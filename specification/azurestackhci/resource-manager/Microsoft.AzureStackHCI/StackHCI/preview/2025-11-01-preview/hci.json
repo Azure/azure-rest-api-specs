@@ -40,6 +40,9 @@
   },
   "tags": [
     {
+      "name": "Clusters"
+    },
+    {
       "name": "KubernetesVersions"
     },
     {
@@ -85,6 +88,40 @@
         "x-ms-examples": {
           "List the operations for the provider.": {
             "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/clusters": {
+      "get": {
+        "operationId": "Clusters_ListBySubscription",
+        "tags": [
+          "Clusters"
+        ],
+        "description": "List all HCI clusters in a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ClusterList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
@@ -400,9 +437,1648 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters": {
+      "get": {
+        "operationId": "Clusters_ListByResourceGroup",
+        "tags": [
+          "Clusters"
+        ],
+        "description": "List all HCI clusters in a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ClusterList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}": {
+      "get": {
+        "operationId": "Clusters_Get",
+        "tags": [
+          "Clusters"
+        ],
+        "description": "Get HCI cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "Clusters_Create",
+        "tags": [
+          "Clusters"
+        ],
+        "description": "Create an HCI cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Details of the HCI cluster.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Cluster' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "201": {
+            "description": "Resource 'Cluster' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Clusters_Update",
+        "tags": [
+          "Clusters"
+        ],
+        "description": "Update an HCI cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "Details of the HCI cluster.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClusterPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Clusters_Delete",
+        "tags": [
+          "Clusters"
+        ],
+        "description": "Delete an HCI cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/configureRemoteSupport": {
+      "post": {
+        "operationId": "Clusters_ConfigureRemoteSupport",
+        "tags": [
+          "Clusters"
+        ],
+        "description": "Configure RemoteSupport on a cluster",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Configure Remote Support Request Payload",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RemoteSupportRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/createClusterIdentity": {
+      "post": {
+        "operationId": "Clusters_CreateIdentity",
+        "tags": [
+          "Clusters"
+        ],
+        "description": "Create cluster identity.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StackHciClusterIdentityResponseResult"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/extendSoftwareAssuranceBenefit": {
+      "post": {
+        "operationId": "Clusters_ExtendSoftwareAssuranceBenefit",
+        "tags": [
+          "Clusters"
+        ],
+        "description": "Extends Software Assurance Benefit to a cluster",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Software Assurance Change Request Payload",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SoftwareAssuranceChangeRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/triggerLogCollection": {
+      "post": {
+        "operationId": "Clusters_TriggerLogCollection",
+        "tags": [
+          "Clusters"
+        ],
+        "description": "Trigger Log Collection on a cluster",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Trigger Log Collection Request Payload",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LogCollectionRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/updateSecretsLocations": {
+      "post": {
+        "operationId": "Clusters_UpdateSecretsLocations",
+        "tags": [
+          "Clusters"
+        ],
+        "description": "Update cluster secrets locations.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SecretsLocationsChangeRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/uploadCertificate": {
+      "post": {
+        "operationId": "Clusters_UploadCertificate",
+        "tags": [
+          "Clusters"
+        ],
+        "description": "Upload certificate.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Upload certificate request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UploadCertificateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
     }
   },
   "definitions": {
+    "AccessLevel": {
+      "type": "string",
+      "description": "Remote Support Access Level",
+      "enum": [
+        "Diagnostics",
+        "DiagnosticsAndRepair"
+      ],
+      "x-ms-enum": {
+        "name": "AccessLevel",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Diagnostics",
+            "value": "Diagnostics",
+            "description": "Diagnostics access level."
+          },
+          {
+            "name": "DiagnosticsAndRepair",
+            "value": "DiagnosticsAndRepair",
+            "description": "Diagnostics and repair access level."
+          }
+        ]
+      }
+    },
+    "ArcExtensionState": {
+      "type": "string",
+      "description": "Arc extension installation state.",
+      "enum": [
+        "NotSpecified",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Accepted",
+        "Creating",
+        "Updating",
+        "Moving",
+        "Deleting",
+        "Deleted"
+      ],
+      "x-ms-enum": {
+        "name": "ArcExtensionState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotSpecified",
+            "value": "NotSpecified",
+            "description": "Arc extension state is not specified."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Arc extension state is Succeeded."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Arc extension state is Failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Arc extension state is Canceled."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "Arc extension state is Accepted when extension installation triggered."
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "Arc extension is in Creating State."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Arc extension is in Updating State."
+          },
+          {
+            "name": "Moving",
+            "value": "Moving",
+            "description": "Arc extension is in Moving State."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Arc extension is in Deleting State."
+          },
+          {
+            "name": "Deleted",
+            "value": "Deleted",
+            "description": "Arc extension is in Deleted State."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "ArcSettingAggregateState": {
+      "type": "string",
+      "description": "Aggregate state of Arc agent across the nodes in this HCI cluster.",
+      "enum": [
+        "NotSpecified",
+        "Error",
+        "Succeeded",
+        "Canceled",
+        "Failed",
+        "Connected",
+        "Disconnected",
+        "Deleted",
+        "Creating",
+        "Updating",
+        "Deleting",
+        "Moving",
+        "PartiallySucceeded",
+        "PartiallyConnected",
+        "InProgress",
+        "Accepted",
+        "Provisioning",
+        "DisableInProgress"
+      ],
+      "x-ms-enum": {
+        "name": "ArcSettingAggregateState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotSpecified",
+            "value": "NotSpecified",
+            "description": "The state is not specified."
+          },
+          {
+            "name": "Error",
+            "value": "Error",
+            "description": "An error occurred."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The operation succeeded."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The operation was canceled."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The operation failed."
+          },
+          {
+            "name": "Connected",
+            "value": "Connected",
+            "description": "The arc setting is connected."
+          },
+          {
+            "name": "Disconnected",
+            "value": "Disconnected",
+            "description": "The arc setting is disconnected."
+          },
+          {
+            "name": "Deleted",
+            "value": "Deleted",
+            "description": "The arc setting is deleted."
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "The arc setting is being created."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The arc setting is being updated."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The arc setting is being deleted."
+          },
+          {
+            "name": "Moving",
+            "value": "Moving",
+            "description": "The arc setting is being moved."
+          },
+          {
+            "name": "PartiallySucceeded",
+            "value": "PartiallySucceeded",
+            "description": "The operation partially succeeded."
+          },
+          {
+            "name": "PartiallyConnected",
+            "value": "PartiallyConnected",
+            "description": "The arc setting is partially connected."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "The operation is in progress."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The operation has been accepted."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The arc setting is provisioning."
+          },
+          {
+            "name": "DisableInProgress",
+            "value": "DisableInProgress",
+            "description": "Disable operation is in progress."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "AvailabilityType": {
+      "type": "string",
+      "description": "Indicates the way the update content can be downloaded.",
+      "enum": [
+        "Local",
+        "Online",
+        "Notify"
+      ],
+      "x-ms-enum": {
+        "name": "AvailabilityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Local",
+            "value": "Local",
+            "description": "Update content is available locally."
+          },
+          {
+            "name": "Online",
+            "value": "Online",
+            "description": "Update content is available online."
+          },
+          {
+            "name": "Notify",
+            "value": "Notify",
+            "description": "Update content requires notification."
+          }
+        ]
+      }
+    },
+    "AzureLinuxEdgeDeviceJobType": {
+      "type": "string",
+      "description": "Job Type supported by Azure Linux Edge Devices.",
+      "enum": [
+        "CollectLog",
+        "RemoteSupport"
+      ],
+      "x-ms-enum": {
+        "name": "AzureLinuxEdgeDeviceJobType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CollectLog",
+            "value": "CollectLog",
+            "description": "Job to collect logs from the device."
+          },
+          {
+            "name": "RemoteSupport",
+            "value": "RemoteSupport",
+            "description": "Job to provide remote support to the device."
+          }
+        ]
+      }
+    },
+    "Cluster": {
+      "type": "object",
+      "description": "Cluster details.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ClusterProperties",
+          "description": "Cluster properties."
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ClusterDesiredProperties": {
+      "type": "object",
+      "description": "Desired properties of the cluster.",
+      "properties": {
+        "windowsServerSubscription": {
+          "$ref": "#/definitions/WindowsServerSubscription",
+          "description": "Desired state of Windows Server Subscription."
+        },
+        "diagnosticLevel": {
+          "$ref": "#/definitions/DiagnosticLevel",
+          "description": "Desired level of diagnostic data emitted by the cluster."
+        }
+      }
+    },
+    "ClusterIdentityResponseProperties": {
+      "type": "object",
+      "description": "Cluster identity response properties.",
+      "properties": {
+        "aadClientId": {
+          "type": "string",
+          "description": "App id of cluster AAD identity."
+        },
+        "aadTenantId": {
+          "type": "string",
+          "description": "Tenant id of cluster AAD identity."
+        },
+        "aadServicePrincipalObjectId": {
+          "type": "string",
+          "description": "Id of cluster identity service principal."
+        },
+        "aadApplicationObjectId": {
+          "type": "string",
+          "description": "Object id of cluster AAD identity."
+        }
+      }
+    },
+    "ClusterList": {
+      "type": "object",
+      "description": "List of clusters.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Cluster items on this page",
+          "items": {
+            "$ref": "#/definitions/Cluster"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ClusterNode": {
+      "type": "object",
+      "description": "Cluster node details.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the cluster node.",
+          "readOnly": true
+        },
+        "id": {
+          "type": "number",
+          "format": "float",
+          "description": "Id of the node in the cluster.",
+          "readOnly": true
+        },
+        "windowsServerSubscription": {
+          "$ref": "#/definitions/WindowsServerSubscription",
+          "description": "State of Windows Server Subscription.",
+          "readOnly": true
+        },
+        "nodeType": {
+          "$ref": "#/definitions/ClusterNodeType",
+          "description": "Type of the cluster node hardware.",
+          "readOnly": true
+        },
+        "ehcResourceId": {
+          "type": "string",
+          "description": "Edge Hardware Center Resource Id",
+          "readOnly": true
+        },
+        "manufacturer": {
+          "type": "string",
+          "description": "Manufacturer of the cluster node hardware.",
+          "readOnly": true
+        },
+        "model": {
+          "type": "string",
+          "description": "Model name of the cluster node hardware.",
+          "readOnly": true
+        },
+        "osName": {
+          "type": "string",
+          "description": "Operating system running on the cluster node.",
+          "readOnly": true
+        },
+        "osVersion": {
+          "type": "string",
+          "description": "Version of the operating system running on the cluster node.",
+          "readOnly": true
+        },
+        "osDisplayVersion": {
+          "type": "string",
+          "description": "Display version of the operating system running on the cluster node.",
+          "readOnly": true
+        },
+        "serialNumber": {
+          "type": "string",
+          "description": "Immutable id of the cluster node.",
+          "readOnly": true
+        },
+        "coreCount": {
+          "type": "number",
+          "format": "float",
+          "description": "Number of physical cores on the cluster node.",
+          "readOnly": true
+        },
+        "memoryInGiB": {
+          "type": "number",
+          "format": "float",
+          "description": "Total available memory on the cluster node (in GiB).",
+          "readOnly": true
+        },
+        "lastLicensingTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Most recent licensing timestamp.",
+          "readOnly": true
+        },
+        "oemActivation": {
+          "$ref": "#/definitions/OemActivation",
+          "description": "OEM activation status of the node.",
+          "readOnly": true
+        }
+      }
+    },
+    "ClusterNodeType": {
+      "type": "string",
+      "description": "The node type of all the nodes of the cluster.",
+      "enum": [
+        "FirstParty",
+        "ThirdParty"
+      ],
+      "x-ms-enum": {
+        "name": "ClusterNodeType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "FirstParty",
+            "value": "FirstParty",
+            "description": "First party cluster node."
+          },
+          {
+            "name": "ThirdParty",
+            "value": "ThirdParty",
+            "description": "Third party cluster node."
+          }
+        ]
+      }
+    },
+    "ClusterPatch": {
+      "type": "object",
+      "description": "Cluster details to update.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "Identity of Cluster resource"
+        },
+        "properties": {
+          "$ref": "#/definitions/ClusterPatchProperties",
+          "description": "Cluster properties."
+        }
+      }
+    },
+    "ClusterPatchProperties": {
+      "type": "object",
+      "description": "Cluster properties.",
+      "properties": {
+        "cloudManagementEndpoint": {
+          "type": "string",
+          "description": "Endpoint configured for management from the Azure portal"
+        },
+        "aadClientId": {
+          "type": "string",
+          "description": "App id of cluster AAD identity."
+        },
+        "aadTenantId": {
+          "type": "string",
+          "description": "Tenant id of cluster AAD identity."
+        },
+        "desiredProperties": {
+          "$ref": "#/definitions/ClusterDesiredProperties",
+          "description": "Desired properties of the cluster."
+        }
+      }
+    },
+    "ClusterPattern": {
+      "type": "string",
+      "description": "Supported Storage Pattern for HCI Cluster",
+      "enum": [
+        "Standard",
+        "RackAware"
+      ],
+      "x-ms-enum": {
+        "name": "ClusterPattern",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "Standard cluster."
+          },
+          {
+            "name": "RackAware",
+            "value": "RackAware",
+            "description": "RackAware cluster."
+          }
+        ]
+      }
+    },
+    "ClusterProperties": {
+      "type": "object",
+      "description": "Cluster properties.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/Status",
+          "description": "Status of the cluster agent.",
+          "readOnly": true
+        },
+        "connectivityStatus": {
+          "$ref": "#/definitions/ConnectivityStatus",
+          "description": "Overall connectivity status for the cluster resource.",
+          "readOnly": true
+        },
+        "cloudId": {
+          "type": "string",
+          "description": "Unique, immutable resource id.",
+          "readOnly": true
+        },
+        "cloudManagementEndpoint": {
+          "type": "string",
+          "description": "Endpoint configured for management from the Azure portal."
+        },
+        "aadClientId": {
+          "type": "string",
+          "description": "App id of cluster AAD identity."
+        },
+        "aadTenantId": {
+          "type": "string",
+          "description": "Tenant id of cluster AAD identity."
+        },
+        "aadApplicationObjectId": {
+          "type": "string",
+          "description": "Object id of cluster AAD identity."
+        },
+        "aadServicePrincipalObjectId": {
+          "type": "string",
+          "description": "Id of cluster identity service principal."
+        },
+        "softwareAssuranceProperties": {
+          "$ref": "#/definitions/SoftwareAssuranceProperties",
+          "description": "Software Assurance properties of the cluster."
+        },
+        "cloudEnvironment": {
+          "type": "string",
+          "description": "Cloud Environment of the cluster. (e.g. AzurePublic, ALDO )",
+          "readOnly": true
+        },
+        "isManagementCluster": {
+          "type": "boolean",
+          "description": "Is Management Cluster, when true indicates that the cluster is used for managing other clusters",
+          "readOnly": true
+        },
+        "clusterWitness": {
+          "$ref": "#/definitions/ClusterWitnessProperties",
+          "description": "Cluster Witness properties of the cluster. A cluster witness is a resource (such as a storage account or file share) that helps maintain quorum and supports automatic failover in high-availability cluster configurations."
+        },
+        "logCollectionProperties": {
+          "$ref": "#/definitions/LogCollectionProperties",
+          "description": "Log Collection properties of the cluster."
+        },
+        "remoteSupportProperties": {
+          "$ref": "#/definitions/RemoteSupportProperties",
+          "description": "RemoteSupport properties of the cluster."
+        },
+        "desiredProperties": {
+          "$ref": "#/definitions/ClusterDesiredProperties",
+          "description": "Desired properties of the cluster."
+        },
+        "reportedProperties": {
+          "$ref": "#/definitions/ClusterReportedProperties",
+          "description": "Properties reported by cluster agent.",
+          "readOnly": true
+        },
+        "isolatedVmAttestationConfiguration": {
+          "$ref": "#/definitions/IsolatedVmAttestationConfiguration",
+          "description": "Attestation configurations for isolated VM (e.g. TVM, CVM) of the cluster.",
+          "readOnly": true
+        },
+        "trialDaysRemaining": {
+          "type": "number",
+          "format": "float",
+          "description": "Number of days remaining in the trial period.",
+          "readOnly": true
+        },
+        "billingModel": {
+          "type": "string",
+          "description": "Type of billing applied to the resource.",
+          "readOnly": true
+        },
+        "registrationTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "First cluster sync timestamp.",
+          "readOnly": true
+        },
+        "lastSyncTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Most recent cluster sync timestamp.",
+          "readOnly": true
+        },
+        "lastBillingTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Most recent billing meter timestamp.",
+          "readOnly": true
+        },
+        "serviceEndpoint": {
+          "type": "string",
+          "description": "Region specific DataPath Endpoint of the cluster.",
+          "readOnly": true
+        },
+        "resourceProviderObjectId": {
+          "type": "string",
+          "description": "Object id of RP Service Principal",
+          "readOnly": true
+        },
+        "secretsLocations": {
+          "type": "array",
+          "description": "List of secret locations.",
+          "items": {
+            "$ref": "#/definitions/SecretsLocationDetails"
+          },
+          "x-ms-identifiers": []
+        },
+        "clusterPattern": {
+          "$ref": "#/definitions/ClusterPattern",
+          "description": "Supported Storage Type for HCI Cluster",
+          "readOnly": true
+        },
+        "localAvailabilityZones": {
+          "type": "array",
+          "description": "Local Availability Zone information for HCI cluster",
+          "items": {
+            "$ref": "#/definitions/LocalAvailabilityZones"
+          },
+          "x-ms-identifiers": [
+            "localAvailabilityZoneName"
+          ]
+        }
+      }
+    },
+    "ClusterReportedProperties": {
+      "type": "object",
+      "description": "Properties reported by cluster agent.",
+      "properties": {
+        "clusterName": {
+          "type": "string",
+          "description": "Name of the on-prem cluster connected to this resource.",
+          "readOnly": true
+        },
+        "clusterId": {
+          "type": "string",
+          "description": "Unique id generated by the on-prem cluster.",
+          "readOnly": true
+        },
+        "clusterVersion": {
+          "type": "string",
+          "description": "Version of the cluster software.",
+          "readOnly": true
+        },
+        "nodes": {
+          "type": "array",
+          "description": "List of nodes reported by the cluster.",
+          "items": {
+            "$ref": "#/definitions/ClusterNode"
+          },
+          "readOnly": true
+        },
+        "lastUpdated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last time the cluster reported the data.",
+          "readOnly": true
+        },
+        "msiExpirationTimeStamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "MSI expiration timestamp of the cluster MSI",
+          "readOnly": true
+        },
+        "imdsAttestation": {
+          "$ref": "#/definitions/ImdsAttestation",
+          "description": "IMDS attestation status of the cluster.",
+          "readOnly": true
+        },
+        "diagnosticLevel": {
+          "$ref": "#/definitions/DiagnosticLevel",
+          "description": "Level of diagnostic data emitted by the cluster."
+        },
+        "supportedCapabilities": {
+          "type": "array",
+          "description": "Capabilities supported by the cluster.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "clusterType": {
+          "$ref": "#/definitions/ClusterNodeType",
+          "description": "The node type of all the nodes of the cluster.",
+          "readOnly": true
+        },
+        "manufacturer": {
+          "type": "string",
+          "description": "The manufacturer of all the nodes of the cluster.",
+          "readOnly": true
+        },
+        "oemActivation": {
+          "$ref": "#/definitions/OemActivation",
+          "description": "OEM activation status of the cluster.",
+          "readOnly": true
+        },
+        "hardwareClass": {
+          "type": "string",
+          "description": "Hardware class of the cluster.",
+          "default": "Medium",
+          "enum": [
+            "Small",
+            "Medium",
+            "Large"
+          ],
+          "x-ms-enum": {
+            "name": "HardwareClass",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Small",
+                "value": "Small",
+                "description": "The hardware class is small."
+              },
+              {
+                "name": "Medium",
+                "value": "Medium",
+                "description": "The hardware class is medium. This corresponds to the default"
+              },
+              {
+                "name": "Large",
+                "value": "Large",
+                "description": "The hardware class is large."
+              }
+            ]
+          },
+          "readOnly": true
+        },
+        "customLocationId": {
+          "type": "string",
+          "description": "Name of the on-prem cluster connected to this resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "ClusterWitnessProperties": {
+      "type": "object",
+      "description": "Cluster Witness properties of the cluster. A cluster witness is a resource (such as a storage account or file share) that helps maintain quorum and supports automatic failover in high-availability cluster configurations.",
+      "properties": {
+        "authenticationMode": {
+          "type": "string",
+          "description": "The authentication mode for the cluster witness. An example value 'ManagedIdentity'.",
+          "readOnly": true
+        }
+      }
+    },
+    "ClustersLogCollectionSession": {
+      "type": "object",
+      "description": "Log Collection Session details of the cluster.",
+      "properties": {
+        "logStartTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start Time of the logs when it was collected",
+          "readOnly": true
+        },
+        "logEndTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End Time of the logs when it was collected",
+          "readOnly": true
+        },
+        "timeCollected": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Duration of logs collected",
+          "readOnly": true
+        },
+        "logSize": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Size of the logs collected",
+          "readOnly": true
+        },
+        "logCollectionStatus": {
+          "$ref": "#/definitions/LogCollectionStatus",
+          "description": "LogCollection status",
+          "readOnly": true
+        },
+        "correlationId": {
+          "type": "string",
+          "description": "CorrelationId of the log collection",
+          "readOnly": true
+        },
+        "logCollectionJobType": {
+          "$ref": "#/definitions/LogCollectionJobType",
+          "description": "LogCollection job type",
+          "readOnly": true
+        },
+        "endTimeCollected": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End Time of the logs when it was collected",
+          "readOnly": true
+        },
+        "logCollectionError": {
+          "$ref": "#/definitions/LogCollectionError",
+          "description": "Log Collection Error details of the cluster.",
+          "readOnly": true
+        }
+      }
+    },
+    "ClustersRemoteSupportNodeSettings": {
+      "type": "object",
+      "description": "Remote Support Node Settings of the cluster.",
+      "properties": {
+        "arcResourceId": {
+          "type": "string",
+          "description": "Arc ResourceId of the Node",
+          "readOnly": true
+        },
+        "state": {
+          "type": "string",
+          "description": "Remote Support Access Connection State on the Node",
+          "readOnly": true
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Remote Support Enablement Request Created TimeStamp on the Node",
+          "readOnly": true
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Remote Support Enablement Request Updated TimeStamp on the Node",
+          "readOnly": true
+        },
+        "connectionStatus": {
+          "type": "string",
+          "description": "Remote Support Access Connection Status on the Node",
+          "readOnly": true
+        },
+        "connectionErrorMessage": {
+          "type": "string",
+          "description": "Remote Support Access Connection Error Message on the Node",
+          "readOnly": true
+        },
+        "transcriptLocation": {
+          "type": "string",
+          "description": "Remote Support Transcript location on the node",
+          "readOnly": true
+        }
+      }
+    },
+    "ComplianceAssignmentType": {
+      "type": "string",
+      "description": "Represents the compliance assignment type of a resource.",
+      "enum": [
+        "Audit",
+        "ApplyAndAutoCorrect"
+      ],
+      "x-ms-enum": {
+        "name": "ComplianceAssignmentType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Audit",
+            "value": "Audit",
+            "description": "Report on the state of the machine, but don't make changes."
+          },
+          {
+            "name": "ApplyAndAutoCorrect",
+            "value": "ApplyAndAutoCorrect",
+            "description": "Applied to the machine. If it drifts, the local service inside the machine makes a correction at the next evaluation."
+          }
+        ]
+      }
+    },
+    "ComplianceStatus": {
+      "type": "string",
+      "description": "Represents the compliance status of a resource.",
+      "enum": [
+        "Compliant",
+        "NonCompliant",
+        "Pending"
+      ],
+      "x-ms-enum": {
+        "name": "ComplianceStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Compliant",
+            "value": "Compliant",
+            "description": "The resource is compliant"
+          },
+          {
+            "name": "NonCompliant",
+            "value": "NonCompliant",
+            "description": "The resource is non-compliant"
+          },
+          {
+            "name": "Pending",
+            "value": "Pending",
+            "description": "The resource compliance status is pending"
+          }
+        ]
+      }
+    },
+    "ConnectivityStatus": {
+      "type": "string",
+      "description": "Overall connectivity status for the cluster resource.",
+      "enum": [
+        "NotYetRegistered",
+        "Connected",
+        "NotConnectedRecently",
+        "PartiallyConnected",
+        "Disconnected",
+        "NotSpecified"
+      ],
+      "x-ms-enum": {
+        "name": "ConnectivityStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotYetRegistered",
+            "value": "NotYetRegistered",
+            "description": "The cluster is not yet registered."
+          },
+          {
+            "name": "Connected",
+            "value": "Connected",
+            "description": "The cluster is connected."
+          },
+          {
+            "name": "NotConnectedRecently",
+            "value": "NotConnectedRecently",
+            "description": "The cluster has not connected recently."
+          },
+          {
+            "name": "PartiallyConnected",
+            "value": "PartiallyConnected",
+            "description": "The cluster is partially connected."
+          },
+          {
+            "name": "Disconnected",
+            "value": "Disconnected",
+            "description": "The cluster is disconnected."
+          },
+          {
+            "name": "NotSpecified",
+            "value": "NotSpecified",
+            "description": "The state is not specified."
+          }
+        ]
+      }
+    },
     "ContentPayload": {
       "type": "object",
       "description": "Represents details of a specific update content payload.",
@@ -436,6 +2112,1095 @@
           "description": "Represents the file name of a update payload."
         }
       }
+    },
+    "CreatedByType": {
+      "type": "string",
+      "description": "The type of identity that created the resource.",
+      "enum": [
+        "User",
+        "Application",
+        "ManagedIdentity",
+        "Key"
+      ],
+      "x-ms-enum": {
+        "name": "CreatedByType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "User",
+            "value": "User",
+            "description": "The resource was created by a user."
+          },
+          {
+            "name": "Application",
+            "value": "Application",
+            "description": "The resource was created by an application."
+          },
+          {
+            "name": "ManagedIdentity",
+            "value": "ManagedIdentity",
+            "description": "The resource was created by a managed identity."
+          },
+          {
+            "name": "Key",
+            "value": "Key",
+            "description": "The resource was created by a key."
+          }
+        ]
+      }
+    },
+    "DeploymentAdapterPropertyOverrides": {
+      "type": "object",
+      "description": "The network adapter properties to override during deployment of a cluster.",
+      "properties": {
+        "jumboPacket": {
+          "type": "string",
+          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation."
+        },
+        "networkDirect": {
+          "type": "string",
+          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation."
+        },
+        "networkDirectTechnology": {
+          "type": "string",
+          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation. Expected values are 'iWARP', 'RoCEv2', 'RoCE'"
+        }
+      }
+    },
+    "DeploymentHostNetwork": {
+      "type": "object",
+      "description": "The HostNetwork of a cluster.",
+      "properties": {
+        "intents": {
+          "type": "array",
+          "description": "The network intents assigned to the network reference pattern used for the deployment. Each intent will define its own name, traffic type, adapter names, and overrides as recommended by your OEM.",
+          "items": {
+            "$ref": "#/definitions/DeploymentIntents"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "storageNetworks": {
+          "type": "array",
+          "description": "List of StorageNetworks config to deploy AzureStackHCI Cluster.",
+          "items": {
+            "$ref": "#/definitions/DeploymentStorageNetworks"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "storageConnectivitySwitchless": {
+          "type": "boolean",
+          "description": "Defines how the storage adapters between nodes are connected either switch or switch less.."
+        },
+        "enableStorageAutoIp": {
+          "type": "boolean",
+          "description": "Optional parameter required only for 3 Nodes switchless deployments. This allows users to specify IPs and Mask for Storage NICs when Network ATC is not assigning the IPs for storage automatically."
+        }
+      }
+    },
+    "DeploymentIntents": {
+      "type": "object",
+      "description": "The Intents of a cluster.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the network intent you wish to create."
+        },
+        "trafficType": {
+          "type": "array",
+          "description": "List of network traffic types. Only allowed values are 'Compute', 'Storage', 'Management'.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "adapter": {
+          "type": "array",
+          "description": "Array of network interfaces used for the network intent.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "overrideVirtualSwitchConfiguration": {
+          "type": "boolean",
+          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation."
+        },
+        "virtualSwitchConfigurationOverrides": {
+          "$ref": "#/definitions/DeploymentVirtualSwitchConfigurationOverrides",
+          "description": "Set virtualSwitch ConfigurationOverrides for cluster."
+        },
+        "overrideQosPolicy": {
+          "type": "boolean",
+          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation."
+        },
+        "qosPolicyOverrides": {
+          "$ref": "#/definitions/QosPolicyOverrides",
+          "description": "Set QoS PolicyOverrides for cluster."
+        },
+        "overrideAdapterProperty": {
+          "type": "boolean",
+          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation."
+        },
+        "adapterPropertyOverrides": {
+          "$ref": "#/definitions/DeploymentAdapterPropertyOverrides",
+          "description": "Set Adapter PropertyOverrides for cluster."
+        }
+      }
+    },
+    "DeploymentMode": {
+      "type": "string",
+      "description": "Deployment mode to trigger job.",
+      "enum": [
+        "Validate",
+        "Deploy"
+      ],
+      "x-ms-enum": {
+        "name": "DeploymentMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Validate",
+            "value": "Validate",
+            "description": "Validate ECE action deployment for a cluster."
+          },
+          {
+            "name": "Deploy",
+            "value": "Deploy",
+            "description": "Deploy ECE action deployment for a cluster."
+          }
+        ]
+      }
+    },
+    "DeploymentStep": {
+      "type": "object",
+      "description": "The Step of AzureStackHCI Cluster.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of step.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of step.",
+          "readOnly": true
+        },
+        "fullStepIndex": {
+          "type": "string",
+          "description": "FullStepIndex of step.",
+          "readOnly": true
+        },
+        "startTimeUtc": {
+          "type": "string",
+          "description": "Start time of step.",
+          "readOnly": true
+        },
+        "endTimeUtc": {
+          "type": "string",
+          "description": "End time of step.",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of step. Allowed values are 'Error', 'Success', 'InProgress'",
+          "readOnly": true
+        },
+        "steps": {
+          "type": "array",
+          "description": "List of nested steps of AzureStackHCI Cluster Deployment.",
+          "items": {
+            "$ref": "#/definitions/DeploymentStep"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "exception": {
+          "type": "array",
+          "description": "List of exceptions in AzureStackHCI Cluster Deployment.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "DeploymentStorageAdapterIPInfo": {
+      "type": "object",
+      "description": "The storage network adapter info.",
+      "properties": {
+        "physicalNode": {
+          "type": "string",
+          "description": "physical node name."
+        },
+        "ipv4Address": {
+          "type": "string",
+          "description": "The IPv4 address assigned to network adapter used for storage."
+        },
+        "subnetMask": {
+          "type": "string",
+          "description": "The SubnetMask address assigned to network adapter used for storage."
+        }
+      }
+    },
+    "DeploymentStorageNetworks": {
+      "type": "object",
+      "description": "The StorageNetworks of a cluster.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the storage network."
+        },
+        "networkAdapterName": {
+          "type": "string",
+          "description": "Name of the storage network adapter."
+        },
+        "vlanId": {
+          "type": "string",
+          "description": "ID specified for the VLAN storage network. This setting is applied to the network interfaces that route the storage and VM migration traffic."
+        },
+        "storageAdapterIPInfo": {
+          "type": "array",
+          "description": "List of Storage adapter physical nodes config to deploy AzureStackHCI Cluster.",
+          "items": {
+            "$ref": "#/definitions/DeploymentStorageAdapterIPInfo"
+          },
+          "x-ms-identifiers": [
+            "physicalNode"
+          ]
+        }
+      }
+    },
+    "DeploymentVirtualSwitchConfigurationOverrides": {
+      "type": "object",
+      "description": "The VirtualSwitchConfigurationOverrides of a cluster.",
+      "properties": {
+        "enableIov": {
+          "type": "string",
+          "description": "Enable IoV for Virtual Switch"
+        },
+        "loadBalancingAlgorithm": {
+          "type": "string",
+          "description": "Load Balancing Algorithm for Virtual Switch"
+        }
+      }
+    },
+    "DeviceConfiguration": {
+      "type": "object",
+      "description": "Device configuration.",
+      "properties": {
+        "network": {
+          "$ref": "#/definitions/NetworkConfiguration",
+          "description": "Network configuration."
+        },
+        "hostName": {
+          "type": "string",
+          "description": "Hostname of the device."
+        },
+        "webProxy": {
+          "$ref": "#/definitions/WebProxyConfiguration",
+          "description": "Web proxy configuration."
+        },
+        "time": {
+          "$ref": "#/definitions/TimeConfiguration",
+          "description": "Time configuration."
+        }
+      }
+    },
+    "DeviceKind": {
+      "type": "string",
+      "description": "Edge device kind.",
+      "enum": [
+        "HCI"
+      ],
+      "x-ms-enum": {
+        "name": "DeviceKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "HCI",
+            "value": "HCI",
+            "description": "Arc-enabled edge device with HCI OS."
+          }
+        ]
+      }
+    },
+    "DeviceLogCollectionStatus": {
+      "type": "string",
+      "description": "Represents the status of a log collection operation.",
+      "enum": [
+        "NotStarted",
+        "Running",
+        "Failed",
+        "Succeeded",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "DeviceLogCollectionStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "Log collection operation has not been initiated."
+          },
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "Indicates that the log collection operation is currently running."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Indicates that the log collection operation has failed."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Indicates that the log collection operation has completed successfully."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Indicates that the log collection operation has completed successfully."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "DeviceState": {
+      "type": "string",
+      "description": "The edge device state.",
+      "enum": [
+        "NotSpecified",
+        "Connected",
+        "Disconnected",
+        "Repairing",
+        "Draining",
+        "InMaintenance",
+        "Resuming",
+        "Processing"
+      ],
+      "x-ms-enum": {
+        "name": "DeviceState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotSpecified",
+            "value": "NotSpecified",
+            "description": "The edge device state is not specified."
+          },
+          {
+            "name": "Connected",
+            "value": "Connected",
+            "description": "The edge device state is in connected state."
+          },
+          {
+            "name": "Disconnected",
+            "value": "Disconnected",
+            "description": "The edge device state is in disconnected state."
+          },
+          {
+            "name": "Repairing",
+            "value": "Repairing",
+            "description": "The edge device state is in repairing state."
+          },
+          {
+            "name": "Draining",
+            "value": "Draining",
+            "description": "The edge device state is in draining state."
+          },
+          {
+            "name": "InMaintenance",
+            "value": "InMaintenance",
+            "description": "The edge device state is in maintenance state."
+          },
+          {
+            "name": "Resuming",
+            "value": "Resuming",
+            "description": "The edge device state is in resuming state."
+          },
+          {
+            "name": "Processing",
+            "value": "Processing",
+            "description": "The edge device state is in processing state."
+          }
+        ]
+      }
+    },
+    "DiagnosticLevel": {
+      "type": "string",
+      "description": "Desired level of diagnostic data emitted by the cluster.",
+      "enum": [
+        "Off",
+        "Basic",
+        "Enhanced"
+      ],
+      "x-ms-enum": {
+        "name": "DiagnosticLevel",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Off",
+            "value": "Off",
+            "description": "Diagnostic data is turned off."
+          },
+          {
+            "name": "Basic",
+            "value": "Basic",
+            "description": "Basic level of diagnostic data."
+          },
+          {
+            "name": "Enhanced",
+            "value": "Enhanced",
+            "description": "Enhanced level of diagnostic data."
+          }
+        ]
+      }
+    },
+    "EceActionStatus": {
+      "type": "object",
+      "description": "Validation / deployment status details for Job.",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Job status.",
+          "readOnly": true
+        },
+        "steps": {
+          "type": "array",
+          "description": "List of steps of Edge device job.",
+          "items": {
+            "$ref": "#/definitions/Step"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "EceReportedProperties": {
+      "type": "object",
+      "description": "The DeploymentStatus of AzureStackHCI Cluster.",
+      "properties": {
+        "validationStatus": {
+          "$ref": "#/definitions/EceActionStatus",
+          "description": "validation status of AzureStackHCI Cluster Deployment.",
+          "readOnly": true
+        },
+        "deploymentStatus": {
+          "$ref": "#/definitions/EceActionStatus",
+          "description": "Deployment status of AzureStackHCI Cluster Deployment.",
+          "readOnly": true
+        }
+      }
+    },
+    "EceSecrets": {
+      "type": "string",
+      "description": "Secret names allowed for Enterprise Cloud Engine (ECE) deployment.",
+      "enum": [
+        "AzureStackLCMUserCredential",
+        "DefaultARBApplication",
+        "LocalAdminCredential",
+        "WitnessStorageKey"
+      ],
+      "x-ms-enum": {
+        "name": "EceSecrets",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AzureStackLCMUserCredential",
+            "value": "AzureStackLCMUserCredential",
+            "description": "AzureStackLCMUserCredential used for LCM operations for AzureStackHCI cluster."
+          },
+          {
+            "name": "DefaultARBApplication",
+            "value": "DefaultARBApplication",
+            "description": "DefaultARBApplication used to manage Azure Arc resource bridge (ARB) for AzureStackHCI cluster."
+          },
+          {
+            "name": "LocalAdminCredential",
+            "value": "LocalAdminCredential",
+            "description": "LocalAdminCredential used for admin operations for AzureStackHCI cluster."
+          },
+          {
+            "name": "WitnessStorageKey",
+            "value": "WitnessStorageKey",
+            "description": "WitnessStorageKey used for setting up a cloud witness for AzureStackHCI cluster."
+          }
+        ]
+      }
+    },
+    "EdgeDeviceJobType": {
+      "type": "string",
+      "description": "Common Job Types supported.",
+      "enum": [
+        "CollectLog",
+        "RemoteSupport"
+      ],
+      "x-ms-enum": {
+        "name": "EdgeDeviceJobType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CollectLog",
+            "value": "CollectLog",
+            "description": "Job to collect logs from the device."
+          },
+          {
+            "name": "RemoteSupport",
+            "value": "RemoteSupport",
+            "description": "Job to provide remote support to the device."
+          }
+        ]
+      }
+    },
+    "EdgeDeviceKind": {
+      "type": "string",
+      "description": "Edge device type based on host OS installed.",
+      "enum": [
+        "HCI",
+        "WindowsServer",
+        "WindowsIoT",
+        "AzureLinux",
+        "UbuntuLinux",
+        "AzureLinuxRoe"
+      ],
+      "x-ms-enum": {
+        "name": "EdgeDeviceKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "HCI",
+            "value": "HCI",
+            "description": "Arc-enabled edge device with HCI OS."
+          },
+          {
+            "name": "WindowsServer",
+            "value": "WindowsServer",
+            "description": "Arc-enabled edge device with WindowsServer OS."
+          },
+          {
+            "name": "WindowsIoT",
+            "value": "WindowsIoT",
+            "description": "Arc-enabled edge device with WindowsIoT OS."
+          },
+          {
+            "name": "AzureLinux",
+            "value": "AzureLinux",
+            "description": "Arc-enabled edge device with AzureLinux OS."
+          },
+          {
+            "name": "UbuntuLinux",
+            "value": "UbuntuLinux",
+            "description": "Arc-enabled edge device with UbuntuLinux OS."
+          },
+          {
+            "name": "AzureLinuxRoe",
+            "value": "AzureLinuxRoe",
+            "description": "Arc-enabled edge device with Azure Linux restricted operating environment."
+          }
+        ]
+      }
+    },
+    "EdgeSolutionType": {
+      "type": "string",
+      "description": "Edge solution type.",
+      "enum": [
+        "WindowsServer",
+        "AzureLinux"
+      ],
+      "x-ms-enum": {
+        "name": "EdgeSolutionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "WindowsServer",
+            "value": "WindowsServer",
+            "description": "Edge solution for Windows based edge devices."
+          },
+          {
+            "name": "AzureLinux",
+            "value": "AzureLinux",
+            "description": "Edge solution for Azure linux edge devices."
+          }
+        ]
+      }
+    },
+    "ExtensionAggregateState": {
+      "type": "string",
+      "description": "Aggregate state of Arc Extensions across the nodes in this HCI cluster.",
+      "enum": [
+        "NotSpecified",
+        "Error",
+        "Succeeded",
+        "Canceled",
+        "Failed",
+        "Connected",
+        "Disconnected",
+        "Deleted",
+        "Creating",
+        "Updating",
+        "Deleting",
+        "Moving",
+        "PartiallySucceeded",
+        "PartiallyConnected",
+        "InProgress",
+        "Accepted",
+        "Provisioning",
+        "UpgradeFailedRollbackSucceeded"
+      ],
+      "x-ms-enum": {
+        "name": "ExtensionAggregateState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotSpecified",
+            "value": "NotSpecified",
+            "description": "The state is not specified."
+          },
+          {
+            "name": "Error",
+            "value": "Error",
+            "description": "An error occurred."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The operation succeeded."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The operation was canceled."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The operation failed."
+          },
+          {
+            "name": "Connected",
+            "value": "Connected",
+            "description": "The extension is connected."
+          },
+          {
+            "name": "Disconnected",
+            "value": "Disconnected",
+            "description": "The extension is disconnected."
+          },
+          {
+            "name": "Deleted",
+            "value": "Deleted",
+            "description": "The extension is deleted."
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "The extension is being created."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The extension is being updated."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The extension is being deleted."
+          },
+          {
+            "name": "Moving",
+            "value": "Moving",
+            "description": "The extension is being moved."
+          },
+          {
+            "name": "PartiallySucceeded",
+            "value": "PartiallySucceeded",
+            "description": "The operation partially succeeded."
+          },
+          {
+            "name": "PartiallyConnected",
+            "value": "PartiallyConnected",
+            "description": "The extension is partially connected."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "The operation is in progress."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The operation has been accepted."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The extension is provisioning."
+          },
+          {
+            "name": "UpgradeFailedRollbackSucceeded",
+            "value": "UpgradeFailedRollbackSucceeded",
+            "description": "Upgrade failed but rollback succeeded."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "ExtensionManagedBy": {
+      "type": "string",
+      "description": "Extension managed by user or Azure.",
+      "enum": [
+        "User",
+        "Azure"
+      ],
+      "x-ms-enum": {
+        "name": "ExtensionManagedBy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "User",
+            "value": "User",
+            "description": "Extension is managed by user."
+          },
+          {
+            "name": "Azure",
+            "value": "Azure",
+            "description": "Extension is managed by Azure."
+          }
+        ]
+      }
+    },
+    "HardwareClass": {
+      "type": "string",
+      "description": "Hardware class of the cluster.",
+      "enum": [
+        "Small",
+        "Medium",
+        "Large"
+      ],
+      "x-ms-enum": {
+        "name": "HardwareClass",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Small",
+            "value": "Small",
+            "description": "The hardware class is small."
+          },
+          {
+            "name": "Medium",
+            "value": "Medium",
+            "description": "The hardware class is medium. This corresponds to the default"
+          },
+          {
+            "name": "Large",
+            "value": "Large",
+            "description": "The hardware class is large."
+          }
+        ]
+      }
+    },
+    "HciEdgeDeviceJobType": {
+      "type": "string",
+      "description": "Job Type supported.",
+      "enum": [
+        "CollectLog",
+        "RemoteSupport"
+      ],
+      "x-ms-enum": {
+        "name": "HciEdgeDeviceJobType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CollectLog",
+            "value": "CollectLog",
+            "description": "Job to collect logs from the device."
+          },
+          {
+            "name": "RemoteSupport",
+            "value": "RemoteSupport",
+            "description": "Job to provide remote support to the device."
+          }
+        ]
+      }
+    },
+    "HealthState": {
+      "type": "string",
+      "description": "The overall health state.",
+      "enum": [
+        "Unknown",
+        "Success",
+        "Failure",
+        "Warning",
+        "Error",
+        "InProgress"
+      ],
+      "x-ms-enum": {
+        "name": "HealthState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "The health state is unknown."
+          },
+          {
+            "name": "Success",
+            "value": "Success",
+            "description": "The health check was successful."
+          },
+          {
+            "name": "Failure",
+            "value": "Failure",
+            "description": "The health check failed."
+          },
+          {
+            "name": "Warning",
+            "value": "Warning",
+            "description": "The health check returned a warning."
+          },
+          {
+            "name": "Error",
+            "value": "Error",
+            "description": "The health check returned an error."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "The health check is in progress."
+          }
+        ]
+      }
+    },
+    "IdentityProvider": {
+      "type": "string",
+      "description": "Identity Provider for the cluster",
+      "enum": [
+        "ActiveDirectory",
+        "LocalIdentity"
+      ],
+      "x-ms-enum": {
+        "name": "IdentityProvider",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ActiveDirectory",
+            "value": "ActiveDirectory",
+            "description": "Active Directory as the Identity Provider. This is the default option."
+          },
+          {
+            "name": "LocalIdentity",
+            "value": "LocalIdentity",
+            "description": "Use local identity with Azure Keyvault"
+          }
+        ]
+      }
+    },
+    "ImdsAttestation": {
+      "type": "string",
+      "description": "IMDS attestation status of the cluster.",
+      "enum": [
+        "Disabled",
+        "Enabled"
+      ],
+      "x-ms-enum": {
+        "name": "ImdsAttestation",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "IMDS attestation is disabled."
+          },
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "IMDS attestation is enabled."
+          }
+        ]
+      }
+    },
+    "IpAddressRange": {
+      "type": "object",
+      "description": "IP address range configuration.",
+      "properties": {
+        "startIp": {
+          "type": "string",
+          "description": "Start IP address."
+        },
+        "endIp": {
+          "type": "string",
+          "description": "End IP address."
+        }
+      },
+      "required": [
+        "startIp",
+        "endIp"
+      ]
+    },
+    "IpAssignmentType": {
+      "type": "string",
+      "description": "IP assignment types",
+      "enum": [
+        "Automatic",
+        "Manual"
+      ],
+      "x-ms-enum": {
+        "name": "IpAssignmentType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Automatic",
+            "value": "Automatic",
+            "description": "Automatic IP assignment"
+          },
+          {
+            "name": "Manual",
+            "value": "Manual",
+            "description": "Manual IP assignment"
+          }
+        ]
+      }
+    },
+    "IsolatedVmAttestationConfiguration": {
+      "type": "object",
+      "description": "Attestation configurations for isolated VM (e.g. TVM, CVM) of the cluster.",
+      "properties": {
+        "attestationResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Fully qualified Azure resource id of the Microsoft Azure attestation resource associated with this cluster.",
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Attestation/attestationProviders"
+              }
+            ]
+          }
+        },
+        "relyingPartyServiceEndpoint": {
+          "type": "string",
+          "description": "Region specific endpoint for relying party service.",
+          "readOnly": true
+        },
+        "attestationServiceEndpoint": {
+          "type": "string",
+          "description": "Region specific endpoint for Microsoft Azure Attestation service for the cluster",
+          "readOnly": true
+        }
+      }
+    },
+    "JobReportedProperties": {
+      "type": "object",
+      "description": "Reported Properties for job triggered from cloud.",
+      "properties": {
+        "percentComplete": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The percentage of the job that is complete.",
+          "readOnly": true
+        },
+        "validationStatus": {
+          "$ref": "#/definitions/EceActionStatus",
+          "description": "Validation status of job.",
+          "readOnly": true
+        },
+        "deploymentStatus": {
+          "$ref": "#/definitions/EceActionStatus",
+          "description": "Deployment status of job.",
+          "readOnly": true
+        }
+      }
+    },
+    "JobStatus": {
+      "type": "string",
+      "description": "Represents the various statuses a job can have throughout its lifecycle.",
+      "enum": [
+        "NotSpecified",
+        "ValidationInProgress",
+        "ValidationSuccess",
+        "ValidationFailed",
+        "DeploymentInProgress",
+        "DeploymentFailed",
+        "DeploymentSuccess",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Paused",
+        "Scheduled"
+      ],
+      "x-ms-enum": {
+        "name": "JobStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotSpecified",
+            "value": "NotSpecified",
+            "description": "The job status has not been specified."
+          },
+          {
+            "name": "ValidationInProgress",
+            "value": "ValidationInProgress",
+            "description": "The job is currently undergoing validation."
+          },
+          {
+            "name": "ValidationSuccess",
+            "value": "ValidationSuccess",
+            "description": "The job has successfully passed validation."
+          },
+          {
+            "name": "ValidationFailed",
+            "value": "ValidationFailed",
+            "description": "The job has failed validation."
+          },
+          {
+            "name": "DeploymentInProgress",
+            "value": "DeploymentInProgress",
+            "description": "The job's deployment is currently in progress."
+          },
+          {
+            "name": "DeploymentFailed",
+            "value": "DeploymentFailed",
+            "description": "The job's deployment has failed."
+          },
+          {
+            "name": "DeploymentSuccess",
+            "value": "DeploymentSuccess",
+            "description": "The job has been successfully deployed."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The job has succeeded."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The job has failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The job has been canceled."
+          },
+          {
+            "name": "Paused",
+            "value": "Paused",
+            "description": "The job is paused."
+          },
+          {
+            "name": "Scheduled",
+            "value": "Scheduled",
+            "description": "The job is scheduled to run."
+          }
+        ]
+      },
+      "readOnly": true
     },
     "KubernetesVersion": {
       "type": "object",
@@ -485,6 +3250,607 @@
       "required": [
         "version"
       ]
+    },
+    "LocalAvailabilityZoneMode": {
+      "type": "string",
+      "description": "Local Availability Zone Mode for HCI cluster.",
+      "enum": [
+        "Active",
+        "Passive"
+      ],
+      "x-ms-enum": {
+        "name": "LocalAvailabilityZoneMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "Local Availability Zone in active mode."
+          },
+          {
+            "name": "Passive",
+            "value": "Passive",
+            "description": "Local Availability Zone in passive mode."
+          }
+        ]
+      }
+    },
+    "LocalAvailabilityZones": {
+      "type": "object",
+      "description": "Local Availability Zone information for HCI cluster",
+      "properties": {
+        "localAvailabilityZoneName": {
+          "type": "string",
+          "description": "Local Availability Zone name for HCI cluster"
+        },
+        "localAvailabilityZoneMode": {
+          "$ref": "#/definitions/LocalAvailabilityZoneMode",
+          "description": "Local Availability Zone Mode for HCI cluster. Can be active or passive."
+        },
+        "nodes": {
+          "type": "array",
+          "description": "Nodes belonging to a particular zone",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "LogCollectionError": {
+      "type": "object",
+      "description": "Log Collection Error details of the cluster.",
+      "properties": {
+        "errorCode": {
+          "type": "string",
+          "description": "Error Code of the log collection",
+          "readOnly": true
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Error Message of the log collection",
+          "readOnly": true
+        }
+      }
+    },
+    "LogCollectionJobType": {
+      "type": "string",
+      "description": "LogCollection job type",
+      "enum": [
+        "OnDemand",
+        "Scheduled"
+      ],
+      "x-ms-enum": {
+        "name": "LogCollectionJobType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "OnDemand",
+            "value": "OnDemand",
+            "description": "On-demand log collection job."
+          },
+          {
+            "name": "Scheduled",
+            "value": "Scheduled",
+            "description": "Scheduled log collection job."
+          }
+        ]
+      }
+    },
+    "LogCollectionProperties": {
+      "type": "object",
+      "description": "Log Collection properties of the cluster.",
+      "properties": {
+        "fromDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "From DateTimeStamp from when logs need to be connected",
+          "readOnly": true
+        },
+        "toDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "To DateTimeStamp till when logs need to be connected",
+          "readOnly": true
+        },
+        "lastLogGenerated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Recent DateTimeStamp where logs are successfully generated",
+          "readOnly": true
+        },
+        "logCollectionSessionDetails": {
+          "type": "array",
+          "description": "Log collection session details for the cluster.",
+          "items": {
+            "$ref": "#/definitions/ClustersLogCollectionSession"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "LogCollectionReportedProperties": {
+      "type": "object",
+      "description": "Represents the reported properties of a log collection job.",
+      "properties": {
+        "percentComplete": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The percentage of the job that is complete.",
+          "readOnly": true
+        },
+        "validationStatus": {
+          "$ref": "#/definitions/EceActionStatus",
+          "description": "Validation status of job.",
+          "readOnly": true
+        },
+        "deploymentStatus": {
+          "$ref": "#/definitions/EceActionStatus",
+          "description": "Deployment status of job.",
+          "readOnly": true
+        },
+        "logCollectionSessionDetails": {
+          "type": "array",
+          "description": "Details of the log collection session.",
+          "items": {
+            "$ref": "#/definitions/LogCollectionSession"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "correlationId"
+          ]
+        }
+      }
+    },
+    "LogCollectionRequest": {
+      "type": "object",
+      "description": "Log Collection Request",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LogCollectionRequestProperties",
+          "description": "Properties for Log Collection Request"
+        }
+      }
+    },
+    "LogCollectionRequestProperties": {
+      "type": "object",
+      "description": "Properties for Log Collection Request",
+      "properties": {
+        "fromDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "From DateTimeStamp from when logs need to be connected"
+        },
+        "toDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "To DateTimeStamp till when logs need to be connected"
+        }
+      },
+      "required": [
+        "fromDate",
+        "toDate"
+      ]
+    },
+    "LogCollectionSession": {
+      "type": "object",
+      "description": "Represents a session for collecting logs from an edge device.",
+      "properties": {
+        "startTime": {
+          "type": "string",
+          "description": "The timestamp when log collection started, in ISO 8601 format.",
+          "readOnly": true
+        },
+        "endTime": {
+          "type": "string",
+          "description": "The timestamp when log collection ended, in ISO 8601 format.",
+          "readOnly": true
+        },
+        "timeCollected": {
+          "type": "string",
+          "description": "The total time logs were collected for, in ISO 8601 duration format.",
+          "readOnly": true
+        },
+        "logSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The size of the collected logs in bytes.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/DeviceLogCollectionStatus",
+          "description": "The status of the log collection session.",
+          "readOnly": true
+        },
+        "correlationId": {
+          "type": "string",
+          "description": "A unique identifier for correlating this log collection session with other operations or sessions.",
+          "readOnly": true
+        }
+      }
+    },
+    "LogCollectionStatus": {
+      "type": "string",
+      "description": "Represents the status of a log collection operation.",
+      "enum": [
+        "None",
+        "InProgress",
+        "Failed",
+        "Succeeded"
+      ],
+      "x-ms-enum": {
+        "name": "LogCollectionStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "Indicates that no log collection operation has been initiated."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "Indicates that the log collection operation is currently in progress."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Indicates that the log collection operation has failed."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Indicates that the log collection operation has completed successfully."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "NetworkAdapter": {
+      "type": "object",
+      "description": "Network adapter configuration.",
+      "properties": {
+        "ipAssignmentType": {
+          "$ref": "#/definitions/IpAssignmentType",
+          "description": "Type of IP assignment."
+        },
+        "ipAddress": {
+          "type": "string",
+          "description": "IP address."
+        },
+        "adapterName": {
+          "type": "string",
+          "description": "Adapter Name."
+        },
+        "macAddress": {
+          "type": "string",
+          "description": "MAC address."
+        },
+        "ipAddressRange": {
+          "$ref": "#/definitions/IpAddressRange",
+          "description": "IP address range."
+        },
+        "gateway": {
+          "type": "string",
+          "description": "Gateway id."
+        },
+        "subnetMask": {
+          "type": "string",
+          "description": "Subnet mask."
+        },
+        "dnsAddressArray": {
+          "type": "array",
+          "description": "Array of DNS addresses.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "vlanId": {
+          "type": "string",
+          "description": "VLAN ID for the network setup."
+        }
+      },
+      "required": [
+        "ipAssignmentType"
+      ]
+    },
+    "NetworkConfiguration": {
+      "type": "object",
+      "description": "Network configuration.",
+      "properties": {
+        "networkAdapters": {
+          "type": "array",
+          "description": "List of network adapters.",
+          "items": {
+            "$ref": "#/definitions/NetworkAdapter"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "NodeArcState": {
+      "type": "string",
+      "description": "State of Arc agent in this node.",
+      "enum": [
+        "NotSpecified",
+        "Error",
+        "Succeeded",
+        "Canceled",
+        "Failed",
+        "Connected",
+        "Disconnected",
+        "Deleted",
+        "Creating",
+        "Updating",
+        "Deleting",
+        "Moving",
+        "PartiallySucceeded",
+        "PartiallyConnected",
+        "InProgress",
+        "Accepted",
+        "Provisioning",
+        "DisableInProgress"
+      ],
+      "x-ms-enum": {
+        "name": "NodeArcState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotSpecified",
+            "value": "NotSpecified",
+            "description": "The state is not specified."
+          },
+          {
+            "name": "Error",
+            "value": "Error",
+            "description": "An error occurred."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The operation succeeded."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The operation was canceled."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The operation failed."
+          },
+          {
+            "name": "Connected",
+            "value": "Connected",
+            "description": "The arc agent is connected."
+          },
+          {
+            "name": "Disconnected",
+            "value": "Disconnected",
+            "description": "The arc agent is disconnected."
+          },
+          {
+            "name": "Deleted",
+            "value": "Deleted",
+            "description": "The arc agent is deleted."
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "The arc agent is being created."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The arc agent is being updated."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The arc agent is being deleted."
+          },
+          {
+            "name": "Moving",
+            "value": "Moving",
+            "description": "The arc agent is being moved."
+          },
+          {
+            "name": "PartiallySucceeded",
+            "value": "PartiallySucceeded",
+            "description": "The operation partially succeeded."
+          },
+          {
+            "name": "PartiallyConnected",
+            "value": "PartiallyConnected",
+            "description": "The arc agent is partially connected."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "The operation is in progress."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The operation has been accepted."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The arc agent is provisioning."
+          },
+          {
+            "name": "DisableInProgress",
+            "value": "DisableInProgress",
+            "description": "Disable operation is in progress."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "NodeExtensionState": {
+      "type": "string",
+      "description": "State of Arc Extension in this node.",
+      "enum": [
+        "NotSpecified",
+        "Error",
+        "Succeeded",
+        "Canceled",
+        "Failed",
+        "Connected",
+        "Disconnected",
+        "Deleted",
+        "Creating",
+        "Updating",
+        "Deleting",
+        "Moving",
+        "PartiallySucceeded",
+        "PartiallyConnected",
+        "InProgress",
+        "Accepted",
+        "Provisioning"
+      ],
+      "x-ms-enum": {
+        "name": "NodeExtensionState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotSpecified",
+            "value": "NotSpecified",
+            "description": "The state is not specified."
+          },
+          {
+            "name": "Error",
+            "value": "Error",
+            "description": "An error occurred."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The operation succeeded."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The operation was canceled."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The operation failed."
+          },
+          {
+            "name": "Connected",
+            "value": "Connected",
+            "description": "The extension is connected."
+          },
+          {
+            "name": "Disconnected",
+            "value": "Disconnected",
+            "description": "The extension is disconnected."
+          },
+          {
+            "name": "Deleted",
+            "value": "Deleted",
+            "description": "The extension is deleted."
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "The extension is being created."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The extension is being updated."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The extension is being deleted."
+          },
+          {
+            "name": "Moving",
+            "value": "Moving",
+            "description": "The extension is being moved."
+          },
+          {
+            "name": "PartiallySucceeded",
+            "value": "PartiallySucceeded",
+            "description": "The operation partially succeeded."
+          },
+          {
+            "name": "PartiallyConnected",
+            "value": "PartiallyConnected",
+            "description": "The extension is partially connected."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "The operation is in progress."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The operation has been accepted."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The extension is provisioning."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "OemActivation": {
+      "type": "string",
+      "description": "OEM activation status of the cluster.",
+      "enum": [
+        "Disabled",
+        "Enabled"
+      ],
+      "x-ms-enum": {
+        "name": "OemActivation",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "OEM activation is disabled."
+          },
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "OEM activation is enabled."
+          }
+        ]
+      }
+    },
+    "OperationType": {
+      "type": "string",
+      "description": "The intended operation for a cluster.",
+      "enum": [
+        "ClusterProvisioning",
+        "ClusterUpgrade"
+      ],
+      "x-ms-enum": {
+        "name": "OperationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ClusterProvisioning",
+            "value": "ClusterProvisioning",
+            "description": "Cluster provisioning operation."
+          },
+          {
+            "name": "ClusterUpgrade",
+            "value": "ClusterUpgrade",
+            "description": "Cluster upgrade operation."
+          }
+        ]
+      }
     },
     "OsImage": {
       "type": "object",
@@ -541,6 +3907,59 @@
         "composedImageIsoHash": {
           "type": "string",
           "description": "Represents composed image iso hash of a os image."
+        }
+      }
+    },
+    "PackageVersionInfo": {
+      "type": "object",
+      "description": "Current version of each updatable component.",
+      "properties": {
+        "packageType": {
+          "type": "string",
+          "description": "Package type"
+        },
+        "version": {
+          "type": "string",
+          "description": "Package version"
+        },
+        "lastUpdated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last time this component was updated."
+        }
+      }
+    },
+    "PerNodeRemoteSupportSession": {
+      "type": "object",
+      "description": "Remote Support Node Session Details on the Node.",
+      "properties": {
+        "sessionStartTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Remote Support Session StartTime on the Node",
+          "readOnly": true
+        },
+        "sessionEndTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Remote Support Session EndTime on the Node",
+          "readOnly": true
+        },
+        "nodeName": {
+          "type": "string",
+          "description": "Name of the node",
+          "readOnly": true
+        },
+        "duration": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Duration of Remote Support Enablement",
+          "readOnly": true
+        },
+        "accessLevel": {
+          "$ref": "#/definitions/AccessLevel",
+          "description": "Remote Support Access Level",
+          "readOnly": true
         }
       }
     },
@@ -644,6 +4063,967 @@
         "platformUpdateDetails"
       ]
     },
+    "PrecheckResult": {
+      "type": "object",
+      "description": "Result of a precheck validation test.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the individual test/rule/alert that was executed. Unique, not exposed to the customer."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The health check DisplayName localized of the individual test executed."
+        },
+        "tags": {
+          "$ref": "#/definitions/PrecheckResultTags",
+          "description": "Key-value pairs that allow grouping/filtering individual tests."
+        },
+        "healthCheckTags": {
+          "type": "object",
+          "description": "Key-value pairs that allow grouping/filtering individual tests.",
+          "additionalProperties": {}
+        },
+        "title": {
+          "type": "string",
+          "description": "User-facing name; one or more sentences indicating the direct issue."
+        },
+        "status": {
+          "$ref": "#/definitions/Status",
+          "description": "The status of the check running (i.e. Failed, Succeeded, In Progress). This answers whether the check ran, and passed or failed."
+        },
+        "severity": {
+          "$ref": "#/definitions/Severity",
+          "description": "Severity of the result (Critical, Warning, Informational, Hidden). This answers how important the result is. Critical is the only update-blocking severity."
+        },
+        "description": {
+          "type": "string",
+          "description": "Detailed overview of the issue and what impact the issue has on the stamp."
+        },
+        "remediation": {
+          "type": "string",
+          "description": "Set of steps that can be taken to resolve the issue found."
+        },
+        "targetResourceID": {
+          "type": "string",
+          "description": "The unique identifier for the affected resource (such as a node or drive)."
+        },
+        "targetResourceName": {
+          "type": "string",
+          "description": "The name of the affected resource."
+        },
+        "targetResourceType": {
+          "type": "string",
+          "description": "The type of resource being referred to (well-known set of nouns in infrastructure, aligning with Monitoring)."
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time in which the HealthCheck was called."
+        },
+        "additionalData": {
+          "type": "string",
+          "description": "Property bag of key value pairs for additional information."
+        },
+        "healthCheckSource": {
+          "type": "string",
+          "description": "The name of the services called for the HealthCheck (I.E. Test-AzureStack, Test-Cluster)."
+        }
+      }
+    },
+    "PrecheckResultTags": {
+      "type": "object",
+      "description": "Key-value pairs that allow grouping/filtering individual tests.",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Key that allow grouping/filtering individual tests."
+        },
+        "value": {
+          "type": "string",
+          "description": "Value of the key that allow grouping/filtering individual tests."
+        }
+      }
+    },
+    "ProvisionOsReportedProperties": {
+      "type": "object",
+      "description": "Reported Properties for Provision Os job",
+      "properties": {
+        "percentComplete": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The percentage of the job that is complete.",
+          "readOnly": true
+        },
+        "validationStatus": {
+          "$ref": "#/definitions/EceActionStatus",
+          "description": "Validation status of job.",
+          "readOnly": true
+        },
+        "deploymentStatus": {
+          "$ref": "#/definitions/EceActionStatus",
+          "description": "Deployment status of job.",
+          "readOnly": true
+        }
+      }
+    },
+    "ProvisioningOsType": {
+      "type": "string",
+      "description": "Represents the provisioning operating system type.",
+      "enum": [
+        "AzureLinux",
+        "HCI"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningOsType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AzureLinux",
+            "value": "AzureLinux",
+            "description": "AzureLinux OS."
+          },
+          {
+            "name": "HCI",
+            "value": "HCI",
+            "description": "HCI OS."
+          }
+        ]
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "InProgress",
+        "NotSpecified",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "Resource creation is in progress."
+          },
+          {
+            "name": "NotSpecified",
+            "value": "NotSpecified",
+            "description": "The resource provision state is not specified"
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "QosPolicyOverrides": {
+      "type": "object",
+      "description": "The QoSPolicyOverrides of a cluster.",
+      "properties": {
+        "priorityValue8021Action_Cluster": {
+          "type": "string",
+          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation."
+        },
+        "priorityValue8021Action_SMB": {
+          "type": "string",
+          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation."
+        },
+        "bandwidthPercentage_SMB": {
+          "type": "string",
+          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation."
+        }
+      }
+    },
+    "RawCertificateData": {
+      "type": "object",
+      "description": "Raw certificate data.",
+      "properties": {
+        "certificates": {
+          "type": "array",
+          "description": "List of certificates to upload.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "RdmaCapability": {
+      "type": "string",
+      "description": "Describes the RDMA capability of the network adapter.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "RdmaCapability",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Network Adapter on the device is RDMA Capable"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Network Adapter on the device is RDMA Capable"
+          }
+        ]
+      }
+    },
+    "RebootRequirement": {
+      "type": "string",
+      "description": "Whether a reboot is required after applying the update.",
+      "enum": [
+        "Unknown",
+        "True",
+        "False"
+      ],
+      "x-ms-enum": {
+        "name": "RebootRequirement",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "The reboot requirement is unknown."
+          },
+          {
+            "name": "True",
+            "value": "True",
+            "description": "A reboot is required."
+          },
+          {
+            "name": "False",
+            "value": "False",
+            "description": "A reboot is not required."
+          }
+        ]
+      }
+    },
+    "RemoteSupportAccessLevel": {
+      "type": "string",
+      "description": "Defines the level of remote support access granted.",
+      "enum": [
+        "None",
+        "Diagnostics",
+        "DiagnosticsAndRepair"
+      ],
+      "x-ms-enum": {
+        "name": "RemoteSupportAccessLevel",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "No remote support access is granted."
+          },
+          {
+            "name": "Diagnostics",
+            "value": "Diagnostics",
+            "description": "Access is limited to diagnostics information only."
+          },
+          {
+            "name": "DiagnosticsAndRepair",
+            "value": "DiagnosticsAndRepair",
+            "description": "Access includes diagnostics information and the ability to perform repairs."
+          }
+        ]
+      }
+    },
+    "RemoteSupportProperties": {
+      "type": "object",
+      "description": "Remote Support properties of the cluster.",
+      "properties": {
+        "accessLevel": {
+          "$ref": "#/definitions/AccessLevel",
+          "description": "Remote Support Access Level",
+          "readOnly": true
+        },
+        "expirationTimeStamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Expiration DateTimeStamp when Remote Support Access will be expired",
+          "readOnly": true
+        },
+        "remoteSupportType": {
+          "$ref": "#/definitions/RemoteSupportType",
+          "description": "Remote Support Type for cluster",
+          "readOnly": true
+        },
+        "remoteSupportNodeSettings": {
+          "type": "array",
+          "description": "Remote support node settings for the cluster.",
+          "items": {
+            "$ref": "#/definitions/ClustersRemoteSupportNodeSettings"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "remoteSupportSessionDetails": {
+          "type": "array",
+          "description": "Remote support session details for the cluster.",
+          "items": {
+            "$ref": "#/definitions/PerNodeRemoteSupportSession"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "RemoteSupportRequest": {
+      "type": "object",
+      "description": "Remote Support Request",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RemoteSupportRequestProperties",
+          "description": "Properties for Remote Support Request"
+        }
+      }
+    },
+    "RemoteSupportRequestProperties": {
+      "type": "object",
+      "description": "Properties for Remote Support Request",
+      "properties": {
+        "accessLevel": {
+          "$ref": "#/definitions/AccessLevel",
+          "description": "Remote Support Access Level",
+          "readOnly": true
+        },
+        "expirationTimeStamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Expiration DateTimeStamp when Remote Support Access will be expired"
+        },
+        "remoteSupportType": {
+          "$ref": "#/definitions/RemoteSupportType",
+          "description": "Remote Support Type for cluster"
+        }
+      }
+    },
+    "RemoteSupportType": {
+      "type": "string",
+      "description": "Defines the type of remote support action to be performed on an edge device.",
+      "enum": [
+        "Enable",
+        "Revoke"
+      ],
+      "x-ms-enum": {
+        "name": "RemoteSupportType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enable",
+            "value": "Enable",
+            "description": "Enables remote support for the edge device."
+          },
+          {
+            "name": "Revoke",
+            "value": "Revoke",
+            "description": "Revokes previously granted remote support access for the edge device."
+          }
+        ]
+      }
+    },
+    "SecretsLocationDetails": {
+      "type": "object",
+      "description": "Secrets location details",
+      "properties": {
+        "secretsType": {
+          "$ref": "#/definitions/SecretsType",
+          "description": "Type of secrets to store"
+        },
+        "secretsLocation": {
+          "type": "string",
+          "description": "secrets location"
+        }
+      },
+      "required": [
+        "secretsType",
+        "secretsLocation"
+      ]
+    },
+    "SecretsLocationsChangeRequest": {
+      "type": "object",
+      "description": "Update secrets locations change  Request.",
+      "properties": {
+        "properties": {
+          "type": "array",
+          "description": "List of secret locations",
+          "items": {
+            "$ref": "#/definitions/SecretsLocationDetails"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "SecretsType": {
+      "type": "string",
+      "description": "Type of secrets to store",
+      "enum": [
+        "BackupSecrets"
+      ],
+      "x-ms-enum": {
+        "name": "SecretsType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "BackupSecrets",
+            "value": "BackupSecrets",
+            "description": "Backup secrets type"
+          }
+        ]
+      }
+    },
+    "ServiceName": {
+      "type": "string",
+      "description": "Name of the service.",
+      "enum": [
+        "WAC"
+      ],
+      "x-ms-enum": {
+        "name": "ServiceName",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "WAC",
+            "value": "WAC",
+            "description": "Windows Admin Center service."
+          }
+        ]
+      }
+    },
+    "Severity": {
+      "type": "string",
+      "description": "Severity of the result (Critical, Warning, Informational, Hidden). This answers how important the result is. Critical is the only update-blocking severity.",
+      "enum": [
+        "Critical",
+        "Warning",
+        "Informational",
+        "Hidden"
+      ],
+      "x-ms-enum": {
+        "name": "Severity",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Critical",
+            "value": "Critical",
+            "description": "Critical severity - blocks updates."
+          },
+          {
+            "name": "Warning",
+            "value": "Warning",
+            "description": "Warning severity."
+          },
+          {
+            "name": "Informational",
+            "value": "Informational",
+            "description": "Informational severity."
+          },
+          {
+            "name": "Hidden",
+            "value": "Hidden",
+            "description": "Hidden severity."
+          }
+        ]
+      }
+    },
+    "SkuMappings": {
+      "type": "object",
+      "description": "SKU Mapping details.",
+      "properties": {
+        "catalogPlanId": {
+          "type": "string",
+          "description": "Identifier of the CatalogPlan for the sku"
+        },
+        "marketplaceSkuId": {
+          "type": "string",
+          "description": "Identifier for the sku"
+        },
+        "marketplaceSkuVersions": {
+          "type": "array",
+          "description": "Array of SKU versions available",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SoftwareAssuranceChangeRequest": {
+      "type": "object",
+      "description": "Software Assurance change request.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SoftwareAssuranceChangeRequestProperties",
+          "description": "Properties for Software Assurance change request."
+        }
+      }
+    },
+    "SoftwareAssuranceChangeRequestProperties": {
+      "type": "object",
+      "description": "Properties for Software Assurance change request.",
+      "properties": {
+        "softwareAssuranceIntent": {
+          "$ref": "#/definitions/SoftwareAssuranceIntent",
+          "description": "Customer Intent for Software Assurance Benefit."
+        }
+      }
+    },
+    "SoftwareAssuranceIntent": {
+      "type": "string",
+      "description": "Customer Intent for Software Assurance Benefit.",
+      "enum": [
+        "Enable",
+        "Disable"
+      ],
+      "x-ms-enum": {
+        "name": "SoftwareAssuranceIntent",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enable",
+            "value": "Enable",
+            "description": "Enable Software Assurance."
+          },
+          {
+            "name": "Disable",
+            "value": "Disable",
+            "description": "Disable Software Assurance."
+          }
+        ]
+      }
+    },
+    "SoftwareAssuranceProperties": {
+      "type": "object",
+      "description": "Software Assurance properties of the cluster.",
+      "properties": {
+        "softwareAssuranceStatus": {
+          "$ref": "#/definitions/SoftwareAssuranceStatus",
+          "description": "Status of the Software Assurance for the cluster.",
+          "readOnly": true
+        },
+        "softwareAssuranceIntent": {
+          "$ref": "#/definitions/SoftwareAssuranceIntent",
+          "description": "Customer Intent for Software Assurance Benefit."
+        },
+        "lastUpdated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "TimeStamp denoting the latest SA benefit applicability is validated.",
+          "readOnly": true
+        }
+      }
+    },
+    "SoftwareAssuranceStatus": {
+      "type": "string",
+      "description": "Status of the Software Assurance for the cluster.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "SoftwareAssuranceStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Software Assurance is enabled."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Software Assurance is disabled."
+          }
+        ]
+      }
+    },
+    "StackHciClusterIdentityResponseResult": {
+      "type": "object",
+      "description": "Cluster Identity details.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ClusterIdentityResponseProperties",
+          "description": "Cluster identity properties.",
+          "readOnly": true
+        }
+      }
+    },
+    "State": {
+      "type": "string",
+      "description": "State of the update as it relates to this stamp.",
+      "enum": [
+        "HasPrerequisite",
+        "Obsolete",
+        "Ready",
+        "NotApplicableBecauseAnotherUpdateIsInProgress",
+        "Preparing",
+        "Installing",
+        "Installed",
+        "PreparationFailed",
+        "InstallationFailed",
+        "Invalid",
+        "Recalled",
+        "Downloading",
+        "DownloadFailed",
+        "HealthChecking",
+        "HealthCheckFailed",
+        "ReadyToInstall",
+        "ScanInProgress",
+        "ScanFailed",
+        "AdditionalContentRequired"
+      ],
+      "x-ms-enum": {
+        "name": "State",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "HasPrerequisite",
+            "value": "HasPrerequisite",
+            "description": "The update has prerequisites that need to be installed first."
+          },
+          {
+            "name": "Obsolete",
+            "value": "Obsolete",
+            "description": "The update is obsolete."
+          },
+          {
+            "name": "Ready",
+            "value": "Ready",
+            "description": "The update is ready to be installed."
+          },
+          {
+            "name": "NotApplicableBecauseAnotherUpdateIsInProgress",
+            "value": "NotApplicableBecauseAnotherUpdateIsInProgress",
+            "description": "The update is not applicable because another update is in progress."
+          },
+          {
+            "name": "Preparing",
+            "value": "Preparing",
+            "description": "The update is being prepared for installation."
+          },
+          {
+            "name": "Installing",
+            "value": "Installing",
+            "description": "The update is being installed."
+          },
+          {
+            "name": "Installed",
+            "value": "Installed",
+            "description": "The update has been installed."
+          },
+          {
+            "name": "PreparationFailed",
+            "value": "PreparationFailed",
+            "description": "The update preparation failed."
+          },
+          {
+            "name": "InstallationFailed",
+            "value": "InstallationFailed",
+            "description": "The update installation failed."
+          },
+          {
+            "name": "Invalid",
+            "value": "Invalid",
+            "description": "The update is invalid."
+          },
+          {
+            "name": "Recalled",
+            "value": "Recalled",
+            "description": "The update has been recalled."
+          },
+          {
+            "name": "Downloading",
+            "value": "Downloading",
+            "description": "The update is being downloaded."
+          },
+          {
+            "name": "DownloadFailed",
+            "value": "DownloadFailed",
+            "description": "The update download failed."
+          },
+          {
+            "name": "HealthChecking",
+            "value": "HealthChecking",
+            "description": "The update is undergoing health checking."
+          },
+          {
+            "name": "HealthCheckFailed",
+            "value": "HealthCheckFailed",
+            "description": "The update health check failed."
+          },
+          {
+            "name": "ReadyToInstall",
+            "value": "ReadyToInstall",
+            "description": "The update is ready to be installed."
+          },
+          {
+            "name": "ScanInProgress",
+            "value": "ScanInProgress",
+            "description": "The update scan is in progress."
+          },
+          {
+            "name": "ScanFailed",
+            "value": "ScanFailed",
+            "description": "The update scan failed."
+          },
+          {
+            "name": "AdditionalContentRequired",
+            "value": "AdditionalContentRequired",
+            "description": "The update requires additional content."
+          }
+        ]
+      }
+    },
+    "Status": {
+      "type": "string",
+      "description": "Status of the cluster agent.",
+      "enum": [
+        "NotYetRegistered",
+        "ConnectedRecently",
+        "NotConnectedRecently",
+        "Disconnected",
+        "Error",
+        "NotSpecified",
+        "ValidationInProgress",
+        "ValidationSuccess",
+        "ValidationFailed",
+        "DeploymentInProgress",
+        "DeploymentFailed",
+        "DeploymentSuccess",
+        "Succeeded",
+        "Failed",
+        "InProgress"
+      ],
+      "x-ms-enum": {
+        "name": "Status",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotYetRegistered",
+            "value": "NotYetRegistered",
+            "description": "The cluster agent is not yet registered."
+          },
+          {
+            "name": "ConnectedRecently",
+            "value": "ConnectedRecently",
+            "description": "The cluster agent connected recently."
+          },
+          {
+            "name": "NotConnectedRecently",
+            "value": "NotConnectedRecently",
+            "description": "The cluster agent has not connected recently."
+          },
+          {
+            "name": "Disconnected",
+            "value": "Disconnected",
+            "description": "The cluster agent is disconnected."
+          },
+          {
+            "name": "Error",
+            "value": "Error",
+            "description": "An error occurred."
+          },
+          {
+            "name": "NotSpecified",
+            "value": "NotSpecified",
+            "description": "The state is not specified."
+          },
+          {
+            "name": "ValidationInProgress",
+            "value": "ValidationInProgress",
+            "description": "Validation is in progress."
+          },
+          {
+            "name": "ValidationSuccess",
+            "value": "ValidationSuccess",
+            "description": "Validation was successful."
+          },
+          {
+            "name": "ValidationFailed",
+            "value": "ValidationFailed",
+            "description": "Validation failed."
+          },
+          {
+            "name": "DeploymentInProgress",
+            "value": "DeploymentInProgress",
+            "description": "Deployment is in progress."
+          },
+          {
+            "name": "DeploymentFailed",
+            "value": "DeploymentFailed",
+            "description": "Deployment failed."
+          },
+          {
+            "name": "DeploymentSuccess",
+            "value": "DeploymentSuccess",
+            "description": "Deployment was successful."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The operation succeeded."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The operation failed."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "The operation is in progress."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "StatusLevelTypes": {
+      "type": "string",
+      "description": "The level code.",
+      "enum": [
+        "Info",
+        "Warning",
+        "Error"
+      ],
+      "x-ms-enum": {
+        "name": "StatusLevelTypes",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Info",
+            "value": "Info",
+            "description": "Information level."
+          },
+          {
+            "name": "Warning",
+            "value": "Warning",
+            "description": "Warning level."
+          },
+          {
+            "name": "Error",
+            "value": "Error",
+            "description": "Error level."
+          }
+        ]
+      }
+    },
+    "Step": {
+      "type": "object",
+      "description": "Step details during job execution.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of step.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of step.",
+          "readOnly": true
+        },
+        "fullStepIndex": {
+          "type": "string",
+          "description": "FullStepIndex of step.",
+          "readOnly": true
+        },
+        "startTimeUtc": {
+          "type": "string",
+          "description": "Start time in utc of step.",
+          "readOnly": true
+        },
+        "endTimeUtc": {
+          "type": "string",
+          "description": "End time in utc of step.",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of step. Allowed values are 'Error', 'Success', 'InProgress'",
+          "readOnly": true
+        },
+        "steps": {
+          "type": "array",
+          "description": "List of nested steps during job execution..",
+          "items": {
+            "$ref": "#/definitions/Step"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "exception": {
+          "type": "array",
+          "description": "List of exceptions in job execution.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "TimeConfiguration": {
+      "type": "object",
+      "description": "Time configuration.",
+      "properties": {
+        "primaryTimeServer": {
+          "type": "string",
+          "description": "Primary NTP server."
+        },
+        "secondaryTimeServer": {
+          "type": "string",
+          "description": "Secondary NTP server."
+        },
+        "timeZone": {
+          "type": "string",
+          "description": "Time zone."
+        }
+      }
+    },
     "UpdateContent": {
       "type": "object",
       "description": "Represents a update content.",
@@ -696,6 +5076,158 @@
       "required": [
         "updatePayloads"
       ]
+    },
+    "UpdateRunPropertiesState": {
+      "type": "string",
+      "description": "State of the update run.",
+      "enum": [
+        "Unknown",
+        "Succeeded",
+        "InProgress",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "UpdateRunPropertiesState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "The update run state is unknown."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The update run succeeded."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "The update run is in progress."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The update run failed."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "UpdateSummariesPropertiesState": {
+      "type": "string",
+      "description": "Overall update state of the stamp.",
+      "enum": [
+        "Unknown",
+        "AppliedSuccessfully",
+        "UpdateAvailable",
+        "UpdateInProgress",
+        "UpdateFailed",
+        "NeedsAttention",
+        "PreparationInProgress",
+        "PreparationFailed"
+      ],
+      "x-ms-enum": {
+        "name": "UpdateSummariesPropertiesState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "The update state is unknown."
+          },
+          {
+            "name": "AppliedSuccessfully",
+            "value": "AppliedSuccessfully",
+            "description": "Updates were applied successfully."
+          },
+          {
+            "name": "UpdateAvailable",
+            "value": "UpdateAvailable",
+            "description": "An update is available."
+          },
+          {
+            "name": "UpdateInProgress",
+            "value": "UpdateInProgress",
+            "description": "An update is in progress."
+          },
+          {
+            "name": "UpdateFailed",
+            "value": "UpdateFailed",
+            "description": "An update failed."
+          },
+          {
+            "name": "NeedsAttention",
+            "value": "NeedsAttention",
+            "description": "The update needs attention."
+          },
+          {
+            "name": "PreparationInProgress",
+            "value": "PreparationInProgress",
+            "description": "Update preparation is in progress."
+          },
+          {
+            "name": "PreparationFailed",
+            "value": "PreparationFailed",
+            "description": "Update preparation failed."
+          }
+        ]
+      }
+    },
+    "UploadCertificateRequest": {
+      "type": "object",
+      "description": "Upload certificate request.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RawCertificateData",
+          "description": "Raw certificate data for upload."
+        }
+      }
+    },
+    "WebProxyConfiguration": {
+      "type": "object",
+      "description": "Web proxy configuration.",
+      "properties": {
+        "connectionUri": {
+          "type": "string",
+          "description": "Connection URI of the web proxy."
+        },
+        "port": {
+          "type": "string",
+          "description": "Port of the web proxy."
+        },
+        "bypassList": {
+          "type": "array",
+          "description": "Bypass list for the web proxy.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "WindowsServerSubscription": {
+      "type": "string",
+      "description": "Desired state of Windows Server Subscription.",
+      "enum": [
+        "Disabled",
+        "Enabled"
+      ],
+      "x-ms-enum": {
+        "name": "WindowsServerSubscription",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Windows Server Subscription is disabled."
+          },
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Windows Server Subscription is enabled."
+          }
+        ]
+      }
     }
   },
   "parameters": {}
