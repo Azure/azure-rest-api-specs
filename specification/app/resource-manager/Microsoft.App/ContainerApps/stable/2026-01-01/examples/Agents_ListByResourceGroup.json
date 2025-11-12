@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9",
+    "resourceGroupName": "examplerg",
+    "api-version": "2026-01-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/agents/testAgent1",
+            "name": "testAgent1",
+            "type": "Microsoft.App/agents",
+            "location": "East US",
+            "tags": {
+              "environment": "development",
+              "team": "platform"
+            },
+            "identity": {
+              "type": "SystemAssigned",
+              "principalId": "11111111-2222-3333-4444-555555555555",
+              "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+            },
+            "properties": {
+              "provisioningState": "Succeeded",
+              "agentEndpoint": "https://testAgent1.eastus.agents.azurecontainerapps.io",
+              "runningState": "Running",
+              "powerState": "Running",
+              "agentSpaceId": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/agentSpaces/testAgentSpace",
+              "vnetConfiguration": {
+                "subnetResourceId": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.Network/virtualNetworks/testvnet/subnets/testsubnet"
+              },
+              "upgradeChannel": "Stable"
+            }
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}

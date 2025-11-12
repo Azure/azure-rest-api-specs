@@ -1,0 +1,137 @@
+{
+  "parameters": {
+    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9",
+    "api-version": "2026-01-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/agentSpaces/testAgentSpace",
+            "name": "testAgentSpace",
+            "type": "Microsoft.App/agentSpaces",
+            "location": "East US",
+            "tags": {
+              "environment": "production",
+              "team": "platform"
+            },
+            "identity": {
+              "type": "SystemAssigned",
+              "principalId": "11111111-2222-3333-4444-555555555555",
+              "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+            },
+            "properties": {
+              "provisioningState": "Succeeded",
+              "currentAgentCount": 3,
+              "maxAgentCount": 10,
+              "memberAgents": [
+                "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/agents/chatAgent",
+                "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/agents/dataAgent",
+                "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/agents/supportAgent"
+              ],
+              "lastPolicyPropagation": "2025-10-28T10:30:00Z",
+              "description": "Production agent space for customer-facing AI agents",
+              "serviceTreeId": "12345678-1234-1234-1234-123456789012",
+              "complianceStatus": {
+                "isCompliant": true,
+                "complianceIssues": [],
+                "lastComplianceCheck": "2025-10-28T09:00:00Z"
+              },
+              "policies": {
+                "genevaActionsConfiguration": {
+                  "acisEndpoint": "https://acis.eastus.monitoring.azure.com",
+                  "allowedActions": [
+                    {
+                      "actionName": "RestartService",
+                      "extension": "GenevaActions",
+                      "actionParameters": [
+                        {
+                          "name": "serviceName",
+                          "type": "string"
+                        }
+                      ],
+                      "approvalRequired": true
+                    },
+                    {
+                      "actionName": "GetMetrics",
+                      "extension": "GenevaActions",
+                      "actionParameters": [
+                        {
+                          "name": "metricName",
+                          "type": "string"
+                        },
+                        {
+                          "name": "timeRange",
+                          "type": "string"
+                        }
+                      ],
+                      "approvalRequired": false
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/testRg/providers/Microsoft.App/agentSpaces/devAgentSpace",
+            "name": "devAgentSpace",
+            "type": "Microsoft.App/agentSpaces",
+            "location": "West US 2",
+            "tags": {
+              "environment": "development",
+              "team": "research"
+            },
+            "identity": {
+              "type": "UserAssigned",
+              "userAssignedIdentities": {
+                "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/testRg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/devIdentity": {
+                  "principalId": "22222222-3333-4444-5555-666666666666",
+                  "clientId": "33333333-4444-5555-6666-777777777777"
+                }
+              }
+            },
+            "properties": {
+              "provisioningState": "Succeeded",
+              "currentAgentCount": 1,
+              "maxAgentCount": 5,
+              "memberAgents": [
+                "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/testRg/providers/Microsoft.App/agents/testAgent"
+              ],
+              "lastPolicyPropagation": "2025-10-28T08:15:00Z",
+              "description": "Development environment for testing new agent capabilities",
+              "serviceTreeId": "87654321-4321-4321-4321-210987654321",
+              "complianceStatus": {
+                "isCompliant": false,
+                "complianceIssues": [
+                  "Missing required security policy",
+                  "Agent configuration drift detected"
+                ],
+                "lastComplianceCheck": "2025-10-28T07:45:00Z"
+              },
+              "policies": {
+                "genevaActionsConfiguration": {
+                  "acisEndpoint": "https://acis.westus2.monitoring.azure.com",
+                  "allowedActions": [
+                    {
+                      "actionName": "GetMetrics",
+                      "extension": "GenevaActions",
+                      "actionParameters": [
+                        {
+                          "name": "metricName",
+                          "type": "string"
+                        }
+                      ],
+                      "approvalRequired": false
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}
