@@ -4,12 +4,12 @@
   "parameters": {
     "api-version": "2025-07-01",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "deploymentStackWhatIfResultName": "changedDeploymentStackWhatIfResult"
+    "deploymentStacksWhatIfResultName": "changedDeploymentStackWhatIfResult"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Resources/deploymentStackWhatIfResults/changedDeploymentStackWhatIfResult",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Resources/deploymentStacksWhatIfResults/changedDeploymentStackWhatIfResult",
         "type": "Microsoft.Resources/deploymentStacksWhatIfResults",
         "name": "changedDeploymentStackWhatIfResult",
         "location": "eastus",
@@ -100,7 +100,7 @@
                   "delta": [
                     {
                       "path": "properties.enforcementMode",
-                      "changeType": "Modify",
+                      "changeType": "modify",
                       "before": "Default",
                       "after": "DoNotEnforce"
                     }
@@ -110,7 +110,7 @@
             ],
             "denySettingsChange": {
               "after": {
-                "mode": "None",
+                "mode": "none",
                 "excludedPrincipals": [],
                 "excludedActions": [],
                 "applyToChildScopes": false
@@ -119,12 +119,12 @@
                 {
                   "path": "Mode",
                   "changeType": "create",
-                  "after": "None"
+                  "after": "none"
                 },
                 {
                   "path": "ApplyToChildScopes",
                   "changeType": "create",
-                  "after": "False"
+                  "after": false
                 }
               ]
             }
