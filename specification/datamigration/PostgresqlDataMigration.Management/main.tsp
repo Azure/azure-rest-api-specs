@@ -3,6 +3,10 @@ import "@typespec/http";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "./PostgresqlModels.tsp";
+import "./PostgresqlMigrationService.tsp";
+import "./PostgresqlDatabaseMigration.tsp";
+import "./PostgresqlRoutes.tsp";
 
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
@@ -12,6 +16,7 @@ using Azure.ResourceManager;
 @versioned(Microsoft.DataMigration.Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.DataMigration;
+
 enum Versions {
   v2025_01_10: "2025-01-10",
 }
