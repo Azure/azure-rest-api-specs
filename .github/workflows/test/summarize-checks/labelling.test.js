@@ -290,8 +290,8 @@ describe("update labels", () => {
   ];
   it.each(testCases)(
     "$description",
-    async ({ existingLabels, expectedLabelsToAdd, expectedLabelsToRemove, impactAssessment }) => {
-      const labelContext = await updateLabels(existingLabels, impactAssessment);
+    ({ existingLabels, expectedLabelsToAdd, expectedLabelsToRemove, impactAssessment }) => {
+      const labelContext = updateLabels(existingLabels, impactAssessment);
 
       expect([...labelContext.toAdd].sort()).toEqual(expectedLabelsToAdd.sort());
       expect([...labelContext.toRemove].sort()).toEqual(expectedLabelsToRemove.sort());
