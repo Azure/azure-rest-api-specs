@@ -11,9 +11,11 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/postgressqlDatamigration.json"
     examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-java":
+    flavor: azure
     emitter-output-dir: "{service-dir}/azure-resourcemanager-datamigration"
     namespace: "com.azure.resourcemanager.datamigration"
   "@azure-tools/typespec-ts":
+    flavor: azure
     experimental-extensible-enums: true
     emitter-output-dir: "{service-dir}/arm-datamigration"
     package-details:
@@ -26,11 +28,13 @@ options:
     inject-spans: true
     module: "github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/datamigration/armdatamigration"
   "@azure-tools/typespec-python":
+    flavor: azure
     emitter-output-dir: "{service-dir}/azure-mgmt-datamigration"
     namespace: "azure.mgmt.datamigration"
     generate-sample: true
     generate-test: true
   "@azure-tools/typespec-csharp":
+    flavor: azure
     namespace: "Azure.ResourceManager.DataMigration"
     clear-output-folder: true
     emitter-output-dir: "{service-dir}/Azure.ResourceManager.DataMigration"
