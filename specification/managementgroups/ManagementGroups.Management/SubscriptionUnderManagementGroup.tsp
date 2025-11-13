@@ -1,6 +1,5 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./ManagementGroup.tsp";
@@ -8,7 +7,6 @@ import "./ManagementGroup.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.Management;
 /**
@@ -32,7 +30,6 @@ interface SubscriptionUnderManagementGroups {
    *
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ManagementGroupSubscriptions_GetSubscription")
   getSubscription is Extension.Read<
     Extension.Tenant,
     SubscriptionUnderManagementGroup,
@@ -52,7 +49,6 @@ interface SubscriptionUnderManagementGroups {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  @operationId("ManagementGroupSubscriptions_Create")
   create is Azure.ResourceManager.Legacy.Extension.CreateOrReplaceSync<
     Extension.Tenant,
     SubscriptionUnderManagementGroup,
@@ -73,7 +69,6 @@ interface SubscriptionUnderManagementGroups {
    *
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ManagementGroupSubscriptions_Delete")
   delete is Extension.DeleteSync<
     Extension.Tenant,
     SubscriptionUnderManagementGroup,
@@ -92,7 +87,6 @@ interface SubscriptionUnderManagementGroups {
    *
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ManagementGroupSubscriptions_GetSubscriptionsUnderManagementGroup")
   getSubscriptionsUnderManagementGroup is Extension.ListByTarget<
     Extension.Tenant,
     SubscriptionUnderManagementGroup,

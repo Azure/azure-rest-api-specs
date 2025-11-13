@@ -1,6 +1,5 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./ManagementGroup.tsp";
@@ -8,7 +7,6 @@ import "./ManagementGroup.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.Management;
 /**
@@ -33,7 +31,6 @@ interface HierarchySettingsOperationGroup {
    *
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("HierarchySettings_Get")
   get is Extension.Read<Extension.Tenant, HierarchySettings>;
 
   /**
@@ -42,7 +39,6 @@ interface HierarchySettingsOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  @operationId("HierarchySettings_CreateOrUpdate")
   createOrUpdate is Azure.ResourceManager.Legacy.Extension.CreateOrReplaceSync<
     Extension.Tenant,
     HierarchySettings,
@@ -55,7 +51,6 @@ interface HierarchySettingsOperationGroup {
    *
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("HierarchySettings_Update")
   @patch(#{ implicitOptionality: false })
   update is Extension.CustomPatchSync<
     Extension.Tenant,
@@ -69,7 +64,6 @@ interface HierarchySettingsOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  @operationId("HierarchySettings_Delete")
   delete is Extension.DeleteSync<
     Extension.Tenant,
     HierarchySettings,
