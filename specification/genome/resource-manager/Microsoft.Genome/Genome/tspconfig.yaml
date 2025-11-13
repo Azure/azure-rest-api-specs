@@ -1,0 +1,62 @@
+parameters:
+  "service-dir":
+    default: "sdk/genome"
+  "dependencies":
+    default: ""
+
+emit:
+  - "@azure-tools/typespec-autorest"
+
+options:
+  "@azure-tools/typespec-autorest":
+    use-read-only-status-schema: true
+    emitter-output-dir: "{project-root}"
+    azure-resource-provider-folder: "resource-manager"
+    output-file: "{version-status}/{version}/genome.json"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+
+  "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    flavor: azure
+    clear-output-folder: true
+    model-namespace: true
+    namespace: "Azure.ResourceManager.Genome"
+
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-genome"
+    namespace: "azure.mgmt.genome"
+    generate-sample: true
+    generate-test: true
+    flavor: "azure"
+
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-genome"
+    namespace: "com.azure.resourcemanager.genome"
+    service-name: "Genome" # human-readable service name, whitespace allowed
+    flavor: azure
+
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-genome"
+    flavor: azure
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-genome"
+
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/genome"
+    emitter-output-dir: "{output-dir}/{service-dir}/armgenome"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armgenome"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+
+  "@azure-tools/typespec-client-generator-cli":
+    additionalDirectories:
+      - "specification/genome/resource-manager/Microsoft.Genome/Genome/"
+
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"

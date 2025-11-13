@@ -621,6 +621,26 @@ model CacheNodeEntity {
   @doc("Customer requested time of the day for mcc install of auto update cycle, should be hh:mm")
   @pattern("^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$")
   autoUpdateRequestedTime?: string;
+
+  @added(Versions.v2025_11_15_preview)
+  @doc("Cache node port firewall rule creation opt-in for port 80 property")
+  openFirewallPort80?: boolean;
+
+  @added(Versions.v2025_11_15_preview)
+  @doc("Cache node port firewall rule creation opt-in for port 443 property")
+  openFirewallPort443?: boolean;
+
+  @added(Versions.v2025_11_15_preview)
+  @doc("Cache node port firewall rule creation opt-in for port 5000 property")
+  openFirewallPort5000?: boolean;
+
+  @added(Versions.v2025_11_15_preview)
+  @doc("Cache node port firewall rule creation opt-in for port 5001 property")
+  openFirewallPort5001?: boolean;
+
+  @added(Versions.v2025_11_15_preview)
+  @doc("Connected Cache runtime account type")
+  runtimeAccountType?: string;
 }
 
 @doc("Model representing cache node for connected cache resource")
@@ -752,6 +772,66 @@ model AdditionalCacheNodeProperties {
   @doc("Cache node tls certificate status.")
   @visibility(Lifecycle.Read)
   tlsStatus?: string;
+
+  @added(Versions.v2025_11_15_preview)
+  @doc("Operating system edition of the cache node host machine")
+  @visibility(Lifecycle.Read)
+  hostOsEdition?: string;
+
+  @added(Versions.v2025_11_15_preview)
+  @doc("Operating system version of the cache node host machine")
+  @visibility(Lifecycle.Read)
+  hostOsVersion?: string;
+
+  @added(Versions.v2025_11_15_preview)
+  @doc("Operating system build of the cache node host machine")
+  @visibility(Lifecycle.Read)
+  hostOsBuild?: string;
+
+  @added(Versions.v2025_11_15_preview)
+  @doc("Operating system edition of the WSL Linux distribution used to run the cache node on Windows host machines")
+  @visibility(Lifecycle.Read)
+  distroOsEditionWsl?: string;
+
+  @added(Versions.v2025_11_15_preview)
+  @doc("Operating system version of the WSL Linux distribution used to run the cache node on Windows host machines")
+  @visibility(Lifecycle.Read)
+  distroOsVersionWsl?: string;
+
+  @added(Versions.v2025_11_15_preview)
+  @doc("Operating system build of the WSL Linux distribution used to run the cache node on Windows host machines")
+  @visibility(Lifecycle.Read)
+  distroOsBuildWsl?: string;
+
+  @added(Versions.v2025_11_15_preview)
+  @doc("Operating system edition of container used to run the cache node")
+  @visibility(Lifecycle.Read)
+  containerOsEdition?: string;
+
+  @added(Versions.v2025_11_15_preview)
+  @doc("Operating system version of the container used to run the cache node")
+  @visibility(Lifecycle.Read)
+  containerOsVersion?: string;
+
+  @added(Versions.v2025_11_15_preview)
+  @doc("Operating system build of the container used to run the cache node")
+  @visibility(Lifecycle.Read)
+  containerOsBuild?: string;
+
+  @added(Versions.v2025_11_15_preview)
+  @doc("Version of the Windows deployment application used to deploy the cache node")
+  @visibility(Lifecycle.Read)
+  installVersionMsix?: string;
+
+  @added(Versions.v2025_11_15_preview)
+  @doc("Version of the installation scripts used to deploy the cache node")
+  @visibility(Lifecycle.Read)
+  installVersionScript?: string;
+
+  @added(Versions.v2025_11_15_preview)
+  @doc("Version of the Windows Subsystem for Linux application version used to run the cache node on the Windows host machine")
+  @visibility(Lifecycle.Read)
+  appVersionWsl?: string;
 
   @doc("Optional property #1 of Mcc response object")
   optionalProperty1?: string;
