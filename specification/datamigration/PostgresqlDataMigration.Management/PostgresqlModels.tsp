@@ -48,22 +48,46 @@ union TargetDatabaseEngine {
 union AuthenticationMethod {
   string,
 
+  @doc("SQL authentication with username and password")
+  SqlAuthentication: "sql_authentication",
+
   @doc("Password authentication")
   Password: "password",
+
+  @doc("Windows authentication for SQL Server")
+  WindowsAuthentication: "windows_authentication",
+
+  @doc("Azure Active Directory integrated authentication")
+  ActiveDirectoryIntegrated: "active_directory_integrated",
+
+  @doc("Azure Active Directory authentication with username and password")
+  ActiveDirectoryPassword: "active_directory_password",
 }
 
 @doc("The SSL mode for database connection.")
 union SslMode {
   string,
 
-  @doc("Require SSL connection")
-  Require: "require",
+  @doc("SslMode: None")
+  None: "none",
 
-  @doc("Prefer SSL connection")
+  @doc("SSL is disabled. If the server requires SSL, the connection will fail.")
+  Disable: "disable",
+
+  @doc("Prefer non-SSL connections if the server allows them, but allow SSL connections.")
+  Allow: "allow",
+
+  @doc("Prefer SSL connections if the server allows them, but allow connections without SSL.")
   Prefer: "prefer",
 
-  @doc("Disable SSL connection")
-  Disable: "disable",
+  @doc("Fail the connection if the server doesn't support SSL.")
+  Require: "require",
+
+  @doc("Fail the connection if the server doesn't support SSL. Also verifies server certificate.")
+  VerifyCA: "verify_ca",
+
+  @doc("Fail the connection if the server doesn't support SSL. Also verifies server certificate with host's name.")
+  VerifyFull: "verify_full",
 }
 
 @doc("The scope of the mapping.")

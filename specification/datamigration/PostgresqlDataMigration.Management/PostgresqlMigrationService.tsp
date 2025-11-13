@@ -20,7 +20,7 @@ model MigrationServiceProperties {
 model MigrationService is TrackedResource<MigrationServiceProperties> {
   @doc("The migration service name.")
   @key("serviceName")
-  @segment("migrationServices")
+  @segment("postgresqlMigrationServices")
   @path
   @pattern("^[a-zA-Z0-9-]*$")
   name: string;

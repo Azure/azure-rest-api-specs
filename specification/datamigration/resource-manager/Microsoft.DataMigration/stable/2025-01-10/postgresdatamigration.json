@@ -46,7 +46,7 @@
     }
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataMigration/migrationServices": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataMigration/postgresqlMigrationServices": {
       "get": {
         "operationId": "MigrationServices_ListByResourceGroup",
         "tags": [
@@ -83,7 +83,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataMigration/migrationServices/{serviceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataMigration/postgresqlMigrationServices/{serviceName}": {
       "get": {
         "operationId": "MigrationServices_Get",
         "tags": [
@@ -269,7 +269,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataMigration/migrationServices/{serviceName}/databaseMigrations": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataMigration/postgresqlMigrationServices/{serviceName}/databaseMigrations": {
       "get": {
         "operationId": "DatabaseMigrations_ListByMigrationService",
         "tags": [
@@ -314,7 +314,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataMigration/migrationServices/{serviceName}/databaseMigrations/{databaseMigrationId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataMigration/postgresqlMigrationServices/{serviceName}/databaseMigrations/{databaseMigrationId}": {
       "get": {
         "operationId": "DatabaseMigrations_Get",
         "tags": [
@@ -546,7 +546,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataMigration/migrationServices/{serviceName}/discoverDatabaseObjects": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataMigration/postgresqlMigrationServices/{serviceName}/discoverDatabaseObjects": {
       "post": {
         "operationId": "MigrationServices_DiscoverDatabaseObjects",
         "tags": [
@@ -607,7 +607,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataMigration/migrationServices/{serviceName}/testConnectivity": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataMigration/postgresqlMigrationServices/{serviceName}/testConnectivity": {
       "post": {
         "operationId": "MigrationServices_TestConnectivity",
         "tags": [
@@ -674,16 +674,40 @@
       "type": "string",
       "description": "The authentication method for database connection.",
       "enum": [
-        "password"
+        "sql_authentication",
+        "password",
+        "windows_authentication",
+        "active_directory_integrated",
+        "active_directory_password"
       ],
       "x-ms-enum": {
         "name": "AuthenticationMethod",
         "modelAsString": true,
         "values": [
           {
+            "name": "SqlAuthentication",
+            "value": "sql_authentication",
+            "description": "SQL authentication with username and password"
+          },
+          {
             "name": "Password",
             "value": "password",
             "description": "Password authentication"
+          },
+          {
+            "name": "WindowsAuthentication",
+            "value": "windows_authentication",
+            "description": "Windows authentication for SQL Server"
+          },
+          {
+            "name": "ActiveDirectoryIntegrated",
+            "value": "active_directory_integrated",
+            "description": "Azure Active Directory integrated authentication"
+          },
+          {
+            "name": "ActiveDirectoryPassword",
+            "value": "active_directory_password",
+            "description": "Azure Active Directory authentication with username and password"
           }
         ]
       }
@@ -1864,28 +1888,52 @@
       "type": "string",
       "description": "The SSL mode for database connection.",
       "enum": [
-        "require",
+        "none",
+        "disable",
+        "allow",
         "prefer",
-        "disable"
+        "require",
+        "verify_ca",
+        "verify_full"
       ],
       "x-ms-enum": {
         "name": "SslMode",
         "modelAsString": true,
         "values": [
           {
-            "name": "Require",
-            "value": "require",
-            "description": "Require SSL connection"
-          },
-          {
-            "name": "Prefer",
-            "value": "prefer",
-            "description": "Prefer SSL connection"
+            "name": "None",
+            "value": "none",
+            "description": "SslMode: None"
           },
           {
             "name": "Disable",
             "value": "disable",
-            "description": "Disable SSL connection"
+            "description": "SSL is disabled. If the server requires SSL, the connection will fail."
+          },
+          {
+            "name": "Allow",
+            "value": "allow",
+            "description": "Prefer non-SSL connections if the server allows them, but allow SSL connections."
+          },
+          {
+            "name": "Prefer",
+            "value": "prefer",
+            "description": "Prefer SSL connections if the server allows them, but allow connections without SSL."
+          },
+          {
+            "name": "Require",
+            "value": "require",
+            "description": "Fail the connection if the server doesn't support SSL."
+          },
+          {
+            "name": "VerifyCA",
+            "value": "verify_ca",
+            "description": "Fail the connection if the server doesn't support SSL. Also verifies server certificate."
+          },
+          {
+            "name": "VerifyFull",
+            "value": "verify_full",
+            "description": "Fail the connection if the server doesn't support SSL. Also verifies server certificate with host's name."
           }
         ]
       }
