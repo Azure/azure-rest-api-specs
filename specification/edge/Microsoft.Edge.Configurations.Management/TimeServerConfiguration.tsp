@@ -1,22 +1,13 @@
-import "@typespec/http";
-import "@typespec/rest";
-import "@typespec/versioning";
-import "@azure-tools/typespec-azure-core";
-import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
 import "./Configuration.tsp";
-import "./Commons.tsp";
 
-using TypeSpec.OpenAPI;
-using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
-using Azure.Core;
 using Azure.ResourceManager;
 
 namespace Microsoft.Edge;
 
 @removed(Versions.v2025_06_01)
+@added(Versions.v2025_12_01_preview)
 @armResourceOperations
 interface TimeServerConfigurations {
   get is ArmResourceRead<TimeServerConfiguration>;
@@ -30,6 +21,7 @@ interface TimeServerConfigurations {
 }
 
 @removed(Versions.v2025_06_01)
+@added(Versions.v2025_12_01_preview)
 @doc("TimeServerConfiguration Resource")
 @parentResource(Configuration)
 model TimeServerConfiguration
@@ -41,6 +33,7 @@ model TimeServerConfiguration
 }
 
 @removed(Versions.v2025_06_01)
+@added(Versions.v2025_12_01_preview)
 @doc("ArcGatewayConfigurationProperties Properties")
 model TimeServerConfigurationProperties {
   @doc("Provisioning state of resource")
@@ -61,6 +54,7 @@ model TimeServerConfigurationProperties {
 }
 
 @removed(Versions.v2025_06_01)
+@added(Versions.v2025_12_01_preview)
 @doc("Ntp Server Configuration")
 model NtpServerConfiguration {
   @doc("Ntp Server")
@@ -71,6 +65,7 @@ model NtpServerConfiguration {
 }
 
 @removed(Versions.v2025_06_01)
+@added(Versions.v2025_12_01_preview)
 @doc("Choices for NTP Server selection")
 union NtpConfigurationChoice {
   @doc("Automatic selection of NTP Server")
