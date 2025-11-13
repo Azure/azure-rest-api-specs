@@ -8,7 +8,7 @@ using Azure.ResourceManager;
 namespace Microsoft.Marketplace;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Read-only metadata resource."
-@doc("Returns a subset of Product attributes")
+@doc("Updating product summary test")
 model ProductSummary {
   @doc("Product display name")
   displayName?: string;
