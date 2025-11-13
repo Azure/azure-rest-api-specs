@@ -1,0 +1,2560 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AzureStackHCI",
+    "version": "2025-11-01-preview",
+    "description": "Azure Stack HCI service"
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/providers/microsoft.AzureStackHCI/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List the operations for the provider.": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.AzureStackHCI/clusters": {
+      "get": {
+        "operationId": "Clusters_ListBySubscription",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ClusterList"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.AzureStackHCI/locations/{location}/kubernetesVersions": {
+      "get": {
+        "operationId": "KubernetesVersions_ListBySubscriptionLocationResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/KubernetesVersionListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "KubernetesVersions_ListBySubscriptionLocationResource_MaximumSet": {
+            "$ref": "./examples/KubernetesVersions_ListBySubscriptionLocationResource_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.AzureStackHCI/locations/{location}/osImages": {
+      "get": {
+        "operationId": "OsImages_ListBySubscriptionLocationResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/OsImageListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OsImages_ListBySubscriptionLocationResource_MaximumSet": {
+            "$ref": "./examples/OsImages_ListBySubscriptionLocationResource_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.AzureStackHCI/locations/{location}/osImages/{osImageName}": {
+      "get": {
+        "operationId": "OsImages_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "osImageName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-.]{3,50}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/OsImage"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OsImages_Get_MaximumSet": {
+            "$ref": "./examples/OsImages_Get_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.AzureStackHCI/locations/{location}/platformUpdates": {
+      "get": {
+        "operationId": "PlatformUpdates_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/PlatformUpdateListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PlatformUpdates_ListByLocation_MaximumSet": {
+            "$ref": "./examples/PlatformUpdates_ListByLocation_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.AzureStackHCI/locations/{location}/platformUpdates/{platformUpdateName}": {
+      "get": {
+        "operationId": "PlatformUpdates_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "platformUpdateName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-.]{3,50}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/PlatformUpdate"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PlatformUpdates_Get_MaximumSet": {
+            "$ref": "./examples/PlatformUpdates_Get_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.AzureStackHCI/locations/{location}/updateContents": {
+      "get": {
+        "operationId": "UpdateContents_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/UpdateContentListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateContents_ListByLocation_MaximumSet": {
+            "$ref": "./examples/UpdateContents_ListByLocation_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.AzureStackHCI/locations/{location}/updateContents/{updateContentName}": {
+      "get": {
+        "operationId": "UpdateContents_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "updateContentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-.]{3,50}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/UpdateContent"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateContents_Get_MaximumSet": {
+            "$ref": "./examples/UpdateContents_Get_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters": {
+      "get": {
+        "operationId": "Clusters_ListByResourceGroup",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ClusterList"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}": {
+      "get": {
+        "operationId": "Clusters_Get",
+        "parameters": [
+          {
+            "name": "clusterName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "Clusters_Create",
+        "parameters": [
+          {
+            "name": "clusterName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Clusters_Update",
+        "parameters": [
+          {
+            "name": "clusterName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClusterPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Clusters_Delete",
+        "parameters": [
+          {
+            "name": "clusterName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/configureRemoteSupport": {
+      "post": {
+        "operationId": "Clusters_ConfigureRemoteSupport",
+        "parameters": [
+          {
+            "name": "clusterName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RemoteSupportRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/createClusterIdentity": {
+      "post": {
+        "operationId": "Clusters_CreateIdentity",
+        "parameters": [
+          {
+            "name": "clusterName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/StackHciClusterIdentityResponseResult"
+            }
+          },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/extendSoftwareAssuranceBenefit": {
+      "post": {
+        "operationId": "Clusters_ExtendSoftwareAssuranceBenefit",
+        "parameters": [
+          {
+            "name": "clusterName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SoftwareAssuranceChangeRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/triggerLogCollection": {
+      "post": {
+        "operationId": "Clusters_TriggerLogCollection",
+        "parameters": [
+          {
+            "name": "clusterName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LogCollectionRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/updateSecretsLocations": {
+      "post": {
+        "operationId": "Clusters_UpdateSecretsLocations",
+        "parameters": [
+          {
+            "name": "clusterName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SecretsLocationsChangeRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/uploadCertificate": {
+      "post": {
+        "operationId": "Clusters_UploadCertificate",
+        "parameters": [
+          {
+            "name": "clusterName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UploadCertificateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "Cluster": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ClusterProperties"
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ClusterDesiredProperties": {
+      "type": "object",
+      "properties": {
+        "windowsServerSubscription": {
+          "type": "string",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "x-ms-enum": {
+            "name": "WindowsServerSubscription",
+            "modelAsString": true
+          }
+        },
+        "diagnosticLevel": {
+          "type": "string",
+          "enum": [
+            "Off",
+            "Basic",
+            "Enhanced"
+          ],
+          "x-ms-enum": {
+            "name": "DiagnosticLevel",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ClusterIdentityResponseProperties": {
+      "type": "object",
+      "properties": {
+        "aadClientId": {
+          "type": "string"
+        },
+        "aadTenantId": {
+          "type": "string"
+        },
+        "aadServicePrincipalObjectId": {
+          "type": "string"
+        },
+        "aadApplicationObjectId": {
+          "type": "string"
+        }
+      }
+    },
+    "ClusterList": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/Cluster"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ClusterNode": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "id": {
+          "type": "number",
+          "format": "float",
+          "readOnly": true
+        },
+        "windowsServerSubscription": {
+          "type": "string",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "x-ms-enum": {
+            "name": "WindowsServerSubscription",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "nodeType": {
+          "type": "string",
+          "enum": [
+            "FirstParty",
+            "ThirdParty"
+          ],
+          "x-ms-enum": {
+            "name": "ClusterNodeType",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "ehcResourceId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "manufacturer": {
+          "type": "string",
+          "readOnly": true
+        },
+        "model": {
+          "type": "string",
+          "readOnly": true
+        },
+        "osName": {
+          "type": "string",
+          "readOnly": true
+        },
+        "osVersion": {
+          "type": "string",
+          "readOnly": true
+        },
+        "osDisplayVersion": {
+          "type": "string",
+          "readOnly": true
+        },
+        "serialNumber": {
+          "type": "string",
+          "readOnly": true
+        },
+        "coreCount": {
+          "type": "number",
+          "format": "float",
+          "readOnly": true
+        },
+        "memoryInGiB": {
+          "type": "number",
+          "format": "float",
+          "readOnly": true
+        },
+        "lastLicensingTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "oemActivation": {
+          "type": "string",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "x-ms-enum": {
+            "name": "OemActivation",
+            "modelAsString": true
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ClusterPatch": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity"
+        },
+        "properties": {
+          "$ref": "#/definitions/ClusterPatchProperties"
+        }
+      }
+    },
+    "ClusterPatchProperties": {
+      "type": "object",
+      "properties": {
+        "cloudManagementEndpoint": {
+          "type": "string"
+        },
+        "aadClientId": {
+          "type": "string"
+        },
+        "aadTenantId": {
+          "type": "string"
+        },
+        "desiredProperties": {
+          "$ref": "#/definitions/ClusterDesiredProperties"
+        }
+      }
+    },
+    "ClusterProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "InProgress",
+            "NotSpecified",
+            "Provisioning",
+            "Updating",
+            "Deleting",
+            "Accepted"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "NotYetRegistered",
+            "ConnectedRecently",
+            "NotConnectedRecently",
+            "Disconnected",
+            "Error",
+            "NotSpecified",
+            "ValidationInProgress",
+            "ValidationSuccess",
+            "ValidationFailed",
+            "DeploymentInProgress",
+            "DeploymentFailed",
+            "DeploymentSuccess",
+            "Succeeded",
+            "Failed",
+            "InProgress"
+          ],
+          "x-ms-enum": {
+            "name": "Status",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "connectivityStatus": {
+          "type": "string",
+          "enum": [
+            "NotYetRegistered",
+            "Connected",
+            "NotConnectedRecently",
+            "PartiallyConnected",
+            "Disconnected",
+            "NotSpecified"
+          ],
+          "x-ms-enum": {
+            "name": "ConnectivityStatus",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "cloudId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "cloudManagementEndpoint": {
+          "type": "string"
+        },
+        "aadClientId": {
+          "type": "string"
+        },
+        "aadTenantId": {
+          "type": "string"
+        },
+        "aadApplicationObjectId": {
+          "type": "string"
+        },
+        "aadServicePrincipalObjectId": {
+          "type": "string"
+        },
+        "softwareAssuranceProperties": {
+          "$ref": "#/definitions/SoftwareAssuranceProperties"
+        },
+        "cloudEnvironment": {
+          "type": "string",
+          "readOnly": true
+        },
+        "isManagementCluster": {
+          "type": "boolean",
+          "readOnly": true
+        },
+        "clusterWitness": {
+          "$ref": "#/definitions/ClusterWitnessProperties"
+        },
+        "logCollectionProperties": {
+          "$ref": "#/definitions/LogCollectionProperties"
+        },
+        "remoteSupportProperties": {
+          "$ref": "#/definitions/RemoteSupportProperties"
+        },
+        "desiredProperties": {
+          "$ref": "#/definitions/ClusterDesiredProperties"
+        },
+        "reportedProperties": {
+          "$ref": "#/definitions/ClusterReportedProperties",
+          "readOnly": true
+        },
+        "isolatedVmAttestationConfiguration": {
+          "$ref": "#/definitions/IsolatedVmAttestationConfiguration",
+          "readOnly": true
+        },
+        "trialDaysRemaining": {
+          "type": "number",
+          "format": "float",
+          "readOnly": true
+        },
+        "billingModel": {
+          "type": "string",
+          "readOnly": true
+        },
+        "registrationTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "lastSyncTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "lastBillingTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "serviceEndpoint": {
+          "type": "string",
+          "readOnly": true
+        },
+        "resourceProviderObjectId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "secretsLocations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SecretsLocationDetails"
+          }
+        },
+        "clusterPattern": {
+          "type": "string",
+          "enum": [
+            "Standard",
+            "RackAware"
+          ],
+          "x-ms-enum": {
+            "name": "ClusterPattern",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "localAvailabilityZones": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LocalAvailabilityZones"
+          },
+          "x-ms-identifiers": [
+            "localAvailabilityZoneName"
+          ]
+        }
+      }
+    },
+    "ClusterReportedProperties": {
+      "type": "object",
+      "properties": {
+        "clusterName": {
+          "type": "string",
+          "readOnly": true
+        },
+        "clusterId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "clusterVersion": {
+          "type": "string",
+          "readOnly": true
+        },
+        "nodes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ClusterNode"
+          },
+          "readOnly": true
+        },
+        "lastUpdated": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "msiExpirationTimeStamp": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "imdsAttestation": {
+          "type": "string",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "x-ms-enum": {
+            "name": "ImdsAttestation",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "diagnosticLevel": {
+          "type": "string",
+          "enum": [
+            "Off",
+            "Basic",
+            "Enhanced"
+          ],
+          "x-ms-enum": {
+            "name": "DiagnosticLevel",
+            "modelAsString": true
+          }
+        },
+        "supportedCapabilities": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "clusterType": {
+          "type": "string",
+          "enum": [
+            "FirstParty",
+            "ThirdParty"
+          ],
+          "x-ms-enum": {
+            "name": "ClusterNodeType",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "manufacturer": {
+          "type": "string",
+          "readOnly": true
+        },
+        "oemActivation": {
+          "type": "string",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "x-ms-enum": {
+            "name": "OemActivation",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "hardwareClass": {
+          "type": "string",
+          "default": "Medium",
+          "enum": [
+            "Small",
+            "Medium",
+            "Large"
+          ],
+          "x-ms-enum": {
+            "name": "HardwareClass",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "customLocationId": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ClusterWitnessProperties": {
+      "type": "object",
+      "properties": {
+        "authenticationMode": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ClustersLogCollectionSession": {
+      "type": "object",
+      "properties": {
+        "logStartTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "logEndTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "timeCollected": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "logSize": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "logCollectionStatus": {
+          "type": "string",
+          "enum": [
+            "None",
+            "InProgress",
+            "Failed",
+            "Succeeded"
+          ],
+          "x-ms-enum": {
+            "name": "LogCollectionStatus",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "correlationId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "logCollectionJobType": {
+          "type": "string",
+          "enum": [
+            "OnDemand",
+            "Scheduled"
+          ],
+          "x-ms-enum": {
+            "name": "LogCollectionJobType",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "endTimeCollected": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "logCollectionError": {
+          "$ref": "#/definitions/LogCollectionError",
+          "readOnly": true
+        }
+      }
+    },
+    "ClustersRemoteSupportNodeSettings": {
+      "type": "object",
+      "properties": {
+        "arcResourceId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "state": {
+          "type": "string",
+          "readOnly": true
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "connectionStatus": {
+          "type": "string",
+          "readOnly": true
+        },
+        "connectionErrorMessage": {
+          "type": "string",
+          "readOnly": true
+        },
+        "transcriptLocation": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ContentPayload": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string"
+        },
+        "hash": {
+          "type": "string"
+        },
+        "hashAlgorithm": {
+          "type": "string"
+        },
+        "identifier": {
+          "type": "string"
+        },
+        "packageSizeInBytes": {
+          "type": "string"
+        },
+        "group": {
+          "type": "string"
+        },
+        "fileName": {
+          "type": "string"
+        }
+      }
+    },
+    "DeploymentAdapterPropertyOverrides": {
+      "type": "object",
+      "properties": {
+        "jumboPacket": {
+          "type": "string"
+        },
+        "networkDirect": {
+          "type": "string"
+        },
+        "networkDirectTechnology": {
+          "type": "string"
+        }
+      }
+    },
+    "DeploymentHostNetwork": {
+      "type": "object",
+      "properties": {
+        "intents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeploymentIntents"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "storageNetworks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeploymentStorageNetworks"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "storageConnectivitySwitchless": {
+          "type": "boolean"
+        },
+        "enableStorageAutoIp": {
+          "type": "boolean"
+        }
+      }
+    },
+    "DeploymentIntents": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "trafficType": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "adapter": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "overrideVirtualSwitchConfiguration": {
+          "type": "boolean"
+        },
+        "virtualSwitchConfigurationOverrides": {
+          "$ref": "#/definitions/DeploymentVirtualSwitchConfigurationOverrides"
+        },
+        "overrideQosPolicy": {
+          "type": "boolean"
+        },
+        "qosPolicyOverrides": {
+          "$ref": "#/definitions/QosPolicyOverrides"
+        },
+        "overrideAdapterProperty": {
+          "type": "boolean"
+        },
+        "adapterPropertyOverrides": {
+          "$ref": "#/definitions/DeploymentAdapterPropertyOverrides"
+        }
+      }
+    },
+    "DeploymentStep": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "readOnly": true
+        },
+        "fullStepIndex": {
+          "type": "string",
+          "readOnly": true
+        },
+        "startTimeUtc": {
+          "type": "string",
+          "readOnly": true
+        },
+        "endTimeUtc": {
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "readOnly": true
+        },
+        "steps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeploymentStep"
+          },
+          "readOnly": true
+        },
+        "exception": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "DeploymentStorageAdapterIPInfo": {
+      "type": "object",
+      "properties": {
+        "physicalNode": {
+          "type": "string"
+        },
+        "ipv4Address": {
+          "type": "string"
+        },
+        "subnetMask": {
+          "type": "string"
+        }
+      }
+    },
+    "DeploymentStorageNetworks": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "networkAdapterName": {
+          "type": "string"
+        },
+        "vlanId": {
+          "type": "string"
+        },
+        "storageAdapterIPInfo": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeploymentStorageAdapterIPInfo"
+          },
+          "x-ms-identifiers": [
+            "physicalNode"
+          ]
+        }
+      }
+    },
+    "DeploymentVirtualSwitchConfigurationOverrides": {
+      "type": "object",
+      "properties": {
+        "enableIov": {
+          "type": "string"
+        },
+        "loadBalancingAlgorithm": {
+          "type": "string"
+        }
+      }
+    },
+    "DeviceConfiguration": {
+      "type": "object",
+      "properties": {
+        "network": {
+          "$ref": "#/definitions/NetworkConfiguration"
+        },
+        "hostName": {
+          "type": "string"
+        },
+        "webProxy": {
+          "$ref": "#/definitions/WebProxyConfiguration"
+        },
+        "time": {
+          "$ref": "#/definitions/TimeConfiguration"
+        }
+      }
+    },
+    "EceActionStatus": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "readOnly": true
+        },
+        "steps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Step"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "EceReportedProperties": {
+      "type": "object",
+      "properties": {
+        "validationStatus": {
+          "$ref": "#/definitions/EceActionStatus",
+          "readOnly": true
+        },
+        "deploymentStatus": {
+          "$ref": "#/definitions/EceActionStatus",
+          "readOnly": true
+        }
+      }
+    },
+    "IpAddressRange": {
+      "type": "object",
+      "properties": {
+        "startIp": {
+          "type": "string"
+        },
+        "endIp": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "endIp",
+        "startIp"
+      ]
+    },
+    "IsolatedVmAttestationConfiguration": {
+      "type": "object",
+      "properties": {
+        "attestationResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Attestation/attestationProviders"
+              }
+            ]
+          }
+        },
+        "relyingPartyServiceEndpoint": {
+          "type": "string",
+          "readOnly": true
+        },
+        "attestationServiceEndpoint": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "JobReportedProperties": {
+      "type": "object",
+      "properties": {
+        "percentComplete": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "validationStatus": {
+          "$ref": "#/definitions/EceActionStatus",
+          "readOnly": true
+        },
+        "deploymentStatus": {
+          "$ref": "#/definitions/EceActionStatus",
+          "readOnly": true
+        }
+      }
+    },
+    "KubernetesVersion": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/KubernetesVersionProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "KubernetesVersionListResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/KubernetesVersion"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "KubernetesVersionProperties": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "version"
+      ]
+    },
+    "LocalAvailabilityZones": {
+      "type": "object",
+      "properties": {
+        "localAvailabilityZoneName": {
+          "type": "string"
+        },
+        "localAvailabilityZoneMode": {
+          "type": "string",
+          "enum": [
+            "Active",
+            "Passive"
+          ],
+          "x-ms-enum": {
+            "name": "LocalAvailabilityZoneMode",
+            "modelAsString": true
+          }
+        },
+        "nodes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "LogCollectionError": {
+      "type": "object",
+      "properties": {
+        "errorCode": {
+          "type": "string",
+          "readOnly": true
+        },
+        "errorMessage": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "LogCollectionProperties": {
+      "type": "object",
+      "properties": {
+        "fromDate": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "toDate": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "lastLogGenerated": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "logCollectionSessionDetails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ClustersLogCollectionSession"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "LogCollectionReportedProperties": {
+      "type": "object",
+      "properties": {
+        "percentComplete": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "validationStatus": {
+          "$ref": "#/definitions/EceActionStatus",
+          "readOnly": true
+        },
+        "deploymentStatus": {
+          "$ref": "#/definitions/EceActionStatus",
+          "readOnly": true
+        },
+        "logCollectionSessionDetails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LogCollectionSession"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "correlationId"
+          ]
+        }
+      }
+    },
+    "LogCollectionRequest": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LogCollectionRequestProperties"
+        }
+      }
+    },
+    "LogCollectionRequestProperties": {
+      "type": "object",
+      "properties": {
+        "fromDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "toDate": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "fromDate",
+        "toDate"
+      ]
+    },
+    "LogCollectionSession": {
+      "type": "object",
+      "properties": {
+        "startTime": {
+          "type": "string",
+          "readOnly": true
+        },
+        "endTime": {
+          "type": "string",
+          "readOnly": true
+        },
+        "timeCollected": {
+          "type": "string",
+          "readOnly": true
+        },
+        "logSize": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "NotStarted",
+            "Running",
+            "Failed",
+            "Succeeded",
+            "Canceled"
+          ],
+          "x-ms-enum": {
+            "name": "DeviceLogCollectionStatus",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "correlationId": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "NetworkAdapter": {
+      "type": "object",
+      "properties": {
+        "ipAssignmentType": {
+          "type": "string",
+          "enum": [
+            "Automatic",
+            "Manual"
+          ],
+          "x-ms-enum": {
+            "name": "IpAssignmentType",
+            "modelAsString": true
+          }
+        },
+        "ipAddress": {
+          "type": "string"
+        },
+        "adapterName": {
+          "type": "string"
+        },
+        "macAddress": {
+          "type": "string"
+        },
+        "ipAddressRange": {
+          "$ref": "#/definitions/IpAddressRange"
+        },
+        "gateway": {
+          "type": "string"
+        },
+        "subnetMask": {
+          "type": "string"
+        },
+        "dnsAddressArray": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "vlanId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "ipAssignmentType"
+      ]
+    },
+    "NetworkConfiguration": {
+      "type": "object",
+      "properties": {
+        "networkAdapters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkAdapter"
+          }
+        }
+      }
+    },
+    "OsImage": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/OsImageProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "OsImageListResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/OsImage"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "OsImageProperties": {
+      "type": "object",
+      "properties": {
+        "validatedSolutionRecipeVersion": {
+          "type": "string"
+        },
+        "composedImageVersion": {
+          "type": "string"
+        },
+        "composedImageIsoUrl": {
+          "type": "string"
+        },
+        "composedImageIsoHash": {
+          "type": "string"
+        }
+      }
+    },
+    "PackageVersionInfo": {
+      "type": "object",
+      "properties": {
+        "packageType": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "lastUpdated": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "PerNodeRemoteSupportSession": {
+      "type": "object",
+      "properties": {
+        "sessionStartTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "sessionEndTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "nodeName": {
+          "type": "string",
+          "readOnly": true
+        },
+        "duration": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "accessLevel": {
+          "type": "string",
+          "enum": [
+            "Diagnostics",
+            "DiagnosticsAndRepair"
+          ],
+          "x-ms-enum": {
+            "name": "AccessLevel",
+            "modelAsString": true
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "PlatformPayload": {
+      "type": "object",
+      "properties": {
+        "payloadUrl": {
+          "type": "string"
+        },
+        "payloadHash": {
+          "type": "string"
+        },
+        "payloadPackageSizeInBytes": {
+          "type": "string"
+        },
+        "payloadIdentifier": {
+          "type": "string"
+        }
+      }
+    },
+    "PlatformUpdate": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PlatformUpdateProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "PlatformUpdateDetails": {
+      "type": "object",
+      "properties": {
+        "validatedSolutionRecipeVersion": {
+          "type": "string"
+        },
+        "platformVersion": {
+          "type": "string"
+        },
+        "platformPayloads": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PlatformPayload"
+          }
+        }
+      },
+      "required": [
+        "platformPayloads"
+      ]
+    },
+    "PlatformUpdateListResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/PlatformUpdate"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PlatformUpdateProperties": {
+      "type": "object",
+      "properties": {
+        "platformUpdateDetails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PlatformUpdateDetails"
+          }
+        }
+      },
+      "required": [
+        "platformUpdateDetails"
+      ]
+    },
+    "PrecheckResult": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "tags": {
+          "$ref": "#/definitions/PrecheckResultTags"
+        },
+        "healthCheckTags": {
+          "type": "object",
+          "additionalProperties": {}
+        },
+        "title": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "NotYetRegistered",
+            "ConnectedRecently",
+            "NotConnectedRecently",
+            "Disconnected",
+            "Error",
+            "NotSpecified",
+            "ValidationInProgress",
+            "ValidationSuccess",
+            "ValidationFailed",
+            "DeploymentInProgress",
+            "DeploymentFailed",
+            "DeploymentSuccess",
+            "Succeeded",
+            "Failed",
+            "InProgress"
+          ],
+          "x-ms-enum": {
+            "name": "Status",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "severity": {
+          "type": "string",
+          "enum": [
+            "Critical",
+            "Warning",
+            "Informational",
+            "Hidden"
+          ],
+          "x-ms-enum": {
+            "name": "Severity",
+            "modelAsString": true
+          }
+        },
+        "description": {
+          "type": "string"
+        },
+        "remediation": {
+          "type": "string"
+        },
+        "targetResourceID": {
+          "type": "string"
+        },
+        "targetResourceName": {
+          "type": "string"
+        },
+        "targetResourceType": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "additionalData": {
+          "type": "string"
+        },
+        "healthCheckSource": {
+          "type": "string"
+        }
+      }
+    },
+    "PrecheckResultTags": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "ProvisionOsReportedProperties": {
+      "type": "object",
+      "properties": {
+        "percentComplete": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "validationStatus": {
+          "$ref": "#/definitions/EceActionStatus",
+          "readOnly": true
+        },
+        "deploymentStatus": {
+          "$ref": "#/definitions/EceActionStatus",
+          "readOnly": true
+        }
+      }
+    },
+    "QosPolicyOverrides": {
+      "type": "object",
+      "properties": {
+        "priorityValue8021Action_Cluster": {
+          "type": "string"
+        },
+        "priorityValue8021Action_SMB": {
+          "type": "string"
+        },
+        "bandwidthPercentage_SMB": {
+          "type": "string"
+        }
+      }
+    },
+    "RawCertificateData": {
+      "type": "object",
+      "properties": {
+        "certificates": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "RemoteSupportProperties": {
+      "type": "object",
+      "properties": {
+        "accessLevel": {
+          "type": "string",
+          "enum": [
+            "Diagnostics",
+            "DiagnosticsAndRepair"
+          ],
+          "x-ms-enum": {
+            "name": "AccessLevel",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "expirationTimeStamp": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "remoteSupportType": {
+          "type": "string",
+          "enum": [
+            "Enable",
+            "Revoke"
+          ],
+          "x-ms-enum": {
+            "name": "RemoteSupportType",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "remoteSupportNodeSettings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ClustersRemoteSupportNodeSettings"
+          },
+          "readOnly": true
+        },
+        "remoteSupportSessionDetails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PerNodeRemoteSupportSession"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "RemoteSupportRequest": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RemoteSupportRequestProperties"
+        }
+      }
+    },
+    "RemoteSupportRequestProperties": {
+      "type": "object",
+      "properties": {
+        "accessLevel": {
+          "type": "string",
+          "enum": [
+            "Diagnostics",
+            "DiagnosticsAndRepair"
+          ],
+          "x-ms-enum": {
+            "name": "AccessLevel",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "expirationTimeStamp": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "remoteSupportType": {
+          "type": "string",
+          "enum": [
+            "Enable",
+            "Revoke"
+          ],
+          "x-ms-enum": {
+            "name": "RemoteSupportType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "SecretsLocationDetails": {
+      "type": "object",
+      "properties": {
+        "secretsType": {
+          "type": "string",
+          "enum": [
+            "BackupSecrets"
+          ],
+          "x-ms-enum": {
+            "name": "SecretsType",
+            "modelAsString": true
+          }
+        },
+        "secretsLocation": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "secretsLocation",
+        "secretsType"
+      ]
+    },
+    "SecretsLocationsChangeRequest": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SecretsLocationDetails"
+          }
+        }
+      }
+    },
+    "SkuMappings": {
+      "type": "object",
+      "properties": {
+        "catalogPlanId": {
+          "type": "string"
+        },
+        "marketplaceSkuId": {
+          "type": "string"
+        },
+        "marketplaceSkuVersions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SoftwareAssuranceChangeRequest": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SoftwareAssuranceChangeRequestProperties"
+        }
+      }
+    },
+    "SoftwareAssuranceChangeRequestProperties": {
+      "type": "object",
+      "properties": {
+        "softwareAssuranceIntent": {
+          "type": "string",
+          "enum": [
+            "Enable",
+            "Disable"
+          ],
+          "x-ms-enum": {
+            "name": "SoftwareAssuranceIntent",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "SoftwareAssuranceProperties": {
+      "type": "object",
+      "properties": {
+        "softwareAssuranceStatus": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "SoftwareAssuranceStatus",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "softwareAssuranceIntent": {
+          "type": "string",
+          "enum": [
+            "Enable",
+            "Disable"
+          ],
+          "x-ms-enum": {
+            "name": "SoftwareAssuranceIntent",
+            "modelAsString": true
+          }
+        },
+        "lastUpdated": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        }
+      }
+    },
+    "StackHciClusterIdentityResponseResult": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ClusterIdentityResponseProperties",
+          "readOnly": true
+        }
+      }
+    },
+    "Step": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "readOnly": true
+        },
+        "fullStepIndex": {
+          "type": "string",
+          "readOnly": true
+        },
+        "startTimeUtc": {
+          "type": "string",
+          "readOnly": true
+        },
+        "endTimeUtc": {
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "readOnly": true
+        },
+        "steps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Step"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "exception": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "TimeConfiguration": {
+      "type": "object",
+      "properties": {
+        "primaryTimeServer": {
+          "type": "string"
+        },
+        "secondaryTimeServer": {
+          "type": "string"
+        },
+        "timeZone": {
+          "type": "string"
+        }
+      }
+    },
+    "UpdateContent": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UpdateContentProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "UpdateContentListResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/UpdateContent"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "UpdateContentProperties": {
+      "type": "object",
+      "properties": {
+        "updatePayloads": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContentPayload"
+          }
+        }
+      },
+      "required": [
+        "updatePayloads"
+      ]
+    },
+    "UploadCertificateRequest": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RawCertificateData"
+        }
+      }
+    },
+    "WebProxyConfiguration": {
+      "type": "object",
+      "properties": {
+        "connectionUri": {
+          "type": "string"
+        },
+        "port": {
+          "type": "string"
+        },
+        "bypassList": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {}
+}
