@@ -99,7 +99,7 @@ model DeploymentStacksWhatIfChange {
   /**
    * Predicted changes to the deployment scope for the deployment stack.
    */
-  deploymentScopeChange: DeploymentStacksChangeBase<string>;
+  deploymentScopeChange?: DeploymentStacksChangeBase<string>;
 }
 
 /**
@@ -132,12 +132,12 @@ model DeploymentStacksWhatIfResourceChange {
   /**
    * The predicted changes to the deployment stack management status of the resource.
    */
-  managementStatusChange: DeploymentStacksChangeBase<DeploymentStacksManagementStatus>;
+  managementStatusChange?: DeploymentStacksChangeBase<DeploymentStacksManagementStatus>;
 
   /**
    * The predicted changes to the deployment stack deny status of the resource.
    */
-  denyStatusChange: DeploymentStacksChangeBase<DenyStatusMode>;
+  denyStatusChange?: DeploymentStacksChangeBase<DenyStatusMode>;
 
   /**
    * The explanation about why the resource is unsupported by What-If.
