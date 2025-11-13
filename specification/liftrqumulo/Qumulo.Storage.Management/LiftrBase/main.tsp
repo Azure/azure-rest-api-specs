@@ -7,8 +7,6 @@ import "@typespec/versioning";
 
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
-using TypeSpec.Reflection;
-using TypeSpec.OpenAPI;
 
 @versioned(LiftrBase.Versions)
 namespace LiftrBase;
@@ -86,8 +84,7 @@ model UserDetails {
   /**
    * User Email
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Legacy"
-  @extension("x-ms-secret", true)
+  @secret
   email: string;
 }
 
