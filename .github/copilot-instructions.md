@@ -309,7 +309,7 @@ Step 2: Identify API spec status
 **Success Criteria**: User decision on spec readiness obtained
 
 Step 3: Validate TypeSpec Specification
-**Goal**: Ensure TypeSpec specification compiles without errors. Povide a complete summary after running the tool. Highlight any errors and help user fix them.
+**Goal**: Ensure TypeSpec specification compiles without errors. Provide a complete summary after running the tool. Highlight any errors and help user fix them.
 **Condition**: Only if the spec is not already merged (from Step 2)
 **Message to user**: "TypeSpec validation takes around 20 - 30 seconds."
 **Actions**:
@@ -358,6 +358,10 @@ Follow the steps in [typespec to sdk](..\eng\common\instructions\azsdk-tools\typ
 # Release readiness of SDK and information about the release pipeline
 
 Run [check package readiness](..\eng\common\instructions\azsdk-tools\check-package-readiness.instructions.md) to check the release readiness of an SDK package. This prompt will collect the required information from the user, execute the readiness check, and present the results.
+
+## SDK customizations in TypeSpec projects
+
+TypeSpec supports making client-specific customizations to a TypeSpec project to change how an SDK is generated. When making client-specific changes, read the [typespec client customizations reference](../eng/common/knowledge/customizing-client-tsp.md) to understand the types of customizations supported and how to apply them.
 
 # Instructions for GitHub coding agent to generate SDKs using GitHub.com
 
