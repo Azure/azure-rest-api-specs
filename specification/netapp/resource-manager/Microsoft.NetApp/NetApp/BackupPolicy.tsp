@@ -5,10 +5,9 @@ import "@typespec/rest";
 import "./models.tsp";
 import "./NetAppAccount.tsp";
 
-using TypeSpec.Rest;
+using Rest;
 using Azure.ResourceManager;
-using TypeSpec.Http;
-using TypeSpec.OpenAPI;
+using Http;
 
 namespace Microsoft.NetApp;
 /**
@@ -78,7 +77,7 @@ model BackupPolicyProperties {
    * A list of volumes assigned to this policy
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["volumeName"])
+  @identifiers(#["volumeName"])
   volumeBackups?: VolumeBackups[];
 }
 
