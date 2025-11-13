@@ -26,7 +26,7 @@ These are the global settings for the Resource API.
 title: ChangesClient
 description: Changes Client
 openapi-type: arm
-tag: package-resources-2025-04
+tag: package-changes-2024-06-01-preview
 ```
 
 ### Tag: package-changes-2023-03-01-preview
@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-changes-2023-03-01-preview` is spe
 
 ``` yaml $(tag) == 'package-changes-2023-03-01-preview'
 input-file:
-- Microsoft.Resources/preview/2023-03-01-preview/changes.json
+- preview/2023-03-01-preview/changes.json
 ```
 
 ### Tag: package-changes-2023-07-01-preview
@@ -44,7 +44,7 @@ These settings apply only when `--tag=package-changes-2023-07-01-preview` is spe
 
 ``` yaml $(tag) == 'package-changes-2023-07-01-preview'
 input-file:
-- Microsoft.Resources/preview/2023-07-01-preview/changes.json
+- preview/2023-07-01-preview/changes.json
 ```
 
 ### Tag: package-changes-2024-06-01-preview
@@ -53,7 +53,7 @@ These settings apply only when `--tag=package-changes-2024-06-01-preview` is spe
 
 ``` yaml $(tag) == 'package-changes-2024-06-01-preview'
 input-file:
-- Microsoft.Resources/preview/2024-06-01-preview/changes.json
+- preview/2024-06-01-preview/changes.json
 ```
 
 ### Tag: package-changes-2022-05
@@ -62,7 +62,7 @@ These settings apply only when `--tag=package-changes-2022-05` is specified on t
 
 ``` yaml $(tag) == 'package-changes-2022-05'
 input-file:
-- Microsoft.Resources/stable/2022-05-01/changes.json
+- stable/2022-05-01/changes.json
 ```
 
 ### Tag: package-changes-2022-03-01-preview
@@ -71,7 +71,7 @@ These settings apply only when `--tag=package-changes-2022-03-01-preview` is spe
 
 ``` yaml $(tag) == 'package-changes-2022-03-01-preview'
 input-file:
-- Microsoft.Resources/preview/2022-03-01-preview/changes.json
+- preview/2022-03-01-preview/changes.json
 ```
 
 ## Suppression

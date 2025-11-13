@@ -23,10 +23,10 @@ To see additional help and options, run:
 These are the global settings for the Resource API.
 
 ``` yaml
-title: SubscriptionsClient
-description: Subscriptions Client
+title: SubscriptionClient
+description: Subscription Client
 openapi-type: arm
-tag: package-resources-2025-04
+tag: package-2022-12
 ```
 
 ### Tag: package-2022-12
@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2022-12` is specified on the comma
 
 ``` yaml $(tag) == 'package-2022-12'
 input-file:
-  - Microsoft.Resources/stable/2022-12-01/subscriptions.json
+  - stable/2022-12-01/subscriptions.json
 ```
 
 ### Tag: package-subscriptions-2022-12
@@ -44,7 +44,7 @@ These settings apply only when `--tag=package-subscriptions-2022-12` is specifie
 
 ``` yaml $(tag) == 'package-subscriptions-2022-12'
 input-file:
-- Microsoft.Resources/stable/2022-12-01/subscriptions.json
+- stable/2022-12-01/subscriptions.json
 ```
 
 ### Tag: package-subscriptions-2021-01
@@ -53,7 +53,7 @@ These settings apply only when `--tag=package-subscriptions-2021-01` is specifie
 
 ``` yaml $(tag) == 'package-subscriptions-2021-01'
 input-file:
-- Microsoft.Resources/stable/2021-01-01/subscriptions.json
+- stable/2021-01-01/subscriptions.json
 ```
 
 ### Tag: package-subscriptions-2020-01
@@ -62,7 +62,7 @@ These settings apply only when `--tag=package-subscriptions-2020-01` is specifie
 
 ``` yaml $(tag) == 'package-subscriptions-2020-01'
 input-file:
-  - Microsoft.Resources/stable/2020-01-01/subscriptions.json
+  - stable/2020-01-01/subscriptions.json
 ```
 
 ### Tag: package-subscriptions-2019-11
@@ -71,7 +71,7 @@ These settings apply only when `--tag=package-subscriptions-2019-11` is specifie
 
 ``` yaml $(tag) == 'package-subscriptions-2019-11'
 input-file:
-- Microsoft.Resources/stable/2019-11-01/subscriptions.json
+- stable/2019-11-01/subscriptions.json
 ```
 
 ### Tag: package-subscriptions-2019-06
@@ -80,7 +80,7 @@ These settings apply only when `--tag=package-subscriptions-2019-06` is specifie
 
 ``` yaml $(tag) == 'package-subscriptions-2019-06'
 input-file:
-- Microsoft.Resources/stable/2019-06-01/subscriptions.json
+- stable/2019-06-01/subscriptions.json
 ```
 
 ### Tag: package-subscriptions-2018-06
@@ -89,7 +89,7 @@ These settings apply only when `--tag=package-subscriptions-2018-06` is specifie
 
 ``` yaml $(tag) == 'package-subscriptions-2018-06'
 input-file:
-- Microsoft.Resources/stable/2018-06-01/subscriptions.json
+- stable/2018-06-01/subscriptions.json
 ```
 
 ### Tag: package-subscriptions-2016-06
@@ -98,7 +98,7 @@ These settings apply only when `--tag=package-subscriptions-2016-06` is specifie
 
 ``` yaml $(tag) == 'package-subscriptions-2016-06'
 input-file:
-- Microsoft.Resources/stable/2016-06-01/subscriptions.json
+- stable/2016-06-01/subscriptions.json
 ```
 
 ### Tag: package-subscriptions-2015-11
@@ -107,7 +107,7 @@ These settings apply only when `--tag=package-subscriptions-2015-11` is specifie
 
 ``` yaml $(tag) == 'package-subscriptions-2015-11'
 input-file:
-- Microsoft.Resources/stable/2015-11-01/subscriptions.json
+- stable/2015-11-01/subscriptions.json
 ```
 
 ## Suppression

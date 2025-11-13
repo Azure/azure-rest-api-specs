@@ -26,7 +26,7 @@ These are the global settings for the Resource API.
 title: SnapshotsClient
 description: Snapshots Client
 openapi-type: arm
-tag: package-resources-2025-04
+tag: package-snapshots-2022-11
 ```
 
 ### Tag: package-snapshots-2022-11
@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-snapshots-2022-11` is specified on
 
 ``` yaml $(tag) == 'package-snapshots-2022-11'
 input-file:
-- Microsoft.Resources/preview/2022-11-01-preview/snapshots.json
+- preview/2022-11-01-preview/snapshots.json
 ```
 
 ## Suppression

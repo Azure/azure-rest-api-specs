@@ -23,8 +23,8 @@ To see additional help and options, run:
 These are the global settings for the Resource API.
 
 ``` yaml
-title: LinksClient
-description: Links Client
+title: ManagementLinkClient
+description: ManagementLink Client
 openapi-type: arm
 tag: package-resources-2025-04
 ```
@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-links-2016-09` is specified on the
 
 ``` yaml $(tag) == 'package-links-2016-09'
 input-file:
-- Microsoft.Resources/stable/2016-09-01/links.json
+- stable/2016-09-01/links.json
 ```
 
 ---

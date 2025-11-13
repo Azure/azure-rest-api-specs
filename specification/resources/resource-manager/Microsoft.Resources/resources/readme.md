@@ -23,8 +23,8 @@ To see additional help and options, run:
 These are the global settings for the Resource API.
 
 ``` yaml
-title: ResourcesClient
-description: Resources Client
+title: ResourceManagementClient
+description: ResourceManagement Client
 openapi-type: arm
 tag: package-resources-2025-04
 ```
@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-resources-2023-07` is specified on
 
 ``` yaml $(tag) == 'package-resources-2023-07'
 input-file:
-  - Microsoft.Resources/stable/2023-07-01/resources.json
+  - stable/2023-07-01/resources.json
 ```
 
 ### Tag: package-resources-2024-03
@@ -44,7 +44,7 @@ These settings apply only when `--tag=package-resources-2024-03` is specified on
 
 ``` yaml $(tag) == 'package-resources-2024-03'
 input-file:
-  - Microsoft.Resources/stable/2024-03-01/resources.json
+  - stable/2024-03-01/resources.json
 ```
 
 ### Tag: package-resources-2024-07
@@ -53,7 +53,7 @@ These settings apply only when `--tag=package-resources-2024-07` is specified on
 
 ``` yaml $(tag) == 'package-resources-2024-07'
 input-file:
-  - Microsoft.Resources/stable/2024-07-01/resources.json
+  - stable/2024-07-01/resources.json
 ```
 
 ### Tag: package-resources-2024-11
@@ -62,7 +62,7 @@ These settings apply only when `--tag=package-resources-2024-11` is specified on
 
 ``` yaml $(tag) == 'package-resources-2024-11'
 input-file:
-  - Microsoft.Resources/stable/2024-11-01/resources.json
+  - stable/2024-11-01/resources.json
 ```
 
 ### Tag: package-resources-2025-03
@@ -71,7 +71,7 @@ These settings apply only when `--tag=package-resources-2025-03` is specified on
 
 ``` yaml $(tag) == 'package-resources-2025-03'
 input-file:
-  - Microsoft.Resources/stable/2025-03-01/resources.json
+  - stable/2025-03-01/resources.json
 ```
 
 ### Tag: package-resources-2025-04
@@ -80,7 +80,7 @@ These settings apply only when `--tag=package-resources-2025-04` is specified on
 
 ``` yaml $(tag) == 'package-resources-2025-04'
 input-file:
-  - Microsoft.Resources/stable/2025-04-01/resources.json
+  - stable/2025-04-01/resources.json
 ```
 
 ### Tag: package-resources-2022-09
@@ -89,7 +89,7 @@ These settings apply only when `--tag=package-resources-2022-09` is specified on
 
 ``` yaml $(tag) == 'package-resources-2022-09'
 input-file:
-- Microsoft.Resources/stable/2022-09-01/resources.json
+- stable/2022-09-01/resources.json
 ```
 
 ### Tag: package-resources-2021-04
@@ -98,7 +98,7 @@ These settings apply only when `--tag=package-resources-2021-04` is specified on
 
 ``` yaml $(tag) == 'package-resources-2021-04'
 input-file:
-- Microsoft.Resources/stable/2021-04-01/resources.json
+- stable/2021-04-01/resources.json
 ```
 
 ### Tag: package-resources-2021-01
@@ -107,7 +107,7 @@ These settings apply only when `--tag=package-resources-2021-01` is specified on
 
 ``` yaml $(tag) == 'package-resources-2021-01'
 input-file:
-- Microsoft.Resources/stable/2021-01-01/resources.json
+- stable/2021-01-01/resources.json
 ```
 
 ### Tag: package-resources-2020-10
@@ -116,7 +116,7 @@ These settings apply only when `--tag=package-resources-2020-10` is specified on
 
 ``` yaml $(tag) == 'package-resources-2020-10'
 input-file:
-  - Microsoft.Resources/stable/2020-10-01/resources.json
+  - stable/2020-10-01/resources.json
 ```
 
 ### Tag: package-resources-2020-08
@@ -125,7 +125,7 @@ These settings apply only when `--tag=package-resources-2020-08` is specified on
 
 ``` yaml $(tag) == 'package-resources-2020-08'
 input-file:
-  - Microsoft.Resources/stable/2020-08-01/resources.json
+  - stable/2020-08-01/resources.json
 ```
 
 ### Tag: package-resources-2020-06
@@ -134,7 +134,7 @@ These settings apply only when `--tag=package-resources-2020-06` is specified on
 
 ``` yaml $(tag) == 'package-resources-2020-06'
 input-file:
-- Microsoft.Resources/stable/2020-06-01/resources.json
+- stable/2020-06-01/resources.json
 ```
 
 ### Tag: package-resources-2019-10
@@ -143,7 +143,7 @@ These settings apply only when `--tag=package-resources-2019-10` is specified on
 
 ``` yaml $(tag) == 'package-resources-2019-10'
 input-file:
-- Microsoft.Resources/stable/2019-10-01/resources.json
+- stable/2019-10-01/resources.json
 ```
 
 ### Tag: package-resources-2019-08
@@ -152,7 +152,7 @@ These settings apply only when `--tag=package-resources-2019-08` is specified on
 
 ``` yaml $(tag) == 'package-resources-2019-08'
 input-file:
-- Microsoft.Resources/stable/2019-08-01/resources.json
+- stable/2019-08-01/resources.json
 ```
 
 ### Tag: package-resources-2019-07
@@ -161,7 +161,7 @@ These settings apply only when `--tag=package-resources-2019-07` is specified on
 
 ``` yaml $(tag) == 'package-resources-2019-07'
 input-file:
-- Microsoft.Resources/stable/2019-07-01/resources.json
+- stable/2019-07-01/resources.json
 ```
 
 ### Tag: package-resources-2019-0510
@@ -170,7 +170,7 @@ These settings apply only when `--tag=package-resources-2019-0510` is specified 
 
 ``` yaml $(tag) == 'package-resources-2019-0510'
 input-file:
-- Microsoft.Resources/stable/2019-05-10/resources.json
+- stable/2019-05-10/resources.json
 ```
 
 ### Tag: package-resources-2019-05
@@ -179,7 +179,7 @@ These settings apply only when `--tag=package-resources-2019-05` is specified on
 
 ``` yaml $(tag) == 'package-resources-2019-05'
 input-file:
-- Microsoft.Resources/stable/2019-05-01/resources.json
+- stable/2019-05-01/resources.json
 ```
 
 ### Tag: package-resources-2019-03
@@ -188,7 +188,7 @@ These settings apply only when `--tag=package-resources-2019-03` is specified on
 
 ``` yaml $(tag) == 'package-resources-2019-03'
 input-file:
-- Microsoft.Resources/stable/2019-03-01/resources.json
+- stable/2019-03-01/resources.json
 ```
 
 ### Tag: package-resources-2018-05
@@ -197,7 +197,7 @@ These settings apply only when `--tag=package-resources-2018-05` is specified on
 
 ``` yaml $(tag) == 'package-resources-2018-05'
 input-file:
-- Microsoft.Resources/stable/2018-05-01/resources.json
+- stable/2018-05-01/resources.json
 ```
 
 ### Tag: package-resources-2018-02
@@ -206,7 +206,7 @@ These settings apply only when `--tag=package-resources-2018-02` is specified on
 
 ``` yaml $(tag) == 'package-resources-2018-02'
 input-file:
-- Microsoft.Resources/stable/2018-02-01/resources.json
+- stable/2018-02-01/resources.json
 ```
 
 ### Tag: package-resources-2017-05
@@ -215,7 +215,7 @@ These settings apply only when `--tag=package-resources-2017-05` is specified on
 
 ``` yaml $(tag) == 'package-resources-2017-05'
 input-file:
-- Microsoft.Resources/stable/2017-05-10/resources.json
+- stable/2017-05-10/resources.json
 ```
 
 ### Tag: package-resources-2016-09
@@ -224,7 +224,7 @@ These settings apply only when `--tag=package-resources-2016-09` is specified on
 
 ``` yaml $(tag) == 'package-resources-2016-09'
 input-file:
-- Microsoft.Resources/stable/2016-09-01/resources.json
+- stable/2016-09-01/resources.json
 ```
 
 ### Tag: package-resources-2016-07
@@ -233,7 +233,7 @@ These settings apply only when `--tag=package-resources-2016-07` is specified on
 
 ``` yaml $(tag) == 'package-resources-2016-07'
 input-file:
-- Microsoft.Resources/stable/2016-07-01/resources.json
+- stable/2016-07-01/resources.json
 ```
 
 ### Tag: package-resources-2016-02
@@ -242,7 +242,7 @@ These settings apply only when `--tag=package-resources-2016-02` is specified on
 
 ``` yaml $(tag) == 'package-resources-2016-02'
 input-file:
-- Microsoft.Resources/stable/2016-02-01/resources.json
+- stable/2016-02-01/resources.json
 ```
 
 ### Tag: package-resources-2015-11
@@ -251,7 +251,7 @@ These settings apply only when `--tag=package-resources-2015-11` is specified on
 
 ``` yaml $(tag) == 'package-resources-2015-11'
 input-file:
-- Microsoft.Resources/stable/2015-11-01/resources.json
+- stable/2015-11-01/resources.json
 ```
 
 ## Suppression
@@ -480,19 +480,19 @@ directive:
     where: $.definitions.ProviderPermissionListResult
     reason: "Historically some properties have not been returned for this model and reviewer said OK to suppress."
   - suppress: OperationsAPIImplementation
-    from: Microsoft.Resources/stable/2016-02-01/resources.json
+    from: stable/2016-02-01/resources.json
     reason: Pre-existing lint error.
   - suppress: OperationsAPIImplementation
-    from: Microsoft.Resources/stable/2016-07-01/resources.json
+    from: stable/2016-07-01/resources.json
     reason: Pre-existing lint error.
   - suppress: OperationsAPIImplementation
-    from: Microsoft.Resources/stable/2016-09-01/resources.json
+    from: stable/2016-09-01/resources.json
     reason: Pre-existing lint error.
   - suppress: OperationsAPIImplementation
-    from: Microsoft.Resources/stable/2017-05-10/resources.json
+    from: stable/2017-05-10/resources.json
     reason: Pre-existing lint error.
   - suppress: OperationsAPIImplementation
-    from: Microsoft.Resources/stable/2018-02-01/resources.json
+    from: stable/2018-02-01/resources.json
     reason: Pre-existing lint error.
 ```
 

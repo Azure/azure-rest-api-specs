@@ -12,75 +12,9 @@ directive:
   reason: Necessary to match Unicode characters in the Go regexp engine.
 ```
 
-``` yaml $(go) && $(track2) && $(package-resources)
-license-header: MICROSOFT_MIT_NO_VERSION
-module-name: sdk/resourcemanager/resources/armresources
-module: github.com/Azure/azure-sdk-for-go/$(module-name)
-output-folder: $(go-sdk-folder)/$(module-name)
-azure-arm: true
-```
-
-``` yaml $(go) && $(track2) && $(package-features)
-license-header: MICROSOFT_MIT_NO_VERSION
-module-name: sdk/resourcemanager/resources/armfeatures
-module: github.com/Azure/azure-sdk-for-go/$(module-name)
-output-folder: $(go-sdk-folder)/$(module-name)
-azure-arm: true
-```
-
-``` yaml $(go) && $(track2) && $(package-links)
-license-header: MICROSOFT_MIT_NO_VERSION
-module-name: sdk/resourcemanager/resources/armlinks
-module: github.com/Azure/azure-sdk-for-go/$(module-name)
-output-folder: $(go-sdk-folder)/$(module-name)
-azure-arm: true
-```
-
-``` yaml $(go) && $(track2) && $(package-locks)
-license-header: MICROSOFT_MIT_NO_VERSION
-module-name: sdk/resourcemanager/resources/armlocks
-module: github.com/Azure/azure-sdk-for-go/$(module-name)
-output-folder: $(go-sdk-folder)/$(module-name)
-azure-arm: true
-```
-
-``` yaml $(go) && $(track2) && $(package-managedapplications)
-license-header: MICROSOFT_MIT_NO_VERSION
-module-name: sdk/resourcemanager/resources/armmanagedapplications
-module: github.com/Azure/azure-sdk-for-go/$(module-name)
-output-folder: $(go-sdk-folder)/$(module-name)
-azure-arm: true
-```
-
-``` yaml $(go) && $(track2) && $(package-policy)
-license-header: MICROSOFT_MIT_NO_VERSION
-module-name: sdk/resourcemanager/resources/armpolicy
-module: github.com/Azure/azure-sdk-for-go/$(module-name)
-output-folder: $(go-sdk-folder)/$(module-name)
-azure-arm: true
-```
-
-``` yaml $(go) && $(track2) && $(package-subscriptions)
-license-header: MICROSOFT_MIT_NO_VERSION
-module-name: sdk/resourcemanager/resources/armsubscriptions
-module: github.com/Azure/azure-sdk-for-go/$(module-name)
-output-folder: $(go-sdk-folder)/$(module-name)
-azure-arm: true
-modelerfour:
-  lenient-model-deduplication: true
-```
-
 ``` yaml $(go) && $(track2) && $(package-changes)
 license-header: MICROSOFT_MIT_NO_VERSION
 module-name: sdk/resourcemanager/resources/armchanges
-module: github.com/Azure/azure-sdk-for-go/$(module-name)
-output-folder: $(go-sdk-folder)/$(module-name)
-azure-arm: true
-```
-
-``` yaml $(go) && $(track2) && $(package-databoundaries)
-license-header: MICROSOFT_MIT_NO_VERSION
-module-name: sdk/resourcemanager/databoundaries/armdataboundaries
 module: github.com/Azure/azure-sdk-for-go/$(module-name)
 output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true

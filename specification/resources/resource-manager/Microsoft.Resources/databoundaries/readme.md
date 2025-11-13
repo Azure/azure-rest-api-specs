@@ -23,10 +23,10 @@ To see additional help and options, run:
 These are the global settings for the Resource API.
 
 ``` yaml
-title: DataBoundariesClient
-description: DataBoundaries Client
+title: DataBoundaryMgmtClient
+description: DataBoundaryMgmt Client
 openapi-type: arm
-tag: package-resources-2025-04
+tag: package-databoundaries-2024-08
 ```
 
 ### Tag: package-databoundaries-2024-08
@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-databoundaries-2024-08` is specifi
 
 ``` yaml $(tag) == 'package-databoundaries-2024-08'
 input-file:
-  - Microsoft.Resources/stable/2024-08-01/dataBoundaries.json
+  - stable/2024-08-01/dataBoundaries.json
 ```
 
 ## Suppression
