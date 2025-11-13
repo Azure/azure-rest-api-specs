@@ -9,11 +9,9 @@
     "api-version": "2025-01-10",
     "properties": {
       "properties": {
-        "operationType": "cancel",
-        "databaseNames": [
-          "HRDB",
-          "INVENTORYDB"
-        ]
+        "migrationJobsettings": {
+          "validateOnly": false
+        }
       }
     }
   },
@@ -39,8 +37,7 @@
                 "databaseName": null,
                 "credentials": {
                   "authenticationMethod": "password",
-                  "userName": "migration_user",
-                  "password": "encrypted_password"
+                  "userName": "migration_user"
                 },
                 "ssl": {
                   "mode": "require"
@@ -60,8 +57,7 @@
                 "databaseName": "target_db",
                 "credentials": {
                   "authenticationMethod": "password",
-                  "userName": "migration_user",
-                  "password": "encrypted_password"
+                  "userName": "migration_user"
                 },
                 "ssl": {
                   "mode": "require"
