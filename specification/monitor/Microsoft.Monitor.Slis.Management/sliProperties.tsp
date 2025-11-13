@@ -51,10 +51,13 @@ model SignalSource {
   metricName: string;
 
   @doc("Filters applied to modify signal values.")
-  @OpenAPI.extension(
-    "x-ms-identifiers",
-    #["dimensionName", "scalarFunction", "samplingType", "value", "operator"]
-  )
+  @identifiers(#[
+    "dimensionName",
+    "scalarFunction",
+    "samplingType",
+    "value",
+    "operator"
+  ])
   filters: Condition[];
 
   @doc("Defines how measurements are aggregated across multiple time series.")

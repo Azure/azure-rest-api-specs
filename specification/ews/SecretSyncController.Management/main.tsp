@@ -5,11 +5,9 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./azurekeyvaultsecretproviderclass.tsp";
 import "./secretsync.tsp";
+import "./back-compatible.tsp";
 
-using TypeSpec.Http;
-using TypeSpec.Rest;
 using TypeSpec.Versioning;
-using Azure.Core;
 using Azure.ResourceManager;
 
 @armProviderNamespace("Microsoft.SecretSyncController")
