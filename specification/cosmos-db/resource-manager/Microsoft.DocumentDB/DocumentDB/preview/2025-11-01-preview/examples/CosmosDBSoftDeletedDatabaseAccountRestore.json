@@ -1,0 +1,99 @@
+{
+  "parameters": {
+    "accountName": "softdeleted-cosmosdb-2",
+    "resourceGroupName": "rg2",
+    "api-version": "2025-04-15",
+    "subscriptionId": "subid",
+    "restoreSoftDeletedAccountParameters": {}
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.DocumentDB/databaseAccounts/softdeleted-cosmosdb-2",
+        "name": "softdeleted-cosmosdb-2",
+        "location": "West US",
+        "type": "Microsoft.DocumentDB/databaseAccounts",
+        "kind": "MongoDB",
+        "tags": {
+          "restored": "true"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "documentEndpoint": "https://softdeleted-cosmosdb-2.documents.azure.com:443/",
+          "databaseAccountOfferType": "Standard",
+          "ipRules": [],
+          "isVirtualNetworkFilterEnabled": false,
+          "enableAutomaticFailover": false,
+          "consistencyPolicy": {
+            "defaultConsistencyLevel": "Session"
+          },
+          "capabilities": [
+            {
+              "name": "EnableMongo"
+            }
+          ],
+          "writeLocations": [
+            {
+              "id": "softdeleted-cosmosdb-2-westus",
+              "locationName": "West US",
+              "documentEndpoint": "https://softdeleted-cosmosdb-2-westus.documents.azure.com:443/",
+              "provisioningState": "Succeeded",
+              "failoverPriority": 0,
+              "isZoneRedundant": false
+            }
+          ],
+          "readLocations": [
+            {
+              "id": "softdeleted-cosmosdb-2-westus",
+              "locationName": "West US",
+              "documentEndpoint": "https://softdeleted-cosmosdb-2-westus.documents.azure.com:443/",
+              "provisioningState": "Succeeded",
+              "failoverPriority": 0,
+              "isZoneRedundant": false
+            }
+          ],
+          "locations": [
+            {
+              "id": "softdeleted-cosmosdb-2-westus",
+              "locationName": "West US",
+              "documentEndpoint": "https://softdeleted-cosmosdb-2-westus.documents.azure.com:443/",
+              "provisioningState": "Succeeded",
+              "failoverPriority": 0,
+              "isZoneRedundant": false
+            }
+          ],
+          "failoverPolicies": [
+            {
+              "id": "softdeleted-cosmosdb-2-westus",
+              "locationName": "West US",
+              "failoverPriority": 0
+            }
+          ],
+          "cors": [],
+          "enableMultipleWriteLocations": false,
+          "enablePartitionMerge": false,
+          "enableBurstCapacity": false,
+          "instanceId": "b2c3d4e5-6789-01bc-def2-234567890abc",
+          "createMode": "Restore",
+          "restoreParameters": {
+            "restoreMode": "PointInTime",
+            "restoreSource": "/subscriptions/subid/providers/Microsoft.DocumentDB/locations/West US/softDeletedDatabaseAccounts/b2c3d4e5-6789-01bc-def2-234567890abc",
+            "restoreTimestampInUtc": "2025-10-10T15:00:00Z"
+          },
+          "backupPolicy": {
+            "type": "Continuous",
+            "continuousModeProperties": {
+              "tier": "Continuous7Days"
+            }
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/subid/providers/Microsoft.DocumentDB/locations/West US/operationResults/restore-operation-id?api-version=2025-04-15",
+        "location": "https://management.azure.com/subscriptions/subid/providers/Microsoft.DocumentDB/locations/West US/operationResults/restore-operation-id?api-version=2025-04-15"
+      }
+    }
+  }
+}

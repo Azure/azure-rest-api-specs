@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "api-version": "2025-04-15",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "location": "West US",
+    "accountName": "softdeleted-cosmosdb-1",
+    "databaseName": "MyDatabase"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.DocumentDB/locations/West US/softDeletedDatabaseAccounts/softdeleted-cosmosdb-1/softDeletedSqlDatabases/MyDatabase/softDeletedSqlContainers/MyContainer",
+            "name": "MyContainer",
+            "type": "Microsoft.DocumentDB/locations/softDeletedDatabaseAccounts/softDeletedSqlDatabases/softDeletedSqlContainers",
+            "properties": {
+              "containerName": "MyContainer",
+              "creationTime": "2025-01-15T14:30:00Z",
+              "deletionTime": "2025-10-15T10:15:30Z",
+              "purgeTime": "2025-11-14T10:15:30Z",
+              "canUndelete": true
+            }
+          },
+          {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.DocumentDB/locations/West US/softDeletedDatabaseAccounts/softdeleted-cosmosdb-1/softDeletedSqlDatabases/MyDatabase/softDeletedSqlContainers/TestContainer",
+            "name": "TestContainer",
+            "type": "Microsoft.DocumentDB/locations/softDeletedDatabaseAccounts/softDeletedSqlDatabases/softDeletedSqlContainers",
+            "properties": {
+              "containerName": "TestContainer",
+              "creationTime": "2025-02-20T09:45:00Z",
+              "deletionTime": "2025-10-10T16:20:15Z",
+              "purgeTime": "2025-11-09T16:20:15Z",
+              "canUndelete": true
+            }
+          }
+        ]
+      }
+    }
+  }
+}
