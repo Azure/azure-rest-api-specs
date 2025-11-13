@@ -363,7 +363,7 @@ export async function summarizeChecksImpl(
   const prUrl = `https://github.com/${owner}/${repo}/pull/${issue_number}`;
   core.summary.addRaw("PR: ");
   core.summary.addLink(prUrl, prUrl);
-  core.summary.write();
+  await core.summary.write();
   core.setOutput("summary", process.env.GITHUB_STEP_SUMMARY);
 
   let labelNames = await getExistingLabels(github, owner, repo, issue_number);
@@ -447,7 +447,7 @@ export async function summarizeChecksImpl(
     `Updating comment '${NEXT_STEPS_COMMENT_ID}' on ${owner}/${repo}#${issue_number} with body: ${commentBody}`,
   );
   core.summary.addRaw(`\n${commentBody}\n\n`);
-  core.summary.write();
+  await core.summary.write();
 
   // this will remain commented until we're comfortable with the change.
   await commentOrUpdate(
@@ -468,7 +468,7 @@ export async function summarizeChecksImpl(
   );
   core.summary.addHeading("Automated Checks Met", 2);
   core.summary.addCodeBlock(JSON.stringify(automatedChecksMet, null, 2));
-  core.summary.write();
+  await core.summary.write();
 }
 
 /**
@@ -694,14 +694,17 @@ export async function getCheckRunTuple(
   });
 
   // Group by name and take the latest for each
+  /** @type {Map<string, Array<CheckRunData & {_originalData: any, _source: string}>>} */
   const checksByName = new Map();
 
   allChecks.forEach((check) => {
     const name = check.name;
-    if (!checksByName.has(name)) {
-      checksByName.set(name, []);
+    let checks = checksByName.get(name);
+    if (checks) {
+      checks.push(check);
+    } else {
+      checksByName.set(name, [check]);
     }
-    checksByName.get(name).push(check);
   });
 
   // For each group, sort by date (newest first) and take the first one
