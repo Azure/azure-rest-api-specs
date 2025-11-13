@@ -3211,36 +3211,6 @@
         ]
       }
     },
-    "IntentType": {
-      "type": "string",
-      "description": "Types of intents.",
-      "enum": [
-        "Storage",
-        "Management",
-        "Compute"
-      ],
-      "x-ms-enum": {
-        "name": "IntentType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Storage",
-            "value": "Storage",
-            "description": "Storage intent."
-          },
-          {
-            "name": "Management",
-            "value": "Management",
-            "description": "Management intent."
-          },
-          {
-            "name": "Compute",
-            "value": "Compute",
-            "description": "Compute intent."
-          }
-        ]
-      }
-    },
     "IpAddressRange": {
       "type": "object",
       "description": "IP address range configuration.",
@@ -3660,9 +3630,17 @@
           "type": "string",
           "description": "The name of the intent."
         },
-        "type": {
-          "$ref": "#/definitions/IntentType",
-          "description": "The type of the intent."
+        "isComputeType": {
+          "type": "boolean",
+          "description": "Whether this is a compute type intent."
+        },
+        "isStorageType": {
+          "type": "boolean",
+          "description": "Whether this is a storage type intent."
+        },
+        "isManagementType": {
+          "type": "boolean",
+          "description": "Whether this is a management type intent."
         },
         "physicalAdapterIds": {
           "type": "array",
@@ -3694,36 +3672,35 @@
         },
         "physicalAdapterNames": {
           "type": "array",
-          "description": "The physical adapter IDs associated with the intent.",
+          "description": "The physical adapter names associated with the intent.",
           "items": {
             "type": "string"
           }
         },
         "virtualAdapterNames": {
           "type": "array",
-          "description": "The virtual adapter IDs associated with the intent.",
+          "description": "The virtual adapter names associated with the intent.",
           "items": {
             "type": "string"
           }
         },
         "virtualSwitchNames": {
           "type": "array",
-          "description": "The virtual switch IDs associated with the intent.",
+          "description": "The virtual switch names associated with the intent.",
           "items": {
             "type": "string"
           }
         },
         "networkNames": {
           "type": "array",
-          "description": "The network IDs associated with the intent.",
+          "description": "The network names associated with the intent.",
           "items": {
             "type": "string"
           }
         }
       },
       "required": [
-        "id",
-        "type"
+        "id"
       ]
     },
     "NetworkProfile": {
@@ -3776,6 +3753,11 @@
           "format": "date-time",
           "description": "Network profile resource Last sync timestamp.",
           "readOnly": true
+        },
+        "lastSyncStatus": {
+          "type": "string",
+          "description": "Network profile resource Last sync status.",
+          "readOnly": true
         }
       }
     },
@@ -3783,9 +3765,20 @@
       "type": "object",
       "description": "Network Profile properties reported by the cluster.",
       "properties": {
-        "clusterIpAddress": {
-          "type": "string",
-          "description": "The IP address of the cluster.",
+        "clusterIpv4Addresses": {
+          "type": "array",
+          "description": "The IPv4 addresses of the cluster.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "clusterIpv6Addresses": {
+          "type": "array",
+          "description": "The IPv6 addresses of the cluster.",
+          "items": {
+            "type": "string"
+          },
           "readOnly": true
         },
         "subnet": {
@@ -4081,9 +4074,19 @@
           "format": "int32",
           "description": "The VLAN associated with the physical adapter."
         },
-        "ipAddress": {
-          "type": "string",
-          "description": "The IP address of the physical adapter."
+        "ipv4Addresses": {
+          "type": "array",
+          "description": "The IPv4 addresses of the physical adapter.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ipv6Addresses": {
+          "type": "array",
+          "description": "The IPv6 addresses of the physical adapter.",
+          "items": {
+            "type": "string"
+          }
         },
         "driverVersion": {
           "type": "string",
@@ -4850,9 +4853,19 @@
           "format": "int32",
           "description": "The VLAN associated with the virtual adapter."
         },
-        "ipAddress": {
-          "type": "string",
-          "description": "The IP address of the virtual adapter."
+        "ipv4Addresses": {
+          "type": "array",
+          "description": "The IPv4 addresses of the virtual adapter.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ipv6Addresses": {
+          "type": "array",
+          "description": "The IPv6 addresses of the virtual adapter.",
+          "items": {
+            "type": "string"
+          }
         }
       },
       "required": [
