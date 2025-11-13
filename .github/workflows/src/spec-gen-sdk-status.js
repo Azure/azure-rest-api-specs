@@ -1,4 +1,3 @@
-// @ts-check
 import { CheckStatus, CommitStatusState, PER_PAGE_MAX } from "../../shared/src/github.js";
 import { getAdoBuildInfoFromUrl, getAzurePipelineArtifact } from "./artifacts.js";
 import { extractInputs } from "./context.js";
@@ -57,6 +56,7 @@ export async function setSpecGenSdkStatusImpl({
   issue_number,
 }) {
   const statusName = "SDK Validation Status";
+  core.setOutput("head_sha", head_sha);
   core.setOutput("issue_number", issue_number);
   const checks = await github.paginate(github.rest.checks.listForRef, {
     owner,

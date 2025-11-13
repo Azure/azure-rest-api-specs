@@ -40,4 +40,13 @@ describe("CoreLogger", () => {
 
     expect(core.isDebug).toBeCalled();
   });
+
+  it("warning", async () => {
+    const core = createMockCore();
+    const logger = new CoreLogger(core);
+
+    logger.warning("test warning");
+
+    expect(core.warning).toBeCalledWith("test warning");
+  });
 });

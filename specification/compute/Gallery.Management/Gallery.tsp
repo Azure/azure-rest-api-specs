@@ -59,7 +59,8 @@ interface Galleries {
     Gallery,
     Response = ArmResourceUpdatedResponse<Gallery> | ArmResourceCreatedResponse<
       Gallery,
-      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+      ArmLroLocationHeader<FinalResult = Gallery> &
+        Azure.Core.Foundations.RetryAfterHeader
     > | (ArmAcceptedLroResponse & {
       @bodyRoot
       _: Gallery;
@@ -74,7 +75,7 @@ interface Galleries {
     Gallery,
     PatchModel = GalleryUpdate,
     Response = ArmResponse<Gallery> &
-      ArmLroLocationHeader &
+      ArmLroLocationHeader<FinalResult = Gallery> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -110,6 +111,7 @@ interface Galleries {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation"
   @get
   @action("versions")
+  @list
   @operationId("SoftDeletedResource_ListByArtifactName")
   listByArtifactName is ComputeResourceActionSync<
     Gallery,
@@ -146,7 +148,8 @@ interface Galleries {
     SharingUpdate,
     ArmResponse<SharingUpdate> | (ArmAcceptedLroResponse<
       "Resource operation accepted.",
-      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+      ArmLroLocationHeader<FinalResult = SharingUpdate> &
+        Azure.Core.Foundations.RetryAfterHeader
     > & {
       @bodyRoot _: SharingUpdate;
     })

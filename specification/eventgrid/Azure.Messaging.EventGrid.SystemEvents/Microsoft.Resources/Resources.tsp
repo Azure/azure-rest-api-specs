@@ -69,6 +69,7 @@ namespace Microsoft.EventGrid.SystemEvents {
     action?: string;
 
     /** The evidence for the authorization. */
+    @visibility(Lifecycle.Read)
     evidence: Record<string>;
   }
 
@@ -98,6 +99,7 @@ namespace Microsoft.EventGrid.SystemEvents {
     authorization: ResourceAuthorization;
 
     /** The properties of the claims. */
+    @visibility(Lifecycle.Read)
     claims: Record<string>;
 
     /** An operation ID used for troubleshooting. */

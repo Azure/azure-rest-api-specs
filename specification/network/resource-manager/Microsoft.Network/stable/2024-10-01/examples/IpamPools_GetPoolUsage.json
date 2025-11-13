@@ -1,0 +1,67 @@
+{
+  "title": "Get the Pool Usage",
+  "parameters": {
+    "api-version": "2024-10-01",
+    "subscriptionId": "11111111-1111-1111-1111-111111111111",
+    "resourceGroupName": "rg1",
+    "networkManagerName": "TestNetworkManager",
+    "poolName": "TestPool"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "addressPrefixes": [
+          "10.0.0.0/8",
+          "192.0.0.0/8"
+        ],
+        "childPools": [
+          {
+            "resourceId": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/TestNetworkManager/ipamPools/TestPool1",
+            "addressPrefixes": [
+              "10.0.2.0/26"
+            ]
+          },
+          {
+            "resourceId": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/TestNetworkManager/ipamPools/TestPool2",
+            "addressPrefixes": [
+              "10.0.3.0/26"
+            ]
+          }
+        ],
+        "allocatedAddressPrefixes": [
+          "10.0.2.0/26",
+          "10.0.3.0/26"
+        ],
+        "reservedAddressPrefixes": [
+          "10.0.0.0/24"
+        ],
+        "availableAddressPrefixes": [
+          "10.0.1.0/24",
+          "10.0.2.64/26",
+          "10.0.2.128/25",
+          "10.0.3.64/26",
+          "10.0.3.128/25",
+          "10.0.4.0/22",
+          "10.0.8.0/21",
+          "10.0.16.0/20",
+          "10.0.32.0/19",
+          "10.0.64.0/18",
+          "10.0.128.0/17",
+          "10.1.0.0/16",
+          "10.2.0.0/15",
+          "10.4.0.0/14",
+          "10.8.0.0/13",
+          "10.16.0.0/12",
+          "10.32.0.0/11",
+          "10.64.0.0/10",
+          "10.128.0.0/9",
+          "192.0.0.0/8"
+        ],
+        "totalNumberOfIPAddresses": "33554432",
+        "numberOfAllocatedIPAddresses": "128",
+        "numberOfReservedIPAddresses": "256",
+        "numberOfAvailableIPAddresses": "33554048"
+      }
+    }
+  }
+}
