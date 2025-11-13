@@ -105,6 +105,9 @@ model ProductBase {
   @doc("The service name of the product, such as 'Virtual Machines'")
   service?: string;
 
+  @doc("The unique id of the product")
+  productId?: string;
+
   @doc("Indication whether the product has plans with reservations")
   hasRiPlans?: boolean;
 
@@ -217,9 +220,6 @@ model ProductDetails {
 
   @doc("Full set of plan/SKU attributes")
   plans?: PlanDetails[];
-
-  @doc("The unique id of the product")
-  productId: string;
 }
 
 @doc("Returns a subset of Plan attributes")

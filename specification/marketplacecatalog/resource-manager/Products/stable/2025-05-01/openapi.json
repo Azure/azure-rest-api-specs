@@ -1726,6 +1726,10 @@
           "type": "string",
           "description": "The service name of the product, such as 'Virtual Machines'"
         },
+        "productId": {
+          "type": "string",
+          "description": "The unique id of the product"
+        },
         "hasRiPlans": {
           "type": "boolean",
           "description": "Indication whether the product has plans with reservations"
@@ -1907,6 +1911,10 @@
           "type": "string",
           "description": "The service name of the product, such as 'Virtual Machines'"
         },
+        "productId": {
+          "type": "string",
+          "description": "The unique id of the product"
+        },
         "hasRiPlans": {
           "type": "boolean",
           "description": "Indication whether the product has plans with reservations"
@@ -2058,18 +2066,13 @@
           "items": {
             "$ref": "#/definitions/PlanDetails"
           }
-        },
-        "productId": {
-          "type": "string",
-          "description": "The unique id of the product"
         }
       },
       "required": [
         "uniqueProductId",
         "productType",
         "isPrivate",
-        "isStopSell",
-        "productId"
+        "isStopSell"
       ]
     },
     "ProductSingle": {
@@ -2245,6 +2248,10 @@
         "service": {
           "type": "string",
           "description": "The service name of the product, such as 'Virtual Machines'"
+        },
+        "productId": {
+          "type": "string",
+          "description": "The unique id of the product"
         },
         "hasRiPlans": {
           "type": "boolean",
