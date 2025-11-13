@@ -1571,14 +1571,12 @@ model ApplicationPackageProperties {
    * The UTC time at which the Azure Storage URL will expire.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   storageUrlExpiry?: utcDateTime;
 
   /**
    * The time at which the package was last activated, if the package is active.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastActivationTime?: utcDateTime;
 }
 
@@ -1656,7 +1654,6 @@ model SupportedSku {
    * The time when Azure Batch service will retire this SKU.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   batchSupportEndOfLife?: utcDateTime;
 }
 
@@ -1811,7 +1808,6 @@ model CertificateProperties extends CertificateBaseProperties {
    * The time at which the certificate entered its current state.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   @summary("The time at which the certificate entered its current state.")
   provisioningStateTransitionTime?: utcDateTime;
 
@@ -1825,7 +1821,6 @@ model CertificateProperties extends CertificateBaseProperties {
    * The time at which the certificate entered its previous state.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   @summary("The time at which the certificate entered its previous state.")
   previousProvisioningStateTransitionTime?: utcDateTime;
 
@@ -2013,7 +2008,6 @@ model PoolProperties {
    */
   @summary("The time at which the pool entered its current state.")
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   provisioningStateTransitionTime?: utcDateTime;
 
   /**
@@ -2028,7 +2022,6 @@ model PoolProperties {
    */
   @summary("The time at which the pool entered its current allocation state.")
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   allocationStateTransitionTime?: utcDateTime;
 
   /**
@@ -3305,7 +3298,6 @@ model ResizeOperationStatus {
   /**
    * The time when this resize operation was started.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   @summary("The time when this resize operation was started.")
   startTime?: utcDateTime;
 
