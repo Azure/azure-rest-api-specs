@@ -1,0 +1,51 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "localgw1",
+            "type": "Microsoft.Network/localNetworkGateways",
+            "etag": "W/\"00000000-0000-0000-0000-000000000000\"",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/localNetworkGateways/localgw1",
+            "location": "centralus",
+            "properties": {
+              "gatewayIpAddress": "x.x.x.x",
+              "localNetworkAddressSpace": {
+                "addressPrefixes": [
+                  "10.1.0.0/16"
+                ]
+              },
+              "provisioningState": "Succeeded",
+              "resourceGuid": "00000000-0000-0000-0000-000000000000"
+            }
+          },
+          {
+            "name": "localgw2",
+            "type": "Microsoft.Network/localNetworkGateways",
+            "etag": "W/\"00000000-0000-0000-0000-000000000000\"",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/localNetworkGateways/localgw2",
+            "location": "eastus",
+            "properties": {
+              "gatewayIpAddress": "x.x.x.x",
+              "localNetworkAddressSpace": {
+                "addressPrefixes": [
+                  "10.2.0.0/16"
+                ]
+              },
+              "provisioningState": "Succeeded",
+              "resourceGuid": "00000000-0000-0000-0000-000000000000"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "LocalNetworkGateways_List",
+  "title": "ListLocalNetworkGateways"
+}

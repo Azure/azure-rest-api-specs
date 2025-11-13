@@ -1,0 +1,74 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "resourceGroupName": "peerTest",
+    "subscriptionId": "subid",
+    "virtualNetworkName": "vnet1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "peer",
+            "id": "/subscriptions/subid/resourceGroups/peerTest/providers/Microsoft.Network/virtualNetworks/vnet1/virtualNetworkPeerings/peer",
+            "properties": {
+              "allowForwardedTraffic": true,
+              "allowGatewayTransit": false,
+              "allowVirtualNetworkAccess": true,
+              "peeringState": "Initiated",
+              "provisioningState": "Succeeded",
+              "remoteAddressSpace": {
+                "addressPrefixes": [
+                  "12.0.0.0/8"
+                ]
+              },
+              "remoteBgpCommunities": {
+                "regionalCommunity": "12076:50004",
+                "virtualNetworkCommunity": "12076:20002"
+              },
+              "remoteVirtualNetwork": {
+                "id": "/subscriptions/subid/resourceGroups/peerTest/providers/Microsoft.Network/virtualNetworks/vnet2"
+              },
+              "remoteVirtualNetworkEncryption": {
+                "enabled": true,
+                "enforcement": "AllowUnencrypted"
+              },
+              "useRemoteGateways": false
+            }
+          },
+          {
+            "name": "peer",
+            "id": "/subscriptions/subid/resourceGroups/peerTest/providers/Microsoft.Network/virtualNetworks/vnet1/virtualNetworkPeerings/peer2",
+            "properties": {
+              "allowForwardedTraffic": false,
+              "allowGatewayTransit": false,
+              "allowVirtualNetworkAccess": true,
+              "peeringState": "Initiated",
+              "provisioningState": "Succeeded",
+              "remoteAddressSpace": {
+                "addressPrefixes": [
+                  "13.0.0.0/8"
+                ]
+              },
+              "remoteBgpCommunities": {
+                "regionalCommunity": "12076:50004",
+                "virtualNetworkCommunity": "12076:20003"
+              },
+              "remoteVirtualNetwork": {
+                "id": "/subscriptions/subid/resourceGroups/peerTest/providers/Microsoft.Network/virtualNetworks/vnet3"
+              },
+              "remoteVirtualNetworkEncryption": {
+                "enabled": true,
+                "enforcement": "AllowUnencrypted"
+              },
+              "useRemoteGateways": false
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "VirtualNetworkPeerings_List",
+  "title": "List peerings with remote virtual network encryption"
+}

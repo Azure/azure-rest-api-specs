@@ -1,0 +1,31 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "networkVirtualApplianceName": "nva",
+    "resourceGroupName": "rg1",
+    "siteName": "site1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "site1",
+        "etag": "W/\"72090554-7e3b-43f2-80ad-99a9020dcb11\"",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkVirtualAppliances/nva/virtualApplianceSites/site1",
+        "properties": {
+          "addressPrefix": "192.168.1.0/24",
+          "o365Policy": {
+            "breakOutCategories": {
+              "default": true,
+              "allow": true,
+              "optimize": true
+            }
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  },
+  "operationId": "VirtualApplianceSites_Get",
+  "title": "GetNetwork Virtual Appliance Site"
+}

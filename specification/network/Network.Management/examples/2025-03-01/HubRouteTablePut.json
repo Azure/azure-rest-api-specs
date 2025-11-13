@@ -1,0 +1,106 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "resourceGroupName": "rg1",
+    "routeTableName": "hubRouteTable1",
+    "routeTableParameters": {
+      "properties": {
+        "labels": [
+          "label1",
+          "label2"
+        ],
+        "routes": [
+          {
+            "name": "route1",
+            "destinationType": "CIDR",
+            "destinations": [
+              "10.0.0.0/8",
+              "20.0.0.0/8",
+              "30.0.0.0/8"
+            ],
+            "nextHop": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/azureFirewalls/azureFirewall1",
+            "nextHopType": "ResourceId"
+          }
+        ]
+      }
+    },
+    "subscriptionId": "subid",
+    "virtualHubName": "virtualHub1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "hubRouteTable1",
+        "type": "Microsoft.Network/virtualHubs/hubRouteTables",
+        "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1/hubRouteTables/hubRouteTable1",
+        "properties": {
+          "associatedConnections": [
+            "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1/hubVirtualNetworkConnections/vnetConnn1",
+            "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1/hubVirtualNetworkConnections/vnetConnn2"
+          ],
+          "labels": [
+            "label1",
+            "label2"
+          ],
+          "propagatingConnections": [
+            "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRouteGateways/erg1/expressRouteConnections/erConn1",
+            "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/vpngw1/vpnConnections/vpnConn2"
+          ],
+          "provisioningState": "Succeeded",
+          "routes": [
+            {
+              "name": "route1",
+              "destinationType": "CIDR",
+              "destinations": [
+                "10.0.0.0/8",
+                "20.0.0.0/8",
+                "30.0.0.0/8"
+              ],
+              "nextHop": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/azureFirewalls/azureFirewall1",
+              "nextHopType": "ResourceId"
+            }
+          ]
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "hubRouteTable1",
+        "type": "Microsoft.Network/virtualHubs/hubRouteTables",
+        "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1/routeTables/virtualHubRouteTable1a",
+        "properties": {
+          "associatedConnections": [
+            "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1/hubVirtualNetworkConnections/vnetConnn1",
+            "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1/hubVirtualNetworkConnections/vnetConnn2"
+          ],
+          "labels": [
+            "label1",
+            "label2"
+          ],
+          "propagatingConnections": [
+            "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRouteGateways/erg1/expressRouteConnections/erConn1",
+            "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/vpngw1/vpnConnections/vpnConn2"
+          ],
+          "provisioningState": "Succeeded",
+          "routes": [
+            {
+              "name": "route1",
+              "destinationType": "CIDR",
+              "destinations": [
+                "10.0.0.0/8",
+                "20.0.0.0/8",
+                "30.0.0.0/8"
+              ],
+              "nextHop": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/azureFirewalls/azureFirewall1",
+              "nextHopType": "ResourceId"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "operationId": "HubRouteTables_CreateOrUpdate",
+  "title": "RouteTablePut"
+}

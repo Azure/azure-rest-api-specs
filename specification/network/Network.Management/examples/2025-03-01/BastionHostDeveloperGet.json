@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "bastionHostName": "bastionhostdeveloper'",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "bastionhostdeveloper'",
+        "type": "Microsoft.Network/bastionHosts",
+        "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+        "id": "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Network/bastionHosts/bastionhostdeveloper'",
+        "location": "West US",
+        "properties": {
+          "dnsName": "omnibrain.uswest.bastionglobal.azure.com",
+          "ipConfigurations": [],
+          "networkAcls": {
+            "ipRules": [
+              {
+                "addressPrefix": "1.1.1.1/16"
+              }
+            ]
+          },
+          "provisioningState": "Succeeded",
+          "virtualNetwork": {
+            "id": "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Network/virtualNetworks/vnet2"
+          }
+        },
+        "sku": {
+          "name": "Developer"
+        }
+      }
+    }
+  },
+  "operationId": "BastionHosts_Get",
+  "title": "Get Developer Bastion Host"
+}

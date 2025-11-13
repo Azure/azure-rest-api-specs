@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "parameters": {
+      "tags": {
+        "tag1": "value1",
+        "tag2": "value2"
+      }
+    },
+    "publicIpPrefixName": "test-ipprefix",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "test-ipprefix",
+        "type": "Microsoft.Network/publicIPPrefixes",
+        "etag": "W/\"00000000-0000-0000-0000-00000000\"",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPPrefixes/test-ipprefix",
+        "location": "westus",
+        "properties": {
+          "ipPrefix": "40.85.154.247/30",
+          "ipTags": [],
+          "prefixLength": 30,
+          "provisioningState": "Succeeded",
+          "publicIPAddressVersion": "IPv4",
+          "resourceGuid": "00000000-0000-0000-0000-00000000"
+        },
+        "sku": {
+          "name": "Standard"
+        },
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        }
+      }
+    }
+  },
+  "operationId": "PublicIPPrefixes_UpdateTags",
+  "title": "Update public IP prefix tags"
+}

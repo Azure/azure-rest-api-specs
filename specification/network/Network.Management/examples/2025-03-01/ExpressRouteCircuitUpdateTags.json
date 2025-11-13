@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "circuitName": "er1",
+    "parameters": {
+      "tags": {
+        "tag1": "value1",
+        "tag2": "value2"
+      }
+    },
+    "resourceGroupName": "ertest",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "er1",
+        "type": "Microsoft.Network/expressRouteCircuits",
+        "id": "/subscriptions/subid/resourceGroups/ertest/providers/Microsoft.Network/expressRouteCircuits/er1",
+        "location": "brazilsouth",
+        "properties": {
+          "allowClassicOperations": false,
+          "authorizations": [],
+          "circuitProvisioningState": "Enabled",
+          "gatewayManagerEtag": "",
+          "peerings": [],
+          "provisioningState": "Failed",
+          "serviceKey": "0b392c2e-1e9d-46d7-b5e0-9ce90ca6b60c",
+          "serviceProviderProperties": {
+            "bandwidthInMbps": 1000,
+            "peeringLocation": "Silicon Valley",
+            "serviceProviderName": "Equinix"
+          },
+          "serviceProviderProvisioningState": "NotProvisioned"
+        },
+        "sku": {
+          "name": "Standard_MeteredData",
+          "family": "MeteredData",
+          "tier": "Standard"
+        },
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        }
+      }
+    }
+  },
+  "operationId": "ExpressRouteCircuits_UpdateTags",
+  "title": "Update Express Route Circuit Tags"
+}

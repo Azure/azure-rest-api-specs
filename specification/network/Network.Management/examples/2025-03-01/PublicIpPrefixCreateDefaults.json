@@ -1,0 +1,61 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "parameters": {
+      "location": "westus",
+      "properties": {
+        "prefixLength": 30
+      },
+      "sku": {
+        "name": "Standard"
+      }
+    },
+    "publicIpPrefixName": "test-ipprefix",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "test-ipprefix",
+        "type": "Microsoft.Network/publicIPPrefixes",
+        "etag": "W/\"00000000-0000-0000-0000-00000000\"",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPPrefixes/test-ipprefix",
+        "location": "westus",
+        "properties": {
+          "ipPrefix": "192.168.254.2/30",
+          "ipTags": [],
+          "prefixLength": 30,
+          "provisioningState": "Succeeded",
+          "publicIPAddressVersion": "IPv4",
+          "resourceGuid": "00000000-0000-0000-0000-00000000"
+        },
+        "sku": {
+          "name": "Standard"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "test-ipprefix",
+        "type": "Microsoft.Network/publicIPPrefixes",
+        "etag": "W/\"00000000-0000-0000-0000-00000000\"",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPPrefixes/test-ipprefix",
+        "location": "westus",
+        "properties": {
+          "ipPrefix": "192.168.254.2/30",
+          "ipTags": [],
+          "prefixLength": 30,
+          "provisioningState": "Succeeded",
+          "publicIPAddressVersion": "IPv4",
+          "resourceGuid": "00000000-0000-0000-0000-00000000"
+        },
+        "sku": {
+          "name": "Standard"
+        }
+      }
+    }
+  },
+  "operationId": "PublicIPPrefixes_CreateOrUpdate",
+  "title": "Create public IP prefix defaults"
+}

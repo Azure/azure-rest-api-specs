@@ -1,0 +1,83 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "privateEndpointName": "testPe",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subId"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testPe",
+        "type": "Microsoft.Network/privateEndpoints",
+        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateEndpoints/testPe",
+        "location": "eastus",
+        "properties": {
+          "applicationSecurityGroups": [],
+          "customDnsConfigs": [
+            {
+              "fqdn": "abc.cosmos.com",
+              "ipAddresses": [
+                "192.168.0.4"
+              ]
+            },
+            {
+              "fqdn": "abc2.cosmos.com",
+              "ipAddresses": [
+                "192.168.0.5"
+              ]
+            }
+          ],
+          "customNetworkInterfaceName": "testPeNic",
+          "ipConfigurations": [
+            {
+              "name": "pestaticconfig",
+              "properties": {
+                "groupId": "file",
+                "memberName": "file",
+                "privateIPAddress": "192.168.0.6"
+              }
+            },
+            {
+              "name": "pestaticconfig2",
+              "properties": {
+                "groupId": "file",
+                "memberName": "file2",
+                "privateIPAddress": "192.168.0.7"
+              }
+            }
+          ],
+          "manualPrivateLinkServiceConnections": [],
+          "networkInterfaces": [
+            {
+              "id": "/subscriptions/subId/resourceGroups/rg1/provders/Microsoft.Network/networkInterfaces/testPe.nic.abcd1234"
+            }
+          ],
+          "privateLinkServiceConnections": [
+            {
+              "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateEndpoints/testPe/privateLinkServiceConnections/plsconnection1",
+              "properties": {
+                "groupIds": [
+                  "groupIdFromResource"
+                ],
+                "privateLinkServiceConnectionState": {
+                  "description": "Auto-approved",
+                  "actionsRequired": "None",
+                  "status": "Approved"
+                },
+                "privateLinkServiceId": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateLinkServices/testPls",
+                "requestMessage": "Please approve my connection."
+              }
+            }
+          ],
+          "provisioningState": "Succeeded",
+          "subnet": {
+            "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubnet"
+          }
+        }
+      }
+    }
+  },
+  "operationId": "PrivateEndpoints_Get",
+  "title": "Get private endpoint"
+}

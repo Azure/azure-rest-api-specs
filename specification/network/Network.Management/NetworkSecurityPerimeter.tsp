@@ -1,0 +1,122 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.Network;
+/**
+ * The Network Security Perimeter resource
+ */
+model NetworkSecurityPerimeter
+  is Azure.ResourceManager.TrackedResource<NetworkSecurityPerimeterProperties> {
+  ...ResourceNameParameter<
+    Resource = NetworkSecurityPerimeter,
+    KeyName = "networkSecurityPerimeterName",
+    SegmentName = "networkSecurityPerimeters",
+    NamePattern = "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
+  >;
+}
+
+@armResourceOperations
+interface NetworkSecurityPerimeters {
+  /**
+   * Gets the specified network security perimeter by the name.
+   */
+  get is ArmResourceRead<NetworkSecurityPerimeter>;
+
+  /**
+   * Creates or updates a Network Security Perimeter.
+   */
+  createOrUpdate is ArmResourceCreateOrReplaceSync<NetworkSecurityPerimeter>;
+
+  /**
+   * Patch Tags for a Network Security Perimeter.
+   */
+  @patch(#{ implicitOptionality: false })
+  patch is ArmCustomPatchSync<
+    NetworkSecurityPerimeter,
+    PatchModel = UpdateTagsRequest
+  >;
+
+  /**
+   * Deletes a network security perimeter.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  delete is ArmResourceDeleteWithoutOkAsync<
+    NetworkSecurityPerimeter,
+    Parameters = {
+      /**
+       * Deletes the resource even if it contains any child associations.
+       */
+      @query("forceDeletion")
+      forceDeletion?: boolean;
+    },
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+  >;
+
+  /**
+   * List network security perimeters in a resource group.
+   */
+  list is ArmResourceListByParent<
+    NetworkSecurityPerimeter,
+    Parameters = {
+      /**
+       * An optional query parameter which specifies the maximum number of records to be returned by the server.
+       */
+      @maxValue(20)
+      @minValue(1)
+      @query("$top")
+      $top?: int32;
+
+      /**
+       * SkipToken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skipToken parameter that specifies a starting point to use for subsequent calls.
+       */
+      @query("$skipToken")
+      $skipToken?: string;
+    }
+  >;
+
+  /**
+   * List all network security perimeters in a subscription.
+   */
+  listBySubscription is ArmListBySubscription<
+    NetworkSecurityPerimeter,
+    Parameters = {
+      /**
+       * An optional query parameter which specifies the maximum number of records to be returned by the server.
+       */
+      @maxValue(20)
+      @minValue(1)
+      @query("$top")
+      $top?: int32;
+
+      /**
+       * SkipToken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skipToken parameter that specifies a starting point to use for subsequent calls.
+       */
+      @query("$skipToken")
+      $skipToken?: string;
+    }
+  >;
+}
+
+@@maxLength(NetworkSecurityPerimeter.name, 80);
+@@doc(NetworkSecurityPerimeter.name,
+  "The name of the network security perimeter."
+);
+@@doc(NetworkSecurityPerimeter.properties,
+  "The network security perimeter properties"
+);
+@@doc(NetworkSecurityPerimeters.createOrUpdate::parameters.resource,
+  "Parameter supplied to create or update the network security perimeter."
+);
+@@doc(NetworkSecurityPerimeters.patch::parameters.properties,
+  "Parameter supplied to the network security perimeter."
+);

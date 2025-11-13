@@ -1,0 +1,60 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.Network;
+/**
+ * ExpressRoutePort Authorization resource definition.
+ */
+model ExpressRoutePortAuthorization
+  is Azure.ResourceManager.ProxyResource<ExpressRoutePortAuthorizationPropertiesFormat> {
+  ...ResourceNameParameter<
+    Resource = ExpressRoutePortAuthorization,
+    KeyName = "authorizationName",
+    SegmentName = "authorizations",
+    NamePattern = ""
+  >;
+  ...Azure.ResourceManager.Legacy.EntityTagProperty;
+}
+
+@armResourceOperations
+interface ExpressRoutePortAuthorizations {
+  /**
+   * Gets the specified authorization from the specified express route port.
+   */
+  get is ArmResourceRead<ExpressRoutePortAuthorization>;
+
+  /**
+   * Creates or updates an authorization in the specified express route port.
+   */
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<ExpressRoutePortAuthorization>;
+
+  /**
+   * Deletes the specified authorization from the specified express route port.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  delete is ArmResourceDeleteWithoutOkAsync<
+    ExpressRoutePortAuthorization,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+  >;
+
+  /**
+   * Gets all authorizations in an express route port.
+   */
+  list is ArmResourceListByParent<ExpressRoutePortAuthorization>;
+}
+
+@@doc(ExpressRoutePortAuthorization.name, "The name of the authorization.");
+@@doc(ExpressRoutePortAuthorization.properties, "ExpressRoutePort properties.");
+@@doc(ExpressRoutePortAuthorizations.createOrUpdate::parameters.resource,
+  "Parameters supplied to the create or update express route port authorization operation."
+);

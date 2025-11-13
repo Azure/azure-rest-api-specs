@@ -1,0 +1,411 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "policyName": "Policy1",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "Policy1",
+        "type": "Microsoft.Network/applicationgatewaywebapplicationfirewallpolicies",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/ApplicationGatewayWebApplicationFirewallPolicies/Policy1",
+        "location": "WestUs",
+        "properties": {
+          "applicationGatewayForContainers": [
+            {
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ServiceNetworking/trafficControllers/agc1"
+            }
+          ],
+          "customRules": [
+            {
+              "name": "Rule1",
+              "action": "Block",
+              "matchConditions": [
+                {
+                  "matchValues": [
+                    "192.168.1.0/24",
+                    "10.0.0.0/24"
+                  ],
+                  "matchVariables": [
+                    {
+                      "selector": null,
+                      "variableName": "RemoteAddr"
+                    }
+                  ],
+                  "negationConditon": false,
+                  "operator": "IPMatch",
+                  "transforms": []
+                }
+              ],
+              "priority": 1,
+              "ruleType": "MatchRule",
+              "state": "Enabled"
+            },
+            {
+              "name": "Rule2",
+              "action": "Block",
+              "matchConditions": [
+                {
+                  "matchValues": [
+                    "192.168.1.0/24"
+                  ],
+                  "matchVariables": [
+                    {
+                      "selector": null,
+                      "variableName": "RemoteAddr"
+                    }
+                  ],
+                  "negationConditon": false,
+                  "operator": "IPMatch"
+                },
+                {
+                  "matchValues": [
+                    "Windows"
+                  ],
+                  "matchVariables": [
+                    {
+                      "selector": "UserAgent",
+                      "variableName": "RequestHeader"
+                    }
+                  ],
+                  "negationConditon": false,
+                  "operator": "Contains"
+                }
+              ],
+              "priority": 2,
+              "ruleType": "MatchRule",
+              "state": "Enabled"
+            },
+            {
+              "name": "RateLimitRule3",
+              "action": "Block",
+              "groupByUserSession": [
+                {
+                  "groupByVariables": [
+                    {
+                      "variableName": "ClientAddr"
+                    }
+                  ]
+                }
+              ],
+              "matchConditions": [
+                {
+                  "matchValues": [
+                    "192.168.1.0/24",
+                    "10.0.0.0/24"
+                  ],
+                  "matchVariables": [
+                    {
+                      "selector": null,
+                      "variableName": "RemoteAddr"
+                    }
+                  ],
+                  "negationConditon": true,
+                  "operator": "IPMatch"
+                }
+              ],
+              "priority": 3,
+              "rateLimitDuration": "OneMin",
+              "rateLimitThreshold": 10,
+              "ruleType": "RateLimitRule"
+            },
+            {
+              "name": "Rule4",
+              "action": "JSChallenge",
+              "matchConditions": [
+                {
+                  "matchValues": [
+                    "192.168.1.0/24"
+                  ],
+                  "matchVariables": [
+                    {
+                      "selector": null,
+                      "variableName": "RemoteAddr"
+                    }
+                  ],
+                  "negationConditon": false,
+                  "operator": "IPMatch"
+                },
+                {
+                  "matchValues": [
+                    "Bot"
+                  ],
+                  "matchVariables": [
+                    {
+                      "selector": "UserAgent",
+                      "variableName": "RequestHeaders"
+                    }
+                  ],
+                  "negationConditon": false,
+                  "operator": "Contains"
+                }
+              ],
+              "priority": 4,
+              "ruleType": "MatchRule",
+              "state": "Enabled"
+            }
+          ],
+          "managedRules": {
+            "exclusions": [
+              {
+                "matchVariable": "RequestHeaderNames",
+                "selector": "testHeader1",
+                "selectorMatchOperator": "Equals"
+              },
+              {
+                "matchVariable": "RequestHeaderNames",
+                "selector": "testHeader2",
+                "selectorMatchOperator": "StartsWith"
+              },
+              {
+                "matchVariable": "RequestArgValues",
+                "selector": "hello",
+                "selectorMatchOperator": "StartsWith"
+              },
+              {
+                "exclusionManagedRuleSets": [
+                  {
+                    "ruleGroups": [
+                      {
+                        "ruleGroupName": "REQUEST-930-APPLICATION-ATTACK-LFI",
+                        "rules": [
+                          {
+                            "ruleId": "930120"
+                          }
+                        ]
+                      },
+                      {
+                        "ruleGroupName": "REQUEST-932-APPLICATION-ATTACK-RCE"
+                      }
+                    ],
+                    "ruleSetType": "OWASP",
+                    "ruleSetVersion": "3.2"
+                  }
+                ],
+                "matchVariable": "RequestArgNames",
+                "selector": "hello",
+                "selectorMatchOperator": "StartsWith"
+              },
+              {
+                "exclusionManagedRuleSets": [
+                  {
+                    "ruleGroups": [],
+                    "ruleSetType": "OWASP",
+                    "ruleSetVersion": "3.1"
+                  }
+                ],
+                "matchVariable": "RequestArgNames",
+                "selector": "hello",
+                "selectorMatchOperator": "EndsWith"
+              }
+            ],
+            "managedRuleSets": [
+              {
+                "computedDisabledRules": [
+                  {
+                    "ruleGroupName": "REQUEST-942-APPLICATION-ATTACK-SQLI",
+                    "rules": [
+                      "942130",
+                      "942110"
+                    ]
+                  },
+                  {
+                    "ruleGroupName": "REQUEST-920-PROTOCOL-ENFORCEMENT",
+                    "rules": [
+                      "920100",
+                      "920120"
+                    ]
+                  },
+                  {
+                    "ruleGroupName": "General",
+                    "rules": [
+                      "200003"
+                    ]
+                  }
+                ],
+                "ruleGroupOverrides": [
+                  {
+                    "ruleGroupName": "REQUEST-942-APPLICATION-ATTACK-SQLI",
+                    "rules": [
+                      {
+                        "action": "AnomalyScoring",
+                        "ruleId": "942130",
+                        "state": "Disabled"
+                      },
+                      {
+                        "action": "AnomalyScoring",
+                        "ruleId": "942110",
+                        "state": "Disabled"
+                      },
+                      {
+                        "action": "Log",
+                        "ruleId": "942140",
+                        "state": "Enabled"
+                      }
+                    ]
+                  },
+                  {
+                    "ruleGroupName": "REQUEST-920-PROTOCOL-ENFORCEMENT",
+                    "rules": [
+                      {
+                        "action": "AnomalyScoring",
+                        "ruleId": "920100",
+                        "state": "Disabled"
+                      },
+                      {
+                        "action": "AnomalyScoring",
+                        "ruleId": "920120",
+                        "state": "Disabled"
+                      },
+                      {
+                        "action": "Block",
+                        "ruleId": "920130",
+                        "state": "Enabled"
+                      }
+                    ]
+                  }
+                ],
+                "ruleSetType": "OWASP",
+                "ruleSetVersion": "3.2"
+              },
+              {
+                "ruleGroupOverrides": [
+                  {
+                    "ruleGroupName": "UnknownBots",
+                    "rules": [
+                      {
+                        "action": "JSChallenge",
+                        "ruleId": "300700",
+                        "state": "Enabled"
+                      }
+                    ]
+                  }
+                ],
+                "ruleSetType": "Microsoft_BotManagerRuleSet",
+                "ruleSetVersion": "1.0"
+              },
+              {
+                "ruleGroupOverrides": [
+                  {
+                    "ruleGroupName": "ExcessiveRequests",
+                    "rules": [
+                      {
+                        "action": "Block",
+                        "ruleId": "500100",
+                        "sensitivity": "High",
+                        "state": "Enabled"
+                      }
+                    ]
+                  }
+                ],
+                "ruleSetType": "Microsoft_HTTPDDoSRuleSet",
+                "ruleSetVersion": "1.0"
+              }
+            ],
+            "exceptions": [
+              {
+                "exceptionManagedRuleSets": [
+                  {
+                    "ruleSetType": "OWASP",
+                    "ruleSetVersion": "3.2"
+                  }
+                ],
+                "matchVariable": "RequestURI",
+                "valueMatchOperator": "Contains",
+                "values": [
+                  "health",
+                  "account/images",
+                  "default.aspx"
+                ]
+              },
+              {
+                "exceptionManagedRuleSets": [
+                  {
+                    "ruleGroups": [
+                      {
+                        "ruleGroupName": "REQUEST-932-APPLICATION-ATTACK-RCE"
+                      }
+                    ],
+                    "ruleSetType": "OWASP",
+                    "ruleSetVersion": "3.2"
+                  }
+                ],
+                "matchVariable": "RequestHeader",
+                "selector": "User-Agent",
+                "selectorMatchOperator": "StartsWith",
+                "valueMatchOperator": "Contains",
+                "values": [
+                  "Mozilla/5.0",
+                  "Chrome/122.0.0.0"
+                ]
+              },
+              {
+                "exceptionManagedRuleSets": [
+                  {
+                    "ruleGroups": [
+                      {
+                        "ruleGroupName": "BadBots",
+                        "rules": [
+                          {
+                            "ruleId": "100100"
+                          }
+                        ]
+                      }
+                    ],
+                    "ruleSetType": "Microsoft_BotManagerRuleSet",
+                    "ruleSetVersion": "1.0"
+                  }
+                ],
+                "matchVariable": "RemoteAddr",
+                "valueMatchOperator": "IPMatch",
+                "values": [
+                  "1.2.3.4",
+                  "10.0.0.1/6"
+                ]
+              }
+            ]
+          },
+          "policySettings": {
+            "customBlockResponseBody": "SGVsbG8=",
+            "customBlockResponseStatusCode": 405,
+            "fileUploadEnforcement": true,
+            "fileUploadLimitInMb": 4000,
+            "jsChallengeCookieExpirationInMins": 100,
+            "logScrubbing": {
+              "scrubbingRules": [
+                {
+                  "matchVariable": "RequestArgNames",
+                  "selector": "test",
+                  "selectorMatchOperator": "Equals",
+                  "state": "Enabled"
+                },
+                {
+                  "matchVariable": "RequestIPAddress",
+                  "selectorMatchOperator": "EqualsAny",
+                  "state": "Enabled"
+                }
+              ],
+              "state": "Enabled"
+            },
+            "maxRequestBodySizeInKb": 2000,
+            "mode": "Prevention",
+            "requestBodyCheck": true,
+            "requestBodyEnforcement": true,
+            "requestBodyInspectLimitInKB": 2000,
+            "state": "Enabled"
+          },
+          "provisioningState": "Succeeded",
+          "resourceState": "Enabled"
+        },
+        "tags": {
+          "key1": "value1",
+          "key2": "value2"
+        }
+      }
+    }
+  },
+  "operationId": "WebApplicationFirewallPolicies_Get",
+  "title": "Gets a WAF policy within a resource group"
+}

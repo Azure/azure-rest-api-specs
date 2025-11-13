@@ -1,0 +1,77 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "networkInterfaceName": "test-nic",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "test-nic",
+        "type": "Microsoft.Network/networkInterfaces",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkInterfaces/test-nic",
+        "location": "eastus",
+        "properties": {
+          "disableTcpStateTracking": true,
+          "dnsSettings": {
+            "appliedDnsServers": [],
+            "dnsServers": [],
+            "internalDomainNameSuffix": "test.bx.internal.cloudapp.net"
+          },
+          "dscpConfiguration": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Compute/dscpConfiguration/mydscpconfiguration"
+          },
+          "enableAcceleratedNetworking": true,
+          "enableIPForwarding": false,
+          "ipConfigurations": [
+            {
+              "name": "ipconfig1",
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkInterfaces/test-nic/ipConfigurations/ipconfig1",
+              "properties": {
+                "primary": true,
+                "privateIPAddress": "172.20.2.4",
+                "privateIPAddressVersion": "IPv4",
+                "privateIPAllocationMethod": "Dynamic",
+                "provisioningState": "Succeeded",
+                "publicIPAddress": {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/test-ip"
+                },
+                "subnet": {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/rg1-vnet/subnets/default"
+                }
+              }
+            },
+            {
+              "name": "ipconfig2",
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkInterfaces/test-nic/ipConfigurations/ipconfig2",
+              "properties": {
+                "primary": false,
+                "privateIPAddress": "172.20.2.16/28",
+                "privateIPAddressPrefixLength": 28,
+                "privateIPAddressVersion": "IPv4",
+                "privateIPAllocationMethod": "Dynamic",
+                "provisioningState": "Succeeded",
+                "subnet": {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/rg1-vnet/subnets/default"
+                }
+              }
+            }
+          ],
+          "macAddress": "00-0D-3A-1B-C7-21",
+          "networkSecurityGroup": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityGroups/nsg"
+          },
+          "primary": true,
+          "provisioningState": "Succeeded",
+          "virtualMachine": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Compute/virtualMachines/vm1"
+          },
+          "vnetEncryptionSupported": false
+        }
+      }
+    }
+  },
+  "operationId": "NetworkInterfaces_Get",
+  "title": "Get network interface"
+}

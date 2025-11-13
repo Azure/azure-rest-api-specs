@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "filterName",
+            "type": "Microsoft.Network/routeFilters",
+            "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/routeFilters/filterName",
+            "location": "West US",
+            "properties": {
+              "peerings": [],
+              "provisioningState": "Succeeded",
+              "rules": [
+                {
+                  "name": "ruleName",
+                  "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/routeFilters/filterName/routeFilterRules/ruleName",
+                  "properties": {
+                    "access": "Allow",
+                    "communities": [
+                      "12076:5030",
+                      "12076:5040"
+                    ],
+                    "provisioningState": "Succeeded",
+                    "routeFilterRuleType": "Community"
+                  }
+                }
+              ]
+            },
+            "tags": {
+              "key1": "value1"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "RouteFilters_List",
+  "title": "RouteFilterList"
+}

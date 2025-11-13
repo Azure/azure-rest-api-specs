@@ -1,0 +1,106 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "networkWatcherName": "nw1",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "cm1",
+            "type": "Microsoft.Network/networkWatchers/connectionMonitors",
+            "etag": "W/\"00000000-0000-0000-0000-000000000000\"",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkWatchers/nw1/connectionMonitors/cm1",
+            "location": "eastus",
+            "properties": {
+              "endpoints": [
+                {
+                  "name": "source",
+                  "resourceId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Compute/virtualMachines/ct1"
+                },
+                {
+                  "name": "destination",
+                  "address": "bing.com"
+                }
+              ],
+              "provisioningState": "Succeeded",
+              "testConfigurations": [
+                {
+                  "name": "tcp",
+                  "tcpConfiguration": {
+                    "port": 80
+                  },
+                  "testFrequencySec": 60,
+                  "protocol": "Tcp"
+                }
+              ],
+              "testGroups": [
+                {
+                  "name": "tg",
+                  "destinations": [
+                    "destination"
+                  ],
+                  "sources": [
+                    "source"
+                  ],
+                  "testConfigurations": [
+                    "tcp"
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "name": "cm2",
+            "type": "Microsoft.Network/networkWatchers/connectionMonitors",
+            "etag": "W/\"00000000-0000-0000-0000-000000000000\"",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkWatchers/nw1/connectionMonitors/cm2",
+            "location": "eastus",
+            "properties": {
+              "endpoints": [
+                {
+                  "name": "source",
+                  "resourceId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Compute/virtualMachines/ct2"
+                },
+                {
+                  "name": "destination",
+                  "address": "google.com"
+                }
+              ],
+              "provisioningState": "Succeeded",
+              "testConfigurations": [
+                {
+                  "name": "tcp",
+                  "tcpConfiguration": {
+                    "port": 80
+                  },
+                  "testFrequencySec": 60,
+                  "protocol": "Tcp"
+                }
+              ],
+              "testGroups": [
+                {
+                  "name": "tg",
+                  "destinations": [
+                    "destination"
+                  ],
+                  "sources": [
+                    "source"
+                  ],
+                  "testConfigurations": [
+                    "tcp"
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ConnectionMonitors_List",
+  "title": "List connection monitors"
+}

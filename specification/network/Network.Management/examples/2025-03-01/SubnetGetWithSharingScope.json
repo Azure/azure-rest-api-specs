@@ -1,0 +1,25 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "resourceGroupName": "subnet-test",
+    "subnetName": "subnet1",
+    "subscriptionId": "subid",
+    "virtualNetworkName": "vnetname"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "subnet1",
+        "id": "/subscriptions/subid/resourceGroups/subnet-test/providers/Microsoft.Network/virtualNetworks/vnetname/subnets/subnet1",
+        "properties": {
+          "addressPrefix": "10.0.0.0/16",
+          "defaultOutboundAccess": false,
+          "provisioningState": "Succeeded",
+          "sharingScope": "Tenant"
+        }
+      }
+    }
+  },
+  "operationId": "Subnets_Get",
+  "title": "Get subnet with sharing scope"
+}

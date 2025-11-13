@@ -1,0 +1,112 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "gatewayName": "vpngw",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "vpngw",
+        "type": "Microsoft.Network/vpnGateways",
+        "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/vpngw",
+        "location": "West US",
+        "properties": {
+          "bgpSettings": {
+            "asn": 65514,
+            "bgpPeeringAddress": "10.0.1.30",
+            "bgpPeeringAddresses": [
+              {
+                "customBgpIpAddresses": [
+                  "169.254.21.5"
+                ],
+                "defaultBgpIpAddresses": [
+                  "10.30.0.4"
+                ],
+                "ipconfigurationId": "Instance0",
+                "tunnelIpAddresses": [
+                  "104.208.48.178"
+                ]
+              },
+              {
+                "customBgpIpAddresses": [
+                  "169.254.21.10"
+                ],
+                "defaultBgpIpAddresses": [
+                  "10.30.0.5"
+                ],
+                "ipconfigurationId": "Instance1",
+                "tunnelIpAddresses": [
+                  "104.208.48.179"
+                ]
+              }
+            ],
+            "peerWeight": 0
+          },
+          "connections": [
+            {
+              "name": "vpnConnection1",
+              "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/vpngw/vpnConnections/vpnConnection1",
+              "properties": {
+                "connectionBandwidth": 100,
+                "connectionStatus": "Connected",
+                "egressBytesTransferred": 0,
+                "enableBgp": false,
+                "ingressBytesTransferred": 0,
+                "ipsecPolicies": [],
+                "provisioningState": "Succeeded",
+                "remoteVpnSite": {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnSites/vpnSite1"
+                },
+                "routingConfiguration": {
+                  "associatedRouteTable": {
+                    "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1/hubRouteTables/hubRouteTable1"
+                  },
+                  "propagatedRouteTables": {
+                    "ids": [
+                      {
+                        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1/hubRouteTables/hubRouteTable1"
+                      },
+                      {
+                        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1/hubRouteTables/hubRouteTable2"
+                      },
+                      {
+                        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1/hubRouteTables/hubRouteTable3"
+                      }
+                    ],
+                    "labels": [
+                      "label1",
+                      "label2"
+                    ]
+                  },
+                  "vnetRoutes": {
+                    "staticRoutes": []
+                  }
+                },
+                "routingWeight": 0,
+                "useLocalAzureIpAddress": false
+              }
+            }
+          ],
+          "enableBgpRouteTranslationForNat": false,
+          "isRoutingPreferenceInternet": false,
+          "natRules": [],
+          "provisioningState": "Succeeded",
+          "virtualHub": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1"
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/operationResults/{operationId}?api-version={api-version}"
+      }
+    }
+  },
+  "operationId": "VpnGateways_Reset",
+  "title": "ResetVpnGateway"
+}

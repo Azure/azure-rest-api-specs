@@ -1,0 +1,30 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "applicationGatewayName": "appgw",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "privateLink1",
+            "type": "Microsoft.Network/applicationGateways/privateLinkResources",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/privateLinkResources/privateLink1",
+            "properties": {
+              "groupId": "privateLink1",
+              "requiredMembers": [
+                "privateLink1"
+              ],
+              "requiredZoneNames": []
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ApplicationGatewayPrivateLinkResources_List",
+  "title": "Lists all private link resources on application gateway"
+}

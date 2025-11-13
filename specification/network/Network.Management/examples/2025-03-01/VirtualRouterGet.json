@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid",
+    "virtualRouterName": "virtualRouter"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "virtualRouter",
+        "type": "Microsoft.Network/virtualRouters",
+        "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualRouters/virtualRouter",
+        "location": "West US",
+        "properties": {
+          "hostedGateway": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/vnetGateway"
+          },
+          "peerings": [
+            {
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualRouters/virtualRouter/peerings/peering1"
+            }
+          ],
+          "provisioningState": "Succeeded",
+          "virtualRouterAsn": 10000,
+          "virtualRouterIps": [
+            "192.168.1.1",
+            "192.168.1.2"
+          ]
+        },
+        "tags": {
+          "key1": "value1"
+        }
+      }
+    }
+  },
+  "operationId": "VirtualRouters_Get",
+  "title": "Get VirtualRouter"
+}

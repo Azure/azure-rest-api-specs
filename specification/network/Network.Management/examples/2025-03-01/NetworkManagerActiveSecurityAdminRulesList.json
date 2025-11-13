@@ -1,0 +1,74 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "networkManagerName": "testNetworkManager",
+    "parameters": {
+      "regions": [
+        "westus"
+      ],
+      "skipToken": "fakeSkipTokenCode"
+    },
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "List Active Security Admin Rules",
+  "responses": {
+    "200": {
+      "body": {
+        "skipToken": "FakeSkipTokenCode",
+        "value": [
+          {
+            "commitTime": "2020-07-10T18:03:22.2578238+05:30",
+            "configurationDescription": "SampleDescription",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkManagers/testNetworkManager/securityAdminConfigurations/myTestSecurityConfig/ruleCollections/testRuleCollection/rules/SampleAdminRule",
+            "kind": "Default",
+            "properties": {
+              "description": "Sample Admin Rule",
+              "access": "Deny",
+              "destinationPortRanges": [
+                "22"
+              ],
+              "destinations": [
+                {
+                  "addressPrefix": "*",
+                  "addressPrefixType": "IPPrefix"
+                }
+              ],
+              "direction": "Inbound",
+              "flag": "AllowVnetInbound",
+              "priority": 1,
+              "provisioningState": "Succeeded",
+              "sourcePortRanges": [
+                "0-65535"
+              ],
+              "sources": [
+                {
+                  "addressPrefix": "*",
+                  "addressPrefixType": "IPPrefix"
+                }
+              ],
+              "protocol": "Tcp"
+            },
+            "region": "westus",
+            "ruleCollectionAppliesToGroups": [
+              {
+                "networkGroupId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroup/myResourceGroup/providers/Microsoft.Network/networkManagers/testNetworkManager/networkGroups/group1"
+              }
+            ],
+            "ruleCollectionDescription": "SampleRuleCollectionDescription",
+            "ruleGroups": [
+              {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroup/myResourceGroup/providers/Microsoft.Network/networkManagers/testNetworkManager/networkGroups/group1",
+                "properties": {
+                  "description": "A group for all test Virtual Networks",
+                  "provisioningState": "Succeeded"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ListActiveSecurityAdminRules"
+}

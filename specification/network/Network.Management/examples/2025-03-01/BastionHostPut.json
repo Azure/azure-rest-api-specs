@@ -1,0 +1,117 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "bastionHostName": "bastionhosttenant",
+    "parameters": {
+      "properties": {
+        "ipConfigurations": [
+          {
+            "name": "bastionHostIpConfiguration",
+            "properties": {
+              "publicIPAddress": {
+                "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/pipName"
+              },
+              "subnet": {
+                "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet2/subnets/BastionHostSubnet"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "resourceGroupName": "rg1",
+    "sku": {
+      "name": "Standard"
+    },
+    "subscriptionId": "subid",
+    "zones": []
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "bastionhost",
+        "type": "Microsoft.Network/bastionHosts",
+        "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/bastionHosts/bastionhosttenant'",
+        "location": "West US",
+        "properties": {
+          "disableCopyPaste": false,
+          "dnsName": "bst-9d89d361-100e-4c01-b92d-466548c476dc.bastion.azure.com",
+          "enableIpConnect": false,
+          "enableKerberos": false,
+          "enablePrivateOnlyBastion": false,
+          "enableSessionRecording": false,
+          "enableShareableLink": false,
+          "enableTunneling": false,
+          "ipConfigurations": [
+            {
+              "name": "bastionHostIpConfiguration",
+              "type": "Microsoft.Network/bastionHosts/bastionHostIpConfigurations",
+              "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/bastionHosts/bastionhosttenant/bastionHostIpConfigurations/bastionHostIpConfiguration",
+              "properties": {
+                "privateIPAllocationMethod": "Dynamic",
+                "provisioningState": "Succeeded",
+                "publicIPAddress": {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/pipName"
+                },
+                "subnet": {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet2/subnets/BastionHostSubnet"
+                }
+              }
+            }
+          ],
+          "provisioningState": "Succeeded",
+          "scaleUnits": 2
+        },
+        "sku": {
+          "name": "Standard"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "bastionhosttenant'",
+        "type": "Microsoft.Network/bastionHosts",
+        "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/bastionHosts/bastionhosttenant",
+        "location": "West US",
+        "properties": {
+          "disableCopyPaste": false,
+          "dnsName": "bst-9d89d361-100e-4c01-b92d-466548c476dc.bastion.azure.com",
+          "enableIpConnect": false,
+          "enableKerberos": false,
+          "enablePrivateOnlyBastion": false,
+          "enableSessionRecording": false,
+          "enableShareableLink": false,
+          "enableTunneling": false,
+          "ipConfigurations": [
+            {
+              "name": "bastionHostIpConfiguration",
+              "type": "Microsoft.Network/bastionHosts/bastionHostIpConfigurations",
+              "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/bastionHosts/bastionhosttenant/bastionHostIpConfigurations/bastionHostIpConfiguration",
+              "properties": {
+                "privateIPAllocationMethod": "Dynamic",
+                "provisioningState": "Succeeded",
+                "publicIPAddress": {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/pipName"
+                },
+                "subnet": {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet2/subnets/BastionHostSubnet"
+                }
+              }
+            }
+          ],
+          "provisioningState": "Succeeded",
+          "scaleUnits": 2
+        },
+        "sku": {
+          "name": "Standard"
+        }
+      }
+    }
+  },
+  "operationId": "BastionHosts_CreateOrUpdate",
+  "title": "Create Bastion Host"
+}

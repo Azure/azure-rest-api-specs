@@ -1,0 +1,121 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "firewallPolicyName": "firewallPolicy",
+    "parameters": {
+      "properties": {
+        "priority": 110,
+        "ruleCollections": [
+          {
+            "name": "Example-Filter-Rule-Collection",
+            "action": {
+              "type": "Deny"
+            },
+            "ruleCollectionType": "FirewallPolicyFilterRuleCollection",
+            "rules": [
+              {
+                "name": "network-1",
+                "destinationIpGroups": [
+                  "/subscriptions/subid/providers/Microsoft.Network/resourceGroup/rg1/ipGroups/ipGroups2"
+                ],
+                "destinationPorts": [
+                  "*"
+                ],
+                "ipProtocols": [
+                  "TCP"
+                ],
+                "ruleType": "NetworkRule",
+                "sourceIpGroups": [
+                  "/subscriptions/subid/providers/Microsoft.Network/resourceGroup/rg1/ipGroups/ipGroups1"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "resourceGroupName": "rg1",
+    "ruleCollectionGroupName": "ruleCollectionGroup1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "ruleCollectionGroup1",
+        "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/firewallPolicies/firewallPolicy/ruleCollectionGroups/ruleCollectionGroup1",
+        "properties": {
+          "priority": 110,
+          "provisioningState": "Succeeded",
+          "ruleCollections": [
+            {
+              "name": "Example-Filter-Rule-Collection",
+              "action": {
+                "type": "Deny"
+              },
+              "ruleCollectionType": "FirewallPolicyFilterRuleCollection",
+              "rules": [
+                {
+                  "name": "network-1",
+                  "destinationIpGroups": [
+                    "/subscriptions/subid/providers/Microsoft.Network/resourceGroup/rg1/ipGroups/ipGroups2"
+                  ],
+                  "destinationPorts": [
+                    "*"
+                  ],
+                  "ipProtocols": [
+                    "TCP"
+                  ],
+                  "ruleType": "NetworkRule",
+                  "sourceIpGroups": [
+                    "/subscriptions/subid/providers/Microsoft.Network/resourceGroup/rg1/ipGroups/ipGroups1"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "firewallPolicy",
+        "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/firewallPolicies/firewallPolicy",
+        "properties": {
+          "priority": 110,
+          "provisioningState": "Succeeded",
+          "ruleCollections": [
+            {
+              "name": "Example-Filter-Rule-Collection",
+              "action": {
+                "type": "Deny"
+              },
+              "ruleCollectionType": "FirewallPolicyFilterRuleCollection",
+              "rules": [
+                {
+                  "name": "network-1",
+                  "destinationIpGroups": [
+                    "/subscriptions/subid/providers/Microsoft.Network/resourceGroup/rg1/ipGroups/ipGroups2"
+                  ],
+                  "destinationPorts": [
+                    "*"
+                  ],
+                  "ipProtocols": [
+                    "TCP"
+                  ],
+                  "ruleType": "NetworkRule",
+                  "sourceIpGroups": [
+                    "/subscriptions/subid/providers/Microsoft.Network/resourceGroup/rg1/ipGroups/ipGroups1"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  "operationId": "FirewallPolicyRuleCollectionGroups_CreateOrUpdate",
+  "title": "Create Firewall Policy Rule Collection Group With IP Groups"
+}

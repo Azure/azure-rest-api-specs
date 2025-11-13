@@ -1,0 +1,32 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid",
+    "virtualHubName": "hub1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "conn1",
+            "etag": "W/\"72090554-7e3b-43f2-80ad-99a9020dcb11\"",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/hub1/bgpConnections/conn1",
+            "properties": {
+              "connectionState": "Connected",
+              "hubVirtualNetworkConnection": {
+                "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/hub1/hubVirtualNetworkConnections/hubVnetConn1"
+              },
+              "peerAsn": 20000,
+              "peerIp": "192.168.1.5",
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "VirtualHubBgpConnections_List",
+  "title": "VirtualHubRouteTableV2List"
+}

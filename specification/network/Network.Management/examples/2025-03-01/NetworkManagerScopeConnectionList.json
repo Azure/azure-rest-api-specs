@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "networkManagerName": "testNetworkManager",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "List Network Manager Scope Connection",
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "{baseurl}/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroup/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/scopeConnections?api-version=2021-02-01-preview&$skipToken=10",
+        "value": [
+          {
+            "name": "TestScopeConnection",
+            "type": "Microsoft.Network/networkManagers/scopeConnections",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroup/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/scopeConnections/TestScopeConnection",
+            "properties": {
+              "description": "This is a scope connection to a cross tenant subscription.",
+              "connectionState": "Pending",
+              "resourceId": "subscriptions/00000000-0000-0000-0000-000000000000",
+              "tenantId": "00000000-0000-0000-0000-000000000000"
+            },
+            "systemData": {
+              "createdAt": "2021-01-11T18:52:27Z",
+              "createdBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
+              "createdByType": "User",
+              "lastModifiedAt": "2021-01-11T18:52:27Z",
+              "lastModifiedBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
+              "lastModifiedByType": "User"
+            }
+          }
+        ]
+      },
+      "headers": {
+        "ETag": "be3cfaa2-3d02-4624-92d7-a26766306c8b"
+      }
+    }
+  },
+  "operationId": "ScopeConnections_List"
+}

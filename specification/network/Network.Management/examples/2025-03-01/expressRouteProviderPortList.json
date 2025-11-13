@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "type": "Microsoft.Network/expressRouteProviderPort",
+            "etag": "W/\"c0e6477e-8150-4d4f-9bf6-bb10e6acb63a\"",
+            "id": "/subscriptions/subid/providers/Microsoft.Network/ExpressRoutePortsLocations/SiliconValley/bvtazureixpportpair1",
+            "location": "uswest",
+            "properties": {
+              "overprovisionFactor": 4,
+              "peeringLocation": "SiliconValley",
+              "portBandwidthInMbps": 4000,
+              "portPairDescriptor": "bvtazureixpportpair1",
+              "primaryAzurePort": "bvtazureixp01",
+              "remainingBandwidthInMbps": 1500,
+              "secondaryAzurePort": "bvtazureixp01",
+              "usedBandwidthInMbps": 2500
+            }
+          },
+          {
+            "type": "Microsoft.Network/expressRouteProviderPort",
+            "etag": "W/\"c0e6477e-8150-4d4f-9bf6-bb10e6acb63a\"",
+            "id": "/subscriptions/subid/providers/Microsoft.Network/ExpressRoutePortsLocations/SiliconValley/bvtazureixpportpair2",
+            "location": "uswest",
+            "properties": {
+              "overprovisionFactor": 4,
+              "peeringLocation": "seattle",
+              "portBandwidthInMbps": 4000,
+              "portPairDescriptor": "bvtazureixpportpair2",
+              "primaryAzurePort": "bvtazureixp02",
+              "remainingBandwidthInMbps": 1800,
+              "secondaryAzurePort": "bvtazureixp02",
+              "usedBandwidthInMbps": 1200
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ExpressRouteProviderPortsLocation_List",
+  "title": "ExpressRouteProviderPortList"
+}

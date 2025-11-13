@@ -1,0 +1,64 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "networkWatcherName": "nw1",
+    "parameters": {
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1": {}
+        }
+      },
+      "properties": {
+        "enabled": true,
+        "storageId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Storage/storageAccounts/st1"
+      },
+      "targetResourceId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityGroups/nsg1"
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1": {
+              "clientId": "c16d15e1-f60a-40e4-8a05-df3d3f655c14",
+              "principalId": "e3858881-e40c-43bd-9cde-88da39c05023"
+            }
+          }
+        },
+        "properties": {
+          "enabled": true,
+          "storageId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Storage/storageAccounts/st1"
+        },
+        "targetResourceId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityGroups/nsg1"
+      }
+    },
+    "202": {
+      "body": {
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1": {
+              "clientId": "c16d15e1-f60a-40e4-8a05-df3d3f655c14",
+              "principalId": "e3858881-e40c-43bd-9cde-88da39c05023"
+            }
+          }
+        },
+        "properties": {
+          "enabled": true,
+          "storageId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Storage/storageAccounts/st1"
+        },
+        "targetResourceId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityGroups/nsg1"
+      },
+      "headers": {
+        "Location": "https:/management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkWatchers/nw1/configureFlowLog?api-version=2025-03-01"
+      }
+    }
+  },
+  "operationId": "NetworkWatchers_SetFlowLogConfiguration",
+  "title": "Configure flow log"
+}

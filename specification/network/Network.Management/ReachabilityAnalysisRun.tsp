@@ -1,0 +1,93 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+import "./VerifierWorkspace.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.Network;
+/**
+ * Configuration information for analysis run.
+ */
+@parentResource(VerifierWorkspace)
+model ReachabilityAnalysisRun
+  is Azure.ResourceManager.ProxyResource<
+    ReachabilityAnalysisRunProperties,
+    false
+  > {
+  ...ResourceNameParameter<
+    Resource = ReachabilityAnalysisRun,
+    KeyName = "reachabilityAnalysisRunName",
+    SegmentName = "reachabilityAnalysisRuns",
+    NamePattern = "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+  >;
+}
+
+@armResourceOperations
+interface ReachabilityAnalysisRuns {
+  /**
+   * Gets Reachability Analysis Run.
+   */
+  get is ArmResourceRead<ReachabilityAnalysisRun>;
+
+  /**
+   * Creates Reachability Analysis Runs.
+   */
+  create is ArmResourceCreateOrReplaceSync<ReachabilityAnalysisRun>;
+
+  /**
+   * Deletes Reachability Analysis Run.
+   */
+  delete is ArmResourceDeleteWithoutOkAsync<ReachabilityAnalysisRun>;
+
+  /**
+   * Gets list of Reachability Analysis Runs.
+   */
+  list is ArmResourceListByParent<
+    ReachabilityAnalysisRun,
+    Parameters = {
+      /**
+       * Optional skip token.
+       */
+      @query("skipToken")
+      skipToken?: string;
+
+      /**
+       * Optional num entries to skip.
+       */
+      @query("skip")
+      skip?: int32;
+
+      /**
+       * Optional num entries to show.
+       */
+      @query("top")
+      top?: int32 = 50;
+
+      /**
+       * Optional key by which to sort.
+       */
+      @query("sortKey")
+      sortKey?: string;
+
+      /**
+       * Optional sort value for pagination.
+       */
+      @query("sortValue")
+      sortValue?: string;
+    }
+  >;
+}
+
+@@doc(ReachabilityAnalysisRun.name, "Reachability Analysis Run name.");
+@@doc(ReachabilityAnalysisRun.properties,
+  "Represents the Reachability Analysis Run properties."
+);
+@@doc(ReachabilityAnalysisRuns.create::parameters.resource,
+  "Analysis Run resource object to create/update."
+);

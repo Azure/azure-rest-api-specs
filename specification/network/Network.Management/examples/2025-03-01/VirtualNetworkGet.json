@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid",
+    "virtualNetworkName": "test-vnet"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "test-vnet",
+        "type": "Microsoft.Network/virtualNetworks",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet",
+        "location": "westus",
+        "properties": {
+          "addressSpace": {
+            "addressPrefixes": [
+              "10.0.0.0/16"
+            ]
+          },
+          "defaultPublicNatGateway": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/natGateways/test-ngw"
+          },
+          "provisioningState": "Succeeded",
+          "subnets": [
+            {
+              "name": "subnet1",
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/subnet1",
+              "properties": {
+                "addressPrefix": "10.0.1.0/24",
+                "ipConfigurations": [
+                  {
+                    "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/frontendIPConfigurations/fe"
+                  }
+                ],
+                "provisioningState": "Succeeded"
+              }
+            }
+          ],
+          "virtualNetworkPeerings": []
+        }
+      }
+    }
+  },
+  "operationId": "VirtualNetworks_Get",
+  "title": "Get virtual network"
+}

@@ -1,0 +1,203 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "networkWatcherName": "nw1",
+    "parameters": {
+      "profiles": [
+        {
+          "destination": "12.11.12.14",
+          "destinationPort": "12100",
+          "direction": "Inbound",
+          "source": "10.1.0.4",
+          "protocol": "TCP"
+        }
+      ],
+      "targetResourceId": "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Compute/virtualMachines/vm1"
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "results": [
+          {
+            "networkSecurityGroupResult": {
+              "evaluatedNetworkSecurityGroups": [
+                {
+                  "appliedTo": "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Network/virtualNetworks/vnet/subnets/AppSubnet",
+                  "matchedRule": {
+                    "action": "Allow",
+                    "ruleName": "UserRule_fe_rule"
+                  },
+                  "networkSecurityGroupId": "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Network/networkSecurityGroups/nsg1",
+                  "rulesEvaluationResult": [
+                    {
+                      "name": "UserRule_Cleanuptool-Allow-100",
+                      "destinationMatched": true,
+                      "destinationPortMatched": false,
+                      "protocolMatched": true,
+                      "sourceMatched": false,
+                      "sourcePortMatched": true
+                    },
+                    {
+                      "name": "UserRule_Cleanuptool-Allow-101",
+                      "destinationMatched": true,
+                      "destinationPortMatched": false,
+                      "protocolMatched": true,
+                      "sourceMatched": true,
+                      "sourcePortMatched": true
+                    },
+                    {
+                      "name": "UserRule_Cleanuptool-Allow-102",
+                      "destinationMatched": true,
+                      "destinationPortMatched": false,
+                      "protocolMatched": true,
+                      "sourceMatched": false,
+                      "sourcePortMatched": true
+                    },
+                    {
+                      "name": "UserRule_Cleanuptool-Deny-103",
+                      "destinationMatched": true,
+                      "destinationPortMatched": false,
+                      "protocolMatched": true,
+                      "sourceMatched": true,
+                      "sourcePortMatched": true
+                    },
+                    {
+                      "name": "UserRule_fe_rule",
+                      "destinationMatched": true,
+                      "destinationPortMatched": true,
+                      "protocolMatched": true,
+                      "sourceMatched": true,
+                      "sourcePortMatched": true
+                    }
+                  ]
+                },
+                {
+                  "appliedTo": "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Network/virtualNetworks/vnet/networkInterfaces/nic",
+                  "matchedRule": {
+                    "action": "Allow",
+                    "ruleName": "UserRule_fe_rule"
+                  },
+                  "networkSecurityGroupId": "/subscriptions/61cc8a98-a8be-4bfe-a04e-0b461f93fe35/resourceGroups/NwRgCentralUSEUAP_copy/providers/Microsoft.Network/networkSecurityGroups/AppNSG",
+                  "rulesEvaluationResult": [
+                    {
+                      "name": "UserRule_fe_rule",
+                      "destinationMatched": true,
+                      "destinationPortMatched": true,
+                      "protocolMatched": true,
+                      "sourceMatched": true,
+                      "sourcePortMatched": true
+                    }
+                  ]
+                }
+              ],
+              "securityRuleAccessResult": "Allow"
+            },
+            "profile": {
+              "destination": "12.11.12.14",
+              "destinationPort": "12100",
+              "direction": "Inbound",
+              "source": "10.1.0.4",
+              "protocol": "TCP"
+            }
+          }
+        ]
+      }
+    },
+    "202": {
+      "body": {
+        "results": [
+          {
+            "networkSecurityGroupResult": {
+              "evaluatedNetworkSecurityGroups": [
+                {
+                  "appliedTo": "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Network/virtualNetworks/vnet/subnets/AppSubnet",
+                  "matchedRule": {
+                    "action": "Allow",
+                    "ruleName": "UserRule_fe_rule"
+                  },
+                  "networkSecurityGroupId": "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Network/networkSecurityGroups/nsg1",
+                  "rulesEvaluationResult": [
+                    {
+                      "name": "UserRule_Cleanuptool-Allow-100",
+                      "destinationMatched": true,
+                      "destinationPortMatched": false,
+                      "protocolMatched": true,
+                      "sourceMatched": false,
+                      "sourcePortMatched": true
+                    },
+                    {
+                      "name": "UserRule_Cleanuptool-Allow-101",
+                      "destinationMatched": true,
+                      "destinationPortMatched": false,
+                      "protocolMatched": true,
+                      "sourceMatched": true,
+                      "sourcePortMatched": true
+                    },
+                    {
+                      "name": "UserRule_Cleanuptool-Allow-102",
+                      "destinationMatched": true,
+                      "destinationPortMatched": false,
+                      "protocolMatched": true,
+                      "sourceMatched": false,
+                      "sourcePortMatched": true
+                    },
+                    {
+                      "name": "UserRule_Cleanuptool-Deny-103",
+                      "destinationMatched": true,
+                      "destinationPortMatched": false,
+                      "protocolMatched": true,
+                      "sourceMatched": true,
+                      "sourcePortMatched": true
+                    },
+                    {
+                      "name": "UserRule_fe_rule",
+                      "destinationMatched": true,
+                      "destinationPortMatched": true,
+                      "protocolMatched": true,
+                      "sourceMatched": true,
+                      "sourcePortMatched": true
+                    }
+                  ]
+                },
+                {
+                  "appliedTo": "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Network/virtualNetworks/vnet/networkInterfaces/nic",
+                  "matchedRule": {
+                    "action": "Allow",
+                    "ruleName": "UserRule_fe_rule"
+                  },
+                  "networkSecurityGroupId": "/subscriptions/61cc8a98-a8be-4bfe-a04e-0b461f93fe35/resourceGroups/NwRgCentralUSEUAP_copy/providers/Microsoft.Network/networkSecurityGroups/AppNSG",
+                  "rulesEvaluationResult": [
+                    {
+                      "name": "UserRule_fe_rule",
+                      "destinationMatched": true,
+                      "destinationPortMatched": true,
+                      "protocolMatched": true,
+                      "sourceMatched": true,
+                      "sourcePortMatched": true
+                    }
+                  ]
+                }
+              ],
+              "securityRuleAccessResult": "Allow"
+            },
+            "profile": {
+              "destination": "12.11.12.14",
+              "destinationPort": "12100",
+              "direction": "Inbound",
+              "source": "10.1.0.4",
+              "protocol": "TCP"
+            }
+          }
+        ]
+      },
+      "headers": {
+        "Location": "https:/management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkWatchers/nw1/networkConfigurationDiagnostic?api-version=2025-03-01"
+      }
+    }
+  },
+  "operationId": "NetworkWatchers_GetNetworkConfigurationDiagnostic",
+  "title": "Network configuration diagnostic"
+}

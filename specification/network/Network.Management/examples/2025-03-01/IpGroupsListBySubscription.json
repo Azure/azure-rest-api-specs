@@ -1,0 +1,58 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "subscriptionId": "subId"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "iptag1",
+            "type": "Microsoft.Network/ipGroups",
+            "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+            "id": "/subscriptions/subId/providers/Microsoft.Network/resourceGroup/myResourceGroup1/ipGroups",
+            "location": "westcentralus",
+            "properties": {
+              "firewallPolicies": [],
+              "firewalls": [
+                {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/azureFirewalls/azurefirewall"
+                }
+              ],
+              "ipAddresses": [
+                "13.64.39.16/32",
+                "40.74.146.80/31",
+                "40.74.147.32/28"
+              ],
+              "provisioningState": "Succeeded"
+            }
+          },
+          {
+            "name": "iptag2",
+            "type": "Microsoft.Network/ipGroups",
+            "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+            "id": "/subscriptions/subId/providers/Microsoft.Network/resourceGroup/myResourceGroup2/ipGroups",
+            "location": "centralus",
+            "properties": {
+              "firewallPolicies": [],
+              "firewalls": [
+                {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/azureFirewalls/azurefirewall"
+                }
+              ],
+              "ipAddresses": [
+                "14.64.39.16/32",
+                "41.74.146.80/31",
+                "42.74.147.32/28"
+              ],
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "IpGroups_List",
+  "title": "List_IpGroups"
+}

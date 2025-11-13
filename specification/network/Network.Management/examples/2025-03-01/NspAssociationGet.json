@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "associationName": "association1",
+    "networkSecurityPerimeterName": "nsp1",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subId"
+  },
+  "title": "NspAssociationGet",
+  "responses": {
+    "200": {
+      "body": {
+        "name": "association1",
+        "type": "Microsoft.Network/networkSecurityPerimeters/resourceAssociations",
+        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp1/resourceAssociations/association1",
+        "properties": {
+          "accessMode": "Enforced",
+          "hasProvisioningIssues": "no",
+          "privateLinkResource": {
+            "id": "/subscriptions/{paasSubscriptionId}/resourceGroups/{paasResourceGroupName}/providers/{providerName}/{resourceType}/{resourceName}"
+          },
+          "profile": {
+            "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp1/profiles/{profileName}"
+          },
+          "provisioningState": "Succeeded"
+        },
+        "systemData": {
+          "createdAt": "2024-02-07T18:07:36.3446713Z",
+          "createdBy": "user",
+          "createdByType": "User",
+          "lastModifiedAt": "2024-02-07T18:07:36.3446713Z",
+          "lastModifiedBy": "user",
+          "lastModifiedByType": "User"
+        }
+      }
+    }
+  },
+  "operationId": "NetworkSecurityPerimeterAssociations_Get"
+}

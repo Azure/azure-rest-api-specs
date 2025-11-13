@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "cloudServiceName": "cs1",
+    "resourceGroupName": "cs-tester",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "pub1",
+            "id": "/subscriptions/subid/resourceGroups/cs-tester/providers/Microsoft.Compute/cloudServices/cs1/roleInstances/Test_VM_0/networkInterfaces/nic1/ipConfigurations/ip1/publicIPAddresses/pub1",
+            "properties": {
+              "dnsSettings": {
+                "domainNameLabel": "vm1.testvmssacc",
+                "fqdn": "vm1.testvmssacc.southeastasia.cloudapp.azure.com"
+              },
+              "idleTimeoutInMinutes": 10,
+              "ipAddress": "13.67.119.72",
+              "ipConfiguration": {
+                "id": "/subscriptions/subid/resourceGroups/cs-tester/providers/Microsoft.Compute/cloudServices/cs1/roleInstances/Test_VM_0/networkInterfaces/nic1/ipConfigurations/ip1"
+              },
+              "provisioningState": "Succeeded",
+              "publicIPAddressVersion": "IPv4",
+              "publicIPAllocationMethod": "Dynamic"
+            }
+          },
+          {
+            "name": "pub1",
+            "id": "/subscriptions/subid/resourceGroups/cs-tester/providers/Microsoft.Compute/cloudServices/cs1/roleInstances/Test_VM_3/networkInterfaces/nic1/ipConfigurations/ip1/publicIPAddresses/pub1",
+            "properties": {
+              "dnsSettings": {
+                "domainNameLabel": "vm3.testvmssacc",
+                "fqdn": "vm3.testvmssacc.southeastasia.cloudapp.azure.com"
+              },
+              "idleTimeoutInMinutes": 10,
+              "ipAddress": "13.67.118.216",
+              "ipConfiguration": {
+                "id": "/subscriptions/subid/resourceGroups/cs-tester/providers/Microsoft.Compute/cloudServices/cs1/roleInstances/Test_VM_3/networkInterfaces/nic1/ipConfigurations/ip1"
+              },
+              "provisioningState": "Succeeded",
+              "publicIPAddressVersion": "IPv4",
+              "publicIPAllocationMethod": "Dynamic"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "PublicIPAddresses_ListCloudServicePublicIPAddresses",
+  "title": "ListVMSSPublicIP"
+}

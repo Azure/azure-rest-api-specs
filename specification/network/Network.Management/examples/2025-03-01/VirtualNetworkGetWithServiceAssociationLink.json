@@ -1,0 +1,71 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subId",
+    "virtualNetworkName": "test-vnet"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "test-vnet",
+        "type": "Microsoft.Network/virtualNetworks",
+        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet",
+        "location": "westus",
+        "properties": {
+          "addressSpace": {
+            "addressPrefixes": [
+              "10.0.0.0/16"
+            ]
+          },
+          "provisioningState": "Succeeded",
+          "subnets": [
+            {
+              "name": "subnet1",
+              "etag": "W/\"4d3e91b4-f67f-48be-880b-e4a8abdd019e\"",
+              "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/subnet1",
+              "properties": {
+                "addressPrefix": "10.0.214.0/24",
+                "delegations": [
+                  {
+                    "name": "aciDelegation",
+                    "etag": "W/\"4d3e91b4-f67f-48be-880b-e4a8abdd019e\"",
+                    "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/subnet1/delegations/aciDelegation",
+                    "properties": {
+                      "actions": [
+                        "Microsoft.Network/virtualNetworks/subnets/action"
+                      ],
+                      "provisioningState": "Succeeded",
+                      "serviceName": "Microsoft.Provider/resourceType"
+                    }
+                  }
+                ],
+                "ipConfigurationProfiles": [
+                  {
+                    "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkProfiles/networkProfile1/containerNetworkInterfaceConfigurations/eth0/ipConfigurations/ipconfigprofile1"
+                  }
+                ],
+                "provisioningState": "Succeeded",
+                "serviceAssociationLinks": [
+                  {
+                    "name": "serviceAssociationLink1",
+                    "etag": "W/\"4d3e91b4-f67f-48be-880b-e4a8abdd019e\"",
+                    "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/subnet1/serviceAssociationLinks/serviceAssociationLink1",
+                    "properties": {
+                      "linkedResourceType": "Microsoft.Provider/resourceType",
+                      "provisioningState": "Succeeded"
+                    }
+                  }
+                ],
+                "serviceEndpoints": []
+              }
+            }
+          ],
+          "virtualNetworkPeerings": []
+        }
+      }
+    }
+  },
+  "operationId": "VirtualNetworks_Get",
+  "title": "Get virtual network with service association links"
+}

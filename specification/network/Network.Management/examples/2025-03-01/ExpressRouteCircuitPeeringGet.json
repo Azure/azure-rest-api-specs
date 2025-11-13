@@ -1,0 +1,63 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "circuitName": "circuitName",
+    "peeringName": "MicrosoftPeering",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "MicrosoftPeering",
+        "type": "Microsoft.Network/expressRouteCircuits/peerings",
+        "etag": "W/\"b2a25b98-2e6d-4d46-87f2-089de5f6fdf9\"",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRouteCircuits/circuitName/peerings/MicrosoftPeering",
+        "properties": {
+          "azureASN": 12076,
+          "gatewayManagerEtag": "103",
+          "ipv6PeeringConfig": {
+            "microsoftPeeringConfig": {
+              "advertisedCommunities": [],
+              "advertisedPublicPrefixes": [
+                "3FFE:FFFF:0:CD31::/120"
+              ],
+              "advertisedPublicPrefixesState": "ValidationNeeded",
+              "customerASN": 23,
+              "legacyMode": 0,
+              "routingRegistryName": "ARIN"
+            },
+            "primaryPeerAddressPrefix": "3FFE:FFFF:0:CD30::/126",
+            "secondaryPeerAddressPrefix": "3FFE:FFFF:0:CD30::4/126",
+            "state": "Enabled"
+          },
+          "lastModifiedBy": "Customer",
+          "microsoftPeeringConfig": {
+            "advertisedCommunities": [],
+            "advertisedPublicPrefixes": [
+              "123.1.0.0/24"
+            ],
+            "advertisedPublicPrefixesState": "ValidationNeeded",
+            "customerASN": 23,
+            "legacyMode": 0,
+            "routingRegistryName": "ARIN"
+          },
+          "peerASN": 100,
+          "peeringType": "MicrosoftPeering",
+          "primaryAzurePort": "A51-TEST-06GMR-CIS-1-PRI-A",
+          "primaryPeerAddressPrefix": "123.0.0.0/30",
+          "provisioningState": "Succeeded",
+          "routeFilter": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/routeFilters/filterName"
+          },
+          "secondaryAzurePort": "A51-TEST-06GMR-CIS-2-SEC-A",
+          "secondaryPeerAddressPrefix": "123.0.0.4/30",
+          "state": "Enabled",
+          "vlanId": 300
+        }
+      }
+    }
+  },
+  "operationId": "ExpressRouteCircuitPeerings_Get",
+  "title": "Get ExpressRouteCircuit Peering"
+}

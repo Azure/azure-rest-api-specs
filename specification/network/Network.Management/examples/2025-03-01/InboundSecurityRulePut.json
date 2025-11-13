@@ -1,0 +1,82 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "networkVirtualApplianceName": "nva",
+    "parameters": {
+      "properties": {
+        "ruleType": "Permanent",
+        "rules": [
+          {
+            "name": "inboundRule1",
+            "appliesOn": [
+              "slbip1"
+            ],
+            "destinationPortRange": 22,
+            "destinationPortRanges": [
+              "80-100"
+            ],
+            "sourceAddressPrefix": "50.20.121.5/32",
+            "protocol": "TCP"
+          }
+        ]
+      }
+    },
+    "resourceGroupName": "rg1",
+    "ruleCollectionName": "rule1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "rule1",
+        "etag": "W/\"72090554-7e3b-43f2-80ad-99a9020dcb11\"",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkVirtualAppliances/nva/InboundSecurityRules/rule1",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "ruleType": "Permanent",
+          "rules": [
+            {
+              "name": "inboundRule1",
+              "appliesOn": [
+                "slbip1"
+              ],
+              "destinationPortRange": 22,
+              "destinationPortRanges": [
+                "80-100"
+              ],
+              "sourceAddressPrefix": "50.20.121.5/32",
+              "protocol": "TCP"
+            }
+          ]
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "rule1",
+        "etag": "W/\"72090554-7e3b-43f2-80ad-99a9020dcb11\"",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkVirtualAppliances/nva/InboundSecurityRules/rule1",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "ruleType": "Permanent",
+          "rules": [
+            {
+              "name": "inboundRule1",
+              "appliesOn": [
+                "slbip1"
+              ],
+              "destinationPortRange": 22,
+              "destinationPortRanges": [
+                "80-100"
+              ],
+              "sourceAddressPrefix": "50.20.121.5/32",
+              "protocol": "TCP"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "operationId": "InboundSecurityRule_CreateOrUpdate",
+  "title": "Create Network Virtual Appliance Inbound Security Rules"
+}

@@ -1,0 +1,64 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "parameters": {
+      "location": "centraluseuap",
+      "properties": {
+        "destinationNetworkInterfaceIPConfiguration": {
+          "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkInterfaces/testNetworkInterface/ipConfigurations/ipconfig1"
+        }
+      }
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid",
+    "tapName": "test-vtap"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testvtap",
+        "type": "Microsoft.Network/virtualNetworkTaps",
+        "etag": "etag",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkTaps/testvtap",
+        "location": "centraluseuap",
+        "properties": {
+          "destinationNetworkInterfaceIPConfiguration": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkInterfaces/testNetworkInterface/ipConfigurations/testIPConfig1"
+          },
+          "destinationPort": 4789,
+          "networkInterfaceTapConfigurations": [
+            {
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkInterfaces/testNetworkInterface2/tapConfigurations/testtapConfiguration"
+            }
+          ],
+          "provisioningState": "Succeded",
+          "resourceGuid": "6A7C139D-8B8D-499B-B7CB-4F3F02A8A44F"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "testvtap",
+        "type": "Microsoft.Network/virtualNetworkTaps",
+        "etag": "etag",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkTaps/testvtap",
+        "location": "centraluseuap",
+        "properties": {
+          "destinationNetworkInterfaceIPConfiguration": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkInterfaces/testNetworkInterface/ipConfigurations/testIPConfig1"
+          },
+          "destinationPort": 4789,
+          "networkInterfaceTapConfigurations": [
+            {
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkInterfaces/testNetworkInterface2/tapConfigurations/testtapConfiguration"
+            }
+          ],
+          "provisioningState": "Succeded",
+          "resourceGuid": "6A7C139D-8B8D-499B-B7CB-4F3F02A8A44F"
+        }
+      }
+    }
+  },
+  "operationId": "VirtualNetworkTaps_CreateOrUpdate",
+  "title": "Create Virtual Network Tap"
+}

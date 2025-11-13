@@ -1,0 +1,53 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "firewallPolicyName": "firewallPolicy",
+    "resourceGroupName": "rg1",
+    "ruleCollectionGroupName": "ruleCollectionGroup1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "ruleCollectionGroup1",
+        "etag": "W/\"72090554-7e3b-43f2-80ad-99a9020dcb11\"",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/firewallPolicies/firewallPolicy/ruleCollectionGroups/ruleCollectionGroup1",
+        "properties": {
+          "priority": 110,
+          "provisioningState": "Succeeded",
+          "ruleCollections": [
+            {
+              "name": "Example-Filter-Rule-Collection",
+              "action": {
+                "type": "Deny"
+              },
+              "priority": 200,
+              "ruleCollectionType": "FirewallPolicyFilterRuleCollection",
+              "rules": [
+                {
+                  "name": "network-rule1",
+                  "destinationAddresses": [
+                    "*"
+                  ],
+                  "destinationPorts": [
+                    "*"
+                  ],
+                  "ipProtocols": [
+                    "TCP"
+                  ],
+                  "ruleType": "NetworkRule",
+                  "sourceAddresses": [
+                    "10.1.25.0/24"
+                  ]
+                }
+              ]
+            }
+          ],
+          "size": "1.2MB"
+        }
+      }
+    }
+  },
+  "operationId": "FirewallPolicyRuleCollectionGroups_Get",
+  "title": "Get FirewallPolicyRuleCollectionGroup"
+}

@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "networkManagerName": "TestNetworkManager",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "11111111-1111-1111-1111-111111111111"
+  },
+  "title": "IpamPools_List",
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "{baseurl}/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroup/rg1/providers/Microsoft.Network/networkManagers/TestNetworkManager/ipamPools?api-version=2025-03-01&$skipToken=10",
+        "value": [
+          {
+            "name": "TestPool",
+            "type": "Microsoft.Network/networkManagers/ipamPools",
+            "etag": "\"00000000-0000-0000-0000-000000000000\"",
+            "id": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/TestNetworkManager/ipamPools/TestPool",
+            "location": "eastus",
+            "properties": {
+              "description": "Test description.",
+              "addressPrefixes": [
+                "10.0.0.0/24"
+              ],
+              "ipAddressType": [
+                "IPv4"
+              ],
+              "parentPoolName": "",
+              "provisioningState": "Succeeded"
+            },
+            "systemData": {
+              "createdAt": "2021-01-11T18:52:27Z",
+              "createdBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
+              "createdByType": "User",
+              "lastModifiedAt": "2021-01-11T18:52:27Z",
+              "lastModifiedBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
+              "lastModifiedByType": "User"
+            },
+            "tags": {}
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "IpamPools_List"
+}

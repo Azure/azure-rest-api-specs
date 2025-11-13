@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "ipConfigurationName": "ipconfig1",
+    "networkInterfaceName": "mynic",
+    "resourceGroupName": "testrg",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "ipconfig1",
+        "etag": "W/\\\"00000000-0000-0000-0000-000000000000\\\"",
+        "id": "/subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/networkInterfaces/mynic/ipConfigurations/ipconfig1",
+        "properties": {
+          "loadBalancerBackendAddressPools": [
+            {
+              "id": "/subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/loadBalancers/lbname1/backendAddressPools/bepool1"
+            }
+          ],
+          "loadBalancerInboundNatRules": [
+            {
+              "id": "/subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/loadBalancers/lbname1/inboundNatRules/inbound1"
+            }
+          ],
+          "privateIPAddress": "10.0.1.4",
+          "privateIPAddressVersion": "IPv4",
+          "privateIPAllocationMethod": "Dynamic",
+          "provisioningState": "Succeeded",
+          "subnet": {
+            "id": "/subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/myVirtualNetwork/subnets/frontendSubnet"
+          },
+          "virtualNetworkTaps": [
+            {
+              "id": "/subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworkTaps/vTAP1"
+            },
+            {
+              "id": "/subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworkTaps/vTAP2"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "operationId": "NetworkInterfaceIPConfigurations_Get",
+  "title": "NetworkInterfaceIPConfigurationGet"
+}

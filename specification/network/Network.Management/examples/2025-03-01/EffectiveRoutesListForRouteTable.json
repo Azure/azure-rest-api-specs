@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "effectiveRoutesParameters": {
+      "resourceId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1/hubRouteTables/hubRouteTable1",
+      "virtualWanResourceType": "RouteTable"
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid",
+    "virtualHubName": "virtualHub1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "addressPrefixes": [
+              "10.147.128.0/17"
+            ],
+            "asPath": "65520-65520",
+            "nextHopType": "Remote Hub",
+            "nextHops": [
+              "/subscriptions/testSub/resourceGroups/testRg/providers/Microsoft.Network/virtualHubs/hub0"
+            ],
+            "routeOrigin": "/subscriptions/testSub/resourceGroups/testRg/providers/Microsoft.Network/virtualHubs/hub0"
+          },
+          {
+            "addressPrefixes": [
+              "10.0.0.0/16"
+            ],
+            "asPath": "12076-12076",
+            "nextHopType": "ExpressRouteGateway",
+            "nextHops": [
+              "/subscriptions/testSub/resourceGroups/testRg/providers/Microsoft.Network/expressRouteGateways/ErGw1"
+            ],
+            "routeOrigin": "/subscriptions/testSub/resourceGroups/testRg/providers/Microsoft.Network/expressRouteGateways/ErGw1"
+          }
+        ]
+      }
+    },
+    "202": {
+      "description": "Accepted and the operation will complete asynchronously.",
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/operationResults/{operationId}?api-version={api-version}"
+      }
+    }
+  },
+  "operationId": "VirtualHubs_GetEffectiveVirtualHubRoutes",
+  "title": "Effective Routes for a Route Table resource"
+}

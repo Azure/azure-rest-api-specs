@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "publicIpAddressName": "testDNS-ip",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testDNS-ip",
+        "type": "Microsoft.Network/publicIPAddresses",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/testDNS-ip",
+        "location": "westus",
+        "properties": {
+          "ddosSettings": {
+            "ddosProtectionPlan": {
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/ddosProtectionPlans/test-plan"
+            },
+            "protectionMode": "Enabled"
+          },
+          "idleTimeoutInMinutes": 4,
+          "ipConfiguration": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkInterfaces/testDNS649/ipConfigurations/ipconfig1"
+          },
+          "ipTags": [
+            {
+              "ipTagType": "FirstPartyUsage",
+              "tag": "SQL"
+            },
+            {
+              "ipTagType": "FirstPartyUsage",
+              "tag": "Storage"
+            }
+          ],
+          "provisioningState": "Succeeded",
+          "publicIPAddressVersion": "IPv4",
+          "publicIPAllocationMethod": "Dynamic"
+        }
+      }
+    }
+  },
+  "operationId": "PublicIPAddresses_Get",
+  "title": "Get public IP address"
+}

@@ -1,0 +1,96 @@
+{
+  "parameters": {
+    "NatRuleParameters": {
+      "properties": {
+        "type": "Static",
+        "externalMappings": [
+          {
+            "addressSpace": "192.168.21.0/24"
+          }
+        ],
+        "internalMappings": [
+          {
+            "addressSpace": "10.4.0.0/24"
+          }
+        ],
+        "ipConfigurationId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/cloudnet1-VNG/ipConfigurations/default",
+        "mode": "EgressSnat"
+      }
+    },
+    "api-version": "2025-03-01",
+    "gatewayName": "gateway1",
+    "natRuleName": "natRule1",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "natRule1",
+        "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1/natRules/natRule1",
+        "properties": {
+          "type": "Static",
+          "egressVpnSiteLinkConnections": [
+            {
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1/vpnConnections/vpnConnection1/vpnLinkConnections/vpnLinkConnection1"
+            }
+          ],
+          "externalMappings": [
+            {
+              "addressSpace": "192.168.21.0/24"
+            }
+          ],
+          "ingressVpnSiteLinkConnections": [
+            {
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1/vpnConnections/vpnConnection1/vpnLinkConnections/vpnLinkConnection2"
+            }
+          ],
+          "internalMappings": [
+            {
+              "addressSpace": "10.4.0.0/24"
+            }
+          ],
+          "ipConfigurationId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/cloudnet1-VNG/ipConfigurations/default",
+          "mode": "EgressSnat",
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "natRule1",
+        "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1/natRules/natRule1",
+        "properties": {
+          "type": "Static",
+          "egressVpnSiteLinkConnections": [
+            {
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1/vpnConnections/vpnConnection1/vpnLinkConnections/vpnLinkConnection1"
+            }
+          ],
+          "externalMappings": [
+            {
+              "addressSpace": "192.168.21.0/24"
+            }
+          ],
+          "ingressVpnSiteLinkConnections": [
+            {
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1/vpnConnections/vpnConnection1/vpnLinkConnections/vpnLinkConnection2"
+            }
+          ],
+          "internalMappings": [
+            {
+              "addressSpace": "10.4.0.0/24"
+            }
+          ],
+          "ipConfigurationId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/cloudnet1-VNG/ipConfigurations/default",
+          "mode": "EgressSnat",
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  },
+  "operationId": "NatRules_CreateOrUpdate",
+  "title": "NatRulePut"
+}

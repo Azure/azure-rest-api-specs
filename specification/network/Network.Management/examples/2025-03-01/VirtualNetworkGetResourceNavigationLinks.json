@@ -1,0 +1,30 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "resourceGroupName": "rg1",
+    "subnetName": "subnet",
+    "subscriptionId": "subid",
+    "virtualNetworkName": "vnet"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "redisCache_redis-tester",
+            "type": "Microsoft.Network/virtualNetworks/subnets/resourceNavigationLinks",
+            "etag": "W/\"00000000-0000-0000-0000-000000000000\"",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet/subnets/subnet/resourceNavigationLinks/redisCache_redis-tester",
+            "properties": {
+              "link": "/subscriptions/subid/resourceGroups/another-rg/providers/Microsoft.Cache/Redis/redis-tester",
+              "linkedResourceType": "Microsoft.Cache/redis",
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ResourceNavigationLinks_List",
+  "title": "Get Resource Navigation Links"
+}

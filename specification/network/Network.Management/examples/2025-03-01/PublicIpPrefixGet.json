@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "publicIpPrefixName": "test-ipprefix",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "test-ipprefix",
+        "type": "Microsoft.Network/publicIPPrefixes",
+        "etag": "W/\"00000000-0000-0000-0000-00000000\"",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPPrefixes/test-ipprefix",
+        "location": "westus",
+        "properties": {
+          "ipPrefix": "192.168.254.2/30",
+          "ipTags": [],
+          "prefixLength": 30,
+          "provisioningState": "Succeeded",
+          "publicIPAddressVersion": "IPv4",
+          "publicIPAddresses": [
+            {
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/PublicIpAddress1"
+            }
+          ],
+          "resourceGuid": "00000000-0000-0000-0000-00000000"
+        },
+        "sku": {
+          "name": "Standard"
+        }
+      }
+    }
+  },
+  "operationId": "PublicIPPrefixes_Get",
+  "title": "Get public IP prefix"
+}

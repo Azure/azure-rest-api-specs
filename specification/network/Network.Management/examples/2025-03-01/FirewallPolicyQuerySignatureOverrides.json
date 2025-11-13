@@ -1,0 +1,70 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "firewallPolicyName": "firewallPolicy",
+    "parameters": {
+      "filters": [
+        {
+          "field": "Mode",
+          "values": [
+            "Deny"
+          ]
+        }
+      ],
+      "orderBy": {
+        "field": "severity",
+        "order": "Ascending"
+      },
+      "resultsPerPage": 20,
+      "search": "",
+      "skip": 0
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "e747cc13-97d4-4a79-b463-42d7f4e558f2"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "matchingRecordsCount": 2,
+        "signatures": [
+          {
+            "description": "P2P Phatbot Control Connection",
+            "destinationPorts": [
+              "any"
+            ],
+            "direction": 2,
+            "group": "A Network Trojan was detected",
+            "inheritedFromParentPolicy": false,
+            "lastUpdated": "2010-07-30T00:00:00",
+            "mode": 2,
+            "severity": 1,
+            "signatureId": 2000015,
+            "sourcePorts": [
+              "any"
+            ],
+            "protocol": "tcp"
+          },
+          {
+            "description": "WEB_SERVER SQL sp_delete_alert attempt",
+            "destinationPorts": [
+              "any"
+            ],
+            "direction": 1,
+            "group": "Attempted User Privilege Gain",
+            "inheritedFromParentPolicy": false,
+            "lastUpdated": "2019-09-27T00:00:00",
+            "mode": 2,
+            "severity": 1,
+            "signatureId": 2000106,
+            "sourcePorts": [
+              "any"
+            ],
+            "protocol": "http"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "FirewallPolicyIdpsSignatures_List",
+  "title": "query signature overrides"
+}

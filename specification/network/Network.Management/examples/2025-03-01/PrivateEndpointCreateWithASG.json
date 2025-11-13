@@ -1,0 +1,149 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "extendedLocation": {
+      "name": "edgeZone0",
+      "type": "EdgeZone"
+    },
+    "parameters": {
+      "location": "eastus2euap",
+      "properties": {
+        "applicationSecurityGroups": [
+          {
+            "id": "/subscriptions/subId/resourceGroups/rg1/provders/Microsoft.Network/applicationSecurityGroup/asg1"
+          }
+        ],
+        "privateLinkServiceConnections": [
+          {
+            "properties": {
+              "groupIds": [
+                "groupIdFromResource"
+              ],
+              "privateLinkServiceId": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateLinkServices/testPls",
+              "requestMessage": "Please approve my connection."
+            }
+          }
+        ],
+        "subnet": {
+          "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubnet"
+        }
+      }
+    },
+    "privateEndpointName": "testPe",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subId"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testPe",
+        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateEndpoints/testPe",
+        "location": "eastus2euap",
+        "properties": {
+          "applicationSecurityGroups": [
+            {
+              "id": "/subscriptions/subId/resourceGroups/rg1/provders/Microsoft.Network/applicationSecurityGroup/asg1"
+            }
+          ],
+          "customDnsConfigs": [
+            {
+              "fqdn": "abc.cosmos.com",
+              "ipAddresses": [
+                "192.168.0.4"
+              ]
+            },
+            {
+              "fqdn": "abc2.cosmos.com",
+              "ipAddresses": [
+                "192.168.0.5"
+              ]
+            }
+          ],
+          "manualPrivateLinkServiceConnections": [],
+          "networkInterfaces": [
+            {
+              "id": "/subscriptions/subId/resourceGroups/rg1/provders/Microsoft.Network/networkInterfaces/testPe.nic.abcd1234"
+            }
+          ],
+          "privateLinkServiceConnections": [
+            {
+              "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateEndpoints/testPe/privateLinkServiceConnections/plsconnection1",
+              "properties": {
+                "groupIds": [
+                  "groupIdFromResource"
+                ],
+                "privateLinkServiceConnectionState": {
+                  "description": "Auto-approved",
+                  "actionsRequired": "None",
+                  "status": "Approved"
+                },
+                "privateLinkServiceId": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateLinkServices/testPls",
+                "requestMessage": "Please approve my connection."
+              }
+            }
+          ],
+          "provisioningState": "Succeeded",
+          "subnet": {
+            "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubnet"
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "testPe",
+        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateEndpoints/testPe",
+        "location": "eastus2euap",
+        "properties": {
+          "applicationSecurityGroups": [
+            {
+              "id": "/subscriptions/subId/resourceGroups/rg1/provders/Microsoft.Network/applicationSecurityGroup/asg1"
+            }
+          ],
+          "customDnsConfigs": [
+            {
+              "fqdn": "abc.cosmos.com",
+              "ipAddresses": [
+                "192.168.0.4"
+              ]
+            },
+            {
+              "fqdn": "abc2.cosmos.com",
+              "ipAddresses": [
+                "192.168.0.5"
+              ]
+            }
+          ],
+          "networkInterfaces": [
+            {
+              "id": "/subscriptions/subId/resourceGroups/rg1/provders/Microsoft.Network/networkInterfaces/testPe.nic.abcd1234"
+            }
+          ],
+          "privateLinkServiceConnections": [
+            {
+              "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateEndpoints/testPe/privateLinkServiceConnections/plsconnection1",
+              "properties": {
+                "groupIds": [
+                  "groupIdFromResource"
+                ],
+                "privateLinkServiceConnectionState": {
+                  "description": "Auto-approved",
+                  "actionsRequired": "None",
+                  "status": "Approved"
+                },
+                "privateLinkServiceId": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateLinkServices/testPls",
+                "requestMessage": "Please approve my connection."
+              }
+            }
+          ],
+          "provisioningState": "Succeeded",
+          "subnet": {
+            "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubnet"
+          }
+        }
+      }
+    }
+  },
+  "operationId": "PrivateEndpoints_CreateOrUpdate",
+  "title": "Create private endpoint with application security groups"
+}

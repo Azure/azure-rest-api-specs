@@ -1,0 +1,345 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.Network;
+/**
+ * Network watcher in a resource group.
+ */
+model NetworkWatcher
+  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<NetworkWatcherPropertiesFormat> {
+  ...ResourceNameParameter<
+    Resource = NetworkWatcher,
+    KeyName = "networkWatcherName",
+    SegmentName = "networkWatchers",
+    NamePattern = ""
+  >;
+  ...Azure.ResourceManager.Legacy.EntityTagProperty;
+}
+
+@armResourceOperations
+interface NetworkWatchers {
+  /**
+   * Gets the specified network watcher by resource group.
+   */
+  get is ArmResourceRead<NetworkWatcher>;
+
+  /**
+   * Creates or updates a network watcher in the specified resource group.
+   */
+  createOrUpdate is ArmResourceCreateOrReplaceSync<NetworkWatcher>;
+
+  /**
+   * Updates a network watcher tags.
+   */
+  @patch(#{ implicitOptionality: false })
+  updateTags is ArmCustomPatchSync<NetworkWatcher, PatchModel = TagsObject>;
+
+  /**
+   * Deletes the specified network watcher resource.
+   */
+  delete is ArmResourceDeleteWithoutOkAsync<NetworkWatcher>;
+
+  /**
+   * Gets all network watchers by resource group.
+   */
+  list is ArmResourceListByParent<
+    NetworkWatcher,
+    Response = ArmResponse<NetworkWatcherListResult>
+  >;
+
+  /**
+   * Gets all network watchers by subscription.
+   */
+  listAll is ArmListBySubscription<
+    NetworkWatcher,
+    Response = ArmResponse<NetworkWatcherListResult>
+  >;
+
+  /**
+   * Gets the current network topology by resource group.
+   */
+  @action("topology")
+  getTopology is ArmResourceActionSync<
+    NetworkWatcher,
+    TopologyParameters,
+    ArmResponse<Topology>
+  >;
+
+  /**
+   * Verify IP flow from the specified VM to a location given the currently configured NSG rules.
+   */
+  @action("ipFlowVerify")
+  verifyIPFlow is ArmResourceActionAsync<
+    NetworkWatcher,
+    VerificationIPFlowParameters,
+    ArmResponse<VerificationIPFlowResult>
+  >;
+
+  /**
+   * Gets the next hop from the specified VM.
+   */
+  @action("nextHop")
+  getNextHop is ArmResourceActionAsync<
+    NetworkWatcher,
+    NextHopParameters,
+    ArmResponse<NextHopResult>
+  >;
+
+  /**
+   * Gets the configured and effective security group rules on the specified VM.
+   */
+  @action("securityGroupView")
+  getVMSecurityRules is ArmResourceActionAsync<
+    NetworkWatcher,
+    SecurityGroupViewParameters,
+    ArmResponse<SecurityGroupViewResult>
+  >;
+
+  /**
+   * Initiate troubleshooting on a specified resource.
+   */
+  @action("troubleshoot")
+  getTroubleshooting is ArmResourceActionAsync<
+    NetworkWatcher,
+    TroubleshootingParameters,
+    ArmResponse<TroubleshootingResult>
+  >;
+
+  /**
+   * Get the last completed troubleshooting result on a specified resource.
+   */
+  @action("queryTroubleshootResult")
+  getTroubleshootingResult is ArmResourceActionAsync<
+    NetworkWatcher,
+    QueryTroubleshootingParameters,
+    ArmResponse<TroubleshootingResult>
+  >;
+
+  /**
+   * Configures flow log and traffic analytics (optional) on a specified resource.
+   */
+  @action("configureFlowLog")
+  setFlowLogConfiguration is ArmResourceActionAsync<
+    NetworkWatcher,
+    FlowLogInformation,
+    ArmResponse<FlowLogInformation>
+  >;
+
+  /**
+   * Queries status of flow log and traffic analytics (optional) on a specified resource.
+   */
+  @action("queryFlowLogStatus")
+  getFlowLogStatus is ArmResourceActionAsync<
+    NetworkWatcher,
+    FlowLogStatusParameters,
+    ArmResponse<FlowLogInformation>
+  >;
+
+  /**
+   * Verifies the possibility of establishing a direct TCP connection from a virtual machine to a given endpoint including another VM or an arbitrary remote server.
+   */
+  @action("connectivityCheck")
+  checkConnectivity is ArmResourceActionAsync<
+    NetworkWatcher,
+    ConnectivityParameters,
+    ArmResponse<ConnectivityInformation>
+  >;
+
+  /**
+   * NOTE: This feature is currently in preview and still being tested for stability. Gets the relative latency score for internet service providers from a specified location to Azure regions.
+   */
+  @action("azureReachabilityReport")
+  getAzureReachabilityReport is ArmResourceActionAsync<
+    NetworkWatcher,
+    AzureReachabilityReportParameters,
+    ArmResponse<AzureReachabilityReport>
+  >;
+
+  /**
+   * NOTE: This feature is currently in preview and still being tested for stability. Lists all available internet service providers for a specified Azure region.
+   */
+  @action("availableProvidersList")
+  listAvailableProviders is ArmResourceActionAsync<
+    NetworkWatcher,
+    AvailableProvidersListParameters,
+    ArmResponse<AvailableProvidersList>
+  >;
+
+  /**
+   * Gets Network Configuration Diagnostic data to help customers understand and debug network behavior. It provides detailed information on what security rules were applied to a specified traffic flow and the result of evaluating these rules. Customers must provide details of a flow like source, destination, protocol, etc. The API returns whether traffic was allowed or denied, the rules evaluated for the specified flow and the evaluation results.
+   */
+  @action("networkConfigurationDiagnostic")
+  getNetworkConfigurationDiagnostic is ArmResourceActionAsync<
+    NetworkWatcher,
+    NetworkConfigurationDiagnosticParameters,
+    ArmResponse<NetworkConfigurationDiagnosticResponse>
+  >;
+
+  /**
+   * Create and start a packet capture on the specified VM.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("PacketCaptures_Create")
+  @put
+  @action("{packetCaptureName}")
+  create is ArmResourceActionAsyncBase<
+    NetworkWatcher,
+    PacketCapture,
+    ArmResourceCreatedResponse<PacketCaptureResult>,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<NetworkWatcher>,
+    Parameters = {
+      /**
+       * The name of the packet capture session.
+       */
+      @path
+      packetCaptureName: string;
+    }
+  >;
+
+  /**
+   * Gets a packet capture session by name.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("PacketCaptures_Get")
+  @get
+  @action("{packetCaptureName}")
+  packetCapturesGet is ArmResourceActionSync<
+    NetworkWatcher,
+    void,
+    ArmResponse<PacketCaptureResult>,
+    Parameters = {
+      /**
+       * The name of the packet capture session.
+       */
+      @path
+      packetCaptureName: string;
+    }
+  >;
+
+  /**
+   * Deletes the specified packet capture session.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("PacketCaptures_Delete")
+  @delete
+  @action("{packetCaptureName}")
+  packetCapturesDelete is ArmResourceActionAsync<
+    NetworkWatcher,
+    void,
+    NoContentResponse,
+    Parameters = {
+      /**
+       * The name of the packet capture session.
+       */
+      @path
+      packetCaptureName: string;
+    }
+  >;
+
+  /**
+   * Stops a specified packet capture session.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("PacketCaptures_Stop")
+  stop is ArmResourceActionAsync<
+    NetworkWatcher,
+    void,
+    OkResponse,
+    Parameters = {
+      /**
+       * The name of the packet capture session.
+       */
+      @path
+      packetCaptureName: string;
+    }
+  >;
+
+  /**
+   * Query the status of a running packet capture session.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("PacketCaptures_GetStatus")
+  @action("queryStatus")
+  getStatus is ArmResourceActionAsync<
+    NetworkWatcher,
+    void,
+    ArmResponse<PacketCaptureQueryStatusResult>,
+    Parameters = {
+      /**
+       * The name given to the packet capture session.
+       */
+      @path
+      packetCaptureName: string;
+    }
+  >;
+
+  /**
+   * Lists all packet capture sessions within the specified resource group.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("PacketCaptures_List")
+  @list
+  @get
+  @action("packetCaptures")
+  packetCapturesList is ArmResourceActionSync<
+    NetworkWatcher,
+    void,
+    ArmResponse<PacketCaptureListResult>
+  >;
+}
+
+@@doc(NetworkWatcher.name, "The name of the network watcher.");
+@@doc(NetworkWatcher.properties, "Properties of the network watcher.");
+@@doc(NetworkWatchers.createOrUpdate::parameters.resource,
+  "Parameters that define the network watcher resource."
+);
+@@doc(NetworkWatchers.updateTags::parameters.properties,
+  "Parameters supplied to update network watcher tags."
+);
+@@doc(NetworkWatchers.getTopology::parameters.body,
+  "Parameters that define the representation of topology."
+);
+@@doc(NetworkWatchers.verifyIPFlow::parameters.body,
+  "Parameters that define the IP flow to be verified."
+);
+@@doc(NetworkWatchers.getNextHop::parameters.body,
+  "Parameters that define the source and destination endpoint."
+);
+@@doc(NetworkWatchers.getVMSecurityRules::parameters.body,
+  "Parameters that define the VM to check security groups for."
+);
+@@doc(NetworkWatchers.getTroubleshooting::parameters.body,
+  "Parameters that define the resource to troubleshoot."
+);
+@@doc(NetworkWatchers.getTroubleshootingResult::parameters.body,
+  "Parameters that define the resource to query the troubleshooting result."
+);
+@@doc(NetworkWatchers.setFlowLogConfiguration::parameters.body,
+  "Parameters that define the configuration of flow log."
+);
+@@doc(NetworkWatchers.getFlowLogStatus::parameters.body,
+  "Parameters that define a resource to query flow log and traffic analytics (optional) status."
+);
+@@doc(NetworkWatchers.checkConnectivity::parameters.body,
+  "Parameters that determine how the connectivity check will be performed."
+);
+@@doc(NetworkWatchers.getAzureReachabilityReport::parameters.body,
+  "Parameters that determine Azure reachability report configuration."
+);
+@@doc(NetworkWatchers.listAvailableProviders::parameters.body,
+  "Parameters that scope the list of available providers."
+);
+@@doc(NetworkWatchers.getNetworkConfigurationDiagnostic::parameters.body,
+  "Parameters to get network configuration diagnostic."
+);
+@@doc(NetworkWatchers.create::parameters.body,
+  "Parameters that define the create packet capture operation."
+);

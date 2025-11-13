@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "OWASP_3.0",
+            "type": "Microsoft.Network/applicationGatewayAvailableWafRuleSets",
+            "id": "/subscriptions//resourceGroups//providers/Microsoft.Network/applicationGatewayAvailableWafRuleSets/",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "ruleGroups": [
+                {
+                  "description": "",
+                  "ruleGroupName": "General",
+                  "rules": [
+                    {
+                      "description": "Multipart Request Body Strict Validation.",
+                      "ruleId": 200003,
+                      "ruleIdString": "200003",
+                      "state": "Disabled"
+                    },
+                    {
+                      "description": "Possible Multipart Unmatched Boundary.",
+                      "ruleId": 200004,
+                      "ruleIdString": "200004"
+                    }
+                  ]
+                }
+              ],
+              "ruleSetType": "OWASP",
+              "ruleSetVersion": "3.0"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ApplicationGateways_ListAvailableWafRuleSets",
+  "title": "Get Available Waf Rule Sets"
+}

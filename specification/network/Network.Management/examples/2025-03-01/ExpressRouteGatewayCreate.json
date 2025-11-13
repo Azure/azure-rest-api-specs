@@ -1,0 +1,68 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "expressRouteGatewayName": "gateway-2",
+    "putExpressRouteGatewayParameters": {
+      "location": "westus",
+      "properties": {
+        "allowNonVirtualWanTraffic": false,
+        "autoScaleConfiguration": {
+          "bounds": {
+            "min": 3
+          }
+        },
+        "virtualHub": {
+          "id": "/subscriptions/subid/resourceGroups/resourceGroupId/providers/Microsoft.Network/virtualHubs/virtualHubName"
+        }
+      }
+    },
+    "resourceGroupName": "resourceGroupName",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "gateway-2",
+        "type": "Microsoft.Network/expressRouteGateways",
+        "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+        "id": "/subscriptions/subid/resourceGroups/resourceGroupName/providers/Microsoft.Network/expressRouteGateways/gateway-2",
+        "location": "westus",
+        "properties": {
+          "allowNonVirtualWanTraffic": false,
+          "autoScaleConfiguration": {
+            "bounds": {
+              "min": 3
+            }
+          },
+          "provisioningState": "Succeeded",
+          "virtualHub": {
+            "id": "/subscriptions/subid/resourceGroups/resourceGroupName/providers/Microsoft.Network/virtualHubs/virtualHubName"
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "gateway-2",
+        "type": "Microsoft.Network/expressRouteGateways",
+        "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+        "id": "/subscriptions/subid/resourceGroups/resourceGroupName/providers/Microsoft.Network/expressRouteGateways/gateway-2",
+        "location": "westus",
+        "properties": {
+          "allowNonVirtualWanTraffic": false,
+          "autoScaleConfiguration": {
+            "bounds": {
+              "min": 3
+            }
+          },
+          "provisioningState": "Succeeded",
+          "virtualHub": {
+            "id": "/subscriptions/subid/resourceGroups/resourceGroupName/providers/Microsoft.Network/virtualHubs/virtualHubName"
+          }
+        }
+      }
+    }
+  },
+  "operationId": "ExpressRouteGateways_CreateOrUpdate",
+  "title": "ExpressRouteGatewayCreate"
+}

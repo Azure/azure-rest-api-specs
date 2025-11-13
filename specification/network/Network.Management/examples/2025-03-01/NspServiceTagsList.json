@@ -1,0 +1,29 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "location": "westus",
+    "subscriptionId": "subId"
+  },
+  "title": "NSPServiceTagsList",
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "{baseurl}/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/nspServiceTags?api-version=2025-03-01&$skipToken=10",
+        "value": [
+          {
+            "serviceTags": [
+              "ActionGroup",
+              "AppConfigurationInternal",
+              "AzureCloud",
+              "PRIVATE",
+              "ApiManagement",
+              "MicrosoftPublicIPSpace",
+              "MicrosoftPrivateIPSpace"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "NetworkSecurityPerimeterServiceTags_List"
+}

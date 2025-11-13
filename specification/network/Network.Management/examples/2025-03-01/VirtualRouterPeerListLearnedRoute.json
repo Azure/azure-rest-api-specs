@@ -1,0 +1,62 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "connectionName": "peer1",
+    "hubName": "virtualRouter1",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "RouteServiceRole_IN_0": [
+          {
+            "asPath": "65002-65001",
+            "localAddress": "10.85.3.4",
+            "network": "10.101.0.0/16",
+            "nextHop": "10.85.4.4",
+            "origin": "EBgp",
+            "sourcePeer": "10.85.4.4",
+            "weight": 32768
+          },
+          {
+            "asPath": "65002-65001",
+            "localAddress": "10.85.3.5",
+            "network": "10.101.0.0/16",
+            "nextHop": "10.85.4.4",
+            "origin": "EBgp",
+            "sourcePeer": "10.85.4.4",
+            "weight": 32768
+          }
+        ],
+        "RouteServiceRole_IN_1": [
+          {
+            "asPath": "65002-65001",
+            "localAddress": "10.85.3.4",
+            "network": "10.101.0.0/16",
+            "nextHop": "10.85.4.4",
+            "origin": "EBgp",
+            "sourcePeer": "10.85.4.4",
+            "weight": 32768
+          },
+          {
+            "asPath": "65002-65001",
+            "localAddress": "10.85.3.5",
+            "network": "10.101.0.0/16",
+            "nextHop": "10.85.4.4",
+            "origin": "EBgp",
+            "sourcePeer": "10.85.4.4",
+            "weight": 32768
+          }
+        ]
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/operationResults/{operationId}?api-version={api-version}"
+      }
+    }
+  },
+  "operationId": "VirtualHubBgpConnections_ListLearnedRoutes",
+  "title": "VirtualRouterPeerListLearnedRoutes"
+}

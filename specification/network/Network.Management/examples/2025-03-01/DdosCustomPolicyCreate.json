@@ -1,0 +1,85 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "ddosCustomPolicyName": "test-ddos-custom-policy",
+    "parameters": {
+      "location": "centraluseuap",
+      "properties": {
+        "detectionRules": [
+          {
+            "name": "detectionRuleTcp",
+            "properties": {
+              "detectionMode": "TrafficThreshold",
+              "trafficDetectionRule": {
+                "packetsPerSecond": 1000000,
+                "trafficType": "Tcp"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "test-ddos-custom-policy",
+        "type": "Microsoft.Network/ddosCustomPolicies",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/ddosCustomPolicies/test-ddos-custom-policy",
+        "location": "centraluseuap",
+        "properties": {
+          "detectionRules": [
+            {
+              "name": "detectionRuleTcp",
+              "type": "Microsoft.Network/ddosCustomPolicies/ddosDetectionRules",
+              "etag": "W/\"00000000-0000-0000-0000-00000000\"",
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/ddosCustomPolicies/test-ddos-custom-policy/ddosDetectionRules/detectionRuleTcp",
+              "properties": {
+                "detectionMode": "TrafficThreshold",
+                "provisioningState": "Succeeded",
+                "trafficDetectionRule": {
+                  "packetsPerSecond": 1000000,
+                  "trafficType": "Tcp"
+                }
+              }
+            }
+          ],
+          "provisioningState": "Succeeded",
+          "resourceGuid": "00000000-0000-0000-0000-000000000000"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "test-ddos-custom-policy",
+        "type": "Microsoft.Network/ddosCustomPolicies",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/ddosCustomPolicies/test-ddos-custom-policy",
+        "location": "centraluseuap",
+        "properties": {
+          "detectionRules": [
+            {
+              "name": "detectionRuleTcp",
+              "type": "Microsoft.Network/ddosCustomPolicies/ddosDetectionRules",
+              "etag": "W/\"00000000-0000-0000-0000-00000000\"",
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/ddosCustomPolicies/test-ddos-custom-policy/ddosDetectionRules/detectionRuleTcp",
+              "properties": {
+                "detectionMode": "TrafficThreshold",
+                "provisioningState": "Succeeded",
+                "trafficDetectionRule": {
+                  "packetsPerSecond": 1000000,
+                  "trafficType": "Tcp"
+                }
+              }
+            }
+          ],
+          "provisioningState": "Succeeded",
+          "resourceGuid": "00000000-0000-0000-0000-000000000000"
+        }
+      }
+    }
+  },
+  "operationId": "DdosCustomPolicies_CreateOrUpdate",
+  "title": "Create DDoS custom policy"
+}

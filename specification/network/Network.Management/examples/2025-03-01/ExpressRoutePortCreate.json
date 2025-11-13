@@ -1,0 +1,117 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "expressRoutePortName": "portName",
+    "parameters": {
+      "location": "westus",
+      "properties": {
+        "bandwidthInGbps": 100,
+        "billingType": "UnlimitedData",
+        "encapsulation": "QinQ",
+        "peeringLocation": "peeringLocationName"
+      }
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "portName",
+        "type": "Microsoft.Network/expressRoutePorts",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRoutePorts/portName",
+        "location": "westus",
+        "properties": {
+          "allocationDate": "Friday, July 1, 2018",
+          "bandwidthInGbps": 100,
+          "billingType": "UnlimitedData",
+          "circuits": [],
+          "encapsulation": "QinQ",
+          "etherType": "0x8100",
+          "links": [
+            {
+              "name": "link1",
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRoutePorts/portName/links/link1",
+              "properties": {
+                "adminState": "Disabled",
+                "connectorType": "LC",
+                "interfaceName": "Ethernet 0/0",
+                "patchPanelId": "patchPanelId1",
+                "provisioningState": "Succeeded",
+                "rackId": "rackId1",
+                "routerName": "router1"
+              }
+            },
+            {
+              "name": "link2",
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRoutePorts/portName/links/link2",
+              "properties": {
+                "adminState": "Disabled",
+                "connectorType": "LC",
+                "interfaceName": "Ethernet 0/0",
+                "patchPanelId": "patchPanelId2",
+                "provisioningState": "Succeeded",
+                "rackId": "rackId2",
+                "routerName": "router2"
+              }
+            }
+          ],
+          "mtu": "1500",
+          "peeringLocation": "peeringLocationName",
+          "provisionedBandwidthInGbps": 0,
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "portName",
+        "type": "Microsoft.Network/expressRoutePorts",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRoutePorts/portName",
+        "location": "westus",
+        "properties": {
+          "allocationDate": "Friday, July 1, 2018",
+          "bandwidthInGbps": 100,
+          "billingType": "UnlimitedData",
+          "circuits": [],
+          "encapsulation": "QinQ",
+          "etherType": "0x8100",
+          "links": [
+            {
+              "name": "link1",
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRoutePorts/portName/links/link1",
+              "properties": {
+                "adminState": "Disabled",
+                "connectorType": "LC",
+                "interfaceName": "Ethernet 0/0",
+                "patchPanelId": "patchPanelId1",
+                "provisioningState": "Succeeded",
+                "rackId": "rackId1",
+                "routerName": "router1"
+              }
+            },
+            {
+              "name": "link2",
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRoutePorts/portName/links/link2",
+              "properties": {
+                "adminState": "Disabled",
+                "connectorType": "LC",
+                "interfaceName": "Ethernet 0/0",
+                "patchPanelId": "patchPanelId2",
+                "provisioningState": "Succeeded",
+                "rackId": "rackId2",
+                "routerName": "router2"
+              }
+            }
+          ],
+          "mtu": "1500",
+          "peeringLocation": "peeringLocationName",
+          "provisionedBandwidthInGbps": 0,
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  },
+  "operationId": "ExpressRoutePorts_CreateOrUpdate",
+  "title": "ExpressRoutePortCreate"
+}

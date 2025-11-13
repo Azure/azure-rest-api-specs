@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "firewallPolicyName": "firewallPolicy",
+    "resourceGroupName": "rg1",
+    "ruleCollectionGroupName": "ruleCollectionGroup1",
+    "subscriptionId": "e747cc13-97d4-4a79-b463-42d7f4e558f2"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "ruleCollectionGroup1",
+        "etag": "W/\"72090554-7e3b-43f2-80ad-99a9020dcb11\"",
+        "id": "/subscriptions/e747cc13-97d4-4a79-b463-42d7f4e558f2/resourceGroups/rg1/providers/Microsoft.Network/firewallPolicies/firewallPolicy/ruleCollectionGroups/ruleCollectionGroup1",
+        "properties": {
+          "priority": 110,
+          "provisioningState": "Succeeded",
+          "ruleCollections": [
+            {
+              "name": "Example-Filter-Rule-Collection",
+              "action": {
+                "type": "Deny"
+              },
+              "priority": 200,
+              "ruleCollectionType": "FirewallPolicyFilterRuleCollection",
+              "rules": [
+                {
+                  "name": "rule1",
+                  "description": "Deny inbound rule",
+                  "protocols": [
+                    {
+                      "port": 443,
+                      "protocolType": "Https"
+                    }
+                  ],
+                  "ruleType": "ApplicationRule",
+                  "sourceAddresses": [
+                    "216.58.216.164",
+                    "10.0.0.0/24"
+                  ],
+                  "webCategories": [
+                    "Hacking"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  "operationId": "FirewallPolicyRuleCollectionGroups_Get",
+  "title": "Get FirewallPolicyRuleCollectionGroup With Web Categories"
+}

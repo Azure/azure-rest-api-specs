@@ -1,0 +1,73 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+import "./VirtualHub.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.Network;
+/**
+ * IpConfigurations.
+ */
+@parentResource(VirtualHub)
+model HubIpConfiguration
+  is Azure.ResourceManager.ProxyResource<HubIPConfigurationPropertiesFormat> {
+  ...ResourceNameParameter<
+    Resource = HubIpConfiguration,
+    KeyName = "ipConfigName",
+    SegmentName = "ipConfigurations",
+    NamePattern = ""
+  >;
+  ...Azure.ResourceManager.Legacy.EntityTagProperty;
+}
+
+@armResourceOperations
+interface HubIpConfigurations {
+  /**
+   * Retrieves the details of a Virtual Hub Ip configuration.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("VirtualHubIpConfiguration_Get")
+  get is ArmResourceRead<HubIpConfiguration>;
+
+  /**
+   * Creates a VirtualHubIpConfiguration resource if it doesn't exist else updates the existing VirtualHubIpConfiguration.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("VirtualHubIpConfiguration_CreateOrUpdate")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<HubIpConfiguration>;
+
+  /**
+   * Deletes a VirtualHubIpConfiguration.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @operationId("VirtualHubIpConfiguration_Delete")
+  delete is ArmResourceDeleteWithoutOkAsync<
+    HubIpConfiguration,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
+
+  /**
+   * Retrieves the details of all VirtualHubIpConfigurations.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("VirtualHubIpConfiguration_List")
+  list is ArmResourceListByParent<
+    HubIpConfiguration,
+    Response = ArmResponse<ListVirtualHubIpConfigurationResults>
+  >;
+}
+
+@@doc(HubIpConfiguration.name, "The name of the ipconfig.");
+@@doc(HubIpConfiguration.properties,
+  "The properties of the Virtual Hub IPConfigurations."
+);
+@@doc(HubIpConfigurations.createOrUpdate::parameters.resource,
+  "Hub Ip Configuration parameters."
+);

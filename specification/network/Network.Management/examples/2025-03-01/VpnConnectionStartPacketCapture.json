@@ -1,0 +1,27 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "gatewayName": "gateway1",
+    "parameters": {
+      "linkConnectionNames": [
+        "siteLink1",
+        "siteLink2"
+      ]
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid",
+    "vpnConnectionName": "vpnConnection1"
+  },
+  "responses": {
+    "200": {
+      "body": "\"{\"Status\":\"Successful\",\"Data\":null}\""
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/operationResults/{operationId}?api-version={api-version}"
+      }
+    }
+  },
+  "operationId": "VpnConnections_StartPacketCapture",
+  "title": "Start packet capture on vpn connection without filter"
+}

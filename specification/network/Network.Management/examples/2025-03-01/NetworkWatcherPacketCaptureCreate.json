@@ -1,0 +1,58 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "networkWatcherName": "nw1",
+    "packetCaptureName": "pc1",
+    "parameters": {
+      "properties": {
+        "bytesToCapturePerPacket": 10000,
+        "filters": [
+          {
+            "localIPAddress": "10.0.0.4",
+            "localPort": "80",
+            "protocol": "TCP"
+          }
+        ],
+        "storageLocation": {
+          "filePath": "D:\\capture\\pc1.cap",
+          "storageId": "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Storage/storageAccounts/pcstore",
+          "storagePath": "https://mytestaccountname.blob.core.windows.net/capture/pc1.cap"
+        },
+        "target": "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Compute/virtualMachines/vm1",
+        "timeLimitInSeconds": 100,
+        "totalBytesPerSession": 100000
+      }
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "name": "pc1",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkWatchers/nw1/packetCaptures/pc1",
+        "properties": {
+          "bytesToCapturePerPacket": 10000,
+          "filters": [
+            {
+              "localIPAddress": "10.0.0.4",
+              "localPort": "80",
+              "protocol": "TCP"
+            }
+          ],
+          "provisioningState": "Updating",
+          "storageLocation": {
+            "filePath": "D:\\capture\\pc1.cap",
+            "storageId": "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Storage/storageAccounts/pcstore",
+            "storagePath": "https://mytestaccountname.blob.core.windows.net/capture/pc1.cap"
+          },
+          "target": "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Compute/virtualMachines/vm1",
+          "timeLimitInSeconds": 100,
+          "totalBytesPerSession": 100000
+        }
+      }
+    }
+  },
+  "operationId": "PacketCaptures_Create",
+  "title": "Create packet capture"
+}

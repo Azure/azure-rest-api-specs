@@ -1,0 +1,61 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "loadBalancerName": "lb",
+    "resourceGroupName": "testrg",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "mynic",
+            "type": "Microsoft.Network/networkInterfaces",
+            "etag": "W/\\\"00000000-0000-0000-0000-000000000000\\\"",
+            "id": "/subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/networkInterfaces/mynic",
+            "location": "westus",
+            "properties": {
+              "dnsSettings": {
+                "appliedDnsServers": [],
+                "dnsServers": []
+              },
+              "enableAcceleratedNetworking": false,
+              "enableIPForwarding": false,
+              "ipConfigurations": [
+                {
+                  "name": "ipconfig1",
+                  "etag": "W/\\\"00000000-0000-0000-0000-000000000000\\\"",
+                  "id": "/subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/networkInterfaces/mynic/ipConfigurations/ipconfig1",
+                  "properties": {
+                    "loadBalancerBackendAddressPools": [
+                      {
+                        "id": "/subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/loadBalancers/lb/backendAddressPools/bepool1"
+                      }
+                    ],
+                    "loadBalancerInboundNatRules": [
+                      {
+                        "id": "/subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/loadBalancers/lb/inboundNatRules/inbound1"
+                      }
+                    ],
+                    "privateIPAddress": "10.0.1.4",
+                    "privateIPAddressVersion": "IPv4",
+                    "privateIPAllocationMethod": "Dynamic",
+                    "provisioningState": "Succeeded",
+                    "subnet": {
+                      "id": "/subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/myVirtualNetwork/subnets/frontendSubnet"
+                    }
+                  }
+                }
+              ],
+              "provisioningState": "Succeeded",
+              "resourceGuid": "00000000-0000-0000-0000-000000000000"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "LoadBalancerNetworkInterfaces_List",
+  "title": "LoadBalancerNetworkInterfaceListSimple"
+}

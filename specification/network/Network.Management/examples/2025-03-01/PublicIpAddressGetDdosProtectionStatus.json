@@ -1,0 +1,25 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "publicIpAddressName": "test-pip",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "ddosProtectionPlanId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/ddosProtectionPlans/test-plan",
+        "isWorkloadProtected": "True",
+        "publicIpAddress": "10.0.1.5",
+        "publicIpAddressId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/test-pip"
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SampleRG/providers/Microsoft.Network/locations/tempLocation/operationResults/00000000-0000-0000-0000-000000000000?api-version=2025-03-01"
+      }
+    }
+  },
+  "operationId": "PublicIPAddresses_DdosProtectionStatus",
+  "title": "Get Ddos Protection Status of a Public IP Address"
+}

@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "networkManagerName": "TestNetworkManager",
+    "poolName": "TestPool",
+    "resourceGroupName": "rg1",
+    "staticCidrName": "TestStaticCidr",
+    "subscriptionId": "11111111-1111-1111-1111-111111111111"
+  },
+  "title": "StaticCidrs_Get",
+  "responses": {
+    "200": {
+      "body": {
+        "name": "TestStaticCidr",
+        "type": "Microsoft.Network/networkManagers/ipamPools/staticCidrs",
+        "id": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/TestNetworkManager/ipamPools/TestPool/staticCidrs/TestStaticCidr",
+        "properties": {
+          "description": "test description",
+          "addressPrefixes": [
+            "10.0.0.0/24"
+          ],
+          "numberOfIPAddressesToAllocate": "",
+          "provisioningState": "Succeeded",
+          "totalNumberOfIPAddresses": "256"
+        },
+        "systemData": {
+          "createdAt": "2021-01-11T18:52:27Z",
+          "createdBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
+          "createdByType": "User",
+          "lastModifiedAt": "2021-01-11T18:52:27Z",
+          "lastModifiedBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
+          "lastModifiedByType": "User"
+        }
+      }
+    }
+  },
+  "operationId": "StaticCidrs_Get"
+}

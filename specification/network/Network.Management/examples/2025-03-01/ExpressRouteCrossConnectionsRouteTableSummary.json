@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "crossConnectionName": "<circuitServiceKey>",
+    "devicePath": "primary",
+    "peeringName": "AzurePrivatePeering",
+    "resourceGroupName": "CrossConnection-SiliconValley",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "asn": 65514,
+            "neighbor": "10.6.1.112",
+            "stateOrPrefixesReceived": "Active",
+            "upDown": "1d14h"
+          },
+          {
+            "asn": 65514,
+            "neighbor": "10.6.1.113",
+            "stateOrPrefixesReceived": "1",
+            "upDown": "1d14h"
+          }
+        ]
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "<azure-operation-result>"
+      }
+    }
+  },
+  "operationId": "ExpressRouteCrossConnections_ListRoutesTableSummary",
+  "title": "GetExpressRouteCrossConnectionsRouteTableSummary"
+}

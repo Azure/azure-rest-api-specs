@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "cloudServiceName": "cs1",
+    "ipConfigurationName": "ip1",
+    "networkInterfaceName": "nic1",
+    "publicIpAddressName": "pub1",
+    "resourceGroupName": "cs-tester",
+    "roleInstanceName": "Test_VM_0",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "pub1",
+        "id": "/subscriptions/subid/resourceGroups/cs-tester/providers/Microsoft.Compute/cloudServices/cs1/roleInstances/Test_VM_0/networkInterfaces/nic1/ipConfigurations/ip1/publicIPAddresses/pub1",
+        "properties": {
+          "dnsSettings": {
+            "domainNameLabel": "vm1.testvmssacc",
+            "fqdn": "vm1.testvmssacc.southeastasia.cloudapp.azure.com"
+          },
+          "idleTimeoutInMinutes": 10,
+          "ipAddress": "13.67.119.72",
+          "ipConfiguration": {
+            "id": "/subscriptions/subid/resourceGroups/cs-tester/providers/Microsoft.Compute/cloudServices/cs1/roleInstances/Test_VM_0/networkInterfaces/nic1/ipConfigurations/ip1"
+          },
+          "provisioningState": "Succeeded",
+          "publicIPAddressVersion": "IPv4",
+          "publicIPAllocationMethod": "Dynamic"
+        }
+      }
+    }
+  },
+  "operationId": "PublicIPAddresses_GetCloudServicePublicIPAddress",
+  "title": "GetVMSSPublicIP"
+}

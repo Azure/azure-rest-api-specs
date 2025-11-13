@@ -1,0 +1,80 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "connectionName": "peer1",
+    "hubName": "virtualRouter1",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "RouteServiceRole_IN_0": [
+          {
+            "asPath": "65515",
+            "localAddress": "10.85.3.4",
+            "network": "10.45.0.0/16",
+            "nextHop": "10.85.3.4",
+            "origin": "Igp",
+            "sourcePeer": "10.85.3.4",
+            "weight": 0
+          },
+          {
+            "asPath": "65515",
+            "localAddress": "10.85.3.4",
+            "network": "10.85.0.0/16",
+            "nextHop": "10.85.3.4",
+            "origin": "Igp",
+            "sourcePeer": "10.85.3.4",
+            "weight": 0
+          },
+          {
+            "asPath": "65515",
+            "localAddress": "10.85.3.4",
+            "network": "10.100.0.0/16",
+            "nextHop": "10.85.3.4",
+            "origin": "Igp",
+            "sourcePeer": "10.85.3.4",
+            "weight": 0
+          }
+        ],
+        "RouteServiceRole_IN_1": [
+          {
+            "asPath": "65515",
+            "localAddress": "10.85.3.4",
+            "network": "10.45.0.0/16",
+            "nextHop": "10.85.3.4",
+            "origin": "Igp",
+            "sourcePeer": "10.85.3.4",
+            "weight": 0
+          },
+          {
+            "asPath": "65515",
+            "localAddress": "10.85.3.4",
+            "network": "10.85.0.0/16",
+            "nextHop": "10.85.3.4",
+            "origin": "Igp",
+            "sourcePeer": "10.85.3.4",
+            "weight": 0
+          },
+          {
+            "asPath": "65515",
+            "localAddress": "10.85.3.4",
+            "network": "10.100.0.0/16",
+            "nextHop": "10.85.3.4",
+            "origin": "Igp",
+            "sourcePeer": "10.85.3.4",
+            "weight": 0
+          }
+        ]
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/operationResults/{operationId}?api-version={api-version}"
+      }
+    }
+  },
+  "operationId": "VirtualHubBgpConnections_ListAdvertisedRoutes",
+  "title": "VirtualRouterPeerListAdvertisedRoutes"
+}

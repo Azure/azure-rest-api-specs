@@ -1,0 +1,114 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "test-natGateway",
+            "type": "Microsoft.Network/natGateways",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/natGateway/test-natGateway",
+            "location": "westus",
+            "properties": {
+              "idleTimeoutInMinutes": 5,
+              "provisioningState": "Succeeded",
+              "publicIpAddresses": [
+                {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/PublicIpAddress1"
+                }
+              ],
+              "publicIpPrefixes": [
+                {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPPrefixes/PublicIpPrefix1"
+                }
+              ],
+              "subnets": [
+                {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/subnet1"
+                }
+              ]
+            },
+            "sku": {
+              "name": "Standard"
+            }
+          },
+          {
+            "name": "test-natGateway2",
+            "type": "Microsoft.Network/natGateways",
+            "id": "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Network/natGateway/test-natGateway2",
+            "location": "westus",
+            "properties": {
+              "idleTimeoutInMinutes": 5,
+              "provisioningState": "Succeeded",
+              "publicIpAddresses": [
+                {
+                  "id": "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Network/publicIPAddresses/PublicIpAddress1"
+                }
+              ],
+              "publicIpPrefixes": [
+                {
+                  "id": "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Network/publicIPPrefixes/PublicIpPrefix1"
+                }
+              ],
+              "subnets": [
+                {
+                  "id": "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/subnet1"
+                }
+              ]
+            },
+            "sku": {
+              "name": "Standard"
+            }
+          },
+          {
+            "name": "test-natGateway3",
+            "type": "Microsoft.Network/natGateways",
+            "id": "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Network/natGateway/test-natGateway3",
+            "location": "westus",
+            "properties": {
+              "idleTimeoutInMinutes": 5,
+              "provisioningState": "Succeeded",
+              "publicIpAddresses": [
+                {
+                  "id": "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Network/publicIPAddresses/PublicIpAddress1"
+                }
+              ],
+              "publicIpAddressesV6": [
+                {
+                  "id": "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Network/publicIPAddresses/PublicIpAddress2"
+                }
+              ],
+              "publicIpPrefixes": [
+                {
+                  "id": "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Network/publicIPPrefixes/PublicIpPrefix1"
+                }
+              ],
+              "publicIpPrefixesV6": [
+                {
+                  "id": "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Network/publicIPPrefixes/PublicIpPrefix2"
+                }
+              ],
+              "sourceVirtualNetwork": {
+                "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet"
+              },
+              "subnets": [
+                {
+                  "id": "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/subnet1"
+                }
+              ]
+            },
+            "sku": {
+              "name": "StandardV2"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "NatGateways_List",
+  "title": "List nat gateways in resource group"
+}

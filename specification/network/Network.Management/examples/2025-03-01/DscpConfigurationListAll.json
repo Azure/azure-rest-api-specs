@@ -1,0 +1,176 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "mydscpConfig",
+            "type": "Microsoft.Network/dscpConfiguration",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/dscpConfiguration/mydscpConfig",
+            "location": "eastus",
+            "properties": {
+              "associatedNetworkInterfaces": [
+                {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkInterfaces/test-nic1"
+                },
+                {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkInterfaces/test-nic2"
+                }
+              ],
+              "provisioningState": "Succeeded",
+              "qosCollectionId": "0f8fad5b-d9cb-469f-a165-70867728950e",
+              "qosDefinitionCollection": [
+                {
+                  "destinationIpRanges": [
+                    {
+                      "endIP": "127.0.10.2",
+                      "startIP": "127.0.10.1"
+                    }
+                  ],
+                  "destinationPortRanges": [
+                    {
+                      "end": 62,
+                      "start": 61
+                    }
+                  ],
+                  "markings": [
+                    1
+                  ],
+                  "sourceIpRanges": [
+                    {
+                      "endIP": "127.0.0.2",
+                      "startIP": "127.0.0.1"
+                    }
+                  ],
+                  "sourcePortRanges": [
+                    {
+                      "end": 12,
+                      "start": 11
+                    }
+                  ],
+                  "protocol": "Tcp"
+                },
+                {
+                  "destinationIpRanges": [
+                    {
+                      "endIP": "12.0.10.2",
+                      "startIP": "12.0.10.1"
+                    }
+                  ],
+                  "destinationPortRanges": [
+                    {
+                      "end": 52,
+                      "start": 51
+                    }
+                  ],
+                  "markings": [
+                    2
+                  ],
+                  "sourceIpRanges": [
+                    {
+                      "endIP": "12.0.0.2",
+                      "startIP": "12.0.0.1"
+                    }
+                  ],
+                  "sourcePortRanges": [
+                    {
+                      "end": 12,
+                      "start": 11
+                    }
+                  ],
+                  "protocol": "Udp"
+                }
+              ]
+            }
+          },
+          {
+            "name": "mydscpConfig2",
+            "type": "Microsoft.Network/dscpConfiguration",
+            "id": "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Network/dscpConfiguration/mydscpConfig2",
+            "location": "eastus",
+            "properties": {
+              "associatedNetworkInterfaces": [
+                {
+                  "id": "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Network/networkInterfaces/test-nic3"
+                },
+                {
+                  "id": "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Network/networkInterfaces/test-nic4"
+                }
+              ],
+              "provisioningState": "Succeeded",
+              "qosCollectionId": "9as24mf6-d9cb-7a7f-a165-70867728950e",
+              "qosDefinitionCollection": [
+                {
+                  "destinationIpRanges": [
+                    {
+                      "endIP": "127.0.10.2",
+                      "startIP": "127.0.10.1"
+                    }
+                  ],
+                  "destinationPortRanges": [
+                    {
+                      "end": 62,
+                      "start": 61
+                    }
+                  ],
+                  "markings": [
+                    1
+                  ],
+                  "sourceIpRanges": [
+                    {
+                      "endIP": "127.0.0.2",
+                      "startIP": "127.0.0.1"
+                    }
+                  ],
+                  "sourcePortRanges": [
+                    {
+                      "end": 12,
+                      "start": 11
+                    }
+                  ],
+                  "protocol": "Tcp"
+                },
+                {
+                  "destinationIpRanges": [
+                    {
+                      "endIP": "12.0.10.2",
+                      "startIP": "12.0.10.1"
+                    }
+                  ],
+                  "destinationPortRanges": [
+                    {
+                      "end": 52,
+                      "start": 51
+                    }
+                  ],
+                  "markings": [
+                    2
+                  ],
+                  "sourceIpRanges": [
+                    {
+                      "endIP": "12.0.0.2",
+                      "startIP": "12.0.0.1"
+                    }
+                  ],
+                  "sourcePortRanges": [
+                    {
+                      "end": 12,
+                      "start": 11
+                    }
+                  ],
+                  "protocol": "Udp"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "DscpConfiguration_ListAll",
+  "title": "List all network interfaces"
+}

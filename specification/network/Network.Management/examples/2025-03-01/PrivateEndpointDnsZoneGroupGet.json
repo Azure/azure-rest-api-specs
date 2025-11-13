@@ -1,0 +1,70 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "privateDnsZoneGroupName": "testPdnsgroup",
+    "privateEndpointName": "testPe",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subId"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testPdnsgroup",
+        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateLinkServices/testPe/privateDnsZoneGroups/testPdnsgroup",
+        "properties": {
+          "privateDnsZoneConfigs": [
+            {
+              "properties": {
+                "privateDnsZoneId": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateDnsZones/zone1.com",
+                "recordSets": [
+                  {
+                    "fqdn": "abc.zone1.com",
+                    "ipAddresses": [
+                      "10.0.0.4"
+                    ],
+                    "recordSetName": "abc",
+                    "recordType": "A"
+                  },
+                  {
+                    "fqdn": "abc2.zone1.com",
+                    "ipAddresses": [
+                      "10.0.0.5"
+                    ],
+                    "recordSetName": "abc2",
+                    "recordType": "A"
+                  }
+                ]
+              }
+            },
+            {
+              "properties": {
+                "privateDnsZoneId": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateDnsZones/zone2.com",
+                "recordSets": [
+                  {
+                    "fqdn": "abc.zone2.com",
+                    "ipAddresses": [
+                      "10.0.0.6"
+                    ],
+                    "recordSetName": "abc",
+                    "recordType": "A"
+                  },
+                  {
+                    "fqdn": "abc2.zone2.com",
+                    "ipAddresses": [
+                      "10.0.0.7"
+                    ],
+                    "recordSetName": "abc2",
+                    "recordType": "A"
+                  }
+                ]
+              }
+            }
+          ],
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  },
+  "operationId": "PrivateDnsZoneGroups_Get",
+  "title": "Get private dns zone group"
+}

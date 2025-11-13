@@ -1,0 +1,91 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "networkSecurityPerimeterName": "nsp1",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subId"
+  },
+  "title": "NspAssociationList",
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "{baseurl}/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp1/resourceAssociations?api-version=2025-03-01&$skipToken=10",
+        "value": [
+          {
+            "name": "association1",
+            "type": "Microsoft.Network/networkSecurityPerimeters/resourceAssociations",
+            "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp1/resourceAssociations/association1",
+            "properties": {
+              "accessMode": "Enforced",
+              "hasProvisioningIssues": "no",
+              "privateLinkResource": {
+                "id": "/subscriptions/{paasSubscriptionId}/resourceGroups/{paasResourceGroupName}/providers/{providerName}/{resourceType}/{resourceName}"
+              },
+              "profile": {
+                "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp1/profiles/{profileName}"
+              },
+              "provisioningState": "Succeeded"
+            },
+            "systemData": {
+              "createdAt": "2024-02-07T18:07:36.3446713Z",
+              "createdBy": "user",
+              "createdByType": "User",
+              "lastModifiedAt": "2024-02-07T18:07:36.3446713Z",
+              "lastModifiedBy": "user",
+              "lastModifiedByType": "User"
+            }
+          },
+          {
+            "name": "association2",
+            "type": "Microsoft.Network/networkSecurityPerimeters/resourceAssociations",
+            "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp1/resourceAssociations/association2",
+            "properties": {
+              "accessMode": "Audit",
+              "hasProvisioningIssues": "no",
+              "privateLinkResource": {
+                "id": "/subscriptions/{paasSubscriptionId}/resourceGroups/{paasResourceGroupName}/providers/{providerName}/{resourceType}/{resourceName}"
+              },
+              "profile": {
+                "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp1/profiles/{profileName}"
+              },
+              "provisioningState": "Succeeded"
+            },
+            "systemData": {
+              "createdAt": "2024-02-07T18:07:36.3446713Z",
+              "createdBy": "user",
+              "createdByType": "User",
+              "lastModifiedAt": "2024-02-07T18:07:36.3446713Z",
+              "lastModifiedBy": "user",
+              "lastModifiedByType": "User"
+            }
+          },
+          {
+            "name": "association3",
+            "type": "Microsoft.Network/networkSecurityPerimeters/resourceAssociations",
+            "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp1/resourceAssociations/association3",
+            "properties": {
+              "accessMode": "Learning",
+              "hasProvisioningIssues": "yes",
+              "privateLinkResource": {
+                "id": "/subscriptions/{paasSubscriptionId}/resourceGroups/{paasResourceGroupName}/providers/{providerName}/{resourceType}/{resourceName}"
+              },
+              "profile": {
+                "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp1/profiles/{profileName}"
+              },
+              "provisioningState": "Failed"
+            },
+            "systemData": {
+              "createdAt": "2024-02-07T18:07:36.3446713Z",
+              "createdBy": "user",
+              "createdByType": "User",
+              "lastModifiedAt": "2024-02-07T18:07:36.3446713Z",
+              "lastModifiedBy": "user",
+              "lastModifiedByType": "User"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "NetworkSecurityPerimeterAssociations_List"
+}

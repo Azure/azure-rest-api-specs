@@ -1,0 +1,190 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.Network;
+/**
+ * Virtual Network resource.
+ */
+model VirtualNetwork
+  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<VirtualNetworkPropertiesFormat> {
+  ...ResourceNameParameter<
+    Resource = VirtualNetwork,
+    KeyName = "virtualNetworkName",
+    SegmentName = "virtualNetworks",
+    NamePattern = ""
+  >;
+
+  /**
+   * The extended location of the virtual network.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  extendedLocation?: ExtendedLocation;
+
+  ...Azure.ResourceManager.Legacy.EntityTagProperty;
+}
+
+@armResourceOperations
+interface VirtualNetworks {
+  /**
+   * Gets the specified virtual network by resource group.
+   */
+  get is ArmResourceRead<
+    VirtualNetwork,
+    Parameters = {
+      /**
+       * Expands referenced resources.
+       */
+      @query("$expand")
+      $expand?: string;
+    }
+  >;
+
+  /**
+   * Creates or updates a virtual network in the specified resource group.
+   */
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<VirtualNetwork>;
+
+  /**
+   * Updates a virtual network tags.
+   */
+  @patch(#{ implicitOptionality: false })
+  updateTags is ArmCustomPatchSync<VirtualNetwork, PatchModel = TagsObject>;
+
+  /**
+   * Deletes the specified virtual network.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  delete is ArmResourceDeleteWithoutOkAsync<
+    VirtualNetwork,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
+
+  /**
+   * Gets all virtual networks in a resource group.
+   */
+  list is ArmResourceListByParent<VirtualNetwork>;
+
+  /**
+   * Gets all virtual networks in a subscription.
+   */
+  listAll is ArmListBySubscription<VirtualNetwork>;
+
+  /**
+   * List all effective connectivity configurations applied on a virtual network.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ListNetworkManagerEffectiveConnectivityConfigurations")
+  @list
+  listNetworkManagerEffectiveConnectivityConfigurations is ArmResourceActionSync<
+    VirtualNetwork,
+    QueryRequestOptions,
+    ArmResponse<NetworkManagerEffectiveConnectivityConfigurationListResult>,
+    Parameters = {
+      /**
+       * An optional query parameter which specifies the maximum number of records to be returned by the server.
+       */
+      @maxValue(20)
+      @minValue(1)
+      @query("$top")
+      $top?: int32;
+    }
+  >;
+
+  /**
+   * List all effective security admin rules applied on a virtual network.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ListNetworkManagerEffectiveSecurityAdminRules")
+  @list
+  listNetworkManagerEffectiveSecurityAdminRules is ArmResourceActionSync<
+    VirtualNetwork,
+    QueryRequestOptions,
+    ArmResponse<NetworkManagerEffectiveSecurityAdminRulesListResult>,
+    Parameters = {
+      /**
+       * An optional query parameter which specifies the maximum number of records to be returned by the server.
+       */
+      @maxValue(20)
+      @minValue(1)
+      @query("$top")
+      $top?: int32;
+    }
+  >;
+
+  /**
+   * Checks whether a private IP address is available for use.
+   */
+  @get
+  @action("CheckIPAddressAvailability")
+  checkIPAddressAvailability is ArmResourceActionSync<
+    VirtualNetwork,
+    void,
+    ArmResponse<IPAddressAvailabilityResult>,
+    Parameters = {
+      /**
+       * The private IP address to be verified.
+       */
+      @query("ipAddress")
+      ipAddress: string;
+    }
+  >;
+
+  /**
+   * Lists usage stats.
+   */
+  @list
+  @get
+  @action("usages")
+  listUsage is ArmResourceActionSync<
+    VirtualNetwork,
+    void,
+    ArmResponse<VirtualNetworkListUsageResult>
+  >;
+
+  /**
+   * Gets the Ddos Protection Status of all IP Addresses under the Virtual Network
+   */
+  @list
+  @action("ddosProtectionStatus")
+  listDdosProtectionStatus is ArmResourceActionAsync<
+    VirtualNetwork,
+    void,
+    ArmResponse<VirtualNetworkDdosProtectionStatusResult>,
+    Parameters = {
+      /**
+       * The max number of ip addresses to return.
+       */
+      @query("top")
+      top?: int32;
+
+      /**
+       * The skipToken that is given with nextLink.
+       */
+      @query("skipToken")
+      skipToken?: string;
+    }
+  >;
+}
+
+@@doc(VirtualNetwork.name, "The name of the virtual network.");
+@@doc(VirtualNetwork.properties, "Properties of the virtual network.");
+@@doc(VirtualNetworks.createOrUpdate::parameters.resource,
+  "Parameters supplied to the create or update virtual network operation."
+);
+@@doc(VirtualNetworks.updateTags::parameters.properties,
+  "Parameters supplied to update virtual network tags."
+);
+@@doc(VirtualNetworks.listNetworkManagerEffectiveConnectivityConfigurations::parameters.body,
+  "Parameters supplied to list correct page."
+);
+@@doc(VirtualNetworks.listNetworkManagerEffectiveSecurityAdminRules::parameters.body,
+  "Parameters supplied to list correct page."
+);

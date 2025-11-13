@@ -1,0 +1,85 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid",
+    "virtualNetworkGatewayConnectionName": "connS2S"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "connS2S",
+        "type": "Microsoft.Network/connections",
+        "etag": "W/\"00000000-0000-0000-0000-000000000000\"",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/connections/connS2S",
+        "location": "centralus",
+        "properties": {
+          "authenticationType": "Certificate",
+          "certificateAuthentication": {
+            "inboundAuthCertificateChain": [
+              "MIIC+TCCAeGgAwIBAgIQFOJUqDaxV5xJcKpTKO...",
+              "MIIC+TCCAeGgAwIBAgIQPJerInitNblK7yBgkqh..."
+            ],
+            "inboundAuthCertificateSubjectName": "CN=rootCert.com",
+            "outboundAuthCertificate": "https://customerKv.vault.azure.net/Certificates/outBoundcert/Version"
+          },
+          "connectionMode": "Default",
+          "connectionProtocol": "IKEv2",
+          "connectionStatus": "Connecting",
+          "connectionType": "IPsec",
+          "dpdTimeoutSeconds": 30,
+          "egressBytesTransferred": 0,
+          "egressNatRules": [
+            {
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/vpngw/natRules/natRule2"
+            }
+          ],
+          "enableBgp": false,
+          "gatewayCustomBgpIpAddresses": [
+            {
+              "customBgpIpAddress": "169.254.21.1",
+              "ipConfigurationId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/vpngw/ipConfigurations/default"
+            },
+            {
+              "customBgpIpAddress": "169.254.21.3",
+              "ipConfigurationId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/vpngw/ipConfigurations/ActiveActive"
+            }
+          ],
+          "ingressBytesTransferred": 0,
+          "ingressNatRules": [
+            {
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/vpngw/natRules/natRule1"
+            }
+          ],
+          "ipsecPolicies": [],
+          "localNetworkGateway2": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/localNetworkGateways/localgw",
+            "properties": {}
+          },
+          "provisioningState": "Succeeded",
+          "resourceGuid": "00000000-0000-0000-0000-000000000000",
+          "routingWeight": 0,
+          "trafficSelectorPolicies": [],
+          "tunnelProperties": [
+            {
+              "bgpPeeringAddress": "10.78.1.17",
+              "tunnelIpAddress": "10.78.1.5"
+            },
+            {
+              "bgpPeeringAddress": "10.78.1.20",
+              "tunnelIpAddress": "10.78.1.7"
+            }
+          ],
+          "useLocalAzureIpAddress": false,
+          "usePolicyBasedTrafficSelectors": false,
+          "virtualNetworkGateway1": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/vpngw",
+            "properties": {}
+          }
+        }
+      }
+    }
+  },
+  "operationId": "VirtualNetworkGatewayConnections_Get",
+  "title": "GetVirtualNetworkGatewayConnection"
+}

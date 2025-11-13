@@ -1,0 +1,72 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "networkVirtualApplianceName": "nva",
+    "parameters": {
+      "tags": {
+        "key1": "value1",
+        "key2": "value2"
+      }
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "nva",
+        "type": "Microsoft.Network/networkVirtualAppliances",
+        "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkVirtualAppliances/nva",
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity1": {}
+          }
+        },
+        "location": "West US",
+        "properties": {
+          "addressPrefix": "192.168.1.0/16",
+          "bootStrapConfigurationBlobs": [
+            "https://csrncvhdstorage1.blob.core.windows.net/csrncvhdstoragecont/csrbootstrapconfig"
+          ],
+          "cloudInitConfigurationBlobs": [
+            "https://csrncvhdstorage1.blob.core.windows.net/csrncvhdstoragecont/csrcloudinitconfig"
+          ],
+          "nvaSku": {
+            "bundledScaleUnit": "1",
+            "marketPlaceVersion": "12.1",
+            "vendor": "Cisco SDWAN"
+          },
+          "provisioningState": "Succeeded",
+          "virtualApplianceAsn": 10000,
+          "virtualApplianceNics": [
+            {
+              "name": "managementNic",
+              "privateIpAddress": "192.168.12.1",
+              "publicIpAddress": "40.30.2.2"
+            },
+            {
+              "name": "privateNic-1",
+              "privateIpAddress": "192.168.12.2"
+            }
+          ],
+          "virtualApplianceSites": [
+            {
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networtkVirtualAppliances/nva/virtualApplianceSites/site1"
+            }
+          ],
+          "virtualHub": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/hub1"
+          }
+        },
+        "tags": {
+          "key1": "value1",
+          "key2": "value2"
+        }
+      }
+    }
+  },
+  "operationId": "NetworkVirtualAppliances_UpdateTags",
+  "title": "Update NetworkVirtualAppliance"
+}

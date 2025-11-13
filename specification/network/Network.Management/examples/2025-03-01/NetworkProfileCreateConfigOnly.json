@@ -1,0 +1,112 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "networkProfileName": "networkProfile1",
+    "parameters": {
+      "location": "westus",
+      "properties": {
+        "containerNetworkInterfaceConfigurations": [
+          {
+            "name": "eth1",
+            "properties": {
+              "ipConfigurations": [
+                {
+                  "name": "ipconfig1",
+                  "properties": {
+                    "subnet": {
+                      "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/networkProfileVnet/subnets/networkProfileSubnet1"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "networkProfile1",
+        "type": "Microsoft.Network/networkProfiles",
+        "etag": "W/\"4d705a71-752f-4e0a-8057-c02b125b1c08\"",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkProfiles/networkProfile1",
+        "location": "westus",
+        "properties": {
+          "containerNetworkInterfaceConfigurations": [
+            {
+              "name": "eth1",
+              "type": "Microsoft.Network/networkProfiles/containerNetworkInterfaceConfigurations",
+              "etag": "W/\"4d705a71-752f-4e0a-8057-c02b125b1c08\"",
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkProfiles/networkProfile1/containerNetworkInterfaceConfigurations/eth1",
+              "properties": {
+                "ipConfigurations": [
+                  {
+                    "name": "ipconfig1",
+                    "type": "Microsoft.Network/networkProfiles/containerNetworkInterfaceConfigurations/ipConfigurations",
+                    "etag": "W/\"4d705a71-752f-4e0a-8057-c02b125b1c08\"",
+                    "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkProfiles/networkProfile1/containerNetworkInterfaceConfigurations/eth1/ipConfigurations/ipconfig1",
+                    "properties": {
+                      "provisioningState": "Succeeded",
+                      "subnet": {
+                        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/networkProfileVnet/subnets/networkProfileSubnet1"
+                      }
+                    }
+                  }
+                ],
+                "provisioningState": "Succeeded"
+              }
+            }
+          ],
+          "containerNetworkInterfaces": [],
+          "provisioningState": "Succeeded",
+          "resourceGuid": "1570d8b6-ab8a-4ad2-81d6-d2799b429cbf"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "networkProfile1",
+        "type": "Microsoft.Network/networkProfiles",
+        "etag": "W/\"4d705a71-752f-4e0a-8057-c02b125b1c08\"",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkProfiles/networkProfile1",
+        "location": "westus",
+        "properties": {
+          "containerNetworkInterfaceConfigurations": [
+            {
+              "name": "eth1",
+              "type": "Microsoft.Network/networkProfiles/containerNetworkInterfaceConfigurations",
+              "etag": "W/\"4d705a71-752f-4e0a-8057-c02b125b1c08\"",
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkProfiles/networkProfile1/containerNetworkInterfaceConfigurations/eth1",
+              "properties": {
+                "ipConfigurations": [
+                  {
+                    "name": "ipconfig1",
+                    "type": "Microsoft.Network/networkProfiles/containerNetworkInterfaceConfigurations/ipConfigurations",
+                    "etag": "W/\"4d705a71-752f-4e0a-8057-c02b125b1c08\"",
+                    "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkProfiles/networkProfile1/containerNetworkInterfaceConfigurations/eth1/ipConfigurations/ipconfig1",
+                    "properties": {
+                      "provisioningState": "Succeeded",
+                      "subnet": {
+                        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/networkProfileVnet/subnets/networkProfileSubnet1"
+                      }
+                    }
+                  }
+                ],
+                "provisioningState": "Succeeded"
+              }
+            }
+          ],
+          "containerNetworkInterfaces": [],
+          "provisioningState": "Succeeded",
+          "resourceGuid": "1570d8b6-ab8a-4ad2-81d6-d2799b429cbf"
+        }
+      }
+    }
+  },
+  "operationId": "NetworkProfiles_CreateOrUpdate",
+  "title": "Create network profile defaults"
+}

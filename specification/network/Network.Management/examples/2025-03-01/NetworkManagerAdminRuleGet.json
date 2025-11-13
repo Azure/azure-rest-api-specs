@@ -1,0 +1,58 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "configurationName": "myTestSecurityConfig",
+    "networkManagerName": "testNetworkManager",
+    "resourceGroupName": "rg1",
+    "ruleCollectionName": "testRuleCollection",
+    "ruleName": "SampleAdminRule",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "SampleAdminRule",
+        "type": "Microsoft.Network/networkManagers/securityAdminConfigurations/ruleCollections/rules",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/securityAdminConfigurations/myTestSecurityConfig/ruleCollections/testRuleCollection/rules/SampleAdminRule",
+        "kind": "Custom",
+        "properties": {
+          "description": "This is Sample Admin Rule",
+          "access": "Deny",
+          "destinationPortRanges": [
+            "22"
+          ],
+          "destinations": [
+            {
+              "addressPrefix": "*",
+              "addressPrefixType": "IPPrefix"
+            }
+          ],
+          "direction": "Inbound",
+          "priority": 1,
+          "provisioningState": "Succeeded",
+          "resourceGuid": "00000000-0000-0000-0000-000000000000",
+          "sourcePortRanges": [
+            "0-65535"
+          ],
+          "sources": [
+            {
+              "addressPrefix": "*",
+              "addressPrefixType": "IPPrefix"
+            }
+          ],
+          "protocol": "Tcp"
+        },
+        "systemData": {
+          "createdAt": "2021-01-11T18:52:27Z",
+          "createdBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
+          "createdByType": "User",
+          "lastModifiedAt": "2021-01-11T18:52:27Z",
+          "lastModifiedBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
+          "lastModifiedByType": "User"
+        }
+      }
+    }
+  },
+  "operationId": "AdminRules_Get",
+  "title": "Gets security admin rule"
+}

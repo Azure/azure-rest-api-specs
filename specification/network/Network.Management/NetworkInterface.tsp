@@ -1,0 +1,208 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.Network;
+/**
+ * A network interface in a resource group.
+ */
+model NetworkInterface
+  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<NetworkInterfacePropertiesFormat> {
+  ...ResourceNameParameter<
+    Resource = NetworkInterface,
+    KeyName = "networkInterfaceName",
+    SegmentName = "networkInterfaces",
+    NamePattern = ""
+  >;
+
+  /**
+   * The extended location of the network interface.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  extendedLocation?: ExtendedLocation;
+
+  ...Azure.ResourceManager.Legacy.EntityTagProperty;
+}
+
+alias NetworkInterfaceOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** The name of the cloud service. */
+    @path
+    @segment("cloudServices")
+    @key
+    cloudServiceName: string;
+
+    /** The name of role instance. */
+    @path
+    @segment("roleInstances")
+    @key
+    roleInstanceName: string;
+  },
+  {
+    /** The name of the network interface. */
+    @path
+    @segment("networkInterfaces")
+    @key
+    networkInterfaceName: string;
+  }
+>;
+
+@armResourceOperations
+interface NetworkInterfaces {
+  /**
+   * Get the specified network interface in a cloud service.
+   */
+  getCloudServiceNetworkInterface is NetworkInterfaceOps.Read<
+    NetworkInterface,
+    Parameters = {
+      /**
+       * Expands referenced resources.
+       */
+      @query("$expand")
+      $expand?: string;
+    }
+  >;
+
+  /**
+   * Gets information about all network interfaces in a role instance in a cloud service.
+   */
+  listCloudServiceRoleInstanceNetworkInterfaces is NetworkInterfaceOps.List<NetworkInterface>;
+}
+alias NetworkInterfaceOperationGroupOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+  },
+  {
+    /** The name of the network interface. */
+    @path
+    @segment("networkInterfaces")
+    @key
+    networkInterfaceName: string;
+  }
+>;
+
+@armResourceOperations
+interface NetworkInterfaceOperationGroup {
+  /**
+   * Gets information about the specified network interface.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("NetworkInterfaces_Get")
+  get is NetworkInterfaceOperationGroupOps.Read<
+    NetworkInterface,
+    Parameters = {
+      /**
+       * Expands referenced resources.
+       */
+      @query("$expand")
+      $expand?: string;
+    }
+  >;
+
+  /**
+   * Creates or updates a network interface.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("NetworkInterfaces_CreateOrUpdate")
+  createOrUpdate is NetworkInterfaceOperationGroupOps.CreateOrUpdateAsync<NetworkInterface>;
+
+  /**
+   * Updates a network interface tags.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("NetworkInterfaces_UpdateTags")
+  @patch(#{ implicitOptionality: false })
+  updateTags is NetworkInterfaceOperationGroupOps.CustomPatchSync<
+    NetworkInterface,
+    PatchModel = TagsObject
+  >;
+
+  /**
+   * Deletes the specified network interface.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @operationId("NetworkInterfaces_Delete")
+  delete is NetworkInterfaceOperationGroupOps.DeleteWithoutOkAsync<
+    NetworkInterface,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
+
+  /**
+   * Gets all network interfaces in a resource group.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("NetworkInterfaces_List")
+  list is NetworkInterfaceOperationGroupOps.List<NetworkInterface>;
+
+  /**
+   * Gets all network interfaces in a subscription.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("NetworkInterfaces_ListAll")
+  listAll is NetworkInterfaceOperationGroupOps.ListBySubscription<NetworkInterface>;
+
+  /**
+   * Gets all route tables applied to a network interface.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("NetworkInterfaces_GetEffectiveRouteTable")
+  @list
+  @action("effectiveRouteTable")
+  getEffectiveRouteTable is NetworkInterfaceOperationGroupOps.ActionAsync<
+    NetworkInterface,
+    void,
+    ArmResponse<EffectiveRouteListResult>
+  >;
+
+  /**
+   * Gets all network security groups applied to a network interface.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("NetworkInterfaces_ListEffectiveNetworkSecurityGroups")
+  @list
+  @action("effectiveNetworkSecurityGroups")
+  listEffectiveNetworkSecurityGroups is NetworkInterfaceOperationGroupOps.ActionAsync<
+    NetworkInterface,
+    void,
+    ArmResponse<EffectiveNetworkSecurityGroupListResult>
+  >;
+
+  /**
+   * List all load balancers in a network interface.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("NetworkInterfaceLoadBalancers_List")
+  @list
+  @get
+  @action("loadBalancers")
+  networkInterfaceLoadBalancersList is NetworkInterfaceOperationGroupOps.ActionSync<
+    NetworkInterface,
+    void,
+    ArmResponse<ResourceListResult<LoadBalancer>>
+  >;
+}
+
+@@doc(NetworkInterface.name, "The name of the network interface.");
+@@doc(NetworkInterface.properties, "Properties of the network interface.");
+@@doc(NetworkInterfaceOperationGroup.createOrUpdate::parameters.resource,
+  "Parameters supplied to the create or update network interface operation."
+);
+@@doc(NetworkInterfaceOperationGroup.updateTags::parameters.properties,
+  "Parameters supplied to update network interface tags."
+);

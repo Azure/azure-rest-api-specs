@@ -1,0 +1,52 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "networkManagerName": "testNetworkManager",
+    "parameters": {
+      "deploymentTypes": [
+        "Connectivity",
+        "AdminPolicy"
+      ],
+      "regions": [
+        "eastus",
+        "westus"
+      ],
+      "skipToken": "FakeSkipTokenCode"
+    },
+    "resourceGroupName": "resoureGroupSample",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "NetworkManagerDeploymentStatusList",
+  "responses": {
+    "200": {
+      "body": {
+        "skipToken": "NextFakeSkipTokenCode",
+        "value": [
+          {
+            "commitTime": "2021-01-26T06:58:50.883Z",
+            "configurationIds": [
+              "SecConfig1",
+              "SecConfig2"
+            ],
+            "deploymentStatus": "Deploying",
+            "deploymentType": "AdminPolicy",
+            "errorMessage": "",
+            "region": "eastus"
+          },
+          {
+            "commitTime": "2021-01-26T06:58:50.883Z",
+            "configurationIds": [
+              "ConnConfig1",
+              "ConnConfig2"
+            ],
+            "deploymentStatus": "Deployed",
+            "deploymentType": "Connectivity",
+            "errorMessage": "",
+            "region": "eastus"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "NetworkManagerDeploymentStatus_List"
+}

@@ -1,0 +1,58 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "skype",
+            "type": "Microsoft.Network/bgpServiceCommunities",
+            "id": "/subscriptions/subid/providers/Microsoft.Network/bgpServiceCommunities/skype",
+            "properties": {
+              "bgpCommunities": [
+                {
+                  "communityName": "Skype For Business Online",
+                  "communityPrefixes": [
+                    "13.67.56.225/32",
+                    "13.67.186.105/32"
+                  ],
+                  "communityValue": "12076:5030",
+                  "isAuthorizedToUse": true,
+                  "serviceGroup": "O365",
+                  "serviceSupportedRegion": "Global"
+                }
+              ],
+              "serviceName": "skype"
+            }
+          },
+          {
+            "name": "exchange",
+            "type": "Microsoft.Network/bgpServiceCommunities",
+            "id": "/subscriptions/subid/providers/Microsoft.Network/bgpServiceCommunities/exchange",
+            "properties": {
+              "bgpCommunities": [
+                {
+                  "communityName": "Exchange Online",
+                  "communityPrefixes": [
+                    "13.67.56.225/32",
+                    "13.67.186.105/32"
+                  ],
+                  "communityValue": "12076:5040",
+                  "isAuthorizedToUse": true,
+                  "serviceGroup": "O365",
+                  "serviceSupportedRegion": "Global"
+                }
+              ],
+              "serviceName": "exchange"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "BgpServiceCommunities_List",
+  "title": "ServiceCommunityList"
+}

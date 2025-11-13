@@ -1,0 +1,34 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "applicationGatewayName": "appgw",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "coonection1",
+            "type": "Microsoft.Network/applicationGateways/privateEndpointConnections",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/privateLinkResources/connection1",
+            "properties": {
+              "linkIdentifier": "805319460",
+              "privateEndpoint": {
+                "id": "/subscriptions/subid2/resourceGroups/rg1/providers/Microsoft.Network/privateEndpoints/pe1"
+              },
+              "privateLinkServiceConnectionState": {
+                "description": "Approval Done",
+                "status": "Approved"
+              },
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ApplicationGatewayPrivateEndpointConnections_List",
+  "title": "Lists all private endpoint connections on application gateway"
+}

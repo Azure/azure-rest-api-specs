@@ -1,0 +1,93 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "networkWatcherName": "nw1",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "flowLog1",
+            "type": "Microsoft.Network/networkWatchers/FlowLogs",
+            "etag": "W/\"00000000-0000-0000-0000-000000000000\"",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkWatchers/тц1/FlowLogs/flowLog1",
+            "identity": {
+              "type": "UserAssigned",
+              "userAssignedIdentities": {
+                "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1": {
+                  "clientId": "c16d15e1-f60a-40e4-8a05-df3d3f655c14",
+                  "principalId": "e3858881-e40c-43bd-9cde-88da39c05023"
+                }
+              }
+            },
+            "location": "centraluseuap",
+            "properties": {
+              "format": {
+                "type": "JSON",
+                "version": 2
+              },
+              "enabled": true,
+              "enabledFilteringCriteria": "srcIP=158.255.7.8 || dstPort=56891",
+              "flowAnalyticsConfiguration": {
+                "networkWatcherFlowAnalyticsConfiguration": {
+                  "enabled": false,
+                  "trafficAnalyticsInterval": 60,
+                  "workspaceId": "-",
+                  "workspaceRegion": "-"
+                }
+              },
+              "provisioningState": "Succeeded",
+              "recordTypes": "B,E",
+              "retentionPolicy": {
+                "days": 0,
+                "enabled": false
+              },
+              "storageId": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Storage/storageAccounts/wzstorage002",
+              "targetResourceGuid": "00000000-0000-0000-0000-000000000000",
+              "targetResourceId": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Network/networkSecurityGroups/vm5-nsg"
+            }
+          },
+          {
+            "name": "flowLog2",
+            "type": "Microsoft.Network/networkWatchers/FlowLogs",
+            "etag": "W/\"00000000-0000-0000-0000-000000000000\"",
+            "id": "/subscriptions/96e68903-0a56-4819-9987-8d08ad6a1f99/resourceGroups/NetworkWatcherRG/providers/Microsoft.Network/networkWatchers/NetworkWatcher_centraluseuap/FlowLogs/flowLog2",
+            "identity": {
+              "type": "UserAssigned",
+              "userAssignedIdentities": {
+                "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1": {
+                  "clientId": "c16d15e1-f60a-40e4-8a05-df3d3f655c14",
+                  "principalId": "e3858881-e40c-43bd-9cde-88da39c05023"
+                }
+              }
+            },
+            "location": "centraluseuap",
+            "properties": {
+              "format": {
+                "type": "JSON",
+                "version": 2
+              },
+              "enabled": true,
+              "enabledFilteringCriteria": "srcIP=158.255.7.8 || dstPort=56891",
+              "flowAnalyticsConfiguration": {},
+              "provisioningState": "Succeeded",
+              "recordTypes": "B,E",
+              "retentionPolicy": {
+                "days": 0,
+                "enabled": false
+              },
+              "storageId": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Storage/storageAccounts/iraflowlogtest2diag",
+              "targetResourceGuid": "00000000-0000-0000-0000-000000000000",
+              "targetResourceId": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Network/networkSecurityGroups/DSCP-test-vm1-nsg"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "FlowLogs_List",
+  "title": "List connection monitors"
+}

@@ -1,0 +1,81 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "resourceGroupName": "rg1",
+    "serviceName": "testPls",
+    "subscriptionId": "subId"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testPls",
+        "type": "Microsoft.Network/privateLinkServices",
+        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateLinkServices/testPls",
+        "location": "eastus",
+        "properties": {
+          "alias": "ContosoService.{guid}.azure.privatelinkservice",
+          "autoApproval": {
+            "subscriptions": [
+              "subscription1",
+              "subscription2"
+            ]
+          },
+          "fqdns": [
+            "fqdn1",
+            "fqdn2",
+            "fqdn3"
+          ],
+          "ipConfigurations": [
+            {
+              "name": "ipconfig1",
+              "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateLinkServices/testPls/ipConfigurations/ipconfig1",
+              "properties": {
+                "privateIPAddress": "10.0.1.4",
+                "privateIPAddressVersion": "IPv4",
+                "privateIPAllocationMethod": "Static",
+                "subnet": {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnetlb/subnets/subnetlb"
+                }
+              }
+            }
+          ],
+          "loadBalancerFrontendIpConfigurations": [
+            {
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/frontendIPConfigurations/fe-lb"
+            }
+          ],
+          "networkInterfaces": [
+            {
+              "id": "/subscriptions/subId/resourceGroups/rg1/provders/Microsoft.Network/networkInterfaces/testPls.nic.abcd1234"
+            }
+          ],
+          "privateEndpointConnections": [
+            {
+              "name": "privateEndpointConnection",
+              "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateLinkServices/testPls/privateEndpointConnections/privateEndpointConnection",
+              "properties": {
+                "privateEndpoint": {
+                  "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateEndpoints/testPe"
+                },
+                "privateLinkServiceConnectionState": {
+                  "description": "approved it for some reason.",
+                  "status": "Approved"
+                }
+              }
+            }
+          ],
+          "provisioningState": "Succeeded",
+          "visibility": {
+            "subscriptions": [
+              "subscription1",
+              "subscription2",
+              "subscription3"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "operationId": "PrivateLinkServices_Get",
+  "title": "Get private link service"
+}

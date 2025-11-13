@@ -1,0 +1,146 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "networkWatcherName": "nw1",
+    "parameters": {
+      "targetResourceId": "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Compute/virtualMachines/vm1"
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "networkInterfaces": [
+          {
+            "id": "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Network/networkInterfaces/nic1",
+            "securityRuleAssociations": {
+              "defaultSecurityRules": [
+                {
+                  "name": "AllowVnetInBound",
+                  "id": "/subscriptions//resourceGroups//providers/Microsoft.Network/networkSecurityGroups//defaultSecurityRules/",
+                  "properties": {
+                    "description": "Allow inbound traffic from all VMs in VNET",
+                    "access": "Allow",
+                    "destinationAddressPrefix": "VirtualNetwork",
+                    "destinationPortRange": "*",
+                    "direction": "Inbound",
+                    "priority": 65000,
+                    "provisioningState": "Succeeded",
+                    "sourceAddressPrefix": "VirtualNetwork",
+                    "sourcePortRange": "*",
+                    "protocol": "*"
+                  }
+                }
+              ],
+              "effectiveSecurityRules": [
+                {
+                  "name": "DefaultOutboundDenyAll",
+                  "access": "Deny",
+                  "destinationAddressPrefix": "*",
+                  "destinationPortRange": "0-65535",
+                  "direction": "Outbound",
+                  "priority": 65500,
+                  "sourceAddressPrefix": "*",
+                  "sourcePortRange": "0-65535",
+                  "protocol": "All"
+                }
+              ],
+              "subnetAssociation": {
+                "id": "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1",
+                "securityRules": [
+                  {
+                    "name": "fe_rule",
+                    "etag": "W/\"00000000-0000-0000-0000-000000000000\"",
+                    "id": "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Network/networkSecurityGroups/AppNSG/securityRules/fe_rule",
+                    "properties": {
+                      "description": "Allow Frontend",
+                      "access": "Allow",
+                      "destinationAddressPrefix": "*",
+                      "destinationPortRange": "*",
+                      "direction": "Inbound",
+                      "priority": 100,
+                      "provisioningState": "Succeeded",
+                      "sourceAddressPrefix": "10.1.0.0/24",
+                      "sourcePortRange": "*",
+                      "protocol": "Tcp"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    },
+    "202": {
+      "body": {
+        "networkInterfaces": [
+          {
+            "id": "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Network/networkInterfaces/nic1",
+            "securityRuleAssociations": {
+              "defaultSecurityRules": [
+                {
+                  "name": "AllowVnetInBound",
+                  "id": "/subscriptions//resourceGroups//providers/Microsoft.Network/networkSecurityGroups//defaultSecurityRules/",
+                  "properties": {
+                    "description": "Allow inbound traffic from all VMs in VNET",
+                    "access": "Allow",
+                    "destinationAddressPrefix": "VirtualNetwork",
+                    "destinationPortRange": "*",
+                    "direction": "Inbound",
+                    "priority": 65000,
+                    "provisioningState": "Succeeded",
+                    "sourceAddressPrefix": "VirtualNetwork",
+                    "sourcePortRange": "*",
+                    "protocol": "*"
+                  }
+                }
+              ],
+              "effectiveSecurityRules": [
+                {
+                  "name": "DefaultOutboundDenyAll",
+                  "access": "Deny",
+                  "destinationAddressPrefix": "*",
+                  "destinationPortRange": "0-65535",
+                  "direction": "Outbound",
+                  "priority": 65500,
+                  "sourceAddressPrefix": "*",
+                  "sourcePortRange": "0-65535",
+                  "protocol": "All"
+                }
+              ],
+              "subnetAssociation": {
+                "id": "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1",
+                "securityRules": [
+                  {
+                    "name": "fe_rule",
+                    "etag": "W/\"00000000-0000-0000-0000-000000000000\"",
+                    "id": "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Network/networkSecurityGroups/AppNSG/securityRules/fe_rule",
+                    "properties": {
+                      "description": "Allow Frontend",
+                      "access": "Allow",
+                      "destinationAddressPrefix": "*",
+                      "destinationPortRange": "*",
+                      "direction": "Inbound",
+                      "priority": 100,
+                      "provisioningState": "Succeeded",
+                      "sourceAddressPrefix": "10.1.0.0/24",
+                      "sourcePortRange": "*",
+                      "protocol": "Tcp"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "headers": {
+        "Location": "https:/management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkWatchers/nw1/queryStatus?api-version=2025-03-01"
+      }
+    }
+  },
+  "operationId": "NetworkWatchers_GetVMSecurityRules",
+  "title": "Get security group view"
+}

@@ -1,0 +1,65 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "parameters": {
+      "location": "eastus",
+      "properties": {
+        "dnsSettings": {
+          "domainNameLabel": "dnslbl"
+        }
+      }
+    },
+    "publicIpAddressName": "test-ip",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testDNS-ip",
+        "type": "Microsoft.Network/publicIPAddresses",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/test-ip",
+        "location": "eastus",
+        "properties": {
+          "dnsSettings": {
+            "domainNameLabel": "dnslbl",
+            "fqdn": "dnslbl.westus.cloudapp.azure.com"
+          },
+          "idleTimeoutInMinutes": 4,
+          "ipConfiguration": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkInterfaces/testDNS649/ipConfigurations/ipconfig1"
+          },
+          "provisioningState": "Succeeded",
+          "publicIPAddressVersion": "IPv4",
+          "publicIPAllocationMethod": "Dynamic"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "testDNS-ip",
+        "type": "Microsoft.Network/publicIPAddresses",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/test-ip",
+        "location": "eastus",
+        "properties": {
+          "ddosSettings": {
+            "protectionMode": "VirtualNetworkInherited"
+          },
+          "dnsSettings": {
+            "domainNameLabel": "dnslbl",
+            "fqdn": "dnslbl.westus.cloudapp.azure.com"
+          },
+          "idleTimeoutInMinutes": 4,
+          "ipConfiguration": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkInterfaces/testDNS649/ipConfigurations/ipconfig1"
+          },
+          "provisioningState": "Succeeded",
+          "publicIPAddressVersion": "IPv4",
+          "publicIPAllocationMethod": "Dynamic"
+        }
+      }
+    }
+  },
+  "operationId": "PublicIPAddresses_CreateOrUpdate",
+  "title": "Create public IP address DNS"
+}

@@ -1,0 +1,102 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "body": {
+      "properties": {
+        "description": "A sample reachability analysis run",
+        "intentId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/verifierWorkspaces/testVerifierWorkspace1/reachabilityAnalysisIntents/testReachabilityAnalysisIntenant1"
+      }
+    },
+    "networkManagerName": "testNetworkManager",
+    "reachabilityAnalysisRunName": "testAnalysisRunName",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "workspaceName": "testWorkspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testAnalysisRunName",
+        "type": "Microsoft.Network/networkManagers/verifierWorkspaces/reachabilityAnalysisRuns",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/verifierWorkspaces/testWorkspace/reachabilityAnalysisRuns/testAnalysisRunName",
+        "properties": {
+          "description": "A sample  reachability analysis intent",
+          "intentContent": {
+            "destinationResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Compute/virtualMachines/testVmDest",
+            "ipTraffic": {
+              "destinationIps": [
+                "10.4.0.1"
+              ],
+              "destinationPorts": [
+                "0"
+              ],
+              "protocols": [
+                "Any"
+              ],
+              "sourceIps": [
+                "10.4.0.0"
+              ],
+              "sourcePorts": [
+                "0"
+              ]
+            },
+            "sourceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Compute/virtualMachines/testVmSrc"
+          },
+          "intentId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/verifierWorkspaces/testVerifierWorkspace1/reachabilityAnalysisIntents/testReachabilityAnalysisIntenant1",
+          "provisioningState": "Succeeded"
+        },
+        "systemData": {
+          "createdAt": "2021-01-11T18:52:27Z",
+          "createdBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
+          "createdByType": "User",
+          "lastModifiedAt": "2021-01-11T18:52:27Z",
+          "lastModifiedBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
+          "lastModifiedByType": "User"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "testAnalysisRunName",
+        "type": "Microsoft.Network/networkManagers/verifierWorkspaces/reachabilityAnalysisRuns",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/networkManager/testNetworkManager/verifierWorkspaces/testWorkspace/reachabilityAnalysisRuns/testAnalysisRunName",
+        "properties": {
+          "description": "A sample  reachability analysis intent",
+          "intentContent": {
+            "destinationResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Compute/virtualMachines/testVmDest",
+            "ipTraffic": {
+              "destinationIps": [
+                "10.4.0.1"
+              ],
+              "destinationPorts": [
+                "0"
+              ],
+              "protocols": [
+                "Any"
+              ],
+              "sourceIps": [
+                "10.4.0.0"
+              ],
+              "sourcePorts": [
+                "0"
+              ]
+            },
+            "sourceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Compute/virtualMachines/testVmSrc"
+          },
+          "intentId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/verifierWorkspaces/testVerifierWorkspace1/reachabilityAnalysisIntents/testReachabilityAnalysisIntenant1",
+          "provisioningState": "Succeeded"
+        },
+        "systemData": {
+          "createdAt": "2021-01-11T18:52:27Z",
+          "createdBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
+          "createdByType": "User",
+          "lastModifiedAt": "2021-01-11T18:52:27Z",
+          "lastModifiedBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
+          "lastModifiedByType": "User"
+        }
+      }
+    }
+  },
+  "operationId": "ReachabilityAnalysisRuns_Create",
+  "title": "ReachabilityAnalysisRunCreate"
+}

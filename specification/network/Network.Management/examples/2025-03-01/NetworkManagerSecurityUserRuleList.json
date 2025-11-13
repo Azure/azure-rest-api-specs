@@ -1,0 +1,59 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "configurationName": "myTestSecurityConfig",
+    "networkManagerName": "testNetworkManager",
+    "resourceGroupName": "rg1",
+    "ruleCollectionName": "testRuleCollection",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "{baseurl}/subscriptions/subscriptionC/resourceGroup/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/securityUserConfigurations/myTestSecurityConfig/ruleCollections/testRuleCollection/rules?api-version=2025-03-01&$skipToken=10",
+        "value": [
+          {
+            "name": "SampleUserRule",
+            "type": "Microsoft.Network/networkManagers/securityConfigurations/ruleCollections/rules",
+            "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkmanagers/testNetworkManager/securityUserConfigurations/myTestSecurityConfig/ruleCollections/testRuleCollection/rules/SampleUserRule",
+            "properties": {
+              "description": "Sample User Rule",
+              "destinationPortRanges": [
+                "22"
+              ],
+              "destinations": [
+                {
+                  "addressPrefix": "*",
+                  "addressPrefixType": "IPPrefix"
+                }
+              ],
+              "direction": "Inbound",
+              "provisioningState": "Succeeded",
+              "resourceGuid": "f930553b-f78d-48c5-9445-6cf86b85e615",
+              "sourcePortRanges": [
+                "0-65535"
+              ],
+              "sources": [
+                {
+                  "addressPrefix": "*",
+                  "addressPrefixType": "IPPrefix"
+                }
+              ],
+              "protocol": "Tcp"
+            },
+            "systemData": {
+              "createdAt": "2021-01-11T18:52:27Z",
+              "createdBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
+              "createdByType": "User",
+              "lastModifiedAt": "2021-01-11T18:52:27Z",
+              "lastModifiedBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
+              "lastModifiedByType": "User"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "SecurityUserRules_List",
+  "title": "List security user rules"
+}

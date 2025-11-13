@@ -1,0 +1,52 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid",
+    "vpnSiteName": "vpnSite1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "vpnSiteLink1",
+            "type": "Microsoft.Network/vpnSites/vpnSiteLinks",
+            "etag": "W/\"00000000-0000-0000-0000-000000000000\"",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnSites/vpnSite1/vpnSiteLinks/vpnSiteLink1",
+            "properties": {
+              "bgpProperties": {
+                "asn": 1234,
+                "bgpPeeringAddress": "192.168.0.0"
+              },
+              "ipAddress": "50.50.50.56",
+              "linkProperties": {
+                "linkSpeedInMbps": 200
+              },
+              "provisioningState": "Succeeded"
+            }
+          },
+          {
+            "name": "vpnSiteLink2",
+            "type": "Microsoft.Network/vpnSites/vpnSiteLinks",
+            "etag": "W/\"00000000-0000-0000-0000-000000000000\"",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnSites/vpnSite1/vpnSiteLinks/vpnSiteLink2",
+            "properties": {
+              "bgpProperties": {
+                "asn": 1234,
+                "bgpPeeringAddress": "192.168.0.1"
+              },
+              "ipAddress": "40.40.40.46",
+              "linkProperties": {
+                "linkSpeedInMbps": 200
+              },
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "VpnSiteLinks_ListByVpnSite",
+  "title": "VpnSiteLinkListByVpnSite"
+}

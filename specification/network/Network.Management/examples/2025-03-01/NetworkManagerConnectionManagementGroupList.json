@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "managementGroupId": "managementGroupA"
+  },
+  "title": "List Management Group Network Manager Connection",
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "{baseurl}/managementGroups/subscriptionA/providers/Microsoft.Network/networkManagerConnections?api-version=2025-03-01&$skipToken=10",
+        "value": [
+          {
+            "name": "TestNMConnection",
+            "type": "Microsoft.Network/networkManagerConnections",
+            "id": "/providers/Microsoft.Management/managementGroups/managementGroupA/providers/Microsoft.Network/networkManagerConnections/TestNMConnection",
+            "properties": {
+              "description": "This is a network manager connection to testNetworkManager.",
+              "connectionState": "Pending",
+              "networkManagerId": "/subscriptions/subscriptionC/resourceGroup/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager"
+            },
+            "systemData": {
+              "createdAt": "2021-01-11T18:52:27Z",
+              "createdBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
+              "createdByType": "User",
+              "lastModifiedAt": "2021-01-11T18:52:27Z",
+              "lastModifiedBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
+              "lastModifiedByType": "User"
+            }
+          }
+        ]
+      },
+      "headers": {
+        "ETag": "be3cfaa2-3d02-4624-92d7-a26766306c8b"
+      }
+    }
+  },
+  "operationId": "ManagementGroupNetworkManagerConnections_List"
+}

@@ -1,0 +1,85 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "networkWatcherName": "nw1",
+    "parameters": {
+      "destination": {
+        "address": "192.168.100.4",
+        "port": 3389
+      },
+      "preferredIPVersion": "IPv4",
+      "source": {
+        "resourceId": "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Compute/virtualMachines/vm1"
+      }
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "avgLatencyInMs": 1,
+        "connectionStatus": "Connected",
+        "hops": [
+          {
+            "type": "Source",
+            "address": "10.1.1.4",
+            "id": "7dbbe7aa-60ba-4650-831e-63d775d38e9e",
+            "issues": [],
+            "nextHopIds": [
+              "75c8d819-b208-4584-a311-1aa45ce753f9"
+            ],
+            "resourceId": "subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Network/networkInterfaces/nic0/ipConfigurations/ipconfig1"
+          },
+          {
+            "type": "VirtualNetwork",
+            "address": "192.168.100.4",
+            "id": "75c8d819-b208-4584-a311-1aa45ce753f9",
+            "issues": [],
+            "nextHopIds": [],
+            "resourceId": "subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Network/networkInterfaces/nic1/ipConfigurations/ipconfig1"
+          }
+        ],
+        "maxLatencyInMs": 4,
+        "minLatencyInMs": 1,
+        "probesFailed": 0,
+        "probesSent": 100
+      }
+    },
+    "202": {
+      "body": {
+        "avgLatencyInMs": 1,
+        "connectionStatus": "Connected",
+        "hops": [
+          {
+            "type": "Source",
+            "address": "10.1.1.4",
+            "id": "7dbbe7aa-60ba-4650-831e-63d775d38e9e",
+            "issues": [],
+            "nextHopIds": [
+              "75c8d819-b208-4584-a311-1aa45ce753f9"
+            ],
+            "resourceId": "subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Network/networkInterfaces/nic0/ipConfigurations/ipconfig1"
+          },
+          {
+            "type": "VirtualNetwork",
+            "address": "192.168.100.4",
+            "id": "75c8d819-b208-4584-a311-1aa45ce753f9",
+            "issues": [],
+            "nextHopIds": [],
+            "resourceId": "subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Network/networkInterfaces/nic1/ipConfigurations/ipconfig1"
+          }
+        ],
+        "maxLatencyInMs": 4,
+        "minLatencyInMs": 1,
+        "probesFailed": 0,
+        "probesSent": 100
+      },
+      "headers": {
+        "Location": "https:/management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkWatchers/nw1/connectivityCheck?api-version=2025-03-01"
+      }
+    }
+  },
+  "operationId": "NetworkWatchers_CheckConnectivity",
+  "title": "Check connectivity"
+}

@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "resourceGroupName": "rg1",
+    "routeTableName": "virtualHubRouteTable1a",
+    "subscriptionId": "subid",
+    "virtualHubName": "virtualHub1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "virtualHubRouteTable1a",
+        "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1/routeTables/virtualHubRouteTable1a",
+        "properties": {
+          "attachedConnections": [
+            "All_Vnets"
+          ],
+          "provisioningState": "Succeeded",
+          "routes": [
+            {
+              "destinationType": "CIDR",
+              "destinations": [
+                "20.10.0.0/16",
+                "20.20.0.0/16"
+              ],
+              "nextHopType": "IPAddress",
+              "nextHops": [
+                "10.0.0.68"
+              ]
+            },
+            {
+              "destinationType": "CIDR",
+              "destinations": [
+                "0.0.0.0/0"
+              ],
+              "nextHopType": "IPAddress",
+              "nextHops": [
+                "10.0.0.68"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  "operationId": "VirtualHubRouteTableV2s_Get",
+  "title": "VirtualHubVirtualHubRouteTableV2Get"
+}

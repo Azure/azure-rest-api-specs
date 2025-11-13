@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "networkInterfaceName": "nic1",
+    "resourceGroupName": "testrg",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "ipconfig1",
+            "etag": "W/\\\"00000000-0000-0000-0000-000000000000\\\"",
+            "id": "/subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/networkInterfaces/nic1/ipConfigurations/ipconfig1",
+            "properties": {
+              "primary": true,
+              "privateIPAddress": "10.0.0.4",
+              "privateIPAddressVersion": "IPv4",
+              "privateIPAllocationMethod": "Dynamic",
+              "provisioningState": "Succeeded",
+              "subnet": {
+                "id": "/subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/vnet12/subnets/subnet12"
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "NetworkInterfaceIPConfigurations_List",
+  "title": "NetworkInterfaceIPConfigurationList"
+}

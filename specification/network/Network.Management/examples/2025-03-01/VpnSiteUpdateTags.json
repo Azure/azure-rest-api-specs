@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "VpnSiteParameters": {
+      "tags": {
+        "key1": "value1",
+        "key2": "value2"
+      }
+    },
+    "api-version": "2025-03-01",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid",
+    "vpnSiteName": "vpnSite1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "vpnSite1",
+        "type": "Microsoft.Network/vpnSites",
+        "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnSites/vpnSite1",
+        "location": "West US",
+        "properties": {
+          "addressSpace": {
+            "addressPrefixes": [
+              "10.0.0.0/16"
+            ]
+          },
+          "bgpProperties": {
+            "asn": 1234,
+            "bgpPeeringAddress": "192.168.0.0"
+          },
+          "deviceProperties": {
+            "deviceModel": "model01",
+            "deviceVendor": "vendor1",
+            "linkSpeedInMbps": 200
+          },
+          "ipAddress": "10.0.0.0",
+          "provisioningState": "Succeeded",
+          "virtualWan": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualWANs/wan1"
+        },
+        "tags": {
+          "key1": "value1",
+          "key2": "value2"
+        }
+      }
+    }
+  },
+  "operationId": "VpnSites_UpdateTags",
+  "title": "VpnSiteUpdate"
+}

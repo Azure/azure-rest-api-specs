@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "resourceGroupName": "peerTest",
+    "subscriptionId": "subid",
+    "virtualNetworkName": "vnet1",
+    "virtualNetworkPeeringName": "peer"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "peer",
+        "id": "/subscriptions/subid/resourceGroups/peerTest/providers/Microsoft.Network/virtualNetworks/vnet1/virtualNetworkPeerings/peer",
+        "properties": {
+          "allowForwardedTraffic": true,
+          "allowGatewayTransit": false,
+          "allowVirtualNetworkAccess": true,
+          "peeringState": "Initiated",
+          "peeringSyncLevel": "FullyInSync",
+          "provisioningState": "Succeeded",
+          "remoteAddressSpace": {
+            "addressPrefixes": [
+              "12.0.0.0/8"
+            ]
+          },
+          "remoteBgpCommunities": {
+            "regionalCommunity": "12076:50004",
+            "virtualNetworkCommunity": "12076:20002"
+          },
+          "remoteVirtualNetwork": {
+            "id": "/subscriptions/subid/resourceGroups/peerTest/providers/Microsoft.Network/virtualNetworks/vnet2"
+          },
+          "remoteVirtualNetworkAddressSpace": {
+            "addressPrefixes": [
+              "12.0.0.0/8"
+            ]
+          },
+          "useRemoteGateways": false
+        }
+      }
+    }
+  },
+  "operationId": "VirtualNetworkPeerings_Get",
+  "title": "Get peering"
+}

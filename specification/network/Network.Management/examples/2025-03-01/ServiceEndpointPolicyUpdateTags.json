@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "parameters": {
+      "tags": {
+        "tag1": "value1",
+        "tag2": "value2"
+      }
+    },
+    "resourceGroupName": "rg1",
+    "serviceEndpointPolicyName": "testServiceEndpointPolicy",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testServiceEndpointPolicy",
+        "type": "Microsoft.Network/serviceEndpointPolicies",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/serviceEndpointPolicies/testServiceEndpointPolicy",
+        "location": "westus",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "resourceGuid": "00000000-0000-0000-0000-000000000000",
+          "serviceEndpointPolicyDefinitions": [
+            {
+              "name": "StorageServiceEndpointPolicyDefinition",
+              "properties": {
+                "description": "Storage Service EndpointPolicy Definition",
+                "service": "Microsoft.Storage",
+                "serviceResources": [
+                  "/subscriptions/subid1",
+                  "/subscriptions/subid1/resourceGroups/storageRg",
+                  "/subscriptions/subid1/resourceGroups/storageRg/providers/Microsoft.Storage/storageAccounts/stAccount"
+                ]
+              }
+            }
+          ],
+          "subnets": []
+        },
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        }
+      }
+    }
+  },
+  "operationId": "ServiceEndpointPolicies_UpdateTags",
+  "title": "Update service endpoint policy tags"
+}

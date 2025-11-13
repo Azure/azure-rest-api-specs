@@ -1,0 +1,209 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "networkVirtualApplianceName": "nva",
+    "parameters": {
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity1": {}
+        }
+      },
+      "location": "West US",
+      "properties": {
+        "bootStrapConfigurationBlobs": [
+          "https://csrncvhdstorage1.blob.core.windows.net/csrncvhdstoragecont/csrbootstrapconfig"
+        ],
+        "cloudInitConfigurationBlobs": [
+          "https://csrncvhdstorage1.blob.core.windows.net/csrncvhdstoragecont/csrcloudinitconfig"
+        ],
+        "nvaInterfaceConfigurations": [
+          {
+            "name": "dataInterface",
+            "type": [
+              "PrivateNic"
+            ],
+            "subnet": {
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1"
+            }
+          },
+          {
+            "name": "managementInterface",
+            "type": [
+              "PublicNic"
+            ],
+            "subnet": {
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet2"
+            }
+          }
+        ],
+        "nvaSku": {
+          "bundledScaleUnit": "1",
+          "marketPlaceVersion": "latest",
+          "vendor": "Cisco SDWAN"
+        },
+        "virtualApplianceAsn": 10000
+      },
+      "tags": {
+        "key1": "value1"
+      }
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "nva",
+        "type": "Microsoft.Network/networkVirtualAppliances",
+        "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkVirtualAppliances/nva",
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity1": {}
+          }
+        },
+        "location": "West US",
+        "properties": {
+          "addressPrefix": "192.168.1.0/16",
+          "bootStrapConfigurationBlobs": [
+            "https://csrncvhdstorage1.blob.core.windows.net/csrncvhdstoragecont/csrbootstrapconfig"
+          ],
+          "cloudInitConfigurationBlobs": [
+            "https://csrncvhdstorage1.blob.core.windows.net/csrncvhdstoragecont/csrcloudinitconfig"
+          ],
+          "inboundSecurityRules": [
+            {
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkVirtualAppliances/nva/InboundSecurityRules/rule1"
+            }
+          ],
+          "nvaInterfaceConfigurations": [
+            {
+              "name": "dataInterface",
+              "type": [
+                "PrivateNic"
+              ],
+              "subnet": {
+                "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1"
+              }
+            },
+            {
+              "name": "managementInterface",
+              "type": [
+                "PublicNic"
+              ],
+              "subnet": {
+                "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet2"
+              }
+            }
+          ],
+          "nvaSku": {
+            "bundledScaleUnit": "1",
+            "marketPlaceVersion": "latest",
+            "vendor": "Cisco SDWAN"
+          },
+          "privateIpAddress": "192.168.12.5",
+          "provisioningState": "Succeeded",
+          "virtualApplianceAsn": 10000,
+          "virtualApplianceNics": [
+            {
+              "name": "managementInterface-ipconfig",
+              "instanceName": "nva_0",
+              "nicType": "",
+              "privateIpAddress": "192.168.12.1",
+              "publicIpAddress": "40.30.2.2"
+            },
+            {
+              "name": "managementInterface-ipconfig",
+              "instanceName": "nva_1",
+              "nicType": "",
+              "privateIpAddress": "192.168.12.2",
+              "publicIpAddress": "40.30.2.3"
+            },
+            {
+              "name": "dataInterface-ipconfig",
+              "instanceName": "nva_0",
+              "nicType": "",
+              "privateIpAddress": "192.168.12.3",
+              "publicIpAddress": ""
+            },
+            {
+              "name": "dataInterface-ipconfig",
+              "instanceName": "nva_1",
+              "nicType": "",
+              "privateIpAddress": "192.168.12.4",
+              "publicIpAddress": ""
+            }
+          ]
+        },
+        "tags": {
+          "key1": "value1"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "nva",
+        "type": "Microsoft.Network/networkVirtualAppliances",
+        "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkVirtualAppliances/nva",
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity1": {}
+          }
+        },
+        "location": "West US",
+        "properties": {
+          "bootStrapConfigurationBlobs": [
+            "https://csrncvhdstorage1.blob.core.windows.net/csrncvhdstoragecont/csrbootstrapconfig"
+          ],
+          "cloudInitConfigurationBlobs": [
+            "https://csrncvhdstorage1.blob.core.windows.net/csrncvhdstoragecont/csrcloudinitconfig"
+          ],
+          "inboundSecurityRules": [
+            {
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkVirtualAppliances/nva/InboundSecurityRules/rule1"
+            }
+          ],
+          "nvaInterfaceConfigurations": [
+            {
+              "name": "dataInterface",
+              "type": [
+                "PrivateNic"
+              ],
+              "subnet": {
+                "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1"
+              }
+            },
+            {
+              "name": "managementInterface",
+              "type": [
+                "PublicNic"
+              ],
+              "subnet": {
+                "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet2"
+              }
+            }
+          ],
+          "nvaSku": {
+            "bundledScaleUnit": "1",
+            "marketPlaceVersion": "latest",
+            "vendor": "Cisco SDWAN"
+          },
+          "provisioningState": "Updating",
+          "virtualApplianceAsn": 10000
+        },
+        "tags": {
+          "key1": "value1"
+        }
+      },
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/westus/nfvOperations/00000000-0000-0000-0000-000000000000?api-version=2025-03-01"
+      }
+    }
+  },
+  "operationId": "NetworkVirtualAppliances_CreateOrUpdate",
+  "title": "Create NVA in VNet with PrivateNic & PublicNic"
+}

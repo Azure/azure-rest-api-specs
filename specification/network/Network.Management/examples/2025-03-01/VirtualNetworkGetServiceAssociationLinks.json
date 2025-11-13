@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "resourceGroupName": "rg1",
+    "subnetName": "subnet",
+    "subscriptionId": "subid",
+    "virtualNetworkName": "vnet"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "acisal",
+            "type": "Microsoft.Network/virtualNetworks/subnets/serviceAssociationLinks",
+            "etag": "W/\"00000000-0000-0000-0000-000000000000\"",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet/subnets/subnet/serviceAssociationLinks/acisal",
+            "properties": {
+              "allowDelete": true,
+              "linkedResourceType": "Microsoft.ContainerInstance/containerGroups",
+              "locations": [
+                "westus"
+              ],
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ServiceAssociationLinks_List",
+  "title": "Get Service Association Links"
+}

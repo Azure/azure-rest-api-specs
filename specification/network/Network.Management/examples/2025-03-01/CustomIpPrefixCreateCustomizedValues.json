@@ -1,0 +1,67 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "customIpPrefixName": "test-customipprefix",
+    "parameters": {
+      "location": "westus",
+      "properties": {
+        "cidr": "0.0.0.0/24"
+      }
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid",
+    "zones": [
+      "1"
+    ]
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "test-customipprefix",
+        "type": "Microsoft.Network/customIpPrefixes",
+        "etag": "W/\"00000000-0000-0000-0000-00000000\"",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/customIpPrefixes/test-customipprefix",
+        "location": "westus",
+        "properties": {
+          "authorizationMessage": "authorizationMessage",
+          "childCustomIpPrefixes": [],
+          "cidr": "192.168.254.2/24",
+          "commissionedState": "Provisioning",
+          "failedReason": "",
+          "provisioningState": "Succeeded",
+          "publicIpPrefixes": [],
+          "resourceGuid": "00000000-0000-0000-0000-00000000",
+          "signedMessage": "signedMessage"
+        },
+        "zones": [
+          "1"
+        ]
+      }
+    },
+    "201": {
+      "body": {
+        "name": "test-customipprefix",
+        "type": "Microsoft.Network/customIpPrefixes",
+        "etag": "W/\"00000000-0000-0000-0000-00000000\"",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/customIpPrefixes/test-customipprefix",
+        "location": "westus",
+        "properties": {
+          "authorizationMessage": "authorizationMessage",
+          "childCustomIpPrefixes": [],
+          "cidr": "192.168.254.2/24",
+          "commissionedState": "Provisioning",
+          "failedReason": "",
+          "provisioningState": "Succeeded",
+          "publicIpPrefixes": [],
+          "resourceGuid": "00000000-0000-0000-0000-00000000",
+          "signedMessage": "signedMessage"
+        },
+        "zones": [
+          "1"
+        ]
+      }
+    }
+  },
+  "operationId": "CustomIPPrefixes_CreateOrUpdate",
+  "title": "Create custom IP prefix allocation method"
+}

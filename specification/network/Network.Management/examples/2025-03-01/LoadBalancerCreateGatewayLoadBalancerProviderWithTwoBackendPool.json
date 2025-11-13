@@ -1,0 +1,366 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "loadBalancerName": "lb",
+    "parameters": {
+      "location": "eastus",
+      "properties": {
+        "backendAddressPools": [
+          {
+            "name": "be-lb1",
+            "properties": {}
+          },
+          {
+            "name": "be-lb2",
+            "properties": {}
+          }
+        ],
+        "frontendIPConfigurations": [
+          {
+            "name": "fe-lb",
+            "properties": {
+              "subnet": {
+                "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnetlb/subnets/subnetlb"
+              }
+            }
+          }
+        ],
+        "inboundNatPools": [],
+        "loadBalancingRules": [
+          {
+            "name": "rulelb",
+            "properties": {
+              "backendAddressPool": {},
+              "backendAddressPools": [
+                {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/backendAddressPools/be-lb1"
+                },
+                {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/backendAddressPools/be-lb2"
+                }
+              ],
+              "backendPort": 0,
+              "enableFloatingIP": true,
+              "frontendIPConfiguration": {
+                "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/frontendIPConfigurations/fe-lb"
+              },
+              "frontendPort": 0,
+              "idleTimeoutInMinutes": 15,
+              "loadDistribution": "Default",
+              "probe": {
+                "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/probes/probe-lb"
+              },
+              "protocol": "All"
+            }
+          }
+        ],
+        "outboundRules": [],
+        "probes": [
+          {
+            "name": "probe-lb",
+            "properties": {
+              "intervalInSeconds": 15,
+              "numberOfProbes": 2,
+              "port": 80,
+              "probeThreshold": 1,
+              "requestPath": "healthcheck.aspx",
+              "protocol": "Http"
+            }
+          }
+        ]
+      },
+      "sku": {
+        "name": "Gateway"
+      }
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "lb",
+        "type": "Microsoft.Network/loadBalancers",
+        "etag": "W/\"00000000-0000-0000-0000-00000000\"",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb",
+        "location": "eastus",
+        "properties": {
+          "backendAddressPools": [
+            {
+              "name": "be-lb1",
+              "type": "Microsoft.Network/loadBalancers/backendAddressPools",
+              "etag": "W/\"00000000-0000-0000-0000-00000000\"",
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/backendAddressPools/be-lb1",
+              "properties": {
+                "loadBalancingRules": [
+                  {
+                    "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/loadBalancingRules/rulelb"
+                  }
+                ],
+                "provisioningState": "Succeeded",
+                "tunnelInterfaces": [
+                  {
+                    "type": "Internal",
+                    "identifier": 900,
+                    "port": 15000,
+                    "protocol": "VXLAN"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "be-lb2",
+              "type": "Microsoft.Network/loadBalancers/backendAddressPools",
+              "etag": "W/\"00000000-0000-0000-0000-00000000\"",
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/backendAddressPools/be-lb2",
+              "properties": {
+                "loadBalancingRules": [
+                  {
+                    "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/loadBalancingRules/rulelb"
+                  }
+                ],
+                "provisioningState": "Succeeded",
+                "tunnelInterfaces": [
+                  {
+                    "type": "Internal",
+                    "identifier": 901,
+                    "port": 15001,
+                    "protocol": "VXLAN"
+                  }
+                ]
+              }
+            }
+          ],
+          "frontendIPConfigurations": [
+            {
+              "name": "fe-lb",
+              "type": "Microsoft.Network/loadBalancers/frontendIPConfigurations",
+              "etag": "W/\"00000000-0000-0000-0000-00000000\"",
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/frontendIPConfigurations/fe-lb",
+              "properties": {
+                "inboundNatRules": [
+                  {
+                    "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/inboundNatRules/in-nat-rule"
+                  }
+                ],
+                "loadBalancingRules": [
+                  {
+                    "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/loadBalancingRules/rulelb"
+                  }
+                ],
+                "privateIPAddress": "10.0.1.4",
+                "privateIPAllocationMethod": "Dynamic",
+                "provisioningState": "Succeeded",
+                "subnet": {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnetlb/subnets/subnetlb"
+                }
+              }
+            }
+          ],
+          "inboundNatPools": [],
+          "loadBalancingRules": [
+            {
+              "name": "rulelb",
+              "type": "Microsoft.Network/loadBalancers/loadBalancingRules",
+              "etag": "W/\"00000000-0000-0000-0000-00000000\"",
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/loadBalancingRules/rulelb",
+              "properties": {
+                "backendAddressPools": [
+                  {
+                    "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/backendAddressPools/be-lb1"
+                  },
+                  {
+                    "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/backendAddressPools/be-lb2"
+                  }
+                ],
+                "backendPort": 0,
+                "disableOutboundSnat": false,
+                "enableFloatingIP": true,
+                "frontendIPConfiguration": {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/frontendIPConfigurations/fe-lb"
+                },
+                "frontendPort": 0,
+                "idleTimeoutInMinutes": 15,
+                "loadDistribution": "Default",
+                "probe": {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/probes/probe-lb"
+                },
+                "provisioningState": "Succeeded",
+                "protocol": "Tcp"
+              }
+            }
+          ],
+          "outboundRules": [],
+          "probes": [
+            {
+              "name": "probe-lb",
+              "type": "Microsoft.Network/loadBalancers/probes",
+              "etag": "W/\"00000000-0000-0000-0000-00000000\"",
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/probes/probe-lb",
+              "properties": {
+                "intervalInSeconds": 15,
+                "loadBalancingRules": [
+                  {
+                    "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/loadBalancingRules/rulelb"
+                  }
+                ],
+                "numberOfProbes": 2,
+                "port": 80,
+                "probeThreshold": 1,
+                "provisioningState": "Succeeded",
+                "requestPath": "healthcheck.aspx",
+                "protocol": "Http"
+              }
+            }
+          ],
+          "provisioningState": "Succeeded",
+          "resourceGuid": "00000000-0000-0000-0000-00000000"
+        },
+        "sku": {
+          "name": "Gateway"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "lb",
+        "type": "Microsoft.Network/loadBalancers",
+        "etag": "W/\"00000000-0000-0000-0000-00000000\"",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb",
+        "location": "eastus",
+        "properties": {
+          "backendAddressPools": [
+            {
+              "name": "be-lb1",
+              "type": "Microsoft.Network/loadBalancers/backendAddressPools",
+              "etag": "W/\"00000000-0000-0000-0000-00000000\"",
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/backendAddressPools/be-lb1",
+              "properties": {
+                "loadBalancingRules": [
+                  {
+                    "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/loadBalancingRules/rulelb"
+                  }
+                ],
+                "provisioningState": "Succeeded",
+                "tunnelInterfaces": [
+                  {
+                    "type": "Internal",
+                    "identifier": 900,
+                    "port": 15000,
+                    "protocol": "VXLAN"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "be-lb2",
+              "type": "Microsoft.Network/loadBalancers/backendAddressPools",
+              "etag": "W/\"00000000-0000-0000-0000-00000000\"",
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/backendAddressPools/be-lb2",
+              "properties": {
+                "loadBalancingRules": [
+                  {
+                    "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/loadBalancingRules/rulelb"
+                  }
+                ],
+                "provisioningState": "Succeeded",
+                "tunnelInterfaces": [
+                  {
+                    "type": "Internal",
+                    "identifier": 901,
+                    "port": 15001,
+                    "protocol": "VXLAN"
+                  }
+                ]
+              }
+            }
+          ],
+          "frontendIPConfigurations": [
+            {
+              "name": "fe-lb",
+              "type": "Microsoft.Network/loadBalancers/frontendIPConfigurations",
+              "etag": "W/\"00000000-0000-0000-0000-00000000\"",
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/frontendIPConfigurations/fe-lb",
+              "properties": {
+                "loadBalancingRules": [
+                  {
+                    "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/loadBalancingRules/rulelb"
+                  }
+                ],
+                "privateIPAddress": "10.0.1.4",
+                "privateIPAllocationMethod": "Dynamic",
+                "provisioningState": "Succeeded",
+                "subnet": {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnetlb/subnets/subnetlb"
+                }
+              }
+            }
+          ],
+          "inboundNatPools": [],
+          "loadBalancingRules": [
+            {
+              "name": "rulelb",
+              "type": "Microsoft.Network/loadBalancers/loadBalancingRules",
+              "etag": "W/\"00000000-0000-0000-0000-00000000\"",
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/loadBalancingRules/rulelb",
+              "properties": {
+                "backendAddressPools": [
+                  {
+                    "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/backendAddressPools/be-lb1"
+                  },
+                  {
+                    "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/backendAddressPools/be-lb2"
+                  }
+                ],
+                "backendPort": 80,
+                "disableOutboundSnat": false,
+                "enableFloatingIP": true,
+                "frontendIPConfiguration": {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/frontendIPConfigurations/fe-lb"
+                },
+                "frontendPort": 80,
+                "idleTimeoutInMinutes": 15,
+                "loadDistribution": "Default",
+                "probe": {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/probes/probe-lb"
+                },
+                "provisioningState": "Succeeded",
+                "protocol": "Tcp"
+              }
+            }
+          ],
+          "outboundRules": [],
+          "probes": [
+            {
+              "name": "probe-lb",
+              "type": "Microsoft.Network/loadBalancers/probes",
+              "etag": "W/\"00000000-0000-0000-0000-00000000\"",
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/probes/probe-lb",
+              "properties": {
+                "intervalInSeconds": 15,
+                "loadBalancingRules": [
+                  {
+                    "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/loadBalancingRules/rulelb"
+                  }
+                ],
+                "numberOfProbes": 2,
+                "port": 80,
+                "probeThreshold": 1,
+                "provisioningState": "Succeeded",
+                "requestPath": "healthcheck.aspx",
+                "protocol": "Http"
+              }
+            }
+          ],
+          "provisioningState": "Succeeded",
+          "resourceGuid": "00000000-0000-0000-0000-00000000"
+        },
+        "sku": {
+          "name": "Gateway"
+        }
+      }
+    }
+  },
+  "operationId": "LoadBalancers_CreateOrUpdate",
+  "title": "Create load balancer with Gateway Load Balancer Provider configured with two Backend Pool"
+}

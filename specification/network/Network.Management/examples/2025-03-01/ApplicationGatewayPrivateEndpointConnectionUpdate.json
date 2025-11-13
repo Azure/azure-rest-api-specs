@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "applicationGatewayName": "appgw",
+    "connectionName": "connection1",
+    "parameters": {
+      "name": "connection1",
+      "properties": {
+        "privateEndpoint": {
+          "id": "/subscriptions/subId2/resourceGroups/rg1/providers/Microsoft.Network/privateEndpoints/testPe"
+        },
+        "privateLinkServiceConnectionState": {
+          "description": "approved it for some reason.",
+          "status": "Approved"
+        }
+      }
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testPlePeConnection",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/privateLinkResources/testPlePeConnection",
+        "properties": {
+          "linkIdentifier": "linkId",
+          "privateEndpoint": {
+            "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateEndpoints/testPe"
+          },
+          "privateLinkServiceConnectionState": {
+            "description": "approved it for some reason.",
+            "status": "Approved"
+          }
+        }
+      }
+    },
+    "202": {}
+  },
+  "operationId": "ApplicationGatewayPrivateEndpointConnections_Update",
+  "title": "Update Application Gateway Private Endpoint Connection"
+}

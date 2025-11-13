@@ -1,0 +1,146 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "parameters": {
+      "location": "eastus",
+      "properties": {
+        "addressSpace": {
+          "ipamPoolPrefixAllocations": [
+            {
+              "numberOfIpAddresses": "65536",
+              "pool": {
+                "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/nm1/ipamPools/testIpamPool"
+              }
+            }
+          ]
+        },
+        "subnets": [
+          {
+            "name": "test-1",
+            "properties": {
+              "ipamPoolPrefixAllocations": [
+                {
+                  "numberOfIpAddresses": "80",
+                  "pool": {
+                    "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/nm1/ipamPools/testIpamPool"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid",
+    "virtualNetworkName": "test-vnet"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "test-vnet",
+        "type": "Microsoft.Network/virtualNetworks",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet",
+        "location": "eastus2euap",
+        "properties": {
+          "addressSpace": {
+            "addressPrefixes": [
+              "10.0.0.0/22"
+            ],
+            "ipamPoolPrefixAllocations": [
+              {
+                "allocatedAddressPrefixes": [
+                  "10.0.0.0/22"
+                ],
+                "numberOfIpAddresses": "800",
+                "pool": {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/nm1/ipamPools/testIpamPool"
+                }
+              }
+            ]
+          },
+          "provisioningState": "Succeeded",
+          "subnets": [
+            {
+              "name": "subnet1",
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/subnet1",
+              "properties": {
+                "addressPrefixes": [
+                  "10.0.0.0/26",
+                  "10.0.0.64/28"
+                ],
+                "ipamPoolPrefixAllocations": [
+                  {
+                    "allocatedAddressPrefixes": [
+                      "10.0.0.0/26",
+                      "10.0.0.64/28"
+                    ],
+                    "numberOfIpAddresses": "80",
+                    "pool": {
+                      "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/nm1/ipamPools/testIpamPool"
+                    }
+                  }
+                ],
+                "provisioningState": "Updating"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "test-vnet",
+        "type": "Microsoft.Network/virtualNetworks",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet",
+        "location": "eastus2euap",
+        "properties": {
+          "addressSpace": {
+            "addressPrefixes": [
+              "10.0.0.0/22"
+            ],
+            "ipamPoolPrefixAllocations": [
+              {
+                "allocatedAddressPrefixes": [
+                  "10.0.0.0/22"
+                ],
+                "numberOfIpAddresses": "800",
+                "pool": {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/nm1/ipamPools/testIpamPool"
+                }
+              }
+            ]
+          },
+          "provisioningState": "Updating",
+          "subnets": [
+            {
+              "name": "subnet1",
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/subnet1",
+              "properties": {
+                "addressPrefixes": [
+                  "10.0.0.0/26",
+                  "10.0.0.64/28"
+                ],
+                "ipamPoolPrefixAllocations": [
+                  {
+                    "allocatedAddressPrefixes": [
+                      "10.0.0.0/26",
+                      "10.0.0.64/28"
+                    ],
+                    "numberOfIpAddresses": "80",
+                    "pool": {
+                      "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/nm1/ipamPools/testIpamPool"
+                    }
+                  }
+                ],
+                "provisioningState": "Updating"
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "operationId": "VirtualNetworks_CreateOrUpdate",
+  "title": "Create virtual network with ipamPool"
+}

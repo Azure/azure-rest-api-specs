@@ -1,0 +1,84 @@
+{
+  "parameters": {
+    "VpnServerConfigurationPolicyGroupParameters": {
+      "properties": {
+        "isDefault": true,
+        "policyMembers": [
+          {
+            "name": "policy1",
+            "attributeType": "RadiusAzureGroupId",
+            "attributeValue": "6ad1bd08"
+          },
+          {
+            "name": "policy2",
+            "attributeType": "CertificateGroupId",
+            "attributeValue": "red.com"
+          }
+        ],
+        "priority": 0
+      }
+    },
+    "api-version": "2025-03-01",
+    "configurationPolicyGroupName": "policyGroup1",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid",
+    "vpnServerConfigurationName": "vpnServerConfiguration1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "policyGroup1",
+        "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnServerConfigurations/vpnServerConfiguration1/vpnServerConfigurationPolicyGroups/policyGroup1",
+        "properties": {
+          "isDefault": true,
+          "p2SConnectionConfigurations": [
+            {
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/p2sVpnGateways/p2sVpnGateway1/p2sConnectionConfigurations/P2SConnectionConfig1"
+            }
+          ],
+          "policyMembers": [
+            {
+              "name": "policy1",
+              "attributeType": "RadiusAzureGroupId",
+              "attributeValue": "6ad1bd08"
+            },
+            {
+              "name": "policy2",
+              "attributeType": "CertificateGroupId",
+              "attributeValue": "red.com"
+            }
+          ],
+          "priority": 0,
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "policyGroup1",
+        "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnServerConfigurations/vpnServerConfiguration1/vpnServerConfigurationPolicyGroups/policyGroup1",
+        "properties": {
+          "isDefault": true,
+          "policyMembers": [
+            {
+              "name": "policy1",
+              "attributeType": "RadiusAzureGroupId",
+              "attributeValue": "6ad1bd08"
+            },
+            {
+              "name": "policy2",
+              "attributeType": "CertificateGroupId",
+              "attributeValue": "red.com"
+            }
+          ],
+          "priority": 0,
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  },
+  "operationId": "ConfigurationPolicyGroups_CreateOrUpdate",
+  "title": "ConfigurationPolicyGroupPut"
+}

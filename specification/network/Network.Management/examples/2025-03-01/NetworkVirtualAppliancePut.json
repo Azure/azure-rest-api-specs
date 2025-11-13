@@ -1,0 +1,334 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "networkVirtualApplianceName": "nva",
+    "parameters": {
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity1": {}
+        }
+      },
+      "location": "West US",
+      "properties": {
+        "additionalNics": [
+          {
+            "name": "exrsdwan",
+            "hasPublicIp": true
+          }
+        ],
+        "bootStrapConfigurationBlobs": [
+          "https://csrncvhdstorage1.blob.core.windows.net/csrncvhdstoragecont/csrbootstrapconfig"
+        ],
+        "cloudInitConfigurationBlobs": [
+          "https://csrncvhdstorage1.blob.core.windows.net/csrncvhdstoragecont/csrcloudinitconfig"
+        ],
+        "internetIngressPublicIps": [
+          {
+            "id": "/subscriptions/{{subscriptionId}}/resourceGroups/{{rg}}/providers/Microsoft.Network/publicIPAddresses/slbip"
+          }
+        ],
+        "networkProfile": {
+          "networkInterfaceConfigurations": [
+            {
+              "type": "PublicNic",
+              "properties": {
+                "ipConfigurations": [
+                  {
+                    "name": "publicnicipconfig",
+                    "properties": {
+                      "primary": true
+                    }
+                  },
+                  {
+                    "name": "publicnicipconfig-2",
+                    "properties": {
+                      "primary": false
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "type": "PrivateNic",
+              "properties": {
+                "ipConfigurations": [
+                  {
+                    "name": "privatenicipconfig",
+                    "properties": {
+                      "primary": true
+                    }
+                  },
+                  {
+                    "name": "privatenicipconfig-2",
+                    "properties": {
+                      "primary": false
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "nvaSku": {
+          "bundledScaleUnit": "1",
+          "marketPlaceVersion": "12.1",
+          "vendor": "Cisco SDWAN"
+        },
+        "virtualApplianceAsn": 10000,
+        "virtualHub": {
+          "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/hub1"
+        }
+      },
+      "tags": {
+        "key1": "value1"
+      }
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "nva",
+        "type": "Microsoft.Network/networkVirtualAppliances",
+        "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkVirtualAppliances/nva",
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity1": {}
+          }
+        },
+        "location": "West US",
+        "properties": {
+          "additionalNics": [
+            {
+              "name": "exrsdwan",
+              "hasPublicIp": true
+            }
+          ],
+          "addressPrefix": "192.168.1.0/16",
+          "bootStrapConfigurationBlobs": [
+            "https://csrncvhdstorage1.blob.core.windows.net/csrncvhdstoragecont/csrbootstrapconfig"
+          ],
+          "cloudInitConfigurationBlobs": [
+            "https://csrncvhdstorage1.blob.core.windows.net/csrncvhdstoragecont/csrcloudinitconfig"
+          ],
+          "inboundSecurityRules": [
+            {
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkVirtualAppliances/nva/InboundSecurityRules/rule1"
+            }
+          ],
+          "internetIngressPublicIps": [
+            {
+              "id": "/subscriptions/{{subscriptionId}}/resourceGroups/{{rg}}/providers/Microsoft.Network/publicIPAddresses/slbip"
+            }
+          ],
+          "networkProfile": {
+            "networkInterfaceConfigurations": [
+              {
+                "type": "PublicNic",
+                "properties": {
+                  "ipConfigurations": [
+                    {
+                      "name": "publicnicipconfig",
+                      "properties": {
+                        "primary": true
+                      }
+                    },
+                    {
+                      "name": "publicnicipconfig-2",
+                      "properties": {
+                        "primary": false
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "PrivateNic",
+                "properties": {
+                  "ipConfigurations": [
+                    {
+                      "name": "privatenicipconfig",
+                      "properties": {
+                        "primary": true
+                      }
+                    },
+                    {
+                      "name": "privatenicipconfig-2",
+                      "properties": {
+                        "primary": false
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "nvaSku": {
+            "bundledScaleUnit": "1",
+            "marketPlaceVersion": "12.1",
+            "vendor": "Cisco SDWAN"
+          },
+          "provisioningState": "Succeeded",
+          "virtualApplianceAsn": 10000,
+          "virtualApplianceNics": [
+            {
+              "name": "publicnicipconfig",
+              "instanceName": "nva_0",
+              "nicType": "PublicNic",
+              "privateIpAddress": "192.168.12.1",
+              "publicIpAddress": "40.30.2.2"
+            },
+            {
+              "name": "publicnicipconfig-2",
+              "instanceName": "nva_0",
+              "nicType": "PublicNic",
+              "privateIpAddress": "192.168.12.2",
+              "publicIpAddress": "40.30.2.3"
+            },
+            {
+              "name": "privatenicipconfig",
+              "instanceName": "nva_0",
+              "nicType": "PrivateNic",
+              "privateIpAddress": "192.168.12.3",
+              "publicIpAddress": ""
+            },
+            {
+              "name": "privatenicipconfig-2",
+              "instanceName": "nva_0",
+              "nicType": "PrivateNic",
+              "privateIpAddress": "192.168.12.4",
+              "publicIpAddress": ""
+            },
+            {
+              "name": "exrsdwan",
+              "instanceName": "nva_0",
+              "nicType": "AdditionalNic",
+              "privateIpAddress": "10.1.113.4",
+              "publicIpAddress": "4.231.25.19"
+            }
+          ],
+          "virtualApplianceSites": [
+            {
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networtkVirtualAppliances/nva/virtualApplianceSites/site1"
+            }
+          ],
+          "virtualHub": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/hub1"
+          }
+        },
+        "tags": {
+          "key1": "value1"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "nva",
+        "type": "Microsoft.Network/networkVirtualAppliances",
+        "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkVirtualAppliances/nva",
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity1": {}
+          }
+        },
+        "location": "West US",
+        "properties": {
+          "additionalNics": [
+            {
+              "name": "exrsdwan",
+              "hasPublicIp": true
+            }
+          ],
+          "addressPrefix": "192.168.1.0/16",
+          "bootStrapConfigurationBlobs": [
+            "https://csrncvhdstorage1.blob.core.windows.net/csrncvhdstoragecont/csrbootstrapconfig"
+          ],
+          "cloudInitConfigurationBlobs": [
+            "https://csrncvhdstorage1.blob.core.windows.net/csrncvhdstoragecont/csrcloudinitconfig"
+          ],
+          "inboundSecurityRules": [
+            {
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkVirtualAppliances/nva/InboundSecurityRules/rule1"
+            }
+          ],
+          "internetIngressPublicIps": [
+            {
+              "id": "/subscriptions/{{subscriptionId}}/resourceGroups/{{rg}}/providers/Microsoft.Network/publicIPAddresses/slbip"
+            }
+          ],
+          "networkProfile": {
+            "networkInterfaceConfigurations": [
+              {
+                "type": "PublicNic",
+                "properties": {
+                  "ipConfigurations": [
+                    {
+                      "name": "publicnicipconfig",
+                      "properties": {
+                        "primary": true
+                      }
+                    },
+                    {
+                      "name": "publicnicipconfig-2",
+                      "properties": {
+                        "primary": false
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "PrivateNic",
+                "properties": {
+                  "ipConfigurations": [
+                    {
+                      "name": "privatenicipconfig",
+                      "properties": {
+                        "primary": true
+                      }
+                    },
+                    {
+                      "name": "privatenicipconfig-2",
+                      "properties": {
+                        "primary": false
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "nvaSku": {
+            "bundledScaleUnit": "1",
+            "marketPlaceVersion": "12.1",
+            "vendor": "Cisco SDWAN"
+          },
+          "provisioningState": "Updating",
+          "virtualApplianceAsn": 10000,
+          "virtualApplianceSites": [
+            {
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networtkVirtualAppliances/nva/virtualApplianceSites/site1"
+            }
+          ],
+          "virtualHub": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/hub1"
+          }
+        },
+        "tags": {
+          "key1": "value1"
+        }
+      },
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/westus/nfvOperations/00000000-0000-0000-0000-000000000000?api-version=2025-03-01"
+      }
+    }
+  },
+  "operationId": "NetworkVirtualAppliances_CreateOrUpdate",
+  "title": "Create NetworkVirtualAppliance"
+}

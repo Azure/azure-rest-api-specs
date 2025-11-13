@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "location": "westus",
+    "subscriptionId": "subId"
+  },
+  "title": "NetworkSecurityPerimeterAssociableResourceTypes",
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "{baseurl}/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/perimeterAssociableResourceTypes?api-version=2025-03-01&$skipToken=10",
+        "value": [
+          {
+            "name": "Microsoft.Sql.servers",
+            "type": "Microsoft.Network/PerimeterAssociableResourceTypes",
+            "id": "/subscriptions/{subscriptionID}/providers/Microsoft.Network/perimeterAssociableResourceTypes/Microsoft.Sql.servers",
+            "properties": {
+              "displayName": "Microsoft.Sql/servers",
+              "publicDnsZones": [
+                "database.windows.net"
+              ],
+              "resourceType": "Microsoft.Sql/servers"
+            }
+          },
+          {
+            "name": "Microsoft.Storage.accounts",
+            "type": "Microsoft.Network/PerimeterAssociableResourceTypes",
+            "id": "/subscriptions/{subscriptionId}/providers/Microsoft.Network/perimeterAssociableResourceTypes/Microsoft.Storage.storageAccounts",
+            "properties": {
+              "displayName": "Microsoft.Storage/accounts",
+              "publicDnsZones": [
+                "blob.core.windows.net",
+                "table.core.windows.net",
+                "queue.core.windows.net",
+                "file.core.windows.net"
+              ],
+              "resourceType": "Microsoft.Storage/accounts"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "NetworkSecurityPerimeterAssociableResourceTypes_List"
+}

@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "resourceGroupName": "rg1",
+    "stopParameters": {
+      "peeringLocation": "Vancouver",
+      "wasSimulationSuccessful": true,
+      "details": [
+        {
+          "failoverConnectionName": "conn1",
+          "failoverLocation": "Denver",
+          "isVerified": false
+        },
+        {
+          "failoverConnectionName": "conn2",
+          "failoverLocation": "Amsterdam",
+          "isVerified": true
+        }
+      ]
+    },
+    "subscriptionId": "subid",
+    "virtualNetworkGatewayName": "ergw"
+  },
+  "responses": {
+    "200": {
+      "body": {}
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/locations/eastus/operations/00000000-0000-0000-0000-000000000000?api-version=2025-03-01"
+      }
+    }
+  },
+  "operationId": "VirtualNetworkGateways_StopExpressRouteSiteFailoverSimulation",
+  "title": "VirtualNetworkGatewayStopSiteFailoverSimulation"
+}

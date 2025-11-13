@@ -1,0 +1,105 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "associationName": "association1",
+    "networkSecurityPerimeterName": "nsp1",
+    "parameters": {
+      "properties": {
+        "accessMode": "Enforced",
+        "privateLinkResource": {
+          "id": "/subscriptions/{paasSubscriptionId}/resourceGroups/{paasResourceGroupName}/providers/{providerName}/{resourceType}/{resourceName}"
+        },
+        "profile": {
+          "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp1/profiles/{profileName}"
+        }
+      }
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subId"
+  },
+  "title": "NspAssociationPut",
+  "responses": {
+    "200": {
+      "body": {
+        "name": "association1",
+        "type": "Microsoft.Network/networkSecurityPerimeters/resourceAssociations",
+        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp1/resourceAssociations/association1",
+        "properties": {
+          "accessMode": "Enforced",
+          "hasProvisioningIssues": "no",
+          "privateLinkResource": {
+            "id": "/subscriptions/{paasSubscriptionId}/resourceGroups/{paasResourceGroupName}/providers/{providerName}/{resourceType}/{resourceName}"
+          },
+          "profile": {
+            "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp1/profiles/{profileName}"
+          },
+          "provisioningState": "Succeeded"
+        },
+        "systemData": {
+          "createdAt": "2024-02-07T18:07:36.3446713Z",
+          "createdBy": "user",
+          "createdByType": "User",
+          "lastModifiedAt": "2024-02-07T18:07:36.3446713Z",
+          "lastModifiedBy": "user",
+          "lastModifiedByType": "User"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "association1",
+        "type": "Microsoft.Network/networkSecurityPerimeters/resourceAssociations",
+        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp1/resourceAssociations/association1",
+        "properties": {
+          "accessMode": "Enforced",
+          "hasProvisioningIssues": "no",
+          "privateLinkResource": {
+            "id": "/subscriptions/{paasSubscriptionId}/resourceGroups/{paasResourceGroupName}/providers/{providerName}/{resourceType}/{resourceName}"
+          },
+          "profile": {
+            "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp1/profiles/{profileName}"
+          },
+          "provisioningState": "Succeeded"
+        },
+        "systemData": {
+          "createdAt": "2024-02-07T18:07:36.3446713Z",
+          "createdBy": "user",
+          "createdByType": "User",
+          "lastModifiedAt": "2024-02-07T18:07:36.3446713Z",
+          "lastModifiedBy": "user",
+          "lastModifiedByType": "User"
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "name": "association1",
+        "type": "Microsoft.Network/networkSecurityPerimeters/resourceAssociations",
+        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp1/resourceAssociations/association1",
+        "properties": {
+          "accessMode": "Learning",
+          "hasProvisioningIssues": "no",
+          "privateLinkResource": {
+            "id": "/subscriptions/{paasSubscriptionId}/resourceGroups/{paasResourceGroupName}/providers/{providerName}/{resourceType}/{resourceName}"
+          },
+          "profile": {
+            "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp1/profiles/{profileName}"
+          },
+          "provisioningState": "Creating"
+        },
+        "systemData": {
+          "createdAt": "2024-02-07T18:07:36.3446713Z",
+          "createdBy": "user",
+          "createdByType": "User",
+          "lastModifiedAt": "2024-02-07T18:07:36.3446713Z",
+          "lastModifiedBy": "user",
+          "lastModifiedByType": "User"
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/networkSecurityPerimeterOperationStatuses/{operationId}?api-version={api-version}"
+      }
+    }
+  },
+  "operationId": "NetworkSecurityPerimeterAssociations_CreateOrUpdate"
+}

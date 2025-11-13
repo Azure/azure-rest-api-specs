@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "resourceGroupName": "rg1",
+    "serviceName": "testPls",
+    "subscriptionId": "subId"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "testPlePeConnection1",
+            "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateLinkServices/testPls/privateEndpointConnections/testPlePeConnection1",
+            "properties": {
+              "privateEndpoint": {
+                "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateEndpoints/testPe1"
+              },
+              "privateLinkServiceConnectionState": {
+                "description": "approved it for some reason.",
+                "status": "Approved"
+              }
+            }
+          },
+          {
+            "name": "testPlePeConnection2",
+            "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateLinkServices/testPls/privateEndpointConnections/testPlePeConnection2",
+            "properties": {
+              "privateEndpoint": {
+                "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateEndpoints/testPe2"
+              },
+              "privateLinkServiceConnectionState": {
+                "description": "rejected by some reason.",
+                "status": "Rejected"
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "PrivateLinkServices_ListPrivateEndpointConnections",
+  "title": "List private link service in resource group"
+}

@@ -1,0 +1,144 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "connectionMonitorName": "cm1",
+    "networkWatcherName": "nw1",
+    "parameters": {
+      "location": "eastus",
+      "properties": {
+        "endpoints": [
+          {
+            "name": "source",
+            "resourceId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Compute/virtualMachines/ct1"
+          },
+          {
+            "name": "destination",
+            "address": "bing.com"
+          }
+        ],
+        "testConfigurations": [
+          {
+            "name": "tcp",
+            "tcpConfiguration": {
+              "port": 80
+            },
+            "testFrequencySec": 60,
+            "protocol": "Tcp"
+          }
+        ],
+        "testGroups": [
+          {
+            "name": "tg",
+            "destinations": [
+              "destination"
+            ],
+            "sources": [
+              "source"
+            ],
+            "testConfigurations": [
+              "tcp"
+            ]
+          }
+        ]
+      }
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "cm1",
+        "type": "Microsoft.Network/networkWatchers/connectionMonitors",
+        "etag": "W/\"e7497f26-5f09-4559-900b-fe98f3dedb6f\"",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkWatchers/nw1/connectionMonitors/cm1",
+        "location": "eastus",
+        "properties": {
+          "endpoints": [
+            {
+              "name": "source",
+              "resourceId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Compute/virtualMachines/ct1"
+            },
+            {
+              "name": "destination",
+              "address": "bing.com"
+            }
+          ],
+          "provisioningState": "Updating",
+          "testConfigurations": [
+            {
+              "name": "tcp",
+              "tcpConfiguration": {
+                "port": 80
+              },
+              "testFrequencySec": 60,
+              "protocol": "Tcp"
+            }
+          ],
+          "testGroups": [
+            {
+              "name": "tg",
+              "destinations": [
+                "destination"
+              ],
+              "sources": [
+                "source"
+              ],
+              "testConfigurations": [
+                "tcp"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "cm1",
+        "type": "Microsoft.Network/networkWatchers/connectionMonitors",
+        "etag": "W/\"e7497f26-5f09-4559-900b-fe98f3dedb6f\"",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkWatchers/nw1/connectionMonitors/cm1",
+        "location": "eastus",
+        "properties": {
+          "endpoints": [
+            {
+              "name": "source",
+              "resourceId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Compute/virtualMachines/ct1"
+            },
+            {
+              "name": "destination",
+              "address": "bing.com"
+            }
+          ],
+          "provisioningState": "Succeeded",
+          "testConfigurations": [
+            {
+              "name": "tcp",
+              "tcpConfiguration": {
+                "port": 80
+              },
+              "testFrequencySec": 60,
+              "protocol": "Tcp"
+            }
+          ],
+          "testGroups": [
+            {
+              "name": "tg",
+              "destinations": [
+                "destination"
+              ],
+              "sources": [
+                "source"
+              ],
+              "testConfigurations": [
+                "tcp"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  "operationId": "ConnectionMonitors_CreateOrUpdate",
+  "title": "Create connection monitor V1"
+}

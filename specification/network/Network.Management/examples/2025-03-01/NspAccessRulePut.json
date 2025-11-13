@@ -1,0 +1,81 @@
+{
+  "parameters": {
+    "accessRuleName": "accessRule1",
+    "api-version": "2025-03-01",
+    "networkSecurityPerimeterName": "nsp1",
+    "parameters": {
+      "properties": {
+        "addressPrefixes": [
+          "10.11.0.0/16",
+          "10.10.1.0/24"
+        ],
+        "direction": "Inbound"
+      }
+    },
+    "profileName": "profile1",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subId"
+  },
+  "title": "NspAccessRulePut",
+  "responses": {
+    "200": {
+      "body": {
+        "name": "accessRule1",
+        "type": "Microsoft.Network/networkSecurityPerimeters/profiles/accessRules",
+        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp1/profiles/profile1/accessRules/accessRule1",
+        "properties": {
+          "addressPrefixes": [
+            "10.11.0.0/16",
+            "10.10.1.0/24"
+          ],
+          "direction": "Inbound",
+          "emailAddresses": [],
+          "fullyQualifiedDomainNames": [],
+          "networkSecurityPerimeters": [],
+          "phoneNumbers": [],
+          "provisioningState": "Succeeded",
+          "serviceTags": [],
+          "subscriptions": []
+        },
+        "systemData": {
+          "createdAt": "2024-02-07T18:07:36.3446713Z",
+          "createdBy": "user",
+          "createdByType": "User",
+          "lastModifiedAt": "2024-02-07T18:07:36.3446713Z",
+          "lastModifiedBy": "user",
+          "lastModifiedByType": "User"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "accessRule1",
+        "type": "Microsoft.Network/networkSecurityPerimeters/profiles/accessRules",
+        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp1/profiles/profile1/accessRules/accessRule1",
+        "properties": {
+          "addressPrefixes": [
+            "10.11.0.0/16",
+            "10.10.1.0/24"
+          ],
+          "direction": "Inbound",
+          "emailAddresses": [],
+          "fullyQualifiedDomainNames": [],
+          "networkSecurityPerimeters": [],
+          "phoneNumbers": [],
+          "provisioningState": "Succeeded",
+          "serviceTags": [],
+          "subscriptions": []
+        },
+        "systemData": {
+          "createdAt": "2024-02-07T18:07:36.3446713Z",
+          "createdBy": "user",
+          "createdByType": "User",
+          "lastModifiedAt": "2024-02-07T18:07:36.3446713Z",
+          "lastModifiedBy": "user",
+          "lastModifiedByType": "User"
+        }
+      }
+    }
+  },
+  "operationId": "NetworkSecurityPerimeterAccessRules_CreateOrUpdate"
+}

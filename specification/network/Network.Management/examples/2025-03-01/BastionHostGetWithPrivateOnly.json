@@ -1,0 +1,55 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "bastionHostName": "bastionhosttenant",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "bastionhosttenant",
+        "type": "Microsoft.Network/bastionHosts",
+        "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/bastionHosts/bastionhosttenant'",
+        "location": "West US",
+        "properties": {
+          "disableCopyPaste": false,
+          "dnsName": "bst-9d89d361-100e-4c01-b92d-466548c476dc.bastion.azure.com",
+          "enableIpConnect": false,
+          "enableKerberos": false,
+          "enablePrivateOnlyBastion": true,
+          "enableSessionRecording": false,
+          "enableShareableLink": false,
+          "enableTunneling": false,
+          "ipConfigurations": [
+            {
+              "name": "bastionHostIpConfiguration",
+              "type": "Microsoft.Network/bastionHosts/bastionHostIpConfigurations",
+              "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/bastionHosts/bastionhosttenant/bastionHostIpConfigurations/bastionHostIpConfiguration",
+              "properties": {
+                "privateIPAllocationMethod": "Dynamic",
+                "provisioningState": "Succeeded",
+                "subnet": {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet2/subnets/BastionHostSubnet"
+                }
+              }
+            }
+          ],
+          "provisioningState": "Succeeded",
+          "scaleUnits": 2
+        },
+        "sku": {
+          "name": "Premium"
+        },
+        "tags": {
+          "key1": "value1"
+        },
+        "zones": []
+      }
+    }
+  },
+  "operationId": "BastionHosts_Get",
+  "title": "Get Bastion Host With Private Only"
+}

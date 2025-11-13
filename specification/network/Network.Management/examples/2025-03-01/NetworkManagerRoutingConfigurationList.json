@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "networkManagerName": "testNetworkManager",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "{baseurl}/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroup/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/routingConfigurations?api-version=2025-03-01&$skipToken=10",
+        "value": [
+          {
+            "name": "myTestRoutingConfig",
+            "type": "Microsoft.Network/networkManagers/routingConfigurations",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/routingConfigurations/myTestRoutingConfig",
+            "properties": {
+              "description": "A sample policy",
+              "provisioningState": "Succeeded",
+              "resourceGuid": "00000000-0000-0000-0000-000000000000",
+              "routeTableUsageMode": "ManagedOnly"
+            },
+            "systemData": {
+              "createdAt": "2021-01-11T18:52:27Z",
+              "createdBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
+              "createdByType": "User",
+              "lastModifiedAt": "2021-01-11T18:52:27Z",
+              "lastModifiedBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
+              "lastModifiedByType": "User"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "NetworkManagerRoutingConfigurations_List",
+  "title": "List routing configurations in a network manager"
+}

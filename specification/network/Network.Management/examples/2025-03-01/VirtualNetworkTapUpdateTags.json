@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid",
+    "tapName": "test-vtap",
+    "tapParameters": {
+      "tags": {
+        "tag1": "value1",
+        "tag2": "value2"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "test-vtap",
+        "type": "Microsoft.Network/virtualNetworkTaps",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkTaps/test-vtap",
+        "location": "eastus",
+        "properties": {
+          "destinationNetworkInterfaceIPConfiguration": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkInterfaces/testNetworkInterface/ipConfigurations/testIPConfig1"
+          },
+          "destinationPort": 4789,
+          "networkInterfaceTapConfigurations": [
+            {
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkInterfaces/testNetworkInterface2/tapConfigurations/testtapConfiguration"
+            }
+          ],
+          "provisioningState": "Succeded"
+        },
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        }
+      }
+    }
+  },
+  "operationId": "VirtualNetworkTaps_UpdateTags",
+  "title": "Update virtual network tap tags"
+}

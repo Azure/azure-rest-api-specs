@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "circuitName": "circuitName",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "circuitName",
+        "type": "Microsoft.Network/expressRouteCircuits",
+        "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRouteCircuits/circuitName",
+        "location": "westus",
+        "properties": {
+          "allowClassicOperations": false,
+          "authorizations": [],
+          "circuitProvisioningState": "Enabled",
+          "peerings": [],
+          "provisioningState": "Succeeded",
+          "serviceKey": "a1410692-0000-4ceb-b94a-b90b94d398d1",
+          "serviceProviderProperties": {
+            "bandwidthInMbps": 200,
+            "peeringLocation": "peeringLocation",
+            "serviceProviderName": "providerName"
+          },
+          "serviceProviderProvisioningState": "NotProvisioned"
+        },
+        "sku": {
+          "name": "Standard_MeteredData",
+          "family": "MeteredData",
+          "tier": "Standard"
+        }
+      }
+    }
+  },
+  "operationId": "ExpressRouteCircuits_Get",
+  "title": "Get ExpressRouteCircuit"
+}

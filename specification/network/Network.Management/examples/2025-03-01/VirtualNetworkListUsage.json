@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid",
+    "virtualNetworkName": "vnetName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": {
+              "localizedValue": "Subnet size and usage",
+              "value": "SubnetSpace"
+            },
+            "currentValue": -1,
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnetName/subnets/GatewaySubnet",
+            "limit": -1,
+            "unit": "Count"
+          },
+          {
+            "name": {
+              "localizedValue": "Subnet size and usage",
+              "value": "SubnetSpace"
+            },
+            "currentValue": 2,
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnetName/subnets/newSubnet",
+            "limit": 3,
+            "unit": "Count"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "VirtualNetworks_ListUsage",
+  "title": "VnetGetUsage"
+}
