@@ -39,6 +39,9 @@
   },
   "tags": [
     {
+      "name": "Operations"
+    },
+    {
       "name": "MigrationServices"
     },
     {
@@ -46,6 +49,37 @@
     }
   ],
   "paths": {
+    "/providers/Microsoft.DataMigration/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataMigration/postgresqlMigrationServices": {
       "get": {
         "operationId": "MigrationServices_ListByResourceGroup",
@@ -309,6 +343,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List all database migrations by migration service": {
+            "$ref": "./examples/PostgresqlDatabaseMigration_List.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -344,7 +383,8 @@
             "in": "path",
             "description": "The database migration identifier.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]*$"
           }
         ],
         "responses": {
@@ -359,6 +399,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get a database migration": {
+            "$ref": "./examples/PostgresqlDatabaseMigration_Get.json"
           }
         }
       },
@@ -391,7 +436,8 @@
             "in": "path",
             "description": "The database migration identifier.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]*$"
           },
           {
             "name": "resource",
@@ -421,6 +467,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Create a database migration": {
+            "$ref": "./examples/PostgresqlDatabaseMigration_CreateOrUpdate.json"
           }
         }
       },
@@ -453,7 +504,8 @@
             "in": "path",
             "description": "The database migration identifier.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]*$"
           },
           {
             "name": "properties",
@@ -477,6 +529,14 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Cancel a database migration": {
+            "$ref": "./examples/PostgresqlDatabaseMigration_Update_Cancel.json"
+          },
+          "Cutover a database migration": {
+            "$ref": "./examples/PostgresqlDatabaseMigration_Update_Cutover.json"
           }
         }
       },
@@ -509,13 +569,11 @@
             "in": "path",
             "description": "The database migration identifier.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]*$"
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
@@ -538,6 +596,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a database migration": {
+            "$ref": "./examples/PostgresqlDatabaseMigration_Delete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -591,6 +654,10 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -604,7 +671,22 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        }
+        },
+        "x-ms-examples": {
+          "Discover database objects from Oracle source": {
+            "$ref": "./examples/PostgresqlDiscoverDatabaseObjects_Oracle.json"
+          },
+          "Discover database objects from PostgreSQL source": {
+            "$ref": "./examples/PostgresqlDiscoverDatabaseObjects_Postgres.json"
+          },
+          "Discover database objects from multiple connections": {
+            "$ref": "./examples/PostgresqlDiscoverDatabaseObjects_MultipleConnections.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataMigration/postgresqlMigrationServices/{serviceName}/testConnectivity": {
@@ -652,6 +734,10 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -665,7 +751,22 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        }
+        },
+        "x-ms-examples": {
+          "Test connectivity to source and target databases": {
+            "$ref": "./examples/PostgresqlMigrationService_TestConnectivity.json"
+          },
+          "Test connectivity with connection failure": {
+            "$ref": "./examples/PostgresqlMigrationService_TestConnectivity_Failed.json"
+          },
+          "Test connectivity with multiple endpoints": {
+            "$ref": "./examples/PostgresqlMigrationService_TestConnectivity_MultipleEndpoints.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     }
   },
@@ -1740,6 +1841,7 @@
         "Provisioning",
         "Succeeded",
         "Failed",
+        "Canceled",
         "Updating",
         "Deleting"
       ],
@@ -1761,6 +1863,11 @@
             "name": "Failed",
             "value": "Failed",
             "description": "Resource provisioning failed"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource provisioning was canceled"
           },
           {
             "name": "Updating",

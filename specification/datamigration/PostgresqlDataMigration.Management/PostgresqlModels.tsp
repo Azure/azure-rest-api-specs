@@ -114,6 +114,9 @@ union ProvisioningState {
   @doc("Resource provisioning failed")
   Failed: "Failed",
 
+  @doc("Resource provisioning was canceled")
+  Canceled: "Canceled",
+
   @doc("Resource is being updated")
   Updating: "Updating",
 

@@ -1,4 +1,6 @@
 {
+  "title": "Discover database objects from PostgreSQL source",
+  "operationId": "MigrationServices_DiscoverDatabaseObjects",
   "parameters": {
     "subscriptionId": "00000000-1111-2222-3333-444444444444",
     "resourceGroupName": "myResourceGroup",
@@ -6,31 +8,17 @@
     "api-version": "2025-01-10",
     "body": {
       "source": {
-        "engine": "Postgres",
+        "engine": "postgres",
         "connectionEndPoints": [
           {
             "connectionName": "postgresSource1",
             "hostName": "postgres-source1.example.com",
             "port": 5432,
-            "databaseName": "sourcedb1",
+            "databaseName": "sourcedb",
             "credentials": {
               "authenticationMethod": "password",
-              "userName": "sourceUser1",
-              "password": "sourcePassword1"
-            },
-            "ssl": {
-              "mode": "require"
-            }
-          },
-          {
-            "connectionName": "postgresSource2",
-            "hostName": "postgres-source2.example.com",
-            "port": 5432,
-            "databaseName": "sourcedb2",
-            "credentials": {
-              "authenticationMethod": "password",
-              "userName": "sourceUser2",
-              "password": "sourcePassword2"
+              "userName": "sourceUser",
+              "password": "sourcePassword"
             },
             "ssl": {
               "mode": "require"
@@ -39,10 +27,10 @@
         ]
       },
       "target": {
-        "engine": "AzurePostgresFlexible",
+        "engine": "azure_postgres_flexible",
         "connectionEndPoints": [
           {
-            "connectionName": "azurePostgresTarget",
+            "connectionName": "postgresTarget",
             "hostName": "postgres-target.postgres.database.azure.com",
             "port": 5432,
             "databaseName": "targetdb",
@@ -66,41 +54,38 @@
     "202": {
       "description": "Discovery operation accepted",
       "headers": {
-        "Location": "https://management.azure.com/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.DataMigration/locations/westus/operationTypes/discoverDatabaseObjects/operationResults/operation-11223",
+        "Location": "https://management.azure.com/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.DataMigration/locations/westus/operationTypes/discoverDatabaseObjects/operationResults/operation-67890",
         "Retry-After": "60"
       },
       "body": {
-        "requestId": "operation-11223",
+        "requestId": "operation-67890",
         "source": [
           {
             "connectionName": "postgresSource1",
             "engine": "postgres",
             "databases": [
               {
-                "databaseName": "sourcedb1",
+                "databaseName": "postgres",
                 "schemas": [
+                  {
+                    "schemaName": "public"
+                  },
+                  {
+                    "schemaName": "information_schema"
+                  }
+                ]
+              },
+              {
+                "databaseName": "sourcedb",
+                "schemas": [
+                  {
+                    "schemaName": "public"
+                  },
                   {
                     "schemaName": "app_schema"
                   },
                   {
-                    "schemaName": "user_data"
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "connectionName": "postgresSource2",
-            "engine": "postgres",
-            "databases": [
-              {
-                "databaseName": "sourcedb2",
-                "schemas": [
-                  {
-                    "schemaName": "analytics"
-                  },
-                  {
-                    "schemaName": "logs"
+                    "schemaName": "reporting"
                   }
                 ]
               }
@@ -108,11 +93,11 @@
           }
         ],
         "target": {
-          "connectionName": "azurePostgresTarget",
+          "connectionName": "postgresTarget",
           "engine": "azure_postgres_flexible",
           "databases": [
             {
-              "databaseName": "targetdb",
+              "databaseName": "postgres",
               "schemas": [
                 {
                   "schemaName": "public"
@@ -120,8 +105,12 @@
               ]
             },
             {
-              "databaseName": "information_schema",
-              "schemas": []
+              "databaseName": "targetdb",
+              "schemas": [
+                {
+                  "schemaName": "public"
+                }
+              ]
             }
           ]
         }

@@ -20,3 +20,6 @@ namespace Microsoft.DataMigration;
 enum Versions {
   v2025_01_10: "2025-01-10",
 }
+
+@doc("Operations interface for Microsoft.DataMigration")
+interface Operations extends Azure.ResourceManager.Operations {}

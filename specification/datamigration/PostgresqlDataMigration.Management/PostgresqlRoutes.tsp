@@ -31,16 +31,14 @@ interface MigrationServices {
   testConnectivity is ArmResourceActionAsync<
     MigrationService,
     TestConnectivityRequest,
-    TestConnectivityResponse,
-    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+    TestConnectivityResponse
   >;
 
   @doc("Discovers database objects (databases and schemas) from source and target.")
   discoverDatabaseObjects is ArmResourceActionAsync<
     MigrationService,
     DiscoverDatabaseObjectsRequest,
-    DiscoverDatabaseObjectsResponse,
-    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+    DiscoverDatabaseObjectsResponse
   >;
 }
 
@@ -59,7 +57,7 @@ interface DatabaseMigrations {
   >;
 
   @doc("Deletes a database migration.")
-  delete is ArmResourceDeleteAsync<DatabaseMigration>;
+  delete is ArmResourceDeleteWithoutOkAsync<DatabaseMigration>;
 
   @doc("Lists database migrations by migration service.")
   listByMigrationService is ArmResourceListByParent<DatabaseMigration>;

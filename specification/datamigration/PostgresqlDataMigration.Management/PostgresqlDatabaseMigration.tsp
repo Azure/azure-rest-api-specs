@@ -20,5 +20,6 @@ model DatabaseMigration is ProxyResource<DatabaseMigrationProperties> {
   @key("databaseMigrationId")
   @segment("databaseMigrations")
   @path
+  @pattern("^[a-zA-Z0-9-_]*$")
   name: string;
 }

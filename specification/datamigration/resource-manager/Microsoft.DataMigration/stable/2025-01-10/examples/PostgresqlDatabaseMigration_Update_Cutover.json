@@ -1,5 +1,5 @@
 {
-  "title": "Cancel a database migration",
+  "title": "Cutover a database migration",
   "operationId": "DatabaseMigrations_Update",
   "parameters": {
     "subscriptionId": "12345678-1234-1234-1234-123456789012",
@@ -9,8 +9,7 @@
     "api-version": "2025-01-10",
     "properties": {
       "properties": {
-        "operationType": "cancel",
-        "databaseNames": ["HRDB", "INVENTORYDB"]
+        "operationType": "cutover"
       }
     }
   },
@@ -23,7 +22,7 @@
         "properties": {
           "migrationName": "prod-oracle-to-azure-pg",
           "description": "Production Oracle migration to Azure PostgreSQL Flexible Server",
-          "migrationMode": "offline",
+          "migrationMode": "online",
           "source": {
             "engine": "oracle",
             "serverResourceId": null,
@@ -91,48 +90,29 @@
           ],
           "provisioningState": "Succeeded",
           "migrationStatus": {
-            "state": "Cancelling",
+            "state": "CutoverInProgress",
             "errors": [],
-            "lastUpdatedAt": "2025-09-23T11:00:00Z"
+            "lastUpdatedAt": "2025-09-23T11:15:00Z"
           },
           "databases": [
             {
-              "databaseName": "HRDB",
-              "migrationStatus": "Cancelling",
+              "databaseName": "HR",
+              "migrationStatus": "CutoverInProgress",
               "validationStatus": "Succeeded",
               "migrationProgress": {
-                "migrationPhase": "DataMigration",
+                "migrationPhase": "Cutover",
                 "migrationStatistics": {
                   "tablesTotal": 100,
-                  "tablesCompleted": 75,
+                  "tablesCompleted": 100,
                   "tablesFailed": 0,
-                  "tablesInProgress": 5,
-                  "tablesPending": 20,
-                  "percentComplete": 75
+                  "tablesInProgress": 0,
+                  "tablesPending": 0,
+                  "percentComplete": 100
                 }
               },
               "errors": [],
               "createdAt": "2025-09-20T08:15:30Z",
-              "lastUpdatedAt": "2025-09-23T11:00:00Z"
-            },
-            {
-              "databaseName": "INVENTORYDB",
-              "migrationStatus": "Cancelling",
-              "validationStatus": "Succeeded",
-              "migrationProgress": {
-                "migrationPhase": "DataMigration",
-                "migrationStatistics": {
-                  "tablesTotal": 50,
-                  "tablesCompleted": 40,
-                  "tablesFailed": 0,
-                  "tablesInProgress": 2,
-                  "tablesPending": 8,
-                  "percentComplete": 80
-                }
-              },
-              "errors": [],
-              "createdAt": "2025-09-20T08:15:30Z",
-              "lastUpdatedAt": "2025-09-23T11:00:00Z"
+              "lastUpdatedAt": "2025-09-23T11:15:00Z"
             }
           ],
           "startedAt": "2025-01-10T10:47:41.820717Z",
