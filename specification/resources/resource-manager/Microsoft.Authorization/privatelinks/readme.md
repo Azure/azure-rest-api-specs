@@ -79,10 +79,6 @@ swagger-to-sdk:
 
 See configuration in [readme.python.md](./readme.python.md)
 
-## Go
-
-See configuration in [readme.go.md](./readme.go.md)
-
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
