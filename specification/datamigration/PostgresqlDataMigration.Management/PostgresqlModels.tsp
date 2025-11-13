@@ -216,10 +216,10 @@ union ErrorSeverity {
   @doc("Critical error")
   Critical: "Critical",
 
-  @doc("Error")
+  @doc("Error level severity")
   Error: "Error",
 
-  @doc("Warning")
+  @doc("Warning level severity")
   Warning: "Warning",
 
   @doc("Information")

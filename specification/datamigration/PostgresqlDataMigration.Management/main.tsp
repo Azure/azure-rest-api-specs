@@ -14,7 +14,7 @@ using Azure.ResourceManager;
 @armProviderNamespace
 @service(#{ title: "Microsoft.DataMigration Management Service" })
 @versioned(Microsoft.DataMigration.Versions)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
 namespace Microsoft.DataMigration;
 
 enum Versions {
