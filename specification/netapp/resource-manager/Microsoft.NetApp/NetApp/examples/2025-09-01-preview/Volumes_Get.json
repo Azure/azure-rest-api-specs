@@ -1,0 +1,34 @@
+{
+  "parameters": {
+    "accountName": "account1",
+    "api-version": "2025-09-01-preview",
+    "poolName": "pool1",
+    "resourceGroupName": "myRG",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "volumeName": "volume1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "account1/pool1/volume1",
+        "type": "Microsoft.NetApp/netAppAccounts/capacityPools/volumes",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1/capacityPools/pool1/volumes/volume1",
+        "location": "eastus",
+        "properties": {
+          "creationToken": "my-unique-file-path",
+          "fileSystemId": "00000000-0000-0000-0000-000000000000",
+          "networkFeatures": "Standard",
+          "networkSiblingSetId": "0f434a03-ce0b-4935-81af-d98652ffb1c4",
+          "provisioningState": "Succeeded",
+          "serviceLevel": "Premium",
+          "storageToNetworkProximity": "T2",
+          "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRP/providers/Microsoft.Network/virtualNetworks/testvnet3/subnets/testsubnet3",
+          "throughputMibps": 128,
+          "usageThreshold": 107374182400
+        }
+      }
+    }
+  },
+  "operationId": "Volumes_Get",
+  "title": "Volumes_Get"
+}
