@@ -572,7 +572,7 @@ model SkuAggregatedData {
   @doc("Superset of Sku features")
   features?: string[];
 
-  @doc("Superset of Sku 'program' values")
+  @doc("Superset of Sku programs")
   programs?: string[];
 
   @doc("There is at least one Sku with consumption components")
