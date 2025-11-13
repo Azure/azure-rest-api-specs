@@ -33,9 +33,15 @@ namespace Quantum.Workspace.Services {
     @renamedFrom(QuantumWorkspaceAPIVersion.v2025_09_01_preview, "update")
     updateOld is PatchOperationOld<JobDetails>;
 
-    /** Request the cancellation of an existing job. */
+    /** DEPRECATED: This operation is deprecated and will be removed in future versions. Please use the 'cancel' operation instead. */
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
-    cancel is CancelOperation<JobDetails>;
+    #deprecated "This operation is deprecated and will be removed in future versions. Please use the 'cancel' operation instead."
+    @renamedFrom(QuantumWorkspaceAPIVersion.v2025_12_01_preview, "cancel")
+    cancelOld is CancelOperation<JobDetails>;
+
+    /** Request the cancellation of an existing job. */
+    @added(QuantumWorkspaceAPIVersion.v2025_12_01_preview)
+    cancel is ActionOperation<JobDetails>;
 
     /** Get job by its id. */
     get is GetOperation<JobDetails>;
