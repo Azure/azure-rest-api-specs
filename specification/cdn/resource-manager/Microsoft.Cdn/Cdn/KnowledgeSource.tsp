@@ -17,6 +17,7 @@ namespace Microsoft.Cdn;
  * Defines a knowledge source resource for a web agent.
  */
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
 @parentResource(WebAgent)
 model KnowledgeSource
   is Azure.ResourceManager.ProxyResource<KnowledgeSourceProperties> {
@@ -32,16 +33,19 @@ model KnowledgeSource
  * Defines a KnowledgeSource response body for long-running operation
  */
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
 model KnowledgeSourceAcceptedBody {
   /**
    * Defines a KnowledgeSource response body
    */
   @bodyRoot
   @added(Versions.v2025_09_01_preview)
+  @removed(Versions.v2025_12_01)
   _: KnowledgeSource;
 }
 
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
 @armResourceOperations
 interface KnowledgeSources {
   /**
