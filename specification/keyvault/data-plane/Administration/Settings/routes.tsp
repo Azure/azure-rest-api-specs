@@ -3,6 +3,7 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "@typespec/versioning";
 import "./models.tsp";
+import "../main.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;

@@ -8,12 +8,12 @@ namespace ClientCustomizations;
 
 @client(
   {
-    name: "ClientBackupRestore",
+    name: "BackupRestoreClient",
     service: KeyVault,
   },
   "go"
 )
-interface ClientBackupRestore {
+interface BackupRestoreClient {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   fullBackup is KeyVault.fullBackup;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"

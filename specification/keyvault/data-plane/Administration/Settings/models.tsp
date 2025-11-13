@@ -3,6 +3,7 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "@azure-tools/typespec-azure-core";
 import "../common/common.tsp";
+import "../main.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;

@@ -3,6 +3,7 @@ import "@azure-tools/typespec-client-generator-core";
 import "@typespec/rest";
 import "@typespec/versioning";
 import "./models.tsp";
+import "../main.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
