@@ -72,7 +72,7 @@ options:
           parameter-name: SubscriptionId
         set:
           default:
-            script: '(Get-AzContext).Subscription.Id'
+            script: "(Get-AzContext).Subscription.Id"
       - where:
           variant: ^(Create|Update)(?!.*?(Expanded|ViaJsonString|ViaJsonFilePath))
         remove: true
@@ -82,6 +82,24 @@ options:
       - where:
           verb: Set
         remove: true
+      - where:
+          subject: Artifact
+          variant: GetViaIdentityDisconnectedOperation|GetViaIdentityImage
+          parameter-name: Name
+        set:
+          parameter-name: ArtifactName
+      - where:
+          parameter-name: ArtifactName
+        clear-alias: true
+      - where:
+          subject: Image
+          variant: GetViaIdentityDisconnectedOperation
+          parameter-name: Name
+        set:
+          parameter-name: ImageName
+      - where:
+          parameter-name: ImageName
+        clear-alias: true
 
 linter:
   extends:
