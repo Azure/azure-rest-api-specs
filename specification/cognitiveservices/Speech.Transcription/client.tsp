@@ -31,4 +31,4 @@ namespace Azure.Ai.Speech.Transcription;
 @@clientName(TranscribedWord.offsetMilliseconds, "offset", "java");
 @@clientName(TranscribedWord.durationMilliseconds, "duration", "java");
 @@access(transcribe, Access.internal, "csharp");
-@@access(transcribe, Access.internal, "java");
+@@access(TranscriptionContent, Access.internal, "java");
