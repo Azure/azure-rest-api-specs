@@ -1,0 +1,64 @@
+{
+  "title": "NetworkMonitors_ListBySubscription",
+  "operationId": "NetworkMonitors_ListBySubscription",
+  "parameters": {
+    "api-version": "2024-06-15-preview",
+    "subscriptionId": "1234ABCD-0A1B-1234-5678-123456ABCDEF"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "annotation": "annotation",
+              "bmpConfiguration": {
+                "scopeResourceId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkFabrics/example-fabric",
+                "stationConfigurationState": "Enabled",
+                "stationName": "station-name",
+                "stationIp": "10.0.0.1",
+                "stationPort": 38846,
+                "stationConnectionMode": "Active",
+                "stationConnectionProperties": {
+                  "keepaliveIdleTime": 489,
+                  "probeInterval": 2854,
+                  "probeCount": 64
+                },
+                "stationNetwork": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomains/example-l3domain/internalNetworks/example-internalnetwork",
+                "monitoredNetworks": [
+                  "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomains/example-l3domain"
+                ],
+                "exportPolicy": "Pre-Policy",
+                "monitoredAddressFamilies": [
+                  "ipv4Unicast"
+                ]
+              },
+              "lastOperation": {
+                "details": "Succeeded"
+              },
+              "configurationState": "Succeeded",
+              "provisioningState": "Accepted",
+              "administrativeState": "Enabled"
+            },
+            "tags": {
+              "key2555": "pv"
+            },
+            "location": "eastus",
+            "id": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourcegroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkMonitors/example-monitor",
+            "name": "example-monitor",
+            "type": "microsoft.managednetworkfabric/networkmonitors",
+            "systemData": {
+              "createdBy": "email@address.com",
+              "createdByType": "User",
+              "createdAt": "2023-06-09T04:51:41.251Z",
+              "lastModifiedBy": "UserId",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2023-06-09T04:51:41.251Z"
+            }
+          }
+        ],
+        "nextLink": "https://microsoft.com/a"
+      }
+    }
+  }
+}
