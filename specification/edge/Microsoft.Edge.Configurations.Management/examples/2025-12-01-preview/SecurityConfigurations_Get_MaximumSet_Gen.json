@@ -1,0 +1,40 @@
+{
+  "title": "SecurityConfigurations_Get",
+  "operationId": "SecurityConfigurations_Get",
+  "parameters": {
+    "api-version": "2025-12-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rgconfigurations",
+    "configurationName": "aConfiguration",
+    "securityConfigurationName": "someName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "scenario": "Provisioning",
+          "secretReferences": [
+            {
+              "keyvaultResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgconfigurations/providers/Microsoft.KeyVault/vaults/provisioning-keyvault",
+              "vaultUri": "https://provisioning-keyvault.vault.azure.net",
+              "secretUri": "https://provisioning-keyvault.vault.azure.net/secrets/device1lac",
+              "purpose": "LocalAdminCredential"
+            }
+          ]
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgconfigurations/providers/Microsoft.Edge/configurations/aConfiguration/securityConfigurations/someName",
+        "name": "someName",
+        "type": "Microsoft.Edge/configurations/securityConfigurations",
+        "systemData": {
+          "createdBy": "kupa",
+          "createdByType": "User",
+          "createdAt": "2024-08-16T14:49:26.220Z",
+          "lastModifiedBy": "kupa",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-08-16T14:49:26.220Z"
+        }
+      }
+    }
+  }
+}
