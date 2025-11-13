@@ -391,7 +391,7 @@ export async function summarizeChecksImpl(
     );
   }
 
-  let labelContext = await updateLabels(labelNames, impactAssessment);
+  let labelContext = updateLabels(labelNames, impactAssessment);
 
   core.info(
     `Summarize checks label actions against ${owner}/${repo}#${issue_number}: \n` +
@@ -552,9 +552,9 @@ function warnIfLabelSetsIntersect(labelsToAdd, labelsToRemove) {
 /**
  * @param {string[]} existingLabels
  * @param {import("./labelling.js").ImpactAssessment | undefined} impactAssessment
- * @returns {Promise<import("./labelling.js").LabelContext>}
+ * @returns {import("./labelling.js").LabelContext}
  */
-export async function updateLabels(existingLabels, impactAssessment) {
+export function updateLabels(existingLabels, impactAssessment) {
   // logic for this function originally present in:
   //  - private/openapi-kebab/src/bots/pipeline/pipelineBotOnPRLabelEvent.ts
   //  - public/rest-api-specs-scripts/src/prSummary.ts
@@ -569,7 +569,7 @@ export async function updateLabels(existingLabels, impactAssessment) {
 
   if (impactAssessment) {
     // will further update the label context if necessary
-    await processImpactAssessment(labelContext, impactAssessment);
+    processImpactAssessment(labelContext, impactAssessment);
   }
 
   warnIfLabelSetsIntersect(labelContext.toAdd, labelContext.toRemove);
@@ -870,9 +870,9 @@ export function getCheckInfo(checkName) {
  * @param {CheckRunData[]} fyiRuns
  * @param {boolean} assessmentCompleted
  * @param {string} target_url
- * @returns {Promise<[string, CheckRunResult]>}
+ * @returns {[string, CheckRunResult]}
  */
-export async function createNextStepsComment(
+export function createNextStepsComment(
   core,
   repo,
   labels,
@@ -901,7 +901,7 @@ export async function createNextStepsComment(
     .filter((run) => checkRunIsSuccessful(run) === false)
     .map((run) => run.checkInfo);
 
-  const [commentBody, automatedChecksMet] = await buildNextStepsToMergeCommentBody(
+  const [commentBody, automatedChecksMet] = buildNextStepsToMergeCommentBody(
     core,
     labels,
     `${repo}/${targetBranch}`,
@@ -924,9 +924,9 @@ export async function createNextStepsComment(
  * @param {CheckMetadata[]} failingFyiChecksInfo
  * @param {boolean} assessmentCompleted
  * @param {string} target_url
- * @returns {Promise<[string, CheckRunResult]>}
+ * @returns {[string, CheckRunResult]}
  */
-async function buildNextStepsToMergeCommentBody(
+function buildNextStepsToMergeCommentBody(
   core,
   labels,
   targetBranch,
@@ -939,7 +939,7 @@ async function buildNextStepsToMergeCommentBody(
   // Build the comment header
   const commentTitle = `<h2>Next Steps to Merge</h2>`;
 
-  const violatedReqLabelsRules = await getViolatedRequiredLabelsRules(core, labels, targetBranch);
+  const violatedReqLabelsRules = getViolatedRequiredLabelsRules(core, labels, targetBranch);
 
   // we are "blocked" if we have any violated labelling rules OR if we have any failing required checks
   const anyBlockerPresent = failingReqChecksInfo.length > 0 || violatedReqLabelsRules.length > 0;
