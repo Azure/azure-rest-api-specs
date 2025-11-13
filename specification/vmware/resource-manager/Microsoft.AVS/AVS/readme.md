@@ -135,16 +135,6 @@ swagger-to-sdk:
 ## Suppression
 
 ``` yaml
-directive:
-
-  - transform: $["x-ms-client-flatten"] = false
-    from: vmware.json
-    where:
-      - $.definitions.Addon.properties.properties
-      - $.definitions.PlacementPolicy.properties.properties
-      - $.definitions.WorkloadNetworkDhcp.properties.properties
-      - $.definitions.License.properties.properties
-
 suppressions:
     
   - code: RequiredPropertiesMissingInResourceModel
