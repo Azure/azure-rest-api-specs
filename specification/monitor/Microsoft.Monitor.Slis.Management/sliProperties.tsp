@@ -221,7 +221,6 @@ union SpatialAggregationType {
 @doc("Represents criteria for determining uptime in window-based SLIs.")
 model WindowUptimeCriteria {
   @doc("Threshold value used to determine uptime.")
-  @minValue(0)
   target: float32;
 
   @doc("Comparison operator used for uptime evaluation.")
