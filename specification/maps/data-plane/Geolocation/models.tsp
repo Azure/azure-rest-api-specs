@@ -1,13 +1,11 @@
 import "@typespec/rest";
 import "@typespec/http";
-import "@azure-tools/typespec-azure-resource-manager";
-
-using TypeSpec.Rest;
-using TypeSpec.Http;
-using Azure.ResourceManager;
 
 namespace Geolocation;
 
+/**
+ * Desired format of the response. Only `json` format is supported.
+ */
 union JsonFormat {
   string,
 
@@ -111,6 +109,7 @@ model ErrorAdditionalInfo {
   /**
    * The additional info.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Existing API contract."
   @visibility(Lifecycle.Read)
   info?: unknown;
 }

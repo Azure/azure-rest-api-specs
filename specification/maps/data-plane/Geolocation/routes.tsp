@@ -18,10 +18,11 @@ interface GeolocationOperationGroup {
    * to block or modify content based on the geographical location from which the
    * application is accessed.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Non-standard operation."
   @summary("Use to get the ISO country/region code for a given IP address.")
   @route("/geolocation/ip/{format}")
   @get
-  getIPToLocation is Azure.Core.Foundations.Operation<
+  getIpToLocation is Azure.Core.Foundations.Operation<
     {
       /**
        * Indicates the account intended for use with the Microsoft Entra ID security
