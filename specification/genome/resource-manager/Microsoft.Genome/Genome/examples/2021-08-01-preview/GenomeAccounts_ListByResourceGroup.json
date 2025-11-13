@@ -1,0 +1,87 @@
+{
+  "operationId": "GenomeAccounts_ListByResourceGroup",
+  "title": "List Genome accounts by resource group",
+  "parameters": {
+    "subscriptionId": "12345678-1234-1234-1234-123456789012",
+    "resourceGroupName": "rg1",
+    "api-version": "2021-08-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/rg1/providers/Microsoft.Genome/accounts/genomeaccount1",
+            "name": "genomeaccount1",
+            "type": "Microsoft.Genome/accounts",
+            "location": "West US 2",
+            "tags": {
+              "project": "genomics-research"
+            },
+            "kind": "Standard",
+            "sku": {
+              "name": "Standard_S1",
+              "tier": "Standard"
+            },
+            "identity": {
+              "type": "SystemAssigned",
+              "principalId": "11111111-1111-1111-1111-111111111111",
+              "tenantId": "22222222-2222-2222-2222-222222222222"
+            },
+            "properties": {
+              "provisioningState": "Active",
+              "endpoint": "https://genomeaccount1.genome.azure.com",
+              "networkAcls": {
+                "defaultAction": "Allow",
+                "ipRules": [],
+                "virtualNetworkRules": []
+              },
+              "encryption": {
+                "keySource": "Microsoft.Storage"
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/rg1/providers/Microsoft.Genome/accounts/genomeaccount2",
+            "name": "genomeaccount2",
+            "type": "Microsoft.Genome/accounts",
+            "location": "East US",
+            "tags": {},
+            "kind": "Premium",
+            "sku": {
+              "name": "Premium_P1",
+              "tier": "Premium"
+            },
+            "identity": {
+              "type": "SystemAssigned",
+              "principalId": "44444444-4444-4444-4444-444444444444",
+              "tenantId": "22222222-2222-2222-2222-222222222222"
+            },
+            "properties": {
+              "provisioningState": "Active",
+              "endpoint": "https://genomeaccount2.genome.azure.com",
+              "networkAcls": {
+                "defaultAction": "Deny",
+                "ipRules": [
+                  {
+                    "value": "203.0.113.0/24"
+                  }
+                ],
+                "virtualNetworkRules": []
+              },
+              "encryption": {
+                "keySource": "Microsoft.KeyVault",
+                "keyVaultProperties": {
+                  "keyName": "mykey",
+                  "keyVersion": "1.0",
+                  "keyVaultUri": "https://myvault.vault.azure.net/",
+                  "identityClientId": "55555555-5555-5555-5555-555555555555"
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}
