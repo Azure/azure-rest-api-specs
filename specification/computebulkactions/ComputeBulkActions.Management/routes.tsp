@@ -81,4 +81,94 @@ interface BulkActions {
     @query
     $skiptoken?: string,
   ): ArmResponse<VirtualMachineListResult> | ErrorResponse;
+
+  // ------------------ Scheduledaction endpoints ---------------
+  /** VirtualMachinesSubmitDeallocate: Schedule deallocate operation for a batch of virtual machines at datetime in future. */
+  virtualMachinesSubmitDeallocate is ArmProviderActionSync<
+    Request = SubmitDeallocateRequest,
+    Response = ArmResponse<DeallocateResourceOperationResponse>,
+    Scope = Extension.Subscription,
+    Parameters = LocationParameter
+  >;
+
+  /** VirtualMachinesSubmitHibernate: Schedule hibernate operation for a batch of virtual machines at datetime in future. */
+  virtualMachinesSubmitHibernate is ArmProviderActionSync<
+    Request = SubmitHibernateRequest,
+    Response = ArmResponse<HibernateResourceOperationResponse>,
+    Scope = Extension.Subscription,
+    Parameters = LocationParameter
+  >;
+
+  /** VirtualMachinesSubmitStart: Schedule start operation for a batch of virtual machines at datetime in future. */
+  virtualMachinesSubmitStart is ArmProviderActionSync<
+    Request = SubmitStartRequest,
+    Response = ArmResponse<StartResourceOperationResponse>,
+    Scope = Extension.Subscription,
+    Parameters = LocationParameter
+  >;
+
+  /** VirtualMachinesExecuteDeallocate: Execute deallocate operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
+  virtualMachinesExecuteDeallocate is ArmProviderActionSync<
+    Request = ExecuteDeallocateRequest,
+    Response = ArmResponse<DeallocateResourceOperationResponse>,
+    Scope = Extension.Subscription,
+    Parameters = LocationParameter
+  >;
+
+  /** VirtualMachinesExecuteHibernate: Execute hibernate operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
+  virtualMachinesExecuteHibernate is ArmProviderActionSync<
+    Request = ExecuteHibernateRequest,
+    Response = ArmResponse<HibernateResourceOperationResponse>,
+    Scope = Extension.Subscription,
+    Parameters = LocationParameter
+  >;
+
+  /** VirtualMachinesExecuteStart: Execute start operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
+  virtualMachinesExecuteStart is ArmProviderActionSync<
+    Request = ExecuteStartRequest,
+    Response = ArmResponse<StartResourceOperationResponse>,
+    Scope = Extension.Subscription,
+    Parameters = LocationParameter
+  >;
+
+  /** VirtualMachinesExecuteCreate: Execute create operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
+  virtualMachinesExecuteCreate is ArmProviderActionSync<
+    Request = ExecuteCreateRequest,
+    Response = ArmResponse<CreateResourceOperationResponse>,
+    Scope = Extension.Subscription,
+    Parameters = LocationParameter
+  >;
+
+  /** VirtualMachinesExecuteDelete: Execute delete operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
+  virtualMachinesExecuteDelete is ArmProviderActionSync<
+    Request = ExecuteDeleteRequest,
+    Response = ArmResponse<DeleteResourceOperationResponse>,
+    Scope = Extension.Subscription,
+    Parameters = LocationParameter
+  >;
+
+  /** VirtualMachinesGetOperationStatus: Polling endpoint to read status of operations performed on virtual machines */
+  virtualMachinesGetOperationStatus is ArmProviderActionSync<
+    Request = GetOperationStatusRequest,
+    Response = ArmResponse<GetOperationStatusResponse>,
+    Scope = Extension.Subscription,
+    Parameters = LocationParameter
+  >;
+
+  /** VirtualMachinesCancelOperations: Cancel a previously submitted (start/deallocate/hibernate) request */
+  virtualMachinesCancelOperations is ArmProviderActionSync<
+    Request = CancelOperationsRequest,
+    Response = ArmResponse<CancelOperationsResponse>,
+    Scope = Extension.Subscription,
+    Parameters = LocationParameter
+  >;
+
+  /** VirtualMachinesGetOperationErrors: Get error details on operation errors (like transient errors encountered, additional logs) if they exist. */
+  virtualMachinesGetOperationErrors is ArmProviderActionSync<
+    Request = GetOperationErrorsRequest,
+    Response = ArmResponse<GetOperationErrorsResponse>,
+    Scope = Extension.Subscription,
+    Parameters = LocationParameter
+  >;
+  // ------------------ Scheduledaction endpoints ---------------
 }

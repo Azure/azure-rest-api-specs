@@ -6,6 +6,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./virtualMachineProfile.tsp";
 import "./virtualMachines.tsp";
 import "./virtualMachineExtension.tsp";
+import "./scheduledactionmodel.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -413,15 +414,6 @@ model ZonePreference {
   @minValue(0)
   @maxValue(65535)
   rank?: int32;
-}
-
-@doc("The retry policy for the operation")
-model RetryPolicy {
-  @doc("Retry count for operation")
-  retryCount?: int32;
-
-  @doc("Retry window in minutes for the operation")
-  retryWindowInMinutes?: int32;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "VMAttributeMinMaxInteger which does not follow camel casing"
