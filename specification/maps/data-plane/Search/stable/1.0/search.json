@@ -2376,12 +2376,12 @@
       "readOnly": true,
       "properties": {
         "buildingNumber": {
-          "description": "The building number on the street. DEPRECATED, use streetNumber instead.",
+          "description": "The building number on the street.\n**Important**: This property is *deprecated*. Use `streetNumber` instead.",
           "type": "string",
           "readOnly": true
         },
         "street": {
-          "description": "The street name. DEPRECATED, use streetName instead.",
+          "description": "The street name.\n**Important**: This property is *deprecated*. Use `streetName` instead.",
           "type": "string",
           "readOnly": true
         },
@@ -2410,7 +2410,7 @@
           "readOnly": true
         },
         "streetNameAndNumber": {
-          "description": "The street name and number.",
+          "description": "The street name and number.\nOnly available for the Search Address Reverse APIs.",
           "type": "string",
           "readOnly": true
         },
@@ -2490,7 +2490,8 @@
           "readOnly": true
         },
         "boundingBox": {
-          "$ref": "#/definitions/BoundingBoxCompassNotation"
+          "$ref": "#/definitions/BoundingBoxCompassNotation",
+          "description": "Defines the bounding box for the location. This property is only returned by the Search Address Reverse APIs. All other Search APIs return the `viewport` property of the `SearchAddressResultItem` object."
         }
       }
     },
