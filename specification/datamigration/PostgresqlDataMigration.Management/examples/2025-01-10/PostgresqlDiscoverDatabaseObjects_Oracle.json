@@ -51,12 +51,8 @@
     }
   },
   "responses": {
-    "202": {
-      "description": "Discovery operation accepted",
-      "headers": {
-        "Location": "https://management.azure.com/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.DataMigration/locations/westus/operationTypes/discoverDatabaseObjects/operationResults/operation-12345",
-        "Retry-After": "60"
-      },
+    "200": {
+      "description": "Discovery operation completed successfully",
       "body": {
         "requestId": "operation-12345",
         "source": [
@@ -103,6 +99,13 @@
             }
           ]
         }
+      }
+    },
+    "202": {
+      "description": "Discovery operation accepted",
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.DataMigration/locations/westus/operationTypes/discoverDatabaseObjects/operationResults/operation-12345",
+        "Retry-After": "60"
       }
     }
   }
