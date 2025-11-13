@@ -148,7 +148,6 @@ model DeploymentStacksWhatIfResourceChange {
    * The predicted changes to the resource configuration.
    */
   resourceConfigurationChanges?: DeploymentStacksChangeDelta<Record<unknown>>;
-
 }
 
 /**
