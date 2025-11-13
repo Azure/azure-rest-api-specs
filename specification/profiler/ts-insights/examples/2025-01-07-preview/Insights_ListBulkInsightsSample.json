@@ -1,0 +1,38 @@
+{
+  "title": "Insights_ListBulkInsights",
+  "operationId": "Insights_ListBulkInsights",
+  "parameters": {
+    "startTime": "2023-01-01T00:00:00Z",
+    "endTime": "2023-01-02T00:00:00Z",
+    "take": 10,
+    "api-version": "2025-01-07-preview",
+    "body": {
+      "appIds": [
+        "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": [
+        {
+          "key": "a-unique-key",
+          "count": 1,
+          "appId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+          "issueId": "ISSUE123",
+          "criteria": 150.5,
+          "issueCategory": "HighCpu",
+          "relation": "<",
+          "value": 120.75,
+          "containers": [
+            "containerA",
+            "containerB"
+          ],
+          "timestamp": "2023-01-01T12:34:56Z",
+          "traceOccurrences": 42,
+          "isFixable": false
+        }
+      ]
+    }
+  }
+}
