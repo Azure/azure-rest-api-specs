@@ -2260,6 +2260,25 @@
           "type": "string",
           "description": "A page with detailed status of the provider.",
           "readOnly": true
+        },
+        "numQubits": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The qubit number.",
+          "minimum": 1,
+          "maximum": 100000,
+          "readOnly": true
+        },
+        "targetProfile": {
+          "type": "string",
+          "description": "Target QIR profile.",
+          "readOnly": true
+        },
+        "metadata": {
+          "type": "object",
+          "description": "The metadata of this target.",
+          "additionalProperties": {},
+          "readOnly": true
         }
       },
       "required": [
