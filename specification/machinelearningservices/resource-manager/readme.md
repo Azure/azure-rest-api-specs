@@ -43,6 +43,19 @@ input-file:
   - Microsoft.MachineLearningServices/stable/2025-09-01/workspaceRP.json
 ```
 
+### Tag: package-2025-09-01
+
+These settings apply only when `--tag=package-2025-09-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-09-01'
+input-file:
+  - Microsoft.MachineLearningServices/stable/2025-09-01/machineLearningServices.json
+  - Microsoft.MachineLearningServices/stable/2025-09-01/mfe.json
+  - Microsoft.MachineLearningServices/stable/2025-09-01/registries.json
+  - Microsoft.MachineLearningServices/stable/2025-09-01/workspaceFeatures.json
+  - Microsoft.MachineLearningServices/stable/2025-09-01/workspaceRP.json
+```
+
 ### Tag: package-preview-2025-10-01-preview
 
 These settings apply only when `--tag=package-preview-2025-10-01-preview` is specified on the command line.
