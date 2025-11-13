@@ -120,7 +120,7 @@ model ProductBase {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Read-only metadata resource."
-@doc("Summary description of the product")
+@doc("Returns a subset of Product attributes")
 model ProductSummary {
   ...ProductBase;
 
@@ -130,7 +130,7 @@ model ProductSummary {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Read-only metadata resource."
-@doc("Summary description of the product")
+@doc("Returns the full set of Product attributes")
 model ProductDetails {
   ...ProductBase;
 
