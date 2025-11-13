@@ -33,11 +33,17 @@ export async function verifyRunStatus({ github, context, core }) {
     );
   }
 
-  if (context.eventName === "check_suite" && context.payload.check_suite.status !== "completed") {
-    core.setFailed(
-      `Check suite ${context.payload.check_suite.app.name} is not completed. Cannot evaluate incomplete check suite.`,
+  if (context.eventName === "check_suite") {
+    const payload = /** @type {import("@octokit/webhooks-types").CheckSuiteCompletedEvent} */ (
+      context.payload
     );
-    return;
+
+    if (payload.check_suite.status !== "completed") {
+      core.setFailed(
+        `Check suite ${payload.check_suite.app.name} is not completed. Cannot evaluate incomplete check suite.`,
+      );
+      return;
+    }
   }
 
   return await verifyRunStatusImpl({
@@ -68,8 +74,12 @@ export async function verifyRunStatusImpl({
   commitStatusName,
   workflowName,
 }) {
-  if (context.eventName == "check_run") {
-    const contextRunName = context.payload.check_run.name;
+  if (context.eventName === "check_run") {
+    const payload = /** @type {import("@octokit/webhooks-types").CheckRunEvent} */ (
+      context.payload
+    );
+
+    const contextRunName = payload.check_run.name;
     if (contextRunName !== checkRunName) {
       core.setFailed(
         `Check run name (${contextRunName}) does not match input: ${checkRunName}. Ensure job is filtering by github.event.check_run.name.`,
@@ -82,12 +92,19 @@ export async function verifyRunStatusImpl({
 
   let checkRun;
   if (context.eventName == "check_run") {
-    checkRun = context.payload.check_run;
+    const payload = /** @type {import("@octokit/webhooks-types").CheckRunEvent} */ (
+      context.payload
+    );
+    checkRun = payload.check_run;
   } else {
     const checkRuns = await getCheckRuns(github, context, checkRunName, head_sha);
     if (checkRuns.length === 0) {
       if (context.eventName === "check_suite") {
-        const message = `Could not locate check run ${checkRunName} in check suite ${context.payload.check_suite.app.name}. Ensure job is filtering by github.event.check_suite.app.name.`;
+        const payload = /** @type {import("@octokit/webhooks-types").CheckSuiteEvent} */ (
+          context.payload
+        );
+
+        const message = `Could not locate check run ${checkRunName} in check suite ${payload.check_suite.app.name}. Ensure job is filtering by github.event.check_suite.app.name.`;
         core.setFailed(message);
         return;
       }
@@ -164,7 +181,10 @@ export async function verifyRunStatusImpl({
   if (workflowName) {
     let workflowRun;
     if (context.eventName == "workflow_run") {
-      workflowRun = context.payload.workflow_run;
+      const payload = /** @type {import("@octokit/webhooks-types").WorkflowRunEvent} */ (
+        context.payload
+      );
+      workflowRun = payload.workflow_run;
     } else {
       const workflowRuns = await getWorkflowRuns(github, context, workflowName, head_sha);
       if (workflowRuns.length === 0) {
