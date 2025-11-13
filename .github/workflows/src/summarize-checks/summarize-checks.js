@@ -24,6 +24,7 @@ import { byDate, invert } from "../../../shared/src/sort.js";
 import { commentOrUpdate } from "../comment.js";
 import { extractInputs } from "../context.js";
 import {
+  ImpactAssessmentSchema,
   brChRevApproval,
   getViolatedRequiredLabelsRules,
   processImpactAssessment,
@@ -130,6 +131,11 @@ import path from "path";
  * @property {string} summary
  * @property {"pending" | keyof typeof CheckConclusion} result
  * @property {string} [target_url]
+ */
+
+/**
+ * @typedef {import("../github.js").CheckRuns[0]} CheckRun
+ * @typedef {import("../github.js").CommitStatuses[0]} CommitStatus
  */
 
 // Placing these configuration items here until we decide another way to pull them in.
@@ -294,7 +300,12 @@ export default async function summarizeChecks({ github, context, core }) {
     return;
   }
 
-  const targetBranch = context.payload.pull_request?.base?.ref;
+  const targetBranch =
+    context.eventName === "pull_request_target"
+      ? /** @type {import("@octokit/webhooks-types").PullRequestEvent} */ (context.payload)
+          .pull_request.base.ref
+      : undefined;
+
   core.info(`PR target branch: ${targetBranch}`);
 
   // Default target is this run itself
@@ -343,7 +354,7 @@ export function outputRunDetails(core, requiredCheckRuns, fyiCheckRuns) {
  * @param {number} issue_number
  * @param {string} head_sha
  * @param {string} event_name
- * @param {string} targetBranch
+ * @param {string|undefined} targetBranch
  * @param {string} target_url
  * @returns {Promise<void>}
  */
@@ -430,7 +441,7 @@ export async function summarizeChecksImpl(
     }
   }
 
-  const [commentBody, automatedChecksMet] = await createNextStepsComment(
+  const [commentBody, automatedChecksMet] = createNextStepsComment(
     core,
     repo,
     labelNames,
@@ -646,7 +657,7 @@ export async function getCheckRunTuple(
   // all checks will be considered as "FYI" until we have an impact assessment, so we can
   // determine the target branch, and from there pull branch protect rulesets to ensure we
   // are marking the required checks correctly.
-  /** @type {Array<CheckRunData & {_originalData: any, _source: string}>} */
+  /** @type {Array<CheckRunData & {_originalData: CheckRun|CommitStatus, _source: string}>} */
   const allChecks = [];
 
   allCheckRuns.forEach((checkRun) => {
@@ -694,7 +705,7 @@ export async function getCheckRunTuple(
   });
 
   // Group by name and take the latest for each
-  /** @type {Map<string, Array<CheckRunData & {_originalData: any, _source: string}>>} */
+  /** @type {Map<string, Array<CheckRunData & {_originalData: CheckRun|CommitStatus, _source: string}>>} */
   const checksByName = new Map();
 
   allChecks.forEach((check) => {
@@ -715,15 +726,12 @@ export async function getCheckRunTuple(
       invert(
         byDate((check) => {
           if (check._source === "checkRun") {
-            // Check runs have started_at, completed_at, etc. Use the most recent available date
-            return (
-              check._originalData.completed_at ||
-              check._originalData.started_at ||
-              check._originalData.created_at
-            );
+            const originalData = /** @type {CheckRun} */ (check._originalData);
+            // Use the most recent available date, or "1970" (oldest possible) if the data contains no dates
+            return originalData.completed_at || originalData.started_at || "1970";
           } else {
-            // Commit statuses have created_at and updated_at
-            return check._originalData.updated_at || check._originalData.created_at;
+            const originalData = /** @type {CommitStatus} */ (check._originalData);
+            return originalData.updated_at;
           }
         }),
       ),
@@ -736,18 +744,17 @@ export async function getCheckRunTuple(
       latestCheck.status === "completed" &&
       latestCheck.conclusion === "success"
     ) {
+      const originalData = /** @type {CheckRun} */ (latestCheck._originalData);
       const workflowRuns = await github.paginate(github.rest.actions.listWorkflowRunsForRepo, {
         owner,
         repo,
         head_sha: head_sha,
-        check_suite_id: latestCheck._originalData.check_suite.id,
+        check_suite_id: originalData.check_suite?.id,
         per_page: PER_PAGE_MAX,
       });
 
       if (workflowRuns.length === 0) {
-        core.warning(
-          `No workflow runs found for check suite ID: ${latestCheck._originalData.check_suite.id}`,
-        );
+        core.warning(`No workflow runs found for check suite ID: ${originalData.check_suite?.id}`);
       } else {
         // Sort by updated_at to get the most recent run
         const sortedRuns = workflowRuns.sort(
@@ -757,7 +764,7 @@ export async function getCheckRunTuple(
 
         if (workflowRuns.length > 1) {
           core.info(
-            `Found ${workflowRuns.length} workflow runs for check suite ID: ${latestCheck._originalData.check_suite.id}, using most recent: ${sortedRuns[0].id}`,
+            `Found ${workflowRuns.length} workflow runs for check suite ID: ${originalData.check_suite?.id}, using most recent: ${sortedRuns[0].id}`,
           );
         }
       }
@@ -865,7 +872,7 @@ export function getCheckInfo(checkName) {
  * @param {typeof import("@actions/core")} core
  * @param {string} repo
  * @param {string[]} labels
- * @param {string} targetBranch
+ * @param {string|undefined} targetBranch
  * @param {CheckRunData[]} requiredRuns
  * @param {CheckRunData[]} fyiRuns
  * @param {boolean} assessmentCompleted
@@ -1185,9 +1192,6 @@ export async function getImpactAssessment(github, core, owner, repo, runId) {
 
   await fs.unlink(tmpZip);
 
-  /** @type {import("./labelling.js").ImpactAssessment} */
-  // todo: we need to zod this to ensure the structure is correct, however we do not have zod installed at time of run
-  const impact = JSON.parse(jsonContent);
-  return impact;
+  return ImpactAssessmentSchema.parse(JSON.parse(jsonContent));
 }
 // #endregion

@@ -4,6 +4,7 @@
     2. It calculates what set of labels should be added or removed from the PR.
 */
 
+import * as z from "zod";
 import { includesEvery, includesNone } from "../../../shared/src/array.js";
 import {
   brchTsg,
@@ -45,19 +46,23 @@ import {
  * @property {Set<string>} toRemove - The set of labels to remove
  */
 
+export const ImpactAssessmentSchema = z.object({
+  resourceManagerRequired: z.boolean().describe("Whether a resource manager review is required."),
+  dataPlaneRequired: z.boolean().describe("Whether a data plane review is required."),
+  suppressionReviewRequired: z.boolean().describe("Whether a suppression review is required."),
+  isNewApiVersion: z.boolean().describe("Whether this PR introduces a new API version."),
+  rpaasRpNotInPrivateRepo: z
+    .boolean()
+    .describe("Whether the RPaaS RP is not present in the private repo."),
+  rpaasChange: z.boolean().describe("Whether this PR includes RPaaS changes."),
+  newRP: z.boolean().describe("Whether this PR introduces a new resource provider."),
+  rpaasRPMissing: z.boolean().describe("Whether the RPaaS RP label is missing."),
+  typeSpecChanged: z.boolean().describe("Whether a TypeSpec file has changed."),
+  isDraft: z.boolean().describe("Whether the PR is a draft."),
+  targetBranch: z.string().describe("The name of the target branch for the PR."),
+});
 /**
- * @typedef {Object} ImpactAssessment
- * @property {boolean} resourceManagerRequired - Whether a resource manager review is required.
- * @property {boolean} dataPlaneRequired - Whether a data plane review is required.
- * @property {boolean} suppressionReviewRequired - Whether a suppression review is required.
- * @property {boolean} isNewApiVersion - Whether this PR introduces a new API version.
- * @property {boolean} rpaasRpNotInPrivateRepo - Whether the RPaaS RP is not present in the private repo.
- * @property {boolean} rpaasChange - Whether this PR includes RPaaS changes.
- * @property {boolean} newRP - Whether this PR introduces a new resource provider.
- * @property {boolean} rpaasRPMissing - Whether the RPaaS RP label is missing.
- * @property {boolean} typeSpecChanged - Whether a TypeSpec file has changed.
- * @property {boolean} isDraft - Whether the PR is a draft.
- * @property {string} targetBranch - The name of the target branch for the PR.
+ * @typedef {import("zod").infer<typeof ImpactAssessmentSchema>} ImpactAssessment
  */
 
 /**
