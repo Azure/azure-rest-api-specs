@@ -12,6 +12,9 @@ using Microsoft.NetApp;
 // Snapshot is not updatable
 @@scope(Microsoft.NetApp.Snapshots.update, "!java");
 
+// rename QuotaItem to SubscriptionQuotaItem, avoid break in SDK
+@@clientName(QuotaItem, "SubscriptionQuotaItem", "java");
+
 // Fix property name case changes
 @@clientName(Microsoft.NetApp.AccountProperties.nfsV4IDDomain,
   "nfsV4IdDomain",
@@ -46,6 +49,14 @@ using Microsoft.NetApp;
   "groupMetadata",
   "java"
 );
+@@clientName(Microsoft.NetApp.VolumeGroupProperties.groupMetaData,
+  "groupMetadata",
+  "java"
+);
+@@clientName(Microsoft.NetApp.NetAppProvisioningState,
+  "ProvisioningState",
+  "java"
+);
 
 // Fix model name changes
 @@clientName(Microsoft.NetApp.VolumeGroupMetaData,
@@ -72,3 +83,7 @@ using Microsoft.NetApp;
   "$DO_NOT_NORMALIZE$\"10Minutely\"",
   "javascript"
 );
+
+@@clientName(QuotaItem, "SubscriptionQuotaItem", "go");
+@@clientName(QuotaItemList, "SubscriptionQuotaItemList", "go");
+@@clientName(QuotaItemProperties, "SubscriptionQuotaItemProperties", "go");

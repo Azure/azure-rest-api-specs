@@ -3,9 +3,6 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
-using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.DataBoxEdge;
@@ -278,7 +275,6 @@ union DeviceType {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@OpenAPI.extension("x-ms-identifiers", #[])
 union RoleTypes {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -350,7 +346,6 @@ union AlertSeverity {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@OpenAPI.extension("x-ms-identifiers", #[])
 union DayOfWeek {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1110,7 +1105,7 @@ model ServiceSpecification {
   /**
    * Metric specification as defined by shoebox.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @Azure.ResourceManager.identifiers(#["name"])
   metricSpecifications?: MetricSpecification_V1[];
 }
 
@@ -1147,7 +1142,7 @@ model MetricSpecification_V1 {
   /**
    * Metric dimensions, other than default dimension which is resource.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @Azure.ResourceManager.identifiers(#["name"])
   dimensions?: MetricDimension_V1[];
 
   /**
@@ -1227,7 +1222,7 @@ model CloudErrorBody {
   /**
    * A list of additional details about the error.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   details?: CloudErrorBody[];
 }
 
@@ -1280,28 +1275,26 @@ model DataBoxEdgeSku {
    * Availability of the Sku for the region.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
   locations?: string[];
 
   /**
    * The API versions in which Sku is available.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
   apiVersions?: string[];
 
   /**
    * Availability of the Sku for the location/zone/site.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["location"])
+  @Azure.ResourceManager.identifiers(#["location"])
   locationInfo?: SkuLocationInfo[];
 
   /**
    * The pricing info of the Sku.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["meterId"])
+  @Azure.ResourceManager.identifiers(#["meterId"])
   costs?: SkuCost[];
 
   /**
@@ -1326,14 +1319,13 @@ model DataBoxEdgeSku {
    * List of Shipment Types supported by this SKU
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
   shipmentTypes?: ShipmentType[];
 
   /**
    * The capability info of the SKU.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @Azure.ResourceManager.identifiers(#["name"])
   capabilities?: SkuCapability[];
 }
 
@@ -1351,14 +1343,12 @@ model SkuLocationInfo {
    * The zones.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
   zones?: string[];
 
   /**
    * The sites.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
   sites?: string[];
 }
 
@@ -1628,7 +1618,7 @@ model SubscriptionProperties {
   serializedDetails?: string;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @Azure.ResourceManager.identifiers(#["name"])
   registeredFeatures?: SubscriptionRegisteredFeatures[];
 }
 
@@ -1854,13 +1844,13 @@ model DeviceCapacityRequestInfoProperties {
   /**
    * Array containing the sizes of the VMs for checking if its feasible to create them on the appliance.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   vmPlacementQuery: string[][];
 
   /**
    * Array of the VMs of the sizes in VmSizes can be provisioned on the appliance.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   vmPlacementResults?: VmPlacementRequestResult[];
 }
 
@@ -2076,7 +2066,7 @@ model HostCapacity {
   /**
    * The numa nodes information for Hpn VMs.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   numaNodesData?: NumaNodeData[];
 }
 
@@ -2157,7 +2147,7 @@ model DiagnosticRemoteSupportSettingsProperties {
   /**
    * Remote support settings list according to the RemoteApplicationType
    */
-  @OpenAPI.extension("x-ms-identifiers", #["remoteApplicationType"])
+  @Azure.ResourceManager.identifiers(#["remoteApplicationType"])
   remoteSupportSettingsList?: RemoteSupportSettings[];
 }
 
@@ -2237,11 +2227,13 @@ model DataBoxEdgeDeviceExtendedInfoProperties {
   /**
    * The public part of the encryption certificate. Client uses this to encrypt any secret.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: use @secret if this is a value that should be kept private"
   encryptionKey?: string;
 
   /**
    * The Resource ID of the Resource.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: use @secret if this is a value that should be kept private"
   @visibility(Lifecycle.Read)
   resourceKey?: string;
 
@@ -2358,7 +2350,7 @@ model JobErrorDetails {
    * The error details.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   errorDetails?: JobErrorItem[];
 
   /**
@@ -2382,7 +2374,6 @@ model JobErrorItem {
    * The recommended actions.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
   recommendations?: string[];
 
   /**
@@ -2524,7 +2515,7 @@ model NetworkSettingsProperties {
    * The network adapter list on the device.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["adapterId"])
+  @Azure.ResourceManager.identifiers(#["adapterId"])
   networkAdapters?: NetworkAdapter[];
 }
 
@@ -2618,7 +2609,6 @@ model NetworkAdapter {
    * The list of DNS Servers of the device.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
   dnsServers?: string[];
 }
 
@@ -2788,7 +2778,7 @@ model OrderProperties {
    * List of status changes in the order.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["trackingInformation/serialNumber"])
+  @Azure.ResourceManager.identifiers(#["trackingInformation/serialNumber"])
   orderHistory?: OrderStatus[];
 
   /**
@@ -2801,14 +2791,14 @@ model OrderProperties {
    * Tracking information for the package delivered to the customer whether it has an original or a replacement device.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["serialNumber"])
+  @Azure.ResourceManager.identifiers(#["serialNumber"])
   deliveryTrackingInfo?: TrackingInfo[];
 
   /**
    * Tracking information for the package returned from the customer whether it has an original or a replacement device.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["serialNumber"])
+  @Azure.ResourceManager.identifiers(#["serialNumber"])
   returnTrackingInfo?: TrackingInfo[];
 
   /**
@@ -2839,7 +2829,6 @@ model ContactDetails {
   /**
    * The email list.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
   emailList: string[];
 }
 
@@ -2991,7 +2980,7 @@ model MonitoringMetricConfigurationProperties {
   /**
    * The metrics configuration details
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   metricConfigurations: MetricConfiguration[];
 }
 
@@ -3017,7 +3006,7 @@ model MetricConfiguration {
   /**
    * Host name for the IoT hub associated to the device.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   counterSets: MetricCounterSet[];
 }
 
@@ -3028,7 +3017,7 @@ model MetricCounterSet {
   /**
    * The counters that should be collected in this set.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @Azure.ResourceManager.identifiers(#["name"])
   counters: MetricCounter[];
 }
 
@@ -3049,13 +3038,13 @@ model MetricCounter {
   /**
    * The dimension filter.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["sourceName"])
+  @Azure.ResourceManager.identifiers(#["sourceName"])
   dimensionFilter?: MetricDimension[];
 
   /**
    * The additional dimensions to be added to metric.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["sourceName"])
+  @Azure.ResourceManager.identifiers(#["sourceName"])
   additionalDimensions?: MetricDimension[];
 }
 
@@ -3134,13 +3123,13 @@ model ShareProperties {
   /**
    * Mapping of users and corresponding access rights on the share (required for SMB protocol).
    */
-  @OpenAPI.extension("x-ms-identifiers", #["userId"])
+  @Azure.ResourceManager.identifiers(#["userId"])
   userAccessRights?: UserAccessRight[];
 
   /**
    * List of IP addresses and corresponding access rights on the share(required for NFS protocol).
    */
-  @OpenAPI.extension("x-ms-identifiers", #["client"])
+  @Azure.ResourceManager.identifiers(#["client"])
   clientAccessRights?: ClientAccessRight[];
 
   /**
@@ -3152,7 +3141,7 @@ model ShareProperties {
    * Share mount point to the role.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["shareId"])
+  @Azure.ResourceManager.identifiers(#["shareId"])
   shareMappings?: MountPointMap[];
 
   /**
@@ -3615,7 +3604,7 @@ model UpdateSummaryProperties {
    * The list of updates available for install.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["updateTitle"])
+  @Azure.ResourceManager.identifiers(#["updateTitle"])
   updates?: UpdateDetails[];
 
   /**
@@ -3778,7 +3767,7 @@ model UserProperties {
    * List of shares that the user has rights on. This field should not be specified during user creation.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["shareId"])
+  @Azure.ResourceManager.identifiers(#["shareId"])
   shareAccessRights?: ShareAccessRight[];
 
   /**
@@ -3984,7 +3973,6 @@ model DataBoxEdgeMoveRequest {
   /**
    * List of resources to be moved
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
   resources: string[];
 }
 
@@ -4231,7 +4219,7 @@ model IoTRoleProperties {
   /**
    * Mount points of shares in role(s).
    */
-  @OpenAPI.extension("x-ms-identifiers", #["shareId"])
+  @Azure.ResourceManager.identifiers(#["shareId"])
   shareMappings?: MountPointMap[];
 
   /**
@@ -4271,7 +4259,7 @@ model KubernetesClusterInfo {
    * Kubernetes cluster nodes
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["name", "type"])
+  @Azure.ResourceManager.identifiers(#["name", "type"])
   nodes?: NodeInfo[];
 
   /**
@@ -4299,7 +4287,7 @@ model NodeInfo {
   /**
    * IP Configuration of the Kubernetes node.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["ipAddress", "port"])
+  @Azure.ResourceManager.identifiers(#["ipAddress", "port"])
   ipConfiguration?: KubernetesIPConfiguration[];
 }
 
@@ -4408,13 +4396,13 @@ model KubernetesRoleStorage {
    * Kubernetes storage class info.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["name", "type"])
+  @Azure.ResourceManager.identifiers(#["name", "type"])
   storageClasses?: KubernetesRoleStorageClassInfo[];
 
   /**
    * Mount points of shares in role(s).
    */
-  @OpenAPI.extension("x-ms-identifiers", #["shareId"])
+  @Azure.ResourceManager.identifiers(#["shareId"])
   endpoints?: MountPointMap[];
 }
 
@@ -4610,7 +4598,7 @@ model OperationsList {
   /**
    * The list of operations.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @Azure.ResourceManager.identifiers(#["name"])
   @pageItems
   value: Operation[];
 
