@@ -147,7 +147,7 @@ union OperationState {
   @doc("Operations that are in the process of being executed")
   Executing: "Executing",
 
-  @doc("Operations that suceeded")
+  @doc("Operations that succeeded")
   Succeeded: "Succeeded",
 
   @doc("Operations that have failed")
@@ -288,7 +288,7 @@ model OperationErrorDetails {
   @doc("The error details of the operation")
   errorDetails: string;
 
-  @doc("The timestamp of the error occurence")
+  @doc("The timestamp of the error occurrence")
   timestamp?: offsetDateTime;
 
   @doc("The compute operationid of the Start/Deallocate/Hibernate request")
