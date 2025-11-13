@@ -465,9 +465,9 @@ This function does the following, **among other things**:
 /**
  * @param {LabelContext} labelContext
  * @param {ImpactAssessment} impactAssessment
- * @returns {Promise<{armReviewLabelShouldBePresent: boolean}>}
+ * @returns {{armReviewLabelShouldBePresent: boolean}}
  */
-export async function processImpactAssessment(labelContext, impactAssessment) {
+export function processImpactAssessment(labelContext, impactAssessment) {
   console.log("ENTER definition processARMReview");
 
   // By default these two should not be present. We may determine later in this function that they should be present after all.
@@ -535,7 +535,7 @@ export async function processImpactAssessment(labelContext, impactAssessment) {
     }
 
     armReviewLabel.shouldBePresent = impactAssessment.resourceManagerRequired;
-    await processARMReviewWorkflowLabels(
+    processARMReviewWorkflowLabels(
       labelContext,
       armReviewLabel.shouldBePresent,
       impactAssessment.rpaasRPMissing,
@@ -620,9 +620,8 @@ labels are being removed or added to a PR is pipelineBotOnPRLabelEvent.ts.
  * @param {boolean} ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent
  * @param {boolean} rpaasExceptionLabelShouldBePresent
  * @param {boolean} ciRpaasRPNotInPrivateRepoLabelShouldBePresent
- * @returns {Promise<void>}
  */
-async function processARMReviewWorkflowLabels(
+function processARMReviewWorkflowLabels(
   labelContext,
   armReviewLabelShouldBePresent,
   ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent,
@@ -706,7 +705,6 @@ async function processARMReviewWorkflowLabels(
       `blockedOnRpaas: ${blockedOnRpaas}. ` +
       `exactlyOneArmReviewWorkflowLabelShouldBePresent: ${exactlyOneArmReviewWorkflowLabelShouldBePresent}. `,
   );
-  return;
 }
 
 /**
@@ -1164,9 +1162,9 @@ export const requiredLabelsRules = rulesPri0dataPlane
  * @param {string[]} existingLabels
  * @param {string} targetBranch
  *
- * @returns {Promise<{presentBlockingLabels: string[], missingRequiredLabels: string[]}>}
+ * @returns {{presentBlockingLabels: string[], missingRequiredLabels: string[]}}
  */
-export async function getPresentBlockingLabelsAndMissingRequiredLabels(
+export function getPresentBlockingLabelsAndMissingRequiredLabels(
   core,
   repo,
   owner,
@@ -1176,15 +1174,17 @@ export async function getPresentBlockingLabelsAndMissingRequiredLabels(
   // this is a little bit of a strange looking branch format, but not going to touch this for now.
   const repoTargetBranch = `${repo}/${targetBranch}`;
 
-  const violatedReqLabelsRules = await getViolatedRequiredLabelsRules(
+  const violatedReqLabelsRules = getViolatedRequiredLabelsRules(
     core,
     existingLabels,
     repoTargetBranch,
   );
   const presentBlockingLabels = getPresentBlockingLabels(violatedReqLabelsRules);
 
-  const requiredLabelsFromRules = (
-    await getViolatedRequiredLabelsRules(core, existingLabels, repoTargetBranch)
+  const requiredLabelsFromRules = getViolatedRequiredLabelsRules(
+    core,
+    existingLabels,
+    repoTargetBranch,
   )
     .filter((rule) => rule.anyRequiredLabels.length > 0)
     // See comment on RequiredLabelRule.anyRequiredLabels to understand why we pick [0] from rule.anyRequiredLabels here.
@@ -1201,12 +1201,12 @@ export async function getPresentBlockingLabelsAndMissingRequiredLabels(
  * @param {typeof import("@actions/core")} core
  * @param {string[]} labels
  * @param {string} targetBranch This function uses a special format {repo/branch}, e.g. "azure-rest-api-specs/main".
- * @returns {Promise<RequiredLabelRule[]>}
+ * @returns {RequiredLabelRule[]}
  */
-export async function getViolatedRequiredLabelsRules(core, labels, targetBranch) {
+export function getViolatedRequiredLabelsRules(core, labels, targetBranch) {
   const violatedRules = [];
   for (const rule of requiredLabelsRules) {
-    if (await requiredLabelRuleViolated(core, labels, targetBranch, rule)) {
+    if (requiredLabelRuleViolated(core, labels, targetBranch, rule)) {
       violatedRules.push(rule);
     }
   }
@@ -1218,9 +1218,9 @@ export async function getViolatedRequiredLabelsRules(core, labels, targetBranch)
  * @param {string[]} presentLabels
  * @param {string} targetBranch
  * @param {RequiredLabelRule} rule
- * @returns {Promise<boolean>}
+ * @returns {boolean}
  */
-export async function requiredLabelRuleViolated(core, presentLabels, targetBranch, rule) {
+export function requiredLabelRuleViolated(core, presentLabels, targetBranch, rule) {
   const branchIsApplicable = rule.branches === undefined || rule.branches.includes(targetBranch);
 
   const anyPrerequisiteLabelPresent =
