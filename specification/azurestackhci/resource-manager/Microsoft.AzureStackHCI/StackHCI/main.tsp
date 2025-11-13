@@ -16,6 +16,9 @@ import "./platformUpdates.tsp";
 import "./osImages.tsp";
 import "./updateContents.tsp";
 import "./Operations.tsp";
+import "./edgeMachine.tsp";
+import "./edgeMachineJob.tsp";
+import "./validateOwnershipVouchers.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -41,4 +44,9 @@ enum Versions {
    * The 2025-11-01-preview API version.
    */
   v2025_11_01_preview: "2025-11-01-preview",
+
+  /**
+   * The 2025-12-01-preview API version.
+   */
+  v2025_12_01_preview: "2025-12-01-preview",
 }
