@@ -14,6 +14,7 @@ vi.mock("../src/context.js", () => ({
 
 /** @type {import('vitest').Mock<(url: string) => Promise<Partial<Response>>>} */
 const mockFetch = vi.fn();
+
 // Mock global fetch
 global.fetch = /** @type {import('vitest').MockedFunction<typeof fetch>} */ (mockFetch);
 
