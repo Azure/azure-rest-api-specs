@@ -285,7 +285,7 @@ model PlanSummary {
   hasRi?: boolean;
 }
 
-@doc("Returns a subset of Plan attributes")
+@doc("Returns the full set of Plan attributes")
 model PlanDetails {
   ...PlanSummary;
 
