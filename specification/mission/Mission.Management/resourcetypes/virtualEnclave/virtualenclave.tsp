@@ -6,7 +6,6 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "@typespec/versioning";
 import "../shared/maintenancemodeconfiguration.tsp";
-import "../shared/resourceid.tsp";
 
 using Azure.Core;
 using Azure.ResourceManager;

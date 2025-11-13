@@ -5,7 +5,6 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "@typespec/versioning";
 import "../shared/maintenancemodeconfiguration.tsp";
-import "../dedicatedHub/dedicatedHub.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
