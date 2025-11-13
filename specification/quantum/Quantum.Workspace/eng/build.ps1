@@ -33,13 +33,20 @@ try {
         $previousVersion = ""
         $previousTag = ""
         $allVersions = New-Object System.Collections.Generic.List[string]
+        $versionMap = @{}
         foreach ($match in $reMatches) {
             $tag = $match.Groups["tag"].Value
-            $version = $match.Groups["version"].Value           
+            $version = $match.Groups["version"].Value
             $allVersions.Add($version)
-            if ($tag -gt $previousTag && $tag -ne $newTag) {
+            $versionMap[$tag] = $version
+        }
+
+        $sortedTags = $versionMap.Keys | Sort-Object -Descending
+        foreach ($tag in $sortedTags) {
+            if ($tag -ne $newTag) {
                 $previousTag = $tag
-                $previousVersion = $version
+                $previousVersion = $versionMap[$tag]
+                break
             }
         }
         return [PSCustomObject]@{
