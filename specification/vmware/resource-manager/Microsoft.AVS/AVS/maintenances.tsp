@@ -3,7 +3,6 @@ namespace Microsoft.AVS;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.Rest;
-using TypeSpec.OpenAPI;
 using TypeSpec.Versioning;
 
 @armResourceOperations
@@ -200,7 +199,7 @@ model MaintenanceProperties {
 
   @doc("Operations on  maintenance")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   operations?: MaintenanceManagementOperation[];
 
   @doc("Indicates whether the maintenance is ready to proceed")
@@ -281,7 +280,7 @@ model MaintenanceReadiness {
 
   @doc("A list of failed checks, if any")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   failedChecks?: MaintenanceFailedCheck[];
 
   @doc("The timestamp of the last readiness update")
@@ -297,7 +296,7 @@ model MaintenanceFailedCheck {
 
   @doc("A list of resources impacted by the failed check")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   impactedResources?: ImpactedMaintenanceResource[];
 }
 
@@ -309,7 +308,7 @@ model ImpactedMaintenanceResource {
 
   @doc("A list of errors associated with the impacted resource")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   errors?: ImpactedMaintenanceResourceError[];
 }
 
@@ -357,7 +356,7 @@ model BlockedMaintenanceWindow {
 
   @doc("Date ranges blocked for schedule")
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["startsAt", "endsAt"])
+  @identifiers(#["startsAt", "endsAt"])
   timeRanges?: BlockedDatesConstraintTimeRange[];
 }
 
@@ -400,7 +399,7 @@ model ScheduleOperation extends MaintenanceManagementOperation {
 
   @doc("Constraints for scheduling maintenance")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   constraints?: ScheduleOperationConstraint[];
 }
 
@@ -472,7 +471,7 @@ model RescheduleOperation extends MaintenanceManagementOperation {
 
   @doc("Constraints for rescheduling maintenance")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   constraints?: RescheduleOperationConstraint[];
 }
 
