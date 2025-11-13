@@ -806,9 +806,26 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "Resource 'ManagedCluster' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/ManagedCluster"
+            }
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/ManagedCluster"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
             }
           },
           "default": {
@@ -822,7 +839,12 @@
           "Patch a managed cluster": {
             "$ref": "./examples/ManagedClusterPatchOperation_example.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ManagedCluster"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "ManagedClusters_Delete",
@@ -1708,7 +1730,7 @@
         "tags": [
           "Applications"
         ],
-        "description": "Updates the tags of an application resource of a given managed cluster.",
+        "description": "Updates an application resource of a given managed cluster.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1745,9 +1767,26 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "Resource 'ApplicationResource' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/ApplicationResource"
+            }
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationResource"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
             }
           },
           "default": {
@@ -1761,7 +1800,12 @@
           "Patch an application": {
             "$ref": "./examples/ApplicationPatchOperation_example.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ApplicationResource"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "Applications_Delete",
@@ -2906,7 +2950,7 @@
         "tags": [
           "NodeTypes"
         ],
-        "description": "Update the configuration of a node type of a given managed cluster, only updating tags.",
+        "description": "Update the configuration of a node type of a given managed cluster, only updating tags or capacity.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"

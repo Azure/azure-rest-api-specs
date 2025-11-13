@@ -1,5 +1,3 @@
-// @ts-check
-
 /**
  * @typedef {Object} RetryOptions
  * @property {number} [maxRetries] Default: 3
