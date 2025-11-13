@@ -22,13 +22,13 @@ options:
     namespace: "Azure.Search.Documents"
     model-namespace: false
   "@azure-tools/typespec-ts":
-    package-dir: "azure-search-documents"
-    generate-Metadata: true
-    generate-Test: true
+    # emitter-output-dir: "{output-dir}/{service-dir}/search-documents"
+    generate-metadata: true
+    experimental-extensible-enums: true
+    is-modular-library: true
+    package-details:
+      name: "@azure/search-documents"
     flavor: azure
-    packageDetails:
-      name: "@azure/azure-search-documents"
-      description: "Azure.Search.Documents"
   "@azure-tools/typespec-java":
     package-dir: "azure-search-documents"
     namespace: "com.azure.search.documents"
