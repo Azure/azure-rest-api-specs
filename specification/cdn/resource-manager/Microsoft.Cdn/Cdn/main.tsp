@@ -35,17 +35,13 @@ import "./WebAgent.tsp";
 import "./KnowledgeSource.tsp";
 import "./routes.tsp";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
-using Azure.ResourceManager.Foundations;
-using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
- * APIs to manage web application firewall rules for Azure CDN
+ * Use these APIs to manage Azure Front Door and CDN resources through the Azure Resource Manager. You must make sure that requests made to these resources are secure.
  */
 @armProviderNamespace
-@service(#{ title: "Azure CDN WebApplicationFirewallManagement" })
+@service(#{ title: "CdnManagementClient" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
 namespace Microsoft.Cdn;
@@ -62,8 +58,6 @@ enum Versions {
   /**
    * The 2025-09-01-preview API version.
    */
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   v2025_09_01_preview: "2025-09-01-preview",
 }
 
