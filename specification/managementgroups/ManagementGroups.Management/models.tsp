@@ -295,7 +295,8 @@ model ManagementGroupProperties {
   /**
    * The list of children.
    */
-  children?: ManagementGroupChildInfo[];
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  children?: ManagementGroupChildInfo[] | null;
 }
 
 /**
@@ -332,7 +333,8 @@ model ManagementGroupDetails {
   /**
    * The ancestors of the management group.
    */
-  managementGroupAncestors?: string[];
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  managementGroupAncestors?: string[] | null;
 
   /**
    * The ancestors of the management group displayed in reversed order, from immediate parent to the root.
@@ -446,7 +448,8 @@ model CreateManagementGroupProperties {
   /**
    * The friendly name of the management group. If no value is passed then this  field will be set to the groupId.
    */
-  displayName?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  displayName?: string | null;
 
   /**
    * The details of a management group used during creation.
@@ -456,8 +459,9 @@ model CreateManagementGroupProperties {
   /**
    * The list of children.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   @visibility(Lifecycle.Read)
-  children?: CreateManagementGroupChildInfo[];
+  children?: CreateManagementGroupChildInfo[] | null;
 }
 
 /**
@@ -602,14 +606,16 @@ model DescendantInfo {
   /**
    * The fully qualified ID for the descendant.  For example, /providers/Microsoft.Management/managementGroups/0000000-0000-0000-0000-000000000000 or /subscriptions/0000000-0000-0000-0000-000000000000
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   @visibility(Lifecycle.Read)
-  id?: string;
+  id?: string | null;
 
   /**
    * The type of the resource. For example, Microsoft.Management/managementGroups or /subscriptions
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   @visibility(Lifecycle.Read)
-  type?: string;
+  type?: string | null;
 
   /**
    * The name of the descendant. For example, 00000000-0000-0000-0000-000000000000
@@ -620,7 +626,8 @@ model DescendantInfo {
   /**
    * The generic properties of an descendant.
    */
-  properties?: DescendantInfoProperties;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  properties?: DescendantInfoProperties | null;
 }
 
 /**
@@ -630,7 +637,8 @@ model DescendantInfoProperties {
   /**
    * The friendly name of the management group.
    */
-  displayName?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  displayName?: string | null;
 
   /**
    * The ID of the parent management group.
@@ -667,7 +675,8 @@ model SubscriptionUnderManagementGroupProperties {
   /**
    * The ID of the parent management group.
    */
-  parent?: DescendantParentGroupInfo;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  parent?: DescendantParentGroupInfo | null;
 
   /**
    * The state of the subscription.
@@ -862,14 +871,16 @@ model EntityInfo {
   /**
    * The fully qualified ID for the entity.  For example, /providers/Microsoft.Management/managementGroups/0000000-0000-0000-0000-000000000000
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   @visibility(Lifecycle.Read)
-  id?: string;
+  id?: string | null;
 
   /**
    * The type of the resource. For example, Microsoft.Management/managementGroups
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   @visibility(Lifecycle.Read)
-  type?: string;
+  type?: string | null;
 
   /**
    * The name of the entity. For example, 00000000-0000-0000-0000-000000000000
@@ -880,7 +891,8 @@ model EntityInfo {
   /**
    * The generic properties of an entity.
    */
-  properties?: EntityInfoProperties;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  properties?: EntityInfoProperties | null;
 }
 
 /**
@@ -890,52 +902,64 @@ model EntityInfoProperties {
   /**
    * The AAD Tenant ID associated with the entity. For example, 00000000-0000-0000-0000-000000000000
    */
-  tenantId?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  tenantId?: string | null;
 
   /**
    * The friendly name of the management group.
    */
-  displayName?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  displayName?: string | null;
 
   /**
    * (Optional) The ID of the parent management group.
    */
-  parent?: EntityParentGroupInfo;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  parent?: EntityParentGroupInfo | null;
 
   /**
    * The users specific permissions to this item.
    */
-  permissions?: Permissions;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "For backward compatibility"
+  permissions?: Permissions | null;
 
   /**
    * The users specific permissions to this item.
    */
-  inheritedPermissions?: Permissions;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "For backward compatibility"
+  inheritedPermissions?: Permissions | null;
 
   /**
    * Number of Descendants
    */
-  numberOfDescendants?: int32;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  numberOfDescendants?: int32 | null;
 
   /**
    * Number of children is the number of Groups and Subscriptions that are exactly one level underneath the current Group.
    */
-  numberOfChildren?: int32;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  numberOfChildren?: int32 | null;
 
   /**
    * Number of children is the number of Groups that are exactly one level underneath the current Group.
    */
-  numberOfChildGroups?: int32;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  numberOfChildGroups?: int32 | null;
 
   /**
    * The parent display name chain from the root group to the immediate parent
    */
-  parentDisplayNameChain?: string[];
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  parentDisplayNameChain?: string[] | null;
 
   /**
    * The parent name chain from the root group to the immediate parent
    */
-  parentNameChain?: string[];
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  parentNameChain?: string[] | null;
 }
 
 /**

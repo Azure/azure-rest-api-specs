@@ -1336,7 +1336,8 @@
         },
         "displayName": {
           "type": "string",
-          "description": "The friendly name of the management group. If no value is passed then this  field will be set to the groupId."
+          "description": "The friendly name of the management group. If no value is passed then this  field will be set to the groupId.",
+          "x-nullable": true
         },
         "details": {
           "$ref": "#/definitions/CreateManagementGroupDetails",
@@ -1345,6 +1346,7 @@
         "children": {
           "type": "array",
           "description": "The list of children.",
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/CreateManagementGroupChildInfo"
           },
@@ -1429,11 +1431,13 @@
         "id": {
           "type": "string",
           "description": "The fully qualified ID for the descendant.  For example, /providers/Microsoft.Management/managementGroups/0000000-0000-0000-0000-000000000000 or /subscriptions/0000000-0000-0000-0000-000000000000",
+          "x-nullable": true,
           "readOnly": true
         },
         "type": {
           "type": "string",
           "description": "The type of the resource. For example, Microsoft.Management/managementGroups or /subscriptions",
+          "x-nullable": true,
           "readOnly": true
         },
         "name": {
@@ -1444,6 +1448,7 @@
         "properties": {
           "$ref": "#/definitions/DescendantInfoProperties",
           "description": "The generic properties of an descendant.",
+          "x-nullable": true,
           "x-ms-client-flatten": true
         }
       }
@@ -1454,7 +1459,8 @@
       "properties": {
         "displayName": {
           "type": "string",
-          "description": "The friendly name of the management group."
+          "description": "The friendly name of the management group.",
+          "x-nullable": true
         },
         "parent": {
           "$ref": "#/definitions/DescendantParentGroupInfo",
@@ -1501,11 +1507,13 @@
         "id": {
           "type": "string",
           "description": "The fully qualified ID for the entity.  For example, /providers/Microsoft.Management/managementGroups/0000000-0000-0000-0000-000000000000",
+          "x-nullable": true,
           "readOnly": true
         },
         "type": {
           "type": "string",
           "description": "The type of the resource. For example, Microsoft.Management/managementGroups",
+          "x-nullable": true,
           "readOnly": true
         },
         "name": {
@@ -1516,6 +1524,7 @@
         "properties": {
           "$ref": "#/definitions/EntityInfoProperties",
           "description": "The generic properties of an entity.",
+          "x-nullable": true,
           "x-ms-client-flatten": true
         }
       }
@@ -1526,42 +1535,51 @@
       "properties": {
         "tenantId": {
           "type": "string",
-          "description": "The AAD Tenant ID associated with the entity. For example, 00000000-0000-0000-0000-000000000000"
+          "description": "The AAD Tenant ID associated with the entity. For example, 00000000-0000-0000-0000-000000000000",
+          "x-nullable": true
         },
         "displayName": {
           "type": "string",
-          "description": "The friendly name of the management group."
+          "description": "The friendly name of the management group.",
+          "x-nullable": true
         },
         "parent": {
           "$ref": "#/definitions/EntityParentGroupInfo",
-          "description": "(Optional) The ID of the parent management group."
+          "description": "(Optional) The ID of the parent management group.",
+          "x-nullable": true
         },
         "permissions": {
           "$ref": "#/definitions/Permissions",
-          "description": "The users specific permissions to this item."
+          "description": "The users specific permissions to this item.",
+          "x-nullable": true
         },
         "inheritedPermissions": {
           "$ref": "#/definitions/Permissions",
-          "description": "The users specific permissions to this item."
+          "description": "The users specific permissions to this item.",
+          "x-nullable": true
         },
         "numberOfDescendants": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of Descendants"
+          "description": "Number of Descendants",
+          "x-nullable": true
         },
         "numberOfChildren": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of children is the number of Groups and Subscriptions that are exactly one level underneath the current Group."
+          "description": "Number of children is the number of Groups and Subscriptions that are exactly one level underneath the current Group.",
+          "x-nullable": true
         },
         "numberOfChildGroups": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of children is the number of Groups that are exactly one level underneath the current Group."
+          "description": "Number of children is the number of Groups that are exactly one level underneath the current Group.",
+          "x-nullable": true
         },
         "parentDisplayNameChain": {
           "type": "array",
           "description": "The parent display name chain from the root group to the immediate parent",
+          "x-nullable": true,
           "items": {
             "type": "string"
           }
@@ -1569,6 +1587,7 @@
         "parentNameChain": {
           "type": "array",
           "description": "The parent name chain from the root group to the immediate parent",
+          "x-nullable": true,
           "items": {
             "type": "string"
           }
@@ -1810,6 +1829,7 @@
         "managementGroupAncestors": {
           "type": "array",
           "description": "The ancestors of the management group.",
+          "x-nullable": true,
           "items": {
             "type": "string"
           }
@@ -1918,6 +1938,7 @@
         "children": {
           "type": "array",
           "description": "The list of children.",
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/ManagementGroupChildInfo"
           }
@@ -2094,7 +2115,8 @@
         },
         "parent": {
           "$ref": "#/definitions/DescendantParentGroupInfo",
-          "description": "The ID of the parent management group."
+          "description": "The ID of the parent management group.",
+          "x-nullable": true
         },
         "state": {
           "type": "string",
