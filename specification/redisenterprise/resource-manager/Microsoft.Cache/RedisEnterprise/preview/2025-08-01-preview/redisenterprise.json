@@ -2651,6 +2651,15 @@
           "$ref": "#/definitions/ClusterPropertiesEncryption",
           "description": "Encryption-at-rest configuration for the cluster."
         },
+        "maintenanceConfiguration": {
+          "$ref": "#/definitions/MaintenanceConfiguration",
+          "description": "Cluster-level maintenance configuration.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
         "hostName": {
           "type": "string",
           "description": "DNS name of the cluster endpoint",
@@ -3343,6 +3352,126 @@
           "description": "State of the link between the database resources.",
           "readOnly": true
         }
+      }
+    },
+    "MaintenanceConfiguration": {
+      "type": "object",
+      "description": "Cluster-level maintenance configuration.",
+      "properties": {
+        "maintenanceWindows": {
+          "type": "array",
+          "description": "Custom maintenance windows that apply to the cluster.",
+          "items": {
+            "$ref": "#/definitions/MaintenanceWindow"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "MaintenanceDayOfWeek": {
+      "type": "string",
+      "description": "Day of week. Required when the maintenance window type is 'Weekly'.",
+      "enum": [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+      ],
+      "x-ms-enum": {
+        "name": "MaintenanceDayOfWeek",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Sunday",
+            "value": "Sunday"
+          },
+          {
+            "name": "Monday",
+            "value": "Monday"
+          },
+          {
+            "name": "Tuesday",
+            "value": "Tuesday"
+          },
+          {
+            "name": "Wednesday",
+            "value": "Wednesday"
+          },
+          {
+            "name": "Thursday",
+            "value": "Thursday"
+          },
+          {
+            "name": "Friday",
+            "value": "Friday"
+          },
+          {
+            "name": "Saturday",
+            "value": "Saturday"
+          }
+        ]
+      }
+    },
+    "MaintenanceWindow": {
+      "type": "object",
+      "description": "A single custom maintenance window.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/MaintenanceWindowType",
+          "description": "Maintenance window type."
+        },
+        "duration": {
+          "type": "string",
+          "description": "Duration in ISO-8601 format, for example 'PT5H'."
+        },
+        "startHourUtc": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Start hour (0-23) in UTC when the maintenance window begins.",
+          "minimum": 0,
+          "maximum": 23
+        },
+        "schedule": {
+          "$ref": "#/definitions/MaintenanceWindowSchedule",
+          "description": "Recurring schedule for the maintenance window."
+        }
+      },
+      "required": [
+        "type",
+        "duration",
+        "startHourUtc",
+        "schedule"
+      ]
+    },
+    "MaintenanceWindowSchedule": {
+      "type": "object",
+      "description": "Schedule details for a maintenance window.",
+      "properties": {
+        "dayOfWeek": {
+          "$ref": "#/definitions/MaintenanceDayOfWeek",
+          "description": "Day of week. Required when the maintenance window type is 'Weekly'."
+        }
+      }
+    },
+    "MaintenanceWindowType": {
+      "type": "string",
+      "description": "Maintenance window type.",
+      "enum": [
+        "Weekly"
+      ],
+      "x-ms-enum": {
+        "name": "MaintenanceWindowType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Weekly",
+            "value": "Weekly",
+            "description": "Weekly maintenance window."
+          }
+        ]
       }
     },
     "Migration": {

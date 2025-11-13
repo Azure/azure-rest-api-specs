@@ -958,6 +958,12 @@ model ClusterProperties {
   encryption?: ClusterPropertiesEncryption;
 
   /**
+   * Cluster-level maintenance configuration.
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  maintenanceConfiguration?: MaintenanceConfiguration;
+
+  /**
    * DNS name of the cluster endpoint
    */
   @visibility(Lifecycle.Read)
@@ -992,6 +998,63 @@ model ClusterProperties {
    */
   @visibility(Lifecycle.Read)
   privateEndpointConnections?: PrivateEndpointConnection[];
+}
+
+/** Cluster-level maintenance configuration. */
+model MaintenanceConfiguration {
+  /** Custom maintenance windows that apply to the cluster. */
+  @identifiers(#[])
+  maintenanceWindows?: MaintenanceWindow[];
+}
+
+/** A single custom maintenance window. */
+model MaintenanceWindow {
+  /** Maintenance window type. */
+  type: MaintenanceWindowType;
+
+  /** Duration in ISO-8601 format, for example 'PT5H'. */
+  duration: string;
+
+  /** Start hour (0-23) in UTC when the maintenance window begins. */
+  @minValue(0)
+  @maxValue(23)
+  startHourUtc: int32;
+
+  /** Recurring schedule for the maintenance window. */
+  schedule: MaintenanceWindowSchedule;
+}
+
+/** Maintenance window type. */
+union MaintenanceWindowType {
+  string,
+
+  /** Weekly maintenance window. */
+  Weekly: "Weekly",
+}
+
+/** Schedule details for a maintenance window. */
+model MaintenanceWindowSchedule {
+  /** Day of week. Required when the maintenance window type is 'Weekly'. */
+  dayOfWeek?: MaintenanceDayOfWeek;
+}
+
+/** Day of week. Required when the maintenance window type is 'Weekly'. */
+union MaintenanceDayOfWeek {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Sunday: "Sunday",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Monday: "Monday",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Tuesday: "Tuesday",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Wednesday: "Wednesday",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Thursday: "Thursday",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Friday: "Friday",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Saturday: "Saturday",
 }
 
 /**
