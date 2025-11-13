@@ -6,56 +6,53 @@
     "api-version": "2025-01-10",
     "body": {
       "source": {
-        "engine": "MySQL",
+        "engine": "Postgres",
         "connectionEndPoints": [
           {
-            "connectionName": "mysqlSource1",
-            "hostName": "mysql-source1.example.com",
-            "port": 3306,
+            "connectionName": "postgresSource1",
+            "hostName": "postgres-source1.example.com",
+            "port": 5432,
             "databaseName": "sourcedb1",
             "credentials": {
-              "authenticationMethod": "SqlAuthentication",
+              "authenticationMethod": "password",
               "userName": "sourceUser1",
               "password": "sourcePassword1"
             },
             "ssl": {
-              "sslMode": "Require",
-              "trustServerCertificate": false
+              "mode": "require"
             }
           },
           {
-            "connectionName": "mysqlSource2",
-            "hostName": "mysql-source2.example.com",
-            "port": 3306,
+            "connectionName": "postgresSource2",
+            "hostName": "postgres-source2.example.com",
+            "port": 5432,
             "databaseName": "sourcedb2",
             "credentials": {
-              "authenticationMethod": "SqlAuthentication",
+              "authenticationMethod": "password",
               "userName": "sourceUser2",
               "password": "sourcePassword2"
             },
             "ssl": {
-              "sslMode": "Require",
-              "trustServerCertificate": false
+              "mode": "require"
             }
           }
         ]
       },
       "target": {
-        "engine": "MySQL",
+        "engine": "AzurePostgresFlexible",
         "connectionEndPoints": [
           {
-            "connectionName": "mysqlTarget",
-            "hostName": "mysql-target.example.com",
-            "port": 3306,
+            "connectionName": "azurePostgresTarget",
+            "hostName": "postgres-target.postgres.database.azure.com",
+            "port": 5432,
             "databaseName": "targetdb",
             "credentials": {
-              "authenticationMethod": "SqlAuthentication",
+              "authenticationMethod": "password",
               "userName": "targetUser",
               "password": "targetPassword"
             },
             "ssl": {
-              "sslMode": "Require",
-              "trustServerCertificate": false
+              "mode": "require"
             }
           }
         ]
@@ -76,8 +73,8 @@
         "requestId": "operation-11223",
         "source": [
           {
-            "connectionName": "mysqlSource1",
-            "engine": "MySQL",
+            "connectionName": "postgresSource1",
+            "engine": "postgres",
             "databases": [
               {
                 "databaseName": "sourcedb1",
@@ -93,8 +90,8 @@
             ]
           },
           {
-            "connectionName": "mysqlSource2",
-            "engine": "MySQL",
+            "connectionName": "postgresSource2",
+            "engine": "postgres",
             "databases": [
               {
                 "databaseName": "sourcedb2",
@@ -111,8 +108,8 @@
           }
         ],
         "target": {
-          "connectionName": "mysqlTarget",
-          "engine": "MySQL",
+          "connectionName": "azurePostgresTarget",
+          "engine": "azure_postgres_flexible",
           "databases": [
             {
               "databaseName": "targetdb",

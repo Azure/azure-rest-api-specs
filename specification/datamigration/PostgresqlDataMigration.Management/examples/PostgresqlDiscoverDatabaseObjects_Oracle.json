@@ -6,7 +6,7 @@
     "api-version": "2025-01-10",
     "body": {
       "source": {
-        "engine": "Oracle",
+        "engine": "oracle",
         "connectionEndPoints": [
           {
             "connectionName": "oracleSource",
@@ -14,33 +14,31 @@
             "port": 1521,
             "serviceName": "ORCL",
             "credentials": {
-              "authenticationMethod": "SqlAuthentication",
+              "authenticationMethod": "password",
               "userName": "sourceUser",
               "password": "sourcePassword"
             },
             "ssl": {
-              "sslMode": "Require",
-              "trustServerCertificate": false
+              "mode": "require"
             }
           }
         ]
       },
       "target": {
-        "engine": "PostgreSQL",
+        "engine": "azure_postgres_flexible",
         "connectionEndPoints": [
           {
             "connectionName": "postgresTarget",
-            "hostName": "postgres-target.example.com",
+            "hostName": "postgres-target.postgres.database.azure.com",
             "port": 5432,
             "databaseName": "targetdb",
             "credentials": {
-              "authenticationMethod": "SqlAuthentication",
+              "authenticationMethod": "password",
               "userName": "targetUser",
               "password": "targetPassword"
             },
             "ssl": {
-              "sslMode": "Require",
-              "trustServerCertificate": false
+              "mode": "require"
             }
           }
         ]
@@ -62,7 +60,7 @@
         "source": [
           {
             "connectionName": "oracleSource",
-            "engine": "Oracle",
+            "engine": "oracle",
             "databases": [
               {
                 "serviceName": "ORCL",
@@ -83,7 +81,7 @@
         ],
         "target": {
           "connectionName": "postgresTarget",
-          "engine": "PostgreSQL",
+          "engine": "azure_postgres_flexible",
           "databases": [
             {
               "databaseName": "postgres",
