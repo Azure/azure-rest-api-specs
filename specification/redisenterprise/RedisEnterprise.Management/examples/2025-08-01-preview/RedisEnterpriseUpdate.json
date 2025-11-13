@@ -5,7 +5,35 @@
     "parameters": {
       "properties": {
         "minimumTlsVersion": "1.2",
-        "publicNetworkAccess": "Enabled"
+        "publicNetworkAccess": "Enabled",
+        "maintenanceConfiguration": {
+          "maintenanceWindows": [
+            {
+              "type": "Weekly",
+              "duration": "PT6H",
+              "startHourUtc": 3,
+              "schedule": {
+                "dayOfWeek": "Monday"
+              }
+            },
+            {
+              "type": "Weekly",
+              "duration": "PT6H",
+              "startHourUtc": 3,
+              "schedule": {
+                "dayOfWeek": "Tuesday"
+              }
+            },
+            {
+              "type": "Weekly",
+              "duration": "PT6H",
+              "startHourUtc": 3,
+              "schedule": {
+                "dayOfWeek": "Wednesday"
+              }
+            }
+          ]
+        }
       },
       "sku": {
         "name": "EnterpriseFlash_F300",
@@ -34,6 +62,34 @@
           "minimumTlsVersion": "1.2",
           "provisioningState": "Updating",
           "publicNetworkAccess": "Enabled",
+          "maintenanceConfiguration": {
+            "maintenanceWindows": [
+              {
+                "type": "Weekly",
+                "duration": "PT6H",
+                "startHourUtc": 3,
+                "schedule": {
+                  "dayOfWeek": "Monday"
+                }
+              },
+              {
+                "type": "Weekly",
+                "duration": "PT6H",
+                "startHourUtc": 3,
+                "schedule": {
+                  "dayOfWeek": "Tuesday"
+                }
+              },
+              {
+                "type": "Weekly",
+                "duration": "PT6H",
+                "startHourUtc": 3,
+                "schedule": {
+                  "dayOfWeek": "Wednesday"
+                }
+              }
+            ]
+          },
           "redisVersion": "5",
           "resourceState": "Updating"
         },
