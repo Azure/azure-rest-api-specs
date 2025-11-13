@@ -66,7 +66,9 @@ model FileSystemResourceProperties {
   /**
    * Initial administrator password of the resource
    */
-  @secret
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Mark this property with @secret if the contents should be kept private."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME:  If this is a real secret, mark with @secret"
+  @OpenAPI.extension("x-ms-secret", true)
   adminPassword: string;
 
   /**

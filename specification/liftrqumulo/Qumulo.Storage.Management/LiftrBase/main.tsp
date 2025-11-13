@@ -84,7 +84,8 @@ model UserDetails {
   /**
    * User Email
    */
-  @secret
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Legacy"
+  @OpenAPI.extension("x-ms-secret", true)
   email: string;
 }
 
