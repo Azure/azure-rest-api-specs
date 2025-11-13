@@ -1,0 +1,120 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "myResourceGroup",
+    "serviceName": "myMigrationService",
+    "api-version": "2025-01-10",
+    "body": {
+      "source": {
+        "engine": "PostgreSQL",
+        "connectionEndPoints": [
+          {
+            "connectionName": "postgresSource1",
+            "hostName": "postgres-source1.example.com",
+            "port": 5432,
+            "databaseName": "sourcedb",
+            "credentials": {
+              "authenticationMethod": "SqlAuthentication",
+              "userName": "sourceUser",
+              "password": "sourcePassword"
+            },
+            "ssl": {
+              "sslMode": "Require",
+              "trustServerCertificate": false
+            }
+          }
+        ]
+      },
+      "target": {
+        "engine": "PostgreSQL",
+        "connectionEndPoints": [
+          {
+            "connectionName": "postgresTarget",
+            "hostName": "postgres-target.example.com",
+            "port": 5432,
+            "databaseName": "targetdb",
+            "credentials": {
+              "authenticationMethod": "SqlAuthentication",
+              "userName": "targetUser",
+              "password": "targetPassword"
+            },
+            "ssl": {
+              "sslMode": "Require",
+              "trustServerCertificate": false
+            }
+          }
+        ]
+      },
+      "computeProfile": {
+        "computeSubnetResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myVNet/subnets/mySubnet"
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "description": "Discovery operation accepted",
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.DataMigration/locations/westus/operationTypes/discoverDatabaseObjects/operationResults/operation-67890",
+        "Retry-After": "60"
+      },
+      "body": {
+        "requestId": "operation-67890",
+        "source": [
+          {
+            "connectionName": "postgresSource1",
+            "engine": "PostgreSQL",
+            "databases": [
+              {
+                "databaseName": "postgres",
+                "schemas": [
+                  {
+                    "schemaName": "public"
+                  },
+                  {
+                    "schemaName": "information_schema"
+                  }
+                ]
+              },
+              {
+                "databaseName": "sourcedb",
+                "schemas": [
+                  {
+                    "schemaName": "public"
+                  },
+                  {
+                    "schemaName": "app_schema"
+                  },
+                  {
+                    "schemaName": "reporting"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "target": {
+          "connectionName": "postgresTarget",
+          "engine": "PostgreSQL",
+          "databases": [
+            {
+              "databaseName": "postgres",
+              "schemas": [
+                {
+                  "schemaName": "public"
+                }
+              ]
+            },
+            {
+              "databaseName": "targetdb",
+              "schemas": [
+                {
+                  "schemaName": "public"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}

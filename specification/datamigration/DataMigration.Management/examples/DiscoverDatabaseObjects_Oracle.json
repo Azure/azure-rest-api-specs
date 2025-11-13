@@ -1,0 +1,109 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "myResourceGroup",
+    "serviceName": "myMigrationService",
+    "api-version": "2025-01-10",
+    "body": {
+      "source": {
+        "engine": "Oracle",
+        "connectionEndPoints": [
+          {
+            "connectionName": "oracleSource",
+            "hostName": "oracle-source.example.com",
+            "port": 1521,
+            "serviceName": "ORCL",
+            "credentials": {
+              "authenticationMethod": "SqlAuthentication",
+              "userName": "sourceUser",
+              "password": "sourcePassword"
+            },
+            "ssl": {
+              "sslMode": "Require",
+              "trustServerCertificate": false
+            }
+          }
+        ]
+      },
+      "target": {
+        "engine": "PostgreSQL",
+        "connectionEndPoints": [
+          {
+            "connectionName": "postgresTarget",
+            "hostName": "postgres-target.example.com",
+            "port": 5432,
+            "databaseName": "targetdb",
+            "credentials": {
+              "authenticationMethod": "SqlAuthentication",
+              "userName": "targetUser",
+              "password": "targetPassword"
+            },
+            "ssl": {
+              "sslMode": "Require",
+              "trustServerCertificate": false
+            }
+          }
+        ]
+      },
+      "computeProfile": {
+        "computeSubnetResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myVNet/subnets/mySubnet"
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "description": "Discovery operation accepted",
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.DataMigration/locations/westus/operationTypes/discoverDatabaseObjects/operationResults/operation-12345",
+        "Retry-After": "60"
+      },
+      "body": {
+        "requestId": "operation-12345",
+        "source": [
+          {
+            "connectionName": "oracleSource",
+            "engine": "Oracle",
+            "databases": [
+              {
+                "serviceName": "ORCL",
+                "schemas": [
+                  {
+                    "schemaName": "HR"
+                  },
+                  {
+                    "schemaName": "SALES"
+                  },
+                  {
+                    "schemaName": "INVENTORY"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "target": {
+          "connectionName": "postgresTarget",
+          "engine": "PostgreSQL",
+          "databases": [
+            {
+              "databaseName": "postgres",
+              "schemas": [
+                {
+                  "schemaName": "public"
+                }
+              ]
+            },
+            {
+              "databaseName": "targetdb",
+              "schemas": [
+                {
+                  "schemaName": "public"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}
