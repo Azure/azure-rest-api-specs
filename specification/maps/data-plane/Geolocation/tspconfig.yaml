@@ -1,24 +1,48 @@
+parameters:
+  "service-dir":
+    default: "sdk/maps"
 emit:
   - "@azure-tools/typespec-autorest"
-
 options:
   "@azure-tools/typespec-autorest":
     azure-resource-provider-folder: "data-plane"
     emitter-output-dir: "{project-root}"
     examples-dir: "{project-root}/examples"
     output-file: "{version-status}/{version}/geolocation.json"
-  # Uncomment this line and add "@azure-tools/typespec-python" to your package.json to generate Python code
-  # "@azure-tools/typespec-python":
-  #   "basic-setup-py": true
-  #   "package-version":
-  #   "package-name":
-  #   "output-path":
-  # Uncomment this line and add "@azure-tools/typespec-java" to your package.json to generate Java code
-  # "@azure-tools/typespec-java": true
-  # Uncomment this line and add "@azure-tools/typespec-csharp" to your package.json to generate C# code
-  # "@azure-tools/typespec-csharp": true
-  # Uncomment this line and add "@azure-tools/typespec-ts" to your package.json to generate Typescript code
-  # "@azure-tools/typespec-ts": true
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-maps-geolocation"
+    namespace: "azure.maps.geolocation"
+    generate-test: false
+    generate-sample: false
+    flavor: azure
+  "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    clear-output-folder: true
+    model-namespace: false
+    namespace: "Azure.Maps.Geolocation"
+    flavor: azure
+  "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: Azure.Maps.Geolocation
+    model-namespace: false
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-maps-geolocation"
+    is-modular-library: true
+    package-details:
+      name: "@azure/azure-maps-geolocation"
+    flavor: azure
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-maps-geolocation"
+    namespace: com.azure.maps.geolocation
+    flavor: azure
+  "@azure-tools/typespec-go":
+    emitter-output-dir: "{output-dir}/{service-dir}/azgeolocation"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/azgeolocation"
+    generate-fakes: true
+    inject-spans: true
+    single-client: true
+    slice-elements-byval: true
+    flavor: azure
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
