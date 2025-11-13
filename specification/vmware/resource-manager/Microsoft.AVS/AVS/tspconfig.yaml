@@ -3,7 +3,9 @@ parameters:
     default: "sdk/avs"
   "service-directory-name":
     default: "vmware"
-emit: ["@azure-tools/typespec-autorest"]
+emit:
+  - "@azure-tools/typespec-autorest"
+  - "@typespec/openapi3"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
@@ -18,6 +20,10 @@ options:
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
     omit-unreachable-types: true
     use-read-only-status-schema: true
+
+  "@typespec/openapi3":
+    emitter-output-dir: "{project-root}/.."
+    output-file: "{output-folder-base}/openapi/{version}/openapi.yaml"
 
   "@azure-tools/typespec-csharp":
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
