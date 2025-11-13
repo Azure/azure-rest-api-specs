@@ -37,8 +37,10 @@ union IdentityType {
 #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum SkuName {
   F0,
+
   @removed(Versions.v2025_11_01)
   S1,
+
   C0,
   PES,
   C1,
