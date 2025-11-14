@@ -274,8 +274,8 @@ model SourceConfiguration {
   @doc("Server resource ID")
   serverResourceId?: string;
 
-  @doc("List of connection endpoints")
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "connectionName is the identifier"
+  @doc("List of connection endpoints")
   connectionEndPoints: ConnectionEndpoint[];
 }
 
@@ -287,8 +287,8 @@ model TargetConfiguration {
   @doc("Server resource ID")
   serverResourceId?: string;
 
-  @doc("List of connection endpoints")
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "connectionName is the identifier"
+  @doc("List of connection endpoints")
   connectionEndPoints: ConnectionEndpoint[];
 }
 
@@ -399,8 +399,8 @@ model DatabaseMigrationStatus {
   @doc("Migration progress")
   migrationProgress: MigrationProgress;
 
-  @doc("List of errors")
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "No identifier properties for this array"
+  @doc("List of errors")
   errors: MigrationError[];
 
   @doc("Creation timestamp")
@@ -417,8 +417,8 @@ model MigrationStatus {
   @doc("Current state of the migration")
   state: MigrationState;
 
-  @doc("List of errors")
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "No identifier properties for this array"
+  @doc("List of errors")
   errors: MigrationError[];
 
   @doc("Last updated timestamp")
@@ -442,8 +442,8 @@ model DatabaseMigrationProperties {
   @doc("Target database configuration")
   target: TargetConfiguration;
 
-  @doc("List of mapping definitions")
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "No identifier properties for this array"
+  @doc("List of mapping definitions")
   mappingDefinitions: MappingDefinition[];
 
   @doc("Compute profile")
@@ -452,8 +452,8 @@ model DatabaseMigrationProperties {
   @doc("Migration job settings")
   migrationJobsettings: MigrationJobSettings;
 
-  @doc("List of tags")
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "key is the identifier"
+  @doc("List of tags")
   tags: Tag[];
 
   @doc("Provisioning state")
@@ -464,9 +464,9 @@ model DatabaseMigrationProperties {
   @visibility(Lifecycle.Read)
   migrationStatus?: MigrationStatus;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "databaseName is the identifier"
   @doc("List of database migration statuses")
   @visibility(Lifecycle.Read)
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "databaseName is the identifier"
   databases?: DatabaseMigrationStatus[];
 
   @doc("Migration start time")
@@ -507,19 +507,19 @@ model ConnectionTestResult {
   @doc("Connection status")
   connectionStatus: ConnectionStatus;
 
-  @doc("List of errors encountered during connection test")
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "No identifier properties for this array"
+  @doc("List of errors encountered during connection test")
   errors: MigrationError[];
 }
 
 @doc("Properties of the connectivity test response.")
 model ConnectivityTestProperties {
-  @doc("Source connection test results")
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "connectionName is the identifier"
+  @doc("Source connection test results")
   source: ConnectionTestResult[];
 
-  @doc("Target connection test results")
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "connectionName is the identifier"
+  @doc("Target connection test results")
   target: ConnectionTestResult[];
 }
 
@@ -558,8 +558,8 @@ model DatabaseInfo {
   @doc("Service name (for Oracle)")
   serviceName?: string;
 
-  @doc("List of schemas in the database")
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "schemaName is the identifier"
+  @doc("List of schemas in the database")
   schemas: SchemaInfo[];
 }
 
@@ -571,8 +571,8 @@ model DiscoveredDatabaseObjects {
   @doc("Database engine type")
   engine: string;
 
-  @doc("List of databases discovered")
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "databaseName and serviceName are identifiers"
+  @doc("List of databases discovered")
   databases: DatabaseInfo[];
 }
 
@@ -581,8 +581,8 @@ model DiscoverDatabaseObjectsResponse {
   @doc("Request identifier for tracking the operation")
   requestId?: string;
 
-  @doc("Source database objects discovered")
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "connectionName is the identifier"
+  @doc("Source database objects discovered")
   source: DiscoveredDatabaseObjects[];
 
   @doc("Target database objects discovered")
