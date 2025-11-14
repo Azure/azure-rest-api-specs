@@ -10,7 +10,6 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.Core;
-using Azure.Core.Traits;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.ContainerService;
@@ -258,7 +257,10 @@ interface Fleets {
   listByResourceGroup is ArmResourceListByParent<Fleet>;
 
   @doc("Lists fleets in the specified subscription.")
-  listBySubscription is ArmListBySubscription<Fleet>;
+  listBySubscription is ArmListBySubscription<
+    Fleet,
+    Parameters = TopQueryParameter & SkipTokenQueryParameter
+  >;
 
   @doc("Lists the user credentials of a Fleet.")
   listCredentials is ArmResourceActionSync<Fleet, void, FleetCredentialResults>;
