@@ -4,11 +4,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
-using Azure.Core;
 using TypeSpec.Versioning;
 
 namespace Microsoft.Cdn;
@@ -2618,6 +2614,7 @@ model DomainValidationProperties {
   /**
    * Challenge used for DNS TXT record or file based validation
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @visibility(Lifecycle.Read)
   validationToken?: string;
 
@@ -3481,7 +3478,7 @@ model KeyGroupUpdatePropertiesParameters {
   /**
    * Names of UrlSigningKey type secret objects
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   keyReferences?: ResourceReference[];
 }
 
@@ -3575,7 +3572,7 @@ model CompareDeploymentVersionsResponse {
   /**
    * The difference between two deployment versions
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   value: DeploymentVersionChange[];
 }
 
@@ -5675,7 +5672,7 @@ model WebAgentProperties {
   /**
    * List of paths associated with the web agent.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   paths?: AgentPath[];
 
   /**
@@ -5744,7 +5741,7 @@ model WebAgentPropertiesUpdateParameters {
   /**
    * List of paths associated with the web agent.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   paths?: AgentPath[];
 }
 
@@ -5973,7 +5970,7 @@ model PolicySettingsLogScrubbing {
   /**
    * List of log scrubbing rules applied to the Web Application Firewall logs.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   scrubbingRules?: WebApplicationFirewallScrubbingRules[];
 }
 
@@ -6056,13 +6053,13 @@ model CustomRuleAfd {
   /**
    * Describes the list of variables to group the rate limit requests
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   groupBy?: GroupByVariable[];
 
   /**
    * List of match conditions.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   matchConditions: MatchConditionAfd[];
 
   /**
@@ -6126,7 +6123,7 @@ model ManagedRuleSetListAfd {
   /**
    * List of rule sets.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   managedRuleSets?: ManagedRuleSetAfd[];
 }
 
@@ -6153,13 +6150,13 @@ model ManagedRuleSetAfd {
   /**
    * Describes the exclusions that are applied to all rules in the set.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   exclusions?: ManagedRuleExclusion[];
 
   /**
    * Defines the rule group overrides to apply to the rule set.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   ruleGroupOverrides?: ManagedRuleGroupOverrideAfd[];
 }
 
@@ -6197,13 +6194,13 @@ model ManagedRuleGroupOverrideAfd {
   /**
    * Describes the exclusions that are applied to all rules in the group.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   exclusions?: ManagedRuleExclusion[];
 
   /**
    * List of rules that will be disabled. If none specified, all rules in the group will be disabled.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   rules?: ManagedRuleOverrideAfd[];
 }
 
@@ -6230,7 +6227,7 @@ model ManagedRuleOverrideAfd {
   /**
    * Describes the exclusions that are applied to this specific rule.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   exclusions?: ManagedRuleExclusion[];
 }
 
@@ -6716,7 +6713,7 @@ model AfdUrlSigningActionParameters {
   /**
    * Defines which query string parameters in the url to be considered for expires, key id etc.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["paramName"])
+  @identifiers(#["paramName"])
   parameterNameOverride?: UrlSigningParamIdentifier[];
 }
 
