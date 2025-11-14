@@ -43,7 +43,9 @@ export async function correlateRuns(
         throw new Error(`No default tag found for readme ${readme} in before state`);
       }
       const beforeDefaultTagCandidates = beforeChecks.filter(
-        (r) => relative(beforePath, r.readme.path) === readmePathRelative && r.tag === defaultTag,
+        (r) =>
+          relative(beforePath, r.readme.path) === readmePathRelative &&
+          (r.tag === defaultTag || r.tag == ""),
       );
 
       if (beforeDefaultTagCandidates.length === 1) {
