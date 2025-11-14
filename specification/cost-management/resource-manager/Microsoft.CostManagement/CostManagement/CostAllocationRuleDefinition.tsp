@@ -24,37 +24,12 @@ model CostAllocationRuleDefinition
   >;
 }
 
-alias CostAllocationRuleDefinitionsOps = Azure.ResourceManager.Legacy.ExtensionOperations<
-  {
-    ...ApiVersionParameter;
-
-    /** the provider namespace */
-    @path
-    @segment("providers")
-    @key
-    providerNamespace: "microsoft.Billing";
-
-    /**
-     * BillingAccount ID
-     */
-    @path
-    @segment("billingAccounts")
-    billingAccountId: string;
-  },
-  {
-    ...Azure.ResourceManager.Legacy.Provider;
-  },
-  {
-    ...Azure.ResourceManager.Legacy.Provider;
-
-    /**
-     * Cost allocation rule name. The name cannot include spaces or any non alphanumeric characters other than '_' and '-'. The max length is 260 characters.
-     */
-    @path
-    @segment("costAllocationRules")
-    @pattern("[A-Za-z0-9\\-_]+")
-    ruleName: string;
-  }
+alias CostAllocationRuleDefinitionsOps = Extension.ExternalResource<
+  "microsoft.Billing",
+  "billingAccounts",
+  "billingAccountId",
+  Description = "BillingAccount ID",
+  ParentType = "Tenant"
 >;
 
 @armResourceOperations
@@ -62,34 +37,38 @@ interface CostAllocationRuleDefinitions {
   /**
    * Get a cost allocation rule by rule name and billing account or enterprise enrollment.
    */
-  get is CostAllocationRuleDefinitionsOps.Read<
+  get is Extension.Read<
+    CostAllocationRuleDefinitionsOps,
     CostAllocationRuleDefinition,
-    ErrorType = ErrorResponse
+    Error = ErrorResponse
   >;
 
   /**
    * Create/Update a rule to allocate cost between different resources within a billing account or enterprise enrollment.
    */
-  createOrUpdate is CostAllocationRuleDefinitionsOps.CreateOrUpdateSync<
+  createOrUpdate is Extension.CreateOrReplaceSync<
+    CostAllocationRuleDefinitionsOps,
     CostAllocationRuleDefinition,
-    ErrorType = ErrorResponse
+    Error = ErrorResponse
   >;
 
   /**
    * Delete cost allocation rule for billing account or enterprise enrollment.
    */
-  delete is CostAllocationRuleDefinitionsOps.DeleteSync<
+  delete is Extension.DeleteSync<
+    CostAllocationRuleDefinitionsOps,
     CostAllocationRuleDefinition,
-    ErrorType = ErrorResponse
+    Error = ErrorResponse
   >;
 
   /**
    * Get the list of all cost allocation rules for a billing account or enterprise enrollment.
    */
-  list is CostAllocationRuleDefinitionsOps.List<
+  list is Extension.ListByTarget<
+    CostAllocationRuleDefinitionsOps,
     CostAllocationRuleDefinition,
     Response = ArmResponse<CostAllocationRuleList>,
-    ErrorType = ErrorResponse
+    Error = ErrorResponse
   >;
 }
 
