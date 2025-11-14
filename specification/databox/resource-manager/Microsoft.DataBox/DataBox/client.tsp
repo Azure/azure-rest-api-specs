@@ -248,6 +248,10 @@ using Microsoft.DataBox;
   "ValidateInputs",
   "csharp"
 );
+@@clientName(TransportShipmentTypes, "TransportShipmentType", "csharp");
+@@clientName(MitigateJobRequest, "MitigateJobContent", "csharp");
+@@clientName(ShipmentPickUpRequest, "ShipmentPickUpContent", "csharp");
+@@clientName(MarkDevicesShippedRequest, "MarkDevicesShippedContent", "csharp");
 @@alternateType(KeyEncryptionKey.kekVaultResourceID,
   armResourceIdentifier,
   "csharp"
