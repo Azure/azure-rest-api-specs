@@ -407,9 +407,6 @@ directive:
   - suppress: PathForTrackedResourceTypes
     from: resources.json
     reason: Not a tracked resource type. Cannot change anything due to design philosophy in ARM.
-  - suppress: PathForTrackedResourceTypes
-    from: policyAssignments.json
-    reason: Not a tracked resource type. The API has never been changed since inception. Would be a breaking change.
   - suppress: PostResponseCodes
     from: resources.json
     reason: Breaking change in order to change the API response code.
@@ -422,7 +419,6 @@ directive:
   - suppress: EvenSegmentedPathForPutOperation
     from: resources.json
     reason: Linter rule limitation. The API has never been changed since inception. Would be a breaking change.
-    
   - suppress: DeleteResponseCodes
     from: resources.json
     reason: Breaking change in order to change the API response code.
@@ -438,12 +434,6 @@ directive:
   - suppress: RequiredReadOnlySystemData
     from: resources.json
     reason: Pre-existing lint error. Not related to this version release. Will fix in the future
-  - suppress: TenantLevelAPIsNotAllowed
-    from: dataBoundaries.json
-    reason: "Have approval from the PAS team."
-  - suppress: GetCollectionResponseSchema
-    from: dataBoundaries.json
-    reason: "Do not have any list calls."
   - suppress: TrackedExtensionResourcesAreNotAllowed
     from: resources.json
     reason: "The deployments resource type is ProxyOnly."
