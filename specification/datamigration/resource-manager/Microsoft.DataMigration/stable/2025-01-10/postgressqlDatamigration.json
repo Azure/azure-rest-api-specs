@@ -678,7 +678,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/DiscoverDatabaseObjectsResponse"
+              "$ref": "#/definitions/DatabaseDiscoveryResult"
             }
           },
           "202": {
@@ -758,7 +758,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/TestConnectivityResponse"
+              "$ref": "#/definitions/ConnectivityTestResult"
             }
           },
           "202": {
@@ -1002,6 +1002,24 @@
         "target"
       ]
     },
+    "ConnectivityTestResult": {
+      "type": "object",
+      "description": "Response for testing connectivity.",
+      "properties": {
+        "requestId": {
+          "type": "string",
+          "description": "Request identifier for tracking the operation"
+        },
+        "properties": {
+          "$ref": "#/definitions/ConnectivityTestProperties",
+          "description": "Connectivity test properties"
+        }
+      },
+      "required": [
+        "requestId",
+        "properties"
+      ]
+    },
     "DatabaseCredentials": {
       "type": "object",
       "description": "Credentials for database authentication.",
@@ -1027,6 +1045,31 @@
         "password"
       ]
     },
+    "DatabaseDiscoveryResult": {
+      "type": "object",
+      "description": "Response for discovering database objects.",
+      "properties": {
+        "requestId": {
+          "type": "string",
+          "description": "Request identifier for tracking the operation"
+        },
+        "source": {
+          "type": "array",
+          "description": "Source database objects discovered",
+          "items": {
+            "$ref": "#/definitions/DiscoveredDatabaseObjects"
+          }
+        },
+        "target": {
+          "$ref": "#/definitions/DiscoveredDatabaseObjects",
+          "description": "Target database objects discovered"
+        }
+      },
+      "required": [
+        "source",
+        "target"
+      ]
+    },
     "DatabaseInfo": {
       "type": "object",
       "description": "Database information with schemas.",
@@ -1049,6 +1092,45 @@
       },
       "required": [
         "schemas"
+      ]
+    },
+    "DatabaseMapping": {
+      "type": "object",
+      "description": "Mapping definition for schema or database migration.",
+      "properties": {
+        "mappingScope": {
+          "$ref": "#/definitions/MappingScope",
+          "description": "Scope of the mapping"
+        },
+        "sourceSchemaName": {
+          "type": "string",
+          "description": "Source schema name"
+        },
+        "sourceDatabaseName": {
+          "type": "string",
+          "description": "Source database name"
+        },
+        "targetDatabaseName": {
+          "type": "string",
+          "description": "Target database name"
+        },
+        "targetSchemaName": {
+          "type": "string",
+          "description": "Target schema name"
+        },
+        "sourceConnectionName": {
+          "type": "string",
+          "description": "Source connection name"
+        },
+        "targetConnectionName": {
+          "type": "string",
+          "description": "Target connection name"
+        }
+      },
+      "required": [
+        "mappingScope",
+        "sourceConnectionName",
+        "targetConnectionName"
       ]
     },
     "DatabaseMigration": {
@@ -1115,7 +1197,7 @@
           "type": "array",
           "description": "List of mapping definitions",
           "items": {
-            "$ref": "#/definitions/MappingDefinition"
+            "$ref": "#/definitions/DatabaseMapping"
           }
         },
         "computeProfile": {
@@ -1204,7 +1286,7 @@
           "type": "array",
           "description": "List of mapping definitions",
           "items": {
-            "$ref": "#/definitions/MappingDefinition"
+            "$ref": "#/definitions/DatabaseMapping"
           }
         },
         "computeProfile": {
@@ -1332,31 +1414,6 @@
         "computeProfile"
       ]
     },
-    "DiscoverDatabaseObjectsResponse": {
-      "type": "object",
-      "description": "Response for discovering database objects.",
-      "properties": {
-        "requestId": {
-          "type": "string",
-          "description": "Request identifier for tracking the operation"
-        },
-        "source": {
-          "type": "array",
-          "description": "Source database objects discovered",
-          "items": {
-            "$ref": "#/definitions/DiscoveredDatabaseObjects"
-          }
-        },
-        "target": {
-          "$ref": "#/definitions/DiscoveredDatabaseObjects",
-          "description": "Target database objects discovered"
-        }
-      },
-      "required": [
-        "source",
-        "target"
-      ]
-    },
     "DiscoveredDatabaseObjects": {
       "type": "object",
       "description": "Discovered database objects for a connection.",
@@ -1418,45 +1475,6 @@
           }
         ]
       }
-    },
-    "MappingDefinition": {
-      "type": "object",
-      "description": "Mapping definition for schema or database migration.",
-      "properties": {
-        "mappingScope": {
-          "$ref": "#/definitions/MappingScope",
-          "description": "Scope of the mapping"
-        },
-        "sourceSchemaName": {
-          "type": "string",
-          "description": "Source schema name"
-        },
-        "sourceDatabaseName": {
-          "type": "string",
-          "description": "Source database name"
-        },
-        "targetDatabaseName": {
-          "type": "string",
-          "description": "Target database name"
-        },
-        "targetSchemaName": {
-          "type": "string",
-          "description": "Target schema name"
-        },
-        "sourceConnectionName": {
-          "type": "string",
-          "description": "Source connection name"
-        },
-        "targetConnectionName": {
-          "type": "string",
-          "description": "Target connection name"
-        }
-      },
-      "required": [
-        "mappingScope",
-        "sourceConnectionName",
-        "targetConnectionName"
-      ]
     },
     "MappingScope": {
       "type": "string",
@@ -2142,24 +2160,6 @@
         "source",
         "target",
         "computeProfile"
-      ]
-    },
-    "TestConnectivityResponse": {
-      "type": "object",
-      "description": "Response for testing connectivity.",
-      "properties": {
-        "requestId": {
-          "type": "string",
-          "description": "Request identifier for tracking the operation"
-        },
-        "properties": {
-          "$ref": "#/definitions/ConnectivityTestProperties",
-          "description": "Connectivity test properties"
-        }
-      },
-      "required": [
-        "requestId",
-        "properties"
       ]
     },
     "ValidationStatus": {
