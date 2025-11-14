@@ -1320,6 +1320,12 @@ model Plan {
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "Supressing rule to match prior OpenAPI v2 JSON specification, consideration is given on adding the ResourcePlanProperty in future updates."
 model FlowsPatch {
+  /**
+   * Properties of flows patch body.
+   */
+  @added(Versions.v2025_10_10_preview)
+  properties?: FlowsPatchProperties;
+
   ...ManagedServiceIdentityProperty;
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 }
@@ -1464,6 +1470,29 @@ model PipelinesPatchProperties {
    * The flow types allowed for this pipeline. FlowTypes has reached end of life support starting version 2025-05-30-preview. Please create and use the FlowProfile property instead.
    */
   flowTypes?: FlowType[];
+
+  /**
+   * Quarantine Download Storage Account
+   */
+  @added(Versions.v2025_10_10_preview)
+  quarantineDownloadStorageAccount?: string;
+
+  /**
+   * Quarantine Download Storage Container
+   */
+  @added(Versions.v2025_10_10_preview)
+  quarantineDownloadStorageContainer?: string;
+}
+
+/**
+ * Properties of flows patch body.
+ */
+@added(Versions.v2025_10_10_preview)
+model FlowsPatchProperties {
+  /**
+   * The protocol of the stream
+   */
+  streamProtocol?: StreamProtocol;
 }
 
 /**
@@ -1627,4 +1656,42 @@ model PipelineConnectionProperties {
    */
   @visibility(Lifecycle.Read)
   internalMetadata?: InternalMetadataProperties;
+}
+
+/**
+ * Defines the required request body for retrieving Pipeline metadata for a provided pipeline.
+ */
+@added(Versions.v2025_10_10_preview)
+model ListPipelineMetadataRequest {
+  /**
+   * The name of the pipeline for which to retrieve associated metadata.
+   */
+  pipeline: string;
+
+  /**
+   * Direction of data movement
+   */
+  direction?: Direction;
+}
+
+/**
+ * Defines the response body for retrieving Pipeline metadata for a provided pipeline.
+ */
+@added(Versions.v2025_10_10_preview)
+model ListPipelineMetadataResult {
+  /**
+   * Returns the features associated with this pipeline.
+   */
+  features: Feature[];
+}
+
+/**
+ * Defines a feature to be associated with a pipeline.
+ */
+@added(Versions.v2025_10_10_preview)
+model Feature {
+  /**
+   * Name of the feature
+   */
+  name: string;
 }
