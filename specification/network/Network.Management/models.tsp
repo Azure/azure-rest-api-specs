@@ -14542,7 +14542,6 @@ model FirewallPolicyIntrusionDetectionConfiguration {
   /**
    * IDPS Private IP address ranges are used to identify traffic direction (i.e. inbound, outbound, etc.). By default, only ranges defined by IANA RFC 1918 are considered private IP addresses. To modify default ranges, specify your Private IP address ranges with this property
    */
-  @identifiers(#[])
   privateRanges?: string[];
 }
 
@@ -14968,7 +14967,6 @@ model IpamPoolProperties {
    * List of IP address type for the IpamPool.
    */
   @visibility(Lifecycle.Read)
-  @identifiers(#[])
   ipAddressType?: IpType[];
 
   /**
@@ -18125,7 +18123,6 @@ model NvaInterfaceConfigurationsProperties {
   /**
    * A subnet resource id where the NIC will be deployed. Each subnet resource uri should be unique.
    */
-  @identifiers(#[])
   subnet?: NvaInVnetSubnetReferenceProperties;
 
   /**
@@ -25482,6 +25479,11 @@ model PeerRoute {
 }
 
 /**
+ * Map from virtual router instance to list of peer routes.
+ */
+alias PeerRouteList = Record<PeerRoute[]>;
+
+/**
  * Properties of IP configuration.
  */
 model HubIPConfigurationPropertiesFormat {
@@ -26346,43 +26348,36 @@ model ApplicationRule extends FirewallPolicyRule {
   /**
    * List of source IP addresses for this rule.
    */
-  @identifiers(#[])
   sourceAddresses?: string[];
 
   /**
    * List of destination IP addresses or Service Tags.
    */
-  @identifiers(#[])
   destinationAddresses?: string[];
 
   /**
    * Array of Application Protocols.
    */
-  @identifiers(#[])
   protocols?: FirewallPolicyRuleApplicationProtocol[];
 
   /**
    * List of FQDNs for this rule.
    */
-  @identifiers(#[])
   targetFqdns?: string[];
 
   /**
    * List of Urls for this rule condition.
    */
-  @identifiers(#[])
   targetUrls?: string[];
 
   /**
    * List of FQDN Tags for this rule.
    */
-  @identifiers(#[])
   fqdnTags?: string[];
 
   /**
    * List of source IpGroups for this rule.
    */
-  @identifiers(#[])
   sourceIpGroups?: string[];
 
   /**
@@ -26393,13 +26388,11 @@ model ApplicationRule extends FirewallPolicyRule {
   /**
    * List of destination azure web categories.
    */
-  @identifiers(#[])
   webCategories?: string[];
 
   /**
    * List of HTTP/S headers to insert.
    */
-  @identifiers(#[])
   httpHeadersToInsert?: FirewallPolicyHttpHeaderToInsert[];
 
   /**
@@ -26928,4 +26921,44 @@ model VpnSiteId {
    */
   @visibility(Lifecycle.Read)
   vpnSite?: string;
+}
+
+/**
+ * Response for ApplicationGatewayAvailableServerVariables API service call.
+ */
+model ApplicationGatewayAvailableServerVariablesResult {
+  @pageItems
+  value?: string[];
+}
+
+/**
+ * Response for ApplicationGatewayAvailableRequestHeaders API service call.
+ */
+model ApplicationGatewayAvailableRequestHeadersResult {
+  @pageItems
+  value?: string[];
+}
+
+/**
+ * Response for ApplicationGatewayAvailableResponseHeaders API service call.
+ */
+model ApplicationGatewayAvailableResponseHeadersResult {
+  @pageItems
+  value?: string[];
+}
+
+/**
+ * Gateway Failover All Test Details
+ */
+model ExpressRouteFailoverAllTestDetails {
+  @pageItems
+  value?: ExpressRouteFailoverTestDetails[];
+}
+
+/**
+ * Gateway Failover Single Test Details Object
+ */
+model ExpressRouteFailoverSingleTestDetailsObject {
+  @pageItems
+  value?: ExpressRouteFailoverSingleTestDetails[];
 }

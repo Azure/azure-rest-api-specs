@@ -155,7 +155,7 @@ interface NetworkInterfaceOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("NetworkInterfaces_ListAll")
-  listAll is NetworkInterfaceOperationGroupOps.ListBySubscription<NetworkInterface>;
+  listAll is ArmListBySubscription<NetworkInterface>;
 
   /**
    * Gets all route tables applied to a network interface.

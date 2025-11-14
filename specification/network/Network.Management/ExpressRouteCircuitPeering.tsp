@@ -58,7 +58,7 @@ interface ExpressRouteCircuitPeerings {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ExpressRouteCircuits_ListArpTable")
   @list
-  @action("{devicePath}")
+  @action("/arpTables/{devicePath}")
   listArpTable is ArmResourceActionAsync<
     ExpressRouteCircuitPeering,
     void,
@@ -78,7 +78,7 @@ interface ExpressRouteCircuitPeerings {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ExpressRouteCircuits_ListRoutesTable")
   @list
-  @action("{devicePath}")
+  @action("/routeTables/{devicePath}")
   listRoutesTable is ArmResourceActionAsync<
     ExpressRouteCircuitPeering,
     void,
@@ -98,7 +98,7 @@ interface ExpressRouteCircuitPeerings {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ExpressRouteCircuits_ListRoutesTableSummary")
   @list
-  @action("{devicePath}")
+  @action("/routeTablesSummary/{devicePath}")
   listRoutesTableSummary is ArmResourceActionAsync<
     ExpressRouteCircuitPeering,
     void,

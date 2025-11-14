@@ -128,15 +128,12 @@ interface ManagementGroupNetworkManagerConnections {
   /**
    * Get a specified connection created by this management group.
    */
-  get is ManagementGroupNetworkManagerConnectionOps.Read<
-    Extension.ManagementGroup,
-    NetworkManagerConnection
-  >;
+  get is Extension.Read<Extension.ManagementGroup, NetworkManagerConnection>;
 
   /**
    * Create a network manager connection on this management group.
    */
-  createOrUpdate is ManagementGroupNetworkManagerConnectionOps.CreateOrUpdateSync<
+  createOrUpdate is Extension.CreateOrReplaceSync<
     Extension.ManagementGroup,
     NetworkManagerConnection
   >;
@@ -144,7 +141,7 @@ interface ManagementGroupNetworkManagerConnections {
   /**
    * Delete specified pending connection created by this management group.
    */
-  delete is ManagementGroupNetworkManagerConnectionOps.DeleteSync<
+  delete is Extension.DeleteSync<
     Extension.ManagementGroup,
     NetworkManagerConnection
   >;
@@ -152,24 +149,9 @@ interface ManagementGroupNetworkManagerConnections {
   /**
    * List all network manager connections created by this management group.
    */
-  list is ManagementGroupNetworkManagerConnectionOps.List<
+  list is Extension.ListByTarget<
     Extension.ManagementGroup,
-    NetworkManagerConnection,
-    Parameters = {
-      /**
-       * An optional query parameter which specifies the maximum number of records to be returned by the server.
-       */
-      @maxValue(20)
-      @minValue(1)
-      @query("$top")
-      $top?: int32;
-
-      /**
-       * SkipToken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skipToken parameter that specifies a starting point to use for subsequent calls.
-       */
-      @query("$skipToken")
-      $skipToken?: string;
-    }
+    NetworkManagerConnection
   >;
 }
 

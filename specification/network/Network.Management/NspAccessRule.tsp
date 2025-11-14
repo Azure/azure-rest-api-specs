@@ -80,7 +80,7 @@ interface NspAccessRules {
   reconcile is ArmResourceActionSync<
     NspAccessRule,
     unknown,
-    ArmResponse<AnyObject>
+    ArmResponse<unknown>
   >;
 }
 

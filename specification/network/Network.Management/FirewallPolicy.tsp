@@ -108,7 +108,7 @@ interface FirewallPolicies {
   deploy is ArmResourceActionAsyncBase<
     FirewallPolicy,
     void,
-    ArmAcceptedLroResponse<ArmAsyncOperationHeader &
+    ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
       Azure.Core.Foundations.RetryAfterHeader>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<FirewallPolicy>
   >;

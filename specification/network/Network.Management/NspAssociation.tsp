@@ -94,7 +94,7 @@ interface NspAssociations {
   reconcile is ArmResourceActionSync<
     NspAssociation,
     unknown,
-    ArmResponse<AnyObject>
+    ArmResponse<unknown>
   >;
 }
 

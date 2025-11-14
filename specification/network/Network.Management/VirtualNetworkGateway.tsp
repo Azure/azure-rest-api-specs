@@ -288,7 +288,7 @@ interface VirtualNetworkGateways {
   getFailoverAllTestDetails is ArmResourceActionAsync<
     VirtualNetworkGateway,
     void,
-    ArmResponse<ExpressRouteFailoverTestDetails[]>,
+    ArmResponse<ExpressRouteFailoverAllTestDetails>,
     Parameters = {
       /**
        * The type of failover test
@@ -311,7 +311,7 @@ interface VirtualNetworkGateways {
   getFailoverSingleTestDetails is ArmResourceActionAsync<
     VirtualNetworkGateway,
     void,
-    ArmResponse<ExpressRouteFailoverSingleTestDetails[]>,
+    ArmResponse<ExpressRouteFailoverSingleTestDetailsObject>,
     Parameters = {
       /**
        * Peering location of the test

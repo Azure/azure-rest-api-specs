@@ -176,7 +176,7 @@ interface PublicIPAddressOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("PublicIPAddresses_ListAll")
-  listAll is PublicIPAddressOperationGroupOps.ListBySubscription<PublicIPAddress>;
+  listAll is ArmListBySubscription<PublicIPAddress>;
 
   /**
    * Gets the Ddos Protection Status of a Public IP Address

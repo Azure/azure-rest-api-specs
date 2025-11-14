@@ -72,7 +72,7 @@ interface ExpressRouteCrossConnections {
    * Gets the currently advertised ARP table associated with the express route cross connection in a resource group.
    */
   @list
-  @action("{devicePath}")
+  @action("/arpTables/{devicePath}")
   listArpTable is ArmResourceActionAsync<
     ExpressRouteCrossConnection,
     void,
@@ -96,7 +96,7 @@ interface ExpressRouteCrossConnections {
    * Gets the route table summary associated with the express route cross connection in a resource group.
    */
   @list
-  @action("{devicePath}")
+  @action("/routeTablesSummary/{devicePath}")
   listRoutesTableSummary is ArmResourceActionAsync<
     ExpressRouteCrossConnection,
     void,
@@ -120,7 +120,7 @@ interface ExpressRouteCrossConnections {
    * Gets the currently advertised routes table associated with the express route cross connection in a resource group.
    */
   @list
-  @action("{devicePath}")
+  @action("/routeTables/{devicePath}")
   listRoutesTable is ArmResourceActionAsync<
     ExpressRouteCrossConnection,
     void,
