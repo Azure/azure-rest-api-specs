@@ -18,13 +18,14 @@ options:
     package-details:
       name: "@azure/arm-postgresqldatamigration"
   "@azure-tools/typespec-go":
+    service-dir: sdk/resourcemanager/postgresqldatamigration
     flavor: azure
     emitter-output-dir: "{output-dir}/{service-dir}/armpostgresqldatamigration"
     generate-samples: true
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
-    module: "github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/postgresqldatamigration/armpostgresqldatamigration"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armpostgresqldatamigration"
   "@azure-tools/typespec-python":
     flavor: azure
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-postgresqldatamigration"
@@ -41,4 +42,4 @@ linter:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
 parameters:
   service-dir:
-    default: sdk/resourcemanager/postgresqldatamigration
+    default: sdk/postgresqldatamigration
