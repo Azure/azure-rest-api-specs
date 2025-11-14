@@ -119,7 +119,7 @@
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+            "$ref": "#/parameters/TopQueryParameter"
           },
           {
             "$ref": "#/parameters/SkipTokenQueryParameter"
@@ -530,7 +530,7 @@
             "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
           },
           {
-            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+            "$ref": "#/parameters/TopQueryParameter"
           },
           {
             "$ref": "#/parameters/SkipTokenQueryParameter"
@@ -974,13 +974,13 @@
             "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
           },
           {
-            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+            "$ref": "#/parameters/TopQueryParameter"
           },
           {
             "$ref": "#/parameters/SkipTokenQueryParameter"
           },
           {
-            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
+            "$ref": "#/parameters/FilterQueryParameter"
           }
         ],
         "responses": {
@@ -1383,7 +1383,7 @@
             "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
           },
           {
-            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+            "$ref": "#/parameters/TopQueryParameter"
           },
           {
             "$ref": "#/parameters/SkipTokenQueryParameter"
@@ -1967,7 +1967,7 @@
             "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
           },
           {
-            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+            "$ref": "#/parameters/TopQueryParameter"
           },
           {
             "$ref": "#/parameters/SkipTokenQueryParameter"
@@ -3723,22 +3723,14 @@
     }
   },
   "parameters": {
-    "Azure.Core.FilterQueryParameter": {
-      "name": "filter",
+    "FilterQueryParameter": {
+      "name": "$filter",
       "in": "query",
       "description": "Filter the result list using the given expression.",
       "required": false,
       "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "Azure.Core.TopQueryParameter": {
-      "name": "top",
-      "in": "query",
-      "description": "The number of result items to return.",
-      "required": false,
-      "type": "integer",
-      "format": "int32",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "filter"
     },
     "SkipTokenQueryParameter": {
       "name": "$skiptoken",
@@ -3749,6 +3741,16 @@
       "format": "int32",
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "skipToken"
+    },
+    "TopQueryParameter": {
+      "name": "$top",
+      "in": "query",
+      "description": "The number of result items to return.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "top"
     }
   }
 }
