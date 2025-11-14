@@ -1,4 +1,5 @@
 using TypeSpec.Versioning;
+using Azure.ResourceManager;
 
 namespace Microsoft.ContainerRegistry;
 
@@ -394,7 +395,7 @@ model NetworkRuleSet {
   /**
    * The IP ACL rules.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   ipRules?: IPRule[];
 }
 
@@ -760,7 +761,7 @@ model RegistryUsageListResult {
    * The list of container registry quota usages.
    */
   @pageItems
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   value?: RegistryUsage[];
 }
 
@@ -786,7 +787,7 @@ model RegistryListCredentialsResult {
   /**
    * The list of passwords for a container registry.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   passwords?: RegistryPassword[];
 }
 
