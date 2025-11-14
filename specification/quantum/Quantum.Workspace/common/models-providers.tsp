@@ -89,7 +89,6 @@ model TargetStatus {
   targetProfile?: string;
 
   /** The metadata of this target. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Approved by ARM API review for metadata property."
   @added(QuantumWorkspaceAPIVersion.v2025_12_01_preview)
   @visibility(Lifecycle.Read)
   metadata?: Record<unknown>;
