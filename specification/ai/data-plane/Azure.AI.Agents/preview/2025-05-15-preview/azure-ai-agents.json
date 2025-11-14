@@ -2804,62 +2804,6 @@
         }
       }
     },
-    "ActivityFunctionDefinition": {
-      "type": "object",
-      "description": "The activity definition information for a function.",
-      "properties": {
-        "description": {
-          "type": "string",
-          "description": "A description of what the function does, used by the model to choose when and how to call the function."
-        },
-        "parameters": {
-          "$ref": "#/definitions/ActivityFunctionParameters",
-          "description": "The parameters the functions accepts, described as a JSON Schema object."
-        }
-      },
-      "required": [
-        "parameters"
-      ]
-    },
-    "ActivityFunctionParameters": {
-      "type": "object",
-      "description": "The parameters used for activity function definition.",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "The parameter type, it is always object.",
-          "enum": [
-            "object"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
-        "properties": {
-          "type": "object",
-          "description": "The dictionary of function arguments.",
-          "additionalProperties": {
-            "$ref": "#/definitions/FunctionArgument"
-          }
-        },
-        "required": {
-          "type": "array",
-          "description": "The list of the required parameters.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "additionalProperties": {
-          "type": "boolean",
-          "description": "If true the function has additional parameters."
-        }
-      },
-      "required": [
-        "type",
-        "properties",
-        "required"
-      ]
-    },
     "Agent": {
       "type": "object",
       "description": "Represents an agent that can call the model and use tools.",
@@ -4898,23 +4842,6 @@
           }
         ]
       }
-    },
-    "FunctionArgument": {
-      "type": "object",
-      "description": "The function argument and description.",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "The type of an argument, for example 'string' or 'number'."
-        },
-        "description": {
-          "type": "string",
-          "description": "The argument description."
-        }
-      },
-      "required": [
-        "type"
-      ]
     },
     "FunctionDefinition": {
       "type": "object",
@@ -7834,9 +7761,7 @@
         "tools": {
           "type": "object",
           "description": "The supported function list.",
-          "additionalProperties": {
-            "$ref": "#/definitions/ActivityFunctionDefinition"
-          }
+          "additionalProperties": {}
         }
       },
       "required": [
