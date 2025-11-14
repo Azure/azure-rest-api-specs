@@ -2,661 +2,1086 @@
   "swagger": "2.0",
   "info": {
     "title": "AttestationManagementClient",
+    "version": "2021-06-01",
     "description": "Various APIs for managing resources in attestation service. This primarily encompasses per-provider management.",
-    "version": "2021-06-01"
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
   },
-  "host": "management.azure.com",
   "schemes": [
     "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
   ],
   "consumes": [
     "application/json"
   ],
-  "produces": [
-    "application/json"
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
   ],
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "description": "Azure Active Directory OAuth2 Flow.",
       "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
     }
   },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "AttestationProviders"
+    },
+    {
+      "name": "PrivateEndpointConnections"
+    }
+  ],
   "paths": {
     "/providers/Microsoft.Attestation/operations": {
       "get": {
+        "operationId": "Operations_List",
         "tags": [
           "Operations"
         ],
-        "operationId": "Operations_List",
-        "description": "Lists all of the available Azure attestation operations.",
-        "x-ms-examples": {
-          "Operations_List": {
-            "$ref": "./examples/Operations_List.json"
-          }
-        },
+        "description": "List the operations for the provider",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "List all the operations.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/OperationList"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
           }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Attestation/attestationProviders/{providerName}": {
-      "get": {
-        "tags": [
-          "AttestationProviders"
-        ],
-        "operationId": "AttestationProviders_Get",
-        "description": "Get the status of Attestation Provider.",
+        },
         "x-ms-examples": {
-          "AttestationProviders_Get": {
-            "$ref": "./examples/Get_AttestationProvider.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "providerName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Name of the attestation provider."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The status of the specified attestation provider",
-            "schema": {
-              "$ref": "#/definitions/AttestationProvider"
-            }
-          },
-          "default": {
-            "description": "Error result from Attestation service",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "AttestationProviders"
-        ],
-        "operationId": "AttestationProviders_Create",
-        "description": "Creates or updates an Attestation Provider.",
-        "x-ms-examples": {
-          "AttestationProviders_Create": {
-            "$ref": "./examples/Create_AttestationProvider.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "providerName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Name of the attestation provider."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "creationParams",
-            "in": "body",
-            "required": true,
-            "description": "Client supplied parameters.",
-            "schema": {
-              "$ref": "#/definitions/AttestationServiceCreationParams"
-            },
-            "x-ms-parameter-location": "method"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Created or updated attestation service",
-            "schema": {
-              "$ref": "#/definitions/AttestationProvider"
-            }
-          },
-          "201": {
-            "description": "Created or updated attestation service",
-            "schema": {
-              "$ref": "#/definitions/AttestationProvider"
-            }
-          },
-          "default": {
-            "description": "Error result from Attestation service",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "AttestationProviders"
-        ],
-        "operationId": "AttestationProviders_Update",
-        "description": "Updates the Attestation Provider.",
-        "x-ms-examples": {
-          "AttestationProviders_Update": {
-            "$ref": "./examples/Update_AttestationProvider.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "providerName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Name of the attestation provider."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "updateParams",
-            "in": "body",
-            "required": true,
-            "description": "Client supplied parameters.",
-            "schema": {
-              "$ref": "#/definitions/AttestationServicePatchParams"
-            },
-            "x-ms-parameter-location": "method"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Updated attestation service",
-            "schema": {
-              "$ref": "#/definitions/AttestationProvider"
-            }
-          },
-          "default": {
-            "description": "Error result from Attestation service",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "AttestationProviders"
-        ],
-        "operationId": "AttestationProviders_Delete",
-        "description": "Delete Attestation Service.",
-        "x-ms-examples": {
-          "AttestationProviders_Delete": {
-            "$ref": "./examples/Delete_AttestationProvider.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "providerName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Name of the attestation service"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource exists and was deleted successfully"
-          },
-          "202": {
-            "description": "Request accepted for deletion of attestation service"
-          },
-          "204": {
-            "description": "Resource does not exist"
-          },
-          "default": {
-            "description": "Error result from Attestation service",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Attestation/attestationProviders/{providerName}/privateEndpointConnections": {
-      "get": {
-        "tags": [
-          "PrivateEndpointConnections"
-        ],
-        "operationId": "PrivateEndpointConnections_List",
-        "description": "List all the private endpoint connections associated with the attestation provider.",
-        "x-ms-examples": {
-          "AttestationProviderListPrivateEndpointConnections": {
-            "$ref": "./examples/AttestationProviderListPrivateEndpointConnections.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ProviderName"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK -- Successfully retrieved private endpoint connections.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnectionListResult"
-            }
-          },
-          "default": {
-            "description": "Error result from Attestation service",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Attestation/attestationProviders/{providerName}/privateEndpointConnections/{privateEndpointConnectionName}": {
-      "get": {
-        "tags": [
-          "PrivateEndpointConnections"
-        ],
-        "operationId": "PrivateEndpointConnections_Get",
-        "description": "Gets the specified private endpoint connection associated with the attestation provider.",
-        "x-ms-examples": {
-          "AttestationProviderGetPrivateEndpointConnection": {
-            "$ref": "./examples/AttestationProviderGetPrivateEndpointConnection.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ProviderName"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v1/privatelinks.json#/parameters/PrivateEndpointConnectionName"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK -- Get the private endpoint connection properties successfully.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "PrivateEndpointConnections"
-        ],
-        "operationId": "PrivateEndpointConnections_Create",
-        "description": "Update the state of specified private endpoint connection associated with the attestation provider.",
-        "x-ms-examples": {
-          "AttestationProviderPutPrivateEndpointConnection": {
-            "$ref": "./examples/AttestationProviderPutPrivateEndpointConnection.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ProviderName"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v1/privatelinks.json#/parameters/PrivateEndpointConnectionName"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
-            },
-            "description": "The private endpoint connection properties."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK -- Update the private endpoint connection properties successfully.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "PrivateEndpointConnections"
-        ],
-        "operationId": "PrivateEndpointConnections_Delete",
-        "description": "Deletes the specified private endpoint connection associated with the attestation provider.",
-        "x-ms-examples": {
-          "AttestationProviderDeletePrivateEndpointConnection": {
-            "$ref": "./examples/AttestationProviderDeletePrivateEndpointConnection.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ProviderName"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v1/privatelinks.json#/parameters/PrivateEndpointConnectionName"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK -- Delete the private endpoint connection successfully."
-          },
-          "204": {
-            "description": "No Content -- The private endpoint connection does not exist."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Attestation/attestationProviders/{providerName}/privateLinkResources": {
-      "get": {
-        "tags": [
-          "PrivateLinkResources"
-        ],
-        "operationId": "PrivateLinkResources_ListByProvider",
-        "description": "Gets the private link resources supported for the attestation provider.",
-        "x-ms-examples": {
-          "AttestationProviderListPrivateLinkResources": {
-            "$ref": "./examples/AttestationProviderListPrivateLinkResources.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ProviderName"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK - Successfully retrieved private link resources.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateLinkResourceListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Attestation/attestationProviders": {
       "get": {
+        "operationId": "AttestationProviders_List",
         "tags": [
           "AttestationProviders"
         ],
-        "operationId": "AttestationProviders_List",
         "description": "Returns a list of attestation providers in a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AttestationProviderListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
         "x-ms-examples": {
           "AttestationProviders_List": {
             "$ref": "./examples/Get_AttestationProvidersList.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/AttestationProviderListResult"
-            }
-          },
-          "default": {
-            "description": "Attestation service error result",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Attestation/attestationProviders": {
-      "get": {
-        "tags": [
-          "AttestationProviders"
-        ],
-        "operationId": "AttestationProviders_ListByResourceGroup",
-        "description": "Returns attestation providers list in a resource group.",
-        "x-ms-examples": {
-          "AttestationProviders_ListByResourceGroup": {
-            "$ref": "./examples/Get_AttestationProvidersListByResourceGroup.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/AttestationProviderListResult"
-            }
-          },
-          "default": {
-            "description": "Attestation service error result",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Attestation/defaultProviders": {
       "get": {
-        "tags": [
-          "AttestationProviders"
-        ],
         "operationId": "AttestationProviders_ListDefault",
         "description": "Get the default provider",
-        "x-ms-examples": {
-          "AttestationProviders_GetDefault": {
-            "$ref": "./examples/Get_DefaultProviders.json"
-          }
-        },
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Retrieved information about the default provider.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/AttestationProviderListResult"
             }
           },
           "default": {
-            "description": "Attestation service error result",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "AttestationProviders_GetDefault": {
+            "$ref": "./examples/Get_DefaultProviders.json"
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Attestation/locations/{location}/defaultProvider": {
       "get": {
-        "tags": [
-          "AttestationProviders"
-        ],
         "operationId": "AttestationProviders_GetDefaultByLocation",
         "description": "Get the default provider by location.",
-        "x-ms-examples": {
-          "AttestationProviders_GetDefaultWithLocation": {
-            "$ref": "./examples/Get_DefaultProviderByLocation.json"
-          }
-        },
         "parameters": [
           {
-            "name": "location",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "description": "The location of the default provider."
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Retrieved information about the default provider.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/AttestationProvider"
             }
           },
           "default": {
-            "description": "Attestation service error result",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "AttestationProviders_GetDefaultWithLocation": {
+            "$ref": "./examples/Get_DefaultProviderByLocation.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Attestation/attestationProviders": {
+      "get": {
+        "operationId": "AttestationProviders_ListByResourceGroup",
+        "tags": [
+          "AttestationProviders"
+        ],
+        "description": "Returns attestation providers list in a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AttestationProviderListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AttestationProviders_ListByResourceGroup": {
+            "$ref": "./examples/Get_AttestationProvidersListByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Attestation/attestationProviders/{providerName}": {
+      "get": {
+        "operationId": "AttestationProviders_Get",
+        "tags": [
+          "AttestationProviders"
+        ],
+        "description": "Get the status of Attestation Provider.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "providerName",
+            "in": "path",
+            "description": "Name of the attestation provider.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AttestationProvider"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AttestationProviders_Get": {
+            "$ref": "./examples/Get_AttestationProvider.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "AttestationProviders_Create",
+        "tags": [
+          "AttestationProviders"
+        ],
+        "description": "Creates or updates an Attestation Provider.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "providerName",
+            "in": "path",
+            "description": "Name of the attestation provider.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "creationParams",
+            "in": "body",
+            "description": "Client supplied parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AttestationServiceCreationParams"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'AttestationProvider' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AttestationProvider"
+            }
+          },
+          "201": {
+            "description": "Resource 'AttestationProvider' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AttestationProvider"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AttestationProviders_Create": {
+            "$ref": "./examples/Create_AttestationProvider.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "AttestationProviders_Update",
+        "tags": [
+          "AttestationProviders"
+        ],
+        "description": "Updates the Attestation Provider.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "providerName",
+            "in": "path",
+            "description": "Name of the attestation provider.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "updateParams",
+            "in": "body",
+            "description": "Client supplied parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AttestationServicePatchParams"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AttestationProvider"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AttestationProviders_Update": {
+            "$ref": "./examples/Update_AttestationProvider.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "AttestationProviders_Delete",
+        "tags": [
+          "AttestationProviders"
+        ],
+        "description": "Delete Attestation Service.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "providerName",
+            "in": "path",
+            "description": "Name of the attestation provider.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AttestationProviders_Delete": {
+            "$ref": "./examples/Delete_AttestationProvider.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Attestation/attestationProviders/{providerName}/privateEndpointConnections": {
+      "get": {
+        "operationId": "PrivateEndpointConnections_List",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "List all the private endpoint connections associated with the attestation provider.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "providerName",
+            "in": "path",
+            "description": "Name of the attestation provider.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AttestationProviderListPrivateEndpointConnections": {
+            "$ref": "./examples/AttestationProviderListPrivateEndpointConnections.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Attestation/attestationProviders/{providerName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "get": {
+        "operationId": "PrivateEndpointConnections_Get",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Gets the specified private endpoint connection associated with the attestation provider.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "providerName",
+            "in": "path",
+            "description": "Name of the attestation provider.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AttestationProviderGetPrivateEndpointConnection": {
+            "$ref": "./examples/AttestationProviderGetPrivateEndpointConnection.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "PrivateEndpointConnections_Create",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Update the state of specified private endpoint connection associated with the attestation provider.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "providerName",
+            "in": "path",
+            "description": "Name of the attestation provider.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The private endpoint connection properties.",
+            "required": true,
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'PrivateEndpointConnection' update operation succeeded",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AttestationProviderPutPrivateEndpointConnection": {
+            "$ref": "./examples/AttestationProviderPutPrivateEndpointConnection.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "PrivateEndpointConnections_Delete",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Deletes the specified private endpoint connection associated with the attestation provider.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "providerName",
+            "in": "path",
+            "description": "Name of the attestation provider.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AttestationProviderDeletePrivateEndpointConnection": {
+            "$ref": "./examples/AttestationProviderDeletePrivateEndpointConnection.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Attestation/attestationProviders/{providerName}/privateLinkResources": {
+      "get": {
+        "operationId": "PrivateLinkResources_ListByProvider",
+        "tags": [
+          "AttestationProviders"
+        ],
+        "description": "Gets the private link resources supported for the attestation provider.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "providerName",
+            "in": "path",
+            "description": "Name of the attestation provider.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AttestationProviderListPrivateLinkResources": {
+            "$ref": "./examples/AttestationProviderListPrivateLinkResources.json"
           }
         }
       }
     }
   },
   "definitions": {
-    "OperationList": {
+    "AttestationProvider": {
+      "type": "object",
+      "description": "Attestation service response message.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StatusResult",
+          "description": "Describes Attestation service status.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "AttestationProviderListResult": {
+      "type": "object",
+      "description": "Attestation Providers List.",
       "properties": {
         "systemData": {
-          "readOnly": true,
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
           "description": "The system metadata relating to this resource",
-          "$ref": "../../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
+          "readOnly": true
+        },
+        "value": {
+          "type": "array",
+          "description": "Attestation Provider array.",
+          "items": {
+            "$ref": "#/definitions/AttestationProvider"
+          }
+        }
+      }
+    },
+    "AttestationServiceCreationParams": {
+      "type": "object",
+      "description": "Parameters for creating an attestation provider",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "The supported Azure location where the attestation provider should be created."
+        },
+        "tags": {
+          "type": "object",
+          "description": "The tags that will be assigned to the attestation provider.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/AttestationServiceCreationSpecificParams",
+          "description": "Properties of the attestation provider"
+        }
+      },
+      "required": [
+        "location",
+        "properties"
+      ]
+    },
+    "AttestationServiceCreationSpecificParams": {
+      "type": "object",
+      "description": "Client supplied parameters used to create a new attestation provider.",
+      "properties": {
+        "publicNetworkAccess": {
+          "type": "string",
+          "description": "Controls whether traffic from the public network is allowed to access the Attestation Provider APIs.",
+          "default": "Enabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "PublicNetworkAccessType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "Enables public network connectivity to the Attestation Provider REST APIs."
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "Disables public network connectivity to the Attestation Provider REST APIs."
+              }
+            ]
+          }
+        },
+        "policySigningCertificates": {
+          "$ref": "#/definitions/JsonWebKeySet",
+          "description": "JSON Web Key Set defining a set of X.509 Certificates that will represent the parent certificate for the signing certificate used for policy operations"
+        },
+        "tpmAttestationAuthentication": {
+          "type": "string",
+          "description": "The setting that controls whether authentication is enabled or disabled for TPM Attestation REST APIs.",
+          "default": "Enabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "TpmAttestationAuthenticationType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "Enables the requirement of authentication for TPM Attestation REST APIs."
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "Disables the requirement of authentication for TPM Attestation REST APIs."
+              }
+            ]
+          }
+        }
+      }
+    },
+    "AttestationServicePatchParams": {
+      "type": "object",
+      "description": "Parameters for patching an attestation provider",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "The tags that will be assigned to the attestation provider.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/AttestationServicePatchSpecificParams",
+          "description": "Properties of the attestation provider"
+        }
+      }
+    },
+    "AttestationServicePatchSpecificParams": {
+      "type": "object",
+      "description": "Client supplied parameters used to patch an existing attestation provider.",
+      "properties": {
+        "publicNetworkAccess": {
+          "type": "string",
+          "description": "Controls whether traffic from the public network is allowed to access the Attestation Provider APIs.",
+          "default": "Enabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "PublicNetworkAccessType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "Enables public network connectivity to the Attestation Provider REST APIs."
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "Disables public network connectivity to the Attestation Provider REST APIs."
+              }
+            ]
+          }
+        },
+        "tpmAttestationAuthentication": {
+          "type": "string",
+          "description": "The setting that controls whether authentication is enabled or disabled for TPM Attestation REST APIs.",
+          "default": "Enabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "TpmAttestationAuthenticationType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "Enables the requirement of authentication for TPM Attestation REST APIs."
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "Disables the requirement of authentication for TPM Attestation REST APIs."
+              }
+            ]
+          }
+        }
+      }
+    },
+    "AttestationServiceStatus": {
+      "type": "string",
+      "description": "Status of attestation service.",
+      "enum": [
+        "Ready",
+        "NotReady",
+        "Error"
+      ],
+      "x-ms-enum": {
+        "name": "AttestationServiceStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Ready",
+            "value": "Ready"
+          },
+          {
+            "name": "NotReady",
+            "value": "NotReady"
+          },
+          {
+            "name": "Error",
+            "value": "Error"
+          }
+        ]
+      }
+    },
+    "CloudError": {
+      "type": "object",
+      "description": "An error response from Attestation.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "An error response from Attestation."
+        }
+      },
+      "x-ms-external": true
+    },
+    "CloudErrorBody": {
+      "type": "object",
+      "description": "An error response from Attestation.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for displaying in a user interface."
+        }
+      },
+      "x-ms-external": true
+    },
+    "CreatedByType": {
+      "type": "string",
+      "description": "The type of identity that created the resource.",
+      "enum": [
+        "User",
+        "Application",
+        "ManagedIdentity",
+        "Key"
+      ],
+      "x-ms-enum": {
+        "name": "CreatedByType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "User",
+            "value": "User"
+          },
+          {
+            "name": "Application",
+            "value": "Application"
+          },
+          {
+            "name": "ManagedIdentity",
+            "value": "ManagedIdentity"
+          },
+          {
+            "name": "Key",
+            "value": "Key"
+          }
+        ]
+      }
+    },
+    "JsonWebKey": {
+      "type": "object",
+      "properties": {
+        "alg": {
+          "type": "string",
+          "description": "The \"alg\" (algorithm) parameter identifies the algorithm intended for\nuse with the key.  The values used should either be registered in the\nIANA \"JSON Web Signature and Encryption Algorithms\" registry\nestablished by [JWA] or be a value that contains a Collision-\nResistant Name."
+        },
+        "crv": {
+          "type": "string",
+          "description": "The \"crv\" (curve) parameter identifies the curve type"
+        },
+        "d": {
+          "type": "string",
+          "description": "RSA private exponent or ECC private key"
+        },
+        "dp": {
+          "type": "string",
+          "description": "RSA Private Key Parameter"
+        },
+        "dq": {
+          "type": "string",
+          "description": "RSA Private Key Parameter"
+        },
+        "e": {
+          "type": "string",
+          "description": "RSA public exponent, in Base64"
+        },
+        "k": {
+          "type": "string",
+          "description": "Symmetric key"
+        },
+        "kid": {
+          "type": "string",
+          "description": "The \"kid\" (key ID) parameter is used to match a specific key.  This\nis used, for instance, to choose among a set of keys within a JWK Set\nduring key rollover.  The structure of the \"kid\" value is\nunspecified.  When \"kid\" values are used within a JWK Set, different\nkeys within the JWK Set SHOULD use distinct \"kid\" values.  (One\nexample in which different keys might use the same \"kid\" value is if\nthey have different \"kty\" (key type) values but are considered to be\nequivalent alternatives by the application using them.)  The \"kid\"\nvalue is a case-sensitive string."
+        },
+        "kty": {
+          "type": "string",
+          "description": "The \"kty\" (key type) parameter identifies the cryptographic algorithm\nfamily used with the key, such as \"RSA\" or \"EC\". \"kty\" values should\neither be registered in the IANA \"JSON Web Key Types\" registry\nestablished by [JWA] or be a value that contains a Collision-\nResistant Name.  The \"kty\" value is a case-sensitive string."
+        },
+        "n": {
+          "type": "string",
+          "description": "RSA modulus, in Base64"
+        },
+        "p": {
+          "type": "string",
+          "description": "RSA secret prime"
+        },
+        "q": {
+          "type": "string",
+          "description": "RSA secret prime, with p < q"
+        },
+        "qi": {
+          "type": "string",
+          "description": "RSA Private Key Parameter"
+        },
+        "use": {
+          "type": "string",
+          "description": "Use (\"public key use\") identifies the intended use of\nthe public key. The \"use\" parameter is employed to indicate whether\na public key is used for encrypting data or verifying the signature\non data. Values are commonly \"sig\" (signature) or \"enc\" (encryption)."
+        },
+        "x": {
+          "type": "string",
+          "description": "X coordinate for the Elliptic Curve point"
+        },
+        "x5c": {
+          "type": "array",
+          "description": "The \"x5c\" (X.509 certificate chain) parameter contains a chain of one\nor more PKIX certificates [RFC5280].  The certificate chain is\nrepresented as a JSON array of certificate value strings.  Each\nstring in the array is a base64-encoded (Section 4 of [RFC4648] --\nnot base64url-encoded) DER [ITU.X690.1994] PKIX certificate value.\nThe PKIX certificate containing the key value MUST be the first\ncertificate.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-client-name": "x5C"
+        },
+        "y": {
+          "type": "string",
+          "description": "Y coordinate for the Elliptic Curve point"
+        }
+      },
+      "required": [
+        "kty"
+      ]
+    },
+    "JsonWebKeySet": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "description": "The value of the \"keys\" parameter is an array of JWK values.  By\ndefault, the order of the JWK values within the array does not imply\nan order of preference among them, although applications of JWK Sets\ncan choose to assign a meaning to the order for their purposes, if\ndesired.",
+          "items": {
+            "$ref": "#/definitions/JsonWebKey"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "LogSpecification": {
+      "type": "object",
+      "description": "Specifications of the Log for Microsoft Azure Attestation",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the log"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Localized friendly display name of the log"
+        }
+      }
+    },
+    "OperationList": {
+      "type": "object",
+      "description": "List of supported operations.",
+      "properties": {
+        "systemData": {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+          "description": "The system metadata relating to this resource",
+          "readOnly": true
         },
         "value": {
           "type": "array",
@@ -668,8 +1093,17 @@
             "name"
           ]
         }
-      },
-      "description": "List of supported operations."
+      }
+    },
+    "OperationProperties": {
+      "type": "object",
+      "description": "Extra Operation properties",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/ServiceSpecification",
+          "description": "Service specifications of the operation"
+        }
+      }
     },
     "OperationsDefinition": {
       "type": "object",
@@ -711,65 +1145,85 @@
         }
       }
     },
-    "OperationProperties": {
-      "description": "Extra Operation properties",
+    "PrivateEndpointConnectionListResult": {
       "type": "object",
+      "description": "The response of a PrivateEndpointConnection list operation.",
       "properties": {
-        "serviceSpecification": {
-          "$ref": "#/definitions/ServiceSpecification",
-          "description": "Service specifications of the operation"
+        "value": {
+          "type": "array",
+          "description": "The PrivateEndpointConnection items on this page",
+          "items": {
+            "$ref": "../../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
         }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PrivateLinkResourceListResult": {
+      "type": "object",
+      "description": "The response of a PrivateLinkResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The PrivateLinkResource items on this page",
+          "items": {
+            "$ref": "../../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateLinkResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PublicNetworkAccessType": {
+      "type": "string",
+      "description": "The public network access type for API calls to the Attestation Provider.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "PublicNetworkAccessType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Enables public network connectivity to the Attestation Provider REST APIs."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Disables public network connectivity to the Attestation Provider REST APIs."
+          }
+        ]
       }
     },
     "ServiceSpecification": {
-      "description": "Service specification payload",
       "type": "object",
+      "description": "Service specification payload",
       "properties": {
         "logSpecifications": {
-          "description": "Specifications of the Log for Microsoft Azure Attestation",
-          "uniqueItems": false,
           "type": "array",
+          "description": "Specifications of the Log for Microsoft Azure Attestation",
           "items": {
             "$ref": "#/definitions/LogSpecification"
           },
           "x-ms-identifiers": [
             "name"
           ]
-        }
-      }
-    },
-    "LogSpecification": {
-      "description": "Specifications of the Log for Microsoft Azure Attestation",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Name of the log",
-          "type": "string"
-        },
-        "displayName": {
-          "description": "Localized friendly display name of the log",
-          "type": "string"
-        }
-      }
-    },
-    "AttestationProvider": {
-      "description": "Attestation service response message.",
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
-        }
-      ],
-      "properties": {
-        "systemData": {
-          "readOnly": true,
-          "description": "The system metadata relating to this resource",
-          "$ref": "../../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
-        },
-        "properties": {
-          "type": "object",
-          "$ref": "#/definitions/StatusResult",
-          "description": "Describes Attestation service status.",
-          "x-ms-client-flatten": true
         }
       }
     },
@@ -782,180 +1236,76 @@
           "description": "Trust model for the attestation provider."
         },
         "status": {
-          "type": "string",
-          "description": "Status of attestation service.",
-          "enum": [
-            "Ready",
-            "NotReady",
-            "Error"
-          ],
-          "x-ms-enum": {
-            "name": "AttestationServiceStatus",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/AttestationServiceStatus",
+          "description": "Status of attestation service."
         },
         "attestUri": {
           "type": "string",
           "description": "Gets the uri of attestation service"
         },
         "publicNetworkAccess": {
+          "type": "string",
           "description": "Controls whether traffic from the public network is allowed to access the Attestation Provider APIs.",
-          "$ref": "#/definitions/PublicNetworkAccessType"
+          "default": "Enabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "PublicNetworkAccessType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "Enables public network connectivity to the Attestation Provider REST APIs."
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "Disables public network connectivity to the Attestation Provider REST APIs."
+              }
+            ]
+          }
         },
         "privateEndpointConnections": {
-          "readOnly": true,
           "type": "array",
+          "description": "List of private endpoint connections associated with the attestation provider.",
           "items": {
-            "$ref": "../../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
+            "$ref": "../../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnection"
           },
-          "description": "List of private endpoint connections associated with the attestation provider."
+          "readOnly": true
         },
         "tpmAttestationAuthentication": {
+          "type": "string",
           "description": "The setting that controls whether authentication is enabled or disabled for TPM Attestation REST APIs.",
-          "$ref": "#/definitions/TpmAttestationAuthenticationType"
-        }
-      }
-    },
-    "CloudError": {
-      "x-ms-external": true,
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/CloudErrorBody"
-        }
-      },
-      "description": "An error response from Attestation."
-    },
-    "CloudErrorBody": {
-      "x-ms-external": true,
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
-        },
-        "message": {
-          "type": "string",
-          "description": "A message describing the error, intended to be suitable for displaying in a user interface."
-        }
-      },
-      "description": "An error response from Attestation."
-    },
-    "AttestationProviderListResult": {
-      "description": "Attestation Providers List.",
-      "properties": {
-        "systemData": {
-          "readOnly": true,
-          "description": "The system metadata relating to this resource",
-          "$ref": "../../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
-        },
-        "value": {
-          "type": "array",
-          "description": "Attestation Provider array.",
-          "items": {
-            "$ref": "#/definitions/AttestationProvider"
+          "default": "Enabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "TpmAttestationAuthenticationType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "Enables the requirement of authentication for TPM Attestation REST APIs."
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "Disables the requirement of authentication for TPM Attestation REST APIs."
+              }
+            ]
           }
         }
-      }
-    },
-    "AttestationServicePatchParams": {
-      "description": "Parameters for patching an attestation provider",
-      "x-ms-azure-resource": true,
-      "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "The tags that will be assigned to the attestation provider."
-        },
-        "properties": {
-          "$ref": "#/definitions/AttestationServicePatchSpecificParams",
-          "description": "Properties of the attestation provider"
-        }
-      }
-    },
-    "AttestationServicePatchSpecificParams": {
-      "type": "object",
-      "description": "Client supplied parameters used to patch an existing attestation provider.",
-      "properties": {
-        "publicNetworkAccess": {
-          "description": "Controls whether traffic from the public network is allowed to access the Attestation Provider APIs.",
-          "$ref": "#/definitions/PublicNetworkAccessType"
-        },
-        "tpmAttestationAuthentication": {
-          "description": "The setting that controls whether authentication is enabled or disabled for TPM Attestation REST APIs.",
-          "$ref": "#/definitions/TpmAttestationAuthenticationType"
-        }
-      }
-    },
-    "AttestationServiceCreationParams": {
-      "description": "Parameters for creating an attestation provider",
-      "required": [
-        "location",
-        "properties"
-      ],
-      "x-ms-azure-resource": true,
-      "properties": {
-        "location": {
-          "type": "string",
-          "description": "The supported Azure location where the attestation provider should be created."
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "The tags that will be assigned to the attestation provider."
-        },
-        "properties": {
-          "$ref": "#/definitions/AttestationServiceCreationSpecificParams",
-          "description": "Properties of the attestation provider"
-        }
-      }
-    },
-    "AttestationServiceCreationSpecificParams": {
-      "description": "Client supplied parameters used to create a new attestation provider.",
-      "properties": {
-        "publicNetworkAccess": {
-          "description": "Controls whether traffic from the public network is allowed to access the Attestation Provider APIs.",
-          "$ref": "#/definitions/PublicNetworkAccessType"
-        },
-        "policySigningCertificates": {
-          "description": "JSON Web Key Set defining a set of X.509 Certificates that will represent the parent certificate for the signing certificate used for policy operations",
-          "$ref": "../../../../../../common-types/rfcs/rfc7517.json#/definitions/JSONWebKeySet"
-        },
-        "tpmAttestationAuthentication": {
-          "description": "The setting that controls whether authentication is enabled or disabled for TPM Attestation REST APIs.",
-          "$ref": "#/definitions/TpmAttestationAuthenticationType"
-        }
-      }
-    },
-    "PublicNetworkAccessType": {
-      "type": "string",
-      "description": "The public network access type for API calls to the Attestation Provider.",
-      "default": "Enabled",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ],
-      "x-ms-enum": {
-        "name": "PublicNetworkAccessType",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "Enabled",
-            "description": "Enables public network connectivity to the Attestation Provider REST APIs."
-          },
-          {
-            "value": "Disabled",
-            "description": "Disables public network connectivity to the Attestation Provider REST APIs."
-          }
-        ]
       }
     },
     "TpmAttestationAuthenticationType": {
       "type": "string",
       "description": "The type for specifying the requirement of authentication for TPM Attestation REST APIs.",
-      "default": "Enabled",
       "enum": [
         "Enabled",
         "Disabled"
@@ -965,10 +1315,12 @@
         "modelAsString": true,
         "values": [
           {
+            "name": "Enabled",
             "value": "Enabled",
             "description": "Enables the requirement of authentication for TPM Attestation REST APIs."
           },
           {
+            "name": "Disabled",
             "value": "Disabled",
             "description": "Disables the requirement of authentication for TPM Attestation REST APIs."
           }
@@ -976,30 +1328,5 @@
       }
     }
   },
-  "parameters": {
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Client API version.  Current version is 2021-06-01"
-    },
-    "PrivateEndpointConnectionName": {
-      "name": "privateEndpointConnectionName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Name of the private endpoint connection associated with the attestation providers.",
-      "x-ms-parameter-location": "method"
-    },
-    "ProviderName": {
-      "name": "providerName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "pattern": "^[a-zA-Z0-9-]{3,24}$",
-      "description": "The name of the attestation provider.",
-      "x-ms-parameter-location": "method"
-    }
-  }
+  "parameters": {}
 }
