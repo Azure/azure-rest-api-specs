@@ -27,12 +27,21 @@ These are the global settings for the informatica.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-05-08
+tag: package-2025-11-14
 ```
 
 ``` yaml
 modelerfour:
   flatten-models: false
+```
+
+### Tag: package-2025-11-14
+
+These settings apply only when `--tag=package-2025-11-14` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-11-14'
+input-file:
+  - Informatica.DataManagement/preview/2025-11-14/openapi.json
 ```
 
 ### Tag: package-2024-05-08
