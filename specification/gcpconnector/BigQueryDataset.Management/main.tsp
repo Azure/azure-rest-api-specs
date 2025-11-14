@@ -135,7 +135,7 @@ model GcpBigQueryDatasetProperties {
   /**
    * An array of objects that define dataset access for one or more entities
    */
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   access?: DatasetAccess[];
 
   /**
@@ -196,7 +196,7 @@ model GcpBigQueryDatasetProperties {
   /**
    * The resource tags associated with this dataset
    */
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   tags?: GcpTag[];
 
   /**

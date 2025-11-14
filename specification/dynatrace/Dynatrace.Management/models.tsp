@@ -411,7 +411,7 @@ model SubscriptionList {
   /**
    * List of subscriptions and the state of the monitoring.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   monitoredSubscriptionList?: MonitoredSubscription[];
 
   /**
@@ -490,7 +490,7 @@ model LogRules {
    * List of filtering tags to be used for capturing logs. This only takes effect if SendActivityLogs flag is enabled. If empty, all resources will be captured.
    * If only Exclude action is specified, the rules will apply to the list of all available resources. If Include actions are specified, the rules will only include resources with the associated tags.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   filteringTags?: FilteringTag[];
 }
 
@@ -526,7 +526,7 @@ model MetricRules {
   /**
    * List of filtering tags to be used for capturing metrics. If empty, all resources will be captured. If only Exclude action is specified, the rules will apply to the list of all available resources. If Include actions are specified, the rules will only include resources with the associated tags.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   filteringTags?: FilteringTag[];
 }
 
@@ -537,7 +537,7 @@ model CreateResourceSupportedResponse {
   /**
    * Represents the properties of the resource.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   value?: CreateResourceSupportedProperties[];
 
   /**
@@ -571,6 +571,7 @@ model VMExtensionPayload {
   /**
    * Ingestion key of the environment
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   ingestionKey?: string;
 
   /**
@@ -714,6 +715,7 @@ model EnvironmentInfo {
   /**
    * Ingestion key of the environment
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   ingestionKey?: string;
 
   /**

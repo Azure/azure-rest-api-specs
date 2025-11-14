@@ -126,7 +126,7 @@ model GcpSqlAdminInstanceProperties {
   /**
    * The assigned IP addresses for the instance.
    */
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   ipAddresses?: IpMapping[];
 
   /**
@@ -182,6 +182,7 @@ model GcpSqlAdminInstanceProperties {
   /**
    * Initial root password.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   rootPassword?: string;
 
   /**
@@ -252,7 +253,7 @@ model GcpSqlAdminInstanceProperties {
   /**
    * List of database versions to which this instance could be upgraded.
    */
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   upgradableDatabaseVersions?: AvailableDatabaseVersion[];
 
   /**
@@ -383,6 +384,7 @@ model OnPremisesConfiguration {
   /**
    * PEM representation of the replica's private key.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   clientKey?: string;
 
   /**
@@ -403,6 +405,7 @@ model OnPremisesConfiguration {
   /**
    * The password for connecting to on-premises instance.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   password?: string;
 
   /**
@@ -699,6 +702,7 @@ model MySqlReplicaConfiguration {
   /**
    * PEM representation of the replica's private key.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   clientKey?: string;
 
   /**
@@ -724,6 +728,7 @@ model MySqlReplicaConfiguration {
   /**
    * The password for the replication connection.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   password?: string;
 
   /**
@@ -895,7 +900,7 @@ model Operation {
    * If errors occurred during processing of this operation, this field will be populated.
    */
   error?: {
-    @extension("x-ms-identifiers", #[])
+    @identifiers(#[])
     errors?: OperationError[];
   };
 }

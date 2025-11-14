@@ -3,8 +3,6 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -729,10 +727,7 @@ model PgsqlInstanceProperties is AzureResourceProperties {
   /**
    * The list of collations in the database.
    */
-  @OpenAPI.extension(
-    "x-ms-identifiers",
-    #["name", "locale", "collationProvider", "isDeterministic"]
-  )
+  @identifiers(#["name", "locale", "collationProvider", "isDeterministic"])
   collations?: Collation[];
 
   /**
@@ -919,10 +914,7 @@ model PgsqlInstanceResourcePatch {
   /**
    * The list of collations in the database.
    */
-  @OpenAPI.extension(
-    "x-ms-identifiers",
-    #["name", "locale", "collationProvider", "isDeterministic"]
-  )
+  @identifiers(#["name", "locale", "collationProvider", "isDeterministic"])
   collations?: Collation[];
 
   /**
@@ -1148,10 +1140,7 @@ model PgsqlDatabaseProperties is AzureResourceProperties {
   /**
    * The list of collations in the database.
    */
-  @OpenAPI.extension(
-    "x-ms-identifiers",
-    #["name", "locale", "collationProvider", "isDeterministic"]
-  )
+  @identifiers(#["name", "locale", "collationProvider", "isDeterministic"])
   collations?: Collation[];
 
   /**
@@ -1258,10 +1247,7 @@ model PgsqlDatabaseResourcePatch {
   /**
    * The list of collations in the database.
    */
-  @OpenAPI.extension(
-    "x-ms-identifiers",
-    #["name", "locale", "collationProvider", "isDeterministic"]
-  )
+  @identifiers(#["name", "locale", "collationProvider", "isDeterministic"])
   collations?: Collation[];
 
   /**
