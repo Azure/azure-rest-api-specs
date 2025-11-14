@@ -1065,6 +1065,12 @@ model AnalyzeConversationAuthoringProjectResourceInfo {
    * The Azure resource region.
    */
   region: string;
+
+  /**
+   * Represents the AOAI resource assigned for data generation.
+   */
+  @added(Versions.v2025_11_15_preview)
+  assignedAoaiResource?: AnalyzeConversationAuthoringDataGenerationConnectionInfo;
 }
 
 /**
