@@ -3,7 +3,7 @@
   "info": {
     "title": "SearchManagementClient",
     "description": "Client that can be used to manage Azure AI Search services and API keys.",
-    "version": "2024-06-01-preview"
+    "version": "2024-03-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -1835,7 +1835,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
         }
       ],
       "description": "Describes an existing private endpoint connection to the Azure AI Search service."
@@ -1853,8 +1853,7 @@
           "type": "string",
           "enum": [
             "None",
-            "AzurePortal",
-            "AzureServices"
+            "AzurePortal"
           ],
           "x-ms-enum": {
             "name": "SearchBypass",
@@ -1869,11 +1868,6 @@
                 "value": "AzurePortal",
                 "name": "AzurePortal",
                 "description": "Indicates that requests originating from the Azure portal can bypass the rules defined in the 'ipRules' section."
-              },
-              {
-                "value": "AzureServices",
-                "name": "AzureServices",
-                "description": "Indicates that requests originating from Azure trusted services can bypass the rules defined in the 'ipRules' section."
               }
             ]
           },
@@ -2066,7 +2060,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
         }
       ],
       "description": "Describes a shared private link resource managed by the Azure AI Search service."
@@ -2216,7 +2210,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
         }
       ],
       "description": "Describes a supported private link resource for the Azure AI Search service."
@@ -2311,7 +2305,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
         }
       ],
       "description": "Describes an Azure AI Search service and its current state."
@@ -2355,7 +2349,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
         }
       ],
       "description": "The parameters used to update an Azure AI Search service."
@@ -2491,28 +2485,28 @@
         "provisioningState": {
           "readOnly": true,
           "type": "string",
-          "description": "The state of the last provisioning operation performed on the search service. Provisioning is an intermediate state that occurs while service capacity is being established. After capacity is set up, provisioningState changes to either 'Succeeded' or 'Failed'. Client applications can poll provisioning status (the recommended polling interval is from 30 seconds to one minute) by using the Get Search Service operation to see when an operation is completed. If you are using the free service, this value tends to come back as 'Succeeded' directly in the call to Create search service. This is because the free service uses capacity that is already set up.",
+          "description": "The state of the last provisioning operation performed on the search service. Provisioning is an intermediate state that occurs while service capacity is being established. After capacity is set up, provisioningState changes to either 'succeeded' or 'failed'. Client applications can poll provisioning status (the recommended polling interval is from 30 seconds to one minute) by using the Get Search Service operation to see when an operation is completed. If you are using the free service, this value tends to come back as 'succeeded' directly in the call to Create search service. This is because the free service uses capacity that is already set up.",
           "enum": [
-            "Succeeded",
-            "Provisioning",
-            "Failed"
+            "succeeded",
+            "provisioning",
+            "failed"
           ],
           "x-ms-enum": {
             "name": "ProvisioningState",
             "modelAsString": false,
             "values": [
               {
-                "value": "Succeeded",
+                "value": "succeeded",
                 "name": "Succeeded",
                 "description": "The last provisioning operation has completed successfully."
               },
               {
-                "value": "Provisioning",
+                "value": "provisioning",
                 "name": "Provisioning",
                 "description": "The search service is being provisioned or scaled up or down."
               },
               {
-                "value": "Failed",
+                "value": "failed",
                 "name": "Failed",
                 "description": "The last provisioning operation has failed."
               }
@@ -3004,7 +2998,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {

@@ -3,7 +3,7 @@
   "info": {
     "title": "SearchManagementClient",
     "description": "Client that can be used to manage Azure Cognitive Search services and API keys.",
-    "version": "2020-08-01"
+    "version": "2020-08-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -41,11 +41,6 @@
         ],
         "description": "Lists all of the available REST API operations of the Microsoft.Search provider.",
         "operationId": "Operations_List",
-        "x-ms-examples": {
-          "OperationsList": {
-            "$ref": "./examples/OperationsList.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -599,7 +594,7 @@
             "$ref": "./examples/SearchListServicesByResourceGroup.json"
           }
         },
-        "description": "Gets a list of all search services in the given resource group.",
+        "description": "Gets a list of all Search services in the given resource group.",
         "externalDocs": {
           "url": "https://aka.ms/search-manage"
         },
@@ -946,7 +941,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The details of the shared private link resource that was created.",
+            "description": "The details of the shared private link resource that was created or updated.",
             "schema": {
               "$ref": "#/definitions/SharedPrivateLinkResource"
             }
@@ -1133,7 +1128,7 @@
             "$ref": "./examples/SearchListServicesBySubscription.json"
           }
         },
-        "description": "Gets a list of all search services in the given subscription.",
+        "description": "Gets a list of all Search services in the given subscription.",
         "externalDocs": {
           "url": "https://aka.ms/search-manage"
         },
@@ -1356,7 +1351,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
         }
       ],
       "description": "Describes an existing Private Endpoint connection to the Azure Cognitive Search service."
@@ -1453,7 +1448,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
         }
       ],
       "description": "Describes a Shared Private Link Resource managed by the Azure Cognitive Search service."
@@ -1554,7 +1549,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
         }
       ],
       "description": "Describes a supported private link resource for the Azure Cognitive Search service."
@@ -1649,7 +1644,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
         }
       ],
       "description": "Describes an Azure Cognitive Search service and its current state."
@@ -1693,7 +1688,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
         }
       ],
       "description": "The parameters used to update an Azure Cognitive Search service."
@@ -1809,7 +1804,7 @@
           "items": {
             "$ref": "#/definitions/SearchService"
           },
-          "description": "The list of search services."
+          "description": "The list of Search services."
         },
         "nextLink": {
           "readOnly": true,
