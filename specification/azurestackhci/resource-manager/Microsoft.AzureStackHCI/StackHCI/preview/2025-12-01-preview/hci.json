@@ -1358,6 +1358,22 @@
       },
       "readOnly": true
     },
+    "ClusterSdnProperties": {
+      "type": "object",
+      "description": "Represents the Software Defined Networking (SDN) configuration state of the Azure Stack HCI cluster.",
+      "properties": {
+        "sdnIntegrationIntent": {
+          "$ref": "#/definitions/SdnIntegrationIntent",
+          "description": "Indicates whether Software Defined Networking (SDN) integration should be enabled or disabled for this deployment.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SdnProperties"
+        }
+      ]
+    },
     "CollectLogJobProperties": {
       "type": "object",
       "description": "Properties for pausing a server in the cluster.",
@@ -1394,6 +1410,150 @@
         }
       ],
       "x-ms-discriminator-value": "CollectLog"
+    },
+    "ConfidentialVmIntent": {
+      "type": "string",
+      "description": "Captures the customer's intent to enable or disable confidential VM support on the cluster, either during initial deployment (Day-0) or at a later stage (Day-N).",
+      "enum": [
+        "Enable",
+        "Disable"
+      ],
+      "x-ms-enum": {
+        "name": "ConfidentialVmIntent",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enable",
+            "value": "Enable",
+            "description": "Indicates that the customer intends to enable confidential VM support on the cluster."
+          },
+          {
+            "name": "Disable",
+            "value": "Disable",
+            "description": "Indicates that the customer intends to disable confidential VM support on the cluster."
+          }
+        ]
+      }
+    },
+    "ConfidentialVmProfile": {
+      "type": "object",
+      "description": "Represents the Confidential Virtual Machine (CVM) configuration status for an edge device. It includes the current IGVM support state and detailed component-level status information.",
+      "properties": {
+        "igvmStatus": {
+          "$ref": "#/definitions/IgvmStatus",
+          "description": "Indicates whether Independent Guest Virtual Machine (IGVM) support is available on the device. This will be 'Enabled' if the device supports confidential VMs, 'Disabled' if not, and 'Unknown' if the status cannot be determined.",
+          "readOnly": true
+        },
+        "statusDetails": {
+          "type": "array",
+          "description": "Provides detailed status entries for IGVM-related components, including deployment status, compatibility checks, and error diagnostics.",
+          "items": {
+            "$ref": "#/definitions/IgvmStatusDetail"
+          },
+          "x-ms-identifiers": [
+            "code"
+          ]
+        }
+      }
+    },
+    "ConfidentialVmProperties": {
+      "type": "object",
+      "description": "Represents the Confidential Virtual Machine (CVM) support intent and current status for the cluster resource.",
+      "properties": {
+        "confidentialVmIntent": {
+          "type": "string",
+          "description": "Captures the customer's intent to enable or disable confidential VM support on the cluster, either during initial deployment (Day-0) or at a later stage (Day-N).",
+          "default": "Disable",
+          "enum": [
+            "Enable",
+            "Disable"
+          ],
+          "x-ms-enum": {
+            "name": "ConfidentialVmIntent",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enable",
+                "value": "Enable",
+                "description": "Indicates that the customer intends to enable confidential VM support on the cluster."
+              },
+              {
+                "name": "Disable",
+                "value": "Disable",
+                "description": "Indicates that the customer intends to disable confidential VM support on the cluster."
+              }
+            ]
+          },
+          "readOnly": true
+        },
+        "confidentialVmStatus": {
+          "type": "string",
+          "description": "Captures the current status of Confidential Virtual Machine (CVM) support on the cluster.",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "PartiallyEnabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "ConfidentialVmStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "Confidential VM support is fully enabled on the cluster. All nodes are CVM capable."
+              },
+              {
+                "name": "PartiallyEnabled",
+                "value": "PartiallyEnabled",
+                "description": "Confidential VM support is partially enabled. At least one node in the cluster is CVM capable."
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "Confidential VM support is disabled. None of the nodes in the cluster are CVM capable."
+              }
+            ]
+          },
+          "readOnly": true
+        },
+        "confidentialVmStatusSummary": {
+          "type": "string",
+          "description": "Additional context about confidential VM support on the cluster, such as reasons for partial enablement or hardware constraints.",
+          "readOnly": true
+        }
+      }
+    },
+    "ConfidentialVmStatus": {
+      "type": "string",
+      "description": "Captures the current status of Confidential Virtual Machine (CVM) support on the cluster.",
+      "enum": [
+        "Enabled",
+        "PartiallyEnabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "ConfidentialVmStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Confidential VM support is fully enabled on the cluster. All nodes are CVM capable."
+          },
+          {
+            "name": "PartiallyEnabled",
+            "value": "PartiallyEnabled",
+            "description": "Confidential VM support is partially enabled. At least one node in the cluster is CVM capable."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Confidential VM support is disabled. None of the nodes in the cluster are CVM capable."
+          }
+        ]
+      }
     },
     "ContentPayload": {
       "type": "object",
@@ -2256,6 +2416,52 @@
         "processorType": {
           "type": "string",
           "description": "Process type of the machine",
+          "readOnly": true
+        }
+      }
+    },
+    "IgvmStatus": {
+      "type": "string",
+      "description": "Represents the IGVM support status for the device.",
+      "enum": [
+        "Unknown",
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "IgvmStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "The IGVM status could not be determined due to a query failure or inconsistent system state."
+          },
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "IGVM support is enabled, indicating that confidential VM features are available on this device."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "IGVM status is disabled, indicating that confidential VM features are not supported on this device."
+          }
+        ]
+      }
+    },
+    "IgvmStatusDetail": {
+      "type": "object",
+      "description": "Provides component-level status information related to IGVM enablement on the device.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "A machine-readable status code indicating the result or condition of a specific IGVM-related check or operation.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable message providing context or explanation for the associated status code.",
           "readOnly": true
         }
       }
@@ -3776,6 +3982,81 @@
           "description": "This represents discovered update results for matching updates and store it as SBE manifest.",
           "readOnly": true
         }
+      }
+    },
+    "SdnIntegrationIntent": {
+      "type": "string",
+      "description": "Indicates whether Software Defined Networking (SDN) integration should be enabled or disabled for this deployment.",
+      "enum": [
+        "Enable",
+        "Disable"
+      ],
+      "x-ms-enum": {
+        "name": "SdnIntegrationIntent",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enable",
+            "value": "Enable",
+            "description": "Enable SDN integration for the deployment."
+          },
+          {
+            "name": "Disable",
+            "value": "Disable",
+            "description": "Disable SDN integration for the deployment."
+          }
+        ]
+      }
+    },
+    "SdnProperties": {
+      "type": "object",
+      "description": "Represents the Software Defined Networking (SDN) configuration state.",
+      "properties": {
+        "sdnStatus": {
+          "$ref": "#/definitions/SdnStatus",
+          "description": "Indicates the current Software Defined Networking (SDN) status of the resource, which may be an individual device or a cluster.",
+          "readOnly": true
+        },
+        "sdnDomainName": {
+          "type": "string",
+          "description": "The fully qualified domain name (FQDN) associated with the SDN deployment. This value is propagated from the Device Management Extension to the cluster resource. It is typically in the format `<sdnPrefix>-nc.<domain>` when SDN is enabled. May be null or absent in unsupported or disabled states.",
+          "readOnly": true
+        },
+        "sdnApiAddress": {
+          "type": "string",
+          "description": "Represents the API address for the SDN deployment.",
+          "readOnly": true
+        }
+      }
+    },
+    "SdnStatus": {
+      "type": "string",
+      "description": "Indicates the current Software Defined Networking (SDN) status of the resource, which may be an individual device or a cluster.",
+      "enum": [
+        "Disabled",
+        "Enabled",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "SdnStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "SDN is not enabled on the resource. The domain name will be null. This is the default state when SDN has not been configured."
+          },
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "SDN is successfully enabled on the resource. The domain name will be populated in the format `<sdnPrefix>-nc.<domain>`. Customers may need to manage DNS settings to ensure proper resolution."
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "The SDN status could not be determined due to a failure in querying the SDN API service. This may occur if the query script fails or if the system is in an inconsistent state. The domain name will be null in this case."
+          }
+        ]
       }
     },
     "SetFailedMachineStateRequest": {
