@@ -260,10 +260,7 @@ interface Fleets {
   @doc("Lists fleets in the specified subscription.")
   listBySubscription is ArmListBySubscription<
     Fleet,
-    Azure.ResourceManager.Foundations.DefaultBaseParameters<Fleet> & {
-      ...TopQueryParameter;
-      ...SkipTokenQueryParameter;
-    }
+    Parameters = TopQueryParameter & SkipTokenQueryParameter
   >;
 
   @doc("Lists the user credentials of a Fleet.")

@@ -81,9 +81,6 @@ interface FleetUpdateStrategies {
   /** List FleetUpdateStrategy resources by Fleet */
   listByFleet is ArmResourceListByParent<
     FleetUpdateStrategy,
-    Azure.ResourceManager.Foundations.DefaultBaseParameters<FleetUpdateStrategy> & {
-      ...TopQueryParameter;
-      ...SkipTokenQueryParameter;
-    }
+    Parameters = TopQueryParameter & SkipTokenQueryParameter
   >;
 }

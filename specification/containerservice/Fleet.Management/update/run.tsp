@@ -429,10 +429,7 @@ interface UpdateRuns {
   /** List UpdateRun resources by Fleet */
   listByFleet is ArmResourceListByParent<
     UpdateRun,
-    Azure.ResourceManager.Foundations.DefaultBaseParameters<UpdateRun> & {
-      ...TopQueryParameter;
-      ...SkipTokenQueryParameter;
-    }
+    Parameters = TopQueryParameter & SkipTokenQueryParameter
   >;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Existing API"

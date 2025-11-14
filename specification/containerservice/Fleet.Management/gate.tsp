@@ -198,10 +198,8 @@ interface Gates {
 
   listByFleet is ArmResourceListByParent<
     Gate,
-    Azure.ResourceManager.Foundations.DefaultBaseParameters<Gate> & {
-      ...FilterQueryParameter;
-      ...TopQueryParameter;
-      ...SkipTokenQueryParameter;
-    }
+    Parameters = FilterQueryParameter 
+      & TopQueryParameter 
+      & SkipTokenQueryParameter
   >;
 }

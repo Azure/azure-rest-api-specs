@@ -155,10 +155,7 @@ interface AutoUpgradeProfiles {
 
   listByFleet is ArmResourceListByParent<
     AutoUpgradeProfile,
-    Azure.ResourceManager.Foundations.DefaultBaseParameters<AutoUpgradeProfile> & {
-      ...TopQueryParameter;
-      ...SkipTokenQueryParameter;
-    }
+    Parameters = TopQueryParameter & SkipTokenQueryParameter
   >;
 }
 
