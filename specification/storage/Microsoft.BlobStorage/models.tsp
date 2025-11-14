@@ -436,7 +436,7 @@ model BlockLookupList {
 
 /** Represents an array of signed identifiers */
 model SignedIdentifiers {
-  /** The array of signed  identifiers. */
+  /** The array of signed identifiers. */
   @Xml.unwrapped
   @Xml.name("SignedIdentifier")
   items: Array<SignedIdentifier>;
