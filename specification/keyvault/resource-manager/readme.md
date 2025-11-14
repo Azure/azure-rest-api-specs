@@ -366,6 +366,10 @@ swagger-to-sdk:
   - repo: azure-powershell
 ```
 
+## Go
+
+See configuration in [readme.go.md](./readme.go.md)
+
 ## Python
 
 See configuration in [readme.python.md](./readme.python.md)
