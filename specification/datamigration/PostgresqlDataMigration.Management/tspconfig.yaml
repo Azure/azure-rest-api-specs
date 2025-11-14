@@ -2,7 +2,7 @@ emit:
   - "@azure-tools/typespec-autorest"
 parameters:
   service-dir:
-    default: "{output-dir}/sdk/datamigration"
+    default: "{cwd}/sdk/datamigration"
 options:
   "@azure-tools/typespec-autorest":
     use-read-only-status-schema: true
@@ -21,6 +21,7 @@ options:
     package-details:
       name: "@azure/arm-datamigration"
   "@azure-tools/typespec-go":
+    flavor: azure
     emitter-output-dir: "{service-dir}/armdatamigration"
     generate-samples: true
     generate-fakes: true
