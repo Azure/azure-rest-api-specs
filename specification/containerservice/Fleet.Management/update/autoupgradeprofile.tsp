@@ -153,7 +153,13 @@ interface AutoUpgradeProfiles {
     BaseParameters<AutoUpgradeProfile> & IfMatchParameters<AutoUpgradeProfile>
   >;
 
-  listByFleet is ArmResourceListByParent<AutoUpgradeProfile>;
+  listByFleet is ArmResourceListByParent<
+    AutoUpgradeProfile,
+    Azure.ResourceManager.Foundations.DefaultBaseParameters<AutoUpgradeProfile> & {
+      ...TopQueryParameter;
+      ...SkipTokenQueryParameter;
+    }
+  >;
 }
 
 @doc("AutoUpgradeProfileStatus is the status of an auto upgrade profile.")

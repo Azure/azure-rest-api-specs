@@ -27,6 +27,13 @@ alias IfMatchHeadersParameters<T extends Azure.ResourceManager.Foundations.Resou
   ...IfNoneMatchParameters<T>;
 };
 
+@doc("Provides the standard 'top' query parameter for list operations.")
+model SkipTokenQueryParameter {
+  @query("$skiptoken")
+  @doc("The page-continuation token to use with a paged version of this API.")
+  skipToken?: int32;
+}
+
 #suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-operation-outside-interface" "this is a template"
 @autoRoute
 @doc("Update a {name}", TResource)

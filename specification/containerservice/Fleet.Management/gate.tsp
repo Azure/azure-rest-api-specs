@@ -196,5 +196,12 @@ interface Gates {
       IfNoneMatchParameters<Gate>
   >;
 
-  listByFleet is ArmResourceListByParent<Gate>;
+  listByFleet is ArmResourceListByParent<
+    Gate,
+    Azure.ResourceManager.Foundations.DefaultBaseParameters<Gate> & {
+      ...FilterQueryParameter;
+      ...TopQueryParameter;
+      ...SkipTokenQueryParameter;
+    }
+  >;
 }

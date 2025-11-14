@@ -153,5 +153,12 @@ interface FleetMembers {
   >;
 
   /** List FleetMember resources by Fleet */
-  listByFleet is ArmResourceListByParent<FleetMember>;
+  listByFleet is ArmResourceListByParent<
+    FleetMember,
+    Azure.ResourceManager.Foundations.DefaultBaseParameters<FleetMember> & {
+      ...TopQueryParameter;
+      ...SkipTokenQueryParameter;
+      ...FilterQueryParameter;
+    }
+  >;
 }
