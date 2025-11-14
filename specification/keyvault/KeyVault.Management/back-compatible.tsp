@@ -260,17 +260,17 @@ op ManagedHsmsPurgeDeletedCustomized(
 
 @@override(DeletedVaults.getDeleted,
   VaultsGetDeletedCustomized,
-  "python,go,java,javascript"
+  "python,go,java"
 );
 @@override(DeletedVaults.purgeDeleted,
   VaultsPurgeDeletedCustomized,
-  "python,go,java,javascript"
+  "python,go,java"
 );
 @@override(DeletedManagedHsms.getDeleted,
   ManagedHsmsGetDeletedCustomized,
-  "python,go,java,javascript"
+  "python,go,java"
 );
 @@override(DeletedManagedHsms.purgeDeleted,
   ManagedHsmsPurgeDeletedCustomized,
-  "python,go,java,javascript"
+  "python,go,java"
 );
