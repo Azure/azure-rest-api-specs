@@ -24,25 +24,6 @@ model AttestationProvider
 }
 
 @armResourceOperations
-interface AttestationProvidersOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
-
-        /**
-         * Name of the attestation provider.
-         */
-        @path
-        @segment("attestationProviders")
-        providerName: string,
-      },
-      {}
-    > {}
-
-@armResourceOperations
 interface AttestationProviders {
   /**
    * Get the status of Attestation Provider.
@@ -52,10 +33,10 @@ interface AttestationProviders {
   /**
    * Creates or updates an Attestation Provider.
    */
-  create is AttestationProvidersOps.CreateOrUpdateSync<
+  create is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     AttestationProvider,
     Request = AttestationServiceCreationParams,
-    OverrideErrorType = CloudError
+    Error = CloudError
   >;
 
   /**
