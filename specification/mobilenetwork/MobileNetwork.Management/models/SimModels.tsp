@@ -2,7 +2,6 @@ import "@azure-tools/typespec-client-generator-core";
 
 import "../common/CommonModels.tsp";
 
-using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 
 namespace Microsoft.MobileNetwork;
@@ -86,13 +85,13 @@ model SimStaticIpPropertiesStaticIp {
 @doc("SIM properties.")
 model SimPropertiesFormat extends CommonSimPropertiesFormat {
   @doc("The Ki value for the SIM.")
-  @extension("x-ms-secret", true)
+  @secret
   @visibility(Lifecycle.Create, Lifecycle.Update)
   @pattern("^[0-9a-fA-F]{32}$")
   authenticationKey?: string;
 
   @doc("The Opc value for the SIM.")
-  @extension("x-ms-secret", true)
+  @secret
   @visibility(Lifecycle.Create, Lifecycle.Update)
   @pattern("^[0-9a-fA-F]{32}$")
   operatorKeyCode?: string;
@@ -160,7 +159,7 @@ model SimNameAndEncryptedProperties {
 @doc("Encrypted SIM properties.")
 model EncryptedSimPropertiesFormat extends CommonSimPropertiesFormat {
   @doc("The encrypted SIM credentials.")
-  @extension("x-ms-secret", true)
+  @secret
   @pattern("^[0-9a-fA-F]+$")
   encryptedCredentials?: string;
 }
