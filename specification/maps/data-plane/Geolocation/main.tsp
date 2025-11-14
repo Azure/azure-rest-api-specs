@@ -32,7 +32,7 @@ using Azure.Core;
   "{endpoint}",
   "Azure Maps Geolocation REST APIs",
   {
-    endpoint: string = "https://atlas.microsoft.com",
+    endpoint: "https://atlas.microsoft.com",
   }
 )
 namespace MapsGeolocation;
