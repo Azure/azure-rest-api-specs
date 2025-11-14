@@ -1,16 +1,10 @@
+import { APIViewRequestData, SpecGenSdkArtifactInfo } from "@azure-tools/specs-shared/sdk-types";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { LogIssueType, LogLevel, logMessage, setVsoVariable, vsoLogIssue } from "./log.js";
 import { groupSpecConfigPaths } from "./spec-helpers.js";
-import {
-  APIViewRequestData,
-  SdkName,
-  SpecGenSdkArtifactInfo,
-  SpecGenSdkCmdInput,
-  SpecGenSdkRequiredSettings,
-  VsoLogs,
-} from "./types.js";
+import { SdkName, SpecGenSdkCmdInput, SpecGenSdkRequiredSettings, VsoLogs } from "./types.js";
 import {
   findReadmeFiles,
   getAllTypeSpecPaths,

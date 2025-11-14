@@ -1,3 +1,5 @@
+import * as z from "zod";
+
 /**
  * @typedef {'azure-sdk-for-go' | 'azure-sdk-for-java' | 'azure-sdk-for-js' | 'azure-sdk-for-net' | 'azure-sdk-for-python'} SdkName
  */
@@ -51,3 +53,27 @@ export const sdkLabels = {
     breakingChangeSuppressionApproved: "BreakingChange-Python-Sdk-Suppression-Approved",
   },
 };
+
+/*
+ * Data for the API view request.
+ */
+const APIViewRequestDataSchema = z.object({ packageName: z.string(), filePath: z.string() });
+/**
+ * @typedef {import("zod").infer<typeof APIViewRequestDataSchema>} APIViewRequestData
+ */
+
+/**
+ * Represents the result of the spec-gen-sdk generation process.
+ */
+export const SpecGenSdkArtifactInfoSchema = z.object({
+  language: z.string(),
+  result: z.string(),
+  headSha: z.string(),
+  prNumber: z.string().optional(),
+  labelAction: z.boolean().optional(),
+  isSpecGenSdkCheckRequired: z.boolean(),
+  apiViewRequestData: z.array(APIViewRequestDataSchema),
+});
+/**
+ * @typedef {import("zod").infer<typeof SpecGenSdkArtifactInfoSchema>} SpecGenSdkArtifactInfo
+ */
