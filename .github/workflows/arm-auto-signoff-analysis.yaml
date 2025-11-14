@@ -1,4 +1,4 @@
-name: ARM Incremental TypeSpec
+name: ARM Auto-SignOff Analysis
 
 on:
   pull_request:
@@ -20,8 +20,8 @@ permissions:
   contents: read
 
 jobs:
-  arm-incremental-typespec:
-    name: ARM Incremental TypeSpec
+  arm-auto-signoff-analysis:
+    name: ARM Auto-SignOff Analysis
 
     runs-on: ubuntu-24.04
 
@@ -56,8 +56,39 @@ jobs:
               await import('${{ github.workspace }}/.github/workflows/src/arm-incremental-typespec.js');
             return await incrementalTypeSpec({ github, context, core });
 
-      - name: Upload artifact with results
+      # Check for trivial changes that can also qualify for auto sign-off
+      - id: trivial-changes
+        name: Trivial Changes Check
+        uses: actions/github-script@v7
+        with:
+          result-encoding: string
+          script: |
+            const { default: checkTrivialChanges } =
+              await import('${{ github.workspace }}/.github/workflows/src/trivial-changes-check.js');
+            return await checkTrivialChanges({ github, context, core });
+
+      # Create combined artifact with all results
+      - id: combined-results
+        name: Combine Results
+        uses: actions/github-script@v7
+        with:
+          result-encoding: string
+          script: |
+            const incrementalResult = '${{ steps.incremental-typespec.outputs.result }}' === 'true';
+            const trivialChangesResult = JSON.parse('${{ steps.trivial-changes.outputs.result }}');
+            
+            const combined = {
+              incrementalTypeSpec: incrementalResult,
+              trivialChanges: trivialChangesResult,
+              qualifiesForAutoSignOff: incrementalResult || trivialChangesResult.anyTrivialChanges
+            };
+            
+            core.info(`Combined result: ${JSON.stringify(combined)}`);
+            return JSON.stringify(combined);
+
+      # Upload new combined artifact with all information
+      - name: Upload artifact - Combined Results
         uses: ./.github/actions/add-empty-artifact
         with:
-          name: "incremental-typespec"
-          value: ${{ steps.incremental-typespec.outputs.result }}
+          name: "arm-analysis-results"
+          value: ${{ steps.combined-results.outputs.result }}
