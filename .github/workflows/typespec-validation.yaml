@@ -21,7 +21,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 2
+          # Checkout all history for all branches.  Required to merge origin/main.
+          fetch-depth: 0
+
+      - name: git merge origin/main
+        run: |
+          git -c user.name="azure-sdk" -c user.email="azuresdk@microsoft.com" merge --no-commit -Xours origin/main
+          git -c user.name="azure-sdk" -c user.email="azuresdk@microsoft.com" commit --allow-empty -m "Merge origin/main"
 
       - name: Setup Node and install deps
         uses: ./.github/actions/setup-node-install-deps
@@ -35,5 +41,5 @@ jobs:
           # Only "main" and "RPSaaSMaster" should validate all specs if core files change
           $ignoreCoreFiles = -not (@('main', 'RPSaaSMaster') -contains $Env:GITHUB_BASE_REF)
 
-          ./eng/scripts/TypeSpec-Validation.ps1 -GitClean -Verbose -IgnoreCoreFiles:$ignoreCoreFiles
+          ./eng/scripts/TypeSpec-Validation.ps1 -GitClean -Verbose -IgnoreCoreFiles:$ignoreCoreFiles -BaseCommitish:HEAD~1 -HeadCommitish:HEAD~2
         shell: pwsh

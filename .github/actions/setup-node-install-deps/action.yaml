@@ -20,6 +20,15 @@ runs:
       with:
         node-version: ${{ inputs.node-version }}
 
+    - name: Regenerate package-lock.json with latest "next" versions
+      run: |
+        rm package-lock.json
+        npm install --package-lock-only
+        echo "::group::echo package-lock.json"
+        cat package-lock.json
+        echo "::endgroup::"
+      shell: bash
+      
     - run: |
         echo "::group::$INSTALL_COMMAND"
         $INSTALL_COMMAND
