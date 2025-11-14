@@ -635,6 +635,7 @@ model OnboardingConfiguration {
   resourceId?: Azure.Core.armResourceIdentifier;
 
   @doc("Location of the resource.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   location?: string;
 
   @doc("Tenant ID of the resource.")

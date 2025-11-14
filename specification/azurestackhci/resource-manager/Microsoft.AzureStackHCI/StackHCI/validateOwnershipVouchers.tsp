@@ -14,14 +14,14 @@ namespace Microsoft.AzureStackHCI;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @added(Versions.v2025_12_01_preview)
-interface ValidateOwnershipVouchers {
+interface OwnershipVouchers {
   /**
    * Validates ownership vouchers.
    */
   @doc("Validates ownership vouchers.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/locations/{location}/validateOwnershipVouchers")
   @post
-  validateOwnershipVouchers(
+  validate(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
     ...ResourceGroupParameter,
