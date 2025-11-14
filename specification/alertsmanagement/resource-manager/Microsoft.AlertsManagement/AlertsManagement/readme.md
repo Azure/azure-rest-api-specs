@@ -38,19 +38,6 @@ directive:
   - suppress: TopLevelResourcesListBySubscription
     reason: The list by scope includes also list by subscription, this is an extension resource.
     from: AlertsManagement.json    
-  - suppress: GuidUsage
-    reason: The IDs of investigation entities are GUIDs.
-    from: Issues.json
-    where:
-     - $.definitions.FetchInvestigationResultParameters.properties.investigationId.format
-     - $.definitions.InvestigationMetadata.properties.id.format
-  - suppress: AvoidAdditionalProperties
-    reason: These are property bags that originate from user input (directly or indirectly), such as metric dimensions.
-    from: Issues.json
-    where:
-     - $.definitions.AzureMetricData.properties.dimensions
-     - $.definitions.TransactionEdge.properties.metadata
-     - $.definitions.TransactionNode.properties.metadata
   - suppress: AvoidAdditionalProperties
     reason: The customProperties field is intentionally designed to allow user-defined key-value pairs for alert metadata.
     from: AlertsManagement.json
@@ -70,31 +57,16 @@ directive:
   - suppress: GetCollectionOnlyHasValueAndNextLink
     reason: Response models maintain compatibility with existing AlertsManagement response structures.
     from: AlertsManagement.json
-  - suppress: MULTIPLE_API_VERSION
-    reason: The AlertsManagement service requires multiple API versions for comprehensive functionality across different services.
-  - suppress: OperationsAPIImplementation
-    reason: Operations API is available in stable/2019-03-01/AlertsManagement.json and not needed in preview version
-    from: preview/2025-07-01-preview/PreviewAlertRule.json
-  - code: ValidFormats
-    where: $.definitions["Azure.Core.eTag"].format
-    reason: eTag should be an allowed format
+  - suppress: MISSING_APIS_IN_DEFAULT_TAG
+    reason: These APIs were moved from AlertsManagement to other services
+    from: preview/2018-11-02-privatepreview/AlertsManagement.json
 ```
 
 ``` yaml
 title: AlertsManagementClient
 description: AlertsManagement Client
 openapi-type: arm
-tag: package-2023-03
-```
-
-=======
-### Tag: package-preview-2025-07-01-preview
-
-These settings apply only when `--tag=package-preview-2025-07-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2025-07-01-preview'
-input-file:
-  - preview/2025-07-01-preview/PreviewAlertRule.json
+tag: package-preview-2025-05-25-preview
 ```
 
 ### Tag: package-preview-2025-05-25-preview
@@ -127,115 +99,20 @@ input-file:
    These endpoints enable tenant-level alert operations without requiring a specific scope parameter.
    The operations are available through new operationIds: Alerts_GetAllTenant, Alerts_GetByIdTenant, Alerts_GetHistoryTenant, Alerts_ChangeStateTenant.
 
-### Tag: package-preview-2025-05-01-preview
-
-These settings apply only when `--tag=package-preview-2025-05-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2025-05-01-preview'
-input-file:
-  - stable/2023-03-01/PrometheusRuleGroups.json
-  - stable/2019-03-01/AlertsManagement.json
-  - preview/2019-05-05-preview/SmartGroups.json
-  - preview/2023-08-01-preview/AlertRuleRecommendations.json
-  - preview/2021-08-08-preview/AlertProcessingRules.json
-  - preview/2025-03-01-preview/Issues.json
-  - preview/2025-05-01-preview/PreviewAlertRule.json
-```
-### Tag: package-preview-2025-03-01-preview
-
-These settings apply only when `--tag=package-preview-2025-03-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2025-03-01-preview'
-input-file:
-  - preview/2025-03-01-preview/Issues.json
-```
-### Tag: package-preview-2023-08
-
-These settings apply only when `--tag=package-preview-2023-08` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2023-08'
-input-file:
-  - preview/2023-08-01-preview/AlertRuleRecommendations.json 
-```
-### Tag: package-preview-2023-04
-
-These settings apply only when `--tag=package-preview-2023-04` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2023-04'
-input-file:
-  - preview/2023-04-01-preview/TenantActivityLogAlerts.json
-```
-### Tag: package-preview-2023-01
-
-These settings apply only when `--tag=package-preview-2023-01` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2023-01'
-input-file:
-  - preview/2023-01-01-preview/AlertRuleRecommendations.json
-```
-### Tag: package-2023-03
-
-These settings apply only when `--tag=package-2023-03` is specified on the command line.
-
-```yaml $(tag) == 'package-2023-03'
-input-file:
-  - stable/2023-03-01/PrometheusRuleGroups.json
-  - preview/2025-05-25-preview/AlertsManagement.json
-  - preview/2019-05-05-preview/SmartGroups.json
-  - preview/2023-08-01-preview/AlertRuleRecommendations.json
-  - preview/2021-08-08-preview/AlertProcessingRules.json
-  - preview/2025-03-01-preview/Issues.json
-  - preview/2025-07-01-preview/PreviewAlertRule.json
-```
-
 ### Important Note
 The following preview versions have been deprecated and their functionality is available in the stable version (stable/2019-03-01/AlertsManagement.json):
 - 2023-07-12-preview/AlertsManagement.json
 - 2024-01-01-preview/AlertsManagement.json
 
 Please use the stable version for all Alerts Management operations.
-### Tag: package-2021-08
 
-These settings apply only when `--tag=package-2021-08` is specified on the command line.
+### Tag: package-2019-03
 
-```yaml $(tag) == 'package-2021-08'
-input-file:
-  - stable/2021-08-08/AlertProcessingRules.json
-  - preview/2021-07-22-preview/PrometheusRuleGroups.json
-  - preview/2019-05-05-preview/AlertsManagement.json
-  - preview/2019-05-05-preview/SmartGroups.json
-  - preview/2023-01-01-preview/AlertRuleRecommendations.json
-  - preview/2023-04-01-preview/TenantActivityLogAlerts.json
-```
+These settings apply only when `--tag=package-2019-03` is specified on the command line.
 
-### Tag: package-preview-2021-08
-
-These settings apply only when `--tag=package-preview-2021-08` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2021-08'
-input-file:
-  - preview/2021-08-08-preview/AlertProcessingRules.json
-  - preview/2019-05-05-preview/AlertsManagement.json
-  - preview/2019-05-05-preview/SmartGroups.json
-```
-
-### Tag: package-preview-2021-07
-
-These settings apply only when `--tag=package-preview-2021-07` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2021-07'
-input-file:
-  - preview/2021-07-22-preview/PrometheusRuleGroups.json
-```
-
-### Tag: package-2021-04-only
-
-These settings apply only when `--tag=package-2021-04-only` is specified on the command line.
-
-```yaml $(tag) == 'package-2021-04-only'
+```yaml $(tag) == 'package-2019-03'
 input-file:
   - stable/2019-03-01/AlertsManagement.json
-  - stable/2021-04-01/SmartDetectorAlertRulesApi.json
 ```
 
 ### Tag: package-preview-2021-01
@@ -245,37 +122,6 @@ These settings apply only when `--tag=package-preview-2021-01` is specified on t
 ```yaml $(tag) == 'package-preview-2021-01'
 input-file:
   - preview/2021-01-01-preview/AlertsManagement.json
-  - preview/2021-01-01-preview/MigrateFromSmartDetections.json
-```
-### Tag: package-2019-06-preview
-
-These settings apply only when `--tag=package-2019-06-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2019-06-preview'
-input-file:
-  - preview/2019-05-05-preview/ActionRules.json
-  - preview/2019-05-05-preview/AlertsManagement.json
-  - preview/2019-05-05-preview/SmartGroups.json
-  - stable/2019-06-01/SmartDetectorAlertRulesApi.json
-```
-
-### Tag: package-2019-06
-
-These settings apply only when `--tag=package-2019-06` is specified on the command line.
-
-```yaml $(tag) == 'package-2019-06'
-input-file:
-  - stable/2019-06-01/SmartDetectorAlertRulesApi.json
-```
-
-### Tag: package-2019-03
-
-These settings apply only when `--tag=package-2019-03` is specified on the command line.
-
-```yaml $(tag) == 'package-2019-03'
-input-file:
-  - stable/2019-03-01/AlertsManagement.json
-  - stable/2019-03-01/SmartDetectorAlertRulesApi.json
 ```
 
 ### Tag: package-preview-2019-05
@@ -284,9 +130,7 @@ These settings apply only when `--tag=package-preview-2019-05` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2019-05'
 input-file:
-  - preview/2019-05-05-preview/ActionRules.json
   - preview/2019-05-05-preview/AlertsManagement.json
-  - preview/2019-05-05-preview/SmartGroups.json
 ```
 
 ### Tag: package-2018-05
@@ -340,3 +184,7 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
+
+## CLI
+
+See configuration in [readme.cli.md](./readme.cli.md)

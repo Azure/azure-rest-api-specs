@@ -7,15 +7,15 @@ Use `--python-mode=update` if you already have a setup.py and just want to updat
 ``` yaml $(python)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
-namespace: azure.mgmt.alertsmanagement
-package-name: azure-mgmt-alertsmanagement
+namespace: azure.mgmt.alertprocessingrules
+package-name: azure-mgmt-alertprocessingrules
 package-version: 1.0.0b1
 clear-output-folder: true
 ```
 
 ``` yaml $(python)
 no-namespace-folders: true
-output-folder: $(python-sdks-folder)/alertsmanagement/azure-mgmt-alertsmanagement/azure/mgmt/alertsmanagement
+output-folder: $(python-sdks-folder)/alertprocessingrules/azure-mgmt-alertprocessingrules/azure/mgmt/alertprocessingrules
 ```
 
 ``` yaml $(python)
