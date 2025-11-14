@@ -1,7 +1,7 @@
 import "@typespec/rest";
 import "@typespec/http";
 
-namespace Geolocation;
+namespace MapsGeolocation;
 
 /**
  * Desired format of the response. Only `json` format is supported.

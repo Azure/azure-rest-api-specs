@@ -5,6 +5,4 @@ using Azure.ClientGenerator.Core;
 
 namespace Customizations;
 
-@@clientName(Geolocation.GeolocationOperationGroup.getIpToLocation,
-  "getLocation"
-);
+@@clientName(MapsGeolocation.Geolocation.getIpToLocation, "getLocation");

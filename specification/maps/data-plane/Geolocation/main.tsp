@@ -26,7 +26,7 @@ using Azure.Core;
     "subscription-key"
   > | ApiKeyAuth<ApiKeyLocation.header, "SAS Token">
 )
-@service(#{ title: "Geolocation" })
+@service(#{ title: "Maps Geolocation" })
 @versioned(Versions)
 @server(
   "{endpoint}",
@@ -35,7 +35,7 @@ using Azure.Core;
     endpoint: string = "https://atlas.microsoft.com",
   }
 )
-namespace Geolocation;
+namespace MapsGeolocation;
 
 /**
  * The available API versions.
