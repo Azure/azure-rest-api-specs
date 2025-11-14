@@ -36,16 +36,44 @@ model ConfidentialVmProperties {
 }
 
 /**
- * Represents the Software Defined Networking (SDN) configuration state of the Azure Stack HCI cluster.
+ * Captures the customer's intent to enable or disable confidential VM support on the cluster, either during initial deployment (Day-0) or at a later stage (Day-N).
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 @added(Versions.v2025_12_01_preview)
-model ClusterSdnProperties extends SdnProperties {
+union ConfidentialVmIntent {
+  string,
+
   /**
-   * Indicates whether Software Defined Networking (SDN) integration should be enabled or disabled for this deployment.
+   * Indicates that the customer intends to enable confidential VM support on the cluster.
    */
-  @visibility(Lifecycle.Read)
-  sdnIntegrationIntent?: SdnIntegrationIntent;
+  Enable: "Enable",
+
+  /**
+   * Indicates that the customer intends to disable confidential VM support on the cluster.
+   */
+  Disable: "Disable",
+}
+
+/**
+ * Captures the current status of Confidential Virtual Machine (CVM) support on the cluster.
+ */
+@added(Versions.v2025_12_01_preview)
+union ConfidentialVmStatus {
+  string,
+
+  /**
+   * Confidential VM support is fully enabled on the cluster. All nodes are CVM capable.
+   */
+  Enabled: "Enabled",
+
+  /**
+   * Confidential VM support is partially enabled. At least one node in the cluster is CVM capable.
+   */
+  PartiallyEnabled: "PartiallyEnabled",
+
+  /**
+   * Confidential VM support is disabled. None of the nodes in the cluster are CVM capable.
+   */
+  Disabled: "Disabled",
 }
 
 /**
@@ -108,44 +136,16 @@ union IgvmStatus {
 }
 
 /**
- * Captures the customer's intent to enable or disable confidential VM support on the cluster, either during initial deployment (Day-0) or at a later stage (Day-N).
+ * Represents the Software Defined Networking (SDN) configuration state of the Azure Stack HCI cluster.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 @added(Versions.v2025_12_01_preview)
-union ConfidentialVmIntent {
-  string,
-
+model ClusterSdnProperties extends SdnProperties {
   /**
-   * Indicates that the customer intends to enable confidential VM support on the cluster.
+   * Indicates whether Software Defined Networking (SDN) integration should be enabled or disabled for this deployment.
    */
-  Enable: "Enable",
-
-  /**
-   * Indicates that the customer intends to disable confidential VM support on the cluster.
-   */
-  Disable: "Disable",
-}
-
-/**
- * Captures the current status of Confidential Virtual Machine (CVM) support on the cluster.
- */
-@added(Versions.v2025_12_01_preview)
-union ConfidentialVmStatus {
-  string,
-
-  /**
-   * Confidential VM support is fully enabled on the cluster. All nodes are CVM capable.
-   */
-  Enabled: "Enabled",
-
-  /**
-   * Confidential VM support is partially enabled. At least one node in the cluster is CVM capable.
-   */
-  PartiallyEnabled: "PartiallyEnabled",
-
-  /**
-   * Confidential VM support is disabled. None of the nodes in the cluster are CVM capable.
-   */
-  Disabled: "Disabled",
+  @visibility(Lifecycle.Read)
+  sdnIntegrationIntent?: SdnIntegrationIntent;
 }
 
 /**
