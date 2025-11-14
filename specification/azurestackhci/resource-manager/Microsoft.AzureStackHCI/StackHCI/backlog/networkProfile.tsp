@@ -12,19 +12,6 @@ using Azure.Core;
 @armProviderNamespace("Microsoft.AzureStackHCI")
 namespace Microsoft.AzureStackHCI;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state"
-@doc("Cluster details.")
-@discriminator("kind")
-model Cluster is Azure.ResourceManager.TrackedResource<{}> {
-  ...ResourceNameParameter<
-    Resource = Cluster,
-    KeyName = "clusterName",
-    SegmentName = "clusters",
-    NamePattern = ""
-  >;
-  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
-}
-
 @doc("Network Profile details.")
 @parentResource(Cluster)
 model NetworkProfile
