@@ -6,11 +6,10 @@ import "@typespec/rest";
 import "./models.tsp";
 import "./CapacityPool.tsp";
 
-using TypeSpec.Rest;
+using Rest;
 using Azure.ResourceManager;
-using TypeSpec.Http;
-using TypeSpec.OpenAPI;
-using TypeSpec.Versioning;
+using Http;
+using Versioning;
 using Azure.ClientGenerator.Core;
 
 namespace Microsoft.NetApp;
@@ -54,6 +53,7 @@ model VolumeProperties {
   /**
    * A unique file path for the volume. Used when creating mount targets
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Mark with @secret if this value should be kept private"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @maxLength(80)
   @minLength(1)
@@ -171,7 +171,7 @@ model VolumeProperties {
    * List of mount targets
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["fileSystemId"])
+  @identifiers(#["fileSystemId"])
   mountTargets?: MountTargetProperties[];
 
   /**
@@ -267,6 +267,11 @@ model VolumeProperties {
    * Specifies the type of LDAP server for a given NFS volume.
    */
   @added(Versions.v2025_07_01_preview)
+  @removed(Versions.v2025_08_01)
+  @added(Versions.v2025_08_01_preview)
+  @removed(Versions.v2025_08_01)
+  @added(Versions.v2025_09_01_preview)
+  @removed(Versions.v2025_09_01)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   ldapServerType?: LdapServerType;
 
@@ -383,7 +388,7 @@ model VolumeProperties {
   /**
    * Application specific placement rules for the particular volume
    */
-  @OpenAPI.extension("x-ms-identifiers", #["key"])
+  @identifiers(#["key"])
   placementRules?: PlacementKeyValuePairs[];
 
   /**
@@ -431,6 +436,11 @@ model VolumeProperties {
    * Language supported for volume.
    */
   @added(Versions.v2025_07_01_preview)
+  @removed(Versions.v2025_08_01)
+  @added(Versions.v2025_08_01_preview)
+  @removed(Versions.v2025_08_01)
+  @added(Versions.v2025_09_01_preview)
+  @removed(Versions.v2025_09_01)
   language?: VolumeLanguage;
 
   /**
@@ -460,6 +470,12 @@ union LdapServerType {
 /**
  * Language supported for volume.
  */
+@added(Versions.v2025_07_01_preview)
+@removed(Versions.v2025_08_01)
+@added(Versions.v2025_08_01_preview)
+@removed(Versions.v2025_08_01)
+@added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_09_01)
 union VolumeLanguage {
   string,
 
@@ -817,7 +833,7 @@ model VolumePropertiesExportPolicy {
   /**
    * Export policy rule
    */
-  @OpenAPI.extension("x-ms-identifiers", #["ruleIndex"])
+  @identifiers(#["ruleIndex"])
   rules?: ExportPolicyRule[];
 }
 
@@ -1035,13 +1051,18 @@ model ReplicationObject {
    * A list of destination replications
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["resourceId"])
+  @identifiers(#["resourceId"])
   destinationReplications?: DestinationReplication[];
 
   /**
    * Property that only applies to external replications. Provides a machine-readable value for the status of the external replication setup.
    */
   @added(Versions.v2025_07_01_preview)
+  @removed(Versions.v2025_08_01)
+  @added(Versions.v2025_08_01_preview)
+  @removed(Versions.v2025_08_01)
+  @added(Versions.v2025_09_01_preview)
+  @removed(Versions.v2025_09_01)
   @visibility(Lifecycle.Read)
   externalReplicationSetupStatus?: ExternalReplicationSetupStatus;
 
@@ -1049,6 +1070,11 @@ model ReplicationObject {
    * Contains human-readable instructions on what the next step is to finish the external replication setup.
    */
   @added(Versions.v2025_07_01_preview)
+  @removed(Versions.v2025_08_01)
+  @added(Versions.v2025_08_01_preview)
+  @removed(Versions.v2025_08_01)
+  @added(Versions.v2025_09_01_preview)
+  @removed(Versions.v2025_09_01)
   @visibility(Lifecycle.Read)
   externalReplicationSetupInfo?: string;
 
@@ -1056,6 +1082,11 @@ model ReplicationObject {
    * The mirror state property describes the current status of data replication for a replication. It provides insight into whether the data is actively being mirrored, if the replication process has been paused, or if it has yet to be initialized.
    */
   @added(Versions.v2025_07_01_preview)
+  @removed(Versions.v2025_08_01)
+  @added(Versions.v2025_08_01_preview)
+  @removed(Versions.v2025_08_01)
+  @added(Versions.v2025_09_01_preview)
+  @removed(Versions.v2025_09_01)
   @visibility(Lifecycle.Read)
   mirrorState?: MirrorState;
 
@@ -1063,6 +1094,11 @@ model ReplicationObject {
    * The status of the Volume Replication
    */
   @added(Versions.v2025_07_01_preview)
+  @removed(Versions.v2025_08_01)
+  @added(Versions.v2025_08_01_preview)
+  @removed(Versions.v2025_08_01)
+  @added(Versions.v2025_09_01_preview)
+  @removed(Versions.v2025_09_01)
   @visibility(Lifecycle.Read)
   relationshipStatus?: VolumeReplicationRelationshipStatus;
 }
@@ -1071,6 +1107,11 @@ model ReplicationObject {
  * Property that only applies to external replications. Provides a machine-readable value for the status of the external replication setup.
  */
 @added(Versions.v2025_07_01_preview)
+@removed(Versions.v2025_08_01)
+@added(Versions.v2025_08_01_preview)
+@removed(Versions.v2025_08_01)
+@added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_09_01)
 union ExternalReplicationSetupStatus {
   string,
 
@@ -1348,7 +1389,7 @@ model VolumePatchPropertiesExportPolicy {
   /**
    * Export policy rule
    */
-  @OpenAPI.extension("x-ms-identifiers", #["ruleIndex"])
+  @identifiers(#["ruleIndex"])
   rules?: ExportPolicyRule[];
 }
 
@@ -2082,11 +2123,16 @@ union BreakthroughMode {
  * Quota Report for volume
  */
 @added(Versions.v2025_07_01_preview)
+@removed(Versions.v2025_08_01)
+@added(Versions.v2025_08_01_preview)
+@removed(Versions.v2025_08_01)
+@added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_09_01)
 model ListQuotaReportResponse {
   /**
    * List of quota reports
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   value?: QuotaReport[];
 }
 
@@ -2094,6 +2140,11 @@ model ListQuotaReportResponse {
  * Quota report record properties
  */
 @added(Versions.v2025_07_01_preview)
+@removed(Versions.v2025_08_01)
+@added(Versions.v2025_08_01_preview)
+@removed(Versions.v2025_08_01)
+@added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_09_01)
 model QuotaReport {
   /**
    * Type of quota
@@ -2568,6 +2619,11 @@ interface Volumes {
   >;
 
   @added(Versions.v2025_07_01_preview)
+  @removed(Versions.v2025_08_01)
+  @added(Versions.v2025_08_01_preview)
+  @removed(Versions.v2025_08_01)
+  @added(Versions.v2025_09_01_preview)
+  @removed(Versions.v2025_09_01)
   listQuotaReport is ArmResourceActionAsync<
     Volume,
     void,

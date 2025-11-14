@@ -5,12 +5,11 @@ import "@typespec/rest";
 import "./../models.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
-using TypeSpec.Rest;
+using Rest;
 using Azure.Core;
 using Azure.ResourceManager;
-using TypeSpec.Http;
-using TypeSpec.OpenAPI;
-using TypeSpec.Versioning;
+using Http;
+using Versioning;
 using Azure.ClientGenerator.Core;
 
 namespace Microsoft.NetApp;
@@ -73,7 +72,7 @@ model ElasticVolumeProperties {
   ]>;
 
   /** List of mount targets that can be used to mount this volume */
-  @OpenAPI.extension("x-ms-identifiers", #["ipAddress"])
+  @identifiers(#["ipAddress"])
   @visibility(Lifecycle.Read)
   mountTargets?: ElasticMountTargetProperties[];
 
@@ -245,7 +244,7 @@ union ElasticVolumeRestorationState {
 @added(Versions.v2025_09_01_preview)
 model ElasticExportPolicy {
   /** Export policy rule */
-  @OpenAPI.extension("x-ms-identifiers", #["ruleIndex"])
+  @identifiers(#["ruleIndex"])
   rules?: ElasticExportPolicyRule[];
 }
 
