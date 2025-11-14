@@ -82,12 +82,23 @@ model AccountProperties {
    * LDAP Configuration for the account.
    */
   @added(Versions.v2025_07_01_preview)
+  @removed(Versions.v2025_08_01)
+  @added(Versions.v2025_08_01_preview)
+  @removed(Versions.v2025_08_01)
+  @added(Versions.v2025_09_01_preview)
+  @removed(Versions.v2025_09_01)
   ldapConfiguration?: LdapConfiguration;
 }
 
 /**
  * LDAP configuration
  */
+@added(Versions.v2025_07_01_preview)
+@removed(Versions.v2025_08_01)
+@added(Versions.v2025_08_01_preview)
+@removed(Versions.v2025_08_01)
+@added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_09_01)
 model LdapConfiguration {
   /**
    * Name of the LDAP configuration domain
