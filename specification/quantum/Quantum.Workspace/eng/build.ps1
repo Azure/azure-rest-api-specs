@@ -189,7 +189,7 @@ Copying examples from $source to $newVersionExamples
     }
 
     RunAndCheck "lint-diff" $logDirectory {
-        npx autorest --v3 --spectral --validation --azure-validator --openapi-type=data-plane --use=@microsoft.azure/openapi-validator@latest $newTag $configFile
+        npx autorest --v3 --spectral --validation --azure-validator --openapi-type=data-plane --use=@microsoft.azure/openapi-validator@latest $versions.NewTag $configFile
     }
 
     RunAndCheck "avocado" $logDirectory {
