@@ -1,3 +1,4 @@
+import { APIViewRequestData } from "@azure-tools/specs-shared/sdk-types";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -15,7 +16,6 @@ import {
 import * as log from "../src/log.js";
 import { LogLevel } from "../src/log.js";
 import * as specHelpers from "../src/spec-helpers.js";
-import { APIViewRequestData } from "../src/types.js";
 import * as utils from "../src/utils.js";
 
 // Get the absolute path to the repo root

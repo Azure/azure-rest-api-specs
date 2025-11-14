@@ -19,14 +19,6 @@ export interface SpecGenSdkCmdInput {
   headBranch?: string;
 }
 
-/**
- * Data for the API view request.
- */
-export interface APIViewRequestData {
-  packageName: string;
-  filePath: string;
-}
-
 /*
  * VsoLogs is a map of task names to log entries. Each log entry contains an array of errors and warnings.
  */
@@ -37,19 +29,6 @@ export type VsoLogs = Map<
     warnings?: string[];
   }
 >;
-
-/**
- * Represents the result of the spec-gen-sdk generation process.
- */
-export interface SpecGenSdkArtifactInfo {
-  language: string;
-  result: string;
-  headSha: string;
-  prNumber?: string;
-  labelAction?: boolean;
-  isSpecGenSdkCheckRequired: boolean;
-  apiViewRequestData: APIViewRequestData[];
-}
 
 /**
  * Represents supported SDK language identifiers.
