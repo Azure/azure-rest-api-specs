@@ -1,67 +1,67 @@
 {
-  "title": "PlatformUpdates_ListByLocation_MaximumSet",
   "operationId": "PlatformUpdates_List",
   "parameters": {
     "api-version": "2025-11-01-preview",
-    "subscriptionId": "b8d594e5-51f3-4c11-9c54-a7771b81c712",
-    "location": "westus2"
+    "location": "westus2",
+    "subscriptionId": "b8d594e5-51f3-4c11-9c54-a7771b81c712"
   },
+  "title": "PlatformUpdates_ListByLocation_MaximumSet",
   "responses": {
     "200": {
       "body": {
+        "nextLink": "https://management.azure.com/subscriptions/b8d594e5-51f3-4c11-9c54-a7771b81c712/providers/Microsoft.AzureStackHCI/locations/westus2/platformUpdates?api-version=2025-11-01-preview&$skiptoken=X'12345'",
         "value": [
           {
+            "name": "10.2408.0.1",
+            "type": "Microsoft.AzureStackHCI/PlatformUpdates",
+            "id": "/subscriptions/b8d594e5-51f3-4c11-9c54-a7771b81c712/providers/Microsoft.AzureStackHCI/locations/westus2/platformUpdates/10.2408.0.1",
             "properties": {
               "platformUpdateDetails": [
                 {
-                  "validatedSolutionRecipeVersion": "10.2408.0.1",
-                  "platformVersion": "10.2408.0.1",
                   "platformPayloads": [
                     {
                       "payloadHash": "sdfdsfdsfsadfdsafdsafawfdsafdsfa",
                       "payloadUrl": "https://microsoft.com/a"
                     }
-                  ]
+                  ],
+                  "platformVersion": "10.2408.0.1",
+                  "validatedSolutionRecipeVersion": "10.2408.0.1"
                 },
                 {
-                  "validatedSolutionRecipeVersion": "10.2408.0.2",
-                  "platformVersion": "10.2408.0.2",
                   "platformPayloads": [
                     {
                       "payloadHash": "sdfdsfdsfsadfdsafdsafawfdsafdsfa",
-                      "payloadUrl": "https://microsoft.com/a",
+                      "payloadIdentifier": "payload-identifier-1234",
                       "payloadPackageSizeInBytes": "2048",
-                      "payloadIdentifier": "payload-identifier-1234"
+                      "payloadUrl": "https://microsoft.com/a"
                     }
-                  ]
+                  ],
+                  "platformVersion": "10.2408.0.2",
+                  "validatedSolutionRecipeVersion": "10.2408.0.2"
                 }
               ]
-            },
-            "id": "/subscriptions/b8d594e5-51f3-4c11-9c54-a7771b81c712/providers/Microsoft.AzureStackHCI/locations/westus2/platformUpdates/10.2408.0.1",
-            "name": "10.2408.0.1",
-            "type": "Microsoft.AzureStackHCI/PlatformUpdates"
+            }
           },
           {
+            "name": "10.2409.0.1",
+            "type": "Microsoft.AzureStackHCI/PlatformUpdates",
+            "id": "/subscriptions/b8d594e5-51f3-4c11-9c54-a7771b81c712/providers/Microsoft.AzureStackHCI/locations/westus2/platformUpdates/10.2409.0.1",
             "properties": {
               "platformUpdateDetails": [
                 {
-                  "validatedSolutionRecipeVersion": "10.2409.0.1",
-                  "platformVersion": "10.2409.0.1",
                   "platformPayloads": [
                     {
                       "payloadHash": "aedfbcabc123456789abcdef12345678",
                       "payloadUrl": "https://microsoft.com/b"
                     }
-                  ]
+                  ],
+                  "platformVersion": "10.2409.0.1",
+                  "validatedSolutionRecipeVersion": "10.2409.0.1"
                 }
               ]
-            },
-            "id": "/subscriptions/b8d594e5-51f3-4c11-9c54-a7771b81c712/providers/Microsoft.AzureStackHCI/locations/westus2/platformUpdates/10.2409.0.1",
-            "name": "10.2409.0.1",
-            "type": "Microsoft.AzureStackHCI/PlatformUpdates"
+            }
           }
-        ],
-        "nextLink": "https://management.azure.com/subscriptions/b8d594e5-51f3-4c11-9c54-a7771b81c712/providers/Microsoft.AzureStackHCI/locations/westus2/platformUpdates?api-version=2025-11-01-preview&$skiptoken=X'12345'"
+        ]
       }
     }
   }
