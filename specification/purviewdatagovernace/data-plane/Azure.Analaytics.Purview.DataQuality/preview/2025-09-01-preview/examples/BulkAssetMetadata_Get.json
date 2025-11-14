@@ -1,0 +1,316 @@
+{
+  "operationId": "GetBulkAssetMetadata",
+  "parameters": {
+    "api-version": "2025-09-01-preview",
+    "continuationToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9"
+  },
+  "title": "BulkAssetMetadata_Get",
+  "responses": {
+    "200": {
+      "body": {
+        "continuationToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ0",
+        "metadata": [
+          {
+            "assetMetadata": {
+              "id": "123e4567-e89b-12d3-a456-426614174000",
+              "name": "CustomerDataObserver",
+              "type": "Basic",
+              "businessDomain": {
+                "type": "BusinessDomain",
+                "referenceId": "abcdef12-3456-7890-abcd-ef1234567890"
+              },
+              "dataProduct": {
+                "type": "DataProduct",
+                "referenceId": "dp-323e4567-e89b-12d3-a456-426614174222"
+              },
+              "dataAsset": {
+                "type": "DataAsset",
+                "referenceId": "asset-223e4567-e89b-12d3-a456-426614174111"
+              },
+              "createdAt": "2025-09-17T08:00:00Z",
+              "createdBy": "user-11111111-2222-3333-4444-555555555555",
+              "lastModifiedAt": "2025-09-17T12:00:00Z",
+              "lastModifiedBy": "user-22222222-3333-4444-5555-666666666666",
+              "isDeleted": false,
+              "eTag": "etag-1234567890",
+              "typeProperties": {
+                "inputDatasets": [
+                  {
+                    "datasetAliasName": "customers",
+                    "datasourceId": "datasource-001"
+                  }
+                ],
+                "projection": {
+                  "accountNumber": {
+                    "type": "string",
+                    "value": "AccountNumber"
+                  },
+                  "customerName": {
+                    "type": "string",
+                    "value": "CustomerName"
+                  }
+                }
+              },
+              "location": {
+                "type": "AzureBlobStorage",
+                "typeProperties": {
+                  "accountName": "mystorageaccount",
+                  "fileSystem": "customer-data",
+                  "folderPath": "customers/2025/09",
+                  "region": "eastus"
+                }
+              },
+              "format": {
+                "type": "Parquet"
+              },
+              "schemaName": "dbo",
+              "tableName": "Customers",
+              "hostName": "myserver.database.windows.net"
+            },
+            "assetScopedMetadata": {
+              "id": "scoped-metadata-001",
+              "description": "Customer data asset scoped metadata for quality monitoring",
+              "favouriteColumnPaths": [
+                "customers.AccountNumber",
+                "customers.CustomerName",
+                "customers.Email"
+              ],
+              "businessDomain": {
+                "type": "BusinessDomain",
+                "referenceId": "abcdef12-3456-7890-abcd-ef1234567890"
+              },
+              "dataProduct": {
+                "type": "DataProduct",
+                "referenceId": "dp-323e4567-e89b-12d3-a456-426614174222"
+              },
+              "dataAsset": {
+                "type": "DataAsset",
+                "referenceId": "asset-223e4567-e89b-12d3-a456-426614174111"
+              },
+              "runtime": {
+                "isErrorRowRequired": true,
+                "errorRowWriteFormat": "Parquet"
+              },
+              "createdAt": "2025-09-17T08:00:00Z",
+              "lastModifiedAt": "2025-09-17T12:00:00Z",
+              "createdBy": "user-11111111-2222-3333-4444-555555555555",
+              "lastModifiedBy": "user-22222222-3333-4444-5555-666666666666",
+              "ETag": "scoped-etag-1234567890"
+            },
+            "globalRules": [
+              {
+                "name": "Customer_Email_NotNull",
+                "id": "rule-001",
+                "description": "Ensure customer email is not null",
+                "type": "NotNull",
+                "typeProperties": {
+                  "column": {
+                    "type": "string",
+                    "value": "Email"
+                  }
+                },
+                "status": "Active",
+                "score": 98.5,
+                "dimension": "Completeness",
+                "businessDomain": {
+                  "type": "BusinessDomain",
+                  "referenceId": "abcdef12-3456-7890-abcd-ef1234567890"
+                },
+                "dataProduct": {
+                  "type": "DataProduct",
+                  "referenceId": "dp-323e4567-e89b-12d3-a456-426614174222"
+                },
+                "dataAsset": {
+                  "type": "DataAsset",
+                  "referenceId": "asset-223e4567-e89b-12d3-a456-426614174111"
+                },
+                "lastModifiedAt": "2025-09-17T10:00:00Z",
+                "lastModifiedBy": "user-33333333-4444-5555-6666-777777777777",
+                "createdAt": "2025-09-17T08:00:00Z",
+                "createdBy": "user-11111111-2222-3333-4444-555555555555"
+              },
+              {
+                "name": "Customer_Phone_Format",
+                "id": "rule-002",
+                "description": "Validate customer phone number format",
+                "type": "Regex",
+                "typeProperties": {
+                  "column": {
+                    "type": "string",
+                    "value": "PhoneNumber"
+                  },
+                  "pattern": "^\\+?[1-9]\\d{1,14}$"
+                },
+                "status": "Active",
+                "score": 95.2,
+                "dimension": "Conformity",
+                "businessDomain": {
+                  "type": "BusinessDomain",
+                  "referenceId": "abcdef12-3456-7890-abcd-ef1234567890"
+                },
+                "dataProduct": {
+                  "type": "DataProduct",
+                  "referenceId": "dp-323e4567-e89b-12d3-a456-426614174222"
+                },
+                "dataAsset": {
+                  "type": "DataAsset",
+                  "referenceId": "asset-223e4567-e89b-12d3-a456-426614174111"
+                },
+                "lastModifiedAt": "2025-09-17T10:30:00Z",
+                "lastModifiedBy": "user-44444444-5555-6666-7777-888888888888",
+                "createdAt": "2025-09-17T08:15:00Z",
+                "createdBy": "user-11111111-2222-3333-4444-555555555555"
+              }
+            ],
+            "scoreSnapshot": {
+              "id": "snapshot-001",
+              "businessDomainId": "abcdef12-3456-7890-abcd-ef1234567890",
+              "dataProductId": "dp-323e4567-e89b-12d3-a456-426614174222",
+              "dataAssetId": "asset-223e4567-e89b-12d3-a456-426614174111",
+              "overallScore": 96.85,
+              "completenessScore": 98.5,
+              "conformityScore": 95.2,
+              "createdAt": "2025-09-17T12:00:00Z",
+              "createdBy": "system-score-generator"
+            }
+          },
+          {
+            "assetMetadata": {
+              "id": "223e4567-e89b-12d3-a456-426614174001",
+              "name": "OrdersDataObserver",
+              "type": "Basic",
+              "businessDomain": {
+                "type": "BusinessDomain",
+                "referenceId": "abcdef12-3456-7890-abcd-ef1234567890"
+              },
+              "dataProduct": {
+                "type": "DataProduct",
+                "referenceId": "dp-423e4567-e89b-12d3-a456-426614174333"
+              },
+              "dataAsset": {
+                "type": "DataAsset",
+                "referenceId": "asset-323e4567-e89b-12d3-a456-426614174222"
+              },
+              "createdAt": "2025-09-17T09:00:00Z",
+              "createdBy": "user-11111111-2222-3333-4444-555555555555",
+              "lastModifiedAt": "2025-09-17T13:00:00Z",
+              "lastModifiedBy": "user-22222222-3333-4444-5555-666666666666",
+              "isDeleted": false,
+              "eTag": "etag-2345678901",
+              "typeProperties": {
+                "inputDatasets": [
+                  {
+                    "datasetAliasName": "orders",
+                    "datasourceId": "datasource-002"
+                  }
+                ],
+                "projection": {
+                  "orderId": {
+                    "type": "string",
+                    "value": "OrderId"
+                  },
+                  "customerId": {
+                    "type": "string",
+                    "value": "CustomerId"
+                  },
+                  "orderAmount": {
+                    "type": "decimal",
+                    "value": "Amount"
+                  }
+                }
+              },
+              "location": {
+                "type": "AzureSqlDatabase",
+                "typeProperties": {
+                  "accountName": "myserver.database.windows.net",
+                  "region": "westus2"
+                }
+              },
+              "schemaName": "sales",
+              "tableName": "Orders",
+              "hostName": "myserver.database.windows.net"
+            },
+            "assetScopedMetadata": {
+              "id": "scoped-metadata-002",
+              "description": "Orders data asset scoped metadata for transaction monitoring",
+              "favouriteColumnPaths": [
+                "orders.OrderId",
+                "orders.CustomerId",
+                "orders.Amount",
+                "orders.OrderDate"
+              ],
+              "businessDomain": {
+                "type": "BusinessDomain",
+                "referenceId": "abcdef12-3456-7890-abcd-ef1234567890"
+              },
+              "dataProduct": {
+                "type": "DataProduct",
+                "referenceId": "dp-423e4567-e89b-12d3-a456-426614174333"
+              },
+              "dataAsset": {
+                "type": "DataAsset",
+                "referenceId": "asset-323e4567-e89b-12d3-a456-426614174222"
+              },
+              "runtime": {
+                "isErrorRowRequired": false,
+                "errorRowWriteFormat": "Json"
+              },
+              "createdAt": "2025-09-17T09:00:00Z",
+              "lastModifiedAt": "2025-09-17T13:00:00Z",
+              "createdBy": "user-11111111-2222-3333-4444-555555555555",
+              "lastModifiedBy": "user-22222222-3333-4444-5555-666666666666",
+              "ETag": "scoped-etag-2345678901"
+            },
+            "globalRules": [
+              {
+                "name": "Order_Amount_Positive",
+                "id": "rule-003",
+                "description": "Ensure order amount is positive",
+                "type": "Range",
+                "typeProperties": {
+                  "column": {
+                    "type": "decimal",
+                    "value": "Amount"
+                  },
+                  "minValue": 0.01,
+                  "maxValue": 999999.99
+                },
+                "status": "Active",
+                "score": 99.1,
+                "dimension": "Validity",
+                "businessDomain": {
+                  "type": "BusinessDomain",
+                  "referenceId": "abcdef12-3456-7890-abcd-ef1234567890"
+                },
+                "dataProduct": {
+                  "type": "DataProduct",
+                  "referenceId": "dp-423e4567-e89b-12d3-a456-426614174333"
+                },
+                "dataAsset": {
+                  "type": "DataAsset",
+                  "referenceId": "asset-323e4567-e89b-12d3-a456-426614174222"
+                },
+                "lastModifiedAt": "2025-09-17T11:00:00Z",
+                "lastModifiedBy": "user-33333333-4444-5555-6666-777777777777",
+                "createdAt": "2025-09-17T09:00:00Z",
+                "createdBy": "user-11111111-2222-3333-4444-555555555555"
+              }
+            ],
+            "scoreSnapshot": {
+              "id": "snapshot-002",
+              "businessDomainId": "abcdef12-3456-7890-abcd-ef1234567890",
+              "dataProductId": "dp-423e4567-e89b-12d3-a456-426614174333",
+              "dataAssetId": "asset-323e4567-e89b-12d3-a456-426614174222",
+              "overallScore": 99.1,
+              "completenessScore": 100.0,
+              "conformityScore": 99.1,
+              "validityScore": 99.1,
+              "createdAt": "2025-09-17T13:00:00Z",
+              "createdBy": "system-score-generator"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,397 @@
+{
+  "operationId": "CreateBulkAssetMetadata",
+  "parameters": {
+    "api-version": "2025-09-01-preview",
+    "request": {
+      "metadata": [
+        {
+          "assetMetadata": {
+            "id": "323e4567-e89b-12d3-a456-426614174002",
+            "name": "ProductCatalogObserver",
+            "type": "Basic",
+            "businessDomain": {
+              "type": "BusinessDomain",
+              "referenceId": "bcdef123-4567-8901-bcde-f1234567890a"
+            },
+            "dataProduct": {
+              "type": "DataProduct",
+              "referenceId": "dp-523e4567-e89b-12d3-a456-426614174444"
+            },
+            "dataAsset": {
+              "type": "DataAsset",
+              "referenceId": "asset-423e4567-e89b-12d3-a456-426614174333"
+            },
+            "createdAt": "2025-09-17T14:00:00Z",
+            "createdBy": "user-55555555-6666-7777-8888-999999999999",
+            "lastModifiedAt": "2025-09-17T14:00:00Z",
+            "lastModifiedBy": "user-55555555-6666-7777-8888-999999999999",
+            "isDeleted": false,
+            "eTag": "etag-3456789012",
+            "typeProperties": {
+              "inputDatasets": [
+                {
+                  "datasetAliasName": "products",
+                  "datasourceId": "datasource-003"
+                }
+              ],
+              "projection": {
+                "productId": {
+                  "type": "string",
+                  "value": "ProductId"
+                },
+                "productName": {
+                  "type": "string",
+                  "value": "ProductName"
+                },
+                "price": {
+                  "type": "decimal",
+                  "value": "Price"
+                },
+                "category": {
+                  "type": "string",
+                  "value": "Category"
+                }
+              }
+            },
+            "location": {
+              "type": "AzureBlobStorage",
+              "typeProperties": {
+                "accountName": "productsstorageaccount",
+                "fileSystem": "product-catalog",
+                "folderPath": "products/2025/09",
+                "region": "centralus"
+              }
+            },
+            "format": {
+              "type": "Json"
+            },
+            "schemaName": "catalog",
+            "tableName": "Products",
+            "hostName": "catalog.database.windows.net"
+          },
+          "assetScopedMetadata": {
+            "id": "scoped-metadata-003",
+            "description": "Product catalog scoped metadata for inventory quality tracking",
+            "favouriteColumnPaths": [
+              "products.ProductId",
+              "products.ProductName",
+              "products.Price",
+              "products.Category",
+              "products.Stock"
+            ],
+            "businessDomain": {
+              "type": "BusinessDomain",
+              "referenceId": "bcdef123-4567-8901-bcde-f1234567890a"
+            },
+            "dataProduct": {
+              "type": "DataProduct",
+              "referenceId": "dp-523e4567-e89b-12d3-a456-426614174444"
+            },
+            "dataAsset": {
+              "type": "DataAsset",
+              "referenceId": "asset-423e4567-e89b-12d3-a456-426614174333"
+            },
+            "runtime": {
+              "isErrorRowRequired": true,
+              "errorRowWriteFormat": "Json"
+            },
+            "createdAt": "2025-09-17T14:00:00Z",
+            "lastModifiedAt": "2025-09-17T14:00:00Z",
+            "createdBy": "user-55555555-6666-7777-8888-999999999999",
+            "lastModifiedBy": "user-55555555-6666-7777-8888-999999999999",
+            "ETag": "scoped-etag-3456789012"
+          },
+          "globalRules": [
+            {
+              "name": "Product_Price_NotNull",
+              "id": "rule-004",
+              "description": "Ensure product price is not null",
+              "type": "NotNull",
+              "typeProperties": {
+                "column": {
+                  "type": "decimal",
+                  "value": "Price"
+                }
+              },
+              "status": "Active",
+              "score": 99.8,
+              "dimension": "Completeness",
+              "businessDomain": {
+                "type": "BusinessDomain",
+                "referenceId": "bcdef123-4567-8901-bcde-f1234567890a"
+              },
+              "dataProduct": {
+                "type": "DataProduct",
+                "referenceId": "dp-523e4567-e89b-12d3-a456-426614174444"
+              },
+              "dataAsset": {
+                "type": "DataAsset",
+                "referenceId": "asset-423e4567-e89b-12d3-a456-426614174333"
+              },
+              "lastModifiedAt": "2025-09-17T14:00:00Z",
+              "lastModifiedBy": "user-55555555-6666-7777-8888-999999999999",
+              "createdAt": "2025-09-17T14:00:00Z",
+              "createdBy": "user-55555555-6666-7777-8888-999999999999"
+            },
+            {
+              "name": "Product_Name_Length",
+              "id": "rule-005",
+              "description": "Validate product name length between 3 and 100 characters",
+              "type": "Length",
+              "typeProperties": {
+                "column": {
+                  "type": "string",
+                  "value": "ProductName"
+                },
+                "minLength": 3,
+                "maxLength": 100
+              },
+              "status": "Active",
+              "score": 97.5,
+              "dimension": "Conformity",
+              "businessDomain": {
+                "type": "BusinessDomain",
+                "referenceId": "bcdef123-4567-8901-bcde-f1234567890a"
+              },
+              "dataProduct": {
+                "type": "DataProduct",
+                "referenceId": "dp-523e4567-e89b-12d3-a456-426614174444"
+              },
+              "dataAsset": {
+                "type": "DataAsset",
+                "referenceId": "asset-423e4567-e89b-12d3-a456-426614174333"
+              },
+              "lastModifiedAt": "2025-09-17T14:05:00Z",
+              "lastModifiedBy": "user-66666666-7777-8888-9999-aaaaaaaaaaaa",
+              "createdAt": "2025-09-17T14:00:00Z",
+              "createdBy": "user-55555555-6666-7777-8888-999999999999"
+            },
+            {
+              "name": "Product_Price_Range",
+              "id": "rule-006",
+              "description": "Validate product price is within reasonable range",
+              "type": "Range",
+              "typeProperties": {
+                "column": {
+                  "type": "decimal",
+                  "value": "Price"
+                },
+                "minValue": 0.01,
+                "maxValue": 50000.00
+              },
+              "status": "Active",
+              "score": 96.2,
+              "dimension": "Validity",
+              "businessDomain": {
+                "type": "BusinessDomain",
+                "referenceId": "bcdef123-4567-8901-bcde-f1234567890a"
+              },
+              "dataProduct": {
+                "type": "DataProduct",
+                "referenceId": "dp-523e4567-e89b-12d3-a456-426614174444"
+              },
+              "dataAsset": {
+                "type": "DataAsset",
+                "referenceId": "asset-423e4567-e89b-12d3-a456-426614174333"
+              },
+              "lastModifiedAt": "2025-09-17T14:10:00Z",
+              "lastModifiedBy": "user-77777777-8888-9999-aaaa-bbbbbbbbbbbb",
+              "createdAt": "2025-09-17T14:00:00Z",
+              "createdBy": "user-55555555-6666-7777-8888-999999999999"
+            }
+          ],
+          "scoreSnapshot": {
+            "id": "snapshot-003",
+            "businessDomainId": "bcdef123-4567-8901-bcde-f1234567890a",
+            "dataProductId": "dp-523e4567-e89b-12d3-a456-426614174444",
+            "dataAssetId": "asset-423e4567-e89b-12d3-a456-426614174333",
+            "overallScore": 97.83,
+            "completenessScore": 99.8,
+            "conformityScore": 97.5,
+            "validityScore": 96.2,
+            "createdAt": "2025-09-17T14:15:00Z",
+            "createdBy": "system-score-generator"
+          }
+        },
+        {
+          "assetMetadata": {
+            "id": "423e4567-e89b-12d3-a456-426614174003",
+            "name": "InventoryDataObserver",
+            "type": "Basic",
+            "businessDomain": {
+              "type": "BusinessDomain",
+              "referenceId": "bcdef123-4567-8901-bcde-f1234567890a"
+            },
+            "dataProduct": {
+              "type": "DataProduct",
+              "referenceId": "dp-623e4567-e89b-12d3-a456-426614174555"
+            },
+            "dataAsset": {
+              "type": "DataAsset",
+              "referenceId": "asset-523e4567-e89b-12d3-a456-426614174444"
+            },
+            "createdAt": "2025-09-17T14:30:00Z",
+            "createdBy": "user-55555555-6666-7777-8888-999999999999",
+            "lastModifiedAt": "2025-09-17T14:30:00Z",
+            "lastModifiedBy": "user-55555555-6666-7777-8888-999999999999",
+            "isDeleted": false,
+            "eTag": "etag-4567890123",
+            "typeProperties": {
+              "inputDatasets": [
+                {
+                  "datasetAliasName": "inventory",
+                  "datasourceId": "datasource-004"
+                }
+              ],
+              "projection": {
+                "productId": {
+                  "type": "string",
+                  "value": "ProductId"
+                },
+                "warehouseId": {
+                  "type": "string",
+                  "value": "WarehouseId"
+                },
+                "quantity": {
+                  "type": "integer",
+                  "value": "Quantity"
+                },
+                "lastUpdated": {
+                  "type": "datetime",
+                  "value": "LastUpdated"
+                }
+              }
+            },
+            "location": {
+              "type": "CosmosDb",
+              "typeProperties": {
+                "accountName": "inventory-cosmos-account",
+                "region": "eastus2"
+              }
+            },
+            "format": {
+              "type": "Json"
+            },
+            "hostName": "inventory-cosmos-account.documents.azure.com"
+          },
+          "assetScopedMetadata": {
+            "id": "scoped-metadata-004",
+            "description": "Inventory data scoped metadata for stock level monitoring",
+            "favouriteColumnPaths": [
+              "inventory.ProductId",
+              "inventory.WarehouseId",
+              "inventory.Quantity",
+              "inventory.LastUpdated"
+            ],
+            "businessDomain": {
+              "type": "BusinessDomain",
+              "referenceId": "bcdef123-4567-8901-bcde-f1234567890a"
+            },
+            "dataProduct": {
+              "type": "DataProduct",
+              "referenceId": "dp-623e4567-e89b-12d3-a456-426614174555"
+            },
+            "dataAsset": {
+              "type": "DataAsset",
+              "referenceId": "asset-523e4567-e89b-12d3-a456-426614174444"
+            },
+            "runtime": {
+              "isErrorRowRequired": true,
+              "errorRowWriteFormat": "Json"
+            },
+            "createdAt": "2025-09-17T14:30:00Z",
+            "lastModifiedAt": "2025-09-17T14:30:00Z",
+            "createdBy": "user-55555555-6666-7777-8888-999999999999",
+            "lastModifiedBy": "user-55555555-6666-7777-8888-999999999999",
+            "ETag": "scoped-etag-4567890123"
+          },
+          "globalRules": [
+            {
+              "name": "Inventory_Quantity_NonNegative",
+              "id": "rule-007",
+              "description": "Ensure inventory quantity is non-negative",
+              "type": "Range",
+              "typeProperties": {
+                "column": {
+                  "type": "integer",
+                  "value": "Quantity"
+                },
+                "minValue": 0,
+                "maxValue": 999999
+              },
+              "status": "Active",
+              "score": 99.5,
+              "dimension": "Validity",
+              "businessDomain": {
+                "type": "BusinessDomain",
+                "referenceId": "bcdef123-4567-8901-bcde-f1234567890a"
+              },
+              "dataProduct": {
+                "type": "DataProduct",
+                "referenceId": "dp-623e4567-e89b-12d3-a456-426614174555"
+              },
+              "dataAsset": {
+                "type": "DataAsset",
+                "referenceId": "asset-523e4567-e89b-12d3-a456-426614174444"
+              },
+              "lastModifiedAt": "2025-09-17T14:30:00Z",
+              "lastModifiedBy": "user-55555555-6666-7777-8888-999999999999",
+              "createdAt": "2025-09-17T14:30:00Z",
+              "createdBy": "user-55555555-6666-7777-8888-999999999999"
+            },
+            {
+              "name": "Inventory_LastUpdated_Recent",
+              "id": "rule-008",
+              "description": "Ensure inventory was updated within the last 30 days",
+              "type": "Freshness",
+              "typeProperties": {
+                "column": {
+                  "type": "datetime",
+                  "value": "LastUpdated"
+                },
+                "maxAgeDays": 30
+              },
+              "status": "Active",
+              "score": 94.7,
+              "dimension": "Timeliness",
+              "businessDomain": {
+                "type": "BusinessDomain",
+                "referenceId": "bcdef123-4567-8901-bcde-f1234567890a"
+              },
+              "dataProduct": {
+                "type": "DataProduct",
+                "referenceId": "dp-623e4567-e89b-12d3-a456-426614174555"
+              },
+              "dataAsset": {
+                "type": "DataAsset",
+                "referenceId": "asset-523e4567-e89b-12d3-a456-426614174444"
+              },
+              "lastModifiedAt": "2025-09-17T14:35:00Z",
+              "lastModifiedBy": "user-88888888-9999-aaaa-bbbb-cccccccccccc",
+              "createdAt": "2025-09-17T14:30:00Z",
+              "createdBy": "user-55555555-6666-7777-8888-999999999999"
+            }
+          ],
+          "scoreSnapshot": {
+            "id": "snapshot-004",
+            "businessDomainId": "bcdef123-4567-8901-bcde-f1234567890a",
+            "dataProductId": "dp-623e4567-e89b-12d3-a456-426614174555",
+            "dataAssetId": "asset-523e4567-e89b-12d3-a456-426614174444",
+            "overallScore": 97.1,
+            "completenessScore": 100.0,
+            "validityScore": 99.5,
+            "timelinessScore": 94.7,
+            "createdAt": "2025-09-17T14:40:00Z",
+            "createdBy": "system-score-generator"
+          }
+        }
+      ]
+    }
+  },
+  "title": "BulkAssetMetadata_Create",
+  "responses": {
+    "201": {
+      "body": "Bulk asset metadata creation completed successfully. 2 assets processed."
+    }
+  }
+}
