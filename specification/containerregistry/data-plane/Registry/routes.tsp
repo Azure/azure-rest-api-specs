@@ -555,7 +555,7 @@ interface ContainerRegistryBlob {
    * endpoint is to resolve the current status of a resumable upload.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
-  @route("/{nextBlobUuidLink}")
+  @route("/{+nextBlobUuidLink}")
   @get
   getUploadStatus is Azure.Core.Foundations.Operation<
     {
@@ -563,8 +563,8 @@ interface ContainerRegistryBlob {
        * Link acquired from upload start or previous chunk. Note, do not include initial
        * / (must do substring(1) )
        */
-      @path("nextBlobUuidLink")
-      location: string;
+      @path
+      nextBlobUuidLink: string;
     },
     {
       /** The upload is known and in progress. The last received offset is available in the Range header. */
@@ -582,7 +582,7 @@ interface ContainerRegistryBlob {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/byos" "Existing API"
-  @route("/{nextBlobUuidLink}")
+  @route("/{+nextBlobUuidLink}")
   @patch(#{ implicitOptionality: true })
   uploadChunk is Azure.Core.Foundations.Operation<
     {
@@ -590,8 +590,8 @@ interface ContainerRegistryBlob {
        * Link acquired from upload start or previous chunk. Note, do not include initial
        * / (must do substring(1) )
        */
-      @path("nextBlobUuidLink")
-      location: string;
+      @path
+      nextBlobUuidLink: string;
 
       /**
        * Raw data of blob
@@ -622,7 +622,7 @@ interface ContainerRegistryBlob {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Ensuring existing operation name for backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/byos" "Existing API"
-  @route("/{nextBlobUuidLink}")
+  @route("/{+nextBlobUuidLink}")
   @put
   completeUpload is Azure.Core.Foundations.Operation<
     {
@@ -636,8 +636,8 @@ interface ContainerRegistryBlob {
        * Link acquired from upload start or previous chunk. Note, do not include initial
        * / (must do substring(1) )
        */
-      @path("nextBlobUuidLink")
-      location: string;
+      @path
+      nextBlobUuidLink: string;
 
       /**
        * Optional raw data of blob
@@ -666,7 +666,7 @@ interface ContainerRegistryBlob {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Preserving existing API operation name for backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
-  @route("/{nextBlobUuidLink}")
+  @route("/{+nextBlobUuidLink}")
   @delete
   cancelUpload is Azure.Core.Foundations.Operation<
     {
@@ -674,8 +674,8 @@ interface ContainerRegistryBlob {
        * Link acquired from upload start or previous chunk. Note, do not include initial
        * / (must do substring(1) )
        */
-      @path("nextBlobUuidLink")
-      location: string;
+      @path
+      nextBlobUuidLink: string;
     },
     NoContentResponse
   >;
