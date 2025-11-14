@@ -1,0 +1,24 @@
+parameters:
+  "service-dir":
+    default: "sdk/applicationinsights"
+  "dependencies":
+    default: ""
+
+emit:
+  - "@azure-tools/typespec-autorest"
+
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
+
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "data-plane"
+    emitter-output-dir: "{project-root}/.."
+    output-file: "{azure-resource-provider-folder}/Monitor.Exporters/preview/{version}/swagger.json"
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-monitor-opentelemetry-exporter"
+    package-name: "azure-monitor-opentelemetry-exporter"
+    package-mode: dataplane
+    flavor: azure
+    namespace: azure.monitor.opentelemetry.exporter._generated

@@ -1,26 +1,103 @@
 {
   "swagger": "2.0",
   "info": {
+    "title": "Azure Monitor Exporters",
     "version": "v2.1",
-    "title": "ApplicationInsightsClient",
-    "description": "This document describes the protocol for client requests and responses to the data collection endpoint."
-  },
-  "x-ms-parameterized-host": {
-    "hostTemplate": "{Host}/v2.1",
-    "useSchemePrefix": false,
-    "parameters": [
+    "description": "OpenTelemetry Exporter for Azure Monitor",
+    "x-typespec-generated": [
       {
-        "$ref": "#/parameters/Host"
+        "emitter": "@azure-tools/typespec-autorest"
       }
     ]
   },
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}/{apiVersion}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "description": "Application Insights' Breeze endpoint.",
+        "required": true,
+        "type": "string",
+        "format": "uri",
+        "default": "https://dc.services.visualstudio.com",
+        "x-ms-skip-url-encoding": true
+      },
+      {
+        "name": "apiVersion",
+        "in": "path",
+        "description": "The service API version.",
+        "required": true,
+        "type": "string",
+        "enum": [
+          "v2.1"
+        ],
+        "x-ms-enum": {
+          "name": "Versions",
+          "modelAsString": true,
+          "values": [
+            {
+              "name": "V2_1",
+              "value": "v2.1",
+              "description": "The V2.1 API version."
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "OAuth2Auth": [
+        "https://monitor.azure.com/.default"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://monitor.azure.com/.default": ""
+      }
+    }
+  },
+  "tags": [],
   "paths": {
     "/track": {
       "post": {
+        "operationId": "Track",
         "summary": "Track telemetry events",
-        "description": "This operation sends a sequence of telemetry events that will be monitored by Azure Monitor.",
-        "operationId": "track",
+        "description": "This operation sends a sequence of telemetry events that will be monitored by\nAzure Monitor.",
         "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "content-type   ",
+            "in": "header",
+            "description": "Body Parameter content-type",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "application/json"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "contentType"
+          },
           {
             "name": "body",
             "in": "body",
@@ -29,70 +106,29 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/TelemetryEnvelope"
+                "$ref": "#/definitions/TelemetryItem"
               }
             }
           }
         ],
-        "consumes": [
-          "application/json",
-          "x-json-stream"
-        ],
-        "produces": [
-          "application/json"
-        ],
         "responses": {
           "200": {
-            "description": "All of the telemetry items were accepted and processed.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/TrackResponse"
             }
           },
-          "206": {
-            "description": "Partial success. Some of the telemetry items were accepted and processed.",
+          "default": {
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/TrackResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
-          },
-          "400": {
-            "description": "Bad Request",
-            "x-ms-error-response": true,
-            "schema": {
-              "$ref": "#/definitions/TrackResponse"
-            }
-          },
-          "402": {
-            "description": "Payment Required",
-            "x-ms-error-response": true,
-            "schema": {
-              "$ref": "#/definitions/TrackResponse"
-            }
-          },
-          "429": {
-            "description": "Too Many Requests",
-            "x-ms-error-response": true,
-            "schema": {
-              "$ref": "#/definitions/TrackResponse"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "x-ms-error-response": true,
-            "schema": {
-              "$ref": "#/definitions/TrackResponse"
-            }
-          },
-          "503": {
-            "description": "Service Unavailable",
-            "x-ms-error-response": true,
-            "schema": {
-              "$ref": "#/definitions/TrackResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Track examples": {
-            "$ref": "examples/track.json"
           }
         }
       }
@@ -100,98 +136,393 @@
   },
   "definitions": {
     "AvailabilityData": {
+      "type": "object",
+      "description": "Instances of AvailabilityData represent the result of executing an availability\ntest.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier of a test run. Use it to correlate steps of test run and telemetry\ngenerated by the service.",
+          "maxLength": 512
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the test that these availability results represent.",
+          "maxLength": 1024
+        },
+        "duration": {
+          "type": "string",
+          "description": "Duration in format: DD.HH:MM:SS.MMMMMM. Must be less than 1000 days."
+        },
+        "success": {
+          "type": "boolean",
+          "description": "Success flag."
+        },
+        "runLocation": {
+          "type": "string",
+          "description": "Name of the location where the test was run from.",
+          "maxLength": 1024
+        },
+        "message": {
+          "type": "string",
+          "description": "Diagnostic message for the result.",
+          "maxLength": 8192
+        },
+        "properties": {
+          "type": "object",
+          "description": "Collection of custom properties.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "measurements": {
+          "type": "object",
+          "description": "Collection of custom measurements.",
+          "additionalProperties": {
+            "format": "double",
+            "type": "number"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "duration",
+        "success"
+      ],
       "allOf": [
         {
-          "$ref": "#/definitions/Domain"
-        },
-        {
-          "type": "object",
-          "description": "Instances of AvailabilityData represent the result of executing an availability test.",
-          "required": [
-            "id",
-            "name",
-            "duration",
-            "success"
-          ],
-          "properties": {
-            "id": {
-              "type": "string",
-              "description": "Identifier of a test run. Use it to correlate steps of test run and telemetry generated by the service.",
-              "maxLength": 512
-            },
-            "name": {
-              "type": "string",
-              "description": "Name of the test that these availability results represent.",
-              "maxLength": 1024
-            },
-            "duration": {
-              "type": "string",
-              "description": "Duration in format: DD.HH:MM:SS.MMMMMM. Must be less than 1000 days."
-            },
-            "success": {
-              "type": "boolean",
-              "x-nullable": false,
-              "description": "Success flag."
-            },
-            "runLocation": {
-              "type": "string",
-              "description": "Name of the location where the test was run from.",
-              "maxLength": 1024
-            },
-            "message": {
-              "type": "string",
-              "description": "Diagnostic message for the result.",
-              "maxLength": 8192
-            },
-            "properties": {
-              "type": "object",
-              "description": "Collection of custom properties.",
-              "additionalProperties": {
-                "type": "string",
-                "maxLength": 8192
-              }
-            },
-            "measurements": {
-              "type": "object",
-              "description": "Collection of custom measurements.",
-              "additionalProperties": {
-                "type": "number",
-                "format": "double"
-              }
-            }
-          }
+          "$ref": "#/definitions/EventDomain"
         }
       ]
     },
-    "Base": {
-      "x-ms-client-name": "MonitorBase",
+    "Azure.Core.Foundations.Error": {
       "type": "object",
-      "description": "Data struct to contain only C section with custom fields.",
+      "description": "The error object.",
       "properties": {
-        "baseType": {
+        "code": {
           "type": "string",
-          "description": "Name of item (B section) if any. If telemetry data is derived straight from this, this should be null."
+          "description": "One of a server-defined set of error codes."
         },
-        "baseData": {
-          "$ref": "#/definitions/Domain",
-          "description": "The data payload for the telemetry request"
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          }
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Azure REST API guidelines - https://aka.ms/AzureRestApiGuidelines#handling-errors.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
         }
       }
     },
-    "DataPoint": {
-      "x-ms-client-name": "MetricDataPoint",
+    "ContextTagKeys": {
+      "type": "string",
+      "description": "The context tag keys.",
+      "enum": [
+        "ai.application.ver",
+        "ai.device.id",
+        "ai.device.locale",
+        "ai.device.model",
+        "ai.device.oemName",
+        "ai.device.osVersion",
+        "ai.device.type",
+        "ai.location.ip",
+        "ai.location.country",
+        "ai.location.province",
+        "ai.location.city",
+        "ai.operation.id",
+        "ai.operation.name",
+        "ai.operation.parentId",
+        "ai.operation.syntheticSource",
+        "ai.operation.correlationVector",
+        "ai.session.id",
+        "ai.session.isFirst",
+        "ai.user.accountId",
+        "ai.user.id",
+        "ai.user.authUserId",
+        "ai.cloud.role",
+        "ai.cloud.roleVer",
+        "ai.cloud.roleInstance",
+        "ai.cloud.location",
+        "ai.internal.sdkVersion",
+        "ai.internal.agentVersion",
+        "ai.internal.nodeName"
+      ],
+      "x-ms-enum": {
+        "name": "ContextTagKeys",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AiApplicationVer",
+            "value": "ai.application.ver",
+            "description": "Application version."
+          },
+          {
+            "name": "AiDeviceId",
+            "value": "ai.device.id",
+            "description": "Device ID."
+          },
+          {
+            "name": "AiDeviceLocale",
+            "value": "ai.device.locale",
+            "description": "Device locale."
+          },
+          {
+            "name": "AiDeviceModel",
+            "value": "ai.device.model",
+            "description": "Device model."
+          },
+          {
+            "name": "AiDeviceOemName",
+            "value": "ai.device.oemName",
+            "description": "Device OEM name."
+          },
+          {
+            "name": "AiDeviceOsVersion",
+            "value": "ai.device.osVersion",
+            "description": "Device OS version."
+          },
+          {
+            "name": "AiDeviceType",
+            "value": "ai.device.type",
+            "description": "Device type."
+          },
+          {
+            "name": "AiLocationIp",
+            "value": "ai.location.ip",
+            "description": "Location IP."
+          },
+          {
+            "name": "AiLocationCountry",
+            "value": "ai.location.country",
+            "description": "Location country."
+          },
+          {
+            "name": "AiLocationProvince",
+            "value": "ai.location.province",
+            "description": "Location province."
+          },
+          {
+            "name": "AiLocationCity",
+            "value": "ai.location.city",
+            "description": "Location city."
+          },
+          {
+            "name": "AiOperationId",
+            "value": "ai.operation.id",
+            "description": "Operation ID."
+          },
+          {
+            "name": "AiOperationName",
+            "value": "ai.operation.name",
+            "description": "Operation name."
+          },
+          {
+            "name": "AiOperationParentId",
+            "value": "ai.operation.parentId",
+            "description": "Operation parent ID."
+          },
+          {
+            "name": "AiOperationSyntheticSource",
+            "value": "ai.operation.syntheticSource",
+            "description": "Operation synthetic source."
+          },
+          {
+            "name": "AiOperationCorrelationVector",
+            "value": "ai.operation.correlationVector",
+            "description": "Operation correlation vector."
+          },
+          {
+            "name": "AiSessionId",
+            "value": "ai.session.id",
+            "description": "Session ID."
+          },
+          {
+            "name": "AiSessionIsFirst",
+            "value": "ai.session.isFirst",
+            "description": "If session is the first one."
+          },
+          {
+            "name": "AiUserAccountId",
+            "value": "ai.user.accountId",
+            "description": "User account ID."
+          },
+          {
+            "name": "AiUserId",
+            "value": "ai.user.id",
+            "description": "User ID."
+          },
+          {
+            "name": "AiUserAuthUserId",
+            "value": "ai.user.authUserId",
+            "description": "Authenticated user ID."
+          },
+          {
+            "name": "AiCloudRole",
+            "value": "ai.cloud.role",
+            "description": "Cloud role."
+          },
+          {
+            "name": "AiCloudRoleVer",
+            "value": "ai.cloud.roleVer",
+            "description": "Cloud role version."
+          },
+          {
+            "name": "AiCloudRoleInstance",
+            "value": "ai.cloud.roleInstance",
+            "description": "Cloud role instance."
+          },
+          {
+            "name": "AiCloudLocation",
+            "value": "ai.cloud.location",
+            "description": "Cloud location."
+          },
+          {
+            "name": "AiInternalSdkVersion",
+            "value": "ai.internal.sdkVersion",
+            "description": "Internal SDK version."
+          },
+          {
+            "name": "AiInternalAgentVersion",
+            "value": "ai.internal.agentVersion",
+            "description": "Internal agent version."
+          },
+          {
+            "name": "AiInternalNodeName",
+            "value": "ai.internal.nodeName",
+            "description": "Internal node name."
+          }
+        ]
+      }
+    },
+    "DataPointType": {
+      "type": "string",
+      "description": "Type of the metric data.",
+      "enum": [
+        "Measurement",
+        "Aggregation"
+      ],
+      "x-ms-enum": {
+        "name": "DataPointType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Measurement",
+            "value": "Measurement",
+            "description": "Single measurement."
+          },
+          {
+            "name": "Aggregation",
+            "value": "Aggregation",
+            "description": "Aggregated value."
+          }
+        ]
+      }
+    },
+    "EventDomain": {
+      "type": "object",
+      "description": "The abstract common base of all domains.",
+      "properties": {
+        "ver": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Schema version",
+          "default": 2,
+          "x-ms-client-name": "version"
+        }
+      },
+      "required": [
+        "ver"
+      ],
+      "additionalProperties": {}
+    },
+    "MessageData": {
+      "type": "object",
+      "description": "Instances of Message represent printf-like trace statements that are\ntext-searched. Log4Net, NLog and other text-based log file entries are\ntranslated into instances of this type. The message does not have measurements.",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "Trace message",
+          "maxLength": 32768
+        },
+        "severityLevel": {
+          "$ref": "#/definitions/SeverityLevel",
+          "description": "Trace severity level."
+        },
+        "properties": {
+          "type": "object",
+          "description": "Collection of custom properties.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "measurements": {
+          "type": "object",
+          "description": "Collection of custom measurements.",
+          "additionalProperties": {
+            "format": "double",
+            "type": "number"
+          }
+        }
+      },
+      "required": [
+        "message"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EventDomain"
+        }
+      ]
+    },
+    "MetricDataPoint": {
       "type": "object",
       "description": "Metric data single measurement.",
-      "required": [
-        "name",
-        "value"
-      ],
       "properties": {
         "ns": {
-          "x-ms-client-name": "namespace",
           "type": "string",
           "description": "Namespace of the metric.",
-          "maxLength": 256
+          "maxLength": 256,
+          "x-ms-client-name": "namespace"
         },
         "name": {
           "type": "string",
@@ -199,541 +530,338 @@
           "maxLength": 1024
         },
         "kind": {
-          "x-ms-client-name": "dataPointType",
           "$ref": "#/definitions/DataPointType",
-          "description": "Metric type. Single measurement or the aggregated value."
+          "description": "Metric type. Single measurement or the aggregated value.",
+          "x-ms-client-name": "dataPointType"
         },
         "value": {
           "type": "number",
-          "description": "Single value for measurement. Sum of individual measurements for the aggregation.",
-          "format": "double"
+          "format": "double",
+          "description": "Single value for measurement. Sum of individual measurements for the\naggregation."
         },
         "count": {
-          "type": "number",
+          "type": "integer",
           "format": "int32",
-          "description": "Metric weight of the aggregated metric. Should not be set for a measurement.",
-          "x-nullable": true
+          "description": "Metric weight of the aggregated metric. Should not be set for a measurement."
         },
         "min": {
           "type": "number",
           "format": "double",
-          "description": "Minimum value of the aggregated metric. Should not be set for a measurement.",
-          "x-nullable": true
+          "description": "Minimum value of the aggregated metric. Should not be set for a measurement."
         },
         "max": {
           "type": "number",
           "format": "double",
-          "description": "Maximum value of the aggregated metric. Should not be set for a measurement.",
-          "x-nullable": true
+          "description": "Maximum value of the aggregated metric. Should not be set for a measurement."
         },
         "stdDev": {
           "type": "number",
           "format": "double",
-          "description": "Standard deviation of the aggregated metric. Should not be set for a measurement.",
-          "x-nullable": true
+          "description": "Standard deviation of the aggregated metric. Should not be set for a\nmeasurement."
         }
-      }
-    },
-    "DataPointType": {
-      "type": "string",
-      "description": "Type of the metric data measurement.",
-      "enum": [
-        "Measurement",
-        "Aggregation"
-      ]
-    },
-    "Domain": {
-      "x-ms-client-name": "MonitorDomain",
-      "type": "object",
-      "description": "The abstract common base of all domains.",
+      },
       "required": [
-        "ver"
-      ],
-      "additionalProperties": true,
-      "properties": {
-        "ver": {
-          "x-ms-client-name": "version",
-          "type": "integer",
-          "format": "int32",
-          "description": "Schema version",
-          "default": 2
-        }
-      }
-    },
-    "EventData": {
-      "x-ms-client-name": "TelemetryEventData",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Domain"
-        },
-        {
-          "type": "object",
-          "description": "Instances of Event represent structured event records that can be grouped and searched by their properties. Event data item also creates a metric of event count by name.",
-          "required": [
-            "name"
-          ],
-          "properties": {
-            "name": {
-              "type": "string",
-              "description": "Event name. Keep it low cardinality to allow proper grouping and useful metrics.",
-              "maxLength": 512
-            },
-            "properties": {
-              "type": "object",
-              "description": "Collection of custom properties.",
-              "additionalProperties": {
-                "type": "string",
-                "maxLength": 8192
-              }
-            },
-            "measurements": {
-              "type": "object",
-              "description": "Collection of custom measurements.",
-              "additionalProperties": {
-                "type": "number",
-                "format": "double"
-              }
-            }
-          }
-        }
-      ]
-    },
-    "ExceptionData": {
-      "x-ms-client-name": "TelemetryExceptionData",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Domain"
-        },
-        {
-          "type": "object",
-          "description": "An instance of Exception represents a handled or unhandled exception that occurred during execution of the monitored application.",
-          "required": [
-            "exceptions"
-          ],
-          "properties": {
-            "exceptions": {
-              "type": "array",
-              "description": "Exception chain - list of inner exceptions.",
-              "items": {
-                "$ref": "#/definitions/ExceptionDetails"
-              }
-            },
-            "severityLevel": {
-              "x-nullable": true,
-              "description": "Severity level. Mostly used to indicate exception severity level when it is reported by logging library.",
-              "$ref": "#/definitions/SeverityLevel"
-            },
-            "problemId": {
-              "type": "string",
-              "description": "Identifier of where the exception was thrown in code. Used for exceptions grouping. Typically a combination of exception type and a function from the call stack.",
-              "maxLength": 1024
-            },
-            "properties": {
-              "type": "object",
-              "description": "Collection of custom properties.",
-              "additionalProperties": {
-                "type": "string",
-                "maxLength": 8192
-              }
-            },
-            "measurements": {
-              "type": "object",
-              "description": "Collection of custom measurements.",
-              "additionalProperties": {
-                "type": "number",
-                "format": "double"
-              }
-            }
-          }
-        }
-      ]
-    },
-    "ExceptionDetails": {
-      "x-ms-client-name": "TelemetryExceptionDetails",
-      "type": "object",
-      "description": "Exception details of the exception in a chain.",
-      "required": [
-        "message"
-      ],
-      "properties": {
-        "id": {
-          "type": "number",
-          "format": "int32",
-          "description": "In case exception is nested (outer exception contains inner one), the id and outerId properties are used to represent the nesting."
-        },
-        "outerId": {
-          "type": "number",
-          "format": "int32",
-          "description": "The value of outerId is a reference to an element in ExceptionDetails that represents the outer exception"
-        },
-        "typeName": {
-          "type": "string",
-          "description": "Exception type name.",
-          "maxLength": 1024
-        },
-        "message": {
-          "type": "string",
-          "description": "Exception message.",
-          "maxLength": 32768
-        },
-        "hasFullStack": {
-          "type": "boolean",
-          "default": true,
-          "description": "Indicates if full exception stack is provided in the exception. The stack may be trimmed, such as in the case of a StackOverflow exception."
-        },
-        "stack": {
-          "type": "string",
-          "description": "Text describing the stack. Either stack or parsedStack should have a value.",
-          "maxLength": 32768
-        },
-        "parsedStack": {
-          "type": "array",
-          "description": "List of stack frames. Either stack or parsedStack should have a value.",
-          "items": {
-            "$ref": "#/definitions/StackFrame"
-          }
-        }
-      }
-    },
-    "MessageData": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/Domain"
-        },
-        {
-          "type": "object",
-          "description": "Instances of Message represent printf-like trace statements that are text-searched. Log4Net, NLog and other text-based log file entries are translated into instances of this type. The message does not have measurements.",
-          "required": [
-            "message"
-          ],
-          "properties": {
-            "message": {
-              "type": "string",
-              "description": "Trace message",
-              "maxLength": 32768
-            },
-            "severityLevel": {
-              "$ref": "#/definitions/SeverityLevel",
-              "description": "Trace severity level."
-            },
-            "properties": {
-              "type": "object",
-              "description": "Collection of custom properties.",
-              "additionalProperties": {
-                "type": "string",
-                "maxLength": 8192
-              }
-            },
-            "measurements": {
-              "type": "object",
-              "description": "Collection of custom measurements.",
-              "additionalProperties": {
-                "type": "number",
-                "format": "double"
-              }
-            }
-          }
-        }
+        "name",
+        "value"
       ]
     },
     "MetricsData": {
+      "type": "object",
+      "description": "An instance of the Metric item is a list of measurements (single data points)\nand/or aggregations.",
+      "properties": {
+        "metrics": {
+          "type": "array",
+          "description": "List of metrics. Only one metric in the list is currently supported by\nApplication Insights storage. If multiple data points were sent only the first\none will be used.",
+          "items": {
+            "$ref": "#/definitions/MetricDataPoint"
+          }
+        },
+        "properties": {
+          "type": "object",
+          "description": "Collection of custom properties.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "metrics"
+      ],
       "allOf": [
         {
-          "$ref": "#/definitions/Domain"
-        },
-        {
-          "type": "object",
-          "description": "An instance of the Metric item is a list of measurements (single data points) and/or aggregations.",
-          "required": [
-            "metrics"
-          ],
-          "properties": {
-            "metrics": {
-              "type": "array",
-              "description": "List of metrics. Only one metric in the list is currently supported by Application Insights storage. If multiple data points were sent only the first one will be used.",
-              "items": {
-                "$ref": "#/definitions/DataPoint"
-              }
-            },
-            "properties": {
-              "type": "object",
-              "description": "Collection of custom properties.",
-              "additionalProperties": {
-                "type": "string",
-                "maxLength": 8192
-              }
-            }
-          }
+          "$ref": "#/definitions/EventDomain"
         }
       ]
     },
+    "MonitorBase": {
+      "type": "object",
+      "description": "Data struct to contain only C section with custom fields.",
+      "properties": {
+        "baseType": {
+          "type": "string",
+          "description": "Name of item (B section) if any. If telemetry data is derived straight from\nthis, this should be null."
+        },
+        "baseData": {
+          "$ref": "#/definitions/EventDomain",
+          "description": "The data payload for the telemetry request"
+        }
+      }
+    },
     "PageViewData": {
+      "type": "object",
+      "description": "An instance of PageView represents a generic action on a page like a button\nclick. It is also the base type for PageView.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier of a page view instance. Used for correlation between page view and\nother telemetry items.",
+          "maxLength": 512
+        },
+        "name": {
+          "type": "string",
+          "description": "Event name. Keep it low cardinality to allow proper grouping and useful metrics.",
+          "maxLength": 1024
+        },
+        "url": {
+          "type": "string",
+          "description": "Request URL with all query string parameters",
+          "maxLength": 2048
+        },
+        "duration": {
+          "type": "string",
+          "description": "Request duration in format: DD.HH:MM:SS.MMMMMM. For a page view (PageViewData),\nthis is the duration. For a page view with performance information\n(PageViewPerfData), this is the page load time. Must be less than 1000 days."
+        },
+        "referredUri": {
+          "type": "string",
+          "description": "Fully qualified page URI or URL of the referring page; if unknown, leave blank",
+          "maxLength": 2048
+        },
+        "properties": {
+          "type": "object",
+          "description": "Collection of custom properties.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "measurements": {
+          "type": "object",
+          "description": "Collection of custom measurements.",
+          "additionalProperties": {
+            "format": "double",
+            "type": "number"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ],
       "allOf": [
         {
-          "$ref": "#/definitions/Domain"
-        },
-        {
-          "type": "object",
-          "description": "An instance of PageView represents a generic action on a page like a button click. It is also the base type for PageView.",
-          "required": [
-            "id",
-            "name"
-          ],
-          "properties": {
-            "id": {
-              "type": "string",
-              "description": "Identifier of a page view instance. Used for correlation between page view and other telemetry items.",
-              "maxLength": 512
-            },
-            "name": {
-              "type": "string",
-              "description": "Event name. Keep it low cardinality to allow proper grouping and useful metrics.",
-              "maxLength": 1024
-            },
-            "url": {
-              "type": "string",
-              "description": "Request URL with all query string parameters",
-              "maxLength": 2048
-            },
-            "duration": {
-              "type": "string",
-              "description": "Request duration in format: DD.HH:MM:SS.MMMMMM. For a page view (PageViewData), this is the duration. For a page view with performance information (PageViewPerfData), this is the page load time. Must be less than 1000 days."
-            },
-            "referredUri": {
-              "type": "string",
-              "description": "Fully qualified page URI or URL of the referring page; if unknown, leave blank",
-              "maxLength": 2048
-            },
-            "properties": {
-              "type": "object",
-              "description": "Collection of custom properties.",
-              "additionalProperties": {
-                "type": "string",
-                "maxLength": 8192
-              }
-            },
-            "measurements": {
-              "type": "object",
-              "description": "Collection of custom measurements.",
-              "additionalProperties": {
-                "type": "number",
-                "format": "double"
-              }
-            }
-          }
+          "$ref": "#/definitions/EventDomain"
         }
       ]
     },
     "PageViewPerfData": {
+      "type": "object",
+      "description": "An instance of PageViewPerf represents: a page view with no performance data, a\npage view with performance data, or just the performance data of an earlier\npage request.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier of a page view instance. Used for correlation between page view and\nother telemetry items.",
+          "maxLength": 512
+        },
+        "name": {
+          "type": "string",
+          "description": "Event name. Keep it low cardinality to allow proper grouping and useful metrics.",
+          "maxLength": 1024
+        },
+        "url": {
+          "type": "string",
+          "description": "Request URL with all query string parameters",
+          "maxLength": 2048
+        },
+        "duration": {
+          "type": "string",
+          "description": "Request duration in format: DD.HH:MM:SS.MMMMMM. For a page view (PageViewData),\nthis is the duration. For a page view with performance information\n(PageViewPerfData), this is the page load time. Must be less than 1000 days."
+        },
+        "perfTotal": {
+          "type": "string",
+          "description": "Performance total in TimeSpan 'G' (general long) format: d:hh:mm:ss.fffffff"
+        },
+        "networkConnect": {
+          "type": "string",
+          "description": "Network connection time in TimeSpan 'G' (general long) format:\nd:hh:mm:ss.fffffff"
+        },
+        "sentRequest": {
+          "type": "string",
+          "description": "Sent request time in TimeSpan 'G' (general long) format: d:hh:mm:ss.fffffff"
+        },
+        "receivedResponse": {
+          "type": "string",
+          "description": "Received response time in TimeSpan 'G' (general long) format: d:hh:mm:ss.fffffff"
+        },
+        "domProcessing": {
+          "type": "string",
+          "description": "DOM processing time in TimeSpan 'G' (general long) format: d:hh:mm:ss.fffffff"
+        },
+        "properties": {
+          "type": "object",
+          "description": "Collection of custom properties.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "measurements": {
+          "type": "object",
+          "description": "Collection of custom measurements.",
+          "additionalProperties": {
+            "format": "double",
+            "type": "number"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ],
       "allOf": [
         {
-          "$ref": "#/definitions/Domain"
-        },
-        {
-          "type": "object",
-          "description": "An instance of PageViewPerf represents: a page view with no performance data, a page view with performance data, or just the performance data of an earlier page request.",
-          "required": [
-            "id",
-            "name"
-          ],
-          "properties": {
-            "id": {
-              "type": "string",
-              "description": "Identifier of a page view instance. Used for correlation between page view and other telemetry items.",
-              "maxLength": 512
-            },
-            "name": {
-              "type": "string",
-              "description": "Event name. Keep it low cardinality to allow proper grouping and useful metrics.",
-              "maxLength": 1024
-            },
-            "url": {
-              "type": "string",
-              "description": "Request URL with all query string parameters",
-              "maxLength": 2048
-            },
-            "duration": {
-              "type": "string",
-              "description": "Request duration in format: DD.HH:MM:SS.MMMMMM. For a page view (PageViewData), this is the duration. For a page view with performance information (PageViewPerfData), this is the page load time. Must be less than 1000 days."
-            },
-            "perfTotal": {
-              "type": "string",
-              "description": "Performance total in TimeSpan 'G' (general long) format: d:hh:mm:ss.fffffff"
-            },
-            "networkConnect": {
-              "type": "string",
-              "description": "Network connection time in TimeSpan 'G' (general long) format: d:hh:mm:ss.fffffff"
-            },
-            "sentRequest": {
-              "type": "string",
-              "description": "Sent request time in TimeSpan 'G' (general long) format: d:hh:mm:ss.fffffff"
-            },
-            "receivedResponse": {
-              "type": "string",
-              "description": "Received response time in TimeSpan 'G' (general long) format: d:hh:mm:ss.fffffff"
-            },
-            "domProcessing": {
-              "type": "string",
-              "description": "DOM processing time in TimeSpan 'G' (general long) format: d:hh:mm:ss.fffffff"
-            },
-            "properties": {
-              "type": "object",
-              "description": "Collection of custom properties.",
-              "additionalProperties": {
-                "type": "string",
-                "maxLength": 8192
-              }
-            },
-            "measurements": {
-              "type": "object",
-              "description": "Collection of custom measurements.",
-              "additionalProperties": {
-                "type": "number",
-                "format": "double"
-              }
-            }
-          }
+          "$ref": "#/definitions/EventDomain"
         }
       ]
     },
     "RemoteDependencyData": {
+      "type": "object",
+      "description": "An instance of Remote Dependency represents an interaction of the monitored\ncomponent with a remote component/service like SQL or an HTTP endpoint.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier of a dependency call instance. Used for correlation with the request\ntelemetry item corresponding to this dependency call.",
+          "maxLength": 512
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the command initiated with this dependency call. Low cardinality value.\nExamples are stored procedure name and URL path template.",
+          "maxLength": 1024
+        },
+        "resultCode": {
+          "type": "string",
+          "description": "Result code of a dependency call. Examples are SQL error code and HTTP status\ncode.",
+          "maxLength": 1024
+        },
+        "data": {
+          "type": "string",
+          "description": "Command initiated by this dependency call. Examples are SQL statement and HTTP\nURL with all query parameters.",
+          "maxLength": 8192
+        },
+        "type": {
+          "type": "string",
+          "description": "Dependency type name. Very low cardinality value for logical grouping of\ndependencies and interpretation of other fields like commandName and\nresultCode. Examples are SQL, Azure table, and HTTP.",
+          "maxLength": 1024
+        },
+        "target": {
+          "type": "string",
+          "description": "Target site of a dependency call. Examples are server name, host address.",
+          "maxLength": 1024
+        },
+        "duration": {
+          "type": "string",
+          "description": "Request duration in format: DD.HH:MM:SS.MMMMMM. Must be less than 1000 days."
+        },
+        "success": {
+          "type": "boolean",
+          "description": "Indication of successful or unsuccessful call.",
+          "default": true
+        },
+        "properties": {
+          "type": "object",
+          "description": "Collection of custom properties.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "measurements": {
+          "type": "object",
+          "description": "Collection of custom measurements.",
+          "additionalProperties": {
+            "format": "double",
+            "type": "number"
+          }
+        }
+      },
+      "required": [
+        "name",
+        "duration"
+      ],
       "allOf": [
         {
-          "$ref": "#/definitions/Domain"
-        },
-        {
-          "type": "object",
-          "description": "An instance of Remote Dependency represents an interaction of the monitored component with a remote component/service like SQL or an HTTP endpoint.",
-          "required": [
-            "name",
-            "duration"
-          ],
-          "properties": {
-            "id": {
-              "type": "string",
-              "description": "Identifier of a dependency call instance. Used for correlation with the request telemetry item corresponding to this dependency call.",
-              "maxLength": 512
-            },
-            "name": {
-              "type": "string",
-              "description": "Name of the command initiated with this dependency call. Low cardinality value. Examples are stored procedure name and URL path template.",
-              "maxLength": 1024
-            },
-            "resultCode": {
-              "type": "string",
-              "description": "Result code of a dependency call. Examples are SQL error code and HTTP status code.",
-              "maxLength": 1024
-            },
-            "data": {
-              "type": "string",
-              "description": "Command initiated by this dependency call. Examples are SQL statement and HTTP URL with all query parameters.",
-              "maxLength": 8192
-            },
-            "type": {
-              "type": "string",
-              "description": "Dependency type name. Very low cardinality value for logical grouping of dependencies and interpretation of other fields like commandName and resultCode. Examples are SQL, Azure table, and HTTP.",
-              "maxLength": 1024
-            },
-            "target": {
-              "type": "string",
-              "description": "Target site of a dependency call. Examples are server name, host address.",
-              "maxLength": 1024
-            },
-            "duration": {
-              "type": "string",
-              "description": "Request duration in format: DD.HH:MM:SS.MMMMMM. Must be less than 1000 days."
-            },
-            "success": {
-              "type": "boolean",
-              "description": "Indication of successful or unsuccessful call.",
-              "default": true
-            },
-            "properties": {
-              "type": "object",
-              "description": "Collection of custom properties.",
-              "additionalProperties": {
-                "type": "string",
-                "maxLength": 8192
-              }
-            },
-            "measurements": {
-              "type": "object",
-              "description": "Collection of custom measurements.",
-              "additionalProperties": {
-                "type": "number",
-                "format": "double"
-              }
-            }
-          }
+          "$ref": "#/definitions/EventDomain"
         }
       ]
     },
     "RequestData": {
+      "type": "object",
+      "description": "An instance of Request represents completion of an external request to the\napplication to do work and contains a summary of that request execution and the\nresults.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier of a request call instance. Used for correlation between request and\nother telemetry items.",
+          "maxLength": 512
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the request. Represents code path taken to process request. Low\ncardinality value to allow better grouping of requests. For HTTP requests it\nrepresents the HTTP method and URL path template like 'GET /values/{id}'.",
+          "maxLength": 1024
+        },
+        "duration": {
+          "type": "string",
+          "description": "Request duration in format: DD.HH:MM:SS.MMMMMM. Must be less than 1000 days."
+        },
+        "success": {
+          "type": "boolean",
+          "description": "Indication of successful or unsuccessful call.",
+          "default": true
+        },
+        "responseCode": {
+          "type": "string",
+          "description": "Result of a request execution. HTTP status code for HTTP requests.",
+          "maxLength": 1024
+        },
+        "source": {
+          "type": "string",
+          "description": "Source of the request. Examples are the instrumentation key of the caller or\nthe ip address of the caller.",
+          "maxLength": 1024
+        },
+        "url": {
+          "type": "string",
+          "description": "Request URL with all query string parameters.",
+          "maxLength": 2048
+        },
+        "properties": {
+          "type": "object",
+          "description": "Collection of custom properties.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "measurements": {
+          "type": "object",
+          "description": "Collection of custom measurements.",
+          "additionalProperties": {
+            "format": "double",
+            "type": "number"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "duration",
+        "success",
+        "responseCode"
+      ],
       "allOf": [
         {
-          "$ref": "#/definitions/Domain"
-        },
-        {
-          "type": "object",
-          "description": "An instance of Request represents completion of an external request to the application to do work and contains a summary of that request execution and the results.",
-          "required": [
-            "id",
-            "duration",
-            "responseCode",
-            "success"
-          ],
-          "properties": {
-            "id": {
-              "type": "string",
-              "description": "Identifier of a request call instance. Used for correlation between request and other telemetry items.",
-              "maxLength": 512
-            },
-            "name": {
-              "type": "string",
-              "description": "Name of the request. Represents code path taken to process request. Low cardinality value to allow better grouping of requests. For HTTP requests it represents the HTTP method and URL path template like 'GET /values/{id}'.",
-              "maxLength": 1024
-            },
-            "duration": {
-              "type": "string",
-              "description": "Request duration in format: DD.HH:MM:SS.MMMMMM. Must be less than 1000 days."
-            },
-            "success": {
-              "type": "boolean",
-              "description": "Indication of successful or unsuccessful call.",
-              "default": true
-            },
-            "responseCode": {
-              "type": "string",
-              "description": "Result of a request execution. HTTP status code for HTTP requests.",
-              "maxLength": 1024
-            },
-            "source": {
-              "type": "string",
-              "description": "Source of the request. Examples are the instrumentation key of the caller or the ip address of the caller.",
-              "maxLength": 1024
-            },
-            "url": {
-              "type": "string",
-              "description": "Request URL with all query string parameters.",
-              "maxLength": 2048
-            },
-            "properties": {
-              "type": "object",
-              "description": "Collection of custom properties.",
-              "additionalProperties": {
-                "type": "string",
-                "maxLength": 8192
-              }
-            },
-            "measurements": {
-              "type": "object",
-              "description": "Collection of custom measurements.",
-              "additionalProperties": {
-                "type": "number",
-                "format": "double"
-              }
-            }
-          }
+          "$ref": "#/definitions/EventDomain"
         }
       ]
     },
@@ -746,20 +874,47 @@
         "Warning",
         "Error",
         "Critical"
-      ]
+      ],
+      "x-ms-enum": {
+        "name": "SeverityLevel",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Verbose",
+            "value": "Verbose",
+            "description": "Verbose level."
+          },
+          {
+            "name": "Information",
+            "value": "Information",
+            "description": "Information level."
+          },
+          {
+            "name": "Warning",
+            "value": "Warning",
+            "description": "Warning level."
+          },
+          {
+            "name": "Error",
+            "value": "Error",
+            "description": "Error level."
+          },
+          {
+            "name": "Critical",
+            "value": "Critical",
+            "description": "Critical level."
+          }
+        ]
+      }
     },
     "StackFrame": {
       "type": "object",
       "description": "Stack frame information.",
-      "required": [
-        "level",
-        "method"
-      ],
       "properties": {
         "level": {
-          "type": "number",
+          "type": "integer",
           "format": "int32",
-          "description": ""
+          "description": "Level in the stack."
         },
         "method": {
           "type": "string",
@@ -777,47 +932,27 @@
           "maxLength": 1024
         },
         "line": {
-          "type": "number",
+          "type": "integer",
           "format": "int32",
           "description": "Line number of the code implementation."
         }
-      }
+      },
+      "required": [
+        "level",
+        "method"
+      ]
     },
-    "TrackResponse": {
-      "description": "Response containing the status of each telemetry item.",
+    "TelemetryErrorDetails": {
       "type": "object",
-      "properties": {
-        "itemsReceived": {
-          "type": "number",
-          "format": "int32",
-          "description": "The number of items received."
-        },
-        "itemsAccepted": {
-          "type": "number",
-          "format": "int32",
-          "description": "The number of items accepted."
-        },
-        "errors": {
-          "type": "array",
-          "description": "An array of error detail objects.",
-          "items": {
-            "$ref": "#/definitions/ErrorDetails"
-          }
-        }
-      }
-    },
-    "ErrorDetails": {
-      "x-ms-client-name": "TelemetryErrorDetails",
       "description": "The error details",
-      "type": "object",
       "properties": {
         "index": {
-          "type": "number",
+          "type": "integer",
           "format": "int32",
           "description": "The index in the original payload of the item."
         },
         "statusCode": {
-          "type": "number",
+          "type": "integer",
           "format": "int32",
           "description": "The item specific [HTTP Response status code](#Response Status Codes)."
         },
@@ -827,21 +962,141 @@
         }
       }
     },
-    "TelemetryEnvelope": {
-      "x-ms-client-name": "TelemetryItem",
-      "description": "System variables for a telemetry item.",
+    "TelemetryEventData": {
       "type": "object",
+      "description": "Instances of Event represent structured event records that can be grouped and\nsearched by their properties. Event data item also creates a metric of event\ncount by name.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Event name. Keep it low cardinality to allow proper grouping and useful metrics.",
+          "maxLength": 512
+        },
+        "properties": {
+          "type": "object",
+          "description": "Collection of custom properties.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "measurements": {
+          "type": "object",
+          "description": "Collection of custom measurements.",
+          "additionalProperties": {
+            "format": "double",
+            "type": "number"
+          }
+        }
+      },
       "required": [
-        "name",
-        "time"
+        "name"
       ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EventDomain"
+        }
+      ]
+    },
+    "TelemetryExceptionData": {
+      "type": "object",
+      "description": "An instance of Exception represents a handled or unhandled exception that\noccurred during execution of the monitored application.",
+      "properties": {
+        "exceptions": {
+          "type": "array",
+          "description": "Exception chain - list of inner exceptions.",
+          "items": {
+            "$ref": "#/definitions/TelemetryExceptionDetails"
+          }
+        },
+        "severityLevel": {
+          "$ref": "#/definitions/SeverityLevel",
+          "description": "Severity level. Mostly used to indicate exception severity level when it is\nreported by logging library."
+        },
+        "problemId": {
+          "type": "string",
+          "description": "Identifier of where the exception was thrown in code. Used for exceptions\ngrouping. Typically a combination of exception type and a function from the\ncall stack.",
+          "maxLength": 1024
+        },
+        "properties": {
+          "type": "object",
+          "description": "Collection of custom properties.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "measurements": {
+          "type": "object",
+          "description": "Collection of custom measurements.",
+          "additionalProperties": {
+            "format": "double",
+            "type": "number"
+          }
+        }
+      },
+      "required": [
+        "exceptions"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EventDomain"
+        }
+      ]
+    },
+    "TelemetryExceptionDetails": {
+      "type": "object",
+      "description": "Exception details of the exception in a chain.",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "In case exception is nested (outer exception contains inner one), the id and\nouterId properties are used to represent the nesting."
+        },
+        "outerId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The value of outerId is a reference to an element in ExceptionDetails that\nrepresents the outer exception"
+        },
+        "typeName": {
+          "type": "string",
+          "description": "Exception type name.",
+          "maxLength": 1024
+        },
+        "message": {
+          "type": "string",
+          "description": "Exception message.",
+          "maxLength": 32768
+        },
+        "hasFullStack": {
+          "type": "boolean",
+          "description": "Indicates if full exception stack is provided in the exception. The stack may\nbe trimmed, such as in the case of a StackOverflow exception.",
+          "default": true
+        },
+        "stack": {
+          "type": "string",
+          "description": "Text describing the stack. Either stack or parsedStack should have a value.",
+          "maxLength": 32768
+        },
+        "parsedStack": {
+          "type": "array",
+          "description": "List of stack frames. Either stack or parsedStack should have a value.",
+          "items": {
+            "$ref": "#/definitions/StackFrame"
+          }
+        }
+      },
+      "required": [
+        "message"
+      ]
+    },
+    "TelemetryItem": {
+      "type": "object",
+      "description": "System variables for a telemetry item.",
       "properties": {
         "ver": {
-          "type": "number",
-          "x-ms-client-name": "version",
+          "type": "integer",
           "format": "int32",
+          "description": "Envelope version. For internal use only. By assigning this the default, it will\nnot be serialized within the payload unless changed to a value other than #1.",
           "default": 1,
-          "description": "Envelope version. For internal use only. By assigning this the default, it will not be serialized within the payload unless changed to a value other than #1."
+          "x-ms-client-name": "version"
         },
         "name": {
           "type": "string",
@@ -850,173 +1105,76 @@
         "time": {
           "type": "string",
           "format": "date-time",
-          "description": "Event date time when telemetry item was created. This is the wall clock time on the client when the event was generated. There is no guarantee that the client's time is accurate. This field must be formatted in UTC ISO 8601 format, with a trailing 'Z' character, as described publicly on https://en.wikipedia.org/wiki/ISO_8601#UTC. Note: the number of decimal seconds digits provided are variable (and unspecified). Consumers should handle this, i.e. managed code consumers should not use format 'O' for parsing as it specifies a fixed length. Example: 2009-06-15T13:45:30.0000000Z."
+          "description": "Event date time when telemetry item was created. This is the wall clock time on\nthe client when the event was generated. There is no guarantee that the\nclient's time is accurate. This field must be formatted in UTC ISO 8601 format,\nwith a trailing 'Z' character, as described publicly on\nhttps://en.wikipedia.org/wiki/ISO_8601#UTC. Note: the number of decimal seconds\ndigits provided are variable (and unspecified). Consumers should handle this,\ni.e. managed code consumers should not use format 'O' for parsing as it\nspecifies a fixed length. Example: 2009-06-15T13:45:30.0000000Z."
         },
         "sampleRate": {
           "type": "number",
           "format": "float",
-          "default": 100.0,
-          "description": "Sampling rate used in application. This telemetry item represents 100 / sampleRate actual telemetry items."
+          "description": "Sampling rate used in application. This telemetry item represents 100 /\nsampleRate actual telemetry items.",
+          "default": 100
         },
         "seq": {
           "type": "string",
-          "x-ms-client-name": "sequence",
+          "description": "Sequence field used to track absolute order of uploaded events.",
           "maxLength": 64,
-          "description": "Sequence field used to track absolute order of uploaded events."
+          "x-ms-client-name": "sequence"
         },
         "iKey": {
           "type": "string",
-          "x-ms-client-name": "instrumentationKey",
-          "description": "The instrumentation key of the Application Insights resource."
+          "description": "The instrumentation key of the Application Insights resource.",
+          "x-ms-client-name": "instrumentationKey"
         },
         "tags": {
           "type": "object",
-          "description": "Key/value collection of context properties. See ContextTagKeys for information on available properties.",
+          "description": "Key/value collection of context properties. See ContextTagKeys for information\non available properties.",
           "additionalProperties": {
             "type": "string"
           }
         },
         "data": {
-          "$ref": "#/definitions/Base",
+          "$ref": "#/definitions/MonitorBase",
           "description": "Telemetry data item."
         }
-      }
+      },
+      "required": [
+        "name",
+        "time"
+      ]
     },
-    "ContextTagKeys": {
-      "type": "string",
-      "description": "The context tag keys.",
-      "enum": [
-        "ApplicationVersion",
-        "DeviceId",
-        "DeviceLocale",
-        "DeviceModel",
-        "DeviceOEMName",
-        "DeviceOSVersion",
-        "DeviceType",
-        "LocationIp",
-        "LocationCountry",
-        "LocationProvince",
-        "LocationCity",
-        "OperationId",
-        "OperationName",
-        "OperationParentId",
-        "OperationSyntheticSource",
-        "OperationCorrelationVector",
-        "SessionId",
-        "SessionIsFirst",
-        "UserAccountId",
-        "UserId",
-        "UserAuthUserId",
-        "CloudRole",
-        "CloudRoleVer",
-        "CloudRoleInstance",
-        "CloudLocation",
-        "InternalSdkVersion",
-        "InternalAgentVersion",
-        "InternalNodeName  "
-      ],
-      "x-ms-enum": {
-        "name": "ContextTagKeys",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "ai.application.ver"
-          },
-          {
-            "value": "ai.device.id"
-          },
-          {
-            "value": "ai.device.locale"
-          },
-          {
-            "value": "ai.device.model"
-          },
-          {
-            "value": "ai.device.oemName"
-          },
-          {
-            "value": "ai.device.osVersion"
-          },
-          {
-            "value": "ai.device.type"
-          },
-          {
-            "value": "ai.location.ip"
-          },
-          {
-            "value": "ai.location.country"
-          },
-          {
-            "value": "ai.location.province"
-          },
-          {
-            "value": "ai.location.city"
-          },
-          {
-            "value": "ai.operation.id"
-          },
-          {
-            "value": "ai.operation.name"
-          },
-          {
-            "value": "ai.operation.parentId"
-          },
-          {
-            "value": "ai.operation.syntheticSource"
-          },
-          {
-            "value": "ai.operation.correlationVector"
-          },
-          {
-            "value": "ai.session.id"
-          },
-          {
-            "value": "ai.session.isFirst"
-          },
-          {
-            "value": "ai.user.accountId"
-          },
-          {
-            "value": "ai.user.id"
-          },
-          {
-            "value": "ai.user.authUserId"
-          },
-          {
-            "value": "ai.cloud.role"
-          },
-          {
-            "value": "ai.cloud.roleVer"
-          },
-          {
-            "value": "ai.cloud.roleInstance"
-          },
-          {
-            "value": "ai.cloud.location"
-          },
-          {
-            "value": "ai.internal.sdkVersion"
-          },
-          {
-            "value": "ai.internal.agentVersion"
-          },
-          {
-            "value": "ai.internal.nodeName"
+    "TrackResponse": {
+      "type": "object",
+      "description": "Response containing the status of each telemetry item.",
+      "properties": {
+        "itemsReceived": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of items received."
+        },
+        "itemsAccepted": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of items accepted."
+        },
+        "errors": {
+          "type": "array",
+          "description": "An array of error detail objects.",
+          "items": {
+            "$ref": "#/definitions/TelemetryErrorDetails"
           }
-        ]
+        }
       }
     }
   },
   "parameters": {
-    "Host": {
-      "name": "Host",
-      "description": "Breeze endpoint: https://dc.services.visualstudio.com",
-      "x-ms-parameter-location": "client",
-      "default": "https://dc.services.visualstudio.com",
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
       "required": true,
       "type": "string",
-      "in": "path",
-      "x-ms-skip-url-encoding": true
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
     }
   }
 }
