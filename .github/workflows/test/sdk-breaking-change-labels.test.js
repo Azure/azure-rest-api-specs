@@ -63,15 +63,19 @@ describe("sdk-breaking-change-labels", () => {
 
       // Second fetch - artifact content
       const language = "azure-sdk-for-js";
+      /** @type {import("../../shared/src/sdk-types.js").SpecGenSdkArtifactInfo} */
+      const artifactInfo = {
+        apiViewRequestData: [],
+        headSha: "abc123",
+        isSpecGenSdkCheckRequired: true,
+        labelAction: true,
+        language,
+        prNumber: "123",
+        result: "test result",
+      };
       const mockContentResponse = {
         ok: true,
-        text: vi.fn().mockResolvedValue(
-          JSON.stringify({
-            labelAction: true,
-            language,
-            prNumber: "123",
-          }),
-        ),
+        text: vi.fn().mockResolvedValue(JSON.stringify(artifactInfo)),
       };
 
       // Setup fetch to return different responses for each call
@@ -92,6 +96,7 @@ describe("sdk-breaking-change-labels", () => {
 
       // Verify result
       expect(result).toEqual({
+        headSha: "abc123",
         labelName: sdkLabels[language].breakingChange,
         labelAction: LabelAction.Add,
         issueNumber: 123,
@@ -119,15 +124,19 @@ describe("sdk-breaking-change-labels", () => {
       };
 
       const language = "azure-sdk-for-js";
+      /** @type {import("../../shared/src/sdk-types.js").SpecGenSdkArtifactInfo} */
+      const artifactInfo = {
+        apiViewRequestData: [],
+        headSha: "abc123",
+        isSpecGenSdkCheckRequired: true,
+        labelAction: false,
+        language,
+        prNumber: "123",
+        result: "test result",
+      };
       const mockContentResponse = {
         ok: true,
-        text: vi.fn().mockResolvedValue(
-          JSON.stringify({
-            labelAction: false,
-            language,
-            prNumber: "123",
-          }),
-        ),
+        text: vi.fn().mockResolvedValue(JSON.stringify(artifactInfo)),
       };
 
       // Setup fetch to return different responses for each call
@@ -148,6 +157,7 @@ describe("sdk-breaking-change-labels", () => {
 
       // Verify result has Remove action
       expect(result).toEqual({
+        headSha: "abc123",
         labelName: sdkLabels[language].breakingChange,
         labelAction: LabelAction.Remove,
         issueNumber: 123,
@@ -175,15 +185,19 @@ describe("sdk-breaking-change-labels", () => {
       };
 
       const language = "azure-sdk-for-java";
+      /** @type {import("../../shared/src/sdk-types.js").SpecGenSdkArtifactInfo} */
+      const artifactInfo = {
+        apiViewRequestData: [],
+        headSha: "abc123",
+        isSpecGenSdkCheckRequired: true,
+        labelAction: false,
+        language,
+        prNumber: "123",
+        result: "test result",
+      };
       const mockContentResponse = {
         ok: true,
-        text: vi.fn().mockResolvedValue(
-          JSON.stringify({
-            labelAction: false,
-            language,
-            prNumber: "123",
-          }),
-        ),
+        text: vi.fn().mockResolvedValue(JSON.stringify(artifactInfo)),
       };
 
       // Setup fetch to return different responses for each call
@@ -204,6 +218,7 @@ describe("sdk-breaking-change-labels", () => {
 
       // Verify result has none action
       expect(result).toEqual({
+        headSha: "abc123",
         labelName: sdkLabels[language].breakingChange,
         labelAction: LabelAction.None,
         issueNumber: 123,
