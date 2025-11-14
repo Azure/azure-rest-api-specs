@@ -293,7 +293,7 @@ model TargetConfiguration {
 }
 
 @doc("Mapping definition for schema or database migration.")
-model MappingDefinition {
+model DatabaseMapping {
   @doc("Scope of the mapping")
   mappingScope: MappingScope;
 
@@ -444,7 +444,7 @@ model DatabaseMigrationProperties {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "No identifier properties for this array"
   @doc("List of mapping definitions")
-  mappingDefinitions: MappingDefinition[];
+  mappingDefinitions: DatabaseMapping[];
 
   @doc("Compute profile")
   computeProfile: ComputeProfile;
@@ -524,7 +524,7 @@ model ConnectivityTestProperties {
 }
 
 @doc("Response for testing connectivity.")
-model TestConnectivityResponse {
+model ConnectivityTestResult {
   @doc("Request identifier for tracking the operation")
   requestId: string;
 
@@ -577,7 +577,7 @@ model DiscoveredDatabaseObjects {
 }
 
 @doc("Response for discovering database objects.")
-model DiscoverDatabaseObjectsResponse {
+model DatabaseDiscoveryResult {
   @doc("Request identifier for tracking the operation")
   requestId?: string;
 

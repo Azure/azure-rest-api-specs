@@ -31,14 +31,14 @@ interface MigrationServices {
   testConnectivity is ArmResourceActionAsync<
     MigrationService,
     TestConnectivityRequest,
-    TestConnectivityResponse
+    ConnectivityTestResult
   >;
 
   @doc("Discovers database objects (databases and schemas) from source and target.")
   discoverDatabaseObjects is ArmResourceActionAsync<
     MigrationService,
     DiscoverDatabaseObjectsRequest,
-    DiscoverDatabaseObjectsResponse
+    DatabaseDiscoveryResult
   >;
 }
 
