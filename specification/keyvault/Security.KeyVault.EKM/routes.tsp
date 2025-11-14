@@ -50,9 +50,9 @@ op createEkmConnection is KeyVaultOperation<
     /**
      * The ekmConnection to create.
      */
-    #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flattening is supported for legacy scenarios like Key Vault's"
+    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
-    @Azure.ClientGenerator.Core.Legacy.flattenProperty
+    @flattenProperty
     ekmConnection: EkmConnection;
   },
   EkmConnection
@@ -70,9 +70,9 @@ op updateEkmConnection is KeyVaultOperation<
     /**
      * The ekmConnection to update.
      */
-    #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flattening is supported for legacy scenarios like Key Vault's"
+    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
-    @Azure.ClientGenerator.Core.Legacy.flattenProperty
+    @flattenProperty
     ekmConnection: EkmConnection;
   },
   EkmConnection
