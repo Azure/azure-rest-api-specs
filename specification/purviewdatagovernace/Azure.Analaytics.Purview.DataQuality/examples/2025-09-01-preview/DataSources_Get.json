@@ -6,56 +6,69 @@
   "title": "DataSources_Get",
   "responses": {
     "200": {
-      "body": [
-        {
-          "name": "TestConnection Snowfake",
-          "id": "TestConnectionSnowfake",
-          "isVnetEnabled": false,
-          "businessDomain": {
-            "type": "BusinessDomainReference",
-            "referenceId": "e0c0840b-f087-4c3e-99e2-63075572d33b"
-          },
-          "lastModifiedAt": "2024-12-17T12:08:02.6040970Z",
-          "lastModifiedBy": "ca31eca9-668e-4933-82f8-69bdeecc6632",
-          "type": "Snowflake",
-          "typeProperties": {
-            "url": "fljqaun-gpa78346.snowflakecomputing.com",
-            "warehouse": "COMPUTE_WH",
-            "database": "DREAM_DEMO",
-            "testConnectionSchemaName": "INFORMATION_SCHEMA",
-            "testConnectionTableName": "CAMPAIGN_ANALYTICS"
-          }
-        },
-        {
-          "name": "Connectionasa12:52:59",
-          "id": "Connectionasa125259",
-          "isVnetEnabled": false,
-          "targetResourceId": "/subscriptions/07d669d6-83f2-4f15-8b5b-4a4b31a7050e/resourceGroups/pdgbugbash/providers/Microsoft.Synapse/workspaces/azsynapsedq",
-          "businessDomain": {
-            "type": "BusinessDomainReference",
-            "referenceId": "e0c0840b-f087-4c3e-99e2-63075572d33b"
-          },
-          "lastModifiedAt": "2025-05-29T00:53:15.1601371Z",
-          "lastModifiedBy": "5f20dead-9561-47e6-95b2-402fe03133be",
-          "type": "AzureSynapseAnalytics",
-          "typeProperties": {
-            "workspaceName": "azsynapsedq",
-            "dedicatedEndpoint": "azsynapsedq.sql.azuresynapse.net",
-            "serverlessEndpoint": "azsynapsedq-ondemand.sql.azuresynapse.net",
-            "database": "azsynsqlpool",
-            "endpointType": "sql"
-          },
-          "scopes": [
-            {
-              "scope": {
-                "type": "Sql",
-                "includes": []
-              },
-              "id": "2c788ad5-357e-4ee2-8072-9fa6a0bff8b1"
+      "body": {
+        "value": [
+          {
+            "name": "vaibhavconn",
+            "id": "vaibhavconn",
+            "isVNetEnabled": false,
+            "businessDomain": {
+              "type": "BusinessDomainReference",
+              "referenceId": "99a01b25-bb9c-4b8f-89c8-8e28bcf801a9"
+            },
+            "lastModifiedAt": "2025-11-04T14:35:17.6330041Z",
+            "lastModifiedBy": "d898432e-87c8-44ba-93b3-c95d61c79ced",
+            "type": "OnPremiseOracleDatabase",
+            "typeProperties": {
+              "host": "10.18.0.13",
+              "port": "1521",
+              "username": "C##mynewuser",
+              "schema": "employee_vaibhavbug_vaibhavbug",
+              "dataIntegrationRuntimeId": "ff7b8941-51c1-4a80-9504-581657575d49",
+              "service": "XE"
             }
-          ]
-        }
-      ]
+          },
+          {
+            "name": "VMConn",
+            "id": "VMConn",
+            "isVNetEnabled": false,
+            "businessDomain": {
+              "type": "BusinessDomainReference",
+              "referenceId": "99a01b25-bb9c-4b8f-89c8-8e28bcf801a9"
+            },
+            "lastModifiedAt": "2025-09-09T04:45:21.7261403Z",
+            "lastModifiedBy": "d898432e-87c8-44ba-93b3-c95d61c79ced",
+            "type": "OnPremiseOracleDatabase",
+            "typeProperties": {
+              "host": "172.164.242.152",
+              "port": "1521",
+              "schema": "C##mynewuser",
+              "dataIntegrationRuntimeId": "40352815-e266-4d7c-bc6e-2f74dd662a8c",
+              "service": "XE"
+            }
+          },
+          {
+            "name": "testschemaandusername",
+            "id": "testschemaandusername",
+            "isVNetEnabled": false,
+            "businessDomain": {
+              "type": "BusinessDomainReference",
+              "referenceId": "99a01b25-bb9c-4b8f-89c8-8e28bcf801a9"
+            },
+            "lastModifiedAt": "2025-11-04T06:57:14.0270799Z",
+            "lastModifiedBy": "d898432e-87c8-44ba-93b3-c95d61c79ced",
+            "type": "OnPremiseOracleDatabase",
+            "typeProperties": {
+              "host": "20.83.215.167",
+              "port": "1521",
+              "username": "C##mynewuser",
+              "schema": "LAKSHMANDBONE",
+              "dataIntegrationRuntimeId": "f6889236-74db-4fc3-8a1d-8677512bdd89",
+              "service": "XE"
+            }
+          }
+        ]
+      }
     }
   }
 }

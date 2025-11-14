@@ -43,9 +43,17 @@ namespace PurviewDataQuality {
 
       @doc("Rule creation request")
       @body
-      request: RuleEntities;
+      request: RuleEntity;
     },
-    RuleEntityResponse
+    {
+      @doc("HTTP status code indicating successful rule creation (201 Created)")
+      @statusCode
+      statusCode: 201;
+
+      @doc("Created rule entity with complete configuration and metadata")
+      @body
+      rule: RuleEntity;
+    }
   >;
 
   /**
@@ -54,21 +62,71 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "RpcOperation with path parameters is intentional for this service."
+  @route("/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/rules")
   @get
   @tag("Rules")
   @doc("Retrieves all rules associated with data assets.")
-  op getRules is DataQualityOperation.ResourceList<RuleParameters>;
+  op getRules is RpcOperation<
+    {
+      @doc("Unique identifier for the business domain containing the data product")
+      @path
+      businessDomainId: string;
+
+      @doc("Unique identifier for the data product containing the data asset")
+      @path
+      dataProductId: string;
+
+      @doc("Unique identifier for the data asset")
+      @path
+      dataAssetId: string;
+    },
+    {
+      @doc("Array of rule entities")
+      @body
+      rules: RuleEntity[];
+    }
+  >;
 
   /**
    * Update a rule
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "RpcOperation with path parameters is intentional for this service."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @patch(#{ implicitOptionality: true })
   @tag("Rules")
+  @route("/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/rules/{ruleId}")
   @doc("Updates an existing rule associated with a data asset.")
-  op updateRule is DataQualityOperation.ResourceUpdate<RuleEntities>;
+  op updateRule is RpcOperation<
+    {
+      @doc("Unique identifier for the business domain containing the data product")
+      @path
+      businessDomainId: string;
+
+      @doc("Unique identifier for the data product containing the data asset")
+      @path
+      dataProductId: string;
+
+      @doc("Unique identifier for the data asset")
+      @path
+      dataAssetId: string;
+
+      @doc("Unique identifier for the rule to update")
+      @path
+      ruleId: string;
+
+      @doc("Rule update request")
+      @body
+      request: RuleEntity;
+    },
+    {
+      @doc("Created rule entity with complete configuration and metadata")
+      @body
+      rule: RuleEntity;
+    }
+  >;
 
   /**
    * Delete a rule
@@ -87,10 +145,35 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "RpcOperation with path parameters is intentional for this service."
+  @route("/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/rules/{ruleId}")
   @get
   @tag("Rules")
   @doc("Retrieves a specific rule associated with a data asset.")
-  op getRule is DataQualityOperation.ResourceRead<RuleParameters>;
+  op getRule is RpcOperation<
+    {
+      @doc("Unique identifier for the business domain containing the data product")
+      @path
+      businessDomainId: string;
+
+      @doc("Unique identifier for the data product containing the data asset")
+      @path
+      dataProductId: string;
+
+      @doc("Unique identifier for the data asset")
+      @path
+      dataAssetId: string;
+
+      @doc("Unique identifier for the data quality rule")
+      @path
+      ruleId: string;
+    },
+    {
+      @doc("Rule entity with complete configuration and metadata")
+      @body
+      rule: RuleEntity;
+    }
+  >;
 
   /**
    * Create Bulk Rules for Assets
@@ -121,7 +204,20 @@ namespace PurviewDataQuality {
       @body
       request: BulkRulesRequest;
     },
-    BulkRulesResponse
+    {
+      @statusCode
+      statusCode: 201;
+
+      @doc("Response containing array of created rule entities")
+      @body
+      response: {
+        /**
+         * Array of created rule entities with complete configuration and metadata
+         */
+        @doc("Array of created rule entities")
+        value: RuleEntity[];
+      };
+    }
   >;
 
   /**
@@ -170,7 +266,14 @@ namespace PurviewDataQuality {
       @body
       request: AssetMetadata;
     },
-    AssetMetadataObserverResponse
+    {
+      @statusCode
+      statusCode: 201;
+
+      @doc("Updated asset metadata")
+      @body
+      response: AssetMetadata;
+    }
   >;
 
   /**
@@ -470,9 +573,9 @@ namespace PurviewDataQuality {
   @post
   @pollingOperation(observations)
   op observations is DataQualityOperation.ResourceAction<
-    DataAsset,  // Resource context (businessDomainId, dataProductId, dataAssetId)
-    JobConfigDTO,  // Request body (job configuration)
-    JobConfigDTOResponse // Response body
+    DataAsset,
+    JobConfigDTO,
+    StatusMonitor
   >;
 
   /**
@@ -487,37 +590,70 @@ namespace PurviewDataQuality {
   op deleteObservation is DataQualityOperation.ResourceDelete<ObservationAssetMetadata>;
 
   /**
-   * Get all Data Sources for a given Business Domain
+   * Retrieves all data source connections for a given business domain.
+   *
+   * This operation returns a paginated list of data source configurations,
+   * including platform type, connectivity settings, and governance metadata.
+   *
+   * Supports optional filtering by data source name and continuation token-based pagination.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing service operation."
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing service operation."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Multiple path parameters are required for this nested resource operation."
   @tag("DataSources")
-  @doc("Retrieves all data sources connections for a given business domain, with optional name filtering and pagination.")
+  @doc("Retrieves all data source connections for a given business domain, with optional name filtering and pagination.")
   @route("/business-domains/{businessDomainId}/data-sources")
   @get
   op getDataSources is RpcOperation<
     {
       /**
-       * The unique identifier for the business domain containing the data sources.
-       * Business domains represent high-level organizational units for data governance
-       * and provide the top-level context for all data products and assets within them.
+       * The unique identifier of the business domain that contains the data sources.
+       *
+       * Business domains represent high-level organizational contexts for
+       * data governance and ownership. Each business domain may contain multiple
+       * data sources, data products, and assets.
        */
-      @doc("Unique identifier for the business domain containing the data sources")
+      @doc("Unique identifier of the business domain whose data sources are being retrieved.")
       @path
       businessDomainId: string;
 
+      /**
+       * Continuation token for retrieving the next set of paginated results.
+       *
+       * Returned by previous list operations when there are more results available.
+       */
+      @doc("Continuation token used for pagination of data source results.")
       @query("skipToken")
-      @doc("Continuation token for paginated results.")
       skipToken?: string;
 
+      /**
+       * Optional case-insensitive name filter for narrowing the data sources list.
+       *
+       * Matches data source names that contain the specified substring.
+       */
+      @doc("Optional name filter to match data sources by partial or full name.")
       @query("name")
-      @doc("Optional name filter for data sources.")
       name?: string;
     },
-    DataSourceEntityListResponse
+    {
+      /**
+       * HTTP 200 response indicating that the data sources were successfully retrieved.
+       */
+      @doc("HTTP 200 response indicating successful retrieval of data sources.")
+      @statusCode
+      statusCode: 200;
+
+      /**
+       * Response body containing the paginated list of data source entities,
+       * each with its full configuration and metadata.
+       */
+      @doc("Body containing a paginated list of data source entities and their configurations.")
+      @body
+      body: DataSourceEntityListResponse;
+    }
   >;
+
   /**
    * Get Data Source for a given data source id
    */
@@ -698,7 +834,11 @@ namespace PurviewDataQuality {
       @path
       dataAssetId: string;
     },
-    EmptyResponse
+    {
+      @doc("Scoped asset metadata successfully deleted")
+      @statusCode
+      statusCode: 204;
+    }
   >;
 
   /**
@@ -948,7 +1088,7 @@ namespace PurviewDataQuality {
     {
       @doc("The data quality snapshot report content")
       @body
-      content: DataQualityTrendResponse;
+      content: DataQualitySnapshotResponse;
     }
   >;
 

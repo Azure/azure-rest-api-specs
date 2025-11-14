@@ -6,6 +6,97 @@
   },
   "title": "LatestSnapshot_Get",
   "responses": {
-    "200": {}
+    "200": {
+      "body": {
+        "businessDomainId": "76be16f9-5cb3-4839-83d6-4e3829a8ab0c",
+        "dataProductId": "3b883ff8-ecea-44f5-933a-8484b7c3bdd1",
+        "assetId": "368058cc-6ba1-4fac-a834-187a9025c7b9",
+        "assetScore": 0.6465,
+        "snapshot": {
+          "observers": [
+            {
+              "name": "BankCustomerLedger4",
+              "type": "Basic",
+              "dataAsset": {
+                "referenceId": "368058cc-6ba1-4fac-a834-187a9025c7b9"
+              },
+              "typeProperties": {
+                "inputDatasets": [
+                  {
+                    "alias": "BankCustomerLedger4",
+                    "primary": true,
+                    "dataset": {
+                      "datasourceFQN": "https://adlsg2qastorage4.dfs.core.windows.net/",
+                      "schemaSummary": {
+                        "columnCount": 80,
+                        "sampleColumns": [
+                          {
+                            "name": "TransactionID",
+                            "type": "String"
+                          },
+                          {
+                            "name": "Amount",
+                            "type": "Number"
+                          },
+                          {
+                            "name": "MerchantCity",
+                            "type": "String"
+                          },
+                          {
+                            "name": "DateofBirth",
+                            "type": "String"
+                          }
+                        ]
+                      },
+                      "type": "Delta",
+                      "location": "smallsized/DELTA3/RowPartitioned/BankCustomerLedger4"
+                    }
+                  },
+                  {
+                    "alias": "BankCustomerLedger3",
+                    "primary": false,
+                    "dataset": {
+                      "schemaSummary": {
+                        "columnCount": 80,
+                        "sampleColumns": [
+                          {
+                            "name": "TransactionID",
+                            "type": "String"
+                          },
+                          {
+                            "name": "ChequeAmount",
+                            "type": "String"
+                          },
+                          {
+                            "name": "ATMLocation",
+                            "type": "String"
+                          }
+                        ]
+                      },
+                      "type": "Parquet",
+                      "location": "smallsized/DELTA2/RowPartitioned/BankCustomerLedger3"
+                    }
+                  }
+                ]
+              }
+            }
+          ],
+          "rulesSummary": {
+            "totalRules": 40,
+            "activeRules": 20,
+            "disabledRules": 20,
+            "sampleActiveRules": [
+              "Data_type_match_AccountNumber",
+              "Data_type_match_ATMID",
+              "Data_type_match_Amount"
+            ],
+            "sampleDisabledRules": [
+              "Data_type_match_AccountFreeze",
+              "Data_type_match_AccountType"
+            ]
+          }
+        }
+      }
+    }
   }
 }

@@ -1,34 +1,40 @@
 {
   "operationId": "UpdateDataSource",
   "parameters": {
-    "body": {
-      "name": "Connectionasa12:52:59",
-      "id": "Connectionasa125259",
-      "isVnetEnabled": false,
-      "targetResourceId": "/subscriptions/07d669d6-83f2-4f15-8b5b-4a4b31a7050e/resourceGroups/pdgbugbash/providers/Microsoft.Synapse/workspaces/azsynapsedq",
+    "request": {
+      "name": "testconn iceberg",
+      "id": "testconniceberg",
+      "type": "AdlsGen2",
+      "credential": {
+        "type": "ManagedServiceIdentity",
+        "typeProperties": {
+          "scopes": [
+            {
+              "scope": {
+                "type": "AdlsGen2",
+                "includes": []
+              }
+            }
+          ]
+        }
+      },
+      "typeProperties": {
+        "subscriptionId": "07d669d6-83f2-4f15-8b5b-4a4b31a7050e",
+        "resourceName": "adbuaeadlsg2",
+        "endpoint": "https://adbuaeadlsg2.dfs.core.windows.net/"
+      },
+      "targetResourceId": "/subscriptions/07d669d6-83f2-4f15-8b5b-4a4b31a7050e/resourceGroups/pdgbugbash/providers/Microsoft.Storage/storageAccounts/adbuaeadlsg2",
       "businessDomain": {
         "type": "BusinessDomainReference",
-        "referenceId": "e0c0840b-f087-4c3e-99e2-63075572d33b"
+        "referenceId": "76be16f9-5cb3-4839-83d6-4e3829a8ab0c"
       },
-      "lastModifiedAt": "2025-05-29T00:53:15.1601371Z",
-      "lastModifiedBy": "5f20dead-9561-47e6-95b2-402fe03133be",
-      "type": "AzureSynapseAnalytics",
-      "typeProperties": {
-        "workspaceName": "azsynapsedq",
-        "dedicatedEndpoint": "azsynapsedq.sql.azuresynapse.net",
-        "serverlessEndpoint": "azsynapsedq-ondemand.sql.azuresynapse.net",
-        "database": "azsynsqlpool",
-        "endpointType": "sql"
-      },
-      "scopes": [
-        {
-          "scope": {
-            "type": "Sql",
-            "includes": []
-          },
-          "id": "2c788ad5-357e-4ee2-8072-9fa6a0bff8b1"
-        }
-      ]
+      "createdAt": "2024-12-20T08:25:03.8734427Z",
+      "lastModifiedAt": "2024-12-20T08:25:03.8734427Z",
+      "createdBy": "ca31eca9-668e-4933-82f8-69bdeecc6632",
+      "lastModifiedBy": "ca31eca9-668e-4933-82f8-69bdeecc6632",
+      "ETag": "88012a82-0000-3200-0000-676529df0000",
+      "region": "uaenorth",
+      "computeId": "6f9fa66f-d7c2-4612-9c03-89686bfcfc5e"
     },
     "businessDomainId": "abcdef12-3456-7890-abcd-ef1234567890",
     "dataSourceId": "Connectionasa125259"
@@ -37,33 +43,37 @@
   "responses": {
     "200": {
       "body": {
-        "name": "Connectionasa12:52:59",
-        "id": "Connectionasa125259",
-        "isVnetEnabled": false,
-        "targetResourceId": "/subscriptions/07d669d6-83f2-4f15-8b5b-4a4b31a7050e/resourceGroups/pdgbugbash/providers/Microsoft.Synapse/workspaces/azsynapsedq",
+        "name": "testconn iceberg",
+        "type": "AdlsGen2",
+        "credential": {
+          "type": "ManagedServiceIdentity",
+          "typeProperties": {
+            "scopes": [
+              {
+                "scope": {
+                  "type": "AdlsGen2",
+                  "includes": []
+                },
+                "id": "1dd96570-9bec-4f7d-b736-74baa67edce9"
+              }
+            ]
+          }
+        },
+        "typeProperties": {
+          "endpoint": "https://adbuaeadlsg2.dfs.core.windows.net/"
+        },
+        "targetResourceId": "/subscriptions/07d669d6-83f2-4f15-8b5b-4a4b31a7050e/resourceGroups/pdgbugbash/providers/Microsoft.Storage/storageAccounts/adbuaeadlsg2",
+        "region": "uaenorth",
+        "computeId": "6f9fa66f-d7c2-4612-9c03-89686bfcfc5e",
         "businessDomain": {
           "type": "BusinessDomainReference",
-          "referenceId": "e0c0840b-f087-4c3e-99e2-63075572d33b"
+          "referenceId": "76be16f9-5cb3-4839-83d6-4e3829a8ab0c"
         },
-        "lastModifiedAt": "2025-05-29T00:53:15.1601371Z",
-        "lastModifiedBy": "5f20dead-9561-47e6-95b2-402fe03133be",
-        "type": "AzureSynapseAnalytics",
-        "typeProperties": {
-          "workspaceName": "azsynapsedq",
-          "dedicatedEndpoint": "azsynapsedq.sql.azuresynapse.net",
-          "serverlessEndpoint": "azsynapsedq-ondemand.sql.azuresynapse.net",
-          "database": "azsynsqlpool",
-          "endpointType": "sql"
-        },
-        "scopes": [
-          {
-            "scope": {
-              "type": "Sql",
-              "includes": []
-            },
-            "id": "2c788ad5-357e-4ee2-8072-9fa6a0bff8b1"
-          }
-        ]
+        "createdAt": "2024-12-20T08:25:03.8734427Z",
+        "createdBy": "ca31eca9-668e-4933-82f8-69bdeecc6632",
+        "id": "testconniceberg",
+        "lastModifiedAt": "2025-11-13T13:57:39.7820583Z",
+        "lastModifiedBy": "6f19d772-4716-4523-9910-cb1575512ce6"
       }
     }
   }

@@ -220,7 +220,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/JobConfigDTOResponse"
+              "$ref": "#/definitions/StatusMonitor"
             }
           },
           "default": {
@@ -352,10 +352,22 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The request has succeeded.",
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
-              "$ref": "#/definitions/BulkRulesResponse"
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "description": "Array of created rule entities",
+                  "items": {
+                    "$ref": "#/definitions/RuleEntity"
+                  }
+                }
+              },
+              "required": [
+                "value"
+              ]
             }
           },
           "default": {
@@ -604,14 +616,14 @@
           {
             "name": "businessDomainId",
             "in": "path",
-            "description": "Unique identifier for the business domain",
+            "description": "Unique identifier for the business domain containing the data product",
             "required": true,
             "type": "string"
           },
           {
             "name": "dataProductId",
             "in": "path",
-            "description": "Unique identifier for the data product",
+            "description": "Unique identifier for the data product containing the data asset",
             "required": true,
             "type": "string"
           },
@@ -627,7 +639,10 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedRuleParameters"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RuleEntity"
+              }
             }
           },
           "default": {
@@ -647,9 +662,6 @@
           "CreateRules_DataAsset": {
             "$ref": "./examples/Rules_Get.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       },
       "put": {
@@ -689,7 +701,7 @@
             "description": "Rule creation request",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RuleEntities"
+              "$ref": "#/definitions/RuleEntity"
             }
           }
         ],
@@ -697,7 +709,7 @@
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
-              "$ref": "#/definitions/RuleEntityResponse"
+              "$ref": "#/definitions/RuleEntity"
             }
           },
           "default": {
@@ -734,14 +746,14 @@
           {
             "name": "businessDomainId",
             "in": "path",
-            "description": "Unique identifier for the business domain",
+            "description": "Unique identifier for the business domain containing the data product",
             "required": true,
             "type": "string"
           },
           {
             "name": "dataProductId",
             "in": "path",
-            "description": "Unique identifier for the data product",
+            "description": "Unique identifier for the data product containing the data asset",
             "required": true,
             "type": "string"
           },
@@ -764,7 +776,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/RuleParameters"
+              "$ref": "#/definitions/RuleEntity"
             }
           },
           "default": {
@@ -781,7 +793,7 @@
           }
         },
         "x-ms-examples": {
-          "Rules_Get": {
+          "Rule_Get": {
             "$ref": "./examples/Rule_Get.json"
           }
         }
@@ -792,9 +804,6 @@
           "Rules"
         ],
         "description": "Updates an existing rule associated with a data asset.",
-        "consumes": [
-          "application/merge-patch+json"
-        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -802,14 +811,14 @@
           {
             "name": "businessDomainId",
             "in": "path",
-            "description": "Unique identifier for the business domain",
+            "description": "Unique identifier for the business domain containing the data product",
             "required": true,
             "type": "string"
           },
           {
             "name": "dataProductId",
             "in": "path",
-            "description": "Unique identifier for the data product",
+            "description": "Unique identifier for the data product containing the data asset",
             "required": true,
             "type": "string"
           },
@@ -823,17 +832,17 @@
           {
             "name": "ruleId",
             "in": "path",
-            "description": "Unique identifier for the data quality rule",
+            "description": "Unique identifier for the rule to update",
             "required": true,
             "type": "string"
           },
           {
-            "name": "resource",
+            "name": "request",
             "in": "body",
-            "description": "The resource instance.",
+            "description": "Rule update request",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RuleEntitiesUpdate"
+              "$ref": "#/definitions/RuleEntityUpdate"
             }
           }
         ],
@@ -841,7 +850,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/RuleEntities"
+              "$ref": "#/definitions/RuleEntity"
             }
           },
           "default": {
@@ -1219,8 +1228,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The request has succeeded."
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1248,7 +1257,7 @@
         "tags": [
           "DataSources"
         ],
-        "description": "Retrieves all data sources connections for a given business domain, with optional name filtering and pagination.",
+        "description": "Retrieves all data source connections for a given business domain, with optional name filtering and pagination.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1256,21 +1265,21 @@
           {
             "name": "businessDomainId",
             "in": "path",
-            "description": "Unique identifier for the business domain containing the data sources",
+            "description": "Unique identifier of the business domain whose data sources are being retrieved.",
             "required": true,
             "type": "string"
           },
           {
             "name": "skipToken",
             "in": "query",
-            "description": "Continuation token for paginated results.",
+            "description": "Continuation token used for pagination of data source results.",
             "required": false,
             "type": "string"
           },
           {
             "name": "name",
             "in": "query",
-            "description": "Optional name filter for data sources.",
+            "description": "Optional name filter to match data sources by partial or full name.",
             "required": false,
             "type": "string"
           }
@@ -1560,7 +1569,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/DataQualityTrendResponse"
+              "$ref": "#/definitions/DataQualitySnapshotResponse"
             }
           },
           "default": {
@@ -2282,7 +2291,7 @@
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
-              "$ref": "#/definitions/AssetMetadataObserverResponse"
+              "$ref": "#/definitions/AssetMetadata"
             }
           },
           "default": {
@@ -2313,10 +2322,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Unique identifier of the asset metadata observer",
-          "x-ms-mutability": [
-            "create"
-          ]
+          "description": "Unique identifier of the asset metadata observer"
         },
         "name": {
           "type": "string",
@@ -2356,7 +2362,7 @@
           "type": "boolean",
           "description": "Soft deletion flag"
         },
-        "eTag": {
+        "ETag": {
           "type": "string",
           "description": "Entity tag for concurrency control"
         },
@@ -2402,6 +2408,10 @@
         "projectId": {
           "type": "string",
           "description": "Project ID for Google Big Query type of data asset"
+        },
+        "isDQAsset": {
+          "type": "boolean",
+          "description": "Flag indicating if the asset is a Data Quality asset"
         }
       },
       "required": [
@@ -2424,91 +2434,14 @@
         }
       }
     },
-    "AssetMetadataObserverResponse": {
-      "type": "object",
-      "description": "HTTP response for asset metadata observer operations",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique metadata observer identifier"
-        },
-        "name": {
-          "type": "string",
-          "description": "Human-readable observer display name"
-        },
-        "dataAsset": {
-          "$ref": "#/definitions/Reference",
-          "description": "Reference to the observed data asset"
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Observer creation timestamp (UTC)"
-        },
-        "createdBy": {
-          "type": "string",
-          "description": "Identity of the creating user"
-        },
-        "lastModifiedAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Observer last modification timestamp (UTC)"
-        },
-        "lastModifiedBy": {
-          "type": "string",
-          "description": "Identity of the last modifying user"
-        },
-        "executionData": {
-          "type": "object",
-          "description": "Runtime execution parameters and configuration",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "isDeleted": {
-          "type": "boolean",
-          "description": "Soft deletion flag"
-        },
-        "businessDomain": {
-          "$ref": "#/definitions/Reference",
-          "description": "Reference to the governing business domain"
-        },
-        "dataProduct": {
-          "$ref": "#/definitions/Reference",
-          "description": "Reference to the containing data product"
-        },
-        "eTag": {
-          "type": "string",
-          "description": "Entity tag for concurrency control"
-        },
-        "type": {
-          "$ref": "#/definitions/AssetMetadataObserverType",
-          "description": "Observer type classification"
-        }
-      }
-    },
-    "AssetMetadataObserverType": {
-      "type": "string",
-      "description": "Type of asset metadata observer for data quality monitoring",
-      "enum": [
-        "Basic"
-      ],
-      "x-ms-enum": {
-        "name": "AssetMetadataObserverType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Basic",
-            "value": "Basic",
-            "description": "Basic observer type for standard data quality monitoring operations"
-          }
-        ]
-      }
-    },
     "AssetMetadataUpdate": {
       "type": "object",
       "description": "Unified metadata observer for monitoring data assets across platforms",
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the asset metadata observer"
+        },
         "name": {
           "type": "string",
           "description": "Display name of the asset metadata observer"
@@ -2547,7 +2480,7 @@
           "type": "boolean",
           "description": "Soft deletion flag"
         },
-        "eTag": {
+        "ETag": {
           "type": "string",
           "description": "Entity tag for concurrency control"
         },
@@ -2593,6 +2526,10 @@
         "projectId": {
           "type": "string",
           "description": "Project ID for Google Big Query type of data asset"
+        },
+        "isDQAsset": {
+          "type": "boolean",
+          "description": "Flag indicating if the asset is a Data Quality asset"
         }
       }
     },
@@ -2818,22 +2755,6 @@
         "rules"
       ]
     },
-    "BulkRulesResponse": {
-      "type": "object",
-      "description": "Response model for bulk rule creation operations",
-      "properties": {
-        "rules": {
-          "type": "array",
-          "description": "Array of created rule entities",
-          "items": {
-            "$ref": "#/definitions/RuleEntityBulkResponse"
-          }
-        }
-      },
-      "required": [
-        "rules"
-      ]
-    },
     "Column": {
       "type": "object",
       "description": "Column definition for dataset validation and quality checks",
@@ -2848,57 +2769,213 @@
         }
       }
     },
-    "DataQualityTrendRecord": {
+    "DataQualitySnapshotResponse": {
       "type": "object",
-      "description": "Trend record capturing data quality score and job execution information for a specific asset.",
+      "description": "Latest data quality snapshot report with comprehensive metrics and observer details.",
       "properties": {
         "businessDomainId": {
           "type": "string",
-          "description": "Identifier of the business domain associated with the trend record."
+          "description": "Identifier of the business domain associated with this snapshot."
         },
         "dataProductId": {
           "type": "string",
           "description": "Identifier of the data product under the business domain."
         },
-        "dataAssetId": {
+        "assetId": {
           "type": "string",
-          "description": "Identifier of the data asset whose quality score is represented."
+          "description": "Identifier of the data asset whose quality is captured in this snapshot."
         },
-        "score": {
+        "assetScore": {
           "type": "number",
           "format": "double",
-          "description": "Data quality score for this job execution, if computed."
+          "description": "Overall data quality score for the asset."
         },
-        "jobId": {
-          "type": "string",
-          "description": "Identifier of the job execution or monitoring run."
-        },
-        "migrationStatus": {
-          "type": "string",
-          "description": "Migration status information, if available."
+        "snapshot": {
+          "type": "object",
+          "description": "Detailed snapshot data containing observer and rule information.",
+          "properties": {
+            "observers": {
+              "type": "array",
+              "description": "Array of observers monitoring this data asset.",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "Name of the observer."
+                  },
+                  "type": {
+                    "type": "string",
+                    "description": "Type of the observer."
+                  },
+                  "dataAsset": {
+                    "type": "object",
+                    "description": "Reference to the data asset being observed.",
+                    "properties": {
+                      "referenceId": {
+                        "type": "string",
+                        "description": "Reference identifier for the data asset."
+                      }
+                    },
+                    "required": [
+                      "referenceId"
+                    ]
+                  },
+                  "typeProperties": {
+                    "type": "object",
+                    "description": "Observer-specific configuration properties.",
+                    "properties": {
+                      "inputDatasets": {
+                        "type": "array",
+                        "description": "Array of input datasets for this observer.",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "alias": {
+                              "type": "string",
+                              "description": "Alias name for the dataset.",
+                              "x-ms-client-name": "aliasName"
+                            },
+                            "primary": {
+                              "type": "boolean",
+                              "description": "Whether this is the primary dataset."
+                            },
+                            "dataset": {
+                              "type": "object",
+                              "description": "Dataset configuration and metadata.",
+                              "properties": {
+                                "datasourceFQN": {
+                                  "type": "string",
+                                  "description": "Fully qualified name of the data source."
+                                },
+                                "schemaSummary": {
+                                  "type": "object",
+                                  "description": "Schema summary information for the dataset.",
+                                  "properties": {
+                                    "columnCount": {
+                                      "type": "integer",
+                                      "format": "int32",
+                                      "description": "Total number of columns in the dataset."
+                                    },
+                                    "sampleColumns": {
+                                      "type": "array",
+                                      "description": "Sample of columns with their names and types.",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "name": {
+                                            "type": "string",
+                                            "description": "Name of the column."
+                                          },
+                                          "type": {
+                                            "type": "string",
+                                            "description": "Data type of the column."
+                                          }
+                                        },
+                                        "required": [
+                                          "name",
+                                          "type"
+                                        ]
+                                      }
+                                    }
+                                  },
+                                  "required": [
+                                    "columnCount",
+                                    "sampleColumns"
+                                  ]
+                                },
+                                "type": {
+                                  "type": "string",
+                                  "description": "Type of the dataset (e.g., Delta, Parquet)."
+                                },
+                                "location": {
+                                  "type": "string",
+                                  "description": "Location path of the dataset."
+                                }
+                              },
+                              "required": [
+                                "schemaSummary",
+                                "type",
+                                "location"
+                              ]
+                            }
+                          },
+                          "required": [
+                            "alias",
+                            "primary",
+                            "dataset"
+                          ]
+                        }
+                      }
+                    },
+                    "required": [
+                      "inputDatasets"
+                    ]
+                  }
+                },
+                "required": [
+                  "name",
+                  "type",
+                  "dataAsset",
+                  "typeProperties"
+                ]
+              }
+            },
+            "rulesSummary": {
+              "type": "object",
+              "description": "Summary of data quality rules associated with this snapshot.",
+              "properties": {
+                "totalRules": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "Total number of rules configured."
+                },
+                "activeRules": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "Number of active rules."
+                },
+                "disabledRules": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "Number of disabled rules."
+                },
+                "sampleActiveRules": {
+                  "type": "array",
+                  "description": "Sample of active rule names.",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "sampleDisabledRules": {
+                  "type": "array",
+                  "description": "Sample of disabled rule names.",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "totalRules",
+                "activeRules",
+                "disabledRules",
+                "sampleActiveRules",
+                "sampleDisabledRules"
+              ]
+            }
+          },
+          "required": [
+            "observers",
+            "rulesSummary"
+          ]
         }
       },
       "required": [
         "businessDomainId",
         "dataProductId",
-        "dataAssetId",
-        "jobId"
-      ]
-    },
-    "DataQualityTrendResponse": {
-      "type": "object",
-      "description": "List of data quality trend records grouped by domain, product, and asset.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "Array of trend entries representing data quality metrics for each job.",
-          "items": {
-            "$ref": "#/definitions/DataQualityTrendRecord"
-          }
-        }
-      },
-      "required": [
-        "value"
+        "assetId",
+        "assetScore",
+        "snapshot"
       ]
     },
     "DataSourceEntity": {
@@ -2907,16 +2984,13 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Unique system identifier for the data source entity.",
-          "x-ms-mutability": [
-            "create"
-          ]
+          "description": "Unique system identifier for the data source entity."
         },
         "name": {
           "type": "string",
           "description": "Human-readable display name identifying the data source connection."
         },
-        "isVnetEnabled": {
+        "isVNetEnabled": {
           "type": "boolean",
           "description": "Virtual Network connectivity flag."
         },
@@ -2946,6 +3020,18 @@
           "type": "string",
           "description": "ISO 8601 timestamp representing the last modification time."
         },
+        "createdBy": {
+          "type": "string",
+          "description": "Identifier or name of the user who created the data source configuration."
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "ISO 8601 timestamp representing the creation time."
+        },
+        "ETag": {
+          "type": "string",
+          "description": "Entity tag for concurrency control and change detection."
+        },
         "lastModifiedBy": {
           "type": "string",
           "description": "Identifier or name of the last modifying user."
@@ -2953,6 +3039,27 @@
         "type": {
           "type": "string",
           "description": "Platform type of the data source (e.g., AzureSqlDatabase, Snowflake, OneLake, etc.)."
+        },
+        "credential": {
+          "type": "object",
+          "description": "Authentication credential configuration for data source access.",
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "Credential type for authentication."
+            },
+            "referenceName": {
+              "type": "string",
+              "description": "Reference identifier for the credential resource."
+            },
+            "typeProperties": {
+              "type": "object",
+              "description": "Type-specific credential parameters."
+            }
+          },
+          "required": [
+            "type"
+          ]
         },
         "typeProperties": {
           "type": "object",
@@ -3053,8 +3160,36 @@
             "lakehouseId": {
               "type": "string",
               "description": "Lakehouse ID (for OneLake)."
+            },
+            "createdBy": {
+              "type": "string",
+              "description": "Identity of the user who created this data source."
+            },
+            "createdAt": {
+              "type": "string",
+              "description": "ISO 8601 timestamp representing the creation time."
+            },
+            "ETag": {
+              "type": "string",
+              "description": "Entity tag for concurrency control and change detection."
+            },
+            "resourceName": {
+              "type": "string",
+              "description": "Resource name associated with the data source."
+            },
+            "subscriptionId": {
+              "type": "string",
+              "description": "Subscription identifier associated with the data source."
             }
           }
+        },
+        "computeId": {
+          "type": "string",
+          "description": "Compute resource identifier associated with the credential."
+        },
+        "region": {
+          "type": "string",
+          "description": "Region associated with the credential."
         },
         "scopes": {
           "type": "array",
@@ -3098,7 +3233,6 @@
       "required": [
         "id",
         "name",
-        "isVnetEnabled",
         "businessDomain",
         "type",
         "typeProperties"
@@ -3231,11 +3365,15 @@
       "type": "object",
       "description": "Unified data source entity model combining all supported data source types and their configuration properties.",
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique system identifier for the data source entity."
+        },
         "name": {
           "type": "string",
           "description": "Human-readable display name identifying the data source connection."
         },
-        "isVnetEnabled": {
+        "isVNetEnabled": {
           "type": "boolean",
           "description": "Virtual Network connectivity flag."
         },
@@ -3261,6 +3399,18 @@
           "type": "string",
           "description": "ISO 8601 timestamp representing the last modification time."
         },
+        "createdBy": {
+          "type": "string",
+          "description": "Identifier or name of the user who created the data source configuration."
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "ISO 8601 timestamp representing the creation time."
+        },
+        "ETag": {
+          "type": "string",
+          "description": "Entity tag for concurrency control and change detection."
+        },
         "lastModifiedBy": {
           "type": "string",
           "description": "Identifier or name of the last modifying user."
@@ -3268,6 +3418,24 @@
         "type": {
           "type": "string",
           "description": "Platform type of the data source (e.g., AzureSqlDatabase, Snowflake, OneLake, etc.)."
+        },
+        "credential": {
+          "type": "object",
+          "description": "Authentication credential configuration for data source access.",
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "Credential type for authentication."
+            },
+            "referenceName": {
+              "type": "string",
+              "description": "Reference identifier for the credential resource."
+            },
+            "typeProperties": {
+              "type": "object",
+              "description": "Type-specific credential parameters."
+            }
+          }
         },
         "typeProperties": {
           "type": "object",
@@ -3368,8 +3536,36 @@
             "lakehouseId": {
               "type": "string",
               "description": "Lakehouse ID (for OneLake)."
+            },
+            "createdBy": {
+              "type": "string",
+              "description": "Identity of the user who created this data source."
+            },
+            "createdAt": {
+              "type": "string",
+              "description": "ISO 8601 timestamp representing the creation time."
+            },
+            "ETag": {
+              "type": "string",
+              "description": "Entity tag for concurrency control and change detection."
+            },
+            "resourceName": {
+              "type": "string",
+              "description": "Resource name associated with the data source."
+            },
+            "subscriptionId": {
+              "type": "string",
+              "description": "Subscription identifier associated with the data source."
             }
           }
+        },
+        "computeId": {
+          "type": "string",
+          "description": "Compute resource identifier associated with the credential."
+        },
+        "region": {
+          "type": "string",
+          "description": "Region associated with the credential."
         },
         "scopes": {
           "type": "array",
@@ -3537,28 +3733,6 @@
           }
         }
       }
-    },
-    "JobConfigDTOResponse": {
-      "type": "object",
-      "description": "HTTP response for job configuration operations with LRO support",
-      "properties": {
-        "value": {
-          "type": "string",
-          "description": "Operation result value or reference"
-        },
-        "status": {
-          "$ref": "#/definitions/LroStatus",
-          "description": "Long-running operation status"
-        },
-        "statusMonitor": {
-          "$ref": "#/definitions/StatusMonitor",
-          "description": "Real-time job execution monitoring information"
-        }
-      },
-      "required": [
-        "value",
-        "status"
-      ]
     },
     "JobHistoryEntity": {
       "type": "object",
@@ -3888,14 +4062,14 @@
         },
         "controlId": {
           "type": "string",
-          "description": "Data quality control identifier"
+          "description": "Data quality control identifier",
+          "x-nullable": true
         },
         "opinionId": {
           "type": "string",
           "description": "Opinion record unique identifier"
         },
         "value": {
-          "type": "string",
           "description": "Opinion assessment value or result"
         },
         "resultedAt": {
@@ -3910,37 +4084,50 @@
         "queryExecuted": {
           "type": "string",
           "description": "Supporting query execution identifier"
+        },
+        "totalRows": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total number of rows evaluated during the opinion assessment"
+        },
+        "emptyRows": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of empty rows identified during the opinion assessment"
+        },
+        "failedRows": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of failed rows identified during the opinion assessment"
+        },
+        "passedRows": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of passed rows identified during the opinion assessment"
+        },
+        "miscastRows": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of miscast rows identified during the opinion assessment"
+        },
+        "isClonedOpinion": {
+          "type": "boolean",
+          "description": "Indicates if the opinion is a cloned instance"
         }
       },
       "required": [
         "businessDomainId",
         "dataProductId",
         "dataAssetId",
-        "controlId",
         "opinionId",
         "resultedAt",
-        "outcomeId"
-      ]
-    },
-    "PagedRuleParameters": {
-      "type": "object",
-      "description": "Paged collection of RuleParameters items",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The RuleParameters items on this page",
-          "items": {
-            "$ref": "#/definitions/RuleParameters"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
+        "outcomeId",
+        "totalRows",
+        "emptyRows",
+        "failedRows",
+        "passedRows",
+        "miscastRows",
+        "isClonedOpinion"
       ]
     },
     "PagedScheduleEntity": {
@@ -4107,37 +4294,6 @@
         "type"
       ]
     },
-    "RuleEntities": {
-      "type": "object",
-      "description": "Rule entities containing rule identifier and complete rule configuration",
-      "properties": {
-        "ruleId": {
-          "type": "string",
-          "description": "Unique identifier for the data quality rule",
-          "x-ms-mutability": [
-            "create"
-          ]
-        },
-        "ruleEntity": {
-          "$ref": "#/definitions/RuleEntity",
-          "description": "Complete rule entity with configuration and metadata"
-        }
-      },
-      "required": [
-        "ruleId",
-        "ruleEntity"
-      ]
-    },
-    "RuleEntitiesUpdate": {
-      "type": "object",
-      "description": "Rule entities containing rule identifier and complete rule configuration",
-      "properties": {
-        "ruleEntity": {
-          "$ref": "#/definitions/RuleEntityUpdate",
-          "description": "Complete rule entity with configuration and metadata"
-        }
-      }
-    },
     "RuleEntity": {
       "type": "object",
       "description": "Data quality rule entity with validation logic, execution parameters, and scoring",
@@ -4204,112 +4360,6 @@
         "lastModifiedBy": {
           "type": "string",
           "description": "User identifier for the last modifier of the rule"
-        }
-      },
-      "required": [
-        "name",
-        "type",
-        "status",
-        "id"
-      ]
-    },
-    "RuleEntityBulkResponse": {
-      "type": "object",
-      "description": "Individual rule entity for bulk operations",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Descriptive name of the data quality rule"
-        },
-        "description": {
-          "type": "string",
-          "description": "Detailed description of rule validation and purpose"
-        },
-        "type": {
-          "type": "string",
-          "description": "Classification of the data quality rule type"
-        },
-        "status": {
-          "type": "string",
-          "description": "Current execution status of the rule"
-        },
-        "typeProperties": {
-          "$ref": "#/definitions/TypeProperties",
-          "description": "Type-specific configuration for rule validation"
-        },
-        "id": {
-          "type": "string",
-          "description": "Unique system identifier for the rule"
-        },
-        "businessDomain": {
-          "$ref": "#/definitions/Reference",
-          "description": "Reference to the associated business domain"
-        },
-        "dataProduct": {
-          "$ref": "#/definitions/Reference",
-          "description": "Reference to the associated data product"
-        },
-        "dataAsset": {
-          "$ref": "#/definitions/Reference",
-          "description": "Reference to the target data asset"
-        },
-        "score": {
-          "type": "number",
-          "format": "double",
-          "description": "Current quality score from rule execution"
-        }
-      },
-      "required": [
-        "name",
-        "type",
-        "status",
-        "id"
-      ]
-    },
-    "RuleEntityResponse": {
-      "type": "object",
-      "description": "HTTP response containing complete data quality rule information",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Descriptive name of the data quality rule"
-        },
-        "description": {
-          "type": "string",
-          "description": "Detailed description of rule validation logic and purpose"
-        },
-        "type": {
-          "type": "string",
-          "description": "Classification of the data quality rule type"
-        },
-        "status": {
-          "type": "string",
-          "description": "Current execution status of the rule"
-        },
-        "typeProperties": {
-          "$ref": "#/definitions/TypeProperties",
-          "description": "Type-specific configuration parameters for rule validation"
-        },
-        "id": {
-          "type": "string",
-          "description": "Unique system identifier for the rule"
-        },
-        "businessDomain": {
-          "$ref": "#/definitions/Reference",
-          "description": "Reference to the associated business domain"
-        },
-        "dataProduct": {
-          "$ref": "#/definitions/Reference",
-          "description": "Reference to the associated data product"
-        },
-        "dataAsset": {
-          "$ref": "#/definitions/Reference",
-          "description": "Reference to the target data asset"
-        },
-        "score": {
-          "type": "number",
-          "format": "double",
-          "description": "Current quality score from rule execution"
         }
       },
       "required": [
@@ -4387,26 +4437,6 @@
           "description": "User identifier for the last modifier of the rule"
         }
       }
-    },
-    "RuleParameters": {
-      "type": "object",
-      "description": "Parameters for rule operations including rule identifier and optional response data",
-      "properties": {
-        "ruleId": {
-          "type": "string",
-          "description": "Unique identifier for the data quality rule",
-          "x-ms-mutability": [
-            "create"
-          ]
-        },
-        "response": {
-          "$ref": "#/definitions/RuleEntity",
-          "description": "Rule entity response data"
-        }
-      },
-      "required": [
-        "ruleId"
-      ]
     },
     "RuleTypeProperties": {
       "type": "object",
@@ -5006,10 +5036,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Unique identifier for the scoped asset metadata entity.",
-          "x-ms-mutability": [
-            "create"
-          ]
+          "description": "Unique identifier for the scoped asset metadata entity."
         },
         "description": {
           "type": "string",
@@ -5056,7 +5083,7 @@
           "type": "string",
           "description": "Identifier of the user who last modified this metadata."
         },
-        "eTag": {
+        "ETag": {
           "type": "string",
           "description": "Entity tag used for concurrency control and version validation."
         }
@@ -5104,6 +5131,10 @@
       "type": "object",
       "description": "Scoped asset metadata configuration linked to a specific data asset.",
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the scoped asset metadata entity."
+        },
         "description": {
           "type": "string",
           "description": "Descriptive text providing details about the scoped asset metadata."
@@ -5149,7 +5180,7 @@
           "type": "string",
           "description": "Identifier of the user who last modified this metadata."
         },
-        "eTag": {
+        "ETag": {
           "type": "string",
           "description": "Entity tag used for concurrency control and version validation."
         }
@@ -5165,6 +5196,10 @@
           "x-ms-mutability": [
             "create"
           ]
+        },
+        "status": {
+          "$ref": "#/definitions/LroStatus",
+          "description": "Current status of the operation"
         },
         "kind": {
           "$ref": "#/definitions/OperationKind",
@@ -5194,6 +5229,7 @@
       },
       "required": [
         "id",
+        "status",
         "lastUpdated"
       ]
     },

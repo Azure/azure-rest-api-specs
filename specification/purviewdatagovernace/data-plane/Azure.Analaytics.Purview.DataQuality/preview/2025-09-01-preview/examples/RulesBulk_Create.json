@@ -2,8 +2,9 @@
   "operationId": "CreateBulkRules",
   "parameters": {
     "api-version": "2025-09-01-preview",
-    "body": [
-      {
+    "request": {
+      "rules": [
+        {
         "name": "Duplicate_Rows",
         "type": "Duplicate",
         "description": "Rule to check duplicate rows",
@@ -54,8 +55,9 @@
             "value": "AccountId"
           }
         }
-      }
-    ],
+        }
+      ]
+    },
     "businessDomainId": "abcdef12-3456-7890-abcd-ef1234567890",
     "dataAssetId": "abcd1234-5678-abcd-1234-abcd5678ef00",
     "dataProductId": "12345678-abcd-1234-ef00-123456abcdef"

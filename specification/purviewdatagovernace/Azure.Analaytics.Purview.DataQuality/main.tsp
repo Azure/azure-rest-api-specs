@@ -39,7 +39,6 @@ namespace PurviewDataQuality;
 @doc("Service API versions")
 enum ApiVersions {
   @doc("2025-09-01-preview service API version")
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2025_09_01_preview: "2025-09-01-preview",
 }
 

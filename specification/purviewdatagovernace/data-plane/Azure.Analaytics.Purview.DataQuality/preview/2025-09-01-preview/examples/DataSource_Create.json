@@ -1,33 +1,33 @@
 {
   "operationId": "CreateDataSource",
   "parameters": {
-    "body": {
-      "name": "Connectionasa12:52:59",
-      "isVnetEnabled": false,
-      "targetResourceId": "/subscriptions/07d669d6-83f2-4f15-8b5b-4a4b31a7050e/resourceGroups/pdgbugbash/providers/Microsoft.Synapse/workspaces/azsynapsedq",
+    "request": {
       "businessDomain": {
-        "type": "BusinessDomainReference",
-        "referenceId": "e0c0840b-f087-4c3e-99e2-63075572d33b"
+        "referenceId": "76be16f9-5cb3-4839-83d6-4e3829a8ab0c",
+        "type": "BusinessDomainReference"
       },
-      "lastModifiedAt": "2025-05-29T00:53:15.1601371Z",
-      "lastModifiedBy": "5f20dead-9561-47e6-95b2-402fe03133be",
-      "type": "AzureSynapseAnalytics",
-      "typeProperties": {
-        "workspaceName": "azsynapsedq",
-        "dedicatedEndpoint": "azsynapsedq.sql.azuresynapse.net",
-        "serverlessEndpoint": "azsynapsedq-ondemand.sql.azuresynapse.net",
-        "database": "azsynsqlpool",
-        "endpointType": "sql"
-      },
-      "scopes": [
-        {
-          "scope": {
-            "type": "Sql",
-            "includes": []
-          },
-          "id": "2c788ad5-357e-4ee2-8072-9fa6a0bff8b1"
+      "name": "SQL_Connection",
+      "id": "SQL_Connection",
+      "type": "AzureSqlDatabase",
+      "credential": {
+        "type": "ManagedServiceIdentity",
+        "typeProperties": {
+          "scopes": [
+            {
+              "scope": {
+                "type": "Sql",
+                "includes": []
+              }
+            }
+          ]
         }
-      ]
+      },
+      "region": "uaenorth",
+      "typeProperties": {
+        "server": "qasqldbbugbash.database.windows.net",
+        "database": "sqldbqabugbash"
+      },
+      "targetResourceId": "/subscriptions/07d669d6-83f2-4f15-8b5b-4a4b31a7050e/resourceGroups/pdgbugbash/providers/Microsoft.Sql/servers/qasqldbbugbash"
     },
     "businessDomainId": "abcdef12-3456-7890-abcd-ef1234567890"
   },
@@ -35,34 +35,38 @@
   "responses": {
     "201": {
       "body": {
-        "name": "Connectionasa12:52:59",
-        "id": "Connectionasa125259",
-        "isVnetEnabled": false,
-        "targetResourceId": "/subscriptions/07d669d6-83f2-4f15-8b5b-4a4b31a7050e/resourceGroups/pdgbugbash/providers/Microsoft.Synapse/workspaces/azsynapsedq",
-        "businessDomain": {
-          "type": "BusinessDomainReference",
-          "referenceId": "e0c0840b-f087-4c3e-99e2-63075572d33b"
-        },
-        "lastModifiedAt": "2025-05-29T00:53:15.1601371Z",
-        "lastModifiedBy": "5f20dead-9561-47e6-95b2-402fe03133be",
-        "type": "AzureSynapseAnalytics",
+    "name": "SQL_Connection",
+    "id": "SQL_Connection",
+    "type": "AzureSqlDatabase",
+    "credential": {
+        "type": "ManagedServiceIdentity",
         "typeProperties": {
-          "workspaceName": "azsynapsedq",
-          "dedicatedEndpoint": "azsynapsedq.sql.azuresynapse.net",
-          "serverlessEndpoint": "azsynapsedq-ondemand.sql.azuresynapse.net",
-          "database": "azsynsqlpool",
-          "endpointType": "sql"
-        },
-        "scopes": [
-          {
-            "scope": {
-              "type": "Sql",
-              "includes": []
-            },
-            "id": "2c788ad5-357e-4ee2-8072-9fa6a0bff8b1"
-          }
-        ]
-      }
+            "scopes": [
+                {
+                    "scope": {
+                        "type": "Sql",
+                        "includes": []
+                    },
+                    "id": "ff6851d0-d580-491c-aeee-8c0a99f2a3b6"
+                }
+            ]
+        }
+    },
+    "region": "uaenorth",
+    "typeProperties": {
+        "server": "qasqldbbugbash.database.windows.net",
+        "database": "sqldbqabugbash"
+    },
+    "targetResourceId": "/subscriptions/07d669d6-83f2-4f15-8b5b-4a4b31a7050e/resourceGroups/pdgbugbash/providers/Microsoft.Sql/servers/qasqldbbugbash",
+    "businessDomain": {
+        "type": "BusinessDomainReference",
+        "referenceId": "76be16f9-5cb3-4839-83d6-4e3829a8ab0c"
+    },
+    "createdAt": "2025-11-13T14:17:13.9264011Z",
+    "lastModifiedAt": "2025-11-13T14:17:13.9264011Z",
+    "createdBy": "6f19d772-4716-4523-9910-cb1575512ce6",
+    "lastModifiedBy": "6f19d772-4716-4523-9910-cb1575512ce6"
+}
     }
   }
 }

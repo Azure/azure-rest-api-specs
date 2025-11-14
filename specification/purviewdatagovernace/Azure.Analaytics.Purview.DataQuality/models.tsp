@@ -360,6 +360,9 @@ model StatusMonitor {
   @doc("Unique identifier of the monitored operation")
   id: string;
 
+  @doc("Current status of the operation")
+  status: LroStatus;
+
   @doc("Kind of operation being monitored")
   kind?: OperationKind;
 
@@ -638,64 +641,10 @@ model RuleEntityResponse {
   statusCode: 201;
 
   /**
-   * Human-readable name identifying the data quality rule
+   * Complete rule entity containing configuration, validation logic, and metadata
    */
-  @doc("Descriptive name of the data quality rule")
-  name: string;
-
-  /**
-   * Detailed explanation of the rule's validation logic and business purpose
-   */
-  @doc("Detailed description of rule validation logic and purpose")
-  description?: string;
-
-  /**
-   * Classification of the rule type (e.g., completeness, accuracy, consistency)
-   */
-  @doc("Classification of the data quality rule type")
-  type: string;
-
-  /**
-   * Current execution status of the rule (active, inactive, error)
-   */
-  @doc("Current execution status of the rule")
-  status: string;
-
-  /**
-   * Type-specific configuration parameters and validation settings
-   */
-  @doc("Type-specific configuration parameters for rule validation")
-  typeProperties?: TypeProperties;
-
-  /**
-   * Unique system identifier for the rule entity
-   */
-  @doc("Unique system identifier for the rule")
-  id: string;
-
-  /**
-   * Reference to the business domain where this rule applies
-   */
-  @doc("Reference to the associated business domain")
-  businessDomain?: Reference;
-
-  /**
-   * Reference to the data product where this rule applies
-   */
-  @doc("Reference to the associated data product")
-  dataProduct?: Reference;
-
-  /**
-   * Reference to the specific data asset where this rule is executed
-   */
-  @doc("Reference to the target data asset")
-  dataAsset?: Reference;
-
-  /**
-   * Current quality score calculated by this rule (0.0 to 100.0)
-   */
-  @doc("Current quality score from rule execution")
-  score?: float64;
+  @doc("Complete rule entity with configuration and metadata")
+  ruleEntity: RuleEntity;
 }
 
 /**
@@ -865,13 +814,12 @@ model LocationTypeProperties {
  * Unified metadata observer that monitors and tracks data assets across different storage platforms.
  * Supports multiple data source types including Lakehouse, Snowflake, SQL Server, and Oracle systems.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property name"
 @doc("Unified metadata observer for monitoring data assets across platforms")
 model AssetMetadata {
   /**
    * Unique system identifier for the metadata observer instance
    */
-  @key
-  @visibility(Lifecycle.Create)
   @doc("Unique identifier of the asset metadata observer")
   id: string;
 
@@ -933,7 +881,7 @@ model AssetMetadata {
    * Entity tag for optimistic concurrency control and change detection
    */
   @doc("Entity tag for concurrency control")
-  eTag?: string;
+  ETag?: string;
 
   /**
    * Data source type classification (Lakehouse, Snowflake, SQLServer, Oracle)
@@ -985,6 +933,9 @@ model AssetMetadata {
 
   @doc("Project ID for Google Big Query type of data asset")
   projectId?: string;
+
+  @doc("Flag indicating if the asset is a Data Quality asset")
+  isDQAsset?: boolean;
 }
 
 /**
@@ -1872,34 +1823,6 @@ model DatasetToDatasourceMapping {
 }
 
 /**
- * HTTP response model for job configuration operations with long-running operation support.
- * Provides immediate acknowledgment with status tracking for asynchronous configuration updates.
- */
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
-@doc("HTTP response for job configuration operations with LRO support")
-model JobConfigDTOResponse {
-  /**
-   * HTTP status code indicating accepted request for processing (202 Accepted)
-   */
-  /**
-   * Response value containing operation result or reference identifier
-   */
-  @doc("Operation result value or reference")
-  value: string;
-
-  /**
-   * Long-running operation status for tracking asynchronous completion
-   */
-  @doc("Long-running operation status")
-  @lroStatus
-  status: LroStatus;
-
-  @doc("Real-time job execution monitoring information")
-  statusMonitor?: StatusMonitor;
-}
-
-/**
  * HTTP response model for scan operations with comprehensive status tracking and monitoring.
  * Provides scan execution details and real-time status updates for long-running scan processes.
  */
@@ -2032,15 +1955,12 @@ model AssetMetadataObserverResponse {
  * Represents the scoped asset metadata configuration for a given data asset.
  * Encapsulates domain, product, and asset references, runtime parameters, and audit metadata.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property name"
 @doc("Scoped asset metadata configuration linked to a specific data asset.")
-@parentResource(DataAsset)
-@resource("scoped-asset-metadata")
 model ScopedAssetMetadata {
   /**
    * Unique identifier for the scoped asset metadata entity.
    */
-  @key
-  @visibility(Lifecycle.Create)
   @doc("Unique identifier for the scoped asset metadata entity.")
   id: string;
 
@@ -2048,7 +1968,7 @@ model ScopedAssetMetadata {
    * Description of the scoped asset metadata.
    */
   @doc("Descriptive text providing details about the scoped asset metadata.")
-  description?: string;
+  description: string;
 
   /**
    * Reference to the associated Business Domain.
@@ -2078,7 +1998,7 @@ model ScopedAssetMetadata {
    * List of favorite column paths selected for quick access or monitoring.
    */
   @doc("List of favorite column paths selected for quick access or monitoring.")
-  favouriteColumnPaths?: string[];
+  favouriteColumnPaths: string[];
 
   /**
    * Timestamp when this metadata was created.
@@ -2108,7 +2028,10 @@ model ScopedAssetMetadata {
    * Entity tag used for concurrency control and version validation.
    */
   @doc("Entity tag used for concurrency control and version validation.")
-  eTag?: string;
+  ETag?: string;
+
+  // @doc("")
+  // name? : string
 }
 
 /**
@@ -2133,9 +2056,7 @@ model DataSourceEntity {
   /**
    * Unique identifier for the data source entity.
    */
-  @key
   @doc("Unique system identifier for the data source entity.")
-  @visibility(Lifecycle.Create)
   id: string;
 
   /**
@@ -2147,8 +2068,9 @@ model DataSourceEntity {
   /**
    * Indicates whether the data source is configured for Virtual Network connectivity.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Already existing body parameter"
   @doc("Virtual Network connectivity flag.")
-  isVnetEnabled: boolean;
+  isVNetEnabled?: boolean;
 
   /**
    * Azure resource identifier of the target data platform, if applicable.
@@ -2181,6 +2103,22 @@ model DataSourceEntity {
   lastModifiedAt?: string;
 
   /**
+   * Identity of the user who created the data source configuration.
+   */
+  @doc("Identifier or name of the user who created the data source configuration.")
+  createdBy?: string;
+
+  /**
+   * Timestamp when the data source was created.
+   */
+  @doc("ISO 8601 timestamp representing the creation time.")
+  createdAt?: string;
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Already existing body parameter"
+  @doc("Entity tag for concurrency control and change detection.")
+  ETag?: string;
+
+  /**
    * Identity of the user who last modified the data source configuration.
    */
   @doc("Identifier or name of the last modifying user.")
@@ -2191,6 +2129,30 @@ model DataSourceEntity {
    */
   @doc("Platform type of the data source (e.g., AzureSqlDatabase, Snowflake, OneLake, etc.).")
   type: string;
+
+  /**
+   * Authentication credential information for accessing the data source.
+   */
+  @doc("Authentication credential configuration for data source access.")
+  credential?: {
+    /**
+     * Type of credential (e.g., ServicePrincipal, ManagedIdentity, UsernamePassword).
+     */
+    @doc("Credential type for authentication.")
+    type: string;
+
+    /**
+     * Reference identifier for the credential resource.
+     */
+    @doc("Reference identifier for the credential resource.")
+    referenceName?: string;
+
+    /**
+     * Additional credential parameters specific to the credential type.
+     */
+    @doc("Type-specific credential parameters.")
+    typeProperties?: {};
+  };
 
   /**
    * Consolidated configuration properties covering all supported data source types.
@@ -2275,7 +2237,29 @@ model DataSourceEntity {
 
     @doc("Lakehouse ID (for OneLake).")
     lakehouseId?: string;
+
+    @doc("Identity of the user who created this data source.")
+    createdBy?: string;
+
+    @doc("ISO 8601 timestamp representing the creation time.")
+    createdAt?: string;
+
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "Already existing parameter from body"
+    @doc("Entity tag for concurrency control and change detection.")
+    ETag?: string;
+
+    @doc("Resource name associated with the data source.")
+    resourceName?: string;
+
+    @doc("Subscription identifier associated with the data source.")
+    subscriptionId?: string;
   };
+
+  @doc("Compute resource identifier associated with the credential.")
+  computeId?: string;
+
+  @doc("Region associated with the credential.")
+  region?: string;
 
   /**
    * Access scope definitions controlling data object inclusion or exclusion for operations.
@@ -2569,6 +2553,188 @@ model ProfileEntityResponse {
 }
 
 /**
+ * Response model for the latest data quality snapshot report containing comprehensive quality metrics and observer information.
+ */
+@doc("Latest data quality snapshot report with comprehensive metrics and observer details.")
+model DataQualitySnapshotResponse {
+  /**
+   * Identifier of the business domain associated with this snapshot.
+   */
+  @doc("Identifier of the business domain associated with this snapshot.")
+  businessDomainId: string;
+
+  /**
+   * Identifier of the data product under the business domain.
+   */
+  @doc("Identifier of the data product under the business domain.")
+  dataProductId: string;
+
+  /**
+   * Identifier of the data asset whose quality is captured in this snapshot.
+   */
+  @doc("Identifier of the data asset whose quality is captured in this snapshot.")
+  assetId: string;
+
+  /**
+   * Overall data quality score for the asset.
+   */
+  @doc("Overall data quality score for the asset.")
+  assetScore: float64;
+
+  /**
+   * Detailed snapshot data containing observer and rule information.
+   */
+  @doc("Detailed snapshot data containing observer and rule information.")
+  snapshot: {
+    /**
+     * Array of observers monitoring this data asset.
+     */
+    @doc("Array of observers monitoring this data asset.")
+    observers: Array<{
+      /**
+       * Name of the observer.
+       */
+      @doc("Name of the observer.")
+      name: string;
+
+      /**
+       * Type of the observer.
+       */
+      @doc("Type of the observer.")
+      type: string;
+
+      /**
+       * Reference to the data asset being observed.
+       */
+      @doc("Reference to the data asset being observed.")
+      dataAsset: {
+        /**
+         * Reference identifier for the data asset.
+         */
+        @doc("Reference identifier for the data asset.")
+        referenceId: string;
+      };
+
+      /**
+       * Observer-specific configuration properties.
+       */
+      @doc("Observer-specific configuration properties.")
+      typeProperties: {
+        /**
+         * Array of input datasets for this observer.
+         */
+        @doc("Array of input datasets for this observer.")
+        inputDatasets: Array<{
+          /**
+           * Alias name for the dataset.
+           */
+          @doc("Alias name for the dataset.")
+          @encodedName("application/json", "alias")
+          aliasName: string;
+
+          /**
+           * Whether this is the primary dataset.
+           */
+          @doc("Whether this is the primary dataset.")
+          primary: boolean;
+
+          /**
+           * Dataset configuration and metadata.
+           */
+          @doc("Dataset configuration and metadata.")
+          dataset: {
+            /**
+             * Fully qualified name of the data source.
+             */
+            #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property name"
+            @doc("Fully qualified name of the data source.")
+            datasourceFQN?: string;
+
+            /**
+             * Schema summary information for the dataset.
+             */
+            @doc("Schema summary information for the dataset.")
+            schemaSummary: {
+              /**
+               * Total number of columns in the dataset.
+               */
+              @doc("Total number of columns in the dataset.")
+              columnCount: int32;
+
+              /**
+               * Sample of columns with their names and types.
+               */
+              @doc("Sample of columns with their names and types.")
+              sampleColumns: Array<{
+                /**
+                 * Name of the column.
+                 */
+                @doc("Name of the column.")
+                name: string;
+
+                /**
+                 * Data type of the column.
+                 */
+                @doc("Data type of the column.")
+                type: string;
+              }>;
+            };
+
+            /**
+             * Type of the dataset (e.g., Delta, Parquet).
+             */
+            @doc("Type of the dataset (e.g., Delta, Parquet).")
+            type: string;
+
+            /**
+             * Location path of the dataset.
+             */
+            @doc("Location path of the dataset.")
+            location: string;
+          };
+        }>;
+      };
+    }>;
+
+    /**
+     * Summary of data quality rules associated with this snapshot.
+     */
+    @doc("Summary of data quality rules associated with this snapshot.")
+    rulesSummary: {
+      /**
+       * Total number of rules configured.
+       */
+      @doc("Total number of rules configured.")
+      totalRules: int32;
+
+      /**
+       * Number of active rules.
+       */
+      @doc("Number of active rules.")
+      activeRules: int32;
+
+      /**
+       * Number of disabled rules.
+       */
+      @doc("Number of disabled rules.")
+      disabledRules: int32;
+
+      /**
+       * Sample of active rule names.
+       */
+      @doc("Sample of active rule names.")
+      sampleActiveRules: string[];
+
+      /**
+       * Sample of disabled rule names.
+       */
+      @doc("Sample of disabled rule names.")
+      sampleDisabledRules: string[];
+    };
+  };
+}
+
+/**
  * Represents a list of trend records showing data quality score evolution
  * across different business domains, data products, and assets.
  */
@@ -2602,13 +2768,13 @@ model DataQualityTrendRecord {
    * Identifier of the data asset whose quality score is represented.
    */
   @doc("Identifier of the data asset whose quality score is represented.")
-  dataAssetId: string;
+  assetId: string;
 
   /**
    * Data quality score for this job execution, if computed.
    */
   @doc("Data quality score for this job execution, if computed.")
-  score?: float64;
+  assetScore?: float64;
 
   /**
    * Identifier of the job execution or monitoring run.
@@ -2650,8 +2816,9 @@ model OpinionEntity {
   /**
    * Unique identifier of the data quality control being assessed
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Allow null for backward compatibility"
   @doc("Data quality control identifier")
-  controlId: string;
+  controlId?: string | null;
 
   /**
    * Unique identifier for this specific opinion record
@@ -2662,8 +2829,9 @@ model OpinionEntity {
   /**
    * Opinion value or assessment result (e.g., "Approved", "Rejected", "Needs Review")
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Existing parameter"
   @doc("Opinion assessment value or result")
-  value?: string;
+  value?: unknown;
 
   /**
    * UTC timestamp when the opinion assessment was completed
@@ -2682,6 +2850,24 @@ model OpinionEntity {
    */
   @doc("Supporting query execution identifier")
   queryExecuted?: string;
+
+  @doc("Total number of rows evaluated during the opinion assessment")
+  totalRows: int64;
+
+  @doc("Number of empty rows identified during the opinion assessment")
+  emptyRows: int64;
+
+  @doc("Number of failed rows identified during the opinion assessment")
+  failedRows: int64;
+
+  @doc("Number of passed rows identified during the opinion assessment")
+  passedRows: int64;
+
+  @doc("Number of miscast rows identified during the opinion assessment")
+  miscastRows: int64;
+
+  @doc("Indicates if the opinion is a cloned instance")
+  isClonedOpinion: boolean;
 }
 
 /**
