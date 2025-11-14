@@ -59,7 +59,7 @@ model PipelineActivity {
   job: PipelineJobBase;
 
   /** Activities this activity depends on. */
-  @OpenAPI.extension("x-ms-identifiers", #["activity"])
+  @identifiers(#["activity"])
   dependsOn?: PipelineActivityDependency[];
 
   /** Activity policy. */

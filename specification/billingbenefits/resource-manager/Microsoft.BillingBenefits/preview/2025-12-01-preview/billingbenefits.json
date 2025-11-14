@@ -3419,6 +3419,71 @@
           }
         }
       },
+      "patch": {
+        "description": "This operation updates free services in Azure.",
+        "operationId": "FreeServices_Update",
+        "tags": [
+          "Free Services"
+        ],
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "FreeServicesUpdate": {
+            "$ref": "./examples/FreeServicesUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FreeServicesNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FreeServicesPatchRequestParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The resource has been updated.",
+            "schema": {
+              "$ref": "#/definitions/FreeServices"
+            }
+          },
+          "202": {
+            "description": "The update request is accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "URL for checking the ongoing status of the operation."
+              },
+              "Location": {
+                "description": "Location URI to poll for result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Clients should wait for the Retry-After interval before polling again"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
       "delete": {
         "description": "This operation deletes free services from the subscription. Only free services that are in an expired or cancelled states can be deleted.",
         "operationId": "FreeServices_Delete",
@@ -4032,6 +4097,34 @@
         "systemId": {
           "$ref": "#/definitions/SystemId",
           "description": "This is the globally unique identifier of the free services which will not change for its lifetime."
+        }
+      }
+    },
+    "FreeServicesPatchRequest": {
+      "type": "object",
+      "description": "Free services patch request",
+      "properties": {
+        "properties": {
+          "description": "Free services patch request properties",
+          "$ref": "#/definitions/FreeServicesPatchRequestProperties",
+          "x-ms-client-flatten": true
+        },
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "FreeServicesPatchRequestProperties": {
+      "type": "object",
+      "description": "Free services patch request properties",
+      "properties": {
+        "endAt": {
+          "$ref": "#/definitions/EndAt",
+          "description": "Updated expiration date and time of the free services"
         }
       }
     },
@@ -7452,6 +7545,16 @@
       "description": "Free services create request",
       "schema": {
         "$ref": "#/definitions/FreeServices"
+      }
+    },
+    "FreeServicesPatchRequestParameter": {
+      "name": "body",
+      "in": "body",
+      "x-ms-parameter-location": "method",
+      "required": true,
+      "description": "Request body for updating free services",
+      "schema": {
+        "$ref": "#/definitions/FreeServicesPatchRequest"
       }
     }
   }
