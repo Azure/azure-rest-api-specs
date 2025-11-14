@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Geolocation",
+    "title": "Maps Geolocation",
     "version": "1.0",
     "description": "Azure Maps Geolocation REST APIs",
     "x-typespec-generated": [
@@ -22,7 +22,12 @@
         "in": "path",
         "required": true,
         "type": "string",
-        "default": "https://atlas.microsoft.com"
+        "enum": [
+          "https://atlas.microsoft.com"
+        ],
+        "x-ms-enum": {
+          "modelAsString": false
+        }
       }
     ]
   },
@@ -66,7 +71,7 @@
   "paths": {
     "/geolocation/ip/{format}": {
       "get": {
-        "operationId": "Geolocation_GetIpToLocation",
+        "operationId": "GetIpToLocation",
         "summary": "Use to get the ISO country/region code for a given IP address.",
         "description": "The `Get IP To Location` API is an HTTP `GET` request that returns the ISO\ncountry/region code for a given IP address. Developers can use this information\nto block or modify content based on the geographical location from which the\napplication is accessed.",
         "parameters": [
@@ -87,6 +92,7 @@
             "description": "Desired format of the response. Only `json` format is supported.",
             "required": true,
             "type": "string",
+            "default": "json",
             "enum": [
               "json"
             ],
@@ -123,11 +129,6 @@
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Successfully retrieve country/region code from IP address": {
-            "$ref": "./examples/SuccessfulGetCountryCodeFromIP.json"
           }
         }
       }

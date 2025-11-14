@@ -35,7 +35,7 @@ op getIpToLocation is Azure.Core.Foundations.Operation<
      * Desired format of the response. Only `json` format is supported.
      */
     @path
-    format: JsonFormat;
+    format: JsonFormat = JsonFormat.json;
 
     /**
      * The IP address. Both IPv4 and IPv6 are allowed.
