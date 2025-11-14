@@ -33,13 +33,21 @@ using OpenAPI;
 @useAuth(AzureEntraAuth | AzureApiKeyAuth)
 @server(
   "https://{region}.{serviceBaseUrl}",
-  "Endpoint for the Azure Quantum",
+  "DEPRECATED: Use with one 'endpoint' parameter instead. Endpoint for the Azure Quantum with region and service base url.",
   {
     /** The Azure region where the Azure Quantum Workspace is located. */
     region: string,
 
     /** The Azure Quantum service base url. */
     serviceBaseUrl: string = "quantum.azure.com",
+  }
+)
+@server(
+  "{endpoint}",
+  "Endpoint for the Azure Quantum",
+  {
+    /** The endpoint of the Azure Quantum service. For example, https://{region}.quantum.azure.com */
+    endpoint: url,
   }
 )
 @versioned(QuantumWorkspaceAPIVersion)
