@@ -64,7 +64,6 @@ describe("sdk-breaking-change-labels", () => {
 
       // Second fetch - artifact content
       const language = "azure-sdk-for-js";
-
       const mockContentResponse = {
         ok: true,
         text: vi.fn().mockResolvedValue(
