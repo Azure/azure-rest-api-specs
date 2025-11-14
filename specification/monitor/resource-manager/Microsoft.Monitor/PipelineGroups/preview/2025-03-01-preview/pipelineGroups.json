@@ -279,6 +279,9 @@
           "Create a PipelineGroup instance using an otlp receiver with a custom TransformLanguage manipulation exporting to a custom table": {
             "$ref": "./examples/PipelineGroupCreateOtlpWithTransform.json"
           },
+          "Create a PipelineGroup instance with a large batch timeout": {
+            "$ref": "./examples/PipelineGroupCreateBatch.json"
+          },
           "Create a PipelineGroup instance with execution placement for hero customer use case (node labeling + pod isolation)": {
             "$ref": "./examples/PipelineGroupCreatePodPlacementWithInOperator.json"
           },
@@ -613,7 +616,7 @@
           "description": "Timeout in milliseconds.",
           "default": 200,
           "minimum": 10,
-          "maximum": 60000
+          "maximum": 300000
         }
       }
     },

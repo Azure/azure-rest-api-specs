@@ -24,7 +24,7 @@ model RoutingInfoPropertiesFormat {
 }
 
 @doc("A list of IPv4 routes.")
-@extension("x-ms-identifiers", #["destination"])
+@identifiers(#["destination"])
 model Ipv4Routes is Array<Ipv4Route>;
 
 @doc("An IPv4 route.")
@@ -47,7 +47,7 @@ model Ipv4RouteNextHop {
 }
 
 @doc("A list of attached data networks and their IPv4 routes.")
-@extension("x-ms-identifiers", #["/attachedDataNetwork/id"])
+@identifiers(#["/attachedDataNetwork/id"])
 model UserPlaneDataRoutes is Array<UserPlaneDataRoutesItem>;
 
 @doc("Attached data networks and their IPv4 routes.")

@@ -1,0 +1,41 @@
+{
+  "title": "Jobs_List",
+  "operationId": "Jobs_List",
+  "parameters": {
+    "api-version": "2025-11-04-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resourcebuilder-rg",
+    "workspaceName": "my-workspace",
+    "pipelineName": "data-processing-pipeline"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "kind": "Batch",
+            "properties": {
+              "processingLogic": {
+                "type": "SparkSQL",
+                "value": "SELECT * FROM input_dataset WHERE column1 > 0"
+              },
+              "inputs": [
+                {
+                  "dataset": {
+                    "type": "ResourceId",
+                    "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourcebuilder-rg/providers/Microsoft.ResourceBuilder/workspaces/my-workspace/datasets/resource-snapshot-dataset"
+                  },
+                  "name": "input-dataset"
+                }
+              ]
+            },
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourcebuilder-rg/providers/Microsoft.ResourceBuilder/workspaces/my-workspace/pipelines/data-processing-pipeline/jobs/batch-processing-job",
+            "name": "batch-processing-job",
+            "type": "Microsoft.ResourceBuilder/workspaces/pipelines/jobs"
+          }
+        ],
+        "nextLink": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourcebuilder-rg/providers/Microsoft.ResourceBuilder/workspaces/my-workspace/pipelines/data-processing-pipeline/jobs?api-version=2025-11-04-preview&$skiptoken=token"
+      }
+    }
+  }
+}

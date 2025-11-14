@@ -3,10 +3,12 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-autorest";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
+
 import "./models.tsp";
 import "./resources.tsp";
 import "./routes.tsp";
-//import "@azure-tools/typespec-providerhub";
+import "./back-compatible.tsp";
 
 using TypeSpec.Versioning;
 using Azure.ResourceManager;

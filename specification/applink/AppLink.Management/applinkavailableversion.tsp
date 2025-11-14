@@ -6,7 +6,6 @@ import "@typespec/openapi";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
-using OpenAPI;
 using Azure.ResourceManager;
 
 namespace Microsoft.AppLink;
@@ -36,14 +35,14 @@ model AvailableVersionProperties {
 @doc("Fully managed versions")
 model FullyManagedVersions {
   @doc("Release channels")
-  @extension("x-ms-identifiers", #["releaseChannel", "version"])
+  @identifiers(#["releaseChannel", "version"])
   releaseChannels: ReleaseChannelInfo[];
 }
 
 @doc("Self managed versions")
 model SelfManagedVersions {
   @doc("Istio versions")
-  @extension("x-ms-identifiers", #["version", "upgrades"])
+  @identifiers(#["version", "upgrades"])
   versions: VersionInfo[];
 }
 

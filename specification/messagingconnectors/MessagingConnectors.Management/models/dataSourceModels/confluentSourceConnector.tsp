@@ -79,4 +79,7 @@ model ConfluentSourceConnectorProperties extends DataSourceProperties {
 
   @doc("OffsetStartTime in utcDateTime zone.")
   offsetStartTime?: utcDateTime;
+
+  @doc("Configuration for ssl.")
+  sslConfiguration?: Models.Auth.SslConfiguration;
 }
