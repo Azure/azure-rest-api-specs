@@ -552,6 +552,7 @@ model OsProvisionProfile {
   @doc("Hash of the OS package downloaded")
   imageHash?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-sensitive" "GPG Public Key is not sensitive information"
   @doc("GPG Public Key used for package verification")
   gpgPubKey?: string;
 
@@ -580,6 +581,7 @@ model DownloadOsProfile {
   @doc("Hash of the OS package downloaded")
   imageHash?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-sensitive" "GPG Public Key is not sensitive information"
   @doc("GPG Public Key used for package verification")
   gpgPubKey?: string;
 }

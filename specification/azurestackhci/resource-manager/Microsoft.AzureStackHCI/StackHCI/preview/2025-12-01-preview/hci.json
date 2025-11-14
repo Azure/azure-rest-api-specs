@@ -2850,7 +2850,11 @@
         },
         "location": {
           "type": "string",
-          "description": "Location of the resource."
+          "description": "Location of the resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "tenantId": {
           "type": "string",
@@ -4056,7 +4060,9 @@
           "items": {
             "$ref": "#/definitions/OwnershipVoucherValidationDetails"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "id"
+          ]
         }
       }
     },
