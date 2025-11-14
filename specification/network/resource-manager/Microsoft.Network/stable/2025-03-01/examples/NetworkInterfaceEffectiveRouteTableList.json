@@ -1,67 +1,67 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
-    "subscriptionId": "subid",
+    "networkInterfaceName": "nic1",
     "resourceGroupName": "rg1",
-    "networkInterfaceName": "nic1"
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "source": "Default",
-            "state": "Active",
             "addressPrefix": [
               "172.20.2.0/24"
             ],
+            "nextHopIpAddress": [],
             "nextHopType": "VnetLocal",
-            "nextHopIpAddress": []
+            "source": "Default",
+            "state": "Active"
           },
           {
-            "source": "Default",
-            "state": "Active",
             "addressPrefix": [
               "0.0.0.0/0"
             ],
+            "nextHopIpAddress": [],
             "nextHopType": "Internet",
-            "nextHopIpAddress": []
+            "source": "Default",
+            "state": "Active"
           },
           {
-            "source": "Default",
-            "state": "Active",
             "addressPrefix": [
               "10.0.0.0/8"
             ],
+            "nextHopIpAddress": [],
             "nextHopType": "None",
-            "nextHopIpAddress": []
+            "source": "Default",
+            "state": "Active"
           },
           {
-            "source": "Default",
-            "state": "Active",
             "addressPrefix": [
               "100.64.0.0/10"
             ],
+            "nextHopIpAddress": [],
             "nextHopType": "None",
-            "nextHopIpAddress": []
+            "source": "Default",
+            "state": "Active"
           },
           {
-            "source": "Default",
-            "state": "Active",
             "addressPrefix": [
               "172.16.0.0/12"
             ],
+            "nextHopIpAddress": [],
             "nextHopType": "None",
-            "nextHopIpAddress": []
+            "source": "Default",
+            "state": "Active"
           },
           {
-            "source": "Default",
-            "state": "Active",
             "addressPrefix": [
               "192.168.0.0/16"
             ],
+            "nextHopIpAddress": [],
             "nextHopType": "None",
-            "nextHopIpAddress": []
+            "source": "Default",
+            "state": "Active"
           }
         ]
       }
@@ -71,5 +71,7 @@
         "Location": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkInterfaces/nic1/operationResults/00000000-0000-0000-0000-000000000000?api-version=2025-03-01"
       }
     }
-  }
+  },
+  "operationId": "NetworkInterfaces_GetEffectiveRouteTable",
+  "title": "Show network interface effective route tables"
 }

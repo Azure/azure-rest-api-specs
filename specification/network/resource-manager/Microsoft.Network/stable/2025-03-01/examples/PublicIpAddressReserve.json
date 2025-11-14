@@ -1,39 +1,41 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
-    "subscriptionId": "subid",
-    "resourceGroupName": "rg1",
-    "publicIpAddressName": "test-ip",
     "parameters": {
       "isRollback": "false"
-    }
+    },
+    "publicIpAddressName": "test-ip",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
       "body": {
         "name": "test-ip",
+        "type": "Microsoft.Network/publicIPAddresses",
         "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/test-ip",
         "location": "eastus",
         "properties": {
-          "provisioningState": "Succeeded",
-          "publicIPAddressVersion": "IPv4",
-          "publicIPAllocationMethod": "Static",
           "idleTimeoutInMinutes": 4,
           "ipConfiguration": {
             "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkInterfaces/testDNS649/ipConfigurations/ipconfig1"
-          }
+          },
+          "provisioningState": "Succeeded",
+          "publicIPAddressVersion": "IPv4",
+          "publicIPAllocationMethod": "Static"
         },
         "sku": {
           "name": "Basic"
-        },
-        "type": "Microsoft.Network/publicIPAddresses"
+        }
       }
     },
     "202": {
       "headers": {
-        "Location": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/locations/westus/operationResults/00000000-0000-0000-0000-000000000000?api-version=2025-01-01",
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/locations/westus/operations/00000000-0000-0000-0000-000000000000?api-version=2025-01-01"
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/locations/westus/operations/00000000-0000-0000-0000-000000000000?api-version=2025-01-01",
+        "Location": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/locations/westus/operationResults/00000000-0000-0000-0000-000000000000?api-version=2025-01-01"
       }
     }
-  }
+  },
+  "operationId": "PublicIPAddresses_ReserveCloudServicePublicIpAddress",
+  "title": "Reserve public IP address "
 }

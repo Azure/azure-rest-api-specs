@@ -1,20 +1,20 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
-    "subscriptionId": "subid",
-    "resourceGroupName": "rg1",
     "applicationSecurityGroupName": "test-asg",
     "parameters": {
       "location": "westus",
       "properties": {}
-    }
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
       "body": {
         "name": "test-asg",
-        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationSecurityGroups/test-asg",
         "type": "Microsoft.Network/applicationSecurityGroups",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationSecurityGroups/test-asg",
         "location": "westus",
         "properties": {
           "provisioningState": "Succeeded",
@@ -25,8 +25,8 @@
     "201": {
       "body": {
         "name": "test-asg",
-        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationSecurityGroups/test-asg",
         "type": "Microsoft.Network/applicationSecurityGroups",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationSecurityGroups/test-asg",
         "location": "westus",
         "properties": {
           "provisioningState": "Succeeded",
@@ -34,5 +34,7 @@
         }
       }
     }
-  }
+  },
+  "operationId": "ApplicationSecurityGroups_CreateOrUpdate",
+  "title": "Create application security group"
 }

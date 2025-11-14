@@ -1,10 +1,6 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
-    "subscriptionId": "subId",
-    "resourceGroupName": "rg1",
-    "serviceName": "testPls",
-    "peConnectionName": "testPlePeConnection",
     "parameters": {
       "name": "testPlePeConnection",
       "properties": {
@@ -12,11 +8,15 @@
           "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateEndpoints/testPe"
         },
         "privateLinkServiceConnectionState": {
-          "status": "Approved",
-          "description": "approved it for some reason."
+          "description": "approved it for some reason.",
+          "status": "Approved"
         }
       }
-    }
+    },
+    "peConnectionName": "testPlePeConnection",
+    "resourceGroupName": "rg1",
+    "serviceName": "testPls",
+    "subscriptionId": "subId"
   },
   "responses": {
     "200": {
@@ -28,11 +28,13 @@
             "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateEndpoints/testPe"
           },
           "privateLinkServiceConnectionState": {
-            "status": "Approved",
-            "description": "approved it for some reason."
+            "description": "approved it for some reason.",
+            "status": "Approved"
           }
         }
       }
     }
-  }
+  },
+  "operationId": "PrivateLinkServices_UpdatePrivateEndpointConnection",
+  "title": "approve or reject private end point connection for a private link service"
 }

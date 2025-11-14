@@ -158,10 +158,11 @@ interface VpnGateways {
   @operationId("VpnConnections_Delete")
   @delete
   @action("{connectionName}")
-  vpnConnectionsDelete is ArmResourceActionAsync<
+  vpnConnectionsDelete is ArmResourceActionAsyncBase<
     VpnGateway,
     void,
-    OkResponse | NoContentResponse,
+    Response = OkResponse | NoContentResponse,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<VpnGateway>,
     Parameters = {
       /**
        * The name of the connection.

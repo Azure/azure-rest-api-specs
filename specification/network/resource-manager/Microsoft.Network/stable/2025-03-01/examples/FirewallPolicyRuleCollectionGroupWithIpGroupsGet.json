@@ -1,43 +1,43 @@
 {
   "parameters": {
-    "ruleCollectionGroupName": "ruleGroup1",
+    "api-version": "2025-03-01",
     "firewallPolicyName": "firewallPolicy",
     "resourceGroupName": "rg1",
-    "api-version": "2025-03-01",
+    "ruleCollectionGroupName": "ruleGroup1",
     "subscriptionId": "subid"
   },
   "responses": {
     "200": {
       "body": {
         "name": "ruleGroup1",
-        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/firewallPolicies/firewallPolicy/ruleGroups/ruleGroup1",
         "etag": "W/\"72090554-7e3b-43f2-80ad-99a9020dcb11\"",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/firewallPolicies/firewallPolicy/ruleGroups/ruleGroup1",
         "properties": {
-          "provisioningState": "Succeeded",
           "priority": 110,
+          "provisioningState": "Succeeded",
           "ruleCollections": [
             {
-              "ruleCollectionType": "FirewallPolicyFilterRuleCollection",
               "name": "Example-Filter-Rule-Collection",
-              "priority": 200,
               "action": {
                 "type": "Deny"
               },
+              "priority": 200,
+              "ruleCollectionType": "FirewallPolicyFilterRuleCollection",
               "rules": [
                 {
-                  "ruleType": "NetworkRule",
                   "name": "network-rule1",
-                  "ipProtocols": [
-                    "TCP"
+                  "destinationIpGroups": [
+                    "/subscriptions/subid/providers/Microsoft.Network/resourceGroup/rg1/ipGroups/ipGroups2"
                   ],
                   "destinationPorts": [
                     "*"
                   ],
+                  "ipProtocols": [
+                    "TCP"
+                  ],
+                  "ruleType": "NetworkRule",
                   "sourceIpGroups": [
                     "/subscriptions/subid/providers/Microsoft.Network/resourceGroup/rg1/ipGroups/ipGroups1"
-                  ],
-                  "destinationIpGroups": [
-                    "/subscriptions/subid/providers/Microsoft.Network/resourceGroup/rg1/ipGroups/ipGroups2"
                   ]
                 }
               ]
@@ -46,5 +46,7 @@
         }
       }
     }
-  }
+  },
+  "operationId": "FirewallPolicyRuleCollectionGroups_Get",
+  "title": "Get FirewallPolicyRuleCollectionGroup With IpGroups"
 }

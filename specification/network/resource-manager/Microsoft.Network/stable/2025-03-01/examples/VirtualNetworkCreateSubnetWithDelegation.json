@@ -1,10 +1,8 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
-    "subscriptionId": "subId",
-    "resourceGroupName": "rg1",
-    "virtualNetworkName": "test-vnet",
     "parameters": {
+      "location": "westcentralus",
       "properties": {
         "addressSpace": {
           "addressPrefixes": [
@@ -27,42 +25,44 @@
             }
           }
         ]
-      },
-      "location": "westcentralus"
-    }
+      }
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subId",
+    "virtualNetworkName": "test-vnet"
   },
   "responses": {
     "200": {
       "body": {
         "name": "test-vnet",
-        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet",
         "type": "Microsoft.Network/virtualNetworks",
+        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet",
         "location": "westcentralus",
         "properties": {
-          "provisioningState": "Succeeded",
           "addressSpace": {
             "addressPrefixes": [
               "10.0.0.0/16"
             ]
           },
+          "provisioningState": "Succeeded",
           "subnets": [
             {
-              "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/test-1",
               "name": "test-1",
+              "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/test-1",
               "properties": {
                 "addressPrefix": "10.0.0.0/24",
-                "provisioningState": "Succeeded",
                 "delegations": [
                   {
                     "name": "myDelegation",
                     "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/test-1/delegations/myDelegation",
                     "properties": {
+                      "actions": [],
                       "provisioningState": "Succeeded",
-                      "serviceName": "Microsoft.Sql/managedInstances",
-                      "actions": []
+                      "serviceName": "Microsoft.Sql/managedInstances"
                     }
                   }
                 ],
+                "provisioningState": "Succeeded",
                 "purpose": ""
               }
             }
@@ -74,34 +74,34 @@
     "201": {
       "body": {
         "name": "test-vnet",
-        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet",
         "type": "Microsoft.Network/virtualNetworks",
+        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet",
         "location": "westcentralus",
         "properties": {
-          "provisioningState": "Succeeded",
           "addressSpace": {
             "addressPrefixes": [
               "10.0.0.0/16"
             ]
           },
+          "provisioningState": "Succeeded",
           "subnets": [
             {
-              "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/test-1",
               "name": "test-1",
+              "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/test-1",
               "properties": {
                 "addressPrefix": "10.0.0.0/24",
-                "provisioningState": "Succeeded",
                 "delegations": [
                   {
                     "name": "myDelegation",
                     "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/test-1/delegations/myDelegation",
                     "properties": {
+                      "actions": [],
                       "provisioningState": "Succeeded",
-                      "serviceName": "Microsoft.Sql/managedInstances",
-                      "actions": []
+                      "serviceName": "Microsoft.Sql/managedInstances"
                     }
                   }
                 ],
+                "provisioningState": "Succeeded",
                 "purpose": ""
               }
             }
@@ -110,5 +110,7 @@
         }
       }
     }
-  }
+  },
+  "operationId": "VirtualNetworks_CreateOrUpdate",
+  "title": "Create virtual network with delegated subnets"
 }

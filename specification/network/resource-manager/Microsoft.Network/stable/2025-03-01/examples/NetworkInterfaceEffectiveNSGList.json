@@ -1,70 +1,70 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
-    "subscriptionId": "subid",
+    "networkInterfaceName": "nic1",
     "resourceGroupName": "rg1",
-    "networkInterfaceName": "nic1"
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "networkSecurityGroup": {
-              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityGroups/test-nsg"
-            },
             "association": {
+              "networkInterface": {
+                "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkInterfaces/nic1"
+              },
               "networkManager": {
                 "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/nm1"
               },
               "subnet": {
                 "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/rg1-vnet/subnets/default"
-              },
-              "networkInterface": {
-                "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkInterfaces/nic1"
               }
             },
             "effectiveSecurityRules": [
               {
                 "name": "securityRules/rule1",
-                "protocol": "Tcp",
-                "sourcePortRange": "456-456",
-                "destinationPortRange": "6579-6579",
-                "sourceAddressPrefix": "0.0.0.0/32",
-                "destinationAddressPrefix": "0.0.0.0/32",
                 "access": "Allow",
+                "destinationAddressPrefix": "0.0.0.0/32",
+                "destinationPortRange": "6579-6579",
+                "direction": "Inbound",
                 "priority": 234,
-                "direction": "Inbound"
+                "sourceAddressPrefix": "0.0.0.0/32",
+                "sourcePortRange": "456-456",
+                "protocol": "Tcp"
               },
               {
                 "name": "securityRules/default-allow-rdp",
-                "protocol": "Tcp",
-                "sourcePortRange": "0-65535",
-                "destinationPortRange": "3389-3389",
-                "sourceAddressPrefix": "1.1.1.1/32",
-                "destinationAddressPrefix": "0.0.0.0/0",
                 "access": "Allow",
+                "destinationAddressPrefix": "0.0.0.0/0",
+                "destinationPortRange": "3389-3389",
+                "direction": "Inbound",
                 "priority": 1000,
-                "direction": "Inbound"
+                "sourceAddressPrefix": "1.1.1.1/32",
+                "sourcePortRange": "0-65535",
+                "protocol": "Tcp"
               },
               {
                 "name": "defaultSecurityRules/AllowInternetOutBound",
-                "protocol": "All",
-                "sourcePortRange": "0-65535",
-                "destinationPortRange": "0-65535",
-                "sourceAddressPrefix": "0.0.0.0/0",
+                "access": "Allow",
                 "destinationAddressPrefix": "Internet",
+                "destinationPortRange": "0-65535",
+                "direction": "Outbound",
                 "expandedDestinationAddressPrefix": [
                   "32.0.0.0/3",
                   "4.0.0.0/6",
                   "2.0.0.0/7",
                   "1.0.0.0/8"
                 ],
-                "access": "Allow",
                 "priority": 65001,
-                "direction": "Outbound"
+                "sourceAddressPrefix": "0.0.0.0/0",
+                "sourcePortRange": "0-65535",
+                "protocol": "All"
               }
-            ]
+            ],
+            "networkSecurityGroup": {
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityGroups/test-nsg"
+            }
           }
         ]
       }
@@ -74,5 +74,7 @@
         "Location": "https://management.azure.com//subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityGroups/test-nsg/operationResults/00000000-0000-0000-0000-000000000000?api-version=2025-03-01"
       }
     }
-  }
+  },
+  "operationId": "NetworkInterfaces_ListEffectiveNetworkSecurityGroups",
+  "title": "List network interface effective network security groups"
 }

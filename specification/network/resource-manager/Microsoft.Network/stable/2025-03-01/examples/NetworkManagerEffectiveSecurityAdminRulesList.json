@@ -1,55 +1,56 @@
 {
-  "title": "List Azure Virtual Network Manager Effective Configuration",
   "parameters": {
     "api-version": "2025-03-01",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "resourceGroupName": "myResourceGroup",
-    "virtualNetworkName": "testVirtualNetwork",
     "parameters": {
       "skipToken": "FakeSkipTokenCode"
-    }
+    },
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "virtualNetworkName": "testVirtualNetwork"
   },
+  "title": "List effective security admin rules",
   "responses": {
     "200": {
       "body": {
+        "skipToken": "FakeSkipTokenCode",
         "value": [
           {
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkManagers/testNetworkManager/securityAdminConfigurations/myTestSecurityConfig/ruleCollections/testRuleCollection/rules/SampleAdminRule",
             "configurationDescription": "SampleDescription",
-            "ruleCollectionDescription": "SampleRuleCollectionDescription",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkManagers/testNetworkManager/securityAdminConfigurations/myTestSecurityConfig/ruleCollections/testRuleCollection/rules/SampleAdminRule",
+            "kind": "Default",
+            "properties": {
+              "description": "Sample Admin Rule",
+              "access": "Deny",
+              "destinationPortRanges": [
+                "22"
+              ],
+              "destinations": [
+                {
+                  "addressPrefix": "*",
+                  "addressPrefixType": "IPPrefix"
+                }
+              ],
+              "direction": "Inbound",
+              "flag": "AllowVnetInbound",
+              "priority": 1,
+              "provisioningState": "Succeeded",
+              "sourcePortRanges": [
+                "0-65535"
+              ],
+              "sources": [
+                {
+                  "addressPrefix": "*",
+                  "addressPrefixType": "IPPrefix"
+                }
+              ],
+              "protocol": "Tcp"
+            },
             "ruleCollectionAppliesToGroups": [
               {
                 "networkGroupId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroup/myResourceGroup/providers/Microsoft.Network/networkManagers/testNetworkManager/networkGroups/group1"
               }
             ],
-            "kind": "Default",
-            "properties": {
-              "description": "Sample Admin Rule",
-              "flag": "AllowVnetInbound",
-              "protocol": "Tcp",
-              "sources": [
-                {
-                  "addressPrefixType": "IPPrefix",
-                  "addressPrefix": "*"
-                }
-              ],
-              "destinations": [
-                {
-                  "addressPrefixType": "IPPrefix",
-                  "addressPrefix": "*"
-                }
-              ],
-              "sourcePortRanges": [
-                "0-65535"
-              ],
-              "destinationPortRanges": [
-                "22"
-              ],
-              "direction": "Inbound",
-              "access": "Deny",
-              "priority": 1,
-              "provisioningState": "Succeeded"
-            },
+            "ruleCollectionDescription": "SampleRuleCollectionDescription",
             "ruleGroups": [
               {
                 "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroup/myResourceGroup/providers/Microsoft.Network/networkManagers/testNetworkManager/networkGroups/group1",
@@ -60,9 +61,9 @@
               }
             ]
           }
-        ],
-        "skipToken": "FakeSkipTokenCode"
+        ]
       }
     }
-  }
+  },
+  "operationId": "ListNetworkManagerEffectiveSecurityAdminRules"
 }

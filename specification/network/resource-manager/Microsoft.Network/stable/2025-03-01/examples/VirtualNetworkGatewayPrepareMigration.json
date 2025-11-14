@@ -1,13 +1,13 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
-    "subscriptionId": "subid",
-    "resourceGroupName": "rg1",
-    "virtualNetworkGatewayName": "vpngw",
     "migrationParams": {
       "migrationType": "UpgradeDeploymentToStandardIP",
       "resourceUrl": "testUrl"
-    }
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid",
+    "virtualNetworkGatewayName": "vpngw"
   },
   "responses": {
     "202": {
@@ -15,5 +15,7 @@
         "Azure-AsyncOperation": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/locations/eastus/operations/00000000-0000-0000-0000-000000000000?api-version=2025-03-01"
       }
     }
-  }
+  },
+  "operationId": "VirtualNetworkGateways_InvokePrepareMigration",
+  "title": "VirtualNetworkGatewayPrepareMigration"
 }

@@ -1,18 +1,20 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
-    "subscriptionId": "subid",
     "resourceGroupName": "rg1",
+    "subscriptionId": "subid",
     "virtualNetworkGatewayConnectionName": "vpngwcn1"
   },
   "responses": {
+    "200": {
+      "body": "\"{\"Status\":\"Successful\",\"Data\":null}\""
+    },
     "202": {
       "headers": {
         "location": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/westus/operationResults/{operationId}?api-version=2025-03-01"
       }
-    },
-    "200": {
-      "body": "\"{\"Status\":\"Successful\",\"Data\":null}\""
     }
-  }
+  },
+  "operationId": "VirtualNetworkGatewayConnections_GetIkeSas",
+  "title": "GetVirtualNetworkGatewayConnectionIkeSa"
 }

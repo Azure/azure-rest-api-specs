@@ -1,16 +1,16 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
-    "subscriptionId": "subid",
+    "applicationSecurityGroupName": "test-asg",
     "resourceGroupName": "rg1",
-    "applicationSecurityGroupName": "test-asg"
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
       "body": {
         "name": "test-asg",
-        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationSecurityGroups/test-asg",
         "type": "Microsoft.Network/applicationSecurityGroups",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationSecurityGroups/test-asg",
         "location": "westus",
         "properties": {
           "provisioningState": "Succeeded",
@@ -18,5 +18,7 @@
         }
       }
     }
-  }
+  },
+  "operationId": "ApplicationSecurityGroups_Get",
+  "title": "Get application security group"
 }

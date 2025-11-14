@@ -1,10 +1,8 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
-    "subscriptionId": "subid",
-    "resourceGroupName": "vnetTest",
-    "virtualNetworkName": "vnet1",
     "parameters": {
+      "location": "eastus",
       "properties": {
         "addressSpace": {
           "addressPrefixes": [
@@ -24,24 +22,26 @@
             }
           }
         ]
-      },
-      "location": "eastus"
-    }
+      }
+    },
+    "resourceGroupName": "vnetTest",
+    "subscriptionId": "subid",
+    "virtualNetworkName": "vnet1"
   },
   "responses": {
     "200": {
       "body": {
         "name": "vnet1",
-        "id": "/subscriptions/subid/resourceGroups/vnetTest/providers/Microsoft.Network/virtualNetworks/vnet1",
         "type": "Microsoft.Network/virtualNetworks",
+        "id": "/subscriptions/subid/resourceGroups/vnetTest/providers/Microsoft.Network/virtualNetworks/vnet1",
         "location": "eastus",
         "properties": {
-          "provisioningState": "Succeeded",
           "addressSpace": {
             "addressPrefixes": [
               "10.0.0.0/16"
             ]
           },
+          "provisioningState": "Succeeded",
           "subnets": [
             {
               "name": "test-1",
@@ -49,18 +49,18 @@
               "properties": {
                 "addressPrefix": "10.0.0.0/16",
                 "ipConfigurations": [],
+                "provisioningState": "Succeeded",
                 "resourceNavigationLinks": [],
                 "serviceEndpoints": [
                   {
-                    "provisioningState": "Succeeded",
-                    "service": "Microsoft.Storage",
                     "locations": [
                       "eastus2(stage)",
                       "usnorth(stage)"
-                    ]
+                    ],
+                    "provisioningState": "Succeeded",
+                    "service": "Microsoft.Storage"
                   }
-                ],
-                "provisioningState": "Succeeded"
+                ]
               }
             }
           ],
@@ -71,16 +71,16 @@
     "201": {
       "body": {
         "name": "vnet1",
-        "id": "/subscriptions/subid/resourceGroups/vnetTest/providers/Microsoft.Network/virtualNetworks/vnet1",
         "type": "Microsoft.Network/virtualNetworks",
+        "id": "/subscriptions/subid/resourceGroups/vnetTest/providers/Microsoft.Network/virtualNetworks/vnet1",
         "location": "eastus",
         "properties": {
-          "provisioningState": "Succeeded",
           "addressSpace": {
             "addressPrefixes": [
               "10.0.0.0/16"
             ]
           },
+          "provisioningState": "Succeeded",
           "subnets": [
             {
               "name": "test-1",
@@ -88,18 +88,18 @@
               "properties": {
                 "addressPrefix": "10.0.0.0/16",
                 "ipConfigurations": [],
+                "provisioningState": "Succeeded",
                 "resourceNavigationLinks": [],
                 "serviceEndpoints": [
                   {
-                    "provisioningState": "Succeeded",
-                    "service": "Microsoft.Storage",
                     "locations": [
                       "eastus2(stage)",
                       "usnorth(stage)"
-                    ]
+                    ],
+                    "provisioningState": "Succeeded",
+                    "service": "Microsoft.Storage"
                   }
-                ],
-                "provisioningState": "Succeeded"
+                ]
               }
             }
           ],
@@ -107,5 +107,7 @@
         }
       }
     }
-  }
+  },
+  "operationId": "VirtualNetworks_CreateOrUpdate",
+  "title": "Create virtual network with service endpoints"
 }

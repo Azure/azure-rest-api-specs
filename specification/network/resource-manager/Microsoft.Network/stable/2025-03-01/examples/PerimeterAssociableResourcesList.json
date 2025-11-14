@@ -1,44 +1,45 @@
 {
-  "title": "List of resources onboarded for network security perimeter feature (perimeter associable resources).",
   "parameters": {
     "api-version": "2025-03-01",
-    "subscriptionId": "subId",
-    "location": "westus"
+    "location": "westus",
+    "subscriptionId": "subId"
   },
+  "title": "NetworkSecurityPerimeterAssociableResourceTypes",
   "responses": {
     "200": {
       "body": {
+        "nextLink": "{baseurl}/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/perimeterAssociableResourceTypes?api-version=2025-03-01&$skipToken=10",
         "value": [
           {
             "name": "Microsoft.Sql.servers",
-            "id": "/subscriptions/{subscriptionID}/providers/Microsoft.Network/perimeterAssociableResourceTypes/Microsoft.Sql.servers",
             "type": "Microsoft.Network/PerimeterAssociableResourceTypes",
+            "id": "/subscriptions/{subscriptionID}/providers/Microsoft.Network/perimeterAssociableResourceTypes/Microsoft.Sql.servers",
             "properties": {
-              "resourceType": "Microsoft.Sql/servers",
               "displayName": "Microsoft.Sql/servers",
               "publicDnsZones": [
                 "database.windows.net"
-              ]
+              ],
+              "resourceType": "Microsoft.Sql/servers"
             }
           },
           {
             "name": "Microsoft.Storage.accounts",
-            "id": "/subscriptions/{subscriptionId}/providers/Microsoft.Network/perimeterAssociableResourceTypes/Microsoft.Storage.storageAccounts",
             "type": "Microsoft.Network/PerimeterAssociableResourceTypes",
+            "id": "/subscriptions/{subscriptionId}/providers/Microsoft.Network/perimeterAssociableResourceTypes/Microsoft.Storage.storageAccounts",
             "properties": {
-              "resourceType": "Microsoft.Storage/accounts",
               "displayName": "Microsoft.Storage/accounts",
               "publicDnsZones": [
                 "blob.core.windows.net",
                 "table.core.windows.net",
                 "queue.core.windows.net",
                 "file.core.windows.net"
-              ]
+              ],
+              "resourceType": "Microsoft.Storage/accounts"
             }
           }
-        ],
-        "nextLink": "{baseurl}/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/perimeterAssociableResourceTypes?api-version=2025-03-01&$skipToken=10"
+        ]
       }
     }
-  }
+  },
+  "operationId": "NetworkSecurityPerimeterAssociableResourceTypes_List"
 }

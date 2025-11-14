@@ -1,53 +1,55 @@
 {
   "parameters": {
-    "routeFilterName": "filterName",
-    "ruleName": "ruleName",
-    "resourceGroupName": "rg1",
     "api-version": "2025-03-01",
-    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "routeFilterName": "filterName",
     "routeFilterRuleParameters": {
       "properties": {
         "access": "Allow",
-        "routeFilterRuleType": "Community",
         "communities": [
           "12076:5030",
           "12076:5040"
-        ]
+        ],
+        "routeFilterRuleType": "Community"
       }
-    }
+    },
+    "ruleName": "ruleName",
+    "subscriptionId": "subid"
   },
   "responses": {
-    "201": {
+    "200": {
       "body": {
-        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/routeFilters/filterName/routeFilterRules/ruleName",
-        "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
         "name": "ruleName",
+        "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/routeFilters/filterName/routeFilterRules/ruleName",
         "properties": {
-          "provisioningState": "Succeeded",
           "access": "Allow",
-          "routeFilterRuleType": "Community",
           "communities": [
             "12076:5030",
             "12076:5040"
-          ]
+          ],
+          "provisioningState": "Succeeded",
+          "routeFilterRuleType": "Community"
         }
       }
     },
-    "200": {
+    "201": {
       "body": {
-        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/routeFilters/filterName/routeFilterRules/ruleName",
-        "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
         "name": "ruleName",
+        "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/routeFilters/filterName/routeFilterRules/ruleName",
         "properties": {
-          "provisioningState": "Succeeded",
           "access": "Allow",
-          "routeFilterRuleType": "Community",
           "communities": [
             "12076:5030",
             "12076:5040"
-          ]
+          ],
+          "provisioningState": "Succeeded",
+          "routeFilterRuleType": "Community"
         }
       }
     }
-  }
+  },
+  "operationId": "RouteFilterRules_CreateOrUpdate",
+  "title": "RouteFilterRuleCreate"
 }

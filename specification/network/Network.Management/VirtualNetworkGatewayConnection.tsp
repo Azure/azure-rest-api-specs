@@ -144,8 +144,8 @@ interface VirtualNetworkGatewayConnections {
   @action("resetconnection")
   resetConnection is ArmResourceActionAsyncBase<
     VirtualNetworkGatewayConnection,
-    void,
-    ArmAcceptedLroResponse,
+    Request = void,
+    Response = ArmAcceptedLroResponse,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<VirtualNetworkGatewayConnection>
   >;
 }

@@ -120,10 +120,11 @@ interface ExpressRouteGateways {
   @operationId("ExpressRouteConnections_Delete")
   @delete
   @action("{connectionName}")
-  expressRouteConnectionsDelete is ArmResourceActionAsync<
+  expressRouteConnectionsDelete is ArmResourceActionAsyncBase<
     ExpressRouteGateway,
     void,
-    OkResponse | NoContentResponse,
+    Response = OkResponse | NoContentResponse,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ExpressRouteGateway>,
     Parameters = {
       /**
        * The name of the connection subresource.

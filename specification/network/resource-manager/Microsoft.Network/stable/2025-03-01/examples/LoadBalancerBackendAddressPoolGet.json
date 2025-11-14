@@ -1,20 +1,19 @@
 {
   "parameters": {
-    "subscriptionId": "subid",
-    "resourceGroupName": "testrg",
-    "loadBalancerName": "lb",
+    "api-version": "2025-03-01",
     "backendAddressPoolName": "backend",
-    "api-version": "2025-03-01"
+    "loadBalancerName": "lb",
+    "resourceGroupName": "testrg",
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
       "body": {
         "name": "backend",
-        "id": "/subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/loadBalancers/lb/backendAddressPools/backend",
-        "etag": "W/\"00000000-0000-0000-0000-000000000000\"",
         "type": "Microsoft.Network/loadBalancers/backendAddressPools",
+        "etag": "W/\"00000000-0000-0000-0000-000000000000\"",
+        "id": "/subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/loadBalancers/lb/backendAddressPools/backend",
         "properties": {
-          "provisioningState": "Succeeded",
           "backendIPConfigurations": [
             {
               "id": "/subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/networkInterfaces/nic/ipConfigurations/default-ip-config"
@@ -24,9 +23,12 @@
             {
               "id": "/subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/loadBalancers/lb/loadBalancingRules/rulelb"
             }
-          ]
+          ],
+          "provisioningState": "Succeeded"
         }
       }
     }
-  }
+  },
+  "operationId": "LoadBalancerBackendAddressPools_Get",
+  "title": "LoadBalancerBackendAddressPoolGet"
 }

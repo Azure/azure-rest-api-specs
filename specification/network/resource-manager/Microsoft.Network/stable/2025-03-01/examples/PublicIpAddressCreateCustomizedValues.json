@@ -1,79 +1,81 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
-    "subscriptionId": "subid",
-    "resourceGroupName": "rg1",
-    "publicIpAddressName": "test-ip",
-    "zones": [
-      "1"
-    ],
     "parameters": {
+      "location": "eastus",
       "properties": {
-        "publicIPAllocationMethod": "Static",
         "idleTimeoutInMinutes": 10,
-        "publicIPAddressVersion": "IPv4"
+        "publicIPAddressVersion": "IPv4",
+        "publicIPAllocationMethod": "Static"
       },
       "sku": {
         "name": "Standard",
         "tier": "Global"
-      },
-      "location": "eastus"
-    }
+      }
+    },
+    "publicIpAddressName": "test-ip",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid",
+    "zones": [
+      "1"
+    ]
   },
   "responses": {
     "200": {
       "body": {
         "name": "testDNS-ip",
+        "type": "Microsoft.Network/publicIPAddresses",
         "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/test-ip",
         "location": "eastus",
-        "zones": [
-          "1"
-        ],
         "properties": {
-          "provisioningState": "Succeeded",
-          "publicIPAddressVersion": "IPv4",
-          "publicIPAllocationMethod": "Static",
+          "ddosSettings": {
+            "protectionMode": "VirtualNetworkInherited"
+          },
           "idleTimeoutInMinutes": 10,
           "ipConfiguration": {
             "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkInterfaces/testDNS649/ipConfigurations/ipconfig1"
           },
-          "ddosSettings": {
-            "protectionMode": "VirtualNetworkInherited"
-          }
+          "provisioningState": "Succeeded",
+          "publicIPAddressVersion": "IPv4",
+          "publicIPAllocationMethod": "Static"
         },
         "sku": {
           "name": "Standard",
           "tier": "Global"
         },
-        "type": "Microsoft.Network/publicIPAddresses"
+        "zones": [
+          "1"
+        ]
       }
     },
     "201": {
       "body": {
         "name": "testDNS-ip",
+        "type": "Microsoft.Network/publicIPAddresses",
         "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/test-ip",
         "location": "eastus",
-        "zones": [
-          "1"
-        ],
         "properties": {
-          "provisioningState": "Succeeded",
-          "publicIPAddressVersion": "IPv4",
-          "publicIPAllocationMethod": "Static",
+          "ddosSettings": {
+            "protectionMode": "VirtualNetworkInherited"
+          },
           "idleTimeoutInMinutes": 10,
           "ipConfiguration": {
             "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkInterfaces/testDNS649/ipConfigurations/ipconfig1"
           },
-          "ddosSettings": {
-            "protectionMode": "VirtualNetworkInherited"
-          }
+          "provisioningState": "Succeeded",
+          "publicIPAddressVersion": "IPv4",
+          "publicIPAllocationMethod": "Static"
         },
         "sku": {
           "name": "Standard",
           "tier": "Global"
         },
-        "type": "Microsoft.Network/publicIPAddresses"
+        "zones": [
+          "1"
+        ]
       }
     }
-  }
+  },
+  "operationId": "PublicIPAddresses_CreateOrUpdate",
+  "title": "Create public IP address allocation method"
 }

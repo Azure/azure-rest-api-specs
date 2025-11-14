@@ -1,40 +1,41 @@
 {
-  "title": "Get Azure Virtual Network Manager",
   "parameters": {
     "api-version": "2025-03-01",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "networkManagerName": "testNetworkManager",
     "resourceGroupName": "rg1",
-    "networkManagerName": "testNetworkManager"
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
+  "title": "NetworkManagersGet",
   "responses": {
     "200": {
       "body": {
         "name": "testNetworkManager",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroup/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager",
         "type": "Microsoft.Network/networkManagers",
-        "systemData": {
-          "createdBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
-          "createdByType": "User",
-          "createdAt": "2021-01-11T18:52:27Z",
-          "lastModifiedBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2021-01-11T18:52:27Z"
-        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroup/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager",
         "properties": {
           "description": "My Test Network Manager",
+          "networkManagerScopeAccesses": [
+            "SecurityUser"
+          ],
           "networkManagerScopes": {
             "managementGroups": [],
             "subscriptions": [
               "/subscriptions/00000000-0000-0000-0000-000000000000"
             ]
           },
-          "networkManagerScopeAccesses": [
-            "SecurityUser"
-          ],
           "provisioningState": "Succeeded",
           "resourceGuid": "00000000-0000-0000-0000-000000000000"
+        },
+        "systemData": {
+          "createdAt": "2021-01-11T18:52:27Z",
+          "createdBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
+          "createdByType": "User",
+          "lastModifiedAt": "2021-01-11T18:52:27Z",
+          "lastModifiedBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
+          "lastModifiedByType": "User"
         }
       }
     }
-  }
+  },
+  "operationId": "NetworkManagers_Get"
 }

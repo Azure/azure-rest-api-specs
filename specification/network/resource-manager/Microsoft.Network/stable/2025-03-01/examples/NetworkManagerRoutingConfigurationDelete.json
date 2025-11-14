@@ -1,18 +1,20 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "resourceGroupName": "rg1",
+    "configurationName": "myTestRoutingConfig",
     "networkManagerName": "testNetworkManager",
-    "configurationName": "myTestRoutingConfig"
+    "resourceGroupName": "rg1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
+    "200": {},
     "202": {
       "headers": {
         "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SampleRG/providers/Microsoft.Network/networkManagers/testNetworkManager/routingConfigurations/myTestRoutingConfig/operationResults/00000000-0000-0000-0000-000000000000?api-version=2025-03-01"
       }
     },
-    "200": {},
     "204": {}
-  }
+  },
+  "operationId": "NetworkManagerRoutingConfigurations_Delete",
+  "title": "Delete network manager routing configuration"
 }

@@ -1,19 +1,20 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
-    "subscriptionId": "subid",
-    "resourceGroupName": "rg1",
+    "connectionMonitorName": "cm1",
     "networkWatcherName": "nw1",
-    "connectionMonitorName": "cm1"
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
       "body": {
         "name": "cm1",
-        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkWatchers/nw1/connectionMonitors/cm1",
+        "type": "Microsoft.Network/networkWatchers/connectionMonitors",
         "etag": "W/\"00000000-0000-0000-0000-000000000000\"",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkWatchers/nw1/connectionMonitors/cm1",
+        "location": "eastus",
         "properties": {
-          "provisioningState": "Succeeded",
           "endpoints": [
             {
               "name": "source",
@@ -24,34 +25,35 @@
               "address": "bing.com"
             }
           ],
+          "provisioningState": "Succeeded",
           "testConfigurations": [
             {
               "name": "tcp",
-              "testFrequencySec": 60,
-              "protocol": "Tcp",
               "tcpConfiguration": {
                 "port": 80
-              }
+              },
+              "testFrequencySec": 60,
+              "protocol": "Tcp"
             }
           ],
           "testGroups": [
             {
               "name": "tg",
-              "testConfigurations": [
-                "tcp"
+              "destinations": [
+                "destination"
               ],
               "sources": [
                 "source"
               ],
-              "destinations": [
-                "destination"
+              "testConfigurations": [
+                "tcp"
               ]
             }
           ]
-        },
-        "location": "eastus",
-        "type": "Microsoft.Network/networkWatchers/connectionMonitors"
+        }
       }
     }
-  }
+  },
+  "operationId": "ConnectionMonitors_Get",
+  "title": "Get connection monitor"
 }

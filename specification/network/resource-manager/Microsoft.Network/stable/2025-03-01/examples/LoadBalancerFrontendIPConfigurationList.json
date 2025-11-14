@@ -1,9 +1,9 @@
 {
   "parameters": {
-    "resourceGroupName": "testrg",
     "api-version": "2025-03-01",
-    "subscriptionId": "subid",
-    "loadBalancerName": "lb"
+    "loadBalancerName": "lb",
+    "resourceGroupName": "testrg",
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
@@ -11,31 +11,33 @@
         "value": [
           {
             "name": "frontend",
-            "id": "/subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/loadBalancers/lb/frontendIPConfigurations/frontend",
-            "etag": "W/\"00000000-0000-0000-0000-000000000000\"",
             "type": "Microsoft.Network/loadBalancers/frontendIPConfigurations",
+            "etag": "W/\"00000000-0000-0000-0000-000000000000\"",
+            "id": "/subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/loadBalancers/lb/frontendIPConfigurations/frontend",
             "properties": {
-              "provisioningState": "Succeeded",
-              "privateIPAddress": "10.0.1.4",
-              "privateIPAllocationMethod": "Dynamic",
-              "privateIPAddressVersion": "IPv4",
-              "subnet": {
-                "id": "/subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/vnetlb/subnets/subnetlb"
-              },
+              "inboundNatRules": [
+                {
+                  "id": "/subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/loadBalancers/lb/inboundNatRules/inrlb"
+                }
+              ],
               "loadBalancingRules": [
                 {
                   "id": "/subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/loadBalancers/lb/loadBalancingRules/rulelb"
                 }
               ],
-              "inboundNatRules": [
-                {
-                  "id": "/subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/loadBalancers/lb/inboundNatRules/inrlb"
-                }
-              ]
+              "privateIPAddress": "10.0.1.4",
+              "privateIPAddressVersion": "IPv4",
+              "privateIPAllocationMethod": "Dynamic",
+              "provisioningState": "Succeeded",
+              "subnet": {
+                "id": "/subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/vnetlb/subnets/subnetlb"
+              }
             }
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "LoadBalancerFrontendIPConfigurations_List",
+  "title": "LoadBalancerFrontendIPConfigurationList"
 }

@@ -1,63 +1,69 @@
 {
   "parameters": {
-    "virtualNetworkPeeringName": "peer",
-    "virtualNetworkName": "vnet1",
-    "resourceGroupName": "peerTest",
-    "syncRemoteAddressSpace": "true",
-    "api-version": "2025-03-01",
-    "subscriptionId": "subid",
     "VirtualNetworkPeeringParameters": {
       "properties": {
-        "allowVirtualNetworkAccess": true,
         "allowForwardedTraffic": true,
         "allowGatewayTransit": false,
-        "useRemoteGateways": false,
-        "peerCompleteVnets": false,
+        "allowVirtualNetworkAccess": true,
         "enableOnlyIPv6Peering": false,
+        "peerCompleteVnets": false,
         "remoteVirtualNetwork": {
           "id": "/subscriptions/subid/resourceGroups/peerTest/providers/Microsoft.Network/virtualNetworks/vnet2"
-        }
+        },
+        "useRemoteGateways": false
       }
-    }
+    },
+    "api-version": "2025-03-01",
+    "resourceGroupName": "peerTest",
+    "subscriptionId": "subid",
+    "syncRemoteAddressSpace": "true",
+    "virtualNetworkName": "vnet1",
+    "virtualNetworkPeeringName": "peer"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/subid/resourceGroups/peerTest/providers/Microsoft.Network/virtualNetworks/vnet1/virtualNetworkPeerings/peer",
         "name": "peer",
+        "id": "/subscriptions/subid/resourceGroups/peerTest/providers/Microsoft.Network/virtualNetworks/vnet1/virtualNetworkPeerings/peer",
         "properties": {
-          "allowVirtualNetworkAccess": true,
           "allowForwardedTraffic": true,
           "allowGatewayTransit": false,
-          "useRemoteGateways": false,
-          "peerCompleteVnets": false,
+          "allowVirtualNetworkAccess": true,
           "enableOnlyIPv6Peering": false,
-          "localSubnetNames": [
-            "Subnet1"
-          ],
-          "remoteSubnetNames": [
-            "Subnet2"
-          ],
-          "remoteVirtualNetwork": {
-            "id": "/subscriptions/subid/resourceGroups/peerTest/providers/Microsoft.Network/virtualNetworks/vnet2"
-          },
-          "remoteAddressSpace": {
-            "addressPrefixes": [
-              "12.0.0.0/8",
-              "2001:2001::/64"
-            ]
-          },
           "localAddressSpace": {
             "addressPrefixes": [
               "212.0.0.0/16",
               "2002:2002::/64"
             ]
           },
+          "localSubnetNames": [
+            "Subnet1"
+          ],
           "localVirtualNetworkAddressSpace": {
             "addressPrefixes": [
               "212.0.0.0/16",
               "2002:2002::/64"
             ]
+          },
+          "peerCompleteVnets": false,
+          "peeringState": "Initiated",
+          "peeringSyncLevel": "FullyInSync",
+          "provisioningState": "Succeeded",
+          "remoteAddressSpace": {
+            "addressPrefixes": [
+              "12.0.0.0/8",
+              "2001:2001::/64"
+            ]
+          },
+          "remoteBgpCommunities": {
+            "regionalCommunity": "12076:50004",
+            "virtualNetworkCommunity": "12076:20002"
+          },
+          "remoteSubnetNames": [
+            "Subnet2"
+          ],
+          "remoteVirtualNetwork": {
+            "id": "/subscriptions/subid/resourceGroups/peerTest/providers/Microsoft.Network/virtualNetworks/vnet2"
           },
           "remoteVirtualNetworkAddressSpace": {
             "addressPrefixes": [
@@ -65,53 +71,53 @@
               "2001:2001::/64"
             ]
           },
-          "remoteBgpCommunities": {
-            "virtualNetworkCommunity": "12076:20002",
-            "regionalCommunity": "12076:50004"
-          },
-          "peeringState": "Initiated",
-          "peeringSyncLevel": "FullyInSync",
-          "provisioningState": "Succeeded"
+          "useRemoteGateways": false
         }
       }
     },
     "201": {
       "body": {
-        "id": "/subscriptions/subid/resourceGroups/peerTest/providers/Microsoft.Network/virtualNetworks/vnet1/virtualNetworkPeerings/peer",
         "name": "peer",
+        "id": "/subscriptions/subid/resourceGroups/peerTest/providers/Microsoft.Network/virtualNetworks/vnet1/virtualNetworkPeerings/peer",
         "properties": {
-          "allowVirtualNetworkAccess": true,
           "allowForwardedTraffic": true,
           "allowGatewayTransit": false,
-          "useRemoteGateways": false,
-          "peerCompleteVnets": false,
+          "allowVirtualNetworkAccess": true,
           "enableOnlyIPv6Peering": false,
-          "localSubnetNames": [
-            "Subnet1"
-          ],
-          "remoteSubnetNames": [
-            "Subnet2"
-          ],
-          "remoteVirtualNetwork": {
-            "id": "/subscriptions/subid/resourceGroups/peerTest/providers/Microsoft.Network/virtualNetworks/vnet2"
-          },
-          "remoteAddressSpace": {
-            "addressPrefixes": [
-              "12.0.0.0/8",
-              "2001:2001::/64"
-            ]
-          },
           "localAddressSpace": {
             "addressPrefixes": [
               "212.0.0.0/16",
               "2002:2002::/64"
             ]
           },
+          "localSubnetNames": [
+            "Subnet1"
+          ],
           "localVirtualNetworkAddressSpace": {
             "addressPrefixes": [
               "212.0.0.0/16",
               "2002:2002::/64"
             ]
+          },
+          "peerCompleteVnets": false,
+          "peeringState": "Initiated",
+          "peeringSyncLevel": "FullyInSync",
+          "provisioningState": "Succeeded",
+          "remoteAddressSpace": {
+            "addressPrefixes": [
+              "12.0.0.0/8",
+              "2001:2001::/64"
+            ]
+          },
+          "remoteBgpCommunities": {
+            "regionalCommunity": "12076:50004",
+            "virtualNetworkCommunity": "12076:20002"
+          },
+          "remoteSubnetNames": [
+            "Subnet2"
+          ],
+          "remoteVirtualNetwork": {
+            "id": "/subscriptions/subid/resourceGroups/peerTest/providers/Microsoft.Network/virtualNetworks/vnet2"
           },
           "remoteVirtualNetworkAddressSpace": {
             "addressPrefixes": [
@@ -119,15 +125,11 @@
               "2001:2001::/64"
             ]
           },
-          "remoteBgpCommunities": {
-            "virtualNetworkCommunity": "12076:20002",
-            "regionalCommunity": "12076:50004"
-          },
-          "peeringState": "Initiated",
-          "peeringSyncLevel": "FullyInSync",
-          "provisioningState": "Succeeded"
+          "useRemoteGateways": false
         }
       }
     }
-  }
+  },
+  "operationId": "VirtualNetworkPeerings_CreateOrUpdate",
+  "title": "Sync subnet Peering"
 }

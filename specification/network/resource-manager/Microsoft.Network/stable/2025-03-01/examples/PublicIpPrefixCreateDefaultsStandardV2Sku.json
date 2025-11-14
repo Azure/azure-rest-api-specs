@@ -1,9 +1,6 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
-    "subscriptionId": "subid",
-    "resourceGroupName": "rg1",
-    "publicIpPrefixName": "test-ipprefix",
     "parameters": {
       "location": "westus",
       "properties": {
@@ -12,48 +9,53 @@
       "sku": {
         "name": "StandardV2"
       }
-    }
+    },
+    "publicIpPrefixName": "test-ipprefix",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
       "body": {
         "name": "test-ipprefix",
-        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPPrefixes/test-ipprefix",
+        "type": "Microsoft.Network/publicIPPrefixes",
         "etag": "W/\"00000000-0000-0000-0000-00000000\"",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPPrefixes/test-ipprefix",
         "location": "westus",
         "properties": {
-          "provisioningState": "Succeeded",
-          "resourceGuid": "00000000-0000-0000-0000-00000000",
-          "publicIPAddressVersion": "IPv4",
-          "prefixLength": 30,
           "ipPrefix": "192.168.254.2/30",
-          "ipTags": []
+          "ipTags": [],
+          "prefixLength": 30,
+          "provisioningState": "Succeeded",
+          "publicIPAddressVersion": "IPv4",
+          "resourceGuid": "00000000-0000-0000-0000-00000000"
         },
         "sku": {
           "name": "StandardV2"
-        },
-        "type": "Microsoft.Network/publicIPPrefixes"
+        }
       }
     },
     "201": {
       "body": {
         "name": "test-ipprefix",
-        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPPrefixes/test-ipprefix",
+        "type": "Microsoft.Network/publicIPPrefixes",
         "etag": "W/\"00000000-0000-0000-0000-00000000\"",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPPrefixes/test-ipprefix",
         "location": "westus",
         "properties": {
-          "provisioningState": "Succeeded",
-          "resourceGuid": "00000000-0000-0000-0000-00000000",
-          "publicIPAddressVersion": "IPv4",
-          "prefixLength": 30,
           "ipPrefix": "192.168.254.2/30",
-          "ipTags": []
+          "ipTags": [],
+          "prefixLength": 30,
+          "provisioningState": "Succeeded",
+          "publicIPAddressVersion": "IPv4",
+          "resourceGuid": "00000000-0000-0000-0000-00000000"
         },
         "sku": {
           "name": "StandardV2"
-        },
-        "type": "Microsoft.Network/publicIPPrefixes"
+        }
       }
     }
-  }
+  },
+  "operationId": "PublicIPPrefixes_CreateOrUpdate",
+  "title": "Create public IP prefix defaults with StandardV2 Sku"
 }

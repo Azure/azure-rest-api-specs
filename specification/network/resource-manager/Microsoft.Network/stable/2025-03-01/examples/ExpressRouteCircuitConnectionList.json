@@ -1,54 +1,56 @@
 {
   "parameters": {
-    "resourceGroupName": "rg1",
     "api-version": "2025-03-01",
-    "subscriptionId": "subid1",
     "circuitName": "ExpressRouteARMCircuitA",
-    "peeringName": "AzurePrivatePeering"
+    "peeringName": "AzurePrivatePeering",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid1"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "id": "/subscriptions/subid1/resourceGroups/dedharcktinit/providers/Microsoft.Network/expressRouteCircuits/ExpressRouteARMCircuitA/peerings/AzurePrivatePeering/connections/circuitConnectionUSAUS",
-            "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
             "name": "circuitConnectionUSAUS",
+            "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+            "id": "/subscriptions/subid1/resourceGroups/dedharcktinit/providers/Microsoft.Network/expressRouteCircuits/ExpressRouteARMCircuitA/peerings/AzurePrivatePeering/connections/circuitConnectionUSAUS",
             "properties": {
+              "addressPrefix": "10.0.0.0/24",
+              "authorizationKey": "946a1918-b7a2-4917-b43c-8c4cdaee006a",
+              "circuitConnectionStatus": "Connected",
               "expressRouteCircuitPeering": {
                 "id": "/subscriptions/subid1/resourceGroups/dedharcktinit/providers/Microsoft.Network/expressRouteCircuits/dedharcktlocal/peerings/AzurePrivatePeering"
+              },
+              "ipv6CircuitConnectionConfig": {
+                "addressPrefix": "aa:bb::1/125",
+                "circuitConnectionStatus": "Connected"
               },
               "peerExpressRouteCircuitPeering": {
                 "id": "/subscriptions/subid2/resourceGroups/dedharcktpeer/providers/Microsoft.Network/expressRouteCircuits/dedharcktremote/peerings/AzurePrivatePeering"
               },
-              "authorizationKey": "946a1918-b7a2-4917-b43c-8c4cdaee006a",
-              "addressPrefix": "10.0.0.0/24",
-              "circuitConnectionStatus": "Connected",
-              "provisioningState": "Succeeded",
-              "ipv6CircuitConnectionConfig": {
-                "addressPrefix": "aa:bb::1/125",
-                "circuitConnectionStatus": "Connected"
-              }
+              "provisioningState": "Succeeded"
             }
           },
           {
-            "id": "/subscriptions/subid1/resourceGroups/dedharcktinit/providers/Microsoft.Network/expressRouteCircuits/ExpressRouteARMCircuitA/peerings/AzurePrivatePeering/connections/circuitConnectionUSEUR",
-            "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
             "name": "circuitConnectionUSEUR",
+            "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+            "id": "/subscriptions/subid1/resourceGroups/dedharcktinit/providers/Microsoft.Network/expressRouteCircuits/ExpressRouteARMCircuitA/peerings/AzurePrivatePeering/connections/circuitConnectionUSEUR",
             "properties": {
+              "addressPrefix": "20.0.0.0/24",
+              "circuitConnectionStatus": "Connected",
               "expressRouteCircuitPeering": {
                 "id": "/subscriptions/subid1/resourceGroups/dedharcktinit/providers/Microsoft.Network/expressRouteCircuits/dedharcktlocal/peerings/AzurePrivatePeering"
               },
               "peerExpressRouteCircuitPeering": {
                 "id": "/subscriptions/subid1/resourceGroups/dedharckteurope/providers/Microsoft.Network/expressRouteCircuits/dedharcktams/peerings/AzurePrivatePeering"
               },
-              "addressPrefix": "20.0.0.0/24",
-              "circuitConnectionStatus": "Connected",
               "provisioningState": "Succeeded"
             }
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "ExpressRouteCircuitConnections_List",
+  "title": "List ExpressRouteCircuit Connection"
 }

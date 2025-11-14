@@ -1,22 +1,22 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
-    "subscriptionId": "subid",
-    "resourceGroupName": "rg1",
     "networkSecurityGroupName": "testnsg",
+    "resourceGroupName": "rg1",
     "securityRuleName": "rule1",
     "securityRuleParameters": {
       "properties": {
-        "protocol": "*",
-        "sourceAddressPrefix": "10.0.0.0/8",
-        "destinationAddressPrefix": "11.0.0.0/8",
         "access": "Deny",
+        "destinationAddressPrefix": "11.0.0.0/8",
         "destinationPortRange": "8080",
-        "sourcePortRange": "*",
+        "direction": "Outbound",
         "priority": 100,
-        "direction": "Outbound"
+        "sourceAddressPrefix": "10.0.0.0/8",
+        "sourcePortRange": "*",
+        "protocol": "*"
       }
-    }
+    },
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
@@ -24,15 +24,15 @@
         "name": "rule1",
         "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityGroups/testnsg/securityRules/rule1",
         "properties": {
-          "provisioningState": "Succeeded",
-          "protocol": "*",
-          "sourcePortRange": "*",
-          "destinationPortRange": "8080",
-          "sourceAddressPrefix": "10.0.0.0/8",
-          "destinationAddressPrefix": "11.0.0.0/8",
           "access": "Deny",
+          "destinationAddressPrefix": "11.0.0.0/8",
+          "destinationPortRange": "8080",
+          "direction": "Outbound",
           "priority": 100,
-          "direction": "Outbound"
+          "provisioningState": "Succeeded",
+          "sourceAddressPrefix": "10.0.0.0/8",
+          "sourcePortRange": "*",
+          "protocol": "*"
         }
       }
     },
@@ -41,17 +41,19 @@
         "name": "rule1",
         "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityGroups/testnsg/securityRules/rule1",
         "properties": {
-          "provisioningState": "Succeeded",
-          "protocol": "*",
-          "sourcePortRange": "*",
-          "destinationPortRange": "8080",
-          "sourceAddressPrefix": "10.0.0.0/8",
-          "destinationAddressPrefix": "11.0.0.0/8",
           "access": "Deny",
+          "destinationAddressPrefix": "11.0.0.0/8",
+          "destinationPortRange": "8080",
+          "direction": "Outbound",
           "priority": 100,
-          "direction": "Outbound"
+          "provisioningState": "Succeeded",
+          "sourceAddressPrefix": "10.0.0.0/8",
+          "sourcePortRange": "*",
+          "protocol": "*"
         }
       }
     }
-  }
+  },
+  "operationId": "SecurityRules_CreateOrUpdate",
+  "title": "Create security rule"
 }

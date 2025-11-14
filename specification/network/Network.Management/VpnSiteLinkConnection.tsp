@@ -51,8 +51,8 @@ interface VpnSiteLinkConnections {
   @action("resetconnection")
   resetConnection is ArmResourceActionAsyncBase<
     VpnSiteLinkConnection,
-    void,
-    ArmAcceptedLroResponse,
+    Request = void,
+    Response = ArmAcceptedLroResponse,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<VpnSiteLinkConnection>
   >;
 

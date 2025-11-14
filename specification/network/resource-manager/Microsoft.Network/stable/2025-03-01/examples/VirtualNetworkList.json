@@ -1,17 +1,17 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
-    "subscriptionId": "subid",
-    "resourceGroupName": "rg1"
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet1",
             "name": "vnet1",
             "type": "Microsoft.Network/virtualNetworks",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet1",
             "location": "westus",
             "properties": {
               "addressSpace": {
@@ -19,30 +19,30 @@
                   "10.0.0.0/8"
                 ]
               },
+              "defaultPublicNatGateway": {
+                "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/natGateways/test-ngw"
+              },
               "dhcpOptions": {
                 "dnsServers": []
               },
+              "provisioningState": "Succeeded",
               "subnets": [
                 {
-                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/test-1",
                   "name": "test-1",
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/test-1",
                   "properties": {
                     "addressPrefix": "10.0.0.0/24",
                     "provisioningState": "Succeeded"
                   }
                 }
               ],
-              "virtualNetworkPeerings": [],
-              "defaultPublicNatGateway": {
-                "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/natGateways/test-ngw"
-              },
-              "provisioningState": "Succeeded"
+              "virtualNetworkPeerings": []
             }
           },
           {
-            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet2",
             "name": "vnet2",
             "type": "Microsoft.Network/virtualNetworks",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet2",
             "location": "westus",
             "properties": {
               "addressSpace": {
@@ -50,21 +50,23 @@
                   "10.0.0.0/16"
                 ]
               },
+              "defaultPublicNatGateway": {
+                "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/natGateways/test-ngw"
+              },
               "dhcpOptions": {
                 "dnsServers": [
                   "8.8.8.8"
                 ]
               },
+              "provisioningState": "Succeeded",
               "subnets": [],
-              "virtualNetworkPeerings": [],
-              "defaultPublicNatGateway": {
-                "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/natGateways/test-ngw"
-              },
-              "provisioningState": "Succeeded"
+              "virtualNetworkPeerings": []
             }
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "VirtualNetworks_List",
+  "title": "List virtual networks in resource group"
 }

@@ -8,49 +8,51 @@
       "body": {
         "value": [
           {
-            "id": "/subscriptions/subid/providers/Microsoft.Network/bgpServiceCommunities/skype",
             "name": "skype",
             "type": "Microsoft.Network/bgpServiceCommunities",
+            "id": "/subscriptions/subid/providers/Microsoft.Network/bgpServiceCommunities/skype",
             "properties": {
-              "serviceName": "skype",
               "bgpCommunities": [
                 {
-                  "serviceSupportedRegion": "Global",
                   "communityName": "Skype For Business Online",
-                  "communityValue": "12076:5030",
                   "communityPrefixes": [
                     "13.67.56.225/32",
                     "13.67.186.105/32"
                   ],
+                  "communityValue": "12076:5030",
                   "isAuthorizedToUse": true,
-                  "serviceGroup": "O365"
+                  "serviceGroup": "O365",
+                  "serviceSupportedRegion": "Global"
                 }
-              ]
+              ],
+              "serviceName": "skype"
             }
           },
           {
-            "id": "/subscriptions/subid/providers/Microsoft.Network/bgpServiceCommunities/exchange",
             "name": "exchange",
             "type": "Microsoft.Network/bgpServiceCommunities",
+            "id": "/subscriptions/subid/providers/Microsoft.Network/bgpServiceCommunities/exchange",
             "properties": {
-              "serviceName": "exchange",
               "bgpCommunities": [
                 {
-                  "serviceSupportedRegion": "Global",
                   "communityName": "Exchange Online",
-                  "communityValue": "12076:5040",
                   "communityPrefixes": [
                     "13.67.56.225/32",
                     "13.67.186.105/32"
                   ],
+                  "communityValue": "12076:5040",
                   "isAuthorizedToUse": true,
-                  "serviceGroup": "O365"
+                  "serviceGroup": "O365",
+                  "serviceSupportedRegion": "Global"
                 }
-              ]
+              ],
+              "serviceName": "exchange"
             }
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "BgpServiceCommunities_List",
+  "title": "ServiceCommunityList"
 }

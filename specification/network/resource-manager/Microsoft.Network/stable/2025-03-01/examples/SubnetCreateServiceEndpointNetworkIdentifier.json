@@ -1,70 +1,72 @@
 {
   "parameters": {
-    "subnetName": "subnet1",
-    "virtualNetworkName": "vnetname",
-    "resourceGroupName": "subnet-test",
     "api-version": "2025-03-01",
-    "subscriptionId": "subid",
+    "resourceGroupName": "subnet-test",
+    "subnetName": "subnet1",
     "subnetParameters": {
       "properties": {
         "addressPrefix": "10.0.0.0/16",
         "serviceEndpoints": [
           {
-            "service": "Microsoft.Storage",
             "networkIdentifier": {
               "id": "/subscriptions/subid/resourceGroups/subnet-test/providers/Microsoft.Network/publicIPAddresses/test-ip"
-            }
+            },
+            "service": "Microsoft.Storage"
           }
         ]
       }
-    }
+    },
+    "subscriptionId": "subid",
+    "virtualNetworkName": "vnetname"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/subid/resourceGroups/subnet-test/providers/Microsoft.Network/virtualNetworks/vnetname/subnets/subnet1",
         "name": "subnet1",
+        "id": "/subscriptions/subid/resourceGroups/subnet-test/providers/Microsoft.Network/virtualNetworks/vnetname/subnets/subnet1",
         "properties": {
           "addressPrefix": "10.0.0.0/16",
+          "provisioningState": "Succeeded",
           "serviceEndpoints": [
             {
-              "service": "Microsoft.Storage",
-              "networkIdentifier": {
-                "id": "/subscriptions/subid/resourceGroups/subnet-test/providers/Microsoft.Network/publicIPAddresses/test-ip"
-              },
               "locations": [
                 "eastus2(stage)",
                 "usnorth(stage)"
               ],
-              "provisioningState": "Succeeded"
+              "networkIdentifier": {
+                "id": "/subscriptions/subid/resourceGroups/subnet-test/providers/Microsoft.Network/publicIPAddresses/test-ip"
+              },
+              "provisioningState": "Succeeded",
+              "service": "Microsoft.Storage"
             }
-          ],
-          "provisioningState": "Succeeded"
+          ]
         }
       }
     },
     "201": {
       "body": {
-        "id": "/subscriptions/subid/resourceGroups/subnet-test/providers/Microsoft.Network/virtualNetworks/vnetname/subnets/subnet1",
         "name": "subnet1",
+        "id": "/subscriptions/subid/resourceGroups/subnet-test/providers/Microsoft.Network/virtualNetworks/vnetname/subnets/subnet1",
         "properties": {
           "addressPrefix": "10.0.0.0/16",
+          "provisioningState": "Succeeded",
           "serviceEndpoints": [
             {
-              "service": "Microsoft.Storage",
-              "networkIdentifier": {
-                "id": "/subscriptions/subid/resourceGroups/subnet-test/providers/Microsoft.Network/publicIPAddresses/test-ip"
-              },
               "locations": [
                 "eastus2(stage)",
                 "usnorth(stage)"
               ],
-              "provisioningState": "Succeeded"
+              "networkIdentifier": {
+                "id": "/subscriptions/subid/resourceGroups/subnet-test/providers/Microsoft.Network/publicIPAddresses/test-ip"
+              },
+              "provisioningState": "Succeeded",
+              "service": "Microsoft.Storage"
             }
-          ],
-          "provisioningState": "Succeeded"
+          ]
         }
       }
     }
-  }
+  },
+  "operationId": "Subnets_CreateOrUpdate",
+  "title": "Create subnet with service endpoints with network identifier"
 }

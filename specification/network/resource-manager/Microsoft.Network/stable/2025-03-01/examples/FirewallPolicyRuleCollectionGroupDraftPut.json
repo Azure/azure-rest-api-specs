@@ -1,43 +1,43 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
-    "subscriptionId": "subid",
-    "resourceGroupName": "rg1",
     "firewallPolicyName": "firewallPolicy",
-    "ruleCollectionGroupName": "ruleCollectionGroup1",
     "parameters": {
       "properties": {
         "priority": 100,
         "ruleCollections": [
           {
-            "ruleCollectionType": "FirewallPolicyFilterRuleCollection",
             "name": "Example-Filter-Rule-Collection",
-            "priority": 100,
             "action": {
               "type": "Deny"
             },
+            "priority": 100,
+            "ruleCollectionType": "FirewallPolicyFilterRuleCollection",
             "rules": [
               {
-                "ruleType": "NetworkRule",
                 "name": "network-rule1",
-                "sourceAddresses": [
-                  "10.1.25.0/24"
-                ],
                 "destinationAddresses": [
+                  "*"
+                ],
+                "destinationPorts": [
                   "*"
                 ],
                 "ipProtocols": [
                   "TCP"
                 ],
-                "destinationPorts": [
-                  "*"
+                "ruleType": "NetworkRule",
+                "sourceAddresses": [
+                  "10.1.25.0/24"
                 ]
               }
             ]
           }
         ]
       }
-    }
+    },
+    "resourceGroupName": "rg1",
+    "ruleCollectionGroupName": "ruleCollectionGroup1",
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
@@ -48,27 +48,27 @@
           "priority": 100,
           "ruleCollections": [
             {
-              "ruleCollectionType": "FirewallPolicyFilterRuleCollection",
               "name": "Example-Filter-Rule-Collection",
-              "priority": 100,
               "action": {
                 "type": "Deny"
               },
+              "priority": 100,
+              "ruleCollectionType": "FirewallPolicyFilterRuleCollection",
               "rules": [
                 {
-                  "ruleType": "NetworkRule",
                   "name": "network-rule1",
-                  "sourceAddresses": [
-                    "10.1.25.0/24"
-                  ],
                   "destinationAddresses": [
+                    "*"
+                  ],
+                  "destinationPorts": [
                     "*"
                   ],
                   "ipProtocols": [
                     "TCP"
                   ],
-                  "destinationPorts": [
-                    "*"
+                  "ruleType": "NetworkRule",
+                  "sourceAddresses": [
+                    "10.1.25.0/24"
                   ]
                 }
               ]
@@ -85,27 +85,27 @@
           "priority": 100,
           "ruleCollections": [
             {
-              "ruleCollectionType": "FirewallPolicyFilterRuleCollection",
               "name": "Example-Filter-Rule-Collection",
-              "priority": 100,
               "action": {
                 "type": "Deny"
               },
+              "priority": 100,
+              "ruleCollectionType": "FirewallPolicyFilterRuleCollection",
               "rules": [
                 {
-                  "ruleType": "NetworkRule",
                   "name": "network-rule1",
-                  "sourceAddresses": [
-                    "10.1.25.0/24"
-                  ],
                   "destinationAddresses": [
+                    "*"
+                  ],
+                  "destinationPorts": [
                     "*"
                   ],
                   "ipProtocols": [
                     "TCP"
                   ],
-                  "destinationPorts": [
-                    "*"
+                  "ruleType": "NetworkRule",
+                  "sourceAddresses": [
+                    "10.1.25.0/24"
                   ]
                 }
               ]
@@ -114,5 +114,7 @@
         }
       }
     }
-  }
+  },
+  "operationId": "FirewallPolicyRuleCollectionGroupDrafts_CreateOrUpdate",
+  "title": "create or update rule collection group draft"
 }

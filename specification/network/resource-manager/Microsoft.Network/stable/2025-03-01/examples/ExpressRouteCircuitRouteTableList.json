@@ -1,22 +1,22 @@
 {
   "parameters": {
-    "circuitName": "circuitName",
-    "resourceGroupName": "rg1",
     "api-version": "2025-03-01",
-    "subscriptionId": "subid",
+    "circuitName": "circuitName",
+    "devicePath": "devicePath",
     "peeringName": "peeringName",
-    "devicePath": "devicePath"
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
+            "path": "",
+            "locPrf": "",
             "network": "",
             "nextHop": "",
-            "locPrf": "",
-            "weight": 0,
-            "path": ""
+            "weight": 0
           }
         ]
       }
@@ -26,5 +26,7 @@
         "Location": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/locations/eastus/operationStatus/default/operationId/00000000-0000-0000-0000-000000000000?api-version=2025-03-01"
       }
     }
-  }
+  },
+  "operationId": "ExpressRouteCircuits_ListRoutesTable",
+  "title": "List Route Tables"
 }

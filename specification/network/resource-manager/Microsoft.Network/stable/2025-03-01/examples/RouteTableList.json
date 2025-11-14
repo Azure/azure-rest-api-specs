@@ -1,8 +1,8 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
-    "subscriptionId": "subid",
-    "resourceGroupName": "rg1"
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
@@ -10,20 +10,20 @@
         "value": [
           {
             "name": "testrt",
-            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/routeTables/testrt",
             "type": "Microsoft.Network/routeTables",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/routeTables/testrt",
             "location": "westus",
             "properties": {
-              "provisioningState": "Succeeded",
               "disableBgpRoutePropagation": true,
+              "provisioningState": "Succeeded",
               "routes": [
                 {
                   "name": "route1",
                   "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/routeTables/testrt/routes/route1",
                   "properties": {
-                    "provisioningState": "Succeeded",
                     "addressPrefix": "10.0.3.0/24",
-                    "nextHopType": "VirtualNetworkGateway"
+                    "nextHopType": "VirtualNetworkGateway",
+                    "provisioningState": "Succeeded"
                   }
                 }
               ]
@@ -31,8 +31,8 @@
           },
           {
             "name": "testrt2",
-            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/routeTables/testrt2",
             "type": "Microsoft.Network/routeTables",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/routeTables/testrt2",
             "location": "westus",
             "properties": {
               "disableBgpRoutePropagation": true,
@@ -43,5 +43,7 @@
         ]
       }
     }
-  }
+  },
+  "operationId": "RouteTables_List",
+  "title": "List route tables in resource group"
 }

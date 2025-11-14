@@ -1,84 +1,86 @@
 {
   "parameters": {
-    "circuitName": "circuitName",
-    "resourceGroupName": "rg1",
     "api-version": "2025-03-01",
-    "subscriptionId": "subid",
+    "circuitName": "circuitName",
     "parameters": {
-      "sku": {
-        "name": "Standard_MeteredData",
-        "tier": "Standard",
-        "family": "MeteredData"
-      },
+      "location": "Brazil South",
       "properties": {
+        "allowClassicOperations": false,
         "authorizations": [],
         "peerings": [],
-        "allowClassicOperations": false,
         "serviceProviderProperties": {
-          "serviceProviderName": "Equinix",
+          "bandwidthInMbps": 200,
           "peeringLocation": "Silicon Valley",
-          "bandwidthInMbps": 200
+          "serviceProviderName": "Equinix"
         }
       },
-      "location": "Brazil South"
-    }
-  },
-  "responses": {
-    "201": {
-      "body": {
-        "name": "circuitName",
-        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRouteCircuits/circuitName",
-        "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
-        "type": "Microsoft.Network/expressRouteCircuits",
-        "location": "Brazil South",
-        "properties": {
-          "provisioningState": "Succeeded",
-          "peerings": [],
-          "authorizations": [],
-          "serviceProviderProperties": {
-            "serviceProviderName": "Equinix",
-            "peeringLocation": "Silicon Valley",
-            "bandwidthInMbps": 200
-          },
-          "circuitProvisioningState": "Enabled",
-          "allowClassicOperations": false,
-          "serviceKey": "a1410692-0000-4ceb-b94a-b90b94d398d1",
-          "serviceProviderProvisioningState": "NotProvisioned"
-        },
-        "sku": {
-          "name": "Standard_MeteredData",
-          "tier": "Standard",
-          "family": "MeteredData"
-        }
+      "sku": {
+        "name": "Standard_MeteredData",
+        "family": "MeteredData",
+        "tier": "Standard"
       }
     },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
     "200": {
       "body": {
         "name": "circuitName",
-        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRouteCircuits/circuitName",
-        "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
         "type": "Microsoft.Network/expressRouteCircuits",
+        "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRouteCircuits/circuitName",
         "location": "Brazil South",
         "properties": {
-          "provisioningState": "Succeeded",
-          "peerings": [],
-          "authorizations": [],
-          "serviceProviderProperties": {
-            "serviceProviderName": "Equinix",
-            "peeringLocation": "Silicon Valley",
-            "bandwidthInMbps": 200
-          },
-          "circuitProvisioningState": "Enabled",
           "allowClassicOperations": false,
+          "authorizations": [],
+          "circuitProvisioningState": "Enabled",
+          "peerings": [],
+          "provisioningState": "Succeeded",
           "serviceKey": "a1410692-0000-4ceb-b94a-b90b94d398d1",
+          "serviceProviderProperties": {
+            "bandwidthInMbps": 200,
+            "peeringLocation": "Silicon Valley",
+            "serviceProviderName": "Equinix"
+          },
           "serviceProviderProvisioningState": "NotProvisioned"
         },
         "sku": {
           "name": "Standard_MeteredData",
-          "tier": "Standard",
-          "family": "MeteredData"
+          "family": "MeteredData",
+          "tier": "Standard"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "circuitName",
+        "type": "Microsoft.Network/expressRouteCircuits",
+        "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRouteCircuits/circuitName",
+        "location": "Brazil South",
+        "properties": {
+          "allowClassicOperations": false,
+          "authorizations": [],
+          "circuitProvisioningState": "Enabled",
+          "peerings": [],
+          "provisioningState": "Succeeded",
+          "serviceKey": "a1410692-0000-4ceb-b94a-b90b94d398d1",
+          "serviceProviderProperties": {
+            "bandwidthInMbps": 200,
+            "peeringLocation": "Silicon Valley",
+            "serviceProviderName": "Equinix"
+          },
+          "serviceProviderProvisioningState": "NotProvisioned"
+        },
+        "sku": {
+          "name": "Standard_MeteredData",
+          "family": "MeteredData",
+          "tier": "Standard"
         }
       }
     }
-  }
+  },
+  "operationId": "ExpressRouteCircuits_CreateOrUpdate",
+  "title": "Create ExpressRouteCircuit"
 }

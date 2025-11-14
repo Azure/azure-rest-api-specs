@@ -1,33 +1,35 @@
 {
   "parameters": {
-    "subscriptionId": "subid",
-    "resourceGroupName": "testrg",
+    "api-version": "2025-03-01",
     "loadBalancerName": "lb",
     "probeName": "probe1",
-    "api-version": "2025-03-01"
+    "resourceGroupName": "testrg",
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
       "body": {
         "name": "probe1",
-        "id": "/subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/loadBalancers/lb/probes/probe1",
-        "etag": "W/\"00000000-0000-0000-0000-000000000000\"",
         "type": "Microsoft.Network/loadBalancers/probes",
+        "etag": "W/\"00000000-0000-0000-0000-000000000000\"",
+        "id": "/subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/loadBalancers/lb/probes/probe1",
         "properties": {
-          "provisioningState": "Succeeded",
-          "protocol": "Http",
-          "port": 80,
-          "requestPath": "healthcheck.aspx",
           "intervalInSeconds": 15,
-          "numberOfProbes": 2,
-          "probeThreshold": 1,
           "loadBalancingRules": [
             {
               "id": "/subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/loadBalancers/lb/loadBalancingRules/rulelb"
             }
-          ]
+          ],
+          "numberOfProbes": 2,
+          "port": 80,
+          "probeThreshold": 1,
+          "provisioningState": "Succeeded",
+          "requestPath": "healthcheck.aspx",
+          "protocol": "Http"
         }
       }
     }
-  }
+  },
+  "operationId": "LoadBalancerProbes_Get",
+  "title": "LoadBalancerProbeGet"
 }

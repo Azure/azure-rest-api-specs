@@ -2,8 +2,8 @@
   "parameters": {
     "api-version": "2025-03-01",
     "location": "westcentralus",
-    "subscriptionId": "subId",
-    "resourceGroupName": "rg1"
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subId"
   },
   "responses": {
     "200": {
@@ -11,15 +11,17 @@
         "value": [
           {
             "name": "Microsoft.Provider.resourceType",
-            "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/availableDelegations/Microsoft.Provider.resourceType",
             "type": "Microsoft.Network/availableDelegations",
-            "serviceName": "Microsoft.Provider/resourceType",
             "actions": [
               "Microsoft.Network/resource/action"
-            ]
+            ],
+            "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/availableDelegations/Microsoft.Provider.resourceType",
+            "serviceName": "Microsoft.Provider/resourceType"
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "AvailableResourceGroupDelegations_List",
+  "title": "Get available delegations in the resource group"
 }

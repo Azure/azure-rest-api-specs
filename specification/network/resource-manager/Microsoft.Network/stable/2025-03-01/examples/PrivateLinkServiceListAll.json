@@ -9,18 +9,11 @@
         "value": [
           {
             "name": "testPls1",
-            "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateLinkServices/testPls1",
             "type": "Microsoft.Network/privateLinkServices",
+            "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateLinkServices/testPls1",
             "location": "eastus",
             "properties": {
-              "provisioningState": "Succeeded",
-              "visibility": {
-                "subscriptions": [
-                  "subscription1",
-                  "subscription2",
-                  "subscription3"
-                ]
-              },
+              "alias": "ContosoService.{guid}.azure.privatelinkservice",
               "autoApproval": {
                 "subscriptions": [
                   "subscription1",
@@ -32,24 +25,28 @@
                 "fqdn2",
                 "fqdn3"
               ],
-              "alias": "ContosoService.{guid}.azure.privatelinkservice",
-              "loadBalancerFrontendIpConfigurations": [
-                {
-                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/frontendIPConfigurations/fe-lb1"
-                }
-              ],
               "ipConfigurations": [
                 {
                   "name": "ipconfig1",
                   "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateLinkServices/testPls1/ipConfigurations/ipconfig1",
                   "properties": {
                     "privateIPAddress": "10.0.1.4",
-                    "privateIPAllocationMethod": "Static",
                     "privateIPAddressVersion": "IPv4",
+                    "privateIPAllocationMethod": "Static",
                     "subnet": {
                       "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnetlb/subnets/subnetlb1"
                     }
                   }
+                }
+              ],
+              "loadBalancerFrontendIpConfigurations": [
+                {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/frontendIPConfigurations/fe-lb1"
+                }
+              ],
+              "networkInterfaces": [
+                {
+                  "id": "/subscriptions/subId/resourceGroups/rg1/provders/Microsoft.Network/networkInterfaces/testPls1.nic.abcd1234"
                 }
               ],
               "privateEndpointConnections": [
@@ -61,32 +58,29 @@
                       "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateEndpoints/testPe1"
                     },
                     "privateLinkServiceConnectionState": {
-                      "status": "Approved",
-                      "description": "approved it for some reason."
+                      "description": "approved it for some reason.",
+                      "status": "Approved"
                     }
                   }
                 }
               ],
-              "networkInterfaces": [
-                {
-                  "id": "/subscriptions/subId/resourceGroups/rg1/provders/Microsoft.Network/networkInterfaces/testPls1.nic.abcd1234"
-                }
-              ]
-            }
-          },
-          {
-            "name": "testPls2",
-            "id": "/subscriptions/subId/resourceGroups/rg2/providers/Microsoft.Network/privateLinkServices/testPls2",
-            "type": "Microsoft.Network/privateLinkServices",
-            "location": "eastus",
-            "properties": {
               "provisioningState": "Succeeded",
               "visibility": {
                 "subscriptions": [
                   "subscription1",
-                  "subscription2"
+                  "subscription2",
+                  "subscription3"
                 ]
-              },
+              }
+            }
+          },
+          {
+            "name": "testPls2",
+            "type": "Microsoft.Network/privateLinkServices",
+            "id": "/subscriptions/subId/resourceGroups/rg2/providers/Microsoft.Network/privateLinkServices/testPls2",
+            "location": "eastus",
+            "properties": {
+              "alias": "ContosoService.{guid}.azure.privatelinkservice",
               "autoApproval": {
                 "subscriptions": [
                   "subscription1",
@@ -97,24 +91,28 @@
                 "fqdn1",
                 "fqdn2"
               ],
-              "alias": "ContosoService.{guid}.azure.privatelinkservice",
-              "loadBalancerFrontendIpConfigurations": [
-                {
-                  "id": "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Network/loadBalancers/lb/frontendIPConfigurations/fe-lb2"
-                }
-              ],
               "ipConfigurations": [
                 {
                   "name": "ipconfig2",
                   "id": "/subscriptions/subId/resourceGroups/rg2/providers/Microsoft.Network/privateLinkServices/testPls2/ipConfigurations/ipconfig2",
                   "properties": {
                     "privateIPAddress": "10.0.1.5",
-                    "privateIPAllocationMethod": "Static",
                     "privateIPAddressVersion": "IPv4",
+                    "privateIPAllocationMethod": "Static",
                     "subnet": {
                       "id": "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Network/virtualNetworks/vnetlb/subnets/subnetlb2"
                     }
                   }
+                }
+              ],
+              "loadBalancerFrontendIpConfigurations": [
+                {
+                  "id": "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Network/loadBalancers/lb/frontendIPConfigurations/fe-lb2"
+                }
+              ],
+              "networkInterfaces": [
+                {
+                  "id": "/subscriptions/subId/resourceGroups/rg2/provders/Microsoft.Network/networkInterfaces/testPls2.nic.efgh5678"
                 }
               ],
               "privateEndpointConnections": [
@@ -126,21 +124,25 @@
                       "id": "/subscriptions/subId/resourceGroups/rg2/providers/Microsoft.Network/privateEndpoints/testPe2"
                     },
                     "privateLinkServiceConnectionState": {
-                      "status": "Approved",
-                      "description": "approved it for some reason."
+                      "description": "approved it for some reason.",
+                      "status": "Approved"
                     }
                   }
                 }
               ],
-              "networkInterfaces": [
-                {
-                  "id": "/subscriptions/subId/resourceGroups/rg2/provders/Microsoft.Network/networkInterfaces/testPls2.nic.efgh5678"
-                }
-              ]
+              "provisioningState": "Succeeded",
+              "visibility": {
+                "subscriptions": [
+                  "subscription1",
+                  "subscription2"
+                ]
+              }
             }
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "PrivateLinkServices_ListBySubscription",
+  "title": "List all private list service"
 }

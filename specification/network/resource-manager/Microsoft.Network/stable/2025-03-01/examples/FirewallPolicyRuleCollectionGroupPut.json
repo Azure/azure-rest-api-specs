@@ -1,124 +1,126 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
-    "subscriptionId": "subid",
-    "resourceGroupName": "rg1",
     "firewallPolicyName": "firewallPolicy",
-    "ruleCollectionGroupName": "ruleCollectionGroup1",
     "parameters": {
       "properties": {
         "priority": 100,
         "ruleCollections": [
           {
-            "ruleCollectionType": "FirewallPolicyFilterRuleCollection",
             "name": "Example-Filter-Rule-Collection",
-            "priority": 100,
             "action": {
               "type": "Deny"
             },
+            "priority": 100,
+            "ruleCollectionType": "FirewallPolicyFilterRuleCollection",
             "rules": [
               {
-                "ruleType": "NetworkRule",
                 "name": "network-rule1",
-                "sourceAddresses": [
-                  "10.1.25.0/24"
-                ],
                 "destinationAddresses": [
+                  "*"
+                ],
+                "destinationPorts": [
                   "*"
                 ],
                 "ipProtocols": [
                   "TCP"
                 ],
-                "destinationPorts": [
-                  "*"
+                "ruleType": "NetworkRule",
+                "sourceAddresses": [
+                  "10.1.25.0/24"
                 ]
               }
             ]
           }
         ]
       }
-    }
+    },
+    "resourceGroupName": "rg1",
+    "ruleCollectionGroupName": "ruleCollectionGroup1",
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
       "body": {
         "name": "ruleCollectionGroup1",
-        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/firewallPolicies/firewallPolicy/ruleCollectionGroups/ruleCollectionGroup1",
         "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/firewallPolicies/firewallPolicy/ruleCollectionGroups/ruleCollectionGroup1",
         "properties": {
-          "size": "1.2MB",
-          "provisioningState": "Succeeded",
           "priority": 100,
+          "provisioningState": "Succeeded",
           "ruleCollections": [
             {
-              "ruleCollectionType": "FirewallPolicyFilterRuleCollection",
               "name": "Example-Filter-Rule-Collection",
-              "priority": 100,
               "action": {
                 "type": "Deny"
               },
+              "priority": 100,
+              "ruleCollectionType": "FirewallPolicyFilterRuleCollection",
               "rules": [
                 {
-                  "ruleType": "NetworkRule",
                   "name": "network-rule1",
-                  "sourceAddresses": [
-                    "10.1.25.0/24"
-                  ],
                   "destinationAddresses": [
+                    "*"
+                  ],
+                  "destinationPorts": [
                     "*"
                   ],
                   "ipProtocols": [
                     "TCP"
                   ],
-                  "destinationPorts": [
-                    "*"
+                  "ruleType": "NetworkRule",
+                  "sourceAddresses": [
+                    "10.1.25.0/24"
                   ]
                 }
               ]
             }
-          ]
+          ],
+          "size": "1.2MB"
         }
       }
     },
     "201": {
       "body": {
         "name": "firewallPolicy",
-        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/firewallPolicies/firewallPolicy",
         "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/firewallPolicies/firewallPolicy",
         "properties": {
-          "size": "1.2MB",
-          "provisioningState": "Succeeded",
           "priority": 100,
+          "provisioningState": "Succeeded",
           "ruleCollections": [
             {
-              "ruleCollectionType": "FirewallPolicyFilterRuleCollection",
               "name": "Example-Filter-Rule-Collection",
-              "priority": 100,
               "action": {
                 "type": "Deny"
               },
+              "priority": 100,
+              "ruleCollectionType": "FirewallPolicyFilterRuleCollection",
               "rules": [
                 {
-                  "ruleType": "NetworkRule",
                   "name": "network-rule1",
-                  "sourceAddresses": [
-                    "10.1.25.0/24"
-                  ],
                   "destinationAddresses": [
+                    "*"
+                  ],
+                  "destinationPorts": [
                     "*"
                   ],
                   "ipProtocols": [
                     "TCP"
                   ],
-                  "destinationPorts": [
-                    "*"
+                  "ruleType": "NetworkRule",
+                  "sourceAddresses": [
+                    "10.1.25.0/24"
                   ]
                 }
               ]
             }
-          ]
+          ],
+          "size": "1.2MB"
         }
       }
     }
-  }
+  },
+  "operationId": "FirewallPolicyRuleCollectionGroups_CreateOrUpdate",
+  "title": "Create Firewall Policy Rule Collection Group"
 }

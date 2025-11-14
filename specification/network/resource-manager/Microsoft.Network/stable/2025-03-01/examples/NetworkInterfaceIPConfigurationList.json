@@ -1,9 +1,9 @@
 {
   "parameters": {
-    "subscriptionId": "subid",
-    "resourceGroupName": "testrg",
+    "api-version": "2025-03-01",
     "networkInterfaceName": "nic1",
-    "api-version": "2025-03-01"
+    "resourceGroupName": "testrg",
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
@@ -11,21 +11,23 @@
         "value": [
           {
             "name": "ipconfig1",
-            "id": "/subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/networkInterfaces/nic1/ipConfigurations/ipconfig1",
             "etag": "W/\\\"00000000-0000-0000-0000-000000000000\\\"",
+            "id": "/subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/networkInterfaces/nic1/ipConfigurations/ipconfig1",
             "properties": {
-              "provisioningState": "Succeeded",
+              "primary": true,
               "privateIPAddress": "10.0.0.4",
+              "privateIPAddressVersion": "IPv4",
               "privateIPAllocationMethod": "Dynamic",
+              "provisioningState": "Succeeded",
               "subnet": {
                 "id": "/subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/vnet12/subnets/subnet12"
-              },
-              "primary": true,
-              "privateIPAddressVersion": "IPv4"
+              }
             }
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "NetworkInterfaceIPConfigurations_List",
+  "title": "NetworkInterfaceIPConfigurationList"
 }

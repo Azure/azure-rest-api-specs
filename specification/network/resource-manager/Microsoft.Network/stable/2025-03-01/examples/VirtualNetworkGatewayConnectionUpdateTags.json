@@ -1,74 +1,76 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
-    "subscriptionId": "subid",
-    "resourceGroupName": "rg1",
-    "virtualNetworkGatewayConnectionName": "test",
     "parameters": {
       "tags": {
         "tag1": "value1",
         "tag2": "value2"
       }
-    }
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid",
+    "virtualNetworkGatewayConnectionName": "test"
   },
   "responses": {
-    "202": {
-      "headers": {
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/locations/eastus/operations/00000000-0000-0000-0000-000000000000?api-version=2025-03-01"
-      }
-    },
     "200": {
       "body": {
         "name": "test",
-        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/connections/test",
         "type": "Microsoft.Network/connections",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/connections/test",
         "location": "westus",
-        "tags": {
-          "tag1": "value1",
-          "tag2": "value2"
-        },
         "properties": {
-          "provisioningState": "Succeeded",
-          "resourceGuid": "00000000-0000-0000-0000-000000000000",
-          "virtualNetworkGateway1": {
-            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/vpngw",
-            "properties": {}
-          },
-          "localNetworkGateway2": {
-            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/localNetworkGateways/lgw",
-            "properties": {}
-          },
-          "ingressNatRules": [
-            {
-              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/vpngw/natRules/natRule1"
-            }
-          ],
+          "connectionStatus": "Unknown",
+          "connectionType": "IPsec",
+          "egressBytesTransferred": 0,
           "egressNatRules": [
             {
               "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/vpngw/natRules/natRule2"
             }
           ],
-          "connectionType": "IPsec",
-          "routingWeight": 0,
           "enableBgp": false,
           "gatewayCustomBgpIpAddresses": [
             {
-              "ipConfigurationId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/vpngw/ipConfigurations/default",
-              "customBgpIpAddress": "169.254.21.1"
+              "customBgpIpAddress": "169.254.21.1",
+              "ipConfigurationId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/vpngw/ipConfigurations/default"
             },
             {
-              "ipConfigurationId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/vpngw/ipConfigurations/ActiveActive",
-              "customBgpIpAddress": "169.254.21.3"
+              "customBgpIpAddress": "169.254.21.3",
+              "ipConfigurationId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/vpngw/ipConfigurations/ActiveActive"
             }
           ],
-          "usePolicyBasedTrafficSelectors": false,
-          "ipsecPolicies": [],
-          "trafficSelectorPolicies": [],
-          "connectionStatus": "Unknown",
           "ingressBytesTransferred": 0,
-          "egressBytesTransferred": 0
+          "ingressNatRules": [
+            {
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/vpngw/natRules/natRule1"
+            }
+          ],
+          "ipsecPolicies": [],
+          "localNetworkGateway2": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/localNetworkGateways/lgw",
+            "properties": {}
+          },
+          "provisioningState": "Succeeded",
+          "resourceGuid": "00000000-0000-0000-0000-000000000000",
+          "routingWeight": 0,
+          "trafficSelectorPolicies": [],
+          "usePolicyBasedTrafficSelectors": false,
+          "virtualNetworkGateway1": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/vpngw",
+            "properties": {}
+          }
+        },
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
         }
       }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/locations/eastus/operations/00000000-0000-0000-0000-000000000000?api-version=2025-03-01"
+      }
     }
-  }
+  },
+  "operationId": "VirtualNetworkGatewayConnections_UpdateTags",
+  "title": "UpdateVirtualNetworkGatewayConnectionTags"
 }

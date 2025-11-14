@@ -164,7 +164,7 @@ interface ExpressRouteCrossConnections {
   delete is ArmResourceActionAsync<
     ExpressRouteCrossConnection,
     void,
-    OkResponse | NoContentResponse,
+    Response = OkResponse | NoContentResponse,
     Parameters = {
       /**
        * The name of the peering.

@@ -1,10 +1,12 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
-    "subscriptionId": "subid",
-    "resourceGroupName": "rg1",
     "networkWatcherName": "nw1",
     "parameters": {
+      "azureLocations": [
+        "West US"
+      ],
+      "endTime": "2017-09-10T00:00:00Z",
       "providerLocation": {
         "country": "United States",
         "state": "washington"
@@ -12,12 +14,10 @@
       "providers": [
         "Frontier Communications of America, Inc. - ASN 5650"
       ],
-      "azureLocations": [
-        "West US"
-      ],
-      "startTime": "2017-09-07T00:00:00Z",
-      "endTime": "2017-09-10T00:00:00Z"
-    }
+      "startTime": "2017-09-07T00:00:00Z"
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
@@ -29,30 +29,27 @@
         },
         "reachabilityReport": [
           {
-            "provider": "Frontier Communications of America, Inc. - ASN 5650",
             "azureLocation": "West US",
             "latencies": [
               {
-                "timeStamp": "2017-09-07T00:00:00Z",
-                "score": 94
+                "score": 94,
+                "timeStamp": "2017-09-07T00:00:00Z"
               },
               {
-                "timeStamp": "2017-09-08T00:00:00Z",
-                "score": 94
+                "score": 94,
+                "timeStamp": "2017-09-08T00:00:00Z"
               },
               {
-                "timeStamp": "2017-09-09T00:00:00Z",
-                "score": 94
+                "score": 94,
+                "timeStamp": "2017-09-09T00:00:00Z"
               }
-            ]
+            ],
+            "provider": "Frontier Communications of America, Inc. - ASN 5650"
           }
         ]
       }
     },
     "202": {
-      "headers": {
-        "Location": "https:/management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkWatchers/nw1/azureReachabilityReport?api-version=2025-03-01"
-      },
       "body": {
         "aggregationLevel": "State",
         "providerLocation": {
@@ -61,25 +58,30 @@
         },
         "reachabilityReport": [
           {
-            "provider": "Frontier Communications of America, Inc. - ASN 5650",
             "azureLocation": "West US",
             "latencies": [
               {
-                "timeStamp": "2017-09-07T00:00:00Z",
-                "score": 94
+                "score": 94,
+                "timeStamp": "2017-09-07T00:00:00Z"
               },
               {
-                "timeStamp": "2017-09-08T00:00:00Z",
-                "score": 94
+                "score": 94,
+                "timeStamp": "2017-09-08T00:00:00Z"
               },
               {
-                "timeStamp": "2017-09-09T00:00:00Z",
-                "score": 94
+                "score": 94,
+                "timeStamp": "2017-09-09T00:00:00Z"
               }
-            ]
+            ],
+            "provider": "Frontier Communications of America, Inc. - ASN 5650"
           }
         ]
+      },
+      "headers": {
+        "Location": "https:/management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkWatchers/nw1/azureReachabilityReport?api-version=2025-03-01"
       }
     }
-  }
+  },
+  "operationId": "NetworkWatchers_GetAzureReachabilityReport",
+  "title": "Get Azure Reachability Report"
 }

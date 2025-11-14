@@ -1,41 +1,43 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
-    "subscriptionId": "subid",
-    "resourceGroupName": "CrossConnection-SiliconValley",
     "crossConnectionName": "<circuitServiceKey>",
     "crossConnectionParameters": {
       "tags": {
         "tag1": "value1",
         "tag2": "value2"
       }
-    }
+    },
+    "resourceGroupName": "CrossConnection-SiliconValley",
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
       "body": {
         "name": "er1",
-        "id": "/subscriptions/subid/resourceGroups/CrossConnectionSiliconValley/providers/Microsoft.Network/expressRouteCrossConnections/<circuitServiceKey>",
         "type": "Microsoft.Network/expressRouteCrossConnections",
+        "id": "/subscriptions/subid/resourceGroups/CrossConnectionSiliconValley/providers/Microsoft.Network/expressRouteCrossConnections/<circuitServiceKey>",
         "location": "brazilsouth",
-        "tags": {
-          "tag1": "value1",
-          "tag2": "value2"
-        },
         "properties": {
-          "provisioningState": "Failed",
+          "bandwidthInMbps": 1000,
           "expressRouteCircuit": {
             "id": "/subscriptions/subid/resourceGroups/ertest/providers/Microsoft.Network/expressRouteCircuits/er1"
           },
-          "peerings": [],
           "peeringLocation": "SiliconValley",
-          "bandwidthInMbps": 1000,
+          "peerings": [],
           "primaryAzurePort": "bvtazureixp01",
-          "secondaryAzurePort": "bvtazureixp01",
+          "provisioningState": "Failed",
           "sTag": 2,
+          "secondaryAzurePort": "bvtazureixp01",
           "serviceProviderProvisioningState": "NotProvisioned"
+        },
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
         }
       }
     }
-  }
+  },
+  "operationId": "ExpressRouteCrossConnections_UpdateTags",
+  "title": "UpdateExpressRouteCrossConnectionTags"
 }

@@ -1,32 +1,34 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
-    "subscriptionId": "subid",
     "resourceGroupName": "rg1",
+    "subscriptionId": "subid",
     "tapName": "testvtap"
   },
   "responses": {
     "200": {
       "body": {
         "name": "testvtap",
-        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkTaps/testvtap",
-        "etag": "etag",
         "type": "Microsoft.Network/virtualNetworkTaps",
+        "etag": "etag",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkTaps/testvtap",
         "location": "centraluseuap",
         "properties": {
           "destinationNetworkInterfaceIPConfiguration": {
             "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkInterfaces/testNetworkInterface/ipConfigurations/testIPConfig1"
           },
           "destinationPort": 4789,
-          "provisioningState": "Succeded",
-          "resourceGuid": "6A7C139D-8B8D-499B-B7CB-4F3F02A8A44F",
           "networkInterfaceTapConfigurations": [
             {
               "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkInterfaces/testNetworkInterface2/tapConfigurations/testtapConfiguration"
             }
-          ]
+          ],
+          "provisioningState": "Succeded",
+          "resourceGuid": "6A7C139D-8B8D-499B-B7CB-4F3F02A8A44F"
         }
       }
     }
-  }
+  },
+  "operationId": "VirtualNetworkTaps_Get",
+  "title": "Get Virtual Network Tap"
 }

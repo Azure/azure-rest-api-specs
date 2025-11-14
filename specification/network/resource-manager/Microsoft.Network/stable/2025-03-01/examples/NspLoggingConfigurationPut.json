@@ -1,11 +1,8 @@
 {
-  "title": "Create/Update NSP logging configuration",
   "parameters": {
     "api-version": "2025-03-01",
-    "subscriptionId": "subId",
-    "resourceGroupName": "rg1",
-    "networkSecurityPerimeterName": "nsp1",
     "loggingConfigurationName": "instance",
+    "networkSecurityPerimeterName": "nsp1",
     "parameters": {
       "properties": {
         "enabledLogCategories": [
@@ -13,14 +10,17 @@
           "NspPublicOutboundPerimeterRulesDenied"
         ]
       }
-    }
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subId"
   },
+  "title": "NspLoggingConfigurationPut",
   "responses": {
     "200": {
       "body": {
         "name": "instance",
-        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp1/loggingConfigurations/instance",
         "type": "Microsoft.Network/networkSecurityPerimeters/loggingConfigurations",
+        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp1/loggingConfigurations/instance",
         "properties": {
           "enabledLogCategories": [
             "NspPublicInboundPerimeterRulesDenied",
@@ -29,20 +29,20 @@
           "version": "0"
         },
         "systemData": {
+          "createdAt": "2024-02-07T18:07:36.3446713Z",
           "createdBy": "user",
           "createdByType": "User",
-          "createdAt": "2024-02-07T18:07:36.3446713Z",
+          "lastModifiedAt": "2024-02-07T18:07:36.3446713Z",
           "lastModifiedBy": "user",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2024-02-07T18:07:36.3446713Z"
+          "lastModifiedByType": "User"
         }
       }
     },
     "201": {
       "body": {
         "name": "instance",
-        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp1/loggingConfigurations/instance",
         "type": "Microsoft.Network/networkSecurityPerimeters/loggingConfigurations",
+        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp1/loggingConfigurations/instance",
         "properties": {
           "enabledLogCategories": [
             "NspPublicInboundPerimeterRulesDenied",
@@ -51,14 +51,15 @@
           "version": "0"
         },
         "systemData": {
+          "createdAt": "2024-02-07T18:07:36.3446713Z",
           "createdBy": "user",
           "createdByType": "User",
-          "createdAt": "2024-02-07T18:07:36.3446713Z",
+          "lastModifiedAt": "2024-02-07T18:07:36.3446713Z",
           "lastModifiedBy": "user",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2024-02-07T18:07:36.3446713Z"
+          "lastModifiedByType": "User"
         }
       }
     }
-  }
+  },
+  "operationId": "NetworkSecurityPerimeterLoggingConfigurations_CreateOrUpdate"
 }

@@ -1,15 +1,36 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
-    "subscriptionId": "subid",
-    "resourceGroupName": "rg1",
     "azureFirewallName": "azureFirewall1",
     "parameters": {
       "durationInSeconds": 300,
-      "numberOfPacketsToCapture": 5000,
-      "sasUrl": "someSASURL",
       "fileName": "azureFirewallPacketCapture",
-      "protocol": "Any",
+      "filters": [
+        {
+          "destinationPorts": [
+            "4500"
+          ],
+          "destinations": [
+            "20.1.2.0"
+          ],
+          "sources": [
+            "20.1.1.0"
+          ]
+        },
+        {
+          "destinationPorts": [
+            "123",
+            "80"
+          ],
+          "destinations": [
+            "10.1.2.0"
+          ],
+          "sources": [
+            "10.1.1.0",
+            "10.1.1.1"
+          ]
+        }
+      ],
       "flags": [
         {
           "type": "syn"
@@ -18,47 +39,28 @@
           "type": "fin"
         }
       ],
-      "filters": [
-        {
-          "sources": [
-            "20.1.1.0"
-          ],
-          "destinations": [
-            "20.1.2.0"
-          ],
-          "destinationPorts": [
-            "4500"
-          ]
-        },
-        {
-          "sources": [
-            "10.1.1.0",
-            "10.1.1.1"
-          ],
-          "destinations": [
-            "10.1.2.0"
-          ],
-          "destinationPorts": [
-            "123",
-            "80"
-          ]
-        }
-      ],
-      "operation": "Status"
-    }
+      "numberOfPacketsToCapture": 5000,
+      "operation": "Status",
+      "sasUrl": "someSASURL",
+      "protocol": "Any"
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
   },
   "responses": {
-    "202": {
-      "headers": {
-        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/locations/eastus/operationResults/00000000-0000-0000-0000-000000000000?api-version=2025-03-01",
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/locations/eastus/operations/00000000-0000-0000-0000-000000000000?api-version=2025-03-01"
-      }
-    },
     "200": {
       "body": {
-        "statusCode": "AzureFirewallPacketCaptureInProgress",
-        "message": "Packet capture in progress. Please wait till it is finished or stop the current capture before starting another."
+        "message": "Packet capture in progress. Please wait till it is finished or stop the current capture before starting another.",
+        "statusCode": "AzureFirewallPacketCaptureInProgress"
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/locations/eastus/operations/00000000-0000-0000-0000-000000000000?api-version=2025-03-01",
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/locations/eastus/operationResults/00000000-0000-0000-0000-000000000000?api-version=2025-03-01"
       }
     }
-  }
+  },
+  "operationId": "AzureFirewalls_PacketCaptureOperation",
+  "title": "AzureFirewallPacketCaptureOperation"
 }

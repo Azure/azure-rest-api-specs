@@ -1,33 +1,35 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
-    "subscriptionId": "subId",
+    "ipGroupsName": "ipGroups1",
     "resourceGroupName": "myResourceGroup",
-    "ipGroupsName": "ipGroups1"
+    "subscriptionId": "subId"
   },
   "responses": {
     "200": {
       "body": {
         "name": "ipGroups1",
-        "id": "/subscriptions/subId/providers/Microsoft.Network/resourceGroup/myResourceGroup/ipGroups/ipGroups1",
         "type": "Microsoft.Network/ipGroups",
+        "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+        "id": "/subscriptions/subId/providers/Microsoft.Network/resourceGroup/myResourceGroup/ipGroups/ipGroups1",
         "location": "westcentralus",
         "properties": {
-          "provisioningState": "Succeeded",
-          "ipAddresses": [
-            "13.64.39.16/32",
-            "40.74.146.80/31",
-            "40.74.147.32/28"
-          ],
+          "firewallPolicies": [],
           "firewalls": [
             {
               "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/azureFirewalls/azurefirewall"
             }
           ],
-          "firewallPolicies": []
-        },
-        "etag": "w/\\00000000-0000-0000-0000-000000000000\\"
+          "ipAddresses": [
+            "13.64.39.16/32",
+            "40.74.146.80/31",
+            "40.74.147.32/28"
+          ],
+          "provisioningState": "Succeeded"
+        }
       }
     }
-  }
+  },
+  "operationId": "IpGroups_Get",
+  "title": "Get_IpGroups"
 }

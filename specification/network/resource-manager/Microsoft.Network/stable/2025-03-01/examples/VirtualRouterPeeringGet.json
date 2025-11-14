@@ -2,22 +2,24 @@
   "parameters": {
     "api-version": "2025-03-01",
     "peeringName": "peering1",
-    "subscriptionId": "subid",
     "resourceGroupName": "rg1",
+    "subscriptionId": "subid",
     "virtualRouterName": "virtualRouter"
   },
   "responses": {
     "200": {
       "body": {
         "name": "peering1",
-        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualRouters/virtualRouter/peerings/peering1",
         "etag": "W/\"72090554-7e3b-43f2-80ad-99a9020dcb11\"",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualRouters/virtualRouter/peerings/peering1",
         "properties": {
-          "provisioningState": "Succeeded",
+          "peerAsn": 20000,
           "peerIp": "192.168.1.5",
-          "peerAsn": 20000
+          "provisioningState": "Succeeded"
         }
       }
     }
-  }
+  },
+  "operationId": "VirtualRouterPeerings_Get",
+  "title": "Get Virtual Router Peering"
 }

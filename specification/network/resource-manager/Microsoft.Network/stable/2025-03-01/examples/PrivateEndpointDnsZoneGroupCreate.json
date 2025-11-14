@@ -1,10 +1,6 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
-    "subscriptionId": "subId",
-    "resourceGroupName": "rg1",
-    "privateEndpointName": "testPe",
-    "privateDnsZoneGroupName": "testPdnsgroup",
     "parameters": {
       "properties": {
         "privateDnsZoneConfigs": [
@@ -15,7 +11,11 @@
           }
         ]
       }
-    }
+    },
+    "privateDnsZoneGroupName": "testPdnsgroup",
+    "privateEndpointName": "testPe",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subId"
   },
   "responses": {
     "200": {
@@ -23,32 +23,32 @@
         "name": "testPdnsgroup",
         "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateLinkServices/testPe/privateDnsZoneGroups/testPdnsgroup",
         "properties": {
-          "provisioningState": "Succeeded",
           "privateDnsZoneConfigs": [
             {
               "properties": {
                 "privateDnsZoneId": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateDnsZones/zone1.com",
                 "recordSets": [
                   {
-                    "recordType": "A",
-                    "recordSetName": "abc",
                     "fqdn": "abc.zone1.com",
                     "ipAddresses": [
                       "10.0.0.4"
-                    ]
+                    ],
+                    "recordSetName": "abc",
+                    "recordType": "A"
                   },
                   {
-                    "recordType": "A",
-                    "recordSetName": "abc2",
                     "fqdn": "abc2.zone1.com",
                     "ipAddresses": [
                       "10.0.0.5"
-                    ]
+                    ],
+                    "recordSetName": "abc2",
+                    "recordType": "A"
                   }
                 ]
               }
             }
-          ]
+          ],
+          "provisioningState": "Succeeded"
         }
       }
     },
@@ -57,34 +57,36 @@
         "name": "testPdnsgroup",
         "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateLinkServices/testPe/privateDnsZoneGroups/testPdnsgroup",
         "properties": {
-          "provisioningState": "Succeeded",
           "privateDnsZoneConfigs": [
             {
               "properties": {
                 "privateDnsZoneId": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateDnsZones/zone1.com",
                 "recordSets": [
                   {
-                    "recordType": "A",
-                    "recordSetName": "abc",
                     "fqdn": "abc.zone1.com",
                     "ipAddresses": [
                       "10.0.0.4"
-                    ]
+                    ],
+                    "recordSetName": "abc",
+                    "recordType": "A"
                   },
                   {
-                    "recordType": "A",
-                    "recordSetName": "abc2",
                     "fqdn": "abc2.zone1.com",
                     "ipAddresses": [
                       "10.0.0.5"
-                    ]
+                    ],
+                    "recordSetName": "abc2",
+                    "recordType": "A"
                   }
                 ]
               }
             }
-          ]
+          ],
+          "provisioningState": "Succeeded"
         }
       }
     }
-  }
+  },
+  "operationId": "PrivateDnsZoneGroups_CreateOrUpdate",
+  "title": "Create private dns zone group"
 }

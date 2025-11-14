@@ -1,9 +1,9 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
-    "subscriptionId": "subId",
     "resourceGroupName": "rg1",
-    "serviceName": "testPls"
+    "serviceName": "testPls",
+    "subscriptionId": "subId"
   },
   "responses": {
     "200": {
@@ -17,8 +17,8 @@
                 "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateEndpoints/testPe1"
               },
               "privateLinkServiceConnectionState": {
-                "status": "Approved",
-                "description": "approved it for some reason."
+                "description": "approved it for some reason.",
+                "status": "Approved"
               }
             }
           },
@@ -30,13 +30,15 @@
                 "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateEndpoints/testPe2"
               },
               "privateLinkServiceConnectionState": {
-                "status": "Rejected",
-                "description": "rejected by some reason."
+                "description": "rejected by some reason.",
+                "status": "Rejected"
               }
             }
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "PrivateLinkServices_ListPrivateEndpointConnections",
+  "title": "List private link service in resource group"
 }

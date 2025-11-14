@@ -9,22 +9,28 @@
         "value": [
           {
             "name": "firewallPolicy",
-            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/firewallPolicies/firewallPolicy",
             "type": "Microsoft.Network/firewallPolicies",
             "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/firewallPolicies/firewallPolicy",
             "location": "West US",
-            "tags": {
-              "key1": "value1"
-            },
             "properties": {
+              "dnsSettings": {
+                "enableProxy": true,
+                "requireProxyForNetworkRules": false,
+                "servers": [
+                  "30.3.4.5"
+                ]
+              },
+              "firewalls": [],
               "provisioningState": "Succeeded",
-              "threatIntelMode": "Alert",
               "ruleCollectionGroups": [
                 {
                   "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/firewallPolicies/firewallPolicy/ruleCollectionGroups/ruleCollectionGroup1"
                 }
               ],
-              "firewalls": [],
+              "sku": {
+                "tier": "Standard"
+              },
               "snat": {
                 "privateRanges": [
                   "IANAPrivateRanges"
@@ -33,20 +39,16 @@
               "sql": {
                 "allowSqlRedirect": true
               },
-              "dnsSettings": {
-                "servers": [
-                  "30.3.4.5"
-                ],
-                "enableProxy": true,
-                "requireProxyForNetworkRules": false
-              },
-              "sku": {
-                "tier": "Standard"
-              }
+              "threatIntelMode": "Alert"
+            },
+            "tags": {
+              "key1": "value1"
             }
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "FirewallPolicies_ListAll",
+  "title": "List all Firewall Policies for a given subscription"
 }

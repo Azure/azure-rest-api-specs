@@ -1,26 +1,26 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
-    "subscriptionId": "subid",
+    "bastionHostName": "bastionhosttenant",
     "resourceGroupName": "rg1",
-    "bastionHostName": "bastionhosttenant"
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
+            "resourceType": "VM",
+            "sessionDurationInMins": 0,
             "sessionId": "sessionId",
             "startTime": "2019-1-1T12:00:00.0000Z",
-            "targetSubscriptionId": "subid",
-            "resourceType": "VM",
             "targetHostName": "vm01",
-            "targetResourceGroup": "rg1",
-            "userName": "user",
             "targetIpAddress": "1.1.1.1",
-            "protocol": "SSH",
+            "targetResourceGroup": "rg1",
             "targetResourceId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Compute/virtualMachines/vm01",
-            "sessionDurationInMins": 0.0
+            "targetSubscriptionId": "subid",
+            "userName": "user",
+            "protocol": "SSH"
           }
         ]
       }
@@ -30,5 +30,7 @@
         "location": "https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/bastionHosts/{bastionHostName}/getActiveSessions/operationResults/{operationId}?api-version={api-version}"
       }
     }
-  }
+  },
+  "operationId": "GetActiveSessions",
+  "title": "Returns a list of currently active sessions on the Bastion"
 }

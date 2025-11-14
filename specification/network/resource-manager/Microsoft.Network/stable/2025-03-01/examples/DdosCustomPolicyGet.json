@@ -1,38 +1,40 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
-    "subscriptionId": "subid",
+    "ddosCustomPolicyName": "test-ddos-custom-policy",
     "resourceGroupName": "rg1",
-    "ddosCustomPolicyName": "test-ddos-custom-policy"
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
       "body": {
         "name": "test-ddos-custom-policy",
-        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/ddosCustomPolicies/test-ddos-custom-policy",
         "type": "Microsoft.Network/ddosCustomPolicies",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/ddosCustomPolicies/test-ddos-custom-policy",
         "location": "westus",
         "properties": {
-          "provisioningState": "Succeeded",
-          "resourceGuid": "00000000-0000-0000-0000-000000000000",
           "detectionRules": [
             {
               "name": "detectionRuleTcp",
-              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/ddosCustomPolicies/test-ddos-custom-policy/ddosDetectionRules/detectionRuleTcp",
-              "etag": "W/\"00000000-0000-0000-0000-00000000\"",
               "type": "Microsoft.Network/ddosCustomPolicies/ddosDetectionRules",
+              "etag": "W/\"00000000-0000-0000-0000-00000000\"",
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/ddosCustomPolicies/test-ddos-custom-policy/ddosDetectionRules/detectionRuleTcp",
               "properties": {
-                "provisioningState": "Succeeded",
                 "detectionMode": "TrafficThreshold",
+                "provisioningState": "Succeeded",
                 "trafficDetectionRule": {
-                  "trafficType": "Tcp",
-                  "packetsPerSecond": 1000000
+                  "packetsPerSecond": 1000000,
+                  "trafficType": "Tcp"
                 }
               }
             }
-          ]
+          ],
+          "provisioningState": "Succeeded",
+          "resourceGuid": "00000000-0000-0000-0000-000000000000"
         }
       }
     }
-  }
+  },
+  "operationId": "DdosCustomPolicies_Get",
+  "title": "Get DDoS custom policy"
 }

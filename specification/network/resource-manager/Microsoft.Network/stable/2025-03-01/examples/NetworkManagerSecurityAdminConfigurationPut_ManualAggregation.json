@@ -1,57 +1,59 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
-    "subscriptionId": "11111111-1111-1111-1111-111111111111",
-    "resourceGroupName": "rg1",
     "configurationName": "myTestSecurityConfig",
     "networkManagerName": "testNetworkManager",
+    "resourceGroupName": "rg1",
     "securityAdminConfiguration": {
       "properties": {
         "description": "A configuration which will update any network groups ip addresses at commit times.",
         "networkGroupAddressSpaceAggregationOption": "Manual"
       }
-    }
+    },
+    "subscriptionId": "11111111-1111-1111-1111-111111111111"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/rg1/providers/Microsoft.Network/networkManager/testNetworkManager/securityAdminConfigurations/myTestSecurityConfig",
         "name": "myTestSecurityConfig",
         "type": "Microsoft.Network/networkManagers/securityAdminConfigurations",
-        "systemData": {
-          "createdBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
-          "createdByType": "User",
-          "createdAt": "2021-01-11T18:52:27Z",
-          "lastModifiedBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2021-01-11T18:52:27Z"
-        },
+        "id": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/rg1/providers/Microsoft.Network/networkManager/testNetworkManager/securityAdminConfigurations/myTestSecurityConfig",
         "properties": {
           "description": "A sample policy",
-          "provisioningState": "Succeeded",
-          "networkGroupAddressSpaceAggregationOption": "Manual"
+          "networkGroupAddressSpaceAggregationOption": "Manual",
+          "provisioningState": "Succeeded"
+        },
+        "systemData": {
+          "createdAt": "2021-01-11T18:52:27Z",
+          "createdBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
+          "createdByType": "User",
+          "lastModifiedAt": "2021-01-11T18:52:27Z",
+          "lastModifiedBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
+          "lastModifiedByType": "User"
         }
       }
     },
     "201": {
       "body": {
-        "id": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/rg1/providers/Microsoft.Network/networkManager/testNetworkManager/securityAdminConfigurations/myTestSecurityConfig",
         "name": "myTestSecurityConfig",
         "type": "Microsoft.Network/networkManagers/securityAdminConfigurations",
-        "systemData": {
-          "createdBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
-          "createdByType": "User",
-          "createdAt": "2021-01-11T18:52:27Z",
-          "lastModifiedBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2021-01-11T18:52:27Z"
-        },
+        "id": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/rg1/providers/Microsoft.Network/networkManager/testNetworkManager/securityAdminConfigurations/myTestSecurityConfig",
         "properties": {
           "description": "A sample policy",
-          "provisioningState": "Succeeded",
-          "networkGroupAddressSpaceAggregationOption": "Manual"
+          "networkGroupAddressSpaceAggregationOption": "Manual",
+          "provisioningState": "Succeeded"
+        },
+        "systemData": {
+          "createdAt": "2021-01-11T18:52:27Z",
+          "createdBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
+          "createdByType": "User",
+          "lastModifiedAt": "2021-01-11T18:52:27Z",
+          "lastModifiedBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
+          "lastModifiedByType": "User"
         }
       }
     }
-  }
+  },
+  "operationId": "SecurityAdminConfigurations_CreateOrUpdate",
+  "title": "Create manual-mode security admin configuration"
 }

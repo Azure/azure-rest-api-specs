@@ -1,8 +1,6 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
-    "subscriptionId": "e747cc13-97d4-4a79-b463-42d7f4e558f2",
-    "resourceGroupName": "rg1",
     "firewallPolicyName": "firewallPolicy",
     "parameters": {
       "filters": [
@@ -13,56 +11,60 @@
           ]
         }
       ],
-      "search": "",
       "orderBy": {
         "field": "severity",
         "order": "Ascending"
       },
       "resultsPerPage": 20,
+      "search": "",
       "skip": 0
-    }
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "e747cc13-97d4-4a79-b463-42d7f4e558f2"
   },
   "responses": {
     "200": {
       "body": {
+        "matchingRecordsCount": 2,
         "signatures": [
           {
-            "signatureId": 2000015,
-            "mode": 2,
-            "severity": 1,
-            "direction": 2,
-            "group": "A Network Trojan was detected",
             "description": "P2P Phatbot Control Connection",
-            "sourcePorts": [
-              "any"
-            ],
             "destinationPorts": [
               "any"
             ],
-            "lastUpdated": "2010-07-30T00:00:00",
+            "direction": 2,
+            "group": "A Network Trojan was detected",
             "inheritedFromParentPolicy": false,
+            "lastUpdated": "2010-07-30T00:00:00",
+            "mode": 2,
+            "severity": 1,
+            "signatureId": 2000015,
+            "sourcePorts": [
+              "any"
+            ],
             "protocol": "tcp"
           },
           {
-            "signatureId": 2000106,
-            "mode": 2,
-            "severity": 1,
-            "direction": 1,
-            "group": "Attempted User Privilege Gain",
             "description": "WEB_SERVER SQL sp_delete_alert attempt",
-            "sourcePorts": [
-              "any"
-            ],
             "destinationPorts": [
               "any"
             ],
-            "lastUpdated": "2019-09-27T00:00:00",
+            "direction": 1,
+            "group": "Attempted User Privilege Gain",
             "inheritedFromParentPolicy": false,
+            "lastUpdated": "2019-09-27T00:00:00",
+            "mode": 2,
+            "severity": 1,
+            "signatureId": 2000106,
+            "sourcePorts": [
+              "any"
+            ],
             "protocol": "http"
           }
-        ],
-        "matchingRecordsCount": 2
+        ]
       }
     }
-  }
+  },
+  "operationId": "FirewallPolicyIdpsSignatures_List",
+  "title": "query signature overrides"
 }

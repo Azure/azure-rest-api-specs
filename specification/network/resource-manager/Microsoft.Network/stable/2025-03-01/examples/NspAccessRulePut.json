@@ -1,80 +1,81 @@
 {
-  "title": "Create/Update NSP access rule",
   "parameters": {
-    "api-version": "2025-03-01",
-    "subscriptionId": "subId",
-    "resourceGroupName": "rg1",
-    "networkSecurityPerimeterName": "nsp1",
-    "profileName": "profile1",
     "accessRuleName": "accessRule1",
+    "api-version": "2025-03-01",
+    "networkSecurityPerimeterName": "nsp1",
     "parameters": {
       "properties": {
-        "direction": "Inbound",
         "addressPrefixes": [
           "10.11.0.0/16",
           "10.10.1.0/24"
-        ]
+        ],
+        "direction": "Inbound"
       }
-    }
+    },
+    "profileName": "profile1",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subId"
   },
+  "title": "NspAccessRulePut",
   "responses": {
     "200": {
       "body": {
         "name": "accessRule1",
-        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp1/profiles/profile1/accessRules/accessRule1",
         "type": "Microsoft.Network/networkSecurityPerimeters/profiles/accessRules",
+        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp1/profiles/profile1/accessRules/accessRule1",
         "properties": {
-          "provisioningState": "Succeeded",
-          "direction": "Inbound",
           "addressPrefixes": [
             "10.11.0.0/16",
             "10.10.1.0/24"
           ],
-          "fullyQualifiedDomainNames": [],
-          "subscriptions": [],
-          "networkSecurityPerimeters": [],
+          "direction": "Inbound",
           "emailAddresses": [],
+          "fullyQualifiedDomainNames": [],
+          "networkSecurityPerimeters": [],
           "phoneNumbers": [],
-          "serviceTags": []
+          "provisioningState": "Succeeded",
+          "serviceTags": [],
+          "subscriptions": []
         },
         "systemData": {
+          "createdAt": "2024-02-07T18:07:36.3446713Z",
           "createdBy": "user",
           "createdByType": "User",
-          "createdAt": "2024-02-07T18:07:36.3446713Z",
+          "lastModifiedAt": "2024-02-07T18:07:36.3446713Z",
           "lastModifiedBy": "user",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2024-02-07T18:07:36.3446713Z"
+          "lastModifiedByType": "User"
         }
       }
     },
     "201": {
       "body": {
         "name": "accessRule1",
-        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp1/profiles/profile1/accessRules/accessRule1",
         "type": "Microsoft.Network/networkSecurityPerimeters/profiles/accessRules",
+        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp1/profiles/profile1/accessRules/accessRule1",
         "properties": {
-          "provisioningState": "Succeeded",
-          "direction": "Inbound",
           "addressPrefixes": [
             "10.11.0.0/16",
             "10.10.1.0/24"
           ],
-          "fullyQualifiedDomainNames": [],
-          "subscriptions": [],
-          "networkSecurityPerimeters": [],
+          "direction": "Inbound",
           "emailAddresses": [],
+          "fullyQualifiedDomainNames": [],
+          "networkSecurityPerimeters": [],
           "phoneNumbers": [],
-          "serviceTags": []
+          "provisioningState": "Succeeded",
+          "serviceTags": [],
+          "subscriptions": []
         },
         "systemData": {
+          "createdAt": "2024-02-07T18:07:36.3446713Z",
           "createdBy": "user",
           "createdByType": "User",
-          "createdAt": "2024-02-07T18:07:36.3446713Z",
+          "lastModifiedAt": "2024-02-07T18:07:36.3446713Z",
           "lastModifiedBy": "user",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2024-02-07T18:07:36.3446713Z"
+          "lastModifiedByType": "User"
         }
       }
     }
-  }
+  },
+  "operationId": "NetworkSecurityPerimeterAccessRules_CreateOrUpdate"
 }

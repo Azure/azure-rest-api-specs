@@ -1,10 +1,8 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
-    "subscriptionId": "subid",
-    "resourceGroupName": "rg1",
-    "virtualNetworkName": "test-vnet",
     "parameters": {
+      "location": "eastus",
       "properties": {
         "addressSpace": {
           "addressPrefixes": [
@@ -12,25 +10,27 @@
           ]
         },
         "flowTimeoutInMinutes": 10
-      },
-      "location": "eastus"
-    }
+      }
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid",
+    "virtualNetworkName": "test-vnet"
   },
   "responses": {
     "200": {
       "body": {
         "name": "test-vnet",
-        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet",
         "type": "Microsoft.Network/virtualNetworks",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet",
         "location": "eastus",
         "properties": {
-          "provisioningState": "Succeeded",
           "addressSpace": {
             "addressPrefixes": [
               "10.0.0.0/16"
             ]
           },
           "flowTimeoutInMinutes": 10,
+          "provisioningState": "Succeeded",
           "subnets": [],
           "virtualNetworkPeerings": []
         }
@@ -39,21 +39,23 @@
     "201": {
       "body": {
         "name": "test-vnet",
-        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet",
         "type": "Microsoft.Network/virtualNetworks",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet",
         "location": "eastus",
         "properties": {
-          "provisioningState": "Succeeded",
           "addressSpace": {
             "addressPrefixes": [
               "10.0.0.0/16"
             ]
           },
           "flowTimeoutInMinutes": 10,
+          "provisioningState": "Succeeded",
           "subnets": [],
           "virtualNetworkPeerings": []
         }
       }
     }
-  }
+  },
+  "operationId": "VirtualNetworks_CreateOrUpdate",
+  "title": "Create virtual network"
 }

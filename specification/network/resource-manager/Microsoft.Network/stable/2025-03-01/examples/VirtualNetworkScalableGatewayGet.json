@@ -1,29 +1,42 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
-    "subscriptionId": "subid",
     "resourceGroupName": "rg1",
+    "subscriptionId": "subid",
     "virtualNetworkGatewayName": "ergw"
   },
   "responses": {
     "200": {
       "body": {
         "name": "ergw",
-        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/ergw",
-        "etag": "W/\"00000000-0000-0000-0000-000000000000\"",
         "type": "Microsoft.Network/virtualNetworkGateways",
+        "etag": "W/\"00000000-0000-0000-0000-000000000000\"",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/ergw",
         "location": "centralus",
         "properties": {
-          "provisioningState": "Succeeded",
-          "resourceGuid": "00000000-0000-0000-0000-000000000000",
+          "activeActive": false,
+          "adminState": "Enabled",
+          "allowRemoteVnetTraffic": false,
+          "allowVirtualWanTraffic": false,
+          "autoScaleConfiguration": {
+            "bounds": {
+              "max": 3,
+              "min": 2
+            }
+          },
+          "bgpSettings": null,
+          "disableIPSecReplayProtection": false,
+          "enableBgp": false,
+          "enableBgpRouteTranslationForNat": false,
+          "gatewayType": "ExpressRoute",
           "ipConfigurations": [
             {
               "name": "gwipconfig1",
-              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/ergw/ipConfigurations/default",
               "etag": "W/\"00000000-0000-0000-0000-000000000000\"",
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/ergw/ipConfigurations/default",
               "properties": {
-                "provisioningState": "Succeeded",
                 "privateIPAllocationMethod": "Dynamic",
+                "provisioningState": "Succeeded",
                 "publicIPAddress": {
                   "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/gwpip"
                 },
@@ -33,31 +46,20 @@
               }
             }
           ],
-          "gatewayType": "ExpressRoute",
-          "vpnType": "PolicyBased",
-          "enableBgp": false,
-          "activeActive": false,
-          "disableIPSecReplayProtection": false,
-          "enableBgpRouteTranslationForNat": false,
+          "natRules": [],
+          "provisioningState": "Succeeded",
+          "resourceGuid": "00000000-0000-0000-0000-000000000000",
           "sku": {
             "name": "ErGwScale",
             "tier": "ErGwScale"
           },
-          "autoScaleConfiguration": {
-            "bounds": {
-              "min": 2,
-              "max": 3
-            }
-          },
-          "vpnClientConfiguration": null,
-          "bgpSettings": null,
-          "allowVirtualWanTraffic": false,
-          "allowRemoteVnetTraffic": false,
-          "natRules": [],
           "virtualNetworkGatewayPolicyGroups": [],
-          "adminState": "Enabled"
+          "vpnClientConfiguration": null,
+          "vpnType": "PolicyBased"
         }
       }
     }
-  }
+  },
+  "operationId": "VirtualNetworkGateways_Get",
+  "title": "GetVirtualNetworkScalableGateway"
 }

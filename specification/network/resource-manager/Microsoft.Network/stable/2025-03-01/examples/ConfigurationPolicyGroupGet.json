@@ -1,22 +1,25 @@
 {
   "parameters": {
-    "configurationPolicyGroupName": "policyGroup1",
-    "vpnServerConfigurationName": "vpnServerConfiguration1",
-    "resourceGroupName": "rg1",
     "api-version": "2025-03-01",
-    "subscriptionId": "subid"
+    "configurationPolicyGroupName": "policyGroup1",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid",
+    "vpnServerConfigurationName": "vpnServerConfiguration1"
   },
   "responses": {
     "200": {
       "body": {
         "name": "policyGroup1",
-        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnServerConfigurations/vpnServerConfiguration1/vpnServerConfigurationPolicyGroups/policyGroup1",
-        "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
         "type": "Microsoft.Network/vpnServerConfigurations/configurationPolicyGroups",
+        "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnServerConfigurations/vpnServerConfiguration1/vpnServerConfigurationPolicyGroups/policyGroup1",
         "properties": {
-          "provisioningState": "Succeeded",
           "isDefault": true,
-          "priority": 0,
+          "p2SConnectionConfigurations": [
+            {
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/p2sVpnGateways/p2sVpnGateway1/p2sConnectionConfigurations/P2SConnectionConfig1"
+            }
+          ],
           "policyMembers": [
             {
               "name": "policy1",
@@ -29,13 +32,12 @@
               "attributeValue": "red.com"
             }
           ],
-          "p2SConnectionConfigurations": [
-            {
-              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/p2sVpnGateways/p2sVpnGateway1/p2sConnectionConfigurations/P2SConnectionConfig1"
-            }
-          ]
+          "priority": 0,
+          "provisioningState": "Succeeded"
         }
       }
     }
-  }
+  },
+  "operationId": "ConfigurationPolicyGroups_Get",
+  "title": "ConfigurationPolicyGroupGet"
 }

@@ -1,41 +1,43 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
-    "subscriptionId": "subid",
+    "backendPoolName": "bp1",
     "groupName": "rg1",
     "loadBalancerName": "lb1",
-    "backendPoolName": "bp1",
     "parameters": {
       "ipAddress": "10.0.0.4"
-    }
+    },
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
       "body": {
         "inboundNatRulePortMappings": [
           {
-            "inboundNatRuleName": "natRule",
-            "protocol": "Tcp",
+            "backendPort": 3389,
             "frontendPort": 3389,
-            "backendPort": 3389
+            "inboundNatRuleName": "natRule",
+            "protocol": "Tcp"
           }
         ]
       }
     },
     "202": {
-      "headers": {
-        "Location": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb1/backendAddressPools/bp1/queryInboundNatRulePortMapping?api-version=2025-03-01"
-      },
       "body": {
         "inboundNatRulePortMappings": [
           {
-            "inboundNatRuleName": "natRule",
-            "protocol": "Tcp",
+            "backendPort": 3389,
             "frontendPort": 3389,
-            "backendPort": 3389
+            "inboundNatRuleName": "natRule",
+            "protocol": "Tcp"
           }
         ]
+      },
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb1/backendAddressPools/bp1/queryInboundNatRulePortMapping?api-version=2025-03-01"
       }
     }
-  }
+  },
+  "operationId": "LoadBalancers_ListInboundNatRulePortMappings",
+  "title": "Query inbound NAT rule port mapping"
 }

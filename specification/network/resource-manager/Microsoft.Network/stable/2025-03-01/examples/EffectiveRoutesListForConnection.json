@@ -1,13 +1,13 @@
 {
   "parameters": {
-    "subscriptionId": "subid",
-    "resourceGroupName": "rg1",
-    "virtualHubName": "virtualHub1",
     "api-version": "2025-03-01",
     "effectiveRoutesParameters": {
       "resourceId": "/subscriptions/subid/resourceGroups/resourceGroupName/providers/Microsoft.Network/expressRouteGateways/expressRouteGatewayName/expressRouteConnections/connectionName",
       "virtualWanResourceType": "ExpressRouteConnection"
-    }
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid",
+    "virtualHubName": "virtualHub1"
   },
   "responses": {
     "200": {
@@ -17,23 +17,23 @@
             "addressPrefixes": [
               "10.147.128.0/17"
             ],
+            "asPath": "65520-65520",
+            "nextHopType": "Remote Hub",
             "nextHops": [
               "/subscriptions/testSub/resourceGroups/testRg/providers/Microsoft.Network/virtualHubs/hub0"
             ],
-            "nextHopType": "Remote Hub",
-            "routeOrigin": "/subscriptions/testSub/resourceGroups/testRg/providers/Microsoft.Network/virtualHubs/hub0",
-            "asPath": "65520-65520"
+            "routeOrigin": "/subscriptions/testSub/resourceGroups/testRg/providers/Microsoft.Network/virtualHubs/hub0"
           },
           {
             "addressPrefixes": [
               "10.0.0.0/16"
             ],
+            "asPath": "12076-12076",
+            "nextHopType": "ExpressRouteGateway",
             "nextHops": [
               "/subscriptions/testSub/resourceGroups/testRg/providers/Microsoft.Network/expressRouteGateways/ErGw1"
             ],
-            "nextHopType": "ExpressRouteGateway",
-            "routeOrigin": "/subscriptions/testSub/resourceGroups/testRg/providers/Microsoft.Network/expressRouteGateways/ErGw1",
-            "asPath": "12076-12076"
+            "routeOrigin": "/subscriptions/testSub/resourceGroups/testRg/providers/Microsoft.Network/expressRouteGateways/ErGw1"
           }
         ]
       }
@@ -44,5 +44,7 @@
         "location": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/operationResults/{operationId}?api-version={api-version}"
       }
     }
-  }
+  },
+  "operationId": "VirtualHubs_GetEffectiveVirtualHubRoutes",
+  "title": "Effective Routes for a Connection resource"
 }

@@ -1,18 +1,21 @@
 {
   "parameters": {
-    "virtualHubName": "virtualHub1",
-    "resourceGroupName": "rg1",
     "api-version": "2025-03-01",
-    "subscriptionId": "subid"
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid",
+    "virtualHubName": "virtualHub1"
   },
   "responses": {
     "200": {
       "body": [
         {
           "name": "virtualHubRouteTable1a",
-          "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1/routeTables/virtualHubRouteTable1a",
           "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+          "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1/routeTables/virtualHubRouteTable1a",
           "properties": {
+            "attachedConnections": [
+              "All_Vnets"
+            ],
             "provisioningState": "Succeeded",
             "routes": [
               {
@@ -36,17 +39,17 @@
                   "10.0.0.68"
                 ]
               }
-            ],
-            "attachedConnections": [
-              "All_Vnets"
             ]
           }
         },
         {
           "name": "virtualHubRouteTable1b",
-          "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1/routeTables/virtualHubRouteTable1b",
           "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+          "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1/routeTables/virtualHubRouteTable1b",
           "properties": {
+            "attachedConnections": [
+              "All_Branches"
+            ],
             "provisioningState": "Succeeded",
             "routes": [
               {
@@ -60,13 +63,12 @@
                   "10.0.0.68"
                 ]
               }
-            ],
-            "attachedConnections": [
-              "All_Branches"
             ]
           }
         }
       ]
     }
-  }
+  },
+  "operationId": "VirtualHubRouteTableV2s_List",
+  "title": "VirtualHubRouteTableV2List"
 }

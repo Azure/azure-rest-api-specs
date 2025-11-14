@@ -1,10 +1,10 @@
 {
   "parameters": {
-    "resourceGroupName": "testrg",
     "api-version": "2025-03-01",
-    "subscriptionId": "subid",
+    "inboundNatRuleName": "natRule1.1",
     "loadBalancerName": "lb1",
-    "inboundNatRuleName": "natRule1.1"
+    "resourceGroupName": "testrg",
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
@@ -12,21 +12,23 @@
         "name": "natRule1.1",
         "id": "/subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/loadBalancers/lb1/inboundNatRules/natRule1.1",
         "properties": {
-          "provisioningState": "Succeeded",
+          "backendIPConfiguration": {
+            "id": "/subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Compute/virtualMachineScaleSets/vmss1/virtualMachines/1/networkInterfaces/nic1/ipConfigurations/ip1"
+          },
+          "backendPort": 3389,
+          "enableFloatingIP": false,
+          "enableTcpReset": true,
           "frontendIPConfiguration": {
             "id": "/subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/loadBalancers/lb1/frontendIPConfigurations/ip1"
           },
           "frontendPort": 3390,
-          "backendPort": 3389,
-          "enableFloatingIP": false,
           "idleTimeoutInMinutes": 4,
-          "protocol": "Tcp",
-          "enableTcpReset": true,
-          "backendIPConfiguration": {
-            "id": "/subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Compute/virtualMachineScaleSets/vmss1/virtualMachines/1/networkInterfaces/nic1/ipConfigurations/ip1"
-          }
+          "provisioningState": "Succeeded",
+          "protocol": "Tcp"
         }
       }
     }
-  }
+  },
+  "operationId": "InboundNatRules_Get",
+  "title": "InboundNatRuleGet"
 }

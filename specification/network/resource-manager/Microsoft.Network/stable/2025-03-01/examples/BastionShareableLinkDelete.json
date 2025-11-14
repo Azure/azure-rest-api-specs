@@ -1,8 +1,6 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
-    "subscriptionId": "subid",
-    "resourceGroupName": "rg1",
     "bastionHostName": "bastionhosttenant",
     "bslRequest": {
       "vms": [
@@ -17,7 +15,9 @@
           }
         }
       ]
-    }
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {},
@@ -26,5 +26,7 @@
         "location": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/operationResults/{operationId}?api-version={api-version}"
       }
     }
-  }
+  },
+  "operationId": "DeleteBastionShareableLink",
+  "title": "Delete Bastion Shareable Links for the request VMs"
 }

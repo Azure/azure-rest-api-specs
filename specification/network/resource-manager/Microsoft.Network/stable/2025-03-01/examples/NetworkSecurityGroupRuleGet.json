@@ -1,10 +1,10 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
-    "subscriptionId": "subid",
-    "resourceGroupName": "rg1",
     "networkSecurityGroupName": "testnsg",
-    "securityRuleName": "rule1"
+    "resourceGroupName": "rg1",
+    "securityRuleName": "rule1",
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
@@ -12,17 +12,19 @@
         "name": "rule1",
         "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityGroups/testnsg/securityRules/rule1",
         "properties": {
-          "provisioningState": "Succeeded",
-          "protocol": "*",
-          "sourcePortRange": "*",
-          "destinationPortRange": "80",
-          "sourceAddressPrefix": "*",
-          "destinationAddressPrefix": "*",
           "access": "Allow",
+          "destinationAddressPrefix": "*",
+          "destinationPortRange": "80",
+          "direction": "Inbound",
           "priority": 130,
-          "direction": "Inbound"
+          "provisioningState": "Succeeded",
+          "sourceAddressPrefix": "*",
+          "sourcePortRange": "*",
+          "protocol": "*"
         }
       }
     }
-  }
+  },
+  "operationId": "SecurityRules_Get",
+  "title": "Get network security rule in network security group"
 }

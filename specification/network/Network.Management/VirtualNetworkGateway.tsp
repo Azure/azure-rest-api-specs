@@ -380,8 +380,8 @@ interface VirtualNetworkGateways {
   @action("prepareMigration")
   invokePrepareMigration is ArmResourceActionAsyncBase<
     VirtualNetworkGateway,
-    VirtualNetworkGatewayMigrationParameters,
-    ArmAcceptedLroResponse,
+    Request = VirtualNetworkGatewayMigrationParameters,
+    Response = ArmAcceptedLroResponse,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<VirtualNetworkGateway>
   >;
 
@@ -391,8 +391,8 @@ interface VirtualNetworkGateways {
   @action("executeMigration")
   invokeExecuteMigration is ArmResourceActionAsyncBase<
     VirtualNetworkGateway,
-    void,
-    ArmAcceptedLroResponse,
+    Request = void,
+    Response = ArmAcceptedLroResponse,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<VirtualNetworkGateway>
   >;
 
@@ -402,8 +402,8 @@ interface VirtualNetworkGateways {
   @action("commitMigration")
   invokeCommitMigration is ArmResourceActionAsyncBase<
     VirtualNetworkGateway,
-    void,
-    ArmAcceptedLroResponse,
+    Request = void,
+    Response = ArmAcceptedLroResponse,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<VirtualNetworkGateway>
   >;
 
@@ -413,8 +413,8 @@ interface VirtualNetworkGateways {
   @action("abortMigration")
   invokeAbortMigration is ArmResourceActionAsyncBase<
     VirtualNetworkGateway,
-    void,
-    ArmAcceptedLroResponse,
+    Request = void,
+    Response = ArmAcceptedLroResponse,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<VirtualNetworkGateway>
   >;
 }

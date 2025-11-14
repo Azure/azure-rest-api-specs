@@ -1,10 +1,8 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
-    "subscriptionId": "subid",
-    "resourceGroupName": "rg1",
-    "routeTableName": "testrt",
     "parameters": {
+      "location": "westus",
       "properties": {
         "disableBgpRoutePropagation": true,
         "routes": [
@@ -16,28 +14,30 @@
             }
           }
         ]
-      },
-      "location": "westus"
-    }
+      }
+    },
+    "resourceGroupName": "rg1",
+    "routeTableName": "testrt",
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
       "body": {
         "name": "testrt",
-        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/routeTables/testrt",
         "type": "Microsoft.Network/routeTables",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/routeTables/testrt",
         "location": "westus",
         "properties": {
-          "provisioningState": "Succeeded",
           "disableBgpRoutePropagation": true,
+          "provisioningState": "Succeeded",
           "routes": [
             {
               "name": "route1",
               "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/routeTables/testrt/routes/route1",
               "properties": {
-                "provisioningState": "Succeeded",
                 "addressPrefix": "10.0.3.0/24",
-                "nextHopType": "VirtualNetworkGateway"
+                "nextHopType": "VirtualNetworkGateway",
+                "provisioningState": "Succeeded"
               }
             }
           ]
@@ -47,8 +47,8 @@
     "201": {
       "body": {
         "name": "testrt",
-        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/routeTables/testrt",
         "type": "Microsoft.Network/routeTables",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/routeTables/testrt",
         "location": "westus",
         "properties": {
           "provisioningState": "Succeeded",
@@ -57,14 +57,16 @@
               "name": "route1",
               "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/routeTables/testrt/routes/route1",
               "properties": {
-                "provisioningState": "Succeeded",
                 "addressPrefix": "10.0.3.0/24",
-                "nextHopType": "VirtualNetworkGateway"
+                "nextHopType": "VirtualNetworkGateway",
+                "provisioningState": "Succeeded"
               }
             }
           ]
         }
       }
     }
-  }
+  },
+  "operationId": "RouteTables_CreateOrUpdate",
+  "title": "Create route table with route"
 }

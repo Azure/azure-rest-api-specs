@@ -1,85 +1,85 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
-    "subscriptionId": "subid",
-    "resourceGroupName": "rg1",
     "firewallPolicyName": "firewallPolicy",
-    "ruleCollectionGroupName": "ruleCollectionGroup1",
     "parameters": {
       "properties": {
         "priority": 100,
         "ruleCollections": [
           {
-            "ruleCollectionType": "FirewallPolicyNatRuleCollection",
-            "priority": 100,
             "name": "Example-Nat-Rule-Collection",
             "action": {
               "type": "DNAT"
             },
+            "priority": 100,
+            "ruleCollectionType": "FirewallPolicyNatRuleCollection",
             "rules": [
               {
-                "ruleType": "NatRule",
                 "name": "nat-rule1",
-                "translatedFqdn": "internalhttp.server.net",
-                "translatedPort": "8080",
-                "ipProtocols": [
-                  "TCP",
-                  "UDP"
-                ],
-                "sourceAddresses": [
-                  "2.2.2.2"
-                ],
-                "sourceIpGroups": [],
                 "destinationAddresses": [
                   "152.23.32.23"
                 ],
                 "destinationPorts": [
                   "8080"
-                ]
+                ],
+                "ipProtocols": [
+                  "TCP",
+                  "UDP"
+                ],
+                "ruleType": "NatRule",
+                "sourceAddresses": [
+                  "2.2.2.2"
+                ],
+                "sourceIpGroups": [],
+                "translatedFqdn": "internalhttp.server.net",
+                "translatedPort": "8080"
               }
             ]
           }
         ]
       }
-    }
+    },
+    "resourceGroupName": "rg1",
+    "ruleCollectionGroupName": "ruleCollectionGroup1",
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
       "body": {
         "name": "ruleCollectionGroup1",
-        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/firewallPolicies/firewallPolicy/ruleCollectionGroups/ruleCollectionGroup1",
         "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/firewallPolicies/firewallPolicy/ruleCollectionGroups/ruleCollectionGroup1",
         "properties": {
-          "provisioningState": "Succeeded",
           "priority": 100,
+          "provisioningState": "Succeeded",
           "ruleCollections": [
             {
-              "ruleCollectionType": "FirewallPolicyNatRuleCollection",
               "name": "Example-Nat-Rule-Collection",
-              "priority": 100,
               "action": {
                 "type": "DNAT"
               },
+              "priority": 100,
+              "ruleCollectionType": "FirewallPolicyNatRuleCollection",
               "rules": [
                 {
-                  "ruleType": "NatRule",
                   "name": "nat-rule1",
-                  "translatedFqdn": "internalhttp.server.net",
-                  "translatedPort": "8080",
-                  "ipProtocols": [
-                    "TCP",
-                    "UDP"
-                  ],
-                  "sourceAddresses": [
-                    "2.2.2.2"
-                  ],
-                  "sourceIpGroups": [],
                   "destinationAddresses": [
                     "152.23.32.23"
                   ],
                   "destinationPorts": [
                     "8080"
-                  ]
+                  ],
+                  "ipProtocols": [
+                    "TCP",
+                    "UDP"
+                  ],
+                  "ruleType": "NatRule",
+                  "sourceAddresses": [
+                    "2.2.2.2"
+                  ],
+                  "sourceIpGroups": [],
+                  "translatedFqdn": "internalhttp.server.net",
+                  "translatedPort": "8080"
                 }
               ]
             }
@@ -90,38 +90,38 @@
     "201": {
       "body": {
         "name": "firewallPolicy",
-        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/firewallPolicies/firewallPolicy",
         "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/firewallPolicies/firewallPolicy",
         "properties": {
           "provisioningState": "Succeeded",
           "ruleCollections": [
             {
-              "ruleCollectionType": "FirewallPolicyNatRuleCollection",
               "name": "Example-Nat-Rule-Collection",
-              "priority": 100,
               "action": {
                 "type": "DNAT"
               },
+              "priority": 100,
+              "ruleCollectionType": "FirewallPolicyNatRuleCollection",
               "rules": [
                 {
-                  "ruleType": "NatRule",
                   "name": "nat-rule1",
-                  "translatedFqdn": "internalhttp.server.net",
-                  "translatedPort": "8080",
-                  "ipProtocols": [
-                    "TCP",
-                    "UDP"
-                  ],
-                  "sourceAddresses": [
-                    "2.2.2.2"
-                  ],
-                  "sourceIpGroups": [],
                   "destinationAddresses": [
                     "152.23.32.23"
                   ],
                   "destinationPorts": [
                     "8080"
-                  ]
+                  ],
+                  "ipProtocols": [
+                    "TCP",
+                    "UDP"
+                  ],
+                  "ruleType": "NatRule",
+                  "sourceAddresses": [
+                    "2.2.2.2"
+                  ],
+                  "sourceIpGroups": [],
+                  "translatedFqdn": "internalhttp.server.net",
+                  "translatedPort": "8080"
                 }
               ]
             }
@@ -129,5 +129,7 @@
         }
       }
     }
-  }
+  },
+  "operationId": "FirewallPolicyRuleCollectionGroups_CreateOrUpdate",
+  "title": "Create Firewall Policy Nat Rule Collection Group"
 }

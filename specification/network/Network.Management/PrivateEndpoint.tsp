@@ -78,10 +78,11 @@ interface PrivateEndpoints {
   @operationId("PrivateDnsZoneGroups_Delete")
   @delete
   @action("{privateDnsZoneGroupName}")
-  privateDnsZoneGroupsDelete is ArmResourceActionAsync<
+  privateDnsZoneGroupsDelete is ArmResourceActionAsyncBase<
     PrivateEndpoint,
     void,
-    OkResponse | NoContentResponse,
+    Response = OkResponse | NoContentResponse,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<PrivateEndpoint>,
     Parameters = {
       /**
        * The name of the private dns zone group.

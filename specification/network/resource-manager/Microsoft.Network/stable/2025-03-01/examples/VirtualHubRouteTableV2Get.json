@@ -1,18 +1,21 @@
 {
   "parameters": {
-    "routeTableName": "virtualHubRouteTable1a",
-    "resourceGroupName": "rg1",
     "api-version": "2025-03-01",
+    "resourceGroupName": "rg1",
+    "routeTableName": "virtualHubRouteTable1a",
     "subscriptionId": "subid",
     "virtualHubName": "virtualHub1"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1/routeTables/virtualHubRouteTable1a",
-        "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
         "name": "virtualHubRouteTable1a",
+        "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1/routeTables/virtualHubRouteTable1a",
         "properties": {
+          "attachedConnections": [
+            "All_Vnets"
+          ],
           "provisioningState": "Succeeded",
           "routes": [
             {
@@ -36,12 +39,11 @@
                 "10.0.0.68"
               ]
             }
-          ],
-          "attachedConnections": [
-            "All_Vnets"
           ]
         }
       }
     }
-  }
+  },
+  "operationId": "VirtualHubRouteTableV2s_Get",
+  "title": "VirtualHubVirtualHubRouteTableV2Get"
 }

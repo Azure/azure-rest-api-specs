@@ -1,21 +1,23 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "resourceGroupName": "rg1",
     "configurationName": "myTestSecurityConfig",
+    "force": false,
     "networkManagerName": "testNetworkManager",
+    "resourceGroupName": "rg1",
     "ruleCollectionName": "testRuleCollection",
     "ruleName": "SampleAdminRule",
-    "force": false
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
+    "200": {},
     "202": {
       "headers": {
         "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SampleRG/providers/Microsoft.Network/networkManagers/testNetworkManager/securityAdminConfigurations/myTestSecurityConfig/ruleCollections/testRuleCollection/rules/SampleAdminRule/operationResults/00000000-0000-0000-0000-000000000000?api-version=2025-03-01"
       }
     },
-    "200": {},
     "204": {}
-  }
+  },
+  "operationId": "AdminRules_Delete",
+  "title": "Deletes an admin rule"
 }

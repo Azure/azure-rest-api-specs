@@ -1,10 +1,5 @@
 {
   "parameters": {
-    "api-version": "2025-03-01",
-    "subscriptionId": "subid",
-    "resourceGroupName": "rg1",
-    "serviceEndpointPolicyName": "testPolicy",
-    "serviceEndpointPolicyDefinitionName": "testDefinition",
     "ServiceEndpointPolicyDefinitions": {
       "properties": {
         "description": "Storage Service EndpointPolicy Definition",
@@ -15,7 +10,12 @@
           "/subscriptions/subid1/resourceGroups/storageRg/providers/Microsoft.Storage/storageAccounts/stAccount"
         ]
       }
-    }
+    },
+    "api-version": "2025-03-01",
+    "resourceGroupName": "rg1",
+    "serviceEndpointPolicyDefinitionName": "testDefinition",
+    "serviceEndpointPolicyName": "testPolicy",
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
@@ -48,5 +48,7 @@
         }
       }
     }
-  }
+  },
+  "operationId": "ServiceEndpointPolicyDefinitions_CreateOrUpdate",
+  "title": "Create service endpoint policy definition"
 }

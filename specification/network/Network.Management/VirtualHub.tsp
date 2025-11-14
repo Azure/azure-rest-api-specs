@@ -136,10 +136,11 @@ interface VirtualHubs {
   @operationId("HubVirtualNetworkConnections_Delete")
   @delete
   @action("{connectionName}")
-  hubVirtualNetworkConnectionsDelete is ArmResourceActionAsync<
+  hubVirtualNetworkConnectionsDelete is ArmResourceActionAsyncBase<
     VirtualHub,
     void,
-    OkResponse | NoContentResponse,
+    Response = OkResponse | NoContentResponse,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<VirtualHub>,
     Parameters = {
       /**
        * The name of the HubVirtualNetworkConnection.
@@ -231,10 +232,11 @@ interface VirtualHubs {
   @operationId("VirtualHubRouteTableV2s_Delete")
   @delete
   @action("{routeTableName}")
-  virtualHubRouteTableV2sDelete is ArmResourceActionAsync<
+  virtualHubRouteTableV2sDelete is ArmResourceActionAsyncBase<
     VirtualHub,
     void,
-    OkResponse | NoContentResponse,
+    Response = OkResponse | NoContentResponse,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<VirtualHub>,
     Parameters = {
       /**
        * The name of the VirtualHubRouteTableV2.

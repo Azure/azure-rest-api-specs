@@ -1,26 +1,28 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
-    "subscriptionId": "subid",
+    "ipAllocationName": "test-ipallocation",
     "resourceGroupName": "rg1",
-    "ipAllocationName": "test-ipallocation"
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
       "body": {
         "name": "test-ipallocation",
-        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/IpAllocations/test-ipallocation",
         "type": "Microsoft.Network/IpAllocations",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/IpAllocations/test-ipallocation",
         "location": "centraluseuap",
         "properties": {
           "type": "Hypernet",
-          "prefix": "3.2.5.0/24",
-          "ipamAllocationId": "916d3b28-663f-448b-9abc-1bea9d5fed8f",
           "allocationTags": {
             "VNetID": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/HypernetVnet1"
-          }
+          },
+          "ipamAllocationId": "916d3b28-663f-448b-9abc-1bea9d5fed8f",
+          "prefix": "3.2.5.0/24"
         }
       }
     }
-  }
+  },
+  "operationId": "IpAllocations_Get",
+  "title": "Get IpAllocation"
 }

@@ -158,10 +158,11 @@ interface NetworkVirtualAppliances {
   @operationId("NetworkVirtualApplianceConnections_Delete")
   @delete
   @action("{connectionName}")
-  networkVirtualApplianceConnectionsDelete is ArmResourceActionAsync<
+  networkVirtualApplianceConnectionsDelete is ArmResourceActionAsyncBase<
     NetworkVirtualAppliance,
     void,
-    OkResponse | NoContentResponse,
+    Response = OkResponse | NoContentResponse,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<NetworkVirtualAppliance>,
     Parameters = {
       /**
        * The name of the NVA connection.

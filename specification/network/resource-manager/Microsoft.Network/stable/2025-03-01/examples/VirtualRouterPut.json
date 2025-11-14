@@ -1,39 +1,30 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
-    "subscriptionId": "subid",
-    "resourceGroupName": "rg1",
-    "virtualRouterName": "virtualRouter",
     "parameters": {
-      "tags": {
-        "key1": "value1"
-      },
       "location": "West US",
       "properties": {
         "hostedGateway": {
           "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/vnetGateway"
         }
+      },
+      "tags": {
+        "key1": "value1"
       }
-    }
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid",
+    "virtualRouterName": "virtualRouter"
   },
   "responses": {
     "200": {
       "body": {
         "name": "virtualRouter",
-        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualRouters/virtualRouter",
         "type": "Microsoft.Network/virtualRouters",
         "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualRouters/virtualRouter",
         "location": "West US",
-        "tags": {
-          "key1": "value1"
-        },
         "properties": {
-          "provisioningState": "Succeeded",
-          "virtualRouterAsn": 10000,
-          "virtualRouterIps": [
-            "192.168.1.1",
-            "192.168.1.2"
-          ],
           "hostedGateway": {
             "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/vnetGateway"
           },
@@ -41,27 +32,27 @@
             {
               "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualRouters/virtualRouter/peerings/peering1"
             }
+          ],
+          "provisioningState": "Succeeded",
+          "virtualRouterAsn": 10000,
+          "virtualRouterIps": [
+            "192.168.1.1",
+            "192.168.1.2"
           ]
+        },
+        "tags": {
+          "key1": "value1"
         }
       }
     },
     "201": {
       "body": {
         "name": "virtualRouter",
-        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualRouters/virtualRouter",
         "type": "Microsoft.Network/virtualRouters",
         "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualRouters/virtualRouter",
         "location": "West US",
-        "tags": {
-          "key1": "value1"
-        },
         "properties": {
-          "provisioningState": "Succeeded",
-          "virtualRouterAsn": 10000,
-          "virtualRouterIps": [
-            "192.168.1.1",
-            "192.168.1.2"
-          ],
           "hostedGateway": {
             "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/vnetGateway"
           },
@@ -69,9 +60,20 @@
             {
               "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualRouters/virtualRouter/peerings/peering1"
             }
+          ],
+          "provisioningState": "Succeeded",
+          "virtualRouterAsn": 10000,
+          "virtualRouterIps": [
+            "192.168.1.1",
+            "192.168.1.2"
           ]
+        },
+        "tags": {
+          "key1": "value1"
         }
       }
     }
-  }
+  },
+  "operationId": "VirtualRouters_CreateOrUpdate",
+  "title": "Create VirtualRouter"
 }

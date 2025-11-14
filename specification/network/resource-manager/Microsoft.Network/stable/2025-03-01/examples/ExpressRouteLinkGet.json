@@ -1,10 +1,10 @@
 {
   "parameters": {
-    "subscriptionId": "subid",
     "api-version": "2025-03-01",
-    "resourceGroupName": "rg1",
     "expressRoutePortName": "portName",
-    "linkName": "linkName"
+    "linkName": "linkName",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
@@ -12,16 +12,18 @@
         "name": "linkName",
         "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRoutePorts/portName/links/linkName",
         "properties": {
-          "provisioningState": "Succeeded",
-          "routerName": "router1",
-          "interfaceName": "Ethernet 0/0",
-          "patchPanelId": "patchPanelId1",
-          "rackId": "rackId1",
+          "adminState": "Disabled",
           "coloLocation": "coloLocationName",
           "connectorType": "LC",
-          "adminState": "Disabled"
+          "interfaceName": "Ethernet 0/0",
+          "patchPanelId": "patchPanelId1",
+          "provisioningState": "Succeeded",
+          "rackId": "rackId1",
+          "routerName": "router1"
         }
       }
     }
-  }
+  },
+  "operationId": "ExpressRouteLinks_Get",
+  "title": "ExpressRouteLinkGet"
 }

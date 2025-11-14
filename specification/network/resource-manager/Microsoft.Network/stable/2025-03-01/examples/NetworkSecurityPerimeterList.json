@@ -1,55 +1,56 @@
 {
-  "title": "List Network Security Perimeter",
   "parameters": {
     "api-version": "2025-03-01",
-    "subscriptionId": "subId",
-    "resourceGroupName": "rg1"
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subId"
   },
+  "title": "List Network Security Perimeter",
   "responses": {
     "200": {
       "body": {
+        "nextLink": "{baseurl}/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters?api-version=2025-03-01&$skipToken=10",
         "value": [
           {
             "name": "testNSP1",
-            "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/testNSP1",
             "type": "Microsoft.Network/networkSecurityPerimeters",
-            "tags": {},
+            "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/testNSP1",
             "location": "East US 2 EUAP",
             "properties": {
               "perimeterGuid": "guid",
               "provisioningState": "Succeeded"
             },
             "systemData": {
+              "createdAt": "2024-02-07T18:07:36.3446713Z",
               "createdBy": "user",
               "createdByType": "User",
-              "createdAt": "2024-02-07T18:07:36.3446713Z",
+              "lastModifiedAt": "2024-02-07T18:07:36.3446713Z",
               "lastModifiedBy": "user",
-              "lastModifiedByType": "User",
-              "lastModifiedAt": "2024-02-07T18:07:36.3446713Z"
-            }
+              "lastModifiedByType": "User"
+            },
+            "tags": {}
           },
           {
             "name": "testNSP2",
-            "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/testNSP2",
             "type": "Microsoft.Network/networkSecurityPerimeters",
-            "tags": {},
+            "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/testNSP2",
             "location": "East US 2 EUAP",
             "properties": {
               "perimeterGuid": "guid",
               "provisioningState": "Succeeded"
             },
             "systemData": {
+              "createdAt": "2024-02-07T18:07:36.3446713Z",
               "createdBy": "user",
               "createdByType": "User",
-              "createdAt": "2024-02-07T18:07:36.3446713Z",
+              "lastModifiedAt": "2024-02-07T18:07:36.3446713Z",
               "lastModifiedBy": "user",
-              "lastModifiedByType": "User",
-              "lastModifiedAt": "2024-02-07T18:07:36.3446713Z"
-            }
+              "lastModifiedByType": "User"
+            },
+            "tags": {}
           }
-        ],
-        "nextLink": "{baseurl}/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters?api-version=2025-03-01&$skipToken=10"
+        ]
       }
     }
-  }
+  },
+  "operationId": "NetworkSecurityPerimeters_List"
 }

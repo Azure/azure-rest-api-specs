@@ -1,38 +1,40 @@
 {
   "parameters": {
-    "subscriptionId": "subid",
-    "resourceGroupName": "testrg",
+    "api-version": "2025-03-01",
     "loadBalancerName": "lb1",
     "loadBalancingRuleName": "rule1",
-    "api-version": "2025-03-01"
+    "resourceGroupName": "testrg",
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
       "body": {
         "name": "rule1",
-        "id": "/subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/loadBalancers/lb1/loadBalancingRules/rule1",
-        "etag": "W/\"00000000-0000-0000-0000-000000000000\"",
         "type": "Microsoft.Network/loadBalancers/loadBalancingRules",
+        "etag": "W/\"00000000-0000-0000-0000-000000000000\"",
+        "id": "/subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/loadBalancers/lb1/loadBalancingRules/rule1",
         "properties": {
-          "provisioningState": "Succeeded",
+          "backendAddressPool": {
+            "id": "/subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/loadBalancers/lb1/backendAddressPools/bepool1"
+          },
+          "backendPort": 80,
+          "enableFloatingIP": false,
+          "enableTcpReset": true,
           "frontendIPConfiguration": {
             "id": "/subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/loadBalancers/lb1/frontendIPConfigurations/lbfrontend"
           },
           "frontendPort": 80,
-          "backendPort": 80,
-          "enableFloatingIP": false,
           "idleTimeoutInMinutes": 15,
-          "protocol": "Tcp",
-          "enableTcpReset": true,
           "loadDistribution": "Default",
-          "backendAddressPool": {
-            "id": "/subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/loadBalancers/lb1/backendAddressPools/bepool1"
-          },
           "probe": {
             "id": "/subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/loadBalancers/lb1/probes/probe1"
-          }
+          },
+          "provisioningState": "Succeeded",
+          "protocol": "Tcp"
         }
       }
     }
-  }
+  },
+  "operationId": "LoadBalancerLoadBalancingRules_Get",
+  "title": "LoadBalancerLoadBalancingRuleGet"
 }

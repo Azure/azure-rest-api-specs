@@ -1,57 +1,59 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "resourceGroupName": "rg1",
     "configurationName": "myTestSecurityConfig",
     "networkManagerName": "testNetworkManager",
+    "resourceGroupName": "rg1",
     "ruleCollectionName": "testRuleCollection",
-    "ruleName": "SampleDefaultAdminRule"
+    "ruleName": "SampleDefaultAdminRule",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/securityAdminConfigurations/myTestSecurityConfig/ruleCollections/testRuleCollection/rules/SampleDefaultAdminRule",
-        "type": "Microsoft.Network/networkManagers/securityAdminConfigurations/ruleCollections/rules",
         "name": "SampleDefaultAdminRule",
+        "type": "Microsoft.Network/networkManagers/securityAdminConfigurations/ruleCollections/rules",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/securityAdminConfigurations/myTestSecurityConfig/ruleCollections/testRuleCollection/rules/SampleDefaultAdminRule",
         "kind": "Default",
-        "systemData": {
-          "createdBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
-          "createdByType": "User",
-          "createdAt": "2021-01-11T18:52:27Z",
-          "lastModifiedBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2021-01-11T18:52:27Z"
-        },
         "properties": {
-          "flag": "AllowVnetInbound",
           "description": "This is Sample Default Admin Rule",
-          "protocol": "Tcp",
-          "sources": [
-            {
-              "addressPrefixType": "IPPrefix",
-              "addressPrefix": "*"
-            }
-          ],
-          "destinations": [
-            {
-              "addressPrefixType": "IPPrefix",
-              "addressPrefix": "*"
-            }
-          ],
-          "sourcePortRanges": [
-            "0-65535"
-          ],
+          "access": "Deny",
           "destinationPortRanges": [
             "22"
           ],
-          "access": "Deny",
-          "priority": 1,
+          "destinations": [
+            {
+              "addressPrefix": "*",
+              "addressPrefixType": "IPPrefix"
+            }
+          ],
           "direction": "Inbound",
+          "flag": "AllowVnetInbound",
+          "priority": 1,
           "provisioningState": "Succeeded",
-          "resourceGuid": "00000000-0000-0000-0000-000000000000"
+          "resourceGuid": "00000000-0000-0000-0000-000000000000",
+          "sourcePortRanges": [
+            "0-65535"
+          ],
+          "sources": [
+            {
+              "addressPrefix": "*",
+              "addressPrefixType": "IPPrefix"
+            }
+          ],
+          "protocol": "Tcp"
+        },
+        "systemData": {
+          "createdAt": "2021-01-11T18:52:27Z",
+          "createdBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
+          "createdByType": "User",
+          "lastModifiedAt": "2021-01-11T18:52:27Z",
+          "lastModifiedBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
+          "lastModifiedByType": "User"
         }
       }
     }
-  }
+  },
+  "operationId": "AdminRules_Get",
+  "title": "Gets security default admin rule"
 }

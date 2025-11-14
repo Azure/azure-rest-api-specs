@@ -1,9 +1,9 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
-    "subscriptionId": "subid",
+    "networkWatcherName": "nw1",
     "resourceGroupName": "rg1",
-    "networkWatcherName": "nw1"
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
@@ -11,48 +11,50 @@
         "value": [
           {
             "name": "pc1",
-            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkWatchers/nw1/packetCaptures/pc1",
             "etag": "W/\"00000000-0000-0000-0000-000000000000\"",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkWatchers/nw1/packetCaptures/pc1",
             "properties": {
-              "provisioningState": "Updating",
-              "target": "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Compute/virtualMachines/vm1",
               "bytesToCapturePerPacket": 10000,
-              "totalBytesPerSession": 100000,
-              "timeLimitInSeconds": 100,
-              "storageLocation": {
-                "storageId": "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Storage/storageAccounts/pcstore",
-                "storagePath": "https://mytestaccountname.blob.core.windows.net/capture/pc1.cap",
-                "filePath": "D:\\capture\\pc1.cap"
-              },
               "filters": [
                 {
-                  "protocol": "TCP",
                   "localIPAddress": "10.0.0.4",
-                  "localPort": "80"
+                  "localPort": "80",
+                  "protocol": "TCP"
                 }
-              ]
+              ],
+              "provisioningState": "Updating",
+              "storageLocation": {
+                "filePath": "D:\\capture\\pc1.cap",
+                "storageId": "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Storage/storageAccounts/pcstore",
+                "storagePath": "https://mytestaccountname.blob.core.windows.net/capture/pc1.cap"
+              },
+              "target": "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Compute/virtualMachines/vm1",
+              "timeLimitInSeconds": 100,
+              "totalBytesPerSession": 100000
             }
           },
           {
             "name": "pc2",
-            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkWatchers/nw1/packetCaptures/pc2",
             "etag": "W/\"00000000-0000-0000-0000-000000000000\"",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkWatchers/nw1/packetCaptures/pc2",
             "properties": {
-              "provisioningState": "Succeeded",
-              "target": "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Compute/virtualMachines/vm1",
               "bytesToCapturePerPacket": 10000,
-              "totalBytesPerSession": 100000,
-              "timeLimitInSeconds": 100,
+              "filters": [],
+              "provisioningState": "Succeeded",
               "storageLocation": {
+                "filePath": "D:\\capture\\pc2.cap",
                 "storageId": "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Storage/storageAccounts/pcstore",
-                "storagePath": "https://mytestaccountname.blob.core.windows.net/capture/pc2.cap",
-                "filePath": "D:\\capture\\pc2.cap"
+                "storagePath": "https://mytestaccountname.blob.core.windows.net/capture/pc2.cap"
               },
-              "filters": []
+              "target": "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Compute/virtualMachines/vm1",
+              "timeLimitInSeconds": 100,
+              "totalBytesPerSession": 100000
             }
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "PacketCaptures_List",
+  "title": "List packet captures"
 }

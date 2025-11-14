@@ -89,8 +89,8 @@ interface AzureFirewalls {
    */
   packetCapture is ArmResourceActionAsyncBase<
     AzureFirewall,
-    FirewallPacketCaptureParameters,
-    ArmAcceptedLroResponse,
+    Request = FirewallPacketCaptureParameters,
+    Response = ArmAcceptedLroResponse,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<AzureFirewall>
   >;
 

@@ -1,9 +1,9 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
-    "subscriptionId": "subid",
+    "networkInterfaceName": "mynic",
     "resourceGroupName": "testrg",
-    "networkInterfaceName": "mynic"
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
@@ -11,18 +11,20 @@
         "value": [
           {
             "name": "tapConfiguration1",
-            "id": "/subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/networkInterfaces/mynic/tapConfigurations/tapConfiguration1",
-            "etag": "etag",
             "type": "Microsoft.Network/networkInterfaces/tapConfigurations",
+            "etag": "etag",
+            "id": "/subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/networkInterfaces/mynic/tapConfigurations/tapConfiguration1",
             "properties": {
+              "provisioningState": "Succeded",
               "virtualNetworkTap": {
                 "id": "/subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworkTaps/testvtap"
-              },
-              "provisioningState": "Succeded"
+              }
             }
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "NetworkInterfaceTapConfigurations_List",
+  "title": "List virtual network tap configurations"
 }

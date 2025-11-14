@@ -1,51 +1,53 @@
 {
   "parameters": {
-    "ruleCollectionGroupName": "ruleCollectionGroup1",
+    "api-version": "2025-03-01",
     "firewallPolicyName": "firewallPolicy",
     "resourceGroupName": "rg1",
-    "api-version": "2025-03-01",
+    "ruleCollectionGroupName": "ruleCollectionGroup1",
     "subscriptionId": "subid"
   },
   "responses": {
     "200": {
       "body": {
         "name": "ruleCollectionGroup1",
-        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/firewallPolicies/firewallPolicy/ruleCollectionGroups/ruleCollectionGroup1",
         "etag": "W/\"72090554-7e3b-43f2-80ad-99a9020dcb11\"",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/firewallPolicies/firewallPolicy/ruleCollectionGroups/ruleCollectionGroup1",
         "properties": {
-          "size": "1.2MB",
-          "provisioningState": "Succeeded",
           "priority": 110,
+          "provisioningState": "Succeeded",
           "ruleCollections": [
             {
-              "ruleCollectionType": "FirewallPolicyFilterRuleCollection",
               "name": "Example-Filter-Rule-Collection",
-              "priority": 200,
               "action": {
                 "type": "Deny"
               },
+              "priority": 200,
+              "ruleCollectionType": "FirewallPolicyFilterRuleCollection",
               "rules": [
                 {
-                  "ruleType": "NetworkRule",
                   "name": "network-rule1",
-                  "sourceAddresses": [
-                    "10.1.25.0/24"
-                  ],
                   "destinationAddresses": [
+                    "*"
+                  ],
+                  "destinationPorts": [
                     "*"
                   ],
                   "ipProtocols": [
                     "TCP"
                   ],
-                  "destinationPorts": [
-                    "*"
+                  "ruleType": "NetworkRule",
+                  "sourceAddresses": [
+                    "10.1.25.0/24"
                   ]
                 }
               ]
             }
-          ]
+          ],
+          "size": "1.2MB"
         }
       }
     }
-  }
+  },
+  "operationId": "FirewallPolicyRuleCollectionGroups_Get",
+  "title": "Get FirewallPolicyRuleCollectionGroup"
 }

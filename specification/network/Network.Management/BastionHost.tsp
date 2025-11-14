@@ -106,8 +106,8 @@ interface BastionHosts {
   @action("deleteShareableLinksByToken")
   deleteBastionShareableLinkByToken is ArmResourceActionAsyncBase<
     BastionHost,
-    BastionShareableLinkTokenListRequest,
-    ArmAcceptedLroResponse,
+    Request = BastionShareableLinkTokenListRequest,
+    Response = ArmAcceptedLroResponse,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<BastionHost>
   >;
 

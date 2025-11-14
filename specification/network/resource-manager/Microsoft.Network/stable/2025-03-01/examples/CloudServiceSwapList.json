@@ -1,18 +1,18 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
-    "subscriptionId": "subid",
     "groupName": "rg1",
-    "resourceName": "testCloudService"
+    "resourceName": "testCloudService",
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Compute/cloudServices/testCloudService/providers/Microsoft.Network/cloudServiceSlots/swap",
             "name": "swap",
             "type": "Microsoft.Network/cloudServiceSlots",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Compute/cloudServices/testCloudService/providers/Microsoft.Network/cloudServiceSlots/swap",
             "properties": {
               "slotType": "Staging"
             }
@@ -20,5 +20,7 @@
         ]
       }
     }
-  }
+  },
+  "operationId": "VipSwap_List",
+  "title": "Get swap resource list"
 }

@@ -8,22 +8,28 @@
       "body": {
         "value": [
           {
-            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1",
-            "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
-            "location": "West US",
             "name": "virtualHub1",
             "type": "Microsoft.Network/virtualHubs",
+            "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1",
+            "location": "West US",
             "properties": {
+              "addressPrefix": "10.10.1.0/24",
+              "allowBranchToBranchTraffic": false,
+              "hubRoutingPreference": "ExpressRoute",
+              "preferredRoutingGateway": "ExpressRoute",
               "provisioningState": "Succeeded",
-              "virtualWan": {
-                "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualWans/virtualWan1"
-              },
+              "routingState": "Provisioned",
+              "sku": "Basic",
               "virtualHubRouteTableV2s": [
                 {
-                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1/routeTables/virtualHubRouteTable1",
-                  "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
                   "name": "rt2a",
+                  "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1/routeTables/virtualHubRouteTable1",
                   "properties": {
+                    "attachedConnections": [
+                      "All_Vnets"
+                    ],
                     "provisioningState": "Succeeded",
                     "routes": [
                       {
@@ -47,46 +53,46 @@
                           "10.0.0.68"
                         ]
                       }
-                    ],
-                    "attachedConnections": [
-                      "All_Vnets"
                     ]
                   }
                 }
               ],
-              "addressPrefix": "10.10.1.0/24",
-              "sku": "Basic",
-              "routingState": "Provisioned",
               "virtualRouterAsn": 65515,
+              "virtualRouterAutoScaleConfiguration": {
+                "minCapacity": 2
+              },
               "virtualRouterIps": [
                 "10.10.1.12",
                 "10.10.1.13"
               ],
-              "allowBranchToBranchTraffic": false,
-              "preferredRoutingGateway": "ExpressRoute",
-              "hubRoutingPreference": "ExpressRoute",
-              "virtualRouterAutoScaleConfiguration": {
-                "minCapacity": 2
+              "virtualWan": {
+                "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualWans/virtualWan1"
               }
             }
           },
           {
-            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub2",
-            "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
-            "location": "East US",
             "name": "virtualHub2",
             "type": "Microsoft.Network/virtualHubs",
+            "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub2",
+            "location": "East US",
             "properties": {
+              "addressPrefix": "210.10.1.0/24",
+              "allowBranchToBranchTraffic": false,
+              "hubRoutingPreference": "ExpressRoute",
+              "preferredRoutingGateway": "ExpressRoute",
               "provisioningState": "Succeeded",
-              "virtualWan": {
-                "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualWans/virtualWan1"
-              },
+              "routingState": "Provisioned",
+              "sku": "Basic",
               "virtualHubRouteTableV2s": [
                 {
-                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub2/routeTables/virtualHubRouteTable2",
-                  "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
                   "name": "rt2a",
+                  "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub2/routeTables/virtualHubRouteTable2",
                   "properties": {
+                    "attachedConnections": [
+                      "All_Vnets"
+                    ],
                     "provisioningState": "Succeeded",
                     "routes": [
                       {
@@ -110,31 +116,27 @@
                           "10.0.0.68"
                         ]
                       }
-                    ],
-                    "attachedConnections": [
-                      "All_Vnets"
                     ]
                   }
                 }
               ],
-              "addressPrefix": "210.10.1.0/24",
-              "sku": "Basic",
-              "routingState": "Provisioned",
               "virtualRouterAsn": 65515,
+              "virtualRouterAutoScaleConfiguration": {
+                "minCapacity": 2
+              },
               "virtualRouterIps": [
                 "10.10.1.12",
                 "10.10.1.13"
               ],
-              "allowBranchToBranchTraffic": false,
-              "preferredRoutingGateway": "ExpressRoute",
-              "hubRoutingPreference": "ExpressRoute",
-              "virtualRouterAutoScaleConfiguration": {
-                "minCapacity": 2
+              "virtualWan": {
+                "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualWans/virtualWan1"
               }
             }
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "VirtualHubs_List",
+  "title": "VirtualHubList"
 }

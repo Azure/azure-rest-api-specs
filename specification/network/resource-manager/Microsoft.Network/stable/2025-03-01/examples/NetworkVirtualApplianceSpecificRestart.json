@@ -1,24 +1,24 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
-    "subscriptionId": "subid",
-    "resourceGroupName": "rg1",
-    "networkVirtualApplianceName": "nva",
     "instanceIds": [
       "0",
       "1"
-    ]
+    ],
+    "networkVirtualApplianceName": "nva",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
-      "headers": {
-        "location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/westus/nfvOperations/00000000-0000-0000-0000-000000000000?api-version=2023-11-01"
-      },
       "body": {
         "instanceIds": [
           "0",
           "1"
         ]
+      },
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/westus/nfvOperations/00000000-0000-0000-0000-000000000000?api-version=2023-11-01"
       }
     },
     "202": {
@@ -26,5 +26,7 @@
         "location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/westus/nfvOperations/00000000-0000-0000-0000-000000000000?api-version=2025-03-01"
       }
     }
-  }
+  },
+  "operationId": "NetworkVirtualAppliances_Restart",
+  "title": "Restart Specific NetworkVirtualAppliance VMs in VM Scale Set"
 }

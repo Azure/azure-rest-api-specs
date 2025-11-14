@@ -1,39 +1,40 @@
 {
-  "title": "Patch Network Security Perimeter",
   "parameters": {
     "api-version": "2025-03-01",
-    "subscriptionId": "subId",
-    "resourceGroupName": "rg1",
     "networkSecurityPerimeterName": "nsp1",
     "parameters": {
       "tags": {
         "description": "nsp1"
       }
-    }
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subId"
   },
+  "title": "Patch Network Security Perimeter",
   "responses": {
     "200": {
       "body": {
         "name": "TestNetworkSecurityPerimeter",
-        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/TestNetworkSecurityPerimeter",
         "type": "Microsoft.Network/networkSecurityPerimeters",
-        "tags": {
-          "description": "nsp1"
-        },
+        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/TestNetworkSecurityPerimeter",
         "location": "East US 2 EUAP",
         "properties": {
           "perimeterGuid": "guid",
           "provisioningState": "Succeeded"
         },
         "systemData": {
+          "createdAt": "2024-02-07T18:07:36.3446713Z",
           "createdBy": "user",
           "createdByType": "User",
-          "createdAt": "2024-02-07T18:07:36.3446713Z",
+          "lastModifiedAt": "2024-02-07T18:07:36.3446713Z",
           "lastModifiedBy": "user",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2024-02-07T18:07:36.3446713Z"
+          "lastModifiedByType": "User"
+        },
+        "tags": {
+          "description": "nsp1"
         }
       }
     }
-  }
+  },
+  "operationId": "NetworkSecurityPerimeters_Patch"
 }

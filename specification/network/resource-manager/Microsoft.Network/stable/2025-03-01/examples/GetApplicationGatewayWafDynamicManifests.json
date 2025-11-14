@@ -1,7 +1,7 @@
 {
   "parameters": {
-    "location": "westus",
     "api-version": "2025-03-01",
+    "location": "westus",
     "subscriptionId": "subid"
   },
   "responses": {
@@ -10,56 +10,58 @@
         "value": [
           {
             "name": "default",
-            "id": "/subscriptions/subid/providers/Microsoft.Network/applicationGatewayWafDynamicManifests/default",
             "type": "Microsoft.Network/applicationGatewayWafDynamicManifest",
+            "id": "/subscriptions/subid/providers/Microsoft.Network/applicationGatewayWafDynamicManifests/default",
             "properties": {
-              "defaultRuleSet": {
-                "ruleSetType": "OWASP",
-                "ruleSetVersion": "3.2"
-              },
               "availableRuleSets": [
                 {
+                  "ruleGroups": [
+                    {
+                      "description": "",
+                      "ruleGroupName": "General",
+                      "rules": [
+                        {
+                          "description": "Failed to Parse Request Body.",
+                          "action": "AnomalyScoring",
+                          "ruleId": 200002,
+                          "ruleIdString": "200002",
+                          "state": "Enabled"
+                        },
+                        {
+                          "description": "Multipart Request Body Strict Validation.",
+                          "action": "AnomalyScoring",
+                          "ruleId": 200003,
+                          "ruleIdString": "200003",
+                          "state": "Enabled"
+                        },
+                        {
+                          "description": "Possible Multipart Unmatched Boundary.",
+                          "action": "AnomalyScoring",
+                          "ruleId": 200004,
+                          "ruleIdString": "200004",
+                          "state": "Enabled"
+                        }
+                      ]
+                    }
+                  ],
                   "ruleSetType": "OWASP",
                   "ruleSetVersion": "3.2",
                   "status": "0",
                   "tiers": [
                     "WAF_v2"
-                  ],
-                  "ruleGroups": [
-                    {
-                      "ruleGroupName": "General",
-                      "description": "",
-                      "rules": [
-                        {
-                          "ruleId": 200002,
-                          "ruleIdString": "200002",
-                          "description": "Failed to Parse Request Body.",
-                          "state": "Enabled",
-                          "action": "AnomalyScoring"
-                        },
-                        {
-                          "ruleId": 200003,
-                          "ruleIdString": "200003",
-                          "description": "Multipart Request Body Strict Validation.",
-                          "state": "Enabled",
-                          "action": "AnomalyScoring"
-                        },
-                        {
-                          "ruleId": 200004,
-                          "ruleIdString": "200004",
-                          "description": "Possible Multipart Unmatched Boundary.",
-                          "state": "Enabled",
-                          "action": "AnomalyScoring"
-                        }
-                      ]
-                    }
                   ]
                 }
-              ]
+              ],
+              "defaultRuleSet": {
+                "ruleSetType": "OWASP",
+                "ruleSetVersion": "3.2"
+              }
             }
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "ApplicationGatewayWafDynamicManifests_Get",
+  "title": "Gets WAF manifests"
 }

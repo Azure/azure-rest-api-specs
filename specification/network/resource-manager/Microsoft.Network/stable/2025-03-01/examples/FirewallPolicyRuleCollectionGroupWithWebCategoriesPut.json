@@ -1,31 +1,28 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
-    "subscriptionId": "e747cc13-97d4-4a79-b463-42d7f4e558f2",
-    "resourceGroupName": "rg1",
     "firewallPolicyName": "firewallPolicy",
-    "ruleCollectionGroupName": "ruleCollectionGroup1",
     "parameters": {
       "properties": {
         "priority": 110,
         "ruleCollections": [
           {
-            "ruleCollectionType": "FirewallPolicyFilterRuleCollection",
             "name": "Example-Filter-Rule-Collection",
             "action": {
               "type": "Deny"
             },
+            "ruleCollectionType": "FirewallPolicyFilterRuleCollection",
             "rules": [
               {
-                "ruleType": "ApplicationRule",
                 "name": "rule1",
                 "description": "Deny inbound rule",
                 "protocols": [
                   {
-                    "protocolType": "Https",
-                    "port": 443
+                    "port": 443,
+                    "protocolType": "Https"
                   }
                 ],
+                "ruleType": "ApplicationRule",
                 "sourceAddresses": [
                   "216.58.216.164",
                   "10.0.0.0/24"
@@ -38,35 +35,38 @@
           }
         ]
       }
-    }
+    },
+    "resourceGroupName": "rg1",
+    "ruleCollectionGroupName": "ruleCollectionGroup1",
+    "subscriptionId": "e747cc13-97d4-4a79-b463-42d7f4e558f2"
   },
   "responses": {
     "200": {
       "body": {
         "name": "ruleCollectionGroup1",
-        "id": "/subscriptions/e747cc13-97d4-4a79-b463-42d7f4e558f2/resourceGroups/rg1/providers/Microsoft.Network/firewallPolicies/firewallPolicy/ruleCollectionGroups/ruleCollectionGroup1",
         "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+        "id": "/subscriptions/e747cc13-97d4-4a79-b463-42d7f4e558f2/resourceGroups/rg1/providers/Microsoft.Network/firewallPolicies/firewallPolicy/ruleCollectionGroups/ruleCollectionGroup1",
         "properties": {
-          "provisioningState": "Succeeded",
           "priority": 110,
+          "provisioningState": "Succeeded",
           "ruleCollections": [
             {
-              "ruleCollectionType": "FirewallPolicyFilterRuleCollection",
               "name": "Example-Filter-Rule-Collection",
               "action": {
                 "type": "Deny"
               },
+              "ruleCollectionType": "FirewallPolicyFilterRuleCollection",
               "rules": [
                 {
-                  "ruleType": "ApplicationRule",
                   "name": "rule1",
                   "description": "Deny inbound rule",
                   "protocols": [
                     {
-                      "protocolType": "Https",
-                      "port": 443
+                      "port": 443,
+                      "protocolType": "Https"
                     }
                   ],
+                  "ruleType": "ApplicationRule",
                   "sourceAddresses": [
                     "216.58.216.164",
                     "10.0.0.0/24"
@@ -84,29 +84,29 @@
     "201": {
       "body": {
         "name": "firewallPolicy",
-        "id": "/subscriptions/e747cc13-97d4-4a79-b463-42d7f4e558f2/resourceGroups/rg1/providers/Microsoft.Network/firewallPolicies/firewallPolicy",
         "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+        "id": "/subscriptions/e747cc13-97d4-4a79-b463-42d7f4e558f2/resourceGroups/rg1/providers/Microsoft.Network/firewallPolicies/firewallPolicy",
         "properties": {
-          "provisioningState": "Succeeded",
           "priority": 110,
+          "provisioningState": "Succeeded",
           "ruleCollections": [
             {
-              "ruleCollectionType": "FirewallPolicyFilterRuleCollection",
               "name": "Example-Filter-Rule-Collection",
               "action": {
                 "type": "Deny"
               },
+              "ruleCollectionType": "FirewallPolicyFilterRuleCollection",
               "rules": [
                 {
-                  "ruleType": "ApplicationRule",
                   "name": "rule1",
                   "description": "Deny inbound rule",
                   "protocols": [
                     {
-                      "protocolType": "Https",
-                      "port": 443
+                      "port": 443,
+                      "protocolType": "Https"
                     }
                   ],
+                  "ruleType": "ApplicationRule",
                   "sourceAddresses": [
                     "216.58.216.164",
                     "10.0.0.0/24"
@@ -121,5 +121,7 @@
         }
       }
     }
-  }
+  },
+  "operationId": "FirewallPolicyRuleCollectionGroups_CreateOrUpdate",
+  "title": "Create Firewall Policy Rule Collection Group With Web Categories"
 }

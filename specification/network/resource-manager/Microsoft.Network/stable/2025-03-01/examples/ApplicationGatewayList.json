@@ -1,8 +1,8 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
-    "subscriptionId": "subid",
-    "resourceGroupName": "rg1"
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
@@ -10,17 +10,88 @@
         "value": [
           {
             "name": "appgw",
-            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw",
             "type": "Microsoft.Network/applicationGateways",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw",
             "location": "southcentralus",
             "properties": {
-              "provisioningState": "Succeeded",
-              "sku": {
-                "name": "Standard_Medium",
-                "tier": "Standard",
-                "capacity": 3
-              },
-              "operationalState": "Running",
+              "authenticationCertificates": [],
+              "backendAddressPools": [
+                {
+                  "name": "appgwpool",
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendAddressPools/appgwpool",
+                  "properties": {
+                    "backendAddresses": [],
+                    "provisioningState": "Succeeded"
+                  }
+                },
+                {
+                  "name": "appgwpool1",
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendAddressPools/appgwpool1",
+                  "properties": {
+                    "backendAddresses": [
+                      "10.0.0.1",
+                      "10.0.0.2"
+                    ],
+                    "provisioningState": "Succeeded"
+                  }
+                }
+              ],
+              "backendHttpSettingsCollection": [
+                {
+                  "name": "appgwbhs",
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendHttpSettingsCollection/appgwbhs",
+                  "properties": {
+                    "cookieBasedAffinity": "Disabled",
+                    "port": 80,
+                    "provisioningState": "Succeeded",
+                    "requestTimeout": 30,
+                    "protocol": "Http"
+                  }
+                }
+              ],
+              "entraJWTValidationConfigs": [
+                {
+                  "name": "entraJWTValidationConfig1",
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/entraJWTValidationConfigs/entraJWTValidationConfig1",
+                  "properties": {
+                    "clientId": "37293f5a-97b3-451d-b786-f532d711c9ff",
+                    "provisioningState": "Succeeded",
+                    "tenantId": "70a036f6-8e4d-4615-bad6-149c02e7720d",
+                    "unAuthorizedRequestAction": "Deny"
+                  }
+                }
+              ],
+              "frontendIPConfigurations": [
+                {
+                  "name": "appgwfip",
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/frontendIPConfigurations/appgwfip",
+                  "properties": {
+                    "privateIPAllocationMethod": "Dynamic",
+                    "provisioningState": "Succeeded",
+                    "publicIPAddress": {
+                      "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/appgwpip"
+                    }
+                  }
+                }
+              ],
+              "frontendPorts": [
+                {
+                  "name": "appgwfp",
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/frontendPorts/appgwfp",
+                  "properties": {
+                    "port": 443,
+                    "provisioningState": "Succeeded"
+                  }
+                },
+                {
+                  "name": "appgwfp80",
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/frontendPorts/appgwfp80",
+                  "properties": {
+                    "port": 80,
+                    "provisioningState": "Succeeded"
+                  }
+                }
+              ],
               "gatewayIPConfigurations": [
                 {
                   "name": "appgwipc",
@@ -33,241 +104,154 @@
                   }
                 }
               ],
-              "sslCertificates": [
-                {
-                  "name": "sslcert",
-                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/sslCertificates/sslcert",
-                  "properties": {
-                    "provisioningState": "Succeeded",
-                    "publicCertData": "*****"
-                  }
-                }
-              ],
-              "trustedClientCertificates": [
-                {
-                  "name": "clientcert",
-                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/trustedClientCertificates/clientcert",
-                  "properties": {
-                    "provisioningState": "Succeeded",
-                    "data": "****",
-                    "validatedCertData": "****",
-                    "clientCertIssuerDN": "CN=User1, OU=Eng, O=Company Ltd, L=D4, S=Arizona, C=US"
-                  }
-                }
-              ],
-              "authenticationCertificates": [],
-              "frontendIPConfigurations": [
-                {
-                  "name": "appgwfip",
-                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/frontendIPConfigurations/appgwfip",
-                  "properties": {
-                    "provisioningState": "Succeeded",
-                    "privateIPAllocationMethod": "Dynamic",
-                    "publicIPAddress": {
-                      "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/appgwpip"
-                    }
-                  }
-                }
-              ],
-              "frontendPorts": [
-                {
-                  "name": "appgwfp",
-                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/frontendPorts/appgwfp",
-                  "properties": {
-                    "provisioningState": "Succeeded",
-                    "port": 443
-                  }
-                },
-                {
-                  "name": "appgwfp80",
-                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/frontendPorts/appgwfp80",
-                  "properties": {
-                    "provisioningState": "Succeeded",
-                    "port": 80
-                  }
-                }
-              ],
-              "backendAddressPools": [
-                {
-                  "name": "appgwpool",
-                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendAddressPools/appgwpool",
-                  "properties": {
-                    "provisioningState": "Succeeded",
-                    "backendAddresses": []
-                  }
-                },
-                {
-                  "name": "appgwpool1",
-                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendAddressPools/appgwpool1",
-                  "properties": {
-                    "provisioningState": "Succeeded",
-                    "backendAddresses": [
-                      "10.0.0.1",
-                      "10.0.0.2"
-                    ]
-                  }
-                }
-              ],
-              "backendHttpSettingsCollection": [
-                {
-                  "name": "appgwbhs",
-                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendHttpSettingsCollection/appgwbhs",
-                  "properties": {
-                    "provisioningState": "Succeeded",
-                    "port": 80,
-                    "protocol": "Http",
-                    "cookieBasedAffinity": "Disabled",
-                    "requestTimeout": 30
-                  }
-                }
-              ],
-              "sslProfiles": [
-                {
-                  "name": "sslProfile1",
-                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/sslProfiles/sslProfile1",
-                  "properties": {
-                    "provisioningState": "Succeeded",
-                    "sslPolicy": {
-                      "policyType": "Custom",
-                      "minProtocolVersion": "TLSv1_1",
-                      "cipherSuites": [
-                        "TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256"
-                      ]
-                    },
-                    "clientAuthConfiguration": {
-                      "verifyClientCertIssuerDN": true,
-                      "verifyClientRevocation": "OCSP",
-                      "verifyClientAuthMode": "Strict"
-                    },
-                    "trustedClientCertificates": [
-                      {
-                        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/trustedClientCertificates/clientcert"
-                      }
-                    ]
-                  }
-                }
-              ],
+              "globalConfiguration": {
+                "enableRequestBuffering": true,
+                "enableResponseBuffering": true
+              },
               "httpListeners": [
                 {
                   "name": "appgwhl",
                   "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/httpListeners/appgwhl",
                   "properties": {
-                    "provisioningState": "Succeeded",
                     "frontendIPConfiguration": {
                       "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/frontendIPConfigurations/appgwfip"
                     },
                     "frontendPort": {
                       "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/frontendPorts/appgwfp"
                     },
-                    "protocol": "Https",
+                    "provisioningState": "Succeeded",
+                    "requireServerNameIndication": false,
                     "sslCertificate": {
                       "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/sslCertificates/sslcert"
                     },
                     "sslProfile": {
                       "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/sslProfiles/sslProfile1"
                     },
-                    "requireServerNameIndication": false
+                    "protocol": "Https"
                   }
                 },
                 {
                   "name": "appgwhttplistener",
                   "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/httpListeners/appgwhttplistener",
                   "properties": {
-                    "provisioningState": "Succeeded",
                     "frontendIPConfiguration": {
                       "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/frontendIPConfigurations/appgwfip"
                     },
                     "frontendPort": {
                       "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/frontendPorts/appgwfp80"
                     },
+                    "provisioningState": "Succeeded",
                     "protocol": "Http"
                   }
                 }
               ],
-              "urlPathMaps": [
+              "loadDistributionPolicies": [
                 {
-                  "name": "pathMap1",
-                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/urlPathMaps/pathMap1",
+                  "name": "ldp1",
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/loadDistributionPolicies/ldp1",
                   "properties": {
-                    "provisioningState": "Succeeded",
-                    "defaultBackendAddressPool": {
-                      "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendAddressPools/appgwpool"
-                    },
-                    "defaultBackendHttpSettings": {
-                      "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendHttpSettingsCollection/appgwbhs"
-                    },
-                    "defaultRewriteRuleSet": {
-                      "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/rewriteRuleSets/rewriteRuleSet1"
-                    },
-                    "defaultLoadDistributionPolicy": {
-                      "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/loadDistributionPolicies/ldp1"
-                    },
-                    "pathRules": [
+                    "loadDistributionAlgorithm": "RoundRobin",
+                    "loadDistributionTargets": [
                       {
-                        "name": "apiPaths",
-                        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/urlPathMaps/pathMap1/pathRules/apiPaths",
+                        "name": "ld11",
+                        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/loadDistributionPolicies/ldp1/loadDistributionTargets/ldt1",
                         "properties": {
-                          "provisioningState": "Succeeded",
-                          "paths": [
-                            "/api",
-                            "/v1/api"
-                          ],
                           "backendAddressPool": {
                             "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendAddressPools/appgwpool"
                           },
-                          "backendHttpSettings": {
-                            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendHttpSettingsCollection/appgwbhs"
+                          "weightPerServer": 40
+                        }
+                      },
+                      {
+                        "name": "ld11",
+                        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/loadDistributionPolicies/ldp1/loadDistributionTargets/ldt1",
+                        "properties": {
+                          "backendAddressPool": {
+                            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendAddressPools/appgwpool1"
                           },
-                          "rewriteRuleSet": {
-                            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/rewriteRuleSets/rewriteRuleSet1"
-                          },
-                          "loadDistributionPolicy": {
-                            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/loadDistributionPolicies/ldp1"
-                          }
+                          "weightPerServer": 60
                         }
                       }
                     ]
                   }
                 }
               ],
+              "operationalState": "Running",
+              "privateEndpointConnections": [],
+              "privateLinkConfigurations": [
+                {
+                  "name": "privateLink1",
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/privateLinkConfigurations/privateLink1",
+                  "properties": {
+                    "ipConfigurations": [
+                      {
+                        "name": "natNicIpconfig1",
+                        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/privateLinkConfigurations/privateLink1/privateLinkConfigurations/privateLink1/ipConfigurations/natNicIpconfig1",
+                        "properties": {
+                          "primary": true,
+                          "privateIPAllocationMethod": "Dynamic",
+                          "provisioningState": "Succeeded",
+                          "subnet": {
+                            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/virtualNetwork1/subnets/appgwsubnet"
+                          }
+                        }
+                      },
+                      {
+                        "name": "natNicIpconfig2",
+                        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/privateLinkConfigurations/privateLink1/privateLinkConfigurations/privateLink1/ipConfigurations/natNicIpconfig2",
+                        "properties": {
+                          "privateIPAllocationMethod": "Dynamic",
+                          "provisioningState": "Succeeded",
+                          "subnet": {
+                            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/virtualNetwork1/subnets/appgwsubnet"
+                          }
+                        }
+                      }
+                    ],
+                    "provisioningState": "Succeeded"
+                  }
+                }
+              ],
+              "probes": [],
+              "provisioningState": "Succeeded",
               "requestRoutingRules": [
                 {
                   "name": "appgwrule",
                   "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/requestRoutingRules/appgwrule",
                   "properties": {
-                    "provisioningState": "Succeeded",
-                    "ruleType": "Basic",
-                    "priority": 10,
-                    "httpListener": {
-                      "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/httpListeners/appgwhl"
-                    },
                     "backendAddressPool": {
                       "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendAddressPools/appgwpool"
                     },
                     "backendHttpSettings": {
                       "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendHttpSettingsCollection/appgwbhs"
                     },
-                    "rewriteRuleSet": {
-                      "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/rewriteRuleSets/rewriteRuleSet1"
+                    "entraJWTValidationConfig": {
+                      "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/entraJWTValidationConfigs/entraJWTValidationConfig1"
+                    },
+                    "httpListener": {
+                      "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/httpListeners/appgwhl"
                     },
                     "loadDistributionPolicy": {
                       "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/loadDistributionPolicies/ldp1"
                     },
-                    "entraJWTValidationConfig": {
-                      "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/entraJWTValidationConfigs/entraJWTValidationConfig1"
-                    }
+                    "priority": 10,
+                    "provisioningState": "Succeeded",
+                    "rewriteRuleSet": {
+                      "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/rewriteRuleSets/rewriteRuleSet1"
+                    },
+                    "ruleType": "Basic"
                   }
                 },
                 {
                   "name": "appgwPathBasedRule",
                   "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/requestRoutingRules/appgwPathBasedRule",
                   "properties": {
-                    "provisioningState": "Succeeded",
-                    "ruleType": "PathBasedRouting",
-                    "priority": 20,
                     "httpListener": {
                       "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/httpListeners/appgwhttplistener"
                     },
+                    "priority": 20,
+                    "provisioningState": "Succeeded",
+                    "ruleType": "PathBasedRouting",
                     "urlPathMap": {
                       "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/urlPathMaps/pathMap1"
                     }
@@ -283,15 +267,6 @@
                     "rewriteRules": [
                       {
                         "name": "Set X-Forwarded-For",
-                        "ruleSequence": 102,
-                        "conditions": [
-                          {
-                            "variable": "http_req_Authorization",
-                            "pattern": "^Bearer",
-                            "ignoreCase": true,
-                            "negate": false
-                          }
-                        ],
                         "actionSet": {
                           "requestHeaderConfigurations": [
                             {
@@ -310,99 +285,126 @@
                             "modifiedQueryString": "x=y&a=b",
                             "reroute": false
                           }
-                        }
+                        },
+                        "conditions": [
+                          {
+                            "ignoreCase": true,
+                            "negate": false,
+                            "pattern": "^Bearer",
+                            "variable": "http_req_Authorization"
+                          }
+                        ],
+                        "ruleSequence": 102
                       }
                     ]
                   }
                 }
               ],
-              "probes": [],
-              "privateLinkConfigurations": [
+              "sku": {
+                "name": "Standard_Medium",
+                "capacity": 3,
+                "tier": "Standard"
+              },
+              "sslCertificates": [
                 {
-                  "name": "privateLink1",
-                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/privateLinkConfigurations/privateLink1",
+                  "name": "sslcert",
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/sslCertificates/sslcert",
                   "properties": {
                     "provisioningState": "Succeeded",
-                    "ipConfigurations": [
+                    "publicCertData": "*****"
+                  }
+                }
+              ],
+              "sslProfiles": [
+                {
+                  "name": "sslProfile1",
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/sslProfiles/sslProfile1",
+                  "properties": {
+                    "clientAuthConfiguration": {
+                      "verifyClientAuthMode": "Strict",
+                      "verifyClientCertIssuerDN": true,
+                      "verifyClientRevocation": "OCSP"
+                    },
+                    "provisioningState": "Succeeded",
+                    "sslPolicy": {
+                      "cipherSuites": [
+                        "TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256"
+                      ],
+                      "minProtocolVersion": "TLSv1_1",
+                      "policyType": "Custom"
+                    },
+                    "trustedClientCertificates": [
                       {
-                        "name": "natNicIpconfig1",
-                        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/privateLinkConfigurations/privateLink1/privateLinkConfigurations/privateLink1/ipConfigurations/natNicIpconfig1",
-                        "properties": {
-                          "provisioningState": "Succeeded",
-                          "privateIPAllocationMethod": "Dynamic",
-                          "primary": true,
-                          "subnet": {
-                            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/virtualNetwork1/subnets/appgwsubnet"
-                          }
-                        }
-                      },
-                      {
-                        "name": "natNicIpconfig2",
-                        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/privateLinkConfigurations/privateLink1/privateLinkConfigurations/privateLink1/ipConfigurations/natNicIpconfig2",
-                        "properties": {
-                          "provisioningState": "Succeeded",
-                          "privateIPAllocationMethod": "Dynamic",
-                          "subnet": {
-                            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/virtualNetwork1/subnets/appgwsubnet"
-                          }
-                        }
+                        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/trustedClientCertificates/clientcert"
                       }
                     ]
                   }
                 }
               ],
-              "privateEndpointConnections": [],
-              "loadDistributionPolicies": [
+              "trustedClientCertificates": [
                 {
-                  "name": "ldp1",
-                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/loadDistributionPolicies/ldp1",
+                  "name": "clientcert",
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/trustedClientCertificates/clientcert",
                   "properties": {
-                    "loadDistributionAlgorithm": "RoundRobin",
-                    "loadDistributionTargets": [
+                    "clientCertIssuerDN": "CN=User1, OU=Eng, O=Company Ltd, L=D4, S=Arizona, C=US",
+                    "data": "****",
+                    "provisioningState": "Succeeded",
+                    "validatedCertData": "****"
+                  }
+                }
+              ],
+              "urlPathMaps": [
+                {
+                  "name": "pathMap1",
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/urlPathMaps/pathMap1",
+                  "properties": {
+                    "defaultBackendAddressPool": {
+                      "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendAddressPools/appgwpool"
+                    },
+                    "defaultBackendHttpSettings": {
+                      "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendHttpSettingsCollection/appgwbhs"
+                    },
+                    "defaultLoadDistributionPolicy": {
+                      "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/loadDistributionPolicies/ldp1"
+                    },
+                    "defaultRewriteRuleSet": {
+                      "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/rewriteRuleSets/rewriteRuleSet1"
+                    },
+                    "pathRules": [
                       {
-                        "name": "ld11",
-                        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/loadDistributionPolicies/ldp1/loadDistributionTargets/ldt1",
+                        "name": "apiPaths",
+                        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/urlPathMaps/pathMap1/pathRules/apiPaths",
                         "properties": {
-                          "weightPerServer": 40,
                           "backendAddressPool": {
                             "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendAddressPools/appgwpool"
-                          }
-                        }
-                      },
-                      {
-                        "name": "ld11",
-                        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/loadDistributionPolicies/ldp1/loadDistributionTargets/ldt1",
-                        "properties": {
-                          "weightPerServer": 60,
-                          "backendAddressPool": {
-                            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendAddressPools/appgwpool1"
+                          },
+                          "backendHttpSettings": {
+                            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendHttpSettingsCollection/appgwbhs"
+                          },
+                          "loadDistributionPolicy": {
+                            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/loadDistributionPolicies/ldp1"
+                          },
+                          "paths": [
+                            "/api",
+                            "/v1/api"
+                          ],
+                          "provisioningState": "Succeeded",
+                          "rewriteRuleSet": {
+                            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/rewriteRuleSets/rewriteRuleSet1"
                           }
                         }
                       }
-                    ]
+                    ],
+                    "provisioningState": "Succeeded"
                   }
                 }
-              ],
-              "entraJWTValidationConfigs": [
-                {
-                  "name": "entraJWTValidationConfig1",
-                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/entraJWTValidationConfigs/entraJWTValidationConfig1",
-                  "properties": {
-                    "provisioningState": "Succeeded",
-                    "unAuthorizedRequestAction": "Deny",
-                    "tenantId": "70a036f6-8e4d-4615-bad6-149c02e7720d",
-                    "clientId": "37293f5a-97b3-451d-b786-f532d711c9ff"
-                  }
-                }
-              ],
-              "globalConfiguration": {
-                "enableRequestBuffering": true,
-                "enableResponseBuffering": true
-              }
+              ]
             }
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "ApplicationGateways_List",
+  "title": "Lists all application gateways in a resource group"
 }

@@ -1,17 +1,17 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
-    "subscriptionId": "subid",
-    "resourceGroupName": "rg1",
     "networkWatcherName": "nw1",
     "parameters": {
       "azureLocations": [
         "West US"
       ],
+      "city": "seattle",
       "country": "United States",
-      "state": "washington",
-      "city": "seattle"
-    }
+      "state": "washington"
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
@@ -21,7 +21,6 @@
             "countryName": "United States",
             "states": [
               {
-                "stateName": "washington",
                 "cities": [
                   {
                     "cityName": "seattle",
@@ -32,7 +31,8 @@
                       "Qwest Communications Company, LLC - ASN 209"
                     ]
                   }
-                ]
+                ],
+                "stateName": "washington"
               }
             ]
           }
@@ -40,16 +40,12 @@
       }
     },
     "202": {
-      "headers": {
-        "Location": "https:/management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkWatchers/nw1/availableProvidersList?api-version=2025-03-01"
-      },
       "body": {
         "countries": [
           {
             "countryName": "United States",
             "states": [
               {
-                "stateName": "washington",
                 "cities": [
                   {
                     "cityName": "seattle",
@@ -60,12 +56,18 @@
                       "Qwest Communications Company, LLC - ASN 209"
                     ]
                   }
-                ]
+                ],
+                "stateName": "washington"
               }
             ]
           }
         ]
+      },
+      "headers": {
+        "Location": "https:/management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkWatchers/nw1/availableProvidersList?api-version=2025-03-01"
       }
     }
-  }
+  },
+  "operationId": "NetworkWatchers_ListAvailableProviders",
+  "title": "Get Available Providers List"
 }

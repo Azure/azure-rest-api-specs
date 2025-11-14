@@ -1,25 +1,25 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
-    "subscriptionId": "subid",
+    "ddosProtectionPlanName": "test-plan",
     "resourceGroupName": "rg1",
-    "ddosProtectionPlanName": "test-plan"
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
       "body": {
         "name": "test-plan",
-        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/ddosProtectionPlans/test-plan",
         "type": "Microsoft.Network/ddosProtectionPlans",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/ddosProtectionPlans/test-plan",
         "location": "westus",
         "properties": {
           "provisioningState": "Succeeded",
-          "resourceGuid": "00000000-0000-0000-0000-000000000000",
           "publicIPAddresses": [
             {
               "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/test-pip"
             }
           ],
+          "resourceGuid": "00000000-0000-0000-0000-000000000000",
           "virtualNetworks": [
             {
               "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet"
@@ -28,5 +28,7 @@
         }
       }
     }
-  }
+  },
+  "operationId": "DdosProtectionPlans_Get",
+  "title": "Get DDoS protection plan"
 }
