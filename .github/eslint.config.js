@@ -13,6 +13,6 @@ export default defineConfig(
     languageOptions: { globals: globals.node },
   },
   {
-    ignores: ["coverage/**"],
+    ignores: ["coverage/**", "shared/coverage/**"],
   },
 );
