@@ -241,6 +241,7 @@ Always read the template before editing so you follow the canonical configuratio
 - User should have a GitHub account and should be logged in to GitHub account using GitHub CLI `gh auth login`.
 - run `npm ci` to install the dependencies
 - To use Azure MCP tool calls, the user must have PowerShell installed. Provide [PowerShell installation instructions](https://learn.microsoft.com/powershell/scripting/install/installing-powershell) if not installed, and recommend restarting the IDE to start the MCP server.
+- Always run the [`azsdk_verify_setup`](../eng/common/instructions/azsdk-tools/verify-setup.instructions.md) tool to check the user's development environment setup for using SDK MCP tools. DO NOT PROCEED with running other tools before completing this step. Only skip for queries that don't need tools.
 
 ### Basic Rules for SDK Generation from TypeSpec
 
@@ -364,6 +365,10 @@ Follow the steps in [typespec to sdk](..\eng\common\instructions\azsdk-tools\typ
 # Release readiness of SDK and information about the release pipeline
 
 Run [check package readiness](..\eng\common\instructions\azsdk-tools\check-package-readiness.instructions.md) to check the release readiness of an SDK package. This prompt will collect the required information from the user, execute the readiness check, and present the results.
+
+## SDK customizations in TypeSpec projects
+
+TypeSpec supports making client-specific customizations to a TypeSpec project to change how an SDK is generated. When making client-specific changes, read the [typespec client customizations reference](../eng/common/knowledge/customizing-client-tsp.md) to understand the types of customizations supported and how to apply them.
 
 # Instructions for GitHub coding agent to generate SDKs using GitHub.com
 

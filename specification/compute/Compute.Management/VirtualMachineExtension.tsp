@@ -26,6 +26,27 @@ model VirtualMachineExtension
 }
 
 @armResourceOperations
+interface VirtualMachineExtensionOps
+  extends Azure.ResourceManager.Legacy.ComputeLegacyOperations<
+      {
+        ...Azure.ResourceManager.Legacy.BasePath,
+
+        @doc("The name of the virtual machine.")
+        @path
+        @segment("virtualMachines")
+        vmName: string,
+      },
+      KeysOf<{
+        ...ResourceNameParameter<
+          VirtualMachineExtension,
+          SegmentName = "extensions",
+          KeyName = "vmExtensionName",
+          NamePattern = ""
+        >,
+      }>
+    > {}
+
+@armResourceOperations
 interface VirtualMachineExtensions {
   /**
    * The operation to get the extension.
@@ -46,7 +67,8 @@ interface VirtualMachineExtensions {
    */
   createOrUpdate is ComputeResourceCreateOrReplaceAsync<
     VirtualMachineExtension,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader<FinalResult = VirtualMachineExtension> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -57,7 +79,7 @@ interface VirtualMachineExtensions {
     VirtualMachineExtension,
     VirtualMachineExtensionUpdate,
     Response = ArmResponse<VirtualMachineExtension> &
-      ArmLroLocationHeader &
+      ArmLroLocationHeader<FinalResult = VirtualMachineExtension> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -72,7 +94,7 @@ interface VirtualMachineExtensions {
   /**
    * The operation to get all extensions of a Virtual Machine.
    */
-  list is ComputeResourceListByParent<
+  list is VirtualMachineExtensionOps.ListSinglePage<
     VirtualMachineExtension,
     Parameters = {
       /**
