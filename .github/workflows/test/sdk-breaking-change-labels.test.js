@@ -123,7 +123,6 @@ describe("sdk-breaking-change-labels", () => {
       };
 
       const language = "azure-sdk-for-js";
-
       const mockContentResponse = {
         ok: true,
         text: vi
