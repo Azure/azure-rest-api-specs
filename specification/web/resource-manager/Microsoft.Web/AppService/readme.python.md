@@ -16,16 +16,16 @@ input-file:
 ```
 
 ``` yaml $(python)
-title: AppServiceManagementClient
+title: WebSiteManagementClient
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
-package-name: azure-mgmt-appservice
-namespace: azure.mgmt.appservice
+package-name: azure-mgmt-web
+namespace: azure.mgmt.web
 package-version: 1.0.0b1
 clear-output-folder: true
 ```
 
 ``` yaml $(python)
 no-namespace-folders: true
-output-folder: $(python-sdks-folder)/appservice/azure-mgmt-appservice/azure/mgmt/appservice
+output-folder: $(python-sdks-folder)/appservice/azure-mgmt-web/azure/mgmt/web
 ```
