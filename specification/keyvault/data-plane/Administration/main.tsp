@@ -13,26 +13,10 @@ import "@typespec/openapi";
 // Import common definitions
 import "./common/common.tsp";
 
-// Import BackupRestore module
-import "./BackupRestore/models.tsp";
-import "./BackupRestore/routes.tsp";
-import "./BackupRestore/client.tsp";
-
-// Import RBAC module
-import "./RBAC/models.tsp";
-import "./RBAC/routes.tsp";
-import "./RBAC/client.tsp";
-
-// Import Settings module
-import "./Settings/models.tsp";
-import "./Settings/routes.tsp";
-import "./Settings/client.tsp";
-
 // Import the main administration definitions (for compatibility)
 import "./administration.tsp";
 
 // Import client customizations
-import "./client.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
