@@ -196,6 +196,9 @@ using Microsoft.AVS;
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(ScriptCmdlet.properties,
   "autorest"
 );
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ScriptExecution.properties,
+  "autorest"
+);
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(ScriptPackage.properties,
   "autorest"
 );
@@ -229,8 +232,3 @@ using Microsoft.AVS;
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(WorkloadNetworkVirtualMachine.properties,
   "autorest"
 );
-
-// Discriminated type
-// @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Addon.properties,
-//   "autorest"
-// );
