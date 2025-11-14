@@ -1,3 +1,5 @@
+using Azure.ResourceManager;
+
 namespace Microsoft.ContainerRegistry;
 
 /**
@@ -33,7 +35,7 @@ model CredentialSetProperties {
    * List of authentication credentials stored for an upstream.
    * Usually consists of a primary and an optional secondary credential.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   authCredentials?: AuthCredential[];
 
   /**
@@ -121,7 +123,7 @@ model CredentialSetUpdateProperties {
    * List of authentication credentials stored for an upstream.
    * Usually consists of a primary and an optional secondary credential.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   authCredentials?: AuthCredential[];
 }
 
