@@ -2124,12 +2124,21 @@ alias ImmutabilityPolicyModeParameter = {
 };
 
 /** The immutability policy expiration parameter. */
-alias ImmutabilityPolicyExpiryParameter = {
+alias ImmutabilityPolicyExpiryRequiredParameter = {
   /** Specifies the date time when the blobs immutability policy is set to expire. */
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @header("x-ms-immutability-policy-until-date")
   immutabilityPolicyExpiry: utcDateTime;
+};
+
+/** The immutability policy expiration parameter. */
+alias ImmutabilityPolicyExpiryParameter = {
+  /** Specifies the date time when the blobs immutability policy is set to expire. */
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
+  @encode("rfc7231")
+  @header("x-ms-immutability-policy-until-date")
+  immutabilityPolicyExpiry?: utcDateTime;
 };
 
 /** The blobs tags header parameter. */

@@ -965,7 +965,7 @@ interface Blob {
     {
       ...TimeoutParameter;
       ...IfUnmodifiedSinceParameter;
-      ...ImmutabilityPolicyExpiryParameter;
+      ...ImmutabilityPolicyExpiryRequiredParameter;
       ...ImmutabilityPolicyModeParameter;
       ...SnapshotParameter;
       ...VersionIdParameter;
