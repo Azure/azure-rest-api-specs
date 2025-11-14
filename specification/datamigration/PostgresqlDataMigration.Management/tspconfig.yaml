@@ -9,36 +9,36 @@ options:
     examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-java":
     flavor: azure
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-datamigration"
-    namespace: "com.azure.resourcemanager.datamigration"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-postgresqldatamigration"
+    namespace: "com.azure.resourcemanager.postgresqldatamigration"
   "@azure-tools/typespec-ts":
     flavor: azure
     experimental-extensible-enums: true
-    emitter-output-dir: "{output-dir}/{service-dir}/arm-datamigration"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-postgresqldatamigration"
     package-details:
-      name: "@azure/arm-datamigration"
+      name: "@azure/arm-postgresqldatamigration"
   "@azure-tools/typespec-go":
     flavor: azure
-    emitter-output-dir: "{output-dir}/{service-dir}/armdatamigration"
+    emitter-output-dir: "{output-dir}/{service-dir}/armpostgresqldatamigration"
     generate-samples: true
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armdatamigration"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armpostgresqldatamigration"
   "@azure-tools/typespec-python":
     flavor: azure
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-datamigration"
-    namespace: "azure.mgmt.datamigration"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-postgresqldatamigration"
+    namespace: "azure.mgmt.postgresqldatamigration"
     generate-sample: true
     generate-test: true
   "@azure-tools/typespec-csharp":
     flavor: azure
-    namespace: "Azure.ResourceManager.DataMigration"
+    namespace: "Azure.ResourceManager.PostgreSqlDataMigration"
     clear-output-folder: true
-    emitter-output-dir: "{output-dir}/{service-dir}/Azure.ResourceManager.DataMigration"
+    emitter-output-dir: "{output-dir}/{service-dir}/Azure.ResourceManager.PostgreSqlDataMigration"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
 parameters:
   service-dir:
-    default: sdk/datamigration
+    default: sdk/postgresqldatamigration
