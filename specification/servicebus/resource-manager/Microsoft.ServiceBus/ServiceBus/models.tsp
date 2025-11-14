@@ -1232,6 +1232,7 @@ model ArmDisasterRecoveryProperties {
 /**
  * Safe failover is to indicate the service should wait for pending replication to finish before switching to the secondary.
  */
+#suppress "@azure-tools/typespec-azure-core/no-case-mismatch" "Name conflict with FailOverProperties, see if they can be combined"
 model FailoverProperties {
   /**
    * Safe failover is to indicate the service should wait for pending replication to finish before switching to the secondary.

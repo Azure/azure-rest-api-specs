@@ -1043,6 +1043,7 @@ model FailOver {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-case-mismatch" "Name conflict with FailoverProperties, see if they can be combined"
 model FailOverProperties {
   /**
    * Query parameter for the new primary location after failover.
