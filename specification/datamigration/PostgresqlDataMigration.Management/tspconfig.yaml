@@ -1,8 +1,5 @@
 emit:
   - "@azure-tools/typespec-autorest"
-parameters:
-  service-dir:
-    default: "{output-dir}/sdk/datamigration"
 options:
   "@azure-tools/typespec-autorest":
     use-read-only-status-schema: true
@@ -12,25 +9,25 @@ options:
     examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-java":
     flavor: azure
-    emitter-output-dir: "{service-dir}/azure-resourcemanager-datamigration"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-datamigration"
     namespace: "com.azure.resourcemanager.datamigration"
   "@azure-tools/typespec-ts":
     flavor: azure
     experimental-extensible-enums: true
-    emitter-output-dir: "{service-dir}/arm-datamigration"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-datamigration"
     package-details:
       name: "@azure/arm-datamigration"
   "@azure-tools/typespec-go":
     flavor: azure
-    emitter-output-dir: "{service-dir}/armdatamigration"
+    emitter-output-dir: "{output-dir}/{service-dir}/armdatamigration"
     generate-samples: true
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
-    module: "github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/datamigration/armdatamigration"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armdatamigration"
   "@azure-tools/typespec-python":
     flavor: azure
-    emitter-output-dir: "{service-dir}/azure-mgmt-datamigration"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-datamigration"
     namespace: "azure.mgmt.datamigration"
     generate-sample: true
     generate-test: true
@@ -38,7 +35,10 @@ options:
     flavor: azure
     namespace: "Azure.ResourceManager.DataMigration"
     clear-output-folder: true
-    emitter-output-dir: "{service-dir}/Azure.ResourceManager.DataMigration"
+    emitter-output-dir: "{output-dir}/{service-dir}/Azure.ResourceManager.DataMigration"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
+parameters:
+  service-dir:
+    default: sdk/datamigration
