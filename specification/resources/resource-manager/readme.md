@@ -26,7 +26,6 @@ These are the global settings for the Resource API.
 
 ``` yaml
 openapi-type: arm
-tag: profile-hybrid-2019-03-01
 ```
 
 ### Tag: profile-hybrid-2019-03-01
