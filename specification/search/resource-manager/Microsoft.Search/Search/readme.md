@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2025-05-01` is specified on the co
 
 ```yaml $(tag) == 'package-2025-05-01'
 input-file:
-  - Microsoft.Search/stable/2025-05-01/search.json
+  - stable/2025-05-01/search.json
 ```
 
 ### Tag: package-preview-2025-02-01
@@ -44,7 +44,7 @@ These settings apply only when `--tag=package-preview-2025-02-01` is specified o
 
 ```yaml $(tag) == 'package-preview-2025-02-01'
 input-file:
-  - Microsoft.Search/preview/2025-02-01-preview/search.json
+  - preview/2025-02-01-preview/search.json
 ```
 
 ### Tag: package-preview-2024-06
@@ -53,7 +53,7 @@ These settings apply only when `--tag=package-preview-2024-06` is specified on t
 
 ```yaml $(tag) == 'package-preview-2024-06'
 input-file:
-  - Microsoft.Search/preview/2024-06-01-preview/search.json
+  - preview/2024-06-01-preview/search.json
 ```
 
 ### Tag: package-preview-2024-03
@@ -62,7 +62,7 @@ These settings apply only when `--tag=package-preview-2024-03` is specified on t
 
 ```yaml $(tag) == 'package-preview-2024-03'
 input-file:
-  - Microsoft.Search/preview/2024-03-01-preview/search.json
+  - preview/2024-03-01-preview/search.json
 ```
 
 ### Tag: package-2023-11
@@ -71,7 +71,7 @@ These settings apply only when `--tag=package-2023-11` is specified on the comma
 
 ```yaml $(tag) == 'package-2023-11'
 input-file:
-  - Microsoft.Search/stable/2023-11-01/search.json
+  - stable/2023-11-01/search.json
 ```
 
 ### Tag: package-2022-09
@@ -80,7 +80,7 @@ These settings apply only when `--tag=package-2022-09` is specified on the comma
 
 ```yaml $(tag) == 'package-2022-09'
 input-file:
-  - Microsoft.Search/stable/2022-09-01/search.json
+  - stable/2022-09-01/search.json
 ```
 
 ### Tag: package-2020-08
@@ -89,7 +89,7 @@ These settings apply only when `--tag=package-2020-08` is specified on the comma
 
 ```yaml $(tag) == 'package-2020-08'
 input-file:
-  - Microsoft.Search/stable/2020-08-01/search.json
+  - stable/2020-08-01/search.json
 ```
 
 ### Tag: package-2020-03
@@ -98,7 +98,7 @@ These settings apply only when `--tag=package-2020-03` is specified on the comma
 
 ```yaml $(tag) == 'package-2020-03'
 input-file:
-  - Microsoft.Search/stable/2020-03-13/search.json
+  - stable/2020-03-13/search.json
 ```
 
 ### Tag: package-2015-08
@@ -107,7 +107,7 @@ These settings apply only when `--tag=package-2015-08` is specified on the comma
 
 ```yaml $(tag) == 'package-2015-08'
 input-file:
-  - Microsoft.Search/stable/2015-08-19/search.json
+  - stable/2015-08-19/search.json
 ```
 
 ### Tag: package-2015-02
@@ -116,7 +116,7 @@ These settings apply only when `--tag=package-2015-02` is specified on the comma
 
 ```yaml $(tag) == 'package-2015-02'
 input-file:
-  - Microsoft.Search/stable/2015-02-28/search.json
+  - stable/2015-02-28/search.json
 ```
 
 ### Tag: package-2021-04-preview
@@ -125,7 +125,7 @@ These settings apply only when `--tag=package-2021-04-preview` is specified on t
 
 ```yaml $(tag) == 'package-2021-04-preview'
 input-file:
-  - Microsoft.Search/preview/2021-04-01-preview/search.json
+  - preview/2021-04-01-preview/search.json
 ```
 
 ### Tag: package-2020-08-preview
@@ -134,7 +134,7 @@ These settings apply only when `--tag=package-2020-08-preview` is specified on t
 
 ```yaml $(tag) == 'package-2020-08-preview'
 input-file:
-  - Microsoft.Search/preview/2020-08-01-preview/search.json
+  - preview/2020-08-01-preview/search.json
 ```
 
 ### Tag: package-2019-10-preview
@@ -143,7 +143,7 @@ These settings apply only when `--tag=package-2019-10-preview` is specified on t
 
 ```yaml $(tag) == 'package-2019-10-preview'
 input-file:
-  - Microsoft.Search/preview/2019-10-01-preview/search.json
+  - preview/2019-10-01-preview/search.json
 ```
 
 ---

@@ -3,7 +3,7 @@
   "info": {
     "title": "SearchManagementClient",
     "description": "Client that can be used to manage Azure Cognitive Search services and API keys.",
-    "version": "2021-04-01-preview"
+    "version": "2020-08-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -42,8 +42,8 @@
         "description": "Lists all of the available REST API operations of the Microsoft.Search provider.",
         "operationId": "Operations_List",
         "x-ms-examples": {
-          "SearchListOperations": {
-            "$ref": "./examples/SearchListOperations.json"
+          "OperationsList": {
+            "$ref": "./examples/OperationsList.json"
           }
         },
         "parameters": [
@@ -151,19 +151,7 @@
             ],
             "x-ms-enum": {
               "name": "AdminKeyKind",
-              "modelAsString": false,
-              "values": [
-                {
-                  "value": "primary",
-                  "name": "Primary",
-                  "description": "The primary API key for the search service."
-                },
-                {
-                  "value": "secondary",
-                  "name": "Secondary",
-                  "description": "The secondary API key for the search service."
-                }
-              ]
+              "modelAsString": false
             },
             "description": "Specifies which key to regenerate. Valid values include 'primary' and 'secondary'."
           },
@@ -370,29 +358,11 @@
           "SearchCreateOrUpdateServiceToAllowAccessFromPublicCustomIPs": {
             "$ref": "./examples/SearchCreateOrUpdateServiceToAllowAccessFromPublicCustomIPs.json"
           },
-          "SearchCreateOrUpdateServiceToAllowAccessFromPublicCustomIPsAndBypass": {
-            "$ref": "./examples/SearchCreateOrUpdateServiceToAllowAccessFromPublicCustomIPsAndBypass.json"
-          },
           "SearchCreateOrUpdateServiceToAllowAccessFromPrivateEndpoints": {
             "$ref": "./examples/SearchCreateOrUpdateServiceToAllowAccessFromPrivateEndpoints.json"
           },
           "SearchCreateOrUpdateServiceWithIdentity": {
             "$ref": "./examples/SearchCreateOrUpdateServiceWithIdentity.json"
-          },
-          "SearchCreateOrUpdateServiceAuthOptions": {
-            "$ref": "./examples/SearchCreateOrUpdateServiceAuthOptions.json"
-          },
-          "SearchCreateOrUpdateServiceDisableLocalAuth": {
-            "$ref": "./examples/SearchCreateOrUpdateServiceDisableLocalAuth.json"
-          },
-          "SearchCreateOrUpdateServiceWithCmkEnforcement": {
-            "$ref": "./examples/SearchCreateOrUpdateServiceWithCmkEnforcement.json"
-          },
-          "SearchCreateOrUpdateServiceWithDataExfiltration": {
-            "$ref": "./examples/SearchCreateOrUpdateServiceWithDataExfiltration.json"
-          },
-          "SearchCreateOrUpdateWithSemanticSearch": {
-            "$ref": "./examples/SearchCreateOrUpdateWithSemanticSearch.json"
           }
         },
         "description": "Creates or updates a search service in the given resource group. If the search service already exists, all properties will be updated with the given values.",
@@ -463,29 +433,11 @@
           "SearchUpdateServiceToRemoveIdentity": {
             "$ref": "./examples/SearchUpdateServiceToRemoveIdentity.json"
           },
-          "SearchUpdateServiceToAllowAccessFromPublicCustomIPs": {
+          "searchUpdateServiceToAllowAccessFromPublicCustomIPs": {
             "$ref": "./examples/SearchUpdateServiceToAllowAccessFromPublicCustomIPs.json"
           },
-          "SearchUpdateServiceToAllowAccessFromPublicCustomIPsAndBypass": {
-            "$ref": "./examples/SearchUpdateServiceToAllowAccessFromPublicCustomIPsAndBypass.json"
-          },
-          "SearchUpdateServiceToAllowAccessFromPrivateEndpoints": {
+          "searchUpdateServiceToAllowAccessFromPrivateEndpoints": {
             "$ref": "./examples/SearchUpdateServiceToAllowAccessFromPrivateEndpoints.json"
-          },
-          "SearchUpdateServiceAuthOptions": {
-            "$ref": "./examples/SearchUpdateServiceAuthOptions.json"
-          },
-          "SearchUpdateServiceDisableLocalAuth": {
-            "$ref": "./examples/SearchUpdateServiceDisableLocalAuth.json"
-          },
-          "SearchUpdateServiceWithCmkEnforcement": {
-            "$ref": "./examples/SearchUpdateServiceWithCmkEnforcement.json"
-          },
-          "SearchUpdateServiceWithDataExfiltration": {
-            "$ref": "./examples/SearchUpdateServiceWithDataExfiltration.json"
-          },
-          "SearchUpdateServiceWithSemanticSearch": {
-            "$ref": "./examples/SearchUpdateServiceWithSemanticSearch.json"
           }
         },
         "description": "Updates an existing search service in the given resource group.",
@@ -647,7 +599,7 @@
             "$ref": "./examples/SearchListServicesByResourceGroup.json"
           }
         },
-        "description": "Gets a list of all Search services in the given resource group.",
+        "description": "Gets a list of all search services in the given resource group.",
         "externalDocs": {
           "url": "https://aka.ms/search-manage"
         },
@@ -994,7 +946,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The details of the shared private link resource that was created or updated.",
+            "description": "The details of the shared private link resource that was created.",
             "schema": {
               "$ref": "#/definitions/SharedPrivateLinkResource"
             }
@@ -1181,7 +1133,7 @@
             "$ref": "./examples/SearchListServicesBySubscription.json"
           }
         },
-        "description": "Gets a list of all Search services in the given subscription.",
+        "description": "Gets a list of all search services in the given subscription.",
         "externalDocs": {
           "url": "https://aka.ms/search-manage"
         },
@@ -1285,14 +1237,7 @@
           ],
           "x-ms-enum": {
             "name": "ResourceType",
-            "modelAsString": false,
-            "values": [
-              {
-                "value": "searchServices",
-                "name": "SearchServices",
-                "description": "'searchServices' is the only resource type whose name can be validated."
-              }
-            ]
+            "modelAsString": false
           }
         }
       },
@@ -1317,19 +1262,7 @@
           ],
           "x-ms-enum": {
             "name": "UnavailableNameReason",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Invalid",
-                "name": "Invalid",
-                "description": "The search service name does not match naming requirements."
-              },
-              {
-                "value": "AlreadyExists",
-                "name": "AlreadyExists",
-                "description": "The search service name is already assigned to a different search service."
-              }
-            ]
+            "modelAsString": true
           }
         },
         "message": {
@@ -1405,44 +1338,7 @@
           ],
           "x-ms-enum": {
             "name": "SkuName",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "free",
-                "name": "Free",
-                "description": "Free tier, with no SLA guarantees and a subset of features offered to paid tiers."
-              },
-              {
-                "value": "basic",
-                "name": "Basic",
-                "description": "Paid tier dedicated service with up to 3 replicas."
-              },
-              {
-                "value": "standard",
-                "name": "Standard",
-                "description": "Paid tier dedicated service with up to 12 partitions and 12 replicas."
-              },
-              {
-                "value": "standard2",
-                "name": "Standard2",
-                "description": "Similar to 'standard', but with more capacity per search unit."
-              },
-              {
-                "value": "standard3",
-                "name": "Standard3",
-                "description": " The largest Standard offering with up to 12 partitions and 12 replicas (or up to 3 partitions with more indexes if you also set the hostingMode property to 'highDensity')."
-              },
-              {
-                "value": "storage_optimized_l1",
-                "name": "StorageOptimizedL1",
-                "description": "Paid tier dedicated service that supports 1TB per partition, up to 12 partitions."
-              },
-              {
-                "value": "storage_optimized_l2",
-                "name": "StorageOptimizedL2",
-                "description": "Paid tier dedicated service that supports 2TB per partition, up to 12 partitions."
-              }
-            ]
+            "modelAsString": false
           }
         }
       },
@@ -1450,128 +1346,6 @@
       "externalDocs": {
         "url": "https://azure.microsoft.com/documentation/articles/search-sku-tier/"
       }
-    },
-    "DataPlaneAuthOptions": {
-      "properties": {
-        "apiKeyOnly": {
-          "type": "object",
-          "properties": {},
-          "description": "Indicates that only the API key needs to be used for authentication."
-        },
-        "aadOrApiKey": {
-          "$ref": "#/definitions/DataPlaneAadOrApiKeyAuthOption",
-          "description": "Indicates that either the API key or an access token from Azure Active Directory can be used for authentication."
-        }
-      },
-      "description": "Defines the options for how the data plane API of a Search service authenticates requests. This cannot be set if 'disableLocalAuth' is set to true."
-    },
-    "DataPlaneAadOrApiKeyAuthOption": {
-      "properties": {
-        "aadAuthFailureMode": {
-          "type": "string",
-          "description": "Describes what response the data plane API of a Search service would send for requests that failed authentication.",
-          "enum": [
-            "http403",
-            "http401WithBearerChallenge"
-          ],
-          "x-ms-enum": {
-            "name": "AadAuthFailureMode",
-            "modelAsString": false,
-            "values": [
-              {
-                "value": "http403",
-                "name": "Http403",
-                "description": "Indicates that requests that failed authentication should be presented with an HTTP status code of 403 (Forbidden)."
-              },
-              {
-                "value": "http401WithBearerChallenge",
-                "name": "Http401WithBearerChallenge",
-                "description": "Indicates that requests that failed authentication should be presented with an HTTP status code of 401 (Unauthorized) and present a Bearer Challenge."
-              }
-            ]
-          }
-        }
-      },
-      "description": "Indicates that either the API key or an access token from Azure Active Directory can be used for authentication."
-    },
-    "DisabledDataExfiltrationOption": {
-      "type": "string",
-      "enum": [
-        "All"
-      ],
-      "x-ms-enum": {
-        "name": "SearchDisabledDataExfiltrationOption",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "All",
-            "name": "All",
-            "description": "Indicates that all data exfiltration scenarios are disabled."
-          }
-        ]
-      },
-      "description": "A specific data exfiltration scenario that is disabled for the service."
-    },
-    "EncryptionWithCmk": {
-      "type": "object",
-      "properties": {
-        "enforcement": {
-          "description": "Describes how a search service should enforce having one or more non customer encrypted resources.",
-          "type": "string",
-          "enum": [
-            "Disabled",
-            "Enabled",
-            "Unspecified"
-          ],
-          "x-ms-enum": {
-            "name": "SearchEncryptionWithCmk",
-            "modelAsString": false,
-            "values": [
-              {
-                "value": "Disabled",
-                "name": "Disabled",
-                "description": "No enforcement will be made and the search service can have non customer encrypted resources."
-              },
-              {
-                "value": "Enabled",
-                "name": "Enabled",
-                "description": "Search service will be marked as non-compliant if there are one or more non customer encrypted resources."
-              },
-              {
-                "value": "Unspecified",
-                "name": "Unspecified",
-                "description": "Enforcement policy is not explicitly specified, with the behavior being the same as if it were set to 'Disabled'."
-              }
-            ]
-          }
-        },
-        "encryptionComplianceStatus": {
-          "readOnly": true,
-          "description": "Describes whether the search service is compliant or not with respect to having non customer encrypted resources. If a service has more than one non customer encrypted resource and 'Enforcement' is 'enabled' then the service will be marked as 'nonCompliant'.",
-          "type": "string",
-          "enum": [
-            "Compliant",
-            "NonCompliant"
-          ],
-          "x-ms-enum": {
-            "name": "SearchEncryptionComplianceStatus",
-            "modelAsString": false,
-            "values": [
-              {
-                "value": "Compliant",
-                "name": "Compliant",
-                "description": "Indicates that the search service is compliant, either because number of non customer encrypted resources is zero or enforcement is disabled."
-              },
-              {
-                "value": "NonCompliant",
-                "name": "NonCompliant",
-                "description": "Indicates that the search service has more than 1 non customer encrypted resources."
-              }
-            ]
-          }
-        }
-      },
-      "description": "Describes a policy that determines how resources within the search service are to be encrypted with Customer Managed Keys."
     },
     "PrivateEndpointConnection": {
       "properties": {
@@ -1582,7 +1356,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
         }
       ],
       "description": "Describes an existing Private Endpoint connection to the Azure Cognitive Search service."
@@ -1595,30 +1369,6 @@
           "items": {
             "$ref": "#/definitions/IpRule"
           }
-        },
-        "bypass": {
-          "type": "string",
-          "enum": [
-            "None",
-            "AzurePortal"
-          ],
-          "x-ms-enum": {
-            "name": "SearchBypass",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "None",
-                "name": "None",
-                "description": "Indicates that no origin can bypass the rules defined in the 'ipRules' section. This is the default."
-              },
-              {
-                "value": "AzurePortal",
-                "name": "AzurePortal",
-                "description": "Indicates that requests originating from the Azure portal can bypass the rules defined in the 'ipRules' section."
-              }
-            ]
-          },
-          "description": "Possible origins of inbound traffic that can bypass the rules defined in the 'ipRules' section."
         }
       },
       "description": "Network specific rules that determine how the Azure Cognitive Search service may be reached."
@@ -1657,29 +1407,7 @@
               ],
               "x-ms-enum": {
                 "name": "PrivateLinkServiceConnectionStatus",
-                "modelAsString": false,
-                "values": [
-                  {
-                    "value": "Pending",
-                    "name": "Pending",
-                    "description": "The private endpoint connection has been created and is pending approval."
-                  },
-                  {
-                    "value": "Approved",
-                    "name": "Approved",
-                    "description": "The private endpoint connection is approved and is ready for use."
-                  },
-                  {
-                    "value": "Rejected",
-                    "name": "Rejected",
-                    "description": "The private endpoint connection has been rejected and cannot be used."
-                  },
-                  {
-                    "value": "Disconnected",
-                    "name": "Disconnected",
-                    "description": "The private endpoint connection has been removed from the service."
-                  }
-                ]
+                "modelAsString": false
               }
             },
             "description": {
@@ -1716,36 +1444,6 @@
       "description": "Response containing a list of Private Endpoint connections.",
       "x-ms-external": true
     },
-    "SemanticSearch": {
-      "type": "string",
-      "enum": [
-        "disabled",
-        "free",
-        "standard"
-      ],
-      "x-ms-enum": {
-        "name": "SearchSemanticSearch",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "disabled",
-            "name": "disabled",
-            "description": "Indicates that semantic search is disabled for the search service. This is the default."
-          },
-          {
-            "value": "free",
-            "name": "free",
-            "description": "Enables semantic search on a search service and indicates that it is to be used within the limits of the free tier. This would cap the volume of semantic search requests and is offered at no extra charge."
-          },
-          {
-            "value": "standard",
-            "name": "standard",
-            "description": "Enables semantic search on a search service as a billable feature, with higher throughput and volume of semantic search queries."
-          }
-        ]
-      },
-      "description": "Sets options that control the availability of semantic search. This configuration is only possible for certain Azure Cognitive Search SKUs in certain locations."
-    },
     "SharedPrivateLinkResource": {
       "properties": {
         "properties": {
@@ -1755,7 +1453,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
         }
       ],
       "description": "Describes a Shared Private Link Resource managed by the Azure Cognitive Search service."
@@ -1784,7 +1482,7 @@
         },
         "status": {
           "type": "string",
-          "description": "Status of the shared private link resource. Can be Pending, Approved, Rejected, Disconnected or other yet to be documented value.",
+          "description": "Status of the shared private link resource. Can be Pending, Approved, Rejected or Disconnected.",
           "enum": [
             "Pending",
             "Approved",
@@ -1793,34 +1491,12 @@
           ],
           "x-ms-enum": {
             "name": "SharedPrivateLinkResourceStatus",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Pending",
-                "name": "Pending",
-                "description": "The shared private link resource has been created and is pending approval."
-              },
-              {
-                "value": "Approved",
-                "name": "Approved",
-                "description": "The shared private link resource is approved and is ready for use."
-              },
-              {
-                "value": "Rejected",
-                "name": "Rejected",
-                "description": "The shared private link resource has been rejected and cannot be used."
-              },
-              {
-                "value": "Disconnected",
-                "name": "Disconnected",
-                "description": "The shared private link resource has been removed from the service."
-              }
-            ]
+            "modelAsString": false
           }
         },
         "provisioningState": {
           "type": "string",
-          "description": "The provisioning state of the shared private link resource. Can be Updating, Deleting, Failed, Succeeded, Incomplete or other yet to be documented value.",
+          "description": "The provisioning state of the shared private link resource. Can be Updating, Deleting, Failed, Succeeded or Incomplete.",
           "enum": [
             "Updating",
             "Deleting",
@@ -1830,34 +1506,7 @@
           ],
           "x-ms-enum": {
             "name": "SharedPrivateLinkResourceProvisioningState",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Updating",
-                "name": "Updating",
-                "description": "The shared private link resource is in the process of being created along with other resources for it to be fully functional."
-              },
-              {
-                "value": "Deleting",
-                "name": "Deleting",
-                "description": "The shared private link resource is in the process of being deleted."
-              },
-              {
-                "value": "Failed",
-                "name": "Failed",
-                "description": "The shared private link resource has failed to be provisioned or deleted."
-              },
-              {
-                "value": "Succeeded",
-                "name": "Succeeded",
-                "description": "The shared private link resource has finished provisioning and is ready for approval."
-              },
-              {
-                "value": "Incomplete",
-                "name": "Incomplete",
-                "description": "Provisioning request for the shared private link resource has been accepted but the process of creation has not commenced yet."
-              }
-            ]
+            "modelAsString": false
           }
         }
       },
@@ -1905,7 +1554,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
         }
       ],
       "description": "Describes a supported private link resource for the Azure Cognitive Search service."
@@ -2000,7 +1649,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
         }
       ],
       "description": "Describes an Azure Cognitive Search service and its current state."
@@ -2039,12 +1688,12 @@
         },
         "identity": {
           "$ref": "#/definitions/Identity",
-          "description": "Details about the search service identity. A null value indicates that the search service has no identity assigned."
+          "description": "The identity of the resource."
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
         }
       ],
       "description": "The parameters used to update an Azure Cognitive Search service."
@@ -2077,19 +1726,7 @@
           ],
           "x-ms-enum": {
             "name": "HostingMode",
-            "modelAsString": false,
-            "values": [
-              {
-                "value": "default",
-                "name": "Default",
-                "description": "The limit on number of indexes is determined by the default limits for the SKU."
-              },
-              {
-                "value": "highDensity",
-                "name": "HighDensity",
-                "description": "Only application for standard3 SKU, where the search service can have up to 1000 indexes."
-              }
-            ]
+            "modelAsString": false
           }
         },
         "publicNetworkAccess": {
@@ -2102,74 +1739,24 @@
           ],
           "x-ms-enum": {
             "name": "PublicNetworkAccess",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "enabled",
-                "name": "Enabled",
-                "description": "The search service is accessible from traffic originating from the public internet."
-              },
-              {
-                "value": "disabled",
-                "name": "Disabled",
-                "description": "The search service is not accessible from traffic originating from the public internet. Access is only permitted over approved private endpoint connections."
-              }
-            ]
+            "modelAsString": false
           }
         },
         "status": {
           "readOnly": true,
           "type": "string",
-          "description": "The status of the search service. Possible values include: 'running': The search service is running and no provisioning operations are underway. 'provisioning': The search service is being provisioned or scaled up or down. 'deleting': The search service is being deleted. 'degraded': The search service is degraded. This can occur when the underlying search units are not healthy. The search service is most likely operational, but performance might be slow and some requests might be dropped. 'disabled': The search service is disabled. In this state, the service will reject all API requests. 'error': The search service is in an error state. 'stopped': The search service is in a subscription that's disabled. If your service is in the degraded, disabled, or error states, it means the Azure Cognitive Search team is actively investigating the underlying issue. Dedicated services in these states are still chargeable based on the number of search units provisioned.",
+          "description": "The status of the search service. Possible values include: 'running': The search service is running and no provisioning operations are underway. 'provisioning': The search service is being provisioned or scaled up or down. 'deleting': The search service is being deleted. 'degraded': The search service is degraded. This can occur when the underlying search units are not healthy. The search service is most likely operational, but performance might be slow and some requests might be dropped. 'disabled': The search service is disabled. In this state, the service will reject all API requests. 'error': The search service is in an error state. If your service is in the degraded, disabled, or error states, it means the Azure Cognitive Search team is actively investigating the underlying issue. Dedicated services in these states are still chargeable based on the number of search units provisioned.",
           "enum": [
             "running",
             "provisioning",
             "deleting",
             "degraded",
             "disabled",
-            "error",
-            "stopped"
+            "error"
           ],
           "x-ms-enum": {
             "name": "SearchServiceStatus",
-            "modelAsString": false,
-            "values": [
-              {
-                "value": "running",
-                "name": "Running",
-                "description": "The search service is running and no provisioning operations are underway."
-              },
-              {
-                "value": "provisioning",
-                "name": "Provisioning",
-                "description": "The search service is being provisioned or scaled up or down."
-              },
-              {
-                "value": "deleting",
-                "name": "Deleting",
-                "description": "The search service is being deleted."
-              },
-              {
-                "value": "degraded",
-                "name": "Degraded",
-                "description": "The search service is degraded because underlying search units are not healthy."
-              },
-              {
-                "value": "disabled",
-                "name": "Disabled",
-                "description": "The search service is disabled and all API requests will be rejected."
-              },
-              {
-                "value": "error",
-                "name": "Error",
-                "description": "The search service is in error state, indicating either a failure to provision or to be deleted."
-              },
-              {
-                "value": "stopped",
-                "name": "Stopped",
-                "description": "The search service is in a subscription that's disabled."
-              }
-            ]
+            "modelAsString": false
           }
         },
         "statusDetails": {
@@ -2188,54 +1775,12 @@
           ],
           "x-ms-enum": {
             "name": "ProvisioningState",
-            "modelAsString": false,
-            "values": [
-              {
-                "value": "succeeded",
-                "name": "Succeeded",
-                "description": "The last provisioning operation has completed successfully."
-              },
-              {
-                "value": "provisioning",
-                "name": "Provisioning",
-                "description": "The search service is being provisioned or scaled up or down."
-              },
-              {
-                "value": "failed",
-                "name": "Failed",
-                "description": "The last provisioning operation has failed."
-              }
-            ]
+            "modelAsString": false
           }
         },
         "networkRuleSet": {
           "$ref": "#/definitions/NetworkRuleSet",
           "description": "Network specific rules that determine how the Azure Cognitive Search service may be reached."
-        },
-        "disabledDataExfiltrationOptions": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DisabledDataExfiltrationOption"
-          },
-          "description": "A list of data exfiltration scenarios that are explicitly disallowed for the search service. Currently, the only supported value is 'All' to disable all possible data export scenarios with more fine grained controls planned for the future."
-        },
-        "encryptionWithCmk": {
-          "$ref": "#/definitions/EncryptionWithCmk",
-          "description": "Specifies any policy regarding encryption of resources (such as indexes) using customer manager keys within a search service."
-        },
-        "disableLocalAuth": {
-          "type": "boolean",
-          "x-nullable": true,
-          "description": "When set to true, calls to the search service will not be permitted to utilize API keys for authentication. This cannot be set to true if 'dataPlaneAuthOptions' are defined."
-        },
-        "authOptions": {
-          "$ref": "#/definitions/DataPlaneAuthOptions",
-          "description": "Defines the options for how the data plane API of a search service authenticates requests. This cannot be set if 'disableLocalAuth' is set to true."
-        },
-        "semanticSearch": {
-          "$ref": "#/definitions/SemanticSearch",
-          "x-nullable": true,
-          "description": "Sets options that control the availability of semantic search. This configuration is only possible for certain Azure Cognitive Search SKUs in certain locations."
         },
         "privateEndpointConnections": {
           "readOnly": true,
@@ -2252,11 +1797,6 @@
             "$ref": "#/definitions/SharedPrivateLinkResource"
           },
           "description": "The list of shared private link resources managed by the Azure Cognitive Search service."
-        },
-        "eTag": {
-          "readOnly": true,
-          "type": "string",
-          "description": "A system generated property representing the service's etag that can be for optimistic concurrency control during updates."
         }
       },
       "description": "Properties of the search service."
@@ -2269,7 +1809,7 @@
           "items": {
             "$ref": "#/definitions/SearchService"
           },
-          "description": "The list of Search services."
+          "description": "The list of search services."
         },
         "nextLink": {
           "readOnly": true,
@@ -2305,10 +1845,6 @@
         "error": {
           "$ref": "#/definitions/CloudErrorBody",
           "description": "Describes a particular API error with an error code and a message."
-        },
-        "message": {
-          "type": "string",
-          "description": "A brief description of the error that hints at what went wrong (for details/debugging information refer to the 'error.message' property)."
         }
       },
       "description": "Contains information about an API error.",
@@ -2374,153 +1910,6 @@
               "type": "string"
             }
           }
-        },
-        "isDataAction": {
-          "type": "boolean",
-          "x-nullable": true,
-          "readOnly": true,
-          "description": "Describes if the specified operation is a data plane API operation. Operations where this value is not true are supported directly by the resource provider."
-        },
-        "origin": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Describes which originating entities are allowed to invoke this operation."
-        },
-        "properties": {
-          "$ref": "#/definitions/OperationProperties",
-          "description": "Describes additional properties for this operation.",
-          "readOnly": true
-        }
-      }
-    },
-    "OperationProperties": {
-      "description": "Describes additional properties for this operation.",
-      "properties": {
-        "serviceSpecification": {
-          "$ref": "#/definitions/OperationServiceSpecification",
-          "description": "Specifications of the service for this operation.",
-          "readOnly": true
-        }
-      }
-    },
-    "OperationServiceSpecification": {
-      "description": "Specifications of the service for this operation.",
-      "properties": {
-        "metricSpecifications": {
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/OperationMetricsSpecification"
-          },
-          "description": "Specifications of metrics for this operation."
-        },
-        "logSpecifications": {
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/OperationLogsSpecification"
-          },
-          "description": "Specifications of logs for this operation."
-        }
-      }
-    },
-    "OperationMetricsSpecification": {
-      "description": "Specifications of one type of metric for this operation.",
-      "readOnly": true,
-      "properties": {
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The name of the metric specification."
-        },
-        "displayName": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The display name of the metric specification."
-        },
-        "displayDescription": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The display description of the metric specification."
-        },
-        "unit": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The unit for the metric specification."
-        },
-        "aggregationType": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The type of aggregation for the metric specification."
-        },
-        "dimensions": {
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/OperationMetricDimension"
-          },
-          "description": "Dimensions for the metric specification."
-        },
-        "availabilities": {
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/OperationAvailability"
-          },
-          "description": "Availabilities for the metric specification."
-        }
-      }
-    },
-    "OperationMetricDimension": {
-      "description": "Describes a particular dimension for the metric specification.",
-      "readOnly": true,
-      "properties": {
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The name of the dimension."
-        },
-        "displayName": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The display name of the dimension."
-        }
-      }
-    },
-    "OperationAvailability": {
-      "description": "Describes a particular availability for the metric specification.",
-      "readOnly": true,
-      "properties": {
-        "timeGrain": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The time grain for the dimension."
-        },
-        "blobDuration": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The blob duration for the dimension."
-        }
-      }
-    },
-    "OperationLogsSpecification": {
-      "description": "Specifications of one type of log for this operation.",
-      "readOnly": true,
-      "properties": {
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The name of the log specification."
-        },
-        "displayName": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The display name of the log specification."
-        },
-        "blobDuration": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The blob duration for the log specification."
         }
       }
     },
@@ -2533,7 +1922,7 @@
             "$ref": "#/definitions/Operation"
           },
           "readOnly": true,
-          "description": "The list of operations by Azure Cognitive Search, some supported by the resource provider and others by data plane APIs."
+          "description": "The list of operations supported by the resource provider."
         },
         "nextLink": {
           "type": "string",
@@ -2547,81 +1936,30 @@
         "principalId": {
           "readOnly": true,
           "type": "string",
-          "description": "The principal ID of the system-assigned identity of the search service."
+          "description": "The principal ID of resource identity."
         },
         "tenantId": {
           "readOnly": true,
           "type": "string",
-          "description": "The tenant ID of the system-assigned identity of the search service."
+          "description": "The tenant ID of resource."
         },
         "type": {
           "type": "string",
-          "description": "The type of identity used for the resource. The type 'SystemAssigned, UserAssigned' includes both an identity created by the system and a set of user assigned identities. The type 'None' will remove all identities from the service.",
+          "description": "The identity type.",
           "enum": [
             "None",
-            "SystemAssigned",
-            "UserAssigned",
-            "SystemAssigned, UserAssigned"
+            "SystemAssigned"
           ],
           "x-ms-enum": {
             "name": "IdentityType",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "None",
-                "name": "None",
-                "description": "Indicates that any identity associated with the search service needs to be removed."
-              },
-              {
-                "value": "SystemAssigned",
-                "name": "SystemAssigned",
-                "description": "Indicates that system-assigned identity for the search service will be enabled."
-              },
-              {
-                "value": "UserAssigned",
-                "name": "UserAssigned",
-                "description": "Indicates that one or more user assigned identities will be assigned to the search service."
-              },
-              {
-                "value": "SystemAssigned, UserAssigned",
-                "name": "SystemAssigned, UserAssigned",
-                "description": "Indicates that system-assigned identity for the search service will be enabled along with the assignment of one or more user assigned identities."
-              }
-            ]
+            "modelAsString": false
           }
-        },
-        "userAssignedIdentities": {
-          "$ref": "#/definitions/UserAssignedManagedIdentities",
-          "description": "The list of user identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'."
         }
       },
       "required": [
         "type"
       ],
-      "description": "Details about the search service identity. A null value indicates that the search service has no identity assigned."
-    },
-    "UserAssignedManagedIdentities": {
-      "type": "object",
-      "description": "The list of user identities associated with the search service. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
-      "additionalProperties": {
-        "$ref": "#/definitions/UserAssignedManagedIdentity"
-      }
-    },
-    "UserAssignedManagedIdentity": {
-      "properties": {
-        "principalId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The principal ID of user assigned identity."
-        },
-        "clientId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The client ID of user assigned identity."
-        }
-      },
-      "type": "object",
-      "description": "The details of the user assigned managed identity assigned to the search service."
+      "description": "Identity for the resource."
     }
   },
   "parameters": {
