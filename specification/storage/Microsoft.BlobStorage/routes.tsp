@@ -1005,8 +1005,8 @@ interface Blob {
       ...VersionIdParameter;
     },
     {
-      ...DateResponseHeader;
-      ...LegalHoldResponseHeader;
+      ...DateResponseHeaderPrivate;
+      ...LegalHoldResponseHeaderPrivate;
     }
   >;
 
