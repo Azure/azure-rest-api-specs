@@ -3,7 +3,6 @@ import "@typespec/rest";
 using TypeSpec.OpenAPI;
 using TypeSpec.Http;
 using TypeSpec.Rest;
-using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -27,11 +26,25 @@ alias IfMatchHeadersParameters<T extends Azure.ResourceManager.Foundations.Resou
   ...IfNoneMatchParameters<T>;
 };
 
-@doc("Provides the standard 'top' query parameter for list operations.")
+@doc("Provides the standard '$skiptoken' query parameter for list operations.")
 model SkipTokenQueryParameter {
   @query("$skiptoken")
   @doc("The page-continuation token to use with a paged version of this API.")
   skipToken?: int32;
+}
+
+@doc("Provides the standard '$top' query parameter for list operations.")
+model TopQueryParameter {
+  @query("$top")
+  @doc("The number of result items to return.")
+  top?: int32;
+}
+
+@doc("Provides the standard '$filter' query parameter for list operations.")
+model FilterQueryParameter {
+  @query("$filter")
+  @doc("Filter the result list using the given expression.")
+  filter?: string;
 }
 
 #suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-operation-outside-interface" "this is a template"
