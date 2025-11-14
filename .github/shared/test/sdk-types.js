@@ -4,6 +4,7 @@
 
 /**
  * Create a mock SpecGenSdkArtifactInfo, filling unspecified properties with defaults.
+ *
  * @param {Partial<import("../src/sdk-types.js").SpecGenSdkArtifactInfo>} [overrides]
  * @returns {SpecGenSdkArtifactInfo}
  */
