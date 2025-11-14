@@ -3,7 +3,7 @@
   "operationId": "GetSupportedLanguages",
   "parameters": {
     "X-ClientTraceId": "kayfnugjec",
-    "scope": "translation,transliteration,dictionary",
+    "scope": "translation,transliteration,models",
     "Accept-Language": "en",
     "If-None-Match": "fpnhruttllvc",
     "api-version": "2025-10-01-preview"
@@ -12,15 +12,38 @@
     "200": {
       "body": {
         "translation": {
+          "ar": {
+            "name": "Arabic",
+            "nativeName": "العربية",
+            "dir": "rtl",
+            "models": [
+              "gpt-4o",
+              "gpt-4o-mini"
+            ]
+          },
           "en": {
             "name": "English",
             "nativeName": "English",
-            "dir": "ltr"
+            "dir": "ltr",
+            "models": [
+              "gpt-4o",
+              "gpt-4o-mini"
+            ]
           },
-          "es": {
-            "name": "Spanish",
-            "nativeName": "Español",
-            "dir": "ltr"
+          "yue": {
+            "name": "Cantonese (Traditional)",
+            "nativeName": "粵語 (繁體)",
+            "dir": "ltr",
+            "models": []
+          },
+          "zh-Hans": {
+            "name": "Chinese Simplified",
+            "nativeName": "中文 (简体)",
+            "dir": "ltr",
+            "models": [
+              "gpt-4o",
+              "gpt-4o-mini"
+            ]
           }
         },
         "transliteration": {
@@ -57,23 +80,58 @@
                 ]
               }
             ]
-          }
-        },
-        "dictionary": {
-          "cs": {
-            "name": "Czech",
-            "nativeName": "Čeština",
-            "dir": "ltr",
-            "translations": [
+          },
+          "zh-Hans": {
+            "name": "Chinese Simplified",
+            "nativeName": "中文 (简体)",
+            "scripts": [
               {
-                "name": "English",
-                "nativeName": "English",
+                "code": "Hans",
+                "name": "Simplified",
+                "nativeName": "简体",
                 "dir": "ltr",
-                "code": "en"
+                "toScripts": [
+                  {
+                    "code": "Hant",
+                    "name": "Hat",
+                    "nativeName": "繁体",
+                    "dir": "ltr"
+                  },
+                  {
+                    "code": "Latn",
+                    "name": "Latin",
+                    "nativeName": "拉丁文",
+                    "dir": "ltr"
+                  }
+                ]
+              },
+              {
+                "code": "Latn",
+                "name": "Latin",
+                "nativeName": "拉丁文",
+                "dir": "ltr",
+                "toScripts": [
+                  {
+                    "code": "Hans",
+                    "name": "Han",
+                    "nativeName": "简体",
+                    "dir": "ltr"
+                  },
+                  {
+                    "code": "Hant",
+                    "name": "Hat",
+                    "nativeName": "繁体",
+                    "dir": "ltr"
+                  }
+                ]
               }
             ]
           }
-        }
+        },
+        "models": [
+          "gpt-4o",
+          "gpt-4o-mini"
+        ]
       }
     }
   }
