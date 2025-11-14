@@ -1,5 +1,8 @@
 import * as z from "zod";
 
+/*
+ * Represents supported SDK language identifiers.
+ */
 const SdkNameSchema = z.enum([
   "azure-sdk-for-go",
   "azure-sdk-for-java",
