@@ -198,8 +198,8 @@ interface Gates {
 
   listByFleet is ArmResourceListByParent<
     Gate,
-    Parameters = FilterQueryParameter 
-      & TopQueryParameter 
-      & SkipTokenQueryParameter
+    Parameters = FilterQueryParameter &
+      TopQueryParameter &
+      SkipTokenQueryParameter
   >;
 }

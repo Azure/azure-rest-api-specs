@@ -155,8 +155,8 @@ interface FleetMembers {
   /** List FleetMember resources by Fleet */
   listByFleet is ArmResourceListByParent<
     FleetMember,
-    Parameters = TopQueryParameter
-      & SkipTokenQueryParameter
-      & FilterQueryParameter
+    Parameters = TopQueryParameter &
+      SkipTokenQueryParameter &
+      FilterQueryParameter
   >;
 }
