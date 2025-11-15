@@ -6,7 +6,6 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.ContainerService;
 
@@ -196,5 +195,10 @@ interface Gates {
       IfNoneMatchParameters<Gate>
   >;
 
-  listByFleet is ArmResourceListByParent<Gate>;
+  listByFleet is ArmResourceListByParent<
+    Gate,
+    Parameters = FilterQueryParameter &
+      TopQueryParameter &
+      SkipTokenQueryParameter
+  >;
 }
