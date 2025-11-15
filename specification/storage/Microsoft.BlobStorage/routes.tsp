@@ -965,15 +965,15 @@ interface Blob {
     {
       ...TimeoutParameter;
       ...IfUnmodifiedSinceParameter;
-      ...ImmutabilityPolicyExpiryParameter;
+      ...ImmutabilityPolicyExpiryRequiredParameter;
       ...ImmutabilityPolicyModeParameter;
       ...SnapshotParameter;
       ...VersionIdParameter;
     },
     {
-      ...DateResponseHeader;
-      ...ImmutabilityPolicyExpiresOnResponseHeader;
-      ...ImmutabilityPolicyModeResponseHeader;
+      ...DateResponseHeaderPrivate;
+      ...ImmutabilityPolicyExpiresOnResponseHeaderPrivate;
+      ...ImmutabilityPolicyModeResponseHeaderPrivate;
     }
   >;
 
@@ -988,7 +988,7 @@ interface Blob {
       ...SnapshotParameter;
       ...VersionIdParameter;
     },
-    DateResponseHeader
+    DateResponseHeaderPrivate
   >;
 
   /** The Set Legal Hold operation sets a legal hold on the blob. */
