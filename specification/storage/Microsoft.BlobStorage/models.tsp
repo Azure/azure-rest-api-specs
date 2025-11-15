@@ -1834,6 +1834,14 @@ alias LegalHoldResponseHeader = {
   legalHold: boolean;
 };
 
+/** The legal hold response header. */
+alias LegalHoldResponseHeaderPrivate = {
+  /** Specifies the legal hold status to set on the blob. */
+  @access(Access.internal)
+  @header("x-ms-legal-hold")
+  legalHold: boolean;
+};
+
 /** The legal hold required parameter. */
 alias LegalHoldRequiredParameter = {
   /** Required.  Specifies the legal hold status to set on the blob. */
