@@ -41,7 +41,8 @@ interface OwnershipVouchers {
 model ValidateOwnershipVouchersRequest {
   @doc("Ownership Voucher Details.")
   @identifiers(#[])
-  ownershipVoucherDetails?: OwnershipVoucherDetails[];
+  @minItems(1)
+  ownershipVoucherDetails: OwnershipVoucherDetails[];
 }
 
 @added(Versions.v2025_12_01_preview)
@@ -49,7 +50,7 @@ model ValidateOwnershipVouchersRequest {
 model ValidateOwnershipVouchersResponse {
   @doc("Ownership Voucher Validation Details.")
   @identifiers(#["id"])
-  ownershipVoucherValidationDetails?: OwnershipVoucherValidationDetails[];
+  ownershipVoucherValidationDetails: OwnershipVoucherValidationDetails[];
 }
 
 @added(Versions.v2025_12_01_preview)

@@ -4043,12 +4043,16 @@
         "ownershipVoucherDetails": {
           "type": "array",
           "description": "Ownership Voucher Details.",
+          "minItems": 1,
           "items": {
             "$ref": "#/definitions/OwnershipVoucherDetails"
           },
           "x-ms-identifiers": []
         }
-      }
+      },
+      "required": [
+        "ownershipVoucherDetails"
+      ]
     },
     "ValidateOwnershipVouchersResponse": {
       "type": "object",
@@ -4064,7 +4068,10 @@
             "id"
           ]
         }
-      }
+      },
+      "required": [
+        "ownershipVoucherValidationDetails"
+      ]
     },
     "WebProxyConfiguration": {
       "type": "object",
