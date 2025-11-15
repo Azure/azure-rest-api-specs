@@ -18,7 +18,8 @@ using ContentUnderstanding;
 @@clientName(ContentFieldDefinition.items, "item_definition", "python");
 
 @@clientName(AnalyzeBinaryRequest.input, "binary_input", "python");
-@@clientName(ClassifyBinaryRequest.input, "binary_input", "python");
+
+//@@clientName(ContentFieldDefinition.$ref, "reference", "javascript");
 
 // Client-only docs clarifying that these properties accept raw binary bytes (not base64 strings) in Python SDK.
 @@clientDoc(AnalyzeInput.data,

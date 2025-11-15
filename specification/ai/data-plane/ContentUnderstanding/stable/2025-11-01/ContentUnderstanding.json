@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Content Understanding",
-    "version": "2025-05-01-preview",
+    "version": "2025-11-01",
     "description": "The Content Understanding service extracts content and fields from multimodal input.",
     "x-typespec-generated": [
       {
@@ -97,10 +97,38 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Get Analysis Result": {
-            "$ref": "./examples/ContentAnalyzers_GetResult.json"
+        }
+      },
+      "delete": {
+        "operationId": "ContentAnalyzers_DeleteResult",
+        "description": "Mark the result of an analysis operation for deletion.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "Operation identifier.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
           }
         }
       }
@@ -152,11 +180,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Get Analysis Result File": {
-            "$ref": "./examples/ContentAnalyzers_GetResultFile.json"
-          }
         }
       }
     },
@@ -197,11 +220,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "List Analyzers": {
-            "$ref": "./examples/ContentAnalyzers_List.json"
           }
         },
         "x-ms-pageable": {
@@ -255,11 +273,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Get Analyzer": {
-            "$ref": "./examples/ContentAnalyzers_GetAnalyzer.json"
-          }
         }
       },
       "put": {
@@ -276,6 +289,14 @@
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9._-]{1,64}$"
+          },
+          {
+            "name": "allowReplace",
+            "in": "query",
+            "description": "Allow the operation to replace an existing resource.",
+            "required": false,
+            "type": "boolean",
+            "default": false
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -340,11 +361,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Create or Replace Analyzer": {
-            "$ref": "./examples/ContentAnalyzers_CreateOrReplace.json"
-          }
-        },
         "x-ms-long-running-operation": true
       },
       "patch": {
@@ -404,11 +420,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Update Analyzer": {
-            "$ref": "./examples/ContentAnalyzers_Update.json"
-          }
         }
       },
       "delete": {
@@ -452,11 +463,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Delete Analyzer": {
-            "$ref": "./examples/ContentAnalyzers_DeleteAnalyzer.json"
           }
         }
       }
@@ -550,12 +556,281 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Analyze URL": {
-            "$ref": "./examples/ContentAnalyzers_Analyze.json"
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/analyzers/{analyzerId}:analyzeBinary": {
+      "post": {
+        "operationId": "ContentAnalyzers_AnalyzeBinary",
+        "description": "Extract content and fields from input.",
+        "consumes": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "analyzerId",
+            "in": "path",
+            "description": "The unique identifier of the analyzer.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9._-]{1,64}$"
+          },
+          {
+            "$ref": "#/parameters/AnalyzeParameters.stringEncoding"
+          },
+          {
+            "$ref": "#/parameters/AnalyzeParameters.processingLocation"
+          },
+          {
+            "$ref": "#/parameters/AnalyzeBinaryRequest.range"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "$ref": "#/parameters/AnalyzeBinaryRequest.input"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "type": "object",
+              "description": "Provides status details for long running operations.",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The unique ID of the operation."
+                },
+                "status": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+                  "description": "The status of the operation"
+                },
+                "error": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
+                  "description": "Error object that describes the error when status is \"Failed\"."
+                },
+                "result": {
+                  "$ref": "#/definitions/AnalyzeResult",
+                  "description": "The result of the operation."
+                }
+              },
+              "required": [
+                "id",
+                "status"
+              ]
+            },
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
           }
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/analyzers/{analyzerId}:copy": {
+      "post": {
+        "operationId": "ContentAnalyzers_Copy",
+        "description": "Create a copy of the source analyzer to the current location.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "analyzerId",
+            "in": "path",
+            "description": "The unique identifier of the analyzer.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9._-]{1,64}$"
+          },
+          {
+            "name": "allowReplace",
+            "in": "query",
+            "description": "Allow the operation to replace an existing resource.",
+            "required": false,
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "sourceAzureResourceId": {
+                  "type": "string",
+                  "description": "Azure resource ID of the source analyzer location.  Defaults to the current resource."
+                },
+                "sourceRegion": {
+                  "type": "string",
+                  "description": "Azure region of the source analyzer location.  Defaults to current region."
+                },
+                "sourceAnalyzerId": {
+                  "type": "string",
+                  "description": "Source analyzer ID."
+                }
+              },
+              "required": [
+                "sourceAnalyzerId"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "type": "object",
+              "description": "Provides status details for long running operations.",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The unique ID of the operation."
+                },
+                "status": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+                  "description": "The status of the operation"
+                },
+                "error": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
+                  "description": "Error object that describes the error when status is \"Failed\"."
+                },
+                "result": {
+                  "$ref": "#/definitions/ContentAnalyzer",
+                  "description": "The result of the operation."
+                }
+              },
+              "required": [
+                "id",
+                "status"
+              ]
+            },
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/analyzers/{analyzerId}:grantCopyAuthorization": {
+      "post": {
+        "operationId": "ContentAnalyzers_GrantCopyAuthorization",
+        "description": "Get authorization for copying this analyzer to another location.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "analyzerId",
+            "in": "path",
+            "description": "The unique identifier of the analyzer.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9._-]{1,64}$"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "targetAzureResourceId": {
+                  "type": "string",
+                  "description": "Azure resource ID of the target analyzer location."
+                },
+                "targetRegion": {
+                  "type": "string",
+                  "description": "Azure region of the target analyzer location.  Defaults to current region."
+                }
+              },
+              "required": [
+                "targetAzureResourceId"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CopyAuthorization"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
       }
     },
     "/analyzers/{analyzerId}/operations/{operationId}": {
@@ -601,132 +876,23 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Get Analyzer Operation Status": {
-            "$ref": "./examples/ContentAnalyzers_GetOperationStatus.json"
-          }
         }
       }
     },
-    "/faces:compare": {
-      "post": {
-        "operationId": "Faces_Compare",
-        "description": "Compare the similarity between two faces.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CompareFacesParameters"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/CompareFacesResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Compare the Similarity Between Two Faces": {
-            "$ref": "./examples/Faces_Compare.json"
-          }
-        }
-      }
-    },
-    "/faces:detect": {
-      "post": {
-        "operationId": "Faces_Detect",
-        "description": "Detect faces in an image.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/DetectFacesParameters"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/DetectFacesResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Detect Faces in an Image": {
-            "$ref": "./examples/Faces_Detect.json"
-          }
-        }
-      }
-    },
-    "/personDirectories": {
+    "/defaults": {
       "get": {
-        "operationId": "PersonDirectories_List",
-        "description": "List person directories.",
+        "operationId": "ContentAnalyzers_GetDefaults",
+        "description": "Return default settings for this Content Understanding resource.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedPersonDirectory"
-            },
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
+              "$ref": "#/definitions/ContentUnderstandingDefaults"
             }
           },
           "default": {
@@ -740,135 +906,12 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "List Person Directories": {
-            "$ref": "./examples/PersonDirectories_List.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/personDirectories/{personDirectoryId}": {
-      "get": {
-        "operationId": "PersonDirectories_Get",
-        "description": "Get person directory properties.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "personDirectoryId",
-            "in": "path",
-            "description": "The unique identifier of the person directory.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9._-]{1,64}$"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/PersonDirectory"
-            },
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get Person Directory": {
-            "$ref": "./examples/PersonDirectories_Get.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "PersonDirectories_Create",
-        "description": "Create a new person directory.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "personDirectoryId",
-            "in": "path",
-            "description": "The unique identifier of the person directory.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9._-]{1,64}$"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "The resource instance.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/PersonDirectory"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
-            "schema": {
-              "$ref": "#/definitions/PersonDirectory"
-            },
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Create Person Directory": {
-            "$ref": "./examples/PersonDirectories_Create.json"
           }
         }
       },
       "patch": {
-        "operationId": "PersonDirectories_Update",
-        "description": "Update person directory properties.",
+        "operationId": "ContentAnalyzers_UpdateDefaults",
+        "description": "Return default settings for this Content Understanding resource.",
         "consumes": [
           "application/merge-patch+json"
         ],
@@ -877,323 +920,11 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "personDirectoryId",
-            "in": "path",
-            "description": "The unique identifier of the person directory.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9._-]{1,64}$"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "The resource instance.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/PersonDirectoryUpdate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/PersonDirectory"
-            },
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Update Person Directory": {
-            "$ref": "./examples/PersonDirectories_Update.json"
-          }
-        }
-      },
-      "delete": {
-        "operationId": "PersonDirectories_Delete",
-        "description": "Delete person directory and all associated persons and faces.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "personDirectoryId",
-            "in": "path",
-            "description": "The unique identifier of the person directory.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9._-]{1,64}$"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. ",
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Delete Person Directory": {
-            "$ref": "./examples/PersonDirectories_Delete.json"
-          }
-        }
-      }
-    },
-    "/personDirectories/{personDirectoryId}/faces": {
-      "get": {
-        "operationId": "PersonDirectories_ListFaces",
-        "description": "List faces.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "personDirectoryId",
-            "in": "path",
-            "description": "The unique identifier of the person directory.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9._-]{1,64}$"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/PagedPersonDirectoryFace"
-            },
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List Faces in Person Directory": {
-            "$ref": "./examples/PersonDirectories_ListFaces.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      },
-      "post": {
-        "operationId": "PersonDirectories_AddFace",
-        "description": "Add a new face.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/AddFaceParameters.personDirectoryId"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          },
-          {
             "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AddFaceParameters"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
-            "schema": {
-              "$ref": "#/definitions/PersonDirectoryFace"
-            },
-            "headers": {
-              "Location": {
-                "type": "string",
-                "format": "uri",
-                "description": "The location of an instance of PersonDirectoryFace"
-              },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Add Face to Person Directory": {
-            "$ref": "./examples/PersonDirectories_AddFace.json"
-          }
-        }
-      }
-    },
-    "/personDirectories/{personDirectoryId}/faces/{faceId}": {
-      "get": {
-        "operationId": "PersonDirectories_GetFace",
-        "description": "Get face properties.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "personDirectoryId",
-            "in": "path",
-            "description": "The unique identifier of the person directory.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9._-]{1,64}$"
-          },
-          {
-            "name": "faceId",
-            "in": "path",
-            "description": "The unique identifier of the face.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9._-]{1,64}$"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/PersonDirectoryFace"
-            },
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get Face in Person Directory": {
-            "$ref": "./examples/PersonDirectories_GetFace.json"
-          }
-        }
-      },
-      "patch": {
-        "operationId": "PersonDirectories_UpdateFace",
-        "description": "Update face properties, such as modifying the association with a person.",
-        "consumes": [
-          "application/merge-patch+json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "personDirectoryId",
-            "in": "path",
-            "description": "The unique identifier of the person directory.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9._-]{1,64}$"
-          },
-          {
-            "name": "faceId",
-            "in": "path",
-            "description": "The unique identifier of the face.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9._-]{1,64}$"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "The resource instance.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/PersonDirectoryFaceUpdate"
+              "$ref": "#/definitions/ContentUnderstandingDefaultsMergePatchUpdate"
             }
           }
         ],
@@ -1201,14 +932,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PersonDirectoryFace"
-            },
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
+              "$ref": "#/definitions/ContentUnderstandingDefaults"
             }
           },
           "default": {
@@ -1222,644 +946,12 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Update Face in Person Directory": {
-            "$ref": "./examples/PersonDirectories_UpdateFace.json"
-          }
-        }
-      },
-      "delete": {
-        "operationId": "PersonDirectories_DeleteFace",
-        "description": "Delete face.  Any linked person will be disassociated, but not deleted.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "personDirectoryId",
-            "in": "path",
-            "description": "The unique identifier of the person directory.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9._-]{1,64}$"
-          },
-          {
-            "name": "faceId",
-            "in": "path",
-            "description": "The unique identifier of the face.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9._-]{1,64}$"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. ",
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Delete Face from Person Directory": {
-            "$ref": "./examples/PersonDirectories_DeleteFace.json"
-          }
-        }
-      }
-    },
-    "/personDirectories/{personDirectoryId}/faces:find": {
-      "post": {
-        "operationId": "PersonDirectories_FindSimilarFaces",
-        "description": "Find similar faces.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "personDirectoryId",
-            "in": "path",
-            "description": "The unique identifier of the person directory.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9._-]{1,64}$"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/FindSimilarFacesParameters"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/FindSimilarFacesResult"
-            },
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Find Similar Faces": {
-            "$ref": "./examples/PersonDirectories_FindSimilarFaces.json"
-          }
-        }
-      }
-    },
-    "/personDirectories/{personDirectoryId}/persons": {
-      "get": {
-        "operationId": "PersonDirectories_ListPersons",
-        "description": "List persons.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "personDirectoryId",
-            "in": "path",
-            "description": "The unique identifier of the person directory.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9._-]{1,64}$"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/PagedPersonDirectoryPerson"
-            },
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List Persons in Person Directory": {
-            "$ref": "./examples/PersonDirectories_ListPersons.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      },
-      "post": {
-        "operationId": "PersonDirectories_AddPerson",
-        "description": "Add a new person and optionally associate with existing faces.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/AddPersonParameters.personDirectoryId"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AddPersonParameters"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
-            "schema": {
-              "$ref": "#/definitions/PersonDirectoryPerson"
-            },
-            "headers": {
-              "Location": {
-                "type": "string",
-                "format": "uri",
-                "description": "The location of an instance of PersonDirectoryPerson"
-              },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Add Person to Person Directory": {
-            "$ref": "./examples/PersonDirectories_AddPerson.json"
-          }
-        }
-      }
-    },
-    "/personDirectories/{personDirectoryId}/persons/{personId}": {
-      "get": {
-        "operationId": "PersonDirectories_GetPerson",
-        "description": "Get person properties.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "personDirectoryId",
-            "in": "path",
-            "description": "The unique identifier of the person directory.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9._-]{1,64}$"
-          },
-          {
-            "name": "personId",
-            "in": "path",
-            "description": "The unique identifier of the person.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9._-]{1,64}$"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/PersonDirectoryPerson"
-            },
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get Person in Person Directory": {
-            "$ref": "./examples/PersonDirectories_GetPerson.json"
-          }
-        }
-      },
-      "patch": {
-        "operationId": "PersonDirectories_UpdatePerson",
-        "description": "Update person properties.",
-        "consumes": [
-          "application/merge-patch+json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "personDirectoryId",
-            "in": "path",
-            "description": "The unique identifier of the person directory.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9._-]{1,64}$"
-          },
-          {
-            "name": "personId",
-            "in": "path",
-            "description": "The unique identifier of the person.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9._-]{1,64}$"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "The resource instance.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/PersonDirectoryPersonUpdate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/PersonDirectoryPerson"
-            },
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Update Person in Person Directory": {
-            "$ref": "./examples/PersonDirectories_UpdatePerson.json"
-          }
-        }
-      },
-      "delete": {
-        "operationId": "PersonDirectories_DeletePerson",
-        "description": "Delete person.  Any linked faces will be disassociated, but not deleted.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "personDirectoryId",
-            "in": "path",
-            "description": "The unique identifier of the person directory.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9._-]{1,64}$"
-          },
-          {
-            "name": "personId",
-            "in": "path",
-            "description": "The unique identifier of the person.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9._-]{1,64}$"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. ",
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Delete Person from Person Directory": {
-            "$ref": "./examples/PersonDirectories_DeletePerson.json"
-          }
-        }
-      }
-    },
-    "/personDirectories/{personDirectoryId}/persons/{personId}:verify": {
-      "post": {
-        "operationId": "PersonDirectories_VerifyPerson",
-        "description": "Verify if a face matches the person.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "personDirectoryId",
-            "in": "path",
-            "description": "The unique identifier of the person directory.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9._-]{1,64}$"
-          },
-          {
-            "name": "personId",
-            "in": "path",
-            "description": "The unique identifier of the person.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9._-]{1,64}$"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/VerifyPersonParameters"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/VerifyPersonResult"
-            },
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Verify If a Face Matches the Person": {
-            "$ref": "./examples/PersonDirectories_VerifyPerson.json"
-          }
-        }
-      }
-    },
-    "/personDirectories/{personDirectoryId}/persons:identify": {
-      "post": {
-        "operationId": "PersonDirectories_IdentifyPerson",
-        "description": "Identify the person from a face.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "personDirectoryId",
-            "in": "path",
-            "description": "The unique identifier of the person directory.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9._-]{1,64}$"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/IdentifyPersonParameters"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/IdentifyPersonResult"
-            },
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Identify the Person from a Face": {
-            "$ref": "./examples/PersonDirectories_IdentifyPerson.json"
           }
         }
       }
     }
   },
   "definitions": {
-    "AddFaceParameters": {
-      "type": "object",
-      "description": "Add face parameters.",
-      "properties": {
-        "faceSource": {
-          "$ref": "#/definitions/FaceSource",
-          "description": "Source of the face."
-        },
-        "personId": {
-          "type": "string",
-          "description": "Person identifier with which to associate the face."
-        },
-        "qualityThreshold": {
-          "type": "string",
-          "description": "Face quality threshold below which the face will not be added. Default is medium.",
-          "default": "medium",
-          "enum": [
-            "low",
-            "medium",
-            "high"
-          ],
-          "x-ms-enum": {
-            "name": "QualityForRecognition",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "low",
-                "value": "low",
-                "description": "Low quality."
-              },
-              {
-                "name": "medium",
-                "value": "medium",
-                "description": "Medium quality."
-              },
-              {
-                "name": "high",
-                "value": "high",
-                "description": "High quality."
-              }
-            ]
-          }
-        }
-      },
-      "required": [
-        "faceSource"
-      ]
-    },
-    "AddPersonParameters": {
-      "type": "object",
-      "description": "Add person parameters.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Tags associated with the person.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "faceIds": {
-          "type": "array",
-          "description": "List of faces associated with the person.",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "AnalyzeInput": {
       "type": "object",
       "description": "Additional input to analyze.",
@@ -1877,6 +969,14 @@
         "name": {
           "type": "string",
           "description": "Name of the input."
+        },
+        "mimeType": {
+          "type": "string",
+          "description": "The MIME type of the input content.  Ex. application/pdf, image/jpeg, etc."
+        },
+        "range": {
+          "$ref": "#/definitions/RangeExpression",
+          "description": "Range of the input to analyze (ex. `1-3,5,9-`).  Document content uses 1-based page numbers, while audio visual content uses integer milliseconds."
         }
       }
     },
@@ -1884,21 +984,18 @@
       "type": "object",
       "description": "Analyze operation request.",
       "properties": {
-        "url": {
-          "type": "string",
-          "format": "uri",
-          "description": "The URL of the primary input to analyze.  Only one of url or data should be specified."
-        },
-        "data": {
-          "type": "string",
-          "format": "byte",
-          "description": "Base64-encoded binary content of the primary input to analyze.  Only one of url or data should be specified."
-        },
         "inputs": {
           "type": "array",
           "description": "Inputs to analyze.  Currently, only pro mode supports multiple inputs.",
           "items": {
             "$ref": "#/definitions/AnalyzeInput"
+          }
+        },
+        "modelDeployments": {
+          "type": "object",
+          "description": "Override default mapping of model names to deployments.\nEx. { \"gpt-4.1\": \"myGpt41Deployment\", \"text-embedding-3-large\": \"myTextEmbedding3LargeDeployment\" }.",
+          "additionalProperties": {
+            "type": "string"
           }
         }
       }
@@ -2011,11 +1108,11 @@
             "$ref": "#/definitions/TranscriptPhrase"
           }
         },
-        "persons": {
+        "segments": {
           "type": "array",
-          "description": "List of detected persons in the video.  Only if enableFace and returnDetails are true.",
+          "description": "List of detected content segments.  Only if enableSegment is true.",
           "items": {
-            "$ref": "#/definitions/DetectedPerson"
+            "$ref": "#/definitions/AudioVisualContentSegment"
           }
         }
       },
@@ -2029,6 +1126,41 @@
         }
       ],
       "x-ms-discriminator-value": "audioVisual"
+    },
+    "AudioVisualContentSegment": {
+      "type": "object",
+      "description": "Detected audio/visual content segment.",
+      "properties": {
+        "segmentId": {
+          "type": "string",
+          "description": "Segment identifier."
+        },
+        "category": {
+          "type": "string",
+          "description": "Classified content category."
+        },
+        "span": {
+          "$ref": "#/definitions/ContentSpan",
+          "description": "Span of the segment in the markdown content."
+        },
+        "startTimeMs": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Start time of the segment in milliseconds."
+        },
+        "endTimeMs": {
+          "type": "integer",
+          "format": "int64",
+          "description": "End time of the segment in milliseconds."
+        }
+      },
+      "required": [
+        "segmentId",
+        "category",
+        "span",
+        "startTimeMs",
+        "endTimeMs"
+      ]
     },
     "Azure.Core.Foundations.Error": {
       "type": "object",
@@ -2132,34 +1264,6 @@
         ]
       }
     },
-    "BlobDataSource": {
-      "type": "object",
-      "description": "Blob storage data source.",
-      "properties": {
-        "containerUrl": {
-          "type": "string",
-          "format": "uri",
-          "description": "The URL of the blob container."
-        },
-        "prefix": {
-          "type": "string",
-          "description": "An optional prefix to filter blobs within the container."
-        },
-        "fileListPath": {
-          "type": "string",
-          "description": "An optional path to a file listing specific blobs to include."
-        }
-      },
-      "required": [
-        "containerUrl"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataSource"
-        }
-      ],
-      "x-ms-discriminator-value": "blob"
-    },
     "BooleanField": {
       "type": "object",
       "description": "Boolean field extracted from the content.",
@@ -2175,80 +1279,6 @@
         }
       ],
       "x-ms-discriminator-value": "boolean"
-    },
-    "BoundingBox": {
-      "type": "object",
-      "description": "Bounding box in an image.",
-      "properties": {
-        "left": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Left coordinate of the bounding box."
-        },
-        "top": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Top coordinate of the bounding box."
-        },
-        "width": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Width of the bounding box."
-        },
-        "height": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Height of the bounding box."
-        }
-      },
-      "required": [
-        "left",
-        "top",
-        "width",
-        "height"
-      ]
-    },
-    "CompareFacesParameters": {
-      "type": "object",
-      "description": "Compare faces parameters.",
-      "properties": {
-        "faceSource1": {
-          "$ref": "#/definitions/FaceSource",
-          "description": "First face to compare."
-        },
-        "faceSource2": {
-          "$ref": "#/definitions/FaceSource",
-          "description": "Second face to compare."
-        }
-      },
-      "required": [
-        "faceSource1",
-        "faceSource2"
-      ]
-    },
-    "CompareFacesResult": {
-      "type": "object",
-      "description": "Compare faces response.",
-      "properties": {
-        "detectedFace1": {
-          "$ref": "#/definitions/DetectedBoundingBox",
-          "description": "Details of the first detected face."
-        },
-        "detectedFace2": {
-          "$ref": "#/definitions/DetectedBoundingBox",
-          "description": "Details of the second detected face."
-        },
-        "confidence": {
-          "type": "number",
-          "format": "float",
-          "description": "Confidence score of the face comparison."
-        }
-      },
-      "required": [
-        "detectedFace1",
-        "detectedFace2",
-        "confidence"
-      ]
     },
     "ContentAnalyzer": {
       "type": "object",
@@ -2321,9 +1351,10 @@
             "create"
           ]
         },
-        "trainingData": {
-          "$ref": "#/definitions/DataSource",
-          "description": "The data source containing training data for the analyzer.",
+        "dynamicFieldSchema": {
+          "type": "boolean",
+          "description": "Indicates whether the result may contain additional fields outside of the defined schema.",
+          "default": false,
           "x-ms-mutability": [
             "read",
             "create"
@@ -2364,35 +1395,6 @@
             "create"
           ]
         },
-        "mode": {
-          "type": "string",
-          "description": "The analysis mode: standard, pro.  Default is standard.",
-          "default": "standard",
-          "enum": [
-            "standard",
-            "pro"
-          ],
-          "x-ms-enum": {
-            "name": "AnalysisMode",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "standard",
-                "value": "standard",
-                "description": "Standard analysis mode."
-              },
-              {
-                "name": "pro",
-                "value": "pro",
-                "description": "Pro analysis mode."
-              }
-            ]
-          },
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
         "knowledgeSources": {
           "type": "array",
           "description": "Additional knowledge sources used to enhance the analyzer.",
@@ -2403,6 +1405,22 @@
             "read",
             "create"
           ]
+        },
+        "models": {
+          "type": "object",
+          "description": "Mapping of model roles to specific model names.\nEx. { \"completion\": \"gpt-4.1\", \"embedding\": \"text-embedding-3-large\" }.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "supportedModels": {
+          "$ref": "#/definitions/SupportedModels",
+          "description": "Chat completion and embedding models supported by the analyzer.",
+          "readOnly": true
         }
       },
       "required": [
@@ -2431,6 +1449,10 @@
         "result": {
           "$ref": "#/definitions/AnalyzeResult",
           "description": "The result of the operation."
+        },
+        "usage": {
+          "$ref": "#/definitions/UsageDetails",
+          "description": "Usage details of the analyze operation."
         }
       },
       "required": [
@@ -2453,14 +1475,6 @@
             "type": "string"
           }
         },
-        "enableFace": {
-          "type": "boolean",
-          "description": "Enable face detection."
-        },
-        "personDirectoryId": {
-          "type": "string",
-          "description": "Specify the person directory used for identifying detected faces."
-        },
         "enableOcr": {
           "type": "boolean",
           "description": "Enable optical character recognition (OCR)."
@@ -2468,6 +1482,14 @@
         "enableLayout": {
           "type": "boolean",
           "description": "Enable layout analysis."
+        },
+        "enableFigureDescription": {
+          "type": "boolean",
+          "description": "Enable generation of figure description."
+        },
+        "enableFigureAnalysis": {
+          "type": "boolean",
+          "description": "Enable analysis of figures, such as charts and diagrams."
         },
         "enableFormula": {
           "type": "boolean",
@@ -2478,7 +1500,8 @@
           "description": "Representation format of tables in analyze result markdown.",
           "default": "html",
           "enum": [
-            "html"
+            "html",
+            "markdown"
           ],
           "x-ms-enum": {
             "name": "TableFormat",
@@ -2488,6 +1511,61 @@
                 "name": "html",
                 "value": "html",
                 "description": "Represent tables using HTML table elements: \\<table>, \\<th>, \\<tr>, \\<td>."
+              },
+              {
+                "name": "markdown",
+                "value": "markdown",
+                "description": "Represent tables using GitHub Flavored Markdown table syntax, which does not support merged cells or rich headers."
+              }
+            ]
+          }
+        },
+        "chartFormat": {
+          "type": "string",
+          "description": "Representation format of charts in analyze result markdown.",
+          "default": "chartJs",
+          "enum": [
+            "chartJs",
+            "markdown"
+          ],
+          "x-ms-enum": {
+            "name": "ChartFormat",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "chartJs",
+                "value": "chartJs",
+                "description": "Represent charts as Chart.js code blocks."
+              },
+              {
+                "name": "markdown",
+                "value": "markdown",
+                "description": "Represent charts as markdown tables."
+              }
+            ]
+          }
+        },
+        "annotationFormat": {
+          "type": "string",
+          "description": "Representation format of annotations in analyze result markdown.",
+          "default": "markdown",
+          "enum": [
+            "none",
+            "markdown"
+          ],
+          "x-ms-enum": {
+            "name": "AnnotationFormat",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "none",
+                "value": "none",
+                "description": "Do not represent annotations."
+              },
+              {
+                "name": "markdown",
+                "value": "markdown",
+                "description": "Represent basic annotation information using markdown formatting."
               }
             ]
           }
@@ -2496,48 +1574,28 @@
           "type": "boolean",
           "description": "Disable the default blurring of faces for privacy while processing the content."
         },
-        "disableContentFiltering": {
-          "type": "boolean",
-          "description": "Disable content filtering that detects and prevents the output of harmful content."
-        },
         "estimateFieldSourceAndConfidence": {
           "type": "boolean",
           "description": "Return field grounding source and confidence."
         },
-        "segmentationMode": {
-          "type": "string",
-          "description": "Segmentation mode used to split audio/visual content.",
-          "default": "noSegmentation",
-          "enum": [
-            "noSegmentation",
-            "auto",
-            "custom"
-          ],
-          "x-ms-enum": {
-            "name": "SegmentationMode",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "noSegmentation",
-                "value": "noSegmentation",
-                "description": "No segmentation."
-              },
-              {
-                "name": "auto",
-                "value": "auto",
-                "description": "Automatic segmentation."
-              },
-              {
-                "name": "custom",
-                "value": "custom",
-                "description": "Segment according to custom segmentation definition."
-              }
-            ]
+        "contentCategories": {
+          "type": "object",
+          "description": "Map of categories to classify the input content(s) against.",
+          "additionalProperties": {
+            "$ref": "#/definitions/ContentCategoryDefinition"
           }
         },
-        "segmentationDefinition": {
-          "type": "string",
-          "description": "Segmentation definition for use with custom segmentation mode."
+        "enableSegment": {
+          "type": "boolean",
+          "description": "Enable segmentation of the input by contentCategories."
+        },
+        "segmentPerPage": {
+          "type": "boolean",
+          "description": "Force segmentation of document content by page."
+        },
+        "omitContent": {
+          "type": "boolean",
+          "description": "Omit the content for this analyzer from analyze result.\nOnly return content(s) from additional analyzers specified in contentCategories, if any."
         }
       }
     },
@@ -2560,6 +1618,10 @@
         "result": {
           "$ref": "#/definitions/ContentAnalyzer",
           "description": "The result of the operation."
+        },
+        "usage": {
+          "$ref": "#/definitions/UsageDetails",
+          "description": "Usage details of the analyzer creation operation."
         }
       },
       "required": [
@@ -2617,6 +1679,24 @@
           "additionalProperties": {
             "type": "string"
           }
+        }
+      }
+    },
+    "ContentCategoryDefinition": {
+      "type": "object",
+      "description": "Content category definition.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "The description of the category."
+        },
+        "analyzerId": {
+          "type": "string",
+          "description": "Optional analyzer used to process the content."
+        },
+        "analyzer": {
+          "$ref": "#/definitions/ContentAnalyzer",
+          "description": "Optional inline definition of analyzer used to process the content."
         }
       }
     },
@@ -2703,6 +1783,10 @@
         "$ref": {
           "type": "string",
           "description": "Reference to another field definition."
+        },
+        "estimateSourceAndConfidence": {
+          "type": "boolean",
+          "description": "Return grounding source and confidence."
         }
       }
     },
@@ -2764,7 +1848,8 @@
         "integer",
         "boolean",
         "array",
-        "object"
+        "object",
+        "json"
       ],
       "x-ms-enum": {
         "name": "ContentFieldType",
@@ -2809,6 +1894,11 @@
             "name": "object",
             "value": "object",
             "description": "Named list of subfields."
+          },
+          {
+            "name": "json",
+            "value": "json",
+            "description": "JSON object."
           }
         ]
       }
@@ -2833,37 +1923,63 @@
         "length"
       ]
     },
-    "DataSource": {
+    "ContentUnderstandingDefaults": {
       "type": "object",
-      "description": "Data source specifying a set of documents.",
+      "description": "default settings for this Content Understanding resource.",
       "properties": {
-        "kind": {
-          "$ref": "#/definitions/DataSourceKind",
-          "description": "The kind of data source."
+        "modelDeployments": {
+          "type": "object",
+          "description": "Mapping of model names to deployments.\nEx. { \"gpt-4.1\": \"myGpt41Deployment\", \"text-embedding-3-large\": \"myTextEmbedding3LargeDeployment\" }.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         }
       },
-      "discriminator": "kind",
       "required": [
-        "kind"
+        "modelDeployments"
       ]
     },
-    "DataSourceKind": {
-      "type": "string",
-      "description": "Data source kind.",
-      "enum": [
-        "blob"
-      ],
-      "x-ms-enum": {
-        "name": "DataSourceKind",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "blob",
-            "value": "blob",
-            "description": "A blob storage data source."
+    "ContentUnderstandingDefaultsMergePatchUpdate": {
+      "type": "object",
+      "description": "default settings for this Content Understanding resource.",
+      "properties": {
+        "modelDeployments": {
+          "type": "object",
+          "description": "Mapping of model names to deployments.\nEx. { \"gpt-4.1\": \"myGpt41Deployment\", \"text-embedding-3-large\": \"myTextEmbedding3LargeDeployment\" }.",
+          "additionalProperties": {
+            "type": "string"
           }
-        ]
+        }
       }
+    },
+    "CopyAuthorization": {
+      "type": "object",
+      "description": "Copy authorization details for cross-resource copy.",
+      "properties": {
+        "source": {
+          "type": "string",
+          "description": "Full path of the source analyzer."
+        },
+        "targetAzureResourceId": {
+          "type": "string",
+          "description": "Azure resource ID of the target location to copy to."
+        },
+        "expiresAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date/time when the copy authorization expires."
+        }
+      },
+      "required": [
+        "source",
+        "targetAzureResourceId",
+        "expiresAt"
+      ]
     },
     "DateField": {
       "type": "object",
@@ -2882,53 +1998,6 @@
       ],
       "x-ms-discriminator-value": "date"
     },
-    "DetectFacesParameters": {
-      "type": "object",
-      "description": "Detect faces parameters.",
-      "properties": {
-        "url": {
-          "type": "string",
-          "description": "Image URL.  Only one of url or data should be specified."
-        },
-        "data": {
-          "type": "string",
-          "format": "byte",
-          "description": "Base64-encoded image data.  Only one of url or data should be specified."
-        },
-        "maxDetectedFaces": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Maximum number of faces to return (up to 100).",
-          "default": 100
-        }
-      }
-    },
-    "DetectFacesResult": {
-      "type": "object",
-      "description": "Detect faces response.",
-      "properties": {
-        "detectedFaces": {
-          "type": "array",
-          "description": "List of detected faces.",
-          "items": {
-            "$ref": "#/definitions/DetectedBoundingBox"
-          }
-        }
-      },
-      "required": [
-        "detectedFaces"
-      ]
-    },
-    "DetectedBoundingBox": {
-      "type": "object",
-      "description": "Detected bounding box of an object.",
-      "properties": {
-        "boundingBox": {
-          "$ref": "#/definitions/BoundingBox",
-          "description": "Bounding box of the detected face."
-        }
-      }
-    },
     "DetectedPerson": {
       "type": "object",
       "description": "Detected person.",
@@ -2946,6 +2015,151 @@
           "$ref": "#/definitions/SourceExpression",
           "description": "Encoded source that identifies the position of the person in the input content."
         }
+      }
+    },
+    "DocumentAnnotation": {
+      "type": "object",
+      "description": "Annotation in a document, such as a strikethrough or a comment.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Annotation identifier."
+        },
+        "kind": {
+          "$ref": "#/definitions/DocumentAnnotationKind",
+          "description": "Annotation kind."
+        },
+        "spans": {
+          "type": "array",
+          "description": "Spans of the content associated with the annotation.",
+          "items": {
+            "$ref": "#/definitions/ContentSpan"
+          }
+        },
+        "source": {
+          "$ref": "#/definitions/SourceExpression",
+          "description": "Position of the annotation."
+        },
+        "comments": {
+          "type": "array",
+          "description": "Comments associated with the annotation.",
+          "items": {
+            "$ref": "#/definitions/DocumentAnnotationComment"
+          }
+        },
+        "author": {
+          "type": "string",
+          "description": "Annotation author."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time when the annotation was created."
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time when the annotation was last modified."
+        },
+        "tags": {
+          "type": "array",
+          "description": "Tags associated with the annotation.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "kind"
+      ]
+    },
+    "DocumentAnnotationComment": {
+      "type": "object",
+      "description": "Comment associated with a document annotation.",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "Comment message in Markdown."
+        },
+        "author": {
+          "type": "string",
+          "description": "Author of the comment."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time when the comment was created."
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time when the comment was last modified."
+        },
+        "tags": {
+          "type": "array",
+          "description": "Tags associated with the comment.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "message"
+      ]
+    },
+    "DocumentAnnotationKind": {
+      "type": "string",
+      "description": "Document annotation kind.",
+      "enum": [
+        "highlight",
+        "strikethrough",
+        "underline",
+        "italic",
+        "bold",
+        "circle",
+        "note"
+      ],
+      "x-ms-enum": {
+        "name": "DocumentAnnotationKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "highlight",
+            "value": "highlight",
+            "description": "Highlight annotation."
+          },
+          {
+            "name": "strikethrough",
+            "value": "strikethrough",
+            "description": "Strikethrough annotation."
+          },
+          {
+            "name": "underline",
+            "value": "underline",
+            "description": "Underline annotation."
+          },
+          {
+            "name": "italic",
+            "value": "italic",
+            "description": "Italic annotation."
+          },
+          {
+            "name": "bold",
+            "value": "bold",
+            "description": "Bold annotation."
+          },
+          {
+            "name": "circle",
+            "value": "circle",
+            "description": "Circle annotation."
+          },
+          {
+            "name": "note",
+            "value": "note",
+            "description": "Note annotation."
+          }
+        ]
       }
     },
     "DocumentBarcode": {
@@ -3123,6 +2337,24 @@
         "content"
       ]
     },
+    "DocumentChartFigure": {
+      "type": "object",
+      "description": "Figure containing a chart, such as a bar chart, line chart, or pie chart.",
+      "properties": {
+        "content": {
+          "description": "Chart content represented using [Chart.js config](https://www.chartjs.org/docs/latest/configuration/)."
+        }
+      },
+      "required": [
+        "content"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DocumentFigure"
+        }
+      ],
+      "x-ms-discriminator-value": "chart"
+    },
     "DocumentContent": {
       "type": "object",
       "description": "Document content.  Ex. text/plain, application/pdf, image/jpeg.",
@@ -3182,6 +2414,27 @@
           "items": {
             "$ref": "#/definitions/DetectedPerson"
           }
+        },
+        "annotations": {
+          "type": "array",
+          "description": "List of annotations in the document.  Only if enableAnnotations and returnDetails are true.",
+          "items": {
+            "$ref": "#/definitions/DocumentAnnotation"
+          }
+        },
+        "hyperlinks": {
+          "type": "array",
+          "description": "List of hyperlinks in the document.  Only if returnDetails are true.",
+          "items": {
+            "$ref": "#/definitions/DocumentHyperlink"
+          }
+        },
+        "segments": {
+          "type": "array",
+          "description": "List of detected content segments.  Only if enableSegment is true.",
+          "items": {
+            "$ref": "#/definitions/DocumentContentSegment"
+          }
         }
       },
       "required": [
@@ -3195,6 +2448,41 @@
       ],
       "x-ms-discriminator-value": "document"
     },
+    "DocumentContentSegment": {
+      "type": "object",
+      "description": "Detected document content segment.",
+      "properties": {
+        "segmentId": {
+          "type": "string",
+          "description": "Segment identifier."
+        },
+        "category": {
+          "type": "string",
+          "description": "Classified content category."
+        },
+        "span": {
+          "$ref": "#/definitions/ContentSpan",
+          "description": "Span of the segment in the markdown content."
+        },
+        "startPageNumber": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Start page number (1-indexed) of the segment."
+        },
+        "endPageNumber": {
+          "type": "integer",
+          "format": "int32",
+          "description": "End page number (1-indexed) of the segment."
+        }
+      },
+      "required": [
+        "segmentId",
+        "category",
+        "span",
+        "startPageNumber",
+        "endPageNumber"
+      ]
+    },
     "DocumentElement": {
       "type": "string",
       "description": "JSON pointer referencing an element of the document, such as paragraph,\ntable, section, etc."
@@ -3205,7 +2493,34 @@
       "properties": {
         "kind": {
           "type": "string",
-          "description": "Discriminator property for DocumentFigure."
+          "description": "Figure kind.",
+          "default": "unknown",
+          "enum": [
+            "unknown",
+            "chart",
+            "mermaid"
+          ],
+          "x-ms-enum": {
+            "name": "DocumentFigureKind",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "unknown",
+                "value": "unknown",
+                "description": "Unknown figure kind."
+              },
+              {
+                "name": "chart",
+                "value": "chart",
+                "description": "Figure containing a chart, such as a bar chart, line chart, or pie chart."
+              },
+              {
+                "name": "mermaid",
+                "value": "mermaid",
+                "description": "Figure containing a diagram, such as a flowchart or network diagram."
+              }
+            ]
+          }
         },
         "id": {
           "type": "string",
@@ -3236,6 +2551,14 @@
           "items": {
             "$ref": "#/definitions/DocumentFootnote"
           }
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the figure."
+        },
+        "role": {
+          "$ref": "#/definitions/SemanticRole",
+          "description": "Semantic role of the figure."
         }
       },
       "discriminator": "kind",
@@ -3329,6 +2652,32 @@
         ]
       }
     },
+    "DocumentHyperlink": {
+      "type": "object",
+      "description": "Hyperlink in a document, such as a link to a web page or an email address.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "Hyperlinked content."
+        },
+        "url": {
+          "type": "string",
+          "description": "URL of the hyperlink."
+        },
+        "span": {
+          "$ref": "#/definitions/ContentSpan",
+          "description": "Span of the hyperlink in the markdown content."
+        },
+        "source": {
+          "$ref": "#/definitions/SourceExpression",
+          "description": "Position of the hyperlink."
+        }
+      },
+      "required": [
+        "content",
+        "url"
+      ]
+    },
     "DocumentLine": {
       "type": "object",
       "description": "Line in a document, consisting of an contiguous sequence of words.",
@@ -3349,6 +2698,25 @@
       "required": [
         "content"
       ]
+    },
+    "DocumentMermaidFigure": {
+      "type": "object",
+      "description": "Figure containing a diagram, such as a flowchart or network diagram.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "Diagram content represented using [Mermaid syntax](https://mermaid.js.org/intro/)."
+        }
+      },
+      "required": [
+        "content"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DocumentFigure"
+        }
+      ],
+      "x-ms-discriminator-value": "mermaid"
     },
     "DocumentPage": {
       "type": "object",
@@ -3499,6 +2867,10 @@
           "items": {
             "$ref": "#/definitions/DocumentFootnote"
           }
+        },
+        "role": {
+          "$ref": "#/definitions/SemanticRole",
+          "description": "Semantic role of the table."
         }
       },
       "required": [
@@ -3632,67 +3004,6 @@
         "content"
       ]
     },
-    "FaceSource": {
-      "type": "object",
-      "description": "Input face source with an optional target bounding box.  If not specified, the largest face will be used.",
-      "properties": {
-        "url": {
-          "type": "string",
-          "format": "uri",
-          "description": "Image URL.  Only one of url or data should be specified."
-        },
-        "data": {
-          "type": "string",
-          "format": "byte",
-          "description": "Base64-encoded image data.  Only one of url or data should be specified."
-        },
-        "imageReferenceId": {
-          "type": "string",
-          "description": "User provided identifier for the source image."
-        },
-        "targetBoundingBox": {
-          "$ref": "#/definitions/BoundingBox",
-          "description": "Bounding box specifying the region of interest."
-        }
-      }
-    },
-    "FindSimilarFacesParameters": {
-      "type": "object",
-      "description": "Find similar faces parameters.",
-      "properties": {
-        "faceSource": {
-          "$ref": "#/definitions/FaceSource",
-          "description": "Source of the face."
-        },
-        "maxSimilarFaces": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Maximum number of similar faces to return (up to 1000).",
-          "default": 1000
-        }
-      }
-    },
-    "FindSimilarFacesResult": {
-      "type": "object",
-      "description": "Find similar faces response.",
-      "properties": {
-        "detectedFace": {
-          "$ref": "#/definitions/DetectedBoundingBox",
-          "description": "Details of the detected face."
-        },
-        "similarFaces": {
-          "type": "array",
-          "description": "List of similar faces.",
-          "items": {
-            "$ref": "#/definitions/SimilarFace"
-          }
-        }
-      },
-      "required": [
-        "detectedFace",
-        "similarFaces"
-      ]
-    },
     "GenerationMethod": {
       "type": "string",
       "description": "Generation method.",
@@ -3723,46 +3034,6 @@
         ]
       }
     },
-    "IdentifyPersonParameters": {
-      "type": "object",
-      "description": "Identify person parameters.",
-      "properties": {
-        "faceSource": {
-          "$ref": "#/definitions/FaceSource",
-          "description": "Source of the face."
-        },
-        "maxPersonCandidates": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Maximum number of person candidates to return (up to 10).",
-          "default": 1
-        }
-      },
-      "required": [
-        "faceSource"
-      ]
-    },
-    "IdentifyPersonResult": {
-      "type": "object",
-      "description": "Identify person response.",
-      "properties": {
-        "detectedFace": {
-          "$ref": "#/definitions/DetectedBoundingBox",
-          "description": "Details of the detected face."
-        },
-        "personCandidates": {
-          "type": "array",
-          "description": "List of person candidates matching the input face.",
-          "items": {
-            "$ref": "#/definitions/PersonCandidate"
-          }
-        }
-      },
-      "required": [
-        "detectedFace",
-        "personCandidates"
-      ]
-    },
     "IntegerField": {
       "type": "object",
       "description": "Integer field extracted from the content.",
@@ -3779,6 +3050,21 @@
         }
       ],
       "x-ms-discriminator-value": "integer"
+    },
+    "JsonField": {
+      "type": "object",
+      "description": "JSON field extracted from the content.",
+      "properties": {
+        "valueJson": {
+          "description": "JSON field value."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ContentField"
+        }
+      ],
+      "x-ms-discriminator-value": "json"
     },
     "KnowledgeSource": {
       "type": "object",
@@ -3798,19 +3084,48 @@
       "type": "string",
       "description": "Knowledge source kind.",
       "enum": [
-        "reference"
+        "labeledData"
       ],
       "x-ms-enum": {
         "name": "KnowledgeSourceKind",
         "modelAsString": true,
         "values": [
           {
-            "name": "reference",
-            "value": "reference",
-            "description": "A reference knowledge source."
+            "name": "labeledData",
+            "value": "labeledData",
+            "description": "A labeled data knowledge source."
           }
         ]
       }
+    },
+    "LabeledDataKnowledgeSource": {
+      "type": "object",
+      "description": "Labeled data knowledge source.",
+      "properties": {
+        "containerUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URL of the blob container containing labeled data."
+        },
+        "prefix": {
+          "type": "string",
+          "description": "An optional prefix to filter blobs within the container."
+        },
+        "fileListPath": {
+          "type": "string",
+          "description": "An optional path to a file listing specific blobs to include."
+        }
+      },
+      "required": [
+        "containerUrl",
+        "fileListPath"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeSource"
+        }
+      ],
+      "x-ms-discriminator-value": "labeledData"
     },
     "LengthUnit": {
       "type": "string",
@@ -3847,6 +3162,11 @@
         "mimeType": {
           "type": "string",
           "description": "Detected MIME type of the content.  Ex. application/pdf, image/jpeg, etc."
+        },
+        "analyzerId": {
+          "type": "string",
+          "description": "The analyzer that generated this content.",
+          "pattern": "^[a-zA-Z0-9._-]{1,64}$"
         },
         "category": {
           "type": "string",
@@ -3955,283 +3275,9 @@
         "value"
       ]
     },
-    "PagedPersonDirectory": {
-      "type": "object",
-      "description": "Paged collection of PersonDirectory items",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The PersonDirectory items on this page",
-          "items": {
-            "$ref": "#/definitions/PersonDirectory"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "PagedPersonDirectoryFace": {
-      "type": "object",
-      "description": "Paged collection of PersonDirectoryFace items",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The PersonDirectoryFace items on this page",
-          "items": {
-            "$ref": "#/definitions/PersonDirectoryFace"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "PagedPersonDirectoryPerson": {
-      "type": "object",
-      "description": "Paged collection of PersonDirectoryPerson items",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The PersonDirectoryPerson items on this page",
-          "items": {
-            "$ref": "#/definitions/PersonDirectoryPerson"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "PersonCandidate": {
-      "type": "object",
-      "description": "Identified person candidate.",
-      "properties": {
-        "personId": {
-          "type": "string",
-          "description": "The unique identifier of the person.",
-          "pattern": "^[a-zA-Z0-9._-]{1,64}$"
-        },
-        "tags": {
-          "type": "object",
-          "description": "Tags associated with the person.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "confidence": {
-          "type": "number",
-          "format": "float",
-          "description": "Confidence score of the person matching the input face."
-        }
-      },
-      "required": [
-        "personId",
-        "confidence"
-      ]
-    },
-    "PersonDirectory": {
-      "type": "object",
-      "description": "Directory of people and their faces.",
-      "properties": {
-        "personDirectoryId": {
-          "type": "string",
-          "description": "The unique identifier of the person directory.",
-          "pattern": "^[a-zA-Z0-9._-]{1,64}$",
-          "readOnly": true
-        },
-        "description": {
-          "type": "string",
-          "description": "A description of the person directory."
-        },
-        "tags": {
-          "type": "object",
-          "description": "Tags associated with the person directory.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The date and time when the person directory was created.",
-          "readOnly": true
-        },
-        "lastModifiedAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The date and time when the person directory was last modified.",
-          "readOnly": true
-        },
-        "personCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of people in the person directory.",
-          "readOnly": true
-        },
-        "faceCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of faces in the person directory.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "personDirectoryId",
-        "createdAt",
-        "lastModifiedAt",
-        "personCount",
-        "faceCount"
-      ]
-    },
-    "PersonDirectoryFace": {
-      "type": "object",
-      "description": "Face in a person directory.",
-      "properties": {
-        "faceId": {
-          "type": "string",
-          "description": "The unique identifier of the face.",
-          "pattern": "^[a-zA-Z0-9._-]{1,64}$",
-          "readOnly": true
-        },
-        "personId": {
-          "type": "string",
-          "description": "Person associated with the face, if any."
-        },
-        "imageReferenceId": {
-          "type": "string",
-          "description": "User provided identifier for the source image.",
-          "readOnly": true
-        },
-        "boundingBox": {
-          "$ref": "#/definitions/BoundingBox",
-          "description": "Bounding box of the face in the source image.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "faceId"
-      ]
-    },
-    "PersonDirectoryFaceUpdate": {
-      "type": "object",
-      "description": "Face in a person directory.",
-      "properties": {
-        "personId": {
-          "type": "string",
-          "description": "Person associated with the face, if any."
-        }
-      }
-    },
-    "PersonDirectoryPerson": {
-      "type": "object",
-      "description": "Person in a person directory.",
-      "properties": {
-        "personId": {
-          "type": "string",
-          "description": "The unique identifier of the person.",
-          "pattern": "^[a-zA-Z0-9._-]{1,64}$",
-          "readOnly": true
-        },
-        "tags": {
-          "type": "object",
-          "description": "Tags associated with the person.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "faceIds": {
-          "type": "array",
-          "description": "List of faces associated with the person.",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "personId"
-      ]
-    },
-    "PersonDirectoryPersonUpdate": {
-      "type": "object",
-      "description": "Person in a person directory.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Tags associated with the person.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "faceIds": {
-          "type": "array",
-          "description": "List of faces associated with the person.",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "PersonDirectoryUpdate": {
-      "type": "object",
-      "description": "Directory of people and their faces.",
-      "properties": {
-        "description": {
-          "type": "string",
-          "description": "A description of the person directory."
-        },
-        "tags": {
-          "type": "object",
-          "description": "Tags associated with the person directory.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "ReferenceKnowledgeSource": {
-      "type": "object",
-      "description": "File knowledge source.",
-      "properties": {
-        "containerUrl": {
-          "type": "string",
-          "format": "uri",
-          "description": "The URL of the blob container."
-        },
-        "prefix": {
-          "type": "string",
-          "description": "An optional prefix to filter blobs within the container."
-        },
-        "fileListPath": {
-          "type": "string",
-          "description": "Path to a file listing specific blobs to include."
-        }
-      },
-      "required": [
-        "containerUrl",
-        "fileListPath"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/KnowledgeSource"
-        }
-      ],
-      "x-ms-discriminator-value": "reference"
+    "RangeExpression": {
+      "type": "string",
+      "description": "  Range expression for specifying parts of the input to analyze (ex. `1-3,5,9-`).\n  Document content uses 1-based page numbers, while audio visual content uses integer milliseconds."
     },
     "SemanticRole": {
       "type": "string",
@@ -4287,41 +3333,6 @@
         ]
       }
     },
-    "SimilarFace": {
-      "type": "object",
-      "description": "Similar face found in the person directory.",
-      "properties": {
-        "faceId": {
-          "type": "string",
-          "description": "The unique identifier of the face.",
-          "pattern": "^[a-zA-Z0-9._-]{1,64}$",
-          "readOnly": true
-        },
-        "personId": {
-          "type": "string",
-          "description": "Person associated with the face, if any."
-        },
-        "imageReferenceId": {
-          "type": "string",
-          "description": "User provided identifier for the source image.",
-          "readOnly": true
-        },
-        "boundingBox": {
-          "$ref": "#/definitions/BoundingBox",
-          "description": "Bounding box of the face in the source image.",
-          "readOnly": true
-        },
-        "confidence": {
-          "type": "number",
-          "format": "float",
-          "description": "Confidence that this face matches the input face."
-        }
-      },
-      "required": [
-        "faceId",
-        "confidence"
-      ]
-    },
     "SourceExpression": {
       "type": "string",
       "description": "Encoded string expression that describes positions in the content."
@@ -4341,6 +3352,30 @@
         }
       ],
       "x-ms-discriminator-value": "string"
+    },
+    "SupportedModels": {
+      "type": "object",
+      "description": "Chat completion and embedding models supported by the analyzer.",
+      "properties": {
+        "completion": {
+          "type": "object",
+          "description": "Chat completion models supported by the analyzer.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "embedding": {
+          "type": "object",
+          "description": "Embedding models supported by the analyzer.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "completion",
+        "embedding"
+      ]
     },
     "TimeField": {
       "type": "object",
@@ -4440,53 +3475,68 @@
         "text"
       ]
     },
-    "VerifyPersonParameters": {
+    "UsageDetails": {
       "type": "object",
-      "description": "Verify person parameters.",
+      "description": "Usage details.",
       "properties": {
-        "faceSource": {
-          "$ref": "#/definitions/FaceSource",
-          "description": "Source of the face."
-        }
-      },
-      "required": [
-        "faceSource"
-      ]
-    },
-    "VerifyPersonResult": {
-      "type": "object",
-      "description": "Verify person response.",
-      "properties": {
-        "detectedFace": {
-          "$ref": "#/definitions/DetectedBoundingBox",
-          "description": "Details of the detected face."
+        "documentPagesMinimal": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of document pages processed at the minimal level.\nFor documents without explicit pages (ex. txt, html), every 3000 UTF-16 characters is counted as one page."
         },
-        "confidence": {
+        "documentPagesBasic": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of document pages processed at the basic level.\nFor documents without explicit pages (ex. txt, html), every 3000 UTF-16 characters is counted as one page."
+        },
+        "documentPagesStandard": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of document pages processed at the standard level.\nFor documents without explicit pages (ex. txt, html), every 3000 UTF-16 characters is counted as one page."
+        },
+        "audioHours": {
           "type": "number",
           "format": "float",
-          "description": "Confidence score of the person verification."
+          "description": "The hours of audio processed."
+        },
+        "videoHours": {
+          "type": "number",
+          "format": "float",
+          "description": "The hours of video processed."
+        },
+        "contextualizationTokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of contextualization tokens consumed for preparing context, generating confidence scores, source grounding, and output formatting."
+        },
+        "tokens": {
+          "type": "object",
+          "description": "The number of LLM and embedding tokens consumed, grouped by model (ex. GTP 4.1) and type (ex. input, cached input, output).",
+          "additionalProperties": {
+            "format": "int32",
+            "type": "integer"
+          }
         }
-      },
-      "required": [
-        "detectedFace",
-        "confidence"
-      ]
+      }
     }
   },
   "parameters": {
-    "AddFaceParameters.personDirectoryId": {
-      "name": "personDirectoryId",
-      "in": "path",
-      "description": "The unique identifier of the person directory.",
+    "AnalyzeBinaryRequest.input": {
+      "name": "input",
+      "in": "body",
+      "description": "The binary content of the document to analyze.",
       "required": true,
-      "type": "string",
+      "schema": {
+        "type": "string",
+        "format": "binary"
+      },
       "x-ms-parameter-location": "method"
     },
-    "AddPersonParameters.personDirectoryId": {
-      "name": "personDirectoryId",
-      "in": "path",
-      "description": "The unique identifier of the person directory.",
-      "required": true,
+    "AnalyzeBinaryRequest.range": {
+      "name": "range",
+      "in": "query",
+      "description": "Range of the input to analyze (ex. `1-3,5,9-`).  Document content uses 1-based page numbers, while audio visual content uses integer milliseconds.",
+      "required": false,
       "type": "string",
       "x-ms-parameter-location": "method"
     },

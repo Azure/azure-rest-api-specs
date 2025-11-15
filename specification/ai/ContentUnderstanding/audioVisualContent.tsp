@@ -43,12 +43,13 @@ model AudioVisualContent extends MediaContent {
   faces?: ImageFace[];
 
   @added(Versions.v2025_05_01_preview)
+  @removed(Versions.v2025_11_01)
   @doc("List of detected persons in the video.  Only if enableFace and returnDetails are true.")
   persons?: DetectedPerson[];
 
-  @added(Versions.v2025_05_01_preview)
-  @doc("List of audio visual segments.  Only if enableSegmentation and returnDetails are true.")
-  segments?: AudioVisualSegment[];
+  @added(Versions.v2025_11_01)
+  @doc("List of detected content segments.  Only if enableSegment is true.")
+  segments?: AudioVisualContentSegment[];
 }
 
 @doc("Transcript phrase.")
@@ -96,6 +97,7 @@ model TranscriptWord {
 }
 
 @added(Versions.v2025_05_01_preview)
+@removed(Versions.v2025_11_01)
 @doc("Audio visual segment, such as a scene, chapter, etc.")
 model AudioVisualSegment {
   @doc("Segment ID.")
@@ -125,4 +127,23 @@ model DetectedPerson {
 
   @doc("Encoded source that identifies the position of the person in the input content.")
   source?: SourceExpression;
+}
+
+@added(Versions.v2025_11_01)
+@doc("Detected audio/visual content segment.")
+model AudioVisualContentSegment {
+  @doc("Segment identifier.")
+  segmentId: string;
+
+  @doc("Classified content category.")
+  category: string;
+
+  @doc("Span of the segment in the markdown content.")
+  span: ContentSpan;
+
+  @doc("Start time of the segment in milliseconds.")
+  startTimeMs: int64;
+
+  @doc("End time of the segment in milliseconds.")
+  endTimeMs: int64;
 }

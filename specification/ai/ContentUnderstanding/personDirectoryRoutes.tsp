@@ -13,6 +13,7 @@ using TypeSpec.Versioning;
 namespace ContentUnderstanding;
 
 @added(Versions.v2025_05_01_preview)
+@removed(Versions.v2025_11_01)
 interface PersonDirectories {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   @doc("Create a new person directory.")
@@ -137,6 +138,7 @@ interface PersonDirectories {
 }
 
 @added(Versions.v2025_05_01_preview)
+@removed(Versions.v2025_11_01)
 interface Faces {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   @doc("Detect faces in an image.")

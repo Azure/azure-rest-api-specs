@@ -6,6 +6,7 @@ import "./models.tsp";
 
 using Azure.Core;
 using Azure.ClientGenerator.Core;
+using Azure.Core.Traits;
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
@@ -19,23 +20,49 @@ model OperationIdHeader {
   operationId?: string;
 }
 
+alias AllowReplaceTrait = QueryParametersTrait<
+  {
+    @added(Versions.v2025_11_01)
+    @doc("Allow the operation to replace an existing resource.")
+    @query
+    allowReplace?: boolean = false;
+  },
+  TraitContext.Create | TraitContext.Action
+>;
+
 alias ServiceTraits = Traits.NoRepeatableRequests &
   Traits.NoConditionalRequests &
   Traits.SupportsClientRequestId;
-alias Operations = ResourceOperations<ServiceTraits>;
+alias Operations<Trait> = ResourceOperations<ServiceTraits & Trait>;
 
 interface ContentAnalyzers {
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is a custom operation status endpoint."
   @doc("Get the status of an analyzer creation operation.")
-  getOperationStatus is Operations.GetResourceOperationStatus<
-    ContentAnalyzer,
-    ContentAnalyzer
+  @route("/analyzers/{analyzerId}/operations/{operationId}")
+  getOperationStatus is Foundations.Operation<
+    {
+      @doc("The unique identifier of the analyzer.")
+      @path
+      @pattern("^[a-zA-Z0-9._-]{1,64}$")
+      analyzerId: string;
+
+      @doc("The unique ID of the operation.")
+      @path
+      operationId: string;
+    },
+    ContentAnalyzerOperationStatus,
+    ServiceTraits
   >;
 
   @doc("Create a new analyzer asynchronously.")
   @pollingOperation(ContentAnalyzers.getOperationStatus)
-  createOrReplace is Operations.LongRunningResourceCreateOrReplace<ContentAnalyzer>;
+  createOrReplace is Operations.LongRunningResourceCreateOrReplace<
+    ContentAnalyzer,
+    AllowReplaceTrait
+  >;
 
   @doc("Update analyzer properties.")
+  @convenientAPI(false)
   update is Operations.ResourceUpdate<ContentAnalyzer>;
 
   @doc("Get analyzer properties.")
@@ -48,8 +75,6 @@ interface ContentAnalyzers {
   list is Operations.ResourceList<ContentAnalyzer>;
 
   @doc("Extract content and fields from input.")
-  @sharedRoute
-  @action("analyze")
   @pollingOperation(ContentAnalyzers.getResult)
   analyze is Operations.LongRunningResourceAction<
     ContentAnalyzer,
@@ -57,9 +82,8 @@ interface ContentAnalyzers {
     AnalyzeResult
   >;
 
+  @added(Versions.v2025_11_01)
   @doc("Extract content and fields from input.")
-  @sharedRoute
-  @action("analyze")
   @pollingOperation(ContentAnalyzers.getResult)
   analyzeBinary is Operations.LongRunningResourceAction<
     ContentAnalyzer,
@@ -75,9 +99,16 @@ interface ContentAnalyzers {
   // and retrieve results, eliminating the need for manual operation ID management.
   @access(Access.internal)
   @route("/analyzerResults/{operationId}")
-  getResult is Foundations.GetOperationStatus<
-    GetResultParameters,
-    AnalyzeResult
+  getResult is Foundations.Operation<
+    {
+      @doc("The unique ID of the operation.")
+      @path
+      operationId: string;
+
+      ...GetResultParameters;
+    },
+    ContentAnalyzerAnalyzeOperationStatus,
+    ServiceTraits
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
@@ -138,18 +169,75 @@ interface ContentAnalyzers {
     ServiceTraits
   >;
 
-  // #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  // @added(Versions.v2025_05_01_preview)
-  // @doc("Mark the result of an analysis operation for deletion.")
-  // @route("/analyzerResults/{operationId}")
-  // @delete
-  // deleteResult is Foundations.Operation<
-  //   {
-  //     @doc("Operation identifier.")
-  //     @path
-  //     operationId: string;
-  //   },
-  //   TypeSpec.Http.NoContentResponse,
-  //   ServiceTraits
-  // >;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  @added(Versions.v2025_11_01)
+  @doc("Mark the result of an analysis operation for deletion.")
+  @route("/analyzerResults/{operationId}")
+  @delete
+  deleteResult is Foundations.Operation<
+    {
+      @doc("Operation identifier.")
+      @path
+      operationId: string;
+    },
+    TypeSpec.Http.NoContentResponse,
+    ServiceTraits
+  >;
+
+  @added(Versions.v2025_11_01)
+  @doc("Create a copy of the source analyzer to the current location.")
+  @pollingOperation(ContentAnalyzers.getOperationStatus)
+  copy is Operations.LongRunningResourceAction<
+    ContentAnalyzer,
+    {
+      @doc("Azure resource ID of the source analyzer location.  Defaults to the current resource.")
+      sourceAzureResourceId?: string;
+
+      @doc("Azure region of the source analyzer location.  Defaults to current region.")
+      sourceRegion?: string;
+
+      @doc("Source analyzer ID.")
+      sourceAnalyzerId: string;
+    },
+    ContentAnalyzer,
+    Foundations.Error,
+    AllowReplaceTrait
+  >;
+
+  @added(Versions.v2025_11_01)
+  @doc("Get authorization for copying this analyzer to another location.")
+  grantCopyAuthorization is Operations.ResourceAction<
+    ContentAnalyzer,
+    {
+      @doc("Azure resource ID of the target analyzer location.")
+      targetAzureResourceId: string;
+
+      @doc("Azure region of the target analyzer location.  Defaults to current region.")
+      targetRegion?: string;
+    },
+    CopyAuthorization
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  @added(Versions.v2025_11_01)
+  @doc("Return default settings for this Content Understanding resource.")
+  @route("/defaults")
+  @get
+  getDefaults is Foundations.Operation<
+    {},
+    ContentUnderstandingDefaults,
+    ServiceTraits
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  @added(Versions.v2025_11_01)
+  @doc("Return default settings for this Content Understanding resource.")
+  @route("/defaults")
+  @patch
+  @convenientAPI(false)
+  updateDefaults is Foundations.Operation<
+    MergePatchUpdate<ContentUnderstandingDefaults>,
+    ContentUnderstandingDefaults,
+    ServiceTraits
+  >;
 }
