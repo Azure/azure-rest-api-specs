@@ -3,7 +3,7 @@ import * as z from "zod";
 /*
  * Represents supported SDK language identifiers.
  */
-const SdkNameSchema = z.enum([
+export const SdkNameSchema = z.enum([
   "azure-sdk-for-go",
   "azure-sdk-for-java",
   "azure-sdk-for-js",
@@ -17,7 +17,7 @@ const SdkNameSchema = z.enum([
 /*
  * Data for the API view request.
  */
-const APIViewRequestDataSchema = z.object({ packageName: z.string(), filePath: z.string() });
+export const APIViewRequestDataSchema = z.object({ packageName: z.string(), filePath: z.string() });
 /**
  * @typedef {import("zod").infer<typeof APIViewRequestDataSchema>} APIViewRequestData
  */
