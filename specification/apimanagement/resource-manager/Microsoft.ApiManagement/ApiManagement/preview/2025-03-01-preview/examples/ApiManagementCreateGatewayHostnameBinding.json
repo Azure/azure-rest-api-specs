@@ -1,0 +1,78 @@
+{
+  "parameters": {
+    "hostnameBindingName": "hb-1",
+    "gatewayName": "apimGateway1",
+    "resourceGroupName": "rg1",
+    "api-version": "2025-03-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "parameters": {
+      "properties": {
+        "hostname": "primary.cotoso.com",
+        "keyVault": {
+          "secretId": "https://myvault.keyvault.azure.net/secrets/contosoprimarycert",
+          "identityClientId": "00000000-0000-0000-0000-000000000000"
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/gateways/apimGateway1/hostnameBindings/hb-1/operationresults/ZWFzdHVzOmFuZHktdGVzdGluZy0yMDIyLTA0LTAxLXByZXZpZXctNF9BY3RfODQ2ZWE4Ng==?api-version=2025-03-01-preview&asyncResponse",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/gateways/apimGateway1/hostnameBindings/hb-1/operationresults/ZWFzdHVzOmFuZHktdGVzdGluZy0yMDIyLTA0LTAxLXByZXZpZXctNF9BY3RfODQ2ZWE4Ng==?api-version=2025-03-01-preview&asyncResponse"
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/gateways/standard-gw-1/hostnameBindings/hb-1",
+        "name": "hb-1",
+        "etag": "AAAAAAAWN/4=",
+        "properties": {
+          "hostname": "primary.cotoso.com",
+          "provisioningState": "InProgress",
+          "keyVault": {
+            "secretId": "https://myvault.keyvault.azure.net/secrets/contosoprimarycert",
+            "identityClientId": "00000000-0000-0000-0000-000000000000",
+            "lastStatus": {
+              "code": "Success",
+              "timeStampUtc": "2024-01-02T12:00:00Z"
+            }
+          },
+          "certificate": {
+            "subject": "CN=primary.cotoso.com",
+            "thumbprint": "3F2504E0-4F89-11D3-9A0C-0305E82C3301",
+            "expiry": "2025-12-31T23:59:59Z"
+          }
+        },
+        "type": "Microsoft.ApiManagement/gateways/hostnameBindings"
+      }
+    },
+    "200": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/gateways/apimGateway1/operationresults/ZWFzdHVzOmFuZHktdGVzdGluZy0yMDIyLTA0LTAxLXByZXZpZXctNF9BY3RfODQ2ZWE4Ng==?api-version=2025-03-01-preview&asyncResponse",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/gateways/apimGateway1/operationresults/ZWFzdHVzOmFuZHktdGVzdGluZy0yMDIyLTA0LTAxLXByZXZpZXctNF9BY3RfODQ2ZWE4Ng==?api-version=2025-03-01-preview&asyncResponse"
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/gateways/standard-gw-1/hostnameBindings/hb-1",
+        "name": "hb-1",
+        "etag": "AAAAAAAmREI",
+        "properties": {
+          "hostname": "primary.cotoso.com",
+          "provisioningState": "InProgress",
+          "keyVault": {
+            "secretId": "https://myvault.keyvault.azure.net/secrets/contosoprimarycert",
+            "identityClientId": "00000000-0000-0000-0000-000000000000",
+            "lastStatus": {
+              "code": "Success",
+              "timeStampUtc": "2024-01-02T12:00:00Z"
+            }
+          },
+          "certificate": {
+            "subject": "CN=primary.cotoso.com",
+            "thumbprint": "3F2504E0-4F89-11D3-9A0C-0305E82C3301",
+            "expiry": "2025-12-31T23:59:59Z"
+          }
+        },
+        "type": "Microsoft.ApiManagement/gateways/hostnameBindings"
+      }
+    }
+  }
+}
