@@ -1,6 +1,7 @@
 import {
   APIViewRequestData,
   SdkName,
+  SdkNameSchema,
   SpecGenSdkArtifactInfo,
 } from "@azure-tools/specs-shared/sdk-types";
 import fs from "node:fs";
@@ -91,7 +92,7 @@ export function parseArguments(): SpecGenSdkCmdInput {
     localSpecRepoPath,
     localSdkRepoPath,
     sdkRepoName,
-    sdkLanguage: sdkRepoName.replace("-pr", ""),
+    sdkLanguage: SdkNameSchema.parse(sdkRepoName.replace("-pr", "")),
     runMode,
     tspConfigPath: getArgumentValue(args, "--tsp-config-relative-path", ""),
     readmePath: getArgumentValue(args, "--readme-relative-path", ""),
