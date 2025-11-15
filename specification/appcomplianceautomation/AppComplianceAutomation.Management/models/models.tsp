@@ -6,12 +6,9 @@ import "@azure-tools/typespec-client-generator-core";
 import "@azure-tools/typespec-azure-core";
 import "@typespec/openapi";
 
-using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
-using OpenAPI;
-using Azure.Core;
 
 namespace Microsoft.AppComplianceAutomation;
 
@@ -1046,6 +1043,7 @@ model WebhookProperties {
   /**
    * webhook secret token. If not set, this field value is null; otherwise, please set a string value.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @pattern("^.{0,2048}$")
   webhookKey?: string;
 

@@ -1,0 +1,63 @@
+- tool: TypeSpecRequirement
+  path: ./data-plane/LanguageAnalyzeConversations/preview/2023-11-15-preview/**/*.json
+  reason: Old preview version not migrated
+- tool: TypeSpecRequirement
+  path: ./data-plane/LanguageAnalyzeConversations/preview/2024-05-15-preview/**/*.json
+  reason: Old preview version not migrated
+- tool: TypeSpecRequirement
+  path: ./data-plane/LanguageAnalyzeConversationsAuthoring/stable/2022-05-01/**/*.json
+  reason: Old GA version not migrated
+- tool: TypeSpecRequirement
+  path: ./data-plane/LanguageAnalyzeConversationsAuthoring/preview/2023-11-15-preview/**/*.json
+  reason: Old preview version not migrated
+- tool: TypeSpecRequirement
+  path: ./data-plane/LanguageAnalyzeDocuments/preview/2023-11-15-preview/**/*.json
+  reason: Old GA version not migrated
+- tool: TypeSpecRequirement
+  path: ./data-plane/LanguageAnalyzeText/preview/2023-11-15-preview/**/*.json
+  reason: Old preview version not migrated
+- tool: TypeSpecRequirement
+  path: ./data-plane/LanguageAnalyzeTextAuthoring/stable/2022-05-01/**/*.json
+  reason: Old GA version not migrated
+- tool: TypeSpecRequirement
+  path: ./data-plane/LanguageAnalyzeTextAuthoring/preview/2023-11-15-preview/**/*.json
+  reason: Old preview version not migrated
+- tool: TypeSpecRequirement
+  path: ./data-plane/LanguageQuestionAnswering/stable/2021-10-01/**/*.json
+  reason: Old GA version not migrated
+- tool: TypeSpecRequirement
+  path: ./data-plane/LanguageQuestionAnswering/preview/2023-11-15-preview/**/*.json
+  reason: Old preview version not migrated
+- tool: TypeSpecRequirement
+  path: ./data-plane/LanguageQuestionAnsweringAuthoring/stable/2021-10-01/**/*.json
+  reason: Old GA version not migrated
+- tool: TypeSpecRequirement
+  path: ./data-plane/LanguageQuestionAnsweringAuthoring/preview/2023-11-15-preview/**/*.json
+  reason: Old preview version not migrated
+- tool: TypeSpecValidation
+  paths:
+    - /data-plane/LanguageAnalyzeConversations/tspconfig.yaml
+    - /data-plane/LanguageAnalyzeConversationsAuthoring/tspconfig.yaml
+    - /data-plane/LanguageAnalyzeDocuments/tspconfig.yaml
+    - /data-plane/LanguageAnalyzeText/tspconfig.yaml
+    - /data-plane/LanguageAnalyzeTextAuthoring/tspconfig.yaml
+    - /data-plane/LanguageQuestionAnswering/tspconfig.yaml
+    - /data-plane/LanguageQuestionAnsweringAuthoring/tspconfig.yaml
+  rules:
+    - SdkTspConfigValidation
+  sub-rules:
+    # Suppress all Java, JS and Go SDK generator validations as this is currently only available in C# and Python
+    - options.@azure-tools/typespec-java.*
+    - options.@azure-tools/typespec-ts.*
+    - options.@azure-tools/typespec-go.*
+  reason: 'No existing SDKs in Java, JS, Go. Will be removed once these SDKs are introduced'
+- tool: TypeSpecValidation
+  paths:
+    - /data-plane/LanguageAnalyzeConversationsAuthoring/tspconfig.yaml
+    - /data-plane/LanguageQuestionAnsweringAuthoring/tspconfig.yaml
+  rules:
+    - SdkTspConfigValidation
+  sub-rules:
+    # Suppress all Java, JS and Go SDK generator validations as this is currently only available in C# and Python
+    - options.@azure-tools/typespec-python.emitter-output-dir
+  reason: 'Existing packages are more than 4 words long. This rule cannot be applied'

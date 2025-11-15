@@ -1,0 +1,34 @@
+{
+  "title": "CodeExecution_Execute_ShellExecCommandAndArgs",
+  "operationId": "CodeExecution_Execute",
+  "parameters": {
+    "api-version": "2025-10-02-preview",
+    "identifier": "testSessionIdentifier",
+    "codeExecutionRequest": {
+      "execCommandAndArgs": [
+        "ls",
+        "-a"
+      ],
+      "outputStreamsMaxLength": 4096,
+      "timeoutInSeconds": 600
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "operation-id": "testExecutionId",
+        "Operation-Location": "operation-location-uri"
+      },
+      "body": {
+        "id": "testExecutionId",
+        "identifier": "testSessionIdentifier",
+        "status": "0",
+        "result": {
+          "stdout": ".\n..\npreviouslyuploadedfile.txt\n",
+          "stderr": "",
+          "executionTimeInMilliseconds": 2
+        }
+      }
+    }
+  }
+}

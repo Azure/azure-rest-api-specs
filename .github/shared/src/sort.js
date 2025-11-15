@@ -1,5 +1,3 @@
-// @ts-check
-
 /**
  * Returns a comparator that compares values by a date string in ascending order.
  * Throws if the value returned by getDate() is null, undefined, or cannot be

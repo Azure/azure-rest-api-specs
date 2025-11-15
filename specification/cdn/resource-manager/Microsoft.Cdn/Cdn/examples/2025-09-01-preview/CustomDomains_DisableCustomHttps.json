@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "api-version": "2025-09-01-preview",
+    "customDomainName": "www-someDomain-net",
+    "endpointName": "endpoint1",
+    "profileName": "profile1",
+    "resourceGroupName": "RG",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "www-someDomain-net",
+        "type": "Microsoft.Cdn/profiles/endpoints/customdomains",
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/customdomains/www-someDomain-net",
+        "properties": {
+          "customHttpsProvisioningState": "Disabled",
+          "customHttpsProvisioningSubstate": "CertificateDeleted",
+          "hostName": "www.someDomain.net",
+          "provisioningState": "Succeeded",
+          "resourceState": "Active",
+          "validationData": null
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "name": "www-someDomain-net",
+        "type": "Microsoft.Cdn/profiles/endpoints/customdomains",
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/customdomains/www-someDomain-net",
+        "properties": {
+          "customHttpsProvisioningState": "Enabling",
+          "customHttpsProvisioningSubstate": "PendingDomainControlValidationREquestApproval",
+          "hostName": "www.someDomain.net",
+          "provisioningState": "Succeeded",
+          "resourceState": "Active",
+          "validationData": null
+        }
+      },
+      "headers": {
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/subid/resourcegroups/resourceGroupName/providers/Microsoft.Cdn/operationresults/operationId?api-version=2025-09-01-preview"
+      }
+    }
+  },
+  "operationId": "CustomDomains_DisableCustomHttps",
+  "title": "CustomDomains_DisableCustomHttps"
+}

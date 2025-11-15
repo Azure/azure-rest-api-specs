@@ -1,7 +1,7 @@
 import "./WebModels/MachineAssessmentsV2.tsp";
 import "./WebModels/AssessedMachineV2.tsp";
 import "./WebModels/MachineAssessmentV2Summary.tsp";
-import "../Common/DataModels/DownloadUrl.tsp";
+import "./Normalized Contract/DataModels/DownloadUrl.tsp";
 import "./WebModels/MachineGraphAssessmentOptions.tsp";
 
 using TypeSpec.Http;

@@ -4,8 +4,7 @@ import "./java-client.tsp";
 
 using Azure.ClientGenerator.Core;
 
-@TypeSpec.Versioning.useDependency(Azure.Core.Versions.v1_0_Preview_2)
-@TypeSpec.Versioning.useDependency(Azure.Batch.Versions.v2024_07_01)
+@TypeSpec.Versioning.useDependency(Azure.Batch.Versions.v2025_06_01)
 namespace Client;
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
@@ -47,12 +46,6 @@ interface BatchClient {
   listJobsFromSchedule is Azure.Batch.Jobs.listJobsFromSchedule;
   listJobPreparationAndReleaseTaskStatus is Azure.Batch.Jobs.listJobPreparationAndReleaseTaskStatus;
   getJobTaskCounts is Azure.Batch.Jobs.getJobTaskCounts;
-
-  createCertificate is Azure.Batch.Certificates.createCertificate;
-  listCertificates is Azure.Batch.Certificates.listCertificates;
-  cancelCertificateDeletion is Azure.Batch.Certificates.cancelCertificateDeletion;
-  deleteCertificate is Azure.Batch.Certificates.deleteCertificate;
-  getCertificate is Azure.Batch.Certificates.getCertificate;
 
   jobScheduleExists is Azure.Batch.JobSchedules.jobScheduleExists;
   deleteJobSchedule is Azure.Batch.JobSchedules.deleteJobSchedule;
@@ -128,11 +121,7 @@ interface BatchClient {
 );
 @@access(Azure.Batch.Pools.deletePool, Access.internal, "csharp");
 @@clientName(BatchClient.deletePool, "deletePoolInternal", "csharp");
-@@access(Azure.Batch.Certificates.deleteCertificate, Access.internal, "csharp");
-@@clientName(BatchClient.deleteCertificate,
-  "deleteCertificateInternal",
-  "csharp"
-);
+
 @@access(Azure.Batch.Nodes.deallocateNode, Access.internal, "csharp");
 @@clientName(BatchClient.deallocateNode, "deallocateNodeInternal", "csharp");
 @@access(Azure.Batch.Nodes.startNode, Access.internal, "csharp");
@@ -169,6 +158,51 @@ interface BatchClient {
   "getNodeFilePropertiesInternal",
   "python"
 );
+// Python LRO private methods
+@@access(Azure.Batch.Pools.removeNodes, Access.internal, "python");
+@@clientName(BatchClient.removeNodes, "removeNodesInternal", "python");
+@@access(Azure.Batch.Pools.resizePool, Access.internal, "python");
+@@clientName(BatchClient.resizePool, "resizePoolInternal", "python");
+@@access(Azure.Batch.Pools.stopPoolResize, Access.internal, "python");
+@@clientName(BatchClient.stopPoolResize, "stopPoolResizeInternal", "python");
+@@access(Azure.Batch.Jobs.deleteJob, Access.internal, "python");
+@@clientName(BatchClient.deleteJob, "deleteJobInternal", "python");
+@@access(Azure.Batch.Jobs.terminateJob, Access.internal, "python");
+@@clientName(BatchClient.terminateJob, "terminateJobInternal", "python");
+@@access(Azure.Batch.JobSchedules.deleteJobSchedule, Access.internal, "python");
+@@clientName(BatchClient.deleteJobSchedule,
+  "deleteJobScheduleInternal",
+  "python"
+);
+@@access(Azure.Batch.JobSchedules.terminateJobSchedule,
+  Access.internal,
+  "python"
+);
+@@clientName(BatchClient.terminateJobSchedule,
+  "terminateJobScheduleInternal",
+  "python"
+);
+@@access(Azure.Batch.Pools.deletePool, Access.internal, "python");
+@@clientName(BatchClient.deletePool, "deletePoolInternal", "python");
+@@access(Azure.Batch.Nodes.deallocateNode, Access.internal, "python");
+@@clientName(BatchClient.deallocateNode, "deallocateNodeInternal", "python");
+@@access(Azure.Batch.Nodes.startNode, Access.internal, "python");
+@@clientName(BatchClient.startNode, "startNodeInternal", "python");
+@@access(Azure.Batch.Nodes.rebootNode, Access.internal, "python");
+@@clientName(BatchClient.rebootNode, "rebootNodeInternal", "python");
+@@access(Azure.Batch.Nodes.reimageNode, Access.internal, "python");
+@@clientName(BatchClient.reimageNode, "reimageNodeInternal", "python");
+@@access(Azure.Batch.Jobs.disableJob, Access.internal, "python");
+@@clientName(BatchClient.disableJob, "disableJobInternal", "python");
+@@access(Azure.Batch.Jobs.enableJob, Access.internal, "python");
+@@clientName(BatchClient.enableJob, "enableJobInternal", "python");
+
+// Set Python models to public
+@@access(Azure.Batch.BatchPoolResizeOptions, Access.public, "python");
+@@access(Azure.Batch.BatchNodeRemoveOptions, Access.public, "python");
+@@access(Azure.Batch.BatchJobDisableOptions, Access.public, "python");
+@@access(Azure.Batch.BatchNodeDeallocationOption, Access.public, "python");
+@@access(Azure.Batch.DisableBatchJobOption, Access.public, "python");
 
 /* GO OVERRIDES */
 // don't export API for this operation because it retired before the first Go SDK release
@@ -179,10 +213,6 @@ interface BatchClient {
   "go"
 );
 @@clientName(Azure.Batch.BatchApplicationListResult.`odata.nextLink`,
-  "NextLink",
-  "go"
-);
-@@clientName(Azure.Batch.BatchCertificateListResult.`odata.nextLink`,
   "NextLink",
   "go"
 );
@@ -236,9 +266,6 @@ interface BatchClient {
   "SASKey",
   "go"
 );
-@@clientName(Azure.Batch.BatchCertificate.certificateFormat, "Format", "go");
-@@clientName(Azure.Batch.BatchCertificateFormat.Cer, "CER", "go");
-@@clientName(Azure.Batch.BatchCertificateFormat.Pfx, "PFX", "go");
 @@clientName(Azure.Batch.BatchJobScheduleStatistics.readIOps, "ReadIOPS", "go");
 @@clientName(Azure.Batch.BatchJobScheduleStatistics.writeIOps,
   "WriteIOPS",
@@ -327,10 +354,6 @@ interface BatchClient {
 );
 @@clientName(Azure.Batch.BatchNodeUserUpdateOptions,
   "UpdateNodeUserOptions",
-  "go"
-);
-@@clientName(Azure.Batch.BatchCertificateDeleteError,
-  "DeleteCertificateError",
   "go"
 );
 @@clientName(Azure.Batch.UploadBatchServiceLogsOptions,

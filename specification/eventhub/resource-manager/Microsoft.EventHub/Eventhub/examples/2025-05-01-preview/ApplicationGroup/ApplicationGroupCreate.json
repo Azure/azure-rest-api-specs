@@ -1,0 +1,71 @@
+{
+  "parameters": {
+    "api-version": "2025-05-01-preview",
+    "applicationGroupName": "appGroup1",
+    "namespaceName": "contoso-ua-test-eh-system-1",
+    "parameters": {
+      "properties": {
+        "clientAppGroupIdentifier": "SASKeyName=KeyName",
+        "isEnabled": true,
+        "policies": [
+          {
+            "name": "ThrottlingPolicy1",
+            "type": "ThrottlingPolicy",
+            "metricId": "IncomingMessages",
+            "rateLimitThreshold": 7912
+          },
+          {
+            "name": "ThrottlingPolicy2",
+            "type": "ThrottlingPolicy",
+            "metricId": "IncomingBytes",
+            "rateLimitThreshold": 3951729
+          },
+          {
+            "name": "ThrottlingPolicy3",
+            "type": "ThrottlingPolicy",
+            "metricId": "OutgoingBytes",
+            "rateLimitThreshold": 245175
+          }
+        ]
+      }
+    },
+    "resourceGroupName": "contosotest",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "appGroup1",
+        "type": "Microsoft.EventHub/Namespaces/ApplicationGroups",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosotest/providers/Microsoft.EventHub/namespaces/contoso-ua-test-eh-system-1/applicationgroups/appGroup1",
+        "location": "EAST US 2 EUAP",
+        "properties": {
+          "clientAppGroupIdentifier": "SASKeyName=KeyName",
+          "isEnabled": true,
+          "policies": [
+            {
+              "name": "ThrottlingPolicy1",
+              "type": "ThrottlingPolicy",
+              "metricId": "IncomingMessages",
+              "rateLimitThreshold": 7912
+            },
+            {
+              "name": "ThrottlingPolicy2",
+              "type": "ThrottlingPolicy",
+              "metricId": "IncomingBytes",
+              "rateLimitThreshold": 3951729
+            },
+            {
+              "name": "ThrottlingPolicy3",
+              "type": "ThrottlingPolicy",
+              "metricId": "OutgoingBytes",
+              "rateLimitThreshold": 245175
+            }
+          ]
+        }
+      }
+    }
+  },
+  "operationId": "ApplicationGroup_CreateOrUpdateApplicationGroup",
+  "title": "ApplicationGroupCreate"
+}

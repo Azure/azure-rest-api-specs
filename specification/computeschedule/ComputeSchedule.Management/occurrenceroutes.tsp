@@ -22,6 +22,7 @@ interface Occurrences {
   @listsResource(OccurrenceResource)
   @armResourceList(OccurrenceResource)
   @get
+  @list
   @doc("List resources attached to Scheduled Actions for the given occurrence")
   listResources(
     ...ResourceInstanceParameters<OccurrenceResource>,

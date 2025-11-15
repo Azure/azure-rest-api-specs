@@ -27,7 +27,7 @@ These are the global settings for the billingbenefits.
 ```yaml
 openapi-type: arm
 openapi-subtype: providerHub
-tag: package-preview-2024-11-01-preview
+tag: package-preview-2025-12-01-preview
 ```
 
 ### Suppression
@@ -101,7 +101,28 @@ directive:
   - suppress: PatchIdentityProperty
     from: billingbenefits.json
     reason: False-positive. Identity property is never defined on the model.
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BillingBenefits/discounts/{discountName}"].patch.parameters[4]
+  - suppress: ConsistentPatchProperties
+    from: billingbenefits.json
+    reason: False-positive. Milestones is always present in resource model. There are two types of conditionalCredit models - primary and contributor. The resource model is split on this discriminator value, and milesstones is only present for primary. The patch operation is only available for primary, so milestones will always be available.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BillingBenefits/conditionalCredits/{conditionalCreditName}"].patch.parameters[4]["schema"]
+```
+
+### Tag: package-preview-2025-12-01-preview
+
+These settings apply only when `--tag=package-preview-2025-12-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-12-01-preview'
+input-file:
+  - Microsoft.BillingBenefits/preview/2025-12-01-preview/billingbenefits.json
+```
+
+### Tag: package-preview-2025-05-01-preview
+
+These settings apply only when `--tag=package-preview-2025-05-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-05-01-preview'
+input-file:
+  - Microsoft.BillingBenefits/preview/2025-05-01-preview/billingbenefits.json
 ```
 
 ### Tag: package-preview-2024-11-01-preview

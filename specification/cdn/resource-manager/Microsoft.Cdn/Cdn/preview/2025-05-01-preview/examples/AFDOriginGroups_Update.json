@@ -1,0 +1,76 @@
+{
+  "parameters": {
+    "api-version": "2025-05-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "RG",
+    "profileName": "profile1",
+    "originGroupName": "origingroup1",
+    "originGroupUpdateProperties": {
+      "properties": {
+        "loadBalancingSettings": {
+          "sampleSize": 3,
+          "successfulSamplesRequired": 3,
+          "additionalLatencyInMilliseconds": 1000
+        },
+        "healthProbeSettings": {
+          "probePath": "/path2",
+          "probeRequestType": "NotSet",
+          "probeProtocol": "NotSet",
+          "probeIntervalInSeconds": 10
+        },
+        "trafficRestorationTimeToHealedOrNewEndpointsInMinutes": 5
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/origingroups/origingroup1",
+        "type": "Microsoft.Cdn/profiles/origingroups",
+        "name": "origingroup1",
+        "properties": {
+          "loadBalancingSettings": {
+            "sampleSize": 3,
+            "successfulSamplesRequired": 3,
+            "additionalLatencyInMilliseconds": 1000
+          },
+          "healthProbeSettings": {
+            "probePath": "/path1",
+            "probeRequestType": "HEAD",
+            "probeProtocol": "Http",
+            "probeIntervalInSeconds": 10
+          },
+          "trafficRestorationTimeToHealedOrNewEndpointsInMinutes": 5,
+          "provisioningState": "Succeeded",
+          "deploymentStatus": "NotStarted"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/subid/resourcegroups/resourceGroupName/providers/Microsoft.Cdn/operationresults/operationId?api-version=2025-05-01-preview"
+      },
+      "body": {
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/origingroups/origingroup1",
+        "type": "Microsoft.Cdn/profiles/origingroups",
+        "name": "origingroup1",
+        "properties": {
+          "loadBalancingSettings": {
+            "sampleSize": 3,
+            "successfulSamplesRequired": 3,
+            "additionalLatencyInMilliseconds": 1000
+          },
+          "healthProbeSettings": {
+            "probePath": "/path1",
+            "probeRequestType": "HEAD",
+            "probeProtocol": "Http",
+            "probeIntervalInSeconds": 10
+          },
+          "trafficRestorationTimeToHealedOrNewEndpointsInMinutes": 5,
+          "provisioningState": "Updating",
+          "deploymentStatus": "NotStarted"
+        }
+      }
+    }
+  }
+}

@@ -1,4 +1,6 @@
 import "@typespec/rest";
+import "./back-compatible.tsp";
+
 import "@typespec/openapi";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
@@ -12,8 +14,6 @@ namespace Informatica.DataManagement;
 
 using Azure.Core;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
-using OpenAPI;
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
@@ -42,8 +42,6 @@ enum Versions {
   /**
    * The 2024-05-08 API version.
    */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2024_05_08: "2024-05-08",
 }
 
@@ -61,6 +59,7 @@ interface Organizations
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
   delete is ArmResourceDeleteWithoutOkAsync<InformaticaOrganizationResource>;
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     InformaticaOrganizationResource,
     InformaticaOrganizationResourceUpdate
@@ -92,6 +91,7 @@ interface ServerlessRuntimes
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
   delete is ArmResourceDeleteWithoutOkAsync<InformaticaServerlessRuntimeResource>;
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     InformaticaServerlessRuntimeResource,
     InformaticaServerlessRuntimeResourceUpdate
@@ -350,6 +350,7 @@ model InformaticaProperties {
 
 @doc("Link Organization")
 model LinkOrganization {
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("Link organization token")
   token?: string;
 }
@@ -484,6 +485,7 @@ model ServerlessRuntimeTag {
 
 @doc("Informatica Serverless Runtime User context properties")
 model ServerlessRuntimeUserContextProperties {
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("User context token for OBO flow.")
   userContextToken: string;
 }

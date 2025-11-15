@@ -70,7 +70,8 @@ interface VirtualMachineRunCommands {
    */
   createOrUpdate is VirtualMachineRunCommandOps.CreateOrUpdateAsync<
     VirtualMachineRunCommand,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader<FinalResult = VirtualMachineRunCommand> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -81,7 +82,7 @@ interface VirtualMachineRunCommands {
     VirtualMachineRunCommand,
     VirtualMachineRunCommandUpdate,
     Response = ArmResponse<VirtualMachineRunCommand> &
-      ArmLroLocationHeader &
+      ArmLroLocationHeader<FinalResult = VirtualMachineRunCommand> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -96,6 +97,7 @@ interface VirtualMachineRunCommands {
   /**
    * The operation to get all run commands of a Virtual Machine.
    */
+  @list
   listByVirtualMachine is VirtualMachineRunCommandOps.List<
     VirtualMachineRunCommand,
     Parameters = {
@@ -164,7 +166,8 @@ interface VirtualMachineScaleSetVMRunCommands {
   @operationId("VirtualMachineScaleSetVMRunCommands_CreateOrUpdate")
   createOrUpdate is VirtualMachineScaleSetVMRunCommandOps.CreateOrUpdateAsync<
     VirtualMachineRunCommand,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader<FinalResult = VirtualMachineRunCommand> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -177,7 +180,7 @@ interface VirtualMachineScaleSetVMRunCommands {
     VirtualMachineRunCommand,
     VirtualMachineRunCommandUpdate,
     Response = ArmResponse<VirtualMachineRunCommand> &
-      ArmLroLocationHeader &
+      ArmLroLocationHeader<FinalResult = VirtualMachineRunCommand> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -194,6 +197,7 @@ interface VirtualMachineScaleSetVMRunCommands {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualMachineScaleSetVMRunCommands_List")
+  @list
   list is VirtualMachineScaleSetVMRunCommandOps.List<
     VirtualMachineRunCommand,
     Parameters = {

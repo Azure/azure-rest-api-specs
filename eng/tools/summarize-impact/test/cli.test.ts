@@ -3,10 +3,10 @@ import { describe, expect, it } from "vitest"; //vi
 import path from "path";
 
 import { getChangedFilesStatuses } from "@azure-tools/specs-shared/changed-files";
+import { Octokit } from "@octokit/rest";
 import { PRContext } from "../src/PRContext.js";
 import { evaluateImpact, getRPaaSFolderList } from "../src/impact.js";
 import { LabelContext } from "../src/labelling-types.js";
-import { Octokit } from "@octokit/rest";
 
 describe("Check Changes", () => {
   it.skipIf(!process.env.GITHUB_TOKEN || !process.env.INTEGRATION_TEST)(

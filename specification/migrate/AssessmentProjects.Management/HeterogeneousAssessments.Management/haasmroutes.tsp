@@ -1,5 +1,5 @@
-import "../Common/DataModels/DownloadUrl.tsp";
-import "../Common/ArmModels/AssessmentProjectV2.tsp";
+import "./Common/DataModels/DownloadUrl.tsp";
+import "./Common/ArmModels/AssessmentProjectV2.tsp";
 import "./WebModels/HeterogeneousAssessments.tsp";
 import "./WebModels/HeterogeneousAssessmentsSummary.tsp";
 

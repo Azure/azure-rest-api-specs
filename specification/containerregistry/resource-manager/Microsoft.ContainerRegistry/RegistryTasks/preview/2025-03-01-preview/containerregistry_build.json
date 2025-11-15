@@ -1,0 +1,3994 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ContainerRegistryTasksManagementClient",
+    "version": "2025-03-01-preview",
+    "description": "The Microsoft Azure Container Registry management API provides create, read, update, and delete functionality for Azure Container Registry resources including registries, replications, webhooks, tasks, runs, and other registry components.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "AgentPools"
+    },
+    {
+      "name": "Runs"
+    },
+    {
+      "name": "TaskRuns"
+    },
+    {
+      "name": "Tasks"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/agentPools": {
+      "get": {
+        "operationId": "AgentPools_List",
+        "tags": [
+          "AgentPools"
+        ],
+        "description": "Lists all the agent pools for a specified container registry.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "registryName",
+            "in": "path",
+            "description": "The name of the Registry",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AgentPoolListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AgentPools_List": {
+            "$ref": "./examples/AgentPoolsList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/agentPools/{agentPoolName}": {
+      "get": {
+        "operationId": "AgentPools_Get",
+        "tags": [
+          "AgentPools"
+        ],
+        "description": "Gets the detailed information for a given agent pool.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "registryName",
+            "in": "path",
+            "description": "The name of the Registry",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9]*$"
+          },
+          {
+            "name": "agentPoolName",
+            "in": "path",
+            "description": "The name of the agent pool.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 20,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AgentPool"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AgentPools_Get": {
+            "$ref": "./examples/AgentPoolsGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "AgentPools_Create",
+        "tags": [
+          "AgentPools"
+        ],
+        "description": "Creates an agent pool for a container registry with the specified parameters.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "registryName",
+            "in": "path",
+            "description": "The name of the Registry",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9]*$"
+          },
+          {
+            "name": "agentPoolName",
+            "in": "path",
+            "description": "The name of the agent pool.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 20,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "agentPool",
+            "in": "body",
+            "description": "The parameters of an agent pool that needs to scheduled.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AgentPool"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'AgentPool' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AgentPool"
+            }
+          },
+          "201": {
+            "description": "Resource 'AgentPool' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AgentPool"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AgentPools_Create": {
+            "$ref": "./examples/AgentPoolsCreate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/AgentPool"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "AgentPools_Update",
+        "tags": [
+          "AgentPools"
+        ],
+        "description": "Updates an agent pool with the specified parameters.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "registryName",
+            "in": "path",
+            "description": "The name of the Registry",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9]*$"
+          },
+          {
+            "name": "agentPoolName",
+            "in": "path",
+            "description": "The name of the agent pool.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 20,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "updateParameters",
+            "in": "body",
+            "description": "The parameters for updating an agent pool.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AgentPoolUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AgentPool"
+            }
+          },
+          "201": {
+            "description": "Resource 'AgentPool' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AgentPool"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AgentPools_Update": {
+            "$ref": "./examples/AgentPoolsUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/AgentPool"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "AgentPools_Delete",
+        "tags": [
+          "AgentPools"
+        ],
+        "description": "Deletes a specified agent pool resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "registryName",
+            "in": "path",
+            "description": "The name of the Registry",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9]*$"
+          },
+          {
+            "name": "agentPoolName",
+            "in": "path",
+            "description": "The name of the agent pool.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 20,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AgentPools_Delete": {
+            "$ref": "./examples/AgentPoolsDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/agentPools/{agentPoolName}/listQueueStatus": {
+      "post": {
+        "operationId": "AgentPools_GetQueueStatus",
+        "tags": [
+          "AgentPools"
+        ],
+        "description": "Gets the count of queued runs for a given agent pool.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "registryName",
+            "in": "path",
+            "description": "The name of the Registry",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9]*$"
+          },
+          {
+            "name": "agentPoolName",
+            "in": "path",
+            "description": "The name of the agent pool.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 20,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AgentPoolQueueStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AgentPools_GetQueueStatus": {
+            "$ref": "./examples/AgentPoolsGetQueueStatus.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/listBuildSourceUploadUrl": {
+      "post": {
+        "operationId": "Registries_GetBuildSourceUploadUrl",
+        "description": "Get the upload location for the user to be able to upload the source.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "registryName",
+            "in": "path",
+            "description": "The name of the container registry.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SourceUploadDefinition"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Registries_GetBuildSourceUploadUrl": {
+            "$ref": "./examples/RegistriesGetBuildSourceUploadUrl.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/runs": {
+      "get": {
+        "operationId": "Runs_List",
+        "tags": [
+          "Runs"
+        ],
+        "description": "Gets all the runs for a registry.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "registryName",
+            "in": "path",
+            "description": "The name of the Registry",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9]*$"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The runs filter to apply on the operation. Arithmetic operators are not supported. The allowed string function is 'contains'. All logical operators except 'Not', 'Has', 'All' are allowed.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "$top is supported for get list of runs, which limits the maximum number of runs to return.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RunListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Runs_List": {
+            "$ref": "./examples/RunsList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/runs/{runId}": {
+      "get": {
+        "operationId": "Runs_Get",
+        "tags": [
+          "Runs"
+        ],
+        "description": "Gets the detailed information for a given run.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "registryName",
+            "in": "path",
+            "description": "The name of the Registry",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9]*$"
+          },
+          {
+            "name": "runId",
+            "in": "path",
+            "description": "The run ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Run"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Runs_Get": {
+            "$ref": "./examples/RunsGet.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Runs_Update",
+        "tags": [
+          "Runs"
+        ],
+        "description": "Patch the run properties.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "registryName",
+            "in": "path",
+            "description": "The name of the Registry",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9]*$"
+          },
+          {
+            "name": "runId",
+            "in": "path",
+            "description": "The run ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "runUpdateParameters",
+            "in": "body",
+            "description": "The run update properties.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RunUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Run"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Runs_Update": {
+            "$ref": "./examples/RunsUpdate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/runs/{runId}/cancel": {
+      "post": {
+        "operationId": "Runs_Cancel",
+        "tags": [
+          "Runs"
+        ],
+        "description": "Cancel an existing run.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "registryName",
+            "in": "path",
+            "description": "The name of the Registry",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9]*$"
+          },
+          {
+            "name": "runId",
+            "in": "path",
+            "description": "The run ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Runs_Cancel": {
+            "$ref": "./examples/RunsCancel.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/runs/{runId}/listLogSasUrl": {
+      "post": {
+        "operationId": "Runs_GetLogSasUrl",
+        "tags": [
+          "Runs"
+        ],
+        "description": "Gets a link to download the run logs.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "registryName",
+            "in": "path",
+            "description": "The name of the Registry",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9]*$"
+          },
+          {
+            "name": "runId",
+            "in": "path",
+            "description": "The run ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RunGetLogResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Runs_GetLogSasUrl": {
+            "$ref": "./examples/RunsGetLogSasUrl.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/scheduleRun": {
+      "post": {
+        "operationId": "Registries_ScheduleRun",
+        "description": "Schedules a new run based on the request parameters and add it to the run queue.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "registryName",
+            "in": "path",
+            "description": "The name of the container registry.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9]*$"
+          },
+          {
+            "name": "runRequest",
+            "in": "body",
+            "description": "The request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RunRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Run"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Registries_ScheduleRun": {
+            "$ref": "./examples/RegistriesScheduleRun.json"
+          },
+          "Registries_ScheduleRun_EncodedTaskRun": {
+            "$ref": "./examples/RegistriesScheduleRun_EncodedTaskRun.json"
+          },
+          "Registries_ScheduleRun_FileTaskRun": {
+            "$ref": "./examples/RegistriesScheduleRun_FileTaskRun.json"
+          },
+          "Registries_ScheduleRun_Task": {
+            "$ref": "./examples/RegistriesScheduleRun_Task.json"
+          },
+          "Registries_ScheduleRun_Task_WithCustomCredentials": {
+            "$ref": "./examples/RegistriesScheduleRun_FileTask_WithCustomCredentials.json"
+          },
+          "Registries_ScheduleRun_WithCustomCredentials": {
+            "$ref": "./examples/RegistriesScheduleRun_WithCustomCredentials.json"
+          },
+          "Registries_ScheduleRun_WithLogTemplate": {
+            "$ref": "./examples/RegistriesScheduleRun_WithLogTemplate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/taskRuns": {
+      "get": {
+        "operationId": "TaskRuns_List",
+        "tags": [
+          "TaskRuns"
+        ],
+        "description": "Lists all the task runs for a specified container registry.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "registryName",
+            "in": "path",
+            "description": "The name of the Registry",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TaskRunListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TaskRuns_List": {
+            "$ref": "./examples/TaskRunsList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/taskRuns/{taskRunName}": {
+      "get": {
+        "operationId": "TaskRuns_Get",
+        "tags": [
+          "TaskRuns"
+        ],
+        "description": "Gets the detailed information for a given task run.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "registryName",
+            "in": "path",
+            "description": "The name of the Registry",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9]*$"
+          },
+          {
+            "name": "taskRunName",
+            "in": "path",
+            "description": "The name of the task run.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TaskRun"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TaskRuns_Get": {
+            "$ref": "./examples/TaskRunsGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "TaskRuns_Create",
+        "tags": [
+          "TaskRuns"
+        ],
+        "description": "Creates a task run for a container registry with the specified parameters.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "registryName",
+            "in": "path",
+            "description": "The name of the Registry",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9]*$"
+          },
+          {
+            "name": "taskRunName",
+            "in": "path",
+            "description": "The name of the task run.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "taskRun",
+            "in": "body",
+            "description": "The parameters of a run that needs to scheduled.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TaskRun"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'TaskRun' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/TaskRun"
+            }
+          },
+          "201": {
+            "description": "Resource 'TaskRun' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/TaskRun"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TaskRuns_Create": {
+            "$ref": "./examples/TaskRunsCreate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/TaskRun"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "TaskRuns_Update",
+        "tags": [
+          "TaskRuns"
+        ],
+        "description": "Updates a task run with the specified parameters.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "registryName",
+            "in": "path",
+            "description": "The name of the Registry",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9]*$"
+          },
+          {
+            "name": "taskRunName",
+            "in": "path",
+            "description": "The name of the task run.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "updateParameters",
+            "in": "body",
+            "description": "The parameters for updating a task run.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TaskRunUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TaskRun"
+            }
+          },
+          "201": {
+            "description": "Resource 'TaskRun' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/TaskRun"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TaskRuns_Update": {
+            "$ref": "./examples/TaskRunsUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/TaskRun"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "TaskRuns_Delete",
+        "tags": [
+          "TaskRuns"
+        ],
+        "description": "Deletes a specified task run resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "registryName",
+            "in": "path",
+            "description": "The name of the Registry",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9]*$"
+          },
+          {
+            "name": "taskRunName",
+            "in": "path",
+            "description": "The name of the task run.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TaskRuns_Delete": {
+            "$ref": "./examples/TaskRunsDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/taskRuns/{taskRunName}/listDetails": {
+      "post": {
+        "operationId": "TaskRuns_GetDetails",
+        "tags": [
+          "TaskRuns"
+        ],
+        "description": "Gets the detailed information for a given task run that includes all secrets.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "registryName",
+            "in": "path",
+            "description": "The name of the Registry",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9]*$"
+          },
+          {
+            "name": "taskRunName",
+            "in": "path",
+            "description": "The name of the task run.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TaskRun"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TaskRuns_GetDetails": {
+            "$ref": "./examples/TaskRunsGetDetails.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/tasks": {
+      "get": {
+        "operationId": "Tasks_List",
+        "tags": [
+          "Tasks"
+        ],
+        "description": "Lists all the tasks for a specified container registry.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "registryName",
+            "in": "path",
+            "description": "The name of the Registry",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TaskListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Tasks_List": {
+            "$ref": "./examples/TasksList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/tasks/{taskName}": {
+      "get": {
+        "operationId": "Tasks_Get",
+        "tags": [
+          "Tasks"
+        ],
+        "description": "Get the properties of a specified task.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "registryName",
+            "in": "path",
+            "description": "The name of the Registry",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9]*$"
+          },
+          {
+            "name": "taskName",
+            "in": "path",
+            "description": "The name of the container registry task.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9-_]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Task"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Tasks_Get": {
+            "$ref": "./examples/TasksGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Tasks_Create",
+        "tags": [
+          "Tasks"
+        ],
+        "description": "Creates a task for a container registry with the specified parameters.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "registryName",
+            "in": "path",
+            "description": "The name of the Registry",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9]*$"
+          },
+          {
+            "name": "taskName",
+            "in": "path",
+            "description": "The name of the container registry task.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9-_]*$"
+          },
+          {
+            "name": "taskCreateParameters",
+            "in": "body",
+            "description": "The parameters for creating a task.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Task"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Task' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Task"
+            }
+          },
+          "201": {
+            "description": "Resource 'Task' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Task"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Tasks_Create": {
+            "$ref": "./examples/TasksCreate.json"
+          },
+          "Tasks_Create_QuickTask": {
+            "$ref": "./examples/TasksCreate_QuickTask.json"
+          },
+          "Tasks_Create_WithLoginIdentity": {
+            "$ref": "./examples/ManagedIdentity/TasksCreate_WithLoginIdentity.json"
+          },
+          "Tasks_Create_WithSystemAndUserIdentities": {
+            "$ref": "./examples/ManagedIdentity/TasksCreate_WithSystemAndUserIdentities.json"
+          },
+          "Tasks_Create_WithUserIdentities": {
+            "$ref": "./examples/ManagedIdentity/TasksCreate_WithUserIdentities.json"
+          },
+          "Tasks_Create_WithUserIdentities_WithSystemIdentity": {
+            "$ref": "./examples/ManagedIdentity/TasksCreate_WithSystemIdentity.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Tasks_Update",
+        "tags": [
+          "Tasks"
+        ],
+        "description": "Updates a task with the specified parameters.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "registryName",
+            "in": "path",
+            "description": "The name of the Registry",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9]*$"
+          },
+          {
+            "name": "taskName",
+            "in": "path",
+            "description": "The name of the container registry task.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9-_]*$"
+          },
+          {
+            "name": "taskUpdateParameters",
+            "in": "body",
+            "description": "The parameters for updating a task.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TaskUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Task"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Tasks_Update": {
+            "$ref": "./examples/TasksUpdate.json"
+          },
+          "Tasks_Update_QuickTask": {
+            "$ref": "./examples/TasksUpdate_QuickTask.json"
+          },
+          "Tasks_Update_WithKeyVaultCustomCredentials": {
+            "$ref": "./examples/ManagedIdentity/TasksUpdate_WithKeyVaultCustomCredentials.json"
+          },
+          "Tasks_Update_WithLoginIdentity": {
+            "$ref": "./examples/ManagedIdentity/TasksUpdate_WithLoginIdentity.json"
+          },
+          "Tasks_Update_WithMSICustomCredentials": {
+            "$ref": "./examples/ManagedIdentity/TasksUpdate_WithMSICustomCredentials.json"
+          },
+          "Tasks_Update_WithOpaqueCustomCredentials": {
+            "$ref": "./examples/TasksUpdate_WithOpaqueCustomCredentials.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Tasks_Delete",
+        "tags": [
+          "Tasks"
+        ],
+        "description": "Deletes a specified task.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "registryName",
+            "in": "path",
+            "description": "The name of the Registry",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9]*$"
+          },
+          {
+            "name": "taskName",
+            "in": "path",
+            "description": "The name of the container registry task.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9-_]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Tasks_Delete": {
+            "$ref": "./examples/TasksDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/tasks/{taskName}/listDetails": {
+      "post": {
+        "operationId": "Tasks_GetDetails",
+        "tags": [
+          "Tasks"
+        ],
+        "description": "Returns a task with extended information that includes all secrets.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "registryName",
+            "in": "path",
+            "description": "The name of the Registry",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9]*$"
+          },
+          {
+            "name": "taskName",
+            "in": "path",
+            "description": "The name of the container registry task.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9-_]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Task"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Tasks_GetDetails": {
+            "$ref": "./examples/TasksGetDetails.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AgentPool": {
+      "type": "object",
+      "description": "The agentpool that has the ARM resource and properties.\nThe agentpool will have all information to create an agent pool.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AgentPoolProperties",
+          "description": "The properties associated with the agent pool",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "AgentPoolListResult": {
+      "type": "object",
+      "description": "The collection of agent pools.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The collection value.",
+          "items": {
+            "$ref": "#/definitions/AgentPool"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI that can be used to request the next set of paged results."
+        }
+      }
+    },
+    "AgentPoolProperties": {
+      "type": "object",
+      "description": "The properties of agent pool.",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The count of agent machine"
+        },
+        "tier": {
+          "type": "string",
+          "description": "The Tier of agent machine"
+        },
+        "os": {
+          "$ref": "#/definitions/OS",
+          "description": "The OS of agent machine"
+        },
+        "virtualNetworkSubnetResourceId": {
+          "type": "string",
+          "description": "The Virtual Network Subnet Resource Id of the agent machine"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of this agent pool",
+          "readOnly": true
+        }
+      }
+    },
+    "AgentPoolPropertiesUpdateParameters": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The count of agent machine"
+        }
+      }
+    },
+    "AgentPoolQueueStatus": {
+      "type": "object",
+      "description": "The QueueStatus of Agent Pool",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of pending runs in the queue"
+        }
+      }
+    },
+    "AgentPoolUpdateParameters": {
+      "type": "object",
+      "description": "The parameters for updating an agent pool.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AgentPoolPropertiesUpdateParameters",
+          "description": "The properties associated with the agent pool",
+          "x-ms-client-flatten": true
+        },
+        "tags": {
+          "type": "object",
+          "description": "The ARM resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AgentProperties": {
+      "type": "object",
+      "description": "The properties that determine the run agent configuration.",
+      "properties": {
+        "cpu": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The CPU configuration in terms of number of cores required for the run."
+        }
+      }
+    },
+    "Architecture": {
+      "type": "string",
+      "description": "The OS architecture.",
+      "enum": [
+        "amd64",
+        "x86",
+        "386",
+        "arm",
+        "arm64"
+      ],
+      "x-ms-enum": {
+        "name": "Architecture",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "amd64",
+            "value": "amd64"
+          },
+          {
+            "name": "x86",
+            "value": "x86"
+          },
+          {
+            "name": "386",
+            "value": "386"
+          },
+          {
+            "name": "arm",
+            "value": "arm"
+          },
+          {
+            "name": "arm64",
+            "value": "arm64"
+          }
+        ]
+      }
+    },
+    "Argument": {
+      "type": "object",
+      "description": "The properties of a run argument.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the argument."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the argument."
+        },
+        "isSecret": {
+          "type": "boolean",
+          "description": "Flag to indicate whether the argument represents a secret and want to be removed from build logs.",
+          "default": false
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ]
+    },
+    "AuthInfo": {
+      "type": "object",
+      "description": "The authorization properties for accessing the source code repository.",
+      "properties": {
+        "tokenType": {
+          "$ref": "#/definitions/TokenType",
+          "description": "The type of Auth token."
+        },
+        "token": {
+          "type": "string",
+          "description": "The access token used to access the source control provider."
+        },
+        "refreshToken": {
+          "type": "string",
+          "description": "The refresh token used to refresh the access token."
+        },
+        "scope": {
+          "type": "string",
+          "description": "The scope of the access token."
+        },
+        "expiresIn": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Time in seconds that the token remains valid"
+        }
+      },
+      "required": [
+        "tokenType",
+        "token"
+      ]
+    },
+    "AuthInfoUpdateParameters": {
+      "type": "object",
+      "description": "The authorization properties for accessing the source code repository.",
+      "properties": {
+        "tokenType": {
+          "$ref": "#/definitions/TokenType",
+          "description": "The type of Auth token."
+        },
+        "token": {
+          "type": "string",
+          "description": "The access token used to access the source control provider."
+        },
+        "refreshToken": {
+          "type": "string",
+          "description": "The refresh token used to refresh the access token."
+        },
+        "scope": {
+          "type": "string",
+          "description": "The scope of the access token."
+        },
+        "expiresIn": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Time in seconds that the token remains valid"
+        }
+      }
+    },
+    "BaseImageDependency": {
+      "type": "object",
+      "description": "Properties that describe a base image dependency.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/BaseImageDependencyType",
+          "description": "The type of the base image dependency."
+        },
+        "registry": {
+          "type": "string",
+          "description": "The registry login server."
+        },
+        "repository": {
+          "type": "string",
+          "description": "The repository name."
+        },
+        "tag": {
+          "type": "string",
+          "description": "The tag name."
+        },
+        "digest": {
+          "type": "string",
+          "description": "The sha256-based digest of the image manifest."
+        }
+      }
+    },
+    "BaseImageDependencyType": {
+      "type": "string",
+      "description": "The type of the base image dependency.",
+      "enum": [
+        "BuildTime",
+        "RunTime"
+      ],
+      "x-ms-enum": {
+        "name": "BaseImageDependencyType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "BuildTime",
+            "value": "BuildTime"
+          },
+          {
+            "name": "RunTime",
+            "value": "RunTime"
+          }
+        ]
+      }
+    },
+    "BaseImageTrigger": {
+      "type": "object",
+      "description": "The trigger based on base image dependency.",
+      "properties": {
+        "baseImageTriggerType": {
+          "$ref": "#/definitions/BaseImageTriggerType",
+          "description": "The type of the auto trigger for base image dependency updates."
+        },
+        "updateTriggerEndpoint": {
+          "type": "string",
+          "description": "The endpoint URL for receiving update triggers."
+        },
+        "updateTriggerPayloadType": {
+          "$ref": "#/definitions/UpdateTriggerPayloadType",
+          "description": "Type of Payload body for Base image update triggers."
+        },
+        "status": {
+          "type": "string",
+          "description": "The current status of trigger.",
+          "default": "Enabled",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "x-ms-enum": {
+            "name": "TriggerStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Disabled",
+                "value": "Disabled"
+              },
+              {
+                "name": "Enabled",
+                "value": "Enabled"
+              }
+            ]
+          }
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the trigger."
+        }
+      },
+      "required": [
+        "baseImageTriggerType",
+        "name"
+      ]
+    },
+    "BaseImageTriggerType": {
+      "type": "string",
+      "description": "The type of the auto trigger for base image dependency updates.",
+      "enum": [
+        "All",
+        "Runtime"
+      ],
+      "x-ms-enum": {
+        "name": "BaseImageTriggerType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "All",
+            "value": "All"
+          },
+          {
+            "name": "Runtime",
+            "value": "Runtime"
+          }
+        ]
+      }
+    },
+    "BaseImageTriggerUpdateParameters": {
+      "type": "object",
+      "description": "The properties for updating base image dependency trigger.",
+      "properties": {
+        "baseImageTriggerType": {
+          "$ref": "#/definitions/BaseImageTriggerType",
+          "description": "The type of the auto trigger for base image dependency updates."
+        },
+        "updateTriggerEndpoint": {
+          "type": "string",
+          "description": "The endpoint URL for receiving update triggers."
+        },
+        "updateTriggerPayloadType": {
+          "$ref": "#/definitions/UpdateTriggerPayloadType",
+          "description": "Type of Payload body for Base image update triggers."
+        },
+        "status": {
+          "type": "string",
+          "description": "The current status of trigger.",
+          "default": "Enabled",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "x-ms-enum": {
+            "name": "TriggerStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Disabled",
+                "value": "Disabled"
+              },
+              {
+                "name": "Enabled",
+                "value": "Enabled"
+              }
+            ]
+          }
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the trigger."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "Credentials": {
+      "type": "object",
+      "description": "The parameters that describes a set of credentials that will be used when a run is invoked.",
+      "properties": {
+        "sourceRegistry": {
+          "$ref": "#/definitions/SourceRegistryCredentials",
+          "description": "Describes the credential parameters for accessing the source registry."
+        },
+        "customRegistries": {
+          "type": "object",
+          "description": "Describes the credential parameters for accessing other custom registries. The key\nfor the dictionary item will be the registry login server (myregistry.azurecr.io) and\nthe value of the item will be the registry credentials for accessing the registry.",
+          "additionalProperties": {
+            "$ref": "#/definitions/CustomRegistryCredentials"
+          }
+        }
+      }
+    },
+    "CustomRegistryCredentials": {
+      "type": "object",
+      "description": "Describes the credentials that will be used to access a custom registry during a run.",
+      "properties": {
+        "userName": {
+          "$ref": "#/definitions/SecretObject",
+          "description": "The username for logging into the custom registry."
+        },
+        "password": {
+          "$ref": "#/definitions/SecretObject",
+          "description": "The password for logging into the custom registry. The password is a secret\nobject that allows multiple ways of providing the value for it."
+        },
+        "identity": {
+          "type": "string",
+          "description": "Indicates the managed identity assigned to the custom credential. If a user-assigned identity\nthis value is the Client ID. If a system-assigned identity, the value will be `system`. In\nthe case of a system-assigned identity, the Client ID will be determined by the runner. This\nidentity may be used to authenticate to key vault to retrieve credentials or it may be the only\nsource of authentication used for accessing the registry."
+        }
+      }
+    },
+    "DockerBuildRequest": {
+      "type": "object",
+      "description": "The parameters for a docker quick build.",
+      "properties": {
+        "imageNames": {
+          "type": "array",
+          "description": "The fully qualified image names including the repository and tag.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "isPushEnabled": {
+          "type": "boolean",
+          "description": "The value of this property indicates whether the image built should be pushed to the registry or not.",
+          "default": true
+        },
+        "noCache": {
+          "type": "boolean",
+          "description": "The value of this property indicates whether the image cache is enabled or not.",
+          "default": false
+        },
+        "dockerFilePath": {
+          "type": "string",
+          "description": "The Docker file path relative to the source location."
+        },
+        "target": {
+          "type": "string",
+          "description": "The name of the target build stage for the docker build."
+        },
+        "arguments": {
+          "type": "array",
+          "description": "The collection of override arguments to be used when executing the run.",
+          "items": {
+            "$ref": "#/definitions/Argument"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "timeout": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Run timeout in seconds.",
+          "default": 3600,
+          "minimum": 300,
+          "maximum": 28800
+        },
+        "platform": {
+          "$ref": "#/definitions/PlatformProperties",
+          "description": "The platform properties against which the run has to happen."
+        },
+        "agentConfiguration": {
+          "$ref": "#/definitions/AgentProperties",
+          "description": "The machine configuration of the run agent."
+        },
+        "sourceLocation": {
+          "type": "string",
+          "description": "The URL(absolute or relative) of the source context. It can be an URL to a tar or git repository.\nIf it is relative URL, the relative path should be obtained from calling listBuildSourceUploadUrl API."
+        },
+        "credentials": {
+          "$ref": "#/definitions/Credentials",
+          "description": "The properties that describes a set of credentials that will be used when this run is invoked."
+        }
+      },
+      "required": [
+        "dockerFilePath",
+        "platform"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunRequest"
+        }
+      ],
+      "x-ms-discriminator-value": "DockerBuildRequest"
+    },
+    "DockerBuildStep": {
+      "type": "object",
+      "description": "The Docker build step.",
+      "properties": {
+        "imageNames": {
+          "type": "array",
+          "description": "The fully qualified image names including the repository and tag.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "isPushEnabled": {
+          "type": "boolean",
+          "description": "The value of this property indicates whether the image built should be pushed to the registry or not.",
+          "default": true
+        },
+        "noCache": {
+          "type": "boolean",
+          "description": "The value of this property indicates whether the image cache is enabled or not.",
+          "default": false
+        },
+        "dockerFilePath": {
+          "type": "string",
+          "description": "The Docker file path relative to the source context."
+        },
+        "target": {
+          "type": "string",
+          "description": "The name of the target build stage for the docker build."
+        },
+        "arguments": {
+          "type": "array",
+          "description": "The collection of override arguments to be used when executing this build step.",
+          "items": {
+            "$ref": "#/definitions/Argument"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      },
+      "required": [
+        "dockerFilePath"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/TaskStepProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "Docker"
+    },
+    "DockerBuildStepUpdateParameters": {
+      "type": "object",
+      "description": "The properties for updating a docker build step.",
+      "properties": {
+        "imageNames": {
+          "type": "array",
+          "description": "The fully qualified image names including the repository and tag.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "isPushEnabled": {
+          "type": "boolean",
+          "description": "The value of this property indicates whether the image built should be pushed to the registry or not."
+        },
+        "noCache": {
+          "type": "boolean",
+          "description": "The value of this property indicates whether the image cache is enabled or not."
+        },
+        "dockerFilePath": {
+          "type": "string",
+          "description": "The Docker file path relative to the source context."
+        },
+        "arguments": {
+          "type": "array",
+          "description": "The collection of override arguments to be used when executing this build step.",
+          "items": {
+            "$ref": "#/definitions/Argument"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "target": {
+          "type": "string",
+          "description": "The name of the target build stage for the docker build."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TaskStepUpdateParameters"
+        }
+      ],
+      "x-ms-discriminator-value": "Docker"
+    },
+    "EncodedTaskRunRequest": {
+      "type": "object",
+      "description": "The parameters for a quick task run request.",
+      "properties": {
+        "encodedTaskContent": {
+          "type": "string",
+          "description": "Base64 encoded value of the template/definition file content."
+        },
+        "encodedValuesContent": {
+          "type": "string",
+          "description": "Base64 encoded value of the parameters/values file content."
+        },
+        "values": {
+          "type": "array",
+          "description": "The collection of overridable values that can be passed when running a task.",
+          "items": {
+            "$ref": "#/definitions/SetValue"
+          },
+          "x-ms-identifiers": []
+        },
+        "timeout": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Run timeout in seconds.",
+          "default": 3600,
+          "minimum": 300,
+          "maximum": 28800
+        },
+        "platform": {
+          "$ref": "#/definitions/PlatformProperties",
+          "description": "The platform properties against which the run has to happen."
+        },
+        "agentConfiguration": {
+          "$ref": "#/definitions/AgentProperties",
+          "description": "The machine configuration of the run agent."
+        },
+        "sourceLocation": {
+          "type": "string",
+          "description": "The URL(absolute or relative) of the source context. It can be an URL to a tar or git repository.\nIf it is relative URL, the relative path should be obtained from calling listBuildSourceUploadUrl API."
+        },
+        "credentials": {
+          "$ref": "#/definitions/Credentials",
+          "description": "The properties that describes a set of credentials that will be used when this run is invoked."
+        }
+      },
+      "required": [
+        "encodedTaskContent",
+        "platform"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunRequest"
+        }
+      ],
+      "x-ms-discriminator-value": "EncodedTaskRunRequest"
+    },
+    "EncodedTaskStep": {
+      "type": "object",
+      "description": "The properties of a encoded task step.",
+      "properties": {
+        "encodedTaskContent": {
+          "type": "string",
+          "description": "Base64 encoded value of the template/definition file content."
+        },
+        "encodedValuesContent": {
+          "type": "string",
+          "description": "Base64 encoded value of the parameters/values file content."
+        },
+        "values": {
+          "type": "array",
+          "description": "The collection of overridable values that can be passed when running a task.",
+          "items": {
+            "$ref": "#/definitions/SetValue"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "encodedTaskContent"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/TaskStepProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "EncodedTask"
+    },
+    "EncodedTaskStepUpdateParameters": {
+      "type": "object",
+      "description": "The properties for updating encoded task step.",
+      "properties": {
+        "encodedTaskContent": {
+          "type": "string",
+          "description": "Base64 encoded value of the template/definition file content."
+        },
+        "encodedValuesContent": {
+          "type": "string",
+          "description": "Base64 encoded value of the parameters/values file content."
+        },
+        "values": {
+          "type": "array",
+          "description": "The collection of overridable values that can be passed when running a task.",
+          "items": {
+            "$ref": "#/definitions/SetValue"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TaskStepUpdateParameters"
+        }
+      ],
+      "x-ms-discriminator-value": "EncodedTask"
+    },
+    "FileTaskRunRequest": {
+      "type": "object",
+      "description": "The request parameters for a scheduling run against a task file.",
+      "properties": {
+        "taskFilePath": {
+          "type": "string",
+          "description": "The template/definition file path relative to the source."
+        },
+        "valuesFilePath": {
+          "type": "string",
+          "description": "The values/parameters file path relative to the source."
+        },
+        "values": {
+          "type": "array",
+          "description": "The collection of overridable values that can be passed when running a task.",
+          "items": {
+            "$ref": "#/definitions/SetValue"
+          },
+          "x-ms-identifiers": []
+        },
+        "timeout": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Run timeout in seconds.",
+          "default": 3600,
+          "minimum": 300,
+          "maximum": 28800
+        },
+        "platform": {
+          "$ref": "#/definitions/PlatformProperties",
+          "description": "The platform properties against which the run has to happen."
+        },
+        "agentConfiguration": {
+          "$ref": "#/definitions/AgentProperties",
+          "description": "The machine configuration of the run agent."
+        },
+        "sourceLocation": {
+          "type": "string",
+          "description": "The URL(absolute or relative) of the source context. It can be an URL to a tar or git repository.\nIf it is relative URL, the relative path should be obtained from calling listBuildSourceUploadUrl API."
+        },
+        "credentials": {
+          "$ref": "#/definitions/Credentials",
+          "description": "The properties that describes a set of credentials that will be used when this run is invoked."
+        }
+      },
+      "required": [
+        "taskFilePath",
+        "platform"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunRequest"
+        }
+      ],
+      "x-ms-discriminator-value": "FileTaskRunRequest"
+    },
+    "FileTaskStep": {
+      "type": "object",
+      "description": "The properties of a task step.",
+      "properties": {
+        "taskFilePath": {
+          "type": "string",
+          "description": "The task template/definition file path relative to the source context."
+        },
+        "valuesFilePath": {
+          "type": "string",
+          "description": "The task values/parameters file path relative to the source context."
+        },
+        "values": {
+          "type": "array",
+          "description": "The collection of overridable values that can be passed when running a task.",
+          "items": {
+            "$ref": "#/definitions/SetValue"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "taskFilePath"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/TaskStepProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "FileTask"
+    },
+    "FileTaskStepUpdateParameters": {
+      "type": "object",
+      "description": "The properties of updating a task step.",
+      "properties": {
+        "taskFilePath": {
+          "type": "string",
+          "description": "The task template/definition file path relative to the source context."
+        },
+        "valuesFilePath": {
+          "type": "string",
+          "description": "The values/parameters file path relative to the source context."
+        },
+        "values": {
+          "type": "array",
+          "description": "The collection of overridable values that can be passed when running a task.",
+          "items": {
+            "$ref": "#/definitions/SetValue"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TaskStepUpdateParameters"
+        }
+      ],
+      "x-ms-discriminator-value": "FileTask"
+    },
+    "IdentityProperties": {
+      "type": "object",
+      "description": "Managed identity for the resource.",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "The principal ID of resource identity.",
+          "readOnly": true
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The tenant ID of resource.",
+          "readOnly": true
+        },
+        "type": {
+          "$ref": "#/definitions/ResourceIdentityType",
+          "description": "The identity type."
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The list of user identities associated with the resource. The user identity\ndictionary key references will be ARM resource ids in the form:\n'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/\nproviders/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
+          "additionalProperties": {
+            "$ref": "#/definitions/UserIdentityProperties"
+          }
+        }
+      }
+    },
+    "ImageDescriptor": {
+      "type": "object",
+      "description": "Properties for a registry image.",
+      "properties": {
+        "registry": {
+          "type": "string",
+          "description": "The registry login server."
+        },
+        "repository": {
+          "type": "string",
+          "description": "The repository name."
+        },
+        "tag": {
+          "type": "string",
+          "description": "The tag name."
+        },
+        "digest": {
+          "type": "string",
+          "description": "The sha256-based digest of the image manifest."
+        }
+      }
+    },
+    "ImageUpdateTrigger": {
+      "type": "object",
+      "description": "The image update trigger that caused a build.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique ID of the trigger."
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the image update happened."
+        },
+        "images": {
+          "type": "array",
+          "description": "The list of image updates that caused the build.",
+          "items": {
+            "$ref": "#/definitions/ImageDescriptor"
+          },
+          "x-ms-identifiers": [
+            "registry"
+          ]
+        }
+      }
+    },
+    "OS": {
+      "type": "string",
+      "description": "The OS of agent machine",
+      "enum": [
+        "Windows",
+        "Linux"
+      ],
+      "x-ms-enum": {
+        "name": "OS",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Windows",
+            "value": "Windows"
+          },
+          {
+            "name": "Linux",
+            "value": "Linux"
+          }
+        ]
+      }
+    },
+    "OverrideTaskStepProperties": {
+      "type": "object",
+      "properties": {
+        "contextPath": {
+          "type": "string",
+          "description": "The source context against which run has to be queued."
+        },
+        "file": {
+          "type": "string",
+          "description": "The file against which run has to be queued."
+        },
+        "arguments": {
+          "type": "array",
+          "description": "Gets or sets the collection of override arguments to be used when\nexecuting a build step.",
+          "items": {
+            "$ref": "#/definitions/Argument"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "target": {
+          "type": "string",
+          "description": "The name of the target build stage for the docker build."
+        },
+        "values": {
+          "type": "array",
+          "description": "The collection of overridable values that can be passed when running a Task.",
+          "items": {
+            "$ref": "#/definitions/SetValue"
+          },
+          "x-ms-identifiers": []
+        },
+        "updateTriggerToken": {
+          "type": "string",
+          "description": "Base64 encoded update trigger token that will be attached with the base image trigger webhook."
+        }
+      }
+    },
+    "PlatformProperties": {
+      "type": "object",
+      "description": "The platform properties against which the run has to happen.",
+      "properties": {
+        "os": {
+          "$ref": "#/definitions/OS",
+          "description": "The operating system type required for the run."
+        },
+        "architecture": {
+          "$ref": "#/definitions/Architecture",
+          "description": "The OS architecture."
+        },
+        "variant": {
+          "$ref": "#/definitions/Variant",
+          "description": "Variant of the CPU."
+        }
+      },
+      "required": [
+        "os"
+      ]
+    },
+    "PlatformUpdateParameters": {
+      "type": "object",
+      "description": "The properties for updating the platform configuration.",
+      "properties": {
+        "os": {
+          "$ref": "#/definitions/OS",
+          "description": "The operating system type required for the run."
+        },
+        "architecture": {
+          "$ref": "#/definitions/Architecture",
+          "description": "The OS architecture."
+        },
+        "variant": {
+          "$ref": "#/definitions/Variant",
+          "description": "Variant of the CPU."
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of this agent pool",
+      "enum": [
+        "Creating",
+        "Updating",
+        "Deleting",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Creating",
+            "value": "Creating"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled"
+          }
+        ]
+      }
+    },
+    "ResourceIdentityType": {
+      "type": "string",
+      "description": "The identity type.",
+      "enum": [
+        "SystemAssigned",
+        "UserAssigned",
+        "SystemAssigned, UserAssigned",
+        "None"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceIdentityType",
+        "modelAsString": false
+      }
+    },
+    "Run": {
+      "type": "object",
+      "description": "Run resource properties",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RunProperties",
+          "description": "The properties of a run.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "RunGetLogResult": {
+      "type": "object",
+      "description": "The result of get log link operation.",
+      "properties": {
+        "logLink": {
+          "type": "string",
+          "description": "The link to logs for a run on a azure container registry."
+        },
+        "logArtifactLink": {
+          "type": "string",
+          "description": "The link to logs in registry for a run on a azure container registry."
+        }
+      }
+    },
+    "RunListResult": {
+      "type": "object",
+      "description": "The collection of runs.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The collection value.",
+          "items": {
+            "$ref": "#/definitions/Run"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI that can be used to request the next set of paged results."
+        }
+      }
+    },
+    "RunProperties": {
+      "type": "object",
+      "description": "The properties for a run.",
+      "properties": {
+        "runId": {
+          "type": "string",
+          "description": "The unique identifier for the run."
+        },
+        "status": {
+          "$ref": "#/definitions/RunStatus",
+          "description": "The current status of the run."
+        },
+        "lastUpdatedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last updated time for the run."
+        },
+        "runType": {
+          "$ref": "#/definitions/RunType",
+          "description": "The type of run."
+        },
+        "agentPoolName": {
+          "type": "string",
+          "description": "The dedicated agent pool for the run."
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the run was scheduled."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the run started."
+        },
+        "finishTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the run finished."
+        },
+        "outputImages": {
+          "type": "array",
+          "description": "The list of all images that were generated from the run. This is applicable if the run generates base image dependencies.",
+          "items": {
+            "$ref": "#/definitions/ImageDescriptor"
+          },
+          "x-ms-identifiers": [
+            "registry"
+          ]
+        },
+        "task": {
+          "type": "string",
+          "description": "The task against which run was scheduled."
+        },
+        "imageUpdateTrigger": {
+          "$ref": "#/definitions/ImageUpdateTrigger",
+          "description": "The image update trigger that caused the run. This is applicable if the task has base image trigger configured."
+        },
+        "sourceTrigger": {
+          "$ref": "#/definitions/SourceTriggerDescriptor",
+          "description": "The source trigger that caused the run."
+        },
+        "timerTrigger": {
+          "$ref": "#/definitions/TimerTriggerDescriptor",
+          "description": "The timer trigger that caused the run."
+        },
+        "platform": {
+          "$ref": "#/definitions/PlatformProperties",
+          "description": "The platform properties against which the run will happen."
+        },
+        "agentConfiguration": {
+          "$ref": "#/definitions/AgentProperties",
+          "description": "The machine configuration of the run agent."
+        },
+        "sourceRegistryAuth": {
+          "type": "string",
+          "description": "The scope of the credentials that were used to login to the source registry during this run."
+        },
+        "customRegistries": {
+          "type": "array",
+          "description": "The list of custom registries that were logged in during this run.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "runErrorMessage": {
+          "type": "string",
+          "description": "The error message received from backend systems after the run is scheduled.",
+          "readOnly": true
+        },
+        "updateTriggerToken": {
+          "type": "string",
+          "description": "The update trigger token passed for the Run."
+        },
+        "logArtifact": {
+          "$ref": "#/definitions/ImageDescriptor",
+          "description": "The image description for the log artifact.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of a run."
+        },
+        "isArchiveEnabled": {
+          "type": "boolean",
+          "description": "The value that indicates whether archiving is enabled or not.",
+          "default": false
+        }
+      }
+    },
+    "RunRequest": {
+      "type": "object",
+      "description": "The request parameters for scheduling a run.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of the run request."
+        },
+        "isArchiveEnabled": {
+          "type": "boolean",
+          "description": "The value that indicates whether archiving is enabled for the run or not.",
+          "default": false
+        },
+        "agentPoolName": {
+          "type": "string",
+          "description": "The dedicated agent pool for the run."
+        },
+        "logTemplate": {
+          "type": "string",
+          "description": "The template that describes the repository and tag information for run log artifact."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "RunStatus": {
+      "type": "string",
+      "description": "The current status of the run.",
+      "enum": [
+        "Queued",
+        "Started",
+        "Running",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Error",
+        "Timeout"
+      ],
+      "x-ms-enum": {
+        "name": "RunStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Queued",
+            "value": "Queued"
+          },
+          {
+            "name": "Started",
+            "value": "Started"
+          },
+          {
+            "name": "Running",
+            "value": "Running"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled"
+          },
+          {
+            "name": "Error",
+            "value": "Error"
+          },
+          {
+            "name": "Timeout",
+            "value": "Timeout"
+          }
+        ]
+      }
+    },
+    "RunType": {
+      "type": "string",
+      "description": "The type of run.",
+      "enum": [
+        "QuickBuild",
+        "QuickRun",
+        "AutoBuild",
+        "AutoRun"
+      ],
+      "x-ms-enum": {
+        "name": "RunType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "QuickBuild",
+            "value": "QuickBuild"
+          },
+          {
+            "name": "QuickRun",
+            "value": "QuickRun"
+          },
+          {
+            "name": "AutoBuild",
+            "value": "AutoBuild"
+          },
+          {
+            "name": "AutoRun",
+            "value": "AutoRun"
+          }
+        ]
+      }
+    },
+    "RunUpdateParameters": {
+      "type": "object",
+      "description": "The set of run properties that can be updated.",
+      "properties": {
+        "isArchiveEnabled": {
+          "type": "boolean",
+          "description": "The value that indicates whether archiving is enabled or not."
+        }
+      }
+    },
+    "SecretObject": {
+      "type": "object",
+      "description": "Describes the properties of a secret object value.",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "The value of the secret. The format of this value will be determined\nbased on the type of the secret object. If the type is Opaque, the value will be\nused as is without any modification."
+        },
+        "type": {
+          "$ref": "#/definitions/SecretObjectType",
+          "description": "The type of the secret object which determines how the value of the secret object has to be\ninterpreted."
+        }
+      }
+    },
+    "SecretObjectType": {
+      "type": "string",
+      "description": "The type of the secret object which determines how the value of the secret object has to be\ninterpreted.",
+      "enum": [
+        "Opaque",
+        "Vaultsecret"
+      ],
+      "x-ms-enum": {
+        "name": "SecretObjectType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Opaque",
+            "value": "Opaque"
+          },
+          {
+            "name": "Vaultsecret",
+            "value": "Vaultsecret"
+          }
+        ]
+      }
+    },
+    "SetValue": {
+      "type": "object",
+      "description": "The properties of a overridable value that can be passed to a task template.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the overridable value."
+        },
+        "value": {
+          "type": "string",
+          "description": "The overridable value."
+        },
+        "isSecret": {
+          "type": "boolean",
+          "description": "Flag to indicate whether the value represents a secret or not.",
+          "default": false
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ]
+    },
+    "SourceControlType": {
+      "type": "string",
+      "description": "The type of source control service.",
+      "enum": [
+        "Github",
+        "VisualStudioTeamService"
+      ],
+      "x-ms-enum": {
+        "name": "SourceControlType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Github",
+            "value": "Github"
+          },
+          {
+            "name": "VisualStudioTeamService",
+            "value": "VisualStudioTeamService"
+          }
+        ]
+      }
+    },
+    "SourceProperties": {
+      "type": "object",
+      "description": "The properties of the source code repository.",
+      "properties": {
+        "sourceControlType": {
+          "$ref": "#/definitions/SourceControlType",
+          "description": "The type of source control service."
+        },
+        "repositoryUrl": {
+          "type": "string",
+          "description": "The full URL to the source code repository"
+        },
+        "branch": {
+          "type": "string",
+          "description": "The branch name of the source code."
+        },
+        "sourceControlAuthProperties": {
+          "$ref": "#/definitions/AuthInfo",
+          "description": "The authorization properties for accessing the source code repository and to set up\nwebhooks for notifications."
+        }
+      },
+      "required": [
+        "sourceControlType",
+        "repositoryUrl"
+      ]
+    },
+    "SourceRegistryCredentials": {
+      "type": "object",
+      "description": "Describes the credential parameters for accessing the source registry.",
+      "properties": {
+        "identity": {
+          "type": "string",
+          "description": "The Entra identity used for source registry login.\nThe value is `[system]` for system-assigned managed identity, `[caller]` for caller identity,\nand client ID for user-assigned managed identity."
+        },
+        "loginMode": {
+          "$ref": "#/definitions/SourceRegistryLoginMode",
+          "description": "The authentication mode which determines the source registry login scope. The credentials for the source registry\nwill be generated using the given scope. These credentials will be used to login to\nthe source registry during the run."
+        }
+      }
+    },
+    "SourceRegistryLoginMode": {
+      "type": "string",
+      "description": "The authentication mode which determines the source registry login scope. The credentials for the source registry\nwill be generated using the given scope. These credentials will be used to login to\nthe source registry during the run.",
+      "enum": [
+        "None",
+        "Default"
+      ],
+      "x-ms-enum": {
+        "name": "SourceRegistryLoginMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None"
+          },
+          {
+            "name": "Default",
+            "value": "Default"
+          }
+        ]
+      }
+    },
+    "SourceTrigger": {
+      "type": "object",
+      "description": "The properties of a source based trigger.",
+      "properties": {
+        "sourceRepository": {
+          "$ref": "#/definitions/SourceProperties",
+          "description": "The properties that describes the source(code) for the task."
+        },
+        "sourceTriggerEvents": {
+          "type": "array",
+          "description": "The source event corresponding to the trigger.",
+          "items": {
+            "$ref": "#/definitions/SourceTriggerEvent"
+          }
+        },
+        "status": {
+          "type": "string",
+          "description": "The current status of trigger.",
+          "default": "Enabled",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "x-ms-enum": {
+            "name": "TriggerStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Disabled",
+                "value": "Disabled"
+              },
+              {
+                "name": "Enabled",
+                "value": "Enabled"
+              }
+            ]
+          }
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the trigger."
+        }
+      },
+      "required": [
+        "sourceRepository",
+        "sourceTriggerEvents",
+        "name"
+      ]
+    },
+    "SourceTriggerDescriptor": {
+      "type": "object",
+      "description": "The source trigger that caused a run.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique ID of the trigger."
+        },
+        "eventType": {
+          "type": "string",
+          "description": "The event type of the trigger."
+        },
+        "commitId": {
+          "type": "string",
+          "description": "The unique ID that identifies a commit."
+        },
+        "pullRequestId": {
+          "type": "string",
+          "description": "The unique ID that identifies pull request."
+        },
+        "repositoryUrl": {
+          "type": "string",
+          "description": "The repository URL."
+        },
+        "branchName": {
+          "type": "string",
+          "description": "The branch name in the repository."
+        },
+        "providerType": {
+          "type": "string",
+          "description": "The source control provider type."
+        }
+      }
+    },
+    "SourceTriggerEvent": {
+      "type": "string",
+      "enum": [
+        "commit",
+        "pullrequest"
+      ],
+      "x-ms-enum": {
+        "name": "SourceTriggerEvent",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "commit",
+            "value": "commit"
+          },
+          {
+            "name": "pullrequest",
+            "value": "pullrequest"
+          }
+        ]
+      }
+    },
+    "SourceTriggerUpdateParameters": {
+      "type": "object",
+      "description": "The properties for updating a source based trigger.",
+      "properties": {
+        "sourceRepository": {
+          "$ref": "#/definitions/SourceUpdateParameters",
+          "description": "The properties that describes the source(code) for the task."
+        },
+        "sourceTriggerEvents": {
+          "type": "array",
+          "description": "The source event corresponding to the trigger.",
+          "items": {
+            "$ref": "#/definitions/SourceTriggerEvent"
+          }
+        },
+        "status": {
+          "type": "string",
+          "description": "The current status of trigger.",
+          "default": "Enabled",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "x-ms-enum": {
+            "name": "TriggerStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Disabled",
+                "value": "Disabled"
+              },
+              {
+                "name": "Enabled",
+                "value": "Enabled"
+              }
+            ]
+          }
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the trigger."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "SourceUpdateParameters": {
+      "type": "object",
+      "description": "The properties for updating the source code repository.",
+      "properties": {
+        "sourceControlType": {
+          "$ref": "#/definitions/SourceControlType",
+          "description": "The type of source control service."
+        },
+        "repositoryUrl": {
+          "type": "string",
+          "description": "The full URL to the source code repository"
+        },
+        "branch": {
+          "type": "string",
+          "description": "The branch name of the source code."
+        },
+        "sourceControlAuthProperties": {
+          "$ref": "#/definitions/AuthInfoUpdateParameters",
+          "description": "The authorization properties for accessing the source code repository and to set up\nwebhooks for notifications."
+        }
+      }
+    },
+    "SourceUploadDefinition": {
+      "type": "object",
+      "description": "The properties of a response to source upload request.",
+      "properties": {
+        "uploadUrl": {
+          "type": "string",
+          "description": "The URL where the client can upload the source."
+        },
+        "relativePath": {
+          "type": "string",
+          "description": "The relative path to the source. This is used to submit the subsequent queue build request."
+        }
+      }
+    },
+    "StepType": {
+      "type": "string",
+      "description": "The type of the step.",
+      "enum": [
+        "Docker",
+        "FileTask",
+        "EncodedTask"
+      ],
+      "x-ms-enum": {
+        "name": "StepType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Docker",
+            "value": "Docker"
+          },
+          {
+            "name": "FileTask",
+            "value": "FileTask"
+          },
+          {
+            "name": "EncodedTask",
+            "value": "EncodedTask"
+          }
+        ]
+      }
+    },
+    "Task": {
+      "type": "object",
+      "description": "The task that has the ARM resource and task properties.\nThe task will have all information to schedule a run against it.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TaskProperties",
+          "description": "The properties of a task.",
+          "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "#/definitions/IdentityProperties",
+          "description": "Identity for the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "TaskListResult": {
+      "type": "object",
+      "description": "The collection of tasks.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The collection value.",
+          "items": {
+            "$ref": "#/definitions/Task"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI that can be used to request the next set of paged results."
+        }
+      }
+    },
+    "TaskProperties": {
+      "type": "object",
+      "description": "The properties of a task.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the task.",
+          "readOnly": true
+        },
+        "creationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date of task.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/TaskStatus",
+          "description": "The current status of task."
+        },
+        "platform": {
+          "$ref": "#/definitions/PlatformProperties",
+          "description": "The platform properties against which the run has to happen."
+        },
+        "agentConfiguration": {
+          "$ref": "#/definitions/AgentProperties",
+          "description": "The machine configuration of the run agent."
+        },
+        "agentPoolName": {
+          "type": "string",
+          "description": "The dedicated agent pool for the task."
+        },
+        "timeout": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Run timeout in seconds.",
+          "default": 3600,
+          "minimum": 300,
+          "maximum": 28800
+        },
+        "step": {
+          "$ref": "#/definitions/TaskStepProperties",
+          "description": "The properties of a task step."
+        },
+        "trigger": {
+          "$ref": "#/definitions/TriggerProperties",
+          "description": "The properties that describe all triggers for the task."
+        },
+        "credentials": {
+          "$ref": "#/definitions/Credentials",
+          "description": "The properties that describes a set of credentials that will be used when this run is invoked."
+        },
+        "logTemplate": {
+          "type": "string",
+          "description": "The template that describes the repository and tag information for run log artifact."
+        },
+        "isSystemTask": {
+          "type": "boolean",
+          "description": "The value of this property indicates whether the task resource is system task or not.",
+          "default": false
+        }
+      }
+    },
+    "TaskPropertiesUpdateParameters": {
+      "type": "object",
+      "description": "The properties for updating a task.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/TaskStatus",
+          "description": "The current status of task."
+        },
+        "platform": {
+          "$ref": "#/definitions/PlatformUpdateParameters",
+          "description": "The platform properties against which the run has to happen."
+        },
+        "agentConfiguration": {
+          "$ref": "#/definitions/AgentProperties",
+          "description": "The machine configuration of the run agent."
+        },
+        "agentPoolName": {
+          "type": "string",
+          "description": "The dedicated agent pool for the task."
+        },
+        "timeout": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Run timeout in seconds."
+        },
+        "step": {
+          "$ref": "#/definitions/TaskStepUpdateParameters",
+          "description": "The properties for updating a task step."
+        },
+        "trigger": {
+          "$ref": "#/definitions/TriggerUpdateParameters",
+          "description": "The properties for updating trigger properties."
+        },
+        "credentials": {
+          "$ref": "#/definitions/Credentials",
+          "description": "The parameters that describes a set of credentials that will be used when this run is invoked."
+        },
+        "logTemplate": {
+          "type": "string",
+          "description": "The template that describes the repository and tag information for run log artifact."
+        }
+      }
+    },
+    "TaskRun": {
+      "type": "object",
+      "description": "The task run that has the ARM resource and properties.\nThe task run will have the information of request and result of a run.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TaskRunProperties",
+          "description": "The properties associated with the task run, i.e., request and result of the run",
+          "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "#/definitions/IdentityProperties",
+          "description": "Identity for the resource."
+        },
+        "location": {
+          "type": "string",
+          "description": "The location of the resource"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "TaskRunListResult": {
+      "type": "object",
+      "description": "The collection of task runs.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The collection value.",
+          "items": {
+            "$ref": "#/definitions/TaskRun"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI that can be used to request the next set of paged results."
+        }
+      }
+    },
+    "TaskRunProperties": {
+      "type": "object",
+      "description": "The properties of task run.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of this task run",
+          "readOnly": true
+        },
+        "runRequest": {
+          "$ref": "#/definitions/RunRequest",
+          "description": "The request (parameters) for the run"
+        },
+        "runResult": {
+          "$ref": "#/definitions/Run",
+          "description": "The result of this task run",
+          "readOnly": true
+        },
+        "forceUpdateTag": {
+          "type": "string",
+          "description": "How the run should be forced to rerun even if the run request configuration has not changed"
+        }
+      }
+    },
+    "TaskRunPropertiesUpdateParameters": {
+      "type": "object",
+      "description": "The properties of a task run update parameters.",
+      "properties": {
+        "runRequest": {
+          "$ref": "#/definitions/RunRequest",
+          "description": "The request (parameters) for the new run"
+        },
+        "forceUpdateTag": {
+          "type": "string",
+          "description": "How the run should be forced to rerun even if the run request configuration has not changed"
+        }
+      }
+    },
+    "TaskRunRequest": {
+      "type": "object",
+      "description": "The parameters for a task run request.",
+      "properties": {
+        "taskId": {
+          "type": "string",
+          "description": "The resource ID of task against which run has to be queued."
+        },
+        "overrideTaskStepProperties": {
+          "$ref": "#/definitions/OverrideTaskStepProperties",
+          "description": "Set of overridable parameters that can be passed when running a Task."
+        }
+      },
+      "required": [
+        "taskId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunRequest"
+        }
+      ],
+      "x-ms-discriminator-value": "TaskRunRequest"
+    },
+    "TaskRunUpdateParameters": {
+      "type": "object",
+      "description": "The parameters for updating a task run.",
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/IdentityProperties",
+          "description": "Identity for the resource."
+        },
+        "properties": {
+          "$ref": "#/definitions/TaskRunPropertiesUpdateParameters",
+          "description": "The properties for updating a task run.",
+          "x-ms-client-flatten": true
+        },
+        "location": {
+          "type": "string",
+          "description": "The location of the resource"
+        },
+        "tags": {
+          "type": "object",
+          "description": "The ARM resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "TaskStatus": {
+      "type": "string",
+      "description": "The current status of task.",
+      "enum": [
+        "Disabled",
+        "Enabled"
+      ],
+      "x-ms-enum": {
+        "name": "TaskStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Disabled",
+            "value": "Disabled"
+          },
+          {
+            "name": "Enabled",
+            "value": "Enabled"
+          }
+        ]
+      }
+    },
+    "TaskStepProperties": {
+      "type": "object",
+      "description": "Base properties for any task step.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/StepType",
+          "description": "The type of the step."
+        },
+        "baseImageDependencies": {
+          "type": "array",
+          "description": "List of base image dependencies for a step.",
+          "items": {
+            "$ref": "#/definitions/BaseImageDependency"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "contextPath": {
+          "type": "string",
+          "description": "The URL(absolute or relative) of the source context for the task step."
+        },
+        "contextAccessToken": {
+          "type": "string",
+          "description": "The token (git PAT or SAS token of storage account blob) associated with the context for a step."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "TaskStepUpdateParameters": {
+      "type": "object",
+      "description": "Base properties for updating any task step.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/StepType",
+          "description": "The type of the step."
+        },
+        "contextPath": {
+          "type": "string",
+          "description": "The URL(absolute or relative) of the source context for the task step."
+        },
+        "contextAccessToken": {
+          "type": "string",
+          "description": "The token (git PAT or SAS token of storage account blob) associated with the context for a step."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "TaskUpdateParameters": {
+      "type": "object",
+      "description": "The parameters for updating a task.",
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/IdentityProperties",
+          "description": "Identity for the resource."
+        },
+        "properties": {
+          "$ref": "#/definitions/TaskPropertiesUpdateParameters",
+          "description": "The properties for updating a task.",
+          "x-ms-client-flatten": true
+        },
+        "tags": {
+          "type": "object",
+          "description": "The ARM resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "TimerTrigger": {
+      "type": "object",
+      "description": "The properties of a timer trigger.",
+      "properties": {
+        "schedule": {
+          "type": "string",
+          "description": "The CRON expression for the task schedule"
+        },
+        "status": {
+          "type": "string",
+          "description": "The current status of trigger.",
+          "default": "Enabled",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "x-ms-enum": {
+            "name": "TriggerStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Disabled",
+                "value": "Disabled"
+              },
+              {
+                "name": "Enabled",
+                "value": "Enabled"
+              }
+            ]
+          }
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the trigger."
+        }
+      },
+      "required": [
+        "schedule",
+        "name"
+      ]
+    },
+    "TimerTriggerDescriptor": {
+      "type": "object",
+      "properties": {
+        "timerTriggerName": {
+          "type": "string",
+          "description": "The timer trigger name that caused the run."
+        },
+        "scheduleOccurrence": {
+          "type": "string",
+          "description": "The occurrence that triggered the run."
+        }
+      }
+    },
+    "TimerTriggerUpdateParameters": {
+      "type": "object",
+      "description": "The properties for updating a timer trigger.",
+      "properties": {
+        "schedule": {
+          "type": "string",
+          "description": "The CRON expression for the task schedule"
+        },
+        "status": {
+          "type": "string",
+          "description": "The current status of trigger.",
+          "default": "Enabled",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "x-ms-enum": {
+            "name": "TriggerStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Disabled",
+                "value": "Disabled"
+              },
+              {
+                "name": "Enabled",
+                "value": "Enabled"
+              }
+            ]
+          }
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the trigger."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "TokenType": {
+      "type": "string",
+      "description": "The type of Auth token.",
+      "enum": [
+        "PAT",
+        "OAuth"
+      ],
+      "x-ms-enum": {
+        "name": "TokenType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "PAT",
+            "value": "PAT"
+          },
+          {
+            "name": "OAuth",
+            "value": "OAuth"
+          }
+        ]
+      }
+    },
+    "TriggerProperties": {
+      "type": "object",
+      "description": "The properties of a trigger.",
+      "properties": {
+        "timerTriggers": {
+          "type": "array",
+          "description": "The collection of timer triggers.",
+          "items": {
+            "$ref": "#/definitions/TimerTrigger"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "sourceTriggers": {
+          "type": "array",
+          "description": "The collection of triggers based on source code repository.",
+          "items": {
+            "$ref": "#/definitions/SourceTrigger"
+          },
+          "x-ms-identifiers": [
+            "name",
+            "sourceRepository/repositoryUrl"
+          ]
+        },
+        "baseImageTrigger": {
+          "$ref": "#/definitions/BaseImageTrigger",
+          "description": "The trigger based on base image dependencies."
+        }
+      }
+    },
+    "TriggerUpdateParameters": {
+      "type": "object",
+      "description": "The properties for updating triggers.",
+      "properties": {
+        "timerTriggers": {
+          "type": "array",
+          "description": "The collection of timer triggers.",
+          "items": {
+            "$ref": "#/definitions/TimerTriggerUpdateParameters"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "sourceTriggers": {
+          "type": "array",
+          "description": "The collection of triggers based on source code repository.",
+          "items": {
+            "$ref": "#/definitions/SourceTriggerUpdateParameters"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "baseImageTrigger": {
+          "$ref": "#/definitions/BaseImageTriggerUpdateParameters",
+          "description": "The trigger based on base image dependencies."
+        }
+      }
+    },
+    "UpdateTriggerPayloadType": {
+      "type": "string",
+      "description": "Type of Payload body for Base image update triggers.",
+      "enum": [
+        "Default",
+        "Token"
+      ],
+      "x-ms-enum": {
+        "name": "UpdateTriggerPayloadType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Default",
+            "value": "Default"
+          },
+          {
+            "name": "Token",
+            "value": "Token"
+          }
+        ]
+      }
+    },
+    "UserIdentityProperties": {
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "The principal id of user assigned identity.",
+          "readOnly": true
+        },
+        "clientId": {
+          "type": "string",
+          "description": "The client id of user assigned identity.",
+          "readOnly": true
+        }
+      }
+    },
+    "Variant": {
+      "type": "string",
+      "description": "Variant of the CPU.",
+      "enum": [
+        "v6",
+        "v7",
+        "v8"
+      ],
+      "x-ms-enum": {
+        "name": "Variant",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "v6",
+            "value": "v6"
+          },
+          {
+            "name": "v7",
+            "value": "v7"
+          },
+          {
+            "name": "v8",
+            "value": "v8"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}

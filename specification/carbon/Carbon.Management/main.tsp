@@ -6,11 +6,8 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-autorest";
 
 using TypeSpec.Http;
-using TypeSpec.Rest;
 using TypeSpec.Versioning;
-using Azure.Core;
 using Azure.ResourceManager;
-using OpenAPI;
 
 @armProviderNamespace
 @service(#{ title: "Carbon" })
@@ -26,8 +23,6 @@ enum Versions {
   /**
    * The 2025-04-01 API version.
    */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2025_04_01: "2025-04-01",
 }
 
@@ -493,6 +488,7 @@ model CarbonEmissionDataListResult {
   @Azure.ResourceManager.identifiers(#[])
   value: CarbonEmissionData[];
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("The pagination token to fetch next page data, it's null or empty if it doesn't have next page data")
   skipToken?: string;
 

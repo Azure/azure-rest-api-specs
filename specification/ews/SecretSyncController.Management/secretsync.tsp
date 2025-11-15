@@ -67,6 +67,7 @@ model KubernetesSecretObjectMapping {
   @pattern("^[A-Za-z0-9.]([-A-Za-z0-9]+([-._a-zA-Z0-9]?[A-Za-z0-9])*)?(\\/([0-9]+))*$")
   sourcePath: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("TargetKey is the key in the Kubernetes secret's data field where the secret value will be stored. This key is used to reference the secret data within Kubernetes, and it should be unique within the secret.")
   @minLength(1)
   @maxLength(253)

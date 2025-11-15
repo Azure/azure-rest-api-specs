@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "api-version": "2025-05-01-preview",
+    "namespaceName": "sdk-Namespace-5828",
+    "resourceGroupName": "SDK-EventHub-4794",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "resourceAssociation1",
+            "type": "Microsoft.EventHub/Namespaces/networkSecurityPerimeterConfigurations",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SDK-EventHub-4794/providers/Microsoft.EventHub/namespaces/sdk-Namespace-5705-new/networkSecurityPerimeterConfigurations/resourceAssociation1",
+            "properties": {
+              "networkSecurityPerimeter": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SDK-EventHub-4794/providers/Microsoft.Network/networkSecurityPerimeters/nsp1",
+                "location": "East US",
+                "perimeterGuid": "00000000-0000-0000-0000-000000000000"
+              },
+              "profile": {
+                "name": "devProfile",
+                "accessRules": [
+                  {
+                    "name": "inVpnRule",
+                    "properties": {
+                      "addressPrefixes": [
+                        "148.0.0.0/8",
+                        "152.4.6.0/24"
+                      ],
+                      "direction": "Inbound"
+                    }
+                  }
+                ],
+                "accessRulesVersion": "10"
+              },
+              "provisioningState": "Updating",
+              "resourceAssociation": {
+                "name": "association1"
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "NetworkSecurityPerimeterConfiguration_List",
+  "title": "NamspaceNetworkSecurityPerimeterConfigurationList"
+}

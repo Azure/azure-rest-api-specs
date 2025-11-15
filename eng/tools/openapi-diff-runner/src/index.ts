@@ -173,5 +173,11 @@ export async function main() {
   await buildPrInfo(context);
   let statusCode = 0;
   statusCode = await validateBreakingChange(context);
+
+  if (process.env.GITHUB_SERVER_URL && process.env.GITHUB_REPOSITORY && process.env.GITHUB_RUN_ID) {
+    logMessage(
+      `See validation report summary at: ${process.env.GITHUB_SERVER_URL}/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID}`,
+    );
+  }
   exit(statusCode);
 }

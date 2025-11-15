@@ -1,5 +1,3 @@
-// @ts-check
-
 // Functions for processing newline-delimited JSON (aka "ndjson")
 // Cannot round-trip "undefined", but neither can JSON.parse()/JSON.stringify()
 

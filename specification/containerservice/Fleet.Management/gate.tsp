@@ -187,6 +187,7 @@ interface Gates {
   // its processing. As such, we only expose the update API here.
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "must change at next release"
   @Azure.Core.useFinalStateVia("azure-async-operation")
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     Gate,
     GatePatch,

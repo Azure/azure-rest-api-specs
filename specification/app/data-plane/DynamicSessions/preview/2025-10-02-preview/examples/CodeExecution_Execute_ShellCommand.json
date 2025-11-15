@@ -1,0 +1,32 @@
+{
+  "title": "CodeExecution_Execute_ShellCommand",
+  "operationId": "CodeExecution_Execute",
+  "parameters": {
+    "api-version": "2025-10-02-preview",
+    "identifier": "testSessionIdentifier",
+    "codeExecutionRequest": {
+      "stdin": "testinputlineline",
+      "shellCommand": "read LINE;first_input=\"$LINE\";echo first_input:$first_input",
+      "outputStreamsMaxLength": 4096,
+      "timeoutInSeconds": 600
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "operation-id": "testExecutionId",
+        "Operation-Location": "operation-location-uri"
+      },
+      "body": {
+        "id": "testExecutionId",
+        "identifier": "testSessionIdentifier",
+        "status": "0",
+        "result": {
+          "stdout": "first_input:testinputlineline\n",
+          "stderr": "",
+          "executionTimeInMilliseconds": 2
+        }
+      }
+    }
+  }
+}

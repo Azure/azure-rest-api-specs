@@ -13,6 +13,7 @@ import "./EndpointResource.tsp";
 import "./ServiceConfigurationResource.tsp";
 import "./PublicCloud.tsp";
 import "@azure-tools/typespec-client-generator-core";
+import "./back-compatible.tsp";
 
 using Azure.ClientGenerator.Core;
 using TypeSpec.Rest;
@@ -34,8 +35,6 @@ namespace Microsoft.HybridConnectivity;
 @doc("Hybrid Connectivity Management service version.")
 enum Versions {
   @doc("Version 2024-12-01")
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2024_12_01: "2024-12-01",
 }
 

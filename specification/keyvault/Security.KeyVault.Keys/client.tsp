@@ -9,7 +9,7 @@ using TypeSpec.Versioning;
 @versioned(KeyVault.Versions)
 namespace Customizations;
 
-@@clientName(KeyVault, "Key", "java");
+@@clientName(KeyVault, "KeyClient", "java");
 @@clientName(KeyVault, "Client", "go");
 @@clientName(KeyVault, "Key", "rust");
 
@@ -43,9 +43,9 @@ op updateKey is KeyVaultOperation<
     /**
      * The parameters of the key to update.
      */
-    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
+    #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
-    @flattenProperty
+    @Azure.ClientGenerator.Core.Legacy.flattenProperty
     parameters: KeyUpdateParameters;
   },
   KeyBundle
@@ -105,9 +105,9 @@ op encrypt is KeyVaultOperation<
     /**
      * The parameters for the encryption operation.
      */
-    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
+    #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
-    @flattenProperty
+    @Azure.ClientGenerator.Core.Legacy.flattenProperty
     parameters: KeyOperationsParameters;
   },
   KeyOperationResult
@@ -141,9 +141,9 @@ op decrypt is KeyVaultOperation<
     /**
      * The parameters for the decryption operation.
      */
-    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
+    #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
-    @flattenProperty
+    @Azure.ClientGenerator.Core.Legacy.flattenProperty
     parameters: KeyOperationsParameters;
   },
   KeyOperationResult
@@ -177,9 +177,9 @@ op sign is KeyVaultOperation<
     /**
      * The parameters for the signing operation.
      */
-    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
+    #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
-    @flattenProperty
+    @Azure.ClientGenerator.Core.Legacy.flattenProperty
     parameters: KeySignParameters;
   },
   KeyOperationResult
@@ -213,9 +213,9 @@ op verify is KeyVaultOperation<
     /**
      * The parameters for verify operations.
      */
-    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
+    #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
-    @flattenProperty
+    @Azure.ClientGenerator.Core.Legacy.flattenProperty
     parameters: KeyVerifyParameters;
   },
   KeyVerifyResult
@@ -249,9 +249,9 @@ op wrapKey is KeyVaultOperation<
     /**
      * The parameters for wrap operation.
      */
-    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
+    #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
-    @flattenProperty
+    @Azure.ClientGenerator.Core.Legacy.flattenProperty
     parameters: KeyOperationsParameters;
   },
   KeyOperationResult
@@ -285,9 +285,9 @@ op unwrapKey is KeyVaultOperation<
     /**
      * The parameters for the key operation.
      */
-    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
+    #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
-    @flattenProperty
+    @Azure.ClientGenerator.Core.Legacy.flattenProperty
     parameters: KeyOperationsParameters;
   },
   KeyOperationResult
@@ -321,9 +321,9 @@ op release is KeyVaultOperation<
     /**
      * The parameters for the key release operation.
      */
-    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
+    #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
-    @flattenProperty
+    @Azure.ClientGenerator.Core.Legacy.flattenProperty
     parameters: KeyReleaseParameters;
   },
   KeyReleaseResult
@@ -391,6 +391,7 @@ op getKeyAttestation is KeyVaultOperation<
 @summary("Retrieves a list of individual key versions with the same key name.")
 @route("/keys/{key-name}/versions")
 @get
+@list
 op listKeyPropertiesVersions is KeyVaultOperation<
   {
     /**
@@ -411,6 +412,7 @@ op listKeyPropertiesVersions is KeyVaultOperation<
 @summary("List keys in the specified vault.")
 @route("/keys")
 @get
+@list
 op listKeyProperties is KeyVaultOperation<{}, KeyListResult>;
 
 /**
@@ -421,6 +423,7 @@ op listKeyProperties is KeyVaultOperation<{}, KeyListResult>;
 @summary("Lists the deleted keys in the specified vault.")
 @route("/deletedkeys")
 @get
+@list
 op listDeletedKeyProperties is KeyVaultOperation<{}, DeletedKeyListResult>;
 
 @@override(getKeyVersions, listKeyPropertiesVersions, "go");
@@ -480,6 +483,9 @@ op listDeletedKeyProperties is KeyVaultOperation<{}, DeletedKeyListResult>;
 @@clientName(JsonWebKey.qi, "QI", "go");
 
 @@clientName(KeyAttestation.certificatePemFile, "CertificatePEMFile", "go");
+
+@@alternateType(JsonWebKey.keyOps, JsonWebKeyOperation[], "go");
+@@alternateType(KeyAttributes.recoveryLevel, string, "go");
 
 // JS configuration
 @@clientName(JsonWebKeyCurveName.P256_K, "P256K", "javascript");
@@ -566,7 +572,8 @@ op listDeletedKeyProperties is KeyVaultOperation<{}, DeletedKeyListResult>;
 @@clientName(getDeletedKeys, "ListDeletedKeyProperties", "rust");
 @@clientName(getKeys, "ListKeyProperties", "rust");
 @@clientName(getKeyVersions, "ListKeyPropertiesVersions", "rust");
-@@clientName(updateKey, "UpdateKeyProperties", "rust");
+// Work around issue where previous @override prevent the following line from working without "KeyVault." prefix.
+@@clientName(KeyVault.updateKey, "UpdateKeyProperties", "rust");
 
 @@clientName(KeyReleaseParameters.enc, "algorithm", "rust");
 @@clientName(KeyOperationsParameters.aad,

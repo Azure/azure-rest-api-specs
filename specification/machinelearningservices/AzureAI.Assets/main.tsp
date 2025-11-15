@@ -21,7 +21,7 @@ using Azure.Core.Traits;
 )
 @service(#{ title: "Azure Machine Learning Data Plane Services" })
 @server(
-  "{endpoint}/genericasset/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}",
+  "{endpoint}/genericasset/v2.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices",
   "Machinelearning Services Asset APIs",
   {
     @doc("""
@@ -34,9 +34,6 @@ using Azure.Core.Traits;
 
     @doc("The name of the Resource Group.")
     resourceGroupName: string,
-
-    @doc("The name of the AzureML workspace or AI project.")
-    workspaceName: string,
   }
 )
 @versioned(Versions)
@@ -45,10 +42,8 @@ namespace Microsoft.MachineLearningServices;
 @doc("Azure Machine Learning Services api versions.")
 enum Versions {
   @doc("Azure Machine Learning Services api version 2024-04-01-preview.")
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   `2024-04-01-preview`,
 
   @doc("Azure Machine Learning Services api version 2024-05-01-preview.")
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   `2024-05-01-preview`,
 }

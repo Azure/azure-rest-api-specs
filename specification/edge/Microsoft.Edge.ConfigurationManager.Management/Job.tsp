@@ -22,6 +22,10 @@ union JobType {
   @doc("A deployment job.")
   Deploy: "deploy",
 
+  @doc("A publish job.")
+  @added(Versions.v2025_08_01)
+  Publish: "publish",
+
   @doc("A staging job.")
   Staging: "staging",
 
@@ -44,6 +48,22 @@ union JobStatus {
 
   /** The job or step failed. */
   Failed: "Failed",
+}
+
+@doc("Publish statistics for a job step, including total, success, and failed counts.")
+@added(Versions.v2025_08_01)
+model PublishJobStepStatistics extends JobStepStatisticsBase {
+  @doc("Statistics type discriminator value")
+  statisticsType: JobType.Publish;
+
+  @doc("Total count of items processed in this step")
+  totalCount?: int32;
+
+  @doc("Count of successful items in this step")
+  successCount?: int32;
+
+  @doc("Count of failed items in this step")
+  failedCount?: int32;
 }
 
 // Base model for polymorphic job step statistics
@@ -92,6 +112,15 @@ model DeployJobParameter extends JobParameterBase {
   parameter?: InstallSolutionParameter;
 }
 
+@doc("Parameters for a publish job.")
+@added(Versions.v2025_08_01)
+model PublishJobParameter extends JobParameterBase {
+  @doc("Job type discriminator value")
+  jobType: JobType.Publish;
+
+  parameter?: SolutionVersionParameter;
+}
+
 @doc("Job Step")
 model JobStep {
   @doc("Name of the step")
@@ -118,6 +147,13 @@ model JobStep {
   @doc("Error Details if any failure is there")
   @visibility(Lifecycle.Read)
   errorDetails?: Azure.ResourceManager.Foundations.ErrorDetail;
+}
+
+@doc("Additional metadata or properties.")
+@added(Versions.v2025_08_01)
+model AdditionalData {
+  @doc("Id of the workflow.")
+  workflowId?: string;
 }
 
 @doc("Properties of a Job resource, including type, status, parameters, steps, and error details.")
@@ -153,6 +189,10 @@ model JobProperties {
   @doc("Error Details if any failure is there")
   @visibility(Lifecycle.Read)
   errorDetails?: Azure.ResourceManager.Foundations.ErrorDetail;
+
+  @doc("Additional metadata or properties.")
+  @added(Versions.v2025_08_01)
+  additionalData?: AdditionalData;
 }
 
 @doc("Job extension resource for tracking job execution and substatuses.")

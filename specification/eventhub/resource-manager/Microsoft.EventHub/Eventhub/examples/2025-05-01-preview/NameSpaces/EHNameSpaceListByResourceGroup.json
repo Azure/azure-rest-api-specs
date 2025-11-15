@@ -1,0 +1,70 @@
+{
+  "parameters": {
+    "api-version": "2025-05-01-preview",
+    "resourceGroupName": "ResurceGroupSample",
+    "subscriptionId": "SampleSubscription"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "NamespaceSample",
+            "type": "Microsoft.EventHub/Namespaces",
+            "id": "/subscriptions/SampleSubscription/resourceGroups/ResurceGroupSample/providers/Microsoft.EventHub/namespaces/NamespaceSample",
+            "identity": {
+              "type": "SystemAssigned, UserAssigned",
+              "principalId": "PrincipalIdGUID",
+              "tenantId": "TenantIdGUID",
+              "userAssignedIdentities": {
+                "/subscriptions/SampleSubscription/resourceGroups/ResurceGroupSample/providers/Microsoft.ManagedIdentity/userAssignedIdentities/ud1": {
+                  "clientId": "ClientIdGUID",
+                  "principalId": "PrincipalIdGUID"
+                },
+                "/subscriptions/SampleSubscription/resourceGroups/ResurceGroupSample/providers/Microsoft.ManagedIdentity/userAssignedIdentities/ud2": {
+                  "clientId": "6a35400f-6ccb-4817-8f1a-ce19ea4523bc",
+                  "principalId": "ce2d5953-5c15-40ca-9d51-cc3f4a63b0f5"
+                }
+              }
+            },
+            "location": "East US",
+            "properties": {
+              "clusterArmId": "/subscriptions/SampleSubscription/resourceGroups/ResurceGroupSample/providers/Microsoft.EventHub/clusters/enc-test",
+              "createdAt": "2021-01-30T00:28:38.963Z",
+              "disableLocalAuth": false,
+              "encryption": {
+                "keySource": "Microsoft.KeyVault",
+                "keyVaultProperties": [
+                  {
+                    "identity": {
+                      "userAssignedIdentity": "/subscriptions/SampleSubscription/resourceGroups/ResurceGroupSample/providers/Microsoft.ManagedIdentity/userAssignedIdentities/ud1"
+                    },
+                    "keyName": "Samplekey",
+                    "keyVaultUri": "https://sample-keyvault-user.vault-int.azure-int.net",
+                    "keyVersion": ""
+                  }
+                ],
+                "requireInfrastructureEncryption": false
+              },
+              "isAutoInflateEnabled": false,
+              "maximumThroughputUnits": 0,
+              "metricId": "MetricGUID:NamespaceSample",
+              "provisioningState": "Succeeded",
+              "serviceBusEndpoint": "https://NamespaceSample.servicebus.windows-int.net:443/",
+              "updatedAt": "2021-01-30T00:30:55.143Z",
+              "zoneRedundant": false
+            },
+            "sku": {
+              "name": "Standard",
+              "capacity": 1,
+              "tier": "Standard"
+            },
+            "tags": {}
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Namespaces_ListByResourceGroup",
+  "title": "NamespaceListByResourceGroup"
+}

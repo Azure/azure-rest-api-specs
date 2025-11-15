@@ -30,9 +30,9 @@ op setSecret is KeyVaultOperation<
     /**
      * The parameters for setting the secret.
      */
-    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
+    #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
-    @flattenProperty
+    @Azure.ClientGenerator.Core.Legacy.flattenProperty
     parameters: SecretSetParameters;
   },
   SecretBundle
@@ -84,9 +84,9 @@ op updateSecret is KeyVaultOperation<
     /**
      * The parameters for update secret operation.
      */
-    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
+    #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
-    @flattenProperty
+    @Azure.ClientGenerator.Core.Legacy.flattenProperty
     parameters: SecretUpdateParameters;
   },
   SecretBundle
@@ -134,6 +134,7 @@ op getSecret is KeyVaultOperation<
 @summary("List secrets in a specified key vault.")
 @route("/secrets")
 @get
+@list
 op getSecrets is KeyVaultOperation<
   {
     /**
@@ -155,6 +156,7 @@ op getSecrets is KeyVaultOperation<
 @summary("List all versions of the specified secret.")
 @route("/secrets/{secret-name}/versions")
 @get
+@list
 op getSecretVersions is KeyVaultOperation<
   {
     /**
@@ -183,6 +185,7 @@ op getSecretVersions is KeyVaultOperation<
 @summary("Lists deleted secrets for the specified vault.")
 @route("/deletedsecrets")
 @get
+@list
 op getDeletedSecrets is KeyVaultOperation<
   {
     /**
@@ -285,9 +288,9 @@ op restoreSecret is KeyVaultOperation<
     /**
      * The parameters to restore the secret.
      */
-    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
+    #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
-    @flattenProperty
+    @Azure.ClientGenerator.Core.Legacy.flattenProperty
     parameters: SecretRestoreParameters;
   },
   SecretBundle

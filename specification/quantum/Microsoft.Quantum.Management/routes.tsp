@@ -11,7 +11,6 @@ using TypeSpec.Http;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
-using TypeSpec.OpenAPI;
 using TypeSpec.Versioning;
 
 namespace Microsoft.Quantum;
@@ -29,6 +28,7 @@ interface Offerings {
    */
   @autoRoute
   @get
+  @list
   @action("offerings")
   list is ArmProviderActionSync<
     Response = OfferingsListResult,
@@ -41,6 +41,13 @@ interface Offerings {
       @segment("locations")
       @typeChangedFrom(Versions.v2025_01_01_preview, string)
       locationName: AzureLocationParameter;
+
+      /**
+       * The filter to apply to the operation. Example: '$filter=kind eq 'v1'
+       */
+      @added(Versions.v2025_11_01_preview)
+      @query("filter")
+      filter?: string;
     }
   >;
 }

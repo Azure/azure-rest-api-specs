@@ -161,22 +161,6 @@
       },
       "description": "Specifies runtime parameters for a search index knowledge source"
     },
-    "WebKnowledgeSourceParams": {
-      "type": "object",
-      "x-ms-discriminator-value": "web",
-      "allOf": [
-        {
-          "$ref": "#/definitions/KnowledgeSourceParams"
-        }
-      ],
-      "properties": {
-        "freshness": {
-          "type": "string",
-          "description": "The freshness of web results."
-        }
-      },
-      "description": "Specifies runtime parameters for a web knowledge source"
-    },
     "KnowledgeAgentMessage": {
       "type": "object",
       "properties": {
@@ -387,36 +371,6 @@
       },
       "description": "Represents the arguments the azure blob retrieval activity was run with."
     },
-    "KnowledgeAgentWebActivityRecord": {
-      "type": "object",
-      "x-ms-discriminator-value": "web",
-      "allOf": [
-        {
-          "$ref": "#/definitions/KnowledgeAgentRetrievalActivityRecord"
-        }
-      ],
-      "properties": {
-        "webArguments": {
-          "$ref": "#/definitions/KnowledgeAgentWebActivityArguments",
-          "description": "The web arguments for the retrieval activity."
-        }
-      },
-      "description": "Represents a web retrieval activity record."
-    },
-    "KnowledgeAgentWebActivityArguments": {
-      "type": "object",
-      "properties": {
-        "search": {
-          "type": "string",
-          "description": "The search string used to query the web."
-        },
-        "freshness": {
-          "type": "string",
-          "description": "The freshness for the retrieval activity."
-        }
-      },
-      "description": "Represents the arguments the web retrieval activity was run with."
-    },
     "KnowledgeAgentModelQueryPlanningActivityRecord": {
       "type": "object",
       "x-ms-discriminator-value": "modelQueryPlanning",
@@ -543,23 +497,6 @@
         }
       },
       "description": "Represents an Azure Blob Storage document reference."
-    },
-    "KnowledgeAgentWebReference": {
-      "type": "object",
-      "x-ms-discriminator-value": "web",
-      "allOf": [
-        {
-          "$ref": "#/definitions/KnowledgeAgentReference"
-        }
-      ],
-      "properties": {
-        "url": {
-          "type": "string",
-          "format": "uri",
-          "description": "The url the reference data originated from."
-        }
-      },
-      "description": "Represents a web document reference."
     }
   },
   "parameters": {

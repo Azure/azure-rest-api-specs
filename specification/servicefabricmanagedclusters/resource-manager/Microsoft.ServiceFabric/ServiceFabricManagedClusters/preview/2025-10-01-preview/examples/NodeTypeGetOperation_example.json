@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "api-version": "2025-10-01-preview",
+    "clusterName": "myCluster",
+    "nodeTypeName": "FE",
+    "resourceGroupName": "resRg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "FE",
+        "type": "Microsoft.ServiceFabric/managedClusters/nodeTypes",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/managedClusters/myCluster/nodeTypes/FE",
+        "properties": {
+          "capacities": {},
+          "dataDiskSizeGB": 100,
+          "dataDiskType": "StandardSSD_LRS",
+          "isPrimary": true,
+          "isStateless": false,
+          "placementProperties": {},
+          "vmImageOffer": "WindowsServer",
+          "vmImagePublisher": "MicrosoftWindowsServer",
+          "vmImageSku": "2016-Datacenter",
+          "vmImageVersion": "latest",
+          "vmInstanceCount": 5,
+          "vmSecrets": [
+            {
+              "sourceVault": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.KeyVault/vaults/myVault"
+              },
+              "vaultCertificates": [
+                {
+                  "certificateStore": "My",
+                  "certificateUrl": "https://myVault.vault.azure.net:443/secrets/myCert/ef1a31d39e1f46bca33def54b6cda54c"
+                }
+              ]
+            }
+          ],
+          "vmSize": "Standard_D2"
+        },
+        "tags": {}
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "NodeTypes_Get",
+  "title": "Get a node type"
+}

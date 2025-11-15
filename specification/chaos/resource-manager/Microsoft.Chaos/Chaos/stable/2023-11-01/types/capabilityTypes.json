@@ -1,0 +1,125 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Capability Metadata Types",
+    "version": "2023-11-01"
+  },
+  "paths": {},
+  "definitions": {
+    "capabilityType": {
+      "type": "object",
+      "description": "Model that represents a Capability Type resource.",
+      "allOf": [
+        {
+          "$ref": "../../../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "systemData": {
+          "description": "The system metadata properties of the capability type resource.",
+          "$ref": "../../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "Location of the Capability Type resource."
+        },
+        "properties": {
+          "description": "The properties of the capability type resource.",
+          "$ref": "#/definitions/capabilityTypeProperties",
+          "x-ms-client-flatten": true,
+          "readOnly": true
+        }
+      }
+    },
+    "capabilityTypeProperties": {
+      "type": "object",
+      "description": "Model that represents the Capability Type properties model.",
+      "properties": {
+        "publisher": {
+          "type": "string",
+          "description": "String of the Publisher that this Capability Type extends.",
+          "readOnly": true
+        },
+        "targetType": {
+          "type": "string",
+          "description": "String of the Target Type that this Capability Type extends.",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Localized string of the display name.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Localized string of the description.",
+          "readOnly": true
+        },
+        "parametersSchema": {
+          "$ref": "./common.json#/definitions/url",
+          "description": "URL to retrieve JSON schema of the Capability Type parameters.",
+          "readOnly": true
+        },
+        "urn": {
+          "$ref": "./common.json#/definitions/urn",
+          "description": "String of the URN for this Capability Type.",
+          "readOnly": true
+        },
+        "kind": {
+          "type": "string",
+          "description": "String of the kind of this Capability Type.",
+          "readOnly": true
+        },
+        "azureRbacActions": {
+          "type": "array",
+          "description": "Control plane actions necessary to execute capability type.",
+          "items": {
+            "type": "string",
+            "description": "Control plane action necessary to execute capability type."
+          }
+        },
+        "azureRbacDataActions": {
+          "type": "array",
+          "description": "Data plane actions necessary to execute capability type.",
+          "items": {
+            "type": "string",
+            "description": "Data plane action necessary to execute capability type."
+          }
+        },
+        "runtimeProperties": {
+          "type": "object",
+          "description": "Runtime properties of this Capability Type.",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "description": "String of the kind of the resource's action type (continuous or discrete).",
+              "readOnly": true
+            }
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "capabilityTypeListResult": {
+      "type": "object",
+      "description": "Model that represents a list of Capability Type resources and a link for pagination.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/capabilityType"
+          },
+          "description": "List of Capability Type resources.",
+          "readOnly": true
+        },
+        "nextLink": {
+          "$ref": "./common.json#/definitions/urlNullable",
+          "description": "URL to retrieve the next page of Capability Type resources.",
+          "readOnly": true
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

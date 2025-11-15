@@ -19,6 +19,7 @@ import "./PrivateLinkResource.tsp";
 import "./ManagedPrivateEndpointModel.tsp";
 import "./IntegrationFabric.tsp";
 import "./ManagedDashboard.tsp";
+import "./DashboardDefinition.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -42,9 +43,17 @@ enum Versions {
   /**
    * The 2024-11-01-preview API version.
    */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2024_11_01_preview: "2024-11-01-preview",
+
+  /**
+   * The 2025-08-01 API version.
+   */
+  v2025_08_01: "2025-08-01",
+
+  /**
+   * The 2025-09-01-preview API version.
+   */
+  v2025_09_01_preview: "2025-09-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}

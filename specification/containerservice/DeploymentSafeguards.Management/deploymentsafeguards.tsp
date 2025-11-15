@@ -9,7 +9,6 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
-using TypeSpec.OpenAPI;
 using Azure.Core.Traits;
 
 @armProviderNamespace

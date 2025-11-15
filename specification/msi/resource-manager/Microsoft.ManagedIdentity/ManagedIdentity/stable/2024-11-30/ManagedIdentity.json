@@ -1,0 +1,1033 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ManagedServiceIdentityClient",
+    "version": "2024-11-30",
+    "description": "The Managed Service Identity Client.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "SystemAssignedIdentities"
+    },
+    {
+      "name": "Identities"
+    },
+    {
+      "name": "FederatedIdentityCredentials"
+    }
+  ],
+  "paths": {
+    "/{scope}/providers/Microsoft.ManagedIdentity/identities/default": {
+      "get": {
+        "operationId": "SystemAssignedIdentities_GetByScope",
+        "tags": [
+          "SystemAssignedIdentities"
+        ],
+        "description": "Gets the systemAssignedIdentity available under the specified RP scope.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SystemAssignedIdentity"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MsiOperationsList": {
+            "$ref": "./examples/SystemAssignedIdentityGet.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.ManagedIdentity/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MsiOperationsList": {
+            "$ref": "./examples/MsiOperationsList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ManagedIdentity/userAssignedIdentities": {
+      "get": {
+        "operationId": "UserAssignedIdentities_ListBySubscription",
+        "tags": [
+          "Identities"
+        ],
+        "description": "Lists all the userAssignedIdentities available under the specified subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/UserAssignedIdentitiesListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IdentityListBySubscription": {
+            "$ref": "./examples/IdentityListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities": {
+      "get": {
+        "operationId": "UserAssignedIdentities_ListByResourceGroup",
+        "tags": [
+          "Identities"
+        ],
+        "description": "Lists all the userAssignedIdentities available under the specified ResourceGroup.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/UserAssignedIdentitiesListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IdentityListByResourceGroup": {
+            "$ref": "./examples/IdentityListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{resourceName}": {
+      "get": {
+        "operationId": "UserAssignedIdentities_Get",
+        "tags": [
+          "Identities"
+        ],
+        "description": "Gets the identity.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the identity resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Identity"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IdentityGet": {
+            "$ref": "./examples/IdentityGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "UserAssignedIdentities_CreateOrUpdate",
+        "tags": [
+          "Identities"
+        ],
+        "description": "Create or update an identity in the specified subscription and resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the identity resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters to create or update the identity",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Identity"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Identity' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Identity"
+            }
+          },
+          "201": {
+            "description": "Resource 'Identity' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Identity"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IdentityCreate": {
+            "$ref": "./examples/IdentityCreate.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "UserAssignedIdentities_Update",
+        "tags": [
+          "Identities"
+        ],
+        "description": "Update an identity in the specified subscription and resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the identity resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters to update the identity",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IdentityUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Identity"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IdentityUpdate": {
+            "$ref": "./examples/IdentityUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "UserAssignedIdentities_Delete",
+        "tags": [
+          "Identities"
+        ],
+        "description": "Deletes the identity.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the identity resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IdentityDelete": {
+            "$ref": "./examples/IdentityDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{resourceName}/federatedIdentityCredentials": {
+      "get": {
+        "operationId": "FederatedIdentityCredentials_List",
+        "tags": [
+          "FederatedIdentityCredentials"
+        ],
+        "description": "Lists all the federated identity credentials under the specified user assigned identity.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the identity resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "Number of records to return.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1
+          },
+          {
+            "name": "$skiptoken",
+            "in": "query",
+            "description": "A skip token is used to continue retrieving items after an operation returns a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skipToken parameter that specifies a starting point to use for subsequent calls.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/FederatedIdentityCredentialsListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FederatedIdentityCredentialList": {
+            "$ref": "./examples/FederatedIdentityCredentialList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{resourceName}/federatedIdentityCredentials/{federatedIdentityCredentialResourceName}": {
+      "get": {
+        "operationId": "FederatedIdentityCredentials_Get",
+        "tags": [
+          "FederatedIdentityCredentials"
+        ],
+        "description": "Gets the federated identity credential.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the identity resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "federatedIdentityCredentialResourceName",
+            "in": "path",
+            "description": "The name of the federated identity credential resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]{1}[a-zA-Z0-9-_]{2,119}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FederatedIdentityCredential"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FederatedIdentityCredentialGet": {
+            "$ref": "./examples/FederatedIdentityCredentialGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "FederatedIdentityCredentials_CreateOrUpdate",
+        "tags": [
+          "FederatedIdentityCredentials"
+        ],
+        "description": "Create or update a federated identity credential under the specified user assigned identity.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the identity resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "federatedIdentityCredentialResourceName",
+            "in": "path",
+            "description": "The name of the federated identity credential resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]{1}[a-zA-Z0-9-_]{2,119}$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters to create or update the federated identity credential.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FederatedIdentityCredential"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'FederatedIdentityCredential' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/FederatedIdentityCredential"
+            }
+          },
+          "201": {
+            "description": "Resource 'FederatedIdentityCredential' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/FederatedIdentityCredential"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FederatedIdentityCredentialCreate": {
+            "$ref": "./examples/FederatedIdentityCredentialCreate.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "FederatedIdentityCredentials_Delete",
+        "tags": [
+          "FederatedIdentityCredentials"
+        ],
+        "description": "Deletes the federated identity credential.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the identity resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "federatedIdentityCredentialResourceName",
+            "in": "path",
+            "description": "The name of the federated identity credential resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]{1}[a-zA-Z0-9-_]{2,119}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FederatedIdentityCredentialDelete": {
+            "$ref": "./examples/FederatedIdentityCredentialDelete.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
+    "CloudError": {
+      "type": "object",
+      "description": "An error response from the ManagedServiceIdentity service.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "A list of additional details about the error."
+        }
+      },
+      "x-ms-external": true
+    },
+    "CloudErrorBody": {
+      "type": "object",
+      "description": "An error response from the ManagedServiceIdentity service.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An identifier for the error."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for display in a user interface."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error. For example, the name of the property in error."
+        },
+        "details": {
+          "type": "array",
+          "description": "A list of additional details about the error.",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "x-ms-identifiers": [
+            "code"
+          ]
+        }
+      },
+      "x-ms-external": true
+    },
+    "FederatedIdentityCredential": {
+      "type": "object",
+      "description": "Describes a federated identity credential.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FederatedIdentityCredentialProperties",
+          "description": "The properties associated with the federated identity credential.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "FederatedIdentityCredentialProperties": {
+      "type": "object",
+      "title": "Federated identity credential properties.",
+      "description": "The properties associated with a federated identity credential.",
+      "properties": {
+        "issuer": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URL of the issuer to be trusted."
+        },
+        "subject": {
+          "type": "string",
+          "description": "The identifier of the external identity."
+        },
+        "audiences": {
+          "type": "array",
+          "description": "The list of audiences that can appear in the issued token.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "issuer",
+        "subject",
+        "audiences"
+      ]
+    },
+    "FederatedIdentityCredentialsListResult": {
+      "type": "object",
+      "description": "Values returned by the List operation for federated identity credentials.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The FederatedIdentityCredential items on this page",
+          "items": {
+            "$ref": "#/definitions/FederatedIdentityCredential"
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "Identity": {
+      "type": "object",
+      "description": "Describes an identity resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UserAssignedIdentityProperties",
+          "description": "The properties associated with the identity.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "IdentityUpdate": {
+      "type": "object",
+      "description": "Describes an identity resource.",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/UserAssignedIdentityProperties",
+          "description": "The properties associated with the identity.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "IsolationScope": {
+      "type": "string",
+      "description": "Enum to configure regional restrictions on identity assignment, as necessary.",
+      "enum": [
+        "None",
+        "Regional"
+      ],
+      "x-ms-enum": {
+        "name": "IsolationScope",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None"
+          },
+          {
+            "name": "Regional",
+            "value": "Regional"
+          }
+        ]
+      }
+    },
+    "Operation": {
+      "type": "object",
+      "title": "Microsoft.ManagedIdentity Operation.",
+      "description": "Details of a REST API operation, returned from the Resource Provider Operations API",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "Operation Name.",
+          "description": "The name of the operation, as per Resource-Based Access Control (RBAC). Examples: \"Microsoft.Compute/virtualMachines/write\", \"Microsoft.Compute/virtualMachines/capture/action\""
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "title": "Operation Display.",
+          "description": "Localized display information for this particular operation."
+        }
+      }
+    },
+    "OperationDisplay": {
+      "type": "object",
+      "title": "Operation Display.",
+      "description": "Localized display information for and operation.",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "title": "Resource Provider Name.",
+          "description": "The localized friendly form of the resource provider name, e.g. \"Microsoft Monitoring Insights\" or \"Microsoft Compute\"."
+        },
+        "operation": {
+          "type": "string",
+          "title": "Operation Type.",
+          "description": "The concise, localized friendly name for the operation; suitable for dropdowns. E.g. \"Create or Update Virtual Machine\", \"Restart Virtual Machine\"."
+        },
+        "resource": {
+          "type": "string",
+          "title": "Resource Type.",
+          "description": "The localized friendly name of the resource type related to this operation. E.g. \"Virtual Machines\" or \"Job Schedule Collections\"."
+        },
+        "description": {
+          "type": "string",
+          "title": "Operation description",
+          "description": "The short, localized friendly description of the operation; suitable for tool tips and detailed views."
+        }
+      }
+    },
+    "OperationListResult": {
+      "type": "object",
+      "title": "Operations List.",
+      "description": "A list of REST API operations supported by an Azure Resource Provider. It contains an URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "title": "Operations List.",
+          "description": "The Operation items on this page",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "title": "Next Link",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SystemAssignedIdentity": {
+      "type": "object",
+      "description": "Describes a system assigned identity resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SystemAssignedIdentityProperties",
+          "description": "The properties associated with the identity.",
+          "readOnly": true,
+          "x-ms-client-flatten": true
+        },
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SystemAssignedIdentityProperties": {
+      "type": "object",
+      "title": "System Assigned Identity properties.",
+      "description": "The properties associated with the system assigned identity.",
+      "properties": {
+        "tenantId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The id of the tenant which the identity belongs to.",
+          "readOnly": true
+        },
+        "principalId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The id of the service principal object associated with the created identity.",
+          "readOnly": true
+        },
+        "clientId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The id of the app associated with the identity. This is a random generated UUID by MSI.",
+          "readOnly": true
+        },
+        "clientSecretUrl": {
+          "type": "string",
+          "description": "The ManagedServiceIdentity DataPlane URL that can be queried to obtain the identity credentials.",
+          "readOnly": true
+        }
+      }
+    },
+    "UserAssignedIdentitiesListResult": {
+      "type": "object",
+      "description": "Values returned by the List operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Identity items on this page",
+          "items": {
+            "$ref": "#/definitions/Identity"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "UserAssignedIdentityProperties": {
+      "type": "object",
+      "title": "User Assigned Identity properties.",
+      "description": "The properties associated with the user assigned identity.",
+      "properties": {
+        "tenantId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The id of the tenant which the identity belongs to.",
+          "readOnly": true
+        },
+        "principalId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The id of the service principal object associated with the created identity.",
+          "readOnly": true
+        },
+        "clientId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The id of the app associated with the identity. This is a random generated UUID by MSI.",
+          "readOnly": true
+        },
+        "isolationScope": {
+          "$ref": "#/definitions/IsolationScope",
+          "description": "Enum to configure regional restrictions on identity assignment, as necessary.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

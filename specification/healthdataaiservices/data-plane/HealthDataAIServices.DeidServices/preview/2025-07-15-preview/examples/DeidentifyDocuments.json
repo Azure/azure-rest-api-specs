@@ -1,0 +1,71 @@
+{
+  "title": "Create a de-identification job.",
+  "operationId": "DeidentifyDocuments",
+  "parameters": {
+    "api-version": "2025-07-15-preview",
+    "name": "job_smith_documents_1",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
+    "resource": {
+      "operation": "Redact",
+      "sourceLocation": {
+        "location": "https://blobtest.blob.core.windows.net/container",
+        "prefix": "documents/"
+      },
+      "targetLocation": {
+        "location": "https://blobtest.blob.core.windows.net/container",
+        "prefix": "_output/",
+        "overwrite": true
+      },
+      "customizations": {
+        "redactionFormat": "[{type}]"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "job_smith_documents_1",
+        "operation": "Redact",
+        "sourceLocation": {
+          "location": "https://blobtest.blob.core.windows.net/container",
+          "prefix": "documents/"
+        },
+        "targetLocation": {
+          "location": "https://blobtest.blob.core.windows.net/container",
+          "prefix": "_output/",
+          "overwrite": true
+        },
+        "customizations": {
+          "redactionFormat": "[{type}]"
+        },
+        "status": "NotStarted",
+        "lastUpdatedAt": "2024-01-26T01:15:00.009Z",
+        "createdAt": "2024-01-25T23:27:43.009Z"
+      }
+    },
+    "201": {
+      "headers": {
+        "original-uri": "https://contoso.com/operationstatus"
+      },
+      "body": {
+        "name": "job_smith_documents_1",
+        "operation": "Redact",
+        "sourceLocation": {
+          "location": "https://blobtest.blob.core.windows.net/container",
+          "prefix": "documents/"
+        },
+        "targetLocation": {
+          "location": "https://blobtest.blob.core.windows.net/container",
+          "prefix": "_output/",
+          "overwrite": true
+        },
+        "customizations": {
+          "redactionFormat": "[{type}]"
+        },
+        "status": "NotStarted",
+        "lastUpdatedAt": "2024-01-26T01:15:00.009Z",
+        "createdAt": "2024-01-25T23:27:43.009Z"
+      }
+    }
+  }
+}

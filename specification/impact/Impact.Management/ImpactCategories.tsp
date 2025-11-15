@@ -6,8 +6,6 @@ import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
-using OpenAPI;
-using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 

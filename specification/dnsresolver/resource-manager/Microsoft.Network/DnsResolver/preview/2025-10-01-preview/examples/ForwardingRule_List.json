@@ -1,0 +1,79 @@
+{
+  "parameters": {
+    "api-version": "2025-10-01-preview",
+    "dnsForwardingRulesetName": "sampleDnsForwardingRuleset",
+    "resourceGroupName": "sampleResourceGroup",
+    "subscriptionId": "abdd4249-9f34-4cc6-8e42-c2e32110603e"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://management.azure.com/api/mresolver/subscriptions/abdd4249-9f34-4cc6-8e42-c2e32110603e/resourceGroups/sampleResourceGroup/providers/Microsoft.Network/forwardingRules?$skipToken=skipToken&api-version=2025-10-01-preview",
+        "value": [
+          {
+            "name": "sampleForwardingRule",
+            "type": "Microsoft.Network/dnsForwardingRulesets/forwardingRules",
+            "etag": "00000000-0000-0000-0000-000000000000",
+            "id": "/subscriptions/abdd4249-9f34-4cc6-8e42-c2e32110603e/resourceGroups/sampleResourceGroup/providers/Microsoft.Network/dnsForwardingRulesets/sampleDnsForwardingRuleset/forwardingRules/sampleForwardingRule",
+            "properties": {
+              "domainName": "contoso.com.",
+              "forwardingRuleState": "Enabled",
+              "metadata": {
+                "additionalProp1": "value1"
+              },
+              "provisioningState": "Succecced",
+              "targetDnsServers": [
+                {
+                  "ipAddress": "10.0.0.1",
+                  "port": 53
+                },
+                {
+                  "ipAddress": "10.0.0.2",
+                  "port": 53
+                }
+              ]
+            },
+            "systemData": {
+              "createdAt": "2021-04-01T01:01:01.1075056Z",
+              "createdByType": "Application",
+              "lastModifiedAt": "2021-04-02T02:03:01.1974346Z",
+              "lastModifiedByType": "Application"
+            }
+          },
+          {
+            "name": "sampleForwardingRule1",
+            "type": "Microsoft.Network/dnsForwardingRulesets/forwardingRules",
+            "etag": "00000000-0000-0000-0000-000000000000",
+            "id": "/subscriptions/abdd4249-9f34-4cc6-8e42-c2e32110603e/resourceGroups/sampleResourceGroup/providers/Microsoft.Network/dnsForwardingRulesets/sampleDnsForwardingRuleset/forwardingRules/sampleForwardingRule1",
+            "properties": {
+              "domainName": "foobar.com.",
+              "forwardingRuleState": "Enabled",
+              "metadata": {
+                "additionalProp1": "value1"
+              },
+              "provisioningState": "Succecced",
+              "targetDnsServers": [
+                {
+                  "ipAddress": "10.0.0.3",
+                  "port": 53
+                },
+                {
+                  "ipAddress": "10.0.0.4",
+                  "port": 53
+                }
+              ]
+            },
+            "systemData": {
+              "createdAt": "2021-04-01T01:01:01.1075056Z",
+              "createdByType": "Application",
+              "lastModifiedAt": "2021-04-02T02:03:01.1974346Z",
+              "lastModifiedByType": "Application"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ForwardingRules_List",
+  "title": "List forwarding rules in a DNS forwarding ruleset"
+}

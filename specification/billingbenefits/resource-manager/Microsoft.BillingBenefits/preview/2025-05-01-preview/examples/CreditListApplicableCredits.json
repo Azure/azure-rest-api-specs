@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "scope": "providers/Microsoft.Billing/billingAccounts/{acctId}",
+    "api-version": "2025-05-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/97ee05f2-07d5-494d-908c-081a197f4277/providers/Microsoft.BillingBenefits/applicableCredits/{systemId}",
+            "name": "credit_20231212",
+            "type": "Microsoft.BillingBenefits/applicableCredits",
+            "properties": {
+              "resourceId": "/subscriptions/30000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.BillingBenefits/credits/testprimarydiscount",
+              "productCode": "0001d726-0000-0160-330f-a0b98cdbbdc4",
+              "reason": {
+                "code": 125,
+                "description": "Outage credit (SLA)"
+              },
+              "credit": {
+                "grain": "FullTerm",
+                "amount": 20000,
+                "currencyCode": "USD"
+              },
+              "startAt": "2023-07-01T00:00:00Z",
+              "endAt": "2024-07-01T23:59:59Z",
+              "status": "Succeeded",
+              "billingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/12345678",
+              "billingProfileResourceId": "/providers/Microsoft.Billing/billingAccounts/1185c37e-d180-5aea-03a3-07e2489791a8:3c9f6394-2029-4f58-bf47-76ebbb03136e_2019-05-31/billingProfiles/6EB6-D7AQ-BG7-TGB",
+              "customerId": "/providers/Microsoft.Billing/billingAccounts/1185c37e-d180-5aea-03a3-07e2489791a8:3c9f6394-2029-4f58-bf47-76ebbb03136e_2019-05-31/customers/5334c5c9-e4b0-4170-a015-fa8fff5c226a",
+              "systemId": "13810867107109237"
+            },
+            "location": "global",
+            "tags": {
+              "key1": "value1",
+              "key2": "value2"
+            },
+            "systemData": {
+              "createdByType": "User",
+              "createdAt": "2023-12-12T01:01:01.1075056Z",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2023-12-12T01:01:01.1075056Z"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "parameters": {
+    "subscriptionId": "10000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resource_group_name_01",
+    "maccName": "macc_20230614",
+    "api-version": "2025-05-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/10000000-0000-0000-0000-000000000000/resourceGroups/resource_group_name_01/providers/Microsoft.BillingBenefits/maccs/macc_20230614",
+        "name": "macc_20230614",
+        "type": "Microsoft.BillingBenefits/maccs",
+        "properties": {
+          "entityType": "Primary",
+          "displayName": "macc_20230614",
+          "productCode": "0001d726-0000-0160-330f-a0b98cdbbdc4",
+          "commitment": {
+            "grain": "FullTerm",
+            "amount": 20000,
+            "currencyCode": "USD"
+          },
+          "startAt": "2023-07-01T00:00:00Z",
+          "endAt": "2024-07-31T23:59:59Z",
+          "systemId": "13810867107109237",
+          "allowContributors": true,
+          "provisioningState": "Canceled",
+          "status": "ShortfallCharged",
+          "automaticShortfall": "Enabled",
+          "shortfall": {
+            "productCode": "000278da-0000-0160-330f-a0b98cdbbdc4",
+            "charge": {
+              "amount": 10000,
+              "currencyCode": "USD",
+              "grain": "FullTerm"
+            },
+            "startAt": "2024-09-01T00:00:00Z",
+            "endAt": "2025-09-30T23:59:59Z",
+            "resourceId": "/subscriptions/27507203-b094-420a-a716-b6fda046e1c2/resourceGroups/testcredit/providers/Microsoft.BillingBenefits/credits/taco0647052025",
+            "balanceVersion": 2,
+            "systemId": "shortfall12345678"
+          }
+        },
+        "location": "global",
+        "tags": {
+          "key1": "value1",
+          "key2": "value2"
+        },
+        "systemData": {
+          "createdByType": "User",
+          "createdAt": "2023-02-01T01:01:01.1075056Z",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-02-01T01:01:01.1075056Z"
+        }
+      }
+    }
+  }
+}

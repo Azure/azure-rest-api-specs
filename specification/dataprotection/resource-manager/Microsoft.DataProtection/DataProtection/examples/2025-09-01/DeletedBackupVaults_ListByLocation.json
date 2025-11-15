@@ -1,0 +1,66 @@
+{
+  "title": "List deleted backup vaults by location",
+  "operationId": "DeletedBackupVaults_ListByLocation",
+  "parameters": {
+    "api-version": "2025-09-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "location": "westus"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.DataProtection/locations/westus/deletedBackupVaults/deleted-vault-01",
+            "name": "deleted-vault-01",
+            "type": "Microsoft.DataProtection/deletedBackupVaults",
+            "properties": {
+              "originalBackupVaultId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-rg/providers/Microsoft.DataProtection/backupVaults/sample-vault",
+              "originalBackupVaultName": "sample-vault",
+              "originalBackupVaultResourcePath": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-rg/providers/Microsoft.DataProtection/backupVaults/sample-vault",
+              "resourceDeletionInfo": {
+                "deletionTime": "2025-09-18T10:00:00.000Z",
+                "scheduledPurgeTime": "2025-10-18T10:00:00.000Z",
+                "deleteActivityId": "00000000-0000-0000-0000-000000000000"
+              },
+              "monitoringSettings": {
+                "azureMonitorAlertSettings": {
+                  "alertsForAllJobFailures": "Enabled"
+                }
+              },
+              "provisioningState": "Succeeded",
+              "resourceMoveState": "Unknown",
+              "securitySettings": {
+                "softDeleteSettings": {
+                  "state": "On",
+                  "retentionDurationInDays": 14.0
+                },
+                "immutabilitySettings": {
+                  "state": "Disabled"
+                }
+              },
+              "storageSettings": [
+                {
+                  "datastoreType": "VaultStore",
+                  "type": "LocallyRedundant"
+                }
+              ],
+              "isVaultProtectedByResourceGuard": false,
+              "featureSettings": {
+                "crossSubscriptionRestoreSettings": {
+                  "state": "Disabled"
+                },
+                "crossRegionRestoreSettings": {
+                  "state": "Disabled"
+                }
+              },
+              "secureScore": "Maximum",
+              "resourceGuardOperationRequests": [],
+              "replicatedRegions": []
+            }
+          }
+        ]
+      }
+    }
+  }
+}

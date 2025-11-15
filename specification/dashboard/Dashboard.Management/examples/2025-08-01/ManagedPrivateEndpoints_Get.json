@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "api-version": "2025-08-01",
+    "managedPrivateEndpointName": "myMPEName",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "workspaceName": "myWorkspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myMPEName",
+        "type": "Microsoft.Dashboard/grafana/managedPrivateEndpoint",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/Microsoft.Dashboard/grafana/myWorkspace/managedPrivateEndpoints/myPrivateEndpointName",
+        "location": "West US",
+        "properties": {
+          "connectionState": {
+            "description": "Auto-Approved",
+            "status": "Approved"
+          },
+          "groupIds": [
+            "grafana"
+          ],
+          "privateLinkResourceId": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-000000000000/resourceGroups/xx-rg/providers/Microsoft.Kusto/Clusters/sampleKustoResource",
+          "privateLinkResourceRegion": "West US",
+          "provisioningState": "Succeeded",
+          "requestMessage": "Example Request Message"
+        },
+        "systemData": {
+          "createdAt": "2020-02-03T01:01:01.1075056Z",
+          "createdBy": "string",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-02-04T02:03:01.1974346Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User"
+        }
+      }
+    }
+  },
+  "operationId": "ManagedPrivateEndpoints_Get",
+  "title": "ManagedPrivateEndpoint_Get"
+}

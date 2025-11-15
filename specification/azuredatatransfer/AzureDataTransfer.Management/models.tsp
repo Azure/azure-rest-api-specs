@@ -2,12 +2,11 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-client-generator-core";
+import "./models.flowprofile.tsp";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
 using Azure.ResourceManager;
-using Azure.ClientGenerator.Core;
 using Azure.ResourceManager.Foundations;
+using Versioning;
 
 namespace Microsoft.AzureDataTransfer;
 
@@ -107,20 +106,26 @@ union ConnectionStatus {
 }
 
 /**
- * Status of force disablement
+ * Defines different disablement statuses and the circumstances in why they were disabled.
  */
 union ForceDisabledStatus {
   string,
 
   /**
-   * This Flow has been disabled as the connection has been disabled.
+   * Defines disablement of a Flow due to the parent connection being disabled.
    */
   ConnectionForceDisabled: "ConnectionForceDisabled",
 
   /**
-   * This Flow has been disabled as the flow type this flow uses has been disabled.
+   * Defines disablement of a Flow due to the linked flow type being disabled.
    */
   FlowTypeForceDisabled: "FlowTypeForceDisabled",
+
+  /**
+   * Defines disablement of a Flow due to the Pipeline being disabled.
+   */
+  @added(Versions.v2025_05_30_preview)
+  PipelineForceDisabled: "PipelineForceDisabled",
 }
 
 /**
@@ -130,20 +135,18 @@ union LinkStatus {
   string,
 
   /**
-   * The pipeline, connection, or flow is currently linked with another corresponding pipeline,
-   * connection, or flow, and can be used.
+   * The pipeline, connection, or flow is currently linked with another corresponding pipeline, connection, or flow, and can be used.
    */
   Linked: "Linked",
 
   /**
-   * The pipeline, connection, or flow is not linked with another corresponding pipeline,
-   * connection, or flow, and cannot be used.
+   * The pipeline, connection, or flow is not linked with another corresponding pipeline, connection, or flow, and cannot be used.
    */
   Unlinked: "Unlinked",
 }
 
 /**
- * Flow type for the specified resource
+ * Flow type for the specified resource. FlowType will be deprecated starting from version 2025_05_30_preview - please create a FlowProfile resource instead.
  */
 union FlowType {
   string,
@@ -169,7 +172,7 @@ union FlowType {
   Messaging: "Messaging",
 
   /**
-   * This flow sends data that will not be processed by any security system.
+   * This flow sends standard data but is subject to strict cloud owner approval.
    */
   Mission: "Mission",
 
@@ -199,12 +202,12 @@ union FlowType {
   StreamingVideo: "StreamingVideo",
 
   /**
-   * This flow sends blobs that will not be processed by any security system.
+   * This flow sends blobs but is subject to cloud owner approval.
    */
   Opaque: "Opaque",
 
   /**
-   * This flow sends Extensible Markup Language that will not be processed by any security system.
+   * This flow sends Extensible Markup Language that is subject to strict cloud owner approval
    */
   MissionOpaqueXML: "MissionOpaqueXML",
 
@@ -264,6 +267,40 @@ union OperationStatusEnum {
 }
 
 /**
+ * The allowed statuses of a FlowProfile.
+ */
+union FlowProfileStatus {
+  string,
+
+  /**
+   * Defines a FlowProfile that can no longer be selected.
+   */
+  Obsolete: "Obsolete",
+
+  /**
+   * Defines a FlowProfile that is enabled.
+   */
+  Enabled: "Enabled",
+}
+
+/**
+ * Enablement statuses
+ */
+union EnablementStatus {
+  string,
+
+  /**
+   * Represents an enabled status.
+   */
+  Enabled: "Enabled",
+
+  /**
+   * Represents a disabled status.
+   */
+  Disabled: "Disabled",
+}
+
+/**
  * Status of the current pipeline
  */
 union PipelineStatus {
@@ -295,6 +332,87 @@ union FlowStatus {
    * The flow is currently disabled and cannot send or receive data.
    */
   Disabled: "Disabled",
+}
+
+/**
+ * Defines the supported replication scenarios for Azure Data Transfer.
+ */
+@added(Versions.v2025_05_30_preview)
+union DataClassType {
+  string,
+
+  /**
+   * Represents standard message-based data, including Azure Service and Event Hub, used in message replication.
+   */
+  "Messaging",
+
+  /**
+   * Represents transactional request/response data types from API endpoints.
+   */
+  "API",
+
+  /**
+   * Represents data types that require continuous, real-time streaming replication (e.g., video).
+   */
+  "Stream",
+
+  /**
+   * Represents standard file-based data, including Azure Blob and Table Storage, used in general-purpose replication.
+   */
+  "Files",
+
+  /**
+   * Represents data related to development, security, and operations workflows such as build artifacts subject to an NCDSMO policy.
+   */
+  "SoftwareArtifacts",
+
+  /**
+   * Represents rich content types such as documents (e.g., Word, PDF) and images that require specialized replication handling.
+   */
+  "Complex",
+}
+
+/**
+ * The list of data types supported for replication.
+ */
+@added(Versions.v2025_05_30_preview)
+union DataClass {
+  string,
+
+  /**
+   * (Messaging) Replicates messages from Azure Service Bus for downstream processing or analysis.
+   */
+  "ServiceBus",
+
+  /**
+   * (Messaging) Replicates messages from Azure Event Hub for downstream processing or analysis.
+   */
+  "EventHub",
+
+  /**
+   * (API) Replicates request/response data through RESTful API endpoints.
+   */
+  "ApiEndpoint",
+
+  /**
+   * (API) Replicates request/response data through SDK-based integrations.
+   */
+  "ApiSDK",
+
+  /**
+   * (Stream) Enables replication of real-time video streaming data.
+   */
+  "Video",
+
+  /**
+   * (Files/SoftwareArtifacts/Complex) Replicates generic blobs data using Azure Blob Storage.
+   */
+  "Blob",
+
+  /**
+   * (Files) Replicates structured NoSQL data using Azure Table Storage.
+   */
+  "Table",
 }
 
 /**
@@ -360,8 +478,7 @@ union IdentityTranslation {
   string,
 
   /**
-   * The API flow will make use of the user identity that called this API flow, and pass that token
-   * through the boundary.
+   * The API flow will make use of the user identity that called this API flow, and pass that token through the boundary.
    */
   UserIdentity: "UserIdentity",
 
@@ -369,6 +486,24 @@ union IdentityTranslation {
    * The API flow will make use of the Azure Data Transfer Flow managed identity on the other side of the boundary.
    */
   ServiceIdentity: "ServiceIdentity",
+}
+
+/**
+ * Type of authentication mechanism for Azure Data Transfer API Flows.
+ */
+@added(Versions.v2025_05_30_preview)
+union AuthenticationType {
+  string,
+
+  /**
+   * Option to use a JWT Bearer Authentication Token.
+   */
+  JWT: "JWT",
+
+  /**
+   * Option to not use any form of Authentication.
+   */
+  None: "None",
 }
 
 /**
@@ -416,7 +551,7 @@ union TargetType {
 }
 
 /**
- * The request used to list approved schemas within the resource provider.
+ * The request used to list approved schemas within the resource provider. ListApprovedSchemaRequest has reached end of life support starting version 2025-05-30-preview. Please manage schemas with a FlowProfile resource instead.
  */
 model ListApprovedSchemasRequest {
   /**
@@ -431,7 +566,7 @@ model ListApprovedSchemasRequest {
 }
 
 /**
- * The schemas list result.
+ * The schemas list result. SchemaListResults has reached end of life support starting version 2025-05-30-preview. Please manage schemas with a FlowProfile resource instead.
  */
 model SchemasListResult {
   /**
@@ -441,7 +576,7 @@ model SchemasListResult {
 }
 
 /**
- * The schema object.
+ * The schema object. Schemas has reached end of life support starting version 2025-05-30-preview. Please manage schemas with a FlowProfile resource instead.
  */
 model Schema {
   /**
@@ -486,7 +621,7 @@ model Schema {
 }
 
 /**
- * Result of the schema validation.
+ * Result of the schema validation. ValidateSchemaResult has reached end of life support starting version 2025-05-30-preview. Please manage schemas with a FlowProfile resource instead.
  */
 model ValidateSchemaResult {
   /**
@@ -550,9 +685,15 @@ model ConnectionProperties {
   linkedConnectionId?: string;
 
   /**
-   * The flow types being requested for this connection
+   * The flow types being requested for this connection. This FlowType property has reached end of life support starting version 2025-05-30-preview. Please create a FlowProfile resource instead.
    */
   flowTypes?: FlowType[];
+
+  /**
+   * Provides a list of FlowProfiles .
+   */
+  @added(Versions.v2025_05_30_preview)
+  flowProfileList?: FlowProfileMetadata[];
 
   /**
    * Requirement ID of the connection
@@ -598,19 +739,25 @@ model ConnectionProperties {
   provisioningState?: ProvisioningState;
 
   /**
-   * The policies for this connection
+   * The policies for this connection. The policies property has reached end of life support starting version 2025-05-30-preview. Please create and use a FlowProfile resource instead.
    */
   policies?: string[];
 
   /**
-   * The schemas for this connection
+   * The schemas for this connection. The schemas property has reached end of life support starting version 2025-05-30-preview. Please create and use a FlowProfile resource instead.
    */
   schemas?: Schema[];
 
   /**
-   * The schema URIs for this connection
+   * The schema URIs for this connection. The schemaUris property has reached end of life support starting version 2025-05-30-preview. Please create and use a FlowProfile resource instead.
    */
   schemaUris?: url[];
+
+  /**
+   * Hostname specific to API Flows
+   */
+  @added(Versions.v2025_05_30_preview)
+  apiHostname?: string;
 }
 
 /**
@@ -631,13 +778,13 @@ model PipelineProperties {
    * Connections associated with pipeline
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["id"])
-  connections?: Read<PipelineConnection>[];
+  @identifiers(#["id"])
+  connections?: ReadPipelineConnection[];
 
   /**
    * Subscribers of this resource
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   subscribers?: Subscriber[];
 
   /**
@@ -647,12 +794,12 @@ model PipelineProperties {
   provisioningState?: ProvisioningState;
 
   /**
-   * The policies for this pipeline
+   * The policies for this pipeline. The policies property has reached end of life support starting version 2025-05-30-preview. Please create and use a FlowProfile resource instead.
    */
   policies?: string[];
 
   /**
-   * The flow types allowed for this pipeline
+   * The flow type for this flow. The flowTypes property has reached end of life support starting version 2025-05-30-preview. Please create and use a FlowProfile resource instead.
    */
   flowTypes?: FlowType[];
 
@@ -660,6 +807,12 @@ model PipelineProperties {
    * The flow types that are disabled for this pipeline
    */
   disabledFlowTypes?: FlowType[];
+
+  /**
+   * The DataClasses that are disabled for this pipeline
+   */
+  @added(Versions.v2025_05_30_preview)
+  disabledDataClass?: DataClass[];
 
   /**
    * Quarantine Download Storage Account
@@ -718,25 +871,6 @@ model PipelineConnection {
    */
   @visibility(Lifecycle.Read)
   systemData?: SystemData;
-
-  /**
-   * Connection properties inside pipeline
-   */
-  @visibility(Lifecycle.Read)
-  properties?: PipelineConnectionProperties;
-}
-
-/**
- * Connection properties inside pipeline
- */
-model PipelineConnectionProperties {
-  ...Record<unknown>;
-
-  /**
-   * Internal metadata of the connection inside pipeline.
-   */
-  @visibility(Lifecycle.Read)
-  internalMetadata?: InternalMetadataProperties;
 }
 
 /**
@@ -881,12 +1015,24 @@ model FlowProperties {
   ]>;
 
   /**
-   * The flow type for this flow
+   * Type of FlowProfile to use for transfer via the flow.
+   */
+  @added(Versions.v2025_05_30_preview)
+  flowProfile?: FlowProfileMetadata;
+
+  /**
+   * The Flow's data class.
+   */
+  @added(Versions.v2025_05_30_preview)
+  flowDataType?: DataClass;
+
+  /**
+   * The flow type for this flow. The property has reached end of life support starting version 2025-05-30-preview. Please create and use a FlowProfile resource instead.
    */
   flowType?: FlowType;
 
   /**
-   * Type of data to transfer via the flow.
+   * Type of data to transfer via the flow. The property has reached end of life support starting version 2025-05-30-preview. Please create and use a FlowProfile resource instead.
    */
   dataType?: DataType;
 
@@ -897,12 +1043,12 @@ model FlowProperties {
   provisioningState?: ProvisioningState;
 
   /**
-   * The policies for this flow
+   * The policies for this flow. The property has reached end of life support starting version 2025-05-30-preview. Please create and use a FlowProfile resource instead.
    */
   policies?: string[];
 
   /**
-   * The selected schema for this flow
+   * The selected schema for this flow. The property has reached end of life support starting version 2025-05-30-preview. Please create and use a FlowProfile resource instead.
    */
   schema?: Schema;
 
@@ -1005,6 +1151,12 @@ model MessagingOptions {
    * Billing tier for this messaging flow
    */
   billingTier?: FlowBillingTier;
+
+  /**
+   * Field indicating whether to enable guaranteed delivery on the flow or not. The default disabled option chooses speed over consistency. When enabled, messages are delivered with minimal delay, but delivery is not guaranteed under all conditions
+   */
+  @added(Versions.v2025_05_30_preview)
+  performancePriority?: EnablementStatus = EnablementStatus.Disabled;
 }
 
 /**
@@ -1012,7 +1164,7 @@ model MessagingOptions {
  */
 model ApiFlowOptions {
   /**
-   * Remote host to which communication needs to be made
+   * Remote host to which communication needs to be made. The property has reached end of life support starting version 2025-05-30-preview. Please create and use the remoteEndpointSettings.endpoint property instead.
    */
   remoteEndpoint?: string;
 
@@ -1027,24 +1179,100 @@ model ApiFlowOptions {
   apiMode?: ApiMode;
 
   /**
-   * Flag for if Azure Data Transfer API Flow should extract the user token
+   * Determines which identity to use for extracting the user token for Azure Data Transfer API Flow. The property has reached end of life support starting version 2025-05-30-preview. Please create and use the authentication property instead.
    */
   identityTranslation?: IdentityTranslation;
 
   /**
-   * Sender's app user assigned Manage Identity client ID
+   * Sender's app user assigned Manage Identity client ID. The property has reached end of life support starting version 2025-05-30-preview. Please create and use the authentication property instead.
    */
   senderClientId?: string;
 
   /**
-   * Remote stub app registration Client ID
+   * Remote stub app registration Client ID. The property has reached end of life support starting version 2025-05-30-preview. Please create and use the authentication property instead.
    */
   remoteCallingModeClientId?: string;
 
   /**
-   * Optional field to override the audience of the remote endpoint
+   * Optional field to override the audience of the remote endpoint. The property has reached end of life support starting version 2025-05-30-preview. Please create and use the authentication property instead.
    */
   audienceOverride?: string;
+
+  /**
+   * Optional and for advanced used only. A list of authentication methods to use when accessing the Azure Data Transfer API Flow. If not provided, the default S2S authentication using Entra (API Flow Managed Identity) and RBAC will be applied.
+   */
+  @added(Versions.v2025_05_30_preview)
+  @identifiers(#[])
+  authentication?: Authentication[];
+
+  /**
+   * Defines the destination remote endpoint for the API calls.
+   */
+  @added(Versions.v2025_05_30_preview)
+  remoteEndpointSettings?: RemoteEndpointSettings;
+}
+
+/**
+ * Properties to configure the destination remote endpoint for API calls.
+ */
+@added(Versions.v2025_05_30_preview)
+model RemoteEndpointSettings {
+  /**
+   * The remote endpoint uri all API calls.
+   */
+  endpoint: string;
+
+  /**
+   * Optional and for advanced used only. A list of authentication methods to use when accessing the remote endpoint. If not provided, the default S2S authentication using Entra (API Flow Managed Identity) and RBAC will be applied.
+   */
+  @identifiers(#[])
+  authentication?: Authentication[];
+}
+
+/**
+ * Configures the authentication method and parameters for an Azure Data Transfer API Flow.
+ */
+@added(Versions.v2025_05_30_preview)
+model Authentication {
+  /**
+   * Type of authentication mechanism. JWT by default.
+   */
+  type?: AuthenticationType = AuthenticationType.JWT;
+
+  /**
+   * The identity provider's token service instance.
+   */
+  instance?: string;
+
+  /**
+   * A unique identifier representing the tenant of the identity provider's token service.
+   */
+  tenantId?: string;
+
+  /**
+   * The full URL endpoint used to acquire tokens, typically combining the instance and tenant ID to target a specific authentication context.
+   */
+  authority?: string;
+
+  /**
+   * List of applicationIds allowed to authorize to this flow. This is used as an alternative to the RBAC authorization check.
+   */
+  applicationIds?: string[];
+
+  /**
+   * Audience of the identity of the remote endpoint service. By default, remoteEndpointSettings.endpoint will be used if a value is not provided.
+   */
+  audience?: string;
+
+  /**
+   * The Flow can use an Entra app identity that is provided by the Flow user to obtain the token to call the remote endpoint. This field specifies the user provided app's clientId.
+   */
+  clientIdOverride?: string;
+
+  /**
+   * Determines which identity to use for extracting the user token for Azure Data Transfer API Flow.
+   */
+  identityTranslation?: IdentityTranslation;
 }
 
 /**
@@ -1229,11 +1457,11 @@ model PipelinesPatch {
 }
 
 /**
- * Properties of pipelines patch body.
+ * Properties of pipelines patch body. The property has reached end of life support starting version 2025-05-30-preview. Please create and use the FlowProfile resource instead.
  */
 model PipelinesPatchProperties {
   /**
-   * The flow types allowed for this pipeline
+   * The flow types allowed for this pipeline. FlowTypes has reached end of life support starting version 2025-05-30-preview. Please create and use the FlowProfile property instead.
    */
   flowTypes?: FlowType[];
 }
@@ -1297,7 +1525,7 @@ model ListFlowsByPipelineResult {
   /**
    * List flows by pipeline result by connection
    */
-  @OpenAPI.extension("x-ms-identifiers", #["id"])
+  @identifiers(#["id"])
   value?: ListFlowsByPipelineConnection[];
 }
 
@@ -1344,4 +1572,59 @@ model AzureResourceManagerArmResponsePipeline {
    * The body type of the operation request or response.
    */
   body: Pipeline;
+}
+
+/**
+ * The ReadPipelineconnection.
+ */
+model ReadPipelineConnection {
+  ...Record<unknown>;
+
+  /**
+   * Connection id inside pipeline
+   */
+  id: string;
+
+  /**
+   * Connection name inside pipeline
+   */
+  name?: string;
+
+  /**
+   * Connection type inside pipeline
+   */
+  type?: string;
+
+  /**
+   * Connection location inside pipeline
+   */
+  location?: string;
+
+  /**
+   * Connection etag inside pipeline
+   */
+  etag?: string;
+
+  /**
+   * Metadata pertaining to creation and last modification of the resource.
+   */
+  systemData?: SystemData;
+
+  /**
+   * Connection properties inside pipeline
+   */
+  properties?: PipelineConnectionProperties;
+}
+
+/**
+ * Connection properties inside pipeline
+ */
+model PipelineConnectionProperties {
+  ...Record<unknown>;
+
+  /**
+   * Internal metadata of the connection inside pipeline.
+   */
+  @visibility(Lifecycle.Read)
+  internalMetadata?: InternalMetadataProperties;
 }

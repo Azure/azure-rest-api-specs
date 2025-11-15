@@ -1,0 +1,84 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Capability Types",
+    "version": "2023-04-01-preview"
+  },
+  "paths": {},
+  "definitions": {
+    "capability": {
+      "type": "object",
+      "description": "Model that represents a Capability resource.",
+      "allOf": [
+        {
+          "$ref": "../../../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "systemData": {
+          "description": "The standard system metadata of a resource type.",
+          "$ref": "../../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "The properties of a capability resource.",
+          "$ref": "#/definitions/capabilityProperties",
+          "readOnly": true
+        }
+      }
+    },
+    "capabilityProperties": {
+      "type": "object",
+      "description": "Model that represents the Capability properties model.",
+      "properties": {
+        "publisher": {
+          "type": "string",
+          "description": "String of the Publisher that this Capability extends.",
+          "readOnly": true
+        },
+        "targetType": {
+          "type": "string",
+          "description": "String of the Target Type that this Capability extends.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Localized string of the description.",
+          "readOnly": true
+        },
+        "parametersSchema": {
+          "$ref": "./common.json#/definitions/url",
+          "description": "URL to retrieve JSON schema of the Capability parameters.",
+          "readOnly": true
+        },
+        "urn": {
+          "$ref": "./common.json#/definitions/urn",
+          "description": "String of the URN for this Capability Type.",
+          "readOnly": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "capabilityListResult": {
+      "type": "object",
+      "description": "Model that represents a list of Capability resources and a link for pagination.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/capability"
+          },
+          "description": "List of Capability resources.",
+          "readOnly": true
+        },
+        "nextLink": {
+          "$ref": "./common.json#/definitions/urlNullable",
+          "description": "URL to retrieve the next page of Capability resources.",
+          "readOnly": true
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

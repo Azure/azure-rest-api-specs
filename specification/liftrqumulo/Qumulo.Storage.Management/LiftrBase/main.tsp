@@ -7,8 +7,6 @@ import "@typespec/versioning";
 
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
-using TypeSpec.Reflection;
-using TypeSpec.OpenAPI;
 
 @versioned(LiftrBase.Versions)
 namespace LiftrBase;
@@ -16,7 +14,6 @@ namespace LiftrBase;
 @doc("Supported versions for LiftrBase resource model")
 enum Versions {
   @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1")
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
   v2_preview: "2024-02-01-preview",
 }
@@ -88,7 +85,7 @@ model UserDetails {
    * User Email
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Legacy"
-  @extension("x-ms-secret", true)
+  @OpenAPI.extension("x-ms-secret", true)
   email: string;
 }
 
