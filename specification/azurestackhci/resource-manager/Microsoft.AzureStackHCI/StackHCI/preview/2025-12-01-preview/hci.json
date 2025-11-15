@@ -2999,7 +2999,7 @@
               {
                 "name": "Disabled",
                 "value": "Disabled",
-                "description": "Network Adapter on the device is RDMA Capable"
+                "description": "Network Adapter on the device isn't RDMA Capable"
               }
             ]
           },
@@ -3641,11 +3641,11 @@
       "type": "string",
       "description": "The provisioning state of a resource.",
       "enum": [
+        "NotSpecified",
         "Succeeded",
         "Failed",
         "Canceled",
         "InProgress",
-        "NotSpecified",
         "Provisioning",
         "Updating",
         "Deleting",
@@ -3655,6 +3655,11 @@
         "name": "ProvisioningState",
         "modelAsString": true,
         "values": [
+          {
+            "name": "NotSpecified",
+            "value": "NotSpecified",
+            "description": "The resource provision state is not specified"
+          },
           {
             "name": "Succeeded",
             "value": "Succeeded",
@@ -3674,11 +3679,6 @@
             "name": "InProgress",
             "value": "InProgress",
             "description": "Resource creation is in progress."
-          },
-          {
-            "name": "NotSpecified",
-            "value": "NotSpecified",
-            "description": "The resource provision state is not specified"
           },
           {
             "name": "Provisioning",
@@ -3723,7 +3723,7 @@
           {
             "name": "Disabled",
             "value": "Disabled",
-            "description": "Network Adapter on the device is RDMA Capable"
+            "description": "Network Adapter on the device isn't RDMA Capable"
           }
         ]
       }
@@ -4033,14 +4033,19 @@
       "type": "string",
       "description": "Indicates the current Software Defined Networking (SDN) status of the resource, which may be an individual device or a cluster.",
       "enum": [
+        "Unknown",
         "Disabled",
-        "Enabled",
-        "Unknown"
+        "Enabled"
       ],
       "x-ms-enum": {
         "name": "SdnStatus",
         "modelAsString": true,
         "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "The SDN status could not be determined due to a failure in querying the SDN API service. This may occur if the query script fails or if the system is in an inconsistent state. The domain name will be null in this case."
+          },
           {
             "name": "Disabled",
             "value": "Disabled",
@@ -4050,11 +4055,6 @@
             "name": "Enabled",
             "value": "Enabled",
             "description": "SDN is successfully enabled on the resource. The domain name will be populated in the format `<sdnPrefix>-nc.<domain>`. Customers may need to manage DNS settings to ensure proper resolution."
-          },
-          {
-            "name": "Unknown",
-            "value": "Unknown",
-            "description": "The SDN status could not be determined due to a failure in querying the SDN API service. This may occur if the query script fails or if the system is in an inconsistent state. The domain name will be null in this case."
           }
         ]
       }

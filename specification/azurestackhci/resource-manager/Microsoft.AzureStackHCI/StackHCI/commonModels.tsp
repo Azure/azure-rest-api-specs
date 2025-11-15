@@ -198,6 +198,11 @@ union SdnStatus {
   string,
 
   /**
+   * The SDN status could not be determined due to a failure in querying the SDN API service. This may occur if the query script fails or if the system is in an inconsistent state. The domain name will be null in this case.
+   */
+  Unknown: "Unknown",
+
+  /**
    * SDN is not enabled on the resource. The domain name will be null. This is the default state when SDN has not been configured.
    */
   Disabled: "Disabled",
@@ -206,9 +211,4 @@ union SdnStatus {
    * SDN is successfully enabled on the resource. The domain name will be populated in the format `<sdnPrefix>-nc.<domain>`. Customers may need to manage DNS settings to ensure proper resolution.
    */
   Enabled: "Enabled",
-
-  /**
-   * The SDN status could not be determined due to a failure in querying the SDN API service. This may occur if the query script fails or if the system is in an inconsistent state. The domain name will be null in this case.
-   */
-  Unknown: "Unknown",
 }
