@@ -751,6 +751,10 @@
           "$ref": "#/definitions/HostNetwork",
           "description": "HostNetwork config to deploy AzureStackHCI Cluster.",
           "readOnly": true
+        },
+        "sdnProperties": {
+          "description": "Software Defined Networking Properties of the cluster",
+          "$ref": "./hci.json#/definitions/SdnProperties"
         }
       }
     },
@@ -1132,6 +1136,81 @@
         "extensionProfile": {
           "$ref": "#/definitions/ExtensionProfile",
           "description": "Extensions details for edge device.",
+          "readOnly": true
+        },
+        "lastSyncTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Most recent edge device sync timestamp in UTC.",
+          "readOnly": true
+        },
+        "confidentialVmProfile": {
+          "$ref": "#/definitions/ConfidentialVmProfile",
+          "description": "Confidential VM support details for edge device.",
+          "readOnly": true
+        }
+      }
+    },
+    "ConfidentialVmProfile": {
+      "type": "object",
+      "description": "Represents the Confidential Virtual Machine (CVM) configuration status for an edge device. It includes the current IGVM support state and detailed component-level status information.",
+      "properties": {
+        "igvmStatus": {
+          "$ref": "#/definitions/IgvmStatus",
+          "description": "Indicates whether Independent Guest Virtual Machine (IGVM) support is available on the device. This will be 'Enabled' if the device supports confidential VMs, 'Disabled' if not, and 'Unknown' if the status cannot be determined.",
+          "readOnly": true
+        },
+        "statusDetails": {
+          "type": "array",
+          "description": "Provides detailed status entries for IGVM-related components, including deployment status, compatibility checks, and error diagnostics.",
+          "items": {
+            "$ref": "#/definitions/IgvmStatusDetail"
+          }
+        }
+      }
+    },
+    "IgvmStatus": {
+      "type": "string",
+      "description": "Represents the IGVM support status for the device.",
+      "enum": [
+        "Unknown",
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "IgvmStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "The IGVM status could not be determined due to a query failure or inconsistent system state."
+          },
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "IGVM support is enabled, indicating that confidential VM features are available on this device."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "IGVM status is disabled, indicating that confidential VM features are not supported on this device."
+          }
+        ]
+      }
+    },
+    "IgvmStatusDetail": {
+      "type": "object",
+      "description": "Provides component-level status information related to IGVM enablement on the device.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "A machine-readable status code indicating the result or condition of a specific IGVM-related check or operation.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable message providing context or explanation for the associated status code.",
           "readOnly": true
         }
       }

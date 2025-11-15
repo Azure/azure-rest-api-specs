@@ -375,6 +375,9 @@ union EdgeMachineState {
 union ProvisioningState {
   string,
 
+  @doc("The resource provision state is not specified")
+  NotSpecified: "NotSpecified",
+
   @doc("Resource has been created.")
   Succeeded: "Succeeded",
 
@@ -386,9 +389,6 @@ union ProvisioningState {
 
   @doc("Resource creation is in progress.")
   InProgress: "InProgress",
-
-  @doc("The resource provision state is not specified")
-  NotSpecified: "NotSpecified",
 
   @doc("The resource is being provisioned")
   Provisioning: "Provisioning",
@@ -663,7 +663,7 @@ union RdmaCapability {
   Enabled: "Enabled",
 
   /**
-   * Network Adapter on the device is RDMA Capable
+   * Network Adapter on the device isn't RDMA Capable
    */
   Disabled: "Disabled",
 }

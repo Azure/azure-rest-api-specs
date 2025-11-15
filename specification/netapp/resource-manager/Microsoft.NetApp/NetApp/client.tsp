@@ -49,6 +49,14 @@ using Microsoft.NetApp;
   "groupMetadata",
   "java"
 );
+@@clientName(Microsoft.NetApp.VolumeGroupProperties.groupMetaData,
+  "groupMetadata",
+  "java"
+);
+@@clientName(Microsoft.NetApp.NetAppProvisioningState,
+  "ProvisioningState",
+  "java"
+);
 
 // Fix model name changes
 @@clientName(Microsoft.NetApp.VolumeGroupMetaData,
@@ -75,3 +83,7 @@ using Microsoft.NetApp;
   "$DO_NOT_NORMALIZE$\"10Minutely\"",
   "javascript"
 );
+
+@@clientName(QuotaItem, "SubscriptionQuotaItem", "go");
+@@clientName(QuotaItemList, "SubscriptionQuotaItemList", "go");
+@@clientName(QuotaItemProperties, "SubscriptionQuotaItemProperties", "go");
