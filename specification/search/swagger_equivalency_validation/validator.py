@@ -2,21 +2,20 @@
 Swagger Equivalency Validator
 
 This module contains the SwaggerValidator class that handles the comparison
-between TypeSpec-compiled swagger and hand-authored swagger files.
+between TypeSpec-compiled swagger and hand-authored swagger files using openapi-diff.
 """
 
 import json
 import os
-import csv
+import subprocess
 from datetime import datetime
 from typing import Dict, Any, List
 import yaml
 from colorama import Fore, Style
-from deepdiff import DeepDiff
 
 
 class SwaggerValidator:
-    """Main validator class that handles the entire validation process."""
+    """Simplified validator class using openapi-diff for professional API comparison."""
 
     def __init__(self, config_path: str = "config.yaml"):
         self.config = self._load_config(config_path)
@@ -37,23 +36,32 @@ class SwaggerValidator:
         return os.path.abspath(os.path.join(self.base_path, relative_path))
 
     def _load_swagger_file(self, file_path: str) -> Dict[str, Any]:
-        """Load and normalize a swagger JSON file."""
+        """Load a swagger JSON file."""
         resolved_path = self._resolve_file_path(file_path)
         if not os.path.exists(resolved_path):
             raise FileNotFoundError(f"Swagger file not found: {resolved_path}")
 
         with open(resolved_path, 'r', encoding='utf-8') as f:
-            swagger_data = json.load(f)
-
-        # Remove descriptions and examples for comparison
-        return self._normalize_swagger(swagger_data)
+            return json.load(f)
 
     def _normalize_swagger(self, data: Any) -> Any:
-        """Normalize swagger data by removing ignored fields."""
+        """
+        Normalize swagger data by replacing variable content with standardized values.
+        This maintains OpenAPI spec compliance while enabling meaningful comparison.
+        """
         if isinstance(data, dict):
-            # Remove description fields and examples
-            normalized = {k: self._normalize_swagger(v) for k, v in data.items()
-                         if k not in ['description', 'summary', 'title', 'example', 'examples', 'x-ms-examples']}
+            normalized = {}
+            for k, v in data.items():
+                if k in ['description', 'summary', 'title']:
+                    # Replace with standardized placeholders
+                    normalized[k] = f"[NORMALIZED_{k.upper()}]"
+                elif k in ['example', 'examples', 'x-ms-examples']:
+                    # Replace examples with standardized placeholders
+                    normalized[k] = "[NORMALIZED_EXAMPLE]"
+                else:
+                    # Recursively normalize other fields
+                    normalized[k] = self._normalize_swagger(v)
+            
             # Sort for consistent ordering
             return {k: normalized[k] for k in sorted(normalized.keys())}
         elif isinstance(data, list):
@@ -95,453 +103,167 @@ class SwaggerValidator:
 
         return merged
 
-    def _validate_equivalency(self, typespec_swagger: Dict[str, Any], merged_swagger: Dict[str, Any]) -> Dict[str, Any]:
-        """Validate equivalency between swagger files."""
-        results = {
-            'paths_comparison': {},
-            'definitions_comparison': {},
-            'parameters_comparison': {},
-            'security_comparison': {},
-            'overall_equivalency': False,
-            'errors': []
-        }
+    def _run_openapi_diff(self, old_spec_path: str, new_spec_path: str) -> str:
+        """Run openapi-diff and return the raw output."""
+        try:
+            # Run openapi-diff with default output format
+            result = subprocess.run([
+                'openapi-diff',
+                old_spec_path,
+                new_spec_path
+            ], capture_output=True, text=True, check=False, shell=True)
 
-        # Compare paths
-        paths_equivalent = self._compare_paths(
-            typespec_swagger.get('paths', {}),
-            merged_swagger.get('paths', {}),
-            results
-        )
+            # Return the output regardless of exit code
+            # openapi-diff returns non-zero when differences are found, which is normal
+            output = result.stdout or result.stderr or "No output from openapi-diff"
+            return output.strip()
 
-        # Compare definitions
-        definitions_equivalent = self._compare_definitions(
-            typespec_swagger.get('definitions', {}),
-            merged_swagger.get('definitions', {}),
-            results
-        )
+        except FileNotFoundError:
+            raise RuntimeError("openapi-diff not found. Please install it with: npm install -g openapi-diff")
 
-        # Compare parameters
-        parameters_equivalent = self._compare_components(
-            typespec_swagger.get('parameters', {}),
-            merged_swagger.get('parameters', {}),
-            'parameters_comparison',
-            results
-        )
-
-        # Compare security definitions
-        security_equivalent = self._compare_components(
-            typespec_swagger.get('securityDefinitions', {}),
-            merged_swagger.get('securityDefinitions', {}),
-            'security_comparison',
-            results
-        )
-
-        results['overall_equivalency'] = (
-            paths_equivalent and definitions_equivalent and
-            parameters_equivalent and security_equivalent
-        )
-
-        return results
-
-    def _compare_paths(self, typespec_paths: Dict[str, Any], hand_authored_paths: Dict[str, Any], results: Dict[str, Any]) -> bool:
-        """Compare API paths and operations."""
-        paths_equivalent = True
-
-        # Find missing paths
-        missing_in_typespec = set(hand_authored_paths.keys()) - set(typespec_paths.keys())
-        missing_in_hand_authored = set(typespec_paths.keys()) - set(hand_authored_paths.keys())
-
-        if missing_in_typespec:
-            results['errors'].append({
-                'type': 'missing_paths_in_typespec',
-                'paths': list(missing_in_typespec)
-            })
-            paths_equivalent = False
-
-        if missing_in_hand_authored:
-            results['errors'].append({
-                'type': 'missing_paths_in_hand_authored',
-                'paths': list(missing_in_hand_authored)
-            })
-            paths_equivalent = False
-
-        # Compare common paths
-        common_paths = set(typespec_paths.keys()) & set(hand_authored_paths.keys())
-        for path in common_paths:
-            path_comparison = self._compare_path_operations(
-                typespec_paths[path], hand_authored_paths[path]
-            )
-            results['paths_comparison'][path] = path_comparison
-            if not path_comparison['equivalent']:
-                paths_equivalent = False
-
-        return paths_equivalent
-
-    def _compare_path_operations(self, typespec_ops: Dict[str, Any], hand_authored_ops: Dict[str, Any]) -> Dict[str, Any]:
-        """Compare operations for a specific path."""
-        comparison = {
-            'equivalent': True,
-            'operations': {},
-            'missing_in_typespec': [],
-            'missing_in_hand_authored': []
-        }
-
-        http_methods = {'get', 'post', 'put', 'delete', 'patch', 'head', 'options'}
-        typespec_methods = set(typespec_ops.keys()) & http_methods
-        hand_authored_methods = set(hand_authored_ops.keys()) & http_methods
-
-        missing_in_typespec = hand_authored_methods - typespec_methods
-        missing_in_hand_authored = typespec_methods - hand_authored_methods
-
-        if missing_in_typespec:
-            comparison['missing_in_typespec'] = list(missing_in_typespec)
-            comparison['equivalent'] = False
-
-        if missing_in_hand_authored:
-            comparison['missing_in_hand_authored'] = list(missing_in_hand_authored)
-            comparison['equivalent'] = False
-
-        # Compare common operations
-        common_methods = typespec_methods & hand_authored_methods
-        for method in common_methods:
-            operation_comparison = self._compare_operation(
-                typespec_ops[method], hand_authored_ops[method]
-            )
-            comparison['operations'][method] = operation_comparison
-            if not operation_comparison['equivalent']:
-                comparison['equivalent'] = False
-
-        return comparison
-
-    def _compare_operation(self, typespec_op: Dict[str, Any], hand_authored_op: Dict[str, Any]) -> Dict[str, Any]:
-        """Compare individual operations."""
-        comparison = {'equivalent': True, 'differences': []}
-
-        # Compare parameters
-        typespec_params = self._normalize_parameters(typespec_op.get('parameters', []))
-        hand_authored_params = self._normalize_parameters(hand_authored_op.get('parameters', []))
-
-        param_diff = DeepDiff(typespec_params, hand_authored_params, ignore_order=True)
-        if param_diff:
-            comparison['differences'].append({
-                'type': 'parameters',
-                'diff': str(param_diff)
-            })
-            comparison['equivalent'] = False
-
-        # Compare responses
-        typespec_responses = self._normalize_responses(typespec_op.get('responses', {}))
-        hand_authored_responses = self._normalize_responses(hand_authored_op.get('responses', {}))
-
-        response_diff = DeepDiff(typespec_responses, hand_authored_responses, ignore_order=True)
-        if response_diff:
-            comparison['differences'].append({
-                'type': 'responses',
-                'diff': str(response_diff)
-            })
-            comparison['equivalent'] = False
-
-        return comparison
-
-    def _normalize_parameters(self, parameters: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
-        """Normalize parameter list for comparison."""
-        normalized = []
-        for param in parameters:
-            normalized_param = {
-                'name': param.get('name'),
-                'in': param.get('in'),
-                'required': param.get('required', False),
-                'type': param.get('type'),
-                'schema': param.get('schema')
-            }
-            normalized_param = {k: v for k, v in normalized_param.items() if v is not None}
-            normalized.append(normalized_param)
-
-        return sorted(normalized, key=lambda p: (p.get('in', ''), p.get('name', '')))
-
-    def _normalize_responses(self, responses: Dict[str, Any]) -> Dict[str, Any]:
-        """Normalize response schemas for comparison."""
-        normalized = {}
-        for status_code, response_data in responses.items():
-            normalized_response = {}
-            if 'schema' in response_data:
-                normalized_response['schema'] = response_data['schema']
-            if 'headers' in response_data:
-                normalized_response['headers'] = response_data['headers']
-            normalized[status_code] = normalized_response
-        return normalized
-
-    def _compare_definitions(self, typespec_defs: Dict[str, Any], hand_authored_defs: Dict[str, Any], results: Dict[str, Any]) -> bool:
-        """Compare model definitions."""
-        definitions_equivalent = True
-
-        missing_in_typespec = set(hand_authored_defs.keys()) - set(typespec_defs.keys())
-        missing_in_hand_authored = set(typespec_defs.keys()) - set(hand_authored_defs.keys())
-
-        if missing_in_typespec:
-            results['errors'].append({
-                'type': 'missing_definitions_in_typespec',
-                'definitions': list(missing_in_typespec)
-            })
-            definitions_equivalent = False
-
-        if missing_in_hand_authored:
-            results['errors'].append({
-                'type': 'missing_definitions_in_hand_authored',
-                'definitions': list(missing_in_hand_authored)
-            })
-            definitions_equivalent = False
-
-        # Compare common definitions
-        common_definitions = set(typespec_defs.keys()) & set(hand_authored_defs.keys())
-        for def_name in common_definitions:
-            diff = DeepDiff(typespec_defs[def_name], hand_authored_defs[def_name], ignore_order=True)
-            if diff:
-                results['definitions_comparison'][def_name] = {
-                    'equivalent': False,
-                    'differences': str(diff)
-                }
-                definitions_equivalent = False
-            else:
-                results['definitions_comparison'][def_name] = {
-                    'equivalent': True,
-                    'differences': {}
-                }
-
-        return definitions_equivalent
-
-    def _compare_components(self, typespec_comp: Dict[str, Any], hand_authored_comp: Dict[str, Any], key: str, results: Dict[str, Any]) -> bool:
-        """Compare components like parameters or security definitions."""
-        diff = DeepDiff(typespec_comp, hand_authored_comp, ignore_order=True)
-        if diff:
-            results[key] = {'equivalent': False, 'differences': str(diff)}
-            return False
-        else:
-            results[key] = {'equivalent': True, 'differences': {}}
-            return True
-
-    def _generate_csv_report(self, validation_results: Dict[str, Any], summary: Dict[str, Any]) -> str:
-        """Generate a CSV report."""
+    def _save_intermediate_file(self, data: Dict[str, Any], filename: str) -> str:
+        """Save normalized swagger data to intermediate file."""
         os.makedirs(self.config['output']['path'], exist_ok=True)
-
-        filename = f"equivalency_report_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv"
         filepath = os.path.join(self.config['output']['path'], filename)
 
-        fieldnames = [
-            'Path', 'Method', 'Operation_ID', 'Status', 'Issue_Type',
-            'Issue_Description', 'TypeSpec_File', 'Hand_Authored_Files', 'Severity', 'Details'
-        ]
-
-        rows = []
-
-        # Extract issues from validation results
-        if validation_results.get('paths_comparison'):
-            for path, comparison in validation_results['paths_comparison'].items():
-                if not comparison.get('equivalent', True):
-                    # Missing operations
-                    for method in comparison.get('missing_in_typespec', []):
-                        rows.append({
-                            'Path': path,
-                            'Method': method.upper(),
-                            'Operation_ID': 'N/A',
-                            'Status': 'Missing_in_TypeSpec',
-                            'Issue_Type': 'Missing_Operation',
-                            'Issue_Description': f'{method.upper()} operation missing in TypeSpec',
-                            'TypeSpec_File': 'search.json',
-                            'Hand_Authored_Files': 'searchservice.json, searchindex.json, knowledgebase.json',
-                            'Severity': 'Error',
-                            'Details': 'Operation not found in TypeSpec-compiled swagger'
-                        })
-
-                    for method in comparison.get('missing_in_hand_authored', []):
-                        rows.append({
-                            'Path': path,
-                            'Method': method.upper(),
-                            'Operation_ID': 'N/A',
-                            'Status': 'Missing_in_Hand_Authored',
-                            'Issue_Type': 'Missing_Operation',
-                            'Issue_Description': f'{method.upper()} operation missing in hand-authored files',
-                            'TypeSpec_File': 'search.json',
-                            'Hand_Authored_Files': 'searchservice.json, searchindex.json, knowledgebase.json',
-                            'Severity': 'Error',
-                            'Details': 'Operation not found in hand-authored swagger files'
-                        })
-
-                    # Operation differences
-                    for method, op_comparison in comparison.get('operations', {}).items():
-                        if not op_comparison.get('equivalent', True):
-                            for diff in op_comparison.get('differences', []):
-                                rows.append({
-                                    'Path': path,
-                                    'Method': method.upper(),
-                                    'Operation_ID': 'N/A',
-                                    'Status': 'Not_Equivalent',
-                                    'Issue_Type': diff.get('type', 'Unknown').replace('_', ' ').title(),
-                                    'Issue_Description': f'{diff.get("type", "Unknown").replace("_", " ").title()} differences found',
-                                    'TypeSpec_File': 'search.json',
-                                    'Hand_Authored_Files': 'searchservice.json, searchindex.json, knowledgebase.json',
-                                    'Severity': 'Error',
-                                    'Details': str(diff.get('diff', ''))[:200]
-                                })
-
-        # Add definition differences
-        if validation_results.get('definitions_comparison'):
-            for def_name, comparison in validation_results['definitions_comparison'].items():
-                if not comparison.get('equivalent', True):
-                    rows.append({
-                        'Path': 'N/A',
-                        'Method': 'N/A',
-                        'Operation_ID': 'N/A',
-                        'Status': 'Not_Equivalent',
-                        'Issue_Type': 'Definition_Difference',
-                        'Issue_Description': f'Model definition "{def_name}" differs',
-                        'TypeSpec_File': 'search.json',
-                        'Hand_Authored_Files': 'searchservice.json, searchindex.json, knowledgebase.json',
-                        'Severity': 'Error',
-                        'Details': str(comparison.get('differences', ''))[:200]
-                    })
-
-        # Add errors
-        for error in validation_results.get('errors', []):
-            error_type = error.get('type', 'Unknown')
-            if 'missing_paths' in error_type:
-                for path in error.get('paths', []):
-                    rows.append({
-                        'Path': path,
-                        'Method': 'N/A',
-                        'Operation_ID': 'N/A',
-                        'Status': 'Missing_in_TypeSpec' if 'typespec' in error_type else 'Missing_in_Hand_Authored',
-                        'Issue_Type': 'Missing_Path',
-                        'Issue_Description': f'Path missing in {"TypeSpec" if "typespec" in error_type else "hand-authored files"}',
-                        'TypeSpec_File': 'search.json',
-                        'Hand_Authored_Files': 'searchservice.json, searchindex.json, knowledgebase.json',
-                        'Severity': 'Error',
-                        'Details': error_type
-                    })
-            elif 'missing_definitions' in error_type:
-                for definition in error.get('definitions', []):
-                    rows.append({
-                        'Path': 'N/A',
-                        'Method': 'N/A',
-                        'Operation_ID': 'N/A',
-                        'Status': 'Missing_in_TypeSpec' if 'typespec' in error_type else 'Missing_in_Hand_Authored',
-                        'Issue_Type': 'Missing_Definition',
-                        'Issue_Description': f'Definition "{definition}" missing',
-                        'TypeSpec_File': 'search.json',
-                        'Hand_Authored_Files': 'searchservice.json, searchindex.json, knowledgebase.json',
-                        'Severity': 'Error',
-                        'Details': error_type
-                    })
-
-        # If no issues, add summary
-        if not rows:
-            rows.append({
-                'Path': 'SUMMARY',
-                'Method': 'N/A',
-                'Operation_ID': 'N/A',
-                'Status': 'Equivalent',
-                'Issue_Type': 'None',
-                'Issue_Description': 'All swagger files are equivalent',
-                'TypeSpec_File': 'search.json',
-                'Hand_Authored_Files': 'searchservice.json, searchindex.json, knowledgebase.json',
-                'Severity': 'Info',
-                'Details': 'Complete equivalency validation passed'
-            })
-
-        # Write CSV
-        with open(filepath, 'w', newline='', encoding='utf-8') as csvfile:
-            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-            writer.writeheader()
-            writer.writerows(rows)
+        with open(filepath, 'w', encoding='utf-8') as f:
+            json.dump(data, f, indent=2, sort_keys=True)
 
         return filepath
 
-    def _get_summary(self, validation_results: Dict[str, Any]) -> Dict[str, Any]:
-        """Generate summary statistics."""
-        total_errors = len(validation_results.get('errors', []))
-        path_issues = sum(1 for comparison in validation_results.get('paths_comparison', {}).values()
-                         if not comparison.get('equivalent', True))
-        definition_issues = sum(1 for comparison in validation_results.get('definitions_comparison', {}).values()
-                              if not comparison.get('equivalent', True))
+    def _load_intermediate_file(self, filename: str) -> Dict[str, Any]:
+        """Load previously saved intermediate file."""
+        filepath = os.path.join(self.config['output']['path'], filename)
 
-        return {
-            'overall_equivalent': validation_results.get('overall_equivalency', False),
-            'total_errors': total_errors,
-            'total_warnings': 0,
-            'path_issues': path_issues,
-            'definition_issues': definition_issues,
-            'parameters_equivalent': validation_results.get('parameters_comparison', {}).get('equivalent', True),
-            'security_equivalent': validation_results.get('security_comparison', {}).get('equivalent', True)
-        }
+        if not os.path.exists(filepath):
+            raise FileNotFoundError(f"Intermediate file not found: {filepath}")
 
-    def _print_summary(self, summary: Dict[str, Any]) -> None:
+        with open(filepath, 'r', encoding='utf-8') as f:
+            return json.load(f)
+
+    def _generate_text_report(self, diff_output: str) -> str:
+        """Save openapi-diff output to a text file."""
+        os.makedirs(self.config['output']['path'], exist_ok=True)
+
+        filename = f"openapi_diff_report_{datetime.now().strftime('%Y%m%d_%H%M%S')}.txt"
+        filepath = os.path.join(self.config['output']['path'], filename)
+
+        with open(filepath, 'w', encoding='utf-8') as f:
+            f.write("OpenAPI-Diff Comparison Report\n")
+            f.write("="*50 + "\n\n")
+            f.write("Comparing:\n")
+            f.write("  Old: norm-hand-search.json (merged hand-authored files)\n")
+            f.write("  New: norm-tsp-search.json (TypeSpec-compiled)\n\n")
+            f.write("Results:\n")
+            f.write("-"*20 + "\n")
+            f.write(diff_output)
+
+        return filepath
+
+    def _print_summary(self, diff_output: str) -> None:
         """Print validation summary to console."""
         print("\n" + "="*60)
-        print("SWAGGER EQUIVALENCY VALIDATION SUMMARY")
+        print("SWAGGER EQUIVALENCY VALIDATION SUMMARY (OpenAPI-Diff)")
         print("="*60)
 
-        status = "✓ EQUIVALENT" if summary['overall_equivalent'] else "✗ NOT EQUIVALENT"
-        print(f"Overall Status: {status}")
-        print(f"Total Errors: {summary['total_errors']}")
-        print(f"Path Issues: {summary['path_issues']}")
-        print(f"Definition Issues: {summary['definition_issues']}")
-
-        params_status = "✓" if summary['parameters_equivalent'] else "✗"
-        security_status = "✓" if summary['security_equivalent'] else "✗"
-        print(f"Parameters: {params_status}")
-        print(f"Security: {security_status}")
-
-        print("="*60)
-
-        if summary['overall_equivalent']:
-            print("🎉 TypeSpec-compiled swagger is equivalent to hand-authored swaggers!")
+        # Simple heuristic to determine if files are equivalent
+        if not diff_output.strip() or "No differences found" in diff_output:
+            print(f"Overall Status: {Fore.GREEN}✓ EQUIVALENT{Style.RESET_ALL}")
+            print("✓ TypeSpec-compiled swagger is equivalent to hand-authored swaggers!")
         else:
-            print("⚠️  Differences found between TypeSpec-compiled and hand-authored swaggers.")
-            print("   Check the CSV report for details.")
+            print(f"Overall Status: {Fore.RED}✗ NOT EQUIVALENT{Style.RESET_ALL}")
+            print("! Differences found between TypeSpec-compiled and hand-authored swaggers.")
+            print("  Check the text report for details.")
 
+        print("="*60)
         print("\n")
 
-    def validate(self) -> int:
+    def validate(self, skip_normalization: bool = False) -> int:
         """Run the complete validation process."""
         try:
-            print(f"{Fore.CYAN}Azure AI Search - Swagger Equivalency Validator{Style.RESET_ALL}")
+            print(f"{Fore.CYAN}Azure AI Search - Swagger Equivalency Validator (OpenAPI-Diff){Style.RESET_ALL}")
             print("="*60)
-            print(f"{Fore.YELLOW}Loading swagger files...{Style.RESET_ALL}")
 
-            # Load TypeSpec-compiled swagger
-            typespec_swagger = self._load_swagger_file(self.config['typespec_compiled']['path'])
+            if not skip_normalization:
+                print(f"{Fore.YELLOW}Step 1: Generating normalized files...{Style.RESET_ALL}")
+                print(f"{Fore.YELLOW}Loading swagger files...{Style.RESET_ALL}")
 
-            # Load hand-authored swagger files
-            hand_authored_files = []
-            for file_config in self.config['hand_authored'].values():
-                hand_authored_files.append(self._load_swagger_file(file_config['path']))
+                # Load TypeSpec-compiled swagger
+                typespec_swagger = self._load_swagger_file(self.config['typespec_compiled']['path'])
+                typespec_normalized = self._normalize_swagger(typespec_swagger)
 
-            print(f"  • TypeSpec-compiled: {len(typespec_swagger.get('paths', {}))} paths")
-            total_paths = sum(len(f.get('paths', {})) for f in hand_authored_files)
-            print(f"  • Hand-authored files: {total_paths} total paths")
+                # Load hand-authored swagger files
+                hand_authored_files = []
+                for file_config in self.config['hand_authored'].values():
+                    swagger_data = self._load_swagger_file(file_config['path'])
+                    hand_authored_files.append(self._normalize_swagger(swagger_data))
 
-            # Merge hand-authored files
-            merged_swagger = self._merge_swagger_files(hand_authored_files)
+                # Merge hand-authored files
+                merged_swagger = self._merge_swagger_files(hand_authored_files)
 
-            print(f"{Fore.YELLOW}Validating equivalency...{Style.RESET_ALL}")
+                # Save intermediate files
+                typespec_file = self._save_intermediate_file(typespec_normalized, 'norm-tsp-search.json')
+                hand_authored_file = self._save_intermediate_file(merged_swagger, 'norm-hand-search.json')
 
-            # Validate equivalency
-            validation_results = self._validate_equivalency(typespec_swagger, merged_swagger)
-            summary = self._get_summary(validation_results)
+                print(f"{Fore.GREEN}✓ Normalized TypeSpec swagger saved: {typespec_file}{Style.RESET_ALL}")
+                print(f"{Fore.GREEN}✓ Normalized hand-authored swagger saved: {hand_authored_file}{Style.RESET_ALL}")
+                
+            else:
+                print(f"{Fore.YELLOW}Step 1: Skipped normalization (using existing files)...{Style.RESET_ALL}")
 
-            # Generate CSV report
-            csv_report_path = self._generate_csv_report(validation_results, summary)
+            print(f"{Fore.YELLOW}Step 2: Loading intermediate normalized files...{Style.RESET_ALL}")
 
-            print(f"{Fore.GREEN}✓ CSV report generated: {csv_report_path}{Style.RESET_ALL}")
+            try:
+                # Check if intermediate files exist
+                typespec_file = os.path.join(self.config['output']['path'], 'norm-tsp-search.json')
+                hand_authored_file = os.path.join(self.config['output']['path'], 'norm-hand-search.json')
+
+                if not os.path.exists(typespec_file) or not os.path.exists(hand_authored_file):
+                    raise FileNotFoundError("Intermediate files not found")
+
+                # Load file info for display
+                typespec_swagger = self._load_intermediate_file('norm-tsp-search.json')
+                merged_swagger = self._load_intermediate_file('norm-hand-search.json')
+
+                print(f"  • TypeSpec-compiled: {len(typespec_swagger.get('paths', {}))} paths (from norm-tsp-search.json)")
+                print(f"  • Hand-authored merged: {len(merged_swagger.get('paths', {}))} paths (from norm-hand-search.json)")
+
+            except FileNotFoundError:
+                print(f"{Fore.RED}Intermediate files not found!{Style.RESET_ALL}")
+                if skip_normalization:
+                    print(f"{Fore.YELLOW}Please run 'python main.py' first to generate normalized files.{Style.RESET_ALL}")
+                else:
+                    print(f"{Fore.YELLOW}Failed to generate intermediate files.{Style.RESET_ALL}")
+                return 1
+
+            print(f"{Fore.YELLOW}Step 3: Running openapi-diff comparison...{Style.RESET_ALL}")
+
+            # Run openapi-diff on the intermediate files
+            diff_output = self._run_openapi_diff(hand_authored_file, typespec_file)
+
+            # Generate text report
+            report_path = self._generate_text_report(diff_output)
+
+            print(f"{Fore.GREEN}✓ Comparison report generated: {report_path}{Style.RESET_ALL}")
+
+            # Print openapi-diff output to console
+            print(f"\n{Fore.CYAN}OpenAPI-Diff Results:{Style.RESET_ALL}")
+            print("-" * 40)
+            if diff_output.strip():
+                print(diff_output)
+            else:
+                print("No differences found!")
 
             # Print summary
-            self._print_summary(summary)
+            self._print_summary(diff_output)
 
-            print("Generated Report:")
-            print(f"  • CSV: {csv_report_path}")
+            print("Generated Files:")
+            print("  • TypeSpec normalized: norm-tsp-search.json")
+            print("  • Hand-authored normalized: norm-hand-search.json")
+            print(f"  • Comparison report: {report_path}")
 
-            # Return exit code
-            return 0 if summary['overall_equivalent'] else 1
+            # Return exit code based on whether differences were found
+            return 1 if diff_output.strip() else 0
 
         except Exception as e:
             print(f"{Fore.RED}Error: {e}{Style.RESET_ALL}")

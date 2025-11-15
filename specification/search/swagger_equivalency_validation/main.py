@@ -6,6 +6,7 @@ Simple script to run swagger validation.
 """
 
 import sys
+import argparse
 from colorama import init, Fore, Style
 from validator import SwaggerValidator
 
@@ -15,24 +16,22 @@ init()
 
 def main():
     """Main entry point for validation."""
-    # Check for custom config
-    config_file = 'config.yaml'
-    if '--config' in sys.argv:
-        try:
-            config_index = sys.argv.index('--config')
-            config_file = sys.argv[config_index + 1]
-        except (IndexError, ValueError):
-            print(f"{Fore.RED}Error: --config requires a file path{Style.RESET_ALL}")
-            sys.exit(1)
+    parser = argparse.ArgumentParser(description='Swagger Equivalency Validator')
+    parser.add_argument('--disable-norm', action='store_true',
+                       help='Skip normalization and use existing intermediate files (tsp-search.json, hand-search.json)')
+    parser.add_argument('--config', type=str, default='config.yaml',
+                       help='Path to configuration file (default: config.yaml)')
+
+    args = parser.parse_args()
 
     try:
-        validator = SwaggerValidator(config_file)
-        exit_code = validator.validate()
+        validator = SwaggerValidator(args.config)
+        exit_code = validator.validate(skip_normalization=args.disable_norm)
 
         if exit_code == 0:
-            print(f"{Fore.GREEN}Validation completed successfully!{Style.RESET_ALL}")
+            print(f"{Fore.GREEN}✓ Validation completed successfully!{Style.RESET_ALL}")
         else:
-            print(f"{Fore.RED}Validation completed with differences!{Style.RESET_ALL}")
+            print(f"{Fore.RED}✗ Validation completed with differences!{Style.RESET_ALL}")
 
         sys.exit(exit_code)
 

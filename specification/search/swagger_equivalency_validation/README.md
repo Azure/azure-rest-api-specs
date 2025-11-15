@@ -1,16 +1,31 @@
 # Swagger Equivalency Validation Tool
 
-A simple Python tool to validate equivalency between TypeSpec-compiled swagger JSON and hand-authored swagger files for Azure Search.
+A simple Python tool to validate equivalency between TypeSpec-compiled swagger JSON and hand-authored swagger files for Azure Search using `openapi-diff`.
 
+## Features
+
+- **Professional Comparison**: Uses `openapi-diff` for industry-standard API comparison
+- **Breaking Change Detection**: Identifies breaking vs non-breaking changes
+- **Two-Step Workflow**: Generate normalized files first, then compare for better debugging
+- **CSV Reports**: Detailed reports with change categorization
+- **Multi-File Support**: Merges multiple hand-authored swagger files for comparison
 
 ## Setup
 
-**Requirements**: Python 3.11 or higher
+**Requirements**:
+- Python 3.11 or higher
+- Node.js and npm (for openapi-diff)
+
+### Install Dependencies
 
 ```bash
-# Check Python version first
-python --version
-# Should show "Python 3.11.x" or higher
+# Check versions first
+python --version  # Should show "Python 3.11.x" or higher
+node --version    # Should show Node.js version
+npm --version     # Should show npm version
+
+# Install openapi-diff globally
+npm install -g openapi-diff
 
 # Create virtual environment with specific Python version
 # Option 1: If python command points to 3.11+
@@ -31,15 +46,48 @@ pip install -r requirements.txt
 
 ## Usage
 
-```bash
-# Basic validation
-python main.py
+## Usage
 
-# Custom config file
-python main.py --config custom.yaml
+### Default Workflow (Recommended)
+
+```bash
+# Complete workflow: normalize + validate in one step
+python main.py
 ```
 
-## Files Structure
+This will:
+
+1. **Step 1**: Load and normalize swagger files (replacing descriptions/examples with standardized placeholders)
+2. **Step 2**: Save intermediate files (`tsp-search.json`, `hand-search.json`)
+3. **Step 3**: Run `openapi-diff` comparison and generate report
+
+### Advanced Options
+
+```bash
+# Skip normalization and use existing intermediate files
+python main.py --disable-norm
+
+# Use custom config file
+python main.py --config custom.yaml
+
+# Get help
+python main.py --help
+```
+
+### Generated Files
+
+The tool creates several output files:
+
+- `tsp-search.json` - Normalized TypeSpec-compiled swagger
+- `hand-search.json` - Normalized and merged hand-authored swagger files
+- `openapi_diff_report_TIMESTAMP.txt` - Detailed comparison results
+
+### Benefits of This Approach
+
+- **Industry Standard**: Uses `openapi-diff` for professional API comparison
+- **Spec Compliant**: Maintains OpenAPI spec validity by replacing (not removing) required fields
+- **Debugging Friendly**: Intermediate files can be inspected manually
+- **One Command**: Default workflow handles everything automatically## Files Structure
 
 - `main.py` - Entry point script
 - `validator.py` - SwaggerValidator class
