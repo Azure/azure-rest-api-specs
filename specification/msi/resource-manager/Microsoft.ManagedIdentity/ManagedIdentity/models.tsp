@@ -1,12 +1,14 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/openapi";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
 namespace Microsoft.ManagedIdentity;
@@ -162,6 +164,22 @@ model FederatedIdentityCredentialsListResult
 @@identifiers(FederatedIdentityCredentialsListResult.value, #["id"]);
 
 /**
+ * Object for defining the allowed identifiers of external identities.
+ */
+@added(Versions.v2025_01_31_preview)
+model ClaimsMatchingExpression {
+  /**
+   * Wildcard-based expression for matching incoming subject claims.
+   */
+  value: string;
+
+  /**
+   * Specifies the version of the flexible fic language used in the expression.
+   */
+  languageVersion: int32;
+}
+
+/**
  * The properties associated with a federated identity credential.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
@@ -175,12 +193,19 @@ model FederatedIdentityCredentialProperties {
   /**
    * The identifier of the external identity.
    */
-  subject: string;
+  @madeOptional(Versions.v2025_01_31_preview)
+  subject?: string;
 
   /**
    * The list of audiences that can appear in the issued token.
    */
   audiences: string[];
+
+  /**
+   * Object for defining the allowed identifiers of external identities. Either 'subject' or 'claimsMatchingExpression' must be defined, but not both.
+   */
+  @added(Versions.v2025_01_31_preview)
+  claimsMatchingExpression?: ClaimsMatchingExpression;
 }
 
 /**
