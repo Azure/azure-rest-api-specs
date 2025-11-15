@@ -1,0 +1,511 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "PolicyClient",
+    "version": "2022-08-01-preview",
+    "description": "To use in policy authoring you can create a variable at a scope. Variables created at a scope can be shared between multiple policy definitions."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/variables/{variableName}": {
+      "delete": {
+        "tags": [
+          "Variables"
+        ],
+        "operationId": "Variables_Delete",
+        "summary": "Deletes a variable.",
+        "description": "This operation deletes a variable, given its name and the subscription it was created in. The scope of a variable is the part of its ID preceding '/providers/Microsoft.Authorization/variables/{variableName}'.",
+        "x-ms-examples": {
+          "Delete a variable": {
+            "$ref": "./examples/deleteVariable.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/VariableNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content - the variable doesn't exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Variables"
+        ],
+        "operationId": "Variables_CreateOrUpdate",
+        "summary": "Creates or updates a variable.",
+        "description": " This operation creates or updates a variable with the given subscription and name. Policy variables can only be used by a policy definition at the scope they are created or below.",
+        "x-ms-examples": {
+          "Create or update a variable": {
+            "$ref": "./examples/createOrUpdateVariable.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/VariableNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Variable"
+            },
+            "description": "Parameters for the variable."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the updated variable.",
+            "schema": {
+              "$ref": "#/definitions/Variable"
+            }
+          },
+          "201": {
+            "description": "Created - Returns information about the new variable.",
+            "schema": {
+              "$ref": "#/definitions/Variable"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Variables"
+        ],
+        "operationId": "Variables_Get",
+        "summary": "Retrieves a variable.",
+        "description": "This operation retrieves a single variable, given its name and the subscription it was created at.",
+        "x-ms-examples": {
+          "Retrieve a variable": {
+            "$ref": "./examples/getVariable.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/VariableNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the variable.",
+            "schema": {
+              "$ref": "#/definitions/Variable"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Authorization/variables/{variableName}": {
+      "delete": {
+        "tags": [
+          "Variables"
+        ],
+        "operationId": "Variables_DeleteAtManagementGroup",
+        "summary": "Deletes a variable.",
+        "description": "This operation deletes a variable, given its name and the management group it was created in. The scope of a variable is the part of its ID preceding '/providers/Microsoft.Authorization/variables/{variableName}'.",
+        "x-ms-examples": {
+          "Delete a variable at management group": {
+            "$ref": "./examples/deleteVariableAtManagementGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ManagementGroupIdParameter"
+          },
+          {
+            "$ref": "#/parameters/VariableNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content - the variable doesn't exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Variables"
+        ],
+        "operationId": "Variables_CreateOrUpdateAtManagementGroup",
+        "summary": "Creates or updates a variable.",
+        "description": " This operation creates or updates a variable with the given  management group and name. Policy variables can only be used by a policy definition at the scope they are created or below.",
+        "x-ms-examples": {
+          "Create or update a variable at management group": {
+            "$ref": "./examples/createOrUpdateVariableAtManagementGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ManagementGroupIdParameter"
+          },
+          {
+            "$ref": "#/parameters/VariableNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Variable"
+            },
+            "description": "Parameters for the variable."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the updated variable.",
+            "schema": {
+              "$ref": "#/definitions/Variable"
+            }
+          },
+          "201": {
+            "description": "Created - Returns information about the new variable.",
+            "schema": {
+              "$ref": "#/definitions/Variable"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Variables"
+        ],
+        "operationId": "Variables_GetAtManagementGroup",
+        "summary": "Retrieves a variable.",
+        "description": "This operation retrieves a single variable, given its name and the  management group it was created at.",
+        "x-ms-examples": {
+          "Retrieve a variable at management group": {
+            "$ref": "./examples/getVariableAtManagementGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ManagementGroupIdParameter"
+          },
+          {
+            "$ref": "#/parameters/VariableNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the variable.",
+            "schema": {
+              "$ref": "#/definitions/Variable"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/variables": {
+      "get": {
+        "tags": [
+          "Variables"
+        ],
+        "operationId": "Variables_List",
+        "summary": "Retrieves all variables that are at this subscription level.",
+        "description": "This operation retrieves the list of all variables associated with the given subscription.",
+        "x-ms-examples": {
+          "List variables that apply to a subscription": {
+            "$ref": "./examples/listVariablesForSubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns an array of variables.",
+            "schema": {
+              "$ref": "#/definitions/VariableListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Authorization/variables": {
+      "get": {
+        "tags": [
+          "Variables"
+        ],
+        "operationId": "Variables_ListForManagementGroup",
+        "summary": "Retrieves all variables that are at this management group level.",
+        "description": "This operation retrieves the list of all variables applicable to the management group.",
+        "x-ms-examples": {
+          "List variables that apply to a management group": {
+            "$ref": "./examples/listVariablesForManagementGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ManagementGroupIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns an array of variables.",
+            "schema": {
+              "$ref": "#/definitions/VariableListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CloudError": {
+      "x-ms-external": true,
+      "properties": {
+        "error": {
+          "$ref": "../../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+        }
+      },
+      "type": "object",
+      "description": "An error response from a policy operation."
+    },
+    "PolicyVariableColumn": {
+      "required": [
+        "columnName"
+      ],
+      "properties": {
+        "columnName": {
+          "type": "string",
+          "description": "The name of this policy variable column."
+        }
+      },
+      "type": "object",
+      "description": "The variable column."
+    },
+    "PolicyVariableProperties": {
+      "required": [
+        "columns"
+      ],
+      "properties": {
+        "columns": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PolicyVariableColumn"
+          },
+          "x-ms-identifiers": [
+            "columnName"
+          ],
+          "description": "Variable column definitions."
+        }
+      },
+      "type": "object",
+      "description": "The variable properties."
+    },
+    "Variable": {
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PolicyVariableProperties",
+          "description": "Properties for the variable."
+        },
+        "systemData": {
+          "readOnly": true,
+          "type": "object",
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The ID of the variable."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the variable."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the resource (Microsoft.Authorization/variables)."
+        }
+      },
+      "type": "object",
+      "description": "The variable.",
+      "x-ms-azure-resource": true
+    },
+    "VariableListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Variable"
+          },
+          "description": "An array of variables."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URL to use for getting the next set of results."
+        }
+      },
+      "type": "object",
+      "description": "List of variables."
+    }
+  },
+  "parameters": {
+    "VariableNameParameter": {
+      "name": "variableName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the variable to operate on.",
+      "x-ms-parameter-location": "method"
+    },
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The ID of the target subscription."
+    },
+    "ManagementGroupIdParameter": {
+      "name": "managementGroupId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The ID of the management group.",
+      "x-ms-parameter-location": "method"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version to use for the operation.",
+      "x-ms-parameter-location": "client"
+    }
+  }
+}

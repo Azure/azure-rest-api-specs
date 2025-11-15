@@ -1,0 +1,52 @@
+# Snapshots
+
+> see https://aka.ms/autorest
+
+This is the AutoRest configuration file.
+
+## Getting Started
+
+To build the SDK for Resource, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
+
+> `autorest`
+
+To see additional help and options, run:
+
+> `autorest --help`
+
+---
+
+## Configuration
+
+### Basic Information
+
+These are the global settings for the Resource API.
+
+``` yaml
+title: SnapshotsClient
+description: Snapshots Client
+openapi-type: arm
+tag: package-snapshots-2022-11
+```
+
+### Tag: package-snapshots-2022-11
+
+These settings apply only when `--tag=package-snapshots-2022-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-snapshots-2022-11'
+input-file:
+- preview/2022-11-01-preview/snapshots.json
+```
+
+## Suppression
+
+``` yaml
+directive:
+  - from: snapshots.json
+    suppress: OperationsAPIImplementation
+    where: $.paths
+    reason: 'Duplicate Operations API causes generation issues'
+  - suppress: TopLevelResourcesListBySubscription
+    from: snapshots.json
+    reason: We will be pushing customers to use Azure Resource Graph for those at scale scenarios.
+```
