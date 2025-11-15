@@ -3,11 +3,7 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
-using Azure.Core;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.BotService;
 
@@ -334,11 +330,13 @@ model BotProperties {
   /**
    * The Application Insights key
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   developerAppInsightKey?: string;
 
   /**
    * The Application Insights Api Key
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   developerAppInsightsApiKey?: string;
 
   /**
@@ -354,6 +352,7 @@ model BotProperties {
   /**
    * The LUIS Key
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   luisKey?: string;
 
   /**
@@ -397,6 +396,7 @@ model BotProperties {
   /**
    * Token used to migrate non Azure bot to azure subscription
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @visibility(Lifecycle.Read)
   migrationToken?: string;
 
@@ -998,6 +998,7 @@ model Site {
   /**
    * Primary key. Value only returned through POST to the action Channel List API, otherwise empty.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @visibility(Lifecycle.Read)
   key?: string;
 
@@ -1377,11 +1378,13 @@ model QnAMakerEndpointKeysResponse {
   /**
    * Primary Access Key.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   primaryEndpointKey?: string;
 
   /**
    * Secondary Access Key.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   secondaryEndpointKey?: string;
 
   /**
@@ -1772,6 +1775,7 @@ model EmailChannelProperties {
   /**
    * The password for the email address. Value only returned through POST to the action Channel List API, otherwise empty.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   password?: string;
 
   /**
@@ -1943,6 +1947,7 @@ model KikChannelProperties {
   /**
    * Kik API key. Value only returned through POST to the action Channel List API, otherwise empty.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   apiKey?: string;
 
   /**
