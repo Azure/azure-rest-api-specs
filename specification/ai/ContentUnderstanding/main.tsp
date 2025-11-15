@@ -4,7 +4,6 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "./routes.tsp";
 import "./personDirectoryRoutes.tsp";
-import "./classifierRoutes.tsp";
 import "./models.tsp";
 import "./documentContent.tsp";
 import "./audioVisualContent.tsp";
@@ -45,4 +44,7 @@ enum Versions {
 
   @doc("The 2025-05-01-preview version of the Content Understanding service.")
   v2025_05_01_preview: "2025-05-01-preview",
+
+  @doc("The 2025-11-01 version of the Content Understanding service.")
+  v2025_11_01: "2025-11-01",
 }
