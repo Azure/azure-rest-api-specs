@@ -98,6 +98,45 @@
     }
   ],
   "paths": {
+    "/{resourceUri}/providers/Microsoft.AzureStackHCI/edgeDevices": {
+      "get": {
+        "operationId": "EdgeDevices_List",
+        "tags": [
+          "EdgeDevices"
+        ],
+        "description": "List EdgeDevice resources by parent",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EdgeDeviceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Edge Devices": {
+            "$ref": "./examples/ListEdgeDevices.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/{resourceUri}/providers/Microsoft.AzureStackHCI/edgeDevices/{edgeDeviceName}": {
       "get": {
         "operationId": "EdgeDevices_Get",
@@ -551,7 +590,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ValidateResponseResult"
+              "$ref": "#/definitions/ValidateResponse"
             }
           },
           "202": {
@@ -575,38 +614,15 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Validate Edge Devices": {
+            "$ref": "./examples/ValidateEdgeDevices.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
-      }
-    },
-    "/": {
-      "get": {
-        "operationId": "EdgeDevices_List",
-        "tags": [
-          "EdgeDevices"
-        ],
-        "description": "List EdgeDevice resources by parent",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/EdgeDeviceListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
       }
     },
     "/providers/Microsoft.AzureStackHCI/operations": {
@@ -4894,19 +4910,6 @@
         ]
       }
     },
-    "Azure.ResourceManager.ArmResponse<Cluster>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/Cluster",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
     "AzureLinuxCollectLogJobProperties": {
       "type": "object",
       "description": "Azure Linux Collect Log Job Properties.",
@@ -7313,6 +7316,7 @@
         },
         "nextLink": {
           "type": "string",
+          "format": "uri",
           "description": "The link to the next page of items"
         }
       },
@@ -10512,24 +10516,6 @@
         }
       }
     },
-    "ResourceUriParameter": {
-      "type": "object",
-      "description": "The resource URI parameter for edge device operations.\nInspired by Azure.ResourceManager.Extension.ScopeParameter but customized for this service.",
-      "properties": {
-        "resourceUri": {
-          "type": "string",
-          "description": "The fully qualified Azure Resource manager identifier of the resource.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        }
-      },
-      "required": [
-        "resourceUri"
-      ]
-    },
     "SbeCredentials": {
       "type": "object",
       "description": "secrets used for solution builder extension (SBE) partner extensibility.",
@@ -12136,7 +12122,7 @@
         "edgeDeviceIds"
       ]
     },
-    "ValidateResponseResult": {
+    "ValidateResponse": {
       "type": "object",
       "description": "An Accepted response with an Operation-Location header.",
       "properties": {

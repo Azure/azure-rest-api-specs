@@ -8,20 +8,8 @@ using Azure.ResourceManager;
 using Azure.Core;
 using Http;
 using Rest;
-
+using Azure.ClientGenerator.Core;
 namespace Microsoft.AzureStackHCI;
-
-/**
- * The resource URI parameter for edge device operations.
- * Inspired by Azure.ResourceManager.Extension.ScopeParameter but customized for this service.
- */
-model ResourceUriParameter {
-  @path(#{ allowReserved: true })
-  @key
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  @doc("The fully qualified Azure Resource manager identifier of the resource.")
-  resourceUri: string;
-}
 
 /**
  * Edge device resource.
@@ -57,19 +45,19 @@ interface EdgeDevices {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Follow existing naming for backward compatibility"
   CreateOrUpdate is ArmResourceCreateOrUpdateAsync<EdgeDevice>;
 
-  
-  
+  /**
+   * List EdgeDevice resources by parent
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Follow existing naming for backward compatibility"
+  List is ArmResourceListByParent<
+    EdgeDevice,
+    Response = ArmResponse<EdgeDeviceListResult>
+  >;
+
   /**
    * Delete a EdgeDevice
    */
   delete is ArmResourceDeleteWithoutOkAsync<EdgeDevice>;
-
-  /**
-   * List EdgeDevice resources by parent
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @get
-  list(...ResourceUriParameter, ...ApiVersionParameter): EdgeDeviceListResult | ErrorResponse;
 
   /**
    * A long-running resource action.
@@ -77,7 +65,7 @@ interface EdgeDevices {
   validate is ArmResourceActionAsync<
     EdgeDevice,
     ValidateRequest,
-    ValidateResponseResult
+    EdgeDeviceValidateResponseResult
   >;
 }
 
@@ -88,17 +76,7 @@ interface EdgeDevices {
 /**
  * The response of a EdgeDevice list operation.
  */
-model EdgeDeviceListResult {
-  /**
-   * The EdgeDevice items on this page
-   */
-  value: EdgeDevice[];
-
-  /**
-   * The link to the next page of items
-   */
-  nextLink?: string;
-}
+model EdgeDeviceListResult is Azure.Core.Page<EdgeDevice>;
 
 /**
  * The validate request for Edge Device.
@@ -118,7 +96,8 @@ model ValidateRequest {
 /**
  * An Accepted response with an Operation-Location header.
  */
-model ValidateResponseResult {
+@clientName("ValidateResponse")
+model EdgeDeviceValidateResponseResult {
   /**
    * edge device validation status
    */

@@ -115,7 +115,7 @@ interface Clusters {
   changeRing is ArmResourceActionAsync<
     Cluster,
     ChangeRingRequest,
-    ArmResponse<Cluster>
+    Cluster
   >;
 
   /**
