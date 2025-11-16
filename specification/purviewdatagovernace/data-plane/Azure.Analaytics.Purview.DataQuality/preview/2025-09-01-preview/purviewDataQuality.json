@@ -1,0 +1,3687 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "PurviewDataQuality",
+    "version": "2025-09-01-preview",
+    "description": "Purview Data Quality Service is a fully managed cloud service whose users can\nrun Data Quality Job to get some score. This spec defines REST API of Purview\nData Quality Service.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}/purviewdataquality/api",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "format": "uri",
+        "x-ms-skip-url-encoding": true
+      }
+    ]
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "OAuth2Auth": [
+        "https://purview.azure.net/.default"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://purview.azure.net/.default": ""
+      }
+    }
+  },
+  "tags": [],
+  "paths": {
+    "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/asset-metadata": {
+      "get": {
+        "operationId": "GetObserver",
+        "description": "Get Observer",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Unique Identifier for Business Domain",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataProductId",
+            "in": "path",
+            "description": "Unique Identifier for Data Product",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "Unique Identifier for Data Asset",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AssetMetadataObserver"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AssetMetaData_Get": {
+            "$ref": "./examples/AssetMetaData_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "CreateAssetMetaData",
+        "description": "Create Asset Metadata Observer",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Unique Identifier for Business Domain",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataProductId",
+            "in": "path",
+            "description": "Unique Identifier for Data Product",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "Unique Identifier for Data Asset",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Asset Meta data observer",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/AssetMetadataObserver"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Represents metadata observer entity for a data asset.",
+            "schema": {
+              "$ref": "#/definitions/AssetMetadataObserverResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AssetMetaData_Create": {
+            "$ref": "./examples/AssetMetaData_Create.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "UpdateObserver",
+        "description": "Update Observer",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Unique Identifier for Business Domain",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataProductId",
+            "in": "path",
+            "description": "Unique Identifier for Data Product",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "Unique Identifier for Data Asset",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "AssetMetaDataObserver",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/AssetMetadataObserver"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AssetMetadataObserver"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AssetMetaData_Update": {
+            "$ref": "./examples/AssetMetaData_Update.json"
+          }
+        }
+      }
+    },
+    "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/bulk-rules": {
+      "put": {
+        "operationId": "CreateBulkRules",
+        "description": "Create Bulk Rules for Assets",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Unique Identifier for Business Domain",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataProductId",
+            "in": "path",
+            "description": "Unique Identifier for Data Product",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "Unique Identifier for Data Asset",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Body Rule Entity",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RuleEntity"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Rule entity response",
+            "schema": {
+              "$ref": "#/definitions/RuleEntityListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Rules_Create": {
+            "$ref": "./examples/RulesBulk_Create.json"
+          }
+        }
+      }
+    },
+    "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/observations": {
+      "put": {
+        "operationId": "Observe",
+        "description": "Do an observation",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Get Business Domain Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataProductId",
+            "in": "path",
+            "description": "Get Data Product Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "Get Data Asset Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Body Job Config DTO",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/JobConfigDTO"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Job Config DTO Response",
+            "schema": {
+              "$ref": "#/definitions/JobConfigDTOResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Observation_Create": {
+            "$ref": "./examples/Observation_Create.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/observations/{observationId}": {
+      "delete": {
+        "operationId": "Delete Observation",
+        "description": "Deletes a specific observation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Get Business Domain Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataProductId",
+            "in": "path",
+            "description": "Get Data Product Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "Get Data Asset Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "observationId",
+            "in": "path",
+            "description": "Get Observation Id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Observation_Delete": {
+            "$ref": "./examples/Observation_Delete.json"
+          }
+        }
+      }
+    },
+    "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/profiles": {
+      "put": {
+        "operationId": "Profile",
+        "description": "The most basic operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Get Business Domain Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataProductId",
+            "in": "path",
+            "description": "Get data product Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "Get data asset Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "profiles",
+            "in": "body",
+            "description": "Scoped asset meta data body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProfileEntity"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Profile Entity",
+            "schema": {
+              "$ref": "#/definitions/ProfileEntityResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Profile_Create": {
+            "$ref": "./examples/Profile_Create.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/profiles/{profileRunId}": {
+      "delete": {
+        "operationId": "Delete Profile",
+        "description": "The most basic operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Get Business Domain Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataProductId",
+            "in": "path",
+            "description": "Get data product Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "Get data asset Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "profileRunId",
+            "in": "path",
+            "description": "Get Profile Run Id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Profile_Delete": {
+            "$ref": "./examples/Profile_Delete.json"
+          }
+        }
+      }
+    },
+    "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/rule-opinions/{ruleId}": {
+      "get": {
+        "operationId": "OpinionTrend",
+        "description": "The most basic operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Get Business Domain Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataProductId",
+            "in": "path",
+            "description": "Get data product Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "Get data asset Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ruleId",
+            "in": "path",
+            "description": "Get Rule Id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OpinionEntity"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RuleOpinions_Get": {
+            "$ref": "./examples/RuleOpinions_Get.json"
+          }
+        }
+      }
+    },
+    "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/rules": {
+      "get": {
+        "operationId": "GetRules",
+        "description": "Get Rules for Assets",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Get Business Domain",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataProductId",
+            "in": "path",
+            "description": "Get Data Product",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "Get Data Asset",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedRuleParameters"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateRules_DataAsset": {
+            "$ref": "./examples/Rules_Get.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/rules/{ruleId}": {
+      "get": {
+        "operationId": "GetRule",
+        "description": "Get a Rule",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Get Business Domain",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataProductId",
+            "in": "path",
+            "description": "Get Data Product",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "Get Data Asset",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ruleId",
+            "in": "path",
+            "description": "Unique Identifier for Rule",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RuleParameters"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Rules_Get": {
+            "$ref": "./examples/Rule_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "CreateRules",
+        "description": "Create Rules for Assets",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Get Business Domain",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataProductId",
+            "in": "path",
+            "description": "Get Data Product",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "Get Data Asset",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ruleId",
+            "in": "path",
+            "description": "Unique Identifier for Rule",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RuleEntities"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RuleEntities"
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/RuleEntities"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateRules_DataAsset": {
+            "$ref": "./examples/Rules_Create.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "UpdateRule",
+        "description": "Update a rule",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Get Business Domain",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataProductId",
+            "in": "path",
+            "description": "Get Data Product",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "Get Data Asset",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ruleId",
+            "in": "path",
+            "description": "Unique Identifier for Rule",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RuleEntitiesUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RuleEntities"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Rules_Update": {
+            "$ref": "./examples/Rules_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DeleteRule",
+        "description": "Delete a rule",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Get Business Domain",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataProductId",
+            "in": "path",
+            "description": "Get Data Product",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "Get Data Asset",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ruleId",
+            "in": "path",
+            "description": "Unique Identifier for Rule",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Rules_Delete": {
+            "$ref": "./examples/Rules_Delete.json"
+          }
+        }
+      }
+    },
+    "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/runs": {
+      "get": {
+        "operationId": "GetRunsForAsset",
+        "description": "Get runs for asset",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Get Business domain id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataProductId",
+            "in": "path",
+            "description": "Get data product id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "Get data asset id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "runType",
+            "in": "query",
+            "description": "Get run type",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/JobHistoryEntity"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Runs_Get": {
+            "$ref": "./examples/Runs_Get.json"
+          }
+        }
+      }
+    },
+    "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/scoped-asset-metadata": {
+      "get": {
+        "operationId": "GetScopedAssetMetaData",
+        "description": "Get scoped asset meta data",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Get Business Domain Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataProductId",
+            "in": "path",
+            "description": "Get data product Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "Get data asset Id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DataSourceEntity"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ScopedAssetMetaData_Get": {
+            "$ref": "./examples/ScopedAssetMetaData_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "CreateScopedAssetMetaData",
+        "description": "The most basic operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Get Business Domain Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataProductId",
+            "in": "path",
+            "description": "Get data product Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "Get data asset Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Scoped asset meta data body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataSourceEntity"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Represents a data source entity with metadata, configuration, and optional scopes.",
+            "schema": {
+              "$ref": "#/definitions/DataSourceEntityResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ScopedAssetMetaData_Create": {
+            "$ref": "./examples/ScopedMetaData_Create.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "UpdateScopedAssetMetaData",
+        "description": "Update scoped asset meta data",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Get Business Domain Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataProductId",
+            "in": "path",
+            "description": "Get data product Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "Get data asset Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Scoped asset meta data body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataSourceEntity"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DataSourceEntity"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ScopedAssetMetaData_Update": {
+            "$ref": "./examples/ScopeMetaData_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DeleteScopedAssetMetaData",
+        "description": "Delete scoped asset meta data",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Get Business Domain Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataProductId",
+            "in": "path",
+            "description": "Get data product Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "Get data asset Id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ScopedAssetMetaData_Delete": {
+            "$ref": "./examples/ScopedAssetMetaData_Delete.json"
+          }
+        }
+      }
+    },
+    "/business-domains/{businessDomainId}/data-sources": {
+      "get": {
+        "operationId": "GetDataSources",
+        "description": "Get all Data Sources for a given Business Domain",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Get Business Domain Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "skipToken",
+            "in": "query",
+            "description": "token",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "name",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DataSourceEntity"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataSources_Get": {
+            "$ref": "./examples/DataSources_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "CreateDataSource",
+        "description": "Update data source",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Get Business Domain Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Data Source Entity",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataSourceEntity"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Represents a data source entity with metadata, configuration, and optional scopes.",
+            "schema": {
+              "$ref": "#/definitions/DataSourceEntityResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataSource_Create": {
+            "$ref": "./examples/DataSource_Create.json"
+          }
+        }
+      }
+    },
+    "/business-domains/{businessDomainId}/data-sources/{dataSourceId}": {
+      "get": {
+        "operationId": "GetDataSource",
+        "description": "Get Data Source for a given data source id",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Get Business Domain Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataSourceId",
+            "in": "path",
+            "description": "Get Data Source Id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DataSourceEntity"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataSource_Get": {
+            "$ref": "./examples/DataSource_Get.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "UpdateDataSource",
+        "description": "Update data source",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Get Business Domain Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataSourceId",
+            "in": "path",
+            "description": "Get Data Source Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Data Source Entity",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataSourceEntity"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DataSourceEntity"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataSource_Update": {
+            "$ref": "./examples/DataSource_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DeleteDataSource",
+        "description": "Delete data source",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Get Business Domain Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataSourceId",
+            "in": "path",
+            "description": "Get Data Source Id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataSource_Delete": {
+            "$ref": "./examples/DataSource_Delete.json"
+          }
+        }
+      }
+    },
+    "/business-domains/{businessDomainId}/report/snapshots/dataquality/latest": {
+      "get": {
+        "operationId": "GetLatestSnapshot",
+        "description": "The most basic operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Get Business Domain Id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LatestSnapshot_Get": {
+            "$ref": "./examples/LatestSnapshot_Get.json"
+          }
+        }
+      }
+    },
+    "/business-domains/{businessDomainId}/runs/{runId}": {
+      "get": {
+        "operationId": "GetRunStatus",
+        "description": "Get the run status by run id",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Get Business domain id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "runId",
+            "in": "path",
+            "description": "Get run id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/JobMetadataEntity"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Run_Get": {
+            "$ref": "./examples/Run_Get.json"
+          }
+        }
+      }
+    },
+    "/business-domains/{businessDomainId}/runs/{runId}:cancel": {
+      "put": {
+        "operationId": "CancelScanByRunId",
+        "description": "Cancel Scan",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Get Business domain id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "runId",
+            "in": "path",
+            "description": "Get run id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Job Config DTO Response",
+            "schema": {
+              "$ref": "#/definitions/ScanDTOResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Scan_CancelByRunId": {
+            "$ref": "./examples/Scan_CancelByRunId.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/business-domains/{businessDomainId}/schedules": {
+      "get": {
+        "operationId": "GetSchedules",
+        "description": "Get Schedules",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Unique Identifier for Business Domain",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "skipToken",
+            "in": "query",
+            "description": "token",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ScheduleEntity"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Schedules_Get": {
+            "$ref": "./examples/Schedules_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "CreateSchedule",
+        "description": "Create Schedule",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Unique Identifier for Business Domain",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Schedule Entity",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/ScheduleEntity"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Represents a scheduled scan entity.",
+            "schema": {
+              "$ref": "#/definitions/ScheduleEntityResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Schedule_Create": {
+            "$ref": "./examples/Schedule_Create.json"
+          }
+        }
+      }
+    },
+    "/business-domains/{businessDomainId}/schedules/{scheduleId}": {
+      "get": {
+        "operationId": "GetSchedule",
+        "description": "Get Schedule",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Unique Identifier for Business Domain",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "scheduleId",
+            "in": "path",
+            "description": "Unique Identifier for Schedule",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ScheduleEntity"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Schedule_Get": {
+            "$ref": "./examples/Schedule_Get.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "UpdateSchedule",
+        "description": "Update Schedule",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Unique Identifier for Business Domain",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "scheduleId",
+            "in": "path",
+            "description": "Unique Identifier for Schedule",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Body for Schedule Entity",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/ScheduleEntity"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ScheduleEntity"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Schedule_Update": {
+            "$ref": "./examples/Schedule_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DeleteSchedule",
+        "description": "Delete Schedule",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Unique Identifier for Business Domain",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "scheduleId",
+            "in": "path",
+            "description": "Unique identifier for Schedule",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Schedule_Delete": {
+            "$ref": "./examples/Schedule_Delete.json"
+          }
+        }
+      }
+    },
+    "/business-domains/{businessDomainId}/schedules/{scheduleId}/scans": {
+      "put": {
+        "operationId": "CreateScan",
+        "description": "Create Scan",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Get business domain id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "scheduleId",
+            "in": "path",
+            "description": "Get schedule id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Get scanDTO",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/ScanDTO"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Job Config DTO Response",
+            "schema": {
+              "$ref": "#/definitions/ScanDTOResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Scan_Create": {
+            "$ref": "./examples/Scan_Create.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/business-domains/{businessDomainId}/schedules/{scheduleId}/scans/{scanId}:cancel": {
+      "put": {
+        "operationId": "CancelScan",
+        "description": "Cancel Scan",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Get business domain id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "scheduleId",
+            "in": "path",
+            "description": "Get schedule id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "scanId",
+            "in": "path",
+            "description": "Get scan id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Job Config DTO Response",
+            "schema": {
+              "$ref": "#/definitions/ScanDTOResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Scan_Cancel": {
+            "$ref": "./examples/Scan_Cancel.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/business-domains/{businessDomainId}/schedules/{scheduleId}/scans/{scanId}": {
+      "get": {
+        "operationId": "ScanByScanId",
+        "description": "Get Scan by ScanId",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Get business domain id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "scheduleId",
+            "in": "path",
+            "description": "Get schedule id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "scanId",
+            "in": "path",
+            "description": "Get scan id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ScheduleScanMonitoringEntity"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Scan_Get": {
+            "$ref": "./examples/Scan_Get.json"
+          }
+        }
+      }
+    },
+    "/business-domains/{businessDomainId}/schedules/{scheduleId}/scans/{scanId}/runs": {
+      "get": {
+        "operationId": "GetRuns",
+        "description": "The most basic operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Get Business Domain Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "scheduleId",
+            "in": "path",
+            "description": "Get schedule Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "scanId",
+            "in": "path",
+            "description": "Get scan id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Get offset",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ScheduleScanMonitoringEntity"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ScanRuns_Get": {
+            "$ref": "./examples/ScanRuns_Get.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AssetMetadataObserver": {
+      "type": "object",
+      "description": "Represents metadata observer entity for a data asset.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the observer."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the observer."
+        },
+        "dataAsset": {
+          "$ref": "#/definitions/Reference",
+          "description": "Reference to the associated DataAsset entity."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the observer was created."
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "User who created the observer."
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the observer was last modified."
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "User who last modified the observer."
+        },
+        "executionData": {
+          "type": "object",
+          "description": "Dictionary containing execution data.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "isDeleted": {
+          "type": "boolean",
+          "description": "Indicates if the observer is deleted."
+        },
+        "businessDomain": {
+          "$ref": "#/definitions/Reference",
+          "description": "Reference to the related BusinessDomain entity."
+        },
+        "dataProduct": {
+          "$ref": "#/definitions/Reference",
+          "description": "Reference to the related DataProduct entity."
+        },
+        "eTag": {
+          "type": "string",
+          "description": "ETag used for concurrency control."
+        },
+        "type": {
+          "$ref": "#/definitions/AssetMetadataObserverType",
+          "description": "Type of the observer."
+        }
+      }
+    },
+    "AssetMetadataObserverResponse": {
+      "type": "object",
+      "description": "Represents metadata observer entity for a data asset.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "id"
+        },
+        "name": {
+          "type": "string",
+          "description": "name"
+        },
+        "dataAsset": {
+          "$ref": "#/definitions/Reference",
+          "description": "Reference to another entity (BusinessDomain, DataProduct, DataAsset)."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "created at"
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "created by"
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "last modified by"
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "last modified"
+        },
+        "executionData": {
+          "type": "object",
+          "description": "Dictionary of <any>",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "isDeleted": {
+          "type": "boolean",
+          "description": "isDeleted"
+        },
+        "businessDomain": {
+          "$ref": "#/definitions/Reference",
+          "description": "Reference to another entity (BusinessDomain, DataProduct, DataAsset)."
+        },
+        "dataProduct": {
+          "$ref": "#/definitions/Reference",
+          "description": "Reference to another entity (BusinessDomain, DataProduct, DataAsset)."
+        },
+        "eTag": {
+          "type": "string",
+          "description": "eTag"
+        },
+        "type": {
+          "$ref": "#/definitions/AssetMetadataObserverType",
+          "description": "type"
+        }
+      }
+    },
+    "AssetMetadataObserverType": {
+      "type": "string",
+      "description": "AssetMetaDataObserverType",
+      "enum": [
+        "Basic"
+      ],
+      "x-ms-enum": {
+        "name": "AssetMetadataObserverType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Basic",
+            "value": "Basic",
+            "description": "Basic"
+          }
+        ]
+      }
+    },
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          }
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Azure REST API guidelines - https://aka.ms/AzureRestApiGuidelines#handling-errors.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "Column": {
+      "type": "object",
+      "description": "Represents a column in a dataset.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of the column."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the column."
+        }
+      }
+    },
+    "DataSourceEntity": {
+      "type": "object",
+      "description": "Represents a data source entity with metadata, configuration, and optional scopes.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The display name of the data source connection."
+        },
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the data source."
+        },
+        "isVnetEnabled": {
+          "type": "boolean",
+          "description": "Indicates whether the data source is enabled with Virtual Network (VNet)."
+        },
+        "targetResourceId": {
+          "type": "string",
+          "description": "The Azure resource ID of the target resource (if applicable)."
+        },
+        "businessDomain": {
+          "type": "object",
+          "description": "The business domain this data source belongs to.",
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "Type of business domain reference."
+            },
+            "referenceId": {
+              "type": "string",
+              "description": "Unique identifier for the business domain."
+            }
+          },
+          "required": [
+            "type",
+            "referenceId"
+          ]
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "description": "ISO 8601 timestamp when the data source was last modified."
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "Identifier (GUID or user ID) of the last modifier."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the data source (e.g., AzureSqlDatabase, Snowflake, AzureSynapseAnalytics)."
+        },
+        "typeProperties": {
+          "type": "object",
+          "description": "A dictionary of key-value pairs with additional properties\nspecific to the data source type.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "scopes": {
+          "type": "array",
+          "description": "Optional list of scopes that define access levels or boundaries for this data source.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "scope": {
+                "type": "object",
+                "description": "The scope definition containing type and included objects.",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "description": "The scope type (e.g., Sql)."
+                  },
+                  "includes": {
+                    "type": "array",
+                    "description": "List of included items in the scope.",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "type",
+                  "includes"
+                ]
+              },
+              "id": {
+                "type": "string",
+                "description": "Unique identifier for the scope."
+              }
+            },
+            "required": [
+              "scope",
+              "id"
+            ]
+          }
+        }
+      },
+      "required": [
+        "name",
+        "isVnetEnabled",
+        "businessDomain",
+        "type",
+        "typeProperties"
+      ]
+    },
+    "DataSourceEntityResponse": {
+      "type": "object",
+      "description": "Represents a data source entity with metadata, configuration, and optional scopes.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The display name of the data source connection."
+        },
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the data source."
+        },
+        "isVnetEnabled": {
+          "type": "boolean",
+          "description": "Indicates whether the data source is enabled with Virtual Network (VNet)."
+        },
+        "targetResourceId": {
+          "type": "string",
+          "description": "The Azure resource ID of the target resource (if applicable)."
+        },
+        "businessDomain": {
+          "type": "object",
+          "description": "The business domain this data source belongs to.",
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "Type of business domain reference."
+            },
+            "referenceId": {
+              "type": "string",
+              "description": "Unique identifier for the business domain."
+            }
+          },
+          "required": [
+            "type",
+            "referenceId"
+          ]
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "description": "ISO 8601 timestamp when the data source was last modified."
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "Identifier (GUID or user ID) of the last modifier."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the data source (e.g., AzureSqlDatabase, Snowflake, AzureSynapseAnalytics)."
+        },
+        "typeProperties": {
+          "type": "object",
+          "description": "A dictionary of key-value pairs with additional properties\nspecific to the data source type.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "scopes": {
+          "type": "array",
+          "description": "Optional list of scopes that define access levels or boundaries for this data source.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "scope": {
+                "type": "object",
+                "description": "The scope definition containing type and included objects.",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "description": "The scope type (e.g., Sql)."
+                  },
+                  "includes": {
+                    "type": "array",
+                    "description": "List of included items in the scope.",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "type",
+                  "includes"
+                ]
+              },
+              "id": {
+                "type": "string",
+                "description": "Unique identifier for the scope."
+              }
+            },
+            "required": [
+              "scope",
+              "id"
+            ]
+          }
+        }
+      },
+      "required": [
+        "name",
+        "id",
+        "isVnetEnabled",
+        "businessDomain",
+        "lastModifiedAt",
+        "lastModifiedBy",
+        "type",
+        "typeProperties"
+      ]
+    },
+    "DatasetToDatasourceMapping": {
+      "type": "object",
+      "description": "Maps a dataset to a datasource.",
+      "properties": {
+        "datasetAliasName": {
+          "type": "string",
+          "description": "Alias name of the dataset."
+        },
+        "datasourceId": {
+          "type": "string",
+          "description": "Identifier of the datasource."
+        }
+      }
+    },
+    "JobConfigDTO": {
+      "type": "object",
+      "description": "Configuration for jobs.",
+      "properties": {
+        "redundancyCheck": {
+          "type": "boolean",
+          "description": "Indicates if redundancy check is enabled."
+        },
+        "datasetToDatasourceMappings": {
+          "type": "array",
+          "description": "Mappings between datasets and data sources.",
+          "items": {
+            "$ref": "#/definitions/DatasetToDatasourceMapping"
+          }
+        }
+      }
+    },
+    "JobConfigDTOResponse": {
+      "type": "object",
+      "description": "Job Config DTO Response",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "Value"
+        },
+        "statuslro": {
+          "$ref": "#/definitions/LroStatus",
+          "description": "lro status"
+        }
+      },
+      "required": [
+        "value",
+        "statuslro"
+      ]
+    },
+    "JobHistoryEntity": {
+      "type": "object",
+      "description": "Job history information.",
+      "properties": {
+        "dataAssetId": {
+          "type": "string",
+          "description": "Identifier of the data asset.",
+          "minLength": 1
+        },
+        "runId": {
+          "type": "string",
+          "description": "Job run identifier.",
+          "minLength": 1
+        },
+        "dataProductId": {
+          "type": "string",
+          "description": "Identifier of the data product.",
+          "minLength": 1
+        },
+        "businessDomainId": {
+          "type": "string",
+          "description": "Business domain identifier.",
+          "minLength": 1
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the job started."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the job ended."
+        },
+        "submissionTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the job was submitted."
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the job."
+        },
+        "jobType": {
+          "type": "string",
+          "description": "Type of job."
+        },
+        "accountId": {
+          "type": "string",
+          "description": "Account identifier."
+        }
+      },
+      "required": [
+        "dataAssetId",
+        "runId",
+        "dataProductId",
+        "businessDomainId"
+      ]
+    },
+    "JobMetadataEntity": {
+      "type": "object",
+      "description": "Metadata for jobs.",
+      "properties": {
+        "runId": {
+          "type": "string",
+          "description": "Unique run identifier for the job."
+        },
+        "dataProductId": {
+          "type": "string",
+          "description": "Identifier of the data product."
+        },
+        "redundancyCheck": {
+          "type": "boolean",
+          "description": "Indicates if redundancy check is enabled."
+        },
+        "accountId": {
+          "type": "string",
+          "description": "Account identifier."
+        },
+        "businessDomainId": {
+          "type": "string",
+          "description": "Business domain identifier."
+        },
+        "submissionTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the job was submitted."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the job started."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the job ended."
+        },
+        "cancelRequestTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when a cancel request was made."
+        },
+        "status": {
+          "type": "string",
+          "description": "Current job status."
+        },
+        "pfsJobId": {
+          "type": "string",
+          "description": "Platform job ID."
+        },
+        "message": {
+          "type": "string",
+          "description": "Job-related message."
+        },
+        "duration": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Duration of the job in milliseconds."
+        },
+        "startedBy": {
+          "type": "string",
+          "description": "User who started the job."
+        },
+        "cancelledBy": {
+          "type": "string",
+          "description": "User who cancelled the job."
+        },
+        "jobType": {
+          "type": "string",
+          "description": "Type of job."
+        },
+        "jobExecutionRegion": {
+          "type": "string",
+          "description": "Region where the job executed."
+        },
+        "dataAssetId": {
+          "type": "string",
+          "description": "Identifier of the associated data asset."
+        },
+        "dataAssetName": {
+          "type": "string",
+          "description": "Name of the associated data asset."
+        },
+        "scheduleId": {
+          "type": "string",
+          "description": "Schedule identifier if job is scheduled."
+        },
+        "scheduleName": {
+          "type": "string",
+          "description": "Schedule name if job is scheduled."
+        },
+        "qualifiedPath": {
+          "type": "string",
+          "description": "Fully qualified path related to the job."
+        },
+        "scanId": {
+          "type": "string",
+          "description": "Scan identifier associated with the job."
+        },
+        "scheduleScanType": {
+          "type": "string",
+          "description": "Type of schedule scan."
+        },
+        "jobBillingSparkSku": {
+          "type": "string",
+          "description": "Spark SKU used for job billing."
+        },
+        "dataSourceType": {
+          "type": "string",
+          "description": "Type of data source."
+        },
+        "primaryDataSourceID": {
+          "type": "string",
+          "description": "Primary data source identifier."
+        },
+        "puDetail": {
+          "type": "string",
+          "description": "Additional details related to Purview."
+        }
+      }
+    },
+    "LroStatus": {
+      "type": "string",
+      "description": "lro status",
+      "enum": [
+        "InProgress",
+        "Succeeded",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "LroStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "In Progress status"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Succeeded status"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Failed status"
+          }
+        ]
+      }
+    },
+    "OpinionEntity": {
+      "type": "object",
+      "description": "Opinion Entity",
+      "properties": {
+        "businessDomainId": {
+          "type": "string",
+          "description": "Get Business domain Id"
+        },
+        "dataProductId": {
+          "type": "string",
+          "description": "Get data product id"
+        },
+        "dataAssetId": {
+          "type": "string",
+          "description": "Get data asset id"
+        },
+        "controlId": {
+          "type": "string",
+          "description": "Get control id"
+        },
+        "opinionId": {
+          "type": "string",
+          "description": "Get opinion id"
+        },
+        "value": {
+          "type": "string",
+          "description": "Get value"
+        },
+        "resultedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Get result At"
+        },
+        "outcomeId": {
+          "type": "string",
+          "description": "Get outcomeId"
+        },
+        "queryExecuted": {
+          "type": "string",
+          "description": "Get queryExecutionId"
+        }
+      },
+      "required": [
+        "businessDomainId",
+        "dataProductId",
+        "dataAssetId",
+        "controlId",
+        "opinionId",
+        "resultedAt",
+        "outcomeId"
+      ]
+    },
+    "PagedRuleParameters": {
+      "type": "object",
+      "description": "Paged collection of RuleParameters items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The RuleParameters items on this page",
+          "items": {
+            "$ref": "#/definitions/RuleParameters"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ProfileEntity": {
+      "type": "object",
+      "description": "Profile Entity",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "type"
+        },
+        "typeProperties": {
+          "type": "object",
+          "description": "Type properties",
+          "properties": {
+            "location": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string"
+                  },
+                  "typeProperties": {
+                    "type": "object",
+                    "properties": {
+                      "fileSystem": {
+                        "type": "string"
+                      },
+                      "folderPath": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "fileSystem",
+                      "folderPath"
+                    ]
+                  }
+                },
+                "required": [
+                  "type",
+                  "typeProperties"
+                ]
+              }
+            }
+          },
+          "required": [
+            "location"
+          ]
+        },
+        "dataSourceId": {
+          "type": "string",
+          "description": "data source id"
+        },
+        "configuration": {
+          "type": "object",
+          "description": "configuration",
+          "properties": {
+            "keyColumns": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              }
+            }
+          },
+          "required": [
+            "keyColumns"
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "typeProperties",
+        "dataSourceId",
+        "configuration"
+      ]
+    },
+    "ProfileEntityResponse": {
+      "type": "object",
+      "description": "Profile Entity",
+      "properties": {
+        "profileRunId": {
+          "type": "string",
+          "description": "profile run id"
+        },
+        "statuslro": {
+          "$ref": "#/definitions/LroStatus",
+          "description": "lro status"
+        }
+      },
+      "required": [
+        "profileRunId",
+        "statuslro"
+      ]
+    },
+    "Reference": {
+      "type": "object",
+      "description": "Reference to another entity (BusinessDomain, DataProduct, DataAsset).",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of the referenced entity."
+        },
+        "referenceId": {
+          "type": "string",
+          "description": "Unique identifier of the referenced entity."
+        }
+      }
+    },
+    "RuleEntities": {
+      "type": "object",
+      "description": "Rule Entities",
+      "properties": {
+        "ruleId": {
+          "type": "string",
+          "description": "Unique Identifier for Rule",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "ruleEntity": {
+          "$ref": "#/definitions/RuleEntity",
+          "description": "ruleEntity"
+        }
+      },
+      "required": [
+        "ruleId",
+        "ruleEntity"
+      ]
+    },
+    "RuleEntitiesUpdate": {
+      "type": "object",
+      "description": "Rule Entities",
+      "properties": {
+        "ruleEntity": {
+          "$ref": "#/definitions/RuleEntityUpdate",
+          "description": "ruleEntity"
+        }
+      }
+    },
+    "RuleEntity": {
+      "type": "object",
+      "description": "Represents a business/data quality rule entity.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Reference to another entity (BusinessDomain, DataProduct, DataAsset)."
+        },
+        "description": {
+          "type": "string",
+          "description": "Represents description of the rule."
+        },
+        "type": {
+          "type": "string",
+          "description": "Represents the type of rule."
+        },
+        "status": {
+          "type": "string",
+          "description": "Represents the status of the rule."
+        },
+        "typeProperties": {
+          "$ref": "#/definitions/TypeProperties",
+          "description": "Holds additional properties related to rule type."
+        },
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the rule."
+        },
+        "businessDomain": {
+          "$ref": "#/definitions/Reference",
+          "description": "Reference to the related BusinessDomain entity."
+        },
+        "dataProduct": {
+          "$ref": "#/definitions/Reference",
+          "description": "Reference to the related DataProduct entity."
+        },
+        "dataAsset": {
+          "$ref": "#/definitions/Reference",
+          "description": "Reference to the related DataAsset entity."
+        },
+        "score": {
+          "type": "number",
+          "format": "double",
+          "description": "Represents the rule's score."
+        }
+      },
+      "required": [
+        "name",
+        "type",
+        "status",
+        "id"
+      ]
+    },
+    "RuleEntityBulkResponse": {
+      "type": "object",
+      "description": "Represents a business/data quality rule entity.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Reference to another entity (BusinessDomain, DataProduct, DataAsset)."
+        },
+        "description": {
+          "type": "string",
+          "description": "Represents description of the rule."
+        },
+        "type": {
+          "type": "string",
+          "description": "Represents the type of rule."
+        },
+        "status": {
+          "type": "string",
+          "description": "Represents the status of the rule."
+        },
+        "typeProperties": {
+          "$ref": "#/definitions/TypeProperties",
+          "description": "Holds additional properties related to rule type."
+        },
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the rule."
+        },
+        "businessDomain": {
+          "$ref": "#/definitions/Reference",
+          "description": "Reference to the related BusinessDomain entity."
+        },
+        "dataProduct": {
+          "$ref": "#/definitions/Reference",
+          "description": "Reference to the related DataProduct entity."
+        },
+        "dataAsset": {
+          "$ref": "#/definitions/Reference",
+          "description": "Reference to the related DataAsset entity."
+        },
+        "score": {
+          "type": "number",
+          "format": "double",
+          "description": "Represents the rule's score."
+        }
+      },
+      "required": [
+        "name",
+        "type",
+        "status",
+        "id"
+      ]
+    },
+    "RuleEntityListResponse": {
+      "type": "object",
+      "description": "Rule entity response",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Value RuleEntity",
+          "items": {
+            "$ref": "#/definitions/RuleEntityBulkResponse"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "RuleEntityUpdate": {
+      "type": "object",
+      "description": "Represents a business/data quality rule entity.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Reference to another entity (BusinessDomain, DataProduct, DataAsset)."
+        },
+        "description": {
+          "type": "string",
+          "description": "Represents description of the rule."
+        },
+        "type": {
+          "type": "string",
+          "description": "Represents the type of rule."
+        },
+        "status": {
+          "type": "string",
+          "description": "Represents the status of the rule."
+        },
+        "typeProperties": {
+          "$ref": "#/definitions/TypeProperties",
+          "description": "Holds additional properties related to rule type."
+        },
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the rule."
+        },
+        "businessDomain": {
+          "$ref": "#/definitions/Reference",
+          "description": "Reference to the related BusinessDomain entity."
+        },
+        "dataProduct": {
+          "$ref": "#/definitions/Reference",
+          "description": "Reference to the related DataProduct entity."
+        },
+        "dataAsset": {
+          "$ref": "#/definitions/Reference",
+          "description": "Reference to the related DataAsset entity."
+        },
+        "score": {
+          "type": "number",
+          "format": "double",
+          "description": "Represents the rule's score."
+        }
+      }
+    },
+    "RuleParameters": {
+      "type": "object",
+      "description": "Rule Parameters",
+      "properties": {
+        "ruleId": {
+          "type": "string",
+          "description": "Unique Identifier for Rule",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "response": {
+          "$ref": "#/definitions/RuleEntity",
+          "description": "Rule Entity response"
+        }
+      },
+      "required": [
+        "ruleId"
+      ]
+    },
+    "ScanDTO": {
+      "type": "object",
+      "description": "Data transfer object for scan information.",
+      "properties": {
+        "scanType": {
+          "type": "string",
+          "description": "Type of the scan."
+        }
+      }
+    },
+    "ScanDTOResponse": {
+      "type": "object",
+      "description": "Job Config DTO Response",
+      "properties": {
+        "scanId": {
+          "type": "string",
+          "description": "Scan Id"
+        },
+        "statuslro": {
+          "$ref": "#/definitions/LroStatus",
+          "description": "lro status"
+        }
+      },
+      "required": [
+        "statuslro"
+      ]
+    },
+    "ScheduleEntity": {
+      "type": "object",
+      "description": "Represents a scheduled scan entity.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the schedule."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the schedule."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the schedule."
+        },
+        "trigger": {
+          "type": "object",
+          "description": "Trigger configuration for the schedule.",
+          "properties": {
+            "type": {
+              "type": "string"
+            },
+            "typeProperties": {
+              "type": "object",
+              "properties": {
+                "timezone": {
+                  "type": "string"
+                },
+                "isScheduled": {
+                  "type": "boolean"
+                },
+                "triggerTime": {
+                  "type": "string",
+                  "format": "date-time"
+                }
+              }
+            }
+          },
+          "required": [
+            "type",
+            "typeProperties"
+          ]
+        },
+        "scope": {
+          "type": "object",
+          "description": "Scope of the scan, including data products and data assets.",
+          "properties": {
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "dataProduct": {
+                    "type": "object",
+                    "properties": {
+                      "referenceId": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "referenceId",
+                      "type"
+                    ]
+                  },
+                  "dataAsset": {
+                    "type": "object",
+                    "properties": {
+                      "referenceId": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "referenceId",
+                      "type"
+                    ]
+                  }
+                },
+                "required": [
+                  "dataProduct",
+                  "dataAsset"
+                ]
+              }
+            }
+          },
+          "required": [
+            "items"
+          ]
+        },
+        "businessDomain": {
+          "type": "object",
+          "description": "Reference to the related BusinessDomain entity.",
+          "properties": {
+            "type": {
+              "type": "string"
+            },
+            "referenceId": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "referenceId"
+          ]
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the schedule was created."
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the schedule was last modified."
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "User who created the schedule."
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "User who last modified the schedule."
+        },
+        "eTag": {
+          "type": "string",
+          "description": "Entity tag for concurrency control."
+        }
+      }
+    },
+    "ScheduleEntityResponse": {
+      "type": "object",
+      "description": "Represents a scheduled scan entity.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the schedule."
+        },
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the schedule."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the schedule."
+        },
+        "annotations": {
+          "type": "object",
+          "description": "Dictionary of annotations for the schedule.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "businessDomain": {
+          "$ref": "#/definitions/Reference",
+          "description": "Reference to the related BusinessDomain entity."
+        },
+        "scope": {
+          "type": "object",
+          "description": "Scope of the scan, including data products and data assets.",
+          "properties": {
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "dataProduct": {
+                    "type": "object",
+                    "properties": {
+                      "referenceId": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "referenceId",
+                      "type"
+                    ]
+                  },
+                  "dataAsset": {
+                    "type": "object",
+                    "properties": {
+                      "referenceId": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "referenceId",
+                      "type"
+                    ]
+                  }
+                },
+                "required": [
+                  "dataProduct",
+                  "dataAsset"
+                ]
+              }
+            }
+          },
+          "required": [
+            "items"
+          ]
+        },
+        "trigger": {
+          "type": "object",
+          "description": "Trigger configuration for the schedule.",
+          "properties": {
+            "type": {
+              "type": "string"
+            },
+            "typeProperties": {
+              "type": "object",
+              "properties": {
+                "timezone": {
+                  "type": "string"
+                },
+                "isScheduled": {
+                  "type": "boolean"
+                },
+                "triggerTime": {
+                  "type": "string",
+                  "format": "date-time"
+                }
+              }
+            }
+          },
+          "required": [
+            "type",
+            "typeProperties"
+          ]
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the schedule was last modified."
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "User who last modified the schedule."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the schedule was created."
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "User who created the schedule."
+        },
+        "executionData": {
+          "type": "object",
+          "description": "Dictionary of execution data for the schedule.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ScheduleScanMonitoringEntity": {
+      "type": "object",
+      "description": "Monitoring information for schedule scans.",
+      "properties": {
+        "succeeded": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of succeeded scans."
+        },
+        "failed": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of failed scans."
+        },
+        "skipped": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of skipped scans."
+        },
+        "scheduleStatus": {
+          "type": "string",
+          "description": "Status of the schedule."
+        },
+        "scheduleName": {
+          "type": "string",
+          "description": "Name of the schedule."
+        },
+        "scheduleId": {
+          "type": "string",
+          "description": "Unique identifier of the schedule."
+        },
+        "scanId": {
+          "type": "string",
+          "description": "Unique identifier of the scan."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the scan started."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the scan ended."
+        },
+        "accountId": {
+          "type": "string",
+          "description": "Identifier of the account."
+        },
+        "businessDomainId": {
+          "type": "string",
+          "description": "Identifier of the business domain."
+        },
+        "totalJobCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total number of jobs in the scan."
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the scan."
+        },
+        "scheduleRunType": {
+          "type": "string",
+          "description": "Type of schedule run."
+        },
+        "scanType": {
+          "type": "string",
+          "description": "Type of the scan."
+        },
+        "startedBy": {
+          "type": "string",
+          "description": "User who started the scan."
+        },
+        "cancelledBy": {
+          "type": "string",
+          "description": "User who cancelled the scan."
+        },
+        "cancelRequestTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when a cancel request was made."
+        },
+        "partitionKey": {
+          "type": "string",
+          "description": "Partition key for storage."
+        },
+        "rowKey": {
+          "type": "string",
+          "description": "Row key for storage."
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp of the record."
+        },
+        "eTag": {
+          "type": "string",
+          "description": "ETag for concurrency control."
+        }
+      }
+    },
+    "TypeProperties": {
+      "type": "object",
+      "description": "Holds additional properties related to rule type.",
+      "properties": {
+        "column": {
+          "$ref": "#/definitions/Column",
+          "description": "Represents a column in a dataset."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    }
+  }
+}

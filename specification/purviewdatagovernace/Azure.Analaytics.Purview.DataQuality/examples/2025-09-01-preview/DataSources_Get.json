@@ -1,0 +1,61 @@
+{
+  "operationId": "GetDataSources",
+  "parameters": {
+    "businessDomainId": "abcdef12-3456-7890-abcd-ef1234567890"
+  },
+  "title": "DataSources_Get",
+  "responses": {
+    "200": {
+      "body": [
+        {
+          "name": "TestConnection Snowfake",
+          "id": "TestConnectionSnowfake",
+          "isVnetEnabled": false,
+          "businessDomain": {
+            "type": "BusinessDomainReference",
+            "referenceId": "e0c0840b-f087-4c3e-99e2-63075572d33b"
+          },
+          "lastModifiedAt": "2024-12-17T12:08:02.6040970Z",
+          "lastModifiedBy": "ca31eca9-668e-4933-82f8-69bdeecc6632",
+          "type": "Snowflake",
+          "typeProperties": {
+            "url": "fljqaun-gpa78346.snowflakecomputing.com",
+            "warehouse": "COMPUTE_WH",
+            "database": "DREAM_DEMO",
+            "testConnectionSchemaName": "INFORMATION_SCHEMA",
+            "testConnectionTableName": "CAMPAIGN_ANALYTICS"
+          }
+        },
+        {
+          "name": "Connectionasa12:52:59",
+          "id": "Connectionasa125259",
+          "isVnetEnabled": false,
+          "targetResourceId": "/subscriptions/07d669d6-83f2-4f15-8b5b-4a4b31a7050e/resourceGroups/pdgbugbash/providers/Microsoft.Synapse/workspaces/azsynapsedq",
+          "businessDomain": {
+            "type": "BusinessDomainReference",
+            "referenceId": "e0c0840b-f087-4c3e-99e2-63075572d33b"
+          },
+          "lastModifiedAt": "2025-05-29T00:53:15.1601371Z",
+          "lastModifiedBy": "5f20dead-9561-47e6-95b2-402fe03133be",
+          "type": "AzureSynapseAnalytics",
+          "typeProperties": {
+            "workspaceName": "azsynapsedq",
+            "dedicatedEndpoint": "azsynapsedq.sql.azuresynapse.net",
+            "serverlessEndpoint": "azsynapsedq-ondemand.sql.azuresynapse.net",
+            "database": "azsynsqlpool",
+            "endpointType": "sql"
+          },
+          "scopes": [
+            {
+              "scope": {
+                "type": "Sql",
+                "includes": []
+              },
+              "id": "2c788ad5-357e-4ee2-8072-9fa6a0bff8b1"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

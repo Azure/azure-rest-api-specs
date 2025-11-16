@@ -1,0 +1,112 @@
+{
+  "operationId": "Profile",
+  "parameters": {
+    "api-version": "2025-09-01-preview",
+    "businessDomainId": "abcdef12-3456-7890-abcd-ef1234567890",
+    "dataAssetId": "123e4567-e89b-12d3-a456-426614174000",
+    "dataProductId": "223e4567-e89b-12d3-a456-426614174111",
+    "profiles": {
+      "type": "Delta",
+      "typeProperties": {
+        "location": [
+          {
+            "type": "AdlsGen2FileLocation",
+            "typeProperties": {
+              "fileSystem": "smallsized",
+              "folderPath": "DELTA2/RowPartitioned/BankCustomerLedger3"
+            }
+          }
+        ]
+      },
+      "dataSourceId": "Connection115832",
+      "configuration": {
+        "keyColumns": [
+          {
+            "name": "Amount"
+          },
+          {
+            "name": "MerchantCity"
+          },
+          {
+            "name": "Currency"
+          },
+          {
+            "name": "MerchantCountry"
+          },
+          {
+            "name": "BankName"
+          },
+          {
+            "name": "BranchBranch"
+          },
+          {
+            "name": "ChequeDate"
+          },
+          {
+            "name": "ATMLocation"
+          },
+          {
+            "name": "ATMType"
+          },
+          {
+            "name": "ATMFee"
+          },
+          {
+            "name": "LoanInterestRate"
+          },
+          {
+            "name": "MerchantState"
+          },
+          {
+            "name": "TransactionDescription"
+          },
+          {
+            "name": "CardHolderName"
+          },
+          {
+            "name": "AccountHolderName"
+          },
+          {
+            "name": "CheckPayeeName"
+          },
+          {
+            "name": "Email"
+          },
+          {
+            "name": "TransferAmount"
+          },
+          {
+            "name": "SocialSecurityNumber"
+          },
+          {
+            "name": "DateofBirth"
+          },
+          {
+            "name": "Gender"
+          },
+          {
+            "name": "HomeAddress"
+          },
+          {
+            "name": "MailingAddress"
+          },
+          {
+            "name": "EmployerAddress"
+          }
+        ]
+      }
+    }
+  },
+  "title": "Profile_Create",
+  "responses": {
+    "202": {
+      "body": {
+        "profileRunId": "31c231c7-36ba-4b9d-8771-e21247c967cc",
+        "statuslro": "In Progress"
+      },
+      "headers": {
+        "azure-AsyncOperation": "In Progress"
+      }
+    }
+  }
+}

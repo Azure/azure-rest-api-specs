@@ -1,0 +1,58 @@
+{
+  "operationId": "GetSchedule",
+  "parameters": {
+    "api-version": "2025-09-01-preview",
+    "businessDomainId": "abcdef12-3456-7890-abcd-ef1234567890",
+    "scheduleId": "12345678-abcd-1234-ef00-123456abcdeg"
+  },
+  "title": "Schedule_Get",
+  "responses": {
+    "200": {
+      "body": {
+        "id": "TestSchedADBSQLDB",
+        "name": "TestSchedADBSQLDB",
+        "description": "",
+        "trigger": {
+          "type": "RunOnce",
+          "typeProperties": {
+            "timezone": "UTC",
+            "isScheduled": true,
+            "triggerTime": "2025-03-11T17:44:17.031Z"
+          }
+        },
+        "scope": {
+          "items": [
+            {
+              "dataProduct": {
+                "referenceId": "757b96c3-af76-45a8-a7cd-0f4b90e27d9a",
+                "type": "DataProductReference"
+              },
+              "dataAsset": {
+                "referenceId": "06678fd6-2e68-44e3-bc58-4e878e8dfa09",
+                "type": "DataAssetReference"
+              }
+            },
+            {
+              "dataProduct": {
+                "referenceId": "757b96c3-af76-45a8-a7cd-0f4b90e27d9a",
+                "type": "DataProductReference"
+              },
+              "dataAsset": {
+                "referenceId": "876a3108-6c5d-4967-9634-65a38d7638b8",
+                "type": "DataAssetReference"
+              }
+            }
+          ]
+        },
+        "businessDomain": {
+          "type": "BusinessDomainReference",
+          "referenceId": "e0c0840b-f087-4c3e-99e2-63075572d33b"
+        },
+        "createdAt": "2025-03-11T17:42:22.1174771Z",
+        "lastModifiedAt": "2025-03-11T17:42:22.1174771Z",
+        "createdBy": "ca31eca9-668e-4933-82f8-69bdeecc6632",
+        "lastModifiedBy": "ca31eca9-668e-4933-82f8-69bdeecc6632"
+      }
+    }
+  }
+}
