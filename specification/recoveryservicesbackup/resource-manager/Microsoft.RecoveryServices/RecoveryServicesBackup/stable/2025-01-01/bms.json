@@ -1446,20 +1446,16 @@
             }
           },
           "202": {
-            "description": "Accepted",
+            "description": "Resource operation accepted.",
             "headers": {
-              "Azure-AsyncOperation": {
-                "description": "The Azure-AsyncOperation header contains the URL where the status of the long running operation can be checked.",
-                "type": "string"
-              },
               "Location": {
-                "description": "The Location header contains the URL where the final result of the long running operation can be checked.",
-                "type": "string"
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
-                "format": "int32"
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -1469,6 +1465,10 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ProtectedItemResource"
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
