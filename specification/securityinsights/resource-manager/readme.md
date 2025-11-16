@@ -27,10 +27,53 @@ These are the global settings for the SecurityInsights API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2025-09-01
+tag: package-preview-2025-10-01-preview
 ```
 
 ---
+
+### Tag: package-preview-2025-10-01-preview
+
+These settings apply only when `--tag=package-preview-2025-10-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-10-01-preview'
+input-file:
+  - Microsoft.SecurityInsights/preview/2025-10-01-preview/AlertRules.json
+  - Microsoft.SecurityInsights/preview/2025-10-01-preview/AutomationRules.json
+  - Microsoft.SecurityInsights/preview/2025-10-01-preview/BillingStatistics.json
+  - Microsoft.SecurityInsights/preview/2025-10-01-preview/Bookmarks.json
+  - Microsoft.SecurityInsights/preview/2025-10-01-preview/BusinessApplicationAgents.json
+  - Microsoft.SecurityInsights/preview/2025-10-01-preview/ContentPackages.json
+  - Microsoft.SecurityInsights/preview/2025-10-01-preview/ContentProductPackages.json
+  - Microsoft.SecurityInsights/preview/2025-10-01-preview/ContentProductTemplates.json
+  - Microsoft.SecurityInsights/preview/2025-10-01-preview/ContentTemplates.json
+  - Microsoft.SecurityInsights/preview/2025-10-01-preview/dataConnectorDefinitions.json
+  - Microsoft.SecurityInsights/preview/2025-10-01-preview/dataConnectors.json
+  - Microsoft.SecurityInsights/preview/2025-10-01-preview/EnrichmentWithWorkspace.json
+  - Microsoft.SecurityInsights/preview/2025-10-01-preview/Entities.json
+  - Microsoft.SecurityInsights/preview/2025-10-01-preview/EntityQueries.json
+  - Microsoft.SecurityInsights/preview/2025-10-01-preview/EntityQueryTemplates.json
+  - Microsoft.SecurityInsights/preview/2025-10-01-preview/FileImports.json
+  - Microsoft.SecurityInsights/preview/2025-10-01-preview/Hunts.json
+  - Microsoft.SecurityInsights/preview/2025-10-01-preview/Incidents.json
+  - Microsoft.SecurityInsights/preview/2025-10-01-preview/Metadata.json
+  - Microsoft.SecurityInsights/preview/2025-10-01-preview/OfficeConsents.json
+  - Microsoft.SecurityInsights/preview/2025-10-01-preview/OnboardingStates.json
+  - Microsoft.SecurityInsights/preview/2025-10-01-preview/operations.json
+  - Microsoft.SecurityInsights/preview/2025-10-01-preview/Recommendations.json
+  - Microsoft.SecurityInsights/preview/2025-10-01-preview/SecurityMLAnalyticsSettings.json
+  - Microsoft.SecurityInsights/preview/2025-10-01-preview/Settings.json
+  - Microsoft.SecurityInsights/preview/2025-10-01-preview/SourceControls.json
+  - Microsoft.SecurityInsights/preview/2025-10-01-preview/ThreatIntelligence.json
+  - Microsoft.SecurityInsights/preview/2025-10-01-preview/ThreatIntelligenceCount.json
+  - Microsoft.SecurityInsights/preview/2025-10-01-preview/ThreatIntelligenceQuery.json
+  - Microsoft.SecurityInsights/preview/2025-10-01-preview/TriggeredAnalyticsRuleRuns.json
+  - Microsoft.SecurityInsights/preview/2025-10-01-preview/Watchlists.json
+  - Microsoft.SecurityInsights/preview/2025-10-01-preview/WorkspaceManagerAssignments.json
+  - Microsoft.SecurityInsights/preview/2025-10-01-preview/WorkspaceManagerConfigurations.json
+  - Microsoft.SecurityInsights/preview/2025-10-01-preview/WorkspaceManagerGroups.json
+  - Microsoft.SecurityInsights/preview/2025-10-01-preview/WorkspaceManagerMembers.json
+```
 
 ### Tag: package-2025-09-01
 
