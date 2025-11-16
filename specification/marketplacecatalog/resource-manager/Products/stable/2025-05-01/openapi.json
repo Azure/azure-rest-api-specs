@@ -1154,8 +1154,97 @@
     },
     "PlanDetails": {
       "type": "object",
-      "description": "Returns a subset of Plan attributes",
+      "description": "Returns the full set of Plan attributes",
       "properties": {
+        "planId": {
+          "type": "string",
+          "description": "Plan identifier"
+        },
+        "uniquePlanId": {
+          "type": "string",
+          "description": "Unique plan identifier which is prefixed by combining uniqueProductId and PlanId with no separator in between"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of the plan / sku"
+        },
+        "vmArchitectureType": {
+          "type": "string",
+          "description": "Specifies the virtual machine processor architecture and generation. Applies exclusively to Virtual Machine product types.\n- `X64Gen1` - x64 processor architecture with Generation 1 virtual machine firmware and BIOS support\n- `X64Gen2` - x64 processor architecture with Generation 2 virtual machine firmware and UEFI support\n- `Arm64` - ARM 64-bit processor architecture optimized for energy efficiency and cloud-native workloads"
+        },
+        "cspState": {
+          "type": "string",
+          "description": "Controls plan availability and partner access within the Microsoft Cloud Solution Provider (CSP) program.\n- `OptIn` - Enables all authorized Cloud Solution Provider partners to resell and deploy the product to customers\n- `OptOut` - Excluded from Cloud Solution Provider program, available only through direct channels\n- `SelectiveOptIn` - Available only to selected Cloud Solution Provider partners for resale and customer deployment"
+        },
+        "metadata": {
+          "$ref": "#/definitions/PlanMetadata",
+          "description": "Expanded plan/SKU metadata."
+        },
+        "altStackReference": {
+          "type": "string",
+          "description": "Alternative stack reference"
+        },
+        "stackType": {
+          "type": "string",
+          "description": "Stack type : Classic, Gen1, Gen2"
+        },
+        "altArchitectureReference": {
+          "type": "string",
+          "description": "The alternative architecture reference"
+        },
+        "categoryIds": {
+          "type": "array",
+          "description": "Plan CategoryIds",
+          "items": {
+            "type": "string"
+          }
+        },
+        "hasProtectedArtifacts": {
+          "type": "boolean",
+          "description": "Set to true if plan has artifacts that are to be hidden for non authenticated users"
+        },
+        "pricingTypes": {
+          "type": "array",
+          "description": "Indicates the billing models and cost structures available for the plan.\n- `Free` - No charge for plan usage, typically for community editions or basic service tiers\n- `FreeTrial` - Time-limited free access period before transitioning to paid billing model\n- `Byol` - Bring Your Own License model where customers provide existing software licenses\n- `Payg` - Pay As You Go consumption-based billing calculated on actual resource usage\n- `Ri` - Reserved Instance billing with upfront commitment for discounted long-term pricing",
+          "items": {
+            "type": "string"
+          }
+        },
+        "vmSecuritytypes": {
+          "type": "array",
+          "description": "Defines the security enhancement level for virtual machine deployments. Applies exclusively to Virtual Machine product types.\n- `None` - Standard virtual machine security without additional protection features\n- `Trusted` - Trusted Launch security with secure boot and virtual Trusted Platform Module capabilities\n- `Confidential` - Confidential computing with memory encryption and attestation for sensitive workloads",
+          "items": {
+            "type": "string"
+          }
+        },
+        "summary": {
+          "type": "string",
+          "description": "The plan summary text"
+        },
+        "description": {
+          "type": "string",
+          "description": "Plan / sku description"
+        },
+        "skuId": {
+          "type": "string",
+          "description": "The SKU id"
+        },
+        "planType": {
+          "type": "string",
+          "description": "Specifies the primary deployment model and hosting architecture for the marketplace product. Currently supported values are:\n- `None` - Unspecified product type, typically used for products without a defined deployment model\n- `DevService` - Development-focused services and tools for software creation workflows\n- `ManagedApplication` - Azure Managed Applications that deploy and manage resources in customer subscriptions\n- `VirtualMachine` - Pre-configured virtual machine images deployable to Azure compute infrastructure\n- `AzureApplication` - Native Azure applications leveraging platform services and APIs\n- `Container` - Containerized applications deployed through Azure Container Instances or similar services\n- `SaaS` - Software as a Service solutions hosted and managed by the publisher\n- `SolutionTemplate` - Azure Resource Manager templates that provision multiple Azure resources\n- `IotEdgeModules` - Modules designed for deployment to Azure IoT Edge runtime environments\n- `ManagedServices` - Fully managed services where the publisher handles infrastructure and operations\n- `ContainerApps` - Applications built for Azure Container Apps serverless container platform\n- `VisualStudioExtension` - Extensions that integrate with Visual Studio IDE functionality\n- `DynamicsOps` - Microsoft Dynamics 365 Finance and Operations applications and extensions\n- `DynamicsCE` - Microsoft Dynamics 365 Customer Engagement applications and customizations\n- `DynamicsBC` - Microsoft Dynamics 365 Business Central applications and add-ons\n- `PowerBI` - Microsoft Power BI reports, dashboards, and data visualization components\n- `ConsultingServices` - Professional services offerings including implementation and advisory services\n- `CosellOnly` - Products available exclusively through Microsoft co-sell partner programs\n- `CoreVirtualMachine` - Core virtual machine offerings with baseline Azure compute capabilities\n- `PowerBIVisuals` - Custom visualizations for Microsoft Power BI reporting platform\n- `Office365` - Microsoft 365 and Office 365 applications, add-ins, and integrations\n- `AADApps` - Azure Active Directory integrated applications supporting organizational identity\n- `AzureServices` - Native Azure platform services and resource providers\n- `AppService` - Web applications hosted on Azure App Service platform\n- `LogAnalytics` - Azure Monitor Log Analytics solutions and workspace configurations\n- `MicrosoftProduct` - First-party Microsoft products available through marketplace channels"
+        },
+        "displayRank": {
+          "type": "string",
+          "description": "The order the plan is displayed in the 'Plans' table"
+        },
+        "isPrivate": {
+          "type": "boolean",
+          "description": "Indication that the plan is accessible to restricted audience only"
+        },
+        "hasRi": {
+          "type": "boolean",
+          "description": "Indication whether the SKU supports reservations"
+        },
         "id": {
           "type": "string",
           "description": "The id"
@@ -1313,14 +1402,10 @@
         }
       },
       "required": [
+        "planType",
         "isHidden",
         "isStopSell",
         "isQuantifiable"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/PlanSummary"
-        }
       ]
     },
     "PlanMetadata": {
@@ -1482,10 +1567,370 @@
         "msrp"
       ]
     },
+    "ProductBase": {
+      "type": "object",
+      "description": "Base model containing common product attributes shared between ProductSummary and ProductDetails",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Product display name"
+        },
+        "popularity": {
+          "type": "number",
+          "format": "double",
+          "description": "Popularity of the product"
+        },
+        "categoryIds": {
+          "type": "array",
+          "description": "Array of product categories",
+          "items": {
+            "type": "string"
+          }
+        },
+        "industryIds": {
+          "type": "array",
+          "description": "List of industry IDs the item belongs to",
+          "items": {
+            "type": "string"
+          }
+        },
+        "publisherId": {
+          "type": "string",
+          "description": "Publisher id"
+        },
+        "azureBenefit": {
+          "type": "string",
+          "description": "Indicates whether product purchases count toward Azure consumption commitment benefits for enterprise customers.\n- `Eligible` - Product costs apply to Azure consumption commitment benefit calculations and credits\n- `NotEligible` - Product costs do not qualify for Azure consumption commitment benefit programs"
+        },
+        "badges": {
+          "type": "array",
+          "description": "Displays certification and qualification badges earned by the product for marketplace visibility.\n- `PreferredSolution` - Microsoft-recognized solution meeting specific quality and partnership criteria\n- `PowerBICertified` - Certified compatibility and integration with Microsoft Power BI platform\n- `AdditionalPurchaseRequirement` - Product requires additional purchases or subscriptions for full functionality",
+          "items": {
+            "type": "string"
+          }
+        },
+        "publisherType": {
+          "type": "string",
+          "description": "Identifies the publisher relationship to Microsoft for support and partnership classification.\n- `Microsoft` - First-party Microsoft product with direct Microsoft support and development\n- `ThirdParty` - Independent software vendor product with publisher-provided support and maintenance"
+        },
+        "publishingStage": {
+          "type": "string",
+          "description": "Indicates the product availability status and customer access level within Azure Marketplace.\n- `Preview` - Limited availability to selected customers for testing and early access evaluation\n- `Public` - General availability to all Azure Marketplace customers for production deployment"
+        },
+        "uniqueProductId": {
+          "type": "string",
+          "description": "Unique product identifier",
+          "readOnly": true
+        },
+        "productType": {
+          "type": "string",
+          "description": "Specifies the primary deployment model and hosting architecture for the marketplace product stored in the Marketplace Catalog.\n- `None` - Unspecified product type, typically used for products without a defined deployment model\n- `ManagedApplication` - Azure Managed Applications that deploy and manage resources in customer subscriptions\n- `VirtualMachine` - Pre-configured virtual machine images deployable to Azure compute infrastructure\n- `AzureApplication` - Native Azure applications leveraging platform services and APIs\n- `Container` - Containerized applications deployed through Azure Container Instances or similar services\n- `SaaS` - Software as a Service solutions hosted and managed by the publisher\n- `SolutionTemplate` - Azure Resource Manager templates that provision multiple Azure resources\n- `IotEdgeModules` - Modules designed for deployment to Azure IoT Edge runtime environments\n- `ManagedServices` - Fully managed services where the publisher handles infrastructure and operations\n- `ContainerApps` - Applications built for Azure Container Apps serverless container platform\n- `DynamicsOps` - Microsoft Dynamics 365 Finance and Operations applications and extensions\n- `DynamicsCE` - Microsoft Dynamics 365 Customer Engagement applications and customizations\n- `DynamicsBC` - Microsoft Dynamics 365 Business Central applications and add-ons\n- `PowerBI` - Microsoft Power BI reports, dashboards, and data visualization components\n- `ConsultingServices` - Professional services offerings including implementation and advisory services\n- `CosellOnly` - Products available exclusively through Microsoft co-sell partner programs\n- `CoreVirtualMachine` - Core virtual machine offerings with baseline Azure compute capabilities\n- `PowerBIVisuals` - Custom visualizations for Microsoft Power BI reporting platform\n- `Office365` - Microsoft 365 and Office 365 applications, add-ins, and integrations\n- `AADApps` - Azure Active Directory integrated applications supporting organizational identity\n- `AzureServices` - Native Azure platform services and resource providers\n- `AppService` - Web applications hosted on Azure App Service platform\n- `LogAnalytics` - Azure Monitor Log Analytics solutions and workspace configurations\n- `MicrosoftProduct` - First-party Microsoft products available through marketplace channels"
+        },
+        "productSubType": {
+          "type": "string",
+          "description": "Product sub type"
+        },
+        "productFamily": {
+          "type": "string",
+          "description": "Product Family"
+        },
+        "operatingSystems": {
+          "type": "array",
+          "description": "Operating system info for this product",
+          "items": {
+            "type": "string"
+          }
+        },
+        "pricingTypes": {
+          "type": "array",
+          "description": "Indicates the billing models and cost structures available for the plan.\n- `Free` - No charge for plan usage, typically for community editions or basic service tiers\n- `FreeTrial` - Time-limited free access period before transitioning to paid billing model\n- `Byol` - Bring Your Own License model where customers provide existing software licenses\n- `Payg` - Pay As You Go consumption-based billing calculated on actual resource usage\n- `Ri` - Reserved Instance billing with upfront commitment for discounted long-term pricing",
+          "items": {
+            "type": "string"
+          }
+        },
+        "publisherDisplayName": {
+          "type": "string",
+          "description": "Publisher display name"
+        },
+        "longSummary": {
+          "type": "string",
+          "description": "Product long summary"
+        },
+        "summary": {
+          "type": "string",
+          "description": "Product summary"
+        },
+        "smallIconUri": {
+          "type": "string",
+          "description": "URI to the small product icon"
+        },
+        "description": {
+          "type": "string",
+          "description": "The product description text"
+        },
+        "cspLegalTermsUri": {
+          "type": "string",
+          "description": "The legal terms of the product for the CSP"
+        },
+        "privacyPolicyUri": {
+          "type": "string",
+          "description": "The privacy policy of the product"
+        },
+        "ratingBuckets": {
+          "type": "array",
+          "description": "Categorizes products by customer rating thresholds for marketplace filtering and discovery.\n- `AboveOne` - Products with customer ratings exceeding 1.0 stars based on marketplace reviews\n- `AboveTwo` - Products with customer ratings exceeding 2.0 stars based on marketplace reviews\n- `AboveThree` - Products with customer ratings exceeding 3.0 stars based on marketplace reviews\n- `AboveFour` - Products with customer ratings exceeding 4.0 stars based on marketplace reviews",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ratingAverage": {
+          "type": "number",
+          "format": "double",
+          "description": "Average rating for the offer"
+        },
+        "ratingCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of ratings for the offer"
+        },
+        "supportedProducts": {
+          "type": "array",
+          "description": "Maps to the list of compatible products",
+          "items": {
+            "type": "string"
+          }
+        },
+        "applicableProducts": {
+          "type": "array",
+          "description": "Product categories the offer belongs to",
+          "items": {
+            "type": "string"
+          }
+        },
+        "lastModifiedDateTime": {
+          "type": "string",
+          "description": "Latest update date of the product"
+        },
+        "locations": {
+          "type": "array",
+          "description": "List of locations which are available on the SKUs",
+          "items": {
+            "type": "string"
+          }
+        },
+        "serviceFamily": {
+          "type": "string",
+          "description": "The service family of the product, such as 'Compute'"
+        },
+        "service": {
+          "type": "string",
+          "description": "The service name of the product, such as 'Virtual Machines'"
+        },
+        "productId": {
+          "type": "string",
+          "description": "The unique id of the product"
+        },
+        "hasRiPlans": {
+          "type": "boolean",
+          "description": "Indication whether the product has plans with reservations"
+        },
+        "hasMarketplaceFootprint": {
+          "type": "boolean",
+          "description": "Indication if product has a representation in the marketplace"
+        },
+        "attributes": {
+          "type": "array",
+          "description": "Set of products attributes",
+          "items": {
+            "$ref": "#/definitions/Attribute"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "uniqueProductId",
+        "productType"
+      ]
+    },
     "ProductDetails": {
       "type": "object",
-      "description": "Summary description of the product",
+      "description": "Returns the full set of Product attributes",
       "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Product display name"
+        },
+        "popularity": {
+          "type": "number",
+          "format": "double",
+          "description": "Popularity of the product"
+        },
+        "categoryIds": {
+          "type": "array",
+          "description": "Array of product categories",
+          "items": {
+            "type": "string"
+          }
+        },
+        "industryIds": {
+          "type": "array",
+          "description": "List of industry IDs the item belongs to",
+          "items": {
+            "type": "string"
+          }
+        },
+        "publisherId": {
+          "type": "string",
+          "description": "Publisher id"
+        },
+        "azureBenefit": {
+          "type": "string",
+          "description": "Indicates whether product purchases count toward Azure consumption commitment benefits for enterprise customers.\n- `Eligible` - Product costs apply to Azure consumption commitment benefit calculations and credits\n- `NotEligible` - Product costs do not qualify for Azure consumption commitment benefit programs"
+        },
+        "badges": {
+          "type": "array",
+          "description": "Displays certification and qualification badges earned by the product for marketplace visibility.\n- `PreferredSolution` - Microsoft-recognized solution meeting specific quality and partnership criteria\n- `PowerBICertified` - Certified compatibility and integration with Microsoft Power BI platform\n- `AdditionalPurchaseRequirement` - Product requires additional purchases or subscriptions for full functionality",
+          "items": {
+            "type": "string"
+          }
+        },
+        "publisherType": {
+          "type": "string",
+          "description": "Identifies the publisher relationship to Microsoft for support and partnership classification.\n- `Microsoft` - First-party Microsoft product with direct Microsoft support and development\n- `ThirdParty` - Independent software vendor product with publisher-provided support and maintenance"
+        },
+        "publishingStage": {
+          "type": "string",
+          "description": "Indicates the product availability status and customer access level within Azure Marketplace.\n- `Preview` - Limited availability to selected customers for testing and early access evaluation\n- `Public` - General availability to all Azure Marketplace customers for production deployment"
+        },
+        "uniqueProductId": {
+          "type": "string",
+          "description": "Unique product identifier",
+          "readOnly": true
+        },
+        "productType": {
+          "type": "string",
+          "description": "Specifies the primary deployment model and hosting architecture for the marketplace product stored in the Marketplace Catalog.\n- `None` - Unspecified product type, typically used for products without a defined deployment model\n- `ManagedApplication` - Azure Managed Applications that deploy and manage resources in customer subscriptions\n- `VirtualMachine` - Pre-configured virtual machine images deployable to Azure compute infrastructure\n- `AzureApplication` - Native Azure applications leveraging platform services and APIs\n- `Container` - Containerized applications deployed through Azure Container Instances or similar services\n- `SaaS` - Software as a Service solutions hosted and managed by the publisher\n- `SolutionTemplate` - Azure Resource Manager templates that provision multiple Azure resources\n- `IotEdgeModules` - Modules designed for deployment to Azure IoT Edge runtime environments\n- `ManagedServices` - Fully managed services where the publisher handles infrastructure and operations\n- `ContainerApps` - Applications built for Azure Container Apps serverless container platform\n- `DynamicsOps` - Microsoft Dynamics 365 Finance and Operations applications and extensions\n- `DynamicsCE` - Microsoft Dynamics 365 Customer Engagement applications and customizations\n- `DynamicsBC` - Microsoft Dynamics 365 Business Central applications and add-ons\n- `PowerBI` - Microsoft Power BI reports, dashboards, and data visualization components\n- `ConsultingServices` - Professional services offerings including implementation and advisory services\n- `CosellOnly` - Products available exclusively through Microsoft co-sell partner programs\n- `CoreVirtualMachine` - Core virtual machine offerings with baseline Azure compute capabilities\n- `PowerBIVisuals` - Custom visualizations for Microsoft Power BI reporting platform\n- `Office365` - Microsoft 365 and Office 365 applications, add-ins, and integrations\n- `AADApps` - Azure Active Directory integrated applications supporting organizational identity\n- `AzureServices` - Native Azure platform services and resource providers\n- `AppService` - Web applications hosted on Azure App Service platform\n- `LogAnalytics` - Azure Monitor Log Analytics solutions and workspace configurations\n- `MicrosoftProduct` - First-party Microsoft products available through marketplace channels"
+        },
+        "productSubType": {
+          "type": "string",
+          "description": "Product sub type"
+        },
+        "productFamily": {
+          "type": "string",
+          "description": "Product Family"
+        },
+        "operatingSystems": {
+          "type": "array",
+          "description": "Operating system info for this product",
+          "items": {
+            "type": "string"
+          }
+        },
+        "pricingTypes": {
+          "type": "array",
+          "description": "Indicates the billing models and cost structures available for the plan.\n- `Free` - No charge for plan usage, typically for community editions or basic service tiers\n- `FreeTrial` - Time-limited free access period before transitioning to paid billing model\n- `Byol` - Bring Your Own License model where customers provide existing software licenses\n- `Payg` - Pay As You Go consumption-based billing calculated on actual resource usage\n- `Ri` - Reserved Instance billing with upfront commitment for discounted long-term pricing",
+          "items": {
+            "type": "string"
+          }
+        },
+        "publisherDisplayName": {
+          "type": "string",
+          "description": "Publisher display name"
+        },
+        "longSummary": {
+          "type": "string",
+          "description": "Product long summary"
+        },
+        "summary": {
+          "type": "string",
+          "description": "Product summary"
+        },
+        "smallIconUri": {
+          "type": "string",
+          "description": "URI to the small product icon"
+        },
+        "description": {
+          "type": "string",
+          "description": "The product description text"
+        },
+        "cspLegalTermsUri": {
+          "type": "string",
+          "description": "The legal terms of the product for the CSP"
+        },
+        "privacyPolicyUri": {
+          "type": "string",
+          "description": "The privacy policy of the product"
+        },
+        "ratingBuckets": {
+          "type": "array",
+          "description": "Categorizes products by customer rating thresholds for marketplace filtering and discovery.\n- `AboveOne` - Products with customer ratings exceeding 1.0 stars based on marketplace reviews\n- `AboveTwo` - Products with customer ratings exceeding 2.0 stars based on marketplace reviews\n- `AboveThree` - Products with customer ratings exceeding 3.0 stars based on marketplace reviews\n- `AboveFour` - Products with customer ratings exceeding 4.0 stars based on marketplace reviews",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ratingAverage": {
+          "type": "number",
+          "format": "double",
+          "description": "Average rating for the offer"
+        },
+        "ratingCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of ratings for the offer"
+        },
+        "supportedProducts": {
+          "type": "array",
+          "description": "Maps to the list of compatible products",
+          "items": {
+            "type": "string"
+          }
+        },
+        "applicableProducts": {
+          "type": "array",
+          "description": "Product categories the offer belongs to",
+          "items": {
+            "type": "string"
+          }
+        },
+        "lastModifiedDateTime": {
+          "type": "string",
+          "description": "Latest update date of the product"
+        },
+        "locations": {
+          "type": "array",
+          "description": "List of locations which are available on the SKUs",
+          "items": {
+            "type": "string"
+          }
+        },
+        "serviceFamily": {
+          "type": "string",
+          "description": "The service family of the product, such as 'Compute'"
+        },
+        "service": {
+          "type": "string",
+          "description": "The service name of the product, such as 'Virtual Machines'"
+        },
+        "productId": {
+          "type": "string",
+          "description": "The unique id of the product"
+        },
+        "hasRiPlans": {
+          "type": "boolean",
+          "description": "Indication whether the product has plans with reservations"
+        },
+        "hasMarketplaceFootprint": {
+          "type": "boolean",
+          "description": "Indication if product has a representation in the marketplace"
+        },
+        "attributes": {
+          "type": "array",
+          "description": "Set of products attributes",
+          "items": {
+            "$ref": "#/definitions/Attribute"
+          },
+          "x-ms-identifiers": []
+        },
         "videos": {
           "type": "array",
           "description": "List of product videos",
@@ -1621,21 +2066,13 @@
           "items": {
             "$ref": "#/definitions/PlanDetails"
           }
-        },
-        "productId": {
-          "type": "string",
-          "description": "The unique id of the product"
         }
       },
       "required": [
+        "uniqueProductId",
+        "productType",
         "isPrivate",
-        "isStopSell",
-        "productId"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProductSummary"
-        }
+        "isStopSell"
       ]
     },
     "ProductSingle": {
@@ -1779,14 +2216,6 @@
           "format": "int32",
           "description": "Total number of ratings for the offer"
         },
-        "plans": {
-          "type": "array",
-          "description": "Full set of plan/SKU attributes",
-          "items": {
-            "$ref": "#/definitions/PlanSummary"
-          },
-          "x-ms-identifiers": []
-        },
         "supportedProducts": {
           "type": "array",
           "description": "Maps to the list of compatible products",
@@ -1837,6 +2266,14 @@
           "description": "Set of products attributes",
           "items": {
             "$ref": "#/definitions/Attribute"
+          },
+          "x-ms-identifiers": []
+        },
+        "plans": {
+          "type": "array",
+          "description": "Full set of plan/SKU attributes",
+          "items": {
+            "$ref": "#/definitions/PlanSummary"
           },
           "x-ms-identifiers": []
         }
