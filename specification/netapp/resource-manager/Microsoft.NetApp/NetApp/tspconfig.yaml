@@ -14,7 +14,7 @@ options:
     output-file: "{version-status}/{version}/netapp.json"
     emit-lro-options: "all"
     examples-dir: "{project-root}/examples"
-    arm-resource-flattening: true
+
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
   "@azure-tools/typespec-csharp":
     flavor: azure
@@ -33,6 +33,9 @@ options:
     namespace: "com.azure.resourcemanager.netapp"
     service-name: "NetAppFiles"
     flavor: azure
+    float32-as-double: false
+    client-side-validations: true
+    uuid-as-string: false
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/arm-netapp"
     flavor: azure
