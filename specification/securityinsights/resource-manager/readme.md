@@ -55,6 +55,35 @@ input-file:
   - Microsoft.SecurityInsights/stable/2025-12-01/SourceControls.json
   - Microsoft.SecurityInsights/stable/2025-12-01/ThreatIntelligence.json
   - Microsoft.SecurityInsights/stable/2025-12-01/Watchlists.json
+suppressions:
+  - code: AvoidAdditionalProperties
+    from: dataConnectors.json
+    where:
+      - $.definitions.RestApiPollerDataConnectorProperties.properties.addOnAttributes
+      - $.definitions.RestApiPollerRequestConfig.properties.headers
+      - $.definitions.RestApiPollerRequestConfig.properties.queryParameters
+      - $.definitions.RestApiPollerRequestPagingNextPageUrlConfig.properties.nextPageUrlQueryParameters
+      - $.definitions.GenericBlobSbsAuthModel.properties.credentialsConfig
+      - $.definitions.GenericBlobSbsAuthModel.properties.storageAccountCredentialsConfig
+      - $.definitions.JwtAuthModel.properties.userName
+      - $.definitions.JwtAuthModel.properties.password
+      - $.definitions.JwtAuthModel.properties.queryParameters
+      - $.definitions.JwtAuthModel.properties.headers
+      - $.definitions.OAuthModel.properties.tokenEndpointHeaders
+      - $.definitions.OAuthModel.properties.tokenEndpointQueryParameters
+      - $.definitions.OAuthModel.properties.authorizationEndpointHeaders
+      - $.definitions.OAuthModel.properties.authorizationEndpointQueryParameters
+      - $.definitions.SessionAuthModel.properties.userName
+      - $.definitions.SessionAuthModel.properties.password
+      - $.definitions.SessionAuthModel.properties.queryParameters
+      - $.definitions.SessionAuthModel.properties.headers
+    reason: These properties are unknown and need to be specified by the customer (each request can have different values)
+  - code: AvoidAdditionalProperties
+    from: AlertRules.json
+    where:
+      - $.definitions.ScheduledAlertRuleCommonProperties.properties.customDetails
+      - $.definitions.ScheduledAlertRuleTemplateProperties.properties.customDetails
+    reason: These properties are unknown and changed frequently (each request can have different values for each entity)
 ```
 
 ### Tag: package-2025-09-01
