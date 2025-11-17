@@ -923,6 +923,7 @@ model AuthorizedTransceiverProperties {
   @doc("Vendor of the transceiver.")
   vendor?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Not a secret. Usage as per design"
   @doc("Key that must be configured on the fabric.")
   key?: string;
 }
@@ -933,6 +934,7 @@ model AuthorizedTransceiverPatchProperties {
   @doc("Vendor of the transceiver.")
   vendor?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Not a secret. Usage as per design"
   @doc("Key that must be configured on the fabric.")
   key?: string;
 }
