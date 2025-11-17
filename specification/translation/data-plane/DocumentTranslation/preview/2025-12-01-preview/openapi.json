@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure.AI.DocumentTranslation",
-    "version": "2024-05-01",
+    "version": "2025-12-01-preview",
     "description": "Document translation service",
     "x-typespec-generated": [
       {
@@ -476,6 +476,9 @@
             "$ref": "#/parameters/DocumentTranslateBody.allowFallback"
           },
           {
+            "$ref": "#/parameters/DocumentTranslateBody.translateTextWithinImage"
+          },
+          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           },
           {
@@ -504,6 +507,21 @@
               "type": "file"
             },
             "headers": {
+              "total-image-scans-failed": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Specifies the number of failed image translations within a document translation job"
+              },
+              "total-image-scans-succeeded": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Specifies the number of successful image translations within a document translation job"
+              },
+              "x-metered-usage": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Specifies consumption (the number of characters for which the user will be charged) for the translation job request"
+              },
               "x-ms-client-request-id": {
                 "type": "string",
                 "format": "uuid",
@@ -622,6 +640,17 @@
       "format": "uuid",
       "description": "Universally Unique Identifier"
     },
+    "BatchOptions": {
+      "type": "object",
+      "description": "Translation batch request options",
+      "properties": {
+        "translateTextWithinImage": {
+          "type": "boolean",
+          "description": "Translation text within an image option",
+          "default": false
+        }
+      }
+    },
     "BatchRequest": {
       "type": "object",
       "description": "Definition for the input batch translation request",
@@ -709,6 +738,16 @@
           "type": "integer",
           "format": "int32",
           "description": "Character charged by the API"
+        },
+        "totalImageScansSucceeded": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total image scans charged by the API"
+        },
+        "totalImageScansFailed": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total image scans failed"
         },
         "imageCharged": {
           "type": "integer",
@@ -921,6 +960,10 @@
           "items": {
             "$ref": "#/definitions/BatchRequest"
           }
+        },
+        "options": {
+          "$ref": "#/definitions/BatchOptions",
+          "description": "The batch operation options"
         }
       },
       "required": [
@@ -1019,6 +1062,16 @@
           "type": "integer",
           "format": "int64",
           "description": "Total characters charged by the API"
+        },
+        "totalImageScansSucceeded": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total image scans charged by the API"
+        },
+        "totalImageScansFailed": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total image scans failed"
         },
         "totalImageCharged": {
           "type": "integer",
@@ -1331,6 +1384,14 @@
       "description": "Specifies the language of the output document.\nThe target language must be one of the supported languages included in the translation scope.\nFor example if you want to translate the document in German language, then use targetLanguage=de ",
       "required": true,
       "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "DocumentTranslateBody.translateTextWithinImage": {
+      "name": "translateTextWithinImage",
+      "in": "query",
+      "description": "Optional boolean parameter to translate text within an image in the document",
+      "required": false,
+      "type": "boolean",
       "x-ms-parameter-location": "method"
     },
     "GetDocumentsStatusOptions.createdDateTimeUtcEnd": {
