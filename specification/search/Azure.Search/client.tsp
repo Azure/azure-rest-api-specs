@@ -2763,6 +2763,17 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(PathHierarchyTokenizer.`@odata.type`, "odataType");
 @@clientName(PathHierarchyTokenizer.`@odata.type`, "odatatype", "javascript");
 @@clientName(ListIndexStatsSummary.value, "IndexesStatistics");
+@@clientName(Search.BM25SimilarityAlgorithm, "BM25Similarity", "javascript");
+@@clientName(Search.ClassicSimilarityAlgorithm,
+  "ClassicSimilarity",
+  "javascript"
+);
+@@clientName(Search.ChatCompletionCommonModelParameters,
+  "CommonModelParameters",
+  "javascript"
+);
+@@clientName(Search.SearchServiceCounters, "ServiceCounters", "javascript");
+@@clientName(Search.SearchServiceLimits, "ServiceLimits", "javascript");
 
 // Knowledge Base types
 @@clientNamespace(Search.KnowledgeBaseRetrievalRequest,
