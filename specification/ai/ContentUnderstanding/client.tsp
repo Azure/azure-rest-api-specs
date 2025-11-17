@@ -20,7 +20,7 @@ interface ContentUnderstandingClient {
   analyzeBinary is ContentAnalyzers.analyzeBinary;
   copyAnalyzer is ContentAnalyzers.copy;
   createAnalyzer is ContentAnalyzers.createOrReplace;
-  deletAnalyzer is ContentAnalyzers.delete;
+  deleteAnalyzer is ContentAnalyzers.delete;
   deleteResult is ContentAnalyzers.deleteResult;
   getAnalyzer is ContentAnalyzers.get;
   getDefaults is ContentAnalyzers.getDefaults;
