@@ -13,7 +13,7 @@ using Azure.Core;
   "{endpoint}",
   "Session pool management endpoint.",
   {
-    @doc("The management endpoint of the session pool.")
+    /** The management endpoint of the session pool. */
     endpoint: string,
   }
 )
@@ -22,9 +22,12 @@ namespace Microsoft.App.DynamicSessions;
 
 @doc("The Microsoft.App Dynamic Sessions service versions.")
 enum Versions {
-  @doc("The 2024-10-02-preview version of the Microsoft.App Dynamic Sessions service.")
+  /** The 2024-10-02-preview version of the Microsoft.App Dynamic Sessions service. */
   v2024_10_02_preview: "2024-10-02-preview",
 
-  @doc("The 2025-02-02-preview version of the Microsoft.App Dynamic Sessions service.")
+  /** The 2025-02-02-preview version of the Microsoft.App Dynamic Sessions service. */
   v2025_02_02_preview: "2025-02-02-preview",
+
+  /** The 2025-10-02-preview version of the Microsoft.App Dynamic Sessions service. */
+  v2025_10_02_preview: "2025-10-02-preview",
 }
