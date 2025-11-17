@@ -1,14 +1,14 @@
-# Management Groups
+# Service Groups
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for Management Groups.
+This is the AutoRest configuration file for Service Groups.
 
 ---
 
 ## Getting Started
 
-To build the SDK for Management Groups, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
+To build the SDK for Service Groups, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
 
@@ -26,16 +26,17 @@ These are the global settings for the API.
 
 ``` yaml
 openapi-type: arm
-tag: 2024-02-01-preview
+tag: package-2024-02-preview
 ```
 
-### Tag: package-2024-02-01-preview
+### Tag: package-2024-02-preview
 
-These settings apply only when `--tag=package-2024-02-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-2024-02-preview` is specified on the command line.
 
 ```yaml $(tag) == 'package-2024-02-preview'
 input-file:
   - preview/2024-02-01-preview/serviceGroups.json
+v3: true
 ```
 ---
 
@@ -63,7 +64,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
-  - repo: azure-sdk-for-node
   - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
   - repo: azure-powershell
@@ -106,8 +106,8 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 
 ``` yaml $(tag) == '2024-02-01-preview' && $(java) && $(multiapi)
 java:
-  namespace: com.microsoft.azure.management.managementgroups.v2024_02_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/sdk/managementgroups/mgmt-v2024_02_01_preview
+  namespace: com.microsoft.azure.management.servicegroups.v2024_02_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/servicegroups/mgmt-v2024_02_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
