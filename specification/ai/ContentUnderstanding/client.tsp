@@ -18,18 +18,18 @@ interface ContentUnderstandingClient {
   // LRO operations will automatically get "begin_" prefix in Python
   analyze is ContentAnalyzers.analyze;
   analyzeBinary is ContentAnalyzers.analyzeBinary;
-  copy is ContentAnalyzers.copy;
-  createOrReplace is ContentAnalyzers.createOrReplace;
-  delete is ContentAnalyzers.delete;
+  copyAnalyzer is ContentAnalyzers.copy;
+  createAnalyzer is ContentAnalyzers.createOrReplace;
+  deletAnalyzer is ContentAnalyzers.delete;
   deleteResult is ContentAnalyzers.deleteResult;
-  get is ContentAnalyzers.get;
+  getAnalyzer is ContentAnalyzers.get;
   getDefaults is ContentAnalyzers.getDefaults;
   getOperationStatus is ContentAnalyzers.getOperationStatus;
   getResult is ContentAnalyzers.getResult;
   getResultFile is ContentAnalyzers.getResultFile;
   grantCopyAuthorization is ContentAnalyzers.grantCopyAuthorization;
-  list is ContentAnalyzers.list;
-  update is ContentAnalyzers.update;
+  listAnalyzers is ContentAnalyzers.list;
+  updateAnalyzer is ContentAnalyzers.update;
   updateDefaults is ContentAnalyzers.updateDefaults;
 }
 
@@ -55,15 +55,21 @@ interface ContentUnderstandingClient {
 
 //@@clientName(ContentFieldDefinition.$ref, "reference", "javascript");
 
-// Rename generic operations to be more specific for clarity across all languages.
-@@clientName(ContentAnalyzers.get, "getAnalyzer");
-@@clientName(ContentAnalyzers.delete, "deleteAnalyzer");
-@@clientName(ContentAnalyzers.update, "updateAnalyzer");
-@@clientName(ContentAnalyzers.copy, "copyAnalyzer");
-@@clientName(ContentAnalyzers.list, "listAnalyzers");
+// Mark polling operations as internal - client generators automatically handle
+// the polling pattern for long-running operations. When users call analyze(), the
+// generated SDK returns a poller that internally uses these endpoints to check status
+// and retrieve results, eliminating the need for manual operation ID management.
+@@access(ContentUnderstandingClient.getResult, Access.internal);
+@@access(ContentUnderstandingClient.getOperationStatus, Access.internal);
+
+// Client-only docs clarifying that these properties accept raw binary bytes (not base64 strings) in Python SDK.
+@@clientDoc(AnalyzeInput.data,
+  "Raw image bytes. Provide bytes-like object; do not base64-encode. Only one of url or data should be specified.",
+  DocumentationMode.replace
+);
 
 // .NET-specific naming: use GetAnalyzers instead of ListAnalyzers
-@@clientName(ContentAnalyzers.list, "getAnalyzers", "csharp");
+@@clientName(ContentAnalyzers.listAnalyzers, "getAnalyzers", "csharp");
 
 // Client-only docs clarifying that these properties accept raw binary bytes (not base64 strings) in Python SDK.
 @@clientDoc(AnalyzeInput.data,
