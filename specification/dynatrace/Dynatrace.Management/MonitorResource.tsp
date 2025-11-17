@@ -110,7 +110,7 @@ interface MonitorResources {
   manageSreAgentConnectors is ArmResourceActionSync<
     MonitorResource,
     SreAgentConnectorRequest,
-    ArmResponse<SreAgentConfiguration[]>
+    ArmResponse<SreAgentConfigurationListResponse>
   >;
 
   /**

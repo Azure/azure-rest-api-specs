@@ -728,6 +728,13 @@ model DynatraceEnvironmentProperties {
 }
 
 /**
+ * Response of a list operation.
+ */
+@added(Dynatrace.Observability.Versions.v2025_11_03_preview)
+model SreAgentConfigurationListResponse
+  is Azure.Core.Page<SreAgentConfiguration>;
+
+/**
  * SRE Agent configuration to connect to MCP server of Dynatrace for a given organization.
  */
 @added(Dynatrace.Observability.Versions.v2025_11_03_preview)
