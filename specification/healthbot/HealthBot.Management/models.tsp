@@ -290,14 +290,14 @@ model ErrorDetail {
    * The error details.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   details?: Error[];
 
   /**
    * The error additional info.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   additionalInfo?: ErrorAdditionalInfo[];
 }
 /**
@@ -356,7 +356,7 @@ model HealthBotKeysResponse {
   /**
    * Array of Azure Health Bot Secrets.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   secrets?: HealthBotKey[];
 }
 
@@ -388,7 +388,7 @@ model AvailableOperations {
   /**
    * Collection of available operation details.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   @pageItems
   value: OperationDetail[];
 
