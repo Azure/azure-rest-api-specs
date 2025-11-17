@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "resourceGroupName": "scgroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2026-01-01",
+    "amlFilesystemName": "fs1",
+    "expansionJobName": "expansionjob1",
+    "expansionJob": {
+      "tags": {
+        "Dept": "ContosoFinance"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "tags": {
+          "Dept": "ContosoFinance"
+        },
+        "name": "expansionjob1",
+        "location": "eastus",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.StorageCache/amlfilesystems/fs1/expansionJobs/expansionjob1",
+        "type": "Microsoft.StorageCache/amlFilesystem/expansionJob",
+        "properties": {
+          "name": "expansionjob1",
+          "provisioningState": "Succeeded",
+          "newStorageCapacityTiB": 16.0,
+          "percentComplete": 100,
+          "status": "Completed",
+          "statusMessage": "Expansion completed successfully",
+          "startTimeUTC": "2024-03-21T17:25:43.511Z",
+          "completionTimeUTC": "2024-03-21T19:15:43.511Z"
+        }
+      }
+    }
+  }
+}
