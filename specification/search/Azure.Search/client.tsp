@@ -1847,6 +1847,20 @@ namespace KnowledgeBaseRetrievalClient {
   "com.azure.search.documents.indexes",
   "java"
 );
+@@clientNamespace(Search.KnowledgeSourceStatus,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.KnowledgeSourceStatus,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(Search.KnowledgeSourceAzureOpenAIVectorizer,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.KnowledgeSourceAzureOpenAIVectorizer,
+  "com.azure.search.documents.indexes",
+  "java"
+);
 @@clientNamespace(Search.WebApiVectorizer, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.WebApiVectorizer,
   "com.azure.search.documents.indexes",
