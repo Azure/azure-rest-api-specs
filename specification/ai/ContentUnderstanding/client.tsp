@@ -69,7 +69,10 @@ interface ContentUnderstandingClient {
 );
 
 // .NET-specific naming: use GetAnalyzers instead of ListAnalyzers
-@@clientName(ContentAnalyzers.listAnalyzers, "getAnalyzers", "csharp");
+@@clientName(ContentUnderstandingClient.listAnalyzers,
+  "getAnalyzers",
+  "csharp"
+);
 
 // Client-only docs clarifying that these properties accept raw binary bytes (not base64 strings) in Python SDK.
 @@clientDoc(AnalyzeInput.data,
