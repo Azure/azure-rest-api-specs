@@ -3977,6 +3977,81 @@
       ],
       "x-ms-discriminator-value": "response.mcp_call_arguments.done"
     },
+    "ServerEventResponseMcpCallCompleted": {
+      "type": "object",
+      "description": "Indicates the MCP call has completed.",
+      "properties": {
+        "item_id": {
+          "type": "string",
+          "description": "The ID of the item associated with the event."
+        },
+        "output_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the output associated with the event."
+        }
+      },
+      "required": [
+        "item_id",
+        "output_index"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "response.mcp_call.completed"
+    },
+    "ServerEventResponseMcpCallFailed": {
+      "type": "object",
+      "description": "Indicates the MCP call has failed.",
+      "properties": {
+        "item_id": {
+          "type": "string",
+          "description": "The ID of the item associated with the event."
+        },
+        "output_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the output associated with the event."
+        }
+      },
+      "required": [
+        "item_id",
+        "output_index"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "response.mcp_call.failed"
+    },
+    "ServerEventResponseMcpCallInProgress": {
+      "type": "object",
+      "description": "Indicates the MCP call running.",
+      "properties": {
+        "item_id": {
+          "type": "string",
+          "description": "The ID of the item associated with the event."
+        },
+        "output_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the output associated with the event."
+        }
+      },
+      "required": [
+        "item_id",
+        "output_index"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "response.mcp_call.in_progress"
+    },
     "ServerEventResponseOutputItemAdded": {
       "type": "object",
       "description": "Returned when a new Item is created during Response generation.",

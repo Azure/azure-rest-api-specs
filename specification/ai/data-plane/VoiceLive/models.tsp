@@ -1319,3 +1319,45 @@ model ServerEventResponseMcpCallArgumentsDone extends ServerEvent {
   /** The full arguments for the tool call. */
   arguments?: string;
 }
+
+/** Indicates the MCP call running. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@usage(ResponseUsage)
+model ServerEventResponseMcpCallInProgress extends ServerEvent {
+  /** @inheritdoc */
+  type: ServerEventType.response_mcp_call_in_progress;
+
+  /** The ID of the item associated with the event. */
+  item_id: string;
+
+  /** The index of the output associated with the event. */
+  output_index: int32;
+}
+
+/** Indicates the MCP call has completed. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@usage(ResponseUsage)
+model ServerEventResponseMcpCallCompleted extends ServerEvent {
+  /** @inheritdoc */
+  type: ServerEventType.response_mcp_call_completed;
+
+  /** The ID of the item associated with the event. */
+  item_id: string;
+
+  /** The index of the output associated with the event. */
+  output_index: int32;
+}
+
+/** Indicates the MCP call has failed. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@usage(ResponseUsage)
+model ServerEventResponseMcpCallFailed extends ServerEvent {
+  /** @inheritdoc */
+  type: ServerEventType.response_mcp_call_failed;
+
+  /** The ID of the item associated with the event. */
+  item_id: string;
+
+  /** The index of the output associated with the event. */
+  output_index: int32;
+}
