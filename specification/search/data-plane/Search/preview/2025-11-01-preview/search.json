@@ -1457,6 +1457,12 @@
               "$ref": "#/definitions/SearchDocumentsResult"
             }
           },
+          "206": {
+            "description": "Successful",
+            "schema": {
+              "$ref": "#/definitions/SearchDocumentsResult"
+            }
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -1836,6 +1842,12 @@
         "responses": {
           "200": {
             "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SearchDocumentsResult"
+            }
+          },
+          "206": {
+            "description": "Successful",
             "schema": {
               "$ref": "#/definitions/SearchDocumentsResult"
             }
@@ -4411,9 +4423,10 @@
       "type": "object",
       "description": "Common language model parameters for Chat Completions. If omitted, default values are used.",
       "properties": {
-        "modelName": {
+        "model": {
           "type": "string",
-          "description": "The name of the model to use (e.g., 'gpt-4o', etc.). Default is null if not specified."
+          "description": "The name of the model to use (e.g., 'gpt-4o', etc.). Default is null if not specified.",
+          "x-ms-client-name": "modelName"
         },
         "frequencyPenalty": {
           "type": "number",
@@ -8021,9 +8034,10 @@
           "$ref": "#/definitions/KnowledgeRetrievalOutputMode",
           "description": "The output mode for the knowledge base."
         },
-        "eTag": {
+        "@odata.etag": {
           "type": "string",
-          "description": "The ETag of the knowledge base."
+          "description": "The ETag of the knowledge base.",
+          "x-ms-client-name": "eTag"
         },
         "encryptionKey": {
           "$ref": "#/definitions/SearchResourceEncryptionKey",
@@ -8998,9 +9012,10 @@
           "$ref": "#/definitions/KnowledgeSourceKind",
           "description": "The type of the knowledge source."
         },
-        "eTag": {
+        "@odata.etag": {
           "type": "string",
-          "description": "The ETag of the agent."
+          "description": "The ETag of the agent.",
+          "x-ms-client-name": "eTag"
         },
         "encryptionKey": {
           "$ref": "#/definitions/SearchResourceEncryptionKey",
@@ -13989,6 +14004,10 @@
           "$ref": "#/definitions/PermissionFilter",
           "description": "A value indicating whether the field should be used as a permission filter."
         },
+        "sensitivityLabel": {
+          "type": "boolean",
+          "description": "A value indicating whether the field contains sensitivity label information."
+        },
         "analyzer": {
           "$ref": "#/definitions/LexicalAnalyzerName",
           "description": "The name of the analyzer to use for the field. This option can be used only with searchable fields and it can't be set together with either searchAnalyzer or indexAnalyzer. Once the analyzer is chosen, it cannot be changed for the field. Must be null for complex fields."
@@ -14225,6 +14244,10 @@
         "permissionFilterOption": {
           "$ref": "#/definitions/SearchIndexPermissionFilterOption",
           "description": "A value indicating whether permission filtering is enabled for the index."
+        },
+        "purviewEnabled": {
+          "type": "boolean",
+          "description": "A value indicating whether Purview is enabled for the index."
         },
         "@odata.etag": {
           "type": "string",
@@ -14978,6 +15001,10 @@
           "$ref": "#/definitions/IndexerStatus",
           "description": "Overall indexer status."
         },
+        "runtime": {
+          "$ref": "#/definitions/IndexerRuntime",
+          "description": "The indexer's cumulative runtime consumption in the service."
+        },
         "lastResult": {
           "$ref": "#/definitions/IndexerExecutionResult",
           "description": "The result of the most recent or an in-progress indexer execution."
@@ -14992,6 +15019,10 @@
         "limits": {
           "$ref": "#/definitions/SearchIndexerLimits",
           "description": "The execution limits for the indexer."
+        },
+        "currentState": {
+          "$ref": "#/definitions/IndexerCurrentState",
+          "description": "All of the state that defines and dictates the indexer's current execution."
         }
       },
       "required": [
@@ -15394,6 +15425,11 @@
           "type": "integer",
           "format": "int64",
           "description": "The maximum amount of storage in bytes allowed per index."
+        },
+        "maxCumulativeIndexerRuntimeSeconds": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The maximum cumulative indexer runtime in seconds allowed for the service."
         }
       }
     },
@@ -15408,6 +15444,10 @@
         "limits": {
           "$ref": "#/definitions/SearchServiceLimits",
           "description": "Service level general limits."
+        },
+        "indexersRuntime": {
+          "$ref": "#/definitions/ServiceIndexersRuntime",
+          "description": "Service level indexer runtime consumption."
         }
       },
       "required": [
