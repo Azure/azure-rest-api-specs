@@ -1,32 +1,67 @@
 import "@azure-tools/typespec-client-generator-core";
+import "@typespec/rest";
+import "@typespec/http";
+import "@typespec/versioning";
 import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
 using ContentUnderstanding;
 
-// Rename type as field_type to avoid conflict with Python built-in class 'type'.
-@@clientName(ArrayField.type, "field_type", "python");
-@@clientName(BooleanField.type, "field_type", "python");
-@@clientName(DateField.type, "field_type", "python");
-@@clientName(IntegerField.type, "field_type", "python");
-@@clientName(NumberField.type, "field_type", "python");
-@@clientName(ObjectField.type, "field_type", "python");
-@@clientName(StringField.type, "field_type", "python");
-@@clientName(TimeField.type, "field_type", "python");
+namespace ClientCustomizations;
 
-// Rename 'items' to avoid conflict with Python built-in function 'items' for dictionaries.
-@@clientName(ContentFieldDefinition.items, "item_definition", "python");
+@client({
+  name: "ContentUnderstandingClient",
+  service: ContentUnderstanding,
+})
+interface ContentUnderstandingClient {
+  // Flatten all ContentAnalyzers operations to client level
+  // LRO operations will automatically get "begin_" prefix in Python
+  analyze is ContentAnalyzers.analyze;
+  analyzeBinary is ContentAnalyzers.analyzeBinary;
+  copy is ContentAnalyzers.copy;
+  createOrReplace is ContentAnalyzers.createOrReplace;
+  delete is ContentAnalyzers.delete;
+  deleteResult is ContentAnalyzers.deleteResult;
+  get is ContentAnalyzers.get;
+  getDefaults is ContentAnalyzers.getDefaults;
+  getOperationStatus is ContentAnalyzers.getOperationStatus;
+  getResult is ContentAnalyzers.getResult;
+  getResultFile is ContentAnalyzers.getResultFile;
+  grantCopyAuthorization is ContentAnalyzers.grantCopyAuthorization;
+  list is ContentAnalyzers.list;
+  update is ContentAnalyzers.update;
+  updateDefaults is ContentAnalyzers.updateDefaults;
+}
 
-@@clientName(AnalyzeBinaryRequest.input, "binary_input", "python");
+// Rename type as fieldType to avoid conflict with built-in 'type' keyword.
+@@clientName(ArrayField.type, "fieldType");
+@@clientName(BooleanField.type, "fieldType");
+@@clientName(DateField.type, "fieldType");
+@@clientName(IntegerField.type, "fieldType");
+@@clientName(NumberField.type, "fieldType");
+@@clientName(ObjectField.type, "fieldType");
+@@clientName(StringField.type, "fieldType");
+@@clientName(TimeField.type, "fieldType");
+
+// Rename 'items' to avoid conflict with built-in 'items' method.
+@@clientName(ContentFieldDefinition.items, "itemDefinition");
+
+@@clientName(AnalyzeBinaryRequest.input, "binaryInput");
 
 //@@clientName(ContentFieldDefinition.$ref, "reference", "javascript");
 
+// Rename generic operations to be more specific for clarity across all languages.
+@@clientName(ContentAnalyzers.get, "getAnalyzer");
+@@clientName(ContentAnalyzers.delete, "deleteAnalyzer");
+@@clientName(ContentAnalyzers.update, "updateAnalyzer");
+@@clientName(ContentAnalyzers.copy, "copyAnalyzer");
+@@clientName(ContentAnalyzers.list, "listAnalyzers");
+
+// .NET-specific naming: use GetAnalyzers instead of ListAnalyzers
+@@clientName(ContentAnalyzers.list, "getAnalyzers", "csharp");
+
 // Client-only docs clarifying that these properties accept raw binary bytes (not base64 strings) in Python SDK.
 @@clientDoc(AnalyzeInput.data,
-  "Raw image bytes. Provide bytes-like object; do not base64-encode. Only one of url or data should be specified.",
-  DocumentationMode.replace
-);
-@@clientDoc(FaceSource.data,
   "Raw image bytes. Provide bytes-like object; do not base64-encode. Only one of url or data should be specified.",
   DocumentationMode.replace
 );
