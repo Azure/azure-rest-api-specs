@@ -825,33 +825,3 @@ model CompletedSynchronizationState {
   @doc("The number of items skipped in the last synchronization.")
   itemsSkipped: int32;
 }
-
-@doc("Knowledge Source targeting web results.")
-model WebKnowledgeSource {
-  @doc("The parameters for the web knowledge source.")
-  webParameters?: WebKnowledgeSourceParameters;
-}
-
-@doc("Parameters for web knowledge source.")
-model WebKnowledgeSourceParameters {
-  @doc("Domain allow/block configuration for web results.")
-  domains?: WebKnowledgeSourceDomains;
-}
-
-@doc("Domain allow/block configuration for web knowledge source.")
-model WebKnowledgeSourceDomains {
-  @doc("Domains that are allowed for web results.")
-  allowedDomains?: WebKnowledgeSourceDomain[];
-
-  @doc("Domains that are blocked from web results.")
-  blockedDomains?: WebKnowledgeSourceDomain[];
-}
-
-@doc("Configuration for web knowledge source domain.")
-model WebKnowledgeSourceDomain {
-  @doc("The address of the domain.")
-  address: string;
-
-  @doc("Whether or not to include subpages from this domain.")
-  includeSubpages?: boolean;
-}

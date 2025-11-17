@@ -4460,6 +4460,87 @@ model AzureBlobKnowledgeSourceParameters {
   disableImageVerbalization?: boolean;
 }
 
+@doc("Configuration for SharePoint knowledge source.")
+model IndexedSharePointKnowledgeSource extends KnowledgeSource {
+  kind: KnowledgeSourceKind.IndexedSharePoint;
+
+  @doc("The parameters for the knowledge source.")
+  indexedSharePointParameters: IndexedSharePointKnowledgeSourceParameters;
+}
+
+@doc("Parameters for SharePoint knowledge source.")
+model IndexedSharePointKnowledgeSourceParameters {
+  @doc("An explicit identity to use for this knowledge source.")
+  identity?: SearchIndexerDataIdentity;
+
+  @doc("Key-based connection string or the ResourceId format if using a managed identity.")
+  connectionString: string;
+
+  @doc("The name of the SharePoint container.")
+  containerName: string;
+
+  @doc("Optional query to filter SharePoint content.")
+  query?: string;
+
+  @doc("Optional ingestion parameters.")
+  ingestionParameters?: KnowledgeSourceIngestionParameters;
+}
+
+@doc("Configuration for OneLake knowledge source.")
+model IndexedOneLakeKnowledgeSource extends KnowledgeSource {
+  kind: KnowledgeSourceKind.IndexedOneLake;
+
+  @doc("The parameters for the knowledge source.")
+  indexedOneLakeParameters: IndexedOneLakeKnowledgeSourceParameters;
+}
+
+@doc("Parameters for OneLake knowledge source.")
+model IndexedOneLakeKnowledgeSourceParameters {
+  @doc("The Fabric workspace ID.")
+  fabricWorkspaceId: string;
+
+  @doc("The lakehouse ID.")
+  lakehouseId: string;
+
+  @doc("Optional target path within the lakehouse.")
+  targetPath?: string;
+
+  @doc("Optional ingestion parameters.")
+  ingestionParameters?: KnowledgeSourceIngestionParameters;
+}
+
+@doc("Knowledge Source targeting web results.")
+model WebKnowledgeSource extends KnowledgeSource {
+  kind: KnowledgeSourceKind.Web;
+
+  @doc("The parameters for the web knowledge source.")
+  webParameters?: WebKnowledgeSourceParameters;
+}
+
+@doc("Parameters for web knowledge source.")
+model WebKnowledgeSourceParameters {
+  @doc("Domain allow/block configuration for web results.")
+  domains?: WebKnowledgeSourceDomains;
+}
+
+@doc("Domain allow/block configuration for web knowledge source.")
+model WebKnowledgeSourceDomains {
+  @doc("Domains that are allowed for web results.")
+  allowedDomains?: WebKnowledgeSourceDomain[];
+
+  @doc("Domains that are blocked from web results.")
+  blockedDomains?: WebKnowledgeSourceDomain[];
+}
+
+@doc("Configuration for web knowledge source domain.")
+model WebKnowledgeSourceDomain {
+  @doc("The address of the domain.")
+  address: string;
+
+  @doc("Whether or not to include subpages from this domain.")
+  includeSubpages?: boolean;
+}
+
 @doc("Configuration for remote SharePoint knowledge source.")
 model RemoteSharePointKnowledgeSource extends KnowledgeSource {
   kind: KnowledgeSourceKind.RemoteSharePoint;

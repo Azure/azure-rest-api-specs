@@ -6984,6 +6984,51 @@
         "storageSize"
       ]
     },
+    "IndexedOneLakeKnowledgeSource": {
+      "type": "object",
+      "description": "Configuration for OneLake knowledge source.",
+      "properties": {
+        "indexedOneLakeParameters": {
+          "$ref": "#/definitions/IndexedOneLakeKnowledgeSourceParameters",
+          "description": "The parameters for the knowledge source."
+        }
+      },
+      "required": [
+        "indexedOneLakeParameters"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeSource"
+        }
+      ],
+      "x-ms-discriminator-value": "indexedOneLake"
+    },
+    "IndexedOneLakeKnowledgeSourceParameters": {
+      "type": "object",
+      "description": "Parameters for OneLake knowledge source.",
+      "properties": {
+        "fabricWorkspaceId": {
+          "type": "string",
+          "description": "The Fabric workspace ID."
+        },
+        "lakehouseId": {
+          "type": "string",
+          "description": "The lakehouse ID."
+        },
+        "targetPath": {
+          "type": "string",
+          "description": "Optional target path within the lakehouse."
+        },
+        "ingestionParameters": {
+          "$ref": "#/definitions/KnowledgeSourceIngestionParameters",
+          "description": "Optional ingestion parameters."
+        }
+      },
+      "required": [
+        "fabricWorkspaceId",
+        "lakehouseId"
+      ]
+    },
     "IndexedOneLakeKnowledgeSourceParams": {
       "type": "object",
       "description": "Specifies runtime parameters for a indexed OneLake knowledge source",
@@ -7023,6 +7068,55 @@
           }
         ]
       }
+    },
+    "IndexedSharePointKnowledgeSource": {
+      "type": "object",
+      "description": "Configuration for SharePoint knowledge source.",
+      "properties": {
+        "indexedSharePointParameters": {
+          "$ref": "#/definitions/IndexedSharePointKnowledgeSourceParameters",
+          "description": "The parameters for the knowledge source."
+        }
+      },
+      "required": [
+        "indexedSharePointParameters"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeSource"
+        }
+      ],
+      "x-ms-discriminator-value": "indexedSharePoint"
+    },
+    "IndexedSharePointKnowledgeSourceParameters": {
+      "type": "object",
+      "description": "Parameters for SharePoint knowledge source.",
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/SearchIndexerDataIdentity",
+          "description": "An explicit identity to use for this knowledge source."
+        },
+        "connectionString": {
+          "type": "string",
+          "description": "Key-based connection string or the ResourceId format if using a managed identity."
+        },
+        "containerName": {
+          "type": "string",
+          "description": "The name of the SharePoint container."
+        },
+        "query": {
+          "type": "string",
+          "description": "Optional query to filter SharePoint content."
+        },
+        "ingestionParameters": {
+          "$ref": "#/definitions/KnowledgeSourceIngestionParameters",
+          "description": "Optional ingestion parameters."
+        }
+      },
+      "required": [
+        "connectionString",
+        "containerName"
+      ]
     },
     "IndexedSharePointKnowledgeSourceParams": {
       "type": "object",
@@ -19053,7 +19147,13 @@
           "$ref": "#/definitions/WebKnowledgeSourceParameters",
           "description": "The parameters for the web knowledge source."
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeSource"
+        }
+      ],
+      "x-ms-discriminator-value": "web"
     },
     "WebKnowledgeSourceDomain": {
       "type": "object",
