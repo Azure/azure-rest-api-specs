@@ -121,6 +121,135 @@
               "targetName": "markdown_document"
             }
           ]
+        },
+        {
+          "outputFormat": "text",
+          "outputMode": "oneToMany",
+          "extractionOptions": [
+            "images",
+            "locationMetadata"
+          ],
+          "chunkingProperties": {
+            "unit": "characters",
+            "maximumLength": 500,
+            "overlapLength": 50
+          },
+          "@odata.type": "#Microsoft.Skills.Util.DocumentIntelligenceLayoutSkill",
+          "name": "docIntelligenceLayoutSkill#2",
+          "context": "/document",
+          "inputs": [
+            {
+              "name": "file_data",
+              "source": "/document/content"
+            }
+          ],
+          "outputs": [
+            {
+              "name": "text_sections",
+              "targetName": "text_sections"
+            },
+            {
+              "name": "normalized_images",
+              "targetName": "normalized_images"
+            }
+          ]
+        },
+        {
+          "apiKey": "<api-key>",
+          "commonModelParameters": {
+            "model": "gpt-4o",
+            "frequencyPenalty": 0,
+            "presencePenalty": 0,
+            "maxTokens": 0,
+            "temperature": 0,
+            "seed": 0,
+            "stop": []
+          },
+          "extraParameters": {
+            "safe_mode": true
+          },
+          "extraParametersBehavior": "error",
+          "responseFormat": {
+            "type": "jsonSchema",
+            "jsonSchemaProperties": {
+              "name": "Some Name",
+              "description": "Some Description",
+              "strict": true,
+              "schema": {
+                "type": "object",
+                "properties": "{\"steps\": {\"type\": \"array\", \"description\": \"A list of reasoning steps.\", \"items\": {\"type\": \"string\"}}, \"answer\": {\"type\": \"string\", \"description\": \"The final answer.\"}}",
+                "required": [
+                  "steps",
+                  "answer"
+                ],
+                "additionalProperties": false
+              }
+            }
+          },
+          "uri": "https://azs-grok-aoai.openai.azure.com/openai/deployments/azs-grok-gpt-4o/chat/completions",
+          "timeout": "PT30S",
+          "degreeOfParallelism": 5,
+          "@odata.type": "#Microsoft.Skills.Custom.ChatCompletionSkill",
+          "name": "chatCompletionSkill",
+          "context": "/document/normalized_images/*",
+          "inputs": [
+            {
+              "name": "text",
+              "source": "/document/content"
+            },
+            {
+              "name": "systemMessage",
+              "source": "/document/system_message"
+            },
+            {
+              "name": "userMessage",
+              "source": "/document/user_message"
+            },
+            {
+              "name": "image",
+              "source": "/document/normalized_images/*"
+            },
+            {
+              "name": "imageDetail",
+              "source": "/document/detail"
+            }
+          ],
+          "outputs": [
+            {
+              "name": "response",
+              "targetName": "response"
+            }
+          ]
+        },
+        {
+          "extractionOptions": [
+            "images",
+            "locationMetadata"
+          ],
+          "chunkingProperties": {
+            "unit": "characters",
+            "maximumLength": 500,
+            "overlapLength": 50
+          },
+          "@odata.type": "#Microsoft.Skills.Util.ContentUnderstandingSkill",
+          "name": "contentUnderstandingSKill",
+          "context": "/document",
+          "inputs": [
+            {
+              "name": "file_data",
+              "source": "/document/content"
+            }
+          ],
+          "outputs": [
+            {
+              "name": "text_sections",
+              "targetName": "text_sections2"
+            },
+            {
+              "name": "normalized_images",
+              "targetName": "normalized_images2"
+            }
+          ]
         }
       ],
       "cognitiveServices": {
@@ -129,21 +258,13 @@
         "@odata.type": "#Microsoft.Azure.Search.AIServicesByKey",
         "description": "Description of the Azure AI service resource attached to a skillset"
       },
-      "@odata.etag": "0x1234568AE7E58A1",
-      "encryptionKey": {
-        "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
-        "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
-        "keyVaultUri": "https://myKeyVault.vault.azure.net",
-        "accessCredentials": {
-          "applicationId": "00000000-0000-0000-0000-000000000000",
-          "applicationSecret": "<applicationSecret>"
-        }
-      }
+      "@odata.etag": "0x1234568AE7E58A1"
     }
   },
   "responses": {
     "201": {
       "body": {
+        "@odata.etag": "0x1234568AE7E58A1",
         "name": "tempskillset",
         "description": "Skillset for extracting entities and more",
         "skills": [
@@ -255,6 +376,7 @@
             "context": "/document",
             "outputMode": "oneToMany",
             "markdownHeaderDepth": "h3",
+            "extractionOptions": [],
             "inputs": [
               {
                 "name": "file_data",
@@ -268,6 +390,142 @@
                 "targetName": "markdown_document"
               }
             ]
+          },
+          {
+            "@odata.type": "#Microsoft.Skills.Util.DocumentIntelligenceLayoutSkill",
+            "name": "docIntelligenceLayoutSkill#2",
+            "context": "/document",
+            "outputMode": "oneToMany",
+            "outputFormat": "text",
+            "extractionOptions": [
+              "images",
+              "locationMetadata"
+            ],
+            "inputs": [
+              {
+                "name": "file_data",
+                "source": "/document/content",
+                "inputs": []
+              }
+            ],
+            "outputs": [
+              {
+                "name": "text_sections",
+                "targetName": "text_sections"
+              },
+              {
+                "name": "normalized_images",
+                "targetName": "normalized_images"
+              }
+            ],
+            "chunkingProperties": {
+              "unit": "characters",
+              "maximumLength": 500,
+              "overlapLength": 50
+            }
+          },
+          {
+            "@odata.type": "#Microsoft.Skills.Custom.ChatCompletionSkill",
+            "name": "chatCompletionSkill",
+            "context": "/document/normalized_images/*",
+            "uri": "https://azs-grok-aoai.openai.azure.com/openai/deployments/azs-grok-gpt-4o/chat/completions",
+            "timeout": "PT30S",
+            "degreeOfParallelism": 5,
+            "apiKey": "<api-key>",
+            "extraParametersBehavior": "error",
+            "inputs": [
+              {
+                "name": "text",
+                "source": "/document/content",
+                "inputs": []
+              },
+              {
+                "name": "systemMessage",
+                "source": "/document/system_message",
+                "inputs": []
+              },
+              {
+                "name": "userMessage",
+                "source": "/document/user_message",
+                "inputs": []
+              },
+              {
+                "name": "image",
+                "source": "/document/normalized_images/*",
+                "inputs": []
+              },
+              {
+                "name": "imageDetail",
+                "source": "/document/detail",
+                "inputs": []
+              }
+            ],
+            "outputs": [
+              {
+                "name": "response",
+                "targetName": "response"
+              }
+            ],
+            "commonModelParameters": {
+              "model": "gpt-4o",
+              "frequencyPenalty": 0,
+              "presencePenalty": 0,
+              "maxTokens": 0,
+              "temperature": 0,
+              "seed": 0,
+              "stop": []
+            },
+            "extraParameters": {
+              "safe_mode": true
+            },
+            "responseFormat": {
+              "type": "jsonSchema",
+              "jsonSchemaProperties": {
+                "name": "Some Name",
+                "description": "Some Description",
+                "strict": true,
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "steps",
+                    "answer"
+                  ],
+                  "properties": "{\"steps\": {\"type\": \"array\", \"description\": \"A list of reasoning steps.\", \"items\": {\"type\": \"string\"}}, \"answer\": {\"type\": \"string\", \"description\": \"The final answer.\"}}"
+                }
+              }
+            }
+          },
+          {
+            "@odata.type": "#Microsoft.Skills.Util.ContentUnderstandingSkill",
+            "name": "contentUnderstandingSKill",
+            "context": "/document",
+            "extractionOptions": [
+              "images",
+              "locationMetadata"
+            ],
+            "inputs": [
+              {
+                "name": "file_data",
+                "source": "/document/content",
+                "inputs": []
+              }
+            ],
+            "outputs": [
+              {
+                "name": "text_sections",
+                "targetName": "text_sections2"
+              },
+              {
+                "name": "normalized_images",
+                "targetName": "normalized_images2"
+              }
+            ],
+            "chunkingProperties": {
+              "unit": "characters",
+              "maximumLength": 500,
+              "overlapLength": 50
+            }
           }
         ],
         "cognitiveServices": {
@@ -275,15 +533,6 @@
           "description": "Description of the Azure AI service resource attached to a skillset",
           "key": "myKey",
           "subdomainUrl": "https://mySubdomainName.cognitiveservices.azure.com"
-        },
-        "encryptionKey": {
-          "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
-          "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
-          "keyVaultUri": "https://myKeyVault.vault.azure.net",
-          "accessCredentials": {
-            "applicationId": "00000000-0000-0000-0000-000000000000",
-            "applicationSecret": "<applicationSecret>"
-          }
         }
       }
     }

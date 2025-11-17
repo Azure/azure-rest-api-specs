@@ -14,14 +14,19 @@
           {
             "@odata.etag": "0x1234568AE7E58A1",
             "name": "mydocdbdatasource",
-            "description": "My Azure Blob data source.",
-            "type": "azureblob",
+            "description": "My Azure Adls Gen2 data source with ACLs.",
+            "type": "adlsgen2",
+            "indexerPermissionOptions": [
+              "userIds",
+              "groupIds",
+              "rbacScope"
+            ],
             "credentials": {
               "connectionString": "DefaultEndpointsProtocol=https;AccountName=myAccountName;AccountKey=myAccountKey;EndpointSuffix=core.windows.net "
             },
             "container": {
-              "name": "doc-extraction-skillset",
-              "query": "E2E_Dsat"
+              "name": "adls-gen2-doc-extraction-acl",
+              "query": "folder_has_final_acl"
             },
             "dataChangeDetectionPolicy": {
               "@odata.type": "#Microsoft.Azure.Search.HighWaterMarkChangeDetectionPolicy",
@@ -31,15 +36,6 @@
               "@odata.type": "#Microsoft.Azure.Search.SoftDeleteColumnDeletionDetectionPolicy",
               "softDeleteColumnName": "isDeleted",
               "softDeleteMarkerValue": "true"
-            },
-            "encryptionKey": {
-              "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
-              "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
-              "keyVaultUri": "https://myKeyVault.vault.azure.net",
-              "accessCredentials": {
-                "applicationId": "00000000-0000-0000-0000-000000000000",
-                "applicationSecret": "<applicationSecret>"
-              }
             }
           }
         ]

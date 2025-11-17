@@ -28,24 +28,17 @@
         "softDeleteMarkerValue": "true",
         "@odata.type": "#Microsoft.Azure.Search.SoftDeleteColumnDeletionDetectionPolicy"
       },
-      "@odata.etag": "0x1234568AE7E58A1",
-      "encryptionKey": {
-        "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
-        "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
-        "keyVaultUri": "https://myKeyVault.vault.azure.net",
-        "accessCredentials": {
-          "applicationId": "00000000-0000-0000-0000-000000000000",
-          "applicationSecret": "<applicationSecret>"
-        }
-      }
+      "@odata.etag": "0x1234568AE7E58A1"
     }
   },
   "responses": {
     "201": {
       "body": {
+        "@odata.etag": "0x1234568AE7E58A1",
         "name": "tempdatasource",
         "description": "My Azure Blob data source.",
         "type": "azureblob",
+        "indexerPermissionOptions": [],
         "credentials": {
           "connectionString": "DefaultEndpointsProtocol=https;AccountName=myAccountName;AccountKey=myAccountKey;EndpointSuffix=core.windows.net "
         },
@@ -61,15 +54,6 @@
           "@odata.type": "#Microsoft.Azure.Search.SoftDeleteColumnDeletionDetectionPolicy",
           "softDeleteColumnName": "isDeleted",
           "softDeleteMarkerValue": "true"
-        },
-        "encryptionKey": {
-          "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
-          "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
-          "keyVaultUri": "https://myKeyVault.vault.azure.net",
-          "accessCredentials": {
-            "applicationId": "00000000-0000-0000-0000-000000000000",
-            "applicationSecret": "<applicationSecret>"
-          }
         },
         "identity": {
           "@odata.type": "#Microsoft.Azure.Search.DataNoneIdentity"

@@ -11,30 +11,36 @@
       "body": {
         "value": [
           {
-            "name": "myknowledgesource",
-            "description": "Search index knowledge source for customer data",
+            "@odata.etag": "0x1234568AE7E58A1",
+            "name": "ks-preview-test",
             "kind": "searchIndex",
-            "searchIndexParameters": {
-              "searchIndexName": "customer-index"
-            },
-            "@odata.etag": "0x8D9A1234567890C"
-          },
-          {
-            "name": "myblobknowledgesource",
-            "description": "Azure Blob knowledge source for documents",
-            "kind": "azureBlob",
-            "azureBlobParameters": {
-              "containerName": "documents",
-              "identity": {
-                "@odata.type": "#Microsoft.Azure.Search.DataNoneIdentity"
-              },
-              "createdResources": {
-                "datasource": "myblobknowledgesource-datasource",
-                "index": "myblobknowledgesource-index",
-                "indexer": "myblobknowledgesource-indexer"
+            "description": "Description of the knowledge source.",
+            "encryptionKey": {
+              "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
+              "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
+              "keyVaultUri": "https://myKeyVault.vault.azure.net",
+              "accessCredentials": {
+                "applicationId": "00000000-0000-0000-0000-000000000000",
+                "applicationSecret": "<applicationSecret>"
               }
             },
-            "@odata.etag": "0x8D9A1234567890D"
+            "searchIndexParameters": {
+              "searchIndexName": "preview-test",
+              "semanticConfigurationName": "testconfig",
+              "sourceDataFields": [
+                {
+                  "name": "description"
+                },
+                {
+                  "name": "category"
+                }
+              ],
+              "searchFields": [
+                {
+                  "name": "*"
+                }
+              ]
+            }
           }
         ]
       }

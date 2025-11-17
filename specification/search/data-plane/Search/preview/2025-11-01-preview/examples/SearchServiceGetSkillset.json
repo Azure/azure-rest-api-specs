@@ -131,6 +131,8 @@
             "context": "/document",
             "outputMode": "oneToMany",
             "markdownHeaderDepth": "h3",
+            "outputFormat": "markdown",
+            "extractionOptions": [],
             "inputs": [
               {
                 "name": "file_data",
@@ -144,17 +146,139 @@
                 "targetName": "markdown_document"
               }
             ]
+          },
+          {
+            "@odata.type": "#Microsoft.Skills.Util.DocumentIntelligenceLayoutSkill",
+            "name": "docIntelligenceLayoutSkill#2",
+            "context": "/document",
+            "outputMode": "oneToMany",
+            "outputFormat": "text",
+            "extractionOptions": [
+              "images",
+              "locationMetadata"
+            ],
+            "inputs": [
+              {
+                "name": "file_data",
+                "source": "/document/content",
+                "inputs": []
+              }
+            ],
+            "outputs": [
+              {
+                "name": "text_sections",
+                "targetName": "text_sections"
+              },
+              {
+                "name": "normalized_images",
+                "targetName": "normalized_images"
+              }
+            ],
+            "chunkingProperties": {
+              "unit": "characters",
+              "maximumLength": 500,
+              "overlapLength": 50
+            }
+          },
+          {
+            "@odata.type": "#Microsoft.Skills.Custom.ChatCompletionSkill",
+            "name": "chatCompletionSkill",
+            "context": "/document/normalized_images/*",
+            "uri": "https://azs-grok-aoai.openai.azure.com/openai/deployments/azs-grok-gpt-4o/chat/completions",
+            "httpMethod": "POST",
+            "timeout": "PT30S",
+            "batchSize": 1,
+            "degreeOfParallelism": 5,
+            "apiKey": "<redacted>",
+            "extraParametersBehavior": "error",
+            "inputs": [
+              {
+                "name": "text",
+                "source": "/document/content",
+                "inputs": []
+              },
+              {
+                "name": "systemMessage",
+                "source": "/document/system_message",
+                "inputs": []
+              },
+              {
+                "name": "userMessage",
+                "source": "/document/user_message",
+                "inputs": []
+              },
+              {
+                "name": "image",
+                "source": "/document/normalized_images/*",
+                "inputs": []
+              },
+              {
+                "name": "imageDetail",
+                "source": "/document/detail",
+                "inputs": []
+              }
+            ],
+            "outputs": [
+              {
+                "name": "response",
+                "targetName": "response"
+              }
+            ],
+            "httpHeaders": {},
+            "commonModelParameters": {
+              "model": "gpt-4o",
+              "frequencyPenalty": 0,
+              "presencePenalty": 0,
+              "maxTokens": 0,
+              "temperature": 0,
+              "seed": 0,
+              "stop": []
+            },
+            "extraParameters": {
+              "safe_mode": true
+            },
+            "responseFormat": {
+              "type": "jsonSchema",
+              "jsonSchemaProperties": {
+                "name": "Some Name",
+                "description": "Some Description",
+                "strict": true,
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "steps",
+                    "answer"
+                  ],
+                  "properties": "{\"steps\": {\"type\": \"array\", \"description\": \"A list of reasoning steps.\", \"items\": {\"type\": \"string\"}}, \"answer\": {\"type\": \"string\", \"description\": \"The final answer.\"}}"
+                }
+              }
+            }
+          },
+          {
+            "@odata.type": "#Microsoft.Skills.Util.ContentUnderstandingSkill",
+            "name": "contentUnderstandingSKill",
+            "context": "/document",
+            "extractionOptions": [],
+            "inputs": [
+              {
+                "name": "file_data",
+                "source": "/document/content",
+                "inputs": []
+              }
+            ],
+            "outputs": [
+              {
+                "name": "text_sections",
+                "targetName": "text_sections2"
+              },
+              {
+                "name": "normalized_images",
+                "targetName": "normalized_images2"
+              }
+            ]
           }
-        ],
-        "encryptionKey": {
-          "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
-          "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
-          "keyVaultUri": "https://myKeyVault.vault.azure.net",
-          "accessCredentials": {
-            "applicationId": "00000000-0000-0000-0000-000000000000",
-            "applicationSecret": "<applicationSecret>"
-          }
-        }
+        ]
       }
     }
   }
