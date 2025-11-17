@@ -1,15 +1,15 @@
 {
-  "operationId": "observations",
+  "operationId": "Observations",
   "parameters": {
     "api-version": "2025-09-01-preview",
-    "body": {
-  "datasetToDatasourceMappings": [
-    {
-      "datasetAliasName": "EmployeeView",
-      "datasourceId": "sai"
-    }
-  ]
-},
+    "request": {
+      "datasetToDatasourceMappings": [
+        {
+          "datasetAliasName": "EmployeeView",
+          "datasourceId": "sai"
+        }
+      ]
+    },
     "businessDomainId": "abcdef12-3456-7890-abcd-ef1234567890",
     "dataAssetId": "123e4567-e89b-12d3-a456-426614174000",
     "dataProductId": "223e4567-e89b-12d3-a456-426614174111"
@@ -17,6 +17,9 @@
   "title": "Observation_Create",
   "responses": {
     "202": {
+      "headers": {
+        "Operation-Id": "12345678-abcd-1234-ef00-123456abcdeg"
+      },
       "body": {
         "id": "123e4567-e89b-12d3-a456-426614174000",
         "status": "InProgress",

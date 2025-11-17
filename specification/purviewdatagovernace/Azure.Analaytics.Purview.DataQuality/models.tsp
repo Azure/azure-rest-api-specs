@@ -196,9 +196,9 @@ model ProfileRun {
    * Unique identifier for the profile run execution within the data asset context
    */
   @doc("Unique identifier for the profile run execution")
-  @key("profileId")
+  @key("profileRunId")
   @visibility(Lifecycle.Create)
-  profileId: string;
+  profileRunId: string;
 }
 
 /**
@@ -356,10 +356,11 @@ model ErrorDetails {
 @doc("Status monitoring with execution state, progress tracking, and error reporting")
 model StatusMonitor {
   @key
-  @visibility(Lifecycle.Create)
+  @visibility(Lifecycle.Read)
   @doc("Unique identifier of the monitored operation")
   id: string;
 
+  @lroStatus
   @doc("Current status of the operation")
   status: LroStatus;
 
@@ -383,6 +384,20 @@ model StatusMonitor {
   result?: unknown;
 }
 
+/**
+ * HTTP response wrapper for operations that return a StatusMonitor.
+ * This ensures operations returning a StatusMonitor produce a 202 Accepted response.
+ */
+// @doc("HTTP 202 response containing a StatusMonitor body")
+// model StatusMonitorResponse {
+//   @doc("HTTP status code indicating the request has been accepted for processing")
+//   @statusCode
+//   statusCode: 202;
+
+//   @body
+//   @doc("Status monitor payload")
+//   value: StatusMonitor;
+// }
 /**
  * Contains the hierarchical resource identifiers for data asset rule operations.
  * Provides the complete path context from business domain down to the data asset level.
@@ -1026,7 +1041,7 @@ model ScheduleEntityResponse {
    */
   @doc("HTTP status code for successful operation")
   @statusCode
-  statusCode: 201;
+  statusCode: 200;
 
   /**
    * Human-readable name identifying the schedule
@@ -1131,7 +1146,7 @@ model ScheduleEntity {
    * Unique system identifier for the schedule entity
    */
   @key("scheduleId")
-  @visibility(Lifecycle.Create)
+  @visibility(Lifecycle.Read)
   @doc("Unique identifier of the schedule")
   id: string;
 
@@ -1276,8 +1291,160 @@ model ScheduleEntity {
   /**
    * Entity tag for optimistic concurrency control and change detection
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property name"
   @doc("Entity tag for concurrency control")
-  eTag?: string;
+  ETag?: string;
+}
+
+@doc("Request body model for creating or updating schedule entities")
+model ScheduleEntityRequestResponse {
+  @doc("Unique identifier of the schedule")
+  id?: string;
+
+  /**
+   * Human-readable display name for the schedule
+   */
+  @doc("Human-readable schedule display name")
+  name?: string;
+
+  /**
+   * Detailed description explaining the schedule's purpose and execution strategy
+   */
+  @doc("Detailed description of schedule purpose and strategy")
+  description?: string;
+
+  /**
+   * Trigger configuration defining execution timing and scheduling behavior
+   */
+  @doc("Trigger configuration for execution timing and scheduling")
+  trigger?: {
+    /**
+     * Trigger type classification (Manual, TimeBased, EventDriven)
+     */
+    @doc("Trigger type classification")
+    type: string;
+
+    /**
+     * Type-specific configuration properties for trigger behavior
+     */
+    @doc("Type-specific trigger configuration properties")
+    typeProperties: {
+      /**
+       * Time zone identifier for schedule evaluation (e.g., 'UTC', 'America/New_York')
+       */
+      @doc("Time zone identifier for schedule evaluation")
+      timezone?: string;
+
+      /**
+       * Flag indicating if the schedule is active for automatic execution
+       */
+      @doc("Flag for automatic execution activation")
+      isScheduled?: boolean;
+
+      /**
+       * Next scheduled execution time in UTC format
+       */
+      @doc("Next scheduled execution time (UTC)")
+      triggerTime?: utcDateTime;
+    };
+  };
+
+  /**
+   * Execution scope defining the data products and assets targeted for quality scanning
+   */
+  @doc("Execution scope for data quality scanning")
+  scope?: {
+    /**
+     * Collection of data product and asset pairs that define the scanning boundary
+     */
+    @doc("Collection of target data products and assets")
+    items: Array<{
+      /**
+       * Reference to the data product containing the target assets
+       */
+      @doc("Data product reference within scope")
+      dataProduct: {
+        /**
+         * Unique identifier of the referenced data product
+         */
+        @doc("Data product unique identifier")
+        referenceId: string;
+
+        /**
+         * Reference type classification for data product
+         */
+        @doc("Data product reference type")
+        type: string;
+      };
+
+      /**
+       * Reference to the specific data asset to be scanned
+       */
+      @doc("Data asset reference within scope")
+      dataAsset: {
+        /**
+         * Unique identifier of the referenced data asset
+         */
+        @doc("Data asset unique identifier")
+        referenceId: string;
+
+        /**
+         * Reference type classification for data asset
+         */
+        @doc("Data asset reference type")
+        type: string;
+      };
+    }>;
+  };
+
+  /**
+   * Reference to the parent business domain that governs this schedule
+   */
+  @doc("Reference to the governing business domain")
+  businessDomain?: {
+    /**
+     * Reference type classification for business domain
+     */
+    @doc("Business domain reference type")
+    type: string;
+
+    /**
+     * Unique identifier of the associated business domain
+     */
+    @doc("Business domain unique identifier")
+    referenceId: string;
+  };
+
+  /**
+   * UTC timestamp when the schedule was initially created
+   */
+  @doc("Creation timestamp (UTC)")
+  createdAt?: utcDateTime;
+
+  /**
+   * UTC timestamp when the schedule was last modified
+   */
+  @doc("Last modification timestamp (UTC)")
+  lastModifiedAt?: utcDateTime;
+
+  /**
+   * Identity of the user who created this schedule
+   */
+  @doc("Identity of the creating user")
+  createdBy?: string;
+
+  /**
+   * Identity of the user who last modified this schedule
+   */
+  @doc("Identity of the last modifying user")
+  lastModifiedBy?: string;
+
+  /**
+   * Entity tag for optimistic concurrency control and change detection
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property name"
+  @doc("Entity tag for concurrency control")
+  ETag?: string;
 }
 
 /**
@@ -1739,6 +1906,31 @@ model JobHistoryEntity {
    */
   @doc("Job execution account identifier")
   accountId?: string;
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property"
+  @doc("Flag indicating if the asset is a Data Quality asset")
+  isDQAsset?: boolean;
+
+  @doc("Fully qualified data resource path")
+  qualifiedPath?: string;
+
+  @doc("Associated scan operation identifier")
+  scanId?: string;
+
+  @doc("Which data product the scan belongs to")
+  dataProductName?: string;
+
+  @doc("Which dataasset the scan belongs to")
+  dataAssetName?: string;
+
+  @doc("Trigger type classification")
+  triggerType?: string;
+
+  @doc("Triggering schedule identifier")
+  scheduleId?: string;
+
+  @doc("Scheduled triggered name")
+  scheduleName?: string;
 }
 
 /**
@@ -1962,7 +2154,7 @@ model ScopedAssetMetadata {
    * Unique identifier for the scoped asset metadata entity.
    */
   @doc("Unique identifier for the scoped asset metadata entity.")
-  id: string;
+  id?: string;
 
   /**
    * Description of the scoped asset metadata.
@@ -1974,25 +2166,25 @@ model ScopedAssetMetadata {
    * Reference to the associated Business Domain.
    */
   @doc("Reference to the associated Business Domain.")
-  businessDomain: Reference;
+  businessDomain?: Reference;
 
   /**
    * Reference to the associated Data Product.
    */
   @doc("Reference to the associated Data Product.")
-  dataProduct: Reference;
+  dataProduct?: Reference;
 
   /**
    * Reference to the associated Data Asset.
    */
   @doc("Reference to the associated Data Asset.")
-  dataAsset: Reference;
+  dataAsset?: Reference;
 
   /**
    * Runtime configuration parameters defining error row behavior and output format.
    */
   @doc("Runtime configuration parameters defining error row behavior and output format.")
-  runtime: ScopedAssetMetadataRuntime;
+  runtime?: ScopedAssetMetadataRuntime;
 
   /**
    * List of favorite column paths selected for quick access or monitoring.
@@ -2057,13 +2249,13 @@ model DataSourceEntity {
    * Unique identifier for the data source entity.
    */
   @doc("Unique system identifier for the data source entity.")
-  id: string;
+  id?: string;
 
   /**
    * Display name of the data source connection.
    */
   @doc("Human-readable display name identifying the data source connection.")
-  name: string;
+  name?: string;
 
   /**
    * Indicates whether the data source is configured for Virtual Network connectivity.
@@ -2082,12 +2274,12 @@ model DataSourceEntity {
    * Reference to the business domain that governs this data source.
    */
   @doc("Business domain governance reference for this data source.")
-  businessDomain: {
+  businessDomain?: {
     /**
      * Type classification for the business domain reference.
      */
     @doc("Business domain reference type classification.")
-    type: string;
+    type?: string;
 
     /**
      * Unique identifier of the governing business domain.
@@ -2128,7 +2320,7 @@ model DataSourceEntity {
    * Type of data source platform, such as AzureSqlDatabase, Snowflake, or OneLake.
    */
   @doc("Platform type of the data source (e.g., AzureSqlDatabase, Snowflake, OneLake, etc.).")
-  type: string;
+  type?: string;
 
   /**
    * Authentication credential information for accessing the data source.
@@ -2158,7 +2350,7 @@ model DataSourceEntity {
    * Consolidated configuration properties covering all supported data source types.
    */
   @doc("Combined configuration properties for all supported data source platforms.")
-  typeProperties: {
+  typeProperties?: {
     // ---------- Azure SQL ----------
     @doc("Azure SQL server name (for AzureSqlDatabase).")
     server?: string;
@@ -2261,6 +2453,15 @@ model DataSourceEntity {
   @doc("Region associated with the credential.")
   region?: string;
 
+  @doc("Type of data source platform (e.g., AzureSqlDatabase, OnPremiseOracleDatabase, Snowflake, etc.).")
+  dataSourceType?: string;
+
+  @doc("Managed Private Endpoint identifier for secure connectivity.")
+  managePrivateEndPointId?: string;
+
+  @doc("Manage Private Endpoint status information.")
+  managePrivateEndpointStatus?: string;
+
   /**
    * Access scope definitions controlling data object inclusion or exclusion for operations.
    */
@@ -2341,8 +2542,9 @@ model DataSourceEntityResponse {
   /**
    * Flag indicating if the data source is configured for Virtual Network connectivity.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property name"
   @doc("Virtual Network connectivity flag.")
-  isVnetEnabled: boolean;
+  isVNetEnabled?: boolean;
 
   /**
    * Azure resource identifier of the target data platform, if Azure-based.
@@ -2354,7 +2556,7 @@ model DataSourceEntityResponse {
    * Reference to the business domain that governs this data source.
    */
   @doc("Business domain governance reference for this data source.")
-  businessDomain: {
+  businessDomain?: {
     /**
      * Reference type classification for the business domain relationship.
      */
@@ -2384,13 +2586,13 @@ model DataSourceEntityResponse {
    * Data source platform type (AzureSqlDatabase, Snowflake, AzureSynapseAnalytics, Oracle, etc.)
    */
   @doc("Platform type of the data source (e.g., AzureSqlDatabase, Snowflake, OneLake, etc.).")
-  type: string;
+  type?: string;
 
   /**
    * Platform-specific configuration properties including connection strings, authentication, and settings.
    */
   @doc("Platform-specific configuration properties and credentials (key-value pairs).")
-  typeProperties: Record<string>;
+  typeProperties?: Record<string>;
 
   /**
    * Access scope definitions that control which data objects are included or excluded from operations.
@@ -2419,7 +2621,40 @@ model DataSourceEntityResponse {
      * Unique identifier for the scope definition.
      */
     @doc("Unique identifier for the scope definition.")
-    id: string;
+    id?: string;
+
+    /**
+     * Authentication credential information for accessing the data source.
+     */
+    @doc("Authentication credential configuration for data source access.")
+    credential?: {
+      /**
+       * Type of credential (e.g., ServicePrincipal, ManagedIdentity, UsernamePassword).
+       */
+      @doc("Credential type for authentication.")
+      type: string;
+
+      /**
+       * Reference identifier for the credential resource.
+       */
+      @doc("Reference identifier for the credential resource.")
+      referenceName?: string;
+
+      /**
+       * Additional credential parameters specific to the credential type.
+       */
+      @doc("Type-specific credential parameters.")
+      typeProperties?: {};
+    };
+
+    @doc("Compute resource identifier associated with the credential.")
+    computeId?: string;
+
+    @doc("Region associated with the credential.")
+    region?: string;
+
+    @doc("Type of data source platform (e.g., AzureSqlDatabase, OnPremiseOracleDatabase, Snowflake, etc.).")
+    dataSourceType?: string;
   }>;
 }
 
@@ -3037,9 +3272,6 @@ model ScoreSnapshot {
   @doc("Overall score for the asset")
   assetScore: float64;
 
-  @doc("Detailed snapshot with observers and validation results")
-  snapshot: SnapshotDetails;
-
   @doc("Rules with their scores and validation results")
   rules?: ScoredRule[];
 
@@ -3254,6 +3486,9 @@ model BulkAssetMetadataEntry {
 
   @doc("Asset scoped metadata information")
   assetScopedMetadata: AssetScopedMetadata;
+
+  @doc("Snapshot Details")
+  scoreSnapshot: ScoreSnapshot;
 
   @doc("Global rules applied to the asset")
   globalRules: GlobalRule[];

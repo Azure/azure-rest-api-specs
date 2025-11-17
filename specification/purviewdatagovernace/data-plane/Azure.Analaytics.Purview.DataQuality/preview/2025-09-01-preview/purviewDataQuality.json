@@ -83,98 +83,9 @@
     },
     {
       "name": "Trend"
-    },
-    {
-      "name": "BulkMetadata"
     }
   ],
   "paths": {
-    "/bulk-asset-metadata": {
-      "get": {
-        "operationId": "GetBulkAssetMetadata",
-        "tags": [
-          "BulkMetadata"
-        ],
-        "description": "Retrieves metadata for all assets in an account with pagination support. Returns up to 10 assets per request.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "continuationToken",
-            "in": "query",
-            "description": "Continuation token for pagination. Use this to get all results until continuationToken from the response becomes null.",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/BulkAssetMetadataResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "operationId": "CreateBulkAssetMetadata",
-        "tags": [
-          "BulkMetadata"
-        ],
-        "description": "Inserts metadata for multiple assets into a new account ID.",
-        "produces": [
-          "text/plain",
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "request",
-            "in": "body",
-            "description": "Bulk asset metadata to insert",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/BulkAssetMetadataRequest"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
     "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}:observations": {
       "post": {
         "operationId": "Observations",
@@ -189,14 +100,14 @@
           {
             "name": "businessDomainId",
             "in": "path",
-            "description": "Unique identifier for the business domain",
+            "description": "Unique identifier for the business domain containing the data product",
             "required": true,
             "type": "string"
           },
           {
             "name": "dataProductId",
             "in": "path",
-            "description": "Unique identifier for the data product",
+            "description": "Unique identifier for the data product containing the data asset",
             "required": true,
             "type": "string"
           },
@@ -208,8 +119,9 @@
             "type": "string"
           },
           {
-            "name": "body",
+            "name": "request",
             "in": "body",
+            "description": "Job configuration request payload",
             "required": true,
             "schema": {
               "$ref": "#/definitions/JobConfigDTO"
@@ -217,8 +129,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The request has succeeded.",
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "schema": {
               "$ref": "#/definitions/StatusMonitor"
             }
@@ -236,10 +148,15 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Observation_Create": {
+            "$ref": "./examples/Observation_Create.json"
+          }
+        },
         "x-ms-long-running-operation": true
       }
     },
-    "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}:profiles": {
+    "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}:profile": {
       "post": {
         "operationId": "Profile",
         "tags": [
@@ -267,14 +184,14 @@
           {
             "name": "dataAssetId",
             "in": "path",
-            "description": "Unique identifier for the data asset whose profile is being created or updated",
+            "description": "Unique identifier for the data asset",
             "required": true,
             "type": "string"
           },
           {
             "name": "request",
             "in": "body",
-            "description": "Profile entity with configuration and properties",
+            "description": "Profile entity request payload",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ProfileEntity"
@@ -285,7 +202,7 @@
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
             "schema": {
-              "$ref": "#/definitions/ProfileEntityResponse"
+              "$ref": "#/definitions/StatusMonitor"
             }
           },
           "default": {
@@ -305,8 +222,7 @@
           "Profile_Create": {
             "$ref": "./examples/Profile_Create.json"
           }
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/bulk-rules": {
@@ -446,10 +362,16 @@
               }
             }
           }
-        }
+        },
+        "x-ms-examples": {
+          "Observation_Delete": {
+            "$ref": "./examples/Observation_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
       }
     },
-    "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/profiles/{profileId}": {
+    "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/profiles/{profileRunId}": {
       "delete": {
         "operationId": "DeleteProfileRun",
         "tags": [
@@ -482,7 +404,7 @@
             "type": "string"
           },
           {
-            "name": "profileId",
+            "name": "profileRunId",
             "in": "path",
             "description": "Unique identifier for the profile run execution",
             "required": true,
@@ -504,6 +426,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Profile_Delete": {
+            "$ref": "./examples/Profile_Delete.json"
           }
         }
       }
@@ -1103,8 +1030,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The request has succeeded.",
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/ScopedAssetMetadata"
             }
@@ -1415,7 +1342,7 @@
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
-              "$ref": "#/definitions/DataSourceEntityResponse"
+              "$ref": "#/definitions/DataSourceEntity"
             }
           },
           "default": {
@@ -1675,7 +1602,7 @@
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
             "schema": {
-              "$ref": "#/definitions/ScanDTOResponse"
+              "$ref": "#/definitions/StatusMonitor"
             }
           },
           "default": {
@@ -1762,14 +1689,14 @@
           {
             "name": "businessDomainId",
             "in": "path",
-            "description": "Unique identifier for the business domain",
+            "description": "Unique identifier for the business domain containing the data product",
             "required": true,
             "type": "string"
           },
           {
             "name": "scheduleId",
             "in": "path",
-            "description": "Unique identifier of the schedule",
+            "description": "Unique identifier for the scheduled job within the business domain",
             "required": true,
             "type": "string"
           }
@@ -1778,7 +1705,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ScheduleEntity"
+              "$ref": "#/definitions/ScheduleEntityRequestResponse"
             }
           },
           "default": {
@@ -1830,7 +1757,7 @@
             "description": "The payload for creating scheduled job",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ScheduleEntity"
+              "$ref": "#/definitions/ScheduleEntityRequestResponse"
             }
           }
         ],
@@ -1838,7 +1765,7 @@
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
-              "$ref": "#/definitions/ScheduleEntityResponse"
+              "$ref": "#/definitions/ScheduleEntityRequestResponse"
             }
           },
           "default": {
@@ -1890,15 +1817,15 @@
             "description": "The payload for creating schedule",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ScheduleEntityUpdate"
+              "$ref": "#/definitions/ScheduleEntityRequestResponseUpdate"
             }
           }
         ],
         "responses": {
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
+          "200": {
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ScheduleEntityResponse"
+              "$ref": "#/definitions/ScheduleEntityRequestResponse"
             }
           },
           "default": {
@@ -2004,10 +1931,10 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The request has succeeded.",
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "schema": {
-              "$ref": "#/definitions/ScanDTOResponse"
+              "$ref": "#/definitions/StatusMonitor"
             }
           },
           "default": {
@@ -2021,6 +1948,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Scan_Create": {
+            "$ref": "./examples/Scan_Create.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -2063,7 +1995,7 @@
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
             "schema": {
-              "$ref": "#/definitions/ScanDTOResponse"
+              "$ref": "#/definitions/StatusMonitor"
             }
           },
           "default": {
@@ -2533,90 +2465,6 @@
         }
       }
     },
-    "AssetRuntimeConfiguration": {
-      "type": "object",
-      "description": "Runtime configuration settings for asset processing",
-      "properties": {
-        "isErrorRowRequired": {
-          "type": "boolean",
-          "description": "Whether error row is required during processing"
-        },
-        "errorRowWriteFormat": {
-          "type": "string",
-          "description": "Format for writing error rows"
-        }
-      }
-    },
-    "AssetScopedMetadata": {
-      "type": "object",
-      "description": "Asset scoped metadata with runtime configuration and references to business domain, data product, and data asset",
-      "properties": {
-        "description": {
-          "type": "string",
-          "description": "Description of the asset scoped metadata"
-        },
-        "favouriteColumnPaths": {
-          "type": "array",
-          "description": "List of favorite column paths for the asset",
-          "items": {
-            "type": "string"
-          }
-        },
-        "id": {
-          "type": "string",
-          "description": "Unique identifier for the asset scoped metadata"
-        },
-        "businessDomain": {
-          "$ref": "#/definitions/Reference",
-          "description": "Reference to the business domain"
-        },
-        "dataProduct": {
-          "$ref": "#/definitions/Reference",
-          "description": "Reference to the data product"
-        },
-        "dataAsset": {
-          "$ref": "#/definitions/Reference",
-          "description": "Reference to the data asset"
-        },
-        "runtime": {
-          "$ref": "#/definitions/AssetRuntimeConfiguration",
-          "description": "Runtime configuration for the asset"
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Timestamp when the metadata was created"
-        },
-        "lastModifiedAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Timestamp when the metadata was last modified"
-        },
-        "createdBy": {
-          "type": "string",
-          "description": "User ID who created the metadata"
-        },
-        "lastModifiedBy": {
-          "type": "string",
-          "description": "User ID who last modified the metadata"
-        },
-        "eTag": {
-          "type": "string",
-          "description": "Entity tag for optimistic concurrency control"
-        }
-      },
-      "required": [
-        "id",
-        "businessDomain",
-        "dataProduct",
-        "dataAsset",
-        "createdAt",
-        "lastModifiedAt",
-        "createdBy",
-        "lastModifiedBy",
-        "eTag"
-      ]
-    },
     "Azure.Core.Foundations.Error": {
       "type": "object",
       "description": "The error object.",
@@ -2676,68 +2524,6 @@
           "description": "Inner error."
         }
       }
-    },
-    "BulkAssetMetadataEntry": {
-      "type": "object",
-      "description": "Complete metadata entry for bulk operations including asset metadata, scoped metadata, rules, and score snapshot",
-      "properties": {
-        "assetMetadata": {
-          "$ref": "#/definitions/AssetMetadata",
-          "description": "Asset metadata information"
-        },
-        "assetScopedMetadata": {
-          "$ref": "#/definitions/AssetScopedMetadata",
-          "description": "Asset scoped metadata information"
-        },
-        "globalRules": {
-          "type": "array",
-          "description": "Global rules applied to the asset",
-          "items": {
-            "$ref": "#/definitions/GlobalRule"
-          }
-        }
-      },
-      "required": [
-        "assetMetadata",
-        "assetScopedMetadata",
-        "globalRules"
-      ]
-    },
-    "BulkAssetMetadataRequest": {
-      "type": "object",
-      "description": "Request containing bulk asset metadata for insertion",
-      "properties": {
-        "metadata": {
-          "type": "array",
-          "description": "Array of metadata entries to insert",
-          "items": {
-            "$ref": "#/definitions/BulkAssetMetadataEntry"
-          }
-        }
-      },
-      "required": [
-        "metadata"
-      ]
-    },
-    "BulkAssetMetadataResponse": {
-      "type": "object",
-      "description": "Response containing bulk asset metadata with pagination support",
-      "properties": {
-        "continuationToken": {
-          "type": "string",
-          "description": "Continuation token for pagination. Null when no more results are available."
-        },
-        "metadata": {
-          "type": "array",
-          "description": "Array of metadata entries (up to 10 per response)",
-          "items": {
-            "$ref": "#/definitions/BulkAssetMetadataEntry"
-          }
-        }
-      },
-      "required": [
-        "metadata"
-      ]
     },
     "BulkRulesRequest": {
       "type": "object",
@@ -3012,7 +2798,6 @@
             }
           },
           "required": [
-            "type",
             "referenceId"
           ]
         },
@@ -3191,6 +2976,18 @@
           "type": "string",
           "description": "Region associated with the credential."
         },
+        "dataSourceType": {
+          "type": "string",
+          "description": "Type of data source platform (e.g., AzureSqlDatabase, OnPremiseOracleDatabase, Snowflake, etc.)."
+        },
+        "managePrivateEndPointId": {
+          "type": "string",
+          "description": "Managed Private Endpoint identifier for secure connectivity."
+        },
+        "managePrivateEndpointStatus": {
+          "type": "string",
+          "description": "Manage Private Endpoint status information."
+        },
         "scopes": {
           "type": "array",
           "description": "Access scope definitions controlling which data objects are included or excluded from operations.",
@@ -3229,14 +3026,7 @@
             ]
           }
         }
-      },
-      "required": [
-        "id",
-        "name",
-        "businessDomain",
-        "type",
-        "typeProperties"
-      ]
+      }
     },
     "DataSourceEntityListResponse": {
       "type": "object",
@@ -3252,113 +3042,6 @@
       },
       "required": [
         "value"
-      ]
-    },
-    "DataSourceEntityResponse": {
-      "type": "object",
-      "description": "HTTP response model for data source operations with complete configuration and metadata.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Display name of the data source connection."
-        },
-        "id": {
-          "type": "string",
-          "description": "Unique data source identifier."
-        },
-        "isVnetEnabled": {
-          "type": "boolean",
-          "description": "Virtual Network connectivity flag."
-        },
-        "targetResourceId": {
-          "type": "string",
-          "description": "Azure resource identifier for target platform (if applicable)."
-        },
-        "businessDomain": {
-          "type": "object",
-          "description": "Business domain governance reference for this data source.",
-          "properties": {
-            "type": {
-              "type": "string",
-              "description": "Business domain reference type classification."
-            },
-            "referenceId": {
-              "type": "string",
-              "description": "Unique identifier of the governing business domain."
-            }
-          },
-          "required": [
-            "type",
-            "referenceId"
-          ]
-        },
-        "lastModifiedAt": {
-          "type": "string",
-          "description": "Timestamp when the data source configuration was last modified (ISO 8601)."
-        },
-        "lastModifiedBy": {
-          "type": "string",
-          "description": "Identity of the last modifying user."
-        },
-        "type": {
-          "type": "string",
-          "description": "Platform type of the data source (e.g., AzureSqlDatabase, Snowflake, OneLake, etc.)."
-        },
-        "typeProperties": {
-          "type": "object",
-          "description": "Platform-specific configuration properties and credentials (key-value pairs).",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "scopes": {
-          "type": "array",
-          "description": "Access scope definitions controlling inclusion and exclusion of data objects.",
-          "items": {
-            "type": "object",
-            "properties": {
-              "scope": {
-                "type": "object",
-                "description": "Scope configuration defining inclusion and exclusion boundaries.",
-                "properties": {
-                  "type": {
-                    "type": "string",
-                    "description": "Scope type classification (e.g., SQL, NoSQL, File, etc.)."
-                  },
-                  "includes": {
-                    "type": "array",
-                    "description": "Collection of included data object names or patterns.",
-                    "items": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "required": [
-                  "type",
-                  "includes"
-                ]
-              },
-              "id": {
-                "type": "string",
-                "description": "Unique identifier for the scope definition."
-              }
-            },
-            "required": [
-              "scope",
-              "id"
-            ]
-          }
-        }
-      },
-      "required": [
-        "name",
-        "id",
-        "isVnetEnabled",
-        "businessDomain",
-        "lastModifiedAt",
-        "lastModifiedBy",
-        "type",
-        "typeProperties"
       ]
     },
     "DataSourceEntityUpdate": {
@@ -3567,6 +3250,18 @@
           "type": "string",
           "description": "Region associated with the credential."
         },
+        "dataSourceType": {
+          "type": "string",
+          "description": "Type of data source platform (e.g., AzureSqlDatabase, OnPremiseOracleDatabase, Snowflake, etc.)."
+        },
+        "managePrivateEndPointId": {
+          "type": "string",
+          "description": "Managed Private Endpoint identifier for secure connectivity."
+        },
+        "managePrivateEndpointStatus": {
+          "type": "string",
+          "description": "Manage Private Endpoint status information."
+        },
         "scopes": {
           "type": "array",
           "description": "Access scope definitions controlling which data objects are included or excluded from operations.",
@@ -3642,81 +3337,6 @@
         }
       }
     },
-    "GlobalRule": {
-      "type": "object",
-      "description": "Global rule definition with scoring and metadata",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the rule"
-        },
-        "id": {
-          "type": "string",
-          "description": "Unique identifier for the rule"
-        },
-        "description": {
-          "type": "string",
-          "description": "Description of the rule"
-        },
-        "type": {
-          "type": "string",
-          "description": "Type of the rule"
-        },
-        "typeProperties": {
-          "$ref": "#/definitions/RuleTypeProperties",
-          "description": "Type-specific properties of the rule"
-        },
-        "status": {
-          "type": "string",
-          "description": "Status of the rule (Active, Inactive)"
-        },
-        "score": {
-          "type": "number",
-          "format": "double",
-          "description": "Score associated with the rule"
-        },
-        "dimension": {
-          "type": "string",
-          "description": "Dimension of the rule (e.g., Conformity, Completeness)"
-        },
-        "businessDomain": {
-          "$ref": "#/definitions/Reference",
-          "description": "Reference to the business domain"
-        },
-        "dataProduct": {
-          "$ref": "#/definitions/Reference",
-          "description": "Reference to the data product"
-        },
-        "dataAsset": {
-          "$ref": "#/definitions/Reference",
-          "description": "Reference to the data asset"
-        },
-        "lastModifiedAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Timestamp when the rule was last modified"
-        },
-        "lastModifiedBy": {
-          "type": "string",
-          "description": "User ID who last modified the rule"
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Timestamp when the rule was created"
-        },
-        "createdBy": {
-          "type": "string",
-          "description": "User ID who created the rule"
-        }
-      },
-      "required": [
-        "name",
-        "id",
-        "type",
-        "status"
-      ]
-    },
     "JobConfigDTO": {
       "type": "object",
       "description": "Job execution configuration with runtime parameters and data mappings",
@@ -3784,6 +3404,38 @@
         "accountId": {
           "type": "string",
           "description": "Job execution account identifier"
+        },
+        "isDQAsset": {
+          "type": "boolean",
+          "description": "Flag indicating if the asset is a Data Quality asset"
+        },
+        "qualifiedPath": {
+          "type": "string",
+          "description": "Fully qualified data resource path"
+        },
+        "scanId": {
+          "type": "string",
+          "description": "Associated scan operation identifier"
+        },
+        "dataProductName": {
+          "type": "string",
+          "description": "Which data product the scan belongs to"
+        },
+        "dataAssetName": {
+          "type": "string",
+          "description": "Which dataasset the scan belongs to"
+        },
+        "triggerType": {
+          "type": "string",
+          "description": "Trigger type classification"
+        },
+        "scheduleId": {
+          "type": "string",
+          "description": "Triggering schedule identifier"
+        },
+        "scheduleName": {
+          "type": "string",
+          "description": "Scheduled triggered name"
         }
       },
       "required": [
@@ -4240,28 +3892,6 @@
         "configuration"
       ]
     },
-    "ProfileEntityResponse": {
-      "type": "object",
-      "description": "HTTP response for profile operations with LRO support and run tracking",
-      "properties": {
-        "profileRunId": {
-          "type": "string",
-          "description": "Profile run execution identifier"
-        },
-        "status": {
-          "$ref": "#/definitions/LroStatus",
-          "description": "Long-running operation status for profiling"
-        },
-        "statusMonitor": {
-          "$ref": "#/definitions/StatusMonitor",
-          "description": "Real-time profiling execution monitoring information"
-        }
-      },
-      "required": [
-        "profileRunId",
-        "status"
-      ]
-    },
     "Reference": {
       "type": "object",
       "description": "Reference to entities in the data governance hierarchy for relationship establishment",
@@ -4275,24 +3905,6 @@
           "description": "Unique identifier of the referenced entity"
         }
       }
-    },
-    "RuleColumn": {
-      "type": "object",
-      "description": "Column definition used in rule configurations",
-      "properties": {
-        "value": {
-          "type": "string",
-          "description": "Value or name of the column"
-        },
-        "type": {
-          "type": "string",
-          "description": "Type of the column reference"
-        }
-      },
-      "required": [
-        "value",
-        "type"
-      ]
     },
     "RuleEntity": {
       "type": "object",
@@ -4438,27 +4050,6 @@
         }
       }
     },
-    "RuleTypeProperties": {
-      "type": "object",
-      "description": "Type-specific properties configuration for rules",
-      "properties": {
-        "condition": {
-          "type": "string",
-          "description": "Condition expression for the rule"
-        },
-        "filterCriteria": {
-          "type": "string",
-          "description": "Filter criteria for the rule"
-        },
-        "columns": {
-          "type": "array",
-          "description": "Columns associated with the rule",
-          "items": {
-            "$ref": "#/definitions/RuleColumn"
-          }
-        }
-      }
-    },
     "ScanDTO": {
       "type": "object",
       "description": "Data transfer object for scan configuration",
@@ -4469,27 +4060,6 @@
         }
       }
     },
-    "ScanDTOResponse": {
-      "type": "object",
-      "description": "HTTP response for scan operations with status tracking and monitoring",
-      "properties": {
-        "scanId": {
-          "type": "string",
-          "description": "Unique scan operation identifier"
-        },
-        "status": {
-          "$ref": "#/definitions/LroStatus",
-          "description": "Long-running operation execution status"
-        },
-        "statusMonitor": {
-          "$ref": "#/definitions/StatusMonitor",
-          "description": "Real-time scan execution monitoring information"
-        }
-      },
-      "required": [
-        "status"
-      ]
-    },
     "ScheduleEntity": {
       "type": "object",
       "description": "Schedule entity for automated data quality scanning and validation",
@@ -4497,9 +4067,7 @@
         "id": {
           "type": "string",
           "description": "Unique identifier of the schedule",
-          "x-ms-mutability": [
-            "create"
-          ]
+          "readOnly": true
         },
         "name": {
           "type": "string",
@@ -4636,7 +4204,7 @@
           "type": "string",
           "description": "Identity of the last modifying user"
         },
-        "eTag": {
+        "ETag": {
           "type": "string",
           "description": "Entity tag for concurrency control"
         }
@@ -4645,50 +4213,76 @@
         "id"
       ]
     },
-    "ScheduleEntityResponse": {
+    "ScheduleEntityRequestResponse": {
       "type": "object",
-      "description": "HTTP response for schedule operations with complete configuration",
+      "description": "Request body model for creating or updating schedule entities",
       "properties": {
-        "name": {
-          "type": "string",
-          "description": "Human-readable schedule name"
-        },
         "id": {
           "type": "string",
-          "description": "Unique schedule identifier"
+          "description": "Unique identifier of the schedule"
+        },
+        "name": {
+          "type": "string",
+          "description": "Human-readable schedule display name"
         },
         "description": {
           "type": "string",
-          "description": "Detailed schedule description and purpose"
+          "description": "Detailed description of schedule purpose and strategy"
         },
-        "annotations": {
+        "trigger": {
           "type": "object",
-          "description": "Metadata annotations for categorization",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "businessDomain": {
-          "$ref": "#/definitions/Reference",
-          "description": "Reference to the governing business domain"
+          "description": "Trigger configuration for execution timing and scheduling",
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "Trigger type classification"
+            },
+            "typeProperties": {
+              "type": "object",
+              "description": "Type-specific trigger configuration properties",
+              "properties": {
+                "timezone": {
+                  "type": "string",
+                  "description": "Time zone identifier for schedule evaluation"
+                },
+                "isScheduled": {
+                  "type": "boolean",
+                  "description": "Flag for automatic execution activation"
+                },
+                "triggerTime": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "Next scheduled execution time (UTC)"
+                }
+              }
+            }
+          },
+          "required": [
+            "type",
+            "typeProperties"
+          ]
         },
         "scope": {
           "type": "object",
-          "description": "Execution scope for data products and assets",
+          "description": "Execution scope for data quality scanning",
           "properties": {
             "items": {
               "type": "array",
+              "description": "Collection of target data products and assets",
               "items": {
                 "type": "object",
                 "properties": {
                   "dataProduct": {
                     "type": "object",
+                    "description": "Data product reference within scope",
                     "properties": {
                       "referenceId": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Data product unique identifier"
                       },
                       "type": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Data product reference type"
                       }
                     },
                     "required": [
@@ -4698,12 +4292,15 @@
                   },
                   "dataAsset": {
                     "type": "object",
+                    "description": "Data asset reference within scope",
                     "properties": {
                       "referenceId": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Data asset unique identifier"
                       },
                       "type": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Data asset reference type"
                       }
                     },
                     "required": [
@@ -4723,65 +4320,56 @@
             "items"
           ]
         },
-        "trigger": {
+        "businessDomain": {
           "type": "object",
-          "description": "Trigger configuration for schedule timing",
+          "description": "Reference to the governing business domain",
           "properties": {
             "type": {
-              "type": "string"
+              "type": "string",
+              "description": "Business domain reference type"
             },
-            "typeProperties": {
-              "type": "object",
-              "properties": {
-                "timezone": {
-                  "type": "string"
-                },
-                "isScheduled": {
-                  "type": "boolean"
-                },
-                "triggerTime": {
-                  "type": "string",
-                  "format": "date-time"
-                }
-              }
+            "referenceId": {
+              "type": "string",
+              "description": "Business domain unique identifier"
             }
           },
           "required": [
             "type",
-            "typeProperties"
+            "referenceId"
           ]
-        },
-        "lastModifiedAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Last modification timestamp (UTC)"
-        },
-        "lastModifiedBy": {
-          "type": "string",
-          "description": "Identity of the last modifying user"
         },
         "createdAt": {
           "type": "string",
           "format": "date-time",
           "description": "Creation timestamp (UTC)"
         },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last modification timestamp (UTC)"
+        },
         "createdBy": {
           "type": "string",
           "description": "Identity of the creating user"
         },
-        "executionData": {
-          "type": "object",
-          "description": "Runtime execution parameters and configuration",
-          "additionalProperties": {
-            "type": "string"
-          }
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "Identity of the last modifying user"
+        },
+        "ETag": {
+          "type": "string",
+          "description": "Entity tag for concurrency control"
         }
       }
     },
-    "ScheduleEntityUpdate": {
+    "ScheduleEntityRequestResponseUpdate": {
       "type": "object",
-      "description": "Schedule entity for automated data quality scanning and validation",
+      "description": "Request body model for creating or updating schedule entities",
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the schedule"
+        },
         "name": {
           "type": "string",
           "description": "Human-readable schedule display name"
@@ -4906,7 +4494,7 @@
           "type": "string",
           "description": "Identity of the last modifying user"
         },
-        "eTag": {
+        "ETag": {
           "type": "string",
           "description": "Entity tag for concurrency control"
         }
@@ -5089,12 +4677,7 @@
         }
       },
       "required": [
-        "id",
         "description",
-        "businessDomain",
-        "dataProduct",
-        "dataAsset",
-        "runtime",
         "favouriteColumnPaths"
       ]
     },
@@ -5195,9 +4778,7 @@
         "id": {
           "type": "string",
           "description": "Unique identifier of the monitored operation",
-          "x-ms-mutability": [
-            "create"
-          ]
+          "readOnly": true
         },
         "status": {
           "$ref": "#/definitions/LroStatus",

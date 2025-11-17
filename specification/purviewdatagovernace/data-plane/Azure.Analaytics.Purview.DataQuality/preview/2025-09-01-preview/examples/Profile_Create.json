@@ -5,7 +5,7 @@
     "businessDomainId": "abcdef12-3456-7890-abcd-ef1234567890",
     "dataAssetId": "123e4567-e89b-12d3-a456-426614174000",
     "dataProductId": "223e4567-e89b-12d3-a456-426614174111",
-    "profiles": {
+    "request": {
       "type": "Delta",
       "typeProperties": {
         "location": [
@@ -13,85 +13,43 @@
             "type": "AdlsGen2FileLocation",
             "typeProperties": {
               "fileSystem": "smallsized",
-              "folderPath": "DELTA2/RowPartitioned/BankCustomerLedger3"
+              "folderPath": "formatmatch/regex1QA"
             }
           }
         ]
       },
-      "dataSourceId": "Connection115832",
+      "dataSourceId": "DataAssetADLSG2",
       "configuration": {
         "keyColumns": [
           {
-            "name": "Amount"
+            "name": "AlphaNumHash"
           },
           {
-            "name": "MerchantCity"
-          },
-          {
-            "name": "Currency"
-          },
-          {
-            "name": "MerchantCountry"
-          },
-          {
-            "name": "BankName"
-          },
-          {
-            "name": "BranchBranch"
-          },
-          {
-            "name": "ChequeDate"
-          },
-          {
-            "name": "ATMLocation"
-          },
-          {
-            "name": "ATMType"
-          },
-          {
-            "name": "ATMFee"
-          },
-          {
-            "name": "LoanInterestRate"
-          },
-          {
-            "name": "MerchantState"
-          },
-          {
-            "name": "TransactionDescription"
-          },
-          {
-            "name": "CardHolderName"
-          },
-          {
-            "name": "AccountHolderName"
-          },
-          {
-            "name": "CheckPayeeName"
+            "name": "BankTransitNumber"
           },
           {
             "name": "Email"
           },
           {
-            "name": "TransferAmount"
+            "name": "Guid"
           },
           {
-            "name": "SocialSecurityNumber"
+            "name": "IP_Address"
           },
           {
-            "name": "DateofBirth"
+            "name": "IpvSix"
           },
           {
-            "name": "Gender"
+            "name": "ISODate"
           },
           {
-            "name": "HomeAddress"
+            "name": "NumericBalance"
           },
           {
-            "name": "MailingAddress"
+            "name": "Url"
           },
           {
-            "name": "EmployerAddress"
+            "name": "Zipcode"
           }
         ]
       }
@@ -100,12 +58,20 @@
   "title": "Profile_Create",
   "responses": {
     "202": {
-      "body": {
-        "profileRunId": "31c231c7-36ba-4b9d-8771-e21247c967cc",
-        "statuslro": "In Progress"
-      },
       "headers": {
-        "azure-AsyncOperation": "In Progress"
+        "Operation-Location": "https://westus.api.purview.azure.com/dataquality/business-domains/76be16f9-5cb3-4839-83d6-4e3829a8ab0c/status/12345678-abcd-1234-ef00-123456abcdeg",
+        "Operation-Id": "12345678-abcd-1234-ef00-123456abcdeg"
+      },
+      "body": {
+        "id": "123e4567-e89b-12d3-a456-426614174000",
+        "status": "InProgress",
+        "kind": "Update",
+        "lastUpdated": "2025-11-13T08:45:30.123Z",
+        "statusMessage": "Observation job initiated successfully",
+        "progressPercentage": 10,
+        "result": {
+          "value": "d6d2d488-3473-4ee5-8d14-93f1004e5c98"
+        }
       }
     }
   }

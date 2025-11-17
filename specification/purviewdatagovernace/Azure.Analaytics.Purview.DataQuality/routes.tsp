@@ -327,9 +327,16 @@ namespace PurviewDataQuality {
 
       @doc("The payload for creating scheduled job")
       @bodyRoot
-      request: ScheduleEntity;
+      request: ScheduleEntityRequestResponse;
     },
-    ScheduleEntityResponse
+    {
+      @statusCode
+      statusCode: 201;
+
+      @doc("Created schedule entity response")
+      @body
+      response: ScheduleEntityRequestResponse;
+    }
   >;
 
   /**
@@ -338,10 +345,23 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "RpcOperation with path parameters is intentional for this service."
   @tag("Schedules")
   @doc("Retrieves a specific scheduled job by its unique identifier under a business domain.")
+  @route("/business-domains/{businessDomainId}/schedules/{scheduleId}")
   @get
-  op getSchedule is DataQualityOperation.ResourceRead<ScheduleEntity>;
+  op getSchedule is RpcOperation<
+    {
+      @doc("Unique identifier for the business domain containing the data product")
+      @path
+      businessDomainId: string;
+
+      @doc("Unique identifier for the scheduled job within the business domain")
+      @path
+      scheduleId: string;
+    },
+    ScheduleEntityRequestResponse
+  >;
 
   /**
    * Update Schedule
@@ -380,9 +400,16 @@ namespace PurviewDataQuality {
       #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use unknown to model Object"
       @doc("The payload for creating schedule")
       @bodyRoot
-      request: ScheduleEntity;
+      request: ScheduleEntityRequestResponse;
     },
-    ScheduleEntityResponse
+    {
+      @statusCode
+      statusCode: 200;
+
+      @doc("Updated schedule entity response")
+      @body
+      response: ScheduleEntityRequestResponse;
+    }
   >;
 
   /**
@@ -401,14 +428,22 @@ namespace PurviewDataQuality {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Need to specify long-running operation extensions for 202 responses"
   @tag("ScheduleScan")
-  @pollingOperation(scans)
+  @extension("x-ms-long-running-operation", true)
   @doc("Creates a scan under a specific business domain and schedule.")
   @post
   op scans is DataQualityOperation.ResourceAction<
     ScheduleEntity,
     ScanDTO,
-    ScanDTOResponse
+    {
+      @statusCode
+      statusCode: 202;
+
+      @body
+      response: StatusMonitor;
+    }
   >;
 
   /**
@@ -444,7 +479,7 @@ namespace PurviewDataQuality {
 
       @doc("Scan cancellation response")
       @body
-      response: ScanDTOResponse;
+      response: StatusMonitor;
     }
   >;
 
@@ -527,7 +562,7 @@ namespace PurviewDataQuality {
 
       @doc("Scan run cancellation response")
       @body
-      response: ScanDTOResponse;
+      response: StatusMonitor;
     }
   >;
   /**
@@ -568,14 +603,43 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Multiple path parameters are required for this nested resource operation."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Need to specify long-running operation extensions for 202 responses"
+  @route("/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}:observations")
   @tag("DQ Assessment Observations")
+  @extension("x-ms-long-running-operation", true)
+  @extension(
+    "x-ms-examples",
+    #{ Observation_Create: #{ $ref: "./examples/Observation_Create.json" } }
+  )
   @doc("Triggers a long-running observation job for a specific data asset.")
   @post
-  @pollingOperation(observations)
-  op observations is DataQualityOperation.ResourceAction<
-    DataAsset,
-    JobConfigDTO,
-    StatusMonitor
+  op observations is RpcOperation<
+    {
+      @doc("Unique identifier for the business domain containing the data product")
+      @path
+      businessDomainId: string;
+
+      @doc("Unique identifier for the data product containing the data asset")
+      @path
+      dataProductId: string;
+
+      @doc("Unique identifier for the data asset")
+      @path
+      dataAssetId: string;
+
+      @doc("Job configuration request payload")
+      @body
+      request: JobConfigDTO;
+    },
+    {
+      @statusCode
+      statusCode: 202;
+
+      @doc("Status monitor for observation operation")
+      @body
+      response: StatusMonitor;
+    }
   >;
 
   /**
@@ -584,8 +648,14 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Need to specify long-running operation extensions for 202 responses"
   @delete
   @tag("DQ Assessment Observations")
+  @extension("x-ms-long-running-operation", true)
+  @extension(
+    "x-ms-examples",
+    #{ Observation_Delete: #{ $ref: "./examples/Observation_Delete.json" } }
+  )
   @doc("Deletes a specific observation associated with a data asset.")
   op deleteObservation is DataQualityOperation.ResourceDelete<ObservationAssetMetadata>;
 
@@ -714,8 +784,13 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "RpcOperation with path parameters is intentional for this service."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" ""
   @tag("DataSources")
   @doc("Updates an existing data source within a given business domain.")
+  @extension(
+    "x-ms-examples",
+    #{ DataSource_Update: #{ $ref: "./examples/DataSource_Update.json" } }
+  )
   @route("/business-domains/{businessDomainId}/data-sources/{dataSourceId}")
   @patch(#{ implicitOptionality: true })
   op updateDataSource is RpcOperation<
@@ -786,7 +861,14 @@ namespace PurviewDataQuality {
       @bodyRoot
       request: DataSourceEntity;
     },
-    DataSourceEntityResponse
+    {
+      @statusCode
+      statusCode: 201;
+
+      @doc("Created data source entity with complete configuration and metadata")
+      @body
+      response: DataSourceEntity;
+    }
   >;
 
   /**
@@ -978,62 +1060,63 @@ namespace PurviewDataQuality {
       @bodyRoot
       request: ScopedAssetMetadata;
     },
-    ScopedAssetMetadata
+    {
+      @doc("Scoped asset metadata successfully created or replaced")
+      @statusCode
+      statusCode: 201;
+
+      @doc("Scoped asset metadata entity response")
+      @body
+      response: ScopedAssetMetadata;
+    }
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Multiple path parameters are required for this nested resource operation."
+  @route("/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}:profile")
   @tag("Profiles")
   @doc("Creates or updates the profile for a given data asset within a business domain. Supports polling as a long-running operation.")
-  @route("/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}:profiles")
   @post
-  @pollingOperation(profile)
   op profile is RpcOperation<
     {
-      /**
-       * The unique identifier for the business domain that contains the data product.
-       * Business domains represent high-level organizational units for data governance
-       * and provide the top-level context for all data products and assets within them.
-       */
       @doc("Unique identifier for the business domain containing the data product")
       @path
       businessDomainId: string;
 
-      /**
-       * The unique identifier for the data product that contains the data asset.
-       * Data products are collections of related data assets that serve specific
-       * business purposes or analytical use cases within a business domain.
-       */
       @doc("Unique identifier for the data product containing the data asset")
       @path
       dataProductId: string;
 
-      /**
-       * The unique identifier for the data asset whose profile is being created or updated.
-       * Data assets represent individual datasets, tables, or data sources that can be
-       * monitored for quality, profiling, and observability within a data product.
-       */
-      @doc("Unique identifier for the data asset whose profile is being created or updated")
+      @doc("Unique identifier for the data asset")
       @path
       dataAssetId: string;
 
-      /**
-       * The profile entity containing the configuration and properties for the profile operation.
-       */
-      @doc("Profile entity with configuration and properties")
-      @bodyRoot
+      @doc("Profile entity request payload")
+      @body
       request: ProfileEntity;
     },
-    ProfileEntityResponse
+    {
+      @statusCode
+      statusCode: 202;
+
+      @doc("Status monitor for profile operation")
+      @body
+      response: StatusMonitor;
+    }
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" ""
   @tag("Profiles")
   @doc("Deletes a specific profile run for a given data asset within a business domain.")
+  @extension(
+    "x-ms-examples",
+    #{ Profile_Delete: #{ $ref: "./examples/Profile_Delete.json" } }
+  )
   @delete
   op deleteProfileRun is DataQualityOperation.ResourceDelete<ProfileRun>;
 
@@ -1156,48 +1239,57 @@ namespace PurviewDataQuality {
     }
   >;
 
-  /**
-   * Get bulk asset metadata for all assets in an account
-   */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @tag("BulkMetadata")
-  @doc("Retrieves metadata for all assets in an account with pagination support. Returns up to 10 assets per request.")
-  @route("/bulk-asset-metadata")
-  @get
-  op getBulkAssetMetadata is RpcOperation<
-    {
-      @query("continuationToken")
-      @doc("Continuation token for pagination. Use this to get all results until continuationToken from the response becomes null.")
-      continuationToken?: string;
-    },
-    BulkAssetMetadataResponse
-  >;
+  // /**
+  //  * Get bulk asset metadata for all assets in an account
+  //  */
+  // #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+  // #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+  // #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  // @tag("BulkMetadata")
+  // @doc("Retrieves metadata for all assets in an account with pagination support. Returns up to 10 assets per request.")
+  // @route("/bulk-asset-metadata")
+  // @get
+  // op getBulkAssetMetadata is RpcOperation<
+  //   {
+  //     @query("continuationToken")
+  //     @doc("Continuation token for pagination. Use this to get all results until continuationToken from the response becomes null.")
+  //     continuationToken?: string;
+  //   },
+  //   BulkAssetMetadataResponse
+  // >;
 
-  /**
-   * Insert bulk asset metadata into a new account
-   */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @tag("BulkMetadata")
-  @doc("Inserts metadata for multiple assets into a new account ID.")
-  @route("/bulk-asset-metadata")
-  @put
-  op createBulkAssetMetadata is RpcOperation<
-    {
-      @doc("Bulk asset metadata to insert")
-      @bodyRoot
-      request: BulkAssetMetadataRequest;
-    },
-    {
-      @statusCode
-      statusCode: 201;
+  // /**
+  //  * Insert bulk asset metadata into a new account
+  //  */
+  // #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+  // #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+  // #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  // #suppress "@azure-tools/typespec-azure-core/no-openapi" ""
+  // @tag("BulkMetadata")
+  // @doc("Inserts metadata for multiple assets into a new account ID.")
+  // @extension(
+  //   "x-ms-examples",
+  //   #{
+  //     BulkAssetMetadata_Create: #{
+  //       $ref: "./examples/BulkAssetMetadata_Create.json",
+  //     },
+  //   }
+  // )
+  // @route("/bulk-asset-metadata")
+  // @put
+  // op createBulkAssetMetadata is RpcOperation<
+  //   {
+  //     @doc("Bulk asset metadata to insert")
+  //     @bodyRoot
+  //     request: BulkAssetMetadataRequest;
+  //   },
+  //   {
+  //     @statusCode
+  //     statusCode: 201;
 
-      @doc("Success message")
-      @body
-      message: string;
-    }
-  >;
+  //     @doc("Success message")
+  //     @body
+  //     message: string;
+  //   }
+  // >;
 }

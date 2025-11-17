@@ -1,13 +1,14 @@
 {
   "operationId": "CreateDataSource",
   "parameters": {
+    "dataSourceId": "SqlDataConnection",
     "request": {
       "businessDomain": {
         "referenceId": "76be16f9-5cb3-4839-83d6-4e3829a8ab0c",
         "type": "BusinessDomainReference"
       },
-      "name": "SQL_Connection",
-      "id": "SQL_Connection",
+      "name": "SQLConnection",
+      "id": "SQLConnection",
       "type": "AzureSqlDatabase",
       "credential": {
         "type": "ManagedServiceIdentity",
@@ -23,11 +24,14 @@
         }
       },
       "region": "uaenorth",
+      "isVNetEnabled": true,
       "typeProperties": {
-        "server": "qasqldbbugbash.database.windows.net",
-        "database": "sqldbqabugbash"
+        "server": "vnetsqlserverpdgbugbash.database.windows.net",
+        "database": "vnettestsqldb"
       },
-      "targetResourceId": "/subscriptions/07d669d6-83f2-4f15-8b5b-4a4b31a7050e/resourceGroups/pdgbugbash/providers/Microsoft.Sql/servers/qasqldbbugbash"
+      "computeId": "6f9fa66f-d7c2-4612-9c03-89686bfcfc5e",
+      "targetResourceId": "/subscriptions/07d669d6-83f2-4f15-8b5b-4a4b31a7050e/resourceGroups/pdgbugbash/providers/Microsoft.Sql/servers/vnetsqlserverpdgbugbash",
+      "dataSourceType": "sqlServer"
     },
     "businessDomainId": "abcdef12-3456-7890-abcd-ef1234567890"
   },
@@ -35,38 +39,43 @@
   "responses": {
     "201": {
       "body": {
-    "name": "SQL_Connection",
-    "id": "SQL_Connection",
-    "type": "AzureSqlDatabase",
-    "credential": {
-        "type": "ManagedServiceIdentity",
-        "typeProperties": {
+        "name": "SQLConnection",
+        "id": "SQLConnection",
+        "type": "AzureSqlDatabase",
+        "credential": {
+          "type": "ManagedServiceIdentity",
+          "typeProperties": {
             "scopes": [
-                {
-                    "scope": {
-                        "type": "Sql",
-                        "includes": []
-                    },
-                    "id": "ff6851d0-d580-491c-aeee-8c0a99f2a3b6"
-                }
+              {
+                "scope": {
+                  "type": "Sql",
+                  "includes": []
+                },
+                "id": "363bd1bc-29e1-47fe-b15c-b21db5b5c3e4"
+              }
             ]
-        }
-    },
-    "region": "uaenorth",
-    "typeProperties": {
-        "server": "qasqldbbugbash.database.windows.net",
-        "database": "sqldbqabugbash"
-    },
-    "targetResourceId": "/subscriptions/07d669d6-83f2-4f15-8b5b-4a4b31a7050e/resourceGroups/pdgbugbash/providers/Microsoft.Sql/servers/qasqldbbugbash",
-    "businessDomain": {
-        "type": "BusinessDomainReference",
-        "referenceId": "76be16f9-5cb3-4839-83d6-4e3829a8ab0c"
-    },
-    "createdAt": "2025-11-13T14:17:13.9264011Z",
-    "lastModifiedAt": "2025-11-13T14:17:13.9264011Z",
-    "createdBy": "6f19d772-4716-4523-9910-cb1575512ce6",
-    "lastModifiedBy": "6f19d772-4716-4523-9910-cb1575512ce6"
-}
+          }
+        },
+        "region": "uaenorth",
+        "isVNetEnabled": true,
+        "typeProperties": {
+          "server": "vnetsqlserverpdgbugbash.database.windows.net",
+          "database": "vnettestsqldb"
+        },
+        "computeId": "6f9fa66f-d7c2-4612-9c03-89686bfcfc5e",
+        "targetResourceId": "/subscriptions/07d669d6-83f2-4f15-8b5b-4a4b31a7050e/resourceGroups/pdgbugbash/providers/Microsoft.Sql/servers/vnetsqlserverpdgbugbash",
+        "dataSourceType": "sqlServer",
+        "managePrivateEndPointId": "3f34d22d-c795-49ce-a903-8e122a7fb37d",
+        "managePrivateEndpointStatus": "Approved",
+        "businessDomain": {
+          "type": "BusinessDomainReference",
+          "referenceId": "76be16f9-5cb3-4839-83d6-4e3829a8ab0c"
+        },
+        "createdAt": "2025-11-14T15:20:48.4205756Z",
+        "lastModifiedAt": "2025-11-14T15:20:48.4205756Z",
+        "createdBy": "6f19d772-4716-4523-9910-cb1575512ce6",
+        "lastModifiedBy": "6f19d772-4716-4523-9910-cb1575512ce6"
+      }
     }
   }
 }
