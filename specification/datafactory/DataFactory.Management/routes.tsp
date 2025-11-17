@@ -1,0 +1,60 @@
+// FIXME: Operations in this file are not detected as a resource operation, please confirm the conversion result manually
+
+import "@azure-tools/typespec-azure-core";
+import "@typespec/rest";
+import "./models.tsp";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+
+using TypeSpec.Rest;
+using TypeSpec.Http;
+using Azure.ResourceManager;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.DataFactory;
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+interface FactoriesOperationGroup {
+  /**
+   * Updates a factory's repo information.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Factories_ConfigureFactoryRepo")
+  @autoRoute
+  configureFactoryRepo is ArmProviderActionSync<
+    Request = FactoryRepoUpdate,
+    Response = Factory,
+    Scope = SubscriptionActionScope,
+    Parameters = {
+      /**
+       * The location identifier.
+       */
+      @path
+      @segment("locations")
+      locationId: string;
+    }
+  >;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+interface ExposureControlOperationGroup {
+  /**
+   * Get exposure control feature for specific location.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ExposureControl_GetFeatureValue")
+  @autoRoute
+  getFeatureValue is ArmProviderActionSync<
+    Request = ExposureControlRequest,
+    Response = ExposureControlResponse,
+    Scope = SubscriptionActionScope,
+    Parameters = {
+      /**
+       * The location identifier.
+       */
+      @path
+      @segment("locations")
+      locationId: string;
+    }
+  >;
+}
