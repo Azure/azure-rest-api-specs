@@ -42,11 +42,16 @@ interface ContentUnderstandingClient {
 @@clientName(ObjectField.type, "fieldType");
 @@clientName(StringField.type, "fieldType");
 @@clientName(TimeField.type, "fieldType");
+@@clientName(JsonField.type, "fieldType");
 
 // Rename 'items' to avoid conflict with built-in 'items' method.
 @@clientName(ContentFieldDefinition.items, "itemDefinition");
 
 @@clientName(AnalyzeBinaryRequest.input, "binaryInput");
+
+// Rename 'range' to 'inputRange' for clarity that it specifies input range.
+@@clientName(AnalyzeInput.range, "inputRange");
+@@clientName(AnalyzeBinaryRequest.range, "inputRange");
 
 //@@clientName(ContentFieldDefinition.$ref, "reference", "javascript");
 
