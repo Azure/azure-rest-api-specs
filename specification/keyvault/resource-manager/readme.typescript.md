@@ -10,6 +10,92 @@ typescript:
   azure-arm: true
   generate-metadata: true
   generate-readme-md: true
+
+directive: 
+  - where-operation: ManagedHsms_PurgeDeleted
+    transform: >
+      $.parameters = 
+        [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the deleted managed HSM.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          }
+        ]
+  - where-operation: ManagedHsms_GetDeleted
+    transform: >
+      $.parameters = 
+        [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the deleted managed HSM.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          }
+        ]
+  - where-operation: Vaults_PurgeDeleted
+    transform: >
+      $.parameters = 
+        [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the vault.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+        ]
+  - where-operation: Vaults_GetDeleted
+    transform: >
+      $.parameters = 
+        [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the vault.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          }
+        ]
 ```
 
 ``` yaml $(typescript) && !$(profile-content)

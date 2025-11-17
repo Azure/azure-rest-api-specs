@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "api-version": "2024-08-01",
+    "billingPeriodName": "201807",
+    "managementGroupId": "managementGroupForTest"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "aggregatedcostId1",
+        "type": "Microsoft.Consumption/aggregatedcost",
+        "id": "/providers/Microsoft.Management/managementGroups/managementGroupForTest/providers/Microsoft.Consumption/aggregatedcostId1",
+        "properties": {
+          "azureCharges": 250.9876,
+          "chargesBilledSeparately": 120.345,
+          "children": [
+            {
+              "name": "aggregatedcostId2",
+              "type": "Microsoft.Consumption/aggregatedcost",
+              "id": "/providers/Microsoft.Management/managementGroups/managementGroupChildForTest/providers/Microsoft.Consumption/aggregatedcostId2",
+              "properties": {
+                "azureCharges": 150,
+                "chargesBilledSeparately": 30.345,
+                "children": [],
+                "currency": "USD",
+                "marketplaceCharges": 50.786,
+                "usageEnd": "2018-07-31T00:00:00.0000000Z",
+                "usageStart": "2018-07-01T00:00:00.0000000Z"
+              }
+            }
+          ],
+          "currency": "USD",
+          "marketplaceCharges": 150.786,
+          "usageEnd": "2018-07-31T00:00:00.0000000Z",
+          "usageStart": "2018-07-01T00:00:00.0000000Z"
+        }
+      }
+    }
+  },
+  "operationId": "AggregatedCost_GetForBillingPeriodByManagementGroup",
+  "title": "AggregatedCostListForBillingPeriodByManagementGroup"
+}
