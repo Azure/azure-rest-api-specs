@@ -8157,7 +8157,7 @@
     },
     "KnowledgeBaseActivityRecord": {
       "type": "object",
-      "description": "Base type for activity records.",
+      "description": "Base type for activity records. Tracks execution details, timing, and errors for knowledge base operations.",
       "properties": {
         "id": {
           "type": "integer",
@@ -8165,7 +8165,7 @@
           "description": "The ID of the activity record."
         },
         "type": {
-          "type": "string",
+          "$ref": "#/definitions/KnowledgeBaseActivityRecordType",
           "description": "The type of the activity record."
         },
         "elapsedMs": {
@@ -8183,6 +8183,72 @@
         "id",
         "type"
       ]
+    },
+    "KnowledgeBaseActivityRecordType": {
+      "type": "string",
+      "description": "The type of activity record.",
+      "enum": [
+        "searchIndex",
+        "azureBlob",
+        "indexedSharePoint",
+        "indexedOneLake",
+        "web",
+        "remoteSharePoint",
+        "modelQueryPlanning",
+        "modelAnswerSynthesis",
+        "agenticReasoning"
+      ],
+      "x-ms-enum": {
+        "name": "KnowledgeBaseActivityRecordType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "searchIndex",
+            "value": "searchIndex",
+            "description": "Search index retrieval activity."
+          },
+          {
+            "name": "azureBlob",
+            "value": "azureBlob",
+            "description": "Azure Blob retrieval activity."
+          },
+          {
+            "name": "indexedSharePoint",
+            "value": "indexedSharePoint",
+            "description": "Indexed SharePoint retrieval activity."
+          },
+          {
+            "name": "indexedOneLake",
+            "value": "indexedOneLake",
+            "description": "Indexed OneLake retrieval activity."
+          },
+          {
+            "name": "web",
+            "value": "web",
+            "description": "Web retrieval activity."
+          },
+          {
+            "name": "remoteSharePoint",
+            "value": "remoteSharePoint",
+            "description": "Remote SharePoint retrieval activity."
+          },
+          {
+            "name": "modelQueryPlanning",
+            "value": "modelQueryPlanning",
+            "description": "LLM query planning activity."
+          },
+          {
+            "name": "modelAnswerSynthesis",
+            "value": "modelAnswerSynthesis",
+            "description": "LLM answer synthesis activity."
+          },
+          {
+            "name": "agenticReasoning",
+            "value": "agenticReasoning",
+            "description": "Agentic reasoning activity."
+          }
+        ]
+      }
     },
     "KnowledgeBaseAgenticReasoningActivityRecord": {
       "type": "object",
@@ -8590,7 +8656,7 @@
       "description": "Base type for references.",
       "properties": {
         "type": {
-          "type": "string",
+          "$ref": "#/definitions/KnowledgeBaseReferenceType",
           "description": "The type of the reference."
         },
         "id": {
@@ -8621,6 +8687,54 @@
         "id",
         "activitySource"
       ]
+    },
+    "KnowledgeBaseReferenceType": {
+      "type": "string",
+      "description": "The type of reference.",
+      "enum": [
+        "searchIndex",
+        "azureBlob",
+        "indexedSharePoint",
+        "indexedOneLake",
+        "web",
+        "remoteSharePoint"
+      ],
+      "x-ms-enum": {
+        "name": "KnowledgeBaseReferenceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "searchIndex",
+            "value": "searchIndex",
+            "description": "Search index document reference."
+          },
+          {
+            "name": "azureBlob",
+            "value": "azureBlob",
+            "description": "Azure Blob document reference."
+          },
+          {
+            "name": "indexedSharePoint",
+            "value": "indexedSharePoint",
+            "description": "Indexed SharePoint document reference."
+          },
+          {
+            "name": "indexedOneLake",
+            "value": "indexedOneLake",
+            "description": "Indexed OneLake document reference."
+          },
+          {
+            "name": "web",
+            "value": "web",
+            "description": "Web document reference."
+          },
+          {
+            "name": "remoteSharePoint",
+            "value": "remoteSharePoint",
+            "description": "Remote SharePoint document reference."
+          }
+        ]
+      }
     },
     "KnowledgeBaseRemoteSharePointActivityArguments": {
       "type": "object",

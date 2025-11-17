@@ -281,15 +281,46 @@ model KnowledgeBaseImageContent {
   url: url;
 }
 
-@doc("Base type for activity records.")
+@doc("The type of activity record.")
+union KnowledgeBaseActivityRecordType {
+  string,
+
+  @doc("Search index retrieval activity.")
+  searchIndex: "searchIndex",
+
+  @doc("Azure Blob retrieval activity.")
+  azureBlob: "azureBlob",
+
+  @doc("Indexed SharePoint retrieval activity.")
+  indexedSharePoint: "indexedSharePoint",
+
+  @doc("Indexed OneLake retrieval activity.")
+  indexedOneLake: "indexedOneLake",
+
+  @doc("Web retrieval activity.")
+  web: "web",
+
+  @doc("Remote SharePoint retrieval activity.")
+  remoteSharePoint: "remoteSharePoint",
+
+  @doc("LLM query planning activity.")
+  modelQueryPlanning: "modelQueryPlanning",
+
+  @doc("LLM answer synthesis activity.")
+  modelAnswerSynthesis: "modelAnswerSynthesis",
+
+  @doc("Agentic reasoning activity.")
+  agenticReasoning: "agenticReasoning",
+}
+
+@doc("Base type for activity records. Tracks execution details, timing, and errors for knowledge base operations.")
 @discriminator("type")
 model KnowledgeBaseActivityRecord {
   @doc("The ID of the activity record.")
   id: int32;
 
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   @doc("The type of the activity record.")
-  type: string;
+  type: KnowledgeBaseActivityRecordType;
 
   @doc("The elapsed time in milliseconds for the retrieval activity.")
   elapsedMs?: int32;
@@ -298,7 +329,7 @@ model KnowledgeBaseActivityRecord {
   error?: KnowledgeBaseErrorDetail;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Inherits typed discriminator from base"
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
 @doc("Represents a retrieval activity record.")
 @discriminator("type")
@@ -314,12 +345,11 @@ model KnowledgeBaseRetrievalActivityRecord extends KnowledgeBaseActivityRecord {
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
-#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
 @doc("Represents a search index retrieval activity record.")
 model KnowledgeBaseSearchIndexActivityRecord
   extends KnowledgeBaseRetrievalActivityRecord {
   @doc("The discriminator value.")
-  type: "searchIndex";
+  type: KnowledgeBaseActivityRecordType.searchIndex;
 
   @doc("The search index arguments for the retrieval activity.")
   searchIndexArguments?: KnowledgeBaseSearchIndexActivityArguments;
@@ -335,12 +365,11 @@ model KnowledgeBaseSearchIndexActivityArguments {
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
-#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
 @doc("Represents a azure blob retrieval activity record.")
 model KnowledgeBaseAzureBlobActivityRecord
   extends KnowledgeBaseRetrievalActivityRecord {
   @doc("The discriminator value.")
-  type: "azureBlob";
+  type: KnowledgeBaseActivityRecordType.azureBlob;
 
   @doc("The azure blob arguments for the retrieval activity.")
   azureBlobArguments?: KnowledgeBaseAzureBlobActivityArguments;
@@ -353,12 +382,11 @@ model KnowledgeBaseAzureBlobActivityArguments {
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
-#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
 @doc("Represents a indexed SharePoint retrieval activity record.")
 model KnowledgeBaseIndexedSharePointActivityRecord
   extends KnowledgeBaseRetrievalActivityRecord {
   @doc("The discriminator value.")
-  type: "indexedSharePoint";
+  type: KnowledgeBaseActivityRecordType.indexedSharePoint;
 
   @doc("The indexed SharePoint arguments for the retrieval activity.")
   indexedSharePointArguments?: KnowledgeBaseIndexedSharePointActivityArguments;
@@ -371,12 +399,11 @@ model KnowledgeBaseIndexedSharePointActivityArguments {
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
-#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
 @doc("Represents a indexed OneLake retrieval activity record.")
 model KnowledgeBaseIndexedOneLakeActivityRecord
   extends KnowledgeBaseRetrievalActivityRecord {
   @doc("The discriminator value.")
-  type: "indexedOneLake";
+  type: KnowledgeBaseActivityRecordType.indexedOneLake;
 
   @doc("The indexed OneLake arguments for the retrieval activity.")
   indexedOneLakeArguments?: KnowledgeBaseIndexedOneLakeActivityArguments;
@@ -389,12 +416,11 @@ model KnowledgeBaseIndexedOneLakeActivityArguments {
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
-#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
 @doc("Represents a web retrieval activity record.")
 model KnowledgeBaseWebActivityRecord
   extends KnowledgeBaseRetrievalActivityRecord {
   @doc("The discriminator value.")
-  type: "web";
+  type: KnowledgeBaseActivityRecordType.web;
 
   @doc("The web arguments for the retrieval activity.")
   webArguments?: KnowledgeBaseWebActivityArguments;
@@ -419,12 +445,11 @@ model KnowledgeBaseWebActivityArguments {
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
-#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
 @doc("Represents a remote SharePoint retrieval activity record.")
 model KnowledgeBaseRemoteSharePointActivityRecord
   extends KnowledgeBaseRetrievalActivityRecord {
   @doc("The discriminator value.")
-  type: "remoteSharePoint";
+  type: KnowledgeBaseActivityRecordType.remoteSharePoint;
 
   @doc("The remote SharePoint arguments for the retrieval activity.")
   remoteSharePointArguments?: KnowledgeBaseRemoteSharePointActivityArguments;
@@ -440,12 +465,11 @@ model KnowledgeBaseRemoteSharePointActivityArguments {
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
-#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
 @doc("Represents an LLM query planning activity record.")
 model KnowledgeBaseModelQueryPlanningActivityRecord
   extends KnowledgeBaseActivityRecord {
   @doc("The discriminator value.")
-  type: "modelQueryPlanning";
+  type: KnowledgeBaseActivityRecordType.modelQueryPlanning;
 
   @doc("The number of input tokens for the LLM query planning activity.")
   inputTokens?: int32;
@@ -455,12 +479,11 @@ model KnowledgeBaseModelQueryPlanningActivityRecord
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
-#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
 @doc("Represents an LLM answer synthesis activity record.")
 model KnowledgeBaseModelAnswerSynthesisActivityRecord
   extends KnowledgeBaseActivityRecord {
   @doc("The discriminator value.")
-  type: "modelAnswerSynthesis";
+  type: KnowledgeBaseActivityRecordType.modelAnswerSynthesis;
 
   @doc("The number of input tokens for the LLM answer synthesis activity.")
   inputTokens?: int32;
@@ -470,12 +493,11 @@ model KnowledgeBaseModelAnswerSynthesisActivityRecord
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
-#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
 @doc("Represents an agentic reasoning activity record.")
 model KnowledgeBaseAgenticReasoningActivityRecord
   extends KnowledgeBaseActivityRecord {
   @doc("The discriminator value.")
-  type: "agenticReasoning";
+  type: KnowledgeBaseActivityRecordType.agenticReasoning;
 
   @doc("The number of input tokens for agentic reasoning.")
   reasoningTokens?: int32;
@@ -484,13 +506,34 @@ model KnowledgeBaseAgenticReasoningActivityRecord
   retrievalReasoningEffort?: KnowledgeRetrievalReasoningEffort;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
+@doc("The type of reference.")
+union KnowledgeBaseReferenceType {
+  string,
+
+  @doc("Search index document reference.")
+  searchIndex: "searchIndex",
+
+  @doc("Azure Blob document reference.")
+  azureBlob: "azureBlob",
+
+  @doc("Indexed SharePoint document reference.")
+  indexedSharePoint: "indexedSharePoint",
+
+  @doc("Indexed OneLake document reference.")
+  indexedOneLake: "indexedOneLake",
+
+  @doc("Web document reference.")
+  web: "web",
+
+  @doc("Remote SharePoint document reference.")
+  remoteSharePoint: "remoteSharePoint",
+}
+
 @doc("Base type for references.")
 @discriminator("type")
 model KnowledgeBaseReference {
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   @doc("The type of the reference.")
-  type: string;
+  type: KnowledgeBaseReferenceType;
 
   @doc("The ID of the reference.")
   id: string;
@@ -506,55 +549,50 @@ model KnowledgeBaseReference {
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
-#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
 @doc("Represents an Azure Search document reference.")
 model KnowledgeBaseSearchIndexReference extends KnowledgeBaseReference {
   @doc("The discriminator value.")
-  type: "searchIndex";
+  type: KnowledgeBaseReferenceType.searchIndex;
 
   @doc("The document key for the reference.")
   docKey?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
-#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
 @doc("Represents an Azure Blob Storage document reference.")
 model KnowledgeBaseAzureBlobReference extends KnowledgeBaseReference {
   @doc("The discriminator value.")
-  type: "azureBlob";
+  type: KnowledgeBaseReferenceType.azureBlob;
 
   @doc("The blob URL for the reference.")
   blobUrl?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
-#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
 @doc("Represents an indexed SharePoint document reference.")
 model KnowledgeBaseIndexedSharePointReference extends KnowledgeBaseReference {
   @doc("The discriminator value.")
-  type: "indexedSharePoint";
+  type: KnowledgeBaseReferenceType.indexedSharePoint;
 
   @doc("The document URL for the reference.")
   docUrl?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
-#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
 @doc("Represents an indexed OneLake document reference.")
 model KnowledgeBaseIndexedOneLakeReference extends KnowledgeBaseReference {
   @doc("The discriminator value.")
-  type: "indexedOneLake";
+  type: KnowledgeBaseReferenceType.indexedOneLake;
 
   @doc("The document URL for the reference.")
   docUrl?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
-#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
 @doc("Represents a web document reference.")
 model KnowledgeBaseWebReference extends KnowledgeBaseReference {
   @doc("The discriminator value.")
-  type: "web";
+  type: KnowledgeBaseReferenceType.web;
 
   @doc("The url the reference data originated from.")
   url: url;
@@ -564,11 +602,10 @@ model KnowledgeBaseWebReference extends KnowledgeBaseReference {
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
-#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
 @doc("Represents a remote SharePoint document reference.")
 model KnowledgeBaseRemoteSharePointReference extends KnowledgeBaseReference {
   @doc("The discriminator value.")
-  type: "remoteSharePoint";
+  type: KnowledgeBaseReferenceType.remoteSharePoint;
 
   @doc("The url the reference data originated from.")
   webUrl: url;
