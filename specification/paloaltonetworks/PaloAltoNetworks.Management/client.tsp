@@ -326,3 +326,14 @@ using PaloAltoNetworks.Cloudngfw;
   "csharp"
 );
 // @@usage(FirewallStatusResource, Usage.input, "csharp");
+@@clientName(EnabledDNSType, "EnabledDnsType", "java");
+
+// POST nextlink
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "POST nextlink"
+@@Legacy.nextLinkVerb(LocalRulestackResources.listAppIds, "POST", "go");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "POST nextlink"
+@@Legacy.nextLinkVerb(LocalRulestackResources.listCountries, "POST", "go");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "POST nextlink"
+@@Legacy.nextLinkVerb(LocalRulestackResources.listPredefinedUrlCategories,
+  "POST", "go"
+);
