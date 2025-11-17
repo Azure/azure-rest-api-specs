@@ -7,15 +7,24 @@ Configuration for generating Document Translation  SDK.
 ### Basic Information
 
 These are the global settings for the app.
-The current release is `package-2024-11-01-preview`.
+The current release is `package-2025-12-01-preview`.
 
 ``` yaml
-tag: package-2024-11-01-preview
+tag: package-2025-12-01-preview
 add-credentials: true
 openapi-type: data-plane
 ```
 
 # Releases
+
+### Release 2025-12-01-preview
+These settings apply only when `--tag=package-2025-12-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-12-01-preview'
+version: 2025-12-01-preview
+input-file:
+  - preview/2025-12-01-preview/openapi.json
+```
 
 ### Release 2024-11-01-preview
 These settings apply only when `--tag=package-2024-11-01-preview` is specified on the command line.
