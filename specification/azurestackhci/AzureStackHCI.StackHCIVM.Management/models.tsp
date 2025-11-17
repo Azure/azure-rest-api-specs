@@ -1520,7 +1520,7 @@ model NatGatewayProperties {
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "NAT is a short form. The casing is correct."
   @doc("List of inbound NAT rules. InboundNATRules can only be set after the NAT Gateway has been associated with a vnet")
-  @extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   inboundNATRules?: InboundNATRule[];
 
   @doc("Provisioning state of the public IP")
