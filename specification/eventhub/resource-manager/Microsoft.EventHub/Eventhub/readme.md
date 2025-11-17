@@ -325,6 +325,9 @@ directive:
   - suppress: LroErrorContent
     from: namespaces.json
     reason: Suppress it for now to avoid breaking change because it is referenced by many files. 
+  - suppress: LroErrorContent
+    from: openapi.json
+    reason: Suppress it for now to avoid breaking change because it is referenced by many files. 
 
   - suppress: LroLocationHeader
     from: Clusters-preview.json
