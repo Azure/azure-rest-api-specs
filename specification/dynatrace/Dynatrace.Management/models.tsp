@@ -623,7 +623,7 @@ model SreAgentConnectorRequest {
   /**
    * The list of ARM resource ID of the MCP connector integrated with SRE Agent resource.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["mcpConnectorResourceId"])
+  @Azure.ResourceManager.identifiers(#["mcpConnectorResourceId"])
   mcpConnectorResourceIdList: SreAgentConfiguration[];
 
   /**
@@ -697,7 +697,7 @@ model MonitorProperties {
   /**
    * SRE Agent configuration to connect to MCP server of Dynatrace for given environment.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["mcpConnectorResourceId"])
+  @Azure.ResourceManager.identifiers(#["mcpConnectorResourceId"])
   @added(Dynatrace.Observability.Versions.v2025_11_03_preview)
   @visibility(Lifecycle.Update)
   sreAgentConfiguration?: SreAgentConfiguration[];
