@@ -1899,10 +1899,10 @@ model GalleryScriptProperties {
 @added(Versions.v2025_03_03)
 model GalleryScriptUpdate extends UpdateResourceDefinition {
   /**
-   * Describes the properties of a gallery script definition.
+   * Gallery script definition properties to update.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: GalleryScriptProperties;
 }
 
@@ -2032,10 +2032,10 @@ model GenericGalleryParameter {
 @added(Versions.v2025_03_03)
 model GalleryScriptVersionUpdate extends UpdateResourceDefinition {
   /**
-   * Describes the properties of a gallery script version.
+   * Gallery script version properties to update.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: GalleryScriptVersionProperties;
 }
 
