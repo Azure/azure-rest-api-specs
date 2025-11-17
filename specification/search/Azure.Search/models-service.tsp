@@ -3390,6 +3390,9 @@ model SearchIndexerStatus {
   @doc("Overall indexer status.")
   status: IndexerStatus;
 
+  @doc("The indexer's cumulative runtime consumption in the service.")
+  runtime?: IndexerRuntime;
+
   @doc("The result of the most recent or an in-progress indexer execution.")
   lastResult?: IndexerExecutionResult;
 
@@ -3398,6 +3401,9 @@ model SearchIndexerStatus {
 
   @doc("The execution limits for the indexer.")
   limits: SearchIndexerLimits;
+
+  @doc("All of the state that defines and dictates the indexer's current execution.")
+  currentState?: IndexerCurrentState;
 }
 
 @doc("Represents the result of an individual indexer execution.")
@@ -3838,6 +3844,9 @@ model SearchIndex {
   @doc("A value indicating whether permission filtering is enabled for the index.")
   permissionFilterOption?: SearchIndexPermissionFilterOption;
 
+  @doc("A value indicating whether Purview is enabled for the index.")
+  purviewEnabled?: boolean;
+
   @doc("The ETag of the index.")
   @encodedName("application/json", "@odata.etag")
   eTag?: string;
@@ -3874,6 +3883,9 @@ model SearchField {
 
   @doc("A value indicating whether the field should be used as a permission filter.")
   permissionFilter?: PermissionFilter;
+
+  @doc("A value indicating whether the field contains sensitivity label information.")
+  sensitivityLabel?: boolean;
 
   @doc("The name of the analyzer to use for the field. This option can be used only with searchable fields and it can't be set together with either searchAnalyzer or indexAnalyzer. Once the analyzer is chosen, it cannot be changed for the field. Must be null for complex fields.")
   analyzer?: LexicalAnalyzerName;
