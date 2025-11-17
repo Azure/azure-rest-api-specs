@@ -330,10 +330,11 @@ using PaloAltoNetworks.Cloudngfw;
 
 // POST nextlink
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "POST nextlink"
-@@Legacy.nextLinkVerb(LocalRulestackResources.listAppIds, "POST", "go");
+@@Legacy.nextLinkVerb(LocalRulestackResources.listAppIds, "POST", "go,java");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "POST nextlink"
-@@Legacy.nextLinkVerb(LocalRulestackResources.listCountries, "POST", "go");
+@@Legacy.nextLinkVerb(LocalRulestackResources.listCountries, "POST", "go,java");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "POST nextlink"
 @@Legacy.nextLinkVerb(LocalRulestackResources.listPredefinedUrlCategories,
-  "POST", "go"
+  "POST",
+  "go,java"
 );
