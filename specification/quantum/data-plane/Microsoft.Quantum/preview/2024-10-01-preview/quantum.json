@@ -17,13 +17,14 @@
     "https"
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "{url}",
+    "hostTemplate": "{endpoint}",
     "useSchemePrefix": false,
     "parameters": [
       {
-        "name": "url",
+        "name": "endpoint",
         "in": "path",
-        "description": "Url",
+        "description": "The endpoint of the Azure Quantum service. For example, https://{region}.quantum.azure.com",
+        "required": true,
         "type": "string",
         "format": "uri",
         "x-ms-skip-url-encoding": true
