@@ -39,6 +39,17 @@ modelerfour:
   lenient-model-deduplication: true
 ```
 
+### Suppression
+
+``` yaml
+directive:
+  - suppress: IntegerTypeMustHaveFormat
+    reason: Data-plane specs can suppress violations of this rule, since it only exists for the benefit of SDKs generated from swagger, and data-plane SDKs are generated directly from TypeSpec (https://github.com/Azure/azure-rest-api-specs/wiki/Swagger-LintDiff#integertypemusthaveformat).
+
+  - suppress: OperationIdNounVerb
+    reason: Fixing this risks introducing breaking changes.
+```
+
 ### Tag: package-stable-2025-01-01
 
 These settings apply only when `--tag=package-stable-2025-01-01` is specified on the command line.
@@ -65,32 +76,6 @@ suppressions:
     reason: False alarm. Per the Noun_Verb convention for Operation Ids, the noun 'Route' should not appear after the underscore.
 ```
 
-### Tag: package-retired-2024-06-01-preview
-
-These settings apply only when `--tag=package-2024-06-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2024-06-01-preview'
-input-file:
-  - preview/2024-06-01-preview/route.json
-  
-suppressions:
-  - code: OperationIdNounVerb
-    reason: False alarm. Per the Noun_Verb convention for Operation Ids, the noun 'Route' should not appear after the underscore.
-```
-
-### Tag: package-retired-2024-05-01-preview
-
-These settings apply only when `--tag=package-2024-05-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2024-05-01-preview'
-input-file:
-  - preview/2024-05-01-preview/route.json
-
-suppressions:
-  - code: OperationIdNounVerb
-    reason: False alarm. Per the Noun_Verb convention for Operation Ids, the noun 'Route' should not appear after the underscore.
-```
-
 ### Tag: package-2024-04-01-preview
 
 These settings apply only when `--tag=package-2024-04-01-preview` is specified on the command line.
@@ -100,31 +85,11 @@ input-file:
   - preview/2024-04-01-preview/route.json
 ```
 
-### Tag: package-retired-2023-10-01-preview
+These settings apply only when `--tag=package-2023-10-01-preview` is specified on the command line.
 
-These settings apply only when `--tag=package-retired-2023-10-01-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-retired-2023-10-01-preview'
+```yaml $(tag) == 'package-2023-10-01-preview'
 input-file:
   - preview/2023-10-01-preview/route.json
-```
-
-### Tag: package-retired-2023-09-01-preview
-
-These settings apply only when `--tag=package-retired-2023-09-01-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-retired-2023-09-01-preview'
-input-file:
-  - preview/2023-09-01-preview/route.json
-```
-
-### Tag: package-retired-2023-08-01-preview
-
-These settings apply only when `--tag=package-retired-2023-08-01-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-retired-2023-08-01-preview'
-input-file:
-  - preview/2023-08-01-preview/route.json
 ```
 
 ### Tag: package-stable-deprecated-1.0
@@ -133,7 +98,7 @@ These settings apply only when `--tag=package-stable-deprecated-1.0` is specifie
 
 ``` yaml $(tag) == 'package-stable-deprecated-1.0'
 input-file:
-  - preview/1.0/route.json
+  - stable/1.0/route.json
 ```
 
 # Code Generation

@@ -1,14 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-client-generator-core";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
-using Azure.Core;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.DataProtection;
 
@@ -610,7 +608,7 @@ model BackupVault {
   /**
    * Storage Settings
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   storageSettings: StorageSetting[];
 
   /**
@@ -870,7 +868,63 @@ model DppIdentityDetails {
    * Gets or sets the user assigned identities.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  userAssignedIdentities?: Record<UserAssignedIdentity>;
+  userAssignedIdentities?: Record<Azure.ResourceManager.Foundations.UserAssignedIdentity>;
+}
+
+/**
+ * Deletion info for a tracked resource (Backup Vault)
+ */
+@added(Versions.v2025_09_01)
+model ResourceDeletionInfo {
+  /**
+   * Specifies time of deletion for the tracked resource (Backup Vault)
+   */
+  @visibility(Lifecycle.Read)
+  deletionTime?: utcDateTime;
+
+  /**
+   * Specifies the scheduled purge time for the tracked resource (Backup Vault)
+   */
+  @visibility(Lifecycle.Read)
+  scheduledPurgeTime?: utcDateTime;
+
+  /**
+   * Delete activity ID for troubleshooting the deletion of the tracked resource
+   */
+  @visibility(Lifecycle.Read)
+  deleteActivityId?: string;
+}
+
+/**
+ * Deleted Backup Vault - uses composition with BackupVault and additional deletion metadata
+ */
+@added(Versions.v2025_09_01)
+model DeletedBackupVault {
+  ...BackupVault;
+
+  /**
+   * Resource Id of the original backup vault
+   */
+  @visibility(Lifecycle.Read)
+  originalBackupVaultId: string;
+
+  /**
+   * Resource name of the original backup vault
+   */
+  @visibility(Lifecycle.Read)
+  originalBackupVaultName: string;
+
+  /**
+   * Resource path of the original backup vault
+   */
+  @visibility(Lifecycle.Read)
+  originalBackupVaultResourcePath: string;
+
+  /**
+   * Deletion info for the tracked resource (Backup Vault)
+   */
+  @visibility(Lifecycle.Read)
+  resourceDeletionInfo: ResourceDeletionInfo;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -913,7 +967,7 @@ model DppBaseTrackedResource {
    * Metadata pertaining to creation and last modification of the resource.
    */
   @visibility(Lifecycle.Read)
-  systemData?: SystemData;
+  systemData?: Azure.ResourceManager.Foundations.SystemData;
 }
 
 /**
@@ -946,8 +1000,8 @@ model Error {
    * The error additional info.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
-  additionalInfo?: ErrorAdditionalInfo[];
+  @identifiers(#[])
+  additionalInfo?: Azure.ResourceManager.Foundations.ErrorAdditionalInfo[];
 
   /**
    * The error code.
@@ -959,7 +1013,7 @@ model Error {
    * The error details.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   details?: Error[];
 
   /**
@@ -1220,7 +1274,7 @@ model ClientDiscoveryForServiceSpecification {
   /**
    * List of log specifications of this operation.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   logSpecifications?: ClientDiscoveryForLogSpecification[];
 }
 
@@ -1298,7 +1352,7 @@ model DppResource {
    * Metadata pertaining to creation and last modification of the resource.
    */
   @visibility(Lifecycle.Read)
-  systemData?: SystemData;
+  systemData?: Azure.ResourceManager.Foundations.SystemData;
 }
 
 /**
@@ -1514,13 +1568,13 @@ model PolicyParameters {
   /**
    * Gets or sets the DataStore Parameters
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   dataStoreParametersList?: DataStoreParameters[];
 
   /**
    * Gets or sets the Backup Data Source Parameters
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   backupDatasourceParametersList?: BackupDatasourceParameters[];
 }
 
@@ -1580,7 +1634,7 @@ model UserFacingError {
   /**
    * Additional related Errors
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   details?: UserFacingError[];
 
   /**
@@ -1694,7 +1748,7 @@ model DppProxyResource {
    * Metadata pertaining to creation and last modification of the resource.
    */
   @visibility(Lifecycle.Read)
-  systemData?: SystemData;
+  systemData?: Azure.ResourceManager.Foundations.SystemData;
 }
 
 /**
@@ -1962,7 +2016,7 @@ model AzureBackupJob {
    * A List, detailing the errors related to the job
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   errorDetails?: UserFacingError[];
 
   /**
@@ -2104,7 +2158,7 @@ model JobExtendedInfo {
    * List of Sub Tasks of the job
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   subTasks?: JobSubTask[];
 
   /**
@@ -2117,7 +2171,7 @@ model JobExtendedInfo {
    * A List, detailing the warnings related to the job
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   warningDetails?: UserFacingWarningDetail[];
 }
 
@@ -2299,7 +2353,7 @@ model AzureBackupFindRestorableTimeRangesResponse {
   /**
    * Returns the Restore Ranges available on the Backup Instance.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   restorableTimeRanges?: RestorableTimeRange[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -2335,6 +2389,7 @@ model ExportJobsResult {
   /**
    * SAS key to access the blob.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @visibility(Lifecycle.Read)
   blobSasKey?: string;
 
@@ -2347,6 +2402,7 @@ model ExportJobsResult {
   /**
    * SAS key to access the ExcelFile blob.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @visibility(Lifecycle.Read)
   excelFileBlobSasKey?: string;
 }
@@ -2436,7 +2492,7 @@ model ResourceGuard {
    * {readonly} List of operation details those are protected by the ResourceGuard resource
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   resourceGuardOperations?: ResourceGuardOperation[];
 
   /**
@@ -2514,7 +2570,7 @@ model ResourceGuardProxyBase {
   resourceGuardResourceId?: string;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   resourceGuardOperationDetails?: ResourceGuardOperationDetail[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -2957,7 +3013,7 @@ model KubernetesClusterBackupDatasourceParameters
   /**
    * Gets or sets the backup hook references. This property sets the hook reference to be executed during backup.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   backupHookReferences?: NamespacedNameResource[];
 
   /**
@@ -3022,7 +3078,7 @@ model AzureRetentionRule extends BasePolicyRule {
   isDefault?: boolean;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   lifecycles: SourceLifeCycle[];
 
   objectType: "AzureRetentionRule";
@@ -3043,7 +3099,7 @@ model SourceLifeCycle {
   sourceDataStore: DataStoreInfoBase;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   targetDataStoreCopySettings?: TargetCopySetting[];
 }
 
@@ -3093,7 +3149,7 @@ model BackupPolicy extends BaseBackupPolicy {
   /**
    * Policy rule dictionary that contains rules for each backuptype i.e Full/Incremental/Logs etc
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   policyRules: BasePolicyRule[];
 
   objectType: "BackupPolicy";
@@ -3196,7 +3252,7 @@ model FeatureValidationResponse extends FeatureValidationResponseBase {
   /**
    * Response features
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   features?: SupportedFeature[];
 
   /**
@@ -3254,7 +3310,7 @@ model ItemLevelRestoreTargetInfo extends RestoreTargetInfoBase {
   /**
    * Restore Criteria
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   restoreCriteria: ItemLevelRestoreCriteria[];
 
   /**
@@ -3423,7 +3479,7 @@ model KubernetesClusterRestoreCriteria extends ItemLevelRestoreCriteria {
   /**
    * Gets or sets the restore hook references. This property sets the hook reference to be executed during restore.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   restoreHookReferences?: NamespacedNameResource[];
 
   /**
@@ -3491,7 +3547,7 @@ model KubernetesClusterVaultTierRestoreCriteria
   /**
    * Gets or sets the restore hook references. This property sets the hook reference to be executed during restore from vault.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   restoreHookReferences?: NamespacedNameResource[];
 
   /**
@@ -3601,7 +3657,7 @@ model ScheduleBasedBackupCriteria extends BackupCriteria {
   /**
    * This is day of the month from 1 to 28 other wise last of month
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   daysOfMonth?: Day[];
 
   /**
@@ -3642,7 +3698,7 @@ model ScheduleBasedTriggerContext extends TriggerContext {
   /**
    * List of tags that can be applicable for given schedule.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   taggingCriteria: TaggingCriteria[];
 
   /**
@@ -3658,7 +3714,7 @@ model TaggingCriteria {
   /**
    * Criteria which decides whether the tag can be applied to a triggered backup.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   criteria?: BackupCriteria[];
 
   /**

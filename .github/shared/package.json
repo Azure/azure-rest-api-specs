@@ -37,8 +37,9 @@
     "@apidevtools/json-schema-ref-parser": "^14.2.1",
     "debug": "^4.4.3",
     "js-yaml": "^4.1.0",
-    "marked": "^16.3.0",
-    "simple-git": "^3.27.0"
+    "marked": "^17.0.0",
+    "simple-git": "^3.27.0",
+    "zod": "^4.1.11"
   },
   "devDependencies": {
     "@eslint/js": "^9.22.0",
@@ -46,17 +47,20 @@
     "@types/debug": "^4.1.12",
     "@types/js-yaml": "^4.0.9",
     "@types/node": "^20.0.0",
-    "@vitest/coverage-v8": "^3.1.2",
-    "cross-env": "^7.0.3",
+    "@types/semver": "^7.7.1",
+    "@vitest/coverage-v8": "^3.2.4",
+    "cross-env": "^10.1.0",
     "eslint": "^9.22.0",
     "globals": "^16.0.0",
     "prettier": "~3.6.2",
     "prettier-plugin-organize-imports": "^4.2.0",
     "semver": "^7.7.1",
-    "typescript": "~5.8.2",
-    "vitest": "^3.1.2"
+    "typescript": "~5.9.2",
+    "typescript-eslint": "^8.45.0",
+    "vitest": "^3.2.4"
   },
   "scripts": {
+    "check": "npm run lint && npm run format:check && npm run test:ci",
     "lint": "npm run lint:eslint && npm run lint:tsc",
     "lint:eslint": "cross-env DEBUG=eslint:eslint eslint",
     "lint:tsc": "tsc --build --verbose",

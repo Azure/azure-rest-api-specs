@@ -2,8 +2,6 @@
   Definitions of elements defined for OTLP receiver.
 */
 
-using OpenAPI;
-
 namespace Microsoft.Monitor;
 
 @doc("OTLP Receiver.")

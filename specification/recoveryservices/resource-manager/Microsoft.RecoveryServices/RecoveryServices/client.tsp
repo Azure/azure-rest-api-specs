@@ -167,3 +167,8 @@ namespace Microsoft.RecoveryServices;
 @@clientName(IdentityType, "RecoveryServicesIdentityType", "csharp");
 @@clientName(State, "RecoveryServicesSourceScanState", "csharp");
 @@clientName(Microsoft.RecoveryServices, "RecoveryServicesClient", "python");
+
+// Java SDK backward compatibility fixes
+@@clientName(BCDRSecurityLevel, "BcdrSecurityLevel", "java");
+@@clientName(DNSZone, "DnsZone", "java");
+@@clientName(DNSZoneResponse, "DnsZoneResponse", "java");

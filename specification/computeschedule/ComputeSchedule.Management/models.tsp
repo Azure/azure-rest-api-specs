@@ -9,7 +9,6 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.ComputeSchedule;
 
@@ -439,7 +438,7 @@ model CreateResourceOperationResponse {
   @visibility(Lifecycle.Read, Lifecycle.Create)
   location: azureLocation;
 
-  @extension("x-ms-identifiers", #["resourceId"])
+  @identifiers(#["resourceId"])
   @doc("The results from the start request if no errors exist")
   results?: Array<ResourceOperation>;
 }
@@ -457,7 +456,7 @@ model DeleteResourceOperationResponse {
   @visibility(Lifecycle.Read, Lifecycle.Create)
   location: azureLocation;
 
-  @extension("x-ms-identifiers", #["resourceId"])
+  @identifiers(#["resourceId"])
   @doc("The results from the start request if no errors exist")
   results?: Array<ResourceOperation>;
 }

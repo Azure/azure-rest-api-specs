@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { REVIEW_REQUIRED_LABELS } from "../../shared/src/breaking-change.js";
 import { PER_PAGE_MAX } from "../../shared/src/github.js";
-import getLabelActions, {
+import getLabelActionsImpl, {
   CROSS_VERSION_BREAKING_CHANGE_WORKFLOW_NAME,
   SWAGGER_BREAKING_CHANGE_WORKFLOW_NAME,
 } from "../src/breaking-change-add-label-artifacts.js";
@@ -12,10 +12,19 @@ vi.mock("../src/context.js", () => ({
   extractInputs: vi.fn(),
 }));
 
+/**
+ * @param {Partial<import("@actions/github-script").AsyncFunctionArguments>} asyncFunctionArgs
+ */
+function getLabelActions(asyncFunctionArgs) {
+  return getLabelActionsImpl(
+    /** @type {import("@actions/github-script").AsyncFunctionArguments} */ (asyncFunctionArgs),
+  );
+}
+
 describe("breaking-change-add-label-artifacts", () => {
-  let mockGithub;
-  let mockContext;
-  let mockCore;
+  /** @type {ReturnType<typeof createMockGithub>} */ let mockGithub;
+  /** @type {ReturnType<typeof createMockContext>} */ let mockContext;
+  /** @type {ReturnType<typeof createMockCore>} */ let mockCore;
 
   beforeEach(() => {
     // Reset all mocks before each test
@@ -35,9 +44,9 @@ describe("breaking-change-add-label-artifacts", () => {
   };
 
   const createMockWorkflowRun = (
-    name,
+    /** @type {string} */ name,
     status = "completed",
-    conclusion = "success",
+    /** @type {string|null} */ conclusion = "success",
     id = 1,
     updated_at = "2024-01-01T12:00:00Z",
   ) => ({
@@ -48,21 +57,26 @@ describe("breaking-change-add-label-artifacts", () => {
     updated_at,
   });
 
-  const createMockArtifact = (name) => ({ name });
+  const createMockArtifact = (/** @type {string} */ name) => ({ name });
 
   // Shared setup helpers
   const setupMockInputs = async () => {
     const { extractInputs } = await import("../src/context.js");
-    extractInputs.mockResolvedValue(mockInputs);
+    /** @type {import("vitest").Mock} */ (extractInputs).mockResolvedValue(mockInputs);
   };
 
-  const setupWorkflowRunsMock = (workflowRuns) => {
+  const setupWorkflowRunsMock = (
+    /** @type {{ id: number; name: string; status: string; conclusion: string | null; updated_at: string; }[]} */ workflowRuns,
+  ) => {
     mockGithub.rest.actions.listWorkflowRunsForRepo.mockResolvedValue({
       data: { workflow_runs: workflowRuns },
     });
   };
 
-  const setupArtifactsMock = (breakingChangeArtifacts, crossVersionArtifacts) => {
+  const setupArtifactsMock = (
+    /** @type {{ name: string; }[]} */ breakingChangeArtifacts,
+    /** @type {{ name: string; }[]} */ crossVersionArtifacts,
+  ) => {
     mockGithub.rest.actions.listWorkflowRunArtifacts
       .mockResolvedValueOnce({ data: { artifacts: breakingChangeArtifacts } })
       .mockResolvedValueOnce({ data: { artifacts: crossVersionArtifacts } });
@@ -78,7 +92,10 @@ describe("breaking-change-add-label-artifacts", () => {
     expect(mockCore.setOutput).toHaveBeenCalledWith("issue_number", mockInputs.issue_number);
   };
 
-  const expectStandardOutputs = (breakingChangeValue, versioningValue) => {
+  const expectStandardOutputs = (
+    /** @type {boolean} */ breakingChangeValue,
+    /** @type {boolean} */ versioningValue,
+  ) => {
     expectRequiredOutputs();
 
     expect(mockCore.setOutput).toHaveBeenCalledWith(
@@ -96,7 +113,7 @@ describe("breaking-change-add-label-artifacts", () => {
     expect(mockCore.setOutput).toHaveBeenCalledWith("versioningReviewLabelValue", versioningValue);
   };
 
-  const expectEarlyReturn = (infoMessage) => {
+  const expectEarlyReturn = (/** @type {string} */ infoMessage) => {
     expectRequiredOutputs();
 
     // Ensure setOutput was *only* called with the two required outputs

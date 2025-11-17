@@ -1,5 +1,23 @@
-import pluginJs from "@eslint/js";
+// Keep in sync with .github/eslint.config.js
+
+import eslint from "@eslint/js";
+import { defineConfig } from "eslint/config";
 import globals from "globals";
+import tseslint from "typescript-eslint";
 
 /** @type {import('eslint').Linter.Config[]} */
-export default [{ languageOptions: { globals: globals.node } }, pluginJs.configs.recommended];
+export default defineConfig(
+  eslint.configs.recommended,
+  tseslint.configs.recommendedTypeChecked,
+  {
+    languageOptions: {
+      // we only run in node, not browser
+      globals: globals.node,
+      // required to use tseslint.configs.recommendedTypeChecked
+      parserOptions: { projectService: true },
+    },
+  },
+  {
+    ignores: ["coverage/**"],
+  },
+);

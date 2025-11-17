@@ -806,9 +806,26 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "Resource 'ManagedCluster' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/ManagedCluster"
+            }
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/ManagedCluster"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
             }
           },
           "default": {
@@ -822,7 +839,12 @@
           "Patch a managed cluster": {
             "$ref": "./examples/ManagedClusterPatchOperation_example.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ManagedCluster"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "ManagedClusters_Delete",
@@ -1708,7 +1730,7 @@
         "tags": [
           "Applications"
         ],
-        "description": "Updates the tags of an application resource of a given managed cluster.",
+        "description": "Updates an application resource of a given managed cluster.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1745,9 +1767,26 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "Resource 'ApplicationResource' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/ApplicationResource"
+            }
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationResource"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
             }
           },
           "default": {
@@ -1761,7 +1800,12 @@
           "Patch an application": {
             "$ref": "./examples/ApplicationPatchOperation_example.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ApplicationResource"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "Applications_Delete",
@@ -2382,6 +2426,80 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/applications/{applicationName}/updateUpgrade": {
+      "post": {
+        "operationId": "Applications_UpdateUpgrade",
+        "tags": [
+          "Applications"
+        ],
+        "description": "Send a request to update the current application upgrade.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the application resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The parameters for updating an application upgrade.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RuntimeUpdateApplicationUpgradeParameters"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update an application upgrade": {
+            "$ref": "./examples/ApplicationActionUpdateUpgrade_example.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/applyMaintenanceWindow": {
       "post": {
         "operationId": "managedApplyMaintenanceWindow_Post",
@@ -2832,7 +2950,7 @@
         "tags": [
           "NodeTypes"
         ],
-        "description": "Update the configuration of a node type of a given managed cluster, only updating tags.",
+        "description": "Update the configuration of a node type of a given managed cluster, only updating tags or capacity.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -7090,12 +7208,12 @@
           {
             "name": "Monitored",
             "value": "Monitored",
-            "description": "The upgrade will stop after completing each upgrade domain and automatically monitor health before proceeding. The value is 0."
+            "description": "The upgrade will stop after completing each upgrade domain and automatically monitor health before proceeding."
           },
           {
             "name": "UnmonitoredAuto",
             "value": "UnmonitoredAuto",
-            "description": "The upgrade will proceed automatically without performing any health monitoring. The value is 1."
+            "description": "The upgrade will proceed automatically without performing any health monitoring."
           }
         ]
       }
@@ -7143,6 +7261,60 @@
         "upgradeDomainTimeout"
       ]
     },
+    "RuntimeApplicationHealthPolicy": {
+      "type": "object",
+      "description": "Cluster level definition for a health policy used to evaluate the health of an application or one of its children entities.",
+      "properties": {
+        "considerWarningAsError": {
+          "type": "boolean",
+          "description": "Indicates whether warnings are treated with the same severity as errors."
+        },
+        "maxPercentUnhealthyDeployedApplications": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum allowed percentage of unhealthy deployed applications. Allowed values are Byte values from zero to 100.\nThe percentage represents the maximum tolerated percentage of deployed applications that can be unhealthy before the application is considered in error.\nThis is calculated by dividing the number of unhealthy deployed applications over the number of nodes where the application is currently deployed on in the cluster.\nThe computation rounds up to tolerate one failure on small numbers of nodes. Default percentage is zero."
+        },
+        "defaultServiceTypeHealthPolicy": {
+          "$ref": "#/definitions/RuntimeServiceTypeHealthPolicy",
+          "description": "The health policy used by default to evaluate the health of a service type."
+        },
+        "serviceTypeHealthPolicyMap": {
+          "type": "object",
+          "description": "The map with service type health policy per service type name. The map is empty by default.",
+          "additionalProperties": {
+            "$ref": "#/definitions/RuntimeServiceTypeHealthPolicy"
+          }
+        }
+      },
+      "required": [
+        "considerWarningAsError",
+        "maxPercentUnhealthyDeployedApplications"
+      ]
+    },
+    "RuntimeFailureAction": {
+      "type": "string",
+      "description": "Cluster level definition for the compensating action to perform when a Monitored upgrade encounters monitoring policy or health policy violations.",
+      "enum": [
+        "Rollback",
+        "Manual"
+      ],
+      "x-ms-enum": {
+        "name": "RuntimeFailureAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Rollback",
+            "value": "Rollback",
+            "description": "Indicates that a rollback of the upgrade will be performed by Service Fabric if the upgrade fails."
+          },
+          {
+            "name": "Manual",
+            "value": "Manual",
+            "description": "Indicates that a manual repair will need to be performed by the administrator if the upgrade fails. Service Fabric will not proceed to the next upgrade domain automatically."
+          }
+        ]
+      }
+    },
     "RuntimeResumeApplicationUpgradeParameters": {
       "type": "object",
       "description": "Parameters for Resume Upgrade action. The upgrade domain name must be specified.",
@@ -7151,6 +7323,163 @@
           "type": "string",
           "description": "The upgrade domain name. Expected to be the next upgrade domain if the application is upgrading."
         }
+      }
+    },
+    "RuntimeRollingUpgradeMode": {
+      "type": "string",
+      "description": "Cluster level definition for the mode used to monitor health during a rolling upgrade.",
+      "enum": [
+        "UnmonitoredAuto",
+        "UnmonitoredManual",
+        "Monitored"
+      ],
+      "x-ms-enum": {
+        "name": "RuntimeRollingUpgradeMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "UnmonitoredAuto",
+            "value": "UnmonitoredAuto",
+            "description": "The upgrade will proceed automatically without performing any health monitoring."
+          },
+          {
+            "name": "UnmonitoredManual",
+            "value": "UnmonitoredManual",
+            "description": "The upgrade will stop after completing each upgrade domain, giving the opportunity to manually monitor health before proceeding."
+          },
+          {
+            "name": "Monitored",
+            "value": "Monitored",
+            "description": "The upgrade will stop after completing each upgrade domain and automatically monitor health before proceeding."
+          }
+        ]
+      }
+    },
+    "RuntimeRollingUpgradeUpdateMonitoringPolicy": {
+      "type": "object",
+      "description": "Describes the parameters for updating a rolling upgrade of application or cluster.",
+      "properties": {
+        "rollingUpgradeMode": {
+          "$ref": "#/definitions/RuntimeRollingUpgradeMode",
+          "description": "The mode used to monitor health during a rolling upgrade."
+        },
+        "forceRestart": {
+          "type": "boolean",
+          "description": "If true, then processes are forcefully restarted during upgrade even when the code version has not changed (the upgrade only changes configuration or data)."
+        },
+        "replicaSetCheckTimeoutInMilliseconds": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The maximum amount of time to block processing of an upgrade domain and prevent loss of availability when there are unexpected issues. When this timeout expires, processing of the upgrade domain will proceed regardless of availability loss issues. The timeout is reset at the start of each upgrade domain. Valid values are between 0 and 42949672925 inclusive. (unsigned 32-bit integer)."
+        },
+        "failureAction": {
+          "$ref": "#/definitions/RuntimeFailureAction",
+          "description": "The compensating action to perform when a Monitored upgrade encounters monitoring policy or health policy violations. Invalid indicates the failure action is invalid. Rollback specifies that the upgrade will start rolling back automatically. Manual indicates that the upgrade will switch to UnmonitoredManual upgrade mode"
+        },
+        "healthCheckWaitDurationInMilliseconds": {
+          "type": "string",
+          "description": "The amount of time to wait after completing an upgrade domain before applying health policies. It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds."
+        },
+        "healthCheckStableDurationInMilliseconds": {
+          "type": "string",
+          "description": "The amount of time that the application or cluster must remain healthy before the upgrade proceeds to the next upgrade domain. It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds."
+        },
+        "healthCheckRetryTimeoutInMilliseconds": {
+          "type": "string",
+          "description": "The amount of time to retry health evaluation when the application or cluster is unhealthy before FailureAction is executed. It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds."
+        },
+        "upgradeTimeoutInMilliseconds": {
+          "type": "string",
+          "description": "The amount of time the overall upgrade has to complete before FailureAction is executed. It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds."
+        },
+        "upgradeDomainTimeoutInMilliseconds": {
+          "type": "string",
+          "description": "The amount of time each upgrade domain has to complete before FailureAction is executed. It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds."
+        },
+        "instanceCloseDelayDurationInSeconds": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Duration in seconds, to wait before a stateless instance is closed, to allow the active requests to drain gracefully. This would be effective when the instance is closing during the application/cluster upgrade, only for those instances which have a non-zero delay duration configured in the service description."
+        }
+      },
+      "required": [
+        "rollingUpgradeMode"
+      ]
+    },
+    "RuntimeServiceTypeHealthPolicy": {
+      "type": "object",
+      "description": "Cluster level definition that represents the health policy used to evaluate the health of services belonging to a service type.",
+      "properties": {
+        "maxPercentUnhealthyServices": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum allowed percentage of unhealthy services.\n\nThe percentage represents the maximum tolerated percentage of services that can be unhealthy before the application is considered in error.\nIf the percentage is respected but there is at least one unhealthy service, the health is evaluated as Warning.\nThis is calculated by dividing the number of unhealthy services of the specific service type over the total number of services of the specific service type.\nThe computation rounds up to tolerate one failure on small numbers of services.",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "maxPercentUnhealthyPartitionsPerService": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum allowed percentage of unhealthy partitions per service.\n\nThe percentage represents the maximum tolerated percentage of partitions that can be unhealthy before the service is considered in error.\nIf the percentage is respected but there is at least one unhealthy partition, the health is evaluated as Warning.\nThe percentage is calculated by dividing the number of unhealthy partitions over the total number of partitions in the service.\nThe computation rounds up to tolerate one failure on small numbers of partitions.",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "maxPercentUnhealthyReplicasPerPartition": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum allowed percentage of unhealthy replicas per partition.\n\nThe percentage represents the maximum tolerated percentage of replicas that can be unhealthy before the partition is considered in error.\nIf the percentage is respected but there is at least one unhealthy replica, the health is evaluated as Warning.\nThe percentage is calculated by dividing the number of unhealthy replicas over the total number of replicas in the partition.\nThe computation rounds up to tolerate one failure on small numbers of replicas.",
+          "minimum": 0,
+          "maximum": 100
+        }
+      },
+      "required": [
+        "maxPercentUnhealthyServices",
+        "maxPercentUnhealthyPartitionsPerService",
+        "maxPercentUnhealthyReplicasPerPartition"
+      ]
+    },
+    "RuntimeUpdateApplicationUpgradeParameters": {
+      "type": "object",
+      "description": "Parameters for the Update Upgrade action.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the application, including the 'fabric:' URI scheme."
+        },
+        "upgradeKind": {
+          "$ref": "#/definitions/RuntimeUpgradeKind",
+          "description": "The kind of the upgrade."
+        },
+        "applicationHealthPolicy": {
+          "$ref": "#/definitions/RuntimeApplicationHealthPolicy",
+          "description": "Defines a health policy used to evaluate the health of an application or one of its children entities."
+        },
+        "updateDescription": {
+          "$ref": "#/definitions/RuntimeRollingUpgradeUpdateMonitoringPolicy",
+          "description": "Describes the parameters for updating a rolling upgrade of application or cluster and a monitoring policy."
+        }
+      },
+      "required": [
+        "name",
+        "upgradeKind"
+      ]
+    },
+    "RuntimeUpgradeKind": {
+      "type": "string",
+      "description": "Cluster level definition for the kind of upgrade.",
+      "enum": [
+        "Rolling"
+      ],
+      "x-ms-enum": {
+        "name": "RuntimeUpgradeKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Rolling",
+            "value": "Rolling",
+            "description": "The upgrade progresses one upgrade domain at a time."
+          }
+        ]
       }
     },
     "ScalingMechanism": {

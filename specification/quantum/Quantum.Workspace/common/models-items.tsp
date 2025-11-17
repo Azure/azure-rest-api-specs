@@ -7,6 +7,7 @@ import "./common.tsp";
 import "./cost-estimates.tsp";
 import "./models.tsp";
 
+using TypeSpec.Versioning;
 using TypeSpec.Rest;
 
 namespace Quantum.Workspace;
@@ -20,6 +21,18 @@ union ItemType {
 
   /** A logical grouping of jobs. */
   Session: "Session",
+}
+
+/** Job priority levels. */
+@added(QuantumWorkspaceAPIVersion.v2025_09_01_preview)
+union Priority {
+  string,
+
+  /** The job's base priority. */
+  Standard: "Standard",
+
+  /** The job's priority is elevated. */
+  High: "High",
 }
 
 /** Id of the workspace item. */
@@ -72,4 +85,23 @@ model ItemDetails {
   /** Error information. */
   @visibility(Lifecycle.Read)
   errorData?: Errors.WorkspaceItemError;
+
+  /** Priority of job or session. */
+  @added(QuantumWorkspaceAPIVersion.v2025_09_01_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  priority?: Priority;
+
+  /** List of user-supplied tags associated with the job. */
+  @added(QuantumWorkspaceAPIVersion.v2025_09_01_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  tags?: string[];
+
+  /** Resource consumption metrics containing provider-specific usage data such as execution time, quantum shots consumed etc. */
+  @added(QuantumWorkspaceAPIVersion.v2025_09_01_preview)
+  @visibility(Lifecycle.Read)
+  usage?: Usage;
 }
+
+/** Resource usage metrics represented as key-value pairs. Keys are provider-defined metric names (e.g. "standardMinutes", "shots") and values are the corresponding consumption amounts. The specific metrics available depend on the quantum provider and target used. */
+@added(QuantumWorkspaceAPIVersion.v2025_09_01_preview)
+model Usage is Record<float64>;

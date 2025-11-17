@@ -5,6 +5,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -430,6 +431,18 @@ union ImageDefinitionBuildStatus {
 union AutoImageBuildStatus {
   string,
 
+  /** Auto image build is disabled. */
+  Disabled: "Disabled",
+
+  /** Auto image build is enabled. */
+  Enabled: "Enabled",
+}
+
+/** Indicates whether auto image build is enabled/disabled for image definitions in the catalog. */
+@added(Versions.v2025_10_01_preview)
+union CatalogAutoImageBuildEnableStatus {
+  string,
+
   @doc("Auto image build is disabled.")
   Disabled: "Disabled",
 
@@ -616,6 +629,27 @@ union DayOfWeek {
   Sunday: "Sunday",
 }
 
+/** The scope of an assignment. */
+@added(Versions.v2025_10_01_preview)
+union AssignedGroupScope {
+  string,
+
+  /** Assignment entitles group members to Dev Boxes in the Project. */
+  DevBox: "DevBox",
+}
+
+/** Indicates whether cancel on connect is enabled. */
+@added(Versions.v2025_10_01_preview)
+union CancelOnConnectEnableStatus {
+  string,
+
+  /** Cancel on connect is enabled. */
+  Enabled: "Enabled",
+
+  /** Cancel on connect is disabled. */
+  Disabled: "Disabled",
+}
+
 model DevCenterListResult is Azure.Core.Page<DevCenter>;
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Legacy. Maintain compatibility with existing models."
@@ -660,6 +694,28 @@ model DevCenterProjectCatalogSettings {
   catalogItemSyncEnableStatus?: CatalogItemSyncEnableStatus;
 }
 
+/** Inherited project catalog settings that combine project policy settings with dev center catalog settings. */
+@added(Versions.v2025_10_01_preview)
+model InheritedProjectCatalogSettings {
+  /** Indicates whether the feature's status, Enabled or Disabled, is configurable at the Project scope. */
+  @added(Versions.v2025_10_01_preview)
+  statusModifiable?: FeatureState.statusModifiable;
+
+  /** Indicates whether the feature values are configurable at the Project scope. */
+  @added(Versions.v2025_10_01_preview)
+  valuesModifiable?: FeatureState.valuesModifiable;
+
+  /** Indicates the default status of the feature. */
+  @added(Versions.v2025_10_01_preview)
+  defaultStatus?: FeatureState.defaultStatus;
+
+  /** The default values of the feature. */
+  @added(Versions.v2025_10_01_preview)
+  defaultValues?: FeatureState.defaultValues;
+
+  ...DevCenterProjectCatalogSettings;
+}
+
 @doc("Network settings for the Dev Center.")
 model DevCenterNetworkSettings {
   @doc("Indicates whether pools in this Dev Center can use Microsoft Hosted Networks. Defaults to Enabled if not set.")
@@ -677,9 +733,9 @@ model DevCenterUpdate is TrackedResourceUpdate {
   @doc("Managed identity properties.")
   identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
 
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Legacy"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy"
   @doc("Properties of a Dev Center to be updated.")
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: DevCenterUpdateProperties;
 }
 
@@ -729,9 +785,9 @@ model KeyEncryptionKeyIdentity {
 
 @doc("The devcenter encryption set resource for partial updates. Properties not provided in the update request will not be changed.")
 model EncryptionSetUpdate is TrackedResourceUpdate {
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Legacy"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy"
   @doc("Properties of a Dev Center encryption set to be updated.")
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: DevCenterEncryptionSetUpdateProperties;
 
   @doc("Managed identity properties")
@@ -749,11 +805,15 @@ model ProjectPolicyProperties extends ProjectPolicyUpdateProperties {
 @doc("Properties of an project policy. These properties can be updated after the resource has been created.")
 model ProjectPolicyUpdateProperties {
   @doc("Resource policies that are a part of this project policy.")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   resourcePolicies?: ResourcePolicy[];
 
   @doc("Resources that have access to the shared resources that are a part of this project policy.")
   scopes?: string[];
+
+  /** Configuration Policies part of this project policy. */
+  @added(Versions.v2025_10_01_preview)
+  configurationPolicies?: ConfigurationPolicies;
 }
 
 @doc("A resource policy.")
@@ -773,9 +833,9 @@ model ResourcePolicy {
 
 @doc("The project policy properties for partial update. Properties not provided in the update request will not be changed.")
 model ProjectPolicyUpdate {
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Legacy"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy"
   @doc("Properties of an project policy to be updated.")
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: ProjectPolicyUpdateProperties;
 }
 
@@ -813,7 +873,12 @@ model ProjectUpdateProperties {
   customizationSettings?: ProjectCustomizationSettings;
 
   @doc("Dev Box Auto Delete settings.")
+  @removed(Versions.v2025_10_01_preview)
   devBoxAutoDeleteSettings?: DevBoxAutoDeleteSettings;
+
+  /** Dev Box Schedule Delete settings. */
+  @added(Versions.v2025_10_01_preview)
+  devBoxScheduleDeleteSettings?: DevBoxScheduleDeleteSettings;
 
   @doc("Indicates whether Azure AI services are enabled for a project.")
   azureAiServicesSettings?: AzureAiServicesSettings;
@@ -823,6 +888,11 @@ model ProjectUpdateProperties {
 
   @doc("Settings to be used for workspace storage.")
   workspaceStorageSettings?: WorkspaceStorageSettings;
+
+  /** List of Entra ID group assignments associated with this project. */
+  @added(Versions.v2025_10_01_preview)
+  @identifiers(#[])
+  assignedGroups?: AssignedGroup[];
 }
 
 @doc("Settings to be used when associating a project with a catalog.")
@@ -834,7 +904,7 @@ model ProjectCatalogSettings {
 @doc("Settings to be used for customizations.")
 model ProjectCustomizationSettings {
   @doc("The identities that can to be used in customization scenarios; e.g., to clone a repository.")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   identities?: ProjectCustomizationManagedIdentity[];
 
   @doc("Indicates whether user customizations are enabled.")
@@ -851,6 +921,7 @@ model ProjectCustomizationManagedIdentity {
 }
 
 @doc("Settings controlling the auto deletion of inactive dev boxes.")
+@removed(Versions.v2025_10_01_preview)
 model DevBoxAutoDeleteSettings {
   @doc("Indicates the delete mode for Dev Boxes within this project.")
   deleteMode?: DevBoxDeleteMode;
@@ -860,6 +931,22 @@ model DevBoxAutoDeleteSettings {
 
   @doc("ISO8601 duration required for the dev box to be marked for deletion prior to it being deleted. ISO8601 format PT[n]H[n]M[n]S.")
   gracePeriod?: string;
+}
+
+/** Settings controlling the auto deletion of inactive dev boxes. */
+@added(Versions.v2025_10_01_preview)
+model DevBoxScheduleDeleteSettings {
+  /** Indicates the delete mode for Dev Boxes within this project. */
+  deleteMode?: DevBoxDeleteMode;
+
+  /** ISO8601 duration required for the dev box to not be inactive prior to it being scheduled for deletion.  ISO8601 format PT[n]H[n]M[n]S. */
+  inactiveThreshold?: duration;
+
+  /** ISO8601 duration required for the dev box to be marked for deletion prior to it being deleted. ISO8601 format PT[n]H[n]M[n]S. */
+  gracePeriod?: duration;
+
+  /** Indicates whether scheduled deletion should be canceled when a user connects to the dev box. */
+  cancelOnConnectEnableStatus?: CancelOnConnectEnableStatus;
 }
 
 @doc("Configures Azure AI related services for the project.")
@@ -884,11 +971,21 @@ model WorkspaceStorageSettings {
   workspaceStorageMode?: WorkspaceStorageMode;
 }
 
+/** Represents an Entra group assigned to this Project, entitling all members to resources for the given scope. */
+@added(Versions.v2025_10_01_preview)
+model AssignedGroup {
+  /** The Entra group object ID (GUID). */
+  objectId?: Azure.Core.uuid;
+
+  /** The scope of the assignment. */
+  scope?: AssignedGroupScope;
+}
+
 @doc("The project properties for partial update. Properties not provided in the update request will not be changed.")
 model ProjectUpdate is TrackedResourceUpdate {
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Legacy"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy"
   @doc("Properties of a project to be updated.")
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: ProjectUpdateProperties;
 
   @doc("Managed identity properties.")
@@ -899,11 +996,139 @@ model ProjectUpdate is TrackedResourceUpdate {
 model InheritedSettingsForProject {
   @doc("Dev Center settings to be used when associating a project with a catalog.")
   @visibility(Lifecycle.Read)
-  projectCatalogSettings?: DevCenterProjectCatalogSettings;
+  @typeChangedFrom(
+    Versions.v2025_10_01_preview,
+    DevCenterProjectCatalogSettings
+  )
+  projectCatalogSettings?: InheritedProjectCatalogSettings;
 
   @doc("Network settings that will be enforced on this project.")
   @visibility(Lifecycle.Read)
   networkSettings?: ProjectNetworkSettings;
+
+  /** Azure AI project policy settings that will be enforced on this project. */
+  @added(Versions.v2025_10_01_preview)
+  @visibility(Lifecycle.Read)
+  azureAiServicesSettings?: FeatureState;
+
+  /** Dev box schedule delete project policy settings that will be enforced on this project. */
+  @added(Versions.v2025_10_01_preview)
+  @visibility(Lifecycle.Read)
+  devBoxScheduleDeleteSettings?: FeatureState;
+
+  /** Dev box limits project policy settings that will be enforced on this project. */
+  @added(Versions.v2025_10_01_preview)
+  @visibility(Lifecycle.Read)
+  devBoxLimitsSettings?: FeatureState;
+
+  /** Display name project policy settings that will be enforced on this project. */
+  @added(Versions.v2025_10_01_preview)
+  @visibility(Lifecycle.Read)
+  displayNameSettings?: FeatureState;
+
+  /** Dev box tunnel project policy settings that will be enforced on this project. */
+  @added(Versions.v2025_10_01_preview)
+  @visibility(Lifecycle.Read)
+  devBoxTunnelSettings?: FeatureState;
+
+  /** Serverless GPU sessions project policy settings that will be enforced on this project. */
+  @added(Versions.v2025_10_01_preview)
+  @visibility(Lifecycle.Read)
+  serverlessGpuSessionsSettings?: FeatureState;
+
+  /** User customizations project policy settings that will be enforced on this project. */
+  @added(Versions.v2025_10_01_preview)
+  @visibility(Lifecycle.Read)
+  userCustomizationsSettings?: FeatureState;
+
+  /** Workspace storage project policy settings that will be enforced on this project. */
+  @added(Versions.v2025_10_01_preview)
+  @visibility(Lifecycle.Read)
+  workspaceStorageSettings?: FeatureState;
+}
+
+/** Represents policies to enforce configuration settings on a project. */
+@added(Versions.v2025_10_01_preview)
+model ConfigurationPolicies {
+  /** The property indicates the Azure AI services settings on a project. */
+  azureAiServicesFeatureStatus?: FeatureState;
+
+  /** Indicates whether the setting is configurable at Project scope. */
+  devBoxScheduleDeleteFeatureStatus?: FeatureState;
+
+  /** Indicates whether DevBox limits are configurable at Project scope. */
+  devBoxLimitsFeatureStatus?: FeatureState;
+
+  /** Indicates whether project display name is configurable at Project scope. */
+  displayNameFeatureStatus?: FeatureState;
+
+  /** Indicates whether DevBox tunnel settings are configurable at Pool scope. */
+  devBoxTunnelFeatureStatus?: FeatureState;
+
+  /** Indicates whether project catalogs are configurable at Project scope. */
+  projectCatalogFeatureStatus?: FeatureState;
+
+  /** Indicates whether serverless GPU sessions are configurable at Project scope. */
+  serverlessGpuSessionsFeatureStatus?: FeatureState;
+
+  /** Indicates whether user customizations is configurable at Project scope. */
+  userCustomizationsFeatureStatus?: FeatureState;
+
+  /** Indicates whether workspace storage is configurable at Project scope. */
+  workspaceStorageFeatureStatus?: FeatureState;
+}
+
+/** Feature state. */
+@added(Versions.v2025_10_01_preview)
+model FeatureState {
+  /** Indicates whether the feature's status, Enabled or Disabled, is configurable at the Project scope. */
+  statusModifiable?: FeatureStateModifiable;
+
+  /** Indicates whether the feature values are configurable at the Project scope. */
+  valuesModifiable?: FeatureStateModifiable;
+
+  /** Indicates the default status of the feature. */
+  defaultStatus?: FeatureStatus;
+
+  /** The default values of the feature. */
+  defaultValues?: DefaultValue[];
+}
+
+/** A default value that can be provided for a feature property. */
+@added(Versions.v2025_10_01_preview)
+model DefaultValue {
+  /** The name of the feature property. */
+  name?: string;
+
+  /** The default value to be applied for the given property. */
+  value?: string;
+}
+
+/** Feature status. */
+@added(Versions.v2025_10_01_preview)
+union FeatureStatus {
+  string,
+
+  @doc("Feature is enabled.")
+  Enabled: "Enabled",
+
+  @doc("Feature is disabled.")
+  Disabled: "Disabled",
+
+  @doc("Auto Deploy feature status.")
+  AutoDeploy: "AutoDeploy",
+}
+
+/** Feature enablement status. */
+@added(Versions.v2025_10_01_preview)
+union FeatureStateModifiable {
+  string,
+
+  /** Feature is not modifiable. */
+  NotModifiable: "NotModifiable",
+
+  /** Feature is modifiable. */
+  Modifiable: "Modifiable",
 }
 
 @doc("Network settings for the project.")
@@ -1013,6 +1238,10 @@ model CatalogUpdateProperties {
   @doc("Indicates the type of sync that is configured for the catalog.")
   syncType?: CatalogSyncType;
 
+  /** Indicates whether the catalog is configured to automatically build image definitions. Defaults to enabled. */
+  @added(Versions.v2025_10_01_preview)
+  autoImageBuildEnableStatus?: CatalogAutoImageBuildEnableStatus;
+
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Correct representation for resource tags."
   @doc("Resource tags.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
@@ -1036,9 +1265,9 @@ model GitCatalog {
 
 @doc("The catalog's properties for partial update. Properties not provided in the update request will not be changed.")
 model CatalogUpdate {
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Legacy"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy"
   @doc("Catalog properties for update.")
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: CatalogUpdateProperties;
 }
 
@@ -1093,7 +1322,7 @@ model EnvironmentDefinitionParameter {
 model CatalogResourceValidationErrorDetails {
   @doc("Errors associated with resources synchronized from the catalog.")
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   errors?: CatalogErrorDetails[];
 }
 
@@ -1114,12 +1343,12 @@ model SyncErrorDetails {
 
   @doc("Catalog items that have conflicting names.")
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   conflicts?: CatalogConflictError[];
 
   @doc("Errors that occured during synchronization.")
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   errors?: CatalogSyncError[];
 }
 
@@ -1142,7 +1371,7 @@ model CatalogSyncError {
 
   @doc("Errors associated with the file.")
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   errorDetails?: CatalogErrorDetails[];
 }
 
@@ -1251,7 +1480,7 @@ model DevCenterSku extends Azure.ResourceManager.CommonTypes.Sku {
 
   @doc("Collection of name/value pairs to describe the SKU capabilities.")
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   capabilities?: Capability[];
 }
 
@@ -1282,9 +1511,9 @@ model EnvironmentTypeUpdateProperties {
 
 @doc("The environment type for partial update. Properties not provided in the update request will not be changed.")
 model EnvironmentTypeUpdate {
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Legacy"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy"
   @doc("Properties of an environment type to be updated.")
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: EnvironmentTypeUpdateProperties;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Correct representation for resource tags."
@@ -1367,9 +1596,9 @@ model UserRoleAssignment {
 
 @doc("The project environment type for partial update. Properties not provided in the update request will not be changed.")
 model ProjectEnvironmentTypeUpdate {
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Legacy"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy"
   @doc("Properties to configure an environment type.")
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: ProjectEnvironmentTypeUpdateProperties;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Correct representation for resource tags."
@@ -1443,9 +1672,9 @@ model DevBoxDefinitionUpdateProperties {
 
 @doc("Partial update of a Dev Box definition resource.")
 model DevBoxDefinitionUpdate is TrackedResourceUpdate {
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Legacy"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy"
   @doc("Properties of a Dev Box definition to be updated.")
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: DevBoxDefinitionUpdateProperties;
 }
 
@@ -1743,7 +1972,7 @@ model ImageDefinitionBuildTask {
   name?: string;
 
   @doc("Parameters for the task.")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   parameters?: ImageDefinitionBuildTaskParametersItem[];
 
   @doc("Display name to help differentiate multiple instances of the same task.")
@@ -1788,7 +2017,7 @@ model PoolProperties extends PoolUpdateProperties {
 
   @doc("Details on the Pool health status to help diagnose issues. This is only populated when the pool status indicates the pool is in a non-healthy state")
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["code"])
+  @identifiers(#["code"])
   healthStatusDetails?: HealthStatusDetail[];
 
   @doc("Indicates the number of provisioned Dev Boxes in this pool.")
@@ -1913,9 +2142,9 @@ model ActiveHoursConfiguration {
 
 @doc("The pool properties for partial update. Properties not provided in the update request will not be changed.")
 model PoolUpdate is TrackedResourceUpdate {
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Legacy"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy"
   @doc("Properties of a pool to be updated.")
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: PoolUpdateProperties;
 }
 
@@ -1948,9 +2177,9 @@ model ScheduleUpdateProperties is TrackedResourceUpdate {
 
 @doc("The schedule properties for partial update. Properties not provided in the update request will not be changed.")
 model ScheduleUpdate {
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Legacy"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy"
   @doc("Properties of a schedule resource to be updated.")
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: ScheduleUpdateProperties;
 }
 
@@ -1995,9 +2224,9 @@ model NetworkConnectionUpdateProperties {
 
 @doc("The network connection properties for partial update. Properties not provided in the update request will not be changed.")
 model NetworkConnectionUpdate is TrackedResourceUpdate {
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Legacy"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy"
   @doc("Properties of a network connection resource to be updated.")
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: NetworkConnectionUpdateProperties;
 }
 
@@ -2014,7 +2243,7 @@ model HealthCheckStatusDetailsProperties {
 
   @doc("Details for each health check item.")
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   healthChecks?: HealthCheck[];
 }
 
@@ -2061,7 +2290,7 @@ model OutboundEnvironmentEndpoint {
 
   @doc("The endpoints for this service for which the agent requires outbound access.")
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["domainName"])
+  @identifiers(#["domainName"])
   endpoints?: EndpointDependency[];
 }
 
@@ -2077,7 +2306,7 @@ model EndpointDependency {
 
   @doc("The list of connection details for this endpoint.")
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   endpointDetails?: EndpointDetail[];
 }
 
@@ -2126,10 +2355,7 @@ model CatalogListResult is Azure.Core.Page<Catalog>;
 @@visibility(DevBoxDefinitionListResult.value, Lifecycle.Read);
 @@visibility(DevCenterListResult.value, Lifecycle.Read);
 @@visibility(EncryptionSetListResult.value, Lifecycle.Read);
-@@OpenAPI.extension(OutboundEnvironmentEndpointCollection.value,
-  "x-ms-identifiers",
-  #["category"]
-);
+@@identifiers(OutboundEnvironmentEndpointCollection.value, #["category"]);
 @@visibility(EnvironmentDefinitionListResult.value, Lifecycle.Read);
 @@visibility(EnvironmentTypeListResult.value, Lifecycle.Read);
 @@visibility(GalleryListResult.value, Lifecycle.Read);

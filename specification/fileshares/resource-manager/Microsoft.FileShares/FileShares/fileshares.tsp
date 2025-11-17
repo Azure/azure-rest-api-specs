@@ -2,6 +2,7 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -19,7 +20,6 @@ namespace Microsoft.FileShares;
 
 @doc("Service versions")
 enum Versions {
-  @useDependency(Azure.ResourceManager.CommonTypes.Versions.v6)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
   @doc("Version 2025-06-01-preview")
   v2025_06_01_preview: "2025-06-01-preview",
