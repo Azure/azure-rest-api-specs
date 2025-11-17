@@ -410,7 +410,7 @@
       },
       "delete": {
         "operationId": "Jobs_Cancel",
-        "description": "DEPRECATED: This operation is deprecated and will be removed in future versions. Please use the 'cancel' operation instead.",
+        "description": "Delete a job by its id. Use for cancellation in versions before 2025-12-01-preview.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -475,10 +475,82 @@
             }
           }
         },
-        "deprecated": true,
         "x-ms-examples": {
           "Cancels a job.": {
             "$ref": "./examples/Jobs_Cancel.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/jobs/{jobId}/cancel": {
+      "post": {
+        "operationId": "Jobs_CancelJob",
+        "description": "Request the cancellation of an existing job.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The Azure subscription ID.",
+            "required": true,
+            "type": "string",
+            "minLength": 36,
+            "maxLength": 36,
+            "pattern": "^[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$",
+            "x-ms-parameter-location": "client"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of the Azure resource group.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9\\-_\\.]*$",
+            "x-ms-parameter-location": "client"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "Name of the Azure Quantum workspace.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9\\-_]*$",
+            "x-ms-parameter-location": "client"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "Id of the job.",
+            "required": true,
+            "type": "string",
+            "maxLength": 36,
+            "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/JobDetails"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
           }
         }
       }
