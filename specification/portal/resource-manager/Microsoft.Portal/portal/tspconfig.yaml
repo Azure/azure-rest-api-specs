@@ -4,9 +4,10 @@ options:
   "@azure-tools/typespec-autorest":
     use-read-only-status-schema: true
     omit-unreachable-types: true
-    emitter-output-dir: "{project-root}/.."
+    emitter-output-dir: "{project-root}"
     azure-resource-provider-folder: "resource-manager"
-    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/portal.json"
+    output-file: "{version-status}/{version}/portal.json"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
