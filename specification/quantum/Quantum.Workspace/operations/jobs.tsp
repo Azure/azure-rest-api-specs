@@ -7,6 +7,7 @@ import "./operations.tsp";
 import "../common/models.tsp";
 import "../common/models-jobs.tsp";
 
+using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Quantum.Workspace;
 
@@ -40,8 +41,9 @@ namespace Quantum.Workspace.Services {
     cancelOld is CancelOperation<JobDetails>;
 
     /** Request the cancellation of an existing job. */
-    @added(QuantumWorkspaceAPIVersion.v2025_12_01_preview)
-    cancel is ActionOperation<JobDetails>;
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Our SDKs already use POST with /cancel."
+    @segment("cancel")
+    cancel is PostResourceOperation<JobDetails>;
 
     /** Get job by its id. */
     get is GetOperation<JobDetails>;
