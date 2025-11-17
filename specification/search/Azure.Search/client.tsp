@@ -344,6 +344,10 @@ namespace KnowledgeBaseRetrievalClient {
 @@usage(IndexBatch, Usage.input);
 @@access(KnowledgeSourceStatus, Access.public);
 @@usage(KnowledgeSourceStatus, Usage.input);
+@@access(WebKnowledgeSource, Access.public);
+@@usage(WebKnowledgeSource, Usage.input);
+@@access(RemoteSharePointKnowledgeSource, Access.public);
+@@usage(RemoteSharePointKnowledgeSource, Usage.input);
 
 @@access(SearchClient.Documents.searchGet, Access.internal);
 @@access(SearchClient.Documents.searchPost, Access.internal);

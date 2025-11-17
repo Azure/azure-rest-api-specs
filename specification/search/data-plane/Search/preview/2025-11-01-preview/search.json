@@ -13595,6 +13595,46 @@
         ]
       }
     },
+    "RemoteSharePointKnowledgeSource": {
+      "type": "object",
+      "description": "Configuration for remote SharePoint knowledge source.",
+      "properties": {
+        "remoteSharePointParameters": {
+          "$ref": "#/definitions/RemoteSharePointKnowledgeSourceParameters",
+          "description": "The parameters for the remote SharePoint knowledge source."
+        }
+      },
+      "required": [
+        "remoteSharePointParameters"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeSource"
+        }
+      ],
+      "x-ms-discriminator-value": "remoteSharePoint"
+    },
+    "RemoteSharePointKnowledgeSourceParameters": {
+      "type": "object",
+      "description": "Parameters for remote SharePoint knowledge source.",
+      "properties": {
+        "filterExpression": {
+          "type": "string",
+          "description": "Keyword Query Language (KQL) expression with queryable SharePoint properties and attributes to scope the retrieval before the query runs."
+        },
+        "resourceMetadata": {
+          "type": "array",
+          "description": "A list of metadata fields to be returned for each item in the response. Only retrievable metadata properties can be included in this list. By default, no metadata is returned.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "containerTypeId": {
+          "type": "string",
+          "description": "Container ID for SharePoint Embedded connection. When this is null, it will use SharePoint Online."
+        }
+      }
+    },
     "RemoteSharePointKnowledgeSourceParams": {
       "type": "object",
       "description": "Specifies runtime parameters for a remote SharePoint knowledge source",

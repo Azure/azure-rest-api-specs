@@ -4460,6 +4460,26 @@ model AzureBlobKnowledgeSourceParameters {
   disableImageVerbalization?: boolean;
 }
 
+@doc("Configuration for remote SharePoint knowledge source.")
+model RemoteSharePointKnowledgeSource extends KnowledgeSource {
+  kind: KnowledgeSourceKind.RemoteSharePoint;
+
+  @doc("The parameters for the remote SharePoint knowledge source.")
+  remoteSharePointParameters: RemoteSharePointKnowledgeSourceParameters;
+}
+
+@doc("Parameters for remote SharePoint knowledge source.")
+model RemoteSharePointKnowledgeSourceParameters {
+  @doc("Keyword Query Language (KQL) expression with queryable SharePoint properties and attributes to scope the retrieval before the query runs.")
+  filterExpression?: string;
+
+  @doc("A list of metadata fields to be returned for each item in the response. Only retrievable metadata properties can be included in this list. By default, no metadata is returned.")
+  resourceMetadata?: string[];
+
+  @doc("Container ID for SharePoint Embedded connection. When this is null, it will use SharePoint Online.")
+  containerTypeId?: string;
+}
+
 @doc("Result from listing knowledge sources.")
 model ListKnowledgeSourcesResult {
   @doc("The knowledge sources in the service.")
