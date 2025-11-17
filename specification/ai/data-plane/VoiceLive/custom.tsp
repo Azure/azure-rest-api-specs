@@ -218,6 +218,7 @@ model AzureStandardVoice extends AzureVoice {
 }
 
 /** Azure personal voice configuration. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(DualUsage)
 model AzurePersonalVoice extends AzureVoice {
   type: AzureVoiceType.azure_personal;
@@ -579,7 +580,7 @@ model AvatarConfig {
   style?: string;
 
   /** Base model to use for the avatar. Required for photo avatar. */
-  `model`?: string;
+  `model`?: PhotoAvatarBaseModes;
 
   /** Indicates whether the avatar is customized or not. */
   customized: boolean;
@@ -600,6 +601,14 @@ union AvatarConfigTypes {
 
   /** Photo avatar */
   "photo-avatar",
+}
+
+/** Photo avatar base modes */
+union PhotoAvatarBaseModes {
+  string,
+
+  /** VASA-1 model */
+  `vasa-1`: "vasa-1",
 }
 
 /** Avatar config output protocols */
