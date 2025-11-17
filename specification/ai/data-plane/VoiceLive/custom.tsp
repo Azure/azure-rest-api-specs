@@ -118,6 +118,12 @@ union OAIVoice {
 
   /** Verse voice. */
   verse: "verse",
+
+  /** Marin voice. */
+  marin: "marin",
+
+  /** Cedar voice. */
+  cedar: "cedar",
 }
 
 /**
@@ -226,6 +232,14 @@ model AzurePersonalVoice extends AzureVoice {
 
   /** Underlying neural model to use for personal voice. */
   `model`: PersonalVoiceModels;
+
+  custom_lexicon_url?: string;
+  prefer_locales?: string[];
+  locale?: string;
+  style?: string;
+  pitch?: string;
+  rate?: string;
+  volume?: string;
 }
 
 /** PersonalVoice models */
@@ -552,6 +566,9 @@ model Animation {
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(RequestUsage)
 model AvatarConfig {
+  /** Type of avatar to use. */
+  type?: AvatarConfigTypes;
+
   /** Optional list of ICE servers to use for WebRTC connection establishment. */
   ice_servers?: IceServer[];
 
@@ -561,11 +578,39 @@ model AvatarConfig {
   /** Optional avatar style, such as emotional tone or speaking style. */
   style?: string;
 
+  /** Base model to use for the avatar. Required for photo avatar. */
+  `model`?: string;
+
   /** Indicates whether the avatar is customized or not. */
   customized: boolean;
 
   /** Optional video configuration including resolution, bitrate, and codec. */
   video?: VideoParams;
+
+  /** Output protocol for avatar streaming. Default is 'webrtc'. */
+  output_protocol?: AvatarOutputProtocol = AvatarOutputProtocol.webrtc;
+}
+
+/** Avatar config types */
+union AvatarConfigTypes {
+  string,
+
+  /** Video avatar */
+  "video-avatar",
+
+  /** Photo avatar */
+  "photo-avatar",
+}
+
+/** Avatar config output protocols */
+union AvatarOutputProtocol {
+  string,
+
+  /** WebRTC protocol, output the audio/video streams via WebRTC */
+  webrtc: "webrtc",
+
+  /** WebSocket protocol, output the video frames over WebSocket */
+  websocket: "websocket",
 }
 
 /** ICE server configuration for WebRTC connection negotiation. */
