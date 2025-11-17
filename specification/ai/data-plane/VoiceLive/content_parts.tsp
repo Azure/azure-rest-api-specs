@@ -8,6 +8,7 @@ union ContentPartType {
   string,
   input_text: "input_text",
   input_audio: "input_audio",
+  input_image: "input_image",
   text: "text",
   audio: "audio",
 }

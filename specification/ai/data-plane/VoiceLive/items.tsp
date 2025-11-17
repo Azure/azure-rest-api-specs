@@ -41,6 +41,29 @@ model InputAudioContentPart extends MessageContentPart {
   transcript?: string;
 }
 
+/** Input image content part. */
+@usage(RequestUsage)
+model RequestImageContentPart extends ContentPart {
+  type: ContentPartType.input_image;
+  url?: string;
+  detail?: RequestImageContentPartDetail;
+}
+
+/** Specifies an image's detail level. Can be 'auto', 'low', 'high', or an unknown future value. */
+union RequestImageContentPartDetail {
+  string,
+
+  /** Automatically select an appropriate detail level. */
+  auto: "auto",
+
+  /** Use a lower detail level to reduce bandwidth or cost. */
+  low: "low",
+
+  /** Use a higher detail level—potentially more resource-intensive. */
+  high: "high",
+}
+
+
 /** Output text content part. */
 @usage(ResponseUsage)
 model OutputTextContentPart extends MessageContentPart {
@@ -251,6 +274,9 @@ model InputTokenDetails {
   /** Number of audio tokens used in the input. */
   audio_tokens: int32;
 
+  /** Number of image tokens used in the input. */
+  image_tokens: int32;
+
   /** Details of cached token usage. */
   cached_tokens_details: CachedTokenDetails;
 }
@@ -275,6 +301,9 @@ model CachedTokenDetails {
 
   /** Number of cached audio tokens. */
   audio_tokens: int32;
+
+  /** Number of cached image tokens. */
+  image_tokens: int32;
 }
 
 /** Overall usage statistics for a response. */

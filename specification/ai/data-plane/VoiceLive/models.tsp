@@ -1135,6 +1135,11 @@ model ResponseCreateParams {
    */
   #suppress "@azure-tools/typespec-autorest/union-unsupported" // This is how it's represented OpeAI Style.
   max_output_tokens?: int32 | "inf";
+
+  /** Create the response with pre-generated assistant message. The message item would be
+   * added into the conversation history and returned with synthesized audio output in the created response.
+   */
+  pre_generated_assistant_message?: AssistantMessageItem;
 }
 
 // Tool customization (apply_discriminator): apply discriminated type base

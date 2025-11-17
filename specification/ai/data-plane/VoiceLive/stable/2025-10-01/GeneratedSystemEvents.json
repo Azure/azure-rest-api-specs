@@ -234,6 +234,10 @@
       "type": "object",
       "description": "Configuration for avatar streaming and behavior during the session.",
       "properties": {
+        "type": {
+          "$ref": "#/definitions/AvatarConfigTypes",
+          "description": "Type of avatar to use."
+        },
         "ice_servers": {
           "type": "array",
           "description": "Optional list of ICE servers to use for WebRTC connection establishment.",
@@ -249,6 +253,10 @@
           "type": "string",
           "description": "Optional avatar style, such as emotional tone or speaking style."
         },
+        "model": {
+          "$ref": "#/definitions/PhotoAvatarBaseModes",
+          "description": "Base model to use for the avatar. Required for photo avatar."
+        },
         "customized": {
           "type": "boolean",
           "description": "Indicates whether the avatar is customized or not."
@@ -256,12 +264,85 @@
         "video": {
           "$ref": "#/definitions/VideoParams",
           "description": "Optional video configuration including resolution, bitrate, and codec."
+        },
+        "output_protocol": {
+          "type": "string",
+          "description": "Output protocol for avatar streaming. Default is 'webrtc'.",
+          "default": "webrtc",
+          "enum": [
+            "webrtc",
+            "websocket"
+          ],
+          "x-ms-enum": {
+            "name": "AvatarOutputProtocol",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "webrtc",
+                "value": "webrtc",
+                "description": "WebRTC protocol, output the audio/video streams via WebRTC"
+              },
+              {
+                "name": "websocket",
+                "value": "websocket",
+                "description": "WebSocket protocol, output the video frames over WebSocket"
+              }
+            ]
+          }
         }
       },
       "required": [
         "character",
         "customized"
       ]
+    },
+    "AvatarConfigTypes": {
+      "type": "string",
+      "description": "Avatar config types",
+      "enum": [
+        "video-avatar",
+        "photo-avatar"
+      ],
+      "x-ms-enum": {
+        "name": "AvatarConfigTypes",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "video-avatar",
+            "value": "video-avatar",
+            "description": "Video avatar"
+          },
+          {
+            "name": "photo-avatar",
+            "value": "photo-avatar",
+            "description": "Photo avatar"
+          }
+        ]
+      }
+    },
+    "AvatarOutputProtocol": {
+      "type": "string",
+      "description": "Avatar config output protocols",
+      "enum": [
+        "webrtc",
+        "websocket"
+      ],
+      "x-ms-enum": {
+        "name": "AvatarOutputProtocol",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "webrtc",
+            "value": "webrtc",
+            "description": "WebRTC protocol, output the audio/video streams via WebRTC"
+          },
+          {
+            "name": "websocket",
+            "value": "websocket",
+            "description": "WebSocket protocol, output the video frames over WebSocket"
+          }
+        ]
+      }
     },
     "AzureCustomVoice": {
       "type": "object",
@@ -339,6 +420,30 @@
         "model": {
           "$ref": "#/definitions/PersonalVoiceModels",
           "description": "Underlying neural model to use for personal voice."
+        },
+        "custom_lexicon_url": {
+          "type": "string"
+        },
+        "prefer_locales": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "locale": {
+          "type": "string"
+        },
+        "style": {
+          "type": "string"
+        },
+        "pitch": {
+          "type": "string"
+        },
+        "rate": {
+          "type": "string"
+        },
+        "volume": {
+          "type": "string"
         }
       },
       "required": [
@@ -699,11 +804,17 @@
           "type": "integer",
           "format": "int32",
           "description": "Number of cached audio tokens."
+        },
+        "image_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of cached image tokens."
         }
       },
       "required": [
         "text_tokens",
-        "audio_tokens"
+        "audio_tokens",
+        "image_tokens"
       ]
     },
     "ClientEvent": {
@@ -1132,6 +1243,7 @@
       "enum": [
         "input_text",
         "input_audio",
+        "input_image",
         "text",
         "audio"
       ],
@@ -1146,6 +1258,10 @@
           {
             "name": "input_audio",
             "value": "input_audio"
+          },
+          {
+            "name": "input_image",
+            "value": "input_image"
           },
           {
             "name": "text",
@@ -1437,6 +1553,11 @@
           "format": "int32",
           "description": "Number of audio tokens used in the input."
         },
+        "image_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of image tokens used in the input."
+        },
         "cached_tokens_details": {
           "$ref": "#/definitions/CachedTokenDetails",
           "description": "Details of cached token usage."
@@ -1446,6 +1567,7 @@
         "cached_tokens",
         "text_tokens",
         "audio_tokens",
+        "image_tokens",
         "cached_tokens_details"
       ]
     },
@@ -1776,7 +1898,9 @@
         "echo",
         "sage",
         "shimmer",
-        "verse"
+        "verse",
+        "marin",
+        "cedar"
       ],
       "x-ms-enum": {
         "name": "OAIVoice",
@@ -1821,6 +1945,16 @@
             "name": "verse",
             "value": "verse",
             "description": "Verse voice."
+          },
+          {
+            "name": "marin",
+            "value": "marin",
+            "description": "Marin voice."
+          },
+          {
+            "name": "cedar",
+            "value": "cedar",
+            "description": "Cedar voice."
           }
         ]
       }
@@ -1960,6 +2094,24 @@
         ]
       }
     },
+    "PhotoAvatarBaseModes": {
+      "type": "string",
+      "description": "Photo avatar base modes",
+      "enum": [
+        "vasa-1"
+      ],
+      "x-ms-enum": {
+        "name": "PhotoAvatarBaseModes",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "vasa-1",
+            "value": "vasa-1",
+            "description": "VASA-1 model"
+          }
+        ]
+      }
+    },
     "RequestAudioContentPart": {
       "type": "object",
       "description": "An audio content part for a request.",
@@ -1974,6 +2126,54 @@
         }
       ],
       "x-ms-discriminator-value": "input_audio"
+    },
+    "RequestImageContentPart": {
+      "type": "object",
+      "description": "Input image content part.",
+      "properties": {
+        "url": {
+          "type": "string"
+        },
+        "detail": {
+          "$ref": "#/definitions/RequestImageContentPartDetail"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ContentPart"
+        }
+      ],
+      "x-ms-discriminator-value": "input_image"
+    },
+    "RequestImageContentPartDetail": {
+      "type": "string",
+      "description": "Specifies an image's detail level. Can be 'auto', 'low', 'high', or an unknown future value.",
+      "enum": [
+        "auto",
+        "low",
+        "high"
+      ],
+      "x-ms-enum": {
+        "name": "RequestImageContentPartDetail",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "auto",
+            "value": "auto",
+            "description": "Automatically select an appropriate detail level."
+          },
+          {
+            "name": "low",
+            "value": "low",
+            "description": "Use a lower detail level to reduce bandwidth or cost."
+          },
+          {
+            "name": "high",
+            "value": "high",
+            "description": "Use a higher detail level—potentially more resource-intensive."
+          }
+        ]
+      }
     },
     "RequestSession": {
       "type": "object",
@@ -2394,6 +2594,10 @@
         },
         "max_output_tokens": {
           "description": "Maximum number of output tokens for a single assistant response,\ninclusive of tool calls. Provide an integer between 1 and 4096 to\nlimit output tokens, or `inf` for the maximum available tokens for a\ngiven model. Defaults to `inf`."
+        },
+        "pre_generated_assistant_message": {
+          "$ref": "#/definitions/AssistantMessageItem",
+          "description": "Create the response with pre-generated assistant message. The message item would be\nadded into the conversation history and returned with synthesized audio output in the created response."
         }
       }
     },
