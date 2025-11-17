@@ -500,8 +500,8 @@ model KnowledgeBaseReference {
 
 @doc("Represents an Azure Search document reference.")
 model KnowledgeBaseSearchIndexReference extends KnowledgeBaseReference {
-  @doc("The discriminator value.")
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
+  @doc("The discriminator value.")
   type: "searchIndex";
 
   @doc("The document key for the reference.")
