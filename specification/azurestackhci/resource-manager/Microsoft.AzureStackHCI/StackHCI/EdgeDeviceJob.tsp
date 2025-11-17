@@ -78,42 +78,6 @@ interface EdgeDeviceJobs {
 // Models
 
 /**
- * Azure Linux Collect Log Job Properties.
- */
-model AzureLinuxCollectLogJobProperties
-  extends AzureLinuxEdgeDeviceJobProperties {
-  /**
-   * From date for log collection.
-   */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  fromDate: utcDateTime;
-
-  /**
-   * To date for log collection.
-   */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  toDate: utcDateTime;
-
-  /**
-   * To date for log collection.
-   */
-  @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  lastLogGenerated?: utcDateTime;
-
-  /**
-   * log collection job reported properties.
-   */
-  @visibility(Lifecycle.Read)
-  reportedProperties?: LogCollectionReportedProperties;
-
-  /**
-   * Job Type to support polymorphic resource.
-   */
-  jobType: "CollectLog";
-}
-
-/**
  * Validation / deployment status details for Job.
  */
 model EdgeDeviceJobsEceActionStatus {

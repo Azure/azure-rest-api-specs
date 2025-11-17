@@ -7,6 +7,7 @@ import "./Cluster.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
+using Azure.ClientGenerator.Core;
 
 namespace Microsoft.AzureStackHCI;
 /**
@@ -511,6 +512,7 @@ model DeploymentSettingsVirtualSwitchConfigurationOverrides {
 /**
  * The AdapterPropertyOverrides of a cluster.
  */
+//@clientName("AdapterPropertyOverrides")
 model DeploymentSettingsAdapterPropertyOverrides {
   /**
    * This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.
