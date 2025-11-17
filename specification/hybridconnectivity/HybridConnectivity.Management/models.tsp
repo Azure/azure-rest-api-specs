@@ -145,8 +145,8 @@ model ServiceConfigurationResourcePatch {
   /**
    * The service configuration properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: ServiceConfigurationPropertiesPatch;
 }
 
@@ -177,8 +177,8 @@ model EndpointAccessResource {
   /**
    * Azure relay hybrid connection access properties
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   relay?: RelayNamespaceAccessProperties;
 }
 
@@ -208,6 +208,7 @@ model RelayNamespaceAccessProperties {
   /**
    * Access key for hybrid connection.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @visibility(Lifecycle.Read)
   accessKey?: string;
 
@@ -219,6 +220,7 @@ model RelayNamespaceAccessProperties {
   /**
    * The token to access the enabled service.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   serviceConfigurationToken?: string;
 }
 
@@ -229,15 +231,15 @@ model IngressGatewayResource {
   /**
    * Azure relay hybrid connection access properties
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   relay?: RelayNamespaceAccessProperties;
 
   /**
    * Ingress gateway profile
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   ingress?: IngressProfileProperties;
 }
 
@@ -253,8 +255,8 @@ model IngressProfileProperties {
   /**
    * The AAD Profile
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   aadProfile: AADProfileProperties;
 }
 

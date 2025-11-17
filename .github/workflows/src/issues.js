@@ -1,5 +1,3 @@
-// @ts-check
-
 /**
  * Retrieves the PR number associated with a specific commit SHA
  * @param {import('@actions/github-script').AsyncFunctionArguments["github"]} github - GitHub API client

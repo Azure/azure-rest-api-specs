@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resRg",
+    "clusterName": "myCluster",
+    "applicationName": "myApp",
+    "api-version": "2025-10-01-preview",
+    "parameters": {
+      "upgradeKind": "Rolling",
+      "name": "fabric:/Voting",
+      "updateDescription": {
+        "rollingUpgradeMode": "Monitored",
+        "forceRestart": true,
+        "failureAction": "Manual",
+        "healthCheckWaitDurationInMilliseconds": "PT0H0M10S",
+        "healthCheckStableDurationInMilliseconds": "PT1H0M0S",
+        "healthCheckRetryTimeoutInMilliseconds": "PT0H15M0S",
+        "upgradeTimeoutInMilliseconds": "PT2H0M0S",
+        "upgradeDomainTimeoutInMilliseconds": "PT2H0M0S"
+      },
+      "applicationHealthPolicy": {
+        "considerWarningAsError": true,
+        "maxPercentUnhealthyDeployedApplications": 10,
+        "defaultServiceTypeHealthPolicy": {
+          "maxPercentUnhealthyPartitionsPerService": 10,
+          "maxPercentUnhealthyReplicasPerPartition": 11,
+          "maxPercentUnhealthyServices": 12
+        },
+        "serviceTypeHealthPolicyMap": {
+          "VotingWeb": {
+            "maxPercentUnhealthyPartitionsPerService": 13,
+            "maxPercentUnhealthyReplicasPerPartition": 14,
+            "maxPercentUnhealthyServices": 15
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Location": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationResults/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2023-07-01-preview",
+        "Azure-AsyncOperation": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationStatus/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2023-07-01-preview"
+      }
+    }
+  },
+  "operationId": "Applications_UpdateUpgrade",
+  "title": "Update an application upgrade"
+}

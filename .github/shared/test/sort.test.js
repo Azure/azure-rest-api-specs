@@ -1,5 +1,3 @@
-// @ts-check
-
 import { describe, expect, it } from "vitest";
 import { byDate, invert } from "../src/sort.js";
 
@@ -21,15 +19,14 @@ describe("byDate", () => {
   });
 
   it.each([null, undefined, "invalid"])("invalid input: %s", (i) => {
-    /** @type {{foo: string | null | undefined}[]} */
     const input = [{ foo: "2025-01-01" }, { foo: "2024-01-01" }];
-    const comparator = byDate((i) => i.foo);
+    const comparator = byDate((/** @type {{foo: string}} */ i) => i.foo);
 
     // Ensure base case doesn't throw
     input.sort(comparator);
     expect(input).toEqual([{ foo: "2024-01-01" }, { foo: "2025-01-01" }]);
 
-    input[0].foo = i;
+    input[0].foo = /** @type {string} */ (i);
     expect(() => input.sort(comparator)).toThrowError(`Unable to parse '${i}' to a valid date`);
   });
 });

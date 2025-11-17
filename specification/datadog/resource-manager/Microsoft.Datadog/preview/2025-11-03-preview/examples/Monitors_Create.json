@@ -1,0 +1,89 @@
+{
+  "parameters": {
+    "api-version": "2025-11-03-preview",
+    "body": {
+      "location": "West US",
+      "properties": {
+        "datadogOrganizationProperties": {
+          "name": "myOrg",
+          "cspm": false,
+          "enterpriseAppId": "00000000-0000-0000-0000-000000000000",
+          "id": "myOrg123",
+          "linkingAuthCode": "someAuthCode",
+          "linkingClientId": "00000000-0000-0000-0000-000000000000",
+          "resourceCollection": false
+        },
+        "monitoringStatus": "Enabled",
+        "userInfo": {
+          "name": "Alice",
+          "emailAddress": "alice@microsoft.com",
+          "phoneNumber": "123-456-7890"
+        }
+      },
+      "sku": {
+        "name": "free_Monthly"
+      },
+      "tags": {
+        "Environment": "Dev"
+      }
+    },
+    "monitorName": "myMonitor",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myMonitor",
+        "type": "Microsoft.Datadog/monitors",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/monitors/myMonitor",
+        "location": "West US",
+        "properties": {
+          "datadogOrganizationProperties": {
+            "name": "myOrg",
+            "enterpriseAppId": null,
+            "id": "myOrg123",
+            "linkingAuthCode": null,
+            "linkingClientId": null
+          },
+          "liftrResourceCategory": "MonitorLogs",
+          "liftrResourcePreference": 1,
+          "monitoringStatus": "Enabled",
+          "provisioningState": "Succeeded"
+        },
+        "sku": {
+          "name": "free_Monthly"
+        },
+        "tags": {
+          "Environment": "Dev"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "myMonitor",
+        "type": "Microsoft.Datadog/monitors",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/monitors/myMonitor",
+        "location": "West US",
+        "properties": {
+          "datadogOrganizationProperties": {
+            "name": "myOrg",
+            "id": "myOrg123"
+          },
+          "liftrResourceCategory": "MonitorLogs",
+          "liftrResourcePreference": 1,
+          "monitoringStatus": "Enabled",
+          "provisioningState": "Accepted"
+        },
+        "sku": {
+          "name": "free_Monthly"
+        },
+        "tags": {
+          "Environment": "Dev"
+        }
+      }
+    }
+  },
+  "operationId": "Monitors_Create",
+  "title": "Monitors_Create"
+}
