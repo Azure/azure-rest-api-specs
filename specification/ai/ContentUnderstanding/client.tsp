@@ -70,3 +70,9 @@ interface ContentUnderstandingClient {
   "Raw image bytes. Provide bytes-like object; do not base64-encode. Only one of url or data should be specified.",
   DocumentationMode.replace
 );
+
+// Python SDK: Hide string_encoding parameter and always use "codePoint"
+// Python strings are indexed by Unicode code points (len() and str[i] use code points),
+// so ContentSpan offsets with codePoint encoding naturally work with Python's string slicing.
+// Other languages (JavaScript, C#) use UTF-16 and need the parameter exposed.
+@@access(AnalyzeParameters.stringEncoding, Access.internal, "python");
