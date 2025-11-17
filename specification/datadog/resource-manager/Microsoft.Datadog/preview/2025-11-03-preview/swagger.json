@@ -1017,10 +1017,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/SreAgentConfiguration"
-              }
+              "$ref": "#/definitions/SreAgentConfigurationListResponse"
             }
           },
           "default": {
@@ -3243,6 +3240,27 @@
       },
       "required": [
         "mcpConnectorResourceId"
+      ]
+    },
+    "SreAgentConfigurationListResponse": {
+      "type": "object",
+      "description": "Response of a list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SreAgentConfiguration items on this page",
+          "items": {
+            "$ref": "#/definitions/SreAgentConfiguration"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "SreAgentConnectorRequest": {
