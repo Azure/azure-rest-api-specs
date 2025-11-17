@@ -2,6 +2,7 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+
 import "./../Web.Management/models.tsp";
 import "./../Web.Management/back-compatible.tsp";
 import "./../Web.Management/AppServiceEnvironmentResource.tsp";
@@ -95,3 +96,36 @@ using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
+
+
+
+@armProviderNamespace
+@service(#{ title: "WebApps API Client" })
+@versioned(Versions)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+namespace Microsoft.Web;
+
+/**
+ * The available API versions.
+ */
+enum Versions {
+  /**
+   * The 2025-03-01 API version.
+   */
+  v2025_03_01: "2025-03-01",
+}
+
+interface Operations
+  extends Azure.ResourceManager.Legacy.Operations<
+      ArmResponse<CsmOperationCollection>,
+      DefaultErrorResponse
+    > {}
+
+
+
+@@doc(Operations.list,
+  "Description for Implements Csm operations Api to exposes the list of available Csm Apis under the resource provider"
+);
+@@summary(Operations.list,
+  "Implements Csm operations Api to exposes the list of available Csm Apis under the resource provider"
+);
