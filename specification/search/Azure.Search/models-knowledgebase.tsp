@@ -314,10 +314,10 @@ model KnowledgeBaseRetrievalActivityRecord extends KnowledgeBaseActivityRecord {
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
-#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
 @doc("Represents a search index retrieval activity record.")
 model KnowledgeBaseSearchIndexActivityRecord
   extends KnowledgeBaseRetrievalActivityRecord {
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   @doc("The discriminator value.")
   type: "searchIndex";
 
@@ -501,6 +501,7 @@ model KnowledgeBaseReference {
 @doc("Represents an Azure Search document reference.")
 model KnowledgeBaseSearchIndexReference extends KnowledgeBaseReference {
   @doc("The discriminator value.")
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   type: "searchIndex";
 
   @doc("The document key for the reference.")
