@@ -11,6 +11,8 @@ using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.DataFactory;
 
+/** Current status of the change data capture resource. */
+alias ChangeDataCaptureStatusResponse = string;
 /**
  * The identity type.
  */
@@ -4514,7 +4516,6 @@ model LinkedService {
   /**
    * List of tags that can be used for describing the linked service.
    */
-  @identifiers(#[])
   annotations?: unknown[];
 }
 
@@ -4601,7 +4602,6 @@ model Dataset {
   /**
    * List of tags that can be used for describing the Dataset.
    */
-  @identifiers(#[])
   annotations?: unknown[];
 
   /**
@@ -4683,7 +4683,6 @@ model Pipeline {
   /**
    * List of tags that can be used for describing the Pipeline.
    */
-  @identifiers(#[])
   annotations?: unknown[];
 
   /**
@@ -5182,7 +5181,6 @@ model Trigger {
   /**
    * List of tags that can be used for describing the trigger.
    */
-  @identifiers(#[])
   annotations?: unknown[];
 }
 
@@ -5342,7 +5340,6 @@ model DataFlow {
   /**
    * List of tags that can be used for describing the data flow.
    */
-  @identifiers(#[])
   annotations?: unknown[];
 
   /**
@@ -5818,7 +5815,6 @@ model Credential {
   /**
    * List of tags that can be used for describing the Credential.
    */
-  @identifiers(#[])
   annotations?: unknown[];
 }
 
@@ -6153,7 +6149,6 @@ model MapperTargetConnectionsInfo {
   /**
    * List of relationship info among the tables.
    */
-  @identifiers(#[])
   relationships?: unknown[];
 }
 
@@ -20835,13 +20830,11 @@ model CopyActivityTypeProperties {
   /**
    * Preserve Rules.
    */
-  @identifiers(#[])
   preserveRules?: unknown[];
 
   /**
    * Preserve rules.
    */
-  @identifiers(#[])
   preserve?: unknown[];
 
   /**
@@ -24696,7 +24689,6 @@ model HDInsightHiveActivityTypeProperties {
   /**
    * User specified arguments to HDInsightActivity.
    */
-  @identifiers(#[])
   arguments?: unknown[];
 
   /**
@@ -24812,7 +24804,6 @@ model HDInsightMapReduceActivityTypeProperties {
   /**
    * User specified arguments to HDInsightActivity.
    */
-  @identifiers(#[])
   arguments?: unknown[];
 
   /**
@@ -24838,7 +24829,6 @@ model HDInsightMapReduceActivityTypeProperties {
   /**
    * Jar libs.
    */
-  @identifiers(#[])
   jarLibs?: unknown[];
 
   /**
@@ -24876,7 +24866,6 @@ model HDInsightStreamingActivityTypeProperties {
   /**
    * User specified arguments to HDInsightActivity.
    */
-  @identifiers(#[])
   arguments?: unknown[];
 
   /**
@@ -24907,7 +24896,6 @@ model HDInsightStreamingActivityTypeProperties {
   /**
    * Paths to streaming job files. Can be directories.
    */
-  @identifiers(#[])
   filePaths: unknown[];
 
   /**
@@ -24923,7 +24911,6 @@ model HDInsightStreamingActivityTypeProperties {
   /**
    * Command line environment values.
    */
-  @identifiers(#[])
   commandEnvironment?: unknown[];
 
   /**
@@ -24965,7 +24952,6 @@ model HDInsightSparkActivityTypeProperties {
   /**
    * The user-specified arguments to HDInsightSparkActivity.
    */
-  @identifiers(#[])
   arguments?: unknown[];
 
   /**
@@ -25693,7 +25679,6 @@ model GetMetadataActivityTypeProperties {
   /**
    * Fields of metadata to get from dataset.
    */
-  @identifiers(#[])
   fieldList?: unknown[];
 
   /**
@@ -26273,7 +26258,6 @@ model DatabricksSparkJarActivityTypeProperties {
   /**
    * Parameters that will be passed to the main method.
    */
-  @identifiers(#[])
   parameters?: unknown[];
 
   /**
@@ -26310,7 +26294,6 @@ model DatabricksSparkPythonActivityTypeProperties {
   /**
    * Command line parameters that will be passed to the Python file.
    */
-  @identifiers(#[])
   parameters?: unknown[];
 
   /**
@@ -26984,7 +26967,6 @@ model SynapseSparkJobActivityTypeProperties {
   /**
    * User specified arguments to SynapseSparkJobDefinitionActivity.
    */
-  @identifiers(#[])
   args?: unknown[];
 
   /**
@@ -27005,19 +26987,16 @@ model SynapseSparkJobActivityTypeProperties {
   /**
    * (Deprecated. Please use pythonCodeReference and filesV2) Additional files used for reference in the main definition file, which will override the 'files' of the spark job definition you provide.
    */
-  @identifiers(#[])
   files?: unknown[];
 
   /**
    * Additional python code files used for reference in the main definition file, which will override the 'pyFiles' of the spark job definition you provide.
    */
-  @identifiers(#[])
   pythonCodeReference?: unknown[];
 
   /**
    * Additional files used for reference in the main definition file, which will override the 'jars' and 'files' of the spark job definition you provide.
    */
-  @identifiers(#[])
   filesV2?: unknown[];
 
   /**
@@ -27475,7 +27454,6 @@ model CustomEventsTriggerTypeProperties {
   /**
    * The list of event types that cause this trigger to fire.
    */
-  @identifiers(#[])
   events: unknown[];
 
   /**

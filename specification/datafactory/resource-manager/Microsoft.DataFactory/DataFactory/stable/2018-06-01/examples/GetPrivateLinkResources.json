@@ -1,19 +1,18 @@
 {
   "parameters": {
-    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
-    "resourceGroupName": "exampleResourceGroup",
+    "api-version": "2018-06-01",
     "factoryName": "exampleFactoryName",
-    "api-version": "2018-06-01"
+    "resourceGroupName": "exampleResourceGroup",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
         "value": [
           {
             "name": "exampleFactoryName",
-            "id": "/subscriptions/12345678-1234-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.DataFactory/factories/exampleFactoryName",
             "type": "Microsoft.DataFactory/factories/privateLinkResources",
+            "id": "/subscriptions/12345678-1234-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.DataFactory/factories/exampleFactoryName",
             "properties": {
               "groupId": "dataFactory",
               "requiredMembers": [
@@ -25,7 +24,10 @@
             }
           }
         ]
-      }
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "privateLinkResources_Get",
+  "title": "Get private link resources of a site"
 }

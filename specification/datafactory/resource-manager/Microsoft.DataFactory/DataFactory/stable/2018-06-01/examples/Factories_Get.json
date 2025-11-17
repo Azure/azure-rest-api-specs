@@ -1,49 +1,51 @@
 {
   "parameters": {
-    "subscriptionId": "12345678-1234-1234-1234-12345678abc",
-    "resourceGroupName": "exampleResourceGroup",
+    "api-version": "2018-06-01",
     "factoryName": "exampleFactoryName",
     "ifNoneMatch": "00004004-0000-0000-0000-5b28979e0000",
-    "api-version": "2018-06-01"
+    "resourceGroupName": "exampleResourceGroup",
+    "subscriptionId": "12345678-1234-1234-1234-12345678abc"
   },
   "responses": {
-    "304": {},
     "200": {
-      "headers": {
-        "Date": "Tue, 19 Jun 2018 05:41:50 GMT",
-        "X-Content-Type-Options": "nosniff",
-        "x-ms-ratelimit-remaining-subscription-reads": "14994",
-        "x-ms-request-id": "d84e59aa-718c-4b1a-951c-076ffff766c8",
-        "x-ms-correlation-request-id": "d84e59aa-718c-4b1a-951c-076ffff766c8"
-      },
       "body": {
         "name": "exampleFactoryName",
-        "id": "/subscriptions/12345678-1234-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.DataFactory/factories/exampleFactoryName",
         "type": "Microsoft.DataFactory/factories",
+        "eTag": "\"00004004-0000-0000-0000-5b28979e0000\"",
+        "id": "/subscriptions/12345678-1234-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.DataFactory/factories/exampleFactoryName",
+        "location": "East US",
         "properties": {
-          "provisioningState": "Succeeded",
           "createTime": "2018-06-19T05:41:50.0041314Z",
-          "version": "2018-06-01",
+          "provisioningState": "Succeeded",
           "purviewConfiguration": {
             "purviewResourceId": "/subscriptions/12345678-1234-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.Purview/accounts/examplePurview"
           },
           "repoConfiguration": {
             "type": "FactoryVSTSConfiguration",
-            "projectName": "project",
-            "tenantId": "",
             "accountName": "ADF",
-            "repositoryName": "repo",
             "collaborationBranch": "master",
+            "lastCommitId": "",
+            "projectName": "project",
+            "repositoryName": "repo",
             "rootFolder": "/",
-            "lastCommitId": ""
-          }
+            "tenantId": ""
+          },
+          "version": "2018-06-01"
         },
-        "eTag": "\"00004004-0000-0000-0000-5b28979e0000\"",
-        "location": "East US",
         "tags": {
           "exampleTag": "exampleValue"
         }
+      },
+      "headers": {
+        "Date": "Tue, 19 Jun 2018 05:41:50 GMT",
+        "X-Content-Type-Options": "nosniff",
+        "x-ms-correlation-request-id": "d84e59aa-718c-4b1a-951c-076ffff766c8",
+        "x-ms-ratelimit-remaining-subscription-reads": "14994",
+        "x-ms-request-id": "d84e59aa-718c-4b1a-951c-076ffff766c8"
       }
-    }
-  }
+    },
+    "304": {}
+  },
+  "operationId": "Factories_Get",
+  "title": "Factories_Get"
 }
