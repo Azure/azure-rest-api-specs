@@ -24,19 +24,34 @@ import { embedError } from "./spec-model.js";
 /**
  * @typedef {Object} SwaggerJSON
  * @property {string} path
+ * @property {Operation[]} [operations]
  * @property {Object[]} [refs]
  */
 
-const pathSchema = z.record(z.string(), z.object({ operationId: z.string().optional() }));
+// https://swagger.io/specification/v2/#operation-object
+const operationSchema = z.object({ operationId: z.string().optional() });
+/**
+ * @typedef {import("zod").infer<typeof operationSchema>} OperationObject
+ */
+
+// TODO: Consider narrowing to only the field names in the spec ("get", "put", etc)
+// https://swagger.io/specification/v2/#path-item-object
+const pathSchema = z
+  .object({
+    parameters: z.array(z.unknown()).optional(),
+  })
+  .catchall(operationSchema);
 /**
  * @typedef {import("zod").infer<typeof pathSchema>} PathObject
  */
 
+// https://swagger.io/specification/v2/#paths-object
 const pathsSchema = z.record(z.string(), pathSchema);
 /**
  * @typedef {import("zod").infer<typeof pathsSchema>} PathsObject
  */
 
+// https://swagger.io/specification/v2/#swagger-object
 const swaggerSchema = z.object({
   paths: pathsSchema.optional(),
   "x-ms-paths": pathsSchema.optional(),
@@ -48,6 +63,7 @@ const swaggerSchema = z.object({
  * const swagger = {
  *   "paths": {
  *     "/foo": {
+ *       "parameters": [ ... ],
  *       "get": {
  *         "operationId": "Foo_Get"
  *       },
@@ -235,8 +251,10 @@ export class Swagger {
    * @returns {void}
    */
   #addOperations(operations, path, pathObject) {
-    for (const [method, operation] of Object.entries(pathObject)) {
-      if (operation.operationId !== undefined && method !== "parameters") {
+    for (const [method, operation] of Object.entries(
+      /** @type {Omit<PathObject, "parameters">} */ (pathObject),
+    )) {
+      if (method !== "parameters" && operation.operationId !== undefined) {
         const operationObj = {
           id: operation.operationId,
           httpMethod: method.toUpperCase(),
@@ -275,7 +293,7 @@ export class Swagger {
    * @returns {Promise<SwaggerJSON|ErrorJSON>}
    */
   async toJSONAsync(options = {}) {
-    const { includeRefs, relativePaths } = options;
+    const { includeOperations, includeRefs, relativePaths } = options;
 
     return await embedError(
       async () => ({
@@ -283,6 +301,12 @@ export class Swagger {
           relativePaths && this.#tag?.readme?.specModel
             ? relative(this.#tag?.readme?.specModel.folder, this.#path)
             : this.#path,
+        operations: includeOperations
+          ? [...(await this.getOperations()).values()].map((o) => {
+              // Create new object with properties in preferred output order
+              return { path: o.path, httpMethod: o.httpMethod, id: o.id };
+            })
+          : undefined,
         refs: includeRefs
           ? await mapAsync(
               [...(await this.getRefs()).values()].sort((a, b) => a.path.localeCompare(b.path)),

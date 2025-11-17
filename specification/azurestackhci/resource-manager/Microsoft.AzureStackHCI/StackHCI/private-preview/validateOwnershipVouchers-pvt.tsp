@@ -11,14 +11,14 @@ namespace Microsoft.AzureStackHCI;
 @doc("Validate Ownership Voucher Request")
 model ValidateOwnershipVouchersRequest {
   @doc("Ownership Voucher Details.")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   ownershipVoucherDetails?: OwnershipVoucherDetails[];
 }
 
 @doc("Validate Ownership Voucher Response")
 model ValidateOwnershipVouchersResponse {
   @doc("Ownership Voucher Validation Details.")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   ownershipVoucherValidationDetails?: OwnershipVoucherValidationDetails[];
 }
 

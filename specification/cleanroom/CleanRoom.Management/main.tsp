@@ -15,11 +15,8 @@ import "./models.tsp";
 import "./Collaboration.tsp";
 import "./Consortium.tsp";
 import "./Contract.tsp";
+import "./back-compatible.tsp";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
-using Azure.ResourceManager.Foundations;
-using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**

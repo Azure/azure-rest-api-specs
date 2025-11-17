@@ -14,6 +14,9 @@ union CloudEventsType {
   @doc("EventSchemaSetCloudEventsConfig")
   EventSchemaSet: "EventSchemaSet",
 
+  @doc("CdcEventSchemaSetCloudEventsConfig")
+  CdcEventSchemaSet: "CdcEventSchemaSet",
+
   string,
 }
 
@@ -75,4 +78,53 @@ model EventSchemaSetCloudEventsConfig extends CloudEventsConfig {
 
   @doc("Auth of EventSchemaSet")
   authentication: Models.Auth.Authentication;
+}
+
+@doc("Types of register")
+union AutoRegisterType {
+  @doc("AutoRegister type")
+  CdcAutoRegister: "CdcAutoRegister",
+
+  string,
+}
+
+@doc("Base configuration for schema autoRegister.")
+@discriminator("type")
+model AutoRegisterConfig {
+  @doc("Type of register")
+  type: AutoRegisterType;
+
+  @doc("The catalog endpoint  of auto register schema.")
+  catalogEndpoint: string;
+
+  @doc("The message group id of auto register schema.")
+  messageGroupId: string;
+
+  @doc("The schema group id of auto register schema.")
+  schemaGroupId: string;
+}
+
+@doc("Configuration for CdcAutoRegister")
+model CdcAutoRegisterConfig extends AutoRegisterConfig {
+  @doc("Type of CdcAutoRegister.")
+  type: AutoRegisterType.CdcAutoRegister;
+
+  @doc("The source of auto register schema.")
+  cloudEventSource: string;
+}
+
+@doc("EventSchemaSet cloud events transform config for CDC(Change data capture).")
+model CdcEventSchemaSetCloudEventsConfig extends CloudEventsConfig {
+  @doc("Type of CdcEventSchemaSetCloudEventsConfig.")
+  type: CloudEventsType.CdcEventSchemaSet;
+
+  @doc("Array of CatalogMessagingSelf.")
+  @Azure.ResourceManager.identifiers(#[])
+  catalogMessageSelves: CatalogMessageSelf[];
+
+  @doc("Auth of EventSchemaSet")
+  authentication: Models.Auth.Authentication;
+
+  @doc("Configuration for register")
+  autoRegisterConfig: AutoRegisterConfig;
 }

@@ -838,7 +838,7 @@
             "description": "The name of the MaintenanceRequest",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[a-zA-Z0-9-]{3,64}$"
           }
         ],
         "responses": {
@@ -891,7 +891,7 @@
             "description": "The name of the MaintenanceRequest",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[a-zA-Z0-9-]{3,64}$"
           },
           {
             "name": "resource",
@@ -974,7 +974,7 @@
             "description": "The name of the MaintenanceRequest",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[a-zA-Z0-9-]{3,64}$"
           },
           {
             "name": "properties",
@@ -1054,7 +1054,7 @@
             "description": "The name of the MaintenanceRequest",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[a-zA-Z0-9-]{3,64}$"
           }
         ],
         "responses": {
@@ -2151,7 +2151,7 @@
         },
         "unhealthyResources": {
           "type": "array",
-          "description": "The ARM resource IDs of the entities that are reported to be unhealthy.",
+          "description": "The Azure resource IDs of the entities that are reported to be unhealthy.",
           "items": {
             "$ref": "#/definitions/ReportableWithinMaintenanceRequestResourceId"
           },
@@ -2167,6 +2167,19 @@
             "read",
             "create"
           ]
+        },
+        "repairedResources": {
+          "type": "array",
+          "description": "The Azure resource IDs of the entities that are repaired through this request.",
+          "items": {
+            "$ref": "#/definitions/ReportableWithinMaintenanceRequestResourceId"
+          },
+          "readOnly": true
+        },
+        "repairCategory": {
+          "$ref": "#/definitions/MaintenanceRequestRepairCategory",
+          "description": "The category of repair on the repaired resources.",
+          "readOnly": true
         },
         "workloadImpactId": {
           "$ref": "#/definitions/WorkloadImpactResourceId",
@@ -2212,6 +2225,60 @@
           "$ref": "#/definitions/MaintenanceRequestState",
           "description": "The current state of the maintenance request in the encompassing workflow.\nCustomers can only create a maintenance request with \"Investigating\" or\n\"Approved\" state, and can only update this from \"WaitingForApproval\" to \"Approved\"."
         }
+      }
+    },
+    "MaintenanceRequestRepairCategory": {
+      "type": "string",
+      "description": "The types of repair covered by maintenance requests.",
+      "enum": [
+        "HumanInvestigate",
+        "OsUpgrade",
+        "PowerCycle",
+        "Restart",
+        "RMA",
+        "ReplaceNic",
+        "ReplaceCable"
+      ],
+      "x-ms-enum": {
+        "name": "MaintenanceRequestRepairCategory",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "HumanInvestigate",
+            "value": "HumanInvestigate",
+            "description": "The repair needs human investigation."
+          },
+          {
+            "name": "OsUpgrade",
+            "value": "OsUpgrade",
+            "description": "The operating system needs to be upgraded."
+          },
+          {
+            "name": "PowerCycle",
+            "value": "PowerCycle",
+            "description": "A power cycle is required."
+          },
+          {
+            "name": "Restart",
+            "value": "Restart",
+            "description": "A restart without power cycle is required."
+          },
+          {
+            "name": "RMA",
+            "value": "RMA",
+            "description": "The repair involves an RMA on a device."
+          },
+          {
+            "name": "ReplaceNic",
+            "value": "ReplaceNic",
+            "description": "A NIC needs to be replaced."
+          },
+          {
+            "name": "ReplaceCable",
+            "value": "ReplaceCable",
+            "description": "A cable needs to be replaced."
+          }
+        ]
       }
     },
     "MaintenanceRequestResourceId": {
