@@ -39,13 +39,10 @@ options:
     namespace: "azure.mgmt.computelimit"
     generate-sample: true
     generate-test: true
-  "@azure-tools/typespec-csharp":
-    flavor: azure
+  "@azure-typespec/http-client-csharp-mgmt":
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    package-dir: "Azure.ResourceManager.ComputeLimit"
-    namespace: "Azure.ResourceManager.ComputeLimit"
-    clear-output-folder: true
-    model-namespace: true
+    package-name: "Azure.ResourceManager.ComputeLimit"
+    namespace: "{package-name}"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
