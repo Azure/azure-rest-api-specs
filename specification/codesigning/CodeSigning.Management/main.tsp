@@ -5,6 +5,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./CodeSigningAccount.tsp";
 import "./CertificateProfile.tsp";
+import "./back-compatible.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

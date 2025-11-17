@@ -1,30 +1,35 @@
 {
+  "operationId": "KnowledgeRetrieval_Retrieve",
+  "title": "KnowledgeBaseRetrieveWithIntents",
   "parameters": {
-    "endpoint": "https://myservice.search.windows.net",
-    "knowledgeBaseName": "my-knowledge-base",
+    "endpoint": "https://previewexampleservice.search.windows.net",
+    "knowledgeBaseName": "base-preview-test",
     "api-version": "2025-11-01-preview",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
+    "x-ms-query-source-authorization": null,
     "retrievalRequest": {
       "intents": [
         {
-          "type": "semantic",
-          "search": "latest features in Azure AI Search"
-        },
-        {
-          "type": "semantic",
-          "search": "pricing information"
+          "search": "foo",
+          "type": "semantic"
         }
       ],
+      "maxRuntimeInSeconds": 60,
+      "maxOutputSize": 100000,
       "retrievalReasoningEffort": {
         "kind": "minimal"
       },
-      "outputMode": "extractiveData",
       "includeActivity": true,
+      "outputMode": "extractiveData",
       "knowledgeSourceParams": [
         {
-          "knowledgeSourceName": "documentation-index",
-          "kind": "searchIndex",
+          "filterAddOn": "foo eq bar",
+          "knowledgeSourceName": "ks-preview-test",
           "includeReferences": true,
-          "filterAddOn": "category eq 'documentation'"
+          "includeReferenceSourceData": true,
+          "alwaysQuerySource": true,
+          "rerankerThreshold": 2.1,
+          "kind": "searchIndex"
         }
       ]
     }
@@ -34,55 +39,183 @@
       "body": {
         "response": [
           {
-            "role": "assistant",
             "content": [
               {
                 "type": "text",
-                "text": "Azure AI Search includes vector search, semantic search, and hybrid search capabilities."
+                "text": "[{...}]"
               }
             ]
           }
         ],
         "activity": [
           {
-            "id": 1,
             "type": "searchIndex",
-            "elapsedMs": 120,
-            "knowledgeSourceName": "documentation-index",
-            "queryTime": "2025-10-13T16:00:00Z",
-            "count": 8,
+            "id": 0,
+            "knowledgeSourceName": "ks-preview-test",
+            "queryTime": "2025-01-01T00:08:45.045Z",
+            "count": 2,
+            "elapsedMs": 1234,
             "searchIndexArguments": {
-              "search": "latest features in Azure AI Search",
-              "filter": "category eq 'documentation'"
+              "search": "foo",
+              "filter": "foo eq bar",
+              "sourceDataFields": [
+                {
+                  "name": "category"
+                },
+                {
+                  "name": "description"
+                },
+                {
+                  "name": "ownerId"
+                },
+                {
+                  "name": "id"
+                }
+              ],
+              "searchFields": [
+                {
+                  "name": "*"
+                }
+              ],
+              "semanticConfigurationName": "testconfig"
             }
           },
           {
-            "id": 2,
-            "type": "searchIndex",
-            "elapsedMs": 95,
-            "knowledgeSourceName": "documentation-index",
-            "queryTime": "2025-10-13T16:00:00Z",
-            "count": 3,
-            "searchIndexArguments": {
-              "search": "pricing information",
-              "filter": "category eq 'documentation'"
-            }
+            "type": "agenticReasoning",
+            "id": 1,
+            "retrievalReasoningEffort": {
+              "kind": "minimal"
+            },
+            "reasoningTokens": 37
           }
         ],
         "references": [
           {
             "type": "searchIndex",
-            "id": "doc1",
-            "activitySource": 1,
-            "rerankerScore": 0.92,
-            "docKey": "456"
+            "id": "83dd7d40",
+            "activitySource": 0,
+            "sourceData": {
+              "id": "myDocKey1",
+              "title": "high_doc",
+              "content": "hello world"
+            },
+            "rerankerScore": 3.5,
+            "docKey": "myDocKey1"
           },
           {
             "type": "searchIndex",
-            "id": "doc2",
-            "activitySource": 2,
-            "rerankerScore": 0.88,
-            "docKey": "789"
+            "id": "83dd7d41",
+            "activitySource": 0,
+            "sourceData": {
+              "id": "myDocKey2",
+              "title": "low_doc",
+              "content": "goodbye world"
+            },
+            "rerankerScore": 2.7,
+            "docKey": "myDocKey2"
+          }
+        ]
+      }
+    },
+    "206": {
+      "body": {
+        "response": [
+          {
+            "content": [
+              {
+                "type": "text",
+                "text": "[{...}]"
+              }
+            ]
+          }
+        ],
+        "activity": [
+          {
+            "type": "searchIndex",
+            "id": 0,
+            "knowledgeSourceName": "ks-preview-test",
+            "queryTime": "2025-01-01T00:08:45.045Z",
+            "count": 2,
+            "elapsedMs": 1234,
+            "searchIndexArguments": {
+              "search": "foo",
+              "filter": "foo eq bar",
+              "sourceDataFields": [
+                {
+                  "name": "category"
+                },
+                {
+                  "name": "description"
+                },
+                {
+                  "name": "ownerId"
+                },
+                {
+                  "name": "id"
+                }
+              ],
+              "searchFields": [
+                {
+                  "name": "*"
+                }
+              ],
+              "semanticConfigurationName": "testconfig"
+            }
+          },
+          {
+            "type": "web",
+            "id": 1,
+            "knowledgeSourceName": "ks-preview-web",
+            "queryTime": "2025-01-01T00:08:45.045Z",
+            "count": 10,
+            "elapsedMs": 2345,
+            "error": {
+              "code": "403",
+              "message": "The error message",
+              "details": [],
+              "additionalInfo": [
+                {
+                  "type": "SomeErrorType",
+                  "info": {
+                    "someProperty": "Some value"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "agenticReasoning",
+            "id": 2,
+            "retrievalReasoningEffort": {
+              "kind": "minimal"
+            },
+            "reasoningTokens": 37
+          }
+        ],
+        "references": [
+          {
+            "type": "searchIndex",
+            "id": "83dd7d40",
+            "activitySource": 0,
+            "sourceData": {
+              "id": "myDocKey1",
+              "title": "high_doc",
+              "content": "hello world"
+            },
+            "rerankerScore": 3.5,
+            "docKey": "myDocKey1"
+          },
+          {
+            "type": "searchIndex",
+            "id": "83dd7d41",
+            "activitySource": 0,
+            "sourceData": {
+              "id": "myDocKey2",
+              "title": "low_doc",
+              "content": "goodbye world"
+            },
+            "rerankerScore": 2.7,
+            "docKey": "myDocKey2"
           }
         ]
       }
