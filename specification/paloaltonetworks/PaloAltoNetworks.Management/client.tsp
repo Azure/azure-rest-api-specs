@@ -335,5 +335,5 @@ using PaloAltoNetworks.Cloudngfw;
 @@Legacy.nextLinkVerb(LocalRulestackResources.listCountries, "POST");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "POST nextlink"
 @@Legacy.nextLinkVerb(LocalRulestackResources.listPredefinedUrlCategories,
-  "POST",
+  "POST"
 );
