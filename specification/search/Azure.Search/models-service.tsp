@@ -4275,6 +4275,7 @@ model KnowledgeBase {
   outputMode?: KnowledgeRetrievalOutputMode;
 
   @doc("The ETag of the knowledge base.")
+  @encodedName("application/json", "@odata.etag")
   eTag?: string;
 
   @doc("A description of an encryption key that you create in Azure Key Vault.")
@@ -4367,6 +4368,7 @@ model KnowledgeSource {
   kind: KnowledgeSourceKind;
 
   @doc("The ETag of the agent.")
+  @encodedName("application/json", "@odata.etag")
   eTag?: string;
 
   @doc("A description of an encryption key that you create in Azure Key Vault.")
@@ -4477,6 +4479,9 @@ model SearchServiceStatistics {
 
   @doc("Service level general limits.")
   limits: SearchServiceLimits;
+
+  @doc("Service level indexer runtime consumption.")
+  indexersRuntime?: ServiceIndexersRuntime;
 }
 
 @doc("Represents service-level resource counters and quotas.")
@@ -4534,6 +4539,9 @@ model SearchServiceLimits {
 
   @doc("The maximum amount of storage in bytes allowed per index.")
   maxStoragePerIndex?: int64;
+
+  @doc("The maximum cumulative indexer runtime in seconds allowed for the service.")
+  maxCumulativeIndexerRuntimeSeconds?: int64;
 }
 
 @doc("Represents service-level indexer runtime counters.")
@@ -6085,6 +6093,7 @@ model ChatCompletionSchemaProperties {
 @doc("Common language model parameters for Chat Completions. If omitted, default values are used.")
 model ChatCompletionCommonModelParameters {
   @doc("The name of the model to use (e.g., 'gpt-4o', etc.). Default is null if not specified.")
+  @encodedName("application/json", "model")
   modelName?: string;
 
   @doc("A float in the range [-2,2] that reduces or increases likelihood of repeated tokens. Default is 0.")
