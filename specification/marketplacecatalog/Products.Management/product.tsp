@@ -626,7 +626,7 @@ model Availability {
   @doc("Applicable billing meter information")
   meter?: Meter;
 
-  @doc("Specifies the distribution channel and customer segment for product pricing and availability. Possible values:\n- `DirectCommercial` - Available through direct Azure Marketplace purchases for commercial customers without intermediaries like partners or resellers\n- `PartnerCommercial` - Available through Cloud Solution Provider partner channel for reseller distribution")
+  @doc("Specifies the distribution channel and customer segment for product pricing and availability. Possible values:\n- `Direct-Commercial` - Available through direct Azure Marketplace purchases for commercial customers without intermediaries like partners or resellers\n- `Partner-Commercial` - Available through Cloud Solution Provider partner channel for reseller distribution")
   pricingAudience: string;
 
   @doc("List of applicable terms")
