@@ -342,6 +342,8 @@ namespace KnowledgeBaseRetrievalClient {
 @@usage(SemanticErrorReason, Usage.input);
 @@access(IndexBatch, Access.public);
 @@usage(IndexBatch, Usage.input);
+@@access(KnowledgeSourceStatus, Access.public);
+@@usage(KnowledgeSourceStatus, Usage.input);
 
 @@access(SearchClient.Documents.searchGet, Access.internal);
 @@access(SearchClient.Documents.searchPost, Access.internal);
@@ -1844,20 +1846,6 @@ namespace KnowledgeBaseRetrievalClient {
   "Azure.Search.Documents.Indexes"
 );
 @@clientNamespace(Search.SearchIndexerDataIdentity,
-  "com.azure.search.documents.indexes",
-  "java"
-);
-@@clientNamespace(Search.KnowledgeSourceStatus,
-  "Azure.Search.Documents.Indexes"
-);
-@@clientNamespace(Search.KnowledgeSourceStatus,
-  "com.azure.search.documents.indexes",
-  "java"
-);
-@@clientNamespace(Search.KnowledgeSourceAzureOpenAIVectorizer,
-  "Azure.Search.Documents.Indexes"
-);
-@@clientNamespace(Search.KnowledgeSourceAzureOpenAIVectorizer,
   "com.azure.search.documents.indexes",
   "java"
 );
