@@ -2,7 +2,6 @@ import "./common.tsp";
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Versioning;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.ManagedNetworkFabric;
 @doc("Network Fabric Properties defines the properties of the resource.")
@@ -923,6 +922,7 @@ model AuthorizedTransceiverProperties {
   @doc("Vendor of the transceiver.")
   vendor?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("Key that must be configured on the fabric.")
   key?: string;
 }

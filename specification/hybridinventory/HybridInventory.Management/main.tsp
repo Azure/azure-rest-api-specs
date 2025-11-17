@@ -17,10 +17,6 @@ import "./PgsqlInstance.tsp";
 import "./PgsqlDatabase.tsp";
 import "./Agent.tsp";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
-using Azure.ResourceManager.Foundations;
-using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
