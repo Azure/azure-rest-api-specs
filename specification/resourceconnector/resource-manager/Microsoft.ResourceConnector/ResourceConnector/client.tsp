@@ -1,0 +1,26 @@
+import "@azure-tools/typespec-client-generator-core";
+import "./main.tsp";
+
+using Azure.ClientGenerator.Core;
+using Microsoft.ResourceConnector;
+
+@@clientName(Microsoft.ResourceConnector,
+  "ResourceConnectorManagementClient",
+  "javascript"
+);
+@@clientName(Microsoft.ResourceConnector,
+  "ResourceConnectorMgmtClient",
+  "python"
+);
+
+@@clientName(Microsoft.ResourceConnector.SSHKey, "SshKey", "java");
+
+// Fix property name case changes to maintain backward compatibility
+@@clientName(Microsoft.ResourceConnector.SSHKey.expirationTimeStamp,
+  "expirationTimestamp",
+  "java"
+);
+@@clientName(Microsoft.ResourceConnector.SSHKey.creationTimeStamp,
+  "creationTimestamp",
+  "java"
+);

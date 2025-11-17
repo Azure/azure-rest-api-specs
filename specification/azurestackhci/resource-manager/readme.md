@@ -29,7 +29,7 @@ title: AzureStackHCIClient
 description: Azure Stack HCI management service
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-01
+tag: package-preview-2025-09-15-preview
 ```
 
 ## Suppression
@@ -81,6 +81,29 @@ suppressions:
     reason: already working without the properties section, adding it will break polymorphism
     from:
       - edgeDevices.json
+```
+
+### Tag: package-preview-2025-09-15-preview
+
+These settings apply only when `--tag=package-preview-2025-09-15-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-09-15-preview'
+input-file:
+  - Microsoft.AzureStackHCI/StackHCI//preview/2025-09-15-preview/arcSettings.json
+  - Microsoft.AzureStackHCI/StackHCI//preview/2025-09-15-preview/clusters.json
+  - Microsoft.AzureStackHCI/StackHCI//preview/2025-09-15-preview/deploymentSettings.json
+  - Microsoft.AzureStackHCI/StackHCI//preview/2025-09-15-preview/edgeDeviceJobs.json
+  - Microsoft.AzureStackHCI/StackHCI//preview/2025-09-15-preview/edgeDevices.json
+  - Microsoft.AzureStackHCI/StackHCI//preview/2025-09-15-preview/extensions.json
+  - Microsoft.AzureStackHCI/StackHCI//preview/2025-09-15-preview/hciCommon.json
+  - Microsoft.AzureStackHCI/StackHCI//preview/2025-09-15-preview/offers.json
+  - Microsoft.AzureStackHCI/StackHCI//preview/2025-09-15-preview/publishers.json
+  - Microsoft.AzureStackHCI/StackHCI//preview/2025-09-15-preview/securitySettings.json
+  - Microsoft.AzureStackHCI/StackHCI//preview/2025-09-15-preview/skus.json
+  - Microsoft.AzureStackHCI/StackHCI//preview/2025-09-15-preview/updateRuns.json
+  - Microsoft.AzureStackHCI/StackHCI//preview/2025-09-15-preview/updates.json
+  - Microsoft.AzureStackHCI/StackHCI//preview/2025-09-15-preview/updateSummaries.json
+  - Microsoft.AzureStackHCI/StackHCI//preview/2025-09-15-preview/validatedSolutionRecipes.json
 ```
 
 ### Tag: package-preview-2024-02
