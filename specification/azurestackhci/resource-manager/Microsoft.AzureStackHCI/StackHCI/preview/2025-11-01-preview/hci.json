@@ -2518,7 +2518,7 @@
             "type": "string"
           },
           {
-            "name": "body",
+            "name": "changeRingRequest",
             "in": "body",
             "description": "The content of the action request",
             "required": true,
@@ -4790,6 +4790,24 @@
         ]
       }
     },
+    "AdapterPropertyOverrides": {
+      "type": "object",
+      "description": "The AdapterPropertyOverrides of a cluster.",
+      "properties": {
+        "jumboPacket": {
+          "type": "string",
+          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation."
+        },
+        "networkDirect": {
+          "type": "string",
+          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation."
+        },
+        "networkDirectTechnology": {
+          "type": "string",
+          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation. Expected values are 'iWARP', 'RoCEv2', 'RoCE'"
+        }
+      }
+    },
     "ArcConnectivityProperties": {
       "type": "object",
       "description": "Connectivity related configuration required by arc server.",
@@ -6642,24 +6660,6 @@
         "value"
       ]
     },
-    "DeploymentSettingsAdapterPropertyOverrides": {
-      "type": "object",
-      "description": "The AdapterPropertyOverrides of a cluster.",
-      "properties": {
-        "jumboPacket": {
-          "type": "string",
-          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation."
-        },
-        "networkDirect": {
-          "type": "string",
-          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation."
-        },
-        "networkDirectTechnology": {
-          "type": "string",
-          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation. Expected values are 'iWARP', 'RoCEv2', 'RoCE'"
-        }
-      }
-    },
     "DeploymentSettingsHostNetwork": {
       "type": "object",
       "description": "The HostNetwork of a cluster.",
@@ -6737,7 +6737,7 @@
           "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation."
         },
         "adapterPropertyOverrides": {
-          "$ref": "#/definitions/DeploymentSettingsAdapterPropertyOverrides",
+          "$ref": "#/definitions/AdapterPropertyOverrides",
           "description": "Set Adapter PropertyOverrides for cluster."
         }
       }

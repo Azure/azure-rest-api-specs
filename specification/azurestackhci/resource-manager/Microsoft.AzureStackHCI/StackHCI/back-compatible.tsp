@@ -36,6 +36,10 @@ using Microsoft.AzureStackHCI;
 @@clientName(Clusters.configureRemoteSupport::parameters.body,
   "remoteSupportRequest"
 );
+@@clientName(Clusters.changeRing::parameters.body,
+  "changeRingRequest"
+);
+
 
 @@clientName(EdgeDevices.validate::parameters.body, "ValidateRequest");
 

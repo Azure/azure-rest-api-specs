@@ -512,7 +512,7 @@ model DeploymentSettingsVirtualSwitchConfigurationOverrides {
 /**
  * The AdapterPropertyOverrides of a cluster.
  */
-//@clientName("AdapterPropertyOverrides")
+@clientName("AdapterPropertyOverrides")
 model DeploymentSettingsAdapterPropertyOverrides {
   /**
    * This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.
