@@ -27,7 +27,12 @@ interface Documents {
 
       ...SearchOptions;
     },
-    SearchDocumentsResult
+    SearchDocumentsResult & {
+      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
+      @doc("A process exit code.")
+      @statusCode
+      code: "200" | "206";
+    }
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
@@ -39,7 +44,12 @@ interface Documents {
     {
       ...SearchRequest;
     },
-    SearchDocumentsResult
+    SearchDocumentsResult & {
+      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
+      @doc("A process exit code.")
+      @statusCode
+      code: "200" | "206";
+    }
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
