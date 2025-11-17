@@ -293,7 +293,6 @@ namespace SearchIndexerClient {
 @clientNamespace("Azure.Search.Documents.KnowledgeBase")
 @clientNamespace("com.azure.search.documents.knowledgebase", "java")
 namespace KnowledgeBaseRetrievalClient {
-  @added(Search.Versions.v2025_11_01_preview)
   interface KnowledgeRetrieval {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
@@ -1600,6 +1599,30 @@ namespace KnowledgeBaseRetrievalClient {
   "Azure.Search.Documents.Indexes"
 );
 @@clientNamespace(Search.VisionVectorizeSkill,
+  "com.azure.search.documents.indexes", "java"
+);
+@@clientNamespace(Search.ContentUnderstandingSkillChunkingUnit,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.ContentUnderstandingSkillChunkingUnit,
+  "com.azure.search.documents.indexes", "java"
+);
+@@clientNamespace(Search.ContentUnderstandingSkillExtractionOptions,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.ContentUnderstandingSkillExtractionOptions,
+  "com.azure.search.documents.indexes", "java"
+);
+@@clientNamespace(Search.ContentUnderstandingSkill,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.ContentUnderstandingSkill,
+  "com.azure.search.documents.indexes", "java"
+);
+@@clientNamespace(Search.ContentUnderstandingSkillChunkingProperties,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.ContentUnderstandingSkillChunkingProperties,
   "com.azure.search.documents.indexes", "java"
 );
 @@clientNamespace(Search.IndexStatisticsSummary,

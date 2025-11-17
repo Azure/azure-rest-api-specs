@@ -4,7 +4,6 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-client-generator-core";
 import "./models-shared.tsp";
 
-using TypeSpec.Versioning;
 using Azure.ClientGenerator.Core.Legacy;
 
 namespace Search;
@@ -3537,6 +3536,21 @@ model SearchIndexerLimits {
   maxDocumentContentCharactersToExtract?: int64;
 }
 
+@doc("Represents the indexer's cumulative runtime consumption in the service.")
+model IndexerRuntime {
+  @doc("Cumulative runtime of the indexer from the beginningTime to endingTime, in seconds.")
+  usedSeconds: int64;
+
+  @doc("Cumulative runtime remaining for all indexers in the service from the beginningTime to endingTime, in seconds.")
+  remainingSeconds?: int64;
+
+  @doc("Beginning UTC time of the 24-hour period considered for indexer runtime usage (inclusive).")
+  beginningTime: utcDateTime;
+
+  @doc("End UTC time of the 24-hour period considered for indexer runtime usage (inclusive).")
+  endingTime: utcDateTime;
+}
+
 @doc("A list of skills.")
 model SearchIndexerSkillset {
   @doc("The name of the skillset.")
@@ -4358,19 +4372,15 @@ union KnowledgeSourceKind {
   AzureBlob: "azureBlob",
 
   @doc("A knowledge source that reads data from indexed SharePoint.")
-  @added(Versions.v2025_11_01_preview)
   IndexedSharePoint: "indexedSharePoint",
 
   @doc("A knowledge source that reads data from indexed OneLake.")
-  @added(Versions.v2025_11_01_preview)
   IndexedOneLake: "indexedOneLake",
 
   @doc("A knowledge source that reads data from the web.")
-  @added(Versions.v2025_11_01_preview)
   Web: "web",
 
   @doc("A knowledge source that reads data from remote SharePoint.")
-  @added(Versions.v2025_11_01_preview)
   RemoteSharePoint: "remoteSharePoint",
 }
 
@@ -4389,6 +4399,12 @@ model SearchIndexKnowledgeSourceParameters {
 
   @doc("Used to request additional fields for referenced source data.")
   sourceDataSelect?: string;
+}
+
+@doc("Field reference for a search index.")
+model SearchIndexFieldReference {
+  @doc("The name of the field.")
+  name: string;
 }
 
 @doc("Configuration for Azure Blob Storage knowledge source.")
@@ -4506,6 +4522,21 @@ model SearchServiceLimits {
 
   @doc("The maximum amount of storage in bytes allowed per index.")
   maxStoragePerIndex?: int64;
+}
+
+@doc("Represents service-level indexer runtime counters.")
+model ServiceIndexersRuntime {
+  @doc("Cumulative runtime of all indexers in the service from the beginningTime to endingTime, in seconds.")
+  usedSeconds: int64;
+
+  @doc("Cumulative runtime remaining for all indexers in the service from the beginningTime to endingTime, in seconds.")
+  remainingSeconds?: int64;
+
+  @doc("Beginning UTC time of the 24-hour period considered for indexer runtime usage (inclusive).")
+  beginningTime: utcDateTime;
+
+  @doc("End UTC time of the 24-hour period considered for indexer runtime usage (inclusive).")
+  endingTime: utcDateTime;
 }
 
 @doc("Allows you to take control over the process of converting text into indexable/searchable tokens. It's a user-defined configuration consisting of a single predefined tokenizer and one or more filters. The tokenizer is responsible for breaking text into tokens, and the filters for modifying tokens emitted by the tokenizer.")
@@ -5954,6 +5985,50 @@ model VisionVectorizeSkill extends SearchIndexerSkill {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   @doc("A URI fragment specifying the type of skill.")
   `@odata.type`: "#Microsoft.Skills.Vision.VectorizeSkill";
+}
+
+@doc("A skill that leverages Azure AI Content Understanding to process and extract structured insights from documents, enabling enriched, searchable content for enhanced document indexing and retrieval.")
+model ContentUnderstandingSkill extends SearchIndexerSkill {
+  @doc("Controls the cardinality of the content extracted from the document by the skill.")
+  extractionOptions?: ContentUnderstandingSkillExtractionOptions[];
+
+  @doc("Controls the cardinality for chunking the content.")
+  chunkingProperties?: ContentUnderstandingSkillChunkingProperties;
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of skill.")
+  `@odata.type`: "#Microsoft.Skills.Util.ContentUnderstandingSkill";
+}
+
+@doc("Controls the cardinality of the content extracted from the document by the skill.")
+union ContentUnderstandingSkillExtractionOptions {
+  string,
+
+  @doc("Specify that image content should be extracted from the document.")
+  Images: "images",
+
+  @doc("Specify that location metadata should be extracted from the document.")
+  LocationMetadata: "locationMetadata",
+}
+
+@doc("Controls the cardinality for chunking the content.")
+model ContentUnderstandingSkillChunkingProperties {
+  @doc("The unit of the chunk.")
+  unit?: ContentUnderstandingSkillChunkingUnit;
+
+  @doc("The maximum chunk length in characters. Default is 500.")
+  maximumLength?: int32;
+
+  @doc("The length of overlap provided between two text chunks. Default is 0.")
+  overlapLength?: int32;
+}
+
+@doc("Controls the cardinality of the chunk unit. Default is 'characters'")
+union ContentUnderstandingSkillChunkingUnit {
+  string,
+
+  @doc("Specifies chunk by characters.")
+  Characters: "characters",
 }
 
 @doc("Object defining the custom schema the model will use to structure its output.")

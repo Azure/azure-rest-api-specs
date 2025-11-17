@@ -3380,6 +3380,24 @@
         ]
       }
     },
+    "AIServices": {
+      "type": "object",
+      "description": "Parameters for AI Services.",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URI of the AI Services endpoint."
+        },
+        "apiKey": {
+          "type": "string",
+          "description": "The API key for accessing AI Services."
+        }
+      },
+      "required": [
+        "uri"
+      ]
+    },
     "AIServicesAccountIdentity": {
       "type": "object",
       "description": "The multi-region account of an Azure AI service resource that's attached to a skillset.",
@@ -4799,6 +4817,44 @@
       ],
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.CommonGramTokenFilter"
     },
+    "CompletedSynchronizationState": {
+      "type": "object",
+      "description": "Represents the completed state of the last synchronization.",
+      "properties": {
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start time of the last completed synchronization."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end time of the last completed synchronization."
+        },
+        "itemsUpdatesProcessed": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of item updates successfully processed in the last synchronization."
+        },
+        "itemsUpdatesFailed": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of item updates that failed in the last synchronization."
+        },
+        "itemsSkipped": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of items skipped in the last synchronization."
+        }
+      },
+      "required": [
+        "startTime",
+        "endTime",
+        "itemsUpdatesProcessed",
+        "itemsUpdatesFailed",
+        "itemsSkipped"
+      ]
+    },
     "ConditionalSkill": {
       "type": "object",
       "description": "A skill that enables scenarios that require a Boolean operation to determine the data to assign to an output.",
@@ -4808,6 +4864,91 @@
         }
       ],
       "x-ms-discriminator-value": "#Microsoft.Skills.Util.ConditionalSkill"
+    },
+    "ContentUnderstandingSkill": {
+      "type": "object",
+      "description": "A skill that leverages Azure AI Content Understanding to process and extract structured insights from documents, enabling enriched, searchable content for enhanced document indexing and retrieval.",
+      "properties": {
+        "extractionOptions": {
+          "type": "array",
+          "description": "Controls the cardinality of the content extracted from the document by the skill.",
+          "items": {
+            "$ref": "#/definitions/ContentUnderstandingSkillExtractionOptions"
+          }
+        },
+        "chunkingProperties": {
+          "$ref": "#/definitions/ContentUnderstandingSkillChunkingProperties",
+          "description": "Controls the cardinality for chunking the content."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SearchIndexerSkill"
+        }
+      ],
+      "x-ms-discriminator-value": "#Microsoft.Skills.Util.ContentUnderstandingSkill"
+    },
+    "ContentUnderstandingSkillChunkingProperties": {
+      "type": "object",
+      "description": "Controls the cardinality for chunking the content.",
+      "properties": {
+        "unit": {
+          "$ref": "#/definitions/ContentUnderstandingSkillChunkingUnit",
+          "description": "The unit of the chunk."
+        },
+        "maximumLength": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum chunk length in characters. Default is 500."
+        },
+        "overlapLength": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The length of overlap provided between two text chunks. Default is 0."
+        }
+      }
+    },
+    "ContentUnderstandingSkillChunkingUnit": {
+      "type": "string",
+      "description": "Controls the cardinality of the chunk unit. Default is 'characters'",
+      "enum": [
+        "characters"
+      ],
+      "x-ms-enum": {
+        "name": "ContentUnderstandingSkillChunkingUnit",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Characters",
+            "value": "characters",
+            "description": "Specifies chunk by characters."
+          }
+        ]
+      }
+    },
+    "ContentUnderstandingSkillExtractionOptions": {
+      "type": "string",
+      "description": "Controls the cardinality of the content extracted from the document by the skill.",
+      "enum": [
+        "images",
+        "locationMetadata"
+      ],
+      "x-ms-enum": {
+        "name": "ContentUnderstandingSkillExtractionOptions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Images",
+            "value": "images",
+            "description": "Specify that image content should be extracted from the document."
+          },
+          {
+            "name": "LocationMetadata",
+            "value": "locationMetadata",
+            "description": "Specify that location metadata should be extracted from the document."
+          }
+        ]
+      }
     },
     "CorsOptions": {
       "type": "object",
@@ -6801,6 +6942,36 @@
       ],
       "x-ms-discriminator-value": "indexedOneLake"
     },
+    "IndexedSharePointContainerName": {
+      "type": "string",
+      "description": "Specifies which SharePoint libraries to access.",
+      "enum": [
+        "defaultSiteLibrary",
+        "allSiteLibraries",
+        "useQuery"
+      ],
+      "x-ms-enum": {
+        "name": "IndexedSharePointContainerName",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DefaultSiteLibrary",
+            "value": "defaultSiteLibrary",
+            "description": "Index content from the site's default document library."
+          },
+          {
+            "name": "AllSiteLibraries",
+            "value": "allSiteLibraries",
+            "description": "Index content from every document library in the site."
+          },
+          {
+            "name": "UseQuery",
+            "value": "useQuery",
+            "description": "Use a query to filter SharePoint content."
+          }
+        ]
+      }
+    },
     "IndexedSharePointKnowledgeSourceParams": {
       "type": "object",
       "description": "Specifies runtime parameters for a indexed SharePoint knowledge source",
@@ -7090,6 +7261,37 @@
           }
         ]
       }
+    },
+    "IndexerRuntime": {
+      "type": "object",
+      "description": "Represents the indexer's cumulative runtime consumption in the service.",
+      "properties": {
+        "usedSeconds": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Cumulative runtime of the indexer from the beginningTime to endingTime, in seconds."
+        },
+        "remainingSeconds": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Cumulative runtime remaining for all indexers in the service from the beginningTime to endingTime, in seconds."
+        },
+        "beginningTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Beginning UTC time of the 24-hour period considered for indexer runtime usage (inclusive)."
+        },
+        "endingTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End UTC time of the 24-hour period considered for indexer runtime usage (inclusive)."
+        }
+      },
+      "required": [
+        "usedSeconds",
+        "beginningTime",
+        "endingTime"
+      ]
     },
     "IndexerStatus": {
       "type": "string",
@@ -8772,6 +8974,181 @@
         "kind"
       ]
     },
+    "KnowledgeSourceAzureOpenAIVectorizer": {
+      "type": "object",
+      "description": "Specifies the Azure OpenAI resource used to vectorize a query string.",
+      "properties": {
+        "azureOpenAIParameters": {
+          "$ref": "#/definitions/AzureOpenAiParameters",
+          "description": "Contains the parameters specific to Azure OpenAI embedding vectorization."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeSourceVectorizer"
+        }
+      ],
+      "x-ms-discriminator-value": "azureOpenAI"
+    },
+    "KnowledgeSourceContentExtractionMode": {
+      "type": "string",
+      "description": "Optional content extraction mode. Default is 'minimal'.",
+      "enum": [
+        "minimal",
+        "standard"
+      ],
+      "x-ms-enum": {
+        "name": "KnowledgeSourceContentExtractionMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Minimal",
+            "value": "minimal",
+            "description": "Extracts only essential metadata while deferring most content processing."
+          },
+          {
+            "name": "Standard",
+            "value": "standard",
+            "description": "Performs the full default content extraction pipeline."
+          }
+        ]
+      }
+    },
+    "KnowledgeSourceIngestionParameters": {
+      "type": "object",
+      "description": "Consolidates all general ingestion settings for knowledge sources.",
+      "properties": {
+        "ingestionSchedule": {
+          "$ref": "#/definitions/IndexingSchedule",
+          "description": "The schedule for ingestion."
+        },
+        "aiServices": {
+          "$ref": "#/definitions/AIServices",
+          "description": "The AI Services configuration."
+        },
+        "maxItemsToExtract": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of items to extract from the source."
+        },
+        "maxDocumentExtractionSize": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The maximum size of the document to extract."
+        },
+        "dataToExtract": {
+          "$ref": "#/definitions/BlobIndexerDataToExtract",
+          "description": "The data to extract from the source."
+        },
+        "imageAction": {
+          "$ref": "#/definitions/BlobIndexerImageAction",
+          "description": "The action to take on images."
+        },
+        "parsingMode": {
+          "$ref": "#/definitions/BlobIndexerParsingMode",
+          "description": "The parsing mode to use."
+        },
+        "failOnUnprocessableDocument": {
+          "type": "boolean",
+          "description": "Whether to fail on unprocessable document."
+        },
+        "failOnUnsupportedContentType": {
+          "type": "boolean",
+          "description": "Whether to fail on unsupported content type."
+        },
+        "indexedFileNameExtensions": {
+          "type": "array",
+          "description": "Indexed file name extensions.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "excludedFileNameExtensions": {
+          "type": "array",
+          "description": "Excluded file name extensions.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "indexStorageMetadataOnlyForOversizedDocuments": {
+          "type": "boolean",
+          "description": "Whether to index storage metadata only for oversized documents."
+        },
+        "delimitedTextDelimiter": {
+          "type": "string",
+          "description": "Delimited text delimiter."
+        },
+        "firstLineContainsHeaders": {
+          "type": "boolean",
+          "description": "Whether the first line contains headers."
+        },
+        "delimitedTextHeaders": {
+          "type": "string",
+          "description": "Delimited text headers."
+        },
+        "documentRoot": {
+          "type": "string",
+          "description": "The document root."
+        },
+        "markdownHeaderDepth": {
+          "$ref": "#/definitions/MarkdownHeaderDepth",
+          "description": "The markdown header depth."
+        },
+        "markdownParsingSubmode": {
+          "$ref": "#/definitions/MarkdownParsingSubmode",
+          "description": "The markdown parsing submode."
+        },
+        "pdfTextRotationAlgorithm": {
+          "$ref": "#/definitions/BlobIndexerPDFTextRotationAlgorithm",
+          "description": "The PDF text rotation algorithm."
+        },
+        "ingestionPermissionOptions": {
+          "type": "array",
+          "description": "Permission options for ingestion.",
+          "items": {
+            "$ref": "#/definitions/KnowledgeSourceIngestionPermissionOption"
+          }
+        },
+        "allowSkillsetToReadFileData": {
+          "type": "boolean",
+          "description": "Whether to allow skillset to read file data."
+        },
+        "contentExtractionMode": {
+          "$ref": "#/definitions/KnowledgeSourceContentExtractionMode",
+          "description": "Optional content extraction mode. Default is 'minimal'."
+        }
+      }
+    },
+    "KnowledgeSourceIngestionPermissionOption": {
+      "type": "string",
+      "description": "Permission types to ingest together with document content.",
+      "enum": [
+        "userIds",
+        "groupIds",
+        "rbacScope"
+      ],
+      "x-ms-enum": {
+        "name": "KnowledgeSourceIngestionPermissionOption",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "UserIds",
+            "value": "userIds",
+            "description": "Ingest explicit user identifiers alongside document content."
+          },
+          {
+            "name": "GroupIds",
+            "value": "groupIds",
+            "description": "Ingest group identifiers alongside document content."
+          },
+          {
+            "name": "RbacScope",
+            "value": "rbacScope",
+            "description": "Ingest RBAC scope information alongside document content."
+          }
+        ]
+      }
+    },
     "KnowledgeSourceKind": {
       "type": "string",
       "description": "The kind of the knowledge source.",
@@ -8867,6 +9244,102 @@
       },
       "required": [
         "name"
+      ]
+    },
+    "KnowledgeSourceStatistics": {
+      "type": "object",
+      "description": "Statistical information about knowledge source synchronization history.",
+      "properties": {
+        "totalSynchronization": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of synchronizations."
+        },
+        "averageSynchronizationDuration": {
+          "type": "string",
+          "format": "duration",
+          "description": "Average synchronization duration."
+        },
+        "averageItemsProcessedPerSynchronization": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Average items processed per synchronization."
+        }
+      },
+      "required": [
+        "totalSynchronization",
+        "averageSynchronizationDuration",
+        "averageItemsProcessedPerSynchronization"
+      ]
+    },
+    "KnowledgeSourceStatus": {
+      "type": "object",
+      "description": "Represents the status and synchronization history of a knowledge source.",
+      "properties": {
+        "synchronizationStatus": {
+          "$ref": "#/definitions/KnowledgeSourceSynchronizationStatus",
+          "description": "The current synchronization status."
+        },
+        "createdResources": {
+          "$ref": "#/definitions/CreatedResources",
+          "description": "The created resources."
+        },
+        "currentSynchronizationState": {
+          "$ref": "#/definitions/SynchronizationState",
+          "description": "The current synchronization state."
+        },
+        "lastSynchronizationState": {
+          "$ref": "#/definitions/CompletedSynchronizationState",
+          "description": "The last synchronization state."
+        },
+        "statistics": {
+          "$ref": "#/definitions/KnowledgeSourceStatistics",
+          "description": "The statistics for the knowledge source."
+        }
+      }
+    },
+    "KnowledgeSourceSynchronizationStatus": {
+      "type": "string",
+      "description": "The current synchronization status of the knowledge source.",
+      "enum": [
+        "creating",
+        "active",
+        "deleting"
+      ],
+      "x-ms-enum": {
+        "name": "KnowledgeSourceSynchronizationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Creating",
+            "value": "creating",
+            "description": "The knowledge source is being provisioned."
+          },
+          {
+            "name": "Active",
+            "value": "active",
+            "description": "The knowledge source is active and synchronization runs are occurring."
+          },
+          {
+            "name": "Deleting",
+            "value": "deleting",
+            "description": "The knowledge source is being deleted."
+          }
+        ]
+      }
+    },
+    "KnowledgeSourceVectorizer": {
+      "type": "object",
+      "description": "Specifies the vectorization method to be used for knowledge source embedding model.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/VectorSearchVectorizerKind",
+          "description": "The name of the kind of vectorization method being configured for use with vector search."
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
       ]
     },
     "LanguageDetectionSkill": {
@@ -13072,9 +13545,20 @@
       "type": "object",
       "description": "Specifies runtime parameters for a remote SharePoint knowledge source",
       "properties": {
-        "filterExpressionAddOn": {
+        "filterExpression": {
           "type": "string",
-          "description": "A filter condition applied to the SharePoint data source. It must be specified in the Keyword Query Language syntax. It will be combined as a conjunction with the filter expression specified in the knowledge source definition."
+          "description": "Keyword Query Language (KQL) expression with queryable SharePoint properties and attributes to scope the retrieval before the query runs. See documentation: https://learn.microsoft.com/en-us/sharepoint/dev/general-development/keyword-query-language-kql-syntax-reference"
+        },
+        "resourceMetadata": {
+          "type": "array",
+          "description": "A list of metadata fields to be returned for each item in the response. Only retrievable metadata properties can be included in this list. By default, no metadata is returned. Optional.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "containerTypeId": {
+          "type": "string",
+          "description": "Container ID for SharePoint Embedded connection. When this is null, it will use SharePoint Online."
         }
       },
       "allOf": [
@@ -13725,6 +14209,19 @@
       },
       "required": [
         "indexName"
+      ]
+    },
+    "SearchIndexFieldReference": {
+      "type": "object",
+      "description": "Field reference for a search index.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the field."
+        }
+      },
+      "required": [
+        "name"
       ]
     },
     "SearchIndexKnowledgeSource": {
@@ -15291,6 +15788,37 @@
       ],
       "x-ms-discriminator-value": "#Microsoft.Skills.Text.V3.SentimentSkill"
     },
+    "ServiceIndexersRuntime": {
+      "type": "object",
+      "description": "Represents service-level indexer runtime counters.",
+      "properties": {
+        "usedSeconds": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Cumulative runtime of all indexers in the service from the beginningTime to endingTime, in seconds."
+        },
+        "remainingSeconds": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Cumulative runtime remaining for all indexers in the service from the beginningTime to endingTime, in seconds."
+        },
+        "beginningTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Beginning UTC time of the 24-hour period considered for indexer runtime usage (inclusive)."
+        },
+        "endingTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End UTC time of the 24-hour period considered for indexer runtime usage (inclusive)."
+        }
+      },
+      "required": [
+        "usedSeconds",
+        "beginningTime",
+        "endingTime"
+      ]
+    },
     "ShaperSkill": {
       "type": "object",
       "description": "A skill for reshaping the outputs. It creates a complex type to support composite fields (also known as multipart fields).",
@@ -16646,6 +17174,38 @@
         "@search.text"
       ],
       "additionalProperties": {}
+    },
+    "SynchronizationState": {
+      "type": "object",
+      "description": "Represents the current state of an ongoing synchronization that spans multiple indexer runs.",
+      "properties": {
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start time of the current synchronization."
+        },
+        "itemsUpdatesProcessed": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of item updates successfully processed in the current synchronization."
+        },
+        "itemsUpdatesFailed": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of item updates that failed in the current synchronization."
+        },
+        "itemsSkipped": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of items skipped in the current synchronization."
+        }
+      },
+      "required": [
+        "startTime",
+        "itemsUpdatesProcessed",
+        "itemsUpdatesFailed",
+        "itemsSkipped"
+      ]
     },
     "SynonymMap": {
       "type": "object",
@@ -18363,6 +18923,63 @@
         "authIdentity": {
           "$ref": "#/definitions/SearchIndexerDataIdentity",
           "description": "The user-assigned managed identity used for outbound connections. If an authResourceId is provided and it's not specified, the system-assigned managed identity is used. On updates to the indexer, if the identity is unspecified, the value remains unchanged. If set to \"none\", the value of this property is cleared."
+        }
+      }
+    },
+    "WebKnowledgeSource": {
+      "type": "object",
+      "description": "Knowledge Source targeting web results.",
+      "properties": {
+        "webParameters": {
+          "$ref": "#/definitions/WebKnowledgeSourceParameters",
+          "description": "The parameters for the web knowledge source."
+        }
+      }
+    },
+    "WebKnowledgeSourceDomain": {
+      "type": "object",
+      "description": "Configuration for web knowledge source domain.",
+      "properties": {
+        "address": {
+          "type": "string",
+          "description": "The address of the domain."
+        },
+        "includeSubpages": {
+          "type": "boolean",
+          "description": "Whether or not to include subpages from this domain."
+        }
+      },
+      "required": [
+        "address"
+      ]
+    },
+    "WebKnowledgeSourceDomains": {
+      "type": "object",
+      "description": "Domain allow/block configuration for web knowledge source.",
+      "properties": {
+        "allowedDomains": {
+          "type": "array",
+          "description": "Domains that are allowed for web results.",
+          "items": {
+            "$ref": "#/definitions/WebKnowledgeSourceDomain"
+          }
+        },
+        "blockedDomains": {
+          "type": "array",
+          "description": "Domains that are blocked from web results.",
+          "items": {
+            "$ref": "#/definitions/WebKnowledgeSourceDomain"
+          }
+        }
+      }
+    },
+    "WebKnowledgeSourceParameters": {
+      "type": "object",
+      "description": "Parameters for web knowledge source.",
+      "properties": {
+        "domains": {
+          "$ref": "#/definitions/WebKnowledgeSourceDomains",
+          "description": "Domain allow/block configuration for web results."
         }
       }
     },

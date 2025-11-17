@@ -1,17 +1,14 @@
 import "@typespec/rest";
 import "@typespec/http";
-import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "./models-service.tsp";
 import "./models-shared.tsp";
 
 using TypeSpec.Http;
-using TypeSpec.Versioning;
 
 namespace Search;
 
 @doc("The input contract for the retrieval request.")
-@added(Versions.v2025_11_01_preview)
 model KnowledgeBaseRetrievalRequest {
   @doc("A list of chat message style input.")
   messages?: KnowledgeBaseMessage[];
@@ -39,7 +36,6 @@ model KnowledgeBaseRetrievalRequest {
 }
 
 @doc("The output contract for the retrieval response.")
-@added(Versions.v2025_11_01_preview)
 model KnowledgeBaseRetrievalResponse {
   @doc("The response messages.")
   response?: KnowledgeBaseMessage[];
@@ -53,14 +49,12 @@ model KnowledgeBaseRetrievalResponse {
 
 @doc("Base type for reasoning effort.")
 @discriminator("kind")
-@added(Versions.v2025_11_01_preview)
 model KnowledgeRetrievalReasoningEffort {
   @doc("The kind of reasoning effort.")
   kind: KnowledgeRetrievalReasoningEffortKind;
 }
 
 @doc("Run knowledge retrieval with minimal reasoning effort.")
-@added(Versions.v2025_11_01_preview)
 model KnowledgeRetrievalMinimalReasoningEffort
   extends KnowledgeRetrievalReasoningEffort {
   @doc("The discriminator value.")
@@ -68,7 +62,6 @@ model KnowledgeRetrievalMinimalReasoningEffort
 }
 
 @doc("Run knowledge retrieval with low reasoning effort.")
-@added(Versions.v2025_11_01_preview)
 model KnowledgeRetrievalLowReasoningEffort
   extends KnowledgeRetrievalReasoningEffort {
   @doc("The discriminator value.")
@@ -76,7 +69,6 @@ model KnowledgeRetrievalLowReasoningEffort
 }
 
 @doc("Run knowledge retrieval with medium reasoning effort.")
-@added(Versions.v2025_11_01_preview)
 model KnowledgeRetrievalMediumReasoningEffort
   extends KnowledgeRetrievalReasoningEffort {
   @doc("The discriminator value.")
@@ -84,7 +76,6 @@ model KnowledgeRetrievalMediumReasoningEffort
 }
 
 @doc("Run knowledge retrieval with high reasoning effort.")
-@added(Versions.v2025_11_01_preview)
 model KnowledgeRetrievalHighReasoningEffort
   extends KnowledgeRetrievalReasoningEffort {
   @doc("The discriminator value.")
@@ -92,7 +83,6 @@ model KnowledgeRetrievalHighReasoningEffort
 }
 
 @doc("The amount of effort to use during retrieval.")
-@added(Versions.v2025_11_01_preview)
 union KnowledgeRetrievalReasoningEffortKind {
   string,
 
@@ -110,7 +100,6 @@ union KnowledgeRetrievalReasoningEffortKind {
 }
 
 @doc("The output configuration for this retrieval.")
-@added(Versions.v2025_11_01_preview)
 union KnowledgeRetrievalOutputMode {
   string,
 
@@ -123,7 +112,6 @@ union KnowledgeRetrievalOutputMode {
 
 @doc("Base type for knowledge source runtime parameters.")
 @discriminator("kind")
-@added(Versions.v2025_11_01_preview)
 model KnowledgeSourceParams {
   @doc("The name of the index the params apply to.")
   knowledgeSourceName: string;
@@ -145,7 +133,6 @@ model KnowledgeSourceParams {
 }
 
 @doc("Specifies runtime parameters for a search index knowledge source")
-@added(Versions.v2025_11_01_preview)
 model SearchIndexKnowledgeSourceParams extends KnowledgeSourceParams {
   @doc("The discriminator value.")
   kind: KnowledgeSourceKind.SearchIndex;
@@ -155,28 +142,38 @@ model SearchIndexKnowledgeSourceParams extends KnowledgeSourceParams {
 }
 
 @doc("Specifies runtime parameters for a azure blob knowledge source")
-@added(Versions.v2025_11_01_preview)
 model AzureBlobKnowledgeSourceParams extends KnowledgeSourceParams {
   @doc("The discriminator value.")
   kind: KnowledgeSourceKind.AzureBlob;
 }
 
+@doc("Specifies which SharePoint libraries to access.")
+union IndexedSharePointContainerName {
+  string,
+
+  @doc("Index content from the site's default document library.")
+  DefaultSiteLibrary: "defaultSiteLibrary",
+
+  @doc("Index content from every document library in the site.")
+  AllSiteLibraries: "allSiteLibraries",
+
+  @doc("Use a query to filter SharePoint content.")
+  UseQuery: "useQuery",
+}
+
 @doc("Specifies runtime parameters for a indexed SharePoint knowledge source")
-@added(Versions.v2025_11_01_preview)
 model IndexedSharePointKnowledgeSourceParams extends KnowledgeSourceParams {
   @doc("The discriminator value.")
   kind: KnowledgeSourceKind.IndexedSharePoint;
 }
 
 @doc("Specifies runtime parameters for a indexed OneLake knowledge source")
-@added(Versions.v2025_11_01_preview)
 model IndexedOneLakeKnowledgeSourceParams extends KnowledgeSourceParams {
   @doc("The discriminator value.")
   kind: KnowledgeSourceKind.IndexedOneLake;
 }
 
 @doc("Specifies runtime parameters for a web knowledge source")
-@added(Versions.v2025_11_01_preview)
 model WebKnowledgeSourceParams extends KnowledgeSourceParams {
   @doc("The discriminator value.")
   kind: KnowledgeSourceKind.Web;
@@ -195,25 +192,28 @@ model WebKnowledgeSourceParams extends KnowledgeSourceParams {
 }
 
 @doc("Specifies runtime parameters for a remote SharePoint knowledge source")
-@added(Versions.v2025_11_01_preview)
 model RemoteSharePointKnowledgeSourceParams extends KnowledgeSourceParams {
   @doc("The discriminator value.")
   kind: KnowledgeSourceKind.RemoteSharePoint;
 
-  @doc("A filter condition applied to the SharePoint data source. It must be specified in the Keyword Query Language syntax. It will be combined as a conjunction with the filter expression specified in the knowledge source definition.")
-  filterExpressionAddOn?: string;
+  @doc("Keyword Query Language (KQL) expression with queryable SharePoint properties and attributes to scope the retrieval before the query runs. See documentation: https://learn.microsoft.com/en-us/sharepoint/dev/general-development/keyword-query-language-kql-syntax-reference")
+  filterExpression?: string;
+
+  @doc("A list of metadata fields to be returned for each item in the response. Only retrievable metadata properties can be included in this list. By default, no metadata is returned. Optional.")
+  resourceMetadata?: string[];
+
+  @doc("Container ID for SharePoint Embedded connection. When this is null, it will use SharePoint Online.")
+  containerTypeId?: string;
 }
 
 @doc("An intended query to execute without model query planning.")
 @discriminator("type")
-@added(Versions.v2025_11_01_preview)
 model KnowledgeRetrievalIntent {
   @doc("The type of the intent.")
   type: KnowledgeRetrievalIntentType;
 }
 
 @doc("The kind of knowledge base configuration to use.")
-@added(Versions.v2025_11_01_preview)
 union KnowledgeRetrievalIntentType {
   string,
 
@@ -222,7 +222,6 @@ union KnowledgeRetrievalIntentType {
 }
 
 @doc("A semantic query intent.")
-@added(Versions.v2025_11_01_preview)
 model KnowledgeRetrievalSemanticIntent extends KnowledgeRetrievalIntent {
   @doc("The discriminator value.")
   type: KnowledgeRetrievalIntentType.semantic;
@@ -232,7 +231,6 @@ model KnowledgeRetrievalSemanticIntent extends KnowledgeRetrievalIntent {
 }
 
 @doc("The natural language message style object.")
-@added(Versions.v2025_11_01_preview)
 model KnowledgeBaseMessage {
   @doc("The role of the tool response.")
   role?: string;
@@ -243,14 +241,12 @@ model KnowledgeBaseMessage {
 
 @doc("Specifies the type of the message content.")
 @discriminator("type")
-@added(Versions.v2025_11_01_preview)
 model KnowledgeBaseMessageContent {
   @doc("The type of the message")
   type: KnowledgeBaseMessageContentType;
 }
 
 @doc("The type of message content.")
-@added(Versions.v2025_11_01_preview)
 union KnowledgeBaseMessageContentType {
   string,
 
@@ -262,7 +258,6 @@ union KnowledgeBaseMessageContentType {
 }
 
 @doc("Text message type.")
-@added(Versions.v2025_11_01_preview)
 model KnowledgeBaseMessageTextContent extends KnowledgeBaseMessageContent {
   @doc("The discriminator value.")
   type: KnowledgeBaseMessageContentType.text;
@@ -272,7 +267,6 @@ model KnowledgeBaseMessageTextContent extends KnowledgeBaseMessageContent {
 }
 
 @doc("Image message type.")
-@added(Versions.v2025_11_01_preview)
 model KnowledgeBaseMessageImageContent extends KnowledgeBaseMessageContent {
   @doc("The discriminator value.")
   type: KnowledgeBaseMessageContentType.image;
@@ -282,7 +276,6 @@ model KnowledgeBaseMessageImageContent extends KnowledgeBaseMessageContent {
 }
 
 @doc("Image content.")
-@added(Versions.v2025_11_01_preview)
 model KnowledgeBaseImageContent {
   @doc("The url of the image.")
   url: url;
@@ -290,7 +283,6 @@ model KnowledgeBaseImageContent {
 
 @doc("Base type for activity records.")
 @discriminator("type")
-@added(Versions.v2025_11_01_preview)
 model KnowledgeBaseActivityRecord {
   @doc("The ID of the activity record.")
   id: int32;
@@ -309,7 +301,6 @@ model KnowledgeBaseActivityRecord {
 #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
 @doc("Represents a retrieval activity record.")
-@added(Versions.v2025_11_01_preview)
 @discriminator("type")
 model KnowledgeBaseRetrievalActivityRecord extends KnowledgeBaseActivityRecord {
   @doc("The knowledge source for the retrieval activity.")
@@ -324,7 +315,6 @@ model KnowledgeBaseRetrievalActivityRecord extends KnowledgeBaseActivityRecord {
 
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
 @doc("Represents a search index retrieval activity record.")
-@added(Versions.v2025_11_01_preview)
 model KnowledgeBaseSearchIndexActivityRecord
   extends KnowledgeBaseRetrievalActivityRecord {
   @doc("The discriminator value.")
@@ -335,7 +325,6 @@ model KnowledgeBaseSearchIndexActivityRecord
 }
 
 @doc("Represents the arguments the search index retrieval activity was run with.")
-@added(Versions.v2025_11_01_preview)
 model KnowledgeBaseSearchIndexActivityArguments {
   @doc("The search string used to query the search index.")
   search?: string;
@@ -346,7 +335,6 @@ model KnowledgeBaseSearchIndexActivityArguments {
 
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
 @doc("Represents a azure blob retrieval activity record.")
-@added(Versions.v2025_11_01_preview)
 model KnowledgeBaseAzureBlobActivityRecord
   extends KnowledgeBaseRetrievalActivityRecord {
   @doc("The discriminator value.")
@@ -357,7 +345,6 @@ model KnowledgeBaseAzureBlobActivityRecord
 }
 
 @doc("Represents the arguments the azure blob retrieval activity was run with.")
-@added(Versions.v2025_11_01_preview)
 model KnowledgeBaseAzureBlobActivityArguments {
   @doc("The search string used to query blob contents.")
   search?: string;
@@ -365,7 +352,6 @@ model KnowledgeBaseAzureBlobActivityArguments {
 
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
 @doc("Represents a indexed SharePoint retrieval activity record.")
-@added(Versions.v2025_11_01_preview)
 model KnowledgeBaseIndexedSharePointActivityRecord
   extends KnowledgeBaseRetrievalActivityRecord {
   @doc("The discriminator value.")
@@ -376,7 +362,6 @@ model KnowledgeBaseIndexedSharePointActivityRecord
 }
 
 @doc("Represents the arguments the indexed SharePoint retrieval activity was run with.")
-@added(Versions.v2025_11_01_preview)
 model KnowledgeBaseIndexedSharePointActivityArguments {
   @doc("The search string used to query indexed SharePoint contents.")
   search?: string;
@@ -384,7 +369,6 @@ model KnowledgeBaseIndexedSharePointActivityArguments {
 
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
 @doc("Represents a indexed OneLake retrieval activity record.")
-@added(Versions.v2025_11_01_preview)
 model KnowledgeBaseIndexedOneLakeActivityRecord
   extends KnowledgeBaseRetrievalActivityRecord {
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
@@ -396,7 +380,6 @@ model KnowledgeBaseIndexedOneLakeActivityRecord
 }
 
 @doc("Represents the arguments the indexed OneLake retrieval activity was run with.")
-@added(Versions.v2025_11_01_preview)
 model KnowledgeBaseIndexedOneLakeActivityArguments {
   @doc("The search string used to query indexed OneLake contents.")
   search?: string;
@@ -404,7 +387,6 @@ model KnowledgeBaseIndexedOneLakeActivityArguments {
 
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
 @doc("Represents a web retrieval activity record.")
-@added(Versions.v2025_11_01_preview)
 model KnowledgeBaseWebActivityRecord
   extends KnowledgeBaseRetrievalActivityRecord {
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
@@ -416,7 +398,6 @@ model KnowledgeBaseWebActivityRecord
 }
 
 @doc("Represents the arguments the web retrieval activity was run with.")
-@added(Versions.v2025_11_01_preview)
 model KnowledgeBaseWebActivityArguments {
   @doc("The search string used to query the web.")
   search?: string;
@@ -436,7 +417,6 @@ model KnowledgeBaseWebActivityArguments {
 
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
 @doc("Represents a remote SharePoint retrieval activity record.")
-@added(Versions.v2025_11_01_preview)
 model KnowledgeBaseRemoteSharePointActivityRecord
   extends KnowledgeBaseRetrievalActivityRecord {
   @doc("The discriminator value.")
@@ -447,7 +427,6 @@ model KnowledgeBaseRemoteSharePointActivityRecord
 }
 
 @doc("Represents the arguments the remote SharePoint retrieval activity was run with.")
-@added(Versions.v2025_11_01_preview)
 model KnowledgeBaseRemoteSharePointActivityArguments {
   @doc("The search string used to query the remote SharePoint knowledge source.")
   search?: string;
@@ -457,7 +436,6 @@ model KnowledgeBaseRemoteSharePointActivityArguments {
 }
 
 @doc("Represents an LLM query planning activity record.")
-@added(Versions.v2025_11_01_preview)
 model KnowledgeBaseModelQueryPlanningActivityRecord
   extends KnowledgeBaseActivityRecord {
   @doc("The discriminator value.")
@@ -471,7 +449,6 @@ model KnowledgeBaseModelQueryPlanningActivityRecord
 }
 
 @doc("Represents an LLM answer synthesis activity record.")
-@added(Versions.v2025_11_01_preview)
 model KnowledgeBaseModelAnswerSynthesisActivityRecord
   extends KnowledgeBaseActivityRecord {
   @doc("The discriminator value.")
@@ -485,7 +462,6 @@ model KnowledgeBaseModelAnswerSynthesisActivityRecord
 }
 
 @doc("Represents an agentic reasoning activity record.")
-@added(Versions.v2025_11_01_preview)
 model KnowledgeBaseAgenticReasoningActivityRecord
   extends KnowledgeBaseActivityRecord {
   @doc("The discriminator value.")
@@ -500,7 +476,6 @@ model KnowledgeBaseAgenticReasoningActivityRecord
 
 @doc("Base type for references.")
 @discriminator("type")
-@added(Versions.v2025_11_01_preview)
 model KnowledgeBaseReference {
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   @doc("The type of the reference.")
@@ -520,7 +495,6 @@ model KnowledgeBaseReference {
 }
 
 @doc("Represents an Azure Search document reference.")
-@added(Versions.v2025_11_01_preview)
 model KnowledgeBaseSearchIndexReference extends KnowledgeBaseReference {
   @doc("The discriminator value.")
   type: "searchIndex";
@@ -530,7 +504,6 @@ model KnowledgeBaseSearchIndexReference extends KnowledgeBaseReference {
 }
 
 @doc("Represents an Azure Blob Storage document reference.")
-@added(Versions.v2025_11_01_preview)
 model KnowledgeBaseAzureBlobReference extends KnowledgeBaseReference {
   @doc("The discriminator value.")
   type: "azureBlob";
@@ -540,7 +513,6 @@ model KnowledgeBaseAzureBlobReference extends KnowledgeBaseReference {
 }
 
 @doc("Represents an indexed SharePoint document reference.")
-@added(Versions.v2025_11_01_preview)
 model KnowledgeBaseIndexedSharePointReference extends KnowledgeBaseReference {
   @doc("The discriminator value.")
   type: "indexedSharePoint";
@@ -550,7 +522,6 @@ model KnowledgeBaseIndexedSharePointReference extends KnowledgeBaseReference {
 }
 
 @doc("Represents an indexed OneLake document reference.")
-@added(Versions.v2025_11_01_preview)
 model KnowledgeBaseIndexedOneLakeReference extends KnowledgeBaseReference {
   @doc("The discriminator value.")
   type: "indexedOneLake";
@@ -560,7 +531,6 @@ model KnowledgeBaseIndexedOneLakeReference extends KnowledgeBaseReference {
 }
 
 @doc("Represents a web document reference.")
-@added(Versions.v2025_11_01_preview)
 model KnowledgeBaseWebReference extends KnowledgeBaseReference {
   @doc("The discriminator value.")
   type: "web";
@@ -573,7 +543,6 @@ model KnowledgeBaseWebReference extends KnowledgeBaseReference {
 }
 
 @doc("Represents a remote SharePoint document reference.")
-@added(Versions.v2025_11_01_preview)
 model KnowledgeBaseRemoteSharePointReference extends KnowledgeBaseReference {
   @doc("The discriminator value.")
   type: "remoteSharePoint";
@@ -586,7 +555,6 @@ model KnowledgeBaseRemoteSharePointReference extends KnowledgeBaseReference {
 }
 
 @doc("Information about the sensitivity label applied to a SharePoint document.")
-@added(Versions.v2025_11_01_preview)
 model SharePointSensitivityLabelInfo {
   @doc("The display name for the sensitivity label.")
   displayName?: string;
@@ -608,7 +576,6 @@ model SharePointSensitivityLabelInfo {
 }
 
 @doc("The error details.")
-@added(Versions.v2025_11_01_preview)
 model KnowledgeBaseErrorDetail {
   @doc("The error code.")
   code?: string;
@@ -627,7 +594,6 @@ model KnowledgeBaseErrorDetail {
 }
 
 @doc("The resource management error additional info.")
-@added(Versions.v2025_11_01_preview)
 model KnowledgeBaseErrorAdditionalInfo {
   @doc("The additional info type.")
   type?: string;
@@ -636,7 +602,6 @@ model KnowledgeBaseErrorAdditionalInfo {
   info?: Record<string>;
 }
 
-@added(Versions.v2025_11_01_preview)
 @doc("Successful retrieval response.")
 model KnowledgeBaseRetrievalSuccessResponse {
   @doc("The retrieval response is successfully returned.")
@@ -648,7 +613,6 @@ model KnowledgeBaseRetrievalSuccessResponse {
   body: KnowledgeBaseRetrievalResponse;
 }
 
-@added(Versions.v2025_11_01_preview)
 @doc("Partial retrieval response.")
 model KnowledgeBaseRetrievalPartialResponse {
   @doc("A partial retrieval response is returned.")
@@ -658,4 +622,231 @@ model KnowledgeBaseRetrievalPartialResponse {
   @doc("The partial retrieval response body.")
   @body
   body: KnowledgeBaseRetrievalResponse;
+}
+
+@doc("Parameters for AI Services.")
+model AIServices {
+  @doc("The URI of the AI Services endpoint.")
+  uri: url;
+
+  @doc("The API key for accessing AI Services.")
+  apiKey?: string;
+}
+
+@doc("Optional content extraction mode. Default is 'minimal'.")
+union KnowledgeSourceContentExtractionMode {
+  string,
+
+  @doc("Extracts only essential metadata while deferring most content processing.")
+  Minimal: "minimal",
+
+  @doc("Performs the full default content extraction pipeline.")
+  Standard: "standard",
+}
+
+@doc("Permission types to ingest together with document content.")
+union KnowledgeSourceIngestionPermissionOption {
+  string,
+
+  @doc("Ingest explicit user identifiers alongside document content.")
+  UserIds: "userIds",
+
+  @doc("Ingest group identifiers alongside document content.")
+  GroupIds: "groupIds",
+
+  @doc("Ingest RBAC scope information alongside document content.")
+  RbacScope: "rbacScope",
+}
+
+@doc("Consolidates all general ingestion settings for knowledge sources.")
+model KnowledgeSourceIngestionParameters {
+  @doc("The schedule for ingestion.")
+  ingestionSchedule?: IndexingSchedule;
+
+  @doc("The AI Services configuration.")
+  aiServices?: AIServices;
+
+  @doc("The maximum number of items to extract from the source.")
+  maxItemsToExtract?: int32;
+
+  @doc("The maximum size of the document to extract.")
+  maxDocumentExtractionSize?: int64;
+
+  @doc("The data to extract from the source.")
+  dataToExtract?: BlobIndexerDataToExtract;
+
+  @doc("The action to take on images.")
+  imageAction?: BlobIndexerImageAction;
+
+  @doc("The parsing mode to use.")
+  parsingMode?: BlobIndexerParsingMode;
+
+  @doc("Whether to fail on unprocessable document.")
+  failOnUnprocessableDocument?: boolean;
+
+  @doc("Whether to fail on unsupported content type.")
+  failOnUnsupportedContentType?: boolean;
+
+  @doc("Indexed file name extensions.")
+  indexedFileNameExtensions?: string[];
+
+  @doc("Excluded file name extensions.")
+  excludedFileNameExtensions?: string[];
+
+  @doc("Whether to index storage metadata only for oversized documents.")
+  indexStorageMetadataOnlyForOversizedDocuments?: boolean;
+
+  @doc("Delimited text delimiter.")
+  delimitedTextDelimiter?: string;
+
+  @doc("Whether the first line contains headers.")
+  firstLineContainsHeaders?: boolean;
+
+  @doc("Delimited text headers.")
+  delimitedTextHeaders?: string;
+
+  @doc("The document root.")
+  documentRoot?: string;
+
+  @doc("The markdown header depth.")
+  markdownHeaderDepth?: MarkdownHeaderDepth;
+
+  @doc("The markdown parsing submode.")
+  markdownParsingSubmode?: MarkdownParsingSubmode;
+
+  @doc("The PDF text rotation algorithm.")
+  pdfTextRotationAlgorithm?: BlobIndexerPDFTextRotationAlgorithm;
+
+  @doc("Permission options for ingestion.")
+  ingestionPermissionOptions?: KnowledgeSourceIngestionPermissionOption[];
+
+  @doc("Whether to allow skillset to read file data.")
+  allowSkillsetToReadFileData?: boolean;
+
+  @doc("Optional content extraction mode. Default is 'minimal'.")
+  contentExtractionMode?: KnowledgeSourceContentExtractionMode;
+}
+
+@doc("Specifies the vectorization method to be used for knowledge source embedding model.")
+@discriminator("kind")
+model KnowledgeSourceVectorizer {
+  @doc("The name of the kind of vectorization method being configured for use with vector search.")
+  kind: VectorSearchVectorizerKind;
+}
+
+@doc("Specifies the Azure OpenAI resource used to vectorize a query string.")
+model KnowledgeSourceAzureOpenAIVectorizer extends KnowledgeSourceVectorizer {
+  @doc("The discriminator value.")
+  kind: VectorSearchVectorizerKind.AzureOpenAI;
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("Contains the parameters specific to Azure OpenAI embedding vectorization.")
+  azureOpenAIParameters?: AzureOpenAiParameters;
+}
+
+@doc("The current synchronization status of the knowledge source.")
+union KnowledgeSourceSynchronizationStatus {
+  string,
+
+  @doc("The knowledge source is being provisioned.")
+  Creating: "creating",
+
+  @doc("The knowledge source is active and synchronization runs are occurring.")
+  Active: "active",
+
+  @doc("The knowledge source is being deleted.")
+  Deleting: "deleting",
+}
+
+@doc("Represents the status and synchronization history of a knowledge source.")
+model KnowledgeSourceStatus {
+  @doc("The current synchronization status.")
+  synchronizationStatus?: KnowledgeSourceSynchronizationStatus;
+
+  @doc("The created resources.")
+  createdResources?: CreatedResources;
+
+  @doc("The current synchronization state.")
+  currentSynchronizationState?: SynchronizationState;
+
+  @doc("The last synchronization state.")
+  lastSynchronizationState?: CompletedSynchronizationState;
+
+  @doc("The statistics for the knowledge source.")
+  statistics?: KnowledgeSourceStatistics;
+}
+
+@doc("Statistical information about knowledge source synchronization history.")
+model KnowledgeSourceStatistics {
+  @doc("Total number of synchronizations.")
+  totalSynchronization: int32;
+
+  @doc("Average synchronization duration.")
+  averageSynchronizationDuration: duration;
+
+  @doc("Average items processed per synchronization.")
+  averageItemsProcessedPerSynchronization: int32;
+}
+
+@doc("Represents the current state of an ongoing synchronization that spans multiple indexer runs.")
+model SynchronizationState {
+  @doc("The start time of the current synchronization.")
+  startTime: utcDateTime;
+
+  @doc("The number of item updates successfully processed in the current synchronization.")
+  itemsUpdatesProcessed: int32;
+
+  @doc("The number of item updates that failed in the current synchronization.")
+  itemsUpdatesFailed: int32;
+
+  @doc("The number of items skipped in the current synchronization.")
+  itemsSkipped: int32;
+}
+
+@doc("Represents the completed state of the last synchronization.")
+model CompletedSynchronizationState {
+  @doc("The start time of the last completed synchronization.")
+  startTime: utcDateTime;
+
+  @doc("The end time of the last completed synchronization.")
+  endTime: utcDateTime;
+
+  @doc("The number of item updates successfully processed in the last synchronization.")
+  itemsUpdatesProcessed: int32;
+
+  @doc("The number of item updates that failed in the last synchronization.")
+  itemsUpdatesFailed: int32;
+
+  @doc("The number of items skipped in the last synchronization.")
+  itemsSkipped: int32;
+}
+
+@doc("Knowledge Source targeting web results.")
+model WebKnowledgeSource {
+  @doc("The parameters for the web knowledge source.")
+  webParameters?: WebKnowledgeSourceParameters;
+}
+
+@doc("Parameters for web knowledge source.")
+model WebKnowledgeSourceParameters {
+  @doc("Domain allow/block configuration for web results.")
+  domains?: WebKnowledgeSourceDomains;
+}
+
+@doc("Domain allow/block configuration for web knowledge source.")
+model WebKnowledgeSourceDomains {
+  @doc("Domains that are allowed for web results.")
+  allowedDomains?: WebKnowledgeSourceDomain[];
+
+  @doc("Domains that are blocked from web results.")
+  blockedDomains?: WebKnowledgeSourceDomain[];
+}
+
+@doc("Configuration for web knowledge source domain.")
+model WebKnowledgeSourceDomain {
+  @doc("The address of the domain.")
+  address: string;
+
+  @doc("Whether or not to include subpages from this domain.")
+  includeSubpages?: boolean;
 }
