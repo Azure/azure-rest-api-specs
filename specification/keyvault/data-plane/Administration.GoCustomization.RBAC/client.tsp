@@ -1,4 +1,4 @@
-import "../main.tsp";
+import "../Administration/main.tsp";
 
 using Azure.ClientGenerator.Core;
 
