@@ -8,12 +8,12 @@ import "./ManagedHsm.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.KeyVault;
 /**
  * Private endpoint connection resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy TrackedResourceWithOptionalLocation for back compatibility"
 @parentResource(ManagedHsm)
 model MhsmPrivateEndpointConnection
   is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<MhsmPrivateEndpointConnectionProperties> {

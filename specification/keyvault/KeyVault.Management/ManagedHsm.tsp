@@ -7,12 +7,13 @@ import "./models.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.KeyVault;
+
 /**
  * Resource information with extended details.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy TrackedResourceWithOptionalLocation for back compatibility"
 model ManagedHsm
   is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<ManagedHsmProperties> {
   ...ResourceNameParameter<
