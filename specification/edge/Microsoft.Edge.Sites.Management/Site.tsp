@@ -82,44 +82,4 @@ interface SitesByServiceGroup {
 
   @doc("update Site at SG scope")
   update is ArmResourcePatchSync<Site, SiteProperties, ServiceGroupParameters>;
-
-  // #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "custom PATCH call"
-  // @route("/providers/Microsoft.Management/serviceGroups/{servicegroupName}/providers/Microsoft.Edge/sites/{siteName}")
-  // @patch(#{ implicitOptionality: true })
-  // @doc("update Site at SG scope")
-  // update(
-  //   ...ApiVersionParameter,
-
-  //   @path
-  //   @doc("The name of the service group")
-  //   @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$")
-  //   servicegroupName: string,
-
-  //   @path
-  //   @doc("The name of the site")
-  //   @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$")
-  //   siteName: string,
-
-  //   @body
-  //   @doc("The properties of the site")
-  //   properties: SiteUpdate,
-  // ): ArmResponse<Site> | ErrorResponse;
-
-  // #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "custom DELETE call"
-  // @route("/providers/Microsoft.Management/serviceGroups/{servicegroupName}/providers/Microsoft.Edge/sites/{siteName}")
-  // @delete
-  // @doc("delete Site at SG scope")
-  // delete(
-  //   ...ApiVersionParameter,
-
-  //   @path
-  //   @doc("The name of the service group")
-  //   @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$")
-  //   servicegroupName: string,
-
-  //   @path
-  //   @doc("The name of the site")
-  //   @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$")
-  //   siteName: string,
-  // ): ArmDeletedResponse | ArmDeletedNoContentResponse | ErrorResponse;
 }
