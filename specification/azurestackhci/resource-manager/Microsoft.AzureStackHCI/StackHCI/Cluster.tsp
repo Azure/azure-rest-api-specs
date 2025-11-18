@@ -112,11 +112,7 @@ interface Clusters {
   /**
    * Changes ring of a cluster
    */
-  changeRing is ArmResourceActionAsync<
-    Cluster,
-    ChangeRingRequest,
-    Cluster
-  >;
+  changeRing is ArmResourceActionAsync<Cluster, ChangeRingRequest, Cluster>;
 
   /**
    * Extends Software Assurance Benefit to a cluster
@@ -364,7 +360,6 @@ model ClusterProperties {
    */
   @visibility(Lifecycle.Read)
   identityProvider?: IdentityProvider;
-
 }
 
 /**

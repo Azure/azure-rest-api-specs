@@ -340,7 +340,7 @@ union EdgeDeviceKind {
   string,
 
   @doc("Arc-enabled edge device with HCI OS.")
-  HCI: "HCI"
+  HCI: "HCI",
 }
 
 @doc("Defines the level of remote support access granted.")
@@ -393,7 +393,7 @@ union EdgeSolutionType {
   string,
 
   @doc("Edge solution for Windows based edge devices.")
-  WindowsServer: "WindowsServer"
+  WindowsServer: "WindowsServer",
 }
 
 @doc("Local Availability Zone Mode for HCI cluster.")
