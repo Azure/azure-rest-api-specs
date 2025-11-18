@@ -27,7 +27,7 @@ model Site is ProxyResource<SiteProperties> {
 interface Sites {
   get is ArmResourceRead<Site>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Site>;
-  update is ArmResourcePatchSync<Site, SiteProperties>;
+  update is ArmCustomPatchSync<Site, SiteUpdate>;
   delete is ArmResourceDeleteSync<Site>;
   listByResourceGroup is ArmResourceListByParent<Site>;
 }
@@ -41,9 +41,9 @@ interface SitesBySubscription {
     Site,
     BaseParameters = SubscriptionParameters
   >;
-  update is ArmResourcePatchSync<
+  update is ArmCustomPatchSync<
     Site,
-    SiteProperties,
+    SiteUpdate,
     BaseParameters = SubscriptionParameters
   >;
   delete is ArmResourceDeleteSync<
@@ -81,5 +81,5 @@ interface SitesByServiceGroup {
   delete is ArmResourceDeleteSync<Site, ServiceGroupParameters>;
 
   @doc("update Site at SG scope")
-  update is ArmResourcePatchSync<Site, SiteProperties, ServiceGroupParameters>;
+  update is ArmCustomPatchSync<Site, SiteUpdate, ServiceGroupParameters>;
 }

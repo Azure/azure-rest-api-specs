@@ -3,11 +3,7 @@ import "@typespec/http";
 import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.Edge;
 
@@ -50,6 +46,28 @@ model SiteAddressProperties {
 
   @doc("Postal or ZIP code of the address")
   postalCode?: string;
+}
+
+@doc("The updatable properties of the Site.")
+model SiteUpdateProperties {
+  @doc("displayName of Site resource")
+  displayName?: string;
+
+  @doc("Description of Site resource")
+  description?: string;
+
+  @doc("Physical address of the site")
+  siteAddress?: SiteAddressProperties;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
+  @doc("Key-value pairs for labeling the site resource.")
+  labels?: Record<string>;
+}
+
+@doc("The type used for update operations of the Site.")
+model SiteUpdate {
+  @doc("The updatable properties of the Site.")
+  properties?: SiteUpdateProperties;
 }
 
 @doc("Properties of the SiteAwareResourceType resource type.")
