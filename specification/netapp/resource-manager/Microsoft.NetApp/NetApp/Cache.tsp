@@ -5,12 +5,11 @@ import "@typespec/rest";
 import "./models.tsp";
 import "./Volume.tsp";
 
-using TypeSpec.Rest;
+using Rest;
 using Azure.Core;
 using Azure.ResourceManager;
-using TypeSpec.Http;
-using TypeSpec.OpenAPI;
-using TypeSpec.Versioning;
+using Http;
+using Versioning;
 
 namespace Microsoft.NetApp;
 /**
@@ -59,7 +58,7 @@ model CacheProperties {
   /**
    * Set of export policy rules
    */
-  @OpenAPI.extension("x-ms-identifiers", #["ruleIndex"])
+  @identifiers(#["ruleIndex"])
   exportPolicy?: ExportPolicyRule[];
 
   /**
@@ -103,7 +102,7 @@ model CacheProperties {
    * List of mount targets that can be used to mount this cache
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["mountTargetId"])
+  @identifiers(#["mountTargetId"])
   mountTargets?: CacheMountTargetProperties[];
 
   /**

@@ -4,10 +4,7 @@ import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-client-generator-core";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
 using TypeSpec.Versioning;
-using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ClientGenerator.Core;
 
@@ -430,6 +427,7 @@ model OsProfile {
   @doc("Specifies version of operating system.")
   version?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("Specifies the SSH public key used to access the operating system.")
   sshPublicKey?: string;
 }
