@@ -98,15 +98,13 @@ interface Clusters {
   /**
    * Create cluster identity.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "not including ArmLroLocationHeader for backward compatibility"
   @action("createClusterIdentity")
   createIdentity is ArmResourceActionAsync<
     Cluster,
     void,
-    ArmResponse<StackHciClusterIdentityResponseResult>,
-    LroHeaders = ArmAsyncOperationHeader<FinalResult = StackHciClusterIdentityResponseResult> &
-      Azure.Core.Foundations.RetryAfterHeader &
-      ArmLroLocationHeader
+    ArmResponse<ClusterIdentityResponse>,
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = ClusterIdentityResponse>
   >;
 
   /**
@@ -448,13 +446,13 @@ model LogCollectionProperties {
    */
   @visibility(Lifecycle.Read)
   @identifiers(#[])
-  logCollectionSessionDetails?: ClustersLogCollectionSession[];
+  logCollectionSessionDetails?: LogCollectionSession[];
 }
 
 /**
  * Log Collection Session details of the cluster.
  */
-model ClustersLogCollectionSession {
+model LogCollectionSession {
   /**
    * Start Time of the logs when it was collected
    */
@@ -559,7 +557,7 @@ model RemoteSupportProperties {
    */
   @visibility(Lifecycle.Read)
   @identifiers(#[])
-  remoteSupportNodeSettings?: ClustersRemoteSupportNodeSettings[];
+  remoteSupportNodeSettings?: RemoteSupportNodeSettings[];
 
   /**
    * Remote support session details for the cluster.
@@ -572,7 +570,7 @@ model RemoteSupportProperties {
 /**
  * Remote Support Node Settings of the cluster.
  */
-model ClustersRemoteSupportNodeSettings {
+model RemoteSupportNodeSettings {
   /**
    * Arc ResourceId of the Node
    */
@@ -980,7 +978,7 @@ model RawCertificateData {
 /**
  * Cluster Identity details.
  */
-model StackHciClusterIdentityResponseResult {
+model ClusterIdentityResponse {
   /**
    * Cluster identity properties.
    */

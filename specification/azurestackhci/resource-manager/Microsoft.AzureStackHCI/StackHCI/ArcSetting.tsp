@@ -85,15 +85,13 @@ interface ArcSettings {
   /**
    * Create Aad identity for arc settings.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "not including ArmLroLocationHeader for backward compatibility"
   @action("createArcIdentity")
   createIdentity is ArmResourceActionAsync<
     ArcSetting,
     void,
     ArmResponse<StackHciArcIdentityResponseResult>,
-    LroHeaders = ArmAsyncOperationHeader<FinalResult = StackHciArcIdentityResponseResult> &
-      Azure.Core.Foundations.RetryAfterHeader &
-      ArmLroLocationHeader
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = StackHciArcIdentityResponseResult>
   >;
 
   /**

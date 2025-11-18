@@ -91,7 +91,7 @@
       "name": "Updates"
     },
     {
-      "name": "UpdateSummaries"
+      "name": "UpdateSummariesOperationGroup"
     },
     {
       "name": "ValidatedSolutionRecipes"
@@ -1750,15 +1750,6 @@
               "Azure-AsyncOperation": {
                 "type": "string",
                 "description": "A link to the status monitor"
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -2614,7 +2605,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/StackHciClusterIdentityResponseResult"
+              "$ref": "#/definitions/ClusterIdentityResponse"
             }
           },
           "202": {
@@ -2623,15 +2614,6 @@
               "Azure-AsyncOperation": {
                 "type": "string",
                 "description": "A link to the status monitor"
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -3810,9 +3792,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/updateSummaries": {
       "get": {
-        "operationId": "UpdateSummaries_List",
+        "operationId": "UpdateSummariesOperationGroup_List",
         "tags": [
-          "UpdateSummaries"
+          "UpdateSummariesOperationGroup"
         ],
         "description": "List all Update summaries under the HCI cluster",
         "parameters": [
@@ -3847,11 +3829,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Get Update summaries under cluster resource": {
-            "$ref": "./examples/ListUpdateSummaries.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -3859,9 +3836,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/updateSummaries/default": {
       "get": {
-        "operationId": "UpdateSummaries_Get",
+        "operationId": "UpdateSummariesOperationGroup_Get",
         "tags": [
-          "UpdateSummaries"
+          "UpdateSummariesOperationGroup"
         ],
         "description": "Get all Update summaries under the HCI cluster",
         "parameters": [
@@ -3886,7 +3863,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/UpdateSummary"
+              "$ref": "#/definitions/UpdateSummaries"
             }
           },
           "default": {
@@ -3895,17 +3872,12 @@
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "Get Update summaries under cluster resource": {
-            "$ref": "./examples/GetUpdateSummaries.json"
-          }
         }
       },
       "put": {
-        "operationId": "UpdateSummaries_Put",
+        "operationId": "UpdateSummariesOperationGroup_Put",
         "tags": [
-          "UpdateSummaries"
+          "UpdateSummariesOperationGroup"
         ],
         "description": "Put Update summaries under the HCI cluster",
         "parameters": [
@@ -3931,15 +3903,15 @@
             "description": "Properties of the UpdateSummaries resource",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UpdateSummary"
+              "$ref": "#/definitions/UpdateSummaries"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'UpdateSummary' update operation succeeded",
+            "description": "Resource 'UpdateSummaries' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/UpdateSummary"
+              "$ref": "#/definitions/UpdateSummaries"
             }
           },
           "default": {
@@ -3948,17 +3920,12 @@
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "Put Update summaries under cluster resource": {
-            "$ref": "./examples/PutUpdateSummaries.json"
-          }
         }
       },
       "delete": {
-        "operationId": "UpdateSummaries_Delete",
+        "operationId": "UpdateSummariesOperationGroup_Delete",
         "tags": [
-          "UpdateSummaries"
+          "UpdateSummariesOperationGroup"
         ],
         "description": "Delete Update Summaries",
         "parameters": [
@@ -4009,11 +3976,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Delete an Update": {
-            "$ref": "./examples/DeleteUpdateSummaries.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -5208,6 +5170,17 @@
         }
       }
     },
+    "ClusterIdentityResponse": {
+      "type": "object",
+      "description": "Cluster Identity details.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ClusterIdentityResponseProperties",
+          "description": "Cluster identity properties.",
+          "readOnly": true
+        }
+      }
+    },
     "ClusterIdentityResponseProperties": {
       "type": "object",
       "description": "Cluster identity response properties.",
@@ -5702,105 +5675,6 @@
         }
       }
     },
-    "ClustersLogCollectionSession": {
-      "type": "object",
-      "description": "Log Collection Session details of the cluster.",
-      "properties": {
-        "logStartTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Start Time of the logs when it was collected",
-          "readOnly": true
-        },
-        "logEndTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "End Time of the logs when it was collected",
-          "readOnly": true
-        },
-        "timeCollected": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Duration of logs collected",
-          "readOnly": true
-        },
-        "logSize": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Size of the logs collected",
-          "readOnly": true
-        },
-        "logCollectionStatus": {
-          "$ref": "#/definitions/LogCollectionStatus",
-          "description": "LogCollection status",
-          "readOnly": true
-        },
-        "correlationId": {
-          "type": "string",
-          "description": "CorrelationId of the log collection",
-          "readOnly": true
-        },
-        "logCollectionJobType": {
-          "$ref": "#/definitions/LogCollectionJobType",
-          "description": "LogCollection job type",
-          "readOnly": true
-        },
-        "endTimeCollected": {
-          "type": "string",
-          "format": "date-time",
-          "description": "End Time of the logs when it was collected",
-          "readOnly": true
-        },
-        "logCollectionError": {
-          "$ref": "#/definitions/LogCollectionError",
-          "description": "Log Collection Error details of the cluster.",
-          "readOnly": true
-        }
-      }
-    },
-    "ClustersRemoteSupportNodeSettings": {
-      "type": "object",
-      "description": "Remote Support Node Settings of the cluster.",
-      "properties": {
-        "arcResourceId": {
-          "type": "string",
-          "description": "Arc ResourceId of the Node",
-          "readOnly": true
-        },
-        "state": {
-          "type": "string",
-          "description": "Remote Support Access Connection State on the Node",
-          "readOnly": true
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Remote Support Enablement Request Created TimeStamp on the Node",
-          "readOnly": true
-        },
-        "updatedAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Remote Support Enablement Request Updated TimeStamp on the Node",
-          "readOnly": true
-        },
-        "connectionStatus": {
-          "type": "string",
-          "description": "Remote Support Access Connection Status on the Node",
-          "readOnly": true
-        },
-        "connectionErrorMessage": {
-          "type": "string",
-          "description": "Remote Support Access Connection Error Message on the Node",
-          "readOnly": true
-        },
-        "transcriptLocation": {
-          "type": "string",
-          "description": "Remote Support Transcript location on the node",
-          "readOnly": true
-        }
-      }
-    },
     "CollectLogJobProperties": {
       "type": "object",
       "description": "Represents the properties of a log collection job.",
@@ -6126,7 +6000,7 @@
         "scaleUnits"
       ]
     },
-    "DeploymentDataContent": {
+    "DeploymentData": {
       "type": "object",
       "description": "The Deployment data of AzureStackHCI Cluster.",
       "properties": {
@@ -6435,7 +6309,7 @@
           "type": "array",
           "description": "The network intents assigned to the network reference pattern used for the deployment. Each intent will define its own name, traffic type, adapter names, and overrides as recommended by your OEM.",
           "items": {
-            "$ref": "#/definitions/DeploymentSettingsIntents"
+            "$ref": "#/definitions/Intents"
           },
           "x-ms-identifiers": [
             "name"
@@ -6445,7 +6319,7 @@
           "type": "array",
           "description": "List of StorageNetworks config to deploy AzureStackHCI Cluster.",
           "items": {
-            "$ref": "#/definitions/DeploymentSettingsStorageNetworks"
+            "$ref": "#/definitions/StorageNetworks"
           },
           "x-ms-identifiers": [
             "name"
@@ -6458,54 +6332,6 @@
         "enableStorageAutoIp": {
           "type": "boolean",
           "description": "Optional parameter required only for 3 Nodes Switchless deployments. This allows users to specify IPs and Mask for Storage NICs when Network ATC is not assigning the IPs for storage automatically."
-        }
-      }
-    },
-    "DeploymentSettingsIntents": {
-      "type": "object",
-      "description": "The Intents of a cluster.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the network intent you wish to create."
-        },
-        "trafficType": {
-          "type": "array",
-          "description": "List of network traffic types. Only allowed values are 'Compute', 'Storage', 'Management'.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "adapter": {
-          "type": "array",
-          "description": "Array of network interfaces used for the network intent.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "overrideVirtualSwitchConfiguration": {
-          "type": "boolean",
-          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation."
-        },
-        "virtualSwitchConfigurationOverrides": {
-          "$ref": "#/definitions/DeploymentSettingsVirtualSwitchConfigurationOverrides",
-          "description": "Set virtualSwitch ConfigurationOverrides for cluster."
-        },
-        "overrideQosPolicy": {
-          "type": "boolean",
-          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation."
-        },
-        "qosPolicyOverrides": {
-          "$ref": "#/definitions/QosPolicyOverrides",
-          "description": "Set QoS PolicyOverrides for cluster."
-        },
-        "overrideAdapterProperty": {
-          "type": "boolean",
-          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation."
-        },
-        "adapterPropertyOverrides": {
-          "$ref": "#/definitions/AdapterPropertyOverrides",
-          "description": "Set Adapter PropertyOverrides for cluster."
         }
       }
     },
@@ -6569,66 +6395,6 @@
         "deploymentMode",
         "deploymentConfiguration"
       ]
-    },
-    "DeploymentSettingsStorageAdapterIPInfo": {
-      "type": "object",
-      "description": "The StorageAdapter physical nodes of a cluster.",
-      "properties": {
-        "physicalNode": {
-          "type": "string",
-          "description": "storage adapter physical node name."
-        },
-        "ipv4Address": {
-          "type": "string",
-          "description": "The IPv4 address assigned to each storage adapter physical node on your Azure Stack HCI cluster."
-        },
-        "subnetMask": {
-          "type": "string",
-          "description": "The SubnetMask address assigned to each storage adapter physical node on your Azure Stack HCI cluster."
-        }
-      }
-    },
-    "DeploymentSettingsStorageNetworks": {
-      "type": "object",
-      "description": "The StorageNetworks of a cluster.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the storage network."
-        },
-        "networkAdapterName": {
-          "type": "string",
-          "description": "Name of the storage network adapter."
-        },
-        "vlanId": {
-          "type": "string",
-          "description": "ID specified for the VLAN storage network. This setting is applied to the network interfaces that route the storage and VM migration traffic."
-        },
-        "storageAdapterIPInfo": {
-          "type": "array",
-          "description": "List of Storage adapter physical nodes config to deploy AzureStackHCI Cluster.",
-          "items": {
-            "$ref": "#/definitions/DeploymentSettingsStorageAdapterIPInfo"
-          },
-          "x-ms-identifiers": [
-            "physicalNode"
-          ]
-        }
-      }
-    },
-    "DeploymentSettingsVirtualSwitchConfigurationOverrides": {
-      "type": "object",
-      "description": "The VirtualSwitchConfigurationOverrides of a cluster.",
-      "properties": {
-        "enableIov": {
-          "type": "string",
-          "description": "Enable IoV for Virtual Switch"
-        },
-        "loadBalancingAlgorithm": {
-          "type": "string",
-          "description": "Load Balancing Algorithm for Virtual Switch"
-        }
-      }
     },
     "DeploymentStep": {
       "type": "object",
@@ -6760,6 +6526,44 @@
         "deviceMetadata": {
           "type": "string",
           "description": "Device metadata details."
+        }
+      }
+    },
+    "DeviceHostNetwork": {
+      "type": "object",
+      "description": "The HostNetwork of a cluster.",
+      "properties": {
+        "intents": {
+          "type": "array",
+          "description": "The network intents assigned to the network reference pattern used for the deployment. Each intent will define its own name, traffic type, adapter names, and overrides as recommended by your OEM.",
+          "items": {
+            "$ref": "#/definitions/EdgeDevicesIntents"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "intentName"
+          ]
+        },
+        "storageNetworks": {
+          "type": "array",
+          "description": "List of StorageNetworks config to deploy AzureStackHCI Cluster.",
+          "items": {
+            "$ref": "#/definitions/EdgeDevicesStorageNetworks"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "networkAdapterName"
+          ]
+        },
+        "storageConnectivitySwitchless": {
+          "type": "boolean",
+          "description": "Defines how the storage adapters between nodes are connected either switch or switch less.",
+          "readOnly": true
+        },
+        "enableStorageAutoIp": {
+          "type": "boolean",
+          "description": "Optional parameter required only for 3 Nodes Switchless deployments. This allows users to specify IPs and Mask for Storage NICs when Network ATC is not assigning the IPs for storage automatically.",
+          "readOnly": true
         }
       }
     },
@@ -7090,17 +6894,6 @@
         }
       ]
     },
-    "EdgeDeviceErrorDetail": {
-      "type": "object",
-      "description": "details of validation failure",
-      "properties": {
-        "exception": {
-          "type": "string",
-          "description": "Exception details while installing extension.",
-          "readOnly": true
-        }
-      }
-    },
     "EdgeDeviceJob": {
       "type": "object",
       "description": "EdgeDevice Jobs resource",
@@ -7268,39 +7061,6 @@
         }
       }
     },
-    "EdgeDeviceJobsRemoteSupportNodeSettings": {
-      "type": "object",
-      "description": "Represents the settings of a remote support node.",
-      "properties": {
-        "state": {
-          "type": "string",
-          "description": "The state of the remote support node.",
-          "readOnly": true
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp when the node settings were created, in UTC.",
-          "readOnly": true
-        },
-        "updatedAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp when the node settings were last updated, in UTC.",
-          "readOnly": true
-        },
-        "connectionStatus": {
-          "type": "string",
-          "description": "The current connection status of the remote support session.",
-          "readOnly": true
-        },
-        "connectionErrorMessage": {
-          "type": "string",
-          "description": "The error message, if any, from the last connection attempt.",
-          "readOnly": true
-        }
-      }
-    },
     "EdgeDeviceJobsStep": {
       "type": "object",
       "description": "Step details during job execution.",
@@ -7449,7 +7209,7 @@
           "type": "array",
           "description": "Error details while installing Arc extension.",
           "items": {
-            "$ref": "#/definitions/EdgeDeviceErrorDetail"
+            "$ref": "#/definitions/ErrorDetail"
           },
           "readOnly": true,
           "x-ms-identifiers": []
@@ -7468,44 +7228,6 @@
         "managedBy": {
           "$ref": "#/definitions/ExtensionManagedBy",
           "description": "Extension managed by user or Azure.",
-          "readOnly": true
-        }
-      }
-    },
-    "EdgeDevicesHostNetwork": {
-      "type": "object",
-      "description": "The HostNetwork of a cluster.",
-      "properties": {
-        "intents": {
-          "type": "array",
-          "description": "The network intents assigned to the network reference pattern used for the deployment. Each intent will define its own name, traffic type, adapter names, and overrides as recommended by your OEM.",
-          "items": {
-            "$ref": "#/definitions/EdgeDevicesIntents"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "intentName"
-          ]
-        },
-        "storageNetworks": {
-          "type": "array",
-          "description": "List of StorageNetworks config to deploy AzureStackHCI Cluster.",
-          "items": {
-            "$ref": "#/definitions/EdgeDevicesStorageNetworks"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "networkAdapterName"
-          ]
-        },
-        "storageConnectivitySwitchless": {
-          "type": "boolean",
-          "description": "Defines how the storage adapters between nodes are connected either switch or switch less.",
-          "readOnly": true
-        },
-        "enableStorageAutoIp": {
-          "type": "boolean",
-          "description": "Optional parameter required only for 3 Nodes Switchless deployments. This allows users to specify IPs and Mask for Storage NICs when Network ATC is not assigning the IPs for storage automatically.",
           "readOnly": true
         }
       }
@@ -7691,6 +7413,17 @@
             "description": "Edge solution for Windows based edge devices."
           }
         ]
+      }
+    },
+    "ErrorDetail": {
+      "type": "object",
+      "description": "details of validation failure",
+      "properties": {
+        "exception": {
+          "type": "string",
+          "description": "Exception details while installing extension.",
+          "readOnly": true
+        }
       }
     },
     "Extension": {
@@ -7923,7 +7656,7 @@
         ]
       }
     },
-    "ExtensionParametersContent": {
+    "ExtensionParameters": {
       "type": "object",
       "description": "Describes the properties of a Machine Extension. This object mirrors the definition in HybridCompute.",
       "properties": {
@@ -7973,12 +7706,36 @@
         }
       }
     },
+    "ExtensionPatchParameters": {
+      "type": "object",
+      "description": "Describes the properties of a Machine Extension that can be updated.",
+      "properties": {
+        "typeHandlerVersion": {
+          "type": "string",
+          "description": "Specifies the version of the script handler. Latest version would be used if not specified."
+        },
+        "enableAutomaticUpgrade": {
+          "type": "boolean",
+          "description": "Indicates whether the extension should be automatically upgraded by the platform if there is a newer version available."
+        },
+        "settings": {
+          "type": "object",
+          "description": "Json formatted public settings for the extension.",
+          "additionalProperties": {}
+        },
+        "protectedSettings": {
+          "type": "object",
+          "description": "Protected settings (may contain secrets).",
+          "additionalProperties": {}
+        }
+      }
+    },
     "ExtensionPatchProperties": {
       "type": "object",
       "description": "Describes Machine Extension Properties that can be updated.",
       "properties": {
         "extensionParameters": {
-          "$ref": "#/definitions/StackHCIHciExtensionPatchParametersContent",
+          "$ref": "#/definitions/ExtensionPatchParameters",
           "description": "Describes the properties of a Machine Extension that can be updated."
         }
       }
@@ -8010,7 +7767,7 @@
           "readOnly": true
         },
         "extensionParameters": {
-          "$ref": "#/definitions/ExtensionParametersContent",
+          "$ref": "#/definitions/ExtensionParameters",
           "description": "Parameters specific to this extension type."
         },
         "aggregateState": {
@@ -8282,7 +8039,7 @@
           ]
         },
         "hostNetwork": {
-          "$ref": "#/definitions/EdgeDevicesHostNetwork",
+          "$ref": "#/definitions/DeviceHostNetwork",
           "description": "HostNetwork config to deploy AzureStackHCI Cluster.",
           "readOnly": true
         }
@@ -8661,6 +8418,54 @@
         }
       }
     },
+    "Intents": {
+      "type": "object",
+      "description": "The Intents of a cluster.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the network intent you wish to create."
+        },
+        "trafficType": {
+          "type": "array",
+          "description": "List of network traffic types. Only allowed values are 'Compute', 'Storage', 'Management'.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "adapter": {
+          "type": "array",
+          "description": "Array of network interfaces used for the network intent.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "overrideVirtualSwitchConfiguration": {
+          "type": "boolean",
+          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation."
+        },
+        "virtualSwitchConfigurationOverrides": {
+          "$ref": "#/definitions/VirtualSwitchConfigurationOverrides",
+          "description": "Set virtualSwitch ConfigurationOverrides for cluster."
+        },
+        "overrideQosPolicy": {
+          "type": "boolean",
+          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation."
+        },
+        "qosPolicyOverrides": {
+          "$ref": "#/definitions/QosPolicyOverrides",
+          "description": "Set QoS PolicyOverrides for cluster."
+        },
+        "overrideAdapterProperty": {
+          "type": "boolean",
+          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation."
+        },
+        "adapterPropertyOverrides": {
+          "$ref": "#/definitions/AdapterPropertyOverrides",
+          "description": "Set Adapter PropertyOverrides for cluster."
+        }
+      }
+    },
     "IpAddressRange": {
       "type": "object",
       "description": "IP address range configuration.",
@@ -8963,6 +8768,43 @@
         }
       }
     },
+    "LogCollectionJobSession": {
+      "type": "object",
+      "description": "Represents a session for collecting logs from an edge device.",
+      "properties": {
+        "startTime": {
+          "type": "string",
+          "description": "The timestamp when log collection started, in ISO 8601 format.",
+          "readOnly": true
+        },
+        "endTime": {
+          "type": "string",
+          "description": "The timestamp when log collection ended, in ISO 8601 format.",
+          "readOnly": true
+        },
+        "timeCollected": {
+          "type": "string",
+          "description": "The total time logs were collected for, in ISO 8601 duration format.",
+          "readOnly": true
+        },
+        "logSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The size of the collected logs in bytes.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/DeviceLogCollectionStatus",
+          "description": "The status of the log collection session.",
+          "readOnly": true
+        },
+        "correlationId": {
+          "type": "string",
+          "description": "A unique identifier for correlating this log collection session with other operations or sessions.",
+          "readOnly": true
+        }
+      }
+    },
     "LogCollectionJobType": {
       "type": "string",
       "description": "LogCollection job type",
@@ -9013,7 +8855,7 @@
           "type": "array",
           "description": "Log collection session details for the cluster.",
           "items": {
-            "$ref": "#/definitions/ClustersLogCollectionSession"
+            "$ref": "#/definitions/LogCollectionSession"
           },
           "readOnly": true,
           "x-ms-identifiers": []
@@ -9044,7 +8886,7 @@
           "type": "array",
           "description": "Details of the log collection session.",
           "items": {
-            "$ref": "#/definitions/LogCollectionSession"
+            "$ref": "#/definitions/LogCollectionJobSession"
           },
           "readOnly": true,
           "x-ms-identifiers": [
@@ -9085,37 +8927,56 @@
     },
     "LogCollectionSession": {
       "type": "object",
-      "description": "Represents a session for collecting logs from an edge device.",
+      "description": "Log Collection Session details of the cluster.",
       "properties": {
-        "startTime": {
+        "logStartTime": {
           "type": "string",
-          "description": "The timestamp when log collection started, in ISO 8601 format.",
+          "format": "date-time",
+          "description": "Start Time of the logs when it was collected",
           "readOnly": true
         },
-        "endTime": {
+        "logEndTime": {
           "type": "string",
-          "description": "The timestamp when log collection ended, in ISO 8601 format.",
+          "format": "date-time",
+          "description": "End Time of the logs when it was collected",
           "readOnly": true
         },
         "timeCollected": {
           "type": "string",
-          "description": "The total time logs were collected for, in ISO 8601 duration format.",
+          "format": "date-time",
+          "description": "Duration of logs collected",
           "readOnly": true
         },
         "logSize": {
           "type": "integer",
-          "format": "int32",
-          "description": "The size of the collected logs in bytes.",
+          "format": "int64",
+          "description": "Size of the logs collected",
           "readOnly": true
         },
-        "status": {
-          "$ref": "#/definitions/DeviceLogCollectionStatus",
-          "description": "The status of the log collection session.",
+        "logCollectionStatus": {
+          "$ref": "#/definitions/LogCollectionStatus",
+          "description": "LogCollection status",
           "readOnly": true
         },
         "correlationId": {
           "type": "string",
-          "description": "A unique identifier for correlating this log collection session with other operations or sessions.",
+          "description": "CorrelationId of the log collection",
+          "readOnly": true
+        },
+        "logCollectionJobType": {
+          "$ref": "#/definitions/LogCollectionJobType",
+          "description": "LogCollection job type",
+          "readOnly": true
+        },
+        "endTimeCollected": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End Time of the logs when it was collected",
+          "readOnly": true
+        },
+        "logCollectionError": {
+          "$ref": "#/definitions/LogCollectionError",
+          "description": "Log Collection Error details of the cluster.",
           "readOnly": true
         }
       }
@@ -9156,68 +9017,6 @@
         ]
       },
       "readOnly": true
-    },
-    "NetworkAdapter": {
-      "type": "object",
-      "description": "Network adapter configuration.",
-      "properties": {
-        "ipAssignmentType": {
-          "$ref": "#/definitions/IpAssignmentType",
-          "description": "Type of IP assignment."
-        },
-        "ipAddress": {
-          "type": "string",
-          "description": "IP address."
-        },
-        "adapterName": {
-          "type": "string",
-          "description": "Adapter Name."
-        },
-        "macAddress": {
-          "type": "string",
-          "description": "MAC address."
-        },
-        "ipAddressRange": {
-          "$ref": "#/definitions/IpAddressRange",
-          "description": "IP address range."
-        },
-        "gateway": {
-          "type": "string",
-          "description": "Gateway id."
-        },
-        "subnetMask": {
-          "type": "string",
-          "description": "Subnet mask."
-        },
-        "dnsAddressArray": {
-          "type": "array",
-          "description": "Array of DNS addresses.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "vlanId": {
-          "type": "string",
-          "description": "VLAN ID for the network setup."
-        }
-      },
-      "required": [
-        "ipAssignmentType"
-      ]
-    },
-    "NetworkConfiguration": {
-      "type": "object",
-      "description": "Network configuration.",
-      "properties": {
-        "networkAdapters": {
-          "type": "array",
-          "description": "List of network adapters.",
-          "items": {
-            "$ref": "#/definitions/NetworkAdapter"
-          },
-          "x-ms-identifiers": []
-        }
-      }
     },
     "NetworkController": {
       "type": "object",
@@ -9988,7 +9787,9 @@
         "healthCheckTags": {
           "type": "object",
           "description": "Key-value pairs that allow grouping/filtering individual tests.",
-          "additionalProperties": {}
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "title": {
           "type": "string",
@@ -9996,11 +9797,11 @@
         },
         "status": {
           "$ref": "#/definitions/Status",
-          "description": "The status of the check running (i.e. Failed, Succeeded, In Progress). This answers whether the check ran, and passed or failed."
+          "description": "Represents the current status of the check being performed. Indicates whether the check has completed successfully, failed, or is still in progress."
         },
         "severity": {
           "$ref": "#/definitions/Severity",
-          "description": "Severity of the result (Critical, Warning, Informational, Hidden). This answers how important the result is. Critical is the only update-blocking severity."
+          "description": "Indicates the importance or impact level of the result. Determines whether the result is informational, a warning, or a critical issue that may block updates."
         },
         "description": {
           "type": "string",
@@ -10048,28 +9849,6 @@
         "value": {
           "type": "string",
           "description": "Value of the key that allow grouping/filtering individual tests."
-        }
-      }
-    },
-    "ProvisionOsReportedProperties": {
-      "type": "object",
-      "description": "Reported Properties for Provision Os job",
-      "properties": {
-        "percentComplete": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The percentage of the job that is complete.",
-          "readOnly": true
-        },
-        "validationStatus": {
-          "$ref": "#/definitions/EceActionStatus",
-          "description": "Validation status of job.",
-          "readOnly": true
-        },
-        "deploymentStatus": {
-          "$ref": "#/definitions/EceActionStatus",
-          "description": "Deployment status of job.",
-          "readOnly": true
         }
       }
     },
@@ -10400,6 +10179,39 @@
         ]
       }
     },
+    "RemoteSupportJobNodeSettings": {
+      "type": "object",
+      "description": "Represents the settings of a remote support node.",
+      "properties": {
+        "state": {
+          "type": "string",
+          "description": "The state of the remote support node.",
+          "readOnly": true
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the node settings were created, in UTC.",
+          "readOnly": true
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the node settings were last updated, in UTC.",
+          "readOnly": true
+        },
+        "connectionStatus": {
+          "type": "string",
+          "description": "The current connection status of the remote support session.",
+          "readOnly": true
+        },
+        "connectionErrorMessage": {
+          "type": "string",
+          "description": "The error message, if any, from the last connection attempt.",
+          "readOnly": true
+        }
+      }
+    },
     "RemoteSupportJobProperties": {
       "type": "object",
       "description": "Represents the properties of a remote support job.",
@@ -10450,7 +10262,7 @@
           "readOnly": true
         },
         "nodeSettings": {
-          "$ref": "#/definitions/EdgeDeviceJobsRemoteSupportNodeSettings",
+          "$ref": "#/definitions/RemoteSupportJobNodeSettings",
           "description": "Optional settings for configuring the node for remote support.",
           "readOnly": true
         },
@@ -10464,6 +10276,49 @@
           "x-ms-identifiers": [
             "sessionId"
           ]
+        }
+      }
+    },
+    "RemoteSupportNodeSettings": {
+      "type": "object",
+      "description": "Remote Support Node Settings of the cluster.",
+      "properties": {
+        "arcResourceId": {
+          "type": "string",
+          "description": "Arc ResourceId of the Node",
+          "readOnly": true
+        },
+        "state": {
+          "type": "string",
+          "description": "Remote Support Access Connection State on the Node",
+          "readOnly": true
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Remote Support Enablement Request Created TimeStamp on the Node",
+          "readOnly": true
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Remote Support Enablement Request Updated TimeStamp on the Node",
+          "readOnly": true
+        },
+        "connectionStatus": {
+          "type": "string",
+          "description": "Remote Support Access Connection Status on the Node",
+          "readOnly": true
+        },
+        "connectionErrorMessage": {
+          "type": "string",
+          "description": "Remote Support Access Connection Error Message on the Node",
+          "readOnly": true
+        },
+        "transcriptLocation": {
+          "type": "string",
+          "description": "Remote Support Transcript location on the node",
+          "readOnly": true
         }
       }
     },
@@ -10491,7 +10346,7 @@
           "type": "array",
           "description": "Remote support node settings for the cluster.",
           "items": {
-            "$ref": "#/definitions/ClustersRemoteSupportNodeSettings"
+            "$ref": "#/definitions/RemoteSupportNodeSettings"
           },
           "readOnly": true,
           "x-ms-identifiers": []
@@ -10724,7 +10579,7 @@
       "description": "Scale units will contains list of deployment data",
       "properties": {
         "deploymentData": {
-          "$ref": "#/definitions/DeploymentDataContent",
+          "$ref": "#/definitions/DeploymentData",
           "description": "Deployment Data to deploy AzureStackHCI Cluster."
         },
         "sbePartnerInfo": {
@@ -11146,41 +11001,6 @@
         ]
       }
     },
-    "StackHCIHciExtensionPatchParametersContent": {
-      "type": "object",
-      "description": "Describes the properties of a Machine Extension that can be updated.",
-      "properties": {
-        "typeHandlerVersion": {
-          "type": "string",
-          "description": "Specifies the version of the script handler. Latest version would be used if not specified."
-        },
-        "enableAutomaticUpgrade": {
-          "type": "boolean",
-          "description": "Indicates whether the extension should be automatically upgraded by the platform if there is a newer version available."
-        },
-        "settings": {
-          "type": "object",
-          "description": "Json formatted public settings for the extension.",
-          "additionalProperties": {}
-        },
-        "protectedSettings": {
-          "type": "object",
-          "description": "Protected settings (may contain secrets).",
-          "additionalProperties": {}
-        }
-      }
-    },
-    "StackHciClusterIdentityResponseResult": {
-      "type": "object",
-      "description": "Cluster Identity details.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ClusterIdentityResponseProperties",
-          "description": "Cluster identity properties.",
-          "readOnly": true
-        }
-      }
-    },
     "State": {
       "type": "string",
       "description": "State of the update as it relates to this stamp.",
@@ -11506,6 +11326,52 @@
         }
       }
     },
+    "StorageAdapterIPInfo": {
+      "type": "object",
+      "description": "The StorageAdapter physical nodes of a cluster.",
+      "properties": {
+        "physicalNode": {
+          "type": "string",
+          "description": "storage adapter physical node name."
+        },
+        "ipv4Address": {
+          "type": "string",
+          "description": "The IPv4 address assigned to each storage adapter physical node on your Azure Stack HCI cluster."
+        },
+        "subnetMask": {
+          "type": "string",
+          "description": "The SubnetMask address assigned to each storage adapter physical node on your Azure Stack HCI cluster."
+        }
+      }
+    },
+    "StorageNetworks": {
+      "type": "object",
+      "description": "The StorageNetworks of a cluster.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the storage network."
+        },
+        "networkAdapterName": {
+          "type": "string",
+          "description": "Name of the storage network adapter."
+        },
+        "vlanId": {
+          "type": "string",
+          "description": "ID specified for the VLAN storage network. This setting is applied to the network interfaces that route the storage and VM migration traffic."
+        },
+        "storageAdapterIPInfo": {
+          "type": "array",
+          "description": "List of Storage adapter physical nodes config to deploy AzureStackHCI Cluster.",
+          "items": {
+            "$ref": "#/definitions/StorageAdapterIPInfo"
+          },
+          "x-ms-identifiers": [
+            "physicalNode"
+          ]
+        }
+      }
+    },
     "SupportStatus": {
       "type": "string",
       "description": "Indicates whether the cluster is under support.",
@@ -11581,24 +11447,6 @@
           "type": "boolean",
           "description": "This represents whether extension is enabled on virtualSwitch.",
           "readOnly": true
-        }
-      }
-    },
-    "TimeConfiguration": {
-      "type": "object",
-      "description": "Time configuration.",
-      "properties": {
-        "primaryTimeServer": {
-          "type": "string",
-          "description": "Primary NTP server."
-        },
-        "secondaryTimeServer": {
-          "type": "string",
-          "description": "Secondary NTP server."
-        },
-        "timeZone": {
-          "type": "string",
-          "description": "Time zone."
         }
       }
     },
@@ -11912,7 +11760,7 @@
           "description": "State of the update run."
         },
         "progress": {
-          "$ref": "#/definitions/UpdateRunsStep",
+          "$ref": "#/definitions/UpdateStep",
           "description": "Progress representation of the update run steps."
         }
       }
@@ -11954,7 +11802,22 @@
       },
       "readOnly": true
     },
-    "UpdateRunsStep": {
+    "UpdateStateProperties": {
+      "type": "object",
+      "description": "Additional information regarding the state of the update. See definition of UpdateStateProperties type below for more details on this property.",
+      "properties": {
+        "progressPercentage": {
+          "type": "number",
+          "format": "float",
+          "description": "Progress percentage of ongoing operation. Currently this property is only valid when the update is in the Downloading state, where it maps to how much of the update content has been downloaded."
+        },
+        "notifyMessage": {
+          "type": "string",
+          "description": "Brief message with instructions for updates of AvailabilityType Notify."
+        }
+      }
+    },
+    "UpdateStep": {
       "type": "object",
       "description": "Progress representation of the update run steps.",
       "properties": {
@@ -11997,7 +11860,7 @@
           "type": "array",
           "description": "Recursive model for child steps of this step.",
           "items": {
-            "$ref": "#/definitions/UpdateRunsStep"
+            "$ref": "#/definitions/UpdateStep"
           },
           "x-ms-identifiers": [
             "name"
@@ -12005,20 +11868,35 @@
         }
       }
     },
-    "UpdateStateProperties": {
+    "UpdateSummaries": {
       "type": "object",
-      "description": "Additional information regarding the state of the update. See definition of UpdateStateProperties type below for more details on this property.",
+      "description": "Get the update summaries for the cluster",
       "properties": {
-        "progressPercentage": {
-          "type": "number",
-          "format": "float",
-          "description": "Progress percentage of ongoing operation. Currently this property is only valid when the update is in the Downloading state, where it maps to how much of the update content has been downloaded."
+        "properties": {
+          "$ref": "#/definitions/UpdateSummariesProperties",
+          "description": "Update summaries properties"
         },
-        "notifyMessage": {
+        "location": {
           "type": "string",
-          "description": "Brief message with instructions for updates of AvailabilityType Notify."
+          "description": "The geo-location where the resource lives",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
     },
     "UpdateSummariesList": {
       "type": "object",
@@ -12026,9 +11904,9 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The UpdateSummary items on this page",
+          "description": "The UpdateSummaries items on this page",
           "items": {
-            "$ref": "#/definitions/UpdateSummary"
+            "$ref": "#/definitions/UpdateSummaries"
           }
         },
         "nextLink": {
@@ -12174,36 +12052,6 @@
           }
         ]
       }
-    },
-    "UpdateSummary": {
-      "type": "object",
-      "description": "Get the update summaries for the cluster",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/UpdateSummariesProperties",
-          "description": "Update summaries properties"
-        },
-        "location": {
-          "type": "string",
-          "description": "The geo-location where the resource lives",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
-        }
-      ]
     },
     "UploadCertificateRequest": {
       "type": "object",
@@ -12507,24 +12355,17 @@
         "recipeContent"
       ]
     },
-    "WebProxyConfiguration": {
+    "VirtualSwitchConfigurationOverrides": {
       "type": "object",
-      "description": "Web proxy configuration.",
+      "description": "The VirtualSwitchConfigurationOverrides of a cluster.",
       "properties": {
-        "connectionUri": {
+        "enableIov": {
           "type": "string",
-          "description": "Connection URI of the web proxy."
+          "description": "Enable IoV for Virtual Switch"
         },
-        "port": {
+        "loadBalancingAlgorithm": {
           "type": "string",
-          "description": "Port of the web proxy."
-        },
-        "bypassList": {
-          "type": "array",
-          "description": "Bypass list for the web proxy.",
-          "items": {
-            "type": "string"
-          }
+          "description": "Load Balancing Algorithm for Virtual Switch"
         }
       }
     },

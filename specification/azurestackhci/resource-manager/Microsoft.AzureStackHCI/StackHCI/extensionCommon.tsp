@@ -29,7 +29,7 @@ model ExtensionProperties {
    * Parameters specific to this extension type.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  extensionParameters?: ExtensionParametersContent;
+  extensionParameters?: ExtensionParameters;
 
   /**
    * Aggregate state of Arc Extensions across the nodes in the Parent Entity(HCI Cluster/Edge Machine).
@@ -54,7 +54,7 @@ model ExtensionProperties {
  * Describes the properties of a Machine Extension. This object mirrors the definition in HybridCompute.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "model nomenclature"
-model ExtensionParametersContent {
+model ExtensionParameters {
   /**
    * How the extension handler should be forced to update even if the extension configuration has not changed.
    */

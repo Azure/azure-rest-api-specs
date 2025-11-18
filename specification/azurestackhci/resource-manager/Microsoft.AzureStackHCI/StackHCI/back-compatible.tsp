@@ -47,7 +47,3 @@ using Microsoft.AzureStackHCI;
 @@clientName(UpdateRuns.put::parameters.resource, "updateRunsProperties");
 
 @@clientName(Updates.put::parameters.resource, "updateProperties");
-
-@@clientName(UpdateSummaries.put::parameters.resource,
-  "updateLocationProperties"
-);

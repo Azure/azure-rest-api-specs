@@ -163,7 +163,7 @@ model DeviceConfiguration {
 /**
  * details of validation failure
  */
-model EdgeDeviceErrorDetail {
+model ErrorDetail {
   /**
    * Exception details while installing extension.
    */
@@ -192,7 +192,7 @@ model EdgeDevicesExtension {
    */
   @visibility(Lifecycle.Read)
   @identifiers(#[])
-  errorDetails?: EdgeDeviceErrorDetail[];
+  errorDetails?: ErrorDetail[];
 
   /**
    * Arc Extension Azure resource id.
@@ -310,7 +310,7 @@ model HciNetworkProfile {
    * HostNetwork config to deploy AzureStackHCI Cluster.
    */
   @visibility(Lifecycle.Read)
-  hostNetwork?: EdgeDevicesHostNetwork;
+  hostNetwork?: DeviceHostNetwork;
 }
 
 /**
@@ -514,7 +514,7 @@ model SwitchExtension {
 /**
  * The HostNetwork of a cluster.
  */
-model EdgeDevicesHostNetwork {
+model DeviceHostNetwork {
   /**
    * The network intents assigned to the network reference pattern used for the deployment. Each intent will define its own name, traffic type, adapter names, and overrides as recommended by your OEM.
    */

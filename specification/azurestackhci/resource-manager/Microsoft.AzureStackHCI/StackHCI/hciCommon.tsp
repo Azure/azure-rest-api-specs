@@ -433,43 +433,6 @@ model JobReportedProperties {
   deploymentStatus?: EceActionStatus;
 }
 
-@doc("Network configuration.")
-model NetworkConfiguration {
-  @Azure.ResourceManager.identifiers(#[])
-  @doc("List of network adapters.")
-  networkAdapters?: NetworkAdapter[];
-}
-
-@doc("Network adapter configuration.")
-model NetworkAdapter {
-  @doc("Type of IP assignment.")
-  ipAssignmentType: IpAssignmentType;
-
-  @doc("IP address.")
-  ipAddress?: string;
-
-  @doc("Adapter Name.")
-  adapterName?: string;
-
-  @doc("MAC address.")
-  macAddress?: string;
-
-  @doc("IP address range.")
-  ipAddressRange?: IpAddressRange;
-
-  @doc("Gateway id.")
-  gateway?: string;
-
-  @doc("Subnet mask.")
-  subnetMask?: string;
-
-  @doc("Array of DNS addresses.")
-  dnsAddressArray?: string[];
-
-  @doc("VLAN ID for the network setup.")
-  vlanId?: string;
-}
-
 @doc("IP assignment types")
 union IpAssignmentType {
   string,
@@ -488,30 +451,6 @@ model IpAddressRange {
 
   @doc("End IP address.")
   endIp: string;
-}
-
-@doc("Web proxy configuration.")
-model WebProxyConfiguration {
-  @doc("Connection URI of the web proxy.")
-  connectionUri?: string;
-
-  @doc("Port of the web proxy.")
-  port?: string;
-
-  @doc("Bypass list for the web proxy.")
-  bypassList?: string[];
-}
-
-@doc("Time configuration.")
-model TimeConfiguration {
-  @doc("Primary NTP server.")
-  primaryTimeServer?: string;
-
-  @doc("Secondary NTP server.")
-  secondaryTimeServer?: string;
-
-  @doc("Time zone.")
-  timeZone?: string;
 }
 
 @doc("Represents the provisioning operating system type.")
@@ -550,11 +489,11 @@ model LogCollectionReportedProperties {
   @doc("Details of the log collection session.")
   @visibility(Lifecycle.Read)
   @Azure.ResourceManager.identifiers(#["correlationId"])
-  logCollectionSessionDetails?: LogCollectionSession[];
+  logCollectionSessionDetails?: LogCollectionJobSession[];
 }
 
 @doc("Represents a session for collecting logs from an edge device.")
-model LogCollectionSession {
+model LogCollectionJobSession {
   @doc("The timestamp when log collection started, in ISO 8601 format.")
   @visibility(Lifecycle.Read)
   startTime?: string;
@@ -578,9 +517,4 @@ model LogCollectionSession {
   @doc("A unique identifier for correlating this log collection session with other operations or sessions.")
   @visibility(Lifecycle.Read)
   correlationId?: string;
-}
-
-@doc("Reported Properties for Provision Os job")
-model ProvisionOsReportedProperties {
-  ...JobReportedProperties;
 }

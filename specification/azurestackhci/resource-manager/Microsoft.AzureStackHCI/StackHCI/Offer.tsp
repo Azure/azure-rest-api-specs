@@ -100,3 +100,23 @@ model OfferProperties {
   @identifiers(#[])
   skuMappings?: SkuMappings[];
 }
+
+/**
+ * SKU Mapping details.
+ */
+model SkuMappings {
+  /**
+   * Identifier of the CatalogPlan for the sku
+   */
+  catalogPlanId?: string;
+
+  /**
+   * Identifier for the sku
+   */
+  marketplaceSkuId?: string;
+
+  /**
+   * Array of SKU versions available
+   */
+  marketplaceSkuVersions?: string[];
+}

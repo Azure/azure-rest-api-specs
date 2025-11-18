@@ -201,7 +201,7 @@ model RemoteSupportJobReportedProperties {
    * Optional settings for configuring the node for remote support.
    */
   @visibility(Lifecycle.Read)
-  nodeSettings?: EdgeDeviceJobsRemoteSupportNodeSettings;
+  nodeSettings?: RemoteSupportJobNodeSettings;
 
   /**
    * Details of the remote support session.
@@ -214,7 +214,7 @@ model RemoteSupportJobReportedProperties {
 /**
  * Represents the settings of a remote support node.
  */
-model EdgeDeviceJobsRemoteSupportNodeSettings {
+model RemoteSupportJobNodeSettings {
   /**
    * The state of the remote support node.
    */

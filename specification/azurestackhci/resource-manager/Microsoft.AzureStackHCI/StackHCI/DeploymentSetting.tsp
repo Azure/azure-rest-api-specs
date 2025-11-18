@@ -117,7 +117,7 @@ model ScaleUnits {
   /**
    * Deployment Data to deploy AzureStackHCI Cluster.
    */
-  deploymentData: DeploymentDataContent;
+  deploymentData: DeploymentData;
 
   /**
    * Solution builder extension (SBE) partner properties
@@ -128,7 +128,7 @@ model ScaleUnits {
 /**
  * The Deployment data of AzureStackHCI Cluster.
  */
-model DeploymentDataContent {
+model DeploymentData {
   /**
    * SecuritySettings to deploy AzureStackHCI Cluster.
    */
@@ -456,13 +456,13 @@ model DeploymentSettingsHostNetwork {
    * The network intents assigned to the network reference pattern used for the deployment. Each intent will define its own name, traffic type, adapter names, and overrides as recommended by your OEM.
    */
   @identifiers(#["name"])
-  intents?: DeploymentSettingsIntents[];
+  intents?: Intents[];
 
   /**
    * List of StorageNetworks config to deploy AzureStackHCI Cluster.
    */
   @identifiers(#["name"])
-  storageNetworks?: DeploymentSettingsStorageNetworks[];
+  storageNetworks?: StorageNetworks[];
 
   /**
    * Defines how the storage adapters between nodes are connected either switch or switch less..
@@ -478,7 +478,7 @@ model DeploymentSettingsHostNetwork {
 /**
  * The Intents of a cluster.
  */
-model DeploymentSettingsIntents {
+model Intents {
   /**
    * Name of the network intent you wish to create.
    */
@@ -502,7 +502,7 @@ model DeploymentSettingsIntents {
   /**
    * Set virtualSwitch ConfigurationOverrides for cluster.
    */
-  virtualSwitchConfigurationOverrides?: DeploymentSettingsVirtualSwitchConfigurationOverrides;
+  virtualSwitchConfigurationOverrides?: VirtualSwitchConfigurationOverrides;
 
   /**
    * This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.
@@ -528,7 +528,7 @@ model DeploymentSettingsIntents {
 /**
  * The VirtualSwitchConfigurationOverrides of a cluster.
  */
-model DeploymentSettingsVirtualSwitchConfigurationOverrides {
+model VirtualSwitchConfigurationOverrides {
   /**
    * Enable IoV for Virtual Switch
    */
@@ -564,7 +564,7 @@ model DeploymentSettingsAdapterPropertyOverrides {
 /**
  * The StorageNetworks of a cluster.
  */
-model DeploymentSettingsStorageNetworks {
+model StorageNetworks {
   /**
    * Name of the storage network.
    */
@@ -585,13 +585,13 @@ model DeploymentSettingsStorageNetworks {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "model nomenclature"
   @identifiers(#["physicalNode"])
-  storageAdapterIPInfo?: DeploymentSettingsStorageAdapterIPInfo[];
+  storageAdapterIPInfo?: StorageAdapterIPInfo[];
 }
 
 /**
  * The StorageAdapter physical nodes of a cluster.
  */
-model DeploymentSettingsStorageAdapterIPInfo {
+model StorageAdapterIPInfo {
   /**
    * storage adapter physical node name.
    */

@@ -1282,10 +1282,6 @@
               "Azure-AsyncOperation": {
                 "type": "string",
                 "description": "A link to the status monitor"
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -1895,7 +1891,7 @@
           "200": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/StackHciClusterIdentityResponseResult"
+              "$ref": "#/definitions/ClusterIdentityResponse"
             }
           },
           "202": {
@@ -1904,10 +1900,6 @@
               "Azure-AsyncOperation": {
                 "type": "string",
                 "description": "A link to the status monitor"
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -2754,7 +2746,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/updateSummaries": {
       "get": {
-        "operationId": "UpdateSummaries_List",
+        "operationId": "UpdateSummariesOperationGroup_List",
         "parameters": [
           {
             "name": "clusterName",
@@ -2777,11 +2769,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Get Update summaries under cluster resource": {
-            "$ref": "./examples/ListUpdateSummaries.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -2789,7 +2776,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/updateSummaries/default": {
       "get": {
-        "operationId": "UpdateSummaries_Get",
+        "operationId": "UpdateSummariesOperationGroup_Get",
         "parameters": [
           {
             "name": "clusterName",
@@ -2802,7 +2789,7 @@
           "200": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/UpdateSummary"
+              "$ref": "#/definitions/UpdateSummaries"
             }
           },
           "default": {
@@ -2811,15 +2798,10 @@
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "Get Update summaries under cluster resource": {
-            "$ref": "./examples/GetUpdateSummaries.json"
-          }
         }
       },
       "put": {
-        "operationId": "UpdateSummaries_Put",
+        "operationId": "UpdateSummariesOperationGroup_Put",
         "parameters": [
           {
             "name": "clusterName",
@@ -2832,7 +2814,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UpdateSummary"
+              "$ref": "#/definitions/UpdateSummaries"
             }
           }
         ],
@@ -2840,7 +2822,7 @@
           "200": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/UpdateSummary"
+              "$ref": "#/definitions/UpdateSummaries"
             }
           },
           "default": {
@@ -2849,15 +2831,10 @@
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "Put Update summaries under cluster resource": {
-            "$ref": "./examples/PutUpdateSummaries.json"
-          }
         }
       },
       "delete": {
-        "operationId": "UpdateSummaries_Delete",
+        "operationId": "UpdateSummariesOperationGroup_Delete",
         "parameters": [
           {
             "name": "clusterName",
@@ -2891,11 +2868,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Delete an Update": {
-            "$ref": "./examples/DeleteUpdateSummaries.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -3666,6 +3638,15 @@
         }
       }
     },
+    "ClusterIdentityResponse": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ClusterIdentityResponseProperties",
+          "readOnly": true
+        }
+      }
+    },
     "ClusterIdentityResponseProperties": {
       "type": "object",
       "properties": {
@@ -4156,105 +4137,6 @@
         }
       }
     },
-    "ClustersLogCollectionSession": {
-      "type": "object",
-      "properties": {
-        "logStartTime": {
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true
-        },
-        "logEndTime": {
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true
-        },
-        "timeCollected": {
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true
-        },
-        "logSize": {
-          "type": "integer",
-          "format": "int64",
-          "readOnly": true
-        },
-        "logCollectionStatus": {
-          "type": "string",
-          "enum": [
-            "None",
-            "InProgress",
-            "Failed",
-            "Succeeded"
-          ],
-          "x-ms-enum": {
-            "name": "LogCollectionStatus",
-            "modelAsString": true
-          },
-          "readOnly": true
-        },
-        "correlationId": {
-          "type": "string",
-          "readOnly": true
-        },
-        "logCollectionJobType": {
-          "type": "string",
-          "enum": [
-            "OnDemand",
-            "Scheduled"
-          ],
-          "x-ms-enum": {
-            "name": "LogCollectionJobType",
-            "modelAsString": true
-          },
-          "readOnly": true
-        },
-        "endTimeCollected": {
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true
-        },
-        "logCollectionError": {
-          "$ref": "#/definitions/LogCollectionError",
-          "readOnly": true
-        }
-      }
-    },
-    "ClustersRemoteSupportNodeSettings": {
-      "type": "object",
-      "properties": {
-        "arcResourceId": {
-          "type": "string",
-          "readOnly": true
-        },
-        "state": {
-          "type": "string",
-          "readOnly": true
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true
-        },
-        "updatedAt": {
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true
-        },
-        "connectionStatus": {
-          "type": "string",
-          "readOnly": true
-        },
-        "connectionErrorMessage": {
-          "type": "string",
-          "readOnly": true
-        },
-        "transcriptLocation": {
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
     "CollectLogJobProperties": {
       "type": "object",
       "properties": {
@@ -4400,7 +4282,7 @@
         "scaleUnits"
       ]
     },
-    "DeploymentDataContent": {
+    "DeploymentData": {
       "type": "object",
       "properties": {
         "securitySettings": {
@@ -4642,7 +4524,7 @@
         "intents": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DeploymentSettingsIntents"
+            "$ref": "#/definitions/Intents"
           },
           "x-ms-identifiers": [
             "name"
@@ -4651,7 +4533,7 @@
         "storageNetworks": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DeploymentSettingsStorageNetworks"
+            "$ref": "#/definitions/StorageNetworks"
           },
           "x-ms-identifiers": [
             "name"
@@ -4662,44 +4544,6 @@
         },
         "enableStorageAutoIp": {
           "type": "boolean"
-        }
-      }
-    },
-    "DeploymentSettingsIntents": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "trafficType": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "adapter": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "overrideVirtualSwitchConfiguration": {
-          "type": "boolean"
-        },
-        "virtualSwitchConfigurationOverrides": {
-          "$ref": "#/definitions/DeploymentSettingsVirtualSwitchConfigurationOverrides"
-        },
-        "overrideQosPolicy": {
-          "type": "boolean"
-        },
-        "qosPolicyOverrides": {
-          "$ref": "#/definitions/QosPolicyOverrides"
-        },
-        "overrideAdapterProperty": {
-          "type": "boolean"
-        },
-        "adapterPropertyOverrides": {
-          "$ref": "#/definitions/AdapterPropertyOverrides"
         }
       }
     },
@@ -4776,54 +4620,6 @@
         "deploymentConfiguration",
         "deploymentMode"
       ]
-    },
-    "DeploymentSettingsStorageAdapterIPInfo": {
-      "type": "object",
-      "properties": {
-        "physicalNode": {
-          "type": "string"
-        },
-        "ipv4Address": {
-          "type": "string"
-        },
-        "subnetMask": {
-          "type": "string"
-        }
-      }
-    },
-    "DeploymentSettingsStorageNetworks": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "networkAdapterName": {
-          "type": "string"
-        },
-        "vlanId": {
-          "type": "string"
-        },
-        "storageAdapterIPInfo": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DeploymentSettingsStorageAdapterIPInfo"
-          },
-          "x-ms-identifiers": [
-            "physicalNode"
-          ]
-        }
-      }
-    },
-    "DeploymentSettingsVirtualSwitchConfigurationOverrides": {
-      "type": "object",
-      "properties": {
-        "enableIov": {
-          "type": "string"
-        },
-        "loadBalancingAlgorithm": {
-          "type": "string"
-        }
-      }
     },
     "DeploymentStep": {
       "type": "object",
@@ -4933,6 +4729,39 @@
         }
       }
     },
+    "DeviceHostNetwork": {
+      "type": "object",
+      "properties": {
+        "intents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EdgeDevicesIntents"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "intentName"
+          ]
+        },
+        "storageNetworks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EdgeDevicesStorageNetworks"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "networkAdapterName"
+          ]
+        },
+        "storageConnectivitySwitchless": {
+          "type": "boolean",
+          "readOnly": true
+        },
+        "enableStorageAutoIp": {
+          "type": "boolean",
+          "readOnly": true
+        }
+      }
+    },
     "DnsZones": {
       "type": "object",
       "properties": {
@@ -5035,15 +4864,6 @@
           "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ]
-    },
-    "EdgeDeviceErrorDetail": {
-      "type": "object",
-      "properties": {
-        "exception": {
-          "type": "string",
-          "readOnly": true
-        }
-      }
     },
     "EdgeDeviceJob": {
       "type": "object",
@@ -5236,33 +5056,6 @@
         }
       }
     },
-    "EdgeDeviceJobsRemoteSupportNodeSettings": {
-      "type": "object",
-      "properties": {
-        "state": {
-          "type": "string",
-          "readOnly": true
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true
-        },
-        "updatedAt": {
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true
-        },
-        "connectionStatus": {
-          "type": "string",
-          "readOnly": true
-        },
-        "connectionErrorMessage": {
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
     "EdgeDeviceJobsStep": {
       "type": "object",
       "properties": {
@@ -5413,7 +5206,7 @@
         "errorDetails": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/EdgeDeviceErrorDetail"
+            "$ref": "#/definitions/ErrorDetail"
           },
           "readOnly": true
         },
@@ -5436,39 +5229,6 @@
             "name": "ExtensionManagedBy",
             "modelAsString": true
           },
-          "readOnly": true
-        }
-      }
-    },
-    "EdgeDevicesHostNetwork": {
-      "type": "object",
-      "properties": {
-        "intents": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/EdgeDevicesIntents"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "intentName"
-          ]
-        },
-        "storageNetworks": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/EdgeDevicesStorageNetworks"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "networkAdapterName"
-          ]
-        },
-        "storageConnectivitySwitchless": {
-          "type": "boolean",
-          "readOnly": true
-        },
-        "enableStorageAutoIp": {
-          "type": "boolean",
           "readOnly": true
         }
       }
@@ -5608,6 +5368,15 @@
         }
       }
     },
+    "ErrorDetail": {
+      "type": "object",
+      "properties": {
+        "exception": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "Extension": {
       "type": "object",
       "properties": {
@@ -5689,7 +5458,7 @@
         "value"
       ]
     },
-    "ExtensionParametersContent": {
+    "ExtensionParameters": {
       "type": "object",
       "properties": {
         "forceUpdateTag": {
@@ -5728,11 +5497,30 @@
         }
       }
     },
+    "ExtensionPatchParameters": {
+      "type": "object",
+      "properties": {
+        "typeHandlerVersion": {
+          "type": "string"
+        },
+        "enableAutomaticUpgrade": {
+          "type": "boolean"
+        },
+        "settings": {
+          "type": "object",
+          "additionalProperties": {}
+        },
+        "protectedSettings": {
+          "type": "object",
+          "additionalProperties": {}
+        }
+      }
+    },
     "ExtensionPatchProperties": {
       "type": "object",
       "properties": {
         "extensionParameters": {
-          "$ref": "#/definitions/StackHCIHciExtensionPatchParametersContent"
+          "$ref": "#/definitions/ExtensionPatchParameters"
         }
       }
     },
@@ -5783,7 +5571,7 @@
           "readOnly": true
         },
         "extensionParameters": {
-          "$ref": "#/definitions/ExtensionParametersContent"
+          "$ref": "#/definitions/ExtensionParameters"
         },
         "aggregateState": {
           "type": "string",
@@ -6060,7 +5848,7 @@
           ]
         },
         "hostNetwork": {
-          "$ref": "#/definitions/EdgeDevicesHostNetwork",
+          "$ref": "#/definitions/DeviceHostNetwork",
           "readOnly": true
         }
       }
@@ -6293,6 +6081,44 @@
         }
       }
     },
+    "Intents": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "trafficType": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "adapter": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "overrideVirtualSwitchConfiguration": {
+          "type": "boolean"
+        },
+        "virtualSwitchConfigurationOverrides": {
+          "$ref": "#/definitions/VirtualSwitchConfigurationOverrides"
+        },
+        "overrideQosPolicy": {
+          "type": "boolean"
+        },
+        "qosPolicyOverrides": {
+          "$ref": "#/definitions/QosPolicyOverrides"
+        },
+        "overrideAdapterProperty": {
+          "type": "boolean"
+        },
+        "adapterPropertyOverrides": {
+          "$ref": "#/definitions/AdapterPropertyOverrides"
+        }
+      }
+    },
     "IpAddressRange": {
       "type": "object",
       "properties": {
@@ -6445,87 +6271,7 @@
         }
       }
     },
-    "LogCollectionProperties": {
-      "type": "object",
-      "properties": {
-        "fromDate": {
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true
-        },
-        "toDate": {
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true
-        },
-        "lastLogGenerated": {
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true
-        },
-        "logCollectionSessionDetails": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ClustersLogCollectionSession"
-          },
-          "readOnly": true
-        }
-      }
-    },
-    "LogCollectionReportedProperties": {
-      "type": "object",
-      "properties": {
-        "percentComplete": {
-          "type": "integer",
-          "format": "int32",
-          "readOnly": true
-        },
-        "validationStatus": {
-          "$ref": "#/definitions/EceActionStatus",
-          "readOnly": true
-        },
-        "deploymentStatus": {
-          "$ref": "#/definitions/EceActionStatus",
-          "readOnly": true
-        },
-        "logCollectionSessionDetails": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/LogCollectionSession"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "correlationId"
-          ]
-        }
-      }
-    },
-    "LogCollectionRequest": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/LogCollectionRequestProperties"
-        }
-      }
-    },
-    "LogCollectionRequestProperties": {
-      "type": "object",
-      "properties": {
-        "fromDate": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "toDate": {
-          "type": "string",
-          "format": "date-time"
-        }
-      },
-      "required": [
-        "fromDate",
-        "toDate"
-      ]
-    },
-    "LogCollectionSession": {
+    "LogCollectionJobSession": {
       "type": "object",
       "properties": {
         "startTime": {
@@ -6566,60 +6312,147 @@
         }
       }
     },
-    "NetworkAdapter": {
+    "LogCollectionProperties": {
       "type": "object",
       "properties": {
-        "ipAssignmentType": {
+        "fromDate": {
           "type": "string",
-          "enum": [
-            "Automatic",
-            "Manual"
-          ],
-          "x-ms-enum": {
-            "name": "IpAssignmentType",
-            "modelAsString": true
-          }
+          "format": "date-time",
+          "readOnly": true
         },
-        "ipAddress": {
-          "type": "string"
+        "toDate": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
         },
-        "adapterName": {
-          "type": "string"
+        "lastLogGenerated": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
         },
-        "macAddress": {
-          "type": "string"
-        },
-        "ipAddressRange": {
-          "$ref": "#/definitions/IpAddressRange"
-        },
-        "gateway": {
-          "type": "string"
-        },
-        "subnetMask": {
-          "type": "string"
-        },
-        "dnsAddressArray": {
+        "logCollectionSessionDetails": {
           "type": "array",
           "items": {
-            "type": "string"
-          }
+            "$ref": "#/definitions/LogCollectionSession"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "LogCollectionReportedProperties": {
+      "type": "object",
+      "properties": {
+        "percentComplete": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
         },
-        "vlanId": {
-          "type": "string"
+        "validationStatus": {
+          "$ref": "#/definitions/EceActionStatus",
+          "readOnly": true
+        },
+        "deploymentStatus": {
+          "$ref": "#/definitions/EceActionStatus",
+          "readOnly": true
+        },
+        "logCollectionSessionDetails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LogCollectionJobSession"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "correlationId"
+          ]
+        }
+      }
+    },
+    "LogCollectionRequest": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LogCollectionRequestProperties"
+        }
+      }
+    },
+    "LogCollectionRequestProperties": {
+      "type": "object",
+      "properties": {
+        "fromDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "toDate": {
+          "type": "string",
+          "format": "date-time"
         }
       },
       "required": [
-        "ipAssignmentType"
+        "fromDate",
+        "toDate"
       ]
     },
-    "NetworkConfiguration": {
+    "LogCollectionSession": {
       "type": "object",
       "properties": {
-        "networkAdapters": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/NetworkAdapter"
-          }
+        "logStartTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "logEndTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "timeCollected": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "logSize": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "logCollectionStatus": {
+          "type": "string",
+          "enum": [
+            "None",
+            "InProgress",
+            "Failed",
+            "Succeeded"
+          ],
+          "x-ms-enum": {
+            "name": "LogCollectionStatus",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "correlationId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "logCollectionJobType": {
+          "type": "string",
+          "enum": [
+            "OnDemand",
+            "Scheduled"
+          ],
+          "x-ms-enum": {
+            "name": "LogCollectionJobType",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "endTimeCollected": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "logCollectionError": {
+          "$ref": "#/definitions/LogCollectionError",
+          "readOnly": true
         }
       }
     },
@@ -7078,7 +6911,9 @@
         },
         "healthCheckTags": {
           "type": "object",
-          "additionalProperties": {}
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "title": {
           "type": "string"
@@ -7156,24 +6991,6 @@
         },
         "value": {
           "type": "string"
-        }
-      }
-    },
-    "ProvisionOsReportedProperties": {
-      "type": "object",
-      "properties": {
-        "percentComplete": {
-          "type": "integer",
-          "format": "int32",
-          "readOnly": true
-        },
-        "validationStatus": {
-          "$ref": "#/definitions/EceActionStatus",
-          "readOnly": true
-        },
-        "deploymentStatus": {
-          "$ref": "#/definitions/EceActionStatus",
-          "readOnly": true
         }
       }
     },
@@ -7267,6 +7084,33 @@
         }
       }
     },
+    "RemoteSupportJobNodeSettings": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "type": "string",
+          "readOnly": true
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "connectionStatus": {
+          "type": "string",
+          "readOnly": true
+        },
+        "connectionErrorMessage": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "RemoteSupportJobProperties": {
       "type": "object",
       "properties": {
@@ -7325,7 +7169,7 @@
           "readOnly": true
         },
         "nodeSettings": {
-          "$ref": "#/definitions/EdgeDeviceJobsRemoteSupportNodeSettings",
+          "$ref": "#/definitions/RemoteSupportJobNodeSettings",
           "readOnly": true
         },
         "sessionDetails": {
@@ -7337,6 +7181,41 @@
           "x-ms-identifiers": [
             "sessionId"
           ]
+        }
+      }
+    },
+    "RemoteSupportNodeSettings": {
+      "type": "object",
+      "properties": {
+        "arcResourceId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "state": {
+          "type": "string",
+          "readOnly": true
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "connectionStatus": {
+          "type": "string",
+          "readOnly": true
+        },
+        "connectionErrorMessage": {
+          "type": "string",
+          "readOnly": true
+        },
+        "transcriptLocation": {
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -7375,7 +7254,7 @@
         "remoteSupportNodeSettings": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ClustersRemoteSupportNodeSettings"
+            "$ref": "#/definitions/RemoteSupportNodeSettings"
           },
           "readOnly": true
         },
@@ -7582,7 +7461,7 @@
       "type": "object",
       "properties": {
         "deploymentData": {
-          "$ref": "#/definitions/DeploymentDataContent"
+          "$ref": "#/definitions/DeploymentData"
         },
         "sbePartnerInfo": {
           "$ref": "#/definitions/SbePartnerInfo"
@@ -7957,34 +7836,6 @@
         }
       }
     },
-    "StackHCIHciExtensionPatchParametersContent": {
-      "type": "object",
-      "properties": {
-        "typeHandlerVersion": {
-          "type": "string"
-        },
-        "enableAutomaticUpgrade": {
-          "type": "boolean"
-        },
-        "settings": {
-          "type": "object",
-          "additionalProperties": {}
-        },
-        "protectedSettings": {
-          "type": "object",
-          "additionalProperties": {}
-        }
-      }
-    },
-    "StackHciClusterIdentityResponseResult": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ClusterIdentityResponseProperties",
-          "readOnly": true
-        }
-      }
-    },
     "Step": {
       "type": "object",
       "properties": {
@@ -8040,6 +7891,43 @@
         }
       }
     },
+    "StorageAdapterIPInfo": {
+      "type": "object",
+      "properties": {
+        "physicalNode": {
+          "type": "string"
+        },
+        "ipv4Address": {
+          "type": "string"
+        },
+        "subnetMask": {
+          "type": "string"
+        }
+      }
+    },
+    "StorageNetworks": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "networkAdapterName": {
+          "type": "string"
+        },
+        "vlanId": {
+          "type": "string"
+        },
+        "storageAdapterIPInfo": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageAdapterIPInfo"
+          },
+          "x-ms-identifiers": [
+            "physicalNode"
+          ]
+        }
+      }
+    },
     "SwitchDetail": {
       "type": "object",
       "properties": {
@@ -8077,20 +7965,6 @@
         "extensionEnabled": {
           "type": "boolean",
           "readOnly": true
-        }
-      }
-    },
-    "TimeConfiguration": {
-      "type": "object",
-      "properties": {
-        "primaryTimeServer": {
-          "type": "string"
-        },
-        "secondaryTimeServer": {
-          "type": "string"
-        },
-        "timeZone": {
-          "type": "string"
         }
       }
     },
@@ -8473,11 +8347,23 @@
           "readOnly": true
         },
         "progress": {
-          "$ref": "#/definitions/UpdateRunsStep"
+          "$ref": "#/definitions/UpdateStep"
         }
       }
     },
-    "UpdateRunsStep": {
+    "UpdateStateProperties": {
+      "type": "object",
+      "properties": {
+        "progressPercentage": {
+          "type": "number",
+          "format": "float"
+        },
+        "notifyMessage": {
+          "type": "string"
+        }
+      }
+    },
+    "UpdateStep": {
       "type": "object",
       "properties": {
         "name": {
@@ -8510,7 +8396,7 @@
         "steps": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/UpdateRunsStep"
+            "$ref": "#/definitions/UpdateStep"
           },
           "x-ms-identifiers": [
             "name"
@@ -8518,17 +8404,31 @@
         }
       }
     },
-    "UpdateStateProperties": {
+    "UpdateSummaries": {
       "type": "object",
       "properties": {
-        "progressPercentage": {
-          "type": "number",
-          "format": "float"
+        "properties": {
+          "$ref": "#/definitions/UpdateSummariesProperties"
         },
-        "notifyMessage": {
-          "type": "string"
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
     },
     "UpdateSummariesList": {
       "type": "object",
@@ -8538,7 +8438,7 @@
           "type": "array",
           "description": "[Placeholder] Discription for value property",
           "items": {
-            "$ref": "#/definitions/UpdateSummary"
+            "$ref": "#/definitions/UpdateSummaries"
           }
         },
         "nextLink": {
@@ -8660,32 +8560,6 @@
           }
         }
       }
-    },
-    "UpdateSummary": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/UpdateSummariesProperties"
-        },
-        "location": {
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
-        }
-      ]
     },
     "UploadCertificateRequest": {
       "type": "object",
@@ -8936,20 +8810,14 @@
         "recipeContent"
       ]
     },
-    "WebProxyConfiguration": {
+    "VirtualSwitchConfigurationOverrides": {
       "type": "object",
       "properties": {
-        "connectionUri": {
+        "enableIov": {
           "type": "string"
         },
-        "port": {
+        "loadBalancingAlgorithm": {
           "type": "string"
-        },
-        "bypassList": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
         }
       }
     }

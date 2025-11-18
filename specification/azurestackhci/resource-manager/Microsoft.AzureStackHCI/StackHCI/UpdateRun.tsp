@@ -128,13 +128,13 @@ model UpdateRunProperties {
    * Progress representation of the update run steps.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  progress?: UpdateRunsStep;
+  progress?: UpdateStep;
 }
 
 /**
  * Progress representation of the update run steps.
  */
-model UpdateRunsStep {
+model UpdateStep {
   /**
    * Name of the step.
    */
@@ -182,5 +182,5 @@ model UpdateRunsStep {
    * Recursive model for child steps of this step.
    */
   @identifiers(#["name"])
-  steps?: UpdateRunsStep[];
+  steps?: UpdateStep[];
 }
