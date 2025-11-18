@@ -9632,23 +9632,26 @@
           "$ref": "#/definitions/KnowledgeSourceSynchronizationStatus",
           "description": "The current synchronization status."
         },
-        "createdResources": {
-          "$ref": "#/definitions/CreatedResources",
-          "description": "The created resources."
+        "synchronizationInterval": {
+          "type": "string",
+          "description": "The synchronization interval (e.g., '1d' for daily). Null if no schedule is configured."
         },
         "currentSynchronizationState": {
           "$ref": "#/definitions/SynchronizationState",
-          "description": "The current synchronization state."
+          "description": "Current synchronization state that spans multiple indexer runs."
         },
         "lastSynchronizationState": {
           "$ref": "#/definitions/CompletedSynchronizationState",
-          "description": "The last synchronization state."
+          "description": "Details of the last completed synchronization. Null on first sync."
         },
         "statistics": {
           "$ref": "#/definitions/KnowledgeSourceStatistics",
-          "description": "The statistics for the knowledge source."
+          "description": "Statistical information about the knowledge source synchronization history. Null on first sync."
         }
-      }
+      },
+      "required": [
+        "synchronizationStatus"
+      ]
     },
     "KnowledgeSourceSynchronizationStatus": {
       "type": "string",
@@ -9675,7 +9678,7 @@
           {
             "name": "Deleting",
             "value": "deleting",
-            "description": "The knowledge source is being deleted."
+            "description": "The knowledge source is being deleted and synchronization is paused."
           }
         ]
       }

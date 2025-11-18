@@ -766,25 +766,25 @@ union KnowledgeSourceSynchronizationStatus {
   @doc("The knowledge source is active and synchronization runs are occurring.")
   Active: "active",
 
-  @doc("The knowledge source is being deleted.")
+  @doc("The knowledge source is being deleted and synchronization is paused.")
   Deleting: "deleting",
 }
 
 @doc("Represents the status and synchronization history of a knowledge source.")
 model KnowledgeSourceStatus {
   @doc("The current synchronization status.")
-  synchronizationStatus?: KnowledgeSourceSynchronizationStatus;
+  synchronizationStatus: KnowledgeSourceSynchronizationStatus;
 
-  @doc("The created resources.")
-  createdResources?: CreatedResources;
+  @doc("The synchronization interval (e.g., '1d' for daily). Null if no schedule is configured.")
+  synchronizationInterval?: string;
 
-  @doc("The current synchronization state.")
+  @doc("Current synchronization state that spans multiple indexer runs.")
   currentSynchronizationState?: SynchronizationState;
 
-  @doc("The last synchronization state.")
+  @doc("Details of the last completed synchronization. Null on first sync.")
   lastSynchronizationState?: CompletedSynchronizationState;
 
-  @doc("The statistics for the knowledge source.")
+  @doc("Statistical information about the knowledge source synchronization history. Null on first sync.")
   statistics?: KnowledgeSourceStatistics;
 }
 
