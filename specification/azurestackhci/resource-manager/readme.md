@@ -517,10 +517,6 @@ See configuration in [readme.go.md](./readme.go.md)
 
 See configuration in [readme.java.md](./readme.java.md)
 
-## Python
-
-See configuration in [readme.python.md](./readme.python.md)
-
 ## Ruby
 
 See configuration in [readme.ruby.md](./readme.ruby.md)
