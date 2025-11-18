@@ -4354,8 +4354,6 @@ model AzureOpenAiParameters {
 @doc("Represents a knowledge source definition.")
 model KnowledgeSource {
   @doc("The name of the knowledge source.")
-  @key("sourceName")
-  @visibility(Lifecycle.Read)
   name: string;
 
   @doc("Optional user-defined description.")
@@ -6281,8 +6279,6 @@ model ChatCompletionSkill extends SearchIndexerSkill {
 @doc("Statistics for a given index. Statistics are collected periodically and are not guaranteed to always be up-to-date.")
 model IndexStatisticsSummary {
   @doc("The name of the index.")
-  @key
-  @visibility(Lifecycle.Read)
   name: string;
 
   @doc("The number of documents in the index.")
