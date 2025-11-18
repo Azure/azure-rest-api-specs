@@ -17,7 +17,7 @@ namespace Microsoft.AzureResilienceManagement;
  */
 @doc("Fault Properties")
 model FaultProperties {
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   @doc("Available faults for this resource.")
   @visibility(Lifecycle.Read)
   availableFaults?: FaultDetails[];

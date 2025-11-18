@@ -65,12 +65,12 @@ model ExtensionManagerProperties {
   hostResourceId?: string;
 
   @doc("Scenario profile of the extension manager resource.")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   scenarioProfile?: ScenarioProfileObject[];
 
   @doc("Extension profile of the extension manager resource")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   extensionProfile?: ExtensionObject[];
 }
 
@@ -100,7 +100,7 @@ model ExtensionObject {
   configurationSettings?: Record<string>;
 
   @extension("x-nullable", true)
-  @extension("x-ms-secret", true)
+  @secret
   @doc("Configuration settings that are sensitive, as name-value pairs for configuring this extension.")
   configurationProtectedSettings?: Record<string>;
 }
@@ -151,7 +151,7 @@ model EnableExtensionsRequestDetails {
   configurationSettings?: Record<string>;
 
   @extension("x-nullable", true)
-  @extension("x-ms-secret", true)
+  @secret
   @doc("Configuration settings that are sensitive, as name-value pairs for configuring this extension.")
   configurationProtectedSettings?: Record<string>;
 }

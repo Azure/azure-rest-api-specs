@@ -3,11 +3,8 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using Azure.ResourceManager.CommonTypes;
 
 namespace Microsoft.Quantum;
@@ -89,6 +86,19 @@ union KeyType {
 
   /** The secondary API key. */
   Secondary: "Secondary",
+}
+
+/**
+ * The workspace type.
+ */
+union WorkspaceKind {
+  string,
+
+  /** The workspace is a general-purpose workspace. */
+  V1: "V1",
+
+  /** The workspace is a V2 workspace. */
+  V2: "V2",
 }
 
 /**
@@ -238,6 +248,30 @@ model TargetDescription {
    * List of content encodings accepted by this target.
    */
   acceptedContentEncodings?: string[];
+
+  /**
+   * The qubit number
+   */
+  @added(Versions.v2025_11_01_preview)
+  @visibility(Lifecycle.Read)
+  @minValue(1)
+  @maxValue(100000)
+  numQubits?: int32;
+
+  /**
+   * Target QIR profile
+   */
+  @added(Versions.v2025_11_01_preview)
+  @visibility(Lifecycle.Read)
+  targetProfile?: string;
+
+  /**
+   * The metadata of this target.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Approved by ARM API review for metadata property."
+  @added(Versions.v2025_11_01_preview)
+  @visibility(Lifecycle.Read)
+  metadata?: Record<unknown>;
 }
 
 /**
@@ -394,6 +428,12 @@ model WorkspaceResourceProperties {
   storageAccount?: StorageAccountResourceId;
 
   /**
+   * Whether this workspace is v1 or v2.
+   */
+  @added(Versions.v2025_11_01_preview)
+  workspaceKind?: WorkspaceKind;
+
+  /**
    * The URI of the workspace endpoint.
    */
   @visibility(Lifecycle.Read)
@@ -417,6 +457,30 @@ model WorkspaceResourceProperties {
   @added(Versions.v2025_01_01_preview)
   @visibility(Lifecycle.Read)
   managedStorageAccount?: StorageAccountResourceId;
+
+  /**
+   * Quota allocations associated with this workspace. Available only for special providers.
+   */
+  @added(Versions.v2025_08_11_preview)
+  quotas?: QuotaAllocations;
+}
+
+/**
+ * Quota allocations with each field representing different quota type.
+ */
+@added(Versions.v2025_08_11_preview)
+model QuotaAllocations {
+  /**
+   * Lifetime limit for standard priority jobs execution in minutes.
+   */
+  @minValue(0)
+  standardMinutesLifetime: int32;
+
+  /**
+   * Lifetime limit for high priority jobs execution in minutes.
+   */
+  @minValue(0)
+  highMinutesLifetime?: int32;
 }
 
 /**
@@ -509,6 +573,7 @@ model ApiKey {
   /**
    * The Api key.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @visibility(Lifecycle.Read)
   key?: string;
 }
@@ -552,4 +617,10 @@ model QuantumSuiteOfferProperties {
 
   /** Description of the offer. */
   description: string;
+
+  /**
+   * Quota allocations associated with this offer.
+   */
+  @added(Versions.v2025_08_11_preview)
+  quotas?: QuotaAllocations;
 }

@@ -151,11 +151,14 @@ interface RecoveryPlanActions {
   @route(ServiceGroupRoute)
   @post
   @doc("This action performs the necessary readiness check on the recovery orchestration plan to ensure it is in the desired state and eligible for all recovery actions, including all protected resources.")
-  checkReadiness is ArmResourceActionSync<
+  checkReadiness is ArmResourceActionAsync<
     RecoveryPlan,
     void,
     RecoveryPlanActionBaseResponse,
-    ServiceGroupAndRequestHeadersParameters
+    ServiceGroupAndRequestHeadersParameters,
+    LroHeaders = ArmAsyncOperationHeader &
+      ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   @route(ServiceGroupRoute)

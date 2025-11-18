@@ -1,6 +1,3 @@
-using TypeSpec.Http;
-using TypeSpec.Rest;
-using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
 namespace Microsoft.Approvals;
@@ -8,17 +5,23 @@ namespace Microsoft.Approvals;
 @doc("The input for the invokeAndFetchApprovalRequest POST call.")
 model ApprovalRequestInput {
   @doc("The ARM resource ID of the ChangeState resource that the approval request is associated with.")
-  changeStateId: Azure.Core.armResourceIdentifier<[
+  changeStateId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ChangeSafety/changeStates";
     }
   ]>;
 
   @doc("The name of the current stage progression of the ChangeState resource.")
-  stageProgression: string;
+  stageProgression?: string;
 
-  @doc("The resource that the approval request is associated with, if multiple resources are included in the ChangeState.")
+  @doc("The resource that the approval request is associated with, if multiple resources are included in the deployment.")
   resourceId?: Azure.Core.armResourceIdentifier;
+
+  @doc("The entire deployment payload associated with the approval request, with all parameters resolved.")
+  resolvedDeploymentPayload?: string;
+
+  @doc("The deployment ID associated with the approval request.")
+  deploymentId?: string;
 }
 
 @doc("The output for the invokeAndFetchApprovalRequest POST call.")
@@ -26,6 +29,7 @@ model ApprovalRequestOutput {
   @doc("The current state of the approval request.")
   approvalRequestState: ApprovalWorkflowExecutionState;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("The approval token of the approval request.")
   approvalToken: string;
 }

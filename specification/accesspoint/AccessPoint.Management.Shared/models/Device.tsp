@@ -44,8 +44,8 @@ model DeviceProperties {
   @visibility(Lifecycle.Create, Lifecycle.Read)
   serial: string;
 
-  @doc("Indicates whether the device is enabled.")
-  enabled: boolean;
+  @doc("Indicates the current state of the device.")
+  deviceState: DeviceState;
 
   @doc("The Azure Resource ID of the associated Update Group resource.")
   updateGroupResourceId: armResourceIdentifier;
@@ -102,4 +102,15 @@ interface DeviceOperations {
 
   @doc("Sends a user log off command to a device.")
   logOffUser is ArmResourceActionNoResponseContentAsync<Device, void>;
+}
+
+@doc("The current state of the device.")
+union DeviceState {
+  @doc("Device is disabled.")
+  Disabled: "Disabled",
+
+  @doc("Device is enabled.")
+  Enabled: "Enabled",
+
+  string,
 }

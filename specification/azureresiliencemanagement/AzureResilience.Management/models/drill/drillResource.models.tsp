@@ -31,22 +31,22 @@ model DrillResource is ProxyResource<DrillResourceProperties> {
 
 @doc("Properties of the Resiliency Drill Resource")
 model DrillResourceProperties {
-  @doc("Id of the resource.")
-  resourceId: string;
+  @doc("ARM Id of the underlying resource.")
+  resourceId: armResourceIdentifier<[]>;
 
   @doc("Type of the Drill resource.")
   resourceType: string;
 
   @doc("Inclusion State of the Drill resource in Drill")
-  inclusionState: DrillResourceInclusionState;
+  inclusionState?: DrillResourceInclusionState;
 
-  @doc("Inclusion State of the Drill resource in RO")
+  @doc("Inclusion State of the Drill resource in Recovery Plan")
   @visibility(Lifecycle.Read)
-  roInclusionState?: ResourceInclusionState;
+  recoveryPlanInclusionState?: ResourceInclusionState;
 
-  @doc("Exclusion reason of the Drill resource in RO")
+  @doc("Exclusion reason of the Drill resource in Recovery Plan")
   @visibility(Lifecycle.Read)
-  roExclusionReason?: RoExclusionReason;
+  recoveryPlanExclusionReason?: RecoveryPlanExclusionReason;
 
   @doc("Protection Solution Type of the Drill resource")
   @visibility(Lifecycle.Read)
@@ -64,6 +64,10 @@ model DrillResourceProperties {
   @visibility(Lifecycle.Read)
   faultProperties?: FaultProperties;
 
+  @doc("ForceInclusion status for this resource. Has the customer forceIncluded it?")
+  @visibility(Lifecycle.Read)
+  forceInclusionState?: ForceInclusionAndUpdate;
+
   @doc("HA status of the Drill resource")
   @visibility(Lifecycle.Read)
   haStatus?: HAStatus;
@@ -71,6 +75,10 @@ model DrillResourceProperties {
   @doc("Attention reason if the Status is 'NeedsAttention'.")
   @visibility(Lifecycle.Read)
   attentionReason?: DrillResourceAttentionReason;
+
+  @doc("Recommendation Type Id for the recommendation.")
+  @visibility(Lifecycle.Read)
+  advisorRecommendationTypeId?: string;
 
   @doc("Associated Advisor Recommendation link, if HA is not enabled on this resource.")
   @visibility(Lifecycle.Read)
@@ -80,9 +88,9 @@ model DrillResourceProperties {
     }
   ]>;
 
-  @doc("Last T&C assignment error, if any.")
+  @doc("Last Target and Capability assignment error, if any.")
   @visibility(Lifecycle.Read)
-  tAndcAssignmentError?: ErrorDetails;
+  targetAndCapabilityAssignmentError?: ErrorDetails;
 
   @doc("Last RBAC assignment error, if any.")
   @visibility(Lifecycle.Read)
@@ -97,6 +105,9 @@ model DrillResourceProperties {
 model DrillResourceAttentionReason {
   @doc("Experiment MSI does not have the desired RBAC on the resource.")
   faultRbacOnTarget?: RBACState;
+
+  @doc("RBAC required by AutomationAccount for runbook MSI not setup on the target resources.")
+  runbookFaultRbacOnTargets?: RBACState;
 
   @doc("Target extension resource is missing on the resource.")
   target?: ExtensionObjectState;

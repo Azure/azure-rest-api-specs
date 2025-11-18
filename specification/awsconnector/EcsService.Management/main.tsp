@@ -28,7 +28,6 @@ namespace Microsoft.AwsConnector;
 /** Api versions */
 enum Versions {
   /** 2024-12-01 api version */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   `2024-12-01`,
 }
 
@@ -577,6 +576,7 @@ model ServiceConnectTlsConfiguration {
   @doc("The signer certificate authority. An object that represents the AWS Private Certificate Authority certificate.")
   issuerCertificateAuthority?: ServiceConnectTlsCertificateAuthority;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("The AWS Key Management Service key.")
   kmsKey?: string;
 

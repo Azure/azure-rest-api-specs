@@ -691,6 +691,15 @@
           "$ref": "../../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
           "x-ms-client-flatten": true
         },
+        "kind": {
+          "type": "string",
+          "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value.",
+          "pattern": "^[-\\w\\._,\\(\\\\\\)]+$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
         "properties": {
           "description": "Cluster properties.",
           "$ref": "#/definitions/ClusterProperties",
@@ -822,6 +831,24 @@
           "description": "Software Assurance properties of the cluster.",
           "$ref": "#/definitions/SoftwareAssuranceProperties"
         },
+        "cloudEnvironment": {
+          "type": "string",
+          "description": "Cloud Environment of the cluster. (e.g. AzurePublic, ALDO )"
+        },
+        "isManagementCluster": {
+          "type": "boolean",
+          "description": "Is Management Cluster, when true indicates that the cluster is used for managing other clusters",
+          "readOnly": true
+        },
+        "clusterWitness": {
+          "$ref": "#/definitions/ClusterWitnessProperties",
+          "description": "Cluster Witness properties of the cluster. A cluster witness is a resource (such as a storage account or file share) that helps maintain quorum and supports automatic failover in high-availability cluster configurations."
+        },
+        "hostedApplication": {
+          "$ref": "#/definitions/HostedApplicationProperties",
+          "description": "Hosted Application details of the cluster.",
+          "readOnly": true
+        },
         "logCollectionProperties": {
           "description": "Log Collection properties of the cluster.",
           "$ref": "#/definitions/LogCollectionProperties"
@@ -893,6 +920,19 @@
         "clusterPattern": {
           "$ref": "./hciCommon.json#/definitions/ClusterPattern",
           "description": "Supported Storage Type for HCI Cluster",
+          "readOnly": true
+        },
+        "confidentialVmProperties": {
+          "description": "Represents the Confidential Virtual Machine (CVM) support intent and current status for the cluster resource.",
+          "$ref": "#/definitions/ConfidentialVmProperties"
+        },
+        "sdnProperties": {
+          "description": "Software Defined Networking Properties of the cluster",
+          "$ref": "#/definitions/ClusterSdnProperties"
+        },
+        "arcGatewayProperties": {
+          "description": "Azure Arc Gateway properties of the cluster.",
+          "$ref": "#/definitions/ArcGatewayProperties",
           "readOnly": true
         },
         "localAvailabilityZones": {
@@ -1180,6 +1220,32 @@
         }
       }
     },
+    "HostedApplicationProperties": {
+      "type": "object",
+      "description": "HostedApplication properties of the cluster.",
+      "properties": {
+        "applicationType": {
+          "type": "string",
+          "description": "Type of the hosted application.",
+          "readOnly": true
+        },
+        "applicationName": {
+          "type": "string",
+          "description": "Name of the hosted application.",
+          "readOnly": true
+        },
+        "scaleUnitType": {
+          "type": "string",
+          "description": "Scale unit type of the hosted application.",
+          "readOnly": true
+        },
+        "applicationHealthStatus": {
+          "type": "string",
+          "description": "Health status of the hosted application.",
+          "readOnly": true
+        }
+      }
+    },
     "SoftwareAssuranceProperties": {
       "description": "Software Assurance properties of the cluster.",
       "type": "object",
@@ -1245,6 +1311,17 @@
         "attestationServiceEndpoint": {
           "description": "Region specific endpoint for Microsoft Azure Attestation service for the cluster",
           "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ClusterWitnessProperties": {
+      "type": "object",
+      "description": "Cluster Witness properties of the cluster. A cluster witness is a resource (such as a storage account or file share) that helps maintain quorum and supports automatic failover in high-availability cluster configurations.",
+      "properties": {
+        "authenticationMode": {
+          "type": "string",
+          "description": "The authentication mode for the cluster witness. An example value 'ManagedIdentity'.",
           "readOnly": true
         }
       }
@@ -1697,6 +1774,143 @@
       },
       "additionalProperties": false,
       "readOnly": true
+    },
+    "ArcGatewayProperties": {
+      "type": "object",
+      "description": "Azure Arc Gateway properties of the cluster.",
+      "properties": {
+        "arcGatewayStatus": {
+          "type": "string",
+          "description": "Status of the Azure Arc Gateway on the cluster.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "default": "Disabled",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ArcGatewayStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "Azure Arc Gateway is enabled on the cluster."
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "Azure Arc Gateway is disabled on the cluster."
+              }
+            ]
+          }
+        }
+      }
+    },
+    "ClusterSdnProperties": {
+      "description": "Represents the Software Defined Networking (SDN) configuration state of the Azure Stack HCI cluster.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./hciCommon.json#/definitions/SdnProperties"
+        }
+      ],
+      "properties": {
+        "sdnIntegrationIntent": {
+          "type": "string",
+          "readOnly": true,
+          "x-ms-client-flatten": true,
+          "enum": [
+            "Enable",
+            "Disable"
+          ],
+          "x-ms-enum": {
+            "name": "SdnIntegrationIntent",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enable",
+                "value": "Enable",
+                "description": "Enable SDN integration for the deployment."
+              },
+              {
+                "name": "Disable",
+                "value": "Disable",
+                "description": "Disable SDN integration for the deployment."
+              }
+            ]
+          },
+          "description": "Indicates whether Software Defined Networking (SDN) integration should be enabled or disabled for this deployment."
+        }
+      }
+    },
+    "ConfidentialVmProperties": {
+      "type": "object",
+      "description": "Represents the Confidential Virtual Machine (CVM) support intent and current status for the cluster resource.",
+      "properties": {
+        "confidentialVmIntent": {
+          "type": "string",
+          "enum": [
+            "Enable",
+            "Disable"
+          ],
+          "default": "Disable",
+          "readOnly": true,
+          "description": "Captures the customer's intent to enable or disable confidential VM support on the cluster, either during initial deployment (Day-0) or at a later stage (Day-N).",
+          "x-ms-enum": {
+            "name": "ConfidentialVmIntent",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enable",
+                "value": "Enable",
+                "description": "Indicates that the customer intends to enable confidential VM support on the cluster."
+              },
+              {
+                "name": "Disable",
+                "value": "Disable",
+                "description": "Indicates that the customer intends to disable confidential VM support on the cluster."
+              }
+            ]
+          }
+        },
+        "confidentialVmStatus": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "PartiallyEnabled",
+            "Disabled"
+          ],
+          "default": "Disabled",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ConfidentialVmStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "Confidential VM support is fully enabled on the cluster. All nodes are CVM capable."
+              },
+              {
+                "name": "PartiallyEnabled",
+                "value": "PartiallyEnabled",
+                "description": "Confidential VM support is partially enabled. At least one node in the cluster is CVM capable."
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "Confidential VM support is disabled. None of the nodes in the cluster are CVM capable."
+              }
+            ]
+          }
+        },
+        "confidentialVmStatusSummary": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Additional context about confidential VM support on the cluster, such as reasons for partial enablement or hardware constraints."
+        }
+      }
     }
   },
   "parameters": {

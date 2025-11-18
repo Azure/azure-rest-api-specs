@@ -1,7 +1,5 @@
 import "@typespec/http";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.CommonTypes;
@@ -1299,7 +1297,7 @@ model CentralServerVmDetails {
    * Storage details of all the Storage Accounts attached to the ASCS Virtual Machine. For e.g. NFS on AFS Shared Storage.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   storageDetails?: StorageInformation[];
 }
 
@@ -1407,7 +1405,7 @@ model DatabaseVmDetails {
    * Storage details of all the Storage Accounts attached to the Database Virtual Machine. For e.g. NFS on AFS Shared Storage.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   storageDetails?: StorageInformation[];
 }
 
@@ -1546,7 +1544,7 @@ model ApplicationServerVmDetails {
    * Storage details of all the Storage Accounts attached to the App Virtual Machine. For e.g. NFS on AFS Shared Storage.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   storageDetails?: StorageInformation[];
 }
 

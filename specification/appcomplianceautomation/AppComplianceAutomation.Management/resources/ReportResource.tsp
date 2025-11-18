@@ -37,8 +37,8 @@ model ReportResource extends Foundations.ProxyResource {
   /**
    * Report property.
    */
-  #suppress "deprecated" "Legacy flattening"
-  @Azure.ClientGenerator.Core.flattenProperty
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   @extension("x-ms-client-name", "properties")
   properties: ReportProperties;
 
@@ -173,7 +173,7 @@ interface ReportResources {
 @@doc(ReportResources.checkNameAvailability::parameters.body,
   "NameAvailabilityRequest object."
 );
-#suppress "deprecated" "Deprecated: Using encodedName for the body property is meaningless."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Deprecated: Using encodedName for the body property is meaningless."
 @@encodedName(ReportResources.update::parameters.properties,
   "application/json",
   "parameters"

@@ -3,7 +3,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "@typespec/versioning";
 
-using OpenAPI;
+using Azure.ResourceManager;
 using TypeSpec.Versioning;
 using Azure.Core;
 
@@ -54,6 +54,10 @@ union DestinationType {
 
   @doc("DestinationType Type PrivateNetwork")
   PrivateNetwork: "PrivateNetwork",
+
+  @added(Microsoft.Mission.Versions.v2025_11_01_preview)
+  @doc("DestinationType Type ServiceTag")
+  ServiceTag: "ServiceTag",
 }
 
 @doc("Base type for destination rules.")
@@ -72,7 +76,7 @@ model CommunityEndpointDestinationRule {
 
 @doc("Community Endpoint Resource properties")
 model CommunityEndpointProperties {
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   @doc("Community Endpoint Rule Collection.")
   ruleCollection: CommunityEndpointDestinationRule[];
 
@@ -88,6 +92,10 @@ model CommunityEndpointProperties {
   @removed(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("Whether approval is needed for the connection (True or False).")
   approvalRequired?: boolean;
+
+  @added(Microsoft.Mission.Versions.v2025_11_01_preview)
+  @doc("Whether update mode is automatic or manual.")
+  updateMode?: UpdateMode;
 }
 
 @doc("Community Endpoint patchable Properties")

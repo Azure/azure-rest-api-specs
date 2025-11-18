@@ -74,6 +74,9 @@
     },
     {
       "name": "GuestAgents"
+    },
+    {
+      "name": "Operations"
     }
   ],
   "paths": {
@@ -878,6 +881,42 @@
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/providers/Microsoft.AzureStackHCI/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List the operations for the provider.": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/galleryImages": {
@@ -4112,10 +4151,6 @@
           "$ref": "#/definitions/HyperVGeneration",
           "description": "The hypervisor generation of the Virtual Machine [V1, V2]"
         },
-        "vmImageRepositoryCredentials": {
-          "$ref": "#/definitions/VmImageRepositoryCredentials",
-          "description": "The credentials used to login to the image repository that has access to the specified image"
-        },
         "identifier": {
           "$ref": "#/definitions/GalleryImageIdentifier",
           "description": "This is the gallery image definition identifier."
@@ -4817,18 +4852,6 @@
             "allowedResources": [
               {
                 "type": "Microsoft.AzureStackHCI/logicalNetworks"
-              },
-              {
-                "type": "Microsoft.NetworkCloud/cloudServicesNetworks"
-              },
-              {
-                "type": "Microsoft.NetworkCloud/l2Networks"
-              },
-              {
-                "type": "Microsoft.NetworkCloud/l3Networks"
-              },
-              {
-                "type": "Microsoft.NetworkCloud/trunkedNetworks"
               },
               {
                 "type": "Microsoft.AzureStackHCI/virtualNetwork/subnets"
@@ -7398,26 +7421,6 @@
           "description": "The VM Config Agent running on the virtual machine."
         }
       }
-    },
-    "VmImageRepositoryCredentials": {
-      "type": "object",
-      "description": "The credentials used to login to the image repository that has access to the specified image",
-      "properties": {
-        "username": {
-          "type": "string",
-          "description": "Username for accessing image repository"
-        },
-        "password": {
-          "type": "string",
-          "format": "password",
-          "description": "Password for accessing image repository",
-          "x-ms-secret": true
-        }
-      },
-      "required": [
-        "username",
-        "password"
-      ]
     },
     "VmSizeEnum": {
       "type": "string",

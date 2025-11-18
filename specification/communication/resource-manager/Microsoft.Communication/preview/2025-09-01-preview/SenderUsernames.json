@@ -1,0 +1,339 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Communication Services Management API",
+    "version": "2025-09-01-preview",
+    "description": "REST API for Email Services/Domains/SenderUsernames"
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Communication/emailServices/{emailServiceName}/domains/{domainName}/senderUsernames": {
+      "get": {
+        "description": "List all valid sender usernames for a domains resource.",
+        "operationId": "SenderUsernames_ListByDomains",
+        "summary": "ListBy_Domains",
+        "tags": [
+          "SenderUsernames"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "EmailServices.json#/parameters/EmailServiceName"
+          },
+          {
+            "$ref": "Domains.json#/parameters/DomainName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describe the Domains SenderUsername collection.",
+            "schema": {
+              "$ref": "#/definitions/SenderUsernameResourceCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Get SenderUsernames resource": {
+            "$ref": "./examples/senderUsernames/listByDomain.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Communication/emailServices/{emailServiceName}/domains/{domainName}/senderUsernames/{senderUsername}": {
+      "get": {
+        "description": "Get a valid sender username for a domains resource.",
+        "operationId": "SenderUsernames_Get",
+        "summary": "Get",
+        "tags": [
+          "SenderUsernames"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "EmailServices.json#/parameters/EmailServiceName"
+          },
+          {
+            "$ref": "Domains.json#/parameters/DomainName"
+          },
+          {
+            "$ref": "#/parameters/SenderUsername"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describe the corresponding SenderUsername resource.",
+            "schema": {
+              "$ref": "#/definitions/SenderUsernameResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Get SenderUsernames resource": {
+            "$ref": "./examples/senderUsernames/get.json"
+          }
+        }
+      },
+      "put": {
+        "description": "Add a new SenderUsername resource under the parent Domains resource or update an existing SenderUsername resource.",
+        "operationId": "SenderUsernames_CreateOrUpdate",
+        "summary": "Create Or Update",
+        "tags": [
+          "SenderUsernames"
+        ],
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters for the create or update operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SenderUsernameResource"
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "EmailServices.json#/parameters/EmailServiceName"
+          },
+          {
+            "$ref": "Domains.json#/parameters/DomainName"
+          },
+          {
+            "$ref": "#/parameters/SenderUsername"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "The update request was completed successfully",
+            "schema": {
+              "$ref": "#/definitions/SenderUsernameResource"
+            }
+          },
+          "201": {
+            "description": "The create request was completed successfully",
+            "schema": {
+              "$ref": "#/definitions/SenderUsernameResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Create or update SenderUsernames resource": {
+            "$ref": "./examples/senderUsernames/createOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "description": "Operation to delete a SenderUsernames resource.",
+        "operationId": "SenderUsernames_Delete",
+        "summary": "Delete",
+        "tags": [
+          "SenderUsernames"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "EmailServices.json#/parameters/EmailServiceName"
+          },
+          {
+            "$ref": "Domains.json#/parameters/DomainName"
+          },
+          {
+            "$ref": "#/parameters/SenderUsername"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The delete operation was successful."
+          },
+          "204": {
+            "description": "The resource did not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete SenderUsernames resource": {
+            "$ref": "./examples/senderUsernames/delete.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SenderUsernameResource": {
+      "description": "A class representing a SenderUsername resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SenderUsernameProperties",
+          "description": "The properties of a SenderUsername resource.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SenderUsernameResourceCollection": {
+      "description": "A class representing a Domains SenderUsernames collection.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of SenderUsernames",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SenderUsernameResource"
+          }
+        },
+        "nextLink": {
+          "description": "The URL the client should use to fetch the next page (per server side paging).",
+          "type": "string"
+        }
+      }
+    },
+    "SenderUsernameProperties": {
+      "description": "A class that describes the properties of a SenderUsername resource.",
+      "type": "object",
+      "required": [
+        "username"
+      ],
+      "properties": {
+        "dataLocation": {
+          "description": "The location where the SenderUsername resource data is stored at rest.",
+          "type": "string",
+          "readOnly": true
+        },
+        "username": {
+          "description": "A sender senderUsername to be used when sending emails.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The display name for the senderUsername.",
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the resource. Unknown is the default state for Communication Services.",
+          "enum": [
+            "Unknown",
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Running",
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Moving"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SenderUsername": {
+      "name": "senderUsername",
+      "in": "path",
+      "description": "The valid sender Username.",
+      "minLength": 1,
+      "maxLength": 253,
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

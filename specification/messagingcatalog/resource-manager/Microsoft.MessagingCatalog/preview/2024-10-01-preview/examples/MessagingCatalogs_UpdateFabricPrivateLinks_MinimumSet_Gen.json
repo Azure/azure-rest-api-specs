@@ -1,0 +1,26 @@
+{
+  "title": "MessagingCatalogs_UpdateFabricPrivateLinks_MinimumSet_Gen",
+  "operationId": "MessagingCatalogs_UpdateFabricPrivateLinks",
+  "parameters": {
+    "api-version": "2024-10-01-preview",
+    "resourceGroupName": "rgmessagingcatalog",
+    "subscriptionId": "A7BFF0F7-F69A-4D4B-AB83-BE8EB0ADC35E",
+    "catalogName": "mycatalog",
+    "body": {
+      "action": "Enable",
+      "fabricFqdn": "abc-messagingcatalog-wsix.z.ext.privatelink.fabric.microsoft.com"
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/providers/Microsoft.MessagingCatalog/operationStatuses/{operationId}"
+      }
+    },
+    "200": {
+      "body": {
+        "message": "Success"
+      }
+    }
+  }
+}

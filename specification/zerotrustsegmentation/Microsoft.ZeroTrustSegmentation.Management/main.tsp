@@ -17,11 +17,9 @@ namespace Microsoft.ZeroTrustSegmentation;
 
 /** ZeroTrustSegmentation API versions */
 enum Versions {
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2025_02_01_preview: "2025-02-01-preview",
 
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2025_07_01_preview: "2025-07-01-preview",
 }
@@ -123,7 +121,7 @@ model SetLabelRecord {
   macAddress: string;
 
   @doc("Labels as key-value pairs")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   labels?: LabelPair[];
 }
 
@@ -139,7 +137,7 @@ model LabelPair {
 @doc("The request model for the SetLabels API")
 model SetLabelsRequest {
   @doc("List of labels that need to be updated")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   labels: SetLabelRecord[];
 }
 
@@ -164,7 +162,7 @@ model Graph {
   vertices: Vertex[];
 
   @doc("List of edges connecting the vertices in the graph")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   edges: Edge[];
 
   @doc("Total weights for all edges in the graph")
@@ -192,7 +190,7 @@ model Vertex {
   name?: string;
 
   @doc("Labels associated with the vertex as key-value pairs")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   labels: LabelPair[];
 }
 

@@ -16,26 +16,18 @@ interface Operations extends Azure.ResourceManager.Operations {}
 
 @doc("API Versions")
 enum Versions {
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   @doc("2024-02-01-preview")
   v2024_02_01_Preview: "2024-02-01-preview",
 
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   @doc("2024-10-01-preview")
   v2024_10_01_Preview: "2024-10-01-preview",
 
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   @doc("2025-04-01-preview")
   v2025_04_01_Preview: "2025-04-01-preview",
 
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
   @doc("2025-05-04-preview")
   v2025_05_04_Preview: "2025-05-04-preview",
@@ -157,10 +149,7 @@ model RetentionPolicyProperties {
   provisioningState?: ProvisioningState;
 
   @doc("The orchestration retention policies")
-  @OpenAPI.extension(
-    "x-ms-identifiers",
-    #["retentionPeriodInDays", "orchestrationState"]
-  )
+  @identifiers(#["retentionPeriodInDays", "orchestrationState"])
   retentionPolicies?: RetentionPolicyDetails[];
 }
 
@@ -244,6 +233,7 @@ interface Schedulers {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Scheduler>;
   @doc("Update a Scheduler")
   @errorsDoc("Validation error: required parameters are missing")
+  @Http.patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<Scheduler, Scheduler>;
   @doc("Delete a Scheduler")
   delete is ArmResourceDeleteWithoutOkAsync<Scheduler>;
@@ -279,6 +269,7 @@ interface RetentionPolicies {
   createOrReplace is ArmResourceCreateOrReplaceAsync<RetentionPolicy>;
   @doc("Update a Retention Policy")
   @errorsDoc("Validation error: required parameters are missing")
+  @Http.patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<RetentionPolicy, RetentionPolicy>;
   @doc("Delete a Retention Policy")
   delete is ArmResourceDeleteWithoutOkAsync<RetentionPolicy>;

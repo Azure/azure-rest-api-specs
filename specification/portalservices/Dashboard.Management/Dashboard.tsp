@@ -31,6 +31,7 @@ interface Dashboards {
   @doc("Creates or updates a Dashboard.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<Dashboard>;
   @doc("Updates an existing Dashboard.")
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<Dashboard, PatchableDashboard>;
   @doc("Deletes the Dashboard.")
   delete is ArmResourceDeleteSync<Dashboard>;

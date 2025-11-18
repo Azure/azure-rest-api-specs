@@ -1,10 +1,14 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -140,6 +144,42 @@ union SupportStatus {
    * Mainstream support status.
    */
   Mainstream: "Mainstream",
+}
+
+/**
+ * Custom property with mixed value types
+ */
+@doc("Custom property with mixed value types")
+@added(Versions.v2025_11_06_preview)
+model CustomProperties {
+  @doc("Property key")
+  key: string;
+
+  @doc("Property value - string")
+  value: string;
+}
+
+/**
+ * Software-specific attributes and metadata
+ */
+@doc("Software-specific attributes and metadata")
+@added(Versions.v2025_11_06_preview)
+model SoftwareAttributes {
+  @doc("Name of the software (e.g., PostgreSQL)")
+  softwareName?: string;
+
+  @doc("Name of the software provider or vendor")
+  providerName?: string;
+
+  @doc("Version of the software")
+  softwareVersion?: string;
+
+  @doc("Unique identifier for the software instance")
+  softwareId?: string;
+
+  @doc("List of additional custom properties with string value types")
+  @identifiers(#["key"])
+  customProperties?: CustomProperties[];
 }
 
 /**
@@ -729,16 +769,13 @@ model PgsqlInstanceProperties is AzureResourceProperties {
   /**
    * The list of collations in the database.
    */
-  @OpenAPI.extension(
-    "x-ms-identifiers",
-    #["name", "locale", "collationProvider", "isDeterministic"]
-  )
+  @identifiers(#["name", "locale", "collationProvider", "isDeterministic"])
   collations?: Collation[];
 
   /**
    * Dictionary of server parameters for the instance
    */
-  @OpenAPI.extension("x-ms-identifiers", #["key", "value"])
+  @identifiers(#["key", "value"])
   serverParameters?: ServerParameter[];
 
   /**
@@ -842,6 +879,13 @@ model PgsqlInstanceProperties is AzureResourceProperties {
   isSuperUserAccessEnabled?: BoolValue;
 
   /**
+   * Software-specific attributes and metadata for the discovered PostgreSQL instance.
+   */
+  @doc("Software-specific attributes and metadata for the discovered PostgreSQL instance.")
+  @added(Versions.v2025_11_06_preview)
+  softwareAttributes?: SoftwareAttributes;
+
+  /**
    * Resource tags
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record"
@@ -919,10 +963,7 @@ model PgsqlInstanceResourcePatch {
   /**
    * The list of collations in the database.
    */
-  @OpenAPI.extension(
-    "x-ms-identifiers",
-    #["name", "locale", "collationProvider", "isDeterministic"]
-  )
+  @identifiers(#["name", "locale", "collationProvider", "isDeterministic"])
   collations?: Collation[];
 
   /**
@@ -1024,6 +1065,13 @@ model PgsqlInstanceResourcePatch {
    * Indicates whether the super user access is enabled on the instance.
    */
   isSuperUserAccessEnabled?: BoolValue;
+
+  /**
+   * Software-specific attributes and metadata for the discovered PostgreSQL instance.
+   */
+  @doc("Software-specific attributes and metadata for the discovered PostgreSQL instance.")
+  @added(Versions.v2025_11_06_preview)
+  softwareAttributes?: SoftwareAttributes;
 
   /**
    * Resource tags
@@ -1148,16 +1196,13 @@ model PgsqlDatabaseProperties is AzureResourceProperties {
   /**
    * The list of collations in the database.
    */
-  @OpenAPI.extension(
-    "x-ms-identifiers",
-    #["name", "locale", "collationProvider", "isDeterministic"]
-  )
+  @identifiers(#["name", "locale", "collationProvider", "isDeterministic"])
   collations?: Collation[];
 
   /**
    * The list of extensions in the database.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name", "version"])
+  @identifiers(#["name", "version"])
   extensions?: Extension[];
 
   /**
@@ -1258,16 +1303,13 @@ model PgsqlDatabaseResourcePatch {
   /**
    * The list of collations in the database.
    */
-  @OpenAPI.extension(
-    "x-ms-identifiers",
-    #["name", "locale", "collationProvider", "isDeterministic"]
-  )
+  @identifiers(#["name", "locale", "collationProvider", "isDeterministic"])
   collations?: Collation[];
 
   /**
    * The list of extensions in the database.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name", "version"])
+  @identifiers(#["name", "version"])
   extensions?: Extension[];
 
   /**

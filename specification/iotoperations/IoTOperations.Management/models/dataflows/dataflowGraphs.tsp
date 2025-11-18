@@ -49,6 +49,8 @@ model DataflowGraphProperties {
   /** The provisioning state of the dataflow graph. */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
+
+  ...ResourceHealth;
 }
 
 /** DataflowGraph node properties. */
@@ -116,7 +118,7 @@ model DataflowGraphNodeGraphSettings {
   /** Reference to the registry endpoint for pulling the artifact. */
   registryEndpointRef: string;
 
-  /** The artifact name and version to pull. */
+  /** The artifact name and version to pull. This should be in the format `<artifact-name>:<version>`. */
   artifact: string;
 
   /** Configuration key-value pairs. */
@@ -136,7 +138,7 @@ model DataflowGraphGraphNodeConfiguration {
 
 /** DataflowGraph destination node properties. */
 @added(Versions.`2025-07-01-preview`)
-model DatafloGraphDestinationNode extends DataflowGraphNode {
+model DataflowGraphDestinationNode extends DataflowGraphNode {
   /** Type of the destination node. */
   nodeType: Destination;
 
@@ -153,12 +155,19 @@ model DataflowGraphDestinationNodeSettings {
   /** Data destination at the endpoint. */
   dataDestination: string;
 
+  /** Headers for the output data. */
+  @identifiers(#["actionType"])
+  @added(Versions.`2025-09-01-preview`)
+  headers?: DataflowGraphDestinationHeaderAction[];
+
   /** Output schema settings. */
+  @removed(Versions.`2025-09-01-preview`)
   outputSchemaSettings?: DataflowGraphDestinationSchemaSettings;
 }
 
 /** DataflowGraph destination node output schema settings. */
 @added(Versions.`2025-07-01-preview`)
+@removed(Versions.`2025-09-01-preview`)
 model DataflowGraphDestinationSchemaSettings {
   /** The format of the output data. */
   serializationFormat: DataflowGraphDestinationSchemaSerializationFormat;
@@ -169,6 +178,7 @@ model DataflowGraphDestinationSchemaSettings {
 
 /** Serialization format for dataflow graph. */
 @added(Versions.`2025-07-01-preview`)
+@removed(Versions.`2025-09-01-preview`)
 union DataflowGraphDestinationSchemaSerializationFormat {
   string,
 
@@ -177,6 +187,68 @@ union DataflowGraphDestinationSchemaSerializationFormat {
 
   /** Delta serialization format. */
   Delta,
+}
+
+/** DataflowGraph Destination Header Action. */
+@added(Versions.`2025-09-01-preview`)
+@discriminator("actionType")
+model DataflowGraphDestinationHeaderAction {
+  /** The type of header operation to perform. */
+  actionType: DataflowGraphDestinationHeaderActionType;
+}
+
+/** DataflowGraph Destination Header Action Types. */
+@added(Versions.`2025-09-01-preview`)
+union DataflowGraphDestinationHeaderActionType {
+  string,
+
+  /** Add if not present type. */
+  AddIfNotPresent,
+
+  /** Remove type. */
+  Remove,
+
+  /** Add or Replace type. */
+  AddOrReplace,
+}
+
+/** DataflowGraph Destination Add if not present HeaderAction properties. */
+@added(Versions.`2025-09-01-preview`)
+model DataflowGraphDestinationAddIfNotPresentHeaderAction
+  extends DataflowGraphDestinationHeaderAction {
+  actionType: AddIfNotPresent;
+
+  /** The name of the header to add. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
+  key: string;
+
+  /** The value of the header to add. */
+  value: string;
+}
+
+/** DataflowGraph Destination Remove HeaderAction properties. */
+@added(Versions.`2025-09-01-preview`)
+model DataflowGraphDestinationRemoveHeaderAction
+  extends DataflowGraphDestinationHeaderAction {
+  actionType: Remove;
+
+  /** The name of the header to remove. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
+  key: string;
+}
+
+/** DataflowGraph Destination Add or Replace HeaderAction properties. */
+@added(Versions.`2025-09-01-preview`)
+model DataflowGraphDestinationAddOrReplaceHeaderAction
+  extends DataflowGraphDestinationHeaderAction {
+  actionType: AddOrReplace;
+
+  /** The name of the header to add or replace. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
+  key: string;
+
+  /** The value of the header to add or replace. */
+  value: string;
 }
 
 /** DataflowGraph DataflowGraphNode Connection. */

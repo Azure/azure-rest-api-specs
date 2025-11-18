@@ -19,15 +19,12 @@ namespace Microsoft.ManufacturingPlatform;
 @doc("Supported API versions for the Microsoft.ManufacturingPlatform resource provider.")
 enum Versions {
   @doc("The 2023-02-01-preview version.")
-  @Versioning.useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   v2023_02_01_preview: "2023-02-01-preview",
 
   @doc("The 2024-02-01-preview version.")
-  @Versioning.useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   v2024_02_01_preview: "2024-02-01-preview",
 
   @doc("The 2025-03-01 version.")
-  @Versioning.useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   v2025_03_01: "2025-03-01",
 }
 

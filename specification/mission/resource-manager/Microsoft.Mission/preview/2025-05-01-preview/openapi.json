@@ -3958,151 +3958,6 @@
         "value"
       ]
     },
-    "ApprovalSettings": {
-      "type": "object",
-      "description": "ApprovalSettings Properties",
-      "properties": {
-        "endpointCreation": {
-          "$ref": "#/definitions/ApprovalPolicy",
-          "description": "Approval required for endpoint creation (Required or NotRequired).",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "endpointUpdate": {
-          "$ref": "#/definitions/ApprovalPolicy",
-          "description": "Approval required for endpoint update (Required or NotRequired).",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "endpointDeletion": {
-          "$ref": "#/definitions/ApprovalPolicy",
-          "description": "Approval required for endpoint deletion (Required or NotRequired).",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "connectionCreation": {
-          "$ref": "#/definitions/ApprovalPolicy",
-          "description": "Approval required for enclave connection creation (Required or NotRequired).",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "connectionUpdate": {
-          "$ref": "#/definitions/ApprovalPolicy",
-          "description": "Approval required for enclave connection update (Required or NotRequired).",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "connectionDeletion": {
-          "$ref": "#/definitions/ApprovalPolicy",
-          "description": "Approval required for enclave connection deletion (Required or NotRequired).",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "enclaveCreation": {
-          "$ref": "#/definitions/ApprovalPolicy",
-          "description": "Approval required for virtual enclave creation (Required or NotRequired).",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "enclaveDeletion": {
-          "$ref": "#/definitions/ApprovalPolicy",
-          "description": "Approval required for virtual enclave deletion (Required or NotRequired).",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "maintenanceMode": {
-          "$ref": "#/definitions/ApprovalPolicy",
-          "description": "Approval required for toggling maintenance mode (Required or NotRequired).",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "serviceCatalogDeployment": {
-          "$ref": "#/definitions/ApprovalPolicy",
-          "description": "Approval required for deploying service catalog templates (Required or NotRequired).",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "notificationOnApprovalCreation": {
-          "$ref": "#/definitions/ApprovalPolicy",
-          "description": "Notification will be sent on creation of an Approval Request",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "notificationOnApprovalAction": {
-          "$ref": "#/definitions/ApprovalPolicy",
-          "description": "Notification will be sent on any action taken (Approve/Reject) on an Approval Request",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "notificationOnApprovalDeletion": {
-          "$ref": "#/definitions/ApprovalPolicy",
-          "description": "Notification will be sent on deletion of an Approval Request",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "mandatoryApprovers": {
-          "type": "array",
-          "description": "List of mandatory approvers for the approval request",
-          "items": {
-            "$ref": "#/definitions/MandatoryApprover"
-          },
-          "x-ms-identifiers": [
-            "approverEntraId"
-          ]
-        },
-        "minimumApproversRequired": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Minimum number of approvers required for the approval request",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        }
-      }
-    },
-    "ApprovalSettingsPatchProperties": {
-      "type": "object",
-      "description": "ApprovalSettings Properties",
-      "properties": {
-        "mandatoryApprovers": {
-          "type": "array",
-          "description": "List of mandatory approvers for the approval request",
-          "items": {
-            "$ref": "#/definitions/MandatoryApprover"
-          },
-          "x-ms-identifiers": [
-            "approverEntraId"
-          ]
-        }
-      }
-    },
     "ApprovalStatus": {
       "type": "string",
       "description": "Approval Status. It can be Approved, Rejected, Pending, Deleted or Expired.",
@@ -4474,8 +4329,9 @@
           "description": "SKU of the community's Azure Firewall (Basic, Standard, Premium). Standard is the default"
         },
         "approvalSettings": {
-          "$ref": "#/definitions/ApprovalSettingsPatchProperties",
-          "description": "Approval requirements for various actions on the community's resources."
+          "$ref": "#/definitions/LegacyApprovalSettingsPatchProperties",
+          "description": "Legacy approval requirements for various actions on the community's resources.",
+          "x-ms-client-name": "legacyApprovalSettings"
         },
         "maintenanceModeConfiguration": {
           "$ref": "#/definitions/MaintenanceModeConfigurationPatchModel",
@@ -4586,8 +4442,9 @@
           }
         },
         "approvalSettings": {
-          "$ref": "#/definitions/ApprovalSettings",
-          "description": "Approval requirements for various actions on the community's resources."
+          "$ref": "#/definitions/LegacyApprovalSettings",
+          "description": "Legacy approval requirements for various actions on the community's resources.",
+          "x-ms-client-name": "legacyApprovalSettings"
         },
         "maintenanceModeConfiguration": {
           "$ref": "#/definitions/MaintenanceModeConfigurationModel",
@@ -5359,6 +5216,151 @@
             "type": "Microsoft.KeyVault/vaults"
           }
         ]
+      }
+    },
+    "LegacyApprovalSettings": {
+      "type": "object",
+      "description": "Legacy ApprovalSettings Properties for versions before 2025-11-01-preview",
+      "properties": {
+        "endpointCreation": {
+          "$ref": "#/definitions/ApprovalPolicy",
+          "description": "Approval required for endpoint creation (Required or NotRequired).",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "endpointUpdate": {
+          "$ref": "#/definitions/ApprovalPolicy",
+          "description": "Approval required for endpoint update (Required or NotRequired).",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "endpointDeletion": {
+          "$ref": "#/definitions/ApprovalPolicy",
+          "description": "Approval required for endpoint deletion (Required or NotRequired).",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "connectionCreation": {
+          "$ref": "#/definitions/ApprovalPolicy",
+          "description": "Approval required for enclave connection creation (Required or NotRequired).",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "connectionUpdate": {
+          "$ref": "#/definitions/ApprovalPolicy",
+          "description": "Approval required for enclave connection update (Required or NotRequired).",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "connectionDeletion": {
+          "$ref": "#/definitions/ApprovalPolicy",
+          "description": "Approval required for enclave connection deletion (Required or NotRequired).",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "enclaveCreation": {
+          "$ref": "#/definitions/ApprovalPolicy",
+          "description": "Approval required for virtual enclave creation (Required or NotRequired).",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "enclaveDeletion": {
+          "$ref": "#/definitions/ApprovalPolicy",
+          "description": "Approval required for virtual enclave deletion (Required or NotRequired).",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "maintenanceMode": {
+          "$ref": "#/definitions/ApprovalPolicy",
+          "description": "Approval required for toggling maintenance mode (Required or NotRequired).",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "serviceCatalogDeployment": {
+          "$ref": "#/definitions/ApprovalPolicy",
+          "description": "Approval required for deploying service catalog templates (Required or NotRequired).",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "notificationOnApprovalCreation": {
+          "$ref": "#/definitions/ApprovalPolicy",
+          "description": "Notification will be sent on creation of an Approval Request",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "notificationOnApprovalAction": {
+          "$ref": "#/definitions/ApprovalPolicy",
+          "description": "Notification will be sent on any action taken (Approve/Reject) on an Approval Request",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "notificationOnApprovalDeletion": {
+          "$ref": "#/definitions/ApprovalPolicy",
+          "description": "Notification will be sent on deletion of an Approval Request",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "mandatoryApprovers": {
+          "type": "array",
+          "description": "List of mandatory approvers for the approval request",
+          "items": {
+            "$ref": "#/definitions/MandatoryApprover"
+          },
+          "x-ms-identifiers": [
+            "approverEntraId"
+          ]
+        },
+        "minimumApproversRequired": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Minimum number of approvers required for the approval request",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      }
+    },
+    "LegacyApprovalSettingsPatchProperties": {
+      "type": "object",
+      "description": "Legacy ApprovalSettings Patch Properties",
+      "properties": {
+        "mandatoryApprovers": {
+          "type": "array",
+          "description": "List of mandatory approvers for the approval request",
+          "items": {
+            "$ref": "#/definitions/MandatoryApprover"
+          },
+          "x-ms-identifiers": [
+            "approverEntraId"
+          ]
+        }
       }
     },
     "LogAnalyticsResourceId": {

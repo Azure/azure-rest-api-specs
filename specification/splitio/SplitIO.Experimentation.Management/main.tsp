@@ -22,7 +22,6 @@ namespace SplitIO.Experimentation {
   @doc("Supported API versions for the SplitIO.Experimentation resource provider.")
   enum Versions {
     @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1")
-    @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
     v1_preview: "2024-07-01-preview",
   }
 
@@ -120,6 +119,7 @@ namespace SplitIO.Experimentation {
   interface ExperimentationWorkspaces {
     get is ArmResourceRead<ExperimentationWorkspace>;
     create is ArmResourceCreateOrUpdateAsync<ExperimentationWorkspace>;
+    @patch(#{ implicitOptionality: true })
     update is ArmCustomPatchAsync<
       ExperimentationWorkspace,
       Azure.ResourceManager.Foundations.ResourceUpdateModel<

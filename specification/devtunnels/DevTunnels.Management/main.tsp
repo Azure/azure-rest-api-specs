@@ -16,7 +16,6 @@ namespace Microsoft.DevTunnels;
 
 enum Versions {
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   `2023-05-23-preview`,
 }
 
@@ -68,6 +67,7 @@ model TunnelPlanResource is TrackedResource<TunnelPlanProperties> {
 
 @doc("The response to a getToken request")
 model GetTokenResponse {
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("The TunnelPlan token")
   token: string;
 }

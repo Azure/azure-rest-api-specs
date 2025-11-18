@@ -2,7 +2,6 @@ import "./common.tsp";
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Versioning;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.ManagedNetworkFabric;
 @doc("Network Fabric Properties defines the properties of the resource.")
@@ -298,10 +297,10 @@ model NetworkFabricPatch {
   @renamedFrom(Versions.v2025_07_15, "properties")
   propertiesDeprecated?: NetworkFabricPatchProperties;
 
-  #suppress "deprecated" "Legacy flattening"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
   @doc("Network Fabric Patch properties.")
   @added(Versions.v2025_07_15)
-  @Azure.ClientGenerator.Core.flattenProperty
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: NetworkFabricPatchProperties;
 
   @added(Versions.v2024_06_15_preview)
@@ -923,6 +922,7 @@ model AuthorizedTransceiverProperties {
   @doc("Vendor of the transceiver.")
   vendor?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("Key that must be configured on the fabric.")
   key?: string;
 }

@@ -218,8 +218,11 @@
       "description": "Defines the deviation status for a configuration check configuration.",
       "enum": [
         "Yes",
+        "DeviationDetected",
         "No",
-        "EvaluationFailed"
+        "NoDeviation",
+        "EvaluationFailed",
+        "EvaluationSkipped"
       ],
       "x-ms-enum": {
         "name": "ConfigurationCheckConfigurationDeviation",
@@ -231,14 +234,29 @@
             "description": "A configuration deviation between the actual state and the recommended/customized state."
           },
           {
+            "name": "DeviationDetected",
+            "value": "DeviationDetected",
+            "description": "A configuration deviation between the actual state and the recommended/customized state is detected."
+          },
+          {
             "name": "No",
             "value": "No",
             "description": "No deviation; the actual state matches the recommended/customized state."
           },
           {
+            "name": "NoDeviation",
+            "value": "NoDeviation",
+            "description": "No deviation detected; the actual state matches the recommended/customized state."
+          },
+          {
             "name": "EvaluationFailed",
             "value": "EvaluationFailed",
             "description": "The deviation status is evaluation failed as the configuration checks couldn't be evaluated."
+          },
+          {
+            "name": "EvaluationSkipped",
+            "value": "EvaluationSkipped",
+            "description": "The deviation status is evaluation skipped as the configuration checks couldn't be evaluated."
           }
         ]
       }
@@ -429,6 +447,10 @@
         "workloadInstanceArmId": {
           "type": "string",
           "description": "The workload instance ARM ID."
+        },
+        "workloadSystemIdentifier": {
+          "type": "string",
+          "description": "The workload system identifier."
         },
         "environment": {
           "type": "string",

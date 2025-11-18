@@ -26,7 +26,6 @@ namespace Microsoft.AwsConnector;
 /** Api versions */
 enum Versions {
   /** 2024-12-01 api version */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   `2024-12-01`,
 }
 
@@ -70,6 +69,7 @@ model AwsEksClusterProperties {
   @doc("<p>The <code>certificate-authority-data</code> for your cluster.</p>")
   certificateAuthority?: Certificate;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>")
   clientRequestToken?: string;
 

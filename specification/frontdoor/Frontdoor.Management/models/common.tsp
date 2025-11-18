@@ -1,5 +1,8 @@
+import "@typespec/versioning";
+
 using Azure.Core;
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Frontdoor;
 
@@ -76,6 +79,14 @@ union AssetTypeVM {
 
   @doc("AssetType enum BaremetalVM")
   BaremetalVM: "BaremetalVM",
+
+  @doc("AssetType enum NonAzureVM")
+  @added(Versions.v2025_08_01_preview)
+  NonAzureVM: "NonAzureVM",
+
+  @doc("AssetType enum PilotFishVM")
+  @added(Versions.v2025_08_01_preview)
+  PilotFishVM: "PilotFishVM",
 }
 
 @doc("Cloud enum")
@@ -104,4 +115,66 @@ union Status {
 
   @doc("Status enum Not Provisioned")
   notProvisioned: "Not Provisioned",
+}
+
+@added(Versions.v2025_08_01_preview)
+@doc("Enum for the IP Version")
+union IpVersion {
+  string,
+
+  @doc("Internet Protocol version 4 address")
+  IPv4: "IPv4",
+
+  @doc("Internet Protocol version 6 address")
+  IPv6: "IPv6",
+}
+
+@added(Versions.v2025_08_01_preview)
+@doc("Enum for State")
+union IpAddressState {
+  string,
+
+  @doc("Managed State")
+  Managed: "Managed",
+
+  @doc("Allocated State")
+  Allocated: "Allocated",
+
+  @doc("Active State")
+  Active: "Active",
+
+  @doc("Retired State")
+  Retired: "Retired",
+}
+
+@added(Versions.v2025_08_01_preview)
+@doc("Enum for AssetType")
+union AssetType {
+  string,
+
+  @doc("Physical AssetType")
+  Physical: "Physical",
+
+  @doc("Logical AssetType")
+  Logical: "Logical",
+}
+
+@added(Versions.v2025_08_01_preview)
+@doc("Metadata that describes the asset to which the resource is assigned")
+model AssignedResource {
+  @doc("The type of the resource")
+  resourceType: AssetType;
+
+  @doc("Unique identifier for the asset")
+  resourceId: string;
+}
+
+@added(Versions.v2025_08_01_preview)
+@doc("Metadata that describes the ownership of the resource")
+model Ownership {
+  @doc("The owning service tree ID")
+  serviceTreeId?: string;
+
+  @doc("The owning subscription ID")
+  subscriptionId?: string;
 }

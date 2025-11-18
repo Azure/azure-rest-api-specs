@@ -1,6 +1,8 @@
 import "./LiftrBase.Storage/main.tsp";
 import "@typespec/openapi";
 
+import "./back-compatible.tsp";
+
 @armProviderNamespace
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 @useLibraryNamespace(LiftrBase.Storage)
@@ -10,7 +12,6 @@ namespace PureStorage.Block;
 
 using Azure.ResourceManager;
 using LiftrBase;
-using LiftrBase.Storage;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Rest;
@@ -19,31 +20,26 @@ using TypeSpec.Versioning;
 @doc("Supported versions for PureStorage.Block.")
 enum Versions {
   @doc("Version 1 preview.")
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(LiftrBase.Versions.v1_preview)
   @useDependency(LiftrBase.Storage.Versions.v1_preview)
   v1_preview: "2023-06-01-preview",
 
   @doc("Version 2 preview.")
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(LiftrBase.Versions.v2_preview)
   @useDependency(LiftrBase.Storage.Versions.v1_preview)
   v2_preview: "2024-06-01-preview",
 
   @doc("Version 3 preview.")
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(LiftrBase.Versions.v3_preview)
   @useDependency(LiftrBase.Storage.Versions.v1_preview)
   v3_preview: "2024-08-01-preview",
 
   @doc("Version 4 preview.")
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(LiftrBase.Versions.v4_preview)
   @useDependency(LiftrBase.Storage.Versions.v1_preview)
   v4_preview: "2024-10-01-preview",
 
   @doc("Version 5 preview.")
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(LiftrBase.Versions.v5_preview)
   @useDependency(LiftrBase.Storage.Versions.v1_preview)
   v5_preview: "2024-11-01-preview",
@@ -282,6 +278,7 @@ model AzureVmwareService {
   @doc("Azure resource ID of the AVS SDDC the storage pool is connected to")
   sddcResourceId?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @removed(Versions.v4_preview)
   @doc("Immutable identifier for the vSpherePlugin provided by Pure Storage. The value is available if the vSpherePlugin has been enabled for the storage pool.")
   vSpherePluginKey?: string;
@@ -294,6 +291,7 @@ interface StoragePools {
   @doc("Create a storage pool")
   create is ArmResourceCreateOrUpdateAsync<StoragePool>;
   @doc("Update a storage pool")
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     StoragePool,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -605,6 +603,7 @@ model AvsDetails {
   @doc("tells if the plugin has been enabled or not")
   vSpherePluginEnabled: boolean;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("vSpherePluginKey associated with the plugin")
   vSpherePluginKey?: string;
 
@@ -914,6 +913,7 @@ interface AvsStorageContainers {
   @doc("Delete an AVS storage container")
   delete is ArmResourceDeleteWithoutOkAsync<AvsStorageContainer>;
   @removed(Versions.v4_preview)
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     AvsStorageContainer,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -1078,6 +1078,7 @@ model AzureProperties {
 @armResourceOperations
 interface AvsStorageContainerVolumes {
   @doc("Update a volume in an AVS storage container")
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     AvsStorageContainerVolume,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -1198,6 +1199,7 @@ union VolumeContainerType {
 @armResourceOperations
 interface AvsVms {
   @doc("Update an AVS VM")
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     AvsVm,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -1229,6 +1231,7 @@ model AvsVmVolume is ProxyResource<VolumeProperties> {
 @armResourceOperations
 interface AvsVmVolumes {
   @doc("Update a volume in an AVS VM")
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     AvsVmVolume,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<

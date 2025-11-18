@@ -59,7 +59,8 @@ union TestFailoverState {
 @doc("Definition of recovery resource resource protection solution settings.")
 model ResourceProtectionSolutionSettings {
   @doc("A setting that indicates the resource protected with which recovery solution.")
-  protectionSolutionType: ResourceProtectionSolutionType;
+  @visibility(Lifecycle.Read)
+  protectionSolutionType?: ResourceProtectionSolutionType;
 
   @doc("A status that indicates the protection status of a resource with an Azure solution for regional or zonal recovery.")
   @visibility(Lifecycle.Read)
@@ -132,22 +133,19 @@ model ResourceCustomProtectionSetting
   protectionSolutionType: ResourceProtectionSolutionType.CustomRunbook;
 
   @doc("The Azure resource ID hosting the failover automation script.")
-  failoverAction: ResourceCustomProtectionAction;
+  failoverAction?: ResourceCustomProtectionAction;
 
   @doc("The Azure resource ID hosting the failover commit automation script.")
-  failoverCommitAction: ResourceCustomProtectionAction;
+  failoverCommitAction?: ResourceCustomProtectionAction;
 
   @doc("The Azure resource ID hosting the test failover automation script.")
-  testFailoverAction: ResourceCustomProtectionAction;
+  testFailoverAction?: ResourceCustomProtectionAction;
 
   @doc("The Azure resource ID hosting the test failover cleanup automation script.")
-  testFailoverCleanupAction: ResourceCustomProtectionAction;
+  testFailoverCleanupAction?: ResourceCustomProtectionAction;
 
   @doc("The Azure resource ID hosting the reprotect automation script.")
-  reprotectAction: ResourceCustomProtectionAction;
-
-  @doc("Identity details associated to the resource, which will be used for performing any operations on it")
-  associatedIdentity: AssociatedIdentity;
+  reprotectAction?: ResourceCustomProtectionAction;
 }
 
 @doc("Definition of recovery resource failover params for site recovery solution.")
@@ -168,7 +166,7 @@ model ResourceSiteRecoveryTestFailoverCleanupParams {
 
 @doc("Definition of recovery resource reprotect params for site recovery solution.")
 model ResourceSiteRecoveryReprotectParams {
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   @doc("Disk Reprotect Input Details")
   diskReprotectInputDetails?: DiskReprotectInputDetails[];
 }
@@ -196,11 +194,11 @@ model ResourceSiteRecoveryProtectionSetting
   protectionSolutionType: ResourceProtectionSolutionType.AzureSiteRecovery;
 
   @doc("Test failover params for azure site recovery solution.")
-  testFailoverParams: ResourceSiteRecoveryTestFailoverParams;
+  testFailoverParams?: ResourceSiteRecoveryTestFailoverParams;
 
   @doc("Test failover params for azure site recovery solution.")
-  testFailoverCleanupParams: ResourceSiteRecoveryTestFailoverCleanupParams;
+  testFailoverCleanupParams?: ResourceSiteRecoveryTestFailoverCleanupParams;
 
   @doc("Reprotect params for azure site recovery solution.")
-  reprotectParams: ResourceSiteRecoveryReprotectParams;
+  reprotectParams?: ResourceSiteRecoveryReprotectParams;
 }

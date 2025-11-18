@@ -1,0 +1,110 @@
+{
+  "parameters": {
+    "api-version": "2025-06-01",
+    "configurationName": "default",
+    "monitorName": "myMonitor",
+    "requestBody": {
+      "properties": {
+        "monitoredSubscriptionList": [
+          {
+            "status": "Active",
+            "subscriptionId": "/subscriptions/00000000-0000-0000-0000-000000000000",
+            "tagRules": {
+              "logRules": {
+                "filteringTags": [
+                  {
+                    "name": "saokgpjvdlorciqbjmjxazpee",
+                    "action": "Include",
+                    "value": "sarxrqsxouhdjwsrqqicbeirdb"
+                  }
+                ],
+                "sendAadLogs": true,
+                "sendActivityLogs": true,
+                "sendSubscriptionLogs": true
+              }
+            }
+          },
+          {
+            "status": "Failed",
+            "subscriptionId": "/subscriptions/00000000-0000-0000-0000-000000000001",
+            "tagRules": {
+              "logRules": {
+                "filteringTags": [
+                  {
+                    "name": "saokgpjvdlorciqbjmjxazpee",
+                    "action": "Include",
+                    "value": "sarxrqsxouhdjwsrqqicbeirdb"
+                  }
+                ],
+                "sendAadLogs": true,
+                "sendActivityLogs": true,
+                "sendSubscriptionLogs": true
+              }
+            }
+          }
+        ],
+        "operation": "AddComplete"
+      }
+    },
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "default",
+        "type": "Microsoft.Elastic/monitors/monitoredSubscriptions",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Elastic/monitors/myMonitor/monitoredSubscriptions/default",
+        "properties": {
+          "monitoredSubscriptionList": [
+            {
+              "status": "Active",
+              "subscriptionId": "/subscriptions/00000000-0000-0000-0000-000000000000",
+              "tagRules": {
+                "logRules": {
+                  "filteringTags": [
+                    {
+                      "name": "saokgpjvdlorciqbjmjxazpee",
+                      "action": "Include",
+                      "value": "sarxrqsxouhdjwsrqqicbeirdb"
+                    }
+                  ],
+                  "sendAadLogs": true,
+                  "sendActivityLogs": true,
+                  "sendSubscriptionLogs": true
+                },
+                "provisioningState": "Accepted"
+              }
+            },
+            {
+              "status": "Failed",
+              "subscriptionId": "/subscriptions/00000000-0000-0000-0000-000000000001",
+              "tagRules": {
+                "logRules": {
+                  "filteringTags": [
+                    {
+                      "name": "saokgpjvdlorciqbjmjxazpee",
+                      "action": "Include",
+                      "value": "sarxrqsxouhdjwsrqqicbeirdb"
+                    }
+                  ],
+                  "sendAadLogs": true,
+                  "sendActivityLogs": true,
+                  "sendSubscriptionLogs": true
+                },
+                "provisioningState": "Accepted"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/subid/resourceGroups/peerTest/providers/Microsoft.Elastic/monitors/test?api-version=2025-06-01"
+      }
+    }
+  },
+  "operationId": "MonitoredSubscriptions_Update",
+  "title": "Monitors_UpdateMonitoredSubscriptions"
+}

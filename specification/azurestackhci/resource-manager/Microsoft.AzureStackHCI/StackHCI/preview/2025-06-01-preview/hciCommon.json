@@ -177,6 +177,55 @@
         }
       }
     },
+    "SdnStatus": {
+      "type": "string",
+      "description": "Indicates the current Software Defined Networking (SDN) status of the resource, which may be an individual device or a cluster.",
+      "enum": [
+        "Disabled",
+        "Enabled"
+      ],
+      "x-ms-enum": {
+        "name": "SdnStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "SDN is not enabled on the resource. The domain name will be null. This is the default state when SDN has not been configured."
+          },
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "SDN is successfully enabled on the resource. The domain name will be populated in the format `<sdnPrefix>-nc.<domain>`. Customers may need to manage DNS settings to ensure proper resolution."
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "The SDN status could not be determined due to a failure in querying the SDN API service. This may occur if the query script fails or if the system is in an inconsistent state. The domain name will be null in this case."
+          }
+        ]
+      }
+    },
+    "SdnProperties": {
+      "type": "object",
+      "description": "Represents the Software Defined Networking (SDN) configuration state.",
+      "properties": {
+        "sdnStatus": {
+          "$ref": "#/definitions/SdnStatus",
+          "readOnly": true
+        },
+        "sdnDomainName": {
+          "type": "string",
+          "description": "The fully qualified domain name (FQDN) associated with the SDN deployment. This value is propagated from the Device Management Extension to the cluster resource. It is typically in the format `<sdnPrefix>-nc.<domain>` when SDN is enabled. May be null or absent in unsupported or disabled states.",
+          "readOnly": true
+        },
+        "sdnApiAddress": {
+          "type": "string",
+          "description": "Represents the API address for the SDN deployment.",
+          "readOnly": true
+        }
+      }
+    },
     "ClusterPattern": {
       "type": "string",
       "description": "Supported Storage Pattern for HCI Cluster",
@@ -197,6 +246,31 @@
             "name": "RackAware",
             "value": "RackAware",
             "description": "RackAware cluster."
+          }
+        ]
+      }
+    },
+    "ConfidentialVmIntent": {
+      "type": "string",
+      "description": "Captures the customer's intent to enable or disable confidential VM support on the cluster, either during initial deployment (Day-0) or at a later stage (Day-N).",
+      "enum": [
+        "Enable",
+        "Disable"
+      ],
+      "default": "Disable",
+      "x-ms-enum": {
+        "name": "ConfidentialVmIntent",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enable",
+            "value": "Enable",
+            "description": "Indicates that the customer intends to enable confidential VM support on the cluster."
+          },
+          {
+            "name": "Disable",
+            "value": "Disable",
+            "description": "Indicates that the customer intends to disable confidential VM support on the cluster."
           }
         ]
       }

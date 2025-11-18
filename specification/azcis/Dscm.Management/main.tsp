@@ -1,17 +1,23 @@
-import "../versions.tsp";
-import "./dstsapplication.tsp";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/versioning";
+
+import "./versions.tsp";
+import "./dstsmodels.tsp";
 import "./dsmsallowlist.tsp";
-import "./dstsserviceclientidentity.tsp";
 import "./dsmsrootfolder.tsp";
+import "./dstsapplication.tsp";
 import "./dstsserviceaccount.tsp";
+import "./dstsserviceaccountgroup.tsp";
+import "./dstsserviceclientidentity.tsp";
+import "./dstsmanagedserviceclientidentitygroup.tsp";
+import "./dstssubjectnamebasedserviceclientidentitygroup.tsp";
 
-using TypeSpec.Versioning;
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Namespace types must use PascalCaseTypeSpec"
 @armProviderNamespace
-@service(#{ title: "Azure CIS FRP" })
-@doc("dscm Service")
+@service(#{ title: "dSCM Service" })
+@doc("https://eng.ms/docs/products/azcis-resource-provisioning/template-user-guide/resources/dscm")
 @versioned(Microsoft.AzureCis.Versions)
 namespace Microsoft.AzureCis;
 

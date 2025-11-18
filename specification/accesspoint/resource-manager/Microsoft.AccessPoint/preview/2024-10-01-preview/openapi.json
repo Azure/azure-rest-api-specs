@@ -2484,7 +2484,7 @@
           "description": "The image modification for the access point account"
         },
         "classification": {
-          "$ref": "#/definitions/Classification",
+          "type": "string",
           "description": "The classification of the access point account"
         },
         "provisioningState": {
@@ -2509,6 +2509,54 @@
             "type": "string"
           }
         }
+      }
+    },
+    "AudioInputCapability": {
+      "type": "string",
+      "description": "Audio input options for Azure Virtual Desktop.",
+      "enum": [
+        "Disabled",
+        "Enabled"
+      ],
+      "x-ms-enum": {
+        "name": "AudioInputCapability",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Audio input is disabled."
+          },
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Audio input is enabled."
+          }
+        ]
+      }
+    },
+    "AudioOutputCapability": {
+      "type": "string",
+      "description": "Audio output options for Azure Virtual Desktop.",
+      "enum": [
+        "Disabled",
+        "Enabled"
+      ],
+      "x-ms-enum": {
+        "name": "AudioOutputCapability",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Audio output is disabled."
+          },
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Audio output is enabled."
+          }
+        ]
       }
     },
     "Azure.Core.ipV4Address": {
@@ -2587,17 +2635,17 @@
           "description": "The status of the last operation.",
           "readOnly": true
         },
-        "audioOutputEnabled": {
-          "type": "boolean",
-          "description": "Indicates whether audio output is enabled."
+        "audioOutputCapability": {
+          "$ref": "#/definitions/AudioOutputCapability",
+          "description": "Selected capability for audio output."
         },
-        "audioInputEnabled": {
-          "type": "boolean",
-          "description": "Indicates whether audio input is enabled."
+        "audioInputCapability": {
+          "$ref": "#/definitions/AudioInputCapability",
+          "description": "Selected capability for audio input."
         },
-        "cameraEnabled": {
-          "type": "boolean",
-          "description": "Indicates whether the camera is enabled."
+        "cameraCapability": {
+          "$ref": "#/definitions/CameraCapability",
+          "description": "Selected capability for camera."
         },
         "applicationId": {
           "type": "string",
@@ -2611,6 +2659,9 @@
       },
       "required": [
         "hostNetworkLevel",
+        "audioOutputCapability",
+        "audioInputCapability",
+        "cameraCapability",
         "applicationId",
         "redirectUrl"
       ]
@@ -2627,17 +2678,17 @@
           "type": "string",
           "description": "Additional details."
         },
-        "audioOutputEnabled": {
-          "type": "boolean",
-          "description": "Indicates whether audio output is enabled."
+        "audioOutputCapability": {
+          "$ref": "#/definitions/AudioOutputCapability",
+          "description": "Selected capability for audio output."
         },
-        "audioInputEnabled": {
-          "type": "boolean",
-          "description": "Indicates whether audio input is enabled."
+        "audioInputCapability": {
+          "$ref": "#/definitions/AudioInputCapability",
+          "description": "Selected capability for audio input."
         },
-        "cameraEnabled": {
-          "type": "boolean",
-          "description": "Indicates whether the camera is enabled."
+        "cameraCapability": {
+          "$ref": "#/definitions/CameraCapability",
+          "description": "Selected capability for camera."
         },
         "applicationId": {
           "type": "string",
@@ -2676,26 +2727,26 @@
         }
       }
     },
-    "Classification": {
+    "CameraCapability": {
       "type": "string",
-      "description": "The classification of the Access Point Account",
+      "description": "Camera options for Azure Virtual Desktop.",
       "enum": [
-        "sap",
-        "sci_sar"
+        "Disabled",
+        "Enabled"
       ],
       "x-ms-enum": {
-        "name": "Classification",
+        "name": "CameraCapability",
         "modelAsString": true,
         "values": [
           {
-            "name": "SAP",
-            "value": "sap",
-            "description": "SAP Classification"
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Camera is disabled."
           },
           {
-            "name": "SCI_SAP",
-            "value": "sci_sar",
-            "description": "SCI_SAP Classification"
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Camera is enabled."
           }
         ]
       }
@@ -2758,9 +2809,9 @@
             "create"
           ]
         },
-        "enabled": {
-          "type": "boolean",
-          "description": "Indicates whether the device is enabled."
+        "deviceState": {
+          "$ref": "#/definitions/DeviceState",
+          "description": "Indicates the current state of the device."
         },
         "updateGroupResourceId": {
           "type": "string",
@@ -2793,7 +2844,7 @@
       "required": [
         "mac",
         "serial",
-        "enabled",
+        "deviceState",
         "updateGroupResourceId",
         "networkResourceId",
         "ipAddress",
@@ -2804,9 +2855,9 @@
       "type": "object",
       "description": "Device Properties.",
       "properties": {
-        "enabled": {
-          "type": "boolean",
-          "description": "Indicates whether the device is enabled."
+        "deviceState": {
+          "$ref": "#/definitions/DeviceState",
+          "description": "Indicates the current state of the device."
         },
         "updateGroupResourceId": {
           "type": "string",
@@ -2922,6 +2973,30 @@
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
+    },
+    "DeviceState": {
+      "type": "string",
+      "description": "The current state of the device.",
+      "enum": [
+        "Disabled",
+        "Enabled"
+      ],
+      "x-ms-enum": {
+        "name": "DeviceState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Device is disabled."
+          },
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Device is enabled."
+          }
+        ]
+      }
     },
     "DeviceUpdate": {
       "type": "object",

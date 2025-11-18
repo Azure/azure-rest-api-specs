@@ -16,7 +16,6 @@ using Azure.ResourceManager;
   title: "Hardware Resource Provider",
   version: "2023-07-12-preview",
 })
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
 namespace Microsoft.Hardware;
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -44,7 +43,7 @@ model OrderProperties {
   status?: OrderStatus;
 
   @doc("Order line details")
-  @OpenAPI.extension("x-ms-identifiers", #["id"])
+  @identifiers(#["id"])
   orderLines: OrderLine[];
 
   @doc("Currency for the order")
@@ -158,7 +157,7 @@ model Price {
   taxes?: Tax[];
 
   @doc("Fees for this line")
-  @OpenAPI.extension("x-ms-identifiers", #["type"])
+  @identifiers(#["type"])
   fees?: Fee[];
 }
 

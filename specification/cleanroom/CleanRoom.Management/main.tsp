@@ -15,11 +15,8 @@ import "./models.tsp";
 import "./Collaboration.tsp";
 import "./Consortium.tsp";
 import "./Contract.tsp";
+import "./back-compatible.tsp";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
-using Azure.ResourceManager.Foundations;
-using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
@@ -38,8 +35,6 @@ enum Versions {
   /**
    * The 2025-01-31-preview API version.
    */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2025_01_31_preview: "2025-01-31-preview",
 }
 

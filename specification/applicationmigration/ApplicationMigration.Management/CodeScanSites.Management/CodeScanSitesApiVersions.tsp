@@ -1,0 +1,12 @@
+import "@azure-tools/typespec-azure-resource-manager";
+
+using Azure.ResourceManager;
+
+namespace Microsoft.ApplicationMigration;
+
+@doc("API Versions for CodeScanSites Resource.")
+enum CodeScanSitesApiVersions {
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
+  @doc("2025-09-09-preview API Version.")
+  v2025_09_09_preview: "2025-09-09-preview",
+}

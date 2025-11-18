@@ -565,9 +565,9 @@
       "items": {
         "type": "object",
         "properties": {
-          "id": {
+          "migrationTrackingId": {
             "type": "string",
-            "description": "reference identifier/link to system initiating this migration."
+            "description": "reference identifier for tracking purposes/optional link to system initiating this migration. e.g. Arc MI link job id OR DMS resource id"
           },
           "migrationMode": {
             "type": "string",
@@ -586,11 +586,25 @@
           },
           "initiatedFrom": {
             "type": "string",
-            "description": "To indicate the client from which the migration is initiated from e.g. Azure Portal/PS/CLI for additional tracking. Log shipping can be initiated independently via PS/CLI or can be initiated by DMS"
+            "description": "To indicate the client from which the migration is initiated from e.g. Azure Arc, DMS-Azure Portal/PS/CLI for additional tracking.",
+            "enum": [
+              "Azure Arc",
+              "ADS",
+              "SSMS",
+              "SSMA",
+              "DMS-Portal",
+              "DMS-PS",
+              "DMS-CLI",
+              "DMS-SDK",
+              "Other"
+            ],
+            "x-ms-enum": {
+              "name": "initiatedFrom",
+              "modelAsString": true
+            }
           },
           "status": {
             "type": "string",
-            "readOnly": true,
             "description": "Status of the migration job.",
             "enum": [
               "NotStarted",
@@ -608,7 +622,6 @@
           },
           "lastError": {
             "type": "string",
-            "readOnly": true,
             "description": "Last error if any associated with this migration job."
           },
           "targetType": {
@@ -630,13 +643,11 @@
           },
           "startTime": {
             "type": "string",
-            "readOnly": true,
             "description": "Time when migration job was started.",
             "format": "date-time"
           },
           "endTime": {
             "type": "string",
-            "readOnly": true,
             "description": "Time when migration job reached terminal state.",
             "format": "date-time"
           },

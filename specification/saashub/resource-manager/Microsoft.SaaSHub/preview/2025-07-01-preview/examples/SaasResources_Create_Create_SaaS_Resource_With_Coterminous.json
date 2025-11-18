@@ -1,0 +1,83 @@
+{
+  "parameters": {
+    "saasResourceName": "myResourceName",
+    "api-version": "2025-07-01-preview",
+    "resource": {
+      "properties": {
+        "billingScope": "/providers/Microsoft.Billing/billingAccounts/{baId}/billingProfiles/{bfId}/invoiceSections/{isId}",
+        "autoRenew": "On",
+        "productCode": "000081e7-0000-0080-f976-8a622c8760a3",
+        "quantity": 20,
+        "term": {
+          "endDate": "2023-05-17T17:00:00-07:00"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myResourceName",
+        "type": "Microsoft.SaaSHub/SaasResources",
+        "id": "/providers/Microsoft.SaaSHub/saasResources/myResourceName",
+        "properties": {
+          "autoRenew": "On",
+          "billingScope": "/providers/Microsoft.Billing/billingAccounts/{baId}/billingProfiles/{bfId}/invoiceSections/{isId}",
+          "billingSubscriptionId": "/providers/Microsoft.Billing/billingAccounts/1111:2222/billingSubscriptions/Id",
+          "licenseData": "000089d5-0000-0080-2654-64a36bcef7ba",
+          "productCode": "000081e7-0000-0080-f976-8a622c8760a3",
+          "productType": "Microsoft 365 E5",
+          "offerType": "Paid",
+          "provisioningState": "Succeeded",
+          "quantity": 20,
+          "skuDescription": "Microsoft 365 E5",
+          "status": "Active",
+          "systemOverrides": {
+            "cancellationAllowedEndDate": "2022-05-06T07:54:48-07:00"
+          },
+          "term": {
+            "billingFrequency": "P1M",
+            "endDate": "2023-05-17T17:00:00-07:00",
+            "startDate": "2022-04-28T17:00:00-07:00",
+            "termUnit": "P1Y"
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "myResourceName",
+        "type": "Microsoft.SaaSHub/SaasResources",
+        "id": "/providers/Microsoft.SaaSHub/saasResources/myResourceName",
+        "properties": {
+          "autoRenew": "On",
+          "billingScope": "/providers/Microsoft.Billing/billingAccounts/{baId}/billingProfiles/{bfId}/invoiceSections/{isId}",
+          "billingSubscriptionId": "/providers/Microsoft.Billing/billingAccounts/1111:2222/billingSubscriptions/Id",
+          "licenseData": "000089d5-0000-0080-2654-64a36bcef7ba",
+          "productCode": "000081e7-0000-0080-f976-8a622c8760a3",
+          "productType": "Microsoft 365 E5",
+          "offerType": "Paid",
+          "provisioningState": "Accepted",
+          "quantity": 20,
+          "skuDescription": "Microsoft 365 E5",
+          "status": "Active",
+          "systemOverrides": {
+            "cancellationAllowedEndDate": "2022-05-06T07:54:48-07:00"
+          },
+          "term": {
+            "billingFrequency": "P1M",
+            "endDate": "2023-05-17T17:00:00-07:00",
+            "startDate": "2022-04-28T17:00:00-07:00",
+            "termUnit": "P1Y"
+          }
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/providers/Microsoft.SaaSHub/operationStatuses/{operationId}?api-version=2025-07-01-preview",
+        "Retry-After": "60"
+      }
+    }
+  },
+  "operationId": "SaasResources_Create",
+  "title": "Create SaasResource With Coterminous"
+}

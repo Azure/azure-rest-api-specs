@@ -29,7 +29,7 @@ model SliResource {
   provisioningState?: ProvisioningState;
 
   @doc("A user-provided description of the SLI, with a maximum length of 1000 characters.")
-  @pattern("^.{3,1000}$")
+  @pattern("^[\\s\\S]{0,1000}$")
   description: string;
 
   @doc("Specifies the category of the SLI, used to classify signals such as Availability and Latency.")
@@ -43,12 +43,12 @@ model SliResource {
   executionState: ExecutionState;
 
   @doc("Destination AMW accounts.")
-  @OpenAPI.extension("x-ms-identifiers", #["resourceId"])
+  @identifiers(#["resourceId"])
   destinationAmwAccounts: AmwAccount[];
 
   @visibility(Lifecycle.Read)
   @doc("The destination Azure Monitor Workspace (AMW) accounts where the SLI emits metrics.")
-  @OpenAPI.extension("x-ms-identifiers", #["metricNamespace", "metricName"])
+  @identifiers(#["metricNamespace", "metricName"])
   destinationMetrics: Metric[];
 
   @doc("Defines the SLO baseline associated with the SLI.")
@@ -61,6 +61,9 @@ model SliResource {
   @visibility(Lifecycle.Read)
   @doc("The streaming rule last updated timestamp associated with the Sli resource.")
   streamingRuleLastUpdatedTimestamp: string;
+
+  @doc("A flag to determine whether alert is enabled.")
+  enableAlert: boolean;
 
   @doc("Defines the SLI properties associated with the SLI.")
   sliProperties: SliProperties;
@@ -153,18 +156,4 @@ interface Slis {
   @doc("Lists all SLI resources under a parent resource.")
   @route(ServiceGroupRoute)
   listByParent is ArmResourceListByParent<Sli, ServiceGroupParameters>;
-
-  /**
-  POST Actions
-  */
-  @route(ServiceGroupRoute)
-  @armResourceAction(Sli)
-  @post
-  @doc("Returns preview data for the signal.")
-  signalPreview is ArmResourceActionSync<
-    Sli,
-    Signal,
-    void,
-    ServiceGroupParameters
-  >;
 }

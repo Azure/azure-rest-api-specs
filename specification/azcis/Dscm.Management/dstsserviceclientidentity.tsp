@@ -1,16 +1,14 @@
-import "@typespec/rest";
-import "@typespec/versioning";
-import "@azure-tools/typespec-autorest";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/http";
+import "@typespec/rest";
+import "@typespec/versioning";
 
-using OpenAPI;
+using Azure.Core;
+using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
-using Azure.Core;
-using Azure.ResourceManager;
-using Autorest;
 
 namespace Microsoft.AzureCis;
 
@@ -87,15 +85,6 @@ model DstsClaimProvisioning {
 
   @doc("Dstsinstance for the claim. This is case-insensitive. E.g. \"co2agg04-dsts.dsts.core.azure-test.net\" for dogfood.")
   dstsInstance?: string;
-}
-
-@doc("This model represents an IP range in SCI.")
-model RequiredIpRange {
-  @doc("Gets or sets the start of IP range. E.g. \"172.1.1.1\".")
-  fromIpAddress: string;
-
-  @doc("Gets or sets the end of IP range. E.g. \"172.1.1.5\".")
-  toIpAddress: string;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-invalid-chars" "Arm resource name must contain only alphanumeric characters"

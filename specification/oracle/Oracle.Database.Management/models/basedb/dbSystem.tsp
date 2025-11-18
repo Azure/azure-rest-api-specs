@@ -88,6 +88,7 @@ model DbSystemBaseProperties {
   @maxLength(11)
   clusterName?: string;
 
+  @removed(Versions.v20250815_preview)
   @doc("The number of CPU cores enabled on the DB system.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   @minValue(1)
@@ -117,9 +118,16 @@ model DbSystemBaseProperties {
   @visibility(Lifecycle.Create, Lifecycle.Read)
   diskRedundancy?: DiskRedundancyType;
 
+  @removed(Versions.v20250815_preview)
   @doc("The domain name for the DB system.")
   @visibility(Lifecycle.Read)
   domain?: string;
+
+  @added(Versions.v20250815_preview)
+  @doc("The domain name for the DB system.")
+  @encodedName("application/json", "domain")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  domainV2?: string;
 
   @doc("The OCID of a grid infrastructure software image. This is a database software image of the type GRID_IMAGE.")
   @visibility(Lifecycle.Read)
@@ -135,9 +143,16 @@ model DbSystemBaseProperties {
   @visibility(Lifecycle.Read)
   ocid?: Ocid;
 
+  @removed(Versions.v20250815_preview)
   @doc("The Oracle license model that applies to all the databases on the DB system. The default is LicenseIncluded.")
   @visibility(Lifecycle.Read)
   licenseModel?: LicenseModel = LicenseModel.LicenseIncluded;
+
+  @added(Versions.v20250815_preview)
+  @doc("The Oracle license model that applies to all the databases on the DB system. The default is LicenseIncluded.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @encodedName("application/json", "licenseModel")
+  licenseModelV2?: LicenseModel = LicenseModel.LicenseIncluded;
 
   @doc("Additional information about the current lifecycle state.")
   @visibility(Lifecycle.Read)
@@ -201,6 +216,11 @@ model DbSystemBaseProperties {
   @doc("The number of compute servers for the DB system.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   computeCount?: int32;
+
+  @added(Versions.v20251101_preview)
+  @doc("Indicates user preferences for the various diagnostic collection options for the Base DB.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  dataCollectionOptions?: DataCollectionOptions;
 }
 
 @added(Versions.v20250701_preview)

@@ -274,6 +274,11 @@ model ProvisionedClusterProperties {
   storageProfile?: StorageProfile;
 
   /**
+   * The security configuration profile for the provisioned cluster.
+   */
+  securityProfile?: SecurityProfile;
+
+  /**
    * The SSH restricted access profile for the VMs in the provisioned cluster.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Initial suppression to prevent breaking change"
@@ -282,24 +287,21 @@ model ProvisionedClusterProperties {
   /**
    * The agent pool properties for the provisioned cluster.
    */
-  @OpenAPI.extension(
-    "x-ms-identifiers",
-    #[
-      "osType",
-      "osSKU",
-      "nodeLabels",
-      "nodeTaints",
-      "maxCount",
-      "minCount",
-      "enableAutoScaling",
-      "maxPods",
-      "count",
-      "vmSize",
-      "kubernetesVersion",
-      "name",
-      "gpuCountPerNode"
-    ]
-  )
+  @identifiers(#[
+    "osType",
+    "osSKU",
+    "nodeLabels",
+    "nodeTaints",
+    "maxCount",
+    "minCount",
+    "enableAutoScaling",
+    "maxPods",
+    "count",
+    "vmSize",
+    "kubernetesVersion",
+    "name",
+    "gpuCountPerNode"
+  ])
   agentPoolProfiles?: NamedAgentPoolProfile[];
 
   /**
@@ -420,6 +422,42 @@ model NetworkProfileLoadBalancerProfile {
    * Number of HA Proxy load balancer VMs. The default value is 0.
    */
   count?: int32;
+}
+
+/**
+ * The security configuration profile for the provisioned cluster.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Initial suppression to prevent breaking change"
+model SecurityProfile {
+  /**
+   * The list of base64 encoded certificate strings that will be added to the node trust store. At most 10 certificates can be provided.
+   */
+  customCATrustCertificates?: SecurityProfileCustomCATrustCertificates;
+
+  /**
+   * FIPS image settings for the security profile.
+   */
+  fipsImage?: SecurityProfileFipsImage;
+}
+
+/**
+ * The list of base64 encoded certificate strings that will be added to the node trust store. At most 10 certificates can be provided. Certificates will be added to trust stores of all the nodes in the cluster. If updated, the new list of certificates will be installed in the trust store in place of the old certificates. Updating the value of this field will result in nodes being re-imaged.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Initial suppression to prevent breaking change, CA is an acronym"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Initial suppression to prevent breaking change"
+@minItems(0)
+@maxItems(10)
+model SecurityProfileCustomCATrustCertificates is bytes[];
+
+/**
+ * FIPS image settings for the security profile.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Initial suppression to prevent breaking change"
+model SecurityProfileFipsImage {
+  /**
+   * Indicates whether to enable FIPS image.
+   */
+  enabled?: boolean = false;
 }
 
 /**
@@ -596,10 +634,7 @@ model ProvisionedClusterPropertiesStatus {
   /**
    * The detailed status of the provisioned cluster components including addons.
    */
-  @OpenAPI.extension(
-    "x-ms-identifiers",
-    #["name", "phase", "ready", "errorMessage"]
-  )
+  @identifiers(#["name", "phase", "ready", "errorMessage"])
   controlPlaneStatus?: AddonStatusProfile[];
 
   /**
@@ -919,10 +954,7 @@ model AgentPoolProvisioningStatusStatus {
   /**
    * The agent pools that are ready.
    */
-  @OpenAPI.extension(
-    "x-ms-identifiers",
-    #["count", "vmSize", "kubernetesVersion", "gpuCountPerNode"]
-  )
+  @identifiers(#["count", "vmSize", "kubernetesVersion", "gpuCountPerNode"])
   readyReplicas?: AgentPoolUpdateProfile[];
 }
 
@@ -1026,10 +1058,7 @@ model KubernetesVersionProfileProperties {
   /**
    * List of supported Kubernetes versions
    */
-  @OpenAPI.extension(
-    "x-ms-identifiers",
-    #["version", "isPreview", "patchVersions"]
-  )
+  @identifiers(#["version", "isPreview", "patchVersions"])
   values?: KubernetesVersionProperties[];
 }
 
@@ -1064,10 +1093,7 @@ model KubernetesPatchVersions {
   /**
    * Indicates whether the kubernetes version image is ready or not
    */
-  @OpenAPI.extension(
-    "x-ms-identifiers",
-    #["osType", "osSku", "ready", "errorMessage"]
-  )
+  @identifiers(#["osType", "osSku", "ready", "errorMessage"])
   readiness?: KubernetesVersionReadiness[];
 
   /**
@@ -1117,10 +1143,7 @@ model VmSkuProfileProperties {
   /**
    * List of supported VM SKUs.
    */
-  @OpenAPI.extension(
-    "x-ms-identifiers",
-    #["resourceType", "capabilities", "name", "tier", "size"]
-  )
+  @identifiers(#["resourceType", "capabilities", "name", "tier", "size"])
   values?: VmSkuProperties[];
 }
 

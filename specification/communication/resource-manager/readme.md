@@ -28,7 +28,35 @@ These are the global settings for the Azure Communication Services API.
 title: CommunicationServiceManagementClient
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2025-05-01
+tag: package-preview-2025-09-01-preview
+```
+
+### Tag: package-preview-2025-09-01-preview
+
+These settings apply only when `--tag=package-preview-2025-09-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-09-01-preview'
+input-file:
+  - Microsoft.Communication/preview/2025-09-01-preview/CommunicationServices.json
+  - Microsoft.Communication/preview/2025-09-01-preview/Domains.json
+  - Microsoft.Communication/preview/2025-09-01-preview/EmailServices.json
+  - Microsoft.Communication/preview/2025-09-01-preview/Locations.json
+  - Microsoft.Communication/preview/2025-09-01-preview/SenderUsernames.json
+  - Microsoft.Communication/preview/2025-09-01-preview/SmtpUsernames.json
+```
+
+### Tag: package-2025-09-01
+
+These settings apply only when `--tag=package-2025-09-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-09-01'
+input-file:
+  - Microsoft.Communication/stable/2025-09-01/CommunicationServices.json
+  - Microsoft.Communication/stable/2025-09-01/Domains.json
+  - Microsoft.Communication/stable/2025-09-01/EmailServices.json
+  - Microsoft.Communication/stable/2025-09-01/SenderUsernames.json
+  - Microsoft.Communication/stable/2025-09-01/SmtpUsernames.json
+  - Microsoft.Communication/stable/2025-09-01/SuppressionLists.json
 ```
 
 ### Tag: package-preview-2025-05-01-preview
@@ -43,6 +71,30 @@ input-file:
   - Microsoft.Communication/preview/2025-05-01-preview/Locations.json
   - Microsoft.Communication/preview/2025-05-01-preview/SenderUsernames.json
   - Microsoft.Communication/preview/2025-05-01-preview/SmtpUsernames.json
+```
+
+### Tag: package-2025-05-01
+
+These settings apply only when `--tag=package-2025-05-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-05-01'
+input-file:
+  - Microsoft.Communication/stable/2025-05-01/CommunicationServices.json
+  - Microsoft.Communication/stable/2025-05-01/Domains.json
+  - Microsoft.Communication/stable/2025-05-01/EmailServices.json
+  - Microsoft.Communication/stable/2025-05-01/SenderUsernames.json
+```
+
+### Tag: package-2023-04
+
+These settings apply only when `--tag=package-2023-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-04'
+input-file:
+  - Microsoft.Communication/stable/2023-04-01/CommunicationServices.json
+  - Microsoft.Communication/stable/2023-04-01/Domains.json
+  - Microsoft.Communication/stable/2023-04-01/EmailServices.json
+  - Microsoft.Communication/stable/2023-04-01/SenderUsernames.json
 ```
 
 ### Tag: package-preview-2025-01-25
@@ -106,7 +158,11 @@ input-file:
   - Microsoft.Communication/preview/2024-01-01-preview/CommunicationServicesGccm.json
 ```
 
-```yaml $(tag) == 'package-preview-2024-01' && $(generate-private)
+### Tag: package-preview-2024-01-private
+
+These settings apply only when `--tag=package-preview-2024-01-private` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-01-private'
 input-file:
   - Microsoft.Communication/preview/2024-01-01-preview/CommunicationServicesGccm-private.json
 ```
@@ -235,9 +291,14 @@ These settings apply only when `--tag=package-2020-08-20` is specified on the co
 ```yaml $(tag) == 'package-2020-08-20'
 input-file:
   - Microsoft.Communication/stable/2020-08-20/CommunicationService.json
+  - Microsoft.Communication/stable/2020-08-20/CommunicationService-private.json
 ```
 
-```yaml $(tag) == 'package-2020-08-20' && $(generate-private)
+### Tag: package-2020-08-20-private
+
+These settings apply only when `--tag=package-2020-08-20-private` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-08-20-private'
 input-file:
   - Microsoft.Communication/stable/2020-08-20/CommunicationService-private.json
 ```
@@ -251,7 +312,11 @@ input-file:
   - Microsoft.Communication/preview/2020-08-20-preview/CommunicationService.json
 ```
 
-```yaml $(tag) == 'package-2020-08-20-preview' && $(generate-private)
+### Tag: package-2020-08-20-preview-private
+
+These settings apply only when `--tag=package-2020-08-20-preview-private` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-08-20-preview-private'
 input-file:
   - Microsoft.Communication/preview/2020-08-20-preview/CommunicationService-private.json
 ```
@@ -265,7 +330,11 @@ input-file:
   - Microsoft.Communication/preview/2019-10-10-preview/CommunicationService.json
 ```
 
-```yaml $(tag) == 'package-2019-10-10-preview' && $(generate-private)
+### Tag: package-2019-10-10-preview-private
+
+These settings apply only when `--tag=package-2019-10-10-preview-private` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-10-10-preview-private'
 input-file:
   - Microsoft.Communication/preview/2019-10-10-preview/CommunicationService-private.json
 ```

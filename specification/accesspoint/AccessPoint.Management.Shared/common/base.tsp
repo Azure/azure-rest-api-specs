@@ -44,20 +44,5 @@ union ProvisioningState {
   ResourceProvisioningState,
 }
 
-@doc("The classification of the Access Point Account")
-union Classification {
-  /**
-   * SAP Classification
-   */
-  SAP: "sap",
-
-  /**
-   * SCI_SAP Classification
-   */
-  SCI_SAP: "sci_sar",
-
-  string,
-}
-
 @armResourceOperations
 interface Operations extends Azure.ResourceManager.Operations {}

@@ -11,7 +11,6 @@ import "../shared/main.tsp";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
-using OpenAPI;
 using Azure.ResourceManager;
 using Azure.Portal;
 
@@ -26,7 +25,6 @@ namespace Microsoft.GcpConnector;
 /** Api versions */
 enum Versions {
   /** 2025-12-01-preview api version */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   `2025-12-01-preview`,
 }
 
@@ -99,7 +97,7 @@ model GcpBucketProperties {
   /**
    * The bucket's Cross-Origin Resource Sharing (CORS) configuration.
    */
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   cors?: {
     /** The value, in seconds, to return in the  Access-Control-Max-Age header used in preflight responses. */
     maxAgeSeconds?: int32;
@@ -204,7 +202,7 @@ model GcpBucketProperties {
    */
   lifecycle?: {
     /** A lifecycle management rule, which is made of an action to take and the condition(s) under which the action will be taken. */
-    @extension("x-ms-identifiers", #[])
+    @identifiers(#[])
     rule?: {
       /** The action to take. */
       action?: {

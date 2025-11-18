@@ -18,12 +18,10 @@ using Azure.ResourceManager;
 @armProviderNamespace("Microsoft.Approvals")
 @service(#{ title: "Microsoft.Approvals" })
 @versioned(Versions)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
 namespace Microsoft.Approvals;
 
 enum Versions {
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   `2025-05-01-preview`,
 }
 

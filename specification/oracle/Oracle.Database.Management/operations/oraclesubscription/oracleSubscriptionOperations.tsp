@@ -63,6 +63,7 @@ interface OracleSubscriptions
    * @template Properties RP-specific property bag for the resource
    * @template BaseParameters The http parameters that are part of the request
    */
+  @Http.patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     OracleSubscription<Plan>,
     ResourceUpdateModel<

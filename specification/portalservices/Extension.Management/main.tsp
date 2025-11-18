@@ -8,6 +8,7 @@ import "./ExtensionVersion.tsp";
 import "./ExtensionDeployment.tsp";
 import "./ExtensionSlot.tsp";
 import "./ExtensionTenantCompileFile.tsp";
+import "./back-compatible.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -31,7 +32,5 @@ enum Versions {
   /**
    * The 2024-10-01-preview API version.
    */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2024_10_01_preview: "2024-10-01-preview",
 }

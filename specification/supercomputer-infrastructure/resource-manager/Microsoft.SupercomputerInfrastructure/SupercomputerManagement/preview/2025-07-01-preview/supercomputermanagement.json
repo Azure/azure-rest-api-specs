@@ -1,0 +1,3215 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.SupercomputerInfrastructure",
+    "version": "2025-07-01-preview",
+    "description": "Supercomputer Infrastructure Management Plane API",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "Links"
+    },
+    {
+      "name": "Supercomputers"
+    },
+    {
+      "name": "Nics"
+    },
+    {
+      "name": "Racks"
+    },
+    {
+      "name": "Clusters"
+    },
+    {
+      "name": "Nodes"
+    },
+    {
+      "name": "DeviceLogicalPorts"
+    },
+    {
+      "name": "Switches"
+    },
+    {
+      "name": "MaintenanceRequests"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.SupercomputerInfrastructure/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.SupercomputerInfrastructure/supercomputers": {
+      "get": {
+        "operationId": "Supercomputers_ListBySubscription",
+        "tags": [
+          "Supercomputers"
+        ],
+        "description": "List Supercomputer resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SupercomputerListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Supercomputers_ListBySubscription": {
+            "$ref": "./examples/Supercomputers_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SupercomputerInfrastructure/supercomputers": {
+      "get": {
+        "operationId": "Supercomputers_ListByResourceGroup",
+        "tags": [
+          "Supercomputers"
+        ],
+        "description": "List Supercomputer resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SupercomputerListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Supercomputers_ListByResourceGroup": {
+            "$ref": "./examples/Supercomputers_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SupercomputerInfrastructure/supercomputers/{supercomputerName}": {
+      "get": {
+        "operationId": "Supercomputers_Get",
+        "tags": [
+          "Supercomputers"
+        ],
+        "description": "Get a Supercomputer",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "supercomputerName",
+            "in": "path",
+            "description": "The name of the Supercomputer",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Supercomputer"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Supercomputers_Get": {
+            "$ref": "./examples/Supercomputers_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Supercomputers_CreateOrUpdate",
+        "tags": [
+          "Supercomputers"
+        ],
+        "description": "Create a Supercomputer",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "supercomputerName",
+            "in": "path",
+            "description": "The name of the Supercomputer",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Supercomputer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Supercomputer' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Supercomputer"
+            }
+          },
+          "201": {
+            "description": "Resource 'Supercomputer' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Supercomputer"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Supercomputers_CreateOrUpdate": {
+            "$ref": "./examples/Supercomputers_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Supercomputers_Update",
+        "tags": [
+          "Supercomputers"
+        ],
+        "description": "Update a Supercomputer",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "supercomputerName",
+            "in": "path",
+            "description": "The name of the Supercomputer",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SupercomputerUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Supercomputer"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Supercomputers_Update": {
+            "$ref": "./examples/Supercomputers_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Supercomputers_Delete",
+        "tags": [
+          "Supercomputers"
+        ],
+        "description": "Delete a Supercomputer",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "supercomputerName",
+            "in": "path",
+            "description": "The name of the Supercomputer",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Supercomputers_Delete": {
+            "$ref": "./examples/Supercomputers_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SupercomputerInfrastructure/supercomputers/{supercomputerName}/clusters": {
+      "get": {
+        "operationId": "Clusters_ListBySupercomputer",
+        "tags": [
+          "Clusters"
+        ],
+        "description": "List Cluster resources by Supercomputer",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "supercomputerName",
+            "in": "path",
+            "description": "The name of the Supercomputer",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ClusterListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Clusters_ListBySupercomputer": {
+            "$ref": "./examples/Clusters_ListBySupercomputer.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SupercomputerInfrastructure/supercomputers/{supercomputerName}/clusters/{clusterName}": {
+      "get": {
+        "operationId": "Clusters_Get",
+        "tags": [
+          "Clusters"
+        ],
+        "description": "Get a Cluster",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "supercomputerName",
+            "in": "path",
+            "description": "The name of the Supercomputer",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the Cluster",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Clusters_Get": {
+            "$ref": "./examples/Clusters_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SupercomputerInfrastructure/supercomputers/{supercomputerName}/deviceLogicalPorts": {
+      "get": {
+        "operationId": "DeviceLogicalPorts_ListBySupercomputer",
+        "tags": [
+          "DeviceLogicalPorts"
+        ],
+        "description": "List DeviceLogicalPort resources by Supercomputer",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "supercomputerName",
+            "in": "path",
+            "description": "The name of the Supercomputer",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeviceLogicalPortListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeviceLogicalPorts_ListBySupercomputer": {
+            "$ref": "./examples/DeviceLogicalPorts_ListBySupercomputer.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SupercomputerInfrastructure/supercomputers/{supercomputerName}/deviceLogicalPorts/{deviceLogicalPortName}": {
+      "get": {
+        "operationId": "DeviceLogicalPorts_Get",
+        "tags": [
+          "DeviceLogicalPorts"
+        ],
+        "description": "Get a DeviceLogicalPort",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "supercomputerName",
+            "in": "path",
+            "description": "The name of the Supercomputer",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "deviceLogicalPortName",
+            "in": "path",
+            "description": "The name of the DeviceLogicalPort",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeviceLogicalPort"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeviceLogicalPorts_Get": {
+            "$ref": "./examples/DeviceLogicalPorts_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SupercomputerInfrastructure/supercomputers/{supercomputerName}/links": {
+      "get": {
+        "operationId": "Links_ListBySupercomputer",
+        "tags": [
+          "Links"
+        ],
+        "description": "List Link resources by Supercomputer",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "supercomputerName",
+            "in": "path",
+            "description": "The name of the Supercomputer",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LinkListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Links_ListBySupercomputer": {
+            "$ref": "./examples/Links_ListBySupercomputer.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SupercomputerInfrastructure/supercomputers/{supercomputerName}/links/{linkName}": {
+      "get": {
+        "operationId": "Links_Get",
+        "tags": [
+          "Links"
+        ],
+        "description": "Get a Link",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "supercomputerName",
+            "in": "path",
+            "description": "The name of the Supercomputer",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "linkName",
+            "in": "path",
+            "description": "The name of the Link",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Link"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Links_Get": {
+            "$ref": "./examples/Links_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SupercomputerInfrastructure/supercomputers/{supercomputerName}/maintenanceRequests": {
+      "get": {
+        "operationId": "MaintenanceRequests_ListBySupercomputer",
+        "tags": [
+          "MaintenanceRequests"
+        ],
+        "description": "List MaintenanceRequest resources by Supercomputer",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "supercomputerName",
+            "in": "path",
+            "description": "The name of the Supercomputer",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceRequestListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MaintenanceRequests_ListBySupercomputer": {
+            "$ref": "./examples/MaintenanceRequests_ListBySupercomputer.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SupercomputerInfrastructure/supercomputers/{supercomputerName}/maintenanceRequests/{maintenanceRequestName}": {
+      "get": {
+        "operationId": "MaintenanceRequests_Get",
+        "tags": [
+          "MaintenanceRequests"
+        ],
+        "description": "Get a MaintenanceRequest",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "supercomputerName",
+            "in": "path",
+            "description": "The name of the Supercomputer",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "maintenanceRequestName",
+            "in": "path",
+            "description": "The name of the MaintenanceRequest",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,64}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceRequest"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MaintenanceRequests_Get": {
+            "$ref": "./examples/MaintenanceRequests_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "MaintenanceRequests_CreateOrUpdate",
+        "tags": [
+          "MaintenanceRequests"
+        ],
+        "description": "Create a MaintenanceRequest",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "supercomputerName",
+            "in": "path",
+            "description": "The name of the Supercomputer",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "maintenanceRequestName",
+            "in": "path",
+            "description": "The name of the MaintenanceRequest",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,64}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MaintenanceRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'MaintenanceRequest' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceRequest"
+            }
+          },
+          "201": {
+            "description": "Resource 'MaintenanceRequest' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceRequest"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MaintenanceRequests_CreateOrUpdate": {
+            "$ref": "./examples/MaintenanceRequests_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "MaintenanceRequests_Update",
+        "tags": [
+          "MaintenanceRequests"
+        ],
+        "description": "Update a MaintenanceRequest",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "supercomputerName",
+            "in": "path",
+            "description": "The name of the Supercomputer",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "maintenanceRequestName",
+            "in": "path",
+            "description": "The name of the MaintenanceRequest",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,64}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MaintenanceRequestUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceRequest"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MaintenanceRequests_Update": {
+            "$ref": "./examples/MaintenanceRequests_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "MaintenanceRequests_Delete",
+        "tags": [
+          "MaintenanceRequests"
+        ],
+        "description": "Delete a MaintenanceRequest",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "supercomputerName",
+            "in": "path",
+            "description": "The name of the Supercomputer",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "maintenanceRequestName",
+            "in": "path",
+            "description": "The name of the MaintenanceRequest",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,64}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MaintenanceRequests_Delete": {
+            "$ref": "./examples/MaintenanceRequests_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SupercomputerInfrastructure/supercomputers/{supercomputerName}/racks": {
+      "get": {
+        "operationId": "Racks_ListBySupercomputer",
+        "tags": [
+          "Racks"
+        ],
+        "description": "List Rack resources by Supercomputer",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "supercomputerName",
+            "in": "path",
+            "description": "The name of the Supercomputer",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RackListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Racks_ListBySupercomputer": {
+            "$ref": "./examples/Racks_ListBySupercomputer.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SupercomputerInfrastructure/supercomputers/{supercomputerName}/racks/{rackName}": {
+      "get": {
+        "operationId": "Racks_Get",
+        "tags": [
+          "Racks"
+        ],
+        "description": "Get a Rack",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "supercomputerName",
+            "in": "path",
+            "description": "The name of the Supercomputer",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "rackName",
+            "in": "path",
+            "description": "The name of the Rack",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Rack"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Racks_Get": {
+            "$ref": "./examples/Racks_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SupercomputerInfrastructure/supercomputers/{supercomputerName}/racks/{rackName}/nics": {
+      "get": {
+        "operationId": "Nics_ListByRack",
+        "tags": [
+          "Nics"
+        ],
+        "description": "List Nic resources by Rack",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "supercomputerName",
+            "in": "path",
+            "description": "The name of the Supercomputer",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "rackName",
+            "in": "path",
+            "description": "The name of the Rack",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NicListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Nics_ListByRack_MaximumSet": {
+            "$ref": "./examples/Nics_ListByRack.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SupercomputerInfrastructure/supercomputers/{supercomputerName}/racks/{rackName}/nics/{nicName}": {
+      "get": {
+        "operationId": "Nics_Get",
+        "tags": [
+          "Nics"
+        ],
+        "description": "Get a Nic",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "supercomputerName",
+            "in": "path",
+            "description": "The name of the Supercomputer",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "rackName",
+            "in": "path",
+            "description": "The name of the Rack",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "nicName",
+            "in": "path",
+            "description": "The name of the Nic",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Nic"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Nics_Get": {
+            "$ref": "./examples/Nics_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SupercomputerInfrastructure/supercomputers/{supercomputerName}/racks/{rackName}/nodes": {
+      "get": {
+        "operationId": "Nodes_ListByRack",
+        "tags": [
+          "Nodes"
+        ],
+        "description": "List Node resources by Rack",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "supercomputerName",
+            "in": "path",
+            "description": "The name of the Supercomputer",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "rackName",
+            "in": "path",
+            "description": "The name of the Rack",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NodeListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Nodes_ListByRack": {
+            "$ref": "./examples/Nodes_ListByRack.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SupercomputerInfrastructure/supercomputers/{supercomputerName}/racks/{rackName}/nodes/{nodeName}": {
+      "get": {
+        "operationId": "Nodes_Get",
+        "tags": [
+          "Nodes"
+        ],
+        "description": "Get a Node",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "supercomputerName",
+            "in": "path",
+            "description": "The name of the Supercomputer",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "rackName",
+            "in": "path",
+            "description": "The name of the Rack",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "nodeName",
+            "in": "path",
+            "description": "The name of the Node",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Node"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Nodes_Get": {
+            "$ref": "./examples/Nodes_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SupercomputerInfrastructure/supercomputers/{supercomputerName}/switches": {
+      "get": {
+        "operationId": "Switches_ListBySupercomputer",
+        "tags": [
+          "Switches"
+        ],
+        "description": "List Switch resources by Supercomputer",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "supercomputerName",
+            "in": "path",
+            "description": "The name of the Supercomputer",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SwitchListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Switches_ListBySupercomputer": {
+            "$ref": "./examples/Switches_ListBySupercomputer.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SupercomputerInfrastructure/supercomputers/{supercomputerName}/switches/{switchName}": {
+      "get": {
+        "operationId": "Switches_Get",
+        "tags": [
+          "Switches"
+        ],
+        "description": "Get a Switch",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "supercomputerName",
+            "in": "path",
+            "description": "The name of the Supercomputer",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "switchName",
+            "in": "path",
+            "description": "The name of the Switch",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Switch"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Switches_Get": {
+            "$ref": "./examples/Switches_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SupercomputerInfrastructure/supercomputers/{supercomputerName}/switches/{switchName}/packetCapture": {
+      "post": {
+        "operationId": "Switches_PacketCapture",
+        "tags": [
+          "Switches"
+        ],
+        "description": "A long-running resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "supercomputerName",
+            "in": "path",
+            "description": "The name of the Supercomputer",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "switchName",
+            "in": "path",
+            "description": "The name of the Switch",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SwitchPacketCaptureRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SwitchPacketCaptureResult"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Switches_PacketCapture": {
+            "$ref": "./examples/Switches_PacketCapture.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SupercomputerInfrastructure/supercomputers/{supercomputerName}/switches/{switchName}/retrieveData": {
+      "post": {
+        "operationId": "Switches_RetrieveData",
+        "tags": [
+          "Switches"
+        ],
+        "description": "A long-running resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "supercomputerName",
+            "in": "path",
+            "description": "The name of the Supercomputer",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "switchName",
+            "in": "path",
+            "description": "The name of the Switch",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SwitchRetrieveDataRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SwitchRetrieveDataResult"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Switches_RetrieveData": {
+            "$ref": "./examples/Switches_RetrieveData.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
+      "type": "object",
+      "title": "Tracked Resource",
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "Azure.ResourceManager.ResourceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource type.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "Cluster": {
+      "type": "object",
+      "description": "A logical cluster within a datacenter.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ClusterProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ClusterListResult": {
+      "type": "object",
+      "description": "The response of a Cluster list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Cluster items on this page",
+          "items": {
+            "$ref": "#/definitions/Cluster"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ClusterProperties": {
+      "type": "object",
+      "description": "The properties of a cluster.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/TopologicalProvisioningState",
+          "description": "The status of the last operation on this rack.",
+          "readOnly": true
+        }
+      }
+    },
+    "ClusterResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.SupercomputerInfrastructure/supercomputers/clusters"
+          }
+        ]
+      }
+    },
+    "DeviceLogicalPort": {
+      "type": "object",
+      "description": "A logical port that resides on a device in the network.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DeviceLogicalPortProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DeviceLogicalPortListResult": {
+      "type": "object",
+      "description": "The response of a DeviceLogicalPort list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DeviceLogicalPort items on this page",
+          "items": {
+            "$ref": "#/definitions/DeviceLogicalPort"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DeviceLogicalPortProperties": {
+      "type": "object",
+      "description": "The properties of a logical port.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/TopologicalProvisioningState",
+          "description": "The status of the last operation on this port.",
+          "readOnly": true
+        },
+        "busDeviceFunction": {
+          "type": "string",
+          "description": "The bus:device:function of the port.",
+          "readOnly": true
+        },
+        "deviceId": {
+          "$ref": "#/definitions/DeviceResourceId",
+          "description": "The Azure resource ID of the device (e.g., NIC or Switch) this port resides on.",
+          "readOnly": true
+        },
+        "macAddress": {
+          "type": "string",
+          "description": "The MAC address of the port.",
+          "readOnly": true
+        },
+        "nameOnDevice": {
+          "type": "string",
+          "description": "The port's name on the device (e.g., Ethernet 1/1).",
+          "readOnly": true
+        },
+        "linkId": {
+          "$ref": "#/definitions/LinkResourceId",
+          "description": "The Azure resource ID of the link that the port is interfaced with.",
+          "readOnly": true
+        },
+        "clusterId": {
+          "$ref": "#/definitions/ClusterResourceId",
+          "description": "The Azure resource ID of the cluster that the port is associated with, if any.",
+          "readOnly": true
+        }
+      }
+    },
+    "DeviceLogicalPortResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.SupercomputerInfrastructure/supercomputers/deviceLogicalPorts"
+          }
+        ]
+      }
+    },
+    "DeviceResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.SupercomputerInfrastructure/supercomputers/switches"
+          },
+          {
+            "type": "Microsoft.SupercomputerInfrastructure/supercomputers/racks/nics"
+          }
+        ]
+      }
+    },
+    "Link": {
+      "type": "object",
+      "description": "A network link between two devices within a datacenter.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LinkProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "LinkListResult": {
+      "type": "object",
+      "description": "The response of a Link list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Link items on this page",
+          "items": {
+            "$ref": "#/definitions/Link"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "LinkProperties": {
+      "type": "object",
+      "description": "The properties of a link.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/TopologicalProvisioningState",
+          "description": "The status of the last operation on this link",
+          "readOnly": true
+        },
+        "deviceOneId": {
+          "$ref": "#/definitions/DeviceResourceId",
+          "description": "The Azure resource ID of the first device connected via this network link.",
+          "readOnly": true
+        },
+        "deviceLogicalPortOneId": {
+          "$ref": "#/definitions/DeviceLogicalPortResourceId",
+          "description": "The Azure resource ID of the port that this network link is connected to the first device.",
+          "readOnly": true
+        },
+        "deviceTwoId": {
+          "$ref": "#/definitions/DeviceResourceId",
+          "description": "The Azure resource ID of the second device connected via this network link.",
+          "readOnly": true
+        },
+        "deviceLogicalPortTwoId": {
+          "$ref": "#/definitions/DeviceLogicalPortResourceId",
+          "description": "The Azure resource ID of the port that this network link is connected to the second device.",
+          "readOnly": true
+        },
+        "planeId": {
+          "type": "string",
+          "description": "The ID of the plane that this link is associated with.",
+          "readOnly": true
+        },
+        "clusterId": {
+          "$ref": "#/definitions/ClusterResourceId",
+          "description": "The Azure resource ID of the cluster that the rack is associated with, if any.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "deviceOneId"
+      ]
+    },
+    "LinkResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.SupercomputerInfrastructure/supercomputers/links"
+          }
+        ]
+      }
+    },
+    "MaintenanceRequest": {
+      "type": "object",
+      "description": "A maintenance request on resource(s) that can be requested and approved.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MaintenanceRequestProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "MaintenanceRequestImpactCategory": {
+      "type": "string",
+      "description": "The types of impact covered by maintenance requests.",
+      "enum": [
+        "EthLinkMiswire",
+        "EthLinkUnhealthy",
+        "EthNicUnhealthy",
+        "EthPortDown",
+        "EthLinkFlap",
+        "EthPortRxLowPower",
+        "EthPortTxLowPower",
+        "EthPortUnhealthy",
+        "EthSwitchDown",
+        "EthSwitchUnhealthy"
+      ],
+      "x-ms-enum": {
+        "name": "MaintenanceRequestImpactCategory",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "EthLinkMiswire",
+            "value": "EthLinkMiswire",
+            "description": "The link is miswired between two devices."
+          },
+          {
+            "name": "EthLinkUnhealthy",
+            "value": "EthLinkUnhealthy",
+            "description": "The referenced link has unspecified performance issues."
+          },
+          {
+            "name": "EthNicUnhealthy",
+            "value": "EthNicUnhealthy",
+            "description": "The referenced NIC has unspecified issues."
+          },
+          {
+            "name": "EthPortDown",
+            "value": "EthPortDown",
+            "description": "The referenced port is completely down."
+          },
+          {
+            "name": "EthLinkFlap",
+            "value": "EthLinkFlap",
+            "description": "The referenced link is flapping."
+          },
+          {
+            "name": "EthPortRxLowPower",
+            "value": "EthPortRxLowPower",
+            "description": "The referenced port is receiving low Rx power."
+          },
+          {
+            "name": "EthPortTxLowPower",
+            "value": "EthPortTxLowPower",
+            "description": "The referenced port is receiving low Tx power."
+          },
+          {
+            "name": "EthPortUnhealthy",
+            "value": "EthPortUnhealthy",
+            "description": "The referenced port has unspecified performance issues, such as packet drops."
+          },
+          {
+            "name": "EthSwitchDown",
+            "value": "EthSwitchDown",
+            "description": "The referenced switch is completely down."
+          },
+          {
+            "name": "EthSwitchUnhealthy",
+            "value": "EthSwitchUnhealthy",
+            "description": "The referenced switch has unspecified issues, such as a low buffer."
+          }
+        ]
+      }
+    },
+    "MaintenanceRequestListResult": {
+      "type": "object",
+      "description": "The response of a MaintenanceRequest list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The MaintenanceRequest items on this page",
+          "items": {
+            "$ref": "#/definitions/MaintenanceRequest"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "MaintenanceRequestProperties": {
+      "type": "object",
+      "description": "The properties of a maintenance request.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "A customizable description of the maintenance request."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The status of the last operation on the maintenance request.",
+          "readOnly": true
+        },
+        "maintenanceRequestType": {
+          "$ref": "#/definitions/MaintenanceRequestType",
+          "description": "The type of the maintenance request",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "state": {
+          "$ref": "#/definitions/MaintenanceRequestState",
+          "description": "The current state of the maintenance request in the encompassing workflow.\nCustomers can only create a maintenance request with \"Investigating\" or\n\"Approved\" state, and can only update this from \"WaitingForApproval\" to \"Approved\"."
+        },
+        "unhealthyResources": {
+          "type": "array",
+          "description": "The Azure resource IDs of the entities that are reported to be unhealthy.",
+          "items": {
+            "$ref": "#/definitions/ReportableWithinMaintenanceRequestResourceId"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "impactCategory": {
+          "$ref": "#/definitions/MaintenanceRequestImpactCategory",
+          "description": "The impact seen to cause this maintenance request.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "repairedResources": {
+          "type": "array",
+          "description": "The Azure resource IDs of the entities that are repaired through this request.",
+          "items": {
+            "$ref": "#/definitions/ReportableWithinMaintenanceRequestResourceId"
+          },
+          "readOnly": true
+        },
+        "repairCategory": {
+          "$ref": "#/definitions/MaintenanceRequestRepairCategory",
+          "description": "The category of repair on the repaired resources.",
+          "readOnly": true
+        },
+        "workloadImpactId": {
+          "$ref": "#/definitions/WorkloadImpactResourceId",
+          "description": "The Azure Resource ID of the workload impact resource,\nif created through the Impact RP workflow.",
+          "readOnly": true
+        },
+        "impactedResources": {
+          "type": "array",
+          "description": "The ARM resource IDs of the entities impacted by this maintenance request.",
+          "items": {
+            "$ref": "#/definitions/ReportableWithinMaintenanceRequestResourceId"
+          },
+          "readOnly": true
+        },
+        "duplicateRequestId": {
+          "$ref": "#/definitions/MaintenanceRequestResourceId",
+          "description": "The ID of the duplicate maintenance request, if this is a duplicate.",
+          "readOnly": true
+        },
+        "clusterId": {
+          "$ref": "#/definitions/ClusterResourceId",
+          "description": "The cluster that the maintenance request is associated with, if any.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "description",
+        "maintenanceRequestType",
+        "state",
+        "unhealthyResources",
+        "impactCategory"
+      ]
+    },
+    "MaintenanceRequestPropertiesUpdate": {
+      "type": "object",
+      "description": "The properties of a maintenance request.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "A customizable description of the maintenance request."
+        },
+        "state": {
+          "$ref": "#/definitions/MaintenanceRequestState",
+          "description": "The current state of the maintenance request in the encompassing workflow.\nCustomers can only create a maintenance request with \"Investigating\" or\n\"Approved\" state, and can only update this from \"WaitingForApproval\" to \"Approved\"."
+        }
+      }
+    },
+    "MaintenanceRequestRepairCategory": {
+      "type": "string",
+      "description": "The types of repair covered by maintenance requests.",
+      "enum": [
+        "HumanInvestigate",
+        "OsUpgrade",
+        "PowerCycle",
+        "Restart",
+        "RMA",
+        "ReplaceNic",
+        "ReplaceCable"
+      ],
+      "x-ms-enum": {
+        "name": "MaintenanceRequestRepairCategory",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "HumanInvestigate",
+            "value": "HumanInvestigate",
+            "description": "The repair needs human investigation."
+          },
+          {
+            "name": "OsUpgrade",
+            "value": "OsUpgrade",
+            "description": "The operating system needs to be upgraded."
+          },
+          {
+            "name": "PowerCycle",
+            "value": "PowerCycle",
+            "description": "A power cycle is required."
+          },
+          {
+            "name": "Restart",
+            "value": "Restart",
+            "description": "A restart without power cycle is required."
+          },
+          {
+            "name": "RMA",
+            "value": "RMA",
+            "description": "The repair involves an RMA on a device."
+          },
+          {
+            "name": "ReplaceNic",
+            "value": "ReplaceNic",
+            "description": "A NIC needs to be replaced."
+          },
+          {
+            "name": "ReplaceCable",
+            "value": "ReplaceCable",
+            "description": "A cable needs to be replaced."
+          }
+        ]
+      }
+    },
+    "MaintenanceRequestResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.SupercomputerInfrastructure/supercomputers/maintenanceRequests"
+          }
+        ]
+      }
+    },
+    "MaintenanceRequestState": {
+      "type": "string",
+      "description": "The states of the maintenance request",
+      "enum": [
+        "Created",
+        "Investigating",
+        "Duplicate",
+        "WaitingOnApproval",
+        "Approved",
+        "InProgress",
+        "Complete",
+        "Cancelled"
+      ],
+      "x-ms-enum": {
+        "name": "MaintenanceRequestState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Created",
+            "value": "Created",
+            "description": "The maintenance request has been created."
+          },
+          {
+            "name": "Investigating",
+            "value": "Investigating",
+            "description": "The maintenance request is being investigated by Microsoft."
+          },
+          {
+            "name": "Duplicate",
+            "value": "Duplicate",
+            "description": "The maintenance request is a duplicate of another maintenance request\nthat is mentioned in network maintenance ID."
+          },
+          {
+            "name": "WaitingOnApproval",
+            "value": "WaitingOnApproval",
+            "description": "The maintenance request is waiting on customer approval to continue."
+          },
+          {
+            "name": "Approved",
+            "value": "Approved",
+            "description": "The maintenance request is approved by the customer."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "The maintenance request is currently underway."
+          },
+          {
+            "name": "Complete",
+            "value": "Complete",
+            "description": "The maintenance request is complete."
+          },
+          {
+            "name": "Cancelled",
+            "value": "Cancelled",
+            "description": "The maintenance request is cancelled."
+          }
+        ]
+      }
+    },
+    "MaintenanceRequestType": {
+      "type": "string",
+      "description": "The type of maintenance request.",
+      "enum": [
+        "Investigative",
+        "Unhealthy"
+      ],
+      "x-ms-enum": {
+        "name": "MaintenanceRequestType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Investigative",
+            "value": "Investigative",
+            "description": "It is unknown exactly what the problem is, and Microsoft should investigate\nand return with action items."
+          },
+          {
+            "name": "Unhealthy",
+            "value": "Unhealthy",
+            "description": "It is known what action items should be completed and Microsoft should\nonly perform that as directed."
+          }
+        ]
+      }
+    },
+    "MaintenanceRequestUpdate": {
+      "type": "object",
+      "description": "A maintenance request on resource(s) that can be requested and approved.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MaintenanceRequestPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "Nic": {
+      "type": "object",
+      "description": "A NIC (Network Interface Card) within a rack.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NicProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "NicListResult": {
+      "type": "object",
+      "description": "The response of a Nic list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Nic items on this page",
+          "items": {
+            "$ref": "#/definitions/Nic"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "NicProperties": {
+      "type": "object",
+      "description": "The properties of a NIC.",
+      "properties": {
+        "hardwareSku": {
+          "type": "string",
+          "description": "The SKU of the physical NIC hardware.",
+          "readOnly": true
+        },
+        "macAddress": {
+          "type": "string",
+          "description": "The MAC address of the NIC.",
+          "readOnly": true
+        },
+        "parentDeviceId": {
+          "$ref": "#/definitions/NodeResourceId",
+          "description": "The Azure resource ID of the device that the NIC resides within.",
+          "readOnly": true
+        },
+        "busDeviceFunction": {
+          "type": "string",
+          "description": "The bus:device:function of the NIC.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/TopologicalProvisioningState",
+          "description": "The status of the last operation on this NIC.",
+          "readOnly": true
+        }
+      }
+    },
+    "Node": {
+      "type": "object",
+      "description": "A node (baremetal compute resource) within a rack.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NodeProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "NodeListResult": {
+      "type": "object",
+      "description": "The response of a Node list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Node items on this page",
+          "items": {
+            "$ref": "#/definitions/Node"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "NodeProperties": {
+      "type": "object",
+      "description": "The properties of a node.",
+      "properties": {
+        "assetId": {
+          "type": "string",
+          "description": "The asset ID of the node.",
+          "readOnly": true
+        },
+        "hardwareSku": {
+          "type": "string",
+          "description": "The SKU of the physical node hardware.",
+          "readOnly": true
+        },
+        "hostname": {
+          "type": "string",
+          "description": "The hostname of the node in the logical network.",
+          "readOnly": true
+        },
+        "nodeId": {
+          "type": "string",
+          "description": "The unique identifier of the logical node.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/TopologicalProvisioningState",
+          "description": "The status of the last operation on this node.",
+          "readOnly": true
+        }
+      }
+    },
+    "NodeResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.SupercomputerInfrastructure/supercomputers/racks/nodes"
+          }
+        ]
+      }
+    },
+    "Rack": {
+      "type": "object",
+      "description": "A rack within a datacenter.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RackProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "RackListResult": {
+      "type": "object",
+      "description": "The response of a Rack list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Rack items on this page",
+          "items": {
+            "$ref": "#/definitions/Rack"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "RackProperties": {
+      "type": "object",
+      "description": "The properties of a rack.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/TopologicalProvisioningState",
+          "description": "The status of the last operation on this rack.",
+          "readOnly": true
+        },
+        "clusterId": {
+          "$ref": "#/definitions/ClusterResourceId",
+          "description": "The Azure resource ID of the cluster that the rack is associated with, if any.",
+          "readOnly": true
+        }
+      }
+    },
+    "RackResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.SupercomputerInfrastructure/supercomputers/racks"
+          }
+        ]
+      }
+    },
+    "ReportableWithinMaintenanceRequestResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.SupercomputerInfrastructure/supercomputers/clusters"
+          },
+          {
+            "type": "Microsoft.SupercomputerInfrastructure/supercomputers/switches"
+          },
+          {
+            "type": "Microsoft.SupercomputerInfrastructure/supercomputers/racks/nics"
+          },
+          {
+            "type": "Microsoft.SupercomputerInfrastructure/supercomputers/links"
+          },
+          {
+            "type": "Microsoft.SupercomputerInfrastructure/supercomputers/racks/nodes"
+          },
+          {
+            "type": "Microsoft.SupercomputerInfrastructure/supercomputers/deviceLogicalPorts"
+          },
+          {
+            "type": "Microsoft.Compute/virtualMachines"
+          }
+        ]
+      }
+    },
+    "Supercomputer": {
+      "type": "object",
+      "description": "A supercomputer composed of topological entities.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SupercomputerProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "SupercomputerListResult": {
+      "type": "object",
+      "description": "The response of a Supercomputer list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Supercomputer items on this page",
+          "items": {
+            "$ref": "#/definitions/Supercomputer"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SupercomputerProperties": {
+      "type": "object",
+      "description": "The properties of a supercomputer.",
+      "properties": {
+        "siteId": {
+          "type": "string",
+          "description": "The identifier of the physical site where the supercomputer hardware is located.",
+          "readOnly": true
+        },
+        "tier": {
+          "$ref": "#/definitions/SupercomputerTier",
+          "description": "The SKU of the supercomputer.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/SupercomputerProvisioningState",
+          "description": "The status of the last operation on the supercomputer.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "tier"
+      ]
+    },
+    "SupercomputerPropertiesUpdate": {
+      "type": "object",
+      "description": "The properties of a supercomputer."
+    },
+    "SupercomputerProvisioningState": {
+      "type": "string",
+      "description": "The resource provisioning state.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Accepted",
+        "Provisioning",
+        "Validating",
+        "Updating",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "SupercomputerProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource operation has been accepted."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is currently being provisioned."
+          },
+          {
+            "name": "Validating",
+            "value": "Validating",
+            "description": "The resource is currently being validated."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is currently being updated."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is currently being deleted."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "SupercomputerTier": {
+      "type": "string",
+      "description": "The available tiers of supercomputers.",
+      "enum": [
+        "Fairwater"
+      ],
+      "x-ms-enum": {
+        "name": "SupercomputerTier",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Fairwater",
+            "value": "Fairwater",
+            "description": "A supercomputer in a Fairwater site."
+          }
+        ]
+      }
+    },
+    "SupercomputerUpdate": {
+      "type": "object",
+      "description": "A supercomputer composed of topological entities.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SupercomputerPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
+    },
+    "Switch": {
+      "type": "object",
+      "description": "A switch in the network.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SwitchProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SwitchListResult": {
+      "type": "object",
+      "description": "The response of a Switch list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Switch items on this page",
+          "items": {
+            "$ref": "#/definitions/Switch"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SwitchNetworkType": {
+      "type": "string",
+      "description": "The type of the network the switch resides in.",
+      "enum": [
+        "BackendScaleUp",
+        "BackendScaleOut",
+        "Frontend"
+      ],
+      "x-ms-enum": {
+        "name": "SwitchNetworkType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "BackendScaleUp",
+            "value": "BackendScaleUp",
+            "description": "The switch is within a scale-up backend network."
+          },
+          {
+            "name": "BackendScaleOut",
+            "value": "BackendScaleOut",
+            "description": "The switch is within a scale-out backend network."
+          },
+          {
+            "name": "Frontend",
+            "value": "Frontend",
+            "description": "The switch is within a frontend network."
+          }
+        ]
+      }
+    },
+    "SwitchPacketCaptureMatchRule": {
+      "type": "object",
+      "description": "A match rule to filter packets upon capture.",
+      "properties": {
+        "destinationIpPrefix": {
+          "type": "string",
+          "description": "The allowed destination prefix of the packets to capture."
+        },
+        "destinationPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The allowed destination port of the packets to capture."
+        },
+        "dscp": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The differentiated services code point (DSCP) of the packets to match."
+        },
+        "protocol": {
+          "$ref": "#/definitions/SwitchPacketCaptureMatchRuleProtocol",
+          "description": "The header protocol of the packets to capture."
+        },
+        "sourceIpPrefix": {
+          "type": "string",
+          "description": "The allowed source prefix of the packets to capture."
+        },
+        "sourcePort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The allowed source port of the packets to capture."
+        },
+        "tcpFlags": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The TCP flags of the packets to capture."
+        }
+      }
+    },
+    "SwitchPacketCaptureMatchRuleProtocol": {
+      "type": "string",
+      "description": "The available header protocols for packet captures.",
+      "enum": [
+        "Ipv4",
+        "Ipv6",
+        "Tcp",
+        "Udp",
+        "Icmp"
+      ],
+      "x-ms-enum": {
+        "name": "SwitchPacketCaptureMatchRuleProtocol",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Ipv4",
+            "value": "Ipv4",
+            "description": "Match over IPv4 headers."
+          },
+          {
+            "name": "Ipv6",
+            "value": "Ipv6",
+            "description": "Match over IPv6 headers."
+          },
+          {
+            "name": "Tcp",
+            "value": "Tcp",
+            "description": "Match over TCP headers."
+          },
+          {
+            "name": "Udp",
+            "value": "Udp",
+            "description": "Match over UDP headers."
+          },
+          {
+            "name": "Icmp",
+            "value": "Icmp",
+            "description": "Match over ICMP headers."
+          }
+        ]
+      }
+    },
+    "SwitchPacketCaptureRequest": {
+      "type": "object",
+      "description": "The request body for a packet capture action over a switch.",
+      "properties": {
+        "destinationLocation": {
+          "type": "string",
+          "description": "The location to store captured packets, such as a Storage Account Blob URI."
+        },
+        "durationInSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The duration of the packet capture in seconds."
+        },
+        "interfaces": {
+          "type": "array",
+          "description": "The interfaces over which to capture packets.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "matchRules": {
+          "type": "array",
+          "description": "The match rules to apply to the packet capture.",
+          "items": {
+            "$ref": "#/definitions/SwitchPacketCaptureMatchRule"
+          },
+          "x-ms-identifiers": []
+        },
+        "trafficDirection": {
+          "$ref": "#/definitions/SwitchPacketCaptureTrafficDirection",
+          "description": "The traffic direction to capture."
+        }
+      },
+      "required": [
+        "destinationLocation",
+        "durationInSeconds",
+        "interfaces",
+        "matchRules",
+        "trafficDirection"
+      ]
+    },
+    "SwitchPacketCaptureResult": {
+      "type": "object",
+      "description": "The result of a packet capture action over a switch.",
+      "properties": {
+        "faultCode": {
+          "type": "string",
+          "description": "The fault code, if the operation failed."
+        },
+        "faultMessage": {
+          "type": "string",
+          "description": "The fault message, if the operation failed."
+        },
+        "status": {
+          "$ref": "#/definitions/SwitchPacketCaptureResultStatus",
+          "description": "The status of the packet capture action."
+        }
+      },
+      "required": [
+        "status"
+      ]
+    },
+    "SwitchPacketCaptureResultStatus": {
+      "type": "string",
+      "description": "The status of a packet capture action over a switch.",
+      "enum": [
+        "Accepted",
+        "Running",
+        "Succeeded",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "SwitchPacketCaptureResultStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The packet capture request has been accepted."
+          },
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "The packet capture is still in progress."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The packet capture completed successfully."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The packet capture failed."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "SwitchPacketCaptureTrafficDirection": {
+      "type": "string",
+      "description": "The traffic directions to filter over when performing packet capture.",
+      "enum": [
+        "All",
+        "Egress",
+        "Ingress"
+      ],
+      "x-ms-enum": {
+        "name": "SwitchPacketCaptureTrafficDirection",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "All",
+            "value": "All",
+            "description": "Match all traffic."
+          },
+          {
+            "name": "Egress",
+            "value": "Egress",
+            "description": "Match only egress traffic from the switch."
+          },
+          {
+            "name": "Ingress",
+            "value": "Ingress",
+            "description": "Match only ingress traffic to the switch."
+          }
+        ]
+      }
+    },
+    "SwitchProperties": {
+      "type": "object",
+      "description": "The properties of a switch.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/TopologicalProvisioningState",
+          "description": "The status of the last operation on this switch",
+          "readOnly": true
+        },
+        "hardwareSku": {
+          "type": "string",
+          "description": "The SKU of the switch hardware.",
+          "readOnly": true
+        },
+        "networkType": {
+          "$ref": "#/definitions/SwitchNetworkType",
+          "description": "The network type of the switch.",
+          "readOnly": true
+        },
+        "clusterId": {
+          "$ref": "#/definitions/ClusterResourceId",
+          "description": "The Azure resource ID of the cluster that the switch is associated with, if any.",
+          "readOnly": true
+        },
+        "rackId": {
+          "$ref": "#/definitions/RackResourceId",
+          "description": "The Azure resource ID of the rack that the switch is associated with, if any.",
+          "readOnly": true
+        }
+      }
+    },
+    "SwitchRetrieveDataOutput": {
+      "type": "object",
+      "description": "The output of a retrieve data action over a switch.",
+      "properties": {
+        "faultCode": {
+          "type": "string",
+          "description": "The fault code, if the operation failed."
+        },
+        "faultMessage": {
+          "type": "string",
+          "description": "The fault message, if the operation failed."
+        },
+        "path": {
+          "type": "string",
+          "description": "The gNMI path of the read operation."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the read operation."
+        }
+      },
+      "required": [
+        "path",
+        "value"
+      ]
+    },
+    "SwitchRetrieveDataRequest": {
+      "type": "object",
+      "description": "The request body a retrieve data action over a switch.",
+      "properties": {
+        "paths": {
+          "type": "array",
+          "description": "The gNMI paths of the read operation.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "paths"
+      ]
+    },
+    "SwitchRetrieveDataResult": {
+      "type": "object",
+      "description": "The result of a retrieve data action over a switch.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The value of the retrieve data action.",
+          "items": {
+            "$ref": "#/definitions/SwitchRetrieveDataOutput"
+          },
+          "x-ms-identifiers": [
+            "path",
+            "value"
+          ]
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "TopologicalProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state for any topological element in a supercomputer",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Updating"
+      ],
+      "x-ms-enum": {
+        "name": "TopologicalProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is currently being updated"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "WorkloadImpactResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.Impact/workloadImpacts"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}

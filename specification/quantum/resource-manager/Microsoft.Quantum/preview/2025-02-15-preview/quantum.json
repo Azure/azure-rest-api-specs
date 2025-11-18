@@ -1316,6 +1316,15 @@
           "description": "The display name of the Azure subscription.",
           "default": "",
           "maxLength": 50
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates whether this subscription is enabled for access to the ProviderAccount resources.",
+          "default": true
+        },
+        "quotas": {
+          "$ref": "#/definitions/ProviderAccount.SubscriptionQuotaAllocations",
+          "description": "Quota allocations for this subscription."
         }
       },
       "required": [
@@ -1395,6 +1404,27 @@
       "minLength": 36,
       "maxLength": 36,
       "pattern": "^[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$"
+    },
+    "ProviderAccount.SubscriptionQuotaAllocations": {
+      "type": "object",
+      "description": "Quota allocations with each field representing different quota type.",
+      "properties": {
+        "standardMinutesLifetime": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Limit for standard priority jobs execution in minutes for a lifetime of the subscription.",
+          "minimum": 0
+        },
+        "highMinutesLifetime": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Limit for high priority jobs execution in minutes for a lifetime of the subscription.",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "standardMinutesLifetime"
+      ]
     },
     "ProviderDescription": {
       "type": "object",

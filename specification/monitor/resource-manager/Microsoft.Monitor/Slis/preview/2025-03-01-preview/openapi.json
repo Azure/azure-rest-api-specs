@@ -224,101 +224,9 @@
           }
         }
       }
-    },
-    "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.Monitor/slis/{sliName}/signalPreview": {
-      "post": {
-        "operationId": "Slis_SignalPreview",
-        "tags": [
-          "Slis"
-        ],
-        "description": "Returns preview data for the signal.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ServiceGroupBaseParameters"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "sliName",
-            "in": "path",
-            "description": "Name of the SLI that is given by the user.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-_()~]{3,64}$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The content of the action request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Signal"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Azure operation completed successfully."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SignalPreview": {
-            "$ref": "./examples/Slis_SignalPreview.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
-    "AggregationType": {
-      "type": "string",
-      "description": "Defines the available aggregation types.",
-      "enum": [
-        "Average",
-        "Min",
-        "Max",
-        "Sum",
-        "Count"
-      ],
-      "x-ms-enum": {
-        "name": "AggregationType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Average",
-            "value": "Average",
-            "description": "Average value."
-          },
-          {
-            "name": "Min",
-            "value": "Min",
-            "description": "Minimum value."
-          },
-          {
-            "name": "Max",
-            "value": "Max",
-            "description": "Maximum value."
-          },
-          {
-            "name": "Sum",
-            "value": "Sum",
-            "description": "Summation."
-          },
-          {
-            "name": "Count",
-            "value": "Count",
-            "description": "Count of occurrences."
-          }
-        ]
-      }
-    },
     "AmwAccount": {
       "type": "object",
       "description": "Represents an Azure Monitor Workspace (AMW) account used for emitting metrics.",
@@ -389,17 +297,12 @@
         "evaluationCalculationType": {
           "$ref": "#/definitions/EvaluationCalculationType",
           "description": "Specifies how evaluation is calculated, either based on calendar days or a rolling window."
-        },
-        "enableAlert": {
-          "type": "boolean",
-          "description": "A flag to determine whether alert is enabled."
         }
       },
       "required": [
         "value",
         "evaluationPeriodDays",
-        "evaluationCalculationType",
-        "enableAlert"
+        "evaluationCalculationType"
       ]
     },
     "BaselineProperties": {
@@ -810,7 +713,8 @@
         "metricNamespace",
         "metricName",
         "filters",
-        "spatialAggregation"
+        "spatialAggregation",
+        "temporalAggregation"
       ]
     },
     "Sli": {
@@ -887,7 +791,7 @@
         "description": {
           "type": "string",
           "description": "A user-provided description of the SLI, with a maximum length of 1000 characters.",
-          "pattern": "^.{3,1000}$"
+          "pattern": "^[\\s\\S]{0,1000}$"
         },
         "category": {
           "$ref": "#/definitions/Category",
@@ -938,6 +842,10 @@
           "description": "The streaming rule last updated timestamp associated with the Sli resource.",
           "readOnly": true
         },
+        "enableAlert": {
+          "type": "boolean",
+          "description": "A flag to determine whether alert is enabled."
+        },
         "sliProperties": {
           "$ref": "#/definitions/SliProperties",
           "description": "Defines the SLI properties associated with the SLI."
@@ -953,6 +861,7 @@
         "baselineProperties",
         "streamingRuleId",
         "streamingRuleLastUpdatedTimestamp",
+        "enableAlert",
         "sliProperties"
       ]
     },
@@ -961,7 +870,7 @@
       "description": "Represents the spatial aggregation model.",
       "properties": {
         "type": {
-          "$ref": "#/definitions/AggregationType",
+          "$ref": "#/definitions/SpatialAggregationType",
           "description": "Type of spatial aggregation."
         },
         "dimensions": {
@@ -977,12 +886,54 @@
         "dimensions"
       ]
     },
+    "SpatialAggregationType": {
+      "type": "string",
+      "description": "Defines the available aggregation types.",
+      "enum": [
+        "Average",
+        "Min",
+        "Max",
+        "Sum",
+        "Count"
+      ],
+      "x-ms-enum": {
+        "name": "SpatialAggregationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Average",
+            "value": "Average",
+            "description": "Average value."
+          },
+          {
+            "name": "Min",
+            "value": "Min",
+            "description": "Minimum value."
+          },
+          {
+            "name": "Max",
+            "value": "Max",
+            "description": "Maximum value."
+          },
+          {
+            "name": "Sum",
+            "value": "Sum",
+            "description": "Summation."
+          },
+          {
+            "name": "Count",
+            "value": "Count",
+            "description": "Count of occurrences."
+          }
+        ]
+      }
+    },
     "TemporalAggregation": {
       "type": "object",
       "description": "Represents temporal aggregation settings.",
       "properties": {
         "type": {
-          "$ref": "#/definitions/AggregationType",
+          "$ref": "#/definitions/TemporalAggregationType",
           "description": "Type of temporal aggregation."
         },
         "windowSizeMinutes": {
@@ -992,9 +943,74 @@
         }
       },
       "required": [
-        "type",
-        "windowSizeMinutes"
+        "type"
       ]
+    },
+    "TemporalAggregationType": {
+      "type": "string",
+      "description": "Defines the available aggregation types.",
+      "enum": [
+        "Average",
+        "Min",
+        "Max",
+        "Sum",
+        "Rate",
+        "IRate",
+        "Delta",
+        "IDelta",
+        "Increase"
+      ],
+      "x-ms-enum": {
+        "name": "TemporalAggregationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Average",
+            "value": "Average",
+            "description": "Average value."
+          },
+          {
+            "name": "Min",
+            "value": "Min",
+            "description": "Minimum value."
+          },
+          {
+            "name": "Max",
+            "value": "Max",
+            "description": "Maximum value."
+          },
+          {
+            "name": "Sum",
+            "value": "Sum",
+            "description": "Summation."
+          },
+          {
+            "name": "Rate",
+            "value": "Rate",
+            "description": "Rate over time."
+          },
+          {
+            "name": "IRate",
+            "value": "IRate",
+            "description": "Instance rate."
+          },
+          {
+            "name": "Delta",
+            "value": "Delta",
+            "description": "Delta over time."
+          },
+          {
+            "name": "IDelta",
+            "value": "IDelta",
+            "description": "Instance delta."
+          },
+          {
+            "name": "Increase",
+            "value": "Increase",
+            "description": "Increase over time."
+          }
+        ]
+      }
     },
     "WindowUptimeCriteria": {
       "type": "object",
@@ -1003,8 +1019,7 @@
         "target": {
           "type": "number",
           "format": "float",
-          "description": "Threshold value used to determine uptime.",
-          "minimum": 0
+          "description": "Threshold value used to determine uptime."
         },
         "comparator": {
           "$ref": "#/definitions/WindowUptimeCriteriaComparator",

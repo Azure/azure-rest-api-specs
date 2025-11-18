@@ -16,7 +16,6 @@ namespace Microsoft.CompositeSolutions;
 @doc("Supported API versions for the Microsoft.CompositeSolutions resource provider.")
 enum Versions {
   @doc("The 2024-03-01-preview version.")
-  @Versioning.useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   v2024_03_01_preview: "2024-03-01-preview",
 }
 
@@ -90,12 +89,12 @@ model CompositeSolutionDefinitionProperties {
 
   @visibility(Lifecycle.Read)
   @doc("Parameters for the composite solution")
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   parameters?: Array<Parameter>;
 
   @visibility(Lifecycle.Read)
   @doc("Credentials for the composite solution")
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   credentials?: Array<Credential>;
 
   @visibility(Lifecycle.Read)
@@ -124,7 +123,7 @@ model CompositeSolutionProperties {
 
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("Bundle Parameters.")
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   parameters: Array<ParameterValue>;
 
   // This isn't actually a secret, but a reference to a secret in AKV, so is it safe to return back in the read request?
@@ -334,6 +333,7 @@ model BundleProfile {
 interface CompositeSolutions {
   get is ArmResourceRead<CompositeSolution>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<CompositeSolution>;
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<CompositeSolution, CompositeSolutionUpdate1>;
   delete is ArmResourceDeleteWithoutOkAsync<CompositeSolution>;
   listByResourceGroup is ArmResourceListByParent<CompositeSolution>;
@@ -349,6 +349,7 @@ interface CompositeSolutions {
 interface CompositeSolutionDefinitions {
   get is ArmResourceRead<CompositeSolutionDefinition>;
   createOrUpdate is ArmResourceCreateOrReplaceSync<CompositeSolutionDefinition>;
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     CompositeSolutionDefinition,
     CompositeSolutionDefinitionUpdate

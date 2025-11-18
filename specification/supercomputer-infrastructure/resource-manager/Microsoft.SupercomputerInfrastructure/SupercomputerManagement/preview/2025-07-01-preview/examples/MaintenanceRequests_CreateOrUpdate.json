@@ -1,0 +1,90 @@
+{
+  "title": "MaintenanceRequests_CreateOrUpdate",
+  "operationId": "MaintenanceRequests_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "MyResourceGroup",
+    "supercomputerName": "MySupercomputer",
+    "maintenanceRequestName": "MyMaintenanceRequest",
+    "resource": {
+      "properties": {
+        "description": "Link down, please replace.",
+        "maintenanceRequestType": "Unhealthy",
+        "state": "Approved",
+        "unhealthyResources": [
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyResourceGroup/providers/Microsoft.SupercomputerInfrastructure/supercomputers/MySupercomputer/clusters/ABC0000000/links/c7bac46904be785cd0c965bf"
+        ],
+        "impactCategory": "LinkUnhealthy"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "description": "Link down, please replace.",
+          "provisioningState": "Succeeded",
+          "maintenanceRequestType": "Unhealthy",
+          "state": "Approved",
+          "unhealthyResources": [
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyResourceGroup/providers/Microsoft.SupercomputerInfrastructure/supercomputers/MySupercomputer/clusters/ABC0000000/links/c7bac46904be785cd0c965bf"
+          ],
+          "impactCategory": "EthLinkUnhealthy",
+          "workloadImpactId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyResourceGroup/providers/Microsoft.Impact/workloadImpacts/ABCDEF",
+          "impactedResources": [
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyResourceGroup/providers/Microsoft.SupercomputerInfrastructure/supercomputers/MySupercomputer/switches/0000-0000-00t0",
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyResourceGroup/providers/Microsoft.SupercomputerInfrastructure/supercomputers/MySupercomputer/links/c7bac46904be785cd0c965bf",
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyResourceGroup/providers/Microsoft.SupercomputerInfrastructure/supercomputers/MySupercomputer/nodes/012345678"
+          ],
+          "clusterId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyResourceGroup/providers/Microsoft.SupercomputerInfrastructure/supercomputers/MySupercomputer/clusters/ABC0000000"
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyResourceGroup/providers/Microsoft.SupercomputerInfrastructure/supercomputers/MySupercomputer/maintenanceRequests/MyMaintenanceRequest",
+        "name": "MyMaintenanceRequest",
+        "type": "Microsoft.SupercomputerInfrastructure/supercomputers/maintenanceRequests",
+        "systemData": {
+          "createdBy": "Supercomputer User",
+          "createdByType": "User",
+          "createdAt": "2025-01-01T00:00:00.000Z",
+          "lastModifiedBy": "Supercomputer User",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-01-01T00:00:00.000Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+      },
+      "body": {
+        "properties": {
+          "description": "Link down, please replace.",
+          "provisioningState": "Succeeded",
+          "maintenanceRequestType": "Unhealthy",
+          "state": "Approved",
+          "unhealthyResources": [
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyResourceGroup/providers/Microsoft.SupercomputerInfrastructure/supercomputers/MySupercomputer/clusters/ABC0000000/links/c7bac46904be785cd0c965bf"
+          ],
+          "impactCategory": "LinkUnhealthy",
+          "impactedResources": [
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyResourceGroup/providers/Microsoft.SupercomputerInfrastructure/supercomputers/MySupercomputer/switches/0000-0000-00t0",
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyResourceGroup/providers/Microsoft.SupercomputerInfrastructure/supercomputers/MySupercomputer/links/c7bac46904be785cd0c965bf",
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyResourceGroup/providers/Microsoft.SupercomputerInfrastructure/supercomputers/MySupercomputer/nodes/012345678"
+          ],
+          "clusterId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyResourceGroup/providers/Microsoft.SupercomputerInfrastructure/supercomputers/MySupercomputer/clusters/ABC0000000"
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyResourceGroup/providers/Microsoft.SupercomputerInfrastructure/supercomputers/MySupercomputer/maintenanceRequests/MyMaintenanceRequest",
+        "name": "MyMaintenanceRequest",
+        "type": "Microsoft.SupercomputerInfrastructure/supercomputers/maintenanceRequests",
+        "systemData": {
+          "createdBy": "Supercomputer User",
+          "createdByType": "User",
+          "createdAt": "2025-01-01T00:00:00.000Z",
+          "lastModifiedBy": "Supercomputer User",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-01-01T00:00:00.000Z"
+        }
+      }
+    }
+  }
+}
