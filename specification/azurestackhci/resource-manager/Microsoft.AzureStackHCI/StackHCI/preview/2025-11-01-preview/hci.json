@@ -5240,143 +5240,6 @@
         ]
       }
     },
-    "AzureLinuxEdgeDeviceJob": {
-      "type": "object",
-      "description": "Edge device job for Azure Linux solution.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/AzureLinuxEdgeDeviceJobProperties",
-          "description": "Edge device job properties"
-        },
-        "kind": {
-          "type": "string",
-          "description": "Edge Solution type to support polymorphic resource.",
-          "enum": [
-            "AzureLinux"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        }
-      },
-      "required": [
-        "properties",
-        "kind"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/EdgeDeviceJob"
-        }
-      ]
-    },
-    "AzureLinuxEdgeDeviceJobProperties": {
-      "type": "object",
-      "description": "Edge device job properties",
-      "properties": {
-        "deploymentMode": {
-          "$ref": "#/definitions/DeploymentMode",
-          "description": "Deployment mode to trigger job."
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "Job provisioning state",
-          "readOnly": true
-        },
-        "jobId": {
-          "type": "string",
-          "description": "Unique, immutable job id.",
-          "readOnly": true
-        },
-        "startTimeUtc": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The UTC date and time at which the job started.",
-          "readOnly": true
-        },
-        "endTimeUtc": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The UTC date and time at which the job completed.",
-          "readOnly": true
-        },
-        "status": {
-          "$ref": "#/definitions/JobStatus",
-          "description": "Status of Edge device job.",
-          "readOnly": true
-        },
-        "jobType": {
-          "$ref": "#/definitions/AzureLinuxEdgeDeviceJobType",
-          "description": "Job Type to support polymorphic resource.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        }
-      },
-      "discriminator": "jobType",
-      "required": [
-        "jobType"
-      ]
-    },
-    "AzureLinuxEdgeDeviceJobType": {
-      "type": "string",
-      "description": "Job Type supported by Azure Linux Edge Devices.",
-      "enum": [
-        "CollectLog",
-        "RemoteSupport"
-      ],
-      "x-ms-enum": {
-        "name": "AzureLinuxEdgeDeviceJobType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "CollectLog",
-            "value": "CollectLog",
-            "description": "Job to collect logs from the device."
-          },
-          {
-            "name": "RemoteSupport",
-            "value": "RemoteSupport",
-            "description": "Job to provide remote support to the device."
-          }
-        ]
-      }
-    },
-    "AzureLinuxRemoteSupportJobProperties": {
-      "type": "object",
-      "description": "Represents the properties of an Azure Linux Remote Support job.",
-      "properties": {
-        "accessLevel": {
-          "$ref": "#/definitions/RemoteSupportAccessLevel",
-          "description": "Remote support access level."
-        },
-        "expirationTimestamp": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Remote support expiration timestamp."
-        },
-        "type": {
-          "$ref": "#/definitions/RemoteSupportType",
-          "description": "Remote support type."
-        },
-        "reportedProperties": {
-          "$ref": "#/definitions/RemoteSupportReportedProperties",
-          "description": "log collection job reported properties.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "accessLevel",
-        "expirationTimestamp",
-        "type"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/AzureLinuxEdgeDeviceJobProperties"
-        }
-      ],
-      "x-ms-discriminator-value": "RemoteSupport"
-    },
     "ChangeRingRequest": {
       "type": "object",
       "description": "Change Ring Request for cluster",
@@ -7328,7 +7191,7 @@
       "description": "EdgeDevice Jobs resource",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/EdgeDeviceJobProperties",
+          "type": "object",
           "description": "The resource-specific properties for this resource."
         },
         "kind": {
@@ -7582,12 +7445,7 @@
       "type": "string",
       "description": "Edge device type based on host OS installed.",
       "enum": [
-        "HCI",
-        "WindowsServer",
-        "WindowsIoT",
-        "AzureLinux",
-        "UbuntuLinux",
-        "AzureLinuxRoe"
+        "HCI"
       ],
       "x-ms-enum": {
         "name": "EdgeDeviceKind",
@@ -7597,31 +7455,6 @@
             "name": "HCI",
             "value": "HCI",
             "description": "Arc-enabled edge device with HCI OS."
-          },
-          {
-            "name": "WindowsServer",
-            "value": "WindowsServer",
-            "description": "Arc-enabled edge device with WindowsServer OS."
-          },
-          {
-            "name": "WindowsIoT",
-            "value": "WindowsIoT",
-            "description": "Arc-enabled edge device with WindowsIoT OS."
-          },
-          {
-            "name": "AzureLinux",
-            "value": "AzureLinux",
-            "description": "Arc-enabled edge device with AzureLinux OS."
-          },
-          {
-            "name": "UbuntuLinux",
-            "value": "UbuntuLinux",
-            "description": "Arc-enabled edge device with UbuntuLinux OS."
-          },
-          {
-            "name": "AzureLinuxRoe",
-            "value": "AzureLinuxRoe",
-            "description": "Arc-enabled edge device with Azure Linux restricted operating environment."
           }
         ]
       }
@@ -7931,8 +7764,7 @@
       "type": "string",
       "description": "Edge solution type.",
       "enum": [
-        "WindowsServer",
-        "AzureLinux"
+        "WindowsServer"
       ],
       "x-ms-enum": {
         "name": "EdgeSolutionType",
@@ -7942,11 +7774,6 @@
             "name": "WindowsServer",
             "value": "WindowsServer",
             "description": "Edge solution for Windows based edge devices."
-          },
-          {
-            "name": "AzureLinux",
-            "value": "AzureLinux",
-            "description": "Edge solution for Azure linux edge devices."
           }
         ]
       }
@@ -8690,7 +8517,7 @@
           "description": "Remote support type."
         },
         "reportedProperties": {
-          "$ref": "#/definitions/RemoteSupportReportedProperties",
+          "$ref": "#/definitions/RemoteSupportJobReportedProperties",
           "description": "log collection job reported properties.",
           "readOnly": true
         }
@@ -10335,18 +10162,12 @@
       "type": "string",
       "description": "Represents the provisioning operating system type.",
       "enum": [
-        "AzureLinux",
         "HCI"
       ],
       "x-ms-enum": {
         "name": "ProvisioningOsType",
         "modelAsString": true,
         "values": [
-          {
-            "name": "AzureLinux",
-            "value": "AzureLinux",
-            "description": "AzureLinux OS."
-          },
           {
             "name": "HCI",
             "value": "HCI",
@@ -10682,7 +10503,7 @@
           "description": "Remote support type."
         },
         "reportedProperties": {
-          "$ref": "#/definitions/RemoteSupportReportedProperties",
+          "$ref": "#/definitions/RemoteSupportJobReportedProperties",
           "description": "log collection job reported properties.",
           "readOnly": true
         }
@@ -10692,6 +10513,44 @@
         "expirationTimestamp",
         "type"
       ]
+    },
+    "RemoteSupportJobReportedProperties": {
+      "type": "object",
+      "description": "Represents the reported properties of a remote support job.",
+      "properties": {
+        "percentComplete": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The percentage of the job that is complete.",
+          "readOnly": true
+        },
+        "validationStatus": {
+          "$ref": "#/definitions/EdgeDeviceJobsEceActionStatus",
+          "description": "Validation status of job.",
+          "readOnly": true
+        },
+        "deploymentStatus": {
+          "$ref": "#/definitions/EdgeDeviceJobsEceActionStatus",
+          "description": "Deployment status of job.",
+          "readOnly": true
+        },
+        "nodeSettings": {
+          "$ref": "#/definitions/EdgeDeviceJobsRemoteSupportNodeSettings",
+          "description": "Optional settings for configuring the node for remote support.",
+          "readOnly": true
+        },
+        "sessionDetails": {
+          "type": "array",
+          "description": "Details of the remote support session.",
+          "items": {
+            "$ref": "#/definitions/RemoteSupportSession"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "sessionId"
+          ]
+        }
+      }
     },
     "RemoteSupportProperties": {
       "type": "object",
@@ -10730,44 +10589,6 @@
           },
           "readOnly": true,
           "x-ms-identifiers": []
-        }
-      }
-    },
-    "RemoteSupportReportedProperties": {
-      "type": "object",
-      "description": "Represents the reported properties of a remote support job.",
-      "properties": {
-        "percentComplete": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The percentage of the job that is complete.",
-          "readOnly": true
-        },
-        "validationStatus": {
-          "$ref": "#/definitions/EdgeDeviceJobsEceActionStatus",
-          "description": "Validation status of job.",
-          "readOnly": true
-        },
-        "deploymentStatus": {
-          "$ref": "#/definitions/EdgeDeviceJobsEceActionStatus",
-          "description": "Deployment status of job.",
-          "readOnly": true
-        },
-        "nodeSettings": {
-          "$ref": "#/definitions/EdgeDeviceJobsRemoteSupportNodeSettings",
-          "description": "Optional settings for configuring the node for remote support.",
-          "readOnly": true
-        },
-        "sessionDetails": {
-          "type": "array",
-          "description": "Details of the remote support session.",
-          "items": {
-            "$ref": "#/definitions/RemoteSupportSession"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "sessionId"
-          ]
         }
       }
     },

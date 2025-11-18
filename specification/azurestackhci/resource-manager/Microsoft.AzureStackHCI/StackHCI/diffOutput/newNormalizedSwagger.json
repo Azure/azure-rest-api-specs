@@ -12,12 +12,12 @@
     "application/json"
   ],
   "paths": {
-    "/{scope}/providers/microsoft.AzureStackHCI/edgeDevices": {
+    "/{resourceUri}/providers/microsoft.AzureStackHCI/edgeDevices": {
       "get": {
         "operationId": "EdgeDevices_List",
         "parameters": [
           {
-            "name": "scope",
+            "name": "resourceUri",
             "in": "path",
             "required": true,
             "type": "string",
@@ -38,17 +38,22 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List Edge Devices": {
+            "$ref": "./examples/ListEdgeDevices.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
       }
     },
-    "/{scope}/providers/microsoft.AzureStackHCI/edgeDevices/{edgeDeviceName}": {
+    "/{resourceUri}/providers/microsoft.AzureStackHCI/edgeDevices/{edgeDeviceName}": {
       "get": {
         "operationId": "EdgeDevices_Get",
         "parameters": [
           {
-            "name": "scope",
+            "name": "resourceUri",
             "in": "path",
             "required": true,
             "type": "string",
@@ -75,13 +80,18 @@
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get Edge Device": {
+            "$ref": "./examples/GetEdgeDevices.json"
+          }
         }
       },
       "put": {
         "operationId": "EdgeDevices_CreateOrUpdate",
         "parameters": [
           {
-            "name": "scope",
+            "name": "resourceUri",
             "in": "path",
             "required": true,
             "type": "string",
@@ -129,6 +139,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create HCI Edge Device": {
+            "$ref": "./examples/CreateHciEdgeDevice.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
@@ -138,7 +153,7 @@
         "operationId": "EdgeDevices_Delete",
         "parameters": [
           {
-            "name": "scope",
+            "name": "resourceUri",
             "in": "path",
             "required": true,
             "type": "string",
@@ -172,15 +187,20 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Delete Edge Devices": {
+            "$ref": "./examples/DeleteEdgeDevices.json"
+          }
+        },
         "x-ms-long-running-operation": true
       }
     },
-    "/{scope}/providers/microsoft.AzureStackHCI/edgeDevices/{edgeDeviceName}/jobs": {
+    "/{resourceUri}/providers/microsoft.AzureStackHCI/edgeDevices/{edgeDeviceName}/jobs": {
       "get": {
         "operationId": "EdgeDeviceJobs_ListByEdgeDevice",
         "parameters": [
           {
-            "name": "scope",
+            "name": "resourceUri",
             "in": "path",
             "required": true,
             "type": "string",
@@ -208,17 +228,22 @@
             }
           }
         },
+        "x-ms-examples": {
+          "EdgeDeviceJobs_ListByEdgeDevice": {
+            "$ref": "./examples/EdgeDeviceJobs_ListByEdgeDevice.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
       }
     },
-    "/{scope}/providers/microsoft.AzureStackHCI/edgeDevices/{edgeDeviceName}/jobs/{jobsName}": {
+    "/{resourceUri}/providers/microsoft.AzureStackHCI/edgeDevices/{edgeDeviceName}/jobs/{jobsName}": {
       "get": {
         "operationId": "EdgeDeviceJobs_Get",
         "parameters": [
           {
-            "name": "scope",
+            "name": "resourceUri",
             "in": "path",
             "required": true,
             "type": "string",
@@ -252,13 +277,18 @@
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "EdgeDeviceJobs_Get_RemoteSupport": {
+            "$ref": "./examples/EdgeDeviceJobs_Get_RemoteSupport.json"
+          }
         }
       },
       "put": {
         "operationId": "EdgeDeviceJobs_CreateOrUpdate",
         "parameters": [
           {
-            "name": "scope",
+            "name": "resourceUri",
             "in": "path",
             "required": true,
             "type": "string",
@@ -313,6 +343,14 @@
             }
           }
         },
+        "x-ms-examples": {
+          "EdgeDeviceJobs_CreateOrUpdate_CollectLog": {
+            "$ref": "./examples/EdgeDeviceJobs_CreateOrUpdate_CollectLog.json"
+          },
+          "EdgeDeviceJobs_CreateOrUpdate_RemoteSupport": {
+            "$ref": "./examples/EdgeDeviceJobs_CreateOrUpdate_RemoteSupport.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
@@ -322,7 +360,7 @@
         "operationId": "EdgeDeviceJobs_Delete",
         "parameters": [
           {
-            "name": "scope",
+            "name": "resourceUri",
             "in": "path",
             "required": true,
             "type": "string",
@@ -363,15 +401,20 @@
             }
           }
         },
+        "x-ms-examples": {
+          "EdgeDeviceJobs_Delete": {
+            "$ref": "./examples/EdgeDeviceJobs_Delete.json"
+          }
+        },
         "x-ms-long-running-operation": true
       }
     },
-    "/{scope}/providers/microsoft.AzureStackHCI/edgeDevices/{edgeDeviceName}/validate": {
+    "/{resourceUri}/providers/microsoft.AzureStackHCI/edgeDevices/{edgeDeviceName}/validate": {
       "post": {
         "operationId": "EdgeDevices_Validate",
         "parameters": [
           {
-            "name": "scope",
+            "name": "resourceUri",
             "in": "path",
             "required": true,
             "type": "string",
@@ -397,7 +440,7 @@
           "200": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/ValidateResponseResult"
+              "$ref": "#/definitions/ValidateResponse"
             }
           },
           "202": {
@@ -414,6 +457,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Validate Edge Devices": {
+            "$ref": "./examples/ValidateEdgeDevices.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -463,6 +511,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List clusters in a given subscription": {
+            "$ref": "./examples/ListClustersBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -728,6 +781,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "ValidatedSolutionRecipes_ListBySubscriptionLocationResource": {
+            "$ref": "./examples/ValidatedSolutionRecipes_ListBySubscriptionLocationResource.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -761,6 +819,11 @@
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "ValidatedSolutionRecipes_Get": {
+            "$ref": "./examples/ValidatedSolutionRecipes_Get.json"
+          }
         }
       }
     },
@@ -780,6 +843,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List clusters in a given resource group": {
+            "$ref": "./examples/ListClustersByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -810,6 +878,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get cluster": {
+            "$ref": "./examples/GetCluster.json"
           }
         }
       },
@@ -851,6 +924,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create cluster": {
+            "$ref": "./examples/CreateCluster.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "original-uri"
         },
@@ -887,6 +965,11 @@
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Update cluster": {
+            "$ref": "./examples/UpdateCluster.json"
+          }
         }
       },
       "delete": {
@@ -922,6 +1005,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Delete cluster": {
+            "$ref": "./examples/DeleteCluster.json"
+          }
+        },
         "x-ms-long-running-operation": true
       }
     },
@@ -948,6 +1036,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List ArcSetting resources by HCI Cluster": {
+            "$ref": "./examples/ListArcSettingsByCluster.json"
           }
         },
         "x-ms-pageable": {
@@ -984,6 +1077,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get ArcSetting": {
+            "$ref": "./examples/GetArcSetting.json"
           }
         }
       },
@@ -1031,6 +1129,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create ArcSetting": {
+            "$ref": "./examples/PutArcSetting.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "original-uri"
         },
@@ -1072,6 +1175,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Patch ArcSetting": {
+            "$ref": "./examples/PatchArcSetting.json"
           }
         }
       },
@@ -1118,6 +1226,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Delete ArcSetting": {
+            "$ref": "./examples/DeleteArcSetting.json"
+          }
+        },
         "x-ms-long-running-operation": true
       }
     },
@@ -1151,6 +1264,11 @@
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Consent And Install Default Extensions": {
+            "$ref": "./examples/ConsentAndInstallDefaultExtensions.json"
+          }
         }
       }
     },
@@ -1175,7 +1293,7 @@
           "200": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/StackHciArcIdentityResponseResult"
+              "$ref": "#/definitions/ArcIdentityResponse"
             }
           },
           "202": {
@@ -1196,6 +1314,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Create Arc Identity": {
+            "$ref": "./examples/CreateArcIdentity.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1233,6 +1356,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List Extensions under ArcSetting resource": {
+            "$ref": "./examples/ListExtensionsByArcSetting.json"
           }
         },
         "x-ms-pageable": {
@@ -1275,6 +1403,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get ArcSettings Extension": {
+            "$ref": "./examples/GetExtension.json"
           }
         }
       },
@@ -1332,6 +1465,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Create Arc Extension": {
+            "$ref": "./examples/PutExtension.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1392,6 +1530,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Update Arc Extension": {
+            "$ref": "./examples/PatchExtension.json"
+          }
+        },
         "x-ms-long-running-operation": true
       },
       "delete": {
@@ -1441,6 +1584,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Arc Extension": {
+            "$ref": "./examples/DeleteExtension.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -1494,6 +1642,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Upgrade Machine Extensions": {
+            "$ref": "./examples/Extensions_Upgrade.json"
+          }
+        },
         "x-ms-long-running-operation": true
       }
     },
@@ -1526,6 +1679,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Generate Password": {
+            "$ref": "./examples/GeneratePassword.json"
           }
         }
       }
@@ -1569,6 +1727,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Trigger ARC Disable": {
+            "$ref": "./examples/InitializeDisableProcess.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -1626,8 +1789,63 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Reconcile Arc Settings": {
+            "$ref": "./examples/reconcileArcSettings.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/changeRing": {
+      "post": {
+        "operationId": "Clusters_ChangeRing",
+        "parameters": [
+          {
+            "name": "clusterName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "changeRingRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ChangeRingRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Change cluster ring": {
+            "$ref": "./examples/ChangeClusterRing.json"
+          }
         },
         "x-ms-long-running-operation": true
       }
@@ -1674,6 +1892,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Configure Remote Support": {
+            "$ref": "./examples/ConfigureRemoteSupport.json"
+          }
+        },
         "x-ms-long-running-operation": true
       }
     },
@@ -1715,6 +1938,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create cluster Identity": {
+            "$ref": "./examples/CreateClusterIdentity.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
@@ -1744,6 +1972,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List Deployment Settings": {
+            "$ref": "./examples/ListDeploymentSettingsByCluster.json"
           }
         },
         "x-ms-pageable": {
@@ -1781,6 +2014,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get Deployment Settings": {
+            "$ref": "./examples/GetDeploymentSettings.json"
           }
         }
       },
@@ -1835,6 +2073,14 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create Deployment Settings": {
+            "$ref": "./examples/PutDeploymentSettings.json"
+          },
+          "Create Deployment Settings Without Active Directory Integration": {
+            "$ref": "./examples/PutDeploymentSettingsWithADLess.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
@@ -1875,6 +2121,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Deployment Settings": {
+            "$ref": "./examples/DeleteDeploymentSettings.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -1922,6 +2173,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create cluster Identity": {
+            "$ref": "./examples/ExtendSoftwareAssuranceBenefit.json"
+          }
+        },
         "x-ms-long-running-operation": true
       }
     },
@@ -1954,6 +2210,11 @@
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "List Offer resources by HCI Cluster": {
+            "$ref": "./examples/ListOffersByCluster.json"
+          }
         }
       }
     },
@@ -1980,6 +2241,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List Publisher resources by HCI Cluster": {
+            "$ref": "./examples/ListPublishersByCluster.json"
           }
         },
         "x-ms-pageable": {
@@ -2016,6 +2282,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get Publisher": {
+            "$ref": "./examples/GetPublisher.json"
           }
         }
       }
@@ -2054,6 +2325,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List Offer resources by publisher for the HCI Cluster": {
+            "$ref": "./examples/ListOffersByPublisher.json"
           }
         },
         "x-ms-pageable": {
@@ -2102,6 +2378,11 @@
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get Offer": {
+            "$ref": "./examples/GetOffer.json"
+          }
         }
       }
     },
@@ -2145,6 +2426,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List SKU resources by offer for the HCI Cluster": {
+            "$ref": "./examples/ListSkusByOffer.json"
           }
         },
         "x-ms-pageable": {
@@ -2199,6 +2485,11 @@
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get Sku": {
+            "$ref": "./examples/GetSku.json"
+          }
         }
       }
     },
@@ -2225,6 +2516,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List Security Settings": {
+            "$ref": "./examples/ListSecuritySettingsByCluster.json"
           }
         },
         "x-ms-pageable": {
@@ -2262,6 +2558,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get Security Settings": {
+            "$ref": "./examples/GetSecuritySettings.json"
           }
         }
       },
@@ -2316,6 +2617,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create Security Settings": {
+            "$ref": "./examples/PutSecuritySettings.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
@@ -2356,6 +2662,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Security Settings": {
+            "$ref": "./examples/DeleteSecuritySettings.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -2403,6 +2714,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Trigger Log Collection": {
+            "$ref": "./examples/TriggerLogCollection.json"
+          }
+        },
         "x-ms-long-running-operation": true
       }
     },
@@ -2448,6 +2764,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Update secrets locations for a Cluster": {
+            "$ref": "./examples/Clusters_UpdateSecretsLocations.json"
+          }
+        },
         "x-ms-long-running-operation": true
       }
     },
@@ -2474,6 +2795,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get Update summaries under cluster resource": {
+            "$ref": "./examples/ListUpdateSummaries.json"
           }
         },
         "x-ms-pageable": {
@@ -2504,6 +2830,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get Update summaries under cluster resource": {
+            "$ref": "./examples/GetUpdateSummaries.json"
           }
         }
       },
@@ -2543,6 +2874,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Put Update summaries under cluster resource": {
+            "$ref": "./examples/PutUpdateSummaries.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2587,6 +2923,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Delete an Update": {
+            "$ref": "./examples/DeleteUpdateSummaries.json"
+          }
+        },
         "x-ms-long-running-operation": true
       }
     },
@@ -2613,6 +2954,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List available updates": {
+            "$ref": "./examples/ListUpdates.json"
           }
         },
         "x-ms-pageable": {
@@ -2649,6 +2995,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get a specific update": {
+            "$ref": "./examples/GetUpdates.json"
           }
         }
       },
@@ -2694,6 +3045,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Put a specific update": {
+            "$ref": "./examples/PutUpdates.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2744,6 +3100,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Delete an Update": {
+            "$ref": "./examples/DeleteUpdates.json"
+          }
+        },
         "x-ms-long-running-operation": true
       }
     },
@@ -2788,6 +3149,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List available updates": {
+            "$ref": "./examples/PostUpdates.json"
+          }
+        },
         "x-ms-long-running-operation": true
       }
     },
@@ -2820,6 +3186,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List Update runs under cluster resource": {
+            "$ref": "./examples/ListUpdateRuns.json"
           }
         },
         "x-ms-pageable": {
@@ -2862,6 +3233,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get Update runs under cluster resource": {
+            "$ref": "./examples/GetUpdateRuns.json"
           }
         }
       },
@@ -2913,6 +3289,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get Update runs under cluster resource": {
+            "$ref": "./examples/PutUpdateRuns.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2969,6 +3350,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Delete an Update": {
+            "$ref": "./examples/DeleteUpdateRuns.json"
+          }
+        },
         "x-ms-long-running-operation": true
       }
     },
@@ -3008,11 +3394,30 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Upload certificate": {
+            "$ref": "./examples/UploadCertificate.json"
+          }
+        },
         "x-ms-long-running-operation": true
       }
     }
   },
   "definitions": {
+    "AdapterPropertyOverrides": {
+      "type": "object",
+      "properties": {
+        "jumboPacket": {
+          "type": "string"
+        },
+        "networkDirect": {
+          "type": "string"
+        },
+        "networkDirectTechnology": {
+          "type": "string"
+        }
+      }
+    },
     "ArcConnectivityProperties": {
       "type": "object",
       "properties": {
@@ -3027,6 +3432,15 @@
           "x-ms-identifiers": [
             "serviceName"
           ]
+        }
+      }
+    },
+    "ArcIdentityResponse": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ArcIdentityResponseProperties",
+          "readOnly": true
         }
       }
     },
@@ -3093,15 +3507,24 @@
         "provisioningState": {
           "type": "string",
           "enum": [
+            "NotSpecified",
+            "Error",
             "Succeeded",
             "Failed",
             "Canceled",
-            "InProgress",
-            "NotSpecified",
-            "Provisioning",
+            "Connected",
+            "Disconnected",
+            "Deleted",
+            "Creating",
             "Updating",
             "Deleting",
-            "Accepted"
+            "Moving",
+            "PartiallySucceeded",
+            "PartiallyConnected",
+            "InProgress",
+            "Accepted",
+            "Provisioning",
+            "DisableInProgress"
           ],
           "x-ms-enum": {
             "name": "ProvisioningState",
@@ -3233,38 +3656,6 @@
         }
       }
     },
-    "AzureLinuxCollectLogJobProperties": {
-      "type": "object",
-      "properties": {
-        "fromDate": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "toDate": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "lastLogGenerated": {
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true
-        },
-        "reportedProperties": {
-          "$ref": "#/definitions/LogCollectionReportedProperties",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "fromDate",
-        "toDate"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/AzureLinuxEdgeDeviceJobProperties"
-        }
-      ],
-      "x-ms-discriminator-value": "CollectLog"
-    },
     "AzureLinuxEdgeDeviceJob": {
       "type": "object",
       "properties": {
@@ -3308,15 +3699,24 @@
         "provisioningState": {
           "type": "string",
           "enum": [
+            "NotSpecified",
+            "Error",
             "Succeeded",
             "Failed",
             "Canceled",
-            "InProgress",
-            "NotSpecified",
-            "Provisioning",
+            "Connected",
+            "Disconnected",
+            "Deleted",
+            "Creating",
             "Updating",
             "Deleting",
-            "Accepted"
+            "Moving",
+            "PartiallySucceeded",
+            "PartiallyConnected",
+            "InProgress",
+            "Accepted",
+            "Provisioning",
+            "DisableInProgress"
           ],
           "x-ms-enum": {
             "name": "ProvisioningState",
@@ -3427,6 +3827,22 @@
         }
       ],
       "x-ms-discriminator-value": "RemoteSupport"
+    },
+    "ChangeRingRequest": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ChangeRingRequestProperties"
+        }
+      }
+    },
+    "ChangeRingRequestProperties": {
+      "type": "object",
+      "properties": {
+        "targetRing": {
+          "type": "string"
+        }
+      }
     },
     "Cluster": {
       "type": "object",
@@ -3643,15 +4059,24 @@
         "provisioningState": {
           "type": "string",
           "enum": [
+            "NotSpecified",
+            "Error",
             "Succeeded",
             "Failed",
             "Canceled",
-            "InProgress",
-            "NotSpecified",
-            "Provisioning",
+            "Connected",
+            "Disconnected",
+            "Deleted",
+            "Creating",
             "Updating",
             "Deleting",
-            "Accepted"
+            "Moving",
+            "PartiallySucceeded",
+            "PartiallyConnected",
+            "InProgress",
+            "Accepted",
+            "Provisioning",
+            "DisableInProgress"
           ],
           "x-ms-enum": {
             "name": "ProvisioningState",
@@ -3700,7 +4125,24 @@
           },
           "readOnly": true
         },
+        "supportStatus": {
+          "type": "string",
+          "enum": [
+            "InSupport",
+            "OutOfSupport",
+            "NotSpecified"
+          ],
+          "x-ms-enum": {
+            "name": "SupportStatus",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
         "cloudId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "ring": {
           "type": "string",
           "readOnly": true
         },
@@ -3722,16 +4164,9 @@
         "softwareAssuranceProperties": {
           "$ref": "#/definitions/SoftwareAssuranceProperties"
         },
-        "cloudEnvironment": {
-          "type": "string",
-          "readOnly": true
-        },
         "isManagementCluster": {
           "type": "boolean",
           "readOnly": true
-        },
-        "clusterWitness": {
-          "$ref": "#/definitions/ClusterWitnessProperties"
         },
         "logCollectionProperties": {
           "$ref": "#/definitions/LogCollectionProperties"
@@ -3808,6 +4243,18 @@
           "x-ms-identifiers": [
             "localAvailabilityZoneName"
           ]
+        },
+        "identityProvider": {
+          "type": "string",
+          "enum": [
+            "ActiveDirectory",
+            "LocalIdentity"
+          ],
+          "x-ms-enum": {
+            "name": "IdentityProvider",
+            "modelAsString": true
+          },
+          "readOnly": true
         }
       }
     },
@@ -4187,6 +4634,17 @@
         "cluster": {
           "$ref": "#/definitions/DeploymentCluster"
         },
+        "identityProvider": {
+          "type": "string",
+          "enum": [
+            "ActiveDirectory",
+            "LocalIdentity"
+          ],
+          "x-ms-enum": {
+            "name": "IdentityProvider",
+            "modelAsString": true
+          }
+        },
         "storage": {
           "$ref": "#/definitions/Storage"
         },
@@ -4400,20 +4858,6 @@
         "value"
       ]
     },
-    "DeploymentSettingsAdapterPropertyOverrides": {
-      "type": "object",
-      "properties": {
-        "jumboPacket": {
-          "type": "string"
-        },
-        "networkDirect": {
-          "type": "string"
-        },
-        "networkDirectTechnology": {
-          "type": "string"
-        }
-      }
-    },
     "DeploymentSettingsHostNetwork": {
       "type": "object",
       "properties": {
@@ -4477,7 +4921,7 @@
           "type": "boolean"
         },
         "adapterPropertyOverrides": {
-          "$ref": "#/definitions/DeploymentSettingsAdapterPropertyOverrides"
+          "$ref": "#/definitions/AdapterPropertyOverrides"
         }
       }
     },
@@ -4487,15 +4931,24 @@
         "provisioningState": {
           "type": "string",
           "enum": [
+            "NotSpecified",
+            "Error",
             "Succeeded",
             "Failed",
             "Canceled",
-            "InProgress",
-            "NotSpecified",
-            "Provisioning",
+            "Connected",
+            "Disconnected",
+            "Deleted",
+            "Creating",
             "Updating",
             "Deleting",
-            "Accepted"
+            "Moving",
+            "PartiallySucceeded",
+            "PartiallyConnected",
+            "InProgress",
+            "Accepted",
+            "Provisioning",
+            "DisableInProgress"
           ],
           "x-ms-enum": {
             "name": "ProvisioningState",
@@ -4688,17 +5141,31 @@
     "DeviceConfiguration": {
       "type": "object",
       "properties": {
-        "network": {
-          "$ref": "#/definitions/NetworkConfiguration"
+        "nicDetails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NicDetail"
+          },
+          "x-ms-identifiers": [
+            "adapterName"
+          ]
         },
-        "hostName": {
+        "deviceMetadata": {
+          "type": "string"
+        }
+      }
+    },
+    "DnsZones": {
+      "type": "object",
+      "properties": {
+        "dnsZoneName": {
           "type": "string"
         },
-        "webProxy": {
-          "$ref": "#/definitions/WebProxyConfiguration"
-        },
-        "time": {
-          "$ref": "#/definitions/TimeConfiguration"
+        "dnsForwarder": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -4763,7 +5230,7 @@
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/EdgeDeviceProperties"
+          "type": "object"
         },
         "kind": {
           "type": "string",
@@ -4873,15 +5340,24 @@
         "provisioningState": {
           "type": "string",
           "enum": [
+            "NotSpecified",
+            "Error",
             "Succeeded",
             "Failed",
             "Canceled",
-            "InProgress",
-            "NotSpecified",
-            "Provisioning",
+            "Connected",
+            "Disconnected",
+            "Deleted",
+            "Creating",
             "Updating",
             "Deleting",
-            "Accepted"
+            "Moving",
+            "PartiallySucceeded",
+            "PartiallyConnected",
+            "InProgress",
+            "Accepted",
+            "Provisioning",
+            "DisableInProgress"
           ],
           "x-ms-enum": {
             "name": "ProvisioningState",
@@ -5090,15 +5566,24 @@
         "provisioningState": {
           "type": "string",
           "enum": [
+            "NotSpecified",
+            "Error",
             "Succeeded",
             "Failed",
             "Canceled",
-            "InProgress",
-            "NotSpecified",
-            "Provisioning",
+            "Connected",
+            "Disconnected",
+            "Deleted",
+            "Creating",
             "Updating",
             "Deleting",
-            "Accepted"
+            "Moving",
+            "PartiallySucceeded",
+            "PartiallyConnected",
+            "InProgress",
+            "Accepted",
+            "Provisioning",
+            "DisableInProgress"
           ],
           "x-ms-enum": {
             "name": "ProvisioningState",
@@ -5499,15 +5984,24 @@
         "provisioningState": {
           "type": "string",
           "enum": [
+            "NotSpecified",
+            "Error",
             "Succeeded",
             "Failed",
             "Canceled",
-            "InProgress",
-            "NotSpecified",
-            "Provisioning",
+            "Connected",
+            "Disconnected",
+            "Deleted",
+            "Creating",
             "Updating",
             "Deleting",
-            "Accepted"
+            "Moving",
+            "PartiallySucceeded",
+            "PartiallyConnected",
+            "InProgress",
+            "Accepted",
+            "Provisioning",
+            "DisableInProgress"
           ],
           "x-ms-enum": {
             "name": "ProvisioningState",
@@ -5664,15 +6158,24 @@
         "provisioningState": {
           "type": "string",
           "enum": [
+            "NotSpecified",
+            "Error",
             "Succeeded",
             "Failed",
             "Canceled",
-            "InProgress",
-            "NotSpecified",
-            "Provisioning",
+            "Connected",
+            "Disconnected",
+            "Deleted",
+            "Creating",
             "Updating",
             "Deleting",
-            "Accepted"
+            "Moving",
+            "PartiallySucceeded",
+            "PartiallyConnected",
+            "InProgress",
+            "Accepted",
+            "Provisioning",
+            "DisableInProgress"
           ],
           "x-ms-enum": {
             "name": "ProvisioningState",
@@ -5984,6 +6487,27 @@
           "items": {
             "$ref": "#/definitions/IpPools"
           }
+        },
+        "dnsServerConfig": {
+          "type": "string",
+          "default": "UseDnsServer",
+          "enum": [
+            "UseDnsServer",
+            "UseForwarder"
+          ],
+          "x-ms-enum": {
+            "name": "DnsServerConfig",
+            "modelAsString": true
+          }
+        },
+        "dnsZones": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DnsZones"
+          },
+          "x-ms-identifiers": [
+            "dnsZoneName"
+          ]
         },
         "dnsServers": {
           "type": "array",
@@ -7441,15 +7965,24 @@
         "provisioningState": {
           "type": "string",
           "enum": [
+            "NotSpecified",
+            "Error",
             "Succeeded",
             "Failed",
             "Canceled",
-            "InProgress",
-            "NotSpecified",
-            "Provisioning",
+            "Connected",
+            "Disconnected",
+            "Deleted",
+            "Creating",
             "Updating",
             "Deleting",
-            "Accepted"
+            "Moving",
+            "PartiallySucceeded",
+            "PartiallyConnected",
+            "InProgress",
+            "Accepted",
+            "Provisioning",
+            "DisableInProgress"
           ],
           "x-ms-enum": {
             "name": "ProvisioningState",
@@ -7667,15 +8200,6 @@
         "protectedSettings": {
           "type": "object",
           "additionalProperties": {}
-        }
-      }
-    },
-    "StackHciArcIdentityResponseResult": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ArcIdentityResponseProperties",
-          "readOnly": true
         }
       }
     },
@@ -7912,15 +8436,24 @@
         "provisioningState": {
           "type": "string",
           "enum": [
+            "NotSpecified",
+            "Error",
             "Succeeded",
             "Failed",
             "Canceled",
-            "InProgress",
-            "NotSpecified",
-            "Provisioning",
+            "Connected",
+            "Disconnected",
+            "Deleted",
+            "Creating",
             "Updating",
             "Deleting",
-            "Accepted"
+            "Moving",
+            "PartiallySucceeded",
+            "PartiallyConnected",
+            "InProgress",
+            "Accepted",
+            "Provisioning",
+            "DisableInProgress"
           ],
           "x-ms-enum": {
             "name": "ProvisioningState",
@@ -8116,15 +8649,24 @@
         "provisioningState": {
           "type": "string",
           "enum": [
+            "NotSpecified",
+            "Error",
             "Succeeded",
             "Failed",
             "Canceled",
-            "InProgress",
-            "NotSpecified",
-            "Provisioning",
+            "Connected",
+            "Disconnected",
+            "Deleted",
+            "Creating",
             "Updating",
             "Deleting",
-            "Accepted"
+            "Moving",
+            "PartiallySucceeded",
+            "PartiallyConnected",
+            "InProgress",
+            "Accepted",
+            "Provisioning",
+            "DisableInProgress"
           ],
           "x-ms-enum": {
             "name": "ProvisioningState",
@@ -8242,15 +8784,24 @@
         "provisioningState": {
           "type": "string",
           "enum": [
+            "NotSpecified",
+            "Error",
             "Succeeded",
             "Failed",
             "Canceled",
-            "InProgress",
-            "NotSpecified",
-            "Provisioning",
+            "Connected",
+            "Disconnected",
+            "Deleted",
+            "Creating",
             "Updating",
             "Deleting",
-            "Accepted"
+            "Moving",
+            "PartiallySucceeded",
+            "PartiallyConnected",
+            "InProgress",
+            "Accepted",
+            "Provisioning",
+            "DisableInProgress"
           ],
           "x-ms-enum": {
             "name": "ProvisioningState",
@@ -8388,7 +8939,7 @@
         "edgeDeviceIds"
       ]
     },
-    "ValidateResponseResult": {
+    "ValidateResponse": {
       "type": "object",
       "properties": {
         "status": {

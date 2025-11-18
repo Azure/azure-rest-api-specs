@@ -340,22 +340,7 @@ union EdgeDeviceKind {
   string,
 
   @doc("Arc-enabled edge device with HCI OS.")
-  HCI: "HCI",
-
-  @doc("Arc-enabled edge device with WindowsServer OS.")
-  WindowsServer: "WindowsServer",
-
-  @doc("Arc-enabled edge device with WindowsIoT OS.")
-  WindowsIoT: "WindowsIoT",
-
-  @doc("Arc-enabled edge device with AzureLinux OS.")
-  AzureLinux: "AzureLinux",
-
-  @doc("Arc-enabled edge device with UbuntuLinux OS.")
-  UbuntuLinux: "UbuntuLinux",
-
-  @doc("Arc-enabled edge device with Azure Linux restricted operating environment.")
-  AzureLinuxRoe: "AzureLinuxRoe",
+  HCI: "HCI"
 }
 
 @doc("Defines the level of remote support access granted.")
@@ -408,10 +393,7 @@ union EdgeSolutionType {
   string,
 
   @doc("Edge solution for Windows based edge devices.")
-  WindowsServer: "WindowsServer",
-
-  @doc("Edge solution for Azure linux edge devices.")
-  AzureLinux: "AzureLinux",
+  WindowsServer: "WindowsServer"
 }
 
 @doc("Local Availability Zone Mode for HCI cluster.")
@@ -535,9 +517,6 @@ model TimeConfiguration {
 @doc("Represents the provisioning operating system type.")
 union ProvisioningOsType {
   string,
-
-  @doc("AzureLinux OS.")
-  AzureLinux: "AzureLinux",
 
   @doc("HCI OS.")
   HCI: "HCI",

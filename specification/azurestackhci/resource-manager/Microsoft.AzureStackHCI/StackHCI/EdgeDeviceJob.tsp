@@ -7,16 +7,16 @@ import "./EdgeDevice.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.AzureStackHCI;
 /**
  * EdgeDevice Jobs resource
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "for backward compatibility, provisioningState is defined in EdgeDeviceProperties"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "for backward compatibility, properties is defined as empty model here"
 @parentResource(EdgeDevice)
 model EdgeDeviceJob
-  is Azure.ResourceManager.ExtensionResource<EdgeDeviceJobProperties> {
+  is Azure.ResourceManager.ExtensionResource<{}> {
   ...ResourceNameParameter<
     Resource = EdgeDeviceJob,
     KeyName = "jobsName",
@@ -177,107 +177,9 @@ model EdgeDeviceJobsLogCollectionSession {
 }
 
 /**
- * Edge device job properties
- */
-@discriminator("jobType")
-model AzureLinuxEdgeDeviceJobProperties {
-  /**
-   * Deployment mode to trigger job.
-   */
-  deploymentMode?: DeploymentMode;
-
-  /**
-   * Job provisioning state
-   */
-  @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
-
-  /**
-   * Unique, immutable job id.
-   */
-  @visibility(Lifecycle.Read)
-  jobId?: string;
-
-  /**
-   * The UTC date and time at which the job started.
-   */
-  @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  startTimeUtc?: utcDateTime;
-
-  /**
-   * The UTC date and time at which the job completed.
-   */
-  @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  endTimeUtc?: utcDateTime;
-
-  /**
-   * Status of Edge device job.
-   */
-  @visibility(Lifecycle.Read)
-  status?: JobStatus;
-
-  /**
-   * Job Type to support polymorphic resource.
-   */
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  jobType: AzureLinuxEdgeDeviceJobType;
-}
-
-/**
- * Edge device job for Azure Linux solution.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Backward Compatibility"
-model AzureLinuxEdgeDeviceJob extends EdgeDeviceJob {
-  /**
-   * Edge device job properties
-   */
-  properties: AzureLinuxEdgeDeviceJobProperties;
-
-  /**
-   * Edge Solution type to support polymorphic resource.
-   */
-  kind: "AzureLinux";
-}
-
-/**
- * Represents the properties of an Azure Linux Remote Support job.
- */
-model AzureLinuxRemoteSupportJobProperties
-  extends AzureLinuxEdgeDeviceJobProperties {
-  /**
-   * Remote support access level.
-   */
-  accessLevel: RemoteSupportAccessLevel;
-
-  /**
-   * Remote support expiration timestamp.
-   */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  expirationTimestamp: utcDateTime;
-
-  /**
-   * Remote support type.
-   */
-  type: RemoteSupportType;
-
-  /**
-   * log collection job reported properties.
-   */
-  @visibility(Lifecycle.Read)
-  reportedProperties?: RemoteSupportReportedProperties;
-
-  /**
-   * Job Type to support polymorphic resource.
-   */
-  jobType: "RemoteSupport";
-}
-
-/**
  * Represents the reported properties of a remote support job.
  */
-model RemoteSupportReportedProperties {
+model RemoteSupportJobReportedProperties {
   /**
    * The percentage of the job that is complete.
    */
@@ -580,7 +482,7 @@ model HciRemoteSupportJobProperties extends HciEdgeDeviceJobProperties {
    * log collection job reported properties.
    */
   @visibility(Lifecycle.Read)
-  reportedProperties?: RemoteSupportReportedProperties;
+  reportedProperties?: RemoteSupportJobReportedProperties;
 
   /**
    * Job Type to support polymorphic resource.
@@ -612,5 +514,5 @@ model RemoteSupportJobProperties {
    * log collection job reported properties.
    */
   @visibility(Lifecycle.Read)
-  reportedProperties?: RemoteSupportReportedProperties;
+  reportedProperties?: RemoteSupportJobReportedProperties;
 }

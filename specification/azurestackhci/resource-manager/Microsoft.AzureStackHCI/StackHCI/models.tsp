@@ -857,23 +857,6 @@ union ServiceName {
 }
 
 /**
- * Job Type supported by Azure Linux Edge Devices.
- */
-union AzureLinuxEdgeDeviceJobType {
-  string,
-
-  /**
-   * Job to collect logs from the device.
-   */
-  CollectLog: "CollectLog",
-
-  /**
-   * Job to provide remote support to the device.
-   */
-  RemoteSupport: "RemoteSupport",
-}
-
-/**
  * Job Type supported.
  */
 union HciEdgeDeviceJobType {

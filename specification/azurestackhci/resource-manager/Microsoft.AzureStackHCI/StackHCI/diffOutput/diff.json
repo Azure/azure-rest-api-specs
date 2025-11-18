@@ -1,964 +1,79 @@
 {
   "paths": {
-    "/{resourceUri}/providers/microsoft.AzureStackHCI/edgeDevices__deleted": {
+    "/{resourceUri}/providers/microsoft.AzureStackHCI/edgeDevices/{edgeDeviceName}": {
       "get": {
-        "operationId": "EdgeDevices_List",
         "parameters": [
-          {
-            "name": "resourceUri",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/EdgeDeviceListResult"
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "default__deleted": "default"
             }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List Edge Devices": {
-            "$ref": "./examples/ListEdgeDevices.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/{resourceUri}/providers/microsoft.AzureStackHCI/edgeDevices/{edgeDeviceName}__deleted": {
-      "get": {
-        "operationId": "EdgeDevices_Get",
-        "parameters": [
-          {
-            "name": "resourceUri",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
-          },
-          {
-            "name": "edgeDeviceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "default": "default",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/EdgeDevice"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get Edge Device": {
-            "$ref": "./examples/GetEdgeDevices.json"
-          }
-        }
+          ]
+        ]
       },
       "put": {
-        "operationId": "EdgeDevices_CreateOrUpdate",
         "parameters": [
-          {
-            "name": "resourceUri",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
-          },
-          {
-            "name": "edgeDeviceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "default": "default",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/EdgeDevice"
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "default__deleted": "default"
             }
-          }
+          ],
+          [
+            " "
+          ]
         ],
         "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/EdgeDevice"
-            }
-          },
           "201": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/EdgeDevice"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Create HCI Edge Device": {
-            "$ref": "./examples/CreateHciEdgeDevice.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true
-      },
-      "delete": {
-        "operationId": "EdgeDevices_Delete",
-        "parameters": [
-          {
-            "name": "resourceUri",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
-          },
-          {
-            "name": "edgeDeviceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "default": "default",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "ignore",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              }
-            }
-          },
-          "204": {
-            "description": "ignore"
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Delete Edge Devices": {
-            "$ref": "./examples/DeleteEdgeDevices.json"
-          }
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/{resourceUri}/providers/microsoft.AzureStackHCI/edgeDevices/{edgeDeviceName}/jobs__deleted": {
-      "get": {
-        "operationId": "EdgeDeviceJobs_ListByEdgeDevice",
-        "parameters": [
-          {
-            "name": "resourceUri",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
-          },
-          {
-            "name": "edgeDeviceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/EdgeDeviceJobListResult"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "EdgeDeviceJobs_ListByEdgeDevice": {
-            "$ref": "./examples/EdgeDeviceJobs_ListByEdgeDevice.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/{resourceUri}/providers/microsoft.AzureStackHCI/edgeDevices/{edgeDeviceName}/jobs/{jobsName}__deleted": {
-      "get": {
-        "operationId": "EdgeDeviceJobs_Get",
-        "parameters": [
-          {
-            "name": "resourceUri",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
-          },
-          {
-            "name": "edgeDeviceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "jobsName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/EdgeDeviceJob"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "EdgeDeviceJobs_Get_RemoteSupport": {
-            "$ref": "./examples/EdgeDeviceJobs_Get_RemoteSupport.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "EdgeDeviceJobs_CreateOrUpdate",
-        "parameters": [
-          {
-            "name": "resourceUri",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
-          },
-          {
-            "name": "edgeDeviceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "jobsName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/EdgeDeviceJob"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/EdgeDeviceJob"
-            }
-          },
-          "201": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/EdgeDeviceJob"
-            },
-            "headers": {
+            "headers__added": {
               "Azure-AsyncOperation": {
                 "type": "string",
                 "description": "A link to the status monitor"
               }
             }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
           }
-        },
-        "x-ms-examples": {
-          "EdgeDeviceJobs_CreateOrUpdate_CollectLog": {
-            "$ref": "./examples/EdgeDeviceJobs_CreateOrUpdate_CollectLog.json"
-          },
-          "EdgeDeviceJobs_CreateOrUpdate_RemoteSupport": {
-            "$ref": "./examples/EdgeDeviceJobs_CreateOrUpdate_RemoteSupport.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true
+        }
       },
       "delete": {
-        "operationId": "EdgeDeviceJobs_Delete",
         "parameters": [
-          {
-            "name": "resourceUri",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
-          },
-          {
-            "name": "edgeDeviceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "jobsName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "ignore",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              }
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "default__deleted": "default"
             }
-          },
-          "204": {
-            "description": "ignore"
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "EdgeDeviceJobs_Delete": {
-            "$ref": "./examples/EdgeDeviceJobs_Delete.json"
-          }
-        },
-        "x-ms-long-running-operation": true
+          ]
+        ]
       }
     },
-    "/{resourceUri}/providers/microsoft.AzureStackHCI/edgeDevices/{edgeDeviceName}/validate__deleted": {
+    "/{resourceUri}/providers/microsoft.AzureStackHCI/edgeDevices/{edgeDeviceName}/validate": {
       "post": {
-        "operationId": "EdgeDevices_Validate",
         "parameters": [
-          {
-            "name": "resourceUri",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
-          },
-          {
-            "name": "edgeDeviceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "default": "default",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "ValidateRequest",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ValidateRequest"
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "default__deleted": "default"
             }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/ValidateResponse"
-            }
-          },
-          "202": {
-            "description": "ignore",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              }
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Validate Edge Devices": {
-            "$ref": "./examples/ValidateEdgeDevices.json"
-          }
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/changeRing__deleted": {
-      "post": {
-        "operationId": "Clusters_ChangeRing",
-        "parameters": [
-          {
-            "name": "clusterName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "changeRingRequest",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ChangeRingRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/Cluster"
-            }
-          },
-          "202": {
-            "description": "ignore",
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Change cluster ring": {
-            "$ref": "./examples/ChangeClusterRing.json"
-          }
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/{scope}/providers/microsoft.AzureStackHCI/edgeDevices__added": {
-      "get": {
-        "operationId": "EdgeDevices_List",
-        "parameters": [
-          {
-            "name": "scope",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/EdgeDeviceListResult"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/{scope}/providers/microsoft.AzureStackHCI/edgeDevices/{edgeDeviceName}__added": {
-      "get": {
-        "operationId": "EdgeDevices_Get",
-        "parameters": [
-          {
-            "name": "scope",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
-          },
-          {
-            "name": "edgeDeviceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/EdgeDevice"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "put": {
-        "operationId": "EdgeDevices_CreateOrUpdate",
-        "parameters": [
-          {
-            "name": "scope",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
-          },
-          {
-            "name": "edgeDeviceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/EdgeDevice"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/EdgeDevice"
-            }
-          },
-          "201": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/EdgeDevice"
-            },
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              }
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true
-      },
-      "delete": {
-        "operationId": "EdgeDevices_Delete",
-        "parameters": [
-          {
-            "name": "scope",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
-          },
-          {
-            "name": "edgeDeviceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "ignore",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              }
-            }
-          },
-          "204": {
-            "description": "ignore"
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/{scope}/providers/microsoft.AzureStackHCI/edgeDevices/{edgeDeviceName}/jobs__added": {
-      "get": {
-        "operationId": "EdgeDeviceJobs_ListByEdgeDevice",
-        "parameters": [
-          {
-            "name": "scope",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
-          },
-          {
-            "name": "edgeDeviceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/EdgeDeviceJobListResult"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/{scope}/providers/microsoft.AzureStackHCI/edgeDevices/{edgeDeviceName}/jobs/{jobsName}__added": {
-      "get": {
-        "operationId": "EdgeDeviceJobs_Get",
-        "parameters": [
-          {
-            "name": "scope",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
-          },
-          {
-            "name": "edgeDeviceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "jobsName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/EdgeDeviceJob"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "put": {
-        "operationId": "EdgeDeviceJobs_CreateOrUpdate",
-        "parameters": [
-          {
-            "name": "scope",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
-          },
-          {
-            "name": "edgeDeviceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "jobsName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/EdgeDeviceJob"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/EdgeDeviceJob"
-            }
-          },
-          "201": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/EdgeDeviceJob"
-            },
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              }
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true
-      },
-      "delete": {
-        "operationId": "EdgeDeviceJobs_Delete",
-        "parameters": [
-          {
-            "name": "scope",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
-          },
-          {
-            "name": "edgeDeviceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "jobsName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "ignore",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              }
-            }
-          },
-          "204": {
-            "description": "ignore"
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/{scope}/providers/microsoft.AzureStackHCI/edgeDevices/{edgeDeviceName}/validate__added": {
-      "post": {
-        "operationId": "EdgeDevices_Validate",
-        "parameters": [
-          {
-            "name": "scope",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
-          },
-          {
-            "name": "edgeDeviceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "ValidateRequest",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ValidateRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/ValidateResponseResult"
-            }
-          },
-          "202": {
-            "description": "ignore",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              }
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/microsoft.AzureStackHCI/clusters": {
-      "get": {
-        "x-ms-examples__deleted": {
-          "List clusters in a given subscription": {
-            "$ref": "./examples/ListClustersBySubscription.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/microsoft.AzureStackHCI/locations/{location}/validatedSolutionRecipes": {
-      "get": {
-        "x-ms-examples__deleted": {
-          "ValidatedSolutionRecipes_ListBySubscriptionLocationResource": {
-            "$ref": "./examples/ValidatedSolutionRecipes_ListBySubscriptionLocationResource.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/microsoft.AzureStackHCI/locations/{location}/validatedSolutionRecipes/{validatedSolutionRecipeName}": {
-      "get": {
-        "x-ms-examples__deleted": {
-          "ValidatedSolutionRecipes_Get": {
-            "$ref": "./examples/ValidatedSolutionRecipes_Get.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters": {
-      "get": {
-        "x-ms-examples__deleted": {
-          "List clusters in a given resource group": {
-            "$ref": "./examples/ListClustersByResourceGroup.json"
-          }
-        }
+          ],
+          [
+            " "
+          ]
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}": {
-      "get": {
-        "x-ms-examples__deleted": {
-          "Get cluster": {
-            "$ref": "./examples/GetCluster.json"
-          }
-        }
-      },
       "put": {
-        "x-ms-examples__deleted": {
-          "Create cluster": {
-            "$ref": "./examples/CreateCluster.json"
-          }
-        },
         "x-ms-long-running-operation-options__added": {
           "final-state-via": "original-uri"
         },
@@ -972,19 +87,7 @@
           }
         }
       },
-      "patch": {
-        "x-ms-examples__deleted": {
-          "Update cluster": {
-            "$ref": "./examples/UpdateCluster.json"
-          }
-        }
-      },
       "delete": {
-        "x-ms-examples__deleted": {
-          "Delete cluster": {
-            "$ref": "./examples/DeleteCluster.json"
-          }
-        },
         "responses": {
           "202": {
             "headers__added": {
@@ -997,29 +100,8 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings": {
-      "get": {
-        "x-ms-examples__deleted": {
-          "List ArcSetting resources by HCI Cluster": {
-            "$ref": "./examples/ListArcSettingsByCluster.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}": {
-      "get": {
-        "x-ms-examples__deleted": {
-          "Get ArcSetting": {
-            "$ref": "./examples/GetArcSetting.json"
-          }
-        }
-      },
       "put": {
-        "x-ms-examples__deleted": {
-          "Create ArcSetting": {
-            "$ref": "./examples/PutArcSetting.json"
-          }
-        },
         "x-ms-long-running-operation-options__added": {
           "final-state-via": "original-uri"
         },
@@ -1033,19 +115,7 @@
           }
         }
       },
-      "patch": {
-        "x-ms-examples__deleted": {
-          "Patch ArcSetting": {
-            "$ref": "./examples/PatchArcSetting.json"
-          }
-        }
-      },
       "delete": {
-        "x-ms-examples__deleted": {
-          "Delete ArcSetting": {
-            "$ref": "./examples/DeleteArcSetting.json"
-          }
-        },
         "x-ms-long-running-operation-options__deleted": {
           "final-state-via": "azure-async-operation"
         },
@@ -1065,31 +135,9 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/consentAndInstallDefaultExtensions": {
-      "post": {
-        "x-ms-examples__deleted": {
-          "Consent And Install Default Extensions": {
-            "$ref": "./examples/ConsentAndInstallDefaultExtensions.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/createArcIdentity": {
       "post": {
-        "x-ms-examples__deleted": {
-          "Create Arc Identity": {
-            "$ref": "./examples/CreateArcIdentity.json"
-          }
-        },
         "responses": {
-          "200": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/ArcIdentityResponse",
-                "__new": "#/definitions/StackHciArcIdentityResponseResult"
-              }
-            }
-          },
           "202": {
             "headers__added": {
               "Azure-AsyncOperation": {
@@ -1107,11 +155,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/extensions": {
       "get": {
-        "x-ms-examples__deleted": {
-          "List Extensions under ArcSetting resource": {
-            "$ref": "./examples/ListExtensionsByArcSetting.json"
-          }
-        },
         "responses": {
           "default": {
             "schema": {
@@ -1126,11 +169,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/extensions/{extensionName}": {
       "get": {
-        "x-ms-examples__deleted": {
-          "Get ArcSettings Extension": {
-            "$ref": "./examples/GetExtension.json"
-          }
-        },
         "responses": {
           "default": {
             "schema": {
@@ -1143,11 +181,6 @@
         }
       },
       "put": {
-        "x-ms-examples__deleted": {
-          "Create Arc Extension": {
-            "$ref": "./examples/PutExtension.json"
-          }
-        },
         "responses": {
           "201": {
             "headers__added": {
@@ -1168,11 +201,6 @@
         }
       },
       "patch": {
-        "x-ms-examples__deleted": {
-          "Update Arc Extension": {
-            "$ref": "./examples/PatchExtension.json"
-          }
-        },
         "x-ms-long-running-operation-options__deleted": {
           "final-state-via": "original-uri"
         },
@@ -1196,11 +224,6 @@
         }
       },
       "delete": {
-        "x-ms-examples__deleted": {
-          "Delete Arc Extension": {
-            "$ref": "./examples/DeleteExtension.json"
-          }
-        },
         "x-ms-long-running-operation-options__deleted": {
           "final-state-via": "azure-async-operation"
         },
@@ -1230,11 +253,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/extensions/{extensionName}/upgrade": {
       "post": {
-        "x-ms-examples__deleted": {
-          "Upgrade Machine Extensions": {
-            "$ref": "./examples/Extensions_Upgrade.json"
-          }
-        },
         "x-ms-long-running-operation-options__deleted": {
           "final-state-via": "azure-async-operation"
         },
@@ -1258,22 +276,8 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/generatePassword": {
-      "post": {
-        "x-ms-examples__deleted": {
-          "Generate Password": {
-            "$ref": "./examples/GeneratePassword.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/initializeDisableProcess": {
       "post": {
-        "x-ms-examples__deleted": {
-          "Trigger ARC Disable": {
-            "$ref": "./examples/InitializeDisableProcess.json"
-          }
-        },
         "x-ms-long-running-operation-options__deleted": {
           "final-state-via": "azure-async-operation"
         },
@@ -1295,11 +299,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/reconcile": {
       "post": {
-        "x-ms-examples__deleted": {
-          "Reconcile Arc Settings": {
-            "$ref": "./examples/reconcileArcSettings.json"
-          }
-        },
         "responses": {
           "202": {
             "headers__added": {
@@ -1316,13 +315,21 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/changeRing": {
+      "post": {
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description__added": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/configureRemoteSupport": {
       "post": {
-        "x-ms-examples__deleted": {
-          "Configure Remote Support": {
-            "$ref": "./examples/ConfigureRemoteSupport.json"
-          }
-        },
         "responses": {
           "202": {
             "headers": {
@@ -1336,11 +343,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/createClusterIdentity": {
       "post": {
-        "x-ms-examples__deleted": {
-          "Create cluster Identity": {
-            "$ref": "./examples/CreateClusterIdentity.json"
-          }
-        },
         "responses": {
           "200": {
             "schema": {
@@ -1365,22 +367,8 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/deploymentSettings": {
-      "get": {
-        "x-ms-examples__deleted": {
-          "List Deployment Settings": {
-            "$ref": "./examples/ListDeploymentSettingsByCluster.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/deploymentSettings/{deploymentSettingsName}": {
       "get": {
-        "x-ms-examples__deleted": {
-          "Get Deployment Settings": {
-            "$ref": "./examples/GetDeploymentSettings.json"
-          }
-        },
         "parameters": [
           [
             " "
@@ -1394,14 +382,6 @@
         ]
       },
       "put": {
-        "x-ms-examples__deleted": {
-          "Create Deployment Settings": {
-            "$ref": "./examples/PutDeploymentSettings.json"
-          },
-          "Create Deployment Settings Without Active Directory Integration": {
-            "$ref": "./examples/PutDeploymentSettingsWithADLess.json"
-          }
-        },
         "parameters": [
           [
             " "
@@ -1428,11 +408,6 @@
         }
       },
       "delete": {
-        "x-ms-examples__deleted": {
-          "Delete Deployment Settings": {
-            "$ref": "./examples/DeleteDeploymentSettings.json"
-          }
-        },
         "parameters": [
           [
             " "
@@ -1448,11 +423,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/extendSoftwareAssuranceBenefit": {
       "post": {
-        "x-ms-examples__deleted": {
-          "Create cluster Identity": {
-            "$ref": "./examples/ExtendSoftwareAssuranceBenefit.json"
-          }
-        },
         "responses": {
           "202": {
             "headers__added": {
@@ -1467,11 +437,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/offers": {
       "get": {
-        "x-ms-examples__deleted": {
-          "List Offer resources by HCI Cluster": {
-            "$ref": "./examples/ListOffersByCluster.json"
-          }
-        },
         "x-ms-pageable__deleted": {
           "nextLinkName": "nextLink"
         },
@@ -1489,11 +454,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/publishers": {
       "get": {
-        "x-ms-examples__deleted": {
-          "List Publisher resources by HCI Cluster": {
-            "$ref": "./examples/ListPublishersByCluster.json"
-          }
-        },
         "responses": {
           "default": {
             "schema": {
@@ -1508,11 +468,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/publishers/{publisherName}": {
       "get": {
-        "x-ms-examples__deleted": {
-          "Get Publisher": {
-            "$ref": "./examples/GetPublisher.json"
-          }
-        },
         "responses": {
           "default": {
             "schema": {
@@ -1527,11 +482,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/publishers/{publisherName}/offers": {
       "get": {
-        "x-ms-examples__deleted": {
-          "List Offer resources by publisher for the HCI Cluster": {
-            "$ref": "./examples/ListOffersByPublisher.json"
-          }
-        },
         "responses": {
           "default": {
             "schema": {
@@ -1546,11 +496,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/publishers/{publisherName}/offers/{offerName}": {
       "get": {
-        "x-ms-examples__deleted": {
-          "Get Offer": {
-            "$ref": "./examples/GetOffer.json"
-          }
-        },
         "responses": {
           "default": {
             "schema": {
@@ -1565,11 +510,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/publishers/{publisherName}/offers/{offerName}/skus": {
       "get": {
-        "x-ms-examples__deleted": {
-          "List SKU resources by offer for the HCI Cluster": {
-            "$ref": "./examples/ListSkusByOffer.json"
-          }
-        },
         "responses": {
           "default": {
             "schema": {
@@ -1584,11 +524,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/publishers/{publisherName}/offers/{offerName}/skus/{skuName}": {
       "get": {
-        "x-ms-examples__deleted": {
-          "Get Sku": {
-            "$ref": "./examples/GetSku.json"
-          }
-        },
         "responses": {
           "default": {
             "schema": {
@@ -1601,22 +536,8 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/securitySettings": {
-      "get": {
-        "x-ms-examples__deleted": {
-          "List Security Settings": {
-            "$ref": "./examples/ListSecuritySettingsByCluster.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/securitySettings/{securitySettingsName}": {
       "get": {
-        "x-ms-examples__deleted": {
-          "Get Security Settings": {
-            "$ref": "./examples/GetSecuritySettings.json"
-          }
-        },
         "parameters": [
           [
             " "
@@ -1630,11 +551,6 @@
         ]
       },
       "put": {
-        "x-ms-examples__deleted": {
-          "Create Security Settings": {
-            "$ref": "./examples/PutSecuritySettings.json"
-          }
-        },
         "parameters": [
           [
             " "
@@ -1661,11 +577,6 @@
         }
       },
       "delete": {
-        "x-ms-examples__deleted": {
-          "Delete Security Settings": {
-            "$ref": "./examples/DeleteSecuritySettings.json"
-          }
-        },
         "parameters": [
           [
             " "
@@ -1681,11 +592,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/triggerLogCollection": {
       "post": {
-        "x-ms-examples__deleted": {
-          "Trigger Log Collection": {
-            "$ref": "./examples/TriggerLogCollection.json"
-          }
-        },
         "responses": {
           "202": {
             "headers": {
@@ -1697,22 +603,8 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/updateSecretsLocations": {
-      "post": {
-        "x-ms-examples__deleted": {
-          "Update secrets locations for a Cluster": {
-            "$ref": "./examples/Clusters_UpdateSecretsLocations.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/updateSummaries": {
       "get": {
-        "x-ms-examples__deleted": {
-          "Get Update summaries under cluster resource": {
-            "$ref": "./examples/ListUpdateSummaries.json"
-          }
-        },
         "responses": {
           "default": {
             "schema": {
@@ -1727,11 +619,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/updateSummaries/default": {
       "get": {
-        "x-ms-examples__deleted": {
-          "Get Update summaries under cluster resource": {
-            "$ref": "./examples/GetUpdateSummaries.json"
-          }
-        },
         "responses": {
           "200": {
             "schema": {
@@ -1752,11 +639,6 @@
         }
       },
       "put": {
-        "x-ms-examples__deleted": {
-          "Put Update summaries under cluster resource": {
-            "$ref": "./examples/PutUpdateSummaries.json"
-          }
-        },
         "x-ms-long-running-operation-options__added": {
           "final-state-via": "original-uri"
         },
@@ -1803,11 +685,6 @@
         }
       },
       "delete": {
-        "x-ms-examples__deleted": {
-          "Delete an Update": {
-            "$ref": "./examples/DeleteUpdateSummaries.json"
-          }
-        },
         "x-ms-long-running-operation-options__deleted": {
           "final-state-via": "azure-async-operation"
         },
@@ -1839,11 +716,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/updates": {
       "get": {
-        "x-ms-examples__deleted": {
-          "List available updates": {
-            "$ref": "./examples/ListUpdates.json"
-          }
-        },
         "responses": {
           "default": {
             "schema": {
@@ -1858,11 +730,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/updates/{updateName}": {
       "get": {
-        "x-ms-examples__deleted": {
-          "Get a specific update": {
-            "$ref": "./examples/GetUpdates.json"
-          }
-        },
         "responses": {
           "default": {
             "schema": {
@@ -1875,11 +742,6 @@
         }
       },
       "put": {
-        "x-ms-examples__deleted": {
-          "Put a specific update": {
-            "$ref": "./examples/PutUpdates.json"
-          }
-        },
         "x-ms-long-running-operation-options__added": {
           "final-state-via": "original-uri"
         },
@@ -1902,11 +764,6 @@
         }
       },
       "delete": {
-        "x-ms-examples__deleted": {
-          "Delete an Update": {
-            "$ref": "./examples/DeleteUpdates.json"
-          }
-        },
         "x-ms-long-running-operation-options__deleted": {
           "final-state-via": "azure-async-operation"
         },
@@ -1938,11 +795,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/updates/{updateName}/apply": {
       "post": {
-        "x-ms-examples__deleted": {
-          "List available updates": {
-            "$ref": "./examples/PostUpdates.json"
-          }
-        },
         "x-ms-long-running-operation-options__deleted": {
           "final-state-via": "azure-async-operation"
         },
@@ -1974,11 +826,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/updates/{updateName}/updateRuns": {
       "get": {
-        "x-ms-examples__deleted": {
-          "List Update runs under cluster resource": {
-            "$ref": "./examples/ListUpdateRuns.json"
-          }
-        },
         "responses": {
           "default": {
             "schema": {
@@ -1993,11 +840,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/updates/{updateName}/updateRuns/{updateRunName}": {
       "get": {
-        "x-ms-examples__deleted": {
-          "Get Update runs under cluster resource": {
-            "$ref": "./examples/GetUpdateRuns.json"
-          }
-        },
         "responses": {
           "default": {
             "schema": {
@@ -2010,11 +852,6 @@
         }
       },
       "put": {
-        "x-ms-examples__deleted": {
-          "Get Update runs under cluster resource": {
-            "$ref": "./examples/PutUpdateRuns.json"
-          }
-        },
         "x-ms-long-running-operation-options__added": {
           "final-state-via": "original-uri"
         },
@@ -2037,11 +874,6 @@
         }
       },
       "delete": {
-        "x-ms-examples__deleted": {
-          "Delete an Update": {
-            "$ref": "./examples/DeleteUpdateRuns.json"
-          }
-        },
         "x-ms-long-running-operation-options__deleted": {
           "final-state-via": "azure-async-operation"
         },
@@ -2073,11 +905,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/uploadCertificate": {
       "post": {
-        "x-ms-examples__deleted": {
-          "Upload certificate": {
-            "$ref": "./examples/UploadCertificate.json"
-          }
-        },
         "x-ms-long-running-operation-options__deleted": {
           "final-state-via": "azure-async-operation"
         },
@@ -2095,45 +922,6 @@
     }
   },
   "definitions": {
-    "AdapterPropertyOverrides__deleted": {
-      "type": "object",
-      "properties": {
-        "jumboPacket": {
-          "type": "string"
-        },
-        "networkDirect": {
-          "type": "string"
-        },
-        "networkDirectTechnology": {
-          "type": "string"
-        }
-      }
-    },
-    "ArcIdentityResponse__deleted": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ArcIdentityResponseProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "ChangeRingRequest__deleted": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ChangeRingRequestProperties"
-        }
-      }
-    },
-    "ChangeRingRequestProperties__deleted": {
-      "type": "object",
-      "properties": {
-        "targetRing": {
-          "type": "string"
-        }
-      }
-    },
     "ClusterIdentityResponse__deleted": {
       "type": "object",
       "properties": {
@@ -2221,20 +1009,6 @@
         },
         "assemblyInfo": {
           "$ref": "#/definitions/AssemblyInfo"
-        }
-      }
-    },
-    "DnsZones__deleted": {
-      "type": "object",
-      "properties": {
-        "dnsZoneName": {
-          "type": "string"
-        },
-        "dnsForwarder": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
         }
       }
     },
@@ -2561,15 +1335,6 @@
         }
       ]
     },
-    "ValidateResponse__deleted": {
-      "type": "object",
-      "properties": {
-        "status": {
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
     "VirtualSwitchConfigurationOverrides__deleted": {
       "type": "object",
       "properties": {
@@ -2580,38 +1345,6 @@
           "type": "string"
         }
       }
-    },
-    "AzureLinuxCollectLogJobProperties__added": {
-      "type": "object",
-      "properties": {
-        "fromDate": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "toDate": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "lastLogGenerated": {
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true
-        },
-        "reportedProperties": {
-          "$ref": "#/definitions/LogCollectionReportedProperties",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "fromDate",
-        "toDate"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/AzureLinuxEdgeDeviceJobProperties"
-        }
-      ],
-      "x-ms-discriminator-value": "CollectLog"
     },
     "AzureLinuxEdgeDeviceJob__added": {
       "type": "object",
@@ -2656,15 +1389,24 @@
         "provisioningState": {
           "type": "string",
           "enum": [
+            "NotSpecified",
+            "Error",
             "Succeeded",
             "Failed",
             "Canceled",
-            "InProgress",
-            "NotSpecified",
-            "Provisioning",
+            "Connected",
+            "Disconnected",
+            "Deleted",
+            "Creating",
             "Updating",
             "Deleting",
-            "Accepted"
+            "Moving",
+            "PartiallySucceeded",
+            "PartiallyConnected",
+            "InProgress",
+            "Accepted",
+            "Provisioning",
+            "DisableInProgress"
           ],
           "x-ms-enum": {
             "name": "ProvisioningState",
@@ -2910,6 +1652,17 @@
         "cluster": {
           "$ref": "#/definitions/DeploymentCluster"
         },
+        "identityProvider": {
+          "type": "string",
+          "enum": [
+            "ActiveDirectory",
+            "LocalIdentity"
+          ],
+          "x-ms-enum": {
+            "name": "IdentityProvider",
+            "modelAsString": true
+          }
+        },
         "storage": {
           "$ref": "#/definitions/Storage"
         },
@@ -3046,20 +1799,6 @@
         }
       }
     },
-    "DeploymentSettingsAdapterPropertyOverrides__added": {
-      "type": "object",
-      "properties": {
-        "jumboPacket": {
-          "type": "string"
-        },
-        "networkDirect": {
-          "type": "string"
-        },
-        "networkDirectTechnology": {
-          "type": "string"
-        }
-      }
-    },
     "DeploymentSettingsHostNetwork__added": {
       "type": "object",
       "properties": {
@@ -3123,7 +1862,7 @@
           "type": "boolean"
         },
         "adapterPropertyOverrides": {
-          "$ref": "#/definitions/DeploymentSettingsAdapterPropertyOverrides"
+          "$ref": "#/definitions/AdapterPropertyOverrides"
         }
       }
     },
@@ -3820,15 +2559,6 @@
         }
       }
     },
-    "StackHciArcIdentityResponseResult__added": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ArcIdentityResponseProperties",
-          "readOnly": true
-        }
-      }
-    },
     "StackHciClusterIdentityResponseResult__added": {
       "type": "object",
       "properties": {
@@ -3919,15 +2649,6 @@
         }
       ]
     },
-    "ValidateResponseResult__added": {
-      "type": "object",
-      "properties": {
-        "status": {
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
     "WebProxyConfiguration__added": {
       "type": "object",
       "properties": {
@@ -3942,6 +2663,14 @@
           "items": {
             "type": "string"
           }
+        }
+      }
+    },
+    "ArcIdentityResponse": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten__deleted": true,
+          "readOnly__added": true
         }
       }
     },
@@ -3972,88 +2701,6 @@
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "provisioningState": {
-          "enum": [
-            [
-              "-",
-              "NotSpecified"
-            ],
-            [
-              "-",
-              "Error"
-            ],
-            [
-              " "
-            ],
-            [
-              " "
-            ],
-            [
-              " "
-            ],
-            [
-              "-",
-              "Connected"
-            ],
-            [
-              "-",
-              "Disconnected"
-            ],
-            [
-              "-",
-              "Deleted"
-            ],
-            [
-              "-",
-              "Creating"
-            ],
-            [
-              "+",
-              "InProgress"
-            ],
-            [
-              "+",
-              "NotSpecified"
-            ],
-            [
-              "+",
-              "Provisioning"
-            ],
-            [
-              " "
-            ],
-            [
-              " "
-            ],
-            [
-              "-",
-              "Moving"
-            ],
-            [
-              "-",
-              "PartiallySucceeded"
-            ],
-            [
-              "-",
-              "PartiallyConnected"
-            ],
-            [
-              "-",
-              "InProgress"
-            ],
-            [
-              " "
-            ],
-            [
-              "-",
-              "Provisioning"
-            ],
-            [
-              "-",
-              "DisableInProgress"
-            ]
-          ]
         },
         "connectivityProperties": {
           "type__deleted": "object",
@@ -4153,45 +2800,16 @@
     },
     "ClusterProperties": {
       "properties": {
-        "supportStatus__deleted": {
-          "type": "string",
-          "enum": [
-            "InSupport",
-            "OutOfSupport",
-            "NotSpecified"
-          ],
-          "x-ms-enum": {
-            "name": "SupportStatus",
-            "modelAsString": true
-          },
-          "readOnly": true
-        },
-        "ring__deleted": {
-          "type": "string",
-          "readOnly": true
-        },
-        "identityProvider__deleted": {
-          "type": "string",
-          "default": "ActiveDirectory",
-          "enum": [
-            "ActiveDirectory",
-            "LocalIdentity"
-          ],
-          "x-ms-enum": {
-            "name": "IdentityProvider",
-            "modelAsString": true
-          },
-          "readOnly": true
-        },
-        "cloudEnvironment__added": {
-          "type": "string",
-          "readOnly": true
-        },
-        "clusterWitness__added": {
-          "$ref": "#/definitions/ClusterWitnessProperties"
-        },
         "provisioningState": {
           "enum": [
+            [
+              "+",
+              "NotSpecified"
+            ],
+            [
+              "+",
+              "Error"
+            ],
             [
               " "
             ],
@@ -4206,23 +2824,24 @@
               "Accepted"
             ],
             [
-              "+",
-              "InProgress"
-            ],
-            [
-              "+",
-              "NotSpecified"
-            ],
-            [
-              " "
+              "-",
+              "Provisioning"
             ],
             [
               "-",
               "NotSpecified"
             ],
             [
-              "-",
-              "Creating"
+              "+",
+              "Connected"
+            ],
+            [
+              "+",
+              "Disconnected"
+            ],
+            [
+              "+",
+              "Deleted"
             ],
             [
               " "
@@ -4231,24 +2850,35 @@
               " "
             ],
             [
-              "-",
-              "Moving"
+              " "
+            ],
+            [
+              " "
             ],
             [
               "-",
               "Deleted"
             ],
             [
-              "-",
-              "PartiallySucceeded"
+              " "
             ],
             [
-              "-",
-              "InProgress"
+              "+",
+              "PartiallyConnected"
             ],
             [
-              "-",
-              "DisableInProgress"
+              " "
+            ],
+            [
+              "+",
+              "Accepted"
+            ],
+            [
+              "+",
+              "Provisioning"
+            ],
+            [
+              " "
             ],
             [
               "-",
@@ -4261,10 +2891,6 @@
             [
               "-",
               "Disconnected"
-            ],
-            [
-              "+",
-              "Accepted"
             ]
           ]
         },
@@ -4342,6 +2968,9 @@
               "__new": "#/definitions/LocalAvailabilityZones"
             }
           }
+        },
+        "identityProvider": {
+          "default__deleted": "ActiveDirectory"
         }
       }
     },
@@ -4427,15 +3056,24 @@
           "$ref__deleted": "./hciCommon.json#/definitions/ProvisioningState",
           "type__added": "string",
           "enum__added": [
+            "NotSpecified",
+            "Error",
             "Succeeded",
             "Failed",
             "Canceled",
-            "InProgress",
-            "NotSpecified",
-            "Provisioning",
+            "Connected",
+            "Disconnected",
+            "Deleted",
+            "Creating",
             "Updating",
             "Deleting",
-            "Accepted"
+            "Moving",
+            "PartiallySucceeded",
+            "PartiallyConnected",
+            "InProgress",
+            "Accepted",
+            "Provisioning",
+            "DisableInProgress"
           ],
           "x-ms-enum__added": {
             "name": "ProvisioningState",
@@ -4462,34 +3100,6 @@
         }
       }
     },
-    "DeviceConfiguration": {
-      "properties": {
-        "nicDetails__deleted": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/NicDetail"
-          },
-          "x-ms-identifiers": [
-            "adapterName"
-          ]
-        },
-        "deviceMetadata__deleted": {
-          "type": "string"
-        },
-        "network__added": {
-          "$ref": "#/definitions/NetworkConfiguration"
-        },
-        "hostName__added": {
-          "type": "string"
-        },
-        "webProxy__added": {
-          "$ref": "#/definitions/WebProxyConfiguration"
-        },
-        "time__added": {
-          "$ref": "#/definitions/TimeConfiguration"
-        }
-      }
-    },
     "EceActionStatus": {
       "properties": {
         "steps": {
@@ -4508,7 +3118,7 @@
     "EdgeDevice": {
       "properties": {
         "properties__added": {
-          "$ref": "#/definitions/EdgeDeviceProperties"
+          "type": "object"
         }
       }
     },
@@ -4541,7 +3151,45 @@
         "provisioningState": {
           "enum": [
             [
+              "+",
+              "NotSpecified"
+            ],
+            [
+              "+",
+              "Error"
+            ],
+            [
               " "
+            ],
+            [
+              " "
+            ],
+            [
+              " "
+            ],
+            [
+              "-",
+              "NotSpecified"
+            ],
+            [
+              "-",
+              "Provisioning"
+            ],
+            [
+              "+",
+              "Connected"
+            ],
+            [
+              "+",
+              "Disconnected"
+            ],
+            [
+              "+",
+              "Deleted"
+            ],
+            [
+              "+",
+              "Creating"
             ],
             [
               " "
@@ -4551,22 +3199,30 @@
             ],
             [
               "+",
+              "Moving"
+            ],
+            [
+              "+",
+              "PartiallySucceeded"
+            ],
+            [
+              "+",
+              "PartiallyConnected"
+            ],
+            [
+              "+",
               "InProgress"
             ],
             [
               " "
             ],
             [
-              " "
+              "+",
+              "Provisioning"
             ],
             [
-              " "
-            ],
-            [
-              " "
-            ],
-            [
-              " "
+              "+",
+              "DisableInProgress"
             ]
           ]
         }
@@ -4578,15 +3234,24 @@
           "$ref__deleted": "./hciCommon.json#/definitions/ProvisioningState",
           "type__added": "string",
           "enum__added": [
+            "NotSpecified",
+            "Error",
             "Succeeded",
             "Failed",
             "Canceled",
-            "InProgress",
-            "NotSpecified",
-            "Provisioning",
+            "Connected",
+            "Disconnected",
+            "Deleted",
+            "Creating",
             "Updating",
             "Deleting",
-            "Accepted"
+            "Moving",
+            "PartiallySucceeded",
+            "PartiallyConnected",
+            "InProgress",
+            "Accepted",
+            "Provisioning",
+            "DisableInProgress"
           ],
           "x-ms-enum__added": {
             "name": "ProvisioningState",
@@ -4761,12 +3426,13 @@
         "provisioningState": {
           "enum": [
             [
-              "-",
-              "NotSpecified"
+              " "
             ],
             [
-              "-",
-              "Error"
+              " "
+            ],
+            [
+              " "
             ],
             [
               " "
@@ -4778,61 +3444,41 @@
               " "
             ],
             [
-              "-",
-              "Connected"
+              " "
             ],
             [
-              "-",
-              "Disconnected"
+              " "
             ],
             [
-              "-",
-              "Deleted"
+              " "
             ],
             [
-              "-",
-              "Creating"
+              " "
+            ],
+            [
+              " "
+            ],
+            [
+              " "
+            ],
+            [
+              " "
+            ],
+            [
+              " "
+            ],
+            [
+              " "
+            ],
+            [
+              " "
+            ],
+            [
+              " "
             ],
             [
               "+",
-              "InProgress"
-            ],
-            [
-              "+",
-              "NotSpecified"
-            ],
-            [
-              "+",
-              "Provisioning"
-            ],
-            [
-              " "
-            ],
-            [
-              " "
-            ],
-            [
-              "-",
-              "Moving"
-            ],
-            [
-              "-",
-              "PartiallySucceeded"
-            ],
-            [
-              "-",
-              "PartiallyConnected"
-            ],
-            [
-              "-",
-              "InProgress"
-            ],
-            [
-              " "
-            ],
-            [
-              "-",
-              "Provisioning"
+              "DisableInProgress"
             ]
           ]
         },
@@ -4888,7 +3534,45 @@
         "provisioningState": {
           "enum": [
             [
+              "+",
+              "NotSpecified"
+            ],
+            [
+              "+",
+              "Error"
+            ],
+            [
               " "
+            ],
+            [
+              " "
+            ],
+            [
+              " "
+            ],
+            [
+              "-",
+              "NotSpecified"
+            ],
+            [
+              "-",
+              "Provisioning"
+            ],
+            [
+              "+",
+              "Connected"
+            ],
+            [
+              "+",
+              "Disconnected"
+            ],
+            [
+              "+",
+              "Deleted"
+            ],
+            [
+              "+",
+              "Creating"
             ],
             [
               " "
@@ -4898,22 +3582,30 @@
             ],
             [
               "+",
+              "Moving"
+            ],
+            [
+              "+",
+              "PartiallySucceeded"
+            ],
+            [
+              "+",
+              "PartiallyConnected"
+            ],
+            [
+              "+",
               "InProgress"
             ],
             [
               " "
             ],
             [
-              " "
+              "+",
+              "Provisioning"
             ],
             [
-              " "
-            ],
-            [
-              " "
-            ],
-            [
-              " "
+              "+",
+              "DisableInProgress"
             ]
           ]
         }
@@ -4936,31 +3628,6 @@
             "__old": "#/definitions/RemoteSupportJobReportedProperties",
             "__new": "#/definitions/RemoteSupportReportedProperties"
           }
-        }
-      }
-    },
-    "InfrastructureNetwork": {
-      "properties": {
-        "dnsServerConfig__deleted": {
-          "type": "string",
-          "default": "UseDnsServer",
-          "enum": [
-            "UseDnsServer",
-            "UseForwarder"
-          ],
-          "x-ms-enum": {
-            "name": "DnsServerConfig",
-            "modelAsString": true
-          }
-        },
-        "dnsZones__deleted": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DnsZones"
-          },
-          "x-ms-identifiers": [
-            "dnsZoneName"
-          ]
         }
       }
     },
@@ -5342,7 +4009,45 @@
         "provisioningState": {
           "enum": [
             [
+              "+",
+              "NotSpecified"
+            ],
+            [
+              "+",
+              "Error"
+            ],
+            [
               " "
+            ],
+            [
+              " "
+            ],
+            [
+              " "
+            ],
+            [
+              "-",
+              "NotSpecified"
+            ],
+            [
+              "-",
+              "Provisioning"
+            ],
+            [
+              "+",
+              "Connected"
+            ],
+            [
+              "+",
+              "Disconnected"
+            ],
+            [
+              "+",
+              "Deleted"
+            ],
+            [
+              "+",
+              "Creating"
             ],
             [
               " "
@@ -5352,22 +4057,30 @@
             ],
             [
               "+",
+              "Moving"
+            ],
+            [
+              "+",
+              "PartiallySucceeded"
+            ],
+            [
+              "+",
+              "PartiallyConnected"
+            ],
+            [
+              "+",
               "InProgress"
             ],
             [
               " "
             ],
             [
-              " "
+              "+",
+              "Provisioning"
             ],
             [
-              " "
-            ],
-            [
-              " "
-            ],
-            [
-              " "
+              "+",
+              "DisableInProgress"
             ]
           ]
         }
@@ -5492,25 +4205,37 @@
         "provisioningState": {
           "enum": [
             [
-              " "
-            ],
-            [
-              " "
-            ],
-            [
-              " "
-            ],
-            [
-              "+",
-              "InProgress"
-            ],
-            [
               "+",
               "NotSpecified"
             ],
             [
               "+",
-              "Provisioning"
+              "Error"
+            ],
+            [
+              " "
+            ],
+            [
+              " "
+            ],
+            [
+              " "
+            ],
+            [
+              "+",
+              "Connected"
+            ],
+            [
+              "+",
+              "Disconnected"
+            ],
+            [
+              "+",
+              "Deleted"
+            ],
+            [
+              "+",
+              "Creating"
             ],
             [
               "+",
@@ -5521,11 +4246,30 @@
               "Deleting"
             ],
             [
+              "+",
+              "Moving"
+            ],
+            [
+              "+",
+              "PartiallySucceeded"
+            ],
+            [
+              "+",
+              "PartiallyConnected"
+            ],
+            [
+              "+",
+              "InProgress"
+            ],
+            [
               " "
             ],
             [
-              "-",
-              "Provisioning"
+              " "
+            ],
+            [
+              "+",
+              "DisableInProgress"
             ]
           ]
         },
@@ -5590,25 +4334,37 @@
         "provisioningState": {
           "enum": [
             [
-              " "
-            ],
-            [
-              " "
-            ],
-            [
-              " "
-            ],
-            [
-              "+",
-              "InProgress"
-            ],
-            [
               "+",
               "NotSpecified"
             ],
             [
               "+",
-              "Provisioning"
+              "Error"
+            ],
+            [
+              " "
+            ],
+            [
+              " "
+            ],
+            [
+              " "
+            ],
+            [
+              "+",
+              "Connected"
+            ],
+            [
+              "+",
+              "Disconnected"
+            ],
+            [
+              "+",
+              "Deleted"
+            ],
+            [
+              "+",
+              "Creating"
             ],
             [
               "+",
@@ -5619,11 +4375,30 @@
               "Deleting"
             ],
             [
+              "+",
+              "Moving"
+            ],
+            [
+              "+",
+              "PartiallySucceeded"
+            ],
+            [
+              "+",
+              "PartiallyConnected"
+            ],
+            [
+              "+",
+              "InProgress"
+            ],
+            [
               " "
             ],
             [
-              "-",
-              "Provisioning"
+              " "
+            ],
+            [
+              "+",
+              "DisableInProgress"
             ]
           ]
         },
@@ -5666,25 +4441,37 @@
         "provisioningState": {
           "enum": [
             [
-              " "
-            ],
-            [
-              " "
-            ],
-            [
-              " "
-            ],
-            [
-              "+",
-              "InProgress"
-            ],
-            [
               "+",
               "NotSpecified"
             ],
             [
               "+",
-              "Provisioning"
+              "Error"
+            ],
+            [
+              " "
+            ],
+            [
+              " "
+            ],
+            [
+              " "
+            ],
+            [
+              "+",
+              "Connected"
+            ],
+            [
+              "+",
+              "Disconnected"
+            ],
+            [
+              "+",
+              "Deleted"
+            ],
+            [
+              "+",
+              "Creating"
             ],
             [
               "+",
@@ -5695,11 +4482,30 @@
               "Deleting"
             ],
             [
+              "+",
+              "Moving"
+            ],
+            [
+              "+",
+              "PartiallySucceeded"
+            ],
+            [
+              "+",
+              "PartiallyConnected"
+            ],
+            [
+              "+",
+              "InProgress"
+            ],
+            [
               " "
             ],
             [
-              "-",
-              "Provisioning"
+              " "
+            ],
+            [
+              "+",
+              "DisableInProgress"
             ]
           ]
         },

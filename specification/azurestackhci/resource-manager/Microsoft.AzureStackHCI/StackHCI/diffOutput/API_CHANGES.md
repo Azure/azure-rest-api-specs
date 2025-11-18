@@ -1,168 +1,48 @@
-## Changed Paths
-
-Path: /{resourceUri}/providers/microsoft.AzureStackHCI/edgeDevices
-Change Type: deleted
-
-Path: /{resourceUri}/providers/microsoft.AzureStackHCI/edgeDevices/{edgeDeviceName}
-Change Type: deleted
-
-Path: /{resourceUri}/providers/microsoft.AzureStackHCI/edgeDevices/{edgeDeviceName}/jobs
-Change Type: deleted
-
-Path: /{resourceUri}/providers/microsoft.AzureStackHCI/edgeDevices/{edgeDeviceName}/jobs/{jobsName}
-Change Type: deleted
-
-Path: /{resourceUri}/providers/microsoft.AzureStackHCI/edgeDevices/{edgeDeviceName}/validate
-Change Type: deleted
-
-Path: /{scope}/providers/microsoft.AzureStackHCI/edgeDevices
-Change Type: added
-
-Path: /{scope}/providers/microsoft.AzureStackHCI/edgeDevices/{edgeDeviceName}
-Change Type: added
-
-Path: /{scope}/providers/microsoft.AzureStackHCI/edgeDevices/{edgeDeviceName}/jobs
-Change Type: added
-
-Path: /{scope}/providers/microsoft.AzureStackHCI/edgeDevices/{edgeDeviceName}/jobs/{jobsName}
-Change Type: added
-
-Path: /{scope}/providers/microsoft.AzureStackHCI/edgeDevices/{edgeDeviceName}/validate
-Change Type: added
-
-Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/changeRing
-Change Type: deleted
-
 ## Swagger Changes
 
-### Changes for `/{resourceUri}/providers/microsoft.AzureStackHCI/edgeDevices`
+### Changes for `default`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/{resourceUri}/providers/microsoft.AzureStackHCI/edgeDevices__deleted']` | deleted | `{"get":{"operationId":"EdgeDevices_List","parameters":[{"name":"resourceUri","in":"path","required":...` |
+| `definitions.ClusterProperties.properties.identityProvider.default__deleted` | deleted | `ActiveDirectory` |
+| `definitions.ClusterReportedProperties.properties.hardwareClass.default__added` | added | `Medium` |
+| `definitions.DeploymentCluster.properties.hardwareClass.default__added` | added | `Medium` |
+| `definitions.DeploymentSecuritySettings.properties.credentialGuardEnforced.default__deleted` | deleted | `false` |
+| `definitions.DeploymentSecuritySettings.properties.smbClusterEncryption.default__deleted` | deleted | `false` |
+| `definitions.Observability.properties.euLocation.default__deleted` | deleted | `false` |
+| `definitions.SecurityProperties.properties.securedCoreComplianceAssignment.default__deleted` | deleted | `Audit` |
+| `definitions.SecurityProperties.properties.smbEncryptionForIntraClusterTrafficComplianceAssignment.default__deleted` | deleted | `Audit` |
+| `definitions.SecurityProperties.properties.wdacComplianceAssignment.default__deleted` | deleted | `Audit` |
+| `paths['/{resourceUri}/providers/microsoft.AzureStackHCI/edgeDevices/{edgeDeviceName}'].delete.parameters[1].default__deleted` | deleted | `default` |
+| `paths['/{resourceUri}/providers/microsoft.AzureStackHCI/edgeDevices/{edgeDeviceName}'].get.parameters[1].default__deleted` | deleted | `default` |
+| `paths['/{resourceUri}/providers/microsoft.AzureStackHCI/edgeDevices/{edgeDeviceName}'].put.parameters[1].default__deleted` | deleted | `default` |
+| `paths['/{resourceUri}/providers/microsoft.AzureStackHCI/edgeDevices/{edgeDeviceName}/validate'].post.parameters[1].default__deleted` | deleted | `default` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/deploymentSettings/{deploymentSettingsName}'].delete.parameters[1].default__deleted` | deleted | `default` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/deploymentSettings/{deploymentSettingsName}'].get.parameters[1].default__deleted` | deleted | `default` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/deploymentSettings/{deploymentSettingsName}'].put.parameters[1].default__deleted` | deleted | `default` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/securitySettings/{securitySettingsName}'].delete.parameters[1].default__deleted` | deleted | `default` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/securitySettings/{securitySettingsName}'].get.parameters[1].default__deleted` | deleted | `default` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/securitySettings/{securitySettingsName}'].put.parameters[1].default__deleted` | deleted | `default` |
 
-### Changes for `/{resourceUri}/providers/microsoft.AzureStackHCI/edgeDevices/{edgeDeviceName}`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/{resourceUri}/providers/microsoft.AzureStackHCI/edgeDevices/{edgeDeviceName}__deleted']` | deleted | `{"get":{"operationId":"EdgeDevices_Get","parameters":[{"name":"resourceUri","in":"path","required":t...` |
-
-### Changes for `/{resourceUri}/providers/microsoft.AzureStackHCI/edgeDevices/{edgeDeviceName}/jobs`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/{resourceUri}/providers/microsoft.AzureStackHCI/edgeDevices/{edgeDeviceName}/jobs__deleted']` | deleted | `{"get":{"operationId":"EdgeDeviceJobs_ListByEdgeDevice","parameters":[{"name":"resourceUri","in":"pa...` |
-
-### Changes for `/{resourceUri}/providers/microsoft.AzureStackHCI/edgeDevices/{edgeDeviceName}/jobs/{jobsName}`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/{resourceUri}/providers/microsoft.AzureStackHCI/edgeDevices/{edgeDeviceName}/jobs/{jobsName}__deleted']` | deleted | `{"get":{"operationId":"EdgeDeviceJobs_Get","parameters":[{"name":"resourceUri","in":"path","required...` |
-
-### Changes for `/{resourceUri}/providers/microsoft.AzureStackHCI/edgeDevices/{edgeDeviceName}/validate`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/{resourceUri}/providers/microsoft.AzureStackHCI/edgeDevices/{edgeDeviceName}/validate__deleted']` | deleted | `{"post":{"operationId":"EdgeDevices_Validate","parameters":[{"name":"resourceUri","in":"path","requi...` |
-
-### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/changeRing`
+### Changes for `headers`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/changeRing__deleted']` | deleted | `{"post":{"operationId":"Clusters_ChangeRing","parameters":[{"name":"clusterName","in":"path","requir...` |
-
-### Changes for `/{scope}/providers/microsoft.AzureStackHCI/edgeDevices`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/{scope}/providers/microsoft.AzureStackHCI/edgeDevices__added']` | added | `{"get":{"operationId":"EdgeDevices_List","parameters":[{"name":"scope","in":"path","required":true,"...` |
-
-### Changes for `/{scope}/providers/microsoft.AzureStackHCI/edgeDevices/{edgeDeviceName}`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/{scope}/providers/microsoft.AzureStackHCI/edgeDevices/{edgeDeviceName}__added']` | added | `{"get":{"operationId":"EdgeDevices_Get","parameters":[{"name":"scope","in":"path","required":true,"t...` |
-
-### Changes for `/{scope}/providers/microsoft.AzureStackHCI/edgeDevices/{edgeDeviceName}/jobs`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/{scope}/providers/microsoft.AzureStackHCI/edgeDevices/{edgeDeviceName}/jobs__added']` | added | `{"get":{"operationId":"EdgeDeviceJobs_ListByEdgeDevice","parameters":[{"name":"scope","in":"path","r...` |
-
-### Changes for `/{scope}/providers/microsoft.AzureStackHCI/edgeDevices/{edgeDeviceName}/jobs/{jobsName}`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/{scope}/providers/microsoft.AzureStackHCI/edgeDevices/{edgeDeviceName}/jobs/{jobsName}__added']` | added | `{"get":{"operationId":"EdgeDeviceJobs_Get","parameters":[{"name":"scope","in":"path","required":true...` |
-
-### Changes for `/{scope}/providers/microsoft.AzureStackHCI/edgeDevices/{edgeDeviceName}/validate`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/{scope}/providers/microsoft.AzureStackHCI/edgeDevices/{edgeDeviceName}/validate__added']` | added | `{"post":{"operationId":"EdgeDevices_Validate","parameters":[{"name":"scope","in":"path","required":t...` |
-
-### Changes for `x-ms-examples`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.AzureStackHCI/clusters'].get['x-ms-examples__deleted']` | deleted | `{"List clusters in a given subscription":{"$ref":"./examples/ListClustersBySubscription.json"}}` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.AzureStackHCI/locations/{location}/validatedSolutionRecipes'].get['x-ms-examples__deleted']` | deleted | `{"ValidatedSolutionRecipes_ListBySubscriptionLocationResource":{"$ref":"./examples/ValidatedSolution...` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.AzureStackHCI/locations/{location}/validatedSolutionRecipes/{validatedSolutionRecipeName}'].get['x-ms-examples__deleted']` | deleted | `{"ValidatedSolutionRecipes_Get":{"$ref":"./examples/ValidatedSolutionRecipes_Get.json"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters'].get['x-ms-examples__deleted']` | deleted | `{"List clusters in a given resource group":{"$ref":"./examples/ListClustersByResourceGroup.json"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}'].delete['x-ms-examples__deleted']` | deleted | `{"Delete cluster":{"$ref":"./examples/DeleteCluster.json"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}'].get['x-ms-examples__deleted']` | deleted | `{"Get cluster":{"$ref":"./examples/GetCluster.json"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}'].patch['x-ms-examples__deleted']` | deleted | `{"Update cluster":{"$ref":"./examples/UpdateCluster.json"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}'].put['x-ms-examples__deleted']` | deleted | `{"Create cluster":{"$ref":"./examples/CreateCluster.json"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings'].get['x-ms-examples__deleted']` | deleted | `{"List ArcSetting resources by HCI Cluster":{"$ref":"./examples/ListArcSettingsByCluster.json"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}'].delete['x-ms-examples__deleted']` | deleted | `{"Delete ArcSetting":{"$ref":"./examples/DeleteArcSetting.json"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}'].get['x-ms-examples__deleted']` | deleted | `{"Get ArcSetting":{"$ref":"./examples/GetArcSetting.json"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}'].patch['x-ms-examples__deleted']` | deleted | `{"Patch ArcSetting":{"$ref":"./examples/PatchArcSetting.json"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}'].put['x-ms-examples__deleted']` | deleted | `{"Create ArcSetting":{"$ref":"./examples/PutArcSetting.json"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/consentAndInstallDefaultExtensions'].post['x-ms-examples__deleted']` | deleted | `{"Consent And Install Default Extensions":{"$ref":"./examples/ConsentAndInstallDefaultExtensions.jso...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/createArcIdentity'].post['x-ms-examples__deleted']` | deleted | `{"Create Arc Identity":{"$ref":"./examples/CreateArcIdentity.json"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/extensions'].get['x-ms-examples__deleted']` | deleted | `{"List Extensions under ArcSetting resource":{"$ref":"./examples/ListExtensionsByArcSetting.json"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/extensions/{extensionName}'].delete['x-ms-examples__deleted']` | deleted | `{"Delete Arc Extension":{"$ref":"./examples/DeleteExtension.json"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/extensions/{extensionName}'].get['x-ms-examples__deleted']` | deleted | `{"Get ArcSettings Extension":{"$ref":"./examples/GetExtension.json"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/extensions/{extensionName}'].patch['x-ms-examples__deleted']` | deleted | `{"Update Arc Extension":{"$ref":"./examples/PatchExtension.json"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/extensions/{extensionName}'].put['x-ms-examples__deleted']` | deleted | `{"Create Arc Extension":{"$ref":"./examples/PutExtension.json"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/extensions/{extensionName}/upgrade'].post['x-ms-examples__deleted']` | deleted | `{"Upgrade Machine Extensions":{"$ref":"./examples/Extensions_Upgrade.json"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/generatePassword'].post['x-ms-examples__deleted']` | deleted | `{"Generate Password":{"$ref":"./examples/GeneratePassword.json"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/initializeDisableProcess'].post['x-ms-examples__deleted']` | deleted | `{"Trigger ARC Disable":{"$ref":"./examples/InitializeDisableProcess.json"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/reconcile'].post['x-ms-examples__deleted']` | deleted | `{"Reconcile Arc Settings":{"$ref":"./examples/reconcileArcSettings.json"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/configureRemoteSupport'].post['x-ms-examples__deleted']` | deleted | `{"Configure Remote Support":{"$ref":"./examples/ConfigureRemoteSupport.json"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/createClusterIdentity'].post['x-ms-examples__deleted']` | deleted | `{"Create cluster Identity":{"$ref":"./examples/CreateClusterIdentity.json"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/deploymentSettings'].get['x-ms-examples__deleted']` | deleted | `{"List Deployment Settings":{"$ref":"./examples/ListDeploymentSettingsByCluster.json"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/deploymentSettings/{deploymentSettingsName}'].delete['x-ms-examples__deleted']` | deleted | `{"Delete Deployment Settings":{"$ref":"./examples/DeleteDeploymentSettings.json"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/deploymentSettings/{deploymentSettingsName}'].get['x-ms-examples__deleted']` | deleted | `{"Get Deployment Settings":{"$ref":"./examples/GetDeploymentSettings.json"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/deploymentSettings/{deploymentSettingsName}'].put['x-ms-examples__deleted']` | deleted | `{"Create Deployment Settings":{"$ref":"./examples/PutDeploymentSettings.json"},"Create Deployment Se...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/extendSoftwareAssuranceBenefit'].post['x-ms-examples__deleted']` | deleted | `{"Create cluster Identity":{"$ref":"./examples/ExtendSoftwareAssuranceBenefit.json"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/offers'].get['x-ms-examples__deleted']` | deleted | `{"List Offer resources by HCI Cluster":{"$ref":"./examples/ListOffersByCluster.json"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/publishers'].get['x-ms-examples__deleted']` | deleted | `{"List Publisher resources by HCI Cluster":{"$ref":"./examples/ListPublishersByCluster.json"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/publishers/{publisherName}'].get['x-ms-examples__deleted']` | deleted | `{"Get Publisher":{"$ref":"./examples/GetPublisher.json"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/publishers/{publisherName}/offers'].get['x-ms-examples__deleted']` | deleted | `{"List Offer resources by publisher for the HCI Cluster":{"$ref":"./examples/ListOffersByPublisher.j...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/publishers/{publisherName}/offers/{offerName}'].get['x-ms-examples__deleted']` | deleted | `{"Get Offer":{"$ref":"./examples/GetOffer.json"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/publishers/{publisherName}/offers/{offerName}/skus'].get['x-ms-examples__deleted']` | deleted | `{"List SKU resources by offer for the HCI Cluster":{"$ref":"./examples/ListSkusByOffer.json"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/publishers/{publisherName}/offers/{offerName}/skus/{skuName}'].get['x-ms-examples__deleted']` | deleted | `{"Get Sku":{"$ref":"./examples/GetSku.json"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/securitySettings'].get['x-ms-examples__deleted']` | deleted | `{"List Security Settings":{"$ref":"./examples/ListSecuritySettingsByCluster.json"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/securitySettings/{securitySettingsName}'].delete['x-ms-examples__deleted']` | deleted | `{"Delete Security Settings":{"$ref":"./examples/DeleteSecuritySettings.json"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/securitySettings/{securitySettingsName}'].get['x-ms-examples__deleted']` | deleted | `{"Get Security Settings":{"$ref":"./examples/GetSecuritySettings.json"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/securitySettings/{securitySettingsName}'].put['x-ms-examples__deleted']` | deleted | `{"Create Security Settings":{"$ref":"./examples/PutSecuritySettings.json"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/triggerLogCollection'].post['x-ms-examples__deleted']` | deleted | `{"Trigger Log Collection":{"$ref":"./examples/TriggerLogCollection.json"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/updates'].get['x-ms-examples__deleted']` | deleted | `{"List available updates":{"$ref":"./examples/ListUpdates.json"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/updates/{updateName}'].delete['x-ms-examples__deleted']` | deleted | `{"Delete an Update":{"$ref":"./examples/DeleteUpdates.json"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/updates/{updateName}'].get['x-ms-examples__deleted']` | deleted | `{"Get a specific update":{"$ref":"./examples/GetUpdates.json"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/updates/{updateName}'].put['x-ms-examples__deleted']` | deleted | `{"Put a specific update":{"$ref":"./examples/PutUpdates.json"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/updates/{updateName}/apply'].post['x-ms-examples__deleted']` | deleted | `{"List available updates":{"$ref":"./examples/PostUpdates.json"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/updates/{updateName}/updateRuns'].get['x-ms-examples__deleted']` | deleted | `{"List Update runs under cluster resource":{"$ref":"./examples/ListUpdateRuns.json"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/updates/{updateName}/updateRuns/{updateRunName}'].delete['x-ms-examples__deleted']` | deleted | `{"Delete an Update":{"$ref":"./examples/DeleteUpdateRuns.json"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/updates/{updateName}/updateRuns/{updateRunName}'].get['x-ms-examples__deleted']` | deleted | `{"Get Update runs under cluster resource":{"$ref":"./examples/GetUpdateRuns.json"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/updates/{updateName}/updateRuns/{updateRunName}'].put['x-ms-examples__deleted']` | deleted | `{"Get Update runs under cluster resource":{"$ref":"./examples/PutUpdateRuns.json"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/updateSecretsLocations'].post['x-ms-examples__deleted']` | deleted | `{"Update secrets locations for a Cluster":{"$ref":"./examples/Clusters_UpdateSecretsLocations.json"}...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/updateSummaries'].get['x-ms-examples__deleted']` | deleted | `{"Get Update summaries under cluster resource":{"$ref":"./examples/ListUpdateSummaries.json"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/updateSummaries/default'].delete['x-ms-examples__deleted']` | deleted | `{"Delete an Update":{"$ref":"./examples/DeleteUpdateSummaries.json"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/updateSummaries/default'].get['x-ms-examples__deleted']` | deleted | `{"Get Update summaries under cluster resource":{"$ref":"./examples/GetUpdateSummaries.json"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/updateSummaries/default'].put['x-ms-examples__deleted']` | deleted | `{"Put Update summaries under cluster resource":{"$ref":"./examples/PutUpdateSummaries.json"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/uploadCertificate'].post['x-ms-examples__deleted']` | deleted | `{"Upload certificate":{"$ref":"./examples/UploadCertificate.json"}}` |
+| `paths['/{resourceUri}/providers/microsoft.AzureStackHCI/edgeDevices/{edgeDeviceName}'].put.responses.201.headers__added` | added | `{"Azure-AsyncOperation":{"type":"string","description":"A link to the status monitor"}}` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}'].delete.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}'].delete.responses.202.headers__added` | added | `{"Azure-AsyncOperation":{"type":"string","description":"A link to the status monitor"},"Location":{"...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/createArcIdentity'].post.responses.202.headers__added` | added | `{"Azure-AsyncOperation":{"type":"string","description":"A link to the status monitor"},"Location":{"...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/extensions/{extensionName}'].delete.responses.202.headers__added` | added | `{"Azure-AsyncOperation":{"type":"string","description":"A link to the status monitor"},"Location":{"...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/extensions/{extensionName}'].patch.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/extensions/{extensionName}'].put.responses.201.headers__added` | added | `{"Azure-AsyncOperation":{"type":"string","description":"A link to the status monitor"}}` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/extensions/{extensionName}/upgrade'].post.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/initializeDisableProcess'].post.responses.202.headers__added` | added | `{"Azure-AsyncOperation":{"type":"string","description":"A link to the status monitor"},"Location":{"...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/reconcile'].post.responses.202.headers__added` | added | `{"Azure-AsyncOperation":{"type":"string","description":"A link to the status monitor"},"Location":{"...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/createClusterIdentity'].post.responses.202.headers__added` | added | `{"Azure-AsyncOperation":{"type":"string","description":"A link to the status monitor"},"Location":{"...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/deploymentSettings/{deploymentSettingsName}'].put.responses.201.headers__added` | added | `{"Azure-AsyncOperation":{"type":"string","description":"A link to the status monitor"}}` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/extendSoftwareAssuranceBenefit'].post.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/securitySettings/{securitySettingsName}'].put.responses.201.headers__added` | added | `{"Azure-AsyncOperation":{"type":"string","description":"A link to the status monitor"}}` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/uploadCertificate'].post.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
 
 ### Changes for `x-ms-long-running-operation-options`
 
@@ -204,50 +84,13 @@ Change Type: deleted
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/updates/{updateName}/updateRuns/{updateRunName}'].put.responses.201__added` | added | `{"description":"ignore","schema":{"$ref":"#/definitions/UpdateRun"}}` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/updateSummaries/default'].put.responses.201__added` | added | `{"description":"ignore","schema":{"$ref":"#/definitions/UpdateSummary"}}` |
 
-### Changes for `headers`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}'].delete.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}'].delete.responses.202.headers__added` | added | `{"Azure-AsyncOperation":{"type":"string","description":"A link to the status monitor"},"Location":{"...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/createArcIdentity'].post.responses.202.headers__added` | added | `{"Azure-AsyncOperation":{"type":"string","description":"A link to the status monitor"},"Location":{"...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/extensions/{extensionName}'].delete.responses.202.headers__added` | added | `{"Azure-AsyncOperation":{"type":"string","description":"A link to the status monitor"},"Location":{"...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/extensions/{extensionName}'].patch.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/extensions/{extensionName}'].put.responses.201.headers__added` | added | `{"Azure-AsyncOperation":{"type":"string","description":"A link to the status monitor"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/extensions/{extensionName}/upgrade'].post.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/initializeDisableProcess'].post.responses.202.headers__added` | added | `{"Azure-AsyncOperation":{"type":"string","description":"A link to the status monitor"},"Location":{"...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/reconcile'].post.responses.202.headers__added` | added | `{"Azure-AsyncOperation":{"type":"string","description":"A link to the status monitor"},"Location":{"...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/createClusterIdentity'].post.responses.202.headers__added` | added | `{"Azure-AsyncOperation":{"type":"string","description":"A link to the status monitor"},"Location":{"...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/deploymentSettings/{deploymentSettingsName}'].put.responses.201.headers__added` | added | `{"Azure-AsyncOperation":{"type":"string","description":"A link to the status monitor"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/extendSoftwareAssuranceBenefit'].post.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/securitySettings/{securitySettingsName}'].put.responses.201.headers__added` | added | `{"Azure-AsyncOperation":{"type":"string","description":"A link to the status monitor"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/uploadCertificate'].post.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
-
 ### Changes for `description`
 
 | Path | Change Type | Value |
 |------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/changeRing'].post.responses.202.headers.Location.description__added` | added | `The Location header contains the URL where the status of the long running operation can be checked.` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/configureRemoteSupport'].post.responses.202.headers.Location.description__added` | added | `The Location header contains the URL where the status of the long running operation can be checked.` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/triggerLogCollection'].post.responses.202.headers.Location.description__added` | added | `The Location header contains the URL where the status of the long running operation can be checked.` |
-
-### Changes for `default`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ClusterReportedProperties.properties.hardwareClass.default__added` | added | `Medium` |
-| `definitions.DeploymentCluster.properties.hardwareClass.default__added` | added | `Medium` |
-| `definitions.DeploymentSecuritySettings.properties.credentialGuardEnforced.default__deleted` | deleted | `false` |
-| `definitions.DeploymentSecuritySettings.properties.smbClusterEncryption.default__deleted` | deleted | `false` |
-| `definitions.Observability.properties.euLocation.default__deleted` | deleted | `false` |
-| `definitions.SecurityProperties.properties.securedCoreComplianceAssignment.default__deleted` | deleted | `Audit` |
-| `definitions.SecurityProperties.properties.smbEncryptionForIntraClusterTrafficComplianceAssignment.default__deleted` | deleted | `Audit` |
-| `definitions.SecurityProperties.properties.wdacComplianceAssignment.default__deleted` | deleted | `Audit` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/deploymentSettings/{deploymentSettingsName}'].delete.parameters[1].default__deleted` | deleted | `default` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/deploymentSettings/{deploymentSettingsName}'].get.parameters[1].default__deleted` | deleted | `default` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/deploymentSettings/{deploymentSettingsName}'].put.parameters[1].default__deleted` | deleted | `default` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/securitySettings/{securitySettingsName}'].delete.parameters[1].default__deleted` | deleted | `default` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/securitySettings/{securitySettingsName}'].get.parameters[1].default__deleted` | deleted | `default` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/securitySettings/{securitySettingsName}'].put.parameters[1].default__deleted` | deleted | `default` |
 
 ### Changes for `x-ms-pageable`
 
@@ -264,30 +107,6 @@ Change Type: deleted
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/updates/{updateName}/updateRuns/{updateRunName}'].delete.responses.202.headers.Location__added` | added | `{"type":"string","description":"The Location header contains the URL where the status of the long ru...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/updateSummaries/default'].delete.responses.202.headers.Location__added` | added | `{"type":"string","description":"The Location header contains the URL where the status of the long ru...` |
 
-### Changes for `AdapterPropertyOverrides`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.AdapterPropertyOverrides__deleted` | deleted | `{"type":"object","properties":{"jumboPacket":{"type":"string"},"networkDirect":{"type":"string"},"ne...` |
-
-### Changes for `ArcIdentityResponse`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ArcIdentityResponse__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/ArcIdentityResponseProperties","x...` |
-
-### Changes for `ChangeRingRequest`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ChangeRingRequest__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/ChangeRingRequestProperties"}}}` |
-
-### Changes for `ChangeRingRequestProperties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ChangeRingRequestProperties__deleted` | deleted | `{"type":"object","properties":{"targetRing":{"type":"string"}}}` |
-
 ### Changes for `ClusterIdentityResponse`
 
 | Path | Change Type | Value |
@@ -299,12 +118,6 @@ Change Type: deleted
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.DeploymentData__deleted` | deleted | `{"type":"object","properties":{"securitySettings":{"$ref":"#/definitions/DeploymentSecuritySettings"...` |
-
-### Changes for `DnsZones`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.DnsZones__deleted` | deleted | `{"type":"object","properties":{"dnsZoneName":{"type":"string"},"dnsForwarder":{"type":"array","items...` |
 
 ### Changes for `ErrorDetail`
 
@@ -378,23 +191,11 @@ Change Type: deleted
 |------|------------|-------|
 | `definitions.UpdateSummaries__deleted` | deleted | `{"type":"object","properties":{"location":{"type":"string","x-ms-mutability":["create","read"]},"pro...` |
 
-### Changes for `ValidateResponse`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ValidateResponse__deleted` | deleted | `{"type":"object","properties":{"status":{"type":"string","readOnly":true}}}` |
-
 ### Changes for `VirtualSwitchConfigurationOverrides`
 
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.VirtualSwitchConfigurationOverrides__deleted` | deleted | `{"type":"object","properties":{"enableIov":{"type":"string"},"loadBalancingAlgorithm":{"type":"strin...` |
-
-### Changes for `AzureLinuxCollectLogJobProperties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.AzureLinuxCollectLogJobProperties__added` | added | `{"type":"object","properties":{"fromDate":{"type":"string","format":"date-time"},"toDate":{"type":"s...` |
 
 ### Changes for `AzureLinuxEdgeDeviceJob`
 
@@ -455,12 +256,6 @@ Change Type: deleted
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.DeploymentIntents__added` | added | `{"type":"object","properties":{"name":{"type":"string"},"trafficType":{"type":"array","items":{"type...` |
-
-### Changes for `DeploymentSettingsAdapterPropertyOverrides`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.DeploymentSettingsAdapterPropertyOverrides__added` | added | `{"type":"object","properties":{"jumboPacket":{"type":"string"},"networkDirect":{"type":"string"},"ne...` |
 
 ### Changes for `DeploymentSettingsHostNetwork`
 
@@ -636,12 +431,6 @@ Change Type: deleted
 |------|------------|-------|
 | `definitions.StackHCIHciExtensionPatchParametersContent__added` | added | `{"type":"object","properties":{"typeHandlerVersion":{"type":"string"},"enableAutomaticUpgrade":{"typ...` |
 
-### Changes for `StackHciArcIdentityResponseResult`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.StackHciArcIdentityResponseResult__added` | added | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/ArcIdentityResponseProperties","r...` |
-
 ### Changes for `StackHciClusterIdentityResponseResult`
 
 | Path | Change Type | Value |
@@ -666,43 +455,17 @@ Change Type: deleted
 |------|------------|-------|
 | `definitions.UpdateSummary__added` | added | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/UpdateSummariesProperties"},"loca...` |
 
-### Changes for `ValidateResponseResult`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ValidateResponseResult__added` | added | `{"type":"object","properties":{"status":{"type":"string","readOnly":true}}}` |
-
 ### Changes for `WebProxyConfiguration`
 
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.WebProxyConfiguration__added` | added | `{"type":"object","properties":{"connectionUri":{"type":"string"},"port":{"type":"string"},"bypassLis...` |
 
-### Changes for `readOnly`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ArcIdentityResponseProperties.readOnly__deleted` | deleted | `true` |
-| `definitions.ArcSettingList.properties.value.readOnly__deleted` | deleted | `true` |
-| `definitions.ClusterIdentityResponseProperties.readOnly__deleted` | deleted | `true` |
-| `definitions.ExtensionList.properties.value.readOnly__deleted` | deleted | `true` |
-| `definitions.OfferList.properties.value.readOnly__deleted` | deleted | `true` |
-| `definitions.PasswordCredential.readOnly__deleted` | deleted | `true` |
-| `definitions.PrecheckResult.properties.status.readOnly__added` | added | `true` |
-| `definitions.PublisherList.properties.value.readOnly__deleted` | deleted | `true` |
-| `definitions.SkuList.properties.value.readOnly__deleted` | deleted | `true` |
-| `definitions.Step.properties.description.readOnly__added` | added | `true` |
-| `definitions.Step.properties.endTimeUtc.readOnly__added` | added | `true` |
-| `definitions.Step.properties.name.readOnly__added` | added | `true` |
-| `definitions.Step.properties.startTimeUtc.readOnly__added` | added | `true` |
-| `definitions.Step.properties.status.readOnly__added` | added | `true` |
-| `definitions.Step.properties.steps.readOnly__added` | added | `true` |
-| `definitions.UpdateRunProperties.properties.state.readOnly__added` | added | `true` |
-
 ### Changes for `x-ms-client-flatten`
 
 | Path | Change Type | Value |
 |------|------------|-------|
+| `definitions.ArcIdentityResponse.properties.properties['x-ms-client-flatten__deleted']` | deleted | `true` |
 | `definitions.ArcSetting.properties.properties['x-ms-client-flatten__deleted']` | deleted | `true` |
 | `definitions.ArcSettingsPatch.properties.properties['x-ms-client-flatten__deleted']` | deleted | `true` |
 | `definitions.Cluster.properties.identity['x-ms-client-flatten__deleted']` | deleted | `true` |
@@ -727,6 +490,28 @@ Change Type: deleted
 | `definitions.UpdateSummariesProperties.properties.healthCheckResult['x-ms-client-flatten__deleted']` | deleted | `true` |
 | `definitions.UpdateSummariesProperties.properties.healthState['x-ms-client-flatten__deleted']` | deleted | `true` |
 | `definitions.UpdateSummariesProperties.properties.packageVersions['x-ms-client-flatten__deleted']` | deleted | `true` |
+
+### Changes for `readOnly`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.ArcIdentityResponse.properties.properties.readOnly__added` | added | `true` |
+| `definitions.ArcIdentityResponseProperties.readOnly__deleted` | deleted | `true` |
+| `definitions.ArcSettingList.properties.value.readOnly__deleted` | deleted | `true` |
+| `definitions.ClusterIdentityResponseProperties.readOnly__deleted` | deleted | `true` |
+| `definitions.ExtensionList.properties.value.readOnly__deleted` | deleted | `true` |
+| `definitions.OfferList.properties.value.readOnly__deleted` | deleted | `true` |
+| `definitions.PasswordCredential.readOnly__deleted` | deleted | `true` |
+| `definitions.PrecheckResult.properties.status.readOnly__added` | added | `true` |
+| `definitions.PublisherList.properties.value.readOnly__deleted` | deleted | `true` |
+| `definitions.SkuList.properties.value.readOnly__deleted` | deleted | `true` |
+| `definitions.Step.properties.description.readOnly__added` | added | `true` |
+| `definitions.Step.properties.endTimeUtc.readOnly__added` | added | `true` |
+| `definitions.Step.properties.name.readOnly__added` | added | `true` |
+| `definitions.Step.properties.startTimeUtc.readOnly__added` | added | `true` |
+| `definitions.Step.properties.status.readOnly__added` | added | `true` |
+| `definitions.Step.properties.steps.readOnly__added` | added | `true` |
+| `definitions.UpdateRunProperties.properties.state.readOnly__added` | added | `true` |
 
 ### Changes for `required`
 
@@ -816,36 +601,6 @@ Change Type: deleted
 | `definitions.UpdateProperties.properties.packageSizeInMb.format__added` | added | `float` |
 | `definitions.UpdateStateProperties.properties.progressPercentage.format__added` | added | `float` |
 
-### Changes for `supportStatus`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ClusterProperties.properties.supportStatus__deleted` | deleted | `{"type":"string","enum":["InSupport","OutOfSupport","NotSpecified"],"x-ms-enum":{"name":"SupportStat...` |
-
-### Changes for `ring`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ClusterProperties.properties.ring__deleted` | deleted | `{"type":"string","readOnly":true}` |
-
-### Changes for `identityProvider`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ClusterProperties.properties.identityProvider__deleted` | deleted | `{"type":"string","default":"ActiveDirectory","enum":["ActiveDirectory","LocalIdentity"],"x-ms-enum":...` |
-
-### Changes for `cloudEnvironment`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ClusterProperties.properties.cloudEnvironment__added` | added | `{"type":"string","readOnly":true}` |
-
-### Changes for `clusterWitness`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ClusterProperties.properties.clusterWitness__added` | added | `{"$ref":"#/definitions/ClusterWitnessProperties"}` |
-
 ### Changes for `enum`
 
 | Path | Change Type | Value |
@@ -855,9 +610,9 @@ Change Type: deleted
 | `definitions.DeploymentCluster.properties.clusterPattern.enum__added` | added | `["Standard","RackAware"]` |
 | `definitions.DeploymentCluster.properties.hardwareClass.enum__added` | added | `["Small","Medium","Large"]` |
 | `definitions.DeploymentSettingsProperties.properties.deploymentMode.enum__added` | added | `["Validate","Deploy"]` |
-| `definitions.DeploymentSettingsProperties.properties.provisioningState.enum__added` | added | `["Succeeded","Failed","Canceled","InProgress","NotSpecified","Provisioning","Updating","Deleting","A...` |
+| `definitions.DeploymentSettingsProperties.properties.provisioningState.enum__added` | added | `["NotSpecified","Error","Succeeded","Failed","Canceled","Connected","Disconnected","Deleted","Creati...` |
 | `definitions.EdgeDeviceJob.properties.kind.enum__added` | added | `["HCI","WindowsServer","WindowsIoT","AzureLinux","UbuntuLinux","AzureLinuxRoe"]` |
-| `definitions.EdgeDeviceProperties.properties.provisioningState.enum__added` | added | `["Succeeded","Failed","Canceled","InProgress","NotSpecified","Provisioning","Updating","Deleting","A...` |
+| `definitions.EdgeDeviceProperties.properties.provisioningState.enum__added` | added | `["NotSpecified","Error","Succeeded","Failed","Canceled","Connected","Disconnected","Deleted","Creati...` |
 
 ### Changes for `x-ms-enum`
 
@@ -891,42 +646,6 @@ Change Type: deleted
 | `definitions.DeploymentSetting.properties.properties['x-ms-mutability__deleted']` | deleted | `["create","read"]` |
 | `definitions.SecuritySetting.properties.properties['x-ms-mutability__deleted']` | deleted | `["create","read"]` |
 
-### Changes for `nicDetails`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.DeviceConfiguration.properties.nicDetails__deleted` | deleted | `{"type":"array","items":{"$ref":"#/definitions/NicDetail"},"x-ms-identifiers":["adapterName"]}` |
-
-### Changes for `deviceMetadata`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.DeviceConfiguration.properties.deviceMetadata__deleted` | deleted | `{"type":"string"}` |
-
-### Changes for `network`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.DeviceConfiguration.properties.network__added` | added | `{"$ref":"#/definitions/NetworkConfiguration"}` |
-
-### Changes for `hostName`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.DeviceConfiguration.properties.hostName__added` | added | `{"type":"string"}` |
-
-### Changes for `webProxy`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.DeviceConfiguration.properties.webProxy__added` | added | `{"$ref":"#/definitions/WebProxyConfiguration"}` |
-
-### Changes for `time`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.DeviceConfiguration.properties.time__added` | added | `{"$ref":"#/definitions/TimeConfiguration"}` |
-
 ### Changes for `x-ms-identifiers`
 
 | Path | Change Type | Value |
@@ -937,7 +656,7 @@ Change Type: deleted
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.EdgeDevice.properties.properties__added` | added | `{"$ref":"#/definitions/EdgeDeviceProperties"}` |
+| `definitions.EdgeDevice.properties.properties__added` | added | `{"type":"object"}` |
 | `definitions.EdgeDeviceJob.properties.properties__added` | added | `{"$ref":"#/definitions/EdgeDeviceJobProperties"}` |
 | `definitions.Extension.properties.properties__added` | added | `{"$ref":"#/definitions/ExtensionProperties"}` |
 | `definitions.ExtensionInstanceView.properties.status.properties__deleted` | deleted | `{"code":{"type":"string","description":"The status code."},"level":{"type":"string","description":"T...` |
@@ -996,18 +715,6 @@ Change Type: deleted
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.HciEdgeDeviceJob['x-ms-discriminator-value__deleted']` | deleted | `HCI` |
-
-### Changes for `dnsServerConfig`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.InfrastructureNetwork.properties.dnsServerConfig__deleted` | deleted | `{"type":"string","default":"UseDnsServer","enum":["UseDnsServer","UseForwarder"],"x-ms-enum":{"name"...` |
-
-### Changes for `dnsZones`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.InfrastructureNetwork.properties.dnsZones__deleted` | deleted | `{"type":"array","items":{"$ref":"#/definitions/DnsZones"},"x-ms-identifiers":["dnsZoneName"]}` |
 
 ### Changes for `scopes`
 
@@ -1158,7 +865,6 @@ Change Type: deleted
 | `definitions.UpdateRunProperties.properties.progress.$ref` | `#/definitions/Step` | `#/definitions/UpdateRunsStep` |
 | `definitions.UpdateSummariesList.properties.value.items.$ref` | `#/definitions/UpdateSummaries` | `#/definitions/UpdateSummary` |
 | `definitions.UpdateSummariesProperties.properties.healthCheckResult.items.$ref` | `./hciCommon.json#/definitions/PrecheckResult` | `#/definitions/PrecheckResult` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/createArcIdentity'].post.responses.200.schema.$ref` | `#/definitions/ArcIdentityResponse` | `#/definitions/StackHciArcIdentityResponseResult` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/extensions'].get.responses.default.schema.$ref` | `../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` | `../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/extensions/{extensionName}'].delete.responses.default.schema.$ref` | `../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` | `../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/extensions/{extensionName}'].get.responses.default.schema.$ref` | `../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` | `../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse` |
