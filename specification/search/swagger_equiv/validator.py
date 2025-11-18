@@ -44,7 +44,7 @@ class SwaggerValidator:
         with open(resolved_path, 'r', encoding='utf-8') as f:
             return json.load(f)
 
-    def _normalize_swagger(self, data: Any) -> Any:
+    def _normalize_swagger(self, data: Any, path: str = "") -> Any:
         """
         Normalize swagger data by replacing variable content with standardized values.
         This maintains OpenAPI spec compliance while enabling meaningful comparison.
@@ -52,20 +52,46 @@ class SwaggerValidator:
         if isinstance(data, dict):
             normalized = {}
             for k, v in data.items():
-                if k in ['description', 'summary', 'title']:
-                    # Replace with standardized placeholders
+                current_path = f"{path}/{k}" if path else k
+
+                # Handle description fields more carefully based on context
+                if k in ['description', 'summary', 'title'] and isinstance(v, str):
+                    # Only replace string values with standardized placeholders
                     normalized[k] = f"[NORMALIZED_{k.upper()}]"
                 elif k in ['example', 'examples', 'x-ms-examples']:
-                    # Replace examples with standardized placeholders
-                    normalized[k] = "[NORMALIZED_EXAMPLE]"
+                    # Skip examples entirely to avoid external file reference issues
+                    continue
+                elif k == 'discriminator' and isinstance(v, dict):
+                    # Preserve discriminator structure but normalize content
+                    normalized[k] = self._normalize_swagger(v, current_path)
+                elif k == '$ref':
+                    # Handle cross-file references by converting them to internal references
+                    if isinstance(v, str):
+                        if v.startswith('knowledgebase.json#/'):
+                            # Convert cross-file reference to internal reference
+                            normalized[k] = v.replace('knowledgebase.json#/', '#/')
+                        elif v.startswith('searchservice.json#/'):
+                            # Convert cross-file reference to internal reference
+                            normalized[k] = v.replace('searchservice.json#/', '#/')
+                        elif v.startswith('searchindex.json#/'):
+                            # Convert cross-file reference to internal reference
+                            normalized[k] = v.replace('searchindex.json#/', '#/')
+                        elif '../../../../../common-types/data-plane/v1/types.json#/' in v:
+                            # Convert common-types reference to internal reference
+                            normalized[k] = v.replace('../../../../../common-types/data-plane/v1/types.json#/', '#/')
+                        else:
+                            # Preserve other references as-is
+                            normalized[k] = v
+                    else:
+                        normalized[k] = v
                 else:
                     # Recursively normalize other fields
-                    normalized[k] = self._normalize_swagger(v)
-            
+                    normalized[k] = self._normalize_swagger(v, current_path)
+
             # Sort for consistent ordering
             return {k: normalized[k] for k in sorted(normalized.keys())}
         elif isinstance(data, list):
-            return [self._normalize_swagger(item) for item in data]
+            return [self._normalize_swagger(item, f"{path}[{i}]") for i, item in enumerate(data)]
         else:
             return data
 
@@ -207,7 +233,7 @@ class SwaggerValidator:
 
                 print(f"{Fore.GREEN}✓ Normalized TypeSpec swagger saved: {typespec_file}{Style.RESET_ALL}")
                 print(f"{Fore.GREEN}✓ Normalized hand-authored swagger saved: {hand_authored_file}{Style.RESET_ALL}")
-                
+
             else:
                 print(f"{Fore.YELLOW}Step 1: Skipped normalization (using existing files)...{Style.RESET_ALL}")
 
