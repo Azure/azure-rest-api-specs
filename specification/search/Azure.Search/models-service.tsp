@@ -4437,33 +4437,24 @@ model AzureBlobKnowledgeSource extends KnowledgeSource {
 
 @doc("Parameters for Azure Blob Storage knowledge source.")
 model AzureBlobKnowledgeSourceParameters {
-  @doc("An explicit identity to use for this knowledge source.")
-  identity?: SearchIndexerDataIdentity;
-
-  @doc("The connection string for the Azure Blob Storage account. Alternatively, set to the ResourceId of the storage account in the form '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{storageAccountName}'. In this format it will be used with the indexer's managed identity to connect to the storage account. The managed identity must have permission to read from the storage account.")
+  @doc("Key-based connection string or the ResourceId format if using a managed identity.")
   connectionString: string;
 
-  @doc("The name of the blob container.")
+  @doc("The name of the blob storage container.")
   containerName: string;
 
-  @doc("The blob folder path.")
+  @doc("Optional folder path within the container.")
   folderPath?: string;
 
-  @doc("The embedding model to use for vectorization.")
-  embeddingModel?: KnowledgeSourceVectorizer;
+  @doc("Set to true if connecting to an ADLS Gen2 storage account. Default is false.")
+  isAdlsGen2?: boolean = false;
 
-  @doc("The chat completion model to use for understanding images.")
-  chatCompletionModel?: KnowledgeBaseModel;
-
-  @doc("Ingestion parameters.")
+  @doc("Consolidates all general ingestion settings.")
   ingestionParameters?: KnowledgeSourceIngestionParameters;
 
-  @doc("Resources created for this knowledge source. These resources are managed by the service and should not be modified or deleted.")
+  @doc("Resources created by the knowledge source.")
   @visibility(Lifecycle.Read)
   createdResources?: CreatedResources;
-
-  @doc("If true, images will not be verbalized using the chatCompletionModel.")
-  disableImageVerbalization?: boolean;
 }
 
 @doc("Configuration for SharePoint knowledge source.")
@@ -4515,30 +4506,21 @@ model IndexedOneLakeKnowledgeSource extends KnowledgeSource {
 
 @doc("Parameters for OneLake knowledge source.")
 model IndexedOneLakeKnowledgeSourceParameters {
-  @doc("The ID of the Fabric workspace.")
-  workspaceId: string;
+  @doc("OneLake workspace ID.")
+  fabricWorkspaceId: string;
 
-  @doc("The ID of the lakehouse.")
+  @doc("Specifies which OneLake lakehouse to access.")
   lakehouseId: string;
 
-  @doc("The target path in the lakehouse.")
+  @doc("Optional OneLakehouse folder or shortcut to filter OneLake content.")
   targetPath?: string;
 
-  @doc("The embedding model to use for vectorization.")
-  embeddingModel?: KnowledgeSourceVectorizer;
-
-  @doc("The chat completion model to use for understanding images.")
-  chatCompletionModel?: KnowledgeBaseModel;
-
-  @doc("Ingestion parameters.")
+  @doc("Consolidates all general ingestion settings.")
   ingestionParameters?: KnowledgeSourceIngestionParameters;
 
-  @doc("Resources created for this knowledge source. These resources are managed by the service and should not be modified or deleted.")
+  @doc("Resources created by the knowledge source.")
   @visibility(Lifecycle.Read)
   createdResources?: CreatedResources;
-
-  @doc("If true, images will not be verbalized using the chatCompletionModel.")
-  disableImageVerbalization?: boolean;
 }
 
 @doc("Knowledge Source targeting web results.")

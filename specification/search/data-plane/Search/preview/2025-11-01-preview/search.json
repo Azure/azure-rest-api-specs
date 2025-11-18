@@ -4057,42 +4057,31 @@
       "type": "object",
       "description": "Parameters for Azure Blob Storage knowledge source.",
       "properties": {
-        "identity": {
-          "$ref": "#/definitions/SearchIndexerDataIdentity",
-          "description": "An explicit identity to use for this knowledge source."
-        },
         "connectionString": {
           "type": "string",
-          "description": "The connection string for the Azure Blob Storage account. Alternatively, set to the ResourceId of the storage account in the form '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{storageAccountName}'. In this format it will be used with the indexer's managed identity to connect to the storage account. The managed identity must have permission to read from the storage account."
+          "description": "Key-based connection string or the ResourceId format if using a managed identity."
         },
         "containerName": {
           "type": "string",
-          "description": "The name of the blob container."
+          "description": "The name of the blob storage container."
         },
         "folderPath": {
           "type": "string",
-          "description": "The blob folder path."
+          "description": "Optional folder path within the container."
         },
-        "embeddingModel": {
-          "$ref": "#/definitions/KnowledgeSourceVectorizer",
-          "description": "The embedding model to use for vectorization."
-        },
-        "chatCompletionModel": {
-          "$ref": "#/definitions/KnowledgeBaseModel",
-          "description": "The chat completion model to use for understanding images."
+        "isAdlsGen2": {
+          "type": "boolean",
+          "description": "Set to true if connecting to an ADLS Gen2 storage account. Default is false.",
+          "default": false
         },
         "ingestionParameters": {
           "$ref": "#/definitions/KnowledgeSourceIngestionParameters",
-          "description": "Ingestion parameters."
+          "description": "Consolidates all general ingestion settings."
         },
         "createdResources": {
           "$ref": "#/definitions/CreatedResources",
-          "description": "Resources created for this knowledge source. These resources are managed by the service and should not be modified or deleted.",
+          "description": "Resources created by the knowledge source.",
           "readOnly": true
-        },
-        "disableImageVerbalization": {
-          "type": "boolean",
-          "description": "If true, images will not be verbalized using the chatCompletionModel."
         }
       },
       "required": [
@@ -7107,42 +7096,30 @@
       "type": "object",
       "description": "Parameters for OneLake knowledge source.",
       "properties": {
-        "workspaceId": {
+        "fabricWorkspaceId": {
           "type": "string",
-          "description": "The ID of the Fabric workspace."
+          "description": "OneLake workspace ID."
         },
         "lakehouseId": {
           "type": "string",
-          "description": "The ID of the lakehouse."
+          "description": "Specifies which OneLake lakehouse to access."
         },
         "targetPath": {
           "type": "string",
-          "description": "The target path in the lakehouse."
-        },
-        "embeddingModel": {
-          "$ref": "#/definitions/KnowledgeSourceVectorizer",
-          "description": "The embedding model to use for vectorization."
-        },
-        "chatCompletionModel": {
-          "$ref": "#/definitions/KnowledgeBaseModel",
-          "description": "The chat completion model to use for understanding images."
+          "description": "Optional OneLakehouse folder or shortcut to filter OneLake content."
         },
         "ingestionParameters": {
           "$ref": "#/definitions/KnowledgeSourceIngestionParameters",
-          "description": "Ingestion parameters."
+          "description": "Consolidates all general ingestion settings."
         },
         "createdResources": {
           "$ref": "#/definitions/CreatedResources",
-          "description": "Resources created for this knowledge source. These resources are managed by the service and should not be modified or deleted.",
+          "description": "Resources created by the knowledge source.",
           "readOnly": true
-        },
-        "disableImageVerbalization": {
-          "type": "boolean",
-          "description": "If true, images will not be verbalized using the chatCompletionModel."
         }
       },
       "required": [
-        "workspaceId",
+        "fabricWorkspaceId",
         "lakehouseId"
       ]
     },
