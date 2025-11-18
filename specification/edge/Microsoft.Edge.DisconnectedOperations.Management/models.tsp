@@ -120,6 +120,33 @@ union PricingModel {
   string,
 }
 
+/**
+ * Billing status
+ */
+@added(Microsoft.Edge.Versions.v2025_08_01)
+union BillingStatus {
+  /**
+   * Billing is enabled.
+   */
+  Enabled: "Enabled",
+
+  string,
+
+  /**
+   * Billing is disabled.
+   */
+  Disabled: "Disabled",
+
+  string,
+
+  /**
+   * Billing is stopped.
+   */
+  Stopped: "Stopped",
+
+  string,
+}
+
 @doc("The disconnected operation properties")
 model DisconnectedOperationProperties {
   @visibility(Lifecycle.Read)
@@ -149,13 +176,9 @@ model DisconnectedOperationProperties {
   @visibility(Lifecycle.Update, Lifecycle.Read)
   deviceVersion?: string;
 
-  @doc("Auto renew setting")
-  @added(Microsoft.Edge.Versions.v2025_08_01)
-  autoRenew: AutoRenew;
-
   @doc("The billing configuration")
   @added(Microsoft.Edge.Versions.v2025_08_01)
-  billingConfiguration: BillingConfiguration;
+  billingConfiguration?: BillingConfiguration;
 }
 
 @doc("The disconnected operation manifest")
@@ -328,16 +351,31 @@ model HardwareSettingProperties {
   @doc("Total number of cores")
   totalCores: int32;
 
-  @doc("Disk space in MB")
-  diskSpace: int64;
+  @doc("Disk space in GB")
+  diskSpace: int32;
 
-  @doc("Memory in MB")
-  memory: int64;
+  @doc("Memory in GB")
+  memory: int32;
+
+  @doc("Hardware vendor")
+  hardwareVendor: string;
+
+  @doc("Hardware SKU")
+  hardwareSku: string;
+
+  @doc("Number of nodes")
+  nodes: int32;
+
+  @doc("Active version at registration")
+  activeVersion: string;
+
+  @doc("Solution builder extension at registration")
+  solutionBuilderExtension: string;
 }
 
-@doc("Billing information")
+@doc("Billing period")
 @added(Microsoft.Edge.Versions.v2025_08_01)
-model BillingInfo {
+model BillingPeriod {
   @doc("Number of cores")
   cores: int32;
 
@@ -348,16 +386,23 @@ model BillingInfo {
   startDate: plainDate;
 
   @doc("Billing end date")
-  endDate: plainDate;
+  endDate?: plainDate;
 }
 
 @doc("The billing configuration")
 @added(Microsoft.Edge.Versions.v2025_08_01)
 model BillingConfiguration {
+  @doc("Auto renew setting")
+  autoRenew: AutoRenew;
+
+  @visibility(Lifecycle.Read)
+  @doc("Billing status")
+  billingStatus: BillingStatus;
+
   @doc("Current billing configuration")
-  current: BillingInfo;
+  current: BillingPeriod;
 
   @doc("Upcoming billing configuration")
   @visibility(Lifecycle.Update, Lifecycle.Read)
-  upcoming?: BillingInfo;
+  upcoming?: BillingPeriod;
 }

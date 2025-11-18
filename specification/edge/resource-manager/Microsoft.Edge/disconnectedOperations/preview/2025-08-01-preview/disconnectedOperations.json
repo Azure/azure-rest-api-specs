@@ -1213,12 +1213,21 @@
       "type": "object",
       "description": "The billing configuration",
       "properties": {
+        "autoRenew": {
+          "$ref": "#/definitions/AutoRenew",
+          "description": "Auto renew setting"
+        },
+        "billingStatus": {
+          "$ref": "#/definitions/BillingStatus",
+          "description": "Billing status",
+          "readOnly": true
+        },
         "current": {
-          "$ref": "#/definitions/BillingInfo",
+          "$ref": "#/definitions/BillingPeriod",
           "description": "Current billing configuration"
         },
         "upcoming": {
-          "$ref": "#/definitions/BillingInfo",
+          "$ref": "#/definitions/BillingPeriod",
           "description": "Upcoming billing configuration",
           "x-ms-mutability": [
             "read",
@@ -1227,6 +1236,8 @@
         }
       },
       "required": [
+        "autoRenew",
+        "billingStatus",
         "current"
       ]
     },
@@ -1234,12 +1245,16 @@
       "type": "object",
       "description": "The billing configuration",
       "properties": {
+        "autoRenew": {
+          "$ref": "#/definitions/AutoRenew",
+          "description": "Auto renew setting"
+        },
         "current": {
-          "$ref": "#/definitions/BillingInfoUpdate",
+          "$ref": "#/definitions/BillingPeriodUpdate",
           "description": "Current billing configuration"
         },
         "upcoming": {
-          "$ref": "#/definitions/BillingInfoUpdate",
+          "$ref": "#/definitions/BillingPeriodUpdate",
           "description": "Upcoming billing configuration",
           "x-ms-mutability": [
             "read",
@@ -1248,9 +1263,27 @@
         }
       }
     },
-    "BillingInfo": {
+    "BillingModel": {
+      "type": "string",
+      "description": "Billing model",
+      "enum": [
+        "Capacity"
+      ],
+      "x-ms-enum": {
+        "name": "BillingModel",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Capacity",
+            "value": "Capacity",
+            "description": "Billed on capacity."
+          }
+        ]
+      }
+    },
+    "BillingPeriod": {
       "type": "object",
-      "description": "Billing information",
+      "description": "Billing period",
       "properties": {
         "cores": {
           "type": "integer",
@@ -1275,13 +1308,12 @@
       "required": [
         "cores",
         "pricingModel",
-        "startDate",
-        "endDate"
+        "startDate"
       ]
     },
-    "BillingInfoUpdate": {
+    "BillingPeriodUpdate": {
       "type": "object",
-      "description": "Billing information",
+      "description": "Billing period",
       "properties": {
         "cores": {
           "type": "integer",
@@ -1304,20 +1336,32 @@
         }
       }
     },
-    "BillingModel": {
+    "BillingStatus": {
       "type": "string",
-      "description": "Billing model",
+      "description": "Billing status",
       "enum": [
-        "Capacity"
+        "Enabled",
+        "Disabled",
+        "Stopped"
       ],
       "x-ms-enum": {
-        "name": "BillingModel",
+        "name": "BillingStatus",
         "modelAsString": true,
         "values": [
           {
-            "name": "Capacity",
-            "value": "Capacity",
-            "description": "Billed on capacity."
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Billing is enabled."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Billing is disabled."
+          },
+          {
+            "name": "Stopped",
+            "value": "Stopped",
+            "description": "Billing is stopped."
           }
         ]
       }
@@ -1507,10 +1551,6 @@
             "update"
           ]
         },
-        "autoRenew": {
-          "$ref": "#/definitions/AutoRenew",
-          "description": "Auto renew setting"
-        },
         "billingConfiguration": {
           "$ref": "#/definitions/BillingConfiguration",
           "description": "The billing configuration"
@@ -1519,9 +1559,7 @@
       "required": [
         "stampId",
         "billingModel",
-        "connectionIntent",
-        "autoRenew",
-        "billingConfiguration"
+        "connectionIntent"
       ]
     },
     "DisconnectedOperationUpdate": {
@@ -1564,10 +1602,6 @@
             "read",
             "update"
           ]
-        },
-        "autoRenew": {
-          "$ref": "#/definitions/AutoRenew",
-          "description": "Auto renew setting"
         },
         "billingConfiguration": {
           "$ref": "#/definitions/BillingConfigurationUpdate",
@@ -1627,19 +1661,45 @@
         },
         "diskSpace": {
           "type": "integer",
-          "format": "int64",
-          "description": "Disk space in MB"
+          "format": "int32",
+          "description": "Disk space in GB"
         },
         "memory": {
           "type": "integer",
-          "format": "int64",
-          "description": "Memory in MB"
+          "format": "int32",
+          "description": "Memory in GB"
+        },
+        "hardwareVendor": {
+          "type": "string",
+          "description": "Hardware vendor"
+        },
+        "hardwareSku": {
+          "type": "string",
+          "description": "Hardware SKU"
+        },
+        "nodes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of nodes"
+        },
+        "activeVersion": {
+          "type": "string",
+          "description": "Active version at registration"
+        },
+        "solutionBuilderExtension": {
+          "type": "string",
+          "description": "Solution builder extension at registration"
         }
       },
       "required": [
         "totalCores",
         "diskSpace",
-        "memory"
+        "memory",
+        "hardwareVendor",
+        "hardwareSku",
+        "nodes",
+        "activeVersion",
+        "solutionBuilderExtension"
       ]
     },
     "Image": {
