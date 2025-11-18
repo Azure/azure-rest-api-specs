@@ -435,6 +435,7 @@ namespace KnowledgeBaseRetrievalClient {
   "com.azure.search.documents",
   "java"
 );
+@@clientName(Search.SemanticField.fieldName, "name", "javascript");
 @@clientNamespace(Search.SemanticErrorReason, "Azure.Search.Documents");
 @@clientNamespace(Search.SemanticErrorReason,
   "com.azure.search.documents",
