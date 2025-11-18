@@ -1,3 +1,5 @@
+import { SdkName } from "@azure-tools/specs-shared/sdk-types";
+
 /**
  * Represents the input parameters required for spec-gen-sdk command execution.
  */
@@ -9,7 +11,7 @@ export interface SpecGenSdkCmdInput {
   tspConfigPath?: string;
   readmePath?: string;
   sdkRepoName: string;
-  sdkLanguage: string;
+  sdkLanguage: SdkName;
   apiVersion?: string;
   prNumber?: string;
   sdkReleaseType?: string;
@@ -29,16 +31,6 @@ export type VsoLogs = Map<
     warnings?: string[];
   }
 >;
-
-/**
- * Represents supported SDK language identifiers.
- */
-export type SdkName =
-  | "azure-sdk-for-go"
-  | "azure-sdk-for-java"
-  | "azure-sdk-for-js"
-  | "azure-sdk-for-net"
-  | "azure-sdk-for-python";
 
 /**
  * Represents the plane types for SDK generation settings

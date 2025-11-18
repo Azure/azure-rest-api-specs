@@ -18,4 +18,7 @@ export default defineConfig(eslint.configs.recommended, tseslint.configs.recomme
       tsconfigRootDir: import.meta.dirname,
     },
   },
+  {
+    ignores: ["coverage/**", "shared/coverage/**"],
+  },
 });
