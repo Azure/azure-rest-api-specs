@@ -1374,6 +1374,42 @@
         "estimatedTotal"
       ]
     },
+    "CreatedByType": {
+      "type": "string",
+      "description": "The type of identity that created the item.",
+      "enum": [
+        "User",
+        "Application",
+        "ManagedIdentity",
+        "Key"
+      ],
+      "x-ms-enum": {
+        "name": "CreatedByType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "User",
+            "value": "User",
+            "description": "The item is created by user"
+          },
+          {
+            "name": "Application",
+            "value": "Application",
+            "description": "The item is created by application"
+          },
+          {
+            "name": "ManagedIdentity",
+            "value": "ManagedIdentity",
+            "description": "The item is created using managed identity"
+          },
+          {
+            "name": "Key",
+            "value": "Key",
+            "description": "The item is created using key"
+          }
+        ]
+      }
+    },
     "DimensionScope": {
       "type": "string",
       "description": "The scope at which the quota is applied to.",
@@ -1484,15 +1520,25 @@
           "description": "The identity that created the item.",
           "readOnly": true
         },
+        "createdByType": {
+          "$ref": "#/definitions/CreatedByType",
+          "description": "The type of identity that created the item.",
+          "readOnly": true
+        },
         "lastModifiedTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The last time the item was modified by a user.",
+          "description": "The timestamp of the item last modification initiated by the customer.",
           "readOnly": true
         },
         "lastModifiedBy": {
           "type": "string",
-          "description": "The last user that modified the item.",
+          "description": "The identity that last modified the item.",
+          "readOnly": true
+        },
+        "lastModifiedByType": {
+          "$ref": "#/definitions/CreatedByType",
+          "description": "The type of identity that last modified the item.",
           "readOnly": true
         },
         "lastUpdatedTime": {

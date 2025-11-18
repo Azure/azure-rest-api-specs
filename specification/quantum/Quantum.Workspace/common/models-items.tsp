@@ -35,6 +35,24 @@ union Priority {
   High: "High",
 }
 
+/** The type of identity that created the item. */
+@added(QuantumWorkspaceAPIVersion.v2025_12_01_preview)
+union CreatedByType {
+  string,
+
+  /** The item is created by user */
+  User: "User",
+
+  /** The item is created by application */
+  Application: "Application",
+
+  /** The item is created using managed identity */
+  ManagedIdentity: "ManagedIdentity",
+
+  /** The item is created using key */
+  Key: "Key",
+}
+
 /** Id of the workspace item. */
 @pattern("^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$")
 @maxLength(36)
@@ -75,15 +93,25 @@ model ItemDetails {
   @visibility(Lifecycle.Read)
   createdBy?: string;
 
-  /** The last time the item was modified by a user. */
+  /** The type of identity that created the item. */
+  @added(QuantumWorkspaceAPIVersion.v2025_12_01_preview)
+  @visibility(Lifecycle.Read)
+  createdByType?: CreatedByType;
+
+  /** The timestamp of the item last modification initiated by the customer. */
   @added(QuantumWorkspaceAPIVersion.v2025_12_01_preview)
   @visibility(Lifecycle.Read)
   lastModifiedTime?: utcDateTime;
 
-  /** The last user that modified the item. */
+  /** The identity that last modified the item. */
   @added(QuantumWorkspaceAPIVersion.v2025_12_01_preview)
   @visibility(Lifecycle.Read)
   lastModifiedBy?: string;
+
+  /** The type of identity that last modified the item. */
+  @added(QuantumWorkspaceAPIVersion.v2025_12_01_preview)
+  @visibility(Lifecycle.Read)
+  lastModifiedByType?: CreatedByType;
 
   /** The last time the item was updated by the system. */
   @added(QuantumWorkspaceAPIVersion.v2025_12_01_preview)
