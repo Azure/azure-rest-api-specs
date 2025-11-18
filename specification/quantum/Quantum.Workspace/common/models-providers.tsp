@@ -91,5 +91,5 @@ model TargetStatus {
   /** The metadata of this target. */
   @added(QuantumWorkspaceAPIVersion.v2025_12_01_preview)
   @visibility(Lifecycle.Read)
-  metadata?: Record<unknown>;
+  metadata?: {};
 }
