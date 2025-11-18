@@ -4059,40 +4059,40 @@
       "properties": {
         "identity": {
           "$ref": "#/definitions/SearchIndexerDataIdentity",
-          "description": "An explicit identity to use for this knowledge source. "
+          "description": "An explicit identity to use for this knowledge source."
         },
         "connectionString": {
           "type": "string",
-          "description": "Key-based connection string or the ResourceId format if using a managed identity."
+          "description": "The connection string for the Azure Blob Storage account. Alternatively, set to the ResourceId of the storage account in the form '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{storageAccountName}'. In this format it will be used with the indexer's managed identity to connect to the storage account. The managed identity must have permission to read from the storage account."
         },
         "containerName": {
           "type": "string",
-          "description": "The name of the blob storage container."
+          "description": "The name of the blob container."
         },
         "folderPath": {
           "type": "string",
-          "description": "Optional folder path within the container."
+          "description": "The blob folder path."
         },
         "embeddingModel": {
-          "$ref": "#/definitions/VectorSearchVectorizer",
-          "description": "Optional vectorizer configuration for vectorizing content."
+          "$ref": "#/definitions/KnowledgeSourceVectorizer",
+          "description": "The embedding model to use for vectorization."
         },
         "chatCompletionModel": {
           "$ref": "#/definitions/KnowledgeBaseModel",
-          "description": "Optional chat completion model for image verbalization or context extraction."
+          "description": "The chat completion model to use for understanding images."
         },
-        "ingestionSchedule": {
-          "$ref": "#/definitions/IndexingSchedule",
-          "description": "Optional schedule for data ingestion."
+        "ingestionParameters": {
+          "$ref": "#/definitions/KnowledgeSourceIngestionParameters",
+          "description": "Ingestion parameters."
         },
         "createdResources": {
           "$ref": "#/definitions/CreatedResources",
-          "description": "Resources created by the knowledge source.",
+          "description": "Resources created for this knowledge source. These resources are managed by the service and should not be modified or deleted.",
           "readOnly": true
         },
         "disableImageVerbalization": {
           "type": "boolean",
-          "description": "Indicates whether image verbalization should be disabled."
+          "description": "If true, images will not be verbalized using the chatCompletionModel."
         }
       },
       "required": [
@@ -7107,25 +7107,42 @@
       "type": "object",
       "description": "Parameters for OneLake knowledge source.",
       "properties": {
-        "fabricWorkspaceId": {
+        "workspaceId": {
           "type": "string",
-          "description": "The Fabric workspace ID."
+          "description": "The ID of the Fabric workspace."
         },
         "lakehouseId": {
           "type": "string",
-          "description": "The lakehouse ID."
+          "description": "The ID of the lakehouse."
         },
         "targetPath": {
           "type": "string",
-          "description": "Optional target path within the lakehouse."
+          "description": "The target path in the lakehouse."
+        },
+        "embeddingModel": {
+          "$ref": "#/definitions/KnowledgeSourceVectorizer",
+          "description": "The embedding model to use for vectorization."
+        },
+        "chatCompletionModel": {
+          "$ref": "#/definitions/KnowledgeBaseModel",
+          "description": "The chat completion model to use for understanding images."
         },
         "ingestionParameters": {
           "$ref": "#/definitions/KnowledgeSourceIngestionParameters",
-          "description": "Optional ingestion parameters."
+          "description": "Ingestion parameters."
+        },
+        "createdResources": {
+          "$ref": "#/definitions/CreatedResources",
+          "description": "Resources created for this knowledge source. These resources are managed by the service and should not be modified or deleted.",
+          "readOnly": true
+        },
+        "disableImageVerbalization": {
+          "type": "boolean",
+          "description": "If true, images will not be verbalized using the chatCompletionModel."
         }
       },
       "required": [
-        "fabricWorkspaceId",
+        "workspaceId",
         "lakehouseId"
       ]
     },
@@ -7198,7 +7215,7 @@
         },
         "connectionString": {
           "type": "string",
-          "description": "Key-based connection string or the ResourceId format if using a managed identity."
+          "description": "The connection string for the SharePoint site."
         },
         "containerName": {
           "type": "string",
@@ -7206,11 +7223,28 @@
         },
         "query": {
           "type": "string",
-          "description": "Optional query to filter SharePoint content."
+          "description": "SharePoint query."
+        },
+        "embeddingModel": {
+          "$ref": "#/definitions/KnowledgeSourceVectorizer",
+          "description": "The embedding model to use for vectorization."
+        },
+        "chatCompletionModel": {
+          "$ref": "#/definitions/KnowledgeBaseModel",
+          "description": "The chat completion model to use for understanding images."
         },
         "ingestionParameters": {
           "$ref": "#/definitions/KnowledgeSourceIngestionParameters",
-          "description": "Optional ingestion parameters."
+          "description": "Ingestion parameters."
+        },
+        "createdResources": {
+          "$ref": "#/definitions/CreatedResources",
+          "description": "Resources created for this knowledge source. These resources are managed by the service and should not be modified or deleted.",
+          "readOnly": true
+        },
+        "disableImageVerbalization": {
+          "type": "boolean",
+          "description": "If true, images will not be verbalized using the chatCompletionModel."
         }
       },
       "required": [
@@ -9382,104 +9416,62 @@
       "type": "object",
       "description": "Consolidates all general ingestion settings for knowledge sources.",
       "properties": {
+        "identity": {
+          "$ref": "#/definitions/SearchIndexerDataIdentity",
+          "description": "An explicit identity to use for this knowledge source."
+        },
+        "embeddingModel": {
+          "$ref": "#/definitions/KnowledgeSourceVectorizer",
+          "description": "Optional vectorizer configuration for vectorizing content."
+        },
+        "chatCompletionModel": {
+          "$ref": "#/definitions/KnowledgeBaseModel",
+          "description": "Optional chat completion model for image verbalization or context extraction."
+        },
+        "disableImageVerbalization": {
+          "type": "boolean",
+          "description": "Indicates whether image verbalization should be disabled. Default is false.",
+          "default": false
+        },
         "ingestionSchedule": {
           "$ref": "#/definitions/IndexingSchedule",
-          "description": "The schedule for ingestion."
-        },
-        "aiServices": {
-          "$ref": "#/definitions/AIServices",
-          "description": "The AI Services configuration."
-        },
-        "maxItemsToExtract": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The maximum number of items to extract from the source."
-        },
-        "maxDocumentExtractionSize": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The maximum size of the document to extract."
-        },
-        "dataToExtract": {
-          "$ref": "#/definitions/BlobIndexerDataToExtract",
-          "description": "The data to extract from the source."
-        },
-        "imageAction": {
-          "$ref": "#/definitions/BlobIndexerImageAction",
-          "description": "The action to take on images."
-        },
-        "parsingMode": {
-          "$ref": "#/definitions/BlobIndexerParsingMode",
-          "description": "The parsing mode to use."
-        },
-        "failOnUnprocessableDocument": {
-          "type": "boolean",
-          "description": "Whether to fail on unprocessable document."
-        },
-        "failOnUnsupportedContentType": {
-          "type": "boolean",
-          "description": "Whether to fail on unsupported content type."
-        },
-        "indexedFileNameExtensions": {
-          "type": "array",
-          "description": "Indexed file name extensions.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "excludedFileNameExtensions": {
-          "type": "array",
-          "description": "Excluded file name extensions.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "indexStorageMetadataOnlyForOversizedDocuments": {
-          "type": "boolean",
-          "description": "Whether to index storage metadata only for oversized documents."
-        },
-        "delimitedTextDelimiter": {
-          "type": "string",
-          "description": "Delimited text delimiter."
-        },
-        "firstLineContainsHeaders": {
-          "type": "boolean",
-          "description": "Whether the first line contains headers."
-        },
-        "delimitedTextHeaders": {
-          "type": "string",
-          "description": "Delimited text headers."
-        },
-        "documentRoot": {
-          "type": "string",
-          "description": "The document root."
-        },
-        "markdownHeaderDepth": {
-          "$ref": "#/definitions/MarkdownHeaderDepth",
-          "description": "The markdown header depth."
-        },
-        "markdownParsingSubmode": {
-          "$ref": "#/definitions/MarkdownParsingSubmode",
-          "description": "The markdown parsing submode."
-        },
-        "pdfTextRotationAlgorithm": {
-          "$ref": "#/definitions/BlobIndexerPDFTextRotationAlgorithm",
-          "description": "The PDF text rotation algorithm."
+          "description": "Optional schedule for data ingestion."
         },
         "ingestionPermissionOptions": {
           "type": "array",
-          "description": "Permission options for ingestion.",
+          "description": "Optional list of permission types to ingest together with document content. If specified, it will set the indexer permission options for the data source.",
           "items": {
             "$ref": "#/definitions/KnowledgeSourceIngestionPermissionOption"
           }
         },
-        "allowSkillsetToReadFileData": {
-          "type": "boolean",
-          "description": "Whether to allow skillset to read file data."
-        },
         "contentExtractionMode": {
-          "$ref": "#/definitions/KnowledgeSourceContentExtractionMode",
-          "description": "Optional content extraction mode. Default is 'minimal'."
+          "type": "string",
+          "description": "Optional content extraction mode. Default is 'minimal'.",
+          "default": "minimal",
+          "enum": [
+            "minimal",
+            "standard"
+          ],
+          "x-ms-enum": {
+            "name": "KnowledgeSourceContentExtractionMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Minimal",
+                "value": "minimal",
+                "description": "Extracts only essential metadata while deferring most content processing."
+              },
+              {
+                "name": "Standard",
+                "value": "standard",
+                "description": "Performs the full default content extraction pipeline."
+              }
+            ]
+          }
+        },
+        "aiServices": {
+          "$ref": "#/definitions/AIServices",
+          "description": "Optional AI Services configuration for content processing."
         }
       }
     },
@@ -14652,9 +14644,23 @@
           "type": "string",
           "description": "The name of the Search index."
         },
-        "sourceDataSelect": {
+        "sourceDataFields": {
+          "type": "array",
+          "description": "Used to request additional fields for referenced source data.",
+          "items": {
+            "$ref": "#/definitions/SearchIndexFieldReference"
+          }
+        },
+        "searchFields": {
+          "type": "array",
+          "description": "Used to restrict which fields to search on the search index.",
+          "items": {
+            "$ref": "#/definitions/SearchIndexFieldReference"
+          }
+        },
+        "semanticConfigurationName": {
           "type": "string",
-          "description": "Used to request additional fields for referenced source data."
+          "description": "Used to specify a different semantic configuration on the target search index other than the default one."
         }
       },
       "required": [

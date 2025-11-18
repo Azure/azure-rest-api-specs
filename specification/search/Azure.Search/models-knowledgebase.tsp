@@ -713,71 +713,29 @@ union KnowledgeSourceIngestionPermissionOption {
 
 @doc("Consolidates all general ingestion settings for knowledge sources.")
 model KnowledgeSourceIngestionParameters {
-  @doc("The schedule for ingestion.")
+  @doc("An explicit identity to use for this knowledge source.")
+  identity?: SearchIndexerDataIdentity;
+
+  @doc("Optional vectorizer configuration for vectorizing content.")
+  embeddingModel?: KnowledgeSourceVectorizer;
+
+  @doc("Optional chat completion model for image verbalization or context extraction.")
+  chatCompletionModel?: KnowledgeBaseModel;
+
+  @doc("Indicates whether image verbalization should be disabled. Default is false.")
+  disableImageVerbalization?: boolean = false;
+
+  @doc("Optional schedule for data ingestion.")
   ingestionSchedule?: IndexingSchedule;
 
-  @doc("The AI Services configuration.")
-  aiServices?: AIServices;
-
-  @doc("The maximum number of items to extract from the source.")
-  maxItemsToExtract?: int32;
-
-  @doc("The maximum size of the document to extract.")
-  maxDocumentExtractionSize?: int64;
-
-  @doc("The data to extract from the source.")
-  dataToExtract?: BlobIndexerDataToExtract;
-
-  @doc("The action to take on images.")
-  imageAction?: BlobIndexerImageAction;
-
-  @doc("The parsing mode to use.")
-  parsingMode?: BlobIndexerParsingMode;
-
-  @doc("Whether to fail on unprocessable document.")
-  failOnUnprocessableDocument?: boolean;
-
-  @doc("Whether to fail on unsupported content type.")
-  failOnUnsupportedContentType?: boolean;
-
-  @doc("Indexed file name extensions.")
-  indexedFileNameExtensions?: string[];
-
-  @doc("Excluded file name extensions.")
-  excludedFileNameExtensions?: string[];
-
-  @doc("Whether to index storage metadata only for oversized documents.")
-  indexStorageMetadataOnlyForOversizedDocuments?: boolean;
-
-  @doc("Delimited text delimiter.")
-  delimitedTextDelimiter?: string;
-
-  @doc("Whether the first line contains headers.")
-  firstLineContainsHeaders?: boolean;
-
-  @doc("Delimited text headers.")
-  delimitedTextHeaders?: string;
-
-  @doc("The document root.")
-  documentRoot?: string;
-
-  @doc("The markdown header depth.")
-  markdownHeaderDepth?: MarkdownHeaderDepth;
-
-  @doc("The markdown parsing submode.")
-  markdownParsingSubmode?: MarkdownParsingSubmode;
-
-  @doc("The PDF text rotation algorithm.")
-  pdfTextRotationAlgorithm?: BlobIndexerPDFTextRotationAlgorithm;
-
-  @doc("Permission options for ingestion.")
+  @doc("Optional list of permission types to ingest together with document content. If specified, it will set the indexer permission options for the data source.")
   ingestionPermissionOptions?: KnowledgeSourceIngestionPermissionOption[];
 
-  @doc("Whether to allow skillset to read file data.")
-  allowSkillsetToReadFileData?: boolean;
-
   @doc("Optional content extraction mode. Default is 'minimal'.")
-  contentExtractionMode?: KnowledgeSourceContentExtractionMode;
+  contentExtractionMode?: KnowledgeSourceContentExtractionMode = KnowledgeSourceContentExtractionMode.Minimal;
+
+  @doc("Optional AI Services configuration for content processing.")
+  aiServices?: AIServices;
 }
 
 @doc("Specifies the vectorization method to be used for knowledge source embedding model.")
