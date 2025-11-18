@@ -933,7 +933,7 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Multiple path parameters are required for this nested resource operation."
   @tag("Scoped Asset Metadata")
-  @doc("Updates the scoped asset metadata for a given data asset within a business domain.")
+  @doc("Create or update the scoped asset metadata for a given data asset within a business domain.")
   @route("/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/scoped-asset-metadata")
   @patch(#{ implicitOptionality: true })
   op updateScopedAssetMetaData is RpcOperation<
@@ -974,62 +974,9 @@ namespace PurviewDataQuality {
     },
     ScopedAssetMetadata
   >;
-
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Multiple path parameters are required for this nested resource operation."
-  @tag("Scoped Asset Metadata")
-  @doc("Creates or replaces the scoped asset metadata for a given data asset within a business domain.")
-  @route("/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/scoped-asset-metadata")
-  @put
-  op createScopedAssetMetaData is RpcOperation<
-    {
-      /**
-       * The unique identifier for the business domain that contains the data product.
-       * Business domains represent high-level organizational units for data governance
-       * and provide the top-level context for all data products and assets within them.
-       */
-      @doc("Unique identifier for the business domain containing the data product")
-      @path
-      businessDomainId: string;
-
-      /**
-       * The unique identifier for the data product that contains the data asset.
-       * Data products are collections of related data assets that serve specific
-       * business purposes or analytical use cases within a business domain.
-       */
-      @doc("Unique identifier for the data product containing the data asset")
-      @path
-      dataProductId: string;
-
-      /**
-       * The unique identifier for the data asset whose scoped metadata is being created or replaced.
-       * Data assets represent individual datasets, tables, or data sources that can be
-       * monitored for quality, profiling, and observability within a data product.
-       */
-      @doc("Unique identifier for the data asset whose scoped metadata is being created or replaced")
-      @path
-      dataAssetId: string;
-
-      /**
-       * The scoped asset metadata entity containing the configuration and properties.
-       */
-      @doc("Scoped asset metadata entity with configuration and properties")
-      @bodyRoot
-      request: ScopedAssetMetadata;
-    },
-    {
-      @doc("Scoped asset metadata successfully created or replaced")
-      @statusCode
-      statusCode: 201;
-
-      @doc("Scoped asset metadata entity response")
-      @body
-      response: ScopedAssetMetadata;
-    }
-  >;
-
+  /**
+   * Create or update profile
+   */
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -1116,7 +1063,7 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Multiple path parameters are required for this nested resource operation."
   @tag("Reports")
   @doc("Retrieves the latest data quality snapshot report for a given business domain.")
-  @route("/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/snapshots")
+  @route("/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{assetId}/snapshots")
   @get
   op getLatestSnapshot is RpcOperation<
     {
@@ -1135,7 +1082,7 @@ namespace PurviewDataQuality {
 
       @doc("Unique Data Asset Identifier")
       @path
-      dataAssetId: string;
+      assetId: string;
     },
     {
       @doc("The data quality snapshot report content")

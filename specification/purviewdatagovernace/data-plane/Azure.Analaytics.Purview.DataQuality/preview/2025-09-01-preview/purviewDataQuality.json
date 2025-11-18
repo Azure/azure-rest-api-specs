@@ -1010,79 +1010,12 @@
           }
         }
       },
-      "put": {
-        "operationId": "CreateScopedAssetMetaData",
-        "tags": [
-          "Scoped Asset Metadata"
-        ],
-        "description": "Creates or replaces the scoped asset metadata for a given data asset within a business domain.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "businessDomainId",
-            "in": "path",
-            "description": "Unique identifier for the business domain containing the data product",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "dataProductId",
-            "in": "path",
-            "description": "Unique identifier for the data product containing the data asset",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "dataAssetId",
-            "in": "path",
-            "description": "Unique identifier for the data asset whose scoped metadata is being created or replaced",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "request",
-            "in": "body",
-            "description": "Scoped asset metadata entity with configuration and properties",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ScopedAssetMetadata"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
-            "schema": {
-              "$ref": "#/definitions/ScopedAssetMetadata"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ScopedAssetMetaData_Create": {
-            "$ref": "./examples/ScopedMetaData_Create.json"
-          }
-        }
-      },
       "patch": {
         "operationId": "UpdateScopedAssetMetaData",
         "tags": [
           "Scoped Asset Metadata"
         ],
-        "description": "Updates the scoped asset metadata for a given data asset within a business domain.",
+        "description": "Create or update the scoped asset metadata for a given data asset within a business domain.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1200,7 +1133,7 @@
         }
       }
     },
-    "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/snapshots": {
+    "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{assetId}/snapshots": {
       "get": {
         "operationId": "GetLatestSnapshot",
         "tags": [
@@ -1226,7 +1159,7 @@
             "type": "string"
           },
           {
-            "name": "dataAssetId",
+            "name": "assetId",
             "in": "path",
             "description": "Unique Data Asset Identifier",
             "required": true,
