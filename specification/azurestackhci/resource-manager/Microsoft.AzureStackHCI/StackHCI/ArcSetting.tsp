@@ -40,7 +40,7 @@ interface ArcSettings {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   create is ArmResourceCreateOrReplaceSync<
     ArcSetting,
-    Response = ArmResourceCreatedResponse<ArcSetting> | ArmResourceUpdatedResponse<ArcSetting>
+    Response = ArmResourceUpdatedResponse<ArcSetting>
   >;
 
   /**

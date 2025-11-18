@@ -38,7 +38,7 @@ interface Clusters {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   create is ArmResourceCreateOrReplaceAsync<
     Cluster,
-    Response = ArmResourceCreatedResponse<Cluster> | ArmResourceUpdatedResponse<Cluster>
+    Response = ArmResourceUpdatedResponse<Cluster>
   >;
 
   /**
