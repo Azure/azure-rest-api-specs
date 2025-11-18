@@ -4445,8 +4445,9 @@ model AzureBlobKnowledgeSourceParameters {
   @doc("Optional folder path within the container.")
   folderPath?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   @doc("Set to true if connecting to an ADLS Gen2 storage account. Default is false.")
-  isAdlsGen2?: boolean = false;
+  isADLSGen2?: boolean = false;
 
   @doc("Consolidates all general ingestion settings.")
   ingestionParameters?: KnowledgeSourceIngestionParameters;
