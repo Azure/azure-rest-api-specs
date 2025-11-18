@@ -1,3 +1,5 @@
+import { SdkName } from "../src/sdk-types.js";
+
 /**
  * @typedef {import("../src/sdk-types.js").SpecGenSdkArtifactInfo} SpecGenSdkArtifactInfo
  */
@@ -14,7 +16,7 @@ export function createMockSpecGenSdkArtifactInfo(overrides = {}) {
     apiViewRequestData: [],
     headSha: "abc123",
     isSpecGenSdkCheckRequired: true,
-    language: "azure-sdk-for-go",
+    language: SdkName.Js,
     result: "test result",
   };
 
