@@ -37,15 +37,18 @@ using Dynatrace.Observability;
   "request"
 );
 #suppress "deprecated" "FixME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(MonitorResource.properties);
 
 #suppress "deprecated" "FixME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(TagRule.properties);
 
 @@clientLocation(DynatraceSingleSignOnResources.get, "SingleSignOn");
 @@clientLocation(DynatraceSingleSignOnResources.createOrUpdate, "SingleSignOn");
 @@clientLocation(DynatraceSingleSignOnResources.list, "SingleSignOn");
 #suppress "deprecated" "FixME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(DynatraceSingleSignOnResource.properties
 );
 

@@ -4,10 +4,12 @@ using Azure.ClientGenerator.Core;
 using Microsoft.Maintenance;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(MaintenanceConfigurationProperties.maintenanceWindow
 );
 
-//@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Update.properties);
+//#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Update.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@clientName(MaintenanceConfigurationOperationGroup.createOrUpdate::parameters.resource,
@@ -17,6 +19,7 @@ using Microsoft.Maintenance;
   "configuration"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(MaintenanceConfiguration.properties
 );
 
@@ -24,6 +27,7 @@ using Microsoft.Maintenance;
   "applyUpdate"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(ApplyUpdate.properties);
 
 @@clientName(ConfigurationAssignments.createOrUpdateParent::parameters.resource,
@@ -45,9 +49,11 @@ using Microsoft.Maintenance;
   "configurationAssignment"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(ConfigurationAssignment.properties
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Microsoft.Maintenance.Update.properties
 );
 
