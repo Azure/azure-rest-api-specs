@@ -41,7 +41,11 @@ jobs:
 
     steps:
     - checkout: self
-    - template: /eng/pipelines/templates/steps/install-dotnet.yml
+    - task: UseDotNet@2
+      displayName: 'Install .NET SDK'
+      inputs:
+        version: '8.x'
+        packageType: sdk
     - template: /eng/common/pipelines/templates/steps/sparse-checkout.yml
       parameters:
         SkipCheckoutNone: true
