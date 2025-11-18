@@ -305,13 +305,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/distributedAvailabilityGroups/{distributedAvailabilityGroupName}/addDatabase": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/distributedAvailabilityGroups/{distributedAvailabilityGroupName}/addDatabases": {
       "post": {
         "tags": [
           "DistributedAvailabilityGroups"
         ],
         "description": "Adds databases to an existing distributed availability group.",
-        "operationId": "DistributedAvailabilityGroups_AddDatabase",
+        "operationId": "DistributedAvailabilityGroups_AddDatabases",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
@@ -342,7 +342,7 @@
             "description": "The database names to add to the distributed availability group.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DistributedAvailabilityGroupsDatabaseRequest"
+              "$ref": "#/definitions/DistributedAvailabilityGroupsDatabasesRequest"
             }
           },
           {
@@ -380,7 +380,7 @@
         },
         "x-ms-examples": {
           "Add databases to a distributed availability group.": {
-            "$ref": "./examples/DistributedAvailabilityGroupsAddDatabase.json"
+            "$ref": "./examples/DistributedAvailabilityGroupsAddDatabases.json"
           }
         }
       }
@@ -465,13 +465,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/distributedAvailabilityGroups/{distributedAvailabilityGroupName}/removeDatabase": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/distributedAvailabilityGroups/{distributedAvailabilityGroupName}/removeDatabases": {
       "post": {
         "tags": [
           "DistributedAvailabilityGroups"
         ],
         "description": "Removes databases from an existing distributed availability group.",
-        "operationId": "DistributedAvailabilityGroups_RemoveDatabase",
+        "operationId": "DistributedAvailabilityGroups_RemoveDatabases",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
@@ -502,7 +502,7 @@
             "description": "The database names to remove from the distributed availability group.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DistributedAvailabilityGroupsDatabaseRequest"
+              "$ref": "#/definitions/DistributedAvailabilityGroupsDatabasesRequest"
             }
           },
           {
@@ -540,7 +540,7 @@
         },
         "x-ms-examples": {
           "Remove databases from a distributed availability group.": {
-            "$ref": "./examples/DistributedAvailabilityGroupsRemoveDatabase.json"
+            "$ref": "./examples/DistributedAvailabilityGroupsRemoveDatabases.json"
           }
         }
       }
@@ -895,7 +895,7 @@
         }
       }
     },
-    "DistributedAvailabilityGroupsDatabaseRequest": {
+    "DistributedAvailabilityGroupsDatabasesRequest": {
       "description": "Distributed availability group database operation request.",
       "required": [
         "databases"
