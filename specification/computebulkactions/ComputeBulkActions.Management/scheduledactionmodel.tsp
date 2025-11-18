@@ -127,6 +127,12 @@ union ResourceOperationType {
   @doc("Hibernate operations on the resources")
   Hibernate: "Hibernate",
 
+  @doc("Create operations on the resources")
+  Create: "Create",
+
+  @doc("Delete operations on the resources")
+  Delete: "Delete",
+
   string,
 }
 
