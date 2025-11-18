@@ -8,13 +8,25 @@ const SdkNameSchema = z.enum([
   "azure-sdk-for-python",
 ]);
 /**
- * @typedef {import("zod").infer<typeof SdkNameSchema>} SdkName
+ * Represents supported SDK language identifiers.
+ *
+ * @readonly
+ * @enum {"azure-sdk-for-go" | "azure-sdk-for-java" | "azure-sdk-for-js" | "azure-sdk-for-net" | "azure-sdk-for-python"}
  */
+export const SdkName = Object.freeze({
+  Go: "azure-sdk-for-go",
+  Java: "azure-sdk-for-java",
+  Js: "azure-sdk-for-js",
+  Net: "azure-sdk-for-net",
+  Python: "azure-sdk-for-python",
+});
+/** @type {import("zod").ZodType<SdkName>} */
+export const SdkNameSchema = z.enum(Object.values(SdkName));
 
 /*
  * Data for the API view request.
  */
-const APIViewRequestDataSchema = z.object({ packageName: z.string(), filePath: z.string() });
+export const APIViewRequestDataSchema = z.object({ packageName: z.string(), filePath: z.string() });
 /**
  * @typedef {import("zod").infer<typeof APIViewRequestDataSchema>} APIViewRequestData
  */

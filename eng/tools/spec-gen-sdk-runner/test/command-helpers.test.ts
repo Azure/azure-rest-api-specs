@@ -1,4 +1,4 @@
-import { APIViewRequestData } from "@azure-tools/specs-shared/sdk-types";
+import { APIViewRequestData, SdkName } from "@azure-tools/specs-shared/sdk-types";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -152,7 +152,7 @@ describe("commands.ts", () => {
         headBranch: "main",
         apiVersion: "2021-01-01",
         sdkReleaseType: "beta",
-        sdkLanguage: "typescript",
+        sdkLanguage: SdkName.Js,
       };
 
       const result = prepareSpecGenSdkCommand(commandInput);
@@ -417,7 +417,7 @@ describe("commands.ts", () => {
 
       const mockCommandInput = {
         workingFolder: "/working/folder",
-        sdkLanguage: "azure-sdk-for-js",
+        sdkLanguage: SdkName.Js,
         runMode: "",
         localSpecRepoPath: "",
         localSdkRepoPath: "",
@@ -498,7 +498,7 @@ describe("commands.ts", () => {
 
       const mockCommandInput = {
         workingFolder: "/working/folder",
-        sdkLanguage: "javascript",
+        sdkLanguage: SdkName.Js,
         runMode: "",
         localSpecRepoPath: "",
         localSdkRepoPath: "",
@@ -545,7 +545,7 @@ describe("commands.ts", () => {
 
       const mockCommandInput = {
         workingFolder: "/working/folder",
-        sdkLanguage: "azure-sdk-for-go",
+        sdkLanguage: SdkName.Go,
         runMode: "",
         localSpecRepoPath: "",
         localSdkRepoPath: "",
