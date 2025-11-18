@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Edge Devices",
-    "version": "2025-06-01-preview",
+    "version": "2025-10-01",
     "description": "Azure Arc-enabled Edge Device."
   },
   "schemes": [
@@ -25,7 +25,7 @@
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
-      "description": "Azure Active Directory OAuth2 Flow.",
+      "description": "Microsoft Entra ID OAuth 2.0 Flow.",
       "flow": "implicit",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
@@ -48,7 +48,7 @@
         "description": "List EdgeDevice resources by parent",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
@@ -64,7 +64,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -87,7 +87,7 @@
         "description": "Get a EdgeDevice",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
@@ -112,7 +112,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -130,7 +130,7 @@
         "description": "Create a EdgeDevice",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
@@ -177,7 +177,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -199,7 +199,7 @@
         "description": "Delete a EdgeDevice",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
@@ -235,7 +235,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -259,7 +259,7 @@
         "description": "A long-running resource action.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
@@ -307,7 +307,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -415,70 +415,6 @@
             "description": "Arc extension is in Deleted State."
           }
         ]
-      }
-    },
-    "ConfidentialVmProfile": {
-      "type": "object",
-      "description": "Represents the Confidential Virtual Machine (CVM) configuration status for an edge device. It includes the current IGVM support state and detailed component-level status information.",
-      "properties": {
-        "igvmStatus": {
-          "$ref": "#/definitions/IgvmStatus",
-          "description": "Indicates whether Independent Guest Virtual Machine (IGVM) support is available on the device. This will be 'Enabled' if the device supports confidential VMs, 'Disabled' if not, and 'Unknown' if the status cannot be determined.",
-          "readOnly": true
-        },
-        "statusDetails": {
-          "type": "array",
-          "description": "Provides detailed status entries for IGVM-related components, including deployment status, compatibility checks, and error diagnostics.",
-          "items": {
-            "$ref": "#/definitions/IgvmStatusDetail"
-          }
-        }
-      }
-    },
-    "IgvmStatus": {
-      "type": "string",
-      "description": "Represents the IGVM support status for the device.",
-      "enum": [
-        "Unknown",
-        "Enabled",
-        "Disabled"
-      ],
-      "x-ms-enum": {
-        "name": "IgvmStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Unknown",
-            "value": "Unknown",
-            "description": "The IGVM status could not be determined due to a query failure or inconsistent system state."
-          },
-          {
-            "name": "Enabled",
-            "value": "Enabled",
-            "description": "IGVM support is enabled, indicating that confidential VM features are available on this device."
-          },
-          {
-            "name": "Disabled",
-            "value": "Disabled",
-            "description": "IGVM status is disabled, indicating that confidential VM features are not supported on this device."
-          }
-        ]
-      }
-    },
-    "IgvmStatusDetail": {
-      "type": "object",
-      "description": "Provides component-level status information related to IGVM enablement on the device.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "A machine-readable status code indicating the result or condition of a specific IGVM-related check or operation.",
-          "readOnly": true
-        },
-        "message": {
-          "type": "string",
-          "description": "A human-readable message providing context or explanation for the associated status code.",
-          "readOnly": true
-        }
       }
     },
     "DeviceConfiguration": {
@@ -599,7 +535,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -686,7 +622,7 @@
         },
         "managedBy": {
           "type": "string",
-          "description": "Extension managed by user or Azure.",
+          "description": "Indicates whether the extension is managed by the user or by Azure.",
           "default": "Azure",
           "enum": [
             "User",
@@ -694,7 +630,19 @@
           ],
           "x-ms-enum": {
             "name": "ExtensionManagedBy",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "User",
+                "value": "User",
+                "description": "The extension is managed by the user."
+              },
+              {
+                "name": "Azure",
+                "value": "Azure",
+                "description": "The extension is managed by Azure."
+              }
+            ]
           },
           "readOnly": true
         }
@@ -709,7 +657,19 @@
       ],
       "x-ms-enum": {
         "name": "ExtensionManagedBy",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "User",
+            "value": "User",
+            "description": "The extension is managed by the user."
+          },
+          {
+            "name": "Azure",
+            "value": "Azure",
+            "description": "The extension is managed by Azure."
+          }
+        ]
       }
     },
     "ExtensionProfile": {
@@ -791,10 +751,6 @@
           "$ref": "#/definitions/HostNetwork",
           "description": "HostNetwork config to deploy AzureStackHCI Cluster.",
           "readOnly": true
-        },
-        "sdnProperties": {
-          "description": "Software Defined Networking Properties of the cluster",
-          "$ref": "./hciCommon.json#/definitions/SdnProperties"
         }
       }
     },
@@ -1176,17 +1132,6 @@
         "extensionProfile": {
           "$ref": "#/definitions/ExtensionProfile",
           "description": "Extensions details for edge device.",
-          "readOnly": true
-        },
-        "lastSyncTimestamp": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Most recent edge device sync timestamp.",
-          "readOnly": true
-        },
-        "confidentialVmProfile": {
-          "$ref": "#/definitions/ConfidentialVmProfile",
-          "description": "Confidential VM support details for edge device.",
           "readOnly": true
         }
       }
