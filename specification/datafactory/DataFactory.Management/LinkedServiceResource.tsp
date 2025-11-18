@@ -39,6 +39,7 @@ interface LinkedServiceResources {
       /**
        * ETag of the linked service entity. Should only be specified for get. If the ETag matches the existing entity tag, or if * was provided, then no content will be returned.
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @header
       `If-None-Match`?: string;
     }
@@ -56,6 +57,7 @@ interface LinkedServiceResources {
       /**
        * ETag of the linkedService entity.  Should only be specified for update, for which it should match existing entity or can be * for unconditional update.
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @header
       `If-Match`?: string;
     },
