@@ -153,7 +153,7 @@ interface CertificateResponses {
   /**
    * Get all the certificates tied to the provisioning service.
    */
-  list is ArmResourceListByParent<
+  list is Azure.ResourceManager.Legacy.ArmListSinglePageByParent<
     CertificateResponse,
     Response = ArmResponse<CertificateListDescription>,
     Error = ErrorDetails

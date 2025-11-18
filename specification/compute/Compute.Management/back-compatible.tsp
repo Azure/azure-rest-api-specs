@@ -334,3 +334,207 @@ using Microsoft.Compute;
 @@clientName(VirtualMachines.migrateToVMScaleSet::parameters.body,
   "parameters"
 );
+
+@@clientLocation(VirtualMachineScaleSetVMS.approveRollingUpgrade,
+  "VirtualMachineScaleSetVMs",
+  "!csharp"
+);
+@@clientLocation(VirtualMachineScaleSetVMS.deallocate,
+  "VirtualMachineScaleSetVMs",
+  "!csharp"
+);
+@@clientLocation(VirtualMachineScaleSetVMS.getInstanceView,
+  "VirtualMachineScaleSetVMs",
+  "!csharp"
+);
+@@clientLocation(VirtualMachineScaleSetVMS.reimage,
+  "VirtualMachineScaleSetVMs",
+  "!csharp"
+);
+@@clientLocation(VirtualMachineScaleSetVMS.reimageAll,
+  "VirtualMachineScaleSetVMs",
+  "!csharp"
+);
+@@clientLocation(VirtualMachineScaleSetVMS.simulateEviction,
+  "VirtualMachineScaleSetVMs",
+  "!csharp"
+);
+@@clientLocation(VirtualMachineScaleSetVMS.attachDetachDataDisks,
+  "VirtualMachineScaleSetVMs",
+  "!csharp"
+);
+@@clientLocation(VirtualMachineScaleSetVMS.performMaintenance,
+  "VirtualMachineScaleSetVMs",
+  "!csharp"
+);
+
+@@clientLocation(VirtualMachineScaleSetVMS.powerOff,
+  "VirtualMachineScaleSetVMs",
+  "!csharp"
+);
+@@clientLocation(VirtualMachineScaleSetVMS.redeploy,
+  "VirtualMachineScaleSetVMs",
+  "!csharp"
+);
+@@clientLocation(VirtualMachineScaleSetVMS.restart,
+  "VirtualMachineScaleSetVMs",
+  "!csharp"
+);
+@@clientLocation(VirtualMachineScaleSetVMS.retrieveBootDiagnosticsData,
+  "VirtualMachineScaleSetVMs",
+  "!csharp"
+);
+
+@@clientLocation(VirtualMachineScaleSetVMS.start,
+  "VirtualMachineScaleSetVMs",
+  "!csharp"
+);
+@@clientLocation(VirtualMachineScaleSetVMS.runCommand,
+  "VirtualMachineScaleSetVMs",
+  "!csharp"
+);
+@@clientLocation(VirtualMachineScaleSetVMS.restart,
+  "VirtualMachineScaleSetVMs",
+  "!csharp"
+);
+@@clientLocation(VirtualMachineScaleSetVMS.retrieveBootDiagnosticsData,
+  "VirtualMachineScaleSetVMs",
+  "!csharp"
+);
+
+@@clientLocation(VirtualMachineScaleSetVMS.get,
+  "VirtualMachineScaleSetVMs",
+  "!csharp"
+);
+@@clientLocation(VirtualMachineScaleSetVMS.update,
+  "VirtualMachineScaleSetVMs",
+  "!csharp"
+);
+@@clientLocation(VirtualMachineScaleSetVMS.delete,
+  "VirtualMachineScaleSetVMs",
+  "!csharp"
+);
+@@clientLocation(VirtualMachineScaleSetVMS.list,
+  "VirtualMachineScaleSetVMs",
+  "!csharp"
+);
+
+@@clientLocation(SshPublicKeyResources.get, "SshPublicKeys", "!csharp");
+@@clientLocation(SshPublicKeyResources.create, "SshPublicKeys", "!csharp");
+@@clientLocation(SshPublicKeyResources.update, "SshPublicKeys", "!csharp");
+@@clientLocation(SshPublicKeyResources.delete, "SshPublicKeys", "!csharp");
+@@clientLocation(SshPublicKeyResources.generateKeyPair,
+  "SshPublicKeys",
+  "!csharp"
+);
+@@clientLocation(SshPublicKeyResources.listBySubscription,
+  "SshPublicKeys",
+  "!csharp"
+);
+@@clientLocation(SshPublicKeyResources.listByResourceGroup,
+  "SshPublicKeys",
+  "!csharp"
+);
+
+@@clientLocation(VirtualMachineImagesEdgeZoneOperationGroup.listPublishers,
+  "VirtualMachineImagesEdgeZone",
+  "!csharp"
+);
+@@clientLocation(VirtualMachineImagesEdgeZoneOperationGroup.listOffers,
+  "VirtualMachineImagesEdgeZone",
+  "!csharp"
+);
+@@clientLocation(VirtualMachineImagesEdgeZoneOperationGroup.listSkus,
+  "VirtualMachineImagesEdgeZone",
+  "!csharp"
+);
+@@clientLocation(VirtualMachineImagesEdgeZoneOperationGroup.list,
+  "VirtualMachineImagesEdgeZone",
+  "!csharp"
+);
+@@clientLocation(VirtualMachineImagesEdgeZoneOperationGroup.get,
+  "VirtualMachineImagesEdgeZone",
+  "!csharp"
+);
+
+@@clientLocation(VirtualMachineImagesOperationGroup.listPublishers,
+  "VirtualMachineImages",
+  "!csharp"
+);
+@@clientLocation(VirtualMachineImagesOperationGroup.listOffers,
+  "VirtualMachineImages",
+  "!csharp"
+);
+@@clientLocation(VirtualMachineImagesOperationGroup.listSkus,
+  "VirtualMachineImages",
+  "!csharp"
+);
+@@clientLocation(VirtualMachineImagesOperationGroup.list,
+  "VirtualMachineImages",
+  "!csharp"
+);
+@@clientLocation(VirtualMachineImagesOperationGroup.get,
+  "VirtualMachineImages",
+  "!csharp"
+);
+@@clientLocation(VirtualMachineImagesOperationGroup.listByEdgeZone,
+  "VirtualMachineImages",
+  "!csharp"
+);
+@@clientLocation(VirtualMachineImagesOperationGroup.listWithProperties,
+  "VirtualMachineImages",
+  "!csharp"
+);
+
+@@clientLocation(UsageOperationGroup.list, "Usage", "!csharp");
+
+@@clientLocation(VirtualMachineSizesOperationGroup.list,
+  "VirtualMachineSizes",
+  "!csharp"
+);
+
+@@clientLocation(VirtualMachinesOperationGroup.listByLocation,
+  VirtualMachines,
+  "!csharp"
+);
+
+@@clientLocation(VirtualMachineScaleSetsOperationGroup.listByLocation,
+  VirtualMachineScaleSets,
+  "!csharp"
+);
+
+@@clientLocation(VirtualMachineScaleSets.startExtensionUpgrade,
+  "VirtualMachineScaleSetRollingUpgrades",
+  "!csharp"
+);
+@@clientLocation(VirtualMachineScaleSets.cancel,
+  "VirtualMachineScaleSetRollingUpgrades",
+  "!csharp"
+);
+@@clientLocation(VirtualMachineScaleSets.startOSUpgrade,
+  "VirtualMachineScaleSetRollingUpgrades",
+  "!csharp"
+);
+
+@@clientLocation(LogAnalyticsOperationGroup.exportThrottledRequests,
+  "LogAnalytics",
+  "!csharp"
+);
+@@clientLocation(LogAnalyticsOperationGroup.exportRequestRateByInterval,
+  "LogAnalytics",
+  "!csharp"
+);
+
+@@clientLocation(RollingUpgradeStatusInfos.getLatest,
+  "VirtualMachineScaleSetRollingUpgrades",
+  "!csharp"
+);
+
+@@clientLocation(VirtualMachineRunCommandsOperationGroup.list,
+  VirtualMachineRunCommands,
+  "!csharp"
+);
+@@clientLocation(VirtualMachineRunCommandsOperationGroup.get,
+  VirtualMachineRunCommands,
+  "!csharp"
+);

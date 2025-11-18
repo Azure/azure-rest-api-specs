@@ -4,6 +4,10 @@ This is the AutoRest configuration file the Cognitive Services Language - Questi
 
 > see https://aka.ms/autorest
 
+## SDK package updates
+
+The authoring client continues to ship from the existing .NET package `Azure.AI.Language.QuestionAnswering`. Inference models and clients now live in the companion package `Azure.AI.Language.QuestionAnswering.Inference`, and the original package type-forwards those types so existing code keeps working after the split.
+
 ## Releases
 
 The current preview release of Language is 2025-05-15-preview.
@@ -25,7 +29,7 @@ directive:
 
 ### Release 2025-05-15-preview
 
-These settings apply only when `--tag=release_2025_05_15_preview` is specified on the command line.
+These settings apply only when `--tag=release_2025-05-15-preview` is specified on the command line.
 
 ``` yaml $(tag) == 'release_2025-05-15-preview'
 input-file:
@@ -38,7 +42,7 @@ modelerfour:
 
 ### Release 2023-11-15-preview
 
-These settings apply only when `--tag=release_2023_11_15_preview` is specified on the command line.
+These settings apply only when `--tag=release_2023-11-15-preview` is specified on the command line.
 
 ``` yaml $(tag) == 'release_2023-11-15-preview'
 input-file:
@@ -59,9 +63,9 @@ suppressions:
 
 ### Release 2023-04-01
 
-These settings apply only when `--tag=release_2023_04_01` is specified on the command line.
+These settings apply only when `--tag=release_2023-04-01` is specified on the command line.
 
-``` yaml $(tag) == 'release_2023_04_01'
+``` yaml $(tag) == 'release_2023-04-01'
 input-file:
   - stable/2023-04-01/questionanswering-authoring.json
 title:
@@ -73,9 +77,9 @@ modelerfour:
 
 ### Release 2021-10-01
 
-These settings apply only when `--tag=release_2021_10_01` is specified on the command line.
+These settings apply only when `--tag=release_2021-10-01` is specified on the command line.
 
-``` yaml $(tag) == 'release_2021_10_01'
+``` yaml $(tag) == 'release_2021-10-01'
 input-file:
   - stable/2021-10-01/questionanswering-authoring.json
   - stable/2021-10-01/common.json
