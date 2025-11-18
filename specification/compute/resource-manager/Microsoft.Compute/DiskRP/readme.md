@@ -31,8 +31,8 @@ To see additional help and options, run:
 These are the global settings for the Compute API.
 
 ```yaml
-title: ComputeManagementClient
-description: Compute Client
+title: ComputeDiskClient
+description: Compute Disk Client
 openapi-type: arm
 tag: package-2025-04-01
 
