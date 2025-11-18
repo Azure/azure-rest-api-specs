@@ -55,9 +55,11 @@ union ResourceOperationType {
   @doc("Hibernate operations on the resources")
   Hibernate: "Hibernate",
 
+  @added(Microsoft.ComputeSchedule.Versions.`2024-10-01`)
   @doc("Create operations on the resources")
   Create: "Create",
 
+  @added(Microsoft.ComputeSchedule.Versions.`2024-10-01`)
   @doc("Delete operations on the resources")
   Delete: "Delete",
 
