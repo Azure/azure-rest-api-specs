@@ -4,12 +4,12 @@ import "@typespec/versioning";
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 
-@versioned(Microsoft.AzureCis.Versions)
-namespace Microsoft.AzureCis;
+@versioned(Microsoft.Geneva.LogsManagement.Versions)
+namespace Microsoft.Geneva.LogsManagement;
 
 @doc("Supported versions.")
 enum Versions {
-  @doc("API version 2024-06-24-preview")
+  @doc("API version 2025-11-04-preview")
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
-  v2024_06_24_preview: "2024-06-24-preview",
+  v2025_11_04_preview: "2025-11-04-preview",
 }
