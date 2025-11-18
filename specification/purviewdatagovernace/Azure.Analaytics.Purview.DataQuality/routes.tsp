@@ -41,6 +41,10 @@ namespace PurviewDataQuality {
       @path
       dataAssetId: string;
 
+      @doc("Unique identifier for the rule")
+      @path
+      ruleId: string;
+
       @doc("Rule creation request")
       @body
       request: RuleEntity;
@@ -172,45 +176,6 @@ namespace PurviewDataQuality {
       @doc("Rule entity with complete configuration and metadata")
       @body
       rule: RuleEntity;
-    }
-  >;
-
-  /**
-   * Create Bulk Rules for Assets
-   */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "RpcOperation with path parameters is intentional for this service."
-  @route("/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/bulk-rules")
-  @put
-  @tag("Rules")
-  @doc("Creates bulk rules for a specific data asset within a data product and business domain.")
-  op createBulkRules is RpcOperation<
-    {
-      @doc("Unique identifier for the business domain containing the data product")
-      @path
-      businessDomainId: string;
-
-      @doc("Unique identifier for the data product containing the data asset")
-      @path
-      dataProductId: string;
-
-      @doc("Unique identifier for the data asset for the bulk rules operation")
-      @path
-      dataAssetId: string;
-
-      @doc("Bulk rules creation request")
-      @body
-      request: BulkRulesRequest;
-    },
-    {
-      @statusCode
-      statusCode: 201;
-
-      @doc("Response containing array of created rule entities")
-      @body
-      response: CreateBulkRulesResponse;
     }
   >;
 
@@ -1151,7 +1116,7 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Multiple path parameters are required for this nested resource operation."
   @tag("Reports")
   @doc("Retrieves the latest data quality snapshot report for a given business domain.")
-  @route("/business-domains/{businessDomainId}/report/snapshots")
+  @route("/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/snapshots")
   @get
   op getLatestSnapshot is RpcOperation<
     {
@@ -1163,11 +1128,19 @@ namespace PurviewDataQuality {
       @doc("Unique identifier for the business domain")
       @path
       businessDomainId: string;
+
+      @doc("Unique Data Product Identifier")
+      @path
+      dataProductId: string;
+
+      @doc("Unique Data Asset Identifier")
+      @path
+      dataAssetId: string;
     },
     {
       @doc("The data quality snapshot report content")
       @body
-      content: DataQualitySnapshotResponse;
+      content: ScoreSnapshot;
     }
   >;
 

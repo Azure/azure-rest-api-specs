@@ -321,75 +321,6 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/bulk-rules": {
-      "put": {
-        "operationId": "CreateBulkRules",
-        "tags": [
-          "Rules"
-        ],
-        "description": "Creates bulk rules for a specific data asset within a data product and business domain.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "businessDomainId",
-            "in": "path",
-            "description": "Unique identifier for the business domain containing the data product",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "dataProductId",
-            "in": "path",
-            "description": "Unique identifier for the data product containing the data asset",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "dataAssetId",
-            "in": "path",
-            "description": "Unique identifier for the data asset for the bulk rules operation",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "request",
-            "in": "body",
-            "description": "Bulk rules creation request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/BulkRulesRequest"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
-            "schema": {
-              "$ref": "#/definitions/CreateBulkRulesResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Rules_Create": {
-            "$ref": "./examples/RulesBulk_Create.json"
-          }
-        }
-      }
-    },
     "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/observations/{observationId}": {
       "delete": {
         "operationId": "DeleteObservation",
@@ -674,73 +605,6 @@
             "$ref": "./examples/Rules_Get.json"
           }
         }
-      },
-      "put": {
-        "operationId": "CreateRules",
-        "tags": [
-          "Rules"
-        ],
-        "description": "Creates rules for a specific data asset within a data product and business domain.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "businessDomainId",
-            "in": "path",
-            "description": "Unique identifier for the business domain containing the data product",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "dataProductId",
-            "in": "path",
-            "description": "Unique identifier for the data product containing the data asset",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "dataAssetId",
-            "in": "path",
-            "description": "Unique identifier for the data asset",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "request",
-            "in": "body",
-            "description": "Rule creation request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/RuleEntity"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
-            "schema": {
-              "$ref": "#/definitions/RuleEntity"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CreateRules_DataAsset": {
-            "$ref": "./examples/Rules_Create.json"
-          }
-        }
       }
     },
     "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/rules/{ruleId}": {
@@ -806,6 +670,80 @@
         "x-ms-examples": {
           "Rule_Get": {
             "$ref": "./examples/Rule_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "CreateRules",
+        "tags": [
+          "Rules"
+        ],
+        "description": "Creates rules for a specific data asset within a data product and business domain.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Unique identifier for the business domain containing the data product",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataProductId",
+            "in": "path",
+            "description": "Unique identifier for the data product containing the data asset",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "Unique identifier for the data asset",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ruleId",
+            "in": "path",
+            "description": "Unique identifier for the rule",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Rule creation request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RuleEntity"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/RuleEntity"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateRules_DataAsset": {
+            "$ref": "./examples/Rules_Create.json"
           }
         }
       },
@@ -1262,6 +1200,66 @@
         }
       }
     },
+    "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/snapshots": {
+      "get": {
+        "operationId": "GetLatestSnapshot",
+        "tags": [
+          "Reports"
+        ],
+        "description": "Retrieves the latest data quality snapshot report for a given business domain.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Unique identifier for the business domain",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataProductId",
+            "in": "path",
+            "description": "Unique Data Product Identifier",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "Unique Data Asset Identifier",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ScoreSnapshot"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LatestSnapshot_Get": {
+            "$ref": "./examples/LatestSnapshot_Get.json"
+          }
+        }
+      }
+    },
     "/business-domains/{businessDomainId}/data-sources": {
       "get": {
         "operationId": "GetDataSources",
@@ -1553,52 +1551,6 @@
         "x-ms-examples": {
           "DataSource_Delete": {
             "$ref": "./examples/DataSource_Delete.json"
-          }
-        }
-      }
-    },
-    "/business-domains/{businessDomainId}/report/snapshots": {
-      "get": {
-        "operationId": "GetLatestSnapshot",
-        "tags": [
-          "Reports"
-        ],
-        "description": "Retrieves the latest data quality snapshot report for a given business domain.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "businessDomainId",
-            "in": "path",
-            "description": "Unique identifier for the business domain",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/DataQualitySnapshotResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "LatestSnapshot_Get": {
-            "$ref": "./examples/LatestSnapshot_Get.json"
           }
         }
       }
@@ -2660,22 +2612,6 @@
         "metadata"
       ]
     },
-    "BulkRulesRequest": {
-      "type": "object",
-      "description": "Request model for bulk rule creation operations",
-      "properties": {
-        "rules": {
-          "type": "array",
-          "description": "Array of rule entities for bulk creation",
-          "items": {
-            "$ref": "#/definitions/RuleEntity"
-          }
-        }
-      },
-      "required": [
-        "rules"
-      ]
-    },
     "Column": {
       "type": "object",
       "description": "Column definition for dataset validation and quality checks",
@@ -2689,231 +2625,6 @@
           "description": "Column name or identifier"
         }
       }
-    },
-    "CreateBulkRulesResponse": {
-      "type": "object",
-      "description": "Bulk rules creation response",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "Array of created rule entities",
-          "items": {
-            "$ref": "#/definitions/RuleEntity"
-          }
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "DataQualitySnapshotResponse": {
-      "type": "object",
-      "description": "Latest data quality snapshot report with comprehensive metrics and observer details.",
-      "properties": {
-        "businessDomainId": {
-          "type": "string",
-          "description": "Identifier of the business domain associated with this snapshot."
-        },
-        "dataProductId": {
-          "type": "string",
-          "description": "Identifier of the data product under the business domain."
-        },
-        "assetId": {
-          "type": "string",
-          "description": "Identifier of the data asset whose quality is captured in this snapshot."
-        },
-        "assetScore": {
-          "type": "number",
-          "format": "double",
-          "description": "Overall data quality score for the asset."
-        },
-        "snapshot": {
-          "type": "object",
-          "description": "Detailed snapshot data containing observer and rule information.",
-          "properties": {
-            "observers": {
-              "type": "array",
-              "description": "Array of observers monitoring this data asset.",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "type": "string",
-                    "description": "Name of the observer."
-                  },
-                  "type": {
-                    "type": "string",
-                    "description": "Type of the observer."
-                  },
-                  "dataAsset": {
-                    "type": "object",
-                    "description": "Reference to the data asset being observed.",
-                    "properties": {
-                      "referenceId": {
-                        "type": "string",
-                        "description": "Reference identifier for the data asset."
-                      }
-                    },
-                    "required": [
-                      "referenceId"
-                    ]
-                  },
-                  "typeProperties": {
-                    "type": "object",
-                    "description": "Observer-specific configuration properties.",
-                    "properties": {
-                      "inputDatasets": {
-                        "type": "array",
-                        "description": "Array of input datasets for this observer.",
-                        "items": {
-                          "type": "object",
-                          "properties": {
-                            "alias": {
-                              "type": "string",
-                              "description": "Alias name for the dataset.",
-                              "x-ms-client-name": "aliasName"
-                            },
-                            "primary": {
-                              "type": "boolean",
-                              "description": "Whether this is the primary dataset."
-                            },
-                            "dataset": {
-                              "type": "object",
-                              "description": "Dataset configuration and metadata.",
-                              "properties": {
-                                "datasourceFQN": {
-                                  "type": "string",
-                                  "description": "Fully qualified name of the data source."
-                                },
-                                "schemaSummary": {
-                                  "type": "object",
-                                  "description": "Schema summary information for the dataset.",
-                                  "properties": {
-                                    "columnCount": {
-                                      "type": "integer",
-                                      "format": "int32",
-                                      "description": "Total number of columns in the dataset."
-                                    },
-                                    "sampleColumns": {
-                                      "type": "array",
-                                      "description": "Sample of columns with their names and types.",
-                                      "items": {
-                                        "type": "object",
-                                        "properties": {
-                                          "name": {
-                                            "type": "string",
-                                            "description": "Name of the column."
-                                          },
-                                          "type": {
-                                            "type": "string",
-                                            "description": "Data type of the column."
-                                          }
-                                        },
-                                        "required": [
-                                          "name",
-                                          "type"
-                                        ]
-                                      }
-                                    }
-                                  },
-                                  "required": [
-                                    "columnCount",
-                                    "sampleColumns"
-                                  ]
-                                },
-                                "type": {
-                                  "type": "string",
-                                  "description": "Type of the dataset (e.g., Delta, Parquet)."
-                                },
-                                "location": {
-                                  "type": "string",
-                                  "description": "Location path of the dataset."
-                                }
-                              },
-                              "required": [
-                                "schemaSummary",
-                                "type",
-                                "location"
-                              ]
-                            }
-                          },
-                          "required": [
-                            "alias",
-                            "primary",
-                            "dataset"
-                          ]
-                        }
-                      }
-                    },
-                    "required": [
-                      "inputDatasets"
-                    ]
-                  }
-                },
-                "required": [
-                  "name",
-                  "type",
-                  "dataAsset",
-                  "typeProperties"
-                ]
-              }
-            },
-            "rulesSummary": {
-              "type": "object",
-              "description": "Summary of data quality rules associated with this snapshot.",
-              "properties": {
-                "totalRules": {
-                  "type": "integer",
-                  "format": "int32",
-                  "description": "Total number of rules configured."
-                },
-                "activeRules": {
-                  "type": "integer",
-                  "format": "int32",
-                  "description": "Number of active rules."
-                },
-                "disabledRules": {
-                  "type": "integer",
-                  "format": "int32",
-                  "description": "Number of disabled rules."
-                },
-                "sampleActiveRules": {
-                  "type": "array",
-                  "description": "Sample of active rule names.",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "sampleDisabledRules": {
-                  "type": "array",
-                  "description": "Sample of disabled rule names.",
-                  "items": {
-                    "type": "string"
-                  }
-                }
-              },
-              "required": [
-                "totalRules",
-                "activeRules",
-                "disabledRules",
-                "sampleActiveRules",
-                "sampleDisabledRules"
-              ]
-            }
-          },
-          "required": [
-            "observers",
-            "rulesSummary"
-          ]
-        }
-      },
-      "required": [
-        "businessDomainId",
-        "dataProductId",
-        "assetId",
-        "assetScore",
-        "snapshot"
-      ]
     },
     "DataSourceEntity": {
       "type": "object",
@@ -4943,6 +4654,14 @@
           "format": "double",
           "description": "Overall score for the asset"
         },
+        "originAssetId": {
+          "type": "string",
+          "description": "Origin asset identifier"
+        },
+        "isStandaloneAsset": {
+          "type": "boolean",
+          "description": "Is the asset standalone"
+        },
         "rules": {
           "type": "array",
           "description": "Rules with their scores and validation results",
@@ -4959,7 +4678,11 @@
         "businessDomainId",
         "dataProductId",
         "assetId",
-        "assetScore"
+        "assetScore",
+        "originAssetId",
+        "isStandaloneAsset",
+        "rules",
+        "job"
       ]
     },
     "ScoredRule": {

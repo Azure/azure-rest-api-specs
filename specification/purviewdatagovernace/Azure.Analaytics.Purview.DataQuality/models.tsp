@@ -3281,11 +3281,17 @@ model ScoreSnapshot {
   @doc("Overall score for the asset")
   assetScore: float64;
 
+  @doc("Origin asset identifier")
+  originAssetId: string;
+
+  @doc("Is the asset standalone")
+  isStandaloneAsset: boolean;
+
   @doc("Rules with their scores and validation results")
-  rules?: ScoredRule[];
+  rules: ScoredRule[];
 
   @doc("Job information for the snapshot")
-  job?: SnapshotJob;
+  job: SnapshotJob;
 }
 
 /**
