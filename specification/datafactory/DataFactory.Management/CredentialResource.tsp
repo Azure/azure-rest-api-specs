@@ -42,7 +42,9 @@ interface CredentialResources {
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @header
       `If-None-Match`?: string;
-    }
+    },
+    Response = ArmResponse<CredentialResource> | NotModifiedResponse,
+    Error = CloudError
   >;
 
   /**
@@ -61,7 +63,8 @@ interface CredentialResources {
       @header
       `If-Match`?: string;
     },
-    Response = ArmResourceUpdatedResponse<CredentialResource>
+    Response = ArmResourceUpdatedResponse<CredentialResource>,
+    Error = CloudError
   >;
 
   /**
@@ -69,7 +72,7 @@ interface CredentialResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("CredentialOperations_Delete")
-  delete is ArmResourceDeleteSync<CredentialResource>;
+  delete is ArmResourceDeleteSync<CredentialResource, Error = CloudError>;
 
   /**
    * List credentials.
@@ -78,7 +81,8 @@ interface CredentialResources {
   @operationId("CredentialOperations_ListByFactory")
   listByFactory is ArmResourceListByParent<
     CredentialResource,
-    Response = ArmResponse<CredentialListResponse>
+    Response = ArmResponse<CredentialListResponse>,
+    Error = CloudError
   >;
 }
 

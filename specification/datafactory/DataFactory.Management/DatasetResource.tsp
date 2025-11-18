@@ -41,7 +41,9 @@ interface DatasetResources {
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @header
       `If-None-Match`?: string;
-    }
+    },
+    Response = ArmResponse<DatasetResource> | NotModifiedResponse,
+    Error = CloudError
   >;
 
   /**
@@ -60,7 +62,8 @@ interface DatasetResources {
       @header
       `If-Match`?: string;
     },
-    Response = ArmResourceUpdatedResponse<DatasetResource>
+    Response = ArmResourceUpdatedResponse<DatasetResource>,
+    Error = CloudError
   >;
 
   /**
@@ -68,7 +71,7 @@ interface DatasetResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Datasets_Delete")
-  delete is ArmResourceDeleteSync<DatasetResource>;
+  delete is ArmResourceDeleteSync<DatasetResource, Error = CloudError>;
 
   /**
    * Lists datasets.
@@ -77,7 +80,8 @@ interface DatasetResources {
   @operationId("Datasets_ListByFactory")
   listByFactory is ArmResourceListByParent<
     DatasetResource,
-    Response = ArmResponse<DatasetListResponse>
+    Response = ArmResponse<DatasetListResponse>,
+    Error = CloudError
   >;
 }
 

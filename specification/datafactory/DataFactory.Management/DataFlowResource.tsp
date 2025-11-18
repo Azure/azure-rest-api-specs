@@ -41,7 +41,8 @@ interface DataFlowResources {
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @header
       `If-None-Match`?: string;
-    }
+    },
+    Error = CloudError
   >;
 
   /**
@@ -60,7 +61,8 @@ interface DataFlowResources {
       @header
       `If-Match`?: string;
     },
-    Response = ArmResourceUpdatedResponse<DataFlowResource>
+    Response = ArmResourceUpdatedResponse<DataFlowResource>,
+    Error = CloudError
   >;
 
   /**
@@ -68,7 +70,7 @@ interface DataFlowResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DataFlows_Delete")
-  delete is ArmResourceDeleteSync<DataFlowResource>;
+  delete is ArmResourceDeleteSync<DataFlowResource, Error = CloudError>;
 
   /**
    * Lists data flows.
@@ -77,7 +79,8 @@ interface DataFlowResources {
   @operationId("DataFlows_ListByFactory")
   listByFactory is ArmResourceListByParent<
     DataFlowResource,
-    Response = ArmResponse<DataFlowListResponse>
+    Response = ArmResponse<DataFlowListResponse>,
+    Error = CloudError
   >;
 }
 

@@ -42,7 +42,8 @@ interface ChangeDataCaptureResources {
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @header
       `If-None-Match`?: string;
-    }
+    },
+    Error = CloudError
   >;
 
   /**
@@ -61,7 +62,8 @@ interface ChangeDataCaptureResources {
       @header
       `If-Match`?: string;
     },
-    Response = ArmResourceUpdatedResponse<ChangeDataCaptureResource>
+    Response = ArmResourceUpdatedResponse<ChangeDataCaptureResource>,
+    Error = CloudError
   >;
 
   /**
@@ -69,7 +71,10 @@ interface ChangeDataCaptureResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ChangeDataCapture_Delete")
-  delete is ArmResourceDeleteSync<ChangeDataCaptureResource>;
+  delete is ArmResourceDeleteSync<
+    ChangeDataCaptureResource,
+    Error = CloudError
+  >;
 
   /**
    * Lists all resources of type change data capture.
@@ -78,7 +83,8 @@ interface ChangeDataCaptureResources {
   @operationId("ChangeDataCapture_ListByFactory")
   listByFactory is ArmResourceListByParent<
     ChangeDataCaptureResource,
-    Response = ArmResponse<ChangeDataCaptureListResponse>
+    Response = ArmResponse<ChangeDataCaptureListResponse>,
+    Error = CloudError
   >;
 
   /**
@@ -86,14 +92,24 @@ interface ChangeDataCaptureResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ChangeDataCapture_Start")
-  start is ArmResourceActionSync<ChangeDataCaptureResource, void, OkResponse>;
+  start is ArmResourceActionSync<
+    ChangeDataCaptureResource,
+    void,
+    OkResponse,
+    Error = CloudError
+  >;
 
   /**
    * Stops a change data capture.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ChangeDataCapture_Stop")
-  stop is ArmResourceActionSync<ChangeDataCaptureResource, void, OkResponse>;
+  stop is ArmResourceActionSync<
+    ChangeDataCaptureResource,
+    void,
+    OkResponse,
+    Error = CloudError
+  >;
 
   /**
    * Gets the current status for the change data capture resource.
@@ -104,7 +120,8 @@ interface ChangeDataCaptureResources {
   status is ArmResourceActionSync<
     ChangeDataCaptureResource,
     void,
-    ArmResponse<ChangeDataCaptureStatusResponse>
+    ArmResponse<ChangeDataCaptureStatusResponse>,
+    Error = CloudError
   >;
 }
 

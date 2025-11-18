@@ -42,7 +42,8 @@ interface ManagedPrivateEndpointResources {
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @header
       `If-None-Match`?: string;
-    }
+    },
+    Error = CloudError
   >;
 
   /**
@@ -61,7 +62,8 @@ interface ManagedPrivateEndpointResources {
       @header
       `If-Match`?: string;
     },
-    Response = ArmResourceUpdatedResponse<ManagedPrivateEndpointResource>
+    Response = ArmResourceUpdatedResponse<ManagedPrivateEndpointResource>,
+    Error = CloudError
   >;
 
   /**
@@ -69,7 +71,10 @@ interface ManagedPrivateEndpointResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ManagedPrivateEndpoints_Delete")
-  delete is ArmResourceDeleteSync<ManagedPrivateEndpointResource>;
+  delete is ArmResourceDeleteSync<
+    ManagedPrivateEndpointResource,
+    Error = CloudError
+  >;
 
   /**
    * Lists managed private endpoints.
@@ -78,7 +83,8 @@ interface ManagedPrivateEndpointResources {
   @operationId("ManagedPrivateEndpoints_ListByFactory")
   listByFactory is ArmResourceListByParent<
     ManagedPrivateEndpointResource,
-    Response = ArmResponse<ManagedPrivateEndpointListResponse>
+    Response = ArmResponse<ManagedPrivateEndpointListResponse>,
+    Error = CloudError
   >;
 }
 

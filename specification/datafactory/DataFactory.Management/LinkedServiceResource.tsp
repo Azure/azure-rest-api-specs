@@ -42,7 +42,9 @@ interface LinkedServiceResources {
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @header
       `If-None-Match`?: string;
-    }
+    },
+    Response = ArmResponse<LinkedServiceResource> | NotModifiedResponse,
+    Error = CloudError
   >;
 
   /**
@@ -61,7 +63,8 @@ interface LinkedServiceResources {
       @header
       `If-Match`?: string;
     },
-    Response = ArmResourceUpdatedResponse<LinkedServiceResource>
+    Response = ArmResourceUpdatedResponse<LinkedServiceResource>,
+    Error = CloudError
   >;
 
   /**
@@ -69,7 +72,7 @@ interface LinkedServiceResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("LinkedServices_Delete")
-  delete is ArmResourceDeleteSync<LinkedServiceResource>;
+  delete is ArmResourceDeleteSync<LinkedServiceResource, Error = CloudError>;
 
   /**
    * Lists linked services.
@@ -78,7 +81,8 @@ interface LinkedServiceResources {
   @operationId("LinkedServices_ListByFactory")
   listByFactory is ArmResourceListByParent<
     LinkedServiceResource,
-    Response = ArmResponse<LinkedServiceListResponse>
+    Response = ArmResponse<LinkedServiceListResponse>,
+    Error = CloudError
   >;
 }
 

@@ -1150,3 +1150,10 @@ using Microsoft.DataFactory;
 @@clientLocation(ExposureControlOperationGroup.getFeatureValue,
   "ExposureControl"
 );
+
+@@clientName(FactoriesOperationGroup.configureFactoryRepo::parameters.body,
+  "factoryRepoUpdate"
+);
+@@clientName(ExposureControlOperationGroup.getFeatureValue::parameters.body,
+  "exposureControlRequest"
+);

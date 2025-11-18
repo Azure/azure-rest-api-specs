@@ -42,7 +42,8 @@ interface PrivateEndpointConnectionResources {
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @header
       `If-None-Match`?: string;
-    }
+    },
+    Error = CloudError
   >;
 
   /**
@@ -62,7 +63,8 @@ interface PrivateEndpointConnectionResources {
       @header
       `If-Match`?: string;
     },
-    Response = ArmResourceUpdatedResponse<PrivateEndpointConnectionResource>
+    Response = ArmResourceUpdatedResponse<PrivateEndpointConnectionResource>,
+    Error = CloudError
   >;
 
   /**
@@ -70,7 +72,10 @@ interface PrivateEndpointConnectionResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("PrivateEndpointConnection_Delete")
-  delete is ArmResourceDeleteSync<PrivateEndpointConnectionResource>;
+  delete is ArmResourceDeleteSync<
+    PrivateEndpointConnectionResource,
+    Error = CloudError
+  >;
 
   /**
    * Lists Private endpoint connections
@@ -79,7 +84,8 @@ interface PrivateEndpointConnectionResources {
   @operationId("privateEndPointConnections_ListByFactory")
   listByFactory is ArmResourceListByParent<
     PrivateEndpointConnectionResource,
-    Response = ArmResponse<PrivateEndpointConnectionListResponse>
+    Response = ArmResponse<PrivateEndpointConnectionListResponse>,
+    Error = CloudError
   >;
 }
 

@@ -30,7 +30,27 @@ model Factory
   identity?: FactoryIdentity;
 }
 
-@armResourceOperations
+alias PipelineRunsOps = Azure.ResourceManager.Legacy.RoutedOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+  },
+  {
+    @path
+    @segment("factories")
+    @key
+    @maxLength(63)
+    @minLength(3)
+    @pattern("^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$")
+    factoryName: string;
+  },
+  ResourceRoute = #{
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DataFactory/factories",
+  }
+>;
+
+@armResourceOperations(#{ allowStaticRoutes: true })
 interface Factories {
   /**
    * Gets a factory.
@@ -44,7 +64,9 @@ interface Factories {
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @header
       `If-None-Match`?: string;
-    }
+    },
+    Response = ArmResponse<Factory> | NotModifiedResponse,
+    Error = CloudError
   >;
 
   /**
@@ -61,26 +83,32 @@ interface Factories {
       @header
       `If-Match`?: string;
     },
-    Response = ArmResourceUpdatedResponse<Factory>
+    Response = ArmResourceUpdatedResponse<Factory>,
+    Error = CloudError
   >;
 
   /**
    * Updates a factory.
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<Factory, PatchModel = FactoryUpdateParameters>;
+  update is ArmCustomPatchSync<
+    Factory,
+    PatchModel = FactoryUpdateParameters,
+    Error = CloudError
+  >;
 
   /**
    * Deletes a factory.
    */
-  delete is ArmResourceDeleteSync<Factory>;
+  delete is ArmResourceDeleteSync<Factory, Error = CloudError>;
 
   /**
    * Lists factories.
    */
   listByResourceGroup is ArmResourceListByParent<
     Factory,
-    Response = ArmResponse<FactoryListResponse>
+    Response = ArmResponse<FactoryListResponse>,
+    Error = CloudError
   >;
 
   /**
@@ -88,7 +116,8 @@ interface Factories {
    */
   list is ArmListBySubscription<
     Factory,
-    Response = ArmResponse<FactoryListResponse>
+    Response = ArmResponse<FactoryListResponse>,
+    Error = CloudError
   >;
 
   /**
@@ -97,7 +126,8 @@ interface Factories {
   getGitHubAccessToken is ArmResourceActionSync<
     Factory,
     GitHubAccessTokenRequest,
-    ArmResponse<GitHubAccessTokenResponse>
+    ArmResponse<GitHubAccessTokenResponse>,
+    Error = CloudError
   >;
 
   /**
@@ -106,7 +136,8 @@ interface Factories {
   getDataPlaneAccess is ArmResourceActionSync<
     Factory,
     UserAccessPolicy,
-    ArmResponse<AccessPolicyResponse>
+    ArmResponse<AccessPolicyResponse>,
+    Error = CloudError
   >;
 
   /**
@@ -118,7 +149,8 @@ interface Factories {
   getFeatureValueByFactory is ArmResourceActionSync<
     Factory,
     ExposureControlRequest,
-    ArmResponse<ExposureControlResponse>
+    ArmResponse<ExposureControlResponse>,
+    Error = CloudError
   >;
 
   /**
@@ -130,7 +162,8 @@ interface Factories {
   queryFeatureValuesByFactory is ArmResourceActionSync<
     Factory,
     ExposureControlBatchRequest,
-    ArmResponse<ExposureControlBatchResponse>
+    ArmResponse<ExposureControlBatchResponse>,
+    Error = CloudError
   >;
 
   /**
@@ -143,7 +176,8 @@ interface Factories {
   queryByFactory is ArmResourceActionSync<
     Factory,
     RunFilterParameters,
-    ArmResponse<PipelineRunsQueryResponse>
+    ArmResponse<PipelineRunsQueryResponse>,
+    Error = CloudError
   >;
 
   /**
@@ -152,8 +186,8 @@ interface Factories {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("PipelineRuns_Get")
   @get
-  @action("{runId}")
-  pipelineRunsGet is ArmResourceActionSync<
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DataFactory/factories/{factoryName}/pipelineruns/{runId}")
+  pipelineRunsGet is PipelineRunsOps.ActionSync<
     Factory,
     void,
     ArmResponse<PipelineRun>,
@@ -163,7 +197,8 @@ interface Factories {
        */
       @path
       runId: string;
-    }
+    },
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -171,7 +206,8 @@ interface Factories {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("PipelineRuns_Cancel")
-  cancel is ArmResourceActionSync<
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DataFactory/factories/{factoryName}/pipelineruns/{runId}/cancel")
+  cancel is PipelineRunsOps.ActionSync<
     Factory,
     void,
     OkResponse,
@@ -187,7 +223,8 @@ interface Factories {
        */
       @query("isRecursive")
       isRecursive?: boolean;
-    }
+    },
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -196,8 +233,8 @@ interface Factories {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ActivityRuns_QueryByPipelineRun")
   @list
-  @action("queryActivityruns")
-  queryByPipelineRun is ArmResourceActionSync<
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DataFactory/factories/{factoryName}/pipelineruns/{runId}/queryActivityruns")
+  queryByPipelineRun is PipelineRunsOps.ActionSync<
     Factory,
     RunFilterParameters,
     ArmResponse<ActivityRunsQueryResponse>,
@@ -207,7 +244,8 @@ interface Factories {
        */
       @path
       runId: string;
-    }
+    },
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -220,7 +258,8 @@ interface Factories {
   triggersQueryByFactory is ArmResourceActionSync<
     Factory,
     TriggerFilterParameters,
-    ArmResponse<TriggerQueryResponse>
+    ArmResponse<TriggerQueryResponse>,
+    Error = CloudError
   >;
 
   /**
@@ -233,7 +272,8 @@ interface Factories {
   triggerRunsQueryByFactory is ArmResourceActionSync<
     Factory,
     RunFilterParameters,
-    ArmResponse<TriggerRunsQueryResponse>
+    ArmResponse<TriggerRunsQueryResponse>,
+    Error = CloudError
   >;
 
   /**
@@ -245,7 +285,8 @@ interface Factories {
   create is ArmResourceActionAsync<
     Factory,
     CreateDataFlowDebugSessionRequest,
-    ArmResponse<CreateDataFlowDebugSessionResponse>
+    ArmResponse<CreateDataFlowDebugSessionResponse>,
+    Error = CloudError
   >;
 
   /**
@@ -258,7 +299,8 @@ interface Factories {
   dataFlowDebugSessionQueryByFactory is ArmResourceActionSync<
     Factory,
     void,
-    ArmResponse<QueryDataFlowDebugSessionsResponse>
+    ArmResponse<QueryDataFlowDebugSessionsResponse>,
+    Error = CloudError
   >;
 
   /**
@@ -270,7 +312,8 @@ interface Factories {
   addDataFlow is ArmResourceActionSync<
     Factory,
     DataFlowDebugPackage,
-    ArmResponse<AddDataFlowToDebugSessionResponse>
+    ArmResponse<AddDataFlowToDebugSessionResponse>,
+    Error = CloudError
   >;
 
   /**
@@ -282,7 +325,8 @@ interface Factories {
   dataFlowDebugSessionDelete is ArmResourceActionSync<
     Factory,
     DeleteDataFlowDebugSessionRequest,
-    OkResponse
+    OkResponse,
+    Error = CloudError
   >;
 
   /**
@@ -294,7 +338,8 @@ interface Factories {
   executeCommand is ArmResourceActionAsync<
     Factory,
     DataFlowDebugCommandRequest,
-    ArmResponse<DataFlowDebugCommandResponse>
+    ArmResponse<DataFlowDebugCommandResponse>,
+    Error = CloudError
   >;
 
   /**
@@ -308,7 +353,8 @@ interface Factories {
   privateLinkResourcesGet is ArmResourceActionSync<
     Factory,
     void,
-    ArmResponse<PrivateLinkResourcesWrapper>
+    ArmResponse<PrivateLinkResourcesWrapper>,
+    Error = CloudError
   >;
 }
 

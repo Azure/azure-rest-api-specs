@@ -26,7 +26,35 @@ model IntegrationRuntimeResource
   ...Azure.ResourceManager.Legacy.EntityTagProperty;
 }
 
-@armResourceOperations
+alias IntegrationRuntimesOps = Azure.ResourceManager.Legacy.RoutedOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+  },
+  {
+    @path
+    @segment("factories")
+    @key
+    @maxLength(63)
+    @minLength(3)
+    @pattern("^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$")
+    factoryName: string;
+
+    @path
+    @segment("integrationRuntimes")
+    @key
+    @maxLength(63)
+    @minLength(3)
+    @pattern("^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$")
+    integrationRuntimeName: string;
+  },
+  ResourceRoute = #{
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DataFactory/factories/{factoryName}/integrationRuntimes",
+  }
+>;
+
+@armResourceOperations(#{ allowStaticRoutes: true })
 interface IntegrationRuntimeResources {
   /**
    * Gets an integration runtime.
@@ -42,7 +70,9 @@ interface IntegrationRuntimeResources {
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @header
       `If-None-Match`?: string;
-    }
+    },
+    Response = ArmResponse<IntegrationRuntimeResource> | NotModifiedResponse,
+    Error = CloudError
   >;
 
   /**
@@ -61,7 +91,8 @@ interface IntegrationRuntimeResources {
       @header
       `If-Match`?: string;
     },
-    Response = ArmResourceUpdatedResponse<IntegrationRuntimeResource>
+    Response = ArmResourceUpdatedResponse<IntegrationRuntimeResource>,
+    Error = CloudError
   >;
 
   /**
@@ -72,7 +103,8 @@ interface IntegrationRuntimeResources {
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     IntegrationRuntimeResource,
-    PatchModel = UpdateIntegrationRuntimeRequest
+    PatchModel = UpdateIntegrationRuntimeRequest,
+    Error = CloudError
   >;
 
   /**
@@ -80,7 +112,10 @@ interface IntegrationRuntimeResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("IntegrationRuntimes_Delete")
-  delete is ArmResourceDeleteSync<IntegrationRuntimeResource>;
+  delete is ArmResourceDeleteSync<
+    IntegrationRuntimeResource,
+    Error = CloudError
+  >;
 
   /**
    * Lists integration runtimes.
@@ -89,7 +124,8 @@ interface IntegrationRuntimeResources {
   @operationId("IntegrationRuntimes_ListByFactory")
   listByFactory is ArmResourceListByParent<
     IntegrationRuntimeResource,
-    Response = ArmResponse<IntegrationRuntimeListResponse>
+    Response = ArmResponse<IntegrationRuntimeListResponse>,
+    Error = CloudError
   >;
 
   /**
@@ -100,7 +136,8 @@ interface IntegrationRuntimeResources {
   getStatus is ArmResourceActionSync<
     IntegrationRuntimeResource,
     void,
-    ArmResponse<IntegrationRuntimeStatusResponse>
+    ArmResponse<IntegrationRuntimeStatusResponse>,
+    Error = CloudError
   >;
 
   /**
@@ -114,7 +151,8 @@ interface IntegrationRuntimeResources {
   listOutboundNetworkDependenciesEndpoints is ArmResourceActionSync<
     IntegrationRuntimeResource,
     void,
-    ArmResponse<IntegrationRuntimeOutboundNetworkDependenciesEndpointsResponse>
+    ArmResponse<IntegrationRuntimeOutboundNetworkDependenciesEndpointsResponse>,
+    Error = CloudError
   >;
 
   /**
@@ -125,7 +163,8 @@ interface IntegrationRuntimeResources {
   getConnectionInfo is ArmResourceActionSync<
     IntegrationRuntimeResource,
     void,
-    ArmResponse<IntegrationRuntimeConnectionInfo>
+    ArmResponse<IntegrationRuntimeConnectionInfo>,
+    Error = CloudError
   >;
 
   /**
@@ -136,7 +175,8 @@ interface IntegrationRuntimeResources {
   regenerateAuthKey is ArmResourceActionSync<
     IntegrationRuntimeResource,
     IntegrationRuntimeRegenerateKeyParameters,
-    ArmResponse<IntegrationRuntimeAuthKeys>
+    ArmResponse<IntegrationRuntimeAuthKeys>,
+    Error = CloudError
   >;
 
   /**
@@ -147,7 +187,8 @@ interface IntegrationRuntimeResources {
   listAuthKeys is ArmResourceActionSync<
     IntegrationRuntimeResource,
     void,
-    ArmResponse<IntegrationRuntimeAuthKeys>
+    ArmResponse<IntegrationRuntimeAuthKeys>,
+    Error = CloudError
   >;
 
   /**
@@ -158,7 +199,8 @@ interface IntegrationRuntimeResources {
   start is ArmResourceActionAsync<
     IntegrationRuntimeResource,
     void,
-    ArmResponse<IntegrationRuntimeStatusResponse>
+    ArmResponse<IntegrationRuntimeStatusResponse>,
+    Error = CloudError
   >;
 
   /**
@@ -166,7 +208,12 @@ interface IntegrationRuntimeResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("IntegrationRuntimes_Stop")
-  stop is ArmResourceActionAsync<IntegrationRuntimeResource, void, OkResponse>;
+  stop is ArmResourceActionAsync<
+    IntegrationRuntimeResource,
+    void,
+    OkResponse,
+    Error = CloudError
+  >;
 
   /**
    * Force the integration runtime to synchronize credentials across integration runtime nodes, and this will override the credentials across all worker nodes with those available on the dispatcher node. If you already have the latest credential backup file, you should manually import it (preferred) on any self-hosted integration runtime node than using this API directly.
@@ -176,7 +223,8 @@ interface IntegrationRuntimeResources {
   syncCredentials is ArmResourceActionSync<
     IntegrationRuntimeResource,
     void,
-    OkResponse
+    OkResponse,
+    Error = CloudError
   >;
 
   /**
@@ -188,7 +236,8 @@ interface IntegrationRuntimeResources {
   getMonitoringData is ArmResourceActionSync<
     IntegrationRuntimeResource,
     void,
-    ArmResponse<IntegrationRuntimeMonitoringData>
+    ArmResponse<IntegrationRuntimeMonitoringData>,
+    Error = CloudError
   >;
 
   /**
@@ -199,7 +248,8 @@ interface IntegrationRuntimeResources {
   upgrade is ArmResourceActionSync<
     IntegrationRuntimeResource,
     void,
-    OkResponse
+    OkResponse,
+    Error = CloudError
   >;
 
   /**
@@ -210,7 +260,8 @@ interface IntegrationRuntimeResources {
   removeLinks is ArmResourceActionSync<
     IntegrationRuntimeResource,
     LinkedIntegrationRuntimeRequest,
-    OkResponse
+    OkResponse,
+    Error = CloudError
   >;
 
   /**
@@ -222,7 +273,8 @@ interface IntegrationRuntimeResources {
   createLinkedIntegrationRuntime is ArmResourceActionSync<
     IntegrationRuntimeResource,
     CreateLinkedIntegrationRuntimeRequest,
-    ArmResponse<IntegrationRuntimeStatusResponse>
+    ArmResponse<IntegrationRuntimeStatusResponse>,
+    Error = CloudError
   >;
 
   /**
@@ -234,7 +286,8 @@ interface IntegrationRuntimeResources {
   refresh is ArmResourceActionAsync<
     IntegrationRuntimeResource,
     void,
-    ArmResponse<SsisObjectMetadataStatusResponse>
+    ArmResponse<SsisObjectMetadataStatusResponse>,
+    Error = CloudError
   >;
 
   /**
@@ -242,12 +295,12 @@ interface IntegrationRuntimeResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("IntegrationRuntimeObjectMetadata_Get")
-  @list
   @action("getObjectMetadata")
   integrationRuntimeObjectMetadataGet is ArmResourceActionSync<
     IntegrationRuntimeResource,
     GetSsisObjectMetadataRequest,
     ArmResponse<SsisObjectMetadataListResponse>,
+    Error = CloudError,
     OptionalRequestBody = true
   >;
 
@@ -257,8 +310,8 @@ interface IntegrationRuntimeResources {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("IntegrationRuntimeNodes_Get")
   @get
-  @action("{nodeName}")
-  integrationRuntimeNodesGet is ArmResourceActionSync<
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/nodes/{nodeName}")
+  integrationRuntimeNodesGet is IntegrationRuntimesOps.ActionSync<
     IntegrationRuntimeResource,
     void,
     ArmResponse<SelfHostedIntegrationRuntimeNode>,
@@ -271,7 +324,8 @@ interface IntegrationRuntimeResources {
       @pattern("^[a-z0-9A-Z][a-z0-9A-Z_-]{0,149}$")
       @path
       nodeName: string;
-    }
+    },
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -280,8 +334,8 @@ interface IntegrationRuntimeResources {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("IntegrationRuntimeNodes_Delete")
   @delete
-  @action("{nodeName}")
-  integrationRuntimeNodesDelete is ArmResourceActionSync<
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/nodes/{nodeName}")
+  integrationRuntimeNodesDelete is IntegrationRuntimesOps.ActionSync<
     IntegrationRuntimeResource,
     void,
     OkResponse | NoContentResponse,
@@ -294,7 +348,8 @@ interface IntegrationRuntimeResources {
       @pattern("^[a-z0-9A-Z][a-z0-9A-Z_-]{0,149}$")
       @path
       nodeName: string;
-    }
+    },
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -303,8 +358,8 @@ interface IntegrationRuntimeResources {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("IntegrationRuntimeNodes_Update")
   @patch
-  @action("{nodeName}")
-  integrationRuntimeNodesUpdate is ArmResourceActionSync<
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/nodes/{nodeName}")
+  integrationRuntimeNodesUpdate is IntegrationRuntimesOps.ActionSync<
     IntegrationRuntimeResource,
     UpdateIntegrationRuntimeNodeRequest,
     ArmResponse<SelfHostedIntegrationRuntimeNode>,
@@ -317,7 +372,8 @@ interface IntegrationRuntimeResources {
       @pattern("^[a-z0-9A-Z][a-z0-9A-Z_-]{0,149}$")
       @path
       nodeName: string;
-    }
+    },
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -325,8 +381,8 @@ interface IntegrationRuntimeResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("IntegrationRuntimeNodes_GetIpAddress")
-  @action("ipAddress")
-  getIpAddress is ArmResourceActionSync<
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/nodes/{nodeName}/ipAddress")
+  getIpAddress is IntegrationRuntimesOps.ActionSync<
     IntegrationRuntimeResource,
     void,
     ArmResponse<IntegrationRuntimeNodeIpAddress>,
@@ -339,7 +395,8 @@ interface IntegrationRuntimeResources {
       @pattern("^[a-z0-9A-Z][a-z0-9A-Z_-]{0,149}$")
       @path
       nodeName: string;
-    }
+    },
+    OverrideErrorType = CloudError
   >;
 
   /**

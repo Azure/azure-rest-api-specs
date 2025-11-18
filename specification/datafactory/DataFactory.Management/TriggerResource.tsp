@@ -25,7 +25,35 @@ model TriggerResource is Azure.ResourceManager.ProxyResource<Trigger, false> {
   ...Azure.ResourceManager.Legacy.EntityTagProperty;
 }
 
-@armResourceOperations
+alias TriggerRunsOps = Azure.ResourceManager.Legacy.RoutedOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+  },
+  {
+    @path
+    @segment("factories")
+    @key
+    @maxLength(63)
+    @minLength(3)
+    @pattern("^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$")
+    factoryName: string;
+
+    @path
+    @segment("triggers")
+    @key
+    @maxLength(260)
+    @minLength(1)
+    @pattern("^[A-Za-z0-9_][^<>*#.%&:\\\\+?/]*$")
+    triggerName: string;
+  },
+  ResourceRoute = #{
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DataFactory/factories/{factoryName}/triggers",
+  }
+>;
+
+@armResourceOperations(#{ allowStaticRoutes: true })
 interface TriggerResources {
   /**
    * Gets a trigger.
@@ -41,7 +69,9 @@ interface TriggerResources {
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @header
       `If-None-Match`?: string;
-    }
+    },
+    Response = ArmResponse<TriggerResource> | NotModifiedResponse,
+    Error = CloudError
   >;
 
   /**
@@ -60,7 +90,8 @@ interface TriggerResources {
       @header
       `If-Match`?: string;
     },
-    Response = ArmResourceUpdatedResponse<TriggerResource>
+    Response = ArmResourceUpdatedResponse<TriggerResource>,
+    Error = CloudError
   >;
 
   /**
@@ -68,7 +99,7 @@ interface TriggerResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Triggers_Delete")
-  delete is ArmResourceDeleteSync<TriggerResource>;
+  delete is ArmResourceDeleteSync<TriggerResource, Error = CloudError>;
 
   /**
    * Lists triggers.
@@ -77,7 +108,8 @@ interface TriggerResources {
   @operationId("Triggers_ListByFactory")
   listByFactory is ArmResourceListByParent<
     TriggerResource,
-    Response = ArmResponse<TriggerListResponse>
+    Response = ArmResponse<TriggerListResponse>,
+    Error = CloudError
   >;
 
   /**
@@ -88,7 +120,8 @@ interface TriggerResources {
   subscribeToEvents is ArmResourceActionAsync<
     TriggerResource,
     void,
-    ArmResponse<TriggerSubscriptionOperationStatus>
+    ArmResponse<TriggerSubscriptionOperationStatus>,
+    Error = CloudError
   >;
 
   /**
@@ -99,7 +132,8 @@ interface TriggerResources {
   getEventSubscriptionStatus is ArmResourceActionSync<
     TriggerResource,
     void,
-    ArmResponse<TriggerSubscriptionOperationStatus>
+    ArmResponse<TriggerSubscriptionOperationStatus>,
+    Error = CloudError
   >;
 
   /**
@@ -110,7 +144,8 @@ interface TriggerResources {
   unsubscribeFromEvents is ArmResourceActionAsync<
     TriggerResource,
     void,
-    ArmResponse<TriggerSubscriptionOperationStatus>
+    ArmResponse<TriggerSubscriptionOperationStatus>,
+    Error = CloudError
   >;
 
   /**
@@ -121,8 +156,9 @@ interface TriggerResources {
   start is ArmResourceActionAsyncBase<
     TriggerResource,
     void,
-    OkResponse,
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<TriggerResource>
+    OkResponse & ArmLroLocationHeader,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<TriggerResource>,
+    Error = CloudError
   >;
 
   /**
@@ -133,8 +169,9 @@ interface TriggerResources {
   stop is ArmResourceActionAsyncBase<
     TriggerResource,
     void,
-    OkResponse,
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<TriggerResource>
+    OkResponse & ArmLroLocationHeader,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<TriggerResource>,
+    Error = CloudError
   >;
 
   /**
@@ -142,7 +179,8 @@ interface TriggerResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("TriggerRuns_Rerun")
-  rerun is ArmResourceActionSync<
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}/triggerRuns/{runId}/rerun")
+  rerun is TriggerRunsOps.ActionSync<
     TriggerResource,
     void,
     OkResponse,
@@ -152,7 +190,8 @@ interface TriggerResources {
        */
       @path
       runId: string;
-    }
+    },
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -160,7 +199,8 @@ interface TriggerResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("TriggerRuns_Cancel")
-  cancel is ArmResourceActionSync<
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}/triggerRuns/{runId}/cancel")
+  cancel is TriggerRunsOps.ActionSync<
     TriggerResource,
     void,
     OkResponse,
@@ -170,7 +210,8 @@ interface TriggerResources {
        */
       @path
       runId: string;
-    }
+    },
+    OverrideErrorType = CloudError
   >;
 }
 

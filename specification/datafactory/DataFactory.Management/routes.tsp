@@ -32,7 +32,8 @@ interface FactoriesOperationGroup {
       @path
       @segment("locations")
       locationId: string;
-    }
+    },
+    Error = CloudError
   >;
 }
 
@@ -55,6 +56,7 @@ interface ExposureControlOperationGroup {
       @path
       @segment("locations")
       locationId: string;
-    }
+    },
+    Error = CloudError
   >;
 }

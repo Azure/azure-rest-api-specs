@@ -34,9 +34,7 @@ using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
-/**
- * The Azure Data Factory V2 management API provides a RESTful set of web services that interact with Azure Data Factory V2 services.
- */
+
 @armProviderNamespace
 @service(#{ title: "DataFactoryManagementClient" })
 @versioned(Versions)
@@ -53,4 +51,12 @@ enum Versions {
   v2018_06_01: "2018-06-01",
 }
 
-interface Operations extends Azure.ResourceManager.Operations {}
+interface Operations
+  extends Azure.ResourceManager.Legacy.Operations<
+      Response = ArmResponse<OperationListResponse>,
+      Error = CloudError
+    > {}
+
+@@doc(Operations.list,
+  "Lists the available Azure Data Factory API operations."
+);

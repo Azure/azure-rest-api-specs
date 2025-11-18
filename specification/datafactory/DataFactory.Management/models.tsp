@@ -3259,6 +3259,18 @@ enum DayOfWeek {
   Saturday,
 }
 
+/** A list of operations that can be performed by the Data Factory service. */
+model OperationListResponse {
+  /** List of Data Factory operations supported by the Data Factory resource provider. */
+  @pageItems
+  @identifiers(#["name"])
+  value?: Operation[];
+
+  /** The link to the next page of results, if any remaining results exist. */
+  @nextLink
+  nextLink?: string;
+}
+
 /**
  * Azure Data Factory API operation definition.
  */
@@ -11265,9 +11277,9 @@ model SelfHostedIntegrationRuntimeStatusTypeProperties {
   /**
    * The estimated time when the self-hosted integration runtime will be updated.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   autoUpdateETA?: utcDateTime;
 
   /**

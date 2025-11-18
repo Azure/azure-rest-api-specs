@@ -41,7 +41,9 @@ interface PipelineResources {
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @header
       `If-None-Match`?: string;
-    }
+    },
+    Response = ArmResponse<PipelineResource> | NotModifiedResponse,
+    Error = CloudError
   >;
 
   /**
@@ -60,7 +62,8 @@ interface PipelineResources {
       @header
       `If-Match`?: string;
     },
-    Response = ArmResourceUpdatedResponse<PipelineResource>
+    Response = ArmResourceUpdatedResponse<PipelineResource>,
+    Error = CloudError
   >;
 
   /**
@@ -68,7 +71,7 @@ interface PipelineResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Pipelines_Delete")
-  delete is ArmResourceDeleteSync<PipelineResource>;
+  delete is ArmResourceDeleteSync<PipelineResource, Error = CloudError>;
 
   /**
    * Lists pipelines.
@@ -77,7 +80,8 @@ interface PipelineResources {
   @operationId("Pipelines_ListByFactory")
   listByFactory is ArmResourceListByParent<
     PipelineResource,
-    Response = ArmResponse<PipelineListResponse>
+    Response = ArmResponse<PipelineListResponse>,
+    Error = CloudError
   >;
 
   /**
@@ -114,6 +118,7 @@ interface PipelineResources {
       @query("startFromFailure")
       startFromFailure?: boolean;
     },
+    Error = CloudError,
     OptionalRequestBody = true
   >;
 }

@@ -42,7 +42,8 @@ interface ManagedVirtualNetworkResources {
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @header
       `If-None-Match`?: string;
-    }
+    },
+    Error = CloudError
   >;
 
   /**
@@ -61,7 +62,8 @@ interface ManagedVirtualNetworkResources {
       @header
       `If-Match`?: string;
     },
-    Response = ArmResourceUpdatedResponse<ManagedVirtualNetworkResource>
+    Response = ArmResourceUpdatedResponse<ManagedVirtualNetworkResource>,
+    Error = CloudError
   >;
 
   /**
@@ -71,7 +73,8 @@ interface ManagedVirtualNetworkResources {
   @operationId("ManagedVirtualNetworks_ListByFactory")
   listByFactory is ArmResourceListByParent<
     ManagedVirtualNetworkResource,
-    Response = ArmResponse<ManagedVirtualNetworkListResponse>
+    Response = ArmResponse<ManagedVirtualNetworkListResponse>,
+    Error = CloudError
   >;
 }
 
