@@ -2,12 +2,14 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Dynatrace.Observability;
 /**
@@ -99,6 +101,16 @@ interface MonitorResources {
     MonitorResource,
     ManageAgentInstallationRequest,
     NoContentResponse
+  >;
+
+  /**
+   * Manages Dynatrace MCP connectors to add/remove through the Azure Dynatrace resource on the provided list of resources.
+   */
+  @added(Dynatrace.Observability.Versions.v2025_11_03_preview)
+  manageSreAgentConnectors is ArmResourceActionSync<
+    MonitorResource,
+    SreAgentConnectorRequest,
+    ArmResponse<SreAgentConfigurationListResponse>
   >;
 
   /**

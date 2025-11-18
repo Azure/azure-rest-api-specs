@@ -6,6 +6,13 @@ import globals from "globals";
 import tseslint from "typescript-eslint";
 
 /** @type {import('eslint').Linter.Config[]} */
-export default defineConfig(eslint.configs.recommended, tseslint.configs.recommended, {
-  languageOptions: { globals: globals.node },
-});
+export default defineConfig(
+  eslint.configs.recommended,
+  tseslint.configs.recommended,
+  {
+    languageOptions: { globals: globals.node },
+  },
+  {
+    ignores: ["coverage/**", "shared/coverage/**"],
+  },
+);
