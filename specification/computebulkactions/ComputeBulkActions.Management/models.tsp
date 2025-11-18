@@ -8,8 +8,9 @@ import "./virtualMachines.tsp";
 import "./virtualMachineExtension.tsp";
 import "./scheduledactionmodel.tsp";
 
-using TypeSpec.Http;
-using TypeSpec.Rest;
+using Http;
+using Rest;
+using Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 
@@ -45,6 +46,22 @@ alias CustomParams = {
     NamePattern = "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
   >;
 };
+
+alias LaunchBulkInstancesOps = Azure.ResourceManager.Legacy.RoutedOperations<
+  ParentParameters = {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...LocationParameter;
+  },
+  ResourceTypeParameter = ResourceNameParameter<
+    LaunchBulkInstancesOperation,
+    KeyName = "name"
+  >,
+  ResourceRoute = #{
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ComputeBulkActions/locations/{location}/launchBulkInstancesOperations/{name}",
+  }
+>;
 
 // ------------------ Union --------------- //
 @doc("The status of the LaunchBulkInstancesOperation.")

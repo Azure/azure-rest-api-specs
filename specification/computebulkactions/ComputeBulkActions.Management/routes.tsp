@@ -13,37 +13,38 @@ namespace Microsoft.ComputeBulkActions;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
-@armResourceOperations
+@armResourceOperations(#{ allowStaticRoutes: true })
 interface BulkActions {
-  @doc("Gets a list of LaunchBulkInstancesOperations.")
+  @doc("Gets an instance of LaunchBulkInstancesOperations.")
   @get
+  @autoRoute
   @armResourceRead(LaunchBulkInstancesOperation)
   get(
     ...CustomParams,
   ): ArmResponse<LaunchBulkInstancesOperation> | ErrorResponse;
 
   @doc("Creates or updates LaunchBulkInstancesOperations.")
-  @put
-  @armResourceCreateOrUpdate(LaunchBulkInstancesOperation)
-  createOrUpdate(
-    ...CustomParams,
-  ): ArmResourceUpdatedResponse<LaunchBulkInstancesOperation> | ArmResourceCreatedResponse<LaunchBulkInstancesOperation> | ErrorResponse;
+  createOrUpdate is LaunchBulkInstancesOps.CreateOrUpdateAsync<LaunchBulkInstancesOperation>;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "The field name `name` is the valid field name."
   @doc("Deletes the LaunchBulkInstancesOperations.")
-  @delete
-  @armResourceDelete(LaunchBulkInstancesOperation)
-  delete(
-    ...CustomParams,
-  ): ArmDeletedResponse | ArmDeletedNoContentResponse | ErrorResponse;
+  delete is LaunchBulkInstancesOps.DeleteWithoutOkAsync<LaunchBulkInstancesOperation>;
 
-  @doc("Cancels the instances that have not yet launched.")
-  @post
-  @armResourceAction(LaunchBulkInstancesOperation)
-  cancel(...CustomParams): ArmNoContentResponse | ErrorResponse;
+  @doc("Cancels LaunchBulkInstancesOperation instances that have not yet launched.")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ComputeBulkActions/locations/{location}/launchBulkInstancesOperations/{name}/cancel")
+  cancel is LaunchBulkInstancesOps.ActionAsync<
+    LaunchBulkInstancesOperation,
+    void,
+    void,
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>
+  >;
+
+  @doc("Gets the status of a LaunchBulkInstancesOperation.")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ComputeBulkActions/locations/{location}/launchBulkInstancesOperations/{name}/status")
+  getStatus is LaunchBulkInstancesOps.Read<LaunchBulkInstancesOperation>;
 
   @doc("List LaunchBulkInstancesOperation resources by resource group.")
   @get
+  @autoRoute
   @list
   @listsResource(LaunchBulkInstancesOperation)
   @armResourceList(LaunchBulkInstancesOperation)
@@ -55,6 +56,7 @@ interface BulkActions {
 
   @doc("List LaunchBulkInstancesOperation resources by subscriptionId.")
   @get
+  @autoRoute
   @list
   @listsResource(LaunchBulkInstancesOperation)
   @armResourceList(LaunchBulkInstancesOperation)
@@ -84,6 +86,7 @@ interface BulkActions {
 
   // ------------------ Scheduledaction endpoints ---------------
   /** VirtualMachinesSubmitDeallocate: Schedule deallocate operation for a batch of virtual machines at datetime in future. */
+  @autoRoute
   virtualMachinesSubmitDeallocate is ArmProviderActionSync<
     Request = SubmitDeallocateRequest,
     Response = ArmResponse<DeallocateResourceOperationResponse>,
@@ -92,6 +95,7 @@ interface BulkActions {
   >;
 
   /** VirtualMachinesSubmitHibernate: Schedule hibernate operation for a batch of virtual machines at datetime in future. */
+  @autoRoute
   virtualMachinesSubmitHibernate is ArmProviderActionSync<
     Request = SubmitHibernateRequest,
     Response = ArmResponse<HibernateResourceOperationResponse>,
@@ -100,6 +104,7 @@ interface BulkActions {
   >;
 
   /** VirtualMachinesSubmitStart: Schedule start operation for a batch of virtual machines at datetime in future. */
+  @autoRoute
   virtualMachinesSubmitStart is ArmProviderActionSync<
     Request = SubmitStartRequest,
     Response = ArmResponse<StartResourceOperationResponse>,
@@ -108,6 +113,7 @@ interface BulkActions {
   >;
 
   /** VirtualMachinesExecuteDeallocate: Execute deallocate operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
+  @autoRoute
   virtualMachinesExecuteDeallocate is ArmProviderActionSync<
     Request = ExecuteDeallocateRequest,
     Response = ArmResponse<DeallocateResourceOperationResponse>,
@@ -116,6 +122,7 @@ interface BulkActions {
   >;
 
   /** VirtualMachinesExecuteHibernate: Execute hibernate operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
+  @autoRoute
   virtualMachinesExecuteHibernate is ArmProviderActionSync<
     Request = ExecuteHibernateRequest,
     Response = ArmResponse<HibernateResourceOperationResponse>,
@@ -124,6 +131,7 @@ interface BulkActions {
   >;
 
   /** VirtualMachinesExecuteStart: Execute start operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
+  @autoRoute
   virtualMachinesExecuteStart is ArmProviderActionSync<
     Request = ExecuteStartRequest,
     Response = ArmResponse<StartResourceOperationResponse>,
@@ -132,6 +140,7 @@ interface BulkActions {
   >;
 
   /** VirtualMachinesExecuteCreate: Execute create operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
+  @autoRoute
   virtualMachinesExecuteCreate is ArmProviderActionSync<
     Request = ExecuteCreateRequest,
     Response = ArmResponse<CreateResourceOperationResponse>,
@@ -140,6 +149,7 @@ interface BulkActions {
   >;
 
   /** VirtualMachinesExecuteDelete: Execute delete operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
+  @autoRoute
   virtualMachinesExecuteDelete is ArmProviderActionSync<
     Request = ExecuteDeleteRequest,
     Response = ArmResponse<DeleteResourceOperationResponse>,
@@ -148,6 +158,7 @@ interface BulkActions {
   >;
 
   /** VirtualMachinesGetOperationStatus: Polling endpoint to read status of operations performed on virtual machines */
+  @autoRoute
   virtualMachinesGetOperationStatus is ArmProviderActionSync<
     Request = GetOperationStatusRequest,
     Response = ArmResponse<GetOperationStatusResponse>,
@@ -156,6 +167,7 @@ interface BulkActions {
   >;
 
   /** VirtualMachinesCancelOperations: Cancel a previously submitted (start/deallocate/hibernate) request */
+  @autoRoute
   virtualMachinesCancelOperations is ArmProviderActionSync<
     Request = CancelOperationsRequest,
     Response = ArmResponse<CancelOperationsResponse>,
@@ -164,6 +176,7 @@ interface BulkActions {
   >;
 
   /** VirtualMachinesGetOperationErrors: Get error details on operation errors (like transient errors encountered, additional logs) if they exist. */
+  @autoRoute
   virtualMachinesGetOperationErrors is ArmProviderActionSync<
     Request = GetOperationErrorsRequest,
     Response = ArmResponse<GetOperationErrorsResponse>,
