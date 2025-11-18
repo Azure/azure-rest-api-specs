@@ -166,9 +166,7 @@ export class Swagger {
   }
 
   /**
-   * Content of swagger file, either loaded from `#path` or passed in via `options`.
-   *
-   * @returns {Promise<string>}
+   * @returns {Promise<string>} Content of swagger file, represented as a string, either loaded from `#path` or passed in via `options`
    * @throws {SpecModelError}
    */
   async #getContent() {
