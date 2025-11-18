@@ -4390,9 +4390,6 @@ union KnowledgeSourceKind {
   @doc("A knowledge source that reads data from the web.")
   Web: "web",
 
-  @doc("A knowledge source that reads data from ingested SharePoint.")
-  IngestedSharePoint: "ingestedSharePoint",
-
   @doc("A knowledge source that reads data from remote SharePoint.")
   RemoteSharePoint: "remoteSharePoint",
 }
