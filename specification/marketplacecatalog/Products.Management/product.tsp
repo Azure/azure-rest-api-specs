@@ -8,8 +8,8 @@ using Azure.ResourceManager;
 namespace Microsoft.Marketplace;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Read-only metadata resource."
-@doc("Returns a subset of Product attributes")
-model ProductSummary {
+@doc("Base model containing common product attributes shared between ProductSummary and ProductDetails")
+model ProductBase {
   @doc("Product display name")
   displayName?: string;
 
@@ -87,10 +87,6 @@ model ProductSummary {
   @doc("Total number of ratings for the offer")
   ratingCount?: int32;
 
-  @doc("Full set of plan/SKU attributes")
-  @identifiers(#[])
-  plans?: PlanSummary[];
-
   @doc("Maps to the list of compatible products")
   supportedProducts?: string[];
 
@@ -124,9 +120,20 @@ model ProductSummary {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Read-only metadata resource."
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "This inheritance is intentional for extending ProductSummary with additional details"
-@doc("Summary description of the product")
-model ProductDetails extends ProductSummary {
+@doc("Returns a subset of Product attributes")
+model ProductSummary {
+  ...ProductBase;
+
+  @doc("Full set of plan/SKU attributes")
+  @identifiers(#[])
+  plans?: PlanSummary[];
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Read-only metadata resource."
+@doc("Returns the full set of Product attributes")
+model ProductDetails {
+  ...ProductBase;
+
   @doc("List of product videos")
   @identifiers(#[])
   videos?: ProductVideo[];
@@ -211,12 +218,8 @@ model ProductDetails extends ProductSummary {
   @identifiers(#[])
   artifacts?: Artifact[];
 
-  // Override properties that differ from base class
   @doc("Full set of plan/SKU attributes")
   plans?: PlanDetails[];
-
-  @doc("The unique id of the product")
-  productId: string;
 }
 
 @doc("Returns a subset of Plan attributes")
@@ -282,9 +285,10 @@ model PlanSummary {
   hasRi?: boolean;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "This inheritance is intentional for extending PlanSummary with additional details"
-@doc("Returns a subset of Plan attributes")
-model PlanDetails extends PlanSummary {
+@doc("Returns the full set of Plan attributes")
+model PlanDetails {
+  ...PlanSummary;
+
   @doc("The id")
   id?: string;
 
