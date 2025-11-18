@@ -5,6 +5,7 @@ import "./models-service.tsp";
 import "./models-shared.tsp";
 
 using TypeSpec.Http;
+using Azure.ClientGenerator.Core.Legacy;
 
 namespace Search;
 
@@ -329,6 +330,9 @@ model KnowledgeBaseRetrievalActivityRecord extends KnowledgeBaseActivityRecord {
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing"
+#suppress "@azure-tools/typespec-client-generator-core/legacy-hierarchy-building-conflict" "Existing"
+@hierarchyBuilding(KnowledgeBaseRetrievalActivityRecord)
 @doc("Represents a search index retrieval activity record.")
 model KnowledgeBaseSearchIndexActivityRecord
   extends KnowledgeBaseRetrievalActivityRecord {
@@ -358,6 +362,9 @@ model KnowledgeBaseSearchIndexActivityArguments {
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing"
+#suppress "@azure-tools/typespec-client-generator-core/legacy-hierarchy-building-conflict" "Existing"
+@hierarchyBuilding(KnowledgeBaseRetrievalActivityRecord)
 @doc("Represents a azure blob retrieval activity record.")
 model KnowledgeBaseAzureBlobActivityRecord
   extends KnowledgeBaseRetrievalActivityRecord {
@@ -375,6 +382,9 @@ model KnowledgeBaseAzureBlobActivityArguments {
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing"
+#suppress "@azure-tools/typespec-client-generator-core/legacy-hierarchy-building-conflict" "Existing"
+@hierarchyBuilding(KnowledgeBaseRetrievalActivityRecord)
 @doc("Represents a indexed SharePoint retrieval activity record.")
 model KnowledgeBaseIndexedSharePointActivityRecord
   extends KnowledgeBaseRetrievalActivityRecord {
@@ -392,6 +402,9 @@ model KnowledgeBaseIndexedSharePointActivityArguments {
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing"
+#suppress "@azure-tools/typespec-client-generator-core/legacy-hierarchy-building-conflict" "Existing"
+@hierarchyBuilding(KnowledgeBaseRetrievalActivityRecord)
 @doc("Represents a indexed OneLake retrieval activity record.")
 model KnowledgeBaseIndexedOneLakeActivityRecord
   extends KnowledgeBaseRetrievalActivityRecord {
@@ -409,6 +422,9 @@ model KnowledgeBaseIndexedOneLakeActivityArguments {
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing"
+#suppress "@azure-tools/typespec-client-generator-core/legacy-hierarchy-building-conflict" "Existing"
+@hierarchyBuilding(KnowledgeBaseRetrievalActivityRecord)
 @doc("Represents a web retrieval activity record.")
 model KnowledgeBaseWebActivityRecord
   extends KnowledgeBaseRetrievalActivityRecord {
@@ -438,6 +454,9 @@ model KnowledgeBaseWebActivityArguments {
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing"
+#suppress "@azure-tools/typespec-client-generator-core/legacy-hierarchy-building-conflict" "Existing"
+@hierarchyBuilding(KnowledgeBaseRetrievalActivityRecord)
 @doc("Represents a remote SharePoint retrieval activity record.")
 model KnowledgeBaseRemoteSharePointActivityRecord
   extends KnowledgeBaseRetrievalActivityRecord {
