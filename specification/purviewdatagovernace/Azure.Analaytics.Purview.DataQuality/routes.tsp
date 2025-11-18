@@ -1239,57 +1239,57 @@ namespace PurviewDataQuality {
     }
   >;
 
-  // /**
-  //  * Get bulk asset metadata for all assets in an account
-  //  */
-  // #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-  // #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
-  // #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  // @tag("BulkMetadata")
-  // @doc("Retrieves metadata for all assets in an account with pagination support. Returns up to 10 assets per request.")
-  // @route("/bulk-asset-metadata")
-  // @get
-  // op getBulkAssetMetadata is RpcOperation<
-  //   {
-  //     @query("continuationToken")
-  //     @doc("Continuation token for pagination. Use this to get all results until continuationToken from the response becomes null.")
-  //     continuationToken?: string;
-  //   },
-  //   BulkAssetMetadataResponse
-  // >;
+  /**
+   * Get bulk asset metadata for all assets in an account
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @tag("BulkMetadata")
+  @doc("Retrieves metadata for all assets in an account with pagination support. Returns up to 10 assets per request.")
+  @route("/bulk-asset-metadata")
+  @get
+  op getBulkAssetMetadata is RpcOperation<
+    {
+      @query("continuationToken")
+      @doc("Continuation token for pagination. Use this to get all results until continuationToken from the response becomes null.")
+      continuationToken?: string;
+    },
+    BulkAssetMetadataRequestResponse
+  >;
 
-  // /**
-  //  * Insert bulk asset metadata into a new account
-  //  */
-  // #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-  // #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
-  // #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  // #suppress "@azure-tools/typespec-azure-core/no-openapi" ""
-  // @tag("BulkMetadata")
-  // @doc("Inserts metadata for multiple assets into a new account ID.")
-  // @extension(
-  //   "x-ms-examples",
-  //   #{
-  //     BulkAssetMetadata_Create: #{
-  //       $ref: "./examples/BulkAssetMetadata_Create.json",
-  //     },
-  //   }
-  // )
-  // @route("/bulk-asset-metadata")
-  // @put
-  // op createBulkAssetMetadata is RpcOperation<
-  //   {
-  //     @doc("Bulk asset metadata to insert")
-  //     @bodyRoot
-  //     request: BulkAssetMetadataRequest;
-  //   },
-  //   {
-  //     @statusCode
-  //     statusCode: 201;
+  /**
+   * Insert bulk asset metadata into a new account
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" ""
+  @tag("BulkMetadata")
+  @doc("Inserts metadata for multiple assets into a new account ID.")
+  @extension(
+    "x-ms-examples",
+    #{
+      BulkAssetMetadata_Create: #{
+        $ref: "./examples/BulkAssetMetadata_Create.json",
+      },
+    }
+  )
+  @route("/bulk-asset-metadata")
+  @put
+  op createBulkAssetMetadata is RpcOperation<
+    {
+      @doc("Bulk asset metadata to insert")
+      @bodyRoot
+      request: BulkAssetMetadataRequestResponse;
+    },
+    {
+      @statusCode
+      statusCode: 201;
 
-  //     @doc("Success message")
-  //     @body
-  //     message: string;
-  //   }
-  // >;
+      @doc("Succesful Response body")
+      @body
+      body: BulkAssetMetadataRequestResponse;
+    }
+  >;
 }

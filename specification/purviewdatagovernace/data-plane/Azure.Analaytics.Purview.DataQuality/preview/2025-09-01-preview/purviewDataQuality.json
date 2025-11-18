@@ -83,9 +83,104 @@
     },
     {
       "name": "Trend"
+    },
+    {
+      "name": "BulkMetadata"
     }
   ],
   "paths": {
+    "/bulk-asset-metadata": {
+      "get": {
+        "operationId": "GetBulkAssetMetadata",
+        "tags": [
+          "BulkMetadata"
+        ],
+        "description": "Retrieves metadata for all assets in an account with pagination support. Returns up to 10 assets per request.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "continuationToken",
+            "in": "query",
+            "description": "Continuation token for pagination. Use this to get all results until continuationToken from the response becomes null.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BulkAssetMetadataRequestResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BulkAssetMetadata_Get": {
+            "$ref": "./examples/BulkAssetMetadata_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "CreateBulkAssetMetadata",
+        "tags": [
+          "BulkMetadata"
+        ],
+        "description": "Inserts metadata for multiple assets into a new account ID.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Bulk asset metadata to insert",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BulkAssetMetadataRequestResponse"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/BulkAssetMetadataRequestResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BulkAssetMetadata_Create": {
+            "$ref": "./examples/BulkAssetMetadata_Create.json"
+          }
+        }
+      }
+    },
     "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}:observations": {
       "post": {
         "operationId": "Observations",
@@ -2525,6 +2620,57 @@
         }
       }
     },
+    "BulkAssetMetadataEntry": {
+      "type": "object",
+      "description": "Complete metadata entry for bulk operations including asset metadata, scoped metadata, rules, and score snapshot",
+      "properties": {
+        "assetMetadata": {
+          "$ref": "#/definitions/AssetMetadata",
+          "description": "Asset metadata information"
+        },
+        "assetScopedMetadata": {
+          "$ref": "#/definitions/ScopedAssetMetadata",
+          "description": "Asset scoped metadata information"
+        },
+        "scoreSnapshot": {
+          "$ref": "#/definitions/ScoreSnapshot",
+          "description": "Snapshot Details"
+        },
+        "globalRules": {
+          "type": "array",
+          "description": "Global rules applied to the asset",
+          "items": {
+            "$ref": "#/definitions/RuleEntity"
+          }
+        }
+      },
+      "required": [
+        "assetMetadata",
+        "assetScopedMetadata",
+        "scoreSnapshot",
+        "globalRules"
+      ]
+    },
+    "BulkAssetMetadataRequestResponse": {
+      "type": "object",
+      "description": "Response containing bulk asset metadata with pagination support",
+      "properties": {
+        "continuationToken": {
+          "type": "string",
+          "description": "Continuation token for pagination. Null when no more results are available."
+        },
+        "metadata": {
+          "type": "array",
+          "description": "Array of metadata entries (up to 10 per response)",
+          "items": {
+            "$ref": "#/definitions/BulkAssetMetadataEntry"
+          }
+        }
+      },
+      "required": [
+        "metadata"
+      ]
+    },
     "BulkRulesRequest": {
       "type": "object",
       "description": "Request model for bulk rule creation operations",
@@ -4768,6 +4914,163 @@
         "ETag": {
           "type": "string",
           "description": "Entity tag used for concurrency control and version validation."
+        }
+      }
+    },
+    "ScoreSnapshot": {
+      "type": "object",
+      "description": "Comprehensive score snapshot with business domain, data product, asset scoring, and validation results",
+      "properties": {
+        "businessDomainId": {
+          "type": "string",
+          "description": "Business domain identifier"
+        },
+        "dataProductId": {
+          "type": "string",
+          "description": "Data product identifier"
+        },
+        "assetId": {
+          "type": "string",
+          "description": "Asset identifier"
+        },
+        "assetScore": {
+          "type": "number",
+          "format": "double",
+          "description": "Overall score for the asset"
+        },
+        "rules": {
+          "type": "array",
+          "description": "Rules with their scores and validation results",
+          "items": {
+            "$ref": "#/definitions/ScoredRule"
+          }
+        },
+        "job": {
+          "$ref": "#/definitions/SnapshotJob",
+          "description": "Job information for the snapshot"
+        }
+      },
+      "required": [
+        "businessDomainId",
+        "dataProductId",
+        "assetId",
+        "assetScore"
+      ]
+    },
+    "ScoredRule": {
+      "type": "object",
+      "description": "Rule definition with scoring and validation results",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Rule identifier"
+        },
+        "score": {
+          "type": "number",
+          "format": "double",
+          "description": "Score for the rule"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the rule"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the rule"
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the rule"
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the rule"
+        },
+        "columns": {
+          "type": "array",
+          "description": "Columns associated with the rule",
+          "items": {}
+        },
+        "totalRows": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total number of rows processed"
+        },
+        "failedRows": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of failed rows"
+        },
+        "passedRows": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of passed rows"
+        },
+        "emptyRows": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of empty rows"
+        },
+        "miscastRows": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of miscast rows"
+        },
+        "queryExecuted": {
+          "type": "string",
+          "description": "The query which has been executed"
+        },
+        "dimension": {
+          "type": "string",
+          "description": "Dimension of the rule"
+        },
+        "businessDomain": {
+          "$ref": "#/definitions/Reference",
+          "description": "Reference to the business domain"
+        },
+        "dataProduct": {
+          "$ref": "#/definitions/Reference",
+          "description": "Reference to the data product"
+        },
+        "dataAsset": {
+          "$ref": "#/definitions/Reference",
+          "description": "Reference to the data asset"
+        },
+        "typeProperties": {
+          "$ref": "#/definitions/TypeProperties",
+          "description": "Properties related to the data asset"
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last modification timestamp"
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "Last modifier user ID"
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "Creator user ID"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation timestamp"
+        }
+      }
+    },
+    "SnapshotJob": {
+      "type": "object",
+      "description": "Job information associated with a score snapshot",
+      "properties": {
+        "jobId": {
+          "type": "string",
+          "description": "Job identifier"
+        },
+        "businessDomainId": {
+          "type": "string",
+          "description": "Business domain identifier"
         }
       }
     },

@@ -772,7 +772,7 @@ model BulkRulesResponse {
    * Array of successfully created rule entities with their assigned identifiers
    */
   @doc("Array of created rule entities")
-  rules: RuleEntityBulkResponse[];
+  rules: RuleEntity[];
 }
 
 /**
@@ -2221,9 +2221,6 @@ model ScopedAssetMetadata {
    */
   @doc("Entity tag used for concurrency control and version validation.")
   ETag?: string;
-
-  // @doc("")
-  // name? : string
 }
 
 /**
@@ -3427,7 +3424,7 @@ model DatasetMapping {
 @doc("Rule definition with scoring and validation results")
 model ScoredRule {
   @doc("Rule identifier")
-  ruleId?: string;
+  id?: string;
 
   @doc("Score for the rule")
   score?: float64;
@@ -3462,6 +3459,36 @@ model ScoredRule {
 
   @doc("Number of miscast rows")
   miscastRows?: int64;
+
+  @doc("The query which has been executed")
+  queryExecuted?: string;
+
+  @doc("Dimension of the rule")
+  dimension?: string;
+
+  @doc("Reference to the business domain")
+  businessDomain?: Reference;
+
+  @doc("Reference to the data product")
+  dataProduct?: Reference;
+
+  @doc("Reference to the data asset")
+  dataAsset?: Reference;
+
+  @doc("Properties related to the data asset")
+  typeProperties?: TypeProperties;
+
+  @doc("Last modification timestamp")
+  lastModifiedAt?: utcDateTime;
+
+  @doc("Last modifier user ID")
+  lastModifiedBy?: string;
+
+  @doc("Creator user ID")
+  createdBy?: string;
+
+  @doc("Creation timestamp")
+  createdAt?: utcDateTime;
 }
 
 /**
@@ -3485,20 +3512,20 @@ model BulkAssetMetadataEntry {
   assetMetadata: AssetMetadata;
 
   @doc("Asset scoped metadata information")
-  assetScopedMetadata: AssetScopedMetadata;
+  assetScopedMetadata: ScopedAssetMetadata;
 
   @doc("Snapshot Details")
   scoreSnapshot: ScoreSnapshot;
 
   @doc("Global rules applied to the asset")
-  globalRules: GlobalRule[];
+  globalRules: RuleEntity[];
 }
 
 /**
  * Response model for bulk asset metadata GET operations
  */
 @doc("Response containing bulk asset metadata with pagination support")
-model BulkAssetMetadataResponse {
+model BulkAssetMetadataRequestResponse {
   @doc("Continuation token for pagination. Null when no more results are available.")
   continuationToken?: string;
 

@@ -3,395 +3,413 @@
   "parameters": {
     "api-version": "2025-09-01-preview",
     "request": {
-      "metadata": [
-        {
-          "assetMetadata": {
-            "id": "323e4567-e89b-12d3-a456-426614174002",
-            "name": "ProductCatalogObserver",
-            "type": "Basic",
-            "businessDomain": {
-              "type": "BusinessDomain",
-              "referenceId": "bcdef123-4567-8901-bcde-f1234567890a"
+        "metadata": [
+          {
+            "assetMetadata": {
+              "name": "CAMPAIGN_ANALYTICS",
+              "businessDomain": {
+                "type": "BusinessDomainReference",
+                "referenceId": "76be16f9-5cb3-4839-83d6-4e3829a8ab0c"
+              },
+              "dataProduct": {
+                "type": "DataProductReference",
+                "referenceId": "2a1d2087-09e2-4ecf-817d-1f5bfcbc31bf"
+              },
+              "type": "Basic",
+              "dataAsset": {
+                "type": "DataAssetReference",
+                "referenceId": "fadb55b6-aa10-47d5-82c4-5e2723ba7869"
+              },
+              "ETag": "250025c0-0000-3200-0000-685e748d0000",
+              "typeProperties": {
+                "inputDatasets": [
+                  {
+                    "alias": "CAMPAIGN_ANALYTICS",
+                    "primary": true,
+                    "dataset": {
+                      "businessDomain": {
+                        "referenceId": "e0c0840b-f087-4c3e-99e2-63075572d33b",
+                        "type": "BusinessDomainReference"
+                      },
+                      "dataProduct": {
+                        "referenceId": "757b96c3-af76-45a8-a7cd-0f4b90e27d9a",
+                        "type": "DataProductReference"
+                      },
+                      "dataAsset": {
+                        "referenceId": "fadb55b6-aa10-47d5-82c4-5e2723ba7869",
+                        "type": "DataAssetReference"
+                      },
+                      "datasourceFQN": "snowflake://fljqaun-gpa78346.snowflakecomputing.com/databases/dream_demo",
+                      "schema": {
+                        "origin": "DataProfiling",
+                        "items": [
+                          {
+                            "name": "ID",
+                            "type": "Number",
+                            "typeProperties": {
+                              "integral": false,
+                              "precision": 38,
+                              "scale": 38
+                            }
+                          },
+                          {
+                            "name": "REGION",
+                            "type": "String"
+                          },
+                          {
+                            "name": "COUNTRY",
+                            "type": "String"
+                          }
+                        ]
+                      },
+                      "type": "SnowflakeTable",
+                      "typeProperties": {
+                        "format": "table",
+                        "schemaName": "PUBLIC",
+                        "tableName": "CAMPAIGN_ANALYTICS"
+                      }
+                    }
+                  }
+                ],
+                "projection": null
+              },
+              "createdAt": "2025-01-09T11:18:00.1199307Z",
+              "createdBy": "ca31eca9-668e-4933-82f8-69bdeecc6632",
+              "id": "083b54ef-f417-4c1c-ad05-e4e5579619b4",
+              "lastModifiedAt": "2025-06-27T10:38:05.0847187Z",
+              "lastModifiedBy": "92522642-6537-4785-9fcd-fe58afaa43c5",
+              "isDQAsset": false
             },
-            "dataProduct": {
-              "type": "DataProduct",
-              "referenceId": "dp-523e4567-e89b-12d3-a456-426614174444"
+            "assetScopedMetadata": {
+              "description": "",
+              "favouriteColumnPaths": [],
+              "id": "642bc3b4-66aa-494a-b9d9-797085ce2cb0",
+              "businessDomain": {
+                "type": "BusinessDomainReference",
+                "referenceId": "76be16f9-5cb3-4839-83d6-4e3829a8ab0c"
+              },
+              "dataProduct": {
+                "type": "DataProductReference",
+                "referenceId": "2a1d2087-09e2-4ecf-817d-1f5bfcbc31bf"
+              },
+              "dataAsset": {
+                "type": "DataAssetReference",
+                "referenceId": "fadb55b6-aa10-47d5-82c4-5e2723ba7869"
+              },
+              "runtime": {
+                "isErrorRowRequired": false,
+                "errorRowWriteFormat": ""
+              },
+              "createdAt": "2025-06-27T10:38:07.6920087Z",
+              "lastModifiedAt": "2025-06-27T10:38:07.6920087Z",
+              "createdBy": "92522642-6537-4785-9fcd-fe58afaa43c5",
+              "lastModifiedBy": "92522642-6537-4785-9fcd-fe58afaa43c5",
+              "ETag": "250026c0-0000-3200-0000-685e748f0000"
             },
-            "dataAsset": {
-              "type": "DataAsset",
-              "referenceId": "asset-423e4567-e89b-12d3-a456-426614174333"
-            },
-            "createdAt": "2025-09-17T14:00:00Z",
-            "createdBy": "user-55555555-6666-7777-8888-999999999999",
-            "lastModifiedAt": "2025-09-17T14:00:00Z",
-            "lastModifiedBy": "user-55555555-6666-7777-8888-999999999999",
-            "isDeleted": false,
-            "eTag": "etag-3456789012",
-            "typeProperties": {
-              "inputDatasets": [
+            "scoreSnapshot": {
+              "businessDomainId": "76be16f9-5cb3-4839-83d6-4e3829a8ab0c",
+              "dataProductId": "00000000-0000-0000-0000-000000000000",
+              "assetId": "238ec0c6-f8a2-4a35-8fc3-a2f6f6f60000",
+              "assetScore": 1,
+              "rules": [
                 {
-                  "datasetAliasName": "products",
-                  "datasourceId": "datasource-003"
+                  "name": "Empty/blank_fields_actual_shipping_cost",
+                  "id": "Emptyblank_fields_actual_shippin",
+                  "description": "",
+                  "type": "NotNull",
+                  "typeProperties": {
+                    "column": {
+                      "value": "actual_shipping_cost",
+                      "type": "Column"
+                    }
+                  },
+                  "status": "Active",
+                  "score": 1,
+                  "dimension": "Completeness",
+                  "lastModifiedAt": "2025-11-13T01:37:12.9302796Z",
+                  "lastModifiedBy": "d3c08f4c-8973-419c-a0cd-a32724e54365",
+                  "createdBy": "d3c08f4c-8973-419c-a0cd-a32724e54365",
+                  "createdAt": "2025-11-12T21:00:05.2288404Z",
+                  "businessDomain": {
+                    "type": "BusinessDomainReference",
+                    "referenceId": "76be16f9-5cb3-4839-83d6-4e3829a8ab0c"
+                  },
+                  "dataProduct": {
+                    "type": "DataProductReference",
+                    "referenceId": "00000000-0000-0000-0000-000000000000"
+                  },
+                  "dataAsset": {
+                    "type": "DataAssetReference",
+                    "referenceId": "238ec0c6-f8a2-4a35-8fc3-a2f6f6f60000"
+                  },
+                  "totalRows": 1,
+                  "failedRows": 0,
+                  "passedRows": 1,
+                  "emptyRows": 0,
+                  "miscastRows": 0,
+                  "queryExecuted": null
                 }
               ],
-              "projection": {
-                "productId": {
-                  "type": "string",
-                  "value": "ProductId"
-                },
-                "productName": {
-                  "type": "string",
-                  "value": "ProductName"
-                },
-                "price": {
-                  "type": "decimal",
-                  "value": "Price"
-                },
-                "category": {
-                  "type": "string",
-                  "value": "Category"
-                }
+              "job": {
+                "jobId": "5b6ce30a-718b-442e-a075-31d39c0cb15f",
+                "businessDomainId": "76be16f9-5cb3-4839-83d6-4e3829a8ab0c"
               }
             },
-            "location": {
-              "type": "AzureBlobStorage",
-              "typeProperties": {
-                "accountName": "productsstorageaccount",
-                "fileSystem": "product-catalog",
-                "folderPath": "products/2025/09",
-                "region": "centralus"
+            "globalRules": [
+              {
+                "name": "Custom",
+                "description": "",
+                "type": "CustomTruth",
+                "status": "Active",
+                "typeProperties": {
+                  "condition": "{REVENUE} > 50000",
+                  "filterCriteria": "{REGION} == 'India'",
+                  "emptyCriteria": "{REVENUE_TARGET} < 100000",
+                  "columns": [
+                    {
+                      "value": "REVENUE",
+                      "type": "Column"
+                    },
+                    {
+                      "value": "REGION",
+                      "type": "Column"
+                    },
+                    {
+                      "value": "REVENUE_TARGET",
+                      "type": "Column"
+                    }
+                  ]
+                },
+                "dimension": "Accuracy",
+                "id": "06dda07d-126b-43c1-aade-2484b265a271",
+                "businessDomain": {
+                  "type": "BusinessDomainReference",
+                  "referenceId": "76be16f9-5cb3-4839-83d6-4e3829a8ab0c"
+                },
+                "dataProduct": {
+                  "type": "DataProductReference",
+                  "referenceId": "2a1d2087-09e2-4ecf-817d-1f5bfcbc31bf"
+                },
+                "dataAsset": {
+                  "type": "DataAssetReference",
+                  "referenceId": "fadb55b6-aa10-47d5-82c4-5e2723ba7869"
+                },
+                "score": -1.0,
+                "createdAt": "2025-11-13T09:08:28.1798306Z",
+                "lastModifiedAt": "2025-11-13T09:08:29.1508867Z",
+                "createdBy": "6f19d772-4716-4523-9910-cb1575512ce6",
+                "lastModifiedBy": "6f19d772-4716-4523-9910-cb1575512ce6"
               }
-            },
-            "format": {
-              "type": "Json"
-            },
-            "schemaName": "catalog",
-            "tableName": "Products",
-            "hostName": "catalog.database.windows.net"
-          },
-          "assetScopedMetadata": {
-            "id": "scoped-metadata-003",
-            "description": "Product catalog scoped metadata for inventory quality tracking",
-            "favouriteColumnPaths": [
-              "products.ProductId",
-              "products.ProductName",
-              "products.Price",
-              "products.Category",
-              "products.Stock"
-            ],
-            "businessDomain": {
-              "type": "BusinessDomain",
-              "referenceId": "bcdef123-4567-8901-bcde-f1234567890a"
-            },
-            "dataProduct": {
-              "type": "DataProduct",
-              "referenceId": "dp-523e4567-e89b-12d3-a456-426614174444"
-            },
-            "dataAsset": {
-              "type": "DataAsset",
-              "referenceId": "asset-423e4567-e89b-12d3-a456-426614174333"
-            },
-            "runtime": {
-              "isErrorRowRequired": true,
-              "errorRowWriteFormat": "Json"
-            },
-            "createdAt": "2025-09-17T14:00:00Z",
-            "lastModifiedAt": "2025-09-17T14:00:00Z",
-            "createdBy": "user-55555555-6666-7777-8888-999999999999",
-            "lastModifiedBy": "user-55555555-6666-7777-8888-999999999999",
-            "ETag": "scoped-etag-3456789012"
-          },
-          "globalRules": [
-            {
-              "name": "Product_Price_NotNull",
-              "id": "rule-004",
-              "description": "Ensure product price is not null",
-              "type": "NotNull",
-              "typeProperties": {
-                "column": {
-                  "type": "decimal",
-                  "value": "Price"
-                }
-              },
-              "status": "Active",
-              "score": 99.8,
-              "dimension": "Completeness",
-              "businessDomain": {
-                "type": "BusinessDomain",
-                "referenceId": "bcdef123-4567-8901-bcde-f1234567890a"
-              },
-              "dataProduct": {
-                "type": "DataProduct",
-                "referenceId": "dp-523e4567-e89b-12d3-a456-426614174444"
-              },
-              "dataAsset": {
-                "type": "DataAsset",
-                "referenceId": "asset-423e4567-e89b-12d3-a456-426614174333"
-              },
-              "lastModifiedAt": "2025-09-17T14:00:00Z",
-              "lastModifiedBy": "user-55555555-6666-7777-8888-999999999999",
-              "createdAt": "2025-09-17T14:00:00Z",
-              "createdBy": "user-55555555-6666-7777-8888-999999999999"
-            },
-            {
-              "name": "Product_Name_Length",
-              "id": "rule-005",
-              "description": "Validate product name length between 3 and 100 characters",
-              "type": "Length",
-              "typeProperties": {
-                "column": {
-                  "type": "string",
-                  "value": "ProductName"
-                },
-                "minLength": 3,
-                "maxLength": 100
-              },
-              "status": "Active",
-              "score": 97.5,
-              "dimension": "Conformity",
-              "businessDomain": {
-                "type": "BusinessDomain",
-                "referenceId": "bcdef123-4567-8901-bcde-f1234567890a"
-              },
-              "dataProduct": {
-                "type": "DataProduct",
-                "referenceId": "dp-523e4567-e89b-12d3-a456-426614174444"
-              },
-              "dataAsset": {
-                "type": "DataAsset",
-                "referenceId": "asset-423e4567-e89b-12d3-a456-426614174333"
-              },
-              "lastModifiedAt": "2025-09-17T14:05:00Z",
-              "lastModifiedBy": "user-66666666-7777-8888-9999-aaaaaaaaaaaa",
-              "createdAt": "2025-09-17T14:00:00Z",
-              "createdBy": "user-55555555-6666-7777-8888-999999999999"
-            },
-            {
-              "name": "Product_Price_Range",
-              "id": "rule-006",
-              "description": "Validate product price is within reasonable range",
-              "type": "Range",
-              "typeProperties": {
-                "column": {
-                  "type": "decimal",
-                  "value": "Price"
-                },
-                "minValue": 0.01,
-                "maxValue": 50000.00
-              },
-              "status": "Active",
-              "score": 96.2,
-              "dimension": "Validity",
-              "businessDomain": {
-                "type": "BusinessDomain",
-                "referenceId": "bcdef123-4567-8901-bcde-f1234567890a"
-              },
-              "dataProduct": {
-                "type": "DataProduct",
-                "referenceId": "dp-523e4567-e89b-12d3-a456-426614174444"
-              },
-              "dataAsset": {
-                "type": "DataAsset",
-                "referenceId": "asset-423e4567-e89b-12d3-a456-426614174333"
-              },
-              "lastModifiedAt": "2025-09-17T14:10:00Z",
-              "lastModifiedBy": "user-77777777-8888-9999-aaaa-bbbbbbbbbbbb",
-              "createdAt": "2025-09-17T14:00:00Z",
-              "createdBy": "user-55555555-6666-7777-8888-999999999999"
-            }
-          ],
-          "scoreSnapshot": {
-            "id": "snapshot-003",
-            "businessDomainId": "bcdef123-4567-8901-bcde-f1234567890a",
-            "dataProductId": "dp-523e4567-e89b-12d3-a456-426614174444",
-            "dataAssetId": "asset-423e4567-e89b-12d3-a456-426614174333",
-            "overallScore": 97.83,
-            "completenessScore": 99.8,
-            "conformityScore": 97.5,
-            "validityScore": 96.2,
-            "createdAt": "2025-09-17T14:15:00Z",
-            "createdBy": "system-score-generator"
+            ]
           }
-        },
-        {
-          "assetMetadata": {
-            "id": "423e4567-e89b-12d3-a456-426614174003",
-            "name": "InventoryDataObserver",
-            "type": "Basic",
-            "businessDomain": {
-              "type": "BusinessDomain",
-              "referenceId": "bcdef123-4567-8901-bcde-f1234567890a"
-            },
-            "dataProduct": {
-              "type": "DataProduct",
-              "referenceId": "dp-623e4567-e89b-12d3-a456-426614174555"
-            },
-            "dataAsset": {
-              "type": "DataAsset",
-              "referenceId": "asset-523e4567-e89b-12d3-a456-426614174444"
-            },
-            "createdAt": "2025-09-17T14:30:00Z",
-            "createdBy": "user-55555555-6666-7777-8888-999999999999",
-            "lastModifiedAt": "2025-09-17T14:30:00Z",
-            "lastModifiedBy": "user-55555555-6666-7777-8888-999999999999",
-            "isDeleted": false,
-            "eTag": "etag-4567890123",
-            "typeProperties": {
-              "inputDatasets": [
-                {
-                  "datasetAliasName": "inventory",
-                  "datasourceId": "datasource-004"
-                }
-              ],
-              "projection": {
-                "productId": {
-                  "type": "string",
-                  "value": "ProductId"
-                },
-                "warehouseId": {
-                  "type": "string",
-                  "value": "WarehouseId"
-                },
-                "quantity": {
-                  "type": "integer",
-                  "value": "Quantity"
-                },
-                "lastUpdated": {
-                  "type": "datetime",
-                  "value": "LastUpdated"
-                }
-              }
-            },
-            "location": {
-              "type": "CosmosDb",
-              "typeProperties": {
-                "accountName": "inventory-cosmos-account",
-                "region": "eastus2"
-              }
-            },
-            "format": {
-              "type": "Json"
-            },
-            "hostName": "inventory-cosmos-account.documents.azure.com"
-          },
-          "assetScopedMetadata": {
-            "id": "scoped-metadata-004",
-            "description": "Inventory data scoped metadata for stock level monitoring",
-            "favouriteColumnPaths": [
-              "inventory.ProductId",
-              "inventory.WarehouseId",
-              "inventory.Quantity",
-              "inventory.LastUpdated"
-            ],
-            "businessDomain": {
-              "type": "BusinessDomain",
-              "referenceId": "bcdef123-4567-8901-bcde-f1234567890a"
-            },
-            "dataProduct": {
-              "type": "DataProduct",
-              "referenceId": "dp-623e4567-e89b-12d3-a456-426614174555"
-            },
-            "dataAsset": {
-              "type": "DataAsset",
-              "referenceId": "asset-523e4567-e89b-12d3-a456-426614174444"
-            },
-            "runtime": {
-              "isErrorRowRequired": true,
-              "errorRowWriteFormat": "Json"
-            },
-            "createdAt": "2025-09-17T14:30:00Z",
-            "lastModifiedAt": "2025-09-17T14:30:00Z",
-            "createdBy": "user-55555555-6666-7777-8888-999999999999",
-            "lastModifiedBy": "user-55555555-6666-7777-8888-999999999999",
-            "ETag": "scoped-etag-4567890123"
-          },
-          "globalRules": [
-            {
-              "name": "Inventory_Quantity_NonNegative",
-              "id": "rule-007",
-              "description": "Ensure inventory quantity is non-negative",
-              "type": "Range",
-              "typeProperties": {
-                "column": {
-                  "type": "integer",
-                  "value": "Quantity"
-                },
-                "minValue": 0,
-                "maxValue": 999999
-              },
-              "status": "Active",
-              "score": 99.5,
-              "dimension": "Validity",
-              "businessDomain": {
-                "type": "BusinessDomain",
-                "referenceId": "bcdef123-4567-8901-bcde-f1234567890a"
-              },
-              "dataProduct": {
-                "type": "DataProduct",
-                "referenceId": "dp-623e4567-e89b-12d3-a456-426614174555"
-              },
-              "dataAsset": {
-                "type": "DataAsset",
-                "referenceId": "asset-523e4567-e89b-12d3-a456-426614174444"
-              },
-              "lastModifiedAt": "2025-09-17T14:30:00Z",
-              "lastModifiedBy": "user-55555555-6666-7777-8888-999999999999",
-              "createdAt": "2025-09-17T14:30:00Z",
-              "createdBy": "user-55555555-6666-7777-8888-999999999999"
-            },
-            {
-              "name": "Inventory_LastUpdated_Recent",
-              "id": "rule-008",
-              "description": "Ensure inventory was updated within the last 30 days",
-              "type": "Freshness",
-              "typeProperties": {
-                "column": {
-                  "type": "datetime",
-                  "value": "LastUpdated"
-                },
-                "maxAgeDays": 30
-              },
-              "status": "Active",
-              "score": 94.7,
-              "dimension": "Timeliness",
-              "businessDomain": {
-                "type": "BusinessDomain",
-                "referenceId": "bcdef123-4567-8901-bcde-f1234567890a"
-              },
-              "dataProduct": {
-                "type": "DataProduct",
-                "referenceId": "dp-623e4567-e89b-12d3-a456-426614174555"
-              },
-              "dataAsset": {
-                "type": "DataAsset",
-                "referenceId": "asset-523e4567-e89b-12d3-a456-426614174444"
-              },
-              "lastModifiedAt": "2025-09-17T14:35:00Z",
-              "lastModifiedBy": "user-88888888-9999-aaaa-bbbb-cccccccccccc",
-              "createdAt": "2025-09-17T14:30:00Z",
-              "createdBy": "user-55555555-6666-7777-8888-999999999999"
-            }
-          ],
-          "scoreSnapshot": {
-            "id": "snapshot-004",
-            "businessDomainId": "bcdef123-4567-8901-bcde-f1234567890a",
-            "dataProductId": "dp-623e4567-e89b-12d3-a456-426614174555",
-            "dataAssetId": "asset-523e4567-e89b-12d3-a456-426614174444",
-            "overallScore": 97.1,
-            "completenessScore": 100.0,
-            "validityScore": 99.5,
-            "timelinessScore": 94.7,
-            "createdAt": "2025-09-17T14:40:00Z",
-            "createdBy": "system-score-generator"
-          }
-        }
-      ]
-    }
+        ]
+      }
   },
   "title": "BulkAssetMetadata_Create",
   "responses": {
     "201": {
-      "body": "Bulk asset metadata creation completed successfully. 2 assets processed."
+      "body": {
+        "metadata": [
+          {
+            "assetMetadata": {
+              "name": "CAMPAIGN_ANALYTICS",
+              "businessDomain": {
+                "type": "BusinessDomainReference",
+                "referenceId": "76be16f9-5cb3-4839-83d6-4e3829a8ab0c"
+              },
+              "dataProduct": {
+                "type": "DataProductReference",
+                "referenceId": "2a1d2087-09e2-4ecf-817d-1f5bfcbc31bf"
+              },
+              "type": "Basic",
+              "dataAsset": {
+                "type": "DataAssetReference",
+                "referenceId": "fadb55b6-aa10-47d5-82c4-5e2723ba7869"
+              },
+              "ETag": "250025c0-0000-3200-0000-685e748d0000",
+              "typeProperties": {
+                "inputDatasets": [
+                  {
+                    "alias": "CAMPAIGN_ANALYTICS",
+                    "primary": true,
+                    "dataset": {
+                      "businessDomain": {
+                        "referenceId": "e0c0840b-f087-4c3e-99e2-63075572d33b",
+                        "type": "BusinessDomainReference"
+                      },
+                      "dataProduct": {
+                        "referenceId": "757b96c3-af76-45a8-a7cd-0f4b90e27d9a",
+                        "type": "DataProductReference"
+                      },
+                      "dataAsset": {
+                        "referenceId": "fadb55b6-aa10-47d5-82c4-5e2723ba7869",
+                        "type": "DataAssetReference"
+                      },
+                      "datasourceFQN": "snowflake://fljqaun-gpa78346.snowflakecomputing.com/databases/dream_demo",
+                      "schema": {
+                        "origin": "DataProfiling",
+                        "items": [
+                          {
+                            "name": "ID",
+                            "type": "Number",
+                            "typeProperties": {
+                              "integral": false,
+                              "precision": 38,
+                              "scale": 38
+                            }
+                          },
+                          {
+                            "name": "REGION",
+                            "type": "String"
+                          },
+                          {
+                            "name": "COUNTRY",
+                            "type": "String"
+                          }
+                        ]
+                      },
+                      "type": "SnowflakeTable",
+                      "typeProperties": {
+                        "format": "table",
+                        "schemaName": "PUBLIC",
+                        "tableName": "CAMPAIGN_ANALYTICS"
+                      }
+                    }
+                  }
+                ],
+                "projection": null
+              },
+              "createdAt": "2025-01-09T11:18:00.1199307Z",
+              "createdBy": "ca31eca9-668e-4933-82f8-69bdeecc6632",
+              "id": "083b54ef-f417-4c1c-ad05-e4e5579619b4",
+              "lastModifiedAt": "2025-06-27T10:38:05.0847187Z",
+              "lastModifiedBy": "92522642-6537-4785-9fcd-fe58afaa43c5",
+              "isDQAsset": false
+            },
+            "assetScopedMetadata": {
+              "description": "",
+              "favouriteColumnPaths": [],
+              "id": "642bc3b4-66aa-494a-b9d9-797085ce2cb0",
+              "businessDomain": {
+                "type": "BusinessDomainReference",
+                "referenceId": "76be16f9-5cb3-4839-83d6-4e3829a8ab0c"
+              },
+              "dataProduct": {
+                "type": "DataProductReference",
+                "referenceId": "2a1d2087-09e2-4ecf-817d-1f5bfcbc31bf"
+              },
+              "dataAsset": {
+                "type": "DataAssetReference",
+                "referenceId": "fadb55b6-aa10-47d5-82c4-5e2723ba7869"
+              },
+              "runtime": {
+                "isErrorRowRequired": false,
+                "errorRowWriteFormat": ""
+              },
+              "createdAt": "2025-06-27T10:38:07.6920087Z",
+              "lastModifiedAt": "2025-06-27T10:38:07.6920087Z",
+              "createdBy": "92522642-6537-4785-9fcd-fe58afaa43c5",
+              "lastModifiedBy": "92522642-6537-4785-9fcd-fe58afaa43c5",
+              "ETag": "250026c0-0000-3200-0000-685e748f0000"
+            },
+            "scoreSnapshot": {
+              "businessDomainId": "76be16f9-5cb3-4839-83d6-4e3829a8ab0c",
+              "dataProductId": "00000000-0000-0000-0000-000000000000",
+              "assetId": "238ec0c6-f8a2-4a35-8fc3-a2f6f6f60000",
+              "assetScore": 1,
+              "rules": [
+                {
+                  "name": "Empty/blank_fields_actual_shipping_cost",
+                  "id": "Emptyblank_fields_actual_shippin",
+                  "description": "",
+                  "type": "NotNull",
+                  "typeProperties": {
+                    "column": {
+                      "value": "actual_shipping_cost",
+                      "type": "Column"
+                    }
+                  },
+                  "status": "Active",
+                  "score": 1,
+                  "dimension": "Completeness",
+                  "lastModifiedAt": "2025-11-13T01:37:12.9302796Z",
+                  "lastModifiedBy": "d3c08f4c-8973-419c-a0cd-a32724e54365",
+                  "createdBy": "d3c08f4c-8973-419c-a0cd-a32724e54365",
+                  "createdAt": "2025-11-12T21:00:05.2288404Z",
+                  "businessDomain": {
+                    "type": "BusinessDomainReference",
+                    "referenceId": "76be16f9-5cb3-4839-83d6-4e3829a8ab0c"
+                  },
+                  "dataProduct": {
+                    "type": "DataProductReference",
+                    "referenceId": "00000000-0000-0000-0000-000000000000"
+                  },
+                  "dataAsset": {
+                    "type": "DataAssetReference",
+                    "referenceId": "238ec0c6-f8a2-4a35-8fc3-a2f6f6f60000"
+                  },
+                  "totalRows": 1,
+                  "failedRows": 0,
+                  "passedRows": 1,
+                  "emptyRows": 0,
+                  "miscastRows": 0,
+                  "queryExecuted": null
+                }
+              ],
+              "job": {
+                "jobId": "5b6ce30a-718b-442e-a075-31d39c0cb15f",
+                "businessDomainId": "76be16f9-5cb3-4839-83d6-4e3829a8ab0c"
+              }
+            },
+            "globalRules": [
+              {
+                "name": "Custom",
+                "description": "",
+                "type": "CustomTruth",
+                "status": "Active",
+                "typeProperties": {
+                  "condition": "{REVENUE} > 50000",
+                  "filterCriteria": "{REGION} == 'India'",
+                  "emptyCriteria": "{REVENUE_TARGET} < 100000",
+                  "columns": [
+                    {
+                      "value": "REVENUE",
+                      "type": "Column"
+                    },
+                    {
+                      "value": "REGION",
+                      "type": "Column"
+                    },
+                    {
+                      "value": "REVENUE_TARGET",
+                      "type": "Column"
+                    }
+                  ]
+                },
+                "dimension": "Accuracy",
+                "id": "06dda07d-126b-43c1-aade-2484b265a271",
+                "businessDomain": {
+                  "type": "BusinessDomainReference",
+                  "referenceId": "76be16f9-5cb3-4839-83d6-4e3829a8ab0c"
+                },
+                "dataProduct": {
+                  "type": "DataProductReference",
+                  "referenceId": "2a1d2087-09e2-4ecf-817d-1f5bfcbc31bf"
+                },
+                "dataAsset": {
+                  "type": "DataAssetReference",
+                  "referenceId": "fadb55b6-aa10-47d5-82c4-5e2723ba7869"
+                },
+                "score": -1.0,
+                "createdAt": "2025-11-13T09:08:28.1798306Z",
+                "lastModifiedAt": "2025-11-13T09:08:29.1508867Z",
+                "createdBy": "6f19d772-4716-4523-9910-cb1575512ce6",
+                "lastModifiedBy": "6f19d772-4716-4523-9910-cb1575512ce6"
+              }
+            ]
+          }
+        ]
+      }
     }
   }
 }
