@@ -9,10 +9,6 @@ using TypeSpec.Versioning;
 using Azure.Core;
 
 namespace KeyVault;
-
-@encode("base64")
-scalar Base64EncodedBytes extends bytes;
-
 /**
  * A EkmConnection model object.
  */
@@ -32,7 +28,7 @@ model EkmConnection {
    * The root CA certificate chain that issued the proxy server's certificate. An array of certificates in the certificate chain, each in DER format and base64 encoded.
    */
   @encodedName("application/json", "server_ca_certificates")
-  serverCaCertificates: Base64EncodedBytes[];
+  serverCaCertificates: bytes[];
 
   /**
    * The subject common name of the server certificate of EKM Proxy.
@@ -50,7 +46,7 @@ model EkmProxyClientCertificateInfo {
    */
   @encodedName("application/json", "ca_certificates")
   @visibility(Lifecycle.Read)
-  caCertificates: Base64EncodedBytes[];
+  caCertificates: bytes[];
 
   /**
    * The subject common name of the client certificate used to authenticate to the EKM proxy.
