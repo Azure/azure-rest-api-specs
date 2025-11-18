@@ -696,6 +696,12 @@ interface KnowledgeSources {
   @route("/knowledgesources('{sourceName}')")
   @get
   get is SearchSourceOperation<{}, KnowledgeSource>;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  @doc("Retrieves the status of a knowledge source.")
+  @route("/knowledgesources('{sourceName}')/status")
+  @get
+  getStatus is SearchSourceOperation<{}, KnowledgeSourceStatus>;
 }
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"

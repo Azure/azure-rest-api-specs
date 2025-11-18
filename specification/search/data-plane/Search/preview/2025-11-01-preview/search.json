@@ -2855,6 +2855,46 @@
         }
       }
     },
+    "/knowledgesources('{sourceName}')/status": {
+      "get": {
+        "operationId": "KnowledgeSources_GetStatus",
+        "description": "Retrieves the status of a knowledge source.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "sourceName",
+            "in": "path",
+            "description": "The name of the knowledge source.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/KnowledgeSourceStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SearchServiceGetKnowledgeSourceStatus": {
+            "$ref": "./examples/SearchServiceGetKnowledgeSourceStatus.json"
+          }
+        }
+      }
+    },
     "/servicestats": {
       "get": {
         "operationId": "GetServiceStatistics",
