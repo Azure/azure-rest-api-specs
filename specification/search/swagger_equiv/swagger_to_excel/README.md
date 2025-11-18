@@ -1,102 +1,52 @@
 # Swagger to Excel Converter
 
-A Python tool to convert Swagger/OpenAPI JSON files into human-readable Excel format for Azure Search API analysis.
+Converts multiple Swagger/OpenAPI JSON files into a single combined Excel file for Azure Search API analysis.
 
-## Purpose
+## Quick Start
 
-This tool helps understand complex API definitions and dependencies for Azure Search by generating Excel files with multiple sheets containing:
-
-- API Overview and Statistics
-- Detailed Endpoint Information
-- Parameters Analysis
-- Response Definitions
-- Data Models/Schemas
-- API Tag Groups Summary
-
-## Setup
-
-1. **Install Python dependencies:**
-   ```bash
-   pip install -r requirements.txt
-   ```
+1. Install dependencies: `pip install -r requirements.txt`
+2. Configure file paths in `config.yaml`
+3. Run: `python swagger_to_excel.py`
 
 ## Usage
 
-### Process all 4 Azure Search swagger files:
-
 ```bash
-python run.py
+python swagger_to_excel.py                           # Use config.yaml
+python swagger_to_excel.py --output "./custom_dir"   # Custom output
+python swagger_to_excel.py --config "./my_config"    # Custom config
 ```
 
-### Process a single file:
+## Configuration
 
-```bash
-python swagger_to_excel.py "../../data-plane/Azure.Search/preview/2025-11-01-preview/searchservice.json"
-```
+Edit `config.yaml` to set input files and categories:
 
-### Process a single file with custom output name:
-
-```bash
-python swagger_to_excel.py "../../data-plane/Azure.Search/preview/2025-11-01-preview/searchservice.json" --name "my_custom_name"
-```
-
-### Specify custom output directory:
-
-```bash
-python swagger_to_excel.py "../../data-plane/Azure.Search/preview/2025-11-01-preview/searchservice.json" --output "./custom_output"
-```
-
-## Files
-
-- `swagger_to_excel.py` - Main conversion script (processes single file)
-- `run.py` - Batch processor (processes all 4 Azure Search files)
-- `config.yaml` - Optional configuration for sheet settings
-- `requirements.txt` - Python dependencies
-- `excel_output/` - Generated Excel files (created automatically)
-
-## Azure Search Files Processed
-
-The `run.py` script processes these 4 files:
-
-1. **search.json** (TSP-compiled) - Complete Search API from TypeSpec compilation
-2. **searchservice.json** (Hand-authored) - Search Service management API
-3. **searchindex.json** (Hand-authored) - Search Index management API
-4. **knowledgebase.json** (Hand-authored) - Knowledge Base management API
+| Category | Source | Description |
+|----------|--------|-------------|
+| `tsp` | search.json | TSP-compiled Search API |
+| `searchservice` | searchservice.json | Hand-authored Search Service API |
+| `searchindex` | searchindex.json | Hand-authored Search Index API |
+| `knowledgebase` | knowledgebase.json | Hand-authored Knowledge Base API |
 
 ## Output
 
-Each Swagger JSON file generates an Excel file with these sheets:
+Single Excel file with 6 sheets, each with **Category** as first column:
 
-1. **API Overview** - High-level statistics and summary
-2. **Endpoints Detail** - Complete API endpoint information
-3. **Parameters** - All parameters with types and constraints
-4. **Responses** - Response codes and schemas
-5. **Data Models** - Schema definitions from the definitions section
-6. **Tag Groups** - API groupings and their statistics
-
-## Examples
-
-### Generated Excel Structure
-
-- `azure_search_api_searchservice_2025-11-01-preview_20231117_143022.xlsx`
-  - Sheet: "API Overview"
-  - Sheet: "Endpoints Detail"
-  - Sheet: "Parameters"
-  - Sheet: "Responses"
-  - Sheet: "Data Models"
-  - Sheet: "Tag Groups"
+1. **API Overview** - Statistics by category
+2. **Operation Overview** - Simple operation list
+3. **Endpoints Detail** - Complete endpoint information
+4. **Parameters** - Parameter analysis with descriptions
+5. **Responses** - Response definitions with descriptions
+6. **Data Models** - Schema definitions with descriptions
 
 ## Files
 
-- `swagger_to_excel.py` - Main conversion script
-- `config.yaml` - Configuration file
-- `requirements.txt` - Python dependencies
-- `excel_output/` - Generated Excel files (created automatically)
+- `swagger_to_excel.py` - Main script
+- `config.yaml` - Input configuration
+- `requirements.txt` - Dependencies (PyYAML, pandas, openpyxl)
+- `excel_output/` - Generated files
 
 ## Troubleshooting
 
-**File not found errors**: Update paths in `config.yaml` to match your file structure.
-
-**Missing dependencies**: Run `pip install -r requirements.txt`
-
-**Large files**: The tool handles large Swagger files by truncating long descriptions to keep Excel readable.
+- **Config not found**: Ensure `config.yaml` exists
+- **File not found**: Update paths in `config.yaml`
+- **Missing deps**: Run `pip install -r requirements.txt`
