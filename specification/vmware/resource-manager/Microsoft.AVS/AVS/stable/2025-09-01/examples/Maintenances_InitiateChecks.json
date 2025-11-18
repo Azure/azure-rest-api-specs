@@ -1,0 +1,139 @@
+{
+  "title": "Maintenances_InitiateChecks",
+  "operationId": "Maintenances_InitiateChecks",
+  "parameters": {
+    "api-version": "2025-09-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "group1",
+    "privateCloudName": "cloud1",
+    "maintenanceName": "maintenance1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000001-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.AVS/privateClouds/cloud1/maintenances/maintenance1",
+        "name": "maintenance1",
+        "type": "Microsoft.AVS/privateClouds/maintenances",
+        "properties": {
+          "component": "VCSA",
+          "displayName": "vcsa 7.0 upgrade",
+          "clusterId": 1,
+          "infoLink": "https://vmwarekb/arcticle",
+          "impact": "This upgrade will update your vcsa to 7.0. Control plance performance will be impacted for the duration",
+          "scheduledStartTime": "2023-01-12T11:00:11.830Z",
+          "estimatedDurationInMinutes": 960,
+          "state": {
+            "message": "CD rom mounted",
+            "startedAt": "2025-11-12T11:00:11.830Z",
+            "endedAt": "2025-11-12T16:00:11.830Z",
+            "name": "Scheduled"
+          },
+          "provisioningState": "Succeeded",
+          "scheduledByMicrosoft": true,
+          "operations": [
+            {
+              "kind": "Schedule",
+              "isDisabled": true,
+              "disabledReason": "Critical upgrade",
+              "constraints": [
+                {
+                  "kind": "SchedulingWindow",
+                  "startsAt": "2025-01-16T06:21:31.961Z",
+                  "endsAt": "2025-01-16T06:21:31.961Z"
+                },
+                {
+                  "kind": "AvailableWindowForMaintenance",
+                  "startsAt": "2025-01-16T06:21:31.961Z",
+                  "endsAt": "2025-01-16T06:21:31.961Z"
+                },
+                {
+                  "kind": "Blocked",
+                  "category": "HiPriorityEvent",
+                  "timeRanges": [
+                    {
+                      "startsAt": "2025-01-16T06:21:31.961Z",
+                      "endsAt": "2025-01-16T06:21:31.961Z",
+                      "reason": "2024 Summer Opening Ceremony"
+                    }
+                  ]
+                },
+                {
+                  "kind": "Blocked",
+                  "category": "QuotaExhausted",
+                  "timeRanges": [
+                    {
+                      "startsAt": "2024-04-14T17:03:28.609Z",
+                      "endsAt": "2024-04-15T17:03:28.609Z",
+                      "reason": "No slots available"
+                    },
+                    {
+                      "startsAt": "2024-09-13T17:03:28.609Z",
+                      "endsAt": "2024-09-26T17:03:28.609Z",
+                      "reason": "No slots available"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "kind": "Reschedule",
+              "isDisabled": true,
+              "disabledReason": "Critical Update",
+              "constraints": [
+                {
+                  "kind": "AvailableWindowForMaintenance",
+                  "startsAt": "2025-01-16T06:21:31.961Z",
+                  "endsAt": "2025-01-16T06:21:31.961Z"
+                },
+                {
+                  "kind": "Blocked",
+                  "category": "HiPriorityEvent",
+                  "timeRanges": [
+                    {
+                      "startsAt": "2025-08-10T06:21:31.961Z",
+                      "endsAt": "2025-08-19T06:21:31.961Z",
+                      "reason": "US General Election 2024"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "kind": "MaintenanceReadinessRefresh",
+              "isDisabled": false,
+              "status": "InProgress",
+              "refreshedByMicrosoft": true
+            }
+          ],
+          "maintenanceReadiness": {
+            "type": "Precheck",
+            "status": "NotReady",
+            "message": "Some checks failed",
+            "failedChecks": [
+              {
+                "name": "HostMaintPrecheck",
+                "impactedResources": [
+                  {
+                    "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.AVS/privateClouds/cloud1/clusters/cluster2",
+                    "errors": [
+                      {
+                        "errorCode": "EVCINTERNALEPR_CDUNMOUNT",
+                        "name": "CD-ROM Mounted",
+                        "details": "Failed to unmount CD ROM  mounted on vm",
+                        "resolutionSteps": [
+                          "Please remove CDROM /usr/lib/vmware/isoimages/windows.iso mounted in VD000535 VM present in esx10-r06.p01.dummy.com Host"
+                        ],
+                        "actionRequired": true
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "lastUpdated": "2025-01-16T06:21:31.961Z"
+          }
+        }
+      }
+    }
+  }
+}
