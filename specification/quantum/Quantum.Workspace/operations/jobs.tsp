@@ -40,8 +40,9 @@ namespace Quantum.Workspace.Services {
 
     /** Request the cancellation of an existing job. */
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Our SDKs already use POST with /cancel."
+    @added(QuantumWorkspaceAPIVersion.v2025_12_01_preview)
     @segment("cancel")
-    cancelJob is PostResourceOperation<JobDetails>;
+    cancel is PostResourceOperation<JobDetails>;
 
     /** Get job by its id. */
     get is GetOperation<JobDetails>;
