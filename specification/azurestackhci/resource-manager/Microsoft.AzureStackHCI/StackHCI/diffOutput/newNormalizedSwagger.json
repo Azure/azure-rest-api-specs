@@ -911,12 +911,6 @@
               "$ref": "#/definitions/Cluster"
             }
           },
-          "201": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/Cluster"
-            }
-          },
           "default": {
             "description": "ignore",
             "schema": {
@@ -928,11 +922,7 @@
           "Create cluster": {
             "$ref": "./examples/CreateCluster.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "original-uri"
-        },
-        "x-ms-long-running-operation": true
+        }
       },
       "patch": {
         "operationId": "Clusters_Update",
@@ -1116,12 +1106,6 @@
               "$ref": "#/definitions/ArcSetting"
             }
           },
-          "201": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/ArcSetting"
-            }
-          },
           "default": {
             "description": "ignore",
             "schema": {
@@ -1133,11 +1117,7 @@
           "Create ArcSetting": {
             "$ref": "./examples/PutArcSetting.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "original-uri"
-        },
-        "x-ms-long-running-operation": true
+        }
       },
       "patch": {
         "operationId": "ArcSettings_Update",
@@ -2863,12 +2843,6 @@
               "$ref": "#/definitions/UpdateSummary"
             }
           },
-          "201": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/UpdateSummary"
-            }
-          },
           "default": {
             "description": "ignore",
             "schema": {
@@ -2880,11 +2854,7 @@
           "Put Update summaries under cluster resource": {
             "$ref": "./examples/PutUpdateSummaries.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "original-uri"
-        },
-        "x-ms-long-running-operation": true
+        }
       },
       "delete": {
         "operationId": "UpdateSummaries_Delete",
@@ -3034,12 +3004,6 @@
               "$ref": "#/definitions/Update"
             }
           },
-          "201": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/Update"
-            }
-          },
           "default": {
             "description": "ignore",
             "schema": {
@@ -3051,11 +3015,7 @@
           "Put a specific update": {
             "$ref": "./examples/PutUpdates.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "original-uri"
-        },
-        "x-ms-long-running-operation": true
+        }
       },
       "delete": {
         "operationId": "Updates_Delete",
@@ -3278,12 +3238,6 @@
               "$ref": "#/definitions/UpdateRun"
             }
           },
-          "201": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/UpdateRun"
-            }
-          },
           "default": {
             "description": "ignore",
             "schema": {
@@ -3295,11 +3249,7 @@
           "Get Update runs under cluster resource": {
             "$ref": "./examples/PutUpdateRuns.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "original-uri"
-        },
-        "x-ms-long-running-operation": true
+        }
       },
       "delete": {
         "operationId": "UpdateRuns_Delete",
@@ -3655,178 +3605,6 @@
           "readOnly": true
         }
       }
-    },
-    "AzureLinuxEdgeDeviceJob": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/AzureLinuxEdgeDeviceJobProperties"
-        },
-        "kind": {
-          "type": "string",
-          "enum": [
-            "AzureLinux"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        }
-      },
-      "required": [
-        "kind",
-        "properties"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/EdgeDeviceJob"
-        }
-      ]
-    },
-    "AzureLinuxEdgeDeviceJobProperties": {
-      "type": "object",
-      "properties": {
-        "deploymentMode": {
-          "type": "string",
-          "enum": [
-            "Validate",
-            "Deploy"
-          ],
-          "x-ms-enum": {
-            "name": "DeploymentMode",
-            "modelAsString": true
-          }
-        },
-        "provisioningState": {
-          "type": "string",
-          "enum": [
-            "NotSpecified",
-            "Error",
-            "Succeeded",
-            "Failed",
-            "Canceled",
-            "Connected",
-            "Disconnected",
-            "Deleted",
-            "Creating",
-            "Updating",
-            "Deleting",
-            "Moving",
-            "PartiallySucceeded",
-            "PartiallyConnected",
-            "InProgress",
-            "Accepted",
-            "Provisioning",
-            "DisableInProgress"
-          ],
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": true
-          },
-          "readOnly": true
-        },
-        "jobId": {
-          "type": "string",
-          "readOnly": true
-        },
-        "startTimeUtc": {
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true
-        },
-        "endTimeUtc": {
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true
-        },
-        "status": {
-          "type": "string",
-          "enum": [
-            "NotSpecified",
-            "ValidationInProgress",
-            "ValidationSuccess",
-            "ValidationFailed",
-            "DeploymentInProgress",
-            "DeploymentFailed",
-            "DeploymentSuccess",
-            "Succeeded",
-            "Failed",
-            "Canceled",
-            "Paused",
-            "Scheduled"
-          ],
-          "x-ms-enum": {
-            "name": "JobStatus",
-            "modelAsString": true
-          },
-          "readOnly": true
-        },
-        "jobType": {
-          "type": "string",
-          "enum": [
-            "CollectLog",
-            "RemoteSupport"
-          ],
-          "x-ms-enum": {
-            "name": "AzureLinuxEdgeDeviceJobType",
-            "modelAsString": true
-          },
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        }
-      },
-      "discriminator": "jobType",
-      "required": [
-        "jobType"
-      ]
-    },
-    "AzureLinuxRemoteSupportJobProperties": {
-      "type": "object",
-      "properties": {
-        "accessLevel": {
-          "type": "string",
-          "enum": [
-            "None",
-            "Diagnostics",
-            "DiagnosticsAndRepair"
-          ],
-          "x-ms-enum": {
-            "name": "RemoteSupportAccessLevel",
-            "modelAsString": true
-          }
-        },
-        "expirationTimestamp": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "type": {
-          "type": "string",
-          "enum": [
-            "Enable",
-            "Revoke"
-          ],
-          "x-ms-enum": {
-            "name": "RemoteSupportType",
-            "modelAsString": true
-          }
-        },
-        "reportedProperties": {
-          "$ref": "#/definitions/RemoteSupportReportedProperties",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "accessLevel",
-        "expirationTimestamp",
-        "type"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/AzureLinuxEdgeDeviceJobProperties"
-        }
-      ],
-      "x-ms-discriminator-value": "RemoteSupport"
     },
     "ChangeRingRequest": {
       "type": "object",
@@ -5271,17 +5049,12 @@
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/EdgeDeviceJobProperties"
+          "type": "object"
         },
         "kind": {
           "type": "string",
           "enum": [
-            "HCI",
-            "WindowsServer",
-            "WindowsIoT",
-            "AzureLinux",
-            "UbuntuLinux",
-            "AzureLinuxRoe"
+            "HCI"
           ],
           "x-ms-enum": {
             "name": "EdgeDeviceKind",
@@ -6417,7 +6190,7 @@
           }
         },
         "reportedProperties": {
-          "$ref": "#/definitions/RemoteSupportReportedProperties",
+          "$ref": "#/definitions/RemoteSupportJobReportedProperties",
           "readOnly": true
         }
       },
@@ -7525,7 +7298,7 @@
           }
         },
         "reportedProperties": {
-          "$ref": "#/definitions/RemoteSupportReportedProperties",
+          "$ref": "#/definitions/RemoteSupportJobReportedProperties",
           "readOnly": true
         }
       },
@@ -7534,6 +7307,38 @@
         "expirationTimestamp",
         "type"
       ]
+    },
+    "RemoteSupportJobReportedProperties": {
+      "type": "object",
+      "properties": {
+        "percentComplete": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "validationStatus": {
+          "$ref": "#/definitions/EdgeDeviceJobsEceActionStatus",
+          "readOnly": true
+        },
+        "deploymentStatus": {
+          "$ref": "#/definitions/EdgeDeviceJobsEceActionStatus",
+          "readOnly": true
+        },
+        "nodeSettings": {
+          "$ref": "#/definitions/EdgeDeviceJobsRemoteSupportNodeSettings",
+          "readOnly": true
+        },
+        "sessionDetails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RemoteSupportSession"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "sessionId"
+          ]
+        }
+      }
     },
     "RemoteSupportProperties": {
       "type": "object",
@@ -7580,38 +7385,6 @@
             "$ref": "#/definitions/PerNodeRemoteSupportSession"
           },
           "readOnly": true
-        }
-      }
-    },
-    "RemoteSupportReportedProperties": {
-      "type": "object",
-      "properties": {
-        "percentComplete": {
-          "type": "integer",
-          "format": "int32",
-          "readOnly": true
-        },
-        "validationStatus": {
-          "$ref": "#/definitions/EdgeDeviceJobsEceActionStatus",
-          "readOnly": true
-        },
-        "deploymentStatus": {
-          "$ref": "#/definitions/EdgeDeviceJobsEceActionStatus",
-          "readOnly": true
-        },
-        "nodeSettings": {
-          "$ref": "#/definitions/EdgeDeviceJobsRemoteSupportNodeSettings",
-          "readOnly": true
-        },
-        "sessionDetails": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RemoteSupportSession"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "sessionId"
-          ]
         }
       }
     },

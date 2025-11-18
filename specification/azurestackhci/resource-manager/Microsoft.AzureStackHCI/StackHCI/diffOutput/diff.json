@@ -73,20 +73,6 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}": {
-      "put": {
-        "x-ms-long-running-operation-options__added": {
-          "final-state-via": "original-uri"
-        },
-        "x-ms-long-running-operation__added": true,
-        "responses": {
-          "201__added": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/Cluster"
-            }
-          }
-        }
-      },
       "delete": {
         "responses": {
           "202": {
@@ -101,20 +87,6 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}": {
-      "put": {
-        "x-ms-long-running-operation-options__added": {
-          "final-state-via": "original-uri"
-        },
-        "x-ms-long-running-operation__added": true,
-        "responses": {
-          "201__added": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/ArcSetting"
-            }
-          }
-        }
-      },
       "delete": {
         "x-ms-long-running-operation-options__deleted": {
           "final-state-via": "azure-async-operation"
@@ -639,10 +611,6 @@
         }
       },
       "put": {
-        "x-ms-long-running-operation-options__added": {
-          "final-state-via": "original-uri"
-        },
-        "x-ms-long-running-operation__added": true,
         "parameters": [
           [
             " "
@@ -666,12 +634,6 @@
                 "__old": "#/definitions/UpdateSummaries",
                 "__new": "#/definitions/UpdateSummary"
               }
-            }
-          },
-          "201__added": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/UpdateSummary"
             }
           },
           "default": {
@@ -742,17 +704,7 @@
         }
       },
       "put": {
-        "x-ms-long-running-operation-options__added": {
-          "final-state-via": "original-uri"
-        },
-        "x-ms-long-running-operation__added": true,
         "responses": {
-          "201__added": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/Update"
-            }
-          },
           "default": {
             "schema": {
               "$ref": {
@@ -852,17 +804,7 @@
         }
       },
       "put": {
-        "x-ms-long-running-operation-options__added": {
-          "final-state-via": "original-uri"
-        },
-        "x-ms-long-running-operation__added": true,
         "responses": {
-          "201__added": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/UpdateRun"
-            }
-          },
           "default": {
             "schema": {
               "$ref": {
@@ -1209,38 +1151,6 @@
         }
       }
     },
-    "RemoteSupportJobReportedProperties__deleted": {
-      "type": "object",
-      "properties": {
-        "percentComplete": {
-          "type": "integer",
-          "format": "int32",
-          "readOnly": true
-        },
-        "validationStatus": {
-          "$ref": "./hciCommon.json#/definitions/EceActionStatus",
-          "readOnly": true
-        },
-        "deploymentStatus": {
-          "$ref": "./hciCommon.json#/definitions/EceActionStatus",
-          "readOnly": true
-        },
-        "nodeSettings": {
-          "$ref": "#/definitions/RemoteSupportJobNodeSettings",
-          "readOnly": true
-        },
-        "sessionDetails": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RemoteSupportSession"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "sessionId"
-          ]
-        }
-      }
-    },
     "RemoteSupportNodeSettings__deleted": {
       "type": "object",
       "properties": {
@@ -1345,178 +1255,6 @@
           "type": "string"
         }
       }
-    },
-    "AzureLinuxEdgeDeviceJob__added": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/AzureLinuxEdgeDeviceJobProperties"
-        },
-        "kind": {
-          "type": "string",
-          "enum": [
-            "AzureLinux"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        }
-      },
-      "required": [
-        "kind",
-        "properties"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/EdgeDeviceJob"
-        }
-      ]
-    },
-    "AzureLinuxEdgeDeviceJobProperties__added": {
-      "type": "object",
-      "properties": {
-        "deploymentMode": {
-          "type": "string",
-          "enum": [
-            "Validate",
-            "Deploy"
-          ],
-          "x-ms-enum": {
-            "name": "DeploymentMode",
-            "modelAsString": true
-          }
-        },
-        "provisioningState": {
-          "type": "string",
-          "enum": [
-            "NotSpecified",
-            "Error",
-            "Succeeded",
-            "Failed",
-            "Canceled",
-            "Connected",
-            "Disconnected",
-            "Deleted",
-            "Creating",
-            "Updating",
-            "Deleting",
-            "Moving",
-            "PartiallySucceeded",
-            "PartiallyConnected",
-            "InProgress",
-            "Accepted",
-            "Provisioning",
-            "DisableInProgress"
-          ],
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": true
-          },
-          "readOnly": true
-        },
-        "jobId": {
-          "type": "string",
-          "readOnly": true
-        },
-        "startTimeUtc": {
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true
-        },
-        "endTimeUtc": {
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true
-        },
-        "status": {
-          "type": "string",
-          "enum": [
-            "NotSpecified",
-            "ValidationInProgress",
-            "ValidationSuccess",
-            "ValidationFailed",
-            "DeploymentInProgress",
-            "DeploymentFailed",
-            "DeploymentSuccess",
-            "Succeeded",
-            "Failed",
-            "Canceled",
-            "Paused",
-            "Scheduled"
-          ],
-          "x-ms-enum": {
-            "name": "JobStatus",
-            "modelAsString": true
-          },
-          "readOnly": true
-        },
-        "jobType": {
-          "type": "string",
-          "enum": [
-            "CollectLog",
-            "RemoteSupport"
-          ],
-          "x-ms-enum": {
-            "name": "AzureLinuxEdgeDeviceJobType",
-            "modelAsString": true
-          },
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        }
-      },
-      "discriminator": "jobType",
-      "required": [
-        "jobType"
-      ]
-    },
-    "AzureLinuxRemoteSupportJobProperties__added": {
-      "type": "object",
-      "properties": {
-        "accessLevel": {
-          "type": "string",
-          "enum": [
-            "None",
-            "Diagnostics",
-            "DiagnosticsAndRepair"
-          ],
-          "x-ms-enum": {
-            "name": "RemoteSupportAccessLevel",
-            "modelAsString": true
-          }
-        },
-        "expirationTimestamp": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "type": {
-          "type": "string",
-          "enum": [
-            "Enable",
-            "Revoke"
-          ],
-          "x-ms-enum": {
-            "name": "RemoteSupportType",
-            "modelAsString": true
-          }
-        },
-        "reportedProperties": {
-          "$ref": "#/definitions/RemoteSupportReportedProperties",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "accessLevel",
-        "expirationTimestamp",
-        "type"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/AzureLinuxEdgeDeviceJobProperties"
-        }
-      ],
-      "x-ms-discriminator-value": "RemoteSupport"
     },
     "ClusterWitnessProperties__added": {
       "type": "object",
@@ -2508,38 +2246,6 @@
         }
       }
     },
-    "RemoteSupportReportedProperties__added": {
-      "type": "object",
-      "properties": {
-        "percentComplete": {
-          "type": "integer",
-          "format": "int32",
-          "readOnly": true
-        },
-        "validationStatus": {
-          "$ref": "#/definitions/EdgeDeviceJobsEceActionStatus",
-          "readOnly": true
-        },
-        "deploymentStatus": {
-          "$ref": "#/definitions/EdgeDeviceJobsEceActionStatus",
-          "readOnly": true
-        },
-        "nodeSettings": {
-          "$ref": "#/definitions/EdgeDeviceJobsRemoteSupportNodeSettings",
-          "readOnly": true
-        },
-        "sessionDetails": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RemoteSupportSession"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "sessionId"
-          ]
-        }
-      }
-    },
     "StackHCIHciExtensionPatchParametersContent__added": {
       "type": "object",
       "properties": {
@@ -3126,18 +2832,13 @@
       "discriminator__deleted": "kind",
       "properties": {
         "properties__added": {
-          "$ref": "#/definitions/EdgeDeviceJobProperties"
+          "type": "object"
         },
         "kind": {
           "$ref__deleted": "./hciCommon.json#/definitions/EdgeDeviceKind",
           "type__added": "string",
           "enum__added": [
-            "HCI",
-            "WindowsServer",
-            "WindowsIoT",
-            "AzureLinux",
-            "UbuntuLinux",
-            "AzureLinuxRoe"
+            "HCI"
           ],
           "x-ms-enum__added": {
             "name": "EdgeDeviceKind",
@@ -3621,16 +3322,6 @@
         }
       }
     },
-    "HciRemoteSupportJobProperties": {
-      "properties": {
-        "reportedProperties": {
-          "$ref": {
-            "__old": "#/definitions/RemoteSupportJobReportedProperties",
-            "__new": "#/definitions/RemoteSupportReportedProperties"
-          }
-        }
-      }
-    },
     "IsolatedVmAttestationConfiguration": {
       "properties": {
         "attestationResourceId": {
@@ -3959,12 +3650,24 @@
         }
       }
     },
-    "RemoteSupportJobProperties": {
+    "RemoteSupportJobReportedProperties": {
       "properties": {
-        "reportedProperties": {
+        "validationStatus": {
           "$ref": {
-            "__old": "#/definitions/RemoteSupportJobReportedProperties",
-            "__new": "#/definitions/RemoteSupportReportedProperties"
+            "__old": "./hciCommon.json#/definitions/EceActionStatus",
+            "__new": "#/definitions/EdgeDeviceJobsEceActionStatus"
+          }
+        },
+        "deploymentStatus": {
+          "$ref": {
+            "__old": "./hciCommon.json#/definitions/EceActionStatus",
+            "__new": "#/definitions/EdgeDeviceJobsEceActionStatus"
+          }
+        },
+        "nodeSettings": {
+          "$ref": {
+            "__old": "#/definitions/RemoteSupportJobNodeSettings",
+            "__new": "#/definitions/EdgeDeviceJobsRemoteSupportNodeSettings"
           }
         }
       }

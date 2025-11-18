@@ -48,41 +48,16 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}'].put['x-ms-long-running-operation-options__added']` | added | `{"final-state-via":"original-uri"}` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}'].delete['x-ms-long-running-operation-options__deleted']` | deleted | `{"final-state-via":"azure-async-operation"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}'].put['x-ms-long-running-operation-options__added']` | added | `{"final-state-via":"original-uri"}` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/extensions/{extensionName}'].delete['x-ms-long-running-operation-options__deleted']` | deleted | `{"final-state-via":"azure-async-operation"}` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/extensions/{extensionName}'].patch['x-ms-long-running-operation-options__deleted']` | deleted | `{"final-state-via":"original-uri"}` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/extensions/{extensionName}/upgrade'].post['x-ms-long-running-operation-options__deleted']` | deleted | `{"final-state-via":"azure-async-operation"}` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/initializeDisableProcess'].post['x-ms-long-running-operation-options__deleted']` | deleted | `{"final-state-via":"azure-async-operation"}` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/updates/{updateName}'].delete['x-ms-long-running-operation-options__deleted']` | deleted | `{"final-state-via":"azure-async-operation"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/updates/{updateName}'].put['x-ms-long-running-operation-options__added']` | added | `{"final-state-via":"original-uri"}` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/updates/{updateName}/apply'].post['x-ms-long-running-operation-options__deleted']` | deleted | `{"final-state-via":"azure-async-operation"}` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/updates/{updateName}/updateRuns/{updateRunName}'].delete['x-ms-long-running-operation-options__deleted']` | deleted | `{"final-state-via":"azure-async-operation"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/updates/{updateName}/updateRuns/{updateRunName}'].put['x-ms-long-running-operation-options__added']` | added | `{"final-state-via":"original-uri"}` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/updateSummaries/default'].delete['x-ms-long-running-operation-options__deleted']` | deleted | `{"final-state-via":"azure-async-operation"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/updateSummaries/default'].put['x-ms-long-running-operation-options__added']` | added | `{"final-state-via":"original-uri"}` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/uploadCertificate'].post['x-ms-long-running-operation-options__deleted']` | deleted | `{"final-state-via":"azure-async-operation"}` |
-
-### Changes for `x-ms-long-running-operation`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}'].put['x-ms-long-running-operation__added']` | added | `true` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}'].put['x-ms-long-running-operation__added']` | added | `true` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/updates/{updateName}'].put['x-ms-long-running-operation__added']` | added | `true` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/updates/{updateName}/updateRuns/{updateRunName}'].put['x-ms-long-running-operation__added']` | added | `true` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/updateSummaries/default'].put['x-ms-long-running-operation__added']` | added | `true` |
-
-### Changes for `201`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}'].put.responses.201__added` | added | `{"description":"ignore","schema":{"$ref":"#/definitions/Cluster"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}'].put.responses.201__added` | added | `{"description":"ignore","schema":{"$ref":"#/definitions/ArcSetting"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/updates/{updateName}'].put.responses.201__added` | added | `{"description":"ignore","schema":{"$ref":"#/definitions/Update"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/updates/{updateName}/updateRuns/{updateRunName}'].put.responses.201__added` | added | `{"description":"ignore","schema":{"$ref":"#/definitions/UpdateRun"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/updateSummaries/default'].put.responses.201__added` | added | `{"description":"ignore","schema":{"$ref":"#/definitions/UpdateSummary"}}` |
 
 ### Changes for `description`
 
@@ -161,12 +136,6 @@
 |------|------------|-------|
 | `definitions.RemoteSupportJobNodeSettings__deleted` | deleted | `{"type":"object","properties":{"state":{"type":"string","readOnly":true},"createdAt":{"type":"string...` |
 
-### Changes for `RemoteSupportJobReportedProperties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.RemoteSupportJobReportedProperties__deleted` | deleted | `{"type":"object","properties":{"percentComplete":{"type":"integer","format":"int32","readOnly":true}...` |
-
 ### Changes for `RemoteSupportNodeSettings`
 
 | Path | Change Type | Value |
@@ -196,24 +165,6 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.VirtualSwitchConfigurationOverrides__deleted` | deleted | `{"type":"object","properties":{"enableIov":{"type":"string"},"loadBalancingAlgorithm":{"type":"strin...` |
-
-### Changes for `AzureLinuxEdgeDeviceJob`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.AzureLinuxEdgeDeviceJob__added` | added | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/AzureLinuxEdgeDeviceJobProperties...` |
-
-### Changes for `AzureLinuxEdgeDeviceJobProperties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.AzureLinuxEdgeDeviceJobProperties__added` | added | `{"type":"object","properties":{"deploymentMode":{"type":"string","enum":["Validate","Deploy"],"x-ms-...` |
-
-### Changes for `AzureLinuxRemoteSupportJobProperties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.AzureLinuxRemoteSupportJobProperties__added` | added | `{"type":"object","properties":{"accessLevel":{"type":"string","enum":["None","Diagnostics","Diagnost...` |
 
 ### Changes for `ClusterWitnessProperties`
 
@@ -419,12 +370,6 @@
 |------|------------|-------|
 | `definitions.ProvisionOsReportedProperties__added` | added | `{"type":"object","properties":{"percentComplete":{"type":"integer","format":"int32","readOnly":true}...` |
 
-### Changes for `RemoteSupportReportedProperties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.RemoteSupportReportedProperties__added` | added | `{"type":"object","properties":{"percentComplete":{"type":"integer","format":"int32","readOnly":true}...` |
-
 ### Changes for `StackHCIHciExtensionPatchParametersContent`
 
 | Path | Change Type | Value |
@@ -611,7 +556,7 @@
 | `definitions.DeploymentCluster.properties.hardwareClass.enum__added` | added | `["Small","Medium","Large"]` |
 | `definitions.DeploymentSettingsProperties.properties.deploymentMode.enum__added` | added | `["Validate","Deploy"]` |
 | `definitions.DeploymentSettingsProperties.properties.provisioningState.enum__added` | added | `["NotSpecified","Error","Succeeded","Failed","Canceled","Connected","Disconnected","Deleted","Creati...` |
-| `definitions.EdgeDeviceJob.properties.kind.enum__added` | added | `["HCI","WindowsServer","WindowsIoT","AzureLinux","UbuntuLinux","AzureLinuxRoe"]` |
+| `definitions.EdgeDeviceJob.properties.kind.enum__added` | added | `["HCI"]` |
 | `definitions.EdgeDeviceProperties.properties.provisioningState.enum__added` | added | `["NotSpecified","Error","Succeeded","Failed","Canceled","Connected","Disconnected","Deleted","Creati...` |
 
 ### Changes for `x-ms-enum`
@@ -657,7 +602,7 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.EdgeDevice.properties.properties__added` | added | `{"type":"object"}` |
-| `definitions.EdgeDeviceJob.properties.properties__added` | added | `{"$ref":"#/definitions/EdgeDeviceJobProperties"}` |
+| `definitions.EdgeDeviceJob.properties.properties__added` | added | `{"type":"object"}` |
 | `definitions.Extension.properties.properties__added` | added | `{"$ref":"#/definitions/ExtensionProperties"}` |
 | `definitions.ExtensionInstanceView.properties.status.properties__deleted` | deleted | `{"code":{"type":"string","description":"The status code."},"level":{"type":"string","description":"T...` |
 | `definitions.PrecheckResult.properties.tags.properties__deleted` | deleted | `{"key":{"type":"string","description":"Key that allow grouping/filtering individual tests."},"value"...` |
@@ -845,7 +790,6 @@
 | `definitions.ExtensionProfile.properties.extensions.items.$ref` | `#/definitions/Extension` | `#/definitions/EdgeDevicesExtension` |
 | `definitions.ExtensionProperties.properties.extensionParameters.$ref` | `#/definitions/ExtensionParameters` | `#/definitions/ExtensionParametersContent` |
 | `definitions.HciNetworkProfile.properties.hostNetwork.$ref` | `#/definitions/HostNetwork` | `#/definitions/EdgeDevicesHostNetwork` |
-| `definitions.HciRemoteSupportJobProperties.properties.reportedProperties.$ref` | `#/definitions/RemoteSupportJobReportedProperties` | `#/definitions/RemoteSupportReportedProperties` |
 | `definitions.JobReportedProperties.properties.deploymentStatus.$ref` | `./hciCommon.json#/definitions/EceActionStatus` | `#/definitions/EceActionStatus` |
 | `definitions.JobReportedProperties.properties.validationStatus.$ref` | `./hciCommon.json#/definitions/EceActionStatus` | `#/definitions/EceActionStatus` |
 | `definitions.LogCollectionProperties.properties.logCollectionSessionDetails.items.$ref` | `#/definitions/LogCollectionSession` | `#/definitions/ClustersLogCollectionSession` |
@@ -855,7 +799,9 @@
 | `definitions.LogCollectionSession.properties.logSize.format` | `int64` | `int32` |
 | `definitions.Offer.allOf[0].$ref` | `../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` | `../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource` |
 | `definitions.Publisher.allOf[0].$ref` | `../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` | `../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource` |
-| `definitions.RemoteSupportJobProperties.properties.reportedProperties.$ref` | `#/definitions/RemoteSupportJobReportedProperties` | `#/definitions/RemoteSupportReportedProperties` |
+| `definitions.RemoteSupportJobReportedProperties.properties.deploymentStatus.$ref` | `./hciCommon.json#/definitions/EceActionStatus` | `#/definitions/EdgeDeviceJobsEceActionStatus` |
+| `definitions.RemoteSupportJobReportedProperties.properties.nodeSettings.$ref` | `#/definitions/RemoteSupportJobNodeSettings` | `#/definitions/EdgeDeviceJobsRemoteSupportNodeSettings` |
+| `definitions.RemoteSupportJobReportedProperties.properties.validationStatus.$ref` | `./hciCommon.json#/definitions/EceActionStatus` | `#/definitions/EdgeDeviceJobsEceActionStatus` |
 | `definitions.RemoteSupportProperties.properties.remoteSupportNodeSettings.items.$ref` | `#/definitions/RemoteSupportNodeSettings` | `#/definitions/ClustersRemoteSupportNodeSettings` |
 | `definitions.ScaleUnits.properties.deploymentData.$ref` | `#/definitions/DeploymentData` | `#/definitions/DeploymentDataContent` |
 | `definitions.Sku.allOf[0].$ref` | `../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` | `../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource` |
