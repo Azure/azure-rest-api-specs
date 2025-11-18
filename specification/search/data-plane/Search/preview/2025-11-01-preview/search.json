@@ -2547,7 +2547,7 @@
     },
     "/knowledgesources": {
       "get": {
-        "operationId": "Sources_List",
+        "operationId": "KnowledgeSources_List",
         "description": "Lists all knowledge sources available for a search service.",
         "parameters": [
           {
@@ -2570,10 +2570,30 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "SearchServiceListKnowledgeSources": {
+            "$ref": "./examples/SearchServiceListKnowledgeSources.json"
+          },
+          "SearchServiceListKnowledgeSourcesAzureBlob": {
+            "$ref": "./examples/SearchServiceListKnowledgeSourcesAzureBlob.json"
+          },
+          "SearchServiceListKnowledgeSourcesIndexedOneLake": {
+            "$ref": "./examples/SearchServiceListKnowledgeSourcesIndexedOneLake.json"
+          },
+          "SearchServiceListKnowledgeSourcesIndexedSharePoint": {
+            "$ref": "./examples/SearchServiceListKnowledgeSourcesIndexedSharePoint.json"
+          },
+          "SearchServiceListKnowledgeSourcesIngestedSharePoint": {
+            "$ref": "./examples/SearchServiceListKnowledgeSourcesIngestedSharePoint.json"
+          },
+          "SearchServiceListKnowledgeSourcesWeb": {
+            "$ref": "./examples/SearchServiceListKnowledgeSourcesWeb.json"
+          }
         }
       },
       "post": {
-        "operationId": "Sources_Create",
+        "operationId": "KnowledgeSources_Create",
         "description": "Creates a new knowledge source.",
         "parameters": [
           {
@@ -2605,12 +2625,32 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "SearchServiceCreateKnowledgeSource": {
+            "$ref": "./examples/SearchServiceCreateKnowledgeSource.json"
+          },
+          "SearchServiceCreateKnowledgeSourceAzureBlob": {
+            "$ref": "./examples/SearchServiceCreateKnowledgeSourceAzureBlob.json"
+          },
+          "SearchServiceCreateKnowledgeSourceIndexedOneLake": {
+            "$ref": "./examples/SearchServiceCreateKnowledgeSourceIndexedOneLake.json"
+          },
+          "SearchServiceCreateKnowledgeSourceIndexedSharePoint": {
+            "$ref": "./examples/SearchServiceCreateKnowledgeSourceIndexedSharePoint.json"
+          },
+          "SearchServiceCreateKnowledgeSourceIngestedSharePoint": {
+            "$ref": "./examples/SearchServiceCreateKnowledgeSourceIngestedSharePoint.json"
+          },
+          "SearchServiceCreateKnowledgeSourceWeb": {
+            "$ref": "./examples/SearchServiceCreateKnowledgeSourceWeb.json"
+          }
         }
       }
     },
     "/knowledgesources('{sourceName}')": {
       "get": {
-        "operationId": "Sources_Get",
+        "operationId": "KnowledgeSources_Get",
         "description": "Retrieves a knowledge source definition.",
         "parameters": [
           {
@@ -2640,10 +2680,30 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "SearchServiceGetKnowledgeSource": {
+            "$ref": "./examples/SearchServiceGetKnowledgeSource.json"
+          },
+          "SearchServiceGetKnowledgeSourceAzureBlob": {
+            "$ref": "./examples/SearchServiceGetKnowledgeSourceAzureBlob.json"
+          },
+          "SearchServiceGetKnowledgeSourceIndexedOneLake": {
+            "$ref": "./examples/SearchServiceGetKnowledgeSourceIndexedOneLake.json"
+          },
+          "SearchServiceGetKnowledgeSourceIndexedSharePoint": {
+            "$ref": "./examples/SearchServiceGetKnowledgeSourceIndexedSharePoint.json"
+          },
+          "SearchServiceGetKnowledgeSourceIngestedSharePoint": {
+            "$ref": "./examples/SearchServiceGetKnowledgeSourceIngestedSharePoint.json"
+          },
+          "SearchServiceGetKnowledgeSourceWeb": {
+            "$ref": "./examples/SearchServiceGetKnowledgeSourceWeb.json"
+          }
         }
       },
       "put": {
-        "operationId": "Sources_CreateOrUpdate",
+        "operationId": "KnowledgeSources_CreateOrUpdate",
         "description": "Creates a new knowledge source or updates an knowledge source if it already exists.",
         "parameters": [
           {
@@ -2718,10 +2778,30 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "SearchServiceCreateOrUpdateKnowledgeSource": {
+            "$ref": "./examples/SearchServiceCreateOrUpdateKnowledgeSource.json"
+          },
+          "SearchServiceCreateOrUpdateKnowledgeSourceAzureBlob": {
+            "$ref": "./examples/SearchServiceCreateOrUpdateKnowledgeSourceAzureBlob.json"
+          },
+          "SearchServiceCreateOrUpdateKnowledgeSourceIndexedOneLake": {
+            "$ref": "./examples/SearchServiceCreateOrUpdateKnowledgeSourceIndexedOneLake.json"
+          },
+          "SearchServiceCreateOrUpdateKnowledgeSourceIndexedSharePoint": {
+            "$ref": "./examples/SearchServiceCreateOrUpdateKnowledgeSourceIndexedSharePoint.json"
+          },
+          "SearchServiceCreateOrUpdateKnowledgeSourceIngestedSharePoint": {
+            "$ref": "./examples/SearchServiceCreateOrUpdateKnowledgeSourceIngestedSharePoint.json"
+          },
+          "SearchServiceCreateOrUpdateKnowledgeSourceWeb": {
+            "$ref": "./examples/SearchServiceCreateOrUpdateKnowledgeSourceWeb.json"
+          }
         }
       },
       "delete": {
-        "operationId": "Sources_Delete",
+        "operationId": "KnowledgeSources_Delete",
         "description": "Deletes an existing knowledge source.",
         "parameters": [
           {
@@ -2766,6 +2846,26 @@
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "SearchServiceDeleteKnowledgeSource": {
+            "$ref": "./examples/SearchServiceDeleteKnowledgeSource.json"
+          },
+          "SearchServiceDeleteKnowledgeSourceAzureBlob": {
+            "$ref": "./examples/SearchServiceDeleteKnowledgeSourceAzureBlob.json"
+          },
+          "SearchServiceDeleteKnowledgeSourceIndexedOneLake": {
+            "$ref": "./examples/SearchServiceDeleteKnowledgeSourceIndexedOneLake.json"
+          },
+          "SearchServiceDeleteKnowledgeSourceIndexedSharePoint": {
+            "$ref": "./examples/SearchServiceDeleteKnowledgeSourceIndexedSharePoint.json"
+          },
+          "SearchServiceDeleteKnowledgeSourceIngestedSharePoint": {
+            "$ref": "./examples/SearchServiceDeleteKnowledgeSourceIngestedSharePoint.json"
+          },
+          "SearchServiceDeleteKnowledgeSourceWeb": {
+            "$ref": "./examples/SearchServiceDeleteKnowledgeSourceWeb.json"
           }
         }
       }
@@ -8936,6 +9036,24 @@
         "filter": {
           "type": "string",
           "description": "The filter string."
+        },
+        "sourceDataFields": {
+          "type": "array",
+          "description": "What fields were selected for search.",
+          "items": {
+            "$ref": "#/definitions/SearchIndexFieldReference"
+          }
+        },
+        "searchFields": {
+          "type": "array",
+          "description": "What fields were searched against.",
+          "items": {
+            "$ref": "#/definitions/SearchIndexFieldReference"
+          }
+        },
+        "semanticConfigurationName": {
+          "type": "string",
+          "description": "What semantic configuration was used from the search index."
         }
       }
     },
@@ -9037,16 +9155,6 @@
         }
       ],
       "x-ms-discriminator-value": "web"
-    },
-    "KnowledgeRetrievalHighReasoningEffort": {
-      "type": "object",
-      "description": "Run knowledge retrieval with high reasoning effort.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/KnowledgeRetrievalReasoningEffort"
-        }
-      ],
-      "x-ms-discriminator-value": "high"
     },
     "KnowledgeRetrievalIntent": {
       "type": "object",
@@ -9154,8 +9262,7 @@
       "enum": [
         "minimal",
         "low",
-        "medium",
-        "high"
+        "medium"
       ],
       "x-ms-enum": {
         "name": "KnowledgeRetrievalReasoningEffortKind",
@@ -9164,7 +9271,7 @@
           {
             "name": "minimal",
             "value": "minimal",
-            "description": "Does not perform any source selections, any query planning, or any iterative search."
+            "description": "Does not perform any source selections, query planning, or iterative search."
           },
           {
             "name": "low",
@@ -9175,11 +9282,6 @@
             "name": "medium",
             "value": "medium",
             "description": "Use a moderate amount of reasoning during retrieval."
-          },
-          {
-            "name": "high",
-            "value": "high",
-            "description": "Use a high amount of reasoning during retrieval."
           }
         ]
       }
@@ -13847,20 +13949,9 @@
       "type": "object",
       "description": "Specifies runtime parameters for a remote SharePoint knowledge source",
       "properties": {
-        "filterExpression": {
+        "filterExpressionAddOn": {
           "type": "string",
-          "description": "Keyword Query Language (KQL) expression with queryable SharePoint properties and attributes to scope the retrieval before the query runs. See documentation: https://learn.microsoft.com/en-us/sharepoint/dev/general-development/keyword-query-language-kql-syntax-reference"
-        },
-        "resourceMetadata": {
-          "type": "array",
-          "description": "A list of metadata fields to be returned for each item in the response. Only retrievable metadata properties can be included in this list. By default, no metadata is returned. Optional.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "containerTypeId": {
-          "type": "string",
-          "description": "Container ID for SharePoint Embedded connection. When this is null, it will use SharePoint Online."
+          "description": "A filter condition applied to the SharePoint data source. It must be specified in the Keyword Query Language syntax. It will be combined as a conjunction with the filter expression specified in the knowledge source definition."
         }
       },
       "allOf": [

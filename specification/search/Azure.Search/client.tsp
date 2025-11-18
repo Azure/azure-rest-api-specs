@@ -2818,13 +2818,6 @@ namespace KnowledgeBaseRetrievalClient {
   "com.azure.search.documents.knowledgebase",
   "java"
 );
-@@clientNamespace(Search.KnowledgeRetrievalHighReasoningEffort,
-  "Azure.Search.Documents.KnowledgeBase"
-);
-@@clientNamespace(Search.KnowledgeRetrievalHighReasoningEffort,
-  "com.azure.search.documents.knowledgebase",
-  "java"
-);
 @@clientNamespace(Search.KnowledgeRetrievalReasoningEffortKind,
   "Azure.Search.Documents.KnowledgeBase"
 );

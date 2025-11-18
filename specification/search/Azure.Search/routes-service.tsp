@@ -627,7 +627,7 @@ interface KnowledgeBases {
   get is SearchKnowledgeBaseOperation<{}, KnowledgeBase>;
 }
 
-interface Sources {
+interface KnowledgeSources {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @doc("Creates a new knowledge source.")
   @route("/knowledgesources")

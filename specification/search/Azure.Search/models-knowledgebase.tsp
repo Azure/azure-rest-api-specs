@@ -75,18 +75,11 @@ model KnowledgeRetrievalMediumReasoningEffort
   kind: KnowledgeRetrievalReasoningEffortKind.medium;
 }
 
-@doc("Run knowledge retrieval with high reasoning effort.")
-model KnowledgeRetrievalHighReasoningEffort
-  extends KnowledgeRetrievalReasoningEffort {
-  @doc("The discriminator value.")
-  kind: KnowledgeRetrievalReasoningEffortKind.high;
-}
-
 @doc("The amount of effort to use during retrieval.")
 union KnowledgeRetrievalReasoningEffortKind {
   string,
 
-  @doc("Does not perform any source selections, any query planning, or any iterative search.")
+  @doc("Does not perform any source selections, query planning, or iterative search.")
   minimal: "minimal",
 
   @doc("Use low reasoning during retrieval.")
@@ -94,9 +87,6 @@ union KnowledgeRetrievalReasoningEffortKind {
 
   @doc("Use a moderate amount of reasoning during retrieval.")
   medium: "medium",
-
-  @doc("Use a high amount of reasoning during retrieval.")
-  high: "high",
 }
 
 @doc("The output configuration for this retrieval.")
@@ -196,14 +186,8 @@ model RemoteSharePointKnowledgeSourceParams extends KnowledgeSourceParams {
   @doc("The discriminator value.")
   kind: KnowledgeSourceKind.RemoteSharePoint;
 
-  @doc("Keyword Query Language (KQL) expression with queryable SharePoint properties and attributes to scope the retrieval before the query runs. See documentation: https://learn.microsoft.com/en-us/sharepoint/dev/general-development/keyword-query-language-kql-syntax-reference")
-  filterExpression?: string;
-
-  @doc("A list of metadata fields to be returned for each item in the response. Only retrievable metadata properties can be included in this list. By default, no metadata is returned. Optional.")
-  resourceMetadata?: string[];
-
-  @doc("Container ID for SharePoint Embedded connection. When this is null, it will use SharePoint Online.")
-  containerTypeId?: string;
+  @doc("A filter condition applied to the SharePoint data source. It must be specified in the Keyword Query Language syntax. It will be combined as a conjunction with the filter expression specified in the knowledge source definition.")
+  filterExpressionAddOn?: string;
 }
 
 @doc("An intended query to execute without model query planning.")
@@ -362,6 +346,15 @@ model KnowledgeBaseSearchIndexActivityArguments {
 
   @doc("The filter string.")
   filter?: string;
+
+  @doc("What fields were selected for search.")
+  sourceDataFields?: SearchIndexFieldReference[];
+
+  @doc("What fields were searched against.")
+  searchFields?: SearchIndexFieldReference[];
+
+  @doc("What semantic configuration was used from the search index.")
+  semanticConfigurationName?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
