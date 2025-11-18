@@ -2,11 +2,13 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/versioning";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using TypeSpec.Versioning;
 
 namespace Dynatrace.Observability;
 
@@ -142,6 +144,24 @@ union Action {
   Install: "Install",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FixME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Uninstall: "Uninstall",
+}
+
+/**
+ * Add or Remove connectors for SRE agents.
+ */
+@added(Dynatrace.Observability.Versions.v2025_11_03_preview)
+union ConnectorAction {
+  string,
+
+  /**
+   * Add connector actions
+   */
+  Add: "Add",
+
+  /**
+   * Remove connector action
+   */
+  Remove: "Remove",
 }
 
 /**
@@ -596,6 +616,23 @@ model ManageAgentInstallationRequest {
 }
 
 /**
+ * Request for adding/removing Dynatrace MCP connectors on SRE Agent resource.
+ */
+@added(Dynatrace.Observability.Versions.v2025_11_03_preview)
+model SreAgentConnectorRequest {
+  /**
+   * The list of ARM resource ID of the MCP connector integrated with SRE Agent resource.
+   */
+  @Azure.ResourceManager.identifiers(#["mcpConnectorResourceId"])
+  mcpConnectorResourceIdList: SreAgentConfiguration[];
+
+  /**
+   * Add/Remove action.
+   */
+  action: ConnectorAction;
+}
+
+/**
  * Details of resource that has Dynatrace agent installed through the Azure Dynatrace resource.
  */
 model ManageAgentList {
@@ -656,6 +693,14 @@ model MonitorProperties {
    */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
+
+  /**
+   * SRE Agent configuration to connect to MCP server of Dynatrace for given environment.
+   */
+  @Azure.ResourceManager.identifiers(#["mcpConnectorResourceId"])
+  @added(Dynatrace.Observability.Versions.v2025_11_03_preview)
+  @visibility(Lifecycle.Update)
+  sreAgentConfiguration?: SreAgentConfiguration[];
 }
 
 /**
@@ -681,6 +726,24 @@ model DynatraceEnvironmentProperties {
    * The details of a Dynatrace single sign-on.
    */
   singleSignOnProperties?: DynatraceSingleSignOnProperties;
+}
+
+/**
+ * Response of a list operation.
+ */
+@added(Dynatrace.Observability.Versions.v2025_11_03_preview)
+model SreAgentConfigurationListResponse
+  is Azure.Core.Page<SreAgentConfiguration>;
+
+/**
+ * SRE Agent configuration to connect to MCP server of Dynatrace for a given organization.
+ */
+@added(Dynatrace.Observability.Versions.v2025_11_03_preview)
+model SreAgentConfiguration {
+  /**
+   * The ARM resource ID of the MCP connector integrated with SRE Agent resource.
+   */
+  mcpConnectorResourceId: string;
 }
 
 /**
