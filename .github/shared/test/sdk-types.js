@@ -16,7 +16,7 @@ export function createMockSpecGenSdkArtifactInfo(overrides = {}) {
     apiViewRequestData: [],
     headSha: "abc123",
     isSpecGenSdkCheckRequired: true,
-    language: SdkName.Js,
+    language: SdkName.Go,
     result: "test result",
   };
 
