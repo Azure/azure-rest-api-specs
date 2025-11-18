@@ -1,6 +1,8 @@
 import "@azure-tools/typespec-client-generator-core";
+import "@azure-tools/typespec-azure-resource-manager";
 
 using Azure.ClientGenerator.Core;
+using Azure.ResourceManager;
 using Microsoft.Elastic;
 
 @@clientLocation(ElasticMonitorResources.get, "Monitors", "!csharp");
@@ -132,12 +134,8 @@ using Microsoft.Elastic;
   "!csharp"
 );
 
-@@OpenAPI.extension(ElasticVersionsListResponse.value,
-  "x-ms-identifiers",
-  #["properties/version"]
-);
+@@identifiers(ElasticVersionsListResponse.value, #["properties/version"]);
 
-@@OpenAPI.extension(ConnectedPartnerResourcesListResponse.value,
-  "x-ms-identifiers",
+@@identifiers(ConnectedPartnerResourcesListResponse.value,
   #["properties/azureResourceId"]
 );
