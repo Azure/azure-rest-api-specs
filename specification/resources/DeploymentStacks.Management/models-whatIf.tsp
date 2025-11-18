@@ -47,7 +47,8 @@ alias DeploymentStacksWhatIfResultNameParameter = ResourceNameParameter<
  * DeploymentStack WhatIfResult Properties
  */
 @added(Versions.v2025_07_01)
-model DeploymentStacksWhatIfResultProperties is DeploymentStacksError {
+model DeploymentStacksWhatIfResultProperties {
+  ...DeploymentStacksError;
   ...DeploymentStackSharedProperties;
 
   /**

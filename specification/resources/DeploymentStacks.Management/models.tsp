@@ -56,6 +56,7 @@ union DeploymentStacksDeleteDetachEnum {
 /**
  * Specifies an action for resources that do not support deletion.
  */
+@added(Versions.v2025_07_01)
 union DeploymentStacksResourcesWithoutDeleteSupportEnum {
   string,
 
@@ -243,7 +244,7 @@ model ActionOnUnmanageDeleteParameters {
 /**
  * Deployment stack shared properties.
  */
-model DeploymentStackSharedProperties {
+alias DeploymentStackSharedProperties = {
   /**
    * The template content. You use this element when you want to pass the template syntax directly in the request rather than link to an existing template. It can be a JObject or well-formed JSON string. Use either the templateLink property or the template property, but not both.
    */
@@ -337,13 +338,13 @@ model DeploymentStackSharedProperties {
    */
   @added(Versions.v2025_07_01)
   validationLevel?: ValidationLevel;
-}
+};
 
 /**
  * Deployment stack properties.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Back compat. TSP doc instructs this for 'allOf' for OpenAPI"
-model DeploymentStackProperties is DeploymentStacksError {
+model DeploymentStackProperties {
+  ...DeploymentStacksError;
   ...DeploymentStackSharedProperties;
 
   /**
@@ -648,12 +649,12 @@ model ResourceReferenceExtended {
 /**
  * Deployment Stacks error response.
  */
-model DeploymentStacksError {
+alias DeploymentStacksError = {
   /**
    * The error detail.
    */
   error?: Azure.ResourceManager.CommonTypes.ErrorDetail;
-}
+};
 
 /**
  * The managed resource model.
