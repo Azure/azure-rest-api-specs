@@ -4258,8 +4258,6 @@ model ListAliasesResult {
 @doc("Represents a knowledge base definition.")
 model KnowledgeBase {
   @doc("The name of the knowledge base.")
-  @key("knowledgeBaseName")
-  @visibility(Lifecycle.Read)
   name: string;
 
   @doc("Knowledge sources referenced by this knowledge base.")
@@ -4393,6 +4391,9 @@ union KnowledgeSourceKind {
 
   @doc("A knowledge source that reads data from the web.")
   Web: "web",
+
+  @doc("A knowledge source that reads data from ingested SharePoint.")
+  IngestedSharePoint: "ingestedSharePoint",
 
   @doc("A knowledge source that reads data from remote SharePoint.")
   RemoteSharePoint: "remoteSharePoint",
