@@ -38,8 +38,8 @@ These settings apply only when `--tag=package-2024-07` is specified on the comma
 
 ```yaml $(tag) == 'package-2024-07'
 input-file:
-  - Microsoft.Batch/stable/2024-07-01/BatchManagement.json
-  - Microsoft.Batch/stable/2024-07-01/NetworkSecurityPerimeter.json
+  - stable/2024-07-01/BatchManagement.json
+  - stable/2024-07-01/NetworkSecurityPerimeter.json
 ```
 
 ### Tag: package-2024-02
@@ -48,7 +48,7 @@ These settings apply only when `--tag=package-2024-02` is specified on the comma
 
 ```yaml $(tag) == 'package-2024-02'
 input-file:
-  - Microsoft.Batch/stable/2024-02-01/BatchManagement.json
+  - stable/2024-02-01/BatchManagement.json
 ```
 ### Tag: package-2023-11
 
@@ -56,7 +56,7 @@ These settings apply only when `--tag=package-2023-11` is specified on the comma
 
 ``` yaml $(tag) == 'package-2023-11'
 input-file:
-  - Microsoft.Batch/stable/2023-11-01/BatchManagement.json
+  - stable/2023-11-01/BatchManagement.json
 ```
 
 ### Tag: package-2023-05
@@ -65,7 +65,7 @@ These settings apply only when `--tag=package-2023-05` is specified on the comma
 
 ``` yaml $(tag) == 'package-2023-05'
 input-file:
-  - Microsoft.Batch/stable/2023-05-01/BatchManagement.json
+  - stable/2023-05-01/BatchManagement.json
 ```
 
 ### Tag: package-2022-10
@@ -74,7 +74,7 @@ These settings apply only when `--tag=package-2022-10` is specified on the comma
 
 ``` yaml $(tag) == 'package-2022-10'
 input-file:
-  - Microsoft.Batch/stable/2022-10-01/BatchManagement.json
+  - stable/2022-10-01/BatchManagement.json
 ```
 
 ### Tag: package-2022-06
@@ -83,7 +83,7 @@ These settings apply only when `--tag=package-2022-06` is specified on the comma
 
 ``` yaml $(tag) == 'package-2022-06'
 input-file:
-  - Microsoft.Batch/stable/2022-06-01/BatchManagement.json
+  - stable/2022-06-01/BatchManagement.json
 ```
 
 ### Tag: package-2022-01
@@ -92,7 +92,7 @@ These settings apply only when `--tag=package-2022-01` is specified on the comma
 
 ``` yaml $(tag) == 'package-2022-01'
 input-file:
-  - Microsoft.Batch/stable/2022-01-01/BatchManagement.json
+  - stable/2022-01-01/BatchManagement.json
 ```
 
 ### Tag: package-2021-06
@@ -101,7 +101,7 @@ These settings apply only when `--tag=package-2021-06` is specified on the comma
 
 ``` yaml $(tag) == 'package-2021-06'
 input-file:
-  - Microsoft.Batch/stable/2021-06-01/BatchManagement.json
+  - stable/2021-06-01/BatchManagement.json
 ```
 
 ### Tag: package-2021-01
@@ -110,7 +110,7 @@ These settings apply only when `--tag=package-2021-01` is specified on the comma
 
 ``` yaml $(tag) == 'package-2021-01'
 input-file:
-  - Microsoft.Batch/stable/2021-01-01/BatchManagement.json
+  - stable/2021-01-01/BatchManagement.json
 ```
 
 ### Tag: package-2020-09
@@ -119,7 +119,7 @@ These settings apply only when `--tag=package-2020-09` is specified on the comma
 
 ``` yaml $(tag) == 'package-2020-09'
 input-file:
-  - Microsoft.Batch/stable/2020-09-01/BatchManagement.json
+  - stable/2020-09-01/BatchManagement.json
 ```
 
 ### Tag: package-2020-05
@@ -128,7 +128,7 @@ These settings apply only when `--tag=package-2020-05` is specified on the comma
 
 ``` yaml $(tag) == 'package-2020-05'
 input-file:
-  - Microsoft.Batch/stable/2020-05-01/BatchManagement.json
+  - stable/2020-05-01/BatchManagement.json
 ```
 
 ### Tag: package-2020-03
@@ -137,7 +137,7 @@ These settings apply only when `--tag=package-2020-03` is specified on the comma
 
 ``` yaml $(tag) == 'package-2020-03'
 input-file:
-  - Microsoft.Batch/stable/2020-03-01/BatchManagement.json
+  - stable/2020-03-01/BatchManagement.json
 ```
 
 ### Tag: package-2019-08
@@ -146,7 +146,7 @@ These settings apply only when `--tag=package-2019-08` is specified on the comma
 
 ``` yaml $(tag) == 'package-2019-08'
 input-file:
-  - Microsoft.Batch/stable/2019-08-01/BatchManagement.json
+  - stable/2019-08-01/BatchManagement.json
 ```
 
 ### Tag: package-2019-04
@@ -155,7 +155,7 @@ These settings apply only when `--tag=package-2019-04` is specified on the comma
 
 ``` yaml $(tag) == 'package-2019-04'
 input-file:
-  - Microsoft.Batch/stable/2019-04-01/BatchManagement.json
+  - stable/2019-04-01/BatchManagement.json
 ```
 
 ### Tag: package-2018-12
@@ -164,7 +164,7 @@ These settings apply only when `--tag=package-2018-12` is specified on the comma
 
 ``` yaml $(tag) == 'package-2018-12'
 input-file:
-  - Microsoft.Batch/stable/2018-12-01/BatchManagement.json
+  - stable/2018-12-01/BatchManagement.json
 ```
 
 ### Tag: package-2017-09
@@ -173,7 +173,7 @@ These settings apply only when `--tag=package-2017-09` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-09'
 input-file:
-- Microsoft.Batch/stable/2017-09-01/BatchManagement.json
+- stable/2017-09-01/BatchManagement.json
 ```
 
 ## Suppression
@@ -253,7 +253,7 @@ These settings apply only when `--tag=package-2017-05` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-05'
 input-file:
-- Microsoft.Batch/stable/2017-05-01/BatchManagement.json
+- stable/2017-05-01/BatchManagement.json
 ```
 
 ### Tag: package-2017-01
@@ -262,7 +262,7 @@ These settings apply only when `--tag=package-2017-01` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-01'
 input-file:
-- Microsoft.Batch/stable/2017-01-01/BatchManagement.json
+- stable/2017-01-01/BatchManagement.json
 ```
 
 ### Tag: package-2015-12
@@ -271,7 +271,7 @@ These settings apply only when `--tag=package-2015-12` is specified on the comma
 
 ``` yaml $(tag) == 'package-2015-12'
 input-file:
-- Microsoft.Batch/stable/2015-12-01/BatchManagement.json
+- stable/2015-12-01/BatchManagement.json
 ```
 
 ---
