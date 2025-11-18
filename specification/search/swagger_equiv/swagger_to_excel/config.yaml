@@ -1,0 +1,60 @@
+# Configuration for Swagger to Excel Converter
+# Azure Search API Analysis Tool
+
+input_files:
+  # TSP-compiled swagger files
+  tsp_compiled:
+    - path: "../../data-plane/Search/preview/2025-11-01-preview/search.json"
+      name: "search_tsp_compiled_2025-11-01-preview"
+
+  # Hand-authored swagger files
+  hand_authored:
+    - path: "../../data-plane/Azure.Search/preview/2025-11-01-preview/searchservice.json"
+      name: "searchservice_2025-11-01-preview"
+    - path: "../../data-plane/Azure.Search/preview/2025-11-01-preview/searchindex.json"
+      name: "searchindex_2025-11-01-preview"
+    - path: "../../data-plane/Azure.Search/preview/2025-11-01-preview/knowledgebase.json"
+      name: "knowledgebase_2025-11-01-preview"
+
+output:
+  directory: "./excel_output"
+  file_prefix: "azure_search_api"
+
+# Sheet configuration
+sheets:
+  api_overview:
+    enabled: true
+    name: "API Overview"
+    description: "High-level summary of all API endpoints"
+
+  endpoints:
+    enabled: true
+    name: "Endpoints Detail"
+    description: "Detailed information about each API endpoint"
+
+  parameters:
+    enabled: true
+    name: "Parameters"
+    description: "All parameters used across APIs"
+
+  responses:
+    enabled: true
+    name: "Responses"
+    description: "Response definitions and status codes"
+
+  data_models:
+    enabled: true
+    name: "Data Models"
+    description: "Schema definitions from the definitions section"
+
+  tag_groups:
+    enabled: true
+    name: "Tag Groups"
+    description: "API groupings and their statistics"
+
+# Analysis options
+analysis:
+  include_deprecated: false
+  group_by_tags: true
+  extract_security_info: true
+  include_vendor_extensions: false  # x-ms-* extensions
