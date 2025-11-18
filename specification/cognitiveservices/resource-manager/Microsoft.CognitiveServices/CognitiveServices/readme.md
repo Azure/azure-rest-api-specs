@@ -39,7 +39,7 @@ These settings apply only when `--tag=package-2025-10-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2025-10-01-preview'
 input-file:
-  - Microsoft.CognitiveServices/preview/2025-10-01-preview/cognitiveservices.json
+  - preview/2025-10-01-preview/cognitiveservices.json
 suppressions:
   - code:  ProvisioningStateMustBeReadOnly
     reason: Schema ref is AgentApplicationResource -> AgenticApplication. AgenticApplication has a readonly provisioning state.
@@ -137,7 +137,7 @@ These settings apply only when `--tag=package-2025-09-01` is specified on the co
 
 ```yaml $(tag) == 'package-2025-09-01'
 input-file:
-  - Microsoft.CognitiveServices/stable/2025-09-01/cognitiveservices.json
+  - stable/2025-09-01/cognitiveservices.json
 suppressions:
   - code: PutResponseCodes
     reason: This is existing behavior in all other APIs and already in stable version, will keep the same.
@@ -188,7 +188,7 @@ These settings apply only when `--tag=package-2025-07-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2025-07-01-preview'
 input-file:
-  - Microsoft.CognitiveServices/preview/2025-07-01-preview/cognitiveservices.json
+  - preview/2025-07-01-preview/cognitiveservices.json
 suppressions:
   - code: PutResponseCodes
     reason: This is existing behavior in all other APIs and already in stable version, will keep the same.
@@ -239,7 +239,7 @@ These settings apply only when `--tag=package-2025-06-01` is specified on the co
 
 ```yaml $(tag) == 'package-2025-06-01'
 input-file:
-  - Microsoft.CognitiveServices/stable/2025-06-01/cognitiveservices.json
+  - stable/2025-06-01/cognitiveservices.json
 suppressions:
   - code: PutResponseCodes
     reason: This is existing behavior in all other APIs and already in stable version, will keep the same.
@@ -290,7 +290,7 @@ These settings apply only when `--tag=package-preview-2025-04-01-preview` is spe
 
 ```yaml $(tag) == 'package-preview-2025-04-01-preview'
 input-file:
-  - Microsoft.CognitiveServices/preview/2025-04-01-preview/cognitiveservices.json
+  - preview/2025-04-01-preview/cognitiveservices.json
 suppressions:
   - code: PutResponseCodes
     reason: This is existing behavior in all other APIs and already in stable version, will keep the same.
@@ -341,7 +341,7 @@ These settings apply only when `--tag=package-2024-10` is specified on the comma
 
 ```yaml $(tag) == 'package-2024-10'
 input-file:
-  - Microsoft.CognitiveServices/stable/2024-10-01/cognitiveservices.json
+  - stable/2024-10-01/cognitiveservices.json
 ```
 
 ### Tag: package-preview-2024-06
@@ -350,7 +350,7 @@ These settings apply only when `--tag=package-preview-2024-06` is specified on t
 
 ```yaml $(tag) == 'package-preview-2024-06'
 input-file:
-  - Microsoft.CognitiveServices/preview/2024-06-01-preview/cognitiveservices.json
+  - preview/2024-06-01-preview/cognitiveservices.json
 ```
 
 ### Tag: package-preview-2024-04
@@ -359,7 +359,7 @@ These settings apply only when `--tag=package-preview-2024-04` is specified on t
 
 ```yaml $(tag) == 'package-preview-2024-04'
 input-file:
-  - Microsoft.CognitiveServices/preview/2024-04-01-preview/cognitiveservices.json
+  - preview/2024-04-01-preview/cognitiveservices.json
 ```
 
 ### Tag: package-preview-2023-10
@@ -368,7 +368,7 @@ These settings apply only when `--tag=package-preview-2023-10` is specified on t
 
 ```yaml $(tag) == 'package-preview-2023-10'
 input-file:
-  - Microsoft.CognitiveServices/preview/2023-10-01-preview/cognitiveservices.json
+  - preview/2023-10-01-preview/cognitiveservices.json
 suppressions:
   - code: ResourceNameRestriction
     reason: The resource name parameter 'deploymentName' is not a new added parameter and was already implemented in previous versions of API, we cannot add pattern now.
@@ -381,7 +381,7 @@ These settings apply only when `--tag=package-2023-05` is specified on the comma
 
 ```yaml $(tag) == 'package-2023-05'
 input-file:
-  - Microsoft.CognitiveServices/stable/2023-05-01/cognitiveservices.json
+  - stable/2023-05-01/cognitiveservices.json
 ```
 
 ### Tag: package-2022-12
@@ -390,7 +390,7 @@ These settings apply only when `--tag=package-2022-12` is specified on the comma
 
 ```yaml $(tag) == 'package-2022-12'
 input-file:
-  - Microsoft.CognitiveServices/stable/2022-12-01/cognitiveservices.json
+  - stable/2022-12-01/cognitiveservices.json
 ```
 
 ### Tag: package-2022-10
@@ -399,7 +399,7 @@ These settings apply only when `--tag=package-2022-10` is specified on the comma
 
 ```yaml $(tag) == 'package-2022-10'
 input-file:
-  - Microsoft.CognitiveServices/stable/2022-10-01/cognitiveservices.json
+  - stable/2022-10-01/cognitiveservices.json
 ```
 
 ### Tag: package-2022-03
@@ -408,7 +408,7 @@ These settings apply only when `--tag=package-2022-03` is specified on the comma
 
 ```yaml $(tag) == 'package-2022-03'
 input-file:
-  - Microsoft.CognitiveServices/stable/2022-03-01/cognitiveservices.json
+  - stable/2022-03-01/cognitiveservices.json
 ```
 
 ### Tag: package-2021-10
@@ -417,7 +417,7 @@ These settings apply only when `--tag=package-2021-10` is specified on the comma
 
 ```yaml $(tag) == 'package-2021-10'
 input-file:
-  - Microsoft.CognitiveServices/stable/2021-10-01/cognitiveservices.json
+  - stable/2021-10-01/cognitiveservices.json
 ```
 
 ### Tag: package-2021-04
@@ -426,7 +426,7 @@ These settings apply only when `--tag=package-2021-04` is specified on the comma
 
 ```yaml $(tag) == 'package-2021-04'
 input-file:
-  - Microsoft.CognitiveServices/stable/2021-04-30/cognitiveservices.json
+  - stable/2021-04-30/cognitiveservices.json
 ```
 
 ### Tag: package-2017-04
@@ -435,7 +435,7 @@ These settings apply only when `--tag=package-2017-04` is specified on the comma
 
 ```yaml $(tag) == 'package-2017-04'
 input-file:
-  - Microsoft.CognitiveServices/stable/2017-04-18/cognitiveservices.json
+  - stable/2017-04-18/cognitiveservices.json
 ```
 
 ### Tag: package-2016-02-preview
@@ -444,7 +444,7 @@ These settings apply only when `--tag=package-2016-02-preview` is specified on t
 
 ```yaml $(tag) == 'package-2016-02-preview'
 input-file:
-  - Microsoft.CognitiveServices/preview/2016-02-01-preview/cognitiveservices.json
+  - preview/2016-02-01-preview/cognitiveservices.json
 ```
 
 ## Suppression
