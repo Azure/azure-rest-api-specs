@@ -1,128 +1,121 @@
-# Swagger Equivalency Validation Tool
+# Swagger Equivalency Checker
 
-A simple Python tool to validate equivalency between TypeSpec-compiled swagger JSON and hand-authored swagger files for Azure Search using `openapi-diff`.
+A Python tool for comparing hand-authored and TypeSpec-compiled Swagger specifications for semantic equivalency. This tool implements strict semantic comparison while ignoring documentation-only fields and ordering differences.
+
+## Overview
+
+This tool compares three hand-authored Swagger files plus common types against a single TypeSpec-compiled Swagger file to determine if they represent the same API contract.
 
 ## Features
 
-- **Professional Comparison**: Uses `openapi-diff` for industry-standard API comparison
-- **Breaking Change Detection**: Identifies breaking vs non-breaking changes
-- **Two-Step Workflow**: Generate normalized files first, then compare for better debugging
-- **CSV Reports**: Detailed reports with change categorization
-- **Multi-File Support**: Merges multiple hand-authored swagger files for comparison
+- **Semantic Comparison**: Focuses on API behavior, ignoring documentation differences
+- **Multi-File Merging**: Combines multiple hand-authored Swagger files into a single specification
+- **Canonicalization**: Removes documentation fields and normalizes ordering for comparison
+- **Detailed Reporting**: Provides specific differences when APIs don't match
+- **Clean Output**: Production-ready tool with minimal verbose output
 
 ## Setup
 
 **Requirements**:
 - Python 3.11 or higher
-- Node.js and npm (for openapi-diff)
+- PyYAML
 
 ### Install Dependencies
 
 ```bash
-# Check versions first
-python --version  # Should show "Python 3.11.x" or higher
-node --version    # Should show Node.js version
-npm --version     # Should show npm version
-
-# Install openapi-diff globally
-npm install -g openapi-diff
-
-# Create virtual environment with specific Python version
+# Install required Python package
+pip install PyYAML
 # Option 1: If python command points to 3.11+
 python -m venv .venv
 
-# Option 2: Use specific Python executable
-py -3.11 -m venv .venv
-
-# Activate virtual environment
-.venv\Scripts\activate
-
-# Verify Python version in virtual environment
-python --version
-
-# Install dependencies
-pip install -r requirements.txt
 ```
 
 ## Usage
 
-## Usage
-
-### Default Workflow (Recommended)
+### Basic Usage
 
 ```bash
-# Complete workflow: normalize + validate in one step
+# Run the equivalency check
 python main.py
-```
-
-This will:
-
-1. **Step 1**: Load and normalize swagger files (replacing descriptions/examples with standardized placeholders)
-2. **Step 2**: Save intermediate files (`tsp-search.json`, `hand-search.json`)
-3. **Step 3**: Run `openapi-diff` comparison and generate report
-
-### Advanced Options
-
-```bash
-# Skip normalization and use existing intermediate files
-python main.py --disable-norm
 
 # Use custom config file
 python main.py --config custom.yaml
 
-# Get help
-python main.py --help
+# Show detailed differences
+python main.py --verbose
+
+# Save canonicalized specs for debugging
+python main.py --save-canonical
+
+# Ignore operationId mismatches
+python main.py --ignore-operation-id
 ```
 
-### Generated Files
+### Configuration
 
-The tool creates several output files:
+Create a `config.yaml` file specifying the file paths:
 
-- `tsp-search.json` - Normalized TypeSpec-compiled swagger
-- `hand-search.json` - Normalized and merged hand-authored swagger files
-- `openapi_diff_report_TIMESTAMP.txt` - Detailed comparison results
+```yaml
+typespec_compiled:
+  path: "../data-plane/Search/preview/2025-11-01-preview/search.json"
+
+hand_authored:
+  searchservice:
+    path: "../data-plane/Azure.Search/preview/2025-11-01-preview/searchservice.json"
+  searchindex:
+    path: "../data-plane/Azure.Search/preview/2025-11-01-preview/searchindex.json"
+  knowledgebase:
+    path: "../data-plane/Azure.Search/preview/2025-11-01-preview/knowledgebase.json"
+  common_types:
+    path: "../../common-types/data-plane/v1/types.json"
+
+output:
+  path: "./.output"
+```
+
+### Output
+
+The tool creates:
+
+- `./.output/comparison_result.json` - Detailed comparison results
+- `./.output/differences_report.txt` - Human-readable differences (if not equivalent)
+- `./.output/hand_authored_canonical.json` - Canonicalized hand-authored spec (if --save-canonical)
+- `./.output/typespec_canonical.json` - Canonicalized TypeSpec spec (if --save-canonical)
 
 ### Benefits of This Approach
 
 - **Industry Standard**: Uses `openapi-diff` for professional API comparison
 - **Spec Compliant**: Maintains OpenAPI spec validity by replacing (not removing) required fields
 - **Debugging Friendly**: Intermediate files can be inspected manually
-- **One Command**: Default workflow handles everything automatically## Files Structure
+### Exit Codes
 
-- `main.py` - Entry point script
-- `validator.py` - SwaggerValidator class
-- `config.yaml` - Configuration file
-- `requirements.txt` - Dependencies
-- `.output/` - Generated CSV reports
+- `0`: Specifications are semantically equivalent
+- `1`: Specifications are NOT equivalent
+- `2`: Configuration or file loading error
+- `3`: Processing error
 
-## Configuration
+## Implementation Details
 
-Edit `config.yaml` to set file paths:
+This tool follows the semantic equivalency contract defined in `equiv_contract.md`. It:
 
-```yaml
-typespec_compiled:
-  path: "../path/to/search.json"
+1. **Merges** three hand-authored Swagger files plus common types into a single specification
+2. **Canonicalizes** both specifications by removing documentation fields and normalizing ordering
+3. **Compares** the canonical specifications for strict semantic equivalency
 
-hand_authored:
-  searchservice:
-    path: "../path/to/searchservice.json"
-  searchindex:
-    path: "../path/to/searchindex.json"
-  knowledgebase:
-    path: "../path/to/knowledgebase.json"
+### Canonicalization Rules
 
-output:
-  path: "./.output"
-```
+According to `equiv_contract.md`, these fields are ignored during comparison:
 
-## Dependencies
+- Documentation fields: `description`, `summary`, `externalDocs`
+- Example fields: `example`, `examples`, `x-ms-examples`
+- Non-behavioral tags
+- Documentation-only vendor extensions: `x-ms-summary`
+- Ordering differences in objects and set-like arrays
 
-- Python 3.11+
-- deepdiff 6.7.1 (deep comparison)
-- PyYAML 6.0.1 (YAML config)
-- colorama 0.4.6 (colored output)
+### Comparison Rules
 
-## Exit Codes
+The comparison checks three dimensions:
 
-- `0`: All swagger files are equivalent
-- `1`: Differences found or validation error
+1. **Paths + HTTP methods**: Path sets and method sets must match exactly
+2. **Operations**: Parameters, request bodies, and responses must match
+3. **Schemas/definitions**: All schema definitions must be equivalent
