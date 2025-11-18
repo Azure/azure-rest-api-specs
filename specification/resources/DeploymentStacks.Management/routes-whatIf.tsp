@@ -47,7 +47,7 @@ interface DeploymentStackWhatIfCommon<TBaseParams extends TypeSpec.Reflection.Mo
   whatIf is ArmResourceActionAsync<
     DeploymentStacksWhatIfResult,
     void,
-    ArmResponse<DeploymentStacksWhatIfResult>,
+    DeploymentStacksWhatIfResult,
     BaseParameters = TBaseParams
   >;
 }
