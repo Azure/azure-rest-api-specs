@@ -519,14 +519,14 @@ model AnalyzeParameters {
 model AnalyzeRequest {
   ...AnalyzeParameters;
 
-  @removed(Versions.v2025_11_01)
-  @doc("The URL of the primary input to analyze.  Only one of url or data should be specified.")
-  url?: url;
+  // @removed(Versions.v2025_11_01)
+  // @doc("The URL of the primary input to analyze.  Only one of url or data should be specified.")
+  // url?: url;
 
-  @removed(Versions.v2025_11_01)
-  @added(Versions.v2025_05_01_preview)
-  @doc("Base64-encoded binary content of the primary input to analyze.  Only one of url or data should be specified.")
-  data?: bytes;
+  // @removed(Versions.v2025_11_01)
+  // @added(Versions.v2025_05_01_preview)
+  // @doc("Base64-encoded binary content of the primary input to analyze.  Only one of url or data should be specified.")
+  // data?: bytes;
 
   @added(Versions.v2025_05_01_preview)
   @doc("Inputs to analyze.  Currently, only pro mode supports multiple inputs.")
