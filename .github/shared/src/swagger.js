@@ -28,6 +28,13 @@ import { embedError } from "./spec-model.js";
  * @property {Object[]} [refs]
  */
 
+const infoSchema = z.object({
+  "x-typespec-generated": z.array(z.object({ emitter: z.string().optional() })).optional(),
+});
+/**
+ * @typedef {import("zod").infer<typeof infoSchema>} InfoObject
+ */
+
 // https://swagger.io/specification/v2/#operation-object
 const operationSchema = z.object({ operationId: z.string().optional() });
 /**
@@ -53,6 +60,7 @@ const pathsSchema = z.record(z.string(), pathSchema);
 
 // https://swagger.io/specification/v2/#swagger-object
 const swaggerSchema = z.object({
+  info: infoSchema.optional(),
   paths: pathsSchema.optional(),
   "x-ms-paths": pathsSchema.optional(),
 });
@@ -100,21 +108,41 @@ export class Swagger {
   /**
    * Content of swagger file, either loaded from `#path` or passed in via `options`.
    *
-   * Reset to `undefined` after `#data` is loaded to save memory.
-   *
    * @type {string | undefined}
    */
   #content;
 
-  // operations: Map of the operations in this swagger, using `operationId` as key
-  /** @type {{operations: Map<string, Operation>, refs: Map<string, Swagger>} | undefined} */
-  #data;
+  /**
+   * Content of swagger file, represented as an untyped JSON object
+   *
+   *  @type {unknown | undefined}
+   */
+  #contentJSON;
+
+  /**
+   * Content of swagger file, represented as a typed object
+   *
+   * @type {SwaggerObject | undefined}
+   * */
+  #contentObject;
 
   /** @type {import('./logger.js').ILogger | undefined} */
   #logger;
 
+  /**
+   * Map of the operations in this swagger, using `operationId` as key
+   *
+   * @type {Map<string, Operation> | undefined}
+   */
+  #operations;
+
   /** @type {string} absolute path */
   #path;
+
+  /**
+   * @type {Map<string, Swagger> | undefined}
+   */
+  #refs;
 
   /** @type {Tag | undefined} Tag that contains this Swagger */
   #tag;
@@ -137,75 +165,57 @@ export class Swagger {
     this.#tag = tag;
   }
 
-  async #getData() {
-    if (!this.#data) {
+  /**
+   * Content of swagger file, either loaded from `#path` or passed in via `options`.
+   *
+   * @returns {Promise<string>}
+   * @throws {SpecModelError}
+   */
+  async #getContent() {
+    if (this.#content === undefined) {
       const path = this.#path;
 
-      const content =
-        this.#content ??
-        (await this.#wrapError(
-          async () => await readFile(path, { encoding: "utf8" }),
-          "Failed to read file for swagger",
-        ));
+      this.#content = await this.#wrapError(
+        async () => await readFile(path, { encoding: "utf8" }),
+        "Failed to read file for swagger",
+      );
+    }
 
-      /** @type {Map<string, Operation>} */
-      const operations = new Map();
+    return this.#content;
+  }
 
-      const swaggerJson = await this.#wrapError(
+  /**
+   * @returns {Promise<unknown>} Content of swagger file, represented as an untyped JSON object
+   * @throws {SpecModelError}
+   */
+  async #getContentJSON() {
+    if (this.#contentJSON === undefined) {
+      const content = await this.#getContent();
+
+      this.#contentJSON = await this.#wrapError(
         () => /** @type {unknown} */ (JSON.parse(content)),
         "Failed to parse JSON for swagger",
       );
-
-      /** @type {SwaggerObject} */
-      const swagger = await this.#wrapError(
-        () => swaggerSchema.parse(swaggerJson),
-        "Failed to parse schema for swagger",
-      );
-
-      // Process regular paths
-      if (swagger.paths) {
-        for (const [path, pathObject] of Object.entries(swagger.paths)) {
-          this.#addOperations(operations, path, pathObject);
-        }
-      }
-
-      // Process x-ms-paths (Azure extension)
-      if (swagger["x-ms-paths"]) {
-        for (const [path, pathObject] of Object.entries(swagger["x-ms-paths"])) {
-          this.#addOperations(operations, path, pathObject);
-        }
-      }
-
-      const schema = await this.#wrapError(
-        async () =>
-          await $RefParser.resolve(this.#path, swaggerJson, {
-            resolve: { file: excludeExamples, http: false },
-          }),
-        "Failed to resolve file for swagger",
-      );
-
-      const refPaths = schema
-        .paths("file")
-        // Exclude ourself
-        .filter((p) => resolve(p) !== resolve(this.#path));
-
-      const refs = new Map(
-        refPaths.map((p) => {
-          const swagger = new Swagger(p, {
-            logger: this.#logger,
-            tag: this.#tag,
-          });
-          return [swagger.path, swagger];
-        }),
-      );
-
-      this.#data = { operations, refs };
-
-      // Clear #content to save memory, since it's no longer needed after #data is loaded
-      this.#content = undefined;
     }
 
-    return this.#data;
+    return this.#contentJSON;
+  }
+
+  /**
+   * @returns {Promise<SwaggerObject>} Content of swagger file, represented as a typed object
+   * @throws {SpecModelError}
+   */
+  async #getContentObject() {
+    if (this.#contentObject === undefined) {
+      const contentJSON = await this.#getContentJSON();
+
+      this.#contentObject = await this.#wrapError(
+        () => swaggerSchema.parse(contentJSON),
+        "Failed to parse schema for swagger",
+      );
+    }
+
+    return this.#contentObject;
   }
 
   /**
@@ -221,7 +231,35 @@ export class Swagger {
   }
 
   async #getRefs() {
-    return (await this.#getData()).refs;
+    if (this.#refs === undefined) {
+      const path = this.#path;
+      const contentJSON = await this.#getContentJSON();
+
+      const schema = await this.#wrapError(
+        async () =>
+          await $RefParser.resolve(path, contentJSON, {
+            resolve: { file: excludeExamples, http: false },
+          }),
+        "Failed to resolve file for swagger",
+      );
+
+      const refPaths = schema
+        .paths("file")
+        // Exclude ourself
+        .filter((p) => resolve(p) !== resolve(this.#path));
+
+      this.#refs = new Map(
+        refPaths.map((p) => {
+          const swagger = new Swagger(p, {
+            logger: this.#logger,
+            tag: this.#tag,
+          });
+          return [swagger.path, swagger];
+        }),
+      );
+    }
+
+    return this.#refs;
   }
 
   /**
@@ -240,7 +278,35 @@ export class Swagger {
    * @returns {Promise<Map<string, Operation>>} Map of the operations in this swagger, using `operationId` as key
    */
   async getOperations() {
-    return (await this.#getData()).operations;
+    if (this.#operations === undefined) {
+      const contentObject = await this.#getContentObject();
+
+      this.#operations = new Map();
+
+      // Process regular paths
+      if (contentObject.paths) {
+        for (const [path, pathObject] of Object.entries(contentObject.paths)) {
+          this.#addOperations(this.#operations, path, pathObject);
+        }
+      }
+
+      // Process x-ms-paths (Azure extension)
+      if (contentObject["x-ms-paths"]) {
+        for (const [path, pathObject] of Object.entries(contentObject["x-ms-paths"])) {
+          this.#addOperations(this.#operations, path, pathObject);
+        }
+      }
+    }
+
+    return this.#operations;
+  }
+
+  /**
+   * @returns {Promise<boolean>} True if the spec was generated from TypeSpec
+   */
+  async getTypeSpecGenerated() {
+    const contentObject = await this.#getContentObject();
+    return contentObject.info?.["x-typespec-generated"] !== undefined;
   }
 
   /**
