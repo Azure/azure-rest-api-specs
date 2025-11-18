@@ -166,3 +166,68 @@ using Microsoft.DevCenter;
   "IdentityType",
   "python,javascript"
 );
+
+// Flatten properties for backward compatibility
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AllowedEnvironmentType.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AttachedNetworkConnection.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Catalog.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(CustomizationTask.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DevBoxDefinition.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DevCenterEncryptionSet.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DevCenter.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(EnvironmentDefinition.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(EnvironmentType.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Gallery.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(HealthCheckStatusDetails.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ImageDefinitionBuild.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ImageDefinition.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Image.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ImageVersion.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(NetworkConnection.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Pool.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ProjectEnvironmentType.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ProjectPolicy.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Project.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Schedule.properties,
+  "autorest"
+);
