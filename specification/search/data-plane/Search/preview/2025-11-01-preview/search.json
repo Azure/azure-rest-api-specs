@@ -6350,7 +6350,38 @@
         "count": {
           "type": "integer",
           "format": "int64",
-          "description": "The approximate count of documents falling within the bucket described by this facet."
+          "description": "The approximate count of documents falling within the bucket described by this facet.",
+          "readOnly": true
+        },
+        "avg": {
+          "type": "number",
+          "format": "double",
+          "description": "The resulting total avg for the facet when a avg metric is requested.",
+          "readOnly": true
+        },
+        "min": {
+          "type": "number",
+          "format": "double",
+          "description": "The resulting total min for the facet when a min metric is requested.",
+          "readOnly": true
+        },
+        "max": {
+          "type": "number",
+          "format": "double",
+          "description": "The resulting total max for the facet when a max metric is requested.",
+          "readOnly": true
+        },
+        "sum": {
+          "type": "number",
+          "format": "double",
+          "description": "The resulting total sum for the facet when a sum metric is requested.",
+          "readOnly": true
+        },
+        "cardinality": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The resulting total cardinality for the facet when a cardinality metric is requested.",
+          "readOnly": true
         },
         "@search.facets": {
           "type": "object",
@@ -6363,12 +6394,6 @@
           },
           "readOnly": true,
           "x-ms-client-name": "facets"
-        },
-        "sum": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The resulting total sum for the facet when a sum metric is requested.",
-          "readOnly": true
         }
       },
       "additionalProperties": {}
@@ -7956,20 +7981,24 @@
       "properties": {
         "key": {
           "type": "string",
-          "description": "The key of a document that was in the indexing request."
+          "description": "The key of a document that was in the indexing request.",
+          "readOnly": true
         },
         "errorMessage": {
           "type": "string",
-          "description": "The error message explaining why the indexing operation failed for the document identified by the key; null if indexing succeeded."
+          "description": "The error message explaining why the indexing operation failed for the document identified by the key; null if indexing succeeded.",
+          "readOnly": true
         },
         "status": {
           "type": "boolean",
-          "description": "A value indicating whether the indexing operation succeeded for the document identified by the key."
+          "description": "A value indicating whether the indexing operation succeeded for the document identified by the key.",
+          "readOnly": true
         },
         "statusCode": {
           "type": "integer",
           "format": "int32",
-          "description": "The status code of the indexing operation. Possible values include: 200 for a successful update or delete, 201 for successful document creation, 400 for a malformed input document, 404 for document not found, 409 for a version conflict, 422 when the index is temporarily unavailable, or 503 for when the service is too busy."
+          "description": "The status code of the indexing operation. Possible values include: 200 for a successful update or delete, 201 for successful document creation, 400 for a malformed input document, 404 for document not found, 409 for a version conflict, 422 when the index is temporarily unavailable, or 503 for when the service is too busy.",
+          "readOnly": true
         }
       },
       "required": [
@@ -15514,7 +15543,7 @@
         },
         "speller": {
           "$ref": "#/definitions/QuerySpellerType",
-          "description": "A value that specified the type of the speller to use to spell-correct individual search query terms."
+          "description": "A value that specifies the type of the speller to use to spell-correct individual search query terms."
         },
         "select": {
           "type": "string",
@@ -15654,11 +15683,8 @@
           "x-ms-client-name": "captions"
         },
         "@search.documentDebugInfo": {
-          "type": "array",
+          "$ref": "#/definitions/DocumentDebugInfo",
           "description": "Contains debugging information that can be used to further explore your search results.",
-          "items": {
-            "$ref": "#/definitions/DocumentDebugInfo"
-          },
           "readOnly": true,
           "x-ms-client-name": "documentDebugInfo"
         }
@@ -18629,7 +18655,7 @@
           {
             "name": "StrictPostFilter",
             "value": "strictPostFilter",
-            "description": "The filter will be applied after the global top-k candidate set of vector results is returned."
+            "description": "The filter will be applied after the global top-k candidate set of vector results is returned. This will result in fewer results than requested by the parameter 'k'."
           }
         ]
       }
@@ -18672,7 +18698,7 @@
         "perDocumentVectorLimit": {
           "type": "integer",
           "format": "int32",
-          "description": "The OData filter expression to apply to this specific vector query. If no filter expression is defined at the vector level, the expression defined in the top level filter parameter is used instead."
+          "description": "Controls how many vectors can be matched from each document in a vector search query. Setting it to 1 ensures at most one vector per document is matched, guaranteeing results come from distinct documents. Setting it to 0 (unlimited) allows multiple relevant vectors from the same document to be matched. Default is 0."
         },
         "kind": {
           "$ref": "#/definitions/VectorQueryKind",
@@ -19054,7 +19080,7 @@
     },
     "VectorThresholdKind": {
       "type": "string",
-      "description": "The kind of vector query being performed.",
+      "description": "The kind of threshold used to filter vector queries.",
       "enum": [
         "vectorSimilarity",
         "searchScore"
@@ -19085,6 +19111,9 @@
           "description": "The base 64 encoded binary of an image to be vectorized to perform a vector search query."
         }
       },
+      "required": [
+        "base64Image"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/VectorQuery"
@@ -19101,6 +19130,9 @@
           "description": "The URL of an image to be vectorized to perform a vector search query."
         }
       },
+      "required": [
+        "url"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/VectorQuery"
