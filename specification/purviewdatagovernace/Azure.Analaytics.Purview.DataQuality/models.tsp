@@ -776,6 +776,18 @@ model BulkRulesResponse {
 }
 
 /**
+ * Response containing array of created rule entities
+ */
+@doc("Bulk rules creation response")
+model CreateBulkRulesResponse {
+  /**
+   * Array of created rule entities with complete configuration and metadata
+   */
+  @doc("Array of created rule entities")
+  value: RuleEntity[];
+}
+
+/**
  * Represents a storage or file location where data assets are physically stored.
  * Supports various storage types including Azure Data Lake, blob storage, and file systems.
  */

@@ -210,13 +210,7 @@ namespace PurviewDataQuality {
 
       @doc("Response containing array of created rule entities")
       @body
-      response: {
-        /**
-         * Array of created rule entities with complete configuration and metadata
-         */
-        @doc("Array of created rule entities")
-        value: RuleEntity[];
-      };
+      response: CreateBulkRulesResponse;
     }
   >;
 
@@ -1075,8 +1069,10 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Multiple path parameters are required for this nested resource operation."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Should mention long running operations for actions"
   @route("/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}:profile")
   @tag("Profiles")
+  @extension("x-ms-long-running-operation", true)
   @doc("Creates or updates the profile for a given data asset within a business domain. Supports polling as a long-running operation.")
   @post
   op profile is RpcOperation<
@@ -1287,7 +1283,7 @@ namespace PurviewDataQuality {
       @statusCode
       statusCode: 201;
 
-      @doc("Succesful Response body")
+      @doc("Successful Response body")
       @body
       body: BulkAssetMetadataRequestResponse;
     }

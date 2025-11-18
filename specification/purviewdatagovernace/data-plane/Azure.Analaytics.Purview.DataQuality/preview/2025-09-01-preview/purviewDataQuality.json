@@ -317,7 +317,8 @@
           "Profile_Create": {
             "$ref": "./examples/Profile_Create.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/bulk-rules": {
@@ -366,19 +367,7 @@
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
-              "type": "object",
-              "properties": {
-                "value": {
-                  "type": "array",
-                  "description": "Array of created rule entities",
-                  "items": {
-                    "$ref": "#/definitions/RuleEntity"
-                  }
-                }
-              },
-              "required": [
-                "value"
-              ]
+              "$ref": "#/definitions/CreateBulkRulesResponse"
             }
           },
           "default": {
@@ -2700,6 +2689,22 @@
           "description": "Column name or identifier"
         }
       }
+    },
+    "CreateBulkRulesResponse": {
+      "type": "object",
+      "description": "Bulk rules creation response",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of created rule entities",
+          "items": {
+            "$ref": "#/definitions/RuleEntity"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "DataQualitySnapshotResponse": {
       "type": "object",
