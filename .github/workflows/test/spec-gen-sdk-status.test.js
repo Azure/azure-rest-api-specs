@@ -1,5 +1,6 @@
 import fs from "fs";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { SdkName } from "../../shared/src/sdk-types.js";
 import { createMockSpecGenSdkArtifactInfo } from "../../shared/test/sdk-types.js";
 import * as artifacts from "../src/artifacts.js";
 import * as github from "../src/github.js";
@@ -35,7 +36,7 @@ describe("spec-gen-sdk-status", () => {
         return Promise.resolve({
           artifactData: JSON.stringify(
             createMockSpecGenSdkArtifactInfo({
-              language: "azure-sdk-for-go",
+              language: SdkName.Go,
               result: "succeeded",
               isSpecGenSdkCheckRequired: true,
             }),
@@ -127,7 +128,7 @@ describe("spec-gen-sdk-status", () => {
     getAzurePipelineArtifactMock.mockResolvedValue({
       artifactData: JSON.stringify(
         createMockSpecGenSdkArtifactInfo({
-          language: "azure-sdk-for-go",
+          language: SdkName.Go,
           result: "succeeded",
           isSpecGenSdkCheckRequired: true,
         }),
@@ -186,7 +187,7 @@ describe("spec-gen-sdk-status", () => {
         return {
           artifactData: JSON.stringify(
             createMockSpecGenSdkArtifactInfo({
-              language: "azure-sdk-for-go",
+              language: SdkName.Go,
               result: "succeeded",
               isSpecGenSdkCheckRequired: true,
             }),
@@ -196,7 +197,7 @@ describe("spec-gen-sdk-status", () => {
         return {
           artifactData: JSON.stringify(
             createMockSpecGenSdkArtifactInfo({
-              language: "azure-sdk-for-java",
+              language: SdkName.Java,
               result: "failed",
               isSpecGenSdkCheckRequired: true,
             }),
@@ -322,7 +323,7 @@ describe("spec-gen-sdk-status", () => {
         return {
           artifactData: JSON.stringify(
             createMockSpecGenSdkArtifactInfo({
-              language: "azure-sdk-for-go",
+              language: SdkName.Go,
               result: "succeeded",
               isSpecGenSdkCheckRequired: true,
             }),
@@ -332,7 +333,7 @@ describe("spec-gen-sdk-status", () => {
         return {
           artifactData: JSON.stringify(
             createMockSpecGenSdkArtifactInfo({
-              language: "azure-sdk-for-java",
+              language: SdkName.Java,
               result: "failed",
               isSpecGenSdkCheckRequired: false, // Not required
             }),
