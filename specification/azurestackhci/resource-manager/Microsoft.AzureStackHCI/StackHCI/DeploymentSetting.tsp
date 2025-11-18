@@ -145,6 +145,11 @@ model DeploymentDataContent {
   cluster?: DeploymentCluster;
 
   /**
+   * Identity Provider for the cluster
+   */
+  identityProvider?: IdentityProvider;
+
+  /**
    * Storage config to deploy AzureStackHCI Cluster.
    */
   storage?: Storage;
@@ -377,6 +382,17 @@ model InfrastructureNetwork {
   ipPools?: IpPools[];
 
   /**
+   * Specifies how DNS servers are configured for the infrastructure network. Allowed values are 'UseDnsServer' to use the provided DNS servers, and 'UseForwarder' to use DNS forwarders.
+   */
+  dnsServerConfig?: DnsServerConfig = DnsServerConfig.UseDnsServer;
+
+  /**
+   * Details of the DNS Zones to be configured.
+   */
+  @identifiers(#["dnsZoneName"])
+  dnsZones?: DnsZones[];
+
+  /**
    * IPv4 address of the DNS servers in your environment.
    */
   dnsServers?: string[];
@@ -385,6 +401,21 @@ model InfrastructureNetwork {
    * Allows customers to use DHCP for Hosts and Cluster IPs. If not declared, the deployment will default to static IPs. When true, GW and DNS servers are not required
    */
   useDhcp?: boolean;
+}
+
+/**
+ * Details of the DNS Zones to be configured.
+ */
+model DnsZones {
+  /**
+   * Name of the DNS Zone to be configured.
+   */
+  dnsZoneName?: string;
+
+  /**
+   * Forwarder details of the DNS Zone to be configured.
+   */
+  dnsForwarder?: string[];
 }
 
 /**

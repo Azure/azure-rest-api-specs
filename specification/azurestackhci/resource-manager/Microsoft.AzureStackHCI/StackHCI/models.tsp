@@ -8,6 +8,23 @@ using Azure.ResourceManager;
 namespace Microsoft.AzureStackHCI;
 
 /**
+ * Specifies how DNS servers are configured for the infrastructure network. Allowed values are 'UseDnsServer' to use the provided DNS servers, and 'UseForwarder' to use DNS forwarders.
+ */
+union DnsServerConfig {
+  string,
+
+  /**
+   * Use the provided DNS servers for the infrastructure network.
+   */
+  UseDnsServer: "UseDnsServer",
+
+  /**
+   * Use DNS forwarders for the infrastructure network.
+   */
+  UseForwarder: "UseForwarder",
+}
+
+/**
  * Aggregate state of Arc agent across the nodes in this HCI cluster.
  */
 union ArcSettingAggregateState {

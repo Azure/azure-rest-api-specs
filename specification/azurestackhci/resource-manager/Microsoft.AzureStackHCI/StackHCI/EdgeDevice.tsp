@@ -14,10 +14,11 @@ namespace Microsoft.AzureStackHCI;
 /**
  * Edge device resource.
  */
-// @extensionResource
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "for backward compatibility, provisioningState is defined in EdgeDeviceProperties"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "for backward compatibility, properties is defined as empty model here"
 @discriminator("kind")
 model EdgeDevice
-  is Azure.ResourceManager.ExtensionResource<EdgeDeviceProperties> {
+  is Azure.ResourceManager.ExtensionResource<{}> {
   ...ResourceNameParameter<
     Resource = EdgeDevice,
     KeyName = "edgeDeviceName",
@@ -129,56 +130,6 @@ model EdgeDevicesAdapterPropertyOverrides {
 }
 
 /**
- * The NIC Detail of a device.
- */
-model NicDetail {
-  /**
-   * Adapter Name of NIC
-   */
-  adapterName?: string;
-
-  /**
-   * Interface Description of NIC
-   */
-  interfaceDescription?: string;
-
-  /**
-   * Component Id of NIC
-   */
-  componentId?: string;
-
-  /**
-   * Driver Version of NIC
-   */
-  driverVersion?: string;
-
-  /**
-   * Subnet Mask of NIC
-   */
-  ip4Address?: string;
-
-  /**
-   * Subnet Mask of NIC
-   */
-  subnetMask?: string;
-
-  /**
-   * Default Gateway of NIC
-   */
-  defaultGateway?: string;
-
-  /**
-   * DNS Servers for NIC
-   */
-  dnsServers?: string[];
-
-  /**
-   * Default Isolation of Management NIC
-   */
-  defaultIsolationId?: string;
-}
-
-/**
  * Edge Device properties
  */
 model EdgeDeviceProperties {
@@ -192,6 +143,22 @@ model EdgeDeviceProperties {
    */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
+}
+
+/**
+ * The device Configuration for edge device.
+ */
+model DeviceConfiguration {
+  /**
+   * NIC Details of device
+   */
+  @identifiers(#["adapterName"])
+  nicDetails?: NicDetail[];
+
+  /**
+   * Device metadata details.
+   */
+  deviceMetadata?: string;
 }
 
 /**
@@ -345,6 +312,56 @@ model HciNetworkProfile {
    */
   @visibility(Lifecycle.Read)
   hostNetwork?: EdgeDevicesHostNetwork;
+}
+
+/**
+ * The NIC Detail of a device.
+ */
+model NicDetail {
+  /**
+   * Adapter Name of NIC
+   */
+  adapterName?: string;
+
+  /**
+   * Interface Description of NIC
+   */
+  interfaceDescription?: string;
+
+  /**
+   * Component Id of NIC
+   */
+  componentId?: string;
+
+  /**
+   * Driver Version of NIC
+   */
+  driverVersion?: string;
+
+  /**
+   * Subnet Mask of NIC
+   */
+  ip4Address?: string;
+
+  /**
+   * Subnet Mask of NIC
+   */
+  subnetMask?: string;
+
+  /**
+   * Default Gateway of NIC
+   */
+  defaultGateway?: string;
+
+  /**
+   * DNS Servers for NIC
+   */
+  dnsServers?: string[];
+
+  /**
+   * Default Isolation of Management NIC
+   */
+  defaultIsolationId?: string;
 }
 
 /**

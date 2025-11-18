@@ -451,21 +451,6 @@ model JobReportedProperties {
   deploymentStatus?: EceActionStatus;
 }
 
-@doc("Device configuration.")
-model DeviceConfiguration {
-  @doc("Network configuration.")
-  network?: NetworkConfiguration;
-
-  @doc("Hostname of the device.")
-  hostName?: string;
-
-  @doc("Web proxy configuration.")
-  webProxy?: WebProxyConfiguration;
-
-  @doc("Time configuration.")
-  time?: TimeConfiguration;
-}
-
 @doc("Network configuration.")
 model NetworkConfiguration {
   @Azure.ResourceManager.identifiers(#[])

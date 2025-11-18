@@ -36,38 +36,24 @@ interface EdgeDeviceJobs {
   /**
    * Get a EdgeDeviceJob
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  get is Azure.ResourceManager.Extension.Read<
-    Azure.ResourceManager.Extension.ScopeParameter,
-    EdgeDeviceJob
-  >;
+  get is ArmResourceRead<EdgeDeviceJob>;
 
   /**
    * Create a EdgeDeviceJob
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  createOrUpdate is Azure.ResourceManager.Extension.CreateOrReplaceAsync<
-    Azure.ResourceManager.Extension.ScopeParameter,
-    EdgeDeviceJob
-  >;
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Follow existing naming for backward compatibility"
+  CreateOrUpdate is ArmResourceCreateOrUpdateAsync<EdgeDeviceJob>;
 
   /**
    * Delete a EdgeDeviceJob
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  delete is Azure.ResourceManager.Extension.DeleteWithoutOkAsync<
-    Azure.ResourceManager.Extension.ScopeParameter,
-    EdgeDeviceJob
-  >;
+  delete is ArmResourceDeleteWithoutOkAsync<EdgeDeviceJob>;
 
   /**
    * List EdgeDeviceJob resources by EdgeDevice
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  listByEdgeDevice is Azure.ResourceManager.Extension.ListByTarget<
-    Azure.ResourceManager.Extension.ScopeParameter,
-    EdgeDeviceJob
-  >;
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Follow existing naming for backward compatibility"
+  listByEdgeDevice is ArmResourceListByParent<EdgeDeviceJob>;
 }
 
 @@doc(EdgeDeviceJob.name, "Name of EdgeDevice Job");

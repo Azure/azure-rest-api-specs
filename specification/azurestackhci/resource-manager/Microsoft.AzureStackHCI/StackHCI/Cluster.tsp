@@ -216,6 +216,12 @@ model ClusterProperties {
   connectivityStatus?: ConnectivityStatus;
 
   /**
+   * Indicates whether the cluster is under support.
+   */
+  @visibility(Lifecycle.Read)
+  supportStatus?: SupportStatus;
+
+  /**
    * Unique, immutable resource id.
    */
   @visibility(Lifecycle.Read)
@@ -359,6 +365,28 @@ model ClusterProperties {
   @visibility(Lifecycle.Read)
   identityProvider?: IdentityProvider;
 
+}
+
+/**
+ * Indicates whether the cluster is under support.
+ */
+union SupportStatus {
+  string,
+
+  /**
+   * The cluster is under support.
+   */
+  InSupport: "InSupport",
+
+  /**
+   * The cluster is out of support.
+   */
+  OutOfSupport: "OutOfSupport",
+
+  /**
+   * The support status is not specified.
+   */
+  NotSpecified: "NotSpecified",
 }
 
 /**

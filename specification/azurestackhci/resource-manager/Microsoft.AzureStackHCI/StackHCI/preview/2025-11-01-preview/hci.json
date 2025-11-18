@@ -310,7 +310,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/{scope}/providers/Microsoft.AzureStackHCI/edgeDevices/{edgeDeviceName}/jobs": {
+    "/{resourceUri}/providers/Microsoft.AzureStackHCI/edgeDevices/{edgeDeviceName}/jobs": {
       "get": {
         "operationId": "EdgeDeviceJobs_ListByEdgeDevice",
         "tags": [
@@ -322,12 +322,7 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "scope",
-            "in": "path",
-            "description": "The fully qualified Azure Resource manager identifier of the resource.",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
           },
           {
             "name": "edgeDeviceName",
@@ -362,7 +357,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.AzureStackHCI/edgeDevices/{edgeDeviceName}/jobs/{jobsName}": {
+    "/{resourceUri}/providers/Microsoft.AzureStackHCI/edgeDevices/{edgeDeviceName}/jobs/{jobsName}": {
       "get": {
         "operationId": "EdgeDeviceJobs_Get",
         "tags": [
@@ -374,12 +369,7 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "scope",
-            "in": "path",
-            "description": "The fully qualified Azure Resource manager identifier of the resource.",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
           },
           {
             "name": "edgeDeviceName",
@@ -429,12 +419,7 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "scope",
-            "in": "path",
-            "description": "The fully qualified Azure Resource manager identifier of the resource.",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
           },
           {
             "name": "edgeDeviceName",
@@ -517,12 +502,7 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "scope",
-            "in": "path",
-            "description": "The fully qualified Azure Resource manager identifier of the resource.",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
           },
           {
             "name": "edgeDeviceName",
@@ -5688,6 +5668,11 @@
           "description": "Overall connectivity status for the cluster resource.",
           "readOnly": true
         },
+        "supportStatus": {
+          "$ref": "#/definitions/SupportStatus",
+          "description": "Indicates whether the cluster is under support.",
+          "readOnly": true
+        },
         "cloudId": {
           "type": "string",
           "description": "Unique, immutable resource id.",
@@ -6379,6 +6364,10 @@
           "$ref": "#/definitions/DeploymentCluster",
           "description": "Observability config to deploy AzureStackHCI Cluster."
         },
+        "identityProvider": {
+          "$ref": "#/definitions/IdentityProvider",
+          "description": "Identity Provider for the cluster"
+        },
         "storage": {
           "$ref": "#/definitions/Storage",
           "description": "Storage config to deploy AzureStackHCI Cluster."
@@ -6978,23 +6967,21 @@
     },
     "DeviceConfiguration": {
       "type": "object",
-      "description": "Device configuration.",
+      "description": "The device Configuration for edge device.",
       "properties": {
-        "network": {
-          "$ref": "#/definitions/NetworkConfiguration",
-          "description": "Network configuration."
+        "nicDetails": {
+          "type": "array",
+          "description": "NIC Details of device",
+          "items": {
+            "$ref": "#/definitions/NicDetail"
+          },
+          "x-ms-identifiers": [
+            "adapterName"
+          ]
         },
-        "hostName": {
+        "deviceMetadata": {
           "type": "string",
-          "description": "Hostname of the device."
-        },
-        "webProxy": {
-          "$ref": "#/definitions/WebProxyConfiguration",
-          "description": "Web proxy configuration."
-        },
-        "time": {
-          "$ref": "#/definitions/TimeConfiguration",
-          "description": "Time configuration."
+          "description": "Device metadata details."
         }
       }
     },
@@ -7149,6 +7136,47 @@
         ]
       }
     },
+    "DnsServerConfig": {
+      "type": "string",
+      "description": "Specifies how DNS servers are configured for the infrastructure network. Allowed values are 'UseDnsServer' to use the provided DNS servers, and 'UseForwarder' to use DNS forwarders.",
+      "enum": [
+        "UseDnsServer",
+        "UseForwarder"
+      ],
+      "x-ms-enum": {
+        "name": "DnsServerConfig",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "UseDnsServer",
+            "value": "UseDnsServer",
+            "description": "Use the provided DNS servers for the infrastructure network."
+          },
+          {
+            "name": "UseForwarder",
+            "value": "UseForwarder",
+            "description": "Use DNS forwarders for the infrastructure network."
+          }
+        ]
+      }
+    },
+    "DnsZones": {
+      "type": "object",
+      "description": "Details of the DNS Zones to be configured.",
+      "properties": {
+        "dnsZoneName": {
+          "type": "string",
+          "description": "Name of the DNS Zone to be configured."
+        },
+        "dnsForwarder": {
+          "type": "array",
+          "description": "Forwarder details of the DNS Zone to be configured.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "EceActionStatus": {
       "type": "object",
       "description": "Validation / deployment status details for Job.",
@@ -7247,7 +7275,7 @@
       "description": "Edge device resource.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/EdgeDeviceProperties",
+          "type": "object",
           "description": "The resource-specific properties for this resource."
         },
         "kind": {
@@ -8842,6 +8870,41 @@
             "$ref": "#/definitions/IpPools"
           },
           "x-ms-identifiers": []
+        },
+        "dnsServerConfig": {
+          "type": "string",
+          "description": "Specifies how DNS servers are configured for the infrastructure network. Allowed values are 'UseDnsServer' to use the provided DNS servers, and 'UseForwarder' to use DNS forwarders.",
+          "default": "UseDnsServer",
+          "enum": [
+            "UseDnsServer",
+            "UseForwarder"
+          ],
+          "x-ms-enum": {
+            "name": "DnsServerConfig",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "UseDnsServer",
+                "value": "UseDnsServer",
+                "description": "Use the provided DNS servers for the infrastructure network."
+              },
+              {
+                "name": "UseForwarder",
+                "value": "UseForwarder",
+                "description": "Use DNS forwarders for the infrastructure network."
+              }
+            ]
+          }
+        },
+        "dnsZones": {
+          "type": "array",
+          "description": "Details of the DNS Zones to be configured.",
+          "items": {
+            "$ref": "#/definitions/DnsZones"
+          },
+          "x-ms-identifiers": [
+            "dnsZoneName"
+          ]
         },
         "dnsServers": {
           "type": "array",
@@ -11705,6 +11768,36 @@
           "description": "By default, this mode is set to Express and your storage is configured as per best practices based on the number of nodes in the cluster. Allowed values are 'Express','InfraOnly', 'KeepStorage'",
           "default": "Express"
         }
+      }
+    },
+    "SupportStatus": {
+      "type": "string",
+      "description": "Indicates whether the cluster is under support.",
+      "enum": [
+        "InSupport",
+        "OutOfSupport",
+        "NotSpecified"
+      ],
+      "x-ms-enum": {
+        "name": "SupportStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "InSupport",
+            "value": "InSupport",
+            "description": "The cluster is under support."
+          },
+          {
+            "name": "OutOfSupport",
+            "value": "OutOfSupport",
+            "description": "The cluster is out of support."
+          },
+          {
+            "name": "NotSpecified",
+            "value": "NotSpecified",
+            "description": "The support status is not specified."
+          }
+        ]
       }
     },
     "SwitchDetail": {
