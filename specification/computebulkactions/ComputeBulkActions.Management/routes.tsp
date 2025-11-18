@@ -40,7 +40,10 @@ interface BulkActions {
 
   @doc("Gets the status of a LaunchBulkInstancesOperation.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ComputeBulkActions/locations/{location}/launchBulkInstancesOperations/{name}/status")
-  getStatus is LaunchBulkInstancesOps.Read<LaunchBulkInstancesOperation>;
+  getStatus is LaunchBulkInstancesOps.Read<
+    Resource = LaunchBulkInstancesOperation,
+    Response = ArmResponse<LaunchBulkInstanceOperationStatusResponse>
+  >;
 
   @doc("List LaunchBulkInstancesOperation resources by resource group.")
   @get

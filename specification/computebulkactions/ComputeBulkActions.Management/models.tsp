@@ -56,6 +56,7 @@ alias LaunchBulkInstancesOps = Azure.ResourceManager.Legacy.RoutedOperations<
   },
   ResourceTypeParameter = ResourceNameParameter<
     LaunchBulkInstancesOperation,
+    NamePattern = "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
     KeyName = "name"
   >,
   ResourceRoute = #{
@@ -315,6 +316,28 @@ model LaunchBulkInstancesOperation
 }
 
 // ------------------ Models --------------- //
+@doc("Response for GetLaunchBulkInstancesOperationStatus.")
+model LaunchBulkInstanceOperationStatusResponse {
+  @doc("The name, as GUID, of the LaunchBulkInstancesOperation.")
+  @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
+  name: string;
+
+  @doc("The provisioningState of the LaunchBulkInstancesOperation.")
+  status: ProvisioningState;
+
+  @doc("Optional errors.")
+  error?: Error;
+}
+
+@doc("Details of error.")
+model Error {
+  @doc("Error code if it exists")
+  errorCode?: string;
+
+  @doc("Error details if they exist")
+  errorDetails?: string;
+}
+
 @doc("List of LaunchBulkInstancesOperation resources.")
 model LaunchBulkInstancesOperationListResult {
   @pageItems

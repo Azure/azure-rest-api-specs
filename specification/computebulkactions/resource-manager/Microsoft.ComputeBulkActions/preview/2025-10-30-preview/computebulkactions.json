@@ -889,7 +889,7 @@
             "description": "The name of the LaunchBulkInstancesOperation",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
           },
           {
             "name": "resource",
@@ -972,7 +972,7 @@
             "description": "The name of the LaunchBulkInstancesOperation",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
           }
         ],
         "responses": {
@@ -1042,7 +1042,7 @@
             "description": "The name of the LaunchBulkInstancesOperation",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
           }
         ],
         "responses": {
@@ -1104,14 +1104,14 @@
             "description": "The name of the LaunchBulkInstancesOperation",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
           }
         ],
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/LaunchBulkInstancesOperation"
+              "$ref": "#/definitions/LaunchBulkInstanceOperationStatusResponse"
             }
           },
           "default": {
@@ -1119,11 +1119,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "BulkActions_GetStatus": {
-            "$ref": "./examples/BulkActions_GetStatus_MaximumSet_Gen.json"
           }
         }
       }
@@ -2110,6 +2105,20 @@
         }
       }
     },
+    "Error": {
+      "type": "object",
+      "description": "Details of error.",
+      "properties": {
+        "errorCode": {
+          "type": "string",
+          "description": "Error code if it exists"
+        },
+        "errorDetails": {
+          "type": "string",
+          "description": "Error details if they exist"
+        }
+      }
+    },
     "EventGridAndResourceGraph": {
       "type": "object",
       "description": "Specifies eventGridAndResourceGraph related Scheduled Event related configurations.",
@@ -2536,6 +2545,29 @@
       "required": [
         "secretUrl",
         "sourceVault"
+      ]
+    },
+    "LaunchBulkInstanceOperationStatusResponse": {
+      "type": "object",
+      "description": "Response for GetLaunchBulkInstancesOperationStatus.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name, as GUID, of the LaunchBulkInstancesOperation.",
+          "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+        },
+        "status": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioningState of the LaunchBulkInstancesOperation."
+        },
+        "error": {
+          "$ref": "#/definitions/Error",
+          "description": "Optional errors."
+        }
+      },
+      "required": [
+        "name",
+        "status"
       ]
     },
     "LaunchBulkInstancesOperation": {
