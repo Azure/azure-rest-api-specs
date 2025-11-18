@@ -16,6 +16,7 @@ namespace Microsoft.DataBoxEdge;
 /**
  * Role Addon
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy DiscriminatedProxyResource for back compatibility"
 @discriminator("kind")
 @parentResource(Role)
 model Addon
