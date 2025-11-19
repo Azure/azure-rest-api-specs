@@ -4934,6 +4934,52 @@
         "modelAsString": true
       }
     },
+    "RecordingStateChanged": {
+      "type": "object",
+      "properties": {
+        "recordingId": {
+          "description": "The call recording id",
+          "type": "string",
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "#/definitions/RecordingState"
+        },
+        "startDateTime": {
+          "format": "date-time",
+          "description": "The time of the recording started",
+          "type": "string",
+          "readOnly": true
+        },
+        "recordingKind": {
+          "$ref": "#/definitions/RecordingKind"
+        },
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation"
+        },
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "additionalProperties": false
+    },
     "RecordingStateResponse": {
       "type": "object",
       "properties": {
