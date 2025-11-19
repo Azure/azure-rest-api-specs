@@ -18,7 +18,8 @@ model Employee is TrackedResource<EmployeeProperties> {
 /** Employee properties */
 model EmployeeProperties {
   /** Age of employee */
-  age?: int32;
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" ""
+  age?: unknown;
 
   /** City of employee */
   city?: string;
