@@ -12,9 +12,138 @@ import os
 import yaml
 import json
 import copy
+import pandas as pd
 from typing import Dict, Any, List, Tuple
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
+from datetime import datetime
+
+
+# Global merge log to track smart merging operations
+merge_log: List[Dict[str, Any]] = []
+
+
+def log_merge_operation(operation_type: str, context: str, details: Dict[str, Any]) -> None:
+    """Log a merge operation for later output to merge.log"""
+    global merge_log
+    merge_log.append({
+        'timestamp': datetime.now().isoformat(),
+        'operation_type': operation_type,
+        'context': context,
+        'details': details
+    })
+
+
+def write_merge_log(output_path: str) -> None:
+    """Write merge log to file"""
+    global merge_log
+    if not merge_log:
+        return
+
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    log_file = Path(output_path) / f"merge_{timestamp}.log"
+    log_file.parent.mkdir(parents=True, exist_ok=True)
+
+    with open(log_file, 'w', encoding='utf-8') as f:
+        f.write("# Swagger Merge Operations Log\n")
+        f.write(f"# Generated on {datetime.now().isoformat()}\n\n")
+
+        for entry in merge_log:
+            f.write(f"[{entry['timestamp']}] {entry['operation_type']}: {entry['context']}\n")
+            if entry['details']:
+                for key, value in entry['details'].items():
+                    f.write(f"  {key}: {value}\n")
+            f.write("\n")
+
+
+def write_differences_excel(differences: List[Dict[str, Any]], output_path: str) -> None:
+    """Write differences to Excel file with categorized sheets"""
+    if not differences:
+        return
+
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    excel_file = Path(output_path) / f"diff_{timestamp}.xlsx"
+    excel_file.parent.mkdir(parents=True, exist_ok=True)
+
+    # Categorize differences
+    categories = {
+        'Paths': [],
+        'Parameters': [],
+        'Responses': [],
+        'Definitions': [],
+        'Operations': [],
+        'Other': []
+    }
+
+    for diff in differences:
+        description = diff.get('description', '').lower()
+        category = 'Other'  # default
+
+        if 'path' in description and ('missing' in description or 'extra' in description):
+            category = 'Paths'
+        elif 'parameter' in description or 'param:' in description:
+            category = 'Parameters'
+        elif 'response' in description:
+            category = 'Responses'
+        elif 'definition:' in description:
+            category = 'Definitions'
+        elif 'operation' in description:
+            category = 'Operations'
+
+        categories[category].append(diff)
+
+    # Create Excel writer
+    with pd.ExcelWriter(excel_file, engine='openpyxl') as writer:
+        # Summary sheet
+        summary_data = []
+        for category, items in categories.items():
+            summary_data.append({
+                'Category': category,
+                'Count': len(items),
+                'Percentage': f"{len(items)/len(differences)*100:.1f}%" if differences else "0%"
+            })
+
+        summary_df = pd.DataFrame(summary_data)
+        summary_df.to_excel(writer, sheet_name='Summary', index=False)
+
+        # Individual category sheets
+        for category, items in categories.items():
+            if not items:
+                continue
+
+            df_data = []
+            for item in items:
+                df_data.append({
+                    'Path': item.get('path', ''),
+                    'Method': item.get('method', ''),
+                    'Operation ID': item.get('operation_id', ''),
+                    'Parameter': item.get('parameter', ''),
+                    'Response': item.get('response', ''),
+                    'Source': item.get('source', ''),
+                    'Description': item.get('description', ''),
+                    'Details': item.get('details', '')
+                })
+
+            df = pd.DataFrame(df_data)
+            df.to_excel(writer, sheet_name=category, index=False)
+
+        # All differences sheet
+        all_data = []
+        for i, diff in enumerate(differences, 1):
+            all_data.append({
+                'ID': i,
+                'Path': diff.get('path', ''),
+                'Method': diff.get('method', ''),
+                'Operation ID': diff.get('operation_id', ''),
+                'Parameter': diff.get('parameter', ''),
+                'Response': diff.get('response', ''),
+                'Source': diff.get('source', ''),
+                'Description': diff.get('description', ''),
+                'Details': diff.get('details', '')
+            })
+
+        all_df = pd.DataFrame(all_data)
+        all_df.to_excel(writer, sheet_name='All Differences', index=False)
 
 
 # Configuration classes and functions (from config.py)
@@ -435,13 +564,29 @@ def _smart_merge_parameters(existing: Dict[str, Any], new: Dict[str, Any], conte
 
     # Add all properties from new, keeping track of what we're adding
     added_properties = []
+    modified_properties = []
+
     for key, value in new.items():
         if key not in merged:
             merged[key] = value
             added_properties.append(key)
         elif merged[key] != value:
             # For conflicts in non-core fields, prefer the new value
+            old_value = merged[key]
             merged[key] = value
+            modified_properties.append(f"{key}: {old_value} -> {value}")
+
+    # Log the merge operation
+    log_merge_operation(
+        operation_type="Smart Parameter Merge",
+        context=context,
+        details={
+            "added_properties": added_properties,
+            "modified_properties": modified_properties,
+            "parameter_name": existing.get('name', 'unknown'),
+            "merged_properties_count": len(merged)
+        }
+    )
 
     print(f"ℹ️  Smart merged {context}: Added properties {added_properties}")
     return merged

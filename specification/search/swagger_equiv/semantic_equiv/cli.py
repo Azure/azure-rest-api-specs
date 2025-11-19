@@ -27,6 +27,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 from utils import load_config, validate_paths, ConfigError
 from utils import load_and_validate_all_files, LoaderError
 from utils import merge_hand_authored_specs, validate_merged_swagger, MergeError
+from utils import write_merge_log, write_differences_excel
 from canonicalize import canonicalize_both_specs, CanonicalizationError
 from compare import compare_swagger_specs, EquivalencyResult
 
@@ -46,23 +47,84 @@ def save_artifacts(config, result: EquivalencyResult,
     output_dir = Path(config.output_path)
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    # Save comparison result
-    result_file = output_dir / "comparison_result.json"
-    result_data = {
-        "equivalent": result.equivalent,
-        "difference_count": result.difference_count,
-        "differences": [
-            {
-                "type": diff.type.value,
-                "message": diff.message,
-                "context": diff.context
-            }
-            for diff in result.differences
-        ]
-    }
+    # Write merge log
+    write_merge_log(config.output_path)
 
-    with open(result_file, 'w', encoding='utf-8') as f:
-        json.dump(result_data, f, indent=2)
+    # Convert differences to structured format for Excel output
+    if not result.equivalent:
+        structured_differences = []
+        for i, diff in enumerate(result.differences, 1):
+            # Extract details from the difference description
+            description = str(diff)
+
+            # Parse path, method, parameter info from description
+            path = ""
+            method = ""
+            operation_id = ""
+            parameter = ""
+            response = ""
+            source = ""
+
+            # Extract path information
+            if "[/" in description:
+                path_part = description.split("[/")[1].split("]")[0] if "]" in description else ""
+                path = "/" + path_part if path_part else ""
+
+            # Extract method from path
+            if " " in path and path.count(" ") > 0:
+                parts = path.split(" ")
+                if len(parts) >= 2:
+                    path = parts[0]
+                    method = parts[1] if parts[1].upper() in ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'HEAD', 'OPTIONS'] else ""
+
+            # Extract parameter info
+            if "param:" in description:
+                parameter = description.split("param:")[1].split("]")[0] if "]" in description.split("param:")[1] else ""
+            elif "Parameter" in description:
+                parameter_parts = description.split("Parameter")
+                if len(parameter_parts) > 1:
+                    parameter = parameter_parts[1].split(":")[0].strip()
+
+            # Extract response info
+            if "Response" in description or "response" in description:
+                response_parts = [part for part in description.split() if "response" in part.lower()]
+                if response_parts:
+                    response = response_parts[0]
+
+            # Extract operation ID
+            if "Operation ID" in description:
+                op_parts = description.split("Operation ID")[1].split(":") if ":" in description.split("Operation ID")[1] else []
+                if len(op_parts) > 1:
+                    operation_id = op_parts[1].split("vs")[0].strip().strip("'\"")
+
+            # Determine source
+            if "definition:" in description:
+                source = "Definition"
+            elif "Path missing" in description or "Extra path" in description:
+                source = "Path"
+            elif "Parameter" in description:
+                source = "Parameter"
+            elif "Response" in description:
+                source = "Response"
+            elif "Operation" in description:
+                source = "Operation"
+            else:
+                source = "Other"
+
+            structured_differences.append({
+                'id': i,
+                'path': path,
+                'method': method,
+                'operation_id': operation_id,
+                'parameter': parameter,
+                'response': response,
+                'source': source,
+                'description': description,
+                'details': str(diff.details) if hasattr(diff, 'details') else ""
+            })
+
+        # Write Excel file
+        write_differences_excel(structured_differences, config.output_path)
 
     # Save canonicalized specs if provided
     if hand_authored_canonical:
@@ -75,36 +137,13 @@ def save_artifacts(config, result: EquivalencyResult,
         with open(canonical_typespec_file, 'w', encoding='utf-8') as f:
             json.dump(typespec_canonical, f, indent=2)
 
-    # Save detailed diff report if not equivalent
-    if not result.equivalent:
-        diff_file = output_dir / "differences_report.txt"
-        with open(diff_file, 'w', encoding='utf-8') as f:
-            f.write("Swagger Equivalency Check - Differences Report\\n")
-            f.write("=" * 50 + "\\n\\n")
-            f.write(f"Total differences found: {result.difference_count}\\n\\n")
-
-            # Group differences by type
-            by_type = {}
-            for diff in result.differences:
-                diff_type = diff.type.value
-                if diff_type not in by_type:
-                    by_type[diff_type] = []
-                by_type[diff_type].append(diff)
-
-            for diff_type, diffs in sorted(by_type.items()):
-                f.write(f"{diff_type.upper()} ({len(diffs)} occurrences):\\n")
-                f.write("-" * 40 + "\\n")
-                for diff in diffs:
-                    f.write(f"  {diff}\\n")
-                f.write("\\n")
-
 
 def print_result_summary(result: EquivalencyResult, verbose: bool = False) -> None:
     """Print comparison result summary to stdout."""
     if result.equivalent:
-        print("✅ SUCCESS: Specifications are semantically equivalent")
+        print("✅ Specifications are semantically equivalent")
     else:
-        print("❌ FAILURE: Specifications are NOT semantically equivalent")
+        print("❌ Specifications are NOT semantically equivalent")
         print(f"Found {result.difference_count} differences")
 
         if verbose:
