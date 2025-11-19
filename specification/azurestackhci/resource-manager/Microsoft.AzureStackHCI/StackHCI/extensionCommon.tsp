@@ -193,7 +193,7 @@ model ExtensionInstanceViewStatus {
 }
 
 /**
- * Aggregate state of Arc Extensions across the nodes in this HCI cluster.
+ * Aggregate state of Arc Extensions across the nodes in the Parent Entity(HCI Cluster/Edge Machine).
  */
 union ExtensionAggregateState {
   string,

@@ -310,7 +310,7 @@ model HciNetworkProfile {
    * HostNetwork config to deploy AzureStackHCI Cluster.
    */
   @visibility(Lifecycle.Read)
-  hostNetwork?: DeviceHostNetwork;
+  hostNetwork?: EdgeDeviceHostNetwork;
 }
 
 /**
@@ -514,7 +514,7 @@ model SwitchExtension {
 /**
  * The HostNetwork of a cluster.
  */
-model DeviceHostNetwork {
+model EdgeDeviceHostNetwork {
   /**
    * The network intents assigned to the network reference pattern used for the deployment. Each intent will define its own name, traffic type, adapter names, and overrides as recommended by your OEM.
    */

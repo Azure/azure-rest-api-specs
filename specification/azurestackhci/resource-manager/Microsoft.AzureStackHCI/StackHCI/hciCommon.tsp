@@ -210,53 +210,6 @@ model Step {
   exception?: string[];
 }
 
-@doc("The HostNetwork of a cluster.")
-model DeploymentHostNetwork {
-  @doc("The network intents assigned to the network reference pattern used for the deployment. Each intent will define its own name, traffic type, adapter names, and overrides as recommended by your OEM.")
-  @identifiers(#["name"])
-  intents?: DeploymentIntents[];
-
-  @doc("List of StorageNetworks config to deploy AzureStackHCI Cluster.")
-  @identifiers(#["name"])
-  storageNetworks?: DeploymentStorageNetworks[];
-
-  @doc("Defines how the storage adapters between nodes are connected either switch or switch less..")
-  storageConnectivitySwitchless?: boolean;
-
-  @doc("Optional parameter required only for 3 Nodes switchless deployments. This allows users to specify IPs and Mask for Storage NICs when Network ATC is not assigning the IPs for storage automatically.")
-  enableStorageAutoIp?: boolean;
-}
-
-@doc("The Intents of a cluster.")
-model DeploymentIntents {
-  @doc("Name of the network intent you wish to create.")
-  name?: string;
-
-  @doc("List of network traffic types. Only allowed values are 'Compute', 'Storage', 'Management'.")
-  trafficType?: string[];
-
-  @doc("Array of network interfaces used for the network intent.")
-  adapter?: string[];
-
-  @doc("This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.")
-  overrideVirtualSwitchConfiguration?: boolean;
-
-  @doc("Set virtualSwitch ConfigurationOverrides for cluster.")
-  virtualSwitchConfigurationOverrides?: DeploymentVirtualSwitchConfigurationOverrides;
-
-  @doc("This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.")
-  overrideQosPolicy?: boolean;
-
-  @doc("Set QoS PolicyOverrides for cluster.")
-  qosPolicyOverrides?: QosPolicyOverrides;
-
-  @doc("This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.")
-  overrideAdapterProperty?: boolean;
-
-  @doc("Set Adapter PropertyOverrides for cluster.")
-  adapterPropertyOverrides?: DeploymentAdapterPropertyOverrides;
-}
-
 @doc("Local Availability Zone information for HCI cluster")
 model LocalAvailabilityZones {
   @doc("Local Availability Zone name for HCI cluster")
@@ -267,15 +220,6 @@ model LocalAvailabilityZones {
 
   @doc("Nodes belonging to a particular zone")
   nodes?: string[];
-}
-
-@doc("The VirtualSwitchConfigurationOverrides of a cluster.")
-model DeploymentVirtualSwitchConfigurationOverrides {
-  @doc("Enable IoV for Virtual Switch")
-  enableIov?: string;
-
-  @doc("Load Balancing Algorithm for Virtual Switch")
-  loadBalancingAlgorithm?: string;
 }
 
 @doc("The QoSPolicyOverrides of a cluster.")
@@ -291,48 +235,6 @@ model QosPolicyOverrides {
   #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @doc("This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.")
   bandwidthPercentage_SMB?: string;
-}
-
-@doc("The network adapter properties to override during deployment of a cluster.")
-model DeploymentAdapterPropertyOverrides {
-  @doc("This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.")
-  jumboPacket?: string;
-
-  @doc("This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.")
-  networkDirect?: string;
-
-  @doc("This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation. Expected values are 'iWARP', 'RoCEv2', 'RoCE'")
-  networkDirectTechnology?: string;
-}
-
-@doc("The StorageNetworks of a cluster.")
-model DeploymentStorageNetworks {
-  @doc("Name of the storage network.")
-  name?: string;
-
-  @doc("Name of the storage network adapter.")
-  networkAdapterName?: string;
-
-  @doc("ID specified for the VLAN storage network. This setting is applied to the network interfaces that route the storage and VM migration traffic.")
-  vlanId?: string;
-
-  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
-  @doc("List of Storage adapter physical nodes config to deploy AzureStackHCI Cluster.")
-  @Azure.ResourceManager.identifiers(#["physicalNode"])
-  storageAdapterIPInfo?: DeploymentStorageAdapterIPInfo[];
-}
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
-@doc("The storage network adapter info.")
-model DeploymentStorageAdapterIPInfo {
-  @doc("physical node name.")
-  physicalNode?: string;
-
-  @doc("The IPv4 address assigned to network adapter used for storage.")
-  ipv4Address?: string;
-
-  @doc("The SubnetMask address assigned to network adapter used for storage.")
-  subnetMask?: string;
 }
 
 @doc("Edge device type based on host OS installed.")
@@ -442,15 +344,6 @@ union IpAssignmentType {
 
   @doc("Manual IP assignment")
   Manual: "Manual",
-}
-
-@doc("IP address range configuration.")
-model IpAddressRange {
-  @doc("Start IP address.")
-  startIp: string;
-
-  @doc("End IP address.")
-  endIp: string;
 }
 
 @doc("Represents the provisioning operating system type.")

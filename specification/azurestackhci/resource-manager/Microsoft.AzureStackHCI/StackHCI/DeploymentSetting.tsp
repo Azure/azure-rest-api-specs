@@ -180,7 +180,7 @@ model DeploymentData {
   /**
    * HostNetwork config to deploy AzureStackHCI Cluster.
    */
-  hostNetwork?: DeploymentSettingsHostNetwork;
+  hostNetwork?: DeploymentHostNetwork;
 
   /**
    * Cloud Environment of the cluster. (e.g. AzurePublic, ALDO )
@@ -449,36 +449,9 @@ model PhysicalNodes {
 }
 
 /**
- * The HostNetwork of a cluster.
- */
-model DeploymentSettingsHostNetwork {
-  /**
-   * The network intents assigned to the network reference pattern used for the deployment. Each intent will define its own name, traffic type, adapter names, and overrides as recommended by your OEM.
-   */
-  @identifiers(#["name"])
-  intents?: Intents[];
-
-  /**
-   * List of StorageNetworks config to deploy AzureStackHCI Cluster.
-   */
-  @identifiers(#["name"])
-  storageNetworks?: StorageNetworks[];
-
-  /**
-   * Defines how the storage adapters between nodes are connected either switch or switch less..
-   */
-  storageConnectivitySwitchless?: boolean;
-
-  /**
-   * Optional parameter required only for 3 Nodes Switchless deployments. This allows users to specify IPs and Mask for Storage NICs when Network ATC is not assigning the IPs for storage automatically.
-   */
-  enableStorageAutoIp?: boolean;
-}
-
-/**
  * The Intents of a cluster.
  */
-model Intents {
+model DeploymentIntents {
   /**
    * Name of the network intent you wish to create.
    */
@@ -502,7 +475,7 @@ model Intents {
   /**
    * Set virtualSwitch ConfigurationOverrides for cluster.
    */
-  virtualSwitchConfigurationOverrides?: VirtualSwitchConfigurationOverrides;
+  virtualSwitchConfigurationOverrides?: DeploymentVirtualSwitchConfigurationOverrides;
 
   /**
    * This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.
@@ -522,13 +495,40 @@ model Intents {
   /**
    * Set Adapter PropertyOverrides for cluster.
    */
-  adapterPropertyOverrides?: DeploymentSettingsAdapterPropertyOverrides;
+  adapterPropertyOverrides?: DeploymentAdapterPropertyOverrides;
+}
+
+/**
+ * The HostNetwork of a cluster.
+ */
+model DeploymentHostNetwork {
+  /**
+   * The network intents assigned to the network reference pattern used for the deployment. Each intent will define its own name, traffic type, adapter names, and overrides as recommended by your OEM.
+   */
+  @identifiers(#["name"])
+  intents?: DeploymentIntents[];
+
+  /**
+   * List of StorageNetworks config to deploy AzureStackHCI Cluster.
+   */
+  @identifiers(#["name"])
+  storageNetworks?: DeploymentStorageNetworks[];
+
+  /**
+   * Defines how the storage adapters between nodes are connected either switch or switch less..
+   */
+  storageConnectivitySwitchless?: boolean;
+
+  /**
+   * Optional parameter required only for 3 Nodes Switchless deployments. This allows users to specify IPs and Mask for Storage NICs when Network ATC is not assigning the IPs for storage automatically.
+   */
+  enableStorageAutoIp?: boolean;
 }
 
 /**
  * The VirtualSwitchConfigurationOverrides of a cluster.
  */
-model VirtualSwitchConfigurationOverrides {
+model DeploymentVirtualSwitchConfigurationOverrides {
   /**
    * Enable IoV for Virtual Switch
    */
@@ -544,7 +544,7 @@ model VirtualSwitchConfigurationOverrides {
  * The AdapterPropertyOverrides of a cluster.
  */
 @clientName("AdapterPropertyOverrides")
-model DeploymentSettingsAdapterPropertyOverrides {
+model DeploymentAdapterPropertyOverrides {
   /**
    * This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.
    */
@@ -564,7 +564,7 @@ model DeploymentSettingsAdapterPropertyOverrides {
 /**
  * The StorageNetworks of a cluster.
  */
-model StorageNetworks {
+model DeploymentStorageNetworks {
   /**
    * Name of the storage network.
    */

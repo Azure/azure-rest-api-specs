@@ -91,7 +91,7 @@
       "name": "Updates"
     },
     {
-      "name": "UpdateSummariesOperationGroup"
+      "name": "UpdateSummaries"
     },
     {
       "name": "ValidatedSolutionRecipes"
@@ -3792,9 +3792,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/updateSummaries": {
       "get": {
-        "operationId": "UpdateSummariesOperationGroup_List",
+        "operationId": "UpdateSummaries_List",
         "tags": [
-          "UpdateSummariesOperationGroup"
+          "UpdateSummaries"
         ],
         "description": "List all Update summaries under the HCI cluster",
         "parameters": [
@@ -3829,6 +3829,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Get Update summaries under cluster resource": {
+            "$ref": "./examples/ListUpdateSummaries.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -3836,9 +3841,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/updateSummaries/default": {
       "get": {
-        "operationId": "UpdateSummariesOperationGroup_Get",
+        "operationId": "UpdateSummaries_Get",
         "tags": [
-          "UpdateSummariesOperationGroup"
+          "UpdateSummaries"
         ],
         "description": "Get all Update summaries under the HCI cluster",
         "parameters": [
@@ -3872,12 +3877,17 @@
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get Update summaries under cluster resource": {
+            "$ref": "./examples/GetUpdateSummaries.json"
+          }
         }
       },
       "put": {
-        "operationId": "UpdateSummariesOperationGroup_Put",
+        "operationId": "UpdateSummaries_Put",
         "tags": [
-          "UpdateSummariesOperationGroup"
+          "UpdateSummaries"
         ],
         "description": "Put Update summaries under the HCI cluster",
         "parameters": [
@@ -3909,7 +3919,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'UpdateSummaries' update operation succeeded",
+            "description": "Resource 'UpdateSummariesResource' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/UpdateSummaries"
             }
@@ -3920,12 +3930,17 @@
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Put Update summaries under cluster resource": {
+            "$ref": "./examples/PutUpdateSummaries.json"
+          }
         }
       },
       "delete": {
-        "operationId": "UpdateSummariesOperationGroup_Delete",
+        "operationId": "UpdateSummaries_Delete",
         "tags": [
-          "UpdateSummariesOperationGroup"
+          "UpdateSummaries"
         ],
         "description": "Delete Update Summaries",
         "parameters": [
@@ -3976,6 +3991,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Delete an Update": {
+            "$ref": "./examples/DeleteUpdateSummaries.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -5895,24 +5915,6 @@
         }
       }
     },
-    "DeploymentAdapterPropertyOverrides": {
-      "type": "object",
-      "description": "The network adapter properties to override during deployment of a cluster.",
-      "properties": {
-        "jumboPacket": {
-          "type": "string",
-          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation."
-        },
-        "networkDirect": {
-          "type": "string",
-          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation."
-        },
-        "networkDirectTechnology": {
-          "type": "string",
-          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation. Expected values are 'iWARP', 'RoCEv2', 'RoCE'"
-        }
-      }
-    },
     "DeploymentCluster": {
       "type": "object",
       "description": "AzureStackHCI Cluster deployment properties.",
@@ -6052,7 +6054,7 @@
           ]
         },
         "hostNetwork": {
-          "$ref": "#/definitions/DeploymentSettingsHostNetwork",
+          "$ref": "#/definitions/DeploymentHostNetwork",
           "description": "HostNetwork config to deploy AzureStackHCI Cluster."
         },
         "cloudEnvironment": {
@@ -6135,7 +6137,7 @@
         },
         "enableStorageAutoIp": {
           "type": "boolean",
-          "description": "Optional parameter required only for 3 Nodes switchless deployments. This allows users to specify IPs and Mask for Storage NICs when Network ATC is not assigning the IPs for storage automatically."
+          "description": "Optional parameter required only for 3 Nodes Switchless deployments. This allows users to specify IPs and Mask for Storage NICs when Network ATC is not assigning the IPs for storage automatically."
         }
       }
     },
@@ -6182,7 +6184,7 @@
           "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation."
         },
         "adapterPropertyOverrides": {
-          "$ref": "#/definitions/DeploymentAdapterPropertyOverrides",
+          "$ref": "#/definitions/AdapterPropertyOverrides",
           "description": "Set Adapter PropertyOverrides for cluster."
         }
       }
@@ -6301,40 +6303,6 @@
         "value"
       ]
     },
-    "DeploymentSettingsHostNetwork": {
-      "type": "object",
-      "description": "The HostNetwork of a cluster.",
-      "properties": {
-        "intents": {
-          "type": "array",
-          "description": "The network intents assigned to the network reference pattern used for the deployment. Each intent will define its own name, traffic type, adapter names, and overrides as recommended by your OEM.",
-          "items": {
-            "$ref": "#/definitions/Intents"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
-        },
-        "storageNetworks": {
-          "type": "array",
-          "description": "List of StorageNetworks config to deploy AzureStackHCI Cluster.",
-          "items": {
-            "$ref": "#/definitions/StorageNetworks"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
-        },
-        "storageConnectivitySwitchless": {
-          "type": "boolean",
-          "description": "Defines how the storage adapters between nodes are connected either switch or switch less.."
-        },
-        "enableStorageAutoIp": {
-          "type": "boolean",
-          "description": "Optional parameter required only for 3 Nodes Switchless deployments. This allows users to specify IPs and Mask for Storage NICs when Network ATC is not assigning the IPs for storage automatically."
-        }
-      }
-    },
     "DeploymentSettingsProperties": {
       "type": "object",
       "description": "DeploymentSetting properties",
@@ -6449,24 +6417,6 @@
         }
       }
     },
-    "DeploymentStorageAdapterIPInfo": {
-      "type": "object",
-      "description": "The storage network adapter info.",
-      "properties": {
-        "physicalNode": {
-          "type": "string",
-          "description": "physical node name."
-        },
-        "ipv4Address": {
-          "type": "string",
-          "description": "The IPv4 address assigned to network adapter used for storage."
-        },
-        "subnetMask": {
-          "type": "string",
-          "description": "The SubnetMask address assigned to network adapter used for storage."
-        }
-      }
-    },
     "DeploymentStorageNetworks": {
       "type": "object",
       "description": "The StorageNetworks of a cluster.",
@@ -6487,7 +6437,7 @@
           "type": "array",
           "description": "List of Storage adapter physical nodes config to deploy AzureStackHCI Cluster.",
           "items": {
-            "$ref": "#/definitions/DeploymentStorageAdapterIPInfo"
+            "$ref": "#/definitions/StorageAdapterIPInfo"
           },
           "x-ms-identifiers": [
             "physicalNode"
@@ -6526,44 +6476,6 @@
         "deviceMetadata": {
           "type": "string",
           "description": "Device metadata details."
-        }
-      }
-    },
-    "DeviceHostNetwork": {
-      "type": "object",
-      "description": "The HostNetwork of a cluster.",
-      "properties": {
-        "intents": {
-          "type": "array",
-          "description": "The network intents assigned to the network reference pattern used for the deployment. Each intent will define its own name, traffic type, adapter names, and overrides as recommended by your OEM.",
-          "items": {
-            "$ref": "#/definitions/EdgeDevicesIntents"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "intentName"
-          ]
-        },
-        "storageNetworks": {
-          "type": "array",
-          "description": "List of StorageNetworks config to deploy AzureStackHCI Cluster.",
-          "items": {
-            "$ref": "#/definitions/EdgeDevicesStorageNetworks"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "networkAdapterName"
-          ]
-        },
-        "storageConnectivitySwitchless": {
-          "type": "boolean",
-          "description": "Defines how the storage adapters between nodes are connected either switch or switch less.",
-          "readOnly": true
-        },
-        "enableStorageAutoIp": {
-          "type": "boolean",
-          "description": "Optional parameter required only for 3 Nodes Switchless deployments. This allows users to specify IPs and Mask for Storage NICs when Network ATC is not assigning the IPs for storage automatically.",
-          "readOnly": true
         }
       }
     },
@@ -6894,6 +6806,44 @@
         }
       ]
     },
+    "EdgeDeviceHostNetwork": {
+      "type": "object",
+      "description": "The HostNetwork of a cluster.",
+      "properties": {
+        "intents": {
+          "type": "array",
+          "description": "The network intents assigned to the network reference pattern used for the deployment. Each intent will define its own name, traffic type, adapter names, and overrides as recommended by your OEM.",
+          "items": {
+            "$ref": "#/definitions/EdgeDevicesIntents"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "intentName"
+          ]
+        },
+        "storageNetworks": {
+          "type": "array",
+          "description": "List of StorageNetworks config to deploy AzureStackHCI Cluster.",
+          "items": {
+            "$ref": "#/definitions/EdgeDevicesStorageNetworks"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "networkAdapterName"
+          ]
+        },
+        "storageConnectivitySwitchless": {
+          "type": "boolean",
+          "description": "Defines how the storage adapters between nodes are connected either switch or switch less.",
+          "readOnly": true
+        },
+        "enableStorageAutoIp": {
+          "type": "boolean",
+          "description": "Optional parameter required only for 3 Nodes Switchless deployments. This allows users to specify IPs and Mask for Storage NICs when Network ATC is not assigning the IPs for storage automatically.",
+          "readOnly": true
+        }
+      }
+    },
     "EdgeDeviceJob": {
       "type": "object",
       "description": "EdgeDevice Jobs resource",
@@ -7000,65 +6950,6 @@
             "description": "Job to provide remote support to the device."
           }
         ]
-      }
-    },
-    "EdgeDeviceJobsEceActionStatus": {
-      "type": "object",
-      "description": "Validation / deployment status details for Job.",
-      "properties": {
-        "status": {
-          "type": "string",
-          "description": "Job status.",
-          "readOnly": true
-        },
-        "steps": {
-          "type": "array",
-          "description": "List of steps of Edge device job.",
-          "items": {
-            "$ref": "#/definitions/EdgeDeviceJobsStep"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "name"
-          ]
-        }
-      }
-    },
-    "EdgeDeviceJobsLogCollectionSession": {
-      "type": "object",
-      "description": "Represents a session for collecting logs from an edge device.",
-      "properties": {
-        "startTime": {
-          "type": "string",
-          "description": "The timestamp when log collection started, in ISO 8601 format.",
-          "readOnly": true
-        },
-        "endTime": {
-          "type": "string",
-          "description": "The timestamp when log collection ended, in ISO 8601 format.",
-          "readOnly": true
-        },
-        "timeCollected": {
-          "type": "string",
-          "description": "The total time logs were collected for, in ISO 8601 duration format.",
-          "readOnly": true
-        },
-        "logSize": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The size of the collected logs in bytes.",
-          "readOnly": true
-        },
-        "status": {
-          "$ref": "#/definitions/DeviceLogCollectionStatus",
-          "description": "The status of the log collection session.",
-          "readOnly": true
-        },
-        "correlationId": {
-          "type": "string",
-          "description": "A unique identifier for correlating this log collection session with other operations or sessions.",
-          "readOnly": true
-        }
       }
     },
     "EdgeDeviceJobsStep": {
@@ -7443,7 +7334,7 @@
     },
     "ExtensionAggregateState": {
       "type": "string",
-      "description": "Aggregate state of Arc Extensions across the nodes in this HCI cluster.",
+      "description": "Aggregate state of Arc Extensions across the nodes in the Parent Entity(HCI Cluster/Edge Machine).",
       "enum": [
         "NotSpecified",
         "Error",
@@ -7759,7 +7650,7 @@
     },
     "ExtensionProperties": {
       "type": "object",
-      "description": "Status of Arc Extension for a particular node/machine in the Parent Entity(HCI Cluster/Edge Machine).",
+      "description": "Status of Arc Extension for a particular node in the Parent Entity(HCI Cluster/Edge Machine).",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -7772,7 +7663,7 @@
         },
         "aggregateState": {
           "$ref": "#/definitions/ExtensionAggregateState",
-          "description": "Aggregate state of Arc Extensions across the node/machines in the Parent Entity(HCI Cluster/Edge Machine).",
+          "description": "Aggregate state of Arc Extensions across the nodes in the Parent Entity(HCI Cluster/Edge Machine).",
           "readOnly": true
         },
         "perNodeExtensionDetails": {
@@ -8039,7 +7930,7 @@
           ]
         },
         "hostNetwork": {
-          "$ref": "#/definitions/DeviceHostNetwork",
+          "$ref": "#/definitions/EdgeDeviceHostNetwork",
           "description": "HostNetwork config to deploy AzureStackHCI Cluster.",
           "readOnly": true
         }
@@ -8302,6 +8193,40 @@
         ]
       }
     },
+    "HostNetwork": {
+      "type": "object",
+      "description": "The HostNetwork of a cluster.",
+      "properties": {
+        "intents": {
+          "type": "array",
+          "description": "The network intents assigned to the network reference pattern used for the deployment. Each intent will define its own name, traffic type, adapter names, and overrides as recommended by your OEM.",
+          "items": {
+            "$ref": "#/definitions/DeploymentIntents"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "storageNetworks": {
+          "type": "array",
+          "description": "List of StorageNetworks config to deploy AzureStackHCI Cluster.",
+          "items": {
+            "$ref": "#/definitions/DeploymentStorageNetworks"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "storageConnectivitySwitchless": {
+          "type": "boolean",
+          "description": "Defines how the storage adapters between nodes are connected either switch or switch less.."
+        },
+        "enableStorageAutoIp": {
+          "type": "boolean",
+          "description": "Optional parameter required only for 3 Nodes Switchless deployments. This allows users to specify IPs and Mask for Storage NICs when Network ATC is not assigning the IPs for storage automatically."
+        }
+      }
+    },
     "IdentityProvider": {
       "type": "string",
       "description": "Identity Provider for the cluster",
@@ -8417,72 +8342,6 @@
           "description": "Allows customers to use DHCP for Hosts and Cluster IPs. If not declared, the deployment will default to static IPs. When true, GW and DNS servers are not required"
         }
       }
-    },
-    "Intents": {
-      "type": "object",
-      "description": "The Intents of a cluster.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the network intent you wish to create."
-        },
-        "trafficType": {
-          "type": "array",
-          "description": "List of network traffic types. Only allowed values are 'Compute', 'Storage', 'Management'.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "adapter": {
-          "type": "array",
-          "description": "Array of network interfaces used for the network intent.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "overrideVirtualSwitchConfiguration": {
-          "type": "boolean",
-          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation."
-        },
-        "virtualSwitchConfigurationOverrides": {
-          "$ref": "#/definitions/VirtualSwitchConfigurationOverrides",
-          "description": "Set virtualSwitch ConfigurationOverrides for cluster."
-        },
-        "overrideQosPolicy": {
-          "type": "boolean",
-          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation."
-        },
-        "qosPolicyOverrides": {
-          "$ref": "#/definitions/QosPolicyOverrides",
-          "description": "Set QoS PolicyOverrides for cluster."
-        },
-        "overrideAdapterProperty": {
-          "type": "boolean",
-          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation."
-        },
-        "adapterPropertyOverrides": {
-          "$ref": "#/definitions/AdapterPropertyOverrides",
-          "description": "Set Adapter PropertyOverrides for cluster."
-        }
-      }
-    },
-    "IpAddressRange": {
-      "type": "object",
-      "description": "IP address range configuration.",
-      "properties": {
-        "startIp": {
-          "type": "string",
-          "description": "Start IP address."
-        },
-        "endIp": {
-          "type": "string",
-          "description": "End IP address."
-        }
-      },
-      "required": [
-        "startIp",
-        "endIp"
-      ]
     },
     "IpAssignmentType": {
       "type": "string",
@@ -9565,7 +9424,7 @@
     },
     "PerNodeExtensionState": {
       "type": "object",
-      "description": "Status of Arc Extension for a particular node/machine in the Parent Entity(HCI Cluster/Edge Machine).",
+      "description": "Status of Arc Extension for a particular node in the Parent Entity(HCI Cluster/Edge Machine).",
       "properties": {
         "name": {
           "type": "string",
@@ -10252,12 +10111,12 @@
           "readOnly": true
         },
         "validationStatus": {
-          "$ref": "#/definitions/EdgeDeviceJobsEceActionStatus",
+          "$ref": "#/definitions/EceActionStatus",
           "description": "Validation status of job.",
           "readOnly": true
         },
         "deploymentStatus": {
-          "$ref": "#/definitions/EdgeDeviceJobsEceActionStatus",
+          "$ref": "#/definitions/EceActionStatus",
           "description": "Deployment status of job.",
           "readOnly": true
         },
@@ -11344,34 +11203,6 @@
         }
       }
     },
-    "StorageNetworks": {
-      "type": "object",
-      "description": "The StorageNetworks of a cluster.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the storage network."
-        },
-        "networkAdapterName": {
-          "type": "string",
-          "description": "Name of the storage network adapter."
-        },
-        "vlanId": {
-          "type": "string",
-          "description": "ID specified for the VLAN storage network. This setting is applied to the network interfaces that route the storage and VM migration traffic."
-        },
-        "storageAdapterIPInfo": {
-          "type": "array",
-          "description": "List of Storage adapter physical nodes config to deploy AzureStackHCI Cluster.",
-          "items": {
-            "$ref": "#/definitions/StorageAdapterIPInfo"
-          },
-          "x-ms-identifiers": [
-            "physicalNode"
-          ]
-        }
-      }
-    },
     "SupportStatus": {
       "type": "string",
       "description": "Indicates whether the cluster is under support.",
@@ -11904,7 +11735,7 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The UpdateSummaries items on this page",
+          "description": "The UpdateSummariesResource items on this page",
           "items": {
             "$ref": "#/definitions/UpdateSummaries"
           }
@@ -12354,20 +12185,6 @@
       "required": [
         "recipeContent"
       ]
-    },
-    "VirtualSwitchConfigurationOverrides": {
-      "type": "object",
-      "description": "The VirtualSwitchConfigurationOverrides of a cluster.",
-      "properties": {
-        "enableIov": {
-          "type": "string",
-          "description": "Enable IoV for Virtual Switch"
-        },
-        "loadBalancingAlgorithm": {
-          "type": "string",
-          "description": "Load Balancing Algorithm for Virtual Switch"
-        }
-      }
     },
     "WindowsServerSubscription": {
       "type": "string",

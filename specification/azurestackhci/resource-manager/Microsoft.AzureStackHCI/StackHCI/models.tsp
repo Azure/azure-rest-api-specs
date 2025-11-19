@@ -470,141 +470,6 @@ union DeviceKind {
 }
 
 /**
- * Aggregate state of Arc Extensions across the nodes in this HCI cluster.
- */
-union ExtensionAggregateState {
-  string,
-
-  /** The state is not specified. */
-  NotSpecified: "NotSpecified",
-
-  /** An error occurred. */
-  Error: "Error",
-
-  /** The operation succeeded. */
-  Succeeded: "Succeeded",
-
-  /** The operation was canceled. */
-  Canceled: "Canceled",
-
-  /** The operation failed. */
-  Failed: "Failed",
-
-  /** The extension is connected. */
-  Connected: "Connected",
-
-  /** The extension is disconnected. */
-  Disconnected: "Disconnected",
-
-  /** The extension is deleted. */
-  Deleted: "Deleted",
-
-  /** The extension is being created. */
-  Creating: "Creating",
-
-  /** The extension is being updated. */
-  Updating: "Updating",
-
-  /** The extension is being deleted. */
-  Deleting: "Deleting",
-
-  /** The extension is being moved. */
-  Moving: "Moving",
-
-  /** The operation partially succeeded. */
-  PartiallySucceeded: "PartiallySucceeded",
-
-  /** The extension is partially connected. */
-  PartiallyConnected: "PartiallyConnected",
-
-  /** The operation is in progress. */
-  InProgress: "InProgress",
-
-  /** The operation has been accepted. */
-  Accepted: "Accepted",
-
-  /** The extension is provisioning. */
-  Provisioning: "Provisioning",
-
-  /** Upgrade failed but rollback succeeded. */
-  UpgradeFailedRollbackSucceeded: "UpgradeFailedRollbackSucceeded",
-}
-
-/**
- * State of Arc Extension in this node.
- */
-union NodeExtensionState {
-  string,
-
-  /** The state is not specified. */
-  NotSpecified: "NotSpecified",
-
-  /** An error occurred. */
-  Error: "Error",
-
-  /** The operation succeeded. */
-  Succeeded: "Succeeded",
-
-  /** The operation was canceled. */
-  Canceled: "Canceled",
-
-  /** The operation failed. */
-  Failed: "Failed",
-
-  /** The extension is connected. */
-  Connected: "Connected",
-
-  /** The extension is disconnected. */
-  Disconnected: "Disconnected",
-
-  /** The extension is deleted. */
-  Deleted: "Deleted",
-
-  /** The extension is being created. */
-  Creating: "Creating",
-
-  /** The extension is being updated. */
-  Updating: "Updating",
-
-  /** The extension is being deleted. */
-  Deleting: "Deleting",
-
-  /** The extension is being moved. */
-  Moving: "Moving",
-
-  /** The operation partially succeeded. */
-  PartiallySucceeded: "PartiallySucceeded",
-
-  /** The extension is partially connected. */
-  PartiallyConnected: "PartiallyConnected",
-
-  /** The operation is in progress. */
-  InProgress: "InProgress",
-
-  /** The operation has been accepted. */
-  Accepted: "Accepted",
-
-  /** The extension is provisioning. */
-  Provisioning: "Provisioning",
-}
-
-/**
- * The level code.
- */
-union StatusLevelTypes {
-  string,
-
-  /** Information level. */
-  Info: "Info",
-
-  /** Warning level. */
-  Warning: "Warning",
-
-  /** Error level. */
-  Error: "Error",
-}
-
-/**
  * Extension managed by user or Azure.
  */
 union ExtensionManagedBy {
@@ -1080,4 +945,31 @@ model DeploymentStep {
    */
   @visibility(Lifecycle.Read)
   exception?: string[];
+}
+
+/**
+ * The HostNetwork of a cluster.
+ */
+model HostNetwork {
+  /**
+   * The network intents assigned to the network reference pattern used for the deployment. Each intent will define its own name, traffic type, adapter names, and overrides as recommended by your OEM.
+   */
+  @identifiers(#["name"])
+  intents?: DeploymentIntents[];
+
+  /**
+   * List of StorageNetworks config to deploy AzureStackHCI Cluster.
+   */
+  @identifiers(#["name"])
+  storageNetworks?: DeploymentStorageNetworks[];
+
+  /**
+   * Defines how the storage adapters between nodes are connected either switch or switch less..
+   */
+  storageConnectivitySwitchless?: boolean;
+
+  /**
+   * Optional parameter required only for 3 Nodes Switchless deployments. This allows users to specify IPs and Mask for Storage NICs when Network ATC is not assigning the IPs for storage automatically.
+   */
+  enableStorageAutoIp?: boolean;
 }

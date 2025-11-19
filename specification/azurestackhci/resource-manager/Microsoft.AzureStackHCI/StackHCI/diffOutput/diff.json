@@ -852,34 +852,78 @@
     }
   },
   "definitions": {
-    "HostNetwork__deleted": {
+    "Intents__deleted": {
       "type": "object",
       "properties": {
-        "intents": {
+        "name": {
+          "type": "string"
+        },
+        "trafficType": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Intents"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
+            "type": "string"
+          }
         },
-        "storageNetworks": {
+        "adapter": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/StorageNetworks"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
+            "type": "string"
+          }
         },
-        "storageConnectivitySwitchless": {
+        "overrideVirtualSwitchConfiguration": {
           "type": "boolean",
           "default": false
         },
-        "enableStorageAutoIp": {
+        "virtualSwitchConfigurationOverrides": {
+          "$ref": "#/definitions/VirtualSwitchConfigurationOverrides"
+        },
+        "overrideQosPolicy": {
           "type": "boolean",
           "default": false
+        },
+        "qosPolicyOverrides": {
+          "$ref": "#/definitions/QosPolicyOverrides"
+        },
+        "overrideAdapterProperty": {
+          "type": "boolean",
+          "default": false
+        },
+        "adapterPropertyOverrides": {
+          "$ref": "#/definitions/AdapterPropertyOverrides"
+        }
+      }
+    },
+    "StorageNetworks__deleted": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "networkAdapterName": {
+          "type": "string"
+        },
+        "vlanId": {
+          "type": "string"
+        },
+        "storageAdapterIPInfo": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageAdapterIPInfo"
+          },
+          "x-ms-identifiers": [
+            "physicalNode"
+          ]
+        }
+      }
+    },
+    "VirtualSwitchConfigurationOverrides__deleted": {
+      "type": "object",
+      "properties": {
+        "enableIov": {
+          "type": "string"
+        },
+        "loadBalancingAlgorithm": {
+          "type": "string"
         }
       }
     },
@@ -889,20 +933,6 @@
         "authenticationMode": {
           "type": "string",
           "readOnly": true
-        }
-      }
-    },
-    "DeploymentAdapterPropertyOverrides__added": {
-      "type": "object",
-      "properties": {
-        "jumboPacket": {
-          "type": "string"
-        },
-        "networkDirect": {
-          "type": "string"
-        },
-        "networkDirectTechnology": {
-          "type": "string"
         }
       }
     },
@@ -969,50 +999,7 @@
           "type": "boolean"
         },
         "adapterPropertyOverrides": {
-          "$ref": "#/definitions/DeploymentAdapterPropertyOverrides"
-        }
-      }
-    },
-    "DeploymentSettingsHostNetwork__added": {
-      "type": "object",
-      "properties": {
-        "intents": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Intents"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
-        },
-        "storageNetworks": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/StorageNetworks"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
-        },
-        "storageConnectivitySwitchless": {
-          "type": "boolean"
-        },
-        "enableStorageAutoIp": {
-          "type": "boolean"
-        }
-      }
-    },
-    "DeploymentStorageAdapterIPInfo__added": {
-      "type": "object",
-      "properties": {
-        "physicalNode": {
-          "type": "string"
-        },
-        "ipv4Address": {
-          "type": "string"
-        },
-        "subnetMask": {
-          "type": "string"
+          "$ref": "#/definitions/AdapterPropertyOverrides"
         }
       }
     },
@@ -1031,7 +1018,7 @@
         "storageAdapterIPInfo": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DeploymentStorageAdapterIPInfo"
+            "$ref": "#/definitions/StorageAdapterIPInfo"
           },
           "x-ms-identifiers": [
             "physicalNode"
@@ -1079,66 +1066,6 @@
         },
         "enableStorageAutoIp": {
           "type": "boolean",
-          "readOnly": true
-        }
-      }
-    },
-    "EdgeDeviceJobsEceActionStatus__added": {
-      "type": "object",
-      "properties": {
-        "status": {
-          "type": "string",
-          "readOnly": true
-        },
-        "steps": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/EdgeDeviceJobsStep"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "name"
-          ]
-        }
-      }
-    },
-    "EdgeDeviceJobsLogCollectionSession__added": {
-      "type": "object",
-      "properties": {
-        "startTime": {
-          "type": "string",
-          "readOnly": true
-        },
-        "endTime": {
-          "type": "string",
-          "readOnly": true
-        },
-        "timeCollected": {
-          "type": "string",
-          "readOnly": true
-        },
-        "logSize": {
-          "type": "integer",
-          "format": "int32",
-          "readOnly": true
-        },
-        "status": {
-          "type": "string",
-          "enum": [
-            "NotStarted",
-            "Running",
-            "Failed",
-            "Succeeded",
-            "Canceled"
-          ],
-          "x-ms-enum": {
-            "name": "DeviceLogCollectionStatus",
-            "modelAsString": true
-          },
-          "readOnly": true
-        },
-        "correlationId": {
-          "type": "string",
           "readOnly": true
         }
       }
@@ -1427,21 +1354,6 @@
           "format": "date-time"
         }
       }
-    },
-    "IpAddressRange__added": {
-      "type": "object",
-      "properties": {
-        "startIp": {
-          "type": "string"
-        },
-        "endIp": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "endIp",
-        "startIp"
-      ]
     },
     "PrecheckResultTags__added": {
       "type": "object",
@@ -1886,7 +1798,7 @@
         "hostNetwork": {
           "$ref": {
             "__old": "#/definitions/HostNetwork",
-            "__new": "#/definitions/DeploymentSettingsHostNetwork"
+            "__new": "#/definitions/DeploymentHostNetwork"
           }
         },
         "secrets": {
@@ -2502,15 +2414,28 @@
         }
       }
     },
-    "Intents": {
+    "HostNetwork": {
       "properties": {
-        "overrideVirtualSwitchConfiguration": {
+        "intents": {
+          "items": {
+            "$ref": {
+              "__old": "#/definitions/Intents",
+              "__new": "#/definitions/DeploymentIntents"
+            }
+          }
+        },
+        "storageNetworks": {
+          "items": {
+            "$ref": {
+              "__old": "#/definitions/StorageNetworks",
+              "__new": "#/definitions/DeploymentStorageNetworks"
+            }
+          }
+        },
+        "storageConnectivitySwitchless": {
           "default__deleted": false
         },
-        "overrideQosPolicy": {
-          "default__deleted": false
-        },
-        "overrideAdapterProperty": {
+        "enableStorageAutoIp": {
           "default__deleted": false
         }
       }
@@ -2749,13 +2674,13 @@
         "validationStatus": {
           "$ref": {
             "__old": "./hciCommon.json#/definitions/EceActionStatus",
-            "__new": "#/definitions/EdgeDeviceJobsEceActionStatus"
+            "__new": "#/definitions/EceActionStatus"
           }
         },
         "deploymentStatus": {
           "$ref": {
             "__old": "./hciCommon.json#/definitions/EceActionStatus",
-            "__new": "#/definitions/EdgeDeviceJobsEceActionStatus"
+            "__new": "#/definitions/EceActionStatus"
           }
         }
       }

@@ -17,10 +17,11 @@ namespace Microsoft.AzureStackHCI;
  */
 @singleton("default")
 @parentResource(Cluster)
-model UpdateSummaries
+@clientName("UpdateSummaries")
+model UpdateSummariesResource
   is Azure.ResourceManager.ProxyResource<UpdateSummariesProperties> {
   ...ResourceNameParameter<
-    Resource = UpdateSummaries,
+    Resource = UpdateSummariesResource,
     KeyName = "updateSummary",
     SegmentName = "updateSummaries",
     NamePattern = ""
@@ -42,19 +43,20 @@ model UpdateSummaries
 }
 
 @armResourceOperations
-interface UpdateSummariesOperationGroup {
+@clientName("UpdateSummaries")
+interface UpdateSummaries {
   /**
    * Get all Update summaries under the HCI cluster
    */
-  get is ArmResourceRead<UpdateSummaries>;
+  get is ArmResourceRead<UpdateSummariesResource>;
 
   /**
    * Put Update summaries under the HCI cluster
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   put is ArmResourceCreateOrReplaceSync<
-    UpdateSummaries,
-    Response = ArmResourceUpdatedResponse<UpdateSummaries>
+    UpdateSummariesResource,
+    Response = ArmResourceUpdatedResponse<UpdateSummariesResource>
   >;
 
   /**
@@ -63,7 +65,7 @@ interface UpdateSummariesOperationGroup {
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
-    UpdateSummaries,
+    UpdateSummariesResource,
     Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
       Azure.Core.Foundations.RetryAfterHeader> &
       ArmLroLocationHeader) | ArmDeletedNoContentResponse
@@ -73,18 +75,19 @@ interface UpdateSummariesOperationGroup {
    * List all Update summaries under the HCI cluster
    */
   list is ArmResourceListByParent<
-    UpdateSummaries,
+    UpdateSummariesResource,
     Response = ArmResponse<UpdateSummariesList>
   >;
 }
 
-@@doc(UpdateSummaries.name, "");
-@@doc(UpdateSummaries.properties, "Update summaries properties");
-@@doc(UpdateSummariesOperationGroup.put::parameters.resource,
+@@doc(UpdateSummariesResource.name, "");
+@@doc(UpdateSummariesResource.properties, "Update summaries properties");
+
+@@doc(UpdateSummaries.put::parameters.resource,
   "Properties of the UpdateSummaries resource"
 );
 
-@@clientName(UpdateSummariesOperationGroup.put::parameters.resource,
+@@clientName(UpdateSummaries.put::parameters.resource,
   "updateLocationProperties"
 );
 
@@ -108,7 +111,7 @@ model UpdateStateProperties {
 /**
  * List of Update Summaries
  */
-model UpdateSummariesList is Azure.Core.Page<UpdateSummaries>;
+model UpdateSummariesList is Azure.Core.Page<UpdateSummariesResource>;
 
 /**
  * Properties of Update summaries

@@ -9,9 +9,8 @@
 | `definitions.DeploymentCluster.properties.hardwareClass.default__added` | added | `Medium` |
 | `definitions.DeploymentSecuritySettings.properties.credentialGuardEnforced.default__deleted` | deleted | `false` |
 | `definitions.DeploymentSecuritySettings.properties.smbClusterEncryption.default__deleted` | deleted | `false` |
-| `definitions.Intents.properties.overrideAdapterProperty.default__deleted` | deleted | `false` |
-| `definitions.Intents.properties.overrideQosPolicy.default__deleted` | deleted | `false` |
-| `definitions.Intents.properties.overrideVirtualSwitchConfiguration.default__deleted` | deleted | `false` |
+| `definitions.HostNetwork.properties.enableStorageAutoIp.default__deleted` | deleted | `false` |
+| `definitions.HostNetwork.properties.storageConnectivitySwitchless.default__deleted` | deleted | `false` |
 | `definitions.Observability.properties.euLocation.default__deleted` | deleted | `false` |
 | `definitions.SecurityProperties.properties.securedCoreComplianceAssignment.default__deleted` | deleted | `Audit` |
 | `definitions.SecurityProperties.properties.smbEncryptionForIntraClusterTrafficComplianceAssignment.default__deleted` | deleted | `Audit` |
@@ -94,23 +93,29 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/updates/{updateName}/updateRuns/{updateRunName}'].delete.responses.202.headers.Location__added` | added | `{"type":"string","description":"The Location header contains the URL where the status of the long ru...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/updateSummaries/default'].delete.responses.202.headers.Location__added` | added | `{"type":"string","description":"The Location header contains the URL where the status of the long ru...` |
 
-### Changes for `HostNetwork`
+### Changes for `Intents`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.HostNetwork__deleted` | deleted | `{"type":"object","properties":{"intents":{"type":"array","items":{"$ref":"#/definitions/Intents"},"x...` |
+| `definitions.Intents__deleted` | deleted | `{"type":"object","properties":{"name":{"type":"string"},"trafficType":{"type":"array","items":{"type...` |
+
+### Changes for `StorageNetworks`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.StorageNetworks__deleted` | deleted | `{"type":"object","properties":{"name":{"type":"string"},"networkAdapterName":{"type":"string"},"vlan...` |
+
+### Changes for `VirtualSwitchConfigurationOverrides`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.VirtualSwitchConfigurationOverrides__deleted` | deleted | `{"type":"object","properties":{"enableIov":{"type":"string"},"loadBalancingAlgorithm":{"type":"strin...` |
 
 ### Changes for `ClusterWitnessProperties`
 
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.ClusterWitnessProperties__added` | added | `{"type":"object","properties":{"authenticationMode":{"type":"string","readOnly":true}}}` |
-
-### Changes for `DeploymentAdapterPropertyOverrides`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.DeploymentAdapterPropertyOverrides__added` | added | `{"type":"object","properties":{"jumboPacket":{"type":"string"},"networkDirect":{"type":"string"},"ne...` |
 
 ### Changes for `DeploymentHostNetwork`
 
@@ -123,18 +128,6 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.DeploymentIntents__added` | added | `{"type":"object","properties":{"name":{"type":"string"},"trafficType":{"type":"array","items":{"type...` |
-
-### Changes for `DeploymentSettingsHostNetwork`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.DeploymentSettingsHostNetwork__added` | added | `{"type":"object","properties":{"intents":{"type":"array","items":{"$ref":"#/definitions/Intents"},"x...` |
-
-### Changes for `DeploymentStorageAdapterIPInfo`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.DeploymentStorageAdapterIPInfo__added` | added | `{"type":"object","properties":{"physicalNode":{"type":"string"},"ipv4Address":{"type":"string"},"sub...` |
 
 ### Changes for `DeploymentStorageNetworks`
 
@@ -153,18 +146,6 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.DeviceHostNetwork__added` | added | `{"type":"object","properties":{"intents":{"type":"array","items":{"$ref":"#/definitions/EdgeDevicesI...` |
-
-### Changes for `EdgeDeviceJobsEceActionStatus`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.EdgeDeviceJobsEceActionStatus__added` | added | `{"type":"object","properties":{"status":{"type":"string","readOnly":true},"steps":{"type":"array","i...` |
-
-### Changes for `EdgeDeviceJobsLogCollectionSession`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.EdgeDeviceJobsLogCollectionSession__added` | added | `{"type":"object","properties":{"startTime":{"type":"string","readOnly":true},"endTime":{"type":"stri...` |
 
 ### Changes for `EdgeDeviceJobsStep`
 
@@ -213,12 +194,6 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.ExtensionInstanceViewStatus__added` | added | `{"type":"object","properties":{"code":{"type":"string"},"level":{"type":"string","enum":["Info","War...` |
-
-### Changes for `IpAddressRange`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.IpAddressRange__added` | added | `{"type":"object","properties":{"startIp":{"type":"string"},"endIp":{"type":"string"}},"required":["e...` |
 
 ### Changes for `PrecheckResultTags`
 
@@ -581,21 +556,23 @@
 | `definitions.Cluster.properties.identity.$ref` | `../../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity` | `../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity` |
 | `definitions.ClusterPatch.properties.identity.$ref` | `../../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity` | `../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity` |
 | `definitions.ClusterProperties.properties.localAvailabilityZones.items.$ref` | `./hciCommon.json#/definitions/LocalAvailabilityZones` | `#/definitions/LocalAvailabilityZones` |
-| `definitions.DeploymentData.properties.hostNetwork.$ref` | `#/definitions/HostNetwork` | `#/definitions/DeploymentSettingsHostNetwork` |
+| `definitions.DeploymentData.properties.hostNetwork.$ref` | `#/definitions/HostNetwork` | `#/definitions/DeploymentHostNetwork` |
 | `definitions.DeploymentData.properties.localAvailabilityZones.items.$ref` | `./hciCommon.json#/definitions/LocalAvailabilityZones` | `#/definitions/LocalAvailabilityZones` |
 | `definitions.DeploymentData.properties.secrets.items.$ref` | `./hciCommon.json#/definitions/EceDeploymentSecrets` | `#/definitions/EceDeploymentSecrets` |
 | `definitions.DeploymentSettingsProperties.properties.reportedProperties.$ref` | `./hciCommon.json#/definitions/EceReportedProperties` | `#/definitions/EceReportedProperties` |
 | `definitions.EceActionStatus.properties.steps.items.$ref` | `#/definitions/DeploymentStep` | `#/definitions/Step` |
 | `definitions.ExtensionProfile.properties.extensions.items.$ref` | `#/definitions/Extension` | `#/definitions/EdgeDevicesExtension` |
 | `definitions.HciNetworkProfile.properties.hostNetwork.$ref` | `#/definitions/HostNetwork` | `#/definitions/DeviceHostNetwork` |
+| `definitions.HostNetwork.properties.intents.items.$ref` | `#/definitions/Intents` | `#/definitions/DeploymentIntents` |
+| `definitions.HostNetwork.properties.storageNetworks.items.$ref` | `#/definitions/StorageNetworks` | `#/definitions/DeploymentStorageNetworks` |
 | `definitions.JobReportedProperties.properties.deploymentStatus.$ref` | `./hciCommon.json#/definitions/EceActionStatus` | `#/definitions/EceActionStatus` |
 | `definitions.JobReportedProperties.properties.validationStatus.$ref` | `./hciCommon.json#/definitions/EceActionStatus` | `#/definitions/EceActionStatus` |
 | `definitions.LogCollectionReportedProperties.properties.deploymentStatus.$ref` | `./hciCommon.json#/definitions/EceActionStatus` | `#/definitions/EceActionStatus` |
 | `definitions.LogCollectionReportedProperties.properties.validationStatus.$ref` | `./hciCommon.json#/definitions/EceActionStatus` | `#/definitions/EceActionStatus` |
 | `definitions.Offer.allOf[0].$ref` | `../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` | `../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource` |
 | `definitions.Publisher.allOf[0].$ref` | `../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` | `../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource` |
-| `definitions.RemoteSupportJobReportedProperties.properties.deploymentStatus.$ref` | `./hciCommon.json#/definitions/EceActionStatus` | `#/definitions/EdgeDeviceJobsEceActionStatus` |
-| `definitions.RemoteSupportJobReportedProperties.properties.validationStatus.$ref` | `./hciCommon.json#/definitions/EceActionStatus` | `#/definitions/EdgeDeviceJobsEceActionStatus` |
+| `definitions.RemoteSupportJobReportedProperties.properties.deploymentStatus.$ref` | `./hciCommon.json#/definitions/EceActionStatus` | `#/definitions/EceActionStatus` |
+| `definitions.RemoteSupportJobReportedProperties.properties.validationStatus.$ref` | `./hciCommon.json#/definitions/EceActionStatus` | `#/definitions/EceActionStatus` |
 | `definitions.Sku.allOf[0].$ref` | `../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` | `../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource` |
 | `definitions.Update.allOf[0].$ref` | `../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` | `../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource` |
 | `definitions.UpdateProperties.properties.healthCheckResult.items.$ref` | `./hciCommon.json#/definitions/PrecheckResult` | `#/definitions/PrecheckResult` |

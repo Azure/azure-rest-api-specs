@@ -62,23 +62,6 @@ interface EdgeDeviceJobs {
 
 // Models
 
-/**
- * Validation / deployment status details for Job.
- */
-model EdgeDeviceJobsEceActionStatus {
-  /**
-   * Job status.
-   */
-  @visibility(Lifecycle.Read)
-  status?: string;
-
-  /**
-   * List of steps of Edge device job.
-   */
-  @visibility(Lifecycle.Read)
-  @identifiers(#["name"])
-  steps?: EdgeDeviceJobsStep[];
-}
 
 /**
  * Step details during job execution.
@@ -135,47 +118,6 @@ model EdgeDeviceJobsStep {
 }
 
 /**
- * Represents a session for collecting logs from an edge device.
- */
-model EdgeDeviceJobsLogCollectionSession {
-  /**
-   * The timestamp when log collection started, in ISO 8601 format.
-   */
-  @visibility(Lifecycle.Read)
-  startTime?: string;
-
-  /**
-   * The timestamp when log collection ended, in ISO 8601 format.
-   */
-  @visibility(Lifecycle.Read)
-  endTime?: string;
-
-  /**
-   * The total time logs were collected for, in ISO 8601 duration format.
-   */
-  @visibility(Lifecycle.Read)
-  timeCollected?: string;
-
-  /**
-   * The size of the collected logs in bytes.
-   */
-  @visibility(Lifecycle.Read)
-  logSize?: int32;
-
-  /**
-   * The status of the log collection session.
-   */
-  @visibility(Lifecycle.Read)
-  status?: DeviceLogCollectionStatus;
-
-  /**
-   * A unique identifier for correlating this log collection session with other operations or sessions.
-   */
-  @visibility(Lifecycle.Read)
-  correlationId?: string;
-}
-
-/**
  * Represents the reported properties of a remote support job.
  */
 model RemoteSupportJobReportedProperties {
@@ -189,13 +131,13 @@ model RemoteSupportJobReportedProperties {
    * Validation status of job.
    */
   @visibility(Lifecycle.Read)
-  validationStatus?: EdgeDeviceJobsEceActionStatus;
+  validationStatus?: EceActionStatus;
 
   /**
    * Deployment status of job.
    */
   @visibility(Lifecycle.Read)
-  deploymentStatus?: EdgeDeviceJobsEceActionStatus;
+  deploymentStatus?: EceActionStatus;
 
   /**
    * Optional settings for configuring the node for remote support.

@@ -24,6 +24,7 @@ import "./DeploymentSetting.tsp";
 import "./EdgeDeviceJob.tsp";
 import "./EdgeDevice.tsp";
 import "./Extension.tsp";
+import "./extensionCommon.tsp";
 import "./kubernetesVersions.tsp";
 import "./platformUpdates.tsp";
 import "./Offer.tsp";

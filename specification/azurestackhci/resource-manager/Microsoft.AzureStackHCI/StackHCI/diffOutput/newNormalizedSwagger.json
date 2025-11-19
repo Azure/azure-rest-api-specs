@@ -4203,20 +4203,6 @@
         }
       }
     },
-    "DeploymentAdapterPropertyOverrides": {
-      "type": "object",
-      "properties": {
-        "jumboPacket": {
-          "type": "string"
-        },
-        "networkDirect": {
-          "type": "string"
-        },
-        "networkDirectTechnology": {
-          "type": "string"
-        }
-      }
-    },
     "DeploymentCluster": {
       "type": "object",
       "properties": {
@@ -4331,7 +4317,7 @@
           ]
         },
         "hostNetwork": {
-          "$ref": "#/definitions/DeploymentSettingsHostNetwork"
+          "$ref": "#/definitions/DeploymentHostNetwork"
         },
         "cloudEnvironment": {
           "type": "string"
@@ -4437,7 +4423,7 @@
           "type": "boolean"
         },
         "adapterPropertyOverrides": {
-          "$ref": "#/definitions/DeploymentAdapterPropertyOverrides"
+          "$ref": "#/definitions/AdapterPropertyOverrides"
         }
       }
     },
@@ -4517,35 +4503,6 @@
       "required": [
         "value"
       ]
-    },
-    "DeploymentSettingsHostNetwork": {
-      "type": "object",
-      "properties": {
-        "intents": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Intents"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
-        },
-        "storageNetworks": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/StorageNetworks"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
-        },
-        "storageConnectivitySwitchless": {
-          "type": "boolean"
-        },
-        "enableStorageAutoIp": {
-          "type": "boolean"
-        }
-      }
     },
     "DeploymentSettingsProperties": {
       "type": "object",
@@ -4664,20 +4621,6 @@
         }
       }
     },
-    "DeploymentStorageAdapterIPInfo": {
-      "type": "object",
-      "properties": {
-        "physicalNode": {
-          "type": "string"
-        },
-        "ipv4Address": {
-          "type": "string"
-        },
-        "subnetMask": {
-          "type": "string"
-        }
-      }
-    },
     "DeploymentStorageNetworks": {
       "type": "object",
       "properties": {
@@ -4693,7 +4636,7 @@
         "storageAdapterIPInfo": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DeploymentStorageAdapterIPInfo"
+            "$ref": "#/definitions/StorageAdapterIPInfo"
           },
           "x-ms-identifiers": [
             "physicalNode"
@@ -4992,66 +4935,6 @@
             "name": "JobStatus",
             "modelAsString": true
           },
-          "readOnly": true
-        }
-      }
-    },
-    "EdgeDeviceJobsEceActionStatus": {
-      "type": "object",
-      "properties": {
-        "status": {
-          "type": "string",
-          "readOnly": true
-        },
-        "steps": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/EdgeDeviceJobsStep"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "name"
-          ]
-        }
-      }
-    },
-    "EdgeDeviceJobsLogCollectionSession": {
-      "type": "object",
-      "properties": {
-        "startTime": {
-          "type": "string",
-          "readOnly": true
-        },
-        "endTime": {
-          "type": "string",
-          "readOnly": true
-        },
-        "timeCollected": {
-          "type": "string",
-          "readOnly": true
-        },
-        "logSize": {
-          "type": "integer",
-          "format": "int32",
-          "readOnly": true
-        },
-        "status": {
-          "type": "string",
-          "enum": [
-            "NotStarted",
-            "Running",
-            "Failed",
-            "Succeeded",
-            "Canceled"
-          ],
-          "x-ms-enum": {
-            "name": "DeviceLogCollectionStatus",
-            "modelAsString": true
-          },
-          "readOnly": true
-        },
-        "correlationId": {
-          "type": "string",
           "readOnly": true
         }
       }
@@ -6034,6 +5917,35 @@
         }
       }
     },
+    "HostNetwork": {
+      "type": "object",
+      "properties": {
+        "intents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeploymentIntents"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "storageNetworks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeploymentStorageNetworks"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "storageConnectivitySwitchless": {
+          "type": "boolean"
+        },
+        "enableStorageAutoIp": {
+          "type": "boolean"
+        }
+      }
+    },
     "InfrastructureNetwork": {
       "type": "object",
       "properties": {
@@ -6080,59 +5992,6 @@
           "type": "boolean"
         }
       }
-    },
-    "Intents": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "trafficType": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "adapter": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "overrideVirtualSwitchConfiguration": {
-          "type": "boolean"
-        },
-        "virtualSwitchConfigurationOverrides": {
-          "$ref": "#/definitions/VirtualSwitchConfigurationOverrides"
-        },
-        "overrideQosPolicy": {
-          "type": "boolean"
-        },
-        "qosPolicyOverrides": {
-          "$ref": "#/definitions/QosPolicyOverrides"
-        },
-        "overrideAdapterProperty": {
-          "type": "boolean"
-        },
-        "adapterPropertyOverrides": {
-          "$ref": "#/definitions/AdapterPropertyOverrides"
-        }
-      }
-    },
-    "IpAddressRange": {
-      "type": "object",
-      "properties": {
-        "startIp": {
-          "type": "string"
-        },
-        "endIp": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "endIp",
-        "startIp"
-      ]
     },
     "IpPools": {
       "type": "object",
@@ -7161,11 +7020,11 @@
           "readOnly": true
         },
         "validationStatus": {
-          "$ref": "#/definitions/EdgeDeviceJobsEceActionStatus",
+          "$ref": "#/definitions/EceActionStatus",
           "readOnly": true
         },
         "deploymentStatus": {
-          "$ref": "#/definitions/EdgeDeviceJobsEceActionStatus",
+          "$ref": "#/definitions/EceActionStatus",
           "readOnly": true
         },
         "nodeSettings": {
@@ -7902,29 +7761,6 @@
         },
         "subnetMask": {
           "type": "string"
-        }
-      }
-    },
-    "StorageNetworks": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "networkAdapterName": {
-          "type": "string"
-        },
-        "vlanId": {
-          "type": "string"
-        },
-        "storageAdapterIPInfo": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/StorageAdapterIPInfo"
-          },
-          "x-ms-identifiers": [
-            "physicalNode"
-          ]
         }
       }
     },
@@ -8809,17 +8645,6 @@
       "required": [
         "recipeContent"
       ]
-    },
-    "VirtualSwitchConfigurationOverrides": {
-      "type": "object",
-      "properties": {
-        "enableIov": {
-          "type": "string"
-        },
-        "loadBalancingAlgorithm": {
-          "type": "string"
-        }
-      }
     }
   },
   "parameters": {}
