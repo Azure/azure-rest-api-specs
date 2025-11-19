@@ -50,9 +50,7 @@ jobs:
           - Name: ${{ parameters.ToolsRepoOwner }}/${{ parameters.ToolsRepoName }}
             WorkingDirectory: $(System.DefaultWorkingDirectory)/${{ parameters.ToolsRepoName }}
         Paths:
-          - '.github'
-          - '.vscode/**'
-          - 'eng/common/**'
+          - 'tools/azsdk-cli/**'
     
     - task: AzureCLI@2
       displayName: 'Run eval'
