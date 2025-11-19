@@ -2,7 +2,6 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
-import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -10,6 +9,47 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Edge;
+
+@doc("Site properties")
+model SiteProperties {
+  @doc("displayName of Site resource")
+  displayName?: string;
+
+  @doc("Description of Site resource")
+  description?: string;
+
+  @doc("Physical address of the site")
+  siteAddress?: SiteAddressProperties;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
+  @doc("Key-value pairs for labeling the site resource.")
+  labels?: Record<string>;
+
+  @doc("Provisioning state of last operation")
+  @visibility(Lifecycle.Read)
+  provisioningState?: ResourceProvisioningState;
+}
+
+@doc("Site address properties")
+model SiteAddressProperties {
+  @doc("First line of the street address")
+  streetAddress1?: string;
+
+  @doc("Second line of the street address")
+  streetAddress2?: string;
+
+  @doc("City of the address")
+  city?: string;
+
+  @doc("State or province of the address")
+  stateOrProvince?: string;
+
+  @doc("Country of the address")
+  country?: string;
+
+  @doc("Postal or ZIP code of the address")
+  postalCode?: string;
+}
 
 @doc("Site as ARM Resource")
 model Site is ProxyResource<SiteProperties> {
@@ -27,7 +67,7 @@ model Site is ProxyResource<SiteProperties> {
 interface Sites {
   get is ArmResourceRead<Site>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Site>;
-  update is ArmCustomPatchSync<Site, SiteUpdate>;
+  update is ArmResourcePatchSync<Site, SiteProperties>;
   delete is ArmResourceDeleteSync<Site>;
   listByResourceGroup is ArmResourceListByParent<Site>;
 }
@@ -41,9 +81,9 @@ interface SitesBySubscription {
     Site,
     BaseParameters = SubscriptionParameters
   >;
-  update is ArmCustomPatchSync<
+  update is ArmResourcePatchSync<
     Site,
-    SiteUpdate,
+    SiteProperties,
     BaseParameters = SubscriptionParameters
   >;
   delete is ArmResourceDeleteSync<
@@ -81,5 +121,5 @@ interface SitesByServiceGroup {
   delete is ArmResourceDeleteSync<Site, ServiceGroupParameters>;
 
   @doc("update Site at SG scope")
-  update is ArmCustomPatchSync<Site, SiteUpdate, ServiceGroupParameters>;
+  update is ArmResourcePatchSync<Site, SiteProperties, ServiceGroupParameters>;
 }

@@ -1084,38 +1084,18 @@
     },
     "SiteUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the Site.",
+      "description": "Site as ARM Resource",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/SiteUpdateProperties",
-          "description": "The updatable properties of the Site."
+          "$ref": "#/definitions/SiteProperties",
+          "description": "The resource-specific properties for this resource."
         }
-      }
-    },
-    "SiteUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the Site.",
-      "properties": {
-        "displayName": {
-          "type": "string",
-          "description": "displayName of Site resource"
-        },
-        "description": {
-          "type": "string",
-          "description": "Description of Site resource"
-        },
-        "siteAddress": {
-          "$ref": "#/definitions/SiteAddressProperties",
-          "description": "Physical address of the site"
-        },
-        "labels": {
-          "type": "object",
-          "description": "Key-value pairs for labeling the site resource.",
-          "additionalProperties": {
-            "type": "string"
-          }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
-      }
+      ]
     }
   },
   "parameters": {
