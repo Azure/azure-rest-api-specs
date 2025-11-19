@@ -2180,11 +2180,8 @@
           "description": "The configuration ID of the extension usage. It uniquely identifies a target the extension deploys to."
         },
         "config": {
-          "type": "object",
-          "description": "The configuration used for deployment. The keys of this object are config property names.",
-          "additionalProperties": {
-            "$ref": "#/definitions/DeploymentExtensionConfig"
-          }
+          "$ref": "#/definitions/DeploymentExtensionConfig",
+          "description": "The configuration used for deployment. The keys of this object are config property names."
         }
       },
       "required": [
@@ -2359,11 +2356,8 @@
           "description": "The URI of parameters file. Use this element to link to an existing parameters file. Use either the parametersLink property or the parameters property, but not both."
         },
         "extensionConfigs": {
-          "type": "object",
+          "$ref": "#/definitions/DeploymentExtensionConfig",
           "description": "The deployment extension configs. Keys of this object are extension aliases as defined in the deployment template.",
-          "additionalProperties": {
-            "$ref": "#/definitions/DeploymentExtensionConfig"
-          },
           "x-ms-mutability": [
             "update",
             "create"
@@ -3292,11 +3286,8 @@
           "description": "The URI of parameters file. Use this element to link to an existing parameters file. Use either the parametersLink property or the parameters property, but not both."
         },
         "extensionConfigs": {
-          "type": "object",
+          "$ref": "#/definitions/DeploymentExtensionConfig",
           "description": "The deployment extension configs. Keys of this object are extension aliases as defined in the deployment template.",
-          "additionalProperties": {
-            "$ref": "#/definitions/DeploymentExtensionConfig"
-          },
           "x-ms-mutability": [
             "update",
             "create"
