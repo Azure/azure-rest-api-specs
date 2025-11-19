@@ -80,7 +80,7 @@ Wherever necessary, include comments or docstrings that reference `equiv_contrac
 
 Create a Python package with a structure similar to:
 
-- `swagger_equiv/`
+- `semantic_equiv/`
   - `__init__.py`
   - `loader.py` (file loading and JSON parsing)
   - `merge.py` (merging three hand-authored specs plus common types)
@@ -90,14 +90,11 @@ Create a Python package with a structure similar to:
   - `cli.py` (command-line entry point)
   - `config.py` (optional: parsing and validating `config.yaml`)
 
-- `tests/`
-  - Unit tests for canonicalization and comparison
-  - Integration tests for real or synthetic Swagger pairs
-
 - `equiv_contract.md`
   - The contract document; never modified automatically by code.
 
-Use standard Python patterns and keep dependencies minimal. The design should make it easy to test each piece in isolation.
+Use standard Python patterns and keep dependencies minimal.
+The design should make it easy to test each piece in isolation.
 
 ## 5. Core Responsibilities by Module
 
@@ -231,21 +228,5 @@ Optional features:
 - A `--verbose` flag to print detailed differences.
 - A `--save-canonical` flag to write canonicalized Swagger JSON into `output.path` for debugging.
 
-## 6. Testing Expectations
-
-Create tests that exercise the full contract in `equiv_contract.md`:
-
-- Canonicalization tests:
-  - Verify that documentation fields are removed.
-  - Verify that examples and tags are removed where expected.
-  - Verify that set-like arrays are deduplicated and sorted.
-
-- Schema comparison tests:
-  - Verify equality of identical schemas with different field orders.
-  - Verify that changes in type, format, required fields, enum values, or additionalProperties are detected as mismatches.
-
-- API comparison tests:
-  - Specs that only differ in documentation or ordering should be considered equivalent.
-  - Specs that differ in paths, methods, parameters, responses, or schemas should be considered not equivalent and should produce understandable difference reports.
 
 Whenever behavior is unclear or ambiguous, re-read `equiv_contract.md` and align with the contract. If the desired behavior appears to diverge from the contract, the contract document should be updated explicitly by a human; the implementation must not silently change semantics on its own.

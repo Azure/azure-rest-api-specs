@@ -15,7 +15,7 @@ from dataclasses import dataclass
 from typing import Dict, Any, List, Optional, Set, FrozenSet
 from enum import Enum
 
-from .models import (
+from models import (
     CanonicalApi, CanonicalPath, CanonicalOperation, CanonicalParameter,
     CanonicalResponse, CanonicalSchema, CanonicalConstraints, ParameterLocation,
     build_canonical_api_from_swagger

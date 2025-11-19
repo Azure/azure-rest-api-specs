@@ -21,11 +21,14 @@ import argparse
 from pathlib import Path
 from typing import Optional
 
-from .config import load_config, validate_paths, ConfigError
-from .loader import load_and_validate_all_files, LoaderError
-from .merge import merge_hand_authored_specs, validate_merged_swagger, MergeError
-from .canonicalize import canonicalize_both_specs, CanonicalizationError
-from .compare import compare_swagger_specs, EquivalencyResult
+# Add current directory to path to allow direct execution
+sys.path.insert(0, str(Path(__file__).parent))
+
+from utils import load_config, validate_paths, ConfigError
+from utils import load_and_validate_all_files, LoaderError
+from utils import merge_hand_authored_specs, validate_merged_swagger, MergeError
+from canonicalize import canonicalize_both_specs, CanonicalizationError
+from compare import compare_swagger_specs, EquivalencyResult
 
 
 def save_artifacts(config, result: EquivalencyResult,
