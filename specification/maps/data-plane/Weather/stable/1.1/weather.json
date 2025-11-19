@@ -2507,30 +2507,31 @@
     },
     "AirAndPollen": {
       "type": "object",
+      "description": "The AirAndPollen object provides comprehensive environmental data. It identifies various pollen types such as tree, grass, ragweed, and mold, and pollutants including PM2.5, PM10, O3, NO2, SO2, and CO. Additionally, it reports the UV Index on a scale from 1 to 10, offers qualitative descriptions of air quality or pollen levels, and provides numerical measurements of the concentration of pollutants or pollen in the air. This detailed information helps users assess air quality and pollen conditions along their travel route.",
       "properties": {
         "name": {
           "x-ms-client-name": "description",
           "type": "string",
-          "description": "Name of the pollen or pollutant. For example, grass, mold, weed, air quality, tree and UV index."
+          "description": "**For pollen:**\nReturns the name of the pollen, such as tree, grass, ragweed, or mold.\n\n**For pollutants:**\nWhen the `name` property is `AirQuality`, the name of the pollutant is returned in the `type` property.\nValid pollutants include: PM2.5, PM10, O3,NO2,SO2,CO.\n\n**For UV Index:**\nWhen the `name` property is `UVIndex`, the UV index is returned in the `value` property. Valid UV Index values range from 0 to 11+ and represent the intensity of ultraviolet radiation.\nUV Index values are categorized as follows:\n<ul><li>**0-2:** Low</li><li>**3-5:** Moderate</li><li>**6-7:** High</li><li>**8-10:** Very High</li></ul>"
         },
         "value": {
           "type": "integer",
           "format": "int32",
-          "description": "Value of the given type above. Values associated with mold, grass, weed and tree are in units of parts per cubic meter. Both air quality and UV are indices, so they are unitless."
+          "description": "Provides a numerical measurement of the concentration of pollutants or pollen in the air. This value is typically expressed in units relevant to the type of pollutant or pollen being measured, such as micrograms per cubic meter (µg/m³) for particulate matter or parts per billion (ppb) for gases like ozone. Both air quality and UV are indices, so they are unitless."
         },
         "category": {
           "type": "string",
-          "description": "Category of the air quality or pollution type. For example, low, high, good, moderate, unhealthy, hazardous."
+          "description": "Provides a one-word qualitative description of the air quality or pollen level for the forecast period in the specified language. This property categorizes the air quality or pollen count into different levels, such as low, high, good, moderate, unhealthy, hazardous giving users an easy-to-understand assessment of the current conditions."
         },
         "categoryValue": {
           "type": "integer",
           "format": "int32",
-          "description": "Value associated with the air quality or pollution category. These values range from 1 to 6. 1 implying good conditions, 6 implying hazardous conditions."
+          "description": "Provides a numerical representation of the air quality or pollen level. This value corresponds to the qualitative `category` property, offering a precise way to quantify the air quality or pollen level."
         },
         "type": {
           "x-ms-client-name": "airQualityType",
           "type": "string",
-          "description": "Only exists for air quality. Examples include ozone and particle pollution."
+          "description": "Specifies the type of air pollutant being measured. Only used when the `name` property equals *AirQuality*. Examples of air pollutants include Particulate Matter (PM2.5, PM10), Ozone (O3), Nitrogen Dioxide (NO2), Sulfur Dioxide (SO2), and Carbon Monoxide (CO)."
         }
       }
     },
@@ -3163,7 +3164,7 @@
     },
     "ActiveStormResult": {
       "type": "object",
-      "description": "All government-issued active storms",
+      "description": "The ActiveStormResult object provides comprehensive information about ongoing tropical storms. It includes an array of [ActiveStorm](#ActiveStorm) objects, each detailing specific attributes of individual storms. These attributes encompass the storm's government ID, basin ID, year of origin, name, and subtropical status.",
       "properties": {
         "results": {
           "type": "array",
@@ -3171,7 +3172,7 @@
           "items": {
             "$ref": "#/definitions/ActiveStorm"
           },
-          "description": "All government-issued active storms"
+          "description": "An array of [ActiveStorm](#ActiveStorm) objects, each providing essential details about an ongoing tropical storm, as reported by national weather forecasting agencies."
         },
         "nextLink": {
           "$ref": "#/definitions/NextLink"
@@ -3180,32 +3181,32 @@
     },
     "ActiveStorm": {
       "type": "object",
-      "description": "Government-issued active storm",
+      "description": "Provides essential details about ongoing tropical storms, as reported by national weather forecasting agencies.",
       "properties": {
         "year": {
           "type": "string",
-          "description": "Year of origination"
+          "description": "Specifies the year in which the tropical storm originated."
         },
         "basinId": {
           "$ref": "#/definitions/basinId",
-          "description": "Basin identifier (AL, EP, SI, NI, CP, NP, SP)"
+          "description": "Categorizes the different ocean basins where tropical storms can originate. Each basin is assigned a unique identifier to help specify the location of the storm's origin. Valid Basin identifiers include AL, CP, EP, NI, NP, SI, and SP."
         },
         "name": {
           "type": "string",
-          "description": "The name of the depression."
+          "description": "The name of the storm."
         },
         "isActive": {
           "type": "boolean",
-          "description": "True if the depression has been updated recently."
+          "description": "Indicates whether the tropical storm is currently active. If true, the storm is active; if false, the storm is not active."
         },
         "isSubtropical": {
           "type": "boolean",
-          "description": "True when the depression is classified as a subtropical cyclone."
+          "description": "A return value of true indicates that the storm is classified as a subtropical cyclone, meaning it has both tropical and extratropical features."
         },
         "govId": {
           "type": "integer",
           "format": "int32",
-          "description": "Government storm ID. This will match the depression number."
+          "description": "A unique identifier assigned to tropical storms by national weather forecasting agencies. This identifier helps track and reference specific storms accurately, including its status, location, and intensity."
         }
       }
     },
@@ -3258,7 +3259,7 @@
     },
     "StormSearchResult": {
       "type": "object",
-      "description": "Search government-issued storms",
+      "description": "Contains a list of government-issued storms that meet the specified search criteria, including details such as the storm's basin ID, government-issued ID and status.",
       "properties": {
         "results": {
           "type": "array",
@@ -3266,7 +3267,7 @@
           "items": {
             "$ref": "#/definitions/StormSearchResultItem"
           },
-          "description": "Search government-issued storms"
+          "description": "Array of [StormSearchResultItem](#stormsearchresultitem) objects, each representing a tropical storm matching the search criteria provided in the request."
         },
         "nextLink": {
           "$ref": "#/definitions/NextLink"
@@ -3275,42 +3276,42 @@
     },
     "StormSearchResultItem": {
       "type": "object",
-      "description": "Government-issued active storm event",
+      "description": "A government-issued storm event, including the storm's basin identifier (basinId), government-issued identifier (govId) and status. This object is returned as part of an array within the [StormSearchResult](#stormsearchresult) object.",
       "properties": {
         "year": {
           "type": "string",
-          "description": "Year of origination"
+          "description": "Specifies the year in which the tropical storm originated."
         },
         "basinId": {
           "$ref": "#/definitions/basinId",
-          "description": "Basin identifier (AL, EP, SI, NI, CP, NP, SP)"
+          "description": "Categorizes the different ocean basins where tropical storms can originate. Each basin is assigned a unique identifier to help specify the location of the storm's origin. Valid Basin identifiers include AL, CP, EP, NI, NP, SI, and SP."
         },
         "name": {
           "type": "string",
-          "description": "The name of the depression."
+          "description": "Identifies the tropical storm by its official name, as designated by the relevant national weather forecasting agency."
         },
         "isActive": {
           "type": "boolean",
-          "description": "True if the depression has been updated recently."
+          "description": "Indicates whether the tropical storm is currently active. If true, the storm is active; if false, the storm is not active"
         },
         "isRetired": {
           "type": "boolean",
-          "description": "True if the storm name has been permanently retired in the source basin."
+          "description": "Returns true if the storm has been permanently retired in the source basin."
         },
         "isSubtropical": {
           "type": "boolean",
-          "description": "True when the depression is classified as a subtropical cyclone."
+          "description": "Returns true if the storm is classified as a subtropical cyclone, meaning it has both tropical and extratropical features."
         },
         "govId": {
           "type": "integer",
           "format": "int32",
-          "description": "Government storm ID. This will match the depression number."
+          "description": "A unique identifier assigned to tropical storms by national weather forecasting agencies. This identifier helps track and reference specific storms accurately, including its status, location, and intensity. This will match the depression number."
         }
       }
     },
     "StormForecastResult": {
       "type": "object",
-      "description": "The list of Government-issued forecasts",
+      "description": "An array of [StormForecast](#stormforecast) objects, each detailing individual storm forecasts issued by government authorities.",
       "properties": {
         "results": {
           "type": "array",
@@ -3318,7 +3319,7 @@
           "items": {
             "$ref": "#/definitions/StormForecast"
           },
-          "description": "The list of Government-issued forecasts"
+          "description": "An array of forecast data for tropical storms, including predicted paths, intensities, and other relevant details. These forecasts are issued by government authorities."
         },
         "nextLink": {
           "$ref": "#/definitions/NextLink"
@@ -3327,46 +3328,46 @@
     },
     "StormForecast": {
       "type": "object",
-      "description": "Government-issued storm forecast",
+      "description": "The StormForecast object contains detailed Government-issued information about forecasted tropical storms, including the storm's location, status, forecast creation date, wind speed, and wind radii.",
       "properties": {
         "dateTime": {
           "type": "string",
           "x-ms-client-name": "timestamp",
-          "description": "Datetime the forecast is valid, displayed in ISO8601 format."
+          "description": "Date and time that the current forecast is valid, displayed in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format (yyyy-mm-ddThh:mm:ss-hh:mm). For example, *2025-04-29T07:00:00-07:00*."
         },
         "initializedDateTime": {
           "type": "string",
           "x-ms-client-name": "initialized_timestamp",
-          "description": "Datetime the forecast was created, displayed in ISO8601 format."
+          "description": "Date and time that the forecast was created, displayed in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format (yyyy-mm-ddThh:mm:ss-hh:mm). For example, *2025-04-29T07:00:00-07:00*."
         },
         "location": {
           "$ref": "../../../Common/preview/1.0/common.json#/definitions/LatLongPair",
           "x-ms-client-name": "coordinates",
-          "description": "Coordinates of the storm"
+          "description": "Specifies the geographical coordinates (latitude and longitude) of the storm's forecasted position."
         },
         "maxWindGust": {
           "$ref": "#/definitions/WeatherUnit",
-          "description": "Maximum wind gust speed associated with the storm. May be NULL."
+          "description": "Specifies the expected maximum wind gust speed and direction expected during the storm, measured in kilometers per hour (km/h) or miles per hour (mph), based on the specified unit. Wind direction is given in azimuth degrees, ranging from 0° (true North) to 359°, moving clockwise. May be NULL."
         },
         "sustainedWind": {
           "$ref": "#/definitions/WeatherUnit",
-          "description": "Maximum sustained wind speed associated with the storm. May be NULL."
+          "description": "Specifies the maximum sustained wind speed expected during the storm, measured in  kilometers per hour (km/h) or miles per hour (mph), based on the unit specified in the request. May be NULL."
         },
         "status": {
           "type": "string",
-          "description": "Possible status values include:<ul><li>Cyclonic storm</li><li>Deep depression</li><li>Depression</li><li>Extremely severe cyclonic storm</li><li>Hurricane category (1-5)</li><li>Intense tropical cyclone</li><li>Moderate tropical storm</li><li>Post-tropical cyclone</li><li>Potential tropical cyclone</li><li>Severe cyclonic storm</li><li>Severe tropical storm</li><li>Subtropical</li><li>Super cyclonic storm</li><li>Tropical cyclone</li><li>Tropical cyclone category (1-5)</li><li>Tropical depression</li><li>Tropical disturbance</li><li>Tropical storm</li><li>Typhoon</li><li>Very intense tropical cyclone</li><li>Very severe cyclonic storm</li><li>Very strong typhoon</li><li>Violent typhoon</li></ul>"
+          "description": "Indicates the current state or condition of the storm. This property provides information on whether the storm is active, dissipating, or has reached another significant status. Possible values:<ul><li>Cyclonic storm</li><li>Deep depression</li><li>Depression</li><li>Extremely severe cyclonic storm</li><li>Hurricane category (1-5)</li><li>Intense tropical cyclone</li><li>Moderate tropical storm</li><li>Post-tropical cyclone</li><li>Potential tropical cyclone</li><li>Severe cyclonic storm</li><li>Severe tropical storm</li><li>Subtropical</li><li>Super cyclonic storm</li><li>Tropical cyclone</li><li>Tropical cyclone category (1-5)</li><li>Tropical depression</li><li>Tropical disturbance</li><li>Tropical storm</li><li>Typhoon</li><li>Very intense tropical cyclone</li><li>Very severe cyclonic storm</li><li>Very strong typhoon</li><li>Violent typhoon</li></ul>"
         },
         "window": {
           "$ref": "#/definitions/WeatherWindow",
           "x-ms-client-name": "WeatherWindow",
-          "description": "Contains information about the forecast window for the storm during the specified time period (not the entire cone). If windowGeometry=true in the request, this object will include geoJSON details for window geometry."
+          "description": "Provides forecast details for the storm within the specified time frame. If the `windowGeometry` parameter is set to true in the API request, this property will include GeoJSON details for the window geometry."
         },
         "windRadiiSummary": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/StormWindRadiiSummary"
           },
-          "description": "Displayed when details=true or radiiGeometry=true in the request."
+          "description": "Contains an array of [StormWindRadiiSummary](#stormwindradiisummary) objects, detailing wind radii in different quadrants around the storm's center. Displayed when `details=true` or `radiiGeometry=true` in the request."
         }
       }
     },
@@ -3412,33 +3413,33 @@
     },
     "StormWindRadiiSummary": {
       "type": "object",
-      "description": "Displayed when details=true or radiiGeometry=true in the request.",
+      "description": "The StormWindRadiiSummary object provides a high-level overview of the wind distribution around a tropical storm. It includes the geometric representation of wind radii (radiiGeometry), detailed sector-based wind data (radiusSectorData), and the wind speeds at various distances from the storm's center (windSpeed). These properties collectively help in understanding the spatial extent and intensity of winds associated with the storm. Displayed when the request includes `details=true` or `radiiGeometry=true`.",
       "properties": {
         "dateTime": {
           "type": "string",
           "x-ms-client-name": "timestamp",
-          "description": "DateTime for which the wind radii summary data is valid, displayed in ISO8601 format."
+          "description": "Date and time that the wind radii summary data is valid, displayed in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format (yyyy-mm-ddThh:mm:ss-hh:mm). For example, *2025-04-29T07:00:00-07:00*."
         },
         "windSpeed": {
           "$ref": "#/definitions/WeatherUnit",
-          "description": "Wind speed associated with the radiusSectorData."
+          "description": "The overall wind speed associated with the storm's wind radii data. This single wind speed value applies collectively to all the sectors within the [radiusSectorData](#radiusSectorData) array, which provides detailed geographical information for the NE, SE, SW, and NW quadrants of the storm's wind radii."
         },
         "radiusSectorData": {
           "type": "array",
-          "description": "Contains the information needed to plot wind radius quadrants. Bearing 0–90 = NE quadrant; 90–180 = SE quadrant; 180–270 = SW quadrant; 270–360 = NW quadrant.",
+          "description": "An array of [RadiusSector](#RadiusSector) objects. Each object contains detailed geographical information (in geoJSON format) needed to plot wind radius quadrants: 0-90° for NE, 90-180° for SE, 180-270° for SW, and 270-360° for NW.",
           "items": {
             "$ref": "#/definitions/RadiusSector"
           }
         },
         "radiiGeometry": {
           "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonGeometry",
-          "description": "GeoJSON object. Displayed when radiiGeometry=true in request. Describes the outline of the wind radius quadrants."
+          "description": "A GeoJSON object that is returned when the `radiiGeometry` parameter is set to true in the request. It provides detailed geographical information about the storm's wind radii, including the spatial representation of areas affected by different wind speeds."
         }
       }
     },
     "RadiusSector": {
       "type": "object",
-      "description": "Bearing 0–90 = NE quadrant; 90–180 = SE quadrant; 180–270 = SW quadrant; 270–360 = NW quadrant.",
+      "description": "Bearing 0-90 = NE quadrant; 90-180 = SE quadrant; 180-270 = SW quadrant; 270-360 = NW quadrant.",
       "properties": {
         "beginBearing": {
           "type": "number",
@@ -3460,7 +3461,7 @@
     },
     "StormLocationsResult": {
       "type": "object",
-      "description": "Locations for an individual government-issued storm",
+      "description": "Contains an array of [StormLocation](#stormlocation) objects, representing government-issued active storm events. Includes details such as latitude and longitude coordinates, wind speed and direction, wind radii, basin identifier, minimum pressure, movement, status, and other relevant attributes.",
       "properties": {
         "results": {
           "type": "array",
@@ -3468,7 +3469,7 @@
           "items": {
             "$ref": "#/definitions/StormLocation"
           },
-          "description": "Locations for an individual government-issued storm"
+          "description": "Array of data points, each detailing the location of an individual government-issued storm, including coordinates, geometry, basin ID, date, wind details, and wind radii."
         },
         "nextLink": {
           "$ref": "#/definitions/NextLink"
@@ -3477,7 +3478,7 @@
     },
     "StormLocation": {
       "type": "object",
-      "description": "Location for an individual Government-issued storm",
+      "description": "Contains detailed information about a tropical storm's location, including latitude and longitude coordinates, wind speed and direction, wind radii, and basin identifier. Essential for tracking and forecasting the storm's movement and intensity.",
       "properties": {
         "dateTime": {
           "type": "string",
@@ -3491,27 +3492,27 @@
         },
         "maxWindGust": {
           "$ref": "#/definitions/WeatherUnit",
-          "description": "Maximum wind gust speed associated with the storm. May be NULL."
+          "description": "Specifies the expected maximum wind gust speed and direction expected during the storm, measured in kilometers per hour (km/h) or miles per hour (mph), based on the specified unit. Wind direction is given in azimuth degrees, ranging from 0° (true North) to 359°, moving clockwise. May be NULL."
         },
         "sustainedWind": {
           "$ref": "#/definitions/WeatherUnit",
-          "description": "Maximum sustained wind speed associated with the storm. May be NULL."
+          "description": "Maximum sustained wind speed associated with the storm, measured in kilometers per hour (km/h) or miles per hour (mph), based on the specified unit. May be NULL."
         },
         "minimumPressure": {
           "$ref": "#/definitions/WeatherUnit",
-          "description": "Minimum pressure associated with the storm. May be NULL."
+          "description": "Specifies the lowest atmospheric pressure associated with the storm, measured in millibars (mb) or  inches of mercury (inHg), depending on the unit specified in the request. This value may be NULL."
         },
         "movement": {
           "$ref": "#/definitions/WindDetails",
-          "description": "The storm movement information."
+          "description": "Returns the storm's current direction (in degrees) and speed, measured in kilometers per hour (km/h) or miles per hour (mph), depending on the specified unit."
         },
         "status": {
           "type": "string",
-          "description": "Storm status, in English."
+          "description": "Returns the current classification or stage of the storm in English, such as a tropical depression, tropical storm, or hurricane."
         },
         "isSubtropical": {
           "type": "boolean",
-          "description": "True when the depression is classified as a subtropical cyclone."
+          "description": "A return value of true indicates that the storm is classified as a subtropical cyclone, meaning it has both tropical and extratropical features."
         },
         "hasTropicalPotential": {
           "type": "boolean",
@@ -3519,14 +3520,14 @@
         },
         "isPostTropical": {
           "type": "boolean",
-          "description": "True when the storm is weakening away, and will no longer become a tropical system."
+          "description": "Returns true if the storm has transitioned from a tropical cyclone to a post-tropical cyclone, aiding in understanding the storm's lifecycle phase."
         },
         "windRadiiSummary": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/StormWindRadiiSummary"
           },
-          "description": "Displayed when details=true or radiiGeometry=true in the request."
+          "description": "Contains an array of [StormWindRadiiSummary](#stormwindradiisummary) objects, detailing wind radii in different quadrants around the storm's center. Displayed when `details=true` or `radiiGeometry=true` in the request."
         }
       }
     },
@@ -3566,35 +3567,35 @@
     },
     "AirQuality": {
       "type": "object",
-      "description": "Information about the air quality in a specific location at a specific time.",
+      "description": "The AirQuality object provides comprehensive information about the current air quality at the specified location. This includes the concentration levels of various pollutants, numerical Air Quality Index (AQI) values indicating the overall air quality, and identification of the dominant pollutant affecting the air quality. Additionally, it offers a risk level summary, which briefly outlines potential health risks and suggests precautions.",
       "properties": {
         "dateTime": {
           "type": "string",
           "format": "date-time",
           "x-ms-client-name": "timestamp",
-          "description": "Date and time of the current observation displayed in ISO 8601 format, for example, 2019-10-27T19:39:57-08:00."
+          "description": "Date and time of the current observation, displayed in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format (yyyy-mm-ddThh:mm:ss-hh:mm). For example, *2025-04-29T07:00:00-07:00*."
         },
         "index": {
           "type": "number",
           "format": "float",
-          "description": "Air quality rating on a scale set by local regulating bodies. Scales can vary widely based on location. See [Wikipedia](https://en.wikipedia.org/wiki/Air_quality_index) for more information."
+          "description": "The air quality index (AQI) is an air quality rating scale set by local regulating bodies. Scales can vary widely based on location. For more information, see [Air quality index](https://en.wikipedia.org/wiki/Air_quality_index) in Wikipedia."
         },
         "globalIndex": {
           "type": "number",
           "format": "float",
-          "description": "Internationally normalized air quality rating on a scale from 0 to 300 and up, with higher numbers representing worse air quality."
+          "description": "Provides an internationally standardized way to understand the concentration of pollutants in the air. Ratings range from 0 to 300 and up, with higher numbers representing worse air quality. The pollutants measured includes PM2.5, PM10, NO2, SO2, CO, and O3."
         },
         "dominantPollutant": {
           "$ref": "#/definitions/DominantPollutant",
-          "description": "The pollutant with the highest concentration."
+          "description": "Identifies the pollutant with the highest concentration."
         },
         "category": {
           "type": "string",
-          "description": "One-word description of the air quality in the requested language. For example, \"Excellent\"."
+          "description": "Provides a one-word description of the air quality for the forecast period in the specified language, such as Poor, Fair, or Excellent."
         },
         "categoryColor": {
           "type": "string",
-          "description": "A unique color corresponding to the category of this air quality result."
+          "description": "Provides a unique hexadecimal color code corresponding to the air quality category for each day in the forecast period. This color helps users quickly identify the air quality level visually, with each color corresponding to a category such as Poor, Fair, or Excellent."
         },
         "description": {
           "type": "string",
@@ -3605,7 +3606,7 @@
           "items": {
             "$ref": "#/definitions/Pollutant"
           },
-          "description": "Information about individual pollutants."
+          "description": "An array containing detailed information about each pollutant in the response. Returned when the `pollutants` URI Parameter is *true*."
         }
       }
     },
@@ -3960,7 +3961,7 @@
     },
     "NextLink": {
       "type": "string",
-      "description": "The is the link to the next page of the features returned. If it's the last page, no this field."
+      "description": "Contains the URL to fetch the next page of results if the response is paginated. This is useful when the response is too large to be returned in a single call, allowing users to navigate through multiple pages of results."
     }
   }
 }
