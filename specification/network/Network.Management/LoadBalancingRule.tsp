@@ -26,6 +26,32 @@ model LoadBalancingRule
   ...Azure.ResourceManager.Legacy.EntityTagProperty;
 }
 
+alias LoadBalancerLoadBalancingRuleOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+
+    @path
+    @segment("resourceGroups")
+    groupName: string;
+
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** The name of the load balancer. */
+    @path
+    @segment("loadBalancers")
+    @key
+    loadBalancerName: string;
+  },
+  {
+    /** The name of the load balancing rule. */
+    @path
+    @segment("loadBalancingRules")
+    @key
+    loadBalancingRuleName: string;
+  }
+>;
+
 @armResourceOperations
 interface LoadBalancingRules {
   /**
@@ -47,18 +73,10 @@ interface LoadBalancingRules {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("LoadBalancerLoadBalancingRules_Health")
-  health is ArmResourceActionAsync<
+  health is LoadBalancerLoadBalancingRuleOps.ActionAsync<
     LoadBalancingRule,
     void,
-    ArmResponse<LoadBalancerHealthPerRule>,
-    Parameters = {
-      /**
-       * The name of the resource group.
-       */
-      @pattern("^[a-zA-Z0-9_.-]*$")
-      @path
-      groupName: string;
-    }
+    ArmResponse<LoadBalancerHealthPerRule>
   >;
 }
 

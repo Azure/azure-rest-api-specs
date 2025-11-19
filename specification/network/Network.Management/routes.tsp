@@ -170,6 +170,56 @@ op checkDnsNameAvailability is ArmProviderActionSync<
   }
 >;
 
+alias RoutesNetworkInterfaceOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+
+    @path
+    @segment("providers")
+    providerName: "microsoft.Compute";
+
+    /** The name of the cloud service. */
+    @path
+    @segment("cloudServices")
+    @key
+    cloudServiceName: string;
+  },
+  {
+    /** The name of the network interface. */
+    @path
+    @segment("networkInterfaces")
+    @key
+    networkInterfaceName: string;
+  }
+>;
+
+alias CloudServicesOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+
+    @path
+    @segment("providers")
+    providerName: "microsoft.Compute";
+
+    /** The name of the cloud service. */
+    @path
+    @segment("cloudServices")
+    @key
+    cloudServiceName: string;
+  },
+  {
+    /** The name of the public IP Address. */
+    @path
+    @segment("publicipaddresses")
+    @key
+    publicIpAddressName: string;
+  }
+>;
+
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface NetworkInterfacesOperationGroup {
   /**
@@ -179,18 +229,10 @@ interface NetworkInterfacesOperationGroup {
   @operationId("NetworkInterfaces_ListCloudServiceNetworkInterfaces")
   @autoRoute
   @get
-  @action("networkInterfaces")
-  listCloudServiceNetworkInterfaces is ArmProviderActionSync<
+  listCloudServiceNetworkInterfaces is RoutesNetworkInterfaceOps.List<
+    NetworkInterface,
     Response = ResourceListResult<NetworkInterface>,
-    Scope = Extension.ResourceGroup,
-    Parameters = {
-      /**
-       * The name of the cloud service.
-       */
-      @path
-      @segment("cloudServices")
-      cloudServiceName: string;
-    }
+    OverrideErrorType = CloudError
   >;
 }
 
@@ -203,18 +245,10 @@ interface PublicIPAddressesOperationGroup {
   @operationId("PublicIPAddresses_ListCloudServicePublicIPAddresses")
   @autoRoute
   @get
-  @action("publicipaddresses")
-  listCloudServicePublicIPAddresses is ArmProviderActionSync<
+  listCloudServicePublicIPAddresses is CloudServicesOps.List<
+    PublicIPAddress,
     Response = ResourceListResult<PublicIPAddress>,
-    Scope = Extension.ResourceGroup,
-    Parameters = {
-      /**
-       * The name of the cloud service.
-       */
-      @path
-      @segment("cloudServices")
-      cloudServiceName: string;
-    }
+    OverrideErrorType = CloudError
   >;
 }
 

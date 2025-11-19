@@ -18,16 +18,43 @@ model SwapResource
   is Azure.ResourceManager.ProxyResource<SwapResourceProperties> {
   ...ResourceNameParameter<
     Resource = SwapResource,
-    KeyName = "cloudServiceSlot",
+    KeyName = "singletonResource",
     SegmentName = "cloudServiceSlots",
     NamePattern = ""
   >;
 }
 
-alias cloudServiceExternalResource = Extension.ExternalResource<
-  "Microsoft.Compute",
-  "cloudServices",
-  "{resourceName}"
+alias CloudServiceOps = Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+
+    @path
+    @segment("resourceGroups")
+    groupName: string;
+
+    @path
+    @segment("providers")
+    providerName: "microsoft.Compute";
+
+    /** The name of the cloud service. */
+    @path
+    @segment("cloudServices")
+    @key
+    resourceName: string;
+  },
+  {
+    ...Extension.ExtensionProviderNamespace<SwapResource>;
+    ...ParentKeysOf<SwapResource>;
+  },
+  {
+    ...Extension.ExtensionProviderNamespace<SwapResource>;
+
+    @path
+    @segment("cloudServiceSlots")
+    @key
+    singletonResource: string;
+  }
 >;
 
 @armResourceOperations
@@ -37,7 +64,7 @@ interface SwapResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VipSwap_Get")
-  get is ArmResourceRead<SwapResource>;
+  get is CloudServiceOps.Read<SwapResource, ErrorType = CloudError>;
 
   /**
    * Performs vip swap operation on swappable cloud services.
@@ -45,10 +72,12 @@ interface SwapResources {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @operationId("VipSwap_Create")
-  create is ArmResourceCreateOrReplaceAsync<
+  create is CloudServiceOps.CreateOrUpdateAsync<
     SwapResource,
     Response = OkResponse | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader,
+    ErrorType = CloudError
   >;
 
   /**
@@ -56,9 +85,10 @@ interface SwapResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VipSwap_List")
-  list is ArmResourceListByParent<
+  list is CloudServiceOps.List<
     SwapResource,
-    Response = ArmResponse<SwapResourceListResult>
+    Response = ArmResponse<SwapResourceListResult>,
+    ErrorType = CloudError
   >;
 }
 

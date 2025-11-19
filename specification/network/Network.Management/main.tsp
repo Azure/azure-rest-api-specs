@@ -139,10 +139,10 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
- * Network Client
+ * APIs to manage web application firewall rules.
  */
 @armProviderNamespace
-@service(#{ title: "NetworkManagementClient" })
+@service(#{ title: "WebApplicationFirewallManagement" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.Network;

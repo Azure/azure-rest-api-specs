@@ -24,6 +24,28 @@ model NetworkWatcher
   ...Azure.ResourceManager.Legacy.EntityTagProperty;
 }
 
+alias PacketCaptureOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** The name of the network watcher. */
+    @path
+    @segment("networkWatchers")
+    @key
+    networkWatcherName: string;
+  },
+  {
+    /** The name of the packet capture session. */
+    @path
+    @segment("packetCaptures")
+    @key
+    packetCaptureName: string;
+  }
+>;
+
 @armResourceOperations
 interface NetworkWatchers {
   /**
@@ -189,19 +211,10 @@ interface NetworkWatchers {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("PacketCaptures_Create")
   @put
-  @action("{packetCaptureName}")
-  create is ArmResourceActionAsyncBase<
+  create is PacketCaptureOps.CreateOrUpdateAsync<
     NetworkWatcher,
-    PacketCapture,
-    ArmResourceCreatedResponse<PacketCaptureResult>,
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<NetworkWatcher>,
-    Parameters = {
-      /**
-       * The name of the packet capture session.
-       */
-      @path
-      packetCaptureName: string;
-    }
+    Response = ArmResourceCreatedResponse<PacketCaptureResult>,
+    Request = PacketCapture
   >;
 
   /**
@@ -210,18 +223,9 @@ interface NetworkWatchers {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("PacketCaptures_Get")
   @get
-  @action("{packetCaptureName}")
-  packetCapturesGet is ArmResourceActionSync<
+  packetCapturesGet is PacketCaptureOps.Read<
     NetworkWatcher,
-    void,
-    ArmResponse<PacketCaptureResult>,
-    Parameters = {
-      /**
-       * The name of the packet capture session.
-       */
-      @path
-      packetCaptureName: string;
-    }
+    Response = ArmResponse<PacketCaptureResult>
   >;
 
   /**
@@ -230,18 +234,9 @@ interface NetworkWatchers {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("PacketCaptures_Delete")
   @delete
-  @action("{packetCaptureName}")
-  packetCapturesDelete is ArmResourceActionAsync<
+  packetCapturesDelete is PacketCaptureOps.DeleteWithoutOkAsync<
     NetworkWatcher,
-    void,
-    NoContentResponse,
-    Parameters = {
-      /**
-       * The name of the packet capture session.
-       */
-      @path
-      packetCaptureName: string;
-    }
+    Response = NoContentResponse
   >;
 
   /**
@@ -249,18 +244,7 @@ interface NetworkWatchers {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("PacketCaptures_Stop")
-  stop is ArmResourceActionAsync<
-    NetworkWatcher,
-    void,
-    OkResponse,
-    Parameters = {
-      /**
-       * The name of the packet capture session.
-       */
-      @path
-      packetCaptureName: string;
-    }
-  >;
+  stop is PacketCaptureOps.ActionAsync<NetworkWatcher, void, OkResponse>;
 
   /**
    * Query the status of a running packet capture session.
@@ -268,17 +252,10 @@ interface NetworkWatchers {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("PacketCaptures_GetStatus")
   @action("queryStatus")
-  getStatus is ArmResourceActionAsync<
+  getStatus is PacketCaptureOps.ActionAsync<
     NetworkWatcher,
     void,
-    ArmResponse<PacketCaptureQueryStatusResult>,
-    Parameters = {
-      /**
-       * The name given to the packet capture session.
-       */
-      @path
-      packetCaptureName: string;
-    }
+    ArmResponse<PacketCaptureQueryStatusResult>
   >;
 
   /**
@@ -288,11 +265,9 @@ interface NetworkWatchers {
   @operationId("PacketCaptures_List")
   @list
   @get
-  @action("packetCaptures")
-  packetCapturesList is ArmResourceActionSync<
+  packetCapturesList is PacketCaptureOps.List<
     NetworkWatcher,
-    void,
-    ArmResponse<PacketCaptureListResult>
+    Response = ArmResponse<PacketCaptureListResult>
   >;
 }
 
@@ -340,6 +315,6 @@ interface NetworkWatchers {
 @@doc(NetworkWatchers.getNetworkConfigurationDiagnostic::parameters.body,
   "Parameters to get network configuration diagnostic."
 );
-@@doc(NetworkWatchers.create::parameters.body,
+@@doc(NetworkWatchers.create::parameters.resource,
   "Parameters that define the create packet capture operation."
 );

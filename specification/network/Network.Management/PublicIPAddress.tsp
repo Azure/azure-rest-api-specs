@@ -45,7 +45,10 @@ alias PublicIPAddressOps = Azure.ResourceManager.Legacy.LegacyOperations<
     ...ApiVersionParameter;
     ...SubscriptionIdParameter;
     ...ResourceGroupParameter;
-    ...Azure.ResourceManager.Legacy.Provider;
+
+    @path
+    @segment("providers")
+    providerName: "microsoft.Compute";
 
     /** The name of the cloud service. */
     @path
@@ -75,6 +78,21 @@ alias PublicIPAddressOps = Azure.ResourceManager.Legacy.LegacyOperations<
     /** The name of the public IP Address. */
     @path
     @segment("publicipaddresses")
+    @key
+    publicIpAddressName: string;
+  }
+>;
+
+alias PublicIPAddressSubscriptionOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+  },
+  {
+    /** The name of the public IP Address. */
+    @path
+    @segment("publicIPAddresses")
     @key
     publicIpAddressName: string;
   }
@@ -176,7 +194,7 @@ interface PublicIPAddressOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("PublicIPAddresses_ListAll")
-  listAll is ArmListBySubscription<PublicIPAddress>;
+  listAll is PublicIPAddressSubscriptionOps.List<PublicIPAddress>;
 
   /**
    * Gets the Ddos Protection Status of a Public IP Address

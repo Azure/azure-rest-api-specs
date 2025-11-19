@@ -24,24 +24,46 @@ model ExpressRoutePortAuthorization
   ...Azure.ResourceManager.Legacy.EntityTagProperty;
 }
 
+alias ExpressRoutePortAuthorizationOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** The name of the express route port. */
+    @path
+    @segment("expressRoutePorts")
+    @key
+    expressRoutePortName: string;
+  },
+  {
+    /** The name of the authorization. */
+    @path
+    @segment("authorizations")
+    @key
+    authorizationName: string;
+  }
+>;
+
 @armResourceOperations
 interface ExpressRoutePortAuthorizations {
   /**
    * Gets the specified authorization from the specified express route port.
    */
-  get is ArmResourceRead<ExpressRoutePortAuthorization>;
+  get is ExpressRoutePortAuthorizationOps.Read<ExpressRoutePortAuthorization>;
 
   /**
    * Creates or updates an authorization in the specified express route port.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<ExpressRoutePortAuthorization>;
+  createOrUpdate is ExpressRoutePortAuthorizationOps.CreateOrUpdateAsync<ExpressRoutePortAuthorization>;
 
   /**
    * Deletes the specified authorization from the specified express route port.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<
+  delete is ExpressRoutePortAuthorizationOps.DeleteWithoutOkAsync<
     ExpressRoutePortAuthorization,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
       Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
@@ -50,7 +72,7 @@ interface ExpressRoutePortAuthorizations {
   /**
    * Gets all authorizations in an express route port.
    */
-  list is ArmResourceListByParent<ExpressRoutePortAuthorization>;
+  list is ExpressRoutePortAuthorizationOps.List<ExpressRoutePortAuthorization>;
 }
 
 @@doc(ExpressRoutePortAuthorization.name, "The name of the authorization.");

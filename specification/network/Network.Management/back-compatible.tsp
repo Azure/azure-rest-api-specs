@@ -423,7 +423,7 @@ using Microsoft.Network;
 @@clientName(PrivateEndpoints.privateDnsZoneGroupsCreateOrUpdate,
   "CreateOrUpdate"
 );
-@@clientName(PrivateEndpoints.privateDnsZoneGroupsCreateOrUpdate::parameters.body,
+@@clientName(PrivateEndpoints.privateDnsZoneGroupsCreateOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(PrivateEndpoints.privateDnsZoneGroupsList,
@@ -734,7 +734,7 @@ using Microsoft.Network;
 @@clientName(ExpressRouteCrossConnections.expressRouteCrossConnectionPeeringsCreateOrUpdate,
   "CreateOrUpdate"
 );
-@@clientName(ExpressRouteCrossConnections.expressRouteCrossConnectionPeeringsCreateOrUpdate::parameters.body,
+@@clientName(ExpressRouteCrossConnections.expressRouteCrossConnectionPeeringsCreateOrUpdate::parameters.resource,
   "peeringParameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
@@ -1093,7 +1093,7 @@ using Microsoft.Network;
 @@clientName(NetworkVirtualAppliances.networkVirtualApplianceConnectionsCreateOrUpdate,
   "CreateOrUpdate"
 );
-@@clientName(NetworkVirtualAppliances.networkVirtualApplianceConnectionsCreateOrUpdate::parameters.body,
+@@clientName(NetworkVirtualAppliances.networkVirtualApplianceConnectionsCreateOrUpdate::parameters.resource,
   "NetworkVirtualApplianceConnectionParameters"
 );
 @@clientLocation(NetworkVirtualAppliances.networkVirtualApplianceConnectionsGet,
@@ -1163,7 +1163,7 @@ using Microsoft.Network;
   "parameters"
 );
 @@clientLocation(NetworkWatchers.create, "PacketCaptures");
-@@clientName(NetworkWatchers.create::parameters.body, "parameters");
+@@clientName(NetworkWatchers.create::parameters.resource, "parameters");
 @@clientLocation(NetworkWatchers.packetCapturesGet, "PacketCaptures");
 @@clientName(NetworkWatchers.packetCapturesGet, "Get");
 @@clientLocation(NetworkWatchers.packetCapturesDelete, "PacketCaptures");
@@ -1572,7 +1572,7 @@ using Microsoft.Network;
 @@clientName(ExpressRouteGateways.expressRouteConnectionsCreateOrUpdate,
   "CreateOrUpdate"
 );
-@@clientName(ExpressRouteGateways.expressRouteConnectionsCreateOrUpdate::parameters.body,
+@@clientName(ExpressRouteGateways.expressRouteConnectionsCreateOrUpdate::parameters.resource,
   "putExpressRouteConnectionParameters"
 );
 @@clientLocation(ExpressRouteGateways.expressRouteConnectionsGet,

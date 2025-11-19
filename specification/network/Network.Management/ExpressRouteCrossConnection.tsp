@@ -24,6 +24,28 @@ model ExpressRouteCrossConnection
   ...Azure.ResourceManager.Legacy.EntityTagProperty;
 }
 
+alias ExpressRouteCrossConnectionPeeringOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** Name for the express route cross connection. */
+    @path
+    @segment("expressRouteCrossConnections")
+    @key
+    crossConnectionName: string;
+  },
+  {
+    /** The name of the peering. */
+    @path
+    @segment("peerings")
+    @key
+    peeringName: string;
+  }
+>;
+
 @armResourceOperations
 interface ExpressRouteCrossConnections {
   /**
@@ -72,72 +94,72 @@ interface ExpressRouteCrossConnections {
    * Gets the currently advertised ARP table associated with the express route cross connection in a resource group.
    */
   @list
-  @action("/arpTables/{devicePath}")
-  listArpTable is ArmResourceActionAsync<
+  listArpTable is ArmResourceRead<
     ExpressRouteCrossConnection,
-    void,
-    ArmResponse<ExpressRouteCircuitsArpTableListResult>,
     Parameters = {
       /**
        * The name of the peering.
        */
       @path
+      @segment("peerings")
       peeringName: string;
 
       /**
        * The path of the device.
        */
       @path
+      @segment("arpTables")
       devicePath: string;
-    }
+    },
+    Response = ArmResponse<ExpressRouteCircuitsArpTableListResult>
   >;
 
   /**
    * Gets the route table summary associated with the express route cross connection in a resource group.
    */
   @list
-  @action("/routeTablesSummary/{devicePath}")
-  listRoutesTableSummary is ArmResourceActionAsync<
+  listRoutesTableSummary is ArmResourceRead<
     ExpressRouteCrossConnection,
-    void,
-    ArmResponse<ExpressRouteCrossConnectionsRoutesTableSummaryListResult>,
     Parameters = {
       /**
        * The name of the peering.
        */
       @path
+      @segment("peerings")
       peeringName: string;
 
       /**
        * The path of the device.
        */
       @path
+      @segment("routeTablesSummary")
       devicePath: string;
-    }
+    },
+    Response = ArmResponse<ExpressRouteCrossConnectionsRoutesTableSummaryListResult>
   >;
 
   /**
    * Gets the currently advertised routes table associated with the express route cross connection in a resource group.
    */
   @list
-  @action("/routeTables/{devicePath}")
-  listRoutesTable is ArmResourceActionAsync<
+  listRoutesTable is ArmResourceRead<
     ExpressRouteCrossConnection,
-    void,
-    ArmResponse<ExpressRouteCircuitsRoutesTableListResult>,
     Parameters = {
       /**
        * The name of the peering.
        */
       @path
+      @segment("peerings")
       peeringName: string;
 
       /**
        * The path of the device.
        */
       @path
+      @segment("routeTables")
       devicePath: string;
-    }
+    },
+    Response = ArmResponse<ExpressRouteCircuitsRoutesTableListResult>
   >;
 
   /**
@@ -147,11 +169,9 @@ interface ExpressRouteCrossConnections {
   @operationId("ExpressRouteCrossConnectionPeerings_List")
   @list
   @get
-  @action("peerings")
-  expressRouteCrossConnectionPeeringsList is ArmResourceActionSync<
+  expressRouteCrossConnectionPeeringsList is ExpressRouteCrossConnectionPeeringOps.List<
     ExpressRouteCrossConnection,
-    void,
-    ArmResponse<ExpressRouteCrossConnectionPeeringList>
+    Response = ArmResponse<ExpressRouteCrossConnectionPeeringList>
   >;
 
   /**
@@ -160,18 +180,9 @@ interface ExpressRouteCrossConnections {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ExpressRouteCrossConnectionPeerings_Delete")
   @delete
-  @action("{peeringName}")
-  delete is ArmResourceActionAsync<
+  delete is ExpressRouteCrossConnectionPeeringOps.DeleteWithoutOkAsync<
     ExpressRouteCrossConnection,
-    void,
-    Response = OkResponse | NoContentResponse,
-    Parameters = {
-      /**
-       * The name of the peering.
-       */
-      @path
-      peeringName: string;
-    }
+    Response = OkResponse | NoContentResponse
   >;
 
   /**
@@ -180,18 +191,9 @@ interface ExpressRouteCrossConnections {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ExpressRouteCrossConnectionPeerings_Get")
   @get
-  @action("{peeringName}")
-  expressRouteCrossConnectionPeeringsGet is ArmResourceActionSync<
+  expressRouteCrossConnectionPeeringsGet is ExpressRouteCrossConnectionPeeringOps.Read<
     ExpressRouteCrossConnection,
-    void,
-    ArmResponse<ExpressRouteCrossConnectionPeering>,
-    Parameters = {
-      /**
-       * The name of the peering.
-       */
-      @path
-      peeringName: string;
-    }
+    Response = ArmResponse<ExpressRouteCrossConnectionPeering>
   >;
 
   /**
@@ -200,19 +202,10 @@ interface ExpressRouteCrossConnections {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ExpressRouteCrossConnectionPeerings_CreateOrUpdate")
   @put
-  @action("{peeringName}")
-  expressRouteCrossConnectionPeeringsCreateOrUpdate is ArmResourceActionAsyncBase<
+  expressRouteCrossConnectionPeeringsCreateOrUpdate is ExpressRouteCrossConnectionPeeringOps.CreateOrUpdateAsync<
     ExpressRouteCrossConnection,
-    ExpressRouteCrossConnectionPeering,
-    ArmResponse<ExpressRouteCrossConnectionPeering> | ArmResourceCreatedResponse<ExpressRouteCrossConnectionPeering>,
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ExpressRouteCrossConnection>,
-    Parameters = {
-      /**
-       * The name of the peering.
-       */
-      @path
-      peeringName: string;
-    }
+    Response = ArmResponse<ExpressRouteCrossConnectionPeering> | ArmResourceCreatedResponse<ExpressRouteCrossConnectionPeering>,
+    Request = ExpressRouteCrossConnectionPeering
   >;
 }
 
@@ -228,6 +221,6 @@ interface ExpressRouteCrossConnections {
 @@doc(ExpressRouteCrossConnections.updateTags::parameters.properties,
   "Parameters supplied to update express route cross connection tags."
 );
-@@doc(ExpressRouteCrossConnections.expressRouteCrossConnectionPeeringsCreateOrUpdate::parameters.body,
+@@doc(ExpressRouteCrossConnections.expressRouteCrossConnectionPeeringsCreateOrUpdate::parameters.resource,
   "Parameters supplied to the create or update ExpressRouteCrossConnection peering operation."
 );

@@ -37,6 +37,26 @@ model LoadBalancer
   ...Azure.ResourceManager.Legacy.EntityTagProperty;
 }
 
+alias LoadBalancerLoadBalancerOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+
+    @path
+    @segment("resourceGroups")
+    groupName: string;
+
+    ...Azure.ResourceManager.Legacy.Provider;
+  },
+  {
+    /** The name of the load balancer. */
+    @path
+    @segment("loadBalancers")
+    @key
+    loadBalancerName: string;
+  }
+>;
+
 @armResourceOperations
 interface LoadBalancers {
   /**
@@ -86,18 +106,10 @@ interface LoadBalancers {
   /**
    * Migrate load balancer to IP Based
    */
-  migrateToIpBased is ArmResourceActionSync<
+  migrateToIpBased is LoadBalancerLoadBalancerOps.ActionSync<
     LoadBalancer,
     MigrateLoadBalancerToIpBasedRequest,
-    ArmResponse<MigratedPools>,
-    Parameters = {
-      /**
-       * The name of the resource group.
-       */
-      @pattern("^[a-z][a-z0-9]*$")
-      @path
-      groupName: string;
-    },
+    Response = ArmResponse<MigratedPools>,
     OptionalRequestBody = true
   >;
 

@@ -26,6 +26,90 @@ model ExpressRouteCircuitPeering
   ...Azure.ResourceManager.Legacy.EntityTagProperty;
 }
 
+alias ArpTablesgOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** The name of the express route port. */
+    @path
+    @segment("expressRouteCircuits")
+    @key
+    circuitName: string;
+
+    /** The name of the peering. */
+    @path
+    @segment("peerings")
+    @key
+    peeringName: string;
+  },
+  {
+    /** The name of the arpTables. */
+    @path
+    @segment("arpTables")
+    @key
+    devicePath: string;
+  }
+>;
+
+alias RouteTablesOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** The name of the express route port. */
+    @path
+    @segment("expressRouteCircuits")
+    @key
+    circuitName: string;
+
+    /** The name of the peering. */
+    @path
+    @segment("peerings")
+    @key
+    peeringName: string;
+  },
+  {
+    /** The name of the routeTables. */
+    @path
+    @segment("routeTables")
+    @key
+    devicePath: string;
+  }
+>;
+
+alias RouteTablesSummaryOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** The name of the express route port. */
+    @path
+    @segment("expressRouteCircuits")
+    @key
+    circuitName: string;
+
+    /** The name of the peering. */
+    @path
+    @segment("peerings")
+    @key
+    peeringName: string;
+  },
+  {
+    /** The name of the routeTablesSummary. */
+    @path
+    @segment("routeTablesSummary")
+    @key
+    devicePath: string;
+  }
+>;
+
 @armResourceOperations
 interface ExpressRouteCircuitPeerings {
   /**
@@ -57,19 +141,9 @@ interface ExpressRouteCircuitPeerings {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ExpressRouteCircuits_ListArpTable")
-  @list
-  @action("/arpTables/{devicePath}")
-  listArpTable is ArmResourceActionAsync<
+  listArpTable is ArpTablesgOps.Read<
     ExpressRouteCircuitPeering,
-    void,
-    ArmResponse<ExpressRouteCircuitsArpTableListResult>,
-    Parameters = {
-      /**
-       * The path of the device.
-       */
-      @path
-      devicePath: string;
-    }
+    Response = ArmResponse<ExpressRouteCircuitsArpTableListResult>
   >;
 
   /**
@@ -78,18 +152,9 @@ interface ExpressRouteCircuitPeerings {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ExpressRouteCircuits_ListRoutesTable")
   @list
-  @action("/routeTables/{devicePath}")
-  listRoutesTable is ArmResourceActionAsync<
+  listRoutesTable is RouteTablesOps.Read<
     ExpressRouteCircuitPeering,
-    void,
-    ArmResponse<ExpressRouteCircuitsRoutesTableListResult>,
-    Parameters = {
-      /**
-       * The path of the device.
-       */
-      @path
-      devicePath: string;
-    }
+    Response = ArmResponse<ExpressRouteCircuitsRoutesTableListResult>,
   >;
 
   /**
@@ -98,18 +163,9 @@ interface ExpressRouteCircuitPeerings {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ExpressRouteCircuits_ListRoutesTableSummary")
   @list
-  @action("/routeTablesSummary/{devicePath}")
-  listRoutesTableSummary is ArmResourceActionAsync<
+  listRoutesTableSummary is RouteTablesSummaryOps.Read<
     ExpressRouteCircuitPeering,
-    void,
-    ArmResponse<ExpressRouteCircuitsRoutesTableSummaryListResult>,
-    Parameters = {
-      /**
-       * The path of the device.
-       */
-      @path
-      devicePath: string;
-    }
+    Response = ArmResponse<ExpressRouteCircuitsRoutesTableSummaryListResult>,
   >;
 
   /**

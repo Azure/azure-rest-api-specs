@@ -31,6 +31,28 @@ model PrivateEndpoint
   ...Azure.ResourceManager.Legacy.EntityTagProperty;
 }
 
+alias PrivateDnsZoneGroupOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** The name of the private endpoint. */
+    @path
+    @segment("privateEndpoints")
+    @key
+    privateEndpointName: string;
+  },
+  {
+    /** The name of the private endpoint. */
+    @path
+    @segment("privateDnsZoneGroups")
+    @key
+    privateDnsZoneGroupName: string;
+  }
+>;
+
 @armResourceOperations
 interface PrivateEndpoints {
   /**
@@ -77,19 +99,9 @@ interface PrivateEndpoints {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("PrivateDnsZoneGroups_Delete")
   @delete
-  @action("{privateDnsZoneGroupName}")
-  privateDnsZoneGroupsDelete is ArmResourceActionAsyncBase<
+  privateDnsZoneGroupsDelete is PrivateDnsZoneGroupOps.DeleteWithoutOkAsync<
     PrivateEndpoint,
-    void,
-    Response = OkResponse | NoContentResponse,
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<PrivateEndpoint>,
-    Parameters = {
-      /**
-       * The name of the private dns zone group.
-       */
-      @path
-      privateDnsZoneGroupName: string;
-    }
+    Response = OkResponse | NoContentResponse
   >;
 
   /**
@@ -98,18 +110,9 @@ interface PrivateEndpoints {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("PrivateDnsZoneGroups_Get")
   @get
-  @action("{privateDnsZoneGroupName}")
-  privateDnsZoneGroupsGet is ArmResourceActionSync<
+  privateDnsZoneGroupsGet is PrivateDnsZoneGroupOps.Read<
     PrivateEndpoint,
-    void,
-    ArmResponse<PrivateDnsZoneGroup>,
-    Parameters = {
-      /**
-       * The name of the private dns zone group.
-       */
-      @path
-      privateDnsZoneGroupName: string;
-    }
+    Response = ArmResponse<PrivateDnsZoneGroup>
   >;
 
   /**
@@ -118,19 +121,10 @@ interface PrivateEndpoints {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("PrivateDnsZoneGroups_CreateOrUpdate")
   @put
-  @action("{privateDnsZoneGroupName}")
-  privateDnsZoneGroupsCreateOrUpdate is ArmResourceActionAsyncBase<
+  privateDnsZoneGroupsCreateOrUpdate is PrivateDnsZoneGroupOps.CreateOrUpdateAsync<
     PrivateEndpoint,
-    PrivateDnsZoneGroup,
-    ArmResponse<PrivateDnsZoneGroup> | ArmResourceCreatedResponse<PrivateDnsZoneGroup>,
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<PrivateEndpoint>,
-    Parameters = {
-      /**
-       * The name of the private dns zone group.
-       */
-      @path
-      privateDnsZoneGroupName: string;
-    }
+    Response = ArmResponse<PrivateDnsZoneGroup> | ArmResourceCreatedResponse<PrivateDnsZoneGroup>,
+    Request = PrivateDnsZoneGroup
   >;
 
   /**
@@ -140,11 +134,9 @@ interface PrivateEndpoints {
   @operationId("PrivateDnsZoneGroups_List")
   @list
   @get
-  @action("privateDnsZoneGroups")
-  privateDnsZoneGroupsList is ArmResourceActionSync<
+  privateDnsZoneGroupsList is PrivateDnsZoneGroupOps.List<
     PrivateEndpoint,
-    void,
-    ArmResponse<PrivateDnsZoneGroupListResult>
+    Response = ArmResponse<PrivateDnsZoneGroupListResult>
   >;
 }
 
@@ -153,6 +145,6 @@ interface PrivateEndpoints {
 @@doc(PrivateEndpoints.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update private endpoint operation."
 );
-@@doc(PrivateEndpoints.privateDnsZoneGroupsCreateOrUpdate::parameters.body,
+@@doc(PrivateEndpoints.privateDnsZoneGroupsCreateOrUpdate::parameters.resource,
   "Parameters supplied to the create or update private dns zone group operation."
 );

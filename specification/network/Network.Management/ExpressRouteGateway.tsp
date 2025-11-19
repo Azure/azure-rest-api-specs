@@ -24,6 +24,28 @@ model ExpressRouteGateway
   ...Azure.ResourceManager.Legacy.EntityTagProperty;
 }
 
+alias ExpressRouteConnectionOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** The name of the express route gateway. */
+    @path
+    @segment("expressRouteGateways")
+    @key
+    expressRouteGatewayName: string;
+  },
+  {
+    /** The name of the express route connection. */
+    @path
+    @segment("expressRouteConnections")
+    @key
+    connectionName: string;
+  }
+>;
+
 @armResourceOperations
 interface ExpressRouteGateways {
   /**
@@ -78,19 +100,10 @@ interface ExpressRouteGateways {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ExpressRouteConnections_CreateOrUpdate")
   @put
-  @action("{connectionName}")
-  expressRouteConnectionsCreateOrUpdate is ArmResourceActionAsyncBase<
+  expressRouteConnectionsCreateOrUpdate is ExpressRouteConnectionOps.CreateOrUpdateAsync<
     ExpressRouteGateway,
-    ExpressRouteConnection,
-    ArmResponse<ExpressRouteConnection> | ArmResourceCreatedResponse<ExpressRouteConnection>,
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ExpressRouteGateway>,
-    Parameters = {
-      /**
-       * The name of the connection subresource.
-       */
-      @path
-      connectionName: string;
-    }
+    Response = ArmResponse<ExpressRouteConnection> | ArmResourceCreatedResponse<ExpressRouteConnection>,
+    Request = ExpressRouteConnection
   >;
 
   /**
@@ -99,18 +112,9 @@ interface ExpressRouteGateways {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ExpressRouteConnections_Get")
   @get
-  @action("{connectionName}")
-  expressRouteConnectionsGet is ArmResourceActionSync<
+  expressRouteConnectionsGet is ExpressRouteConnectionOps.Read<
     ExpressRouteGateway,
-    void,
-    ArmResponse<ExpressRouteConnection>,
-    Parameters = {
-      /**
-       * The name of the ExpressRoute connection.
-       */
-      @path
-      connectionName: string;
-    }
+    Response = ArmResponse<ExpressRouteConnection>
   >;
 
   /**
@@ -119,19 +123,9 @@ interface ExpressRouteGateways {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ExpressRouteConnections_Delete")
   @delete
-  @action("{connectionName}")
-  expressRouteConnectionsDelete is ArmResourceActionAsyncBase<
+  expressRouteConnectionsDelete is ExpressRouteConnectionOps.DeleteWithoutOkAsync<
     ExpressRouteGateway,
-    void,
-    Response = OkResponse | NoContentResponse,
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ExpressRouteGateway>,
-    Parameters = {
-      /**
-       * The name of the connection subresource.
-       */
-      @path
-      connectionName: string;
-    }
+    Response = OkResponse | NoContentResponse
   >;
 
   /**
@@ -141,11 +135,9 @@ interface ExpressRouteGateways {
   @operationId("ExpressRouteConnections_List")
   @list
   @get
-  @action("expressRouteConnections")
-  list is ArmResourceActionSync<
+  list is ExpressRouteConnectionOps.List<
     ExpressRouteGateway,
-    void,
-    ArmResponse<ExpressRouteConnectionList>
+    Response = ArmResponse<ExpressRouteConnectionList>
   >;
 }
 
@@ -159,6 +151,6 @@ interface ExpressRouteGateways {
 @@doc(ExpressRouteGateways.updateTags::parameters.properties,
   "Parameters supplied to update a virtual wan express route gateway tags."
 );
-@@doc(ExpressRouteGateways.expressRouteConnectionsCreateOrUpdate::parameters.body,
+@@doc(ExpressRouteGateways.expressRouteConnectionsCreateOrUpdate::parameters.resource,
   "Parameters required in an ExpressRouteConnection PUT operation."
 );

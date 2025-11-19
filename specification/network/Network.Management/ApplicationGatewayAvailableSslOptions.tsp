@@ -58,7 +58,6 @@ interface ApplicationGatewayAvailableSslOptionsOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ApplicationGateways_GetSslPredefinedPolicy")
   @get
-  @action("{predefinedPolicyName}")
   getSslPredefinedPolicy is ArmResourceActionSync<
     ApplicationGatewayAvailableSslOptions,
     void,
@@ -69,6 +68,7 @@ interface ApplicationGatewayAvailableSslOptionsOperationGroup {
        * Name of Ssl predefined policy.
        */
       @path
+      @segment("predefinedPolicies")
       predefinedPolicyName: string;
     }
   >;

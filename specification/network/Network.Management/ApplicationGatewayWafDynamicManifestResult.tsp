@@ -25,6 +25,26 @@ model ApplicationGatewayWafDynamicManifestResult
   >;
 }
 
+alias ApplicationGatewayWafDynamicManifestResultOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** The location for which the WAF dynamic manifest is requested. */
+    @path
+    @segment("locations")
+    location: string;
+  },
+  {
+    /** The name of the Application Gateway WAF Dynamic Manifest. */
+    @path
+    @segment("applicationGatewayWafDynamicManifests")
+    @key
+    applicationGatewayWafDynamicManifestName: "dafault";
+  }
+>;
+
 @armResourceOperations
 interface ApplicationGatewayWafDynamicManifestResults {
   /**
@@ -32,10 +52,7 @@ interface ApplicationGatewayWafDynamicManifestResults {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ApplicationGatewayWafDynamicManifestsDefault_Get")
-  get is ArmResourceRead<
-    ApplicationGatewayWafDynamicManifestResult,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
-  >;
+  get is ApplicationGatewayWafDynamicManifestResultOps.Read<ApplicationGatewayWafDynamicManifestResult>;
 
   /**
    * Gets the regional application gateway waf manifest.
@@ -45,6 +62,12 @@ interface ApplicationGatewayWafDynamicManifestResults {
   applicationGatewayWafDynamicManifestsGet is ArmResourceListByParent<
     ApplicationGatewayWafDynamicManifestResult,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    Parameters = {
+      /** The location for which the WAF dynamic manifest is requested. */
+      @path
+      @segment("locations")
+      location: string;
+    },
     Response = ArmResponse<ApplicationGatewayWafDynamicManifestResultList>
   >;
 }

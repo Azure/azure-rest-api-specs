@@ -36,7 +36,10 @@ alias NetworkInterfaceOps = Azure.ResourceManager.Legacy.LegacyOperations<
     ...ApiVersionParameter;
     ...SubscriptionIdParameter;
     ...ResourceGroupParameter;
-    ...Azure.ResourceManager.Legacy.Provider;
+
+    @path
+    @segment("providers")
+    providerName: "microsoft.Compute";
 
     /** The name of the cloud service. */
     @path

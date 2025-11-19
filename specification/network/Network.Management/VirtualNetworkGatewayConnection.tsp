@@ -102,7 +102,7 @@ interface VirtualNetworkGatewayConnections {
   /**
    * The VirtualNetworkGatewayConnectionResetSharedKey operation resets the virtual network gateway connection shared key for passed virtual network gateway connection in the specified resource group through Network resource provider.
    */
-  @action("reset")
+  @action("sharedkey/reset")
   resetSharedKey is ArmResourceActionAsync<
     VirtualNetworkGatewayConnection,
     ConnectionResetSharedKey,

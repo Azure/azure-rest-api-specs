@@ -31,6 +31,27 @@ model NetworkVirtualAppliance
   ...Azure.ResourceManager.Legacy.EntityTagProperty;
 }
 
+alias NetworkVirtualApplianceNetworkVirtualApplianceOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** The name of the Network Virtual Appliance. */
+    @path
+    @segment("networkVirtualAppliances")
+    @key
+    networkVirtualApplianceName: string;
+  },
+  {
+    @path
+    @segment("networkVirtualApplianceConnections")
+    @key
+    connectionName: string;
+  }
+>;
+
 @armResourceOperations
 interface NetworkVirtualAppliances {
   /**
@@ -115,20 +136,10 @@ interface NetworkVirtualAppliances {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("NetworkVirtualApplianceConnections_CreateOrUpdate")
   @put
-  @action("{connectionName}")
-  networkVirtualApplianceConnectionsCreateOrUpdate is ArmResourceActionAsyncBase<
+  networkVirtualApplianceConnectionsCreateOrUpdate is NetworkVirtualApplianceNetworkVirtualApplianceOps.CreateOrUpdateAsync<
     NetworkVirtualAppliance,
-    NetworkVirtualApplianceConnection,
-    ArmResponse<NetworkVirtualApplianceConnection> | ArmResourceCreatedResponse<NetworkVirtualApplianceConnection>,
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<NetworkVirtualAppliance>,
-    Parameters = {
-      /**
-       * The name of the NVA connection.
-       */
-      @pattern("^[A-Za-z0-9_]+")
-      @path
-      connectionName: string;
-    }
+    Response = ArmResponse<NetworkVirtualApplianceConnection> | ArmResourceCreatedResponse<NetworkVirtualApplianceConnection>,
+    Request = NetworkVirtualApplianceConnection
   >;
 
   /**
@@ -137,18 +148,9 @@ interface NetworkVirtualAppliances {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("NetworkVirtualApplianceConnections_Get")
   @get
-  @action("{connectionName}")
-  networkVirtualApplianceConnectionsGet is ArmResourceActionSync<
+  networkVirtualApplianceConnectionsGet is NetworkVirtualApplianceNetworkVirtualApplianceOps.Read<
     NetworkVirtualAppliance,
-    void,
-    ArmResponse<NetworkVirtualApplianceConnection>,
-    Parameters = {
-      /**
-       * The name of the NVA connection.
-       */
-      @path
-      connectionName: string;
-    }
+    Response = ArmResponse<NetworkVirtualApplianceConnection>
   >;
 
   /**
@@ -157,19 +159,9 @@ interface NetworkVirtualAppliances {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("NetworkVirtualApplianceConnections_Delete")
   @delete
-  @action("{connectionName}")
-  networkVirtualApplianceConnectionsDelete is ArmResourceActionAsyncBase<
+  networkVirtualApplianceConnectionsDelete is NetworkVirtualApplianceNetworkVirtualApplianceOps.DeleteWithoutOkAsync<
     NetworkVirtualAppliance,
-    void,
-    Response = OkResponse | NoContentResponse,
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<NetworkVirtualAppliance>,
-    Parameters = {
-      /**
-       * The name of the NVA connection.
-       */
-      @path
-      connectionName: string;
-    }
+    Response = OkResponse | NoContentResponse
   >;
 
   /**
@@ -179,11 +171,9 @@ interface NetworkVirtualAppliances {
   @operationId("NetworkVirtualApplianceConnections_List")
   @list
   @get
-  @action("networkVirtualApplianceConnections")
-  networkVirtualApplianceConnectionsList is ArmResourceActionSync<
+  networkVirtualApplianceConnectionsList is NetworkVirtualApplianceNetworkVirtualApplianceOps.List<
     NetworkVirtualAppliance,
-    void,
-    ArmResponse<NetworkVirtualApplianceConnectionList>
+    Response = ArmResponse<NetworkVirtualApplianceConnectionList>
   >;
 }
 
@@ -206,6 +196,6 @@ interface NetworkVirtualAppliances {
 @@doc(NetworkVirtualAppliances.getBootDiagnosticLogs::parameters.body,
   "Parameters supplied to retrieve boot diagnostic logs for a NVA VM instance"
 );
-@@doc(NetworkVirtualAppliances.networkVirtualApplianceConnectionsCreateOrUpdate::parameters.body,
+@@doc(NetworkVirtualAppliances.networkVirtualApplianceConnectionsCreateOrUpdate::parameters.resource,
   "Parameters supplied in an NetworkVirtualApplianceConnection PUT operation."
 );

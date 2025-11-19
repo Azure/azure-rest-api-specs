@@ -30,6 +30,28 @@ model ExpressRoutePort
   identity?: ManagedServiceIdentity;
 }
 
+alias ExpressRouteLinkOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** The name of the express route port. */
+    @path
+    @segment("ExpressRoutePorts")
+    @key
+    expressRoutePortName: string;
+  },
+  {
+    /** The name of the express route link. */
+    @path
+    @segment("links")
+    @key
+    linkName: string;
+  }
+>;
+
 @armResourceOperations
 interface ExpressRoutePorts {
   /**
@@ -85,18 +107,9 @@ interface ExpressRoutePorts {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ExpressRouteLinks_Get")
   @get
-  @action("{linkName}")
-  expressRouteLinksGet is ArmResourceActionSync<
+  expressRouteLinksGet is ExpressRouteLinkOps.Read<
     ExpressRoutePort,
-    void,
-    ArmResponse<ExpressRouteLink>,
-    Parameters = {
-      /**
-       * The name of the ExpressRouteLink resource.
-       */
-      @path
-      linkName: string;
-    }
+    Response = ArmResponse<ExpressRouteLink>
   >;
 
   /**
@@ -106,11 +119,9 @@ interface ExpressRoutePorts {
   @operationId("ExpressRouteLinks_List")
   @list
   @get
-  @action("links")
-  expressRouteLinksList is ArmResourceActionSync<
+  expressRouteLinksList is ExpressRouteLinkOps.List<
     ExpressRoutePort,
-    void,
-    ArmResponse<ExpressRouteLinkListResult>
+    Response = ArmResponse<ExpressRouteLinkListResult>
   >;
 }
 

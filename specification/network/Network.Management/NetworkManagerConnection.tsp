@@ -93,48 +93,22 @@ interface NetworkManagerConnections {
     }
   >;
 }
-alias ManagementGroupNetworkManagerConnectionOps = Azure.ResourceManager.Legacy.ExtensionOperations<
-  {
-    ...ApiVersionParameter;
-
-    /** the provider namespace */
-    @path
-    @segment("providers")
-    @key
-    providerNamespace: "Microsoft.Management";
-
-    /** The management group Id which uniquely identify the Microsoft Azure management group. */
-    @path
-    @segment("managementGroups")
-    @key
-    managementGroupId: string;
-  },
-  {
-    ...Extension.ExtensionProviderNamespace<NetworkManagerConnection>;
-  },
-  {
-    ...Extension.ExtensionProviderNamespace<NetworkManagerConnection>;
-
-    /** Name for the network manager connection. */
-    @path
-    @segment("networkManagerConnections")
-    @key
-    networkManagerConnectionName: string;
-  }
->;
 
 @armResourceOperations
 interface ManagementGroupNetworkManagerConnections {
   /**
    * Get a specified connection created by this management group.
    */
-  get is Extension.Read<Extension.ManagementGroup, NetworkManagerConnection>;
+  get is Extension.Read<
+    Extension.ManagementGroup<"managementGroupId">,
+    NetworkManagerConnection
+  >;
 
   /**
    * Create a network manager connection on this management group.
    */
   createOrUpdate is Extension.CreateOrReplaceSync<
-    Extension.ManagementGroup,
+    Extension.ManagementGroup<"managementGroupId">,
     NetworkManagerConnection
   >;
 
@@ -142,7 +116,7 @@ interface ManagementGroupNetworkManagerConnections {
    * Delete specified pending connection created by this management group.
    */
   delete is Extension.DeleteSync<
-    Extension.ManagementGroup,
+    Extension.ManagementGroup<"managementGroupId">,
     NetworkManagerConnection
   >;
 
@@ -150,7 +124,7 @@ interface ManagementGroupNetworkManagerConnections {
    * List all network manager connections created by this management group.
    */
   list is Extension.ListByTarget<
-    Extension.ManagementGroup,
+    Extension.ManagementGroup<"managementGroupId">,
     NetworkManagerConnection
   >;
 }

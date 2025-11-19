@@ -26,6 +26,31 @@ model BackendAddressPool
   ...Azure.ResourceManager.Legacy.EntityTagProperty;
 }
 
+alias ListInboundNatRulePortMappingsOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+
+    @path
+    @segment("resourceGroups")
+    groupName: string;
+
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** The name of the load balancer. */
+    @path
+    @segment("loadBalancers")
+    @key
+    loadBalancerName: string;
+  },
+  {
+    /** The name of the backend address pool. */
+    @path
+    @segment("backendAddressPools")
+    @key
+    backendPoolName: string;
+  }
+>;
 @armResourceOperations
 interface BackendAddressPools {
   /**
@@ -66,23 +91,10 @@ interface BackendAddressPools {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("LoadBalancers_ListInboundNatRulePortMappings")
   @action("queryInboundNatRulePortMapping")
-  listInboundNatRulePortMappings is ArmResourceActionAsync<
+  listInboundNatRulePortMappings is ListInboundNatRulePortMappingsOps.ActionAsync<
     BackendAddressPool,
     QueryInboundNatRulePortMappingRequest,
-    ArmResponse<BackendAddressInboundNatRulePortMappings>,
-    Parameters = {
-      /**
-       * The name of the resource group.
-       */
-      @path
-      groupName: string;
-
-      /**
-       * The name of the load balancer backend address pool.
-       */
-      @path
-      backendPoolName: string;
-    }
+    ArmResponse<BackendAddressInboundNatRulePortMappings>
   >;
 }
 

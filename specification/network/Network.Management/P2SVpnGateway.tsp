@@ -24,6 +24,22 @@ model P2SVpnGateway
   ...Azure.ResourceManager.Legacy.EntityTagProperty;
 }
 
+alias P2SVpnGatewayOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+  },
+  {
+    /** The name of the P2S Vpn Gateway. */
+    @path
+    @segment("p2svpnGateways")
+    @key
+    p2sVpnGatewayName: string;
+  }
+>;
+
 @armResourceOperations
 interface P2SVpnGateways {
   /**
@@ -132,17 +148,10 @@ interface P2SVpnGateways {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("P2sVpnGateways_DisconnectP2sVpnConnections")
-  disconnectP2sVpnConnections is ArmResourceActionAsync<
+  disconnectP2sVpnConnections is P2SVpnGatewayOps.ActionAsync<
     P2SVpnGateway,
     P2SVpnConnectionRequest,
-    OkResponse,
-    Parameters = {
-      /**
-       * The name of the P2S Vpn Gateway.
-       */
-      @path
-      p2sVpnGatewayName: string;
-    }
+    OkResponse
   >;
 }
 
