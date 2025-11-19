@@ -25,6 +25,6 @@ export default defineConfig(
     },
   },
   {
-    ignores: ["coverage/**", "dist/**"],
+    ignores: ["coverage/**", "dist/**", "test/**"],
   },
 );
