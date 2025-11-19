@@ -38,14 +38,6 @@ interface BulkActions {
     Response = ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>
   >;
 
-  @doc("Gets the status of a LaunchBulkInstancesOperation.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ComputeBulkActions/locations/{location}/launchBulkInstancesOperations/{name}/status")
-  getStatus is LaunchBulkInstancesOps.ActionSync<
-    LaunchBulkInstancesOperation,
-    void,
-    Response = LaunchBulkInstanceOperationStatusResponse
-  >;
-
   @doc("List LaunchBulkInstancesOperation resources by resource group.")
   @get
   @autoRoute
