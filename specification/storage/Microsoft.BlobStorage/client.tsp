@@ -38,7 +38,7 @@ namespace Customizations;
   "objectReplicationRules",
   "rust"
 );
-@@clientName(ImmutabilityPolicyExpiryParameter.immutabilityPolicyExpiry,
+@@clientName(ImmutabilityPolicyExpiryRequiredParameter.immutabilityPolicyExpiry,
   "expiry"
 );
 @@alternateType(BlobPropertiesInternal.contentLength, uint64, "rust");
