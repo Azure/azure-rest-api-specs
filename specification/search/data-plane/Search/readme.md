@@ -40,7 +40,7 @@ suppressions:
   - code: LroExtension 
     from: search.json
     reason: Legacy swagger file
-  - code: DISCRIMINATOR_VALUE_NOT_FOUND 
+  - code: AutoRestExtension
     from: search.json
     reason: Legacy swagger file
 ```
