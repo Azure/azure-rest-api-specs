@@ -3463,7 +3463,9 @@ model OperationMetricDimension {
 /**
  * The object that defines the structure of an Azure Data Factory error response.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @error
+@Azure.ResourceManager.Legacy.armExternalType
 model CloudError {
   /**
    * Error data
@@ -3474,6 +3476,8 @@ model CloudError {
 /**
  * The object that defines the structure of an Azure Data Factory error.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.armExternalType
 model CloudErrorBody {
   /**
    * Error code.
@@ -3598,6 +3602,7 @@ model PurviewConfiguration {
 /**
  * Factory's git repo information.
  */
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @discriminator("type")
 model FactoryRepoConfiguration {
   /**
@@ -3876,6 +3881,7 @@ model GitHubAccessTokenResponse {
   /**
    * GitHub access token.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   gitHubAccessToken?: string;
 }
 
@@ -3921,6 +3927,7 @@ model AccessPolicyResponse {
   /**
    * Data Plane read only access token.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   accessToken?: string;
 
   /**
@@ -3939,6 +3946,7 @@ model IntegrationRuntimeListResponse
  * Azure Data Factory nested object which serves as a compute resource for activities.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "For backward compatibility"
 @discriminator("type")
 model IntegrationRuntime {
   ...Record<unknown>;
@@ -4102,6 +4110,7 @@ model IntegrationRuntimeConnectionInfo {
   /**
    * The token generated in service. Callers use this token to authenticate to integration runtime.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   serviceToken?: string;
 
@@ -4505,6 +4514,8 @@ model LinkedService {
   /**
    * Type of linked service.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "For backward compatibility"
   type: string;
 
   /**
@@ -4587,6 +4598,8 @@ model Dataset {
   /**
    * Type of dataset.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "For backward compatibility"
   type: string;
 
   /**
@@ -4735,6 +4748,7 @@ model Activity {
   /**
    * Type of activity.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   type: string;
 
   /**
@@ -4870,9 +4884,6 @@ model RunFilterParameters {
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastUpdatedAfter: utcDateTime;
 
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  error?: unknown;
-
   /**
    * The time at or before which the run event was updated in 'ISO 8601' format.
    */
@@ -4941,6 +4952,7 @@ model PipelineRunsQueryResponse {
   /**
    * The continuation token for getting the next page of results, if any remaining results exist, null otherwise.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   continuationToken?: string;
 }
 
@@ -5083,6 +5095,7 @@ model ActivityRunsQueryResponse {
   /**
    * The continuation token for getting the next page of results, if any remaining results exist, null otherwise.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   continuationToken?: string;
 }
 
@@ -5192,6 +5205,8 @@ model Trigger {
   /**
    * Trigger type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "For backward compatibility"
   type: string;
 
   /**
@@ -5239,6 +5254,7 @@ model TriggerQueryResponse {
   /**
    * The continuation token for getting the next page of results, if any remaining results exist, null otherwise.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   continuationToken?: string;
 }
 
@@ -5266,6 +5282,7 @@ model TriggerRunsQueryResponse {
   /**
    * List of trigger runs.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @pageItems
   @identifiers(#["triggerRunId"])
   value: TriggerRun[];
@@ -5273,6 +5290,7 @@ model TriggerRunsQueryResponse {
   /**
    * The continuation token for getting the next page of results, if any remaining results exist, null otherwise.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   continuationToken?: string;
 }
 
@@ -5357,6 +5375,8 @@ model DataFlow {
   /**
    * Type of data flow.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "For backward compatibility"
   type: string;
 
   /**
@@ -5454,6 +5474,9 @@ model CreateDataFlowDebugSessionResponse {
 /**
  * A list of active debug sessions.
  */
+@@identifiers(QueryDataFlowDebugSessionsResponse.value,
+  #["dataFlowName", "sessionId"]
+);
 model QueryDataFlowDebugSessionsResponse
   is Azure.Core.Page<DataFlowDebugSessionInfo>;
 
@@ -5834,6 +5857,8 @@ model Credential {
   /**
    * Type of credential.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "For backward compatibility"
   type: string;
 
   /**
@@ -6027,6 +6052,7 @@ model ChangeDataCapture {
   /**
    * A boolean to determine if the vnet configuration needs to be overwritten.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   allowVNetOverride?: boolean;
 
   /**
@@ -6363,6 +6389,7 @@ model SecretBase {
   /**
    * Type of the secret.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   type: string;
 }
 
@@ -6795,6 +6822,7 @@ model DatasetLocation {
   /**
    * Type of dataset storage location.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   type: string;
 
   /**
@@ -7063,6 +7091,7 @@ model DatasetStorageFormat {
   /**
    * Type of dataset storage format.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   type: string;
 
   /**
@@ -10769,6 +10798,7 @@ model CustomSetupBase {
   /**
    * The type of custom setup.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   type: string;
 }
 
@@ -10974,6 +11004,7 @@ model LinkedIntegrationRuntimeType {
   /**
    * The authorization type for integration runtime sharing.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   authorizationType: string;
 }
 
@@ -20252,6 +20283,7 @@ model StoreReadSettings {
   /**
    * The read setting type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   type: string;
 
   /**
@@ -20720,6 +20752,7 @@ model StoreWriteSettings {
   /**
    * The write setting type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   type: string;
 
   /**
@@ -21395,6 +21428,7 @@ model FormatReadSettings {
   /**
    * The read setting type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   type: string;
 }
 
@@ -21408,6 +21442,7 @@ model CompressionReadSettings {
   /**
    * The Compression setting type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   type: string;
 }
 
@@ -21562,6 +21597,7 @@ model BinaryReadSettings extends FormatReadSettings {
   /**
    * The read setting type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   type: "BinaryReadSettings";
 }
 
@@ -21575,6 +21611,7 @@ model FormatWriteSettings {
   /**
    * The write setting type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   type: string;
 }
 
@@ -21745,6 +21782,7 @@ model CopySource {
   /**
    * Copy source type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   type: string;
 
   /**
@@ -21948,6 +21986,7 @@ model CopySink {
   /**
    * Copy sink type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   type: string;
 
   /**
@@ -22307,6 +22346,7 @@ model BinarySource extends CopySource {
 /**
  * Copy activity sources of tabular type.
  */
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @discriminator("type")
 model TabularSource extends CopySource {
   /**
@@ -23766,6 +23806,7 @@ model ImportSettings {
   /**
    * The import setting type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   type: string;
 }
 
@@ -24875,6 +24916,7 @@ model ExportSettings {
   /**
    * The export setting type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   type: string;
 }
 
@@ -26238,6 +26280,7 @@ model CopyTranslator {
   /**
    * Copy translator type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   type: string;
 }
 
@@ -29048,12 +29091,14 @@ model ExpressionV2 {
   /**
    * List of nested expressions.
    */
+  @identifiers(#[])
   operands?: ExpressionV2[];
 }
 
 /**
  * Base class for all triggers that support one to many model for trigger to pipeline.
  */
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @discriminator("type")
 model MultiplePipelineTrigger extends Trigger {
   /**
@@ -29394,6 +29439,7 @@ model DependencyReference {
   /**
    * The type of dependency reference.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   type: string;
 }
 
@@ -29415,6 +29461,7 @@ model TriggerReference {
 /**
  * Trigger referenced dependency.
  */
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @discriminator("type")
 model TriggerDependencyReference extends DependencyReference {
   /**

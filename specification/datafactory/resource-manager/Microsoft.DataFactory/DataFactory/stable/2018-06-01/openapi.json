@@ -2761,7 +2761,12 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -2848,7 +2853,12 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -11645,7 +11655,8 @@
       },
       "required": [
         "error"
-      ]
+      ],
+      "x-ms-external": true
     },
     "CloudErrorBody": {
       "type": "object",
@@ -11675,7 +11686,8 @@
       "required": [
         "code",
         "message"
-      ]
+      ],
+      "x-ms-external": true
     },
     "CmdkeySetup": {
       "type": "object",
@@ -15801,7 +15813,8 @@
           "description": "List of nested expressions.",
           "items": {
             "$ref": "#/definitions/ExpressionV2"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -25709,14 +25722,18 @@
     },
     "QueryDataFlowDebugSessionsResponse": {
       "type": "object",
-      "description": "A list of active debug sessions.",
+      "description": "Paged collection of DataFlowDebugSessionInfo items",
       "properties": {
         "value": {
           "type": "array",
           "description": "The DataFlowDebugSessionInfo items on this page",
           "items": {
             "$ref": "#/definitions/DataFlowDebugSessionInfo"
-          }
+          },
+          "x-ms-identifiers": [
+            "dataFlowName",
+            "sessionId"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -26484,7 +26501,6 @@
           "format": "date-time",
           "description": "The time at or after which the run event was updated in 'ISO 8601' format."
         },
-        "error": {},
         "lastUpdatedBefore": {
           "type": "string",
           "format": "date-time",

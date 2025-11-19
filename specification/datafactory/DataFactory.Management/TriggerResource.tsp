@@ -32,6 +32,7 @@ alias TriggerRunsOps = Azure.ResourceManager.Legacy.RoutedOperations<
     ...ResourceGroupParameter;
   },
   {
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @path
     @segment("factories")
     @key
@@ -40,6 +41,7 @@ alias TriggerRunsOps = Azure.ResourceManager.Legacy.RoutedOperations<
     @pattern("^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$")
     factoryName: string;
 
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @path
     @segment("triggers")
     @key
@@ -152,6 +154,7 @@ interface TriggerResources {
    * Starts a trigger.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Triggers_Start")
   start is ArmResourceActionAsyncBase<
     TriggerResource,
@@ -165,6 +168,7 @@ interface TriggerResources {
    * Stops a trigger.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Triggers_Stop")
   stop is ArmResourceActionAsyncBase<
     TriggerResource,

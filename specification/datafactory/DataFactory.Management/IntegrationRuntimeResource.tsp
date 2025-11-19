@@ -33,6 +33,7 @@ alias IntegrationRuntimesOps = Azure.ResourceManager.Legacy.RoutedOperations<
     ...ResourceGroupParameter;
   },
   {
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @path
     @segment("factories")
     @key
@@ -41,6 +42,7 @@ alias IntegrationRuntimesOps = Azure.ResourceManager.Legacy.RoutedOperations<
     @pattern("^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$")
     factoryName: string;
 
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @path
     @segment("integrationRuntimes")
     @key
@@ -99,6 +101,7 @@ interface IntegrationRuntimeResources {
    * Updates an integration runtime.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("IntegrationRuntimes_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
@@ -357,12 +360,11 @@ interface IntegrationRuntimeResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("IntegrationRuntimeNodes_Update")
-  @patch
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/nodes/{nodeName}")
-  integrationRuntimeNodesUpdate is IntegrationRuntimesOps.ActionSync<
+  integrationRuntimeNodesUpdate is IntegrationRuntimesOps.CustomPatchSync<
     IntegrationRuntimeResource,
     UpdateIntegrationRuntimeNodeRequest,
-    ArmResponse<SelfHostedIntegrationRuntimeNode>,
+    Response = ArmResponse<SelfHostedIntegrationRuntimeNode>,
     Parameters = {
       /**
        * The integration runtime node name.
@@ -404,11 +406,12 @@ interface IntegrationRuntimeResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("IntegrationRuntime_EnableInteractiveQuery")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   enableInteractiveQuery is ArmResourceActionAsync<
     IntegrationRuntimeResource,
     EnableInteractiveQueryRequest,
     ArmResponse<IntegrationRuntimeResource>,
-    LroHeaders = ArmAsyncOperationHeader<FinalResult = IntegrationRuntimeResource> &
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = IntegrationRuntimeResource> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -417,11 +420,12 @@ interface IntegrationRuntimeResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("IntegrationRuntime_DisableInteractiveQuery")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   disableInteractiveQuery is ArmResourceActionAsync<
     IntegrationRuntimeResource,
     void,
     ArmResponse<IntegrationRuntimeResource>,
-    LroHeaders = ArmAsyncOperationHeader<FinalResult = IntegrationRuntimeResource> &
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = IntegrationRuntimeResource> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 }
@@ -448,7 +452,7 @@ interface IntegrationRuntimeResources {
 @@doc(IntegrationRuntimeResources.integrationRuntimeObjectMetadataGet::parameters.body,
   "The parameters for getting a SSIS object metadata."
 );
-@@doc(IntegrationRuntimeResources.integrationRuntimeNodesUpdate::parameters.body,
+@@doc(IntegrationRuntimeResources.integrationRuntimeNodesUpdate::parameters.properties,
   "The parameters for updating an integration runtime node."
 );
 @@doc(IntegrationRuntimeResources.enableInteractiveQuery::parameters.body,
