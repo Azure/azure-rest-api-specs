@@ -3,7 +3,7 @@
   "info": {
     "title": "SearchManagementClient",
     "description": "Client that can be used to manage Azure AI Search services and API keys.",
-    "version": "2024-03-01-preview"
+    "version": "2025-02-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -60,6 +60,42 @@
           },
           "default": {
             "description": "Operations API failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/providers/Microsoft.Search/offerings": {
+      "get": {
+        "tags": [
+          "Offerings"
+        ],
+        "description": "Lists all of the features and SKUs offered by the Azure AI Search service in each region.",
+        "operationId": "Offerings_List",
+        "x-ms-examples": {
+          "SearchListOfferings": {
+            "$ref": "./examples/SearchListOfferings.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the list of features and SKUs offered in each region.",
+            "schema": {
+              "$ref": "#/definitions/OfferingsListResult"
+            }
+          },
+          "default": {
+            "description": "Offerings API failed.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
@@ -486,6 +522,9 @@
           },
           "SearchUpdateServiceWithSemanticSearch": {
             "$ref": "./examples/SearchUpdateServiceWithSemanticSearch.json"
+          },
+          "SearchUpdateServiceWithSku": {
+            "$ref": "./examples/SearchUpdateServiceWithSku.json"
           }
         },
         "description": "Updates an existing search service in the given resource group.",
@@ -1323,7 +1362,7 @@
             "$ref": "./examples/GetQuotaUsage.json"
           }
         },
-        "description": "Gets the quota usage for a search sku in the given subscription.",
+        "description": "Gets the quota usage for a search SKU in the given subscription.",
         "externalDocs": {
           "url": "https://aka.ms/search-manage"
         },
@@ -1346,7 +1385,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The operation succeeded. The response contains the quota usage of a search service sku for the given subscription.",
+            "description": "The operation succeeded. The response contains the quota usage of a search service SKU for the given subscription.",
             "schema": {
               "$ref": "#/definitions/QuotaUsageResult"
             }
@@ -1512,6 +1551,60 @@
           "Reconcile NSP Config": {
             "$ref": "./examples/NetworkSecurityPerimeterConfigurationsReconcile.json"
           }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{searchServiceName}/upgrade": {
+      "post": {
+        "tags": [
+          "Services"
+        ],
+        "operationId": "Services_Upgrade",
+        "x-ms-examples": {
+          "UpgradeSearchServiceToLatestVersion": {
+            "$ref": "./examples/UpgradeSearchServiceToLatestVersion.json"
+          }
+        },
+        "description": "Upgrades the Azure AI Search service to the latest version available.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SearchServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Search service has been upgraded to the latest version.",
+            "schema": {
+              "$ref": "#/definitions/SearchService"
+            }
+          },
+          "202": {
+            "description": "The long running operation for upgrading the service to the latest version was queued successfully. You can check the status of the operation through the provisioningState property of a Get Service request.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "HTTP 400 (Bad Request): There is not upgrade available for the current service. HTTP 404 (Not Found): The subscription or resource group could not be found.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     }
@@ -1835,7 +1928,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
         }
       ],
       "description": "Describes an existing private endpoint connection to the Azure AI Search service."
@@ -1853,7 +1946,8 @@
           "type": "string",
           "enum": [
             "None",
-            "AzurePortal"
+            "AzurePortal",
+            "AzureServices"
           ],
           "x-ms-enum": {
             "name": "SearchBypass",
@@ -1868,6 +1962,11 @@
                 "value": "AzurePortal",
                 "name": "AzurePortal",
                 "description": "Indicates that requests originating from the Azure portal can bypass the rules defined in the 'ipRules' section."
+              },
+              {
+                "value": "AzureServices",
+                "name": "AzureServices",
+                "description": "Indicates that requests originating from Azure trusted services can bypass the rules defined in the 'ipRules' section."
               }
             ]
           },
@@ -2060,7 +2159,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
         }
       ],
       "description": "Describes a shared private link resource managed by the Azure AI Search service."
@@ -2210,7 +2309,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
         }
       ],
       "description": "Describes a supported private link resource for the Azure AI Search service."
@@ -2301,11 +2400,16 @@
         "identity": {
           "$ref": "#/definitions/Identity",
           "description": "The identity of the resource."
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "Azure Resource Manager metadata of the search service containing createdBy and modifiedBy information.",
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/systemData"
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
         }
       ],
       "description": "Describes an Azure AI Search service and its current state."
@@ -2345,11 +2449,16 @@
         "identity": {
           "$ref": "#/definitions/Identity",
           "description": "Details about the search service identity. A null value indicates that the search service has no identity assigned."
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/systemData"
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
         }
       ],
       "description": "The parameters used to update an Azure AI Search service."
@@ -2372,6 +2481,11 @@
           "default": 1,
           "description": "The number of partitions in the search service; if specified, it can be 1, 2, 3, 4, 6, or 12. Values greater than 1 are only valid for standard SKUs. For 'standard3' services with hostingMode set to 'highDensity', the allowed values are between 1 and 3."
         },
+        "endpoint": {
+          "type": "string",
+          "format": "uri",
+          "description": "The endpoint of the Azure AI Search service."
+        },
         "hostingMode": {
           "type": "string",
           "default": "default",
@@ -2393,6 +2507,30 @@
                 "value": "highDensity",
                 "name": "HighDensity",
                 "description": "Only application for standard3 SKU, where the search service can have up to 1000 indexes."
+              }
+            ]
+          }
+        },
+        "computeType": {
+          "type": "string",
+          "description": "Configure this property to support the search service using either the default compute or Azure Confidential Compute.",
+          "enum": [
+            "default",
+            "confidential"
+          ],
+          "x-ms-enum": {
+            "name": "ComputeType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "default",
+                "name": "Default",
+                "description": "Create the service with the default compute."
+              },
+              {
+                "value": "confidential",
+                "name": "Confidential",
+                "description": "Create the service with Azure Confidential Compute."
               }
             ]
           }
@@ -2485,28 +2623,28 @@
         "provisioningState": {
           "readOnly": true,
           "type": "string",
-          "description": "The state of the last provisioning operation performed on the search service. Provisioning is an intermediate state that occurs while service capacity is being established. After capacity is set up, provisioningState changes to either 'succeeded' or 'failed'. Client applications can poll provisioning status (the recommended polling interval is from 30 seconds to one minute) by using the Get Search Service operation to see when an operation is completed. If you are using the free service, this value tends to come back as 'succeeded' directly in the call to Create search service. This is because the free service uses capacity that is already set up.",
+          "description": "The state of the last provisioning operation performed on the search service. Provisioning is an intermediate state that occurs while service capacity is being established. After capacity is set up, provisioningState changes to either 'Succeeded' or 'Failed'. Client applications can poll provisioning status (the recommended polling interval is from 30 seconds to one minute) by using the Get Search Service operation to see when an operation is completed. If you are using the free service, this value tends to come back as 'Succeeded' directly in the call to Create search service. This is because the free service uses capacity that is already set up.",
           "enum": [
-            "succeeded",
-            "provisioning",
-            "failed"
+            "Succeeded",
+            "Provisioning",
+            "Failed"
           ],
           "x-ms-enum": {
             "name": "ProvisioningState",
             "modelAsString": false,
             "values": [
               {
-                "value": "succeeded",
+                "value": "Succeeded",
                 "name": "Succeeded",
                 "description": "The last provisioning operation has completed successfully."
               },
               {
-                "value": "provisioning",
+                "value": "Provisioning",
                 "name": "Provisioning",
                 "description": "The search service is being provisioned or scaled up or down."
               },
               {
-                "value": "failed",
+                "value": "Failed",
                 "name": "Failed",
                 "description": "The last provisioning operation has failed."
               }
@@ -2562,6 +2700,17 @@
           "readOnly": true,
           "type": "string",
           "description": "A system generated property representing the service's etag that can be for optimistic concurrency control during updates."
+        },
+        "upgradeAvailable": {
+          "readOnly": true,
+          "type": "boolean",
+          "description": "Indicates whether or not the search service has an upgrade available."
+        },
+        "serviceUpgradeDate": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time the search service was last upgraded. This field will be null until the service gets upgraded for the first time."
         }
       },
       "description": "Properties of the search service."
@@ -2998,7 +3147,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -3206,6 +3355,168 @@
         }
       },
       "description": "The properties to describe any issues with provisioning network security perimeters to a search service."
+    },
+    "OfferingsListResult": {
+      "type": "object",
+      "description": "The response containing a list of features and SKUs offered in various regions.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OfferingsByRegion"
+          },
+          "description": "The list of regions with their respective features and SKUs offered."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The URL to get the next set of offerings, if any."
+        }
+      }
+    },
+    "OfferingsByRegion": {
+      "type": "object",
+      "properties": {
+        "regionName": {
+          "type": "string",
+          "description": "The name of the region."
+        },
+        "features": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FeatureOffering"
+          },
+          "description": "The list of features offered in this region.",
+          "x-ms-identifiers": []
+        },
+        "skus": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SkuOffering"
+          },
+          "description": "The list of SKUs offered in this region."
+        }
+      }
+    },
+    "FeatureOffering": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the feature offered in this region.",
+          "enum": [
+            "Grok",
+            "ImageVectorization",
+            "DocumentIntelligence",
+            "QueryRewrite",
+            "S3",
+            "StorageOptimized",
+            "SemanticSearch",
+            "MegaStore",
+            "AvailabilityZones"
+          ],
+          "x-ms-enum": {
+            "name": "FeatureName",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Grok",
+                "name": "Grok",
+                "description": "Supports Grok feature."
+              },
+              {
+                "value": "ImageVectorization",
+                "name": "ImageVectorization",
+                "description": "Supports Image Vectorization feature."
+              },
+              {
+                "value": "DocumentIntelligence",
+                "name": "DocumentIntelligence",
+                "description": "Supports Document Intelligence feature."
+              },
+              {
+                "value": "QueryRewrite",
+                "name": "QueryRewrite",
+                "description": "Supports Query Rewrite feature."
+              },
+              {
+                "value": "S3",
+                "name": "S3",
+                "description": "Supports S3 feature."
+              },
+              {
+                "value": "StorageOptimized",
+                "name": "StorageOptimized",
+                "description": "Supports Storage Optimized feature."
+              },
+              {
+                "value": "SemanticSearch",
+                "name": "SemanticSearch",
+                "description": "Supports Semantic Search feature."
+              },
+              {
+                "value": "MegaStore",
+                "name": "MegaStore",
+                "description": "Supports Mega Store feature."
+              },
+              {
+                "value": "AvailabilityZones",
+                "name": "AvailabilityZones",
+                "description": "Supports Availability Zones feature."
+              }
+            ]
+          }
+        }
+      }
+    },
+    "SkuOffering": {
+      "type": "object",
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/Sku"
+        },
+        "limits": {
+          "type": "object",
+          "properties": {
+            "indexes": {
+              "type": "integer",
+              "format": "int32",
+              "description": "The maximum number of indexes available for this SKU."
+            },
+            "indexers": {
+              "type": "integer",
+              "format": "int32",
+              "description": "The maximum number of indexers available for this SKU."
+            },
+            "partitionStorageInGigabytes": {
+              "type": "number",
+              "format": "float",
+              "description": "The maximum storage size in Gigabytes available for this SKU per partition."
+            },
+            "partitionVectorStorageInGigabytes": {
+              "type": "number",
+              "format": "float",
+              "description": "The maximum vector storage size in Gigabytes available for this SKU per partition."
+            },
+            "searchUnits": {
+              "type": "integer",
+              "format": "int32",
+              "description": "The maximum number of search units available for this SKU."
+            },
+            "replicas": {
+              "type": "integer",
+              "format": "int32",
+              "description": "The maximum number of replicas available for this SKU."
+            },
+            "partitions": {
+              "type": "integer",
+              "format": "int32",
+              "description": "The maximum number of partitions available for this SKU."
+            }
+          },
+          "description": "The limits associated with this SKU offered in this region."
+        }
+      }
     }
   },
   "parameters": {
