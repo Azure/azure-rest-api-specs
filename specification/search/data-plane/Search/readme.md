@@ -40,6 +40,24 @@ suppressions:
   - code: LroExtension 
     from: search.json
     reason: Legacy swagger file
+  - code: KnowledgeBaseSearchIndexActivityRecord 
+    from: search.json
+    reason: Legacy swagger file
+  - code: KnowledgeBaseAzureBlobActivityRecord 
+    from: search.json
+    reason: Legacy swagger file
+  - code: KnowledgeBaseIndexedSharePointActivityRecord 
+    from: search.json
+    reason: Legacy swagger file
+  - code: KnowledgeBaseIndexedOneLakeActivityRecord 
+    from: search.json
+    reason: Legacy swagger file
+  - code: KnowledgeBaseWebActivityRecord 
+    from: search.json
+    reason: Legacy swagger file
+  - code: KnowledgeBaseRemoteSharePointActivityRecord 
+    from: search.json
+    reason: Legacy swagger file
 ```
 
 ### Suppression
