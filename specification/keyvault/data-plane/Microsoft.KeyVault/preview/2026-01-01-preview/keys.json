@@ -1567,6 +1567,19 @@
       },
       "x-nullable": true
     },
+    "ExternalKey": {
+      "type": "object",
+      "description": "External Key parameters.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The external key identifier. The valid id can only contain characters in the set [a-zA-Z0-9-]. Maximum length is 64 characters."
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
     "GetRandomBytesRequest": {
       "type": "object",
       "description": "The get random bytes request object.",
@@ -2171,6 +2184,18 @@
           "$ref": "#/definitions/KeyAttestation",
           "description": "The key or key version attestation information.",
           "readOnly": true
+        },
+        "external_key": {
+          "$ref": "#/definitions/ExternalKey",
+          "description": "The external key information.",
+          "x-ms-client-name": "externalKey"
+        },
+        "key_size": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The optional key size in bits for symmetric keys. For example: 128, 192, or 256 for AES keys.",
+          "readOnly": true,
+          "x-ms-client-name": "keySize"
         }
       }
     },
