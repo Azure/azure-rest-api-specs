@@ -18,18 +18,12 @@ parameters:
   - name: Model
     type: string
     default: 'gpt-5'
-  - name: RepoName
+  - name: ToolsRepoName
     type: string
-    default: $(Build.Repository.Name)
-  - name: RepoOwner
+    default: 'azure-sdk-tools'
+  - name: ToolsRepoOwner
     type: string
     default: 'Azure'
-  - name: RepoCommit
-    type: string
-    default: $(System.PullRequest.SourceCommitId)
-  - name: WorkingDirectory
-    type: string
-    default: $(System.DefaultWorkingDirectory)
 
 jobs:
   - job: Run_Eval
@@ -53,9 +47,8 @@ jobs:
       parameters:
         SkipCheckoutNone: true
         Repositories:
-          - Name: ${{ parameters.RepoOwner }}/${{ parameters.RepoName }}
-            Commitish: ${{ parameters.RepoCommit }}
-            WorkingDirectory: $(System.DefaultWorkingDirectory)/${{ parameters.RepoName }}
+          - Name: ${{ parameters.ToolsRepoOwner }}/${{ parameters.ToolsRepoName }}
+            WorkingDirectory: $(System.DefaultWorkingDirectory)/${{ parameters.ToolsRepoName }}
         Paths:
           - '.github'
           - '.vscode/**'
@@ -68,7 +61,7 @@ jobs:
         azureSubscription: opensource-api-connection
         scriptType: 'bash'
         scriptLocation: 'inlineScript'
-        workingDirectory: '${{ parameters.EvalProject }}'
+        workingDirectory: '${{ parameters.ToolsRepoName }}/${{ parameters.EvalProject }}'
         inlineScript: |
           echo "Logged in to Azure"
           echo "Running eval in project ${{ parameters.EvalProject }}"
@@ -81,7 +74,7 @@ jobs:
         AZURE_OPENAI_ENDPOINT: ${{ parameters.OpenAIEndPoint }}
         COPILOT_INSTRUCTIONS_REPOSITORY_NAME: ${{ parameters.RepoName }}
         COPILOT_INSTRUCTIONS_REPOSITORY_OWNER: ${{ parameters.RepoOwner }}
-        COPILOT_INSTRUCTIONS_PATH: $(System.DefaultWorkingDirectory)/${{ parameters.RepoName }}/.github/copilot-instructions.md
+        COPILOT_INSTRUCTIONS_PATH: $(System.DefaultWorkingDirectory)/.github/copilot-instructions.md
 
     - task: PublishTestResults@2
       condition: succeededOrFailed()
