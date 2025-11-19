@@ -392,7 +392,7 @@ model StatusSummary {
 
   @doc("Total images charged by the API")
   @added(Versions.v2025_12_01_preview)
-  totalImageCharged: int64;
+  totalImageCharged?: int64;
 }
 
 @doc("Document Status Response")
