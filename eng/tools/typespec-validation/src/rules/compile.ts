@@ -87,15 +87,16 @@ export class CompileRule implements Rule {
 
           // Ensure all output swaggers are under expected folder for the identified structure (v1/v2)
 
-          // TODO: Extract shared method for code shared between compile and folderStructure
           const gitRoot = normalizePath(await simpleGit(folder).revparse("--show-toplevel"));
           const relativePath = path.relative(gitRoot, folder).split(path.sep).join("/");
+
           // If the folder containing TypeSpec sources is under "data-plane" or "resource-manager", the spec
           // must be using "folder structure v2".  Otherwise, it must be using v1.
           const structureVersion =
             relativePath.includes("data-plane") || relativePath.includes("resource-manager")
               ? 2
               : 1;
+
           const folderStruct = relativePath.split("/").filter(Boolean);
           const allowedOutputFolder =
             structureVersion === 1
