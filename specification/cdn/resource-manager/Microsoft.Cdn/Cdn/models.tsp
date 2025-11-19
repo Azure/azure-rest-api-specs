@@ -4,11 +4,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
-using Azure.Core;
 using TypeSpec.Versioning;
 
 namespace Microsoft.Cdn;
@@ -2618,6 +2614,7 @@ model DomainValidationProperties {
   /**
    * Challenge used for DNS TXT record or file based validation
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @visibility(Lifecycle.Read)
   validationToken?: string;
 
@@ -2746,8 +2743,8 @@ model AFDDomainUpdateParameters {
   /**
    * The JSON object that contains the properties of the domain to create.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: AFDDomainUpdatePropertiesParameters;
 }
 
@@ -2809,8 +2806,8 @@ model AFDEndpointUpdateParameters {
   /**
    * The JSON object containing endpoint update parameters.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: AFDEndpointPropertiesUpdateParameters;
 }
 
@@ -2986,8 +2983,8 @@ model AFDOriginGroupUpdateParameters {
   /**
    * The JSON object that contains the properties of the origin group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: AFDOriginGroupUpdatePropertiesParameters;
 }
 
@@ -3143,8 +3140,8 @@ model AFDOriginUpdateParameters {
   /**
    * The JSON object that contains the properties of the origin.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: AFDOriginUpdatePropertiesParameters;
 }
 
@@ -3290,8 +3287,8 @@ model RouteUpdateParameters {
   /**
    * The JSON object that contains the properties of the domain to create.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: RouteUpdatePropertiesParameters;
 }
 
@@ -3379,8 +3376,8 @@ model RuleUpdateParameters {
   /**
    * The JSON object that contains the properties of the rule to update.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: RuleUpdatePropertiesParameters;
 }
 
@@ -3420,8 +3417,8 @@ model SecurityPolicyUpdateParameters {
   /**
    * The json object that contains properties required to update a security policy
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: SecurityPolicyUpdateProperties;
 }
 
@@ -3481,7 +3478,7 @@ model KeyGroupUpdatePropertiesParameters {
   /**
    * Names of UrlSigningKey type secret objects
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   keyReferences?: ResourceReference[];
 }
 
@@ -3552,8 +3549,8 @@ model DeploymentVersionUpdate {
   /**
    * Contains the properties of the deployment version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: DeploymentVersionUpdateProperties;
 }
 
@@ -3575,7 +3572,7 @@ model CompareDeploymentVersionsResponse {
   /**
    * The difference between two deployment versions
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   value: DeploymentVersionChange[];
 }
 
@@ -3880,8 +3877,8 @@ model ProfileUpdateParameters {
   /**
    * The JSON object containing profile update parameters.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: ProfilePropertiesUpdateParameters;
 }
 
@@ -3927,9 +3924,9 @@ model CanMigrateResult {
   @visibility(Lifecycle.Read)
   type?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: CanMigrateProperties;
 }
 
@@ -4038,9 +4035,9 @@ model MigrateResult {
   @visibility(Lifecycle.Read)
   type?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: MigrateResultProperties;
 }
 
@@ -4164,8 +4161,8 @@ model DeepCreatedOrigin {
   /**
    * Properties of the origin created on the CDN endpoint.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: DeepCreatedOriginProperties;
 }
 
@@ -4255,8 +4252,8 @@ model DeepCreatedOriginGroup {
   /**
    * Properties of the origin group created on the CDN endpoint.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: DeepCreatedOriginGroupProperties;
 }
 
@@ -4340,8 +4337,8 @@ model DeepCreatedCustomDomain {
   /**
    * Properties of the custom domain created on the CDN endpoint.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: DeepCreatedCustomDomainProperties;
 }
 
@@ -4571,8 +4568,8 @@ model EndpointUpdateParameters {
   /**
    * The JSON object containing endpoint update parameters.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: EndpointPropertiesUpdateParameters;
 }
 
@@ -4700,8 +4697,8 @@ model OriginUpdateParameters {
   /**
    * The JSON object that contains the properties of the origin.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: OriginUpdatePropertiesParameters;
 }
 
@@ -4757,8 +4754,8 @@ model OriginGroupUpdateParameters {
   /**
    * The JSON object that contains the properties of the origin group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: OriginGroupUpdatePropertiesParameters;
 }
 
@@ -4943,8 +4940,8 @@ model Operation {
   /**
    * Properties of operation, include metric specifications.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: OperationProperties;
 }
 
@@ -5134,8 +5131,8 @@ model EdgeNode extends Azure.ResourceManager.CommonTypes.ProxyResource {
   /**
    * The JSON object that contains the properties required to create an edgenode.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: EdgeNodeProperties;
 }
 
@@ -5248,8 +5245,8 @@ model ProfileAgentUpdateParameters {
   /**
    * The properties for updating a profile agent association.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: ProfileAgentUpdateProperties;
 }
 
@@ -5570,8 +5567,8 @@ model ManagedRuleSetDefinition
   /**
    * Describes managed rule set definition properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: ManagedRuleSetDefinitionProperties;
 
   /**
@@ -5675,7 +5672,7 @@ model WebAgentProperties {
   /**
    * List of paths associated with the web agent.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   paths?: AgentPath[];
 
   /**
@@ -5721,8 +5718,8 @@ model WebAgentUpdateParameters {
   /**
    * Properties of the web agent to be updated.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: WebAgentPropertiesUpdateParameters;
 }
 
@@ -5744,7 +5741,7 @@ model WebAgentPropertiesUpdateParameters {
   /**
    * List of paths associated with the web agent.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   paths?: AgentPath[];
 }
 
@@ -5802,8 +5799,8 @@ model KnowledgeSourceUpdateParameters {
   /**
    * Properties of the knowledge source to be updated.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: KnowledgeSourcePropertiesUpdateParameters;
 }
 
@@ -5838,8 +5835,8 @@ model WebApplicationFirewallPolicy
   /**
    * Properties of the web application firewall policy.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: WebApplicationFirewallPolicyProperties;
 
   /**
@@ -5955,8 +5952,8 @@ model PolicySettingsAfd {
   /**
    * Defines rules that scrub sensitive fields in the Web Application Firewall logs.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   logScrubbing?: PolicySettingsLogScrubbing;
 }
 
@@ -5973,7 +5970,7 @@ model PolicySettingsLogScrubbing {
   /**
    * List of log scrubbing rules applied to the Web Application Firewall logs.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   scrubbingRules?: WebApplicationFirewallScrubbingRules[];
 }
 
@@ -6056,13 +6053,13 @@ model CustomRuleAfd {
   /**
    * Describes the list of variables to group the rate limit requests
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   groupBy?: GroupByVariable[];
 
   /**
    * List of match conditions.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   matchConditions: MatchConditionAfd[];
 
   /**
@@ -6126,7 +6123,7 @@ model ManagedRuleSetListAfd {
   /**
    * List of rule sets.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   managedRuleSets?: ManagedRuleSetAfd[];
 }
 
@@ -6153,13 +6150,13 @@ model ManagedRuleSetAfd {
   /**
    * Describes the exclusions that are applied to all rules in the set.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   exclusions?: ManagedRuleExclusion[];
 
   /**
    * Defines the rule group overrides to apply to the rule set.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   ruleGroupOverrides?: ManagedRuleGroupOverrideAfd[];
 }
 
@@ -6197,13 +6194,13 @@ model ManagedRuleGroupOverrideAfd {
   /**
    * Describes the exclusions that are applied to all rules in the group.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   exclusions?: ManagedRuleExclusion[];
 
   /**
    * List of rules that will be disabled. If none specified, all rules in the group will be disabled.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   rules?: ManagedRuleOverrideAfd[];
 }
 
@@ -6230,7 +6227,7 @@ model ManagedRuleOverrideAfd {
   /**
    * Describes the exclusions that are applied to this specific rule.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   exclusions?: ManagedRuleExclusion[];
 }
 
@@ -6716,7 +6713,7 @@ model AfdUrlSigningActionParameters {
   /**
    * Defines which query string parameters in the url to be considered for expires, key id etc.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["paramName"])
+  @identifiers(#["paramName"])
   parameterNameOverride?: UrlSigningParamIdentifier[];
 }
 

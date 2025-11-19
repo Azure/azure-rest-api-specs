@@ -64,10 +64,15 @@ interface ManagedClusters {
   /**
    * Update the tags of of a Service Fabric managed cluster resource with the specified name.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Day 0 Property"
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<
+  update is ArmCustomPatchAsync<
     ManagedCluster,
-    PatchModel = ManagedClusterUpdateParameters
+    PatchModel = ManagedClusterUpdateParameters,
+    Response = ArmResourceUpdatedResponse<ManagedCluster> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ManagedCluster>> & {
+      @bodyRoot
+      _: ManagedCluster;
+    })
   >;
 
   /**
