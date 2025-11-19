@@ -325,7 +325,7 @@ union VectorQueryKind {
   ImageBinary: "imageBinary",
 }
 
-@doc("The kind of vector query being performed.")
+@doc("The kind of threshold used to filter vector queries.")
 union VectorThresholdKind {
   string,
 
@@ -346,7 +346,7 @@ union VectorFilterMode {
   @doc("The filter will be applied before the search query.")
   PreFilter: "preFilter",
 
-  @doc("The filter will be applied after the global top-k candidate set of vector results is returned.")
+  @doc("The filter will be applied after the global top-k candidate set of vector results is returned. This will result in fewer results than requested by the parameter 'k'.")
   StrictPostFilter: "strictPostFilter",
 }
 
@@ -708,7 +708,7 @@ model SearchDocumentsResult {
   @visibility(Lifecycle.Read)
   value: SearchResult[];
 
-  @doc("Continuation URL returned when the query can't return all the requested results in a single response. You can use this URL to formulate another GET or POST Search request to get the next part of the search response. Make sure to use the same verb (GET or POST) as the request that produced this response.")  
+  @doc("Continuation URL returned when the query can't return all the requested results in a single response. You can use this URL to formulate another GET or POST Search request to get the next part of the search response. Make sure to use the same verb (GET or POST) as the request that produced this response.")
   @visibility(Lifecycle.Read)
   @encodedName("application/json", "@odata.nextLink")
   @nextLink
@@ -734,16 +734,33 @@ model SearchDocumentsResult {
 @doc("A single bucket of a facet query result. Reports the number of documents with a field value falling within a particular range or having a particular value or interval.")
 model FacetResult is Record<unknown> {
   @doc("The approximate count of documents falling within the bucket described by this facet.")
+  @visibility(Lifecycle.Read)
   count?: int64;
+
+  @doc("The resulting total avg for the facet when a avg metric is requested.")
+  @visibility(Lifecycle.Read)
+  avg?: float64;
+
+  @doc("The resulting total min for the facet when a min metric is requested.")
+  @visibility(Lifecycle.Read)
+  min?: float64;
+
+  @doc("The resulting total max for the facet when a max metric is requested.")
+  @visibility(Lifecycle.Read)
+  max?: float64;
+
+  @doc("The resulting total sum for the facet when a sum metric is requested.")
+  @visibility(Lifecycle.Read)
+  sum?: float64;
+
+  @doc("The resulting total cardinality for the facet when a cardinality metric is requested.")
+  @visibility(Lifecycle.Read)
+  cardinality?: int64;
 
   @doc("The nested facet query results for the search operation, organized as a collection of buckets for each faceted field; null if the query did not contain any nested facets.")
   @visibility(Lifecycle.Read)
   @encodedName("application/json", "@search.facets")
   facets?: Record<FacetResult[]>;
-
-  @doc("The resulting total sum for the facet when a sum metric is requested.")
-  @visibility(Lifecycle.Read)
-  sum?: int64;
 }
 
 #suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
@@ -847,7 +864,7 @@ model SearchRequest {
   @doc("A value that specifies the language of the search query.")
   queryLanguage?: QueryLanguage;
 
-  @doc("A value that specified the type of the speller to use to spell-correct individual search query terms.")
+  @doc("A value that specifies the type of the speller to use to spell-correct individual search query terms.")
   speller?: QuerySpellerType;
 
   @doc("The comma-separated list of fields to retrieve. If unspecified, all fields marked as retrievable in the schema are included.")
@@ -918,7 +935,7 @@ model VectorQuery {
   @doc("The OData filter expression to apply to this specific vector query. If no filter expression is defined at the vector level, the expression defined in the top level filter parameter is used instead.")
   filterOverride?: string;
 
-  @doc("The OData filter expression to apply to this specific vector query. If no filter expression is defined at the vector level, the expression defined in the top level filter parameter is used instead.")
+  @doc("Controls how many vectors can be matched from each document in a vector search query. Setting it to 1 ensures at most one vector per document is matched, guaranteeing results come from distinct documents. Setting it to 0 (unlimited) allows multiple relevant vectors from the same document to be matched. Default is 0.")
   perDocumentVectorLimit?: int32;
 
   @doc("Type of query.")
@@ -969,7 +986,7 @@ model SearchResult {
   @doc("Contains debugging information that can be used to further explore your search results.")
   @visibility(Lifecycle.Read)
   @encodedName("application/json", "@search.documentDebugInfo")
-  documentDebugInfo?: DocumentDebugInfo[];
+  documentDebugInfo?: DocumentDebugInfo;
 }
 
 #suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
@@ -1188,15 +1205,19 @@ model IndexDocumentsResult {
 
 @doc("Status of an indexing operation for a single document.")
 model IndexingResult {
+  @visibility(Lifecycle.Read)
   @doc("The key of a document that was in the indexing request.")
   key: string;
 
+  @visibility(Lifecycle.Read)
   @doc("The error message explaining why the indexing operation failed for the document identified by the key; null if indexing succeeded.")
   errorMessage?: string;
 
+  @visibility(Lifecycle.Read)
   @doc("A value indicating whether the indexing operation succeeded for the document identified by the key.")
   status: boolean;
 
+  @visibility(Lifecycle.Read)
   @doc("The status code of the indexing operation. Possible values include: 200 for a successful update or delete, 201 for successful document creation, 400 for a malformed input document, 404 for document not found, 409 for a version conflict, 422 when the index is temporarily unavailable, or 503 for when the service is too busy.")
   statusCode: int32;
 }
@@ -1278,7 +1299,7 @@ model VectorizableTextQuery extends VectorQuery {
 @doc("The query parameters to use for vector search when an url that represents an image value that needs to be vectorized is provided.")
 model VectorizableImageUrlQuery extends VectorQuery {
   @doc("The URL of an image to be vectorized to perform a vector search query.")
-  url?: string;
+  url: string;
 
   @doc("The kind of vector query being performed.")
   kind: "imageUrl";
@@ -1287,7 +1308,7 @@ model VectorizableImageUrlQuery extends VectorQuery {
 @doc("The query parameters to use for vector search when a base 64 encoded binary of an image that needs to be vectorized is provided.")
 model VectorizableImageBinaryQuery extends VectorQuery {
   @doc("The base 64 encoded binary of an image to be vectorized to perform a vector search query.")
-  base64Image?: string;
+  base64Image: string;
 
   @doc("The kind of vector query being performed.")
   kind: "imageBinary";

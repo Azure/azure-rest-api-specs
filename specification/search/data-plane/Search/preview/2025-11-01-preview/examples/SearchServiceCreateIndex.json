@@ -7,6 +7,7 @@
     "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
     "index": {
       "name": "temp-preview-test",
+      "description": "description",
       "fields": [
         {
           "name": "id",
@@ -109,6 +110,24 @@
           "filterable": true,
           "sortable": true,
           "facetable": true
+        },
+        {
+          "name": "permissionFilters",
+          "type": "Collection(Edm.String)",
+          "retrievable": true,
+          "filterable": true,
+          "sortable": false,
+          "facetable": true,
+          "permissionFilter": "userIds"
+        },
+        {
+          "name": "sensitivityLabels",
+          "type": "Collection(Edm.String)",
+          "retrievable": true,
+          "filterable": true,
+          "sortable": false,
+          "facetable": true,
+          "sensitivityLabel": true
         }
       ],
       "scoringProfiles": [
@@ -225,6 +244,7 @@
                 }
               ]
             },
+            "rankingOrder": "BoostedRerankerScore",
             "flightingOptIn": true
           }
         ]
@@ -317,6 +337,17 @@
             },
             "name": "aml",
             "kind": "aml"
+          },
+          {
+            "amlParameters": {
+              "uri": "https://my-custom-endpoint.org/",
+              "resourceId": "aml resource id",
+              "timeout": "PT1M",
+              "region": "aml region",
+              "modelName": "Cohere-embed-v4"
+            },
+            "name": "aml-cohere",
+            "kind": "aml"
           }
         ],
         "compressions": [
@@ -355,6 +386,8 @@
           }
         ]
       },
+      "permissionFilterOption": "enabled",
+      "purviewEnabled": true,
       "@odata.etag": "0x1234568AE7E58A1"
     }
   },
@@ -363,7 +396,10 @@
       "body": {
         "@odata.etag": "0x1234568AE7E58A1",
         "name": "temp-preview-test",
+        "description": "description",
         "defaultScoringProfile": "stringFieldBoost",
+        "permissionFilterOption": "enabled",
+        "purviewEnabled": true,
         "fields": [
           {
             "name": "id",
@@ -524,6 +560,32 @@
             "facetable": true,
             "key": false,
             "synonymMaps": []
+          },
+          {
+            "name": "permissionFilters",
+            "type": "Collection(Edm.String)",
+            "searchable": true,
+            "filterable": true,
+            "retrievable": true,
+            "stored": true,
+            "sortable": false,
+            "facetable": true,
+            "key": false,
+            "permissionFilter": "userIds",
+            "synonymMaps": []
+          },
+          {
+            "name": "sensitivityLabels",
+            "type": "Collection(Edm.String)",
+            "searchable": true,
+            "filterable": true,
+            "retrievable": true,
+            "stored": true,
+            "sortable": false,
+            "facetable": true,
+            "key": false,
+            "sensitivityLabel": true,
+            "synonymMaps": []
           }
         ],
         "scoringProfiles": [
@@ -626,7 +688,8 @@
           "configurations": [
             {
               "name": "testconfig",
-              "flightingOptIn": false,
+              "flightingOptIn": true,
+              "rankingOrder": "BoostedRerankerScore",
               "prioritizedFields": {
                 "titleField": {
                   "fieldName": "category"
@@ -741,6 +804,17 @@
                 "uri": "https://my-custom-endpoint.org/",
                 "timeout": "PT1M",
                 "modelName": "OpenAI-CLIP-Image-Text-Embeddings-vit-base-patch32"
+              }
+            },
+            {
+              "name": "aml-cohere",
+              "kind": "aml",
+              "amlParameters": {
+                "resourceId": "aml resource id",
+                "region": "aml region",
+                "uri": "https://my-custom-endpoint.org/",
+                "timeout": "PT1M",
+                "modelName": "Cohere-embed-v4"
               }
             }
           ],

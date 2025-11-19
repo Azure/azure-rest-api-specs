@@ -4,7 +4,6 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-client-generator-core";
 import "./models-shared.tsp";
 
-using TypeSpec.Versioning;
 using Azure.ClientGenerator.Core.Legacy;
 
 namespace Search;
@@ -33,6 +32,9 @@ union SearchIndexerDataSourceType {
 
   @doc("Indicates a Microsoft Fabric OneLake datasource.")
   OneLake: "onelake",
+
+  @doc("Indicates a SharePoint datasource.")
+  SharePoint: "sharepoint",
 }
 
 @doc("Represents the parsing mode for indexing from an Azure blob data source.")
@@ -812,6 +814,30 @@ union AzureOpenAIModelName {
 
   @doc("TextEmbedding3Small model.")
   TextEmbedding3Small: "text-embedding-3-small",
+
+  @doc("Gpt4o model.")
+  Gpt4o: "gpt-4o",
+
+  @doc("Gpt4oMini model.")
+  Gpt4oMini: "gpt-4o-mini",
+
+  @doc("Gpt41 model.")
+  Gpt41: "gpt-4.1",
+
+  @doc("Gpt41Mini model.")
+  Gpt41Mini: "gpt-4.1-mini",
+
+  @doc("Gpt41Nano model.")
+  Gpt41Nano: "gpt-4.1-nano",
+
+  @doc("Gpt5 model.")
+  Gpt5: "gpt-5",
+
+  @doc("Gpt5Mini model.")
+  Gpt5Mini: "gpt-5-mini",
+
+  @doc("Gpt5Nano model.")
+  Gpt5Nano: "gpt-5-nano",
 }
 
 @doc("The name of the embedding model from the Azure AI Foundry Catalog that will be called.")
@@ -835,6 +861,9 @@ union AIFoundryModelCatalogName {
 
   @doc("Cohere-embed-v3-multilingual")
   CohereEmbedV3Multilingual: "Cohere-embed-v3-multilingual",
+
+  @doc("Cohere embed v4 model for generating embeddings from both text and images.")
+  CohereEmbedV4: "Cohere-embed-v4",
 }
 
 @doc("The language codes supported for input text by KeyPhraseExtractionSkill.")
@@ -1380,7 +1409,7 @@ union OcrSkillLanguage {
   @doc("Uzbek (Latin)")
   uz: "uz",
 
-  @doc("VolapÃ¼k")
+  @doc("Volapük")
   vo: "vo",
 
   @doc("Walser")
@@ -2304,6 +2333,9 @@ union ScoringFunctionAggregation {
 
   @doc("Boost scores using the first applicable scoring function in the scoring profile.")
   FirstMatching: "firstMatching",
+
+  @doc("Boost scores by the product of all scoring function results.")
+  Product: "product",
 }
 
 @doc("Represents classes of characters on which a token filter can operate.")
@@ -2653,10 +2685,10 @@ union PhoneticEncoder {
   @doc("Encodes a token into a NYSIIS value.")
   Nysiis: "nysiis",
 
-  @doc("Encodes a token using the KÃ¶lner Phonetik algorithm.")
+  @doc("Encodes a token using the Kölner Phonetik algorithm.")
   KoelnerPhonetik: "koelnerPhonetik",
 
-  @doc("Encodes a token using the Haase refinement of the KÃ¶lner Phonetik algorithm.")
+  @doc("Encodes a token using the Haase refinement of the Kölner Phonetik algorithm.")
   HaasePhonetik: "haasePhonetik",
 
   @doc("Encodes a token into a Beider-Morse value.")
@@ -3043,7 +3075,7 @@ union ChatCompletionExtraParametersBehavior {
   string,
 
   @doc("Passes any extra parameters directly to the model.")
-  PassThrough: "passThrough",
+  PassThrough: "pass-through",
 
   @doc("Drops all extra parameters.")
   Drop: "drop",
@@ -3103,6 +3135,7 @@ model SearchIndexerDataSource {
   type: SearchIndexerDataSourceType;
 
   @doc("A specific type of the data source, in case the resource is capable of different modalities. For example, 'MongoDb' for certain 'cosmosDb' accounts.")
+  @visibility(Lifecycle.Read)
   subType?: string;
 
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Pre-existing API contract"
@@ -3172,7 +3205,7 @@ model SearchResourceEncryptionKey {
   keyVaultKeyName: string;
 
   @doc("The version of your Azure Key Vault key to be used to encrypt your data at rest.")
-  keyVaultKeyVersion?: string;
+  keyVaultKeyVersion: string;
 
   @doc("The URI of your Azure Key Vault, also referred to as DNS name, that contains the key to be used to encrypt your data at rest. An example URI might be `https://my-keyvault-name.vault.azure.net`.")
   keyVaultUri: string;
@@ -3269,10 +3302,10 @@ model IndexingParameters {
   batchSize?: int32;
 
   @doc("The maximum number of items that can fail indexing for indexer execution to still be considered successful. -1 means no limit. Default is 0.")
-  maxFailedItems?: int32;
+  maxFailedItems?: int32 = 0;
 
   @doc("The maximum number of items in a single batch that can fail indexing for the batch to still be considered successful. -1 means no limit. Default is 0.")
-  maxFailedItemsPerBatch?: int32;
+  maxFailedItemsPerBatch?: int32 = 0;
 
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
   @doc("A dictionary of indexer-specific configuration properties. Each name is the name of a specific property. Each value must be of a primitive type.")
@@ -3288,19 +3321,19 @@ model IndexingParametersConfiguration {
   parsingMode?: BlobIndexerParsingMode = BlobIndexerParsingMode.Default;
 
   @doc("Comma-delimited list of filename extensions to ignore when processing from Azure blob storage.  For example, you could exclude \".png, .mp4\" to skip over those files during indexing.")
-  excludedFileNameExtensions?: string;
+  excludedFileNameExtensions?: string = "";
 
   @doc("Comma-delimited list of filename extensions to select when processing from Azure blob storage.  For example, you could focus indexing on specific application files \".docx, .pptx, .msg\" to specifically include those file types.")
-  indexedFileNameExtensions?: string;
+  indexedFileNameExtensions?: string = "";
 
   @doc("For Azure blobs, set to false if you want to continue indexing when an unsupported content type is encountered, and you don't know all the content types (file extensions) in advance.")
-  failOnUnsupportedContentType?: boolean;
+  failOnUnsupportedContentType?: boolean = false;
 
   @doc("For Azure blobs, set to false if you want to continue indexing if a document fails indexing.")
-  failOnUnprocessableDocument?: boolean;
+  failOnUnprocessableDocument?: boolean = false;
 
   @doc("For Azure blobs, set this property to true to still index storage metadata for blob content that is too large to process. Oversized blobs are treated as errors by default. For limits on blob size, see https://learn.microsoft.com/azure/search/search-limits-quotas-capacity.")
-  indexStorageMetadataOnlyForOversizedDocuments?: boolean;
+  indexStorageMetadataOnlyForOversizedDocuments?: boolean = false;
 
   @doc("For CSV blobs, specifies a comma-delimited list of column headers, useful for mapping source fields to destination fields in an index.")
   delimitedTextHeaders?: string;
@@ -3327,7 +3360,7 @@ model IndexingParametersConfiguration {
   imageAction?: BlobIndexerImageAction = BlobIndexerImageAction.None;
 
   @doc("If true, will create a path //document//file_data that is an object representing the original file data downloaded from your blob data source. This allows you to pass the original file data to a custom skill for processing within the enrichment pipeline, or to the Document Extraction skill.")
-  allowSkillsetToReadFileData?: boolean;
+  allowSkillsetToReadFileData?: boolean = false;
 
   @doc("Determines algorithm for text extraction from PDF files in Azure blob storage.")
   pdfTextRotationAlgorithm?: BlobIndexerPDFTextRotationAlgorithm = BlobIndexerPDFTextRotationAlgorithm.None;
@@ -3363,6 +3396,9 @@ model FieldMappingFunction {
 
 @doc("The type of the cache.")
 model SearchIndexerCache {
+  @doc("A guid for the SearchIndexerCache.")
+  id?: string;
+
   @doc("The connection string to the storage account where the cache data will be persisted.")
   storageConnectionString?: string;
 
@@ -3371,9 +3407,6 @@ model SearchIndexerCache {
 
   @doc("The user-assigned managed identity used for connections to the enrichment cache.  If the connection string indicates an identity (ResourceId) and it's not specified, the system-assigned managed identity is used. On updates to the indexer, if the identity is unspecified, the value remains unchanged. If set to \"none\", the value of this property is cleared.")
   identity?: SearchIndexerDataIdentity;
-
-  @doc("A guid for the SearchIndexerCache.")
-  id?: string;
 }
 
 @doc("Response from a List Indexers request. If successful, it includes the full definitions of all indexers.")
@@ -3386,24 +3419,38 @@ model ListIndexersResult {
 @doc("Represents the current status and execution history of an indexer.")
 model SearchIndexerStatus {
   @doc("The name of the indexer.")
+  @visibility(Lifecycle.Read)
   name: string;
 
   @doc("Overall indexer status.")
+  @visibility(Lifecycle.Read)
   status: IndexerStatus;
 
+  @doc("Snapshot of the indexer's cumulative runtime consumption for the service over the current UTC period.")
+  @visibility(Lifecycle.Read)
+  runtime: IndexerRuntime;
+
   @doc("The result of the most recent or an in-progress indexer execution.")
+  @visibility(Lifecycle.Read)
   lastResult?: IndexerExecutionResult;
 
   @doc("History of the recent indexer executions, sorted in reverse chronological order.")
+  @visibility(Lifecycle.Read)
   executionHistory: IndexerExecutionResult[];
 
   @doc("The execution limits for the indexer.")
+  @visibility(Lifecycle.Read)
   limits: SearchIndexerLimits;
+
+  @doc("All of the state that defines and dictates the indexer's current execution.")
+  @visibility(Lifecycle.Read)
+  currentState?: IndexerCurrentState;
 }
 
 @doc("Represents the result of an individual indexer execution.")
 model IndexerExecutionResult {
   @doc("The outcome of this indexer execution.")
+  @visibility(Lifecycle.Read)
   status: IndexerExecutionStatus;
 
   @doc("The outcome of this indexer execution.")
@@ -3419,30 +3466,39 @@ model IndexerExecutionResult {
   currentState?: IndexerCurrentState;
 
   @doc("The error message indicating the top-level error, if any.")
+  @visibility(Lifecycle.Read)
   errorMessage?: string;
 
   @doc("The start time of this indexer execution.")
+  @visibility(Lifecycle.Read)
   startTime?: utcDateTime;
 
   @doc("The end time of this indexer execution, if the execution has already completed.")
+  @visibility(Lifecycle.Read)
   endTime?: utcDateTime;
 
   @doc("The item-level indexing errors.")
+  @visibility(Lifecycle.Read)
   errors: SearchIndexerError[];
 
   @doc("The item-level indexing warnings.")
+  @visibility(Lifecycle.Read)
   warnings: SearchIndexerWarning[];
 
   @doc("The number of items that were processed during this indexer execution. This includes both successfully processed items and items where indexing was attempted but failed.")
+  @visibility(Lifecycle.Read)
   itemsProcessed: int32;
 
   @doc("The number of items that failed to be indexed during this indexer execution.")
+  @visibility(Lifecycle.Read)
   itemsFailed: int32;
 
   @doc("Change tracking state with which an indexer execution started.")
+  @visibility(Lifecycle.Read)
   initialTrackingState?: string;
 
   @doc("Change tracking state with which an indexer execution finished.")
+  @visibility(Lifecycle.Read)
   finalTrackingState?: string;
 }
 
@@ -3510,18 +3566,23 @@ model SearchIndexerError {
 @doc("Represents an item-level warning.")
 model SearchIndexerWarning {
   @doc("The key of the item which generated a warning.")
+  @visibility(Lifecycle.Read)
   key?: string;
 
   @doc("The message describing the warning that occurred while processing the item.")
+  @visibility(Lifecycle.Read)
   message: string;
 
   @doc("The name of the source at which the warning originated. For example, this could refer to a particular skill in the attached skillset. This may not be always available.")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   @doc("Additional, verbose details about the warning to assist in debugging the indexer. This may not be always available.")
+  @visibility(Lifecycle.Read)
   details?: string;
 
   @doc("A link to a troubleshooting guide for these classes of warnings. This may not be always available.")
+  @visibility(Lifecycle.Read)
   documentationLink?: string;
 }
 
@@ -3535,6 +3596,21 @@ model SearchIndexerLimits {
 
   @doc("The maximum number of characters that will be extracted from a document picked up for indexing.")
   maxDocumentContentCharactersToExtract?: int64;
+}
+
+@doc("Represents the indexer's cumulative runtime consumption in the service.")
+model IndexerRuntime {
+  @doc("Cumulative runtime of the indexer from the beginningTime to endingTime, in seconds.")
+  usedSeconds: int64;
+
+  @doc("Cumulative runtime remaining for all indexers in the service from the beginningTime to endingTime, in seconds.")
+  remainingSeconds?: int64;
+
+  @doc("Beginning UTC time of the 24-hour period considered for indexer runtime usage (inclusive).")
+  beginningTime: utcDateTime;
+
+  @doc("End UTC time of the 24-hour period considered for indexer runtime usage (inclusive).")
+  endingTime: utcDateTime;
 }
 
 @doc("A list of skills.")
@@ -3657,6 +3733,9 @@ model SearchIndexerKnowledgeStoreProjection {
 @doc("Description for what data to store in Azure Tables.")
 model SearchIndexerKnowledgeStoreTableProjectionSelector
   extends SearchIndexerKnowledgeStoreProjectionSelector {
+  @doc("Name of generated key to store projection under.")
+  generatedKeyName: string;
+
   @doc("Name of the Azure table to store projected data in.")
   tableName: string;
 }
@@ -3734,6 +3813,7 @@ model SearchIndexerIndexProjectionsParameters {
 @doc("Response from a list skillset request. If successful, it includes the full definitions of all skillsets.")
 model ListSkillsetsResult {
   @doc("The skillsets defined in the Search service.")
+  @visibility(Lifecycle.Read)
   @pageItems
   value: SearchIndexerSkillset[];
 }
@@ -3767,6 +3847,7 @@ model SynonymMap {
 @doc("Response from a List SynonymMaps request. If successful, it includes the full definitions of all synonym maps.")
 model ListSynonymMapsResult {
   @doc("The synonym maps in the Search service.")
+  @visibility(Lifecycle.Read)
   @pageItems
   value: SynonymMap[];
 }
@@ -3824,6 +3905,9 @@ model SearchIndex {
   @doc("A value indicating whether permission filtering is enabled for the index.")
   permissionFilterOption?: SearchIndexPermissionFilterOption;
 
+  @doc("A value indicating whether Purview is enabled for the index.")
+  purviewEnabled?: boolean;
+
   @doc("The ETag of the index.")
   @encodedName("application/json", "@odata.etag")
   eTag?: string;
@@ -3860,6 +3944,9 @@ model SearchField {
 
   @doc("A value indicating whether the field should be used as a permission filter.")
   permissionFilter?: PermissionFilter;
+
+  @doc("A value indicating whether the field contains sensitivity label information.")
+  sensitivityLabel?: boolean;
 
   @doc("The name of the analyzer to use for the field. This option can be used only with searchable fields and it can't be set together with either searchAnalyzer or indexAnalyzer. Once the analyzer is chosen, it cannot be changed for the field. Must be null for complex fields.")
   analyzer?: LexicalAnalyzerName;
@@ -4117,12 +4204,6 @@ model VectorSearchCompression {
   @doc("The name to associate with this particular configuration.")
   name: string;
 
-  @doc("If set to true, once the ordered set of results calculated using compressed vectors are obtained, they will be reranked again by recalculating the full-precision similarity scores. This will improve recall at the expense of latency.")
-  rerankWithOriginalVectors?: boolean = true;
-
-  @doc("Default oversampling factor. Oversampling will internally request more documents (specified by this multiplier) in the initial search. This increases the set of results that will be reranked using recomputed similarity scores from full-precision vectors. Minimum value is 1, meaning no oversampling (1x). This parameter can only be set when rerankWithOriginalVectors is true. Higher values improve recall at the expense of latency.")
-  defaultOversampling?: float64;
-
   @doc("Contains the options for rescoring.")
   rescoringOptions?: RescoringOptions;
 
@@ -4142,7 +4223,7 @@ model RescoringOptions {
   defaultOversampling?: float64;
 
   @doc("Controls the storage method for original vectors. This setting is immutable.")
-  rescoreStorageMethod?: VectorSearchCompressionRescoreStorageMethod;
+  rescoreStorageMethod?: VectorSearchCompressionRescoreStorageMethod = VectorSearchCompressionRescoreStorageMethod.PreserveOriginals;
 }
 
 @doc("Response from a List Indexes request. If successful, it includes the full definitions of all indexes.")
@@ -4156,12 +4237,15 @@ model ListIndexesResult {
 @doc("Statistics for a given index. Statistics are collected periodically and are not guaranteed to always be up-to-date.")
 model GetIndexStatisticsResult {
   @doc("The number of documents in the index.")
+  @visibility(Lifecycle.Read)
   documentCount: int64;
 
   @doc("The amount of storage in bytes consumed by the index.")
+  @visibility(Lifecycle.Read)
   storageSize: int64;
 
   @doc("The amount of memory in bytes consumed by vectors in the index.")
+  @visibility(Lifecycle.Read)
   vectorIndexSize: int64;
 }
 
@@ -4189,21 +4273,26 @@ model AnalyzeRequest {
 @doc("The result of testing an analyzer on text.")
 model AnalyzeResult {
   @doc("The list of tokens returned by the analyzer specified in the request.")
+  @visibility(Lifecycle.Read)
   tokens: AnalyzedTokenInfo[];
 }
 
 @doc("Information about a token returned by an analyzer.")
 model AnalyzedTokenInfo {
   @doc("The token returned by the analyzer.")
+  @visibility(Lifecycle.Read)
   token: string;
 
   @doc("The index of the first character of the token in the input text.")
+  @visibility(Lifecycle.Read)
   startOffset: int32;
 
   @doc("The index of the last character of the token in the input text.")
+  @visibility(Lifecycle.Read)
   endOffset: int32;
 
   @doc("The position of the token in the input text relative to other tokens. The first token in the input text has position 0, the next has position 1, and so on. Depending on the analyzer used, some tokens might have the same position, for example if they are synonyms of each other.")
+  @visibility(Lifecycle.Read)
   position: int32;
 }
 
@@ -4232,8 +4321,6 @@ model ListAliasesResult {
 @doc("Represents a knowledge base definition.")
 model KnowledgeBase {
   @doc("The name of the knowledge base.")
-  @key("knowledgeBaseName")
-  @visibility(Lifecycle.Read)
   name: string;
 
   @doc("Knowledge sources referenced by this knowledge base.")
@@ -4249,6 +4336,7 @@ model KnowledgeBase {
   outputMode?: KnowledgeRetrievalOutputMode;
 
   @doc("The ETag of the knowledge base.")
+  @encodedName("application/json", "@odata.etag")
   eTag?: string;
 
   @doc("A description of an encryption key that you create in Azure Key Vault.")
@@ -4329,8 +4417,6 @@ model AzureOpenAiParameters {
 @doc("Represents a knowledge source definition.")
 model KnowledgeSource {
   @doc("The name of the knowledge source.")
-  @key("sourceName")
-  @visibility(Lifecycle.Read)
   name: string;
 
   @doc("Optional user-defined description.")
@@ -4340,10 +4426,11 @@ model KnowledgeSource {
   @doc("The type of the knowledge source.")
   kind: KnowledgeSourceKind;
 
-  @doc("The ETag of the agent.")
+  @doc("The ETag of the knowledge source.")
+  @encodedName("application/json", "@odata.etag")
   eTag?: string;
 
-  @doc("A description of an encryption key that you create in Azure Key Vault.")
+  @doc("A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your knowledge source definition when you want full assurance that no one, not even Microsoft, can decrypt them. Once you have encrypted your knowledge source definition, it will always remain encrypted. The search service will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your knowledge source definition will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019.")
   encryptionKey?: SearchResourceEncryptionKey;
 }
 
@@ -4358,19 +4445,15 @@ union KnowledgeSourceKind {
   AzureBlob: "azureBlob",
 
   @doc("A knowledge source that reads data from indexed SharePoint.")
-  @added(Versions.v2025_11_01_preview)
   IndexedSharePoint: "indexedSharePoint",
 
   @doc("A knowledge source that reads data from indexed OneLake.")
-  @added(Versions.v2025_11_01_preview)
   IndexedOneLake: "indexedOneLake",
 
   @doc("A knowledge source that reads data from the web.")
-  @added(Versions.v2025_11_01_preview)
   Web: "web",
 
   @doc("A knowledge source that reads data from remote SharePoint.")
-  @added(Versions.v2025_11_01_preview)
   RemoteSharePoint: "remoteSharePoint",
 }
 
@@ -4388,7 +4471,19 @@ model SearchIndexKnowledgeSourceParameters {
   searchIndexName: string;
 
   @doc("Used to request additional fields for referenced source data.")
-  sourceDataSelect?: string;
+  sourceDataFields?: SearchIndexFieldReference[];
+
+  @doc("Used to restrict which fields to search on the search index.")
+  searchFields?: SearchIndexFieldReference[];
+
+  @doc("Used to specify a different semantic configuration on the target search index other than the default one.")
+  semanticConfigurationName?: string;
+}
+
+@doc("Field reference for a search index.")
+model SearchIndexFieldReference {
+  @doc("The name of the field.")
+  name: string;
 }
 
 @doc("Configuration for Azure Blob Storage knowledge source.")
@@ -4401,9 +4496,6 @@ model AzureBlobKnowledgeSource extends KnowledgeSource {
 
 @doc("Parameters for Azure Blob Storage knowledge source.")
 model AzureBlobKnowledgeSourceParameters {
-  @doc("An explicit identity to use for this knowledge source. ")
-  identity?: SearchIndexerDataIdentity;
-
   @doc("Key-based connection string or the ResourceId format if using a managed identity.")
   connectionString: string;
 
@@ -4413,21 +4505,134 @@ model AzureBlobKnowledgeSourceParameters {
   @doc("Optional folder path within the container.")
   folderPath?: string;
 
-  @doc("Optional vectorizer configuration for vectorizing content.")
-  embeddingModel?: VectorSearchVectorizer;
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("Set to true if connecting to an ADLS Gen2 storage account. Default is false.")
+  isADLSGen2?: boolean = false;
 
-  @doc("Optional chat completion model for image verbalization or context extraction.")
-  chatCompletionModel?: KnowledgeBaseModel;
-
-  @doc("Optional schedule for data ingestion.")
-  ingestionSchedule?: IndexingSchedule;
+  @doc("Consolidates all general ingestion settings.")
+  ingestionParameters?: KnowledgeSourceIngestionParameters;
 
   @doc("Resources created by the knowledge source.")
   @visibility(Lifecycle.Read)
   createdResources?: CreatedResources;
+}
 
-  @doc("Indicates whether image verbalization should be disabled.")
+@doc("Configuration for SharePoint knowledge source.")
+model IndexedSharePointKnowledgeSource extends KnowledgeSource {
+  kind: KnowledgeSourceKind.IndexedSharePoint;
+
+  @doc("The parameters for the knowledge source.")
+  indexedSharePointParameters: IndexedSharePointKnowledgeSourceParameters;
+}
+
+@doc("Parameters for SharePoint knowledge source.")
+model IndexedSharePointKnowledgeSourceParameters {
+  @doc("An explicit identity to use for this knowledge source.")
+  identity?: SearchIndexerDataIdentity;
+
+  @doc("The connection string for the SharePoint site.")
+  connectionString: string;
+
+  @doc("The name of the SharePoint container.")
+  containerName: string;
+
+  @doc("SharePoint query.")
+  query?: string;
+
+  @doc("The embedding model to use for vectorization.")
+  embeddingModel?: KnowledgeSourceVectorizer;
+
+  @doc("The chat completion model to use for understanding images.")
+  chatCompletionModel?: KnowledgeBaseModel;
+
+  @doc("Ingestion parameters.")
+  ingestionParameters?: KnowledgeSourceIngestionParameters;
+
+  @doc("Resources created for this knowledge source. These resources are managed by the service and should not be modified or deleted.")
+  @visibility(Lifecycle.Read)
+  createdResources?: CreatedResources;
+
+  @doc("If true, images will not be verbalized using the chatCompletionModel.")
   disableImageVerbalization?: boolean;
+}
+
+@doc("Configuration for OneLake knowledge source.")
+model IndexedOneLakeKnowledgeSource extends KnowledgeSource {
+  kind: KnowledgeSourceKind.IndexedOneLake;
+
+  @doc("The parameters for the knowledge source.")
+  indexedOneLakeParameters: IndexedOneLakeKnowledgeSourceParameters;
+}
+
+@doc("Parameters for OneLake knowledge source.")
+model IndexedOneLakeKnowledgeSourceParameters {
+  @doc("OneLake workspace ID.")
+  fabricWorkspaceId: string;
+
+  @doc("Specifies which OneLake lakehouse to access.")
+  lakehouseId: string;
+
+  @doc("Optional OneLakehouse folder or shortcut to filter OneLake content.")
+  targetPath?: string;
+
+  @doc("Consolidates all general ingestion settings.")
+  ingestionParameters?: KnowledgeSourceIngestionParameters;
+
+  @doc("Resources created by the knowledge source.")
+  @visibility(Lifecycle.Read)
+  createdResources?: CreatedResources;
+}
+
+@doc("Knowledge Source targeting web results.")
+model WebKnowledgeSource extends KnowledgeSource {
+  kind: KnowledgeSourceKind.Web;
+
+  @doc("The parameters for the web knowledge source.")
+  webParameters?: WebKnowledgeSourceParameters;
+}
+
+@doc("Parameters for web knowledge source.")
+model WebKnowledgeSourceParameters {
+  @doc("Domain allow/block configuration for web results.")
+  domains?: WebKnowledgeSourceDomains;
+}
+
+@doc("Domain allow/block configuration for web knowledge source.")
+model WebKnowledgeSourceDomains {
+  @doc("Domains that are allowed for web results.")
+  allowedDomains?: WebKnowledgeSourceDomain[];
+
+  @doc("Domains that are blocked from web results.")
+  blockedDomains?: WebKnowledgeSourceDomain[];
+}
+
+@doc("Configuration for web knowledge source domain.")
+model WebKnowledgeSourceDomain {
+  @doc("The address of the domain.")
+  address: string;
+
+  @doc("Whether or not to include subpages from this domain.")
+  includeSubpages?: boolean;
+}
+
+@doc("Configuration for remote SharePoint knowledge source.")
+model RemoteSharePointKnowledgeSource extends KnowledgeSource {
+  kind: KnowledgeSourceKind.RemoteSharePoint;
+
+  @doc("The parameters for the remote SharePoint knowledge source.")
+  remoteSharePointParameters: RemoteSharePointKnowledgeSourceParameters;
+}
+
+@doc("Parameters for remote SharePoint knowledge source.")
+model RemoteSharePointKnowledgeSourceParameters {
+  @doc("Keyword Query Language (KQL) expression with queryable SharePoint properties and attributes to scope the retrieval before the query runs.")
+  filterExpression?: string;
+
+  @doc("A list of metadata fields to be returned for each item in the response. Only retrievable metadata properties can be included in this list. By default, no metadata is returned.")
+  resourceMetadata?: string[];
+
+  @doc("Container ID for SharePoint Embedded connection. When this is null, it will use SharePoint Online.")
+  containerTypeId?: string;
 }
 
 @doc("Result from listing knowledge sources.")
@@ -4449,6 +4654,9 @@ model SearchServiceStatistics {
 
   @doc("Service level general limits.")
   limits: SearchServiceLimits;
+
+  @doc("Service level indexer runtime consumption.")
+  indexersRuntime: ServiceIndexersRuntime;
 }
 
 @doc("Represents service-level resource counters and quotas.")
@@ -4506,6 +4714,24 @@ model SearchServiceLimits {
 
   @doc("The maximum amount of storage in bytes allowed per index.")
   maxStoragePerIndex?: int64;
+
+  @doc("The maximum cumulative indexer runtime in seconds allowed for the service.")
+  maxCumulativeIndexerRuntimeSeconds?: int64;
+}
+
+@doc("Represents service-level indexer runtime counters.")
+model ServiceIndexersRuntime {
+  @doc("Cumulative runtime of all indexers in the service from the beginningTime to endingTime, in seconds.")
+  usedSeconds: int64;
+
+  @doc("Cumulative runtime remaining for all indexers in the service from the beginningTime to endingTime, in seconds.")
+  remainingSeconds?: int64;
+
+  @doc("Beginning UTC time of the 24-hour period considered for indexer runtime usage (inclusive).")
+  beginningTime: utcDateTime;
+
+  @doc("End UTC time of the 24-hour period considered for indexer runtime usage (inclusive).")
+  endingTime: utcDateTime;
 }
 
 @doc("Allows you to take control over the process of converting text into indexable/searchable tokens. It's a user-defined configuration consisting of a single predefined tokenizer and one or more filters. The tokenizer is responsible for breaking text into tokens, and the filters for modifying tokens emitted by the tokenizer.")
@@ -4687,10 +4913,10 @@ model PathHierarchyTokenizer extends LexicalTokenizer {
   maxTokenLength?: int32 = 300;
 
   @doc("A value indicating whether to generate tokens in reverse order. Default is false.")
-  reverse?: boolean;
+  reverse?: boolean = false;
 
   @doc("The number of initial tokens to skip. Default is 0.")
-  skip?: int32;
+  skip?: int32 = 0;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   @doc("A URI fragment specifying the type of tokenizer.")
@@ -4834,7 +5060,7 @@ model KeepTokenFilter extends TokenFilter {
   keepWords: string[];
 
   @doc("A value indicating whether to lower case all words first. Default is false.")
-  keepWordsCase?: boolean;
+  keepWordsCase?: boolean = false;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   @doc("A URI fragment specifying the type of token filter.")
@@ -4847,7 +5073,7 @@ model KeywordMarkerTokenFilter extends TokenFilter {
   keywords: string[];
 
   @doc("A value indicating whether to ignore case. If true, all words are converted to lower case first. Default is false.")
-  ignoreCase?: boolean;
+  ignoreCase?: boolean = false;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   @doc("A URI fragment specifying the type of token filter.")
@@ -4857,8 +5083,9 @@ model KeywordMarkerTokenFilter extends TokenFilter {
 @doc("Removes words that are too long or too short. This token filter is implemented using Apache Lucene.")
 model LengthTokenFilter extends TokenFilter {
   @doc("The minimum length in characters. Default is 0. Maximum is 300. Must be less than the value of max.")
+  @minValue(0)
   @maxValue(300)
-  min?: int32;
+  min?: int32 = 0;
 
   @doc("The maximum length in characters. Default and maximum is 300.")
   @maxValue(300)
@@ -4875,7 +5102,7 @@ model LimitTokenFilter extends TokenFilter {
   maxTokenCount?: int32 = 1;
 
   @doc("A value indicating whether all tokens from the input must be consumed even if maxTokenCount is reached. Default is false.")
-  consumeAllTokens?: boolean;
+  consumeAllTokens?: boolean = false;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   @doc("A URI fragment specifying the type of token filter.")
@@ -4883,8 +5110,23 @@ model LimitTokenFilter extends TokenFilter {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+#deprecated "This version of NGramTokenFilter is deprecated. Please use NGramTokenFilterV2 instead."
 @doc("Generates n-grams of the given size(s). This token filter is implemented using Apache Lucene.")
 model NGramTokenFilter extends TokenFilter {
+  @doc("The minimum n-gram length. Default is 1. Must be less than the value of maxGram.")
+  minGram?: int32 = 1;
+
+  @doc("The maximum n-gram length. Default is 2.")
+  maxGram?: int32 = 2;
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of token filter.")
+  `@odata.type`: "#Microsoft.Azure.Search.NGramTokenFilter";
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+@doc("Generates n-grams of the given size(s). This token filter is implemented using Apache Lucene.")
+model NGramTokenFilterV2 extends TokenFilter {
   @doc("The minimum n-gram length. Default is 1. Maximum is 300. Must be less than the value of maxGram.")
   @maxValue(300)
   minGram?: int32 = 1;
@@ -4951,7 +5193,7 @@ model ShingleTokenFilter extends TokenFilter {
   outputUnigrams?: boolean = true;
 
   @doc("A value indicating whether to output unigrams for those times when no shingles are available. This property takes precedence when outputUnigrams is set to false. Default is false.")
-  outputUnigramsIfNoShingles?: boolean;
+  outputUnigramsIfNoShingles?: boolean = false;
 
   @doc("The string to use when joining adjacent tokens to form a shingle. Default is a single space (\" \").")
   tokenSeparator?: string = " ";
@@ -4974,7 +5216,7 @@ model SnowballTokenFilter extends TokenFilter {
   `@odata.type`: "#Microsoft.Azure.Search.SnowballTokenFilter";
 }
 
-@doc("Language specific stemming filter. This token filter is implemented using Apache Lucene.")
+@doc("Language specific stemming filter. This token filter is implemented using Apache Lucene. See https://learn.microsoft.com/rest/api/searchservice/Custom-analyzers-in-Azure-Search#TokenFilters")
 model StemmerTokenFilter extends TokenFilter {
   @doc("The language to use.")
   language: StemmerTokenFilterLanguage;
@@ -4984,7 +5226,7 @@ model StemmerTokenFilter extends TokenFilter {
   `@odata.type`: "#Microsoft.Azure.Search.StemmerTokenFilter";
 }
 
-@doc("Provides the ability to override other stemming filters with custom dictionary-based stemming. Any dictionary-stemmed terms will be marked as keywords so that they will not be stemmed with stemmers down the chain. Must be placed before any stemming filters. This token filter is implemented using Apache Lucene.")
+@doc("Provides the ability to override other stemming filters with custom dictionary-based stemming. Any dictionary-stemmed terms will be marked as keywords so that they will not be stemmed with stemmers down the chain. Must be placed before any stemming filters. This token filter is implemented using Apache Lucene. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/StemmerOverrideFilter.html")
 model StemmerOverrideTokenFilter extends TokenFilter {
   @doc("A list of stemming rules in the following format: \"word => stem\", for example: \"ran => run\".")
   rules: string[];
@@ -4994,16 +5236,16 @@ model StemmerOverrideTokenFilter extends TokenFilter {
   `@odata.type`: "#Microsoft.Azure.Search.StemmerOverrideTokenFilter";
 }
 
-@doc("Removes stop words from a token stream. This token filter is implemented using Apache Lucene.")
+@doc("Removes stop words from a token stream. This token filter is implemented using Apache Lucene. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/core/StopFilter.html")
 model StopwordsTokenFilter extends TokenFilter {
   @doc("The list of stopwords. This property and the stopwords list property cannot both be set.")
   stopwords?: string[];
 
   @doc("A predefined list of stopwords to use. This property and the stopwords property cannot both be set. Default is English.")
-  stopwordsList?: StopwordsList;
+  stopwordsList?: StopwordsList = StopwordsList.English;
 
   @doc("A value indicating whether to ignore case. If true, all words are converted to lower case first. Default is false.")
-  ignoreCase?: boolean;
+  ignoreCase?: boolean = false;
 
   @doc("A value indicating whether to ignore the last search term if it's a stop word. Default is true.")
   removeTrailing?: boolean = true;
@@ -5019,7 +5261,7 @@ model SynonymTokenFilter extends TokenFilter {
   synonyms: string[];
 
   @doc("A value indicating whether to case-fold input for matching. Default is false.")
-  ignoreCase?: boolean;
+  ignoreCase?: boolean = false;
 
   @doc("A value indicating whether all words in the list of synonyms (if => notation is not used) will map to one another. If true, all words in the list of synonyms (if => notation is not used) will map to one another. The following list: incredible, unbelievable, fabulous, amazing is equivalent to: incredible, unbelievable, fabulous, amazing => incredible, unbelievable, fabulous, amazing. If false, the following list: incredible, unbelievable, fabulous, amazing will be equivalent to: incredible, unbelievable, fabulous, amazing => incredible. Default is true.")
   expand?: boolean = true;
@@ -5043,7 +5285,7 @@ model TruncateTokenFilter extends TokenFilter {
 @doc("Filters out tokens with same text as the previous token. This token filter is implemented using Apache Lucene.")
 model UniqueTokenFilter extends TokenFilter {
   @doc("A value indicating whether to remove duplicates only at the same position. Default is false.")
-  onlyOnSamePosition?: boolean;
+  onlyOnSamePosition?: boolean = false;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   @doc("A URI fragment specifying the type of token filter.")
@@ -5059,19 +5301,19 @@ model WordDelimiterTokenFilter extends TokenFilter {
   generateNumberParts?: boolean = true;
 
   @doc("A value indicating whether maximum runs of word parts will be catenated. For example, if this is set to true, \"Azure-Search\" becomes \"AzureSearch\". Default is false.")
-  catenateWords?: boolean;
+  catenateWords?: boolean = false;
 
   @doc("A value indicating whether maximum runs of number parts will be catenated. For example, if this is set to true, \"1-2\" becomes \"12\". Default is false.")
-  catenateNumbers?: boolean;
+  catenateNumbers?: boolean = false;
 
   @doc("A value indicating whether all subword parts will be catenated. For example, if this is set to true, \"Azure-Search-1\" becomes \"AzureSearch1\". Default is false.")
-  catenateAll?: boolean;
+  catenateAll?: boolean = false;
 
   @doc("A value indicating whether to split words on caseChange. For example, if this is set to true, \"AzureSearch\" becomes \"Azure\" \"Search\". Default is true.")
   splitOnCaseChange?: boolean = true;
 
   @doc("A value indicating whether original words will be preserved and added to the subword list. Default is false.")
-  preserveOriginal?: boolean;
+  preserveOriginal?: boolean = false;
 
   @doc("A value indicating whether to split on numbers. For example, if this is set to true, \"Azure1Search\" becomes \"Azure\" \"1\" \"Search\". Default is true.")
   splitOnNumerics?: boolean = true;
@@ -5225,6 +5467,9 @@ model AzureOpenAIVectorizerParameters {
 
   @doc("The name of the embedding model that is deployed at the provided deploymentId path.")
   modelName?: AzureOpenAIModelName;
+
+  @doc("The authentication method to use when connecting to the Azure OpenAI resource.")
+  authenticationMethod?: string;
 }
 
 @doc("Abstract base type for data identities.")
@@ -5696,6 +5941,7 @@ model EntityLinkingSkill extends SearchIndexerSkill {
   defaultLanguageCode?: string;
 
   @doc("A value between 0 and 1 that be used to only include entities whose confidence score is greater than the value specified. If not set (default), or if explicitly set to null, all entities will be included.")
+  @minValue(0)
   @maxValue(1)
   minimumPrecision?: float64;
 
@@ -5716,6 +5962,7 @@ model EntityRecognitionSkillV3 extends SearchIndexerSkill {
   defaultLanguageCode?: string;
 
   @doc("A value between 0 and 1 that be used to only include entities whose confidence score is greater than the value specified. If not set (default), or if explicitly set to null, all entities will be included.")
+  @minValue(0)
   @maxValue(1)
   minimumPrecision?: float64;
 
@@ -5734,6 +5981,7 @@ model PIIDetectionSkill extends SearchIndexerSkill {
   defaultLanguageCode?: string;
 
   @doc("A value between 0 and 1 that be used to only include entities whose confidence score is greater than the value specified. If not set (default), or if explicitly set to null, all entities will be included.")
+  @minValue(0)
   @maxValue(1)
   minimumPrecision?: float64;
 
@@ -5857,8 +6105,8 @@ model DocumentExtractionSkill extends SearchIndexerSkill {
 
 @doc("A skill that extracts content and layout information, via Azure AI Services, from files within the enrichment pipeline.")
 model DocumentIntelligenceLayoutSkill extends SearchIndexerSkill {
-  @doc("Controls the cardinality of the output produced by the skill. Default is 'oneToMany'.")
-  outputFormat?: DocumentIntelligenceLayoutSkillOutputFormat;
+  @doc("Controls the output format. Default is 'markdown'.")
+  outputFormat?: DocumentIntelligenceLayoutSkillOutputFormat = DocumentIntelligenceLayoutSkillOutputFormat.Markdown;
 
   @doc("Controls the cardinality of the output produced by the skill. Default is 'oneToMany'.")
   outputMode?: DocumentIntelligenceLayoutSkillOutputMode = DocumentIntelligenceLayoutSkillOutputMode.OneToMany;
@@ -5883,7 +6131,7 @@ model WebApiSkill extends SearchIndexerSkill {
   uri: string;
 
   @doc("The headers required to make the http request.")
-  httpHeaders?: Record<string>;
+  httpHeaders?: WebApiHttpHeaders;
 
   @doc("The method for the http request.")
   httpMethod?: string;
@@ -5949,11 +6197,55 @@ model AzureOpenAIEmbeddingSkill extends SearchIndexerSkill {
 @doc("Allows you to generate a vector embedding for a given image or text input using the Azure AI Services Vision Vectorize API.")
 model VisionVectorizeSkill extends SearchIndexerSkill {
   @doc("The version of the model to use when calling the AI Services Vision service. It will default to the latest available when not specified.")
-  modelVersion: string;
+  modelVersion?: string;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   @doc("A URI fragment specifying the type of skill.")
   `@odata.type`: "#Microsoft.Skills.Vision.VectorizeSkill";
+}
+
+@doc("A skill that leverages Azure AI Content Understanding to process and extract structured insights from documents, enabling enriched, searchable content for enhanced document indexing and retrieval.")
+model ContentUnderstandingSkill extends SearchIndexerSkill {
+  @doc("Controls the cardinality of the content extracted from the document by the skill.")
+  extractionOptions?: ContentUnderstandingSkillExtractionOptions[];
+
+  @doc("Controls the cardinality for chunking the content.")
+  chunkingProperties?: ContentUnderstandingSkillChunkingProperties;
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of skill.")
+  `@odata.type`: "#Microsoft.Skills.Util.ContentUnderstandingSkill";
+}
+
+@doc("Controls the cardinality of the content extracted from the document by the skill.")
+union ContentUnderstandingSkillExtractionOptions {
+  string,
+
+  @doc("Specify that image content should be extracted from the document.")
+  Images: "images",
+
+  @doc("Specify that location metadata should be extracted from the document.")
+  LocationMetadata: "locationMetadata",
+}
+
+@doc("Controls the cardinality for chunking the content.")
+model ContentUnderstandingSkillChunkingProperties {
+  @doc("The unit of the chunk.")
+  unit?: ContentUnderstandingSkillChunkingUnit;
+
+  @doc("The maximum chunk length in characters. Default is 500.")
+  maximumLength?: int32;
+
+  @doc("The length of overlap provided between two text chunks. Default is 0.")
+  overlapLength?: int32;
+}
+
+@doc("Controls the cardinality of the chunk unit. Default is 'characters'")
+union ContentUnderstandingSkillChunkingUnit {
+  string,
+
+  @doc("Specifies chunk by characters.")
+  Characters: "characters",
 }
 
 @doc("Object defining the custom schema the model will use to structure its output.")
@@ -5964,7 +6256,7 @@ model ChatCompletionSchema {
   @doc("A JSON-formatted string that defines the output schema's properties and constraints for the model.")
   properties?: string;
 
-  @doc("An array of the property names that are required to be part of the model's response.")
+  @doc("An array of the property names that are required to be part of the model's response. All properties must be included for structured outputs.")
   required?: string[];
 
   @doc("Controls whether it is allowable for an object to contain additional keys / values that were not defined in the JSON Schema. Default is false.")
@@ -5998,6 +6290,7 @@ model ChatCompletionSchemaProperties {
 @doc("Common language model parameters for Chat Completions. If omitted, default values are used.")
 model ChatCompletionCommonModelParameters {
   @doc("The name of the model to use (e.g., 'gpt-4o', etc.). Default is null if not specified.")
+  @encodedName("application/json", "model")
   modelName?: string;
 
   @doc("A float in the range [-2,2] that reduces or increases likelihood of repeated tokens. Default is 0.")
@@ -6039,10 +6332,10 @@ model ChatCompletionSkill extends SearchIndexerSkill {
   @doc("If set, the number of parallel calls that can be made to the Web API.")
   degreeOfParallelism?: int32;
 
-  @doc("Applies to custom skills that connect to external code in an Azure function or some other application that provides the transformations.")
+  @doc("Applies to custom skills that connect to external code in an Azure function or some other application that provides the transformations. This value should be the application ID created for the function or app when it was registered with Azure Active Directory. When specified, the custom skill connects to the function or app using a managed ID (either system or user-assigned) of the search service and the access token of the function or app, using this value as the resource id for creating the scope of the access token.")
   authResourceId?: string;
 
-  @doc("The user-assigned managed identity used for outbound connections.")
+  @doc("The user-assigned managed identity used for outbound connections. If an authResourceId is provided and it's not specified, the system-assigned managed identity is used. On updates to the indexer, if the identity is unspecified, the value remains unchanged. If set to \"none\", the value of this property is cleared.")
   authIdentity?: SearchIndexerDataIdentity;
 
   @doc("API key for authenticating to the model. Both apiKey and authIdentity cannot be specified at the same time.")
@@ -6069,8 +6362,6 @@ model ChatCompletionSkill extends SearchIndexerSkill {
 @doc("Statistics for a given index. Statistics are collected periodically and are not guaranteed to always be up-to-date.")
 model IndexStatisticsSummary {
   @doc("The name of the index.")
-  @key
-  @visibility(Lifecycle.Read)
   name: string;
 
   @doc("The number of documents in the index.")
@@ -6083,7 +6374,7 @@ model IndexStatisticsSummary {
 
   @doc("The amount of memory in bytes consumed by vectors in the index.")
   @visibility(Lifecycle.Read)
-  vectorIndexSize?: int64;
+  vectorIndexSize: int64;
 }
 
 @doc("Response from a request to retrieve stats summary of all indexes. If successful, it includes the stats of each index in the service.")

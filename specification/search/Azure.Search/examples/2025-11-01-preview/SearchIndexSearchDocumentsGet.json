@@ -5,6 +5,9 @@
     "endpoint": "https://myservice.search.windows.net",
     "indexName": "myindex",
     "api-version": "2025-11-01-preview",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
+    "x-ms-query-source-authorization": "AZURE_AD_ACCESS_TOKEN",
+    "x-ms-enable-elevated-read": true,
     "$count": true,
     "facet": [
       "category,count:10,sort:count"
@@ -60,7 +63,7 @@
         },
         "value": [
           {
-            "@search.score": 1.50,
+            "@search.score": 1.5,
             "@search.highlights": {
               "title": [
                 "<em>Nice</em> <em>Hotel</em>"
@@ -71,7 +74,49 @@
             "title": "Nice Hotel"
           },
           {
-            "@search.score": 0.70,
+            "@search.score": 0.7,
+            "@search.highlights": {
+              "title": [
+                "Fancy <em>Hotel</em>"
+              ]
+            },
+            "description": "Best hotel in town",
+            "docId": "2",
+            "title": "Fancy Hotel"
+          }
+        ]
+      }
+    },
+    "206": {
+      "body": {
+        "@odata.count": 25,
+        "@search.coverage": 80,
+        "@search.facets": {
+          "category": [
+            {
+              "count": 1,
+              "value": "Economy"
+            },
+            {
+              "count": 1,
+              "value": "Luxury"
+            }
+          ]
+        },
+        "value": [
+          {
+            "@search.score": 1.5,
+            "@search.highlights": {
+              "title": [
+                "<em>Nice</em> <em>Hotel</em>"
+              ]
+            },
+            "description": "Cheapest hotel in town",
+            "docId": "1",
+            "title": "Nice Hotel"
+          },
+          {
+            "@search.score": 0.7,
             "@search.highlights": {
               "title": [
                 "Fancy <em>Hotel</em>"

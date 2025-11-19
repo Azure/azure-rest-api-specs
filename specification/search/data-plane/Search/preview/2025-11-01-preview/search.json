@@ -952,6 +952,11 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "SearchServiceResync": {
+            "$ref": "./examples/SearchServiceResync.json"
+          }
         }
       }
     },
@@ -1028,6 +1033,9 @@
         "x-ms-examples": {
           "SearchServiceGetIndexerStatus": {
             "$ref": "./examples/SearchServiceGetIndexerStatus.json"
+          },
+          "SearchServiceGetS3HDUnlimitedIndexerStatus": {
+            "$ref": "./examples/SearchServiceGetS3HDUnlimitedIndexerStatus.json"
           }
         }
       }
@@ -1449,6 +1457,12 @@
               "$ref": "#/definitions/SearchDocumentsResult"
             }
           },
+          "206": {
+            "description": "Successful",
+            "schema": {
+              "$ref": "#/definitions/SearchDocumentsResult"
+            }
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -1828,6 +1842,12 @@
         "responses": {
           "200": {
             "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SearchDocumentsResult"
+            }
+          },
+          "206": {
+            "description": "Successful",
             "schema": {
               "$ref": "#/definitions/SearchDocumentsResult"
             }
@@ -2225,6 +2245,11 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "SearchServiceListKnowledgeBases": {
+            "$ref": "./examples/SearchServiceListKnowledgeBases.json"
+          }
         }
       },
       "post": {
@@ -2260,6 +2285,11 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "SearchServiceCreateKnowledgeBase": {
+            "$ref": "./examples/SearchServiceCreateKnowledgeBase.json"
+          }
         }
       }
     },
@@ -2294,6 +2324,11 @@
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "SearchServiceGetKnowledgeBase": {
+            "$ref": "./examples/SearchServiceGetKnowledgeBase.json"
           }
         }
       },
@@ -2373,6 +2408,11 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "SearchServiceCreateOrUpdateKnowledgeBase": {
+            "$ref": "./examples/SearchServiceCreateOrUpdateKnowledgeBase.json"
+          }
         }
       },
       "delete": {
@@ -2421,6 +2461,11 @@
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "SearchServiceDeleteKnowledgeBase": {
+            "$ref": "./examples/SearchServiceDeleteKnowledgeBase.json"
           }
         }
       }
@@ -2499,7 +2544,7 @@
     },
     "/knowledgesources": {
       "get": {
-        "operationId": "Sources_List",
+        "operationId": "KnowledgeSources_List",
         "description": "Lists all knowledge sources available for a search service.",
         "parameters": [
           {
@@ -2522,10 +2567,27 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "SearchServiceListKnowledgeSources": {
+            "$ref": "./examples/SearchServiceListKnowledgeSources.json"
+          },
+          "SearchServiceListKnowledgeSourcesAzureBlob": {
+            "$ref": "./examples/SearchServiceListKnowledgeSourcesAzureBlob.json"
+          },
+          "SearchServiceListKnowledgeSourcesIndexedOneLake": {
+            "$ref": "./examples/SearchServiceListKnowledgeSourcesIndexedOneLake.json"
+          },
+          "SearchServiceListKnowledgeSourcesIndexedSharePoint": {
+            "$ref": "./examples/SearchServiceListKnowledgeSourcesIndexedSharePoint.json"
+          },
+          "SearchServiceListKnowledgeSourcesWeb": {
+            "$ref": "./examples/SearchServiceListKnowledgeSourcesWeb.json"
+          }
         }
       },
       "post": {
-        "operationId": "Sources_Create",
+        "operationId": "KnowledgeSources_Create",
         "description": "Creates a new knowledge source.",
         "parameters": [
           {
@@ -2557,12 +2619,29 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "SearchServiceCreateKnowledgeSource": {
+            "$ref": "./examples/SearchServiceCreateKnowledgeSource.json"
+          },
+          "SearchServiceCreateKnowledgeSourceAzureBlob": {
+            "$ref": "./examples/SearchServiceCreateKnowledgeSourceAzureBlob.json"
+          },
+          "SearchServiceCreateKnowledgeSourceIndexedOneLake": {
+            "$ref": "./examples/SearchServiceCreateKnowledgeSourceIndexedOneLake.json"
+          },
+          "SearchServiceCreateKnowledgeSourceIndexedSharePoint": {
+            "$ref": "./examples/SearchServiceCreateKnowledgeSourceIndexedSharePoint.json"
+          },
+          "SearchServiceCreateKnowledgeSourceWeb": {
+            "$ref": "./examples/SearchServiceCreateKnowledgeSourceWeb.json"
+          }
         }
       }
     },
     "/knowledgesources('{sourceName}')": {
       "get": {
-        "operationId": "Sources_Get",
+        "operationId": "KnowledgeSources_Get",
         "description": "Retrieves a knowledge source definition.",
         "parameters": [
           {
@@ -2592,10 +2671,27 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "SearchServiceGetKnowledgeSource": {
+            "$ref": "./examples/SearchServiceGetKnowledgeSource.json"
+          },
+          "SearchServiceGetKnowledgeSourceAzureBlob": {
+            "$ref": "./examples/SearchServiceGetKnowledgeSourceAzureBlob.json"
+          },
+          "SearchServiceGetKnowledgeSourceIndexedOneLake": {
+            "$ref": "./examples/SearchServiceGetKnowledgeSourceIndexedOneLake.json"
+          },
+          "SearchServiceGetKnowledgeSourceIndexedSharePoint": {
+            "$ref": "./examples/SearchServiceGetKnowledgeSourceIndexedSharePoint.json"
+          },
+          "SearchServiceGetKnowledgeSourceWeb": {
+            "$ref": "./examples/SearchServiceGetKnowledgeSourceWeb.json"
+          }
         }
       },
       "put": {
-        "operationId": "Sources_CreateOrUpdate",
+        "operationId": "KnowledgeSources_CreateOrUpdate",
         "description": "Creates a new knowledge source or updates an knowledge source if it already exists.",
         "parameters": [
           {
@@ -2670,10 +2766,27 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "SearchServiceCreateOrUpdateKnowledgeSource": {
+            "$ref": "./examples/SearchServiceCreateOrUpdateKnowledgeSource.json"
+          },
+          "SearchServiceCreateOrUpdateKnowledgeSourceAzureBlob": {
+            "$ref": "./examples/SearchServiceCreateOrUpdateKnowledgeSourceAzureBlob.json"
+          },
+          "SearchServiceCreateOrUpdateKnowledgeSourceIndexedOneLake": {
+            "$ref": "./examples/SearchServiceCreateOrUpdateKnowledgeSourceIndexedOneLake.json"
+          },
+          "SearchServiceCreateOrUpdateKnowledgeSourceIndexedSharePoint": {
+            "$ref": "./examples/SearchServiceCreateOrUpdateKnowledgeSourceIndexedSharePoint.json"
+          },
+          "SearchServiceCreateOrUpdateKnowledgeSourceWeb": {
+            "$ref": "./examples/SearchServiceCreateOrUpdateKnowledgeSourceWeb.json"
+          }
         }
       },
       "delete": {
-        "operationId": "Sources_Delete",
+        "operationId": "KnowledgeSources_Delete",
         "description": "Deletes an existing knowledge source.",
         "parameters": [
           {
@@ -2719,6 +2832,63 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "SearchServiceDeleteKnowledgeSource": {
+            "$ref": "./examples/SearchServiceDeleteKnowledgeSource.json"
+          },
+          "SearchServiceDeleteKnowledgeSourceAzureBlob": {
+            "$ref": "./examples/SearchServiceDeleteKnowledgeSourceAzureBlob.json"
+          },
+          "SearchServiceDeleteKnowledgeSourceIndexedOneLake": {
+            "$ref": "./examples/SearchServiceDeleteKnowledgeSourceIndexedOneLake.json"
+          },
+          "SearchServiceDeleteKnowledgeSourceIndexedSharePoint": {
+            "$ref": "./examples/SearchServiceDeleteKnowledgeSourceIndexedSharePoint.json"
+          },
+          "SearchServiceDeleteKnowledgeSourceWeb": {
+            "$ref": "./examples/SearchServiceDeleteKnowledgeSourceWeb.json"
+          }
+        }
+      }
+    },
+    "/knowledgesources('{sourceName}')/status": {
+      "get": {
+        "operationId": "KnowledgeSources_GetStatus",
+        "description": "Retrieves the status of a knowledge source.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "sourceName",
+            "in": "path",
+            "description": "The name of the knowledge source.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/KnowledgeSourceStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SearchServiceGetKnowledgeSourceStatus": {
+            "$ref": "./examples/SearchServiceGetKnowledgeSourceStatus.json"
+          }
         }
       }
     },
@@ -2749,6 +2919,9 @@
           }
         },
         "x-ms-examples": {
+          "SearchServiceGetS3HDUnlimitedServiceStatistics": {
+            "$ref": "./examples/SearchServiceGetS3HDUnlimitedServiceStatistics.json"
+          },
           "SearchServiceGetServiceStatistics": {
             "$ref": "./examples/SearchServiceGetServiceStatistics.json"
           }
@@ -3341,7 +3514,8 @@
         "Facebook-DinoV2-Image-Embeddings-ViT-Base",
         "Facebook-DinoV2-Image-Embeddings-ViT-Giant",
         "Cohere-embed-v3-english",
-        "Cohere-embed-v3-multilingual"
+        "Cohere-embed-v3-multilingual",
+        "Cohere-embed-v4"
       ],
       "x-ms-enum": {
         "name": "AIFoundryModelCatalogName",
@@ -3376,9 +3550,32 @@
             "name": "CohereEmbedV3Multilingual",
             "value": "Cohere-embed-v3-multilingual",
             "description": "Cohere-embed-v3-multilingual"
+          },
+          {
+            "name": "CohereEmbedV4",
+            "value": "Cohere-embed-v4",
+            "description": "Cohere embed v4 model for generating embeddings from both text and images."
           }
         ]
       }
+    },
+    "AIServices": {
+      "type": "object",
+      "description": "Parameters for AI Services.",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URI of the AI Services endpoint."
+        },
+        "apiKey": {
+          "type": "string",
+          "description": "The API key for accessing AI Services."
+        }
+      },
+      "required": [
+        "uri"
+      ]
     },
     "AIServicesAccountIdentity": {
       "type": "object",
@@ -3569,7 +3766,8 @@
           "description": "The list of tokens returned by the analyzer specified in the request.",
           "items": {
             "$ref": "#/definitions/AnalyzedTokenInfo"
-          }
+          },
+          "readOnly": true
         }
       },
       "required": [
@@ -3582,22 +3780,26 @@
       "properties": {
         "token": {
           "type": "string",
-          "description": "The token returned by the analyzer."
+          "description": "The token returned by the analyzer.",
+          "readOnly": true
         },
         "startOffset": {
           "type": "integer",
           "format": "int32",
-          "description": "The index of the first character of the token in the input text."
+          "description": "The index of the first character of the token in the input text.",
+          "readOnly": true
         },
         "endOffset": {
           "type": "integer",
           "format": "int32",
-          "description": "The index of the last character of the token in the input text."
+          "description": "The index of the last character of the token in the input text.",
+          "readOnly": true
         },
         "position": {
           "type": "integer",
           "format": "int32",
-          "description": "The position of the token in the input text relative to other tokens. The first token in the input text has position 0, the next has position 1, and so on. Depending on the analyzer used, some tokens might have the same position, for example if they are synonyms of each other."
+          "description": "The position of the token in the input text relative to other tokens. The first token in the input text has position 0, the next has position 1, and so on. Depending on the analyzer used, some tokens might have the same position, for example if they are synonyms of each other.",
+          "readOnly": true
         }
       },
       "required": [
@@ -3888,10 +4090,6 @@
       "type": "object",
       "description": "Parameters for Azure Blob Storage knowledge source.",
       "properties": {
-        "identity": {
-          "$ref": "#/definitions/SearchIndexerDataIdentity",
-          "description": "An explicit identity to use for this knowledge source. "
-        },
         "connectionString": {
           "type": "string",
           "description": "Key-based connection string or the ResourceId format if using a managed identity."
@@ -3904,26 +4102,19 @@
           "type": "string",
           "description": "Optional folder path within the container."
         },
-        "embeddingModel": {
-          "$ref": "#/definitions/VectorSearchVectorizer",
-          "description": "Optional vectorizer configuration for vectorizing content."
+        "isADLSGen2": {
+          "type": "boolean",
+          "description": "Set to true if connecting to an ADLS Gen2 storage account. Default is false.",
+          "default": false
         },
-        "chatCompletionModel": {
-          "$ref": "#/definitions/KnowledgeBaseModel",
-          "description": "Optional chat completion model for image verbalization or context extraction."
-        },
-        "ingestionSchedule": {
-          "$ref": "#/definitions/IndexingSchedule",
-          "description": "Optional schedule for data ingestion."
+        "ingestionParameters": {
+          "$ref": "#/definitions/KnowledgeSourceIngestionParameters",
+          "description": "Consolidates all general ingestion settings."
         },
         "createdResources": {
           "$ref": "#/definitions/CreatedResources",
           "description": "Resources created by the knowledge source.",
           "readOnly": true
-        },
-        "disableImageVerbalization": {
-          "type": "boolean",
-          "description": "Indicates whether image verbalization should be disabled."
         }
       },
       "required": [
@@ -4005,6 +4196,10 @@
           "$ref": "#/definitions/AzureOpenAIModelName",
           "description": "The name of the embedding model that is deployed at the provided deploymentId path."
         },
+        "authenticationMethod": {
+          "type": "string",
+          "description": "The authentication method to use when connecting to the Azure OpenAI resource."
+        },
         "dimensions": {
           "type": "integer",
           "format": "int32",
@@ -4024,7 +4219,15 @@
       "enum": [
         "text-embedding-ada-002",
         "text-embedding-3-large",
-        "text-embedding-3-small"
+        "text-embedding-3-small",
+        "gpt-4o",
+        "gpt-4o-mini",
+        "gpt-4.1",
+        "gpt-4.1-mini",
+        "gpt-4.1-nano",
+        "gpt-5",
+        "gpt-5-mini",
+        "gpt-5-nano"
       ],
       "x-ms-enum": {
         "name": "AzureOpenAIModelName",
@@ -4044,6 +4247,46 @@
             "name": "TextEmbedding3Small",
             "value": "text-embedding-3-small",
             "description": "TextEmbedding3Small model."
+          },
+          {
+            "name": "Gpt4o",
+            "value": "gpt-4o",
+            "description": "Gpt4o model."
+          },
+          {
+            "name": "Gpt4oMini",
+            "value": "gpt-4o-mini",
+            "description": "Gpt4oMini model."
+          },
+          {
+            "name": "Gpt41",
+            "value": "gpt-4.1",
+            "description": "Gpt41 model."
+          },
+          {
+            "name": "Gpt41Mini",
+            "value": "gpt-4.1-mini",
+            "description": "Gpt41Mini model."
+          },
+          {
+            "name": "Gpt41Nano",
+            "value": "gpt-4.1-nano",
+            "description": "Gpt41Nano model."
+          },
+          {
+            "name": "Gpt5",
+            "value": "gpt-5",
+            "description": "Gpt5 model."
+          },
+          {
+            "name": "Gpt5Mini",
+            "value": "gpt-5-mini",
+            "description": "Gpt5Mini model."
+          },
+          {
+            "name": "Gpt5Nano",
+            "value": "gpt-5-nano",
+            "description": "Gpt5Nano model."
           }
         ]
       }
@@ -4105,6 +4348,10 @@
         "modelName": {
           "$ref": "#/definitions/AzureOpenAIModelName",
           "description": "The name of the embedding model that is deployed at the provided deploymentId path."
+        },
+        "authenticationMethod": {
+          "type": "string",
+          "description": "The authentication method to use when connecting to the Azure OpenAI resource."
         }
       }
     },
@@ -4354,9 +4601,10 @@
       "type": "object",
       "description": "Common language model parameters for Chat Completions. If omitted, default values are used.",
       "properties": {
-        "modelName": {
+        "model": {
           "type": "string",
-          "description": "The name of the model to use (e.g., 'gpt-4o', etc.). Default is null if not specified."
+          "description": "The name of the model to use (e.g., 'gpt-4o', etc.). Default is null if not specified.",
+          "x-ms-client-name": "modelName"
         },
         "frequencyPenalty": {
           "type": "number",
@@ -4399,7 +4647,7 @@
       "type": "string",
       "description": "Specifies how 'extraParameters' should be handled by Azure AI Foundry. Defaults to 'error'.",
       "enum": [
-        "passThrough",
+        "pass-through",
         "drop",
         "error"
       ],
@@ -4409,7 +4657,7 @@
         "values": [
           {
             "name": "PassThrough",
-            "value": "passThrough",
+            "value": "pass-through",
             "description": "Passes any extra parameters directly to the model."
           },
           {
@@ -4511,7 +4759,7 @@
         },
         "required": {
           "type": "array",
-          "description": "An array of the property names that are required to be part of the model's response.",
+          "description": "An array of the property names that are required to be part of the model's response. All properties must be included for structured outputs.",
           "items": {
             "type": "string"
           }
@@ -4579,11 +4827,11 @@
         },
         "authResourceId": {
           "type": "string",
-          "description": "Applies to custom skills that connect to external code in an Azure function or some other application that provides the transformations."
+          "description": "Applies to custom skills that connect to external code in an Azure function or some other application that provides the transformations. This value should be the application ID created for the function or app when it was registered with Azure Active Directory. When specified, the custom skill connects to the function or app using a managed ID (either system or user-assigned) of the search service and the access token of the function or app, using this value as the resource id for creating the scope of the access token."
         },
         "authIdentity": {
           "$ref": "#/definitions/SearchIndexerDataIdentity",
-          "description": "The user-assigned managed identity used for outbound connections."
+          "description": "The user-assigned managed identity used for outbound connections. If an authResourceId is provided and it's not specified, the system-assigned managed identity is used. On updates to the indexer, if the identity is unspecified, the value remains unchanged. If set to \"none\", the value of this property is cleared."
         },
         "apiKey": {
           "type": "string",
@@ -4603,7 +4851,7 @@
           "description": "How extra parameters are handled by Azure AI Foundry. Default is 'error'.",
           "default": "error",
           "enum": [
-            "passThrough",
+            "pass-through",
             "drop",
             "error"
           ],
@@ -4613,7 +4861,7 @@
             "values": [
               {
                 "name": "PassThrough",
-                "value": "passThrough",
+                "value": "pass-through",
                 "description": "Passes any extra parameters directly to the model."
               },
               {
@@ -4799,6 +5047,44 @@
       ],
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.CommonGramTokenFilter"
     },
+    "CompletedSynchronizationState": {
+      "type": "object",
+      "description": "Represents the completed state of the last synchronization.",
+      "properties": {
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start time of the last completed synchronization."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end time of the last completed synchronization."
+        },
+        "itemsUpdatesProcessed": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of item updates successfully processed in the last synchronization."
+        },
+        "itemsUpdatesFailed": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of item updates that failed in the last synchronization."
+        },
+        "itemsSkipped": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of items skipped in the last synchronization."
+        }
+      },
+      "required": [
+        "startTime",
+        "endTime",
+        "itemsUpdatesProcessed",
+        "itemsUpdatesFailed",
+        "itemsSkipped"
+      ]
+    },
     "ConditionalSkill": {
       "type": "object",
       "description": "A skill that enables scenarios that require a Boolean operation to determine the data to assign to an output.",
@@ -4808,6 +5094,91 @@
         }
       ],
       "x-ms-discriminator-value": "#Microsoft.Skills.Util.ConditionalSkill"
+    },
+    "ContentUnderstandingSkill": {
+      "type": "object",
+      "description": "A skill that leverages Azure AI Content Understanding to process and extract structured insights from documents, enabling enriched, searchable content for enhanced document indexing and retrieval.",
+      "properties": {
+        "extractionOptions": {
+          "type": "array",
+          "description": "Controls the cardinality of the content extracted from the document by the skill.",
+          "items": {
+            "$ref": "#/definitions/ContentUnderstandingSkillExtractionOptions"
+          }
+        },
+        "chunkingProperties": {
+          "$ref": "#/definitions/ContentUnderstandingSkillChunkingProperties",
+          "description": "Controls the cardinality for chunking the content."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SearchIndexerSkill"
+        }
+      ],
+      "x-ms-discriminator-value": "#Microsoft.Skills.Util.ContentUnderstandingSkill"
+    },
+    "ContentUnderstandingSkillChunkingProperties": {
+      "type": "object",
+      "description": "Controls the cardinality for chunking the content.",
+      "properties": {
+        "unit": {
+          "$ref": "#/definitions/ContentUnderstandingSkillChunkingUnit",
+          "description": "The unit of the chunk."
+        },
+        "maximumLength": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum chunk length in characters. Default is 500."
+        },
+        "overlapLength": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The length of overlap provided between two text chunks. Default is 0."
+        }
+      }
+    },
+    "ContentUnderstandingSkillChunkingUnit": {
+      "type": "string",
+      "description": "Controls the cardinality of the chunk unit. Default is 'characters'",
+      "enum": [
+        "characters"
+      ],
+      "x-ms-enum": {
+        "name": "ContentUnderstandingSkillChunkingUnit",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Characters",
+            "value": "characters",
+            "description": "Specifies chunk by characters."
+          }
+        ]
+      }
+    },
+    "ContentUnderstandingSkillExtractionOptions": {
+      "type": "string",
+      "description": "Controls the cardinality of the content extracted from the document by the skill.",
+      "enum": [
+        "images",
+        "locationMetadata"
+      ],
+      "x-ms-enum": {
+        "name": "ContentUnderstandingSkillExtractionOptions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Images",
+            "value": "images",
+            "description": "Specify that image content should be extracted from the document."
+          },
+          {
+            "name": "LocationMetadata",
+            "value": "locationMetadata",
+            "description": "Specify that location metadata should be extracted from the document."
+          }
+        ]
+      }
     },
     "CorsOptions": {
       "type": "object",
@@ -5291,8 +5662,29 @@
       "description": "A skill that extracts content and layout information, via Azure AI Services, from files within the enrichment pipeline.",
       "properties": {
         "outputFormat": {
-          "$ref": "#/definitions/DocumentIntelligenceLayoutSkillOutputFormat",
-          "description": "Controls the cardinality of the output produced by the skill. Default is 'oneToMany'."
+          "type": "string",
+          "description": "Controls the output format. Default is 'markdown'.",
+          "default": "markdown",
+          "enum": [
+            "text",
+            "markdown"
+          ],
+          "x-ms-enum": {
+            "name": "DocumentIntelligenceLayoutSkillOutputFormat",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Text",
+                "value": "text",
+                "description": "Specify the format of the output as text."
+              },
+              {
+                "name": "Markdown",
+                "value": "markdown",
+                "description": "Specify the format of the output as markdown."
+              }
+            ]
+          }
         },
         "outputMode": {
           "type": "string",
@@ -5725,6 +6117,7 @@
           "type": "number",
           "format": "double",
           "description": "A value between 0 and 1 that be used to only include entities whose confidence score is greater than the value specified. If not set (default), or if explicitly set to null, all entities will be included.",
+          "minimum": 0,
           "maximum": 1
         },
         "modelVersion": {
@@ -5940,6 +6333,7 @@
           "type": "number",
           "format": "double",
           "description": "A value between 0 and 1 that be used to only include entities whose confidence score is greater than the value specified. If not set (default), or if explicitly set to null, all entities will be included.",
+          "minimum": 0,
           "maximum": 1
         },
         "modelVersion": {
@@ -6046,7 +6440,38 @@
         "count": {
           "type": "integer",
           "format": "int64",
-          "description": "The approximate count of documents falling within the bucket described by this facet."
+          "description": "The approximate count of documents falling within the bucket described by this facet.",
+          "readOnly": true
+        },
+        "avg": {
+          "type": "number",
+          "format": "double",
+          "description": "The resulting total avg for the facet when a avg metric is requested.",
+          "readOnly": true
+        },
+        "min": {
+          "type": "number",
+          "format": "double",
+          "description": "The resulting total min for the facet when a min metric is requested.",
+          "readOnly": true
+        },
+        "max": {
+          "type": "number",
+          "format": "double",
+          "description": "The resulting total max for the facet when a max metric is requested.",
+          "readOnly": true
+        },
+        "sum": {
+          "type": "number",
+          "format": "double",
+          "description": "The resulting total sum for the facet when a sum metric is requested.",
+          "readOnly": true
+        },
+        "cardinality": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The resulting total cardinality for the facet when a cardinality metric is requested.",
+          "readOnly": true
         },
         "@search.facets": {
           "type": "object",
@@ -6059,12 +6484,6 @@
           },
           "readOnly": true,
           "x-ms-client-name": "facets"
-        },
-        "sum": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The resulting total sum for the facet when a sum metric is requested.",
-          "readOnly": true
         }
       },
       "additionalProperties": {}
@@ -6148,17 +6567,20 @@
         "documentCount": {
           "type": "integer",
           "format": "int64",
-          "description": "The number of documents in the index."
+          "description": "The number of documents in the index.",
+          "readOnly": true
         },
         "storageSize": {
           "type": "integer",
           "format": "int64",
-          "description": "The amount of storage in bytes consumed by the index."
+          "description": "The amount of storage in bytes consumed by the index.",
+          "readOnly": true
         },
         "vectorIndexSize": {
           "type": "integer",
           "format": "int64",
-          "description": "The amount of memory in bytes consumed by vectors in the index."
+          "description": "The amount of memory in bytes consumed by vectors in the index.",
+          "readOnly": true
         }
       },
       "required": [
@@ -6763,8 +7185,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name of the index.",
-          "readOnly": true
+          "description": "The name of the index."
         },
         "documentCount": {
           "type": "integer",
@@ -6788,7 +7209,58 @@
       "required": [
         "name",
         "documentCount",
-        "storageSize"
+        "storageSize",
+        "vectorIndexSize"
+      ]
+    },
+    "IndexedOneLakeKnowledgeSource": {
+      "type": "object",
+      "description": "Configuration for OneLake knowledge source.",
+      "properties": {
+        "indexedOneLakeParameters": {
+          "$ref": "#/definitions/IndexedOneLakeKnowledgeSourceParameters",
+          "description": "The parameters for the knowledge source."
+        }
+      },
+      "required": [
+        "indexedOneLakeParameters"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeSource"
+        }
+      ],
+      "x-ms-discriminator-value": "indexedOneLake"
+    },
+    "IndexedOneLakeKnowledgeSourceParameters": {
+      "type": "object",
+      "description": "Parameters for OneLake knowledge source.",
+      "properties": {
+        "fabricWorkspaceId": {
+          "type": "string",
+          "description": "OneLake workspace ID."
+        },
+        "lakehouseId": {
+          "type": "string",
+          "description": "Specifies which OneLake lakehouse to access."
+        },
+        "targetPath": {
+          "type": "string",
+          "description": "Optional OneLakehouse folder or shortcut to filter OneLake content."
+        },
+        "ingestionParameters": {
+          "$ref": "#/definitions/KnowledgeSourceIngestionParameters",
+          "description": "Consolidates all general ingestion settings."
+        },
+        "createdResources": {
+          "$ref": "#/definitions/CreatedResources",
+          "description": "Resources created by the knowledge source.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "fabricWorkspaceId",
+        "lakehouseId"
       ]
     },
     "IndexedOneLakeKnowledgeSourceParams": {
@@ -6800,6 +7272,102 @@
         }
       ],
       "x-ms-discriminator-value": "indexedOneLake"
+    },
+    "IndexedSharePointContainerName": {
+      "type": "string",
+      "description": "Specifies which SharePoint libraries to access.",
+      "enum": [
+        "defaultSiteLibrary",
+        "allSiteLibraries",
+        "useQuery"
+      ],
+      "x-ms-enum": {
+        "name": "IndexedSharePointContainerName",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DefaultSiteLibrary",
+            "value": "defaultSiteLibrary",
+            "description": "Index content from the site's default document library."
+          },
+          {
+            "name": "AllSiteLibraries",
+            "value": "allSiteLibraries",
+            "description": "Index content from every document library in the site."
+          },
+          {
+            "name": "UseQuery",
+            "value": "useQuery",
+            "description": "Use a query to filter SharePoint content."
+          }
+        ]
+      }
+    },
+    "IndexedSharePointKnowledgeSource": {
+      "type": "object",
+      "description": "Configuration for SharePoint knowledge source.",
+      "properties": {
+        "indexedSharePointParameters": {
+          "$ref": "#/definitions/IndexedSharePointKnowledgeSourceParameters",
+          "description": "The parameters for the knowledge source."
+        }
+      },
+      "required": [
+        "indexedSharePointParameters"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeSource"
+        }
+      ],
+      "x-ms-discriminator-value": "indexedSharePoint"
+    },
+    "IndexedSharePointKnowledgeSourceParameters": {
+      "type": "object",
+      "description": "Parameters for SharePoint knowledge source.",
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/SearchIndexerDataIdentity",
+          "description": "An explicit identity to use for this knowledge source."
+        },
+        "connectionString": {
+          "type": "string",
+          "description": "The connection string for the SharePoint site."
+        },
+        "containerName": {
+          "type": "string",
+          "description": "The name of the SharePoint container."
+        },
+        "query": {
+          "type": "string",
+          "description": "SharePoint query."
+        },
+        "embeddingModel": {
+          "$ref": "#/definitions/KnowledgeSourceVectorizer",
+          "description": "The embedding model to use for vectorization."
+        },
+        "chatCompletionModel": {
+          "$ref": "#/definitions/KnowledgeBaseModel",
+          "description": "The chat completion model to use for understanding images."
+        },
+        "ingestionParameters": {
+          "$ref": "#/definitions/KnowledgeSourceIngestionParameters",
+          "description": "Ingestion parameters."
+        },
+        "createdResources": {
+          "$ref": "#/definitions/CreatedResources",
+          "description": "Resources created for this knowledge source. These resources are managed by the service and should not be modified or deleted.",
+          "readOnly": true
+        },
+        "disableImageVerbalization": {
+          "type": "boolean",
+          "description": "If true, images will not be verbalized using the chatCompletionModel."
+        }
+      },
+      "required": [
+        "connectionString",
+        "containerName"
+      ]
     },
     "IndexedSharePointKnowledgeSourceParams": {
       "type": "object",
@@ -6898,7 +7466,8 @@
       "properties": {
         "status": {
           "$ref": "#/definitions/IndexerExecutionStatus",
-          "description": "The outcome of this indexer execution."
+          "description": "The outcome of this indexer execution.",
+          "readOnly": true
         },
         "statusDetail": {
           "$ref": "#/definitions/IndexerExecutionStatusDetail",
@@ -6917,49 +7486,58 @@
         },
         "errorMessage": {
           "type": "string",
-          "description": "The error message indicating the top-level error, if any."
+          "description": "The error message indicating the top-level error, if any.",
+          "readOnly": true
         },
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The start time of this indexer execution."
+          "description": "The start time of this indexer execution.",
+          "readOnly": true
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The end time of this indexer execution, if the execution has already completed."
+          "description": "The end time of this indexer execution, if the execution has already completed.",
+          "readOnly": true
         },
         "errors": {
           "type": "array",
           "description": "The item-level indexing errors.",
           "items": {
             "$ref": "#/definitions/SearchIndexerError"
-          }
+          },
+          "readOnly": true
         },
         "warnings": {
           "type": "array",
           "description": "The item-level indexing warnings.",
           "items": {
             "$ref": "#/definitions/SearchIndexerWarning"
-          }
+          },
+          "readOnly": true
         },
         "itemsProcessed": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of items that were processed during this indexer execution. This includes both successfully processed items and items where indexing was attempted but failed."
+          "description": "The number of items that were processed during this indexer execution. This includes both successfully processed items and items where indexing was attempted but failed.",
+          "readOnly": true
         },
         "itemsFailed": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of items that failed to be indexed during this indexer execution."
+          "description": "The number of items that failed to be indexed during this indexer execution.",
+          "readOnly": true
         },
         "initialTrackingState": {
           "type": "string",
-          "description": "Change tracking state with which an indexer execution started."
+          "description": "Change tracking state with which an indexer execution started.",
+          "readOnly": true
         },
         "finalTrackingState": {
           "type": "string",
-          "description": "Change tracking state with which an indexer execution finished."
+          "description": "Change tracking state with which an indexer execution finished.",
+          "readOnly": true
         }
       },
       "required": [
@@ -7091,6 +7669,37 @@
         ]
       }
     },
+    "IndexerRuntime": {
+      "type": "object",
+      "description": "Represents the indexer's cumulative runtime consumption in the service.",
+      "properties": {
+        "usedSeconds": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Cumulative runtime of the indexer from the beginningTime to endingTime, in seconds."
+        },
+        "remainingSeconds": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Cumulative runtime remaining for all indexers in the service from the beginningTime to endingTime, in seconds."
+        },
+        "beginningTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Beginning UTC time of the 24-hour period considered for indexer runtime usage (inclusive)."
+        },
+        "endingTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End UTC time of the 24-hour period considered for indexer runtime usage (inclusive)."
+        }
+      },
+      "required": [
+        "usedSeconds",
+        "beginningTime",
+        "endingTime"
+      ]
+    },
     "IndexerStatus": {
       "type": "string",
       "description": "Represents the overall indexer status.",
@@ -7163,12 +7772,14 @@
         "maxFailedItems": {
           "type": "integer",
           "format": "int32",
-          "description": "The maximum number of items that can fail indexing for indexer execution to still be considered successful. -1 means no limit. Default is 0."
+          "description": "The maximum number of items that can fail indexing for indexer execution to still be considered successful. -1 means no limit. Default is 0.",
+          "default": 0
         },
         "maxFailedItemsPerBatch": {
           "type": "integer",
           "format": "int32",
-          "description": "The maximum number of items in a single batch that can fail indexing for the batch to still be considered successful. -1 means no limit. Default is 0."
+          "description": "The maximum number of items in a single batch that can fail indexing for the batch to still be considered successful. -1 means no limit. Default is 0.",
+          "default": 0
         },
         "configuration": {
           "$ref": "#/definitions/IndexingParametersConfiguration",
@@ -7237,23 +7848,28 @@
         },
         "excludedFileNameExtensions": {
           "type": "string",
-          "description": "Comma-delimited list of filename extensions to ignore when processing from Azure blob storage.  For example, you could exclude \".png, .mp4\" to skip over those files during indexing."
+          "description": "Comma-delimited list of filename extensions to ignore when processing from Azure blob storage.  For example, you could exclude \".png, .mp4\" to skip over those files during indexing.",
+          "default": ""
         },
         "indexedFileNameExtensions": {
           "type": "string",
-          "description": "Comma-delimited list of filename extensions to select when processing from Azure blob storage.  For example, you could focus indexing on specific application files \".docx, .pptx, .msg\" to specifically include those file types."
+          "description": "Comma-delimited list of filename extensions to select when processing from Azure blob storage.  For example, you could focus indexing on specific application files \".docx, .pptx, .msg\" to specifically include those file types.",
+          "default": ""
         },
         "failOnUnsupportedContentType": {
           "type": "boolean",
-          "description": "For Azure blobs, set to false if you want to continue indexing when an unsupported content type is encountered, and you don't know all the content types (file extensions) in advance."
+          "description": "For Azure blobs, set to false if you want to continue indexing when an unsupported content type is encountered, and you don't know all the content types (file extensions) in advance.",
+          "default": false
         },
         "failOnUnprocessableDocument": {
           "type": "boolean",
-          "description": "For Azure blobs, set to false if you want to continue indexing if a document fails indexing."
+          "description": "For Azure blobs, set to false if you want to continue indexing if a document fails indexing.",
+          "default": false
         },
         "indexStorageMetadataOnlyForOversizedDocuments": {
           "type": "boolean",
-          "description": "For Azure blobs, set this property to true to still index storage metadata for blob content that is too large to process. Oversized blobs are treated as errors by default. For limits on blob size, see https://learn.microsoft.com/azure/search/search-limits-quotas-capacity."
+          "description": "For Azure blobs, set this property to true to still index storage metadata for blob content that is too large to process. Oversized blobs are treated as errors by default. For limits on blob size, see https://learn.microsoft.com/azure/search/search-limits-quotas-capacity.",
+          "default": false
         },
         "delimitedTextHeaders": {
           "type": "string",
@@ -7410,7 +8026,8 @@
         },
         "allowSkillsetToReadFileData": {
           "type": "boolean",
-          "description": "If true, will create a path //document//file_data that is an object representing the original file data downloaded from your blob data source. This allows you to pass the original file data to a custom skill for processing within the enrichment pipeline, or to the Document Extraction skill."
+          "description": "If true, will create a path //document//file_data that is an object representing the original file data downloaded from your blob data source. This allows you to pass the original file data to a custom skill for processing within the enrichment pipeline, or to the Document Extraction skill.",
+          "default": false
         },
         "pdfTextRotationAlgorithm": {
           "type": "string",
@@ -7476,20 +8093,24 @@
       "properties": {
         "key": {
           "type": "string",
-          "description": "The key of a document that was in the indexing request."
+          "description": "The key of a document that was in the indexing request.",
+          "readOnly": true
         },
         "errorMessage": {
           "type": "string",
-          "description": "The error message explaining why the indexing operation failed for the document identified by the key; null if indexing succeeded."
+          "description": "The error message explaining why the indexing operation failed for the document identified by the key; null if indexing succeeded.",
+          "readOnly": true
         },
         "status": {
           "type": "boolean",
-          "description": "A value indicating whether the indexing operation succeeded for the document identified by the key."
+          "description": "A value indicating whether the indexing operation succeeded for the document identified by the key.",
+          "readOnly": true
         },
         "statusCode": {
           "type": "integer",
           "format": "int32",
-          "description": "The status code of the indexing operation. Possible values include: 200 for a successful update or delete, 201 for successful document creation, 400 for a malformed input document, 404 for document not found, 409 for a version conflict, 422 when the index is temporarily unavailable, or 503 for when the service is too busy."
+          "description": "The status code of the indexing operation. Possible values include: 200 for a successful update or delete, 201 for successful document creation, 400 for a malformed input document, 404 for document not found, 409 for a version conflict, 422 when the index is temporarily unavailable, or 503 for when the service is too busy.",
+          "readOnly": true
         }
       },
       "required": [
@@ -7558,7 +8179,8 @@
         },
         "keepWordsCase": {
           "type": "boolean",
-          "description": "A value indicating whether to lower case all words first. Default is false."
+          "description": "A value indicating whether to lower case all words first. Default is false.",
+          "default": false
         }
       },
       "required": [
@@ -7717,7 +8339,8 @@
         },
         "ignoreCase": {
           "type": "boolean",
-          "description": "A value indicating whether to ignore case. If true, all words are converted to lower case first. Default is false."
+          "description": "A value indicating whether to ignore case. If true, all words are converted to lower case first. Default is false.",
+          "default": false
         }
       },
       "required": [
@@ -7755,8 +8378,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name of the knowledge base.",
-          "readOnly": true
+          "description": "The name of the knowledge base."
         },
         "knowledgeSources": {
           "type": "array",
@@ -7780,9 +8402,10 @@
           "$ref": "#/definitions/KnowledgeRetrievalOutputMode",
           "description": "The output mode for the knowledge base."
         },
-        "eTag": {
+        "@odata.etag": {
           "type": "string",
-          "description": "The ETag of the knowledge base."
+          "description": "The ETag of the knowledge base.",
+          "x-ms-client-name": "eTag"
         },
         "encryptionKey": {
           "$ref": "#/definitions/SearchResourceEncryptionKey",
@@ -7808,7 +8431,7 @@
     },
     "KnowledgeBaseActivityRecord": {
       "type": "object",
-      "description": "Base type for activity records.",
+      "description": "Base type for activity records. Tracks execution details, timing, and errors for knowledge base operations.",
       "properties": {
         "id": {
           "type": "integer",
@@ -7816,7 +8439,7 @@
           "description": "The ID of the activity record."
         },
         "type": {
-          "type": "string",
+          "$ref": "#/definitions/KnowledgeBaseActivityRecordType",
           "description": "The type of the activity record."
         },
         "elapsedMs": {
@@ -7834,6 +8457,72 @@
         "id",
         "type"
       ]
+    },
+    "KnowledgeBaseActivityRecordType": {
+      "type": "string",
+      "description": "The type of activity record.",
+      "enum": [
+        "searchIndex",
+        "azureBlob",
+        "indexedSharePoint",
+        "indexedOneLake",
+        "web",
+        "remoteSharePoint",
+        "modelQueryPlanning",
+        "modelAnswerSynthesis",
+        "agenticReasoning"
+      ],
+      "x-ms-enum": {
+        "name": "KnowledgeBaseActivityRecordType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "searchIndex",
+            "value": "searchIndex",
+            "description": "Search index retrieval activity."
+          },
+          {
+            "name": "azureBlob",
+            "value": "azureBlob",
+            "description": "Azure Blob retrieval activity."
+          },
+          {
+            "name": "indexedSharePoint",
+            "value": "indexedSharePoint",
+            "description": "Indexed SharePoint retrieval activity."
+          },
+          {
+            "name": "indexedOneLake",
+            "value": "indexedOneLake",
+            "description": "Indexed OneLake retrieval activity."
+          },
+          {
+            "name": "web",
+            "value": "web",
+            "description": "Web retrieval activity."
+          },
+          {
+            "name": "remoteSharePoint",
+            "value": "remoteSharePoint",
+            "description": "Remote SharePoint retrieval activity."
+          },
+          {
+            "name": "modelQueryPlanning",
+            "value": "modelQueryPlanning",
+            "description": "LLM query planning activity."
+          },
+          {
+            "name": "modelAnswerSynthesis",
+            "value": "modelAnswerSynthesis",
+            "description": "LLM answer synthesis activity."
+          },
+          {
+            "name": "agenticReasoning",
+            "value": "agenticReasoning",
+            "description": "Agentic reasoning activity."
+          }
+        ]
+      }
     },
     "KnowledgeBaseAgenticReasoningActivityRecord": {
       "type": "object",
@@ -7923,14 +8612,14 @@
       "properties": {
         "type": {
           "type": "string",
-          "description": "The additional info type."
+          "description": "The additional info type.",
+          "readOnly": true
         },
         "info": {
           "type": "object",
           "description": "The additional info.",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "additionalProperties": {},
+          "readOnly": true
         }
       }
     },
@@ -7940,29 +8629,34 @@
       "properties": {
         "code": {
           "type": "string",
-          "description": "The error code."
+          "description": "The error code.",
+          "readOnly": true
         },
         "message": {
           "type": "string",
-          "description": "The error message."
+          "description": "The error message.",
+          "readOnly": true
         },
         "target": {
           "type": "string",
-          "description": "The error target."
+          "description": "The error target.",
+          "readOnly": true
         },
         "details": {
           "type": "array",
           "description": "The error details.",
           "items": {
             "$ref": "#/definitions/KnowledgeBaseErrorDetail"
-          }
+          },
+          "readOnly": true
         },
         "additionalInfo": {
           "type": "array",
           "description": "The error additional info.",
           "items": {
             "$ref": "#/definitions/KnowledgeBaseErrorAdditionalInfo"
-          }
+          },
+          "readOnly": true
         }
       }
     },
@@ -8241,7 +8935,7 @@
       "description": "Base type for references.",
       "properties": {
         "type": {
-          "type": "string",
+          "$ref": "#/definitions/KnowledgeBaseReferenceType",
           "description": "The type of the reference."
         },
         "id": {
@@ -8256,9 +8950,7 @@
         "sourceData": {
           "type": "object",
           "description": "The source data for the reference.",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "additionalProperties": {}
         },
         "rerankerScore": {
           "type": "number",
@@ -8272,6 +8964,54 @@
         "id",
         "activitySource"
       ]
+    },
+    "KnowledgeBaseReferenceType": {
+      "type": "string",
+      "description": "The type of reference.",
+      "enum": [
+        "searchIndex",
+        "azureBlob",
+        "indexedSharePoint",
+        "indexedOneLake",
+        "web",
+        "remoteSharePoint"
+      ],
+      "x-ms-enum": {
+        "name": "KnowledgeBaseReferenceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "searchIndex",
+            "value": "searchIndex",
+            "description": "Search index document reference."
+          },
+          {
+            "name": "azureBlob",
+            "value": "azureBlob",
+            "description": "Azure Blob document reference."
+          },
+          {
+            "name": "indexedSharePoint",
+            "value": "indexedSharePoint",
+            "description": "Indexed SharePoint document reference."
+          },
+          {
+            "name": "indexedOneLake",
+            "value": "indexedOneLake",
+            "description": "Indexed OneLake document reference."
+          },
+          {
+            "name": "web",
+            "value": "web",
+            "description": "Web document reference."
+          },
+          {
+            "name": "remoteSharePoint",
+            "value": "remoteSharePoint",
+            "description": "Remote SharePoint document reference."
+          }
+        ]
+      }
     },
     "KnowledgeBaseRemoteSharePointActivityArguments": {
       "type": "object",
@@ -8473,6 +9213,24 @@
         "filter": {
           "type": "string",
           "description": "The filter string."
+        },
+        "sourceDataFields": {
+          "type": "array",
+          "description": "What fields were selected for search.",
+          "items": {
+            "$ref": "#/definitions/SearchIndexFieldReference"
+          }
+        },
+        "searchFields": {
+          "type": "array",
+          "description": "What fields were searched against.",
+          "items": {
+            "$ref": "#/definitions/SearchIndexFieldReference"
+          }
+        },
+        "semanticConfigurationName": {
+          "type": "string",
+          "description": "What semantic configuration was used from the search index."
         }
       }
     },
@@ -8574,16 +9332,6 @@
         }
       ],
       "x-ms-discriminator-value": "web"
-    },
-    "KnowledgeRetrievalHighReasoningEffort": {
-      "type": "object",
-      "description": "Run knowledge retrieval with high reasoning effort.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/KnowledgeRetrievalReasoningEffort"
-        }
-      ],
-      "x-ms-discriminator-value": "high"
     },
     "KnowledgeRetrievalIntent": {
       "type": "object",
@@ -8691,8 +9439,7 @@
       "enum": [
         "minimal",
         "low",
-        "medium",
-        "high"
+        "medium"
       ],
       "x-ms-enum": {
         "name": "KnowledgeRetrievalReasoningEffortKind",
@@ -8701,7 +9448,7 @@
           {
             "name": "minimal",
             "value": "minimal",
-            "description": "Does not perform any source selections, any query planning, or any iterative search."
+            "description": "Does not perform any source selections, query planning, or iterative search."
           },
           {
             "name": "low",
@@ -8712,11 +9459,6 @@
             "name": "medium",
             "value": "medium",
             "description": "Use a moderate amount of reasoning during retrieval."
-          },
-          {
-            "name": "high",
-            "value": "high",
-            "description": "Use a high amount of reasoning during retrieval."
           }
         ]
       }
@@ -8746,8 +9488,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name of the knowledge source.",
-          "readOnly": true
+          "description": "The name of the knowledge source."
         },
         "description": {
           "type": "string",
@@ -8757,13 +9498,14 @@
           "$ref": "#/definitions/KnowledgeSourceKind",
           "description": "The type of the knowledge source."
         },
-        "eTag": {
+        "@odata.etag": {
           "type": "string",
-          "description": "The ETag of the agent."
+          "description": "The ETag of the knowledge source.",
+          "x-ms-client-name": "eTag"
         },
         "encryptionKey": {
           "$ref": "#/definitions/SearchResourceEncryptionKey",
-          "description": "A description of an encryption key that you create in Azure Key Vault."
+          "description": "A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your knowledge source definition when you want full assurance that no one, not even Microsoft, can decrypt them. Once you have encrypted your knowledge source definition, it will always remain encrypted. The search service will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your knowledge source definition will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019."
         }
       },
       "discriminator": "kind",
@@ -8771,6 +9513,139 @@
         "name",
         "kind"
       ]
+    },
+    "KnowledgeSourceAzureOpenAIVectorizer": {
+      "type": "object",
+      "description": "Specifies the Azure OpenAI resource used to vectorize a query string.",
+      "properties": {
+        "azureOpenAIParameters": {
+          "$ref": "#/definitions/AzureOpenAiParameters",
+          "description": "Contains the parameters specific to Azure OpenAI embedding vectorization."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeSourceVectorizer"
+        }
+      ],
+      "x-ms-discriminator-value": "azureOpenAI"
+    },
+    "KnowledgeSourceContentExtractionMode": {
+      "type": "string",
+      "description": "Optional content extraction mode. Default is 'minimal'.",
+      "enum": [
+        "minimal",
+        "standard"
+      ],
+      "x-ms-enum": {
+        "name": "KnowledgeSourceContentExtractionMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Minimal",
+            "value": "minimal",
+            "description": "Extracts only essential metadata while deferring most content processing."
+          },
+          {
+            "name": "Standard",
+            "value": "standard",
+            "description": "Performs the full default content extraction pipeline."
+          }
+        ]
+      }
+    },
+    "KnowledgeSourceIngestionParameters": {
+      "type": "object",
+      "description": "Consolidates all general ingestion settings for knowledge sources.",
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/SearchIndexerDataIdentity",
+          "description": "An explicit identity to use for this knowledge source."
+        },
+        "embeddingModel": {
+          "$ref": "#/definitions/KnowledgeSourceVectorizer",
+          "description": "Optional vectorizer configuration for vectorizing content."
+        },
+        "chatCompletionModel": {
+          "$ref": "#/definitions/KnowledgeBaseModel",
+          "description": "Optional chat completion model for image verbalization or context extraction."
+        },
+        "disableImageVerbalization": {
+          "type": "boolean",
+          "description": "Indicates whether image verbalization should be disabled. Default is false.",
+          "default": false
+        },
+        "ingestionSchedule": {
+          "$ref": "#/definitions/IndexingSchedule",
+          "description": "Optional schedule for data ingestion."
+        },
+        "ingestionPermissionOptions": {
+          "type": "array",
+          "description": "Optional list of permission types to ingest together with document content. If specified, it will set the indexer permission options for the data source.",
+          "items": {
+            "$ref": "#/definitions/KnowledgeSourceIngestionPermissionOption"
+          }
+        },
+        "contentExtractionMode": {
+          "type": "string",
+          "description": "Optional content extraction mode. Default is 'minimal'.",
+          "default": "minimal",
+          "enum": [
+            "minimal",
+            "standard"
+          ],
+          "x-ms-enum": {
+            "name": "KnowledgeSourceContentExtractionMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Minimal",
+                "value": "minimal",
+                "description": "Extracts only essential metadata while deferring most content processing."
+              },
+              {
+                "name": "Standard",
+                "value": "standard",
+                "description": "Performs the full default content extraction pipeline."
+              }
+            ]
+          }
+        },
+        "aiServices": {
+          "$ref": "#/definitions/AIServices",
+          "description": "Optional AI Services configuration for content processing."
+        }
+      }
+    },
+    "KnowledgeSourceIngestionPermissionOption": {
+      "type": "string",
+      "description": "Permission types to ingest together with document content.",
+      "enum": [
+        "userIds",
+        "groupIds",
+        "rbacScope"
+      ],
+      "x-ms-enum": {
+        "name": "KnowledgeSourceIngestionPermissionOption",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "UserIds",
+            "value": "userIds",
+            "description": "Ingest explicit user identifiers alongside document content."
+          },
+          {
+            "name": "GroupIds",
+            "value": "groupIds",
+            "description": "Ingest group identifiers alongside document content."
+          },
+          {
+            "name": "RbacScope",
+            "value": "rbacScope",
+            "description": "Ingest RBAC scope information alongside document content."
+          }
+        ]
+      }
     },
     "KnowledgeSourceKind": {
       "type": "string",
@@ -8869,6 +9744,104 @@
         "name"
       ]
     },
+    "KnowledgeSourceStatistics": {
+      "type": "object",
+      "description": "Statistical information about knowledge source synchronization history.",
+      "properties": {
+        "totalSynchronization": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of synchronizations."
+        },
+        "averageSynchronizationDuration": {
+          "type": "string",
+          "description": "Average synchronization duration in HH:MM:SS format."
+        },
+        "averageItemsProcessedPerSynchronization": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Average items processed per synchronization."
+        }
+      },
+      "required": [
+        "totalSynchronization",
+        "averageSynchronizationDuration",
+        "averageItemsProcessedPerSynchronization"
+      ]
+    },
+    "KnowledgeSourceStatus": {
+      "type": "object",
+      "description": "Represents the status and synchronization history of a knowledge source.",
+      "properties": {
+        "synchronizationStatus": {
+          "$ref": "#/definitions/KnowledgeSourceSynchronizationStatus",
+          "description": "The current synchronization status."
+        },
+        "synchronizationInterval": {
+          "type": "string",
+          "description": "The synchronization interval (e.g., '1d' for daily). Null if no schedule is configured."
+        },
+        "currentSynchronizationState": {
+          "$ref": "#/definitions/SynchronizationState",
+          "description": "Current synchronization state that spans multiple indexer runs."
+        },
+        "lastSynchronizationState": {
+          "$ref": "#/definitions/CompletedSynchronizationState",
+          "description": "Details of the last completed synchronization. Null on first sync."
+        },
+        "statistics": {
+          "$ref": "#/definitions/KnowledgeSourceStatistics",
+          "description": "Statistical information about the knowledge source synchronization history. Null on first sync."
+        }
+      },
+      "required": [
+        "synchronizationStatus"
+      ]
+    },
+    "KnowledgeSourceSynchronizationStatus": {
+      "type": "string",
+      "description": "The current synchronization status of the knowledge source.",
+      "enum": [
+        "creating",
+        "active",
+        "deleting"
+      ],
+      "x-ms-enum": {
+        "name": "KnowledgeSourceSynchronizationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Creating",
+            "value": "creating",
+            "description": "The knowledge source is being provisioned."
+          },
+          {
+            "name": "Active",
+            "value": "active",
+            "description": "The knowledge source is active and synchronization runs are occurring."
+          },
+          {
+            "name": "Deleting",
+            "value": "deleting",
+            "description": "The knowledge source is being deleted and synchronization is paused."
+          }
+        ]
+      }
+    },
+    "KnowledgeSourceVectorizer": {
+      "type": "object",
+      "description": "Specifies the vectorization method to be used for knowledge source embedding model.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/VectorSearchVectorizerKind",
+          "description": "The name of the kind of vectorization method being configured for use with vector search."
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
+    },
     "LanguageDetectionSkill": {
       "type": "object",
       "description": "A skill that detects the language of input text and reports a single language code for every document submitted on the request. The language code is paired with a score indicating the confidence of the analysis.",
@@ -8897,6 +9870,8 @@
           "type": "integer",
           "format": "int32",
           "description": "The minimum length in characters. Default is 0. Maximum is 300. Must be less than the value of max.",
+          "default": 0,
+          "minimum": 0,
           "maximum": 300
         },
         "max": {
@@ -9685,7 +10660,8 @@
         },
         "consumeAllTokens": {
           "type": "boolean",
-          "description": "A value indicating whether all tokens from the input must be consumed even if maxTokenCount is reached. Default is false."
+          "description": "A value indicating whether all tokens from the input must be consumed even if maxTokenCount is reached. Default is false.",
+          "default": false
         }
       },
       "allOf": [
@@ -9819,7 +10795,8 @@
           "description": "The skillsets defined in the Search service.",
           "items": {
             "$ref": "#/definitions/SearchIndexerSkillset"
-          }
+          },
+          "readOnly": true
         }
       },
       "required": [
@@ -9835,7 +10812,8 @@
           "description": "The synonym maps in the Search service.",
           "items": {
             "$ref": "#/definitions/SynonymMap"
-          }
+          },
+          "readOnly": true
         }
       },
       "required": [
@@ -10652,6 +11630,30 @@
       }
     },
     "NGramTokenFilter": {
+      "type": "object",
+      "description": "Generates n-grams of the given size(s). This token filter is implemented using Apache Lucene.",
+      "properties": {
+        "minGram": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The minimum n-gram length. Default is 1. Must be less than the value of maxGram.",
+          "default": 1
+        },
+        "maxGram": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum n-gram length. Default is 2.",
+          "default": 2
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TokenFilter"
+        }
+      ],
+      "x-ms-discriminator-value": "#Microsoft.Azure.Search.NGramTokenFilter"
+    },
+    "NGramTokenFilterV2": {
       "type": "object",
       "description": "Generates n-grams of the given size(s). This token filter is implemented using Apache Lucene.",
       "properties": {
@@ -11772,7 +12774,7 @@
           {
             "name": "vo",
             "value": "vo",
-            "description": "VolapÃ¼k"
+            "description": "Volapük"
           },
           {
             "name": "wae",
@@ -11841,6 +12843,7 @@
           "type": "number",
           "format": "double",
           "description": "A value between 0 and 1 that be used to only include entities whose confidence score is greater than the value specified. If not set (default), or if explicitly set to null, all entities will be included.",
+          "minimum": 0,
           "maximum": 1
         },
         "maskingMode": {
@@ -11922,12 +12925,14 @@
         },
         "reverse": {
           "type": "boolean",
-          "description": "A value indicating whether to generate tokens in reverse order. Default is false."
+          "description": "A value indicating whether to generate tokens in reverse order. Default is false.",
+          "default": false
         },
         "skip": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of initial tokens to skip. Default is 0."
+          "description": "The number of initial tokens to skip. Default is 0.",
+          "default": 0
         }
       },
       "allOf": [
@@ -12165,12 +13170,12 @@
           {
             "name": "KoelnerPhonetik",
             "value": "koelnerPhonetik",
-            "description": "Encodes a token using the KÃ¶lner Phonetik algorithm."
+            "description": "Encodes a token using the Kölner Phonetik algorithm."
           },
           {
             "name": "HaasePhonetik",
             "value": "haasePhonetik",
-            "description": "Encodes a token using the Haase refinement of the KÃ¶lner Phonetik algorithm."
+            "description": "Encodes a token using the Haase refinement of the Kölner Phonetik algorithm."
           },
           {
             "name": "BeiderMorse",
@@ -13068,6 +14073,46 @@
         ]
       }
     },
+    "RemoteSharePointKnowledgeSource": {
+      "type": "object",
+      "description": "Configuration for remote SharePoint knowledge source.",
+      "properties": {
+        "remoteSharePointParameters": {
+          "$ref": "#/definitions/RemoteSharePointKnowledgeSourceParameters",
+          "description": "The parameters for the remote SharePoint knowledge source."
+        }
+      },
+      "required": [
+        "remoteSharePointParameters"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeSource"
+        }
+      ],
+      "x-ms-discriminator-value": "remoteSharePoint"
+    },
+    "RemoteSharePointKnowledgeSourceParameters": {
+      "type": "object",
+      "description": "Parameters for remote SharePoint knowledge source.",
+      "properties": {
+        "filterExpression": {
+          "type": "string",
+          "description": "Keyword Query Language (KQL) expression with queryable SharePoint properties and attributes to scope the retrieval before the query runs."
+        },
+        "resourceMetadata": {
+          "type": "array",
+          "description": "A list of metadata fields to be returned for each item in the response. Only retrievable metadata properties can be included in this list. By default, no metadata is returned.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "containerTypeId": {
+          "type": "string",
+          "description": "Container ID for SharePoint Embedded connection. When this is null, it will use SharePoint Online."
+        }
+      }
+    },
     "RemoteSharePointKnowledgeSourceParams": {
       "type": "object",
       "description": "Specifies runtime parameters for a remote SharePoint knowledge source",
@@ -13099,8 +14144,29 @@
           "description": "Default oversampling factor. Oversampling retrieves a greater set of potential documents to offset the resolution loss due to quantization. This increases the set of results that will be rescored on full-precision vectors. Minimum value is 1, meaning no oversampling (1x). This parameter can only be set when 'enableRescoring' is true. Higher values improve recall at the expense of latency."
         },
         "rescoreStorageMethod": {
-          "$ref": "#/definitions/VectorSearchCompressionRescoreStorageMethod",
-          "description": "Controls the storage method for original vectors. This setting is immutable."
+          "type": "string",
+          "description": "Controls the storage method for original vectors. This setting is immutable.",
+          "default": "preserveOriginals",
+          "enum": [
+            "preserveOriginals",
+            "discardOriginals"
+          ],
+          "x-ms-enum": {
+            "name": "VectorSearchCompressionRescoreStorageMethod",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "PreserveOriginals",
+                "value": "preserveOriginals",
+                "description": "This option preserves the original full-precision vectors. Choose this option for maximum flexibility and highest quality of compressed search results. This consumes more storage but allows for rescoring and oversampling."
+              },
+              {
+                "name": "DiscardOriginals",
+                "value": "discardOriginals",
+                "description": "This option discards the original full-precision vectors. Choose this option for maximum storage savings. Since this option does not allow for rescoring and oversampling, it will often cause slight to moderate reductions in quality."
+              }
+            ]
+          }
         }
       }
     },
@@ -13186,7 +14252,8 @@
         "average",
         "minimum",
         "maximum",
-        "firstMatching"
+        "firstMatching",
+        "product"
       ],
       "x-ms-enum": {
         "name": "ScoringFunctionAggregation",
@@ -13216,6 +14283,11 @@
             "name": "FirstMatching",
             "value": "firstMatching",
             "description": "Boost scores using the first applicable scoring function in the scoring profile."
+          },
+          {
+            "name": "Product",
+            "value": "product",
+            "description": "Boost scores by the product of all scoring function results."
           }
         ]
       }
@@ -13466,6 +14538,10 @@
           "$ref": "#/definitions/PermissionFilter",
           "description": "A value indicating whether the field should be used as a permission filter."
         },
+        "sensitivityLabel": {
+          "type": "boolean",
+          "description": "A value indicating whether the field contains sensitivity label information."
+        },
         "analyzer": {
           "$ref": "#/definitions/LexicalAnalyzerName",
           "description": "The name of the analyzer to use for the field. This option can be used only with searchable fields and it can't be set together with either searchAnalyzer or indexAnalyzer. Once the analyzer is chosen, it cannot be changed for the field. Must be null for complex fields."
@@ -13703,6 +14779,10 @@
           "$ref": "#/definitions/SearchIndexPermissionFilterOption",
           "description": "A value indicating whether permission filtering is enabled for the index."
         },
+        "purviewEnabled": {
+          "type": "boolean",
+          "description": "A value indicating whether Purview is enabled for the index."
+        },
         "@odata.etag": {
           "type": "string",
           "description": "The ETag of the index.",
@@ -13725,6 +14805,19 @@
       },
       "required": [
         "indexName"
+      ]
+    },
+    "SearchIndexFieldReference": {
+      "type": "object",
+      "description": "Field reference for a search index.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the field."
+        }
+      },
+      "required": [
+        "name"
       ]
     },
     "SearchIndexKnowledgeSource": {
@@ -13754,9 +14847,23 @@
           "type": "string",
           "description": "The name of the Search index."
         },
-        "sourceDataSelect": {
+        "sourceDataFields": {
+          "type": "array",
+          "description": "Used to request additional fields for referenced source data.",
+          "items": {
+            "$ref": "#/definitions/SearchIndexFieldReference"
+          }
+        },
+        "searchFields": {
+          "type": "array",
+          "description": "Used to restrict which fields to search on the search index.",
+          "items": {
+            "$ref": "#/definitions/SearchIndexFieldReference"
+          }
+        },
+        "semanticConfigurationName": {
           "type": "string",
-          "description": "Used to request additional fields for referenced source data."
+          "description": "Used to specify a different semantic configuration on the target search index other than the default one."
         }
       },
       "required": [
@@ -13877,6 +14984,10 @@
       "type": "object",
       "description": "The type of the cache.",
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "A guid for the SearchIndexerCache."
+        },
         "storageConnectionString": {
           "type": "string",
           "description": "The connection string to the storage account where the cache data will be persisted."
@@ -13888,10 +14999,6 @@
         "identity": {
           "$ref": "#/definitions/SearchIndexerDataIdentity",
           "description": "The user-assigned managed identity used for connections to the enrichment cache.  If the connection string indicates an identity (ResourceId) and it's not specified, the system-assigned managed identity is used. On updates to the indexer, if the identity is unspecified, the value remains unchanged. If set to \"none\", the value of this property is cleared."
-        },
-        "id": {
-          "type": "string",
-          "description": "A guid for the SearchIndexerCache."
         }
       }
     },
@@ -13954,7 +15061,8 @@
         },
         "subType": {
           "type": "string",
-          "description": "A specific type of the data source, in case the resource is capable of different modalities. For example, 'MongoDb' for certain 'cosmosDb' accounts."
+          "description": "A specific type of the data source, in case the resource is capable of different modalities. For example, 'MongoDb' for certain 'cosmosDb' accounts.",
+          "readOnly": true
         },
         "credentials": {
           "$ref": "#/definitions/DataSourceCredentials",
@@ -14011,7 +15119,8 @@
         "azuretable",
         "mysql",
         "adlsgen2",
-        "onelake"
+        "onelake",
+        "sharepoint"
       ],
       "x-ms-enum": {
         "name": "SearchIndexerDataSourceType",
@@ -14051,6 +15160,11 @@
             "name": "OneLake",
             "value": "onelake",
             "description": "Indicates a Microsoft Fabric OneLake datasource."
+          },
+          {
+            "name": "SharePoint",
+            "value": "sharepoint",
+            "description": "Indicates a SharePoint datasource."
           }
         ]
       }
@@ -14307,12 +15421,17 @@
       "type": "object",
       "description": "Description for what data to store in Azure Tables.",
       "properties": {
+        "generatedKeyName": {
+          "type": "string",
+          "description": "Name of generated key to store projection under."
+        },
         "tableName": {
           "type": "string",
           "description": "Name of the Azure table to store projected data in."
         }
       },
       "required": [
+        "generatedKeyName",
         "tableName"
       ],
       "allOf": [
@@ -14436,31 +15555,47 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name of the indexer."
+          "description": "The name of the indexer.",
+          "readOnly": true
         },
         "status": {
           "$ref": "#/definitions/IndexerStatus",
-          "description": "Overall indexer status."
+          "description": "Overall indexer status.",
+          "readOnly": true
+        },
+        "runtime": {
+          "$ref": "#/definitions/IndexerRuntime",
+          "description": "Snapshot of the indexer's cumulative runtime consumption for the service over the current UTC period.",
+          "readOnly": true
         },
         "lastResult": {
           "$ref": "#/definitions/IndexerExecutionResult",
-          "description": "The result of the most recent or an in-progress indexer execution."
+          "description": "The result of the most recent or an in-progress indexer execution.",
+          "readOnly": true
         },
         "executionHistory": {
           "type": "array",
           "description": "History of the recent indexer executions, sorted in reverse chronological order.",
           "items": {
             "$ref": "#/definitions/IndexerExecutionResult"
-          }
+          },
+          "readOnly": true
         },
         "limits": {
           "$ref": "#/definitions/SearchIndexerLimits",
-          "description": "The execution limits for the indexer."
+          "description": "The execution limits for the indexer.",
+          "readOnly": true
+        },
+        "currentState": {
+          "$ref": "#/definitions/IndexerCurrentState",
+          "description": "All of the state that defines and dictates the indexer's current execution.",
+          "readOnly": true
         }
       },
       "required": [
         "name",
         "status",
+        "runtime",
         "executionHistory",
         "limits"
       ]
@@ -14471,23 +15606,28 @@
       "properties": {
         "key": {
           "type": "string",
-          "description": "The key of the item which generated a warning."
+          "description": "The key of the item which generated a warning.",
+          "readOnly": true
         },
         "message": {
           "type": "string",
-          "description": "The message describing the warning that occurred while processing the item."
+          "description": "The message describing the warning that occurred while processing the item.",
+          "readOnly": true
         },
         "name": {
           "type": "string",
-          "description": "The name of the source at which the warning originated. For example, this could refer to a particular skill in the attached skillset. This may not be always available."
+          "description": "The name of the source at which the warning originated. For example, this could refer to a particular skill in the attached skillset. This may not be always available.",
+          "readOnly": true
         },
         "details": {
           "type": "string",
-          "description": "Additional, verbose details about the warning to assist in debugging the indexer. This may not be always available."
+          "description": "Additional, verbose details about the warning to assist in debugging the indexer. This may not be always available.",
+          "readOnly": true
         },
         "documentationLink": {
           "type": "string",
-          "description": "A link to a troubleshooting guide for these classes of warnings. This may not be always available."
+          "description": "A link to a troubleshooting guide for these classes of warnings. This may not be always available.",
+          "readOnly": true
         }
       },
       "required": [
@@ -14603,7 +15743,7 @@
         },
         "speller": {
           "$ref": "#/definitions/QuerySpellerType",
-          "description": "A value that specified the type of the speller to use to spell-correct individual search query terms."
+          "description": "A value that specifies the type of the speller to use to spell-correct individual search query terms."
         },
         "select": {
           "type": "string",
@@ -14698,6 +15838,7 @@
       },
       "required": [
         "keyVaultKeyName",
+        "keyVaultKeyVersion",
         "keyVaultUri"
       ]
     },
@@ -14743,11 +15884,8 @@
           "x-ms-client-name": "captions"
         },
         "@search.documentDebugInfo": {
-          "type": "array",
+          "$ref": "#/definitions/DocumentDebugInfo",
           "description": "Contains debugging information that can be used to further explore your search results.",
-          "items": {
-            "$ref": "#/definitions/DocumentDebugInfo"
-          },
           "readOnly": true,
           "x-ms-client-name": "documentDebugInfo"
         }
@@ -14858,6 +15996,11 @@
           "type": "integer",
           "format": "int64",
           "description": "The maximum amount of storage in bytes allowed per index."
+        },
+        "maxCumulativeIndexerRuntimeSeconds": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The maximum cumulative indexer runtime in seconds allowed for the service."
         }
       }
     },
@@ -14872,11 +16015,16 @@
         "limits": {
           "$ref": "#/definitions/SearchServiceLimits",
           "description": "Service level general limits."
+        },
+        "indexersRuntime": {
+          "$ref": "#/definitions/ServiceIndexersRuntime",
+          "description": "Service level indexer runtime consumption."
         }
       },
       "required": [
         "counters",
-        "limits"
+        "limits",
+        "indexersRuntime"
       ]
     },
     "SearchSuggester": {
@@ -15291,6 +16439,37 @@
       ],
       "x-ms-discriminator-value": "#Microsoft.Skills.Text.V3.SentimentSkill"
     },
+    "ServiceIndexersRuntime": {
+      "type": "object",
+      "description": "Represents service-level indexer runtime counters.",
+      "properties": {
+        "usedSeconds": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Cumulative runtime of all indexers in the service from the beginningTime to endingTime, in seconds."
+        },
+        "remainingSeconds": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Cumulative runtime remaining for all indexers in the service from the beginningTime to endingTime, in seconds."
+        },
+        "beginningTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Beginning UTC time of the 24-hour period considered for indexer runtime usage (inclusive)."
+        },
+        "endingTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End UTC time of the 24-hour period considered for indexer runtime usage (inclusive)."
+        }
+      },
+      "required": [
+        "usedSeconds",
+        "beginningTime",
+        "endingTime"
+      ]
+    },
     "ShaperSkill": {
       "type": "object",
       "description": "A skill for reshaping the outputs. It creates a complex type to support composite fields (also known as multipart fields).",
@@ -15357,7 +16536,8 @@
         },
         "outputUnigramsIfNoShingles": {
           "type": "boolean",
-          "description": "A value indicating whether to output unigrams for those times when no shingles are available. This property takes precedence when outputUnigrams is set to false. Default is false."
+          "description": "A value indicating whether to output unigrams for those times when no shingles are available. This property takes precedence when outputUnigrams is set to false. Default is false.",
+          "default": false
         },
         "tokenSeparator": {
           "type": "string",
@@ -15930,7 +17110,7 @@
     },
     "StemmerOverrideTokenFilter": {
       "type": "object",
-      "description": "Provides the ability to override other stemming filters with custom dictionary-based stemming. Any dictionary-stemmed terms will be marked as keywords so that they will not be stemmed with stemmers down the chain. Must be placed before any stemming filters. This token filter is implemented using Apache Lucene.",
+      "description": "Provides the ability to override other stemming filters with custom dictionary-based stemming. Any dictionary-stemmed terms will be marked as keywords so that they will not be stemmed with stemmers down the chain. Must be placed before any stemming filters. This token filter is implemented using Apache Lucene. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/StemmerOverrideFilter.html",
       "properties": {
         "rules": {
           "type": "array",
@@ -15952,7 +17132,7 @@
     },
     "StemmerTokenFilter": {
       "type": "object",
-      "description": "Language specific stemming filter. This token filter is implemented using Apache Lucene.",
+      "description": "Language specific stemming filter. This token filter is implemented using Apache Lucene. See https://learn.microsoft.com/rest/api/searchservice/Custom-analyzers-in-Azure-Search#TokenFilters",
       "properties": {
         "language": {
           "$ref": "#/definitions/StemmerTokenFilterLanguage",
@@ -16524,7 +17704,7 @@
     },
     "StopwordsTokenFilter": {
       "type": "object",
-      "description": "Removes stop words from a token stream. This token filter is implemented using Apache Lucene.",
+      "description": "Removes stop words from a token stream. This token filter is implemented using Apache Lucene. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/core/StopFilter.html",
       "properties": {
         "stopwords": {
           "type": "array",
@@ -16534,12 +17714,208 @@
           }
         },
         "stopwordsList": {
-          "$ref": "#/definitions/StopwordsList",
-          "description": "A predefined list of stopwords to use. This property and the stopwords property cannot both be set. Default is English."
+          "type": "string",
+          "description": "A predefined list of stopwords to use. This property and the stopwords property cannot both be set. Default is English.",
+          "default": "english",
+          "enum": [
+            "arabic",
+            "armenian",
+            "basque",
+            "brazilian",
+            "bulgarian",
+            "catalan",
+            "czech",
+            "danish",
+            "dutch",
+            "english",
+            "finnish",
+            "french",
+            "galician",
+            "german",
+            "greek",
+            "hindi",
+            "hungarian",
+            "indonesian",
+            "irish",
+            "italian",
+            "latvian",
+            "norwegian",
+            "persian",
+            "portuguese",
+            "romanian",
+            "russian",
+            "sorani",
+            "spanish",
+            "swedish",
+            "thai",
+            "turkish"
+          ],
+          "x-ms-enum": {
+            "name": "StopwordsList",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Arabic",
+                "value": "arabic",
+                "description": "Selects the stopword list for Arabic."
+              },
+              {
+                "name": "Armenian",
+                "value": "armenian",
+                "description": "Selects the stopword list for Armenian."
+              },
+              {
+                "name": "Basque",
+                "value": "basque",
+                "description": "Selects the stopword list for Basque."
+              },
+              {
+                "name": "Brazilian",
+                "value": "brazilian",
+                "description": "Selects the stopword list for Portuguese (Brazil)."
+              },
+              {
+                "name": "Bulgarian",
+                "value": "bulgarian",
+                "description": "Selects the stopword list for Bulgarian."
+              },
+              {
+                "name": "Catalan",
+                "value": "catalan",
+                "description": "Selects the stopword list for Catalan."
+              },
+              {
+                "name": "Czech",
+                "value": "czech",
+                "description": "Selects the stopword list for Czech."
+              },
+              {
+                "name": "Danish",
+                "value": "danish",
+                "description": "Selects the stopword list for Danish."
+              },
+              {
+                "name": "Dutch",
+                "value": "dutch",
+                "description": "Selects the stopword list for Dutch."
+              },
+              {
+                "name": "English",
+                "value": "english",
+                "description": "Selects the stopword list for English."
+              },
+              {
+                "name": "Finnish",
+                "value": "finnish",
+                "description": "Selects the stopword list for Finnish."
+              },
+              {
+                "name": "French",
+                "value": "french",
+                "description": "Selects the stopword list for French."
+              },
+              {
+                "name": "Galician",
+                "value": "galician",
+                "description": "Selects the stopword list for Galician."
+              },
+              {
+                "name": "German",
+                "value": "german",
+                "description": "Selects the stopword list for German."
+              },
+              {
+                "name": "Greek",
+                "value": "greek",
+                "description": "Selects the stopword list for Greek."
+              },
+              {
+                "name": "Hindi",
+                "value": "hindi",
+                "description": "Selects the stopword list for Hindi."
+              },
+              {
+                "name": "Hungarian",
+                "value": "hungarian",
+                "description": "Selects the stopword list for Hungarian."
+              },
+              {
+                "name": "Indonesian",
+                "value": "indonesian",
+                "description": "Selects the stopword list for Indonesian."
+              },
+              {
+                "name": "Irish",
+                "value": "irish",
+                "description": "Selects the stopword list for Irish."
+              },
+              {
+                "name": "Italian",
+                "value": "italian",
+                "description": "Selects the stopword list for Italian."
+              },
+              {
+                "name": "Latvian",
+                "value": "latvian",
+                "description": "Selects the stopword list for Latvian."
+              },
+              {
+                "name": "Norwegian",
+                "value": "norwegian",
+                "description": "Selects the stopword list for Norwegian."
+              },
+              {
+                "name": "Persian",
+                "value": "persian",
+                "description": "Selects the stopword list for Persian."
+              },
+              {
+                "name": "Portuguese",
+                "value": "portuguese",
+                "description": "Selects the stopword list for Portuguese."
+              },
+              {
+                "name": "Romanian",
+                "value": "romanian",
+                "description": "Selects the stopword list for Romanian."
+              },
+              {
+                "name": "Russian",
+                "value": "russian",
+                "description": "Selects the stopword list for Russian."
+              },
+              {
+                "name": "Sorani",
+                "value": "sorani",
+                "description": "Selects the stopword list for Sorani."
+              },
+              {
+                "name": "Spanish",
+                "value": "spanish",
+                "description": "Selects the stopword list for Spanish."
+              },
+              {
+                "name": "Swedish",
+                "value": "swedish",
+                "description": "Selects the stopword list for Swedish."
+              },
+              {
+                "name": "Thai",
+                "value": "thai",
+                "description": "Selects the stopword list for Thai."
+              },
+              {
+                "name": "Turkish",
+                "value": "turkish",
+                "description": "Selects the stopword list for Turkish."
+              }
+            ]
+          }
         },
         "ignoreCase": {
           "type": "boolean",
-          "description": "A value indicating whether to ignore case. If true, all words are converted to lower case first. Default is false."
+          "description": "A value indicating whether to ignore case. If true, all words are converted to lower case first. Default is false.",
+          "default": false
         },
         "removeTrailing": {
           "type": "boolean",
@@ -16647,6 +18023,38 @@
       ],
       "additionalProperties": {}
     },
+    "SynchronizationState": {
+      "type": "object",
+      "description": "Represents the current state of an ongoing synchronization that spans multiple indexer runs.",
+      "properties": {
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start time of the current synchronization."
+        },
+        "itemsUpdatesProcessed": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of item updates successfully processed in the current synchronization."
+        },
+        "itemsUpdatesFailed": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of item updates that failed in the current synchronization."
+        },
+        "itemsSkipped": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of items skipped in the current synchronization."
+        }
+      },
+      "required": [
+        "startTime",
+        "itemsUpdatesProcessed",
+        "itemsUpdatesFailed",
+        "itemsSkipped"
+      ]
+    },
     "SynonymMap": {
       "type": "object",
       "description": "Represents a synonym map definition.",
@@ -16698,7 +18106,8 @@
         },
         "ignoreCase": {
           "type": "boolean",
-          "description": "A value indicating whether to case-fold input for matching. Default is false."
+          "description": "A value indicating whether to case-fold input for matching. Default is false.",
+          "default": false
         },
         "expand": {
           "type": "boolean",
@@ -17593,7 +19002,8 @@
       "properties": {
         "onlyOnSamePosition": {
           "type": "boolean",
-          "description": "A value indicating whether to remove duplicates only at the same position. Default is false."
+          "description": "A value indicating whether to remove duplicates only at the same position. Default is false.",
+          "default": false
         }
       },
       "allOf": [
@@ -17646,7 +19056,7 @@
           {
             "name": "StrictPostFilter",
             "value": "strictPostFilter",
-            "description": "The filter will be applied after the global top-k candidate set of vector results is returned."
+            "description": "The filter will be applied after the global top-k candidate set of vector results is returned. This will result in fewer results than requested by the parameter 'k'."
           }
         ]
       }
@@ -17689,7 +19099,7 @@
         "perDocumentVectorLimit": {
           "type": "integer",
           "format": "int32",
-          "description": "The OData filter expression to apply to this specific vector query. If no filter expression is defined at the vector level, the expression defined in the top level filter parameter is used instead."
+          "description": "Controls how many vectors can be matched from each document in a vector search query. Setting it to 1 ensures at most one vector per document is matched, guaranteeing results come from distinct documents. Setting it to 0 (unlimited) allows multiple relevant vectors from the same document to be matched. Default is 0."
         },
         "kind": {
           "$ref": "#/definitions/VectorQueryKind",
@@ -17857,16 +19267,6 @@
         "name": {
           "type": "string",
           "description": "The name to associate with this particular configuration."
-        },
-        "rerankWithOriginalVectors": {
-          "type": "boolean",
-          "description": "If set to true, once the ordered set of results calculated using compressed vectors are obtained, they will be reranked again by recalculating the full-precision similarity scores. This will improve recall at the expense of latency.",
-          "default": true
-        },
-        "defaultOversampling": {
-          "type": "number",
-          "format": "double",
-          "description": "Default oversampling factor. Oversampling will internally request more documents (specified by this multiplier) in the initial search. This increases the set of results that will be reranked using recomputed similarity scores from full-precision vectors. Minimum value is 1, meaning no oversampling (1x). This parameter can only be set when rerankWithOriginalVectors is true. Higher values improve recall at the expense of latency."
         },
         "rescoringOptions": {
           "$ref": "#/definitions/RescoringOptions",
@@ -18071,7 +19471,7 @@
     },
     "VectorThresholdKind": {
       "type": "string",
-      "description": "The kind of vector query being performed.",
+      "description": "The kind of threshold used to filter vector queries.",
       "enum": [
         "vectorSimilarity",
         "searchScore"
@@ -18102,6 +19502,9 @@
           "description": "The base 64 encoded binary of an image to be vectorized to perform a vector search query."
         }
       },
+      "required": [
+        "base64Image"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/VectorQuery"
@@ -18118,6 +19521,9 @@
           "description": "The URL of an image to be vectorized to perform a vector search query."
         }
       },
+      "required": [
+        "url"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/VectorQuery"
@@ -18191,9 +19597,6 @@
           "description": "The version of the model to use when calling the AI Services Vision service. It will default to the latest available when not specified."
         }
       },
-      "required": [
-        "modelVersion"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/SearchIndexerSkill"
@@ -18271,11 +19674,8 @@
           "description": "The url for the Web API."
         },
         "httpHeaders": {
-          "type": "object",
-          "description": "The headers required to make the http request.",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "$ref": "#/definitions/WebApiHttpHeaders",
+          "description": "The headers required to make the http request."
         },
         "httpMethod": {
           "type": "string",
@@ -18366,6 +19766,69 @@
         }
       }
     },
+    "WebKnowledgeSource": {
+      "type": "object",
+      "description": "Knowledge Source targeting web results.",
+      "properties": {
+        "webParameters": {
+          "$ref": "#/definitions/WebKnowledgeSourceParameters",
+          "description": "The parameters for the web knowledge source."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeSource"
+        }
+      ],
+      "x-ms-discriminator-value": "web"
+    },
+    "WebKnowledgeSourceDomain": {
+      "type": "object",
+      "description": "Configuration for web knowledge source domain.",
+      "properties": {
+        "address": {
+          "type": "string",
+          "description": "The address of the domain."
+        },
+        "includeSubpages": {
+          "type": "boolean",
+          "description": "Whether or not to include subpages from this domain."
+        }
+      },
+      "required": [
+        "address"
+      ]
+    },
+    "WebKnowledgeSourceDomains": {
+      "type": "object",
+      "description": "Domain allow/block configuration for web knowledge source.",
+      "properties": {
+        "allowedDomains": {
+          "type": "array",
+          "description": "Domains that are allowed for web results.",
+          "items": {
+            "$ref": "#/definitions/WebKnowledgeSourceDomain"
+          }
+        },
+        "blockedDomains": {
+          "type": "array",
+          "description": "Domains that are blocked from web results.",
+          "items": {
+            "$ref": "#/definitions/WebKnowledgeSourceDomain"
+          }
+        }
+      }
+    },
+    "WebKnowledgeSourceParameters": {
+      "type": "object",
+      "description": "Parameters for web knowledge source.",
+      "properties": {
+        "domains": {
+          "$ref": "#/definitions/WebKnowledgeSourceDomains",
+          "description": "Domain allow/block configuration for web results."
+        }
+      }
+    },
     "WebKnowledgeSourceParams": {
       "type": "object",
       "description": "Specifies runtime parameters for a web knowledge source",
@@ -18411,15 +19874,18 @@
         },
         "catenateWords": {
           "type": "boolean",
-          "description": "A value indicating whether maximum runs of word parts will be catenated. For example, if this is set to true, \"Azure-Search\" becomes \"AzureSearch\". Default is false."
+          "description": "A value indicating whether maximum runs of word parts will be catenated. For example, if this is set to true, \"Azure-Search\" becomes \"AzureSearch\". Default is false.",
+          "default": false
         },
         "catenateNumbers": {
           "type": "boolean",
-          "description": "A value indicating whether maximum runs of number parts will be catenated. For example, if this is set to true, \"1-2\" becomes \"12\". Default is false."
+          "description": "A value indicating whether maximum runs of number parts will be catenated. For example, if this is set to true, \"1-2\" becomes \"12\". Default is false.",
+          "default": false
         },
         "catenateAll": {
           "type": "boolean",
-          "description": "A value indicating whether all subword parts will be catenated. For example, if this is set to true, \"Azure-Search-1\" becomes \"AzureSearch1\". Default is false."
+          "description": "A value indicating whether all subword parts will be catenated. For example, if this is set to true, \"Azure-Search-1\" becomes \"AzureSearch1\". Default is false.",
+          "default": false
         },
         "splitOnCaseChange": {
           "type": "boolean",
@@ -18428,7 +19894,8 @@
         },
         "preserveOriginal": {
           "type": "boolean",
-          "description": "A value indicating whether original words will be preserved and added to the subword list. Default is false."
+          "description": "A value indicating whether original words will be preserved and added to the subword list. Default is false.",
+          "default": false
         },
         "splitOnNumerics": {
           "type": "boolean",
