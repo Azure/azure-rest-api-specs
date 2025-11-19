@@ -8,8 +8,7 @@ using Microsoft.Maintenance;
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(MaintenanceConfigurationProperties.maintenanceWindow
 );
 
-//#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Update.properties);
+//@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Update.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@clientName(MaintenanceConfigurationOperationGroup.createOrUpdate::parameters.resource,
