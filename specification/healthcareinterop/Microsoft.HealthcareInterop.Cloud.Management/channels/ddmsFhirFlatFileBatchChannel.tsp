@@ -1,10 +1,11 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-resource-manager";
-import "../common/provisioningState.tsp";
-import "../common/models/destinationModels.tsp";
-import "../common/models/fhirQueryModels.tsp";
-import "../common/models/triggerModels.tsp";
+import "./../common/provisioningState.tsp";
+import "./../common/resourceIds.tsp";
+import "./../common/models/destinationModels.tsp";
+import "./../common/models/fhirQueryModels.tsp";
+import "./../common/models/triggerModels.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -13,12 +14,12 @@ using Azure.ResourceManager;
 
 namespace Microsoft.HealthcareInterop;
 
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2025_11_01_preview)
 @doc("The healthcare interop resource that extracts IDs from file that contains a list of delimited IDs and queries the configured EMR FHIR endpoint to retrieve the representative resources.")
 @resource("ddmsFhirFlatFileBatchChannels")
 model DdmsFhirFlatFileBatchChannel
   is TrackedResource<DdmsFhirFlatFileBatchChannelProperties> {
-  @doc("The name of the DdmsFhirFlatFileBatchChannel resource")
+  @doc("The name of the DdmsFhirFlatFileBatchChannel resource.")
   @pattern("^[a-zA-Z0-9-]{3,24}$")
   @key("ddmsFhirFlatFileBatchChannelName")
   @segment("ddmsFhirFlatFileBatchChannels")
@@ -26,7 +27,7 @@ model DdmsFhirFlatFileBatchChannel
   name: string;
 }
 
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2025_11_01_preview)
 @doc("The properties to configure the DdmsFhirFlatFileBatchChannel resource.")
 model DdmsFhirFlatFileBatchChannelProperties {
   @doc("The status of the last provisioning operation.")
@@ -50,7 +51,7 @@ model DdmsFhirFlatFileBatchChannelProperties {
 }
 
 // #region Source
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2025_11_01_preview)
 @doc("The source configuration for the DdmsFhirFlatFileBatchChannel resource.")
 @discriminator("connectorType")
 model DdmsFhirFlatFileBatchChannelSourceProperties {
@@ -58,7 +59,7 @@ model DdmsFhirFlatFileBatchChannelSourceProperties {
   connectorType: DdmsFhirFlatFileBatchChannelSourceConnectorType;
 }
 
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2025_11_01_preview)
 @doc("Types of source connectors supported for the DdmsFhirFlatFileBatchChannel resource.")
 union DdmsFhirFlatFileBatchChannelSourceConnectorType {
   string,
@@ -67,7 +68,7 @@ union DdmsFhirFlatFileBatchChannelSourceConnectorType {
   StorageAccountConnector: "StorageAccountConnector",
 }
 
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2025_11_01_preview)
 @doc("StorageAccountConnector source properties.")
 model DdmsFhirFlatFileBatchChannelStorageAccountConnectorSourceProperties
   extends DdmsFhirFlatFileBatchChannelSourceProperties {
@@ -81,7 +82,7 @@ model DdmsFhirFlatFileBatchChannelStorageAccountConnectorSourceProperties
 // #endregion Source
 
 // #region Transformation
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2025_11_01_preview)
 @doc("The transformation configuration for the DdmsFhirFlatFileBatchChannel resource.")
 model DdmsFhirFlatFileBatchChannelTransformationProperties {
   @doc("The FHIR Query configuration.")
@@ -91,7 +92,7 @@ model DdmsFhirFlatFileBatchChannelTransformationProperties {
 // #endregion Transformation
 
 // #region Destination
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2025_11_01_preview)
 @doc("The destination configuration for the DdmsFhirFlatFileBatchChannel resource.")
 @discriminator("connectorType")
 model DdmsFhirFlatFileBatchChannelDestinationProperties {
@@ -99,7 +100,7 @@ model DdmsFhirFlatFileBatchChannelDestinationProperties {
   connectorType: DdmsFhirFlatFileBatchChannelDestinationConnectorType;
 }
 
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2025_11_01_preview)
 @doc("Types of destination connectors supported for the DdmsFhirFlatFileBatchChannel resource.")
 union DdmsFhirFlatFileBatchChannelDestinationConnectorType {
   string,
@@ -108,7 +109,7 @@ union DdmsFhirFlatFileBatchChannelDestinationConnectorType {
   DdmsConnector: "DdmsConnector",
 }
 
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2025_11_01_preview)
 @doc("DdmsConnector destination properties for DDMS Flat File batch channel.")
 model DdmsFhirFlatFileBatchChannelDdmsConnectorDestinationProperties
   extends DdmsFhirFlatFileBatchChannelDestinationProperties {
@@ -122,7 +123,7 @@ model DdmsFhirFlatFileBatchChannelDdmsConnectorDestinationProperties
 // #endregion Destination
 
 // #region Job
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2025_11_01_preview)
 @doc("Properties for Job")
 model DdmsFhirFlatFileBatchChannelJobProperties {
   @doc("The trigger configuration")
@@ -130,7 +131,7 @@ model DdmsFhirFlatFileBatchChannelJobProperties {
 }
 
 // #endregion Job
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2025_11_01_preview)
 @armResourceOperations
 interface DdmsFhirFlatFileBatchChannels {
   get is ArmResourceRead<DdmsFhirFlatFileBatchChannel>;
