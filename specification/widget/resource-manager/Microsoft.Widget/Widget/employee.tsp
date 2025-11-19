@@ -32,6 +32,10 @@ model EmployeeProperties {
   provisioningState?: ProvisioningState;
 
   /** test */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" ""
+  unknownProp?: unknown;
+
+  /** test */
   configItem?: TestConfigItem;
 
   /** test */
