@@ -149,9 +149,9 @@ def print_result_summary(
 ) -> None:
     """Print comparison result summary to stdout."""
     if result.equivalent:
-        print("✅ Specifications are semantically equivalent")
+        print("\033[92mSUCCESS\033[0m: Specifications are semantically equivalent")
     else:
-        print("❌ Specifications are NOT semantically equivalent")
+        print("\033[91mx Specifications are NOT semantically equivalent\033[0m")
         print(f"Found {result.difference_count} differences")
 
         if verbose:
@@ -242,13 +242,20 @@ Exit codes:
             ignore_operation_id=args.ignore_operation_id
         )
 
-        # Save artifacts
-        artifacts_to_save = {}
-        if args.save_canonical:
-            artifacts_to_save['hand_authored_canonical'] = canonical_hand_authored
-            artifacts_to_save['typespec_canonical'] = canonical_typespec
+        # Save artifacts - always pass canonical specs for comparison
+        artifacts_to_save = {
+            'hand_authored_canonical': canonical_hand_authored,
+            'typespec_canonical': canonical_typespec
+        }
 
-        save_artifacts(config, result, **artifacts_to_save)
+        # Only save canonical spec files if requested
+        if not args.save_canonical:
+            # Remove canonical specs from artifacts_to_save for file saving, but keep for Excel comparison
+            save_artifacts(config, result,
+                          hand_authored_canonical=canonical_hand_authored,
+                          typespec_canonical=canonical_typespec)
+        else:
+            save_artifacts(config, result, **artifacts_to_save)
 
         # Print results and exit with appropriate code
         print_result_summary(result, verbose=args.verbose)
@@ -256,23 +263,23 @@ Exit codes:
         return 0 if result.equivalent else 1
 
     except ConfigError as e:
-        print(f"❌ Configuration error: {e}", file=sys.stderr)
+        print(f"\033[91mERROR\033[0m: Configuration error: {e}", file=sys.stderr)
         return 2
 
     except LoaderError as e:
-        print(f"❌ File loading error: {e}", file=sys.stderr)
+        print(f"\033[91mERROR\033[0m: File loading error: {e}", file=sys.stderr)
         return 2
 
     except MergeError as e:
-        print(f"❌ Merge error: {e}", file=sys.stderr)
+        print(f"\033[91mERROR\033[0m: Merge error: {e}", file=sys.stderr)
         return 3
 
     except CanonicalizationError as e:
-        print(f"❌ Canonicalization error: {e}", file=sys.stderr)
+        print(f"\033[91mERROR\033[0m: Canonicalization error: {e}", file=sys.stderr)
         return 3
 
     except Exception as e:
-        print(f"❌ Unexpected error: {e}", file=sys.stderr)
+        print(f"\033[91mERROR\033[0m: Unexpected error: {e}", file=sys.stderr)
         import traceback
         traceback.print_exc()
         return 3
