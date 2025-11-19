@@ -6332,11 +6332,6 @@
           "type": "string",
           "description": "The maximum number or percentage of nodes that are surged during upgrade. This can either be set to an integer (e.g. '5') or a percentage (e.g. '50%'). If a percentage is specified, it is the percentage of the total agent pool size at the time of the upgrade. For percentages, fractional nodes are rounded up. If not specified, the default is 10%. For more information, including best practices, see: https://learn.microsoft.com/en-us/azure/aks/upgrade-cluster"
         },
-        "minSurge": {
-          "type": "string",
-          "title": "The minimum number or percentage of nodes that are surged during upgrade.",
-          "description": "This can either be set to an integer (e.g. '5') or a percentage (e.g. '50%'). If a percentage is specified, it is the percentage of the total agent pool size at the time of the upgrade. For percentages, fractional nodes are rounded up. If node capacity constraints prevent full surging, AKS would attempt a slower upgrade with fewer surge nodes. The upgrade will proceed only if the available surge capacity meets or exceeds minSurge. If minSurge not specified, the default is 50% of the maxSurge, for example, if maxSurge = 10%, the default is 5%, if maxSurge = 10, the default is 5."
-        },
         "maxUnavailable": {
           "type": "string",
           "description": "The maximum number or percentage of nodes that can be simultaneously unavailable during upgrade. This can either be set to an integer (e.g. '1') or a percentage (e.g. '5%'). If a percentage is specified, it is the percentage of the total agent pool size at the time of the upgrade. For percentages, fractional nodes are rounded up. If not specified, the default is 0. For more information, including best practices, see: https://learn.microsoft.com/en-us/azure/aks/upgrade-cluster"
