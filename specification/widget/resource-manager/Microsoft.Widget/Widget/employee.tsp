@@ -30,6 +30,30 @@ model EmployeeProperties {
   /** The status of the last operation. */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
+
+  /** test */
+  testExtensions?: TestExtension[];
+}
+
+/** test */
+model TestExtension {
+  /** test */
+  name: string;
+
+  /** test */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
+  config?: Record<TestConfig>;
+}
+
+/** test */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
+model TestConfig is Record<TestConfigItem>;
+
+/** test */
+model TestConfigItem {
+  /** test */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" ""
+  value?: unknown;
 }
 
 /** The resource provisioning state. */

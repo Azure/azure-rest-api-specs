@@ -488,6 +488,13 @@
           "$ref": "#/definitions/ProvisioningState",
           "description": "The status of the last operation.",
           "readOnly": true
+        },
+        "testExtensions": {
+          "type": "array",
+          "description": "test",
+          "items": {
+            "$ref": "#/definitions/TestExtension"
+          }
         }
       }
     },
@@ -560,6 +567,42 @@
         ]
       },
       "readOnly": true
+    },
+    "TestConfig": {
+      "type": "object",
+      "description": "test",
+      "additionalProperties": {
+        "$ref": "#/definitions/TestConfigItem"
+      }
+    },
+    "TestConfigItem": {
+      "type": "object",
+      "description": "test",
+      "properties": {
+        "value": {
+          "description": "test"
+        }
+      }
+    },
+    "TestExtension": {
+      "type": "object",
+      "description": "test",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "test"
+        },
+        "config": {
+          "type": "object",
+          "description": "test",
+          "additionalProperties": {
+            "$ref": "#/definitions/TestConfig"
+          }
+        }
+      },
+      "required": [
+        "name"
+      ]
     }
   },
   "parameters": {}
