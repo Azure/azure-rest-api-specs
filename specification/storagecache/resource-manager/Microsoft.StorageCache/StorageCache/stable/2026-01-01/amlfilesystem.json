@@ -1414,7 +1414,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "storagecache.json#/definitions/CloudError"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1538,7 +1538,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "storagecache.json#/definitions/CloudError"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1613,7 +1613,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "storagecache.json#/definitions/CloudError"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1865,7 +1865,7 @@
               "format": "float",
               "readOnly": true
             },
-            "clusterUUID": {
+            "clusterUuid": {
               "description": "The unique identifier of the AML file system cluster.",
               "type": "string",
               "readOnly": true
@@ -3254,20 +3254,15 @@
           "type": "object",
           "description": "Properties of the expansion job.",
           "properties": {
-            "name": {
-              "type": "string",
-              "description": "Name of the expansion job.",
-              "readOnly": true
-            },
             "provisioningState": {
               "description": "ARM provisioning state, see https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#provisioningstate-property",
               "enum": [
                 "Succeeded",
                 "Failed",
-                "Cancelled",
                 "Creating",
                 "Deleting",
-                "Updating"
+                "Updating",
+                "Canceled"
               ],
               "x-ms-enum": {
                 "modelAsString": true
