@@ -632,27 +632,34 @@ model SharePointSensitivityLabelInfo {
 @doc("The error details.")
 model KnowledgeBaseErrorDetail {
   @doc("The error code.")
+  @visibility(Lifecycle.Read)
   code?: string;
 
   @doc("The error message.")
+  @visibility(Lifecycle.Read)
   message?: string;
 
   @doc("The error target.")
+  @visibility(Lifecycle.Read)
   target?: string;
 
   @doc("The error details.")
+  @visibility(Lifecycle.Read)
   details?: KnowledgeBaseErrorDetail[];
 
   @doc("The error additional info.")
+  @visibility(Lifecycle.Read)
   additionalInfo?: KnowledgeBaseErrorAdditionalInfo[];
 }
 
 @doc("The resource management error additional info.")
 model KnowledgeBaseErrorAdditionalInfo {
   @doc("The additional info type.")
+  @visibility(Lifecycle.Read)
   type?: string;
 
   @doc("The additional info.")
+  @visibility(Lifecycle.Read)
   info?: Record<string>;
 }
 

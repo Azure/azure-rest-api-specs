@@ -1409,7 +1409,7 @@ union OcrSkillLanguage {
   @doc("Uzbek (Latin)")
   uz: "uz",
 
-  @doc("VolapÃ¼k")
+  @doc("Volapük")
   vo: "vo",
 
   @doc("Walser")
@@ -3075,7 +3075,7 @@ union ChatCompletionExtraParametersBehavior {
   string,
 
   @doc("Passes any extra parameters directly to the model.")
-  PassThrough: "passThrough",
+  PassThrough: "pass-through",
 
   @doc("Drops all extra parameters.")
   Drop: "drop",
@@ -3205,7 +3205,7 @@ model SearchResourceEncryptionKey {
   keyVaultKeyName: string;
 
   @doc("The version of your Azure Key Vault key to be used to encrypt your data at rest.")
-  keyVaultKeyVersion?: string;
+  keyVaultKeyVersion: string;
 
   @doc("The URI of your Azure Key Vault, also referred to as DNS name, that contains the key to be used to encrypt your data at rest. An example URI might be `https://my-keyvault-name.vault.azure.net`.")
   keyVaultUri: string;
@@ -3396,6 +3396,9 @@ model FieldMappingFunction {
 
 @doc("The type of the cache.")
 model SearchIndexerCache {
+  @doc("A guid for the SearchIndexerCache.")
+  id?: string;
+
   @doc("The connection string to the storage account where the cache data will be persisted.")
   storageConnectionString?: string;
 
@@ -3404,9 +3407,6 @@ model SearchIndexerCache {
 
   @doc("The user-assigned managed identity used for connections to the enrichment cache.  If the connection string indicates an identity (ResourceId) and it's not specified, the system-assigned managed identity is used. On updates to the indexer, if the identity is unspecified, the value remains unchanged. If set to \"none\", the value of this property is cleared.")
   identity?: SearchIndexerDataIdentity;
-
-  @doc("A guid for the SearchIndexerCache.")
-  id?: string;
 }
 
 @doc("Response from a List Indexers request. If successful, it includes the full definitions of all indexers.")
@@ -3733,6 +3733,9 @@ model SearchIndexerKnowledgeStoreProjection {
 @doc("Description for what data to store in Azure Tables.")
 model SearchIndexerKnowledgeStoreTableProjectionSelector
   extends SearchIndexerKnowledgeStoreProjectionSelector {
+  @doc("Name of generated key to store projection under.")
+  generatedKeyName: string;
+
   @doc("Name of the Azure table to store projected data in.")
   tableName: string;
 }
@@ -3810,6 +3813,7 @@ model SearchIndexerIndexProjectionsParameters {
 @doc("Response from a list skillset request. If successful, it includes the full definitions of all skillsets.")
 model ListSkillsetsResult {
   @doc("The skillsets defined in the Search service.")
+  @visibility(Lifecycle.Read)
   @pageItems
   value: SearchIndexerSkillset[];
 }
@@ -3821,13 +3825,21 @@ model SkillNames {
   skillNames?: string[];
 }
 
+@doc("The format of the synonym map.")
+union SynonymMapFormat {
+  string,
+
+  @doc("Selects the SOLR format for synonym maps.")
+  Solr: "solr",
+}
+
 @doc("Represents a synonym map definition.")
 model SynonymMap {
   @doc("The name of the synonym map.")
   name: string;
 
   @doc("The format of the synonym map. Only the 'solr' format is currently supported.")
-  format: "solr";
+  format: SynonymMapFormat;
 
   @doc("A series of synonym rules in the specified synonym map format. The rules must be separated by newlines.")
   synonyms: string;
@@ -3843,6 +3855,7 @@ model SynonymMap {
 @doc("Response from a List SynonymMaps request. If successful, it includes the full definitions of all synonym maps.")
 model ListSynonymMapsResult {
   @doc("The synonym maps in the Search service.")
+  @visibility(Lifecycle.Read)
   @pageItems
   value: SynonymMap[];
 }
@@ -4232,12 +4245,15 @@ model ListIndexesResult {
 @doc("Statistics for a given index. Statistics are collected periodically and are not guaranteed to always be up-to-date.")
 model GetIndexStatisticsResult {
   @doc("The number of documents in the index.")
+  @visibility(Lifecycle.Read)
   documentCount: int64;
 
   @doc("The amount of storage in bytes consumed by the index.")
+  @visibility(Lifecycle.Read)
   storageSize: int64;
 
   @doc("The amount of memory in bytes consumed by vectors in the index.")
+  @visibility(Lifecycle.Read)
   vectorIndexSize: int64;
 }
 
@@ -4648,7 +4664,7 @@ model SearchServiceStatistics {
   limits: SearchServiceLimits;
 
   @doc("Service level indexer runtime consumption.")
-  indexersRuntime?: ServiceIndexersRuntime;
+  indexersRuntime: ServiceIndexersRuntime;
 }
 
 @doc("Represents service-level resource counters and quotas.")
@@ -5933,6 +5949,7 @@ model EntityLinkingSkill extends SearchIndexerSkill {
   defaultLanguageCode?: string;
 
   @doc("A value between 0 and 1 that be used to only include entities whose confidence score is greater than the value specified. If not set (default), or if explicitly set to null, all entities will be included.")
+  @minValue(0)
   @maxValue(1)
   minimumPrecision?: float64;
 
@@ -5953,6 +5970,7 @@ model EntityRecognitionSkillV3 extends SearchIndexerSkill {
   defaultLanguageCode?: string;
 
   @doc("A value between 0 and 1 that be used to only include entities whose confidence score is greater than the value specified. If not set (default), or if explicitly set to null, all entities will be included.")
+  @minValue(0)
   @maxValue(1)
   minimumPrecision?: float64;
 
@@ -5971,6 +5989,7 @@ model PIIDetectionSkill extends SearchIndexerSkill {
   defaultLanguageCode?: string;
 
   @doc("A value between 0 and 1 that be used to only include entities whose confidence score is greater than the value specified. If not set (default), or if explicitly set to null, all entities will be included.")
+  @minValue(0)
   @maxValue(1)
   minimumPrecision?: float64;
 
@@ -6094,8 +6113,8 @@ model DocumentExtractionSkill extends SearchIndexerSkill {
 
 @doc("A skill that extracts content and layout information, via Azure AI Services, from files within the enrichment pipeline.")
 model DocumentIntelligenceLayoutSkill extends SearchIndexerSkill {
-  @doc("Controls the cardinality of the output produced by the skill. Default is 'oneToMany'.")
-  outputFormat?: DocumentIntelligenceLayoutSkillOutputFormat;
+  @doc("Controls the output format. Default is 'markdown'.")
+  outputFormat?: DocumentIntelligenceLayoutSkillOutputFormat = DocumentIntelligenceLayoutSkillOutputFormat.Markdown;
 
   @doc("Controls the cardinality of the output produced by the skill. Default is 'oneToMany'.")
   outputMode?: DocumentIntelligenceLayoutSkillOutputMode = DocumentIntelligenceLayoutSkillOutputMode.OneToMany;
@@ -6120,7 +6139,7 @@ model WebApiSkill extends SearchIndexerSkill {
   uri: string;
 
   @doc("The headers required to make the http request.")
-  httpHeaders?: Record<string>;
+  httpHeaders?: WebApiHttpHeaders;
 
   @doc("The method for the http request.")
   httpMethod?: string;
@@ -6186,7 +6205,7 @@ model AzureOpenAIEmbeddingSkill extends SearchIndexerSkill {
 @doc("Allows you to generate a vector embedding for a given image or text input using the Azure AI Services Vision Vectorize API.")
 model VisionVectorizeSkill extends SearchIndexerSkill {
   @doc("The version of the model to use when calling the AI Services Vision service. It will default to the latest available when not specified.")
-  modelVersion: string;
+  modelVersion?: string;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   @doc("A URI fragment specifying the type of skill.")
@@ -6245,7 +6264,7 @@ model ChatCompletionSchema {
   @doc("A JSON-formatted string that defines the output schema's properties and constraints for the model.")
   properties?: string;
 
-  @doc("An array of the property names that are required to be part of the model's response.")
+  @doc("An array of the property names that are required to be part of the model's response. All properties must be included for structured outputs.")
   required?: string[];
 
   @doc("Controls whether it is allowable for an object to contain additional keys / values that were not defined in the JSON Schema. Default is false.")
@@ -6321,10 +6340,10 @@ model ChatCompletionSkill extends SearchIndexerSkill {
   @doc("If set, the number of parallel calls that can be made to the Web API.")
   degreeOfParallelism?: int32;
 
-  @doc("Applies to custom skills that connect to external code in an Azure function or some other application that provides the transformations.")
+  @doc("Applies to custom skills that connect to external code in an Azure function or some other application that provides the transformations. This value should be the application ID created for the function or app when it was registered with Azure Active Directory. When specified, the custom skill connects to the function or app using a managed ID (either system or user-assigned) of the search service and the access token of the function or app, using this value as the resource id for creating the scope of the access token.")
   authResourceId?: string;
 
-  @doc("The user-assigned managed identity used for outbound connections.")
+  @doc("The user-assigned managed identity used for outbound connections. If an authResourceId is provided and it's not specified, the system-assigned managed identity is used. On updates to the indexer, if the identity is unspecified, the value remains unchanged. If set to \"none\", the value of this property is cleared.")
   authIdentity?: SearchIndexerDataIdentity;
 
   @doc("API key for authenticating to the model. Both apiKey and authIdentity cannot be specified at the same time.")
@@ -6363,7 +6382,7 @@ model IndexStatisticsSummary {
 
   @doc("The amount of memory in bytes consumed by vectors in the index.")
   @visibility(Lifecycle.Read)
-  vectorIndexSize?: int64;
+  vectorIndexSize: int64;
 }
 
 @doc("Response from a request to retrieve stats summary of all indexes. If successful, it includes the stats of each index in the service.")
