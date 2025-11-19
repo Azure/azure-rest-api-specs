@@ -41,3 +41,9 @@ suppressions:
     from: search.json
     reason: Multi-Level Discrimination
 ```
+
+### Suppression
+``` yaml
+directive:
+  - suppress: INVALID_TYPE
+```
