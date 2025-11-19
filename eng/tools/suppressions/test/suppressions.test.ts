@@ -253,7 +253,7 @@ test("yaml array not suppression", () => {
 });
 
 test("suppression with rules", () => {
-  let suppressions: Suppression[] = getSuppressionsFromYaml(
+  const suppressions: Suppression[] = getSuppressionsFromYaml(
     "TestTool",
     "foo",
     "suppressions.yaml",
@@ -320,7 +320,7 @@ test.each([
   reason: process-version
 `;
 
-  let suppressions: Suppression[] = getSuppressionsFromYaml(
+  const suppressions: Suppression[] = getSuppressionsFromYaml(
     "TestTool",
     "test-path",
     "suppressions.yaml",

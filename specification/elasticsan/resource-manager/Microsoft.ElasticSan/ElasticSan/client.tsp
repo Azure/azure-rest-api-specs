@@ -72,3 +72,5 @@ using Azure.Core;
 @@clientLocation(Microsoft.ElasticSan.restoreVolume, "Management", "go");
 
 @@clientName(Microsoft.ElasticSan, "ElasticSanMgmtClient", "python");
+
+@@clientName(SKUCapability, "SkuCapability", "java");
