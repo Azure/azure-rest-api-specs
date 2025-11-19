@@ -536,7 +536,8 @@ model KnowledgeBaseReference {
   activitySource: int32;
 
   @doc("The source data for the reference.")
-  sourceData?: Record<string>;
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Allows arbitrary JSON via additionalProperties: true."
+  sourceData?: Record<unknown>;
 
   @doc("The reranker score for the document reference.")
   rerankerScore?: float32;
@@ -660,7 +661,8 @@ model KnowledgeBaseErrorAdditionalInfo {
 
   @doc("The additional info.")
   @visibility(Lifecycle.Read)
-  info?: Record<string>;
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Allows arbitrary JSON via additionalProperties: true."
+  info?: Record<unknown>;
 }
 
 @doc("Successful retrieval response.")
