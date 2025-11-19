@@ -1,5 +1,6 @@
 import { filterAsync } from "@azure-tools/specs-shared/array";
-import { readFile } from "fs/promises";
+import { defaultLogger } from "@azure-tools/specs-shared/logger";
+import { Swagger } from "@azure-tools/specs-shared/swagger";
 import { globby } from "globby";
 import path, { basename, dirname, normalize } from "path";
 import pc from "picocolors";
@@ -103,12 +104,8 @@ export class CompileRule implements Rule {
           const tspGeneratedSwaggers = await filterAsync(
             allSwaggers,
             async (swaggerPath: string) => {
-              const swaggerText = await readFile(swaggerPath, { encoding: "utf8" });
-              const swaggerObj = JSON.parse(swaggerText);
-              return (
-                swaggerObj["info"]?.["x-typespec-generated"] ||
-                swaggerObj["info"]?.["x-cadl-generated"]
-              );
+              const swagger = new Swagger(swaggerPath, { logger: defaultLogger });
+              return (await swagger.getTypeSpecGenerated()) || (await swagger.getCadlGenerated());
             },
           );
 
@@ -178,7 +175,7 @@ export class CompileRule implements Rule {
 
     const clientTsp = path.join(folder, "client.tsp");
     if (await fileExists(clientTsp)) {
-      let [err, stdout, stderr] = await runNpm([
+      const [err, stdout, stderr] = await runNpm([
         "exec",
         "--no",
         "--",
