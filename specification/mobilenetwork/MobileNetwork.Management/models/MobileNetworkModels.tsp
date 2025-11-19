@@ -2,7 +2,7 @@ import "@typespec/openapi";
 
 import "../common/CommonModels.tsp";
 
-using TypeSpec.OpenAPI;
+using Azure.ResourceManager;
 
 namespace Microsoft.MobileNetwork;
 
@@ -21,6 +21,7 @@ model MobileNetworkPropertiesFormat {
   @identifiers(#["mcc", "mnc"])
   publicLandMobileNetworks?: PublicLandMobileNetwork[];
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Validate if secret and add @secret if so or update reason"
   @doc("The mobile network resource identifier")
   @visibility(Lifecycle.Read)
   serviceKey?: string;
