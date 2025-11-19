@@ -1,3 +1,4 @@
+import { inspect } from "util";
 import { toPercent } from "../../shared/src/math.js";
 import { Duration, formatDuration, getDuration, subtract } from "../../shared/src/time.js";
 
