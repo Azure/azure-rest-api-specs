@@ -3839,7 +3839,7 @@ model SynonymMap {
   name: string;
 
   @doc("The format of the synonym map. Only the 'solr' format is currently supported.")
-  format: SynonymMapFormat;
+  format: SynonymMapFormat= SynonymMapFormat.Solr;
 
   @doc("A series of synonym rules in the specified synonym map format. The rules must be separated by newlines.")
   synonyms: string;

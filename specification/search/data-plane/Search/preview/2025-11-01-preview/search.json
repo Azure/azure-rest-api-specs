@@ -18064,8 +18064,23 @@
           "description": "The name of the synonym map."
         },
         "format": {
-          "$ref": "#/definitions/SynonymMapFormat",
-          "description": "The format of the synonym map. Only the 'solr' format is currently supported."
+          "type": "string",
+          "description": "The format of the synonym map. Only the 'solr' format is currently supported.",
+          "default": "solr",
+          "enum": [
+            "solr"
+          ],
+          "x-ms-enum": {
+            "name": "SynonymMapFormat",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Solr",
+                "value": "solr",
+                "description": "Selects the SOLR format for synonym maps."
+              }
+            ]
+          }
         },
         "synonyms": {
           "type": "string",
