@@ -126,6 +126,11 @@ input-file:
   - stable/2026-01-01/Subscriptions.json
   - stable/2026-01-01/Usages.json
   - stable/2026-01-01/LogicAppsExtension.json
+directive:
+  - suppress: AvoidAdditionalProperties
+    from: CommonDefinitions.json
+    where:
+      - $.definitions.DataConnector.properties.extendedProperties
 ```
 
 ### Tag: package-2025-07-01

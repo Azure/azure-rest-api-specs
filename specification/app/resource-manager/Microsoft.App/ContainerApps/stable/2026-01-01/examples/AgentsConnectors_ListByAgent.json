@@ -17,7 +17,14 @@
               "dataConnectorType": "SqlServer",
               "keyVaultUri": "https://testkv.vault.azure.net/secrets/sql-connection-string",
               "identity": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/sqlIdentity",
-              "source": "Agent"
+              "source": "Agent",
+              "extendedProperties": {
+                "AuthType": "Custom",
+                "CustomHeader": {
+                  "DD_API_KEY": "value 1",
+                  "DD_APPLICATION_KEY": "value 2"
+                }
+              }
             }
           },
           {
@@ -27,7 +34,15 @@
             "properties": {
               "dataConnectorType": "AzureStorage",
               "identity": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/storageIdentity",
-              "source": "AgentSpace"
+              "source": "AgentSpace",
+              "extendedProperties": {
+                "environment": "production",
+                "owner": "alice",
+                "additionalEndpoints": [
+                  "https://foo.kusto.windows.net/databasename",
+                  "https://bar.kusto.windows.net/databasename"
+                ]
+              }
             }
           },
           {
