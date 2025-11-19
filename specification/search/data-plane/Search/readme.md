@@ -35,18 +35,9 @@ These settings apply only when `--tag=package-2025-11-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2025-11-01-preview'
 input-file:
-- preview/2025-11-01-preview/search.json
+  - preview/2025-11-01-preview/search.json
 suppressions:
-  - code: LroExtension 
+  - code: DISCRIMINATOR_VALUE_NOT_FOUND
     from: search.json
-    reason: Legacy swagger file
-  - code: AutoRestExtension
-    from: search.json
-    reason: Legacy swagger file
-```
-
-### Suppression
-``` yaml
-directive:
-  - suppress: INVALID_TYPE
+    reason: Multi-Level Discrimination
 ```
