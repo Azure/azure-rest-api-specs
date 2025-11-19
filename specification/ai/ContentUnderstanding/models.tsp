@@ -47,10 +47,10 @@ model ContentAnalyzer {
   @pattern("^[a-zA-Z0-9._-]{1,64}$")
   baseAnalyzerId?: string;
 
-  @removed(Versions.v2025_05_01_preview)
-  @doc("The scenario for which the analyzer is optimized.")
-  @visibility(Lifecycle.Create, Lifecycle.Read)
-  scenario?: string;
+  // @removed(Versions.v2025_05_01_preview)
+  // @doc("The scenario for which the analyzer is optimized.")
+  // @visibility(Lifecycle.Create, Lifecycle.Read)
+  // scenario?: string;
 
   @doc("Analyzer configuration settings.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
@@ -65,23 +65,23 @@ model ContentAnalyzer {
   @visibility(Lifecycle.Create, Lifecycle.Read)
   dynamicFieldSchema?: boolean = false;
 
-  @removed(Versions.v2025_11_01)
-  @doc("The data source containing training data for the analyzer.")
-  @visibility(Lifecycle.Create, Lifecycle.Read)
-  trainingData?: DataSource;
+  // @removed(Versions.v2025_11_01)
+  // @doc("The data source containing training data for the analyzer.")
+  // @visibility(Lifecycle.Create, Lifecycle.Read)
+  // trainingData?: DataSource;
 
-  @added(Versions.v2025_05_01_preview)
+  // @added(Versions.v2025_05_01_preview)
   @doc("The location where the data may be processed.  Defaults to global.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   processingLocation?: ProcessingLocation = ProcessingLocation.global;
 
-  @added(Versions.v2025_05_01_preview)
-  @removed(Versions.v2025_11_01)
-  @doc("The analysis mode: standard, pro.  Default is standard.")
-  @visibility(Lifecycle.Create, Lifecycle.Read)
-  mode?: AnalysisMode = AnalysisMode.standard;
+  // @added(Versions.v2025_05_01_preview)
+  // @removed(Versions.v2025_11_01)
+  // @doc("The analysis mode: standard, pro.  Default is standard.")
+  // @visibility(Lifecycle.Create, Lifecycle.Read)
+  // mode?: AnalysisMode = AnalysisMode.standard;
 
-  @added(Versions.v2025_05_01_preview)
+  // @added(Versions.v2025_05_01_preview)
   @doc("Additional knowledge sources used to enhance the analyzer.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   knowledgeSources?: KnowledgeSource[];
@@ -127,7 +127,7 @@ union ContentAnalyzerStatus {
   failed: "failed",
 }
 
-@added(Versions.v2025_05_01_preview)
+// @added(Versions.v2025_05_01_preview)
 @doc("The location where the data may be processed.")
 union ProcessingLocation {
   string,
@@ -142,34 +142,34 @@ union ProcessingLocation {
   global: "global",
 }
 
-@added(Versions.v2025_05_01_preview)
-@removed(Versions.v2025_11_01)
-@doc("Analysis mode.")
-union AnalysisMode {
-  string,
+// @added(Versions.v2025_05_01_preview)
+// @removed(Versions.v2025_11_01)
+// @doc("Analysis mode.")
+// union AnalysisMode {
+//   string,
 
-  @doc("Standard analysis mode.")
-  standard: "standard",
+//   @doc("Standard analysis mode.")
+//   standard: "standard",
 
-  @doc("Pro analysis mode.")
-  pro: "pro",
-}
+//   @doc("Pro analysis mode.")
+//   pro: "pro",
+// }
 
-@added(Versions.v2025_05_01_preview)
+// @added(Versions.v2025_05_01_preview)
 @doc("Knowledge source kind.")
 union KnowledgeSourceKind {
   string,
 
-  @removed(Versions.v2025_11_01)
-  @doc("A reference knowledge source.")
-  reference: "reference",
+  // @removed(Versions.v2025_11_01)
+  // @doc("A reference knowledge source.")
+  // reference: "reference",
 
   @added(Versions.v2025_11_01)
   @doc("A labeled data knowledge source.")
   labeledData: "labeledData",
 }
 
-@added(Versions.v2025_05_01_preview)
+// @added(Versions.v2025_05_01_preview)
 @doc("Knowledge source.")
 @discriminator("kind")
 model KnowledgeSource {
@@ -177,22 +177,22 @@ model KnowledgeSource {
   kind: KnowledgeSourceKind;
 }
 
-@added(Versions.v2025_05_01_preview)
-@removed(Versions.v2025_11_01)
-@doc("File knowledge source.")
-model ReferenceKnowledgeSource extends KnowledgeSource {
-  @doc("A blob container containing reference data for analysis.")
-  kind: KnowledgeSourceKind.reference;
+// @added(Versions.v2025_05_01_preview)
+// @removed(Versions.v2025_11_01)
+// @doc("File knowledge source.")
+// model ReferenceKnowledgeSource extends KnowledgeSource {
+//   @doc("A blob container containing reference data for analysis.")
+//   kind: KnowledgeSourceKind.reference;
 
-  @doc("The URL of the blob container.")
-  containerUrl: url;
+//   @doc("The URL of the blob container.")
+//   containerUrl: url;
 
-  @doc("An optional prefix to filter blobs within the container.")
-  prefix?: string;
+//   @doc("An optional prefix to filter blobs within the container.")
+//   prefix?: string;
 
-  @doc("Path to a file listing specific blobs to include.")
-  fileListPath: string;
-}
+//   @doc("Path to a file listing specific blobs to include.")
+//   fileListPath: string;
+// }
 
 @added(Versions.v2025_11_01)
 @doc("Labeled data knowledge source.")
@@ -238,14 +238,14 @@ model ContentAnalyzerConfig {
   @doc("List of locale hints for speech transcription.")
   locales?: string[];
 
-  @removed(Versions.v2025_11_01)
-  @doc("Enable face detection.")
-  enableFace?: boolean;
+  // @removed(Versions.v2025_11_01)
+  // @doc("Enable face detection.")
+  // enableFace?: boolean;
 
-  @added(Versions.v2025_05_01_preview)
-  @removed(Versions.v2025_11_01)
-  @doc("Specify the person directory used for identifying detected faces.")
-  personDirectoryId?: string;
+  // @added(Versions.v2025_05_01_preview)
+  // @removed(Versions.v2025_11_01)
+  // @doc("Specify the person directory used for identifying detected faces.")
+  // personDirectoryId?: string;
 
   @doc("Enable optical character recognition (OCR).")
   enableOcr?: boolean;
@@ -261,14 +261,14 @@ model ContentAnalyzerConfig {
   @doc("Enable analysis of figures, such as charts and diagrams.")
   enableFigureAnalysis?: boolean;
 
-  @removed(Versions.v2025_05_01_preview)
-  @doc("Enable barcode detection.")
-  enableBarcode?: boolean;
+  // @removed(Versions.v2025_05_01_preview)
+  // @doc("Enable barcode detection.")
+  // enableBarcode?: boolean;
 
   @doc("Enable mathematical formula detection.")
   enableFormula?: boolean;
 
-  @added(Versions.v2025_05_01_preview)
+  // @added(Versions.v2025_05_01_preview)
   @doc("Representation format of tables in analyze result markdown.")
   tableFormat?: TableFormat = TableFormat.html;
 
@@ -280,28 +280,28 @@ model ContentAnalyzerConfig {
   @doc("Representation format of annotations in analyze result markdown.")
   annotationFormat?: AnnotationFormat = AnnotationFormat.markdown;
 
-  @added(Versions.v2025_05_01_preview)
+  // @added(Versions.v2025_05_01_preview)
   @doc("Disable the default blurring of faces for privacy while processing the content.")
   disableFaceBlurring?: boolean;
 
-  @added(Versions.v2025_05_01_preview)
-  @removed(Versions.v2025_11_01)
-  @doc("Disable content filtering that detects and prevents the output of harmful content.")
-  disableContentFiltering?: boolean;
+  // @added(Versions.v2025_05_01_preview)
+  // @removed(Versions.v2025_11_01)
+  // @doc("Disable content filtering that detects and prevents the output of harmful content.")
+  // disableContentFiltering?: boolean;
 
-  @added(Versions.v2025_05_01_preview)
+  // @added(Versions.v2025_05_01_preview)
   @doc("Return field grounding source and confidence.")
   estimateFieldSourceAndConfidence?: boolean;
 
-  @added(Versions.v2025_05_01_preview)
-  @removed(Versions.v2025_11_01)
-  @doc("Segmentation mode used to split audio/visual content.")
-  segmentationMode?: SegmentationMode = SegmentationMode.noSegmentation;
+  // @added(Versions.v2025_05_01_preview)
+  // @removed(Versions.v2025_11_01)
+  // @doc("Segmentation mode used to split audio/visual content.")
+  // segmentationMode?: SegmentationMode = SegmentationMode.noSegmentation;
 
-  @added(Versions.v2025_05_01_preview)
-  @removed(Versions.v2025_11_01)
-  @doc("Segmentation definition for use with custom segmentation mode.")
-  segmentationDefinition?: string;
+  // @added(Versions.v2025_05_01_preview)
+  // @removed(Versions.v2025_11_01)
+  // @doc("Segmentation definition for use with custom segmentation mode.")
+  // segmentationDefinition?: string;
 
   @added(Versions.v2025_11_01)
   @doc("Map of categories to classify the input content(s) against.")
@@ -323,7 +323,7 @@ model ContentAnalyzerConfig {
   omitContent?: boolean;
 }
 
-@added(Versions.v2025_05_01_preview)
+// @added(Versions.v2025_05_01_preview)
 @doc("Representation format of tables in analyze result markdown.")
 union TableFormat {
   string,
@@ -360,50 +360,54 @@ union AnnotationFormat {
   markdown: "markdown",
 }
 
-@added(Versions.v2025_05_01_preview)
-@doc("Segmentation mode used to split audio/visual content.")
-union SegmentationMode {
-  string,
+// @added(Versions.v2025_05_01_preview)
+// @removed(Versions.v2025_11_01)
+// @doc("Segmentation mode used to split audio/visual content.")
+// union SegmentationMode {
+//   string,
 
-  @doc("No segmentation.")
-  noSegmentation: "noSegmentation",
+//   @doc("No segmentation.")
+//   noSegmentation: "noSegmentation",
 
-  @doc("Automatic segmentation.")
-  auto: "auto",
+//   @doc("Automatic segmentation.")
+//   auto: "auto",
 
-  @doc("Segment according to custom segmentation definition.")
-  custom: "custom",
-}
+//   @doc("Segment according to custom segmentation definition.")
+//   custom: "custom",
+// }
 
-@doc("Data source kind.")
-union DataSourceKind {
-  string,
+// @removed(Versions.v2025_11_01)
+// @doc("Data source kind.")
+// union DataSourceKind {
+//   string,
 
-  @doc("A blob storage data source.")
-  blob: "blob",
-}
+//   @doc("A blob storage data source.")
+//   blob: "blob",
+// }
 
-@doc("Data source specifying a set of documents.")
-@discriminator("kind")
-model DataSource {
-  @doc("The kind of data source.")
-  kind: DataSourceKind;
-}
+// @removed(Versions.v2025_11_01)
+// @doc("Data source specifying a set of documents.")
+// @discriminator("kind")
+// model DataSource {
+//   @doc("The kind of data source.")
+//   kind: DataSourceKind;
+// }
 
-@doc("Blob storage data source.")
-model BlobDataSource extends DataSource {
-  @doc("Indicates that the data source is a blob.")
-  kind: "blob";
+// @removed(Versions.v2025_11_01)
+// @doc("Blob storage data source.")
+// model BlobDataSource extends DataSource {
+//   @doc("Indicates that the data source is a blob.")
+//   kind: "blob";
 
-  @doc("The URL of the blob container.")
-  containerUrl: url;
+//   @doc("The URL of the blob container.")
+//   containerUrl: url;
 
-  @doc("An optional prefix to filter blobs within the container.")
-  prefix?: string;
+//   @doc("An optional prefix to filter blobs within the container.")
+//   prefix?: string;
 
-  @doc("An optional path to a file listing specific blobs to include.")
-  fileListPath?: string;
-}
+//   @doc("An optional path to a file listing specific blobs to include.")
+//   fileListPath?: string;
+// }
 
 @doc("Definition of the field using a JSON Schema like syntax.")
 model ContentFieldDefinition {
@@ -501,7 +505,7 @@ model ContentCategoryDefinition {
 
 @doc("Analyze operation parameters.")
 model AnalyzeParameters {
-  @added(Versions.v2025_05_01_preview)
+  // @added(Versions.v2025_05_01_preview)
   @doc("""
       The string encoding format for content spans in the response.
       Possible values are 'codePoint', 'utf16', and `utf8`.  Default is `codePoint`.")
@@ -509,7 +513,7 @@ model AnalyzeParameters {
   @query
   stringEncoding?: string = "codePoint";
 
-  @added(Versions.v2025_05_01_preview)
+  // @added(Versions.v2025_05_01_preview)
   @doc("The location where the data may be processed.  Defaults to global.")
   @query
   processingLocation?: ProcessingLocation = ProcessingLocation.global;
@@ -528,7 +532,7 @@ model AnalyzeRequest {
   // @doc("Base64-encoded binary content of the primary input to analyze.  Only one of url or data should be specified.")
   // data?: bytes;
 
-  @added(Versions.v2025_05_01_preview)
+  // @added(Versions.v2025_05_01_preview)
   @doc("Inputs to analyze.  Currently, only pro mode supports multiple inputs.")
   inputs?: AnalyzeInput[];
 
@@ -547,7 +551,7 @@ model AnalyzeRequest {
   """)
 scalar RangeExpression extends string;
 
-@added(Versions.v2025_05_01_preview)
+// @added(Versions.v2025_05_01_preview)
 @doc("Additional input to analyze.")
 model AnalyzeInput {
   @doc("The URL of the input to analyze.  Only one of url or data should be specified.")
@@ -605,7 +609,7 @@ model AnalyzeResult {
   @doc("Warnings encountered while analyzing the document.")
   warnings?: Azure.Core.Foundations.Error[];
 
-  @added(Versions.v2025_05_01_preview)
+  // @added(Versions.v2025_05_01_preview)
   @doc("""
       The string encoding format for content spans in the response.
       Possible values are 'codePoint', 'utf16', and `utf8`.  Default is `codePoint`.")
@@ -633,7 +637,7 @@ model MediaContent {
   @doc("Content kind.")
   kind: MediaContentKind;
 
-  @added(Versions.v2025_05_01_preview)
+  // @added(Versions.v2025_05_01_preview)
   @doc("Detected MIME type of the content.  Ex. application/pdf, image/jpeg, etc.")
   mimeType: string;
 
@@ -642,11 +646,11 @@ model MediaContent {
   @pattern("^[a-zA-Z0-9._-]{1,64}$")
   analyzerId?: string;
 
-  @added(Versions.v2025_05_01_preview)
+  // @added(Versions.v2025_05_01_preview)
   @doc("Classified content category.")
   category?: string;
 
-  @added(Versions.v2025_05_01_preview)
+  // @added(Versions.v2025_05_01_preview)
   @doc("The path of the content in the input.")
   path?: string;
 

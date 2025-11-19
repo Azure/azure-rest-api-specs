@@ -105,39 +105,39 @@ interface ContentAnalyzers {
     ServiceTraits
   >;
 
+  // #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  // @removed(Versions.v2025_05_01_preview)
+  // @doc("Get an image associated with the result of an analysis operation.")
+  // @route("/analyzers/{analyzerId}/results/{operationId}/images/{imageId}")
+  // @get
+  // getResultImage is Foundations.Operation<
+  //   {
+  //     @doc("Analyzer identifier.")
+  //     @path
+  //     analyzerId: string;
+
+  //     @doc("Operation identifier.")
+  //     @path
+  //     operationId: string;
+
+  //     @doc("Image identifier.")
+  //     @path
+  //     imageId: string;
+  //   },
+  //   {
+  //     @doc("Response content type.")
+  //     @header
+  //     contentType: "image/*";
+
+  //     @doc("Image content.")
+  //     @bodyRoot
+  //     image: bytes;
+  //   },
+  //   ServiceTraits
+  // >;
+
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  @removed(Versions.v2025_05_01_preview)
-  @doc("Get an image associated with the result of an analysis operation.")
-  @route("/analyzers/{analyzerId}/results/{operationId}/images/{imageId}")
-  @get
-  getResultImage is Foundations.Operation<
-    {
-      @doc("Analyzer identifier.")
-      @path
-      analyzerId: string;
-
-      @doc("Operation identifier.")
-      @path
-      operationId: string;
-
-      @doc("Image identifier.")
-      @path
-      imageId: string;
-    },
-    {
-      @doc("Response content type.")
-      @header
-      contentType: "image/*";
-
-      @doc("Image content.")
-      @bodyRoot
-      image: bytes;
-    },
-    ServiceTraits
-  >;
-
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  @added(Versions.v2025_05_01_preview)
+  // @added(Versions.v2025_05_01_preview)
   @doc("Get a file associated with the result of an analysis operation.")
   @route("/analyzerResults/{operationId}/files/{+path}")
   @get

@@ -97,6 +97,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Get Analysis Result": {
+            "$ref": "./examples/ContentAnalyzers_GetResult.json"
+          }
         }
       },
       "delete": {
@@ -129,6 +134,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Analyzer": {
+            "$ref": "./examples/ContentAnalyzers_DeleteResult.json"
           }
         }
       }
@@ -180,6 +190,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Get Analysis Result File": {
+            "$ref": "./examples/ContentAnalyzers_GetResultFile.json"
+          }
         }
       }
     },
@@ -220,6 +235,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "List Analyzers": {
+            "$ref": "./examples/ContentAnalyzers_List.json"
           }
         },
         "x-ms-pageable": {
@@ -272,6 +292,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get Analyzer": {
+            "$ref": "./examples/ContentAnalyzers_GetAnalyzer.json"
           }
         }
       },
@@ -361,6 +386,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create or Replace Analyzer": {
+            "$ref": "./examples/ContentAnalyzers_CreateOrReplace.json"
+          }
+        },
         "x-ms-long-running-operation": true
       },
       "patch": {
@@ -420,6 +450,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Update Analyzer": {
+            "$ref": "./examples/ContentAnalyzers_Update.json"
+          }
         }
       },
       "delete": {
@@ -463,6 +498,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Analyzer": {
+            "$ref": "./examples/ContentAnalyzers_DeleteAnalyzer.json"
           }
         }
       }
@@ -556,6 +596,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Analyze URL": {
+            "$ref": "./examples/ContentAnalyzers_Analyze.json"
+          }
+        },
         "x-ms-long-running-operation": true
       }
     },
@@ -647,6 +692,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Analyze File": {
+            "$ref": "./examples/ContentAnalyzers_AnalyzeBinary.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -760,6 +810,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Copy Analyzer": {
+            "$ref": "./examples/ContentAnalyzers_Copy.json"
+          }
+        },
         "x-ms-long-running-operation": true
       }
     },
@@ -830,6 +885,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Grant Copy Authorization": {
+            "$ref": "./examples/ContentAnalyzers_GrantCopyAuthorization.json"
+          }
         }
       }
     },
@@ -876,6 +936,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Get Analyzer Operation Status": {
+            "$ref": "./examples/ContentAnalyzers_GetOperationStatus.json"
+          }
         }
       }
     },
@@ -906,6 +971,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get Defaults": {
+            "$ref": "./examples/ContentAnalyzers_GetDefaults.json"
           }
         }
       },
@@ -946,6 +1016,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Update Defaults": {
+            "$ref": "./examples/ContentAnalyzers_UpdateDefaults.json"
           }
         }
       }
@@ -1998,25 +2073,6 @@
       ],
       "x-ms-discriminator-value": "date"
     },
-    "DetectedPerson": {
-      "type": "object",
-      "description": "Detected person.",
-      "properties": {
-        "personId": {
-          "type": "string",
-          "description": "Person identifier in the optional person directory if found.  Otherwise, each unknown person is assigned a unique `Person-{Number}`."
-        },
-        "confidence": {
-          "type": "number",
-          "format": "float",
-          "description": "Confidence of the person identification, if a person directory is provided."
-        },
-        "source": {
-          "$ref": "#/definitions/SourceExpression",
-          "description": "Encoded source that identifies the position of the person in the input content."
-        }
-      }
-    },
     "DocumentAnnotation": {
       "type": "object",
       "description": "Annotation in a document, such as a strikethrough or a comment.",
@@ -2406,13 +2462,6 @@
           "description": "List of figures in the document.  Only if enableLayout and returnDetails are true.",
           "items": {
             "$ref": "#/definitions/DocumentFigure"
-          }
-        },
-        "persons": {
-          "type": "array",
-          "description": "List of detected persons in the document.  Only if enableFace and returnDetails are true.",
-          "items": {
-            "$ref": "#/definitions/DetectedPerson"
           }
         },
         "annotations": {

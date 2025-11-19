@@ -42,9 +42,10 @@ model DocumentContent extends MediaContent {
   @doc("List of figures in the document.  Only if enableLayout and returnDetails are true.")
   figures?: DocumentFigure[];
 
-  @added(Versions.v2025_05_01_preview)
-  @doc("List of detected persons in the document.  Only if enableFace and returnDetails are true.")
-  persons?: DetectedPerson[];
+  // @added(Versions.v2025_05_01_preview)
+  // @removed(Versions.v2025_11_01)
+  // @doc("List of detected persons in the document.  Only if enableFace and returnDetails are true.")
+  // persons?: DetectedPerson[];
 
   @added(Versions.v2025_11_01)
   @doc("List of annotations in the document.  Only if enableAnnotations and returnDetails are true.")
@@ -488,18 +489,18 @@ union DocumentTableCellKind {
   description: "description",
 }
 
-@removed(Versions.v2025_05_01_preview)
-@doc("Face in an image.")
-model ImageFace {
-  @doc("Face identifier.")
-  faceId?: string;
+// @removed(Versions.v2025_05_01_preview)
+// @doc("Face in an image.")
+// model ImageFace {
+//   @doc("Face identifier.")
+//   faceId?: string;
 
-  @doc("Confidence of predicting the face.")
-  confidence?: float32;
+//   @doc("Confidence of predicting the face.")
+//   confidence?: float32;
 
-  @doc("Encoded source that identifies the position of the face in the content.")
-  source?: SourceExpression;
-}
+//   @doc("Encoded source that identifies the position of the face in the content.")
+//   source?: SourceExpression;
+// }
 
 @added(Versions.v2025_11_01)
 @doc("Annotation in a document, such as a strikethrough or a comment.")
