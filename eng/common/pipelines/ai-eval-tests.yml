@@ -50,7 +50,7 @@ jobs:
           - Name: ${{ parameters.ToolsRepoOwner }}/${{ parameters.ToolsRepoName }}
             WorkingDirectory: $(System.DefaultWorkingDirectory)/${{ parameters.ToolsRepoName }}
         Paths:
-          - 'tools/azsdk-cli/**'
+          - 'tools/**'
     
     - task: AzureCLI@2
       displayName: 'Run eval'
