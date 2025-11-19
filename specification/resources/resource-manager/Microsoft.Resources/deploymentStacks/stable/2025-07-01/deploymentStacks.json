@@ -2356,8 +2356,11 @@
           "description": "The URI of parameters file. Use this element to link to an existing parameters file. Use either the parametersLink property or the parameters property, but not both."
         },
         "extensionConfigs": {
-          "$ref": "#/definitions/DeploymentExtensionConfig",
+          "type": "object",
           "description": "The deployment extension configs. Keys of this object are extension aliases as defined in the deployment template.",
+          "additionalProperties": {
+            "$ref": "#/definitions/DeploymentExtensionConfig"
+          },
           "x-ms-mutability": [
             "update",
             "create"
@@ -3286,8 +3289,11 @@
           "description": "The URI of parameters file. Use this element to link to an existing parameters file. Use either the parametersLink property or the parameters property, but not both."
         },
         "extensionConfigs": {
-          "$ref": "#/definitions/DeploymentExtensionConfig",
+          "type": "object",
           "description": "The deployment extension configs. Keys of this object are extension aliases as defined in the deployment template.",
+          "additionalProperties": {
+            "$ref": "#/definitions/DeploymentExtensionConfig"
+          },
           "x-ms-mutability": [
             "update",
             "create"

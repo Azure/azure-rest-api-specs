@@ -275,7 +275,7 @@ alias DeploymentStackSharedProperties = {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "The keys of the object are determined by the deployment template."
   @added(Versions.v2025_07_01)
   @visibility(Lifecycle.Create, Lifecycle.Update)
-  extensionConfigs?: DeploymentExtensionConfig;
+  extensionConfigs?: Record<DeploymentExtensionConfig>;
 
   /**
    * External input values, used by external tooling for parameter evaluation.
