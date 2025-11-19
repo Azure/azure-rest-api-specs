@@ -2383,11 +2383,15 @@
     "ActionResponse": {
       "allOf": [
         {
-          "$ref": "../../../common/2.0/types.json#/definitions/ResourceWithEtag"
+          "$ref": "../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
         }
       ],
       "description": "Action for alert rule.",
       "properties": {
+        "etag": {
+          "description": "Etag of the action.",
+          "type": "string"
+        },
         "properties": {
           "$ref": "#/definitions/ActionResponseProperties",
           "description": "Action properties for get request",
