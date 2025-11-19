@@ -734,24 +734,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "sourceAzureResourceId": {
-                  "type": "string",
-                  "description": "Azure resource ID of the source analyzer location.  Defaults to the current resource."
-                },
-                "sourceRegion": {
-                  "type": "string",
-                  "description": "Azure region of the source analyzer location.  Defaults to current region."
-                },
-                "sourceAnalyzerId": {
-                  "type": "string",
-                  "description": "Source analyzer ID."
-                }
-              },
-              "required": [
-                "sourceAnalyzerId"
-              ]
+              "$ref": "#/definitions/CopyRequest"
             }
           }
         ],
@@ -842,20 +825,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "targetAzureResourceId": {
-                  "type": "string",
-                  "description": "Azure resource ID of the target analyzer location."
-                },
-                "targetRegion": {
-                  "type": "string",
-                  "description": "Azure region of the target analyzer location.  Defaults to current region."
-                }
-              },
-              "required": [
-                "targetAzureResourceId"
-              ]
+              "$ref": "#/definitions/GrantCopyAuthorizationRequest"
             }
           }
         ],
@@ -2056,6 +2026,27 @@
         "expiresAt"
       ]
     },
+    "CopyRequest": {
+      "type": "object",
+      "description": "Copy operation request.",
+      "properties": {
+        "sourceAzureResourceId": {
+          "type": "string",
+          "description": "Azure resource ID of the source analyzer location.  Defaults to the current resource."
+        },
+        "sourceRegion": {
+          "type": "string",
+          "description": "Azure region of the source analyzer location.  Defaults to current region."
+        },
+        "sourceAnalyzerId": {
+          "type": "string",
+          "description": "Source analyzer ID."
+        }
+      },
+      "required": [
+        "sourceAnalyzerId"
+      ]
+    },
     "DateField": {
       "type": "object",
       "description": "Date field extracted from the content.",
@@ -3082,6 +3073,23 @@
           }
         ]
       }
+    },
+    "GrantCopyAuthorizationRequest": {
+      "type": "object",
+      "description": "Grant copy authorization request.",
+      "properties": {
+        "targetAzureResourceId": {
+          "type": "string",
+          "description": "Azure resource ID of the target analyzer location."
+        },
+        "targetRegion": {
+          "type": "string",
+          "description": "Azure region of the target analyzer location.  Defaults to current region."
+        }
+      },
+      "required": [
+        "targetAzureResourceId"
+      ]
     },
     "IntegerField": {
       "type": "object",

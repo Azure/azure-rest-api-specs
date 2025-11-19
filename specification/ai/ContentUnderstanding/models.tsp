@@ -849,3 +849,26 @@ model ContentUnderstandingDefaults {
   @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
   modelDeployments: Record<string>;
 }
+
+@added(Versions.v2025_11_01)
+@doc("Copy operation request.")
+model CopyRequest {
+  @doc("Azure resource ID of the source analyzer location.  Defaults to the current resource.")
+  sourceAzureResourceId?: string;
+
+  @doc("Azure region of the source analyzer location.  Defaults to current region.")
+  sourceRegion?: string;
+
+  @doc("Source analyzer ID.")
+  sourceAnalyzerId: string;
+}
+
+@added(Versions.v2025_11_01)
+@doc("Grant copy authorization request.")
+model GrantCopyAuthorizationRequest {
+  @doc("Azure resource ID of the target analyzer location.")
+  targetAzureResourceId: string;
+
+  @doc("Azure region of the target analyzer location.  Defaults to current region.")
+  targetRegion?: string;
+}

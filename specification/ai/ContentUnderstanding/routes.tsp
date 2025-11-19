@@ -183,16 +183,7 @@ interface ContentAnalyzers {
   @pollingOperation(ContentAnalyzers.getOperationStatus)
   copy is Operations.LongRunningResourceAction<
     ContentAnalyzer,
-    {
-      @doc("Azure resource ID of the source analyzer location.  Defaults to the current resource.")
-      sourceAzureResourceId?: string;
-
-      @doc("Azure region of the source analyzer location.  Defaults to current region.")
-      sourceRegion?: string;
-
-      @doc("Source analyzer ID.")
-      sourceAnalyzerId: string;
-    },
+    CopyRequest,
     ContentAnalyzer,
     Foundations.Error,
     AllowReplaceTrait
@@ -202,13 +193,7 @@ interface ContentAnalyzers {
   @doc("Get authorization for copying this analyzer to another location.")
   grantCopyAuthorization is Operations.ResourceAction<
     ContentAnalyzer,
-    {
-      @doc("Azure resource ID of the target analyzer location.")
-      targetAzureResourceId: string;
-
-      @doc("Azure region of the target analyzer location.  Defaults to current region.")
-      targetRegion?: string;
-    },
+    GrantCopyAuthorizationRequest,
     CopyAuthorization
   >;
 
