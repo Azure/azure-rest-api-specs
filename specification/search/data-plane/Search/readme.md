@@ -35,11 +35,13 @@ These settings apply only when `--tag=package-2025-11-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2025-11-01-preview'
 input-file:
-  - preview/2025-11-01-preview/examples/KnowledgeBaseRetrieveWithIntents.json
-  - preview/2025-11-01-preview/examples/KnowledgeBaseRetrieve.json
+  - preview/2025-11-01-preview/search.json
 suppressions:
   - code: DISCRIMINATOR_VALUE_NOT_FOUND
-    from: search.json
+    from: KnowledgeBaseRetrieveWithIntents.json
+    reason: Multi-Level Discrimination
+  - code: DISCRIMINATOR_VALUE_NOT_FOUND
+    from: KnowledgeBaseRetrieve.json
     reason: Multi-Level Discrimination
 ```
 
