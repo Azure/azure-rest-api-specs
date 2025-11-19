@@ -162,7 +162,10 @@ interface ContainerRegistry {
       @path
       name: string;
     },
-    DeleteRepositoryResult
+    {
+      @statusCode statusCode: 202;
+      @bodyRoot body: DeleteRepositoryResult;
+    }
   >;
 
   /**
