@@ -37,6 +37,9 @@ These settings apply only when `--tag=package-2025-11-01-preview` is specified o
 input-file:
   - preview/2025-11-01-preview/search.json
 suppressions:
+  - code: LroExtension
+    from: search.json
+    reason: Legacy swagger file
   - code: DISCRIMINATOR_VALUE_NOT_FOUND
     from: KnowledgeBaseRetrieveWithIntents.json
     reason: Multi-Level Discrimination
