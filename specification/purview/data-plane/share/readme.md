@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2021-09-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2021-09-01-preview'
 input-file:
-  - Azure.Analytics.Purview.Share/preview/2021-09-01-preview/share.json
+  - preview/2021-09-01-preview/share.json
 ```
 
 ``` yaml
@@ -51,7 +51,7 @@ These settings apply only when `--tag=package-2023-02-15-preview` is specified o
 
 ``` yaml $(tag) == 'package-2023-02-15-preview'
 input-file:
-  - Azure.Analytics.Purview.Share/preview/2023-02-15-preview/share.json
+  - preview/2023-02-15-preview/share.json
 ```
 
 ``` yaml
@@ -66,7 +66,7 @@ These settings apply only when `--tag=package-2023-05-30-preview` is specified o
 
 ``` yaml $(tag) == 'package-2023-05-30-preview'
 input-file:
-  - Azure.Analytics.Purview.Share/preview/2023-05-30-preview/share.json
+  - preview/2023-05-30-preview/share.json
 ```
 
 ---

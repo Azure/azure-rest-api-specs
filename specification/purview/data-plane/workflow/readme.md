@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2022-05-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2022-05-01-preview'
 input-file:
-- Azure.Analytics.Purview.Workflow/preview/2022-05-01-preview/purviewWorkflow.json
+- preview/2022-05-01-preview/purviewWorkflow.json
 ```
 
 ### Tag: package-2023-10-01-preview
@@ -44,7 +44,7 @@ These settings apply only when `--tag=package-2023-10-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2023-10-01-preview'
 input-file:
-- Azure.Analytics.Purview.Workflow/preview/2023-10-01-preview/purviewWorkflow.json
+- preview/2023-10-01-preview/purviewWorkflow.json
 ```
 
 ---

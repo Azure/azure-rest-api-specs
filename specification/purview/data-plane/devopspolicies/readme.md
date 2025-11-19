@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2022-11-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2022-11-01-preview'
 input-file:
-  - Azure.Analytics.Purview.DevopsPolicies/preview/2022-11-01-preview/purviewDevopsPolicy.json
+  - preview/2022-11-01-preview/purviewDevopsPolicy.json
 ```
 
 ---

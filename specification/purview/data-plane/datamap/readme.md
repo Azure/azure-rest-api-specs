@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-preview-2024-03` is specified on t
 
 ```yaml $(tag) == 'package-preview-2024-03'
 input-file:
-  - Azure.Analytics.Purview.DataMap/preview/2024-03-01-preview/purviewdatamap.json
+  - preview/2024-03-01-preview/purviewdatamap.json
 ```
 ### Tag: package-preview-2023-10
 
@@ -44,7 +44,7 @@ These settings apply only when `--tag=package-preview-2023-10` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2023-10'
 input-file:
-  - Azure.Analytics.Purview.DataMap/preview/2023-10-01-preview/purviewdatamap.json
+  - preview/2023-10-01-preview/purviewdatamap.json
 ```
 
 ### Tag: package-2023-09
@@ -53,7 +53,7 @@ These settings apply only when `--tag=package-2023-09` is specified on the comma
 
 ``` yaml $(tag) == 'package-2023-09'
 input-file:
-  - Azure.Analytics.Purview.DataMap/stable/2023-09-01/purviewdatamap.json
+  - stable/2023-09-01/purviewdatamap.json
 ```
 
 ---
