@@ -29,6 +29,10 @@ options:
     flavor: azure
     generate-test: true
     generate-sample: true
+  '@azure-tools/typespec-rust':
+    crate-name: azure_ai_documentintelligence
+    crate-version: 0.0.1
+    emitter-output-dir: '{output-dir}/{service-dir}/{crate-name}'
   "@azure-tools/typespec-java":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-documentintelligence"
     namespace: "com.azure.ai.documentintelligence"
@@ -36,17 +40,22 @@ options:
     custom-types-subpackage: "implementation.models"
     generate-tests: false
     partial-update: true
-    customization-class: customization/src/main/java/DocumentIntelligenceCustomizations.java
+    customization-class: 
+      customization/src/main/java/DocumentIntelligenceCustomizations.java
     use-eclipse-language-server: false
     polling:
       buildDocumentModel:
-        final-type: com.azure.ai.documentintelligence.models.DocumentModelDetails
+        final-type: 
+          com.azure.ai.documentintelligence.models.DocumentModelDetails
       buildClassifier:
-        final-type: com.azure.ai.documentintelligence.models.DocumentClassifierDetails
+        final-type: 
+          com.azure.ai.documentintelligence.models.DocumentClassifierDetails
       composeModel:
-        final-type: com.azure.ai.documentintelligence.models.DocumentModelDetails
+        final-type: 
+          com.azure.ai.documentintelligence.models.DocumentModelDetails
       copyModelTo:
-        final-type: com.azure.ai.documentintelligence.models.DocumentModelDetails
+        final-type: 
+          com.azure.ai.documentintelligence.models.DocumentModelDetails
     flavor: azure
   "@azure-tools/typespec-csharp":
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"

@@ -44,6 +44,10 @@ options:
     flavor: azure
     generate-test: true
     generate-sample: true
+  '@azure-tools/typespec-rust':
+    crate-name: azure_communication_messages
+    crate-version: 0.0.1
+    emitter-output-dir: '{output-dir}/{service-dir}/{crate-name}'
   "@azure-tools/typespec-java":
     api-version: "2025-01-15-preview"
     emitter-output-dir: "{output-dir}/{service-dir}/azure-communication-messages"
@@ -52,7 +56,8 @@ options:
     service-name: Messages
     custom-types-subpackage: "models.channels"
     custom-types: "WhatsAppButtonActionBindings,WhatsAppListActionBindings,WhatsAppUrlActionBindings,WhatsAppMessageButtonSubType,WhatsAppMessageTemplateBindings,WhatsAppMessageTemplateBindingsButton,WhatsAppMessageTemplateBindingsComponent,WhatsAppMessageTemplateItem"
-    customization-class: customization/src/main/java/MessagesSdkCustomization.java
+    customization-class: 
+      customization/src/main/java/MessagesSdkCustomization.java
     use-eclipse-language-server: false
     flavor: azure
   "@azure-tools/typespec-ts":

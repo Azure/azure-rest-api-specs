@@ -19,6 +19,10 @@ options:
     flavor: azure
     generate-test: true
     generate-sample: true
+  '@azure-tools/typespec-rust':
+    crate-name: azure_ai_vision_imageanalysis
+    crate-version: 0.0.1
+    emitter-output-dir: '{output-dir}/{service-dir}/{crate-name}'
   "@azure-tools/typespec-csharp":
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: "Azure.AI.Vision.ImageAnalysis"
@@ -34,7 +38,8 @@ options:
     namespace: "com.azure.ai.vision.imageanalysis"
     # We switched two public methods to private. Make sure this is not overridden next time the SDK is emitted.
     partial-update: true
-    customization-class: customization/src/main/java/ImageAnalysisCustomization.java
+    customization-class: 
+      customization/src/main/java/ImageAnalysisCustomization.java
     use-eclipse-language-server: false
     flavor: azure
   "@azure-tools/typespec-ts":

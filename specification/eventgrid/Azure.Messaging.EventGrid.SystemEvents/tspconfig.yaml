@@ -23,6 +23,10 @@ options:
     flavor: azure
     generate-test: true
     generate-sample: true
+  '@azure-tools/typespec-rust':
+    crate-name: azure_eventgrid
+    crate-version: 0.0.1
+    emitter-output-dir: '{output-dir}/{service-dir}/{crate-name}'
   "@azure-typespec/http-client-csharp":
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: Azure.Messaging.EventGrid.SystemEvents
@@ -52,7 +56,8 @@ options:
   "@azure-tools/typespec-java":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-messaging-eventgrid-systemevents"
     namespace: com.azure.messaging.eventgrid.systemevents
-    customization-class: customization/src/main/java/EventGridSystemEventsCustomization.java
+    customization-class: 
+      customization/src/main/java/EventGridSystemEventsCustomization.java
     use-eclipse-language-server: false
     custom-types-subpackage: implementation.models
     custom-types: AcsRouterCommunicationError,AcsMessageChannelEventError

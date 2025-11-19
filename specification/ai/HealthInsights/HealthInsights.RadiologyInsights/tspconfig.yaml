@@ -24,6 +24,10 @@ options:
     flavor: azure
     generate-test: true
     generate-sample: true
+  '@azure-tools/typespec-rust':
+    crate-name: azure_healthinsights_radiologyinsights
+    crate-version: 0.0.1
+    emitter-output-dir: '{output-dir}/{service-dir}/{crate-name}'
   "@azure-tools/typespec-java":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-health-insights-radiologyinsights"
     package-version: 1.1.0
@@ -33,7 +37,8 @@ options:
     use-object-for-unknown: true
     polling:
       inferRadiologyInsights:
-        final-type: com.azure.health.insights.radiologyinsights.models.RadiologyInsightsInferenceResult
+        final-type: 
+          com.azure.health.insights.radiologyinsights.models.RadiologyInsightsInferenceResult
     flavor: azure
     api-version: 2024-10-01
     service-version-exclude-preview: true

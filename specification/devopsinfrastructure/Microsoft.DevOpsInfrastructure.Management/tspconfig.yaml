@@ -5,7 +5,8 @@ linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
   disable:
-    "@azure-tools/typespec-azure-resource-manager/arm-common-types-version": "New rule"
+    "@azure-tools/typespec-azure-resource-manager/arm-common-types-version": "New
+      rule"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -21,6 +22,10 @@ options:
     flavor: "azure"
     generate-test: true
     generate-sample: true
+  '@azure-tools/typespec-rust':
+    crate-name: "azure_management_devopsinfrastructure"
+    crate-version: 0.0.1
+    emitter-output-dir: "{output-dir}/resource_manager/{service-dir}/{crate-name}"
   "@azure-tools/typespec-java":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-devopsinfrastructure"
     flavor: "azure"

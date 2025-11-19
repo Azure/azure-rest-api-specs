@@ -43,6 +43,10 @@ options:
     flavor: azure
     generate-test: true
     generate-sample: true
+  '@azure-tools/typespec-rust':
+    crate-name: azure_communication_jobrouter
+    crate-version: 0.0.1
+    emitter-output-dir: '{output-dir}/{service-dir}/{crate-name}'
   "@azure-tools/typespec-java":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-communication-jobrouter"
     namespace: com.azure.communication.jobrouter
@@ -50,7 +54,8 @@ options:
     service-name: JobRouter
     custom-types-subpackage: "implementation.models"
     custom-types: "CancelJobResultInternal,CloseJobResultInternal,CompleteJobResultInternal,DeclineJobOfferResultInternal,ReclassifyJobOptionsInternal,ReclassifyJobResultInternal"
-    customization-class: customization/src/main/java/JobRouterSdkCustomization.java
+    customization-class: 
+      customization/src/main/java/JobRouterSdkCustomization.java
     use-object-for-unknown: true
     use-eclipse-language-server: false
     flavor: azure

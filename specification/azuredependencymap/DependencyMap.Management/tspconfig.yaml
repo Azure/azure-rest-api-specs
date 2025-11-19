@@ -21,6 +21,10 @@ options:
     generate-test: true
     generate-sample: true
     flavor: "azure"
+  '@azure-tools/typespec-rust':
+    crate-name: "azure_management_dependencymap"
+    crate-version: 0.0.1
+    emitter-output-dir: "{output-dir}/resource_manager/{service-dir}/{crate-name}"
   "@azure-tools/typespec-java":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-dependencymap"
     namespace: "com.azure.resourcemanager.dependencymap"
@@ -69,7 +73,8 @@ options:
           default:
             script: "(Get-AzContext).Subscription.Id"
       - where:
-          variant: ^(Create|Update|Export)(?!.*?Expanded|ViaJsonString|ViaJsonFilePath)
+          variant: 
+            ^(Create|Update|Export)(?!.*?Expanded|ViaJsonString|ViaJsonFilePath)
         remove: true
       - where:
           subject: MapConnection

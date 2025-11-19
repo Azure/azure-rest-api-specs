@@ -18,6 +18,10 @@ options:
     generate-test: true
     generate-sample: true
     flavor: "azure"
+  '@azure-tools/typespec-rust':
+    crate-name: "azure_management_servicebus"
+    crate-version: 0.0.1
+    emitter-output-dir: "{output-dir}/resource_manager/{service-dir}/{crate-name}"
   "@azure-tools/typespec-java":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-servicebus"
     namespace: "com.azure.resourcemanager.servicebus"
@@ -28,7 +32,8 @@ options:
       EncryptionKeySource: KeySource
     use-object-for-unknown: true
     client-side-validations: true
-    customization-class: customization/src/main/java/ServiceBusCustomization.java
+    customization-class: 
+      customization/src/main/java/ServiceBusCustomization.java
     flavor: azure
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/arm-servicebus"
