@@ -489,6 +489,77 @@
           "description": "The status of the last operation.",
           "readOnly": true
         },
+        "configItem": {
+          "$ref": "#/definitions/TestConfigItem",
+          "description": "test"
+        },
+        "config": {
+          "type": "object",
+          "description": "test",
+          "additionalProperties": {
+            "$ref": "#/definitions/TestConfigItem"
+          }
+        },
+        "configs": {
+          "type": "object",
+          "description": "test",
+          "additionalProperties": {
+            "$ref": "#/definitions/TestConfig"
+          }
+        },
+        "testExtension": {
+          "$ref": "#/definitions/TestExtension",
+          "description": "test"
+        },
+        "testExtensions": {
+          "type": "array",
+          "description": "test",
+          "items": {
+            "$ref": "#/definitions/TestExtension"
+          }
+        }
+      }
+    },
+    "EmployeePropertiesUpdate": {
+      "type": "object",
+      "description": "Employee properties",
+      "properties": {
+        "age": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Age of employee"
+        },
+        "city": {
+          "type": "string",
+          "description": "City of employee"
+        },
+        "profile": {
+          "type": "string",
+          "format": "base64url",
+          "description": "Profile of employee"
+        },
+        "configItem": {
+          "$ref": "#/definitions/TestConfigItem",
+          "description": "test"
+        },
+        "config": {
+          "type": "object",
+          "description": "test",
+          "additionalProperties": {
+            "$ref": "#/definitions/TestConfigItem"
+          }
+        },
+        "configs": {
+          "type": "object",
+          "description": "test",
+          "additionalProperties": {
+            "$ref": "#/definitions/TestConfig"
+          }
+        },
+        "testExtension": {
+          "$ref": "#/definitions/TestExtensionUpdate",
+          "description": "test"
+        },
         "testExtensions": {
           "type": "array",
           "description": "test",
@@ -503,7 +574,7 @@
       "description": "Employee resource",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/EmployeeProperties",
+          "$ref": "#/definitions/EmployeePropertiesUpdate",
           "description": "The resource-specific properties for this resource."
         }
       },
@@ -603,6 +674,23 @@
       "required": [
         "name"
       ]
+    },
+    "TestExtensionUpdate": {
+      "type": "object",
+      "description": "test",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "test"
+        },
+        "config": {
+          "type": "object",
+          "description": "test",
+          "additionalProperties": {
+            "$ref": "#/definitions/TestConfig"
+          }
+        }
+      }
     }
   },
   "parameters": {}

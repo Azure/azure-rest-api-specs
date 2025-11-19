@@ -32,6 +32,20 @@ model EmployeeProperties {
   provisioningState?: ProvisioningState;
 
   /** test */
+  configItem?: TestConfigItem;
+
+  /** test */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
+  config?: Record<TestConfigItem>;
+
+  /** test */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
+  configs?: Record<TestConfig>;
+
+  /** test */
+  testExtension?: TestExtension;
+
+  /** test */
   testExtensions?: TestExtension[];
 }
 
