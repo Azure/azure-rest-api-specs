@@ -29,6 +29,7 @@ import { embedError } from "./spec-model.js";
  */
 
 const infoSchema = z.object({
+  "x-cadl-generated": z.array(z.object({ emitter: z.string().optional() })).optional(),
   "x-typespec-generated": z.array(z.object({ emitter: z.string().optional() })).optional(),
 });
 /**
@@ -297,6 +298,14 @@ export class Swagger {
     }
 
     return this.#operations;
+  }
+
+  /**
+   * @returns {Promise<boolean>} True if the spec was generated from TypeSpec
+   */
+  async getCadlGenerated() {
+    const contentObject = await this.#getContentObject();
+    return contentObject.info?.["x-cadl-generated"] !== undefined;
   }
 
   /**
