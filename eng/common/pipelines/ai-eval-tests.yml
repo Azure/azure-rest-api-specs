@@ -33,6 +33,9 @@ parameters:
 
 jobs:
   - job: Run_Eval
+    variables:
+      - template: /eng/pipelines/templates/variables/globals.yml
+      - template: /eng/pipelines/templates/variables/image.yml
     displayName: 'Run AI Eval'
     pool:
       name: $(LINUXPOOL)
