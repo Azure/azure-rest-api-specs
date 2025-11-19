@@ -26,7 +26,7 @@ These are the global settings for the Resource API.
 title: ManagementLinkClient
 description: ManagementLink Client
 openapi-type: arm
-tag: package-resources-2025-04
+tag: package-links-2016-09
 ```
 
 ### Tag: package-links-2016-09
