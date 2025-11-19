@@ -23,7 +23,11 @@ from datetime import datetime
 merge_log: List[Dict[str, Any]] = []
 
 
-def log_merge_operation(operation_type: str, context: str, details: Dict[str, Any]) -> None:
+def log_merge_operation(
+    operation_type: str,
+    context: str,
+    details: Dict[str, Any]
+) -> None:
     """Log a merge operation for later output to merge.log"""
     global merge_log
     merge_log.append({
@@ -56,11 +60,13 @@ def write_merge_log(output_path: str) -> None:
             f.write("\n")
 
 
-def write_differences_excel(differences: List[Dict[str, Any]], output_path: str) -> None:
-    """Write differences to Excel file with categorized sheets"""
-    if not differences:
-        return
-
+def write_diffs_excel(
+    diffs: List[Dict[str, Any]],
+    output_path: str,
+    hand_authored_canonical: dict = None,
+    typespec_canonical: dict = None
+) -> None:
+    """Write differences to Excel file with side-by-side comparison format"""
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     excel_file = Path(output_path) / f"diff_{timestamp}.xlsx"
     excel_file.parent.mkdir(parents=True, exist_ok=True)
@@ -75,7 +81,7 @@ def write_differences_excel(differences: List[Dict[str, Any]], output_path: str)
         'Other': []
     }
 
-    for diff in differences:
+    for diff in diffs:
         description = diff.get('description', '').lower()
         category = 'Other'  # default
 
@@ -92,58 +98,209 @@ def write_differences_excel(differences: List[Dict[str, Any]], output_path: str)
 
         categories[category].append(diff)
 
+    # Create side-by-side comparison data
+    def create_comparison_data(hand_authored_canonical, typespec_canonical):
+        """Create comprehensive comparison data including equal and different items"""
+        comparison_data = {
+            'Paths': [],
+            'Parameters': [],
+            'Responses': [],
+            'Definitions': [],
+            'Operations': [],
+            'Other': []
+        }
+
+        if not hand_authored_canonical or not typespec_canonical:
+            return comparison_data
+
+        # Compare paths
+        hand_paths = set()
+        tsp_paths = set()
+
+        # Extract paths from both specs
+        if 'paths' in hand_authored_canonical:
+            for path, methods in hand_authored_canonical['paths'].items():
+                for method in methods:
+                    hand_paths.add((path, method.upper()))
+
+        if 'paths' in typespec_canonical:
+            for path, methods in typespec_canonical['paths'].items():
+                for method in methods:
+                    tsp_paths.add((path, method.upper()))
+
+        # Create path comparisons
+        all_paths = hand_paths.union(tsp_paths)
+        for path, method in all_paths:
+            swagger_source = "searchservice"  # Default, could be enhanced to detect actual source
+            hand_has = (path, method) in hand_paths
+            tsp_has = (path, method) in tsp_paths
+
+            if hand_has and tsp_has:
+                diff_type = "Equal"
+                diff_details = ""
+            elif hand_has and not tsp_has:
+                diff_type = "Missing in TSP"
+                diff_details = f"Path {path} {method} exists in Swagger but not in TSP"
+            else:
+                diff_type = "Extra in TSP"
+                diff_details = f"Path {path} {method} exists in TSP but not in Swagger"
+
+            comparison_data['Paths'].append({
+                'swagger': swagger_source,
+                'path': path if hand_has else '',
+                'method': method if hand_has else '',
+                'operation_id': '',
+                'tsp_path': path if tsp_has else '',
+                'tsp_method': method if tsp_has else '',
+                'tsp_operation_id': '',
+                'diff_type': diff_type,
+                'diff_details': diff_details
+            })
+
+        return comparison_data
+
     # Create Excel writer
     with pd.ExcelWriter(excel_file, engine='openpyxl') as writer:
-        # Summary sheet
+        # Summary sheet (without percentage, with total)
         summary_data = []
+        total_count = 0
         for category, items in categories.items():
+            count = len(items)
+            total_count += count
             summary_data.append({
                 'Category': category,
-                'Count': len(items),
-                'Percentage': f"{len(items)/len(differences)*100:.1f}%" if differences else "0%"
+                'Count': count
             })
+
+        # Add total row
+        summary_data.append({
+            'Category': 'Total',
+            'Count': total_count
+        })
 
         summary_df = pd.DataFrame(summary_data)
         summary_df.to_excel(writer, sheet_name='Summary', index=False)
 
-        # Individual category sheets
-        for category, items in categories.items():
-            if not items:
-                continue
+        # Get comparison data
+        comparison_data = create_comparison_data(hand_authored_canonical, typespec_canonical)
 
-            df_data = []
-            for item in items:
-                df_data.append({
-                    'Path': item.get('path', ''),
-                    'Method': item.get('method', ''),
-                    'Operation ID': item.get('operation_id', ''),
-                    'Parameter': item.get('parameter', ''),
-                    'Response': item.get('response', ''),
-                    'Source': item.get('source', ''),
-                    'Description': item.get('description', ''),
-                    'Details': item.get('details', '')
-                })
+        # Paths sheet
+        if comparison_data['Paths']:
+            paths_df = pd.DataFrame(comparison_data['Paths'], columns=[
+                'Swagger', 'Path', 'Method', 'Operation ID', 'TSP Path', 'TSP Method', 'TSP Operation ID', 'Diff Type', 'Diff Details'
+            ])
+            paths_df.to_excel(writer, sheet_name='Paths', index=False)
 
-            df = pd.DataFrame(df_data)
-            df.to_excel(writer, sheet_name=category, index=False)
+        # Parameters sheet
+        params_data = []
+        for diff in categories['Parameters']:
+            # Extract parameter details from difference
+            swagger_source = diff.get('swagger_source', 'searchservice')
+            params_data.append({
+                'Swagger': swagger_source,
+                'Path': diff.get('path', ''),
+                'Method': diff.get('method', ''),
+                'Parameter Name': diff.get('parameter', ''),
+                'Parameter Type': '',
+                'Parameter Location': '',
+                'TSP Path': diff.get('tsp_path', ''),
+                'TSP Method': diff.get('tsp_method', ''),
+                'TSP Parameter Name': diff.get('tsp_parameter', ''),
+                'TSP Parameter Type': '',
+                'TSP Parameter Location': '',
+                'Diff Type': 'Different',
+                'Diff Details': diff.get('description', '')
+            })
 
-        # All differences sheet
-        all_data = []
-        for i, diff in enumerate(differences, 1):
-            all_data.append({
-                'ID': i,
+        if params_data:
+            params_df = pd.DataFrame(params_data)
+            params_df.to_excel(writer, sheet_name='Parameters', index=False)
+
+        # Responses sheet
+        responses_data = []
+        for diff in categories['Responses']:
+            swagger_source = diff.get('swagger_source', 'searchservice')
+            responses_data.append({
+                'Swagger': swagger_source,
+                'Path': diff.get('path', ''),
+                'Method': diff.get('method', ''),
+                'Response Code': diff.get('response', ''),
+                'Response Schema': '',
+                'TSP Path': diff.get('tsp_path', ''),
+                'TSP Method': diff.get('tsp_method', ''),
+                'TSP Response Code': diff.get('tsp_response', ''),
+                'TSP Response Schema': '',
+                'Diff Type': 'Different',
+                'Diff Details': diff.get('description', '')
+            })
+
+        if responses_data:
+            responses_df = pd.DataFrame(responses_data)
+            responses_df.to_excel(writer, sheet_name='Responses', index=False)
+
+        # Definitions sheet
+        definitions_data = []
+        for diff in categories['Definitions']:
+            swagger_source = diff.get('swagger_source', 'searchservice')
+            definitions_data.append({
+                'Swagger': swagger_source,
+                'Definition Name': '',
+                'Definition Type': '',
+                'Properties': '',
+                'TSP Definition Name': '',
+                'TSP Definition Type': '',
+                'TSP Properties': '',
+                'Diff Type': 'Different',
+                'Diff Details': diff.get('description', '')
+            })
+
+        if definitions_data:
+            definitions_df = pd.DataFrame(definitions_data)
+            definitions_df.to_excel(writer, sheet_name='Definitions', index=False)
+
+        # Operations sheet
+        operations_data = []
+        for diff in categories['Operations']:
+            swagger_source = diff.get('swagger_source', 'searchservice')
+            operations_data.append({
+                'Swagger': swagger_source,
                 'Path': diff.get('path', ''),
                 'Method': diff.get('method', ''),
                 'Operation ID': diff.get('operation_id', ''),
-                'Parameter': diff.get('parameter', ''),
-                'Response': diff.get('response', ''),
-                'Source': diff.get('source', ''),
-                'Description': diff.get('description', ''),
-                'Details': diff.get('details', '')
+                'Summary': '',
+                'Description': '',
+                'TSP Path': diff.get('tsp_path', ''),
+                'TSP Method': diff.get('tsp_method', ''),
+                'TSP Operation ID': diff.get('tsp_operation_id', ''),
+                'TSP Summary': '',
+                'TSP Description': '',
+                'Diff Type': 'Different',
+                'Diff Details': diff.get('description', '')
             })
 
-        all_df = pd.DataFrame(all_data)
-        all_df.to_excel(writer, sheet_name='All Differences', index=False)
+        if operations_data:
+            operations_df = pd.DataFrame(operations_data)
+            operations_df.to_excel(writer, sheet_name='Operations', index=False)
+
+        # Other sheet
+        other_data = []
+        for diff in categories['Other']:
+            swagger_source = diff.get('swagger_source', 'searchservice')
+            other_data.append({
+                'Swagger': swagger_source,
+                'Item Type': '',
+                'Item Name': '',
+                'Item Value': '',
+                'TSP Item Type': '',
+                'TSP Item Name': '',
+                'TSP Item Value': '',
+                'Diff Type': 'Different',
+                'Diff Details': diff.get('description', '')
+            })
+
+        if other_data:
+            other_df = pd.DataFrame(other_data)
+            other_df.to_excel(writer, sheet_name='Other', index=False)
 
 
 # Configuration classes and functions (from config.py)
@@ -379,7 +536,10 @@ def load_all_swagger_files(config) -> Dict[str, Dict[str, Any]]:
     return loaded_files
 
 
-def validate_swagger_structure(swagger_dict: Dict[str, Any], file_name: str) -> None:
+def validate_swagger_structure(
+    swagger_dict: Dict[str, Any],
+    file_name: str
+) -> None:
     """
     Validate that a loaded JSON dictionary has the basic structure of a Swagger file.
 
@@ -480,9 +640,13 @@ def _indent_text(text: str, indent_spaces: int) -> str:
     return "\n".join(indent + line for line in text.split("\n"))
 
 
-def merge_objects(target: Dict[str, Any], source: Dict[str, Any],
-                 context: str, allow_conflicts: bool = False,
-                 smart_merge: bool = False) -> None:
+def merge_objects(
+    target: Dict[str, Any],
+    source: Dict[str, Any],
+    context: str,
+    allow_conflicts: bool = False,
+    smart_merge: bool = False
+) -> None:
     """
     Merge source dictionary into target dictionary.
 
@@ -555,7 +719,11 @@ def _can_smart_merge(existing: Any, new: Any) -> bool:
     return False
 
 
-def _smart_merge_parameters(existing: Dict[str, Any], new: Dict[str, Any], context: str) -> Dict[str, Any]:
+def _smart_merge_parameters(
+    existing: Dict[str, Any],
+    new: Dict[str, Any],
+    context: str
+) -> Dict[str, Any]:
     """
     Intelligently merge two parameter definitions by combining their properties.
     Keeps all properties from both, with new taking precedence for conflicts.
@@ -664,8 +832,10 @@ def merge_definitions(swagger_files: Dict[str, Dict[str, Any]]) -> Dict[str, Any
     return merged_definitions
 
 
-def merge_top_level_fields(swagger_files: Dict[str, Dict[str, Any]],
-                          merged_swagger: Dict[str, Any]) -> None:
+def merge_top_level_fields(
+    swagger_files: Dict[str, Dict[str, Any]],
+    merged_swagger: Dict[str, Any]
+) -> None:
     """
     Merge top-level fields from the first available source.
 

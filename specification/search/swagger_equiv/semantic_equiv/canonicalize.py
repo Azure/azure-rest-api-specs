@@ -288,8 +288,10 @@ def canonicalize_swagger(swagger_dict: Dict[str, Any]) -> Dict[str, Any]:
         raise CanonicalizationError(f"Failed to canonicalize Swagger document: {e}")
 
 
-def canonicalize_both_specs(hand_authored_swagger: Dict[str, Any],
-                           typespec_swagger: Dict[str, Any]) -> tuple[Dict[str, Any], Dict[str, Any]]:
+def canonicalize_both_specs(
+    hand_authored_swagger: Dict[str, Any],
+    typespec_swagger: Dict[str, Any]
+) -> tuple[Dict[str, Any], Dict[str, Any]]:
     """
     Canonicalize both the hand-authored and TypeSpec-compiled Swagger documents.
 

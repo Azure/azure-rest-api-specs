@@ -101,9 +101,32 @@ Any missing or extra path/method → **not equivalent**.
 
 ## Operations
 
+### Operation Identification (Dual Strategy)
+
+Operations are matched using a **dual strategy approach** to ensure comprehensive comparison:
+
+**Strategy A: OperationID + Method Matching**
+- If two operations have the same `operationId` and HTTP method, they are considered the same operation
+- If their paths differ, this is flagged as a **path inconsistency** but comparison continues
+- Context: `operationId:xxx METHOD`
+
+**Strategy B: Path + Method Matching**
+- If two operations have the same path and HTTP method, they are considered the same operation
+- If their `operationId` values differ, this is flagged as an **operationId inconsistency** but comparison continues
+- Context: `path METHOD`
+
+**Deduplication**: Operations matched by both strategies are compared only once.
+
+### Cross-reference Validation
+
+For operations matched by either strategy, we validate path vs operationID consistency:
+
+- **Path Inconsistency**: Same operationId but different paths → flagged as difference, comparison continues
+- **OperationId Inconsistency**: Same path but different operationIds → flagged as difference, comparison continues
+
 ### operationId
 
-- Must match exactly, unless explicitly configured otherwise.
+- Must match exactly within matched operations, unless explicitly configured otherwise or already flagged by dual strategy logic.
 
 ### Parameters
 

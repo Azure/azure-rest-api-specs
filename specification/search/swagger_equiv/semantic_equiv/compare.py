@@ -34,6 +34,8 @@ class DifferenceType(Enum):
 
     # Operation-level differences
     OPERATION_ID_MISMATCH = "operation_id_mismatch"
+    PATH_INCONSISTENCY = "path_inconsistency"
+    OPERATION_ID_INCONSISTENCY = "operation_id_inconsistency"
     MISSING_PARAMETER = "missing_parameter"
     EXTRA_PARAMETER = "extra_parameter"
     PARAMETER_MISMATCH = "parameter_mismatch"
@@ -192,41 +194,113 @@ class ApiComparator:
             ))
 
     def _compare_operations(self, api1: CanonicalApi, api2: CanonicalApi) -> None:
-        """Compare operations for all common path+method combinations."""
-        common_paths = api1.path_set & api2.path_set
+        """Compare operations using both operation ID + method and path + method matching."""
+        # Build operation mappings for both APIs
+        ops1_by_id_method = {}  # {(operation_id, method): (path, operation)}
+        ops1_by_path_method = {}  # {(path, method): operation}
 
-        for path in common_paths:
-            path1 = api1.paths[path]
-            path2 = api2.paths[path]
-            common_methods = path1.methods & path2.methods
+        for path, path_obj in api1.paths.items():
+            for method, operation in path_obj.operations.items():
+                if operation.operation_id:
+                    ops1_by_id_method[(operation.operation_id, method)] = (path, operation)
+                ops1_by_path_method[(path, method)] = operation
 
-            for method in common_methods:
-                operation1 = path1.operations[method]
-                operation2 = path2.operations[method]
-                context = f"{path} {method}"
-                self._compare_operation(operation1, operation2, context)
+        ops2_by_id_method = {}  # {(operation_id, method): (path, operation)}
+        ops2_by_path_method = {}  # {(path, method): operation}
 
-    def _compare_operation(self, op1: CanonicalOperation, op2: CanonicalOperation, context: str) -> None:
-        """Compare two operations according to equiv_contract.md section 3.2."""
+        for path, path_obj in api2.paths.items():
+            for method, operation in path_obj.operations.items():
+                if operation.operation_id:
+                    ops2_by_id_method[(operation.operation_id, method)] = (path, operation)
+                ops2_by_path_method[(path, method)] = operation
+
+        # Track which operations we've already compared to avoid duplicates
+        compared_pairs = set()
+
+        # Strategy 1: Match by operation ID + method
+        for (op_id, method), (path1, op1) in ops1_by_id_method.items():
+            if (op_id, method) in ops2_by_id_method:
+                path2, op2 = ops2_by_id_method[(op_id, method)]
+                context = f"[Strategy A: operationId+method] {op_id} {method}"
+
+                # Cross-reference validation: If paths are different, note the inconsistency
+                if path1 != path2:
+                    self.differences.append(Difference(
+                        type=DifferenceType.PATH_INCONSISTENCY,
+                        message=f"Path inconsistency: operation '{op_id}' {method} found at different paths '{path1}' vs '{path2}'",
+                        context=context
+                    ))
+
+                self._compare_operation(op1, op2, context, check_operation_id=False, matching_strategy="operationId+method")
+                compared_pairs.add((path1, method, path2, method))
+
+        # Strategy 2: Match by path + method (excluding already compared operations)
+        for (path, method), op1 in ops1_by_path_method.items():
+            if (path, method) in ops2_by_path_method:
+                op2 = ops2_by_path_method[(path, method)]
+
+                # Skip if we already compared these operations by operation ID
+                already_compared = any(
+                    (p1, m1, p2, m2) in compared_pairs
+                    for p1, m1, p2, m2 in compared_pairs
+                    if p1 == path and m1 == method and p2 == path and m2 == method
+                )
+
+                if not already_compared:
+                    context = f"[Strategy B: path+method] {path} {method}"
+
+                    # Cross-reference validation: If operation IDs are different, note the inconsistency
+                    if op1.operation_id != op2.operation_id:
+                        self.differences.append(Difference(
+                            type=DifferenceType.OPERATION_ID_INCONSISTENCY,
+                            message=f"OperationId inconsistency: path '{path}' {method} has different operationIds '{op1.operation_id}' vs '{op2.operation_id}'",
+                            context=context
+                        ))
+
+                    self._compare_operation(op1, op2, context, check_operation_id=False, matching_strategy="path+method")
+
+    def _compare_operation(
+        self,
+        op1: CanonicalOperation,
+        op2: CanonicalOperation,
+        context: str,
+        check_operation_id: bool = True,
+        matching_strategy: str = None
+    ) -> None:
+        """
+        Compare two operations according to equiv_contract.md section 3.2.
+
+        Args:
+            op1: First operation
+            op2: Second operation
+            context: Context for error messages (includes strategy information)
+            check_operation_id: Whether to check operation ID equality
+            matching_strategy: The matching strategy used (e.g., "operationId+method", "path+method")
+        """
+        # Include matching strategy in context if available
+        if matching_strategy:
+            enhanced_context = f"{context} (matched via {matching_strategy})"
+        else:
+            enhanced_context = context
 
         # 3.2.1 operationId - must match exactly unless configured otherwise
-        if not self.ignore_operation_id:
+        if check_operation_id and not self.ignore_operation_id:
             if op1.operation_id != op2.operation_id:
                 self.differences.append(Difference(
                     type=DifferenceType.OPERATION_ID_MISMATCH,
                     message=f"Operation ID mismatch: '{op1.operation_id}' vs '{op2.operation_id}'",
-                    context=context
+                    context=enhanced_context
                 ))
 
         # 3.2.2 Parameters - keyed by (in, name)
-        self._compare_parameters(op1.parameters, op2.parameters, context)
+        self._compare_parameters(op1.parameters, op2.parameters, enhanced_context)
 
         # 3.2.3 Request Body
         if not self._schemas_equal(op1.request_body_schema, op2.request_body_schema):
             self.differences.append(Difference(
                 type=DifferenceType.REQUEST_BODY_MISMATCH,
                 message="Request body schemas do not match",
-                context=context
+                context=enhanced_context
             ))
 
         # Content types for request
@@ -234,18 +308,18 @@ class ApiComparator:
             self.differences.append(Difference(
                 type=DifferenceType.CONSUMES_MISMATCH,
                 message=f"Request content types mismatch: {op1.consumes} vs {op2.consumes}",
-                context=context
+                context=enhanced_context
             ))
 
         # 3.2.4 Responses
-        self._compare_responses(op1.responses, op2.responses, context)
+        self._compare_responses(op1.responses, op2.responses, enhanced_context)
 
         # Content types for responses
         if op1.produces != op2.produces:
             self.differences.append(Difference(
                 type=DifferenceType.PRODUCES_MISMATCH,
                 message=f"Response content types mismatch: {op1.produces} vs {op2.produces}",
-                context=context
+                context=enhanced_context
             ))
 
     def _compare_parameters(self, params1: Optional[Dict], params2: Optional[Dict], context: str) -> None:
@@ -509,8 +583,11 @@ class ApiComparator:
         # Array constraints are handled in _constraints_equal
         return True
 
-    def _constraints_equal(self, constraints1: Optional[CanonicalConstraints],
-                          constraints2: Optional[CanonicalConstraints]) -> bool:
+    def _constraints_equal(
+        self,
+        constraints1: Optional[CanonicalConstraints],
+        constraints2: Optional[CanonicalConstraints]
+    ) -> bool:
         """Compare constraint objects including enums."""
         if constraints1 is None and constraints2 is None:
             return True
@@ -545,8 +622,11 @@ class ApiComparator:
 
         return True
 
-    def _schema_lists_equal(self, list1: Optional[List[CanonicalSchema]],
-                           list2: Optional[List[CanonicalSchema]]) -> bool:
+    def _schema_lists_equal(
+        self,
+        list1: Optional[List[CanonicalSchema]],
+        list2: Optional[List[CanonicalSchema]]
+    ) -> bool:
         """Compare lists of schemas."""
         if list1 is None and list2 is None:
             return True
@@ -577,9 +657,11 @@ class ApiComparator:
         return True
 
 
-def compare_swagger_specs(hand_authored_swagger: Dict[str, Any],
-                         typespec_swagger: Dict[str, Any],
-                         ignore_operation_id: bool = False) -> EquivalencyResult:
+def compare_swagger_specs(
+    hand_authored_swagger: Dict[str, Any],
+    typespec_swagger: Dict[str, Any],
+    ignore_operation_id: bool = False
+) -> EquivalencyResult:
     """
     High-level function to compare two canonicalized Swagger specifications.
 

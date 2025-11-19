@@ -27,14 +27,17 @@ sys.path.insert(0, str(Path(__file__).parent))
 from utils import load_config, validate_paths, ConfigError
 from utils import load_and_validate_all_files, LoaderError
 from utils import merge_hand_authored_specs, validate_merged_swagger, MergeError
-from utils import write_merge_log, write_differences_excel
+from utils import write_merge_log, write_diffs_excel
 from canonicalize import canonicalize_both_specs, CanonicalizationError
 from compare import compare_swagger_specs, EquivalencyResult
 
 
-def save_artifacts(config, result: EquivalencyResult,
-                  hand_authored_canonical: dict = None,
-                  typespec_canonical: dict = None) -> None:
+def save_artifacts(
+    config,
+    result: EquivalencyResult,
+    hand_authored_canonical: dict = None,
+    typespec_canonical: dict = None
+) -> None:
     """
     Save comparison artifacts to the output directory.
 
@@ -51,8 +54,8 @@ def save_artifacts(config, result: EquivalencyResult,
     write_merge_log(config.output_path)
 
     # Convert differences to structured format for Excel output
+    structured_diffs = []
     if not result.equivalent:
-        structured_differences = []
         for i, diff in enumerate(result.differences, 1):
             # Extract details from the difference description
             description = str(diff)
@@ -111,7 +114,7 @@ def save_artifacts(config, result: EquivalencyResult,
             else:
                 source = "Other"
 
-            structured_differences.append({
+            structured_diffs.append({
                 'id': i,
                 'path': path,
                 'method': method,
@@ -123,8 +126,10 @@ def save_artifacts(config, result: EquivalencyResult,
                 'details': str(diff.details) if hasattr(diff, 'details') else ""
             })
 
-        # Write Excel file
-        write_differences_excel(structured_differences, config.output_path)
+    # Write Excel file with canonical specs for side-by-side comparison
+    write_diffs_excel(structured_diffs, config.output_path,
+                           hand_authored_canonical=hand_authored_canonical,
+                           typespec_canonical=typespec_canonical)
 
     # Save canonicalized specs if provided
     if hand_authored_canonical:
@@ -138,7 +143,10 @@ def save_artifacts(config, result: EquivalencyResult,
             json.dump(typespec_canonical, f, indent=2)
 
 
-def print_result_summary(result: EquivalencyResult, verbose: bool = False) -> None:
+def print_result_summary(
+    result: EquivalencyResult,
+    verbose: bool = False
+) -> None:
     """Print comparison result summary to stdout."""
     if result.equivalent:
         print("✅ Specifications are semantically equivalent")
@@ -158,7 +166,7 @@ def print_result_summary(result: EquivalencyResult, verbose: bool = False) -> No
             if len(result.differences) > max_shown:
                 remaining = len(result.differences) - max_shown
                 print(f"... and {remaining} more differences (use --verbose to see all)")
-                print(f"Full details written to output directory")
+                print("Full details written to output directory")
 
 
 def main_cli(argv: Optional[list] = None) -> int:

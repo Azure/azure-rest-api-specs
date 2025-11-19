@@ -183,8 +183,10 @@ def build_constraints_from_dict(data: Dict[str, Any]) -> Optional[CanonicalConst
     )
 
 
-def build_schema_from_dict(schema_dict: Dict[str, Any],
-                          definitions: Dict[str, Dict[str, Any]] = None) -> CanonicalSchema:
+def build_schema_from_dict(
+    schema_dict: Dict[str, Any],
+    definitions: Dict[str, Dict[str, Any]] = None
+) -> CanonicalSchema:
     """
     Build a CanonicalSchema from a Swagger schema dictionary.
 
@@ -263,8 +265,10 @@ def build_schema_from_dict(schema_dict: Dict[str, Any],
     )
 
 
-def build_parameter_from_dict(param_dict: Dict[str, Any],
-                             definitions: Dict[str, Dict[str, Any]] = None) -> CanonicalParameter:
+def build_parameter_from_dict(
+    param_dict: Dict[str, Any],
+    definitions: Dict[str, Dict[str, Any]] = None
+) -> CanonicalParameter:
     """Build a CanonicalParameter from a Swagger parameter dictionary."""
     name = param_dict.get('name', '')
     location_str = param_dict.get('in', 'query')
@@ -307,9 +311,11 @@ def build_parameter_from_dict(param_dict: Dict[str, Any],
     )
 
 
-def build_response_from_dict(response_dict: Dict[str, Any],
-                           definitions: Dict[str, Dict[str, Any]] = None,
-                           produces: Optional[List[str]] = None) -> CanonicalResponse:
+def build_response_from_dict(
+    response_dict: Dict[str, Any],
+    definitions: Dict[str, Dict[str, Any]] = None,
+    produces: Optional[List[str]] = None
+) -> CanonicalResponse:
     """Build a CanonicalResponse from a Swagger response dictionary."""
     schema = None
     if 'schema' in response_dict:
@@ -334,8 +340,10 @@ def build_response_from_dict(response_dict: Dict[str, Any],
     )
 
 
-def build_operation_from_dict(operation_dict: Dict[str, Any],
-                            definitions: Dict[str, Dict[str, Any]] = None) -> CanonicalOperation:
+def build_operation_from_dict(
+    operation_dict: Dict[str, Any],
+    definitions: Dict[str, Dict[str, Any]] = None
+) -> CanonicalOperation:
     """Build a CanonicalOperation from a Swagger operation dictionary."""
     operation_id = operation_dict.get('operationId')
 
