@@ -3825,21 +3825,13 @@ model SkillNames {
   skillNames?: string[];
 }
 
-@doc("The format of the synonym map.")
-union SynonymMapFormat {
-  string,
-
-  @doc("Selects the SOLR format for synonym maps.")
-  Solr: "solr",
-}
-
 @doc("Represents a synonym map definition.")
 model SynonymMap {
   @doc("The name of the synonym map.")
   name: string;
 
   @doc("The format of the synonym map. Only the 'solr' format is currently supported.")
-  format: SynonymMapFormat = SynonymMapFormat.Solr;
+  format: "solr";
 
   @doc("A series of synonym rules in the specified synonym map format. The rules must be separated by newlines.")
   synonyms: string;
