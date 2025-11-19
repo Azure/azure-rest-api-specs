@@ -40,22 +40,7 @@ suppressions:
   - code: LroExtension 
     from: search.json
     reason: Legacy swagger file
-  - code: KnowledgeBaseSearchIndexActivityRecord 
-    from: search.json
-    reason: Legacy swagger file
-  - code: KnowledgeBaseAzureBlobActivityRecord 
-    from: search.json
-    reason: Legacy swagger file
-  - code: KnowledgeBaseIndexedSharePointActivityRecord 
-    from: search.json
-    reason: Legacy swagger file
-  - code: KnowledgeBaseIndexedOneLakeActivityRecord 
-    from: search.json
-    reason: Legacy swagger file
-  - code: KnowledgeBaseWebActivityRecord 
-    from: search.json
-    reason: Legacy swagger file
-  - code: KnowledgeBaseRemoteSharePointActivityRecord 
+  - code: DISCRIMINATOR_VALUE_NOT_FOUND 
     from: search.json
     reason: Legacy swagger file
 ```
