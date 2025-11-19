@@ -38,11 +38,20 @@ jobs:
 
     steps:
     - checkout: self
-    - task: UseDotNet@2
-      displayName: 'Install .NET SDK'
+    - task: UseDotNet@2 
+      displayName: "Use .NET SDK from global.json"
+      retryCountOnTaskFailure: 3
       inputs:
-        version: '9.0.x'
+        useGlobalJson: true
+
+    - task: UseDotNet@2
+      displayName: "Use .NET SDK 8.0.x"
+      retryCountOnTaskFailure: 3
+      inputs:
         packageType: sdk
+        version: 8.0.x
+        performMultiLevelLookup: true
+        
     - template: /eng/common/pipelines/templates/steps/sparse-checkout.yml
       parameters:
         SkipCheckoutNone: true
