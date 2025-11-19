@@ -1,0 +1,65 @@
+name: "Summarize PR Impact"
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - edited
+      - ready_for_review
+      - converted_to_draft
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  impact:
+    name: "Summarize PR Impact"
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout 'after' state
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+          path: after
+
+      - name: Checkout 'before' state
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+          path: before
+
+      - name: Setup Node and install deps
+        uses: ./after/.github/actions/setup-node-install-deps
+        with:
+          working-directory: after
+
+      - name: Run Summarize Impact
+        id: summarize-impact
+        working-directory: after
+        run: |
+          npm exec --no -- summarize-impact --sourceDirectory . --targetDirectory ../before \
+            --number "${{ github.event.pull_request.number }}" \
+            --sourceBranch "$HEAD_REF" \
+            --targetBranch "${{ github.event.pull_request.base.ref }}" \
+            --sha "${{ github.event.pull_request.head.sha }}" \
+            --repo "${{ github.event.repository.name }}" \
+            --owner "${{ github.repository_owner }}" \
+            ${{ github.event.pull_request.draft && '--isDraft' || '' }}
+        env:
+          # We absolutely need to avoid OOM errors due to certain inherited types from openapi-alps
+          NODE_OPTIONS: "--max-old-space-size=8192"
+          HEAD_REF: ${{ github.event.pull_request.head.ref }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set job-summary artifact
+        if: ${{ always() && steps.summarize-impact.outputs.summary }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: job-summary
+          path: ${{ steps.summarize-impact.outputs.summary }}
+          # If the file doesn't exist, just don't add the artifact
+          if-no-files-found: ignore

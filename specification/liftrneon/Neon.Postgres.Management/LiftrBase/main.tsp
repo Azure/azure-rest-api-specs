@@ -10,7 +10,6 @@ namespace LiftrBase;
 @doc("Supported versions for LiftrBase resource model")
 enum Versions {
   @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1")
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   v1_preview: "2024-08-01-preview",
 }
 
@@ -113,7 +112,7 @@ model CompanyDetails {
 @doc("Base resource properties that can be extended for arm resources.")
 model BaseResourceProperties {
   @doc("Marketplace details of the resource.")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
   marketplaceDetails: MarketplaceDetails;
 
   @doc("Details of the user.")
@@ -123,7 +122,7 @@ model BaseResourceProperties {
   companyDetails: CompanyDetails;
 
   @doc("Provisioning state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 }
 

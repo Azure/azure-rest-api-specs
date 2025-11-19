@@ -2,12 +2,14 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.AzureStackHCI;
 
@@ -21,7 +23,7 @@ model NetworkInterface is TrackedResource<NetworkInterfaceProperties> {
   @path
   @key("networkInterfaceName")
   @segment("networkInterfaces")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   @doc("The extendedLocation of the resource.")
@@ -42,8 +44,20 @@ interface NetworkInterfaces {
   >;
 
   @doc("The operation to update a network interface.")
-  @parameterVisibility
-  update is ArmCustomPatchAsync<NetworkInterface>;
+  @patch(#{ implicitOptionality: false })
+  @removed(Versions.v2025_02_01_preview)
+  @sharedRoute
+  @renamedFrom(Versions.v2025_02_01_preview, "update")
+  updateOld is ArmCustomPatchAsync<NetworkInterface>;
+
+  @doc("The operation to update a network interface.")
+  @patch(#{ implicitOptionality: false })
+  @added(Versions.v2025_02_01_preview)
+  @sharedRoute
+  update is ArmCustomPatchAsync<
+    NetworkInterface,
+    NetworkInterfacesUpdateRequest
+  >;
 
   @doc("The operation to delete a network interface.")
   delete is ArmResourceDeleteWithoutOkAsync<NetworkInterface>;

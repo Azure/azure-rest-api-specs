@@ -1,0 +1,30 @@
+# This file configures spell checking. Items in "words" were initially populated
+# with words that might be spelling errors. Review these words and take
+# appropriate action. For more information, see: https://aka.ms/ci-fix#spell-check
+
+# Spell checking is not case sensitive
+# Keep word lists in alphabetical order so the file is easier to manage
+version: '0.2'
+import:
+  - ../../cspell.yaml
+words:
+  - hybridaks
+  - iloveyou
+  - kubenet
+  - kubevirt
+  - ossku
+  - virt
+  - vmip
+overrides:
+  - filename: '**/specification/hybridaks/resource-manager/Microsoft.HybridContainerService/stable/2024-01-01/provisionedClusterInstances.json'
+    words:
+      - kubeconfig
+      - kubeconfigs
+  - filename: '**/specification/hybridaks/resource-manager/Microsoft.HybridContainerService/preview/2025-02-01-preview/provisionedClusterInstances.json'
+    words:
+      - kubeconfig
+      - kubeconfigs
+  - filename: '**/specification/hybridaks/resource-manager/Microsoft.HybridContainerService/preview/2023-11-15-preview/provisionedClusterInstances.json'
+    words:
+      - kubeconfig
+      - kubeconfigs

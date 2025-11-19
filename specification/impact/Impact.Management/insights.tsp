@@ -7,7 +7,6 @@ namespace Microsoft.Impact;
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
-using OpenAPI;
 using Azure.ResourceManager;
 
 @doc("Insight resource")
@@ -18,7 +17,7 @@ model Insight is ProxyResource<InsightProperties> {
   @key("insightName")
   @segment("insights")
   @doc("Name of the insight")
-  @visibility("Read")
+  @visibility(Lifecycle.Read)
   @path
   name: string;
 }
@@ -30,7 +29,7 @@ model InsightUnderSubscription is ProxyResource<InsightProperties> {
   @key("insightName")
   @segment("insights")
   @doc("Name of the insight")
-  @visibility("Read")
+  @visibility(Lifecycle.Read)
   @path
   name: string;
 }

@@ -18,7 +18,7 @@ namespace Microsoft.MachineLearningServices;
 @doc("AssetVersion Definition")
 model AssetVersion {
   @doc("Fully qualified resource Id: azureml://workspace/{workspaceName}/indexes/{name}/versions/{version} of the index.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id: string;
 
   @doc("Update stage to 'Archive' to archive the asset. Default is Development, which means the asset is under development.")
@@ -28,7 +28,7 @@ model AssetVersion {
   description?: string;
 
   @doc("Metadata containing createdBy and modifiedBy information.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   systemData?: SystemData;
 
   @doc("Asset's tags. Unlike properties, tags are fully mutable.")
@@ -38,6 +38,60 @@ model AssetVersion {
   properties?: Record<string>;
 }
 
+@doc("DeploymentTemplate resource definition")
+model DeploymentTemplate is AssetVersion {
+  @doc("The type of deployment template.")
+  deploymentTemplateType: string;
+
+  @doc("The ID of the environment asset.")
+  environmentId: string;
+
+  @doc("Environment variables for the deployment.")
+  environmentVariables?: Record<string>;
+
+  @doc("List of environment variable names that can be overridden.")
+  allowedEnvironmentVariableOverrides?: string[];
+
+  @doc("Path where the model will be mounted.")
+  modelMountPath?: string;
+
+  @doc("Request settings for online deployment.")
+  requestSettings?: OnlineRequestSettings;
+
+  @doc("Liveness probe settings.")
+  livenessProbe?: ProbeSettings;
+
+  @doc("Readiness probe settings.")
+  readinessProbe?: ProbeSettings;
+
+  @doc("List of allowed instance types for the deployment.")
+  allowedInstanceType: string[];
+
+  @doc("Default instance type for the deployment.")
+  defaultInstanceType: string;
+
+  @doc("Number of instances for the deployment.")
+  instanceCount: int32;
+
+  @doc("Path for scoring requests.")
+  scoringPath?: string;
+
+  @doc("Port for scoring requests.")
+  scoringPort?: int32;
+}
+
+@doc("Paged collection of DeploymentTemplate items.")
+model PagedDeploymentTemplate {
+  @doc("The list of Deployment Templates.")
+  @Azure.ResourceManager.identifiers(#[])
+  @pageItems
+  value: DeploymentTemplate[];
+
+  @doc("The link to the next page of items")
+  @nextLink
+  nextLink?: ResourceLocation<DeploymentTemplate>;
+}
+
 @doc("Index resource Definition")
 model Index is AssetVersion {
   @doc("Default workspace blob storage Uri. Should work across storage types and auth scenarios.")
@@ -45,15 +99,14 @@ model Index is AssetVersion {
 }
 
 @doc("Paged collection of IndexVersion items.")
-@pagedResult
 model PagedIndex {
   @doc("The list of Indexes.")
-  @extension("x-ms-identifiers", [])
-  @items
+  @Azure.ResourceManager.identifiers(#[])
+  @pageItems
   value: Index[];
 
   @doc("The link to the next page of items")
-  @Azure.Core.nextLink
+  @nextLink
   nextLink?: ResourceLocation<Index>;
 }
 
@@ -68,16 +121,15 @@ model Prompt is AssetVersion {
 }
 
 @doc("Paged collection of PromptVersion items")
-@pagedResult
 @added(Versions.`2024-05-01-preview`)
 model PagedPrompt {
   @doc("The list of Prompts.")
-  @extension("x-ms-identifiers", [])
-  @items
+  @Azure.ResourceManager.identifiers(#[])
+  @pageItems
   value: Prompt[];
 
   @doc("The link to the next page of items")
-  @Azure.Core.nextLink
+  @nextLink
   nextLink?: ResourceLocation<Prompt>;
 }
 

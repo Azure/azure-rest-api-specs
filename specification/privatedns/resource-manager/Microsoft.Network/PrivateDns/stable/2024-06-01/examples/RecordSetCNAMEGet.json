@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "api-version": "2024-06-01",
+    "privateZoneName": "privatezone1.com",
+    "recordType": "CNAME",
+    "relativeRecordSetName": "recordCNAME",
+    "resourceGroupName": "resourceGroup1",
+    "subscriptionId": "subscriptionId"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "recordcname",
+        "type": "Microsoft.Network/privateDnsZones/CNAME",
+        "etag": "00000000-0000-0000-0000-000000000000",
+        "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/privatezone1.com/CNAME/recordcname",
+        "properties": {
+          "cnameRecord": {
+            "cname": "contoso.com"
+          },
+          "fqdn": "recordcname.privatezone1.com.",
+          "isAutoRegistered": false,
+          "metadata": {
+            "key1": "value1"
+          },
+          "ttl": 3600
+        }
+      }
+    }
+  },
+  "operationId": "RecordSets_Get",
+  "title": "GET Private DNS Zone CNAME Record Set"
+}

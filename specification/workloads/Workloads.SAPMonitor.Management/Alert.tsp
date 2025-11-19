@@ -1,7 +1,6 @@
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 using TypeSpec.Versioning;
 
 namespace Microsoft.Workloads;
@@ -18,7 +17,7 @@ model Alert is ProxyResource<AlertProperties> {
   @path
   @key("alertName")
   @segment("alerts")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 }
 

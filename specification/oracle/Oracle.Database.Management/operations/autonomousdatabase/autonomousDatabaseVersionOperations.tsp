@@ -1,5 +1,5 @@
 import "@azure-tools/typespec-azure-resource-manager";
-import "../../../models/autonomousdatabase/autonomousDatabaseVersion.tsp";
+import "../../models/autonomousdatabase/autonomousDatabaseVersion.tsp";
 
 using Azure.ResourceManager;
 using Autorest;
@@ -10,10 +10,6 @@ namespace Oracle.Database;
 @armResourceOperations
 interface AutonomousDatabaseVersions
   extends OracleLocationBasedResource<AutonomousDbVersion> {}
-
-@@doc(AutonomousDatabaseVersions.listByLocation,
-  "List AutonomousDbVersion resources by Location"
-);
 
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
 @@Autorest.example(AutonomousDatabaseVersions.listByLocation,

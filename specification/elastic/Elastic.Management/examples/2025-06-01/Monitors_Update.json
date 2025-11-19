@@ -1,0 +1,144 @@
+{
+  "parameters": {
+    "api-version": "2025-06-01",
+    "monitorName": "myMonitor",
+    "requestBody": {
+      "name": "myMonitor",
+      "location": "West US 2",
+      "properties": {
+        "elasticProperties": {
+          "elasticCloudDeployment": {
+            "name": "deploymentname",
+            "azureSubscriptionId": "00000000-0000-0000-0000-000000000000",
+            "elasticsearchRegion": "azure-westus2",
+            "elasticsearchServiceUrl": "https://elasticsearchendpoint.com",
+            "kibanaServiceUrl": "https://kibanaserviceurl.com",
+            "kibanaSsoUrl": "https://kibanssourl.com"
+          },
+          "elasticCloudUser": {
+            "elasticCloudSsoDefaultUrl": "https://examplessourl.com",
+            "emailAddress": "alice@microsoft.com",
+            "id": "myid123"
+          }
+        },
+        "hostingType": "Hosted",
+        "projectDetails": {
+          "configurationType": "NotApplicable",
+          "projectType": "NotApplicable"
+        },
+        "userInfo": {
+          "companyInfo": {
+            "business": "Technology",
+            "country": "US",
+            "domain": "microsoft.com",
+            "employeeNumber": "10000",
+            "state": "WA"
+          },
+          "companyName": "Microsoft",
+          "emailAddress": "alice@microsoft.com",
+          "firstName": "Alice",
+          "lastName": "Bob"
+        }
+      },
+      "sku": {
+        "name": "free_Monthly"
+      },
+      "tags": {
+        "Environment": "Dev"
+      }
+    },
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myMonitor",
+        "type": "Microsoft.Elastic/monitors",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Elastic/monitors/myMonitor",
+        "kind": "elastic-hosted-deployment",
+        "location": "West US 2",
+        "properties": {
+          "elasticProperties": {
+            "elasticCloudDeployment": {
+              "name": "deploymentname",
+              "azureSubscriptionId": "00000000-0000-0000-0000-000000000000",
+              "deploymentId": "deployment_id",
+              "elasticsearchRegion": "azure-westus2",
+              "elasticsearchServiceUrl": "https://elasticsearchendpoint.com",
+              "kibanaServiceUrl": "https://kibanaserviceurl.com",
+              "kibanaSsoUrl": "https://kibanssourl.com"
+            },
+            "elasticCloudUser": {
+              "elasticCloudSsoDefaultUrl": "https://examplessourl.com",
+              "emailAddress": "alice@microsoft.com",
+              "id": "myid123"
+            }
+          },
+          "hostingType": "Hosted",
+          "liftrResourceCategory": "MonitorLogs",
+          "liftrResourcePreference": 0,
+          "monitoringStatus": "Enabled",
+          "projectDetails": {
+            "configurationType": "NotApplicable",
+            "projectType": "NotApplicable"
+          },
+          "provisioningState": "Succeeded"
+        },
+        "sku": {
+          "name": "free_Monthly"
+        },
+        "tags": {
+          "Environment": "Dev"
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "name": "myMonitor",
+        "type": "Microsoft.Elastic/monitors",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Elastic/monitors/myMonitor",
+        "kind": "elastic-hosted-deployment",
+        "location": "West US 2",
+        "properties": {
+          "elasticProperties": {
+            "elasticCloudDeployment": {
+              "name": "deploymentname",
+              "azureSubscriptionId": "00000000-0000-0000-0000-000000000000",
+              "deploymentId": "deployment_id",
+              "elasticsearchRegion": "azure-westus2",
+              "elasticsearchServiceUrl": "https://elasticsearchendpoint.com",
+              "kibanaServiceUrl": "https://kibanaserviceurl.com",
+              "kibanaSsoUrl": "https://kibanssourl.com"
+            },
+            "elasticCloudUser": {
+              "elasticCloudSsoDefaultUrl": "https://examplessourl.com",
+              "emailAddress": "alice@microsoft.com",
+              "id": "myid123"
+            }
+          },
+          "hostingType": "Hosted",
+          "liftrResourceCategory": "MonitorLogs",
+          "liftrResourcePreference": 0,
+          "monitoringStatus": "Enabled",
+          "projectDetails": {
+            "configurationType": "NotApplicable",
+            "projectType": "NotApplicable"
+          },
+          "provisioningState": "Succeeded"
+        },
+        "sku": {
+          "name": "free_Monthly"
+        },
+        "tags": {
+          "Environment": "Dev"
+        }
+      },
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/subid/resourceGroups/resourceGroup/providers/Microsoft.Elastic/monitor/monitorname?api-version=2025-06-01"
+      }
+    }
+  },
+  "operationId": "Monitors_Update",
+  "title": "Monitors_Update"
+}

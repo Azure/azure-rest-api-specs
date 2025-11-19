@@ -15,6 +15,7 @@ import "./ApiDefinition.tsp";
 import "./ApiSource.tsp";
 import "./Deployment.tsp";
 import "./Environment.tsp";
+import "./back-compatible.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -23,9 +24,7 @@ using Azure.ResourceManager;
 using TypeSpec.Versioning;
 using Azure.ClientGenerator.Core;
 @armProviderNamespace
-@service({
-  title: "Azure API Center",
-})
+@service(#{ title: "Azure API Center" })
 @versioned(Versions)
 @doc("Azure API Center Resource Provider.")
 @Azure.ResourceManager.armCommonTypesVersion("v5")
@@ -34,18 +33,12 @@ namespace Microsoft.ApiCenter;
 @doc("The available API versions.")
 enum Versions {
   /** The initial service version */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2024_03_01: "2024-03-01",
 
   @doc("Azure API Center 2024-03-15-preview")
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2024_03_15_preview: "2024-03-15-preview",
 
   @doc("Azure API Center 2024-06-01-preview")
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2024_06_01_preview: "2024-06-01-preview",
 }
 
@@ -126,8 +119,8 @@ enum Versions {
 
 @@clientName(Services.exportMetadataSchema::parameters.body, "payload");
 
-@@visibility(Azure.Core.Page.nextLink, "read");
-@@visibility(Azure.Core.Page.value, "read");
+@@visibility(Azure.Core.Page.nextLink, Lifecycle.Read);
+@@visibility(Azure.Core.Page.value, Lifecycle.Read);
 /**
  * A resource list operation, at the scope of the resource's parent
  * @template TResource the resource being patched
@@ -139,6 +132,7 @@ enum Versions {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "It is pascal case"
 @get
 @autoRoute
+@list
 @listsResource(TResource)
 @segmentOf(TResource)
 @armResourceList(TResource)

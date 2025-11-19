@@ -27,16 +27,16 @@ These are the global settings for the Batch API.
 ``` yaml
 title: BatchServiceClient
 openapi-type: data-plane
-tag: package-2024-07
+tag: package-2025-06
 ```
 
-### Tag: package-2024-07.20.0
+### Tag: package-2025-06.21.0
 
-These settings apply only when `--tag=package-2024-07.20.0` is specified on the command line.
+These settings apply only when `--tag=package-2025-06` is specified on the command line.
 
-```yaml $(tag) == 'package-2024-07.20.0-preview'
+```yaml $(tag) == 'package-2025-06'
 input-file:
-  - Azure.Batch/preview/2024-07-01.20.0/BatchService.json
+  - Azure.Batch/stable/2025-06-01/BatchService.json
 ```
 
 ### Tag: package-2024-07
@@ -46,15 +46,6 @@ These settings apply only when `--tag=package-2024-07` is specified on the comma
 ```yaml $(tag) == 'package-2024-07'
 input-file:
   - Microsoft.Batch/stable/2024-07-01.20.0/BatchService.json
-```
-
-### Tag: package-2024-02.19.0-preview
-
-These settings apply only when `--tag=package-2024-02.19.0-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2024-02.19.0-preview'
-input-file:
-  - Azure.Batch/preview/2024-02-01.19.0/BatchService.json
 ```
 
 ### Tag: package-2024-02
@@ -346,6 +337,7 @@ suppressions:
    where: 
      - $.paths["/pools/{poolId}/nodes/{nodeId}/start"].post
      - $.paths["/pools/{poolId}/nodes/{nodeId}/deallocate"].post
+     - $.paths["/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})"].delete
    reason: Service does not return 200, nor supply location header.
 
 ```

@@ -15,7 +15,6 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
-using OpenAPI;
 
 namespace Microsoft.StandbyPool;
 
@@ -26,7 +25,7 @@ model StandbyContainerGroupPoolResource
   @pattern("^[a-zA-Z0-9-]{3,24}$")
   @key("standbyContainerGroupPoolName")
   @segment("standbyContainerGroupPools")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Name of the standby container group pool")
   @path
   name: string;
@@ -41,8 +40,12 @@ model StandbyContainerGroupPoolResourceProperties {
   @doc("Specifies container group properties of standby container group pools.")
   containerGroupProperties: ContainerGroupProperties;
 
+  @doc("Specifies zones of standby container group pools.")
+  @added(Microsoft.StandbyPool.Versions.`2025-03-01`)
+  zones?: string[];
+
   @doc("The status of the last operation.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -50,12 +53,23 @@ model StandbyContainerGroupPoolResourceProperties {
 @doc("Specifies the elasticity profile of the standby container group pools.")
 model StandbyContainerGroupPoolElasticityProfile {
   @doc("Specifies maximum number of standby container groups in the standby pool.")
+  @minValue(0)
   @maxValue(2000)
+  @removed(Microsoft.StandbyPool.Versions.`2025-10-01`)
+  @renamedFrom(Microsoft.StandbyPool.Versions.`2025-10-01`, "maxReadyCapacity")
+  oldMaxReadyCapacity: int64;
+
+  @added(Microsoft.StandbyPool.Versions.`2025-10-01`)
+  @doc("Specifies maximum number of standby container groups in the standby pool.")
   @minValue(0)
   maxReadyCapacity: int64;
 
   @doc("Specifies refill policy of the pool.")
   refillPolicy?: RefillPolicy;
+
+  @added(Microsoft.StandbyPool.Versions.`2025-10-01`)
+  @doc("Specifies the dynamic sizing configuration.")
+  dynamicSizing?: DynamicSizing;
 }
 
 @added(Microsoft.StandbyPool.Versions.`2023-12-01-preview`)
@@ -113,7 +127,7 @@ interface StandbyContainerGroupPools {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
   delete is ArmResourceDeleteWithoutOkAsync<StandbyContainerGroupPoolResource>;
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     StandbyContainerGroupPoolResource,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<

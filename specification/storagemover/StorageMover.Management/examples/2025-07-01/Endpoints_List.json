@@ -1,0 +1,56 @@
+{
+  "operationId": "Endpoints_List",
+  "parameters": {
+    "api-version": "2025-07-01",
+    "resourceGroupName": "examples-rg",
+    "storageMoverName": "examples-storageMoverName",
+    "subscriptionId": "60bcfc77-6589-4da2-b7fd-f9ec9322cf95"
+  },
+  "title": "Endpoints_List",
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://management.azure.com/providers/Microsoft.StorageMover/storageMovers/examples-storageMoverName/endpoints?$skiptoken=fake-continue-token",
+        "value": [
+          {
+            "name": "examples-endpointName1",
+            "type": "Microsoft.StorageMover/storageMovers/endpoints",
+            "id": "/subscriptions/60bcfc77-6589-4da2-b7fd-f9ec9322cf95/resourceGroups/examples-rg/providers/Microsoft.StorageMover/storageMovers/examples-storageMoverName/endpoints/examples-endpointName1",
+            "properties": {
+              "description": "Example Storage Container Endpoint 1 Description",
+              "blobContainerName": "examples-blobcontainer1",
+              "endpointType": "AzureStorageBlobContainer",
+              "provisioningState": "Succeeded",
+              "storageAccountResourceId": "/subscriptions/60bcfc77-6589-4da2-b7fd-f9ec9322cf95/resourceGroups/examples-rg/providers/Microsoft.Storage/storageAccounts/examplesa"
+            }
+          },
+          {
+            "name": "examples-endpointName2",
+            "type": "Microsoft.StorageMover/storageMovers/endpoints",
+            "id": "/subscriptions/60bcfc77-6589-4da2-b7fd-f9ec9322cf95/resourceGroups/examples-rg/providers/Microsoft.StorageMover/storageMovers/examples-storageMoverName/endpoints/examples-endpointName2",
+            "properties": {
+              "description": "Example Storage Container Endpoint 2 Description",
+              "endpointType": "NfsMount",
+              "export": "/",
+              "host": "0.0.0.0",
+              "nfsVersion": "NFSv4",
+              "provisioningState": "Succeeded"
+            }
+          },
+          {
+            "name": "examples-endpointName3",
+            "type": "Microsoft.StorageMover/storageMovers/endpoints",
+            "id": "/subscriptions/60bcfc77-6589-4da2-b7fd-f9ec9322cf95/resourceGroups/examples-rg/providers/Microsoft.StorageMover/storageMovers/examples-storageMoverName/endpoints/examples-endpointName3",
+            "properties": {
+              "description": "Example Storage Container Endpoint 3 Description",
+              "blobContainerName": "examples-blobcontainer3",
+              "endpointType": "AzureStorageBlobContainer",
+              "provisioningState": "Succeeded",
+              "storageAccountResourceId": "/subscriptions/60bcfc77-6589-4da2-b7fd-f9ec9322cf95/resourceGroups/examples-rg/providers/Microsoft.Storage/storageAccounts/examplesa"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

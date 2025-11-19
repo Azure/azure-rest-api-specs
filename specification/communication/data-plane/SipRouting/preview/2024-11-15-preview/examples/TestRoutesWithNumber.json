@@ -1,0 +1,122 @@
+{
+  "parameters": {
+    "api-version": "2024-11-15-preview",
+    "endpoint": "https://resourcename.communication.azure.com",
+    "targetPhoneNumber": "+14251234567",
+    "sipConfiguration": {
+      "domains": {
+        "contoso.com": {
+          "enabled": true
+        }
+      },
+      "trunks": {
+        "seattle.contoso.com": {
+          "sipSignalingPort": 5011,
+          "enabled": true,
+          "directTransfer": false,
+          "privacyHeader": "none",
+          "ipAddressVersion": "ipv4"
+        },
+        "us1.contoso.com": {
+          "sipSignalingPort": 5012,
+          "enabled": true,
+          "directTransfer": false,
+          "privacyHeader": "none",
+          "ipAddressVersion": "ipv4"
+        },
+        "us2.contoso.com": {
+          "sipSignalingPort": 5013,
+          "enabled": true,
+          "directTransfer": false,
+          "privacyHeader": "none",
+          "ipAddressVersion": "ipv4"
+        },
+        "russia.contoso.com": {
+          "sipSignalingPort": 5014,
+          "enabled": true,
+          "directTransfer": false,
+          "privacyHeader": "none",
+          "ipAddressVersion": "ipv4"
+        },
+        "global.contoso.com": {
+          "sipSignalingPort": 5015,
+          "enabled": true,
+          "directTransfer": false,
+          "privacyHeader": "none",
+          "ipAddressVersion": "ipv4"
+        }
+      },
+      "routes": [
+        {
+          "name": "Seattle",
+          "description": "Seattle route",
+          "numberPattern": "^\\+1(425|206)\\d{7}$",
+          "trunks": [
+            "seattle.contoso.com"
+          ]
+        },
+        {
+          "name": "US",
+          "description": "US route",
+          "numberPattern": "^\\+1\\d{10}$",
+          "trunks": [
+            "us1.contoso.com",
+            "us2.contoso.com"
+          ]
+        },
+        {
+          "name": "Russia",
+          "description": "Russian route",
+          "numberPattern": "^\\+7\\d+$",
+          "trunks": [
+            "russia.contoso.com"
+          ]
+        },
+        {
+          "name": "Global",
+          "description": "Fallback route",
+          "numberPattern": "^\\+\\d+$",
+          "trunks": [
+            "global.contoso.com"
+          ],
+          "callerIdOverride": "+1234567890"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "matchingRoutes": [
+          {
+            "description": "Seattle route",
+            "name": "Seattle",
+            "numberPattern": "^\\+1(425|206)\\d{7}$",
+            "trunks": [
+              "seattle.contoso.com"
+            ]
+          },
+          {
+            "description": "US route",
+            "name": "US",
+            "numberPattern": "^\\+1\\d{10}$",
+            "trunks": [
+              "us1.contoso.com",
+              "us2.contoso.com"
+            ]
+          },
+          {
+            "description": "Fallback route",
+            "name": "Global",
+            "numberPattern": "^\\+\\d+$",
+            "trunks": [
+              "global.contoso.com"
+            ],
+            "callerIdOverride": "+1234567890"
+          }
+        ]
+      }
+    }
+  }
+}

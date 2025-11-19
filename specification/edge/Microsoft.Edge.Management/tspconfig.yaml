@@ -1,3 +1,4 @@
+output-dir: "{project-root}/"
 parameters:
   "service-dir":
     default: "sdk/commonedgesitemanageroperations"
@@ -17,45 +18,37 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/edge/{version-status}/{version}/operations.json"
     arm-types-dir: "{project-root}/../../common-types/resource-management"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-commonedgesitemanageroperations"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-commonedgesitemanageroperations"
     namespace: "com.azure.resourcemanager.commonedgesitemanageroperations"
-    emitter-output-dir: "{java-sdk-folder}/sdk/{service-directory-name}/azure-resourcemanager-commonedgesitemanageroperations"
     flavor: azure
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-commonedgesitemanageroperations"
-    package-name: "{package-dir}"
-    emitter-output-dir: "{python-sdk-folder}/sdk/{service-directory-name}/{package-name}"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-commonedgesitemanageroperations"
+    namespace: "azure.mgmt.commonedgesitemanageroperations"
     generate-test: true
     generate-sample: true
     flavor: azure
   "@azure-tools/typespec-ts":
-    azureSdkForJs: true
-    isModularLibrary: true
-    generateMetadata: true
-    hierarchyClient: false
-    experimentalExtensibleEnums: true
-    enableOperationGroup: true
+    experimental-extensible-enums: true
     flavor: azure
-    package-dir: "arm-commonedgesitemanageroperations"
-    packageDetails:
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-commonedgesitemanageroperations"
+    package-details:
       name: "@azure/arm-commonedgesitemanageroperations"
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.ResourceManager.CommonEdgeSiteManagerOperations"
-    namespace: "{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: "Azure.ResourceManager.CommonEdgeSiteManagerOperations"
     clear-output-folder: true
     model-namespace: false
     flavor: azure
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/commonedgesitemanageroperations"
-    package-dir: "armcommonedgesitemanageroperations"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armcommonedgesitemanageroperations"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armcommonedgesitemanageroperations"
     fix-const-stuttering: true
     flavor: "azure"
-    generate-examples: true
+    generate-samples: true
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
-    remove-unreferenced-types: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

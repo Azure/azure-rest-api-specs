@@ -1,0 +1,44 @@
+{
+  "title": "Occurrences_Delay_MaximumSet",
+  "operationId": "Occurrences_Delay",
+  "parameters": {
+    "api-version": "2025-04-15-preview",
+    "subscriptionId": "CB26D7CB-3E27-465F-99C8-EAF7A4118245",
+    "resourceGroupName": "rgcomputeschedule",
+    "scheduledActionName": "myScheduledAction",
+    "occurrenceId": "CB26D7CB-3E27-465F-99C8-EAF7A4118245",
+    "body": {
+      "delay": "2025-05-22T17:00:00.000-07:00",
+      "resourceIds": [
+        "/subscriptions/CB26D7CB-3E27-465F-99C8-EAF7A4118245/resourceGroups/myRg/providers/Microsoft.Compute/virtualMachines/myVm"
+      ]
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    },
+    "200": {
+      "body": {
+        "totalResources": 11,
+        "resourcesStatuses": [
+          {
+            "resourceId": "/subscriptions/1d04e8f1-ee04-4056-b0b2-718f5bb45b04/resourceGroups/myRg/providers/Microsoft.Compute/virtualMachines/myVm",
+            "status": "Succeeded",
+            "error": {
+              "code": "baxjmkbhoatqcj",
+              "message": "chapcwfkqymeof",
+              "target": "mkirmorowetsigohjamvk",
+              "details": [],
+              "innererror": {
+                "code": "cgalioufsabcwatbxa"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

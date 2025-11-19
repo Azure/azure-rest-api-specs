@@ -10,15 +10,12 @@ namespace LiftrBase;
 @doc("Supported versions for LiftrBase resource model")
 enum Versions {
   @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1")
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   v1_preview: "2023-06-01-preview",
 
   @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1")
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   v2024_08_27_preview: "2024-08-27-preview",
 
   @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1")
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   v2024_08_27: "2024-08-27",
 }
 
@@ -95,7 +92,7 @@ model OfferDetails {
   @added(Versions.v2024_08_27_preview)
   @added(Versions.v2024_08_27)
   @doc("Current subscription end date and time")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   endDate?: utcDateTime;
 }
 
@@ -124,14 +121,14 @@ model UserDetails {
 @doc("Base resource properties that can be extended for arm resources.")
 model BaseResourceProperties {
   @doc("Marketplace details of the resource.")
-  @visibility("create", "read", "update")
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
   marketplace: MarketplaceDetails;
 
   @doc("Details of the user.")
   user: UserDetails;
 
   @doc("Provisioning state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 }
 
@@ -149,7 +146,7 @@ model SingleSignOnProperties {
   @doc("List of AAD domains fetched from Microsoft Graph for user.")
   aadDomains?: string[];
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Provisioning State of the resource")
   provisioningState?: ResourceProvisioningState;
 }

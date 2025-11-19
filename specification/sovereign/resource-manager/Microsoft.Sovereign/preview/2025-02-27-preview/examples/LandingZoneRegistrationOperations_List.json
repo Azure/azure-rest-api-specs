@@ -1,0 +1,41 @@
+{
+  "title": "LandingZoneRegistrationOperations_List",
+  "operationId": "LandingZoneRegistrationOperations_List",
+  "parameters": {
+    "api-version": "2025-02-27-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg-RemApiExample",
+    "landingZoneAccountName": "lza-RemApiExample"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-RemApiExample/providers/Microsoft.Sovereign/landingZoneAccounts/lza-RemApiExample/landingZoneRegistrations/lzr-RemApiExample",
+            "name": "lzr-RemApiExample",
+            "type": "microsoft.sovereign/landingzoneaccounts/landingzoneregistrations",
+            "systemData": {
+              "createdBy": "ExampleUser@example.com",
+              "createdByType": "User",
+              "createdAt": "2025-03-14T01:34:29.3042209Z",
+              "lastModifiedBy": "ExampleUser@example.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2025-03-14T01:34:29.3042209Z"
+            },
+            "properties": {
+              "provisioningState": "Succeeded",
+              "existingTopLevelMgId": "/providers/Microsoft.Management/managementGroups/mg-example",
+              "existingLandingZoneConfigurationId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-RemApiExample/providers/Microsoft.Sovereign/landingZoneAccounts/lza-RemApiExample/landingZoneConfigurations/lzc-RemApiExample",
+              "managedIdentity": {
+                "type": "UserAssigned",
+                "userAssignedIdentityResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-RemApiExample/providers/Microsoft.ManagedIdentity/userAssignedIdentities/mi-RemApiExample"
+              }
+            }
+          }
+        ],
+        "nextLink": "https://example.com/a"
+      }
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "title": "Sends a notification message - video",
+  "operationId": "NotificationMessagesOperations_Send",
+  "parameters": {
+    "api-version": "2025-01-15-preview",
+    "content-type": "application/json",
+    "body": {
+      "channelRegistrationId": "0f0eb78e-a576-1dfc-b414-0f0756de3338",
+      "to": [
+        "14250000000"
+      ],
+      "kind": "video",
+      "mediaUri": "https://example.com/video.mp4",
+      "caption": "check out this video!"
+    },
+    "endpoint": "https://my-resource.communication.azure.com"
+  },
+  "responses": {
+    "202": {
+      "body": {
+        "receipts": [
+          {
+            "messageId": "320fc2a1-4c4b-4387-9c1a-bd38b57795de",
+            "to": "14250000000"
+          }
+        ]
+      }
+    }
+  }
+}

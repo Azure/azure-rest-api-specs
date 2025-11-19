@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "api-version": "2024-06-01",
+    "parameters": {
+      "properties": {
+        "metadata": {
+          "key2": "value2"
+        }
+      }
+    },
+    "privateZoneName": "privatezone1.com",
+    "recordType": "MX",
+    "relativeRecordSetName": "recordMX",
+    "resourceGroupName": "resourceGroup1",
+    "subscriptionId": "subscriptionId"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "recordmx",
+        "type": "Microsoft.Network/privateDnsZones/MX",
+        "etag": "00000000-0000-0000-0000-000000000000",
+        "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/privatezone1.com/MX/recordmx",
+        "properties": {
+          "fqdn": "recordmx.privatezone1.com.",
+          "isAutoRegistered": false,
+          "metadata": {
+            "key2": "value2"
+          },
+          "mxRecords": [
+            {
+              "exchange": "mail.privatezone1.com",
+              "preference": 0
+            }
+          ],
+          "ttl": 3600
+        }
+      }
+    }
+  },
+  "operationId": "RecordSets_Update",
+  "title": "PATCH Private DNS Zone MX Record Set"
+}

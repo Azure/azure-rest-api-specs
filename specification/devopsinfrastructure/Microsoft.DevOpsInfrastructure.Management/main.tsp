@@ -1,4 +1,5 @@
 import "@typespec/http";
+import "./back-compatible.tsp";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "@azure-tools/typespec-azure-core";
@@ -11,20 +12,20 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 
-@armCommonTypesVersion(CommonTypes.Versions.v5)
 @armProviderNamespace
-@service({
-  title: "Managed DevOps Infrastructure",
-})
-@versioned(Versions)
+@service(#{ title: "Managed DevOps Infrastructure" })
+@versioned(Microsoft.DevOpsInfrastructure.Versions)
 namespace Microsoft.DevOpsInfrastructure;
 
 /** Api versions */
 enum Versions {
-  /** 2024-10-19 version */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  `2024-10-19`,
+  /** 2025-01-21 version */
+  @armCommonTypesVersion(CommonTypes.Versions.v5)
+  v2025_01_21: "2025-01-21",
+
+  /** 2025-09-20 version */
+  @armCommonTypesVersion(CommonTypes.Versions.v6)
+  v2025_09_20: "2025-09-20",
 }
 
 model Pool is TrackedResource<PoolProperties> {
@@ -60,6 +61,10 @@ model PoolProperties {
 
   @doc("The resource id of the DevCenter Project the pool belongs to.")
   devCenterProjectResourceId: string;
+
+  @doc("The runtime configuration of the pool.")
+  @added(Microsoft.DevOpsInfrastructure.Versions.v2025_09_20)
+  runtimeConfiguration?: RuntimeConfiguration;
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
@@ -74,7 +79,7 @@ model GitHubOrganizationProfile extends OrganizationProfile {
   kind: "GitHub";
 
   @doc("The list of GitHub organizations/repositories the pool should be present in.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   organizations: GitHubOrganization[];
 }
 @doc("Defines a GitHub organization")
@@ -92,12 +97,17 @@ model AzureDevOpsOrganizationProfile extends OrganizationProfile {
   kind: "AzureDevOps";
 
   @doc("The list of Azure DevOps organizations the pool should be present in.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   organizations: Organization[];
 
   @doc("The type of permission which determines which accounts are admins on the Azure DevOps pool.")
   permissionProfile?: AzureDevOpsPermissionProfile;
+
+  @doc("An alias to reference the Azure DevOps pool name.")
+  @added(Microsoft.DevOpsInfrastructure.Versions.v2025_09_20)
+  `alias`?: string;
 }
+
 @doc("Defines an Azure DevOps organization.")
 model Organization {
   @doc("The Azure DevOps organization URL in which the pool should be created.")
@@ -108,6 +118,13 @@ model Organization {
 
   @doc("How many machines can be created at maximum in this organization out of the maximumConcurrency of the pool.")
   parallelism?: int32;
+
+  @doc("Determines if the pool should have open access to all projects in this organization.")
+  openAccess?: boolean;
+
+  @doc("An alias to reference the Azure DevOps pool name.")
+  @added(Microsoft.DevOpsInfrastructure.Versions.v2025_09_20)
+  `alias`?: string;
 }
 @doc("Defines the type of Azure DevOps pool permission.")
 model AzureDevOpsPermissionProfile {
@@ -139,6 +156,7 @@ union AzureDevOpsPermissionType {
 @doc("Defines the type of fabric the agent will run on.")
 @discriminator("kind")
 model FabricProfile {}
+
 @doc("The agents will run on Virtual Machine Scale Sets.")
 model VmssFabricProfile extends FabricProfile {
   @doc("Virtual Machine Scale Sets")
@@ -148,7 +166,7 @@ model VmssFabricProfile extends FabricProfile {
   sku: DevOpsAzureSku;
 
   @doc("The VM images of the machines in the pool.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   images: PoolImage[];
 
   @doc("The OS profile of the machines in the pool.")
@@ -159,6 +177,13 @@ model VmssFabricProfile extends FabricProfile {
 
   @doc("The network profile of the machines in the pool.")
   networkProfile?: NetworkProfile;
+}
+
+@doc("The runtime configuration of the pool.")
+@added(Microsoft.DevOpsInfrastructure.Versions.v2025_09_20)
+model RuntimeConfiguration {
+  @doc("The target work folder of the task agent on the machine.")
+  workFolder?: string;
 }
 
 @doc("The Azure SKU of the machines in the pool.")
@@ -173,7 +198,7 @@ model StorageProfile {
   osDiskStorageAccountType?: OsDiskStorageAccountType;
 
   @doc("A list of empty data disks to attach.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   dataDisks?: DataDisk[];
 }
 
@@ -240,6 +265,20 @@ union OsDiskStorageAccountType {
   StandardSSD: "StandardSSD",
 }
 
+@doc("The type of Ephemeral option the pool will use on underlying VMs when loading this image.")
+union EphemeralType {
+  string,
+
+  @doc("Ephemeral is handled by Managed DevOps Pools service.")
+  Automatic: "Automatic",
+
+  @doc("CacheDisk ephemeral only, requires that the SKU has a cache that is large enough for the image.")
+  CacheDisk: "CacheDisk",
+
+  @doc("ResourceDisk ephemeral only, requires only that the SKU supports it.")
+  ResourceDisk: "ResourceDisk",
+}
+
 @doc("The VM image of the machines in the pool.")
 model PoolImage {
   @doc("The resource id of the image.")
@@ -253,6 +292,14 @@ model PoolImage {
 
   @doc("The percentage of the buffer to be allocated to this image.")
   buffer?: string = "*";
+
+  @doc("The ephemeral type of the image.")
+  ephemeralType?: EphemeralType;
+
+  @doc("Read only. Determines if the image is ephemeral.")
+  @visibility(Lifecycle.Read)
+  @added(Microsoft.DevOpsInfrastructure.Versions.v2025_09_20)
+  isEphemeral?: boolean;
 }
 
 @doc("The OS profile of the machines in the pool.")
@@ -263,10 +310,25 @@ model OsProfile {
   @doc("Determines how the service should be run. By default, this will be set to Service.")
   logonType?: LogonType;
 }
+
+@doc("The certificate store name type")
+union CertificateStoreNameOption {
+  string,
+
+  @doc("The X.509 certificate store for personal certificates.")
+  "My",
+
+  @doc("The X.509 certificate store for trusted root certificate authorities (CAs).")
+  "Root",
+}
+
 @doc("The secret management settings of the machines in the pool.")
 model SecretsManagementSettings {
   @doc("Where to store certificates on the machine.")
   certificateStoreLocation?: string;
+
+  @doc("Name of the certificate store to use on the machine, currently 'My' and 'Root' are supported.")
+  certificateStoreName?: CertificateStoreNameOption;
 
   @doc("The list of certificates to install on all machines in the pool.")
   observedCertificates: url[];
@@ -274,6 +336,7 @@ model SecretsManagementSettings {
   @doc("Defines if the key of the certificates should be exportable.")
   keyExportable: boolean;
 }
+
 @doc("Determines how the service should be run.")
 union LogonType {
   string,
@@ -288,7 +351,17 @@ union LogonType {
 @doc("The network profile of the machines in the pool.")
 model NetworkProfile {
   @doc("The subnet id on which to put all machines created in the pool.")
-  subnetId: string;
+  @madeOptional(Microsoft.DevOpsInfrastructure.Versions.v2025_09_20)
+  subnetId?: string;
+
+  @doc("The number of static public IP addresses for outgoing connections assigned to the pool.")
+  @added(Microsoft.DevOpsInfrastructure.Versions.v2025_09_20)
+  staticIpAddressCount?: int32;
+
+  @doc("Read only. The list of static public IP addresses for outgoing connections assigned to the pool.")
+  @added(Microsoft.DevOpsInfrastructure.Versions.v2025_09_20)
+  @visibility(Lifecycle.Read)
+  ipAddresses?: string[];
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
@@ -411,7 +484,7 @@ interface Pools {
     Pool,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     Pool,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<Pool, PoolProperties>
@@ -419,6 +492,21 @@ interface Pools {
   delete is ArmResourceDeleteWithoutOkAsync<Pool>;
   listByResourceGroup is ArmResourceListByParent<Pool>;
   listBySubscription is ArmListBySubscription<Pool>;
+
+  @doc("Checks that the pool name is valid and is not already in use.")
+  checkNameAvailability is checkGlobalNameAvailability<
+    CheckNameAvailability,
+    CheckNameAvailabilityResult
+  >;
+
+  @added(Microsoft.DevOpsInfrastructure.Versions.v2025_09_20)
+  @action("resources")
+  @post
+  deleteResources is ArmResourceActionSync<
+    Pool,
+    DeleteResourcesDetails,
+    ArmDeletedResponse | ErrorResponse
+  >;
 }
 
 @parentResource(Pool)
@@ -428,7 +516,7 @@ model ResourceDetailsObject is ProxyResource<ResourceDetailsObjectProperties> {
   @doc("The name of the resource.")
   @key("resourceName")
   @segment("resources")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @path
   name: string;
 }
@@ -489,6 +577,13 @@ interface ResourceDetails {
   listByPool is ArmResourceListByParent<ResourceDetailsObject>;
 }
 
+@doc("Request body for deleting many resources by their IDs.")
+@added(Microsoft.DevOpsInfrastructure.Versions.v2025_09_20)
+model DeleteResourcesDetails {
+  @doc("List of resource IDs to delete.")
+  resourceIds: string[];
+}
+
 /** Represents how SKU capacity scales. */
 union ResourceSkuCapacityScaleType {
   string,
@@ -496,7 +591,7 @@ union ResourceSkuCapacityScaleType {
   /** Capacity scales automatically. */
   "Automatic",
 
-  /** Capactiy scales manually. */
+  /** Capacity scales manually. */
   "Manual",
 
   /** Capacity does not scale. */
@@ -582,7 +677,7 @@ model ResourceSkuLocationInfo {
   zones: string[];
 
   @doc("Gets details of capabilities available to a SKU in specific zones.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   zoneDetails: ResourceSkuZoneDetails[];
 }
 
@@ -592,7 +687,7 @@ model ResourceSkuZoneDetails {
   name: string[];
 
   @doc("A list of capabilities that are available for the SKU in the specified list of zones.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   capabilities: ResourceSkuCapabilities[];
 }
 
@@ -603,7 +698,7 @@ model ResourceSku is ProxyResource<ResourceSkuProperties> {
   @doc("The name of the SKU.")
   @key("skuName")
   @segment("skus")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @path
   name: string;
 }
@@ -627,15 +722,15 @@ model ResourceSkuProperties {
   locations: azureLocation[];
 
   @doc("A list of locations and availability zones in those locations where the SKU is available")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   locationInfo: ResourceSkuLocationInfo[];
 
   @doc("Name value pairs to describe the capability.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   capabilities: ResourceSkuCapabilities[];
 
   @doc("The restrictions of the SKU.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   restrictions: ResourceSkuRestrictions[];
 }
 
@@ -648,7 +743,6 @@ model Location is ProxyResource<LocationProperties> {
   @path
   @segment("locations")
   @doc("Name of the location.")
-  @visibility("public")
   name: string;
 }
 
@@ -670,6 +764,7 @@ interface SubscriptionUsages {
   @get
   @armResourceList(Location)
   @doc("List Quota resources by subscription ID")
+  @list
   usages(
     ...SubscriptionIdParameter,
     ...Azure.ResourceManager.Foundations.DefaultProviderNamespace,
@@ -682,7 +777,7 @@ interface SubscriptionUsages {
 @parentResource(Location)
 model Quota {
   @doc("The name of the quota.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: QuotaName;
 
   @doc("Fully qualified ARM resource id")
@@ -716,8 +811,25 @@ model Image is ProxyResource<ImageProperties> {
   @path
   @segment("images")
   @doc("Name of the image.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
+}
+
+@doc("The type of resource.")
+union DevOpsInfrastructureResourceType {
+  string,
+
+  @doc("DevOpsInfrastructure pool resource.")
+  "Microsoft.DevOpsInfrastructure/pools",
+}
+
+@doc("The parameters used to check the availability of a resource.")
+model CheckNameAvailability {
+  @doc("The name of the resource.")
+  name: string;
+
+  @doc("The type of resource that is used as the scope of the availability check.")
+  type: DevOpsInfrastructureResourceType;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "No ProvisioningState"
@@ -732,7 +844,7 @@ model ImageVersion is ProxyResource<ImageVersionProperties> {
   @doc("The name of the image version.")
   @key("imageVersionName")
   @segment("versions")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @path
   name: string;
 }
@@ -747,4 +859,42 @@ model ImageVersionProperties {
 @armResourceOperations
 interface ImageVersions {
   listByImage is ArmResourceListByParent<ImageVersion>;
+}
+
+@doc("The reason code explaining why the name is unavailable. Will be null if the name is available.")
+union CheckNameAvailabilityReason {
+  string,
+
+  @doc("The name is invalid.")
+  "Invalid",
+
+  @doc("The name already exists.")
+  "AlreadyExists",
+}
+
+@doc("AvailabilityStatus of a name.")
+union AvailabilityStatus {
+  string,
+
+  @doc("The name is available.")
+  "Available",
+
+  @doc("The name is unavailable")
+  "Unavailable",
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "No ProvisioningState"
+@doc("The CheckNameAvailability operation response.")
+model CheckNameAvailabilityResult {
+  @doc("Availability status of the name.")
+  available: AvailabilityStatus;
+
+  @doc("A message explaining why the name is unavailable. Will be null if the name is available.")
+  message: string;
+
+  @doc("The name whose availability was checked.")
+  name: string;
+
+  @doc("The reason code explaining why the name is unavailable. Will be null if the name is available.")
+  reason: CheckNameAvailabilityReason;
 }

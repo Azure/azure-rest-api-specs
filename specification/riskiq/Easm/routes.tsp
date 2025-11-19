@@ -59,6 +59,7 @@ interface Assets {
   @doc("Retrieve a list of deltas for the provided time range.")
   @action("getDeltaDetails")
   @Versioning.added(Versions.v2024_03_01_preview)
+  @list
   getDeltaDetails is Operations.ResourceCollectionAction<
     AssetResource,
     BodyParameter<DeltaDetailsRequest>,
@@ -148,6 +149,7 @@ interface DiscoveryGroups {
   @route("/discoGroups/{groupName}/runs")
   @get
   @clientName("GetDiscoveryGroupRuns", "csharp")
+  @list
   listRuns is Foundations.Operation<
     DiscoGroupsListRunsParameter,
     DiscoRunPageResult

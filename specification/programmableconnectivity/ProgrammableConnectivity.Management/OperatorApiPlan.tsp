@@ -24,7 +24,7 @@ model OperatorApiPlan
   @path
   @key("operatorApiPlanName")
   @segment("operatorApiPlans")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 }
 
@@ -40,6 +40,7 @@ model MarketplaceProperties {
   /**
    * Azure marketplace Legacy Offer ID for this plan. This is used to fetch the details of the plan from the Azure marketplace.
    */
+  @TypeSpec.Versioning.removed(Versions.v2025_03_30_preview)
   legacyOfferId?: string;
 
   /**
@@ -55,7 +56,16 @@ model MarketplaceProperties {
   /**
    * Azure marketplace Term ID for this plan.
    */
+  @TypeSpec.Versioning.removed(Versions.v2025_03_30_preview)
   termId?: string;
+
+  /**
+   * Links to the Terms and Conditions of the Plan that must be accepted to create an
+   * associated Operator Api Connection
+   */
+  @TypeSpec.Versioning.added(Versions.v2025_03_30_preview)
+  @visibility(Lifecycle.Read)
+  planTermsAndConditionsLinks: string[];
 }
 
 /**
@@ -100,7 +110,7 @@ model OperatorApiPlanProperties {
   /**
    * The status of the last operation on the Gateway resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 

@@ -11,7 +11,6 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
-using OpenAPI;
 
 namespace Microsoft.DeviceRegistry;
 
@@ -31,7 +30,7 @@ model DiscoveredAsset is TrackedResource<DiscoveredAssetProperties> {
   // Extended location is not included in TrackedResource yet
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("The extended location.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   extendedLocation: ExtendedLocation;
 }
 
@@ -40,7 +39,7 @@ model DiscoveredAsset is TrackedResource<DiscoveredAssetProperties> {
 @removed(Versions.v2024_11_01)
 model DiscoveredAssetProperties {
   @doc("A reference to the asset endpoint profile (connection information) used by brokers to connect to an endpoint that provides data points for this asset. Must provide asset endpoint profile name.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   assetEndpointProfileRef: string;
 
   @doc("Identifier used to detect changes in the asset.")
@@ -83,15 +82,15 @@ model DiscoveredAssetProperties {
   defaultTopic?: Topic;
 
   @doc("Array of datasets that are part of the asset. Each dataset spec describes the data points that make up the set.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   datasets?: DiscoveredDataset[];
 
   @doc("Array of events that are part of the asset. Each event can have per-event configuration.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   events?: DiscoveredEvent[];
 
   @doc("Provisioning state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -109,7 +108,7 @@ model DiscoveredDataset {
   topic?: Topic;
 
   @doc("Array of data points that are part of the dataset. Each data point can have per-data point configuration.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   dataPoints?: DiscoveredDataPoint[];
 }
 
@@ -159,6 +158,7 @@ interface DiscoveredAssets {
   // Using 'ArmCustomPatchAsync' instead of 'ArmResourcePatchAsync' to define the correct patch payload for the resource.
   // This is a workaround to fix the patch payload that otherwise will expose the 'location' field (not present in patch),
   // since otherwise it extends the ARM TrackedResource type.
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     DiscoveredAsset,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<

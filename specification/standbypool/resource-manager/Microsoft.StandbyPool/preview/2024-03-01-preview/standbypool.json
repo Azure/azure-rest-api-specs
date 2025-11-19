@@ -1418,10 +1418,7 @@
         },
         "virtualMachineState": {
           "$ref": "#/definitions/VirtualMachineState",
-          "description": "Specifies the desired state of virtual machines in the pool.",
-          "x-ms-identifiers": [
-            "vmState"
-          ]
+          "description": "Specifies the desired state of virtual machines in the pool."
         },
         "attachedVirtualMachineScaleSetId": {
           "type": "string",
@@ -1473,10 +1470,7 @@
         },
         "virtualMachineState": {
           "$ref": "#/definitions/VirtualMachineState",
-          "description": "Specifies the desired state of virtual machines in the pool.",
-          "x-ms-identifiers": [
-            "vmState"
-          ]
+          "description": "Specifies the desired state of virtual machines in the pool."
         },
         "attachedVirtualMachineScaleSetId": {
           "type": "string",
@@ -1535,7 +1529,7 @@
       "properties": {
         "instanceCountSummary": {
           "type": "array",
-          "description": "A list containing the counts of virtual machines in each possible power state for each zone if enabled, as known by the StandbyPool resource provider.\nIf zones are not enabled on the attached VMSS, the list will contain a single entry with null zone values.\nNote: any updates to pool resources outside of StandbyPoolRP (i.e deleting a VM through portal) are not reflected here.\nNote: any resources in the Running state may still be installing extensions / not fully provisioned.",
+          "description": "A list containing the counts of virtual machines in each possible power state for each zone if enabled, as known by the StandbyPool resource provider. If zones are not enabled on the attached VMSS, the list will contain a single entry without zone values. Note: any resources in the Running state may still be installing extensions / not fully provisioned.",
           "items": {
             "$ref": "#/definitions/VirtualMachineInstanceCountSummary"
           },
@@ -1634,12 +1628,12 @@
     },
     "VirtualMachineInstanceCountSummary": {
       "type": "object",
-      "description": "Contains the counts of VMs in each power state in a given zone, fault domain, as known by the StandbyPool resource provider.\nNote: any updates to pool resources outside of StandbyPoolRP (i.e deleting a VM through portal) are not reflected here.\nNote: any resources in the Running state may still be installing extensions / not fully provisioned.",
+      "description": "Contains the counts of VMs in each power state in a given zone, fault domain, as known by the StandbyPool resource provider. Note: any resources in the Running state may still be installing extensions / not fully provisioned.",
       "properties": {
         "zone": {
           "type": "integer",
           "format": "int64",
-          "description": "The zone that the provided counts are in. This is null if zones are not enabled on the attached VMSS."
+          "description": "The zone that the provided counts are in. It will not have a value if zones are not enabled on the attached VMSS."
         },
         "instanceCountsByState": {
           "type": "array",

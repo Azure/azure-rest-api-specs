@@ -4,6 +4,8 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
+import "./back-compatible.tsp";
+
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
@@ -11,9 +13,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 
 @armProviderNamespace("Microsoft.VerifiedId")
-@service({
-  title: "VerifiedIdMgmtClient",
-})
+@service(#{ title: "VerifiedIdMgmtClient" })
 @versioned(Microsoft.VerifiedId.Versions)
 @doc("VerifiedId Resource Provider management API.")
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
@@ -26,7 +26,6 @@ enum Versions {
   /**
    * The 2024-01-26-preview version of the Microsoft.VerifiedId resource provider.
    */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   v2024_01_26_preview: "2024-01-26-preview",
 }
 
@@ -63,7 +62,7 @@ union ProvisioningState {
 
 @doc("Details of the VerifiedId Authority.")
 model AuthorityProperties {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 }

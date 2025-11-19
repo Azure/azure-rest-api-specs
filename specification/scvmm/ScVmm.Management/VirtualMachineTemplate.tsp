@@ -44,9 +44,7 @@ interface VirtualMachineTemplates {
   @summary("Implements the VirtualMachineTemplate PATCH method.")
   @extension(
     "x-ms-long-running-operation-options",
-    {
-      `final-state-via`: "azure-async-operation",
-    }
+    #{ `final-state-via`: "azure-async-operation" }
   )
   update is ArmTagsPatchAsync<VirtualMachineTemplate>;
   /** Deregisters the ScVmm VM Template from Azure. */
@@ -54,9 +52,7 @@ interface VirtualMachineTemplates {
   @summary("Implements VirtualMachineTemplate DELETE method.")
   @extension(
     "x-ms-long-running-operation-options",
-    {
-      `final-state-via`: "azure-async-operation",
-    }
+    #{ `final-state-via`: "azure-async-operation" }
   )
   delete is ArmResourceDeleteWithoutOkAsync<
     VirtualMachineTemplate,

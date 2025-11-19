@@ -3,6 +3,9 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-autorest";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
+
+import "./back-compatible.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Http;
@@ -15,16 +18,13 @@ namespace SplitIO {
 }
 
 @armProviderNamespace
-@service({
-  title: "Split.IO Experimentation",
-})
+@service(#{ title: "Split.IO Experimentation" })
 @versioned(SplitIO.Experimentation.Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace SplitIO.Experimentation {
   @doc("Supported API versions for the SplitIO.Experimentation resource provider.")
   enum Versions {
     @doc("2024-07-01-preview api version")
-    @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
     v24_07_preview: "2024-07-01-preview",
   }
 
@@ -33,7 +33,7 @@ namespace SplitIO.Experimentation {
   @doc("Properties of the experimentation workspace")
   model ExperimentationWorkspaceProperties {
     @doc("Provisioning state of the resource.")
-    @visibility("read")
+    @visibility(Lifecycle.Read)
     provisioningState?: ResourceProvisioningState;
 
     @doc("Access policy for an experimentation workspace.")
@@ -53,7 +53,7 @@ namespace SplitIO.Experimentation {
     defaultRole?: DataPlaneRole;
 
     @doc("Endpoint used for access to the experimentation workspace.")
-    @visibility("read")
+    @visibility(Lifecycle.Read)
     dataPlaneEndpoint?: url;
   }
 
@@ -145,7 +145,7 @@ namespace SplitIO.Experimentation {
   @doc("The exchange token result that contains the bearer token which is used for Split.IO data plane authentication.")
   model ExchangeTokenResult {
     @doc("The bearer token that is used for Split.IO data plane authentication.")
-    @visibility("read")
+    @visibility(Lifecycle.Read)
     @secret
     token: string;
   }

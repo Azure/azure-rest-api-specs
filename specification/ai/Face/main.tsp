@@ -14,9 +14,7 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 
 @useAuth(KeyAuth | AADToken)
-@service({
-  title: "Azure AI Face API",
-})
+@service(#{ title: "Azure AI Face API" })
 @versioned(Versions)
 @server(
   "{endpoint}/face/{apiVersion}",
@@ -52,11 +50,15 @@ model AADToken
 
 @doc("API versions for Azure AI Face API.")
 enum Versions {
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @doc("v1.1-preview.1")
   v1_1_preview_1: "v1.1-preview.1",
 
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @doc("v1.2-preview.1")
   v1_2_preview_1: "v1.2-preview.1",
+
+  @doc("v1.2")
+  v1_2: "v1.2",
+
+  @doc("v1.3-preview.1")
+  v1_3_preview_1: "v1.3-preview.1",
 }

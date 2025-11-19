@@ -1,0 +1,66 @@
+parameters:
+  endpoint: https://aoairesource.openai.azure.com
+  api-key: "{api key}"
+  api-version: "2025-04-01-preview"
+  eval-id: eval_6801694950848190b10968bb628b651d
+responses:
+  "200":
+    headers: {}
+    body:
+      object: list
+      data:
+        - object: eval.run
+          id: evalrun_68016a056f0481909b9774447bdd1aa3
+          eval_id: eval_6801694950848190b10968bb628b651d
+          report_url: https://ai.azure.com/resource/evaluation
+          status: queued
+          model: gpt-4o-mini
+          name: Math quiz
+          created_at: 1744923141
+          result_counts:
+            total: 0
+            errored: 0
+            failed: 0
+            passed: 0
+          per_model_usage: null
+          per_testing_criteria_results: null
+          data_source:
+            type: completions
+            source:
+              type: file_content
+              content:
+                - item:
+                    question: "Find the degree for the given field extension Q(sqrt(2), sqrt(3), sqrt(18)) over Q."
+                    A: "0"
+                    B: "4"
+                    C: "2"
+                    D: "6"
+                    answer: B
+                - item:
+                    question: "Let p = (1, 2, 5, 4)(2, 3) in S_5 . Find the index of <p> in S_5."
+                    A: "8"
+                    B: "2"
+                    C: "24"
+                    D: "120"
+                    answer: C
+            input_messages:
+              type: template
+              template:
+                - type: message
+                  role: system
+                  content:
+                    text: "Answer the question's with A, B, C, or D."
+                - type: message
+                  role: user
+                  content:
+                    text: "Question: {{item.question}} A: {{item.A}} B: {{item.B}} C: {{item.C}} D: {{item.D}}."
+            model: gpt-4o-mini
+            sampling_params:
+              seed: 42
+              temperature: 1
+              top_p: 1
+          error: null
+          metadata: {}
+      first_id: evalrun_68016a056f0481909b9774447bdd1aa3
+      last_id: evalrun_68016a056f0481909b9774447bdd1aa3
+      has_more: false

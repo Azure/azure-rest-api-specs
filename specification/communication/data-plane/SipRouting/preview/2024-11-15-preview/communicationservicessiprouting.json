@@ -1,0 +1,631 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "SipRouting Service",
+    "description": "SipRouting Service",
+    "contact": {
+      "email": "acsdevexdisc@microsoft.com"
+    },
+    "version": "2024-11-15-preview"
+  },
+  "paths": {
+    "/sip": {
+      "get": {
+        "tags": [
+          "SipConfiguration"
+        ],
+        "summary": "Gets SIP configuration for resource.",
+        "operationId": "SipRouting_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ExpandSipConfiguration"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok.",
+            "schema": {
+              "$ref": "#/definitions/SipConfiguration"
+            }
+          },
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get SIP configuration for resource with Trunk Health expand": {
+            "$ref": "./examples/GetSipConfigurationWithExpand.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "SipConfiguration"
+        ],
+        "summary": "Updates SIP configuration for resource.",
+        "operationId": "SipRouting_Update",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Sip configuration update object.",
+            "schema": {
+              "$ref": "#/definitions/SipConfigurationUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated configuration is returned.",
+            "schema": {
+              "$ref": "#/definitions/SipConfiguration"
+            }
+          },
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update SIP configuration for resource": {
+            "$ref": "./examples/UpdateSipConfiguration.json"
+          }
+        }
+      }
+    },
+    "/sip:testRoutesWithNumber": {
+      "post": {
+        "tags": [
+          "NumberRoutingValidation"
+        ],
+        "summary": "Gets the list of routes matching the target phone number, ordered by priority.",
+        "operationId": "SipRouting_TestRoutesWithNumber",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "targetPhoneNumber",
+            "description": "Phone number to test routing patterns against",
+            "required": true,
+            "type": "string",
+            "x-example": "+11234567890"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "sipConfiguration",
+            "description": "Sip configuration object to test with targetPhoneNumber.",
+            "schema": {
+              "$ref": "#/definitions/SipConfiguration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of matching routes",
+            "schema": {
+              "$ref": "#/definitions/RoutesForNumber"
+            }
+          },
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Validate target phone number routing": {
+            "$ref": "./examples/TestRoutesWithNumber.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Trunk": {
+      "description": "Represents a SIP trunk for routing calls. See RFC 4904. Can be expanded with additional data.",
+      "required": [
+        "sipSignalingPort"
+      ],
+      "type": "object",
+      "properties": {
+        "sipSignalingPort": {
+          "format": "int32",
+          "description": "Gets or sets SIP signaling port of the trunk.",
+          "type": "integer"
+        },
+        "enabled": {
+          "description": "Enabled flag",
+          "$ref": "#/definitions/Enabled"
+        },
+        "health": {
+          "description": "Represents health state of a SIP trunk for routing calls.",
+          "type": "object",
+          "readOnly": true,
+          "$ref": "#/definitions/Health"
+        },
+        "directTransfer": {
+          "type": "boolean",
+          "description": "When enabled, removes Azure Communication Services from the signaling path on call transfer and sets the SIP Refer-To header to the trunk's FQDN. By default false."
+        },
+        "privacyHeader": {
+          "$ref": "#/definitions/PrivacyHeader",
+          "description": "SIP Privacy header. Default value is id."
+        },
+        "ipAddressVersion": {
+          "$ref": "#/definitions/IpAddressVersion",
+          "description": "IP address version used by the trunk. Default value is ipv4."
+        }
+      }
+    },
+    "Health": {
+      "description": "Represents health state of a SIP trunk for routing calls.",
+      "type": "object",
+      "required": [
+        "tls",
+        "ping",
+        "overall"
+      ],
+      "properties": {
+        "tls": {
+          "$ref": "#/definitions/Tls"
+        },
+        "ping": {
+          "$ref": "#/definitions/Ping"
+        },
+        "overall": {
+          "$ref": "#/definitions/OverallHealth"
+        }
+      }
+    },
+    "Tls": {
+      "type": "object",
+      "description": "The status of the TLS connections of the Trunk.",
+      "required": [
+        "status"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "The status of the TLS connections of the Trunk.",
+          "enum": [
+            "unknown",
+            "ok",
+            "certExpiring",
+            "certExpired"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "tlsStatus",
+            "values": [
+              {
+                "value": "unknown",
+                "description": "Indicates an unknown status."
+              },
+              {
+                "value": "ok",
+                "description": "Indicates the status is okay."
+              },
+              {
+                "value": "certExpiring",
+                "description": "Indicates the Trunk certificate is expiring."
+              },
+              {
+                "value": "certExpired",
+                "description": "Indicates the Trunk certificate is expired."
+              }
+            ]
+          }
+        }
+      }
+    },
+    "Ping": {
+      "type": "object",
+      "description": "The status of SIP OPTIONS message sent by Trunk.",
+      "required": [
+        "status"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "The status of SIP OPTIONS message sent by Trunk.",
+          "enum": [
+            "unknown",
+            "ok",
+            "expired",
+            "error"
+          ],
+          "x-ms-enum": {
+            "name": "pingStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "unknown",
+                "description": "Indicates an unknown status."
+              },
+              {
+                "value": "ok",
+                "description": "Indicates the status is okay."
+              },
+              {
+                "value": "expired",
+                "description": "Indicates the status is expired."
+              },
+              {
+                "value": "error",
+                "description": "Indicates the status is at an error level."
+              }
+            ]
+          }
+        }
+      }
+    },
+    "OverallHealth": {
+      "type": "object",
+      "description": "The overall health status of Trunk.",
+      "required": [
+        "status"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "The overall health status of Trunk.",
+          "enum": [
+            "unknown",
+            "active",
+            "inactive"
+          ],
+          "x-ms-enum": {
+            "name": "overallHealthStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "unknown",
+                "description": "Indicates an unknown health status."
+              },
+              {
+                "value": "active",
+                "description": "Indicates the Trunk is active."
+              },
+              {
+                "value": "inactive",
+                "description": "Indicates the Trunk is inactive."
+              }
+            ]
+          }
+        },
+        "reason": {
+          "type": "string",
+          "description": "The reason overall status of Trunk is inactive.",
+          "enum": [
+            "noRecentCalls",
+            "noRecentPings",
+            "noRecentCallsAndPings"
+          ],
+          "x-ms-enum": {
+            "name": "inactiveStatusReason",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "noRecentCalls",
+                "description": "Indicates no recent calls."
+              },
+              {
+                "value": "noRecentPings",
+                "description": "Indicates ping status is expired."
+              },
+              {
+                "value": "noRecentCallsAndPings",
+                "description": "Indicates no recent calls and ping status is expired."
+              }
+            ]
+          }
+        }
+      }
+    },
+    "TrunkUpdate": {
+      "description": "Represents a SIP trunk update.",
+      "type": "object",
+      "properties": {
+        "sipSignalingPort": {
+          "format": "int32",
+          "description": "Gets or sets SIP signaling port of the trunk.",
+          "type": "integer"
+        },
+        "enabled": {
+          "description": "Enabled flag",
+          "$ref": "#/definitions/Enabled"
+        },
+        "directTransfer": {
+          "type": "boolean",
+          "description": "When enabled, removes Azure Communication Services from the signaling path on call transfer and sets the SIP Refer-To header to the trunk's FQDN. By default false."
+        },
+        "privacyHeader": {
+          "$ref": "#/definitions/PrivacyHeader",
+          "description": "SIP Privacy header. Default value is id."
+        },
+        "ipAddressVersion": {
+          "$ref": "#/definitions/IpAddressVersion",
+          "description": "IP address version used by the trunk. The default value is ipv4."
+        }
+      }
+    },
+    "TrunkRoute": {
+      "description": "Represents a trunk route for routing calls.",
+      "required": [
+        "name",
+        "numberPattern"
+      ],
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "Gets or sets description of the route.",
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "name": {
+          "description": "Gets or sets name of the route.",
+          "maxLength": 256,
+          "type": "string"
+        },
+        "numberPattern": {
+          "description": "Gets or sets regex number pattern for routing calls. .NET regex format is supported.\r\nThe regex should match only digits with an optional '+' prefix without spaces.\r\nI.e. \"^\\+[1-9][0-9]{3,23}$\".",
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "trunks": {
+          "description": "Gets or sets list of SIP trunks for routing calls. Trunks are represented as FQDN.",
+          "maxItems": 250,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "callerIdOverride": {
+          "type": "string",
+          "description": "Gets or sets caller ID override. This value will override caller ID of outgoing call specified at runtime."
+        }
+      }
+    },
+    "IpAddressVersion": {
+      "type": "string",
+      "description": "IP address version.",
+      "enum": [
+        "ipv4",
+        "ipv6"
+      ],
+      "x-ms-enum": {
+        "name": "IpAddressVersion",
+        "modelAsString": true
+      }
+    },
+    "PrivacyHeader": {
+      "type": "string",
+      "description": "SIP privacy header value, `id` - Privacy requested for Third-Party Asserted Identity (rfc3325), `none` - No operation is performed by privacy service (rfc3323)",
+      "enum": [
+        "id",
+        "none"
+      ],
+      "x-ms-enum": {
+        "name": "PrivacyHeader",
+        "modelAsString": true
+      }
+    },
+    "Enabled": {
+      "type": "boolean",
+      "description": "Flag if domain is enabled or not.\r\nIf enabled it's used in configuration, if not enabled it's not used."
+    },
+    "Domain": {
+      "description": "Represents Domain object as response of validation api.\r\nMap key is domain.",
+      "required": [
+        "enabled"
+      ],
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "description": "Enabled flag",
+          "$ref": "#/definitions/Enabled"
+        }
+      }
+    },
+    "SipConfiguration": {
+      "description": "Represents a SIP configuration.\r\nWhen a call is being routed the routes are applied in the same order as in the routes list.\r\nA route is matched by its number pattern.\r\nCall is then directed into route's first available trunk, based on the order in the route's trunks list. The configuration can be expanded with additional data.",
+      "type": "object",
+      "properties": {
+        "domains": {
+          "description": "Validated Domains.\r\nMap key is domain.",
+          "maxProperties": 250,
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/Domain"
+          }
+        },
+        "trunks": {
+          "description": "SIP trunks for routing calls.\r\nMap key is trunk's FQDN (1-249 characters).",
+          "maxProperties": 250,
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/Trunk"
+          }
+        },
+        "routes": {
+          "description": "Trunk routes for routing calls.",
+          "maxItems": 250,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TrunkRoute"
+          }
+        }
+      }
+    },
+    "DomainPatch": {
+      "description": "Represents Domain that will be used.\r\nMap key is domain.",
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "description": "Enabled flag",
+          "$ref": "#/definitions/Enabled"
+        }
+      }
+    },
+    "SipConfigurationUpdate": {
+      "description": "Represents a SIP configuration update.",
+      "type": "object",
+      "properties": {
+        "domains": {
+          "description": "Domains that will be used.\r\nMap key is domain.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/DomainPatch"
+          }
+        },
+        "trunks": {
+          "description": "SIP trunks for routing calls.\r\nMap key is trunk's FQDN (1-249 characters).",
+          "maxProperties": 250,
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/TrunkUpdate"
+          }
+        },
+        "routes": {
+          "description": "Trunk routes for routing calls.",
+          "maxItems": 250,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TrunkRoute"
+          }
+        }
+      }
+    },
+    "RoutesForNumber": {
+      "description": "Represents number routing validation details.",
+      "type": "object",
+      "properties": {
+        "matchingRoutes": {
+          "description": "The list of routes whose number patterns are matched by the target number. The routes are displayed and apply in the same order as in SipConfiguration.",
+          "maxItems": 250,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TrunkRoute"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ExpandSipConfiguration": {
+      "name": "expand",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "Sip configuration expand. Optional.",
+      "x-ms-parameter-location": "method",
+      "enum": [
+        "trunks/health"
+      ],
+      "x-ms-enum": {
+        "name": "ExpandEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "trunks/health",
+            "description": "Health state of a SIP trunk for routing calls."
+          }
+        ]
+      }
+    },
+    "ApiVersionParameter": {
+      "in": "query",
+      "name": "api-version",
+      "description": "Version of API to invoke",
+      "required": true,
+      "type": "string"
+    },
+    "Endpoint": {
+      "in": "path",
+      "name": "endpoint",
+      "description": "The communication resource, for example https://resourcename.communication.azure.com",
+      "required": true,
+      "type": "string",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "client"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow"
+    },
+    "apiKey": {
+      "type": "apiKey",
+      "name": "access_key",
+      "in": "header",
+      "description": "An authentication string containing a signature generated using HMAC-SHA256 scheme."
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    },
+    {
+      "apiKey": []
+    }
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      }
+    ]
+  }
+}

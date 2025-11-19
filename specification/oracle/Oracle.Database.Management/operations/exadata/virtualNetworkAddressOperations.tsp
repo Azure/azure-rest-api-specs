@@ -1,5 +1,5 @@
 import "@azure-tools/typespec-azure-resource-manager";
-import "../../../models/exadata/virtualNetworkAddress.tsp";
+import "../../models/exadata/virtualNetworkAddress.tsp";
 
 using Azure.ResourceManager;
 using Autorest;
@@ -19,7 +19,7 @@ interface VirtualNetworkAddresses
     "./examples/virtualNetworkAddresses_listByParent.json",
     "List Virtual Network Addresses by VM Cluster"
   )
-  listByCloudVmCluster is ArmResourceListByParent<VirtualNetworkAddress>;
+  listByParent is ArmResourceListByParent<VirtualNetworkAddress>;
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"

@@ -1,4 +1,5 @@
 import "./LiftrBase.Storage/main.tsp";
+import "./back-compatible.tsp";
 
 import "@typespec/rest";
 import "@typespec/openapi";
@@ -18,9 +19,7 @@ using LiftrBase;
 
 @armProviderNamespace
 @useLibraryNamespace(LiftrBase.Storage)
-@service({
-  title: "Qumulo.Storage",
-})
+@service(#{ title: "Qumulo.Storage" })
 @versioned(Versions)
 namespace Qumulo.Storage;
 
@@ -31,7 +30,6 @@ enum Versions {
   /**
    * The 2024-06-19 Stable API version.
    */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(LiftrBase.Versions.v2_preview)
   @useDependency(LiftrBase.Storage.Versions.v2_preview)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
@@ -64,7 +62,7 @@ interface FileSystems {
    * Update a FileSystemResource
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   @operationId("FileSystems_Update")
   update is ArmCustomPatchSync<FileSystemResource, FileSystemResourceUpdate>;
 

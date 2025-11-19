@@ -26,7 +26,7 @@ These are the global settings for the communicationservices.
 
 ```yaml
 openapi-type: data-plane
-tag: package-2023-11-15
+tag: package-2025-06-30
 ```
 
 
@@ -62,6 +62,23 @@ These settings apply only when `--tag=package-2023-11-15` is specified on the co
 input-file:
   - stable/2023-11-15/common.json
 ```
+
+### Tag: package-2025-03-15-preview
+These settings apply only when `--tag=package-2025-03-15-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-03-15-preview'
+input-file:
+  - preview/2025-03-15-preview/common.json
+```
+
+### Tag: package-2025-06-30
+These settings apply only when `--tag=package-2025-06-30` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-06-30'
+input-file:
+  - stable/2025-06-30/common.json
+```
+
 
 ---
 

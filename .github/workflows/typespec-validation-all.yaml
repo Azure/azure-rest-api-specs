@@ -19,18 +19,23 @@ on:
       - package.json
       - tsconfig.json
       - eng/**
+      - "!eng/common/**"
       - specification/suppressions.yaml
       - specification/common-types/**
 
       # Workflow and workflow dependencies
-      - .github/workflows/typespec-validation-all.yaml
       - .github/actions/setup-node-npm-ci/**
+      - .github/shared/**
+      - .github/workflows/typespec-validation-all.yaml
 
   schedule:
     # Run 4x/day
-    - cron: '0 0,6,12,18 * * *'
+    - cron: "0 0,6,12,18 * * *"
 
   workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   typespec-validation-all:
@@ -53,7 +58,7 @@ jobs:
         # total-shards must be an accurate count of the number of shards
         total-shards: [3]
 
-    runs-on: ${{ matrix.os }}-latest
+    runs-on: ${{ fromJSON('{"ubuntu":"ubuntu-24.04", "windows":"windows-2022"}')[matrix.os] }}
 
     steps:
       - name: Enable git long paths
@@ -65,9 +70,9 @@ jobs:
           # Convert placeholder string 'default' to '', which tells the action to checkout the default ref.
           ref: ${{ matrix.ref == 'next' && 'typespec-next' || '' }}
 
-      - name: Setup Node and run `npm ci`
-        uses: ./.github/actions/setup-node-npm-ci
-        
+      - name: Setup Node and install deps
+        uses: ./.github/actions/setup-node-install-deps
+
       - name: Validate All Specs
         run: |
           # Keep processing when errors are written. Nonzero exit will mark the 

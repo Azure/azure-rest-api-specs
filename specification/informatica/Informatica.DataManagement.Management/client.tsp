@@ -3,7 +3,16 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 
-@@clientName(Informatica.DataManagement, "InformaticaDataMgmt", "python");
+@@clientNamespace(Informatica.DataManagement,
+  "com.azure.resourcemanager.informaticadatamanagement",
+  "java"
+);
+
+@@clientName(Informatica.DataManagement, "InformaticaDataMgmtClient", "python");
+@@clientName(Informatica.DataManagement,
+  "InformaticaDataManagementClient",
+  "java"
+);
 
 namespace Informatica.DataManagement {
   @@access(Operations.list, Access.internal);
@@ -89,4 +98,9 @@ namespace Informatica.DataManagement {
   );
 
   @@usage(ServerlessRuntimeNetworkProfileUpdate, Usage.output);
+
+  @@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+    Azure.Core.armResourceIdentifier,
+    "csharp"
+  );
 }

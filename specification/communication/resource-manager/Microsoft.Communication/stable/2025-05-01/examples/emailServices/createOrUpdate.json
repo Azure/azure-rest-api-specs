@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "subscriptionId": "11112222-3333-4444-5555-666677778888",
+    "resourceGroupName": "MyResourceGroup",
+    "emailServiceName": "MyEmailServiceResource",
+    "api-version": "2025-05-01",
+    "parameters": {
+      "location": "Global",
+      "properties": {
+        "dataLocation": "United States"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/11112222-3333-4444-5555-666677778888/resourceGroups/MyResourceGroup/providers/Microsoft.Communication/EmailServices/MyEmailServiceResource",
+        "name": "MyEmailServiceResource",
+        "type": "Microsoft.Communication/EmailServices",
+        "location": "Global",
+        "properties": {
+          "dataLocation": "United States",
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/providers/Microsoft.Communication/locations/westus/operationStatuses/ed5d502c-acaa-42ec-ad61-0d8488a9fd1d"
+      },
+      "body": {
+        "id": "/subscriptions/11112222-3333-4444-5555-666677778888/resourceGroups/MyResourceGroup/providers/Microsoft.Communication/EmailServices/MyEmailServiceResource",
+        "name": "MyEmailServiceResource",
+        "type": "Microsoft.Communication/EmailServices",
+        "location": "Global",
+        "properties": {
+          "dataLocation": "United States",
+          "provisioningState": "Accepted"
+        }
+      }
+    }
+  }
+}

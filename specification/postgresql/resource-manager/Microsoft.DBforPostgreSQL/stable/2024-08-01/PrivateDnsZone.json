@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2024-08-01",
-    "title": "PostgreSQLServerManagementClient",
-    "description": "The Microsoft Azure management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, VNET rules, security alert policies, log files and configurations with new business model."
+    "title": "PostgreSQLManagementClient",
+    "description": "The Azure Database for PostgreSQL management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, network configuration, security alert policies, log files and configurations with new business model.",
+    "version": "2024-08-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -27,7 +27,7 @@
       "type": "oauth2",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
+      "description": "Microsoft Entra OAuth2 Flow",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
@@ -41,11 +41,11 @@
         ],
         "operationId": "GetPrivateDnsZoneSuffix_Execute",
         "x-ms-examples": {
-          "GetPrivateDnsZoneSuffix": {
+          "Get the private DNS suffix.": {
             "$ref": "./examples/GetPrivateDnsZoneSuffix.json"
           }
         },
-        "description": "Get private DNS zone suffix in the cloud",
+        "description": "Gets the private DNS zone suffix.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -71,7 +71,7 @@
   "definitions": {
     "PrivateDnsZoneSuffix": {
       "type": "string",
-      "description": "Represents a resource name availability."
+      "description": "Private DNS suffix."
     }
   }
 }

@@ -1,9 +1,9 @@
 {
   "parameters": {
-    "serverName": "pgtestsvc4",
-    "resourceGroupName": "testrg",
     "api-version": "2024-08-01",
-    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "exampleresourcegroup",
+    "serverName": "exampleserver"
   },
   "responses": {
     "200": {
@@ -13,15 +13,15 @@
             "properties": {
               "endpointType": "ReadWrite",
               "members": [
-                "testReplica1"
+                "examplebasename"
               ],
               "virtualEndpoints": [
-                "pgVirtualEndpoint1.reader.postgres.database.azure.com",
-                "pgVirtualEndpoint1.writer.postgres.database.azure.com"
+                "examplebasename.reader.postgres.database.azure.com",
+                "examplebasename.writer.postgres.database.azure.com"
               ]
             },
-            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/flexibleServers/pgtestsvc4/virtualEndpoints/pgVirtualEndpoint1",
-            "name": "pgVirtualEndpoint1",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampleserver/virtualEndpoints/examplebasename",
+            "name": "examplebasename",
             "type": "Microsoft.DBforPostgreSQL/flexibleServers/virtualEndpoints"
           }
         ]

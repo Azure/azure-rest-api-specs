@@ -1,16 +1,19 @@
 import "@typespec/versioning";
+import "./SignalRServiceExample.tsp";
 using TypeSpec.Versioning;
 /** Describes the schema of the Azure SignalR Service events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after service swagger."
 namespace Microsoft.EventGrid.SystemEvents {
   /** Schema of the Data property of an EventGridEvent for a Microsoft.SignalRService.ClientConnectionConnected event. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after service swagger."
+  @example(MicrosoftSignalRServiceClientConnectionConnectedExample)
   model SignalRServiceClientConnectionConnectedEventData {
     ...SignalRServiceBaseEventdata;
   }
 
   /** Schema of the Data property of an EventGridEvent for a Microsoft.SignalRService.ClientConnectionDisconnected event. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after service swagger."
+  @example(MicrosoftSignalRServiceClientConnectionDisconnectedExample)
   model SignalRServiceClientConnectionDisconnectedEventData {
     ...SignalRServiceBaseEventdata;
 
@@ -24,10 +27,10 @@ namespace Microsoft.EventGrid.SystemEvents {
     timestamp: utcDateTime;
 
     /** The hub of connected client connection. */
-    hubName?: string;
+    hubName: string;
 
     /** The connection Id of connected client connection. */
-    connectionId?: string;
+    connectionId: string;
 
     /** The user Id of connected client connection. */
     userId?: string;

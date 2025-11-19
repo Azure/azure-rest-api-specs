@@ -1,6 +1,6 @@
+import { join } from "path";
 import { expect, test } from "vitest";
 import { Suppression, getSuppressions } from "../src/suppressions.js";
-import { join } from "path";
 
 /**
  * Returns the suppressions for a tool (default "TestTool") applicable to a path under folder "e2e".
@@ -149,6 +149,22 @@ test.concurrent("merge, get foo.json", async () => {
       tool: "TestTool",
       paths: ["foo/foo.json"],
       reason: "root-foo-exact",
+    },
+  ]);
+});
+
+test.concurrent("suppress rules", async () => {
+  const suppressions: Suppression[] = await getTestSuppressions(
+    join("suppressRules", "foo.json"),
+    "TestTool",
+  );
+  expect(suppressions).toEqual([
+    {
+      tool: "TestTool",
+      paths: ["foo.json"],
+      reason: "test",
+      rules: ["rule-1"],
+      subRules: ["sub-rule-1"],
     },
   ]);
 });

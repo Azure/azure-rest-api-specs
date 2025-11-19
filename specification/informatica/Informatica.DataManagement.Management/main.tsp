@@ -1,22 +1,19 @@
 import "@typespec/rest";
+import "./back-compatible.tsp";
+
 import "@typespec/openapi";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 @armProviderNamespace
-@service({
-  title: "Informatica.DataManagement",
-  description: "Azure Native Services Informatica DataManagement",
-})
+@service(#{ title: "Informatica.DataManagement" })
 @versioned(Versions)
 @armCommonTypesVersion("v3")
 namespace Informatica.DataManagement;
 
 using Azure.Core;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
-using OpenAPI;
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
@@ -45,8 +42,6 @@ enum Versions {
   /**
    * The 2024-05-08 API version.
    */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2024_05_08: "2024-05-08",
 }
 
@@ -64,6 +59,7 @@ interface Organizations
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
   delete is ArmResourceDeleteWithoutOkAsync<InformaticaOrganizationResource>;
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     InformaticaOrganizationResource,
     InformaticaOrganizationResourceUpdate
@@ -95,6 +91,7 @@ interface ServerlessRuntimes
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
   delete is ArmResourceDeleteWithoutOkAsync<InformaticaServerlessRuntimeResource>;
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     InformaticaServerlessRuntimeResource,
     InformaticaServerlessRuntimeResourceUpdate
@@ -259,7 +256,7 @@ model InformaticaServerlessRuntimeResource
 
 @doc("Properties specific to the Informatica DataManagement Organization resource.")
 model OrganizationProperties {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Provisioning State of the resource.")
   provisioningState?: ProvisioningState;
 
@@ -353,6 +350,7 @@ model InformaticaProperties {
 
 @doc("Link Organization")
 model LinkOrganization {
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("Link organization token")
   token?: string;
 }
@@ -392,7 +390,7 @@ model ServerlessMetadataResponse {
 
 @doc("Serverless Runtime properties.")
 model InformaticaServerlessRuntimeProperties {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Provisioning State of the resource.")
   provisioningState?: ProvisioningState;
 
@@ -418,7 +416,7 @@ model InformaticaServerlessRuntimeProperties {
   serverlessRuntimeNetworkProfile?: ServerlessRuntimeNetworkProfile;
 
   @doc("String KV pairs indicating Advanced custom properties.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   advancedCustomProperties?: AdvancedCustomProperties[];
 
   @doc("Supplementary file location.")
@@ -428,7 +426,7 @@ model InformaticaServerlessRuntimeProperties {
   serverlessRuntimeConfig?: ServerlessRuntimeConfigProperties;
 
   @doc("Serverless Runtime Tags")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   serverlessRuntimeTags?: ServerlessRuntimeTag[];
 
   @doc("Serverless runtime user context properties")
@@ -438,11 +436,11 @@ model InformaticaServerlessRuntimeProperties {
 @doc("Serverless Runtime config properties.")
 model ServerlessRuntimeConfigProperties {
   @doc("The List of Informatica Serverless Runtime CDI Config Properties.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   cdiConfigProps?: CdiConfigProps[];
 
   @doc("The List of Informatica Serverless Runtime CDIE Config Properties.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   cdieConfigProps?: CdiConfigProps[];
 }
 
@@ -452,18 +450,18 @@ model ServerlessConfigProperties {
   platform?: PlatformType;
 
   @doc("List of application types supported by informatica")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   applicationTypes?: ApplicationTypeMetadata[];
 
   @doc("The list of compute units with possible array of values")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   computeUnits?: ComputeUnitsMetadata[];
 
   @doc("Serverless Runtime execution timeout")
   executionTimeout?: string;
 
   @doc("List of supported serverless informatica regions")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   regions?: RegionsMetadata[];
 }
 
@@ -487,6 +485,7 @@ model ServerlessRuntimeTag {
 
 @doc("Informatica Serverless Runtime User context properties")
 model ServerlessRuntimeUserContextProperties {
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("User context token for OBO flow.")
   userContextToken: string;
 }
@@ -527,7 +526,7 @@ model CdiConfigProps {
   engineVersion: string;
 
   @doc("ApplicationConfigs of the CDI or CDIE.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   applicationConfigs: ApplicationConfigs[];
 }
 
@@ -712,7 +711,7 @@ model ServerlessRuntimePropertiesCustomUpdate {
   serverlessRuntimeNetworkProfile?: ServerlessRuntimeNetworkProfileUpdate;
 
   @doc("String KV pairs indicating Advanced custom properties.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   advancedCustomProperties?: AdvancedCustomProperties[];
 
   @doc("Supplementary file location.")
@@ -722,7 +721,7 @@ model ServerlessRuntimePropertiesCustomUpdate {
   serverlessRuntimeConfig?: ServerlessRuntimeConfigPropertiesUpdate;
 
   @doc("Serverless Runtime Tags")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   serverlessRuntimeTags?: ServerlessRuntimeTag[];
 
   @doc("Serverless runtime user context properties")

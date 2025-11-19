@@ -1,0 +1,209 @@
+{
+  "title": "TilerGeoJsonStatistics_GetAll",
+  "operationId": "TilerGeoJsonStatistics_GetAll",
+  "parameters": {
+    "collectionId": "{{collectionId}}",
+    "itemId": "{{itemId}}",
+    "api-version": "2025-04-30-preview",
+    "body": {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "type": "Feature",
+          "stac_version": "1.0.0",
+          "stac_extensions": [
+            "https://stac-extensions.github.io/projection/v1.0.0/schema.json"
+          ],
+          "id": "test-item-0df36a74d7ed",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -65.75386020444417,
+                  18.252659831448764
+                ],
+                [
+                  -65.75385878091376,
+                  18.252569552371305
+                ],
+                [
+                  -65.75376429311993,
+                  18.252570912467043
+                ],
+                [
+                  -65.75376571660163,
+                  18.252661191551685
+                ],
+                [
+                  -65.75386020444417,
+                  18.252659831448764
+                ]
+              ]
+            ]
+          },
+          "bbox": [
+            -65.75386020444417,
+            18.252569552371305,
+            -65.75376429311993,
+            18.252661191551685
+          ],
+          "properties": {
+            "proj:epsg": 26920,
+            "proj:shape": [
+              10,
+              10
+            ],
+            "proj:transform": [
+              208796.4,
+              1.0,
+              0.0,
+              2020332.3,
+              0.0,
+              -1.0
+            ],
+            "proj:bbox": [
+              208796.4,
+              2020322.3,
+              208806.4,
+              2020332.3
+            ],
+            "datetime": "2024-11-06T22:49:19.098983Z"
+          },
+          "links": [
+            {
+              "rel": "self",
+              "href": "https://spatiocitest.blob.core.windows.net/test-data-0df36a74d7ed/test-item.json",
+              "type": "application/json"
+            }
+          ],
+          "assets": {
+            "data": {
+              "href": "https://spatiocitest.blob.core.windows.net/test-data-0df36a74d7ed/asset.tif",
+              "type": "image/tiff; application=geotiff",
+              "title": "Test data",
+              "roles": [
+                "data"
+              ]
+            }
+          },
+          "collection": "test-collection-0df36a74d7ed"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "type": "FeatureCollection",
+        "features": [
+          {
+            "bbox": [
+              -65.75386020444417,
+              18.252569552371305,
+              -65.75376429311993,
+              18.252661191551685
+            ],
+            "type": "Feature",
+            "geometry": {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [
+                    -65.75386020444417,
+                    18.252659831448764
+                  ],
+                  [
+                    -65.75385878091376,
+                    18.252569552371305
+                  ],
+                  [
+                    -65.75376429311993,
+                    18.252570912467043
+                  ],
+                  [
+                    -65.75376571660163,
+                    18.252661191551685
+                  ],
+                  [
+                    -65.75386020444417,
+                    18.252659831448764
+                  ]
+                ]
+              ]
+            },
+            "properties": {
+              "statistics": {
+                "data_b1": {
+                  "min": 0.0,
+                  "max": 0.0,
+                  "mean": 0.0,
+                  "count": 100.0,
+                  "sum": 0.0,
+                  "std": 0.0,
+                  "median": 0.0,
+                  "majority": 0.0,
+                  "minority": 0.0,
+                  "unique": 1.0,
+                  "histogram": [
+                    [
+                      0.0,
+                      0.0,
+                      0.0,
+                      0.0,
+                      0.0,
+                      100.0,
+                      0.0,
+                      0.0,
+                      0.0,
+                      0.0
+                    ],
+                    [
+                      -0.5,
+                      -0.4,
+                      -0.3,
+                      -0.19999999999999996,
+                      -0.09999999999999998,
+                      0.0,
+                      0.10000000000000009,
+                      0.20000000000000007,
+                      0.30000000000000004,
+                      0.4,
+                      0.5
+                    ]
+                  ],
+                  "valid_percent": 90.91,
+                  "masked_pixels": 10.0,
+                  "valid_pixels": 100.0,
+                  "percentile_2": 0.0,
+                  "percentile_98": 0.0
+                }
+              },
+              "proj:epsg": 26920,
+              "proj:shape": [
+                10,
+                10
+              ],
+              "proj:transform": [
+                208796.4,
+                1.0,
+                0.0,
+                2020332.3,
+                0.0,
+                -1.0
+              ],
+              "proj:bbox": [
+                208796.4,
+                2020322.3,
+                208806.4,
+                2020332.3
+              ],
+              "datetime": "2024-11-06T22:49:19.098983Z"
+            },
+            "id": "test-item-0df36a74d7ed"
+          }
+        ]
+      }
+    }
+  }
+}

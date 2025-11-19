@@ -9,9 +9,7 @@ using TypeSpec.Http;
 using TypeSpec.Versioning;
 
 @versioned(APIVersion)
-@service({
-  title: "Anomaly Detector",
-})
+@service(#{ title: "Anomaly Detector" })
 @useAuth(AnomalyDetectorApiKeyAuth)
 @server(
   "{Endpoint}/anomalydetector/{ApiVersion}",
@@ -53,6 +51,5 @@ model AnomalyDetectorApiKeyAuth
   is ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">;
 
 enum APIVersion {
-  @TypeSpec.Versioning.useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v1_1: "v1.1",
 }

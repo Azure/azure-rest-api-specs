@@ -9,7 +9,6 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
-using OpenAPI;
 
 namespace Microsoft.DeviceRegistry;
 
@@ -30,7 +29,7 @@ model BillingContainer is ProxyResource<BillingContainerProperties> {
   // Suppress linter false positive for etag properties not allowed at top level of ProxyResource
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Resource ETag")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   etag?: string;
 }
 
@@ -38,7 +37,7 @@ model BillingContainer is ProxyResource<BillingContainerProperties> {
 @doc("Defines the billingContainer properties.")
 model BillingContainerProperties {
   @doc("Provisioning state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 

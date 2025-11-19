@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "api-version": "2024-06-01",
+    "privateZoneName": "privatelink.contoso.com",
+    "resourceGroupName": "resourceGroup1",
+    "subscriptionId": "subscriptionId"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://management.azure.com/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/virtualNetworkLinks?api-version=2024-06-01&$skipToken=skipToken",
+        "value": [
+          {
+            "name": "virtualNetworkLink1",
+            "type": "Microsoft.Network/privateDnsZones/virtualNetworkLinks",
+            "etag": "00000000-0000-0000-0000-000000000000",
+            "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/privatelink.contoso.com/virtualNetworkLinks/virtualNetworkLink1",
+            "location": "global",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "registrationEnabled": false,
+              "resolutionPolicy": "NxDomainRedirect",
+              "virtualNetwork": {
+                "id": "/subscriptions/virtualNetworkSubscriptionId/resourceGroups/virtualNetworkResourceGroup/providers/Microsoft.Network/virtualNetworks/virtualNetworkName"
+              },
+              "virtualNetworkLinkState": "Completed"
+            },
+            "tags": {
+              "key1": "value1"
+            }
+          },
+          {
+            "name": "virtualNetworkLink2",
+            "type": "Microsoft.Network/privateDnsZones/virtualNetworkLinks",
+            "etag": "00000000-0000-0000-0000-000000000000",
+            "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/privatelink.contoso.com/virtualNetworkLinks/virtualNetworkLink2",
+            "location": "global",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "registrationEnabled": true,
+              "resolutionPolicy": "Default",
+              "virtualNetwork": {
+                "id": "/subscriptions/virtualNetworkSubscriptionId/resourceGroups/virtualNetworkResourceGroup/providers/Microsoft.Network/virtualNetworks/virtualNetworkName"
+              },
+              "virtualNetworkLinkState": "InProgress"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "VirtualNetworkLinks_List",
+  "title": "Get Private DNS Zone Virtual Network Links"
+}

@@ -1,0 +1,55 @@
+{
+  "parameters": {
+    "api-version": "2024-09-30-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "siteName": "testSite",
+    "body": {
+      "location": "East US",
+      "extendedLocation": {
+        "type": "customLocation",
+        "name": "/subscriptions/a5015e1c-867f-4533-8541-85cd470d0cfb/resourceGroups/demoRG/providers/Microsoft.ExtendedLocation/customLocations/contoso"
+      },
+      "properties": {
+        "masterSiteId": "/subscriptions/a5015e1c-867f-4533-8541-85cd470d0cfb/resourceGroups/demoRG/providers/Microsoft.OffAzure/MasterSites/xxx",
+        "migrateProjectId": "/subscriptions/a5015e1c-867f-4533-8541-85cd470d0cfb/resourcegroups/demoRG/providers/microsoft.migrate/migrateprojects/xxx"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.MySQLDiscovery/MySQLSites/testSite",
+        "name": "testSite",
+        "type": "Microsoft.MySQLDiscovery/MySQLSites",
+        "location": "East US",
+        "extendedLocation": {
+          "type": "customLocation",
+          "name": "/subscriptions/a5015e1c-867f-4533-8541-85cd470d0cfb/resourceGroups/demoRG/providers/Microsoft.Arc/customLocations/contoso"
+        },
+        "properties": {
+          "masterSiteId": "/subscriptions/a5015e1c-867f-4533-8541-85cd470d0cfb/resourceGroups/demoRG/providers/Microsoft.OffAzure/MasterSites/xxx",
+          "migrateProjectId": "/subscriptions/a5015e1c-867f-4533-8541-85cd470d0cfb/resourcegroups/demoRG/providers/microsoft.migrate/migrateprojects/xxx",
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.MySQLDiscovery/MySQLSites/testSite",
+        "name": "testSite",
+        "type": "Microsoft.MySQLDiscovery/MySQLSites",
+        "location": "East US",
+        "extendedLocation": {
+          "type": "customLocation",
+          "name": "/subscriptions/a5015e1c-867f-4533-8541-85cd470d0cfb/resourceGroups/demoRG/providers/Microsoft.Arc/customLocations/contoso"
+        },
+        "properties": {
+          "masterSiteId": "/subscriptions/a5015e1c-867f-4533-8541-85cd470d0cfb/resourceGroups/demoRG/providers/Microsoft.OffAzure/MasterSites/xxx",
+          "migrateProjectId": "/subscriptions/a5015e1c-867f-4533-8541-85cd470d0cfb/resourcegroups/demoRG/providers/microsoft.migrate/migrateprojects/xxx",
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

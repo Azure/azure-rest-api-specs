@@ -1,0 +1,648 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Communication Services Management API",
+    "version": "2024-09-01-preview",
+    "description": "REST API for Email Services/Domains/SuppressionLists"
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Communication/emailServices/{emailServiceName}/domains/{domainName}/suppressionLists": {
+      "get": {
+        "description": "List all suppression lists for a domains resource.",
+        "operationId": "SuppressionLists_ListByDomain",
+        "summary": "List",
+        "tags": [
+          "SuppressionLists"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "EmailServices.json#/parameters/EmailServiceName"
+          },
+          {
+            "$ref": "#/parameters/DomainName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describe the Domains SuppressionList resource collection.",
+            "schema": {
+              "$ref": "#/definitions/SuppressionListResourceCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Get all SuppressionLists resources.": {
+            "$ref": "./examples/suppressionLists/getSuppressionLists.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Communication/emailServices/{emailServiceName}/domains/{domainName}/suppressionLists/{suppressionListName}": {
+      "get": {
+        "description": "Get a SuppressionList resource.",
+        "operationId": "SuppressionLists_Get",
+        "summary": "Get",
+        "tags": [
+          "SuppressionLists"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "EmailServices.json#/parameters/EmailServiceName"
+          },
+          {
+            "$ref": "#/parameters/DomainName"
+          },
+          {
+            "$ref": "#/parameters/SuppressionListName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the corresponding SuppressionList resource.",
+            "schema": {
+              "$ref": "#/definitions/SuppressionListResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Get a SuppressionList resource.": {
+            "$ref": "./examples/suppressionLists/getSuppressionList.json"
+          }
+        }
+      },
+      "put": {
+        "description": "Add a new SuppressionList resource under the parent Domains resource or update an existing SuppressionList resource.",
+        "operationId": "SuppressionLists_CreateOrUpdate",
+        "summary": "Create Or Update",
+        "tags": [
+          "SuppressionLists"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "EmailServices.json#/parameters/EmailServiceName"
+          },
+          {
+            "$ref": "#/parameters/DomainName"
+          },
+          {
+            "$ref": "#/parameters/SuppressionListName"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters for the create or update operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SuppressionListResource"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "The resource was updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/SuppressionListResource"
+            }
+          },
+          "201": {
+            "description": "The resource was created successfully.",
+            "schema": {
+              "$ref": "#/definitions/SuppressionListResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "CreateOrUpdate SuppressionLists resource.": {
+            "$ref": "./examples/suppressionLists/createOrUpdateSuppressionList.json"
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete a SuppressionList.",
+        "operationId": "SuppressionLists_Delete",
+        "summary": "Delete",
+        "tags": [
+          "SuppressionLists"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "EmailServices.json#/parameters/EmailServiceName"
+          },
+          {
+            "$ref": "#/parameters/DomainName"
+          },
+          {
+            "$ref": "#/parameters/SuppressionListName"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "The resource was deleted successfully."
+          },
+          "204": {
+            "description": "The resource did not exist to be deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Delete a SuppressionLists resource.": {
+            "$ref": "./examples/suppressionLists/deleteSuppressionList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Communication/emailServices/{emailServiceName}/domains/{domainName}/suppressionLists/{suppressionListName}/suppressionListAddresses": {
+      "get": {
+        "description": "Get all the addresses in a suppression list.",
+        "operationId": "SuppressionListAddresses_List",
+        "summary": "Get",
+        "tags": [
+          "SuppressionLists"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "EmailServices.json#/parameters/EmailServiceName"
+          },
+          {
+            "$ref": "#/parameters/DomainName"
+          },
+          {
+            "$ref": "#/parameters/SuppressionListName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The collection of SuppressionListAddresses for a SuppressionList.",
+            "schema": {
+              "$ref": "#/definitions/SuppressionListAddressResourceCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Get all SuppressionListAddresses resources for a SuppressionList resource.": {
+            "$ref": "./examples/suppressionLists/getAddresses.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Communication/emailServices/{emailServiceName}/domains/{domainName}/suppressionLists/{suppressionListName}/suppressionListAddresses/{addressId}": {
+      "get": {
+        "description": "Get a SuppressionListAddress.",
+        "operationId": "SuppressionListAddresses_Get",
+        "summary": "Get",
+        "tags": [
+          "SuppressionLists"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "EmailServices.json#/parameters/EmailServiceName"
+          },
+          {
+            "$ref": "#/parameters/DomainName"
+          },
+          {
+            "$ref": "#/parameters/SuppressionListName"
+          },
+          {
+            "$ref": "#/parameters/SuppressionListAddressId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The suppression list address object.",
+            "schema": {
+              "$ref": "#/definitions/SuppressionListAddressResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Get a SuppressionListAddress resource.": {
+            "$ref": "./examples/suppressionLists/getAddress.json"
+          }
+        }
+      },
+      "put": {
+        "description": "Create or update a SuppressionListAddress.",
+        "operationId": "SuppressionListAddresses_CreateOrUpdate",
+        "summary": "Create Or Update",
+        "tags": [
+          "SuppressionLists"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "EmailServices.json#/parameters/EmailServiceName"
+          },
+          {
+            "$ref": "#/parameters/DomainName"
+          },
+          {
+            "$ref": "#/parameters/SuppressionListName"
+          },
+          {
+            "$ref": "#/parameters/SuppressionListAddressId"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters for the create or update operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SuppressionListAddressResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The resource was updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/SuppressionListAddressResource"
+            }
+          },
+          "201": {
+            "description": "The resource was created successfully.",
+            "schema": {
+              "$ref": "#/definitions/SuppressionListAddressResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "CreateOrUpdate SuppressionListAddress resource": {
+            "$ref": "./examples/suppressionLists/createOrUpdateAddress.json"
+          }
+        }
+      },
+      "delete": {
+        "description": "Operation to delete a single address from a suppression list.",
+        "operationId": "SuppressionListAddresses_Delete",
+        "summary": "Delete",
+        "tags": [
+          "SuppressionLists"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "EmailServices.json#/parameters/EmailServiceName"
+          },
+          {
+            "$ref": "#/parameters/DomainName"
+          },
+          {
+            "$ref": "#/parameters/SuppressionListName"
+          },
+          {
+            "$ref": "#/parameters/SuppressionListAddressId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The resource was deleted successfully."
+          },
+          "204": {
+            "description": "The resource did not exist to be deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a SuppressionListAddress resource.": {
+            "$ref": "./examples/suppressionLists/deleteAddress.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SuppressionListResource": {
+      "description": "A class representing a SuppressionList resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SuppressionListProperties",
+          "description": "The properties of a SuppressionList resource.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SuppressionListAddressResourceCollection": {
+      "description": "Collection of addresses in a suppression list. Response will include a nextLink if response contains more pages.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of suppressed email addresses.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SuppressionListAddressResource"
+          }
+        },
+        "nextLink": {
+          "description": "The URL the client should use to fetch the next page (per server side paging).",
+          "type": "string"
+        }
+      }
+    },
+    "SuppressionListProperties": {
+      "description": "A class that describes the properties of a SuppressionList resource.",
+      "type": "object",
+      "properties": {
+        "listName": {
+          "description": "The the name of the suppression list. This value must match one of the valid sender usernames of the sending domain.",
+          "type": "string"
+        },
+        "lastUpdatedTimeStamp": {
+          "description": "The date the resource was last updated.",
+          "type": "string",
+          "readOnly": true
+        },
+        "createdTimeStamp": {
+          "description": "The date the resource was created.",
+          "type": "string",
+          "readOnly": true
+        },
+        "dataLocation": {
+          "description": "The location where the SuppressionListAddress data is stored at rest. This value is inherited from the parent Domains resource.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SuppressionListAddressResource": {
+      "description": "A object that represents a SuppressionList record.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SuppressionListAddressProperties",
+          "description": "The properties of a SuppressionListAddress resource.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SuppressionListAddressProperties": {
+      "description": "A class that describes the properties of a SuppressionListAddress resource.",
+      "type": "object",
+      "required": [
+        "email"
+      ],
+      "properties": {
+        "email": {
+          "description": "Email address of the recipient.",
+          "type": "string"
+        },
+        "firstName": {
+          "description": "The first name of the email recipient.",
+          "type": "string"
+        },
+        "lastName": {
+          "description": "The last name of the email recipient.",
+          "type": "string"
+        },
+        "notes": {
+          "description": "An optional property to provide contextual notes or a description for an address.",
+          "type": "string"
+        },
+        "lastModified": {
+          "description": "The date the address was last updated in a suppression list.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "dataLocation": {
+          "description": "The location where the SuppressionListAddress data is stored at rest. This value is inherited from the parent Domains resource.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SuppressionListResourceCollection": {
+      "description": "A class representing a Domains SuppressionListResource collection.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of SuppressionListResource",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SuppressionListResource"
+          }
+        },
+        "nextLink": {
+          "description": "The URL the client should use to fetch the next page (per server side paging).",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SuppressionListAddressId": {
+      "name": "addressId",
+      "in": "path",
+      "description": "The id of the address in a suppression list.",
+      "minLength": 1,
+      "maxLength": 253,
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-zA-Z0-9-]+$"
+    },
+    "SuppressionListName": {
+      "name": "suppressionListName",
+      "in": "path",
+      "description": "The name of the suppression list.",
+      "minLength": 1,
+      "maxLength": 253,
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-zA-Z0-9-]+$"
+    },
+    "DomainName": {
+      "name": "domainName",
+      "in": "path",
+      "description": "The name of the Domains resource.",
+      "minLength": 1,
+      "maxLength": 253,
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "pattern": ".*"
+    }
+  }
+}

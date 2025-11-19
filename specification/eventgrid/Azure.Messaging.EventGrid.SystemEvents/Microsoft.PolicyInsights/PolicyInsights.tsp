@@ -1,13 +1,16 @@
 import "@typespec/versioning";
+import "./PolicyInsightsExample.tsp";
 using TypeSpec.Versioning;
 /** Describes the schema of the Azure Policy events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent. */
 namespace Microsoft.EventGrid.SystemEvents {
   /** Schema of the Data property of an EventGridEvent for a Microsoft.PolicyInsights.PolicyStateCreated event. */
+  @example(MicrosoftPolicyInsightsPolicyStateCreatedExample)
   model PolicyInsightsPolicyStateCreatedEventData {
     ...PolicyInsightsBaseEventData;
   }
 
   /** Schema of the Data property of an EventGridEvent for a Microsoft.PolicyInsights.PolicyStateChanged event. */
+  @example(MicrosoftPolicyInsightsPolicyStateChangedExample)
   model PolicyInsightsPolicyStateChangedEventData {
     ...PolicyInsightsBaseEventData;
   }
@@ -23,21 +26,21 @@ namespace Microsoft.EventGrid.SystemEvents {
     timestamp: utcDateTime;
 
     /** The resource ID of the policy assignment. */
-    policyAssignmentId?: string;
+    policyAssignmentId: string;
 
     /** The resource ID of the policy definition. */
-    policyDefinitionId?: string;
+    policyDefinitionId: string;
 
     /** The reference ID for the policy definition inside the initiative definition, if the policy assignment is for an initiative. May be empty. */
-    policyDefinitionReferenceId?: string;
+    policyDefinitionReferenceId: string;
 
     /** The compliance state of the resource with respect to the policy assignment. */
-    complianceState?: string;
+    complianceState: string;
 
     /** The subscription ID of the resource. */
-    subscriptionId?: string;
+    subscriptionId: string;
 
     /** The compliance reason code. May be empty. */
-    complianceReasonCode?: string;
+    complianceReasonCode: string;
   };
 }

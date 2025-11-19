@@ -43,9 +43,7 @@ interface VirtualNetworks {
   @summary("Implements the VirtualNetworks PATCH method.")
   @extension(
     "x-ms-long-running-operation-options",
-    {
-      `final-state-via`: "azure-async-operation",
-    }
+    #{ `final-state-via`: "azure-async-operation" }
   )
   update is ArmTagsPatchAsync<VirtualNetwork>;
   /** Deregisters the ScVmm virtual network from Azure. */
@@ -53,9 +51,7 @@ interface VirtualNetworks {
   @summary("Implements VirtualNetwork DELETE method.")
   @extension(
     "x-ms-long-running-operation-options",
-    {
-      `final-state-via`: "azure-async-operation",
-    }
+    #{ `final-state-via`: "azure-async-operation" }
   )
   delete is ArmResourceDeleteWithoutOkAsync<
     VirtualNetwork,

@@ -26,7 +26,25 @@ These are the global settings for the SearchManagementClient API.
 
 ```yaml
 openapi-type: arm
-tag: package-preview-2024-06
+tag: package-2025-05-01
+```
+
+### Tag: package-2025-05-01
+
+These settings apply only when `--tag=package-2025-05-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-05-01'
+input-file:
+  - Microsoft.Search/stable/2025-05-01/search.json
+```
+
+### Tag: package-preview-2025-02-01
+
+These settings apply only when `--tag=package-preview-2025-02-01` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-02-01'
+input-file:
+  - Microsoft.Search/preview/2025-02-01-preview/search.json
 ```
 
 ### Tag: package-preview-2024-06
@@ -139,7 +157,7 @@ This is not used by Autorest itself.
 
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go

@@ -5,21 +5,18 @@
 
 import "./common.tsp";
 
-using OpenAPI;
-using TypeSpec.Versioning;
 using TypeSpec.Http;
 using TypeSpec.Rest;
-using TypeSpec.Rest.Resource;
 using Azure.Core;
 using Azure.Core.Traits;
+using TypeSpec.Versioning;
 
 alias DefaultServiceTraits = NoRepeatableRequests &
   NoConditionalRequests &
   NoClientRequestId;
 alias AzureCoreOperations = Azure.Core.ResourceOperations<DefaultServiceTraits>;
 
-@useDependency(DefaultAzureCoreVersion)
-namespace Quantum.Workspace.BaseOperations {
+namespace Quantum.Workspace.Services {
   alias ResourceOkOrNoContentResponse<Resource extends TypeSpec.Reflection.Model> = Azure.Core.Foundations.ResourceOkResponse<Resource> | TypeSpec.Http.NoContentResponse;
 
   /** Generic POST operation. */
@@ -39,14 +36,35 @@ namespace Quantum.Workspace.BaseOperations {
   alias CreateOperation<Resource extends TypeSpec.Reflection.Model> = AzureCoreOperations.ResourceCreateOrReplace<Resource>;
 
   /** Operation to patch a resource. */
+  @patch(#{ implicitOptionality: true })
+  @updatesResource(Resource)
+  op PatchOperation<Resource extends Reflection.Model> is AzureCoreOperations.ResourceUpdate<
+    Resource,
+    {
+      /** This request uses a JSON Merge Patch body. */
+      @header("Content-Type")
+      contentType: "application/merge-patch+json";
+
+      @body
+      update: Resource;
+
+      ...Azure.Core.Traits.Private.TraitProperties<
+        DefaultServiceTraits,
+        TraitLocation.Parameters,
+        TraitContext.Update
+      >;
+    }
+  >;
+
+  /** Operation to patch a resource. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" """
     There is no support for JsonPatch in Azure.Core.
     The Azure.Core.ResourceUpdate does not support NoContentResponse and the JsonPatchDocument request body.
     See https://github.com/Azure/typespec-azure/issues/475
     """
   @updatesResource(Resource)
-  @patch
-  op PatchOperation<Resource extends TypeSpec.Reflection.Model> is Azure.Core.Foundations.ResourceOperation<
+  @patch(#{ implicitOptionality: true })
+  op PatchOperationOld<Resource extends TypeSpec.Reflection.Model> is Azure.Core.Foundations.ResourceOperation<
     Resource,
     {
       /** This request has a JSON Merge Patch body. */

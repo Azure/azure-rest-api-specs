@@ -16,7 +16,7 @@ model GuestAgent is ProxyResource<GuestAgentProperties> {
   /** Name of the guest agent. */
   @key("guestAgentName")
   @segment("guestAgents")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @maxLength(54)
   @minLength(1)
   @pattern("[a-zA-Z0-9-_\\.]")

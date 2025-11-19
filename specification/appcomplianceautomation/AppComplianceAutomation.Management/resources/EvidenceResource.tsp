@@ -20,7 +20,7 @@ namespace Microsoft.AppComplianceAutomation;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ReportResource)
-@includeInapplicableMetadataInPayload(false)
+@Http.Private.includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(EvidenceProperties)
 model EvidenceResource extends Azure.ResourceManager.Foundations.ProxyResource {
   /**
@@ -28,7 +28,7 @@ model EvidenceResource extends Azure.ResourceManager.Foundations.ProxyResource {
    */
   @key("evidenceName")
   @segment("evidences")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @pattern("^[a-zA-Z0-9-_.]+$")
   @path
   name: string;
@@ -36,8 +36,8 @@ model EvidenceResource extends Azure.ResourceManager.Foundations.ProxyResource {
   /**
    * Evidence property.
    */
-  #suppress "deprecated" "Legacy flatten"
-  @Azure.ClientGenerator.Core.flattenProperty
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flatten"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties: EvidenceProperties;
 }
 

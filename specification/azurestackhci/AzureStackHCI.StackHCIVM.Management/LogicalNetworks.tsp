@@ -21,7 +21,7 @@ model LogicalNetwork is TrackedResource<LogicalNetworkProperties> {
   @path
   @key("logicalNetworkName")
   @segment("logicalNetworks")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   @doc("The extendedLocation of the resource.")
@@ -42,7 +42,7 @@ interface LogicalNetworks {
   >;
 
   @doc("The operation to update a logical network.")
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<LogicalNetwork, LogicalNetworksUpdateRequest>;
 
   @doc("The operation to delete a logical network.")

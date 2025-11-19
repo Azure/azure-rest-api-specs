@@ -1,0 +1,31 @@
+{
+  "parameters": {
+    "api-version": "2025-06-01-preview",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "exampleresourcegroup",
+    "serverName": "exampleserver"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "endpointType": "ReadWrite",
+              "members": [
+                "examplebasename"
+              ],
+              "virtualEndpoints": [
+                "examplebasename.reader.postgres.database.azure.com",
+                "examplebasename.writer.postgres.database.azure.com"
+              ]
+            },
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampleserver/virtualEndpoints/examplebasename",
+            "name": "examplebasename",
+            "type": "Microsoft.DBforPostgreSQL/flexibleServers/virtualEndpoints"
+          }
+        ]
+      }
+    }
+  }
+}

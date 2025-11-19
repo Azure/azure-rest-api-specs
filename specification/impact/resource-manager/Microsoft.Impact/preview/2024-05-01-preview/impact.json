@@ -1014,30 +1014,25 @@
         "lastRunTimeStamp"
       ]
     },
-    "ConnectorPropertiesUpdate": {
+    "ConnectorUpdate": {
       "type": "object",
-      "description": "Details of the Connector.",
+      "description": "The type used for update operations of the Connector.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ConnectorUpdateProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      }
+    },
+    "ConnectorUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the Connector.",
       "properties": {
         "connectorType": {
           "$ref": "#/definitions/Platform",
           "description": "connector type"
         }
       }
-    },
-    "ConnectorUpdate": {
-      "type": "object",
-      "description": "A connector is a resource that can be used to proactively report impacts against workloads in Azure to Microsoft.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ConnectorPropertiesUpdate",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
-      ]
     },
     "Content": {
       "type": "object",
@@ -1303,7 +1298,8 @@
         },
         "subscriptionId": {
           "type": "string",
-          "description": "The ID of the target subscription. The value must be an UUID."
+          "description": "The ID of the target subscription. The value must be an UUID.",
+          "minLength": 1
         },
         "provider": {
           "type": "string",
@@ -1843,8 +1839,7 @@
           "description": "The ARM correlation ids, this is important field for control plane related impacts",
           "items": {
             "type": "string"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "performance": {
           "type": "array",
@@ -1860,7 +1855,8 @@
         },
         "additionalProperties": {
           "type": "object",
-          "description": "Additional fields related to impact, applicable fields per resource type are list under /impactCategories API"
+          "description": "Additional fields related to impact, applicable fields per resource type are list under /impactCategories API",
+          "additionalProperties": {}
         },
         "errorDetails": {
           "$ref": "#/definitions/ErrorDetailProperties",
@@ -1905,7 +1901,7 @@
       "name": "resourceType",
       "in": "query",
       "description": "Filter by resource type",
-      "required": false,
+      "required": true,
       "type": "string",
       "minLength": 1,
       "x-ms-parameter-location": "method"

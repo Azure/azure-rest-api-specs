@@ -61,7 +61,7 @@ function ToSemVer($version){
 
 function SortSemVersions($versions)
 {
-    return $versions | Sort -Property Major, Minor, Patch, PrereleaseLabel, PrereleaseNumber -Descending
+    return $versions | Sort-Object -Property Major, Minor, Patch, PrereleaseLabel, PrereleaseNumber -Descending
 }
 
 function Sort-Versions
@@ -116,7 +116,7 @@ function Get-Existing-Versions
     Param (
         [Parameter(Mandatory=$true)] [String]$PkgName
     )
-    $versionUri = "${BlobAccountName}/`$web/$($Language)/$($PkgName)/versioning/versions"
+    $versionUri = "https://azuresdkdocs.z19.web.core.windows.net/$Language/$PkgName/versioning/versions"
     LogDebug "Heading to $versionUri to retrieve known versions"
 
     try {

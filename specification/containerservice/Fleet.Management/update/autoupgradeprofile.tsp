@@ -30,7 +30,7 @@ model AutoUpgradeProfile
   @minLength(1)
   @maxLength(50)
   @path
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   name: string;
 
   ...EntityTagProperty;
@@ -45,11 +45,11 @@ union AutoUpgradeProfileProvisioningState {
 @doc("The properties of the AutoUpgradeProfile.")
 @added(Versions.v2024_05_02_preview)
 model AutoUpgradeProfileProperties {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The provisioning state of the AutoUpgradeProfile resource.")
   provisioningState?: AutoUpgradeProfileProvisioningState;
 
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   @doc("The resource id of the UpdateStrategy resource to reference. If not specified, the auto upgrade will run on all clusters which are members of the fleet.")
   updateStrategyId?: FleetUpdateStrategyResourceId;
 
@@ -66,6 +66,29 @@ model AutoUpgradeProfileProperties {
     By default, this is set to False.
     """)
   disabled?: boolean;
+
+  @doc("The status of the auto upgrade profile.")
+  @added(Versions.v2025_03_01)
+  autoUpgradeProfileStatus?: AutoUpgradeProfileStatus;
+
+  @doc("""
+      This is the target Kubernetes version for auto-upgrade. The format must be `{major version}.{minor version}`. For example, "1.30".
+      By default, this is empty.
+      If upgrade channel is set to TargetKubernetesVersion, this field must not be empty.
+      If upgrade channel is Rapid, Stable or NodeImage, this field must be empty.
+    """)
+  @added(Versions.v2025_04_01_preview)
+  targetKubernetesVersion?: string;
+
+  @doc("""
+      If upgrade channel is not TargetKubernetesVersion, this field must be False.
+      If set to True: Fleet auto upgrade will continue generate update runs for patches of minor versions earlier than N-2 
+      (where N is the latest supported minor version) if those minor versions support Long-Term Support (LTS).
+      By default, this is set to False.
+      For more information on AKS LTS, please see https://learn.microsoft.com/en-us/azure/aks/long-term-support
+    """)
+  @added(Versions.v2025_04_01_preview)
+  longTermSupport?: boolean;
 }
 
 @doc("Configuration of how auto upgrade will be run.")
@@ -83,12 +106,20 @@ union UpgradeChannel {
 
   @doc("Upgrade node image version of the clusters.")
   NodeImage: "NodeImage",
+
+  @doc("""
+      Upgrades the clusters Kubernetes version to the latest supported patch version of the specified target Kubernetes version.
+      For information on the behavior of update run for Kubernetes version upgrade, 
+      see https://learn.microsoft.com/en-us/azure/kubernetes-fleet/update-orchestration?tabs=azure-portal
+    """)
+  @added(Versions.v2025_04_01_preview)
+  TargetKubernetesVersion: "TargetKubernetesVersion",
 }
 
 @doc("The node image upgrade to be applied to the target clusters in auto upgrade.")
 @added(Versions.v2024_05_02_preview)
 model AutoUpgradeNodeImageSelection {
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   @doc("The node image upgrade type.")
   type: AutoUpgradeNodeImageSelectionType;
 }
@@ -123,4 +154,61 @@ interface AutoUpgradeProfiles {
   >;
 
   listByFleet is ArmResourceListByParent<AutoUpgradeProfile>;
+}
+
+@doc("AutoUpgradeProfileStatus is the status of an auto upgrade profile.")
+@added(Versions.v2025_03_01)
+model AutoUpgradeProfileStatus {
+  @doc("The UTC time of the last attempt to automatically create and start an UpdateRun as triggered by the release of new versions.")
+  @visibility(Lifecycle.Read)
+  lastTriggeredAt?: utcDateTime;
+
+  @doc("The status of the last AutoUpgrade trigger.")
+  @visibility(Lifecycle.Read)
+  lastTriggerStatus?: AutoUpgradeLastTriggerStatus;
+
+  @doc("The error details of the last trigger.")
+  @visibility(Lifecycle.Read)
+  lastTriggerError?: Azure.ResourceManager.Foundations.ErrorDetail; // https://github.com/Azure/azure-rest-api-specs/blob/1de0b5315d62e1b40052bad2c9a2f2c89d84ff0f/specification/common-types/resource-management/v5/types.json#L260
+
+  @doc("The target Kubernetes version or node image versions of the last trigger.")
+  @visibility(Lifecycle.Read)
+  lastTriggerUpgradeVersions?: string[];
+}
+
+@doc("AutoUpgradeLastTriggerStatus is the status of the last AutoUpgrade trigger (attempt to automatically create and start UpdateRun when there are new released versions) of an auto upgrade profile.")
+@added(Versions.v2025_03_01)
+union AutoUpgradeLastTriggerStatus {
+  string,
+
+  @doc("The last AutoUpgrade trigger was succeeded.")
+  Succeeded: "Succeeded",
+
+  @doc("The last AutoUpgrade trigger failed.")
+  Failed: "Failed",
+}
+
+@added(Versions.v2025_03_01)
+@armResourceOperations
+interface AutoUpgradeProfileOperations {
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "use azure-async instead"
+  @useFinalStateVia("azure-async-operation")
+  @doc("Generates an update run for a given auto upgrade profile.")
+  generateUpdateRun is Azure.ResourceManager.ArmResourceActionAsync<
+    AutoUpgradeProfile,
+    void,
+    GenerateResponse,
+    BaseParameters<AutoUpgradeProfile>,
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = GenerateResponse> &
+      ArmLroLocationHeader<FinalResult = GenerateResponse> &
+      IfMatchParameters<AutoUpgradeProfile>
+  >;
+}
+
+@added(Versions.v2025_03_01)
+@doc("GenerateResponse is the response of a generate request.")
+model GenerateResponse {
+  @visibility(Lifecycle.Read)
+  @doc("The ARM resource id of the generated UpdateRun. e.g.: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/fleets/{fleetName}/updateRuns/{updateRunName}'.")
+  id: string;
 }

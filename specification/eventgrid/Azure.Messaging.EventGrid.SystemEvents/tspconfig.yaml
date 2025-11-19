@@ -18,24 +18,44 @@ options:
   "@azure-tools/typespec-python":
     package-pprint-name: '"Azure Event Grid System Events"'
     package-version: 4.12.0b1
-    package-dir: "azure-eventgrid"
-    package-name: "{package-dir}"
-    emitter-output-dir: "{project-root}/{service-dir}/{package-name}"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-eventgrid"
+    namespace: "azure.eventgrid"
     flavor: azure
     generate-test: true
     generate-sample: true
-  # Uncomment this line and add "@azure-tools/typespec-csharp" to your package.json to generate C# code
+  "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: Azure.Messaging.EventGrid.SystemEvents
+    model-namespace: false
+    api-version: "2018-01-01"
   "@azure-tools/typespec-csharp":
-    package-dir: Azure.Messaging.EventGrid.SystemEvents
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     model-namespace: false
     namespace: Azure.Messaging.EventGrid.SystemEvents
     flavor: azure
     api-version: "2018-01-01"
   "@azure-tools/typespec-ts":
-    generateMetadata: true
-    generateTest: true
-    azureSdkForJs: true
-    package-dir: "eventgrid-system-events"
-    packageDetails:
-      name: "@azure/eventgrid-system-events"
+    experimental-extensible-enums: true
+    emitter-output-dir: "{output-dir}/{service-dir}/eventgrid-systemevents"
+    package-details:
+      name: "@azure/eventgrid-systemevents"
     flavor: azure
+    is-modular-library: true
+  "@azure-tools/typespec-go":
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/azsystemevents"
+    service-dir: "sdk/messaging/eventgrid"
+    emitter-output-dir: "{output-dir}/{service-dir}/azsystemevents"
+    slice-elements-byval: true
+    flavor: "azure"
+    # executes any go:generate commands in build.go, which generates the system events enumeration.
+    go-generate: build.go
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-messaging-eventgrid-systemevents"
+    namespace: com.azure.messaging.eventgrid.systemevents
+    customization-class: customization/src/main/java/EventGridSystemEventsCustomization.java
+    use-eclipse-language-server: false
+    custom-types-subpackage: implementation.models
+    custom-types: AcsRouterCommunicationError,AcsMessageChannelEventError
+    flavor: azure
+    dev-options:
+      loglevel: info

@@ -1,0 +1,21 @@
+{
+  "operationId": "Storage_GetSasUri",
+  "title": "Gets a URL with SAS token for a container/blob.",
+  "parameters": {
+    "api-version": "2024-10-01-preview",
+    "resourceGroupName": "my-resource-group",
+    "subscriptionId": "00000000-0000-0000-0000-000000000001",
+    "workspaceName": "my-workspace",
+    "blobDetails": {
+      "containerName": "some_container",
+      "blobName": "input_blob"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "sasUri": "https://storage.blob.core.windows.net/some_container/input_blob?sv=2019-02-02&sr=b&sig=SANITIZED&se=2020-10-17T10%3A03%3A01Z&sp=rcw"
+      }
+    }
+  }
+}

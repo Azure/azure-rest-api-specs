@@ -21,9 +21,7 @@ using TypeSpec.Versioning;
  * Allows creation and deletion of Azure Shared Dashboards.
  */
 @armProviderNamespace
-@service({
-  title: "portal",
-})
+@service(#{ title: "portal" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.Portal;
@@ -35,14 +33,15 @@ enum Versions {
   /**
    * The 2020-09-01-preview API version.
    */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2020_09_01_preview: "2020-09-01-preview",
 
   /**
    * The 2022-12-01-preview API version.
    */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2022_12_01_preview: "2022-12-01-preview",
+
+  /**
+   * The 2025-04-01-preview API version.
+   */
+  v2025_04_01_preview: "2025-04-01-preview",
 }

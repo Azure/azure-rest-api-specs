@@ -1,0 +1,87 @@
+{
+  "parameters": {
+    "api-version": "2023-09-15-preview",
+    "connectionName": "sampleConnection",
+    "parameters": {
+      "etag": "etag1",
+      "location": "global",
+      "properties": {
+        "name": "sampleName",
+        "clientId": "sampleclientid",
+        "clientSecret": "samplesecret",
+        "id": "sampleId",
+        "parameters": [
+          {
+            "key": "key1",
+            "value": "value1"
+          },
+          {
+            "key": "key2",
+            "value": "value2"
+          }
+        ],
+        "scopes": "samplescope",
+        "serviceProviderDisplayName": "serviceProviderDisplayName",
+        "serviceProviderId": "serviceproviderid"
+      }
+    },
+    "resourceGroupName": "OneResourceGroupName",
+    "resourceName": "samplebotname",
+    "subscriptionId": "subscription-id"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "sampleConnection",
+        "id": "/subscriptions/subscription-id/resourceGroups/OneResourceGroupName/providers/Microsoft.BotService/botServices/samplebotname/connections/sampleConnection",
+        "location": "global",
+        "properties": {
+          "name": "sampleConnection",
+          "clientId": "sampleclientid",
+          "clientSecret": null,
+          "id": "/subscriptions/subscription-id/resourceGroups/OneResourceGroupName/providers/Microsoft.BotService/botServices/samplebotname/connections/sampleConnection",
+          "parameters": [
+            {
+              "key": "key1",
+              "value": "value1"
+            },
+            {
+              "key": "key2",
+              "value": "value2"
+            }
+          ],
+          "scopes": "samplescope",
+          "serviceProviderDisplayName": "serviceProviderDisplayName",
+          "serviceProviderId": "serviceproviderid"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "sampleConnection",
+        "etag": "etag1",
+        "id": "/subscriptions/subscription-id/resourceGroups/OneResourceGroupName/providers/Microsoft.BotService/botServices/samplebotname/connections/sampleConnection",
+        "location": "global",
+        "properties": {
+          "clientId": "sampleclientid",
+          "clientSecret": null,
+          "parameters": [
+            {
+              "key": "key1",
+              "value": "value1"
+            },
+            {
+              "key": "key2",
+              "value": "value2"
+            }
+          ],
+          "scopes": "samplescope",
+          "serviceProviderDisplayName": "serviceProviderDisplayName",
+          "serviceProviderId": "serviceproviderid"
+        }
+      }
+    }
+  },
+  "operationId": "BotConnection_Update",
+  "title": "Update Connection Setting"
+}

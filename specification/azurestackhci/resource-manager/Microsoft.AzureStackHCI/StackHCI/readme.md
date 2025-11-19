@@ -29,7 +29,7 @@ title: AzureStackHCIClient
 description: Azure Stack HCI management service
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2024-09
+tag: package-preview-2025-11-01-preview
 
 directive:
   - from: edgeDevices.json
@@ -62,10 +62,10 @@ directive:
       - $.definitions.Update.allOf[0]
       - $.definitions.UpdateSummaries.allOf[0]
     transform: >
-      $['$ref'] = "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+      $['$ref'] = "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
   - from: swagger-document
     where: $.paths[*]..responses.default
-    transform: $.schema['$ref'] = "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+    transform: $.schema['$ref'] = "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
 ```
 
 ## Suppression
@@ -97,6 +97,7 @@ suppressions:
       - arcSettings.json
       - clusters.json
       - extensions.json
+      - hci.json
       - operations.json
       - offers.json
       - publishers.json
@@ -108,6 +109,7 @@ suppressions:
       - edgeDevices.json
       - securitySettings.json
       - edgeDeviceJobs.json
+      - validatedSolutionRecipes.json
 
   - code: ResourceNameRestriction
     reason: ClusterName didn't have a pattern initially, adding the constraint now will cause a breaking change
@@ -235,6 +237,125 @@ suppressions:
     from: 
       - clusters.json
     reason: Making the body optional now would cause a breaking change in backward compatibility
+```
+
+### Tag: package-preview-2025-11-01-preview
+
+These settings apply only when `--tag=package-preview-2025-11-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-11-01-preview'
+input-file:
+  - preview/2025-11-01-preview/arcSettings.json
+  - preview/2025-11-01-preview/clusters.json
+  - preview/2025-11-01-preview/deploymentSettings.json
+  - preview/2025-11-01-preview/edgeDeviceJobs.json
+  - preview/2025-11-01-preview/edgeDevices.json
+  - preview/2025-11-01-preview/extensions.json
+  - preview/2025-11-01-preview/hciCommon.json
+  - preview/2025-11-01-preview/offers.json
+  - preview/2025-11-01-preview/publishers.json
+  - preview/2025-11-01-preview/securitySettings.json
+  - preview/2025-11-01-preview/skus.json
+  - preview/2025-11-01-preview/updateRuns.json
+  - preview/2025-11-01-preview/updates.json
+  - preview/2025-11-01-preview/updateSummaries.json
+  - preview/2025-11-01-preview/validatedSolutionRecipes.json
+  - preview/2025-11-01-preview/hci.json
+```
+
+### Tag: package-2025-10-01
+
+These settings apply only when `--tag=package-2025-10-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-10-01'
+input-file:
+  - stable/2025-10-01/arcSettings.json
+  - stable/2025-10-01/clusters.json
+  - stable/2025-10-01/deploymentSettings.json
+  - stable/2025-10-01/edgeDeviceJobs.json
+  - stable/2025-10-01/edgeDevices.json
+  - stable/2025-10-01/extensions.json
+  - stable/2025-10-01/hciCommon.json
+  - stable/2025-10-01/offers.json
+  - ../operations/stable/2025-10-01/operations.json
+  - stable/2025-10-01/publishers.json
+  - stable/2025-10-01/securitySettings.json
+  - stable/2025-10-01/skus.json
+  - stable/2025-10-01/updateRuns.json
+  - stable/2025-10-01/updates.json
+  - stable/2025-10-01/updateSummaries.json
+  - stable/2025-10-01/validatedSolutionRecipes.json
+```
+
+### Tag: package-preview-2025-09-15-preview
+
+These settings apply only when `--tag=package-preview-2025-09-15-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-09-15-preview'
+input-file:
+  - preview/2025-09-15-preview/arcSettings.json
+  - preview/2025-09-15-preview/clusters.json
+  - preview/2025-09-15-preview/deploymentSettings.json
+  - preview/2025-09-15-preview/edgeDeviceJobs.json
+  - preview/2025-09-15-preview/edgeDevices.json
+  - preview/2025-09-15-preview/extensions.json
+  - preview/2025-09-15-preview/hciCommon.json
+  - preview/2025-09-15-preview/offers.json
+  - ../operations/preview/2025-09-15-preview/operations.json
+  - preview/2025-09-15-preview/publishers.json
+  - preview/2025-09-15-preview/securitySettings.json
+  - preview/2025-09-15-preview/skus.json
+  - preview/2025-09-15-preview/updateRuns.json
+  - preview/2025-09-15-preview/updates.json
+  - preview/2025-09-15-preview/updateSummaries.json
+  - preview/2025-09-15-preview/validatedSolutionRecipes.json
+```
+
+### Tag: package-preview-2025-02-01-preview
+
+These settings apply only when `--tag=package-preview-2025-02-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-02-01-preview'
+input-file:
+  - preview/2025-02-01-preview/arcSettings.json
+  - preview/2025-02-01-preview/clusters.json
+  - preview/2025-02-01-preview/deploymentSettings.json
+  - preview/2025-02-01-preview/edgeDeviceJobs.json
+  - preview/2025-02-01-preview/edgeDevices.json
+  - preview/2025-02-01-preview/extensions.json
+  - preview/2025-02-01-preview/hciCommon.json
+  - preview/2025-02-01-preview/offers.json
+  - ../operations/preview/2025-02-01-preview/operations.json
+  - preview/2025-02-01-preview/publishers.json
+  - preview/2025-02-01-preview/securitySettings.json
+  - preview/2025-02-01-preview/skus.json
+  - preview/2025-02-01-preview/updateRuns.json
+  - preview/2025-02-01-preview/updates.json
+  - preview/2025-02-01-preview/updateSummaries.json
+  - preview/2025-02-01-preview/validatedSolutionRecipes.json
+```
+
+### Tag: package-preview-2024-12-01-preview
+
+These settings apply only when `--tag=package-preview-2024-12-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-12-01-preview'
+input-file:
+  - preview/2024-12-01-preview/arcSettings.json
+  - preview/2024-12-01-preview/clusters.json
+  - preview/2024-12-01-preview/deploymentSettings.json
+  - preview/2024-12-01-preview/edgeDeviceJobs.json
+  - preview/2024-12-01-preview/edgeDevices.json
+  - preview/2024-12-01-preview/extensions.json
+  - preview/2024-12-01-preview/hciCommon.json
+  - preview/2024-12-01-preview/offers.json
+  - ../operations/preview/2024-12-01-preview/operations.json
+  - preview/2024-12-01-preview/publishers.json
+  - preview/2024-12-01-preview/securitySettings.json
+  - preview/2024-12-01-preview/skus.json
+  - preview/2024-12-01-preview/updateRuns.json
+  - preview/2024-12-01-preview/updates.json
+  - preview/2024-12-01-preview/updateSummaries.json
 ```
 
 ### Tag: package-preview-2024-09

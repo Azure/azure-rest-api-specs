@@ -21,7 +21,9 @@
         "name": "endpoint",
         "in": "path",
         "required": true,
-        "type": "string"
+        "type": "string",
+        "format": "uri",
+        "x-ms-skip-url-encoding": true
       }
     ]
   },
@@ -944,8 +946,7 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/AtlasClassification"
-              },
-              "x-ms-identifiers": []
+              }
             }
           }
         ],
@@ -986,8 +987,7 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/AtlasClassification"
-              },
-              "x-ms-identifiers": []
+              }
             }
           }
         ],
@@ -1388,8 +1388,7 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/AtlasClassification"
-              },
-              "x-ms-identifiers": []
+              }
             }
           }
         ],
@@ -1438,8 +1437,7 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/AtlasClassification"
-              },
-              "x-ms-identifiers": []
+              }
             }
           }
         ],
@@ -1656,8 +1654,7 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/AtlasGlossary"
-              },
-              "x-ms-identifiers": []
+              }
             }
           },
           "default": {
@@ -1865,8 +1862,7 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/AtlasGlossaryCategory"
-              },
-              "x-ms-identifiers": []
+              }
             }
           },
           "default": {
@@ -1926,8 +1922,7 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/AtlasRelatedCategoryHeader"
-              },
-              "x-ms-identifiers": []
+              }
             }
           },
           "default": {
@@ -2083,8 +2078,7 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/AtlasGlossaryTerm"
-              },
-              "x-ms-identifiers": []
+              }
             }
           },
           "default": {
@@ -2144,8 +2138,7 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/AtlasRelatedTermHeader"
-              },
-              "x-ms-identifiers": []
+              }
             }
           },
           "default": {
@@ -2176,8 +2169,7 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/AtlasGlossaryCategory"
-              },
-              "x-ms-identifiers": []
+              }
             }
           }
         ],
@@ -2188,8 +2180,7 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/AtlasGlossaryCategory"
-              },
-              "x-ms-identifiers": []
+              }
             }
           },
           "default": {
@@ -2437,8 +2428,7 @@
                 "items": {
                   "$ref": "#/definitions/AtlasRelatedCategoryHeader"
                 },
-                "type": "array",
-                "x-ms-identifiers": []
+                "type": "array"
               }
             }
           },
@@ -2499,8 +2489,7 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/AtlasRelatedTermHeader"
-              },
-              "x-ms-identifiers": []
+              }
             }
           },
           "default": {
@@ -2763,8 +2752,7 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/AtlasGlossaryTerm"
-              },
-              "x-ms-identifiers": []
+              }
             }
           }
         ],
@@ -2775,8 +2763,7 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/AtlasGlossaryTerm"
-              },
-              "x-ms-identifiers": []
+              }
             }
           },
           "default": {
@@ -2836,8 +2823,7 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/AtlasRelatedObjectId"
-              },
-              "x-ms-identifiers": []
+              }
             }
           },
           "default": {
@@ -2873,8 +2859,7 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/AtlasRelatedObjectId"
-              },
-              "x-ms-identifiers": []
+              }
             }
           }
         ],
@@ -2915,8 +2900,7 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/AtlasRelatedObjectId"
-              },
-              "x-ms-identifiers": []
+              }
             }
           }
         ],
@@ -2986,8 +2970,7 @@
                 "items": {
                   "$ref": "#/definitions/AtlasRelatedTermHeader"
                 },
-                "type": "array",
-                "x-ms-identifiers": []
+                "type": "array"
               }
             }
           },
@@ -4126,8 +4109,7 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/AtlasTypeDefHeader"
-              },
-              "x-ms-identifiers": []
+              }
             }
           },
           "default": {
@@ -4542,8 +4524,7 @@
           "description": "An array of constraints.",
           "items": {
             "$ref": "#/definitions/AtlasConstraintDef"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "defaultValue": {
           "type": "string",
@@ -4667,8 +4648,7 @@
           "description": "An array of attribute definitions.",
           "items": {
             "$ref": "#/definitions/AtlasAttributeDef"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -4706,8 +4686,7 @@
           "description": "An array of time boundaries indicating validity periods.",
           "items": {
             "$ref": "#/definitions/TimeBoundary"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -4782,8 +4761,7 @@
           "description": "An array of attribute definitions.",
           "items": {
             "$ref": "#/definitions/AtlasAttributeDef"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "entityTypes": {
           "type": "array",
@@ -4873,8 +4851,7 @@
           "description": "An array of entities.",
           "items": {
             "$ref": "#/definitions/AtlasEntity"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -4905,8 +4882,7 @@
           "description": "An array of classifications.",
           "items": {
             "$ref": "#/definitions/AtlasClassification"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "createTime": {
           "type": "integer",
@@ -4953,8 +4929,7 @@
           "description": "An array of term assignment headers indicating the meanings of the entity.",
           "items": {
             "$ref": "#/definitions/AtlasTermAssignmentHeader"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "provenanceType": {
           "type": "integer",
@@ -5071,8 +5046,7 @@
           "description": "An array of attribute definitions.",
           "items": {
             "$ref": "#/definitions/AtlasAttributeDef"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "subTypes": {
           "type": "array",
@@ -5093,8 +5067,7 @@
           "description": "An array of relationship attributes.",
           "items": {
             "$ref": "#/definitions/AtlasRelationshipAttributeDef"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -5127,8 +5100,7 @@
           "description": "An array of classifications.",
           "items": {
             "$ref": "#/definitions/AtlasClassification"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "displayText": {
           "type": "string",
@@ -5161,8 +5133,7 @@
           "description": "An array of term assignment headers.",
           "items": {
             "$ref": "#/definitions/AtlasTermAssignmentHeader"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "status": {
           "$ref": "#/definitions/EntityStatus",
@@ -5275,8 +5246,7 @@
           "description": "An array of enum element definitions.",
           "items": {
             "$ref": "#/definitions/AtlasEnumElementDef"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -5330,8 +5300,7 @@
           "description": "An array of classifications.",
           "items": {
             "$ref": "#/definitions/AtlasClassification"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "longDescription": {
           "type": "string",
@@ -5376,8 +5345,7 @@
           "description": "An array of categories.",
           "items": {
             "$ref": "#/definitions/AtlasRelatedCategoryHeader"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "language": {
           "type": "string",
@@ -5388,8 +5356,7 @@
           "description": "An array of related term headers.",
           "items": {
             "$ref": "#/definitions/AtlasRelatedTermHeader"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "usage": {
           "type": "string",
@@ -5410,8 +5377,7 @@
           "description": "An array of classifications.",
           "items": {
             "$ref": "#/definitions/AtlasClassification"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "longDescription": {
           "type": "string",
@@ -5460,8 +5426,7 @@
           "description": "An array of children categories.",
           "items": {
             "$ref": "#/definitions/AtlasRelatedCategoryHeader"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "parentCategory": {
           "$ref": "#/definitions/AtlasRelatedCategoryHeader",
@@ -5472,8 +5437,7 @@
           "description": "An array of related term headers.",
           "items": {
             "$ref": "#/definitions/AtlasRelatedTermHeader"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -5490,8 +5454,7 @@
           "description": "An array of classifications.",
           "items": {
             "$ref": "#/definitions/AtlasClassification"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "longDescription": {
           "type": "string",
@@ -5536,8 +5499,7 @@
           "description": "An array of categories.",
           "items": {
             "$ref": "#/definitions/AtlasRelatedCategoryHeader"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "language": {
           "type": "string",
@@ -5548,8 +5510,7 @@
           "description": "An array of related term headers.",
           "items": {
             "$ref": "#/definitions/AtlasRelatedTermHeader"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "usage": {
           "type": "string",
@@ -5602,8 +5563,7 @@
           "description": "An array of classifications.",
           "items": {
             "$ref": "#/definitions/AtlasClassification"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "longDescription": {
           "type": "string",
@@ -5661,8 +5621,7 @@
           "description": "An array of related term headers as antonyms.",
           "items": {
             "$ref": "#/definitions/AtlasRelatedTermHeader"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "status": {
           "$ref": "#/definitions/TermStatus",
@@ -5677,16 +5636,14 @@
           "description": "The hierarchy information of the term.",
           "items": {
             "$ref": "#/definitions/PurviewObjectId"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "resources": {
           "type": "array",
           "description": "An array of resource link for term",
           "items": {
             "$ref": "#/definitions/ResourceLink"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "contacts": {
           "type": "object",
@@ -5711,24 +5668,21 @@
           "description": "An array of related object IDs.",
           "items": {
             "$ref": "#/definitions/AtlasRelatedObjectId"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "categories": {
           "type": "array",
           "description": "An array of term categorization headers.",
           "items": {
             "$ref": "#/definitions/AtlasTermCategorizationHeader"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "classifies": {
           "type": "array",
           "description": "An array of related term headers.",
           "items": {
             "$ref": "#/definitions/AtlasRelatedTermHeader"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "examples": {
           "type": "array",
@@ -5742,72 +5696,63 @@
           "description": "An array of related term headers indicating the is-a relationship.",
           "items": {
             "$ref": "#/definitions/AtlasRelatedTermHeader"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "preferredTerms": {
           "type": "array",
           "description": "An array of preferred related term headers.",
           "items": {
             "$ref": "#/definitions/AtlasRelatedTermHeader"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "preferredToTerms": {
           "type": "array",
           "description": "An array of related term headers that are preferred to.",
           "items": {
             "$ref": "#/definitions/AtlasRelatedTermHeader"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "replacedBy": {
           "type": "array",
           "description": "An array of related term headers that are replaced by.",
           "items": {
             "$ref": "#/definitions/AtlasRelatedTermHeader"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "replacementTerms": {
           "type": "array",
           "description": "An array of related term headers for replacement.",
           "items": {
             "$ref": "#/definitions/AtlasRelatedTermHeader"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "seeAlso": {
           "type": "array",
           "description": "An array of related term headers for see also.",
           "items": {
             "$ref": "#/definitions/AtlasRelatedTermHeader"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "synonyms": {
           "type": "array",
           "description": "An array of related term headers as synonyms.",
           "items": {
             "$ref": "#/definitions/AtlasRelatedTermHeader"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "translatedTerms": {
           "type": "array",
           "description": "An array of translated related term headers.",
           "items": {
             "$ref": "#/definitions/AtlasRelatedTermHeader"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "translationTerms": {
           "type": "array",
           "description": "An array of related term headers for translation.",
           "items": {
             "$ref": "#/definitions/AtlasRelatedTermHeader"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "usage": {
           "type": "string",
@@ -5818,16 +5763,14 @@
           "description": "An array of related term headers as valid values.",
           "items": {
             "$ref": "#/definitions/AtlasRelatedTermHeader"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "validValuesFor": {
           "type": "array",
           "description": "An array of related term headers as valid values for other records.",
           "items": {
             "$ref": "#/definitions/AtlasRelatedTermHeader"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -5878,16 +5821,14 @@
           "description": "An array of parentRelations relations.",
           "items": {
             "$ref": "#/definitions/ParentRelation"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "relations": {
           "type": "array",
           "description": "An array of lineage relations.",
           "items": {
             "$ref": "#/definitions/LineageRelation"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -6097,8 +6038,7 @@
           "description": "An array of constraints.",
           "items": {
             "$ref": "#/definitions/AtlasConstraintDef"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "defaultValue": {
           "type": "string",
@@ -6230,8 +6170,7 @@
           "description": "An array of attribute definitions.",
           "items": {
             "$ref": "#/definitions/AtlasAttributeDef"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "endDef1": {
           "$ref": "#/definitions/AtlasRelationshipEndDef",
@@ -6388,8 +6327,7 @@
           "description": "An array of attribute definitions.",
           "items": {
             "$ref": "#/definitions/AtlasAttributeDef"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -6650,8 +6588,7 @@
           "description": "An array of relationship attributes.",
           "items": {
             "$ref": "#/definitions/AtlasRelationshipAttributeDef"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "defaultValue": {
           "type": "string",
@@ -6662,8 +6599,7 @@
           "description": "An array of enum element definitions.",
           "items": {
             "$ref": "#/definitions/AtlasEnumElementDef"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "endDef1": {
           "$ref": "#/definitions/AtlasRelationshipEndDef",
@@ -6686,8 +6622,7 @@
           "description": "An array of attribute definitions.",
           "items": {
             "$ref": "#/definitions/AtlasAttributeDef"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -6718,56 +6653,49 @@
           "description": "businessMetadataDefs",
           "items": {
             "$ref": "#/definitions/AtlasBusinessMetadataDef"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "classificationDefs": {
           "type": "array",
           "description": "An array of classification definitions.",
           "items": {
             "$ref": "#/definitions/AtlasClassificationDef"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "entityDefs": {
           "type": "array",
           "description": "An array of entity definitions.",
           "items": {
             "$ref": "#/definitions/AtlasEntityDef"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "enumDefs": {
           "type": "array",
           "description": "An array of enum definitions.",
           "items": {
             "$ref": "#/definitions/AtlasEnumDef"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "relationshipDefs": {
           "type": "array",
           "description": "An array of relationship definitions.",
           "items": {
             "$ref": "#/definitions/AtlasRelationshipDef"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "structDefs": {
           "type": "array",
           "description": "An array of struct definitions.",
           "items": {
             "$ref": "#/definitions/AtlasStructDef"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "termTemplateDefs": {
           "type": "array",
           "description": "An array of term template definitions.",
           "items": {
             "$ref": "#/definitions/TermTemplateDef"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -6798,8 +6726,7 @@
           "description": "The result value",
           "items": {
             "$ref": "#/definitions/AutoCompleteResultValue"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -6831,32 +6758,16 @@
           "description": "failed importInfoList",
           "items": {
             "$ref": "#/definitions/ImportInfo"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "successImportInfoList": {
           "type": "array",
           "description": "successful importInfoList",
           "items": {
             "$ref": "#/definitions/ImportInfo"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
-    },
-    "BusinessMetadataOptions": {
-      "type": "object",
-      "description": "Business metadata to send to the service",
-      "properties": {
-        "file": {
-          "type": "string",
-          "format": "byte",
-          "description": "InputStream of file"
-        }
-      },
-      "required": [
-        "file"
-      ]
     },
     "CardinalityValue": {
       "type": "string",
@@ -7001,8 +6912,7 @@
             "items": {
               "$ref": "#/definitions/AtlasEntityHeader"
             },
-            "type": "array",
-            "x-ms-identifiers": []
+            "type": "array"
           }
         },
         "partialUpdatedEntities": {
@@ -7010,8 +6920,7 @@
           "description": "An array of entity headers that partially updated.",
           "items": {
             "$ref": "#/definitions/AtlasEntityHeader"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -7303,8 +7212,7 @@
           "description": "The facets for search. See examples for the usage of supported facets.",
           "items": {
             "$ref": "#/definitions/SearchFacetItem"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "taxonomySetting": {
           "$ref": "#/definitions/SearchTaxonomySetting",
@@ -7492,80 +7400,70 @@
           "description": "Entity type",
           "items": {
             "$ref": "#/definitions/SearchFacetItemValue"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "assetType": {
           "type": "array",
           "description": "Asset type",
           "items": {
             "$ref": "#/definitions/SearchFacetItemValue"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "classification": {
           "type": "array",
           "description": "Classification",
           "items": {
             "$ref": "#/definitions/SearchFacetItemValue"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "term": {
           "type": "array",
           "description": "Term",
           "items": {
             "$ref": "#/definitions/SearchFacetItemValue"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "contactId": {
           "type": "array",
           "description": "Contact id",
           "items": {
             "$ref": "#/definitions/SearchFacetItemValue"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "contactType": {
           "type": "array",
           "description": "Contact type",
           "items": {
             "$ref": "#/definitions/SearchFacetItemValue"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "label": {
           "type": "array",
           "description": "Label",
           "items": {
             "$ref": "#/definitions/SearchFacetItemValue"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "glossaryType": {
           "type": "array",
           "description": "Glossary type",
           "items": {
             "$ref": "#/definitions/SearchFacetItemValue"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "termStatus": {
           "type": "array",
           "description": "Term status",
           "items": {
             "$ref": "#/definitions/SearchFacetItemValue"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "termTemplate": {
           "type": "array",
           "description": "Term template",
           "items": {
             "$ref": "#/definitions/SearchFacetItemValue"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -7674,8 +7572,11 @@
           "description": "The description of the asset."
         },
         "endorsement": {
-          "type": "string",
-          "description": "The endorsement of the asset."
+          "type": "array",
+          "description": "The endorsement of the asset.",
+          "items": {
+            "type": "string"
+          }
         },
         "owner": {
           "type": "string",
@@ -7700,8 +7601,7 @@
           "description": "The terms assigned to the asset.",
           "items": {
             "$ref": "#/definitions/TermSearchResultValue"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "contact": {
           "type": "array",
@@ -7918,8 +7818,11 @@
           "description": "The description of the asset."
         },
         "endorsement": {
-          "type": "string",
-          "description": "The endorsement of the asset."
+          "type": "array",
+          "description": "The endorsement of the asset.",
+          "items": {
+            "type": "string"
+          }
         },
         "owner": {
           "type": "string",
@@ -7944,8 +7847,7 @@
           "description": "The terms assigned to the asset.",
           "items": {
             "$ref": "#/definitions/TermSearchResultValue"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "contact": {
           "type": "array",
@@ -8111,8 +8013,7 @@
           "description": "An array of attribute definitions.",
           "items": {
             "$ref": "#/definitions/AtlasAttributeDef"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },

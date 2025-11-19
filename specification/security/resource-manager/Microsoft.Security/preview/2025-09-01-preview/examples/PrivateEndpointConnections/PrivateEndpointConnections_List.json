@@ -1,0 +1,55 @@
+{
+  "parameters": {
+    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+    "resourceGroupName": "rg",
+    "privateLinkName": "pls",
+    "api-version": "2025-09-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/rg/providers/Microsoft.Security/privateLinks/pls/privateEndpointConnections/pe",
+            "name": "pe",
+            "type": "Microsoft.Security/privateLinks/privateEndpointConnections",
+            "properties": {
+              "privateEndpoint": {
+                "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/rg/providers/Microsoft.Network/privateEndpoints/pe"
+              },
+              "privateLinkServiceConnectionState": {
+                "status": "Approved",
+                "description": "Auto-approved",
+                "actionsRequired": "None"
+              },
+              "groupIds": [
+                "containers"
+              ],
+              "provisioningState": "Succeeded"
+            }
+          },
+          {
+            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/rg/providers/Microsoft.Security/privateLinks/pls/privateEndpointConnections/pe2",
+            "name": "pe2",
+            "type": "Microsoft.Security/privateLinks/privateEndpointConnections",
+            "properties": {
+              "privateEndpoint": {
+                "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/rg/providers/Microsoft.Network/privateEndpoints/pe2"
+              },
+              "privateLinkServiceConnectionState": {
+                "status": "Pending",
+                "description": "Waiting for approval",
+                "actionsRequired": "Manual approval required"
+              },
+              "groupIds": [
+                "containers"
+              ],
+              "provisioningState": "Succeeded"
+            }
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}

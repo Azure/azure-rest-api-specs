@@ -1,0 +1,38 @@
+# This file configures spell checking. Items in "words" were initially populated
+# with words that might be spelling errors. Review these words and take
+# appropriate action. For more information, see: https://aka.ms/ci-fix#spell-check
+
+# Spell checking is not case sensitive
+# Keep word lists in alphabetical order so the file is easier to manage
+import:
+  - ../../cspell.yaml
+words:
+  - aiapi
+  - appliation
+  - edmx
+  - ikey
+  - intervaled
+  - myanalytics
+  - myworkbooks
+  - qssw
+  - vsts
+  - xvcj
+overrides:
+  - filename: >-
+      **/specification/applicationinsights/resource-manager/Microsoft.Insights/stable/2015-05-01/componentFeaturesAndPricing_API.json
+    words:
+      - resouce
+  - filename: >-
+      **/specification/applicationinsights/resource-manager/Microsoft.Insights/preview/2017-10-01/eaSubscriptionMigration_API.json
+    words:
+      - migrationdate
+  - filename: >-
+      **/specification/applicationinsights/data-plane/LiveMetrics/preview/2024-04-01-preview/livemetrics.json
+    words:
+      - apikey
+      - comparand
+      - ikey
+      - livemetrics
+      - quickpulse
+      - sdk
+

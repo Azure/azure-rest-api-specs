@@ -1,0 +1,58 @@
+{
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "body": {
+      "properties": {
+        "devboxDisksEncryptionEnableStatus": "Enabled"
+      }
+    },
+    "devCenterName": "Contoso",
+    "encryptionSetName": "EncryptionWestUs",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "0ac520ee-14c0-480f-b6c9-0a90c58fffff"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "EncryptionWestUs",
+        "type": "Microsoft.DevCenter/devcenters/encryptionSets",
+        "id": "/subscriptions/0ac520ee-14c0-480f-b6c9-0a90c58ffff/resourceGroups/rg1/providers/Microsoft.DevCenter/devcenters/Contoso/encryptionSets/EncryptionWestUs",
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/identityGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/testidentity1": {
+              "clientId": "e35621a5-f615-4a20-940e-de8a84b15abc",
+              "principalId": "2111b8fc-e123-485a-b408-bf1153189494"
+            }
+          }
+        },
+        "location": "westus",
+        "properties": {
+          "devboxDisksEncryptionEnableStatus": "Enabled",
+          "keyEncryptionKeyIdentity": {
+            "type": "UserAssigned",
+            "userAssignedIdentityResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/identityGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/testidentity1"
+          },
+          "keyEncryptionKeyUrl": "https://contosovault.vault.azure.net/keys/contosokekwestus",
+          "provisioningState": "Accepted"
+        },
+        "systemData": {
+          "createdAt": "2020-11-18T18:24:24.818Z",
+          "createdBy": "User1",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-11-18T18:24:24.818Z",
+          "lastModifiedBy": "User1",
+          "lastModifiedByType": "User"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.DevCenter/locations/CENTRALUS/operationStatuses/722e7bc4-60fa-4e6b-864f-d5bf12b9adc4?api-version=2024-10-01-preview",
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.DevCenter/locations/CENTRALUS/operationStatuses/722e7bc4-60fa-4e6b-864f-d5bf12b9adc4?api-version=2024-10-01-preview"
+      }
+    }
+  },
+  "operationId": "EncryptionSets_Update",
+  "title": "EncryptionSets_Update"
+}

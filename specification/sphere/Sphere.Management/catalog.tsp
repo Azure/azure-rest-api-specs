@@ -18,7 +18,7 @@ model Catalog is TrackedResource<CatalogProperties> {
   @path
   @key("catalogName")
   @segment("catalogs")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 }
 
@@ -42,7 +42,7 @@ interface Catalogs {
   /**
    * Update a Catalog
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<Catalog, CatalogUpdate>;
 
   /**
@@ -70,6 +70,7 @@ interface Catalogs {
   /**
    * Lists deployments for catalog.
    */
+  @list
   listDeployments is ArmResourceActionSync<
     Catalog,
     void,
@@ -86,6 +87,7 @@ interface Catalogs {
   /**
    * List the device groups for the catalog.
    */
+  @list
   listDeviceGroups is ArmResourceActionSync<
     Catalog,
     ListDeviceGroupsRequest,
@@ -102,6 +104,7 @@ interface Catalogs {
   /**
    * Lists device insights for catalog.
    */
+  @list
   listDeviceInsights is ArmResourceActionSync<
     Catalog,
     void,
@@ -118,6 +121,7 @@ interface Catalogs {
   /**
    * Lists devices for catalog.
    */
+  @list
   listDevices is ArmResourceActionSync<
     Catalog,
     void,

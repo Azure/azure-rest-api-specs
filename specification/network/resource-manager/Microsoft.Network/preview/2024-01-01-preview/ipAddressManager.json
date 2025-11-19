@@ -125,6 +125,7 @@
             "in": "body",
             "name": "body",
             "description": "Pool resource object to create/update.",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/IpamPool"
             }
@@ -751,6 +752,9 @@
     "IpamPool": {
       "description": "Instance of Pool resource.",
       "type": "object",
+      "required": [
+        "properties"
+      ],
       "properties": {
         "properties": {
           "$ref": "#/definitions/IpamPoolProperties"

@@ -17,6 +17,9 @@ on:
       - eng/tools/typespec-requirement/**
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   typespec-requirement:
     uses: ./.github/workflows/_reusable-eng-tools-test.yaml
