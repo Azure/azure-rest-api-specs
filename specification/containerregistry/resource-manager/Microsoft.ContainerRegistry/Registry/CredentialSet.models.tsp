@@ -1,3 +1,5 @@
+using Azure.ResourceManager;
+
 namespace Microsoft.ContainerRegistry;
 
 /**
@@ -33,7 +35,7 @@ model CredentialSetProperties {
    * List of authentication credentials stored for an upstream.
    * Usually consists of a primary and an optional secondary credential.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   authCredentials?: AuthCredential[];
 
   /**
@@ -103,8 +105,8 @@ model CredentialSetUpdateParameters {
   /**
    * The properties of the credential set update parameters
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: CredentialSetUpdateProperties;
 
   /**
@@ -121,7 +123,7 @@ model CredentialSetUpdateProperties {
    * List of authentication credentials stored for an upstream.
    * Usually consists of a primary and an optional secondary credential.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   authCredentials?: AuthCredential[];
 }
 

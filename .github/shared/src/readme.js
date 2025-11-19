@@ -2,6 +2,7 @@ import { readFile } from "fs/promises";
 import yaml from "js-yaml";
 import { marked } from "marked";
 import { dirname, normalize, relative, resolve } from "path";
+import { inspect } from "util";
 import * as z from "zod";
 import { mapAsync } from "./array.js";
 import { SpecModelError } from "./spec-model-error.js";
@@ -9,8 +10,17 @@ import { embedError } from "./spec-model.js";
 import { Tag } from "./tag.js";
 
 /**
+ * @typedef {import('./spec-model.js').ErrorJSON} ErrorJSON
  * @typedef {import('./spec-model.js').SpecModel} SpecModel
  * @typedef {import('./spec-model.js').ToJSONOptions} ToJSONOptions
+ * @typedef {import('./tag.js').TagJSON} TagJSON
+ */
+
+/**
+ * @typedef {Object} ReadmeJSON
+ * @property {string} path
+ * @property {Object} globalConfig
+ * @property {(TagJSON|ErrorJSON)[]} tags
  */
 
 /**
@@ -43,7 +53,7 @@ export class Readme {
    */
   #content;
 
-  /** @type {{globalConfig: Object, tags: Map<string, Tag>} | undefined} */
+  /** @type {{globalConfig: Record<string, any>, tags: Map<string, Tag>} | undefined} */
   #data;
 
   /** @type {import('./logger.js').ILogger | undefined} */
@@ -165,7 +175,7 @@ export class Readme {
           } /* v8 ignore start: defensive rethrow */ else {
             throw error;
           }
-          /* v8 ignore end */
+          /* v8 ignore stop */
         }
 
         if (!parsedObj["input-file"]) {
@@ -210,7 +220,7 @@ export class Readme {
   }
 
   /**
-   * @returns {Promise<Object>}
+   * @returns {Promise<Record<string, any>>}
    */
   async getGlobalConfig() {
     return (await this.#getData()).globalConfig;
@@ -239,7 +249,7 @@ export class Readme {
 
   /**
    * @param {ToJSONOptions} [options]
-   * @returns {Promise<Object>}
+   * @returns {Promise<ReadmeJSON|ErrorJSON>}
    */
   async toJSONAsync(options = {}) {
     const { relativePaths } = options;
@@ -265,6 +275,6 @@ export class Readme {
    * @returns {string}
    */
   toString() {
-    return `Readme(${this.#path}, {logger: ${this.#logger}})`;
+    return `Readme(${this.#path}, {logger: ${inspect(this.#logger)}})`;
   }
 }

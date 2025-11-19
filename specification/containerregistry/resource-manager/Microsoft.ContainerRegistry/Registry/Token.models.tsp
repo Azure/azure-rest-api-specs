@@ -1,5 +1,7 @@
 namespace Microsoft.ContainerRegistry;
 
+using Azure.ResourceManager;
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union TokenCertificateName {
   string,
@@ -69,11 +71,11 @@ model TokenProperties {
  */
 model TokenCredentialsProperties {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #["thumbprint"])
+  @identifiers(#["thumbprint"])
   certificates?: TokenCertificate[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   passwords?: TokenPassword[];
 }
 
@@ -136,8 +138,8 @@ model TokenUpdateParameters {
   /**
    * The properties of the token update parameters.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: TokenUpdateProperties;
 }
 
@@ -194,7 +196,7 @@ model GenerateCredentialsResult {
   /**
    * The list of passwords for a container registry.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   passwords?: TokenPassword[];
 }
 
