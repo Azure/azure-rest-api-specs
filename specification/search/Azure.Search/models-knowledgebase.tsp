@@ -793,8 +793,8 @@ model KnowledgeSourceStatistics {
   @doc("Total number of synchronizations.")
   totalSynchronization: int32;
 
-  @doc("Average synchronization duration.")
-  averageSynchronizationDuration: duration;
+  @doc("Average synchronization duration in HH:MM:SS format.")
+  averageSynchronizationDuration: string;
 
   @doc("Average items processed per synchronization.")
   averageItemsProcessedPerSynchronization: int32;

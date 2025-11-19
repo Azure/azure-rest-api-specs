@@ -3514,7 +3514,8 @@
         "Facebook-DinoV2-Image-Embeddings-ViT-Base",
         "Facebook-DinoV2-Image-Embeddings-ViT-Giant",
         "Cohere-embed-v3-english",
-        "Cohere-embed-v3-multilingual"
+        "Cohere-embed-v3-multilingual",
+        "Cohere-embed-v4"
       ],
       "x-ms-enum": {
         "name": "AIFoundryModelCatalogName",
@@ -3549,6 +3550,11 @@
             "name": "CohereEmbedV3Multilingual",
             "value": "Cohere-embed-v3-multilingual",
             "description": "Cohere-embed-v3-multilingual"
+          },
+          {
+            "name": "CohereEmbedV4",
+            "value": "Cohere-embed-v4",
+            "description": "Cohere embed v4 model for generating embeddings from both text and images."
           }
         ]
       }
@@ -3760,7 +3766,8 @@
           "description": "The list of tokens returned by the analyzer specified in the request.",
           "items": {
             "$ref": "#/definitions/AnalyzedTokenInfo"
-          }
+          },
+          "readOnly": true
         }
       },
       "required": [
@@ -3773,22 +3780,26 @@
       "properties": {
         "token": {
           "type": "string",
-          "description": "The token returned by the analyzer."
+          "description": "The token returned by the analyzer.",
+          "readOnly": true
         },
         "startOffset": {
           "type": "integer",
           "format": "int32",
-          "description": "The index of the first character of the token in the input text."
+          "description": "The index of the first character of the token in the input text.",
+          "readOnly": true
         },
         "endOffset": {
           "type": "integer",
           "format": "int32",
-          "description": "The index of the last character of the token in the input text."
+          "description": "The index of the last character of the token in the input text.",
+          "readOnly": true
         },
         "position": {
           "type": "integer",
           "format": "int32",
-          "description": "The position of the token in the input text relative to other tokens. The first token in the input text has position 0, the next has position 1, and so on. Depending on the analyzer used, some tokens might have the same position, for example if they are synonyms of each other."
+          "description": "The position of the token in the input text relative to other tokens. The first token in the input text has position 0, the next has position 1, and so on. Depending on the analyzer used, some tokens might have the same position, for example if they are synonyms of each other.",
+          "readOnly": true
         }
       },
       "required": [
@@ -4185,6 +4196,10 @@
           "$ref": "#/definitions/AzureOpenAIModelName",
           "description": "The name of the embedding model that is deployed at the provided deploymentId path."
         },
+        "authenticationMethod": {
+          "type": "string",
+          "description": "The authentication method to use when connecting to the Azure OpenAI resource."
+        },
         "dimensions": {
           "type": "integer",
           "format": "int32",
@@ -4204,7 +4219,15 @@
       "enum": [
         "text-embedding-ada-002",
         "text-embedding-3-large",
-        "text-embedding-3-small"
+        "text-embedding-3-small",
+        "gpt-4o",
+        "gpt-4o-mini",
+        "gpt-4.1",
+        "gpt-4.1-mini",
+        "gpt-4.1-nano",
+        "gpt-5",
+        "gpt-5-mini",
+        "gpt-5-nano"
       ],
       "x-ms-enum": {
         "name": "AzureOpenAIModelName",
@@ -4224,6 +4247,46 @@
             "name": "TextEmbedding3Small",
             "value": "text-embedding-3-small",
             "description": "TextEmbedding3Small model."
+          },
+          {
+            "name": "Gpt4o",
+            "value": "gpt-4o",
+            "description": "Gpt4o model."
+          },
+          {
+            "name": "Gpt4oMini",
+            "value": "gpt-4o-mini",
+            "description": "Gpt4oMini model."
+          },
+          {
+            "name": "Gpt41",
+            "value": "gpt-4.1",
+            "description": "Gpt41 model."
+          },
+          {
+            "name": "Gpt41Mini",
+            "value": "gpt-4.1-mini",
+            "description": "Gpt41Mini model."
+          },
+          {
+            "name": "Gpt41Nano",
+            "value": "gpt-4.1-nano",
+            "description": "Gpt41Nano model."
+          },
+          {
+            "name": "Gpt5",
+            "value": "gpt-5",
+            "description": "Gpt5 model."
+          },
+          {
+            "name": "Gpt5Mini",
+            "value": "gpt-5-mini",
+            "description": "Gpt5Mini model."
+          },
+          {
+            "name": "Gpt5Nano",
+            "value": "gpt-5-nano",
+            "description": "Gpt5Nano model."
           }
         ]
       }
@@ -4285,6 +4348,10 @@
         "modelName": {
           "$ref": "#/definitions/AzureOpenAIModelName",
           "description": "The name of the embedding model that is deployed at the provided deploymentId path."
+        },
+        "authenticationMethod": {
+          "type": "string",
+          "description": "The authentication method to use when connecting to the Azure OpenAI resource."
         }
       }
     },
@@ -7372,7 +7439,8 @@
       "properties": {
         "status": {
           "$ref": "#/definitions/IndexerExecutionStatus",
-          "description": "The outcome of this indexer execution."
+          "description": "The outcome of this indexer execution.",
+          "readOnly": true
         },
         "statusDetail": {
           "$ref": "#/definitions/IndexerExecutionStatusDetail",
@@ -7391,49 +7459,58 @@
         },
         "errorMessage": {
           "type": "string",
-          "description": "The error message indicating the top-level error, if any."
+          "description": "The error message indicating the top-level error, if any.",
+          "readOnly": true
         },
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The start time of this indexer execution."
+          "description": "The start time of this indexer execution.",
+          "readOnly": true
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The end time of this indexer execution, if the execution has already completed."
+          "description": "The end time of this indexer execution, if the execution has already completed.",
+          "readOnly": true
         },
         "errors": {
           "type": "array",
           "description": "The item-level indexing errors.",
           "items": {
             "$ref": "#/definitions/SearchIndexerError"
-          }
+          },
+          "readOnly": true
         },
         "warnings": {
           "type": "array",
           "description": "The item-level indexing warnings.",
           "items": {
             "$ref": "#/definitions/SearchIndexerWarning"
-          }
+          },
+          "readOnly": true
         },
         "itemsProcessed": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of items that were processed during this indexer execution. This includes both successfully processed items and items where indexing was attempted but failed."
+          "description": "The number of items that were processed during this indexer execution. This includes both successfully processed items and items where indexing was attempted but failed.",
+          "readOnly": true
         },
         "itemsFailed": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of items that failed to be indexed during this indexer execution."
+          "description": "The number of items that failed to be indexed during this indexer execution.",
+          "readOnly": true
         },
         "initialTrackingState": {
           "type": "string",
-          "description": "Change tracking state with which an indexer execution started."
+          "description": "Change tracking state with which an indexer execution started.",
+          "readOnly": true
         },
         "finalTrackingState": {
           "type": "string",
-          "description": "Change tracking state with which an indexer execution finished."
+          "description": "Change tracking state with which an indexer execution finished.",
+          "readOnly": true
         }
       },
       "required": [
@@ -7668,12 +7745,14 @@
         "maxFailedItems": {
           "type": "integer",
           "format": "int32",
-          "description": "The maximum number of items that can fail indexing for indexer execution to still be considered successful. -1 means no limit. Default is 0."
+          "description": "The maximum number of items that can fail indexing for indexer execution to still be considered successful. -1 means no limit. Default is 0.",
+          "default": 0
         },
         "maxFailedItemsPerBatch": {
           "type": "integer",
           "format": "int32",
-          "description": "The maximum number of items in a single batch that can fail indexing for the batch to still be considered successful. -1 means no limit. Default is 0."
+          "description": "The maximum number of items in a single batch that can fail indexing for the batch to still be considered successful. -1 means no limit. Default is 0.",
+          "default": 0
         },
         "configuration": {
           "$ref": "#/definitions/IndexingParametersConfiguration",
@@ -7742,23 +7821,28 @@
         },
         "excludedFileNameExtensions": {
           "type": "string",
-          "description": "Comma-delimited list of filename extensions to ignore when processing from Azure blob storage.  For example, you could exclude \".png, .mp4\" to skip over those files during indexing."
+          "description": "Comma-delimited list of filename extensions to ignore when processing from Azure blob storage.  For example, you could exclude \".png, .mp4\" to skip over those files during indexing.",
+          "default": ""
         },
         "indexedFileNameExtensions": {
           "type": "string",
-          "description": "Comma-delimited list of filename extensions to select when processing from Azure blob storage.  For example, you could focus indexing on specific application files \".docx, .pptx, .msg\" to specifically include those file types."
+          "description": "Comma-delimited list of filename extensions to select when processing from Azure blob storage.  For example, you could focus indexing on specific application files \".docx, .pptx, .msg\" to specifically include those file types.",
+          "default": ""
         },
         "failOnUnsupportedContentType": {
           "type": "boolean",
-          "description": "For Azure blobs, set to false if you want to continue indexing when an unsupported content type is encountered, and you don't know all the content types (file extensions) in advance."
+          "description": "For Azure blobs, set to false if you want to continue indexing when an unsupported content type is encountered, and you don't know all the content types (file extensions) in advance.",
+          "default": false
         },
         "failOnUnprocessableDocument": {
           "type": "boolean",
-          "description": "For Azure blobs, set to false if you want to continue indexing if a document fails indexing."
+          "description": "For Azure blobs, set to false if you want to continue indexing if a document fails indexing.",
+          "default": false
         },
         "indexStorageMetadataOnlyForOversizedDocuments": {
           "type": "boolean",
-          "description": "For Azure blobs, set this property to true to still index storage metadata for blob content that is too large to process. Oversized blobs are treated as errors by default. For limits on blob size, see https://learn.microsoft.com/azure/search/search-limits-quotas-capacity."
+          "description": "For Azure blobs, set this property to true to still index storage metadata for blob content that is too large to process. Oversized blobs are treated as errors by default. For limits on blob size, see https://learn.microsoft.com/azure/search/search-limits-quotas-capacity.",
+          "default": false
         },
         "delimitedTextHeaders": {
           "type": "string",
@@ -7915,7 +7999,8 @@
         },
         "allowSkillsetToReadFileData": {
           "type": "boolean",
-          "description": "If true, will create a path //document//file_data that is an object representing the original file data downloaded from your blob data source. This allows you to pass the original file data to a custom skill for processing within the enrichment pipeline, or to the Document Extraction skill."
+          "description": "If true, will create a path //document//file_data that is an object representing the original file data downloaded from your blob data source. This allows you to pass the original file data to a custom skill for processing within the enrichment pipeline, or to the Document Extraction skill.",
+          "default": false
         },
         "pdfTextRotationAlgorithm": {
           "type": "string",
@@ -8067,7 +8152,8 @@
         },
         "keepWordsCase": {
           "type": "boolean",
-          "description": "A value indicating whether to lower case all words first. Default is false."
+          "description": "A value indicating whether to lower case all words first. Default is false.",
+          "default": false
         }
       },
       "required": [
@@ -8226,7 +8312,8 @@
         },
         "ignoreCase": {
           "type": "boolean",
-          "description": "A value indicating whether to ignore case. If true, all words are converted to lower case first. Default is false."
+          "description": "A value indicating whether to ignore case. If true, all words are converted to lower case first. Default is false.",
+          "default": false
         }
       },
       "required": [
@@ -9383,12 +9470,12 @@
         },
         "@odata.etag": {
           "type": "string",
-          "description": "The ETag of the agent.",
+          "description": "The ETag of the knowledge source.",
           "x-ms-client-name": "eTag"
         },
         "encryptionKey": {
           "$ref": "#/definitions/SearchResourceEncryptionKey",
-          "description": "A description of an encryption key that you create in Azure Key Vault."
+          "description": "A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your knowledge source definition when you want full assurance that no one, not even Microsoft, can decrypt them. Once you have encrypted your knowledge source definition, it will always remain encrypted. The search service will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your knowledge source definition will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019."
         }
       },
       "discriminator": "kind",
@@ -9638,8 +9725,7 @@
         },
         "averageSynchronizationDuration": {
           "type": "string",
-          "format": "duration",
-          "description": "Average synchronization duration."
+          "description": "Average synchronization duration in HH:MM:SS format."
         },
         "averageItemsProcessedPerSynchronization": {
           "type": "integer",
@@ -9754,6 +9840,8 @@
           "type": "integer",
           "format": "int32",
           "description": "The minimum length in characters. Default is 0. Maximum is 300. Must be less than the value of max.",
+          "default": 0,
+          "minimum": 0,
           "maximum": 300
         },
         "max": {
@@ -10542,7 +10630,8 @@
         },
         "consumeAllTokens": {
           "type": "boolean",
-          "description": "A value indicating whether all tokens from the input must be consumed even if maxTokenCount is reached. Default is false."
+          "description": "A value indicating whether all tokens from the input must be consumed even if maxTokenCount is reached. Default is false.",
+          "default": false
         }
       },
       "allOf": [
@@ -11509,6 +11598,30 @@
       }
     },
     "NGramTokenFilter": {
+      "type": "object",
+      "description": "Generates n-grams of the given size(s). This token filter is implemented using Apache Lucene.",
+      "properties": {
+        "minGram": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The minimum n-gram length. Default is 1. Must be less than the value of maxGram.",
+          "default": 1
+        },
+        "maxGram": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum n-gram length. Default is 2.",
+          "default": 2
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TokenFilter"
+        }
+      ],
+      "x-ms-discriminator-value": "#Microsoft.Azure.Search.NGramTokenFilter"
+    },
+    "NGramTokenFilterV2": {
       "type": "object",
       "description": "Generates n-grams of the given size(s). This token filter is implemented using Apache Lucene.",
       "properties": {
@@ -12779,12 +12892,14 @@
         },
         "reverse": {
           "type": "boolean",
-          "description": "A value indicating whether to generate tokens in reverse order. Default is false."
+          "description": "A value indicating whether to generate tokens in reverse order. Default is false.",
+          "default": false
         },
         "skip": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of initial tokens to skip. Default is 0."
+          "description": "The number of initial tokens to skip. Default is 0.",
+          "default": 0
         }
       },
       "allOf": [
@@ -13022,12 +13137,12 @@
           {
             "name": "KoelnerPhonetik",
             "value": "koelnerPhonetik",
-            "description": "Encodes a token using the KÃ¶lner Phonetik algorithm."
+            "description": "Encodes a token using the Kölner Phonetik algorithm."
           },
           {
             "name": "HaasePhonetik",
             "value": "haasePhonetik",
-            "description": "Encodes a token using the Haase refinement of the KÃ¶lner Phonetik algorithm."
+            "description": "Encodes a token using the Haase refinement of the Kölner Phonetik algorithm."
           },
           {
             "name": "BeiderMorse",
@@ -13996,8 +14111,29 @@
           "description": "Default oversampling factor. Oversampling retrieves a greater set of potential documents to offset the resolution loss due to quantization. This increases the set of results that will be rescored on full-precision vectors. Minimum value is 1, meaning no oversampling (1x). This parameter can only be set when 'enableRescoring' is true. Higher values improve recall at the expense of latency."
         },
         "rescoreStorageMethod": {
-          "$ref": "#/definitions/VectorSearchCompressionRescoreStorageMethod",
-          "description": "Controls the storage method for original vectors. This setting is immutable."
+          "type": "string",
+          "description": "Controls the storage method for original vectors. This setting is immutable.",
+          "default": "preserveOriginals",
+          "enum": [
+            "preserveOriginals",
+            "discardOriginals"
+          ],
+          "x-ms-enum": {
+            "name": "VectorSearchCompressionRescoreStorageMethod",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "PreserveOriginals",
+                "value": "preserveOriginals",
+                "description": "This option preserves the original full-precision vectors. Choose this option for maximum flexibility and highest quality of compressed search results. This consumes more storage but allows for rescoring and oversampling."
+              },
+              {
+                "name": "DiscardOriginals",
+                "value": "discardOriginals",
+                "description": "This option discards the original full-precision vectors. Choose this option for maximum storage savings. Since this option does not allow for rescoring and oversampling, it will often cause slight to moderate reductions in quality."
+              }
+            ]
+          }
         }
       }
     },
@@ -14083,7 +14219,8 @@
         "average",
         "minimum",
         "maximum",
-        "firstMatching"
+        "firstMatching",
+        "product"
       ],
       "x-ms-enum": {
         "name": "ScoringFunctionAggregation",
@@ -14113,6 +14250,11 @@
             "name": "FirstMatching",
             "value": "firstMatching",
             "description": "Boost scores using the first applicable scoring function in the scoring profile."
+          },
+          {
+            "name": "Product",
+            "value": "product",
+            "description": "Boost scores by the product of all scoring function results."
           }
         ]
       }
@@ -14886,7 +15028,8 @@
         },
         "subType": {
           "type": "string",
-          "description": "A specific type of the data source, in case the resource is capable of different modalities. For example, 'MongoDb' for certain 'cosmosDb' accounts."
+          "description": "A specific type of the data source, in case the resource is capable of different modalities. For example, 'MongoDb' for certain 'cosmosDb' accounts.",
+          "readOnly": true
         },
         "credentials": {
           "$ref": "#/definitions/DataSourceCredentials",
@@ -14943,7 +15086,8 @@
         "azuretable",
         "mysql",
         "adlsgen2",
-        "onelake"
+        "onelake",
+        "sharepoint"
       ],
       "x-ms-enum": {
         "name": "SearchIndexerDataSourceType",
@@ -14983,6 +15127,11 @@
             "name": "OneLake",
             "value": "onelake",
             "description": "Indicates a Microsoft Fabric OneLake datasource."
+          },
+          {
+            "name": "SharePoint",
+            "value": "sharepoint",
+            "description": "Indicates a SharePoint datasource."
           }
         ]
       }
@@ -15368,39 +15517,47 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name of the indexer."
+          "description": "The name of the indexer.",
+          "readOnly": true
         },
         "status": {
           "$ref": "#/definitions/IndexerStatus",
-          "description": "Overall indexer status."
+          "description": "Overall indexer status.",
+          "readOnly": true
         },
         "runtime": {
           "$ref": "#/definitions/IndexerRuntime",
-          "description": "The indexer's cumulative runtime consumption in the service."
+          "description": "Snapshot of the indexer's cumulative runtime consumption for the service over the current UTC period.",
+          "readOnly": true
         },
         "lastResult": {
           "$ref": "#/definitions/IndexerExecutionResult",
-          "description": "The result of the most recent or an in-progress indexer execution."
+          "description": "The result of the most recent or an in-progress indexer execution.",
+          "readOnly": true
         },
         "executionHistory": {
           "type": "array",
           "description": "History of the recent indexer executions, sorted in reverse chronological order.",
           "items": {
             "$ref": "#/definitions/IndexerExecutionResult"
-          }
+          },
+          "readOnly": true
         },
         "limits": {
           "$ref": "#/definitions/SearchIndexerLimits",
-          "description": "The execution limits for the indexer."
+          "description": "The execution limits for the indexer.",
+          "readOnly": true
         },
         "currentState": {
           "$ref": "#/definitions/IndexerCurrentState",
-          "description": "All of the state that defines and dictates the indexer's current execution."
+          "description": "All of the state that defines and dictates the indexer's current execution.",
+          "readOnly": true
         }
       },
       "required": [
         "name",
         "status",
+        "runtime",
         "executionHistory",
         "limits"
       ]
@@ -15411,23 +15568,28 @@
       "properties": {
         "key": {
           "type": "string",
-          "description": "The key of the item which generated a warning."
+          "description": "The key of the item which generated a warning.",
+          "readOnly": true
         },
         "message": {
           "type": "string",
-          "description": "The message describing the warning that occurred while processing the item."
+          "description": "The message describing the warning that occurred while processing the item.",
+          "readOnly": true
         },
         "name": {
           "type": "string",
-          "description": "The name of the source at which the warning originated. For example, this could refer to a particular skill in the attached skillset. This may not be always available."
+          "description": "The name of the source at which the warning originated. For example, this could refer to a particular skill in the attached skillset. This may not be always available.",
+          "readOnly": true
         },
         "details": {
           "type": "string",
-          "description": "Additional, verbose details about the warning to assist in debugging the indexer. This may not be always available."
+          "description": "Additional, verbose details about the warning to assist in debugging the indexer. This may not be always available.",
+          "readOnly": true
         },
         "documentationLink": {
           "type": "string",
-          "description": "A link to a troubleshooting guide for these classes of warnings. This may not be always available."
+          "description": "A link to a troubleshooting guide for these classes of warnings. This may not be always available.",
+          "readOnly": true
         }
       },
       "required": [
@@ -16334,7 +16496,8 @@
         },
         "outputUnigramsIfNoShingles": {
           "type": "boolean",
-          "description": "A value indicating whether to output unigrams for those times when no shingles are available. This property takes precedence when outputUnigrams is set to false. Default is false."
+          "description": "A value indicating whether to output unigrams for those times when no shingles are available. This property takes precedence when outputUnigrams is set to false. Default is false.",
+          "default": false
         },
         "tokenSeparator": {
           "type": "string",
@@ -16907,7 +17070,7 @@
     },
     "StemmerOverrideTokenFilter": {
       "type": "object",
-      "description": "Provides the ability to override other stemming filters with custom dictionary-based stemming. Any dictionary-stemmed terms will be marked as keywords so that they will not be stemmed with stemmers down the chain. Must be placed before any stemming filters. This token filter is implemented using Apache Lucene.",
+      "description": "Provides the ability to override other stemming filters with custom dictionary-based stemming. Any dictionary-stemmed terms will be marked as keywords so that they will not be stemmed with stemmers down the chain. Must be placed before any stemming filters. This token filter is implemented using Apache Lucene. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/StemmerOverrideFilter.html",
       "properties": {
         "rules": {
           "type": "array",
@@ -16929,7 +17092,7 @@
     },
     "StemmerTokenFilter": {
       "type": "object",
-      "description": "Language specific stemming filter. This token filter is implemented using Apache Lucene.",
+      "description": "Language specific stemming filter. This token filter is implemented using Apache Lucene. See https://learn.microsoft.com/rest/api/searchservice/Custom-analyzers-in-Azure-Search#TokenFilters",
       "properties": {
         "language": {
           "$ref": "#/definitions/StemmerTokenFilterLanguage",
@@ -17501,7 +17664,7 @@
     },
     "StopwordsTokenFilter": {
       "type": "object",
-      "description": "Removes stop words from a token stream. This token filter is implemented using Apache Lucene.",
+      "description": "Removes stop words from a token stream. This token filter is implemented using Apache Lucene. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/core/StopFilter.html",
       "properties": {
         "stopwords": {
           "type": "array",
@@ -17511,12 +17674,208 @@
           }
         },
         "stopwordsList": {
-          "$ref": "#/definitions/StopwordsList",
-          "description": "A predefined list of stopwords to use. This property and the stopwords property cannot both be set. Default is English."
+          "type": "string",
+          "description": "A predefined list of stopwords to use. This property and the stopwords property cannot both be set. Default is English.",
+          "default": "english",
+          "enum": [
+            "arabic",
+            "armenian",
+            "basque",
+            "brazilian",
+            "bulgarian",
+            "catalan",
+            "czech",
+            "danish",
+            "dutch",
+            "english",
+            "finnish",
+            "french",
+            "galician",
+            "german",
+            "greek",
+            "hindi",
+            "hungarian",
+            "indonesian",
+            "irish",
+            "italian",
+            "latvian",
+            "norwegian",
+            "persian",
+            "portuguese",
+            "romanian",
+            "russian",
+            "sorani",
+            "spanish",
+            "swedish",
+            "thai",
+            "turkish"
+          ],
+          "x-ms-enum": {
+            "name": "StopwordsList",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Arabic",
+                "value": "arabic",
+                "description": "Selects the stopword list for Arabic."
+              },
+              {
+                "name": "Armenian",
+                "value": "armenian",
+                "description": "Selects the stopword list for Armenian."
+              },
+              {
+                "name": "Basque",
+                "value": "basque",
+                "description": "Selects the stopword list for Basque."
+              },
+              {
+                "name": "Brazilian",
+                "value": "brazilian",
+                "description": "Selects the stopword list for Portuguese (Brazil)."
+              },
+              {
+                "name": "Bulgarian",
+                "value": "bulgarian",
+                "description": "Selects the stopword list for Bulgarian."
+              },
+              {
+                "name": "Catalan",
+                "value": "catalan",
+                "description": "Selects the stopword list for Catalan."
+              },
+              {
+                "name": "Czech",
+                "value": "czech",
+                "description": "Selects the stopword list for Czech."
+              },
+              {
+                "name": "Danish",
+                "value": "danish",
+                "description": "Selects the stopword list for Danish."
+              },
+              {
+                "name": "Dutch",
+                "value": "dutch",
+                "description": "Selects the stopword list for Dutch."
+              },
+              {
+                "name": "English",
+                "value": "english",
+                "description": "Selects the stopword list for English."
+              },
+              {
+                "name": "Finnish",
+                "value": "finnish",
+                "description": "Selects the stopword list for Finnish."
+              },
+              {
+                "name": "French",
+                "value": "french",
+                "description": "Selects the stopword list for French."
+              },
+              {
+                "name": "Galician",
+                "value": "galician",
+                "description": "Selects the stopword list for Galician."
+              },
+              {
+                "name": "German",
+                "value": "german",
+                "description": "Selects the stopword list for German."
+              },
+              {
+                "name": "Greek",
+                "value": "greek",
+                "description": "Selects the stopword list for Greek."
+              },
+              {
+                "name": "Hindi",
+                "value": "hindi",
+                "description": "Selects the stopword list for Hindi."
+              },
+              {
+                "name": "Hungarian",
+                "value": "hungarian",
+                "description": "Selects the stopword list for Hungarian."
+              },
+              {
+                "name": "Indonesian",
+                "value": "indonesian",
+                "description": "Selects the stopword list for Indonesian."
+              },
+              {
+                "name": "Irish",
+                "value": "irish",
+                "description": "Selects the stopword list for Irish."
+              },
+              {
+                "name": "Italian",
+                "value": "italian",
+                "description": "Selects the stopword list for Italian."
+              },
+              {
+                "name": "Latvian",
+                "value": "latvian",
+                "description": "Selects the stopword list for Latvian."
+              },
+              {
+                "name": "Norwegian",
+                "value": "norwegian",
+                "description": "Selects the stopword list for Norwegian."
+              },
+              {
+                "name": "Persian",
+                "value": "persian",
+                "description": "Selects the stopword list for Persian."
+              },
+              {
+                "name": "Portuguese",
+                "value": "portuguese",
+                "description": "Selects the stopword list for Portuguese."
+              },
+              {
+                "name": "Romanian",
+                "value": "romanian",
+                "description": "Selects the stopword list for Romanian."
+              },
+              {
+                "name": "Russian",
+                "value": "russian",
+                "description": "Selects the stopword list for Russian."
+              },
+              {
+                "name": "Sorani",
+                "value": "sorani",
+                "description": "Selects the stopword list for Sorani."
+              },
+              {
+                "name": "Spanish",
+                "value": "spanish",
+                "description": "Selects the stopword list for Spanish."
+              },
+              {
+                "name": "Swedish",
+                "value": "swedish",
+                "description": "Selects the stopword list for Swedish."
+              },
+              {
+                "name": "Thai",
+                "value": "thai",
+                "description": "Selects the stopword list for Thai."
+              },
+              {
+                "name": "Turkish",
+                "value": "turkish",
+                "description": "Selects the stopword list for Turkish."
+              }
+            ]
+          }
         },
         "ignoreCase": {
           "type": "boolean",
-          "description": "A value indicating whether to ignore case. If true, all words are converted to lower case first. Default is false."
+          "description": "A value indicating whether to ignore case. If true, all words are converted to lower case first. Default is false.",
+          "default": false
         },
         "removeTrailing": {
           "type": "boolean",
@@ -17707,7 +18066,8 @@
         },
         "ignoreCase": {
           "type": "boolean",
-          "description": "A value indicating whether to case-fold input for matching. Default is false."
+          "description": "A value indicating whether to case-fold input for matching. Default is false.",
+          "default": false
         },
         "expand": {
           "type": "boolean",
@@ -18602,7 +18962,8 @@
       "properties": {
         "onlyOnSamePosition": {
           "type": "boolean",
-          "description": "A value indicating whether to remove duplicates only at the same position. Default is false."
+          "description": "A value indicating whether to remove duplicates only at the same position. Default is false.",
+          "default": false
         }
       },
       "allOf": [
@@ -18866,16 +19227,6 @@
         "name": {
           "type": "string",
           "description": "The name to associate with this particular configuration."
-        },
-        "rerankWithOriginalVectors": {
-          "type": "boolean",
-          "description": "If set to true, once the ordered set of results calculated using compressed vectors are obtained, they will be reranked again by recalculating the full-precision similarity scores. This will improve recall at the expense of latency.",
-          "default": true
-        },
-        "defaultOversampling": {
-          "type": "number",
-          "format": "double",
-          "description": "Default oversampling factor. Oversampling will internally request more documents (specified by this multiplier) in the initial search. This increases the set of results that will be reranked using recomputed similarity scores from full-precision vectors. Minimum value is 1, meaning no oversampling (1x). This parameter can only be set when rerankWithOriginalVectors is true. Higher values improve recall at the expense of latency."
         },
         "rescoringOptions": {
           "$ref": "#/definitions/RescoringOptions",
@@ -19489,15 +19840,18 @@
         },
         "catenateWords": {
           "type": "boolean",
-          "description": "A value indicating whether maximum runs of word parts will be catenated. For example, if this is set to true, \"Azure-Search\" becomes \"AzureSearch\". Default is false."
+          "description": "A value indicating whether maximum runs of word parts will be catenated. For example, if this is set to true, \"Azure-Search\" becomes \"AzureSearch\". Default is false.",
+          "default": false
         },
         "catenateNumbers": {
           "type": "boolean",
-          "description": "A value indicating whether maximum runs of number parts will be catenated. For example, if this is set to true, \"1-2\" becomes \"12\". Default is false."
+          "description": "A value indicating whether maximum runs of number parts will be catenated. For example, if this is set to true, \"1-2\" becomes \"12\". Default is false.",
+          "default": false
         },
         "catenateAll": {
           "type": "boolean",
-          "description": "A value indicating whether all subword parts will be catenated. For example, if this is set to true, \"Azure-Search-1\" becomes \"AzureSearch1\". Default is false."
+          "description": "A value indicating whether all subword parts will be catenated. For example, if this is set to true, \"Azure-Search-1\" becomes \"AzureSearch1\". Default is false.",
+          "default": false
         },
         "splitOnCaseChange": {
           "type": "boolean",
@@ -19506,7 +19860,8 @@
         },
         "preserveOriginal": {
           "type": "boolean",
-          "description": "A value indicating whether original words will be preserved and added to the subword list. Default is false."
+          "description": "A value indicating whether original words will be preserved and added to the subword list. Default is false.",
+          "default": false
         },
         "splitOnNumerics": {
           "type": "boolean",
