@@ -25,13 +25,13 @@ alias CodeExecutionTraits = BaseOperationTraits &
 alias CodeExecutionOperations = Azure.Core.ResourceOperations<CodeExecutionTraits>;
 
 interface CodeExecution {
-  @doc("Execute code in a session.")
+  /** Execute code in a session. */
   @route("/executions")
   execute is RpcOperation<
     {
       ...ExecutionOperationIdHeader;
 
-      @doc("The request to execute code.")
+      /** The request to execute code. */
       @body
       codeExecutionRequest: SessionCodeExecutionRequest;
     },
@@ -41,51 +41,65 @@ interface CodeExecution {
     CodeExecutionTraits
   >;
 
-  @doc("Get the code execution result.")
+  /** Get the code execution result. */
   get is CodeExecutionOperations.ResourceRead<SessionCodeExecutionResource>;
 }
 
-alias SessionResourceFilesTraits = BaseOperationTraits &
-  QueryParametersTrait<{
-    ...SessionIdentifier;
-    ...SessionResourceFilePathQueryParameter;
-  }>;
-alias SessionResourceFilesOperations = Azure.Core.ResourceOperations<SessionResourceFilesTraits>;
+alias SessionResourceFilesQueryParamsTrait = QueryParametersTrait<{
+  ...SessionIdentifier;
+  ...SessionResourceFilePathQueryParameter;
+}>;
+alias SessionResourceFilesListQueryParamsTrait = QueryParametersTrait<{
+  ...SessionIdentifier;
+  ...SessionResourceFilePathQueryParameter;
+  ...SessionResourceFileRecursiveListParameter;
+}>;
+
+alias SessionResourceFilesOperations = Azure.Core.ResourceOperations<BaseOperationTraits>;
 
 interface SessionResourceFiles {
-  @doc("List the file resources.")
-  list is SessionResourceFilesOperations.ResourceList<SessionResourceFile>;
+  /** List the file resources. */
+  list is SessionResourceFilesOperations.ResourceList<
+    SessionResourceFile,
+    SessionResourceFilesListQueryParamsTrait
+  >;
 
-  @doc("Get the file resource.")
-  get is SessionResourceFilesOperations.ResourceRead<SessionResourceFile>;
+  /** Get the file resource. */
+  get is SessionResourceFilesOperations.ResourceRead<
+    SessionResourceFile,
+    SessionResourceFilesQueryParamsTrait
+  >;
 
-  @doc("Delete the file.")
-  delete is SessionResourceFilesOperations.ResourceDelete<SessionResourceFile>;
+  /** Delete the file. */
+  delete is SessionResourceFilesOperations.ResourceDelete<
+    SessionResourceFile,
+    SessionResourceFilesQueryParamsTrait
+  >;
 
+  /** Upload a file to a session. */
   #suppress "@azure-tools/typespec-azure-core/byos" "Storage service is not used"
-  @doc("Upload a file to a session.")
   @route("/files")
   upload is RpcOperation<
     {
-      @doc("The content type for the operation. Always multipart/form-data for this operation.")
+      /** The content type for the operation. Always multipart/form-data for this operation. */
       @header("content-type")
       contentType: "multipart/form-data";
 
       /** Multipart body */
       @multipartBody body: {
-        @doc("The file to upload.")
+        /** The file to upload. */
         file: HttpPart<bytes>;
       };
     },
     SessionResourceFile,
-    SessionResourceFilesTraits
+    SessionResourceFilesQueryParamsTrait
   >;
 
   // Azure standard operations require resource identifier (here session id) to be passed in the request path.
   // But for sessions, session identifier needs to be passed as a query parameter for conformity with other operations.
   // So we need to use custom operations instead of standard operations.
+  /** Get the content of the file. */
   #suppress "@azure-tools/typespec-azure-core/verb-conflict" "GET allowed on Action"
-  @doc("Get the content of the file.")
   @get
   @action("content")
   @actionSeparator("/")
@@ -94,7 +108,8 @@ interface SessionResourceFiles {
     {},
     {
       @body _: bytes;
-    }
+    },
+    SessionResourceFilesQueryParamsTrait
   >;
 }
 
@@ -104,13 +119,13 @@ interface SessionResourceFiles {
 @route("/session")
 @added(Versions.v2025_02_02_preview)
 interface SessionManagement {
+  /** Get the session. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "No suitable standard operation found."
-  @doc("Get the session.")
   @get
   get is Foundations.Operation<SessionIdentifier, Session>;
 
+  /** Delete the session. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "No suitable standard operation found."
-  @doc("Delete the session.")
   @delete
   delete is Foundations.Operation<
     SessionIdentifier,
@@ -124,12 +139,12 @@ interface SessionManagement {
 @route("/listSessions")
 @added(Versions.v2025_02_02_preview)
 interface ListSessions {
+  /** List the sessions. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "No suitable standard operation found."
-  @doc("List the sessions.")
   @get
   get is Foundations.Operation<
     {
-      @doc("The offset for pagination purpose.")
+      /** The offset for pagination purpose. */
       @query
       skip?: int32;
     },
@@ -142,8 +157,8 @@ interface ListSessions {
 // So we need to use custom operations instead of standard operations.
 @added(Versions.v2025_02_02_preview)
 interface SessionPoolMetadata {
+  /** Get the metadata information. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "No suitable standard operation found."
-  @doc("Get the metadata information.")
   @route("/metadata")
   @get
   get is Foundations.Operation<{}, SessionPoolMetadataResponse>;

@@ -1,8 +1,17 @@
 import { describe, expect, it } from "vitest";
 import { PER_PAGE_MAX } from "../../shared/src/github.js";
 import { fullGitSha } from "../../shared/test/examples.js";
-import updateLabels, { updateLabelsImpl } from "../src/update-labels.js";
+import updateLabelsSrc, { updateLabelsImpl } from "../src/update-labels.js";
 import { createMockCore, createMockGithub, createMockRequestError } from "./mocks.js";
+
+/**
+ * @param {unknown} asyncFunctionArgs
+ */
+function updateLabels(asyncFunctionArgs) {
+  return updateLabelsSrc(
+    /** @type {import("@actions/github-script").AsyncFunctionArguments} */ (asyncFunctionArgs),
+  );
+}
 
 describe("updateLabels", () => {
   it("loads inputs from context", async () => {
@@ -63,6 +72,7 @@ describe("updateLabelsImpl", () => {
       updateLabelsImpl({
         owner: "owner",
         repo: "repo",
+        head_sha: fullGitSha,
         issue_number: 123,
         run_id: NaN,
         github: github,
@@ -90,6 +100,7 @@ describe("updateLabelsImpl", () => {
       updateLabelsImpl({
         owner: "owner",
         repo: "repo",
+        head_sha: fullGitSha,
         issue_number: NaN,
         run_id: 456,
         github: github,
@@ -108,6 +119,7 @@ describe("updateLabelsImpl", () => {
       updateLabelsImpl({
         owner: "owner",
         repo: "repo",
+        head_sha: fullGitSha,
         issue_number: NaN,
         run_id: 456,
         github: github,
@@ -139,6 +151,7 @@ describe("updateLabelsImpl", () => {
       updateLabelsImpl({
         owner: "owner",
         repo: "repo",
+        head_sha: fullGitSha,
         issue_number: 123,
         run_id: 456,
         github: github,
@@ -189,6 +202,7 @@ describe("updateLabelsImpl", () => {
       updateLabelsImpl({
         owner: "owner",
         repo: "repo",
+        head_sha: fullGitSha,
         issue_number: 123,
         run_id: 456,
         github: github,
@@ -226,6 +240,7 @@ describe("updateLabelsImpl", () => {
       updateLabelsImpl({
         owner: "owner",
         repo: "repo",
+        head_sha: fullGitSha,
         issue_number: 123,
         run_id: 456,
         github: github,
@@ -257,6 +272,7 @@ describe("updateLabelsImpl", () => {
     const updateLabelsImplPromise = updateLabelsImpl({
       owner: "owner",
       repo: "repo",
+      head_sha: fullGitSha,
       issue_number: 123,
       run_id: 456,
       github: github,

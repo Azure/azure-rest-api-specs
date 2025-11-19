@@ -9,7 +9,7 @@ using LiftrBase.Storage;
 
 namespace LiftrBase;
 
-@@clientName(Qumulo.Storage, "QumuloMgmt", "python");
+@@clientName(Qumulo.Storage, "QumuloMgmtClient", "python");
 @@clientName(FileSystemResource, "QumuloFileSystemResource", "csharp");
 @@clientName(FileSystemResourceProperties.storageSku,
   "StorageSkuName",
