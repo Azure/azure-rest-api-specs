@@ -287,24 +287,21 @@ model ProvisionedClusterProperties {
   /**
    * The agent pool properties for the provisioned cluster.
    */
-  @OpenAPI.extension(
-    "x-ms-identifiers",
-    #[
-      "osType",
-      "osSKU",
-      "nodeLabels",
-      "nodeTaints",
-      "maxCount",
-      "minCount",
-      "enableAutoScaling",
-      "maxPods",
-      "count",
-      "vmSize",
-      "kubernetesVersion",
-      "name",
-      "gpuCountPerNode"
-    ]
-  )
+  @identifiers(#[
+    "osType",
+    "osSKU",
+    "nodeLabels",
+    "nodeTaints",
+    "maxCount",
+    "minCount",
+    "enableAutoScaling",
+    "maxPods",
+    "count",
+    "vmSize",
+    "kubernetesVersion",
+    "name",
+    "gpuCountPerNode"
+  ])
   agentPoolProfiles?: NamedAgentPoolProfile[];
 
   /**
@@ -637,10 +634,7 @@ model ProvisionedClusterPropertiesStatus {
   /**
    * The detailed status of the provisioned cluster components including addons.
    */
-  @OpenAPI.extension(
-    "x-ms-identifiers",
-    #["name", "phase", "ready", "errorMessage"]
-  )
+  @identifiers(#["name", "phase", "ready", "errorMessage"])
   controlPlaneStatus?: AddonStatusProfile[];
 
   /**
@@ -960,10 +954,7 @@ model AgentPoolProvisioningStatusStatus {
   /**
    * The agent pools that are ready.
    */
-  @OpenAPI.extension(
-    "x-ms-identifiers",
-    #["count", "vmSize", "kubernetesVersion", "gpuCountPerNode"]
-  )
+  @identifiers(#["count", "vmSize", "kubernetesVersion", "gpuCountPerNode"])
   readyReplicas?: AgentPoolUpdateProfile[];
 }
 
@@ -1067,10 +1058,7 @@ model KubernetesVersionProfileProperties {
   /**
    * List of supported Kubernetes versions
    */
-  @OpenAPI.extension(
-    "x-ms-identifiers",
-    #["version", "isPreview", "patchVersions"]
-  )
+  @identifiers(#["version", "isPreview", "patchVersions"])
   values?: KubernetesVersionProperties[];
 }
 
@@ -1105,10 +1093,7 @@ model KubernetesPatchVersions {
   /**
    * Indicates whether the kubernetes version image is ready or not
    */
-  @OpenAPI.extension(
-    "x-ms-identifiers",
-    #["osType", "osSku", "ready", "errorMessage"]
-  )
+  @identifiers(#["osType", "osSku", "ready", "errorMessage"])
   readiness?: KubernetesVersionReadiness[];
 
   /**
@@ -1158,10 +1143,7 @@ model VmSkuProfileProperties {
   /**
    * List of supported VM SKUs.
    */
-  @OpenAPI.extension(
-    "x-ms-identifiers",
-    #["resourceType", "capabilities", "name", "tier", "size"]
-  )
+  @identifiers(#["resourceType", "capabilities", "name", "tier", "size"])
   values?: VmSkuProperties[];
 }
 

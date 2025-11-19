@@ -36,4 +36,5 @@ interface Workspaces {
   update is ArmResourcePatchSync<Workspace, WorkspaceProperties>;
   delete is ArmResourceDeleteSync<Workspace>;
   list is ArmResourceListByParent<Workspace>;
+  listBySubscription is ArmListBySubscription<Workspace>;
 }

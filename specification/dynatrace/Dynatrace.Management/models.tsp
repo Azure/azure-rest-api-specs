@@ -2,11 +2,13 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/versioning";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using TypeSpec.Versioning;
 
 namespace Dynatrace.Observability;
 
@@ -142,6 +144,24 @@ union Action {
   Install: "Install",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FixME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Uninstall: "Uninstall",
+}
+
+/**
+ * Add or Remove connectors for SRE agents.
+ */
+@added(Dynatrace.Observability.Versions.v2025_11_03_preview)
+union ConnectorAction {
+  string,
+
+  /**
+   * Add connector actions
+   */
+  Add: "Add",
+
+  /**
+   * Remove connector action
+   */
+  Remove: "Remove",
 }
 
 /**
@@ -411,7 +431,7 @@ model SubscriptionList {
   /**
    * List of subscriptions and the state of the monitoring.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   monitoredSubscriptionList?: MonitoredSubscription[];
 
   /**
@@ -490,7 +510,7 @@ model LogRules {
    * List of filtering tags to be used for capturing logs. This only takes effect if SendActivityLogs flag is enabled. If empty, all resources will be captured.
    * If only Exclude action is specified, the rules will apply to the list of all available resources. If Include actions are specified, the rules will only include resources with the associated tags.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   filteringTags?: FilteringTag[];
 }
 
@@ -526,7 +546,7 @@ model MetricRules {
   /**
    * List of filtering tags to be used for capturing metrics. If empty, all resources will be captured. If only Exclude action is specified, the rules will apply to the list of all available resources. If Include actions are specified, the rules will only include resources with the associated tags.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   filteringTags?: FilteringTag[];
 }
 
@@ -537,7 +557,7 @@ model CreateResourceSupportedResponse {
   /**
    * Represents the properties of the resource.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   value?: CreateResourceSupportedProperties[];
 
   /**
@@ -571,6 +591,7 @@ model VMExtensionPayload {
   /**
    * Ingestion key of the environment
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   ingestionKey?: string;
 
   /**
@@ -592,6 +613,23 @@ model ManageAgentInstallationRequest {
    * Install/Uninstall action.
    */
   action: Action;
+}
+
+/**
+ * Request for adding/removing Dynatrace MCP connectors on SRE Agent resource.
+ */
+@added(Dynatrace.Observability.Versions.v2025_11_03_preview)
+model SreAgentConnectorRequest {
+  /**
+   * The list of ARM resource ID of the MCP connector integrated with SRE Agent resource.
+   */
+  @Azure.ResourceManager.identifiers(#["mcpConnectorResourceId"])
+  mcpConnectorResourceIdList: SreAgentConfiguration[];
+
+  /**
+   * Add/Remove action.
+   */
+  action: ConnectorAction;
 }
 
 /**
@@ -655,6 +693,14 @@ model MonitorProperties {
    */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
+
+  /**
+   * SRE Agent configuration to connect to MCP server of Dynatrace for given environment.
+   */
+  @Azure.ResourceManager.identifiers(#["mcpConnectorResourceId"])
+  @added(Dynatrace.Observability.Versions.v2025_11_03_preview)
+  @visibility(Lifecycle.Update)
+  sreAgentConfiguration?: SreAgentConfiguration[];
 }
 
 /**
@@ -680,6 +726,24 @@ model DynatraceEnvironmentProperties {
    * The details of a Dynatrace single sign-on.
    */
   singleSignOnProperties?: DynatraceSingleSignOnProperties;
+}
+
+/**
+ * Response of a list operation.
+ */
+@added(Dynatrace.Observability.Versions.v2025_11_03_preview)
+model SreAgentConfigurationListResponse
+  is Azure.Core.Page<SreAgentConfiguration>;
+
+/**
+ * SRE Agent configuration to connect to MCP server of Dynatrace for a given organization.
+ */
+@added(Dynatrace.Observability.Versions.v2025_11_03_preview)
+model SreAgentConfiguration {
+  /**
+   * The ARM resource ID of the MCP connector integrated with SRE Agent resource.
+   */
+  mcpConnectorResourceId: string;
 }
 
 /**
@@ -714,6 +778,7 @@ model EnvironmentInfo {
   /**
    * Ingestion key of the environment
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   ingestionKey?: string;
 
   /**
