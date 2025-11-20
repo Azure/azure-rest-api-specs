@@ -134,7 +134,7 @@ union IPFamily {
   string,
 
   @doc("IPv4 is available to the pool.")
-  @clientName("Ipv4", "python")
+  @clientName("ipv4", "python")
   IPv4: "IPv4",
 
   @doc("IPv6 is available to the pool.")
