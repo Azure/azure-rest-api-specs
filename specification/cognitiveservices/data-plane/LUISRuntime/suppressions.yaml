@@ -1,0 +1,9 @@
+# LUISRuntime suppressions.yaml
+# Suppress TypeSpec requirement for existing Swagger-based versions
+# Stable versions
+- tool: TypeSpecRequirement
+  path: ./stable/v2.0/*.json
+  reason: Brownfield service not ready to migrate
+- tool: TypeSpecRequirement
+  path: ./stable/v3.0/*.json
+  reason: Brownfield service not ready to migrate

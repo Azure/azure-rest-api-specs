@@ -13,9 +13,9 @@
     - ai/data-plane/HealthInsights/preview/2023-09-01-preview/openapi.json
     - azurestackhci/resource-manager/Microsoft.AzureStackHCI/StackHCIVM/preview/2024-07-15-preview/stackhcivm.json
     - batch/data-plane/Azure.Batch/preview/2024-02-01.19.0/BatchService.json
-    - cognitiveservices/data-plane/AzureOpenAI/inference/preview/2023-08-01-preview/generated.json
-    - cognitiveservices/data-plane/AzureOpenAI/inference/preview/2023-09-01-preview/generated.json
-    - cognitiveservices/data-plane/AzureOpenAI/inference/preview/2023-12-01-preview/generated.json
+    - cognitiveservices/data-plane/OpenAIInference/preview/2023-08-01-preview/generated.json
+    - cognitiveservices/data-plane/OpenAIInference/preview/2023-09-01-preview/generated.json
+    - cognitiveservices/data-plane/OpenAIInference/preview/2023-12-01-preview/generated.json
     - cognitiveservices/data-plane/ContentSafety/preview/2023-04-30-preview/contentsafety.json
     - cognitiveservices/data-plane/ContentSafety/preview/2023-10-15-preview/contentsafety.json
     - cognitiveservices/data-plane/ContentSafety/preview/2024-02-15-preview/contentsafety.json
@@ -321,7 +321,7 @@
     - options.@azure-tools/typespec-java.namespace
     - options.@azure-tools/typespec-python.*
   paths:
-    - cognitiveservices/AnomalyDetector/tspconfig.yaml
+    - cognitiveservices/data-plane/AnomalyDetector/tspconfig.yaml
 
 - tool: TypeSpecValidation
   reason: Suppress until spec can be updated
@@ -335,7 +335,7 @@
     - options.@azure-tools/typespec-go.service-dir
     - options.@azure-tools/typespec-java.namespace
   paths:
-    - cognitiveservices/ContentSafety/tspconfig.yaml
+    - cognitiveservices/data-plane/ContentSafety/tspconfig.yaml
 
 - tool: TypeSpecValidation
   reason: Suppress until spec can be updated
@@ -351,14 +351,14 @@
     - options.@azure-tools/typespec-python.*
     - options.@azure-tools/typespec-ts.*
   paths:
-    - cognitiveservices/Language.AnalyzeConversations-authoring/tspconfig.yaml
-    - cognitiveservices/Language.AnalyzeDocuments/tspconfig.yaml
-    - cognitiveservices/Language.AnalyzeText/tspconfig.yaml
-    - cognitiveservices/Language.AnalyzeText-authoring/tspconfig.yaml
-    - cognitiveservices/Language.Conversations/tspconfig.yaml
-    - cognitiveservices/Language.QuestionAnswering/tspconfig.yaml
-    - cognitiveservices/Language.QuestionAnswering-authoring/tspconfig.yaml
-    - cognitiveservices/Speech.VideoTranslation/tspconfig.yaml
+    - cognitiveservices/data-plane/LanguageAnalyzeConversationsAuthoring/tspconfig.yaml
+    - cognitiveservices/data-plane/LanguageAnalyzeDocuments/tspconfig.yaml
+    - cognitiveservices/data-plane/LanguageAnalyzeText/tspconfig.yaml
+    - cognitiveservices/data-plane/LanguageAnalyzeTextAuthoring/tspconfig.yaml
+    - cognitiveservices/data-plane/LanguageAnalyzeConversations/tspconfig.yaml
+    - cognitiveservices/data-plane/LanguageQuestionAnswering/tspconfig.yaml
+    - cognitiveservices/data-plane/LanguageQuestionAnsweringAuthoring/tspconfig.yaml
+    - cognitiveservices/data-plane/SpeechVideoTranslation/tspconfig.yaml
 
 - tool: TypeSpecValidation
   reason: Suppress until spec can be updated
@@ -376,7 +376,7 @@
     - options.@azure-tools/typespec-ts.package-dir
     - options.@azure-tools/typespec-ts.emitter-output-dir
   paths:
-    - cognitiveservices/OpenAI.Inference/tspconfig.yaml
+    - cognitiveservices/data-plane/OpenAIInference/tspconfig.yaml
 
 - tool: TypeSpecValidation
   reason: Suppress until spec can be updated
@@ -1221,17 +1221,17 @@
     - app/data-plane/DynamicSessions/tspconfig.yaml
     - appconfiguration/data-plane/AppConfiguration/tspconfig.yaml
     - applicationinsights/ApplicationInsights.LiveMetrics/tspconfig.yaml
-    - cognitiveservices/AnomalyDetector/tspconfig.yaml
-    - cognitiveservices/ContentSafety/tspconfig.yaml
-    - cognitiveservices/Language.AnalyzeConversations-authoring/tspconfig.yaml
-    - cognitiveservices/Language.AnalyzeDocuments/tspconfig.yaml
-    - cognitiveservices/Language.AnalyzeText/tspconfig.yaml
-    - cognitiveservices/Language.AnalyzeText-authoring/tspconfig.yaml
-    - cognitiveservices/Language.Conversations/tspconfig.yaml
-    - cognitiveservices/Language.QuestionAnswering/tspconfig.yaml
-    - cognitiveservices/Language.QuestionAnswering-authoring/tspconfig.yaml
-    - cognitiveservices/OpenAI.Inference/tspconfig.yaml
-    - cognitiveservices/Speech.VideoTranslation/tspconfig.yaml
+    - cognitiveservices/data-plane/AnomalyDetector/tspconfig.yaml
+    - cognitiveservices/data-plane/ContentSafety/tspconfig.yaml
+    - cognitiveservices/data-plane/LanguageAnalyzeConversationsAuthoring/tspconfig.yaml
+    - cognitiveservices/data-plane/LanguageAnalyzeDocuments/tspconfig.yaml
+    - cognitiveservices/data-plane/LanguageAnalyzeText/tspconfig.yaml
+    - cognitiveservices/data-plane/LanguageAnalyzeTextAuthoring/tspconfig.yaml
+    - cognitiveservices/data-plane/LanguageAnalyzeConversations/tspconfig.yaml
+    - cognitiveservices/data-plane/LanguageQuestionAnswering/tspconfig.yaml
+    - cognitiveservices/data-plane/LanguageQuestionAnsweringAuthoring/tspconfig.yaml
+    - cognitiveservices/data-plane/OpenAIInference/tspconfig.yaml
+    - cognitiveservices/data-plane/SpeechVideoTranslation/tspconfig.yaml
     - communication/Communication.JobRouter/tspconfig.yaml
     - communication/Communication.Messages/tspconfig.yaml
     - confidentialledger/Microsoft.CodeTransparency/tspconfig.yaml
