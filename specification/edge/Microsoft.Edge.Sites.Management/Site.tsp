@@ -51,6 +51,28 @@ model SiteAddressProperties {
   postalCode?: string;
 }
 
+// @doc("The updatable properties of the Site.")
+// model SiteUpdateProperties {
+//   @doc("displayName of Site resource")
+//   displayName?: string;
+
+//   @doc("Description of Site resource")
+//   description?: string;
+
+//   @doc("Physical address of the site")
+//   siteAddress?: SiteAddressProperties;
+
+//   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
+//   @doc("Key-value pairs for labeling the site resource.")
+//   labels?: Record<string>;
+// }
+
+@doc("The type used for update operations of the Site.")
+model SiteUpdate {
+  @doc("The updatable properties of the Site.")
+  properties?: SiteProperties;
+}
+
 @doc("Site as ARM Resource")
 model Site is ProxyResource<SiteProperties> {
   #suppress "@typespec/http/metadata-ignored" ""
@@ -67,7 +89,7 @@ model Site is ProxyResource<SiteProperties> {
 interface Sites {
   get is ArmResourceRead<Site>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Site>;
-  update is ArmResourcePatchSync<Site, SiteProperties>;
+  update is ArmCustomPatchSync<Site, SiteUpdate>;
   delete is ArmResourceDeleteSync<Site>;
   listByResourceGroup is ArmResourceListByParent<Site>;
 }
@@ -81,11 +103,12 @@ interface SitesBySubscription {
     Site,
     BaseParameters = SubscriptionParameters
   >;
-  update is ArmResourcePatchSync<
+  update is ArmCustomPatchSync<
     Site,
-    SiteProperties,
+    SiteUpdate,
     BaseParameters = SubscriptionParameters
   >;
+
   delete is ArmResourceDeleteSync<
     Site,
     BaseParameters = SubscriptionParameters
@@ -121,5 +144,5 @@ interface SitesByServiceGroup {
   delete is ArmResourceDeleteSync<Site, ServiceGroupParameters>;
 
   @doc("update Site at SG scope")
-  update is ArmResourcePatchSync<Site, SiteProperties, ServiceGroupParameters>;
+  update is ArmCustomPatchSync<Site, SiteUpdate, ServiceGroupParameters>;
 }
