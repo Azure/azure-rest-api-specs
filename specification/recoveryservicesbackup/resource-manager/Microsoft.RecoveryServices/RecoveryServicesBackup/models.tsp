@@ -2845,6 +2845,7 @@ model TokenInformation {
   /**
    * Token value.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   token?: string;
 
   /**
@@ -5312,6 +5313,7 @@ model ExportJobsOperationResultInfo extends OperationResultInfoBase {
   /**
    * SAS key to access the blob. It expires in 15 mins.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   blobSasKey?: string;
 
   /**
@@ -5322,6 +5324,7 @@ model ExportJobsOperationResultInfo extends OperationResultInfoBase {
   /**
    * SAS key to access the blob. It expires in 15 mins.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   excelFileBlobSasKey?: string;
 
   /**
