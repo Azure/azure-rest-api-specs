@@ -136,7 +136,7 @@ export class FolderStructureRule implements Rule {
           success = false;
         }
 
-        const rpNamespaceRegex = /^[A-Za-z0-9\.]+$/;
+        const rpNamespaceRegex = /^[A-Za-z0-9.]+$/;
         const rpNamespaceFolder = folderStruct[folderStruct.length - 2];
 
         if (!rpNamespaceRegex.test(rpNamespaceFolder)) {

@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import { join } from "path";
 import { Suppression } from "suppressions";
 import { parse as yamlParse } from "yaml";

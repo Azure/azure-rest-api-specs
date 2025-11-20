@@ -2,6 +2,12 @@ export const fullGitSha = "abc123abc123abc123abc123abc123abc123abc1";
 
 export const swaggerHandWritten = JSON.stringify({});
 
+export const swaggerCadlGenerated = JSON.stringify({
+  info: {
+    "x-cadl-generated": [{ emitter: "@azure-tools/cadl-autorest" }],
+  },
+});
+
 export const swaggerTypeSpecGenerated = JSON.stringify({
   info: {
     "x-typespec-generated": [{ emitter: "@azure-tools/typespec-autorest" }],
