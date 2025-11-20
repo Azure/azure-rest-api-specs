@@ -1,8 +1,8 @@
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -72,7 +72,7 @@ model StorageCollectionRuleFilters {
 @doc("The filter definition of the storage collection rule. The filters are applied in a logical AND manner, such that only storage accounts that meet all the filters will be included in the collection. Filters that are empty or null have no effect on the selection. For filters that are arrays or dictionaries, any storage account that matches at least one of the array elements or key-value pairs will satisfy the filter condition.")
 model StorageCollectionRuleFilter {
   @doc("The Azure Resource Manager scopes to filter. This can be the resource IDs of management groups, subscriptions, resource groups or specific storage accounts.")
-  scopes: ResourceIdentifier<[
+  scopes: Azure.Core.armResourceIdentifier<[
     {
       type: "*";
       scopes: ["ManagementGroup", "Subscription", "ResourceGroup"];
@@ -98,7 +98,7 @@ model StorageCollectionRuleFilter {
 @doc("Destinations for storage collection rule data.")
 model StorageCollectionRuleDestinations {
   @doc("The resource ID of the log analytics workspace.")
-  dataCollectionRuleResourceId: ResourceIdentifier<[
+  dataCollectionRuleResourceId: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Insights/dataCollectionRules";
     }
