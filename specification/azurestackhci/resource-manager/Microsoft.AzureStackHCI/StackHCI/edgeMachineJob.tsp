@@ -40,12 +40,12 @@ interface EdgeMachineJobs {
   delete is ArmResourceDeleteWithoutOkAsync<EdgeMachineJob>;
 
   @doc("List EdgeMachineJob resources by EdgeMachines")
-  listByCluster is ArmResourceListByParent<EdgeMachineJob>;
+  list is ArmResourceListByParent<EdgeMachineJob>;
 }
 
 @@doc(EdgeMachineJob.name, "Name of EdgeMachineJob");
 
-////////////////////models////////////////////
+//////////////////// models ////////////////////
 
 @added(Versions.v2025_12_01_preview)
 @doc("EdgeMachine Job properties")
@@ -96,9 +96,6 @@ union EdgeMachineJobType {
 
   @doc("Job to provision operating system in the device.")
   ProvisionOs: "ProvisionOs",
-
-  @doc("Job to debug machine issues using AI.")
-  MachineAssistant: "MachineAssistant",
 
   @doc("Job to download OS packages on to the device")
   DownloadOs: "DownloadOs",
@@ -164,26 +161,6 @@ model RemoteSupportJobProperties extends EdgeMachineJobProperties {
   @doc("log collection job reported properties.")
   @visibility(Lifecycle.Read)
   reportedProperties?: RemoteSupportReportedProperties;
-}
-
-@added(Versions.v2025_12_01_preview)
-@doc("Properties for running Machine Assistant Job Properties.")
-model MachineAssistantJobProperties extends EdgeMachineJobProperties {
-  @doc("Job Type to support polymorphic resource.")
-  jobType: EdgeMachineJobType.MachineAssistant;
-
-  @doc("The user intent to be checked on the device.")
-  intent: string;
-
-  @doc("The source of the model used for analysis.")
-  source?: string;
-
-  @doc("The type of model used for analysis.")
-  type?: string;
-
-  @doc("Machine Assistant job reported properties.")
-  @visibility(Lifecycle.Read)
-  reportedProperties?: MachineAssistantReportedProperties;
 }
 
 @added(Versions.v2025_12_01_preview)
@@ -278,16 +255,6 @@ model RemoteSupportReportedProperties {
   @visibility(Lifecycle.Read)
   @Azure.ResourceManager.identifiers(#["sessionId"])
   sessionDetails?: RemoteSupportSession[];
-}
-
-@added(Versions.v2025_12_01_preview)
-@doc("Represents the reported properties of machine assistant job.")
-model MachineAssistantReportedProperties {
-  ...JobReportedProperties;
-
-  @doc("The result obtained after checking the intent on the machine.")
-  @visibility(Lifecycle.Read)
-  summary?: string;
 }
 
 @added(Versions.v2025_12_01_preview)
@@ -602,18 +569,30 @@ union OSOperationType {
 }
 
 @added(Versions.v2025_12_01_preview)
+@doc("Type of secret used for authentication.")
+union SecretType {
+  string,
+
+  @doc("Key Vault based authentication")
+  KeyVault: "KeyVault",
+
+  @doc("SSH Public Key based authentication")
+  SshPubKey: "SshPubKey",
+}
+
+@added(Versions.v2025_12_01_preview)
 @doc("User configuration.")
 model UserDetails {
   @doc("Name of the user.")
   userName: string;
 
-  @doc("Type of the secret used for authentication. Change it to enum in public preview")
-  secretType: string;
+  @doc("Type of the secret used for authentication.")
+  secretType: SecretType;
 
   @doc("Location of the secret used for authentication.")
   secretLocation?: string;
 
-  @doc("Location of the secret used for authentication.")
+  @doc("SSH Public Key for the user.")
   sshPubKey?: string[];
 }
 
@@ -738,13 +717,14 @@ model IpAddressRange {
 @doc("Web proxy configuration.")
 model WebProxyConfiguration {
   @doc("Connection URI of the web proxy.")
-  connectionUri?: string;
+  connectionUri?: url;
 
   @doc("Port of the web proxy.")
+  @pattern("^[0-9]{0,5}$")
   port?: string;
 
   @doc("Bypass list for the web proxy.")
-  bypassList?: string[];
+  bypassList?: url[];
 }
 
 @added(Versions.v2025_12_01_preview)

@@ -27,6 +27,29 @@ model EdgeMachine
 }
 
 @added(Versions.v2025_12_01_preview)
+@armResourceOperations
+interface EdgeMachines {
+  @doc("Get an edge machine.")
+  get is ArmResourceRead<EdgeMachine>;
+
+  @doc("Create or update an edge machine.")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<EdgeMachine>;
+
+  @doc("Delete an edge machine.")
+  delete is ArmResourceDeleteWithoutOkAsync<EdgeMachine>;
+
+  @doc("List all edge machines in a resource group.")
+  listByResourceGroup is ArmResourceListByParent<EdgeMachine>;
+
+  @doc("List all edge machines in a subscription.")
+  listBySubscription is ArmListBySubscription<EdgeMachine>;
+}
+
+@@doc(EdgeMachine.name, "Name of Device");
+
+////////////////////// models //////////////////////
+
+@added(Versions.v2025_12_01_preview)
 @doc("Edge Machine Kind.")
 union EdgeMachineKind {
   string,
@@ -37,66 +60,6 @@ union EdgeMachineKind {
   @doc("EdgeMachine resource created for brownfield HCI customers without zero touch provisioning.")
   Dedicated: "Dedicated",
 }
-
-@added(Versions.v2025_12_01_preview)
-@armResourceOperations
-interface EdgeMachines {
-  /**
-   * Get a EdgeDevice
-   */
-  get is ArmResourceRead<EdgeMachine>;
-
-  /**
-   * Create a EdgeDevice
-   */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<EdgeMachine>;
-
-  /**
-   * Delete a EdgeDevice
-   */
-  delete is ArmResourceDeleteWithoutOkAsync<EdgeMachine>;
-
-  @doc("List all edge machines in a resource group.")
-  listByResourceGroup is ArmResourceListByParent<EdgeMachine>;
-
-  @doc("List all edge machines in a subscription.")
-  listBySubscription is ArmListBySubscription<EdgeMachine>;
-
-  @doc("Update an edgeMachine")
-  @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<EdgeMachine, EdgeMachinePatch>;
-
-  /**
-   * A long-running resource action.
-   */
-  validate is ArmResourceActionAsync<
-    EdgeMachine,
-    EdgeMachineValidateRequest,
-    EdgeMachineValidateResponse
-  >;
-
-  /**
-   * A long-running resource action.
-   */
-  setFailedMachineState is ArmResourceActionAsync<
-    EdgeMachine,
-    SetFailedMachineStateRequest,
-    EdgeMachine
-  >;
-
-  /**
-   * A long-running resource action.
-   */
-  resetFailedMachineState is ArmResourceActionAsync<
-    EdgeMachine,
-    void,
-    EdgeMachine
-  >;
-}
-
-@@doc(EdgeMachine.name, "Name of Device");
-
-//////////////////////models//////////////////////
 
 @added(Versions.v2025_12_01_preview)
 @doc("Properties for edge machine.")
@@ -115,14 +78,26 @@ model EdgeMachineProperties {
 
   @doc("Optional property to create arc machine in custom resource group.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  arcMachineResourceGroupId?: Azure.Core.armResourceIdentifier;
+  arcMachineResourceGroupId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Resources/resourceGroups";
+    }
+  ]>;
 
   @doc("Arc machine instance resource id.")
-  arcMachineResourceId?: Azure.Core.armResourceIdentifier;
+  arcMachineResourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.HybridCompute/machines";
+    }
+  ]>;
 
   @doc("Link to Arc Gateway ARM resource Id")
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  arcGatewayResourceId?: Azure.Core.armResourceIdentifier;
+  arcGatewayResourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.HybridCompute/gateways";
+    }
+  ]>;
 
   @doc("Service fetches common configuration from site.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
@@ -179,6 +154,7 @@ model ProvisioningDetails {
   osProfile: OsProvisionProfile;
 
   @doc("User configuration.")
+  @minItems(1)
   @Azure.ResourceManager.identifiers(#["userName"])
   userDetails?: UserDetails[];
 }
@@ -239,51 +215,6 @@ model OperationDetail {
   error?: Azure.ResourceManager.Foundations.ErrorDetail;
 }
 
-/**
- * The validate request for Edge Machine.
- */
-@added(Versions.v2025_12_01_preview)
-model EdgeMachineValidateRequest {
-  /**
-   * Machine Ids against which, current machine has to be validated.
-   */
-  edgeMachineIds: string[];
-
-  /**
-   * Additional info required for validation.
-   */
-  additionalInfo?: string;
-}
-
-@added(Versions.v2025_12_01_preview)
-@doc("The Set Failed request for Edge Machine..")
-model SetFailedMachineStateRequest {
-  @doc("Failure details to set why edge machine set to Failed state.")
-  failureDetails?: FailureDetails;
-}
-
-@added(Versions.v2025_12_01_preview)
-@doc("Failure details to set why edge machine set to Failed state.")
-model FailureDetails {
-  @doc("Operation name which caused edge machine set to Failed state.")
-  operation?: string;
-
-  @doc("description of failure why edge machine set to Failed state.")
-  description?: string;
-}
-
-/**
- * An Accepted response with an Operation-Location header.
- */
-@added(Versions.v2025_12_01_preview)
-model EdgeMachineValidateResponse {
-  /**
-   * edge device validation status
-   */
-  @visibility(Lifecycle.Read)
-  status?: string;
-}
-
 @added(Versions.v2025_12_01_preview)
 @doc("Overall connectivity status for the machine resource.")
 union EdgeMachineConnectivityStatus {
@@ -302,29 +233,15 @@ union EdgeMachineConnectivityStatus {
 @added(Versions.v2025_12_01_preview)
 @doc("Site Details consists of common configurations.")
 model SiteDetails {
-  @doc("Site resource Id set EM resource creation, once set can be reset only on EdgeMachine Reset API invocation.")
-  siteResourceId: Azure.Core.armResourceIdentifier;
+  @doc("Site resource Id to be set during Edge Machine resource creation.")
+  siteResourceId: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Edge/sites";
+    }
+  ]>;
 
   @doc("Edge Device configuration received from site common configuration.")
   deviceConfiguration?: DeviceConfiguration;
-}
-
-@added(Versions.v2025_12_01_preview)
-@doc("Model for patching edge machine.")
-model EdgeMachinePatch {
-  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
-  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
-
-  @doc("Properties for patching edge machine.")
-  properties?: EdgeMachinePatchProperties;
-}
-
-@added(Versions.v2025_12_01_preview)
-@doc("Properties for patching edge machine.")
-model EdgeMachinePatchProperties {
-  @doc("selection labels that can be used by CMP to decide which all machines can be part of this device pool")
-  @Azure.ResourceManager.identifiers(#["labelName"])
-  labels?: Labels[];
 }
 
 @added(Versions.v2025_12_01_preview)

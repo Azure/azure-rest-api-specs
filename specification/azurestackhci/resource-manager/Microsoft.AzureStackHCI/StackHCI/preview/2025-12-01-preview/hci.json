@@ -494,7 +494,7 @@
         "tags": [
           "EdgeMachines"
         ],
-        "description": "Get a EdgeDevice",
+        "description": "Get an edge machine.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -539,7 +539,7 @@
         "tags": [
           "EdgeMachines"
         ],
-        "description": "Create a EdgeDevice",
+        "description": "Create or update an edge machine.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -609,84 +609,12 @@
         },
         "x-ms-long-running-operation": true
       },
-      "patch": {
-        "operationId": "EdgeMachines_Update",
-        "tags": [
-          "EdgeMachines"
-        ],
-        "description": "Update an edgeMachine",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "edgeMachineName",
-            "in": "path",
-            "description": "Name of Device",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-_]{3,63}$"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "The resource properties to be updated.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/EdgeMachinePatch"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/EdgeMachine"
-            }
-          },
-          "202": {
-            "description": "Resource update request accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "EdgeMachines_Update": {
-            "$ref": "./examples/EdgeMachines_Update.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      },
       "delete": {
         "operationId": "EdgeMachines_Delete",
         "tags": [
           "EdgeMachines"
         ],
-        "description": "Delete a EdgeDevice",
+        "description": "Delete an edge machine.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -744,7 +672,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/edgeMachines/{edgeMachineName}/jobs": {
       "get": {
-        "operationId": "EdgeMachineJobs_ListByCluster",
+        "operationId": "EdgeMachineJobs_List",
         "tags": [
           "EdgeMachineJobs"
         ],
@@ -783,8 +711,8 @@
           }
         },
         "x-ms-examples": {
-          "EdgeMachineJobs_ListByCluster_MaximumSet": {
-            "$ref": "./examples/EdgeMachineJobs_ListByCluster_MaximumSet_Gen.json"
+          "EdgeMachineJobs_List_MaximumSet": {
+            "$ref": "./examples/EdgeMachineJobs_List_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -843,9 +771,6 @@
         "x-ms-examples": {
           "EdgeMachineJobs_Get_CollectLog": {
             "$ref": "./examples/EdgeMachineJobs_Get_CollectLog.json"
-          },
-          "EdgeMachineJobs_Get_MachineAssistant": {
-            "$ref": "./examples/EdgeMachineJobs_Get_MachineAssistant.json"
           },
           "EdgeMachineJobs_Get_ProvisionOs": {
             "$ref": "./examples/EdgeMachineJobs_Get_ProvisionOs.json"
@@ -935,9 +860,6 @@
           "EdgeMachineJobs_CreateOrUpdate_DownloadOs": {
             "$ref": "./examples/EdgeMachineJobs_CreateOrUpdate_DownloadOs.json"
           },
-          "EdgeMachineJobs_CreateOrUpdate_MachineAssistant": {
-            "$ref": "./examples/EdgeMachineJobs_CreateOrUpdate_MachineAssistant.json"
-          },
           "EdgeMachineJobs_CreateOrUpdate_ProvisionOs": {
             "$ref": "./examples/EdgeMachineJobs_CreateOrUpdate_ProvisionOs.json"
           },
@@ -1014,219 +936,6 @@
         "x-ms-examples": {
           "EdgeMachineJobs_Delete_MaximumSet": {
             "$ref": "./examples/EdgeMachineJobs_Delete_MaximumSet_Gen.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/edgeMachines/{edgeMachineName}/resetFailedMachineState": {
-      "post": {
-        "operationId": "EdgeMachines_ResetFailedMachineState",
-        "tags": [
-          "EdgeMachines"
-        ],
-        "description": "A long-running resource action.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "edgeMachineName",
-            "in": "path",
-            "description": "Name of Device",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-_]{3,63}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/EdgeMachine"
-            }
-          },
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "EdgeMachines_ResetFailedMachineState": {
-            "$ref": "./examples/EdgeMachines_ResetFailedMachineState.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/edgeMachines/{edgeMachineName}/setFailedMachineState": {
-      "post": {
-        "operationId": "EdgeMachines_SetFailedMachineState",
-        "tags": [
-          "EdgeMachines"
-        ],
-        "description": "A long-running resource action.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "edgeMachineName",
-            "in": "path",
-            "description": "Name of Device",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-_]{3,63}$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The content of the action request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SetFailedMachineStateRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/EdgeMachine"
-            }
-          },
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "EdgeMachines_SetFailedMachineState": {
-            "$ref": "./examples/EdgeMachines_SetFailedMachineState.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/edgeMachines/{edgeMachineName}/validate": {
-      "post": {
-        "operationId": "EdgeMachines_Validate",
-        "tags": [
-          "EdgeMachines"
-        ],
-        "description": "A long-running resource action.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "edgeMachineName",
-            "in": "path",
-            "description": "Name of Device",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-_]{3,63}$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The content of the action request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/EdgeMachineValidateRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/EdgeMachineValidateResponse"
-            }
-          },
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "EdgeMachines_Validate_MaximumSet": {
-            "$ref": "./examples/EdgeMachines_Validate_MaximumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1929,7 +1638,6 @@
         "CollectLog",
         "RemoteSupport",
         "ProvisionOs",
-        "MachineAssistant",
         "DownloadOs"
       ],
       "x-ms-enum": {
@@ -1950,11 +1658,6 @@
             "name": "ProvisionOs",
             "value": "ProvisionOs",
             "description": "Job to provision operating system in the device."
-          },
-          {
-            "name": "MachineAssistant",
-            "value": "MachineAssistant",
-            "description": "Job to debug machine issues using AI."
           },
           {
             "name": "DownloadOs",
@@ -2009,43 +1712,6 @@
         "value"
       ]
     },
-    "EdgeMachinePatch": {
-      "type": "object",
-      "description": "Model for patching edge machine.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "identity": {
-          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
-        },
-        "properties": {
-          "$ref": "#/definitions/EdgeMachinePatchProperties",
-          "description": "Properties for patching edge machine."
-        }
-      }
-    },
-    "EdgeMachinePatchProperties": {
-      "type": "object",
-      "description": "Properties for patching edge machine.",
-      "properties": {
-        "labels": {
-          "type": "array",
-          "description": "selection labels that can be used by CMP to decide which all machines can be part of this device pool",
-          "items": {
-            "$ref": "#/definitions/Labels"
-          },
-          "x-ms-identifiers": [
-            "labelName"
-          ]
-        }
-      }
-    },
     "EdgeMachineProperties": {
       "type": "object",
       "description": "Properties for edge machine.",
@@ -2075,12 +1741,26 @@
           "x-ms-mutability": [
             "read",
             "create"
-          ]
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Resources/resourceGroups"
+              }
+            ]
+          }
         },
         "arcMachineResourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "Arc machine instance resource id."
+          "description": "Arc machine instance resource id.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.HybridCompute/machines"
+              }
+            ]
+          }
         },
         "arcGatewayResourceId": {
           "type": "string",
@@ -2089,7 +1769,14 @@
           "x-ms-mutability": [
             "read",
             "create"
-          ]
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.HybridCompute/gateways"
+              }
+            ]
+          }
         },
         "siteDetails": {
           "$ref": "#/definitions/SiteDetails",
@@ -2233,37 +1920,6 @@
         ]
       }
     },
-    "EdgeMachineValidateRequest": {
-      "type": "object",
-      "description": "The validate request for Edge Machine.",
-      "properties": {
-        "edgeMachineIds": {
-          "type": "array",
-          "description": "Machine Ids against which, current machine has to be validated.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "additionalInfo": {
-          "type": "string",
-          "description": "Additional info required for validation."
-        }
-      },
-      "required": [
-        "edgeMachineIds"
-      ]
-    },
-    "EdgeMachineValidateResponse": {
-      "type": "object",
-      "description": "An Accepted response with an Operation-Location header.",
-      "properties": {
-        "status": {
-          "type": "string",
-          "description": "edge device validation status",
-          "readOnly": true
-        }
-      }
-    },
     "ErrorDetailModel": {
       "type": "object",
       "description": "details of validation failure",
@@ -2359,20 +2015,6 @@
           "x-ms-identifiers": [
             "extensionName"
           ]
-        }
-      }
-    },
-    "FailureDetails": {
-      "type": "object",
-      "description": "Failure details to set why edge machine set to Failed state.",
-      "properties": {
-        "operation": {
-          "type": "string",
-          "description": "Operation name which caused edge machine set to Failed state."
-        },
-        "description": {
-          "type": "string",
-          "description": "description of failure why edge machine set to Failed state."
         }
       }
     },
@@ -2744,65 +2386,6 @@
         "correlationId": {
           "type": "string",
           "description": "A unique identifier for correlating this log collection session with other operations or sessions.",
-          "readOnly": true
-        }
-      }
-    },
-    "MachineAssistantJobProperties": {
-      "type": "object",
-      "description": "Properties for running Machine Assistant Job Properties.",
-      "properties": {
-        "intent": {
-          "type": "string",
-          "description": "The user intent to be checked on the device."
-        },
-        "source": {
-          "type": "string",
-          "description": "The source of the model used for analysis."
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of model used for analysis."
-        },
-        "reportedProperties": {
-          "$ref": "#/definitions/MachineAssistantReportedProperties",
-          "description": "Machine Assistant job reported properties.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "intent"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/EdgeMachineJobProperties"
-        }
-      ],
-      "x-ms-discriminator-value": "MachineAssistant"
-    },
-    "MachineAssistantReportedProperties": {
-      "type": "object",
-      "description": "Represents the reported properties of machine assistant job.",
-      "properties": {
-        "percentComplete": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The percentage of the job that is complete.",
-          "readOnly": true
-        },
-        "validationStatus": {
-          "$ref": "#/definitions/EceActionStatus",
-          "description": "Validation status of job.",
-          "readOnly": true
-        },
-        "deploymentStatus": {
-          "$ref": "#/definitions/EceActionStatus",
-          "description": "Deployment status of job.",
-          "readOnly": true
-        },
-        "summary": {
-          "type": "string",
-          "description": "The result obtained after checking the intent on the machine.",
           "readOnly": true
         }
       }
@@ -3557,6 +3140,7 @@
         "userDetails": {
           "type": "array",
           "description": "User configuration.",
+          "minItems": 1,
           "items": {
             "$ref": "#/definitions/UserDetails"
           },
@@ -4059,14 +3643,28 @@
         ]
       }
     },
-    "SetFailedMachineStateRequest": {
-      "type": "object",
-      "description": "The Set Failed request for Edge Machine..",
-      "properties": {
-        "failureDetails": {
-          "$ref": "#/definitions/FailureDetails",
-          "description": "Failure details to set why edge machine set to Failed state."
-        }
+    "SecretType": {
+      "type": "string",
+      "description": "Type of secret used for authentication.",
+      "enum": [
+        "KeyVault",
+        "SshPubKey"
+      ],
+      "x-ms-enum": {
+        "name": "SecretType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "KeyVault",
+            "value": "KeyVault",
+            "description": "Key Vault based authentication"
+          },
+          {
+            "name": "SshPubKey",
+            "value": "SshPubKey",
+            "description": "SSH Public Key based authentication"
+          }
+        ]
       }
     },
     "SiteDetails": {
@@ -4076,7 +3674,14 @@
         "siteResourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "Site resource Id set EM resource creation, once set can be reset only on EdgeMachine Reset API invocation."
+          "description": "Site resource Id to be set during Edge Machine resource creation.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Edge/sites"
+              }
+            ]
+          }
         },
         "deviceConfiguration": {
           "$ref": "#/definitions/DeviceConfiguration",
@@ -4297,8 +3902,8 @@
           "description": "Name of the user."
         },
         "secretType": {
-          "type": "string",
-          "description": "Type of the secret used for authentication. Change it to enum in public preview"
+          "$ref": "#/definitions/SecretType",
+          "description": "Type of the secret used for authentication."
         },
         "secretLocation": {
           "type": "string",
@@ -4306,7 +3911,7 @@
         },
         "sshPubKey": {
           "type": "array",
-          "description": "Location of the secret used for authentication.",
+          "description": "SSH Public Key for the user.",
           "items": {
             "type": "string"
           }
@@ -4360,17 +3965,20 @@
       "properties": {
         "connectionUri": {
           "type": "string",
+          "format": "uri",
           "description": "Connection URI of the web proxy."
         },
         "port": {
           "type": "string",
-          "description": "Port of the web proxy."
+          "description": "Port of the web proxy.",
+          "pattern": "^[0-9]{0,5}$"
         },
         "bypassList": {
           "type": "array",
           "description": "Bypass list for the web proxy.",
           "items": {
-            "type": "string"
+            "type": "string",
+            "format": "uri"
           }
         }
       }
