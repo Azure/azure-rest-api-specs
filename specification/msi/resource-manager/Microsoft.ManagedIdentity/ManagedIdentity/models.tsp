@@ -1,12 +1,14 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/openapi";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
 namespace Microsoft.ManagedIdentity;
@@ -20,6 +22,17 @@ union IsolationScope {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
   Regional: "Regional",
   string,
+}
+
+/**
+ * Configuration to restrict identity assignment to specific resource providers or resource types.
+ */
+@added(Versions.v2025_05_31_preview)
+model IdentityAssignmentRestrictions {
+  /**
+   * List of resource providers or resource providers with resource types that this identity can be assigned to (case-insensitive). Examples: 'Microsoft.Compute', 'Microsoft.Storage/Accounts', 'Microsoft.Network/VirtualNetworks'.
+   */
+  providers?: string[];
 }
 
 /**
@@ -128,6 +141,13 @@ model UserAssignedIdentityProperties {
    */
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   isolationScope?: IsolationScope;
+
+  /**
+   * Restrictions on which resource providers this identity can be assigned to.
+   */
+  @added(Versions.v2025_05_31_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  assignmentRestrictions?: IdentityAssignmentRestrictions;
 }
 
 /**
