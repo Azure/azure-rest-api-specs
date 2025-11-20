@@ -36,22 +36,24 @@
   ],
   "security": [
     {
-      "ApiKeyAuth": []
+      "AzureKey": []
     },
     {
-      "OAuth2Auth": [
+      "EntraIdToken": [
         "https://cognitiveservices.azure.com/.default"
       ]
     }
   ],
   "securityDefinitions": {
-    "ApiKeyAuth": {
+    "AzureKey": {
       "type": "apiKey",
+      "description": "Key-based authentication using the access key of the Azure resource.",
       "name": "Ocp-Apim-Subscription-Key",
       "in": "header"
     },
-    "OAuth2Auth": {
+    "EntraIdToken": {
       "type": "oauth2",
+      "description": "Microsoft Entra ID OAuth2 authentication using an access token.",
       "flow": "accessCode",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
@@ -137,7 +139,7 @@
           }
         },
         "x-ms-examples": {
-          "Delete Analyzer": {
+          "Delete Analyzer Result": {
             "$ref": "./examples/ContentAnalyzers_DeleteResult.json"
           }
         }
@@ -261,6 +263,8 @@
             "description": "The unique identifier of the analyzer.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
             "pattern": "^[a-zA-Z0-9._-]{1,64}$"
           },
           {
@@ -313,6 +317,8 @@
             "description": "The unique identifier of the analyzer.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
             "pattern": "^[a-zA-Z0-9._-]{1,64}$"
           },
           {
@@ -409,6 +415,8 @@
             "description": "The unique identifier of the analyzer.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
             "pattern": "^[a-zA-Z0-9._-]{1,64}$"
           },
           {
@@ -470,6 +478,8 @@
             "description": "The unique identifier of the analyzer.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
             "pattern": "^[a-zA-Z0-9._-]{1,64}$"
           },
           {
@@ -521,6 +531,8 @@
             "description": "The unique identifier of the analyzer.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
             "pattern": "^[a-zA-Z0-9._-]{1,64}$"
           },
           {
@@ -621,6 +633,8 @@
             "description": "The unique identifier of the analyzer.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
             "pattern": "^[a-zA-Z0-9._-]{1,64}$"
           },
           {
@@ -716,6 +730,8 @@
             "description": "The unique identifier of the analyzer.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
             "pattern": "^[a-zA-Z0-9._-]{1,64}$"
           },
           {
@@ -815,6 +831,8 @@
             "description": "The unique identifier of the analyzer.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
             "pattern": "^[a-zA-Z0-9._-]{1,64}$"
           },
           {
@@ -877,6 +895,8 @@
             "description": "The unique identifier of the analyzer.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
             "pattern": "^[a-zA-Z0-9._-]{1,64}$"
           },
           {
@@ -1052,6 +1072,8 @@
         "analyzerId": {
           "type": "string",
           "description": "The unique identifier of the analyzer.",
+          "minLength": 1,
+          "maxLength": 64,
           "pattern": "^[a-zA-Z0-9._-]{1,64}$"
         },
         "apiVersion": {
@@ -1332,6 +1354,8 @@
         "analyzerId": {
           "type": "string",
           "description": "The unique identifier of the analyzer.",
+          "minLength": 1,
+          "maxLength": 64,
           "pattern": "^[a-zA-Z0-9._-]{1,64}$",
           "readOnly": true
         },
@@ -1374,6 +1398,8 @@
         "baseAnalyzerId": {
           "type": "string",
           "description": "The analyzer to incrementally train from.",
+          "minLength": 1,
+          "maxLength": 64,
           "pattern": "^[a-zA-Z0-9._-]{1,64}$",
           "x-ms-mutability": [
             "read",
@@ -2389,7 +2415,9 @@
       "description": "Figure containing a chart, such as a bar chart, line chart, or pie chart.",
       "properties": {
         "content": {
-          "description": "Chart content represented using [Chart.js config](https://www.chartjs.org/docs/latest/configuration/)."
+          "type": "object",
+          "description": "Chart content represented using [Chart.js config](https://www.chartjs.org/docs/latest/configuration/).",
+          "additionalProperties": {}
         }
       },
       "required": [
@@ -3223,6 +3251,8 @@
         "analyzerId": {
           "type": "string",
           "description": "The analyzer that generated this content.",
+          "minLength": 1,
+          "maxLength": 64,
           "pattern": "^[a-zA-Z0-9._-]{1,64}$"
         },
         "category": {

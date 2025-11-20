@@ -43,6 +43,8 @@ interface ContentAnalyzers {
       @doc("The unique identifier of the analyzer.")
       @path
       @pattern("^[a-zA-Z0-9._-]{1,64}$")
+      @minLength(1)
+      @maxLength(64)
       analyzerId: string;
 
       @doc("The unique ID of the operation.")

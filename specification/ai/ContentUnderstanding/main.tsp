@@ -9,21 +9,10 @@ import "./documentContent.tsp";
 import "./audioVisualContent.tsp";
 
 using TypeSpec.Http;
-using TypeSpec.Rest;
 using TypeSpec.Versioning;
-using Azure.Core;
 
 @doc("The Content Understanding service extracts content and fields from multimodal input.")
-@useAuth(
-  ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key"> | OAuth2Auth<[
-    {
-      type: OAuth2FlowType.authorizationCode,
-      authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize",
-      tokenUrl: "https://login.microsoftonline.com/common/oauth2/token",
-      scopes: ["https://cognitiveservices.azure.com/.default"],
-    }
-  ]>
-)
+@useAuth(AzureKey | EntraIdToken)
 @service(#{ title: "Content Understanding" })
 @server(
   "{endpoint}/contentunderstanding",
@@ -35,6 +24,14 @@ using Azure.Core;
 )
 @versioned(ContentUnderstanding.Versions)
 namespace ContentUnderstanding;
+
+@doc("Key-based authentication using the access key of the Azure resource.")
+model AzureKey
+  is ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">;
+
+@doc("Microsoft Entra ID OAuth2 authentication using an access token.")
+model EntraIdToken
+  is Azure.Core.AadOauth2Auth<["https://cognitiveservices.azure.com/.default"]>;
 
 @doc("Service API versions.")
 enum Versions {

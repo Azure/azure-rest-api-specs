@@ -316,9 +316,9 @@ model DocumentChartFigure extends DocumentFigure {
   @doc("Figure kind.")
   kind: DocumentFigureKind.chart;
 
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "External API shape takes an arbitrary json"
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "External API shape takes an arbitrary json"
   @doc("Chart content represented using [Chart.js config](https://www.chartjs.org/docs/latest/configuration/).")
-  content: unknown;
+  content: Record<unknown>;
 }
 
 @added(Versions.v2025_11_01)

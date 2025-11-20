@@ -18,6 +18,8 @@ model ContentAnalyzer {
   @key
   @visibility(Lifecycle.Read)
   @pattern("^[a-zA-Z0-9._-]{1,64}$")
+  @minLength(1)
+  @maxLength(64)
   analyzerId: string;
 
   @doc("A description of the analyzer.")
@@ -45,6 +47,8 @@ model ContentAnalyzer {
   @doc("The analyzer to incrementally train from.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   @pattern("^[a-zA-Z0-9._-]{1,64}$")
+  @minLength(1)
+  @maxLength(64)
   baseAnalyzerId?: string;
 
   // @removed(Versions.v2025_05_01_preview)
@@ -598,6 +602,8 @@ model GetResultParameters {}
 model AnalyzeResult {
   @doc("The unique identifier of the analyzer.")
   @pattern("^[a-zA-Z0-9._-]{1,64}$")
+  @minLength(1)
+  @maxLength(64)
   analyzerId?: string;
 
   @doc("The version of the API used to analyze the document.")
@@ -644,6 +650,8 @@ model MediaContent {
   @added(Versions.v2025_11_01)
   @doc("The analyzer that generated this content.")
   @pattern("^[a-zA-Z0-9._-]{1,64}$")
+  @minLength(1)
+  @maxLength(64)
   analyzerId?: string;
 
   // @added(Versions.v2025_05_01_preview)
