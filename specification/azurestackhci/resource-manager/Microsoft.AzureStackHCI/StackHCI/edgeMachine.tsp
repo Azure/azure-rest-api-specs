@@ -35,6 +35,10 @@ interface EdgeMachines {
   @doc("Create or update an edge machine.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<EdgeMachine>;
 
+  @doc("Update an edge machine.")
+  @patch(#{ implicitOptionality: false })
+  update is ArmCustomPatchAsync<EdgeMachine, EdgeMachinePatch>;
+
   @doc("Delete an edge machine.")
   delete is ArmResourceDeleteWithoutOkAsync<EdgeMachine>;
 
@@ -143,6 +147,24 @@ model EdgeMachineProperties {
   @doc("Last time data updated to service.")
   @visibility(Lifecycle.Read)
   lastSyncTimestamp?: utcDateTime;
+}
+
+@added(Versions.v2025_12_01_preview)
+@doc("Model for patching edge machine.")
+model EdgeMachinePatch {
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
+
+  @doc("Properties for patching edge machine.")
+  properties?: EdgeMachinePatchProperties;
+}
+
+@added(Versions.v2025_12_01_preview)
+@doc("Properties for patching edge machine.")
+model EdgeMachinePatchProperties {
+  @doc("selection labels that can be used by CMP to decide which all machines can be part of this device pool")
+  @Azure.ResourceManager.identifiers(#["labelName"])
+  labels?: Labels[];
 }
 
 /**

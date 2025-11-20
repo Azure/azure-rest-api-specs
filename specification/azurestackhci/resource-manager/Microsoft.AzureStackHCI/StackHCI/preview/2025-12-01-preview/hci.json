@@ -609,6 +609,78 @@
         },
         "x-ms-long-running-operation": true
       },
+      "patch": {
+        "operationId": "EdgeMachines_Update",
+        "tags": [
+          "EdgeMachines"
+        ],
+        "description": "Update an edge machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "edgeMachineName",
+            "in": "path",
+            "description": "Name of Device",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,63}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EdgeMachinePatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EdgeMachine"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EdgeMachines_Update": {
+            "$ref": "./examples/EdgeMachines_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
       "delete": {
         "operationId": "EdgeMachines_Delete",
         "tags": [
@@ -1711,6 +1783,43 @@
       "required": [
         "value"
       ]
+    },
+    "EdgeMachinePatch": {
+      "type": "object",
+      "description": "Model for patching edge machine.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        },
+        "properties": {
+          "$ref": "#/definitions/EdgeMachinePatchProperties",
+          "description": "Properties for patching edge machine."
+        }
+      }
+    },
+    "EdgeMachinePatchProperties": {
+      "type": "object",
+      "description": "Properties for patching edge machine.",
+      "properties": {
+        "labels": {
+          "type": "array",
+          "description": "selection labels that can be used by CMP to decide which all machines can be part of this device pool",
+          "items": {
+            "$ref": "#/definitions/Labels"
+          },
+          "x-ms-identifiers": [
+            "labelName"
+          ]
+        }
+      }
     },
     "EdgeMachineProperties": {
       "type": "object",
