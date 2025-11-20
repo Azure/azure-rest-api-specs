@@ -1,3 +1,4 @@
+import { SdkName } from "@azure-tools/specs-shared/sdk-types";
 import fs from "node:fs";
 import path from "node:path";
 import { beforeEach, describe, expect, test, vi, type Mock } from "vitest";
@@ -33,7 +34,7 @@ describe("generateSdkForSingleSpec", () => {
       runMode: "release",
       localSdkRepoPath: "/sdk/path",
       sdkRepoName: "azure-sdk-for-js",
-      sdkLanguage: "javascript",
+      sdkLanguage: SdkName.Js,
       specCommitSha: "",
       specRepoHttpsUrl: "",
     };
@@ -103,7 +104,7 @@ describe("generateSdkForSingleSpec", () => {
       runMode: "batch",
       localSdkRepoPath: "/sdk/path",
       sdkRepoName: "azure-sdk-for-js",
-      sdkLanguage: "javascript",
+      sdkLanguage: SdkName.Js,
       specCommitSha: "",
       specRepoHttpsUrl: "",
     };
@@ -142,7 +143,7 @@ describe("generateSdkForSingleSpec", () => {
       runMode: "batch",
       localSdkRepoPath: "/sdk/path",
       sdkRepoName: "azure-sdk-for-js",
-      sdkLanguage: "javascript",
+      sdkLanguage: SdkName.Js,
       specCommitSha: "",
       specRepoHttpsUrl: "",
     };
@@ -184,7 +185,7 @@ describe("generateSdkForSpecPr", () => {
       workingFolder: "/working/folder",
       runMode: "batch",
       sdkRepoName: "azure-sdk-for-js",
-      sdkLanguage: "javascript",
+      sdkLanguage: SdkName.Js,
       specCommitSha: "",
       specRepoHttpsUrl: "",
     };
@@ -256,7 +257,7 @@ describe("generateSdkForSpecPr", () => {
       workingFolder: "/working/folder",
       runMode: "spec-pull-request",
       sdkRepoName: "azure-sdk-for-js",
-      sdkLanguage: "javascript",
+      sdkLanguage: SdkName.Js,
       specCommitSha: "",
       specRepoHttpsUrl: "",
     };
@@ -298,7 +299,7 @@ describe("generateSdkForSpecPr", () => {
       workingFolder: "/working/folder",
       runMode: "batch",
       sdkRepoName: "azure-sdk-for-js",
-      sdkLanguage: "javascript",
+      sdkLanguage: SdkName.Js,
       specCommitSha: "",
       specRepoHttpsUrl: "",
     };
@@ -337,7 +338,7 @@ describe("generateSdkForSpecPr", () => {
       workingFolder: "/working/folder",
       runMode: "batch",
       sdkRepoName: "azure-sdk-for-js",
-      sdkLanguage: "javascript",
+      sdkLanguage: SdkName.Js,
       specCommitSha: "",
       specRepoHttpsUrl: "",
     };
@@ -384,7 +385,7 @@ describe("generateSdkForSpecPr", () => {
       workingFolder: "/working/folder",
       runMode: "batch",
       sdkRepoName: "azure-sdk-for-js",
-      sdkLanguage: "javascript",
+      sdkLanguage: SdkName.Js,
       specCommitSha: "",
       specRepoHttpsUrl: "",
     };
@@ -436,7 +437,7 @@ describe("generateSdkForBatchSpecs", () => {
       runMode: "batch",
       localSdkRepoPath: "/sdk/path",
       sdkRepoName: "azure-sdk-for-js",
-      sdkLanguage: "javascript",
+      sdkLanguage: SdkName.Js,
       specCommitSha: "",
       specRepoHttpsUrl: "",
     };
@@ -504,7 +505,7 @@ describe("generateSdkForBatchSpecs", () => {
       runMode: "batch",
       localSdkRepoPath: "/sdk/path",
       sdkRepoName: "azure-sdk-for-js",
-      sdkLanguage: "javascript",
+      sdkLanguage: SdkName.Js,
       specCommitSha: "",
       specRepoHttpsUrl: "",
     };
@@ -564,7 +565,7 @@ describe("generateSdkForBatchSpecs", () => {
       runMode: "batch",
       localSdkRepoPath: "/sdk/path",
       sdkRepoName: "azure-sdk-for-js",
-      sdkLanguage: "javascript",
+      sdkLanguage: SdkName.Js,
       specCommitSha: "",
       specRepoHttpsUrl: "",
     };

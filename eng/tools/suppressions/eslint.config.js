@@ -15,7 +15,9 @@ export default defineConfig(
       globals: globals.node,
       // required to use tseslint.configs.recommendedTypeChecked
       parserOptions: {
-        projectService: true,
+        projectService: {
+          allowDefaultProject: ["*.js", "cmd/*.js"],
+        },
         // ensures the tsconfig path resolves relative to this file
         // default is process.cwd() when running eslint, which may be incorrect
         tsconfigRootDir: import.meta.dirname,
@@ -23,6 +25,6 @@ export default defineConfig(
     },
   },
   {
-    ignores: ["coverage/**", "shared/coverage/**"],
+    ignores: ["coverage/**", "dist/**"],
   },
 );
