@@ -1,12 +1,11 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.AppConfiguration;
 
@@ -316,6 +315,12 @@ model ConfigurationStoreProperties {
    */
   @visibility(Lifecycle.Read)
   managedOnBehalfOfConfiguration?: CommonTypes.ManagedOnBehalfOfConfiguration;
+
+  /**
+   * Property specifying the configuration of Azure Front Door for this configuration store
+   */
+  @added(Versions.v2025_06_01_preview)
+  azureFrontDoor?: AzureFrontDoorProperties;
 }
 
 /**
@@ -368,8 +373,8 @@ model PrivateEndpointConnectionReference {
   /**
    * The properties of a private endpoint connection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: PrivateEndpointConnectionProperties;
 }
 
@@ -451,6 +456,16 @@ model TelemetryProperties {
 }
 
 /**
+ * Azure Front Door settings
+ */
+model AzureFrontDoorProperties {
+  /**
+   * Resource ID of an Azure Front Door profile
+   */
+  resourceId?: Azure.Core.armResourceIdentifier;
+}
+
+/**
  * Describes a configuration store SKU.
  */
 model Sku {
@@ -467,8 +482,8 @@ model ConfigurationStoreUpdateParameters {
   /**
    * The properties for updating a configuration store.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: ConfigurationStorePropertiesUpdateParameters;
 
   /**
@@ -526,6 +541,12 @@ model ConfigurationStorePropertiesUpdateParameters {
    * Property specifying the configuration of telemetry to update for this configuration store
    */
   telemetry?: TelemetryProperties;
+
+  /**
+   * Property specifying the configuration of Azure Front Door for this configuration store
+   */
+  @added(Versions.v2025_06_01_preview)
+  azureFrontDoor?: AzureFrontDoorProperties;
 }
 
 /**
@@ -696,7 +717,7 @@ model OperationDefinitionListResult {
   /**
    * The collection value.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   @pageItems
   value?: OperationDefinition[];
 
@@ -715,13 +736,13 @@ model ServiceSpecification {
   /**
    * Specifications of the Log for Azure Monitoring
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   logSpecifications?: LogSpecification[];
 
   /**
    * Specifications of the Metrics for Azure Monitoring
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   metricSpecifications?: MetricSpecification[];
 }
 
@@ -782,7 +803,7 @@ model MetricSpecification {
   /**
    * Dimensions of the metric
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   dimensions?: MetricDimension[];
 
   /**
@@ -844,6 +865,7 @@ model KeyValueProperties {
    * The primary identifier of a key-value.
    * The key is used in unison with the label to uniquely identify a key-value.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @visibility(Lifecycle.Read)
   key?: string;
 
@@ -973,7 +995,7 @@ model SnapshotProperties {
   /**
    * A list of filters used to filter the key-values included in the snapshot.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   @minItems(1)
   @maxItems(3)
   filters: KeyValueFilter[];
@@ -1037,6 +1059,7 @@ model KeyValueFilter {
   /**
    * Filters key-values by their key field.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   key: string;
 
   /**
