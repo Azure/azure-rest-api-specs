@@ -556,6 +556,49 @@ namespace Language.AnalyzeTextClientCustomizations;
 );
 @@clientName(PiiEntityWithTags, "PiiEntity");
 
+@@clientName(PiiResultWithDetectedLanguage, "PiiActionResult", "csharp");
+
+@@clientName(PiiLROTask, "PiiOperationAction", "csharp");
+@@clientName(PiiLROTask.parameters, "ActionContent", "csharp");
+
+@@clientName(KeyPhraseLROTask, "KeyPhraseOperationAction", "csharp");
+@@clientName(KeyPhraseLROTask.parameters, "ActionContent", "csharp");
+
+@@clientName(HealthcareLROTask, "HealthcareOperationAction", "csharp");
+@@clientName(HealthcareLROTask.parameters, "ActionContent", "csharp");
+@@clientName(HealthcareTaskParameters, "HealthcareActionContent", "csharp");
+
+@@clientName(EntitiesLROTask, "EntitiesOperationAction", "csharp");
+@@clientName(EntitiesLROTask.parameters, "ActionContent", "csharp");
+
+@@clientName(EntityLinkingLROTask, "EntityLinkingOperationAction", "csharp");
+@@clientName(EntityLinkingLROTask.parameters, "ActionContent", "csharp");
+
+@@clientName(CustomEntitiesLROTask, "CustomEntitiesOperationAction", "csharp");
+@@clientName(CustomEntitiesLROTask.parameters, "ActionContent", "csharp");
+@@clientName(CustomEntitiesTaskParameters,
+  "CustomEntitiesActionContent",
+  "csharp"
+);
+
+@@clientName(AnalyzeTextJobState, "AnalyzeTextOperationState", "csharp");
+@@clientName(AnalyzeTextJobState.tasks, "Actions", "csharp");
+
+@@access(AnalyzeTextLROResult, Access.public, "csharp");
+@@clientName(AnalyzeTextLROResult, "AnalyzeTextOperationResult", "csharp");
+@@clientName(AnalyzeTextLROResult.taskName, "Name", "csharp");
+
+@@clientName(AnalyzeTextLROResultsKind,
+  "AnalyzeTextOperationResultsKind",
+  "csharp"
+);
+
+@@clientName(HealthcareLROResult, "HealthcareOperationResult", "csharp");
+
+@@clientName(analyzeTextSubmitJob, "AnalyzeTextSubmitOperation", "csharp");
+@@clientName(analyzeTextJobStatus, "AnalyzeTextOperationStatus", "csharp");
+@@clientName(analyzeTextCancelJob, "AnalyzeTextCancelOperation", "csharp");
+
 @@clientName(analyzeTextSubmitJob, "analyzeTextJob", "python");
 @@clientName(analyzeTextCancelJob, "cancelJob", "python");
 @@clientName(analyzeTextJobStatus, "getJobStatus", "python");
