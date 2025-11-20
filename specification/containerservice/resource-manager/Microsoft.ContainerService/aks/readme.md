@@ -46,6 +46,15 @@ input-file:
   - stable/2025-10-01/managedClusters.json
 ```
 
+### Tag: package-preview-2025-10
+
+These settings apply only when `--tag=package-preview-2025-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2025-10'
+input-file:
+  - preview/2025-10-02-preview/managedClusters.json
+```
+
 ### Tag: package-2025-09
 
 These settings apply only when `--tag=package-2025-09` is specified on the command line.
@@ -1433,4 +1442,8 @@ directive:
     from: managedClusters.json
     where: $.definitions.LocalDNSOverrides
     reason: User defined custom key-value pairs, similar to the allowed "user defined tags." These pairs can have any value, as there is no validation on the values
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: managedClusters.json
+    where: $.definitions.ResourceSkusResult
+    reason: The model is reused from [compute rp](https://github.com/Azure/azure-rest-api-specs/blob/main/specification/compute/resource-manager/Microsoft.Compute/Skus/stable/2021-07-01/skus.json#L114), and its original definition does not include attributes such as name, id or type.
 ```
