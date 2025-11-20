@@ -41,10 +41,6 @@ suppressions:
     from: search.json
     reason: Legacy swagger file
   - code: DISCRIMINATOR_VALUE_NOT_FOUND
-    from: KnowledgeBaseRetrieveWithIntents.json
-    reason: Multi-Level Discrimination
-  - code: DISCRIMINATOR_VALUE_NOT_FOUND
-    from: KnowledgeBaseRetrieve.json
     reason: Multi-Level Discrimination
 ```
 
