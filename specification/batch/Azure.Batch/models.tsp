@@ -134,9 +134,11 @@ union IPFamily {
   string,
 
   @doc("IPv4 is available to the pool.")
+  @clientName("IPv4", "python")
   IPv4: "IPv4",
 
   @doc("IPv6 is available to the pool.")
+  @clientName("IPv6", "python")
   IPv6: "IPv6",
 }
 
@@ -732,7 +734,7 @@ union SecurityTypes {
   "trustedLaunch",
 
   @doc("Azure confidential computing offers confidential VMs are for tenants with high security and confidentiality requirements. These VMs provide a strong, hardware-enforced boundary to help meet your security needs. You can use confidential VMs for migrations without making changes to your code, with the platform protecting your VM's state from being read or modified.")
-  "confidentialVM",
+  confidentialVM: "confidentialvm",
 }
 
 @doc("The result of listing the applications available in an Account.")
@@ -3862,7 +3864,7 @@ model BatchNode {
   @clientName("uri", "csharp")
   url: url;
 
-  @doc("The current state of the Compute Node. The Spot/Low-priority Compute Node has been preempted. Tasks which were running on the Compute Node when it was preempted will be rescheduled when another Compute Node becomes available.")
+  @doc("The current state of the Compute Node.")
   @visibility(Lifecycle.Read)
   state: BatchNodeState;
 
