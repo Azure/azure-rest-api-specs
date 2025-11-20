@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "accountName": "account1",
+    "api-version": "2025-09-01-preview",
+    "poolName": "pool1",
+    "resourceGroupName": "myRG",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "subvolumeName": "subvolume1",
+    "volumeName": "volume1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "account1/pool1/volume1/subvolume1/metadata",
+        "type": "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/subvolumes/metadata",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1/capacityPools/pool1/volumes/volume1/subvolumes/subvolume1/metadata",
+        "properties": {
+          "path": "/pathToSubvol",
+          "accessedTimeStamp": "2017-08-15T13:23:33Z",
+          "bytesUsed": 5,
+          "changedTimeStamp": "2017-08-15T13:23:33Z",
+          "creationTimeStamp": "2017-08-15T13:23:33Z",
+          "modifiedTimeStamp": "2017-08-15T13:23:33Z",
+          "permissions": "777",
+          "size": 5
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.NetApp/locations/eastus/operationResults/616ee961-4042-4935-b4a0-ed6f4dae0172?api-version=2025-09-01-preview&operationResultResponseType=Location"
+      }
+    }
+  },
+  "operationId": "Subvolumes_GetMetadata",
+  "title": "Subvolumes_Metadata"
+}

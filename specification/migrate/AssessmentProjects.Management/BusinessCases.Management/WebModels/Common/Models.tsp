@@ -64,7 +64,7 @@ model ManagementCostDetails {
 
   @doc("Management Cost Components.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   managementCostComponents?: ManagementCostComponent[];
 }
 
@@ -81,37 +81,37 @@ model ManagementCostComponent {
 model YearOnYearEstimates {
   @doc("Year-on-Year on-premises cost.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   onPremisesCost?: YearOnYearCost[];
 
   @doc("Year-on-Year Azure cost.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   azureCost?: YearOnYearCost[];
 
   @doc("Year-on-Year savings.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   savings?: YearOnYearCost[];
 
   @doc("Year-on-Year on-premises capex cost.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   onPremisesCapexCost?: YearOnYearCost[];
 
   @doc("Year-on-Year on-premises opex cost.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   onPremisesOpexCost?: YearOnYearCost[];
 
   @doc("Year-on-Year azure capex cost.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   azureCapexCost?: YearOnYearCost[];
 
   @doc("Year-on-Year azure opex cost.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   azureOpexCost?: YearOnYearCost[];
 
   @doc("Payback period.")
@@ -120,32 +120,32 @@ model YearOnYearEstimates {
 
   @doc("Year-on-Year azure arc enabled on-premises cost.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   azureArcEnabledOnPremisesCost?: YearOnYearCost[];
 
   @doc("Year-on-Year azure with arc enabled on-premises cost.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   futureCost?: YearOnYearCost[];
 
   @doc("Year-on-Year azure arc enabled on-premises esu cost of the remaining infra on-premises.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   futureAzureArcEnabledOnPremisesEsuCost?: YearOnYearCost[];
 
   @doc("Year-on-Year on-premises esu cost of the remaining infra on-premises.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   futureOnPremisesEsuCost?: YearOnYearCost[];
 
   @doc("Year-on-Year on-premises emissions estimates.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   onPremisesEmissionsEstimates?: YearOnYearEmissions[];
 
   @doc("Year-on-Year Azure emissions estimates.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   azureEmissionsEstimates?: YearOnYearEmissions[];
 }
 

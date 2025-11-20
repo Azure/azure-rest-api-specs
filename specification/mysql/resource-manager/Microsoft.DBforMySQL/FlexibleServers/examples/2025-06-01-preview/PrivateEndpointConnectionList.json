@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "api-version": "2025-06-01-preview",
+    "resourceGroupName": "Default",
+    "serverName": "test-svr",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "private-endpoint-connection-name",
+            "type": "Microsoft.DBforMySQL/servers/privateEndpointConnections",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.DBforMySQL/servers/test-svr/privateEndpointConnections/private-endpoint-connection-name-2",
+            "properties": {
+              "privateEndpoint": {
+                "id": "/subscriptions/55555555-6666-7777-8888-999999999999/resourceGroups/Default-Network/providers/Microsoft.Network/privateEndpoints/private-endpoint-name"
+              },
+              "privateLinkServiceConnectionState": {
+                "description": "Auto-approved",
+                "actionsRequired": "None",
+                "status": "Approved"
+              },
+              "provisioningState": "Ready"
+            }
+          },
+          {
+            "name": "private-endpoint-connection-name-2",
+            "type": "Microsoft.DBforMySQL/servers/privateEndpointConnections",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.DBforMySQL/servers/test-svr/privateEndpointConnections/private-endpoint-connection-name-2",
+            "properties": {
+              "privateEndpoint": {
+                "id": "/subscriptions/55555555-6666-7777-8888-999999999999/resourceGroups/Default-Network/providers/Microsoft.Network/privateEndpoints/private-endpoint-name-2"
+              },
+              "privateLinkServiceConnectionState": {
+                "description": "Auto-approved",
+                "actionsRequired": "None",
+                "status": "Approved"
+              },
+              "provisioningState": "Ready"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "PrivateEndpointConnections_ListByServer",
+  "title": "Gets list of private endpoint connections on a server."
+}

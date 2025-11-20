@@ -5,7 +5,7 @@ using Azure.ClientGenerator.Core;
 using Microsoft.IoTOperations;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style"
-@@clientName(Microsoft.IoTOperations, "IoTOperationsMgmt", "python");
+@@clientName(Microsoft.IoTOperations, "IoTOperationsMgmtClient", "python");
 @@clientName(Microsoft.IoTOperations, "IoTOperationsManagementClient", "java");
 
 // CSharp Client configuration

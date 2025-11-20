@@ -1,0 +1,4180 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Quota Extension API",
+    "version": "2025-09-01",
+    "description": "Microsoft Azure Quota Resource Provider",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "QuotaOperation"
+    },
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "GroupQuotasEntities"
+    },
+    {
+      "name": "GroupQuotaSubscriptionIds"
+    },
+    {
+      "name": "GroupQuotaSubscriptionRequestStatuses"
+    },
+    {
+      "name": "GroupQuotaLimitLists"
+    },
+    {
+      "name": "SubmittedResourceRequestStatuses"
+    },
+    {
+      "name": "SubscriptionQuotaAllocationsLists"
+    },
+    {
+      "name": "QuotaAllocationRequestStatuses"
+    },
+    {
+      "name": "GroupQuotasEnforcementStatuses"
+    },
+    {
+      "name": "CurrentUsagesBases"
+    },
+    {
+      "name": "CurrentQuotaLimitBases"
+    },
+    {
+      "name": "QuotaRequestStatus"
+    }
+  ],
+  "paths": {
+    "/{scope}/providers/Microsoft.Quota/quotaRequests": {
+      "get": {
+        "operationId": "QuotaRequestStatus_List",
+        "tags": [
+          "QuotaRequestStatus"
+        ],
+        "description": "For the specified scope, get the current quota requests for a one year period ending at the time is made. Use the **oData** filter to select quota requests.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "| Field                    | Supported operators\n|---------------------|------------------------\n\n|requestSubmitTime | ge, le, eq, gt, lt\n|provisioningState eq {QuotaRequestState}\n|resourceName eq {resourceName}",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "Number of records to return.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1
+          },
+          {
+            "name": "$skiptoken",
+            "in": "query",
+            "description": "The **Skiptoken** parameter is used only if a previous operation returned a partial result. If a previous response contains a **nextLink** element, its value includes a **skiptoken** parameter that specifies a starting point to use for subsequent calls.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/QuotaRequestDetailsList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ExceptionResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "QuotaRequestHistory": {
+            "$ref": "./examples/getQuotaRequestsHistory.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Quota/quotaRequests/{id}": {
+      "get": {
+        "operationId": "QuotaRequestStatus_Get",
+        "tags": [
+          "QuotaRequestStatus"
+        ],
+        "description": "Get the quota request details and status by quota request ID for the resources of the resource provider at a specific location. The quota request ID **id** is returned in the response of the PUT operation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Quota request ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/QuotaRequestDetails"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ExceptionResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "QuotaRequestFailed": {
+            "$ref": "./examples/getQuotaRequestStatusFailed.json"
+          },
+          "QuotaRequestInProgress": {
+            "$ref": "./examples/getQuotaRequestStatusInProgress.json"
+          },
+          "QuotaRequestStatus": {
+            "$ref": "./examples/getQuotaRequestStatusById.json"
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Quota/quotas": {
+      "get": {
+        "operationId": "Quota_List",
+        "tags": [
+          "CurrentQuotaLimitBases"
+        ],
+        "description": "Get a list of current quota limits of all resources for the specified scope. The response from this GET operation can be leveraged to submit requests to update a quota.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/QuotaLimits"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ExceptionResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Quotas_listQuotaLimitsForCompute": {
+            "$ref": "./examples/getComputeQuotaLimits.json"
+          },
+          "Quotas_listQuotaLimitsForNetwork": {
+            "$ref": "./examples/getNetworkQuotaLimits.json"
+          },
+          "Quotas_listQuotaLimitsMachineLearningServices": {
+            "$ref": "./examples/getMachineLearningServicesQuotaLimits.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Quota/quotas/{resourceName}": {
+      "get": {
+        "operationId": "Quota_Get",
+        "tags": [
+          "CurrentQuotaLimitBases"
+        ],
+        "description": "Get the quota limit of a resource. The response can be used to determine the remaining quota to calculate a new quota limit that can be submitted with a PUT request.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "Resource name for a given resource provider. For example:\n- SKU name for Microsoft.Compute\n- SKU or TotalLowPriorityCores for Microsoft.MachineLearningServices\n For Microsoft.Network PublicIPAddresses.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CurrentQuotaLimitBase"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ExceptionResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Quotas_Get_Request_ForCompute": {
+            "$ref": "./examples/getComputeOneSkuQuotaLimit.json"
+          },
+          "Quotas_UsagesRequest_ForNetwork": {
+            "$ref": "./examples/getNetworkOneSkuQuotaLimit.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Quota_CreateOrUpdate",
+        "tags": [
+          "CurrentQuotaLimitBases"
+        ],
+        "description": "Create or update the quota limit for the specified resource with the requested value. To update the quota, follow these steps:\n1. Use the GET operation for quotas and usages to determine how much quota remains for the specific resource and to calculate the new quota limit. These steps are detailed in [this example](https://techcommunity.microsoft.com/t5/azure-governance-and-management/using-the-new-quota-rest-api/ba-p/2183670).\n2. Use this PUT operation to update the quota limit. Please check the URI in location header for the detailed status of the request.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "Resource name for a given resource provider. For example:\n- SKU name for Microsoft.Compute\n- SKU or TotalLowPriorityCores for Microsoft.MachineLearningServices\n For Microsoft.Network PublicIPAddresses.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "createQuotaRequest",
+            "in": "body",
+            "description": "Quota request payload.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CurrentQuotaLimitBase"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CurrentQuotaLimitBase"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ExceptionResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Quotas_PutRequest_ForNetwork": {
+            "$ref": "./examples/putNetworkOneSkuQuotaRequest.json"
+          },
+          "Quotas_PutRequest_ForNetwork_StandardSkuPublicIpAddressesResource": {
+            "$ref": "./examples/putNetworkOneSkuQuotaRequestStandardSkuPublicIpAddresses.json"
+          },
+          "Quotas_Put_Request_ForCompute": {
+            "$ref": "./examples/putComputeOneSkuQuotaRequest.json"
+          },
+          "Quotas_Request_ForMachineLearningServices_LowPriorityResource": {
+            "$ref": "./examples/putMachineLearningServicesQuotaRequestLowPriority.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri",
+          "final-state-schema": "#/definitions/CurrentQuotaLimitBase"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Quota_Update",
+        "tags": [
+          "CurrentQuotaLimitBases"
+        ],
+        "description": "Update the quota limit for a specific resource to the specified value:\n1. Use the Usages-GET and Quota-GET operations to determine the remaining quota for the specific resource and to calculate the new quota limit. These steps are detailed in [this example](https://techcommunity.microsoft.com/t5/azure-governance-and-management/using-the-new-quota-rest-api/ba-p/2183670).\n2. Use this PUT operation to update the quota limit. Please check the URI in location header for the detailed status of the request.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "Resource name for a given resource provider. For example:\n- SKU name for Microsoft.Compute\n- SKU or TotalLowPriorityCores for Microsoft.MachineLearningServices\n For Microsoft.Network PublicIPAddresses.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "createQuotaRequest",
+            "in": "body",
+            "description": "Quota requests payload.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CurrentQuotaLimitBase"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CurrentQuotaLimitBase"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ExceptionResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Quotas_Request_PatchForCompute": {
+            "$ref": "./examples/patchComputeQuotaRequest.json"
+          },
+          "Quotas_Request_PatchForNetwork": {
+            "$ref": "./examples/patchNetworkOneSkuQuotaRequest.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri",
+          "final-state-schema": "#/definitions/CurrentQuotaLimitBase"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/{scope}/providers/Microsoft.Quota/usages": {
+      "get": {
+        "operationId": "Usages_List",
+        "tags": [
+          "CurrentUsagesBases"
+        ],
+        "description": "Get a list of current usage for all resources for the scope specified.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/UsagesLimits"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ExceptionResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Quotas_listUsagesForCompute": {
+            "$ref": "./examples/getComputeUsages.json"
+          },
+          "Quotas_listUsagesForNetwork": {
+            "$ref": "./examples/getNetworkUsages.json"
+          },
+          "Quotas_listUsagesMachineLearningServices": {
+            "$ref": "./examples/getMachineLearningServicesUsages.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Quota/usages/{resourceName}": {
+      "get": {
+        "operationId": "Usages_Get",
+        "tags": [
+          "CurrentUsagesBases"
+        ],
+        "description": "Get the current usage of a resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "Resource name for a given resource provider. For example:\n- SKU name for Microsoft.Compute\n- SKU or TotalLowPriorityCores for Microsoft.MachineLearningServices\n For Microsoft.Network PublicIPAddresses.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CurrentUsagesBase"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ExceptionResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Quotas_UsagesRequest_ForCompute": {
+            "$ref": "./examples/getComputeOneSkuUsages.json"
+          },
+          "Quotas_UsagesRequest_ForNetwork": {
+            "$ref": "./examples/getNetworkOneSkuUsages.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas": {
+      "get": {
+        "operationId": "GroupQuotas_List",
+        "tags": [
+          "GroupQuotasEntities"
+        ],
+        "description": "Lists GroupQuotas for the scope passed. It will return the GroupQuotas QuotaEntity properties only.The details on group quota can be access from the group quota APIs.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "managementGroupId",
+            "in": "path",
+            "description": "The management group ID.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GroupQuotaList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GroupQuotas_List_Request_ForCompute": {
+            "$ref": "./examples/GroupQuotas/ListGroupQuotas.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}": {
+      "get": {
+        "operationId": "GroupQuotas_Get",
+        "tags": [
+          "GroupQuotasEntities"
+        ],
+        "description": "Gets the GroupQuotas for the name passed. It will return the GroupQuotas properties only. The details on group quota can be access from the group quota APIs.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "managementGroupId",
+            "in": "path",
+            "description": "The management group ID.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63
+          },
+          {
+            "name": "groupQuotaName",
+            "in": "path",
+            "description": "The GroupQuota name. The name should be unique for the provided context tenantId/MgId.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z][a-z0-9]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GroupQuotasEntity"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GroupQuotas_Get_Request_ForCompute": {
+            "$ref": "./examples/GroupQuotas/GetGroupQuotas.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "GroupQuotas_CreateOrUpdate",
+        "tags": [
+          "GroupQuotasEntities"
+        ],
+        "description": "Creates a new GroupQuota for the name passed. A RequestId will be returned by the Service. The status can be polled periodically. The status Async polling is using standards defined at - https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/async-api-reference.md#asynchronous-operations. Use the OperationsStatus URI provided in Azure-AsyncOperation header, the duration will be specified in retry-after header. Once the operation gets to terminal state - Succeeded | Failed, then the URI will change to Get URI and full details can be checked.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "managementGroupId",
+            "in": "path",
+            "description": "The management group ID.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63
+          },
+          {
+            "name": "groupQuotaName",
+            "in": "path",
+            "description": "The GroupQuota name. The name should be unique for the provided context tenantId/MgId.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z][a-z0-9]*$"
+          },
+          {
+            "name": "GroupQuotaPutRequestBody",
+            "in": "body",
+            "description": "The GroupQuota body details for creation or update of a GroupQuota entity.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/GroupQuotasEntity"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'GroupQuotasEntity' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/GroupQuotasEntity"
+            }
+          },
+          "201": {
+            "description": "Resource 'GroupQuotasEntity' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/GroupQuotasEntity"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GroupQuotas_Put_Request_ForCompute": {
+            "$ref": "./examples/GroupQuotas/PutGroupQuotas.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/GroupQuotasEntity"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "GroupQuotas_Update",
+        "tags": [
+          "GroupQuotasEntities"
+        ],
+        "description": "Updates the GroupQuotas for the name passed. A GroupQuotas RequestId will be returned by the Service. The status can be polled periodically. The status Async polling is using standards defined at - https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/async-api-reference.md#asynchronous-operations. Use the OperationsStatus URI provided in Azure-AsyncOperation header, the duration will be specified in retry-after header. Once the operation gets to terminal state - Succeeded | Failed, then the URI will change to Get URI and full details can be checked.\nAny change in the filters will be applicable to the future quota assignments, existing quota allocated to subscriptions from the GroupQuotas remains unchanged.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "managementGroupId",
+            "in": "path",
+            "description": "The management group ID.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63
+          },
+          {
+            "name": "groupQuotaName",
+            "in": "path",
+            "description": "The GroupQuota name. The name should be unique for the provided context tenantId/MgId.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z][a-z0-9]*$"
+          },
+          {
+            "name": " GroupQuotasPatchRequestBody",
+            "in": "body",
+            "description": "The  GroupQuotas Patch Request.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/GroupQuotasEntityPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GroupQuotasEntity"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GroupQuotas_Patch_Request_ForCompute": {
+            "$ref": "./examples/GroupQuotas/PatchGroupQuotas.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/GroupQuotasEntity"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "GroupQuotas_Delete",
+        "tags": [
+          "GroupQuotasEntities"
+        ],
+        "description": "Deletes the GroupQuotas for the name passed. All the remaining shareQuota in the GroupQuotas will be lost.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "managementGroupId",
+            "in": "path",
+            "description": "The management group ID.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63
+          },
+          {
+            "name": "groupQuotaName",
+            "in": "path",
+            "description": "The GroupQuota name. The name should be unique for the provided context tenantId/MgId.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z][a-z0-9]*$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GroupQuotas_Delete_Request_ForCompute": {
+            "$ref": "./examples/GroupQuotas/DeleteGroupQuotas.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/groupQuotaRequests/{requestId}": {
+      "get": {
+        "operationId": "GroupQuotaLimitsRequest_Get",
+        "tags": [
+          "SubmittedResourceRequestStatuses"
+        ],
+        "description": "Get API to check the status of a GroupQuota request by requestId.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "managementGroupId",
+            "in": "path",
+            "description": "The management group ID.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63
+          },
+          {
+            "name": "groupQuotaName",
+            "in": "path",
+            "description": "The GroupQuota name. The name should be unique for the provided context tenantId/MgId.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z][a-z0-9]*$"
+          },
+          {
+            "name": "requestId",
+            "in": "path",
+            "description": "Request Id.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SubmittedResourceRequestStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GroupQuotaLimitsRequests_Get": {
+            "$ref": "./examples/GroupQuotaLimitsRequests/GroupQuotaLimitsRequests_Get.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/resourceProviders/{resourceProviderName}/groupQuotaLimits/{location}": {
+      "get": {
+        "operationId": "GroupQuotaLimits_List",
+        "tags": [
+          "GroupQuotaLimitLists"
+        ],
+        "description": "Gets the GroupQuotaLimits for the specified resource provider and location for resource names passed in $filter=resourceName eq {SKU}.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "managementGroupId",
+            "in": "path",
+            "description": "The management group ID.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63
+          },
+          {
+            "name": "groupQuotaName",
+            "in": "path",
+            "description": "The GroupQuota name. The name should be unique for the provided context tenantId/MgId.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z][a-z0-9]*$"
+          },
+          {
+            "name": "resourceProviderName",
+            "in": "path",
+            "description": "The resource provider name, such as - Microsoft.Compute. Currently only Microsoft.Compute resource provider supports this API.",
+            "required": true,
+            "type": "string",
+            "pattern": "^((?!-)[a-zA-Z0-9-]{1,63}(?<!-)\\.)+[a-zA-Z]{2,63}$"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "The name of the Azure region.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GroupQuotaLimitList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GroupQuotaLimits_Get_Request_ForCompute": {
+            "$ref": "./examples/GroupQuotaLimits/ListGroupQuotaLimits-Compute.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "GroupQuotaLimitsRequest_Update",
+        "tags": [
+          "GroupQuotaLimitLists"
+        ],
+        "description": "Create the GroupQuota requests for a specific ResourceProvider/Location/Resource. The resourceName properties are specified in the request body. Only 1 resource quota can be requested. Please note that patch request creates a new groupQuota request.\nUse the polling API - OperationsStatus URI specified in Azure-AsyncOperation header field, with retry-after duration in seconds to check the intermediate status. This API provides the finals status with the request details and status.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "managementGroupId",
+            "in": "path",
+            "description": "The management group ID.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63
+          },
+          {
+            "name": "groupQuotaName",
+            "in": "path",
+            "description": "The GroupQuota name. The name should be unique for the provided context tenantId/MgId.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z][a-z0-9]*$"
+          },
+          {
+            "name": "resourceProviderName",
+            "in": "path",
+            "description": "The resource provider name, such as - Microsoft.Compute. Currently only Microsoft.Compute resource provider supports this API.",
+            "required": true,
+            "type": "string",
+            "pattern": "^((?!-)[a-zA-Z0-9-]{1,63}(?<!-)\\.)+[a-zA-Z]{2,63}$"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "The name of the Azure region.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "groupQuotaRequest",
+            "in": "body",
+            "description": "The GroupQuotaRequest body details for specific resourceProvider/location/resources.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/GroupQuotaLimitList"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GroupQuotaLimitList"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GroupQuotaLimitsRequests_Update": {
+            "$ref": "./examples/GroupQuotaLimitsRequests/PatchGroupQuotaLimitsRequests-Compute.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/GroupQuotaLimitList"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/resourceProviders/{resourceProviderName}/groupQuotaRequests": {
+      "get": {
+        "operationId": "GroupQuotaLimitsRequest_List",
+        "tags": [
+          "GroupQuotasEntities"
+        ],
+        "description": "Get API to check the status of a GroupQuota request by requestId.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "managementGroupId",
+            "in": "path",
+            "description": "The management group ID.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63
+          },
+          {
+            "name": "groupQuotaName",
+            "in": "path",
+            "description": "The GroupQuota name. The name should be unique for the provided context tenantId/MgId.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z][a-z0-9]*$"
+          },
+          {
+            "name": "resourceProviderName",
+            "in": "path",
+            "description": "The resource provider name, such as - Microsoft.Compute. Currently only Microsoft.Compute resource provider supports this API.",
+            "required": true,
+            "type": "string",
+            "pattern": "^((?!-)[a-zA-Z0-9-]{1,63}(?<!-)\\.)+[a-zA-Z]{2,63}$"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "| Field | Supported operators  \\r\\n|---------------------|------------------------\\n\\r\\n location eq {location} and resource eq {resourceName}\\n Example: $filter=location eq eastus and resourceName eq cores",
+            "required": true,
+            "type": "string",
+            "minLength": 12
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SubmittedResourceRequestStatusList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GroupQuotaLimitsRequest_List": {
+            "$ref": "./examples/GroupQuotaLimitsRequests/GroupQuotaLimitsRequests_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/resourceProviders/{resourceProviderName}/locationSettings/{location}": {
+      "get": {
+        "operationId": "GroupQuotaLocationSettings_Get",
+        "tags": [
+          "GroupQuotasEnforcementStatuses"
+        ],
+        "description": "Gets the GroupQuotas enforcement settings for the ResourceProvider/location. The locations, where GroupQuota enforcement is not enabled will return Not Found.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "managementGroupId",
+            "in": "path",
+            "description": "The management group ID.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63
+          },
+          {
+            "name": "groupQuotaName",
+            "in": "path",
+            "description": "The GroupQuota name. The name should be unique for the provided context tenantId/MgId.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z][a-z0-9]*$"
+          },
+          {
+            "name": "resourceProviderName",
+            "in": "path",
+            "description": "The resource provider name, such as - Microsoft.Compute. Currently only Microsoft.Compute resource provider supports this API.",
+            "required": true,
+            "type": "string",
+            "pattern": "^((?!-)[a-zA-Z0-9-]{1,63}(?<!-)\\.)+[a-zA-Z]{2,63}$"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "The name of the Azure region.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GroupQuotasEnforcementStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GroupQuotasEnforcement_Get": {
+            "$ref": "./examples/GroupQuotasEnforcement/GetGroupQuotaEnforcement.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "GroupQuotaLocationSettings_CreateOrUpdate",
+        "tags": [
+          "GroupQuotasEnforcementStatuses"
+        ],
+        "description": "Enables the GroupQuotas enforcement for the resource provider and the location specified. The resource provider will start using the group quotas as the overall quota for the subscriptions included in the GroupQuota. The subscriptions cannot request quota at subscription level since it is now part of an enforced group.\nThe subscriptions share the GroupQuotaLimits assigned to the GroupQuota. If the GroupQuotaLimits is used, then submit a groupQuotaLimit request for the specific resource - provider/location/resource.\nOnce the GroupQuota Enforcement is enabled then, it cannot be deleted or reverted back. To disable GroupQuota Enforcement -\n1. Remove all the subscriptions from the groupQuota using the delete API for Subscriptions (Check the example - GroupQuotaSubscriptions_Delete).\n2. Then delete the GroupQuota (Check the example - GroupQuotas_Delete).",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "managementGroupId",
+            "in": "path",
+            "description": "The management group ID.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63
+          },
+          {
+            "name": "groupQuotaName",
+            "in": "path",
+            "description": "The GroupQuota name. The name should be unique for the provided context tenantId/MgId.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z][a-z0-9]*$"
+          },
+          {
+            "name": "resourceProviderName",
+            "in": "path",
+            "description": "The resource provider name, such as - Microsoft.Compute. Currently only Microsoft.Compute resource provider supports this API.",
+            "required": true,
+            "type": "string",
+            "pattern": "^((?!-)[a-zA-Z0-9-]{1,63}(?<!-)\\.)+[a-zA-Z]{2,63}$"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "The name of the Azure region.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "LocationSettings",
+            "in": "body",
+            "description": "The GroupQuota body details for creation or update of a GroupQuota entity.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/GroupQuotasEnforcementStatus"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'GroupQuotasEnforcementStatus' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/GroupQuotasEnforcementStatus"
+            }
+          },
+          "201": {
+            "description": "Resource 'GroupQuotasEnforcementStatus' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/GroupQuotasEnforcementStatus"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GroupQuotaLocationSettings_CreateOrUpdate": {
+            "$ref": "./examples/GroupQuotasEnforcement/PutGroupQuotaEnforcement.json"
+          },
+          "GroupQuotaLocationSettings_CreateOrUpdate_Failed": {
+            "$ref": "./examples/GroupQuotasEnforcement/PutGroupQuotaEnforcementFailed.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/GroupQuotasEnforcementStatus"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "GroupQuotaLocationSettings_Update",
+        "tags": [
+          "GroupQuotasEnforcementStatuses"
+        ],
+        "description": "Enables the GroupQuotas enforcement for the resource provider and the location specified. The resource provider will start using the group quotas as the overall quota for the subscriptions included in the GroupQuota.  The subscriptions cannot request quota at subscription level since it is now part of an enforced group.\nThe subscriptions share the GroupQuotaLimits assigned to the GroupQuota. If the GroupQuotaLimits is used, then submit a groupQuotaLimit request for the specific resource - provider/location/resource.\nOnce the GroupQuota Enforcement is enabled then, it cannot be deleted or reverted back. To disable GroupQuota Enforcement -\n1. Remove all the subscriptions from the groupQuota using the delete API for Subscriptions (Check the example - GroupQuotaSubscriptions_Delete).\n2. Ten delete the GroupQuota (Check the example - GroupQuotas_Delete).",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "managementGroupId",
+            "in": "path",
+            "description": "The management group ID.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63
+          },
+          {
+            "name": "groupQuotaName",
+            "in": "path",
+            "description": "The GroupQuota name. The name should be unique for the provided context tenantId/MgId.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z][a-z0-9]*$"
+          },
+          {
+            "name": "resourceProviderName",
+            "in": "path",
+            "description": "The resource provider name, such as - Microsoft.Compute. Currently only Microsoft.Compute resource provider supports this API.",
+            "required": true,
+            "type": "string",
+            "pattern": "^((?!-)[a-zA-Z0-9-]{1,63}(?<!-)\\.)+[a-zA-Z]{2,63}$"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "The name of the Azure region.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "LocationSettings",
+            "in": "body",
+            "description": "The GroupQuota body details for creation or update of a GroupQuota entity.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/GroupQuotasEnforcementStatus"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GroupQuotasEnforcementStatus"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GroupQuotaLocationSettings_Patch": {
+            "$ref": "./examples/GroupQuotasEnforcement/PatchGroupQuotaEnforcement.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/GroupQuotasEnforcementStatus"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/resourceProviders/{resourceProviderName}/locationUsages/{location}": {
+      "get": {
+        "operationId": "GroupQuotaUsages_List",
+        "tags": [
+          "GroupQuotasEntities"
+        ],
+        "description": "Gets the GroupQuotas usages and limits(quota). Location is required paramter.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "managementGroupId",
+            "in": "path",
+            "description": "The management group ID.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63
+          },
+          {
+            "name": "groupQuotaName",
+            "in": "path",
+            "description": "The GroupQuota name. The name should be unique for the provided context tenantId/MgId.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z][a-z0-9]*$"
+          },
+          {
+            "name": "resourceProviderName",
+            "in": "path",
+            "description": "The resource provider name, such as - Microsoft.Compute. Currently only Microsoft.Compute resource provider supports this API.",
+            "required": true,
+            "type": "string",
+            "pattern": "^((?!-)[a-zA-Z0-9-]{1,63}(?<!-)\\.)+[a-zA-Z]{2,63}$"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "The name of the Azure region.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ResourceUsageList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GroupQuotasUsages_List": {
+            "$ref": "./examples/GroupQuotaUsages/GetGroupQuotaUsages.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/subscriptionRequests": {
+      "get": {
+        "operationId": "GroupQuotaSubscriptionRequests_List",
+        "tags": [
+          "GroupQuotaSubscriptionRequestStatuses"
+        ],
+        "description": "List API to check the status of a subscriptionId requests by requestId. Request history is maintained for 1 year.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "managementGroupId",
+            "in": "path",
+            "description": "The management group ID.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63
+          },
+          {
+            "name": "groupQuotaName",
+            "in": "path",
+            "description": "The GroupQuota name. The name should be unique for the provided context tenantId/MgId.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z][a-z0-9]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GroupQuotaSubscriptionRequestStatusList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GroupQuotaSubscriptionRequests_List": {
+            "$ref": "./examples/SubscriptionRequests/SubscriptionRequests_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/subscriptionRequests/{requestId}": {
+      "get": {
+        "operationId": "GroupQuotaSubscriptionRequests_Get",
+        "tags": [
+          "GroupQuotaSubscriptionRequestStatuses"
+        ],
+        "description": "Get API to check the status of a subscriptionIds request by requestId.  Use the polling API - OperationsStatus URI specified in Azure-AsyncOperation header field, with retry-after duration in seconds to check the intermediate status. This API provides the finals status with the request details and status.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "managementGroupId",
+            "in": "path",
+            "description": "The management group ID.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63
+          },
+          {
+            "name": "groupQuotaName",
+            "in": "path",
+            "description": "The GroupQuota name. The name should be unique for the provided context tenantId/MgId.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z][a-z0-9]*$"
+          },
+          {
+            "name": "requestId",
+            "in": "path",
+            "description": "Request Id.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GroupQuotaSubscriptionRequestStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GroupQuotaSubscriptionRequests_Get": {
+            "$ref": "./examples/SubscriptionRequests/SubscriptionRequests_Get.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/subscriptions": {
+      "get": {
+        "operationId": "GroupQuotaSubscriptions_List",
+        "tags": [
+          "GroupQuotaSubscriptionIds"
+        ],
+        "description": "Returns a list of the subscriptionIds associated with the GroupQuotas.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "managementGroupId",
+            "in": "path",
+            "description": "The management group ID.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63
+          },
+          {
+            "name": "groupQuotaName",
+            "in": "path",
+            "description": "The GroupQuota name. The name should be unique for the provided context tenantId/MgId.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z][a-z0-9]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GroupQuotaSubscriptionIdList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GroupQuotaSubscriptions_List_Subscriptions": {
+            "$ref": "./examples/GroupQuotasSubscriptions/ListGroupQuotaSubscriptions.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/subscriptions/{subscriptionId}": {
+      "get": {
+        "operationId": "GroupQuotaSubscriptions_Get",
+        "tags": [
+          "GroupQuotaSubscriptionIds"
+        ],
+        "description": "Returns the subscriptionIds along with its provisioning state for being associated with the GroupQuota. If the subscription is not a member of GroupQuota, it will return 404, else 200.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "managementGroupId",
+            "in": "path",
+            "description": "The management group ID.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63
+          },
+          {
+            "name": "groupQuotaName",
+            "in": "path",
+            "description": "The GroupQuota name. The name should be unique for the provided context tenantId/MgId.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z][a-z0-9]*$"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription. The value must be an UUID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GroupQuotaSubscriptionId"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GroupQuotaSubscriptions_Get_Subscriptions": {
+            "$ref": "./examples/GroupQuotasSubscriptions/GetGroupQuotaSubscriptions.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "GroupQuotaSubscriptions_CreateOrUpdate",
+        "tags": [
+          "GroupQuotaSubscriptionIds"
+        ],
+        "description": "Adds a subscription to GroupQuotas. The subscriptions will be validated based on the additionalAttributes defined in the GroupQuota. The additionalAttributes works as filter for the subscriptions, which can be included in the GroupQuotas. The request's TenantId is validated against the subscription's TenantId.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "managementGroupId",
+            "in": "path",
+            "description": "Management Group Id.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63
+          },
+          {
+            "name": "groupQuotaName",
+            "in": "path",
+            "description": "The GroupQuota name. The name should be unique for the provided context tenantId/MgId.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z][a-z0-9]*$"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'GroupQuotaSubscriptionId' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/GroupQuotaSubscriptionId"
+            }
+          },
+          "201": {
+            "description": "Resource 'GroupQuotaSubscriptionId' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/GroupQuotaSubscriptionId"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GroupQuotaSubscriptions_Put_Subscriptions": {
+            "$ref": "./examples/GroupQuotasSubscriptions/PutGroupQuotasSubscription.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/GroupQuotaSubscriptionId"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "GroupQuotaSubscriptions_Update",
+        "tags": [
+          "GroupQuotaSubscriptionIds"
+        ],
+        "description": "Updates the GroupQuotas with the subscription to add to the subscriptions list. The subscriptions will be validated if additionalAttributes are defined in the GroupQuota. The request's TenantId is validated against the subscription's TenantId.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "managementGroupId",
+            "in": "path",
+            "description": "Management Group Id.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63
+          },
+          {
+            "name": "groupQuotaName",
+            "in": "path",
+            "description": "The GroupQuota name. The name should be unique for the provided context tenantId/MgId.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z][a-z0-9]*$"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GroupQuotaSubscriptionId"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GroupQuotaSubscriptions_Patch_Subscriptions": {
+            "$ref": "./examples/GroupQuotasSubscriptions/PatchGroupQuotasSubscription.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/GroupQuotaSubscriptionId"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "GroupQuotaSubscriptions_Delete",
+        "tags": [
+          "GroupQuotaSubscriptionIds"
+        ],
+        "description": "Removes the subscription from GroupQuotas. The request's TenantId is validated against the subscription's TenantId.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "managementGroupId",
+            "in": "path",
+            "description": "The management group ID.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63
+          },
+          {
+            "name": "groupQuotaName",
+            "in": "path",
+            "description": "The GroupQuota name. The name should be unique for the provided context tenantId/MgId.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z][a-z0-9]*$"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription. The value must be an UUID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GroupQuotaSubscriptions_Delete_Subscriptions": {
+            "$ref": "./examples/GroupQuotasSubscriptions/DeleteGroupQuotaSubscriptions.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/subscriptions/{subscriptionId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/resourceProviders/{resourceProviderName}/quotaAllocationRequests": {
+      "get": {
+        "operationId": "GroupQuotaSubscriptionAllocationRequest_List",
+        "tags": [
+          "QuotaAllocationRequestStatuses"
+        ],
+        "description": "Get all the quotaAllocationRequests for a resourceProvider/location. The filter paramter for location is required.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "managementGroupId",
+            "in": "path",
+            "description": "The management group ID.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "groupQuotaName",
+            "in": "path",
+            "description": "The GroupQuota name. The name should be unique for the provided context tenantId/MgId.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z][a-z0-9]*$"
+          },
+          {
+            "name": "resourceProviderName",
+            "in": "path",
+            "description": "The resource provider name, such as - Microsoft.Compute. Currently only Microsoft.Compute resource provider supports this API.",
+            "required": true,
+            "type": "string",
+            "pattern": "^((?!-)[a-zA-Z0-9-]{1,63}(?<!-)\\.)+[a-zA-Z]{2,63}$"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "| Field | Supported operators\n|---------------------|------------------------\n\nlocation eq {location}\nExample: $filter=location eq eastus",
+            "required": true,
+            "type": "string",
+            "minLength": 12
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/QuotaAllocationRequestStatusList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SubscriptionQuotaAllocation_List_Request_ForCompute": {
+            "$ref": "./examples/SubscriptionQuotaAllocationRequests/SubscriptionQuotaAllocationRequests_List-Compute.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/subscriptions/{subscriptionId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/resourceProviders/{resourceProviderName}/quotaAllocationRequests/{allocationId}": {
+      "get": {
+        "operationId": "GroupQuotaSubscriptionAllocationRequest_Get",
+        "tags": [
+          "QuotaAllocationRequestStatuses"
+        ],
+        "description": "Get the quota allocation request status for the subscriptionId by allocationId.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "managementGroupId",
+            "in": "path",
+            "description": "The management group ID.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "groupQuotaName",
+            "in": "path",
+            "description": "The GroupQuota name. The name should be unique for the provided context tenantId/MgId.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z][a-z0-9]*$"
+          },
+          {
+            "name": "resourceProviderName",
+            "in": "path",
+            "description": "The resource provider name, such as - Microsoft.Compute. Currently only Microsoft.Compute resource provider supports this API.",
+            "required": true,
+            "type": "string",
+            "pattern": "^((?!-)[a-zA-Z0-9-]{1,63}(?<!-)\\.)+[a-zA-Z]{2,63}$"
+          },
+          {
+            "name": "allocationId",
+            "in": "path",
+            "description": "Request Id.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/QuotaAllocationRequestStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SubscriptionQuotaAllocationRequests_Get_Request_ForCompute": {
+            "$ref": "./examples/SubscriptionQuotaAllocationRequests/SubscriptionQuotaAllocationRequests_Get-Compute.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/subscriptions/{subscriptionId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/resourceProviders/{resourceProviderName}/quotaAllocations/{location}": {
+      "get": {
+        "operationId": "GroupQuotaSubscriptionAllocation_List",
+        "tags": [
+          "SubscriptionQuotaAllocationsLists"
+        ],
+        "description": "Gets all the quota allocated to a subscription for the specified resource provider and location for resource names passed in $filter=resourceName eq {SKU}. This will include the GroupQuota and total quota allocated to the subscription. Only the Group quota allocated to the subscription can be allocated back to the MG Group Quota.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "managementGroupId",
+            "in": "path",
+            "description": "The management group ID.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "groupQuotaName",
+            "in": "path",
+            "description": "The GroupQuota name. The name should be unique for the provided context tenantId/MgId.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z][a-z0-9]*$"
+          },
+          {
+            "name": "resourceProviderName",
+            "in": "path",
+            "description": "The resource provider name, such as - Microsoft.Compute. Currently only Microsoft.Compute resource provider supports this API.",
+            "required": true,
+            "type": "string",
+            "pattern": "^((?!-)[a-zA-Z0-9-]{1,63}(?<!-)\\.)+[a-zA-Z]{2,63}$"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "The name of the Azure region.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionQuotaAllocationsList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SubscriptionQuotaAllocation_List_ForCompute": {
+            "$ref": "./examples/SubscriptionQuotaAllocation/SubscriptionQuotaAllocation_List-Compute.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "GroupQuotaSubscriptionAllocationRequest_Update",
+        "tags": [
+          "SubscriptionQuotaAllocationsLists"
+        ],
+        "description": "Request to assign quota from group quota to a specific Subscription. The assign GroupQuota to subscriptions or reduce the quota allocated to subscription to give back the unused quota ( quota >= usages) to the groupQuota. So, this API can be used to assign Quota to subscriptions and assign back unused quota to group quota, which can be assigned to another subscriptions in the GroupQuota. User can collect unused quotas from multiple subscriptions within the groupQuota and assign the groupQuota to the subscription, where it's needed.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "managementGroupId",
+            "in": "path",
+            "description": "The management group ID.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "groupQuotaName",
+            "in": "path",
+            "description": "The GroupQuota name. The name should be unique for the provided context tenantId/MgId.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z][a-z0-9]*$"
+          },
+          {
+            "name": "resourceProviderName",
+            "in": "path",
+            "description": "The resource provider name, such as - Microsoft.Compute. Currently only Microsoft.Compute resource provider supports this API.",
+            "required": true,
+            "type": "string",
+            "pattern": "^((?!-)[a-zA-Z0-9-]{1,63}(?<!-)\\.)+[a-zA-Z]{2,63}$"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "The name of the Azure region.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "allocateQuotaRequest",
+            "in": "body",
+            "description": "Quota requests payload.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SubscriptionQuotaAllocationsList"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionQuotaAllocationsList"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SubscriptionQuotaAllocation_Patch_Request_ForCompute": {
+            "$ref": "./examples/SubscriptionQuotaAllocationRequests/PatchSubscriptionQuotaAllocationRequest-Compute.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/SubscriptionQuotaAllocationsList"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/providers/Microsoft.Quota/operations": {
+      "get": {
+        "operationId": "QuotaOperation_List",
+        "tags": [
+          "QuotaOperation",
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OperationList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ExceptionResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetOperations": {
+            "$ref": "./examples/GetOperations.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AllocatedQuotaToSubscriptionList": {
+      "type": "object",
+      "description": "Quota allocated to subscriptions",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of Group Quota Limit allocated to subscriptions.",
+          "items": {
+            "$ref": "#/definitions/AllocatedToSubscription"
+          }
+        }
+      }
+    },
+    "AllocatedToSubscription": {
+      "type": "object",
+      "description": "SubscriptionIds and quota allocated to subscriptions from the GroupQuota.",
+      "properties": {
+        "subscriptionId": {
+          "type": "string",
+          "description": "An Azure subscriptionId."
+        },
+        "quotaAllocated": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The amount of quota allocated to this subscriptionId from the GroupQuotasEntity."
+        }
+      }
+    },
+    "CommonResourceProperties": {
+      "type": "object",
+      "description": "Resource properties.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource name.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type. Example: \"Microsoft.Quota/quotas\"",
+          "readOnly": true
+        }
+      }
+    },
+    "CreateGenericQuotaRequestParameters": {
+      "type": "object",
+      "description": "Quota change requests information.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Quota change requests.",
+          "items": {
+            "$ref": "#/definitions/CurrentQuotaLimitBase"
+          }
+        }
+      }
+    },
+    "CreatedByType": {
+      "type": "string",
+      "description": "The type of identity that created the resource.",
+      "enum": [
+        "User",
+        "Application",
+        "ManagedIdentity",
+        "Key"
+      ],
+      "x-ms-enum": {
+        "name": "CreatedByType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "User",
+            "value": "User"
+          },
+          {
+            "name": "Application",
+            "value": "Application"
+          },
+          {
+            "name": "ManagedIdentity",
+            "value": "ManagedIdentity"
+          },
+          {
+            "name": "Key",
+            "value": "Key"
+          }
+        ]
+      }
+    },
+    "CurrentQuotaLimitBase": {
+      "type": "object",
+      "description": "Quota limit.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/QuotaProperties",
+          "description": "Quota properties for the specified resource, based on the API called, Quotas or Usages."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "CurrentUsagesBase": {
+      "type": "object",
+      "description": "Resource usage.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UsagesProperties",
+          "description": "Usage properties for the specified resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "EnforcementState": {
+      "type": "string",
+      "description": "Enforcement status.",
+      "enum": [
+        "Enabled",
+        "Disabled",
+        "NotAvailable"
+      ],
+      "x-ms-enum": {
+        "name": "EnforcementState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled"
+          },
+          {
+            "name": "NotAvailable",
+            "value": "NotAvailable"
+          }
+        ]
+      }
+    },
+    "ExceptionResponse": {
+      "type": "object",
+      "description": "Error.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ServiceError",
+          "description": "API error details."
+        }
+      }
+    },
+    "GroupQuotaDetails": {
+      "type": "object",
+      "description": "Group Quota details.",
+      "properties": {
+        "resourceName": {
+          "type": "string",
+          "description": "The resource name, such as SKU name."
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The current Group Quota Limit at the parentId level."
+        },
+        "comment": {
+          "type": "string",
+          "description": "Any comment related to quota request."
+        },
+        "unit": {
+          "type": "string",
+          "description": "The usages units, such as Count and Bytes. When requesting quota, use the **unit** value returned in the GET response in the request body of your PUT operation.",
+          "readOnly": true
+        },
+        "name": {
+          "$ref": "#/definitions/GroupQuotaDetailsName",
+          "description": "Name of the resource provided by the resource provider. This property is already included in the request URI, so it is a readonly property returned in the response.",
+          "readOnly": true,
+          "x-ms-client-flatten": true
+        },
+        "availableLimit": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The available Group Quota Limit at the MG level. This Group quota can be allocated to subscription(s).",
+          "readOnly": true
+        },
+        "allocatedToSubscriptions": {
+          "$ref": "#/definitions/AllocatedQuotaToSubscriptionList",
+          "description": "Quota allocated to subscriptions",
+          "readOnly": true
+        }
+      }
+    },
+    "GroupQuotaDetailsName": {
+      "type": "object",
+      "description": "Name of the resource provided by the resource provider. This property is already included in the request URI, so it is a readonly property returned in the response.",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "Resource name.",
+          "readOnly": true
+        },
+        "localizedValue": {
+          "type": "string",
+          "description": "Resource display name.",
+          "readOnly": true
+        }
+      }
+    },
+    "GroupQuotaLimit": {
+      "type": "object",
+      "description": "Group Quota limit.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/GroupQuotaLimitProperties",
+          "description": "Group Quota properties for the specified resource."
+        }
+      }
+    },
+    "GroupQuotaLimitList": {
+      "type": "object",
+      "description": "List of Group Quota Limit details.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/GroupQuotaLimitListProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "GroupQuotaLimitListProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/RequestState",
+          "description": "Request status.",
+          "readOnly": true
+        },
+        "value": {
+          "type": "array",
+          "description": "List of Group Quota Limit details.",
+          "items": {
+            "$ref": "#/definitions/GroupQuotaLimit"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to use for getting the next set of results.",
+          "readOnly": true
+        }
+      }
+    },
+    "GroupQuotaLimitProperties": {
+      "type": "object",
+      "description": "Group Quota properties for the specified resource.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/GroupQuotaDetails"
+        }
+      ]
+    },
+    "GroupQuotaList": {
+      "type": "object",
+      "description": "List of Group Quotas at MG level.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The GroupQuotasEntity items on this page",
+          "items": {
+            "$ref": "#/definitions/GroupQuotasEntity"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "GroupQuotaRequestBase": {
+      "type": "object",
+      "description": "The new GroupQuota limit requested.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/GroupQuotaRequestBaseProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "GroupQuotaRequestBaseProperties": {
+      "type": "object",
+      "properties": {
+        "limit": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The new quota limit for the subscription. The incremental quota will be allocated from pre-approved group quota."
+        },
+        "name": {
+          "$ref": "#/definitions/GroupQuotaRequestBasePropertiesName",
+          "description": "Name of the resource provided by the resource provider. This property is already included in the request URI, so it is a readonly property returned in the response.",
+          "readOnly": true,
+          "x-ms-client-flatten": true
+        },
+        "region": {
+          "type": "string",
+          "description": "Location/Azure region for the quota requested for resource."
+        },
+        "comments": {
+          "type": "string",
+          "description": "GroupQuota Request comments and details for request. This is optional paramter to provide more details related to the requested resource."
+        }
+      }
+    },
+    "GroupQuotaRequestBasePropertiesName": {
+      "type": "object",
+      "description": "Name of the resource provided by the resource provider. This property is already included in the request URI, so it is a readonly property returned in the response.",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "Resource name.",
+          "readOnly": true
+        },
+        "localizedValue": {
+          "type": "string",
+          "description": "Resource display name.",
+          "readOnly": true
+        }
+      }
+    },
+    "GroupQuotaSubscriptionId": {
+      "type": "object",
+      "description": "This represents a Azure subscriptionId that is associated with a GroupQuotasEntity.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/GroupQuotaSubscriptionIdProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "GroupQuotaSubscriptionIdList": {
+      "type": "object",
+      "description": "List of GroupQuotaSubscriptionIds",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The GroupQuotaSubscriptionId items on this page",
+          "items": {
+            "$ref": "#/definitions/GroupQuotaSubscriptionId"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "GroupQuotaSubscriptionIdProperties": {
+      "type": "object",
+      "properties": {
+        "subscriptionId": {
+          "type": "string",
+          "description": "An Azure subscriptionId."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/RequestState",
+          "description": "Status of this subscriptionId being associated with the GroupQuotasEntity.",
+          "readOnly": true
+        }
+      }
+    },
+    "GroupQuotaSubscriptionRequestStatus": {
+      "type": "object",
+      "description": "The new quota limit request status.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/GroupQuotaSubscriptionRequestStatusProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "GroupQuotaSubscriptionRequestStatusList": {
+      "type": "object",
+      "description": "List of GroupQuotaSubscriptionRequests Status",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The GroupQuotaSubscriptionRequestStatus items on this page",
+          "items": {
+            "$ref": "#/definitions/GroupQuotaSubscriptionRequestStatus"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "GroupQuotaSubscriptionRequestStatusProperties": {
+      "type": "object",
+      "properties": {
+        "subscriptionId": {
+          "type": "string",
+          "description": "The subscription Id"
+        },
+        "requestSubmitTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The request submission time. The date conforms to the following format specified by the ISO 8601 standard: yyyy-MM-ddTHH:mm:ssZ"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/RequestState",
+          "description": "Status of this subscriptionId being associated with the GroupQuotasEntity.",
+          "readOnly": true
+        }
+      }
+    },
+    "GroupQuotaUsagesBase": {
+      "type": "object",
+      "description": "Resource details with usages and GroupQuota.",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/GroupQuotaUsagesBaseName",
+          "description": "Name of the resource provided by the resource provider. This property is already included in the request URI, so it is a readonly property returned in the response.",
+          "x-ms-client-flatten": true
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Quota/limits for the resource."
+        },
+        "usages": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Usages for the resource."
+        },
+        "unit": {
+          "type": "string",
+          "description": "Representing the units of the usage quota. Possible values are: Count, Bytes, Seconds, Percent, CountPerSecond, BytesPerSecond. Based on - https://armwiki.azurewebsites.net/api_contracts/UsagesAPIContract.html?q=usages . Different RPs may have different units, Count, type as int64 should work for most of the integer values.",
+          "readOnly": true
+        }
+      }
+    },
+    "GroupQuotaUsagesBaseName": {
+      "type": "object",
+      "description": "Name of the resource provided by the resource provider. This property is already included in the request URI, so it is a readonly property returned in the response.",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "Resource name."
+        },
+        "localizedValue": {
+          "type": "string",
+          "description": "Resource display name.",
+          "readOnly": true
+        }
+      }
+    },
+    "GroupQuotasEnforcementListResponse": {
+      "type": "object",
+      "description": "List of Azure regions, where the group quotas is enabled for enforcement.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of Azure Regions.",
+          "items": {
+            "$ref": "#/definitions/GroupQuotasEnforcementStatus"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to use for getting the next set of results.",
+          "readOnly": true
+        }
+      }
+    },
+    "GroupQuotasEnforcementStatus": {
+      "type": "object",
+      "description": "The GroupQuota Enforcement status for a Azure Location/Region.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/GroupQuotasEnforcementStatusProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "GroupQuotasEnforcementStatusProperties": {
+      "type": "object",
+      "properties": {
+        "enforcementEnabled": {
+          "$ref": "#/definitions/EnforcementState",
+          "description": "Is the GroupQuota Enforcement enabled for the Azure region."
+        },
+        "enforcedGroupName": {
+          "type": "string",
+          "description": "The name of the group that is enforced.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/RequestState",
+          "description": "Request status.",
+          "readOnly": true
+        },
+        "faultCode": {
+          "type": "string",
+          "description": "Details of the failure.",
+          "readOnly": true
+        }
+      }
+    },
+    "GroupQuotasEntity": {
+      "type": "object",
+      "description": "Properties and filters for ShareQuota. The request parameter is optional, if there are no filters specified.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/GroupQuotasEntityProperties",
+          "description": "Properties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "GroupQuotasEntityBase": {
+      "type": "object",
+      "description": "Properties and filters for ShareQuota. The request parameter is optional, if there are no filters specified.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Display name of the GroupQuota entity."
+        },
+        "groupType": {
+          "$ref": "#/definitions/GroupType",
+          "description": "Type of the group.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/RequestState",
+          "description": "Provisioning state of the operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "GroupQuotasEntityBasePatch": {
+      "type": "object",
+      "description": "Properties and filters for ShareQuota. The request parameter is optional, if there are no filters specified.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Display name of the GroupQuota entity."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/RequestState",
+          "description": "Provisioning state of the operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "GroupQuotasEntityPatch": {
+      "type": "object",
+      "description": "Properties and filters for ShareQuota. The request parameter is optional, if there are no filters specified.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/GroupQuotasEntityPatchProperties",
+          "description": "Properties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "GroupQuotasEntityPatchProperties": {
+      "type": "object",
+      "description": "Properties",
+      "allOf": [
+        {
+          "$ref": "#/definitions/GroupQuotasEntityBasePatch"
+        }
+      ]
+    },
+    "GroupQuotasEntityProperties": {
+      "type": "object",
+      "description": "Properties",
+      "allOf": [
+        {
+          "$ref": "#/definitions/GroupQuotasEntityBase"
+        }
+      ]
+    },
+    "GroupType": {
+      "type": "string",
+      "description": "Type of the group.",
+      "enum": [
+        "AllocationGroup",
+        "EnforcedGroup"
+      ],
+      "x-ms-enum": {
+        "name": "GroupType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AllocationGroup",
+            "value": "AllocationGroup",
+            "description": "The group is used for subscription group quota allocations."
+          },
+          {
+            "name": "EnforcedGroup",
+            "value": "EnforcedGroup",
+            "description": "The group is used for the enforced shared limit scenario"
+          }
+        ]
+      }
+    },
+    "LROResponse": {
+      "type": "object",
+      "description": "The provisioning state for the operation.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LROResponseProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "LROResponseProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/RequestState",
+          "description": "Request status.",
+          "readOnly": true
+        }
+      }
+    },
+    "LimitJsonObject": {
+      "type": "object",
+      "description": "LimitJson abstract class.",
+      "properties": {
+        "limitObjectType": {
+          "$ref": "#/definitions/LimitType",
+          "description": "The limit object type."
+        }
+      },
+      "discriminator": "limitObjectType",
+      "required": [
+        "limitObjectType"
+      ]
+    },
+    "LimitObject": {
+      "type": "object",
+      "description": "The resource quota limit value.",
+      "properties": {
+        "value": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The quota/limit value"
+        },
+        "limitType": {
+          "$ref": "#/definitions/QuotaLimitTypes",
+          "description": "The quota or usages limit types."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/LimitJsonObject"
+        }
+      ],
+      "x-ms-discriminator-value": "LimitValue"
+    },
+    "LimitType": {
+      "type": "string",
+      "description": "The limit object type.",
+      "enum": [
+        "LimitValue"
+      ],
+      "x-ms-enum": {
+        "name": "LimitType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "LimitValue",
+            "value": "LimitValue"
+          }
+        ]
+      }
+    },
+    "OperationDisplay": {
+      "type": "object",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "Provider name."
+        },
+        "resource": {
+          "type": "string",
+          "description": "Resource name."
+        },
+        "operation": {
+          "type": "string",
+          "description": "Operation name."
+        },
+        "description": {
+          "type": "string",
+          "description": "Operation description."
+        }
+      }
+    },
+    "OperationList": {
+      "type": "object",
+      "description": "The paginated list of connected cluster API operations.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of connected cluster API operations.",
+          "items": {
+            "$ref": "#/definitions/OperationResponse"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to fetch the next page of connected cluster API operations."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "OperationResponse": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay"
+        },
+        "origin": {
+          "type": "string"
+        }
+      }
+    },
+    "QuotaAllocationRequestBase": {
+      "type": "object",
+      "description": "The new quota request allocated to subscription.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/QuotaAllocationRequestBaseProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "QuotaAllocationRequestBaseProperties": {
+      "type": "object",
+      "properties": {
+        "limit": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The new quota limit for the subscription. The incremental quota will be allocated from pre-approved group quota."
+        },
+        "name": {
+          "$ref": "#/definitions/QuotaAllocationRequestBasePropertiesName",
+          "description": "Name of the resource provided by the resource provider. This property is already included in the request URI, so it is a readonly property returned in the response.",
+          "readOnly": true,
+          "x-ms-client-flatten": true
+        },
+        "region": {
+          "type": "string",
+          "description": "The location for which the subscription is allocated"
+        }
+      }
+    },
+    "QuotaAllocationRequestBasePropertiesName": {
+      "type": "object",
+      "description": "Name of the resource provided by the resource provider. This property is already included in the request URI, so it is a readonly property returned in the response.",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "Resource name.",
+          "readOnly": true
+        },
+        "localizedValue": {
+          "type": "string",
+          "description": "Resource display name.",
+          "readOnly": true
+        }
+      }
+    },
+    "QuotaAllocationRequestStatus": {
+      "type": "object",
+      "description": "The subscription quota allocation status.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/QuotaAllocationRequestStatusProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "QuotaAllocationRequestStatusList": {
+      "type": "object",
+      "description": "List of QuotaAllocation Request Status",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The QuotaAllocationRequestStatus items on this page",
+          "items": {
+            "$ref": "#/definitions/QuotaAllocationRequestStatus"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "QuotaAllocationRequestStatusProperties": {
+      "type": "object",
+      "properties": {
+        "requestedResource": {
+          "$ref": "#/definitions/QuotaAllocationRequestBase",
+          "description": "The new quota request allocated to subscription."
+        },
+        "requestSubmitTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The request submission time. The date conforms to the following format specified by the ISO 8601 standard: yyyy-MM-ddTHH:mm:ssZ",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/RequestState",
+          "description": "Request status.",
+          "readOnly": true
+        },
+        "faultCode": {
+          "type": "string",
+          "description": "Details of the failure.",
+          "readOnly": true
+        }
+      }
+    },
+    "QuotaLimitTypes": {
+      "type": "string",
+      "description": "The quota or usages limit types.",
+      "enum": [
+        "Independent",
+        "Shared"
+      ],
+      "x-ms-enum": {
+        "name": "QuotaLimitTypes",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Independent",
+            "value": "Independent"
+          },
+          {
+            "name": "Shared",
+            "value": "Shared"
+          }
+        ]
+      }
+    },
+    "QuotaLimits": {
+      "type": "object",
+      "description": "Quota limits.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The CurrentQuotaLimitBase items on this page",
+          "items": {
+            "$ref": "#/definitions/CurrentQuotaLimitBase"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "QuotaLimitsResponse": {
+      "type": "object",
+      "description": "Quota limits request response.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of quota limits with the quota request status.",
+          "items": {
+            "$ref": "#/definitions/CurrentQuotaLimitBase"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI used to fetch the next page of quota limits. When there are no more pages, this is null."
+        }
+      }
+    },
+    "QuotaProperties": {
+      "type": "object",
+      "description": "Quota properties for the specified resource.",
+      "properties": {
+        "limit": {
+          "$ref": "#/definitions/LimitJsonObject",
+          "description": "Resource quota limit properties."
+        },
+        "unit": {
+          "type": "string",
+          "description": "The quota units, such as Count and Bytes. When requesting quota, use the **unit** value returned in the GET response in the request body of your PUT operation.",
+          "readOnly": true
+        },
+        "name": {
+          "$ref": "#/definitions/ResourceName",
+          "description": "Resource name provided by the resource provider. Use this property name when requesting quota."
+        },
+        "resourceType": {
+          "type": "string",
+          "description": "The name of the resource type. Optional field."
+        },
+        "quotaPeriod": {
+          "type": "string",
+          "description": "The time period over which the quota usage values are summarized. For example:\n*P1D (per one day)\n*PT1M (per one minute)\n*PT1S (per one second).\nThis parameter is optional because, for some resources like compute, the period is irrelevant.",
+          "readOnly": true
+        },
+        "isQuotaApplicable": {
+          "type": "boolean",
+          "description": "States if quota can be requested for this resource.",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "Additional properties for the specific resource provider."
+        }
+      }
+    },
+    "QuotaRequestDetails": {
+      "type": "object",
+      "description": "List of quota requests with details.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/QuotaRequestProperties",
+          "description": "Quota request details.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "QuotaRequestDetailsList": {
+      "type": "object",
+      "description": "Quota request information.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The QuotaRequestDetails items on this page",
+          "items": {
+            "$ref": "#/definitions/QuotaRequestDetails"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "QuotaRequestOneResourceSubmitResponse": {
+      "type": "object",
+      "description": "Quota request response.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Quota request ID.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the quota request.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type. \"Microsoft.Quota/ServiceLimitRequests\"",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/quotaRequestOneResourceProperties",
+          "description": "Quota request details.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "QuotaRequestProperties": {
+      "type": "object",
+      "description": "Quota request properties.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/QuotaRequestState",
+          "description": "The quota request status.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "User-friendly status message.",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "#/definitions/ServiceErrorDetail",
+          "description": "Error details of the quota request."
+        },
+        "requestSubmitTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The quota request submission time. The date conforms to the following format specified by the ISO 8601 standard: yyyy-MM-ddTHH:mm:ssZ",
+          "readOnly": true
+        },
+        "value": {
+          "type": "array",
+          "description": "Quota request details.",
+          "items": {
+            "$ref": "#/definitions/SubRequest"
+          },
+          "x-ms-identifiers": [
+            "subRequestId"
+          ]
+        }
+      }
+    },
+    "QuotaRequestState": {
+      "type": "string",
+      "description": "Quota request status.",
+      "enum": [
+        "Accepted",
+        "Invalid",
+        "Succeeded",
+        "Failed",
+        "InProgress"
+      ],
+      "x-ms-enum": {
+        "name": "QuotaRequestState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Accepted",
+            "value": "Accepted"
+          },
+          {
+            "name": "Invalid",
+            "value": "Invalid"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed"
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress"
+          }
+        ]
+      }
+    },
+    "QuotaRequestStatusDetails": {
+      "type": "object",
+      "description": "Quota request status details.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/QuotaRequestState",
+          "description": "Quota request status.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "User-friendly message.",
+          "readOnly": true
+        },
+        "limit": {
+          "$ref": "#/definitions/LimitObject",
+          "description": "Resource quota limit properties."
+        },
+        "unit": {
+          "type": "string",
+          "description": "The quota limit units, such as Count and Bytes. When requesting quota, use the **unit** value returned in the GET response in the request body of your PUT operation."
+        },
+        "name": {
+          "$ref": "#/definitions/ResourceName",
+          "description": "Resource name provided by the resource provider. Use this property name when requesting quota."
+        },
+        "resourceType": {
+          "type": "string",
+          "description": "The name of the resource type. Optional field."
+        },
+        "quotaPeriod": {
+          "type": "string",
+          "description": "The time period over which the quota usage values are summarized. For example:\n*P1D (per one day)\n*PT1M (per one minute)\n*PT1S (per one second).\nThis parameter is optional because, for some resources like compute, the period is irrelevant.",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "Additional properties for the specific resource provider."
+        }
+      }
+    },
+    "QuotaRequestSubmitResponse": {
+      "type": "object",
+      "description": "Quota request response.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Quota request ID.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Quota request name.",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/QuotaRequestProperties",
+          "description": "Quota request details."
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type. \"Microsoft.Quota/quotas\".",
+          "readOnly": true
+        }
+      }
+    },
+    "QuotaRequestSubmitResponse202": {
+      "type": "object",
+      "description": "The quota request response with the quota request ID.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The quota request ID. To check the request status, use the **id** value in a [Quota Request Status](https://docs.microsoft.com/en-us/rest/api/reserved-vm-instances/quotarequeststatus/get) GET operation.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Operation ID.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type.",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/QuotaRequestStatusDetails",
+          "description": "Quota request status.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "RequestState": {
+      "type": "string",
+      "description": "Request status.",
+      "enum": [
+        "Accepted",
+        "Created",
+        "Invalid",
+        "Succeeded",
+        "Escalated",
+        "Failed",
+        "InProgress",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "RequestState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The quota request has been accepted."
+          },
+          {
+            "name": "Created",
+            "value": "Created",
+            "description": "The quota request has been created."
+          },
+          {
+            "name": "Invalid",
+            "value": "Invalid",
+            "description": "The quota request is invalid."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The quota request has succeeded."
+          },
+          {
+            "name": "Escalated",
+            "value": "Escalated",
+            "description": "The quota request has been escalated for further review. Please file a support ticket. A support engineer will follow up."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The quota request has failed."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "The quota request is currently being processed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The quota request has been canceled."
+          }
+        ]
+      }
+    },
+    "ResourceBaseRequest": {
+      "type": "object",
+      "description": "Resource definition with the requested quota.",
+      "properties": {
+        "resourceName": {
+          "type": "string",
+          "description": "The resource name, such as SKU name.",
+          "readOnly": true
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Quota requested for the resource."
+        },
+        "unit": {
+          "type": "string",
+          "description": "Representing the units of the usage quota. Possible values are: Count, Bytes, Seconds, Percent, CountPerSecond, BytesPerSecond. Based on - https://armwiki.azurewebsites.net/api_contracts/UsagesAPIContract.html?q=usages . Different RPs may have different units, Count, type as int64 should work for most of the integer values.",
+          "readOnly": true
+        }
+      }
+    },
+    "ResourceName": {
+      "type": "object",
+      "description": "Name of the resource provided by the resource Provider. When requesting quota, use this property name.",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "Resource name."
+        },
+        "localizedValue": {
+          "type": "string",
+          "description": "Resource display name.",
+          "readOnly": true
+        }
+      }
+    },
+    "ResourceUsageList": {
+      "type": "object",
+      "description": "List of resource usages and quotas for GroupQuota.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ResourceUsages items on this page",
+          "items": {
+            "$ref": "#/definitions/ResourceUsages"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ResourceUsages": {
+      "type": "object",
+      "description": "Resource details with usages and GroupQuota.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/GroupQuotaUsagesBase",
+          "description": "Resource details with usages and GroupQuota."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ServiceError": {
+      "type": "object",
+      "description": "API error details.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message."
+        },
+        "details": {
+          "type": "array",
+          "description": "List of error details.",
+          "items": {
+            "$ref": "#/definitions/ServiceErrorDetail"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "code"
+          ]
+        }
+      }
+    },
+    "ServiceErrorDetail": {
+      "type": "object",
+      "description": "Error details.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message.",
+          "readOnly": true
+        }
+      }
+    },
+    "SubRequest": {
+      "type": "object",
+      "description": "Request property.",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/ResourceName",
+          "description": "Resource name."
+        },
+        "resourceType": {
+          "type": "string",
+          "description": "Resource type for which the quota properties were requested.",
+          "readOnly": true
+        },
+        "unit": {
+          "type": "string",
+          "description": "Quota limit units, such as Count and Bytes. When requesting quota, use the **unit** value returned in the GET response in the request body of your PUT operation."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/QuotaRequestState",
+          "description": "The quota request status.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "User-friendly status message.",
+          "readOnly": true
+        },
+        "subRequestId": {
+          "type": "string",
+          "description": "Quota request ID.",
+          "readOnly": true
+        },
+        "limit": {
+          "$ref": "#/definitions/LimitJsonObject",
+          "description": "Resource quota limit properties."
+        }
+      }
+    },
+    "SubmittedResourceRequestStatus": {
+      "type": "object",
+      "description": "Status of a single GroupQuota request.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SubmittedResourceRequestStatusProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SubmittedResourceRequestStatusList": {
+      "type": "object",
+      "description": "Share Quota Entity list.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SubmittedResourceRequestStatus items on this page",
+          "items": {
+            "$ref": "#/definitions/SubmittedResourceRequestStatus"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SubmittedResourceRequestStatusProperties": {
+      "type": "object",
+      "properties": {
+        "requestedResource": {
+          "$ref": "#/definitions/GroupQuotaRequestBase",
+          "description": "Requested Resource."
+        },
+        "requestSubmitTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The request submission time. The date conforms to the following format specified by the ISO 8601 standard: yyyy-MM-ddTHH:mm:ssZ",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/RequestState",
+          "description": "Request status.",
+          "readOnly": true
+        },
+        "faultCode": {
+          "type": "string",
+          "description": "Details of the failure.",
+          "readOnly": true
+        }
+      }
+    },
+    "SubscriptionGroupQuotaAssignment": {
+      "type": "object",
+      "description": "MGId the source of group quota.",
+      "properties": {
+        "groupQuotaId": {
+          "type": "string",
+          "description": "The group quota id of the quota source."
+        },
+        "quotaAllocated": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The amount of quota allocated to this subscriptionId from the quota source."
+        }
+      }
+    },
+    "SubscriptionQuotaAllocationRequestList": {
+      "type": "object",
+      "description": "List of Allocated Group Quota to the subscriptions.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Allocated Group Quota to subscriptions.",
+          "items": {
+            "$ref": "#/definitions/QuotaAllocationRequestStatus"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to use for getting the next set of results.",
+          "readOnly": true
+        }
+      }
+    },
+    "SubscriptionQuotaAllocations": {
+      "type": "object",
+      "description": "Quota allocated to a subscription for the specific Resource Provider, Location, ResourceName. This will include the GroupQuota and total quota allocated to the subscription. Only the Group quota allocated to the subscription can be allocated back to the MG Group Quota.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SubscriptionQuotaAllocationsProperties",
+          "description": "Quota properties for the specified resource."
+        }
+      }
+    },
+    "SubscriptionQuotaAllocationsList": {
+      "type": "object",
+      "description": "Subscription quota list.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SubscriptionQuotaAllocationsListProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SubscriptionQuotaAllocationsListProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/RequestState",
+          "description": "Request status.",
+          "readOnly": true
+        },
+        "value": {
+          "type": "array",
+          "description": "Subscription quota list.",
+          "items": {
+            "$ref": "#/definitions/SubscriptionQuotaAllocations"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to use for getting the next set of results.",
+          "readOnly": true
+        }
+      }
+    },
+    "SubscriptionQuotaAllocationsProperties": {
+      "type": "object",
+      "description": "Quota properties for the specified resource.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubscriptionQuotaDetails"
+        }
+      ]
+    },
+    "SubscriptionQuotaAllocationsStatusList": {
+      "type": "object",
+      "description": "Subscription quota allocation requests status list.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Subscription quota allocation status list.",
+          "items": {
+            "$ref": "#/definitions/SubmittedResourceRequestStatus"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to use for getting the next set of results.",
+          "readOnly": true
+        }
+      }
+    },
+    "SubscriptionQuotaDetails": {
+      "type": "object",
+      "description": "Subscription Quota details.",
+      "properties": {
+        "resourceName": {
+          "type": "string",
+          "description": "The resource name, such as SKU name."
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The total quota limit for the subscription."
+        },
+        "shareableQuota": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The shareable quota for the subscription.",
+          "readOnly": true
+        },
+        "name": {
+          "$ref": "#/definitions/SubscriptionQuotaDetailsName",
+          "description": "Name of the resource provided by the resource provider. This property is already included in the request URI, so it is a readonly property returned in the response.",
+          "readOnly": true,
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SubscriptionQuotaDetailsName": {
+      "type": "object",
+      "description": "Name of the resource provided by the resource provider. This property is already included in the request URI, so it is a readonly property returned in the response.",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "Resource name.",
+          "readOnly": true
+        },
+        "localizedValue": {
+          "type": "string",
+          "description": "Resource display name.",
+          "readOnly": true
+        }
+      }
+    },
+    "UsagesLimits": {
+      "type": "object",
+      "description": "Quota limits.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The CurrentUsagesBase items on this page",
+          "items": {
+            "$ref": "#/definitions/CurrentUsagesBase"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "UsagesObject": {
+      "type": "object",
+      "description": "The resource usages value.",
+      "properties": {
+        "value": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The usages value."
+        },
+        "usagesType": {
+          "$ref": "#/definitions/UsagesTypes",
+          "description": "The quota or usages limit types."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "UsagesProperties": {
+      "type": "object",
+      "description": "Usage properties for the specified resource.",
+      "properties": {
+        "usages": {
+          "$ref": "#/definitions/UsagesObject",
+          "description": "The quota limit properties for this resource."
+        },
+        "unit": {
+          "type": "string",
+          "description": "The units for the quota usage, such as Count and Bytes. When requesting quota, use the **unit** value returned in the GET response in the request body of your PUT operation.",
+          "readOnly": true
+        },
+        "name": {
+          "$ref": "#/definitions/ResourceName",
+          "description": "Resource name provided by the resource provider. Use this property name when requesting quota."
+        },
+        "resourceType": {
+          "type": "string",
+          "description": "The name of the resource type. Optional field."
+        },
+        "quotaPeriod": {
+          "type": "string",
+          "description": "The time period for the summary of the quota usage values. For example:\n*P1D (per one day)\n*PT1M (per one minute)\n*PT1S (per one second).\nThis parameter is optional because it is not relevant for all resources such as compute.",
+          "readOnly": true
+        },
+        "isQuotaApplicable": {
+          "type": "boolean",
+          "description": "States if quota can be requested for this resource.",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "Additional properties for the specific resource provider."
+        }
+      }
+    },
+    "UsagesTypes": {
+      "type": "string",
+      "description": "The quota or usages limit types.",
+      "enum": [
+        "Individual",
+        "Combined"
+      ],
+      "x-ms-enum": {
+        "name": "UsagesTypes",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Individual",
+            "value": "Individual"
+          },
+          {
+            "name": "Combined",
+            "value": "Combined"
+          }
+        ]
+      }
+    },
+    "quotaRequestOneResourceProperties": {
+      "type": "object",
+      "description": "Quota request.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/QuotaRequestState",
+          "description": "Quota request status.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "User-friendly status message.",
+          "readOnly": true
+        },
+        "requestSubmitTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Quota request submission time. The date conforms to the following ISO 8601 standard format: yyyy-MM-ddTHH:mm:ssZ.",
+          "readOnly": true
+        },
+        "limit": {
+          "$ref": "#/definitions/LimitObject",
+          "description": "Resource quota limit properties."
+        },
+        "currentValue": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Usage information for the current resource.",
+          "readOnly": true
+        },
+        "unit": {
+          "type": "string",
+          "description": "The quota limit units, such as Count and Bytes. When requesting quota, use the **unit** value returned in the GET response in the request body of your PUT operation."
+        },
+        "name": {
+          "$ref": "#/definitions/ResourceName",
+          "description": "Resource name provided by the resource provider. Use this property name when requesting quota."
+        },
+        "resourceType": {
+          "type": "string",
+          "description": "The name of the resource type. Optional field."
+        },
+        "quotaPeriod": {
+          "type": "string",
+          "description": "The time period over which the quota usage values are summarized. For example:\n*P1D (per one day)\n*PT1M (per one minute)\n*PT1S (per one second).\nThis parameter is optional because, for some resources like compute, the period is irrelevant.",
+          "readOnly": true
+        },
+        "isQuotaApplicable": {
+          "type": "boolean",
+          "description": "States if quota can be requested for this resource.",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "#/definitions/ServiceErrorDetail",
+          "description": "Error details of the quota request."
+        },
+        "properties": {
+          "description": "Additional properties for the specific resource provider."
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

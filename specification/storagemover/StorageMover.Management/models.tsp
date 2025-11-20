@@ -399,7 +399,7 @@ model UploadLimitSchedule {
   /**
    * The set of weekly repeating recurrences of the WAN-link upload limit schedule.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   weeklyRecurrences?: UploadLimitWeeklyRecurrence[];
 }
 
@@ -704,7 +704,7 @@ model JobDefinitionProperties {
   sourceTargetMap?: {
     @visibility(Lifecycle.Read)
     @added(Versions.v2025_07_01)
-    @OpenAPI.extension("x-ms-identifiers", #[])
+    @identifiers(#[])
     value?: SourceTargetMap[];
   };
 

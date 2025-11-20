@@ -1,5 +1,3 @@
-// @ts-check
-
 import { REVIEW_REQUIRED_LABELS } from "../../shared/src/breaking-change.js";
 import { PER_PAGE_MAX } from "../../shared/src/github.js";
 import { byDate, invert } from "../../shared/src/sort.js";

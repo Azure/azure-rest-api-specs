@@ -7,6 +7,7 @@ import "./update/common.tsp";
 import "./update/run.tsp";
 import "./update/strategy.tsp";
 import "./update/autoupgradeprofile.tsp";
+import "./back-compatible.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Http;

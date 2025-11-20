@@ -1,0 +1,35 @@
+{
+  "parameters": {
+    "api-version": "2025-09-01-preview",
+    "endpointName": "endpoint1",
+    "originName": "www-someDomain-net",
+    "profileName": "profile1",
+    "resourceGroupName": "RG",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "www-someDomain-net",
+        "type": "Microsoft.Cdn/profiles/endpoints/origins",
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/origins/www-someDomain-net",
+        "properties": {
+          "enabled": true,
+          "hostName": "www.someDomain.net",
+          "httpPort": null,
+          "httpsPort": null,
+          "originHostHeader": "www.someDomain.net",
+          "priority": 1,
+          "privateEndpointStatus": "Pending",
+          "privateLinkAlias": "APPSERVER.d84e61f0-0870-4d24-9746-7438fa0019d1.westus2.azure.privatelinkservice",
+          "privateLinkApprovalMessage": "Please approve the connection request for this Private Link",
+          "provisioningState": "Succeeded",
+          "resourceState": "Active",
+          "weight": 50
+        }
+      }
+    }
+  },
+  "operationId": "Origins_Get",
+  "title": "Origins_Get"
+}

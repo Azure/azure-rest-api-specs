@@ -2432,23 +2432,23 @@
         },
         "hostingMode": {
           "type": "string",
-          "default": "default",
-          "description": "Applicable only for the standard3 SKU. You can set this property to enable up to 3 high density partitions that allow up to 1000 indexes, which is much higher than the maximum indexes allowed for any other SKU. For the standard3 SKU, the value is either 'default' or 'highDensity'. For all other SKUs, this value must be 'default'.",
+          "default": "Default",
+          "description": "Applicable only for the standard3 SKU. You can set this property to enable up to 3 high density partitions that allow up to 1000 indexes, which is much higher than the maximum indexes allowed for any other SKU. For the standard3 SKU, the value is either 'Default' or 'HighDensity'. For all other SKUs, this value must be 'Default'.",
           "enum": [
-            "default",
-            "highDensity"
+            "Default",
+            "HighDensity"
           ],
           "x-ms-enum": {
             "name": "HostingMode",
             "modelAsString": false,
             "values": [
               {
-                "value": "default",
+                "value": "Default",
                 "name": "Default",
                 "description": "The limit on number of indexes is determined by the default limits for the SKU."
               },
               {
-                "value": "highDensity",
+                "value": "HighDensity",
                 "name": "HighDensity",
                 "description": "Only application for standard3 SKU, where the search service can have up to 1000 indexes."
               }
@@ -2459,20 +2459,20 @@
           "type": "string",
           "description": "Configure this property to support the search service using either the Default Compute or Azure Confidential Compute.",
           "enum": [
-            "default",
-            "confidential"
+            "Default",
+            "Confidential"
           ],
           "x-ms-enum": {
             "name": "ComputeType",
             "modelAsString": true,
             "values": [
               {
-                "value": "default",
+                "value": "Default",
                 "name": "Default",
                 "description": "Create the service with the Default Compute."
               },
               {
-                "value": "confidential",
+                "value": "Confidential",
                 "name": "Confidential",
                 "description": "Create the service with Azure Confidential Compute."
               }
@@ -2481,28 +2481,28 @@
         },
         "publicNetworkAccess": {
           "type": "string",
-          "default": "enabled",
-          "description": "This value can be set to 'enabled' to avoid breaking changes on existing customer resources and templates. If set to 'disabled', traffic over public interface is not allowed, and private endpoint connections would be the exclusive access method.",
+          "default": "Enabled",
+          "description": "This value can be set to 'Enabled' to avoid breaking changes on existing customer resources and templates. If set to 'Disabled', traffic over public interface is not allowed, and private endpoint connections would be the exclusive access method.",
           "enum": [
-            "enabled",
-            "disabled"
+            "Enabled",
+            "Disabled"
           ],
           "x-ms-enum": {
             "name": "PublicNetworkAccess",
             "modelAsString": true,
             "values": [
               {
-                "value": "enabled",
+                "value": "Enabled",
                 "name": "Enabled",
                 "description": "The search service is accessible from traffic originating from the public internet."
               },
               {
-                "value": "disabled",
+                "value": "Disabled",
                 "name": "Disabled",
                 "description": "The search service is not accessible from traffic originating from the public internet. Access is only permitted over approved private endpoint connections."
               },
               {
-                "value": "securedByPerimeter",
+                "value": "SecuredByPerimeter",
                 "name": "SecuredByPerimeter",
                 "description": "The network security perimeter configuration rules allow or disallow public network access to the resource. Requires an associated network security perimeter."
               }

@@ -1,0 +1,83 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myRG",
+    "accountName": "account1",
+    "poolName": "pool1",
+    "volumeName": "volume1",
+    "api-version": "2025-09-01-preview",
+    "body": {
+      "properties": {
+        "exportPolicy": {
+          "rules": [
+            {
+              "ruleIndex": 1,
+              "unixAccessRule": "ReadOnly",
+              "nfsv3": "Enabled",
+              "nfsv4": "Disabled",
+              "allowedClients": [
+                "0.0.0.0/0"
+              ],
+              "rootAccess": "Disabled"
+            }
+          ]
+        },
+        "dataProtection": {
+          "snapshot": {
+            "snapshotPolicyResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.NetApp/elasticAccounts/account1/elasticSnapshotPolicies/policy1"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.NetApp/elasticAccounts/account1/elasticCapacityPools/pool1/elasticVolumes/volume1",
+        "name": "account1/pool1/volume1",
+        "type": "Microsoft.NetApp/elasticAccounts/elasticCapacityPools/elasticVolumes",
+        "location": "eastus",
+        "properties": {
+          "filePath": "my-unique-file-path",
+          "size": 107374182400,
+          "exportPolicy": {
+            "rules": [
+              {
+                "ruleIndex": 1,
+                "unixAccessRule": "ReadOnly",
+                "nfsv3": "Enabled",
+                "nfsv4": "Disabled",
+                "allowedClients": [
+                  "0.0.0.0/0"
+                ],
+                "rootAccess": "Disabled"
+              }
+            ]
+          },
+          "protocolTypes": [
+            "NFSv3"
+          ],
+          "dataProtection": {
+            "snapshot": {
+              "snapshotPolicyResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.NetApp/elasticAccounts/account1/elasticSnapshotPolicies/policy1"
+            }
+          },
+          "mountTargets": [
+            {
+              "ipAddress": "10.1.0.9"
+            }
+          ],
+          "availabilityStatus": "Online",
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.NetApp/locations/eastus/operationResults/616ee961-4042-4935-b4a0-ed6f4dae0172?api-version=2025-09-01-preview"
+      }
+    }
+  },
+  "operationId": "ElasticVolumes_Update",
+  "title": "ElasticVolumes_Update"
+}

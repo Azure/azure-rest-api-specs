@@ -96,9 +96,7 @@ interface VirtualMachineImagesEdgeZoneOperationGroup {
   @get
   @action("publishers")
   listPublishers is ComputeProviderActionSync<
-    Response = {
-      @bodyRoot _: VirtualMachineImageResource[];
-    },
+    Response = ArmResponse<VirtualMachineImageResource[]>,
     Scope = SubscriptionActionScope,
     Parameters = {
       ...LocationParameter;
@@ -120,9 +118,7 @@ interface VirtualMachineImagesEdgeZoneOperationGroup {
   @get
   @action("artifacttypes/vmimage/offers")
   listOffers is ComputeProviderActionSync<
-    Response = {
-      @bodyRoot _: VirtualMachineImageResource[];
-    },
+    Response = ArmResponse<VirtualMachineImageResource[]>,
     Scope = SubscriptionActionScope,
     Parameters = {
       ...LocationParameter;
@@ -151,9 +147,7 @@ interface VirtualMachineImagesEdgeZoneOperationGroup {
   @get
   @action("skus")
   listSkus is ComputeProviderActionSync<
-    Response = {
-      @bodyRoot _: VirtualMachineImageResource[];
-    },
+    Response = ArmResponse<VirtualMachineImageResource[]>,
     Scope = SubscriptionActionScope,
     Parameters = {
       ...LocationParameter;
@@ -196,9 +190,7 @@ interface VirtualMachineImagesEdgeZoneOperationGroup {
   @get
   @action("versions")
   list is ComputeProviderActionSync<
-    Response = {
-      @bodyRoot _: VirtualMachineImageResource[];
-    },
+    Response = ArmResponse<VirtualMachineImageResource[]>,
     Scope = SubscriptionActionScope,
     Parameters = {
       ...LocationParameter;
@@ -335,9 +327,7 @@ interface VirtualMachineImagesOperationGroup {
   @get
   @action("publishers")
   listPublishers is ComputeProviderActionSync<
-    Response = {
-      @bodyRoot _: VirtualMachineImageResource[];
-    },
+    Response = ArmResponse<VirtualMachineImageResource[]>,
     Scope = SubscriptionActionScope,
     Parameters = LocationParameter
   >;
@@ -350,9 +340,7 @@ interface VirtualMachineImagesOperationGroup {
   @get
   @action("artifacttypes/vmimage/offers")
   listOffers is ComputeProviderActionSync<
-    Response = {
-      @bodyRoot _: VirtualMachineImageResource[];
-    },
+    Response = ArmResponse<VirtualMachineImageResource[]>,
     Scope = SubscriptionActionScope,
     Parameters = {
       ...LocationParameter;
@@ -374,9 +362,7 @@ interface VirtualMachineImagesOperationGroup {
   @get
   @action("skus")
   listSkus is ComputeProviderActionSync<
-    Response = {
-      @bodyRoot _: VirtualMachineImageResource[];
-    },
+    Response = ArmResponse<VirtualMachineImageResource[]>,
     Scope = SubscriptionActionScope,
     Parameters = {
       ...LocationParameter;
@@ -412,9 +398,7 @@ interface VirtualMachineImagesOperationGroup {
   @get
   @action("versions")
   list is ComputeProviderActionSync<
-    Response = {
-      @bodyRoot _: VirtualMachineImageResource[];
-    },
+    Response = ArmResponse<VirtualMachineImageResource[]>,
     Scope = SubscriptionActionScope,
     Parameters = {
       ...LocationParameter;
@@ -506,9 +490,7 @@ interface VirtualMachineImagesOperationGroup {
     #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
     @query("$orderby")
     $orderby?: string,
-  ): {
-    @bodyRoot _: VirtualMachineImage[];
-  } | CloudError;
+  ): ArmResponse<VirtualMachineImage[]> | CloudError;
 
   /**
    * Gets a virtual machine image.
@@ -562,7 +544,7 @@ interface LogAnalyticsOperationGroup {
   @action("logAnalytics/apiAccess/getRequestRateByInterval")
   exportRequestRateByInterval is ComputeProviderActionAsync<
     Response = LogAnalyticsOperationResult,
-    LroHeaders = ArmAsyncOperationHeader &
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = LogAnalyticsOperationResult> &
       Azure.Core.Foundations.RetryAfterHeader,
     Scope = SubscriptionActionScope,
     Parameters = LocationParameter,
@@ -578,7 +560,7 @@ interface LogAnalyticsOperationGroup {
   @action("logAnalytics/apiAccess/getThrottledRequests")
   exportThrottledRequests is ComputeProviderActionAsync<
     Response = LogAnalyticsOperationResult,
-    LroHeaders = ArmAsyncOperationHeader &
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = LogAnalyticsOperationResult> &
       Azure.Core.Foundations.RetryAfterHeader,
     Scope = SubscriptionActionScope,
     Parameters = LocationParameter,
@@ -598,11 +580,7 @@ interface VirtualMachineRunCommandsOperationGroup {
   @action("runCommands")
   @list
   list is ComputeProviderActionSync<
-    Response = RunCommandListResult & {
-      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union"
-      @header
-      contentType: "application/json" | "text/json";
-    },
+    Response = RunCommandListResult,
     Scope = SubscriptionActionScope,
     Parameters = LocationParameter
   >;
@@ -618,17 +596,13 @@ interface VirtualMachineRunCommandsOperationGroup {
     ...LocationResourceParameter,
 
     /**
-     * The command id.
+     * Specifies a commandId of predefined built-in script. Command IDs available for Linux are listed at https://aka.ms/RunCommandManagedLinux#available-commands, Windows at https://aka.ms/RunCommandManagedWindows#available-commands.
      */
     @path
     commandId: string,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<RunCommandDocument & {
-    #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union"
-    @header
-    contentType: "application/json" | "text/json";
-  }> | CloudError;
+  ): ArmResponse<RunCommandDocument> | CloudError;
 }
 
 @@doc(LogAnalyticsOperationGroup.exportRequestRateByInterval::parameters.body,

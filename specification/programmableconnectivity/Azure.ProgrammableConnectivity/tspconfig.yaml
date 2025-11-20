@@ -12,18 +12,18 @@ options:
     emitter-output-dir: "{project-root}/.."
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
   "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    emitter-output-dir: "{output-dir}/sdk/communication/{namespace}"
     clear-output-folder: true
     model-namespace: false
     namespace: "Azure.Communication.ProgrammableConnectivity"
     flavor: azure
   "@azure-typespec/http-client-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    emitter-output-dir: "{output-dir}/sdk/communication/{namespace}"
     namespace: Azure.Communication.ProgrammableConnectivity
     model-namespace: false
   "@azure-tools/typespec-python":
     package-mode: "dataplane"
-    package-dir: "azure-programmableconnectivity"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-programmableconnectivity"
     namespace: "azure.programmableconnectivity"
     flavor: azure
     generate-test: true
@@ -31,7 +31,7 @@ options:
   "@azure-tools/typespec-ts":
     generate-metadata: true
     is-modular-library: false
-    package-dir: "programmableconnectivity-rest"
+    emitter-output-dir: "{output-dir}/{service-dir}/programmableconnectivity-rest"
     package-details:
       name: "@azure-rest/programmableconnectivity"
     flavor: azure

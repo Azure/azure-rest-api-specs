@@ -45,7 +45,7 @@ model ContentClassifier {
 
   @doc("The categories to classify against.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  categories: Record<ClassifierCategory>;
+  categories: Record<ClassifierCategoryDefinition>;
 
   @doc("Mode used to split input into content objects.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
@@ -59,7 +59,7 @@ model ContentClassifier {
 
 @added(Versions.v2025_05_01_preview)
 @doc("A classifier category.")
-model ClassifierCategory {
+model ClassifierCategoryDefinition {
   @doc("The description of the category.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   description?: string;
@@ -131,7 +131,7 @@ model ClassifyBinaryRequest {
 //   ...ClassifyRequest;
 
 //   @doc("The content categories to classify against.")
-//   categories?: Record<ClassifierCategory>;
+//   categories?: Record<ClassifierCategoryDefinition>;
 
 //   @doc("Mode used to split input into content objects.")
 //   splitMode?: ClassifierSplitMode = ClassifierSplitMode.noSplit;

@@ -1,0 +1,3118 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft Cognitive Language Service - Question Answering Authoring",
+    "version": "2023-04-01",
+    "description": "The language service API is a suite of natural language processing (NLP) skills\nbuilt with best-in-class Microsoft machine learning algorithms.  The API can be\nused to analyze unstructured text for tasks such as sentiment analysis, key\nphrase extraction, language detection and question answering.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{Endpoint}/language",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "Endpoint",
+        "in": "path",
+        "description": "Supported Cognitive Services endpoint (e.g., https://<resource-name>.api.cognitiveservices.azure.com).",
+        "required": true,
+        "type": "string",
+        "format": "uri",
+        "x-ms-skip-url-encoding": true
+      }
+    ]
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "ApiKeyAuth": []
+    },
+    {
+      "OAuth2Auth": [
+        "https://cognitiveservices.azure.com/.default"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "ApiKeyAuth": {
+      "type": "apiKey",
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header"
+    },
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://cognitiveservices.azure.com/.default": ""
+      }
+    }
+  },
+  "tags": [],
+  "paths": {
+    "/authoring/query-knowledgebases/projects": {
+      "get": {
+        "operationId": "QuestionAnsweringProjects_ListProjects",
+        "description": "Gets all projects for a user.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "description": "The maximum number of resources to return from the collection.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "An offset into the collection of the first resource to be returned.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "maxpagesize",
+            "in": "query",
+            "description": "The maximum number of resources to include in a single response.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedQuestionAnsweringProjectMetadata"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/SuccessfulProjectsListProjects.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/authoring/query-knowledgebases/projects/{projectName}": {
+      "get": {
+        "operationId": "QuestionAnsweringProjects_GetProjectDetails",
+        "description": "Get the requested project metadata.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Name of the project.",
+            "required": true,
+            "type": "string",
+            "maxLength": 100,
+            "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]{0,98}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/QuestionAnsweringProjectMetadata"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/SuccessfulGetProject.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "QuestionAnsweringProjects_CreateProject",
+        "description": "Create or update a project.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Name of the project.",
+            "required": true,
+            "type": "string",
+            "maxLength": 100,
+            "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]{0,98}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/QuestionAnsweringProjectMetadataCreateOrUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/QuestionAnsweringProjectMetadata"
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/QuestionAnsweringProjectMetadata"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/SuccessfulCreateProject.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "QuestionAnsweringProjects_DeleteProject",
+        "description": "Delete the project.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of the project to use.",
+            "required": true,
+            "type": "string",
+            "maxLength": 100,
+            "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]{0,98}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/SuccessfulDeleteProject.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "operation-location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/authoring/query-knowledgebases/projects/{projectName}/:export": {
+      "post": {
+        "operationId": "QuestionAnsweringProjects_Export",
+        "description": "Export project metadata and assets.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of the project to use.",
+            "required": true,
+            "type": "string",
+            "maxLength": 100,
+            "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]{0,98}[a-zA-Z0-9]$"
+          },
+          {
+            "$ref": "#/parameters/ExportQueryParameters.format"
+          },
+          {
+            "$ref": "#/parameters/ExportQueryParameters.assetKind"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/SuccessfulProjectSubmitExportJob.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "operation-location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/authoring/query-knowledgebases/projects/{projectName}/:import": {
+      "post": {
+        "operationId": "QuestionAnsweringProjects_Import",
+        "description": "Import project assets.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of the project to use.",
+            "required": true,
+            "type": "string",
+            "maxLength": 100,
+            "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]{0,98}[a-zA-Z0-9]$"
+          },
+          {
+            "$ref": "#/parameters/ImportQueryParameters.format"
+          },
+          {
+            "$ref": "#/parameters/ImportQueryParameters.assetKind"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Project assets the needs to be imported.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/ImportJobOptions"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/SuccessfulProjectSubmitImportJob.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "operation-location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/authoring/query-knowledgebases/projects/{projectName}/deployments": {
+      "get": {
+        "operationId": "QuestionAnsweringProjects_ListDeployments",
+        "description": "List all deployments of a project.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Name of the project.",
+            "required": true,
+            "type": "string",
+            "maxLength": 100,
+            "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]{0,98}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "description": "The maximum number of resources to return from the collection.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "An offset into the collection of the first resource to be returned.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "maxpagesize",
+            "in": "query",
+            "description": "The maximum number of resources to include in a single response.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedProjectDeployment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/SuccessfulProjectListDeployments.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/authoring/query-knowledgebases/projects/{projectName}/deployments/{deploymentName}": {
+      "put": {
+        "operationId": "QuestionAnsweringProjects_DeployProject",
+        "description": "Deploy project to production.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of the project to use.",
+            "required": true,
+            "type": "string",
+            "maxLength": 100,
+            "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]{0,98}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "deploymentName",
+            "in": "path",
+            "description": "The name of the specific deployment of the project to use.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/SuccessfulProjectSubmitDeployJob.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "operation-location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/authoring/query-knowledgebases/projects/{projectName}/deployments/{deploymentName}/jobs/{jobId}": {
+      "get": {
+        "operationId": "QuestionAnsweringProjects_GetDeployStatus",
+        "description": "Gets the status of a Deploy job.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Name of the project.",
+            "required": true,
+            "type": "string",
+            "maxLength": 100,
+            "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]{0,98}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "deploymentName",
+            "in": "path",
+            "description": "Name of the deployment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "The job ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/QuestionAnsweringAuthoringProjectDeploymentJobState"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/SuccessfulProjectDeployJobStatus.json"
+          }
+        }
+      }
+    },
+    "/authoring/query-knowledgebases/projects/{projectName}/export/jobs/{jobId}": {
+      "get": {
+        "operationId": "QuestionAnsweringProjects_GetExportStatus",
+        "description": "Gets the status of an Export job, once job completes, returns the project\nmetadata, and assets.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Name of the project.",
+            "required": true,
+            "type": "string",
+            "maxLength": 100,
+            "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]{0,98}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "The job ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/QuestionAnsweringAuthoringExportJobState"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/SuccessfulProjectExportJobStatus.json"
+          }
+        }
+      }
+    },
+    "/authoring/query-knowledgebases/projects/{projectName}/feedback": {
+      "post": {
+        "operationId": "QuestionAnsweringProjects_AddFeedback",
+        "description": "Update Active Learning feedback.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of the project to use.",
+            "required": true,
+            "type": "string",
+            "maxLength": 100,
+            "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]{0,98}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Feedback for Active Learning.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ActiveLearningFeedback"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Feedback recorded successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/SuccessfulUpdateActiveLearningFeedback.json"
+          }
+        }
+      }
+    },
+    "/authoring/query-knowledgebases/projects/{projectName}/import/jobs/{jobId}": {
+      "get": {
+        "operationId": "QuestionAnsweringProjects_GetImportStatus",
+        "description": "Gets the status of an Import job.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Name of the project.",
+            "required": true,
+            "type": "string",
+            "maxLength": 100,
+            "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]{0,98}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "The job ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/QuestionAnsweringAuthoringImportJobState"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/SuccessfulProjectImportJobStatus.json"
+          }
+        }
+      }
+    },
+    "/authoring/query-knowledgebases/projects/{projectName}/qnas": {
+      "get": {
+        "operationId": "QuestionAnsweringProjects_GetQnas",
+        "description": "Gets all the QnAs of a project.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Name of the project.",
+            "required": true,
+            "type": "string",
+            "maxLength": 100,
+            "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]{0,98}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "description": "The maximum number of resources to return from the collection.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "An offset into the collection of the first resource to be returned.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "maxpagesize",
+            "in": "query",
+            "description": "The maximum number of resources to include in a single response.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "source",
+            "in": "query",
+            "description": "Source of the QnA.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedRetrieveQnaRecord"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/SuccessfulGetQnas.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      },
+      "patch": {
+        "operationId": "QuestionAnsweringProjects_UpdateQnas",
+        "description": "Updates the QnAs of a project.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of the project to use.",
+            "required": true,
+            "type": "string",
+            "maxLength": 100,
+            "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]{0,98}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Update QnAs parameters of a project.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateQnaOptions"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/SuccessfulUpdateQnas.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "operation-location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/authoring/query-knowledgebases/projects/{projectName}/qnas/jobs/{jobId}": {
+      "get": {
+        "operationId": "QuestionAnsweringProjects_GetUpdateQnasStatus",
+        "description": "Gets the status of update QnAs job.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Name of the project.",
+            "required": true,
+            "type": "string",
+            "maxLength": 100,
+            "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]{0,98}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "The job ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/QuestionAnsweringAuthoringUpdateQnasJobState"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/SuccessfulUpdateQnasJobStatus.json"
+          }
+        }
+      }
+    },
+    "/authoring/query-knowledgebases/projects/{projectName}/sources": {
+      "get": {
+        "operationId": "QuestionAnsweringProjects_GetSources",
+        "description": "Gets all the sources of a project.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Name of the project.",
+            "required": true,
+            "type": "string",
+            "maxLength": 100,
+            "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]{0,98}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "description": "The maximum number of resources to return from the collection.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "An offset into the collection of the first resource to be returned.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "maxpagesize",
+            "in": "query",
+            "description": "The maximum number of resources to include in a single response.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedQnaSourceRecord"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/SuccessfulGetSources.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      },
+      "patch": {
+        "operationId": "QuestionAnsweringProjects_UpdateSources",
+        "description": "Updates the sources of a project.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of the project to use.",
+            "required": true,
+            "type": "string",
+            "maxLength": 100,
+            "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]{0,98}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Update sources parameters of a project.",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/UpdateSourceRecord"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/SuccessfulUpdateSources.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "operation-location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/authoring/query-knowledgebases/projects/{projectName}/sources/jobs/{jobId}": {
+      "get": {
+        "operationId": "QuestionAnsweringProjects_GetUpdateSourcesStatus",
+        "description": "Gets the status of update sources job.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Name of the project.",
+            "required": true,
+            "type": "string",
+            "maxLength": 100,
+            "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]{0,98}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "The job ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/QuestionAnsweringAuthoringUpdateSourcesJobState"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/SuccessfulUpdateSourcesJobStatus.json"
+          }
+        }
+      }
+    },
+    "/authoring/query-knowledgebases/projects/{projectName}/synonyms": {
+      "get": {
+        "operationId": "QuestionAnsweringProjects_GetSynonyms",
+        "description": "Gets all the synonyms of a project.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Name of the project.",
+            "required": true,
+            "type": "string",
+            "maxLength": 100,
+            "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]{0,98}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "description": "The maximum number of resources to return from the collection.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "An offset into the collection of the first resource to be returned.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "maxpagesize",
+            "in": "query",
+            "description": "The maximum number of resources to include in a single response.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedWordAlterations"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/SuccessfulGetSynonyms.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      },
+      "put": {
+        "operationId": "QuestionAnsweringProjects_UpdateSynonyms",
+        "description": "Updates all the synonyms of a project.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of the project to use.",
+            "required": true,
+            "type": "string",
+            "maxLength": 100,
+            "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]{0,98}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "All the synonyms of a project.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SynonymAssets"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Response payload after synonyms updated successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/SuccessfulUpdateSynonyms.json"
+          }
+        }
+      }
+    },
+    "/authoring/query-knowledgebases/projects/deletion-jobs/{jobId}": {
+      "get": {
+        "operationId": "QuestionAnsweringProjects_GetDeleteStatus",
+        "description": "Gets the status of a Project delete job.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "The job ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/QuestionAnsweringAuthoringProjectDeletionJobState"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/SuccessfulProjectDeleteJobStatus.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AcceptedResponse": {
+      "type": "object",
+      "description": "The request has been accepted for processing, but processing has not yet completed."
+    },
+    "ActiveLearningFeedback": {
+      "type": "object",
+      "description": "Feedback for Active Learning.",
+      "properties": {
+        "records": {
+          "type": "array",
+          "description": "A list of Feedback Records for Active Learning.",
+          "items": {
+            "$ref": "#/definitions/FeedbackRecord"
+          }
+        }
+      }
+    },
+    "AddFeedBackNoContentResponse": {
+      "type": "object",
+      "description": "Feedback recorded successfully."
+    },
+    "AssestKind": {
+      "type": "string",
+      "description": "Kind of the asset of the project.",
+      "enum": [
+        "qnas",
+        "synonyms"
+      ],
+      "x-ms-enum": {
+        "name": "AssestKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "qnas",
+            "value": "qnas",
+            "description": "Question and Answers."
+          },
+          {
+            "name": "synonyms",
+            "value": "synonyms",
+            "description": "Synonyms."
+          }
+        ]
+      }
+    },
+    "Assets": {
+      "type": "object",
+      "description": "All assets for this project.",
+      "properties": {
+        "synonyms": {
+          "type": "array",
+          "description": "Collection of synonyms.",
+          "maxItems": 10000,
+          "items": {
+            "$ref": "#/definitions/WordAlterations"
+          }
+        },
+        "qnas": {
+          "type": "array",
+          "description": "List of QnA records to import.",
+          "items": {
+            "$ref": "#/definitions/ImportQnaRecord"
+          }
+        }
+      }
+    },
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          }
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Azure REST API guidelines - https://aka.ms/AzureRestApiGuidelines#handling-errors.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "$ref": "#/definitions/ErrorCode",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          }
+        },
+        "innererror": {
+          "$ref": "#/definitions/InnerErrorModel",
+          "description": "An object containing more specific information than the current object about\nthe error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "ErrorCode": {
+      "type": "string",
+      "description": "Human-readable error code.",
+      "enum": [
+        "InvalidRequest",
+        "InvalidArgument",
+        "Unauthorized",
+        "Forbidden",
+        "NotFound",
+        "ProjectNotFound",
+        "OperationNotFound",
+        "AzureCognitiveSearchNotFound",
+        "AzureCognitiveSearchIndexNotFound",
+        "TooManyRequests",
+        "AzureCognitiveSearchThrottling",
+        "AzureCognitiveSearchIndexLimitReached",
+        "InternalServerError",
+        "ServiceUnavailable",
+        "Timeout",
+        "QuotaExceeded",
+        "Conflict",
+        "Warning"
+      ],
+      "x-ms-enum": {
+        "name": "ErrorCode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "InvalidRequest",
+            "value": "InvalidRequest",
+            "description": "Invalid request error"
+          },
+          {
+            "name": "InvalidArgument",
+            "value": "InvalidArgument",
+            "description": "Invalid argument error"
+          },
+          {
+            "name": "Unauthorized",
+            "value": "Unauthorized",
+            "description": "Unauthorized access error"
+          },
+          {
+            "name": "Forbidden",
+            "value": "Forbidden",
+            "description": "Forbidden access error"
+          },
+          {
+            "name": "NotFound",
+            "value": "NotFound",
+            "description": "Not found error"
+          },
+          {
+            "name": "ProjectNotFound",
+            "value": "ProjectNotFound",
+            "description": "Project not found error"
+          },
+          {
+            "name": "OperationNotFound",
+            "value": "OperationNotFound",
+            "description": "Operation not found error"
+          },
+          {
+            "name": "AzureCognitiveSearchNotFound",
+            "value": "AzureCognitiveSearchNotFound",
+            "description": "Azure Cognitive Search not found error"
+          },
+          {
+            "name": "AzureCognitiveSearchIndexNotFound",
+            "value": "AzureCognitiveSearchIndexNotFound",
+            "description": "Azure Cognitive Search index not found error"
+          },
+          {
+            "name": "TooManyRequests",
+            "value": "TooManyRequests",
+            "description": "Too many requests error"
+          },
+          {
+            "name": "AzureCognitiveSearchThrottling",
+            "value": "AzureCognitiveSearchThrottling",
+            "description": "Azure Cognitive Search throttling error"
+          },
+          {
+            "name": "AzureCognitiveSearchIndexLimitReached",
+            "value": "AzureCognitiveSearchIndexLimitReached",
+            "description": "Azure Cognitive Search index limit reached error"
+          },
+          {
+            "name": "InternalServerError",
+            "value": "InternalServerError",
+            "description": "Internal server error"
+          },
+          {
+            "name": "ServiceUnavailable",
+            "value": "ServiceUnavailable",
+            "description": "Service unavailable error"
+          },
+          {
+            "name": "Timeout",
+            "value": "Timeout",
+            "description": "Timeout error"
+          },
+          {
+            "name": "QuotaExceeded",
+            "value": "QuotaExceeded",
+            "description": "Quota exceeded error"
+          },
+          {
+            "name": "Conflict",
+            "value": "Conflict",
+            "description": "Conflict error"
+          },
+          {
+            "name": "Warning",
+            "value": "Warning",
+            "description": "Warning error"
+          }
+        ]
+      }
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "description": "Error response.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "ExportJobResultUrl": {
+      "type": "object",
+      "description": "URL to download the result of the Export Job.",
+      "properties": {
+        "resultUrl": {
+          "type": "string",
+          "description": "URL to download the result of the Export Job."
+        }
+      },
+      "required": [
+        "resultUrl"
+      ]
+    },
+    "FeedbackRecord": {
+      "type": "object",
+      "description": "Feedback Record for Active Learning.",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "Unique identifier of the user."
+        },
+        "userQuestion": {
+          "type": "string",
+          "description": "User suggested question for the QnA."
+        },
+        "qnaId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Unique ID of the QnA."
+        }
+      }
+    },
+    "ImportJobOptions": {
+      "type": "object",
+      "description": "Project assets that need to be imported.",
+      "properties": {
+        "metadata": {
+          "$ref": "#/definitions/QuestionAnsweringProjectMetadata",
+          "description": "Parameters needed to create the project."
+        },
+        "assets": {
+          "$ref": "#/definitions/Assets",
+          "description": "All assets for this project."
+        },
+        "fileUri": {
+          "type": "string",
+          "description": "Import data File URI."
+        }
+      }
+    },
+    "ImportQnaRecord": {
+      "type": "object",
+      "description": "Import QnA Record.",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Unique ID for the QnA.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "answer": {
+          "type": "string",
+          "description": "Answer text.",
+          "minLength": 1,
+          "maxLength": 25000
+        },
+        "source": {
+          "type": "string",
+          "description": "Source from which QnA was indexed e.g.\nhttps://docs.microsoft.com/en-us/azure/cognitive-services/QnAMaker/FAQs .",
+          "maxLength": 300
+        },
+        "questions": {
+          "type": "array",
+          "description": "List of questions associated with the answer.",
+          "minItems": 1,
+          "maxItems": 100,
+          "items": {
+            "type": "string"
+          }
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Metadata associated with the answer, useful to categorize or filter question\nanswers.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "dialog": {
+          "$ref": "#/definitions/QnaDialog",
+          "description": "Context of a QnA."
+        },
+        "activeLearningSuggestions": {
+          "type": "array",
+          "description": "List of Active Learning suggestions for the QnA.",
+          "items": {
+            "$ref": "#/definitions/SuggestedQuestionsCluster"
+          }
+        },
+        "lastUpdatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date-time when the QnA was last updated."
+        },
+        "sourceDisplayName": {
+          "type": "string",
+          "description": "Friendly name of the Source.",
+          "minLength": 1,
+          "maxLength": 200
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "InnerErrorCode": {
+      "type": "string",
+      "description": "Human-readable error code.",
+      "enum": [
+        "InvalidRequest",
+        "InvalidParameterValue",
+        "KnowledgeBaseNotFound",
+        "AzureCognitiveSearchNotFound",
+        "AzureCognitiveSearchThrottling",
+        "ExtractionFailure",
+        "InvalidRequestBodyFormat",
+        "EmptyRequest",
+        "MissingInputDocuments",
+        "InvalidDocument",
+        "ModelVersionIncorrect",
+        "InvalidDocumentBatch",
+        "UnsupportedLanguageCode",
+        "InvalidCountryHint"
+      ],
+      "x-ms-enum": {
+        "name": "InnerErrorCode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "InvalidRequest",
+            "value": "InvalidRequest",
+            "description": "Invalid request error"
+          },
+          {
+            "name": "InvalidParameterValue",
+            "value": "InvalidParameterValue",
+            "description": "Invalid parameter value error"
+          },
+          {
+            "name": "KnowledgeBaseNotFound",
+            "value": "KnowledgeBaseNotFound",
+            "description": "Knowledge base not found error"
+          },
+          {
+            "name": "AzureCognitiveSearchNotFound",
+            "value": "AzureCognitiveSearchNotFound",
+            "description": "Azure Cognitive Search not found error"
+          },
+          {
+            "name": "AzureCognitiveSearchThrottling",
+            "value": "AzureCognitiveSearchThrottling",
+            "description": "Azure Cognitive Search throttling error"
+          },
+          {
+            "name": "ExtractionFailure",
+            "value": "ExtractionFailure",
+            "description": "Extraction failure error"
+          },
+          {
+            "name": "InvalidRequestBodyFormat",
+            "value": "InvalidRequestBodyFormat",
+            "description": "Invalid request body format error"
+          },
+          {
+            "name": "EmptyRequest",
+            "value": "EmptyRequest",
+            "description": "Empty request error"
+          },
+          {
+            "name": "MissingInputDocuments",
+            "value": "MissingInputDocuments",
+            "description": "Missing input documents error"
+          },
+          {
+            "name": "InvalidDocument",
+            "value": "InvalidDocument",
+            "description": "Invalid document error"
+          },
+          {
+            "name": "ModelVersionIncorrect",
+            "value": "ModelVersionIncorrect",
+            "description": "Model version incorrect error"
+          },
+          {
+            "name": "InvalidDocumentBatch",
+            "value": "InvalidDocumentBatch",
+            "description": "Invalid document batch error"
+          },
+          {
+            "name": "UnsupportedLanguageCode",
+            "value": "UnsupportedLanguageCode",
+            "description": "Unsupported language code error"
+          },
+          {
+            "name": "InvalidCountryHint",
+            "value": "InvalidCountryHint",
+            "description": "Invalid country hint error"
+          }
+        ]
+      }
+    },
+    "InnerErrorModel": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per\nMicrosoft One API guidelines -\nhttps://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "properties": {
+        "code": {
+          "$ref": "#/definitions/InnerErrorCode",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message."
+        },
+        "details": {
+          "type": "object",
+          "description": "Error details.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "target": {
+          "type": "string",
+          "description": "Error target."
+        },
+        "innererror": {
+          "$ref": "#/definitions/InnerErrorModel",
+          "description": "An object containing more specific information than the current object about\nthe error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "LastUpdatedDateTimeParameter": {
+      "type": "object",
+      "description": "Last updated date-time parameter.",
+      "properties": {
+        "lastUpdatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date-time when the QnA was last updated."
+        }
+      }
+    },
+    "NoContentResponse": {
+      "type": "object",
+      "description": "There is no content to send for this request, but the headers may be useful."
+    },
+    "PagedProjectDeployment": {
+      "type": "object",
+      "description": "Paged collection of ProjectDeployment items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ProjectDeployment items on this page",
+          "items": {
+            "$ref": "#/definitions/ProjectDeployment"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedQnaSourceRecord": {
+      "type": "object",
+      "description": "Paged collection of QnaSourceRecord items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The QnaSourceRecord items on this page",
+          "items": {
+            "$ref": "#/definitions/QnaSourceRecord"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedQuestionAnsweringProjectMetadata": {
+      "type": "object",
+      "description": "Paged collection of QuestionAnsweringProjectMetadata items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The QuestionAnsweringProjectMetadata items on this page",
+          "items": {
+            "$ref": "#/definitions/QuestionAnsweringProjectMetadata"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedRetrieveQnaRecord": {
+      "type": "object",
+      "description": "Paged collection of RetrieveQnaRecord items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The RetrieveQnaRecord items on this page",
+          "items": {
+            "$ref": "#/definitions/RetrieveQnaRecord"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedWordAlterations": {
+      "type": "object",
+      "description": "Paged collection of WordAlterations items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The WordAlterations items on this page",
+          "items": {
+            "$ref": "#/definitions/WordAlterations"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ProjectDeployment": {
+      "type": "object",
+      "description": "Project deployment details.",
+      "properties": {
+        "deploymentName": {
+          "type": "string",
+          "description": "Name of the deployment.",
+          "readOnly": true
+        },
+        "lastDeployedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Represents the project last deployment date-time."
+        }
+      },
+      "required": [
+        "deploymentName"
+      ]
+    },
+    "ProjectSettings": {
+      "type": "object",
+      "description": "Configurable settings of the Project.",
+      "properties": {
+        "defaultAnswer": {
+          "type": "string",
+          "description": "Default Answer response when no good match is found in the knowledge base."
+        }
+      }
+    },
+    "QnaDialog": {
+      "type": "object",
+      "description": "Dialog associated with QnA Record.",
+      "properties": {
+        "isContextOnly": {
+          "type": "boolean",
+          "description": "To mark if a prompt is relevant only with a previous question or not. If true,\ndo not include this QnA as answer for queries without context; otherwise,\nignores context and includes this QnA in answers."
+        },
+        "prompts": {
+          "type": "array",
+          "description": "List of prompts associated with the answer.",
+          "maxItems": 20,
+          "items": {
+            "$ref": "#/definitions/QnaPrompt"
+          }
+        }
+      }
+    },
+    "QnaPrompt": {
+      "type": "object",
+      "description": "Prompt for an answer.",
+      "properties": {
+        "displayOrder": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Index of the prompt. It is used for ordering of the prompts."
+        },
+        "qnaId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "ID of the QnA corresponding to the prompt."
+        },
+        "qna": {
+          "$ref": "#/definitions/QnaRecord",
+          "description": "QnA record. Either QnAId or QnA record needs to be present in a Prompt."
+        },
+        "displayText": {
+          "type": "string",
+          "description": "Text displayed to represent a follow up question prompt.",
+          "maxLength": 200
+        }
+      }
+    },
+    "QnaRecord": {
+      "type": "object",
+      "description": "QnA record.",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Unique ID for the QnA.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "answer": {
+          "type": "string",
+          "description": "Answer text.",
+          "minLength": 1,
+          "maxLength": 25000
+        },
+        "source": {
+          "type": "string",
+          "description": "Source from which QnA was indexed e.g.\nhttps://docs.microsoft.com/en-us/azure/cognitive-services/QnAMaker/FAQs .",
+          "maxLength": 300
+        },
+        "questions": {
+          "type": "array",
+          "description": "List of questions associated with the answer.",
+          "minItems": 1,
+          "maxItems": 100,
+          "items": {
+            "type": "string"
+          }
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Metadata associated with the answer, useful to categorize or filter question\nanswers.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "dialog": {
+          "$ref": "#/definitions/QnaDialog",
+          "description": "Context of a QnA."
+        },
+        "activeLearningSuggestions": {
+          "type": "array",
+          "description": "List of Active Learning suggestions for the QnA.",
+          "items": {
+            "$ref": "#/definitions/SuggestedQuestionsCluster"
+          }
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "QnaSourceMetadata": {
+      "type": "object",
+      "description": "Input source file or url details.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Friendly name of the Source.",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "source": {
+          "type": "string",
+          "description": "Unique source identifier. Name of the file if it's a 'file' source; otherwise,\nthe complete URL if it's a 'url' source.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "sourceUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "URI location for the file or url."
+        },
+        "sourceKind": {
+          "$ref": "#/definitions/sourceKind",
+          "description": "Supported source types."
+        },
+        "contentStructureKind": {
+          "type": "string",
+          "description": "Content structure type for sources.",
+          "default": "unstructured",
+          "enum": [
+            "unstructured"
+          ],
+          "x-ms-enum": {
+            "name": "sourceContentStructureKind",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "unstructured",
+                "value": "unstructured",
+                "description": "Unstructured."
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "source",
+        "sourceUri",
+        "sourceKind"
+      ]
+    },
+    "QnaSourceRecord": {
+      "type": "object",
+      "description": "Custom source record with last updated date-time.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Friendly name of the Source.",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "source": {
+          "type": "string",
+          "description": "Unique source identifier. Name of the file if it's a 'file' source; otherwise,\nthe complete URL if it's a 'url' source.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "sourceUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "URI location for the file or url."
+        },
+        "sourceKind": {
+          "$ref": "#/definitions/sourceKind",
+          "description": "Supported source types."
+        },
+        "contentStructureKind": {
+          "type": "string",
+          "description": "Content structure type for sources.",
+          "default": "unstructured",
+          "enum": [
+            "unstructured"
+          ],
+          "x-ms-enum": {
+            "name": "sourceContentStructureKind",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "unstructured",
+                "value": "unstructured",
+                "description": "Unstructured."
+              }
+            ]
+          }
+        },
+        "lastUpdatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date-time when the QnA was last updated."
+        }
+      },
+      "required": [
+        "source",
+        "sourceUri",
+        "sourceKind"
+      ]
+    },
+    "QuestionAnsweringAuthoringExportJobState": {
+      "type": "object",
+      "description": "Export job status, project metadata, and assets.",
+      "properties": {
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date time of the job."
+        },
+        "expirationDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The expiration date time of the job."
+        },
+        "jobId": {
+          "type": "string",
+          "description": "The job ID.",
+          "readOnly": true
+        },
+        "lastUpdatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last date time the job was updated."
+        },
+        "status": {
+          "$ref": "#/definitions/jobStatus",
+          "description": "Job Status."
+        },
+        "errors": {
+          "type": "array",
+          "description": "The errors encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          }
+        },
+        "resultUrl": {
+          "type": "string",
+          "description": "URL to download the result of the Export Job."
+        }
+      },
+      "required": [
+        "createdDateTime",
+        "jobId",
+        "lastUpdatedDateTime",
+        "status",
+        "resultUrl"
+      ]
+    },
+    "QuestionAnsweringAuthoringImportJobState": {
+      "type": "object",
+      "description": "Import job status, project metadata, and assets.",
+      "properties": {
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date time of the job."
+        },
+        "expirationDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The expiration date time of the job."
+        },
+        "jobId": {
+          "type": "string",
+          "description": "The job ID.",
+          "readOnly": true
+        },
+        "lastUpdatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last date time the job was updated."
+        },
+        "status": {
+          "$ref": "#/definitions/jobStatus",
+          "description": "Job Status."
+        },
+        "errors": {
+          "type": "array",
+          "description": "The errors encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          }
+        }
+      },
+      "required": [
+        "createdDateTime",
+        "jobId",
+        "lastUpdatedDateTime",
+        "status"
+      ]
+    },
+    "QuestionAnsweringAuthoringJobState": {
+      "type": "object",
+      "description": "Base class for all LRO Job states",
+      "properties": {
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date time of the job."
+        },
+        "expirationDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The expiration date time of the job."
+        },
+        "jobId": {
+          "type": "string",
+          "description": "The job ID.",
+          "readOnly": true
+        },
+        "lastUpdatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last date time the job was updated."
+        },
+        "status": {
+          "$ref": "#/definitions/jobStatus",
+          "description": "Job Status."
+        },
+        "errors": {
+          "type": "array",
+          "description": "The errors encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          }
+        }
+      },
+      "required": [
+        "createdDateTime",
+        "jobId",
+        "lastUpdatedDateTime",
+        "status"
+      ]
+    },
+    "QuestionAnsweringAuthoringProjectDeletionJobState": {
+      "type": "object",
+      "description": "Represents the state of a project deletion job.",
+      "properties": {
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date time of the job."
+        },
+        "expirationDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The expiration date time of the job."
+        },
+        "jobId": {
+          "type": "string",
+          "description": "The job ID.",
+          "readOnly": true
+        },
+        "lastUpdatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last date time the job was updated."
+        },
+        "status": {
+          "$ref": "#/definitions/jobStatus",
+          "description": "Job Status."
+        },
+        "errors": {
+          "type": "array",
+          "description": "The errors encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          }
+        }
+      },
+      "required": [
+        "createdDateTime",
+        "jobId",
+        "lastUpdatedDateTime",
+        "status"
+      ]
+    },
+    "QuestionAnsweringAuthoringProjectDeploymentJobState": {
+      "type": "object",
+      "description": "Job state represents the job metadata and any errors.",
+      "properties": {
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date time of the job."
+        },
+        "expirationDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The expiration date time of the job."
+        },
+        "jobId": {
+          "type": "string",
+          "description": "The job ID.",
+          "readOnly": true
+        },
+        "lastUpdatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last date time the job was updated."
+        },
+        "status": {
+          "$ref": "#/definitions/jobStatus",
+          "description": "Job Status."
+        },
+        "errors": {
+          "type": "array",
+          "description": "The errors encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          }
+        }
+      },
+      "required": [
+        "createdDateTime",
+        "jobId",
+        "lastUpdatedDateTime",
+        "status"
+      ]
+    },
+    "QuestionAnsweringAuthoringUpdateQnasJobState": {
+      "type": "object",
+      "description": "Job state represents the job metadata and any errors.",
+      "properties": {
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date time of the job."
+        },
+        "expirationDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The expiration date time of the job."
+        },
+        "jobId": {
+          "type": "string",
+          "description": "The job ID.",
+          "readOnly": true
+        },
+        "lastUpdatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last date time the job was updated."
+        },
+        "status": {
+          "$ref": "#/definitions/jobStatus",
+          "description": "Job Status."
+        },
+        "errors": {
+          "type": "array",
+          "description": "The errors encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          }
+        }
+      },
+      "required": [
+        "createdDateTime",
+        "jobId",
+        "lastUpdatedDateTime",
+        "status"
+      ]
+    },
+    "QuestionAnsweringAuthoringUpdateSourcesJobState": {
+      "type": "object",
+      "description": "Job state represents the job metadata and any errors.",
+      "properties": {
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date time of the job."
+        },
+        "expirationDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The expiration date time of the job."
+        },
+        "jobId": {
+          "type": "string",
+          "description": "The job ID.",
+          "readOnly": true
+        },
+        "lastUpdatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last date time the job was updated."
+        },
+        "status": {
+          "$ref": "#/definitions/jobStatus",
+          "description": "Job Status."
+        },
+        "errors": {
+          "type": "array",
+          "description": "The errors encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          }
+        }
+      },
+      "required": [
+        "createdDateTime",
+        "jobId",
+        "lastUpdatedDateTime",
+        "status"
+      ]
+    },
+    "QuestionAnsweringProjectMetadata": {
+      "type": "object",
+      "description": "Represents the project.",
+      "properties": {
+        "projectName": {
+          "type": "string",
+          "description": "Name of the project.",
+          "maxLength": 100,
+          "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]{0,98}[a-zA-Z0-9]$",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the project."
+        },
+        "language": {
+          "type": "string",
+          "description": "Language of the text records. This is BCP-47 representation of a language. For\nexample, use \"en\" for English; \"es\" for Spanish etc. If not set, use \"en\" for\nEnglish as default."
+        },
+        "multilingualResource": {
+          "type": "boolean",
+          "description": "Resource enabled for multiple languages across projects or not."
+        },
+        "settings": {
+          "$ref": "#/definitions/ProjectSettings",
+          "description": "Configurable settings of the Project."
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Project creation date-time.",
+          "readOnly": true
+        },
+        "lastModifiedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Represents the project last modified date-time.",
+          "readOnly": true
+        },
+        "lastDeployedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Represents the project last deployment date-time.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "projectName"
+      ]
+    },
+    "QuestionAnsweringProjectMetadataCreateOrUpdate": {
+      "type": "object",
+      "description": "Represents the project.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description of the project."
+        },
+        "language": {
+          "type": "string",
+          "description": "Language of the text records. This is BCP-47 representation of a language. For\nexample, use \"en\" for English; \"es\" for Spanish etc. If not set, use \"en\" for\nEnglish as default."
+        },
+        "multilingualResource": {
+          "type": "boolean",
+          "description": "Resource enabled for multiple languages across projects or not."
+        },
+        "settings": {
+          "$ref": "#/definitions/ProjectSettings",
+          "description": "Configurable settings of the Project."
+        }
+      }
+    },
+    "RefreshSourceOptions": {
+      "type": "object",
+      "description": "Boolean flag used to refresh data from the Source.",
+      "properties": {
+        "refresh": {
+          "type": "boolean",
+          "description": "Boolean flag used to refresh data from the Source."
+        }
+      }
+    },
+    "RetrieveQnaRecord": {
+      "type": "object",
+      "description": "QnA Record with last updated date-time.",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Unique ID for the QnA.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "answer": {
+          "type": "string",
+          "description": "Answer text.",
+          "minLength": 1,
+          "maxLength": 25000
+        },
+        "source": {
+          "type": "string",
+          "description": "Source from which QnA was indexed e.g.\nhttps://docs.microsoft.com/en-us/azure/cognitive-services/QnAMaker/FAQs .",
+          "maxLength": 300
+        },
+        "questions": {
+          "type": "array",
+          "description": "List of questions associated with the answer.",
+          "minItems": 1,
+          "maxItems": 100,
+          "items": {
+            "type": "string"
+          }
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Metadata associated with the answer, useful to categorize or filter question\nanswers.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "dialog": {
+          "$ref": "#/definitions/QnaDialog",
+          "description": "Context of a QnA."
+        },
+        "activeLearningSuggestions": {
+          "type": "array",
+          "description": "List of Active Learning suggestions for the QnA.",
+          "items": {
+            "$ref": "#/definitions/SuggestedQuestionsCluster"
+          }
+        },
+        "lastUpdatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date-time when the QnA was last updated."
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "SourceDisplayNameParameter": {
+      "type": "object",
+      "description": "Friendly name of the Source parameter.",
+      "properties": {
+        "sourceDisplayName": {
+          "type": "string",
+          "description": "Friendly name of the Source.",
+          "minLength": 1,
+          "maxLength": 200
+        }
+      }
+    },
+    "SuggestedQuestion": {
+      "type": "object",
+      "description": "Question suggested by the Active Learning feature.",
+      "properties": {
+        "question": {
+          "type": "string",
+          "description": "Question suggested by the Active Learning feature."
+        },
+        "userSuggestedCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of times the question was suggested explicitly by the user."
+        },
+        "autoSuggestedCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of times the question was suggested automatically by the Active\nLearning algorithm."
+        }
+      }
+    },
+    "SuggestedQuestionsCluster": {
+      "type": "object",
+      "description": "Active Learning suggested questions cluster details.",
+      "properties": {
+        "clusterHead": {
+          "type": "string",
+          "description": "Question chosen as the head of suggested questions cluster by Active Learning\nclustering algorithm."
+        },
+        "suggestedQuestions": {
+          "type": "array",
+          "description": "List of all suggested questions for the QnA.",
+          "items": {
+            "$ref": "#/definitions/SuggestedQuestion"
+          }
+        }
+      }
+    },
+    "SynonymAssets": {
+      "type": "object",
+      "description": "Request payload for updating synonyms.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The WordAlterations items on this page",
+          "items": {
+            "$ref": "#/definitions/WordAlterations"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "UpdateQnaOptions": {
+      "type": "array",
+      "description": "A list of QnAs to be updated.",
+      "items": {
+        "$ref": "#/definitions/UpdateQnaRecord"
+      }
+    },
+    "UpdateQnaRecord": {
+      "type": "object",
+      "description": "QnA record to be updated.",
+      "properties": {
+        "op": {
+          "$ref": "#/definitions/updateOperationKind",
+          "description": "Update operation type for assets."
+        },
+        "value": {
+          "$ref": "#/definitions/QnaRecord",
+          "description": "QnA record."
+        }
+      },
+      "required": [
+        "op",
+        "value"
+      ]
+    },
+    "UpdateQnaSourceRecord": {
+      "type": "object",
+      "description": "Update source record.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Friendly name of the Source.",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "source": {
+          "type": "string",
+          "description": "Unique source identifier. Name of the file if it's a 'file' source; otherwise,\nthe complete URL if it's a 'url' source.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "sourceUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "URI location for the file or url."
+        },
+        "sourceKind": {
+          "$ref": "#/definitions/sourceKind",
+          "description": "Supported source types."
+        },
+        "contentStructureKind": {
+          "type": "string",
+          "description": "Content structure type for sources.",
+          "default": "unstructured",
+          "enum": [
+            "unstructured"
+          ],
+          "x-ms-enum": {
+            "name": "sourceContentStructureKind",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "unstructured",
+                "value": "unstructured",
+                "description": "Unstructured."
+              }
+            ]
+          }
+        },
+        "refresh": {
+          "type": "boolean",
+          "description": "Boolean flag used to refresh data from the Source."
+        }
+      },
+      "required": [
+        "source",
+        "sourceUri",
+        "sourceKind"
+      ]
+    },
+    "UpdateSourceRecord": {
+      "type": "object",
+      "description": "Source to be updated.",
+      "properties": {
+        "op": {
+          "$ref": "#/definitions/updateOperationKind",
+          "description": "Update operation type for assets."
+        },
+        "value": {
+          "$ref": "#/definitions/UpdateQnaSourceRecord",
+          "description": "Update source record."
+        }
+      },
+      "required": [
+        "op",
+        "value"
+      ]
+    },
+    "UpdateSynonymsWithNoContentResponse": {
+      "type": "object",
+      "description": "Response payload after synonyms updated successfully."
+    },
+    "WordAlterations": {
+      "type": "object",
+      "description": "Collection of word alterations.",
+      "properties": {
+        "alterations": {
+          "type": "array",
+          "description": "Collection of word alterations.",
+          "maxItems": 20,
+          "items": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "alterations"
+      ]
+    },
+    "format": {
+      "type": "string",
+      "description": "Knowledge base Import or Export format.",
+      "enum": [
+        "json",
+        "tsv",
+        "excel"
+      ],
+      "x-ms-enum": {
+        "name": "format",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "json",
+            "value": "json",
+            "description": "Export or Import QnA assets in JSON format."
+          },
+          {
+            "name": "tsv",
+            "value": "tsv",
+            "description": "Export or Import knowledge base replica including all assets and metadata in\nExcel format."
+          },
+          {
+            "name": "excel",
+            "value": "excel",
+            "description": "Export or Import knowledge base replica including all assets and metadata in\nTsv format."
+          }
+        ]
+      }
+    },
+    "jobStatus": {
+      "type": "string",
+      "description": "Job Status.",
+      "enum": [
+        "notStarted",
+        "running",
+        "succeeded",
+        "failed",
+        "cancelled",
+        "cancelling",
+        "partiallyCompleted"
+      ],
+      "x-ms-enum": {
+        "name": "jobStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "notStarted",
+            "value": "notStarted"
+          },
+          {
+            "name": "running",
+            "value": "running"
+          },
+          {
+            "name": "succeeded",
+            "value": "succeeded"
+          },
+          {
+            "name": "failed",
+            "value": "failed"
+          },
+          {
+            "name": "cancelled",
+            "value": "cancelled"
+          },
+          {
+            "name": "cancelling",
+            "value": "cancelling"
+          },
+          {
+            "name": "partiallyCompleted",
+            "value": "partiallyCompleted"
+          }
+        ]
+      }
+    },
+    "sourceContentStructureKind": {
+      "type": "string",
+      "description": "Content structure type for sources.",
+      "enum": [
+        "unstructured"
+      ],
+      "x-ms-enum": {
+        "name": "sourceContentStructureKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "unstructured",
+            "value": "unstructured",
+            "description": "Unstructured."
+          }
+        ]
+      }
+    },
+    "sourceKind": {
+      "type": "string",
+      "description": "Supported source types.",
+      "enum": [
+        "file",
+        "url"
+      ],
+      "x-ms-enum": {
+        "name": "sourceKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "file",
+            "value": "file",
+            "description": "File Source."
+          },
+          {
+            "name": "url",
+            "value": "url",
+            "description": "URI Source."
+          }
+        ]
+      }
+    },
+    "updateOperationKind": {
+      "type": "string",
+      "description": "Update operation type for assets.",
+      "enum": [
+        "add",
+        "delete",
+        "replace"
+      ],
+      "x-ms-enum": {
+        "name": "updateOperationKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "add",
+            "value": "add",
+            "description": "Add operation."
+          },
+          {
+            "name": "delete",
+            "value": "delete",
+            "description": "Delete operation."
+          },
+          {
+            "name": "replace",
+            "value": "replace",
+            "description": "Replace operation."
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    },
+    "ExportQueryParameters.assetKind": {
+      "name": "assetKind",
+      "in": "query",
+      "description": "Kind of the asset of the project.",
+      "required": false,
+      "type": "string",
+      "enum": [
+        "qnas",
+        "synonyms"
+      ],
+      "x-ms-enum": {
+        "name": "AssestKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "qnas",
+            "value": "qnas",
+            "description": "Question and Answers."
+          },
+          {
+            "name": "synonyms",
+            "value": "synonyms",
+            "description": "Synonyms."
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "ExportQueryParameters.format": {
+      "name": "format",
+      "in": "query",
+      "description": "Knowledge base Import or Export format.",
+      "required": false,
+      "type": "string",
+      "default": "json",
+      "enum": [
+        "json",
+        "tsv",
+        "excel"
+      ],
+      "x-ms-enum": {
+        "name": "format",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "json",
+            "value": "json",
+            "description": "Export or Import QnA assets in JSON format."
+          },
+          {
+            "name": "tsv",
+            "value": "tsv",
+            "description": "Export or Import knowledge base replica including all assets and metadata in\nExcel format."
+          },
+          {
+            "name": "excel",
+            "value": "excel",
+            "description": "Export or Import knowledge base replica including all assets and metadata in\nTsv format."
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "ImportQueryParameters.assetKind": {
+      "name": "assetKind",
+      "in": "query",
+      "description": "Kind of the asset of the project.",
+      "required": false,
+      "type": "string",
+      "enum": [
+        "qnas",
+        "synonyms"
+      ],
+      "x-ms-enum": {
+        "name": "AssestKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "qnas",
+            "value": "qnas",
+            "description": "Question and Answers."
+          },
+          {
+            "name": "synonyms",
+            "value": "synonyms",
+            "description": "Synonyms."
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "ImportQueryParameters.format": {
+      "name": "format",
+      "in": "query",
+      "description": "Knowledge base Import or Export format.",
+      "required": false,
+      "type": "string",
+      "default": "json",
+      "enum": [
+        "json",
+        "tsv",
+        "excel"
+      ],
+      "x-ms-enum": {
+        "name": "format",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "json",
+            "value": "json",
+            "description": "Export or Import QnA assets in JSON format."
+          },
+          {
+            "name": "tsv",
+            "value": "tsv",
+            "description": "Export or Import knowledge base replica including all assets and metadata in\nExcel format."
+          },
+          {
+            "name": "excel",
+            "value": "excel",
+            "description": "Export or Import knowledge base replica including all assets and metadata in\nTsv format."
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

@@ -3,11 +3,13 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.ElasticSan;
 
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(ElasticSanUpdate.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ElasticSanUpdate.properties
+);
 
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(PrivateLinkResource.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateLinkResource.properties
+);
 
 @@clientName(EncryptionProperties.identity, "EncryptionIdentity");
 
@@ -17,38 +19,40 @@ using Microsoft.ElasticSan;
 
 @@clientName(VirtualNetworkRule.id, "VirtualNetworkResourceId");
 
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(VolumeGroupUpdate.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(VolumeGroupUpdate.properties
+);
 
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(VolumeUpdate.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(VolumeUpdate.properties);
 
 @@clientName(ElasticSans.create::parameters.resource, "parameters");
 @@clientName(ElasticSans.update::parameters.properties, "parameters");
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(ElasticSan.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ElasticSan.properties);
 
 @@clientName(PrivateEndpointConnections.create::parameters.resource,
   "parameters"
 );
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(PrivateEndpointConnection.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateEndpointConnection.properties
+);
 
 @@clientName(VolumeGroups.create::parameters.resource, "parameters");
 @@clientName(VolumeGroups.update::parameters.properties, "parameters");
 @@clientName(VolumeGroups.preBackup::parameters.body, "parameters");
 @@clientName(VolumeGroups.preRestore::parameters.body, "parameters");
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(VolumeGroup.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(VolumeGroup.properties);
 
 @@clientName(Snapshots.create::parameters.resource, "parameters");
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(Snapshot.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Snapshot.properties);
 
 @@clientName(Volumes.create::parameters.resource, "parameters");
 @@clientName(Volumes.update::parameters.properties, "parameters");
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(Volume.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Volume.properties);
 
 @@clientName(AutoScaleProperties.scaleUpProperties, "ScaleUpProperties");
 @@clientName(EncryptionProperties.keyVaultProperties, "KeyVaultProperties");
@@ -85,3 +89,10 @@ using Microsoft.ElasticSan;
 // VolumeGroups interface operations
 @@clientLocation(VolumeGroups.preBackup, Volumes);
 @@clientLocation(VolumeGroups.preRestore, Volumes);
+
+@@clientName(`x-ms-delete-snapshots`, "XMsDeleteSnapshots", "python");
+@@clientName(`x-ms-force-delete`, "XMsForceDelete", "python");
+@@clientName(`x-ms-access-soft-deleted-resources`,
+  "XMsAccessSoftDeletedResources",
+  "python"
+);

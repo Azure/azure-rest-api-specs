@@ -326,7 +326,7 @@
       },
       "patch": {
         "operationId": "Jobs_Update",
-        "description": "Update job properties.",
+        "description": "OLD METHOD: Update job properties.",
         "consumes": [
           "application/json-patch+json"
         ],
@@ -1538,18 +1538,6 @@
           "description": "The time when a job was successfully cancelled.",
           "readOnly": true
         },
-        "tags": {
-          "type": "array",
-          "description": "List of user-supplied tags associated with the job.",
-          "items": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
         "quantumComputingData": {
           "$ref": "#/definitions/QuantumComputingData",
           "description": "Quantum computing data.",
@@ -1576,6 +1564,18 @@
           "description": "The format of the output data.",
           "x-ms-mutability": [
             "read",
+            "create"
+          ]
+        },
+        "tags": {
+          "type": "array",
+          "description": "List of user-supplied tags associated with the job.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
             "create"
           ]
         }

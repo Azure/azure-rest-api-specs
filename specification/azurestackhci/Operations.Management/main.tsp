@@ -16,7 +16,7 @@ using TypeSpec.Versioning;
 @armProviderNamespace
 @service(#{ title: "Microsoft.AzureStackHCI" })
 @versioned(Versions)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
 namespace Microsoft.AzureStackHCI;
 
 /**
@@ -57,4 +57,14 @@ enum Versions {
    * The 2025-06-01-preview API version.
    */
   v2025_06_01_preview: "2025-06-01-preview",
+
+  /**
+   * The 2025-09-15-preview API version.
+   */
+  v2025_09_15_preview: "2025-09-15-preview",
+
+  /**
+   * The 2025-10-01 API version.
+   */
+  v2025_10_01: "2025-10-01",
 }

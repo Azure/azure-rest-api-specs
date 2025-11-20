@@ -6,7 +6,7 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
-  - tag: schema-azuresphere-2022-09-01-preview
+  - tag: schema-azuresphere-2024-04-01
 
 ```
 
@@ -14,11 +14,11 @@ Please also specify `--azureresourceschema-folder=<path to the root directory of
 
 ### Tag: schema-azuresphere-2022-09-01-preview and azureresourceschema
 
-``` yaml $(tag) == 'schema-azuresphere-2022-09-01-preview' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-azuresphere-2024-04-01' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
 
 # all the input files in this apiVersion
 input-file:
-  - Microsoft.AzureSphere/preview/2022-09-01-preview/azuresphere.json
+  - Microsoft.AzureSphere/preview/2024-04-01/azuresphere.json
 
 ```

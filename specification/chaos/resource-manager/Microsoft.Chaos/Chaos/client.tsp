@@ -50,17 +50,19 @@ using Microsoft.Chaos;
   "java"
 );
 
-#suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(Experiment.properties);
-#suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(ExperimentExecution.properties);
-#suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(TargetType.properties);
-#suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(Capability.properties);
-#suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(CapabilityType.properties);
-#suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(ExperimentExecutionDetails.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Experiment.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ExperimentExecution.properties
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(TargetType.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Capability.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(CapabilityType.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ExperimentExecutionDetails.properties
+);
 
 @@clientName(Microsoft.Chaos.Operations.list, "listAll", "javascript,python");

@@ -3,12 +3,11 @@ import "@typespec/openapi";
 import "./routes.tsp";
 
 using Azure.ClientGenerator.Core;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.Resources.DeploymentStacks;
 
-#suppress "deprecated" "Backwards compat with old swagger"
-@@flattenProperty(DeploymentStack.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backwards compat with old swagger"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DeploymentStack.properties);
 
 @@clientName(DeploymentStacksAtResourceGroup.createOrUpdate::parameters.resource,
   "deploymentStack"

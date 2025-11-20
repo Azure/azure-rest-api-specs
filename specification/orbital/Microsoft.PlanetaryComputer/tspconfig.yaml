@@ -13,14 +13,15 @@ options:
     azure-resource-provider-folder: "data-plane"
     emitter-output-dir: "{project-root}/.."
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
+    xml-strategy: none
   "@azure-tools/typespec-python":
-    package-dir: "azure-planetarycomputer"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-planetarycomputer"
     namespace: "azure.planetarycomputer"
     generate-test: true
     generate-sample: true
     flavor: azure
   # "@azure-tools/typespec-csharp":
-  #   package-dir: "Azure.PlanetaryComputer"
+  #   emitter-output-dir: "{output-dir}/{service-dir}/Azure.PlanetaryComputer"
   #   clear-output-folder: true
   #   model-namespace: false
   #   namespace: "{package-dir}"
@@ -32,13 +33,13 @@ options:
   #     name: "@azure-rest/planetarycomputer-rest"
   #   flavor: azure
   # "@azure-tools/typespec-java":
-  #   package-dir: "azure-planetarycomputer"
+  #   emitter-output-dir: "{output-dir}/{service-dir}/azure-planetarycomputer"
   #   namespace: com.azure.planetarycomputer
   #   flavor: azure
   # "@azure-tools/typespec-go":
-  #   module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+  #   module: "github.com/Azure/azure-sdk-for-go/{emitter-output-dir}"
   #   service-dir: "sdk/planetarycomputer"
-  #   package-dir: "azmanager"
+  #   emitter-output-dir: "{output-dir}/{service-dir}/azmanager"
   #   module-version: "0.0.1"
   #   generate-fakes: true
   #   inject-spans: true

@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { verifyRunStatusImpl } from "../src/verify-run-status.js";
+import { verifyRunStatusImpl as verifyRunStatusImplSrc } from "../src/verify-run-status.js";
 import { createMockCore, createMockGithub } from "./mocks.js";
 
 vi.mock("../src/context.js", () => {
@@ -18,6 +18,35 @@ vi.mock("../src/github.js", () => {
   };
 });
 
+/**
+ * @param {Object} params
+ * @param {import('@actions/github-script').AsyncFunctionArguments["github"]} params.github
+ * @param {Partial<import('@actions/github-script').AsyncFunctionArguments["context"]>} params.context
+ * @param {import('@actions/github-script').AsyncFunctionArguments["core"]} params.core
+ * @param {string} params.checkRunName
+ * @param {string} [params.commitStatusName]
+ * @param {string} [params.workflowName]
+ */
+export async function verifyRunStatusImpl({
+  github,
+  context,
+  core,
+  checkRunName,
+  commitStatusName,
+  workflowName,
+}) {
+  return verifyRunStatusImplSrc({
+    github,
+    context: /** @type {import('@actions/github-script').AsyncFunctionArguments["context"]} */ (
+      context
+    ),
+    core,
+    checkRunName,
+    commitStatusName,
+    workflowName,
+  });
+}
+
 describe("verifyRunStatusImpl", () => {
   // Reset mock call history before each test
   beforeEach(() => {
@@ -27,7 +56,7 @@ describe("verifyRunStatusImpl", () => {
   it("verifies status when check_run event fires", async () => {
     const github = createMockGithub();
     const { getWorkflowRuns } = await import("../src/github.js");
-    getWorkflowRuns.mockResolvedValue([
+    /** @type {import("vitest").Mock} */ (getWorkflowRuns).mockResolvedValue([
       {
         name: "workflowName",
         status: "completed",
@@ -64,7 +93,7 @@ describe("verifyRunStatusImpl", () => {
 
   it("verifies status when workflow_run event fires", async () => {
     const github = createMockGithub();
-    github.rest.checks.listForRef = vi.fn().mockResolvedValue({
+    github.rest.checks.listForRef.mockResolvedValue({
       data: {
         check_runs: [
           {
@@ -103,7 +132,7 @@ describe("verifyRunStatusImpl", () => {
 
   it("returns early during workflow_run event when no matching check_run is found", async () => {
     const github = createMockGithub();
-    github.rest.checks.listForRef = vi.fn().mockResolvedValue({
+    github.rest.checks.listForRef.mockResolvedValue({
       data: {
         check_runs: [],
       },
@@ -134,7 +163,7 @@ describe("verifyRunStatusImpl", () => {
 
   it("returns early during check_run event when no matching workflow_run is found", async () => {
     const { getWorkflowRuns } = await import("../src/github.js");
-    getWorkflowRuns.mockResolvedValue([]);
+    /** @type {import("vitest").Mock} */ (getWorkflowRuns).mockResolvedValue([]);
 
     const context = {
       eventName: "check_run",
@@ -185,7 +214,7 @@ describe("verifyRunStatusImpl", () => {
 
   it("throws if check_run conclusion does not match workflow_run conclusion", async () => {
     const { getWorkflowRuns } = await import("../src/github.js");
-    getWorkflowRuns.mockResolvedValue([
+    /** @type {import("vitest").Mock} */ (getWorkflowRuns).mockResolvedValue([
       {
         name: "workflowName",
         status: "completed",
@@ -217,7 +246,7 @@ describe("verifyRunStatusImpl", () => {
 
   it("throws when in check_suite event but no check_run with name is found", async () => {
     const github = createMockGithub();
-    github.rest.checks.listForRef = vi.fn().mockResolvedValue({
+    github.rest.checks.listForRef.mockResolvedValue({
       data: {
         check_runs: [],
       },
@@ -248,14 +277,14 @@ describe("verifyRunStatusImpl", () => {
 
   it("fetches commit status from API when not status event", async () => {
     const { getCheckRuns, getCommitStatuses } = await import("../src/github.js");
-    getCheckRuns.mockResolvedValue([
+    /** @type {import("vitest").Mock}*/ (getCheckRuns).mockResolvedValue([
       {
         name: "checkRunName",
         conclusion: "success",
         html_url: "https://example.com/check",
       },
     ]);
-    getCommitStatuses.mockResolvedValue([
+    /** @type {import("vitest").Mock}*/ (getCommitStatuses).mockResolvedValue([
       {
         context: "commitStatusName",
         state: "success",
@@ -292,14 +321,16 @@ describe("verifyRunStatusImpl", () => {
 
   it("handles API error when fetching commit status", async () => {
     const { getCheckRuns, getCommitStatuses } = await import("../src/github.js");
-    getCheckRuns.mockResolvedValue([
+    /** @type {import("vitest").Mock}*/ (getCheckRuns).mockResolvedValue([
       {
         name: "checkRunName",
         conclusion: "success",
         html_url: "https://example.com/check",
       },
     ]);
-    getCommitStatuses.mockRejectedValue(new Error("API Error"));
+    /** @type {import("vitest").Mock}*/ (getCommitStatuses).mockRejectedValue(
+      new Error("API Error"),
+    );
 
     const context = {
       eventName: "workflow_run",
@@ -327,7 +358,7 @@ describe("verifyRunStatusImpl", () => {
 
   it("verifies neutral check run matches success workflow run", async () => {
     const { getCheckRuns } = await import("../src/github.js");
-    getCheckRuns.mockResolvedValue([
+    /** @type {import("vitest").Mock}*/ (getCheckRuns).mockResolvedValue([
       {
         name: "checkRunName",
         conclusion: "neutral",

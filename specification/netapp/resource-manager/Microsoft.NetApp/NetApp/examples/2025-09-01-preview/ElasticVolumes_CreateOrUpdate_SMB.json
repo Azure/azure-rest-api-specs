@@ -1,0 +1,77 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myRG",
+    "accountName": "account1",
+    "poolName": "pool1",
+    "volumeName": "volume1",
+    "api-version": "2025-09-01-preview",
+    "body": {
+      "location": "eastus",
+      "properties": {
+        "filePath": "my-unique-file-path",
+        "size": 107374182400,
+        "protocolTypes": [
+          "SMB"
+        ],
+        "smbProperties": {
+          "smbEncryption": "Enabled"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.NetApp/elasticAccounts/account1/elasticCapacityPools/pool1/elasticVolumes/volume1",
+        "location": "eastus",
+        "name": "account1/pool1/volume1",
+        "properties": {
+          "filePath": "my-unique-file-path",
+          "size": 107374182400,
+          "provisioningState": "Succeeded",
+          "protocolTypes": [
+            "SMB"
+          ],
+          "mountTargets": [
+            {
+              "ipAddress": "10.1.0.9",
+              "smbServerFqdn": "fullyqualified.domainname.com"
+            }
+          ],
+          "smbProperties": {
+            "smbEncryption": "Enabled"
+          }
+        },
+        "type": "Microsoft.NetApp/elasticAccounts/elasticCapacityPools/elasticVolumes"
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.NetApp/locations/eastus/operationResults/a0216c17-f9d6-4b99-9faf-9ebd4883d0e4?api-version=2025-09-01-preview"
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.NetApp/elasticAccounts/account1/elasticCapacityPools/pool1/elasticVolumes/volume1",
+        "location": "eastus",
+        "name": "account1/pool1/volume1",
+        "properties": {
+          "filePath": "my-unique-file-path",
+          "size": 107374182400,
+          "protocolTypes": [
+            "SMB"
+          ],
+          "mountTargets": [
+            {
+              "ipAddress": "10.1.0.9",
+              "smbServerFqdn": "fullyqualified.domainname.com"
+            }
+          ],
+          "provisioningState": "Creating"
+        },
+        "type": "Microsoft.NetApp/elasticAccounts/elasticCapacityPools/elasticVolumes"
+      }
+    }
+  },
+  "operationId": "ElasticVolumes_CreateOrUpdate_SMB",
+  "title": "ElasticVolumes_CreateOrUpdate_SMB"
+}

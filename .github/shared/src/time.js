@@ -1,5 +1,3 @@
-// @ts-check
-
 /**
  * @typedef {Object} DurationType
  * @property {number} Millisecond - 1 millisecond

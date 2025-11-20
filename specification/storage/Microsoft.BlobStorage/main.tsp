@@ -35,4 +35,7 @@ namespace Storage.Blob;
 enum Versions {
   @doc("The 2025-11-05 version of the Azure.Storage.Blob service.")
   v2025_11_05: "2025-11-05",
+
+  @doc("The 2026-02-06 version of the Azure.Storage.Blob service.")
+  v2026_02_06: "2026-02-06",
 }

@@ -1,0 +1,58 @@
+{
+  "parameters": {
+    "api-version": "2025-09-01",
+    "jobId": "3c60cb49-63e8-4b21-b9bd-26277b3fdfae",
+    "resourceGroupName": "BugBash1",
+    "subscriptionId": "62b829ee-7936-40c9-a1c9-47a93f9f3965",
+    "vaultName": "BugBashVaultForCCYv11"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "3c60cb49-63e8-4b21-b9bd-26277b3fdfae",
+        "type": "Microsoft.DataProtection/Backupvaults/backupJobs",
+        "id": "/subscriptions/62b829ee-7936-40c9-a1c9-47a93f9f3965/resourceGroups/BugBash1/providers/Microsoft.DataProtection/Backupvaults/BugBashVaultForCCYv11/backupJobs/3c60cb49-63e8-4b21-b9bd-26277b3fdfae",
+        "properties": {
+          "activityID": "c4344fb4-7c11-43a4-8307-7ae7c7fb09b9",
+          "backupInstanceFriendlyName": "mabtestingccybasicv11\\bugbashdb2",
+          "backupInstanceId": "/subscriptions/62b829ee-7936-40c9-a1c9-47a93f9f3965/resourceGroups/BugBash1/providers/Microsoft.DataProtection/backupVaults/BugBashVaultForCCYv11/backupInstances/28460a9d-707a-45f3-ace6-b16284c2900e",
+          "dataSourceId": "/subscriptions/62b829ee-7936-40c9-a1c9-47a93f9f3965/resourceGroups/DppPostgresTestingCcy/providers/Microsoft.DBforPostgreSQL/servers/mabtestingccybasicv11/databases/bugbashdb2",
+          "dataSourceLocation": "centraluseuap",
+          "dataSourceName": "bugbashdb2",
+          "dataSourceSetName": "mabtestingccybasicv11",
+          "dataSourceType": "Microsoft.DBforPostgreSQL/servers/databases",
+          "duration": "00:00:00",
+          "extendedInfo": {
+            "additionalDetails": {
+              "PolicyRuleName": "BackupWeekly",
+              "RetentionTag": "Default",
+              "TaskId": "c4344fb4-7c11-43a4-8307-7ae7c7fb09b9"
+            },
+            "subTasks": [
+              {
+                "taskId": 1,
+                "taskName": "Trigger Backup",
+                "taskStatus": "Started"
+              }
+            ]
+          },
+          "isUserTriggered": false,
+          "operation": "Backup",
+          "operationCategory": "Backup",
+          "policyId": "/subscriptions/62b829ee-7936-40c9-a1c9-47a93f9f3965/resourceGroups/BugBash1/providers/Microsoft.DataProtection/backupVaults/BugBashVaultForCCYv11/backupPolicies/jakavetdailypolicy",
+          "policyName": "jakavetdailypolicy",
+          "progressEnabled": false,
+          "sourceResourceGroup": "DppPostgresTestingCcy",
+          "sourceSubscriptionID": "62b829ee-7936-40c9-a1c9-47a93f9f3965",
+          "startTime": "2021-03-17T03:00:03.7604146Z",
+          "status": "Started",
+          "subscriptionId": "62b829ee-7936-40c9-a1c9-47a93f9f3965",
+          "supportedActions": [],
+          "vaultName": "BugBashVaultForCCYv11"
+        }
+      }
+    }
+  },
+  "operationId": "Jobs_Get",
+  "title": "Get Job"
+}
