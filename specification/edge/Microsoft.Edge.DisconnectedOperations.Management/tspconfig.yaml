@@ -78,8 +78,7 @@ options:
           default:
             script: "(Get-AzContext).Subscription.Id"
       - where:
-          variant: 
-            ^(Create|Update)(?!.*?(Expanded|ViaJsonString|ViaJsonFilePath))
+          variant: ^(Create|Update)(?!.*?(Expanded|ViaJsonString|ViaJsonFilePath))
         remove: true
       - where:
           variant: ^CreateViaIdentity$|^CreateViaIdentityExpanded$

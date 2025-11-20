@@ -73,8 +73,7 @@ options:
           default:
             script: "(Get-AzContext).Subscription.Id"
       - where:
-          variant: 
-            ^(Create|Update|Export)(?!.*?Expanded|ViaJsonString|ViaJsonFilePath)
+          variant: ^(Create|Update|Export)(?!.*?Expanded|ViaJsonString|ViaJsonFilePath)
         remove: true
       - where:
           subject: MapConnection

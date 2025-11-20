@@ -47,11 +47,7 @@ linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
   disable:
-    "@azure-tools/typespec-azure-core/casing-style": "Since we have many names in
-      the form XxxxAIXxxx"
-    "@azure-tools/typespec-azure-core/no-string-discriminator": "Use an extensible
-      union instead of a plain string"
-    "@azure-tools/typespec-azure-core/bad-record-type": "We do want to use Record<unknown>,
-      and not Record<string>. But this needs further investigation"
-    "@azure-tools/typespec-azure-core/use-standard-names": "PUT operations that return
-      200 should start with 'replace' or 'createOrReplace'"
+    "@azure-tools/typespec-azure-core/casing-style": "Since we have many names in the form XxxxAIXxxx"
+    "@azure-tools/typespec-azure-core/no-string-discriminator": "Use an extensible union instead of a plain string"
+    "@azure-tools/typespec-azure-core/bad-record-type": "We do want to use Record<unknown>, and not Record<string>. But this needs further investigation"
+    "@azure-tools/typespec-azure-core/use-standard-names": "PUT operations that return 200 should start with 'replace' or 'createOrReplace'"
