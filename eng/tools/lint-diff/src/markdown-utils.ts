@@ -1,6 +1,7 @@
 import { Readme } from "@azure-tools/specs-shared/readme";
 import { kebabCase } from "change-case";
 import { marked } from "marked";
+import { inspect } from "util";
 
 export enum MarkdownType {
   Arm = "arm",
@@ -88,9 +89,9 @@ export async function getRelatedArmRpcFromDoc(ruleName: string): Promise<string[
     if (!response.ok) {
       throw new Error(`HTTP ${response.status}: ${response.statusText}`);
     }
-  } catch (e: any) {
+  } catch (e) {
     // TODO: Retry? Fail ungracefully?
-    console.log(`GET ${docUrl} failed with ${e.message} .`);
+    console.log(`GET ${docUrl} failed with ${inspect(e)}.`);
     rpcInfoCache.set(ruleName, rpcRules);
     return rpcRules;
   }
