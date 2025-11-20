@@ -4,6 +4,7 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "../Security.KeyVault.Common/common.tsp";
+import "../Security.KeyVault.EKM/routes.tsp";
 
 using Azure.ClientGenerator.Core;
 using TypeSpec.Http;
