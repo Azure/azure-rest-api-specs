@@ -1,6 +1,7 @@
 // client.tsp
 import "./administration.tsp";
 import "../Security.KeyVault.Common/common.tsp";
+import "../Security.KeyVault.EKM/main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
