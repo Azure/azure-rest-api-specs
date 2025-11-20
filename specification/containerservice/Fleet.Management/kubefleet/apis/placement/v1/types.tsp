@@ -5,6 +5,7 @@ import "../../../../k8s.io/apimachinery/apis/meta/v1/types.tsp";
 using TypeSpec.Versioning;
 using Core.V1;
 using Meta.V1;
+using Azure.ResourceManager;
 
 namespace Placement.V1;
 
@@ -25,8 +26,8 @@ model PlacementPolicy {
   @doc("Affinity contains cluster affinity scheduling rules. Defines which member clusters to place the selected resources. Only valid if the placement type is \"PickAll\" or \"PickN\".")
   affinity?: Affinity;
 
-  @OpenAPI.extension("x-ms-identifiers", #[])
   @doc("If specified, the ClusterResourcePlacement's Tolerations. Tolerations cannot be updated or deleted. This field is beta-level and is for the taints and tolerations feature.")
+  @identifiers(#[])
   tolerations?: Toleration[];
 }
 
@@ -55,8 +56,8 @@ model ClusterAffinity {
 
 @doc("ClusterSelector")
 model ClusterSelector {
-  @OpenAPI.extension("x-ms-identifiers", #[])
   @doc("ClusterSelectorTerms is a list of cluster selector terms. The terms are `ORed`.")
+  @identifiers(#[])
   clusterSelectorTerms: ClusterSelectorTerm[];
 }
 
@@ -112,6 +113,7 @@ union PropertySelectorOperator {
 
 @doc("Toleration allows ClusterResourcePlacement to tolerate any taint that matches the triple <key,value,effect> using the matching operator <operator>.")
 model Toleration {
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "This key is not sensitive; it's a taint key identifier in Kubernetes tolerations."
   @doc("Key is the taint key that the toleration applies to. Empty means match all taint keys. If the key is empty, operator must be Exists; this combination means to match all values and all keys.")
   key?: string;
 
