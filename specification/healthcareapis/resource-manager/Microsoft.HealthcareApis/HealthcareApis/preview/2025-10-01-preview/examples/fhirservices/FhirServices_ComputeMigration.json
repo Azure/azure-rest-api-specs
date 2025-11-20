@@ -1,0 +1,22 @@
+{
+  "parameters": {
+    "subscriptionId": "subscriptionId",
+    "resourceGroupName": "myResourceGroup",
+    "workspaceName": "myWorkspace",
+    "fhirServiceName": "myFhirService",
+    "api-version": "2025-10-01-preview",
+    "computeConfiguration": {
+      "name": "Dedicated",
+      "dbComputeUnits": 2,
+      "appComputeUnits": 2
+    }
+  },
+  "responses": {
+    "200": {},
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://endpoint:port/subscriptions/{subscriptionId}/providers/Microsoft.HealthcareApis/locations/{location}/operationResults/{operationid}?api-version=2025-10-01-preview"
+      }
+    }
+  }
+}
