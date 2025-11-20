@@ -6,7 +6,7 @@
 title: RPaaSClient
 openapi-type: arm
 openapi-subtype: rpaas
-tag: 2025-11-05-preview
+tag: 2024-06-24-preview
 ```
 
 > Exception for adding resourcetypes inside the resource folder.  
@@ -62,26 +62,6 @@ These settings apply only when `--tag=2024-11-20-preview` is specified on the co
 ```yaml $(tag) == '2024-11-20-preview'
 input-file:
   - Microsoft.AzureCis/preview/2024-11-20-preview/cloudSprout.json
-```
-
-### Tag: 2025-11-05-preview
-
-These settings apply only when `--tag=2025-11-05-preview` is specified on the command line.
-
-```yaml $(tag) == '2025-11-05-preview'
-input-file:
-  - Microsoft.AzureCis/preview/2025-11-05-preview/azcopy.json
-  - Microsoft.AzureCis/preview/2024-06-24-preview/aad.json
-  - Microsoft.AzureCis/preview/2024-06-24-preview/certificate.json
-  - Microsoft.AzureCis/preview/2024-06-24-preview/dns.json
-  - Microsoft.AzureCis/preview/2024-06-24-preview/dscm.json
-  - Microsoft.AzureCis/preview/2024-06-24-preview/dsmsmanagedkeysecret.json
-  - Microsoft.AzureCis/preview/2024-06-24-preview/environment.json
-  - Microsoft.AzureCis/preview/2024-06-24-preview/eventgrid.json
-  - Microsoft.AzureCis/preview/2024-06-24-preview/ficp.json
-  - Microsoft.AzureCis/preview/2024-06-24-preview/genevaActions.json
-  - Microsoft.AzureCis/preview/2024-06-24-preview/plannedQuota.json
-  - Microsoft.AzureCis/preview/2024-06-24-preview/storageAccountDsms.json
 ```
 
 ## Suppression
