@@ -10,6 +10,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.BillingBenefits;
 
@@ -85,15 +86,193 @@ interface DiscountsOperationGroup {
     scope: string,
   ): ArmResponse<DiscountList> | ErrorResponse;
 }
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+interface BenefitOperationGroup {
+  /**
+   * Validate savings plan purchase.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @autoRoute
+  @action("validate")
+  @added(Microsoft.BillingBenefits.Versions.v2025_05_01_preview)
+  validate is ArmProviderActionSync<
+    Request = BenefitValidateRequest,
+    Response = BenefitValidateResponse
+  >;
+}
 
-/**
- * Validate savings plan purchase.
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@autoRoute
-@action("validate")
-op validatePurchase is ArmProviderActionSync<
-  Request = SavingsPlanPurchaseValidateRequest,
-  Response = SavingsPlanValidateResponse
->;
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+interface ContributorsOperationGroup {
+  /**
+   * List contributors under applicable MACCs for a given billing account.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "For backward compatibility"
+  @operationId("Contributors_ListFromApplicableMacc")
+  @autoRoute
+  @get
+  @action("providers/microsoft.BillingBenefits/applicableContributors")
+  @list
+  listFromApplicableMacc(
+    ...ApiVersionParameter,
+
+    /**
+     * the provider namespace
+     */
+    @path
+    @segment("providers")
+    providerNamespace: "microsoft.Billing",
+
+    /**
+     * The billing account Id at which the benefits are listed. Accepted format is: {rootId:orgId}.
+     */
+    @pattern("^[a-zA-Z0-9_\\-\\.:]+$")
+    @path
+    @segment("billingAccounts")
+    billingAccountId: string,
+
+    ...Azure.ResourceManager.Legacy.Provider,
+
+    /**
+     * System ID of the primary MACC.
+     */
+    @pattern("^[a-zA-Z0-9_\\-\\.]+$")
+    @path
+    @segment("applicableMaccs")
+    systemId: string,
+  ): ContributorList | ErrorResponse;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+interface SellerResourceOperationGroup {
+  /**
+   * List maccs by billing account
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("SellerResource_List")
+  @autoRoute
+  @action("listSellerResources")
+  list is ArmProviderActionSync<
+    Request = SellerResourceListRequest,
+    Response = ArmResponse<Macc[]>
+  >;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+interface ApplicableMaccsOperationGroup {
+  /**
+   * List maccs that are applicable for a given billing account.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "For backward compatibility"
+  @operationId("ApplicableMaccs_List")
+  @autoRoute
+  @get
+  @action("applicableMaccs")
+  @list
+  list(
+    ...ApiVersionParameter,
+
+    /**
+     * the provider namespace
+     */
+    @path
+    @segment("providers")
+    providerNamespace: "microsoft.Billing",
+
+    /**
+     * The billing account Id at which the benefits are listed. Accepted format is: {rootId:orgId}.
+     */
+    @pattern("^[a-zA-Z0-9_\\-\\.:]+$")
+    @path
+    @segment("billingAccounts")
+    billingAccountId: string,
+
+    ...Azure.ResourceManager.Legacy.Provider,
+  ): ApplicableMaccList | ErrorResponse;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+interface CreditsOperationGroup {
+  /**
+   * List applicable credits for the provided scope. Currently supported scopes: BillingAccountResourceId
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Credits_ListApplicable")
+  @route("/{scope}/providers/Microsoft.BillingBenefits/applicableCredits")
+  @get
+  @list
+  listApplicable(
+    ...ApiVersionParameter,
+
+    /**
+     * The scope at which the benefits are listed.
+     */
+    @path
+    scope: string,
+  ): ArmResponse<CreditsList> | ErrorResponse;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+interface ConditionalCreditsOperationGroup {
+  /**
+   * List conditional credits that are applicable for a given scope. Currently supported scopes: billing accounts
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ConditionalCredits_ScopeList")
+  @route("/{scope}/providers/Microsoft.BillingBenefits/applicableConditionalCredits")
+  @get
+  @list
+  scopeList(
+    ...ApiVersionParameter,
+
+    /**
+     * The scope at which the benefits are listed.
+     */
+    @path
+    scope: string,
+  ): ArmResponse<ConditionalCreditList> | ErrorResponse;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+interface ConditionalCreditContributorsOperationGroup {
+  /**
+   * List contributors under applicable conditional credits for a given billing account.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "For backward compatibility"
+  @operationId("ConditionalCreditContributors_ListFromApplicableConditionalCredit")
+  @autoRoute
+  @get
+  @action("providers/microsoft.BillingBenefits/applicableContributors")
+  @list
+  listFromApplicableConditionalCredit(
+    ...ApiVersionParameter,
+
+    /**
+     * the provider namespace
+     */
+    @path
+    @segment("providers")
+    providerNamespace: "microsoft.Billing",
+
+    /**
+     * The billing account Id at which the benefits are listed. Accepted format is: {rootId:orgId}.
+     */
+    @pattern("^[a-zA-Z0-9_\\-\\.:]+$")
+    @path
+    @segment("billingAccounts")
+    billingAccountId: string,
+
+    ...Azure.ResourceManager.Legacy.Provider,
+
+    /**
+     * System ID of the primary MACC.
+     */
+    @pattern("^[a-zA-Z0-9_\\-\\.]+$")
+    @path
+    @segment("applicableConditionalCredits")
+    systemId: string,
+  ): ConditionalCreditContributorList | ErrorResponse;
+}
