@@ -9,6 +9,7 @@ import tseslint from "typescript-eslint";
 export default defineConfig(
   eslint.configs.recommended,
   tseslint.configs.recommended,
+  // TODO: Enable "recommendedTypeChecked" rules, fix all violations
   // tseslint.configs.recommendedTypeChecked,
   {
     languageOptions: {
@@ -26,6 +27,7 @@ export default defineConfig(
     },
   },
   {
+    // TODO: Remove exclusion for "test/**"
     ignores: ["coverage/**", "dist/**", "test/**"],
   },
 );

@@ -1,4 +1,5 @@
 /* eslint-disable */
+// TODO: Enable eslint, fix errors
 
 import { join } from "path";
 import { Suppression } from "suppressions";
