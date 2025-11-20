@@ -2,7 +2,7 @@ import "@typespec/openapi";
 
 import "../common/CommonModels.tsp";
 
-using TypeSpec.OpenAPI;
+using Azure.ResourceManager;
 
 namespace Microsoft.MobileNetwork;
 
@@ -18,16 +18,17 @@ model MobileNetworkPropertiesFormat {
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "For backward compatibility"
   @doc("A list of public land mobile networks including their identifiers. If both 'publicLandMobileNetworks' and 'publicLandMobileNetworkIdentifier' are specified, then the 'publicLandMobileNetworks' will take precedence.")
   @minItems(1)
-  @extension("x-ms-identifiers", #["mcc", "mnc"])
+  @identifiers(#["mcc", "mnc"])
   publicLandMobileNetworks?: PublicLandMobileNetwork[];
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Validate if secret and add @secret if so or update reason"
   @doc("The mobile network resource identifier")
   @visibility(Lifecycle.Read)
   serviceKey?: string;
 
   @doc("The list of endpoint security groups used in the mobile network.")
   @minItems(1)
-  @extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   endpointSecurityGroups?: EndpointSecurityGroup[];
 }
 

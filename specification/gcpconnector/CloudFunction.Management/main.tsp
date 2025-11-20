@@ -11,9 +11,6 @@ import "../shared/main.tsp";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
-using OpenAPI;
-using Azure.Core;
-using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using Azure.Portal;
 
@@ -135,6 +132,7 @@ model BuildConfig {
   /**
    * An identifier for Firebase function sources. Disclaimer: This field is only supported for Firebase function deployments.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   sourceToken?: string;
 
   @doc("Name of the Cloud Build Custom Worker Pool that should be used to build the function. The format of this field is `projects/{project}/locations/{region}/workerPools/{workerPool}` where {project} and {region} are the project id and region respectively where the worker pool is defined and {workerPool} is the short name of the worker pool. If the project id is not the same as the function, then the Cloud Functions Service Agent (service-@gcf-admin-robot.iam.gserviceaccount.com) must be granted the role Cloud Build Custom Workers Builder (roles/cloudbuild.customworkers.builder) in the project.")
@@ -175,7 +173,7 @@ model EventTrigger {
   /**
    * Criteria used to filter events.
    */
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   eventFilters?: EventFilter[];
 
   /**
@@ -289,7 +287,7 @@ model GcpFunctionProperties {
   /**
    * Output only. State Messages for this Cloud Function.
    */
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   stateMessages?: GoogleCloudFunctionsV2StateMessage[];
 
   /**
@@ -378,6 +376,7 @@ model SecretEnvVar {
   /**
    * Name of the environment variable.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   key?: string;
 
   /**
@@ -388,6 +387,7 @@ model SecretEnvVar {
   /**
    * Name of the secret in secret manager (not the full resource name).
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   secret?: string;
 
   /**
@@ -430,12 +430,13 @@ model SecretVolume {
   /**
    * Name of the secret in secret manager (not the full resource name).
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   secret?: string;
 
   /**
    * List of secret versions to mount for this secret. If empty, the `latest` version of the secret will be made available in a file named after the secret under the mount point.
    */
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   versions?: SecretVersion[];
 }
 
@@ -497,13 +498,13 @@ model ServiceConfig {
   /**
    * Secret environment variables configuration.
    */
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   secretEnvironmentVariables?: SecretEnvVar[];
 
   /**
    * Secret volumes configuration.
    */
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   secretVolumes?: SecretVolume[];
 
   /**

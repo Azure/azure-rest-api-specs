@@ -52,9 +52,9 @@ model HealthModelProperties {
 
   @doc("The list of nodes in the health model")
 <<<<<<< HEAD
-  @extension("x-ms-identifiers", ["nodeId"])
+  @identifiers(["nodeId"])
 =======
-  @extension("x-ms-identifiers", #["nodeId"])
+  @identifiers(#["nodeId"])
 >>>>>>> df72356ecde5888624c1e6d9ecd108188fcb38f3
   nodes?: Node[];
 }
@@ -109,9 +109,9 @@ model Node {
 
   @doc("List of queries")
 <<<<<<< HEAD
-  @extension("x-ms-identifiers", ["queryId"])
+  @identifiers(["queryId"])
 =======
-  @extension("x-ms-identifiers", #["queryId"])
+  @identifiers(#["queryId"])
 >>>>>>> df72356ecde5888624c1e6d9ecd108188fcb38f3
   queries?: Query[];
 
@@ -457,9 +457,9 @@ model HealthModelVersionProperties {
 
   @doc("The list of nodes in the health model")
 <<<<<<< HEAD
-  @extension("x-ms-identifiers", ["nodeId"])
+  @identifiers(["nodeId"])
 =======
-  @extension("x-ms-identifiers", #["nodeId"])
+  @identifiers(#["nodeId"])
 >>>>>>> df72356ecde5888624c1e6d9ecd108188fcb38f3
   @visibility(Lifecycle.Read)
   nodes?: Node[];
@@ -541,17 +541,17 @@ model SnapshotProperties {
 
   @doc("List of node states in the snapshot")
 <<<<<<< HEAD
-  @extension("x-ms-identifiers", ["nodeId"])
+  @identifiers(["nodeId"])
   nodeStates?: NodeState[];
 
   @doc("List of query results in the snapshot")
-  @extension("x-ms-identifiers", ["nodeId", "queryId"])
+  @identifiers(["nodeId", "queryId"])
 =======
-  @extension("x-ms-identifiers", #["nodeId"])
+  @identifiers(#["nodeId"])
   nodeStates?: NodeState[];
 
   @doc("List of query results in the snapshot")
-  @extension("x-ms-identifiers", #["nodeId", "queryId"])
+  @identifiers(#["nodeId", "queryId"])
 >>>>>>> df72356ecde5888624c1e6d9ecd108188fcb38f3
   queryResults?: QueryResult[];
 
@@ -579,9 +579,9 @@ model NodeStatePointInTime {
 
   @doc("List of query states in the snapshot")
 <<<<<<< HEAD
-  @extension("x-ms-identifiers", ["queryId"])
+  @identifiers(["queryId"])
 =======
-  @extension("x-ms-identifiers", #["queryId"])
+  @identifiers(#["queryId"])
 >>>>>>> df72356ecde5888624c1e6d9ecd108188fcb38f3
   queryStates?: QueryState[];
 }

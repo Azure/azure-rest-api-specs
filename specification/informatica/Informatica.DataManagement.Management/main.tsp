@@ -10,10 +10,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 @armCommonTypesVersion("v5")
 namespace Informatica.DataManagement;
 
-using Azure.Core;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
-using OpenAPI;
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
@@ -405,6 +402,7 @@ model InformaticaProperties {
 
 @doc("Link Organization")
 model LinkOrganization {
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("Link organization token")
   token?: string;
 }
@@ -520,7 +518,7 @@ model ServerlessConfigProperties {
   executionTimeout?: string;
 
   @doc("List of supported serverless informatica regions")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   regions?: RegionsMetadata[];
 }
 
@@ -544,6 +542,7 @@ model ServerlessRuntimeTag {
 
 @doc("Informatica Serverless Runtime User context properties")
 model ServerlessRuntimeUserContextProperties {
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("User context token for OBO flow.")
   userContextToken: string;
 }

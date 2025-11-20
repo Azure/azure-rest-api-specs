@@ -713,7 +713,8 @@
         "metricNamespace",
         "metricName",
         "filters",
-        "spatialAggregation"
+        "spatialAggregation",
+        "temporalAggregation"
       ]
     },
     "Sli": {
@@ -790,7 +791,7 @@
         "description": {
           "type": "string",
           "description": "A user-provided description of the SLI, with a maximum length of 1000 characters.",
-          "pattern": "^.{3,1000}$"
+          "pattern": "^[\\s\\S]{0,1000}$"
         },
         "category": {
           "$ref": "#/definitions/Category",
@@ -942,8 +943,7 @@
         }
       },
       "required": [
-        "type",
-        "windowSizeMinutes"
+        "type"
       ]
     },
     "TemporalAggregationType": {
@@ -1019,8 +1019,7 @@
         "target": {
           "type": "number",
           "format": "float",
-          "description": "Threshold value used to determine uptime.",
-          "minimum": 0
+          "description": "Threshold value used to determine uptime."
         },
         "comparator": {
           "$ref": "#/definitions/WindowUptimeCriteriaComparator",

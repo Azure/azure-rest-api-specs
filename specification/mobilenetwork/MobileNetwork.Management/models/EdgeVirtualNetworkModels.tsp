@@ -2,7 +2,7 @@ import "@typespec/openapi";
 
 import "../common/CommonModels.tsp";
 
-using TypeSpec.OpenAPI;
+using Azure.ResourceManager;
 
 namespace Microsoft.MobileNetwork;
 
@@ -14,7 +14,7 @@ model EdgeVirtualNetworkPropertiesFormat {
 
   @doc("A list of edge subnets in a Virtual Network.")
   @minItems(1)
-  @extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   subnets?: EdgeSubnet[];
 
   @doc("Default interface to which traffic is routed from this Virtual Network")
@@ -30,7 +30,7 @@ model EdgeSubnet {
 
   @doc("List of address prefixes for the subnet.")
   @minItems(1)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   addressPrefixes: EdgeSubnetPrefix[];
 
   @doc("The reference to the NetworkSecurityGroup resource.")

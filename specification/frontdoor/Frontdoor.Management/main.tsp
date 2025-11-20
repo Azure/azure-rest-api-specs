@@ -6,3 +6,6 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./resources/virtualmachine.tsp";
 import "./resources/publicipaddress.tsp";
+import "./resources/publicnetworkaddress.tsp";
+import "./resources/privatenetworkaddress.tsp";
+import "./resources/logicaldatacenter.tsp";

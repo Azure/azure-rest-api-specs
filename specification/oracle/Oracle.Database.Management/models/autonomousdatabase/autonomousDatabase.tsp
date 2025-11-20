@@ -4,7 +4,6 @@ import "./adbCommon.tsp";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
-using Azure.Core;
 using Azure.ResourceManager;
 
 namespace Oracle.Database;
@@ -428,7 +427,7 @@ model LongTermBackUpScheduleDetails {
   @doc("The timestamp for the long-term backup schedule. For a MONTHLY cadence, months having fewer days than the provided date will have the backup taken on the last day of that month.")
   timeOfBackup?: utcDateTime;
 
-  @doc("Retention period, in days, for backups.")
+  @doc("Retention period, in days, for long-term backups")
   retentionPeriodInDays?: RetentionPeriod;
 
   @doc("Indicates if the long-term backup schedule should be deleted. The default value is `FALSE`.")
@@ -855,7 +854,7 @@ model AutonomousDatabaseBaseProperties {
   @added(Versions.v20250601_preview)
   @doc("The list of scheduled operations.")
   @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   scheduledOperationsList?: ScheduledOperationsType[];
 
   @doc("The private endpoint Ip address for the resource.")

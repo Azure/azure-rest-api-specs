@@ -4,12 +4,14 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
+using Azure.ResourceManager;
+
 namespace Microsoft.Monitor;
 
 @doc("Represents a signal model used in SLI calculations.")
 model Signal {
   @doc("Sources of metrics used for SLIs.")
-  @OpenAPI.extension("x-ms-identifiers", #["signalSourceId"])
+  @identifiers(#["signalSourceId"])
   signalSources: SignalSource[];
 
   @doc("Mathematical formula used to combine multiple metrics.")
@@ -34,10 +36,13 @@ model SignalSource {
   metricName: string;
 
   @doc("Filters applied to modify signal values.")
-  @OpenAPI.extension(
-    "x-ms-identifiers",
-    #["dimensionName", "scalarFunction", "samplingType", "value", "operator"]
-  )
+  @identifiers(#[
+    "dimensionName",
+    "scalarFunction",
+    "samplingType",
+    "value",
+    "operator"
+  ])
   filters: Condition[];
 
   @doc("Defines how measurements are aggregated across multiple time series.")
@@ -204,7 +209,6 @@ union SpatialAggregationType {
 @doc("Represents criteria for determining uptime in window-based SLIs.")
 model WindowUptimeCriteria {
   @doc("Threshold value used to determine uptime.")
-  @minValue(0)
   target: float32;
 
   @doc("Comparison operator used for uptime evaluation.")

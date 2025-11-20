@@ -60,6 +60,13 @@ scalar MaintenanceRequestResourceId
     }
   ]>;
 
+scalar RackResourceId
+  extends Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.SupercomputerInfrastructure/supercomputers/racks",
+    }
+  ]>;
+
 scalar ReportableWithinMaintenanceRequestResourceId
   extends Azure.Core.armResourceIdentifier<[
     {

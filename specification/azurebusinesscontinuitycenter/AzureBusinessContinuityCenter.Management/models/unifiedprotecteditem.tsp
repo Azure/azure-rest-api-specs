@@ -260,6 +260,7 @@ model RegionSpecificPropertiesForProtectedItem {
   configuredMaximumRetentionInDays: NullableIntPropertyInfo;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Back compatibility"
 @doc("Definition of provider specific properties.")
 model ProviderSpecificProperties {}
 
@@ -566,7 +567,7 @@ model UnifiedProtectedItemProperties {
   solutionSpecificProtectionProperties: Record<SolutionSpecificProtectionProperties>;
 
   @doc("Detail of protected item.")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   @visibility(Lifecycle.Read)
   protectedItems: SolutionSpecificProtectedItem[];
 

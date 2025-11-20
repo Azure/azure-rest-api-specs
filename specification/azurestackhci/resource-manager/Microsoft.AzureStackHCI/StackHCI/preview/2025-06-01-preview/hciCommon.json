@@ -206,6 +206,26 @@
         ]
       }
     },
+    "SdnProperties": {
+      "type": "object",
+      "description": "Represents the Software Defined Networking (SDN) configuration state.",
+      "properties": {
+        "sdnStatus": {
+          "$ref": "#/definitions/SdnStatus",
+          "readOnly": true
+        },
+        "sdnDomainName": {
+          "type": "string",
+          "description": "The fully qualified domain name (FQDN) associated with the SDN deployment. This value is propagated from the Device Management Extension to the cluster resource. It is typically in the format `<sdnPrefix>-nc.<domain>` when SDN is enabled. May be null or absent in unsupported or disabled states.",
+          "readOnly": true
+        },
+        "sdnApiAddress": {
+          "type": "string",
+          "description": "Represents the API address for the SDN deployment.",
+          "readOnly": true
+        }
+      }
+    },
     "ClusterPattern": {
       "type": "string",
       "description": "Supported Storage Pattern for HCI Cluster",

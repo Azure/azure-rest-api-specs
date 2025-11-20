@@ -86,4 +86,7 @@ model OracleSourceConnectorProperties extends DataSourceProperties {
 
   @doc("Handling mode for DECIMAL and NUMERIC.")
   oracleDecimalHandlingMode?: OracleDecimalHandlingMode;
+
+  @doc("A Boolean value that specifies whether the connector records schema structures from all tables in a schema or database, or only from tables that are designated for capture.")
+  isStoreOnlyCapturedTablesDdl?: boolean;
 }

@@ -8,6 +8,7 @@ options:
     use-read-only-status-schema: true
     emitter-output-dir: "{project-root}/.."
     azure-resource-provider-folder: "resource-manager"
+    emit-common-types-schema: "never"
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/codeSigningAccount.json"
   "@azure-tools/typespec-java":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-trustedsigning"
@@ -36,6 +37,9 @@ options:
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.TrustedSigning"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

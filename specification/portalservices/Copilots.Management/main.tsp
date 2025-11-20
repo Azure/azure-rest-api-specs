@@ -5,6 +5,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./Copilots.tsp";
+import "./back-compatible.tsp";
 
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
@@ -19,7 +20,5 @@ namespace Microsoft.PortalServices;
 @doc("Azure Portal Services Copilots Management API versions.")
 enum Versions {
   @doc("Azure Portal Services Copilots Management API version 2025-10-01-preview.")
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2025_10_01_preview: "2025-10-01-preview",
 }

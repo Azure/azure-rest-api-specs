@@ -204,7 +204,6 @@ union FailoverDirectionTypes {
 
 @doc("Additional properties for Failover.")
 model FailoverRequestProperties {
-  @OpenAPI.extension("x-ms-identifiers", #[])
   @doc("Source locations from where resources to be failed-over.")
   sourceLocations: string[];
 }

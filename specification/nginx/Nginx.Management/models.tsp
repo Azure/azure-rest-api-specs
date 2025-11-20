@@ -3,8 +3,6 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -316,11 +314,11 @@ model NginxConfigurationResponseProperties {
   provisioningState?: ProvisioningState;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   files?: NginxConfigurationFile[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   protectedFiles?: NginxConfigurationProtectedFileResponse[];
 
   /**
@@ -363,9 +361,7 @@ model NginxConfigurationProtectedFileResponse {
 model NginxConfigurationPackage {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   data?: string;
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
   protectedFiles?: string[];
 }
 
@@ -408,11 +404,11 @@ model NginxConfigurationRequestProperties {
   provisioningState?: ProvisioningState;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   files?: NginxConfigurationFile[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   protectedFiles?: NginxConfigurationProtectedFileRequest[];
 
   /**
@@ -461,11 +457,11 @@ model AnalysisCreateConfig {
   rootFile?: string;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   files?: NginxConfigurationFile[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   protectedFiles?: NginxConfigurationProtectedFileRequest[];
 
   /**
@@ -678,12 +674,12 @@ model NginxNetworkProfile {
 model NginxFrontendIPConfiguration {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   publicIPAddresses?: NginxPublicIPAddress[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   privateIPAddresses?: NginxPrivateIPAddress[];
 }
 
@@ -751,8 +747,8 @@ model NginxDeploymentScalingProperties {
   /**
    * The settings for enabling automatic scaling of the deployment. If this field is specified, 'scale.capacity' must be empty.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   autoScaleSettings?: NginxDeploymentScalingPropertiesAutoScaleSettings;
 }
 
@@ -761,7 +757,7 @@ model NginxDeploymentScalingProperties {
  */
 model NginxDeploymentScalingPropertiesAutoScaleSettings {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   profiles: ScaleProfile[];
 }
 
@@ -982,8 +978,8 @@ model NginxDeploymentUpdateProperties {
   /**
    * Update settings for NGINX App Protect (NAP)
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   nginxAppProtect?: NginxDeploymentUpdatePropertiesNginxAppProtect;
 }
 
@@ -1086,7 +1082,7 @@ model NginxDeploymentWafPolicyApplyingStatus {
  */
 model NginxDeploymentDefaultWafPolicyListResponse {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   value?: NginxDeploymentDefaultWafPolicyProperties[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

@@ -31,7 +31,7 @@ model StageMapProperties {
   provisioningState?: ProvisioningState;
 
   @doc("Array of stages objects.")
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   stages: Stage[];
 

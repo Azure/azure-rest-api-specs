@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "api-version": "2025-06-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "myMonitor",
+            "type": "Microsoft.Elastic/monitors",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Elastic/monitors/myMonitor",
+            "location": "West US 2",
+            "properties": {
+              "elasticProperties": {
+                "elasticCloudDeployment": {
+                  "name": "deploymentname",
+                  "azureSubscriptionId": "00000000-0000-0000-0000-000000000000",
+                  "deploymentId": "deployment_id",
+                  "elasticsearchRegion": "azure-westus2",
+                  "elasticsearchServiceUrl": "https://elasticsearchendpoint.com",
+                  "kibanaServiceUrl": "https://kibanaserviceurl.com",
+                  "kibanaSsoUrl": "https://kibanssourl.com"
+                },
+                "elasticCloudUser": {
+                  "elasticCloudSsoDefaultUrl": "https://examplessourl.com",
+                  "emailAddress": "alice@microsoft.com",
+                  "id": "myid123"
+                }
+              },
+              "liftrResourceCategory": "MonitorLogs",
+              "liftrResourcePreference": 0,
+              "monitoringStatus": "Enabled",
+              "provisioningState": "Succeeded"
+            },
+            "tags": {
+              "Environment": "Dev"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Monitors_List",
+  "title": "Monitors_List"
+}

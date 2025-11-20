@@ -58,16 +58,28 @@
       "name": "Extensions"
     },
     {
+      "name": "KubernetesVersions"
+    },
+    {
+      "name": "PlatformUpdates"
+    },
+    {
       "name": "Offers"
     },
     {
       "name": "Publishers"
     },
     {
+      "name": "OsImages"
+    },
+    {
       "name": "SecuritySettings"
     },
     {
       "name": "Skus"
+    },
+    {
+      "name": "UpdateContents"
     },
     {
       "name": "UpdateRuns"
@@ -760,6 +772,315 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/locations/{location}/kubernetesVersions": {
+      "get": {
+        "operationId": "KubernetesVersions_ListBySubscriptionLocationResource",
+        "tags": [
+          "KubernetesVersions"
+        ],
+        "description": "List all kubernetes versions.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/KubernetesVersionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "KubernetesVersions_ListBySubscriptionLocationResource_MaximumSet": {
+            "$ref": "./examples/KubernetesVersions_ListBySubscriptionLocationResource_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/locations/{location}/osImages": {
+      "get": {
+        "operationId": "OsImages_ListBySubscriptionLocationResource",
+        "tags": [
+          "OsImages"
+        ],
+        "description": "List all os images.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OsImageListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OsImages_ListBySubscriptionLocationResource_MaximumSet": {
+            "$ref": "./examples/OsImages_ListBySubscriptionLocationResource_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/locations/{location}/osImages/{osImageName}": {
+      "get": {
+        "operationId": "OsImages_Get",
+        "tags": [
+          "OsImages"
+        ],
+        "description": "Get a os image.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "osImageName",
+            "in": "path",
+            "description": "The name of the OsImage",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-.]{3,50}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OsImage"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OsImages_Get_MaximumSet": {
+            "$ref": "./examples/OsImages_Get_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/locations/{location}/platformUpdates": {
+      "get": {
+        "operationId": "PlatformUpdates_List",
+        "tags": [
+          "PlatformUpdates"
+        ],
+        "description": "List all platform updates.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PlatformUpdateListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PlatformUpdates_ListByLocation_MaximumSet": {
+            "$ref": "./examples/PlatformUpdates_ListByLocation_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/locations/{location}/platformUpdates/{platformUpdateName}": {
+      "get": {
+        "operationId": "PlatformUpdates_Get",
+        "tags": [
+          "PlatformUpdates"
+        ],
+        "description": "Get a platform update.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "platformUpdateName",
+            "in": "path",
+            "description": "The name of the PlatformUpdate",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-.]{3,50}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PlatformUpdate"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PlatformUpdates_Get_MaximumSet": {
+            "$ref": "./examples/PlatformUpdates_Get_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/locations/{location}/updateContents": {
+      "get": {
+        "operationId": "UpdateContents_List",
+        "tags": [
+          "UpdateContents"
+        ],
+        "description": "List all update contents.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UpdateContentListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateContents_ListByLocation_MaximumSet": {
+            "$ref": "./examples/UpdateContents_ListByLocation_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/locations/{location}/updateContents/{updateContentName}": {
+      "get": {
+        "operationId": "UpdateContents_Get",
+        "tags": [
+          "UpdateContents"
+        ],
+        "description": "Gets content for an update.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "updateContentName",
+            "in": "path",
+            "description": "The name of the UpdateContent",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-.]{3,50}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UpdateContent"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateContents_Get_MaximumSet": {
+            "$ref": "./examples/UpdateContents_Get_MaximumSet_Gen.json"
+          }
         }
       }
     },
@@ -1619,7 +1940,7 @@
         "tags": [
           "Extensions"
         ],
-        "description": "List all Extensions under ArcSetting resource.",
+        "description": "List all Extensions under the Parent Entity(HCI Cluster/Edge Machine).",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
@@ -1649,7 +1970,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/HCIExtensionList"
+              "$ref": "#/definitions/ExtensionList"
             }
           },
           "default": {
@@ -1678,7 +1999,7 @@
         "tags": [
           "Extensions"
         ],
-        "description": "Get particular Arc Extension of HCI Cluster.",
+        "description": "Get particular Arc Extension of the Parent Entity(HCI Cluster/Edge Machine).",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
@@ -1715,7 +2036,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/HCIExtension"
+              "$ref": "#/definitions/Extension"
             }
           },
           "default": {
@@ -1739,7 +2060,7 @@
         "tags": [
           "Extensions"
         ],
-        "description": "Create Extension for HCI cluster.",
+        "description": "Create Extension for the Parent Entity(HCI Cluster/Edge Machine).",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
@@ -1777,21 +2098,21 @@
             "description": "Details of the Machine Extension to be created.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/HCIExtension"
+              "$ref": "#/definitions/Extension"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'HCIExtension' update operation succeeded",
+            "description": "Resource 'Extension' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/HCIExtension"
+              "$ref": "#/definitions/Extension"
             }
           },
           "201": {
-            "description": "Resource 'HCIExtension' create operation succeeded",
+            "description": "Resource 'Extension' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/HCIExtension"
+              "$ref": "#/definitions/Extension"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -1830,7 +2151,7 @@
         "tags": [
           "Extensions"
         ],
-        "description": "Update Extension for HCI cluster.",
+        "description": "Update Extension for the Parent Entity(HCI Cluster/Edge Machine).",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
@@ -1868,7 +2189,7 @@
             "description": "Details of the Machine Extension to be created.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/HCIExtensionPatch"
+              "$ref": "#/definitions/ExtensionPatch"
             }
           }
         ],
@@ -1876,7 +2197,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/HCIExtension"
+              "$ref": "#/definitions/Extension"
             }
           },
           "202": {
@@ -1918,7 +2239,7 @@
         "tags": [
           "Extensions"
         ],
-        "description": "Delete particular Arc Extension of HCI Cluster.",
+        "description": "Delete particular Arc Extension of the Parent Entity(HCI Cluster/Edge Machine).",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
@@ -2006,7 +2327,7 @@
         "tags": [
           "Extensions"
         ],
-        "description": "Upgrade a particular Arc Extension of HCI Cluster.",
+        "description": "Upgrade a particular Arc Extension of the Parent Entity(HCI Cluster/Edge Machine).",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
@@ -2044,7 +2365,7 @@
             "description": "Parameters supplied to the Upgrade Extensions operation.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/HCIExtensionUpgradeParameters"
+              "$ref": "#/definitions/ExtensionUpgradeParameters"
             }
           }
         ],
@@ -4643,117 +4964,6 @@
         ]
       }
     },
-    "AksClusterProperties": {
-      "type": "object",
-      "description": "AKS cluster properties for Azure Stack HCI. This object controls the download and configuration of AKS images for the cluster, including enabling or disabling image download. Future extensions may include specifying image version and image path for advanced deployment scenarios.",
-      "properties": {
-        "aksImageDownload": {
-          "type": "string",
-          "description": "Whether to download AKS image for Azure Stack HCI cluster. Possible values include: 'string', 'Enabled', 'Disabled'",
-          "default": "Enabled",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "AksImageDownload",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Enabled",
-                "value": "Enabled",
-                "description": "AKS Image should be downloaded."
-              },
-              {
-                "name": "Disabled",
-                "value": "Disabled",
-                "description": "AKS Image should not be downloaded."
-              }
-            ]
-          },
-          "readOnly": true
-        }
-      }
-    },
-    "AksClusterPropertiesIntent": {
-      "type": "object",
-      "description": "AKS cluster properties for Azure Stack HCI. This object controls the download and configuration of AKS images for the cluster, including enabling or disabling image download. Future extensions may include specifying image version and image path for advanced deployment scenarios.",
-      "properties": {
-        "aksImageDownload": {
-          "type": "string",
-          "description": "Whether to download AKS image for Azure Stack HCI cluster. Possible values include: 'string', 'Enabled', 'Disabled'",
-          "default": "Enabled",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "AksImageDownloadIntent",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Enabled",
-                "value": "Enabled",
-                "description": "AKS Image should be downloaded."
-              },
-              {
-                "name": "Disabled",
-                "value": "Disabled",
-                "description": "AKS Image should not be downloaded."
-              }
-            ]
-          }
-        }
-      }
-    },
-    "AksImageDownload": {
-      "type": "string",
-      "description": "Whether to download AKS image for Azure Stack HCI cluster. Possible values include: 'string', 'Enabled', 'Disabled'",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ],
-      "x-ms-enum": {
-        "name": "AksImageDownload",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Enabled",
-            "value": "Enabled",
-            "description": "AKS Image should be downloaded."
-          },
-          {
-            "name": "Disabled",
-            "value": "Disabled",
-            "description": "AKS Image should not be downloaded."
-          }
-        ]
-      }
-    },
-    "AksImageDownloadIntent": {
-      "type": "string",
-      "description": "Whether to download AKS image for Azure Stack HCI cluster. Possible values include: 'string', 'Enabled', 'Disabled'",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ],
-      "x-ms-enum": {
-        "name": "AksImageDownloadIntent",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Enabled",
-            "value": "Enabled",
-            "description": "AKS Image should be downloaded."
-          },
-          {
-            "name": "Disabled",
-            "value": "Disabled",
-            "description": "AKS Image should not be downloaded."
-          }
-        ]
-      }
-    },
     "ArcConnectivityProperties": {
       "type": "object",
       "description": "Connectivity related configuration required by arc server.",
@@ -5876,10 +6086,6 @@
           "type": "string",
           "description": "Name of the on-prem cluster connected to this resource.",
           "readOnly": true
-        },
-        "aksClusterProperties": {
-          "$ref": "#/definitions/AksClusterProperties",
-          "description": "AKS cluster properties for Azure Stack HCI. This object controls the download and configuration of AKS images for the cluster, including enabling or disabling image download. Future extensions may include specifying image version and image path for advanced deployment scenarios."
         }
       }
     },
@@ -6125,6 +6331,49 @@
           }
         ]
       }
+    },
+    "ContentPayload": {
+      "type": "object",
+      "description": "Represents details of a specific update content payload.",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "Represents url of a update payload."
+        },
+        "hash": {
+          "type": "string",
+          "description": "Represents hash of a update payload."
+        },
+        "hashAlgorithm": {
+          "type": "string",
+          "description": "Represents hash algorithm of a update payload."
+        },
+        "identifier": {
+          "type": "string",
+          "description": "Represents identifier of a update payload."
+        },
+        "packageSizeInBytes": {
+          "type": "string",
+          "description": "Represents size in bytes of a update payload."
+        },
+        "group": {
+          "type": "string",
+          "description": "Represents the group of a update payload."
+        },
+        "fileName": {
+          "type": "string",
+          "description": "Represents the file name of a update payload."
+        }
+      },
+      "required": [
+        "url",
+        "hash",
+        "hashAlgorithm",
+        "identifier",
+        "packageSizeInBytes",
+        "group",
+        "fileName"
+      ]
     },
     "CreatedByType": {
       "type": "string",
@@ -6695,8 +6944,7 @@
           "description": "Azure resource ids of Arc machines to be part of cluster.",
           "items": {
             "type": "string"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "deploymentMode": {
           "$ref": "#/definitions/DeploymentMode",
@@ -6729,8 +6977,7 @@
         },
         "deploymentConfiguration": {
           "$ref": "#/definitions/DeploymentConfiguration",
-          "description": "Scale units will contains list of deployment data",
-          "x-ms-identifiers": []
+          "description": "Scale units will contains list of deployment data"
         },
         "reportedProperties": {
           "$ref": "#/definitions/EceReportedProperties",
@@ -6853,8 +7100,7 @@
           "items": {
             "type": "string"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         }
       }
     },
@@ -7865,6 +8111,21 @@
         ]
       }
     },
+    "Extension": {
+      "type": "object",
+      "description": "Details of a particular extension in HCI Cluster.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ExtensionProperties",
+          "description": "Describes Machine Extension Properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
     "ExtensionAggregateState": {
       "type": "string",
       "description": "Aggregate state of Arc Extensions across the nodes in this HCI cluster.",
@@ -7986,63 +8247,7 @@
       },
       "readOnly": true
     },
-    "ExtensionManagedBy": {
-      "type": "string",
-      "description": "Extension managed by user or Azure.",
-      "enum": [
-        "User",
-        "Azure"
-      ],
-      "x-ms-enum": {
-        "name": "ExtensionManagedBy",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "User",
-            "value": "User",
-            "description": "Extension is managed by user."
-          },
-          {
-            "name": "Azure",
-            "value": "Azure",
-            "description": "Extension is managed by Azure."
-          }
-        ]
-      }
-    },
-    "ExtensionProfile": {
-      "type": "object",
-      "description": "Extensions details for edge device.",
-      "properties": {
-        "extensions": {
-          "type": "array",
-          "description": "List of Arc extensions installed on edge device.",
-          "items": {
-            "$ref": "#/definitions/EdgeDevicesExtension"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "extensionName"
-          ]
-        }
-      }
-    },
-    "HCIExtension": {
-      "type": "object",
-      "description": "Details of a particular extension in HCI Cluster.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/HCIExtensionProperties",
-          "description": "Describes Machine Extension Properties."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "HCIExtensionInstanceView": {
+    "ExtensionInstanceView": {
       "type": "object",
       "description": "Describes the Extension Instance View.",
       "properties": {
@@ -8059,12 +8264,12 @@
           "description": "Specifies the version of the script handler."
         },
         "status": {
-          "$ref": "#/definitions/HCIExtensionInstanceViewStatus",
+          "$ref": "#/definitions/ExtensionInstanceViewStatus",
           "description": "Instance view status."
         }
       }
     },
-    "HCIExtensionInstanceViewStatus": {
+    "ExtensionInstanceViewStatus": {
       "type": "object",
       "description": "Instance view status.",
       "properties": {
@@ -8091,15 +8296,15 @@
         }
       }
     },
-    "HCIExtensionList": {
+    "ExtensionList": {
       "type": "object",
-      "description": "List of Extensions in HCI cluster.",
+      "description": "List of Extensions in the Parent Entity(HCI Cluster/Edge Machine).",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The HCIExtension items on this page",
+          "description": "The Extension items on this page",
           "items": {
-            "$ref": "#/definitions/HCIExtension"
+            "$ref": "#/definitions/Extension"
           }
         },
         "nextLink": {
@@ -8112,7 +8317,31 @@
         "value"
       ]
     },
-    "HCIExtensionParametersContent": {
+    "ExtensionManagedBy": {
+      "type": "string",
+      "description": "Extension managed by user or Azure.",
+      "enum": [
+        "User",
+        "Azure"
+      ],
+      "x-ms-enum": {
+        "name": "ExtensionManagedBy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "User",
+            "value": "User",
+            "description": "Extension is managed by user."
+          },
+          {
+            "name": "Azure",
+            "value": "Azure",
+            "description": "Extension is managed by Azure."
+          }
+        ]
+      }
+    },
+    "ExtensionParametersContent": {
       "type": "object",
       "description": "Describes the properties of a Machine Extension. This object mirrors the definition in HybridCompute.",
       "properties": {
@@ -8152,17 +8381,17 @@
         }
       }
     },
-    "HCIExtensionPatch": {
+    "ExtensionPatch": {
       "type": "object",
       "description": "Extension Details to update",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/HCIExtensionPatchProperties",
+          "$ref": "#/definitions/ExtensionPatchProperties",
           "description": "Describes Machine Extension Properties that can be updated."
         }
       }
     },
-    "HCIExtensionPatchProperties": {
+    "ExtensionPatchProperties": {
       "type": "object",
       "description": "Describes Machine Extension Properties that can be updated.",
       "properties": {
@@ -8172,9 +8401,26 @@
         }
       }
     },
-    "HCIExtensionProperties": {
+    "ExtensionProfile": {
       "type": "object",
-      "description": "Status of Arc Extension for a particular node in HCI Cluster.",
+      "description": "Extensions details for edge device.",
+      "properties": {
+        "extensions": {
+          "type": "array",
+          "description": "List of Arc extensions installed on edge device.",
+          "items": {
+            "$ref": "#/definitions/EdgeDevicesExtension"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "extensionName"
+          ]
+        }
+      }
+    },
+    "ExtensionProperties": {
+      "type": "object",
+      "description": "Status of Arc Extension for a particular node/machine in the Parent Entity(HCI Cluster/Edge Machine).",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -8182,19 +8428,19 @@
           "readOnly": true
         },
         "extensionParameters": {
-          "$ref": "#/definitions/HCIExtensionParametersContent",
+          "$ref": "#/definitions/ExtensionParametersContent",
           "description": "Parameters specific to this extension type."
         },
         "aggregateState": {
           "$ref": "#/definitions/ExtensionAggregateState",
-          "description": "Aggregate state of Arc Extensions across the nodes in this HCI cluster.",
+          "description": "Aggregate state of Arc Extensions across the node/machines in the Parent Entity(HCI Cluster/Edge Machine).",
           "readOnly": true
         },
         "perNodeExtensionDetails": {
           "type": "array",
-          "description": "State of Arc Extension in each of the nodes.",
+          "description": "State of Arc Extension in each of the nodes/machines.",
           "items": {
-            "$ref": "#/definitions/HCIPerNodeExtensionState"
+            "$ref": "#/definitions/PerNodeExtensionState"
           },
           "readOnly": true
         },
@@ -8205,44 +8451,13 @@
         }
       }
     },
-    "HCIExtensionUpgradeParameters": {
+    "ExtensionUpgradeParameters": {
       "type": "object",
       "description": "Describes the parameters for Extension upgrade.",
       "properties": {
         "targetVersion": {
           "type": "string",
           "description": "Extension Upgrade Target Version."
-        }
-      }
-    },
-    "HCIPerNodeExtensionState": {
-      "type": "object",
-      "description": "Status of Arc Extension for a particular node in HCI Cluster.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the node in HCI Cluster.",
-          "readOnly": true
-        },
-        "extension": {
-          "type": "string",
-          "description": "Fully qualified resource ID for the particular Arc Extension on this node.",
-          "readOnly": true
-        },
-        "typeHandlerVersion": {
-          "type": "string",
-          "description": "Specifies the version of the script handler.",
-          "readOnly": true
-        },
-        "state": {
-          "$ref": "#/definitions/NodeExtensionState",
-          "description": "State of Arc Extension in this node.",
-          "readOnly": true
-        },
-        "instanceView": {
-          "$ref": "#/definitions/HCIExtensionInstanceView",
-          "description": "The extension instance view.",
-          "readOnly": true
         }
       }
     },
@@ -8536,8 +8751,7 @@
           "items": {
             "type": "string"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "defaultIsolationId": {
           "type": "string",
@@ -9022,6 +9236,55 @@
       },
       "readOnly": true
     },
+    "KubernetesVersion": {
+      "type": "object",
+      "description": "Represents a kubernetes version resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/KubernetesVersionProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "KubernetesVersionListResult": {
+      "type": "object",
+      "description": "The response of a KubernetesVersion list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The KubernetesVersion items on this page",
+          "items": {
+            "$ref": "#/definitions/KubernetesVersion"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "KubernetesVersionProperties": {
+      "type": "object",
+      "description": "Represents properties of a kubernetes version.",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "Represents kubernetes version."
+        }
+      },
+      "required": [
+        "version"
+      ]
+    },
     "LocalAvailabilityZoneMode": {
       "type": "string",
       "description": "Local Availability Zone Mode for HCI cluster.",
@@ -9394,8 +9657,7 @@
           "description": "DNS Servers for NIC",
           "items": {
             "type": "string"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "defaultIsolationId": {
           "type": "string",
@@ -9781,12 +10043,72 @@
         "customLocation": {
           "type": "string",
           "description": "The name of custom location."
-        },
-        "aksClusterProperties": {
-          "$ref": "#/definitions/AksClusterPropertiesIntent",
-          "description": "AKS cluster properties for Azure Stack HCI. This object controls the download and configuration of AKS images for the cluster, including enabling or disabling image download. Future extensions may include specifying image version and image path for advanced deployment scenarios."
         }
       }
+    },
+    "OsImage": {
+      "type": "object",
+      "description": "Represents a os image resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/OsImageProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "OsImageListResult": {
+      "type": "object",
+      "description": "The response of a OsImage list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The OsImage items on this page",
+          "items": {
+            "$ref": "#/definitions/OsImage"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "OsImageProperties": {
+      "type": "object",
+      "description": "Represents properties of a os image resource.",
+      "properties": {
+        "validatedSolutionRecipeVersion": {
+          "type": "string",
+          "description": "Represents validated solution recipe version of a os image."
+        },
+        "composedImageVersion": {
+          "type": "string",
+          "description": "Represents composed image version of a os image."
+        },
+        "composedImageIsoUrl": {
+          "type": "string",
+          "description": "Represents composed image iso download url of a os image."
+        },
+        "composedImageIsoHash": {
+          "type": "string",
+          "description": "Represents composed image iso hash of a os image."
+        }
+      },
+      "required": [
+        "validatedSolutionRecipeVersion",
+        "composedImageVersion",
+        "composedImageIsoUrl",
+        "composedImageIsoHash"
+      ]
     },
     "PackageVersionInfo": {
       "type": "object",
@@ -9828,6 +10150,37 @@
           "type": "string",
           "format": "date-time",
           "description": "The end date and time of the password validity."
+        }
+      }
+    },
+    "PerNodeExtensionState": {
+      "type": "object",
+      "description": "Status of Arc Extension for a particular node/machine in the Parent Entity(HCI Cluster/Edge Machine).",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the node/machine in the Parent Entity(HCI Cluster/Edge Machine).",
+          "readOnly": true
+        },
+        "extension": {
+          "type": "string",
+          "description": "Fully qualified resource ID for the particular Arc Extension on this node/machine.",
+          "readOnly": true
+        },
+        "typeHandlerVersion": {
+          "type": "string",
+          "description": "Specifies the version of the script handler.",
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "#/definitions/NodeExtensionState",
+          "description": "State of Arc Extension in this node/machine.",
+          "readOnly": true
+        },
+        "instanceView": {
+          "$ref": "#/definitions/ExtensionInstanceView",
+          "description": "The extension instance view.",
+          "readOnly": true
         }
       }
     },
@@ -9904,6 +10257,104 @@
           "description": "The IPv4 address assigned to each physical server on your Azure Stack HCI cluster."
         }
       }
+    },
+    "PlatformPayload": {
+      "type": "object",
+      "description": "Represents details of a specific platform update payload.",
+      "properties": {
+        "payloadUrl": {
+          "type": "string",
+          "description": "Represents url of a platform update payload."
+        },
+        "payloadHash": {
+          "type": "string",
+          "description": "Represents hash of a platform update payload."
+        }
+      },
+      "required": [
+        "payloadUrl",
+        "payloadHash"
+      ]
+    },
+    "PlatformUpdate": {
+      "type": "object",
+      "description": "Represents a platform update resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PlatformUpdateProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "PlatformUpdateDetails": {
+      "type": "object",
+      "description": "Represents details of a specific platform update.",
+      "properties": {
+        "validatedSolutionRecipeVersion": {
+          "type": "string",
+          "description": "Represents validated solution recipe version of a platform update."
+        },
+        "platformVersion": {
+          "type": "string",
+          "description": "Represents version of a platform update."
+        },
+        "platformPayloads": {
+          "type": "array",
+          "description": "Represents the platform payloads of a platform update.",
+          "items": {
+            "$ref": "#/definitions/PlatformPayload"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "validatedSolutionRecipeVersion",
+        "platformVersion",
+        "platformPayloads"
+      ]
+    },
+    "PlatformUpdateListResult": {
+      "type": "object",
+      "description": "The response of a PlatformUpdate list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The PlatformUpdate items on this page",
+          "items": {
+            "$ref": "#/definitions/PlatformUpdate"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PlatformUpdateProperties": {
+      "type": "object",
+      "description": "Represents properties of a platform update resource.",
+      "properties": {
+        "platformUpdateDetails": {
+          "type": "array",
+          "description": "Represents applicable platform updates.",
+          "items": {
+            "$ref": "#/definitions/PlatformUpdateDetails"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "platformUpdateDetails"
+      ]
     },
     "PrecheckResult": {
       "type": "object",
@@ -11499,6 +11950,59 @@
         {
           "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
         }
+      ]
+    },
+    "UpdateContent": {
+      "type": "object",
+      "description": "Represents a update content.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UpdateContentProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "UpdateContentListResult": {
+      "type": "object",
+      "description": "The response of a UpdateContent list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The UpdateContent items on this page",
+          "items": {
+            "$ref": "#/definitions/UpdateContent"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "UpdateContentProperties": {
+      "type": "object",
+      "description": "Represents properties of a update content resource.",
+      "properties": {
+        "updatePayloads": {
+          "type": "array",
+          "description": "Represents the payloads of a update content resource.",
+          "items": {
+            "$ref": "#/definitions/ContentPayload"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "updatePayloads"
       ]
     },
     "UpdateList": {

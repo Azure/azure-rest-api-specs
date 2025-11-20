@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "api-version": "2025-06-01",
+    "monitorName": "myMonitor",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "rulesets": [
+          {
+            "name": "IPFromApi",
+            "type": "ip",
+            "description": "created from azure",
+            "id": "31d91b5afb6f4c2eaaf104c97b1991dd",
+            "includeByDefault": false,
+            "region": "azure-eastus",
+            "rules": [
+              {
+                "description": "Allow inbound traffic from IP address 192.168.131.0",
+                "id": "f0297dad72af4a5e964cddf817f35e65",
+                "source": "192.168.131.0"
+              },
+              {
+                "description": "Allow inbound traffic from IP address block 192.168.132.6/22",
+                "id": "f9c00169f0e54931ae72aabde326b589",
+                "source": "192.168.132.6/22"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "listAssociatedTrafficFilters_list",
+  "title": "listAssociatedTrafficFilters_list"
+}

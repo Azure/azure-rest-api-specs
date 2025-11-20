@@ -40,10 +40,13 @@
   },
   "tags": [
     {
-      "name": "EdgeMachines"
+      "name": "EdgeMachineExtensions"
     },
     {
       "name": "DevicePools"
+    },
+    {
+      "name": "EdgeMachines"
     },
     {
       "name": "EdgeMachineJobs"
@@ -1004,6 +1007,263 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/edgeMachines/{edgeMachineName}/extensions": {
+      "get": {
+        "operationId": "EdgeMachineExtensions_ListByEdgeMachine",
+        "tags": [
+          "EdgeMachineExtensions"
+        ],
+        "description": "List all Extensions on an Edge Machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "edgeMachineName",
+            "in": "path",
+            "description": "Name of Device",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,63}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EdgeMachineExtensionList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EdgeMachineExtensions_ListByEdgeMachine": {
+            "$ref": "./examples/EdgeMachineExtensions_ListByProvisionedMachine.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/edgeMachines/{edgeMachineName}/extensions/{extensionName}": {
+      "get": {
+        "operationId": "EdgeMachineExtensions_Get",
+        "tags": [
+          "EdgeMachineExtensions"
+        ],
+        "description": "Get a specific Extension on an Edge Machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "edgeMachineName",
+            "in": "path",
+            "description": "Name of Device",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,63}$"
+          },
+          {
+            "name": "extensionName",
+            "in": "path",
+            "description": "The name of the EdgeMachineExtension",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EdgeMachineExtension"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EdgeMachineExtensions_Get": {
+            "$ref": "./examples/EdgeMachineExtensions_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "EdgeMachineExtensions_Create",
+        "tags": [
+          "EdgeMachineExtensions"
+        ],
+        "description": "Create or replace an Extension on an Edge Machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "edgeMachineName",
+            "in": "path",
+            "description": "Name of Device",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,63}$"
+          },
+          {
+            "name": "extensionName",
+            "in": "path",
+            "description": "The name of the EdgeMachineExtension",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "extension",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EdgeMachineExtension"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'EdgeMachineExtension' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/EdgeMachineExtension"
+            }
+          },
+          "201": {
+            "description": "Resource 'EdgeMachineExtension' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/EdgeMachineExtension"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EdgeMachineExtensions_Create": {
+            "$ref": "./examples/EdgeMachineExtensions_Create.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "EdgeMachineExtensions_Delete",
+        "tags": [
+          "EdgeMachineExtensions"
+        ],
+        "description": "Delete Extension on an Edge Machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "edgeMachineName",
+            "in": "path",
+            "description": "Name of Device",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,63}$"
+          },
+          {
+            "name": "extensionName",
+            "in": "path",
+            "description": "The name of the EdgeMachineExtension",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EdgeMachineExtensions_Delete": {
+            "$ref": "./examples/EdgeMachineExtensions_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/edgeMachines/{edgeMachineName}/jobs": {
       "get": {
         "operationId": "EdgeMachineJobs_ListByCluster",
@@ -1203,11 +1463,11 @@
           "EdgeMachineJobs_CreateOrUpdate_ProvisionOs": {
             "$ref": "./examples/EdgeMachineJobs_CreateOrUpdate_ProvisionOs.json"
           },
-          "EdgeMachineJobs_CreateOrUpdate_UpdateOs": {
-            "$ref": "./examples/EdgeMachineJobs_CreateOrUpdate_UpdateOs.json"
-          },
           "EdgeMachineJobs_CreateOrUpdate_RemoteSupport": {
             "$ref": "./examples/EdgeMachineJobs_CreateOrUpdate_RemoteSupport.json"
+          },
+          "EdgeMachineJobs_CreateOrUpdate_UpdateOs": {
+            "$ref": "./examples/EdgeMachineJobs_CreateOrUpdate_UpdateOs.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1495,6 +1755,54 @@
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/locations/{location}/validateOwnershipVouchers": {
+      "post": {
+        "operationId": "ServiceOperationGroup_ValidateOwnershipVouchers",
+        "description": "This method does all the necessary validation on the ownership voucher details provided by the customer.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "validationRequest",
+            "in": "body",
+            "description": "Inputs of the customer.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ValidateOwnershipVouchersRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ValidateOwnershipVouchersResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Validate ownership vouchers in a given resource group": {
+            "$ref": "./examples/ValidateOwnershipVouchers_ByResourceGroup.json"
+          }
+        }
       }
     }
   },
@@ -1994,6 +2302,42 @@
         ]
       }
     },
+    "EdgeMachineExtension": {
+      "type": "object",
+      "description": "Details of a particular extension in EdgeMachine.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ExtensionProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "EdgeMachineExtensionList": {
+      "type": "object",
+      "description": "List of Extensions in Edge Machine.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The EdgeMachineExtension items on this page",
+          "items": {
+            "$ref": "#/definitions/EdgeMachineExtension"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "EdgeMachineJob": {
       "type": "object",
       "description": "Cluster Jobs resource",
@@ -2307,6 +2651,17 @@
           "format": "date-time",
           "description": "Last time data updated to service.",
           "readOnly": true
+        },
+        "ownershipVoucherDetails": {
+          "$ref": "#/definitions/OwnershipVoucherDetails",
+          "description": "Ownership voucher details for provisioned machine.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "provisioningDetails": {
+          "$ref": "#/definitions/ProvisioningDetails",
+          "description": "Details for device provisioning."
         }
       }
     },
@@ -2464,6 +2819,176 @@
         }
       }
     },
+    "ExtensionAggregateState": {
+      "type": "string",
+      "description": "Aggregate state of Arc Extensions across the nodes in this HCI cluster.",
+      "enum": [
+        "NotSpecified",
+        "Error",
+        "Succeeded",
+        "Canceled",
+        "Failed",
+        "Connected",
+        "Disconnected",
+        "Deleted",
+        "Creating",
+        "Updating",
+        "Deleting",
+        "Moving",
+        "PartiallySucceeded",
+        "PartiallyConnected",
+        "InProgress",
+        "Accepted",
+        "Provisioning",
+        "UpgradeFailedRollbackSucceeded"
+      ],
+      "x-ms-enum": {
+        "name": "ExtensionAggregateState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotSpecified",
+            "value": "NotSpecified",
+            "description": "The state is not specified."
+          },
+          {
+            "name": "Error",
+            "value": "Error",
+            "description": "An error occurred."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The operation succeeded."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The operation was canceled."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The operation failed."
+          },
+          {
+            "name": "Connected",
+            "value": "Connected",
+            "description": "The extension is connected."
+          },
+          {
+            "name": "Disconnected",
+            "value": "Disconnected",
+            "description": "The extension is disconnected."
+          },
+          {
+            "name": "Deleted",
+            "value": "Deleted",
+            "description": "The extension is deleted."
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "The extension is being created."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The extension is being updated."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The extension is being deleted."
+          },
+          {
+            "name": "Moving",
+            "value": "Moving",
+            "description": "The extension is being moved."
+          },
+          {
+            "name": "PartiallySucceeded",
+            "value": "PartiallySucceeded",
+            "description": "The operation partially succeeded."
+          },
+          {
+            "name": "PartiallyConnected",
+            "value": "PartiallyConnected",
+            "description": "The extension is partially connected."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "The operation is in progress."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The operation has been accepted."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The extension is provisioning."
+          },
+          {
+            "name": "UpgradeFailedRollbackSucceeded",
+            "value": "UpgradeFailedRollbackSucceeded",
+            "description": "Upgrade failed but rollback succeeded."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "ExtensionInstanceView": {
+      "type": "object",
+      "description": "Describes the Extension Instance View.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The extension name."
+        },
+        "type": {
+          "type": "string",
+          "description": "Specifies the type of the extension; an example is \"MicrosoftMonitoringAgent\"."
+        },
+        "typeHandlerVersion": {
+          "type": "string",
+          "description": "Specifies the version of the script handler."
+        },
+        "status": {
+          "$ref": "#/definitions/ExtensionInstanceViewStatus",
+          "description": "Instance view status."
+        }
+      }
+    },
+    "ExtensionInstanceViewStatus": {
+      "type": "object",
+      "description": "Instance view status.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The status code."
+        },
+        "level": {
+          "$ref": "#/definitions/StatusLevelTypes",
+          "description": "The level code."
+        },
+        "displayStatus": {
+          "type": "string",
+          "description": "The short localizable label for the status."
+        },
+        "message": {
+          "type": "string",
+          "description": "The detailed status message, including for alerts and error messages."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time of the status."
+        }
+      }
+    },
     "ExtensionManagedBy": {
       "type": "string",
       "description": "Extension managed by user or Azure.",
@@ -2488,6 +3013,46 @@
         ]
       }
     },
+    "ExtensionParametersContent": {
+      "type": "object",
+      "description": "Describes the properties of a Machine Extension. This object mirrors the definition in HybridCompute.",
+      "properties": {
+        "forceUpdateTag": {
+          "type": "string",
+          "description": "How the extension handler should be forced to update even if the extension configuration has not changed."
+        },
+        "publisher": {
+          "type": "string",
+          "description": "The name of the extension handler publisher."
+        },
+        "type": {
+          "type": "string",
+          "description": "Specifies the type of the extension; an example is \"CustomScriptExtension\"."
+        },
+        "typeHandlerVersion": {
+          "type": "string",
+          "description": "Specifies the version of the script handler. Latest version would be used if not specified."
+        },
+        "autoUpgradeMinorVersion": {
+          "type": "boolean",
+          "description": "Indicates whether the extension should use a newer minor version if one is available at deployment time. Once deployed, however, the extension will not upgrade minor versions unless redeployed, even with this property set to true."
+        },
+        "settings": {
+          "type": "object",
+          "description": "Json formatted public settings for the extension.",
+          "additionalProperties": {}
+        },
+        "protectedSettings": {
+          "type": "object",
+          "description": "Protected settings (may contain secrets).",
+          "additionalProperties": {}
+        },
+        "enableAutomaticUpgrade": {
+          "type": "boolean",
+          "description": "Indicates whether the extension should be automatically upgraded by the platform if there is a newer version available."
+        }
+      }
+    },
     "ExtensionProfile": {
       "type": "object",
       "description": "Extensions details for edge device.",
@@ -2502,6 +3067,39 @@
           "x-ms-identifiers": [
             "extensionName"
           ]
+        }
+      }
+    },
+    "ExtensionProperties": {
+      "type": "object",
+      "description": "Status of Arc Extension for a particular node in the Parent Entity(HCI Cluster/Edge Machine).",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the Extension proxy resource.",
+          "readOnly": true
+        },
+        "extensionParameters": {
+          "$ref": "#/definitions/ExtensionParametersContent",
+          "description": "Parameters specific to this extension type."
+        },
+        "aggregateState": {
+          "$ref": "#/definitions/ExtensionAggregateState",
+          "description": "Aggregate state of Arc Extensions across the nodes in the Parent Entity(HCI Cluster/Edge Machine).",
+          "readOnly": true
+        },
+        "perNodeExtensionDetails": {
+          "type": "array",
+          "description": "State of Arc Extension in each of the nodes/machines.",
+          "items": {
+            "$ref": "#/definitions/PerNodeExtensionState"
+          },
+          "readOnly": true
+        },
+        "managedBy": {
+          "$ref": "#/definitions/ExtensionManagedBy",
+          "description": "Indicates if the extension is managed by azure or the user.",
+          "readOnly": true
         }
       }
     },
@@ -2935,16 +3533,6 @@
         }
       }
     },
-    "StorageConfiguration": {
-      "type": "object",
-      "description": "Storage configuration.",
-      "properties": {
-        "partitionSize": {
-          "type": "string",
-          "description": "Partition size."
-        }
-      }
-    },
     "NetworkProfile": {
       "type": "object",
       "description": "NetworkProfile of edge machine.",
@@ -3083,12 +3671,128 @@
         }
       }
     },
+    "NodeExtensionState": {
+      "type": "string",
+      "description": "State of Arc Extension in this node.",
+      "enum": [
+        "NotSpecified",
+        "Error",
+        "Succeeded",
+        "Canceled",
+        "Failed",
+        "Connected",
+        "Disconnected",
+        "Deleted",
+        "Creating",
+        "Updating",
+        "Deleting",
+        "Moving",
+        "PartiallySucceeded",
+        "PartiallyConnected",
+        "InProgress",
+        "Accepted",
+        "Provisioning"
+      ],
+      "x-ms-enum": {
+        "name": "NodeExtensionState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotSpecified",
+            "value": "NotSpecified",
+            "description": "The state is not specified."
+          },
+          {
+            "name": "Error",
+            "value": "Error",
+            "description": "An error occurred."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The operation succeeded."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The operation was canceled."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The operation failed."
+          },
+          {
+            "name": "Connected",
+            "value": "Connected",
+            "description": "The extension is connected."
+          },
+          {
+            "name": "Disconnected",
+            "value": "Disconnected",
+            "description": "The extension is disconnected."
+          },
+          {
+            "name": "Deleted",
+            "value": "Deleted",
+            "description": "The extension is deleted."
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "The extension is being created."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The extension is being updated."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The extension is being deleted."
+          },
+          {
+            "name": "Moving",
+            "value": "Moving",
+            "description": "The extension is being moved."
+          },
+          {
+            "name": "PartiallySucceeded",
+            "value": "PartiallySucceeded",
+            "description": "The operation partially succeeded."
+          },
+          {
+            "name": "PartiallyConnected",
+            "value": "PartiallyConnected",
+            "description": "The extension is partially connected."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "The operation is in progress."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The operation has been accepted."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The extension is provisioning."
+          }
+        ]
+      },
+      "readOnly": true
+    },
     "OSOperationType": {
       "type": "string",
       "description": "OS Provision Operation type",
       "enum": [
         "Provision",
-        "Update"
+        "Update",
+        "ReImage"
       ],
       "x-ms-enum": {
         "name": "OSOperationType",
@@ -3103,6 +3807,11 @@
             "name": "Update",
             "value": "Update",
             "description": "OS Update operation"
+          },
+          {
+            "name": "ReImage",
+            "value": "ReImage",
+            "description": "OS ReImage operation"
           }
         ]
       }
@@ -3298,7 +4007,8 @@
           "default": "Provision",
           "enum": [
             "Provision",
-            "Update"
+            "Update",
+            "ReImage"
           ],
           "x-ms-enum": {
             "name": "OSOperationType",
@@ -3313,9 +4023,145 @@
                 "name": "Update",
                 "value": "Update",
                 "description": "OS Update operation"
+              },
+              {
+                "name": "ReImage",
+                "value": "ReImage",
+                "description": "OS ReImage operation"
               }
             ]
           }
+        }
+      }
+    },
+    "OwnerKeyType": {
+      "type": "string",
+      "description": "Type of owner key in the voucher",
+      "enum": [
+        "MicrosoftManaged"
+      ],
+      "x-ms-enum": {
+        "name": "OwnerKeyType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "MicrosoftManaged",
+            "value": "MicrosoftManaged",
+            "description": "Owner is Microsoft managed key"
+          }
+        ]
+      }
+    },
+    "OwnershipVoucherDetails": {
+      "type": "object",
+      "description": "Details for ownership voucher.",
+      "properties": {
+        "ownershipVoucher": {
+          "type": "string",
+          "format": "password",
+          "description": "Ownership voucher in base64 encoded format",
+          "x-ms-secret": true
+        },
+        "ownerKeyType": {
+          "$ref": "#/definitions/OwnerKeyType",
+          "description": "Owner key type"
+        }
+      },
+      "required": [
+        "ownershipVoucher",
+        "ownerKeyType"
+      ]
+    },
+    "OwnershipVoucherValidationDetails": {
+      "type": "object",
+      "description": "Ownership Voucher Validation Details",
+      "properties": {
+        "validationStatus": {
+          "$ref": "#/definitions/OwnershipVoucherValidationStatus",
+          "description": "The ownership voucher validation status."
+        },
+        "serialNumber": {
+          "type": "string",
+          "description": "Serial number of the device."
+        },
+        "id": {
+          "type": "string",
+          "description": "FDO guid of the Ownership Voucher."
+        },
+        "manufacturer": {
+          "type": "string",
+          "description": "Name of the manufacturer."
+        },
+        "modelName": {
+          "type": "string",
+          "description": "Name of the model."
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of the Ownership Voucher format"
+        },
+        "azureMachineId": {
+          "type": "string",
+          "description": "Azure Machine Id of the Ownership voucher"
+        },
+        "error": {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail",
+          "description": "Error details if the validation failed."
+        }
+      }
+    },
+    "OwnershipVoucherValidationStatus": {
+      "type": "string",
+      "description": "Ownership Voucher validation Status.",
+      "enum": [
+        "Valid",
+        "Invalid"
+      ],
+      "x-ms-enum": {
+        "name": "OwnershipVoucherValidationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Valid",
+            "value": "Valid",
+            "description": "Voucher evaluated as valid."
+          },
+          {
+            "name": "Invalid",
+            "value": "Invalid",
+            "description": "Voucher evaluated as invalid."
+          }
+        ]
+      }
+    },
+    "PerNodeExtensionState": {
+      "type": "object",
+      "description": "Status of Arc Extension for a particular node in the Parent Entity(HCI Cluster/Edge Machine).",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the node/machine in the Parent Entity(HCI Cluster/Edge Machine).",
+          "readOnly": true
+        },
+        "extension": {
+          "type": "string",
+          "description": "Fully qualified resource ID for the particular Arc Extension on this node/machine.",
+          "readOnly": true
+        },
+        "typeHandlerVersion": {
+          "type": "string",
+          "description": "Specifies the version of the script handler.",
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "#/definitions/NodeExtensionState",
+          "description": "State of Arc Extension in this node/machine.",
+          "readOnly": true
+        },
+        "instanceView": {
+          "$ref": "#/definitions/ExtensionInstanceView",
+          "description": "The extension instance view.",
+          "readOnly": true
         }
       }
     },
@@ -3363,6 +4209,29 @@
           "readOnly": true
         }
       }
+    },
+    "ProvisioningDetails": {
+      "type": "object",
+      "description": "Details for device provisioning.",
+      "properties": {
+        "osProfile": {
+          "$ref": "#/definitions/OsProvisionProfile",
+          "description": "Operating system profile."
+        },
+        "userDetails": {
+          "type": "array",
+          "description": "User configuration.",
+          "items": {
+            "$ref": "#/definitions/UserDetails"
+          },
+          "x-ms-identifiers": [
+            "userName"
+          ]
+        }
+      },
+      "required": [
+        "osProfile"
+      ]
     },
     "ProvisioningOsType": {
       "type": "string",
@@ -3825,6 +4694,36 @@
         "siteResourceId"
       ]
     },
+    "StatusLevelTypes": {
+      "type": "string",
+      "description": "The level code.",
+      "enum": [
+        "Info",
+        "Warning",
+        "Error"
+      ],
+      "x-ms-enum": {
+        "name": "StatusLevelTypes",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Info",
+            "value": "Info",
+            "description": "Information level."
+          },
+          {
+            "name": "Warning",
+            "value": "Warning",
+            "description": "Warning level."
+          },
+          {
+            "name": "Error",
+            "value": "Error",
+            "description": "Error level."
+          }
+        ]
+      }
+    },
     "Step": {
       "type": "object",
       "description": "Step details during job execution.",
@@ -3882,6 +4781,16 @@
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail",
           "description": "Error information for the step",
           "readOnly": true
+        }
+      }
+    },
+    "StorageConfiguration": {
+      "type": "object",
+      "description": "Storage configuration.",
+      "properties": {
+        "partitionSize": {
+          "type": "string",
+          "description": "Partition size."
         }
       }
     },
@@ -3991,6 +4900,34 @@
         "userName",
         "secretType"
       ]
+    },
+    "ValidateOwnershipVouchersRequest": {
+      "type": "object",
+      "description": "Validate Ownership Voucher Request",
+      "properties": {
+        "ownershipVoucherDetails": {
+          "type": "array",
+          "description": "Ownership Voucher Details.",
+          "items": {
+            "$ref": "#/definitions/OwnershipVoucherDetails"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ValidateOwnershipVouchersResponse": {
+      "type": "object",
+      "description": "Validate Ownership Voucher Response",
+      "properties": {
+        "ownershipVoucherValidationDetails": {
+          "type": "array",
+          "description": "Ownership Voucher Validation Details.",
+          "items": {
+            "$ref": "#/definitions/OwnershipVoucherValidationDetails"
+          },
+          "x-ms-identifiers": []
+        }
+      }
     },
     "WebProxyConfiguration": {
       "type": "object",

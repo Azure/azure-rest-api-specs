@@ -99,7 +99,7 @@ model ApplicationProperties {
   provisioningState?: ProvisioningState;
 
   @doc("List of realms associated with the application")
-  @OpenAPI.extension("x-ms-identifiers", #["type"])
+  @identifiers(#["type"])
   realms?: RealmReference[];
 
   @doc("List of reply to addresses")
@@ -124,7 +124,7 @@ model ApplicationProperties {
   accountProperties?: string[];
 
   @doc("Account claims")
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   claims?: ApplicationClaim[];
 
   @doc("Version of the account")

@@ -69,7 +69,7 @@ model DeviceStateProperties {
   @doc("Array of previously allocated endpoints")
   @removed(Versions.v2025_05_01_preview)
   @maxItems(1)
-  @extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   allocatedEndpoints?: Array<AllocatedEndpoint>;
 
   @visibility(Lifecycle.Read)

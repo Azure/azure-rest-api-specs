@@ -50,6 +50,9 @@
     },
     {
       "name": "UpgradeHistories"
+    },
+    {
+      "name": "AvailableVersions"
     }
   ],
   "paths": {
@@ -121,6 +124,58 @@
         "x-ms-examples": {
           "AppLinks_ListBySubscription": {
             "$ref": "./examples/AppLinks_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AppLink/locations/{location}/availableVersions": {
+      "get": {
+        "operationId": "AvailableVersions_ListByLocation",
+        "tags": [
+          "AvailableVersions"
+        ],
+        "description": "List AvailableVersion resources by Location",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "kubernetesVersion",
+            "in": "query",
+            "description": "Kubernetes version to filter profiles",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AvailableVersionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AvailableVersions_ListByLocation": {
+            "$ref": "./examples/AvailableVersions_ListByLocation.json"
+          },
+          "AvailableVersions_ListByLocationWithFilter": {
+            "$ref": "./examples/AvailableVersions_ListByLocationWithFilter.json"
           }
         },
         "x-ms-pageable": {
@@ -335,6 +390,10 @@
           "202": {
             "description": "Resource update request accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -359,7 +418,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       },
@@ -663,6 +722,10 @@
           "202": {
             "description": "Resource update request accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -687,7 +750,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       },
@@ -902,7 +965,11 @@
       "properties": {
         "clusterType": {
           "$ref": "#/definitions/ClusterType",
-          "description": "Cluster type"
+          "description": "Cluster type",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "metadata": {
           "$ref": "#/definitions/Metadata",
@@ -920,9 +987,9 @@
           "$ref": "#/definitions/SelfManagedUpgradeProfile",
           "description": "Self managed upgrade profile"
         },
-        "observabilitySettings": {
-          "$ref": "#/definitions/ObservabilitySettings",
-          "description": "Observability settings"
+        "observabilityProfile": {
+          "$ref": "#/definitions/ObservabilityProfile",
+          "description": "Observability profile"
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -938,10 +1005,6 @@
       "type": "object",
       "description": "AppLink Member properties",
       "properties": {
-        "clusterType": {
-          "$ref": "#/definitions/ClusterType",
-          "description": "Cluster type"
-        },
         "metadata": {
           "$ref": "#/definitions/MetadataUpdate",
           "description": "AppLink Member Metadata"
@@ -958,9 +1021,9 @@
           "$ref": "#/definitions/SelfManagedUpgradeProfileUpdate",
           "description": "Self managed upgrade profile"
         },
-        "observabilitySettings": {
-          "$ref": "#/definitions/ObservabilitySettingsUpdate",
-          "description": "Observability settings"
+        "observabilityProfile": {
+          "$ref": "#/definitions/ObservabilityProfileUpdate",
+          "description": "Observability profile"
         }
       }
     },
@@ -987,20 +1050,6 @@
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state",
           "readOnly": true
-        },
-        "observabilityProfile": {
-          "$ref": "#/definitions/ObservabilityProfile",
-          "description": "Observability profile"
-        }
-      }
-    },
-    "AppLinkPropertiesUpdate": {
-      "type": "object",
-      "description": "AppLink properties",
-      "properties": {
-        "observabilityProfile": {
-          "$ref": "#/definitions/ObservabilityProfileUpdate",
-          "description": "Observability profile"
         }
       }
     },
@@ -1009,7 +1058,7 @@
       "description": "AppLink resource",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/AppLinkPropertiesUpdate",
+          "$ref": "#/definitions/AppLinkProperties",
           "description": "The resource-specific properties for this resource."
         },
         "identity": {
@@ -1021,6 +1070,70 @@
         {
           "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
         }
+      ]
+    },
+    "AvailableVersion": {
+      "type": "object",
+      "description": "AppLink available version resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AvailableVersionProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "AvailableVersionListResult": {
+      "type": "object",
+      "description": "The response of a AvailableVersion list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AvailableVersion items on this page",
+          "items": {
+            "$ref": "#/definitions/AvailableVersion"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AvailableVersionProperties": {
+      "type": "object",
+      "description": "AppLink available version properties",
+      "properties": {
+        "kubernetesVersion": {
+          "type": "string",
+          "description": "Kubernetes version"
+        },
+        "fullyManagedVersions": {
+          "$ref": "#/definitions/FullyManagedVersions",
+          "description": "Fully managed versions"
+        },
+        "selfManagedVersions": {
+          "$ref": "#/definitions/SelfManagedVersions",
+          "description": "Self managed versions"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "kubernetesVersion",
+        "fullyManagedVersions",
+        "selfManagedVersions"
       ]
     },
     "Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate": {
@@ -1101,51 +1214,25 @@
         }
       }
     },
-    "LogsProfile": {
+    "FullyManagedVersions": {
       "type": "object",
-      "description": "AppLink logs profile",
+      "description": "Fully managed versions",
       "properties": {
-        "logsWorkspaceResourceId": {
-          "type": "string",
-          "description": "Logs workspace resource ID"
+        "releaseChannels": {
+          "type": "array",
+          "description": "Release channels",
+          "items": {
+            "$ref": "#/definitions/ReleaseChannelInfo"
+          },
+          "x-ms-identifiers": [
+            "releaseChannel",
+            "version"
+          ]
         }
       },
       "required": [
-        "logsWorkspaceResourceId"
+        "releaseChannels"
       ]
-    },
-    "LogsProfileUpdate": {
-      "type": "object",
-      "description": "AppLink logs profile",
-      "properties": {
-        "logsWorkspaceResourceId": {
-          "type": "string",
-          "description": "Logs workspace resource ID"
-        }
-      }
-    },
-    "LogsSettings": {
-      "type": "object",
-      "description": "AppLinkMember logs settings",
-      "properties": {
-        "state": {
-          "$ref": "#/definitions/ObservabilityState",
-          "description": "Logs state"
-        }
-      },
-      "required": [
-        "state"
-      ]
-    },
-    "LogsSettingsUpdate": {
-      "type": "object",
-      "description": "AppLinkMember logs settings",
-      "properties": {
-        "state": {
-          "$ref": "#/definitions/ObservabilityState",
-          "description": "Logs state"
-        }
-      }
     },
     "Metadata": {
       "type": "object",
@@ -1153,7 +1240,11 @@
       "properties": {
         "resourceId": {
           "type": "string",
-          "description": "Resource ID"
+          "description": "Resource ID",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "required": [
@@ -1162,167 +1253,44 @@
     },
     "MetadataUpdate": {
       "type": "object",
-      "description": "AppLinkMember metadata",
-      "properties": {
-        "resourceId": {
-          "type": "string",
-          "description": "Resource ID"
-        }
-      }
+      "description": "AppLinkMember metadata"
     },
     "MetricsProfile": {
       "type": "object",
-      "description": "AppLink metrics profile",
+      "description": "AppLinkMember metrics profile",
       "properties": {
-        "monitorWorkspaceResourceId": {
+        "metricsEndpoint": {
           "type": "string",
-          "description": "Monitor workspace resource ID"
-        },
-        "grafanaDashboard": {
-          "type": "string",
-          "description": "Grafana dashboard URL",
+          "description": "Metrics endpoint URL",
           "readOnly": true
         }
       },
       "required": [
-        "monitorWorkspaceResourceId"
+        "metricsEndpoint"
       ]
     },
     "MetricsProfileUpdate": {
       "type": "object",
-      "description": "AppLink metrics profile",
-      "properties": {
-        "monitorWorkspaceResourceId": {
-          "type": "string",
-          "description": "Monitor workspace resource ID"
-        }
-      }
-    },
-    "MetricsSettings": {
-      "type": "object",
-      "description": "AppLinkMember metrics settings",
-      "properties": {
-        "state": {
-          "$ref": "#/definitions/ObservabilityState",
-          "description": "Metrics state"
-        }
-      },
-      "required": [
-        "state"
-      ]
-    },
-    "MetricsSettingsUpdate": {
-      "type": "object",
-      "description": "AppLinkMember metrics settings",
-      "properties": {
-        "state": {
-          "$ref": "#/definitions/ObservabilityState",
-          "description": "Metrics state"
-        }
-      }
+      "description": "AppLinkMember metrics profile"
     },
     "ObservabilityProfile": {
       "type": "object",
-      "description": "AppLink observability profile",
+      "description": "AppLinkMember observability profile",
       "properties": {
         "metrics": {
           "$ref": "#/definitions/MetricsProfile",
-          "description": "Metrics profile"
-        },
-        "logs": {
-          "$ref": "#/definitions/LogsProfile",
-          "description": "Logs profile"
-        },
-        "traces": {
-          "$ref": "#/definitions/TracesProfile",
-          "description": "Traces profile"
+          "description": "Metrics configuration"
         }
       }
     },
     "ObservabilityProfileUpdate": {
       "type": "object",
-      "description": "AppLink observability profile",
+      "description": "AppLinkMember observability profile",
       "properties": {
         "metrics": {
           "$ref": "#/definitions/MetricsProfileUpdate",
-          "description": "Metrics profile"
-        },
-        "logs": {
-          "$ref": "#/definitions/LogsProfileUpdate",
-          "description": "Logs profile"
-        },
-        "traces": {
-          "$ref": "#/definitions/TracesProfileUpdate",
-          "description": "Traces profile"
+          "description": "Metrics configuration"
         }
-      }
-    },
-    "ObservabilitySettings": {
-      "type": "object",
-      "description": "AppLinkMember observability settings",
-      "properties": {
-        "metrics": {
-          "$ref": "#/definitions/MetricsSettings",
-          "description": "Metrics settings"
-        },
-        "logs": {
-          "$ref": "#/definitions/LogsSettings",
-          "description": "Logs settings"
-        },
-        "traces": {
-          "$ref": "#/definitions/TracesSettings",
-          "description": "Traces settings"
-        },
-        "managedIdentity": {
-          "type": "string",
-          "description": "Managed identity"
-        }
-      }
-    },
-    "ObservabilitySettingsUpdate": {
-      "type": "object",
-      "description": "AppLinkMember observability settings",
-      "properties": {
-        "metrics": {
-          "$ref": "#/definitions/MetricsSettingsUpdate",
-          "description": "Metrics settings"
-        },
-        "logs": {
-          "$ref": "#/definitions/LogsSettingsUpdate",
-          "description": "Logs settings"
-        },
-        "traces": {
-          "$ref": "#/definitions/TracesSettingsUpdate",
-          "description": "Traces settings"
-        },
-        "managedIdentity": {
-          "type": "string",
-          "description": "Managed identity"
-        }
-      }
-    },
-    "ObservabilityState": {
-      "type": "string",
-      "description": "AppLinkMember observability state",
-      "enum": [
-        "Disabled",
-        "Enabled"
-      ],
-      "x-ms-enum": {
-        "name": "ObservabilityState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Disabled",
-            "value": "Disabled",
-            "description": "Observability state disabled"
-          },
-          {
-            "name": "Enabled",
-            "value": "Enabled",
-            "description": "Observability state enabled"
-          }
-        ]
       }
     },
     "ProvisioningState": {
@@ -1380,6 +1348,24 @@
       },
       "readOnly": true
     },
+    "ReleaseChannelInfo": {
+      "type": "object",
+      "description": "Release channel information",
+      "properties": {
+        "releaseChannel": {
+          "type": "string",
+          "description": "Release channel"
+        },
+        "version": {
+          "type": "string",
+          "description": "Istio version behind release channel"
+        }
+      },
+      "required": [
+        "releaseChannel",
+        "version"
+      ]
+    },
     "SelfManagedUpgradeProfile": {
       "type": "object",
       "description": "AppLinkMember self managed upgrade profile",
@@ -1403,51 +1389,25 @@
         }
       }
     },
-    "TracesProfile": {
+    "SelfManagedVersions": {
       "type": "object",
-      "description": "AppLink traces profile",
+      "description": "Self managed versions",
       "properties": {
-        "insightsResourceId": {
-          "type": "string",
-          "description": "Insights resource ID"
+        "versions": {
+          "type": "array",
+          "description": "Istio versions",
+          "items": {
+            "$ref": "#/definitions/VersionInfo"
+          },
+          "x-ms-identifiers": [
+            "version",
+            "upgrades"
+          ]
         }
       },
       "required": [
-        "insightsResourceId"
+        "versions"
       ]
-    },
-    "TracesProfileUpdate": {
-      "type": "object",
-      "description": "AppLink traces profile",
-      "properties": {
-        "insightsResourceId": {
-          "type": "string",
-          "description": "Insights resource ID"
-        }
-      }
-    },
-    "TracesSettings": {
-      "type": "object",
-      "description": "AppLinkMember traces settings",
-      "properties": {
-        "state": {
-          "$ref": "#/definitions/ObservabilityState",
-          "description": "Traces state"
-        }
-      },
-      "required": [
-        "state"
-      ]
-    },
-    "TracesSettingsUpdate": {
-      "type": "object",
-      "description": "AppLinkMember traces settings",
-      "properties": {
-        "state": {
-          "$ref": "#/definitions/ObservabilityState",
-          "description": "Traces state"
-        }
-      }
     },
     "UpgradeHistory": {
       "type": "object",
@@ -1571,6 +1531,27 @@
           }
         ]
       }
+    },
+    "VersionInfo": {
+      "type": "object",
+      "description": "Version information",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "Istio version"
+        },
+        "upgrades": {
+          "type": "array",
+          "description": "Available upgrades",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "version",
+        "upgrades"
+      ]
     }
   },
   "parameters": {}

@@ -1,6 +1,5 @@
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-autorest";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
@@ -21,10 +20,8 @@ enum Versions {
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
-using Autorest;
 using Azure.Core;
 using Azure.ResourceManager;
-using OpenAPI;
 
 interface Operations extends Azure.ResourceManager.Operations {
   checkNameAvailability is checkGlobalNameAvailability;
@@ -48,46 +45,6 @@ union ProvisioningState {
 
   ResourceProvisioningState,
   string,
-}
-
-@doc("Proxy account")
-model ProxyAccount is ProxyResource<ProxyAccountProperties> {
-  @doc("Proxy account name")
-  @key("proxyAccountName")
-  @segment("proxyAccounts")
-  @path
-  @visibility(Lifecycle.Read)
-  @minLength(3)
-  @maxLength(128)
-  @pattern("^[a-zA-Z][a-zA-Z0-9-]+$")
-  name: string;
-}
-
-@armResourceOperations
-interface ProxyAccounts {
-  get is ArmResourceRead<ProxyAccount>;
-  create is ArmResourceCreateOrReplaceAsync<ProxyAccount>;
-  update is ArmResourcePatchAsync<ProxyAccount, ProxyAccountProperties>;
-  delete is ArmResourceDeleteWithoutOkAsync<ProxyAccount>;
-  listByResourceGroup is ArmResourceListByParent<ProxyAccount>;
-  listBySubscription is ArmListBySubscription<ProxyAccount>;
-}
-
-@doc("Proxy account properties")
-model ProxyAccountProperties {
-  @doc("Provisioning state")
-  @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
-
-  @doc("Proxy account authentication properties")
-  authentication?: ProxyAccountAuthenticationProperties;
-}
-
-@doc("Proxy account authentication properties")
-model ProxyAccountAuthenticationProperties {
-  @doc("Certificate-based authentication properties")
-  @extension("x-ms-identifiers", #["subjectName"])
-  certificates?: CertificateProperties[];
 }
 
 @doc("Throttling account")
@@ -142,11 +99,11 @@ model ThrottlingAccountProperties {
 @doc("Account authentication properties")
 model AccountAuthenticationProperties {
   @doc("Certificate-based authentication properties")
-  @extension("x-ms-identifiers", #["subjectName"])
+  @identifiers(#["subjectName"])
   certificates?: CertificateProperties[];
 
   @doc("Microsoft Entra-based authentication properties")
-  @extension("x-ms-identifiers", #["tenantId", "objectId"])
+  @identifiers(#["tenantId", "objectId"])
   entra?: EntraProperties[];
 }
 
@@ -207,14 +164,12 @@ model RuleProperties {
   depthMultiplier: int32;
 
   @doc("Window duration")
-  // TODO: define, see task #27581502 which is blocked by https://github.com/Microsoft/typespec/issues/3318
-  //@minValue("?")
-  //@maxValue("?")
+  @minValue(duration.fromISO("PT5M"))
+  @maxValue(duration.fromISO("PT1H"))
   windowDuration: duration;
 
   @doc("Minimal enforcement duration")
-  // TODO: define, see task #27581502 which is blocked by https://github.com/Microsoft/typespec/issues/3318
-  //@minValue("?")
-  //@maxValue("?")
+  @minValue(duration.fromISO("PT5M"))
+  @maxValue(duration.fromISO("PT1H"))
   minEnforcementDuration?: duration;
 }

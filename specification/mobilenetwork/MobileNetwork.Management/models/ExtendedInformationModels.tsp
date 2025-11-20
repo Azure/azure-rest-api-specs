@@ -2,7 +2,7 @@ import "@typespec/openapi";
 
 import "../common/CommonModels.tsp";
 
-using TypeSpec.OpenAPI;
+using Azure.ResourceManager;
 
 namespace Microsoft.MobileNetwork;
 
@@ -91,7 +91,7 @@ model UeInfo4GProperties {
 
   @doc("UE Session Info for 4G.")
   @maxItems(11)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   sessionInfo?: Array<UeSessionInfo4G>;
 }
 
@@ -116,7 +116,8 @@ model UeConnectionInfo4G {
 
   @doc("MME S1AP identifier.")
   @minValue(0)
-  @maxValue(4294967295)
+  // Not an int32
+  // @maxValue(4294967295)
   mmeS1apId: int32;
 
   @doc("Per-UE transport network layer association.")
@@ -139,7 +140,8 @@ model Guti4G {
 
   @doc("MME Temporary Mobile Subscriber Identity.")
   @minValue(0)
-  @maxValue(4294967295)
+  // Not an int32
+  // @maxValue(4294967295)
   mTmsi: int32;
 
   @doc("PLMN Identifier.")
@@ -262,7 +264,7 @@ model UeInfo5GProperties {
 
   @doc("UE Session Info for 5G.")
   @maxItems(15)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   sessionInfo?: Array<UeSessionInfo5G>;
 
   @doc("Subscription Permanent Identifier.")
@@ -273,7 +275,7 @@ model UeInfo5GProperties {
 model UeConnectionInfo5G {
   @doc("Allowed Network Slice Selection Assistance Information.")
   @maxItems(8)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   allowedNssai?: Array<Snssai>;
 
   @doc("The AMF UE NGAP ID.")
@@ -297,7 +299,8 @@ model UeConnectionInfo5G {
 
   @doc("The RAN UE NGAP ID.")
   @minValue(0)
-  @maxValue(4294967295)
+  // Not an int32
+  // @maxValue(4294967295)
   ranUeNgapId: int32;
 
   @doc("Radio connection establishment cause.")
@@ -317,7 +320,8 @@ model Guti5G {
 
   @doc("5G Temporary Mobile Subscriber Identity.")
   @minValue(0)
-  @maxValue(4294967295)
+  // Not an int32
+  // @maxValue(4294967295)
   fivegTmsi: int32;
 
   @doc("PLMN Identifier.")
@@ -361,7 +365,7 @@ model UeSessionInfo5G {
   pduSessionId: PduSessionId;
 
   @doc("QoS Flow.")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   qosFlow: Array<UeQOSFlow>;
 
   @doc("Single-network slice selection assistance information (S-NSSAI).")

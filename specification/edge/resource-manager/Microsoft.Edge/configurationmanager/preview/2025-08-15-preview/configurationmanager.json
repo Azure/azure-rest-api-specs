@@ -466,7 +466,7 @@
             "description": "The name of the SchemaReference",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^default$"
           }
         ],
         "responses": {
@@ -488,6 +488,186 @@
             "$ref": "./examples/SchemaReferences_Get_MaximumSet_Gen.json"
           }
         }
+      },
+      "put": {
+        "operationId": "SchemaReferences_CreateOrUpdate",
+        "tags": [
+          "SchemaReferences"
+        ],
+        "description": "Create or update a Schema Reference Resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "schemaReferenceName",
+            "in": "path",
+            "description": "The name of the SchemaReference",
+            "required": true,
+            "type": "string",
+            "pattern": "^default$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SchemaReference"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'SchemaReference' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SchemaReference"
+            }
+          },
+          "201": {
+            "description": "Resource 'SchemaReference' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SchemaReference"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SchemaReferences_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/SchemaReferences_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "SchemaReferences_Update",
+        "tags": [
+          "SchemaReferences"
+        ],
+        "description": "update a Schema Reference Resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "schemaReferenceName",
+            "in": "path",
+            "description": "The name of the SchemaReference",
+            "required": true,
+            "type": "string",
+            "pattern": "^default$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SchemaReferenceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SchemaReference"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SchemaReferences_Update_MaximumSet": {
+            "$ref": "./examples/SchemaReferences_Update_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "SchemaReferences_Delete",
+        "tags": [
+          "SchemaReferences"
+        ],
+        "description": "Delete a Schema Reference Resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "schemaReferenceName",
+            "in": "path",
+            "description": "The name of the SchemaReference",
+            "required": true,
+            "type": "string",
+            "pattern": "^default$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SchemaReferences_Delete_MaximumSet": {
+            "$ref": "./examples/SchemaReferences_Delete_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/{resourceUri}/providers/Microsoft.Edge/solutionMetadatas": {
@@ -710,7 +890,7 @@
           }
         },
         "x-ms-examples": {
-          "ConfigTemplates_ListBySubscription_MaximumSet": {
+          "ConfigTemplates_ListBySubscription_MaximumSet - generated by [MaximumSet] rule": {
             "$ref": "./examples/ConfigTemplates_ListBySubscription_MaximumSet_Gen.json"
           }
         },
@@ -749,7 +929,7 @@
           }
         },
         "x-ms-examples": {
-          "Contexts_ListBySubscription_MaximumSet": {
+          "Contexts_ListBySubscription_MaximumSet - generated by [MaximumSet] rule": {
             "$ref": "./examples/Contexts_ListBySubscription_MaximumSet_Gen.json"
           }
         },
@@ -986,7 +1166,7 @@
           }
         },
         "x-ms-examples": {
-          "ConfigTemplates_ListByResourceGroup_MaximumSet": {
+          "ConfigTemplates_ListByResourceGroup_MaximumSet - generated by [MaximumSet] rule": {
             "$ref": "./examples/ConfigTemplates_ListByResourceGroup_MaximumSet_Gen.json"
           }
         },
@@ -1036,7 +1216,7 @@
           }
         },
         "x-ms-examples": {
-          "ConfigTemplates_Get_MaximumSet": {
+          "ConfigTemplates_Get_MaximumSet - generated by [MaximumSet] rule": {
             "$ref": "./examples/ConfigTemplates_Get_MaximumSet_Gen.json"
           }
         }
@@ -1107,7 +1287,7 @@
           }
         },
         "x-ms-examples": {
-          "ConfigTemplates_CreateOrUpdate_MaximumSet": {
+          "ConfigTemplates_CreateOrUpdate_MaximumSet - generated by [MaximumSet] rule": {
             "$ref": "./examples/ConfigTemplates_CreateOrUpdate_MaximumSet_Gen.json"
           }
         },
@@ -1165,7 +1345,7 @@
           }
         },
         "x-ms-examples": {
-          "ConfigTemplates_Update_MaximumSet": {
+          "ConfigTemplates_Update_MaximumSet - generated by [MaximumSet] rule": {
             "$ref": "./examples/ConfigTemplates_Update_MaximumSet_Gen.json"
           }
         }
@@ -1221,7 +1401,7 @@
           }
         },
         "x-ms-examples": {
-          "ConfigTemplates_Delete_MaximumSet": {
+          "ConfigTemplates_Delete_MaximumSet - generated by [MaximumSet] rule": {
             "$ref": "./examples/ConfigTemplates_Delete_MaximumSet_Gen.json"
           }
         },
@@ -1272,7 +1452,7 @@
           }
         },
         "x-ms-examples": {
-          "ConfigTemplateMetadatas_ListByConfigTemplate_MaximumSet - generated by [MaximumSet] rule": {
+          "ConfigTemplateMetadatas_ListByConfigTemplate_MaximumSet - generated by [MaximumSet] rule - generated by [MaximumSet] rule": {
             "$ref": "./examples/ConfigTemplateMetadatas_ListByConfigTemplate_MaximumSet_Gen.json"
           }
         },
@@ -1330,7 +1510,7 @@
           }
         },
         "x-ms-examples": {
-          "ConfigTemplateMetadatas_Get_MaximumSet - generated by [MaximumSet] rule": {
+          "ConfigTemplateMetadatas_Get_MaximumSet - generated by [MaximumSet] rule - generated by [MaximumSet] rule": {
             "$ref": "./examples/ConfigTemplateMetadatas_Get_MaximumSet_Gen.json"
           }
         }
@@ -1400,7 +1580,7 @@
           }
         },
         "x-ms-examples": {
-          "ConfigTemplates_CreateVersion_MaximumSet": {
+          "ConfigTemplates_CreateVersion_MaximumSet - generated by [MaximumSet] rule": {
             "$ref": "./examples/ConfigTemplates_CreateVersion_MaximumSet_Gen.json"
           }
         },
@@ -1468,7 +1648,7 @@
           }
         },
         "x-ms-examples": {
-          "ConfigTemplates_LinkToHierarchies_MaximumSet": {
+          "ConfigTemplates_LinkToHierarchies_MaximumSet - generated by [MaximumSet] rule": {
             "$ref": "./examples/ConfigTemplates_LinkToHierarchies_MaximumSet_Gen.json"
           }
         },
@@ -1528,10 +1708,78 @@
           }
         },
         "x-ms-examples": {
-          "ConfigTemplates_RemoveVersion_MaximumSet": {
+          "ConfigTemplates_RemoveVersion_MaximumSet - generated by [MaximumSet] rule": {
             "$ref": "./examples/ConfigTemplates_RemoveVersion_MaximumSet_Gen.json"
           }
         }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/configTemplates/{configTemplateName}/unLinkFromHierarchies": {
+      "post": {
+        "operationId": "ConfigTemplates_UnLinkFromHierarchies",
+        "tags": [
+          "ConfigTemplates"
+        ],
+        "description": "Remove a Config Template from a particular hierarchy node",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "configTemplateName",
+            "in": "path",
+            "description": "The name of the ConfigTemplate",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HierarchySelector"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConfigTemplates_UnLinkFromHierarchies_MaximumSet - generated by [MaximumSet] rule": {
+            "$ref": "./examples/ConfigTemplates_UnLinkFromHierarchies_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/configTemplates/{configTemplateName}/versions": {
@@ -1793,7 +2041,7 @@
           }
         },
         "x-ms-examples": {
-          "Contexts_ListByResourceGroup_MaximumSet": {
+          "Contexts_ListByResourceGroup_MaximumSet - generated by [MaximumSet] rule": {
             "$ref": "./examples/Contexts_ListByResourceGroup_MaximumSet_Gen.json"
           }
         },
@@ -1845,7 +2093,7 @@
           }
         },
         "x-ms-examples": {
-          "Contexts_Get_MaximumSet": {
+          "Contexts_Get_MaximumSet - generated by [MaximumSet] rule": {
             "$ref": "./examples/Contexts_Get_MaximumSet_Gen.json"
           }
         }
@@ -1918,7 +2166,7 @@
           }
         },
         "x-ms-examples": {
-          "Contexts_CreateOrUpdate_MaximumSet": {
+          "Contexts_CreateOrUpdate_MaximumSet - generated by [MaximumSet] rule": {
             "$ref": "./examples/Contexts_CreateOrUpdate_MaximumSet_Gen.json"
           }
         },
@@ -1992,7 +2240,7 @@
           }
         },
         "x-ms-examples": {
-          "Contexts_Update_MaximumSet": {
+          "Contexts_Update_MaximumSet - generated by [MaximumSet] rule": {
             "$ref": "./examples/Contexts_Update_MaximumSet_Gen.json"
           }
         },
@@ -2054,7 +2302,7 @@
           }
         },
         "x-ms-examples": {
-          "Contexts_Delete_MaximumSet": {
+          "Contexts_Delete_MaximumSet - generated by [MaximumSet] rule": {
             "$ref": "./examples/Contexts_Delete_MaximumSet_Gen.json"
           }
         },
@@ -6015,7 +6263,7 @@
           }
         },
         "x-ms-examples": {
-          "SolutionTemplateVersions_BulkPublishSolution_MaximumSet": {
+          "SolutionTemplateVersions_BulkPublishSolution_MaximumSet - generated by [MaximumSet] rule": {
             "$ref": "./examples/SolutionTemplateVersions_BulkPublishSolution_MaximumSet_Gen.json"
           }
         },
@@ -6093,7 +6341,7 @@
           }
         },
         "x-ms-examples": {
-          "SolutionTemplateVersions_BulkReviewSolution_MaximumSet": {
+          "SolutionTemplateVersions_BulkReviewSolution_MaximumSet - generated by [MaximumSet] rule": {
             "$ref": "./examples/SolutionTemplateVersions_BulkReviewSolution_MaximumSet_Gen.json"
           }
         },
@@ -9526,6 +9774,16 @@
         ]
       }
     },
+    "AdditionalData": {
+      "type": "object",
+      "description": "Additional metadata or properties.",
+      "properties": {
+        "workflowId": {
+          "type": "string",
+          "description": "Id of the workflow."
+        }
+      }
+    },
     "AvailableSolutionTemplateVersion": {
       "type": "object",
       "description": "Available Solution template Version along with latest revision",
@@ -9698,6 +9956,14 @@
             ]
           }
         },
+        "solutionDependencies": {
+          "type": "array",
+          "description": "Solution dependencies",
+          "items": {
+            "$ref": "#/definitions/SolutionDependencyParameter"
+          },
+          "x-ms-identifiers": []
+        },
         "solutionInstanceName": {
           "type": "string",
           "description": "Name of the solution instance",
@@ -9773,6 +10039,14 @@
               }
             ]
           }
+        },
+        "solutionDependencies": {
+          "type": "array",
+          "description": "Solution dependencies",
+          "items": {
+            "$ref": "#/definitions/SolutionDependencyParameter"
+          },
+          "x-ms-identifiers": []
         },
         "solutionInstanceName": {
           "type": "string",
@@ -9997,20 +10271,36 @@
           "readOnly": true,
           "x-ms-identifiers": []
         },
+        "unLinkedHierarchies": {
+          "type": "array",
+          "description": "Hierarchy ARM Ids",
+          "items": {
+            "$ref": "#/definitions/HierarchyMetadata"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "templateUniqueIdentifier": {
+          "type": "string",
+          "description": "Unique identifier for the config template, generated by the system",
+          "readOnly": true
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state of resource",
           "readOnly": true
         }
-      },
-      "required": [
-        "linkedHierarchies"
-      ]
+      }
     },
     "ConfigTemplateProperties": {
       "type": "object",
       "description": "Config Template Properties",
       "properties": {
+        "uniqueIdentifier": {
+          "type": "string",
+          "description": "A unique identifier for the config template, generated by the system",
+          "readOnly": true
+        },
         "description": {
           "type": "string",
           "description": "Description of config template"
@@ -10088,6 +10378,11 @@
         "value": {
           "type": "string",
           "description": "Value of schema",
+          "readOnly": true
+        },
+        "templateUniqueIdentifier": {
+          "type": "string",
+          "description": "Unique identifier for the config template, generated by the system",
           "readOnly": true
         },
         "provisioningState": {
@@ -10305,6 +10600,11 @@
       "type": "object",
       "description": "Context Properties",
       "properties": {
+        "uniqueIdentifier": {
+          "type": "string",
+          "description": "A unique identifier for the context, generated by the system",
+          "readOnly": true
+        },
         "capabilities": {
           "type": "array",
           "description": "List of Capabilities",
@@ -11114,7 +11414,7 @@
       "type": "object",
       "description": "Hierarchy Configuration Metadata Version Properties",
       "properties": {
-        "displayName": {
+        "parentDisplayName": {
           "type": "string",
           "description": "Display name of the hierarchy configuration metadata resource",
           "minLength": 3,
@@ -11203,6 +11503,18 @@
       "type": "object",
       "description": "Hierarchy Ids With Level for applying config Template which will further generate ARG objects",
       "properties": {
+        "contextId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Context Id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Edge/Contexts"
+              }
+            ]
+          }
+        },
         "hierarchyIds": {
           "type": "array",
           "description": "Hierarchy Ids",
@@ -11226,7 +11538,10 @@
           "type": "string",
           "description": "Hierarchy Level"
         }
-      }
+      },
+      "required": [
+        "contextId"
+      ]
     },
     "InstallSolutionParameter": {
       "type": "object",
@@ -11575,6 +11890,10 @@
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail",
           "description": "Error Details if any failure is there",
           "readOnly": true
+        },
+        "additionalData": {
+          "$ref": "#/definitions/AdditionalData",
+          "description": "Additional metadata or properties."
         }
       },
       "required": [
@@ -12070,6 +12389,31 @@
         "schemaId"
       ]
     },
+    "SchemaReferencePropertiesUpdate": {
+      "type": "object",
+      "description": "Schema Reference Properties",
+      "properties": {
+        "schemaId": {
+          "type": "string",
+          "description": "Schema Id of schema reference"
+        }
+      }
+    },
+    "SchemaReferenceUpdate": {
+      "type": "object",
+      "description": "Schema Reference Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SchemaReferencePropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
     "SchemaUpdate": {
       "type": "object",
       "description": "Schema Resource",
@@ -12451,6 +12795,16 @@
               }
             ]
           }
+        },
+        "latestVersion": {
+          "type": "string",
+          "description": "Latest solution template version",
+          "readOnly": true
+        },
+        "currentVersion": {
+          "type": "string",
+          "description": "Current solution template version",
+          "readOnly": true
         }
       }
     },
@@ -12494,7 +12848,7 @@
       "type": "object",
       "description": "Solution Metadata Version Properties",
       "properties": {
-        "displayName": {
+        "parentDisplayName": {
           "type": "string",
           "description": "Display name of the solution metadata resource",
           "minLength": 3,
@@ -12631,6 +12985,11 @@
         "level": {
           "type": "string",
           "description": "Hierarchy Level",
+          "readOnly": true
+        },
+        "templateUniqueIdentifier": {
+          "type": "string",
+          "description": "Unique identifier for the solution template, generated by the system",
           "readOnly": true
         },
         "provisioningState": {
@@ -13047,7 +13406,7 @@
           "description": "The URI for tracking the latest action performed on this solution version.",
           "readOnly": true
         },
-        "lastestActionTriggeredBy": {
+        "latestActionTriggeredBy": {
           "type": "string",
           "description": "Object Id of user who triggered the latest action on this solution version.",
           "readOnly": true

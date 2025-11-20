@@ -573,6 +573,10 @@
     }
   },
   "definitions": {
+    "Azure.Core.azureLocation": {
+      "type": "string",
+      "description": "Represents an Azure geography region where supported resource providers live."
+    },
     "Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate": {
       "type": "object",
       "description": "Managed service identity (system assigned and/or user assigned identities)",
@@ -588,26 +592,6 @@
             "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/UserAssignedIdentity",
             "x-nullable": true
           }
-        }
-      }
-    },
-    "Azure.ResourceManager.ManagedServiceIdentityProperty": {
-      "type": "object",
-      "description": "The managed service identities envelope.",
-      "properties": {
-        "identity": {
-          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
-        }
-      }
-    },
-    "Azure.ResourceManager.ManagedServiceIdentityPropertyUpdate": {
-      "type": "object",
-      "description": "The managed service identities envelope.",
-      "properties": {
-        "identity": {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate",
-          "description": "The managed service identities assigned to this resource."
         }
       }
     },
@@ -795,8 +779,28 @@
         "properties": {
           "$ref": "#/definitions/SafeRolloutProperties",
           "description": "The resource-specific properties for this resource."
+        },
+        "location": {
+          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "description": "The location of the safeRollout",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed identity for the safe rollout to use.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         }
       },
+      "required": [
+        "identity"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
@@ -846,15 +850,6 @@
             "create"
           ]
         },
-        "identity": {
-          "$ref": "#/definitions/Azure.ResourceManager.ManagedServiceIdentityProperty",
-          "description": "The managed identity for the safe rollout to use.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
         "error": {
           "$ref": "#/definitions/Error",
           "description": "The error of the safe rollout.",
@@ -867,23 +862,13 @@
       },
       "required": [
         "status",
-        "changeStateResourceId",
-        "identity"
+        "changeStateResourceId"
       ]
     },
     "SafeRolloutPropertiesUpdate": {
       "type": "object",
       "description": "Details of the properties of the SafeRollout.",
       "properties": {
-        "identity": {
-          "$ref": "#/definitions/Azure.ResourceManager.ManagedServiceIdentityPropertyUpdate",
-          "description": "The managed identity for the safe rollout to use.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
         "error": {
           "$ref": "#/definitions/ErrorUpdate",
           "description": "The error of the safe rollout.",
@@ -902,6 +887,15 @@
         "properties": {
           "$ref": "#/definitions/SafeRolloutPropertiesUpdate",
           "description": "The resource-specific properties for this resource."
+        },
+        "identity": {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate",
+          "description": "The managed identity for the safe rollout to use.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         }
       },
       "allOf": [

@@ -1,5 +1,6 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./applink.tsp";
@@ -18,6 +19,7 @@ model AppLinkMember is TrackedResource<AppLinkMemberProperties> {
 @doc("AppLink Member properties")
 model AppLinkMemberProperties {
   @doc("Cluster type")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   clusterType?: ClusterType;
 
   @doc("AppLink Member Metadata")
@@ -32,8 +34,8 @@ model AppLinkMemberProperties {
   @doc("Self managed upgrade profile")
   selfManagedUpgradeProfile?: SelfManagedUpgradeProfile;
 
-  @doc("Observability settings")
-  observabilitySettings?: ObservabilitySettings;
+  @doc("Observability profile")
+  observabilityProfile?: ObservabilityProfile;
 
   @doc("Provisioning state")
   @visibility(Lifecycle.Read)
@@ -51,6 +53,7 @@ union ClusterType {
 @doc("AppLinkMember metadata")
 model Metadata {
   @doc("Resource ID")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   resourceId: string;
 }
 
@@ -88,55 +91,31 @@ model SelfManagedUpgradeProfile {
   version: string;
 }
 
-@doc("AppLinkMember observability state")
-union ObservabilityState {
-  string,
-
-  @doc("Observability state disabled")
-  Disabled: "Disabled",
-
-  @doc("Observability state enabled")
-  Enabled: "Enabled",
+@doc("AppLinkMember observability profile")
+model ObservabilityProfile {
+  @doc("Metrics configuration")
+  metrics?: MetricsProfile;
 }
 
-@doc("AppLinkMember metrics settings")
-model MetricsSettings {
-  @doc("Metrics state")
-  state: ObservabilityState;
-}
-
-@doc("AppLinkMember logs settings")
-model LogsSettings {
-  @doc("Logs state")
-  state: ObservabilityState;
-}
-
-@doc("AppLinkMember traces settings")
-model TracesSettings {
-  @doc("Traces state")
-  state: ObservabilityState;
-}
-
-@doc("AppLinkMember observability settings")
-model ObservabilitySettings {
-  @doc("Metrics settings")
-  metrics?: MetricsSettings;
-
-  @doc("Logs settings")
-  logs?: LogsSettings;
-
-  @doc("Traces settings")
-  traces?: TracesSettings;
-
-  @doc("Managed identity")
-  managedIdentity?: string;
+@doc("AppLinkMember metrics profile")
+model MetricsProfile {
+  @doc("Metrics endpoint URL")
+  @visibility(Lifecycle.Read)
+  metricsEndpoint: string;
 }
 
 @armResourceOperations
 interface AppLinkMembers {
   get is ArmResourceRead<AppLinkMember>;
   createOrReplace is ArmResourceCreateOrReplaceAsync<AppLinkMember>;
-  update is ArmResourcePatchAsync<AppLinkMember, AppLinkMemberProperties>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  update is ArmResourcePatchAsync<
+    AppLinkMember,
+    AppLinkMemberProperties,
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = AppLinkMember> &
+      ArmLroLocationHeader<FinalResult = AppLinkMember> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
   delete is ArmResourceDeleteWithoutOkAsync<AppLinkMember>;
   listByAppLink is ArmResourceListByParent<AppLinkMember>;
 }

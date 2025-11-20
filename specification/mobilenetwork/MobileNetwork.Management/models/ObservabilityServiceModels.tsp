@@ -2,7 +2,7 @@ import "@typespec/openapi";
 
 import "../common/CommonModels.tsp";
 
-using TypeSpec.OpenAPI;
+using Azure.ResourceManager;
 
 namespace Microsoft.MobileNetwork;
 
@@ -13,7 +13,7 @@ model ObservabilityServiceResourceProperties {
   provisioningState?: ProvisioningState;
 
   @doc("Azure for Operators 5G Core Observability component parameters.  One set per component type")
-  @extension("x-ms-identifiers", #["type"])
+  @identifiers(#["type"])
   componentParameters: QualifiedComponentDeploymentParameters[];
 
   @doc("Reference to cluster where the observability components are deployed")

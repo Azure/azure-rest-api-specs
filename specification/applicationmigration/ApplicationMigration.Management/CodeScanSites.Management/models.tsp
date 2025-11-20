@@ -1,4 +1,3 @@
-using Azure.Core;
 using Azure.ResourceManager;
 
 namespace Microsoft.ApplicationMigration;
@@ -126,7 +125,7 @@ model ProcessReportOperationStatusProperties {
   reportCount: int32;
 
   @doc("The summary of the reports processed.")
-  @OpenAPI.extension("x-ms-identifiers", #["reportName"])
+  @identifiers(#["reportName"])
   summary: ProcessReportSummary[];
 }
 

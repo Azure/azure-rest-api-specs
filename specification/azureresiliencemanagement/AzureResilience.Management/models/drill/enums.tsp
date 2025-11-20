@@ -295,6 +295,9 @@ union DrillRunOperationVerbs {
 
   @doc("MarkAsComplete Action.")
   MarkAsComplete: "MarkAsComplete",
+
+  @doc("Cancel Action.")
+  Cancel: "Cancel",
 }
 
 /**
@@ -352,4 +355,32 @@ union HealthStatus {
 
   @doc("Unhealthy Status.")
   Unhealthy: "Unhealthy",
+}
+
+/**
+ * Enum for ForceInclusionAndUpdate
+ */
+@doc("Enum for ForceInclusionAndUpdate")
+union ForceInclusionAndUpdate {
+  string,
+
+  @doc("Enable ForceInclusionAndUpdate.")
+  Enable: "Enable",
+
+  @doc("Disable ForceInclusionAndUpdate.")
+  Disable: "Disable",
+}
+
+/**
+ * Enum for AutoFailover
+ */
+@doc("Enum for AutoFailover")
+union AutoFailover {
+  string,
+
+  @doc("Enable AutoFailover.")
+  Enable: "Enable",
+
+  @doc("Disable AutoFailover.")
+  Disable: "Disable",
 }

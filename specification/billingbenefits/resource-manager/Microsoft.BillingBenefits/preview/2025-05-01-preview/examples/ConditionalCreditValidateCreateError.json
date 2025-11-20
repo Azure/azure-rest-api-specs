@@ -8,14 +8,12 @@
           "properties": {
             "entityType": "Primary",
             "displayName": "Invalid CACO Test",
-            "systemId": "INVALID-SYSTEM-ID",
-            "productCode": "INVALID:PRODUCT:CODE",
+            "productCode": "b8473ce57f1d",
             "startAt": "2023-01-01T00:00:00Z",
             "allowContributors": "Enabled",
             "milestones": [
               {
-                "milestoneId": "00000000-0000-0000-0000-000000000000",
-                "name": "Invalid Milestone",
+                "name": "Milestone 1",
                 "spendTarget": {
                   "amount": -1000,
                   "currencyCode": "INVALID"
@@ -38,8 +36,7 @@
           "properties": {
             "entityType": "Contributor",
             "displayName": "Invalid Contributor CACO",
-            "systemId": "INVALID-CONTRIBUTOR-SYSTEM",
-            "productCode": "INVALID:CONTRIBUTOR:CODE",
+            "productCode": "000187f7-0000-0260-ab43-b8473ce57f1d",
             "startAt": "2023-01-01T00:00:00Z",
             "primaryResourceId": "/subscriptions/invalid/resourceGroups/invalid/providers/Microsoft.BillingBenefits/conditionalCredits/nonexistent",
             "primaryBillingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/nonexistent"
@@ -54,13 +51,13 @@
         "benefits": [
           {
             "valid": false,
-            "reasonCode": "CACO_VALIDATION_FAILED",
-            "reason": "Multiple validation errors: Invalid product code format, negative spend target amount, invalid currency code, award end date cannot be before start date, milestone end date cannot be in the past"
+            "reason": "The billing account resource ID is missing or invalid",
+            "reasonCode": "InvalidBillingAccountId"
           },
           {
             "valid": false,
-            "reasonCode": "CONTRIBUTOR_VALIDATION_FAILED",
-            "reason": "Contributor validation failed: Invalid product code format, primary resource does not exist or is not accessible"
+            "reason": "Start date must be the first day of the current or a future month",
+            "reasonCode": "InvalidStartAt"
           }
         ]
       }

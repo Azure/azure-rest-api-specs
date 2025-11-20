@@ -7,9 +7,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
-using Azure.Core;
 using Azure.ResourceManager;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.HybridConnectivity;
 
@@ -122,9 +120,9 @@ model PublicCloudConnector is TrackedResource<PublicCloudConnectorProperties> {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 @doc("Public Cloud Connector")
 model PublicCloudConnectorUpdate extends TrackedResourceUpdate {
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
   @doc("The resource-specific properties for this resource.")
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: PublicCloudConnectorPropertiesUpdate;
 }
 
@@ -313,9 +311,9 @@ model SolutionConfigurationProperties {
 @doc("Solution Configuration")
 model SolutionConfigurationUpdate
   extends Azure.ResourceManager.CommonTypes.ProxyResource {
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
   @doc("The resource-specific properties for this resource.")
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: SolutionConfigurationPropertiesUpdate;
 }
 

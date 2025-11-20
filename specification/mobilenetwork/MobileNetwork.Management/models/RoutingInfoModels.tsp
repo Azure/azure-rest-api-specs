@@ -3,6 +3,7 @@ import "@typespec/openapi";
 import "../common/CommonModels.tsp";
 
 using TypeSpec.OpenAPI;
+using Azure.ResourceManager;
 
 namespace Microsoft.MobileNetwork;
 
@@ -10,20 +11,20 @@ namespace Microsoft.MobileNetwork;
 @doc("Routing information properties")
 model RoutingInfoPropertiesFormat {
   @doc("A list of IPv4 control plane access routes.")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   controlPlaneAccessRoutes?: Ipv4Routes;
 
   @doc("A list of IPv4 user plane access routes.")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   userPlaneAccessRoutes?: Ipv4Routes;
 
   @doc("A list of attached data networks and their IPv4 routes.")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   userPlaneDataRoutes?: UserPlaneDataRoutes;
 }
 
 @doc("A list of IPv4 routes.")
-@extension("x-ms-identifiers", #["destination"])
+@identifiers(#["destination"])
 model Ipv4Routes is Array<Ipv4Route>;
 
 @doc("An IPv4 route.")
@@ -32,7 +33,7 @@ model Ipv4Route {
   destination?: Ipv4AddrMask;
 
   @doc("A list of next hops for the destination.")
-  @extension("x-ms-identifiers", #["address"])
+  @identifiers(#["address"])
   nextHops?: Ipv4RouteNextHop[];
 }
 
@@ -46,7 +47,7 @@ model Ipv4RouteNextHop {
 }
 
 @doc("A list of attached data networks and their IPv4 routes.")
-@extension("x-ms-identifiers", #["/attachedDataNetwork/id"])
+@identifiers(#["/attachedDataNetwork/id"])
 model UserPlaneDataRoutes is Array<UserPlaneDataRoutesItem>;
 
 @doc("Attached data networks and their IPv4 routes.")
@@ -55,6 +56,6 @@ model UserPlaneDataRoutesItem {
   attachedDataNetwork?: AttachedDataNetworkResourceId;
 
   @doc("A list of IPv4 routes.")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   routes?: Ipv4Routes;
 }
