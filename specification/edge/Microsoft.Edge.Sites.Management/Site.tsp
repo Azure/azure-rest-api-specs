@@ -51,26 +51,26 @@ model SiteAddressProperties {
   postalCode?: string;
 }
 
-// @doc("The updatable properties of the Site.")
-// model SiteUpdateProperties {
-//   @doc("displayName of Site resource")
-//   displayName?: string;
+@doc("The updatable properties of the Site.")
+model SiteUpdateProperties {
+  @doc("displayName of Site resource")
+  displayName?: string;
 
-//   @doc("Description of Site resource")
-//   description?: string;
+  @doc("Description of Site resource")
+  description?: string;
 
-//   @doc("Physical address of the site")
-//   siteAddress?: SiteAddressProperties;
+  @doc("Physical address of the site")
+  siteAddress?: SiteAddressProperties;
 
-//   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
-//   @doc("Key-value pairs for labeling the site resource.")
-//   labels?: Record<string>;
-// }
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
+  @doc("Key-value pairs for labeling the site resource.")
+  labels?: Record<string>;
+}
 
 @doc("The type used for update operations of the Site.")
 model SiteUpdate {
   @doc("The updatable properties of the Site.")
-  properties?: SiteProperties;
+  properties?: SiteUpdateProperties;
 }
 
 @doc("Site as ARM Resource")

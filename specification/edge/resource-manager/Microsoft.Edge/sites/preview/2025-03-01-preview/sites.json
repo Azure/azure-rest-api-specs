@@ -1087,8 +1087,33 @@
       "description": "The type used for update operations of the Site.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/SiteProperties",
+          "$ref": "#/definitions/SiteUpdateProperties",
           "description": "The updatable properties of the Site."
+        }
+      }
+    },
+    "SiteUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the Site.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "displayName of Site resource"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of Site resource"
+        },
+        "siteAddress": {
+          "$ref": "#/definitions/SiteAddressProperties",
+          "description": "Physical address of the site"
+        },
+        "labels": {
+          "type": "object",
+          "description": "Key-value pairs for labeling the site resource.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     }
