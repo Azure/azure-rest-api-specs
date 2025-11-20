@@ -213,7 +213,7 @@ export function isSameSources(a: Source[], b: Source[]) {
   return true;
 }
 
-export function arrayIsEqual(a: any[], b: any[]) {
+export function arrayIsEqual(a: unknown[], b: unknown[]) {
   if (a.length !== b.length) {
     return false;
   }
