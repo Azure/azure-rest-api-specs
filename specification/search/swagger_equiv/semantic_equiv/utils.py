@@ -116,26 +116,59 @@ def write_diffs_excel(
             'Parameters': [],
             'Responses': [],
             'Definitions': [],
-            'Operations': [],
             'Other': []
         }
 
         if not hand_authored_canonical or not typespec_canonical:
             return comparison_data
 
+        # Helper function to build full URL for comparison
+        def build_full_url(spec, path):
+            """Build full URL by combining host template with path"""
+            if 'x-ms-parameterized-host' in spec and 'hostTemplate' in spec['x-ms-parameterized-host']:
+                host_template = spec['x-ms-parameterized-host']['hostTemplate']
+                # Extract path segment from host template (everything after the endpoint)
+                # e.g., "{endpoint}/knowledgebases('{knowledgeBaseName}')" -> "/knowledgebases('{knowledgeBaseName}')"
+                if '}/' in host_template:
+                    host_path_segment = '/' + host_template.split('}/', 1)[1]
+                    # If the current path doesn't start with this segment, prepend it
+                    if not path.startswith(host_path_segment):
+                        return host_path_segment + path
+                    else:
+                        return path
+                else:
+                    # Host template doesn't have additional path, just return the path
+                    return path
+            else:
+                # No parameterized host, return path as-is
+                return path
+
+        # Helper function to create comparison key
+        def create_comparison_key(full_url, method, operation_id):
+            """Create a unique key for operation comparison"""
+            return f"{full_url}#{method.upper()}#{operation_id}"
+
         # Helper function to determine swagger source from original files
-        def get_swagger_source_for_path(path, method):
-            """Determine which original swagger file contains this path/method combination"""
+        def get_swagger_source_for_path(full_url, method, operation_id):
+            """Determine which original swagger file contains this operation"""
             if not original_swagger_files:
                 return 'searchservice'  # fallback
 
-            # Check each original file to see which one contains this path
+            # Check each original file to see which one contains this operation
             for file_name in ['searchservice', 'searchindex', 'knowledgebase']:
                 if file_name in original_swagger_files:
                     file_data = original_swagger_files[file_name]
-                    if 'paths' in file_data and path in file_data['paths']:
-                        if method.lower() in file_data['paths'][path]:
-                            return file_name
+                    if 'paths' in file_data:
+                        # Build full URL for each path in this file
+                        for file_path, path_methods in file_data['paths'].items():
+                            if isinstance(path_methods, dict):
+                                file_full_url = build_full_url(file_data, file_path)
+                                if file_full_url == full_url and method.lower() in path_methods:
+                                    file_operation = path_methods[method.lower()]
+                                    if isinstance(file_operation, dict):
+                                        file_op_id = file_operation.get('operationId', '')
+                                        if file_op_id == operation_id:
+                                            return file_name
 
             return 'searchservice'  # default fallback
 
@@ -147,35 +180,49 @@ def write_diffs_excel(
         if 'paths' in hand_authored_canonical:
             for path, path_methods in hand_authored_canonical['paths'].items():
                 if isinstance(path_methods, dict):
+                    # Build full URL for comparison
+                    full_url = build_full_url(hand_authored_canonical, path)
                     for method, operation in path_methods.items():
                         if isinstance(operation, dict):
                             operation_id = operation.get('operationId', '')
-                            source_file = get_swagger_source_for_path(path, method)
-                            hand_paths[(path, method.upper())] = {
+                            source_file = get_swagger_source_for_path(full_url, method, operation_id)
+                            # Use full URL + method + operation ID as the key for comparison
+                            comparison_key = create_comparison_key(full_url, method, operation_id)
+                            hand_paths[comparison_key] = {
                                 'operation_id': operation_id,
                                 'parameters': operation.get('parameters', []),
                                 'responses': operation.get('responses', {}),
-                                'source_file': source_file
+                                'source_file': source_file,
+                                'original_path': path,  # Keep track of original path
+                                'full_url': full_url,
+                                'method': method.upper()
                             }
 
         # Extract paths and operations from typespec spec
         if 'paths' in typespec_canonical:
             for path, path_methods in typespec_canonical['paths'].items():
                 if isinstance(path_methods, dict):
+                    # Build full URL for comparison
+                    full_url = build_full_url(typespec_canonical, path)
                     for method, operation in path_methods.items():
                         if isinstance(operation, dict):
                             operation_id = operation.get('operationId', '')
-                            tsp_paths[(path, method.upper())] = {
+                            # Use full URL + method + operation ID as the key for comparison
+                            comparison_key = create_comparison_key(full_url, method, operation_id)
+                            tsp_paths[comparison_key] = {
                                 'operation_id': operation_id,
                                 'parameters': operation.get('parameters', []),
-                                'responses': operation.get('responses', {})
+                                'responses': operation.get('responses', {}),
+                                'original_path': path,  # Keep track of original path
+                                'full_url': full_url,
+                                'method': method.upper()
                             }
 
         # Create path/operation comparisons
-        all_path_methods = set(hand_paths.keys()).union(set(tsp_paths.keys()))
-        for path, method in all_path_methods:
-            hand_op = hand_paths.get((path, method))
-            tsp_op = tsp_paths.get((path, method))
+        all_comparison_keys = set(hand_paths.keys()).union(set(tsp_paths.keys()))
+        for comparison_key in all_comparison_keys:
+            hand_op = hand_paths.get(comparison_key)
+            tsp_op = tsp_paths.get(comparison_key)
 
             if hand_op and tsp_op:
                 # Both exist - compare details
@@ -187,26 +234,14 @@ def write_diffs_excel(
                     diff_type = "Different"
                     diff_details = f"OperationId: '{hand_op['operation_id']}' vs '{tsp_op['operation_id']}'"
 
-                comparison_data['Operations'].append({
-                    'Swagger': swagger_source,
-                    'Path': path,
-                    'Method': method,
-                    'Operation ID': hand_op['operation_id'],
-                    'TSP Path': path,
-                    'TSP Method': method,
-                    'TSP Operation ID': tsp_op['operation_id'],
-                    'Diff Type': diff_type,
-                    'Diff Details': diff_details
-                })
-
-                # Also add to Paths
+                # Add to Paths
                 comparison_data['Paths'].append({
                     'Swagger': swagger_source,
-                    'Path': path,
-                    'Method': method,
+                    'Full Path': hand_op['full_url'],  # Host template + original path
+                    'Method': hand_op['method'],
                     'Operation ID': hand_op['operation_id'],
-                    'TSP Path': path,
-                    'TSP Method': method,
+                    'TSP Full Path': tsp_op['original_path'],  # Path from TSP-compiled JSON
+                    'TSP Method': tsp_op['method'],
                     'TSP Operation ID': tsp_op['operation_id'],
                     'Diff Type': diff_type,
                     'Diff Details': diff_details
@@ -218,24 +253,12 @@ def write_diffs_excel(
                 diff_type = "Missing in TSP"
                 diff_details = "Operation exists in Swagger but not in TSP"
 
-                comparison_data['Operations'].append({
-                    'Swagger': swagger_source,
-                    'Path': path,
-                    'Method': method,
-                    'Operation ID': hand_op['operation_id'],
-                    'TSP Path': '',
-                    'TSP Method': '',
-                    'TSP Operation ID': '',
-                    'Diff Type': diff_type,
-                    'Diff Details': diff_details
-                })
-
                 comparison_data['Paths'].append({
                     'Swagger': swagger_source,
-                    'Path': path,
-                    'Method': method,
+                    'Full Path': hand_op['full_url'],  # Host template + original path
+                    'Method': hand_op['method'],
                     'Operation ID': hand_op['operation_id'],
-                    'TSP Path': '',
+                    'TSP Full Path': '',
                     'TSP Method': '',
                     'TSP Operation ID': '',
                     'Diff Type': diff_type,
@@ -247,37 +270,29 @@ def write_diffs_excel(
                 diff_type = "Extra in TSP"
                 diff_details = f"Operation exists in TSP but not in Swagger"
 
-                comparison_data['Operations'].append({
-                    'Swagger': '',
-                    'Path': '',
-                    'Method': '',
-                    'Operation ID': '',
-                    'TSP Path': path,
-                    'TSP Method': method,
-                    'TSP Operation ID': tsp_op['operation_id'],
-                    'Diff Type': diff_type,
-                    'Diff Details': diff_details
-                })
-
                 comparison_data['Paths'].append({
                     'Swagger': '',
-                    'Path': '',
+                    'Full Path': '',
                     'Method': '',
                     'Operation ID': '',
-                    'TSP Path': path,
-                    'TSP Method': method,
+                    'TSP Full Path': tsp_op['original_path'],  # Path from TSP-compiled JSON
+                    'TSP Method': tsp_op['method'],
                     'TSP Operation ID': tsp_op['operation_id'],
                     'Diff Type': diff_type,
                     'Diff Details': diff_details
                 })
 
-        # 2. Compare Parameters
-        # Extract all parameters from both specs
-        for (path, method), hand_op in hand_paths.items():
-            tsp_op = tsp_paths.get((path, method))
+        # 2. Compare Parameters for matched operations only
+        for comparison_key, hand_op in hand_paths.items():
+            tsp_op = tsp_paths.get(comparison_key)
 
+            # Only compare parameters for operations that exist in both specs
+            if not tsp_op:
+                continue
+
+            swagger_source = hand_op['source_file']
             hand_params = {(p.get('name', ''), p.get('in', 'query')): p for p in hand_op.get('parameters', [])}
-            tsp_params = {(p.get('name', ''), p.get('in', 'query')): p for p in (tsp_op.get('parameters', []) if tsp_op else [])}
+            tsp_params = {(p.get('name', ''), p.get('in', 'query')): p for p in tsp_op.get('parameters', [])}
 
             all_param_keys = set(hand_params.keys()).union(set(tsp_params.keys()))
 
@@ -286,35 +301,34 @@ def write_diffs_excel(
                 hand_param = hand_params.get(param_key)
                 tsp_param = tsp_params.get(param_key)
 
-                swagger_source = hand_op['source_file']
-
                 if hand_param and tsp_param:
-                    # Both exist - compare
-                    if (hand_param.get('type') == tsp_param.get('type') and
-                        hand_param.get('required') == tsp_param.get('required')):
+                    # Both exist - compare details
+                    swagger_type = hand_param.get('type', '')
+                    swagger_required = hand_param.get('required', False)
+                    tsp_type = tsp_param.get('type', '')
+                    tsp_required = tsp_param.get('required', False)
+
+                    if swagger_type == tsp_type and swagger_required == tsp_required:
                         diff_type = "Equal"
                         diff_details = ""
                     else:
                         diff_type = "Different"
                         details = []
-                        if hand_param.get('type') != tsp_param.get('type'):
-                            details.append(f"Type: '{hand_param.get('type')}' vs '{tsp_param.get('type')}'")
-                        if hand_param.get('required') != tsp_param.get('required'):
-                            details.append(f"Required: {hand_param.get('required')} vs {tsp_param.get('required')}")
+                        if swagger_type != tsp_type:
+                            details.append(f"Type: '{swagger_type}' vs '{tsp_type}'")
+                        if swagger_required != tsp_required:
+                            details.append(f"Required: {swagger_required} vs {tsp_required}")
                         diff_details = "; ".join(details)
 
                     comparison_data['Parameters'].append({
-                        'Swagger': swagger_source,
+                        'Swagger Source': swagger_source,
                         'Path': path,
                         'Method': method,
-                        'Parameter Name': param_name,
-                        'Parameter Type': hand_param.get('type', ''),
-                        'Parameter Location': param_location,
-                        'TSP Path': path,
-                        'TSP Method': method,
-                        'TSP Parameter Name': param_name,
-                        'TSP Parameter Type': tsp_param.get('type', ''),
-                        'TSP Parameter Location': param_location,
+                        'Parameter': param_name,
+                        'Swagger Type': swagger_type,
+                        'Swagger Required': swagger_required,
+                        'TSP Type': tsp_type,
+                        'TSP Required': tsp_required,
                         'Diff Type': diff_type,
                         'Diff Details': diff_details
                     })
@@ -322,17 +336,14 @@ def write_diffs_excel(
                 elif hand_param and not tsp_param:
                     # Missing in TSP
                     comparison_data['Parameters'].append({
-                        'Swagger': swagger_source,
+                        'Swagger Source': swagger_source,
                         'Path': path,
                         'Method': method,
-                        'Parameter Name': param_name,
-                        'Parameter Type': hand_param.get('type', ''),
-                        'Parameter Location': param_location,
-                        'TSP Path': '',
-                        'TSP Method': '',
-                        'TSP Parameter Name': '',
-                        'TSP Parameter Type': '',
-                        'TSP Parameter Location': '',
+                        'Parameter': param_name,
+                        'Swagger Type': hand_param.get('type', ''),
+                        'Swagger Required': hand_param.get('required', False),
+                        'TSP Type': '',
+                        'TSP Required': '',
                         'Diff Type': "Missing in TSP",
                         'Diff Details': f"Parameter '{param_name}' exists in Swagger but not in TSP"
                     })
@@ -340,27 +351,31 @@ def write_diffs_excel(
                 elif not hand_param and tsp_param:
                     # Extra in TSP
                     comparison_data['Parameters'].append({
-                        'Swagger': '',
-                        'Path': '',
-                        'Method': '',
-                        'Parameter Name': '',
-                        'Parameter Type': '',
-                        'Parameter Location': '',
-                        'TSP Path': path,
-                        'TSP Method': method,
-                        'TSP Parameter Name': param_name,
-                        'TSP Parameter Type': tsp_param.get('type', ''),
-                        'TSP Parameter Location': param_location,
+                        'Swagger Source': swagger_source,
+                        'Path': path,
+                        'Method': method,
+                        'Parameter': param_name,
+                        'Swagger Type': '',
+                        'Swagger Required': '',
+                        'TSP Type': tsp_param.get('type', ''),
+                        'TSP Required': tsp_param.get('required', False),
                         'Diff Type': "Extra in TSP",
                         'Diff Details': f"Parameter '{param_name}' exists in TSP but not in Swagger"
                     })
 
-        # 3. Compare Responses
-        for (path, method), hand_op in hand_paths.items():
-            tsp_op = tsp_paths.get((path, method))
+        # 3. Compare Responses for matched operations only
+        for comparison_key, hand_op in hand_paths.items():
+            tsp_op = tsp_paths.get(comparison_key)
 
+            # Only compare responses for operations that exist in both specs
+            if not tsp_op:
+                continue
+
+            swagger_source = hand_op['source_file']
+            path = hand_op['original_path']
+            method = hand_op['method']
             hand_responses = hand_op.get('responses', {})
-            tsp_responses = tsp_op.get('responses', {}) if tsp_op else {}
+            tsp_responses = tsp_op.get('responses', {})
 
             all_response_codes = set(hand_responses.keys()).union(set(tsp_responses.keys()))
 
@@ -368,12 +383,13 @@ def write_diffs_excel(
                 hand_response = hand_responses.get(response_code)
                 tsp_response = tsp_responses.get(response_code)
 
-                swagger_source = hand_op['source_file']
-
                 if hand_response and tsp_response:
-                    # Both exist - compare
+                    # Both exist - compare schemas
                     hand_schema = hand_response.get('schema', {})
                     tsp_schema = tsp_response.get('schema', {})
+
+                    hand_schema_str = str(hand_schema)[:100] + ('...' if len(str(hand_schema)) > 100 else '')
+                    tsp_schema_str = str(tsp_schema)[:100] + ('...' if len(str(tsp_schema)) > 100 else '')
 
                     if hand_schema == tsp_schema:
                         diff_type = "Equal"
@@ -383,15 +399,12 @@ def write_diffs_excel(
                         diff_details = "Response schemas differ"
 
                     comparison_data['Responses'].append({
-                        'Swagger': swagger_source,
+                        'Swagger Source': swagger_source,
                         'Path': path,
                         'Method': method,
                         'Response Code': response_code,
-                        'Response Schema': str(hand_schema)[:50] + '...' if len(str(hand_schema)) > 50 else str(hand_schema),
-                        'TSP Path': path,
-                        'TSP Method': method,
-                        'TSP Response Code': response_code,
-                        'TSP Response Schema': str(tsp_schema)[:50] + '...' if len(str(tsp_schema)) > 50 else str(tsp_schema),
+                        'Swagger Schema': hand_schema_str,
+                        'TSP Schema': tsp_schema_str,
                         'Diff Type': diff_type,
                         'Diff Details': diff_details
                     })
@@ -399,16 +412,15 @@ def write_diffs_excel(
                 elif hand_response and not tsp_response:
                     # Missing in TSP
                     hand_schema = hand_response.get('schema', {})
+                    hand_schema_str = str(hand_schema)[:100] + ('...' if len(str(hand_schema)) > 100 else '')
+
                     comparison_data['Responses'].append({
-                        'Swagger': swagger_source,
+                        'Swagger Source': swagger_source,
                         'Path': path,
                         'Method': method,
                         'Response Code': response_code,
-                        'Response Schema': str(hand_schema)[:50] + '...' if len(str(hand_schema)) > 50 else str(hand_schema),
-                        'TSP Path': '',
-                        'TSP Method': '',
-                        'TSP Response Code': '',
-                        'TSP Response Schema': '',
+                        'Swagger Schema': hand_schema_str,
+                        'TSP Schema': '',
                         'Diff Type': "Missing in TSP",
                         'Diff Details': f"Response '{response_code}' exists in Swagger but not in TSP"
                     })
@@ -416,16 +428,15 @@ def write_diffs_excel(
                 elif not hand_response and tsp_response:
                     # Extra in TSP
                     tsp_schema = tsp_response.get('schema', {})
+                    tsp_schema_str = str(tsp_schema)[:100] + ('...' if len(str(tsp_schema)) > 100 else '')
+
                     comparison_data['Responses'].append({
-                        'Swagger': '',
-                        'Path': '',
-                        'Method': '',
-                        'Response Code': '',
-                        'Response Schema': '',
-                        'TSP Path': path,
-                        'TSP Method': method,
-                        'TSP Response Code': response_code,
-                        'TSP Response Schema': str(tsp_schema)[:50] + '...' if len(str(tsp_schema)) > 50 else str(tsp_schema),
+                        'Swagger Source': swagger_source,
+                        'Path': path,
+                        'Method': method,
+                        'Response Code': response_code,
+                        'Swagger Schema': '',
+                        'TSP Schema': tsp_schema_str,
                         'Diff Type': "Extra in TSP",
                         'Diff Details': f"Response '{response_code}' exists in TSP but not in Swagger"
                     })
@@ -476,12 +487,11 @@ def write_diffs_excel(
                     diff_details = "; ".join(details)
 
                 comparison_data['Definitions'].append({
-                    'Swagger': swagger_source,
+                    'Swagger Source': swagger_source,
                     'Definition Name': def_name,
-                    'Definition Type': hand_type,
-                    'Properties': ', '.join(hand_props[:5]) + ('...' if len(hand_props) > 5 else ''),
-                    'TSP Definition Name': def_name,
-                    'TSP Definition Type': tsp_type,
+                    'Swagger Type': hand_type,
+                    'Swagger Properties': ', '.join(hand_props[:5]) + ('...' if len(hand_props) > 5 else ''),
+                    'TSP Type': tsp_type,
                     'TSP Properties': ', '.join(tsp_props[:5]) + ('...' if len(tsp_props) > 5 else ''),
                     'Diff Type': diff_type,
                     'Diff Details': diff_details
@@ -493,12 +503,11 @@ def write_diffs_excel(
                 hand_props = list(hand_def.get('properties', {}).keys())
 
                 comparison_data['Definitions'].append({
-                    'Swagger': swagger_source,
+                    'Swagger Source': swagger_source,
                     'Definition Name': def_name,
-                    'Definition Type': hand_type,
-                    'Properties': ', '.join(hand_props[:5]) + ('...' if len(hand_props) > 5 else ''),
-                    'TSP Definition Name': '',
-                    'TSP Definition Type': '',
+                    'Swagger Type': hand_type,
+                    'Swagger Properties': ', '.join(hand_props[:5]) + ('...' if len(hand_props) > 5 else ''),
+                    'TSP Type': '',
                     'TSP Properties': '',
                     'Diff Type': "Missing in TSP",
                     'Diff Details': f"Definition '{def_name}' exists in Swagger but not in TSP"
@@ -510,12 +519,11 @@ def write_diffs_excel(
                 tsp_props = list(tsp_def.get('properties', {}).keys())
 
                 comparison_data['Definitions'].append({
-                    'Swagger': '',
-                    'Definition Name': '',
-                    'Definition Type': '',
-                    'Properties': '',
-                    'TSP Definition Name': def_name,
-                    'TSP Definition Type': tsp_type,
+                    'Swagger Source': '',
+                    'Definition Name': def_name,
+                    'Swagger Type': '',
+                    'Swagger Properties': '',
+                    'TSP Type': tsp_type,
                     'TSP Properties': ', '.join(tsp_props[:5]) + ('...' if len(tsp_props) > 5 else ''),
                     'Diff Type': "Extra in TSP",
                     'Diff Details': f"Definition '{def_name}' exists in TSP but not in Swagger"
@@ -547,7 +555,6 @@ def write_diffs_excel(
         comparison_data = create_comparison_data(hand_authored_canonical, typespec_canonical)
         print(f"\033[94mcomparison_data keys: {list(comparison_data.keys())}\033[0m")
         print(f"\033[94mPaths data count: {len(comparison_data['Paths'])}\033[0m")
-        print(f"\033[94mOperations data count: {len(comparison_data['Operations'])}\033[0m")
         print(f"\033[94mParameters data count: {len(comparison_data['Parameters'])}\033[0m")
 
         # Paths sheet
@@ -568,11 +575,6 @@ def write_diffs_excel(
         if comparison_data['Definitions']:
             definitions_df = pd.DataFrame(comparison_data['Definitions'])
             definitions_df.to_excel(writer, sheet_name='Definitions', index=False)
-
-        # Operations sheet
-        if comparison_data['Operations']:
-            operations_df = pd.DataFrame(comparison_data['Operations'])
-            operations_df.to_excel(writer, sheet_name='Operations', index=False)
 
         # Other sheet - for any remaining differences that don't fit other categories
         other_data = []
