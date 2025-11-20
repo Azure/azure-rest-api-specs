@@ -134,11 +134,11 @@ union IPFamily {
   string,
 
   @doc("IPv4 is available to the pool.")
-  @clientName("IPv4", "python")
+  @clientName("IP_v4", "python")
   IPv4: "IPv4",
 
   @doc("IPv6 is available to the pool.")
-  @clientName("IPv6", "python")
+  @clientName("IP_v6", "python")
   IPv6: "IPv6",
 }
 
