@@ -24,6 +24,27 @@ model RouteFilter
   ...Azure.ResourceManager.Legacy.EntityTagProperty;
 }
 
+alias RouteFilterRuleOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** The name of the route filter. */
+    @path
+    @segment("routeFilters")
+    @key
+    routeFilterName: string;
+  },
+  {
+    /** The name of the route filter rule. */
+    @path
+    @segment("routeFilterRules")
+    @key
+    ruleName: string;
+  }
+>;
 @armResourceOperations
 interface RouteFilters {
   /**
@@ -78,20 +99,11 @@ interface RouteFilters {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RouteFilterRules_Delete")
   @delete
-  @action("{ruleName}")
-  routeFilterRulesDelete is ArmResourceActionAsync<
+  routeFilterRulesDelete is RouteFilterRuleOps.DeleteWithoutOkAsync<
     RouteFilter,
-    void,
-    OkResponse | NoContentResponse,
-    Parameters = {
-      /**
-       * The name of the rule.
-       */
-      @path
-      ruleName: string;
-    },
     LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader
+      Azure.Core.Foundations.RetryAfterHeader,
+    Response = OkResponse | NoContentResponse
   >;
 
   /**
@@ -100,18 +112,9 @@ interface RouteFilters {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RouteFilterRules_Get")
   @get
-  @action("{ruleName}")
-  routeFilterRulesGet is ArmResourceActionSync<
+  routeFilterRulesGet is RouteFilterRuleOps.Read<
     RouteFilter,
-    void,
-    ArmResponse<RouteFilterRule>,
-    Parameters = {
-      /**
-       * The name of the rule.
-       */
-      @path
-      ruleName: string;
-    }
+    Response = ArmResponse<RouteFilterRule>
   >;
 
   /**
@@ -120,19 +123,10 @@ interface RouteFilters {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RouteFilterRules_CreateOrUpdate")
   @put
-  @action("{ruleName}")
-  routeFilterRulesCreateOrUpdate is ArmResourceActionAsyncBase<
+  routeFilterRulesCreateOrUpdate is RouteFilterRuleOps.CreateOrUpdateAsync<
     RouteFilter,
-    RouteFilterRule,
-    ArmResponse<RouteFilterRule> | ArmResourceCreatedResponse<RouteFilterRule>,
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<RouteFilter>,
-    Parameters = {
-      /**
-       * The name of the route filter rule.
-       */
-      @path
-      ruleName: string;
-    }
+    Response = ArmResponse<RouteFilterRule> | ArmResourceCreatedResponse<RouteFilterRule>,
+    Request = RouteFilterRule
   >;
 
   /**
@@ -142,11 +136,9 @@ interface RouteFilters {
   @operationId("RouteFilterRules_ListByRouteFilter")
   @list
   @get
-  @action("routeFilterRules")
-  listByRouteFilter is ArmResourceActionSync<
+  listByRouteFilter is RouteFilterRuleOps.List<
     RouteFilter,
-    void,
-    ArmResponse<RouteFilterRuleListResult>
+    Response = ArmResponse<RouteFilterRuleListResult>
   >;
 }
 
@@ -158,6 +150,6 @@ interface RouteFilters {
 @@doc(RouteFilters.updateTags::parameters.properties,
   "Parameters supplied to update route filter tags."
 );
-@@doc(RouteFilters.routeFilterRulesCreateOrUpdate::parameters.body,
+@@doc(RouteFilters.routeFilterRulesCreateOrUpdate::parameters.resource,
   "Parameters supplied to the create or update route filter rule operation."
 );

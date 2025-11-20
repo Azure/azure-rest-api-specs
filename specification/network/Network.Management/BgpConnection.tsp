@@ -26,6 +26,28 @@ model BgpConnection
   ...Azure.ResourceManager.Legacy.EntityTagProperty;
 }
 
+alias VirtualHubBgpConnectionOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** The name of the virtual hub. */
+    @path
+    @segment("virtualHubs")
+    @key
+    hubName: string;
+  },
+  {
+    /** The name of the bgp connection. */
+    @path
+    @segment("bgpConnections")
+    @key
+    connectionName: string;
+  }
+>;
+
 @armResourceOperations
 interface BgpConnections {
   /**
@@ -69,17 +91,10 @@ interface BgpConnections {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualHubBgpConnections_ListLearnedRoutes")
   @action("learnedRoutes")
-  listLearnedRoutes is ArmResourceActionAsync<
+  listLearnedRoutes is VirtualHubBgpConnectionOps.ActionAsync<
     BgpConnection,
     void,
-    ArmResponse<PeerRouteList>,
-    Parameters = {
-      /**
-       * The name of the virtual hub.
-       */
-      @path
-      hubName: string;
-    }
+    ArmResponse<PeerRouteList>
   >;
 
   /**
@@ -88,17 +103,10 @@ interface BgpConnections {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualHubBgpConnections_ListAdvertisedRoutes")
   @action("advertisedRoutes")
-  listAdvertisedRoutes is ArmResourceActionAsync<
+  listAdvertisedRoutes is VirtualHubBgpConnectionOps.ActionAsync<
     BgpConnection,
     void,
-    ArmResponse<PeerRouteList>,
-    Parameters = {
-      /**
-       * The name of the virtual hub.
-       */
-      @path
-      hubName: string;
-    }
+    ArmResponse<PeerRouteList>
   >;
 }
 

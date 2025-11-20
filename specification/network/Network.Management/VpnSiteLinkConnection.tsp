@@ -26,12 +26,40 @@ model VpnSiteLinkConnection
   ...Azure.ResourceManager.Legacy.EntityTagProperty;
 }
 
+alias VpnSiteLinkConnectionsOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** The name of the vpn gateway. */
+    @path
+    @segment("vpnGateways")
+    @key
+    gatewayName: string;
+
+    /** The name of the vpn connection. */
+    @path
+    @segment("vpnConnections")
+    @key
+    connectionName: string;
+  },
+  {
+    /** The name of the vpn link connection. */
+    @path
+    @segment("vpnLinkConnections")
+    @key
+    linkConnectionName: string;
+  }
+>;
+
 @armResourceOperations
 interface VpnSiteLinkConnections {
   /**
    * Retrieves the details of a vpn site link connection.
    */
-  get is ArmResourceRead<VpnSiteLinkConnection>;
+  get is VpnSiteLinkConnectionsOps.Read<VpnSiteLinkConnection>;
 
   /**
    * Retrieves all vpn site link connections for a particular virtual wan vpn gateway vpn connection.
@@ -40,6 +68,13 @@ interface VpnSiteLinkConnections {
   @operationId("VpnLinkConnections_ListByVpnConnection")
   listByVpnConnection is ArmResourceListByParent<
     VpnSiteLinkConnection,
+    Parameters = {
+      /** The name of the vpn connection. */
+      @path
+      @segment("vpnConnections")
+      @key
+      connectionName: string;
+    },
     Response = ArmResponse<ListVpnSiteLinkConnectionsResult>
   >;
 
@@ -49,11 +84,10 @@ interface VpnSiteLinkConnections {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VpnLinkConnections_ResetConnection")
   @action("resetconnection")
-  resetConnection is ArmResourceActionAsyncBase<
+  resetConnection is VpnSiteLinkConnectionsOps.ActionAsync<
     VpnSiteLinkConnection,
     Request = void,
-    Response = ArmAcceptedLroResponse,
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<VpnSiteLinkConnection>
+    Result = ArmAcceptedLroResponse
   >;
 
   /**
@@ -62,7 +96,7 @@ interface VpnSiteLinkConnections {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VpnLinkConnections_GetIkeSas")
   @action("getikesas")
-  getIkeSas is ArmResourceActionAsync<
+  getIkeSas is VpnSiteLinkConnectionsOps.ActionAsync<
     VpnSiteLinkConnection,
     void,
     ArmResponse<string>

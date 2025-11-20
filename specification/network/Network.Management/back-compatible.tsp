@@ -1209,7 +1209,7 @@ using Microsoft.Network;
   "RouteFilterRules"
 );
 @@clientName(RouteFilters.routeFilterRulesCreateOrUpdate, "CreateOrUpdate");
-@@clientName(RouteFilters.routeFilterRulesCreateOrUpdate::parameters.body,
+@@clientName(RouteFilters.routeFilterRulesCreateOrUpdate::parameters.resource,
   "routeFilterRuleParameters"
 );
 @@clientLocation(RouteFilters.listByRouteFilter, "RouteFilterRules");
@@ -1446,7 +1446,7 @@ using Microsoft.Network;
 @@clientName(VirtualHubs.hubVirtualNetworkConnectionsCreateOrUpdate,
   "CreateOrUpdate"
 );
-@@clientName(VirtualHubs.hubVirtualNetworkConnectionsCreateOrUpdate::parameters.body,
+@@clientName(VirtualHubs.hubVirtualNetworkConnectionsCreateOrUpdate::parameters.resource,
   "hubVirtualNetworkConnectionParameters"
 );
 @@clientLocation(VirtualHubs.hubVirtualNetworkConnectionsDelete,
@@ -1471,7 +1471,7 @@ using Microsoft.Network;
 @@clientName(VirtualHubs.virtualHubRouteTableV2sCreateOrUpdate,
   "CreateOrUpdate"
 );
-@@clientName(VirtualHubs.virtualHubRouteTableV2sCreateOrUpdate::parameters.body,
+@@clientName(VirtualHubs.virtualHubRouteTableV2sCreateOrUpdate::parameters.resource,
   "virtualHubRouteTableV2Parameters"
 );
 @@clientLocation(VirtualHubs.virtualHubRouteTableV2sDelete,
@@ -1503,7 +1503,7 @@ using Microsoft.Network;
 @@clientName(VpnGateways.vpnConnectionsGet, "Get");
 @@clientLocation(VpnGateways.vpnConnectionsCreateOrUpdate, "VpnConnections");
 @@clientName(VpnGateways.vpnConnectionsCreateOrUpdate, "CreateOrUpdate");
-@@clientName(VpnGateways.vpnConnectionsCreateOrUpdate::parameters.body,
+@@clientName(VpnGateways.vpnConnectionsCreateOrUpdate::parameters.resource,
   "VpnConnectionParameters"
 );
 @@clientLocation(VpnGateways.vpnConnectionsDelete, "VpnConnections");

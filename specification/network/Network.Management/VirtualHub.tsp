@@ -31,6 +31,49 @@ model VirtualHub
   kind?: string;
 }
 
+alias HubVirtualNetworkConnectionOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** The name of the Virtual Hub. */
+    @path
+    @segment("virtualHubs")
+    @key
+    virtualHubName: string;
+  },
+  {
+    @path
+    @segment("hubVirtualNetworkConnections")
+    @key
+    connectionName: string;
+  }
+>;
+
+alias VirtualHubRouteTableV2Ops = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** The name of the Virtual Hub. */
+    @path
+    @segment("virtualHubs")
+    @key
+    virtualHubName: string;
+  },
+  {
+    /** The name of the VirtualHubRouteTableV2. */
+    @path
+    @segment("routeTables")
+    @key
+    routeTableName: string;
+  }
+>;
+
 @armResourceOperations
 interface VirtualHubs {
   /**
@@ -114,19 +157,10 @@ interface VirtualHubs {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("HubVirtualNetworkConnections_CreateOrUpdate")
   @put
-  @action("{connectionName}")
-  hubVirtualNetworkConnectionsCreateOrUpdate is ArmResourceActionAsyncBase<
+  hubVirtualNetworkConnectionsCreateOrUpdate is HubVirtualNetworkConnectionOps.CreateOrUpdateAsync<
     VirtualHub,
-    HubVirtualNetworkConnection,
-    ArmResponse<HubVirtualNetworkConnection> | ArmResourceCreatedResponse<HubVirtualNetworkConnection>,
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<VirtualHub>,
-    Parameters = {
-      /**
-       * The name of the HubVirtualNetworkConnection.
-       */
-      @path
-      connectionName: string;
-    }
+    Response = ArmResponse<HubVirtualNetworkConnection> | ArmResourceCreatedResponse<HubVirtualNetworkConnection>,
+    Request = HubVirtualNetworkConnection
   >;
 
   /**
@@ -135,19 +169,9 @@ interface VirtualHubs {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("HubVirtualNetworkConnections_Delete")
   @delete
-  @action("{connectionName}")
-  hubVirtualNetworkConnectionsDelete is ArmResourceActionAsyncBase<
+  hubVirtualNetworkConnectionsDelete is HubVirtualNetworkConnectionOps.DeleteSync<
     VirtualHub,
-    void,
-    Response = OkResponse | NoContentResponse,
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<VirtualHub>,
-    Parameters = {
-      /**
-       * The name of the HubVirtualNetworkConnection.
-       */
-      @path
-      connectionName: string;
-    }
+    Response = OkResponse | NoContentResponse
   >;
 
   /**
@@ -156,18 +180,9 @@ interface VirtualHubs {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("HubVirtualNetworkConnections_Get")
   @get
-  @action("{connectionName}")
-  hubVirtualNetworkConnectionsGet is ArmResourceActionSync<
+  hubVirtualNetworkConnectionsGet is HubVirtualNetworkConnectionOps.Read<
     VirtualHub,
-    void,
-    ArmResponse<HubVirtualNetworkConnection>,
-    Parameters = {
-      /**
-       * The name of the vpn connection.
-       */
-      @path
-      connectionName: string;
-    }
+    Response = ArmResponse<HubVirtualNetworkConnection>
   >;
 
   /**
@@ -177,11 +192,9 @@ interface VirtualHubs {
   @operationId("HubVirtualNetworkConnections_List")
   @list
   @get
-  @action("hubVirtualNetworkConnections")
-  hubVirtualNetworkConnectionsList is ArmResourceActionSync<
+  hubVirtualNetworkConnectionsList is HubVirtualNetworkConnectionOps.List<
     VirtualHub,
-    void,
-    ArmResponse<ListHubVirtualNetworkConnectionsResult>
+    Response = ArmResponse<ListHubVirtualNetworkConnectionsResult>
   >;
 
   /**
@@ -190,18 +203,9 @@ interface VirtualHubs {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualHubRouteTableV2s_Get")
   @get
-  @action("{routeTableName}")
-  virtualHubRouteTableV2sGet is ArmResourceActionSync<
+  virtualHubRouteTableV2sGet is VirtualHubRouteTableV2Ops.Read<
     VirtualHub,
-    void,
-    ArmResponse<VirtualHubRouteTableV2>,
-    Parameters = {
-      /**
-       * The name of the VirtualHubRouteTableV2.
-       */
-      @path
-      routeTableName: string;
-    }
+    Response = ArmResponse<VirtualHubRouteTableV2>
   >;
 
   /**
@@ -210,19 +214,10 @@ interface VirtualHubs {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualHubRouteTableV2s_CreateOrUpdate")
   @put
-  @action("{routeTableName}")
-  virtualHubRouteTableV2sCreateOrUpdate is ArmResourceActionAsyncBase<
+  virtualHubRouteTableV2sCreateOrUpdate is VirtualHubRouteTableV2Ops.CreateOrUpdateAsync<
     VirtualHub,
-    VirtualHubRouteTableV2,
-    ArmResponse<VirtualHubRouteTableV2> | ArmResourceCreatedResponse<VirtualHubRouteTableV2>,
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<VirtualHub>,
-    Parameters = {
-      /**
-       * The name of the VirtualHubRouteTableV2.
-       */
-      @path
-      routeTableName: string;
-    }
+    Response = ArmResponse<VirtualHubRouteTableV2> | ArmResourceCreatedResponse<VirtualHubRouteTableV2>,
+    Request = VirtualHubRouteTableV2
   >;
 
   /**
@@ -231,19 +226,9 @@ interface VirtualHubs {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualHubRouteTableV2s_Delete")
   @delete
-  @action("{routeTableName}")
-  virtualHubRouteTableV2sDelete is ArmResourceActionAsyncBase<
+  virtualHubRouteTableV2sDelete is VirtualHubRouteTableV2Ops.DeleteWithoutOkAsync<
     VirtualHub,
-    void,
-    Response = OkResponse | NoContentResponse,
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<VirtualHub>,
-    Parameters = {
-      /**
-       * The name of the VirtualHubRouteTableV2.
-       */
-      @path
-      routeTableName: string;
-    }
+    Response = OkResponse | NoContentResponse
   >;
 
   /**
@@ -253,11 +238,9 @@ interface VirtualHubs {
   @operationId("VirtualHubRouteTableV2s_List")
   @list
   @get
-  @action("routeTables")
-  virtualHubRouteTableV2sList is ArmResourceActionSync<
+  virtualHubRouteTableV2sList is VirtualHubRouteTableV2Ops.List<
     VirtualHub,
-    void,
-    ArmResponse<ListVirtualHubRouteTableV2SResult>
+    Response = ArmResponse<ListVirtualHubRouteTableV2SResult>
   >;
 }
 
@@ -278,9 +261,9 @@ interface VirtualHubs {
 @@doc(VirtualHubs.getOutboundRoutes::parameters.body,
   "Parameters supplied to get the outbound routes for a connection resource."
 );
-@@doc(VirtualHubs.hubVirtualNetworkConnectionsCreateOrUpdate::parameters.body,
+@@doc(VirtualHubs.hubVirtualNetworkConnectionsCreateOrUpdate::parameters.resource,
   "Parameters supplied to create or update a hub virtual network connection."
 );
-@@doc(VirtualHubs.virtualHubRouteTableV2sCreateOrUpdate::parameters.body,
+@@doc(VirtualHubs.virtualHubRouteTableV2sCreateOrUpdate::parameters.resource,
   "Parameters supplied to create or update VirtualHubRouteTableV2."
 );

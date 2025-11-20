@@ -341,7 +341,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGatewayAvailableSslOptions/default/predefinedPolicies/{predefinedPolicyName}/getSslPredefinedPolicy": {
+    "/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGatewayAvailableSslOptions/default/predefinedPolicies/{predefinedPolicyName}": {
       "get": {
         "operationId": "ApplicationGateways_GetSslPredefinedPolicy",
         "description": "Gets Ssl predefined policy with the specified policy name.",
@@ -23183,7 +23183,43 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters/{routeFilterName}/{ruleName}/{ruleName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters/{routeFilterName}/routeFilterRules": {
+      "get": {
+        "operationId": "RouteFilterRules_ListByRouteFilter",
+        "description": "Gets all RouteFilterRules in a route filter.",
+        "parameters": [
+          {
+            "name": "routeFilterName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/RouteFilterRuleListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RouteFilterRuleListByRouteFilter": {
+            "$ref": "./examples/RouteFilterRuleListByRouteFilter.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters/{routeFilterName}/routeFilterRules/{ruleName}": {
       "get": {
         "operationId": "RouteFilterRules_Get",
         "description": "Gets the specified rule from a route filter.",
@@ -23272,7 +23308,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "original-uri"
+          "final-state-via": "original-uri",
+          "final-state-schema": "#/definitions/RouteFilter"
         },
         "x-ms-long-running-operation": true
       },
@@ -23297,15 +23334,6 @@
           "200": {
             "description": "ignore"
           },
-          "202": {
-            "description": "ignore",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              }
-            }
-          },
           "204": {
             "description": "ignore"
           },
@@ -23320,46 +23348,6 @@
           "RouteFilterRuleDelete": {
             "$ref": "./examples/RouteFilterRuleDelete.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters/{routeFilterName}/routeFilterRules": {
-      "get": {
-        "operationId": "RouteFilterRules_ListByRouteFilter",
-        "description": "Gets all RouteFilterRules in a route filter.",
-        "parameters": [
-          {
-            "name": "routeFilterName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/RouteFilterRuleListResult"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "RouteFilterRuleListByRouteFilter": {
-            "$ref": "./examples/RouteFilterRuleListByRouteFilter.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -24539,268 +24527,6 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/{connectionName}/{connectionName}": {
-      "get": {
-        "operationId": "HubVirtualNetworkConnections_Get",
-        "description": "Retrieves the details of a HubVirtualNetworkConnection.",
-        "parameters": [
-          {
-            "name": "virtualHubName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "connectionName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/HubVirtualNetworkConnection"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "HubVirtualNetworkConnectionGet": {
-            "$ref": "./examples/HubVirtualNetworkConnectionGet.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "HubVirtualNetworkConnections_CreateOrUpdate",
-        "description": "Creates a hub virtual network connection if it doesn't exist else updates the existing one.",
-        "parameters": [
-          {
-            "name": "virtualHubName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "connectionName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "hubVirtualNetworkConnectionParameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/HubVirtualNetworkConnection"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/HubVirtualNetworkConnection"
-            }
-          },
-          "201": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/HubVirtualNetworkConnection"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "HubVirtualNetworkConnectionPut": {
-            "$ref": "./examples/HubVirtualNetworkConnectionPut.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "original-uri"
-        },
-        "x-ms-long-running-operation": true
-      },
-      "delete": {
-        "operationId": "HubVirtualNetworkConnections_Delete",
-        "description": "Deletes a HubVirtualNetworkConnection.",
-        "parameters": [
-          {
-            "name": "virtualHubName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "connectionName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore"
-          },
-          "204": {
-            "description": "ignore"
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "HubVirtualNetworkConnectionDelete": {
-            "$ref": "./examples/HubVirtualNetworkConnectionDelete.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/{routeTableName}/{routeTableName}": {
-      "get": {
-        "operationId": "VirtualHubRouteTableV2s_Get",
-        "description": "Retrieves the details of a VirtualHubRouteTableV2.",
-        "parameters": [
-          {
-            "name": "virtualHubName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "routeTableName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/VirtualHubRouteTableV2"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "VirtualHubVirtualHubRouteTableV2Get": {
-            "$ref": "./examples/VirtualHubRouteTableV2Get.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "VirtualHubRouteTableV2s_CreateOrUpdate",
-        "description": "Creates a VirtualHubRouteTableV2 resource if it doesn't exist else updates the existing VirtualHubRouteTableV2.",
-        "parameters": [
-          {
-            "name": "virtualHubName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "routeTableName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "virtualHubRouteTableV2Parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/VirtualHubRouteTableV2"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/VirtualHubRouteTableV2"
-            }
-          },
-          "201": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/VirtualHubRouteTableV2"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "VirtualHubRouteTableV2Put": {
-            "$ref": "./examples/VirtualHubRouteTableV2Put.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "original-uri"
-        },
-        "x-ms-long-running-operation": true
-      },
-      "delete": {
-        "operationId": "VirtualHubRouteTableV2s_Delete",
-        "description": "Deletes a VirtualHubRouteTableV2.",
-        "parameters": [
-          {
-            "name": "virtualHubName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "routeTableName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore"
-          },
-          "204": {
-            "description": "ignore"
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "VirtualHubRouteTableV2Delete": {
-            "$ref": "./examples/VirtualHubRouteTableV2Delete.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/bgpConnections": {
       "get": {
         "operationId": "VirtualHubBgpConnections_List",
@@ -24985,25 +24711,19 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/bgpConnections/{connectionName}/{hubName}/advertisedRoutes": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{hubName}/bgpConnections/{connectionName}/advertisedRoutes": {
       "post": {
         "operationId": "VirtualHubBgpConnections_ListAdvertisedRoutes",
         "description": "Retrieves a list of routes the virtual hub bgp connection is advertising to the specified peer.",
         "parameters": [
           {
-            "name": "virtualHubName",
+            "name": "hubName",
             "in": "path",
             "required": true,
             "type": "string"
           },
           {
             "name": "connectionName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "hubName",
             "in": "path",
             "required": true,
             "type": "string"
@@ -25046,25 +24766,19 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/bgpConnections/{connectionName}/{hubName}/learnedRoutes": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{hubName}/bgpConnections/{connectionName}/learnedRoutes": {
       "post": {
         "operationId": "VirtualHubBgpConnections_ListLearnedRoutes",
         "description": "Retrieves a list of routes the virtual hub bgp connection has learned.",
         "parameters": [
           {
-            "name": "virtualHubName",
+            "name": "hubName",
             "in": "path",
             "required": true,
             "type": "string"
           },
           {
             "name": "connectionName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "hubName",
             "in": "path",
             "required": true,
             "type": "string"
@@ -25380,6 +25094,138 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/hubVirtualNetworkConnections/{connectionName}": {
+      "get": {
+        "operationId": "HubVirtualNetworkConnections_Get",
+        "description": "Retrieves the details of a HubVirtualNetworkConnection.",
+        "parameters": [
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/HubVirtualNetworkConnection"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HubVirtualNetworkConnectionGet": {
+            "$ref": "./examples/HubVirtualNetworkConnectionGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "HubVirtualNetworkConnections_CreateOrUpdate",
+        "description": "Creates a hub virtual network connection if it doesn't exist else updates the existing one.",
+        "parameters": [
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "hubVirtualNetworkConnectionParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HubVirtualNetworkConnection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/HubVirtualNetworkConnection"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/HubVirtualNetworkConnection"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HubVirtualNetworkConnectionPut": {
+            "$ref": "./examples/HubVirtualNetworkConnectionPut.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri",
+          "final-state-schema": "#/definitions/VirtualHub"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "HubVirtualNetworkConnections_Delete",
+        "description": "Deletes a HubVirtualNetworkConnection.",
+        "parameters": [
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HubVirtualNetworkConnectionDelete": {
+            "$ref": "./examples/HubVirtualNetworkConnectionDelete.json"
+          }
         }
       }
     },
@@ -25886,6 +25732,138 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/routeTables/{routeTableName}": {
+      "get": {
+        "operationId": "VirtualHubRouteTableV2s_Get",
+        "description": "Retrieves the details of a VirtualHubRouteTableV2.",
+        "parameters": [
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "routeTableName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VirtualHubRouteTableV2"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualHubVirtualHubRouteTableV2Get": {
+            "$ref": "./examples/VirtualHubRouteTableV2Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "VirtualHubRouteTableV2s_CreateOrUpdate",
+        "description": "Creates a VirtualHubRouteTableV2 resource if it doesn't exist else updates the existing VirtualHubRouteTableV2.",
+        "parameters": [
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "routeTableName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "virtualHubRouteTableV2Parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualHubRouteTableV2"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VirtualHubRouteTableV2"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VirtualHubRouteTableV2"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualHubRouteTableV2Put": {
+            "$ref": "./examples/VirtualHubRouteTableV2Put.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri",
+          "final-state-schema": "#/definitions/VirtualHub"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "VirtualHubRouteTableV2s_Delete",
+        "description": "Deletes a VirtualHubRouteTableV2.",
+        "parameters": [
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "routeTableName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualHubRouteTableV2Delete": {
+            "$ref": "./examples/VirtualHubRouteTableV2Delete.json"
+          }
         }
       }
     },
@@ -29558,17 +29536,11 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans/{VirtualWANName}/{virtualWANName}/generateVpnProfile": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans/{virtualWANName}/generateVpnProfile": {
       "post": {
         "operationId": "generatevirtualwanvpnserverconfigurationvpnprofile",
         "description": "Generates a unique VPN profile for P2S clients for VirtualWan and associated VpnServerConfiguration combination in the specified resource group.",
         "parameters": [
-          {
-            "name": "VirtualWANName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
           {
             "name": "virtualWANName",
             "in": "path",
@@ -29615,17 +29587,11 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans/{VirtualWANName}/{virtualWANName}/supportedSecurityProviders": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans/{virtualWANName}/supportedSecurityProviders": {
       "get": {
         "operationId": "SupportedSecurityProviders",
         "description": "Gives the supported security providers for the virtual wan.",
         "parameters": [
-          {
-            "name": "VirtualWANName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
           {
             "name": "virtualWANName",
             "in": "path",
@@ -29654,17 +29620,11 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans/{VirtualWANName}/{virtualWANName}/vpnConfiguration": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans/{virtualWANName}/vpnConfiguration": {
       "post": {
         "operationId": "VpnSitesConfiguration_Download",
         "description": "Gives the sas-url to download the configurations for vpn-sites in a resource group.",
         "parameters": [
-          {
-            "name": "VirtualWANName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
           {
             "name": "virtualWANName",
             "in": "path",
@@ -29708,17 +29668,11 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans/{VirtualWANName}/{virtualWANName}/vpnServerConfigurations": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans/{virtualWANName}/vpnServerConfigurations": {
       "post": {
         "operationId": "VpnServerConfigurationsAssociatedWithVirtualWan_List",
         "description": "Gives the list of VpnServerConfigurations associated with Virtual Wan in a resource group.",
         "parameters": [
-          {
-            "name": "VirtualWANName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
           {
             "name": "virtualWANName",
             "in": "path",
@@ -29964,260 +29918,6 @@
         "x-ms-examples": {
           "VpnGatewayDelete": {
             "$ref": "./examples/VpnGatewayDelete.json"
-          }
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/{connectionName}/{connectionName}": {
-      "get": {
-        "operationId": "VpnConnections_Get",
-        "description": "Retrieves the details of a vpn connection.",
-        "parameters": [
-          {
-            "name": "gatewayName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "connectionName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/VpnConnection"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "VpnConnectionGet": {
-            "$ref": "./examples/VpnConnectionGet.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "VpnConnections_CreateOrUpdate",
-        "description": "Creates a vpn connection to a scalable vpn gateway if it doesn't exist else updates the existing connection.",
-        "parameters": [
-          {
-            "name": "gatewayName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "connectionName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "VpnConnectionParameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/VpnConnection"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/VpnConnection"
-            }
-          },
-          "201": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/VpnConnection"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "VpnConnectionPut": {
-            "$ref": "./examples/VpnConnectionPut.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "original-uri"
-        },
-        "x-ms-long-running-operation": true
-      },
-      "delete": {
-        "operationId": "VpnConnections_Delete",
-        "description": "Deletes a vpn connection.",
-        "parameters": [
-          {
-            "name": "gatewayName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "connectionName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore"
-          },
-          "204": {
-            "description": "ignore"
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "VpnConnectionDelete": {
-            "$ref": "./examples/VpnConnectionDelete.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/{vpnConnectionName}/startpacketcapture": {
-      "post": {
-        "operationId": "VpnConnections_StartPacketCapture",
-        "description": "Starts packet capture on Vpn connection in the specified resource group.",
-        "produces": [
-          "text/plain",
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "gatewayName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "vpnConnectionName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "schema": {
-              "$ref": "#/definitions/VpnConnectionPacketCaptureStartParameters"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "type": "string"
-            }
-          },
-          "202": {
-            "description": "ignore",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              }
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Start packet capture on vpn connection with filter": {
-            "$ref": "./examples/VpnConnectionStartPacketCaptureFilterData.json"
-          },
-          "Start packet capture on vpn connection without filter": {
-            "$ref": "./examples/VpnConnectionStartPacketCapture.json"
-          }
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/{vpnConnectionName}/stoppacketcapture": {
-      "post": {
-        "operationId": "VpnConnections_StopPacketCapture",
-        "description": "Stops packet capture on Vpn connection in the specified resource group.",
-        "produces": [
-          "text/plain",
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "gatewayName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "vpnConnectionName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "schema": {
-              "$ref": "#/definitions/VpnConnectionPacketCaptureStopParameters"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "type": "string"
-            }
-          },
-          "202": {
-            "description": "ignore",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              }
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Start packet capture on vpn connection without filter": {
-            "$ref": "./examples/VpnConnectionStopPacketCapture.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -30602,13 +30302,274 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnLinkConnections": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}": {
+      "get": {
+        "operationId": "VpnConnections_Get",
+        "description": "Retrieves the details of a vpn connection.",
+        "parameters": [
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VpnConnection"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VpnConnectionGet": {
+            "$ref": "./examples/VpnConnectionGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "VpnConnections_CreateOrUpdate",
+        "description": "Creates a vpn connection to a scalable vpn gateway if it doesn't exist else updates the existing connection.",
+        "parameters": [
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "VpnConnectionParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VpnConnection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VpnConnection"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VpnConnection"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VpnConnectionPut": {
+            "$ref": "./examples/VpnConnectionPut.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri",
+          "final-state-schema": "#/definitions/VpnGateway"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "VpnConnections_Delete",
+        "description": "Deletes a vpn connection.",
+        "parameters": [
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VpnConnectionDelete": {
+            "$ref": "./examples/VpnConnectionDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{vpnConnectionName}/startpacketcapture": {
+      "post": {
+        "operationId": "VpnConnections_StartPacketCapture",
+        "description": "Starts packet capture on Vpn connection in the specified resource group.",
+        "produces": [
+          "text/plain",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "vpnConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/VpnConnectionPacketCaptureStartParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Start packet capture on vpn connection with filter": {
+            "$ref": "./examples/VpnConnectionStartPacketCaptureFilterData.json"
+          },
+          "Start packet capture on vpn connection without filter": {
+            "$ref": "./examples/VpnConnectionStartPacketCapture.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{vpnConnectionName}/stoppacketcapture": {
+      "post": {
+        "operationId": "VpnConnections_StopPacketCapture",
+        "description": "Stops packet capture on Vpn connection in the specified resource group.",
+        "produces": [
+          "text/plain",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "vpnConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/VpnConnectionPacketCaptureStopParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Start packet capture on vpn connection without filter": {
+            "$ref": "./examples/VpnConnectionStopPacketCapture.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}/vpnLinkConnections": {
       "get": {
         "operationId": "VpnLinkConnections_ListByVpnConnection",
         "description": "Retrieves all vpn site link connections for a particular virtual wan vpn gateway vpn connection.",
         "parameters": [
           {
             "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionName",
             "in": "path",
             "required": true,
             "type": "string"
@@ -30638,13 +30599,19 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnLinkConnections/{linkConnectionName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}/vpnLinkConnections/{linkConnectionName}": {
       "get": {
         "operationId": "VpnSiteLinkConnections_Get",
         "description": "Retrieves the details of a vpn site link connection.",
         "parameters": [
           {
             "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionName",
             "in": "path",
             "required": true,
             "type": "string"
@@ -30677,7 +30644,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnLinkConnections/{linkConnectionName}/getikesas": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}/vpnLinkConnections/{linkConnectionName}/getikesas": {
       "post": {
         "operationId": "VpnLinkConnections_GetIkeSas",
         "description": "Lists IKE Security Associations for Vpn Site Link Connection in the specified resource group.",
@@ -30688,6 +30655,12 @@
         "parameters": [
           {
             "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionName",
             "in": "path",
             "required": true,
             "type": "string"
@@ -30730,13 +30703,19 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnLinkConnections/{linkConnectionName}/resetconnection": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}/vpnLinkConnections/{linkConnectionName}/resetconnection": {
       "post": {
         "operationId": "VpnLinkConnections_ResetConnection",
         "description": "Resets the VpnLink connection specified.",
         "parameters": [
           {
             "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionName",
             "in": "path",
             "required": true,
             "type": "string"
@@ -30773,13 +30752,19 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnLinkConnections/{linkConnectionName}/sharedKeys": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}/vpnLinkConnections/{linkConnectionName}/sharedKeys": {
       "get": {
         "operationId": "VpnLinkConnections_GetAllSharedKeys",
         "description": "Lists all shared keys of VpnLink connection specified.",
         "parameters": [
           {
             "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionName",
             "in": "path",
             "required": true,
             "type": "string"
@@ -30815,13 +30800,19 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnLinkConnections/{linkConnectionName}/sharedKeys/default": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}/vpnLinkConnections/{linkConnectionName}/sharedKeys/default": {
       "get": {
         "operationId": "VpnLinkConnections_GetDefaultSharedKey",
         "description": "Gets the shared key of VpnLink connection specified.",
         "parameters": [
           {
             "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionName",
             "in": "path",
             "required": true,
             "type": "string"
@@ -30859,6 +30850,12 @@
         "parameters": [
           {
             "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionName",
             "in": "path",
             "required": true,
             "type": "string"
@@ -30916,13 +30913,19 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnLinkConnections/{linkConnectionName}/sharedKeys/default/listSharedKey": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}/vpnLinkConnections/{linkConnectionName}/sharedKeys/default/listSharedKey": {
       "post": {
         "operationId": "VpnLinkConnections_ListDefaultSharedKey",
         "description": "Gets the value of the shared key of VpnLink connection specified.",
         "parameters": [
           {
             "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionName",
             "in": "path",
             "required": true,
             "type": "string"
@@ -36380,6 +36383,10 @@
       "required": [
         "value"
       ]
+    },
+    "Azure.ResourceManager.ArmAcceptedLroResponse<\"Resource operation accepted.\", Azure.ResourceManager.{ location: string, retryAfter: int32 }>": {
+      "type": "object",
+      "description": "Resource operation accepted."
     },
     "Azure.ResourceManager.ArmResponse<ApplicationGatewayBackendHealth>": {
       "type": "object",

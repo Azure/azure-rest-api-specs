@@ -24,6 +24,22 @@ model VirtualWAN
   ...Azure.ResourceManager.Legacy.EntityTagProperty;
 }
 
+alias VirtualWanOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+  },
+  {
+    /** The name of the VirtualWAN. */
+    @path
+    @segment("virtualWans")
+    @key
+    virtualWANName: string;
+  }
+>;
+
 @armResourceOperations
 interface VirtualWANS {
   /**
@@ -85,17 +101,10 @@ interface VirtualWANS {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SupportedSecurityProviders")
   @get
-  supportedSecurityProviders is ArmResourceActionSync<
+  supportedSecurityProviders is VirtualWanOps.ActionSync<
     VirtualWAN,
     void,
-    ArmResponse<VirtualWanSecurityProviders>,
-    Parameters = {
-      /**
-       * The name of the VirtualWAN for which supported security providers are needed.
-       */
-      @path
-      virtualWANName: string;
-    }
+    ArmResponse<VirtualWanSecurityProviders>
   >;
 
   /**
@@ -104,17 +113,10 @@ interface VirtualWANS {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("generatevirtualwanvpnserverconfigurationvpnprofile")
   @action("GenerateVpnProfile")
-  generatevirtualwanvpnserverconfigurationvpnprofile is ArmResourceActionAsync<
+  generatevirtualwanvpnserverconfigurationvpnprofile is VirtualWanOps.ActionAsync<
     VirtualWAN,
     VirtualWanVpnProfileParameters,
-    ArmResponse<VpnProfileResponse>,
-    Parameters = {
-      /**
-       * The name of the VirtualWAN whose associated VpnServerConfigurations is needed.
-       */
-      @path
-      virtualWANName: string;
-    }
+    ArmResponse<VpnProfileResponse>
   >;
 
   /**
@@ -123,17 +125,10 @@ interface VirtualWANS {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VpnSitesConfiguration_Download")
   @action("vpnConfiguration")
-  download is ArmResourceActionAsync<
+  download is VirtualWanOps.ActionAsync<
     VirtualWAN,
     GetVpnSitesConfigurationRequest,
-    OkResponse,
-    Parameters = {
-      /**
-       * The name of the VirtualWAN for which configuration of all vpn-sites is needed.
-       */
-      @path
-      virtualWANName: string;
-    }
+    OkResponse
   >;
 
   /**
@@ -142,17 +137,10 @@ interface VirtualWANS {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VpnServerConfigurationsAssociatedWithVirtualWan_List")
   @action("vpnServerConfigurations")
-  vpnServerConfigurationsAssociatedWithVirtualWanList is ArmResourceActionAsync<
+  vpnServerConfigurationsAssociatedWithVirtualWanList is VirtualWanOps.ActionAsync<
     VirtualWAN,
     void,
-    ArmResponse<VpnServerConfigurationsResponse>,
-    Parameters = {
-      /**
-       * The name of the VirtualWAN whose associated VpnServerConfigurations is needed.
-       */
-      @path
-      virtualWANName: string;
-    }
+    ArmResponse<VpnServerConfigurationsResponse>
   >;
 }
 

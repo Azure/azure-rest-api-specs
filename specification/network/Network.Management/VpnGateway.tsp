@@ -24,6 +24,50 @@ model VpnGateway
   ...Azure.ResourceManager.Legacy.EntityTagProperty;
 }
 
+alias VpnConnectionOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** The name of the vpn gateway. */
+    @path
+    @segment("vpnGateways")
+    @key
+    gatewayName: string;
+  },
+  {
+    /** The name of the vpn connection. */
+    @path
+    @segment("vpnConnections")
+    @key
+    connectionName: string;
+  }
+>;
+
+alias VpnConnection2Ops = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** The name of the vpn gateway. */
+    @path
+    @segment("vpnGateways")
+    @key
+    gatewayName: string;
+  },
+  {
+    /** The name of the vpn connection. */
+    @path
+    @segment("vpnConnections")
+    @key
+    vpnConnectionName: string;
+  }
+>;
+
 @armResourceOperations
 interface VpnGateways {
   /**
@@ -116,18 +160,9 @@ interface VpnGateways {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VpnConnections_Get")
   @get
-  @action("{connectionName}")
-  vpnConnectionsGet is ArmResourceActionSync<
+  vpnConnectionsGet is VpnConnectionOps.Read<
     VpnGateway,
-    void,
-    ArmResponse<VpnConnection>,
-    Parameters = {
-      /**
-       * The name of the vpn connection.
-       */
-      @path
-      connectionName: string;
-    }
+    Response = ArmResponse<VpnConnection>
   >;
 
   /**
@@ -136,19 +171,10 @@ interface VpnGateways {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VpnConnections_CreateOrUpdate")
   @put
-  @action("{connectionName}")
-  vpnConnectionsCreateOrUpdate is ArmResourceActionAsyncBase<
+  vpnConnectionsCreateOrUpdate is VpnConnectionOps.CreateOrUpdateAsync<
     VpnGateway,
-    VpnConnection,
-    ArmResponse<VpnConnection> | ArmResourceCreatedResponse<VpnConnection>,
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<VpnGateway>,
-    Parameters = {
-      /**
-       * The name of the connection.
-       */
-      @path
-      connectionName: string;
-    }
+    Response = ArmResponse<VpnConnection> | ArmResourceCreatedResponse<VpnConnection>,
+    Request = VpnConnection
   >;
 
   /**
@@ -157,19 +183,9 @@ interface VpnGateways {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VpnConnections_Delete")
   @delete
-  @action("{connectionName}")
-  vpnConnectionsDelete is ArmResourceActionAsyncBase<
+  vpnConnectionsDelete is VpnConnectionOps.DeleteWithoutOkAsync<
     VpnGateway,
-    void,
-    Response = OkResponse | NoContentResponse,
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<VpnGateway>,
-    Parameters = {
-      /**
-       * The name of the connection.
-       */
-      @path
-      connectionName: string;
-    }
+    Response = OkResponse | NoContentResponse
   >;
 
   /**
@@ -178,17 +194,10 @@ interface VpnGateways {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VpnConnections_StartPacketCapture")
   @action("startpacketcapture")
-  vpnConnectionsStartPacketCapture is ArmResourceActionAsync<
+  vpnConnectionsStartPacketCapture is VpnConnection2Ops.ActionAsync<
     VpnGateway,
     VpnConnectionPacketCaptureStartParameters,
     ArmResponse<string>,
-    Parameters = {
-      /**
-       * The name of the vpn connection.
-       */
-      @path
-      vpnConnectionName: string;
-    },
     OptionalRequestBody = true
   >;
 
@@ -198,17 +207,10 @@ interface VpnGateways {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VpnConnections_StopPacketCapture")
   @action("stoppacketcapture")
-  vpnConnectionsStopPacketCapture is ArmResourceActionAsync<
+  vpnConnectionsStopPacketCapture is VpnConnection2Ops.ActionAsync<
     VpnGateway,
     VpnConnectionPacketCaptureStopParameters,
     ArmResponse<string>,
-    Parameters = {
-      /**
-       * The name of the vpn connection.
-       */
-      @path
-      vpnConnectionName: string;
-    },
     OptionalRequestBody = true
   >;
 
@@ -219,11 +221,9 @@ interface VpnGateways {
   @operationId("VpnConnections_ListByVpnGateway")
   @list
   @get
-  @action("vpnConnections")
-  listByVpnGateway is ArmResourceActionSync<
+  listByVpnGateway is VpnConnectionOps.List<
     VpnGateway,
-    void,
-    ArmResponse<ListVpnConnectionsResult>
+    Response = ArmResponse<ListVpnConnectionsResult>
   >;
 }
 
@@ -241,7 +241,7 @@ interface VpnGateways {
 @@doc(VpnGateways.stopPacketCapture::parameters.body,
   "Vpn gateway packet capture parameters supplied to stop packet capture on vpn gateway."
 );
-@@doc(VpnGateways.vpnConnectionsCreateOrUpdate::parameters.body,
+@@doc(VpnGateways.vpnConnectionsCreateOrUpdate::parameters.resource,
   "Parameters supplied to create or Update a VPN Connection."
 );
 @@doc(VpnGateways.vpnConnectionsStartPacketCapture::parameters.body,

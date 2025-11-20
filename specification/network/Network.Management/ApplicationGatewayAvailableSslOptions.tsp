@@ -25,6 +25,27 @@ model ApplicationGatewayAvailableSslOptions
   >;
 }
 
+alias ApplicationGatewayAvailableSslOptionsOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** The name of the application gateway available ssl option. */
+    @path
+    @segment("applicationGatewayAvailableSslOptions")
+    @key
+    applicationGatewayAvailableSslOption: "default";
+  },
+  {
+    /** The name of the ssl predefined policy. */
+    @path
+    @segment("predefinedPolicies")
+    @key
+    predefinedPolicyName: string;
+  }
+>;
+
 @armResourceOperations
 interface ApplicationGatewayAvailableSslOptionsOperationGroup {
   /**
@@ -58,19 +79,9 @@ interface ApplicationGatewayAvailableSslOptionsOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ApplicationGateways_GetSslPredefinedPolicy")
   @get
-  getSslPredefinedPolicy is ArmResourceActionSync<
+  getSslPredefinedPolicy is ApplicationGatewayAvailableSslOptionsOps.Read<
     ApplicationGatewayAvailableSslOptions,
-    void,
-    ArmResponse<ApplicationGatewaySslPredefinedPolicy>,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
-    Parameters = {
-      /**
-       * Name of Ssl predefined policy.
-       */
-      @path
-      @segment("predefinedPolicies")
-      predefinedPolicyName: string;
-    }
+    Response = ArmResponse<ApplicationGatewaySslPredefinedPolicy>
   >;
 }
 
