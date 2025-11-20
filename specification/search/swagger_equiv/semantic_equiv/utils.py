@@ -64,7 +64,8 @@ def write_diffs_excel(
     diffs: List[Dict[str, Any]],
     output_path: str,
     hand_authored_canonical: dict = None,
-    typespec_canonical: dict = None
+    typespec_canonical: dict = None,
+    original_swagger_files: dict = None
 ) -> None:
     """Write differences to Excel file with side-by-side comparison format"""
 
@@ -122,15 +123,21 @@ def write_diffs_excel(
         if not hand_authored_canonical or not typespec_canonical:
             return comparison_data
 
-        # Helper function to determine swagger source
-        def get_swagger_source(context_info=""):
-            # Try to extract source from context or default to searchservice
-            if 'searchindex' in context_info.lower():
-                return 'searchindex'
-            elif 'knowledgebase' in context_info.lower():
-                return 'knowledgebase'
-            else:
-                return 'searchservice'
+        # Helper function to determine swagger source from original files
+        def get_swagger_source_for_path(path, method):
+            """Determine which original swagger file contains this path/method combination"""
+            if not original_swagger_files:
+                return 'searchservice'  # fallback
+
+            # Check each original file to see which one contains this path
+            for file_name in ['searchservice', 'searchindex', 'knowledgebase']:
+                if file_name in original_swagger_files:
+                    file_data = original_swagger_files[file_name]
+                    if 'paths' in file_data and path in file_data['paths']:
+                        if method.lower() in file_data['paths'][path]:
+                            return file_name
+
+            return 'searchservice'  # default fallback
 
         # 1. Compare Paths and Operations
         hand_paths = {}
@@ -143,10 +150,12 @@ def write_diffs_excel(
                     for method, operation in path_methods.items():
                         if isinstance(operation, dict):
                             operation_id = operation.get('operationId', '')
+                            source_file = get_swagger_source_for_path(path, method)
                             hand_paths[(path, method.upper())] = {
                                 'operation_id': operation_id,
                                 'parameters': operation.get('parameters', []),
-                                'responses': operation.get('responses', {})
+                                'responses': operation.get('responses', {}),
+                                'source_file': source_file
                             }
 
         # Extract paths and operations from typespec spec
@@ -168,10 +177,9 @@ def write_diffs_excel(
             hand_op = hand_paths.get((path, method))
             tsp_op = tsp_paths.get((path, method))
 
-            swagger_source = get_swagger_source()
-
             if hand_op and tsp_op:
                 # Both exist - compare details
+                swagger_source = hand_op['source_file']
                 if hand_op['operation_id'] == tsp_op['operation_id']:
                     diff_type = "Equal"
                     diff_details = ""
@@ -206,8 +214,9 @@ def write_diffs_excel(
 
             elif hand_op and not tsp_op:
                 # Missing in TSP
+                swagger_source = hand_op['source_file']
                 diff_type = "Missing in TSP"
-                diff_details = f"Operation exists in Swagger but not in TSP"
+                diff_details = "Operation exists in Swagger but not in TSP"
 
                 comparison_data['Operations'].append({
                     'Swagger': swagger_source,
@@ -277,7 +286,7 @@ def write_diffs_excel(
                 hand_param = hand_params.get(param_key)
                 tsp_param = tsp_params.get(param_key)
 
-                swagger_source = get_swagger_source()
+                swagger_source = hand_op['source_file']
 
                 if hand_param and tsp_param:
                     # Both exist - compare
@@ -359,7 +368,7 @@ def write_diffs_excel(
                 hand_response = hand_responses.get(response_code)
                 tsp_response = tsp_responses.get(response_code)
 
-                swagger_source = get_swagger_source()
+                swagger_source = hand_op['source_file']
 
                 if hand_response and tsp_response:
                     # Both exist - compare
@@ -421,6 +430,20 @@ def write_diffs_excel(
                         'Diff Details': f"Response '{response_code}' exists in TSP but not in Swagger"
                     })
 
+        # Helper function for definition source
+        def get_definition_source(def_name):
+            """Determine which original swagger file contains this definition"""
+            if not original_swagger_files:
+                return 'searchservice'  # fallback
+
+            for file_name in ['searchservice', 'searchindex', 'knowledgebase', 'common_types']:
+                if file_name in original_swagger_files:
+                    file_data = original_swagger_files[file_name]
+                    if 'definitions' in file_data and def_name in file_data['definitions']:
+                        return file_name
+
+            return 'searchservice'  # default fallback
+
         # 4. Compare Definitions
         hand_definitions = hand_authored_canonical.get('definitions', {})
         tsp_definitions = typespec_canonical.get('definitions', {})
@@ -431,7 +454,7 @@ def write_diffs_excel(
             hand_def = hand_definitions.get(def_name)
             tsp_def = tsp_definitions.get(def_name)
 
-            swagger_source = get_swagger_source()
+            swagger_source = get_definition_source(def_name)
 
             if hand_def and tsp_def:
                 # Both exist - compare

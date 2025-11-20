@@ -36,7 +36,8 @@ def save_artifacts(
     config,
     result: EquivalencyResult,
     hand_authored_canonical: dict = None,
-    typespec_canonical: dict = None
+    typespec_canonical: dict = None,
+    original_swagger_files: dict = None
 ) -> None:
     """
     Save comparison artifacts to the output directory.
@@ -46,6 +47,7 @@ def save_artifacts(
         result: Comparison result
         hand_authored_canonical: Canonicalized hand-authored spec (optional)
         typespec_canonical: Canonicalized TypeSpec spec (optional)
+        original_swagger_files: Original swagger files before merging (optional)
     """
     output_dir = Path(config.output_path)
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -129,7 +131,8 @@ def save_artifacts(
     # Write Excel file with canonical specs for side-by-side comparison
     write_diffs_excel(structured_diffs, config.output_path,
                            hand_authored_canonical=hand_authored_canonical,
-                           typespec_canonical=typespec_canonical)
+                           typespec_canonical=typespec_canonical,
+                           original_swagger_files=original_swagger_files)
 
     # Save canonicalized specs if provided
     if hand_authored_canonical:
@@ -245,7 +248,8 @@ Exit codes:
         # Save artifacts - always pass canonical specs for comparison
         artifacts_to_save = {
             'hand_authored_canonical': canonical_hand_authored,
-            'typespec_canonical': canonical_typespec
+            'typespec_canonical': canonical_typespec,
+            'original_swagger_files': loaded_files
         }
 
         # Only save canonical spec files if requested
@@ -253,7 +257,8 @@ Exit codes:
             # Remove canonical specs from artifacts_to_save for file saving, but keep for Excel comparison
             save_artifacts(config, result,
                           hand_authored_canonical=canonical_hand_authored,
-                          typespec_canonical=canonical_typespec)
+                          typespec_canonical=canonical_typespec,
+                          original_swagger_files=loaded_files)
         else:
             save_artifacts(config, result, **artifacts_to_save)
 
