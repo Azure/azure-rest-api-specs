@@ -25,9 +25,9 @@ from typing import Optional
 sys.path.insert(0, str(Path(__file__).parent))
 
 from utils import load_config, validate_paths, ConfigError
-from utils import load_and_validate_all_files, LoaderError
+from utils import load_and_validate_all_files, build_full_paths_for_all_files, LoaderError
 from utils import merge_hand_authored_specs, validate_merged_swagger, MergeError
-from utils import write_merge_log, write_diffs_excel
+from utils import write_diffs_excel
 from canonicalize import canonicalize_both_specs, CanonicalizationError
 from compare import compare_swagger_specs, EquivalencyResult
 
@@ -37,7 +37,6 @@ def save_artifacts(
     result: EquivalencyResult,
     hand_authored_canonical: dict = None,
     typespec_canonical: dict = None,
-    original_swagger_files: dict = None
 ) -> None:
     """
     Save comparison artifacts to the output directory.
@@ -47,13 +46,9 @@ def save_artifacts(
         result: Comparison result
         hand_authored_canonical: Canonicalized hand-authored spec (optional)
         typespec_canonical: Canonicalized TypeSpec spec (optional)
-        original_swagger_files: Original swagger files before merging (optional)
     """
     output_dir = Path(config.output_path)
     output_dir.mkdir(parents=True, exist_ok=True)
-
-    # Write merge log
-    write_merge_log(config.output_path)
 
     # Convert differences to structured format for Excel output
     structured_diffs = []
@@ -129,27 +124,26 @@ def save_artifacts(
             })
 
     # Write Excel file with canonical specs for side-by-side comparison
-    write_diffs_excel(structured_diffs, config.output_path,
-                           hand_authored_canonical=hand_authored_canonical,
-                           typespec_canonical=typespec_canonical,
-                           original_swagger_files=original_swagger_files)
+    write_diffs_excel(
+        structured_diffs,
+        config.output_path,
+        hand_authored_canonical,
+        typespec_canonical
+    )
 
     # Save canonicalized specs if provided
     if hand_authored_canonical:
-        canonical_hand_file = output_dir / "hand_authored_canonical.json"
-        with open(canonical_hand_file, 'w', encoding='utf-8') as f:
-            json.dump(hand_authored_canonical, f, indent=2)
-
+        save_json(hand_authored_canonical, output_dir / "hand_authored_canonical.json")
     if typespec_canonical:
-        canonical_typespec_file = output_dir / "typespec_canonical.json"
-        with open(canonical_typespec_file, 'w', encoding='utf-8') as f:
-            json.dump(typespec_canonical, f, indent=2)
+        save_json(typespec_canonical, output_dir / "typespec_canonical.json")
 
 
-def print_result_summary(
-    result: EquivalencyResult,
-    verbose: bool = False
-) -> None:
+def save_json(canonical, file_path: Path) -> None:
+    with open(file_path, 'w', encoding='utf-8') as f:
+        json.dump(canonical, f, indent=2)
+
+
+def print_result_summary(result: EquivalencyResult) -> None:
     """Print comparison result summary to stdout."""
     if result.equivalent:
         print("\033[92mSUCCESS\033[0m: Specifications are semantically equivalent")
@@ -157,19 +151,12 @@ def print_result_summary(
         print("\033[91mx Specifications are NOT semantically equivalent\033[0m")
         print(f"Found {result.difference_count} differences")
 
-        if verbose:
-            for i, diff in enumerate(result.differences, 1):
-                print(f"{i}. {diff}")
-        else:
-            # Print just the first few differences
-            max_shown = 5
-            for i, diff in enumerate(result.differences[:max_shown], 1):
-                print(f"{i}. {diff}")
-
-            if len(result.differences) > max_shown:
-                remaining = len(result.differences) - max_shown
-                print(f"... and {remaining} more differences (use --verbose to see all)")
-                print("Full details written to output directory")
+        for i, diff in enumerate(result.differences[:5], 1):
+            print(f"{i}. {diff}")
+        if len(result.differences) > 5:
+            remaining = len(result.differences) - 5
+            print(f"... and {remaining} more differences")
+            print("Full details written to output directory")
 
 
 def main_cli(argv: Optional[list] = None) -> int:
@@ -195,29 +182,10 @@ Exit codes:
     )
 
     parser.add_argument(
-        '--config', '-c',
+        '--config',
         default='config.yaml',
         help='Path to configuration file (default: config.yaml)'
     )
-
-    parser.add_argument(
-        '--verbose', '-v',
-        action='store_true',
-        help='Print detailed differences (default: summary only)'
-    )
-
-    parser.add_argument(
-        '--save-canonical',
-        action='store_true',
-        help='Save canonicalized specs to output directory for debugging'
-    )
-
-    parser.add_argument(
-        '--ignore-operation-id',
-        action='store_true',
-        help='Ignore operationId mismatches during comparison'
-    )
-
     args = parser.parse_args(argv)
 
     try:
@@ -228,7 +196,10 @@ Exit codes:
         # Load all Swagger files
         loaded_files = load_and_validate_all_files(config)
 
-        # Merge hand-authored specifications
+        # Build full paths for all files using x-ms-parameterized-host
+        loaded_files = build_full_paths_for_all_files(loaded_files)
+
+        # Merge hand-authored specifications (now with full paths)
         merged_hand_authored = merge_hand_authored_specs(loaded_files)
         validate_merged_swagger(merged_hand_authored)
 
@@ -242,28 +213,13 @@ Exit codes:
         result = compare_swagger_specs(
             canonical_hand_authored,
             canonical_typespec,
-            ignore_operation_id=args.ignore_operation_id
         )
 
-        # Save artifacts - always pass canonical specs for comparison
-        artifacts_to_save = {
-            'hand_authored_canonical': canonical_hand_authored,
-            'typespec_canonical': canonical_typespec,
-            'original_swagger_files': loaded_files
-        }
-
-        # Only save canonical spec files if requested
-        if not args.save_canonical:
-            # Remove canonical specs from artifacts_to_save for file saving, but keep for Excel comparison
-            save_artifacts(config, result,
-                          hand_authored_canonical=canonical_hand_authored,
-                          typespec_canonical=canonical_typespec,
-                          original_swagger_files=loaded_files)
-        else:
-            save_artifacts(config, result, **artifacts_to_save)
+        # save canonical spec files if requested
+        save_artifacts(config, result, canonical_hand_authored, canonical_typespec)
 
         # Print results and exit with appropriate code
-        print_result_summary(result, verbose=args.verbose)
+        print_result_summary(result)
 
         return 0 if result.equivalent else 1
 

@@ -67,6 +67,10 @@ def should_remove_field(field_name: str, field_value: Any) -> bool:
     Returns:
         True if the field should be removed, False otherwise
     """
+    # Preserve source tracking field
+    if field_name == '_swagger_source':
+        return False
+
     # Documentation fields
     if field_name in DOCUMENTATION_FIELDS:
         return True

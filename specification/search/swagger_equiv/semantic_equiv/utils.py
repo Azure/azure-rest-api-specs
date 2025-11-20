@@ -9,73 +9,30 @@ and merging hand-authored Swagger specifications according to equiv_impl_guide.m
 """
 
 import os
-import yaml
 import json
+import yaml
 import copy
 import pandas as pd
-from typing import Dict, Any, List, Tuple
-from dataclasses import dataclass, field
+from typing import Dict, Any, List
+from dataclasses import dataclass
 from pathlib import Path
 from datetime import datetime
-
-
-# Global merge log to track smart merging operations
-merge_log: List[Dict[str, Any]] = []
-
-
-def log_merge_operation(
-    operation_type: str,
-    context: str,
-    details: Dict[str, Any]
-) -> None:
-    """Log a merge operation for later output to merge.log"""
-    global merge_log
-    merge_log.append({
-        'timestamp': datetime.now().isoformat(),
-        'operation_type': operation_type,
-        'context': context,
-        'details': details
-    })
-
-
-def write_merge_log(output_path: str) -> None:
-    """Write merge log to file"""
-    global merge_log
-    if not merge_log:
-        return
-
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    log_file = Path(output_path) / f"merge_{timestamp}.log"
-    log_file.parent.mkdir(parents=True, exist_ok=True)
-
-    with open(log_file, 'w', encoding='utf-8') as f:
-        f.write("# Swagger Merge Operations Log\n")
-        f.write(f"# Generated on {datetime.now().isoformat()}\n\n")
-
-        for entry in merge_log:
-            f.write(f"[{entry['timestamp']}] {entry['operation_type']}: {entry['context']}\n")
-            if entry['details']:
-                for key, value in entry['details'].items():
-                    f.write(f"  {key}: {value}\n")
-            f.write("\n")
-
 
 def write_diffs_excel(
     diffs: List[Dict[str, Any]],
     output_path: str,
     hand_authored_canonical: dict = None,
     typespec_canonical: dict = None,
-    original_swagger_files: dict = None
 ) -> None:
     """Write differences to Excel file with side-by-side comparison format"""
 
     # Debug prints
-    print(f"\033[94mhand_authored_canonical is {'available' if hand_authored_canonical else 'None'}\033[0m")
-    print(f"\033[94mtypespec_canonical is {'available' if typespec_canonical else 'None'}\033[0m")
+    print(f"hand_authored_canonical is {'available' if hand_authored_canonical else 'None'}")
+    print(f"typespec_canonical is {'available' if typespec_canonical else 'None'}")
     if hand_authored_canonical:
-        print(f"\033[94mhand_authored paths count: {len(hand_authored_canonical.get('paths', {}))}\033[0m")
+        print(f"hand_authored paths count: {len(hand_authored_canonical.get('paths', {}))}")
     if typespec_canonical:
-        print(f"\033[94mtypespec paths count: {len(typespec_canonical.get('paths', {}))}\033[0m")
+        print(f"typespec paths count: {len(typespec_canonical.get('paths', {}))}")
 
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     excel_file = Path(output_path) / f"diff_{timestamp}.xlsx"
@@ -122,55 +79,10 @@ def write_diffs_excel(
         if not hand_authored_canonical or not typespec_canonical:
             return comparison_data
 
-        # Helper function to build full URL for comparison
-        def build_full_url(spec, path):
-            """Build full URL by combining host template with path"""
-            if 'x-ms-parameterized-host' in spec and 'hostTemplate' in spec['x-ms-parameterized-host']:
-                host_template = spec['x-ms-parameterized-host']['hostTemplate']
-                # Extract path segment from host template (everything after the endpoint)
-                # e.g., "{endpoint}/knowledgebases('{knowledgeBaseName}')" -> "/knowledgebases('{knowledgeBaseName}')"
-                if '}/' in host_template:
-                    host_path_segment = '/' + host_template.split('}/', 1)[1]
-                    # If the current path doesn't start with this segment, prepend it
-                    if not path.startswith(host_path_segment):
-                        return host_path_segment + path
-                    else:
-                        return path
-                else:
-                    # Host template doesn't have additional path, just return the path
-                    return path
-            else:
-                # No parameterized host, return path as-is
-                return path
-
         # Helper function to create comparison key
         def create_comparison_key(full_url, method, operation_id):
             """Create a unique key for operation comparison"""
             return f"{full_url}#{method.upper()}#{operation_id}"
-
-        # Helper function to determine swagger source from original files
-        def get_swagger_source_for_path(full_url, method, operation_id):
-            """Determine which original swagger file contains this operation"""
-            if not original_swagger_files:
-                return 'searchservice'  # fallback
-
-            # Check each original file to see which one contains this operation
-            for file_name in ['searchservice', 'searchindex', 'knowledgebase']:
-                if file_name in original_swagger_files:
-                    file_data = original_swagger_files[file_name]
-                    if 'paths' in file_data:
-                        # Build full URL for each path in this file
-                        for file_path, path_methods in file_data['paths'].items():
-                            if isinstance(path_methods, dict):
-                                file_full_url = build_full_url(file_data, file_path)
-                                if file_full_url == full_url and method.lower() in path_methods:
-                                    file_operation = path_methods[method.lower()]
-                                    if isinstance(file_operation, dict):
-                                        file_op_id = file_operation.get('operationId', '')
-                                        if file_op_id == operation_id:
-                                            return file_name
-
-            return 'searchservice'  # default fallback
 
         # 1. Compare Paths and Operations
         hand_paths = {}
@@ -180,30 +92,33 @@ def write_diffs_excel(
         if 'paths' in hand_authored_canonical:
             for path, path_methods in hand_authored_canonical['paths'].items():
                 if isinstance(path_methods, dict):
-                    # Build full URL for comparison
-                    full_url = build_full_url(hand_authored_canonical, path)
+                    # Paths are already full URLs from the build_full_paths step
+                    full_url = path
+                    # Extract source information if available
+                    path_source = path_methods.get('_swagger_source', 'unknown')
+
                     for method, operation in path_methods.items():
-                        if isinstance(operation, dict):
+                        if isinstance(operation, dict) and method.lower() in ['get', 'post', 'put', 'delete', 'patch', 'head', 'options']:
                             operation_id = operation.get('operationId', '')
-                            source_file = get_swagger_source_for_path(full_url, method, operation_id)
+                            operation_source = operation.get('_swagger_source', path_source)
                             # Use full URL + method + operation ID as the key for comparison
                             comparison_key = create_comparison_key(full_url, method, operation_id)
                             hand_paths[comparison_key] = {
                                 'operation_id': operation_id,
                                 'parameters': operation.get('parameters', []),
                                 'responses': operation.get('responses', {}),
-                                'source_file': source_file,
                                 'original_path': path,  # Keep track of original path
                                 'full_url': full_url,
-                                'method': method.upper()
+                                'method': method.upper(),
+                                'swagger_source': operation_source  # Use tracked source instead of heuristic
                             }
 
         # Extract paths and operations from typespec spec
         if 'paths' in typespec_canonical:
             for path, path_methods in typespec_canonical['paths'].items():
                 if isinstance(path_methods, dict):
-                    # Build full URL for comparison
-                    full_url = build_full_url(typespec_canonical, path)
+                    # Paths are already full URLs from the build_full_paths step
+                    full_url = path
                     for method, operation in path_methods.items():
                         if isinstance(operation, dict):
                             operation_id = operation.get('operationId', '')
@@ -226,7 +141,8 @@ def write_diffs_excel(
 
             if hand_op and tsp_op:
                 # Both exist - compare details
-                swagger_source = hand_op['source_file']
+                # Use tracked source information instead of heuristic pattern matching
+                swagger_source = hand_op.get('swagger_source', 'unknown')
                 if hand_op['operation_id'] == tsp_op['operation_id']:
                     diff_type = "Equal"
                     diff_details = ""
@@ -237,7 +153,7 @@ def write_diffs_excel(
                 # Add to Paths
                 comparison_data['Paths'].append({
                     'Swagger': swagger_source,
-                    'Full Path': hand_op['full_url'],  # Host template + original path
+                    'Full Path': hand_op['full_url'],  # Already full URL
                     'Method': hand_op['method'],
                     'Operation ID': hand_op['operation_id'],
                     'TSP Full Path': tsp_op['original_path'],  # Path from TSP-compiled JSON
@@ -249,13 +165,13 @@ def write_diffs_excel(
 
             elif hand_op and not tsp_op:
                 # Missing in TSP
-                swagger_source = hand_op['source_file']
+                swagger_source = hand_op.get('swagger_source', 'unknown')
                 diff_type = "Missing in TSP"
                 diff_details = "Operation exists in Swagger but not in TSP"
 
                 comparison_data['Paths'].append({
                     'Swagger': swagger_source,
-                    'Full Path': hand_op['full_url'],  # Host template + original path
+                    'Full Path': hand_op['full_url'],  # Already full URL
                     'Method': hand_op['method'],
                     'Operation ID': hand_op['operation_id'],
                     'TSP Full Path': '',
@@ -268,7 +184,7 @@ def write_diffs_excel(
             elif not hand_op and tsp_op:
                 # Extra in TSP
                 diff_type = "Extra in TSP"
-                diff_details = f"Operation exists in TSP but not in Swagger"
+                diff_details = "Operation exists in TSP but not in Swagger"
 
                 comparison_data['Paths'].append({
                     'Swagger': '',
@@ -290,7 +206,9 @@ def write_diffs_excel(
             if not tsp_op:
                 continue
 
-            swagger_source = hand_op['source_file']
+            swagger_source = 'knowledgebase' if '/knowledgebases(' in hand_op['full_url'] and hand_op['full_url'].endswith('/retrieve') else 'searchindex' if '/docs' in hand_op['full_url'] else 'searchservice'
+            path = hand_op['original_path']
+            method = hand_op['method']
             hand_params = {(p.get('name', ''), p.get('in', 'query')): p for p in hand_op.get('parameters', [])}
             tsp_params = {(p.get('name', ''), p.get('in', 'query')): p for p in tsp_op.get('parameters', [])}
 
@@ -371,7 +289,7 @@ def write_diffs_excel(
             if not tsp_op:
                 continue
 
-            swagger_source = hand_op['source_file']
+            swagger_source = 'knowledgebase' if '/knowledgebases(' in hand_op['full_url'] and hand_op['full_url'].endswith('/retrieve') else 'searchindex' if '/docs' in hand_op['full_url'] else 'searchservice'
             path = hand_op['original_path']
             method = hand_op['method']
             hand_responses = hand_op.get('responses', {})
@@ -443,17 +361,16 @@ def write_diffs_excel(
 
         # Helper function for definition source
         def get_definition_source(def_name):
-            """Determine which original swagger file contains this definition"""
-            if not original_swagger_files:
-                return 'searchservice'  # fallback
-
-            for file_name in ['searchservice', 'searchindex', 'knowledgebase', 'common_types']:
-                if file_name in original_swagger_files:
-                    file_data = original_swagger_files[file_name]
-                    if 'definitions' in file_data and def_name in file_data['definitions']:
-                        return file_name
-
-            return 'searchservice'  # default fallback
+            """Determine which swagger file likely contains this definition based on naming patterns"""
+            # Simple pattern-based detection since we don't have original files context
+            if 'index' in def_name.lower() or 'search' in def_name.lower() or 'document' in def_name.lower():
+                return 'searchindex'
+            elif 'knowledge' in def_name.lower() or 'retrieve' in def_name.lower():
+                return 'knowledgebase'
+            elif 'error' in def_name.lower() or 'common' in def_name.lower():
+                return 'common_types'
+            else:
+                return 'searchservice'  # default fallback
 
         # 4. Compare Definitions
         hand_definitions = hand_authored_canonical.get('definitions', {})
@@ -553,13 +470,13 @@ def write_diffs_excel(
 
         # Get comparison data
         comparison_data = create_comparison_data(hand_authored_canonical, typespec_canonical)
-        print(f"\033[94mcomparison_data keys: {list(comparison_data.keys())}\033[0m")
-        print(f"\033[94mPaths data count: {len(comparison_data['Paths'])}\033[0m")
-        print(f"\033[94mParameters data count: {len(comparison_data['Parameters'])}\033[0m")
+        print(f"comparison_data keys: {list(comparison_data.keys())}")
+        print(f"Paths data count: {len(comparison_data['Paths'])}")
+        print(f"Parameters data count: {len(comparison_data['Parameters'])}")
 
         # Paths sheet
         if comparison_data['Paths']:
-            print(f"\033[94mCreating Paths sheet with {len(comparison_data['Paths'])} rows\033[0m")
+            print(f"Creating Paths sheet with {len(comparison_data['Paths'])} rows")
             paths_df = pd.DataFrame(comparison_data['Paths'])
             paths_df.to_excel(writer, sheet_name='Paths', index=False)        # Parameters sheet
         if comparison_data['Parameters']:
@@ -595,7 +512,8 @@ def write_diffs_excel(
         if other_data:
             other_df = pd.DataFrame(other_data)
             other_df.to_excel(writer, sheet_name='Other', index=False)
-# Configuration classes and functions (from config.py)
+
+# Configuration classes and functions
 
 @dataclass
 class HandAuthoredConfig:
@@ -626,6 +544,7 @@ class Config:
             output_path=str(base_dir / self.output_path)
         )
 
+# Error classes
 
 class ConfigError(Exception):
     """Exception raised for configuration-related errors."""
@@ -748,8 +667,7 @@ def validate_paths(config: Config) -> None:
     except Exception as e:
         raise ConfigError(f"Cannot create output directory {config.output_path}: {e}")
 
-
-# File loading functions (from loader.py)
+# Loader functions
 
 def load_swagger_json(file_path: str) -> Dict[str, Any]:
     """
@@ -805,6 +723,9 @@ def load_all_swagger_files(config) -> Dict[str, Dict[str, Any]]:
         - 'knowledgebase': Hand-authored knowledgebase Swagger
         - 'common_types': Common types Swagger
 
+        Each loaded swagger dictionary includes a '_swagger_source' field
+        indicating the source file name.
+
     Raises:
         LoaderError: If any file cannot be loaded
     """
@@ -820,7 +741,10 @@ def load_all_swagger_files(config) -> Dict[str, Dict[str, Any]]:
 
     for name, path in files_to_load:
         try:
-            loaded_files[name] = load_swagger_json(path)
+            swagger_dict = load_swagger_json(path)
+            # Add source information to the swagger dictionary
+            swagger_dict['_swagger_source'] = name
+            loaded_files[name] = swagger_dict
         except LoaderError as e:
             # Re-raise with context about which file failed
             raise LoaderError(f"Failed to load {name}: {e}")
@@ -846,9 +770,9 @@ def validate_swagger_structure(
     required_fields = ['swagger', 'info']
     missing_fields = []
 
-    for field in required_fields:
-        if field not in swagger_dict:
-            missing_fields.append(field)
+    for required_field in required_fields:
+        if required_field not in swagger_dict:
+            missing_fields.append(required_field)
 
     if missing_fields:
         raise LoaderError(
@@ -889,6 +813,77 @@ def validate_swagger_structure(
                     f"Invalid '{section_name}' section in {file_name}: "
                     f"expected {expected_type.__name__}, got {type(section_value).__name__}"
                 )
+    print(f"Validated Swagger structure for {file_name}")
+
+
+def build_full_paths_for_all_files(loaded_files: Dict[str, Dict[str, Any]]) -> Dict[str, Dict[str, Any]]:
+    """
+    Build full paths for all loaded Swagger files that use x-ms-parameterized-host.
+
+    This function processes each loaded file and transforms paths by combining
+    the hostTemplate with the original paths to create full URLs.
+
+    Args:
+        loaded_files: Dictionary mapping file names to their parsed JSON content
+
+    Returns:
+        Dictionary with the same structure but with full paths constructed
+    """
+    print("Building full paths for loaded files")
+
+    def build_full_url(spec, path):
+        """Build full URL by combining host template with path"""
+        if 'x-ms-parameterized-host' in spec and 'hostTemplate' in spec['x-ms-parameterized-host']:
+            host_template = spec['x-ms-parameterized-host']['hostTemplate']
+            # Extract path segment from host template (everything after the endpoint)
+            # e.g., "{endpoint}/knowledgebases('{knowledgeBaseName}')" -> "/knowledgebases('{knowledgeBaseName}')"
+            if '}/' in host_template:
+                host_path_segment = '/' + host_template.split('}/', 1)[1]
+                # If the current path doesn't start with this segment, prepend it
+                if not path.startswith(host_path_segment):
+                    return host_path_segment + path
+                else:
+                    return path
+            else:
+                # Host template doesn't have additional path, just return the path
+                return path
+        else:
+            # No parameterized host, return path as-is
+            return path
+
+    def transform_spec_paths(spec):
+        """Transform all paths in a single spec to use full URLs"""
+        if 'paths' not in spec or not isinstance(spec['paths'], dict):
+            return spec
+
+        # Create a new spec with transformed paths
+        transformed_spec = spec.copy()
+        new_paths = {}
+
+        for original_path, path_methods in spec['paths'].items():
+            full_path = build_full_url(spec, original_path)
+            new_paths[full_path] = path_methods
+
+            # Log the transformation if it changed
+            if full_path != original_path:
+                print(f"  Transformed: {original_path} -> {full_path}")
+
+        transformed_spec['paths'] = new_paths
+        return transformed_spec
+
+    # Process each loaded file
+    transformed_files = {}
+    for file_name, spec in loaded_files.items():
+        if file_name == 'typespec_compiled':
+            # TypeSpec compiled files should already have full paths, but transform anyway for consistency
+            transformed_files[file_name] = transform_spec_paths(spec)
+        else:
+            # Hand-authored files need path transformation
+            print(f"  Processing {file_name}...")
+            transformed_files[file_name] = transform_spec_paths(spec)
+
+    print(f"Completed building full paths for {len(transformed_files)} files")
+    return transformed_files
 
 
 def load_and_validate_all_files(config) -> Dict[str, Dict[str, Any]]:
@@ -907,6 +902,7 @@ def load_and_validate_all_files(config) -> Dict[str, Dict[str, Any]]:
         LoaderError: If any file cannot be loaded or is invalid
     """
     loaded_files = load_all_swagger_files(config)
+    print(f"Loaded Swagger files: {list(loaded_files.keys())}")
 
     # Validate each loaded file
     for name, swagger_dict in loaded_files.items():
@@ -915,7 +911,7 @@ def load_and_validate_all_files(config) -> Dict[str, Dict[str, Any]]:
     return loaded_files
 
 
-# Merging functions (from merge.py)
+# Merging functions
 
 def _indent_text(text: str, indent_spaces: int) -> str:
     """
@@ -952,7 +948,6 @@ def merge_objects(
     Raises:
         MergeError: If there are conflicting keys and allow_conflicts is False
     """
-    import json
     conflicts = []
 
     for key, value in source.items():
@@ -1036,29 +1031,20 @@ def _smart_merge_parameters(
             merged[key] = value
             modified_properties.append(f"{key}: {old_value} -> {value}")
 
-    # Log the merge operation
-    log_merge_operation(
-        operation_type="Smart Parameter Merge",
-        context=context,
-        details={
-            "added_properties": added_properties,
-            "modified_properties": modified_properties,
-            "parameter_name": existing.get('name', 'unknown'),
-            "merged_properties_count": len(merged)
-        }
-    )
-
     print(f"Smart merged {context}: Added properties {added_properties}")
     return merged
+
+
 def merge_paths(swagger_files: Dict[str, Dict[str, Any]]) -> Dict[str, Any]:
     """
     Merge paths from searchservice, searchindex, and knowledgebase.
+    Each path will include source information.
 
     Args:
         swagger_files: Dictionary containing the loaded Swagger files
 
     Returns:
-        Merged paths dictionary
+        Merged paths dictionary with source information embedded
 
     Raises:
         MergeError: If there are conflicting path definitions
@@ -1078,11 +1064,22 @@ def merge_paths(swagger_files: Dict[str, Dict[str, Any]]) -> Dict[str, Any]:
         if not isinstance(source_paths, dict):
             raise MergeError(f"Invalid paths section in {source_name}: expected object, got {type(source_paths).__name__}")
 
-        if source_paths:  # Only merge if there are actually paths
-            try:
-                merge_objects(merged_paths, source_paths, f"paths from {source_name}")
-            except MergeError as e:
-                raise MergeError(f"Path conflicts between existing paths and {source_name}: {e}")
+        # Add source information to each path and operation
+        for path_pattern, path_obj in source_paths.items():
+            if path_pattern in merged_paths:
+                raise MergeError(f"Conflicting path {path_pattern} found in {source_name} and previously merged files")
+
+            # Deep copy the path object and add source information
+            path_with_source = copy.deepcopy(path_obj)
+            path_with_source['_swagger_source'] = source_name
+
+            # Also add source to each operation within the path
+            if isinstance(path_with_source, dict):
+                for method, operation in path_with_source.items():
+                    if method.lower() in ['get', 'post', 'put', 'delete', 'patch', 'head', 'options'] and isinstance(operation, dict):
+                        operation['_swagger_source'] = source_name
+
+            merged_paths[path_pattern] = path_with_source
 
     return merged_paths
 
@@ -1090,12 +1087,13 @@ def merge_paths(swagger_files: Dict[str, Dict[str, Any]]) -> Dict[str, Any]:
 def merge_definitions(swagger_files: Dict[str, Dict[str, Any]]) -> Dict[str, Any]:
     """
     Merge definitions from all input files, including common_types.
+    Each definition will include source information.
 
     Args:
         swagger_files: Dictionary containing the loaded Swagger files
 
     Returns:
-        Merged definitions dictionary
+        Merged definitions dictionary with source information embedded
 
     Raises:
         MergeError: If there are conflicting definition names with different content
@@ -1115,11 +1113,26 @@ def merge_definitions(swagger_files: Dict[str, Dict[str, Any]]) -> Dict[str, Any
         if not isinstance(source_definitions, dict):
             raise MergeError(f"Invalid definitions section in {source_name}: expected object, got {type(source_definitions).__name__}")
 
-        if source_definitions:  # Only merge if there are actually definitions
-            try:
-                merge_objects(merged_definitions, source_definitions, f"definitions from {source_name}")
-            except MergeError as e:
-                raise MergeError(f"Definition conflicts between existing definitions and {source_name}: {e}")
+        # Add source information to each definition
+        for def_name, def_obj in source_definitions.items():
+            if def_name in merged_definitions:
+                # Check if they're actually different before raising an error
+                existing_def = copy.deepcopy(merged_definitions[def_name])
+                new_def = copy.deepcopy(def_obj)
+
+                # Remove source information for comparison
+                existing_def.pop('_swagger_source', None)
+                new_def.pop('_swagger_source', None)
+
+                if existing_def != new_def:
+                    raise MergeError(f"Conflicting definition {def_name} found in {source_name} and {merged_definitions[def_name].get('_swagger_source', 'unknown')}")
+                # If they're identical, keep the existing one (first wins)
+                continue
+
+            # Deep copy the definition and add source information
+            def_with_source = copy.deepcopy(def_obj)
+            def_with_source['_swagger_source'] = source_name
+            merged_definitions[def_name] = def_with_source
 
     return merged_definitions
 

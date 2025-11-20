@@ -221,7 +221,7 @@ class ApiComparator:
         for (op_id, method), (path1, op1) in ops1_by_id_method.items():
             if (op_id, method) in ops2_by_id_method:
                 path2, op2 = ops2_by_id_method[(op_id, method)]
-                context = f"[Strategy A: operationId+method] {op_id} {method}"
+                context = f"{op_id} {method}"
 
                 # Cross-reference validation: If paths are different, note the inconsistency
                 if path1 != path2:
