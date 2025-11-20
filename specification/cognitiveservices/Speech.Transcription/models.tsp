@@ -150,10 +150,9 @@ model TranscribedWord {
 #suppress "@azure-tools/typespec-autorest/unsupported-multipart-type" "Support streaming input files"
 @doc("Request model for transcription operation.")
 model TranscriptionContent {
-  @clientName("options")
   @doc("Metadata for a transcription request. This field contains a JSON-serialized object of type `TranscriptionOptions`.")
-  definition?: HttpPart<TranscriptionOptions>;
+  definition: HttpPart<TranscriptionOptions>;
 
   @doc("The content of the audio file to be transcribed. The audio file must be shorter than 2 hours in audio duration and smaller than 250 MB in size. Optional if audioUrl is provided in the definition.")
-  audio?: HttpPart<bytes>;
+  audio: HttpPart<bytes>;
 }
