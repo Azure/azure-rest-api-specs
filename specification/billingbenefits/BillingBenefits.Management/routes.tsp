@@ -107,9 +107,7 @@ interface ContributorsOperationGroup {
   /**
    * List contributors under applicable MACCs for a given billing account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "For backward compatibility"
-  @operationId("Contributors_ListFromApplicableMacc")
   @autoRoute
   @get
   @action("providers/microsoft.BillingBenefits/applicableContributors")
@@ -149,8 +147,6 @@ interface SellerResourceOperationGroup {
   /**
    * List maccs by billing account
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("SellerResource_List")
   @autoRoute
   @action("listSellerResources")
   list is ArmProviderActionSync<
@@ -164,9 +160,7 @@ interface ApplicableMaccsOperationGroup {
   /**
    * List maccs that are applicable for a given billing account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "For backward compatibility"
-  @operationId("ApplicableMaccs_List")
   @autoRoute
   @get
   @action("applicableMaccs")
@@ -198,8 +192,6 @@ interface CreditsOperationGroup {
   /**
    * List applicable credits for the provided scope. Currently supported scopes: BillingAccountResourceId
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Credits_ListApplicable")
   @route("/{scope}/providers/Microsoft.BillingBenefits/applicableCredits")
   @get
   @list
@@ -219,8 +211,6 @@ interface ConditionalCreditsOperationGroup {
   /**
    * List conditional credits that are applicable for a given scope. Currently supported scopes: billing accounts
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ConditionalCredits_ScopeList")
   @route("/{scope}/providers/Microsoft.BillingBenefits/applicableConditionalCredits")
   @get
   @list
@@ -240,9 +230,7 @@ interface ConditionalCreditContributorsOperationGroup {
   /**
    * List contributors under applicable conditional credits for a given billing account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "For backward compatibility"
-  @operationId("ConditionalCreditContributors_ListFromApplicableConditionalCredit")
   @autoRoute
   @get
   @action("providers/microsoft.BillingBenefits/applicableContributors")

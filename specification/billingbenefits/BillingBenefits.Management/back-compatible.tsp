@@ -23,6 +23,24 @@ using Microsoft.BillingBenefits;
 @@clientLocation(SavingsPlanOrderModels.elevate, "SavingsPlanOrder");
 @@clientLocation(Discounts.get, "Discount");
 @@clientLocation(Discounts.update, "Discount");
+@@clientLocation(BenefitOperationGroup.validate, "Benefit");
+@@clientLocation(ContributorsOperationGroup.listFromApplicableMacc,
+  "Contributors"
+);
+@@clientLocation(SellerResourceOperationGroup.list, "SellerResource");
+@@clientLocation(ApplicableMaccsOperationGroup.list, "ApplicableMaccs");
+@@clientLocation(CreditsOperationGroup.listApplicable, "Credits");
+@@clientLocation(ConditionalCreditsOperationGroup.scopeList,
+  "ConditionalCredits"
+);
+@@clientLocation(ConditionalCreditContributorsOperationGroup.listFromApplicableConditionalCredit,
+  "ConditionalCreditContributors"
+);
+@@clientLocation(CreditSources.get, "Sources");
+@@clientLocation(CreditSources.create, "Sources");
+@@clientLocation(CreditSources.update, "Sources");
+@@clientLocation(CreditSources.delete, "Sources");
+@@clientLocation(CreditSources.listByCredit, "Sources");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(RoleAssignmentEntity.properties
@@ -104,8 +122,6 @@ using Microsoft.BillingBenefits;
 @@clientName(CreditSources.update::parameters.properties, "body");
 @@clientName(Maccs.create::parameters.resource, "body");
 @@clientName(Maccs.update::parameters.properties, "body");
-
-@@clientLocation(BenefitOperationGroup.validate, "Benefit");
 
 @@doc(Azure.ResourceManager.ArmAsyncOperationHeader.azureAsyncOperation,
   "URL for checking the ongoing status of the operation."

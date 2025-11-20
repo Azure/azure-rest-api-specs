@@ -70,22 +70,16 @@ interface CreditSources {
   /**
    * Get a credit source.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Sources_Get")
   get is ArmResourceRead<CreditSource>;
 
   /**
    * Create a credit source.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Sources_Create")
   create is ArmResourceCreateOrReplaceSync<CreditSource>;
 
   /**
    * Update a credit source.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Sources_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     CreditSource,
@@ -95,15 +89,11 @@ interface CreditSources {
   /**
    * Delete a credit source.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Sources_Delete")
   delete is ArmResourceDeleteSync<CreditSource>;
 
   /**
    * List credit sources for a credit under a resource group from primary service admin.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Sources_ListByCredit")
   listByCredit is ArmResourceListByParent<
     CreditSource,
     Response = ArmResponse<CreditSourcesList>
