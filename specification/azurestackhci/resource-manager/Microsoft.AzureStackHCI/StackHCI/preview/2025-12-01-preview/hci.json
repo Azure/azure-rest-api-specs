@@ -1798,26 +1798,6 @@
         "identity": {
           "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
-        },
-        "properties": {
-          "$ref": "#/definitions/EdgeMachinePatchProperties",
-          "description": "Properties for patching edge machine."
-        }
-      }
-    },
-    "EdgeMachinePatchProperties": {
-      "type": "object",
-      "description": "Properties for patching edge machine.",
-      "properties": {
-        "labels": {
-          "type": "array",
-          "description": "selection labels that can be used by CMP to decide which all machines can be part of this device pool",
-          "items": {
-            "$ref": "#/definitions/Labels"
-          },
-          "x-ms-identifiers": [
-            "labelName"
-          ]
         }
       }
     },
@@ -1925,16 +1905,6 @@
           "$ref": "#/definitions/EdgeMachineConnectivityStatus",
           "description": "machine connectivity status",
           "readOnly": true
-        },
-        "labels": {
-          "type": "array",
-          "description": "selection labels that can be used by CMP to decide which all machines can be part of this device pool",
-          "items": {
-            "$ref": "#/definitions/Labels"
-          },
-          "x-ms-identifiers": [
-            "labelName"
-          ]
         },
         "claimedBy": {
           "type": "string",
@@ -2414,20 +2384,6 @@
       "required": [
         "version"
       ]
-    },
-    "Labels": {
-      "type": "object",
-      "description": "selection labels that can be used by CMP to decide which all machines can be part of this device pool",
-      "properties": {
-        "labelName": {
-          "type": "string",
-          "description": "Name of label"
-        },
-        "labelValue": {
-          "type": "string",
-          "description": "Value of label"
-        }
-      }
     },
     "LogCollectionReportedProperties": {
       "type": "object",

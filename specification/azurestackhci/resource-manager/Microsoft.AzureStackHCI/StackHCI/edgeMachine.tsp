@@ -127,10 +127,6 @@ model EdgeMachineProperties {
   @visibility(Lifecycle.Read)
   connectivityStatus?: EdgeMachineConnectivityStatus;
 
-  @doc("selection labels that can be used by CMP to decide which all machines can be part of this device pool")
-  @Azure.ResourceManager.identifiers(#["labelName"])
-  labels?: Labels[];
-
   @doc("Tracks the ID of the consuming resource, Settingthe machine as in-use.")
   @visibility(Lifecycle.Read)
   claimedBy?: string;
@@ -154,17 +150,6 @@ model EdgeMachineProperties {
 model EdgeMachinePatch {
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
-
-  @doc("Properties for patching edge machine.")
-  properties?: EdgeMachinePatchProperties;
-}
-
-@added(Versions.v2025_12_01_preview)
-@doc("Properties for patching edge machine.")
-model EdgeMachinePatchProperties {
-  @doc("selection labels that can be used by CMP to decide which all machines can be part of this device pool")
-  @Azure.ResourceManager.identifiers(#["labelName"])
-  labels?: Labels[];
 }
 
 /**
@@ -264,16 +249,6 @@ model SiteDetails {
 
   @doc("Edge Device configuration received from site common configuration.")
   deviceConfiguration?: DeviceConfiguration;
-}
-
-@added(Versions.v2025_12_01_preview)
-@doc("selection labels that can be used by CMP to decide which all machines can be part of this device pool")
-model Labels {
-  @doc("Name of label")
-  labelName?: string;
-
-  @doc("Value of label")
-  labelValue?: string;
 }
 
 @added(Versions.v2025_12_01_preview)
