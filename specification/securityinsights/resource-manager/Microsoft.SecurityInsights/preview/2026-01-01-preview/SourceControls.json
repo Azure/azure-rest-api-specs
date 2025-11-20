@@ -408,7 +408,6 @@
         "workloadIdentityFederation": {
           "description": "Workload Identity metadata.",
           "$ref": "#/definitions/WorkloadIdentityFederation",
-          "readOnly": true
         },
         "repositoryAccess": {
           "description": "Repository access credentials. This is write-only object and it never returns back to a user.",
@@ -546,6 +545,11 @@
         },
         "appId": {
           "description": "App id of service principal.",
+          "type": "string",
+          "readOnly": true
+        },
+        "appObjectId": {
+          "description": "App object id of service principal.",
           "type": "string",
           "readOnly": true
         },
