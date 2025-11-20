@@ -5,6 +5,9 @@
     "description": "Azure Communication Service Call Automation APIs",
     "version": "2024-09-15"
   },
+  "schemes": [
+    "https"
+  ],
   "paths": {
     "/calling/callConnections": {
       "post": {
@@ -3395,6 +3398,9 @@
     },
     "StartCallRecordingRequest": {
       "description": "The request payload start for call recording operation with call locator.",
+      "required": [
+        "callLocator"
+      ],
       "type": "object",
       "properties": {
         "callLocator": {
