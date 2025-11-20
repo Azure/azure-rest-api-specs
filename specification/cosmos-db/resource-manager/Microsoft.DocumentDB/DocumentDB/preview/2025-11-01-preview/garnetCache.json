@@ -58,7 +58,7 @@
           "200": {
             "description": "Successfully retrieved the list of Garnet clusters.",
             "schema": {
-              "$ref": "#/definitions/ListClusters"
+              "$ref": "#/definitions/ListGarnetClusters"
             }
           },
           "default": {
@@ -97,7 +97,7 @@
           "200": {
             "description": "Successfully retrieved the list of Garnet clusters.",
             "schema": {
-              "$ref": "#/definitions/ListClusters"
+              "$ref": "#/definitions/ListGarnetClusters"
             }
           },
           "default": {
@@ -136,7 +136,7 @@
           "200": {
             "description": "The properties of the Garnet cluster were retrieved successfully.",
             "schema": {
-              "$ref": "#/definitions/ClusterResource"
+              "$ref": "#/definitions/GarnetClusterResource"
             }
           },
           "default": {
@@ -222,7 +222,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ClusterResource"
+              "$ref": "#/definitions/GarnetClusterResource"
             },
             "description": "The properties specifying the desired state of the Garnet cache cluster."
           }
@@ -231,13 +231,13 @@
           "200": {
             "description": "The Garnet cache cluster is being updated.",
             "schema": {
-              "$ref": "#/definitions/ClusterResource"
+              "$ref": "#/definitions/GarnetClusterResource"
             }
           },
           "201": {
             "description": "The Garnet cache cluster is being created",
             "schema": {
-              "$ref": "#/definitions/ClusterResource"
+              "$ref": "#/definitions/GarnetClusterResource"
             }
           },
           "default": {
@@ -275,7 +275,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ClusterResourcePatch"
+              "$ref": "#/definitions/GarnetClusterResourcePatch"
             },
             "description": "Parameters to provide for updating the Garnet cluster."
           }
@@ -297,7 +297,7 @@
           "200": {
             "description": "Completed synchronously. This will only happen if the fields changed by patch require no changes to the actual Garnet data center.",
             "schema": {
-              "$ref": "#/definitions/ClusterResource"
+              "$ref": "#/definitions/GarnetClusterResource"
             }
           },
           "default": {
@@ -324,7 +324,7 @@
     }
   },
   "definitions": {
-    "ListClusters": {
+    "ListGarnetClusters": {
       "description": "List of Garnet clusters.",
       "type": "object",
       "properties": {
@@ -333,7 +333,7 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/ClusterResource"
+            "$ref": "#/definitions/GarnetClusterResource"
           }
         },
         "nextLink": {
@@ -343,7 +343,7 @@
         }
       }
     },
-    "ClusterResource": {
+    "GarnetClusterResource": {
       "description": "Representation of a Garnet cache cluster.",
       "type": "object",
       "allOf": [
@@ -452,7 +452,7 @@
         }
       }
     },
-    "ClusterResourcePatch": {
+    "GarnetClusterResourcePatch": {
       "description": "Representation of a Garnet cache cluster for updates.",
       "type": "object",
       "properties": {
