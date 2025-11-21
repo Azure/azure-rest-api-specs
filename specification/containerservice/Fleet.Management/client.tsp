@@ -41,6 +41,18 @@ using Azure.ClientGenerator.Core;
   "python"
 );
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Azure.ResourceManager.TrackedResource.properties
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Azure.ResourceManager.ProxyResource.properties
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Azure.ResourceManager.Foundations.ResourceUpdateModel.properties
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Azure.ResourceManager.Foundations.ProxyResourceUpdateModel.properties
+);
 @@clientName(Microsoft.ContainerService,
   "ContainerServiceFleetClient",
   "javascript"
