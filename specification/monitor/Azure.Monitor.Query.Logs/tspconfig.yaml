@@ -1,0 +1,50 @@
+parameters:
+  "service-dir":
+    default: "sdk/monitor"
+  "dependencies":
+    default: ""
+
+emit:
+  - "@azure-tools/typespec-autorest"
+
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
+
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "data-plane"
+    emitter-output-dir: "{project-root}/.."
+    output-file: "{azure-resource-provider-folder}/Microsoft.OperationInsights/{version-status}/{version}/OperationInsights.json"
+  "@azure-tools/typespec-python":
+    package-dir: "azure-monitor-query"
+    package-name: "{package-dir}"
+    package-mode: dataplane
+    flavor: azure
+    namespace: azure.monitor.query._generated
+  "@azure-tools/typespec-csharp":
+    package-dir: "Azure.Monitor.Query.Logs"
+    namespace: "{package-dir}"
+    clear-output-folder: true
+    model-namespace: false
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    package-dir: "monitor-query-logs"
+    generate-metadata: false
+    generate-test: true
+    is-modular-library: true
+    package-details:
+      name: "@azure/monitor-query-logs"
+      description: "Azure Monitor Query library"
+      version: "2.0.0"
+    flavor: azure
+  "@azure-tools/typespec-java":
+    package-dir: "azure-monitor-query-logs"
+    namespace: com.azure.monitor.query-logs
+    flavor: azure
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/monitor/query"
+    package-dir: "azlogs"
+    emitter-output-dir: "{project-root}"
+    generate-fakes: true
+    inject-spans: true
