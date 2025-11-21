@@ -202,11 +202,18 @@ class ApiComparator:
         missing_paths = paths1 - paths2
         extra_paths = paths2 - paths1
 
+        # Find potential matches between missing and extra paths
+        path_matches = self._find_path_matches(missing_paths, extra_paths)
+
         for path in missing_paths:
+            # Check if this missing path has a potential match
+            matches = [match for match in path_matches if match[0] == path]
+            match_hint = f" (possible match: {matches[0][1]})" if matches else ""
+
             self.differences.append(
                 Difference(
                     type=DifferenceType.MISSING_PATH,
-                    message=f"Path missing in {api2.swagger_source}: {path}",
+                    message=f"Path missing in {api2.swagger_source}: {path}{match_hint}",
                     context=path,
                 )
             )
@@ -215,10 +222,14 @@ class ApiComparator:
             print(f"Missing paths in {api2.swagger_source}\t {len(missing_paths)}")
 
         for path in extra_paths:
+            # Check if this extra path has a potential match
+            matches = [match for match in path_matches if match[1] == path]
+            match_hint = f" (possible match: {matches[0][0]})" if matches else ""
+
             self.differences.append(
                 Difference(
                     type=DifferenceType.EXTRA_PATH,
-                    message=f"Extra path in {api2.swagger_source}: {path}",
+                    message=f"Extra path in {api2.swagger_source}: {path}{match_hint}",
                     context=path,
                 )
             )
@@ -605,25 +616,42 @@ class ApiComparator:
         missing_defs = defs1 - defs2
         extra_defs = defs2 - defs1
 
+        # Find potential matches between missing and extra definitions
+        potential_matches = self._find_definition_matches(
+            missing_defs, extra_defs, api1, api2
+        )
+
         for def_name in missing_defs:
+            # Check if this missing definition has a potential match
+            matches = [match for match in potential_matches if match[0] == def_name]
+            match_hint = f" (possible match: {matches[0][1]})" if matches else ""
+
             self.differences.append(
                 Difference(
                     type=DifferenceType.MISSING_DEFINITION,
-                    message=f"Definition missing in {api2.swagger_source} : {def_name}",
-                    context=f"definition:{def_name}",
+                    message=f"Definition missing in {api2.swagger_source} : {def_name}{match_hint}",
+                    context=def_name,
                 )
             )
-            print(f"Definition missing in {api2.swagger_source} \t {def_name}")
+            print(
+                f"Definition missing in {api2.swagger_source} \t {def_name}{match_hint}"
+            )
 
         for def_name in extra_defs:
+            # Check if this extra definition has a potential match
+            matches = [match for match in potential_matches if match[1] == def_name]
+            match_hint = f" (possible match: {matches[0][0]})" if matches else ""
+
             self.differences.append(
                 Difference(
                     type=DifferenceType.EXTRA_DEFINITION,
-                    message=f"Extra definition in {api2.swagger_source}: {def_name}",
-                    context=f"definition:{def_name}",
+                    message=f"Extra definition in {api2.swagger_source}: {def_name}{match_hint}",
+                    context=def_name,
                 )
             )
-            print(f"Extra definition in {api2.swagger_source} \t {def_name}")
+            print(
+                f"Extra definition in {api2.swagger_source} \t {def_name}{match_hint}"
+            )
         # Compare common definitions
         common_defs = defs1 & defs2
         for def_name in common_defs:
@@ -634,7 +662,7 @@ class ApiComparator:
                     Difference(
                         type=DifferenceType.DEFINITION_MISMATCH,
                         message=f"Definition schemas mismatch: {def_name}",
-                        context=f"definition:{def_name}",
+                        context=def_name,
                     )
                 )
                 print(f"Definition schemas mismatch \t {def_name}")
@@ -1012,6 +1040,58 @@ class ApiComparator:
                 )
             )
             print("Security requirements mismatch")
+
+    def _find_definition_matches(self, missing_defs, extra_defs, api1, api2):
+        """Find potential matches between missing and extra definitions using name similarity."""
+        from difflib import SequenceMatcher
+
+        matches = []
+        threshold = 0.7  # Similarity threshold for potential matches
+
+        for missing_name in missing_defs:
+            best_match = None
+            best_similarity = 0
+
+            for extra_name in extra_defs:
+                # Calculate name similarity
+                similarity = SequenceMatcher(
+                    None, missing_name.lower(), extra_name.lower()
+                ).ratio()
+
+                if similarity > best_similarity and similarity >= threshold:
+                    best_similarity = similarity
+                    best_match = extra_name
+
+            if best_match:
+                matches.append((missing_name, best_match, best_similarity))
+
+        return matches
+
+    def _find_path_matches(self, missing_paths, extra_paths):
+        """Find potential matches between missing and extra paths using similarity."""
+        from difflib import SequenceMatcher
+
+        matches = []
+        threshold = 0.6  # Lower threshold for paths as they can vary more
+
+        for missing_path in missing_paths:
+            best_match = None
+            best_similarity = 0
+
+            for extra_path in extra_paths:
+                # Calculate path similarity
+                similarity = SequenceMatcher(
+                    None, missing_path.lower(), extra_path.lower()
+                ).ratio()
+
+                if similarity > best_similarity and similarity >= threshold:
+                    best_similarity = similarity
+                    best_match = extra_path
+
+            if best_match:
+                matches.append((missing_path, best_match, best_similarity))
+
+        return matches
 
 
 def compare_swagger_specs(
