@@ -2318,6 +2318,7 @@ model SiteProperties {
   /**
    * Property to allow or block all public traffic. Allowed Values: 'Enabled', 'Disabled' or an empty string.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   publicNetworkAccess?: string;
 
   /**
@@ -2848,6 +2849,7 @@ model SiteConfig {
   /**
    * Property to allow or block all public traffic.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   publicNetworkAccess?: string;
 }
 
@@ -2883,6 +2885,7 @@ model SiteMachineKey {
   /**
    * Validation key.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   validationKey?: string;
 
   /**
@@ -2893,6 +2896,7 @@ model SiteMachineKey {
   /**
    * Decryption key.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   decryptionKey?: string;
 }
 
@@ -3269,6 +3273,7 @@ model PushSettingsProperties {
    */
   tagWhitelistJson?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @doc("""
     Gets or sets a JSON string containing a list of tags that require user authentication to be used in the push registration endpoint.
     Tags can consist of alphanumeric characters and the following:
@@ -5048,6 +5053,7 @@ model CertificateProperties {
   /**
    * Certificate password.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   password?: string;
 
   /**
@@ -6247,6 +6253,7 @@ model ContainerAppsConfiguration {
    * Azure Monitor instrumentation key used by Dapr to export Service to Service communication telemetry
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   daprAIInstrumentationKey?: string;
 
@@ -7527,16 +7534,19 @@ model SourceControlProperties {
   /**
    * OAuth access token.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   token?: string;
 
   /**
    * OAuth access token secret.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tokenSecret?: string;
 
   /**
    * OAuth refresh token.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   refreshToken?: string;
 
   /**
@@ -8403,6 +8413,7 @@ model StaticSite {
   /**
    * A user's github repository token. This is used to setup the Github Actions workflow file and API secrets.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   repositoryToken?: string;
 
   /**
@@ -8469,6 +8480,7 @@ model StaticSite {
   /**
    * State indicating whether public traffic are allowed or not for a static web app. Allowed Values: 'Enabled', 'Disabled' or an empty string.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   publicNetworkAccess?: string;
 
   /**
@@ -9112,6 +9124,7 @@ model StaticSiteBasicAuthPropertiesARMResourceProperties {
   /**
    * The password for basic auth.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   password?: string;
 
   /**
@@ -9242,6 +9255,7 @@ model StaticSiteCustomDomainOverviewARMResourceProperties {
   /**
    * The TXT record validation token
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   validationToken?: string;
 
@@ -10091,6 +10105,7 @@ model SiteAuthSettingsProperties {
    * Otherwise, the OpenID Connect Authorization Code Flow is used to authenticate end users.
    * More information on OpenID Connect: http://openid.net/specs/openid-connect-core-1_0.html
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   clientSecret?: string;
 
   /**
@@ -10147,6 +10162,7 @@ model SiteAuthSettingsProperties {
    * This setting is required for enabling Google Sign-In.
    * Google Sign-In documentation: https://developers.google.com/identity/sign-in/web/
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   googleClientSecret?: string;
 
   /**
@@ -10175,6 +10191,7 @@ model SiteAuthSettingsProperties {
    * This setting is required for enabling Facebook Login.
    * Facebook Login documentation: https://developers.facebook.com/docs/facebook-login
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   facebookAppSecret?: string;
 
   /**
@@ -10200,6 +10217,7 @@ model SiteAuthSettingsProperties {
    * The Client Secret of the GitHub app used for Github Login.
    * This setting is required for enabling Github login.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   gitHubClientSecret?: string;
 
   /**
@@ -10220,6 +10238,7 @@ model SiteAuthSettingsProperties {
    * This setting is required for enabling Twitter Sign-In.
    * Twitter Sign-In documentation: https://dev.twitter.com/web/sign-in
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   twitterConsumerKey?: string;
 
   /**
@@ -10227,6 +10246,7 @@ model SiteAuthSettingsProperties {
    * This setting is required for enabling Twitter Sign-In.
    * Twitter Sign-In documentation: https://dev.twitter.com/web/sign-in
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   twitterConsumerSecret?: string;
 
   /**
@@ -10247,6 +10267,7 @@ model SiteAuthSettingsProperties {
    * This setting is required for enabling Microsoft Account authentication.
    * Microsoft Account OAuth documentation: https://dev.onedrive.com/auth/msa_oauth.htm
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   microsoftAccountClientSecret?: string;
 
   /**
@@ -10741,6 +10762,7 @@ model TwitterRegistration {
    * This setting is required for enabling Twitter Sign-In.
    * Twitter Sign-In documentation: https://dev.twitter.com/web/sign-in
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   consumerKey?: string;
 
   /**
@@ -11821,6 +11843,7 @@ model FunctionSecrets {
   /**
    * Secret key.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   key?: string;
 
   /**
@@ -11837,6 +11860,7 @@ model HostKeys {
   /**
    * Secret key.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   masterKey?: string;
 
   /**
@@ -13129,6 +13153,7 @@ model SiteContainerProperties {
   /**
    * Password Secret
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   passwordSecret?: string;
 
   /**
@@ -13574,6 +13599,7 @@ model TriggeredWebJobProperties {
   /**
    * Property to allow or block all public traffic. Allowed Values: 'Enabled', 'Disabled' or an empty string.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   publicNetworkAccess?: string;
 
   /**
@@ -15743,9 +15769,20 @@ model DefaultIdentity {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ServerFarmInstanceDetails {
   /**
-   * ServerFarmInstanceDetails resource specific properties
+   * The server farm name.
    */
-  properties?: ServerFarmInstanceDetailsProperties;
+  serverFarmName?: string;
+
+  /**
+   * The list of server farm instances.
+   */
+  @identifiers(#[])
+  instances?: ServerFarmInstance[];
+
+  /**
+   * The total number of instances.
+   */
+  instanceCount?: int32;
 }
 
 /**
@@ -15785,28 +15822,8 @@ model ServerFarmRdpDetails {
    * The RDP password expiry date.
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   rdpPasswordExpiry?: utcDateTime;
-}
-
-/**
- * ServerFarmInstanceDetails resource specific properties
- */
-model ServerFarmInstanceDetailsProperties {
-  /**
-   * The server farm name.
-   */
-  serverFarmName?: string;
-
-  /**
-   * The list of server farm instances.
-   */
-  @identifiers(#[])
-  instances?: ServerFarmInstance[];
-
-  /**
-   * The total number of instances.
-   */
-  instanceCount?: int32;
 }
 
 /**
@@ -15816,6 +15833,7 @@ model RegistryAdapter {
   /**
    * Registry key for the adapter.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   registryKey?: string;
 
   /**
