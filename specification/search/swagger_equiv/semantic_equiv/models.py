@@ -151,9 +151,39 @@ class CanonicalApi:
     - Path sets and HTTP method sets per path
     - Complete operation definitions
     - Complete schema/definition sets
+    - Global API configuration (consumes, produces, schemes, etc.)
     """
+    # Core API structure
     paths: Dict[str, CanonicalPath] = field(default_factory=dict)
     definitions: Dict[str, CanonicalSchema] = field(default_factory=dict)
+
+    # Global API configuration
+    swagger_version: Optional[str] = None  # swagger field
+    info: Optional[Dict[str, Any]] = None  # info section
+    consumes: Optional[FrozenSet[str]] = None  # Global content types consumed
+    produces: Optional[FrozenSet[str]] = None  # Global content types produced
+    schemes: Optional[FrozenSet[str]] = None  # Supported protocols (http, https)
+    host: Optional[str] = None  # Base host
+    base_path: Optional[str] = None  # Base path
+
+    # Azure/Microsoft-specific extensions
+    x_ms_parameterized_host: Optional[Dict[str, Any]] = None  # x-ms-parameterized-host
+    x_ms_code_generation_settings: Optional[Dict[str, Any]] = None  # x-ms-code-generation-settings
+
+    # Security configuration
+    security_definitions: Optional[Dict[str, Any]] = None  # securityDefinitions
+    security: Optional[List[Dict[str, Any]]] = None  # security requirements
+
+    # Additional metadata
+    tags: Optional[List[Dict[str, Any]]] = None  # tags
+    external_docs: Optional[Dict[str, Any]] = None  # externalDocs
+
+    # Global parameter and response definitions
+    parameters: Optional[Dict[str, CanonicalParameter]] = None  # Global parameters
+    responses: Optional[Dict[str, CanonicalResponse]] = None  # Global responses
+
+    # Source tracking
+    swagger_source: Optional[str] = None
 
     @property
     def path_set(self) -> FrozenSet[str]:
@@ -420,7 +450,7 @@ def build_operation_from_dict(
     )
 
 
-def build_canonical_api_from_swagger(swagger_dict: Dict[str, Any]) -> CanonicalApi:
+def build_canonical_api_from_swagger(swagger_dict: Dict[str, Any], swagger_source: str) -> CanonicalApi:
     """
     Build a CanonicalApi from a canonicalized Swagger dictionary.
 
@@ -429,20 +459,70 @@ def build_canonical_api_from_swagger(swagger_dict: Dict[str, Any]) -> CanonicalA
 
     Args:
         swagger_dict: Canonicalized Swagger dictionary
-
+        swagger_source: Source identifier for the Swagger document
     Returns:
         CanonicalApi object ready for comparison
     """
-    # Extract source information from the swagger dictionary
-    swagger_source = swagger_dict.get('_swagger_source')
 
-    definitions_dict = swagger_dict.get('definitions', {})
+    # Extract global API information
+    swagger_version = swagger_dict.get('swagger')
+    info = swagger_dict.get('info')
+    host = swagger_dict.get('host')
+    base_path = swagger_dict.get('basePath')
+
+    # Extract Azure/Microsoft-specific extensions
+    x_ms_parameterized_host = swagger_dict.get('x-ms-parameterized-host')
+    x_ms_code_generation_settings = swagger_dict.get('x-ms-code-generation-settings')
+
+    # Extract security configuration
+    security_definitions = swagger_dict.get('securityDefinitions')
+    security = swagger_dict.get('security')
+
+    # Extract additional metadata
+    tags = swagger_dict.get('tags')
+    external_docs = swagger_dict.get('externalDocs')
+
+    # Extract global content types and schemes
+    consumes = None
+    if 'consumes' in swagger_dict and isinstance(swagger_dict['consumes'], list):
+        consumes = frozenset(swagger_dict['consumes'])
+
+    produces = None
+    if 'produces' in swagger_dict and isinstance(swagger_dict['produces'], list):
+        produces = frozenset(swagger_dict['produces'])
+
+    schemes = None
+    if 'schemes' in swagger_dict and isinstance(swagger_dict['schemes'], list):
+        schemes = frozenset(swagger_dict['schemes'])
 
     # Build canonical definitions
+    definitions_dict = swagger_dict.get('definitions', {})
     definitions = {}
     for def_name, def_schema in definitions_dict.items():
         if isinstance(def_schema, dict):
             definitions[def_name] = build_schema_from_dict(def_schema, definitions_dict, swagger_source)
+
+    # Build global parameters
+    parameters = None
+    parameters_dict = swagger_dict.get('parameters', {})
+    if parameters_dict:
+        parameters = {}
+        for param_name, param_def in parameters_dict.items():
+            if isinstance(param_def, dict):
+                parameters[param_name] = build_parameter_from_dict(param_def, definitions_dict, swagger_source)
+
+    # Build global responses
+    responses = None
+    responses_dict = swagger_dict.get('responses', {})
+    if responses_dict:
+        responses = {}
+        for response_name, response_def in responses_dict.items():
+            if isinstance(response_def, dict):
+                responses[response_name] = build_response_from_dict(
+                    response_def, definitions_dict,
+                    list(produces) if produces else None,
+                    swagger_source
+                )
 
     # Build canonical paths
     paths = {}
@@ -465,4 +545,23 @@ def build_canonical_api_from_swagger(swagger_dict: Dict[str, Any]) -> CanonicalA
             if operations:
                 paths[path_pattern] = CanonicalPath(operations=operations, swagger_source=swagger_source)
 
-    return CanonicalApi(paths=paths, definitions=definitions)
+    return CanonicalApi(
+        paths=paths,
+        definitions=definitions,
+        swagger_version=swagger_version,
+        info=info,
+        consumes=consumes,
+        produces=produces,
+        schemes=schemes,
+        host=host,
+        base_path=base_path,
+        x_ms_parameterized_host=x_ms_parameterized_host,
+        x_ms_code_generation_settings=x_ms_code_generation_settings,
+        security_definitions=security_definitions,
+        security=security,
+        tags=tags,
+        external_docs=external_docs,
+        parameters=parameters,
+        responses=responses,
+        swagger_source=swagger_source
+    )

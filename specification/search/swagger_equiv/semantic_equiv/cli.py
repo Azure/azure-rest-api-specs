@@ -15,21 +15,29 @@ According to equiv_impl_guide.md, the CLI should:
 - Write detailed artifacts to output directory
 """
 
-import sys
-import json
 import argparse
+import json
+import sys
 from pathlib import Path
 from typing import Optional
 
 # Add current directory to path to allow direct execution
 sys.path.insert(0, str(Path(__file__).parent))
 
-from utils import load_config, validate_paths, ConfigError
-from utils import load_and_validate_all_files, build_full_paths_for_all_files, LoaderError
-from utils import merge_hand_authored_specs, validate_merged_swagger, MergeError
-from utils import write_diffs_excel
-from canonicalize import canonicalize_both_specs, CanonicalizationError
-from compare import compare_swagger_specs, EquivalencyResult
+from canonicalize import CanonicalizationError, canonicalize_both_specs
+from compare import EquivalencyResult, compare_swagger_specs
+from utils import (
+    ConfigError,
+    LoaderError,
+    MergeError,
+    build_full_paths_for_all_files,
+    load_and_validate_all_files,
+    load_config,
+    merge_hand_authored_specs,
+    validate_merged_swagger,
+    validate_paths,
+    write_diffs_excel_v2,
+)
 
 
 def save_artifacts(
@@ -67,7 +75,11 @@ def save_artifacts(
 
             # Extract path information
             if "[/" in description:
-                path_part = description.split("[/")[1].split("]")[0] if "]" in description else ""
+                path_part = (
+                    description.split("[/")[1].split("]")[0]
+                    if "]" in description
+                    else ""
+                )
                 path = "/" + path_part if path_part else ""
 
             # Extract method from path
@@ -75,11 +87,20 @@ def save_artifacts(
                 parts = path.split(" ")
                 if len(parts) >= 2:
                     path = parts[0]
-                    method = parts[1] if parts[1].upper() in ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'HEAD', 'OPTIONS'] else ""
+                    method = (
+                        parts[1]
+                        if parts[1].upper()
+                        in ["GET", "POST", "PUT", "DELETE", "PATCH", "HEAD", "OPTIONS"]
+                        else ""
+                    )
 
             # Extract parameter info
             if "param:" in description:
-                parameter = description.split("param:")[1].split("]")[0] if "]" in description.split("param:")[1] else ""
+                parameter = (
+                    description.split("param:")[1].split("]")[0]
+                    if "]" in description.split("param:")[1]
+                    else ""
+                )
             elif "Parameter" in description:
                 parameter_parts = description.split("Parameter")
                 if len(parameter_parts) > 1:
@@ -87,13 +108,19 @@ def save_artifacts(
 
             # Extract response info
             if "Response" in description or "response" in description:
-                response_parts = [part for part in description.split() if "response" in part.lower()]
+                response_parts = [
+                    part for part in description.split() if "response" in part.lower()
+                ]
                 if response_parts:
                     response = response_parts[0]
 
             # Extract operation ID
             if "Operation ID" in description:
-                op_parts = description.split("Operation ID")[1].split(":") if ":" in description.split("Operation ID")[1] else []
+                op_parts = (
+                    description.split("Operation ID")[1].split(":")
+                    if ":" in description.split("Operation ID")[1]
+                    else []
+                )
                 if len(op_parts) > 1:
                     operation_id = op_parts[1].split("vs")[0].strip().strip("'\"")
 
@@ -111,25 +138,23 @@ def save_artifacts(
             else:
                 source = "Other"
 
-            structured_diffs.append({
-                'id': i,
-                'path': path,
-                'method': method,
-                'operation_id': operation_id,
-                'parameter': parameter,
-                'response': response,
-                'source': source,
-                'description': description,
-                'details': str(diff.details) if hasattr(diff, 'details') else ""
-            })
+            structured_diffs.append(
+                {
+                    "id": i,
+                    "path": path,
+                    "method": method,
+                    "operation_id": operation_id,
+                    "parameter": parameter,
+                    "response": response,
+                    "source": source,
+                    "description": description,
+                    "details": str(diff.details) if hasattr(diff, "details") else "",
+                }
+            )
 
-    # Write Excel file with canonical specs for side-by-side comparison
-    write_diffs_excel(
-        structured_diffs,
-        config.output_path,
-        hand_authored_canonical,
-        typespec_canonical
-    )
+    # Write Excel file with categorized differences
+    if not result.equivalent:
+        write_diffs_excel_v2(result, config.output_path)
 
     # Save canonicalized specs if provided
     if hand_authored_canonical:
@@ -139,7 +164,7 @@ def save_artifacts(
 
 
 def save_json(canonical, file_path: Path) -> None:
-    with open(file_path, 'w', encoding='utf-8') as f:
+    with open(file_path, "w", encoding="utf-8") as f:
         json.dump(canonical, f, indent=2)
 
 
@@ -178,13 +203,13 @@ Exit codes:
   1  - Specifications are NOT equivalent
   2  - Configuration or file loading error
   3  - Processing error
-"""
+""",
     )
 
     parser.add_argument(
-        '--config',
-        default='config.yaml',
-        help='Path to configuration file (default: config.yaml)'
+        "--config",
+        default="config.yaml",
+        help="Path to configuration file (default: config.yaml)",
     )
     args = parser.parse_args(argv)
 
@@ -205,8 +230,7 @@ Exit codes:
 
         # Canonicalize both specifications
         canonical_hand_authored, canonical_typespec = canonicalize_both_specs(
-            merged_hand_authored,
-            loaded_files['typespec_compiled']
+            merged_hand_authored, loaded_files["typespec_compiled"]
         )
 
         # Compare for equivalency
@@ -242,6 +266,7 @@ Exit codes:
     except Exception as e:
         print(f"\033[91mERROR\033[0m: Unexpected error: {e}", file=sys.stderr)
         import traceback
+
         traceback.print_exc()
         return 3
 
@@ -251,5 +276,5 @@ def main() -> None:
     sys.exit(main_cli())
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
