@@ -9622,6 +9622,11 @@ model SitePatchResourceProperties {
   inProgressOperationId?: string;
 
   /**
+   * Property to allow or block all public traffic. Allowed Values: 'Enabled', 'Disabled' or an empty string.
+   */
+  publicNetworkAccess?: string;
+
+  /**
    * Checks if Customer provided storage account is required
    */
   storageAccountRequired?: boolean;
