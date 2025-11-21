@@ -3,7 +3,7 @@ import "@typespec/versioning";
 
 import "../common/CommonModels.tsp";
 
-using TypeSpec.OpenAPI;
+using Azure.ResourceManager;
 using TypeSpec.Versioning;
 
 namespace Microsoft.MobileNetwork;
