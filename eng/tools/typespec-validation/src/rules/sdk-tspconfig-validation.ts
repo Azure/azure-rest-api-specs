@@ -642,12 +642,6 @@ export class TspConfigRustMgmtCrateNameSubRule extends TspconfigEmitterOptionsSu
   }
 }
 
-export class TspConfigRustAzEmitterOutputDirSubRule extends TspconfigEmitterOptionsEmitterOutputDirSubRuleBase {
-  constructor() {
-    super("@azure-tools/typespec-rust", "emitter-output-dir", new RegExp(/^{output-dir}\/{service-dir}\/{crate-name}\./));
-  }
-}
-
 export const defaultRules = [
   new TspConfigCommonAzServiceDirMatchPatternSubRule(),
   new TspConfigJavaAzEmitterOutputDirMatchPatternSubRule(),
@@ -680,7 +674,6 @@ export const defaultRules = [
   new TspConfigCsharpAzEmitterOutputDirSubRule(),
   new TspConfigCsharpMgmtEmitterOutputDirSubRule(),
   new TspConfigRustMgmtCrateNameSubRule(),
-  new TspConfigRustAzEmitterOutputDirSubRule(),
 ];
 
 export class SdkTspConfigValidationRule implements Rule {
