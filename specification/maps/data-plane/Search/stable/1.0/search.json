@@ -924,8 +924,12 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/Typeahead",
-            "description": "If the typeahead flag is set, the query will be interpreted as a partial input and the search will enter predictive mode.\n\n**Important**: This property is deprecated and may be omitted from the response."
+            "name": "typeahead",
+            "x-ms-client-name": "isTypeAhead",
+            "in": "query",
+            "description": "If the typeahead flag is set, the query will be interpreted as a partial input and the search will enter predictive mode.\n\n**Important**: This property is deprecated and may be omitted from the response.",
+            "type": "boolean",
+            "x-ms-parameter-location": "method"
           },
           {
             "$ref": "#/parameters/LimitSearch"
