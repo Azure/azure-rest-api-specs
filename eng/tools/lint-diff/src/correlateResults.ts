@@ -40,7 +40,7 @@ export async function correlateRuns(
       const beforeReadme = new Readme(beforeReadmePath);
       const defaultTag = await getDefaultTag(beforeReadme);
       if (!defaultTag) {
-        throw new Error(`No default tag found for readme ${readme} in before state`);
+        throw new Error(`No default tag found for readme ${readme.toString()} in before state`);
       }
       const beforeDefaultTagCandidates = beforeChecks.filter(
         (r) => relative(beforePath, r.readme.path) === readmePathRelative && r.tag === defaultTag,
@@ -69,7 +69,9 @@ export async function correlateRuns(
         });
         continue;
       } else if (beforeReadmeCandidate.length > 1) {
-        throw new Error(`Multiple before candidates found for key ${key} using readme ${readme}`);
+        throw new Error(
+          `Multiple before candidates found for key ${key} using readme ${readme.toString()}`,
+        );
       }
     }
 
@@ -148,7 +150,7 @@ export function getLintDiffViolations(runResult: AutorestRunResult): LintDiffVio
       continue;
     }
 
-    const result = JSON.parse(line.trim());
+    const result = JSON.parse(line.trim()) as { code: string };
     if (result.code == undefined) {
       // Results without a code can be assumed to be fatal errors. Set the code
       // to "FATAL"
