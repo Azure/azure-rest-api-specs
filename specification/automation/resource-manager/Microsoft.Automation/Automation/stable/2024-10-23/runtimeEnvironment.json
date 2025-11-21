@@ -1,0 +1,399 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AutomationManagement",
+    "version": "2024-10-23"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/runtimeEnvironments/{runtimeEnvironmentName}": {
+      "patch": {
+        "tags": [
+          "RuntimeEnvironment"
+        ],
+        "operationId": "RuntimeEnvironments_Update",
+        "description": "Update an Runtime Environment.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/automationaccountoperations"
+        },
+        "x-ms-examples": {
+          "Update an automation account": {
+            "$ref": "./examples/runtimeEnvironment/updateRuntimeEnvironment.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
+          },
+          {
+            "$ref": "./common/v5/definitions.json#/parameters/RuntimeEnvironmentNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RuntimeEnvironmentUpdateParameters"
+            },
+            "description": "Parameters supplied to the Runtime Environment"
+          },
+          {
+            "$ref": "./common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RuntimeEnvironment"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "RuntimeEnvironment"
+        ],
+        "operationId": "RuntimeEnvironments_Create",
+        "description": "Create or update Runtime Environment",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/runtimeEnvironmentOperations"
+        },
+        "x-ms-examples": {
+          "Create or update automation account": {
+            "$ref": "./examples/runtimeEnvironment/createRuntimeEnvironment.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
+          },
+          {
+            "$ref": "./common/v5/definitions.json#/parameters/RuntimeEnvironmentNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RuntimeEnvironment"
+            },
+            "description": "Parameters supplied to the create  the runtime environment."
+          },
+          {
+            "$ref": "./common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated",
+            "schema": {
+              "$ref": "#/definitions/RuntimeEnvironment"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/RuntimeEnvironment"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed. ",
+            "schema": {
+              "$ref": "./common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "RuntimeEnvironment"
+        ],
+        "operationId": "RuntimeEnvironments_Delete",
+        "description": "Delete the Runtime Environment.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/runtimeEnvironmentOperations"
+        },
+        "x-ms-examples": {
+          "Delete Runtime Environment": {
+            "$ref": "./examples/runtimeEnvironment/deleteRuntimeEnvironment.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
+          },
+          {
+            "$ref": "./common/v5/definitions.json#/parameters/RuntimeEnvironmentNameParameter"
+          },
+          {
+            "$ref": "./common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "RuntimeEnvironment"
+        ],
+        "operationId": "RuntimeEnvironments_Get",
+        "description": "Get information about the Runtime Environment",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/runtimeEnvironmentOperations"
+        },
+        "x-ms-examples": {
+          "Get automation account": {
+            "$ref": "./examples/runtimeEnvironment/getRuntimeEnvironment.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
+          },
+          {
+            "$ref": "./common/v5/definitions.json#/parameters/RuntimeEnvironmentNameParameter"
+          },
+          {
+            "$ref": "./common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RuntimeEnvironment"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/runtimeEnvironments": {
+      "get": {
+        "tags": [
+          "RuntimeEnvironment"
+        ],
+        "operationId": "RuntimeEnvironments_ListByAutomationAccount",
+        "description": "Retrieve a list of RuntimeEnvironments.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/runbookoperations"
+        },
+        "x-ms-examples": {
+          "List runbooks by automation account": {
+            "$ref": "./examples/runtimeEnvironment/listRuntimeEnvironmentsByAutomationAccount.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
+          },
+          {
+            "$ref": "./common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RuntimeEnvironmentListResult"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "RuntimeEnvironment": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RuntimeEnvironmentProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the Runtime Environment properties."
+        },
+        "systemData": {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "description": "Resource system metadata."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "Definition of the Runtime Environment type."
+    },
+    "RuntimeEnvironmentUpdateProperties": {
+      "type": "object",
+      "properties": {
+        "defaultPackages": {
+          "$ref": "#/definitions/DefaultPackages",
+          "description": "List of Default packages for Environment"
+        }
+      },
+      "description": "Gets or sets Runtime update properties."
+    },
+    "RuntimeProperties": {
+      "type": "object",
+      "properties": {
+        "language": {
+          "type": "string",
+          "description": "Language of Runtime Environment"
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of Language"
+        }
+      },
+      "description": "Runtime properties."
+    },
+    "RuntimeEnvironmentUpdateParameters": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RuntimeEnvironmentUpdateProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets Runtime update properties."
+        },
+        "systemData": {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
+        }
+      },
+      "description": "The parameters supplied to the update automation account operation."
+    },
+    "RuntimeEnvironmentProperties": {
+      "type": "object",
+      "properties": {
+        "runtime": {
+          "$ref": "#/definitions/RuntimeProperties",
+          "x-ms-client-flatten": true,
+          "description": " Runtime properties."
+        },
+        "defaultPackages": {
+          "$ref": "#/definitions/DefaultPackages",
+          "description": "List of Default packages for Environment"
+        },
+        "description": {
+          "type": "string",
+          "description": "Gets or sets the description."
+        }
+      },
+      "description": "Runtime Environment properties."
+    },
+    "DefaultPackages": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "Gets or sets default packages of Runtime Environment."
+    },
+    "RuntimeEnvironmentListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RuntimeEnvironment"
+          },
+          "description": "list of RuntimeEnvironment."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets or sets the next link."
+        }
+      },
+      "description": "List of all the  Runtime Environments of automation account."
+    }
+  },
+  "parameters": {}
+}
