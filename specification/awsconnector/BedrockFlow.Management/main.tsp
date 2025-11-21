@@ -345,7 +345,7 @@ model FlowNodeConfiguration {
   @doc("Retrieval flow node configuration")
   retrieval?: RetrievalFlowNodeConfiguration;
 
-  @doc("Inline code config structure, contains code configs")
+  @doc("Inline code config strucuture, contains code configs")
   inlineCode?: InlineCodeFlowNodeConfiguration;
 
   @doc("Loop node config, contains loop's internal definition")
@@ -680,7 +680,7 @@ model VectorSearchRerankingConfiguration {
   @doc("Property bedrockRerankingConfiguration")
   bedrockRerankingConfiguration?: VectorSearchBedrockRerankingConfiguration;
 
-  @doc("Enum of Re rank Configuration Types")
+  @doc("Enum of Rerank Configuration Types")
   type?: VectorSearchRerankingConfigurationType;
 }
 
