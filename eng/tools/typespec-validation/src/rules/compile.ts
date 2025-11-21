@@ -1,7 +1,7 @@
 import { filterAsync } from "@azure-tools/specs-shared/array";
 import { readFile } from "fs/promises";
 import { globby } from "globby";
-import path, { basename, dirname, normalize, relative, resolve } from "path";
+import path, { basename, dirname, normalize, relative } from "path";
 import pc from "picocolors";
 import { simpleGit } from "simple-git";
 import stripAnsi from "strip-ansi";
@@ -88,7 +88,7 @@ export class CompileRule implements Rule {
           // Ensure all output swaggers are under expected folder for the identified structure (v1/v2)
 
           const gitRoot = normalizePath(await simpleGit(folder).revparse("--show-toplevel"));
-          const relativePath = path.relative(gitRoot, folder).split(path.sep).join("/");
+          const relativePath = path.relative("", folder).split(path.sep).join("/");
 
           // If the folder containing TypeSpec sources is under "data-plane" or "resource-manager", the spec
           // must be using "folder structure v2".  Otherwise, it must be using v1.
@@ -106,9 +106,7 @@ export class CompileRule implements Rule {
           stdOutput += "\nAllowed output folder:\n";
           stdOutput += allowedOutputFolder + "\n";
 
-          const invalidSwagger = outputSwaggers.find(
-            (s) => !relative(gitRoot, resolve(folder, s)).startsWith(allowedOutputFolder),
-          );
+          const invalidSwagger = outputSwaggers.find((s) => !s.startsWith(allowedOutputFolder));
           if (invalidSwagger) {
             throw new Error(
               `Output swagger ${invalidSwagger} must be under path ${allowedOutputFolder}`,
