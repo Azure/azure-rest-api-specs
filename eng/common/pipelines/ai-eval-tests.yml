@@ -7,6 +7,7 @@ pr:
   paths:
     include:
       - .github/copilot-instructions.md
+      - eng/common/instructions/azsdk-tools/**
 
 parameters:
   - name: EvalProject
@@ -37,9 +38,8 @@ jobs:
       os: linux
 
     steps:
-    - checkout: self
     - task: UseDotNet@2
-      displayName: "Use .NET SDK 8.0.x"
+      displayName: "Use .NET SDK 9.0.x"
       retryCountOnTaskFailure: 3
       inputs:
         packageType: sdk
@@ -58,10 +58,15 @@ jobs:
       parameters:
         SkipCheckoutNone: true
         Repositories:
+          - Name: $(Build.Repository.Name)
+            Commitish: $(Build.SourceVersion)
+            WorkingDirectory: $(System.DefaultWorkingDirectory)/$(Build.Repository.Name)
           - Name: ${{ parameters.ToolsRepoOwner }}/${{ parameters.ToolsRepoName }}
             WorkingDirectory: $(System.DefaultWorkingDirectory)/${{ parameters.ToolsRepoName }}
         Paths:
           - 'tools/**'
+          - eng/common/**
+          - .github/copilot-instructions.md
     
     - task: AzureCLI@2
       displayName: 'Run eval'
@@ -80,10 +85,9 @@ jobs:
         DOTNET_CLI_TELEMETRY_OPTOUT: 1
         DOTNET_MULTILEVEL_LOOKUP: 0
         AZURE_OPENAI_MODEL_DEPLOYMENT_NAME: ${{ parameters.Model }}
-        AZURE_OPENAI_ENDPOINT: ${{ parameters.OpenAIEndPoint }}
-        COPILOT_INSTRUCTIONS_REPOSITORY_NAME: $(Build.Repository.Name)
-        COPILOT_INSTRUCTIONS_REPOSITORY_OWNER: $(Build.Repository.Owner)
-        COPILOT_INSTRUCTIONS_PATH: $(System.DefaultWorkingDirectory)/.github/copilot-instructions.md
+        AZURE_OPENAI_ENDPOINT: $(Build.Repository.Name)/${{ parameters.OpenAIEndPoint }}
+        REPOSITORY_NAME: $(Build.Repository.Name)
+        COPILOT_INSTRUCTIONS_PATH_MCP_EVALS: $(System.DefaultWorkingDirectory)/$(Build.Repository.Name)/.github/copilot-instructions.md
 
     - task: PublishTestResults@2
       condition: succeededOrFailed()
