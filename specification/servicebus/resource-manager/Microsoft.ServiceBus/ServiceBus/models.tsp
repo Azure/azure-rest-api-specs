@@ -851,6 +851,7 @@ model FailOver {
   properties?: FailOverProperties;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-case-mismatch" "Name conflict with FailoverProperties, see if they can be combined"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model FailOverProperties {
   /**
