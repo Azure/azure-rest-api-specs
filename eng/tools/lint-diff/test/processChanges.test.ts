@@ -14,20 +14,20 @@ import { resolve } from "node:path";
 import { isWindows } from "./test-util.js";
 
 describe("getAffectedServices", () => {
-  test.skipIf(isWindows())("returns single service with multiple files", async () => {
+  test.skipIf(isWindows())("returns single service with multiple files", () => {
     const changedFiles = ["specification/service1/file1.json", "specification/service1/file2.json"];
-    const affectedServices = await getAffectedServices(changedFiles);
+    const affectedServices = getAffectedServices(changedFiles);
 
     expect(affectedServices).toEqual(new Set<string>(["specification/service1"]));
   });
 
-  test.skipIf(isWindows())("returns multiple services", async () => {
+  test.skipIf(isWindows())("returns multiple services", () => {
     const changedFiles = [
       "specification/service1/file1.json",
       "specification/service1/file2.json",
       "specification/service2/file1.json",
     ];
-    const affectedServices = await getAffectedServices(changedFiles);
+    const affectedServices = getAffectedServices(changedFiles);
 
     expect(affectedServices).toEqual(
       new Set<string>(["specification/service1", "specification/service2"]),
@@ -36,26 +36,23 @@ describe("getAffectedServices", () => {
 });
 
 describe("getService", () => {
-  test.skipIf(isWindows())("returns service name from file path", async () => {
+  test.skipIf(isWindows())("returns service name from file path", () => {
     const filePath = "specification/service1/file1.json";
-    const serviceName = await getService(filePath);
+    const serviceName = getService(filePath);
 
     expect(serviceName).toEqual("specification/service1");
   });
 
-  test.skipIf(isWindows())(
-    "returns service name from file path with leading separator",
-    async () => {
-      const filePath = "/specification/service1/file1.json";
-      const serviceName = await getService(filePath);
+  test.skipIf(isWindows())("returns service name from file path with leading separator", () => {
+    const filePath = "/specification/service1/file1.json";
+    const serviceName = getService(filePath);
 
-      expect(serviceName).toEqual("specification/service1");
-    },
-  );
+    expect(serviceName).toEqual("specification/service1");
+  });
 
-  test("throws when file path does not contain enough pieces to assemble a service name", async () => {
+  test("throws when file path does not contain enough pieces to assemble a service name", () => {
     const filePath = "file1.json";
-    await expect(() => getService(filePath)).toThrow("Could not find service for file path");
+    expect(() => getService(filePath)).toThrow("Could not find service for file path");
   });
 });
 
@@ -139,7 +136,7 @@ describe("reconcileChangedFilesAndTags", () => {
 
 describe("getChangedSwaggers", () => {
   test("returns an empty set if no swaggers are changed", async () => {
-    expect(
+    await expect(
       getChangedSwaggers(
         "test/fixtures/getChangedSwaggers/before",
         "test/fixtures/getChangedSwaggers/after",
@@ -229,7 +226,7 @@ describe("buildState", () => {
           "specification/edit-in-place/readme.md",
           {
             changedTags: new Set<string>(),
-            readme: expect.any(Readme),
+            readme: expect.any(Readme) as unknown,
           },
         ],
       ]),
@@ -242,12 +239,12 @@ describe("buildState", () => {
   });
 
   test("does not throw if a file is missing", async () => {
-    expect(() =>
+    await expect(() =>
       buildState(
         ["specification/edit-in-place/data-plane/does-not-exist.json"],
         "test/fixtures/buildState/",
       ),
-    ).not.toThrow();
+    ).resolves.not.toThrow();
   });
 
   test.skipIf(isWindows())("does not include readme files that has no input-file:", async () => {
