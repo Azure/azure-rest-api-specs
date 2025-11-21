@@ -628,6 +628,26 @@ export class TspConfigCsharpMgmtNamespaceSubRule extends TspconfigEmitterOptions
   }
 }
 
+// ----- Rust sub rules -----
+export class TspConfigRustMgmtCrateNameSubRule extends TspconfigEmitterOptionsSubRuleBase {
+  constructor() {
+    super(
+      "@azure-tools/typespec-rust",
+      "crate-name",
+      new RegExp(/^azure_resourcemanager_(?:[a-z0-9]+_)*[a-z0-9]+$/),
+    );
+  }
+  protected skip(_: any, folder: string) {
+    return skipForDataPlane(folder);
+  }
+}
+
+export class TspConfigRustAzEmitterOutputDirSubRule extends TspconfigEmitterOptionsEmitterOutputDirSubRuleBase {
+  constructor() {
+    super("@azure-tools/typespec-rust", "emitter-output-dir", new RegExp(/^{output-dir}\/{service-dir}\/{crate-name}\./));
+  }
+}
+
 export const defaultRules = [
   new TspConfigCommonAzServiceDirMatchPatternSubRule(),
   new TspConfigJavaAzEmitterOutputDirMatchPatternSubRule(),
@@ -659,6 +679,8 @@ export const defaultRules = [
   new TspConfigCsharpMgmtNamespaceSubRule(),
   new TspConfigCsharpAzEmitterOutputDirSubRule(),
   new TspConfigCsharpMgmtEmitterOutputDirSubRule(),
+  new TspConfigRustMgmtCrateNameSubRule(),
+  new TspConfigRustAzEmitterOutputDirSubRule(),
 ];
 
 export class SdkTspConfigValidationRule implements Rule {
