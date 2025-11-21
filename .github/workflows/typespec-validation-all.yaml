@@ -58,7 +58,7 @@ jobs:
         # total-shards must be an accurate count of the number of shards
         total-shards: [3]
 
-    runs-on: ${{ fromJSON('{"ubuntu":"ubuntu-slim", "windows":"windows-2022"}')[matrix.os] }}
+    runs-on: ${{ fromJSON('{"ubuntu":"ubuntu-24.04", "windows":"windows-2022"}')[matrix.os] }}
 
     steps:
       - name: Enable git long paths
