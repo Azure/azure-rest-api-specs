@@ -17,7 +17,7 @@ jobs:
   avocado-code:
     name: "Swagger Avocado - Analyze Code"
 
-    runs-on: ubuntu-slim
+    runs-on: ubuntu-24.04
 
     steps:
       - uses: actions/checkout@v4
@@ -33,9 +33,7 @@ jobs:
         run: |
           set -x
 
-          printenv
-          ls $HOME/.local/bin
-          ls /home/runner/.local/bin
+          which pwsh
 
           AVOCADO_OUTPUT_FILE=$RUNNER_TEMP/avocado.ndjson
 
