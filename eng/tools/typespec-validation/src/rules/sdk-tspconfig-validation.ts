@@ -128,6 +128,77 @@ class TspconfigEmitterOptionsSubRuleBase extends TspconfigSubRuleBase {
     return option;
   }
 
+  protected resolveVariables(value: string, config: any): { resolved: string; error?: string } {
+    let resolvedValue = value;
+    const variablePattern = /\{([^}]+)\}/g;
+    const maxIterations = 10; // Prevent infinite loops
+    let iterations = 0;
+
+    // Keep resolving until no more variables are found or max iterations reached
+    while (resolvedValue.includes("{") && iterations < maxIterations) {
+      iterations++;
+      let hasUnresolvedVariables = false;
+      const currentValue = resolvedValue;
+
+      // Reset regex lastIndex for each iteration
+      variablePattern.lastIndex = 0;
+      let match;
+
+      while ((match = variablePattern.exec(currentValue)) !== null) {
+        const variableName = match[1];
+
+        // Try to resolve variable from multiple sources:
+        // 1. From the emitter's options (e.g., namespace, package-name)
+        // 2. From parameters (e.g., service-dir, output-dir)
+        // 3. From global options
+        let variableValue: string | undefined;
+
+        // Check emitter options first
+        variableValue = config?.options?.[this.emitterName]?.[variableName];
+
+        // If not found, check parameters
+        if (!variableValue) {
+          variableValue = config?.parameters?.[variableName]?.default;
+        }
+
+        // If not found, check global options (for variables like output-dir)
+        if (!variableValue) {
+          variableValue = config?.[variableName];
+        }
+
+        if (variableValue && typeof variableValue === "string") {
+          resolvedValue = resolvedValue.replace(`{${variableName}}`, variableValue);
+        } else {
+          hasUnresolvedVariables = true;
+        }
+      }
+
+      // If no progress was made in this iteration and there are still unresolved variables, return error
+      if (hasUnresolvedVariables && resolvedValue === currentValue) {
+        const unresolvedMatch = resolvedValue.match(/\{([^}]+)\}/);
+        const unresolvedVar = unresolvedMatch ? unresolvedMatch[1] : "unknown";
+        return {
+          resolved: resolvedValue,
+          error: `Could not resolve variable {${unresolvedVar}}. The variable is not defined in options.${this.emitterName}, parameters, or config`,
+        };
+      }
+
+      // If no more variables to resolve, break
+      if (!resolvedValue.includes("{")) {
+        break;
+      }
+    }
+
+    if (iterations >= maxIterations && resolvedValue.includes("{")) {
+      return {
+        resolved: resolvedValue,
+        error: `Maximum resolution depth reached. Possible circular reference in variable resolution.`,
+      };
+    }
+
+    return { resolved: resolvedValue };
+  }
+
   protected validate(config: any): RuleResult {
     const option = this.tryFindOption(config);
     if (option === undefined)
@@ -136,7 +207,20 @@ class TspconfigEmitterOptionsSubRuleBase extends TspconfigSubRuleBase {
         `Please add "options.${this.emitterName}.${this.keyToValidate}" with expected value "${this.expectedValue}"`,
       );
 
-    const actualValue = option as unknown as undefined | string | boolean;
+    let actualValue = option as unknown as undefined | string | boolean;
+
+    // Resolve variables if the value is a string
+    if (typeof actualValue === "string" && actualValue.includes("{")) {
+      const { resolved, error } = this.resolveVariables(actualValue, config);
+      if (error) {
+        return this.createFailedResult(
+          error,
+          `Please define the variable in your configuration or use a direct value`,
+        );
+      }
+      actualValue = resolved;
+    }
+
     if (!this.validateValue(actualValue, this.expectedValue))
       return this.createFailedResult(
         `The value of options.${this.emitterName}.${this.keyToValidate} "${actualValue}" does not match "${this.expectedValue}"`,
@@ -186,6 +270,7 @@ class TspconfigEmitterOptionsEmitterOutputDirSubRuleBase extends TspconfigEmitte
     // Format 1: {output-dir}/{service-dir}/azure-mgmt-advisor
     // Format 2: {service-dir}/azure-mgmt-advisor where service-dir might include {output-dir}
     // Format 3: {output-dir}/{service-dir}/azadmin/settings where we need to validate "azadmin/settings"
+    // Format 4: {output-dir}/sdk/dellstorage/Azure.ResourceManager.Dell.Storage - validate last part only
 
     if (!actualValue.includes("/")) {
       pathToValidate = actualValue;
@@ -194,7 +279,20 @@ class TspconfigEmitterOptionsEmitterOutputDirSubRuleBase extends TspconfigEmitte
       const filteredParts = pathParts.filter(
         (part) => !(part === "{output-dir}" || part === "{service-dir}"),
       );
-      pathToValidate = filteredParts.join("/");
+
+      // Strategy: Remove common directory prefixes (sdk, sdk/xxx) and validate the remaining path
+      // This handles:
+      // - "sdk/dellstorage/Azure.ResourceManager.Dell.Storage" -> "Azure.ResourceManager.Dell.Storage"
+      // - "azadmin/settings" -> "azadmin/settings" (no sdk prefix, keep as is)
+      if (filteredParts.length > 1 && filteredParts[0] === "sdk") {
+        // Remove "sdk" and any intermediate directory, validate only the last segment
+        // Example: ["sdk", "dellstorage", "Azure.ResourceManager.Dell"] -> "Azure.ResourceManager.Dell"
+        pathToValidate = filteredParts[filteredParts.length - 1];
+      } else {
+        // Keep the full remaining path for validation
+        // Example: ["azadmin", "settings"] -> "azadmin/settings"
+        pathToValidate = filteredParts.join("/");
+      }
     }
 
     // Skip validation if pathToValidate is exactly {namespace} and skipValidateNamespace is true
@@ -203,21 +301,15 @@ class TspconfigEmitterOptionsEmitterOutputDirSubRuleBase extends TspconfigEmitte
     }
 
     // Resolve any variables in the pathToValidate
-    // Check if pathToValidate contains variables like {namespace}
-    const variableMatch = pathToValidate.match(/\{([^}]+)\}/);
-    if (variableMatch) {
-      const variableName = variableMatch[1];
-      const variableValue = config?.options?.[this.emitterName]?.[variableName];
-
-      if (variableValue && typeof variableValue === "string") {
-        // Replace the variable with its value
-        pathToValidate = pathToValidate.replace(`{${variableName}}`, variableValue);
-      } else {
+    if (pathToValidate.includes("{")) {
+      const { resolved, error } = this.resolveVariables(pathToValidate, config);
+      if (error) {
         return this.createFailedResult(
-          `Could not resolve variable {${variableName}} in path "${pathToValidate}". The variable is not defined in options.${this.emitterName}`,
-          `Please define the ${variableName} variable in your configuration or use a direct path value`,
+          error,
+          `Please define the variable in your configuration or use a direct path value`,
         );
       }
+      pathToValidate = resolved;
     }
 
     if (!this.validateValue(pathToValidate, this.expectedValue))
@@ -628,6 +720,45 @@ export class TspConfigCsharpMgmtNamespaceSubRule extends TspconfigEmitterOptions
   }
 }
 
+// new Csharp sub rules should be added above this line
+export class TspConfigHttpClientCsharpAzEmitterOutputDirSubRule extends TspconfigEmitterOptionsEmitterOutputDirSubRuleBase {
+  constructor() {
+    super("@azure-typespec/http-client-csharp", "emitter-output-dir", new RegExp(/^Azure\./));
+  }
+}
+
+export class TspConfigHttpClientCsharpAzNamespaceSubRule extends TspconfigEmitterOptionsSubRuleBase {
+  constructor() {
+    super("@azure-typespec/http-client-csharp", "namespace", new RegExp(/^Azure\./));
+  }
+}
+
+export class TspConfigHttpClientCsharpMgmtEmitterOutputDirSubRule extends TspconfigEmitterOptionsEmitterOutputDirSubRuleBase {
+  constructor() {
+    super(
+      "@azure-typespec/http-client-csharp-mgmt",
+      "emitter-output-dir",
+      new RegExp(/^Azure\.ResourceManager\./),
+    );
+  }
+  protected skip(_: any, folder: string) {
+    return skipForDataPlane(folder);
+  }
+}
+
+export class TspConfigHttpClientCsharpMgmtNamespaceSubRule extends TspconfigEmitterOptionsSubRuleBase {
+  constructor() {
+    super(
+      "@azure-typespec/http-client-csharp-mgmt",
+      "namespace",
+      new RegExp(/^Azure\.ResourceManager\./),
+    );
+  }
+  protected skip(_: any, folder: string) {
+    return skipForDataPlane(folder);
+  }
+}
+
 export const defaultRules = [
   new TspConfigCommonAzServiceDirMatchPatternSubRule(),
   new TspConfigJavaAzEmitterOutputDirMatchPatternSubRule(),
@@ -659,6 +790,10 @@ export const defaultRules = [
   new TspConfigCsharpMgmtNamespaceSubRule(),
   new TspConfigCsharpAzEmitterOutputDirSubRule(),
   new TspConfigCsharpMgmtEmitterOutputDirSubRule(),
+  new TspConfigHttpClientCsharpAzNamespaceSubRule(),
+  new TspConfigHttpClientCsharpAzEmitterOutputDirSubRule(),
+  new TspConfigHttpClientCsharpMgmtNamespaceSubRule(),
+  new TspConfigHttpClientCsharpMgmtEmitterOutputDirSubRule(),
 ];
 
 export class SdkTspConfigValidationRule implements Rule {
@@ -699,7 +834,21 @@ export class SdkTspConfigValidationRule implements Rule {
         const emitterName = emitterOptionSubRule.getEmitterName();
         if (emitterName === "@azure-tools/typespec-csharp" && isSubRuleSuccess === false) {
           console.warn(
-            `Validation on option "${emitterOptionSubRule.getPathOfKeyToValidate()}" in "${emitterName}" are failed. However, per ${emitterName}’s decision, we will treat it as passed, please refer to https://eng.ms/docs/products/azure-developer-experience/onboard/request-exception`,
+            `Validation on option "${emitterOptionSubRule.getPathOfKeyToValidate()}" in "${emitterName}" are failed. However, per ${emitterName}'s decision, we will treat it as passed, please refer to https://eng.ms/docs/products/azure-developer-experience/onboard/request-exception`,
+          );
+          isSubRuleSuccess = true;
+        }
+
+        // For @azure-typespec/http-client-csharp and @azure-typespec/http-client-csharp-mgmt,
+        // only ignore validation when the option is not found (missing configuration)
+        if (
+          (emitterName === "@azure-typespec/http-client-csharp" ||
+            emitterName === "@azure-typespec/http-client-csharp-mgmt") &&
+          isSubRuleSuccess === false &&
+          result.errorOutput?.includes("Failed to find")
+        ) {
+          console.warn(
+            `Validation on option "${emitterOptionSubRule.getPathOfKeyToValidate()}" in "${emitterName}" is skipped because the option is not configured.`,
           );
           isSubRuleSuccess = true;
         }
