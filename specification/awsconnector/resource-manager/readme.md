@@ -256,6 +256,7 @@ input-file:
   - Microsoft.AwsConnector/stable/2024-12-01/apiGatewayStage.json
   - Microsoft.AwsConnector/stable/2024-12-01/appSyncGraphqlApi.json
   - Microsoft.AwsConnector/stable/2024-12-01/autoScalingAutoScalingGroup.json
+  - Microsoft.AwsConnector/preview/2025-12-01-preview/bedrockAgent.json
   - Microsoft.AwsConnector/preview/2025-12-01-preview/bedrockAgentAlias.json
   - Microsoft.AwsConnector/preview/2025-12-01-preview/bedrockApplicationInferenceProfile.json
   - Microsoft.AwsConnector/preview/2025-12-01-preview/bedrockBlueprint.json
