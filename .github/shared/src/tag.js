@@ -1,10 +1,19 @@
+import { inspect } from "util";
 import { mapAsync } from "./array.js";
 import { embedError } from "./spec-model.js";
 import { Swagger } from "./swagger.js";
 
 /**
+ * @typedef {import('./spec-model.js').ErrorJSON} ErrorJSON
  * @typedef {import('./readme.js').Readme} Readme
+ * @typedef {import('./swagger.js').SwaggerJSON} SwaggerJSON
  * @typedef {import('./spec-model.js').ToJSONOptions} ToJSONOptions
+ */
+
+/**
+ * @typedef {Object} TagJSON
+ * @property {string} name
+ * @property {(SwaggerJSON|ErrorJSON)[]} inputFiles
  */
 
 export class Tag {
@@ -68,7 +77,7 @@ export class Tag {
 
   /**
    * @param {ToJSONOptions} [options]
-   * @returns {Promise<Object>}
+   * @returns {Promise<TagJSON|ErrorJSON>}
    */
   async toJSONAsync(options = {}) {
     return await embedError(
@@ -84,6 +93,6 @@ export class Tag {
   }
 
   toString() {
-    return `Tag(${this.#name}, {logger: ${this.#logger}})`;
+    return `Tag(${this.#name}, {logger: ${inspect(this.#logger)}})`;
   }
 }
