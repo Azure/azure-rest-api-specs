@@ -1,4 +1,4 @@
-import { ExecError, execNpmExec, isExecError } from "@azure-tools/specs-shared/exec";
+import { execNpmExec, isExecError } from "@azure-tools/specs-shared/exec";
 import { debugLogger } from "@azure-tools/specs-shared/logger";
 import { join } from "path";
 
@@ -77,16 +77,15 @@ export async function runChecks(
           throw error;
         }
 
-        const execError = error as ExecError;
         lintDiffResult = {
           autorestCommand,
           rootPath: path,
           readme: tags.readme,
           tag: tag ? tag : "",
           openApiType,
-          error: execError,
-          stdout: execError.stdout || "",
-          stderr: execError.stderr || "",
+          error,
+          stdout: error.stdout || "",
+          stderr: error.stderr || "",
         } as AutorestRunResult;
 
         logAutorestExecutionErrors(lintDiffResult);
