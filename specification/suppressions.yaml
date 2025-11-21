@@ -107,17 +107,6 @@
     - storageinsights/Microsoft.StorageInsights.Management
     - voiceservices/VoiceServices.Management
 - tool: TypeSpecValidation
-  reason: Suppress until we know the awsconnector folder uses these settings
-  rules: [SdkTspConfigValidation]
-  sub-rules:
-    - options.@azure-tools/typespec-go.*
-    - options.@azure-tools/typespec-java.*
-    - options.@azure-tools/typespec-python.*
-    - options.@azure-tools/typespec-ts.*
-    - parameters.service-dir.default
-  paths:
-    - awsconnector/**/tspconfig.yaml
-- tool: TypeSpecValidation
   reason: Remove specs contain incorrect or missing emitter options or parameters
   rules: [SdkTspConfigValidation]
   sub-rules:
