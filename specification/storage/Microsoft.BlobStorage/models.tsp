@@ -788,12 +788,12 @@ enum LeaseStatus {
 model AccessPolicy {
   /** The date-time the policy is active. */
   @Xml.name("Start")
-  @encode("rfc3339")
+  @encode("rfc3339-fixed-width")
   start: utcDateTime;
 
   /** The date-time the policy expires. */
   @Xml.name("Expiry")
-  @encode("rfc3339")
+  @encode("rfc3339-fixed-width")
   expiry: utcDateTime;
 
   /** The permissions for acl the policy. */
