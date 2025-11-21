@@ -22,6 +22,10 @@ import {
   TspConfigGoMgmtHeadAsBooleanTrueSubRule,
   TspConfigGoMgmtServiceDirMatchPatternSubRule,
   TspConfigGoModuleMatchPatternSubRule,
+  TspConfigHttpClientCsharpAzEmitterOutputDirSubRule,
+  TspConfigHttpClientCsharpAzNamespaceSubRule,
+  TspConfigHttpClientCsharpMgmtEmitterOutputDirSubRule,
+  TspConfigHttpClientCsharpMgmtNamespaceSubRule,
   TspConfigJavaAzEmitterOutputDirMatchPatternSubRule,
   TspConfigJavaMgmtEmitterOutputDirMatchPatternSubRule,
   TspConfigJavaMgmtNamespaceFormatSubRule,
@@ -575,6 +579,46 @@ const csharpMgmtNamespaceTestCases = createEmitterOptionTestCases(
   [new TspConfigCsharpMgmtNamespaceSubRule()],
 );
 
+const httpClientCsharpAzEmitterOutputTestCases = createEmitterOptionTestCases(
+  "@azure-typespec/http-client-csharp",
+  "",
+  "emitter-output-dir",
+  "{output-dir}/{service-dir}/Azure.AAA",
+  "{output-dir}/{service-dir}/AAA",
+  [new TspConfigHttpClientCsharpAzEmitterOutputDirSubRule()],
+  true, // allowUndefined - skip validation when option is not present
+);
+
+const httpClientCsharpAzNamespaceTestCases = createEmitterOptionTestCases(
+  "@azure-typespec/http-client-csharp",
+  "",
+  "namespace",
+  "Azure.AAA",
+  "AAA",
+  [new TspConfigHttpClientCsharpAzNamespaceSubRule()],
+  true, // allowUndefined - skip validation when option is not present
+);
+
+const httpClientCsharpMgmtEmitterOutputDirTestCases = createEmitterOptionTestCases(
+  "@azure-typespec/http-client-csharp-mgmt",
+  managementTspconfigFolder,
+  "emitter-output-dir",
+  "{output-dir}/{service-dir}/Azure.ResourceManager.AAA",
+  "{output-dir}/{service-dir}/Azure.Management.AAA",
+  [new TspConfigHttpClientCsharpMgmtEmitterOutputDirSubRule()],
+  true, // allowUndefined - skip validation when option is not present
+);
+
+const httpClientCsharpMgmtNamespaceTestCases = createEmitterOptionTestCases(
+  "@azure-typespec/http-client-csharp-mgmt",
+  managementTspconfigFolder,
+  "namespace",
+  "Azure.ResourceManager.AAA",
+  "Azure.Management.AAA",
+  [new TspConfigHttpClientCsharpMgmtNamespaceSubRule()],
+  true, // allowUndefined - skip validation when option is not present
+);
+
 // Test cases for emitter-output-dir with namespace variable resolution
 const emitterOutputDirWithNamespaceVariableTestCases: Case[] = [
   {
@@ -611,6 +655,95 @@ options:
 `,
     success: false,
     subRules: [new TspConfigJavaMgmtEmitterOutputDirMatchPatternSubRule()],
+  },
+  {
+    description: "Validate http-client-csharp namespace with {package-name} variable",
+    folder: "",
+    tspconfigContent: `
+options:
+  "@azure-typespec/http-client-csharp":
+    package-name: "Azure.MyService"
+    namespace: "{package-name}"
+`,
+    success: true,
+    subRules: [new TspConfigHttpClientCsharpAzNamespaceSubRule()],
+  },
+  {
+    description: "Validate http-client-csharp namespace with invalid {package-name} variable value",
+    folder: "",
+    tspconfigContent: `
+options:
+  "@azure-typespec/http-client-csharp":
+    package-name: "MyService"
+    namespace: "{package-name}"
+`,
+    success: false,
+    subRules: [new TspConfigHttpClientCsharpAzNamespaceSubRule()],
+  },
+  {
+    description: "Validate http-client-csharp-mgmt emitter-output-dir with {package-name} variable",
+    folder: managementTspconfigFolder,
+    tspconfigContent: `
+options:
+  "@azure-typespec/http-client-csharp-mgmt":
+    package-name: "Azure.ResourceManager.MyService"
+    emitter-output-dir: "{output-dir}/{service-dir}/{package-name}"
+`,
+    success: true,
+    subRules: [new TspConfigHttpClientCsharpMgmtEmitterOutputDirSubRule()],
+  },
+  {
+    description:
+      "Validate http-client-csharp-mgmt recursive variable resolution (namespace -> package-name)",
+    folder: managementTspconfigFolder,
+    tspconfigContent: `
+options:
+  "@azure-typespec/http-client-csharp-mgmt":
+    package-name: "Azure.ResourceManager.Compute.Recommender"
+    namespace: "{package-name}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+`,
+    success: true,
+    subRules: [new TspConfigHttpClientCsharpMgmtEmitterOutputDirSubRule()],
+  },
+  {
+    description:
+      "Validate http-client-csharp-mgmt emitter-output-dir validates only last path segment",
+    folder: managementTspconfigFolder,
+    tspconfigContent: `
+options:
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.Dell.Storage"
+    emitter-output-dir: "{output-dir}/sdk/dellstorage/Azure.ResourceManager.Dell.Storage"
+`,
+    success: true,
+    subRules: [new TspConfigHttpClientCsharpMgmtEmitterOutputDirSubRule()],
+  },
+  {
+    description:
+      "Validate http-client-csharp-mgmt emitter-output-dir fails when last segment is invalid",
+    folder: managementTspconfigFolder,
+    tspconfigContent: `
+options:
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.Dell.Storage"
+    emitter-output-dir: "{output-dir}/sdk/dellstorage/Dell.Storage"
+`,
+    success: false,
+    subRules: [new TspConfigHttpClientCsharpMgmtEmitterOutputDirSubRule()],
+  },
+  {
+    description:
+      "Validate http-client-csharp emitter-output-dir with multiple path segments validates only last",
+    folder: "",
+    tspconfigContent: `
+options:
+  "@azure-typespec/http-client-csharp":
+    namespace: "Azure.AI.Translation"
+    emitter-output-dir: "{output-dir}/sdk/translation/Azure.AI.Translation"
+`,
+    success: true,
+    subRules: [new TspConfigHttpClientCsharpAzEmitterOutputDirSubRule()],
   },
 ];
 
@@ -724,6 +857,11 @@ describe("tspconfig", function () {
     ...csharpAzClearOutputFolderTestCases,
     ...csharpMgmtEmitterOutputDirTestCases,
     ...csharpMgmtNamespaceTestCases,
+    // http-client-csharp
+    ...httpClientCsharpAzEmitterOutputTestCases,
+    ...httpClientCsharpAzNamespaceTestCases,
+    ...httpClientCsharpMgmtEmitterOutputDirTestCases,
+    ...httpClientCsharpMgmtNamespaceTestCases,
     // variable resolution in emitter-output-dir
     ...emitterOutputDirWithNamespaceVariableTestCases,
   ])(`$description`, async (c: Case) => {
