@@ -130,6 +130,10 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
+        },
         "x-ms-examples": {
           "Approve or reject a private endpoint connection.": {
             "$ref": "./examples/PrivateEndpointConnectionsUpdate.json"
@@ -183,7 +187,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-examples": {
           "Delete a private endpoint connection.": {
