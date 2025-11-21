@@ -1272,6 +1272,33 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
+            "name": "gcpTemplateFormat",
+            "in": "query",
+            "description": "Optional template output format. Defaults to 'terraform' if not provided",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "terraform",
+              "shellscript"
+            ],
+            "x-ms-enum": {
+              "name": "GCPTemplateFormat",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Terraform",
+                  "value": "terraform",
+                  "description": "Terraform template format"
+                },
+                {
+                  "name": "ShellScript",
+                  "value": "shellscript",
+                  "description": "Shell script template format"
+                }
+              ]
+            }
+          },
+          {
             "name": "generateGcpTemplateRequest",
             "in": "body",
             "description": "ConnectorId and SolutionTypes and their properties to Generate GCP Access Control Template.",

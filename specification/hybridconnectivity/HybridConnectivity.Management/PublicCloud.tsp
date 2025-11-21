@@ -495,10 +495,25 @@ interface GenerateGcpTemplate {
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
 
+    @doc("Optional template output format. Defaults to 'terraform' if not provided")
+    @query
+    gcpTemplateFormat?: GCPTemplateFormat,
+
     @doc("ConnectorId and SolutionTypes and their properties to Generate GCP Access Control Template.")
     @body
     generateGcpTemplateRequest: GenerateGcpTemplateRequest,
   ): Azure.ResourceManager.ArmResponse<GenerateGcpTemplateResponse> | ErrorResponse;
+}
+
+@doc("GCP template format.")
+union GCPTemplateFormat {
+  string,
+
+  @doc("Terraform template format")
+  Terraform: "terraform",
+ 
+  @doc("Shell script template format")
+  ShellScript: "shellscript",
 }
 
 /**
