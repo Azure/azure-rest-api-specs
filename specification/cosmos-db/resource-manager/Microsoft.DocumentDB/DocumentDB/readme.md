@@ -195,6 +195,26 @@ input-file:
   - stable/2024-08-15/services.json
 ```
 
+### Tag: package-preview-2024-07
+
+These settings apply only when `--tag=package-preview-2024-07` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-07'
+input-file:
+  - preview/2024-07-15-preview/cosmos-db.json
+  - preview/2024-07-15-preview/dataTransferService.json
+  - preview/2024-07-15-preview/managedCassandra.json
+  - preview/2024-07-15-preview/mongoCluster.json
+  - preview/2024-07-15-preview/mongorbac.json
+  - preview/2024-07-15-preview/notebook.json
+  - preview/2024-07-15-preview/privateEndpointConnection.json
+  - preview/2024-07-15-preview/privateLinkResources.json
+  - preview/2024-07-15-preview/rbac.json
+  - preview/2024-07-15-preview/restorable.json
+  - preview/2024-07-15-preview/services.json
+  - preview/2024-07-15-preview/throughputpool.json
+```
+
 ### Tag: package-preview-2024-05
 
 These settings apply only when `--tag=package-preview-2024-05` is specified on the command line.
@@ -231,6 +251,7 @@ input-file:
   - stable/2024-05-15/restorable.json
   - stable/2024-05-15/services.json
 ```
+
 ### Tag: package-preview-2024-02
 
 These settings apply only when `--tag=package-preview-2024-02` is specified on the command line.
