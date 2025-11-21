@@ -40,8 +40,6 @@ namespace Customizations;
   "rust"
 );
 
-@@alternateType(AccessPolicy.expiry, string, "rust");
-@@alternateType(AccessPolicy.start, string, "rust");
 @@alternateType(BlobPropertiesInternal.contentLength, uint64, "rust");
 @@alternateType(BlobContentLengthRequired.blobContentLength, uint64, "rust");
 @@alternateType(ContentLengthResponseHeader.contentLength, uint64, "rust");
