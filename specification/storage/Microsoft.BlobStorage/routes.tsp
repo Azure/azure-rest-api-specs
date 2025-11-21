@@ -327,7 +327,7 @@ interface Container {
       ...BlobPublicAccess;
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
-      ...DateResponseHeader;
+      ...DateResponseHeaderPrivate;
     }
   >;
 
@@ -351,9 +351,9 @@ interface Container {
       ...IfUnmodifiedSinceParameter;
     },
     {
-      ...EtagResponseHeader;
-      ...LastModifiedResponseHeader;
-      ...DateResponseHeader;
+      ...EtagResponseHeaderPrivate;
+      ...LastModifiedResponseHeaderPrivate;
+      ...DateResponseHeaderPrivate;
     }
   >;
 
@@ -1005,8 +1005,8 @@ interface Blob {
       ...VersionIdParameter;
     },
     {
-      ...DateResponseHeader;
-      ...LegalHoldResponseHeader;
+      ...DateResponseHeaderPrivate;
+      ...LegalHoldResponseHeaderPrivate;
     }
   >;
 

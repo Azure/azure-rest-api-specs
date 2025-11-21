@@ -436,7 +436,7 @@ model BlockLookupList {
 
 /** Represents an array of signed identifiers */
 model SignedIdentifiers {
-  /** The array of signed  identifiers. */
+  /** The array of signed identifiers. */
   @Xml.unwrapped
   @Xml.name("SignedIdentifier")
   items: Array<SignedIdentifier>;
@@ -1830,6 +1830,14 @@ alias ServerEncryptedResponseHeaderPrivate = {
 /** The legal hold response header. */
 alias LegalHoldResponseHeader = {
   /** Specifies the legal hold status to set on the blob. */
+  @header("x-ms-legal-hold")
+  legalHold: boolean;
+};
+
+/** The legal hold response header. */
+alias LegalHoldResponseHeaderPrivate = {
+  /** Specifies the legal hold status to set on the blob. */
+  @access(Access.internal)
   @header("x-ms-legal-hold")
   legalHold: boolean;
 };
