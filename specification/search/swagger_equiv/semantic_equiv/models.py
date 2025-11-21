@@ -11,12 +11,13 @@ The models are designed to:
 """
 
 from dataclasses import dataclass, field
-from typing import Dict, Any, List, Optional, Set, FrozenSet, Tuple
 from enum import Enum
+from typing import Any, Dict, FrozenSet, List, Optional, Set, Tuple
 
 
 class ParameterLocation(Enum):
     """Parameter location enumeration."""
+
     QUERY = "query"
     PATH = "path"
     HEADER = "header"
@@ -27,6 +28,7 @@ class ParameterLocation(Enum):
 @dataclass(frozen=True)
 class CanonicalConstraints:
     """Represents validation constraints for parameters and schemas."""
+
     minimum: Optional[float] = None
     maximum: Optional[float] = None
     exclusive_minimum: Optional[bool] = None
@@ -55,28 +57,31 @@ class CanonicalSchema:
     - References: $ref values
     - Composed schemas: allOf/oneOf/anyOf component counts and schemas
     """
+
     type: Optional[str] = None
     format: Optional[str] = None
     ref: Optional[str] = None  # For $ref
 
     # Object schema fields
-    properties: Optional[Dict[str, 'CanonicalSchema']] = None
+    properties: Optional[Dict[str, "CanonicalSchema"]] = None
     required: Optional[FrozenSet[str]] = None
     additional_properties: Optional[Any] = None  # bool or CanonicalSchema
 
     # Array schema fields
-    items: Optional['CanonicalSchema'] = None
+    items: Optional["CanonicalSchema"] = None
 
     # Constraints
     constraints: Optional[CanonicalConstraints] = None
 
     # Composed schemas
-    all_of: Optional[List['CanonicalSchema']] = None
-    one_of: Optional[List['CanonicalSchema']] = None
-    any_of: Optional[List['CanonicalSchema']] = None
+    all_of: Optional[List["CanonicalSchema"]] = None
+    one_of: Optional[List["CanonicalSchema"]] = None
+    any_of: Optional[List["CanonicalSchema"]] = None
 
     # Source tracking
     swagger_source: Optional[str] = None
+
+
 @dataclass(frozen=True)
 class CanonicalParameter:
     """
@@ -86,6 +91,7 @@ class CanonicalParameter:
     and must match on: in, name, required, full schema for body params,
     type/format/constraints for non-body params, enum, default.
     """
+
     name: str
     location: ParameterLocation  # 'in' field
     required: bool = False
@@ -104,6 +110,7 @@ class CanonicalParameter:
 @dataclass(frozen=True)
 class CanonicalResponse:
     """Represents a canonical response definition."""
+
     schema: Optional[CanonicalSchema] = None
     headers: Optional[Dict[str, CanonicalSchema]] = None
     content_types: Optional[FrozenSet[str]] = None  # 'produces' for this response
@@ -121,8 +128,11 @@ class CanonicalOperation:
     - Request body (consumes + schema)
     - Responses (status codes + schemas + headers)
     """
+
     operation_id: Optional[str] = None
-    parameters: Optional[Dict[Tuple[str, str], CanonicalParameter]] = None  # Keyed by (in, name)
+    parameters: Optional[Dict[Tuple[str, str], CanonicalParameter]] = (
+        None  # Keyed by (in, name)
+    )
     request_body_schema: Optional[CanonicalSchema] = None
     consumes: Optional[FrozenSet[str]] = None  # Content types for request
     responses: Optional[Dict[str, CanonicalResponse]] = None  # Keyed by status code
@@ -133,7 +143,10 @@ class CanonicalOperation:
 @dataclass(frozen=True)
 class CanonicalPath:
     """Represents a canonical path definition."""
-    operations: Dict[str, CanonicalOperation] = field(default_factory=dict)  # Keyed by HTTP method
+
+    operations: Dict[str, CanonicalOperation] = field(
+        default_factory=dict
+    )  # Keyed by HTTP method
     swagger_source: Optional[str] = None
 
     @property
@@ -153,6 +166,7 @@ class CanonicalApi:
     - Complete schema/definition sets
     - Global API configuration (consumes, produces, schemes, etc.)
     """
+
     # Core API structure
     paths: Dict[str, CanonicalPath] = field(default_factory=dict)
     definitions: Dict[str, CanonicalSchema] = field(default_factory=dict)
@@ -168,7 +182,9 @@ class CanonicalApi:
 
     # Azure/Microsoft-specific extensions
     x_ms_parameterized_host: Optional[Dict[str, Any]] = None  # x-ms-parameterized-host
-    x_ms_code_generation_settings: Optional[Dict[str, Any]] = None  # x-ms-code-generation-settings
+    x_ms_code_generation_settings: Optional[Dict[str, Any]] = (
+        None  # x-ms-code-generation-settings
+    )
 
     # Security configuration
     security_definitions: Optional[Dict[str, Any]] = None  # securityDefinitions
@@ -191,39 +207,41 @@ class CanonicalApi:
         return frozenset(self.paths.keys())
 
 
-def build_constraints_from_dict(data: Dict[str, Any], swagger_source: Optional[str] = None) -> Optional[CanonicalConstraints]:
+def build_constraints_from_dict(
+    data: Dict[str, Any], swagger_source: Optional[str] = None
+) -> Optional[CanonicalConstraints]:
     """Build CanonicalConstraints from a dictionary, handling enum specially."""
     if not data:
         return None
 
     enum_value = None
-    if 'enum' in data:
-        enum_list = data['enum']
+    if "enum" in data:
+        enum_list = data["enum"]
         if isinstance(enum_list, list):
             # Convert to frozenset of strings for comparison
             enum_value = frozenset(str(item) for item in enum_list)
 
     return CanonicalConstraints(
-        minimum=data.get('minimum'),
-        maximum=data.get('maximum'),
-        exclusive_minimum=data.get('exclusiveMinimum'),
-        exclusive_maximum=data.get('exclusiveMaximum'),
-        min_length=data.get('minLength'),
-        max_length=data.get('maxLength'),
-        pattern=data.get('pattern'),
-        min_items=data.get('minItems'),
-        max_items=data.get('maxItems'),
-        unique_items=data.get('uniqueItems'),
+        minimum=data.get("minimum"),
+        maximum=data.get("maximum"),
+        exclusive_minimum=data.get("exclusiveMinimum"),
+        exclusive_maximum=data.get("exclusiveMaximum"),
+        min_length=data.get("minLength"),
+        max_length=data.get("maxLength"),
+        pattern=data.get("pattern"),
+        min_items=data.get("minItems"),
+        max_items=data.get("maxItems"),
+        unique_items=data.get("uniqueItems"),
         enum=enum_value,
-        default=data.get('default'),
-        swagger_source=swagger_source
+        default=data.get("default"),
+        swagger_source=swagger_source,
     )
 
 
 def build_schema_from_dict(
     schema_dict: Dict[str, Any],
     definitions: Dict[str, Dict[str, Any]] = None,
-    swagger_source: Optional[str] = None
+    swagger_source: Optional[str] = None,
 ) -> CanonicalSchema:
     """
     Build a CanonicalSchema from a Swagger schema dictionary.
@@ -240,12 +258,12 @@ def build_schema_from_dict(
         return CanonicalSchema(swagger_source=swagger_source)
 
     # Handle $ref
-    if '$ref' in schema_dict:
-        return CanonicalSchema(ref=schema_dict['$ref'], swagger_source=swagger_source)
+    if "$ref" in schema_dict:
+        return CanonicalSchema(ref=schema_dict["$ref"], swagger_source=swagger_source)
 
     # Basic type and format
-    schema_type = schema_dict.get('type')
-    schema_format = schema_dict.get('format')
+    schema_type = schema_dict.get("type")
+    schema_format = schema_dict.get("format")
 
     # Build constraints
     constraints = build_constraints_from_dict(schema_dict, swagger_source)
@@ -255,40 +273,55 @@ def build_schema_from_dict(
     required = None
     additional_properties = None
 
-    if schema_type == 'object' or 'properties' in schema_dict:
-        props_dict = schema_dict.get('properties', {})
+    if schema_type == "object" or "properties" in schema_dict:
+        props_dict = schema_dict.get("properties", {})
         if props_dict:
             properties = {}
             for prop_name, prop_schema in props_dict.items():
-                properties[prop_name] = build_schema_from_dict(prop_schema, definitions, swagger_source)
+                properties[prop_name] = build_schema_from_dict(
+                    prop_schema, definitions, swagger_source
+                )
 
-        required_list = schema_dict.get('required', [])
+        required_list = schema_dict.get("required", [])
         if required_list:
             required = frozenset(required_list)
 
-        if 'additionalProperties' in schema_dict:
-            add_props = schema_dict['additionalProperties']
+        if "additionalProperties" in schema_dict:
+            add_props = schema_dict["additionalProperties"]
             if isinstance(add_props, bool):
                 additional_properties = add_props
             elif isinstance(add_props, dict):
-                additional_properties = build_schema_from_dict(add_props, definitions, swagger_source)
+                additional_properties = build_schema_from_dict(
+                    add_props, definitions, swagger_source
+                )
 
     # Handle array schemas
     items = None
-    if schema_type == 'array' and 'items' in schema_dict:
-        items = build_schema_from_dict(schema_dict['items'], definitions, swagger_source)
+    if schema_type == "array" and "items" in schema_dict:
+        items = build_schema_from_dict(
+            schema_dict["items"], definitions, swagger_source
+        )
 
     # Handle composed schemas
     all_of = None
     one_of = None
     any_of = None
 
-    if 'allOf' in schema_dict:
-        all_of = [build_schema_from_dict(s, definitions, swagger_source) for s in schema_dict['allOf']]
-    if 'oneOf' in schema_dict:
-        one_of = [build_schema_from_dict(s, definitions, swagger_source) for s in schema_dict['oneOf']]
-    if 'anyOf' in schema_dict:
-        any_of = [build_schema_from_dict(s, definitions, swagger_source) for s in schema_dict['anyOf']]
+    if "allOf" in schema_dict:
+        all_of = [
+            build_schema_from_dict(s, definitions, swagger_source)
+            for s in schema_dict["allOf"]
+        ]
+    if "oneOf" in schema_dict:
+        one_of = [
+            build_schema_from_dict(s, definitions, swagger_source)
+            for s in schema_dict["oneOf"]
+        ]
+    if "anyOf" in schema_dict:
+        any_of = [
+            build_schema_from_dict(s, definitions, swagger_source)
+            for s in schema_dict["anyOf"]
+        ]
 
     return CanonicalSchema(
         type=schema_type,
@@ -301,30 +334,47 @@ def build_schema_from_dict(
         all_of=all_of,
         one_of=one_of,
         any_of=any_of,
-        swagger_source=swagger_source
+        swagger_source=swagger_source,
     )
+
+
+def resolve_parameter_ref(
+    param_dict: Dict[str, Any], global_params: Dict[str, Dict[str, Any]]
+) -> Dict[str, Any]:
+    """Resolve parameter $ref to actual parameter definition."""
+    if "$ref" in param_dict:
+        ref_path = param_dict["$ref"]
+        if ref_path.startswith("#/parameters/"):
+            param_name = ref_path.replace("#/parameters/", "")
+            if param_name in global_params:
+                return global_params[param_name]
+            else:
+                # If reference not found, return original dict
+                # This will likely cause an error later but prevents crashes
+                return param_dict
+    return param_dict
 
 
 def build_parameter_from_dict(
     param_dict: Dict[str, Any],
     definitions: Dict[str, Dict[str, Any]] = None,
-    swagger_source: Optional[str] = None
+    swagger_source: Optional[str] = None,
 ) -> CanonicalParameter:
     """Build a CanonicalParameter from a Swagger parameter dictionary."""
-    name = param_dict.get('name', '')
-    location_str = param_dict.get('in', 'query')
+    name = param_dict.get("name", "")
+    location_str = param_dict.get("in", "query")
 
     # Map location string to enum
     location_map = {
-        'query': ParameterLocation.QUERY,
-        'path': ParameterLocation.PATH,
-        'header': ParameterLocation.HEADER,
-        'formData': ParameterLocation.FORM_DATA,
-        'body': ParameterLocation.BODY
+        "query": ParameterLocation.QUERY,
+        "path": ParameterLocation.PATH,
+        "header": ParameterLocation.HEADER,
+        "formData": ParameterLocation.FORM_DATA,
+        "body": ParameterLocation.BODY,
     }
     location = location_map.get(location_str, ParameterLocation.QUERY)
 
-    required = param_dict.get('required', False)
+    required = param_dict.get("required", False)
 
     # For body parameters, use schema
     schema = None
@@ -333,12 +383,14 @@ def build_parameter_from_dict(
     constraints = None
 
     if location == ParameterLocation.BODY:
-        if 'schema' in param_dict:
-            schema = build_schema_from_dict(param_dict['schema'], definitions, swagger_source)
+        if "schema" in param_dict:
+            schema = build_schema_from_dict(
+                param_dict["schema"], definitions, swagger_source
+            )
     else:
         # For non-body parameters, use type/format/constraints
-        param_type = param_dict.get('type')
-        param_format = param_dict.get('format')
+        param_type = param_dict.get("type")
+        param_format = param_dict.get("format")
         constraints = build_constraints_from_dict(param_dict, swagger_source)
 
     return CanonicalParameter(
@@ -349,7 +401,7 @@ def build_parameter_from_dict(
         param_type=param_type,
         param_format=param_format,
         constraints=constraints,
-        swagger_source=swagger_source
+        swagger_source=swagger_source,
     )
 
 
@@ -357,20 +409,24 @@ def build_response_from_dict(
     response_dict: Dict[str, Any],
     definitions: Dict[str, Dict[str, Any]] = None,
     produces: Optional[List[str]] = None,
-    swagger_source: Optional[str] = None
+    swagger_source: Optional[str] = None,
 ) -> CanonicalResponse:
     """Build a CanonicalResponse from a Swagger response dictionary."""
     schema = None
-    if 'schema' in response_dict:
-        schema = build_schema_from_dict(response_dict['schema'], definitions, swagger_source)
+    if "schema" in response_dict:
+        schema = build_schema_from_dict(
+            response_dict["schema"], definitions, swagger_source
+        )
 
     headers = None
-    if 'headers' in response_dict:
-        headers_dict = response_dict['headers']
+    if "headers" in response_dict:
+        headers_dict = response_dict["headers"]
         if isinstance(headers_dict, dict):
             headers = {}
             for header_name, header_def in headers_dict.items():
-                headers[header_name] = build_schema_from_dict(header_def, definitions, swagger_source)
+                headers[header_name] = build_schema_from_dict(
+                    header_def, definitions, swagger_source
+                )
 
     content_types = None
     if produces:
@@ -380,27 +436,37 @@ def build_response_from_dict(
         schema=schema,
         headers=headers,
         content_types=content_types,
-        swagger_source=swagger_source
+        swagger_source=swagger_source,
     )
 
 
 def build_operation_from_dict(
     operation_dict: Dict[str, Any],
     definitions: Dict[str, Dict[str, Any]] = None,
-    swagger_source: Optional[str] = None
+    swagger_source: Optional[str] = None,
 ) -> CanonicalOperation:
     """Build a CanonicalOperation from a Swagger operation dictionary."""
-    operation_id = operation_dict.get('operationId')
+    operation_id = operation_dict.get("operationId")
 
     # Build parameters dictionary keyed by (in, name)
     parameters = None
-    if 'parameters' in operation_dict:
-        param_list = operation_dict['parameters']
+    if "parameters" in operation_dict:
+        param_list = operation_dict["parameters"]
         if isinstance(param_list, list):
             parameters = {}
+            # Get global parameters from the main swagger document for reference resolution
+            global_params = (
+                definitions.get("__global_parameters", {}) if definitions else {}
+            )
             for param_dict in param_list:
                 if isinstance(param_dict, dict):
-                    param = build_parameter_from_dict(param_dict, definitions, swagger_source)
+                    # Resolve parameter reference if it's a $ref
+                    resolved_param_dict = resolve_parameter_ref(
+                        param_dict, global_params
+                    )
+                    param = build_parameter_from_dict(
+                        resolved_param_dict, definitions, swagger_source
+                    )
                     parameters[param.key] = param
 
     # Handle request body (from body parameter)
@@ -413,29 +479,30 @@ def build_operation_from_dict(
 
     # Content types
     consumes = None
-    if 'consumes' in operation_dict:
-        consumes_list = operation_dict['consumes']
+    if "consumes" in operation_dict:
+        consumes_list = operation_dict["consumes"]
         if isinstance(consumes_list, list):
             consumes = frozenset(consumes_list)
 
     produces = None
-    if 'produces' in operation_dict:
-        produces_list = operation_dict['produces']
+    if "produces" in operation_dict:
+        produces_list = operation_dict["produces"]
         if isinstance(produces_list, list):
             produces = frozenset(produces_list)
 
     # Build responses dictionary
     responses = None
-    if 'responses' in operation_dict:
-        responses_dict = operation_dict['responses']
+    if "responses" in operation_dict:
+        responses_dict = operation_dict["responses"]
         if isinstance(responses_dict, dict):
             responses = {}
             for status_code, response_dict in responses_dict.items():
                 if isinstance(response_dict, dict):
                     response = build_response_from_dict(
-                        response_dict, definitions,
+                        response_dict,
+                        definitions,
                         list(produces) if produces else None,
-                        swagger_source
+                        swagger_source,
                     )
                     responses[status_code] = response
 
@@ -446,11 +513,13 @@ def build_operation_from_dict(
         consumes=consumes,
         responses=responses,
         produces=produces,
-        swagger_source=swagger_source
+        swagger_source=swagger_source,
     )
 
 
-def build_canonical_api_from_swagger(swagger_dict: Dict[str, Any], swagger_source: str) -> CanonicalApi:
+def build_canonical_api_from_swagger(
+    swagger_dict: Dict[str, Any], swagger_source: str
+) -> CanonicalApi:
     """
     Build a CanonicalApi from a canonicalized Swagger dictionary.
 
@@ -465,85 +534,96 @@ def build_canonical_api_from_swagger(swagger_dict: Dict[str, Any], swagger_sourc
     """
 
     # Extract global API information
-    swagger_version = swagger_dict.get('swagger')
-    info = swagger_dict.get('info')
-    host = swagger_dict.get('host')
-    base_path = swagger_dict.get('basePath')
+    swagger_version = swagger_dict.get("swagger")
+    info = swagger_dict.get("info")
+    host = swagger_dict.get("host")
+    base_path = swagger_dict.get("basePath")
 
     # Extract Azure/Microsoft-specific extensions
-    x_ms_parameterized_host = swagger_dict.get('x-ms-parameterized-host')
-    x_ms_code_generation_settings = swagger_dict.get('x-ms-code-generation-settings')
+    x_ms_parameterized_host = swagger_dict.get("x-ms-parameterized-host")
+    x_ms_code_generation_settings = swagger_dict.get("x-ms-code-generation-settings")
 
     # Extract security configuration
-    security_definitions = swagger_dict.get('securityDefinitions')
-    security = swagger_dict.get('security')
+    security_definitions = swagger_dict.get("securityDefinitions")
+    security = swagger_dict.get("security")
 
     # Extract additional metadata
-    tags = swagger_dict.get('tags')
-    external_docs = swagger_dict.get('externalDocs')
+    tags = swagger_dict.get("tags")
+    external_docs = swagger_dict.get("externalDocs")
 
     # Extract global content types and schemes
     consumes = None
-    if 'consumes' in swagger_dict and isinstance(swagger_dict['consumes'], list):
-        consumes = frozenset(swagger_dict['consumes'])
+    if "consumes" in swagger_dict and isinstance(swagger_dict["consumes"], list):
+        consumes = frozenset(swagger_dict["consumes"])
 
     produces = None
-    if 'produces' in swagger_dict and isinstance(swagger_dict['produces'], list):
-        produces = frozenset(swagger_dict['produces'])
+    if "produces" in swagger_dict and isinstance(swagger_dict["produces"], list):
+        produces = frozenset(swagger_dict["produces"])
 
     schemes = None
-    if 'schemes' in swagger_dict and isinstance(swagger_dict['schemes'], list):
-        schemes = frozenset(swagger_dict['schemes'])
+    if "schemes" in swagger_dict and isinstance(swagger_dict["schemes"], list):
+        schemes = frozenset(swagger_dict["schemes"])
 
     # Build canonical definitions
-    definitions_dict = swagger_dict.get('definitions', {})
+    definitions_dict = swagger_dict.get("definitions", {})
     definitions = {}
     for def_name, def_schema in definitions_dict.items():
         if isinstance(def_schema, dict):
-            definitions[def_name] = build_schema_from_dict(def_schema, definitions_dict, swagger_source)
+            definitions[def_name] = build_schema_from_dict(
+                def_schema, definitions_dict, swagger_source
+            )
 
     # Build global parameters
     parameters = None
-    parameters_dict = swagger_dict.get('parameters', {})
+    parameters_dict = swagger_dict.get("parameters", {})
     if parameters_dict:
         parameters = {}
         for param_name, param_def in parameters_dict.items():
             if isinstance(param_def, dict):
-                parameters[param_name] = build_parameter_from_dict(param_def, definitions_dict, swagger_source)
+                parameters[param_name] = build_parameter_from_dict(
+                    param_def, definitions_dict, swagger_source
+                )
+
+        # Store global parameters in definitions for reference resolution
+        definitions_dict["__global_parameters"] = parameters_dict
 
     # Build global responses
     responses = None
-    responses_dict = swagger_dict.get('responses', {})
+    responses_dict = swagger_dict.get("responses", {})
     if responses_dict:
         responses = {}
         for response_name, response_def in responses_dict.items():
             if isinstance(response_def, dict):
                 responses[response_name] = build_response_from_dict(
-                    response_def, definitions_dict,
+                    response_def,
+                    definitions_dict,
                     list(produces) if produces else None,
-                    swagger_source
+                    swagger_source,
                 )
 
     # Build canonical paths
     paths = {}
-    paths_dict = swagger_dict.get('paths', {})
+    paths_dict = swagger_dict.get("paths", {})
 
     for path_pattern, path_dict in paths_dict.items():
         if isinstance(path_dict, dict):
             operations = {}
 
             # HTTP methods
-            http_methods = ['get', 'post', 'put', 'delete', 'patch', 'head', 'options']
+            http_methods = ["get", "post", "put", "delete", "patch", "head", "options"]
             for method in http_methods:
                 if method in path_dict:
                     operation_dict = path_dict[method]
                     if isinstance(operation_dict, dict):
+                        # Pass definitions_dict which now includes __global_parameters
                         operations[method.upper()] = build_operation_from_dict(
                             operation_dict, definitions_dict, swagger_source
                         )
 
             if operations:
-                paths[path_pattern] = CanonicalPath(operations=operations, swagger_source=swagger_source)
+                paths[path_pattern] = CanonicalPath(
+                    operations=operations, swagger_source=swagger_source
+                )
 
     return CanonicalApi(
         paths=paths,
@@ -563,5 +643,5 @@ def build_canonical_api_from_swagger(swagger_dict: Dict[str, Any], swagger_sourc
         external_docs=external_docs,
         parameters=parameters,
         responses=responses,
-        swagger_source=swagger_source
+        swagger_source=swagger_source,
     )
