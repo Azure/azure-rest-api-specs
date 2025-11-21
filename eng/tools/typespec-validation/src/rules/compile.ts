@@ -2,7 +2,7 @@ import { filterAsync } from "@azure-tools/specs-shared/array";
 import { example, json } from "@azure-tools/specs-shared/changed-files";
 import { readFile } from "fs/promises";
 import { globby } from "globby";
-import { basename, dirname, join, posix, resolve, win32 } from "path";
+import { basename, dirname, join, posix, relative, resolve, win32 } from "path";
 import pc from "picocolors";
 import stripAnsi from "strip-ansi";
 import { RuleResult } from "../rule-result.js";
@@ -12,6 +12,25 @@ import { fileExists, getSuppressions, gitDiffTopSpecFolder, runNpm } from "../ut
 export class CompileRule implements Rule {
   readonly name = "Compile";
   readonly description = "Compile TypeSpec";
+
+  untilLastParentSegment(path: string, segment: string): string {
+    let current = resolve(path);
+
+    while (true) {
+      const parent = dirname(current);
+
+      if (basename(parent) === segment) {
+        // Found the target parent.  Return current.
+        return current;
+      } else if (parent === current) {
+        // Reached the filesystem root (folder not found).  Return empty string.
+        return "";
+      } else {
+        // Keep walking upward
+        current = parent;
+      }
+    }
+  }
 
   /**
    * @param folder absolute path to folder containing tspconfig.yaml
@@ -73,18 +92,38 @@ export class CompileRule implements Rule {
             .filter((s) => json(s) && !example(s));
 
           stdOutput += "\nGenerated Swaggers:\n";
-          stdOutput += outputSwaggers.join("\n") + "\n";
+          stdOutput += outputSwaggers.map((s) => relative("", s)).join("\n") + "\n";
 
           if (outputSwaggers.length === 0) {
             throw new Error("No generated swaggers found in output of 'tsp compile'");
           }
 
-          // ../resource-manager/Microsoft.Contoso
+          // /specs/specification/contosowidgetmanager/resource-manager/Microsoft.Contoso
           const outputFolder = dirname(dirname(dirname(outputSwaggers[0])));
-          const outputFilename = basename(outputSwaggers[0]);
-
           stdOutput += "\nOutput folder:\n";
-          stdOutput += outputFolder + "\n";
+          stdOutput += relative("", outputFolder) + "\n";
+
+          const structureVersion =
+            basename(dirname(folder)) === "data-plane" ||
+            basename(dirname(folder)) === "resource-manager" ||
+            basename(dirname(dirname(folder))) === "data-plane" ||
+            basename(dirname(dirname(folder))) === "resource-manager"
+              ? 2
+              : 1;
+
+          const allowedOutputFolder =
+            structureVersion === 2 ? folder : this.untilLastParentSegment(folder, "specification");
+
+          stdOutput += "\nAllowed output folder:\n";
+          stdOutput += relative("", allowedOutputFolder) + "\n";
+
+          if (!outputFolder.startsWith(allowedOutputFolder)) {
+            throw new Error(
+              `Output folder '${relative("", outputFolder)}' must be under path '${relative("", allowedOutputFolder)}'`,
+            );
+          }
+
+          const outputFilename = basename(outputSwaggers[0]);
 
           // Filter to only specs matching the folder and filename extracted from the first output-file.
           // Necessary to handle multi-project specs like keyvault.
@@ -110,7 +149,7 @@ export class CompileRule implements Rule {
           );
 
           stdOutput += `\nSwaggers matching output folder and filename:\n`;
-          stdOutput += tspGeneratedSwaggers.join("\n") + "\n";
+          stdOutput += tspGeneratedSwaggers.map((s) => relative("", s)).join("\n") + "\n";
 
           const suppressedSwaggers = await filterAsync(
             tspGeneratedSwaggers,
@@ -145,26 +184,26 @@ export class CompileRule implements Rule {
           );
 
           stdOutput += `\nSwaggers excluded via suppressions.yaml:\n`;
-          stdOutput += suppressedSwaggers.join("\n") + "\n";
+          stdOutput += suppressedSwaggers.map((s) => relative("", s)).join("\n") + "\n";
 
           const remainingSwaggers = tspGeneratedSwaggers.filter(
             (s) => !suppressedSwaggers.includes(s),
           );
 
           stdOutput += `\nRemaining swaggers:\n`;
-          stdOutput += remainingSwaggers.join("\n") + "\n";
+          stdOutput += remainingSwaggers.map((s) => relative("", s)).join("\n") + "\n";
 
           const extraSwaggers = remainingSwaggers.filter((s) => !outputSwaggers.includes(s));
 
           if (extraSwaggers.length > 0) {
             success = false;
             errorOutput += pc.red(
-              `\nOutput folder '${outputFolder}' appears to contain TypeSpec-generated ` +
+              `\nOutput folder '${relative("", outputFolder)}' appears to contain TypeSpec-generated ` +
                 `swagger files, not generated from the current TypeSpec sources. ` +
                 `Perhaps you deleted a version from your TypeSpec, but didn't delete ` +
                 `the associated swaggers?\n\n`,
             );
-            errorOutput += pc.red(extraSwaggers.join("\n") + "\n");
+            errorOutput += pc.red(extraSwaggers.map((s) => relative("", s)).join("\n") + "\n");
           }
         } else {
           success = false;
