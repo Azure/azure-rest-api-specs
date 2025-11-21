@@ -10,6 +10,7 @@ import {
   swagger,
 } from "../../shared/src/changed-files.js";
 import { Readme } from "../../shared/src/readme.js";
+import { Swagger } from "../../shared/src/swagger.js";
 import { CoreLogger } from "./core-logger.js";
 
 // Enable simple-git debug logging to improve console output
@@ -55,17 +56,15 @@ export default async function incrementalTypeSpec({ core }) {
       }
     }
 
-    let swaggerObj;
     try {
-      swaggerObj = JSON.parse(swaggerText);
+      const swagger = new Swagger(file, { content: swaggerText });
+      if (!(await swagger.getTypeSpecGenerated())) {
+        core.info(`File "${file}" does not contain "info.x-typespec-generated"`);
+        return false;
+      }
     } catch {
       // If swagger cannot be parsed as JSON, it's not "incremental typespec"
       core.info(`File "${file}" cannot be parsed as JSON`);
-      return false;
-    }
-
-    if (!swaggerObj["info"]?.["x-typespec-generated"]) {
-      core.info(`File "${file}" does not contain "info.x-typespec-generated"`);
       return false;
     }
   }
@@ -142,9 +141,9 @@ export default async function incrementalTypeSpec({ core }) {
     let containsTypeSpecGeneratedSwagger = false;
     // TODO: Add lint rule to prevent using "for...in" instead of "for...of"
     for (const file of specRmSwaggerFilesBaseBranch) {
-      const baseSwagger = await git.show([`HEAD^:${file}`]);
-      const baseSwaggerObj = JSON.parse(baseSwagger);
-      if (baseSwaggerObj["info"]?.["x-typespec-generated"]) {
+      const baseSwaggerContent = await git.show([`HEAD^:${file}`]);
+      const baseSwagger = new Swagger(file, { content: baseSwaggerContent });
+      if (await baseSwagger.getTypeSpecGenerated()) {
         core.info(
           `Spec folder '${changedSpecDir}' in base branch contains typespec-generated swagger: '${file}'`,
         );
