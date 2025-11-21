@@ -1,0 +1,21 @@
+{
+  "title": "Grant Copy Authorization",
+  "operationId": "ContentAnalyzers_GrantCopyAuthorization",
+  "parameters": {
+    "api-version": "2025-11-01",
+    "analyzerId": "sourceAnalyzer",
+    "body": {
+      "targetAzureResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.CognitiveServices/accounts/myResource",
+      "targetRegion": "westus2"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "source": "https://myendpoint.cognitiveservices.azure.com/contentunderstanding/analyzers/sourceAnalyzer",
+        "targetAzureResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.CognitiveServices/accounts/myResource",
+        "expiresAt": "2025-12-01T18:46:36.051Z"
+      }
+    }
+  }
+}
