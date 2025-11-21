@@ -186,22 +186,17 @@ model DeploymentStacksChangeBase<T> {
   /**
    * The predicted value before the deployment is executed.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "This represents a change for an arbitrary property. Additionally, the type could change between before and after."
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "This represents a change for an arbitrary property."
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Azure resources are too complex to model"
   before?: T;
 
   /**
    * The predicted value after the deployment is executed.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "This represents a change for an arbitrary property. Additionally, the type could change between before and after."
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "This represents a change for an arbitrary property."
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Azure resources are too complex to model"
   after?: T;
 }
-
-/**
- * Model for resource changes to show the before-and-after property values for resource properties.
- */
-model PropertyChangeBase is DeploymentStacksChangeBase<unknown>;
 
 /**
  * Model to show the before-and-after property values, along with the delta between them.
@@ -223,7 +218,7 @@ model DeploymentStacksChangeDelta<T> {
  * The predicted change to the resource property.
  */
 model DeploymentStacksWhatIfPropertyChange {
-  ...PropertyChangeBase;
+  ...DeploymentStacksChangeBase<unknown>;
 
   /**
    * Type of change that will be made to the resource when the deployment is executed.
