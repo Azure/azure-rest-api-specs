@@ -60,7 +60,7 @@ model DeploymentStacksWhatIfResultProperties {
    * The timestamp for when the deployment stack was last modified. This can be used to determine if the what-if data is still current.
    */
   @visibility(Lifecycle.Read)
-  deploymentStackLastModified: utcDateTime;
+  deploymentStackLastModified?: utcDateTime;
 
   /**
    * The interval to persist the deployment stack what-if result in ISO 8601 format.
