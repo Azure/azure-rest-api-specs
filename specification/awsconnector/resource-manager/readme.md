@@ -262,6 +262,7 @@ input-file:
   - Microsoft.AwsConnector/preview/2025-12-01-preview/bedrockBlueprint.json
   - Microsoft.AwsConnector/preview/2025-12-01-preview/bedrockDataAutomationProject.json
   - Microsoft.AwsConnector/preview/2025-12-01-preview/bedrockDataSource.json
+  - Microsoft.AwsConnector/preview/2025-12-01-preview/bedrockFlow.json
   - Microsoft.AwsConnector/preview/2025-12-01-preview/bedrockFlowAlias.json
   - Microsoft.AwsConnector/preview/2025-12-01-preview/bedrockGuardrail.json
   - Microsoft.AwsConnector/preview/2025-12-01-preview/bedrockKnowledgeBase.json
