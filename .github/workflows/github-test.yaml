@@ -21,7 +21,7 @@ jobs:
         folder: [.github, .github/shared]
         os: [ubuntu, windows]
 
-    runs-on: ${{ fromJSON('{"ubuntu":"ubuntu-slim", "windows":"windows-2022"}')[matrix.os] }}
+    runs-on: ${{ fromJSON('{"ubuntu":"ubuntu-24.04", "windows":"windows-2022"}')[matrix.os] }}
 
     defaults:
       run:
