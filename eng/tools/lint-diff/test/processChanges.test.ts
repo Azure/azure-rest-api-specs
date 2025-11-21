@@ -239,7 +239,7 @@ describe("buildState", () => {
   });
 
   test("does not throw if a file is missing", async () => {
-    await expect(() =>
+    await expect(
       buildState(
         ["specification/edit-in-place/data-plane/does-not-exist.json"],
         "test/fixtures/buildState/",
