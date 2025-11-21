@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "appliances",
-    "version": "2022-10-27",
+    "version": "2025-03-01-preview",
     "description": "The appliances Rest API spec.",
     "x-typespec-generated": [
       {
@@ -320,6 +320,9 @@
         "x-ms-examples": {
           "Create/Update Appliance": {
             "$ref": "./examples/AppliancesCreate_Update.json"
+          },
+          "Update Appliance Proxy Configuration": {
+            "$ref": "./examples/AppliancesUpdateProxy.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -649,6 +652,57 @@
         }
       }
     },
+    "DnsConfiguration": {
+      "type": "object",
+      "description": "Contains DNS information about the Appliance",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "Version of the DNS configuration."
+        }
+      }
+    },
+    "Event": {
+      "type": "object",
+      "description": "Event contains information about customer driven, platform driven, or unplanned events that occurred on the Appliance",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of event is used to classify how the event was initiated."
+        },
+        "code": {
+          "type": "string",
+          "description": "Code is used to break down the event further to identify why it occurred."
+        },
+        "status": {
+          "type": "string",
+          "description": "Status is used to represent the outcome of the event."
+        },
+        "message": {
+          "type": "string",
+          "description": "Message is intended to be actionable and should be used to inform the user of the event."
+        },
+        "severity": {
+          "type": "string",
+          "description": "Severity is the classification of the event to relay the importance of the event."
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp is the time the event occurred."
+        }
+      }
+    },
+    "GatewayConfiguration": {
+      "type": "object",
+      "description": "Contains Arc Gateway information about the Appliance",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "Version of the Arc Gateway configuration."
+        }
+      }
+    },
     "HybridConnectionConfig": {
       "type": "object",
       "description": "Contains the REP (rendezvous endpoint) and “Listener” access token from notification service (NS).",
@@ -696,6 +750,24 @@
         }
       }
     },
+    "NetworkProfile": {
+      "type": "object",
+      "description": "Contains network information about the Appliance",
+      "properties": {
+        "proxyConfiguration": {
+          "$ref": "#/definitions/ProxyConfiguration",
+          "description": "Contains proxy information about the Appliance"
+        },
+        "dnsConfiguration": {
+          "$ref": "#/definitions/DnsConfiguration",
+          "description": "Contains DNS information about the Appliance"
+        },
+        "gatewayConfiguration": {
+          "$ref": "#/definitions/GatewayConfiguration",
+          "description": "Contains Arc Gateway information about the Appliance"
+        }
+      }
+    },
     "Provider": {
       "type": "string",
       "description": "Information about the connected appliance.",
@@ -721,6 +793,16 @@
             "value": "SCVMM"
           }
         ]
+      }
+    },
+    "ProxyConfiguration": {
+      "type": "object",
+      "description": "Contains proxy information about the Appliance",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "Version of the proxy configuration."
+        }
       }
     },
     "ResourceIdentityType": {
@@ -813,7 +895,19 @@
         "UpgradeClusterExtensionFailedToDelete",
         "UpgradeFailed",
         "Offline",
-        "None"
+        "None",
+        "NetworkProxyUpdatePreparing",
+        "NetworkProxyUpdating",
+        "NetworkProxyUpdateComplete",
+        "NetworkProxyUpdateFailed",
+        "NetworkDNSUpdatePreparing",
+        "NetworkDNSUpdating",
+        "NetworkDNSUpdateComplete",
+        "NetworkDNSUpdateFailed",
+        "ArcGatewayUpdatePreparing",
+        "ArcGatewayUpdating",
+        "ArcGatewayUpdateComplete",
+        "ArcGatewayUpdateFailed"
       ],
       "x-ms-enum": {
         "name": "Status",
@@ -946,6 +1040,54 @@
           {
             "name": "None",
             "value": "None"
+          },
+          {
+            "name": "NetworkProxyUpdatePreparing",
+            "value": "NetworkProxyUpdatePreparing"
+          },
+          {
+            "name": "NetworkProxyUpdating",
+            "value": "NetworkProxyUpdating"
+          },
+          {
+            "name": "NetworkProxyUpdateComplete",
+            "value": "NetworkProxyUpdateComplete"
+          },
+          {
+            "name": "NetworkProxyUpdateFailed",
+            "value": "NetworkProxyUpdateFailed"
+          },
+          {
+            "name": "NetworkDNSUpdatePreparing",
+            "value": "NetworkDNSUpdatePreparing"
+          },
+          {
+            "name": "NetworkDNSUpdating",
+            "value": "NetworkDNSUpdating"
+          },
+          {
+            "name": "NetworkDNSUpdateComplete",
+            "value": "NetworkDNSUpdateComplete"
+          },
+          {
+            "name": "NetworkDNSUpdateFailed",
+            "value": "NetworkDNSUpdateFailed"
+          },
+          {
+            "name": "ArcGatewayUpdatePreparing",
+            "value": "ArcGatewayUpdatePreparing"
+          },
+          {
+            "name": "ArcGatewayUpdating",
+            "value": "ArcGatewayUpdating"
+          },
+          {
+            "name": "ArcGatewayUpdateComplete",
+            "value": "ArcGatewayUpdateComplete"
+          },
+          {
+            "name": "ArcGatewayUpdateFailed",
+            "value": "ArcGatewayUpdateFailed"
           }
         ]
       }
@@ -1300,6 +1442,19 @@
         "version": {
           "type": "string",
           "description": "Version of the Appliance"
+        },
+        "events": {
+          "type": "array",
+          "description": "A list of events that occurred on the Appliance to relay information to the user.",
+          "items": {
+            "$ref": "#/definitions/Event"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "networkProfile": {
+          "$ref": "#/definitions/NetworkProfile",
+          "description": "Contains network information about the Appliance"
         }
       }
     },
