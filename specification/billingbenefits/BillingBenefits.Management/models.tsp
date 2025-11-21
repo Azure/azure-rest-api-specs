@@ -3249,9 +3249,14 @@ model MaccValidateModel extends BenefitValidateModel {
 /**
  * Savings plan validate model
  */
-model SavingsPlanValidateModel extends BenefitValidateModel {
-  ...SavingsPlanOrderAliasModel;
+model SavingsPlanValidateModel extends SavingsPlanOrderAliasModel {
+  ...BenefitValidateModelProperties;
+}
 
+/**
+ * Benefit validate model properties for savings plan
+ */
+model BenefitValidateModelProperties extends BenefitValidateModel {
   /**
    * Type of benefit to validate. This is used to determine the model type for validation.
    */

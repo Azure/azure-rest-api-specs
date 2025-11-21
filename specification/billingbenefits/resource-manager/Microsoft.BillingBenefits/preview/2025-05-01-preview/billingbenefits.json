@@ -3877,10 +3877,6 @@
         }
       }
     },
-    "Azure.Core.armResourceType": {
-      "type": "string",
-      "description": "Represents an Azure Resource Type."
-    },
     "BenefitType": {
       "type": "string",
       "description": "Represents benefit model type for validation.",
@@ -3926,6 +3922,16 @@
       "required": [
         "benefitType"
       ]
+    },
+    "BenefitValidateModelProperties": {
+      "type": "object",
+      "description": "Benefit validate model properties for savings plan",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BenefitValidateModel"
+        }
+      ],
+      "x-ms-discriminator-value": "SavingsPlan"
     },
     "BenefitValidateRequest": {
       "type": "object",
@@ -7869,51 +7875,25 @@
       "type": "object",
       "description": "Savings plan validate model",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/SavingsPlanOrderAliasProperties",
-          "description": "Savings plan order alias properties",
-          "x-ms-client-flatten": true
-        },
-        "name": {
+        "benefitType": {
           "type": "string",
-          "description": "Name of the savings plan order alias",
-          "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
-        },
-        "sku": {
-          "$ref": "#/definitions/ResourceSku",
-          "description": "Savings plan SKU"
-        },
-        "kind": {
-          "type": "string",
-          "description": "Resource provider kind"
-        },
-        "id": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
-          "readOnly": true
-        },
-        "type": {
-          "$ref": "#/definitions/Azure.Core.armResourceType",
-          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
-          "readOnly": true
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/systemData",
-          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
-          "readOnly": true
+          "description": "Type of benefit to validate. This is used to determine the model type for validation.",
+          "enum": [
+            "SavingsPlan"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
         }
       },
       "required": [
-        "name",
-        "sku"
+        "benefitType"
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/BenefitValidateModel"
+          "$ref": "#/definitions/SavingsPlanOrderAliasModel"
         }
-      ],
-      "x-ms-discriminator-value": "SavingsPlan"
+      ]
     },
     "SavingsPlanValidateResponse": {
       "type": "object",
