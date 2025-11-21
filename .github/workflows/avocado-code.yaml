@@ -33,6 +33,10 @@ jobs:
         run: |
           set -x
 
+          printenv
+          ls $HOME/.local/bin
+          ls /home/runner/.local/bin
+
           AVOCADO_OUTPUT_FILE=$RUNNER_TEMP/avocado.ndjson
 
           echo "output-file=$AVOCADO_OUTPUT_FILE" >> "$GITHUB_OUTPUT"
