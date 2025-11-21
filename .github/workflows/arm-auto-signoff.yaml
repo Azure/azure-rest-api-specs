@@ -12,7 +12,11 @@ on:
       - unlabeled
   workflow_run:
     workflows:
-      ["ARM Incremental TypeSpec", "Swagger Avocado - Set Status", "Swagger LintDiff - Set Status"]
+      [
+        "ARM Incremental TypeSpec",
+        "Swagger Avocado - Set Status",
+        "Swagger LintDiff - Set Status",
+      ]
     types: [completed]
 
 permissions:
@@ -46,7 +50,7 @@ jobs:
         github.event.label.name == 'NotReadyForARMReview' ||
         github.event.label.name == 'SuppressionReviewRequired'))
 
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-slim
 
     steps:
       # *** IMPORTANT ***

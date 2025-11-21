@@ -36,7 +36,7 @@ jobs:
   run-summarize-checks:
     if: ${{ github.event_name == 'pull_request_target' || github.event.workflow_run.conclusion != 'skipped' }}
     name: "Summarize Checks"
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-slim
 
     steps:
       # *** IMPORTANT ***

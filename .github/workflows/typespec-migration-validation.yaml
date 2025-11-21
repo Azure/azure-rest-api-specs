@@ -11,7 +11,7 @@ jobs:
   typespec-migration-validation:
     name: TypeSpec Migration Validation
     if: contains(join(github.event.pull_request.labels.*.name, ','), 'typespec-conversion-w')
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-slim
 
     steps:
       - uses: actions/checkout@v4

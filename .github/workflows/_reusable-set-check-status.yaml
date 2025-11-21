@@ -37,7 +37,7 @@ jobs:
         ((github.event.action == 'labeled' || github.event.action == 'unlabeled') &&
          inputs.overriding_label && contains(inputs.overriding_label, github.event.label.name))))
 
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-slim
 
     steps:
       # *** IMPORTANT ***
