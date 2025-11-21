@@ -4,8 +4,8 @@ import "@typespec/versioning";
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 
-@versioned(Microsoft.Geneva.LogsManagement.Versions)
-namespace Microsoft.Geneva.LogsManagement;
+@versioned(Microsoft.Geneva.Logs.Versions)
+namespace Microsoft.Geneva.Logs;
 
 @doc("Supported versions.")
 enum Versions {

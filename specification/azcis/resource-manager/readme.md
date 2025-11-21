@@ -70,7 +70,7 @@ These settings apply only when `--tag=2025-11-04-preview` is specified on the co
 
 ```yaml $(tag) == '2025-11-04-preview'
 input-file:
-  - Microsoft.Geneva/LogsManagement/preview/2025-11-04-preview/genevaLogs.json
+  - Microsoft.Geneva/Logs/preview/2025-11-04-preview/genevaLogs.json
 ```
 
 ## Suppression
