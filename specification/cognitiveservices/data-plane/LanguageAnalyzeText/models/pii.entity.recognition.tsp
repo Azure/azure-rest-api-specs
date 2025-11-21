@@ -86,7 +86,7 @@ model ConfidenceScoreThresholdOverride {
   value: float32;
 
   /** The 2 letter ISO 639-1 language for which the override applies. If not specified, the override applies to all languages. */
-  language: string;
+  language?: string;
 }
 
 /** The entity synonyms used to enhance pii entity detection */
@@ -126,7 +126,7 @@ model BaseRedactionPolicy {
 
   /** (Optional) flag to indicate whether this redaction policy is the default policy to be applied when no specific policy is defined for a PII category. Only one policy can be marked as default. */
   @added(Versions.v2025_11_15_preview)
-  isDefaultPolicy?: boolean = false;
+  isDefault?: boolean = false;
 }
 
 /** Represents the policy of redacting with a redaction character */
