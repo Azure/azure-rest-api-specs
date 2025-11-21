@@ -88,8 +88,8 @@ namespace Quantum.Workspace.Services {
     Azure.Core.Foundations.ErrorResponse
   >;
 
-  /** Operation to cancel a resource. */
-  alias CancelOperation<Resource extends TypeSpec.Reflection.Model> = AzureCoreOperations.ResourceDelete<Resource>;
+  /** Operation to delete a resource. */
+  alias DeleteOperation<Resource extends TypeSpec.Reflection.Model> = AzureCoreOperations.ResourceDelete<Resource>;
 
   /** Operation to get a resource. */
   alias GetOperation<Resource extends TypeSpec.Reflection.Model> = AzureCoreOperations.ResourceRead<Resource>;
@@ -99,6 +99,27 @@ namespace Quantum.Workspace.Services {
     Resource = Resource,
     Parameters = {},
     Response = Resource
+  >;
+
+  /** Post resource operation to use with segment (/action) instead colon action pattern (:action). */
+  @post
+  op PostResourceOperation<Resource extends TypeSpec.Reflection.Model> is Azure.Core.Foundations.ResourceOperation<
+    Resource,
+    {
+      ...Azure.Core.Traits.Private.TraitProperties<
+        DefaultServiceTraits,
+        TraitLocation.Parameters,
+        TraitContext.Action
+      >;
+    },
+    Azure.Core.Foundations.ResourceOkResponse<Resource> &
+      Azure.Core.Traits.Private.TraitProperties<
+        DefaultServiceTraits,
+        TraitLocation.Response,
+        TraitContext.Action
+      >,
+    DefaultServiceTraits,
+    Azure.Core.Foundations.ErrorResponse
   >;
 
   /** Operation to list a resource. */
