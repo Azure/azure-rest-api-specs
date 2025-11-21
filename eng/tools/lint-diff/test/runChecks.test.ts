@@ -68,7 +68,7 @@ describe("runChecks", () => {
 
   test("error path populates error, stdout, stderr", async () => {
     // Consturct an error object that will return true when passed to isExecError
-    const err = new Error() as ExecError;
+    const err: ExecError = new Error();
     err.stdout = "s";
     err.stderr = "e";
     err.code = 1;
