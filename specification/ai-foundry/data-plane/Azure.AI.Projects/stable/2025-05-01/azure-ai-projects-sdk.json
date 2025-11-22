@@ -1056,6 +1056,138 @@
           }
         }
       }
+    },
+    "/redTeams/runs": {
+      "get": {
+        "operationId": "RedTeams_List",
+        "description": "List a redteam by name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedRedTeam"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/redTeams/runs/{name}": {
+      "get": {
+        "operationId": "RedTeams_Get",
+        "description": "Get a redteam by name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Identifier of the red team run.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RedTeam"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/redTeams/runs:run": {
+      "post": {
+        "operationId": "RedTeams_Create",
+        "description": "Creates a redteam run.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "RedTeam",
+            "in": "body",
+            "description": "Redteam to be run",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RedTeam"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/RedTeam"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1089,6 +1221,162 @@
       "required": [
         "blobReference"
       ]
+    },
+    "AttackStrategy": {
+      "type": "string",
+      "description": "Strategies for attacks.",
+      "enum": [
+        "easy",
+        "moderate",
+        "difficult",
+        "ascii_art",
+        "ascii_smuggler",
+        "atbash",
+        "base64",
+        "binary",
+        "caesar",
+        "character_space",
+        "jailbreak",
+        "ansii_attack",
+        "character_swap",
+        "suffix_append",
+        "string_join",
+        "unicode_confusable",
+        "unicode_substitution",
+        "diacritic",
+        "flip",
+        "leetspeak",
+        "rot13",
+        "morse",
+        "url",
+        "baseline"
+      ],
+      "x-ms-enum": {
+        "name": "AttackStrategy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Easy",
+            "value": "easy",
+            "description": "Represents a default set of easy complexity attacks. Easy complexity attacks require less effort, such as translation of a prompt into some encoding, and does not require any Large Language Model to convert or orchestrate."
+          },
+          {
+            "name": "Moderate",
+            "value": "moderate",
+            "description": "Represents a default set of moderate complexity attacks. Moderate complexity attacks require having access to resources such as another generative AI model."
+          },
+          {
+            "name": "Difficult",
+            "value": "difficult",
+            "description": "Represents a default set of difficult complexity attacks. Difficult complexity attacks include attacks that require access to significant resources and effort to execute an attack such as knowledge of search-based algorithms in addition to a generative AI model."
+          },
+          {
+            "name": "AsciiArt",
+            "value": "ascii_art",
+            "description": "Generates visual art using ASCII characters, often used for creative or obfuscation purposes."
+          },
+          {
+            "name": "AsciiSmuggler",
+            "value": "ascii_smuggler",
+            "description": "Conceals data within ASCII characters, making it harder to detect."
+          },
+          {
+            "name": "Atbash",
+            "value": "atbash",
+            "description": "Implements the Atbash cipher, a simple substitution cipher where each letter is mapped to its reverse."
+          },
+          {
+            "name": "Base64",
+            "value": "base64",
+            "description": "Encodes binary data into a text format using Base64, commonly used for data transmission."
+          },
+          {
+            "name": "Binary",
+            "value": "binary",
+            "description": "Converts text into binary code, representing data in a series of 0s and 1s."
+          },
+          {
+            "name": "Caesar",
+            "value": "caesar",
+            "description": "Applies the Caesar cipher, a substitution cipher that shifts characters by a fixed number of positions."
+          },
+          {
+            "name": "CharacterSpace",
+            "value": "character_space",
+            "description": "Alters text by adding spaces between characters, often used for obfuscation."
+          },
+          {
+            "name": "Jailbreak",
+            "value": "jailbreak",
+            "description": "Injects specially crafted prompts to bypass AI safeguards, known as User Injected Prompt Attacks (UPIA)."
+          },
+          {
+            "name": "AnsiiAttack",
+            "value": "ansii_attack",
+            "description": "Utilizes ANSI escape sequences to manipulate text appearance and behavior."
+          },
+          {
+            "name": "CharacterSwap",
+            "value": "character_swap",
+            "description": "Swaps characters within text to create variations or obfuscate the original content."
+          },
+          {
+            "name": "SuffixAppend",
+            "value": "suffix_append",
+            "description": "Appends an adversarial suffix to the prompt."
+          },
+          {
+            "name": "StringJoin",
+            "value": "string_join",
+            "description": "Joins multiple strings together, often used for concatenation or obfuscation."
+          },
+          {
+            "name": "UnicodeConfusable",
+            "value": "unicode_confusable",
+            "description": "Uses Unicode characters that look similar to standard characters, creating visual confusion."
+          },
+          {
+            "name": "UnicodeSubstitution",
+            "value": "unicode_substitution",
+            "description": "Substitutes standard characters with Unicode equivalents, often for obfuscation."
+          },
+          {
+            "name": "Diacritic",
+            "value": "diacritic",
+            "description": "Adds diacritical marks to characters, changing their appearance and sometimes their meaning."
+          },
+          {
+            "name": "Flip",
+            "value": "flip",
+            "description": "Flips characters from front to back, creating a mirrored effect."
+          },
+          {
+            "name": "Leetspeak",
+            "value": "leetspeak",
+            "description": "Transforms text into Leetspeak, a form of encoding that replaces letters with similar-looking numbers or symbols."
+          },
+          {
+            "name": "ROT13",
+            "value": "rot13",
+            "description": "Applies the ROT13 cipher, a simple substitution cipher that shifts characters by 13 positions."
+          },
+          {
+            "name": "Morse",
+            "value": "morse",
+            "description": "Encodes text into Morse code, using dots and dashes to represent characters."
+          },
+          {
+            "name": "Url",
+            "value": "url",
+            "description": "Encodes text into URL format."
+          },
+          {
+            "name": "Baseline",
+            "value": "baseline",
+            "description": "Represents the baseline direct adversarial probing, which is used by attack strategies as the attack objective."
+          }
+        ]
+      }
     },
     "Azure.Core.Foundations.Error": {
       "type": "object",
@@ -1186,6 +1474,25 @@
         }
       ],
       "x-ms-discriminator-value": "AzureSearch"
+    },
+    "AzureOpenAIModelConfiguration": {
+      "type": "object",
+      "description": "Azure OpenAI model configuration. The API version would be selected by the service for querying the model.",
+      "properties": {
+        "modelDeploymentName": {
+          "type": "string",
+          "description": "Deployment name for AOAI model. Example: gpt-4o if in AIServices or connection based `connection_name/deployment_name` (e.g. `my-aoai-connection/gpt-4o`)."
+        }
+      },
+      "required": [
+        "modelDeploymentName"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/TargetConfig"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureOpenAIModel"
     },
     "BaseCredentials": {
       "type": "object",
@@ -1949,6 +2256,27 @@
         "value"
       ]
     },
+    "PagedRedTeam": {
+      "type": "object",
+      "description": "Paged collection of RedTeam items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The RedTeam items on this page",
+          "items": {
+            "$ref": "#/definitions/RedTeam"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "PendingUploadRequest": {
       "type": "object",
       "description": "Represents a request for a pending upload.",
@@ -2008,6 +2336,113 @@
         "pendingUploadId",
         "pendingUploadType"
       ]
+    },
+    "RedTeam": {
+      "type": "object",
+      "description": "Red team details.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier of the red team run.",
+          "readOnly": true,
+          "x-ms-client-name": "name"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Name of the red-team run."
+        },
+        "numTurns": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of simulation rounds."
+        },
+        "attackStrategies": {
+          "type": "array",
+          "description": "List of attack strategies or nested lists of attack strategies.",
+          "items": {
+            "$ref": "#/definitions/AttackStrategy"
+          }
+        },
+        "simulationOnly": {
+          "type": "boolean",
+          "description": "Simulation-only or Simulation + Evaluation. Default false, if true the scan outputs conversation not evaluation result.",
+          "default": false
+        },
+        "riskCategories": {
+          "type": "array",
+          "description": "List of risk categories to generate attack objectives for.",
+          "items": {
+            "$ref": "#/definitions/RiskCategory"
+          }
+        },
+        "applicationScenario": {
+          "type": "string",
+          "description": "Application scenario for the red team operation, to generate scenario specific attacks."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Red team's tags. Unlike properties, tags are fully mutable.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "type": "object",
+          "description": "Red team's properties. Unlike tags, properties are add-only. Once added, a property cannot be removed.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the red-team. It is set by service and is read-only.",
+          "readOnly": true
+        },
+        "target": {
+          "$ref": "#/definitions/TargetConfig",
+          "description": "Target configuration for the red-team run."
+        }
+      },
+      "required": [
+        "id",
+        "target"
+      ]
+    },
+    "RiskCategory": {
+      "type": "string",
+      "description": "Risk category for the attack objective.",
+      "enum": [
+        "HateUnfairness",
+        "Violence",
+        "Sexual",
+        "SelfHarm"
+      ],
+      "x-ms-enum": {
+        "name": "RiskCategory",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "HateUnfairness",
+            "value": "HateUnfairness",
+            "description": "Represents content related to hate or unfairness."
+          },
+          {
+            "name": "Violence",
+            "value": "Violence",
+            "description": "Represents content related to violence."
+          },
+          {
+            "name": "Sexual",
+            "value": "Sexual",
+            "description": "Represents content of a sexual nature."
+          },
+          {
+            "name": "SelfHarm",
+            "value": "SelfHarm",
+            "description": "Represents content related to self-harm."
+          }
+        ]
+      }
     },
     "SASCredentials": {
       "type": "object",
@@ -2085,6 +2520,20 @@
         "name",
         "size",
         "tier"
+      ]
+    },
+    "TargetConfig": {
+      "type": "object",
+      "description": "Abstract class for target configuration.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of the model configuration."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
       ]
     }
   },

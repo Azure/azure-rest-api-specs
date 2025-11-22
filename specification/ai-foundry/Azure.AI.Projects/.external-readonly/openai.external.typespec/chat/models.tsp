@@ -931,8 +931,9 @@ model CreateChatCompletionRequest {
   Determinism is not guaranteed, and you should refer to the `system_fingerprint` response parameter to monitor changes in the backend.*/
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
-  @maxValue(9223372036854776000)
-  @minValue(-9223372036854776000)
+  // FIXME: these values cause this error: error unassignable: Type '-9223372036854776000' is not assignable to type 'OpenAI.integer | null'
+  // @maxValue(9223372036854776000)
+  // @minValue(-9223372036854776000)
   @extension("x-oaiMeta", #{ beta: true })
   seed?: integer | null;
 
