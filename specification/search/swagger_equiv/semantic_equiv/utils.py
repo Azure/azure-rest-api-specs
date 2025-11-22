@@ -1507,7 +1507,26 @@ def write_diffs_excel_v2(result, output_path: str) -> None:
         context = diff.context or ""
         message = diff.message
 
-        row = {"Diff Type": diff_type, "Context": context, "Message": message}
+        # Parse structured context into separate components
+        if "||" in context:
+            # Structured context: operation_id||path_method||suffix
+            context_parts = context.split("||")
+            operation_id = context_parts[0] if len(context_parts) > 0 else ""
+            path_method = context_parts[1] if len(context_parts) > 1 else ""
+            context_suffix = context_parts[2] if len(context_parts) > 2 else ""
+        else:
+            # Legacy context format
+            operation_id = ""
+            path_method = context
+            context_suffix = ""
+
+        row = {
+            "Diff Type": diff_type,
+            "OperationID": operation_id,
+            "Path-Method": path_method,
+            "Context Suffix": context_suffix,
+            "Message": message,
+        }
 
         # Categorize by difference type
         if "path" in diff_type.lower():
@@ -1565,6 +1584,14 @@ def write_diffs_excel_v2(result, output_path: str) -> None:
                         "Category": category,
                         "Total Diff": len(diffs),
                         "Diff Types (Count)": diff_types_str,
+                    }
+                )
+            else:
+                summary_data.append(
+                    {
+                        "Category": category,
+                        "Total Diff": 0,
+                        "Diff Types (Count)": "",
                     }
                 )
 

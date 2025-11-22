@@ -46,6 +46,7 @@ class DifferenceType(Enum):
     MISSING_PARAMETER = "missing_parameter"
     EXTRA_PARAMETER = "extra_parameter"
     PARAMETER_MISMATCH = "parameter_mismatch"
+    PARAMETER_MISMATCH_NAME_CASE = "parameter_mismatch_name_case"
     REQUEST_BODY_MISMATCH = "request_body_mismatch"
     CONSUMES_MISMATCH = "consumes_mismatch"
     PRODUCES_MISMATCH = "produces_mismatch"
@@ -306,7 +307,10 @@ class ApiComparator:
         for (path, method), op1 in ops1_by_path_method.items():
             if (path, method) in ops2_by_path_method:
                 op2 = ops2_by_path_method[(path, method)]
-                context = f"{path} {method}"
+                # Build structured context with operation_id, path+method, suffix
+                operation_id = op1.operation_id or op2.operation_id or "<unknown>"
+                path_method = f"{path} {method}"
+                context = f"{operation_id}||{path_method}||"
 
                 self._compare_operation(
                     op1, op2, context, api1.swagger_source, api2.swagger_source
@@ -330,17 +334,28 @@ class ApiComparator:
             source1: Swagger Source identifier for first operation
             source2: Swagger Source identifier for second operation
         """
+        # Extract context components
+        context_parts = (
+            context.split("||") if "||" in context else ["<unknown>", context, ""]
+        )
+        operation_id, path_method, _ = (
+            context_parts[0],
+            context_parts[1],
+            context_parts[2],
+        )
+
         # 3.2.1 operationId - must match exactly
         if op1.operation_id != op2.operation_id:
+            mismatch_context = f"{operation_id}||{path_method}||operation_id_mismatch"
             self.differences.append(
                 Difference(
                     type=DifferenceType.OPERATION_ID_MISMATCH,
                     message=f"Operation ID mismatch: {source1} {op1.operation_id} vs {source2} {op2.operation_id}",
-                    context=context,
+                    context=mismatch_context,
                 )
             )
             print(
-                f"Operation ID mismatch\t {context}\t {source1} {op1.operation_id} vs {source2} {op2.operation_id}"
+                f"Operation ID mismatch\t {mismatch_context}\t {source1} {op1.operation_id} vs {source2} {op2.operation_id}"
             )
 
         # 3.2.2 Parameters - keyed by (in, name)
@@ -350,26 +365,30 @@ class ApiComparator:
 
         # 3.2.3 Request Body
         if not self._schemas_equal(op1.request_body_schema, op2.request_body_schema):
+            body_context = f"{operation_id}||{path_method}||request_body_mismatch"
             self.differences.append(
                 Difference(
                     type=DifferenceType.REQUEST_BODY_MISMATCH,
-                    message=f"Request body schemas mismatch",
-                    context=context,
+                    message="Request body schemas mismatch",
+                    context=body_context,
                 )
             )
-            print(f"Request body schemas mismatch\t {context}\t {source1} vs {source2}")
+            print(
+                f"Request body schemas mismatch\t {body_context}\t {source1} vs {source2}"
+            )
 
         # Content types for request
         if op1.consumes != op2.consumes:
+            consumes_context = f"{operation_id}||{path_method}||consumes_mismatch"
             self.differences.append(
                 Difference(
                     type=DifferenceType.CONSUMES_MISMATCH,
                     message=f"Request content types mismatch: {source1} {op1.consumes} vs {source2} {op2.consumes}",
-                    context=context,
+                    context=consumes_context,
                 )
             )
             print(
-                f"Request content types mismatch\t {context}\t {source1} {op1.consumes} vs {source2} {op2.consumes}"
+                f"Request content types mismatch\t {consumes_context}\t {source1} {op1.consumes} vs {source2} {op2.consumes}"
             )
 
         # 3.2.4 Responses
@@ -377,15 +396,16 @@ class ApiComparator:
 
         # Content types for responses
         if op1.produces != op2.produces:
+            produces_context = f"{operation_id}||{path_method}||produces_mismatch"
             self.differences.append(
                 Difference(
                     type=DifferenceType.PRODUCES_MISMATCH,
                     message=f"Response content types mismatch: {source1} {op1.produces} vs {source2} {op2.produces}",
-                    context=context,
+                    context=produces_context,
                 )
             )
             print(
-                f"Response content types mismatch\t {context}\t {source1} {op1.produces} vs {source2} {op2.produces}"
+                f"Response content types mismatch\t {produces_context}\t {source1} {op1.produces} vs {source2} {op2.produces}"
             )
 
     def _compare_parameters(
@@ -407,30 +427,92 @@ class ApiComparator:
         missing_keys = keys1 - keys2
         extra_keys = keys2 - keys1
 
-        for key in missing_keys:
+        # Extract context components
+        context_parts = (
+            context.split("||") if "||" in context else ["<unknown>", context, ""]
+        )
+        operation_id, path_method = context_parts[0], context_parts[1]
+
+        # Check for case mismatches in parameter names
+        case_mismatches = self._find_parameter_name_case_mismatches(
+            missing_keys, extra_keys, params1, params2
+        )
+
+        # Find potential fuzzy matches for missing/extra parameters
+        param_matches = self._find_parameter_matches(
+            missing_keys, extra_keys, params1, params2
+        )
+
+        # Filter out case mismatches from missing/extra keys
+        filtered_missing_keys = missing_keys.copy()
+        filtered_extra_keys = extra_keys.copy()
+
+        for missing_key, extra_key in case_mismatches:
+            filtered_missing_keys.discard(missing_key)
+            filtered_extra_keys.discard(extra_key)
+            # Report as case mismatch instead of missing/extra
+            param1 = params1[missing_key]
+            param2 = params2[extra_key]
+            param_context = (
+                f"{operation_id}||{path_method}||{param1.name}, {param1.location.value}"
+            )
+            self.differences.append(
+                Difference(
+                    type=DifferenceType.PARAMETER_MISMATCH_NAME_CASE,
+                    message=f"Parameter name case mismatch: {source1} '{param1.name}' vs {source2} '{param2.name}'",
+                    context=param_context,
+                )
+            )
+            print(
+                f"Parameter name case mismatch\t {param_context}\t {source1} '{param1.name}' vs {source2} '{param2.name}'"
+            )
+
+        for key in filtered_missing_keys:
             param = params1[key]
+            param_context = (
+                f"{operation_id}||{path_method}||{param.name}, {param.location.value}"
+            )
+
+            # Check if this missing parameter has a potential match
+            matches = [match for match in param_matches if match[0] == key]
+            possible_match = (
+                f"Possible Match: {matches[0][1]}" if matches else "Possible Match: "
+            )
+
             self.differences.append(
                 Difference(
                     type=DifferenceType.MISSING_PARAMETER,
-                    message=f"Parameter missing in {source2}: {param.name}, {param.location.value}",
-                    context=context,
+                    message=f"Parameter missing in {source2}: {param.name}, {param.location.value}. {possible_match}",
+                    context=param_context,
                 )
             )
             print(
-                f"Missing parameter in {source2}\t {context}\t {param.name}, {param.location.value}"
+                f"Missing parameter in {source2}\t {param_context}\t {param.name}, {param.location.value}. {possible_match}"
             )
 
-        for key in extra_keys:
+        for key in filtered_extra_keys:
             param = params2[key]
+            param_context = (
+                f"{operation_id}||{path_method}||{param.name}, {param.location.value}"
+            )
+
+            # Check if this extra parameter has a potential match
+            matches = [match for match in param_matches if match[1] == param.name]
+            possible_match = (
+                f"Possible Match: {matches[0][0][1] if matches and len(matches[0]) > 0 else ''}"
+                if matches
+                else "Possible Match: "
+            )
+
             self.differences.append(
                 Difference(
                     type=DifferenceType.EXTRA_PARAMETER,
-                    message=f"Extra parameter in {source2}: {param.name}, {param.location.value}",
-                    context=context,
+                    message=f"Extra parameter in {source2}: {param.name}, {param.location.value}. {possible_match}",
+                    context=param_context,
                 )
             )
             print(
-                f"Extra parameter in {source2}\t {context}\t {param.name}, {param.location.value}"
+                f"Extra parameter in {source2}\t {param_context}\t {param.name}, {param.location.value}. {possible_match}"
             )
 
         # Compare common parameters
@@ -449,7 +531,14 @@ class ApiComparator:
         source2: str,
     ) -> None:
         """Compare two parameters according to equiv_contract.md section 3.2.2."""
-        param_context = f"{context} param:{param1.name}"
+        # Extract context components
+        context_parts = (
+            context.split("||") if "||" in context else ["<unknown>", context, ""]
+        )
+        operation_id, path_method = context_parts[0], context_parts[1]
+        param_context = (
+            f"{operation_id}||{path_method}||{param1.name}, {param1.location.value}"
+        )
 
         # Basic fields must match
         if param1.required != param2.required:
@@ -467,15 +556,23 @@ class ApiComparator:
         # For body parameters, compare schemas
         if param1.location == ParameterLocation.BODY:
             if not self._schemas_equal(param1.schema, param2.schema):
+                # Get detailed schema differences
+                schema_diffs = self._get_schema_differences(
+                    param1.schema, param2.schema
+                )
+                diff_details = (
+                    "; ".join(schema_diffs) if schema_diffs else "unknown differences"
+                )
+
                 self.differences.append(
                     Difference(
                         type=DifferenceType.PARAMETER_MISMATCH,
-                        message=f"Body parameter schemas mismatch",
+                        message=f"Body parameter schemas mismatch: {diff_details}",
                         context=param_context,
                     )
                 )
                 print(
-                    f"Body parameter schemas mismatch\t {param_context}\t {source1} vs {source2}"
+                    f"Body parameter schemas mismatch\t {param_context}\t {diff_details}"
                 )
         else:
             # For non-body parameters, compare type, format, constraints
@@ -504,15 +601,25 @@ class ApiComparator:
                 )
 
             if not self._constraints_equal(param1.constraints, param2.constraints):
+                # Get detailed constraint differences
+                constraint_diffs = self._get_constraint_differences(
+                    param1.constraints, param2.constraints
+                )
+                diff_details = (
+                    "; ".join(constraint_diffs)
+                    if constraint_diffs
+                    else "unknown differences"
+                )
+
                 self.differences.append(
                     Difference(
                         type=DifferenceType.PARAMETER_MISMATCH,
-                        message=f"Parameter constraints mismatch",
+                        message=f"Parameter constraints mismatch: {diff_details}",
                         context=param_context,
                     )
                 )
                 print(
-                    f"Parameter constraints mismatch\t {param_context}\t {source1} vs {source2}"
+                    f"Parameter constraints mismatch\t {param_context}\t {diff_details}"
                 )
 
     def _compare_responses(
@@ -534,33 +641,58 @@ class ApiComparator:
         missing_codes = status_codes1 - status_codes2
         extra_codes = status_codes2 - status_codes1
 
+        # Find potential matches between missing and extra response codes
+        response_matches = self._find_response_matches(missing_codes, extra_codes)
+
         for code in missing_codes:
+            # Check if this missing response has a potential match
+            matches = [match for match in response_matches if match[0] == code]
+            possible_match = (
+                f"Possible Match: {matches[0][1]}" if matches else "Possible Match: "
+            )
+
             self.differences.append(
                 Difference(
                     type=DifferenceType.MISSING_RESPONSE,
-                    message=f"Response status code missing in {source1}: {code}",
+                    message=f"Response status code missing in {source1}: {code}. {possible_match}",
                     context=context,
                 )
             )
-            print(f"Response status code missing\t {context}\t {source1}: {code}")
+            print(
+                f"Response status code missing\t {context}\t {source1}: {code}. {possible_match}"
+            )
 
         for code in extra_codes:
+            # Check if this extra response has a potential match
+            matches = [match for match in response_matches if match[1] == code]
+            possible_match = (
+                f"Possible Match: {matches[0][0]}" if matches else "Possible Match: "
+            )
+
             self.differences.append(
                 Difference(
                     type=DifferenceType.EXTRA_RESPONSE,
-                    message=f"Extra response status code in {source2}: {code}",
+                    message=f"Extra response status code in {source2}: {code}. {possible_match}",
                     context=context,
                 )
             )
-            print(f"Extra response status code in {source2} \t {context}\t {code}")
+            print(
+                f"Extra response status code in {source2} \t {context}\t {code}. {possible_match}"
+            )
 
         # Compare common responses
         common_codes = status_codes1 & status_codes2
         for code in common_codes:
             response1 = responses1[code]
             response2 = responses2[code]
+            # Extract context components for structured format
+            context_parts = (
+                context.split("||") if "||" in context else ["<unknown>", context, ""]
+            )
+            operation_id, path_method = context_parts[0], context_parts[1]
+            response_context = f"{operation_id}||{path_method}||{code}"
             self._compare_response(
-                response1, response2, f"{context} {code}", source1, source2
+                response1, response2, response_context, source1, source2
             )
 
     def _compare_response(
@@ -575,25 +707,60 @@ class ApiComparator:
 
         # Response schemas must match
         if not self._schemas_equal(resp1.schema, resp2.schema):
+            # Get detailed schema differences
+            schema_diffs = self._get_schema_differences(resp1.schema, resp2.schema)
+
+            # Check for ErrorResponse ref path differences
+            message = "Response schemas mismatch"
+            if (
+                context.endswith("||default")
+                and resp1.schema
+                and resp2.schema
+                and resp1.schema.ref
+                and resp2.schema.ref
+            ):
+                ref1 = resp1.schema.ref
+                ref2 = resp2.schema.ref
+                # Check if both refs point to ErrorResponse but with different paths
+                if (
+                    ref1.endswith("/definitions/ErrorResponse")
+                    and ref2.endswith("/definitions/ErrorResponse")
+                    and ref1 != ref2
+                ):
+                    message = "Response schemas mismatch on ref path of /definitions/ErrorResponse"
+
+            # Add detailed differences to message if available
+            if schema_diffs:
+                diff_details = "; ".join(schema_diffs)
+                message = f"{message}: {diff_details}"
+
             self.differences.append(
                 Difference(
                     type=DifferenceType.RESPONSE_SCHEMA_MISMATCH,
-                    message="Response schemas mismatch",
+                    message=message,
                     context=context,
                 )
             )
-            print(f"Response schemas mismatch \t {context}\t ")
+            print(
+                f"Response schemas mismatch \t {context}\t {'; '.join(schema_diffs) if schema_diffs else 'unknown differences'}"
+            )
 
         # Response headers must match
         if not self._headers_equal(resp1.headers, resp2.headers):
+            # Get detailed header differences
+            header_diffs = self._get_header_differences(resp1.headers, resp2.headers)
+            diff_details = (
+                "; ".join(header_diffs) if header_diffs else "unknown differences"
+            )
+
             self.differences.append(
                 Difference(
                     type=DifferenceType.RESPONSE_HEADERS_MISMATCH,
-                    message="Response headers mismatch",
+                    message=f"Response headers mismatch: {diff_details}",
                     context=context,
                 )
             )
-            print(f"Response headers mismatch \t {context}\t ")
+            print(f"Response headers mismatch \t {context}\t {diff_details}")
         # Content types must match
         if resp1.content_types != resp2.content_types:
             self.differences.append(
@@ -658,14 +825,128 @@ class ApiComparator:
             schema1 = api1.definitions[def_name]
             schema2 = api2.definitions[def_name]
             if not self._schemas_equal(schema1, schema2):
+                # Get detailed schema differences
+                schema_diffs = self._get_schema_differences(schema1, schema2)
+                diff_details = (
+                    "; ".join(schema_diffs) if schema_diffs else "unknown differences"
+                )
+
                 self.differences.append(
                     Difference(
                         type=DifferenceType.DEFINITION_MISMATCH,
-                        message=f"Definition schemas mismatch: {def_name}",
+                        message=f"Definition schemas mismatch: {def_name} - {diff_details}",
                         context=def_name,
                     )
                 )
-                print(f"Definition schemas mismatch \t {def_name}")
+                print(f"Definition schemas mismatch \t {def_name} \t {diff_details}")
+
+    def _get_schema_differences(
+        self, schema1: Optional[CanonicalSchema], schema2: Optional[CanonicalSchema]
+    ) -> List[str]:
+        """Get list of specific schema differences."""
+        if schema1 is None and schema2 is None:
+            return []
+        if schema1 is None:
+            return ["schema missing in first spec"]
+        if schema2 is None:
+            return ["schema missing in second spec"]
+
+        differences = []
+
+        # Core schema fields
+        if schema1.type != schema2.type:
+            differences.append(f"type: {schema1.type} vs {schema2.type}")
+        if schema1.format != schema2.format:
+            differences.append(f"format: {schema1.format} vs {schema2.format}")
+        if schema1.ref != schema2.ref:
+            differences.append(f"ref: {schema1.ref} vs {schema2.ref}")
+
+        # Object schema differences
+        if not self._object_schemas_equal(schema1, schema2):
+            props1 = schema1.properties or {}
+            props2 = schema2.properties or {}
+            if set(props1.keys()) != set(props2.keys()):
+                missing_props = set(props1.keys()) - set(props2.keys())
+                extra_props = set(props2.keys()) - set(props1.keys())
+                if missing_props:
+                    differences.append(
+                        f"missing properties: {', '.join(missing_props)}"
+                    )
+                if extra_props:
+                    differences.append(f"extra properties: {', '.join(extra_props)}")
+
+            if schema1.required != schema2.required:
+                req1 = schema1.required or frozenset()
+                req2 = schema2.required or frozenset()
+                differences.append(f"required fields: {sorted(req1)} vs {sorted(req2)}")
+
+            if schema1.additional_properties != schema2.additional_properties:
+                differences.append(
+                    f"additionalProperties: {schema1.additional_properties} vs {schema2.additional_properties}"
+                )
+
+        # Array schema differences
+        if not self._array_schemas_equal(schema1, schema2):
+            if (schema1.items is None) != (schema2.items is None):
+                differences.append(
+                    f"items schema: {schema1.items is not None} vs {schema2.items is not None}"
+                )
+
+        # Constraint differences
+        if not self._constraints_equal(schema1.constraints, schema2.constraints):
+            constraint_diffs = self._get_constraint_differences(
+                schema1.constraints, schema2.constraints
+            )
+            differences.extend([f"constraint {diff}" for diff in constraint_diffs])
+
+        # Composed schema differences
+        if not self._composed_schemas_equal(schema1, schema2):
+            if (schema1.all_of is None) != (schema2.all_of is None):
+                differences.append(
+                    f"allOf: {schema1.all_of is not None} vs {schema2.all_of is not None}"
+                )
+            if (schema1.one_of is None) != (schema2.one_of is None):
+                differences.append(
+                    f"oneOf: {schema1.one_of is not None} vs {schema2.one_of is not None}"
+                )
+            if (schema1.any_of is None) != (schema2.any_of is None):
+                differences.append(
+                    f"anyOf: {schema1.any_of is not None} vs {schema2.any_of is not None}"
+                )
+
+        return differences
+
+    def _get_header_differences(
+        self, headers1: Optional[Dict], headers2: Optional[Dict]
+    ) -> List[str]:
+        """Get list of specific header differences."""
+        headers1 = headers1 or {}
+        headers2 = headers2 or {}
+
+        differences = []
+
+        # Check for missing/extra headers
+        missing_headers = set(headers1.keys()) - set(headers2.keys())
+        extra_headers = set(headers2.keys()) - set(headers1.keys())
+
+        if missing_headers:
+            differences.append(f"missing headers: {', '.join(sorted(missing_headers))}")
+        if extra_headers:
+            differences.append(f"extra headers: {', '.join(sorted(extra_headers))}")
+
+        # Check for schema differences in common headers
+        common_headers = set(headers1.keys()) & set(headers2.keys())
+        for header_name in common_headers:
+            if not self._schemas_equal(headers1[header_name], headers2[header_name]):
+                schema_diffs = self._get_schema_differences(
+                    headers1[header_name], headers2[header_name]
+                )
+                if schema_diffs:
+                    differences.append(
+                        f"header '{header_name}' schema: {'; '.join(schema_diffs)}"
+                    )
+
+        return differences
 
     def _schemas_equal(
         self, schema1: Optional[CanonicalSchema], schema2: Optional[CanonicalSchema]
@@ -788,6 +1069,77 @@ class ApiComparator:
             and constraints1.default == constraints2.default
         )
 
+    def _get_constraint_differences(
+        self,
+        constraints1: Optional[CanonicalConstraints],
+        constraints2: Optional[CanonicalConstraints],
+    ) -> List[str]:
+        """Get list of specific constraint differences."""
+        if constraints1 is None and constraints2 is None:
+            return []
+        if constraints1 is None:
+            return ["constraints missing in first spec"]
+        if constraints2 is None:
+            return ["constraints missing in second spec"]
+
+        differences = []
+
+        if constraints1.minimum != constraints2.minimum:
+            differences.append(
+                f"minimum: {constraints1.minimum} vs {constraints2.minimum}"
+            )
+        if constraints1.maximum != constraints2.maximum:
+            differences.append(
+                f"maximum: {constraints1.maximum} vs {constraints2.maximum}"
+            )
+        if constraints1.exclusive_minimum != constraints2.exclusive_minimum:
+            differences.append(
+                f"exclusive_minimum: {constraints1.exclusive_minimum} vs {constraints2.exclusive_minimum}"
+            )
+        if constraints1.exclusive_maximum != constraints2.exclusive_maximum:
+            differences.append(
+                f"exclusive_maximum: {constraints1.exclusive_maximum} vs {constraints2.exclusive_maximum}"
+            )
+        if constraints1.min_length != constraints2.min_length:
+            differences.append(
+                f"min_length: {constraints1.min_length} vs {constraints2.min_length}"
+            )
+        if constraints1.max_length != constraints2.max_length:
+            differences.append(
+                f"max_length: {constraints1.max_length} vs {constraints2.max_length}"
+            )
+        if constraints1.pattern != constraints2.pattern:
+            differences.append(
+                f"pattern: '{constraints1.pattern}' vs '{constraints2.pattern}'"
+            )
+        if constraints1.min_items != constraints2.min_items:
+            differences.append(
+                f"min_items: {constraints1.min_items} vs {constraints2.min_items}"
+            )
+        if constraints1.max_items != constraints2.max_items:
+            differences.append(
+                f"max_items: {constraints1.max_items} vs {constraints2.max_items}"
+            )
+        if constraints1.unique_items != constraints2.unique_items:
+            differences.append(
+                f"unique_items: {constraints1.unique_items} vs {constraints2.unique_items}"
+            )
+        if constraints1.enum != constraints2.enum:
+            # Show enum differences in a more readable way
+            enum1_str = (
+                ", ".join(sorted(constraints1.enum)) if constraints1.enum else "None"
+            )
+            enum2_str = (
+                ", ".join(sorted(constraints2.enum)) if constraints2.enum else "None"
+            )
+            differences.append(f"enum: [{enum1_str}] vs [{enum2_str}]")
+        if constraints1.default != constraints2.default:
+            differences.append(
+                f"default: {constraints1.default} vs {constraints2.default}"
+            )
+
+        return differences
+
     def _composed_schemas_equal(
         self, schema1: CanonicalSchema, schema2: CanonicalSchema
     ) -> bool:
@@ -852,25 +1204,50 @@ class ApiComparator:
         missing_params = param_names1 - param_names2
         extra_params = param_names2 - param_names1
 
+        # Find potential fuzzy matches for global parameters
+        global_param_matches = self._find_string_matches(
+            missing_params, extra_params, threshold=0.6
+        )
+
         for param_name in missing_params:
+            # Check if this missing parameter has a potential match
+            matches = [
+                match for match in global_param_matches if match[0] == param_name
+            ]
+            possible_match = (
+                f"Possible Match: {matches[0][1]}" if matches else "Possible Match: "
+            )
+
             self.differences.append(
                 Difference(
                     type=DifferenceType.MISSING_GLOBAL_PARAMETER,
-                    message=f"Global parameter missing in {api2.swagger_source}: {param_name}",
-                    context=f"global_parameter:{param_name}",
+                    message=f"Global parameter missing in {api2.swagger_source}: {param_name}. {possible_match}",
+                    context=param_name,
                 )
             )
-            print(f"Global parameter missing in {api2.swagger_source}\t {param_name}")
+            print(
+                f"Global parameter missing in {api2.swagger_source}\t {param_name}. {possible_match}"
+            )
 
         for param_name in extra_params:
+            # Check if this extra parameter has a potential match
+            matches = [
+                match for match in global_param_matches if match[1] == param_name
+            ]
+            possible_match = (
+                f"Possible Match: {matches[0][0]}" if matches else "Possible Match: "
+            )
+
             self.differences.append(
                 Difference(
                     type=DifferenceType.EXTRA_GLOBAL_PARAMETER,
-                    message=f"Extra global parameter in {api2.swagger_source}: {param_name}",
-                    context=f"global_parameter:{param_name}",
+                    message=f"Extra global parameter in {api2.swagger_source}: {param_name}. {possible_match}",
+                    context=param_name,
                 )
             )
-            print(f"Extra global parameter in {api2.swagger_source}\t {param_name}")
+            print(
+                f"Extra global parameter in {api2.swagger_source}\t {param_name}. {possible_match}"
+            )
 
         # Compare common global parameters
         common_params = param_names1 & param_names2
@@ -896,7 +1273,7 @@ class ApiComparator:
                 Difference(
                     type=DifferenceType.MISSING_GLOBAL_RESPONSE,
                     message=f"Global response missing in {api2.swagger_source}: {response_name}",
-                    context=f"global_response:{response_name}",
+                    context=f"global_response: {response_name}",
                 )
             )
             print(f"Global response missing in {api2.swagger_source}\t {response_name}")
@@ -906,7 +1283,7 @@ class ApiComparator:
                 Difference(
                     type=DifferenceType.EXTRA_GLOBAL_RESPONSE,
                     message=f"Extra global response in {api2.swagger_source}: {response_name}",
-                    context=f"global_response:{response_name}",
+                    context=f"global_response: {response_name}",
                 )
             )
             print(f"Extra global response in {api2.swagger_source}\t {response_name}")
@@ -917,7 +1294,7 @@ class ApiComparator:
             response1 = responses1[response_name]
             response2 = responses2[response_name]
             self._compare_response(
-                response1, response2, f"global_response:{response_name}"
+                response1, response2, f"global_response: {response_name}"
             )
 
     def _compare_global_configuration(
@@ -1041,6 +1418,92 @@ class ApiComparator:
             )
             print("Security requirements mismatch")
 
+    def _find_string_matches(self, missing_items, extra_items, threshold=0.6):
+        """Find potential matches between missing and extra string items using similarity."""
+        from difflib import SequenceMatcher
+
+        matches = []
+
+        for missing_item in missing_items:
+            best_match = None
+            best_similarity = 0
+
+            for extra_item in extra_items:
+                # Calculate similarity
+                similarity = SequenceMatcher(
+                    None, str(missing_item).lower(), str(extra_item).lower()
+                ).ratio()
+
+                if similarity > best_similarity and similarity >= threshold:
+                    best_similarity = similarity
+                    best_match = extra_item
+
+            if best_match:
+                matches.append((missing_item, best_match, best_similarity))
+
+        return matches
+
+    def _find_parameter_matches(self, missing_keys, extra_keys, params1, params2):
+        """Find potential matches between missing and extra parameters using name similarity."""
+        from difflib import SequenceMatcher
+
+        matches = []
+        threshold = 0.6  # Similarity threshold for potential matches
+
+        for missing_key in missing_keys:
+            missing_param = params1[missing_key]
+            missing_name = missing_param.name
+            missing_location = missing_param.location.value
+            best_match = None
+            best_similarity = 0
+
+            for extra_key in extra_keys:
+                extra_param = params2[extra_key]
+                extra_name = extra_param.name
+                extra_location = extra_param.location.value
+
+                # Only match parameters in the same location
+                if missing_location == extra_location:
+                    # Calculate name similarity
+                    similarity = SequenceMatcher(
+                        None, missing_name.lower(), extra_name.lower()
+                    ).ratio()
+
+                    if similarity > best_similarity and similarity >= threshold:
+                        best_similarity = similarity
+                        best_match = extra_name
+
+            if best_match:
+                matches.append((missing_key, best_match, best_similarity))
+
+        return matches
+
+    def _find_response_matches(self, missing_codes, extra_codes):
+        """Find potential matches between missing and extra response codes."""
+        from difflib import SequenceMatcher
+
+        matches = []
+        threshold = 0.7  # Higher threshold for response codes
+
+        for missing_code in missing_codes:
+            best_match = None
+            best_similarity = 0
+
+            for extra_code in extra_codes:
+                # Calculate similarity
+                similarity = SequenceMatcher(
+                    None, str(missing_code).lower(), str(extra_code).lower()
+                ).ratio()
+
+                if similarity > best_similarity and similarity >= threshold:
+                    best_similarity = similarity
+                    best_match = extra_code
+
+            if best_match:
+                matches.append((missing_code, best_match, best_similarity))
+
+        return matches
+
     def _find_definition_matches(self, missing_defs, extra_defs, api1, api2):
         """Find potential matches between missing and extra definitions using name similarity."""
         from difflib import SequenceMatcher
@@ -1092,6 +1555,33 @@ class ApiComparator:
                 matches.append((missing_path, best_match, best_similarity))
 
         return matches
+
+    def _find_parameter_name_case_mismatches(
+        self, missing_keys, extra_keys, params1, params2
+    ):
+        """Find bi-directional case mismatches in parameter names."""
+        case_mismatches = []
+
+        for missing_key in missing_keys:
+            missing_param = params1[missing_key]
+            missing_location = missing_param.location.value
+            missing_name = missing_param.name
+
+            for extra_key in extra_keys:
+                extra_param = params2[extra_key]
+                extra_location = extra_param.location.value
+                extra_name = extra_param.name
+
+                # Check if same location and case-insensitive name match
+                if (
+                    missing_location == extra_location
+                    and missing_name.lower() == extra_name.lower()
+                    and missing_name != extra_name
+                ):
+                    case_mismatches.append((missing_key, extra_key))
+                    break
+
+        return case_mismatches
 
 
 def compare_swagger_specs(
