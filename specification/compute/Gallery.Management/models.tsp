@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -41,6 +43,39 @@ union GallerySharingPermissionTypes {
   Groups: "Groups",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Community: "Community",
+}
+
+/**
+ * Specifies the type of the Gallery Script parameter. Possible values are: String, Int, Double, Boolean, Enum
+ */
+@added(Versions.v2025_03_03)
+union GalleryScriptParameterType {
+  string,
+
+  /**
+   * String gallery script parameter type
+   */
+  String: "String",
+
+  /**
+   * Int gallery script parameter type
+   */
+  Int: "Int",
+
+  /**
+   * Double gallery script parameter type
+   */
+  Double: "Double",
+
+  /**
+   * Boolean gallery script parameter type
+   */
+  Boolean: "Boolean",
+
+  /**
+   * Enum gallery script parameter type
+   */
+  Enum: "Enum",
 }
 
 /**
@@ -144,6 +179,24 @@ union ReplicationMode {
   Full: "Full",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Shallow: "Shallow",
+}
+
+/**
+ * Specifies the strategy to be used when selecting the storage account type. Cannot be specified along with storageAccountType, but can be overridden per region by specifying targetRegions[].storageAccountType. This property is not updatable.
+ */
+@added(Versions.v2025_03_03)
+union StorageAccountStrategy {
+  string,
+
+  /**
+   *  Choose Standard_ZRS storage if the region supports it, else choose Standard_LRS storage, unless overridden by specifying regional storageAccountType. If no storageAccountStrategy is specified, this is the default strategy (from API version 2025-03-03 onwards).
+   */
+  PreferStandard_ZRS: "PreferStandard_ZRS",
+
+  /**
+   *  Choose Standard_LRS storage unless overridden by specifying regional storageAccountType.
+   */
+  DefaultStandard_LRS: "DefaultStandard_LRS",
 }
 
 /**
@@ -947,11 +1000,10 @@ model GalleryArtifactPublishingProfileBase {
   /**
    * The end of life date of the gallery image version. This property can be used for decommissioning purposes. This property is updatable.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endOfLifeDate?: utcDateTime;
 
   /**
-   * Specifies the storage account type to be used to store the image. This property is not updatable.
+   * Specifies the storage account type to be used to store the image. Cannot be specified along with storageAccountStrategy. This property is not updatable.
    */
   storageAccountType?: StorageAccountType;
 
@@ -965,6 +1017,12 @@ model GalleryArtifactPublishingProfileBase {
    */
   @identifiers(#["name", "extendedLocation/name"])
   targetExtendedLocations?: GalleryTargetExtendedLocation[];
+
+  /**
+   * Specifies the strategy to be used when selecting the storage account type. Cannot be specified along with storageAccountType, but can be overridden per region by specifying targetRegions[].storageAccountType. This property is not updatable.
+   */
+  @added(Versions.v2025_03_03)
+  storageAccountStrategy?: StorageAccountStrategy;
 }
 
 /**
@@ -1741,6 +1799,12 @@ model GalleryImageVersionList is Azure.Core.Page<GalleryImageVersion>;
 model GalleryApplicationList is Azure.Core.Page<GalleryApplication>;
 
 /**
+ * The List Gallery Script operation response.
+ */
+@added(Versions.v2025_03_03)
+model GalleryScriptList is Azure.Core.Page<GalleryScript>;
+
+/**
  * The List Gallery Application version operation response.
  */
 model GalleryApplicationVersionList
@@ -1784,6 +1848,195 @@ model GallerySoftDeletedResourceProperties {
    * The timestamp for when the resource is soft-deleted. In dateTime offset format.
    */
   softDeletedTime?: string;
+}
+
+/**
+ * Describes the properties of a gallery script definition.
+ */
+@added(Versions.v2025_03_03)
+model GalleryScriptProperties {
+  /**
+   * The description of this gallery script definition resource. This property is updatable.
+   */
+  description?: string;
+
+  /**
+   * The Eula agreement (End User License Agreement) for the gallery Script Definition.
+   */
+  eula?: string;
+
+  /**
+   * The privacy statement uri.
+   */
+  privacyStatementUri?: string;
+
+  /**
+   * The release note uri.
+   */
+  releaseNoteUri?: string;
+
+  /**
+   * The end of life date of the gallery Script Definition. This property can be used for decommissioning purposes. This property is updatable.
+   */
+  endOfLifeDate?: utcDateTime;
+
+  /**
+   * This property allows you to specify the supported type of the OS that application is built for. Possible values are: **Windows,** **Linux.**
+   */
+  supportedOSType: OperatingSystemTypes;
+
+  /**
+   * The provisioning state, which only appears in the response.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: GalleryProvisioningState;
+}
+
+/**
+ * Specifies information about the gallery Script Definition that you want to update.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+@added(Versions.v2025_03_03)
+model GalleryScriptUpdate extends UpdateResourceDefinition {
+  /**
+   * Gallery script definition properties to update.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
+  properties?: GalleryScriptProperties;
+}
+
+/**
+ * Describes the properties of a gallery script version.
+ */
+@added(Versions.v2025_03_03)
+model GalleryScriptVersionProperties {
+  /**
+   * The publishing profile of a gallery image version.
+   */
+  publishingProfile: GalleryScriptVersionPublishingProfile;
+
+  /**
+   * The safety profile of the Gallery Script Version.
+   */
+  safetyProfile?: GalleryScriptVersionSafetyProfile;
+
+  /**
+   * The provisioning state, which only appears in the response.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: GalleryProvisioningState;
+
+  /**
+   * This is the replication status of the gallery image version.
+   */
+  @visibility(Lifecycle.Read)
+  replicationStatus?: ReplicationStatus;
+}
+
+/**
+ * The publishing profile of a gallery image version.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+@added(Versions.v2025_03_03)
+model GalleryScriptVersionPublishingProfile
+  extends GalleryArtifactPublishingProfileBase {
+  /**
+   * The source script from which the Script Version is going to be created.
+   */
+  source: ScriptSource;
+}
+
+/**
+ * The safety profile of the Gallery Script Version.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "By design. Properties will be added in future."
+@added(Versions.v2025_03_03)
+model GalleryScriptVersionSafetyProfile
+  extends GalleryArtifactSafetyProfileBase {}
+
+/**
+ * The source script from which the Script Version is going to be created.
+ */
+@added(Versions.v2025_03_03)
+model ScriptSource {
+  /**
+   * Required. The link of the source script, it must be a readable storage blob with SAS URI or publicly accessible URI or managed identity enabled.
+   */
+  scriptLink: string;
+
+  /**
+   * Optional. Any input parameters that needs to passed to the script and are accessed within the script for its execution.
+   */
+  parameters?: GalleryScriptParameter[];
+}
+
+/**
+ * The definition of a parameter that can be passed to a script of a Gallery Script Version.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+@added(Versions.v2025_03_03)
+model GalleryScriptParameter extends GenericGalleryParameter {
+  /**
+   * Specifies the type of the Gallery Script parameter. Possible values are: String, Int, Double, Boolean, Enum
+   */
+  type?: GalleryScriptParameterType;
+
+  /**
+   * The minimum value of parameter.
+   */
+  minValue?: string;
+
+  /**
+   * The minimum value of parameter.
+   */
+  maxValue?: string;
+
+  /**
+   * A list of permissible values. Only applicable values are from 'enum' values defined in 'GalleryScriptParameter'.
+   */
+  enumValues?: string[];
+}
+
+/**
+ * The definition of a generic gallery parameter.
+ */
+@added(Versions.v2025_03_03)
+model GenericGalleryParameter {
+  /**
+   * The name of the parameter.
+   */
+  name: string;
+
+  /**
+   * Indicates whether this parameter must be passed.
+   */
+  required?: boolean;
+
+  /**
+   * The default value of the parameter, only applies to string types.
+   */
+  defaultValue?: string;
+
+  /**
+   * A description to help users understand what this parameter means
+   */
+  description?: string;
+}
+
+/**
+ * Specifies information about the gallery Script Version that you want to update.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+@added(Versions.v2025_03_03)
+model GalleryScriptVersionUpdate extends UpdateResourceDefinition {
+  /**
+   * Gallery script version properties to update.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
+  properties?: GalleryScriptVersionProperties;
 }
 
 /**
