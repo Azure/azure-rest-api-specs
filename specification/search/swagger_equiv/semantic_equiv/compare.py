@@ -1193,18 +1193,116 @@ class ApiComparator:
     def _compare_global_parameters(
         self, api1: CanonicalApi, api2: CanonicalApi
     ) -> None:
-        """Compare global parameter definitions."""
+        """Compare global parameter definitions with support for parameter grouping."""
         params1 = api1.parameters or {}
         params2 = api2.parameters or {}
 
-        param_names1 = set(params1.keys())
-        param_names2 = set(params2.keys())
+        # Extract grouping information for both APIs
+        ungrouped1, grouped1 = self._extract_parameter_grouping(params1)
+        ungrouped2, grouped2 = self._extract_parameter_grouping(params2)
 
-        # Check for missing/extra global parameters
+        # Compare parameter groups (SearchOptions and SuggestOptions)
+        for group_name in ["SearchOptions", "SuggestOptions"]:
+            group1_params = grouped1.get(group_name, [])
+            group2_params = grouped2.get(group_name, [])
+
+            if group1_params and not group2_params:
+                # Extract parameter names for display
+                param_names = [
+                    p["full_name"] if isinstance(p, dict) else str(p)
+                    for p in group1_params
+                ]
+                self.differences.append(
+                    Difference(
+                        type=DifferenceType.MISSING_GLOBAL_PARAMETER,
+                        message=f"Parameter group missing in {api2.swagger_source}: {group_name} (contains {len(group1_params)} parameters: {', '.join(param_names)}). Possible Match: Check x-ms-parameter-grouping",
+                        context=f"parameter_group: {group_name}",
+                    )
+                )
+                print(
+                    f"Parameter group missing in {api2.swagger_source}\t {group_name} (contains {len(group1_params)} parameters)"
+                )
+
+            elif not group1_params and group2_params:
+                # Extract parameter names for display
+                param_names = [
+                    p["full_name"] if isinstance(p, dict) else str(p)
+                    for p in group2_params
+                ]
+                base_names = [
+                    p["base_name"] if isinstance(p, dict) else str(p)
+                    for p in group2_params
+                ]
+                self.differences.append(
+                    Difference(
+                        type=DifferenceType.EXTRA_GLOBAL_PARAMETER,
+                        message=f"Extra parameter group in {api2.swagger_source}: {group_name} (contains {len(group2_params)} parameters: {', '.join(param_names)} -> base names: {', '.join(base_names)}). Possible Match: Check x-ms-parameter-grouping",
+                        context=f"parameter_group: {group_name}",
+                    )
+                )
+                print(
+                    f"Extra parameter group in {api2.swagger_source}\t {group_name} (contains {len(group2_params)} parameters)"
+                )
+
+            elif group1_params and group2_params:
+                # Both have the group, compare parameter counts
+                if len(group1_params) != len(group2_params):
+                    param1_names = [
+                        p["full_name"] if isinstance(p, dict) else str(p)
+                        for p in group1_params
+                    ]
+                    param2_names = [
+                        p["full_name"] if isinstance(p, dict) else str(p)
+                        for p in group2_params
+                    ]
+                    self.differences.append(
+                        Difference(
+                            type=DifferenceType.GLOBAL_PARAMETER_MISMATCH,
+                            message=f"Parameter group count mismatch for {group_name}: {api1.swagger_source} has {len(group1_params)} parameters ({', '.join(param1_names)}) vs {api2.swagger_source} has {len(group2_params)} parameters ({', '.join(param2_names)})",
+                            context=f"parameter_group: {group_name}",
+                        )
+                    )
+                    print(
+                        f"Parameter group count mismatch\t {group_name}\t {len(group1_params)} vs {len(group2_params)}"
+                    )
+                else:
+                    # Same count, compare base names for better matching info
+                    base_names1 = [
+                        p.get("base_name", p.get("full_name", str(p)))
+                        if isinstance(p, dict)
+                        else str(p)
+                        for p in group1_params
+                    ]
+                    base_names2 = [
+                        p.get("base_name", p.get("full_name", str(p)))
+                        if isinstance(p, dict)
+                        else str(p)
+                        for p in group2_params
+                    ]
+                    base_names1.sort()
+                    base_names2.sort()
+
+                    if base_names1 != base_names2:
+                        self.differences.append(
+                            Difference(
+                                type=DifferenceType.GLOBAL_PARAMETER_MISMATCH,
+                                message=f"Parameter group content mismatch for {group_name}: {api1.swagger_source} base names [{', '.join(base_names1)}] vs {api2.swagger_source} base names [{', '.join(base_names2)}]",
+                                context=f"parameter_group: {group_name}",
+                            )
+                        )
+                        print(
+                            f"Parameter group content mismatch\t {group_name}\t base names differ"
+                        )
+
+        # Compare ungrouped parameters using existing logic
+        param_names1 = set(ungrouped1.keys())
+        param_names2 = set(ungrouped2.keys())
+
+        # Check for missing/extra ungrouped global parameters
         missing_params = param_names1 - param_names2
         extra_params = param_names2 - param_names1
 
-        # Find potential fuzzy matches for global parameters
+        # Find potential fuzzy matches for ungrouped global parameters
         global_param_matches = self._find_string_matches(
             missing_params, extra_params, threshold=0.6
         )
@@ -1417,6 +1515,41 @@ class ApiComparator:
                 )
             )
             print("Security requirements mismatch")
+
+    def _extract_parameter_grouping(self, params_dict):
+        """Extract parameter grouping information for SearchOptions and SuggestOptions.
+
+        Returns:
+            - ungrouped_params: Dict of parameters not in SearchOptions/SuggestOptions groups
+            - grouped_params: Dict with group names as keys and list of parameter info as values
+                Each parameter info is a dict with 'full_name' and 'base_name' keys
+        """
+        ungrouped_params = {}
+        grouped_params = {"SearchOptions": [], "SuggestOptions": []}
+
+        for param_name, param in params_dict.items():
+            # Check if parameter follows SearchOptions.<name> or SuggestOptions.<name> pattern (TSP style)
+            if param_name.startswith("SearchOptions."):
+                base_name = param_name[
+                    len("SearchOptions.") :
+                ]  # Extract name after the dot
+                grouped_params["SearchOptions"].append(
+                    {"full_name": param_name, "base_name": base_name}
+                )
+            elif param_name.startswith("SuggestOptions."):
+                base_name = param_name[
+                    len("SuggestOptions.") :
+                ]  # Extract name after the dot
+                grouped_params["SuggestOptions"].append(
+                    {"full_name": param_name, "base_name": base_name}
+                )
+            else:
+                # For hand-authored swagger, we would need to check x-ms-parameter-grouping
+                # Since we don't have access to raw swagger here, we'll assume ungrouped
+                # TODO: Extend CanonicalParameter to include x-ms-parameter-grouping info
+                ungrouped_params[param_name] = param
+
+        return ungrouped_params, grouped_params
 
     def _find_string_matches(self, missing_items, extra_items, threshold=0.6):
         """Find potential matches between missing and extra string items using similarity."""
