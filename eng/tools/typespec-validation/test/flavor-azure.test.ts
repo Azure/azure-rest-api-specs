@@ -22,7 +22,6 @@ describe("flavor-azure", function () {
     "@azure-tools/typespec-java",
     "@azure-tools/typespec-python",
     "@azure-tools/typespec-ts",
-    "@azure-tools/typespec-rust",
     "@typespec/http-client-foo",
   ];
 
