@@ -1,0 +1,120 @@
+{
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "subscriptionId": "12345678-1234-1234-1234-123456789012",
+    "resourceGroupName": "myResourceGroup",
+    "body": {
+      "items": [
+        {
+          "resourceUri": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/myResourceGroup/providers/Microsoft.SaaSHub/cloudServices/newCloudService",
+          "approvalCode": "89012345-67f2-3456-8901-2345f2345689",
+          "operationType": "canCreate",
+          "properties": {
+            "productCode": "000081e7-0000-0080-f976-8a622c8760a3",
+            "quantity": 20,
+            "autoRenew": "On",
+            "term": {
+              "startDate": "2025-01-01T00:00:00Z"
+            }
+          }
+        },
+        {
+          "resourceUri": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/myResourceGroup/providers/Microsoft.SaaSHub/cloudServices/targetCloudService",
+          "operationType": "canMerge",
+          "mergeRequest": {
+            "sourceResources": [
+              {
+                "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/myResourceGroup/providers/Microsoft.SaaSHub/cloudServices/sourceCloudService1",
+                "quantity": 10
+              }
+            ]
+          }
+        },
+        {
+          "resourceUri": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/myResourceGroup/providers/Microsoft.SaaSHub/cloudServices/existingCloudService",
+          "operationType": "canUpdate",
+          "properties": {
+            "quantity": 30
+          }
+        },
+        {
+          "resourceUri": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/myResourceGroup/providers/Microsoft.SaaSHub/cloudServices/cancelCloudService",
+          "operationType": "canCancel"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "resourceUri": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/myResourceGroup/providers/Microsoft.SaaSHub/cloudServices/newCloudService",
+            "approvalCode": "b8c9d0e1-f2a3-4567-1234-678901234567",
+            "operationType": "canCreate",
+            "result": {
+              "evaluateResult": "Passed",
+              "reasonCode": null,
+              "reason": null,
+              "additionalInfo": null
+            }
+          },
+          {
+            "resourceUri": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/myResourceGroup/providers/Microsoft.SaaSHub/cloudServices/targetCloudService",
+            "approvalCode": "c9d0e1f2-a3b4-5678-2345-789012345678",
+            "operationType": "canMerge",
+            "result": {
+              "evaluateResult": "Passed",
+              "reasonCode": null,
+              "reason": null,
+              "additionalInfo": [
+                {
+                  "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/myResourceGroup/providers/Microsoft.SaaSHub/cloudServices/sourceCloudService1",
+                  "quantity": 10,
+                  "validationError": null
+                }
+              ]
+            }
+          },
+          {
+            "resourceUri": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/myResourceGroup/providers/Microsoft.SaaSHub/cloudServices/existingCloudService",
+            "operationType": "canUpdate",
+            "result": {
+              "evaluateResult": "Failed",
+              "reasonCode": "FailedToSatisfyRefundableQuantityConstraints",
+              "reason": "Failed to satisfy refundable quantity constraints",
+              "updateScenario": "ChangeQuantity",
+              "additionalInfo": {
+                "refundableQuantity": {
+                  "totalRefundableQuantity": 10,
+                  "refundableQuantities": [
+                    {
+                      "quantity": 10,
+                      "returnWindowEndDateTime": "2025-12-31T23:59:59Z"
+                    }
+                  ]
+                },
+                "coTermDates": null
+              }
+            }
+          },
+          {
+            "resourceUri": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/myResourceGroup/providers/Microsoft.SaaSHub/cloudServices/cancelCloudService",
+            "operationType": "canCancel",
+            "result": {
+              "evaluateResult": "Failed",
+              "reasonCode": "CancellationWindowExpired",
+              "reason": "The cancellation window has expired",
+              "additionalInfo": {
+                "cancellationWindowEndTimestamp": "2025-10-15T23:59:59Z"
+              }
+            }
+          }
+        ],
+        "nextLink": "https://management.azure.com/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/myResourceGroup/providers/Microsoft.SaaSHub/canTransact?api-version=2025-07-01-preview&$skiptoken=bmV4dFBhZ2VUb2tlbg"
+      }
+    }
+  },
+  "operationId": "ResourceGroupLevelProviderActions_CanTransact",
+  "title": "Evaluates multiple transaction operations for CloudServices at resource group level"
+}
