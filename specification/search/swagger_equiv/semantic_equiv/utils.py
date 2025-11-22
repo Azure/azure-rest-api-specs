@@ -1520,11 +1520,18 @@ def write_diffs_excel_v2(result, output_path: str) -> None:
             path_method = context
             context_suffix = ""
 
+        possible_match = ""
+        if "|| Possible Match: " in message:
+            message_parts = message.split("|| Possible Match:")
+            message = message_parts[0].strip()
+            possible_match = message_parts[1].strip()
+
         row = {
             "Diff Type": diff_type,
-            "OperationID": operation_id,
             "Path-Method": path_method,
+            "OperationID": operation_id,
             "Context Suffix": context_suffix,
+            "Possible Match": possible_match,
             "Message": message,
         }
 

@@ -209,7 +209,7 @@ class ApiComparator:
         for path in missing_paths:
             # Check if this missing path has a potential match
             matches = [match for match in path_matches if match[0] == path]
-            possible_match = f" || Possible Match: {matches[0][1]})" if matches else ""
+            possible_match = f" || Possible Match: {matches[0][1]}" if matches else ""
 
             self.differences.append(
                 Difference(
@@ -225,7 +225,7 @@ class ApiComparator:
         for path in extra_paths:
             # Check if this extra path has a potential match
             matches = [match for match in path_matches if match[1] == path]
-            possible_match = f" || Possible Match: {matches[0][0]})" if matches else ""
+            possible_match = f" || Possible Match: {matches[0][0]}" if matches else ""
 
             self.differences.append(
                 Difference(
@@ -785,7 +785,7 @@ class ApiComparator:
         for def_name in missing_defs:
             # Check if this missing definition has a potential match
             matches = [match for match in potential_matches if match[0] == def_name]
-            possible_match = f" || Possible Match: {matches[0][1]})" if matches else ""
+            possible_match = f" || Possible Match: {matches[0][1]}" if matches else ""
 
             self.differences.append(
                 Difference(
@@ -801,7 +801,7 @@ class ApiComparator:
         for def_name in extra_defs:
             # Check if this extra definition has a potential match
             matches = [match for match in potential_matches if match[1] == def_name]
-            possible_match = f" || Possible Match: {matches[0][0]})" if matches else ""
+            possible_match = f" || Possible Match: {matches[0][0]}" if matches else ""
 
             self.differences.append(
                 Difference(
