@@ -15,7 +15,7 @@ This instruction applies to all tasks involving **TypeSpec**, including:
     Replacing a preview API with a new preview API
     Replacing a preview API with a stable API
     Replacing a preview API with a stable API and a new preview API
-    Adding a preview API version
+    Adding a preview API
     Adding a stable API version
     and so on
 
@@ -23,35 +23,46 @@ This instruction applies to all tasks involving **TypeSpec**, including:
 
 ## ⚙️ Workflow Guidance
 
-**When the task is to add a new api version**
-- first identify current api versions which are stable version, which are preview version ( the version with suffix '-preview', For preview versions, the format should be YYYY-MM-DD-preview; For stable versions, the format should be YYYY-MM-DD (e.g., 2025-12-01)). Give out summary of the service api version and put it as meta data
-- prompt user to provide the api version name and choose if is stable version or preview version.
-- verify if the api version name match the azure version rule: preview version suffix '-preview'. If not, prompt user to suggest an api version name
-- when add a new preview api version, and there are previous preview api version, prompt user to ask if it want to replace the previous api version or add a new one
-- when add a new stable api version, and the current latest api version is previous version, prompt user to ask if it want to replace the previous api version or not
-
 When encountering a TypeSpec-related task, follow this process:
 
-### Step 1: Call the `azure-sdk-mcp/azsdk_ai_qa_completion` tool
+### Step 1: Collect Required Information
 
-Use this tool to retrieve validated solutions, suggestions, or fixes for TypeSpec issues. Combine the user’s question with all provided metadata (such as context, role, service name, decorators, versioning details, and any additional parameters) to construct a comprehensive query. Ensure the query is precise, includes relevant technical terms, and targets authoritative sources for TypeSpec and Azure API guidance.
+Collect required information for the TypeSpec-related task. If the task does not need the extra information, skip this step.
 
-### Step 2: Extract the solution from the tool result
+And this step just collecting information, NO code change action taken.
 
-Parse the response from `azure-sdk-mcp/azsdk_ai_qa_completion` to identify the recommended fix or implementation.
+Following tasks need collect required information:
 
-### Step 3: Execute the solution
+**Task 1: add a new api version**
+Prompt user to answer following question one by one:
+- prompt user to provide the api version name
+- prompt user to idenfity if it is a stable version or preview version.
+- verify if the api version name match the azure version rule: preview version suffix '-preview'. If not, prompt user to suggest an api version name
+- identify current api versions which are stable version, which are preview version ( the version with suffix '-preview', For preview versions, the format should be YYYY-MM-DD-preview; For stable versions, the format should be YYYY-MM-DD (e.g., 2025-12-01))
+- **when add a new preview api version**, and the current latest api version is preview version, prompt user to ask if it want to replace the previous preview api version or add a new preview api version
+- **when add a new stable api version**, and the current latest api version is preview version, first identify which typespec items are added in this preview version, then prompt user to choose which items are GAed or all items are GAed
 
-Apply the extracted solution to update the TypeSpec file accordingly.
+### Step 2: Call the `azure-sdk-mcp/azsdk_typespec_authoring` tool
+
+Use this tool to retrieve validated solutions, suggestions, or fixes for TypeSpec issues. Combine the user’s question with all provided information collected in step 1 to construct a comprehensive query. Ensure the query is precise.
+
+### Step 3: Extract the solution from the tool result
+
+Parse the response from `azure-sdk-mcp/azsdk_typespec_authoring` to identify the recommended fix or implementation solution.
+show the solution flow, list all the steps to execute.
+
+### Step 4: Execute the solution
+
+Apply the extracted solution from step 3 to update the TypeSpec file accordingly.
 
 
-### Step 4: Summary the solution
+### Step 5: Summary the solution
 
-Summary the solution taken, and display the reference doc url from the response from `azure-sdk-mcp/azsdk_ai_qa_completion` tool
+Summary the solution taken, and display the reference doc url from the response from `azure-sdk-mcp/azsdk_typespec_authoring` tool
 
 **When the task is to add a new api version, add following extra step:**
 
-### Step 5: Suggestion follow up action
+### Step 6: Suggestion follow up action
 
 ask user whether he want to perform following actions:
 - Add new operations (create, update, delete, list, etc.)
