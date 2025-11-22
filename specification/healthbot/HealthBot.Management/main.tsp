@@ -37,9 +37,11 @@ namespace Microsoft.HealthBot;
  */
 enum Versions {
   /**
-   * The 2025-05-25 API version.
+   * The API versions.
    */
   v2025_05_25: "2025-05-25",
+
+  v2025_11_01: "2025-11-01",
 }
 
 /**
