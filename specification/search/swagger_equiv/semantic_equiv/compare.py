@@ -209,12 +209,12 @@ class ApiComparator:
         for path in missing_paths:
             # Check if this missing path has a potential match
             matches = [match for match in path_matches if match[0] == path]
-            match_hint = f" (possible match: {matches[0][1]})" if matches else ""
+            possible_match = f" || Possible Match: {matches[0][1]})" if matches else ""
 
             self.differences.append(
                 Difference(
                     type=DifferenceType.MISSING_PATH,
-                    message=f"Path missing in {api2.swagger_source}: {path}{match_hint}",
+                    message=f"Path missing in {api2.swagger_source}: {path}{possible_match}",
                     context=path,
                 )
             )
@@ -225,12 +225,12 @@ class ApiComparator:
         for path in extra_paths:
             # Check if this extra path has a potential match
             matches = [match for match in path_matches if match[1] == path]
-            match_hint = f" (possible match: {matches[0][0]})" if matches else ""
+            possible_match = f" || Possible Match: {matches[0][0]})" if matches else ""
 
             self.differences.append(
                 Difference(
                     type=DifferenceType.EXTRA_PATH,
-                    message=f"Extra path in {api2.swagger_source}: {path}{match_hint}",
+                    message=f"Extra path in {api2.swagger_source}: {path}{possible_match}",
                     context=path,
                 )
             )
@@ -475,19 +475,17 @@ class ApiComparator:
 
             # Check if this missing parameter has a potential match
             matches = [match for match in param_matches if match[0] == key]
-            possible_match = (
-                f"Possible Match: {matches[0][1]}" if matches else "Possible Match: "
-            )
+            possible_match = f"|| Possible Match: {matches[0][1]}" if matches else ""
 
             self.differences.append(
                 Difference(
                     type=DifferenceType.MISSING_PARAMETER,
-                    message=f"Parameter missing in {source2}: {param.name}, {param.location.value}. {possible_match}",
+                    message=f"Parameter missing in {source2}: {param.name}, {param.location.value}{possible_match}",
                     context=param_context,
                 )
             )
             print(
-                f"Missing parameter in {source2}\t {param_context}\t {param.name}, {param.location.value}. {possible_match}"
+                f"Missing parameter in {source2}\t {param_context}\t {param.name}, {param.location.value}{possible_match}"
             )
 
         for key in filtered_extra_keys:
@@ -499,20 +497,20 @@ class ApiComparator:
             # Check if this extra parameter has a potential match
             matches = [match for match in param_matches if match[1] == param.name]
             possible_match = (
-                f"Possible Match: {matches[0][0][1] if matches and len(matches[0]) > 0 else ''}"
+                f"|| Possible Match: {matches[0][0][1] if matches and len(matches[0]) > 0 else ''}"
                 if matches
-                else "Possible Match: "
+                else ""
             )
 
             self.differences.append(
                 Difference(
                     type=DifferenceType.EXTRA_PARAMETER,
-                    message=f"Extra parameter in {source2}: {param.name}, {param.location.value}. {possible_match}",
+                    message=f"Extra parameter in {source2}: {param.name}, {param.location.value}{possible_match}",
                     context=param_context,
                 )
             )
             print(
-                f"Extra parameter in {source2}\t {param_context}\t {param.name}, {param.location.value}. {possible_match}"
+                f"Extra parameter in {source2}\t {param_context}\t {param.name}, {param.location.value}{possible_match}"
             )
 
         # Compare common parameters
@@ -647,37 +645,33 @@ class ApiComparator:
         for code in missing_codes:
             # Check if this missing response has a potential match
             matches = [match for match in response_matches if match[0] == code]
-            possible_match = (
-                f"Possible Match: {matches[0][1]}" if matches else "Possible Match: "
-            )
+            possible_match = f"|| Possible Match: {matches[0][1]}" if matches else ""
 
             self.differences.append(
                 Difference(
                     type=DifferenceType.MISSING_RESPONSE,
-                    message=f"Response status code missing in {source1}: {code}. {possible_match}",
+                    message=f"Response status code missing in {source1}: {code}{possible_match}",
                     context=context,
                 )
             )
             print(
-                f"Response status code missing\t {context}\t {source1}: {code}. {possible_match}"
+                f"Response status code missing\t {context}\t {source1}: {code}{possible_match}"
             )
 
         for code in extra_codes:
             # Check if this extra response has a potential match
             matches = [match for match in response_matches if match[1] == code]
-            possible_match = (
-                f"Possible Match: {matches[0][0]}" if matches else "Possible Match: "
-            )
+            possible_match = f"|| Possible Match: {matches[0][0]}" if matches else ""
 
             self.differences.append(
                 Difference(
                     type=DifferenceType.EXTRA_RESPONSE,
-                    message=f"Extra response status code in {source2}: {code}. {possible_match}",
+                    message=f"Extra response status code in {source2}: {code}{possible_match}",
                     context=context,
                 )
             )
             print(
-                f"Extra response status code in {source2} \t {context}\t {code}. {possible_match}"
+                f"Extra response status code in {source2} \t {context}\t {code}{possible_match}"
             )
 
         # Compare common responses
@@ -791,33 +785,33 @@ class ApiComparator:
         for def_name in missing_defs:
             # Check if this missing definition has a potential match
             matches = [match for match in potential_matches if match[0] == def_name]
-            match_hint = f" (possible match: {matches[0][1]})" if matches else ""
+            possible_match = f" || Possible Match: {matches[0][1]})" if matches else ""
 
             self.differences.append(
                 Difference(
                     type=DifferenceType.MISSING_DEFINITION,
-                    message=f"Definition missing in {api2.swagger_source} : {def_name}{match_hint}",
+                    message=f"Definition missing in {api2.swagger_source} : {def_name}{possible_match}",
                     context=def_name,
                 )
             )
             print(
-                f"Definition missing in {api2.swagger_source} \t {def_name}{match_hint}"
+                f"Definition missing in {api2.swagger_source} \t {def_name}{possible_match}"
             )
 
         for def_name in extra_defs:
             # Check if this extra definition has a potential match
             matches = [match for match in potential_matches if match[1] == def_name]
-            match_hint = f" (possible match: {matches[0][0]})" if matches else ""
+            possible_match = f" || Possible Match: {matches[0][0]})" if matches else ""
 
             self.differences.append(
                 Difference(
                     type=DifferenceType.EXTRA_DEFINITION,
-                    message=f"Extra definition in {api2.swagger_source}: {def_name}{match_hint}",
+                    message=f"Extra definition in {api2.swagger_source}: {def_name}{possible_match}",
                     context=def_name,
                 )
             )
             print(
-                f"Extra definition in {api2.swagger_source} \t {def_name}{match_hint}"
+                f"Extra definition in {api2.swagger_source} \t {def_name}{possible_match}"
             )
         # Compare common definitions
         common_defs = defs1 & defs2
@@ -1215,7 +1209,7 @@ class ApiComparator:
                 self.differences.append(
                     Difference(
                         type=DifferenceType.MISSING_GLOBAL_PARAMETER,
-                        message=f"Parameter group missing in {api2.swagger_source}: {group_name} (contains {len(group1_params)} parameters: {', '.join(param_names)}). Possible Match: Check x-ms-parameter-grouping",
+                        message=f"Parameter group missing in {api2.swagger_source}: {group_name} (contains {len(group1_params)} parameters: {', '.join(param_names)})",
                         context=f"parameter_group: {group_name}",
                     )
                 )
@@ -1236,7 +1230,7 @@ class ApiComparator:
                 self.differences.append(
                     Difference(
                         type=DifferenceType.EXTRA_GLOBAL_PARAMETER,
-                        message=f"Extra parameter group in {api2.swagger_source}: {group_name} (contains {len(group2_params)} parameters: {', '.join(param_names)} -> base names: {', '.join(base_names)}). Possible Match: Check x-ms-parameter-grouping",
+                        message=f"Extra parameter group in {api2.swagger_source}: {group_name} (contains {len(group2_params)} parameters: {', '.join(param_names)} -> base names: {', '.join(base_names)})",
                         context=f"parameter_group: {group_name}",
                     )
                 )
@@ -1312,19 +1306,17 @@ class ApiComparator:
             matches = [
                 match for match in global_param_matches if match[0] == param_name
             ]
-            possible_match = (
-                f"Possible Match: {matches[0][1]}" if matches else "Possible Match: "
-            )
+            possible_match = f"|| Possible Match: {matches[0][1]}" if matches else ""
 
             self.differences.append(
                 Difference(
                     type=DifferenceType.MISSING_GLOBAL_PARAMETER,
-                    message=f"Global parameter missing in {api2.swagger_source}: {param_name}. {possible_match}",
+                    message=f"Global parameter missing in {api2.swagger_source}: {param_name}{possible_match}",
                     context=param_name,
                 )
             )
             print(
-                f"Global parameter missing in {api2.swagger_source}\t {param_name}. {possible_match}"
+                f"Global parameter missing in {api2.swagger_source}\t {param_name}{possible_match}"
             )
 
         for param_name in extra_params:
@@ -1332,19 +1324,17 @@ class ApiComparator:
             matches = [
                 match for match in global_param_matches if match[1] == param_name
             ]
-            possible_match = (
-                f"Possible Match: {matches[0][0]}" if matches else "Possible Match: "
-            )
+            possible_match = f"|| Possible Match: {matches[0][0]}" if matches else ""
 
             self.differences.append(
                 Difference(
                     type=DifferenceType.EXTRA_GLOBAL_PARAMETER,
-                    message=f"Extra global parameter in {api2.swagger_source}: {param_name}. {possible_match}",
+                    message=f"Extra global parameter in {api2.swagger_source}: {param_name}{possible_match}",
                     context=param_name,
                 )
             )
             print(
-                f"Extra global parameter in {api2.swagger_source}\t {param_name}. {possible_match}"
+                f"Extra global parameter in {api2.swagger_source}\t {param_name}{possible_match}"
             )
 
         # Compare common global parameters
