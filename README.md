@@ -22,6 +22,13 @@ External Contributors can read [Getting Started with OpenAPI Specifications](htt
 
 See [aka.ms/azsdk/spec-dirs](https://aka.ms/azsdk/spec-dirs).
 
+## Examples
+
+These examples provide a starting point for how a library should be structured, as well as the expected options that libraries should use:
+
+* Data plane: [https://aka.ms/azsdk/tspconfig-sample-dpg](https://aka.ms/azsdk/tspconfig-sample-dpg)
+* Management plane (ARM): [https://aka.ms/azsdk/tspconfig-sample-mpg](https://aka.ms/azsdk/tspconfig-sample-mpg)
+
 ## Next steps
 
 The next step in the process after a spec is completed is to generate SDKs and API reference documentation. If you're a Microsoft employee, go to the [Azure SDK - Internal Wiki](https://aka.ms/jointhesdk) for more information.

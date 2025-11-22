@@ -1,0 +1,74 @@
+{
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "body": {
+      "items": [
+        {
+          "resourceUri": "/providers/Microsoft.SaaSHub/saasResources/myResourceName1",
+          "operationType": "canCreate",
+          "properties": {
+            "productCode": "000081e7-0000-0080-f976-8a622c8760a3",
+            "quantity": 20,
+            "billingScope": "/providers/Microsoft.Billing/billingAccounts/12345:67890/billingProfiles/ABCD-1234/invoiceSections/IS-5678"
+          },
+          "additionalInfo": [
+            {
+              "type": "header",
+              "key": "x-ms-correlation-id",
+              "value": "550e8400-e29b-41d4-a716-446655440000"
+            }
+          ]
+        },
+        {
+          "resourceUri": "/providers/Microsoft.SaaSHub/saasResources/myResourceName2",
+          "operationType": "canUpdate",
+          "properties": {
+            "quantity": 25
+          },
+          "additionalInfo": [
+            {
+              "type": "header",
+              "key": "x-ms-correlation-id",
+              "value": "550e8400-e29b-41d4-a716-446655440001"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "resourceUri": "/providers/Microsoft.SaaSHub/saasResources/myResourceName1",
+            "approvalCode": "token",
+            "operationType": "canCreate",
+            "dependsOn": [],
+            "result": {
+              "evaluateResult": "Passed",
+              "reasonCode": null,
+              "reason": null,
+              "additionalInfo": null
+            }
+          },
+          {
+            "resourceUri": "/providers/Microsoft.SaaSHub/saasResources/myResourceName2",
+            "approvalCode": "token",
+            "operationType": "canUpdate",
+            "dependsOn": [],
+            "result": {
+              "evaluateResult": "Passed",
+              "reasonCode": null,
+              "reason": null,
+              "updateScenario": "AddQuantity",
+              "additionalInfo": null
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ProviderLevelActions_TenantLevelCanTransact",
+  "title": "TenantLevelCanTransact with AdditionalInfo - Multiple Operations"
+}
