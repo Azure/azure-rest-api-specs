@@ -3,7 +3,7 @@
   "info": {
     "title": "Security Insights",
     "description": "API spec for Microsoft.SecurityInsights (Azure Security Insights) resource provider",
-    "version": "2025-09-01"
+    "version": "2026-01-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -137,7 +137,7 @@
         "tags": [
           "SourceControls"
         ],
-        "description": "Gets a source control byt its identifier.",
+        "description": "Gets a source control by its identifier.",
         "operationId": "SourceControls_Get",
         "parameters": [
           {
@@ -407,8 +407,7 @@
         },
         "workloadIdentityFederation": {
           "description": "Workload Identity metadata.",
-          "$ref": "#/definitions/WorkloadIdentityFederation",
-          "readOnly": true
+          "$ref": "#/definitions/WorkloadIdentityFederation"
         },
         "repositoryAccess": {
           "description": "Repository access credentials. This is write-only object and it never returns back to a user.",
@@ -509,7 +508,7 @@
         "url",
         "branch"
       ],
-      "description": "metadata of a repository.",
+      "description": "Metadata of a repository.",
       "properties": {
         "url": {
           "description": "Url of repository.",
@@ -536,18 +535,19 @@
       "properties": {
         "id": {
           "description": "Id of service principal.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "tenantId": {
           "description": "Tenant id of service principal.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "appId": {
           "description": "App id of service principal.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
+        },
+         "appObjectId": {
+          "description": "App object id of service principal.",
+          "type": "string"
         },
         "credentialsExpireOn": {
           "format": "date-time",
