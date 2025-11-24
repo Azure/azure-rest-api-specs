@@ -27566,7 +27566,10 @@ model SwitchCase {
 /**
  * This activity is used for iterating over a collection and execute given activities.
  */
-model ForEachActivity extends ControlActivity {
+#suppress "@azure-tools/typespec-client-generator-core/legacy-hierarchy-building-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ControlActivity)
+model ForEachActivity extends Activity {
   /**
    * ForEach activity properties.
    */
