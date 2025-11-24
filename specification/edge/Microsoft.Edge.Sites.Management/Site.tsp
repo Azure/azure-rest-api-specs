@@ -1,12 +1,7 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
-import "@typespec/rest";
 
-using TypeSpec.Rest;
 using Azure.ResourceManager;
-using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.Edge;
 
@@ -73,18 +68,44 @@ model SiteUpdate {
   properties?: SiteUpdateProperties;
 }
 
-@doc("Site as ARM Resource")
-model Site is ProxyResource<SiteProperties> {
-  #suppress "@typespec/http/metadata-ignored" ""
-  @doc("Name of Site resource")
-  @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$")
-  @path
-  @key("siteName")
-  @segment("sites")
-  @visibility(Lifecycle.Read)
-  name: string;
+@doc("Site as Extension Resource")
+model Site is ExtensionResource<SiteProperties> {
+  ...ResourceNameParameter<
+    Resource = Site,
+    KeyName = "siteName",
+    SegmentName = "sites",
+    NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
+  >;
 }
 
+@doc("Site operations as base operations which will be extended for each scopes")
+interface SiteOps<Scope extends Azure.ResourceManager.Foundations.SimpleResource> {
+  list is Extension.ListByTarget<Scope, Site>;
+  get is Extension.Read<Scope, Site>;
+  create is Extension.CreateOrReplaceAsync<Scope, Site>;
+  update is Extension.CustomPatchSync<Scope, Site, SiteUpdate>;
+  delete is Extension.DeleteSync<Scope, Site>;
+}
+
+@armResourceOperations
+interface SitesByResourceGroups extends SiteOps<Extension.ResourceGroup> {}
+
+@armResourceOperations
+interface SitesBySubscriptions extends SiteOps<Extension.Subscription> {}
+
+alias ServiceGroup = Extension.ExternalResource<
+  TargetNamespace = "Microsoft.Management",
+  ResourceType = "serviceGroups",
+  ResourceParameterName = "serviceGroupName",
+  NamePattern = "^[a-zA-Z0-9\\-_().]{1,90}$",
+  Description = "The name of the service group",
+  ParentType = "Tenant"
+>;
+
+@armResourceOperations
+interface SitesByServiceGroups extends SiteOps<ServiceGroup> {}
+
+/*
 @armResourceOperations
 interface Sites {
   get is ArmResourceRead<Site>;
@@ -93,6 +114,7 @@ interface Sites {
   delete is ArmResourceDeleteSync<Site>;
   listByResourceGroup is ArmResourceListByParent<Site>;
 }
+
 
 alias SubscriptionParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Custom operation on the scope of subscription"
@@ -114,6 +136,7 @@ interface SitesBySubscription {
     BaseParameters = SubscriptionParameters
   >;
 }
+
 
 @doc("ServiceGroup as parameter")
 model ServiceGroupParameters {
@@ -146,3 +169,4 @@ interface SitesByServiceGroup {
   @doc("update Site at SG scope")
   update is ArmCustomPatchSync<Site, SiteUpdate, ServiceGroupParameters>;
 }
+*/
