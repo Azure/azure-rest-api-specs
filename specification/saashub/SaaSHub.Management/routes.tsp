@@ -35,13 +35,13 @@ interface ProviderLevelActions {
   ): ArmResponse<Microsoft.SaaSHub.CanCreateResult> | ErrorResponse;
 
   /**
-   * Gets coterm end dates for multiple resources.
+   * Gets coterm end dates for multiple resources at tenant level.
    * Only available in API version 2025-07-01-preview.
    */
-  @route("/providers/Microsoft.SaaSHub/coterminousDates")
+  @route("/providers/Microsoft.SaaSHub/tenantLevelCoterminousDates")
   @post
   @tag("ProviderLevelActions")
-  getCotermEndDates(
+  tenantLevelGetCotermEndDates(
     ...ApiVersionParameter,
 
     /**
@@ -52,21 +52,21 @@ interface ProviderLevelActions {
   ): ArmResponse<Microsoft.SaaSHub.CotermResponseItem[]> | ErrorResponse;
 
   /**
-   * Processes a proposal request and returns proposal information.
+   * Evaluates whether multiple transaction requests can be processed at tenant level.
    * Only available in API version 2025-07-01-preview.
    */
-  @route("/providers/Microsoft.SaaSHub/proposal")
+  @route("/providers/Microsoft.SaaSHub/tenantLevelCanTransact")
   @post
   @tag("ProviderLevelActions")
-  proposal(
+  tenantLevelCanTransact(
     ...ApiVersionParameter,
 
     /**
-     * Request parameters that are provided to the proposal operation.
+     * Request parameters that are provided to the tenant level canTransact operation.
      */
     @bodyRoot
-    body: Microsoft.SaaSHub.ProposalRequest,
-  ): ArmResponse<Microsoft.SaaSHub.ProposalResponse> | ErrorResponse;
+    body: Microsoft.SaaSHub.TenantLevelCanTransactBulkRequest,
+  ): ArmResponse<Microsoft.SaaSHub.TenantLevelCanTransactBulkResponse> | ErrorResponse;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Resource group level provider actions don't follow standard ARM resource patterns"
@@ -89,4 +89,42 @@ interface ResourceGroupLevelProviderActions {
     @bodyRoot
     body: Microsoft.SaaSHub.CanCreateCloudServiceRequest,
   ): ArmResponse<Microsoft.SaaSHub.CanCreateResult> | ErrorResponse;
+
+  /**
+   * Gets coterm end dates for multiple resources at resource group level.
+   * Only available in API version 2025-07-01-preview.
+   */
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SaaSHub/coterminousDates")
+  @tag("ResourceGroupLevelProviderActions")
+  @post
+  getCotermEndDates(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
+
+    /**
+     * Request parameters that are provided to the GetCotermEndDates operation.
+     */
+    @bodyRoot
+    body: Microsoft.SaaSHub.CotermEndDatesRequest,
+  ): ArmResponse<Microsoft.SaaSHub.CotermResponseItem[]> | ErrorResponse;
+
+  /**
+   * Evaluates whether multiple transaction requests can be processed at resource group level.
+   * Only available in API version 2025-07-01-preview.
+   */
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SaaSHub/canTransact")
+  @tag("ResourceGroupLevelProviderActions")
+  @post
+  canTransact(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
+
+    /**
+     * Request parameters that are provided to the resource group level canTransact operation.
+     */
+    @bodyRoot
+    body: Microsoft.SaaSHub.ResourceGroupLevelCanTransactBulkRequest,
+  ): ArmResponse<Microsoft.SaaSHub.ResourceGroupLevelCanTransactBulkResponse> | ErrorResponse;
 }
