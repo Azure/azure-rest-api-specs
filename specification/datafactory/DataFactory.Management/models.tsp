@@ -20224,15 +20224,7 @@ model ControlActivity is Activity;
  * Base class for all execution activities.
  */
 model ExecutionActivity is Activity {
-  /**
-   * Linked service reference.
-   */
-  linkedServiceName?: LinkedServiceReference;
-
-  /**
-   * Activity policy.
-   */
-  policy?: ActivityPolicy;
+  ...ExecutionActivityProperties;
 }
 
 alias ExecutionActivityProperties = {
@@ -22361,17 +22353,7 @@ model BinarySource extends CopySource {
  * Copy activity sources of tabular type.
  */
 model TabularSource is CopySource {
-  /**
-   * Query timeout. Type: string (or Expression with resultType string), pattern: ((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9])).
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  queryTimeout?: unknown;
-
-  /**
-   * Specifies the additional columns to be added to source data. Type: array of objects(AdditionalColumns) (or Expression with resultType array of objects).
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  additionalColumns?: unknown;
+  ...TabularSourceProperties;
 }
 
 alias TabularSourceProperties = {
@@ -29136,11 +29118,7 @@ model ExpressionV2 {
  * Base class for all triggers that support one to many model for trigger to pipeline.
  */
 model MultiplePipelineTrigger is Trigger {
-  /**
-   * Pipelines that need to be started.
-   */
-  @identifiers(#["/pipelineReference/referenceName"])
-  pipelines?: TriggerPipelineReference[];
+  ...MultiplePipelineTriggerProperties;
 }
 
 alias MultiplePipelineTriggerProperties = {
@@ -29510,10 +29488,7 @@ model TriggerReference {
  * Trigger referenced dependency.
  */
 model TriggerDependencyReference is DependencyReference {
-  /**
-   * Referenced trigger.
-   */
-  referenceTrigger: TriggerReference;
+  ...TriggerDependencyReferenceProperties;
 }
 
 alias TriggerDependencyReferenceProperties = {
