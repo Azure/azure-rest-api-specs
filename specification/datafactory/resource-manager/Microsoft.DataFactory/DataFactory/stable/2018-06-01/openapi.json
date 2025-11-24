@@ -29067,46 +29067,21 @@
       "type": "object",
       "description": "Trigger that creates pipeline runs periodically, on schedule.",
       "properties": {
-        "type": {
-          "type": "string",
-          "description": "Trigger type."
-        },
-        "description": {
-          "type": "string",
-          "description": "Trigger description."
-        },
-        "runtimeState": {
-          "$ref": "#/definitions/TriggerRuntimeState",
-          "description": "Indicates if trigger is running or not. Updated when Start/Stop APIs are called on the Trigger.",
-          "readOnly": true
-        },
-        "annotations": {
-          "type": "array",
-          "description": "List of tags that can be used for describing the trigger.",
-          "items": {}
-        },
-        "pipelines": {
-          "type": "array",
-          "description": "Pipelines that need to be started.",
-          "items": {
-            "$ref": "#/definitions/TriggerPipelineReference"
-          },
-          "x-ms-identifiers": [
-            "/pipelineReference/referenceName"
-          ]
-        },
         "typeProperties": {
           "$ref": "#/definitions/ScheduleTriggerTypeProperties",
           "description": "Schedule Trigger properties.",
           "x-ms-client-flatten": true
         }
       },
-      "discriminator": "type",
       "required": [
-        "type",
         "typeProperties"
       ],
-      "additionalProperties": {}
+      "allOf": [
+        {
+          "$ref": "#/definitions/MultiplePipelineTrigger"
+        }
+      ],
+      "x-ms-discriminator-value": "ScheduleTrigger"
     },
     "ScheduleTriggerRecurrence": {
       "type": "object",

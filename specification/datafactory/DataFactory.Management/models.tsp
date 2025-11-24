@@ -29090,11 +29090,16 @@ model MultiplePipelineTrigger is Trigger {
 /**
  * Trigger that creates pipeline runs periodically, on schedule.
  */
-model ScheduleTrigger is MultiplePipelineTrigger {
+model ScheduleTrigger extends MultiplePipelineTrigger {
   /**
    * Schedule Trigger properties.
    */
   typeProperties: ScheduleTriggerTypeProperties;
+
+  /**
+   * Trigger type.
+   */
+  type: "ScheduleTrigger";
 }
 
 /**
