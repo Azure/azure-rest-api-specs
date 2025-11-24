@@ -649,10 +649,15 @@ export class TspConfigRustAzEmitterOutputDirSubRule extends TspconfigEmitterOpti
 
   protected validate(config: any): RuleResult {
     let emitterOutputDir = config?.options?.[this.emitterName]?.["emitter-output-dir"];
-    if (emitterOutputDir === undefined) return this.createFailedResult("Failed to find \"options.@azure-tools/typespec-rust.emitter-output-dir\"", "Please add \"options.@azure-tools/typespec-rust.emitter-output-dir\" with a path matching the SDK naming convention \"{output-dir}/{service-dir}/{crate-name}\"");
+    if (emitterOutputDir === undefined)
+      return this.createFailedResult(
+        'Failed to find "options.@azure-tools/typespec-rust.emitter-output-dir"',
+        'Please add "options.@azure-tools/typespec-rust.emitter-output-dir" with a path matching the SDK naming convention "{output-dir}/{service-dir}/{crate-name}"',
+      );
     if (emitterOutputDir !== "{output-dir}/{service-dir}/{crate-name}") {
       return this.createFailedResult(
-        `The value of options.${this.emitterName}.emitter-output-dir "${emitterOutputDir}" does not match the required format "{output-dir}/{service-dir}/{crate-name}"`, "Correct the emitter-output-dir to be \"{output-dir}/{service-dir}/{crate-name}\""
+        `The value of options.${this.emitterName}.emitter-output-dir "${emitterOutputDir}" does not match the required format "{output-dir}/{service-dir}/{crate-name}"`,
+        'Correct the emitter-output-dir to be "{output-dir}/{service-dir}/{crate-name}"',
       );
     }
     return super.validate(config);
