@@ -31,8 +31,6 @@ interface LinkedServiceResources {
   /**
    * Gets a linked service.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("LinkedServices_Get")
   get is ArmResourceRead<
     LinkedServiceResource,
     Parameters = {
@@ -50,9 +48,7 @@ interface LinkedServiceResources {
   /**
    * Creates or updates a linked service.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  @operationId("LinkedServices_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     LinkedServiceResource,
     Parameters = {
@@ -70,15 +66,11 @@ interface LinkedServiceResources {
   /**
    * Deletes a linked service.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("LinkedServices_Delete")
   delete is ArmResourceDeleteSync<LinkedServiceResource, Error = CloudError>;
 
   /**
    * Lists linked services.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("LinkedServices_ListByFactory")
   listByFactory is ArmResourceListByParent<
     LinkedServiceResource,
     Response = ArmResponse<LinkedServiceListResponse>,

@@ -31,8 +31,6 @@ interface ManagedPrivateEndpointResources {
   /**
    * Gets a managed private endpoint.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ManagedPrivateEndpoints_Get")
   get is ArmResourceRead<
     ManagedPrivateEndpointResource,
     Parameters = {
@@ -49,9 +47,7 @@ interface ManagedPrivateEndpointResources {
   /**
    * Creates or updates a managed private endpoint.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  @operationId("ManagedPrivateEndpoints_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     ManagedPrivateEndpointResource,
     Parameters = {
@@ -69,8 +65,6 @@ interface ManagedPrivateEndpointResources {
   /**
    * Deletes a managed private endpoint.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ManagedPrivateEndpoints_Delete")
   delete is ArmResourceDeleteSync<
     ManagedPrivateEndpointResource,
     Error = CloudError
@@ -79,8 +73,6 @@ interface ManagedPrivateEndpointResources {
   /**
    * Lists managed private endpoints.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ManagedPrivateEndpoints_ListByFactory")
   listByFactory is ArmResourceListByParent<
     ManagedPrivateEndpointResource,
     Response = ArmResponse<ManagedPrivateEndpointListResponse>,

@@ -144,8 +144,6 @@ interface Factories {
   /**
    * Get exposure control feature for specific factory.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ExposureControl_GetFeatureValueByFactory")
   @action("getFeatureValue")
   getFeatureValueByFactory is ArmResourceActionSync<
     Factory,
@@ -157,8 +155,6 @@ interface Factories {
   /**
    * Get list of exposure control features for specific factory.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ExposureControl_QueryFeatureValuesByFactory")
   @action("queryFeaturesValue")
   queryFeatureValuesByFactory is ArmResourceActionSync<
     Factory,
@@ -170,8 +166,6 @@ interface Factories {
   /**
    * Query pipeline runs in the factory based on input filter conditions.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PipelineRuns_QueryByFactory")
   @list
   @action("queryPipelineRuns")
   queryByFactory is ArmResourceActionSync<
@@ -184,8 +178,6 @@ interface Factories {
   /**
    * Get a pipeline run by its run ID.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PipelineRuns_Get")
   @get
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DataFactory/factories/{factoryName}/pipelineruns/{runId}")
   pipelineRunsGet is PipelineRunsOps.ActionSync<
@@ -205,8 +197,6 @@ interface Factories {
   /**
    * Cancel a pipeline run by its run ID.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PipelineRuns_Cancel")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DataFactory/factories/{factoryName}/pipelineruns/{runId}/cancel")
   cancel is PipelineRunsOps.ActionSync<
     Factory,
@@ -231,8 +221,6 @@ interface Factories {
   /**
    * Query activity runs based on input filter conditions.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ActivityRuns_QueryByPipelineRun")
   @list
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DataFactory/factories/{factoryName}/pipelineruns/{runId}/queryActivityruns")
   queryByPipelineRun is PipelineRunsOps.ActionSync<
@@ -252,8 +240,6 @@ interface Factories {
   /**
    * Query triggers.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Triggers_QueryByFactory")
   @list
   @action("querytriggers")
   triggersQueryByFactory is ArmResourceActionSync<
@@ -266,8 +252,6 @@ interface Factories {
   /**
    * Query trigger runs.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("TriggerRuns_QueryByFactory")
   @list
   @action("queryTriggerRuns")
   triggerRunsQueryByFactory is ArmResourceActionSync<
@@ -280,8 +264,6 @@ interface Factories {
   /**
    * Creates a data flow debug session.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DataFlowDebugSession_Create")
   @action("createDataFlowDebugSession")
   create is ArmResourceActionAsync<
     Factory,
@@ -293,8 +275,6 @@ interface Factories {
   /**
    * Query all active data flow debug sessions.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DataFlowDebugSession_QueryByFactory")
   @list
   @action("queryDataFlowDebugSessions")
   dataFlowDebugSessionQueryByFactory is ArmResourceActionSync<
@@ -307,8 +287,6 @@ interface Factories {
   /**
    * Add a data flow into debug session.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DataFlowDebugSession_AddDataFlow")
   @action("addDataFlowToDebugSession")
   addDataFlow is ArmResourceActionSync<
     Factory,
@@ -320,8 +298,6 @@ interface Factories {
   /**
    * Deletes a data flow debug session.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DataFlowDebugSession_Delete")
   @action("deleteDataFlowDebugSession")
   dataFlowDebugSessionDelete is ArmResourceActionSync<
     Factory,
@@ -333,8 +309,6 @@ interface Factories {
   /**
    * Execute a data flow debug command.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DataFlowDebugSession_ExecuteCommand")
   @action("executeDataFlowDebugCommand")
   executeCommand is ArmResourceActionAsync<
     Factory,

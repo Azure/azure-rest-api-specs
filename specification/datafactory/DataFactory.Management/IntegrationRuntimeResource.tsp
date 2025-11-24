@@ -61,8 +61,6 @@ interface IntegrationRuntimeResources {
   /**
    * Gets an integration runtime.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("IntegrationRuntimes_Get")
   get is ArmResourceRead<
     IntegrationRuntimeResource,
     Parameters = {
@@ -80,9 +78,7 @@ interface IntegrationRuntimeResources {
   /**
    * Creates or updates an integration runtime.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  @operationId("IntegrationRuntimes_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     IntegrationRuntimeResource,
     Parameters = {
@@ -100,9 +96,7 @@ interface IntegrationRuntimeResources {
   /**
    * Updates an integration runtime.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("IntegrationRuntimes_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     IntegrationRuntimeResource,
@@ -113,8 +107,6 @@ interface IntegrationRuntimeResources {
   /**
    * Deletes an integration runtime.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("IntegrationRuntimes_Delete")
   delete is ArmResourceDeleteSync<
     IntegrationRuntimeResource,
     Error = CloudError
@@ -123,8 +115,6 @@ interface IntegrationRuntimeResources {
   /**
    * Lists integration runtimes.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("IntegrationRuntimes_ListByFactory")
   listByFactory is ArmResourceListByParent<
     IntegrationRuntimeResource,
     Response = ArmResponse<IntegrationRuntimeListResponse>,
@@ -134,8 +124,6 @@ interface IntegrationRuntimeResources {
   /**
    * Gets detailed status information for an integration runtime.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("IntegrationRuntimes_GetStatus")
   getStatus is ArmResourceActionSync<
     IntegrationRuntimeResource,
     void,
@@ -146,8 +134,6 @@ interface IntegrationRuntimeResources {
   /**
    * Gets the list of outbound network dependencies for a given Azure-SSIS integration runtime.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("IntegrationRuntimes_ListOutboundNetworkDependenciesEndpoints")
   @list
   @get
   @action("outboundNetworkDependenciesEndpoints")
@@ -161,8 +147,6 @@ interface IntegrationRuntimeResources {
   /**
    * Gets the on-premises integration runtime connection information for encrypting the on-premises data source credentials.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("IntegrationRuntimes_GetConnectionInfo")
   getConnectionInfo is ArmResourceActionSync<
     IntegrationRuntimeResource,
     void,
@@ -173,8 +157,6 @@ interface IntegrationRuntimeResources {
   /**
    * Regenerates the authentication key for an integration runtime.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("IntegrationRuntimes_RegenerateAuthKey")
   regenerateAuthKey is ArmResourceActionSync<
     IntegrationRuntimeResource,
     IntegrationRuntimeRegenerateKeyParameters,
@@ -185,8 +167,6 @@ interface IntegrationRuntimeResources {
   /**
    * Retrieves the authentication keys for an integration runtime.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("IntegrationRuntimes_ListAuthKeys")
   listAuthKeys is ArmResourceActionSync<
     IntegrationRuntimeResource,
     void,
@@ -197,8 +177,6 @@ interface IntegrationRuntimeResources {
   /**
    * Starts a ManagedReserved type integration runtime.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("IntegrationRuntimes_Start")
   start is ArmResourceActionAsync<
     IntegrationRuntimeResource,
     void,
@@ -209,8 +187,6 @@ interface IntegrationRuntimeResources {
   /**
    * Stops a ManagedReserved type integration runtime.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("IntegrationRuntimes_Stop")
   stop is ArmResourceActionAsync<
     IntegrationRuntimeResource,
     void,
@@ -221,8 +197,6 @@ interface IntegrationRuntimeResources {
   /**
    * Force the integration runtime to synchronize credentials across integration runtime nodes, and this will override the credentials across all worker nodes with those available on the dispatcher node. If you already have the latest credential backup file, you should manually import it (preferred) on any self-hosted integration runtime node than using this API directly.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("IntegrationRuntimes_SyncCredentials")
   syncCredentials is ArmResourceActionSync<
     IntegrationRuntimeResource,
     void,
@@ -233,8 +207,6 @@ interface IntegrationRuntimeResources {
   /**
    * Get the integration runtime monitoring data, which includes the monitor data for all the nodes under this integration runtime.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("IntegrationRuntimes_GetMonitoringData")
   @action("monitoringData")
   getMonitoringData is ArmResourceActionSync<
     IntegrationRuntimeResource,
@@ -246,8 +218,6 @@ interface IntegrationRuntimeResources {
   /**
    * Upgrade self-hosted integration runtime to latest version if availability.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("IntegrationRuntimes_Upgrade")
   upgrade is ArmResourceActionSync<
     IntegrationRuntimeResource,
     void,
@@ -258,8 +228,6 @@ interface IntegrationRuntimeResources {
   /**
    * Remove all linked integration runtimes under specific data factory in a self-hosted integration runtime.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("IntegrationRuntimes_RemoveLinks")
   removeLinks is ArmResourceActionSync<
     IntegrationRuntimeResource,
     LinkedIntegrationRuntimeRequest,
@@ -270,8 +238,6 @@ interface IntegrationRuntimeResources {
   /**
    * Create a linked integration runtime entry in a shared integration runtime.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("IntegrationRuntimes_CreateLinkedIntegrationRuntime")
   @action("linkedIntegrationRuntime")
   createLinkedIntegrationRuntime is ArmResourceActionSync<
     IntegrationRuntimeResource,
@@ -283,8 +249,6 @@ interface IntegrationRuntimeResources {
   /**
    * Refresh a SSIS integration runtime object metadata.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("IntegrationRuntimeObjectMetadata_Refresh")
   @action("refreshObjectMetadata")
   refresh is ArmResourceActionAsync<
     IntegrationRuntimeResource,
@@ -296,8 +260,6 @@ interface IntegrationRuntimeResources {
   /**
    * Get a SSIS integration runtime object metadata by specified path. The return is pageable metadata list.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("IntegrationRuntimeObjectMetadata_Get")
   @action("getObjectMetadata")
   integrationRuntimeObjectMetadataGet is ArmResourceActionSync<
     IntegrationRuntimeResource,
@@ -310,8 +272,6 @@ interface IntegrationRuntimeResources {
   /**
    * Gets a self-hosted integration runtime node.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("IntegrationRuntimeNodes_Get")
   @get
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/nodes/{nodeName}")
   integrationRuntimeNodesGet is IntegrationRuntimesOps.ActionSync<
@@ -334,8 +294,6 @@ interface IntegrationRuntimeResources {
   /**
    * Deletes a self-hosted integration runtime node.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("IntegrationRuntimeNodes_Delete")
   @delete
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/nodes/{nodeName}")
   integrationRuntimeNodesDelete is IntegrationRuntimesOps.ActionSync<
@@ -358,8 +316,6 @@ interface IntegrationRuntimeResources {
   /**
    * Updates a self-hosted integration runtime node.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("IntegrationRuntimeNodes_Update")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/nodes/{nodeName}")
   integrationRuntimeNodesUpdate is IntegrationRuntimesOps.CustomPatchSync<
     IntegrationRuntimeResource,
@@ -381,8 +337,6 @@ interface IntegrationRuntimeResources {
   /**
    * Get the IP address of self-hosted integration runtime node.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("IntegrationRuntimeNodes_GetIpAddress")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/nodes/{nodeName}/ipAddress")
   getIpAddress is IntegrationRuntimesOps.ActionSync<
     IntegrationRuntimeResource,
@@ -404,8 +358,6 @@ interface IntegrationRuntimeResources {
   /**
    * Enable interactive authoring of Managed Virtual Network integration runtime.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("IntegrationRuntime_EnableInteractiveQuery")
   @Azure.Core.useFinalStateVia("azure-async-operation")
   enableInteractiveQuery is ArmResourceActionAsync<
     IntegrationRuntimeResource,
@@ -418,8 +370,6 @@ interface IntegrationRuntimeResources {
   /**
    * Disable interactive authoring of Managed Virtual Network integration runtime.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("IntegrationRuntime_DisableInteractiveQuery")
   @Azure.Core.useFinalStateVia("azure-async-operation")
   disableInteractiveQuery is ArmResourceActionAsync<
     IntegrationRuntimeResource,

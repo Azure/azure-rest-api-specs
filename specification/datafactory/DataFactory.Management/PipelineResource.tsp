@@ -30,8 +30,6 @@ interface PipelineResources {
   /**
    * Gets a pipeline.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Pipelines_Get")
   get is ArmResourceRead<
     PipelineResource,
     Parameters = {
@@ -49,9 +47,7 @@ interface PipelineResources {
   /**
    * Creates or updates a pipeline.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  @operationId("Pipelines_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     PipelineResource,
     Parameters = {
@@ -69,15 +65,11 @@ interface PipelineResources {
   /**
    * Deletes a pipeline.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Pipelines_Delete")
   delete is ArmResourceDeleteSync<PipelineResource, Error = CloudError>;
 
   /**
    * Lists pipelines.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Pipelines_ListByFactory")
   listByFactory is ArmResourceListByParent<
     PipelineResource,
     Response = ArmResponse<PipelineListResponse>,
@@ -87,8 +79,6 @@ interface PipelineResources {
   /**
    * Creates a run of a pipeline.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Pipelines_CreateRun")
   createRun is ArmResourceActionSync<
     PipelineResource,
     Record<unknown>,

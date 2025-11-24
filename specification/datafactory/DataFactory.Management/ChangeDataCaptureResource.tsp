@@ -31,8 +31,6 @@ interface ChangeDataCaptureResources {
   /**
    * Gets a change data capture.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ChangeDataCapture_Get")
   get is ArmResourceRead<
     ChangeDataCaptureResource,
     Parameters = {
@@ -49,9 +47,7 @@ interface ChangeDataCaptureResources {
   /**
    * Creates or updates a change data capture resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  @operationId("ChangeDataCapture_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     ChangeDataCaptureResource,
     Parameters = {
@@ -69,8 +65,6 @@ interface ChangeDataCaptureResources {
   /**
    * Deletes a change data capture.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ChangeDataCapture_Delete")
   delete is ArmResourceDeleteSync<
     ChangeDataCaptureResource,
     Error = CloudError
@@ -79,8 +73,6 @@ interface ChangeDataCaptureResources {
   /**
    * Lists all resources of type change data capture.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ChangeDataCapture_ListByFactory")
   listByFactory is ArmResourceListByParent<
     ChangeDataCaptureResource,
     Response = ArmResponse<ChangeDataCaptureListResponse>,
@@ -90,8 +82,6 @@ interface ChangeDataCaptureResources {
   /**
    * Starts a change data capture.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ChangeDataCapture_Start")
   start is ArmResourceActionSync<
     ChangeDataCaptureResource,
     void,
@@ -102,8 +92,6 @@ interface ChangeDataCaptureResources {
   /**
    * Stops a change data capture.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ChangeDataCapture_Stop")
   stop is ArmResourceActionSync<
     ChangeDataCaptureResource,
     void,
@@ -114,8 +102,6 @@ interface ChangeDataCaptureResources {
   /**
    * Gets the current status for the change data capture resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ChangeDataCapture_Status")
   @get
   status is ArmResourceActionSync<
     ChangeDataCaptureResource,

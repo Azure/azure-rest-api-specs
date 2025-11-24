@@ -31,8 +31,6 @@ interface CredentialResources {
   /**
    * Gets a credential.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("CredentialOperations_Get")
   get is ArmResourceRead<
     CredentialResource,
     Parameters = {
@@ -50,9 +48,7 @@ interface CredentialResources {
   /**
    * Creates or updates a credential.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  @operationId("CredentialOperations_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     CredentialResource,
     Parameters = {
@@ -70,15 +66,11 @@ interface CredentialResources {
   /**
    * Deletes a credential.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("CredentialOperations_Delete")
   delete is ArmResourceDeleteSync<CredentialResource, Error = CloudError>;
 
   /**
    * List credentials.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("CredentialOperations_ListByFactory")
   listByFactory is ArmResourceListByParent<
     CredentialResource,
     Response = ArmResponse<CredentialListResponse>,

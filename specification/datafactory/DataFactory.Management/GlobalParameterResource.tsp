@@ -31,16 +31,12 @@ interface GlobalParameterResources {
   /**
    * Gets a Global parameter
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GlobalParameters_Get")
   get is ArmResourceRead<GlobalParameterResource, Error = CloudError>;
 
   /**
    * Creates or updates a Global parameter
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  @operationId("GlobalParameters_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     GlobalParameterResource,
     Response = ArmResourceUpdatedResponse<GlobalParameterResource>,
@@ -50,15 +46,11 @@ interface GlobalParameterResources {
   /**
    * Deletes a Global parameter
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GlobalParameters_Delete")
   delete is ArmResourceDeleteSync<GlobalParameterResource, Error = CloudError>;
 
   /**
    * Lists Global parameters
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GlobalParameters_ListByFactory")
   listByFactory is ArmResourceListByParent<
     GlobalParameterResource,
     Response = ArmResponse<GlobalParameterListResponse>,

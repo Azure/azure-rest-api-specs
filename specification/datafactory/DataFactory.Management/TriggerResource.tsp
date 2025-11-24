@@ -60,8 +60,6 @@ interface TriggerResources {
   /**
    * Gets a trigger.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Triggers_Get")
   get is ArmResourceRead<
     TriggerResource,
     Parameters = {
@@ -79,9 +77,7 @@ interface TriggerResources {
   /**
    * Creates or updates a trigger.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  @operationId("Triggers_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     TriggerResource,
     Parameters = {
@@ -99,15 +95,11 @@ interface TriggerResources {
   /**
    * Deletes a trigger.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Triggers_Delete")
   delete is ArmResourceDeleteSync<TriggerResource, Error = CloudError>;
 
   /**
    * Lists triggers.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Triggers_ListByFactory")
   listByFactory is ArmResourceListByParent<
     TriggerResource,
     Response = ArmResponse<TriggerListResponse>,
@@ -117,8 +109,6 @@ interface TriggerResources {
   /**
    * Subscribe event trigger to events.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Triggers_SubscribeToEvents")
   subscribeToEvents is ArmResourceActionAsync<
     TriggerResource,
     void,
@@ -129,8 +119,6 @@ interface TriggerResources {
   /**
    * Get a trigger's event subscription status.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Triggers_GetEventSubscriptionStatus")
   getEventSubscriptionStatus is ArmResourceActionSync<
     TriggerResource,
     void,
@@ -141,8 +129,6 @@ interface TriggerResources {
   /**
    * Unsubscribe event trigger from events.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Triggers_UnsubscribeFromEvents")
   unsubscribeFromEvents is ArmResourceActionAsync<
     TriggerResource,
     void,
@@ -153,9 +139,7 @@ interface TriggerResources {
   /**
    * Starts a trigger.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Triggers_Start")
   start is ArmResourceActionAsyncBase<
     TriggerResource,
     void,
@@ -167,9 +151,7 @@ interface TriggerResources {
   /**
    * Stops a trigger.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Triggers_Stop")
   stop is ArmResourceActionAsyncBase<
     TriggerResource,
     void,
@@ -181,8 +163,6 @@ interface TriggerResources {
   /**
    * Rerun single trigger instance by runId.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("TriggerRuns_Rerun")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}/triggerRuns/{runId}/rerun")
   rerun is TriggerRunsOps.ActionSync<
     TriggerResource,
@@ -201,8 +181,6 @@ interface TriggerResources {
   /**
    * Cancel a single trigger instance by runId.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("TriggerRuns_Cancel")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}/triggerRuns/{runId}/cancel")
   cancel is TriggerRunsOps.ActionSync<
     TriggerResource,

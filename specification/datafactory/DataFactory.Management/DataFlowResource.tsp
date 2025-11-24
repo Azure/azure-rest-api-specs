@@ -30,8 +30,6 @@ interface DataFlowResources {
   /**
    * Gets a data flow.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DataFlows_Get")
   get is ArmResourceRead<
     DataFlowResource,
     Parameters = {
@@ -48,9 +46,7 @@ interface DataFlowResources {
   /**
    * Creates or updates a data flow.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  @operationId("DataFlows_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     DataFlowResource,
     Parameters = {
@@ -68,15 +64,11 @@ interface DataFlowResources {
   /**
    * Deletes a data flow.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DataFlows_Delete")
   delete is ArmResourceDeleteSync<DataFlowResource, Error = CloudError>;
 
   /**
    * Lists data flows.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DataFlows_ListByFactory")
   listByFactory is ArmResourceListByParent<
     DataFlowResource,
     Response = ArmResponse<DataFlowListResponse>,

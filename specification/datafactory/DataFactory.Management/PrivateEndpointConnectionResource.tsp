@@ -31,8 +31,6 @@ interface PrivateEndpointConnectionResources {
   /**
    * Gets a private endpoint connection
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PrivateEndpointConnection_Get")
   get is ArmResourceRead<
     PrivateEndpointConnectionResource,
     Parameters = {
@@ -49,9 +47,7 @@ interface PrivateEndpointConnectionResources {
   /**
    * Approves or rejects a private endpoint connection
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  @operationId("PrivateEndpointConnection_CreateOrUpdate")
   createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     PrivateEndpointConnectionResource,
     Request = PrivateLinkConnectionApprovalRequestResource,
@@ -70,8 +66,6 @@ interface PrivateEndpointConnectionResources {
   /**
    * Deletes a private endpoint connection
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PrivateEndpointConnection_Delete")
   delete is ArmResourceDeleteSync<
     PrivateEndpointConnectionResource,
     Error = CloudError

@@ -30,8 +30,6 @@ interface DatasetResources {
   /**
    * Gets a dataset.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Datasets_Get")
   get is ArmResourceRead<
     DatasetResource,
     Parameters = {
@@ -49,9 +47,7 @@ interface DatasetResources {
   /**
    * Creates or updates a dataset.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  @operationId("Datasets_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     DatasetResource,
     Parameters = {
@@ -69,15 +65,11 @@ interface DatasetResources {
   /**
    * Deletes a dataset.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Datasets_Delete")
   delete is ArmResourceDeleteSync<DatasetResource, Error = CloudError>;
 
   /**
    * Lists datasets.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Datasets_ListByFactory")
   listByFactory is ArmResourceListByParent<
     DatasetResource,
     Response = ArmResponse<DatasetListResponse>,

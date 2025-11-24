@@ -32,8 +32,6 @@ interface ManagedVirtualNetworkResources {
   /**
    * Gets a managed Virtual Network.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ManagedVirtualNetworks_Get")
   get is ArmResourceRead<
     ManagedVirtualNetworkResource,
     Parameters = {
@@ -50,9 +48,7 @@ interface ManagedVirtualNetworkResources {
   /**
    * Creates or updates a managed Virtual Network.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  @operationId("ManagedVirtualNetworks_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     ManagedVirtualNetworkResource,
     Parameters = {
@@ -70,8 +66,6 @@ interface ManagedVirtualNetworkResources {
   /**
    * Lists managed Virtual Networks.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ManagedVirtualNetworks_ListByFactory")
   listByFactory is ArmResourceListByParent<
     ManagedVirtualNetworkResource,
     Response = ArmResponse<ManagedVirtualNetworkListResponse>,

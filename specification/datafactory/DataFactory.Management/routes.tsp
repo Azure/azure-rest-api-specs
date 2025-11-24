@@ -18,8 +18,6 @@ interface FactoriesOperationGroup {
   /**
    * Updates a factory's repo information.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Factories_ConfigureFactoryRepo")
   @autoRoute
   configureFactoryRepo is ArmProviderActionSync<
     Request = FactoryRepoUpdate,
@@ -42,8 +40,6 @@ interface ExposureControlOperationGroup {
   /**
    * Get exposure control feature for specific location.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ExposureControl_GetFeatureValue")
   @autoRoute
   getFeatureValue is ArmProviderActionSync<
     Request = ExposureControlRequest,
