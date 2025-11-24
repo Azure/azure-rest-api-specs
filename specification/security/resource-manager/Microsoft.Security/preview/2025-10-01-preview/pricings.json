@@ -505,7 +505,7 @@
         },
         "enforce": {
           "type": "string",
-          "description": "If set to \"False\", it allows the descendants of this scope to override the pricing configuration set on this scope. If set to \"True\", it prevents overrides and forces this pricing configuration on all the descendants of this scope. This field is only available for subscription-level pricing.",
+          "description": "If set to \"False\", it allows the descendants of this scope to override the pricing configuration set on this scope (allows setting inherited=\"False\"). If set to \"True\", it prevents overrides and forces this pricing configuration on all the descendants of this scope. This field is only available for subscription-level pricing.",
           "enum": [
             "False",
             "True"
@@ -516,11 +516,34 @@
             "values": [
               {
                 "value": "False",
-                "description": "Allows the descendants of this scope to override the pricing configuration set on this scope"
+                "description": "Allows the descendants of this scope to override the pricing configuration set on this scope (allows setting inherited=\"False\")"
               },
               {
                 "value": "True",
                 "description": "Prevents overrides and forces the current scope's pricing configuration to all descendants"
+              }
+            ]
+          }
+        },
+        "inherited": {
+          "type": "string",
+          "readOnly": true,
+          "description": "\"inherited\" = \"True\" indicates that the current scope inherits its pricing configuration from its parent. The ID of the parent scope that provides the inherited configuration is displayed in the \"inheritedFrom\" field. On the other hand, \"inherited\" = \"False\" indicates that the current scope has its own pricing configuration explicitly set, and does not inherit from its parent. This field is read only and available only for resource-level pricing.",
+          "enum": [
+            "True",
+            "False"
+          ],
+          "x-ms-enum": {
+            "name": "inherited",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "True",
+                "description": "Indicates that the current scope is inheriting its pricing configuration from its parent"
+              },
+              {
+                "value": "False",
+                "description": "Indicates that the current scope sets its own pricing configuration and does not inherit it from its parent"
               }
             ]
           }
