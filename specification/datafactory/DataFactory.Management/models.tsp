@@ -22374,10 +22374,29 @@ model TabularSource is CopySource {
   additionalColumns?: unknown;
 }
 
+alias TabularSourceProperties = {
+  /**
+   * Query timeout. Type: string (or Expression with resultType string), pattern: ((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9])).
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  queryTimeout?: unknown;
+
+  /**
+   * Specifies the additional columns to be added to source data. Type: array of objects(AdditionalColumns) (or Expression with resultType array of objects).
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  additionalColumns?: unknown;
+};
+
 /**
  * A copy activity Azure Table source.
  */
-model AzureTableSource extends TabularSource {
+#suppress "@azure-tools/typespec-client-generator-core/legacy-hierarchy-building-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TabularSource)
+model AzureTableSource extends CopySource {
+  ...TabularSourceProperties;
+
   /**
    * Azure Table source query. Type: string (or Expression with resultType string).
    */
@@ -28302,7 +28321,10 @@ model AzureFunctionActivityTypeProperties {
 /**
  * WebHook activity.
  */
-model WebHookActivity extends ControlActivity {
+#suppress "@azure-tools/typespec-client-generator-core/legacy-hierarchy-building-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ControlActivity)
+model WebHookActivity extends Activity {
   /**
    * WebHook activity properties.
    */
@@ -29494,11 +29516,21 @@ model TriggerDependencyReference is DependencyReference {
   referenceTrigger: TriggerReference;
 }
 
+alias TriggerDependencyReferenceProperties = {
+  /**
+   * Referenced trigger.
+   */
+  referenceTrigger: TriggerReference;
+};
 /**
  * Referenced tumbling window trigger dependency.
  */
-model TumblingWindowTriggerDependencyReference
-  extends TriggerDependencyReference {
+#suppress "@azure-tools/typespec-client-generator-core/legacy-hierarchy-building-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TriggerDependencyReference)
+model TumblingWindowTriggerDependencyReference extends DependencyReference {
+  ...TriggerDependencyReferenceProperties;
+
   /**
    * Timespan applied to the start time of a tumbling window when evaluating dependency.
    */

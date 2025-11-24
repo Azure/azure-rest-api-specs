@@ -11047,6 +11047,12 @@
       "type": "object",
       "description": "A copy activity Azure Table source.",
       "properties": {
+        "queryTimeout": {
+          "description": "Query timeout. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
+        },
+        "additionalColumns": {
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects(AdditionalColumns) (or Expression with resultType array of objects)."
+        },
         "azureTableSourceQuery": {
           "description": "Azure Table source query. Type: string (or Expression with resultType string)."
         },
@@ -11056,7 +11062,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/TabularSource"
+          "$ref": "#/definitions/CopySource"
         }
       ],
       "x-ms-discriminator-value": "AzureTableSource"
@@ -33953,6 +33959,10 @@
       "type": "object",
       "description": "Referenced tumbling window trigger dependency.",
       "properties": {
+        "referenceTrigger": {
+          "$ref": "#/definitions/TriggerReference",
+          "description": "Referenced trigger."
+        },
         "offset": {
           "type": "string",
           "description": "Timespan applied to the start time of a tumbling window when evaluating dependency.",
@@ -33968,9 +33978,12 @@
           "pattern": "((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))"
         }
       },
+      "required": [
+        "referenceTrigger"
+      ],
       "allOf": [
         {
-          "$ref": "#/definitions/TriggerDependencyReference"
+          "$ref": "#/definitions/DependencyReference"
         }
       ],
       "x-ms-discriminator-value": "TumblingWindowTriggerDependencyReference"
@@ -34919,7 +34932,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ControlActivity"
+          "$ref": "#/definitions/Activity"
         }
       ],
       "x-ms-discriminator-value": "WebHook"
