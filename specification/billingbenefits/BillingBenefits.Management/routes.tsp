@@ -19,7 +19,6 @@ interface SavingsPlanOperationGroup {
   /**
    * List savings plans.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @autoRoute
   @get
   @list
@@ -71,7 +70,6 @@ interface DiscountsOperationGroup {
   /**
    * List discounts that are applicable for a given scope. Currently supported scopes: billing accounts
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @route("/{scope}/providers/Microsoft.BillingBenefits/applicableDiscounts")
   @get
@@ -92,10 +90,8 @@ interface BenefitOperationGroup {
    * Validate savings plan purchase.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @autoRoute
   @action("validate")
-  @added(Microsoft.BillingBenefits.Versions.v2025_05_01_preview)
   validate is ArmProviderActionSync<
     Request = BenefitValidateRequest,
     Response = BenefitValidateResponse

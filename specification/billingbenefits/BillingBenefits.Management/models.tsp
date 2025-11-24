@@ -2657,7 +2657,6 @@ model CreditProperties {
 /**
  * Credit breakdown item representing a milestone, line-item, or no-charge service
  */
-@added(Microsoft.BillingBenefits.Versions.v2025_05_01_preview)
 model CreditBreakdownItem {
   /**
    * Allocation details including currency and amount for this breakdown item
