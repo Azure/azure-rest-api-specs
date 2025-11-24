@@ -6914,6 +6914,18 @@
         }
       }
     },
+    "AdditionalColumns": {
+      "type": "object",
+      "description": "Specify the column name and value of additional columns.",
+      "properties": {
+        "name": {
+          "description": "Additional column name. Type: string (or Expression with resultType string)."
+        },
+        "value": {
+          "description": "Additional column value. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
     "AmazonMWSLinkedService": {
       "type": "object",
       "description": "Amazon Marketplace Web Service linked service.",
@@ -7108,6 +7120,35 @@
         }
       ],
       "x-ms-discriminator-value": "AmazonRdsForOracle"
+    },
+    "AmazonRdsForOraclePartitionOption": {
+      "type": "string",
+      "enum": [
+        "None",
+        "PhysicalPartitionsOfTable",
+        "DynamicRange"
+      ],
+      "x-ms-enum": {
+        "name": "AmazonRdsForOraclePartitionOption",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "None"
+          },
+          {
+            "name": "PhysicalPartitionsOfTable",
+            "value": "PhysicalPartitionsOfTable",
+            "description": "PhysicalPartitionsOfTable"
+          },
+          {
+            "name": "DynamicRange",
+            "value": "DynamicRange",
+            "description": "DynamicRange"
+          }
+        ]
+      }
     },
     "AmazonRdsForOraclePartitionSettings": {
       "type": "object",
@@ -7817,6 +7858,47 @@
       "required": [
         "apiToken"
       ]
+    },
+    "AvroCompressionCodec": {
+      "type": "string",
+      "enum": [
+        "none",
+        "deflate",
+        "snappy",
+        "xz",
+        "bzip2"
+      ],
+      "x-ms-enum": {
+        "name": "AvroCompressionCodec",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "none",
+            "value": "none",
+            "description": "none"
+          },
+          {
+            "name": "deflate",
+            "value": "deflate",
+            "description": "deflate"
+          },
+          {
+            "name": "snappy",
+            "value": "snappy",
+            "description": "snappy"
+          },
+          {
+            "name": "xz",
+            "value": "xz",
+            "description": "xz"
+          },
+          {
+            "name": "bzip2",
+            "value": "bzip2",
+            "description": "bzip2"
+          }
+        ]
+      }
     },
     "AvroDataset": {
       "type": "object",
@@ -10965,6 +11047,28 @@
       "type": "object",
       "description": "A copy activity Azure Table source.",
       "properties": {
+        "type": {
+          "type": "string",
+          "description": "Copy source type."
+        },
+        "sourceRetryCount": {
+          "description": "Source retry count. Type: integer (or Expression with resultType integer)."
+        },
+        "sourceRetryWait": {
+          "description": "Source retry wait. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
+        },
+        "maxConcurrentConnections": {
+          "description": "The maximum concurrent connection count for the source data store. Type: integer (or Expression with resultType integer)."
+        },
+        "disableMetricsCollection": {
+          "description": "If true, disable data store metrics collection. Default is false. Type: boolean (or Expression with resultType boolean)."
+        },
+        "queryTimeout": {
+          "description": "Query timeout. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
+        },
+        "additionalColumns": {
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects(AdditionalColumns) (or Expression with resultType array of objects)."
+        },
         "azureTableSourceQuery": {
           "description": "Azure Table source query. Type: string (or Expression with resultType string)."
         },
@@ -10972,12 +11076,11 @@
           "description": "Azure Table source ignore table not found. Type: boolean (or Expression with resultType boolean)."
         }
       },
-      "allOf": [
-        {
-          "$ref": "#/definitions/TabularSource"
-        }
+      "discriminator": "type",
+      "required": [
+        "type"
       ],
-      "x-ms-discriminator-value": "AzureTableSource"
+      "additionalProperties": {}
     },
     "AzureTableStorageLinkedService": {
       "type": "object",
@@ -11897,6 +12000,78 @@
       ],
       "x-ms-discriminator-value": "ComponentSetup"
     },
+    "CompressionCodec": {
+      "type": "string",
+      "description": "All available compressionCodec values.",
+      "enum": [
+        "none",
+        "lzo",
+        "bzip2",
+        "gzip",
+        "deflate",
+        "zipDeflate",
+        "snappy",
+        "lz4",
+        "tar",
+        "tarGZip"
+      ],
+      "x-ms-enum": {
+        "name": "CompressionCodec",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "none",
+            "value": "none",
+            "description": "none"
+          },
+          {
+            "name": "lzo",
+            "value": "lzo",
+            "description": "lzo"
+          },
+          {
+            "name": "bzip2",
+            "value": "bzip2",
+            "description": "bzip2"
+          },
+          {
+            "name": "gzip",
+            "value": "gzip",
+            "description": "gzip"
+          },
+          {
+            "name": "deflate",
+            "value": "deflate",
+            "description": "deflate"
+          },
+          {
+            "name": "zipDeflate",
+            "value": "zipDeflate",
+            "description": "zipDeflate"
+          },
+          {
+            "name": "snappy",
+            "value": "snappy",
+            "description": "snappy"
+          },
+          {
+            "name": "lz4",
+            "value": "lz4",
+            "description": "lz4"
+          },
+          {
+            "name": "tar",
+            "value": "tar",
+            "description": "tar"
+          },
+          {
+            "name": "tarGZip",
+            "value": "tarGZip",
+            "description": "tarGZip"
+          }
+        ]
+      }
+    },
     "CompressionReadSettings": {
       "type": "object",
       "description": "Compression read settings.",
@@ -12088,25 +12263,102 @@
       "type": "object",
       "description": "Base class for all control activities like IfCondition, ForEach , Until.",
       "properties": {
+        "name": {
+          "type": "string",
+          "description": "Activity name."
+        },
         "type": {
           "type": "string",
-          "description": "Discriminator property for ControlActivity."
+          "description": "Type of activity."
+        },
+        "description": {
+          "type": "string",
+          "description": "Activity description."
+        },
+        "state": {
+          "$ref": "#/definitions/ActivityState",
+          "description": "Activity state. This is an optional property and if not provided, the state will be Active by default."
+        },
+        "onInactiveMarkAs": {
+          "$ref": "#/definitions/ActivityOnInactiveMarkAs",
+          "description": "Status result of the activity when the state is set to Inactive. This is an optional property and if not provided when the activity is inactive, the status will be Succeeded by default."
+        },
+        "dependsOn": {
+          "type": "array",
+          "description": "Activity depends on condition.",
+          "items": {
+            "$ref": "#/definitions/ActivityDependency"
+          },
+          "x-ms-identifiers": []
+        },
+        "userProperties": {
+          "type": "array",
+          "description": "Activity user properties.",
+          "items": {
+            "$ref": "#/definitions/UserProperty"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       },
       "discriminator": "type",
       "required": [
+        "name",
         "type"
       ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/Activity"
-        }
-      ]
+      "additionalProperties": {}
     },
     "CopyActivity": {
       "type": "object",
       "description": "Copy activity.",
       "properties": {
+        "name": {
+          "type": "string",
+          "description": "Activity name."
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of activity."
+        },
+        "description": {
+          "type": "string",
+          "description": "Activity description."
+        },
+        "state": {
+          "$ref": "#/definitions/ActivityState",
+          "description": "Activity state. This is an optional property and if not provided, the state will be Active by default."
+        },
+        "onInactiveMarkAs": {
+          "$ref": "#/definitions/ActivityOnInactiveMarkAs",
+          "description": "Status result of the activity when the state is set to Inactive. This is an optional property and if not provided when the activity is inactive, the status will be Succeeded by default."
+        },
+        "dependsOn": {
+          "type": "array",
+          "description": "Activity depends on condition.",
+          "items": {
+            "$ref": "#/definitions/ActivityDependency"
+          },
+          "x-ms-identifiers": []
+        },
+        "userProperties": {
+          "type": "array",
+          "description": "Activity user properties.",
+          "items": {
+            "$ref": "#/definitions/UserProperty"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "linkedServiceName": {
+          "$ref": "#/definitions/LinkedServiceReference",
+          "description": "Linked service reference."
+        },
+        "policy": {
+          "$ref": "#/definitions/ActivityPolicy",
+          "description": "Activity policy."
+        },
         "typeProperties": {
           "$ref": "#/definitions/CopyActivityTypeProperties",
           "description": "Copy activity properties.",
@@ -12133,15 +12385,13 @@
           ]
         }
       },
+      "discriminator": "type",
       "required": [
+        "name",
+        "type",
         "typeProperties"
       ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ExecutionActivity"
-        }
-      ],
-      "x-ms-discriminator-value": "Copy"
+      "additionalProperties": {}
     },
     "CopyActivityLogSettings": {
       "type": "object",
@@ -12221,6 +12471,36 @@
         "sink"
       ]
     },
+    "CopyBehaviorType": {
+      "type": "string",
+      "description": "All available types of copy behavior.",
+      "enum": [
+        "PreserveHierarchy",
+        "FlattenHierarchy",
+        "MergeFiles"
+      ],
+      "x-ms-enum": {
+        "name": "CopyBehaviorType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "PreserveHierarchy",
+            "value": "PreserveHierarchy",
+            "description": "PreserveHierarchy"
+          },
+          {
+            "name": "FlattenHierarchy",
+            "value": "FlattenHierarchy",
+            "description": "FlattenHierarchy"
+          },
+          {
+            "name": "MergeFiles",
+            "value": "MergeFiles",
+            "description": "MergeFiles"
+          }
+        ]
+      }
+    },
     "CopyComputeScaleProperties": {
       "type": "object",
       "description": "CopyComputeScale properties for managed integration runtime.",
@@ -12292,6 +12572,21 @@
         },
         "disableMetricsCollection": {
           "description": "If true, disable data store metrics collection. Default is false. Type: boolean (or Expression with resultType boolean)."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ],
+      "additionalProperties": {}
+    },
+    "CopyTranslator": {
+      "type": "object",
+      "description": "A copy activity translator.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Copy translator type."
         }
       },
       "discriminator": "type",
@@ -13804,6 +14099,42 @@
       ],
       "additionalProperties": {}
     },
+    "DatasetCompressionLevel": {
+      "type": "string",
+      "description": "All available compression levels.",
+      "enum": [
+        "Optimal",
+        "Fastest"
+      ],
+      "x-ms-enum": {
+        "name": "DatasetCompressionLevel",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Optimal",
+            "value": "Optimal",
+            "description": "Optimal"
+          },
+          {
+            "name": "Fastest",
+            "value": "Fastest",
+            "description": "Fastest"
+          }
+        ]
+      }
+    },
+    "DatasetDataElement": {
+      "type": "object",
+      "description": "Columns that define the structure of the dataset.",
+      "properties": {
+        "name": {
+          "description": "Name of the column. Type: string (or Expression with resultType string)."
+        },
+        "type": {
+          "description": "Type of the column. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
     "DatasetDebugResource": {
       "type": "object",
       "description": "Dataset debug resource.",
@@ -13937,6 +14268,19 @@
           "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ]
+    },
+    "DatasetSchemaDataElement": {
+      "type": "object",
+      "description": "Columns that define the physical type schema of the dataset.",
+      "properties": {
+        "name": {
+          "description": "Name of the schema column. Type: string (or Expression with resultType string)."
+        },
+        "type": {
+          "description": "Type of the schema column. Type: string (or Expression with resultType string)."
+        }
+      },
+      "additionalProperties": {}
     },
     "DatasetStorageFormat": {
       "type": "object",
@@ -14762,6 +15106,42 @@
       ],
       "x-ms-discriminator-value": "DynamicsAXSource"
     },
+    "DynamicsAuthenticationType": {
+      "type": "string",
+      "description": "All available dynamicsAuthenticationType values.",
+      "enum": [
+        "Office365",
+        "Ifd",
+        "AADServicePrincipal",
+        "Active Directory"
+      ],
+      "x-ms-enum": {
+        "name": "DynamicsAuthenticationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Office365",
+            "value": "Office365",
+            "description": "Office365"
+          },
+          {
+            "name": "Ifd",
+            "value": "Ifd",
+            "description": "Ifd"
+          },
+          {
+            "name": "AADServicePrincipal",
+            "value": "AADServicePrincipal",
+            "description": "AADServicePrincipal"
+          },
+          {
+            "name": "Active Directory",
+            "value": "Active Directory",
+            "description": "Active Directory"
+          }
+        ]
+      }
+    },
     "DynamicsCrmEntityDataset": {
       "type": "object",
       "description": "The Dynamics CRM entity dataset.",
@@ -14912,6 +15292,30 @@
         }
       ],
       "x-ms-discriminator-value": "DynamicsCrmSource"
+    },
+    "DynamicsDeploymentType": {
+      "type": "string",
+      "description": "All available dynamicsDeploymentType values.",
+      "enum": [
+        "Online",
+        "OnPremisesWithIfd"
+      ],
+      "x-ms-enum": {
+        "name": "DynamicsDeploymentType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Online",
+            "value": "Online",
+            "description": "Online"
+          },
+          {
+            "name": "OnPremisesWithIfd",
+            "value": "OnPremisesWithIfd",
+            "description": "OnPremisesWithIfd"
+          }
+        ]
+      }
     },
     "DynamicsEntityDataset": {
       "type": "object",
@@ -15648,9 +16052,43 @@
       "type": "object",
       "description": "Base class for all execution activities.",
       "properties": {
+        "name": {
+          "type": "string",
+          "description": "Activity name."
+        },
         "type": {
           "type": "string",
-          "description": "Discriminator property for ExecutionActivity."
+          "description": "Type of activity."
+        },
+        "description": {
+          "type": "string",
+          "description": "Activity description."
+        },
+        "state": {
+          "$ref": "#/definitions/ActivityState",
+          "description": "Activity state. This is an optional property and if not provided, the state will be Active by default."
+        },
+        "onInactiveMarkAs": {
+          "$ref": "#/definitions/ActivityOnInactiveMarkAs",
+          "description": "Status result of the activity when the state is set to Inactive. This is an optional property and if not provided when the activity is inactive, the status will be Succeeded by default."
+        },
+        "dependsOn": {
+          "type": "array",
+          "description": "Activity depends on condition.",
+          "items": {
+            "$ref": "#/definitions/ActivityDependency"
+          },
+          "x-ms-identifiers": []
+        },
+        "userProperties": {
+          "type": "array",
+          "description": "Activity user properties.",
+          "items": {
+            "$ref": "#/definitions/UserProperty"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "linkedServiceName": {
           "$ref": "#/definitions/LinkedServiceReference",
@@ -15663,13 +16101,10 @@
       },
       "discriminator": "type",
       "required": [
+        "name",
         "type"
       ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/Activity"
-        }
-      ]
+      "additionalProperties": {}
     },
     "ExportSettings": {
       "type": "object",
@@ -16734,6 +17169,17 @@
           "description": "The table name. Type: string (or Expression with resultType string)."
         }
       }
+    },
+    "GetDataFactoryOperationStatusResponse": {
+      "type": "object",
+      "description": "Response body structure for get data factory operation status.",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Status of the operation."
+        }
+      },
+      "additionalProperties": {}
     },
     "GetMetadataActivity": {
       "type": "object",
@@ -18508,6 +18954,36 @@
       ],
       "x-ms-discriminator-value": "HdfsSource"
     },
+    "HdiNodeTypes": {
+      "type": "string",
+      "description": "All available HdiNodeTypes values.",
+      "enum": [
+        "Headnode",
+        "Workernode",
+        "Zookeeper"
+      ],
+      "x-ms-enum": {
+        "name": "HdiNodeTypes",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Headnode",
+            "value": "Headnode",
+            "description": "Headnode"
+          },
+          {
+            "name": "Workernode",
+            "value": "Workernode",
+            "description": "Workernode"
+          },
+          {
+            "name": "Zookeeper",
+            "value": "Zookeeper",
+            "description": "Zookeeper"
+          }
+        ]
+      }
+    },
     "HiveAuthenticationType": {
       "type": "string",
       "description": "The authentication method used to access the Hive server.",
@@ -20265,6 +20741,27 @@
       ],
       "additionalProperties": {}
     },
+    "IntegrationRuntimeStatusListResponse": {
+      "type": "object",
+      "description": "A list of integration runtime status.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The IntegrationRuntimeStatusResponse items on this page",
+          "items": {
+            "$ref": "#/definitions/IntegrationRuntimeStatusResponse"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "IntegrationRuntimeStatusResponse": {
       "type": "object",
       "description": "Integration runtime status response.",
@@ -20583,6 +21080,30 @@
       ],
       "x-ms-discriminator-value": "JsonFormat"
     },
+    "JsonFormatFilePattern": {
+      "type": "string",
+      "description": "JSON format file pattern. A property of JsonFormat.",
+      "enum": [
+        "setOfObjects",
+        "arrayOfObjects"
+      ],
+      "x-ms-enum": {
+        "name": "JsonFormatFilePattern",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "setOfObjects",
+            "value": "setOfObjects",
+            "description": "setOfObjects"
+          },
+          {
+            "name": "arrayOfObjects",
+            "value": "arrayOfObjects",
+            "description": "arrayOfObjects"
+          }
+        ]
+      }
+    },
     "JsonReadSettings": {
       "type": "object",
       "description": "Json read settings.",
@@ -20641,6 +21162,30 @@
         }
       ],
       "x-ms-discriminator-value": "JsonSource"
+    },
+    "JsonWriteFilePattern": {
+      "type": "string",
+      "description": "All available filePatterns.",
+      "enum": [
+        "setOfObjects",
+        "arrayOfObjects"
+      ],
+      "x-ms-enum": {
+        "name": "JsonWriteFilePattern",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "setOfObjects",
+            "value": "setOfObjects",
+            "description": "setOfObjects"
+          },
+          {
+            "name": "arrayOfObjects",
+            "value": "arrayOfObjects",
+            "description": "arrayOfObjects"
+          }
+        ]
+      }
     },
     "JsonWriteSettings": {
       "type": "object",
@@ -22795,7 +23340,21 @@
       "properties": {
         "type": {
           "type": "string",
-          "description": "Discriminator property for MultiplePipelineTrigger."
+          "description": "Trigger type."
+        },
+        "description": {
+          "type": "string",
+          "description": "Trigger description."
+        },
+        "runtimeState": {
+          "$ref": "#/definitions/TriggerRuntimeState",
+          "description": "Indicates if trigger is running or not. Updated when Start/Stop APIs are called on the Trigger.",
+          "readOnly": true
+        },
+        "annotations": {
+          "type": "array",
+          "description": "List of tags that can be used for describing the trigger.",
+          "items": {}
         },
         "pipelines": {
           "type": "array",
@@ -22812,11 +23371,7 @@
       "required": [
         "type"
       ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/Trigger"
-        }
-      ]
+      "additionalProperties": {}
     },
     "MySqlLinkedService": {
       "type": "object",
@@ -22989,6 +23544,36 @@
           "type": "string",
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
+      }
+    },
+    "NetezzaPartitionOption": {
+      "type": "string",
+      "description": "The partition mechanism that will be used for Netezza read in parallel.",
+      "enum": [
+        "None",
+        "DataSlice",
+        "DynamicRange"
+      ],
+      "x-ms-enum": {
+        "name": "NetezzaPartitionOption",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "None"
+          },
+          {
+            "name": "DataSlice",
+            "value": "DataSlice",
+            "description": "DataSlice"
+          },
+          {
+            "name": "DynamicRange",
+            "value": "DynamicRange",
+            "description": "DynamicRange"
+          }
+        ]
       }
     },
     "NetezzaPartitionSettings": {
@@ -23978,6 +24563,36 @@
         }
       }
     },
+    "OraclePartitionOption": {
+      "type": "string",
+      "description": "The partition mechanism that will be used for Oracle read in parallel.",
+      "enum": [
+        "None",
+        "PhysicalPartitionsOfTable",
+        "DynamicRange"
+      ],
+      "x-ms-enum": {
+        "name": "OraclePartitionOption",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "None"
+          },
+          {
+            "name": "PhysicalPartitionsOfTable",
+            "value": "PhysicalPartitionsOfTable",
+            "description": "PhysicalPartitionsOfTable"
+          },
+          {
+            "name": "DynamicRange",
+            "value": "DynamicRange",
+            "description": "DynamicRange"
+          }
+        ]
+      }
+    },
     "OraclePartitionSettings": {
       "type": "object",
       "description": "The settings that will be leveraged for Oracle source partitioning.",
@@ -24163,6 +24778,41 @@
         }
       }
     },
+    "OrcCompressionCodec": {
+      "type": "string",
+      "enum": [
+        "none",
+        "zlib",
+        "snappy",
+        "lzo"
+      ],
+      "x-ms-enum": {
+        "name": "OrcCompressionCodec",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "none",
+            "value": "none",
+            "description": "none"
+          },
+          {
+            "name": "zlib",
+            "value": "zlib",
+            "description": "zlib"
+          },
+          {
+            "name": "snappy",
+            "value": "snappy",
+            "description": "snappy"
+          },
+          {
+            "name": "lzo",
+            "value": "lzo",
+            "description": "lzo"
+          }
+        ]
+      }
+    },
     "OrcDataset": {
       "type": "object",
       "description": "ORC dataset.",
@@ -24262,6 +24912,16 @@
         }
       ],
       "x-ms-discriminator-value": "OrcWriteSettings"
+    },
+    "OutputColumn": {
+      "type": "object",
+      "description": "The columns to be read out from the Office 365 table.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the table column. Type: string."
+        }
+      }
     },
     "PackageStore": {
       "type": "object",
@@ -26142,6 +26802,47 @@
         "rerunConcurrency"
       ]
     },
+    "Resource": {
+      "type": "object",
+      "description": "Azure Data Factory top-level resource.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The resource identifier.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The resource name.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The resource type.",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "The resource location.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "description": "The resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "eTag": {
+          "type": "string",
+          "description": "Etag identifies change in the resource.",
+          "readOnly": true
+        }
+      }
+    },
     "ResponsysLinkedService": {
       "type": "object",
       "description": "Responsys linked service.",
@@ -27241,6 +27942,30 @@
       ],
       "x-ms-discriminator-value": "SalesforceSource"
     },
+    "SalesforceSourceReadBehavior": {
+      "type": "string",
+      "description": "The Salesforce read behavior for the operation",
+      "enum": [
+        "Query",
+        "QueryAll"
+      ],
+      "x-ms-enum": {
+        "name": "SalesforceSourceReadBehavior",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Query",
+            "value": "Query",
+            "description": "Query"
+          },
+          {
+            "name": "QueryAll",
+            "value": "QueryAll",
+            "description": "QueryAll"
+          }
+        ]
+      }
+    },
     "SalesforceV2LinkedService": {
       "type": "object",
       "description": "Linked service for Salesforce V2.",
@@ -27766,6 +28491,36 @@
         }
       }
     },
+    "SapHanaPartitionOption": {
+      "type": "string",
+      "description": "The partition mechanism that will be used for SAP HANA read in parallel.",
+      "enum": [
+        "None",
+        "PhysicalPartitionsOfTable",
+        "SapHanaDynamicRange"
+      ],
+      "x-ms-enum": {
+        "name": "SapHanaPartitionOption",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "None"
+          },
+          {
+            "name": "PhysicalPartitionsOfTable",
+            "value": "PhysicalPartitionsOfTable",
+            "description": "PhysicalPartitionsOfTable"
+          },
+          {
+            "name": "SapHanaDynamicRange",
+            "value": "SapHanaDynamicRange",
+            "description": "SapHanaDynamicRange"
+          }
+        ]
+      }
+    },
     "SapHanaPartitionSettings": {
       "type": "object",
       "description": "The settings that will be leveraged for SAP HANA source partitioning.",
@@ -28170,6 +28925,54 @@
         }
       }
     },
+    "SapTablePartitionOption": {
+      "type": "string",
+      "description": "The partition mechanism that will be used for SAP table read in parallel.",
+      "enum": [
+        "None",
+        "PartitionOnInt",
+        "PartitionOnCalendarYear",
+        "PartitionOnCalendarMonth",
+        "PartitionOnCalendarDate",
+        "PartitionOnTime"
+      ],
+      "x-ms-enum": {
+        "name": "SapTablePartitionOption",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "None"
+          },
+          {
+            "name": "PartitionOnInt",
+            "value": "PartitionOnInt",
+            "description": "PartitionOnInt"
+          },
+          {
+            "name": "PartitionOnCalendarYear",
+            "value": "PartitionOnCalendarYear",
+            "description": "PartitionOnCalendarYear"
+          },
+          {
+            "name": "PartitionOnCalendarMonth",
+            "value": "PartitionOnCalendarMonth",
+            "description": "PartitionOnCalendarMonth"
+          },
+          {
+            "name": "PartitionOnCalendarDate",
+            "value": "PartitionOnCalendarDate",
+            "description": "PartitionOnCalendarDate"
+          },
+          {
+            "name": "PartitionOnTime",
+            "value": "PartitionOnTime",
+            "description": "PartitionOnTime"
+          }
+        ]
+      }
+    },
     "SapTablePartitionSettings": {
       "type": "object",
       "description": "The settings that will be leveraged for SAP table source partitioning.",
@@ -28264,21 +29067,46 @@
       "type": "object",
       "description": "Trigger that creates pipeline runs periodically, on schedule.",
       "properties": {
+        "type": {
+          "type": "string",
+          "description": "Trigger type."
+        },
+        "description": {
+          "type": "string",
+          "description": "Trigger description."
+        },
+        "runtimeState": {
+          "$ref": "#/definitions/TriggerRuntimeState",
+          "description": "Indicates if trigger is running or not. Updated when Start/Stop APIs are called on the Trigger.",
+          "readOnly": true
+        },
+        "annotations": {
+          "type": "array",
+          "description": "List of tags that can be used for describing the trigger.",
+          "items": {}
+        },
+        "pipelines": {
+          "type": "array",
+          "description": "Pipelines that need to be started.",
+          "items": {
+            "$ref": "#/definitions/TriggerPipelineReference"
+          },
+          "x-ms-identifiers": [
+            "/pipelineReference/referenceName"
+          ]
+        },
         "typeProperties": {
           "$ref": "#/definitions/ScheduleTriggerTypeProperties",
           "description": "Schedule Trigger properties.",
           "x-ms-client-flatten": true
         }
       },
+      "discriminator": "type",
       "required": [
+        "type",
         "typeProperties"
       ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/MultiplePipelineTrigger"
-        }
-      ],
-      "x-ms-discriminator-value": "ScheduleTrigger"
+      "additionalProperties": {}
     },
     "ScheduleTriggerRecurrence": {
       "type": "object",
@@ -28605,6 +29433,30 @@
       "required": [
         "logDestination"
       ]
+    },
+    "ScriptType": {
+      "type": "string",
+      "description": "The type of the ScriptActivityScriptBlock.",
+      "enum": [
+        "Query",
+        "NonQuery"
+      ],
+      "x-ms-enum": {
+        "name": "ScriptType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Query",
+            "value": "Query",
+            "description": "Query"
+          },
+          {
+            "name": "NonQuery",
+            "value": "NonQuery",
+            "description": "NonQuery"
+          }
+        ]
+      }
     },
     "SecretBase": {
       "type": "object",
@@ -29277,6 +30129,30 @@
       ],
       "x-ms-discriminator-value": "ServicePrincipal"
     },
+    "ServicePrincipalCredentialType": {
+      "type": "string",
+      "description": "All available servicePrincipalCredentialType values.",
+      "enum": [
+        "ServicePrincipalKey",
+        "ServicePrincipalCert"
+      ],
+      "x-ms-enum": {
+        "name": "ServicePrincipalCredentialType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ServicePrincipalKey",
+            "value": "ServicePrincipalKey",
+            "description": "ServicePrincipalKey"
+          },
+          {
+            "name": "ServicePrincipalCert",
+            "value": "ServicePrincipalCert",
+            "description": "ServicePrincipalCert"
+          }
+        ]
+      }
+    },
     "ServicePrincipalCredentialTypeProperties": {
       "type": "object",
       "description": "Service Principal credential type properties.",
@@ -29733,6 +30609,36 @@
       "required": [
         "apiToken"
       ]
+    },
+    "SnowflakeAuthenticationType": {
+      "type": "string",
+      "description": "The type used for authentication. Type: string.",
+      "enum": [
+        "Basic",
+        "KeyPair",
+        "AADServicePrincipal"
+      ],
+      "x-ms-enum": {
+        "name": "SnowflakeAuthenticationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Basic",
+            "value": "Basic",
+            "description": "Basic"
+          },
+          {
+            "name": "KeyPair",
+            "value": "KeyPair",
+            "description": "KeyPair"
+          },
+          {
+            "name": "AADServicePrincipal",
+            "value": "AADServicePrincipal",
+            "description": "AADServicePrincipal"
+          }
+        ]
+      }
     },
     "SnowflakeDataset": {
       "type": "object",
@@ -30489,6 +31395,30 @@
         }
       }
     },
+    "SqlDWWriteBehaviorEnum": {
+      "type": "string",
+      "description": "Specify the write behavior when copying data into sql dw.",
+      "enum": [
+        "Insert",
+        "Upsert"
+      ],
+      "x-ms-enum": {
+        "name": "SqlDWWriteBehaviorEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Insert",
+            "value": "Insert",
+            "description": "Insert"
+          },
+          {
+            "name": "Upsert",
+            "value": "Upsert",
+            "description": "Upsert"
+          }
+        ]
+      }
+    },
     "SqlMISink": {
       "type": "object",
       "description": "A copy activity Azure SQL Managed Instance sink.",
@@ -30562,6 +31492,36 @@
         }
       ],
       "x-ms-discriminator-value": "SqlMISource"
+    },
+    "SqlPartitionOption": {
+      "type": "string",
+      "description": "The partition mechanism that will be used for Sql read in parallel.",
+      "enum": [
+        "None",
+        "PhysicalPartitionsOfTable",
+        "DynamicRange"
+      ],
+      "x-ms-enum": {
+        "name": "SqlPartitionOption",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "None"
+          },
+          {
+            "name": "PhysicalPartitionsOfTable",
+            "value": "PhysicalPartitionsOfTable",
+            "description": "PhysicalPartitionsOfTable"
+          },
+          {
+            "name": "DynamicRange",
+            "value": "DynamicRange",
+            "description": "DynamicRange"
+          }
+        ]
+      }
     },
     "SqlPartitionSettings": {
       "type": "object",
@@ -30953,6 +31913,36 @@
         "keys": {
           "description": "Key column names for unique row identification. Type: array of strings (or Expression with resultType array of strings)."
         }
+      }
+    },
+    "SqlWriteBehaviorEnum": {
+      "type": "string",
+      "description": "Specify the write behavior when copying data into sql.",
+      "enum": [
+        "Insert",
+        "Upsert",
+        "StoredProcedure"
+      ],
+      "x-ms-enum": {
+        "name": "SqlWriteBehaviorEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Insert",
+            "value": "Insert",
+            "description": "Insert"
+          },
+          {
+            "name": "Upsert",
+            "value": "Upsert",
+            "description": "Upsert"
+          },
+          {
+            "name": "StoredProcedure",
+            "value": "StoredProcedure",
+            "description": "StoredProcedure"
+          }
+        ]
       }
     },
     "SquareLinkedService": {
@@ -31685,6 +32675,73 @@
       ],
       "additionalProperties": {}
     },
+    "StoredProcedureParameter": {
+      "type": "object",
+      "description": "SQL stored procedure parameter.",
+      "properties": {
+        "value": {
+          "description": "Stored procedure parameter value. Type: string (or Expression with resultType string)."
+        },
+        "type": {
+          "$ref": "#/definitions/StoredProcedureParameterType",
+          "description": "Stored procedure parameter type."
+        }
+      }
+    },
+    "StoredProcedureParameterType": {
+      "type": "string",
+      "description": "Stored procedure parameter type.",
+      "enum": [
+        "String",
+        "Int",
+        "Int64",
+        "Decimal",
+        "Guid",
+        "Boolean",
+        "Date"
+      ],
+      "x-ms-enum": {
+        "name": "StoredProcedureParameterType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "String",
+            "value": "String",
+            "description": "String"
+          },
+          {
+            "name": "Int",
+            "value": "Int",
+            "description": "Int"
+          },
+          {
+            "name": "Int64",
+            "value": "Int64",
+            "description": "Int64"
+          },
+          {
+            "name": "Decimal",
+            "value": "Decimal",
+            "description": "Decimal"
+          },
+          {
+            "name": "Guid",
+            "value": "Guid",
+            "description": "Guid"
+          },
+          {
+            "name": "Boolean",
+            "value": "Boolean",
+            "description": "Boolean"
+          },
+          {
+            "name": "Date",
+            "value": "Date",
+            "description": "Date"
+          }
+        ]
+      }
+    },
     "SubResource": {
       "type": "object",
       "description": "Azure Data Factory nested resource, which belongs to a factory.",
@@ -32114,7 +33171,19 @@
       "properties": {
         "type": {
           "type": "string",
-          "description": "Discriminator property for TabularSource."
+          "description": "Copy source type."
+        },
+        "sourceRetryCount": {
+          "description": "Source retry count. Type: integer (or Expression with resultType integer)."
+        },
+        "sourceRetryWait": {
+          "description": "Source retry wait. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
+        },
+        "maxConcurrentConnections": {
+          "description": "The maximum concurrent connection count for the source data store. Type: integer (or Expression with resultType integer)."
+        },
+        "disableMetricsCollection": {
+          "description": "If true, disable data store metrics collection. Default is false. Type: boolean (or Expression with resultType boolean)."
         },
         "queryTimeout": {
           "description": "Query timeout. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
@@ -32127,11 +33196,41 @@
       "required": [
         "type"
       ],
+      "additionalProperties": {}
+    },
+    "TabularTranslator": {
+      "type": "object",
+      "description": "A copy activity tabular translator.",
+      "properties": {
+        "columnMappings": {
+          "description": "Column mappings. Example: \"UserId: MyUserId, Group: MyGroup, Name: MyName\" Type: string (or Expression with resultType string). This property will be retired. Please use mappings property."
+        },
+        "schemaMapping": {
+          "description": "The schema mapping to map between tabular data and hierarchical data. Example: {\"Column1\": \"$.Column1\", \"Column2\": \"$.Column2.Property1\", \"Column3\": \"$.Column2.Property2\"}. Type: object (or Expression with resultType object). This property will be retired. Please use mappings property."
+        },
+        "collectionReference": {
+          "description": "The JSON Path of the Nested Array that is going to do cross-apply. Type: object (or Expression with resultType object)."
+        },
+        "mapComplexValuesToString": {
+          "description": "Whether to map complex (array and object) values to simple strings in json format. Type: boolean (or Expression with resultType boolean)."
+        },
+        "mappings": {
+          "description": "Column mappings with logical types. Tabular->tabular example: [{\"source\":{\"name\":\"CustomerName\",\"type\":\"String\"},\"sink\":{\"name\":\"ClientName\",\"type\":\"String\"}},{\"source\":{\"name\":\"CustomerAddress\",\"type\":\"String\"},\"sink\":{\"name\":\"ClientAddress\",\"type\":\"String\"}}].  Hierarchical->tabular example: [{\"source\":{\"path\":\"$.CustomerName\",\"type\":\"String\"},\"sink\":{\"name\":\"ClientName\",\"type\":\"String\"}},{\"source\":{\"path\":\"$.CustomerAddress\",\"type\":\"String\"},\"sink\":{\"name\":\"ClientAddress\",\"type\":\"String\"}}]. Type: object (or Expression with resultType object)."
+        },
+        "typeConversion": {
+          "description": "Whether to enable the advanced type conversion feature in the Copy activity. Type: boolean (or Expression with resultType boolean)."
+        },
+        "typeConversionSettings": {
+          "$ref": "#/definitions/TypeConversionSettings",
+          "description": "Type conversion settings"
+        }
+      },
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/CopyTranslator"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "TabularTranslator"
     },
     "TarGZipReadSettings": {
       "type": "object",
@@ -32343,6 +33442,36 @@
         }
       }
     },
+    "TeradataPartitionOption": {
+      "type": "string",
+      "description": "The partition mechanism that will be used for teradata read in parallel.",
+      "enum": [
+        "None",
+        "Hash",
+        "DynamicRange"
+      ],
+      "x-ms-enum": {
+        "name": "TeradataPartitionOption",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "None"
+          },
+          {
+            "name": "Hash",
+            "value": "Hash",
+            "description": "Hash"
+          },
+          {
+            "name": "DynamicRange",
+            "value": "DynamicRange",
+            "description": "DynamicRange"
+          }
+        ]
+      }
+    },
     "TeradataPartitionSettings": {
       "type": "object",
       "description": "The settings that will be leveraged for teradata source partitioning.",
@@ -32528,7 +33657,7 @@
       "properties": {
         "type": {
           "type": "string",
-          "description": "Discriminator property for TriggerDependencyReference."
+          "description": "The type of dependency reference."
         },
         "referenceTrigger": {
           "$ref": "#/definitions/TriggerReference",
@@ -32539,11 +33668,6 @@
       "required": [
         "type",
         "referenceTrigger"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/DependencyReference"
-        }
       ]
     },
     "TriggerFilterParameters": {
@@ -32901,6 +34025,14 @@
       "type": "object",
       "description": "Referenced tumbling window trigger dependency.",
       "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of dependency reference."
+        },
+        "referenceTrigger": {
+          "$ref": "#/definitions/TriggerReference",
+          "description": "Referenced trigger."
+        },
         "offset": {
           "type": "string",
           "description": "Timespan applied to the start time of a tumbling window when evaluating dependency.",
@@ -32916,12 +34048,11 @@
           "pattern": "((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))"
         }
       },
-      "allOf": [
-        {
-          "$ref": "#/definitions/TriggerDependencyReference"
-        }
-      ],
-      "x-ms-discriminator-value": "TumblingWindowTriggerDependencyReference"
+      "discriminator": "type",
+      "required": [
+        "type",
+        "referenceTrigger"
+      ]
     },
     "TumblingWindowTriggerTypeProperties": {
       "type": "object",
@@ -33029,6 +34160,36 @@
             "description": "LinkedServiceReference"
           }
         ]
+      }
+    },
+    "TypeConversionSettings": {
+      "type": "object",
+      "description": "Type conversion settings",
+      "properties": {
+        "allowDataTruncation": {
+          "description": "Whether to allow data truncation when converting the data. Type: boolean (or Expression with resultType boolean)."
+        },
+        "treatBooleanAsNumber": {
+          "description": "Whether to treat boolean values as numbers. Type: boolean (or Expression with resultType boolean)."
+        },
+        "dateTimeFormat": {
+          "description": "The format for DateTime values. Type: string (or Expression with resultType string)."
+        },
+        "dateTimeOffsetFormat": {
+          "description": "The format for DateTimeOffset values. Type: string (or Expression with resultType string)."
+        },
+        "timeSpanFormat": {
+          "description": "The format for TimeSpan values. Type: string (or Expression with resultType string)."
+        },
+        "timeFormat": {
+          "description": "The format for Time values. Type: string (or Expression with resultType string)."
+        },
+        "dateFormat": {
+          "description": "The format for Date values. Type: string (or Expression with resultType string)."
+        },
+        "culture": {
+          "description": "The culture used to convert data from/to string. Type: string (or Expression with resultType string)."
+        }
       }
     },
     "TypeSpec.Http.OkResponse": {
@@ -33822,6 +34983,44 @@
       "type": "object",
       "description": "WebHook activity.",
       "properties": {
+        "name": {
+          "type": "string",
+          "description": "Activity name."
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of activity."
+        },
+        "description": {
+          "type": "string",
+          "description": "Activity description."
+        },
+        "state": {
+          "$ref": "#/definitions/ActivityState",
+          "description": "Activity state. This is an optional property and if not provided, the state will be Active by default."
+        },
+        "onInactiveMarkAs": {
+          "$ref": "#/definitions/ActivityOnInactiveMarkAs",
+          "description": "Status result of the activity when the state is set to Inactive. This is an optional property and if not provided when the activity is inactive, the status will be Succeeded by default."
+        },
+        "dependsOn": {
+          "type": "array",
+          "description": "Activity depends on condition.",
+          "items": {
+            "$ref": "#/definitions/ActivityDependency"
+          },
+          "x-ms-identifiers": []
+        },
+        "userProperties": {
+          "type": "array",
+          "description": "Activity user properties.",
+          "items": {
+            "$ref": "#/definitions/UserProperty"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
         "typeProperties": {
           "$ref": "#/definitions/WebHookActivityTypeProperties",
           "description": "WebHook activity properties.",
@@ -33832,15 +35031,13 @@
           "description": "Activity policy."
         }
       },
+      "discriminator": "type",
       "required": [
+        "name",
+        "type",
         "typeProperties"
       ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ControlActivity"
-        }
-      ],
-      "x-ms-discriminator-value": "WebHook"
+      "additionalProperties": {}
     },
     "WebHookActivityMethod": {
       "type": "string",

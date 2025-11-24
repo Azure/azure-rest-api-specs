@@ -20218,14 +20218,12 @@ model ServiceNowV2LinkedServiceTypeProperties {
 /**
  * Base class for all control activities like IfCondition, ForEach , Until.
  */
-@discriminator("type")
-model ControlActivity extends Activity {}
+model ControlActivity is Activity;
 
 /**
  * Base class for all execution activities.
  */
-@discriminator("type")
-model ExecutionActivity extends Activity {
+model ExecutionActivity is Activity {
   /**
    * Linked service reference.
    */
@@ -22069,7 +22067,7 @@ model OrcSink extends CopySink {
 /**
  * Copy activity.
  */
-model CopyActivity extends ExecutionActivity {
+model CopyActivity is ExecutionActivity {
   /**
    * Copy activity properties.
    */
@@ -22086,11 +22084,6 @@ model CopyActivity extends ExecutionActivity {
    */
   @identifiers(#["referenceName"])
   outputs?: DatasetReference[];
-
-  /**
-   * Type of activity.
-   */
-  type: "Copy";
 }
 
 /**
@@ -22347,8 +22340,7 @@ model BinarySource extends CopySource {
  * Copy activity sources of tabular type.
  */
 #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@discriminator("type")
-model TabularSource extends CopySource {
+model TabularSource is CopySource {
   /**
    * Query timeout. Type: string (or Expression with resultType string), pattern: ((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9])).
    */
@@ -22365,7 +22357,7 @@ model TabularSource extends CopySource {
 /**
  * A copy activity Azure Table source.
  */
-model AzureTableSource extends TabularSource {
+model AzureTableSource is TabularSource {
   /**
    * Azure Table source query. Type: string (or Expression with resultType string).
    */
@@ -22377,11 +22369,6 @@ model AzureTableSource extends TabularSource {
    */
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   azureTableSourceIgnoreTableNotFound?: unknown;
-
-  /**
-   * Copy source type.
-   */
-  type: "AzureTableSource";
 }
 
 /**
@@ -28287,7 +28274,7 @@ model AzureFunctionActivityTypeProperties {
 /**
  * WebHook activity.
  */
-model WebHookActivity extends ControlActivity {
+model WebHookActivity is ControlActivity {
   /**
    * WebHook activity properties.
    */
@@ -28297,11 +28284,6 @@ model WebHookActivity extends ControlActivity {
    * Activity policy.
    */
   policy?: SecureInputOutputPolicy;
-
-  /**
-   * Type of activity.
-   */
-  type: "WebHook";
 }
 
 /**
@@ -29099,8 +29081,7 @@ model ExpressionV2 {
  * Base class for all triggers that support one to many model for trigger to pipeline.
  */
 #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@discriminator("type")
-model MultiplePipelineTrigger extends Trigger {
+model MultiplePipelineTrigger is Trigger {
   /**
    * Pipelines that need to be started.
    */
@@ -29111,16 +29092,11 @@ model MultiplePipelineTrigger extends Trigger {
 /**
  * Trigger that creates pipeline runs periodically, on schedule.
  */
-model ScheduleTrigger extends MultiplePipelineTrigger {
+model ScheduleTrigger is MultiplePipelineTrigger {
   /**
    * Schedule Trigger properties.
    */
   typeProperties: ScheduleTriggerTypeProperties;
-
-  /**
-   * Trigger type.
-   */
-  type: "ScheduleTrigger";
 }
 
 /**
@@ -29462,8 +29438,7 @@ model TriggerReference {
  * Trigger referenced dependency.
  */
 #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@discriminator("type")
-model TriggerDependencyReference extends DependencyReference {
+model TriggerDependencyReference is DependencyReference {
   /**
    * Referenced trigger.
    */
@@ -29473,8 +29448,7 @@ model TriggerDependencyReference extends DependencyReference {
 /**
  * Referenced tumbling window trigger dependency.
  */
-model TumblingWindowTriggerDependencyReference
-  extends TriggerDependencyReference {
+model TumblingWindowTriggerDependencyReference is TriggerDependencyReference {
   /**
    * Timespan applied to the start time of a tumbling window when evaluating dependency.
    */
@@ -29490,11 +29464,6 @@ model TumblingWindowTriggerDependencyReference
   @minLength(8)
   @pattern("((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))")
   size?: string;
-
-  /**
-   * The type of dependency reference.
-   */
-  type: "TumblingWindowTriggerDependencyReference";
 }
 
 /**
