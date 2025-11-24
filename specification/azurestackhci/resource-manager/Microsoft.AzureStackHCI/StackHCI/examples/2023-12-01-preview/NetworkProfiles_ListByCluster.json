@@ -17,7 +17,12 @@
             "type": "Microsoft.AzureStackHCI/clusters/networkProfiles",
             "properties": {
               "reportedProperties": {
-                "clusterIpAddress": "10.0.0.1",
+                "clusterIpv4Addresses": [
+                  "10.0.0.1"
+                ],
+                "clusterIpv6Addresses": [
+                  "2001:db8::1"
+                ],
                 "subnet": "255.255.255.0",
                 "autoSelectMigrationNetwork": true,
                 "enableNetworkNaming": true,
@@ -45,7 +50,12 @@
                     "name": "Adapter 1",
                     "description": "Primary adapter",
                     "vlan": 10,
-                    "ipAddress": "10.0.0.2",
+                    "ipv4Addresses": [
+                      "10.0.0.2"
+                    ],
+                    "ipv6Addresses": [
+                      "2001:db8::2"
+                    ],
                     "driverVersion": "1.0.0",
                     "nodeId": "node1"
                   }
@@ -77,14 +87,19 @@
                     "id": "vadapter1",
                     "name": "vAdapter 1",
                     "vlan": 30,
-                    "ipAddress": "10.0.0.3"
+                    "ipv4Addresses": [
+                      "10.0.0.3"
+                    ],
+                    "ipv6Addresses": [
+                      "2001:db8::3"
+                    ]
                   }
                 ],
                 "intents": [
                   {
                     "id": "intent1",
                     "name": "Intent 1",
-                    "type": "Management",
+                    "isManagementType": true,
                     "physicalAdapterIds": [
                       "adapter1"
                     ],
@@ -100,7 +115,8 @@
                   }
                 ]
               },
-              "lastSyncTimestamp": "2023-10-01T12:00:00Z"
+              "lastSyncTimestamp": "2023-10-01T12:00:00Z",
+              "lastSyncStatus": "Success"
             }
           }
         ],
