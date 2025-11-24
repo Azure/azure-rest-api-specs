@@ -393,7 +393,7 @@ union ActivityOnInactiveMarkAs {
   Skipped: "Skipped",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union DependencyCondition {
   string,
 
@@ -2606,7 +2606,7 @@ union RecurrenceFrequency {
   Year: "Year",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union BlobEventTypes {
   string,
 
@@ -2689,7 +2689,7 @@ union DatasetCompressionLevel {
   Fastest: "Fastest",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union AvroCompressionCodec {
   string,
 
@@ -2776,7 +2776,7 @@ union CompressionCodec {
   tarGZip: "tarGZip",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union OrcCompressionCodec {
   string,
 
@@ -2918,7 +2918,7 @@ union SalesforceSourceReadBehavior {
   QueryAll: "QueryAll",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union AmazonRdsForOraclePartitionOption {
   string,
 
@@ -3166,7 +3166,7 @@ union NetezzaPartitionOption {
 /**
  * The transport protocol to use in the Thrift layer (for V2 only). Default value is Binary.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum ImpalaThriftTransportProtocol {
   /**
    * Binary
@@ -3179,8 +3179,8 @@ enum ImpalaThriftTransportProtocol {
   HTTP,
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum DaysOfWeek {
   /**
    * Sunday
@@ -3221,7 +3221,7 @@ enum DaysOfWeek {
 /**
  * The days of the week.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum DayOfWeek {
   /**
    * Sunday
@@ -3518,7 +3518,7 @@ model FactoryIdentity {
   /**
    * The principal id of the identity.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @format("uuid")
   principalId?: string;
@@ -3526,7 +3526,7 @@ model FactoryIdentity {
   /**
    * The client tenant id of the identity.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @format("uuid")
   tenantId?: string;
@@ -3534,7 +3534,7 @@ model FactoryIdentity {
   /**
    * List of user assigned identities for the factory.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   userAssignedIdentities?: Record<unknown>;
 }
 
@@ -3545,7 +3545,7 @@ model FactoryProperties {
   /**
    * Factory provisioning state, example Succeeded.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   provisioningState?: string;
 
@@ -3575,7 +3575,7 @@ model FactoryProperties {
   /**
    * List of parameters for factory.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   globalParameters?: Record<GlobalParameterSpecification>;
 
   /**
@@ -3724,7 +3724,7 @@ model Resource {
   /**
    * The resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 
   /**
@@ -3810,7 +3810,7 @@ model FactoryUpdateParameters {
   /**
    * The resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 
   /**
@@ -3945,8 +3945,8 @@ model IntegrationRuntimeListResponse
 /**
  * Azure Data Factory nested object which serves as a compute resource for activities.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @discriminator("type")
 model IntegrationRuntime {
   ...Record<unknown>;
@@ -4376,7 +4376,7 @@ model SelfHostedIntegrationRuntimeNode {
   /**
    * The integration runtime capabilities dictionary
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   capabilities?: Record<string>;
 
@@ -4506,7 +4506,7 @@ model LinkedServiceListResponse is Azure.Core.Page<LinkedServiceResource>;
 /**
  * The nested object which contains the information and credential which can be used to connect with related store or compute resource.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @discriminator("type")
 model LinkedService {
   ...Record<unknown>;
@@ -4515,7 +4515,7 @@ model LinkedService {
    * Type of linked service.
    */
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   type: string;
 
   /**
@@ -4536,7 +4536,7 @@ model LinkedService {
   /**
    * Parameters for linked service.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   parameters?: Record<ParameterSpecification>;
 
   /**
@@ -4562,7 +4562,7 @@ model IntegrationRuntimeReference {
   /**
    * Arguments for integration runtime.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   parameters?: Record<unknown>;
 }
 
@@ -4590,7 +4590,7 @@ model DatasetListResponse is Azure.Core.Page<DatasetResource>;
 /**
  * The Azure Data Factory nested object which identifies data within different data stores, such as tables, files, folders, and documents.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @discriminator("type")
 model Dataset {
   ...Record<unknown>;
@@ -4599,7 +4599,7 @@ model Dataset {
    * Type of dataset.
    */
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   type: string;
 
   /**
@@ -4627,7 +4627,7 @@ model Dataset {
   /**
    * Parameters for dataset.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   parameters?: Record<ParameterSpecification>;
 
   /**
@@ -4658,7 +4658,7 @@ model LinkedServiceReference {
   /**
    * Arguments for LinkedService.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   parameters?: Record<unknown>;
 }
 
@@ -4680,7 +4680,7 @@ model PipelineListResponse is Azure.Core.Page<PipelineResource>;
 /**
  * A data factory pipeline.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model Pipeline {
   /**
    * The description of the pipeline.
@@ -4696,13 +4696,13 @@ model Pipeline {
   /**
    * List of parameters for pipeline.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   parameters?: Record<ParameterSpecification>;
 
   /**
    * List of variables for pipeline.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   variables?: Record<VariableSpecification>;
 
   /**
@@ -4719,7 +4719,7 @@ model Pipeline {
   /**
    * Dimensions emitted by Pipeline.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   runDimensions?: Record<unknown>;
 
   /**
@@ -4989,14 +4989,14 @@ model PipelineRun {
   /**
    * The full or partial list of parameter name, value pair used in the pipeline run.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   parameters?: Record<string>;
 
   /**
    * Run dimensions emitted by Pipeline run.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   runDimensions?: Record<string>;
 
@@ -5197,7 +5197,7 @@ model TriggerListResponse is Azure.Core.Page<TriggerResource>;
 /**
  * Azure data factory nested object which contains information about creating pipeline run
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @discriminator("type")
 model Trigger {
   ...Record<unknown>;
@@ -5206,7 +5206,7 @@ model Trigger {
    * Trigger type.
    */
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   type: string;
 
   /**
@@ -5340,28 +5340,28 @@ model TriggerRun {
   /**
    * List of property name and value related to trigger run. Name, value pair depends on type of trigger.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   properties?: Record<string>;
 
   /**
    * List of pipeline name and run Id triggered by the trigger run.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   triggeredPipelines?: Record<string>;
 
   /**
    * Run dimension for which trigger was fired.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   runDimension?: Record<string>;
 
   /**
    * Status of the upstream pipelines.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   dependencyStatus?: Record<unknown>;
 }
@@ -5369,14 +5369,14 @@ model TriggerRun {
 /**
  * Azure Data Factory nested object which contains a flow with data movements and transformations.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @discriminator("type")
 model DataFlow {
   /**
    * Type of data flow.
    */
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   type: string;
 
   /**
@@ -5438,7 +5438,7 @@ model CreateDataFlowDebugSessionRequest {
 /**
  * Integration runtime debug resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model IntegrationRuntimeDebugResource extends SubResourceDebugResource {
   /**
    * Integration runtime properties.
@@ -5580,7 +5580,7 @@ model DataFlowDebugPackage {
 /**
  * Data flow debug resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DataFlowDebugResource extends SubResourceDebugResource {
   /**
    * Data flow properties.
@@ -5591,7 +5591,7 @@ model DataFlowDebugResource extends SubResourceDebugResource {
 /**
  * Dataset debug resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DatasetDebugResource extends SubResourceDebugResource {
   /**
    * Dataset properties.
@@ -5602,7 +5602,7 @@ model DatasetDebugResource extends SubResourceDebugResource {
 /**
  * Linked service debug resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model LinkedServiceDebugResource extends SubResourceDebugResource {
   /**
    * Properties of linked service.
@@ -5639,7 +5639,7 @@ model DataFlowDebugPackageDebugSettings {
   /**
    * Data flow parameters.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   parameters?: Record<unknown>;
 
   /**
@@ -5755,7 +5755,7 @@ model ManagedVirtualNetworkListResponse
 /**
  * A managed Virtual Network associated with the Azure Data Factory
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ManagedVirtualNetwork {
   ...Record<unknown>;
 
@@ -5813,7 +5813,7 @@ model ManagedPrivateEndpoint {
   /**
    * The managed private endpoint provisioning state
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   provisioningState?: string;
 }
@@ -5849,7 +5849,7 @@ model CredentialListResponse is Azure.Core.Page<CredentialResource>;
 /**
  * The Azure Data Factory nested object which contains the information and credential which can be used to connect with related store or compute resource.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @discriminator("type")
 model Credential {
   ...Record<unknown>;
@@ -5858,7 +5858,7 @@ model Credential {
    * Type of credential.
    */
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   type: string;
 
   /**
@@ -5882,8 +5882,8 @@ model PrivateEndpointConnectionListResponse
  * A remote private endpoint connection
  */
 model RemotePrivateEndpointConnection {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   provisioningState?: string;
 
@@ -5902,7 +5902,7 @@ model RemotePrivateEndpointConnection {
  * A wrapper for an ARM resource id
  */
 model ArmIdWrapper {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   id?: string;
 }
@@ -5930,7 +5930,7 @@ model PrivateLinkConnectionState {
 /**
  * Private Endpoint Connection Approval ARM resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PrivateLinkConnectionApprovalRequestResource extends SubResource {
   /**
    * Core resource properties
@@ -5967,7 +5967,7 @@ model PrivateEndpoint {
  * Wrapper for a collection of private link resources
  */
 model PrivateLinkResourcesWrapper {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @pageItems
   value: PrivateLinkResource[];
 }
@@ -5975,7 +5975,7 @@ model PrivateLinkResourcesWrapper {
 /**
  * A private link resource
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PrivateLinkResource extends SubResource {
   /**
    * Core resource properties
@@ -6020,7 +6020,7 @@ model ChangeDataCaptureListResponse
 /**
  * A Azure Data Factory object which automatically detects data changes at the source and then sends the updated data to the destination.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ChangeDataCapture {
   /**
    * The folder that this CDC is in. If not specified, CDC will appear at the root level.
@@ -6503,7 +6503,7 @@ model TriggerPipelineReference {
   /**
    * Pipeline parameters.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   parameters?: Record<unknown>;
 }
 
@@ -6524,7 +6524,7 @@ model DatasetReference {
   /**
    * Arguments for dataset.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   parameters?: Record<unknown>;
 }
 
@@ -6565,7 +6565,7 @@ model DataFlowReference {
   /**
    * Data flow parameters
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   parameters?: Record<unknown>;
 }
 
@@ -6652,7 +6652,7 @@ model MappingDataFlowTypeProperties {
 /**
  * Transformation for data flow source.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DataFlowSource extends Transformation {
   /**
    * Schema linked service reference.
@@ -6693,7 +6693,7 @@ model Transformation {
 /**
  * Transformation for data flow sink.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DataFlowSink extends Transformation {
   /**
    * Schema linked service reference.
@@ -6793,7 +6793,7 @@ model PowerQueryTypeProperties {
 /**
  * Power query source.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PowerQuerySource extends DataFlowSource {
   /**
    * source script.
@@ -6804,7 +6804,7 @@ model PowerQuerySource extends DataFlowSource {
 /**
  * Power query sink.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PowerQuerySink extends DataFlowSink {
   /**
    * sink script.
@@ -7356,7 +7356,7 @@ model AvroDatasetTypeProperties {
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   avroCompressionCodec?: unknown;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @maxValue(9)
   @minValue(1)
   avroCompressionLevel?: int32;
@@ -9118,13 +9118,13 @@ model RestResourceDatasetTypeProperties {
   /**
    * The additional HTTP headers in the request to the RESTful API.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   additionalHeaders?: Record<unknown>;
 
   /**
    * The pagination rules to compose next page requests.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   paginationRules?: Record<unknown>;
 }
 
@@ -10569,7 +10569,7 @@ model IntegrationRuntimeDataFlowProperties {
   customProperties?: IntegrationRuntimeDataFlowPropertiesCustomPropertiesItem[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model IntegrationRuntimeDataFlowPropertiesCustomPropertiesItem {
   /**
    * Name of custom property.
@@ -11265,7 +11265,7 @@ model SelfHostedIntegrationRuntimeStatusTypeProperties {
   /**
    * Object with additional information about integration runtime capabilities.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   capabilities?: Record<string>;
 
@@ -11741,7 +11741,7 @@ model AzureTableStorageLinkedService extends LinkedService {
 /**
  * Azure Table Storage linked service properties.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AzureTableStorageLinkedServiceTypeProperties
   extends AzureStorageLinkedServiceTypeProperties {
   /**
@@ -11894,7 +11894,7 @@ model AzureSqlDWLinkedService extends LinkedService {
 /**
  * Azure SQL Data Warehouse linked service properties.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AzureSqlDWLinkedServiceTypeProperties
   extends SqlServerBaseLinkedServiceTypeProperties {
@@ -11984,7 +11984,7 @@ model SqlServerLinkedService extends LinkedService {
 /**
  * SQL Server linked service properties.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SqlServerLinkedServiceTypeProperties
   extends SqlServerBaseLinkedServiceTypeProperties {
   /**
@@ -12070,7 +12070,7 @@ model AmazonRdsForSqlServerLinkedService extends LinkedService {
 /**
  * Amazon Rds for SQL Server linked service properties.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AmazonRdsForSqlServerLinkedServiceTypeProperties
   extends SqlServerBaseLinkedServiceTypeProperties {
   /**
@@ -12125,7 +12125,7 @@ model AzureSqlDatabaseLinkedService extends LinkedService {
 /**
  * Azure SQL Database linked service properties.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AzureSqlDatabaseLinkedServiceTypeProperties
   extends SqlServerBaseLinkedServiceTypeProperties {
   /**
@@ -12220,7 +12220,7 @@ model AzureSqlMILinkedService extends LinkedService {
 /**
  * Azure SQL Managed Instance linked service properties.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AzureSqlMILinkedServiceTypeProperties
   extends SqlServerBaseLinkedServiceTypeProperties {
@@ -18993,19 +18993,19 @@ model AzureDatabricksLinkedServiceTypeProperties {
   /**
    * A set of optional, user-specified Spark configuration key-value pairs.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   newClusterSparkConf?: Record<unknown>;
 
   /**
    * A set of optional, user-specified Spark environment variables key-value pairs.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   newClusterSparkEnvVars?: Record<unknown>;
 
   /**
    * Additional tags for cluster resources. This property is ignored in instance pool configurations.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   newClusterCustomTags?: Record<unknown>;
 
   /**
@@ -22339,7 +22339,6 @@ model BinarySource extends CopySource {
 /**
  * Copy activity sources of tabular type.
  */
-#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model TabularSource is CopySource {
   /**
    * Query timeout. Type: string (or Expression with resultType string), pattern: ((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9])).
@@ -24872,13 +24871,13 @@ model SnowflakeExportCopyCommand extends ExportSettings {
   /**
    * Additional copy options directly passed to snowflake Copy Command. Type: key value pairs (value should be string type) (or Expression with resultType object). Example: "additionalCopyOptions": { "DATE_FORMAT": "MM/DD/YYYY", "TIME_FORMAT": "'HH24:MI:SS.FF'" }
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   additionalCopyOptions?: Record<unknown>;
 
   /**
    * Additional format options directly passed to snowflake Copy Command. Type: key value pairs (value should be string type) (or Expression with resultType object). Example: "additionalFormatOptions": { "OVERWRITE": "TRUE", "MAX_FILE_SIZE": "'FALSE'" }
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   additionalFormatOptions?: Record<unknown>;
 
   /**
@@ -25112,7 +25111,7 @@ model DWCopyCommandSettings {
   /**
    * Additional options directly passed to SQL DW in Copy Command. Type: key value pairs (value should be string type) (or Expression with resultType object). Example: "additionalOptions": { "MAXERRORS": "1000", "DATEFORMAT": "'ymd'" }
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   additionalOptions?: Record<string>;
 }
 
@@ -25799,13 +25798,13 @@ model SnowflakeImportCopyCommand extends ImportSettings {
   /**
    * Additional copy options directly passed to snowflake Copy Command. Type: key value pairs (value should be string type) (or Expression with resultType object). Example: "additionalCopyOptions": { "DATE_FORMAT": "MM/DD/YYYY", "TIME_FORMAT": "'HH24:MI:SS.FF'" }
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   additionalCopyOptions?: Record<unknown>;
 
   /**
    * Additional format options directly passed to snowflake Copy Command. Type: key value pairs (value should be string type) (or Expression with resultType object). Example: "additionalFormatOptions": { "FORCE": "TRUE", "LOAD_UNCERTAIN_FILES": "'FALSE'" }
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   additionalFormatOptions?: Record<unknown>;
 
   /**
@@ -26427,13 +26426,13 @@ model HDInsightHiveActivityTypeProperties {
   /**
    * Allows user to specify defines for Hive job request.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   defines?: Record<unknown>;
 
   /**
    * User specified arguments under hivevar namespace.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   variables?: Record<unknown>;
 
   /**
@@ -26494,7 +26493,7 @@ model HDInsightPigActivityTypeProperties {
   /**
    * Allows user to specify defines for Pig job request.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   defines?: Record<unknown>;
 }
 
@@ -26560,7 +26559,7 @@ model HDInsightMapReduceActivityTypeProperties {
   /**
    * Allows user to specify defines for the MapReduce job request.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   defines?: Record<unknown>;
 }
 
@@ -26649,7 +26648,7 @@ model HDInsightStreamingActivityTypeProperties {
   /**
    * Allows user to specify defines for streaming job request.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   defines?: Record<unknown>;
 }
 
@@ -26715,7 +26714,7 @@ model HDInsightSparkActivityTypeProperties {
   /**
    * Spark configuration property.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sparkConfig?: Record<unknown>;
 }
 
@@ -26774,31 +26773,31 @@ model ExecuteSsisPackageActivityTypeProperties {
   /**
    * The project level parameters to execute the SSIS package.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   projectParameters?: Record<SsisExecutionParameter>;
 
   /**
    * The package level parameters to execute the SSIS package.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   packageParameters?: Record<SsisExecutionParameter>;
 
   /**
    * The project level connection managers to execute the SSIS package.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   projectConnectionManagers?: Record<Record<SsisExecutionParameter>>;
 
   /**
    * The package level connection managers to execute the SSIS package.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   packageConnectionManagers?: Record<Record<SsisExecutionParameter>>;
 
   /**
    * The property overrides to execute the SSIS package.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   propertyOverrides?: Record<SsisPropertyOverride>;
 
   /**
@@ -27055,7 +27054,7 @@ model CustomActivityTypeProperties {
   /**
    * User defined property bag. There is no restriction on the keys or values that can be used. The user specified custom activity has the full responsibility to consume and interpret the content defined.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   extendedProperties?: Record<unknown>;
 
   /**
@@ -27164,7 +27163,7 @@ model ExecutePipelineActivityTypeProperties {
   /**
    * Pipeline parameters.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   parameters?: Record<unknown>;
 
   /**
@@ -27333,7 +27332,7 @@ model WebActivityTypeProperties {
   /**
    * Represents the headers that will be sent to the request. For example, to set the language and type on a request: "headers" : { "Accept-Language": "en-us", "Content-Type": "application/json" }. Type: string (or Expression with resultType string).
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   headers?: Record<unknown>;
 
   /**
@@ -27620,19 +27619,19 @@ model AzureMLBatchExecutionActivityTypeProperties {
   /**
    * Key,Value pairs to be passed to the Azure ML Batch Execution Service endpoint. Keys must match the names of web service parameters defined in the published Azure ML web service. Values will be passed in the GlobalParameters property of the Azure ML batch execution request.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   globalParameters?: Record<unknown>;
 
   /**
    * Key,Value pairs, mapping the names of Azure ML endpoint's Web Service Outputs to AzureMLWebServiceFile objects specifying the output Blob locations. This information will be passed in the WebServiceOutputs property of the Azure ML batch execution request.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   webServiceOutputs?: Record<AzureMLWebServiceFile>;
 
   /**
    * Key,Value pairs, mapping the names of Azure ML endpoint's Web Service Inputs to AzureMLWebServiceFile objects specifying the input Blob locations.. This information will be passed in the WebServiceInputs property of the Azure ML batch execution request.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   webServiceInputs?: Record<AzureMLWebServiceFile>;
 }
 
@@ -27807,7 +27806,7 @@ model DataLakeAnalyticsUsqlActivityTypeProperties {
   /**
    * Parameters for U-SQL job request.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   parameters?: Record<unknown>;
 
   /**
@@ -28025,7 +28024,7 @@ model DatabricksNotebookActivityTypeProperties {
   /**
    * Base parameters to be used for each run of this job.If the notebook takes a parameter that is not specified, the default value from the notebook will be used.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   baseParameters?: Record<unknown>;
 
   /**
@@ -28137,7 +28136,7 @@ model DatabricksJobActivityTypeProperties {
   /**
    * Job parameters to be used for each run of this job. If the job takes a parameter that is not specified, the default value from the job will be used.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   jobParameters?: Record<unknown>;
 }
 
@@ -28261,7 +28260,7 @@ model AzureFunctionActivityTypeProperties {
   /**
    * Represents the headers that will be sent to the request. For example, to set the language and type on a request: "headers" : { "Accept-Language": "en-us", "Content-Type": "application/json" }. Type: string (or Expression with resultType string).
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   headers?: Record<unknown>;
 
   /**
@@ -28309,7 +28308,7 @@ model WebHookActivityTypeProperties {
   /**
    * Represents the headers that will be sent to the request. For example, to set the language and type on a request: "headers" : { "Accept-Language": "en-us", "Content-Type": "application/json" }. Type: string (or Expression with resultType string).
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   headers?: Record<unknown>;
 
   /**
@@ -28462,13 +28461,13 @@ model ExecuteWranglingDataflowActivity extends Activity {
 /**
  * Execute power query data flow activity properties.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ExecutePowerQueryActivityTypeProperties
   extends ExecuteDataFlowActivityTypeProperties {
   /**
    * (Deprecated. Please use Queries). List of Power Query activity sinks mapped to a queryName.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sinks?: Record<PowerQuerySink>;
 
   /**
@@ -28667,7 +28666,7 @@ model SynapseNotebookActivityTypeProperties {
   /**
    * Notebook parameters.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   parameters?: Record<NotebookParameter>;
 
   /**
@@ -28707,7 +28706,7 @@ model SynapseNotebookActivityTypeProperties {
   /**
    * Spark configuration property.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sparkConfig?: Record<unknown>;
 }
 
@@ -28879,7 +28878,7 @@ model SynapseSparkJobActivityTypeProperties {
   /**
    * Spark configuration property.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sparkConfig?: Record<unknown>;
 }
 
@@ -29080,7 +29079,6 @@ model ExpressionV2 {
 /**
  * Base class for all triggers that support one to many model for trigger to pipeline.
  */
-#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MultiplePipelineTrigger is Trigger {
   /**
    * Pipelines that need to be started.
@@ -29437,7 +29435,6 @@ model TriggerReference {
 /**
  * Trigger referenced dependency.
  */
-#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model TriggerDependencyReference is DependencyReference {
   /**
    * Referenced trigger.

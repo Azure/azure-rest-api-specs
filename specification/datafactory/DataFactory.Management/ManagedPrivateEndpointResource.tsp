@@ -47,7 +47,7 @@ interface ManagedPrivateEndpointResources {
   /**
    * Creates or updates a managed private endpoint.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     ManagedPrivateEndpointResource,
     Parameters = {

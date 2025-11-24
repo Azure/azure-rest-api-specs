@@ -47,7 +47,7 @@ interface PrivateEndpointConnectionResources {
   /**
    * Approves or rejects a private endpoint connection
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     PrivateEndpointConnectionResource,
     Request = PrivateLinkConnectionApprovalRequestResource,
@@ -74,7 +74,7 @@ interface PrivateEndpointConnectionResources {
   /**
    * Lists Private endpoint connections
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("privateEndPointConnections_ListByFactory")
   listByFactory is ArmResourceListByParent<
     PrivateEndpointConnectionResource,

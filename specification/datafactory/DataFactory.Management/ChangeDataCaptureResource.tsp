@@ -47,7 +47,7 @@ interface ChangeDataCaptureResources {
   /**
    * Creates or updates a change data capture resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     ChangeDataCaptureResource,
     Parameters = {
