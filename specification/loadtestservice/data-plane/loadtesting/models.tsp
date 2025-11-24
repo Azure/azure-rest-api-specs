@@ -1379,6 +1379,7 @@ model ListTestRunQueryParams {
 
   @doc("Number of results in response.")
   @query
+  @pageSize
   maxpagesize?: int32 = 50;
 
   @doc("Comma separated list of type of entities that have created the test run.")
