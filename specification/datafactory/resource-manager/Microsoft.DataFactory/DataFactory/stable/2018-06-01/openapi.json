@@ -12292,6 +12292,14 @@
       "type": "object",
       "description": "Copy activity.",
       "properties": {
+        "linkedServiceName": {
+          "$ref": "#/definitions/LinkedServiceReference",
+          "description": "Linked service reference."
+        },
+        "policy": {
+          "$ref": "#/definitions/ActivityPolicy",
+          "description": "Activity policy."
+        },
         "typeProperties": {
           "$ref": "#/definitions/CopyActivityTypeProperties",
           "description": "Copy activity properties.",
@@ -12323,7 +12331,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ExecutionActivity"
+          "$ref": "#/definitions/Activity"
         }
       ],
       "x-ms-discriminator-value": "Copy"
@@ -29002,6 +29010,16 @@
       "type": "object",
       "description": "Trigger that creates pipeline runs periodically, on schedule.",
       "properties": {
+        "pipelines": {
+          "type": "array",
+          "description": "Pipelines that need to be started.",
+          "items": {
+            "$ref": "#/definitions/TriggerPipelineReference"
+          },
+          "x-ms-identifiers": [
+            "/pipelineReference/referenceName"
+          ]
+        },
         "typeProperties": {
           "$ref": "#/definitions/ScheduleTriggerTypeProperties",
           "description": "Schedule Trigger properties.",
@@ -29013,7 +29031,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MultiplePipelineTrigger"
+          "$ref": "#/definitions/Trigger"
         }
       ],
       "x-ms-discriminator-value": "ScheduleTrigger"

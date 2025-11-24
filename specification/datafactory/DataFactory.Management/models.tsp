@@ -20235,6 +20235,17 @@ model ExecutionActivity is Activity {
   policy?: ActivityPolicy;
 }
 
+alias ExecutionActivityProperties = {
+  /**
+   * Linked service reference.
+   */
+  linkedServiceName?: LinkedServiceReference;
+
+  /**
+   * Activity policy.
+   */
+  policy?: ActivityPolicy;
+};
 /**
  * Execution policy for an activity.
  */
@@ -22067,7 +22078,12 @@ model OrcSink extends CopySink {
 /**
  * Copy activity.
  */
-model CopyActivity extends ExecutionActivity {
+#suppress "@azure-tools/typespec-client-generator-core/legacy-hierarchy-building-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ExecutionActivity)
+model CopyActivity extends Activity {
+  ...ExecutionActivityProperties;
+
   /**
    * Copy activity properties.
    */
@@ -29105,10 +29121,23 @@ model MultiplePipelineTrigger is Trigger {
   pipelines?: TriggerPipelineReference[];
 }
 
+alias MultiplePipelineTriggerProperties = {
+  /**
+   * Pipelines that need to be started.
+   */
+  @identifiers(#["/pipelineReference/referenceName"])
+  pipelines?: TriggerPipelineReference[];
+};
+
 /**
  * Trigger that creates pipeline runs periodically, on schedule.
  */
-model ScheduleTrigger extends MultiplePipelineTrigger {
+#suppress "@azure-tools/typespec-client-generator-core/legacy-hierarchy-building-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(MultiplePipelineTrigger)
+model ScheduleTrigger extends Trigger {
+  ...MultiplePipelineTriggerProperties;
+
   /**
    * Schedule Trigger properties.
    */
