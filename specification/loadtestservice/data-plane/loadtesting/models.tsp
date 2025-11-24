@@ -1424,6 +1424,7 @@ model ListTestQueryParams {
 
   @doc("Number of results in response.")
   @query
+  @pageSize
   maxpagesize?: int32 = 50;
 }
 
