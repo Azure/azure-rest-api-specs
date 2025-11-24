@@ -30,13 +30,11 @@ interface Clusters {
   /**
    * Get HCI cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   get is ArmResourceRead<Cluster>;
 
   /**
    * Create an HCI cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   create is ArmResourceCreateOrReplaceAsync<
     Cluster,
@@ -46,14 +44,12 @@ interface Clusters {
   /**
    * Update an HCI cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<Cluster, PatchModel = ClusterPatch>;
 
   /**
    * Delete an HCI cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     Cluster,
@@ -63,7 +59,6 @@ interface Clusters {
   /**
    * List all HCI clusters in a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   listByResourceGroup is ArmResourceListByParent<
     Cluster,
     Response = ArmResponse<ClusterList>
@@ -72,7 +67,6 @@ interface Clusters {
   /**
    * List all HCI clusters in a subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   listBySubscription is ArmListBySubscription<
     Cluster,
     Response = ArmResponse<ClusterList>
@@ -81,7 +75,6 @@ interface Clusters {
   /**
    * Update cluster secrets locations.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   updateSecretsLocations is ArmResourceActionAsync<
     Cluster,
     SecretsLocationsChangeRequest,
@@ -91,7 +84,6 @@ interface Clusters {
   /**
    * Upload certificate.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   uploadCertificate is ArmResourceActionNoResponseContentAsync<
     Cluster,
     UploadCertificateRequest
@@ -117,7 +109,6 @@ interface Clusters {
   /**
    * Extends Software Assurance Benefit to a cluster
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   extendSoftwareAssuranceBenefit is ArmResourceActionAsync<
     Cluster,
     SoftwareAssuranceChangeRequest,
@@ -127,7 +118,6 @@ interface Clusters {
   /**
    * Trigger Log Collection on a cluster
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   triggerLogCollection is ArmResourceActionAsync<
     Cluster,
     LogCollectionRequest,
@@ -137,31 +127,10 @@ interface Clusters {
   /**
    * Configure RemoteSupport on a cluster
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   configureRemoteSupport is ArmResourceActionAsync<
     Cluster,
     RemoteSupportRequest,
     Cluster
-  >;
-
-  /**
-   * List Offers available across publishers for the HCI Cluster.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @get
-  @action("offers")
-  @operationId("Offers_ListByCluster")
-  listByCluster is ArmResourceActionSync<
-    Cluster,
-    void,
-    ArmResponse<OfferList>,
-    Parameters = {
-      /**
-       * Specify $expand=content,contentVersion to populate additional fields related to the marketplace offer.
-       */
-      @query("$expand")
-      $expand?: string;
-    }
   >;
 }
 
@@ -975,7 +944,6 @@ model ClusterIdentityResponse {
   /**
    * Cluster identity properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   @visibility(Lifecycle.Read)
   properties?: ClusterIdentityResponseProperties;
 }

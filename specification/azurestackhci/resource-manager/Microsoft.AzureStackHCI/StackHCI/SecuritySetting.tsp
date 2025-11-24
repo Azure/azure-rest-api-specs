@@ -29,25 +29,21 @@ interface SecuritySettings {
   /**
    * Get a SecuritySetting
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   get is ArmResourceRead<SecuritySetting>;
 
   /**
    * Create a security setting
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<SecuritySetting>;
 
   /**
    * Delete a SecuritySetting
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   delete is ArmResourceDeleteWithoutOkAsync<SecuritySetting>;
 
   /**
    * List SecuritySetting resources by Clusters
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   listByClusters is ArmResourceListByParent<SecuritySetting>;
 }
 

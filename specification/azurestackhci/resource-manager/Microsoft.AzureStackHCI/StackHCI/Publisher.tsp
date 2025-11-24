@@ -29,13 +29,11 @@ interface Publishers {
   /**
    * Get Publisher resource details of HCI Cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   get is ArmResourceRead<Publisher>;
 
   /**
    * List Publishers available for the HCI Cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   listByCluster is ArmResourceListByParent<
     Publisher,
     Response = ArmResponse<PublisherList>

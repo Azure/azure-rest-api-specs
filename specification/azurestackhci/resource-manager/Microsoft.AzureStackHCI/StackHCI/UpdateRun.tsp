@@ -43,13 +43,11 @@ interface UpdateRuns {
   /**
    * Get the Update run for a specified update
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   get is ArmResourceRead<UpdateRun>;
 
   /**
    * Put Update runs for a specified update
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   put is ArmResourceCreateOrReplaceSync<
     UpdateRun,
@@ -59,7 +57,6 @@ interface UpdateRuns {
   /**
    * Delete specified Update Run
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
@@ -72,7 +69,6 @@ interface UpdateRuns {
   /**
    * List all Update runs for a specified update
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   list is ArmResourceListByParent<
     UpdateRun,
     Response = ArmResponse<UpdateRunList>
@@ -127,7 +123,6 @@ model UpdateRunProperties {
   /**
    * Progress representation of the update run steps.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   progress?: UpdateStep;
 }
 

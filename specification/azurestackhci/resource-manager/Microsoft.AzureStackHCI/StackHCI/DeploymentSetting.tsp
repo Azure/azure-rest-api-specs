@@ -28,25 +28,21 @@ interface DeploymentSettings {
   /**
    * Get a DeploymentSetting
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   get is ArmResourceRead<DeploymentSetting>;
 
   /**
    * Create a DeploymentSetting
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<DeploymentSetting>;
 
   /**
    * Delete a DeploymentSetting
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   delete is ArmResourceDeleteWithoutOkAsync<DeploymentSetting>;
 
   /**
    * List DeploymentSetting resources by Clusters
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   listByClusters is ArmResourceListByParent<DeploymentSetting>;
 }
 

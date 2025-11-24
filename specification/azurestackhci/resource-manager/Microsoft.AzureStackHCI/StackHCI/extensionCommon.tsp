@@ -28,7 +28,6 @@ model ExtensionProperties {
   /**
    * Parameters specific to this extension type.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   extensionParameters?: ExtensionParameters;
 
   /**

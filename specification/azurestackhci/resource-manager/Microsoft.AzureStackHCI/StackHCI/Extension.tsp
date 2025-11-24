@@ -30,26 +30,22 @@ interface Extensions {
   /**
    * Get particular Arc Extension of the Parent Entity(HCI Cluster/Edge Machine).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   get is ArmResourceRead<Extension>;
 
   /**
    * Create Extension for the Parent Entity(HCI Cluster/Edge Machine).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   create is ArmResourceCreateOrReplaceAsync<Extension>;
 
   /**
    * Update Extension for the Parent Entity(HCI Cluster/Edge Machine).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<Extension, PatchModel = ExtensionPatch>;
 
   /**
    * Delete particular Arc Extension of the Parent Entity(HCI Cluster/Edge Machine).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
@@ -62,7 +58,6 @@ interface Extensions {
   /**
    * List all Extensions under the Parent Entity(HCI Cluster/Edge Machine).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   listByArcSetting is ArmResourceListByParent<
     Extension,
     Response = ArmResponse<ExtensionList>
@@ -71,7 +66,6 @@ interface Extensions {
   /**
    * Upgrade a particular Arc Extension of the Parent Entity(HCI Cluster/Edge Machine).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   upgrade is ArmResourceActionAsyncBase<
     Extension,
     ExtensionUpgradeParameters,
@@ -111,7 +105,6 @@ model ExtensionPatch {
   /**
    * Describes Machine Extension Properties that can be updated.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   properties?: ExtensionPatchProperties;
 }
 
