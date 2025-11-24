@@ -524,50 +524,24 @@ input-file:
   - Microsoft.Compute/GalleryRP/stable/2024-03-03/GalleryRP.json
 
 directive:
-  # 2024-03-03: Make provisioning/state-related fields writable (back-compat)
-  - from: GalleryRP/stable/2024-03-03/GalleryRP.json
-    where: $.definitions.GalleryProperties.properties.provisioningState
-    transform: if ($.readOnly) { delete $.readOnly }
-  - from: GalleryRP/stable/2024-03-03/GalleryRP.json
-    where: $.definitions.SharingStatus.properties.aggregatedState
-    transform: if ($.readOnly) { delete $.readOnly }
-  - from: GalleryRP/stable/2024-03-03/GalleryRP.json
-    where: $.definitions.RegionalSharingStatus.properties.state
-    transform: if ($.readOnly) { delete $.readOnly }
-  - from: GalleryRP/stable/2024-03-03/GalleryRP.json
-    where: $.definitions.GalleryApplicationVersionProperties.properties.provisioningState
-    transform: if ($.readOnly) { delete $.readOnly }
-  - from: GalleryRP/stable/2024-03-03/GalleryRP.json
-    where: $.definitions.GalleryImageProperties.properties.provisioningState
-    transform: if ($.readOnly) { delete $.readOnly }
-  - from: GalleryRP/stable/2024-03-03/GalleryRP.json
-    where: $.definitions.GalleryImageVersionProperties.properties.provisioningState
-    transform: if ($.readOnly) { delete $.readOnly }
-  - from: GalleryRP/stable/2024-03-03/GalleryRP.json
-    where: $.definitions.ExecutedValidation.properties.status
-    transform: if ($.readOnly) { delete $.readOnly }
-  - from: GalleryRP/stable/2024-03-03/GalleryRP.json
-    where: $.definitions.GalleryInVMAccessControlProfileProperties.properties.provisioningState
-    transform: if ($.readOnly) { delete $.readOnly }
-  - from: GalleryRP/stable/2024-03-03/GalleryRP.json
-    where: $.definitions.GalleryInVMAccessControlProfileVersionProperties.properties.provisioningState
-    transform: if ($.readOnly) { delete $.readOnly }
-  - from: GalleryRP/stable/2024-03-03/GalleryRP.json
-    where: $.definitions.GalleryResourceProfilePropertiesBase.properties.provisioningState
-    transform: if ($.readOnly) { delete $.readOnly }
-  - from: GalleryRP/stable/2024-03-03/GalleryRP.json
-    where: $.definitions.GalleryResourceProfileVersionPropertiesBase.properties.provisioningState
-    transform: if ($.readOnly) { delete $.readOnly }
-  # Unions (status enums) – remove readOnly if emitter added it
-  - from: GalleryRP/stable/2024-03-03/GalleryRP.json
-    where: $.definitions.GalleryProvisioningState
-    transform: if ($.readOnly) { delete $.readOnly }
-  - from: GalleryRP/stable/2024-03-03/GalleryRP.json
-    where: $.definitions.SharingState
-    transform: if ($.readOnly) { delete $.readOnly }
-  - from: GalleryRP/stable/2024-03-03/GalleryRP.json
-    where: $.definitions.ValidationStatus
-    transform: if ($.readOnly) { delete $.readOnly }
+  # Strip readOnly only from 2024-03-03 to avoid retroactive breaking change
+  - from: Microsoft.Compute/GalleryRP/stable/2024-03-03/GalleryRP.json
+    where:
+      - $.definitions.GalleryProperties.properties.provisioningState
+      - $.definitions.SharingStatus.properties.aggregatedState
+      - $.definitions.RegionalSharingStatus.properties.state
+      - $.definitions.GalleryApplicationVersionProperties.properties.provisioningState
+      - $.definitions.GalleryImageProperties.properties.provisioningState
+      - $.definitions.GalleryImageVersionProperties.properties.provisioningState
+      - $.definitions.ExecutedValidation.properties.status
+      - $.definitions.GalleryInVMAccessControlProfileProperties.properties.provisioningState
+      - $.definitions.GalleryInVMAccessControlProfileVersionProperties.properties.provisioningState
+      - $.definitions.GalleryResourceProfilePropertiesBase.properties.provisioningState
+      - $.definitions.GalleryResourceProfileVersionPropertiesBase.properties.provisioningState
+      - $.definitions.GalleryProvisioningState
+      - $.definitions.SharingState
+      - $.definitions.ValidationStatus
+    transform: delete $.readOnly
 ```
 
 ### Tag: package-2024-07-01
