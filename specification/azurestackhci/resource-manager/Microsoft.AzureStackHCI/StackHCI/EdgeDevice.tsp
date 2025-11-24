@@ -174,7 +174,7 @@ model ErrorDetail {
 /**
  * Arc extension installed on edge device.
  */
-model EdgeDevicesExtension {
+model HciEdgeDeviceArcExtension {
   /**
    * Arc extension name installed on edge device.
    */
@@ -222,7 +222,7 @@ model ExtensionProfile {
    */
   @visibility(Lifecycle.Read)
   @identifiers(#["extensionName"])
-  extensions?: EdgeDevicesExtension[];
+  extensions?: HciEdgeDeviceArcExtension[];
 }
 
 /**

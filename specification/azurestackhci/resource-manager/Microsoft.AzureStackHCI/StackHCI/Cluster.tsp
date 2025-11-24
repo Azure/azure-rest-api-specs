@@ -1,4 +1,5 @@
 import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-client-generator-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Azure.ClientGenerator.Core;
 
 namespace Microsoft.AzureStackHCI;
 /**
@@ -403,17 +405,6 @@ model SoftwareAssuranceProperties {
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastUpdated?: utcDateTime;
-}
-
-/**
- * Cluster Witness properties of the cluster. A cluster witness is a resource (such as a storage account or file share) that helps maintain quorum and supports automatic failover in high-availability cluster configurations.
- */
-model ClusterWitnessProperties {
-  /**
-   * The authentication mode for the cluster witness. An example value 'ManagedIdentity'.
-   */
-  @visibility(Lifecycle.Read)
-  authenticationMode?: string;
 }
 
 /**
@@ -909,13 +900,15 @@ model ClusterPatch {
   /**
    * Identity of Cluster resource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
 
   /**
    * Cluster properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: ClusterPatchProperties;
 }
 

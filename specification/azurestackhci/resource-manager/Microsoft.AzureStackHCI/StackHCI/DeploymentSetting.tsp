@@ -470,7 +470,7 @@ model DeploymentIntents {
   /**
    * This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.
    */
-  overrideVirtualSwitchConfiguration?: boolean;
+  overrideVirtualSwitchConfiguration?: boolean = false;
 
   /**
    * Set virtualSwitch ConfigurationOverrides for cluster.

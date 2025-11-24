@@ -5366,11 +5366,13 @@
         },
         "identity": {
           "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "Identity of Cluster resource"
+          "description": "Identity of Cluster resource",
+          "x-ms-client-flatten": true
         },
         "properties": {
           "$ref": "#/definitions/ClusterPatchProperties",
-          "description": "Cluster properties."
+          "description": "Cluster properties.",
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -5680,17 +5682,6 @@
         "customLocationId": {
           "type": "string",
           "description": "Name of the on-prem cluster connected to this resource.",
-          "readOnly": true
-        }
-      }
-    },
-    "ClusterWitnessProperties": {
-      "type": "object",
-      "description": "Cluster Witness properties of the cluster. A cluster witness is a resource (such as a storage account or file share) that helps maintain quorum and supports automatic failover in high-availability cluster configurations.",
-      "properties": {
-        "authenticationMode": {
-          "type": "string",
-          "description": "The authentication mode for the cluster witness. An example value 'ManagedIdentity'.",
           "readOnly": true
         }
       }
@@ -6165,7 +6156,8 @@
         },
         "overrideVirtualSwitchConfiguration": {
           "type": "boolean",
-          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation."
+          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.",
+          "default": false
         },
         "virtualSwitchConfigurationOverrides": {
           "$ref": "#/definitions/DeploymentVirtualSwitchConfigurationOverrides",
@@ -6952,61 +6944,6 @@
         ]
       }
     },
-    "EdgeDeviceJobsStep": {
-      "type": "object",
-      "description": "Step details during job execution.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of step.",
-          "readOnly": true
-        },
-        "description": {
-          "type": "string",
-          "description": "Description of step.",
-          "readOnly": true
-        },
-        "fullStepIndex": {
-          "type": "string",
-          "description": "FullStepIndex of step.",
-          "readOnly": true
-        },
-        "startTimeUtc": {
-          "type": "string",
-          "description": "Start time in utc of step.",
-          "readOnly": true
-        },
-        "endTimeUtc": {
-          "type": "string",
-          "description": "End time in utc of step.",
-          "readOnly": true
-        },
-        "status": {
-          "type": "string",
-          "description": "Status of step. Allowed values are 'Error', 'Success', 'InProgress'",
-          "readOnly": true
-        },
-        "steps": {
-          "type": "array",
-          "description": "List of nested steps during job execution..",
-          "items": {
-            "$ref": "#/definitions/EdgeDeviceJobsStep"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "name"
-          ]
-        },
-        "exception": {
-          "type": "array",
-          "description": "List of exceptions in job execution.",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        }
-      }
-    },
     "EdgeDeviceKind": {
       "type": "string",
       "description": "Edge device type based on host OS installed.",
@@ -7078,47 +7015,6 @@
         "networkDirectTechnology": {
           "type": "string",
           "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation. Expected values are 'iWARP', 'RoCEv2', 'RoCE'",
-          "readOnly": true
-        }
-      }
-    },
-    "EdgeDevicesExtension": {
-      "type": "object",
-      "description": "Arc extension installed on edge device.",
-      "properties": {
-        "extensionName": {
-          "type": "string",
-          "description": "Arc extension name installed on edge device.",
-          "readOnly": true
-        },
-        "state": {
-          "$ref": "#/definitions/ArcExtensionState",
-          "description": "Arc extension state from arc machine extension.",
-          "readOnly": true
-        },
-        "errorDetails": {
-          "type": "array",
-          "description": "Error details while installing Arc extension.",
-          "items": {
-            "$ref": "#/definitions/ErrorDetail"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": []
-        },
-        "extensionResourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Arc Extension Azure resource id.",
-          "readOnly": true
-        },
-        "typeHandlerVersion": {
-          "type": "string",
-          "description": "Extension version installed.",
-          "readOnly": true
-        },
-        "managedBy": {
-          "$ref": "#/definitions/ExtensionManagedBy",
-          "description": "Extension managed by user or Azure.",
           "readOnly": true
         }
       }
@@ -7639,7 +7535,7 @@
           "type": "array",
           "description": "List of Arc extensions installed on edge device.",
           "items": {
-            "$ref": "#/definitions/EdgeDevicesExtension"
+            "$ref": "#/definitions/HciEdgeDeviceArcExtension"
           },
           "readOnly": true,
           "x-ms-identifiers": [
@@ -7773,6 +7669,47 @@
         }
       ],
       "x-ms-discriminator-value": "HCI"
+    },
+    "HciEdgeDeviceArcExtension": {
+      "type": "object",
+      "description": "Arc extension installed on edge device.",
+      "properties": {
+        "extensionName": {
+          "type": "string",
+          "description": "Arc extension name installed on edge device.",
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "#/definitions/ArcExtensionState",
+          "description": "Arc extension state from arc machine extension.",
+          "readOnly": true
+        },
+        "errorDetails": {
+          "type": "array",
+          "description": "Error details while installing Arc extension.",
+          "items": {
+            "$ref": "#/definitions/ErrorDetail"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "extensionResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Arc Extension Azure resource id.",
+          "readOnly": true
+        },
+        "typeHandlerVersion": {
+          "type": "string",
+          "description": "Extension version installed.",
+          "readOnly": true
+        },
+        "managedBy": {
+          "$ref": "#/definitions/ExtensionManagedBy",
+          "description": "Extension managed by user or Azure.",
+          "readOnly": true
+        }
+      }
     },
     "HciEdgeDeviceJob": {
       "type": "object",

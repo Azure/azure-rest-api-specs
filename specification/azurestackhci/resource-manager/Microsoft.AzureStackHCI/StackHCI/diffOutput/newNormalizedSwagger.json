@@ -2746,7 +2746,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/updateSummaries": {
       "get": {
-        "operationId": "UpdateSummariesOperationGroup_List",
+        "operationId": "UpdateSummaries_List",
         "parameters": [
           {
             "name": "clusterName",
@@ -2769,6 +2769,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Get Update summaries under cluster resource": {
+            "$ref": "./examples/ListUpdateSummaries.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -2776,7 +2781,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/updateSummaries/default": {
       "get": {
-        "operationId": "UpdateSummariesOperationGroup_Get",
+        "operationId": "UpdateSummaries_Get",
         "parameters": [
           {
             "name": "clusterName",
@@ -2798,10 +2803,15 @@
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get Update summaries under cluster resource": {
+            "$ref": "./examples/GetUpdateSummaries.json"
+          }
         }
       },
       "put": {
-        "operationId": "UpdateSummariesOperationGroup_Put",
+        "operationId": "UpdateSummaries_Put",
         "parameters": [
           {
             "name": "clusterName",
@@ -2831,10 +2841,15 @@
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Put Update summaries under cluster resource": {
+            "$ref": "./examples/PutUpdateSummaries.json"
+          }
         }
       },
       "delete": {
-        "operationId": "UpdateSummariesOperationGroup_Delete",
+        "operationId": "UpdateSummaries_Delete",
         "parameters": [
           {
             "name": "clusterName",
@@ -2868,6 +2883,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Delete an Update": {
+            "$ref": "./examples/DeleteUpdateSummaries.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -3788,10 +3808,12 @@
           }
         },
         "identity": {
-          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity"
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "x-ms-client-flatten": true
         },
         "properties": {
-          "$ref": "#/definitions/ClusterPatchProperties"
+          "$ref": "#/definitions/ClusterPatchProperties",
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -4128,15 +4150,6 @@
         }
       }
     },
-    "ClusterWitnessProperties": {
-      "type": "object",
-      "properties": {
-        "authenticationMode": {
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
     "CollectLogJobProperties": {
       "type": "object",
       "properties": {
@@ -4408,7 +4421,8 @@
           }
         },
         "overrideVirtualSwitchConfiguration": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "virtualSwitchConfigurationOverrides": {
           "$ref": "#/definitions/DeploymentVirtualSwitchConfigurationOverrides"
@@ -4672,39 +4686,6 @@
         }
       }
     },
-    "DeviceHostNetwork": {
-      "type": "object",
-      "properties": {
-        "intents": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/EdgeDevicesIntents"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "intentName"
-          ]
-        },
-        "storageNetworks": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/EdgeDevicesStorageNetworks"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "networkAdapterName"
-          ]
-        },
-        "storageConnectivitySwitchless": {
-          "type": "boolean",
-          "readOnly": true
-        },
-        "enableStorageAutoIp": {
-          "type": "boolean",
-          "readOnly": true
-        }
-      }
-    },
     "DnsZones": {
       "type": "object",
       "properties": {
@@ -4807,6 +4788,39 @@
           "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ]
+    },
+    "EdgeDeviceHostNetwork": {
+      "type": "object",
+      "properties": {
+        "intents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EdgeDevicesIntents"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "intentName"
+          ]
+        },
+        "storageNetworks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EdgeDevicesStorageNetworks"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "networkAdapterName"
+          ]
+        },
+        "storageConnectivitySwitchless": {
+          "type": "boolean",
+          "readOnly": true
+        },
+        "enableStorageAutoIp": {
+          "type": "boolean",
+          "readOnly": true
+        }
+      }
     },
     "EdgeDeviceJob": {
       "type": "object",
@@ -4939,52 +4953,6 @@
         }
       }
     },
-    "EdgeDeviceJobsStep": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string",
-          "readOnly": true
-        },
-        "description": {
-          "type": "string",
-          "readOnly": true
-        },
-        "fullStepIndex": {
-          "type": "string",
-          "readOnly": true
-        },
-        "startTimeUtc": {
-          "type": "string",
-          "readOnly": true
-        },
-        "endTimeUtc": {
-          "type": "string",
-          "readOnly": true
-        },
-        "status": {
-          "type": "string",
-          "readOnly": true
-        },
-        "steps": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/EdgeDeviceJobsStep"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "name"
-          ]
-        },
-        "exception": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        }
-      }
-    },
     "EdgeDeviceListResult": {
       "type": "object",
       "description": "[Placeholder] Discription for page model",
@@ -5055,63 +5023,6 @@
         },
         "networkDirectTechnology": {
           "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "EdgeDevicesExtension": {
-      "type": "object",
-      "properties": {
-        "extensionName": {
-          "type": "string",
-          "readOnly": true
-        },
-        "state": {
-          "type": "string",
-          "enum": [
-            "NotSpecified",
-            "Succeeded",
-            "Failed",
-            "Canceled",
-            "Accepted",
-            "Creating",
-            "Updating",
-            "Moving",
-            "Deleting",
-            "Deleted"
-          ],
-          "x-ms-enum": {
-            "name": "ArcExtensionState",
-            "modelAsString": true
-          },
-          "readOnly": true
-        },
-        "errorDetails": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorDetail"
-          },
-          "readOnly": true
-        },
-        "extensionResourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "readOnly": true
-        },
-        "typeHandlerVersion": {
-          "type": "string",
-          "readOnly": true
-        },
-        "managedBy": {
-          "type": "string",
-          "enum": [
-            "User",
-            "Azure"
-          ],
-          "x-ms-enum": {
-            "name": "ExtensionManagedBy",
-            "modelAsString": true
-          },
           "readOnly": true
         }
       }
@@ -5413,7 +5324,7 @@
         "extensions": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/EdgeDevicesExtension"
+            "$ref": "#/definitions/HciEdgeDeviceArcExtension"
           },
           "readOnly": true,
           "x-ms-identifiers": [
@@ -5558,6 +5469,63 @@
         }
       ],
       "x-ms-discriminator-value": "HCI"
+    },
+    "HciEdgeDeviceArcExtension": {
+      "type": "object",
+      "properties": {
+        "extensionName": {
+          "type": "string",
+          "readOnly": true
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "NotSpecified",
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Accepted",
+            "Creating",
+            "Updating",
+            "Moving",
+            "Deleting",
+            "Deleted"
+          ],
+          "x-ms-enum": {
+            "name": "ArcExtensionState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "errorDetails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDetail"
+          },
+          "readOnly": true
+        },
+        "extensionResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "readOnly": true
+        },
+        "typeHandlerVersion": {
+          "type": "string",
+          "readOnly": true
+        },
+        "managedBy": {
+          "type": "string",
+          "enum": [
+            "User",
+            "Azure"
+          ],
+          "x-ms-enum": {
+            "name": "ExtensionManagedBy",
+            "modelAsString": true
+          },
+          "readOnly": true
+        }
+      }
     },
     "HciEdgeDeviceJob": {
       "type": "object",
@@ -5731,7 +5699,7 @@
           ]
         },
         "hostNetwork": {
-          "$ref": "#/definitions/DeviceHostNetwork",
+          "$ref": "#/definitions/EdgeDeviceHostNetwork",
           "readOnly": true
         }
       }

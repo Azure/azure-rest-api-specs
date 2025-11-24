@@ -62,61 +62,6 @@ interface EdgeDeviceJobs {
 
 // Models
 
-
-/**
- * Step details during job execution.
- */
-model EdgeDeviceJobsStep {
-  /**
-   * Name of step.
-   */
-  @visibility(Lifecycle.Read)
-  name?: string;
-
-  /**
-   * Description of step.
-   */
-  @visibility(Lifecycle.Read)
-  description?: string;
-
-  /**
-   * FullStepIndex of step.
-   */
-  @visibility(Lifecycle.Read)
-  fullStepIndex?: string;
-
-  /**
-   * Start time in utc of step.
-   */
-  @visibility(Lifecycle.Read)
-  startTimeUtc?: string;
-
-  /**
-   * End time in utc of step.
-   */
-  @visibility(Lifecycle.Read)
-  endTimeUtc?: string;
-
-  /**
-   * Status of step. Allowed values are 'Error', 'Success', 'InProgress'
-   */
-  @visibility(Lifecycle.Read)
-  status?: string;
-
-  /**
-   * List of nested steps during job execution..
-   */
-  @visibility(Lifecycle.Read)
-  @identifiers(#["name"])
-  steps?: EdgeDeviceJobsStep[];
-
-  /**
-   * List of exceptions in job execution.
-   */
-  @visibility(Lifecycle.Read)
-  exception?: string[];
-}
-
 /**
  * Represents the reported properties of a remote support job.
  */

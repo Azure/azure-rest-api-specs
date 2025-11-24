@@ -75,15 +75,6 @@
 |------|------------|-------|
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/offers'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
 
-### Changes for `x-ms-examples`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/updateSummaries'].get['x-ms-examples__deleted']` | deleted | `{"Get Update summaries under cluster resource":{"$ref":"./examples/ListUpdateSummaries.json"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/updateSummaries/default'].delete['x-ms-examples__deleted']` | deleted | `{"Delete an Update":{"$ref":"./examples/DeleteUpdateSummaries.json"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/updateSummaries/default'].get['x-ms-examples__deleted']` | deleted | `{"Get Update summaries under cluster resource":{"$ref":"./examples/GetUpdateSummaries.json"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/updateSummaries/default'].put['x-ms-examples__deleted']` | deleted | `{"Put Update summaries under cluster resource":{"$ref":"./examples/PutUpdateSummaries.json"}}` |
-
 ### Changes for `Location`
 
 | Path | Change Type | Value |
@@ -111,12 +102,6 @@
 |------|------------|-------|
 | `definitions.VirtualSwitchConfigurationOverrides__deleted` | deleted | `{"type":"object","properties":{"enableIov":{"type":"string"},"loadBalancingAlgorithm":{"type":"strin...` |
 
-### Changes for `ClusterWitnessProperties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ClusterWitnessProperties__added` | added | `{"type":"object","properties":{"authenticationMode":{"type":"string","readOnly":true}}}` |
-
 ### Changes for `DeploymentHostNetwork`
 
 | Path | Change Type | Value |
@@ -141,29 +126,17 @@
 |------|------------|-------|
 | `definitions.DeploymentVirtualSwitchConfigurationOverrides__added` | added | `{"type":"object","properties":{"enableIov":{"type":"string"},"loadBalancingAlgorithm":{"type":"strin...` |
 
-### Changes for `DeviceHostNetwork`
+### Changes for `EdgeDeviceHostNetwork`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.DeviceHostNetwork__added` | added | `{"type":"object","properties":{"intents":{"type":"array","items":{"$ref":"#/definitions/EdgeDevicesI...` |
-
-### Changes for `EdgeDeviceJobsStep`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.EdgeDeviceJobsStep__added` | added | `{"type":"object","properties":{"name":{"type":"string","readOnly":true},"description":{"type":"strin...` |
+| `definitions.EdgeDeviceHostNetwork__added` | added | `{"type":"object","properties":{"intents":{"type":"array","items":{"$ref":"#/definitions/EdgeDevicesI...` |
 
 ### Changes for `EdgeDevicesAdapterPropertyOverrides`
 
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.EdgeDevicesAdapterPropertyOverrides__added` | added | `{"type":"object","properties":{"jumboPacket":{"type":"string","readOnly":true},"networkDirect":{"typ...` |
-
-### Changes for `EdgeDevicesExtension`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.EdgeDevicesExtension__added` | added | `{"type":"object","properties":{"extensionName":{"type":"string","readOnly":true},"state":{"type":"st...` |
 
 ### Changes for `EdgeDevicesIntents`
 
@@ -195,6 +168,12 @@
 |------|------------|-------|
 | `definitions.ExtensionInstanceViewStatus__added` | added | `{"type":"object","properties":{"code":{"type":"string"},"level":{"type":"string","enum":["Info","War...` |
 
+### Changes for `HciEdgeDeviceArcExtension`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.HciEdgeDeviceArcExtension__added` | added | `{"type":"object","properties":{"extensionName":{"type":"string","readOnly":true},"state":{"type":"st...` |
+
 ### Changes for `PrecheckResultTags`
 
 | Path | Change Type | Value |
@@ -217,8 +196,6 @@
 | `definitions.Cluster.properties.identity['x-ms-client-flatten__deleted']` | deleted | `true` |
 | `definitions.Cluster.properties.properties['x-ms-client-flatten__deleted']` | deleted | `true` |
 | `definitions.ClusterIdentityResponse.properties.properties['x-ms-client-flatten__deleted']` | deleted | `true` |
-| `definitions.ClusterPatch.properties.identity['x-ms-client-flatten__deleted']` | deleted | `true` |
-| `definitions.ClusterPatch.properties.properties['x-ms-client-flatten__deleted']` | deleted | `true` |
 | `definitions.DeploymentSetting.properties.properties['x-ms-client-flatten__deleted']` | deleted | `true` |
 | `definitions.ExtensionPatch.properties.properties['x-ms-client-flatten__deleted']` | deleted | `true` |
 | `definitions.ExtensionProperties.properties.extensionParameters['x-ms-client-flatten__deleted']` | deleted | `true` |
@@ -561,8 +538,8 @@
 | `definitions.DeploymentData.properties.secrets.items.$ref` | `./hciCommon.json#/definitions/EceDeploymentSecrets` | `#/definitions/EceDeploymentSecrets` |
 | `definitions.DeploymentSettingsProperties.properties.reportedProperties.$ref` | `./hciCommon.json#/definitions/EceReportedProperties` | `#/definitions/EceReportedProperties` |
 | `definitions.EceActionStatus.properties.steps.items.$ref` | `#/definitions/DeploymentStep` | `#/definitions/Step` |
-| `definitions.ExtensionProfile.properties.extensions.items.$ref` | `#/definitions/Extension` | `#/definitions/EdgeDevicesExtension` |
-| `definitions.HciNetworkProfile.properties.hostNetwork.$ref` | `#/definitions/HostNetwork` | `#/definitions/DeviceHostNetwork` |
+| `definitions.ExtensionProfile.properties.extensions.items.$ref` | `#/definitions/Extension` | `#/definitions/HciEdgeDeviceArcExtension` |
+| `definitions.HciNetworkProfile.properties.hostNetwork.$ref` | `#/definitions/HostNetwork` | `#/definitions/EdgeDeviceHostNetwork` |
 | `definitions.HostNetwork.properties.intents.items.$ref` | `#/definitions/Intents` | `#/definitions/DeploymentIntents` |
 | `definitions.HostNetwork.properties.storageNetworks.items.$ref` | `#/definitions/StorageNetworks` | `#/definitions/DeploymentStorageNetworks` |
 | `definitions.JobReportedProperties.properties.deploymentStatus.$ref` | `./hciCommon.json#/definitions/EceActionStatus` | `#/definitions/EceActionStatus` |
@@ -605,13 +582,9 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/updates/{updateName}/updateRuns/{updateRunName}'].delete.responses.default.schema.$ref` | `../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` | `../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/updates/{updateName}/updateRuns/{updateRunName}'].get.responses.default.schema.$ref` | `../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` | `../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/updates/{updateName}/updateRuns/{updateRunName}'].put.responses.default.schema.$ref` | `../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` | `../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/updateSummaries'].get.operationId` | `UpdateSummaries_List` | `UpdateSummariesOperationGroup_List` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/updateSummaries'].get.responses.default.schema.$ref` | `../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` | `../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/updateSummaries/default'].delete.operationId` | `UpdateSummaries_Delete` | `UpdateSummariesOperationGroup_Delete` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/updateSummaries/default'].delete.responses.202.headers['Azure-AsyncOperation'].description` | `URL to query for status of the operation.` | `A link to the status monitor` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/updateSummaries/default'].delete.responses.default.schema.$ref` | `../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` | `../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/updateSummaries/default'].get.operationId` | `UpdateSummaries_Get` | `UpdateSummariesOperationGroup_Get` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/updateSummaries/default'].get.responses.default.schema.$ref` | `../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` | `../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/updateSummaries/default'].put.operationId` | `UpdateSummaries_Put` | `UpdateSummariesOperationGroup_Put` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHCI/clusters/{clusterName}/updateSummaries/default'].put.responses.default.schema.$ref` | `../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` | `../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse` |
 
