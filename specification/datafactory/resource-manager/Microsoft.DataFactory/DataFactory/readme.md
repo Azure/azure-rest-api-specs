@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2018-06` is specified on the comma
 
 ``` yaml $(tag) == 'package-2018-06'
 input-file:
-- stable/2018-06-01/datafactory.json
+- stable/2018-06-01/openapi.json
 - stable/2018-06-01/entityTypes/DataFlow.json
 - stable/2018-06-01/entityTypes/Dataset.json
 - stable/2018-06-01/entityTypes/IntegrationRuntime.json
