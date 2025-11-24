@@ -642,6 +642,23 @@ export class TspConfigRustMgmtCrateNameSubRule extends TspconfigEmitterOptionsSu
   }
 }
 
+export class TspConfigRustAzEmitterOutputDirSubRule extends TspconfigEmitterOptionsSubRuleBase {
+  constructor() {
+    super("@azure-tools/typespec-rust", "emitter-output-dir", new RegExp(/{output-dir}\/{service-dir}\/{crate-name}/));
+  }
+
+  protected validate(config: any): RuleResult {
+    let emitterOutputDir = config?.options?.[this.emitterName]?.["emitter-output-dir"];
+    if (emitterOutputDir === undefined) return { success: false };
+    if (emitterOutputDir !== "{output-dir}/{service-dir}/{crate-name}") {
+      return this.createFailedResult(
+        `The value of options.${this.emitterName}.emitter-output-dir "${emitterOutputDir}" does not match the required format "{output-dir}/{service-dir}/{crate-name}"`, "Correct the emitter-output-dir to be \"{output-dir}/{service-dir}/{crate-name}\""
+      );
+    }
+    return { success: true };
+  }
+}
+
 export const defaultRules = [
   new TspConfigCommonAzServiceDirMatchPatternSubRule(),
   new TspConfigJavaAzEmitterOutputDirMatchPatternSubRule(),
@@ -674,6 +691,7 @@ export const defaultRules = [
   new TspConfigCsharpAzEmitterOutputDirSubRule(),
   new TspConfigCsharpMgmtEmitterOutputDirSubRule(),
   new TspConfigRustMgmtCrateNameSubRule(),
+  new TspConfigRustAzEmitterOutputDirSubRule(),
 ];
 
 export class SdkTspConfigValidationRule implements Rule {
