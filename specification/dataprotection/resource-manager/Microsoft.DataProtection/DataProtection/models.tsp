@@ -228,6 +228,19 @@ union BCDRSecurityLevel {
 }
 
 /**
+ * Feature state
+ */
+union FeatureState {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  NotApplicable: "NotApplicable",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Enabled: "Enabled",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Disabled: "Disabled",
+}
+
+/**
  * Type of the specific object - used for deserializing
  */
 union ResourcePropertiesObjectType {
@@ -643,6 +656,12 @@ model BackupVault {
    * List of replicated regions for Backup Vault
    */
   replicatedRegions?: string[];
+
+  /**
+   * Setting to support cross region backup at a vault
+   */
+  @added(Versions.v2025_12_01)
+  crossRegionBackupSettings?: FeatureState;
 }
 
 /**
@@ -1141,6 +1160,12 @@ model PatchBackupVaultInput {
    * ResourceGuardOperationRequests on which LAC check will be performed
    */
   resourceGuardOperationRequests?: string[];
+
+  /**
+   * Setting to support cross region backup at a vault
+   */
+  @added(Versions.v2025_12_01)
+  crossRegionBackupSettings?: FeatureState;
 }
 
 /**
