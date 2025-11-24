@@ -725,6 +725,24 @@ model JobDefinitionProperties {
    */
   @added(Versions.v2025_08_01)
   connections?: Azure.Core.armResourceIdentifier[];
+
+  /**
+   * The checksum validation mode for the job definition.
+   */
+  @added(Versions.v2025_08_01)
+  dataIntegrityValidation?: DataIntegrityValidation = DataIntegrityValidation.None;
+}
+
+/**
+ * The Data integrity validation mode.
+ */
+@added(Versions.v2025_08_01)
+union DataIntegrityValidation {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  SaveFileMD5: "SaveFileMD5",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  None: "None",
 }
 
 /**
@@ -1429,9 +1447,7 @@ union ConnectionStatus {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Disconnected: "Disconnected",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  PendingApproval: "Pending Approval",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  Stale: "Stale",
+  Pending: "Pending",
 }
 
 /** Parameters for updating a Connection resource. */
