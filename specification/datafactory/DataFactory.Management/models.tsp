@@ -22067,7 +22067,7 @@ model OrcSink extends CopySink {
 /**
  * Copy activity.
  */
-model CopyActivity is ExecutionActivity {
+model CopyActivity extends ExecutionActivity {
   /**
    * Copy activity properties.
    */
@@ -22084,6 +22084,11 @@ model CopyActivity is ExecutionActivity {
    */
   @identifiers(#["referenceName"])
   outputs?: DatasetReference[];
+
+  /**
+   * Type of activity.
+   */
+  type: "Copy";
 }
 
 /**
@@ -22356,7 +22361,7 @@ model TabularSource is CopySource {
 /**
  * A copy activity Azure Table source.
  */
-model AzureTableSource is TabularSource {
+model AzureTableSource extends TabularSource {
   /**
    * Azure Table source query. Type: string (or Expression with resultType string).
    */
@@ -22368,6 +22373,11 @@ model AzureTableSource is TabularSource {
    */
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   azureTableSourceIgnoreTableNotFound?: unknown;
+
+  /**
+   * Copy source type.
+   */
+  type: "AzureTableSource";
 }
 
 /**
@@ -28273,7 +28283,7 @@ model AzureFunctionActivityTypeProperties {
 /**
  * WebHook activity.
  */
-model WebHookActivity is ControlActivity {
+model WebHookActivity extends ControlActivity {
   /**
    * WebHook activity properties.
    */
@@ -28283,6 +28293,11 @@ model WebHookActivity is ControlActivity {
    * Activity policy.
    */
   policy?: SecureInputOutputPolicy;
+
+  /**
+   * Type of activity.
+   */
+  type: "WebHook";
 }
 
 /**
@@ -29450,7 +29465,8 @@ model TriggerDependencyReference is DependencyReference {
 /**
  * Referenced tumbling window trigger dependency.
  */
-model TumblingWindowTriggerDependencyReference is TriggerDependencyReference {
+model TumblingWindowTriggerDependencyReference
+  extends TriggerDependencyReference {
   /**
    * Timespan applied to the start time of a tumbling window when evaluating dependency.
    */
@@ -29466,6 +29482,11 @@ model TumblingWindowTriggerDependencyReference is TriggerDependencyReference {
   @minLength(8)
   @pattern("((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))")
   size?: string;
+
+  /**
+   * The type of dependency reference.
+   */
+  type: "TumblingWindowTriggerDependencyReference";
 }
 
 /**
