@@ -215,9 +215,6 @@ model LocalAvailabilityZones {
   @doc("Local Availability Zone name for HCI cluster")
   localAvailabilityZoneName?: string;
 
-  @doc("Local Availability Zone Mode for HCI cluster. Can be active or passive.")
-  localAvailabilityZoneMode?: LocalAvailabilityZoneMode;
-
   @doc("Nodes belonging to a particular zone")
   nodes?: string[];
 }
@@ -296,17 +293,6 @@ union EdgeSolutionType {
 
   @doc("Edge solution for Windows based edge devices.")
   WindowsServer: "WindowsServer",
-}
-
-@doc("Local Availability Zone Mode for HCI cluster.")
-union LocalAvailabilityZoneMode {
-  string,
-
-  @doc("Local Availability Zone in active mode.")
-  Active: "Active",
-
-  @doc("Local Availability Zone in passive mode.")
-  Passive: "Passive",
 }
 
 @doc("Identity Provider for the cluster")

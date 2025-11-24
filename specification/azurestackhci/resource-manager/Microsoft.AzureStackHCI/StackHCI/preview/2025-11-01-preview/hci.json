@@ -5169,6 +5169,15 @@
         "identity": {
           "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
+        },
+        "kind": {
+          "type": "string",
+          "description": "This property identifies the purpose of the Cluster deployment. For example, a valid value is AzureLocal.",
+          "pattern": "^[-\\w\\._,\\(\\\\\\)]+$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -6126,11 +6135,13 @@
         },
         "storageConnectivitySwitchless": {
           "type": "boolean",
-          "description": "Defines how the storage adapters between nodes are connected either switch or switch less.."
+          "description": "Defines how the storage adapters between nodes are connected either switch or switch less..",
+          "default": false
         },
         "enableStorageAutoIp": {
           "type": "boolean",
-          "description": "Optional parameter required only for 3 Nodes Switchless deployments. This allows users to specify IPs and Mask for Storage NICs when Network ATC is not assigning the IPs for storage automatically."
+          "description": "Optional parameter required only for 3 Nodes Switchless deployments. This allows users to specify IPs and Mask for Storage NICs when Network ATC is not assigning the IPs for storage automatically.",
+          "default": false
         }
       }
     },
@@ -8506,30 +8517,6 @@
         "version"
       ]
     },
-    "LocalAvailabilityZoneMode": {
-      "type": "string",
-      "description": "Local Availability Zone Mode for HCI cluster.",
-      "enum": [
-        "Active",
-        "Passive"
-      ],
-      "x-ms-enum": {
-        "name": "LocalAvailabilityZoneMode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Active",
-            "value": "Active",
-            "description": "Local Availability Zone in active mode."
-          },
-          {
-            "name": "Passive",
-            "value": "Passive",
-            "description": "Local Availability Zone in passive mode."
-          }
-        ]
-      }
-    },
     "LocalAvailabilityZones": {
       "type": "object",
       "description": "Local Availability Zone information for HCI cluster",
@@ -8537,10 +8524,6 @@
         "localAvailabilityZoneName": {
           "type": "string",
           "description": "Local Availability Zone name for HCI cluster"
-        },
-        "localAvailabilityZoneMode": {
-          "$ref": "#/definitions/LocalAvailabilityZoneMode",
-          "description": "Local Availability Zone Mode for HCI cluster. Can be active or passive."
         },
         "nodes": {
           "type": "array",
@@ -10487,16 +10470,79 @@
       "description": "Security properties of the resource",
       "properties": {
         "securedCoreComplianceAssignment": {
-          "$ref": "#/definitions/ComplianceAssignmentType",
-          "description": "Secured Core Compliance Assignment"
+          "type": "string",
+          "description": "Secured Core Compliance Assignment",
+          "default": "Audit",
+          "enum": [
+            "Audit",
+            "ApplyAndAutoCorrect"
+          ],
+          "x-ms-enum": {
+            "name": "ComplianceAssignmentType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Audit",
+                "value": "Audit",
+                "description": "Report on the state of the machine, but don't make changes."
+              },
+              {
+                "name": "ApplyAndAutoCorrect",
+                "value": "ApplyAndAutoCorrect",
+                "description": "Applied to the machine. If it drifts, the local service inside the machine makes a correction at the next evaluation."
+              }
+            ]
+          }
         },
         "wdacComplianceAssignment": {
-          "$ref": "#/definitions/ComplianceAssignmentType",
-          "description": "WDAC Compliance Assignment"
+          "type": "string",
+          "description": "WDAC Compliance Assignment",
+          "default": "Audit",
+          "enum": [
+            "Audit",
+            "ApplyAndAutoCorrect"
+          ],
+          "x-ms-enum": {
+            "name": "ComplianceAssignmentType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Audit",
+                "value": "Audit",
+                "description": "Report on the state of the machine, but don't make changes."
+              },
+              {
+                "name": "ApplyAndAutoCorrect",
+                "value": "ApplyAndAutoCorrect",
+                "description": "Applied to the machine. If it drifts, the local service inside the machine makes a correction at the next evaluation."
+              }
+            ]
+          }
         },
         "smbEncryptionForIntraClusterTrafficComplianceAssignment": {
-          "$ref": "#/definitions/ComplianceAssignmentType",
-          "description": "SMB encryption for intra-cluster traffic Compliance Assignment"
+          "type": "string",
+          "description": "SMB encryption for intra-cluster traffic Compliance Assignment",
+          "default": "Audit",
+          "enum": [
+            "Audit",
+            "ApplyAndAutoCorrect"
+          ],
+          "x-ms-enum": {
+            "name": "ComplianceAssignmentType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Audit",
+                "value": "Audit",
+                "description": "Report on the state of the machine, but don't make changes."
+              },
+              {
+                "name": "ApplyAndAutoCorrect",
+                "value": "ApplyAndAutoCorrect",
+                "description": "Applied to the machine. If it drifts, the local service inside the machine makes a correction at the next evaluation."
+              }
+            ]
+          }
         },
         "securityComplianceStatus": {
           "$ref": "#/definitions/SecurityComplianceStatus",
@@ -11236,13 +11282,6 @@
             "read",
             "create"
           ]
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
         }
       },
       "allOf": [
@@ -11472,13 +11511,6 @@
             "read",
             "create"
           ]
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
         }
       },
       "allOf": [

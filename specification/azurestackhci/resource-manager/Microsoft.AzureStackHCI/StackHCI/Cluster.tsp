@@ -23,7 +23,10 @@ model Cluster is Azure.ResourceManager.TrackedResource<ClusterProperties> {
     NamePattern = ""
   >;
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
+  ...ResourceKindProperty;
 }
+
+@@doc(Cluster.kind, "This property identifies the purpose of the Cluster deployment. For example, a valid value is AzureLocal.");
 
 @armResourceOperations
 interface Clusters {

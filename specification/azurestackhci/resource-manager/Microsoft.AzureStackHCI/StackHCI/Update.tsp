@@ -29,13 +29,6 @@ model Update is Azure.ResourceManager.ProxyResource<UpdateProperties> {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   location?: string;
-
-  /**
-   * Resource tags.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-  tags?: Record<string>;
 }
 
 @armResourceOperations

@@ -513,12 +513,12 @@ model DeploymentHostNetwork {
   /**
    * Defines how the storage adapters between nodes are connected either switch or switch less..
    */
-  storageConnectivitySwitchless?: boolean;
+  storageConnectivitySwitchless?: boolean = false;
 
   /**
    * Optional parameter required only for 3 Nodes Switchless deployments. This allows users to specify IPs and Mask for Storage NICs when Network ATC is not assigning the IPs for storage automatically.
    */
-  enableStorageAutoIp?: boolean;
+  enableStorageAutoIp?: boolean = false;
 }
 
 /**

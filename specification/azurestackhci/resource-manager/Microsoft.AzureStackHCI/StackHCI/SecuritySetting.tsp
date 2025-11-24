@@ -61,17 +61,17 @@ model SecurityProperties {
   /**
    * Secured Core Compliance Assignment
    */
-  securedCoreComplianceAssignment?: ComplianceAssignmentType;
+  securedCoreComplianceAssignment?: ComplianceAssignmentType = ComplianceAssignmentType.Audit;
 
   /**
    * WDAC Compliance Assignment
    */
-  wdacComplianceAssignment?: ComplianceAssignmentType;
+  wdacComplianceAssignment?: ComplianceAssignmentType = ComplianceAssignmentType.Audit;
 
   /**
    * SMB encryption for intra-cluster traffic Compliance Assignment
    */
-  smbEncryptionForIntraClusterTrafficComplianceAssignment?: ComplianceAssignmentType;
+  smbEncryptionForIntraClusterTrafficComplianceAssignment?: ComplianceAssignmentType = ComplianceAssignmentType.Audit;
 
   /**
    * Security Compliance Status
