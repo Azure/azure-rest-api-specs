@@ -101,7 +101,7 @@ describe("Summarize Checks Integration Tests", () => {
         );
 
         let adjustedStartLabels = expectedLabels.filter((x) => ignorableLabels.includes(x));
-        let labelContext = await updateLabels(adjustedStartLabels, impactAssessment);
+        let labelContext = updateLabels(adjustedStartLabels, impactAssessment);
 
         adjustedStartLabels = adjustedStartLabels.filter(
           (name) => !labelContext.toRemove.has(name),
@@ -112,7 +112,7 @@ describe("Summarize Checks Integration Tests", () => {
           }
         }
 
-        const [commentBody, automatedChecksMet] = await createNextStepsComment(
+        const [commentBody, automatedChecksMet] = createNextStepsComment(
           mockCore,
           repo,
           adjustedStartLabels,
@@ -135,7 +135,7 @@ describe("Summarize Checks Integration Tests", () => {
 
 describe("Summarize Checks Unit Tests", () => {
   describe("check result processing", () => {
-    it("should generate success summary for no matched check suites (completed impactAssessment)", async () => {
+    it("should generate success summary for no matched check suites (completed impactAssessment)", () => {
       const repo = "azure-rest-api-specs";
       const targetBranch = "main";
       /** @type {string[]} */
@@ -153,7 +153,7 @@ describe("Summarize Checks Unit Tests", () => {
         },
       ];
 
-      const output = await createNextStepsComment(
+      const output = createNextStepsComment(
         mockCore,
         repo,
         labelNames,
@@ -167,7 +167,7 @@ describe("Summarize Checks Unit Tests", () => {
       expect(output).toEqual(expectedOutput);
     });
 
-    it("should generate success summary for all completed check suites", async () => {
+    it("should generate success summary for all completed check suites", () => {
       const repo = "azure-rest-api-specs";
       const targetBranch = "main";
       /** @type {string[]} */
@@ -264,7 +264,7 @@ describe("Summarize Checks Unit Tests", () => {
         },
       ];
 
-      const output = await createNextStepsComment(
+      const output = createNextStepsComment(
         mockCore,
         repo,
         labelNames,
@@ -278,7 +278,7 @@ describe("Summarize Checks Unit Tests", () => {
       expect(output).toEqual(expectedOutput);
     });
 
-    it("should generate success summary with completed required checks but in-progress FYI", async () => {
+    it("should generate success summary with completed required checks but in-progress FYI", () => {
       const repo = "azure-rest-api-specs";
       const targetBranch = "main";
       /** @type {string[]} */
@@ -334,7 +334,7 @@ describe("Summarize Checks Unit Tests", () => {
         },
       ];
 
-      const output = await createNextStepsComment(
+      const output = createNextStepsComment(
         mockCore,
         repo,
         labelNames,
@@ -351,7 +351,7 @@ describe("Summarize Checks Unit Tests", () => {
     // this case should NEVER occur in practice, due to Summarize PR Impact being made a "required" check, but in cases
     // where the user is targeting a branch that is not the main branch, we may have no required checks
     // but still have FYI checks in progress. This is a regression test to ensure we handle this case correctly.
-    it("should generate success summary with 0 required checks but in-progress FYI", async () => {
+    it("should generate success summary with 0 required checks but in-progress FYI", () => {
       const repo = "azure-rest-api-specs";
       const targetBranch = "main";
       /** @type {string[]} */
@@ -395,7 +395,7 @@ describe("Summarize Checks Unit Tests", () => {
         },
       ];
 
-      const output = await createNextStepsComment(
+      const output = createNextStepsComment(
         mockCore,
         repo,
         labelNames,
@@ -409,7 +409,7 @@ describe("Summarize Checks Unit Tests", () => {
       expect(output).toEqual(expectedOutput);
     });
 
-    it("should generate success with warning for error FYI", async () => {
+    it("should generate success with warning for error FYI", () => {
       const repo = "azure-rest-api-specs";
       const targetBranch = "main";
       /** @type {string[]} */
@@ -440,7 +440,7 @@ describe("Summarize Checks Unit Tests", () => {
         },
       ];
 
-      const output = await createNextStepsComment(
+      const output = createNextStepsComment(
         mockCore,
         repo,
         labelNames,
@@ -454,7 +454,7 @@ describe("Summarize Checks Unit Tests", () => {
       expect(output).toEqual(expectedOutput);
     });
 
-    it("should generate success summary when CI-NewRPNamespaceWithoutRPaaS is present, and RPaaSException is as well.", async () => {
+    it("should generate success summary when CI-NewRPNamespaceWithoutRPaaS is present, and RPaaSException is as well.", () => {
       const repo = "azure-rest-api-specs";
       const targetBranch = "main";
       const labelNames = ["CI-NewRPNamespaceWithoutRPaaS", "RPaaSException"];
@@ -476,7 +476,7 @@ describe("Summarize Checks Unit Tests", () => {
         },
       ];
 
-      const [commentBody, automatedCheckOutput] = await createNextStepsComment(
+      const [commentBody, automatedCheckOutput] = createNextStepsComment(
         mockCore,
         repo,
         labelNames,
@@ -491,7 +491,7 @@ describe("Summarize Checks Unit Tests", () => {
       expect(automatedCheckOutput).toEqual(expectedCheckOutput);
     });
 
-    it("should generate pending summary when checks are partially in progress", async () => {
+    it("should generate pending summary when checks are partially in progress", () => {
       const repo = "azure-rest-api-specs";
       const targetBranch = "main";
       /** @type {string[]} */
@@ -528,7 +528,7 @@ describe("Summarize Checks Unit Tests", () => {
         },
       ];
 
-      const output = await createNextStepsComment(
+      const output = createNextStepsComment(
         mockCore,
         repo,
         labelNames,
@@ -542,7 +542,7 @@ describe("Summarize Checks Unit Tests", () => {
       expect(output).toEqual(expectedOutput);
     });
 
-    it("should generate pending summary when checks are in progress", async () => {
+    it("should generate pending summary when checks are in progress", () => {
       const repo = "azure-rest-api-specs";
       const targetBranch = "main";
       /** @type {string[]} */
@@ -579,7 +579,7 @@ describe("Summarize Checks Unit Tests", () => {
         },
       ];
 
-      const output = await createNextStepsComment(
+      const output = createNextStepsComment(
         mockCore,
         repo,
         labelNames,
@@ -593,7 +593,7 @@ describe("Summarize Checks Unit Tests", () => {
       expect(output).toEqual(expectedOutput);
     });
 
-    it("should generate pending summary when impact assessment is not completed", async () => {
+    it("should generate pending summary when impact assessment is not completed", () => {
       const repo = "azure-rest-api-specs";
       const targetBranch = "main";
       /** @type {string[]} */
@@ -690,7 +690,7 @@ describe("Summarize Checks Unit Tests", () => {
         },
       ];
 
-      const output = await createNextStepsComment(
+      const output = createNextStepsComment(
         mockCore,
         repo,
         labelNames,
@@ -704,7 +704,7 @@ describe("Summarize Checks Unit Tests", () => {
       expect(output).toEqual(expectedOutput);
     });
 
-    it("should generate pending summary when checks are in progress", async () => {
+    it("should generate pending summary when checks are in progress", () => {
       const repo = "azure-rest-api-specs";
       const targetBranch = "main";
       /** @type {string[]} */
@@ -759,7 +759,7 @@ describe("Summarize Checks Unit Tests", () => {
         },
       ];
 
-      const output = await createNextStepsComment(
+      const output = createNextStepsComment(
         mockCore,
         repo,
         labelNames,
@@ -773,7 +773,7 @@ describe("Summarize Checks Unit Tests", () => {
       expect(output).toEqual(expectedOutput);
     });
 
-    it("should generate pending summary when checks there are no required checks blocking or completed, but successful FYI checks", async () => {
+    it("should generate pending summary when checks there are no required checks blocking or completed, but successful FYI checks", () => {
       const repo = "azure-rest-api-specs";
       const targetBranch = "main";
       const labelNames = [
@@ -818,7 +818,7 @@ describe("Summarize Checks Unit Tests", () => {
         },
       ];
 
-      const output = await createNextStepsComment(
+      const output = createNextStepsComment(
         mockCore,
         repo,
         labelNames,
@@ -832,7 +832,7 @@ describe("Summarize Checks Unit Tests", () => {
       expect(output).toEqual(expectedOutput);
     });
 
-    it("Should generate error summary for a PR scenario where NotReadyForARMReview is present", async () => {
+    it("Should generate error summary for a PR scenario where NotReadyForARMReview is present", () => {
       const repo = "azure-rest-api-specs-pr";
       const targetBranch = "RPSaaSMaster";
       const labelNames = [
@@ -953,7 +953,7 @@ describe("Summarize Checks Unit Tests", () => {
         },
       ];
 
-      const output = await createNextStepsComment(
+      const output = createNextStepsComment(
         mockCore,
         repo,
         labelNames,
@@ -967,7 +967,7 @@ describe("Summarize Checks Unit Tests", () => {
       expect(output).toEqual(expectedOutput);
     });
 
-    it("Should generate error summary for a PR scenario with labeling issues", async () => {
+    it("Should generate error summary for a PR scenario with labeling issues", () => {
       const repo = "azure-rest-api-specs";
       const targetBranch = "main";
       const labelNames = [
@@ -1083,7 +1083,7 @@ describe("Summarize Checks Unit Tests", () => {
         },
       ];
 
-      const output = await createNextStepsComment(
+      const output = createNextStepsComment(
         mockCore,
         repo,
         labelNames,
@@ -1097,7 +1097,7 @@ describe("Summarize Checks Unit Tests", () => {
       expect(output).toEqual(expectedOutput);
     });
 
-    it("should generate error summary with a failed required check, and failed FYI checks", async () => {
+    it("should generate error summary with a failed required check, and failed FYI checks", () => {
       const repo = "azure-rest-api-specs";
       const targetBranch = "main";
       /** @type {string[]} */
@@ -1128,7 +1128,7 @@ describe("Summarize Checks Unit Tests", () => {
         },
       ];
 
-      const [commentOutput, automatedCheckOutput] = await createNextStepsComment(
+      const [commentOutput, automatedCheckOutput] = createNextStepsComment(
         mockCore,
         repo,
         labelNames,
@@ -1143,7 +1143,7 @@ describe("Summarize Checks Unit Tests", () => {
       expect(commentOutput).toEqual(expectedCommentOutput);
     });
 
-    it("should generate error summary with a failed required check, and in-progress FYI checks", async () => {
+    it("should generate error summary with a failed required check, and in-progress FYI checks", () => {
       const repo = "azure-rest-api-specs";
       const targetBranch = "main";
       /** @type {string[]} */
@@ -1173,7 +1173,7 @@ describe("Summarize Checks Unit Tests", () => {
         },
       ];
 
-      const [, automatedCheckOutput] = await createNextStepsComment(
+      const [, automatedCheckOutput] = createNextStepsComment(
         mockCore,
         repo,
         labelNames,
@@ -1187,7 +1187,7 @@ describe("Summarize Checks Unit Tests", () => {
       expect(automatedCheckOutput).toEqual(expectedCheckOutput);
     });
 
-    it("should generate error summary when CI-NewRPNamespaceWithoutRPaaS is present, but RPaaSException is not.", async () => {
+    it("should generate error summary when CI-NewRPNamespaceWithoutRPaaS is present, but RPaaSException is not.", () => {
       const repo = "azure-rest-api-specs";
       const targetBranch = "main";
       const labelNames = ["CI-NewRPNamespaceWithoutRPaaS"];
@@ -1210,7 +1210,7 @@ describe("Summarize Checks Unit Tests", () => {
         },
       ];
 
-      const [commentBody, automatedCheckOutput] = await createNextStepsComment(
+      const [commentBody, automatedCheckOutput] = createNextStepsComment(
         mockCore,
         repo,
         labelNames,
@@ -1225,7 +1225,7 @@ describe("Summarize Checks Unit Tests", () => {
       expect(automatedCheckOutput).toEqual(expectedCheckOutput);
     });
 
-    it("should generate error summary when checks are in error state", async () => {
+    it("should generate error summary when checks are in error state", () => {
       const repo = "azure-rest-api-specs";
       const targetBranch = "main";
       /** @type {string[]} */
@@ -1248,7 +1248,7 @@ describe("Summarize Checks Unit Tests", () => {
         },
       ];
 
-      const [, automatedCheckOutput] = await createNextStepsComment(
+      const [, automatedCheckOutput] = createNextStepsComment(
         mockCore,
         repo,
         labelNames,

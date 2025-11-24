@@ -1,0 +1,42 @@
+{
+  "operationId": "Pools_UpdatePool",
+  "title": "Patch the customer managed key for a pool",
+  "parameters": {
+    "batchUrl": "account.region.batch.azure.com",
+    "api-version": "2025-06-01",
+    "client-request-id": "00000000-0000-0000-0000-000000000000",
+    "ocp-date": "Fri, 17 Feb 2025 00:00:00 GMT",
+    "poolId": "poolId",
+    "pool": {
+      "vmSize": "Standard_D2ds_v5",
+      "virtualMachineConfiguration": {
+        "imageReference": {
+          "publisher": "Canonical",
+          "offer": "ubuntu-24_04-lts",
+          "sku": "server",
+          "version": "latest"
+        },
+        "diskEncryptionConfiguration": {
+          "targets": [
+            "osdisk",
+            "temporarydisk"
+          ],
+          "customerManagedKey": {
+            "keyUrl": "https://<vaultEndpoint>/keys/<keyName>/<keyVersion>",
+            "identityReference": {
+              "resourceId": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1"
+            }
+          }
+        },
+        "nodeAgentSKUId": "batch.node.ubuntu 20.04"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "request-id": "00000000-0000-0000-0000-000000000000",
+      "ETag": "0x8D45765A6A2DC04",
+      "Last-Modified": "Fri, 17 Feb 2025 00:00:00 GMT"
+    }
+  }
+}
