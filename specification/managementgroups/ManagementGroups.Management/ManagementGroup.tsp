@@ -126,7 +126,7 @@ interface ManagementGroups {
       @header("Cache-Control")
       `Cache-Control`?: string = "no-cache";
     },
-    Response = (ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders<FinalResult = ManagementGroup> &
+    Response = (ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders<FinalResult = AzureAsyncOperationResults> &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: AzureAsyncOperationResults;
