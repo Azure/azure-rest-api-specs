@@ -50,7 +50,6 @@ interface ArcSettings {
   /**
    * Delete ArcSetting resource details of HCI Cluster.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     ArcSetting,
@@ -84,8 +83,8 @@ interface ArcSettings {
   createIdentity is ArmResourceActionAsync<
     ArcSetting,
     void,
-    ArmResponse<StackHciArcIdentityResponseResult>,
-    LroHeaders = ArmAsyncOperationHeader<FinalResult = StackHciArcIdentityResponseResult>
+    ArmResponse<ArcIdentityResponse>,
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = ArcIdentityResponse>
   >;
 
   /**
@@ -261,8 +260,16 @@ model DefaultExtensionDetails {
  */
 model ArcSettingsPatch {
   /**
+   * Resource tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  tags?: Record<string>;
+
+  /**
    * ArcSettings properties.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: ArcSettingsPatchProperties;
 }
 
@@ -270,12 +277,6 @@ model ArcSettingsPatch {
  * ArcSettings properties.
  */
 model ArcSettingsPatchProperties {
-  /**
-   * Resource tags.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  tags?: Record<string>;
-
   /**
    * contains connectivity related configuration for ARC resources
    */
@@ -312,12 +313,12 @@ model PasswordCredential {
 /**
  * ArcIdentity details.
  */
-@clientName("ArcIdentityResponse")
-model StackHciArcIdentityResponseResult {
+model ArcIdentityResponse {
   /**
    * ArcIdentity properties.
    */
-  @visibility(Lifecycle.Read)
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: ArcIdentityResponseProperties;
 }
 

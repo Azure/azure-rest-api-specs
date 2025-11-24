@@ -123,6 +123,8 @@ model UpdateRunProperties {
   /**
    * Progress representation of the update run steps.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   progress?: UpdateStep;
 }
 

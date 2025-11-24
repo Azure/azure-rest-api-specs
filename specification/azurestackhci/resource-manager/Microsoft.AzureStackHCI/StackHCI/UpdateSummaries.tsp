@@ -141,6 +141,8 @@ model UpdateSummariesProperties {
   /**
    * Current version of each updatable component.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   @identifiers(#["version"])
   packageVersions?: PackageVersionInfo[];
 
@@ -169,11 +171,15 @@ model UpdateSummariesProperties {
   /**
    * Overall health state for update-specific health checks.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   healthState?: HealthState;
 
   /**
    * An array of pre-check result objects.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   @identifiers(#["name"])
   healthCheckResult?: PrecheckResult[];
 

@@ -55,7 +55,6 @@ interface Offers {
     Response = ArmResponse<OfferList>
   >;
 
-
   /**
    * List Offers available across publishers for the HCI Cluster.
    */
@@ -73,7 +72,6 @@ interface Offers {
       $expand?: string;
     }
   >;
-
 }
 
 @@doc(Offer.name, "The name of the offer available within HCI cluster.");

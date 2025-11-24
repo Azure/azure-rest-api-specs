@@ -186,41 +186,10 @@
 |------|------------|-------|
 | `definitions.UpdateStep__added` | added | `{"type":"object","properties":{"name":{"type":"string"},"description":{"type":"string"},"errorMessag...` |
 
-### Changes for `x-ms-client-flatten`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ArcIdentityResponse.properties.properties['x-ms-client-flatten__deleted']` | deleted | `true` |
-| `definitions.ArcSetting.properties.properties['x-ms-client-flatten__deleted']` | deleted | `true` |
-| `definitions.ArcSettingsPatch.properties.properties['x-ms-client-flatten__deleted']` | deleted | `true` |
-| `definitions.Cluster.properties.identity['x-ms-client-flatten__deleted']` | deleted | `true` |
-| `definitions.Cluster.properties.properties['x-ms-client-flatten__deleted']` | deleted | `true` |
-| `definitions.ClusterIdentityResponse.properties.properties['x-ms-client-flatten__deleted']` | deleted | `true` |
-| `definitions.DeploymentSetting.properties.properties['x-ms-client-flatten__deleted']` | deleted | `true` |
-| `definitions.ExtensionPatch.properties.properties['x-ms-client-flatten__deleted']` | deleted | `true` |
-| `definitions.ExtensionProperties.properties.extensionParameters['x-ms-client-flatten__deleted']` | deleted | `true` |
-| `definitions.Offer.properties.properties['x-ms-client-flatten__deleted']` | deleted | `true` |
-| `definitions.Publisher.properties.properties['x-ms-client-flatten__deleted']` | deleted | `true` |
-| `definitions.SecuritySetting.properties.properties['x-ms-client-flatten__deleted']` | deleted | `true` |
-| `definitions.Sku.properties.properties['x-ms-client-flatten__deleted']` | deleted | `true` |
-| `definitions.Update.properties.properties['x-ms-client-flatten__deleted']` | deleted | `true` |
-| `definitions.UpdateProperties.properties.componentVersions['x-ms-client-flatten__deleted']` | deleted | `true` |
-| `definitions.UpdateProperties.properties.healthCheckResult['x-ms-client-flatten__deleted']` | deleted | `true` |
-| `definitions.UpdateProperties.properties.healthState['x-ms-client-flatten__deleted']` | deleted | `true` |
-| `definitions.UpdateProperties.properties.rebootRequired['x-ms-client-flatten__deleted']` | deleted | `true` |
-| `definitions.UpdateProperties.properties.updateStateProperties['x-ms-client-flatten__deleted']` | deleted | `true` |
-| `definitions.UpdateRun.properties.properties['x-ms-client-flatten__deleted']` | deleted | `true` |
-| `definitions.UpdateRunProperties.properties.progress['x-ms-client-flatten__deleted']` | deleted | `true` |
-| `definitions.UpdateSummaries.properties.properties['x-ms-client-flatten__deleted']` | deleted | `true` |
-| `definitions.UpdateSummariesProperties.properties.healthCheckResult['x-ms-client-flatten__deleted']` | deleted | `true` |
-| `definitions.UpdateSummariesProperties.properties.healthState['x-ms-client-flatten__deleted']` | deleted | `true` |
-| `definitions.UpdateSummariesProperties.properties.packageVersions['x-ms-client-flatten__deleted']` | deleted | `true` |
-
 ### Changes for `readOnly`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.ArcIdentityResponse.properties.properties.readOnly__added` | added | `true` |
 | `definitions.ArcIdentityResponseProperties.readOnly__deleted` | deleted | `true` |
 | `definitions.ArcSettingList.properties.value.readOnly__deleted` | deleted | `true` |
 | `definitions.ClusterIdentityResponse.properties.properties.readOnly__added` | added | `true` |
@@ -238,6 +207,23 @@
 | `definitions.Step.properties.status.readOnly__added` | added | `true` |
 | `definitions.Step.properties.steps.readOnly__added` | added | `true` |
 | `definitions.UpdateRunProperties.properties.state.readOnly__added` | added | `true` |
+
+### Changes for `x-ms-client-flatten`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.ArcSetting.properties.properties['x-ms-client-flatten__deleted']` | deleted | `true` |
+| `definitions.Cluster.properties.identity['x-ms-client-flatten__deleted']` | deleted | `true` |
+| `definitions.Cluster.properties.properties['x-ms-client-flatten__deleted']` | deleted | `true` |
+| `definitions.DeploymentSetting.properties.properties['x-ms-client-flatten__deleted']` | deleted | `true` |
+| `definitions.ExtensionProperties.properties.extensionParameters['x-ms-client-flatten__deleted']` | deleted | `true` |
+| `definitions.Offer.properties.properties['x-ms-client-flatten__deleted']` | deleted | `true` |
+| `definitions.Publisher.properties.properties['x-ms-client-flatten__deleted']` | deleted | `true` |
+| `definitions.SecuritySetting.properties.properties['x-ms-client-flatten__deleted']` | deleted | `true` |
+| `definitions.Sku.properties.properties['x-ms-client-flatten__deleted']` | deleted | `true` |
+| `definitions.Update.properties.properties['x-ms-client-flatten__deleted']` | deleted | `true` |
+| `definitions.UpdateRun.properties.properties['x-ms-client-flatten__deleted']` | deleted | `true` |
+| `definitions.UpdateSummaries.properties.properties['x-ms-client-flatten__deleted']` | deleted | `true` |
 
 ### Changes for `required`
 
@@ -258,8 +244,6 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.ArcSettingProperties.properties.tags__added` | added | `{"type":"object","additionalProperties":{"type":"string"}}` |
-| `definitions.ArcSettingsPatch.properties.tags__deleted` | deleted | `{"type":"object","additionalProperties":{"type":"string"}}` |
-| `definitions.ArcSettingsPatchProperties.properties.tags__added` | added | `{"type":"object","additionalProperties":{"type":"string"}}` |
 | `definitions.Update.properties.tags__added` | added | `{"type":"object","additionalProperties":{"type":"string"}}` |
 | `definitions.UpdateRun.properties.tags__added` | added | `{"type":"object","additionalProperties":{"type":"string"}}` |
 | `definitions.UpdateSummaries.properties.tags__added` | added | `{"type":"object","additionalProperties":{"type":"string"}}` |

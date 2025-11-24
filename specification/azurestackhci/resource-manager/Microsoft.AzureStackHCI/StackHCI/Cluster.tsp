@@ -944,7 +944,9 @@ model ClusterIdentityResponse {
   /**
    * Cluster identity properties.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
   @visibility(Lifecycle.Read)
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: ClusterIdentityResponseProperties;
 }
 

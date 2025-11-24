@@ -94,9 +94,6 @@ interface Extensions {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "model nomenclature"
 model ExtensionList is Azure.Core.Page<Extension>;
 
-
-
-
 /**
  * Extension Details to update
  */
@@ -105,6 +102,8 @@ model ExtensionPatch {
   /**
    * Describes Machine Extension Properties that can be updated.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: ExtensionPatchProperties;
 }
 

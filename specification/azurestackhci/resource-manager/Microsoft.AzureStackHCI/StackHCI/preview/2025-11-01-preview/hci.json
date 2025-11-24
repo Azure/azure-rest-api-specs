@@ -4785,7 +4785,7 @@
         "properties": {
           "$ref": "#/definitions/ArcIdentityResponseProperties",
           "description": "ArcIdentity properties.",
-          "readOnly": true
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -5038,16 +5038,6 @@
       "type": "object",
       "description": "ArcSetting details to update.",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/ArcSettingsPatchProperties",
-          "description": "ArcSettings properties."
-        }
-      }
-    },
-    "ArcSettingsPatchProperties": {
-      "type": "object",
-      "description": "ArcSettings properties.",
-      "properties": {
         "tags": {
           "type": "object",
           "description": "Resource tags.",
@@ -5055,6 +5045,17 @@
             "type": "string"
           }
         },
+        "properties": {
+          "$ref": "#/definitions/ArcSettingsPatchProperties",
+          "description": "ArcSettings properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ArcSettingsPatchProperties": {
+      "type": "object",
+      "description": "ArcSettings properties.",
+      "properties": {
         "connectivityProperties": {
           "$ref": "#/definitions/ArcConnectivityProperties",
           "description": "contains connectivity related configuration for ARC resources"
@@ -5197,7 +5198,8 @@
         "properties": {
           "$ref": "#/definitions/ClusterIdentityResponseProperties",
           "description": "Cluster identity properties.",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -7489,7 +7491,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/ExtensionPatchProperties",
-          "description": "Describes Machine Extension Properties that can be updated."
+          "description": "Describes Machine Extension Properties that can be updated.",
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -11382,24 +11385,28 @@
           "items": {
             "$ref": "#/definitions/PackageVersionInfo"
           },
+          "x-ms-client-flatten": true,
           "x-ms-identifiers": [
             "version"
           ]
         },
         "rebootRequired": {
           "$ref": "#/definitions/RebootRequirement",
-          "description": "Whether a reboot is required after applying the update."
+          "description": "Whether a reboot is required after applying the update.",
+          "x-ms-client-flatten": true
         },
         "healthState": {
           "$ref": "#/definitions/HealthState",
-          "description": "Overall health state for update-specific health checks."
+          "description": "Overall health state for update-specific health checks.",
+          "x-ms-client-flatten": true
         },
         "healthCheckResult": {
           "type": "array",
           "description": "An array of PrecheckResult objects.",
           "items": {
             "$ref": "#/definitions/PrecheckResult"
-          }
+          },
+          "x-ms-client-flatten": true
         },
         "healthCheckDate": {
           "type": "string",
@@ -11445,7 +11452,8 @@
         },
         "updateStateProperties": {
           "$ref": "#/definitions/UpdateStateProperties",
-          "description": "Additional information regarding the state of the update. See definition of UpdateStateProperties type below for more details on this property."
+          "description": "Additional information regarding the state of the update. See definition of UpdateStateProperties type below for more details on this property.",
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -11529,7 +11537,8 @@
         },
         "progress": {
           "$ref": "#/definitions/UpdateStep",
-          "description": "Progress representation of the update run steps."
+          "description": "Progress representation of the update run steps.",
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -11714,6 +11723,7 @@
           "items": {
             "$ref": "#/definitions/PackageVersionInfo"
           },
+          "x-ms-client-flatten": true,
           "x-ms-identifiers": [
             "version"
           ]
@@ -11738,7 +11748,8 @@
         },
         "healthState": {
           "$ref": "#/definitions/HealthState",
-          "description": "Overall health state for update-specific health checks."
+          "description": "Overall health state for update-specific health checks.",
+          "x-ms-client-flatten": true
         },
         "healthCheckResult": {
           "type": "array",
@@ -11746,6 +11757,7 @@
           "items": {
             "$ref": "#/definitions/PrecheckResult"
           },
+          "x-ms-client-flatten": true,
           "x-ms-identifiers": [
             "name"
           ]

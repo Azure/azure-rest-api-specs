@@ -3382,7 +3382,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/ArcIdentityResponseProperties",
-          "readOnly": true
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -3542,20 +3542,21 @@
     "ArcSettingsPatch": {
       "type": "object",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/ArcSettingsPatchProperties"
-        }
-      }
-    },
-    "ArcSettingsPatchProperties": {
-      "type": "object",
-      "properties": {
         "tags": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           }
         },
+        "properties": {
+          "$ref": "#/definitions/ArcSettingsPatchProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ArcSettingsPatchProperties": {
+      "type": "object",
+      "properties": {
         "connectivityProperties": {
           "$ref": "#/definitions/ArcConnectivityProperties"
         }
@@ -3663,7 +3664,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/ClusterIdentityResponseProperties",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -5287,7 +5289,8 @@
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ExtensionPatchProperties"
+          "$ref": "#/definitions/ExtensionPatchProperties",
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -7964,6 +7967,7 @@
           "items": {
             "$ref": "#/definitions/PackageVersionInfo"
           },
+          "x-ms-client-flatten": true,
           "x-ms-identifiers": [
             "version"
           ]
@@ -7978,7 +7982,8 @@
           "x-ms-enum": {
             "name": "RebootRequirement",
             "modelAsString": true
-          }
+          },
+          "x-ms-client-flatten": true
         },
         "healthState": {
           "type": "string",
@@ -7993,13 +7998,15 @@
           "x-ms-enum": {
             "name": "HealthState",
             "modelAsString": true
-          }
+          },
+          "x-ms-client-flatten": true
         },
         "healthCheckResult": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/PrecheckResult"
-          }
+          },
+          "x-ms-client-flatten": true
         },
         "healthCheckDate": {
           "type": "string",
@@ -8043,7 +8050,8 @@
           "type": "string"
         },
         "updateStateProperties": {
-          "$ref": "#/definitions/UpdateStateProperties"
+          "$ref": "#/definitions/UpdateStateProperties",
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -8151,7 +8159,8 @@
           "readOnly": true
         },
         "progress": {
-          "$ref": "#/definitions/UpdateStep"
+          "$ref": "#/definitions/UpdateStep",
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -8300,6 +8309,7 @@
           "items": {
             "$ref": "#/definitions/PackageVersionInfo"
           },
+          "x-ms-client-flatten": true,
           "x-ms-identifiers": [
             "version"
           ]
@@ -8331,13 +8341,15 @@
           "x-ms-enum": {
             "name": "HealthState",
             "modelAsString": true
-          }
+          },
+          "x-ms-client-flatten": true
         },
         "healthCheckResult": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/PrecheckResult"
           },
+          "x-ms-client-flatten": true,
           "x-ms-identifiers": [
             "name"
           ]

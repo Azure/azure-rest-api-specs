@@ -1317,14 +1317,6 @@
         }
       }
     },
-    "ArcIdentityResponse": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten__deleted": true,
-          "readOnly__added": true
-        }
-      }
-    },
     "ArcIdentityResponseProperties": {
       "readOnly__deleted": true
     },
@@ -1362,27 +1354,8 @@
         }
       }
     },
-    "ArcSettingsPatch": {
-      "properties": {
-        "tags__deleted": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "x-ms-client-flatten__deleted": true
-        }
-      }
-    },
     "ArcSettingsPatchProperties": {
       "properties": {
-        "tags__added": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "connectivityProperties": {
           "type__deleted": "object",
           "items__deleted": {
@@ -1417,7 +1390,6 @@
     "ClusterIdentityResponse": {
       "properties": {
         "properties": {
-          "x-ms-client-flatten__deleted": true,
           "readOnly__added": true
         }
       }
@@ -1457,12 +1429,23 @@
       "properties": {
         "provisioningState": {
           "enum": [
-            
+            [
+              "+",
+              "NotSpecified"
+            ],
             [
               "+",
               "Error"
             ],
-          
+            [
+              " "
+            ],
+            [
+              " "
+            ],
+            [
+              " "
+            ],
             [
               "-",
               "Accepted"
@@ -1471,7 +1454,10 @@
               "-",
               "Provisioning"
             ],
-           
+            [
+              "-",
+              "NotSpecified"
+            ],
             [
               "+",
               "Connected"
@@ -2077,13 +2063,6 @@
         "protectedSettings": {
           "x-ms-secret__deleted": true,
           "additionalProperties__added": {}
-        }
-      }
-    },
-    "ExtensionPatch": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten__deleted": true
         }
       }
     },
@@ -2861,17 +2840,7 @@
             ]
           ]
         },
-        "componentVersions": {
-          "x-ms-client-flatten__deleted": true
-        },
-        "rebootRequired": {
-          "x-ms-client-flatten__deleted": true
-        },
-        "healthState": {
-          "x-ms-client-flatten__deleted": true
-        },
         "healthCheckResult": {
-          "x-ms-client-flatten__deleted": true,
           "items": {
             "$ref": {
               "__old": "./hciCommon.json#/definitions/PrecheckResult",
@@ -2883,8 +2852,7 @@
           "format__added": "float"
         },
         "updateStateProperties": {
-          "type__deleted": "object",
-          "x-ms-client-flatten__deleted": true
+          "type__deleted": "object"
         }
       }
     },
@@ -2994,7 +2962,6 @@
           "readOnly__added": true
         },
         "progress": {
-          "x-ms-client-flatten__deleted": true,
           "$ref": {
             "__old": "#/definitions/Step",
             "__new": "#/definitions/UpdateStep"
@@ -3112,14 +3079,7 @@
             ]
           ]
         },
-        "packageVersions": {
-          "x-ms-client-flatten__deleted": true
-        },
-        "healthState": {
-          "x-ms-client-flatten__deleted": true
-        },
         "healthCheckResult": {
-          "x-ms-client-flatten__deleted": true,
           "items": {
             "$ref": {
               "__old": "./hciCommon.json#/definitions/PrecheckResult",

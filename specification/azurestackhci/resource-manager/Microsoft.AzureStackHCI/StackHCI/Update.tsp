@@ -136,22 +136,30 @@ model UpdateProperties {
   /**
    * An array of component versions for a Solution Bundle update, and an empty array otherwise.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   @identifiers(#["version"])
   componentVersions?: PackageVersionInfo[];
 
   /**
    * Whether a reboot is required after applying the update.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   rebootRequired?: RebootRequirement;
 
   /**
    * Overall health state for update-specific health checks.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   healthState?: HealthState;
 
   /**
    * An array of PrecheckResult objects.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   healthCheckResult?: PrecheckResult[];
 
   /**
@@ -208,6 +216,8 @@ model UpdateProperties {
   /**
    * Additional information regarding the state of the update. See definition of UpdateStateProperties type below for more details on this property.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   updateStateProperties?: UpdateStateProperties;
 }
 
