@@ -122,15 +122,10 @@
         "description": "list Site at SG scope",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ServiceGroupParameters.servicegroupName"
           },
           {
-            "name": "servicegroupName",
-            "in": "path",
-            "description": "The name of the service group",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -163,20 +158,15 @@
         "description": "Get Site at SG scope",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ServiceGroupParameters.servicegroupName"
           },
           {
-            "name": "servicegroupName",
-            "in": "path",
-            "description": "The name of the service group",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "siteName",
             "in": "path",
-            "description": "The name of the site",
+            "description": "Name of Site resource",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
@@ -207,20 +197,15 @@
         "description": "create or update Site at SG scope",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ServiceGroupParameters.servicegroupName"
           },
           {
-            "name": "servicegroupName",
-            "in": "path",
-            "description": "The name of the service group",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "siteName",
             "in": "path",
-            "description": "The name of the site",
+            "description": "Name of Site resource",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
@@ -228,7 +213,7 @@
           {
             "name": "resource",
             "in": "body",
-            "description": "The properties of the site",
+            "description": "Resource create parameters.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Site"
@@ -272,7 +257,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "original-uri"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       },
@@ -281,20 +266,15 @@
         "description": "update Site at SG scope",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ServiceGroupParameters.servicegroupName"
           },
           {
-            "name": "servicegroupName",
-            "in": "path",
-            "description": "The name of the service group",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "siteName",
             "in": "path",
-            "description": "The name of the site",
+            "description": "Name of Site resource",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
@@ -302,7 +282,7 @@
           {
             "name": "properties",
             "in": "body",
-            "description": "The properties of the site",
+            "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/SiteUpdate"
@@ -334,20 +314,15 @@
         "description": "delete Site at SG scope",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ServiceGroupParameters.servicegroupName"
           },
           {
-            "name": "servicegroupName",
-            "in": "path",
-            "description": "The name of the service group",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "siteName",
             "in": "path",
-            "description": "The name of the site",
+            "description": "Name of Site resource",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
@@ -1143,5 +1118,15 @@
       }
     }
   },
-  "parameters": {}
+  "parameters": {
+    "ServiceGroupParameters.servicegroupName": {
+      "name": "servicegroupName",
+      "in": "path",
+      "description": "The name of the service group.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$",
+      "x-ms-parameter-location": "method"
+    }
+  }
 }
