@@ -15,7 +15,7 @@ using Azure.ResourceManager;
 namespace Microsoft.HealthcareInterop;
 
 @added(Versions.v2025_11_01_preview)
-@doc("The healthcare interop resource that extracts IDs from file that contains a list of delimited IDs and queries the configured EMR FHIR endpoint to retrieve the representative resources.")
+@doc("A healthcare interop channel that reads patient IDs from a flat file containing delimited identifiers, queries an Electronic Medical Record (EMR) Fast Healthcare Interoperability Resources (FHIR) endpoint to retrieve the corresponding resources, and sends the retrieved data to the Diagnostic Data Management Service (DDMS) for further processing.")
 @resource("ddmsFhirFlatFileBatchChannels")
 model DdmsFhirFlatFileBatchChannel
   is TrackedResource<DdmsFhirFlatFileBatchChannelProperties> {
