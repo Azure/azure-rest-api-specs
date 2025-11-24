@@ -79,7 +79,7 @@ interface ManagementGroups {
       @header("Cache-Control")
       `Cache-Control`?: string = "no-cache";
     },
-    Response = ArmResourceUpdatedResponse<ManagementGroup> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> & {
+    Response = ArmResourceUpdatedResponse<ManagementGroup> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ManagementGroup>> & {
       @bodyRoot
       _: AzureAsyncOperationResults;
     })
@@ -126,7 +126,7 @@ interface ManagementGroups {
       @header("Cache-Control")
       `Cache-Control`?: string = "no-cache";
     },
-    Response = (ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders &
+    Response = (ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders<FinalResult = ManagementGroup> &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: AzureAsyncOperationResults;
