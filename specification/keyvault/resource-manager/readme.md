@@ -26,7 +26,16 @@ These are the global settings for the KeyVault API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2024-11-01
+tag: package-2025-05-01
+```
+
+### Tag: package-2025-05-01
+
+These settings apply only when `--tag=package-2025-05-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-05-01'
+input-file:
+  - Microsoft.KeyVault/stable/2025-05-01/openapi.json
 ```
 
 ### Tag: package-2024-11-01
@@ -319,7 +328,12 @@ directive:
     - $.definitions.ManagedHsmKeyProperties.properties.release_policy
   from: keysManagedHsm.json
   reason: This is to keep compatibility with existing data plane property. The 'release_policy' property for KeyCreateParameters does not support camelCase.
-
+- suppress: INVALID_REQUEST_PARAMETER
+  from: openapi.json
+  reason: The Vaults_List API endpoint only supports version 2015-11-01.
+- suppress: OBJECT_MISSING_REQUIRED_PROPERTY
+  from: openapi.json
+  reason: The Vaults_List API endpoint only supports version 2015-11-01.
 - suppress: INVALID_REQUEST_PARAMETER
   from: keyvault.json
   reason: The Vaults_List API endpoint only supports version 2015-11-01.
@@ -342,7 +356,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-ruby

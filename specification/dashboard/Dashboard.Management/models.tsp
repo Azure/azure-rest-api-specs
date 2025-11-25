@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -69,6 +71,34 @@ union DeterministicOutboundIP {
   Disabled: "Disabled",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Enabled: "Enabled",
+}
+
+/**
+ * The creator will have admin access for the Grafana instance.
+ */
+@added(Versions.v2025_08_01)
+union CreatorCanAdmin {
+  string,
+
+  /** Creator admin access is disabled */
+  Disabled: "Disabled",
+
+  /** Creator admin access is enabled */
+  Enabled: "Enabled",
+}
+
+/**
+ * Specifies the capacity tier of the Grafana instance.
+ */
+@added(Versions.v2025_08_01)
+union Size {
+  string,
+
+  /** X1 capacity tier */
+  X1: "X1",
+
+  /** X2 capacity tier */
+  X2: "X2",
 }
 
 /**
@@ -199,6 +229,12 @@ model ManagedGrafanaProperties {
   apiKey?: ApiKey = ApiKey.Disabled;
 
   /**
+   * The creator will have admin access for the Grafana instance.
+   */
+  @added(Versions.v2025_08_01)
+  creatorCanAdmin?: CreatorCanAdmin;
+
+  /**
    * Whether a Grafana instance uses deterministic outbound IPs.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -311,7 +347,7 @@ model Resource {
  */
 model GrafanaIntegrations {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   azureMonitorWorkspaceIntegrations?: AzureMonitorWorkspaceIntegration[];
 }
 
@@ -550,6 +586,12 @@ model ManagedGrafanaPropertiesUpdateParameters {
   apiKey?: ApiKey = ApiKey.Disabled;
 
   /**
+   * The creator will have admin access for the Grafana instance.
+   */
+  @added(Versions.v2025_08_01)
+  creatorCanAdmin?: CreatorCanAdmin;
+
+  /**
    * Whether a Grafana instance uses deterministic outbound IPs.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -707,7 +749,7 @@ model MarketplaceTrialQuota {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model GrafanaAvailablePluginListResponse {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #["pluginId"])
+  @identifiers(#["pluginId"])
   value?: GrafanaAvailablePlugin[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -729,6 +771,20 @@ model GrafanaAvailablePlugin {
    */
   @visibility(Lifecycle.Read)
   name?: string;
+
+  /**
+   * Grafana plugin type
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2025_08_01)
+  type?: string;
+
+  /**
+   * Grafana plugin author/publisher name
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2025_08_01)
+  author?: string;
 }
 
 /**
@@ -902,4 +958,33 @@ model ResourceSku {
    * The name of the SKU.
    */
   name: string;
+
+  /**
+   * Specifies the capacity tier of the Grafana instance.
+   */
+  @added(Versions.v2025_08_01)
+  size?: Size;
+}
+
+/**
+ * The list response for dashboard definitions.
+ */
+@added(Versions.v2025_09_01_preview)
+model DashboardDefinitionListResponse is Azure.Core.Page<DashboardDefinition>;
+
+/**
+ * Properties specific to the dashboard definition.
+ */
+@added(Versions.v2025_09_01_preview)
+model DashboardDefinitionProperties {
+  /**
+   * The dashboard definition data in JSON format.
+   */
+  serializedData?: string;
+
+  /**
+   * The provisioning state of the dashboard definition resource.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
 }

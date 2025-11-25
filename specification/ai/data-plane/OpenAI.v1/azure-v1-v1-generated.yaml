@@ -7,6 +7,7 @@ info:
   version: v1
 tags:
   - name: Chat
+  - name: Containers
   - name: Embeddings
   - name: Evals
   - name: Files
@@ -68,6 +69,521 @@ paths:
       x-ms-examples:
         Create a chat completion:
           $ref: ./examples/chat_completions.yaml
+  /containers:
+    get:
+      operationId: ListContainers
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+        - name: limit
+          in: query
+          required: false
+          description: |-
+            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+            default is 20.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+          explode: false
+        - name: order
+          in: query
+          required: false
+          description: |-
+            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
+            for descending order.
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+          explode: false
+        - name: after
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include after=obj_foo in order to fetch the next page of the list.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.ContainerListResource'
+        default:
+          description: An unexpected error response.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Containers
+    post:
+      operationId: CreateContainer
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.ContainerResource'
+        default:
+          description: An unexpected error response.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Containers
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OpenAI.CreateContainerBody'
+  /containers/{container_id}:
+    get:
+      operationId: RetrieveContainer
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+        - name: container_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.ContainerResource'
+        default:
+          description: An unexpected error response.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Containers
+    delete:
+      operationId: DeleteContainer
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+        - name: container_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - id
+                  - object
+                  - deleted
+                properties:
+                  id:
+                    type: string
+                  object:
+                    type: string
+                    enum:
+                      - container.deleted
+                  deleted:
+                    type: boolean
+                    enum:
+                      - true
+        default:
+          description: An unexpected error response.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Containers
+  /containers/{container_id}/files:
+    post:
+      operationId: CreateContainerFile
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+        - name: container_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.ContainerFileResource'
+        default:
+          description: An unexpected error response.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Containers
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OpenAI.CreateContainerFileBodyMultiPart'
+    get:
+      operationId: ListContainerFiles
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+        - name: container_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: limit
+          in: query
+          required: false
+          description: |-
+            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+            default is 20.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+          explode: false
+        - name: order
+          in: query
+          required: false
+          description: |-
+            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
+            for descending order.
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+          explode: false
+        - name: after
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include after=obj_foo in order to fetch the next page of the list.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.ContainerFileListResource'
+        default:
+          description: An unexpected error response.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Containers
+  /containers/{container_id}/files/{file_id}:
+    get:
+      operationId: RetrieveContainerFile
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+        - name: container_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: file_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.ContainerFileResource'
+        default:
+          description: An unexpected error response.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Containers
+    delete:
+      operationId: DeleteContainerFile
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+        - name: container_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: file_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - id
+                  - object
+                  - deleted
+                properties:
+                  id:
+                    type: string
+                  object:
+                    type: string
+                    enum:
+                      - container.file.deleted
+                  deleted:
+                    type: boolean
+                    enum:
+                      - true
+        default:
+          description: An unexpected error response.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Containers
+  /containers/{container_id}/files/{file_id}/content:
+    get:
+      operationId: RetrieveContainerFileContent
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+        - name: container_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: file_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        default:
+          description: An unexpected error response.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Containers
   /embeddings:
     post:
       operationId: createEmbedding
@@ -3131,6 +3647,278 @@ paths:
                 $ref: '#/components/schemas/AzureErrorResponse'
       tags:
         - Vector Stores
+  /videos:
+    post:
+      operationId: Videos_Create
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+      description: Creates a new video generation job.
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VideoResource'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Videos
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateVideoBody'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CreateVideoBodyWithInputReference'
+            encoding:
+              seconds:
+                contentType: text/plain
+              size:
+                contentType: text/plain
+              input_reference:
+                contentType: '*/*'
+    get:
+      operationId: Videos_List
+      description: Lists video generation jobs.
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+        - name: after
+          in: query
+          required: false
+          schema:
+            type: string
+          explode: false
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 20
+          explode: false
+        - name: order
+          in: query
+          required: false
+          schema:
+            $ref: '#/components/schemas/Order'
+            default: desc
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VideoList'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Videos
+  /videos/{video-id}:
+    get:
+      operationId: Videos_Get
+      description: Retrieves properties of a video generation job.
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+        - $ref: '#/components/parameters/VideoIdParameter'
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VideoResource'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Videos
+    delete:
+      operationId: Videos_Delete
+      description: Deletes a video generation job.
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+        - $ref: '#/components/parameters/VideoIdParameter'
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeletedVideoResource'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Videos
+  /videos/{video-id}/content:
+    get:
+      operationId: Videos_RetrieveContent
+      description: Retrieves a thumbnail of the generated video content.
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+        - $ref: '#/components/parameters/VideoIdParameter'
+        - name: variant
+          in: query
+          required: false
+          schema:
+            $ref: '#/components/schemas/VideoContentVariant'
+            default: video
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+            content-length:
+              required: true
+              schema:
+                type: integer
+          content:
+            image/jpg:
+              schema:
+                type: string
+                format: binary
+            image/webp:
+              schema:
+                type: string
+                format: binary
+            video/mp4:
+              schema:
+                type: string
+                format: binary
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Videos
+  /videos/{video-id}/remix:
+    post:
+      operationId: Videos_Remix
+      description: Use an existing generated video and change it with a prompt.
+      parameters:
+        - $ref: '#/components/parameters/VideoIdParameter'
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VideoResource'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Videos
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                prompt:
+                  type: string
+                  minLength: 1
+              required:
+                - prompt
 security:
   - ApiKeyAuth: []
   - ApiKeyAuth_: []
@@ -7288,6 +8076,137 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: A tool that controls a virtual computer. Learn more about the [computer tool](https://platform.openai.com/docs/guides/tools-computer-use).
+    OpenAI.ContainerFileListResource:
+      type: object
+      required:
+        - object
+        - data
+        - first_id
+        - last_id
+        - has_more
+      properties:
+        object:
+          type: string
+          enum:
+            - list
+          description: The type of object returned, must be 'list'.
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.ContainerFileResource'
+          description: A list of container files.
+        first_id:
+          type: string
+          description: The ID of the first file in the list.
+        last_id:
+          type: string
+          description: The ID of the last file in the list.
+        has_more:
+          type: boolean
+          description: Whether there are more files available.
+    OpenAI.ContainerFileResource:
+      type: object
+      required:
+        - id
+        - object
+        - container_id
+        - created_at
+        - bytes
+        - path
+        - source
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the file.
+        object:
+          type: string
+          description: The type of this object (`container.file`).
+        container_id:
+          type: string
+          description: The container this file belongs to.
+        created_at:
+          type: integer
+          format: unixtime
+          description: Unix timestamp (in seconds) when the file was created.
+        bytes:
+          type: integer
+          format: int32
+          description: Size of the file in bytes.
+        path:
+          type: string
+          description: Path of the file in the container.
+        source:
+          type: string
+          description: Source of the file (e.g., `user`, `assistant`).
+    OpenAI.ContainerListResource:
+      type: object
+      required:
+        - object
+        - data
+        - first_id
+        - last_id
+        - has_more
+      properties:
+        object:
+          type: string
+          enum:
+            - list
+          description: The type of object returned, must be 'list'.
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.ContainerResource'
+          description: A list of containers.
+        first_id:
+          type: string
+          description: The ID of the first container in the list.
+        last_id:
+          type: string
+          description: The ID of the last container in the list.
+        has_more:
+          type: boolean
+          description: Whether there are more containers available.
+    OpenAI.ContainerResource:
+      type: object
+      required:
+        - id
+        - object
+        - name
+        - created_at
+        - status
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the container.
+        object:
+          type: string
+          description: The type of this object.
+        name:
+          type: string
+          description: Name of the container.
+        created_at:
+          type: integer
+          format: unixtime
+          description: Unix timestamp (in seconds) when the container was created.
+        status:
+          type: string
+          description: Status of the container (e.g., active, deleted).
+        expires_after:
+          type: object
+          properties:
+            anchor:
+              type: string
+              enum:
+                - last_active_at
+              description: The reference point for the expiration.
+            minutes:
+              type: integer
+              format: int32
+              description: The number of minutes after the anchor before the container expires.
+          description: |-
+            The container will expire after this time period.
+            The anchor is the reference point for the expiration.
+            The minutes is the number of minutes after the anchor before the container expires.
     OpenAI.Coordinate:
       type: object
       required:
@@ -7303,6 +8222,43 @@ components:
           format: int32
           description: The y-coordinate.
       description: 'An x/y coordinate pair, e.g. `{ x: 100, y: 200 }`.'
+    OpenAI.CreateContainerBody:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Name of the container to create.
+        file_ids:
+          type: array
+          items:
+            type: string
+          description: IDs of files to copy to the container.
+        expires_after:
+          type: object
+          properties:
+            anchor:
+              type: string
+              enum:
+                - last_active_at
+              description: Time anchor for the expiration time. Currently only 'last_active_at' is supported.
+            minutes:
+              type: integer
+              format: int32
+          required:
+            - anchor
+            - minutes
+          description: Container expiration time in seconds relative to the 'anchor' time.
+    OpenAI.CreateContainerFileBodyMultiPart:
+      type: object
+      properties:
+        file_id:
+          type: string
+          description: Name of the file to create.
+        file:
+          type: string
+          format: binary
     OpenAI.CreateEmbeddingResponse:
       type: object
       required:
@@ -14514,6 +15470,218 @@ components:
         both text and audio responses, you can use:
 
         `["text", "audio"]`
+    CreateVideoBody:
+      type: object
+      required:
+        - model
+        - prompt
+      properties:
+        model:
+          type: string
+          description: The name of the deployment to use for this request.
+        prompt:
+          type: string
+          minLength: 1
+          description: Text prompt that describes the video to generate.
+        seconds:
+          allOf:
+            - $ref: '#/components/schemas/VideoSeconds'
+          description: Clip duration in seconds. Defaults to 4 seconds.
+          default: '4'
+        size:
+          allOf:
+            - $ref: '#/components/schemas/VideoSize'
+          description: Output resolution formatted as width x height. Defaults to 720x1280.
+          default: 720x1280
+    CreateVideoBodyWithInputReference:
+      type: object
+      properties:
+        model:
+          type: string
+          description: The name of the deployment to use for this request.
+        prompt:
+          type: string
+          description: Text prompt that describes the video to generate.
+        seconds:
+          allOf:
+            - $ref: '#/components/schemas/VideoSeconds'
+          description: Clip duration in seconds. Defaults to 4 seconds.
+        size:
+          allOf:
+            - $ref: '#/components/schemas/VideoSize'
+          description: Output resolution formatted as width x height. Defaults to 720x1280.
+        input_reference:
+          type: string
+          format: binary
+          description: Optional image reference that guides generation.
+          x-oaiTypeLabel: file
+      required:
+        - model
+        - prompt
+        - input_reference
+    DeletedVideoResource:
+      type: object
+      required:
+        - object
+        - deleted
+        - id
+      properties:
+        object:
+          type: string
+          description: The object type that signals the deletion response.
+          default: video.deleted
+        deleted:
+          type: boolean
+          description: Indicates that the video resource was deleted.
+          default: true
+        id:
+          type: string
+          description: Identifier of the deleted video.
+      description: Confirmation payload returned after deleting a video.
+    Error:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+    Order:
+      type: string
+      enum:
+        - asc
+        - desc
+    VideoContentVariant:
+      anyOf:
+        - type: string
+          enum:
+            - video
+            - thumbnail
+            - spritesheet
+        - type: string
+      description: Selectable asset variants for downloaded content.
+    VideoList:
+      type: object
+      required:
+        - object
+        - data
+        - has_more
+      properties:
+        object:
+          type: string
+          enum:
+            - list
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/VideoResource'
+          description: The list of video generation jobs.
+        has_more:
+          type: boolean
+          description: A flag indicating whether there are more jobs available after the list.
+        first_id:
+          type: string
+          description: The ID of the first video in the current page, if available.
+        last_id:
+          type: string
+          description: The ID of the last video in the current page, if available.
+      description: A list of video generation jobs.
+    VideoResource:
+      type: object
+      required:
+        - id
+        - object
+        - model
+        - status
+        - progress
+        - created_at
+        - size
+        - seconds
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the video job.
+        object:
+          type: string
+          description: The object type, which is always `video`.
+        model:
+          type: string
+          description: The video generation model deployment that produced the job.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/VideoStatus'
+          description: Current lifecycle status of the video job.
+        progress:
+          type: integer
+          format: int32
+          description: Approximate completion percentage for the generation task.
+        created_at:
+          type: integer
+          format: unixtime
+          description: Unix timestamp (seconds) for when the job was created.
+        completed_at:
+          type: integer
+          format: unixtime
+          description: Unix timestamp (seconds) for when the job completed, if finished.
+        expires_at:
+          type: integer
+          format: unixtime
+          description: Unix timestamp (seconds) for when the video generation expires (and will be deleted).
+        size:
+          allOf:
+            - $ref: '#/components/schemas/VideoSize'
+          description: The resolution of the generated video.
+        seconds:
+          allOf:
+            - $ref: '#/components/schemas/VideoSeconds'
+          description: Duration of the generated clip in seconds.
+        remixed_from_video_id:
+          type: string
+          description: Identifier of the source video if this video is a remix.
+        error:
+          allOf:
+            - $ref: '#/components/schemas/Error'
+          description: Error payload that explains why generation failed, if applicable.
+      description: Structured information describing a generated video job.
+    VideoSeconds:
+      anyOf:
+        - type: string
+          enum:
+            - '4'
+            - '8'
+            - '12'
+        - type: string
+      description: Supported clip durations, measured in seconds.
+    VideoSize:
+      anyOf:
+        - type: string
+          enum:
+            - 720x1280
+            - 1280x720
+            - 1024x1792
+            - 1792x1024
+        - type: string
+      description: Output dimensions formatted as `{width}x{height}`.
+    VideoStatus:
+      anyOf:
+        - type: string
+          enum:
+            - queued
+            - in_progress
+            - completed
+            - failed
+        - type: string
+      description: Lifecycle state of a generated video.
+  parameters:
+    VideoIdParameter:
+      name: video-id
+      in: path
+      required: true
+      description: The ID of the video to use for the Azure OpenAI request.
+      schema:
+        type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

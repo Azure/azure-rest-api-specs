@@ -11,9 +11,6 @@ import "../shared/main.tsp";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
-using OpenAPI;
-using Azure.Core;
-using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using Azure.Portal;
 
@@ -28,7 +25,6 @@ namespace Microsoft.AwsConnector;
 /** Api versions */
 enum Versions {
   /** 2024-12-01 api version */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   `2024-12-01`,
 }
 
@@ -210,6 +206,7 @@ model AuthenticateOidcConfig {
   @doc("The OAuth 2.0 client identifier.")
   clientId?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("The OAuth 2.0 client secret. This parameter is required if you are creating a rule. If you are modifying a rule, you can omit this parameter if you set ``UseExistingClientSecret`` to true.")
   clientSecret?: string;
 

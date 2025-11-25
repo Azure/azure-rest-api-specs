@@ -2,10 +2,13 @@ import "@typespec/rest";
 import "@typespec/openapi";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
+
 import "./pool.tsp";
 import "./volume.tsp";
 import "./snapshot.tsp";
 import "./assignment.tsp";
+import "./back-compatible.tsp";
 
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
@@ -19,7 +22,6 @@ namespace Microsoft.ContainerStorage;
 /** Api versions */
 enum Versions {
   /** 2023-07-01-preview preview version */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   `2023-07-01-preview`,
 }
 

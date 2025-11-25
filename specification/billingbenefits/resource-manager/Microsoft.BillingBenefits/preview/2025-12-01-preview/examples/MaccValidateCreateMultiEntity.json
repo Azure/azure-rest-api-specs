@@ -1,0 +1,57 @@
+{
+  "parameters": {
+    "api-version": "2025-12-01-preview",
+    "body": {
+      "benefits": [
+        {
+          "benefitType": "MACC",
+          "properties": {
+            "entityType": "Primary",
+            "systemId": null,
+            "billingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}",
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.BillingBenefits/maccs/myBenefit",
+            "productCode": "0001d726-0000-0160-330f-a0b98cdbbdc4",
+            "startAt": "2023-07-01T00:00:00Z",
+            "endAt": "2024-07-31T23:59:59Z",
+            "allowContributors": true,
+            "commitment": {
+              "grain": "FullTerm",
+              "currencyCode": "USD",
+              "amount": 10000
+            }
+          }
+        },
+        {
+          "benefitType": "MACC",
+          "properties": {
+            "entityType": "Contributor",
+            "productCode": "0001d726-0000-0160-330f-a0b98cdbbdc4",
+            "primaryResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.BillingBenefits/maccs/myBenefit",
+            "billingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}",
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.BillingBenefits/maccs/myBenefit",
+            "startAt": "2023-07-01T00:00:00Z",
+            "systemId": null
+          }
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "benefits": [
+          {
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.BillingBenefits/maccs/myBenefit",
+            "valid": true
+          },
+          {
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.BillingBenefits/maccs/myBenefit",
+            "valid": false,
+            "reason": "Error message",
+            "reasonCode": "ErrorCode"
+          }
+        ]
+      }
+    }
+  }
+}

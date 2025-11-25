@@ -31,9 +31,9 @@ op createKey is KeyVaultOperation<
     /**
      * The parameters to create a key.
      */
-    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
+    #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
-    @flattenProperty
+    @Azure.ClientGenerator.Core.Legacy.flattenProperty
     parameters: KeyCreateParameters;
   },
   KeyBundle
@@ -80,9 +80,9 @@ op importKey is KeyVaultOperation<
     /**
      * The parameters to import a key.
      */
-    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
+    #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
-    @flattenProperty
+    @Azure.ClientGenerator.Core.Legacy.flattenProperty
     parameters: KeyImportParameters;
   },
   KeyBundle
@@ -134,9 +134,9 @@ op updateKey is KeyVaultOperation<
     /**
      * The parameters of the key to update.
      */
-    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
+    #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
-    @flattenProperty
+    @Azure.ClientGenerator.Core.Legacy.flattenProperty
     parameters: KeyUpdateParameters;
   },
   KeyBundle
@@ -249,9 +249,9 @@ op backupKey is KeyVaultOperation<
 op restoreKey is KeyVaultOperation<
   {
     /** The parameters to restore the key. */
-    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
+    #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
-    @flattenProperty
+    @Azure.ClientGenerator.Core.Legacy.flattenProperty
     parameters: KeyRestoreParameters;
   },
   KeyBundle
@@ -286,9 +286,9 @@ op encrypt is KeyVaultOperation<
     /**
      * The parameters for the encryption operation.
      */
-    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
+    #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
-    @flattenProperty
+    @Azure.ClientGenerator.Core.Legacy.flattenProperty
     parameters: KeyOperationsParameters;
   },
   KeyOperationResult
@@ -323,9 +323,9 @@ op decrypt is KeyVaultOperation<
     /**
      * The parameters for the decryption operation.
      */
-    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
+    #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
-    @flattenProperty
+    @Azure.ClientGenerator.Core.Legacy.flattenProperty
     parameters: KeyOperationsParameters;
   },
   KeyOperationResult
@@ -360,9 +360,9 @@ op sign is KeyVaultOperation<
     /**
      * The parameters for the signing operation.
      */
-    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
+    #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
-    @flattenProperty
+    @Azure.ClientGenerator.Core.Legacy.flattenProperty
     parameters: KeySignParameters;
   },
   KeyOperationResult
@@ -397,9 +397,9 @@ op verify is KeyVaultOperation<
     /**
      * The parameters for verify operations.
      */
-    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
+    #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
-    @flattenProperty
+    @Azure.ClientGenerator.Core.Legacy.flattenProperty
     parameters: KeyVerifyParameters;
   },
   KeyVerifyResult
@@ -434,9 +434,9 @@ op wrapKey is KeyVaultOperation<
     /**
      * The parameters for wrap operation.
      */
-    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
+    #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
-    @flattenProperty
+    @Azure.ClientGenerator.Core.Legacy.flattenProperty
     parameters: KeyOperationsParameters;
   },
   KeyOperationResult
@@ -471,9 +471,9 @@ op unwrapKey is KeyVaultOperation<
     /**
      * The parameters for the key operation.
      */
-    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
+    #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
-    @flattenProperty
+    @Azure.ClientGenerator.Core.Legacy.flattenProperty
     parameters: KeyOperationsParameters;
   },
   KeyOperationResult
@@ -508,9 +508,9 @@ op release is KeyVaultOperation<
     /**
      * The parameters for the key release operation.
      */
-    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
+    #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
-    @flattenProperty
+    @Azure.ClientGenerator.Core.Legacy.flattenProperty
     parameters: KeyReleaseParameters;
   },
   KeyReleaseResult
@@ -651,9 +651,9 @@ op updateKeyRotationPolicy is KeyVaultOperation<
 op getRandomBytes is KeyVaultOperation<
   {
     /** The request object to get random bytes. */
-    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
+    #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
-    @flattenProperty
+    @Azure.ClientGenerator.Core.Legacy.flattenProperty
     parameters: GetRandomBytesRequest;
   },
   RandomBytes

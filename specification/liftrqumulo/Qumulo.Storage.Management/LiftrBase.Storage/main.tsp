@@ -6,13 +6,9 @@ import "@typespec/rest";
 import "@typespec/versioning";
 
 using Azure.ResourceManager;
-using LiftrBase;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
-using TypeSpec.Reflection;
-using Azure.ResourceManager.Foundations;
 
 @versioned(LiftrBase.Storage.Versions)
 @armLibraryNamespace
@@ -21,7 +17,6 @@ namespace LiftrBase.Storage;
 @doc("Supported versions for LiftrBase.Storage resource model")
 enum Versions {
   @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1 and LiftrBase.Versions.v1_preview")
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(LiftrBase.Versions.v2_preview)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
   v2_preview: "2024-02-01-preview",
@@ -71,8 +66,9 @@ model FileSystemResourceProperties {
   /**
    * Initial administrator password of the resource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Legacy"
-  @extension("x-ms-secret", true)
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Mark this property with @secret if the contents should be kept private."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME:  If this is a real secret, mark with @secret"
+  @OpenAPI.extension("x-ms-secret", true)
   adminPassword: string;
 
   /**

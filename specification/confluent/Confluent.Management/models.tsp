@@ -5,7 +5,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/versioning";
 
 using TypeSpec.Versioning;
-
+using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.Confluent;
@@ -336,7 +336,7 @@ model ErrorResponseBody {
    * Error detail
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   details?: ErrorResponseBody[];
 }
 
@@ -1539,7 +1539,7 @@ model ListRegionsSuccessResponse {
   /**
    * List of regions supported by confluent
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   data?: RegionRecord[];
 }
 
@@ -1964,6 +1964,7 @@ model AzureBlobStorageSinkConnectorServiceInfo
   /**
    * Azure Blob Storage Account Key
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   storageAccountKey?: string;
 
   /**
@@ -2018,6 +2019,7 @@ model AzureCosmosDBSinkConnectorServiceInfo
   /**
    * Azure Cosmos Database Master Key
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   cosmosMasterKey?: string;
 
   /**
@@ -2061,6 +2063,7 @@ model AzureCosmosDBSourceConnectorServiceInfo
   /**
    * Azure Cosmos Database Master Key
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   cosmosMasterKey?: string;
 
   /**
@@ -2113,6 +2116,7 @@ model AzureSynapseAnalyticsSinkConnectorServiceInfo
   /**
    * Azure Synapse SQL login details
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   synapseSqlPassword?: string;
 
   /**
@@ -2148,17 +2152,25 @@ model KafkaAzureBlobStorageSinkConnectorInfo extends PartnerInfoBase {
   /**
    * Kafka API Key
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   apiKey?: string;
 
   /**
    * Kafka API Key Secret
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   apiSecret?: string;
 
   /**
    * Kafka Service Account Id
    */
   serviceAccountId?: string;
+
+  /**
+   * Kafka Service Account Name
+   */
+  @added(Microsoft.Confluent.Versions.v2025_08_18_preview)
+  serviceAccountName?: string;
 
   /**
    * Kafka topics list
@@ -2213,6 +2225,7 @@ model KafkaAzureBlobStorageSourceConnectorInfo extends PartnerInfoBase {
   /**
    * Kafka API Key
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   apiKey?: string;
 
   /**
@@ -2225,6 +2238,12 @@ model KafkaAzureBlobStorageSourceConnectorInfo extends PartnerInfoBase {
    * Kafka Service Account Id
    */
   serviceAccountId?: string;
+
+  /**
+   * Kafka Service Account Name
+   */
+  @added(Microsoft.Confluent.Versions.v2025_08_18_preview)
+  serviceAccountName?: string;
 
   /**
    * Kafka topics Regex pattern
@@ -2270,17 +2289,25 @@ model KafkaAzureCosmosDBSinkConnectorInfo extends PartnerInfoBase {
   /**
    * Kafka API Key
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   apiKey?: string;
 
   /**
    * Kafka API Key Secret
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   apiSecret?: string;
 
   /**
    * Kafka Service Account Id
    */
   serviceAccountId?: string;
+
+  /**
+   * Kafka Service Account Name
+   */
+  @added(Microsoft.Confluent.Versions.v2025_08_18_preview)
+  serviceAccountName?: string;
 
   /**
    * Kafka topics list
@@ -2336,6 +2363,7 @@ model KafkaAzureCosmosDBSourceConnectorInfo extends PartnerInfoBase {
   /**
    * Kafka API Key
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   apiKey?: string;
 
   /**
@@ -2348,6 +2376,12 @@ model KafkaAzureCosmosDBSourceConnectorInfo extends PartnerInfoBase {
    * Kafka Service Account Id
    */
   serviceAccountId?: string;
+
+  /**
+   * Kafka Service Account Name
+   */
+  @added(Microsoft.Confluent.Versions.v2025_08_18_preview)
+  serviceAccountName?: string;
 
   /**
    * Kafka topics Regex pattern
@@ -2392,17 +2426,25 @@ model KafkaAzureSynapseAnalyticsSinkConnectorInfo extends PartnerInfoBase {
   /**
    * Kafka API Key
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   apiKey?: string;
 
   /**
    * Kafka API Key Secret
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   apiSecret?: string;
 
   /**
    * Kafka Service Account Id
    */
   serviceAccountId?: string;
+
+  /**
+   * Kafka Service Account Name
+   */
+  @added(Microsoft.Confluent.Versions.v2025_08_18_preview)
+  serviceAccountName?: string;
 
   /**
    * Kafka topics list
