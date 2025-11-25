@@ -898,10 +898,6 @@
           "ChangeDataCaptureResources"
         ],
         "description": "Gets the current status for the change data capture resource.",
-        "produces": [
-          "text/plain",
-          "application/json"
-        ],
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -937,7 +933,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/ChangeDataCaptureStatusResponse"
             }
           },
           "default": {
@@ -11730,6 +11726,10 @@
           "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ]
+    },
+    "ChangeDataCaptureStatusResponse": {
+      "type": "string",
+      "description": "Current status of the change data capture resource."
     },
     "CloudError": {
       "type": "object",

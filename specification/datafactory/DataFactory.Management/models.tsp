@@ -12,7 +12,8 @@ using Azure.ResourceManager.Foundations;
 namespace Microsoft.DataFactory;
 
 /** Current status of the change data capture resource. */
-alias ChangeDataCaptureStatusResponse = string;
+@mediaTypeHint("application/json")
+scalar ChangeDataCaptureStatusResponse extends string;
 /**
  * The identity type.
  */
