@@ -32,8 +32,7 @@ interface AzureWebCategories {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebCategories_Get")
-  get is ArmResourceRead<
-    AzureWebCategory,
+  get is ArmResourceRead<AzureWebCategory,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
     Parameters = {
       /**
@@ -41,18 +40,15 @@ interface AzureWebCategories {
        */
       @query("$expand")
       $expand?: string;
-    }
-  >;
+    }, Error = CloudError>;
 
   /**
    * Gets all the Azure Web Categories in a subscription.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebCategories_ListBySubscription")
-  listBySubscription is ArmResourceListByParent<
-    AzureWebCategory,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
-  >;
+  listBySubscription is ArmResourceListByParent<AzureWebCategory,
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters, Error = CloudError>;
 }
 
 @@doc(AzureWebCategory.name, "The name of the azureWebCategory.");

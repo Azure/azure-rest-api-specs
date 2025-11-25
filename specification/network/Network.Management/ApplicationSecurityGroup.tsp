@@ -29,40 +29,36 @@ interface ApplicationSecurityGroups {
   /**
    * Gets information about the specified application security group.
    */
-  get is ArmResourceRead<ApplicationSecurityGroup>;
+  get is ArmResourceRead<ApplicationSecurityGroup, Error = CloudError>;
 
   /**
    * Creates or updates an application security group.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<ApplicationSecurityGroup>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<ApplicationSecurityGroup, Error = CloudError>;
 
   /**
    * Updates an application security group's tags.
    */
   @patch(#{ implicitOptionality: false })
-  updateTags is ArmCustomPatchSync<
-    ApplicationSecurityGroup,
-    PatchModel = TagsObject
-  >;
+  updateTags is ArmCustomPatchSync<ApplicationSecurityGroup,
+    PatchModel = TagsObject, Error = CloudError>;
 
   /**
    * Deletes the specified application security group.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<
-    ApplicationSecurityGroup,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
-  >;
+  delete is ArmResourceDeleteWithoutOkAsync<ApplicationSecurityGroup,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
 
   /**
    * Gets all the application security groups in a resource group.
    */
-  list is ArmResourceListByParent<ApplicationSecurityGroup>;
+  list is ArmResourceListByParent<ApplicationSecurityGroup, Error = CloudError>;
 
   /**
    * Gets all application security groups in a subscription.
    */
-  listAll is ArmListBySubscription<ApplicationSecurityGroup>;
+  listAll is ArmListBySubscription<ApplicationSecurityGroup, Error = CloudError>;
 }
 
 @@doc(ApplicationSecurityGroup.name,

@@ -31,15 +31,14 @@ interface DscpConfigurations {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DscpConfiguration_Get")
-  get is ArmResourceRead<DscpConfiguration>;
+  get is ArmResourceRead<DscpConfiguration, Error = CloudError>;
 
   /**
    * Creates or updates a DSCP Configuration.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DscpConfiguration_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    DscpConfiguration,
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<DscpConfiguration,
     LroHeaders = ArmLroLocationHeader<FinalResult = DscpConfiguration> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
@@ -50,24 +49,22 @@ interface DscpConfigurations {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   @operationId("DscpConfiguration_Delete")
-  delete is ArmResourceDeleteWithoutOkAsync<
-    DscpConfiguration,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
-  >;
+  delete is ArmResourceDeleteWithoutOkAsync<DscpConfiguration,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
 
   /**
    * Gets a DSCP Configuration.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DscpConfiguration_List")
-  list is ArmResourceListByParent<DscpConfiguration>;
+  list is ArmResourceListByParent<DscpConfiguration, Error = CloudError>;
 
   /**
    * Gets all dscp configurations in a subscription.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DscpConfiguration_ListAll")
-  listAll is ArmListBySubscription<DscpConfiguration>;
+  listAll is ArmListBySubscription<DscpConfiguration, Error = CloudError>;
 }
 
 @@doc(DscpConfiguration.name, "The name of the resource.");

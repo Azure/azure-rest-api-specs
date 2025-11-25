@@ -32,28 +32,28 @@ interface NspLoggingConfigurations {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("NetworkSecurityPerimeterLoggingConfigurations_Get")
-  get is ArmResourceRead<NspLoggingConfiguration>;
+  get is ArmResourceRead<NspLoggingConfiguration, Error = CloudError>;
 
   /**
    * Creates or updates NSP logging configuration.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("NetworkSecurityPerimeterLoggingConfigurations_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceSync<NspLoggingConfiguration>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<NspLoggingConfiguration, Error = CloudError>;
 
   /**
    * Deletes an NSP Logging configuration.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("NetworkSecurityPerimeterLoggingConfigurations_Delete")
-  delete is ArmResourceDeleteSync<NspLoggingConfiguration>;
+  delete is ArmResourceDeleteSync<NspLoggingConfiguration, Error = CloudError>;
 
   /**
    * Lists the NSP logging configuration.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("NetworkSecurityPerimeterLoggingConfigurations_List")
-  list is ArmResourceListByParent<NspLoggingConfiguration>;
+  list is ArmResourceListByParent<NspLoggingConfiguration, Error = CloudError>;
 }
 
 @@maxLength(NspLoggingConfiguration.name, 80);

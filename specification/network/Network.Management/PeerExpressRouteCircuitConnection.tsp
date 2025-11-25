@@ -31,12 +31,12 @@ interface PeerExpressRouteCircuitConnections {
   /**
    * Gets the specified Peer Express Route Circuit Connection from the specified express route circuit.
    */
-  get is ArmResourceRead<PeerExpressRouteCircuitConnection>;
+  get is ArmResourceRead<PeerExpressRouteCircuitConnection, Error = CloudError>;
 
   /**
    * Gets all global reach peer connections associated with a private peering in an express route circuit.
    */
-  list is ArmResourceListByParent<PeerExpressRouteCircuitConnection>;
+  list is ArmResourceListByParent<PeerExpressRouteCircuitConnection, Error = CloudError>;
 }
 
 @@doc(PeerExpressRouteCircuitConnection.name,

@@ -33,17 +33,15 @@ interface OutboundRules {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("LoadBalancerOutboundRules_Get")
-  get is ArmResourceRead<OutboundRule>;
+  get is ArmResourceRead<OutboundRule, Error = CloudError>;
 
   /**
    * Gets all the outbound rules in a load balancer.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("LoadBalancerOutboundRules_List")
-  list is ArmResourceListByParent<
-    OutboundRule,
-    Response = LoadBalancerOutboundRuleListResult
-  >;
+  list is ArmResourceListByParent<OutboundRule,
+    Response = LoadBalancerOutboundRuleListResult, Error = CloudError>;
 }
 
 @@doc(OutboundRule.name, "The name of the outbound rule.");

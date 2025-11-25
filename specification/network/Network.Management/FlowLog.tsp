@@ -37,28 +37,28 @@ interface FlowLogs {
   /**
    * Gets a flow log resource by name.
    */
-  get is ArmResourceRead<FlowLog>;
+  get is ArmResourceRead<FlowLog, Error = CloudError>;
 
   /**
    * Create or update a flow log for the specified network security group.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<FlowLog>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<FlowLog, Error = CloudError>;
 
   /**
    * Update tags of the specified flow log.
    */
   @patch(#{ implicitOptionality: false })
-  updateTags is ArmCustomPatchSync<FlowLog, PatchModel = TagsObject>;
+  updateTags is ArmCustomPatchSync<FlowLog, PatchModel = TagsObject, Error = CloudError>;
 
   /**
    * Deletes the specified flow log resource.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<FlowLog>;
+  delete is ArmResourceDeleteWithoutOkAsync<FlowLog, Error = CloudError>;
 
   /**
    * Lists all flow log resources for the specified Network Watcher.
    */
-  list is ArmResourceListByParent<FlowLog>;
+  list is ArmResourceListByParent<FlowLog, Error = CloudError>;
 }
 
 @@doc(FlowLog.name, "The name of the flow log resource.");

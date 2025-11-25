@@ -29,37 +29,35 @@ interface VirtualNetworkTaps {
   /**
    * Gets information about the specified virtual network tap.
    */
-  get is ArmResourceRead<VirtualNetworkTap>;
+  get is ArmResourceRead<VirtualNetworkTap, Error = CloudError>;
 
   /**
    * Creates or updates a Virtual Network Tap.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<VirtualNetworkTap>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<VirtualNetworkTap, Error = CloudError>;
 
   /**
    * Updates an VirtualNetworkTap tags.
    */
   @patch(#{ implicitOptionality: false })
-  updateTags is ArmCustomPatchSync<VirtualNetworkTap, PatchModel = TagsObject>;
+  updateTags is ArmCustomPatchSync<VirtualNetworkTap, PatchModel = TagsObject, Error = CloudError>;
 
   /**
    * Deletes the specified virtual network tap.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<
-    VirtualNetworkTap,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
-  >;
+  delete is ArmResourceDeleteWithoutOkAsync<VirtualNetworkTap,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
 
   /**
    * Gets all the VirtualNetworkTaps in a subscription.
    */
-  listByResourceGroup is ArmResourceListByParent<VirtualNetworkTap>;
+  listByResourceGroup is ArmResourceListByParent<VirtualNetworkTap, Error = CloudError>;
 
   /**
    * Gets all the VirtualNetworkTaps in a subscription.
    */
-  listAll is ArmListBySubscription<VirtualNetworkTap>;
+  listAll is ArmListBySubscription<VirtualNetworkTap, Error = CloudError>;
 }
 
 @@doc(VirtualNetworkTap.name, "The name of virtual network tap.");

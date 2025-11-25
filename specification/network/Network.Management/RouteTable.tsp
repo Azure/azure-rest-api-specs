@@ -29,46 +29,42 @@ interface RouteTables {
   /**
    * Gets the specified route table.
    */
-  get is ArmResourceRead<
-    RouteTable,
+  get is ArmResourceRead<RouteTable,
     Parameters = {
       /**
        * Expands referenced resources.
        */
       @query("$expand")
       $expand?: string;
-    }
-  >;
+    }, Error = CloudError>;
 
   /**
    * Create or updates a route table in a specified resource group.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<RouteTable>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<RouteTable, Error = CloudError>;
 
   /**
    * Updates a route table tags.
    */
   @patch(#{ implicitOptionality: false })
-  updateTags is ArmCustomPatchSync<RouteTable, PatchModel = TagsObject>;
+  updateTags is ArmCustomPatchSync<RouteTable, PatchModel = TagsObject, Error = CloudError>;
 
   /**
    * Deletes the specified route table.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<
-    RouteTable,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
-  >;
+  delete is ArmResourceDeleteWithoutOkAsync<RouteTable,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
 
   /**
    * Gets all route tables in a resource group.
    */
-  list is ArmResourceListByParent<RouteTable>;
+  list is ArmResourceListByParent<RouteTable, Error = CloudError>;
 
   /**
    * Gets all route tables in a subscription.
    */
-  listAll is ArmListBySubscription<RouteTable>;
+  listAll is ArmListBySubscription<RouteTable, Error = CloudError>;
 }
 
 @@doc(RouteTable.name, "The name of the route table.");

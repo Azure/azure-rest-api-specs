@@ -33,23 +33,22 @@ interface ReachabilityAnalysisIntents {
   /**
    * Get the Reachability Analysis Intent.
    */
-  get is ArmResourceRead<ReachabilityAnalysisIntent>;
+  get is ArmResourceRead<ReachabilityAnalysisIntent, Error = CloudError>;
 
   /**
    * Creates Reachability Analysis Intent.
    */
-  create is ArmResourceCreateOrReplaceSync<ReachabilityAnalysisIntent>;
+  create is ArmResourceCreateOrReplaceSync<ReachabilityAnalysisIntent, Error = CloudError>;
 
   /**
    * Deletes Reachability Analysis Intent.
    */
-  delete is ArmResourceDeleteSync<ReachabilityAnalysisIntent>;
+  delete is ArmResourceDeleteSync<ReachabilityAnalysisIntent, Error = CloudError>;
 
   /**
    * Gets list of Reachability Analysis Intents .
    */
-  list is ArmResourceListByParent<
-    ReachabilityAnalysisIntent,
+  list is ArmResourceListByParent<ReachabilityAnalysisIntent,
     Parameters = {
       /**
        * Optional skip token.
@@ -80,8 +79,7 @@ interface ReachabilityAnalysisIntents {
        */
       @query("sortValue")
       sortValue?: string;
-    }
-  >;
+    }, Error = CloudError>;
 }
 
 @@doc(ReachabilityAnalysisIntent.name, "Reachability Analysis Intent name.");

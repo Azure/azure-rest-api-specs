@@ -31,19 +31,18 @@ interface SecurityUserRuleCollections {
   /**
    * Gets a network manager security user configuration rule collection.
    */
-  get is ArmResourceRead<SecurityUserRuleCollection>;
+  get is ArmResourceRead<SecurityUserRuleCollection, Error = CloudError>;
 
   /**
    * Creates or updates a security user rule collection.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<SecurityUserRuleCollection>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<SecurityUserRuleCollection, Error = CloudError>;
 
   /**
    * Deletes a Security User Rule collection.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<
-    SecurityUserRuleCollection,
+  delete is ArmResourceDeleteWithoutOkAsync<SecurityUserRuleCollection,
     Parameters = {
       /**
        * Deletes the resource even if it is part of a deployed configuration. If the configuration has been deployed, the service will do a cleanup deployment in the background, prior to the delete.
@@ -51,14 +50,12 @@ interface SecurityUserRuleCollections {
       @query("force")
       force?: boolean;
     },
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
-  >;
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
 
   /**
    * Lists all the security user rule collections in a security configuration, in a paginated format.
    */
-  list is ArmResourceListByParent<
-    SecurityUserRuleCollection,
+  list is ArmResourceListByParent<SecurityUserRuleCollection,
     Parameters = {
       /**
        * An optional query parameter which specifies the maximum number of records to be returned by the server.
@@ -73,8 +70,7 @@ interface SecurityUserRuleCollections {
        */
       @query("$skipToken")
       $skipToken?: string;
-    }
-  >;
+    }, Error = CloudError>;
 }
 
 @@doc(SecurityUserRuleCollection.name,

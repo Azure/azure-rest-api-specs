@@ -62,14 +62,14 @@ interface LoadBalancingRules {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("LoadBalancerLoadBalancingRules_Get")
-  get is ArmResourceRead<LoadBalancingRule>;
+  get is ArmResourceRead<LoadBalancingRule, Error = CloudError>;
 
   /**
    * Gets all the load balancing rules in a load balancer.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("LoadBalancerLoadBalancingRules_List")
-  list is ArmResourceListByParent<LoadBalancingRule>;
+  list is ArmResourceListByParent<LoadBalancingRule, Error = CloudError>;
 
   /**
    * Get health details of a load balancing rule.

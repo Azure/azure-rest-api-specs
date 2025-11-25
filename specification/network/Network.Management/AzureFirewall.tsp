@@ -37,71 +37,65 @@ interface AzureFirewalls {
   /**
    * Gets the specified Azure Firewall.
    */
-  get is ArmResourceRead<AzureFirewall>;
+  get is ArmResourceRead<AzureFirewall, Error = CloudError>;
 
   /**
    * Creates or updates the specified Azure Firewall.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<AzureFirewall>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<AzureFirewall, Error = CloudError>;
 
   /**
    * Updates tags of an Azure Firewall resource.
    */
   @patch(#{ implicitOptionality: false })
-  updateTags is ArmCustomPatchAsync<
-    AzureFirewall,
+  updateTags is ArmCustomPatchAsync<AzureFirewall,
     PatchModel = TagsObject,
     LroHeaders = ArmAsyncOperationHeader<FinalResult = AzureFirewall> &
       Azure.Core.Foundations.RetryAfterHeader
-  >;
+  , Error = CloudError>;
 
   /**
    * Deletes the specified Azure Firewall.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<
-    AzureFirewall,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
-  >;
+  delete is ArmResourceDeleteWithoutOkAsync<AzureFirewall,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
 
   /**
    * Lists all Azure Firewalls in a resource group.
    */
-  list is ArmResourceListByParent<AzureFirewall>;
+  list is ArmResourceListByParent<AzureFirewall, Error = CloudError>;
 
   /**
    * Gets all the Azure Firewalls in a subscription.
    */
-  listAll is ArmListBySubscription<AzureFirewall>;
+  listAll is ArmListBySubscription<AzureFirewall, Error = CloudError>;
 
   /**
    * Retrieves a list of all IP prefixes that azure firewall has learned to not SNAT.
    */
   @action("learnedIPPrefixes")
-  listLearnedPrefixes is ArmResourceActionAsync<
-    AzureFirewall,
+  listLearnedPrefixes is ArmResourceActionAsync<AzureFirewall,
     void,
     ArmResponse<IPPrefixesList>
-  >;
+  , Error = CloudError>;
 
   /**
    * Runs a packet capture on AzureFirewall.
    */
-  packetCapture is ArmResourceActionAsyncBase<
-    AzureFirewall,
+  packetCapture is ArmResourceActionAsyncBase<AzureFirewall,
     Request = FirewallPacketCaptureParameters,
     Response = ArmAcceptedLroResponse,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<AzureFirewall>
-  >;
+  , Error = CloudError>;
 
   /**
    * Runs a packet capture operation on AzureFirewall.
    */
-  packetCaptureOperation is ArmResourceActionAsync<
-    AzureFirewall,
+  packetCaptureOperation is ArmResourceActionAsync<AzureFirewall,
     FirewallPacketCaptureParameters,
     ArmResponse<AzureFirewallPacketCaptureResponse>
-  >;
+  , Error = CloudError>;
 }
 
 @@doc(AzureFirewall.name, "The name of the Azure Firewall.");

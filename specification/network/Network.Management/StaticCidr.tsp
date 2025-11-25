@@ -29,23 +29,22 @@ interface StaticCidrs {
   /**
    * Gets the specific Static CIDR resource.
    */
-  get is ArmResourceRead<StaticCidr>;
+  get is ArmResourceRead<StaticCidr, Error = CloudError>;
 
   /**
    * Creates/Updates the Static CIDR resource.
    */
-  create is ArmResourceCreateOrReplaceSync<StaticCidr>;
+  create is ArmResourceCreateOrReplaceSync<StaticCidr, Error = CloudError>;
 
   /**
    * Delete the Static CIDR resource.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<StaticCidr>;
+  delete is ArmResourceDeleteWithoutOkAsync<StaticCidr, Error = CloudError>;
 
   /**
    * Gets list of Static CIDR resources at Network Manager level.
    */
-  list is ArmResourceListByParent<
-    StaticCidr,
+  list is ArmResourceListByParent<StaticCidr,
     Parameters = {
       /**
        * Optional skip token.

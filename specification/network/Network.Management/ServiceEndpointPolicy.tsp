@@ -36,49 +36,43 @@ interface ServiceEndpointPolicies {
   /**
    * Gets the specified service Endpoint Policies in a specified resource group.
    */
-  get is ArmResourceRead<
-    ServiceEndpointPolicy,
+  get is ArmResourceRead<ServiceEndpointPolicy,
     Parameters = {
       /**
        * Expands referenced resources.
        */
       @query("$expand")
       $expand?: string;
-    }
-  >;
+    }, Error = CloudError>;
 
   /**
    * Creates or updates a service Endpoint Policies.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<ServiceEndpointPolicy>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<ServiceEndpointPolicy, Error = CloudError>;
 
   /**
    * Updates tags of a service endpoint policy.
    */
   @patch(#{ implicitOptionality: false })
-  updateTags is ArmCustomPatchSync<
-    ServiceEndpointPolicy,
-    PatchModel = TagsObject
-  >;
+  updateTags is ArmCustomPatchSync<ServiceEndpointPolicy,
+    PatchModel = TagsObject, Error = CloudError>;
 
   /**
    * Deletes the specified service endpoint policy.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<
-    ServiceEndpointPolicy,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
-  >;
+  delete is ArmResourceDeleteWithoutOkAsync<ServiceEndpointPolicy,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
 
   /**
    * Gets all service endpoint Policies in a resource group.
    */
-  listByResourceGroup is ArmResourceListByParent<ServiceEndpointPolicy>;
+  listByResourceGroup is ArmResourceListByParent<ServiceEndpointPolicy, Error = CloudError>;
 
   /**
    * Gets all the service endpoint policies in a subscription.
    */
-  list is ArmListBySubscription<ServiceEndpointPolicy>;
+  list is ArmListBySubscription<ServiceEndpointPolicy, Error = CloudError>;
 }
 
 @@doc(ServiceEndpointPolicy.name, "The name of the service endpoint policy.");

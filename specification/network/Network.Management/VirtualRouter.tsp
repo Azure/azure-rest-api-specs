@@ -29,40 +29,36 @@ interface VirtualRouters {
   /**
    * Gets the specified Virtual Router.
    */
-  get is ArmResourceRead<
-    VirtualRouter,
+  get is ArmResourceRead<VirtualRouter,
     Parameters = {
       /**
        * Expands referenced resources.
        */
       @query("$expand")
       $expand?: string;
-    }
-  >;
+    }, Error = CloudError>;
 
   /**
    * Creates or updates the specified Virtual Router.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<VirtualRouter>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<VirtualRouter, Error = CloudError>;
 
   /**
    * Deletes the specified Virtual Router.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<
-    VirtualRouter,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
-  >;
+  delete is ArmResourceDeleteWithoutOkAsync<VirtualRouter,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
 
   /**
    * Lists all Virtual Routers in a resource group.
    */
-  listByResourceGroup is ArmResourceListByParent<VirtualRouter>;
+  listByResourceGroup is ArmResourceListByParent<VirtualRouter, Error = CloudError>;
 
   /**
    * Gets all the Virtual Routers in a subscription.
    */
-  list is ArmListBySubscription<VirtualRouter>;
+  list is ArmListBySubscription<VirtualRouter, Error = CloudError>;
 }
 
 @@doc(VirtualRouter.name, "The name of the Virtual Router.");

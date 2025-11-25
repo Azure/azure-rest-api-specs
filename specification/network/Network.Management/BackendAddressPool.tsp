@@ -58,14 +58,14 @@ interface BackendAddressPools {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("LoadBalancerBackendAddressPools_Get")
-  get is ArmResourceRead<BackendAddressPool>;
+  get is ArmResourceRead<BackendAddressPool, Error = CloudError>;
 
   /**
    * Creates or updates a load balancer backend address pool.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("LoadBalancerBackendAddressPools_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<BackendAddressPool>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<BackendAddressPool, Error = CloudError>;
 
   /**
    * Deletes the specified load balancer backend address pool.
@@ -73,17 +73,15 @@ interface BackendAddressPools {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   @operationId("LoadBalancerBackendAddressPools_Delete")
-  delete is ArmResourceDeleteWithoutOkAsync<
-    BackendAddressPool,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
-  >;
+  delete is ArmResourceDeleteWithoutOkAsync<BackendAddressPool,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
 
   /**
    * Gets all the load balancer backed address pools.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("LoadBalancerBackendAddressPools_List")
-  list is ArmResourceListByParent<BackendAddressPool>;
+  list is ArmResourceListByParent<BackendAddressPool, Error = CloudError>;
 
   /**
    * List of inbound NAT rule port mappings.

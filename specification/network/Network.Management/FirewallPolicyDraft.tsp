@@ -31,17 +31,17 @@ interface FirewallPolicyDrafts {
   /**
    * Get a draft Firewall Policy.
    */
-  get is ArmResourceRead<FirewallPolicyDraft>;
+  get is ArmResourceRead<FirewallPolicyDraft, Error = CloudError>;
 
   /**
    * Create or update a draft Firewall Policy.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<FirewallPolicyDraft>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<FirewallPolicyDraft, Error = CloudError>;
 
   /**
    * Delete a draft policy.
    */
-  delete is ArmResourceDeleteSync<FirewallPolicyDraft>;
+  delete is ArmResourceDeleteSync<FirewallPolicyDraft, Error = CloudError>;
 }
 
 @@doc(FirewallPolicyDraft.name, "");

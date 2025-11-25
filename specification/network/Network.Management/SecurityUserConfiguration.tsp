@@ -31,19 +31,18 @@ interface SecurityUserConfigurations {
   /**
    * Retrieves a network manager security user configuration.
    */
-  get is ArmResourceRead<SecurityUserConfiguration>;
+  get is ArmResourceRead<SecurityUserConfiguration, Error = CloudError>;
 
   /**
    * Creates or updates a network manager security user configuration.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<SecurityUserConfiguration>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<SecurityUserConfiguration, Error = CloudError>;
 
   /**
    * Deletes a network manager security user configuration.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<
-    SecurityUserConfiguration,
+  delete is ArmResourceDeleteWithoutOkAsync<SecurityUserConfiguration,
     Parameters = {
       /**
        * Deletes the resource even if it is part of a deployed configuration. If the configuration has been deployed, the service will do a cleanup deployment in the background, prior to the delete.
@@ -51,14 +50,12 @@ interface SecurityUserConfigurations {
       @query("force")
       force?: boolean;
     },
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
-  >;
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
 
   /**
    * Lists all the network manager security user configurations in a network manager, in a paginated format.
    */
-  list is ArmResourceListByParent<
-    SecurityUserConfiguration,
+  list is ArmResourceListByParent<SecurityUserConfiguration,
     Parameters = {
       /**
        * An optional query parameter which specifies the maximum number of records to be returned by the server.
@@ -73,8 +70,7 @@ interface SecurityUserConfigurations {
        */
       @query("$skipToken")
       $skipToken?: string;
-    }
-  >;
+    }, Error = CloudError>;
 }
 
 @@doc(SecurityUserConfiguration.name,

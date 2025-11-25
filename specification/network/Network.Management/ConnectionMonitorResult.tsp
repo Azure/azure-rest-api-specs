@@ -33,7 +33,7 @@ interface ConnectionMonitorResults {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ConnectionMonitors_Get")
-  get is ArmResourceRead<ConnectionMonitorResult>;
+  get is ArmResourceRead<ConnectionMonitorResult, Error = CloudError>;
 
   /**
    * Create or update a connection monitor.
@@ -58,34 +58,31 @@ interface ConnectionMonitorResults {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ConnectionMonitors_UpdateTags")
   @patch(#{ implicitOptionality: false })
-  updateTags is ArmCustomPatchSync<
-    ConnectionMonitorResult,
-    PatchModel = TagsObject
-  >;
+  updateTags is ArmCustomPatchSync<ConnectionMonitorResult,
+    PatchModel = TagsObject, Error = CloudError>;
 
   /**
    * Deletes the specified connection monitor.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ConnectionMonitors_Delete")
-  delete is ArmResourceDeleteWithoutOkAsync<ConnectionMonitorResult>;
+  delete is ArmResourceDeleteWithoutOkAsync<ConnectionMonitorResult, Error = CloudError>;
 
   /**
    * Lists all connection monitors for the specified Network Watcher.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ConnectionMonitors_List")
-  list is ArmResourceListByParent<
-    ConnectionMonitorResult,
+  list is ArmResourceListByParent<ConnectionMonitorResult,
     Response = ArmResponse<ConnectionMonitorListResult>
-  >;
+  , Error = CloudError>;
 
   /**
    * Stops the specified connection monitor.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ConnectionMonitors_Stop")
-  stop is ArmResourceActionAsync<ConnectionMonitorResult, void, OkResponse>;
+  stop is ArmResourceActionAsync<ConnectionMonitorResult, void, OkResponse, Error = CloudError>;
 }
 
 @@doc(ConnectionMonitorResult.name, "The name of the connection monitor.");

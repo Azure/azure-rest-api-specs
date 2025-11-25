@@ -39,24 +39,21 @@ interface CustomIpPrefixes {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("CustomIPPrefixes_Get")
-  get is ArmResourceRead<
-    CustomIpPrefix,
+  get is ArmResourceRead<CustomIpPrefix,
     Parameters = {
       /**
        * Expands referenced resources.
        */
       @query("$expand")
       $expand?: string;
-    }
-  >;
+    }, Error = CloudError>;
 
   /**
    * Creates or updates a custom IP prefix.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("CustomIPPrefixes_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    CustomIpPrefix,
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<CustomIpPrefix,
     LroHeaders = ArmLroLocationHeader<FinalResult = CustomIpPrefix> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
@@ -67,7 +64,7 @@ interface CustomIpPrefixes {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("CustomIPPrefixes_UpdateTags")
   @patch(#{ implicitOptionality: false })
-  updateTags is ArmCustomPatchSync<CustomIpPrefix, PatchModel = TagsObject>;
+  updateTags is ArmCustomPatchSync<CustomIpPrefix, PatchModel = TagsObject, Error = CloudError>;
 
   /**
    * Deletes the specified custom IP prefix.
@@ -75,24 +72,22 @@ interface CustomIpPrefixes {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   @operationId("CustomIPPrefixes_Delete")
-  delete is ArmResourceDeleteWithoutOkAsync<
-    CustomIpPrefix,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
-  >;
+  delete is ArmResourceDeleteWithoutOkAsync<CustomIpPrefix,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
 
   /**
    * Gets all custom IP prefixes in a resource group.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("CustomIPPrefixes_List")
-  list is ArmResourceListByParent<CustomIpPrefix>;
+  list is ArmResourceListByParent<CustomIpPrefix, Error = CloudError>;
 
   /**
    * Gets all the custom IP prefixes in a subscription.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("CustomIPPrefixes_ListAll")
-  listAll is ArmListBySubscription<CustomIpPrefix>;
+  listAll is ArmListBySubscription<CustomIpPrefix, Error = CloudError>;
 }
 
 @@doc(CustomIpPrefix.name, "The name of the custom IP prefix.");

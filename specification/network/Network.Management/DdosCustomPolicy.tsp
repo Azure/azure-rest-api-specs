@@ -29,27 +29,25 @@ interface DdosCustomPolicies {
   /**
    * Gets information about the specified DDoS custom policy.
    */
-  get is ArmResourceRead<DdosCustomPolicy>;
+  get is ArmResourceRead<DdosCustomPolicy, Error = CloudError>;
 
   /**
    * Creates or updates a DDoS custom policy.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<DdosCustomPolicy>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<DdosCustomPolicy, Error = CloudError>;
 
   /**
    * Update a DDoS custom policy tags.
    */
   @patch(#{ implicitOptionality: false })
-  updateTags is ArmCustomPatchSync<DdosCustomPolicy, PatchModel = TagsObject>;
+  updateTags is ArmCustomPatchSync<DdosCustomPolicy, PatchModel = TagsObject, Error = CloudError>;
 
   /**
    * Deletes the specified DDoS custom policy.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<
-    DdosCustomPolicy,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
-  >;
+  delete is ArmResourceDeleteWithoutOkAsync<DdosCustomPolicy,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
 }
 
 @@doc(DdosCustomPolicy.name, "The name of the DDoS custom policy.");

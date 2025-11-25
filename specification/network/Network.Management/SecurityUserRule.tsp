@@ -31,19 +31,18 @@ interface SecurityUserRules {
   /**
    * Gets a security user rule.
    */
-  get is ArmResourceRead<SecurityUserRule>;
+  get is ArmResourceRead<SecurityUserRule, Error = CloudError>;
 
   /**
    * Creates or updates a security user rule.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<SecurityUserRule>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<SecurityUserRule, Error = CloudError>;
 
   /**
    * Deletes a security user rule.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<
-    SecurityUserRule,
+  delete is ArmResourceDeleteWithoutOkAsync<SecurityUserRule,
     Parameters = {
       /**
        * Deletes the resource even if it is part of a deployed configuration. If the configuration has been deployed, the service will do a cleanup deployment in the background, prior to the delete.
@@ -51,14 +50,12 @@ interface SecurityUserRules {
       @query("force")
       force?: boolean;
     },
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
-  >;
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
 
   /**
    * Lists all Security User Rules in a rule collection.
    */
-  list is ArmResourceListByParent<
-    SecurityUserRule,
+  list is ArmResourceListByParent<SecurityUserRule,
     Parameters = {
       /**
        * An optional query parameter which specifies the maximum number of records to be returned by the server.
@@ -73,8 +70,7 @@ interface SecurityUserRules {
        */
       @query("$skipToken")
       $skipToken?: string;
-    }
-  >;
+    }, Error = CloudError>;
 }
 
 @@doc(SecurityUserRule.name, "The name of the rule.");

@@ -30,55 +30,47 @@ interface Subnets {
   /**
    * Gets the specified subnet by virtual network and resource group.
    */
-  get is ArmResourceRead<
-    Subnet,
+  get is ArmResourceRead<Subnet,
     Parameters = {
       /**
        * Expands referenced resources.
        */
       @query("$expand")
       $expand?: string;
-    }
-  >;
+    }, Error = CloudError>;
 
   /**
    * Creates or updates a subnet in the specified virtual network.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Subnet>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<Subnet, Error = CloudError>;
 
   /**
    * Deletes the specified subnet.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<
-    Subnet,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
-  >;
+  delete is ArmResourceDeleteWithoutOkAsync<Subnet,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
 
   /**
    * Gets all subnets in a virtual network.
    */
-  list is ArmResourceListByParent<Subnet>;
+  list is ArmResourceListByParent<Subnet, Error = CloudError>;
 
   /**
    * Prepares a subnet by applying network intent policies.
    */
   @action("PrepareNetworkPolicies")
-  prepareNetworkPolicies is ArmResourceActionAsync<
-    Subnet,
+  prepareNetworkPolicies is ArmResourceActionAsync<Subnet,
     PrepareNetworkPoliciesRequest,
-    OkResponse
-  >;
+    OkResponse, Error = CloudError>;
 
   /**
    * Unprepares a subnet by removing network intent policies.
    */
   @action("UnprepareNetworkPolicies")
-  unprepareNetworkPolicies is ArmResourceActionAsync<
-    Subnet,
+  unprepareNetworkPolicies is ArmResourceActionAsync<Subnet,
     UnprepareNetworkPoliciesRequest,
-    OkResponse
-  >;
+    OkResponse, Error = CloudError>;
 
   /**
    * Gets a list of resource navigation links for a subnet.
@@ -88,11 +80,10 @@ interface Subnets {
   @list
   @get
   @action("ResourceNavigationLinks")
-  resourceNavigationLinksList is ArmResourceActionSync<
-    Subnet,
+  resourceNavigationLinksList is ArmResourceActionSync<Subnet,
     void,
     ArmResponse<ResourceListResult<ResourceNavigationLink>>
-  >;
+  , Error = CloudError>;
 
   /**
    * Gets a list of service association links for a subnet.
@@ -102,11 +93,10 @@ interface Subnets {
   @list
   @get
   @action("ServiceAssociationLinks")
-  serviceAssociationLinksList is ArmResourceActionSync<
-    Subnet,
+  serviceAssociationLinksList is ArmResourceActionSync<Subnet,
     void,
     ArmResponse<ResourceListResult<ServiceAssociationLink>>
-  >;
+  , Error = CloudError>;
 }
 
 @@doc(Subnet.name, "The name of the subnet.");

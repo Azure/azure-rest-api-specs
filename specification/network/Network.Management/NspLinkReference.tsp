@@ -32,7 +32,7 @@ interface NspLinkReferences {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("NetworkSecurityPerimeterLinkReferences_Get")
-  get is ArmResourceRead<NspLinkReference>;
+  get is ArmResourceRead<NspLinkReference, Error = CloudError>;
 
   /**
    * Deletes an NSP LinkReference resource.
@@ -40,18 +40,15 @@ interface NspLinkReferences {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   @operationId("NetworkSecurityPerimeterLinkReferences_Delete")
-  delete is ArmResourceDeleteWithoutOkAsync<
-    NspLinkReference,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
-  >;
+  delete is ArmResourceDeleteWithoutOkAsync<NspLinkReference,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
 
   /**
    * Lists the NSP LinkReference resources in the specified network security perimeter.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("NetworkSecurityPerimeterLinkReferences_List")
-  list is ArmResourceListByParent<
-    NspLinkReference,
+  list is ArmResourceListByParent<NspLinkReference,
     Parameters = {
       /**
        * An optional query parameter which specifies the maximum number of records to be returned by the server.
@@ -66,8 +63,7 @@ interface NspLinkReferences {
        */
       @query("$skipToken")
       $skipToken?: string;
-    }
-  >;
+    }, Error = CloudError>;
 }
 
 @@maxLength(NspLinkReference.name, 80);

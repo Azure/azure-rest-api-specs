@@ -31,14 +31,13 @@ interface FirewallPolicyIdpsSignaturesOverrides {
   /**
    * Returns all signatures overrides for a specific policy.
    */
-  get is ArmResourceRead<SignaturesOverrides>;
+  get is ArmResourceRead<SignaturesOverrides, Error = CloudError>;
 
   /**
    * Will override/create a new signature overrides for the policy's IDPS
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  put is ArmResourceCreateOrReplaceSync<
-    SignaturesOverrides,
+  put is ArmResourceCreateOrReplaceSync<SignaturesOverrides,
     Response = ArmResourceUpdatedResponse<SignaturesOverrides>
   >;
 
@@ -46,18 +45,15 @@ interface FirewallPolicyIdpsSignaturesOverrides {
    * Will update the status of policy's signature overrides for IDPS
    */
   @patch(#{ implicitOptionality: false })
-  patch is ArmCustomPatchSync<
-    SignaturesOverrides,
-    PatchModel = SignaturesOverrides
-  >;
+  patch is ArmCustomPatchSync<SignaturesOverrides,
+    PatchModel = SignaturesOverrides, Error = CloudError>;
 
   /**
    * Returns all signatures overrides objects for a specific policy as a list containing a single value.
    */
-  list is ArmResourceListByParent<
-    SignaturesOverrides,
+  list is ArmResourceListByParent<SignaturesOverrides,
     Response = ArmResponse<SignaturesOverridesList>
-  >;
+  , Error = CloudError>;
 }
 
 @@doc(SignaturesOverrides.name, "");

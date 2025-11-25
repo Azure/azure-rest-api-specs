@@ -75,13 +75,14 @@ interface NetworkInterfaces {
        */
       @query("$expand")
       $expand?: string;
-    }
+    },
+    OverrideErrorType = CloudError
   >;
 
   /**
    * Gets information about all network interfaces in a role instance in a cloud service.
    */
-  listCloudServiceRoleInstanceNetworkInterfaces is NetworkInterfaceOps.List<NetworkInterface>;
+  listCloudServiceRoleInstanceNetworkInterfaces is NetworkInterfaceOps.List<NetworkInterface, OverrideErrorType = CloudError>;
 }
 alias NetworkInterfaceOperationGroupOps = Azure.ResourceManager.Legacy.LegacyOperations<
   {
@@ -114,7 +115,8 @@ interface NetworkInterfaceOperationGroup {
        */
       @query("$expand")
       $expand?: string;
-    }
+    },
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -122,7 +124,7 @@ interface NetworkInterfaceOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("NetworkInterfaces_CreateOrUpdate")
-  createOrUpdate is NetworkInterfaceOperationGroupOps.CreateOrUpdateAsync<NetworkInterface>;
+  createOrUpdate is NetworkInterfaceOperationGroupOps.CreateOrUpdateAsync<NetworkInterface,  OverrideErrorType = CloudError>;
 
   /**
    * Updates a network interface tags.
@@ -132,7 +134,8 @@ interface NetworkInterfaceOperationGroup {
   @patch(#{ implicitOptionality: false })
   updateTags is NetworkInterfaceOperationGroupOps.CustomPatchSync<
     NetworkInterface,
-    PatchModel = TagsObject
+    PatchModel = TagsObject,
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -144,21 +147,21 @@ interface NetworkInterfaceOperationGroup {
   delete is NetworkInterfaceOperationGroupOps.DeleteWithoutOkAsync<
     NetworkInterface,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
-  >;
+,    OverrideErrorType = CloudError>;
 
   /**
    * Gets all network interfaces in a resource group.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("NetworkInterfaces_List")
-  list is NetworkInterfaceOperationGroupOps.List<NetworkInterface>;
+  list is NetworkInterfaceOperationGroupOps.List<NetworkInterface, OverrideErrorType = CloudError>;
 
   /**
    * Gets all network interfaces in a subscription.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("NetworkInterfaces_ListAll")
-  listAll is ArmListBySubscription<NetworkInterface>;
+  listAll is ArmListBySubscription<NetworkInterface, Error = CloudError>;
 
   /**
    * Gets all route tables applied to a network interface.

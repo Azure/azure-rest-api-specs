@@ -31,21 +31,19 @@ interface IpamPools {
   /**
    * Gets the specific Pool resource.
    */
-  get is ArmResourceRead<IpamPool>;
+  get is ArmResourceRead<IpamPool, Error = CloudError>;
 
   /**
    * Creates/Updates the Pool resource.
    */
-  create is ArmResourceCreateOrReplaceAsync<
-    IpamPool,
+  create is ArmResourceCreateOrReplaceAsync<IpamPool,
     Parameters = {
       /**
        * The entity state (ETag) version of the pool to update. This value can be omitted or set to "*" to apply the operation unconditionally.
        */
       @header
       `If-Match`?: string;
-    }
-  >;
+    }, Error = CloudError>;
 
   /**
    * Updates the specific Pool resource.
@@ -67,22 +65,19 @@ interface IpamPools {
   /**
    * Delete the Pool resource.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<
-    IpamPool,
+  delete is ArmResourceDeleteWithoutOkAsync<IpamPool,
     Parameters = {
       /**
        * The entity state (ETag) version of the pool to update. This value can be omitted or set to "*" to apply the operation unconditionally.
        */
       @header
       `If-Match`?: string;
-    }
-  >;
+    }, Error = CloudError>;
 
   /**
    * Gets list of Pool resources at Network Manager level.
    */
-  list is ArmResourceListByParent<
-    IpamPool,
+  list is ArmResourceListByParent<IpamPool,
     Parameters = {
       /**
        * Optional skip token.
@@ -120,17 +115,16 @@ interface IpamPools {
   /**
    * Get the Pool Usage.
    */
-  getPoolUsage is ArmResourceActionSync<IpamPool, void, ArmResponse<PoolUsage>>;
+  getPoolUsage is ArmResourceActionSync<IpamPool, void, ArmResponse<PoolUsage>, Error = CloudError>;
 
   /**
    * List Associated Resource in the Pool.
    */
   @list
-  listAssociatedResources is ArmResourceActionSync<
-    IpamPool,
+  listAssociatedResources is ArmResourceActionSync<IpamPool,
     void,
     ArmResponse<PoolAssociationList>
-  >;
+  , Error = CloudError>;
 }
 
 @@doc(IpamPool.name, "Pool resource name.");

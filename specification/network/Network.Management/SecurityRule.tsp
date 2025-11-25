@@ -53,12 +53,12 @@ interface SecurityRules {
   /**
    * Get the specified network security rule.
    */
-  get is SecurityRuleOps.Read<SecurityRule>;
+  get is SecurityRuleOps.Read<SecurityRule, OverrideErrorType = CloudError>;
 
   /**
    * Creates or updates a security rule in the specified network security group.
    */
-  createOrUpdate is SecurityRuleOps.CreateOrUpdateAsync<SecurityRule>;
+  createOrUpdate is SecurityRuleOps.CreateOrUpdateAsync<SecurityRule,  OverrideErrorType = CloudError>;
 
   /**
    * Deletes the specified network security rule.
@@ -67,12 +67,12 @@ interface SecurityRules {
   delete is SecurityRuleOps.DeleteWithoutOkAsync<
     SecurityRule,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
-  >;
+,    OverrideErrorType = CloudError>;
 
   /**
    * Gets all security rules in a network security group.
    */
-  list is SecurityRuleOps.List<SecurityRule>;
+  list is SecurityRuleOps.List<SecurityRule, OverrideErrorType = CloudError>;
 }
 alias DefaultSecurityRuleOps = Azure.ResourceManager.Legacy.LegacyOperations<
   {
@@ -101,12 +101,12 @@ interface DefaultSecurityRules {
   /**
    * Get the specified default network security rule.
    */
-  get is DefaultSecurityRuleOps.Read<SecurityRule>;
+  get is DefaultSecurityRuleOps.Read<SecurityRule, OverrideErrorType = CloudError>;
 
   /**
    * Gets all default security rules in a network security group.
    */
-  list is DefaultSecurityRuleOps.List<SecurityRule>;
+  list is DefaultSecurityRuleOps.List<SecurityRule, OverrideErrorType = CloudError>;
 }
 
 @@doc(SecurityRule.name, "The name of the security rule.");

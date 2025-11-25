@@ -53,7 +53,7 @@ interface NetworkManagerConnections {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SubscriptionNetworkManagerConnections_Get")
-  get is NetworkManagerConnectionOps.Read<NetworkManagerConnection>;
+  get is NetworkManagerConnectionOps.Read<NetworkManagerConnection, ErrorType = CloudError>;
 
   /**
    * Create a network manager connection on this subscription.
@@ -67,7 +67,7 @@ interface NetworkManagerConnections {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SubscriptionNetworkManagerConnections_Delete")
-  delete is NetworkManagerConnectionOps.DeleteSync<NetworkManagerConnection>;
+  delete is NetworkManagerConnectionOps.DeleteSync<NetworkManagerConnection, ErrorType = CloudError>;
 
   /**
    * List all network manager connections created by this subscription.

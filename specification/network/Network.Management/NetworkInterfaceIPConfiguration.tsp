@@ -31,12 +31,12 @@ interface NetworkInterfaceIPConfigurations {
   /**
    * Gets the specified network interface ip configuration.
    */
-  get is ArmResourceRead<NetworkInterfaceIPConfiguration>;
+  get is ArmResourceRead<NetworkInterfaceIPConfiguration, Error = CloudError>;
 
   /**
    * Get all ip configurations in a network interface.
    */
-  list is ArmResourceListByParent<NetworkInterfaceIPConfiguration>;
+  list is ArmResourceListByParent<NetworkInterfaceIPConfiguration, Error = CloudError>;
 }
 
 @@doc(NetworkInterfaceIPConfiguration.name,

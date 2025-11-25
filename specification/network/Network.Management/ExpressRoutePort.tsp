@@ -57,18 +57,18 @@ interface ExpressRoutePorts {
   /**
    * Retrieves the requested ExpressRoutePort resource.
    */
-  get is ArmResourceRead<ExpressRoutePort>;
+  get is ArmResourceRead<ExpressRoutePort, Error = CloudError>;
 
   /**
    * Creates or updates the specified ExpressRoutePort resource.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<ExpressRoutePort>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<ExpressRoutePort, Error = CloudError>;
 
   /**
    * Update ExpressRoutePort tags.
    */
   @patch(#{ implicitOptionality: false })
-  updateTags is ArmCustomPatchSync<ExpressRoutePort, PatchModel = TagsObject>;
+  updateTags is ArmCustomPatchSync<ExpressRoutePort, PatchModel = TagsObject, Error = CloudError>;
 
   /**
    * Deletes the specified ExpressRoutePort resource.
@@ -76,31 +76,29 @@ interface ExpressRoutePorts {
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   @Azure.Core.useFinalStateVia("azure-async-operation")
-  delete is ArmResourceDeleteWithoutOkAsync<
-    ExpressRoutePort,
+  delete is ArmResourceDeleteWithoutOkAsync<ExpressRoutePort,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
-  >;
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse,
+    Error = CloudError>;
 
   /**
    * List all the ExpressRoutePort resources in the specified resource group.
    */
-  listByResourceGroup is ArmResourceListByParent<ExpressRoutePort>;
+  listByResourceGroup is ArmResourceListByParent<ExpressRoutePort, Error = CloudError>;
 
   /**
    * List all the ExpressRoutePort resources in the specified subscription.
    */
-  list is ArmListBySubscription<ExpressRoutePort>;
+  list is ArmListBySubscription<ExpressRoutePort, Error = CloudError>;
 
   /**
    * Generate a letter of authorization for the requested ExpressRoutePort resource.
    */
   @action("generateLoa")
-  generateLOA is ArmResourceActionSync<
-    ExpressRoutePort,
+  generateLOA is ArmResourceActionSync<ExpressRoutePort,
     GenerateExpressRoutePortsLOARequest,
     ArmResponse<GenerateExpressRoutePortsLOAResult>
-  >;
+  , Error = CloudError>;
 
   /**
    * Retrieves the specified ExpressRouteLink resource.
@@ -110,7 +108,8 @@ interface ExpressRoutePorts {
   @get
   expressRouteLinksGet is ExpressRouteLinkOps.Read<
     ExpressRoutePort,
-    Response = ArmResponse<ExpressRouteLink>
+    Response = ArmResponse<ExpressRouteLink>,
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -122,7 +121,8 @@ interface ExpressRoutePorts {
   @get
   expressRouteLinksList is ExpressRouteLinkOps.List<
     ExpressRoutePort,
-    Response = ArmResponse<ExpressRouteLinkListResult>
+    Response = ArmResponse<ExpressRouteLinkListResult>,
+    OverrideErrorType = CloudError
   >;
 }
 

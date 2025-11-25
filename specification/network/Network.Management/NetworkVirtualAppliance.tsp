@@ -57,78 +57,69 @@ interface NetworkVirtualAppliances {
   /**
    * Gets the specified Network Virtual Appliance.
    */
-  get is ArmResourceRead<
-    NetworkVirtualAppliance,
+  get is ArmResourceRead<NetworkVirtualAppliance,
     Parameters = {
       /**
        * Expands referenced resources.
        */
       @query("$expand")
       $expand?: string;
-    }
-  >;
+    }, Error = CloudError>;
 
   /**
    * Creates or updates the specified Network Virtual Appliance.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<NetworkVirtualAppliance>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<NetworkVirtualAppliance, Error = CloudError>;
 
   /**
    * Updates a Network Virtual Appliance.
    */
   @patch(#{ implicitOptionality: false })
-  updateTags is ArmCustomPatchSync<
-    NetworkVirtualAppliance,
-    PatchModel = TagsObject
-  >;
+  updateTags is ArmCustomPatchSync<NetworkVirtualAppliance,
+    PatchModel = TagsObject, Error = CloudError>;
 
   /**
    * Deletes the specified Network Virtual Appliance.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<
-    NetworkVirtualAppliance,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
-  >;
+  delete is ArmResourceDeleteWithoutOkAsync<NetworkVirtualAppliance,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
 
   /**
    * Lists all Network Virtual Appliances in a resource group.
    */
-  listByResourceGroup is ArmResourceListByParent<NetworkVirtualAppliance>;
+  listByResourceGroup is ArmResourceListByParent<NetworkVirtualAppliance, Error = CloudError>;
 
   /**
    * Gets all Network Virtual Appliances in a subscription.
    */
-  list is ArmListBySubscription<NetworkVirtualAppliance>;
+  list is ArmListBySubscription<NetworkVirtualAppliance, Error = CloudError>;
 
   /**
    * Restarts one or more VMs belonging to the specified Network Virtual Appliance.
    */
-  restart is ArmResourceActionAsync<
-    NetworkVirtualAppliance,
+  restart is ArmResourceActionAsync<NetworkVirtualAppliance,
     NetworkVirtualApplianceInstanceIds,
     ArmResponse<NetworkVirtualApplianceInstanceIds>,
     OptionalRequestBody = true
-  >;
+  , Error = CloudError>;
 
   /**
    * Reimages one VM belonging to the specified Network Virtual Appliance.
    */
-  reimage is ArmResourceActionAsync<
-    NetworkVirtualAppliance,
+  reimage is ArmResourceActionAsync<NetworkVirtualAppliance,
     NetworkVirtualApplianceInstanceIds,
     ArmResponse<NetworkVirtualApplianceInstanceIds>,
     OptionalRequestBody = true
-  >;
+  , Error = CloudError>;
 
   /**
    * Retrieves the boot diagnostic logs for a VM instance belonging to the specified Network Virtual Appliance.
    */
-  getBootDiagnosticLogs is ArmResourceActionAsync<
-    NetworkVirtualAppliance,
+  getBootDiagnosticLogs is ArmResourceActionAsync<NetworkVirtualAppliance,
     NetworkVirtualApplianceBootDiagnosticParameters,
     ArmResponse<NetworkVirtualApplianceInstanceId>
-  >;
+  , Error = CloudError>;
 
   /**
    * Creates a connection to Network Virtual Appliance, if it doesn't exist else updates the existing NVA connection'
@@ -140,7 +131,7 @@ interface NetworkVirtualAppliances {
     NetworkVirtualAppliance,
     Response = ArmResponse<NetworkVirtualApplianceConnection> | ArmResourceCreatedResponse<NetworkVirtualApplianceConnection>,
     Request = NetworkVirtualApplianceConnection
-  >;
+,    OverrideErrorType = CloudError>;
 
   /**
    * Retrieves the details of specified NVA connection.
@@ -150,7 +141,8 @@ interface NetworkVirtualAppliances {
   @get
   networkVirtualApplianceConnectionsGet is NetworkVirtualApplianceNetworkVirtualApplianceOps.Read<
     NetworkVirtualAppliance,
-    Response = ArmResponse<NetworkVirtualApplianceConnection>
+    Response = ArmResponse<NetworkVirtualApplianceConnection>,
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -162,7 +154,7 @@ interface NetworkVirtualAppliances {
   networkVirtualApplianceConnectionsDelete is NetworkVirtualApplianceNetworkVirtualApplianceOps.DeleteWithoutOkAsync<
     NetworkVirtualAppliance,
     Response = OkResponse | NoContentResponse
-  >;
+,    OverrideErrorType = CloudError>;
 
   /**
    * Lists NetworkVirtualApplianceConnections under the NVA.
@@ -173,7 +165,8 @@ interface NetworkVirtualAppliances {
   @get
   networkVirtualApplianceConnectionsList is NetworkVirtualApplianceNetworkVirtualApplianceOps.List<
     NetworkVirtualAppliance,
-    Response = ArmResponse<NetworkVirtualApplianceConnectionList>
+    Response = ArmResponse<NetworkVirtualApplianceConnectionList>,
+    OverrideErrorType = CloudError
   >;
 }
 

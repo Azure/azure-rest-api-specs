@@ -32,17 +32,15 @@ interface Probes {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("LoadBalancerProbes_Get")
-  get is ArmResourceRead<Probe>;
+  get is ArmResourceRead<Probe, Error = CloudError>;
 
   /**
    * Gets all the load balancer probes.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("LoadBalancerProbes_List")
-  list is ArmResourceListByParent<
-    Probe,
-    Response = LoadBalancerProbeListResult
-  >;
+  list is ArmResourceListByParent<Probe,
+    Response = LoadBalancerProbeListResult, Error = CloudError>;
 }
 
 @@doc(Probe.name, "The name of the probe.");

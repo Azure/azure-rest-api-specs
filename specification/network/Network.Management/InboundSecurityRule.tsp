@@ -33,14 +33,14 @@ interface InboundSecurityRuleOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("InboundSecurityRule_Get")
-  get is ArmResourceRead<InboundSecurityRule>;
+  get is ArmResourceRead<InboundSecurityRule, Error = CloudError>;
 
   /**
    * Creates or updates the specified Network Virtual Appliance Inbound Security Rules.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("InboundSecurityRule_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<InboundSecurityRule>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<InboundSecurityRule, Error = CloudError>;
 }
 
 @@doc(InboundSecurityRule.name, "The name of security rule collection.");

@@ -29,37 +29,35 @@ interface DdosProtectionPlans {
   /**
    * Gets information about the specified DDoS protection plan.
    */
-  get is ArmResourceRead<DdosProtectionPlan>;
+  get is ArmResourceRead<DdosProtectionPlan, Error = CloudError>;
 
   /**
    * Creates or updates a DDoS protection plan.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<DdosProtectionPlan>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<DdosProtectionPlan, Error = CloudError>;
 
   /**
    * Update a DDoS protection plan tags.
    */
   @patch(#{ implicitOptionality: false })
-  updateTags is ArmCustomPatchSync<DdosProtectionPlan, PatchModel = TagsObject>;
+  updateTags is ArmCustomPatchSync<DdosProtectionPlan, PatchModel = TagsObject, Error = CloudError>;
 
   /**
    * Deletes the specified DDoS protection plan.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<
-    DdosProtectionPlan,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
-  >;
+  delete is ArmResourceDeleteWithoutOkAsync<DdosProtectionPlan,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
 
   /**
    * Gets all the DDoS protection plans in a resource group.
    */
-  listByResourceGroup is ArmResourceListByParent<DdosProtectionPlan>;
+  listByResourceGroup is ArmResourceListByParent<DdosProtectionPlan, Error = CloudError>;
 
   /**
    * Gets all DDoS protection plans in a subscription.
    */
-  list is ArmListBySubscription<DdosProtectionPlan>;
+  list is ArmListBySubscription<DdosProtectionPlan, Error = CloudError>;
 }
 
 @@doc(DdosProtectionPlan.name, "The name of the DDoS protection plan.");

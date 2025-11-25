@@ -37,23 +37,20 @@ interface NatGateways {
   /**
    * Gets the specified nat gateway in a specified resource group.
    */
-  get is ArmResourceRead<
-    NatGateway,
+  get is ArmResourceRead<NatGateway,
     Parameters = {
       /**
        * Expands referenced resources.
        */
       @query("$expand")
       $expand?: string;
-    }
-  >;
+    }, Error = CloudError>;
 
   /**
    * Creates or updates a nat gateway.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    NatGateway,
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<NatGateway,
     Response = ArmResourceUpdatedResponse<NatGateway> | ArmResourceCreatedResponse<NatGateway> | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader>
   >;
 
@@ -61,26 +58,24 @@ interface NatGateways {
    * Updates nat gateway tags.
    */
   @patch(#{ implicitOptionality: false })
-  updateTags is ArmCustomPatchSync<NatGateway, PatchModel = TagsObject>;
+  updateTags is ArmCustomPatchSync<NatGateway, PatchModel = TagsObject, Error = CloudError>;
 
   /**
    * Deletes the specified nat gateway.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<
-    NatGateway,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
-  >;
+  delete is ArmResourceDeleteWithoutOkAsync<NatGateway,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
 
   /**
    * Gets all nat gateways in a resource group.
    */
-  list is ArmResourceListByParent<NatGateway>;
+  list is ArmResourceListByParent<NatGateway, Error = CloudError>;
 
   /**
    * Gets all the Nat Gateways in a subscription.
    */
-  listAll is ArmListBySubscription<NatGateway>;
+  listAll is ArmListBySubscription<NatGateway, Error = CloudError>;
 }
 
 @@doc(NatGateway.name, "The name of the nat gateway.");

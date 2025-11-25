@@ -33,14 +33,14 @@ interface VpnGatewayNatRules {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("NatRules_Get")
-  get is ArmResourceRead<VpnGatewayNatRule>;
+  get is ArmResourceRead<VpnGatewayNatRule, Error = CloudError>;
 
   /**
    * Creates a nat rule to a scalable vpn gateway if it doesn't exist else updates the existing nat rules.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("NatRules_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<VpnGatewayNatRule>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<VpnGatewayNatRule, Error = CloudError>;
 
   /**
    * Deletes a nat rule.
@@ -48,20 +48,17 @@ interface VpnGatewayNatRules {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   @operationId("NatRules_Delete")
-  delete is ArmResourceDeleteWithoutOkAsync<
-    VpnGatewayNatRule,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
-  >;
+  delete is ArmResourceDeleteWithoutOkAsync<VpnGatewayNatRule,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
 
   /**
    * Retrieves all nat rules for a particular virtual wan vpn gateway.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("NatRules_ListByVpnGateway")
-  listByVpnGateway is ArmResourceListByParent<
-    VpnGatewayNatRule,
+  listByVpnGateway is ArmResourceListByParent<VpnGatewayNatRule,
     Response = ArmResponse<ListVpnGatewayNatRulesResult>
-  >;
+  , Error = CloudError>;
 }
 
 @@doc(VpnGatewayNatRule.name, "The name of the nat rule.");

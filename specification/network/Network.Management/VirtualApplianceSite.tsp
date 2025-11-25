@@ -31,26 +31,24 @@ interface VirtualApplianceSites {
   /**
    * Gets the specified Virtual Appliance Site.
    */
-  get is ArmResourceRead<VirtualApplianceSite>;
+  get is ArmResourceRead<VirtualApplianceSite, Error = CloudError>;
 
   /**
    * Creates or updates the specified Network Virtual Appliance Site.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<VirtualApplianceSite>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<VirtualApplianceSite, Error = CloudError>;
 
   /**
    * Deletes the specified site from a Virtual Appliance.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<
-    VirtualApplianceSite,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
-  >;
+  delete is ArmResourceDeleteWithoutOkAsync<VirtualApplianceSite,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
 
   /**
    * Lists all Network Virtual Appliance Sites in a Network Virtual Appliance resource.
    */
-  list is ArmResourceListByParent<VirtualApplianceSite>;
+  list is ArmResourceListByParent<VirtualApplianceSite, Error = CloudError>;
 }
 
 @@doc(VirtualApplianceSite.name, "The name of the site.");

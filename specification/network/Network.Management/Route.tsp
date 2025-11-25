@@ -30,26 +30,24 @@ interface Routes {
   /**
    * Gets the specified route from a route table.
    */
-  get is ArmResourceRead<Route>;
+  get is ArmResourceRead<Route, Error = CloudError>;
 
   /**
    * Creates or updates a route in the specified route table.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Route>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<Route, Error = CloudError>;
 
   /**
    * Deletes the specified route from a route table.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<
-    Route,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
-  >;
+  delete is ArmResourceDeleteWithoutOkAsync<Route,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
 
   /**
    * Gets all routes in a route table.
    */
-  list is ArmResourceListByParent<Route>;
+  list is ArmResourceListByParent<Route, Error = CloudError>;
 }
 
 @@doc(Route.name, "The name of the route.");

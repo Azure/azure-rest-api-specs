@@ -85,7 +85,8 @@ interface AvailableDelegationsOperationGroup {
   list is ArmProviderActionSync<
     Response = AvailableDelegationsResult,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter
+    Parameters = LocationParameter,
+    Error = CloudError
   >;
 }
 
@@ -102,7 +103,8 @@ interface AvailableResourceGroupDelegationsOperationGroup {
   list is ArmProviderActionSync<
     Response = AvailableDelegationsResult,
     Scope = Extension.ResourceGroup,
-    Parameters = LocationParameter
+    Parameters = LocationParameter,
+    Error = CloudError
   >;
 }
 
@@ -119,7 +121,8 @@ interface AvailableServiceAliasesOperationGroup {
   list is ArmProviderActionSync<
     Response = AvailableServiceAliasesResult,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter
+    Parameters = LocationParameter,
+    Error = CloudError
   >;
 
   /**
@@ -133,7 +136,8 @@ interface AvailableServiceAliasesOperationGroup {
   listByResourceGroup is ArmProviderActionSync<
     Response = AvailableServiceAliasesResult,
     Scope = Extension.ResourceGroup,
-    Parameters = LocationParameter
+    Parameters = LocationParameter,
+    Error = CloudError
   >;
 }
 
@@ -150,7 +154,8 @@ interface AzureFirewallFqdnTagsOperationGroup {
   @action("azureFirewallFqdnTags")
   listAll is ArmProviderActionSync<
     Response = ResourceListResult<AzureFirewallFqdnTag>,
-    Scope = SubscriptionActionScope
+    Scope = SubscriptionActionScope,
+    Error = CloudError
   >;
 }
 
@@ -172,7 +177,8 @@ op checkDnsNameAvailability is ArmProviderActionSync<
      */
     @query("domainNameLabel")
     domainNameLabel: string;
-  }
+  },
+  Error = CloudError
 >;
 
 alias RoutesNetworkInterfaceOps = Azure.ResourceManager.Legacy.LegacyOperations<
@@ -287,7 +293,8 @@ interface ExpressRouteServiceProvidersOperationGroup {
   @action("expressRouteServiceProviders")
   list is ArmProviderActionSync<
     Response = ResourceListResult<ExpressRouteServiceProvider>,
-    Scope = SubscriptionActionScope
+    Scope = SubscriptionActionScope,
+    Error = CloudError
   >;
 }
 
@@ -321,7 +328,8 @@ interface NetworkSecurityPerimeterAssociableResourceTypesOperationGroup {
   list is ArmProviderActionSync<
     Response = PerimeterAssociableResourcesListResult,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter
+    Parameters = LocationParameter,
+    Error = CloudError
   >;
 }
 
@@ -360,7 +368,8 @@ interface NetworkSecurityPerimeterServiceTagsOperationGroup {
   list is ArmProviderActionSync<
     Response = NspServiceTagsListResult,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter
+    Parameters = LocationParameter,
+    Error = CloudError
   >;
 }
 
@@ -377,7 +386,8 @@ interface AvailablePrivateEndpointTypesOperationGroup {
   list is ArmProviderActionSync<
     Response = AvailablePrivateEndpointTypesResult,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter
+    Parameters = LocationParameter,
+    Error = CloudError
   >;
   /**
    * Returns all of the resource types that can be linked to a Private Endpoint in this subscription in this region.
@@ -390,7 +400,8 @@ interface AvailablePrivateEndpointTypesOperationGroup {
   listByResourceGroup is ArmProviderActionSync<
     Response = AvailablePrivateEndpointTypesResult,
     Scope = Extension.ResourceGroup,
-    Parameters = LocationParameter
+    Parameters = LocationParameter,
+    Error = CloudError
   >;
 }
 
@@ -406,7 +417,8 @@ interface PrivateLinkServicesOperationGroup {
     Request = CheckPrivateLinkServiceVisibilityRequest,
     Response = PrivateLinkServiceVisibility,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter
+    Parameters = LocationParameter,
+    Error = CloudError
   >;
   /**
    * Checks whether the subscription is visible to private link service in the specified resource group.
@@ -419,7 +431,8 @@ interface PrivateLinkServicesOperationGroup {
     Request = CheckPrivateLinkServiceVisibilityRequest,
     Response = PrivateLinkServiceVisibility,
     Scope = Extension.ResourceGroup,
-    Parameters = LocationParameter
+    Parameters = LocationParameter,
+    Error = CloudError
   >;
   /**
    * Returns all of the private link service ids that can be linked to a Private Endpoint with auto approved in this subscription in this region.
@@ -432,7 +445,8 @@ interface PrivateLinkServicesOperationGroup {
   listAutoApprovedPrivateLinkServices is ArmProviderActionSync<
     Response = AutoApprovedPrivateLinkServicesResult,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter
+    Parameters = LocationParameter,
+    Error = CloudError
   >;
   /**
    * Returns all of the private link service ids that can be linked to a Private Endpoint with auto approved in this subscription in this region.
@@ -445,7 +459,8 @@ interface PrivateLinkServicesOperationGroup {
   listAutoApprovedPrivateLinkServicesByResourceGroup is ArmProviderActionSync<
     Response = AutoApprovedPrivateLinkServicesResult,
     Scope = Extension.ResourceGroup,
-    Parameters = LocationParameter
+    Parameters = LocationParameter,
+    Error = CloudError
   >;
 }
 
@@ -461,7 +476,8 @@ interface BgpServiceCommunitiesOperationGroup {
   @action("bgpServiceCommunities")
   list is ArmProviderActionSync<
     Response = ResourceListResult<BgpServiceCommunity>,
-    Scope = SubscriptionActionScope
+    Scope = SubscriptionActionScope,
+    Error = CloudError
   >;
 }
 
@@ -478,7 +494,8 @@ interface ServiceTagsOperationGroup {
   list is ArmProviderActionSync<
     Response = ServiceTagsListResult,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter
+    Parameters = LocationParameter,
+    Error = CloudError
   >;
 }
 
@@ -509,7 +526,8 @@ interface ServiceTagInformationOperationGroup {
        */
       @query("tagName")
       tagName?: string;
-    }
+    },
+    Error = CloudError
   >;
 }
 

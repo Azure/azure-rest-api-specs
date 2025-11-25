@@ -51,48 +51,43 @@ interface ExpressRouteGateways {
   /**
    * Fetches the details of a ExpressRoute gateway in a resource group.
    */
-  get is ArmResourceRead<ExpressRouteGateway>;
+  get is ArmResourceRead<ExpressRouteGateway, Error = CloudError>;
 
   /**
    * Creates or updates a ExpressRoute gateway in a specified resource group.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<ExpressRouteGateway>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<ExpressRouteGateway, Error = CloudError>;
 
   /**
    * Updates express route gateway tags.
    */
   @patch(#{ implicitOptionality: false })
-  updateTags is ArmCustomPatchAsync<
-    ExpressRouteGateway,
+  updateTags is ArmCustomPatchAsync<ExpressRouteGateway,
     PatchModel = TagsObject,
     LroHeaders = ArmAsyncOperationHeader<FinalResult = ExpressRouteGateway> &
       Azure.Core.Foundations.RetryAfterHeader
-  >;
+  , Error = CloudError>;
 
   /**
    * Deletes the specified ExpressRoute gateway in a resource group. An ExpressRoute gateway resource can only be deleted when there are no connection subresources.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<
-    ExpressRouteGateway,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
-  >;
+  delete is ArmResourceDeleteWithoutOkAsync<ExpressRouteGateway,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
 
   /**
    * Lists ExpressRoute gateways in a given resource group.
    */
-  listByResourceGroup is ArmResourceListByParent<
-    ExpressRouteGateway,
+  listByResourceGroup is ArmResourceListByParent<ExpressRouteGateway,
     Response = ArmResponse<ExpressRouteGatewayList>
-  >;
+  , Error = CloudError>;
 
   /**
    * Lists ExpressRoute gateways under a given subscription.
    */
-  listBySubscription is ArmListBySubscription<
-    ExpressRouteGateway,
+  listBySubscription is ArmListBySubscription<ExpressRouteGateway,
     Response = ArmResponse<ExpressRouteGatewayList>
-  >;
+  , Error = CloudError>;
 
   /**
    * Creates a connection between an ExpressRoute gateway and an ExpressRoute circuit.
@@ -105,7 +100,7 @@ interface ExpressRouteGateways {
     ExpressRouteGateway,
     Response = ArmResponse<ExpressRouteConnection> | ArmResourceCreatedResponse<ExpressRouteConnection>,
     Request = ExpressRouteConnection
-  >;
+,    OverrideErrorType = CloudError>;
 
   /**
    * Gets the specified ExpressRouteConnection.
@@ -115,7 +110,8 @@ interface ExpressRouteGateways {
   @get
   expressRouteConnectionsGet is ExpressRouteConnectionOps.Read<
     ExpressRouteGateway,
-    Response = ArmResponse<ExpressRouteConnection>
+    Response = ArmResponse<ExpressRouteConnection>,
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -127,7 +123,7 @@ interface ExpressRouteGateways {
   expressRouteConnectionsDelete is ExpressRouteConnectionOps.DeleteWithoutOkAsync<
     ExpressRouteGateway,
     Response = OkResponse | ArmAcceptedLroResponse | NoContentResponse
-  >;
+,    OverrideErrorType = CloudError>;
 
   /**
    * Lists ExpressRouteConnections.
@@ -138,7 +134,8 @@ interface ExpressRouteGateways {
   @get
   list is ExpressRouteConnectionOps.List<
     ExpressRouteGateway,
-    Response = ArmResponse<ExpressRouteConnectionList>
+    Response = ArmResponse<ExpressRouteConnectionList>,
+    OverrideErrorType = CloudError
   >;
 }
 

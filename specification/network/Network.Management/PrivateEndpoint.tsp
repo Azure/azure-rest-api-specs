@@ -58,40 +58,36 @@ interface PrivateEndpoints {
   /**
    * Gets the specified private endpoint by resource group.
    */
-  get is ArmResourceRead<
-    PrivateEndpoint,
+  get is ArmResourceRead<PrivateEndpoint,
     Parameters = {
       /**
        * Expands referenced resources.
        */
       @query("$expand")
       $expand?: string;
-    }
-  >;
+    }, Error = CloudError>;
 
   /**
    * Creates or updates an private endpoint in the specified resource group.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<PrivateEndpoint>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<PrivateEndpoint, Error = CloudError>;
 
   /**
    * Deletes the specified private endpoint.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<
-    PrivateEndpoint,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
-  >;
+  delete is ArmResourceDeleteWithoutOkAsync<PrivateEndpoint,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
 
   /**
    * Gets all private endpoints in a resource group.
    */
-  list is ArmResourceListByParent<PrivateEndpoint>;
+  list is ArmResourceListByParent<PrivateEndpoint, Error = CloudError>;
 
   /**
    * Gets all private endpoints in a subscription.
    */
-  listBySubscription is ArmListBySubscription<PrivateEndpoint>;
+  listBySubscription is ArmListBySubscription<PrivateEndpoint, Error = CloudError>;
 
   /**
    * Deletes the specified private dns zone group.
@@ -102,7 +98,7 @@ interface PrivateEndpoints {
   privateDnsZoneGroupsDelete is PrivateDnsZoneGroupOps.DeleteWithoutOkAsync<
     PrivateEndpoint,
     Response = OkResponse | NoContentResponse
-  >;
+,    OverrideErrorType = CloudError>;
 
   /**
    * Gets the private dns zone group resource by specified private dns zone group name.
@@ -112,7 +108,8 @@ interface PrivateEndpoints {
   @get
   privateDnsZoneGroupsGet is PrivateDnsZoneGroupOps.Read<
     PrivateEndpoint,
-    Response = ArmResponse<PrivateDnsZoneGroup>
+    Response = ArmResponse<PrivateDnsZoneGroup>,
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -125,7 +122,7 @@ interface PrivateEndpoints {
     PrivateEndpoint,
     Response = ArmResponse<PrivateDnsZoneGroup> | ArmResourceCreatedResponse<PrivateDnsZoneGroup>,
     Request = PrivateDnsZoneGroup
-  >;
+,    OverrideErrorType = CloudError>;
 
   /**
    * Gets all private dns zone groups in a private endpoint.
@@ -137,7 +134,7 @@ interface PrivateEndpoints {
   privateDnsZoneGroupsList is PrivateDnsZoneGroupOps.List<
     PrivateEndpoint,
     Response = ArmResponse<PrivateDnsZoneGroupListResult>,
-    OverrideErrorType = Error
+    OverrideErrorType = CloudError
   >;
 }
 

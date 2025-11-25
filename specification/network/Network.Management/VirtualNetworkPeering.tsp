@@ -31,35 +31,31 @@ interface VirtualNetworkPeerings {
   /**
    * Gets the specified virtual network peering.
    */
-  get is ArmResourceRead<VirtualNetworkPeering>;
+  get is ArmResourceRead<VirtualNetworkPeering, Error = CloudError>;
 
   /**
    * Creates or updates a peering in the specified virtual network.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    VirtualNetworkPeering,
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<VirtualNetworkPeering,
     Parameters = {
       /**
        * Parameter indicates the intention to sync the peering with the current address space on the remote vNet after it's updated.
        */
       @query("syncRemoteAddressSpace")
       syncRemoteAddressSpace?: SyncRemoteAddressSpace;
-    }
-  >;
+    }, Error = CloudError>;
 
   /**
    * Deletes the specified virtual network peering.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<
-    VirtualNetworkPeering,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
-  >;
+  delete is ArmResourceDeleteWithoutOkAsync<VirtualNetworkPeering,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
 
   /**
    * Gets all virtual network peerings in a virtual network.
    */
-  list is ArmResourceListByParent<VirtualNetworkPeering>;
+  list is ArmResourceListByParent<VirtualNetworkPeering, Error = CloudError>;
 }
 
 @@doc(VirtualNetworkPeering.name, "The name of the virtual network peering.");

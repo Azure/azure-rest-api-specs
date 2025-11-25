@@ -31,17 +31,17 @@ interface FirewallPolicyRuleCollectionGroupDrafts {
   /**
    * Get Rule Collection Group Draft.
    */
-  get is ArmResourceRead<FirewallPolicyRuleCollectionGroupDraft>;
+  get is ArmResourceRead<FirewallPolicyRuleCollectionGroupDraft, Error = CloudError>;
 
   /**
    * Create or Update Rule Collection Group Draft.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<FirewallPolicyRuleCollectionGroupDraft>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<FirewallPolicyRuleCollectionGroupDraft, Error = CloudError>;
 
   /**
    * Delete Rule Collection Group Draft.
    */
-  delete is ArmResourceDeleteSync<FirewallPolicyRuleCollectionGroupDraft>;
+  delete is ArmResourceDeleteSync<FirewallPolicyRuleCollectionGroupDraft, Error = CloudError>;
 }
 
 @@doc(FirewallPolicyRuleCollectionGroupDraft.name, "");

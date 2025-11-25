@@ -51,12 +51,12 @@ interface ExpressRoutePortAuthorizations {
   /**
    * Gets the specified authorization from the specified express route port.
    */
-  get is ExpressRoutePortAuthorizationOps.Read<ExpressRoutePortAuthorization>;
+  get is ExpressRoutePortAuthorizationOps.Read<ExpressRoutePortAuthorization, OverrideErrorType = CloudError>;
 
   /**
    * Creates or updates an authorization in the specified express route port.
    */
-  createOrUpdate is ExpressRoutePortAuthorizationOps.CreateOrUpdateAsync<ExpressRoutePortAuthorization>;
+  createOrUpdate is ExpressRoutePortAuthorizationOps.CreateOrUpdateAsync<ExpressRoutePortAuthorization,  OverrideErrorType = CloudError>;
 
   /**
    * Deletes the specified authorization from the specified express route port.
@@ -68,12 +68,12 @@ interface ExpressRoutePortAuthorizations {
     ExpressRoutePortAuthorization,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders &
       Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
-  >;
+,    OverrideErrorType = CloudError>;
 
   /**
    * Gets all authorizations in an express route port.
    */
-  list is ExpressRoutePortAuthorizationOps.List<ExpressRoutePortAuthorization>;
+  list is ExpressRoutePortAuthorizationOps.List<ExpressRoutePortAuthorization, OverrideErrorType = CloudError>;
 }
 
 @@doc(ExpressRoutePortAuthorization.name, "The name of the authorization.");

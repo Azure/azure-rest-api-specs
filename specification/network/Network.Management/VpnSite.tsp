@@ -29,43 +29,39 @@ interface VpnSites {
   /**
    * Retrieves the details of a VPN site.
    */
-  get is ArmResourceRead<VpnSite>;
+  get is ArmResourceRead<VpnSite, Error = CloudError>;
 
   /**
    * Creates a VpnSite resource if it doesn't exist else updates the existing VpnSite.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<VpnSite>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<VpnSite, Error = CloudError>;
 
   /**
    * Updates VpnSite tags.
    */
   @patch(#{ implicitOptionality: false })
-  updateTags is ArmCustomPatchSync<VpnSite, PatchModel = TagsObject>;
+  updateTags is ArmCustomPatchSync<VpnSite, PatchModel = TagsObject, Error = CloudError>;
 
   /**
    * Deletes a VpnSite.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<
-    VpnSite,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
-  >;
+  delete is ArmResourceDeleteWithoutOkAsync<VpnSite,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
 
   /**
    * Lists all the vpnSites in a resource group.
    */
-  listByResourceGroup is ArmResourceListByParent<
-    VpnSite,
+  listByResourceGroup is ArmResourceListByParent<VpnSite,
     Response = ArmResponse<ListVpnSitesResult>
-  >;
+  , Error = CloudError>;
 
   /**
    * Lists all the VpnSites in a subscription.
    */
-  list is ArmListBySubscription<
-    VpnSite,
+  list is ArmListBySubscription<VpnSite,
     Response = ArmResponse<ListVpnSitesResult>
-  >;
+  , Error = CloudError>;
 }
 
 @@doc(VpnSite.name, "The name of the VpnSite being retrieved.");

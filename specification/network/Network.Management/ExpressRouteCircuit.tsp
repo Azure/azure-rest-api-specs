@@ -36,51 +36,46 @@ interface ExpressRouteCircuits {
   /**
    * Gets information about the specified express route circuit.
    */
-  get is ArmResourceRead<ExpressRouteCircuit>;
+  get is ArmResourceRead<ExpressRouteCircuit, Error = CloudError>;
 
   /**
    * Creates or updates an express route circuit.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<ExpressRouteCircuit>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<ExpressRouteCircuit, Error = CloudError>;
 
   /**
    * Updates an express route circuit tags.
    */
   @patch(#{ implicitOptionality: false })
-  updateTags is ArmCustomPatchSync<
-    ExpressRouteCircuit,
-    PatchModel = TagsObject
-  >;
+  updateTags is ArmCustomPatchSync<ExpressRouteCircuit,
+    PatchModel = TagsObject, Error = CloudError>;
 
   /**
    * Deletes the specified express route circuit.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<
-    ExpressRouteCircuit,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
-  >;
+  delete is ArmResourceDeleteWithoutOkAsync<ExpressRouteCircuit,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
 
   /**
    * Gets all the express route circuits in a resource group.
    */
-  list is ArmResourceListByParent<ExpressRouteCircuit>;
+  list is ArmResourceListByParent<ExpressRouteCircuit, Error = CloudError>;
 
   /**
    * Gets all the express route circuits in a subscription.
    */
-  listAll is ArmListBySubscription<ExpressRouteCircuit>;
+  listAll is ArmListBySubscription<ExpressRouteCircuit, Error = CloudError>;
 
   /**
    * Gets all the stats from an express route circuit in a resource group.
    */
   @get
   @action("stats")
-  getStats is ArmResourceActionSync<
-    ExpressRouteCircuit,
+  getStats is ArmResourceActionSync<ExpressRouteCircuit,
     void,
     ArmResponse<ExpressRouteCircuitStats>
-  >;
+  , Error = CloudError>;
 }
 
 @@doc(ExpressRouteCircuit.name, "The name of express route circuit.");

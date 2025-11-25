@@ -36,42 +36,39 @@ interface BastionHosts {
   /**
    * Gets the specified Bastion Host.
    */
-  get is ArmResourceRead<BastionHost>;
+  get is ArmResourceRead<BastionHost, Error = CloudError>;
 
   /**
    * Creates or updates the specified Bastion Host.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<BastionHost>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<BastionHost, Error = CloudError>;
 
   /**
    * Updates Tags for BastionHost resource
    */
   @patch(#{ implicitOptionality: false })
-  updateTags is ArmCustomPatchAsync<
-    BastionHost,
+  updateTags is ArmCustomPatchAsync<BastionHost,
     PatchModel = TagsObject,
     LroHeaders = ArmAsyncOperationHeader<FinalResult = BastionHost> &
       Azure.Core.Foundations.RetryAfterHeader
-  >;
+  , Error = CloudError>;
 
   /**
    * Deletes the specified Bastion Host.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<
-    BastionHost,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
-  >;
+  delete is ArmResourceDeleteWithoutOkAsync<BastionHost,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
 
   /**
    * Lists all Bastion Hosts in a resource group.
    */
-  listByResourceGroup is ArmResourceListByParent<BastionHost>;
+  listByResourceGroup is ArmResourceListByParent<BastionHost, Error = CloudError>;
 
   /**
    * Lists all Bastion Hosts in a subscription.
    */
-  list is ArmListBySubscription<BastionHost>;
+  list is ArmListBySubscription<BastionHost, Error = CloudError>;
 
   /**
    * Creates a Bastion Shareable Links for all the VMs specified in the request.
@@ -80,11 +77,10 @@ interface BastionHosts {
   @operationId("PutBastionShareableLink")
   @list
   @action("createShareableLinks")
-  putBastionShareableLink is ArmResourceActionAsync<
-    BastionHost,
+  putBastionShareableLink is ArmResourceActionAsync<BastionHost,
     BastionShareableLinkListRequest,
     ArmResponse<BastionShareableLinkListResult>
-  >;
+  , Error = CloudError>;
 
   /**
    * Deletes the Bastion Shareable Links for all the VMs specified in the request.
@@ -92,11 +88,9 @@ interface BastionHosts {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DeleteBastionShareableLink")
   @action("deleteShareableLinks")
-  deleteBastionShareableLink is ArmResourceActionAsync<
-    BastionHost,
+  deleteBastionShareableLink is ArmResourceActionAsync<BastionHost,
     BastionShareableLinkListRequest,
-    OkResponse
-  >;
+    OkResponse, Error = CloudError>;
 
   /**
    * Deletes the Bastion Shareable Links for all the tokens specified in the request.
@@ -104,12 +98,11 @@ interface BastionHosts {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DeleteBastionShareableLinkByToken")
   @action("deleteShareableLinksByToken")
-  deleteBastionShareableLinkByToken is ArmResourceActionAsyncBase<
-    BastionHost,
+  deleteBastionShareableLinkByToken is ArmResourceActionAsyncBase<BastionHost,
     Request = BastionShareableLinkTokenListRequest,
     Response = ArmAcceptedLroResponse,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<BastionHost>
-  >;
+  , Error = CloudError>;
 
   /**
    * Return the Bastion Shareable Links for all the VMs specified in the request.
@@ -118,11 +111,10 @@ interface BastionHosts {
   @operationId("GetBastionShareableLink")
   @list
   @action("getShareableLinks")
-  getBastionShareableLink is ArmResourceActionSync<
-    BastionHost,
+  getBastionShareableLink is ArmResourceActionSync<BastionHost,
     BastionShareableLinkListRequest,
     ArmResponse<BastionShareableLinkListResult>
-  >;
+  , Error = CloudError>;
 
   /**
    * Returns the list of currently active sessions on the Bastion.
@@ -130,11 +122,10 @@ interface BastionHosts {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("GetActiveSessions")
   @list
-  getActiveSessions is ArmResourceActionAsync<
-    BastionHost,
+  getActiveSessions is ArmResourceActionAsync<BastionHost,
     void,
     ArmResponse<BastionActiveSessionListResult>
-  >;
+  , Error = CloudError>;
 
   /**
    * Returns the list of currently active sessions on the Bastion.
@@ -142,11 +133,10 @@ interface BastionHosts {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DisconnectActiveSessions")
   @list
-  disconnectActiveSessions is ArmResourceActionSync<
-    BastionHost,
+  disconnectActiveSessions is ArmResourceActionSync<BastionHost,
     SessionIds,
     ArmResponse<BastionSessionDeleteResult>
-  >;
+  , Error = CloudError>;
 }
 
 @@doc(BastionHost.name, "The name of the Bastion Host.");

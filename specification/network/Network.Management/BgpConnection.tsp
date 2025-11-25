@@ -55,14 +55,14 @@ interface BgpConnections {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualHubBgpConnection_Get")
-  get is ArmResourceRead<BgpConnection>;
+  get is ArmResourceRead<BgpConnection, Error = CloudError>;
 
   /**
    * Creates a VirtualHubBgpConnection resource if it doesn't exist else updates the existing VirtualHubBgpConnection.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualHubBgpConnection_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<BgpConnection>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<BgpConnection, Error = CloudError>;
 
   /**
    * Deletes a VirtualHubBgpConnection.
@@ -70,20 +70,17 @@ interface BgpConnections {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   @operationId("VirtualHubBgpConnection_Delete")
-  delete is ArmResourceDeleteWithoutOkAsync<
-    BgpConnection,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
-  >;
+  delete is ArmResourceDeleteWithoutOkAsync<BgpConnection,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
 
   /**
    * Retrieves the details of all VirtualHubBgpConnections.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualHubBgpConnections_List")
-  list is ArmResourceListByParent<
-    BgpConnection,
+  list is ArmResourceListByParent<BgpConnection,
     Response = ArmResponse<ListVirtualHubBgpConnectionResults>
-  >;
+  , Error = CloudError>;
 
   /**
    * Retrieves a list of routes the virtual hub bgp connection has learned.

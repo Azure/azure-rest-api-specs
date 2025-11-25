@@ -79,77 +79,70 @@ interface VirtualHubs {
   /**
    * Retrieves the details of a VirtualHub.
    */
-  get is ArmResourceRead<VirtualHub>;
+  get is ArmResourceRead<VirtualHub, Error = CloudError>;
 
   /**
    * Creates a VirtualHub resource if it doesn't exist else updates the existing VirtualHub.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<VirtualHub>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<VirtualHub, Error = CloudError>;
 
   /**
    * Updates VirtualHub tags.
    */
   @patch(#{ implicitOptionality: false })
-  updateTags is ArmCustomPatchSync<VirtualHub, PatchModel = TagsObject>;
+  updateTags is ArmCustomPatchSync<VirtualHub, PatchModel = TagsObject, Error = CloudError>;
 
   /**
    * Deletes a VirtualHub.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<
-    VirtualHub,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
-  >;
+  delete is ArmResourceDeleteWithoutOkAsync<VirtualHub,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
 
   /**
    * Lists all the VirtualHubs in a resource group.
    */
-  listByResourceGroup is ArmResourceListByParent<
-    VirtualHub,
+  listByResourceGroup is ArmResourceListByParent<VirtualHub,
     Response = ArmResponse<ListVirtualHubsResult>
-  >;
+  , Error = CloudError>;
 
   /**
    * Lists all the VirtualHubs in a subscription.
    */
-  list is ArmListBySubscription<
-    VirtualHub,
+  list is ArmListBySubscription<VirtualHub,
     Response = ArmResponse<ListVirtualHubsResult>
-  >;
+  , Error = CloudError>;
 
   /**
    * Gets the effective routes configured for the Virtual Hub resource or the specified resource .
    */
   @list
   @action("effectiveRoutes")
-  getEffectiveVirtualHubRoutes is ArmResourceActionAsync<
-    VirtualHub,
+  getEffectiveVirtualHubRoutes is ArmResourceActionAsync<VirtualHub,
     EffectiveRoutesParameters,
     ArmResponse<VirtualHubEffectiveRouteList>,
     OptionalRequestBody = true
-  >;
+  , Error = CloudError>;
 
   /**
    * Gets the inbound routes configured for the Virtual Hub on a particular connection.
    */
   @list
   @action("inboundRoutes")
-  getInboundRoutes is ArmResourceActionAsync<
-    VirtualHub,
+  getInboundRoutes is ArmResourceActionAsync<VirtualHub,
     GetInboundRoutesParameters,
     ArmResponse<EffectiveRouteMapRouteList>
-  >;
+  , Error = CloudError>;
 
   /**
    * Gets the outbound routes configured for the Virtual Hub on a particular connection.
    */
   @list
   @action("outboundRoutes")
-  getOutboundRoutes is ArmResourceActionAsync<
-    VirtualHub,
+  getOutboundRoutes is ArmResourceActionAsync<VirtualHub,
     GetOutboundRoutesParameters,
     ArmResponse<EffectiveRouteMapRouteList>
-  >;
+  , Error = CloudError>;
 
   /**
    * Creates a hub virtual network connection if it doesn't exist else updates the existing one.
@@ -161,7 +154,7 @@ interface VirtualHubs {
     VirtualHub,
     Response = ArmResponse<HubVirtualNetworkConnection> | ArmResourceCreatedResponse<HubVirtualNetworkConnection>,
     Request = HubVirtualNetworkConnection
-  >;
+,    OverrideErrorType = CloudError>;
 
   /**
    * Deletes a HubVirtualNetworkConnection.
@@ -182,7 +175,8 @@ interface VirtualHubs {
   @get
   hubVirtualNetworkConnectionsGet is HubVirtualNetworkConnectionOps.Read<
     VirtualHub,
-    Response = ArmResponse<HubVirtualNetworkConnection>
+    Response = ArmResponse<HubVirtualNetworkConnection>,
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -194,7 +188,8 @@ interface VirtualHubs {
   @get
   hubVirtualNetworkConnectionsList is HubVirtualNetworkConnectionOps.List<
     VirtualHub,
-    Response = ArmResponse<ListHubVirtualNetworkConnectionsResult>
+    Response = ArmResponse<ListHubVirtualNetworkConnectionsResult>,
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -218,7 +213,7 @@ interface VirtualHubs {
     VirtualHub,
     Response = ArmResponse<VirtualHubRouteTableV2> | ArmResourceCreatedResponse<VirtualHubRouteTableV2>,
     Request = VirtualHubRouteTableV2
-  >;
+,    OverrideErrorType = CloudError>;
 
   /**
    * Deletes a VirtualHubRouteTableV2.
@@ -229,7 +224,7 @@ interface VirtualHubs {
   virtualHubRouteTableV2sDelete is VirtualHubRouteTableV2Ops.DeleteWithoutOkAsync<
     VirtualHub,
     Response = OkResponse | NoContentResponse
-  >;
+,    OverrideErrorType = CloudError>;
 
   /**
    * Retrieves the details of all VirtualHubRouteTableV2s.

@@ -29,49 +29,43 @@ interface NetworkSecurityGroups {
   /**
    * Gets the specified network security group.
    */
-  get is ArmResourceRead<
-    NetworkSecurityGroup,
+  get is ArmResourceRead<NetworkSecurityGroup,
     Parameters = {
       /**
        * Expands referenced resources.
        */
       @query("$expand")
       $expand?: string;
-    }
-  >;
+    }, Error = CloudError>;
 
   /**
    * Creates or updates a network security group in the specified resource group.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<NetworkSecurityGroup>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<NetworkSecurityGroup, Error = CloudError>;
 
   /**
    * Updates a network security group tags.
    */
   @patch(#{ implicitOptionality: false })
-  updateTags is ArmCustomPatchSync<
-    NetworkSecurityGroup,
-    PatchModel = TagsObject
-  >;
+  updateTags is ArmCustomPatchSync<NetworkSecurityGroup,
+    PatchModel = TagsObject, Error = CloudError>;
 
   /**
    * Deletes the specified network security group.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<
-    NetworkSecurityGroup,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
-  >;
+  delete is ArmResourceDeleteWithoutOkAsync<NetworkSecurityGroup,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
 
   /**
    * Gets all network security groups in a resource group.
    */
-  list is ArmResourceListByParent<NetworkSecurityGroup>;
+  list is ArmResourceListByParent<NetworkSecurityGroup, Error = CloudError>;
 
   /**
    * Gets all network security groups in a subscription.
    */
-  listAll is ArmListBySubscription<NetworkSecurityGroup>;
+  listAll is ArmListBySubscription<NetworkSecurityGroup, Error = CloudError>;
 }
 
 @@doc(NetworkSecurityGroup.name, "The name of the network security group.");

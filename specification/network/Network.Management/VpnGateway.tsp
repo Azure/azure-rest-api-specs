@@ -73,54 +73,48 @@ interface VpnGateways {
   /**
    * Retrieves the details of a virtual wan vpn gateway.
    */
-  get is ArmResourceRead<VpnGateway>;
+  get is ArmResourceRead<VpnGateway, Error = CloudError>;
 
   /**
    * Creates a virtual wan vpn gateway if it doesn't exist else updates the existing gateway.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<VpnGateway>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<VpnGateway, Error = CloudError>;
 
   /**
    * Updates virtual wan vpn gateway tags.
    */
   @patch(#{ implicitOptionality: false })
-  updateTags is ArmCustomPatchAsync<
-    VpnGateway,
+  updateTags is ArmCustomPatchAsync<VpnGateway,
     PatchModel = TagsObject,
     LroHeaders = ArmAsyncOperationHeader<FinalResult = VpnGateway> &
       Azure.Core.Foundations.RetryAfterHeader
-  >;
+  , Error = CloudError>;
 
   /**
    * Deletes a virtual wan vpn gateway.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<
-    VpnGateway,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
-  >;
+  delete is ArmResourceDeleteWithoutOkAsync<VpnGateway,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
 
   /**
    * Lists all the VpnGateways in a resource group.
    */
-  listByResourceGroup is ArmResourceListByParent<
-    VpnGateway,
+  listByResourceGroup is ArmResourceListByParent<VpnGateway,
     Response = ArmResponse<ListVpnGatewaysResult>
-  >;
+  , Error = CloudError>;
 
   /**
    * Lists all the VpnGateways in a subscription.
    */
-  list is ArmListBySubscription<
-    VpnGateway,
+  list is ArmListBySubscription<VpnGateway,
     Response = ArmResponse<ListVpnGatewaysResult>
-  >;
+  , Error = CloudError>;
 
   /**
    * Resets the primary of the vpn gateway in the specified resource group.
    */
-  reset is ArmResourceActionAsync<
-    VpnGateway,
+  reset is ArmResourceActionAsync<VpnGateway,
     void,
     ArmResponse<VpnGateway>,
     Parameters = {
@@ -130,29 +124,27 @@ interface VpnGateways {
       @query("ipConfigurationId")
       ipConfigurationId?: string;
     }
-  >;
+  , Error = CloudError>;
 
   /**
    * Starts packet capture on vpn gateway in the specified resource group.
    */
   @action("startpacketcapture")
-  startPacketCapture is ArmResourceActionAsync<
-    VpnGateway,
+  startPacketCapture is ArmResourceActionAsync<VpnGateway,
     VpnGatewayPacketCaptureStartParameters,
     ArmResponse<stringApplicationJson>,
     OptionalRequestBody = true
-  >;
+  , Error = CloudError>;
 
   /**
    * Stops packet capture on vpn gateway in the specified resource group.
    */
   @action("stoppacketcapture")
-  stopPacketCapture is ArmResourceActionAsync<
-    VpnGateway,
+  stopPacketCapture is ArmResourceActionAsync<VpnGateway,
     VpnGatewayPacketCaptureStopParameters,
     ArmResponse<stringApplicationJson>,
     OptionalRequestBody = true
-  >;
+  , Error = CloudError>;
 
   /**
    * Retrieves the details of a vpn connection.
@@ -162,7 +154,8 @@ interface VpnGateways {
   @get
   vpnConnectionsGet is VpnConnectionOps.Read<
     VpnGateway,
-    Response = ArmResponse<VpnConnection>
+    Response = ArmResponse<VpnConnection>,
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -175,7 +168,7 @@ interface VpnGateways {
     VpnGateway,
     Response = ArmResponse<VpnConnection> | ArmResourceCreatedResponse<VpnConnection>,
     Request = VpnConnection
-  >;
+,    OverrideErrorType = CloudError>;
 
   /**
    * Deletes a vpn connection.
@@ -186,7 +179,7 @@ interface VpnGateways {
   vpnConnectionsDelete is VpnConnectionOps.DeleteWithoutOkAsync<
     VpnGateway,
     Response = OkResponse | NoContentResponse
-  >;
+,    OverrideErrorType = CloudError>;
 
   /**
    * Starts packet capture on Vpn connection in the specified resource group.
@@ -223,7 +216,8 @@ interface VpnGateways {
   @get
   listByVpnGateway is VpnConnectionOps.List<
     VpnGateway,
-    Response = ArmResponse<ListVpnConnectionsResult>
+    Response = ArmResponse<ListVpnConnectionsResult>,
+    OverrideErrorType = CloudError
   >;
 }
 

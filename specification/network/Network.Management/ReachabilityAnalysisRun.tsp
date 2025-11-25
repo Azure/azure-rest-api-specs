@@ -33,23 +33,22 @@ interface ReachabilityAnalysisRuns {
   /**
    * Gets Reachability Analysis Run.
    */
-  get is ArmResourceRead<ReachabilityAnalysisRun>;
+  get is ArmResourceRead<ReachabilityAnalysisRun, Error = CloudError>;
 
   /**
    * Creates Reachability Analysis Runs.
    */
-  create is ArmResourceCreateOrReplaceSync<ReachabilityAnalysisRun>;
+  create is ArmResourceCreateOrReplaceSync<ReachabilityAnalysisRun, Error = CloudError>;
 
   /**
    * Deletes Reachability Analysis Run.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<ReachabilityAnalysisRun>;
+  delete is ArmResourceDeleteWithoutOkAsync<ReachabilityAnalysisRun, Error = CloudError>;
 
   /**
    * Gets list of Reachability Analysis Runs.
    */
-  list is ArmResourceListByParent<
-    ReachabilityAnalysisRun,
+  list is ArmResourceListByParent<ReachabilityAnalysisRun,
     Parameters = {
       /**
        * Optional skip token.
@@ -80,8 +79,7 @@ interface ReachabilityAnalysisRuns {
        */
       @query("sortValue")
       sortValue?: string;
-    }
-  >;
+    }, Error = CloudError>;
 }
 
 @@doc(ReachabilityAnalysisRun.name, "Reachability Analysis Run name.");

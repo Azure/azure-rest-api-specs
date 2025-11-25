@@ -29,56 +29,49 @@ interface VpnServerConfigurations {
   /**
    * Retrieves the details of a VpnServerConfiguration.
    */
-  get is ArmResourceRead<VpnServerConfiguration>;
+  get is ArmResourceRead<VpnServerConfiguration, Error = CloudError>;
 
   /**
    * Creates a VpnServerConfiguration resource if it doesn't exist else updates the existing VpnServerConfiguration.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<VpnServerConfiguration>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<VpnServerConfiguration, Error = CloudError>;
 
   /**
    * Updates VpnServerConfiguration tags.
    */
   @patch(#{ implicitOptionality: false })
-  updateTags is ArmCustomPatchSync<
-    VpnServerConfiguration,
-    PatchModel = TagsObject
-  >;
+  updateTags is ArmCustomPatchSync<VpnServerConfiguration,
+    PatchModel = TagsObject, Error = CloudError>;
 
   /**
    * Deletes a VpnServerConfiguration.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<
-    VpnServerConfiguration,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
-  >;
+  delete is ArmResourceDeleteWithoutOkAsync<VpnServerConfiguration,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
 
   /**
    * Lists all the vpnServerConfigurations in a resource group.
    */
-  listByResourceGroup is ArmResourceListByParent<
-    VpnServerConfiguration,
+  listByResourceGroup is ArmResourceListByParent<VpnServerConfiguration,
     Response = ArmResponse<ListVpnServerConfigurationsResult>
-  >;
+  , Error = CloudError>;
 
   /**
    * Lists all the VpnServerConfigurations in a subscription.
    */
-  list is ArmListBySubscription<
-    VpnServerConfiguration,
+  list is ArmListBySubscription<VpnServerConfiguration,
     Response = ArmResponse<ListVpnServerConfigurationsResult>
-  >;
+  , Error = CloudError>;
 
   /**
    * List all Radius servers with respective radius secrets from VpnServerConfiguration.
    */
   @list
-  listRadiusSecrets is ArmResourceActionSync<
-    VpnServerConfiguration,
+  listRadiusSecrets is ArmResourceActionSync<VpnServerConfiguration,
     void,
     ArmResponse<RadiusAuthServerListResult>
-  >;
+  , Error = CloudError>;
 }
 
 @@doc(VpnServerConfiguration.name,

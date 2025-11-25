@@ -50,48 +50,45 @@ interface RouteFilters {
   /**
    * Gets the specified route filter.
    */
-  get is ArmResourceRead<
-    RouteFilter,
+  get is ArmResourceRead<RouteFilter,
     Parameters = {
       /**
        * Expands referenced express route bgp peering resources.
        */
       @query("$expand")
       $expand?: string;
-    }
-  >;
+    }, Error = CloudError>;
 
   /**
    * Creates or updates a route filter in a specified resource group.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<RouteFilter>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<RouteFilter, Error = CloudError>;
 
   /**
    * Updates tags of a route filter.
    */
   @patch(#{ implicitOptionality: false })
-  updateTags is ArmCustomPatchSync<RouteFilter, PatchModel = TagsObject>;
+  updateTags is ArmCustomPatchSync<RouteFilter, PatchModel = TagsObject, Error = CloudError>;
 
   /**
    * Deletes the specified route filter.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<
-    RouteFilter,
+  delete is ArmResourceDeleteWithoutOkAsync<RouteFilter,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
-  >;
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse,
+    Error = CloudError>;
 
   /**
    * Gets all route filters in a resource group.
    */
-  listByResourceGroup is ArmResourceListByParent<RouteFilter>;
+  listByResourceGroup is ArmResourceListByParent<RouteFilter, Error = CloudError>;
 
   /**
    * Gets all route filters in a subscription.
    */
-  list is ArmListBySubscription<RouteFilter>;
+  list is ArmListBySubscription<RouteFilter, Error = CloudError>;
 
   /**
    * Deletes the specified rule from a route filter.
@@ -104,7 +101,7 @@ interface RouteFilters {
     LroHeaders = ArmAsyncOperationHeader &
       Azure.Core.Foundations.RetryAfterHeader,
     Response = OkResponse | NoContentResponse
-  >;
+,    OverrideErrorType = CloudError>;
 
   /**
    * Gets the specified rule from a route filter.
@@ -114,7 +111,8 @@ interface RouteFilters {
   @get
   routeFilterRulesGet is RouteFilterRuleOps.Read<
     RouteFilter,
-    Response = ArmResponse<RouteFilterRule>
+    Response = ArmResponse<RouteFilterRule>,
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -127,7 +125,7 @@ interface RouteFilters {
     RouteFilter,
     Response = ArmResponse<RouteFilterRule> | ArmResourceCreatedResponse<RouteFilterRule>,
     Request = RouteFilterRule
-  >;
+,    OverrideErrorType = CloudError>;
 
   /**
    * Gets all RouteFilterRules in a route filter.
@@ -138,7 +136,8 @@ interface RouteFilters {
   @get
   listByRouteFilter is RouteFilterRuleOps.List<
     RouteFilter,
-    Response = ArmResponse<RouteFilterRuleListResult>
+    Response = ArmResponse<RouteFilterRuleListResult>,
+    OverrideErrorType = CloudError
   >;
 }
 

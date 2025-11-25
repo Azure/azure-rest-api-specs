@@ -67,14 +67,16 @@ interface ConnectionSharedKeyResults {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VpnLinkConnections_GetDefaultSharedKey")
-  getDefaultSharedKey is VpnLinkConnectionSharedKeyOps.Read<ConnectionSharedKeyResult>;
+  getDefaultSharedKey is VpnLinkConnectionSharedKeyOps.Read<ConnectionSharedKeyResult,
+    OverrideErrorType = CloudError
+  >;
 
   /**
    * Sets or auto generates the shared key based on the user input. If users give a shared key value, it does the set operation. If key length is given, the operation creates a random key of the pre-defined length.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VpnLinkConnections_SetOrInitDefaultSharedKey")
-  setOrInitDefaultSharedKey is VpnLinkConnectionSharedKeyOps.CreateOrUpdateAsync<ConnectionSharedKeyResult>;
+  setOrInitDefaultSharedKey is VpnLinkConnectionSharedKeyOps.CreateOrUpdateAsync<ConnectionSharedKeyResult,  OverrideErrorType = CloudError>;
 
   /**
    * Lists all shared keys of VpnLink connection specified.
@@ -83,7 +85,8 @@ interface ConnectionSharedKeyResults {
   @operationId("VpnLinkConnections_GetAllSharedKeys")
   getAllSharedKeys is VpnLinkConnectionSharedKeyOps.List<
     ConnectionSharedKeyResult,
-    Response = ArmResponse<ConnectionSharedKeyResultList>
+    Response = ArmResponse<ConnectionSharedKeyResultList>,
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -95,7 +98,8 @@ interface ConnectionSharedKeyResults {
   listDefaultSharedKey is VpnLinkConnectionSharedKeyOps.ActionSync<
     ConnectionSharedKeyResult,
     void,
-    ArmResponse<ConnectionSharedKeyResult>
+    ArmResponse<ConnectionSharedKeyResult>,
+    OverrideErrorType = CloudError
   >;
 }
 

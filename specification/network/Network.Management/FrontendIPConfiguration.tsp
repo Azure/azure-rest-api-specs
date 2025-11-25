@@ -34,17 +34,15 @@ interface FrontendIPConfigurations {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("LoadBalancerFrontendIPConfigurations_Get")
-  get is ArmResourceRead<FrontendIPConfiguration>;
+  get is ArmResourceRead<FrontendIPConfiguration, Error = CloudError>;
 
   /**
    * Gets all the load balancer frontend IP configurations.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("LoadBalancerFrontendIPConfigurations_List")
-  list is ArmResourceListByParent<
-    FrontendIPConfiguration,
-    Response = LoadBalancerFrontendIPConfigurationListResult
-  >;
+  list is ArmResourceListByParent<FrontendIPConfiguration,
+    Response = LoadBalancerFrontendIPConfigurationListResult, Error = CloudError>;
 }
 
 @@doc(FrontendIPConfiguration.name,

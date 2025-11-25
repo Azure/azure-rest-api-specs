@@ -31,19 +31,18 @@ interface SecurityAdminConfigurations {
   /**
    * Retrieves a network manager security admin configuration.
    */
-  get is ArmResourceRead<SecurityAdminConfiguration>;
+  get is ArmResourceRead<SecurityAdminConfiguration, Error = CloudError>;
 
   /**
    * Creates or updates a network manager security admin configuration.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<SecurityAdminConfiguration>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<SecurityAdminConfiguration, Error = CloudError>;
 
   /**
    * Deletes a network manager security admin configuration.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<
-    SecurityAdminConfiguration,
+  delete is ArmResourceDeleteWithoutOkAsync<SecurityAdminConfiguration,
     Parameters = {
       /**
        * Deletes the resource even if it is part of a deployed configuration. If the configuration has been deployed, the service will do a cleanup deployment in the background, prior to the delete.
@@ -51,14 +50,12 @@ interface SecurityAdminConfigurations {
       @query("force")
       force?: boolean;
     },
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
-  >;
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
 
   /**
    * Lists all the network manager security admin configurations in a network manager, in a paginated format.
    */
-  list is ArmResourceListByParent<
-    SecurityAdminConfiguration,
+  list is ArmResourceListByParent<SecurityAdminConfiguration,
     Parameters = {
       /**
        * An optional query parameter which specifies the maximum number of records to be returned by the server.
@@ -73,8 +70,7 @@ interface SecurityAdminConfigurations {
        */
       @query("$skipToken")
       $skipToken?: string;
-    }
-  >;
+    }, Error = CloudError>;
 }
 
 @@doc(SecurityAdminConfiguration.name,

@@ -111,13 +111,14 @@ interface PublicIPAddresses {
        */
       @query("$expand")
       $expand?: string;
-    }
+    },
+    OverrideErrorType = CloudError
   >;
 
   /**
    * Gets information about all public IP addresses in a role instance IP configuration in a cloud service.
    */
-  listCloudServiceRoleInstancePublicIPAddresses is PublicIPAddressOps.List<PublicIPAddress>;
+  listCloudServiceRoleInstancePublicIPAddresses is PublicIPAddressOps.List<PublicIPAddress, OverrideErrorType = CloudError>;
 }
 alias PublicIPAddressOperationGroupOps = Azure.ResourceManager.Legacy.LegacyOperations<
   {
@@ -150,7 +151,8 @@ interface PublicIPAddressOperationGroup {
        */
       @query("$expand")
       $expand?: string;
-    }
+    },
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -158,7 +160,7 @@ interface PublicIPAddressOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("PublicIPAddresses_CreateOrUpdate")
-  createOrUpdate is PublicIPAddressOperationGroupOps.CreateOrUpdateAsync<PublicIPAddress>;
+  createOrUpdate is PublicIPAddressOperationGroupOps.CreateOrUpdateAsync<PublicIPAddress,  OverrideErrorType = CloudError>;
 
   /**
    * Updates public IP address tags.
@@ -168,7 +170,8 @@ interface PublicIPAddressOperationGroup {
   @patch(#{ implicitOptionality: false })
   updateTags is PublicIPAddressOperationGroupOps.CustomPatchSync<
     PublicIPAddress,
-    PatchModel = TagsObject
+    PatchModel = TagsObject,
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -180,21 +183,21 @@ interface PublicIPAddressOperationGroup {
   delete is PublicIPAddressOperationGroupOps.DeleteWithoutOkAsync<
     PublicIPAddress,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
-  >;
+,    OverrideErrorType = CloudError>;
 
   /**
    * Gets all public IP addresses in a resource group.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("PublicIPAddresses_List")
-  list is PublicIPAddressOperationGroupOps.List<PublicIPAddress>;
+  list is PublicIPAddressOperationGroupOps.List<PublicIPAddress, OverrideErrorType = CloudError>;
 
   /**
    * Gets all the public IP addresses in a subscription.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("PublicIPAddresses_ListAll")
-  listAll is PublicIPAddressSubscriptionOps.List<PublicIPAddress>;
+  listAll is PublicIPAddressSubscriptionOps.List<PublicIPAddress, OverrideErrorType = CloudError>;
 
   /**
    * Gets the Ddos Protection Status of a Public IP Address

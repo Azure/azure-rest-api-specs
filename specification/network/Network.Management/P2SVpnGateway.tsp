@@ -47,14 +47,14 @@ interface P2SVpnGateways {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("P2sVpnGateways_Get")
-  get is ArmResourceRead<P2SVpnGateway>;
+  get is ArmResourceRead<P2SVpnGateway, Error = CloudError>;
 
   /**
    * Creates a virtual wan p2s vpn gateway if it doesn't exist else updates the existing gateway.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("P2sVpnGateways_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<P2SVpnGateway>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<P2SVpnGateway, Error = CloudError>;
 
   /**
    * Updates virtual wan p2s vpn gateway tags.
@@ -62,12 +62,11 @@ interface P2SVpnGateways {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("P2sVpnGateways_UpdateTags")
   @patch(#{ implicitOptionality: false })
-  updateTags is ArmCustomPatchAsync<
-    P2SVpnGateway,
+  updateTags is ArmCustomPatchAsync<P2SVpnGateway,
     PatchModel = TagsObject,
     LroHeaders = ArmAsyncOperationHeader<FinalResult = P2SVpnGateway> &
       Azure.Core.Foundations.RetryAfterHeader
-  >;
+  , Error = CloudError>;
 
   /**
    * Deletes a virtual wan p2s vpn gateway.
@@ -75,39 +74,34 @@ interface P2SVpnGateways {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   @operationId("P2sVpnGateways_Delete")
-  delete is ArmResourceDeleteWithoutOkAsync<
-    P2SVpnGateway,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
-  >;
+  delete is ArmResourceDeleteWithoutOkAsync<P2SVpnGateway,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
 
   /**
    * Lists all the P2SVpnGateways in a resource group.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("P2sVpnGateways_ListByResourceGroup")
-  listByResourceGroup is ArmResourceListByParent<
-    P2SVpnGateway,
+  listByResourceGroup is ArmResourceListByParent<P2SVpnGateway,
     Response = ArmResponse<ListP2SVpnGatewaysResult>
-  >;
+  , Error = CloudError>;
 
   /**
    * Lists all the P2SVpnGateways in a subscription.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("P2sVpnGateways_List")
-  list is ArmListBySubscription<
-    P2SVpnGateway,
+  list is ArmListBySubscription<P2SVpnGateway,
     Response = ArmResponse<ListP2SVpnGatewaysResult>
-  >;
+  , Error = CloudError>;
 
   /**
    * Resets the primary of the p2s vpn gateway in the specified resource group.
    */
-  reset is ArmResourceActionAsync<
-    P2SVpnGateway,
+  reset is ArmResourceActionAsync<P2SVpnGateway,
     void,
     ArmResponse<P2SVpnGateway>
-  >;
+  , Error = CloudError>;
 
   /**
    * Generates VPN profile for P2S client of the P2SVpnGateway in the specified resource group.
@@ -115,33 +109,30 @@ interface P2SVpnGateways {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("P2sVpnGateways_GenerateVpnProfile")
   @action("generatevpnprofile")
-  generateVpnProfile is ArmResourceActionAsync<
-    P2SVpnGateway,
+  generateVpnProfile is ArmResourceActionAsync<P2SVpnGateway,
     P2SVpnProfileParameters,
     ArmResponse<VpnProfileResponse>
-  >;
+  , Error = CloudError>;
 
   /**
    * Gets the connection health of P2S clients of the virtual wan P2SVpnGateway in the specified resource group.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("P2sVpnGateways_GetP2sVpnConnectionHealth")
-  getP2sVpnConnectionHealth is ArmResourceActionAsync<
-    P2SVpnGateway,
+  getP2sVpnConnectionHealth is ArmResourceActionAsync<P2SVpnGateway,
     void,
     ArmResponse<P2SVpnGateway>
-  >;
+  , Error = CloudError>;
 
   /**
    * Gets the sas url to get the connection health detail of P2S clients of the virtual wan P2SVpnGateway in the specified resource group.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("P2sVpnGateways_GetP2sVpnConnectionHealthDetailed")
-  getP2sVpnConnectionHealthDetailed is ArmResourceActionAsync<
-    P2SVpnGateway,
+  getP2sVpnConnectionHealthDetailed is ArmResourceActionAsync<P2SVpnGateway,
     P2SVpnConnectionHealthRequest,
     ArmResponse<P2SVpnConnectionHealth>
-  >;
+  , Error = CloudError>;
 
   /**
    * Disconnect P2S vpn connections of the virtual wan P2SVpnGateway in the specified resource group.

@@ -31,19 +31,18 @@ interface RoutingRules {
   /**
    * Gets a network manager routing configuration routing rule.
    */
-  get is ArmResourceRead<RoutingRule>;
+  get is ArmResourceRead<RoutingRule, Error = CloudError>;
 
   /**
    * Creates or updates an routing rule.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<RoutingRule>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<RoutingRule, Error = CloudError>;
 
   /**
    * Deletes a routing rule.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<
-    RoutingRule,
+  delete is ArmResourceDeleteWithoutOkAsync<RoutingRule,
     Parameters = {
       /**
        * Deletes the resource even if it is part of a deployed configuration. If the configuration has been deployed, the service will do a cleanup deployment in the background, prior to the delete.
@@ -51,14 +50,12 @@ interface RoutingRules {
       @query("force")
       force?: boolean;
     },
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
-  >;
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
 
   /**
    * List all network manager routing configuration routing rules.
    */
-  list is ArmResourceListByParent<
-    RoutingRule,
+  list is ArmResourceListByParent<RoutingRule,
     Parameters = {
       /**
        * An optional query parameter which specifies the maximum number of records to be returned by the server.
@@ -73,8 +70,7 @@ interface RoutingRules {
        */
       @query("$skipToken")
       $skipToken?: string;
-    }
-  >;
+    }, Error = CloudError>;
 }
 
 @@doc(RoutingRule.name, "The name of the rule.");

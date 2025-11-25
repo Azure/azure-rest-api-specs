@@ -29,40 +29,36 @@ interface SecurityPartnerProviders {
   /**
    * Gets the specified Security Partner Provider.
    */
-  get is ArmResourceRead<SecurityPartnerProvider>;
+  get is ArmResourceRead<SecurityPartnerProvider, Error = CloudError>;
 
   /**
    * Creates or updates the specified Security Partner Provider.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<SecurityPartnerProvider>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<SecurityPartnerProvider, Error = CloudError>;
 
   /**
    * Updates tags of a Security Partner Provider resource.
    */
   @patch(#{ implicitOptionality: false })
-  updateTags is ArmCustomPatchSync<
-    SecurityPartnerProvider,
-    PatchModel = TagsObject
-  >;
+  updateTags is ArmCustomPatchSync<SecurityPartnerProvider,
+    PatchModel = TagsObject, Error = CloudError>;
 
   /**
    * Deletes the specified Security Partner Provider.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<
-    SecurityPartnerProvider,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
-  >;
+  delete is ArmResourceDeleteWithoutOkAsync<SecurityPartnerProvider,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
 
   /**
    * Lists all Security Partner Providers in a resource group.
    */
-  listByResourceGroup is ArmResourceListByParent<SecurityPartnerProvider>;
+  listByResourceGroup is ArmResourceListByParent<SecurityPartnerProvider, Error = CloudError>;
 
   /**
    * Gets all the Security Partner Providers in a subscription.
    */
-  list is ArmListBySubscription<SecurityPartnerProvider>;
+  list is ArmListBySubscription<SecurityPartnerProvider, Error = CloudError>;
 }
 
 @@doc(SecurityPartnerProvider.name,

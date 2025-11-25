@@ -31,21 +31,19 @@ interface VerifierWorkspaces {
   /**
    * Gets Verifier Workspace.
    */
-  get is ArmResourceRead<VerifierWorkspace>;
+  get is ArmResourceRead<VerifierWorkspace, Error = CloudError>;
 
   /**
    * Creates Verifier Workspace.
    */
-  create is ArmResourceCreateOrReplaceSync<
-    VerifierWorkspace,
+  create is ArmResourceCreateOrReplaceSync<VerifierWorkspace,
     Parameters = {
       /**
        * The entity state (ETag) version of the pool to update. This value can be omitted or set to "*" to apply the operation unconditionally.
        */
       @header
       `If-Match`?: string;
-    }
-  >;
+    }, Error = CloudError>;
 
   /**
    * Updates Verifier Workspace.
@@ -67,22 +65,19 @@ interface VerifierWorkspaces {
   /**
    * Deletes Verifier Workspace.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<
-    VerifierWorkspace,
+  delete is ArmResourceDeleteWithoutOkAsync<VerifierWorkspace,
     Parameters = {
       /**
        * The entity state (ETag) version of the pool to update. This value can be omitted or set to "*" to apply the operation unconditionally.
        */
       @header
       `If-Match`?: string;
-    }
-  >;
+    }, Error = CloudError>;
 
   /**
    * Gets list of Verifier Workspaces.
    */
-  list is ArmResourceListByParent<
-    VerifierWorkspace,
+  list is ArmResourceListByParent<VerifierWorkspace,
     Parameters = {
       /**
        * Optional skip token.
@@ -113,8 +108,7 @@ interface VerifierWorkspaces {
        */
       @query("sortValue")
       sortValue?: string;
-    }
-  >;
+    }, Error = CloudError>;
 }
 
 @@doc(VerifierWorkspace.name, "Workspace name.");

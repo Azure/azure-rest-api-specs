@@ -31,29 +31,28 @@ interface NspProfiles {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("NetworkSecurityPerimeterProfiles_Get")
-  get is ArmResourceRead<NspProfile>;
+  get is ArmResourceRead<NspProfile, Error = CloudError>;
 
   /**
    * Creates or updates a network profile.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("NetworkSecurityPerimeterProfiles_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceSync<NspProfile>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<NspProfile, Error = CloudError>;
 
   /**
    * Deletes an NSP profile.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("NetworkSecurityPerimeterProfiles_Delete")
-  delete is ArmResourceDeleteSync<NspProfile>;
+  delete is ArmResourceDeleteSync<NspProfile, Error = CloudError>;
 
   /**
    * Lists the NSP profiles in the specified network security perimeter.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("NetworkSecurityPerimeterProfiles_List")
-  list is ArmResourceListByParent<
-    NspProfile,
+  list is ArmResourceListByParent<NspProfile,
     Parameters = {
       /**
        * An optional query parameter which specifies the maximum number of records to be returned by the server.
@@ -68,8 +67,7 @@ interface NspProfiles {
        */
       @query("$skipToken")
       $skipToken?: string;
-    }
-  >;
+    }, Error = CloudError>;
 }
 
 @@maxLength(NspProfile.name, 80);

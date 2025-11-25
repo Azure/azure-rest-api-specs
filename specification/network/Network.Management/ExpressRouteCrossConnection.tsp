@@ -51,14 +51,13 @@ interface ExpressRouteCrossConnections {
   /**
    * Gets details about the specified ExpressRouteCrossConnection.
    */
-  get is ArmResourceRead<ExpressRouteCrossConnection>;
+  get is ArmResourceRead<ExpressRouteCrossConnection, Error = CloudError>;
 
   /**
    * Update the specified ExpressRouteCrossConnection.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    ExpressRouteCrossConnection,
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<ExpressRouteCrossConnection,
     Response = ArmResourceUpdatedResponse<ExpressRouteCrossConnection> &
       ArmAsyncOperationHeader
   >;
@@ -67,36 +66,31 @@ interface ExpressRouteCrossConnections {
    * Updates an express route cross connection tags.
    */
   @patch(#{ implicitOptionality: false })
-  updateTags is ArmCustomPatchSync<
-    ExpressRouteCrossConnection,
-    PatchModel = TagsObject
-  >;
+  updateTags is ArmCustomPatchSync<ExpressRouteCrossConnection,
+    PatchModel = TagsObject, Error = CloudError>;
 
   /**
    * Retrieves all the ExpressRouteCrossConnections in a resource group.
    */
-  listByResourceGroup is ArmResourceListByParent<ExpressRouteCrossConnection>;
+  listByResourceGroup is ArmResourceListByParent<ExpressRouteCrossConnection, Error = CloudError>;
 
   /**
    * Retrieves all the ExpressRouteCrossConnections in a subscription.
    */
-  list is ArmListBySubscription<
-    ExpressRouteCrossConnection,
+  list is ArmListBySubscription<ExpressRouteCrossConnection,
     Parameters = {
       /**
        * The filter to apply on the operation. For example, you can use $filter=name eq '{circuitServiceKey}'.
        */
       @query("$filter")
       $filter?: string;
-    }
-  >;
+    }, Error = CloudError>;
 
   /**
    * Gets the currently advertised ARP table associated with the express route cross connection in a resource group.
    */
   @post
-  listArpTable is ArmResourceRead<
-    ExpressRouteCrossConnection,
+  listArpTable is ArmResourceRead<ExpressRouteCrossConnection,
     Parameters = {
       /**
        * The name of the peering.
@@ -119,8 +113,7 @@ interface ExpressRouteCrossConnections {
    * Gets the route table summary associated with the express route cross connection in a resource group.
    */
   @post
-  listRoutesTableSummary is ArmResourceRead<
-    ExpressRouteCrossConnection,
+  listRoutesTableSummary is ArmResourceRead<ExpressRouteCrossConnection,
     Parameters = {
       /**
        * The name of the peering.
@@ -143,8 +136,7 @@ interface ExpressRouteCrossConnections {
    * Gets the currently advertised routes table associated with the express route cross connection in a resource group.
    */
   @post
-  listRoutesTable is ArmResourceRead<
-    ExpressRouteCrossConnection,
+  listRoutesTable is ArmResourceRead<ExpressRouteCrossConnection,
     Parameters = {
       /**
        * The name of the peering.
@@ -172,7 +164,8 @@ interface ExpressRouteCrossConnections {
   @get
   expressRouteCrossConnectionPeeringsList is ExpressRouteCrossConnectionPeeringOps.List<
     ExpressRouteCrossConnection,
-    Response = ArmResponse<ExpressRouteCrossConnectionPeeringList>
+    Response = ArmResponse<ExpressRouteCrossConnectionPeeringList>,
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -184,7 +177,7 @@ interface ExpressRouteCrossConnections {
   delete is ExpressRouteCrossConnectionPeeringOps.DeleteWithoutOkAsync<
     ExpressRouteCrossConnection,
     Response = OkResponse | ArmAcceptedLroResponse | NoContentResponse
-  >;
+,    OverrideErrorType = CloudError>;
 
   /**
    * Gets the specified peering for the ExpressRouteCrossConnection.
@@ -194,7 +187,8 @@ interface ExpressRouteCrossConnections {
   @get
   expressRouteCrossConnectionPeeringsGet is ExpressRouteCrossConnectionPeeringOps.Read<
     ExpressRouteCrossConnection,
-    Response = ArmResponse<ExpressRouteCrossConnectionPeering>
+    Response = ArmResponse<ExpressRouteCrossConnectionPeering>,
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -208,7 +202,7 @@ interface ExpressRouteCrossConnections {
     ExpressRouteCrossConnection,
     Response = ArmResponse<ExpressRouteCrossConnectionPeering> | ArmResourceCreatedResponse<ExpressRouteCrossConnectionPeering>,
     Request = ExpressRouteCrossConnectionPeering
-  >;
+,    OverrideErrorType = CloudError>;
 }
 
 @@doc(ExpressRouteCrossConnection.name,

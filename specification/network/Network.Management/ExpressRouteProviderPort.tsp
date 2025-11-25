@@ -32,18 +32,15 @@ interface ExpressRouteProviderPorts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ExpressRouteProviderPort")
-  expressRouteProviderPort is ArmResourceRead<
-    ExpressRouteProviderPort,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
-  >;
+  expressRouteProviderPort is ArmResourceRead<ExpressRouteProviderPort,
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters, Error = CloudError>;
 
   /**
    * Retrieves all the ExpressRouteProviderPorts in a subscription.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ExpressRouteProviderPortsLocation_List")
-  list is ArmResourceListByParent<
-    ExpressRouteProviderPort,
+  list is ArmResourceListByParent<ExpressRouteProviderPort,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
     Parameters = {
       /**
@@ -51,8 +48,7 @@ interface ExpressRouteProviderPorts {
        */
       @query("$filter")
       $filter?: string;
-    }
-  >;
+    }, Error = CloudError>;
 }
 
 @@doc(ExpressRouteProviderPort.name, "The name of the provider port.");

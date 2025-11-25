@@ -33,14 +33,14 @@ interface HubIpConfigurations {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualHubIpConfiguration_Get")
-  get is ArmResourceRead<HubIpConfiguration>;
+  get is ArmResourceRead<HubIpConfiguration, Error = CloudError>;
 
   /**
    * Creates a VirtualHubIpConfiguration resource if it doesn't exist else updates the existing VirtualHubIpConfiguration.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualHubIpConfiguration_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<HubIpConfiguration>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<HubIpConfiguration, Error = CloudError>;
 
   /**
    * Deletes a VirtualHubIpConfiguration.
@@ -48,20 +48,17 @@ interface HubIpConfigurations {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   @operationId("VirtualHubIpConfiguration_Delete")
-  delete is ArmResourceDeleteWithoutOkAsync<
-    HubIpConfiguration,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
-  >;
+  delete is ArmResourceDeleteWithoutOkAsync<HubIpConfiguration,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
 
   /**
    * Retrieves the details of all VirtualHubIpConfigurations.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualHubIpConfiguration_List")
-  list is ArmResourceListByParent<
-    HubIpConfiguration,
+  list is ArmResourceListByParent<HubIpConfiguration,
     Response = ArmResponse<ListVirtualHubIpConfigurationResults>
-  >;
+  , Error = CloudError>;
 }
 
 @@doc(HubIpConfiguration.name, "The name of the ipconfig.");

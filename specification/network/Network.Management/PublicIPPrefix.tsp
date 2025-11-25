@@ -43,22 +43,19 @@ interface PublicIPPrefixes {
   /**
    * Gets the specified public IP prefix in a specified resource group.
    */
-  get is ArmResourceRead<
-    PublicIPPrefix,
+  get is ArmResourceRead<PublicIPPrefix,
     Parameters = {
       /**
        * Expands referenced resources.
        */
       @query("$expand")
       $expand?: string;
-    }
-  >;
+    }, Error = CloudError>;
 
   /**
    * Creates or updates a static or dynamic public IP prefix.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    PublicIPPrefix,
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<PublicIPPrefix,
     LroHeaders = ArmLroLocationHeader<FinalResult = PublicIPPrefix> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
@@ -67,26 +64,24 @@ interface PublicIPPrefixes {
    * Updates public IP prefix tags.
    */
   @patch(#{ implicitOptionality: false })
-  updateTags is ArmCustomPatchSync<PublicIPPrefix, PatchModel = TagsObject>;
+  updateTags is ArmCustomPatchSync<PublicIPPrefix, PatchModel = TagsObject, Error = CloudError>;
 
   /**
    * Deletes the specified public IP prefix.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<
-    PublicIPPrefix,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
-  >;
+  delete is ArmResourceDeleteWithoutOkAsync<PublicIPPrefix,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
 
   /**
    * Gets all public IP prefixes in a resource group.
    */
-  list is ArmResourceListByParent<PublicIPPrefix>;
+  list is ArmResourceListByParent<PublicIPPrefix, Error = CloudError>;
 
   /**
    * Gets all the public IP prefixes in a subscription.
    */
-  listAll is ArmListBySubscription<PublicIPPrefix>;
+  listAll is ArmListBySubscription<PublicIPPrefix, Error = CloudError>;
 }
 
 @@doc(PublicIPPrefix.name, "The name of the public IP prefix.");

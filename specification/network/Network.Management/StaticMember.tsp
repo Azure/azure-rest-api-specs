@@ -31,23 +31,22 @@ interface StaticMembers {
   /**
    * Gets the specified static member.
    */
-  get is ArmResourceRead<StaticMember>;
+  get is ArmResourceRead<StaticMember, Error = CloudError>;
 
   /**
    * Creates or updates a static member.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<StaticMember>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<StaticMember, Error = CloudError>;
 
   /**
    * Deletes a static member.
    */
-  delete is ArmResourceDeleteSync<StaticMember>;
+  delete is ArmResourceDeleteSync<StaticMember, Error = CloudError>;
 
   /**
    * Lists the specified static member.
    */
-  list is ArmResourceListByParent<
-    StaticMember,
+  list is ArmResourceListByParent<StaticMember,
     Parameters = {
       /**
        * An optional query parameter which specifies the maximum number of records to be returned by the server.
@@ -62,8 +61,7 @@ interface StaticMembers {
        */
       @query("$skipToken")
       $skipToken?: string;
-    }
-  >;
+    }, Error = CloudError>;
 }
 
 @@doc(StaticMember.name, "The name of the static member.");
