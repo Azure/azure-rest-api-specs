@@ -8,7 +8,7 @@ azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 no-namespace-folders: true
 package-name: azure-mgmt-rdbms
-package-version: 1.0.0b1
+package-version: 10.1.1
 clear-output-folder: true
 ```
 
@@ -25,8 +25,8 @@ Please also specify `--python-sdk-folder=<path to the root directory of your azu
 
 ``` yaml $(tag) == 'package-flexibleserver-2021-06-01' && $(python)
 title: PostgreSQLManagementClient
-namespace: azure.mgmt.rdbms.postgresqlflexibleservers
-output-folder: $(python-sdks-folder)/rdbms/azure-mgmt-rdbms/azure/mgmt/rdbms/postgresqlflexibleservers
+namespace: azure.mgmt.rdbms.postgresql_flexibleservers
+output-folder: $(python-sdks-folder)/rdbms/azure-mgmt-rdbms/azure/mgmt/rdbms/postgresql_flexibleservers
 ```
 
 ### Tag: package-2020-01-01 and python

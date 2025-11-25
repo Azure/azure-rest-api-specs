@@ -9,8 +9,8 @@ azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 no-namespace-folders: true
 clear-output-folder: true
-package-version: 1.0.0b1
+package-version: 10.1.1
 package-name: azure-mgmt-rdbms
-namespace: azure.mgmt.rdbms.mysqlflexibleservers
-output-folder: $(python-sdks-folder)/rdbms/azure-mgmt-rdbms/azure/mgmt/rdbms/mysqlflexibleservers
+namespace: azure.mgmt.rdbms.mysql_flexibleservers
+output-folder: $(python-sdks-folder)/rdbms/azure-mgmt-rdbms/azure/mgmt/rdbms/mysql_flexibleservers
 ```

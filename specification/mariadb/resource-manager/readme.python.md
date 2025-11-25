@@ -10,7 +10,7 @@ azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 namespace: azure.mgmt.rdbms.mariadb
 package-name: azure-mgmt-rdbms
-package-version: 1.0.0b1
+package-version: 10.1.1
 clear-output-folder: true
 modelerfour:
   lenient-model-deduplication: true
