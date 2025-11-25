@@ -751,7 +751,8 @@ options:
 const csharpEmittersValidationTestCases: Case[] = [
   // @azure-typespec/http-client-csharp - "Failed to find" should be ignored (success)
   {
-    description: "Validate http-client-csharp emitter-output-dir - Failed to find should be ignored",
+    description:
+      "Validate http-client-csharp emitter-output-dir - Failed to find should be ignored",
     folder: "",
     tspconfigContent: `
 options:
@@ -773,7 +774,8 @@ options:
     subRules: [new TspConfigHttpClientCsharpAzNamespaceSubRule()],
   },
   {
-    description: "Validate http-client-csharp-mgmt emitter-output-dir - Failed to find should be ignored",
+    description:
+      "Validate http-client-csharp-mgmt emitter-output-dir - Failed to find should be ignored",
     folder: managementTspconfigFolder,
     tspconfigContent: `
 options:
@@ -841,7 +843,8 @@ options:
     subRules: [new TspConfigCsharpAzNamespaceSubRule()],
   },
   {
-    description: "Validate typespec-csharp emitter-output-dir - Invalid value should pass (per emitter's decision)",
+    description:
+      "Validate typespec-csharp emitter-output-dir - Invalid value should pass (per emitter's decision)",
     folder: "",
     tspconfigContent: `
 options:
@@ -852,7 +855,8 @@ options:
     subRules: [new TspConfigCsharpAzEmitterOutputDirSubRule()],
   },
   {
-    description: "Validate typespec-csharp namespace - Invalid value should pass (per emitter's decision)",
+    description:
+      "Validate typespec-csharp namespace - Invalid value should pass (per emitter's decision)",
     folder: "",
     tspconfigContent: `
 options:
@@ -874,7 +878,8 @@ options:
     subRules: [new TspConfigCsharpAzClearOutputFolderTrueSubRule()],
   },
   {
-    description: "Validate typespec-csharp clear-output-folder - Invalid value should pass (per emitter's decision)",
+    description:
+      "Validate typespec-csharp clear-output-folder - Invalid value should pass (per emitter's decision)",
     folder: "",
     tspconfigContent: `
 options:
@@ -896,7 +901,8 @@ options:
     subRules: [new TspConfigCsharpMgmtEmitterOutputDirSubRule()],
   },
   {
-    description: "Validate typespec-csharp mgmt namespace - Invalid value should pass (per emitter's decision)",
+    description:
+      "Validate typespec-csharp mgmt namespace - Invalid value should pass (per emitter's decision)",
     folder: managementTspconfigFolder,
     tspconfigContent: `
 options:

@@ -26,7 +26,7 @@ export abstract class TspconfigSubRuleBase {
       return this.createFailedResult(
         `Failed to find ${join(folder, "tspconfig.yaml")}`,
         "Please add tspconfig.yaml",
-        RuleFailureType.NotFind,
+        RuleFailureType.ParseError,
       );
 
     let config = undefined;
