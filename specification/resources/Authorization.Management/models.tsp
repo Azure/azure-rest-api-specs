@@ -973,7 +973,7 @@ model PolicyTokenResponse {
   /**
    * An array of external evaluation endpoint invocation results.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   results?: ExternalEvaluationEndpointInvocationResult[];
 
   /**
@@ -984,6 +984,7 @@ model PolicyTokenResponse {
   /**
    * The issued policy token.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   token?: string;
 
   /**
