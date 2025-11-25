@@ -30,6 +30,12 @@ namespace Language.QuestionAnsweringClientCustomizations;
 
 @@clientName(TextAnswer.confidenceScore, "confidence");
 @@clientName(TextAnswer.answerSpan, "shortAnswer");
+@@clientName(KnowledgeBaseAnswerPrompt.qnaId, "Id");
+@@clientName(MetadataFilter.metadata, "MetadataRecords");
+@@clientName(PrebuiltQueryMatchingPolicy.disableFullMatch,
+  "IsFullMatchingDisabled"
+);
+@@clientName(ShortAnswerOptions.enable, "IsEnabled");
 
 @client({
   name: "QuestionAnsweringClient",

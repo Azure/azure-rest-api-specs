@@ -83,3 +83,31 @@ interface QuestionAnsweringAuthoringClientOperations {
 @@clientName(ExportQueryParameters.format, "fileFormat", "python");
 @@clientName(ImportQueryParameters.format, "fileFormat", "python");
 @@clientName(AssestKind, "AssetKind");
+@@clientName(Assets, "QnaAssets", "csharp");
+@@clientName(Error, "QnaAuthoringError", "csharp");
+@@clientName(ErrorCode, "QnaAuthoringErrorCode", "csharp");
+@@clientName(format, "FileFormat", "csharp");
+@@clientName(ImportQnaRecord.lastUpdatedDateTime, "LastUpdated", "csharp");
+@@clientName(InnerErrorCode, "QnaAuthoringInnerErrorCode", "csharp");
+@@clientName(InnerErrorModel, "QnaAuthoringInnerErrorModel", "csharp");
+@@clientName(jobStatus, "QnaAuthoringJobStatus", "csharp");
+@@clientName(ProjectDeployment.lastDeployedDateTime, "LastDeployed", "csharp");
+@@clientName(QnaPrompt.qna, "QnaRecord", "csharp");
+@@clientName(QnaRecord.activeLearningSuggestions,
+  "activeLearningSuggestionClusters ",
+  "csharp"
+);
+@@clientName(QuestionAnsweringAuthoringExportJobState.lastUpdatedDateTime,
+  "LastUpdated",
+  "csharp"
+);
+@@clientName(QuestionAnsweringProjectMetadata.configureSemanticRanking,
+  "IsConfiguredSemanticRankingEnabled",
+  "csharp"
+);
+@@clientName(QuestionAnsweringProjectMetadata.multilingualResource,
+  "IsMultilingualResource",
+  "csharp"
+);
+@@clientName(sourceKind, "KnowledgeBaseSourceKind", "csharp");
+@@clientName(WordAlterations, "WordAlterationsGroup", "csharp");
