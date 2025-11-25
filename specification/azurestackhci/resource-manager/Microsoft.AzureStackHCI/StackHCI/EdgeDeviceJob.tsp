@@ -62,7 +62,6 @@ interface EdgeDeviceJobs {
 
 @@doc(EdgeDeviceJob.name, "Name of EdgeDevice Job");
 
-
 // Models
 
 /**
