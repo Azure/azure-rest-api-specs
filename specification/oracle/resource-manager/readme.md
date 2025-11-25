@@ -158,6 +158,15 @@ input-file:
   - Oracle.Database/preview/2025-11-01-preview/openapi.json
 ```
 
+### Tag: package-2025-11-15-preview
+
+These settings apply only when `--tag=package-2025-11-15-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-11-15-preview'
+input-file:
+  - Oracle.Database/preview/2025-11-15-preview/openapi.json
+```
+
 ---
 
 # Code Generation
