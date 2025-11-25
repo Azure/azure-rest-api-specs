@@ -143,9 +143,6 @@ suppressions:
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/updates/{updateName}"].patch.parameters["schema"]
 
-      $.paths["/providers/Microsoft.BareMetal/locations/{location}/utilization"].get.responses["200"].schema.properties
-
-
   - code: PostResponseCodes
     reason: already used in GA api version, fixing it will cause breaking change
     from:
