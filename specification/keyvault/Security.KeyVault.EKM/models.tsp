@@ -12,6 +12,7 @@ namespace KeyVault;
 /**
  * A EkmConnection model object.
  */
+@added(KeyVault.Versions.v2026_01_01_preview)
 model EkmConnection {
   /**
    * EKM proxy FQDN (Fully Qualified Domain Name). Only allowed characters are a-z, A-Z, 0-9, hyphen (-), dot (.), and colon (:).
@@ -40,6 +41,7 @@ model EkmConnection {
 /**
  * EKM proxy client certificate information.
  */
+@added(KeyVault.Versions.v2026_01_01_preview)
 model EkmProxyClientCertificateInfo {
   /**
    * The client root CA certificate chain to authenticate to the EKM proxy. An array of certificates in the certificate chain, each in DER format and base64 encoded.
@@ -59,6 +61,7 @@ model EkmProxyClientCertificateInfo {
 /**
  * EKM proxy information.
  */
+@added(KeyVault.Versions.v2026_01_01_preview)
 model EkmProxyInfo {
   /**
    * The highest version of proxy interface API supported by the EKM Proxy.
