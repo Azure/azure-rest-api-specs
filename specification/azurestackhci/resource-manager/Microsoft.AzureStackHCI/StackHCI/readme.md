@@ -141,7 +141,7 @@ suppressions:
       - arcSettings.json
       - hci.json
     where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/updates/{updateName}"].patch.parameters["schema"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/updates/{updateName}"].patch.parameters[6]["schema"]
 
   - code: PostResponseCodes
     reason: already used in GA api version, fixing it will cause breaking change
