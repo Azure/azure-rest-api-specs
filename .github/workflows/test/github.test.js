@@ -15,7 +15,7 @@ const mockCore = createMockCore();
 describe("getCheckRuns", () => {
   it("returns matching check_run", async () => {
     const githubMock = createMockGithub();
-    githubMock.rest.checks.listForRef = vi.fn().mockResolvedValue({
+    githubMock.rest.checks.listForRef.mockResolvedValue({
       data: {
         check_runs: [
           {
@@ -27,13 +27,7 @@ describe("getCheckRuns", () => {
       },
     });
 
-    const actual = await getCheckRuns(
-      githubMock,
-      createMockContext(),
-      createMockCore(),
-      "checkRunName",
-      "head_sha",
-    );
+    const actual = await getCheckRuns(githubMock, createMockContext(), "checkRunName", "head_sha");
 
     expect(actual).toEqual([
       expect.objectContaining({
@@ -46,7 +40,7 @@ describe("getCheckRuns", () => {
 
   it("returns null when no check matches", async () => {
     const githubMock = createMockGithub();
-    githubMock.rest.checks.listForRef = vi.fn().mockResolvedValue({
+    githubMock.rest.checks.listForRef.mockResolvedValue({
       data: {
         check_runs: [],
       },
@@ -61,7 +55,7 @@ describe("getCheckRuns", () => {
     const githubMock = createMockGithub();
     const earlierDate = "2025-04-01T00:00:00Z";
     const laterDate = "2025-04-02T00:00:00Z";
-    githubMock.rest.checks.listForRef = vi.fn().mockResolvedValue({
+    githubMock.rest.checks.listForRef.mockResolvedValue({
       data: {
         check_runs: [
           {
@@ -102,7 +96,7 @@ describe("getCheckRuns", () => {
 describe("getWorkflowRuns", () => {
   it("returns matching workflow_run", async () => {
     const githubMock = createMockGithub();
-    githubMock.rest.actions.listWorkflowRunsForRepo = vi.fn().mockResolvedValue({
+    githubMock.rest.actions.listWorkflowRunsForRepo.mockResolvedValue({
       data: {
         workflow_runs: [
           {
@@ -132,7 +126,7 @@ describe("getWorkflowRuns", () => {
 
   it("returns null when no workflow matches", async () => {
     const githubMock = createMockGithub();
-    githubMock.rest.actions.listWorkflowRunsForRepo = vi.fn().mockResolvedValue({
+    githubMock.rest.actions.listWorkflowRunsForRepo.mockResolvedValue({
       data: {
         workflow_runs: [
           {
@@ -156,7 +150,7 @@ describe("getWorkflowRuns", () => {
     const githubMock = createMockGithub();
     const earlyDate = "2025-04-01T00:00:00Z";
     const laterDate = "2025-04-02T00:00:00Z";
-    githubMock.rest.actions.listWorkflowRunsForRepo = vi.fn().mockResolvedValue({
+    githubMock.rest.actions.listWorkflowRunsForRepo.mockResolvedValue({
       data: {
         workflow_runs: [
           {
@@ -221,7 +215,10 @@ describe("writeToActionsSummary function", () => {
 describe("createLogHook", () => {
   it("logs request info with body", () => {
     const mockLogger = createMockLogger();
-    const logHook = createLogHook((r) => r, mockLogger);
+    const logHook = createLogHook(
+      /** @type {import("@octokit/types").EndpointInterface} */ ((/** @type {any} */ r) => r),
+      mockLogger,
+    );
 
     expect(
       logHook({
@@ -241,7 +238,10 @@ describe("createLogHook", () => {
 
   it("logs request info without body", () => {
     const mockLogger = createMockLogger();
-    const logHook = createLogHook((r) => r, mockLogger);
+    const logHook = createLogHook(
+      /** @type {import("@octokit/types").EndpointInterface} */ ((/** @type {any} */ r) => r),
+      mockLogger,
+    );
 
     expect(
       logHook({
@@ -273,7 +273,11 @@ describe("createRateLimitHook", () => {
     const mockLogger = createMockLogger();
     const ratelimitHook = createRateLimitHook(mockLogger);
 
-    expect(ratelimitHook({ headers: {} })).toBeUndefined();
+    expect(
+      ratelimitHook(
+        /** @type {import("@octokit/types").OctokitResponse<any, number>} */ ({ headers: {} }),
+      ),
+    ).toBeUndefined();
 
     expect(mockLogger.info).toBeCalledTimes(0);
     expect(mockLogger.debug).toBeCalledTimes(1);
@@ -291,13 +295,15 @@ describe("createRateLimitHook", () => {
     const reset = (add(new Date(), 30 * Duration.Minute).getTime() / Duration.Second).toFixed(0);
 
     expect(
-      ratelimitHook({
-        headers: {
-          "x-ratelimit-limit": "100",
-          "x-ratelimit-remaining": "50",
-          "x-ratelimit-reset": reset,
-        },
-      }),
+      ratelimitHook(
+        /** @type {import("@octokit/types").OctokitResponse<any, number>} */ ({
+          headers: {
+            "x-ratelimit-limit": "100",
+            "x-ratelimit-remaining": "50",
+            "x-ratelimit-reset": reset,
+          },
+        }),
+      ),
     ).toBeUndefined();
     expect(mockLogger.info).toBeCalledTimes(1);
     expect(mockLogger.info.mock.calls[0]).toMatchInlineSnapshot(`
@@ -307,13 +313,15 @@ describe("createRateLimitHook", () => {
     `);
 
     expect(
-      ratelimitHook({
-        headers: {
-          "x-ratelimit-limit": "100",
-          "x-ratelimit-remaining": "75",
-          "x-ratelimit-reset": reset,
-        },
-      }),
+      ratelimitHook(
+        /** @type {import("@octokit/types").OctokitResponse<any, number>} */ ({
+          headers: {
+            "x-ratelimit-limit": "100",
+            "x-ratelimit-remaining": "75",
+            "x-ratelimit-reset": reset,
+          },
+        }),
+      ),
     ).toBeUndefined();
     expect(mockLogger.info).toBeCalledTimes(2);
     expect(mockLogger.info.mock.calls[1]).toMatchInlineSnapshot(`
@@ -323,13 +331,15 @@ describe("createRateLimitHook", () => {
     `);
 
     expect(
-      ratelimitHook({
-        headers: {
-          "x-ratelimit-limit": "100",
-          "x-ratelimit-remaining": "25",
-          "x-ratelimit-reset": reset,
-        },
-      }),
+      ratelimitHook(
+        /** @type {import("@octokit/types").OctokitResponse<any, number>} */ ({
+          headers: {
+            "x-ratelimit-limit": "100",
+            "x-ratelimit-remaining": "25",
+            "x-ratelimit-reset": reset,
+          },
+        }),
+      ),
     ).toBeUndefined();
     expect(mockLogger.info).toBeCalledTimes(3);
     expect(mockLogger.info.mock.calls[2]).toMatchInlineSnapshot(`
@@ -339,13 +349,15 @@ describe("createRateLimitHook", () => {
     `);
 
     expect(
-      ratelimitHook({
-        headers: {
-          "x-ratelimit-limit": "100",
-          "x-ratelimit-remaining": "0",
-          "x-ratelimit-reset": reset,
-        },
-      }),
+      ratelimitHook(
+        /** @type {import("@octokit/types").OctokitResponse<any, number>} */ ({
+          headers: {
+            "x-ratelimit-limit": "100",
+            "x-ratelimit-remaining": "0",
+            "x-ratelimit-reset": reset,
+          },
+        }),
+      ),
     ).toBeUndefined();
     expect(mockLogger.info).toBeCalledTimes(4);
     expect(mockLogger.info.mock.calls[3]).toMatchInlineSnapshot(`

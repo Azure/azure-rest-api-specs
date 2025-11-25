@@ -35,7 +35,7 @@ tag: package-preview-2025-10
 
 These settings apply only when `--tag=package-preview-2025-10` is specified on the command line.
 
-```yaml $(tag) == 'package-2025-10'
+```yaml $(tag) == 'package-preview-2025-10'
 input-file:
   - preview/2025-10-01-preview/openapi.json
 ```
