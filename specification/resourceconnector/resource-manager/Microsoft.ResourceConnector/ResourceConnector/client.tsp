@@ -29,3 +29,11 @@ using Microsoft.ResourceConnector;
   "SupportedVersionCatalogVersionDataField",
   "csharp"
 );
+@@clientName(Microsoft.ResourceConnector.ApplianceOperation,
+  "Operation",
+  "csharp"
+);
+@@clientName(Microsoft.ResourceConnector.ApplianceOperationValueDisplay,
+  "OperationDisplay",
+  "csharp"
+);
