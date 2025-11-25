@@ -215,63 +215,6 @@ union SSHKeyType {
 }
 
 /**
- * Appliances operation.
- */
-model ApplianceOperation {
-  /**
-   * Describes the properties of an Appliances Operation Value Display.
-   */
-  display?: ApplianceOperationValueDisplay;
-
-  /**
-   * Is this Operation a data plane operation
-   */
-  @visibility(Lifecycle.Read)
-  isDataAction?: boolean;
-
-  /**
-   * The name of the compute operation.
-   */
-  @visibility(Lifecycle.Read)
-  name?: string;
-
-  /**
-   * The origin of the compute operation.
-   */
-  @visibility(Lifecycle.Read)
-  origin?: string;
-}
-
-/**
- * Describes the properties of an Appliances Operation Value Display.
- */
-model ApplianceOperationValueDisplay {
-  /**
-   * The description of the operation.
-   */
-  @visibility(Lifecycle.Read)
-  description?: string;
-
-  /**
-   * The display name of the compute operation.
-   */
-  @visibility(Lifecycle.Read)
-  operation?: string;
-
-  /**
-   * The resource provider for the operation.
-   */
-  @visibility(Lifecycle.Read)
-  provider?: string;
-
-  /**
-   * The display name of the resource the operation applies to.
-   */
-  @visibility(Lifecycle.Read)
-  resource?: string;
-}
-
-/**
  * Identity for the resource.
  */
 model Identity {
@@ -722,8 +665,6 @@ model SupportedVersionCatalogVersionData {
   @visibility(Lifecycle.Read)
   version?: string;
 }
-
-model ApplianceOperationsList is Azure.Core.Page<ApplianceOperation>;
 
 model ApplianceListResult is Azure.Core.Page<Appliance>;
 

@@ -47,9 +47,4 @@ enum Versions {
   v2025_03_01_preview: "2025-03-01-preview",
 }
 
-interface Operations
-  extends Azure.ResourceManager.Legacy.Operations<
-      ArmResponse<ApplianceOperationsList>,
-      ErrorResponse
-    > {}
-@@doc(Operations.list, "Lists all available Appliances operations.");
+interface Operations extends Azure.ResourceManager.Operations {}
