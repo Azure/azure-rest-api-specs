@@ -12,10 +12,11 @@ namespace Microsoft.AzureStackHCI;
 /**
  * EdgeDevice Jobs resource
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "for backward compatibility, provisioningState is defined in EdgeDeviceProperties"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Edge Device Job is defined as empty model for backward compatibility"
 @parentResource(EdgeDevice)
 @discriminator("kind")
-model EdgeDeviceJob
-  is Azure.ResourceManager.ExtensionResource<EdgeDeviceJobPlaceholder> {
+model EdgeDeviceJob is Azure.ResourceManager.ExtensionResource<{}> {
   ...ResourceNameParameter<
     Resource = EdgeDeviceJob,
     KeyName = "jobsName",

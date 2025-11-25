@@ -14,9 +14,10 @@ namespace Microsoft.AzureStackHCI;
 /**
  * Edge device resource.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "for backward compatibility, provisioningState is defined in EdgeDeviceProperties"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Edge Device is defined as empty model for backward compatibility"
 @discriminator("kind")
-model EdgeDevice
-  is Azure.ResourceManager.ExtensionResource<EdgeDevicePlaceholder> {
+model EdgeDevice is Azure.ResourceManager.ExtensionResource<{}> {
   ...ResourceNameParameter<
     Resource = EdgeDevice,
     KeyName = "edgeDeviceName",
