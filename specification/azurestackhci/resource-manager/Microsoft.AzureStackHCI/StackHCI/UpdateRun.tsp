@@ -42,10 +42,7 @@ interface UpdateRuns {
    * Put Update runs for a specified update
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  put is ArmResourceCreateOrReplaceSync<
-    UpdateRun,
-    Response = ArmResourceUpdatedResponse<UpdateRun>
-  >;
+  put is ArmResourceCreateOrReplaceSync<UpdateRun>;
 
   /**
    * Delete specified Update Run

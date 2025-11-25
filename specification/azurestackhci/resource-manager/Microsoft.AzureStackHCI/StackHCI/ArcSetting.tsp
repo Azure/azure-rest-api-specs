@@ -35,11 +35,7 @@ interface ArcSettings {
   /**
    * Create ArcSetting for HCI cluster.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  create is ArmResourceCreateOrReplaceSync<
-    ArcSetting,
-    Response = ArmResourceUpdatedResponse<ArcSetting>
-  >;
+  create is ArmResourceCreateOrReplaceSync<ArcSetting>;
 
   /**
    * Update ArcSettings for HCI cluster.
@@ -85,7 +81,9 @@ interface ArcSettings {
     ArcSetting,
     void,
     ArmResponse<ArcIdentityResponse>,
-    LroHeaders = ArmAsyncOperationHeader<FinalResult = ArcIdentityResponse>
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = ArcIdentityResponse> &
+      Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader
   >;
 
   /**
