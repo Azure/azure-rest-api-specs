@@ -60,7 +60,10 @@ scalar AssetId extends string;
 @added(Versions.v2025_11_15_preview)
 model EvaluationRuleFilter {
   @doc("Filter by agent name.")
-  agentName: string;
+  agentName?: string;
+
+  @doc("Filter by agent name.")
+  agentId?: string;
 }
 
 @doc("Type of the evaluation rule event.")
@@ -73,6 +76,9 @@ union EvaluationRuleEventType {
 
   @doc("Manual trigger.")
   manual: "manual",
+
+  @doc("Trace scheduled run.")
+  traceScheduledRun: "traceScheduledRun",
 }
 
 @doc("Evaluation rule model.")
