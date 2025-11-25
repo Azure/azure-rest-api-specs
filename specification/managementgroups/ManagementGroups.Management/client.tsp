@@ -5,4 +5,4 @@ using Azure.ClientGenerator.Core;
 
 namespace ClientCustomizations;
 
-@@clientName(Microsoft.Management, "ManagementGroupsAPI", "python");
+@@clientName(Microsoft.Management, "ManagementGroupsMgmtClient", "python");
