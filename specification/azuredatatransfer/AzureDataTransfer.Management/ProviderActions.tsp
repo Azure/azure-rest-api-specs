@@ -38,7 +38,9 @@ interface AzureDataTransfer {
    */
   @added(Versions.v2025_05_30_preview)
   @autoRoute
-  listFlowProfiles is ArmProviderActionSync<
+  @removed(Versions.v2025_10_10_preview)
+  @renamedFrom(Versions.v2025_10_10_preview, "listFlowProfiles")
+  listFlowProfilesOld is ArmProviderActionSync<
     Request = ListFlowProfilesRequest,
     Response = {
       /**
@@ -48,6 +50,16 @@ interface AzureDataTransfer {
       @bodyRoot
       flowProfileList?: FlowProfileMetadata[];
     }
+  >;
+
+  /**
+   * Retrieves a list of FlowProfile resources associated with a specified pipeline.
+   */
+  @added(Versions.v2025_10_10_preview)
+  @autoRoute
+  listFlowProfiles is ArmProviderActionSync<
+    Request = ListFlowProfilesRequest,
+    Response = FlowProfilesListResult
   >;
 
   /**

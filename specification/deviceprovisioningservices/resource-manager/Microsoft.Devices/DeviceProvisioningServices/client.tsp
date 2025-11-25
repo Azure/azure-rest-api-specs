@@ -212,7 +212,7 @@ op IotDpsResourceDeleteCustomized(
 
 @@override(ProvisioningServiceDescriptions.delete,
   IotDpsResourceDeleteCustomized,
-  "python"
+  "python,go,java"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -236,7 +236,7 @@ op IotDpsResourceListKeysCustomized(
 
 @@override(ProvisioningServiceDescriptions.listKeys,
   IotDpsResourceListKeysCustomized,
-  "python"
+  "python,go,java,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -265,7 +265,7 @@ op IotDpsResourceGetOperationResultCustomized(
 
 @@override(ProvisioningServiceDescriptionOperations.getOperationResult,
   IotDpsResourceGetOperationResultCustomized,
-  "python"
+  "python,go,java,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -293,7 +293,7 @@ op IotDpsResourceListKeysForKeyNameCustomized(
 
 @@override(ProvisioningServiceDescriptions.listKeysForKeyName,
   IotDpsResourceListKeysForKeyNameCustomized,
-  "python"
+  "python,go,java,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -317,7 +317,7 @@ op IotDpsResourceListValidSkusCustomized(
 
 @@override(ProvisioningServiceDescriptions.listValidSkus,
   IotDpsResourceListValidSkusCustomized,
-  "python"
+  "python,go,java,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -340,5 +340,243 @@ op IotDpsResourceGetCustomized(
 
 @@override(ProvisioningServiceDescriptions.get,
   IotDpsResourceGetCustomized,
-  "python"
+  "python,go,java"
+);
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op CertificateResponseDeleteCustomized(
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  provider: "Microsoft.ThisWillBeReplaced",
+
+  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
+  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
+  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  ifMatch: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  provisioningServiceName: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  certificateName: string,
+
+  ...CertificateNameQuery2,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @query("certificate.rawBytes")
+  certificateRawBytes?: bytes,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @query("certificate.isVerified")
+  certificateIsVerified?: boolean,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @query("certificate.purpose")
+  certificatePurpose?: CertificatePurpose,
+
+  ...CertificateNameQuery3,
+  ...CertificateNameQuery4,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @query("certificate.hasPrivateKey")
+  certificateHasPrivateKey?: boolean,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @query("certificate.nonce")
+  certificateNonce?: string,
+): void;
+
+@@override(CertificateResponses.delete,
+  CertificateResponseDeleteCustomized,
+  "python,go,java"
+);
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op CertificateResponseGenerateVerificationCodeCustomized(
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  provider: "Microsoft.ThisWillBeReplaced",
+
+  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
+  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  certificateName: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  ifMatch: string,
+  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  provisioningServiceName: string,
+
+  ...CertificateNameQuery1,
+
+  /**
+   * Raw data of certificate.
+   */
+  @query("certificate.rawBytes")
+  certificateRawBytes?: bytes,
+
+  /**
+   * Indicates if the certificate has been verified by owner of the private key.
+   */
+  @query("certificate.isVerified")
+  certificateIsVerified?: boolean,
+
+  /**
+   * Description mentioning the purpose of the certificate.
+   */
+  @query("certificate.purpose")
+  certificatePurpose?: CertificatePurpose,
+
+  ...CertificateNameQuery3,
+  ...CertificateNameQuery4,
+
+  /**
+   * Indicates if the certificate contains private key.
+   */
+  @query("certificate.hasPrivateKey")
+  certificateHasPrivateKey?: boolean,
+
+  /**
+   * Random number generated to indicate Proof of Possession.
+   */
+  @query("certificate.nonce")
+  certificateNonce?: string,
+
+  @body
+  body: void,
+): VerificationCodeResponse;
+
+@@override(CertificateResponses.generateVerificationCode,
+  CertificateResponseGenerateVerificationCodeCustomized,
+  "python,go,java,javascript"
+);
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op CertificateResponseVerifyCertificateCustomized(
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  provider: "Microsoft.ThisWillBeReplaced",
+
+  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
+  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  certificateName: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  ifMatch: string,
+  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  provisioningServiceName: string,
+
+  ...CertificateNameQuery1,
+
+  /**
+   * Raw data of certificate.
+   */
+  @query("certificate.rawBytes")
+  certificateRawBytes?: bytes,
+
+  /**
+   * Indicates if the certificate has been verified by owner of the private key.
+   */
+  @query("certificate.isVerified")
+  certificateIsVerified?: boolean,
+
+  /**
+   * Describe the purpose of the certificate.
+   */
+  @query("certificate.purpose")
+  certificatePurpose?: CertificatePurpose,
+
+  ...CertificateNameQuery3,
+  ...CertificateNameQuery4,
+
+  /**
+   * Indicates if the certificate contains private key.
+   */
+  @query("certificate.hasPrivateKey")
+  certificateHasPrivateKey?: boolean,
+
+  /**
+   * Random number generated to indicate Proof of Possession.
+   */
+  @query("certificate.nonce")
+  certificateNonce?: string,
+
+  @body
+  request: VerificationCodeRequest,
+): CertificateListDescription;
+
+@@override(CertificateResponses.verifyCertificate,
+  CertificateResponseVerifyCertificateCustomized,
+  "python,go,java,javascript"
+);
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op CertificateResponseGetCustomized(
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  provider: "Microsoft.ThisWillBeReplaced",
+
+  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
+  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  certificateName: string,
+
+  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  provisioningServiceName: string,
+
+  /**
+   * ETag of the certificate.
+   */
+  @header("If-Match")
+  ifMatch?: string,
+): CertificateResponse;
+
+@@override(CertificateResponses.get,
+  CertificateResponseGetCustomized,
+  "python,go,java,javascript"
+);
+
+// Java-specific client name fixes to mitigate TypeSpec migration breaks
+@@clientName(Microsoft.Devices.IotDpsPropertiesDescription.deviceProvisioningHostName,
+  "deviceProvisioningHostname",
+  "java"
+);
+@@clientName(Microsoft.Devices.IotDpsPropertiesDescription.serviceOperationsHostName,
+  "serviceOperationsHostname",
+  "java"
+);
+@@clientName(Microsoft.Devices.ProvisioningServiceDescription.resourcegroup,
+  "resourceGroup",
+  "java"
+);
+@@clientName(SharedAccessSignatureAuthorizationRuleAccessRightsDescription,
+  "SharedAccessSignatureAuthorizationRule",
+  "java"
 );
