@@ -78,7 +78,7 @@ interface Issue {
   addInvestigationResult is ArmResourceActionSync<
     IssueResource,
     InvestigationResult,
-    InvestigationMetadata
+    InvestigationResult
   >;
   @doc("Fetch investigation result")
   fetchInvestigationResult is ArmResourceActionSync<
