@@ -47,6 +47,7 @@ interface Issue {
       @query
       related?: string;
 
+      @removed(Versions.v2025_10_03)
       @doc("Whether to automatically start an investigation once the issue is created (default: false)")
       @query
       startInvestigation?: boolean;
@@ -65,10 +66,18 @@ interface Issue {
   @doc("List all issues under the parent")
   list is ArmResourceListByParent<IssueResource>;
 
+  @removed(Versions.v2025_10_03)
   @doc("Start a new investigation")
   startInvestigation is ArmResourceActionSync<
     IssueResource,
     StartInvestigationParameters,
+    InvestigationMetadata
+  >;
+  @added(Versions.v2025_10_03)
+  @doc("Adds investigation result")
+  addInvestigationResult is ArmResourceActionSync<
+    IssueResource,
+    InvestigationResult,
     InvestigationMetadata
   >;
   @doc("Fetch investigation result")
