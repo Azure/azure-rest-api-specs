@@ -29,13 +29,6 @@ model Update is Azure.ResourceManager.ProxyResource<UpdateProperties> {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   location?: string;
-
-  /**
-   * Resource tags.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-  tags?: Record<string>;
 }
 
 @armResourceOperations
@@ -43,23 +36,20 @@ interface Updates {
   /**
    * Get specified Update
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   get is ArmResourceRead<Update>;
 
   /**
    * Put specified Update
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   put is ArmResourceCreateOrReplaceSync<
     Update,
-    Response = ArmResourceCreatedResponse<Update> | ArmResourceUpdatedResponse<Update>
+    Response = ArmResourceUpdatedResponse<Update>
   >;
 
   /**
    * Delete specified Update
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
@@ -72,13 +62,11 @@ interface Updates {
   /**
    * List all Updates
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   list is ArmResourceListByParent<Update, Response = ArmResponse<UpdateList>>;
 
   /**
    * Apply Update
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @action("apply")
   post is ArmResourceActionAsync<
     Update,
@@ -141,26 +129,30 @@ model UpdateProperties {
   /**
    * An array of component versions for a Solution Bundle update, and an empty array otherwise.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   @identifiers(#["version"])
   componentVersions?: PackageVersionInfo[];
 
   /**
    * Whether a reboot is required after applying the update.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   rebootRequired?: RebootRequirement;
 
   /**
    * Overall health state for update-specific health checks.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   healthState?: HealthState;
 
   /**
    * An array of PrecheckResult objects.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   healthCheckResult?: PrecheckResult[];
 
   /**
@@ -217,7 +209,8 @@ model UpdateProperties {
   /**
    * Additional information regarding the state of the update. See definition of UpdateStateProperties type below for more details on this property.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   updateStateProperties?: UpdateStateProperties;
 }
 

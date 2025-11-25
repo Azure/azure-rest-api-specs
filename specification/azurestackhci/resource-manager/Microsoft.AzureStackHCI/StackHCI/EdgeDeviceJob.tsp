@@ -7,16 +7,14 @@ import "./EdgeDevice.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.AzureStackHCI;
 /**
  * EdgeDevice Jobs resource
  */
 @parentResource(EdgeDevice)
-model EdgeDeviceJob
-  is Azure.ResourceManager.ExtensionResource<EdgeDeviceJobProperties> {
+@discriminator("kind")
+model EdgeDeviceJob is Azure.ResourceManager.ExtensionResource<EdgeDeviceJobPlaceholder> {
   ...ResourceNameParameter<
     Resource = EdgeDeviceJob,
     KeyName = "jobsName",
@@ -36,38 +34,24 @@ interface EdgeDeviceJobs {
   /**
    * Get a EdgeDeviceJob
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  get is Azure.ResourceManager.Extension.Read<
-    Azure.ResourceManager.Extension.ScopeParameter,
-    EdgeDeviceJob
-  >;
+  get is ArmResourceRead<EdgeDeviceJob>;
 
   /**
    * Create a EdgeDeviceJob
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  createOrUpdate is Azure.ResourceManager.Extension.CreateOrReplaceAsync<
-    Azure.ResourceManager.Extension.ScopeParameter,
-    EdgeDeviceJob
-  >;
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Follow existing naming for backward compatibility"
+  CreateOrUpdate is ArmResourceCreateOrUpdateAsync<EdgeDeviceJob>;
 
   /**
    * Delete a EdgeDeviceJob
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  delete is Azure.ResourceManager.Extension.DeleteWithoutOkAsync<
-    Azure.ResourceManager.Extension.ScopeParameter,
-    EdgeDeviceJob
-  >;
+  delete is ArmResourceDeleteWithoutOkAsync<EdgeDeviceJob>;
 
   /**
    * List EdgeDeviceJob resources by EdgeDevice
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  listByEdgeDevice is Azure.ResourceManager.Extension.ListByTarget<
-    Azure.ResourceManager.Extension.ScopeParameter,
-    EdgeDeviceJob
-  >;
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Follow existing naming for backward compatibility"
+  listByEdgeDevice is ArmResourceListByParent<EdgeDeviceJob>;
 }
 
 @@doc(EdgeDeviceJob.name, "Name of EdgeDevice Job");
@@ -78,256 +62,9 @@ interface EdgeDeviceJobs {
 // Models
 
 /**
- * Azure Linux Collect Log Job Properties.
- */
-model AzureLinuxCollectLogJobProperties
-  extends AzureLinuxEdgeDeviceJobProperties {
-  /**
-   * From date for log collection.
-   */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  fromDate: utcDateTime;
-
-  /**
-   * To date for log collection.
-   */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  toDate: utcDateTime;
-
-  /**
-   * To date for log collection.
-   */
-  @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  lastLogGenerated?: utcDateTime;
-
-  /**
-   * log collection job reported properties.
-   */
-  @visibility(Lifecycle.Read)
-  reportedProperties?: LogCollectionReportedProperties;
-
-  /**
-   * Job Type to support polymorphic resource.
-   */
-  jobType: "CollectLog";
-}
-
-/**
- * Validation / deployment status details for Job.
- */
-model EdgeDeviceJobsEceActionStatus {
-  /**
-   * Job status.
-   */
-  @visibility(Lifecycle.Read)
-  status?: string;
-
-  /**
-   * List of steps of Edge device job.
-   */
-  @visibility(Lifecycle.Read)
-  @identifiers(#["name"])
-  steps?: EdgeDeviceJobsStep[];
-}
-
-/**
- * Step details during job execution.
- */
-model EdgeDeviceJobsStep {
-  /**
-   * Name of step.
-   */
-  @visibility(Lifecycle.Read)
-  name?: string;
-
-  /**
-   * Description of step.
-   */
-  @visibility(Lifecycle.Read)
-  description?: string;
-
-  /**
-   * FullStepIndex of step.
-   */
-  @visibility(Lifecycle.Read)
-  fullStepIndex?: string;
-
-  /**
-   * Start time in utc of step.
-   */
-  @visibility(Lifecycle.Read)
-  startTimeUtc?: string;
-
-  /**
-   * End time in utc of step.
-   */
-  @visibility(Lifecycle.Read)
-  endTimeUtc?: string;
-
-  /**
-   * Status of step. Allowed values are 'Error', 'Success', 'InProgress'
-   */
-  @visibility(Lifecycle.Read)
-  status?: string;
-
-  /**
-   * List of nested steps during job execution..
-   */
-  @visibility(Lifecycle.Read)
-  @identifiers(#["name"])
-  steps?: EdgeDeviceJobsStep[];
-
-  /**
-   * List of exceptions in job execution.
-   */
-  @visibility(Lifecycle.Read)
-  exception?: string[];
-}
-
-/**
- * Represents a session for collecting logs from an edge device.
- */
-model EdgeDeviceJobsLogCollectionSession {
-  /**
-   * The timestamp when log collection started, in ISO 8601 format.
-   */
-  @visibility(Lifecycle.Read)
-  startTime?: string;
-
-  /**
-   * The timestamp when log collection ended, in ISO 8601 format.
-   */
-  @visibility(Lifecycle.Read)
-  endTime?: string;
-
-  /**
-   * The total time logs were collected for, in ISO 8601 duration format.
-   */
-  @visibility(Lifecycle.Read)
-  timeCollected?: string;
-
-  /**
-   * The size of the collected logs in bytes.
-   */
-  @visibility(Lifecycle.Read)
-  logSize?: int32;
-
-  /**
-   * The status of the log collection session.
-   */
-  @visibility(Lifecycle.Read)
-  status?: DeviceLogCollectionStatus;
-
-  /**
-   * A unique identifier for correlating this log collection session with other operations or sessions.
-   */
-  @visibility(Lifecycle.Read)
-  correlationId?: string;
-}
-
-/**
- * Edge device job properties
- */
-@discriminator("jobType")
-model AzureLinuxEdgeDeviceJobProperties {
-  /**
-   * Deployment mode to trigger job.
-   */
-  deploymentMode?: DeploymentMode;
-
-  /**
-   * Job provisioning state
-   */
-  @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
-
-  /**
-   * Unique, immutable job id.
-   */
-  @visibility(Lifecycle.Read)
-  jobId?: string;
-
-  /**
-   * The UTC date and time at which the job started.
-   */
-  @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  startTimeUtc?: utcDateTime;
-
-  /**
-   * The UTC date and time at which the job completed.
-   */
-  @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  endTimeUtc?: utcDateTime;
-
-  /**
-   * Status of Edge device job.
-   */
-  @visibility(Lifecycle.Read)
-  status?: JobStatus;
-
-  /**
-   * Job Type to support polymorphic resource.
-   */
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  jobType: AzureLinuxEdgeDeviceJobType;
-}
-
-/**
- * Edge device job for Azure Linux solution.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Backward Compatibility"
-model AzureLinuxEdgeDeviceJob extends EdgeDeviceJob {
-  /**
-   * Edge device job properties
-   */
-  properties: AzureLinuxEdgeDeviceJobProperties;
-
-  /**
-   * Edge Solution type to support polymorphic resource.
-   */
-  kind: "AzureLinux";
-}
-
-/**
- * Represents the properties of an Azure Linux Remote Support job.
- */
-model AzureLinuxRemoteSupportJobProperties
-  extends AzureLinuxEdgeDeviceJobProperties {
-  /**
-   * Remote support access level.
-   */
-  accessLevel: RemoteSupportAccessLevel;
-
-  /**
-   * Remote support expiration timestamp.
-   */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  expirationTimestamp: utcDateTime;
-
-  /**
-   * Remote support type.
-   */
-  type: RemoteSupportType;
-
-  /**
-   * log collection job reported properties.
-   */
-  @visibility(Lifecycle.Read)
-  reportedProperties?: RemoteSupportReportedProperties;
-
-  /**
-   * Job Type to support polymorphic resource.
-   */
-  jobType: "RemoteSupport";
-}
-
-/**
  * Represents the reported properties of a remote support job.
  */
-model RemoteSupportReportedProperties {
+model RemoteSupportJobReportedProperties {
   /**
    * The percentage of the job that is complete.
    */
@@ -338,19 +75,19 @@ model RemoteSupportReportedProperties {
    * Validation status of job.
    */
   @visibility(Lifecycle.Read)
-  validationStatus?: EdgeDeviceJobsEceActionStatus;
+  validationStatus?: EceActionStatus;
 
   /**
    * Deployment status of job.
    */
   @visibility(Lifecycle.Read)
-  deploymentStatus?: EdgeDeviceJobsEceActionStatus;
+  deploymentStatus?: EceActionStatus;
 
   /**
    * Optional settings for configuring the node for remote support.
    */
   @visibility(Lifecycle.Read)
-  nodeSettings?: EdgeDeviceJobsRemoteSupportNodeSettings;
+  nodeSettings?: RemoteSupportJobNodeSettings;
 
   /**
    * Details of the remote support session.
@@ -363,7 +100,7 @@ model RemoteSupportReportedProperties {
 /**
  * Represents the settings of a remote support node.
  */
-model EdgeDeviceJobsRemoteSupportNodeSettings {
+model RemoteSupportJobNodeSettings {
   /**
    * The state of the remote support node.
    */
@@ -630,7 +367,7 @@ model HciRemoteSupportJobProperties extends HciEdgeDeviceJobProperties {
    * log collection job reported properties.
    */
   @visibility(Lifecycle.Read)
-  reportedProperties?: RemoteSupportReportedProperties;
+  reportedProperties?: RemoteSupportJobReportedProperties;
 
   /**
    * Job Type to support polymorphic resource.
@@ -662,5 +399,5 @@ model RemoteSupportJobProperties {
    * log collection job reported properties.
    */
   @visibility(Lifecycle.Read)
-  reportedProperties?: RemoteSupportReportedProperties;
+  reportedProperties?: RemoteSupportJobReportedProperties;
 }

@@ -7,6 +7,7 @@ import "./Cluster.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
+using Azure.ClientGenerator.Core;
 
 namespace Microsoft.AzureStackHCI;
 /**
@@ -27,25 +28,21 @@ interface DeploymentSettings {
   /**
    * Get a DeploymentSetting
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   get is ArmResourceRead<DeploymentSetting>;
 
   /**
    * Create a DeploymentSetting
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<DeploymentSetting>;
 
   /**
    * Delete a DeploymentSetting
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   delete is ArmResourceDeleteWithoutOkAsync<DeploymentSetting>;
 
   /**
    * List DeploymentSetting resources by Clusters
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   listByClusters is ArmResourceListByParent<DeploymentSetting>;
 }
 
@@ -116,7 +113,7 @@ model ScaleUnits {
   /**
    * Deployment Data to deploy AzureStackHCI Cluster.
    */
-  deploymentData: DeploymentDataContent;
+  deploymentData: DeploymentData;
 
   /**
    * Solution builder extension (SBE) partner properties
@@ -127,7 +124,7 @@ model ScaleUnits {
 /**
  * The Deployment data of AzureStackHCI Cluster.
  */
-model DeploymentDataContent {
+model DeploymentData {
   /**
    * SecuritySettings to deploy AzureStackHCI Cluster.
    */
@@ -142,6 +139,11 @@ model DeploymentDataContent {
    * Observability config to deploy AzureStackHCI Cluster.
    */
   cluster?: DeploymentCluster;
+
+  /**
+   * Identity Provider for the cluster
+   */
+  identityProvider?: IdentityProvider;
 
   /**
    * Storage config to deploy AzureStackHCI Cluster.
@@ -174,12 +176,7 @@ model DeploymentDataContent {
   /**
    * HostNetwork config to deploy AzureStackHCI Cluster.
    */
-  hostNetwork?: DeploymentSettingsHostNetwork;
-
-  /**
-   * Cloud Environment of the cluster. (e.g. AzurePublic, ALDO )
-   */
-  cloudEnvironment?: string;
+  hostNetwork?: DeploymentHostNetwork;
 
   /**
    * Is Management Cluster, when true indicates that the cluster is used for managing other clusters
@@ -246,7 +243,7 @@ model DeploymentSecuritySettings {
   /**
    * When set to true, Credential Guard is enabled.
    */
-  credentialGuardEnforced?: boolean;
+  credentialGuardEnforced?: boolean = false;
 
   /**
    * When set to true, the SMB default instance requires sign in for the client and server services.
@@ -256,7 +253,7 @@ model DeploymentSecuritySettings {
   /**
    * When set to true, cluster east-west traffic is encrypted.
    */
-  smbClusterEncryption?: boolean;
+  smbClusterEncryption?: boolean = false;
 
   /**
    * When set to true, all the side channel mitigations are enabled
@@ -319,11 +316,6 @@ model DeploymentCluster {
   witnessPath?: string;
 
   /**
-   * The authentication mode for the cluster witness. An example value 'ManagedIdentity'.
-   */
-  witnessAuthenticationMode?: string;
-
-  /**
    * Specify the Azure Storage account name for cloud witness for your Azure Stack HCI cluster.
    */
   cloudAccountName?: string;
@@ -376,6 +368,17 @@ model InfrastructureNetwork {
   ipPools?: IpPools[];
 
   /**
+   * Specifies how DNS servers are configured for the infrastructure network. Allowed values are 'UseDnsServer' to use the provided DNS servers, and 'UseForwarder' to use DNS forwarders.
+   */
+  dnsServerConfig?: DnsServerConfig = DnsServerConfig.UseDnsServer;
+
+  /**
+   * Details of the DNS Zones to be configured.
+   */
+  @identifiers(#["dnsZoneName"])
+  dnsZones?: DnsZones[];
+
+  /**
    * IPv4 address of the DNS servers in your environment.
    */
   dnsServers?: string[];
@@ -384,6 +387,21 @@ model InfrastructureNetwork {
    * Allows customers to use DHCP for Hosts and Cluster IPs. If not declared, the deployment will default to static IPs. When true, GW and DNS servers are not required
    */
   useDhcp?: boolean;
+}
+
+/**
+ * Details of the DNS Zones to be configured.
+ */
+model DnsZones {
+  /**
+   * Name of the DNS Zone to be configured.
+   */
+  dnsZoneName?: string;
+
+  /**
+   * Forwarder details of the DNS Zone to be configured.
+   */
+  dnsForwarder?: string[];
 }
 
 /**
@@ -417,36 +435,9 @@ model PhysicalNodes {
 }
 
 /**
- * The HostNetwork of a cluster.
- */
-model DeploymentSettingsHostNetwork {
-  /**
-   * The network intents assigned to the network reference pattern used for the deployment. Each intent will define its own name, traffic type, adapter names, and overrides as recommended by your OEM.
-   */
-  @identifiers(#["name"])
-  intents?: DeploymentSettingsIntents[];
-
-  /**
-   * List of StorageNetworks config to deploy AzureStackHCI Cluster.
-   */
-  @identifiers(#["name"])
-  storageNetworks?: DeploymentSettingsStorageNetworks[];
-
-  /**
-   * Defines how the storage adapters between nodes are connected either switch or switch less..
-   */
-  storageConnectivitySwitchless?: boolean;
-
-  /**
-   * Optional parameter required only for 3 Nodes Switchless deployments. This allows users to specify IPs and Mask for Storage NICs when Network ATC is not assigning the IPs for storage automatically.
-   */
-  enableStorageAutoIp?: boolean;
-}
-
-/**
  * The Intents of a cluster.
  */
-model DeploymentSettingsIntents {
+model DeploymentIntents {
   /**
    * Name of the network intent you wish to create.
    */
@@ -465,12 +456,12 @@ model DeploymentSettingsIntents {
   /**
    * This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.
    */
-  overrideVirtualSwitchConfiguration?: boolean;
+  overrideVirtualSwitchConfiguration?: boolean = false;
 
   /**
    * Set virtualSwitch ConfigurationOverrides for cluster.
    */
-  virtualSwitchConfigurationOverrides?: DeploymentSettingsVirtualSwitchConfigurationOverrides;
+  virtualSwitchConfigurationOverrides?: DeploymentVirtualSwitchConfigurationOverrides;
 
   /**
    * This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.
@@ -490,13 +481,40 @@ model DeploymentSettingsIntents {
   /**
    * Set Adapter PropertyOverrides for cluster.
    */
-  adapterPropertyOverrides?: DeploymentSettingsAdapterPropertyOverrides;
+  adapterPropertyOverrides?: DeploymentAdapterPropertyOverrides;
+}
+
+/**
+ * The HostNetwork of a cluster.
+ */
+model DeploymentHostNetwork {
+  /**
+   * The network intents assigned to the network reference pattern used for the deployment. Each intent will define its own name, traffic type, adapter names, and overrides as recommended by your OEM.
+   */
+  @identifiers(#["name"])
+  intents?: DeploymentIntents[];
+
+  /**
+   * List of StorageNetworks config to deploy AzureStackHCI Cluster.
+   */
+  @identifiers(#["name"])
+  storageNetworks?: DeploymentStorageNetworks[];
+
+  /**
+   * Defines how the storage adapters between nodes are connected either switch or switch less..
+   */
+  storageConnectivitySwitchless?: boolean = false;
+
+  /**
+   * Optional parameter required only for 3 Nodes Switchless deployments. This allows users to specify IPs and Mask for Storage NICs when Network ATC is not assigning the IPs for storage automatically.
+   */
+  enableStorageAutoIp?: boolean = false;
 }
 
 /**
  * The VirtualSwitchConfigurationOverrides of a cluster.
  */
-model DeploymentSettingsVirtualSwitchConfigurationOverrides {
+model DeploymentVirtualSwitchConfigurationOverrides {
   /**
    * Enable IoV for Virtual Switch
    */
@@ -511,7 +529,8 @@ model DeploymentSettingsVirtualSwitchConfigurationOverrides {
 /**
  * The AdapterPropertyOverrides of a cluster.
  */
-model DeploymentSettingsAdapterPropertyOverrides {
+@clientName("AdapterPropertyOverrides")
+model DeploymentAdapterPropertyOverrides {
   /**
    * This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.
    */
@@ -531,7 +550,7 @@ model DeploymentSettingsAdapterPropertyOverrides {
 /**
  * The StorageNetworks of a cluster.
  */
-model DeploymentSettingsStorageNetworks {
+model DeploymentStorageNetworks {
   /**
    * Name of the storage network.
    */
@@ -552,13 +571,13 @@ model DeploymentSettingsStorageNetworks {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "model nomenclature"
   @identifiers(#["physicalNode"])
-  storageAdapterIPInfo?: DeploymentSettingsStorageAdapterIPInfo[];
+  storageAdapterIPInfo?: StorageAdapterIPInfo[];
 }
 
 /**
  * The StorageAdapter physical nodes of a cluster.
  */
-model DeploymentSettingsStorageAdapterIPInfo {
+model StorageAdapterIPInfo {
   /**
    * storage adapter physical node name.
    */

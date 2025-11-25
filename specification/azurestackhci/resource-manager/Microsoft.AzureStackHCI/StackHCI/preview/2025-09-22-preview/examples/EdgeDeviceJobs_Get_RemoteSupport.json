@@ -2,16 +2,20 @@
   "title": "EdgeDeviceJobs_Get_RemoteSupport",
   "operationId": "EdgeDeviceJobs_Get",
   "parameters": {
-    "api-version": "2025-09-22-preview",
+    "api-version": "2025-11-01-preview",
     "resourceUri": "subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.HybridCompute/machines/Node-1",
     "edgeDeviceName": "-5M1G7G10OZ-o5b-HS3-c72",
-    "jobsName": "-oUxs",
-    "scope": "subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg"
+    "jobsName": "-oUxs"
   },
   "responses": {
     "200": {
       "body": {
-        "properties": {},
+        "properties": {
+          "jobType": "RemoteSupport",
+          "accessLevel": "Diagnostics",
+          "type": "Enable",
+          "expirationTimestamp": "2024-01-29T10:43:27.9471574Z"
+        },
         "kind": "HCI",
         "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.HybridCompute/machines/Node-1/providers/Microsoft.AzureStackHCI/edgeDevices/default/jobs/RemoteSupport",
         "name": "collectLog",

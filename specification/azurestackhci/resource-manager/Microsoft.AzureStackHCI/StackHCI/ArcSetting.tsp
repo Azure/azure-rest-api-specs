@@ -9,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Azure.ClientGenerator.Core;
 
 namespace Microsoft.AzureStackHCI;
 /**
@@ -29,31 +30,27 @@ interface ArcSettings {
   /**
    * Get ArcSetting resource details of HCI Cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   get is ArmResourceRead<ArcSetting>;
 
   /**
    * Create ArcSetting for HCI cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   create is ArmResourceCreateOrReplaceSync<
     ArcSetting,
-    Response = ArmResourceCreatedResponse<ArcSetting> | ArmResourceUpdatedResponse<ArcSetting>
+    Response = ArmResourceUpdatedResponse<ArcSetting>
   >;
 
   /**
    * Update ArcSettings for HCI cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Resource PATCH models must be a subset of the resource model, for backward compatibility arcSetting didnt have this property"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<ArcSetting, PatchModel = ArcSettingsPatch>;
 
   /**
    * Delete ArcSetting resource details of HCI Cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     ArcSetting,
@@ -65,7 +62,6 @@ interface ArcSettings {
   /**
    * Get ArcSetting resources of HCI Cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   listByCluster is ArmResourceListByParent<
     ArcSetting,
     Response = ArmResponse<ArcSettingList>
@@ -74,7 +70,6 @@ interface ArcSettings {
   /**
    * Generate password for arc settings.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   generatePassword is ArmResourceActionSync<
     ArcSetting,
     void,
@@ -84,21 +79,18 @@ interface ArcSettings {
   /**
    * Create Aad identity for arc settings.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "not including ArmLroLocationHeader for backward compatibility"
   @action("createArcIdentity")
   createIdentity is ArmResourceActionAsync<
     ArcSetting,
     void,
-    ArmResponse<StackHciArcIdentityResponseResult>,
-    LroHeaders = ArmAsyncOperationHeader<FinalResult = StackHciArcIdentityResponseResult> &
-      Azure.Core.Foundations.RetryAfterHeader &
-      ArmLroLocationHeader
+    ArmResponse<ArcIdentityResponse>,
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = ArcIdentityResponse>
   >;
 
   /**
    * Reconcile Arc Settings with information related to all nodes.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   reconcile is ArmResourceActionAsync<
     ArcSetting,
     ReconcileArcSettingsRequest,
@@ -111,7 +103,6 @@ interface ArcSettings {
   /**
    * Add consent time for default extensions and initiate extensions installation
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   consentAndInstallDefaultExtensions is ArmResourceActionSync<
     ArcSetting,
     void,
@@ -121,7 +112,6 @@ interface ArcSettings {
   /**
    * Initializes ARC Disable process on the cluster
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   initializeDisableProcess is ArmResourceActionAsync<
     ArcSetting,
     void,
@@ -157,12 +147,6 @@ model ArcSettingList is Azure.Core.Page<ArcSetting>;
  * ArcSetting properties.
  */
 model ArcSettingProperties {
-  /**
-   * Resource tags.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  tags?: Record<string>;
-
   /**
    * Provisioning state of the ArcSetting proxy resource.
    */
@@ -271,9 +255,16 @@ model DefaultExtensionDetails {
  */
 model ArcSettingsPatch {
   /**
+   * Resource tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  tags?: Record<string>;
+
+  /**
    * ArcSettings properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: ArcSettingsPatchProperties;
 }
 
@@ -281,12 +272,6 @@ model ArcSettingsPatch {
  * ArcSettings properties.
  */
 model ArcSettingsPatchProperties {
-  /**
-   * Resource tags.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  tags?: Record<string>;
-
   /**
    * contains connectivity related configuration for ARC resources
    */
@@ -323,12 +308,12 @@ model PasswordCredential {
 /**
  * ArcIdentity details.
  */
-model StackHciArcIdentityResponseResult {
+model ArcIdentityResponse {
   /**
    * ArcIdentity properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @visibility(Lifecycle.Read)
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: ArcIdentityResponseProperties;
 }
 

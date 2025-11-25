@@ -1,4 +1,5 @@
 import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-client-generator-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Azure.ClientGenerator.Core;
 
 namespace Microsoft.AzureStackHCI;
 /**
@@ -21,37 +23,36 @@ model Cluster is Azure.ResourceManager.TrackedResource<ClusterProperties> {
     NamePattern = ""
   >;
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
+  ...ResourceKindProperty;
 }
+
+@@doc(Cluster.kind, "This property identifies the purpose of the Cluster deployment. For example, a valid value is AzureLocal.");
 
 @armResourceOperations
 interface Clusters {
   /**
    * Get HCI cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   get is ArmResourceRead<Cluster>;
 
   /**
    * Create an HCI cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   create is ArmResourceCreateOrReplaceAsync<
     Cluster,
-    Response = ArmResourceCreatedResponse<Cluster> | ArmResourceUpdatedResponse<Cluster>
+    Response = ArmResourceUpdatedResponse<Cluster>
   >;
 
   /**
    * Update an HCI cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<Cluster, PatchModel = ClusterPatch>;
 
   /**
    * Delete an HCI cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     Cluster,
@@ -61,7 +62,6 @@ interface Clusters {
   /**
    * List all HCI clusters in a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   listByResourceGroup is ArmResourceListByParent<
     Cluster,
     Response = ArmResponse<ClusterList>
@@ -70,7 +70,6 @@ interface Clusters {
   /**
    * List all HCI clusters in a subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   listBySubscription is ArmListBySubscription<
     Cluster,
     Response = ArmResponse<ClusterList>
@@ -79,7 +78,6 @@ interface Clusters {
   /**
    * Update cluster secrets locations.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   updateSecretsLocations is ArmResourceActionAsync<
     Cluster,
     SecretsLocationsChangeRequest,
@@ -89,7 +87,6 @@ interface Clusters {
   /**
    * Upload certificate.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   uploadCertificate is ArmResourceActionNoResponseContentAsync<
     Cluster,
     UploadCertificateRequest
@@ -98,21 +95,23 @@ interface Clusters {
   /**
    * Create cluster identity.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "not including ArmLroLocationHeader for backward compatibility"
   @action("createClusterIdentity")
   createIdentity is ArmResourceActionAsync<
     Cluster,
     void,
-    ArmResponse<StackHciClusterIdentityResponseResult>,
-    LroHeaders = ArmAsyncOperationHeader<FinalResult = StackHciClusterIdentityResponseResult> &
-      Azure.Core.Foundations.RetryAfterHeader &
-      ArmLroLocationHeader
+    ArmResponse<ClusterIdentityResponse>,
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = ClusterIdentityResponse>
   >;
+
+  /**
+   * Changes ring of a cluster
+   */
+  changeRing is ArmResourceActionAsync<Cluster, ChangeRingRequest, Cluster>;
 
   /**
    * Extends Software Assurance Benefit to a cluster
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   extendSoftwareAssuranceBenefit is ArmResourceActionAsync<
     Cluster,
     SoftwareAssuranceChangeRequest,
@@ -122,7 +121,6 @@ interface Clusters {
   /**
    * Trigger Log Collection on a cluster
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   triggerLogCollection is ArmResourceActionAsync<
     Cluster,
     LogCollectionRequest,
@@ -132,31 +130,10 @@ interface Clusters {
   /**
    * Configure RemoteSupport on a cluster
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   configureRemoteSupport is ArmResourceActionAsync<
     Cluster,
     RemoteSupportRequest,
     Cluster
-  >;
-
-  /**
-   * List Offers available across publishers for the HCI Cluster.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @get
-  @action("offers")
-  @operationId("Offers_ListByCluster")
-  listByCluster is ArmResourceActionSync<
-    Cluster,
-    void,
-    ArmResponse<OfferList>,
-    Parameters = {
-      /**
-       * Specify $expand=content,contentVersion to populate additional fields related to the marketplace offer.
-       */
-      @query("$expand")
-      $expand?: string;
-    }
   >;
 }
 
@@ -207,10 +184,22 @@ model ClusterProperties {
   connectivityStatus?: ConnectivityStatus;
 
   /**
+   * Indicates whether the cluster is under support.
+   */
+  @visibility(Lifecycle.Read)
+  supportStatus?: SupportStatus;
+
+  /**
    * Unique, immutable resource id.
    */
   @visibility(Lifecycle.Read)
   cloudId?: string;
+
+  /**
+   * The ring to which this cluster belongs to.
+   */
+  @visibility(Lifecycle.Read)
+  ring?: string;
 
   /**
    * Endpoint configured for management from the Azure portal.
@@ -243,21 +232,10 @@ model ClusterProperties {
   softwareAssuranceProperties?: SoftwareAssuranceProperties;
 
   /**
-   * Cloud Environment of the cluster. (e.g. AzurePublic, ALDO )
-   */
-  @visibility(Lifecycle.Read)
-  cloudEnvironment?: string;
-
-  /**
    * Is Management Cluster, when true indicates that the cluster is used for managing other clusters
    */
   @visibility(Lifecycle.Read)
   isManagementCluster?: boolean;
-
-  /**
-   * Cluster Witness properties of the cluster. A cluster witness is a resource (such as a storage account or file share) that helps maintain quorum and supports automatic failover in high-availability cluster configurations.
-   */
-  clusterWitness?: ClusterWitnessProperties;
 
   /**
    * Log Collection properties of the cluster.
@@ -348,6 +326,34 @@ model ClusterProperties {
    */
   @identifiers(#["localAvailabilityZoneName"])
   localAvailabilityZones?: LocalAvailabilityZones[];
+
+  /**
+   * Identity Provider for the cluster
+   */
+  @visibility(Lifecycle.Read)
+  identityProvider?: IdentityProvider;
+}
+
+/**
+ * Indicates whether the cluster is under support.
+ */
+union SupportStatus {
+  string,
+
+  /**
+   * The cluster is under support.
+   */
+  InSupport: "InSupport",
+
+  /**
+   * The cluster is out of support.
+   */
+  OutOfSupport: "OutOfSupport",
+
+  /**
+   * The support status is not specified.
+   */
+  NotSpecified: "NotSpecified",
 }
 
 /**
@@ -371,17 +377,6 @@ model SoftwareAssuranceProperties {
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastUpdated?: utcDateTime;
-}
-
-/**
- * Cluster Witness properties of the cluster. A cluster witness is a resource (such as a storage account or file share) that helps maintain quorum and supports automatic failover in high-availability cluster configurations.
- */
-model ClusterWitnessProperties {
-  /**
-   * The authentication mode for the cluster witness. An example value 'ManagedIdentity'.
-   */
-  @visibility(Lifecycle.Read)
-  authenticationMode?: string;
 }
 
 /**
@@ -414,13 +409,13 @@ model LogCollectionProperties {
    */
   @visibility(Lifecycle.Read)
   @identifiers(#[])
-  logCollectionSessionDetails?: ClustersLogCollectionSession[];
+  logCollectionSessionDetails?: LogCollectionSession[];
 }
 
 /**
  * Log Collection Session details of the cluster.
  */
-model ClustersLogCollectionSession {
+model LogCollectionSession {
   /**
    * Start Time of the logs when it was collected
    */
@@ -525,7 +520,7 @@ model RemoteSupportProperties {
    */
   @visibility(Lifecycle.Read)
   @identifiers(#[])
-  remoteSupportNodeSettings?: ClustersRemoteSupportNodeSettings[];
+  remoteSupportNodeSettings?: RemoteSupportNodeSettings[];
 
   /**
    * Remote support session details for the cluster.
@@ -538,7 +533,7 @@ model RemoteSupportProperties {
 /**
  * Remote Support Node Settings of the cluster.
  */
-model ClustersRemoteSupportNodeSettings {
+model RemoteSupportNodeSettings {
   /**
    * Arc ResourceId of the Node
    */
@@ -877,13 +872,15 @@ model ClusterPatch {
   /**
    * Identity of Cluster resource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
 
   /**
    * Cluster properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: ClusterPatchProperties;
 }
 
@@ -946,12 +943,13 @@ model RawCertificateData {
 /**
  * Cluster Identity details.
  */
-model StackHciClusterIdentityResponseResult {
+model ClusterIdentityResponse {
   /**
    * Cluster identity properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
   @visibility(Lifecycle.Read)
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: ClusterIdentityResponseProperties;
 }
 
@@ -1057,4 +1055,24 @@ model RemoteSupportRequestProperties {
    * Remote Support Type for cluster
    */
   remoteSupportType?: RemoteSupportType;
+}
+
+/**
+ * Change Ring Request for cluster
+ */
+model ChangeRingRequest {
+  /**
+   * Properties for Change Ring Request
+   */
+  properties?: ChangeRingRequestProperties;
+}
+
+/**
+ * Properties for Change Ring Request
+ */
+model ChangeRingRequestProperties {
+  /**
+   * The target ring for the cluster.
+   */
+  targetRing?: string;
 }
