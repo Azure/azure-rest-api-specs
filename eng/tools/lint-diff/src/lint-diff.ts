@@ -1,6 +1,6 @@
 import { SpecModelError } from "@azure-tools/specs-shared/spec-model-error";
 import { writeFile } from "node:fs/promises";
-import { parseArgs, ParseArgsConfig } from "node:util";
+import { inspect, parseArgs, ParseArgsConfig } from "node:util";
 import { correlateRuns } from "./correlateResults.js";
 import { generateAutoRestErrorReport, generateLintDiffReport } from "./generateReport.js";
 import { getRunList } from "./processChanges.js";
@@ -67,13 +67,13 @@ export async function main() {
   // TODO: Handle trailing slashes properly
   if (!beforeArg || !(await pathExists(beforeArg as string))) {
     validArgs = false;
-    console.log(`--before must be a valid path. Value passed: ${beforeArg || "<empty>"}`);
+    console.log(`--before must be a valid path. Value passed: ${inspect(beforeArg) || "<empty>"}`);
   }
 
   // TODO: Handle trailing slashes properly
   if (!afterArg || !(await pathExists(afterArg as string))) {
     validArgs = false;
-    console.log(`--after must be a valid path. Value passed: ${afterArg || "<empty>"}`);
+    console.log(`--after must be a valid path. Value passed: ${inspect(afterArg) || "<empty>"}`);
   }
 
   if (!changedFilesPath || !(await pathExists(changedFilesPath as string))) {
@@ -121,7 +121,7 @@ async function runLintDiff(
   } catch (error) {
     if (error instanceof SpecModelError) {
       console.log("\n❌ Error building Spec Model from changed file list:");
-      console.log(`${error}`);
+      console.log(`${inspect(error)}`);
 
       process.exitCode = 1;
       return;
