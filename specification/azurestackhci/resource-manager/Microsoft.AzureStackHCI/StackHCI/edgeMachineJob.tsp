@@ -330,7 +330,7 @@ union RemoteSupportType {
   @doc("Enables remote support for the edge device.")
   Enable: "Enable",
 
-  @doc("Revokes previously granted remote support access for the edge device.")
+  @doc("Revokes remote support access for the edge device.")
   Revoke: "Revoke",
 }
 

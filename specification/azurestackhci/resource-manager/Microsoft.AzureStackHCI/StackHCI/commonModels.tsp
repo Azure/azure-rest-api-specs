@@ -17,38 +17,38 @@ namespace Microsoft.AzureStackHCI;
 @added(Versions.v2025_12_01_preview)
 model ConfidentialVmProperties {
   /**
-   * Captures the customer's intent to enable or disable confidential VM support on the cluster, either during initial deployment (Day-0) or at a later stage (Day-N).
+   * Captures the customer's intent to enable or disable CVM support on the cluster, either during initial deployment (Day-0) or at a later stage (Day-N).
    */
   @visibility(Lifecycle.Read)
   confidentialVmIntent?: ConfidentialVmIntent = ConfidentialVmIntent.Disable;
 
   /**
-   * Captures the current status of Confidential Virtual Machine (CVM) support on the cluster.
+   * Captures the current status of CVM support on the cluster.
    */
   @visibility(Lifecycle.Read)
   confidentialVmStatus?: ConfidentialVmStatus = ConfidentialVmStatus.Disabled;
 
   /**
-   * Additional context about confidential VM support on the cluster, such as reasons for partial enablement or hardware constraints.
+   * Additional context about CVM support on the cluster, such as reasons for partial enablement or hardware constraints.
    */
   @visibility(Lifecycle.Read)
   confidentialVmStatusSummary?: string;
 }
 
 /**
- * Captures the customer's intent to enable or disable confidential VM support on the cluster, either during initial deployment (Day-0) or at a later stage (Day-N).
+ * Captures the customer's intent to enable or disable Confidential Virtual Machine (CVM) support on the cluster, either during initial deployment (Day-0) or at a later stage (Day-N).
  */
 @added(Versions.v2025_12_01_preview)
 union ConfidentialVmIntent {
   string,
 
   /**
-   * Indicates that the customer intends to enable confidential VM support on the cluster.
+   * Indicates that the customer intends to enable CVM support on the cluster.
    */
   Enable: "Enable",
 
   /**
-   * Indicates that the customer intends to disable confidential VM support on the cluster.
+   * Indicates that the customer intends to disable CVM support on the cluster.
    */
   Disable: "Disable",
 }
@@ -61,17 +61,17 @@ union ConfidentialVmStatus {
   string,
 
   /**
-   * Confidential VM support is fully enabled on the cluster. All nodes are CVM capable.
+   * CVM support is fully enabled on the cluster. All nodes are CVM capable.
    */
   Enabled: "Enabled",
 
   /**
-   * Confidential VM support is partially enabled. At least one node in the cluster is CVM capable.
+   * CVM support is partially enabled. At least one node in the cluster is CVM capable.
    */
   PartiallyEnabled: "PartiallyEnabled",
 
   /**
-   * Confidential VM support is disabled. None of the nodes in the cluster are CVM capable.
+   * CVM support is disabled. None of the nodes in the cluster are CVM capable.
    */
   Disabled: "Disabled",
 }
@@ -82,7 +82,7 @@ union ConfidentialVmStatus {
 @added(Versions.v2025_12_01_preview)
 model ConfidentialVmProfile {
   /**
-   * Indicates whether Independent Guest Virtual Machine (IGVM) support is available on the device. This will be 'Enabled' if the device supports confidential VMs, 'Disabled' if not, and 'Unknown' if the status cannot be determined.
+   * Indicates whether Independent Guest Virtual Machine (IGVM) support is available on the device. This will be 'Enabled' if the device supports CVMs, 'Disabled' if not, and 'Unknown' if the status cannot be determined.
    */
   @visibility(Lifecycle.Read)
   igvmStatus?: IgvmStatus;

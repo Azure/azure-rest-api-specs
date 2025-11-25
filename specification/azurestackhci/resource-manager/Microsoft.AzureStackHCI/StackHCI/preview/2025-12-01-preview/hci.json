@@ -1071,15 +1071,15 @@
       "description": "Arc extension installation state.",
       "enum": [
         "NotSpecified",
-        "Succeeded",
-        "Failed",
-        "Canceled",
         "Accepted",
+        "Canceled",
         "Creating",
-        "Updating",
-        "Moving",
+        "Deleted",
         "Deleting",
-        "Deleted"
+        "Failed",
+        "Moving",
+        "Succeeded",
+        "Updating"
       ],
       "x-ms-enum": {
         "name": "ArcExtensionState",
@@ -1091,14 +1091,9 @@
             "description": "Arc extension state is not specified."
           },
           {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Arc extension state is Succeeded."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Arc extension state is Failed."
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "Arc extension state is Accepted when extension installation triggered."
           },
           {
             "name": "Canceled",
@@ -1106,24 +1101,14 @@
             "description": "Arc extension state is Canceled."
           },
           {
-            "name": "Accepted",
-            "value": "Accepted",
-            "description": "Arc extension state is Accepted when extension installation triggered."
-          },
-          {
             "name": "Creating",
             "value": "Creating",
             "description": "Arc extension is in Creating State."
           },
           {
-            "name": "Updating",
-            "value": "Updating",
-            "description": "Arc extension is in Updating State."
-          },
-          {
-            "name": "Moving",
-            "value": "Moving",
-            "description": "Arc extension is in Moving State."
+            "name": "Deleted",
+            "value": "Deleted",
+            "description": "Arc extension is in Deleted State."
           },
           {
             "name": "Deleting",
@@ -1131,9 +1116,24 @@
             "description": "Arc extension is in Deleting State."
           },
           {
-            "name": "Deleted",
-            "value": "Deleted",
-            "description": "Arc extension is in Deleted State."
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Arc extension state is Failed."
+          },
+          {
+            "name": "Moving",
+            "value": "Moving",
+            "description": "Arc extension is in Moving State."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Arc extension state is Succeeded."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Arc extension is in Updating State."
           }
         ]
       },
@@ -1194,7 +1194,7 @@
     },
     "ConfidentialVmIntent": {
       "type": "string",
-      "description": "Captures the customer's intent to enable or disable confidential VM support on the cluster, either during initial deployment (Day-0) or at a later stage (Day-N).",
+      "description": "Captures the customer's intent to enable or disable Confidential Virtual Machine (CVM) support on the cluster, either during initial deployment (Day-0) or at a later stage (Day-N).",
       "enum": [
         "Enable",
         "Disable"
@@ -1206,12 +1206,12 @@
           {
             "name": "Enable",
             "value": "Enable",
-            "description": "Indicates that the customer intends to enable confidential VM support on the cluster."
+            "description": "Indicates that the customer intends to enable CVM support on the cluster."
           },
           {
             "name": "Disable",
             "value": "Disable",
-            "description": "Indicates that the customer intends to disable confidential VM support on the cluster."
+            "description": "Indicates that the customer intends to disable CVM support on the cluster."
           }
         ]
       }
@@ -1222,7 +1222,7 @@
       "properties": {
         "igvmStatus": {
           "$ref": "#/definitions/IgvmStatus",
-          "description": "Indicates whether Independent Guest Virtual Machine (IGVM) support is available on the device. This will be 'Enabled' if the device supports confidential VMs, 'Disabled' if not, and 'Unknown' if the status cannot be determined.",
+          "description": "Indicates whether Independent Guest Virtual Machine (IGVM) support is available on the device. This will be 'Enabled' if the device supports CVMs, 'Disabled' if not, and 'Unknown' if the status cannot be determined.",
           "readOnly": true
         },
         "statusDetails": {
@@ -1243,7 +1243,7 @@
       "properties": {
         "confidentialVmIntent": {
           "type": "string",
-          "description": "Captures the customer's intent to enable or disable confidential VM support on the cluster, either during initial deployment (Day-0) or at a later stage (Day-N).",
+          "description": "Captures the customer's intent to enable or disable CVM support on the cluster, either during initial deployment (Day-0) or at a later stage (Day-N).",
           "default": "Disable",
           "enum": [
             "Enable",
@@ -1256,12 +1256,12 @@
               {
                 "name": "Enable",
                 "value": "Enable",
-                "description": "Indicates that the customer intends to enable confidential VM support on the cluster."
+                "description": "Indicates that the customer intends to enable CVM support on the cluster."
               },
               {
                 "name": "Disable",
                 "value": "Disable",
-                "description": "Indicates that the customer intends to disable confidential VM support on the cluster."
+                "description": "Indicates that the customer intends to disable CVM support on the cluster."
               }
             ]
           },
@@ -1269,7 +1269,7 @@
         },
         "confidentialVmStatus": {
           "type": "string",
-          "description": "Captures the current status of Confidential Virtual Machine (CVM) support on the cluster.",
+          "description": "Captures the current status of CVM support on the cluster.",
           "default": "Disabled",
           "enum": [
             "Enabled",
@@ -1283,17 +1283,17 @@
               {
                 "name": "Enabled",
                 "value": "Enabled",
-                "description": "Confidential VM support is fully enabled on the cluster. All nodes are CVM capable."
+                "description": "CVM support is fully enabled on the cluster. All nodes are CVM capable."
               },
               {
                 "name": "PartiallyEnabled",
                 "value": "PartiallyEnabled",
-                "description": "Confidential VM support is partially enabled. At least one node in the cluster is CVM capable."
+                "description": "CVM support is partially enabled. At least one node in the cluster is CVM capable."
               },
               {
                 "name": "Disabled",
                 "value": "Disabled",
-                "description": "Confidential VM support is disabled. None of the nodes in the cluster are CVM capable."
+                "description": "CVM support is disabled. None of the nodes in the cluster are CVM capable."
               }
             ]
           },
@@ -1301,7 +1301,7 @@
         },
         "confidentialVmStatusSummary": {
           "type": "string",
-          "description": "Additional context about confidential VM support on the cluster, such as reasons for partial enablement or hardware constraints.",
+          "description": "Additional context about CVM support on the cluster, such as reasons for partial enablement or hardware constraints.",
           "readOnly": true
         }
       }
@@ -1321,17 +1321,17 @@
           {
             "name": "Enabled",
             "value": "Enabled",
-            "description": "Confidential VM support is fully enabled on the cluster. All nodes are CVM capable."
+            "description": "CVM support is fully enabled on the cluster. All nodes are CVM capable."
           },
           {
             "name": "PartiallyEnabled",
             "value": "PartiallyEnabled",
-            "description": "Confidential VM support is partially enabled. At least one node in the cluster is CVM capable."
+            "description": "CVM support is partially enabled. At least one node in the cluster is CVM capable."
           },
           {
             "name": "Disabled",
             "value": "Disabled",
-            "description": "Confidential VM support is disabled. None of the nodes in the cluster are CVM capable."
+            "description": "CVM support is disabled. None of the nodes in the cluster are CVM capable."
           }
         ]
       }
@@ -1908,7 +1908,7 @@
         },
         "claimedBy": {
           "type": "string",
-          "description": "Tracks the ID of the consuming resource, Settingthe machine as in-use.",
+          "description": "Tracks the ID of the consuming resource, setting the machine as in-use.",
           "readOnly": true
         },
         "reportedProperties": {
@@ -2523,7 +2523,7 @@
       "properties": {
         "nicDetails": {
           "type": "array",
-          "description": "List of NIC Details of edge machine.",
+          "description": "List of Network Interface Card (NIC) Details of edge machine.",
           "items": {
             "$ref": "#/definitions/NicDetail"
           },
@@ -2547,7 +2547,7 @@
     },
     "NicDetail": {
       "type": "object",
-      "description": "NIC Details of edge machine.",
+      "description": "Network Interface Card (NIC) Details of edge machine.",
       "properties": {
         "adapterName": {
           "type": "string",
@@ -3565,7 +3565,7 @@
           {
             "name": "Revoke",
             "value": "Revoke",
-            "description": "Revokes previously granted remote support access for the edge device."
+            "description": "Revokes remote support access for the edge device."
           }
         ]
       }

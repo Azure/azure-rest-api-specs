@@ -127,7 +127,7 @@ model EdgeMachineProperties {
   @visibility(Lifecycle.Read)
   connectivityStatus?: EdgeMachineConnectivityStatus;
 
-  @doc("Tracks the ID of the consuming resource, Settingthe machine as in-use.")
+  @doc("Tracks the ID of the consuming resource, setting the machine as in-use.")
   @visibility(Lifecycle.Read)
   claimedBy?: string;
 
@@ -352,7 +352,7 @@ model ReportedProperties {
 @added(Versions.v2025_12_01_preview)
 @doc("NetworkProfile of edge machine.")
 model NetworkProfile {
-  @doc("List of NIC Details of edge machine.")
+  @doc("List of Network Interface Card (NIC) Details of edge machine.")
   @visibility(Lifecycle.Read)
   @Azure.ResourceManager.identifiers(#["adapterName"])
   nicDetails?: NicDetail[];
@@ -364,7 +364,7 @@ model NetworkProfile {
 }
 
 @added(Versions.v2025_12_01_preview)
-@doc("NIC Details of edge machine.")
+@doc("Network Interface Card (NIC) Details of edge machine.")
 model NicDetail {
   /**
    * Adapter Name of NIC
@@ -737,14 +737,9 @@ union ArcExtensionState {
   NotSpecified: "NotSpecified",
 
   /**
-   * Arc extension state is Succeeded.
+   * Arc extension state is Accepted when extension installation triggered.
    */
-  Succeeded: "Succeeded",
-
-  /**
-   * Arc extension state is Failed.
-   */
-  Failed: "Failed",
+  Accepted: "Accepted",
 
   /**
    * Arc extension state is Canceled.
@@ -752,24 +747,14 @@ union ArcExtensionState {
   Canceled: "Canceled",
 
   /**
-   * Arc extension state is Accepted when extension installation triggered.
-   */
-  Accepted: "Accepted",
-
-  /**
    * Arc extension is in Creating State.
    */
   Creating: "Creating",
 
   /**
-   * Arc extension is in Updating State.
+   * Arc extension is in Deleted State.
    */
-  Updating: "Updating",
-
-  /**
-   * Arc extension is in Moving State.
-   */
-  Moving: "Moving",
+  Deleted: "Deleted",
 
   /**
    * Arc extension is in Deleting State.
@@ -777,9 +762,24 @@ union ArcExtensionState {
   Deleting: "Deleting",
 
   /**
-   * Arc extension is in Deleted State.
+   * Arc extension state is Failed.
    */
-  Deleted: "Deleted",
+  Failed: "Failed",
+
+  /**
+   * Arc extension is in Moving State.
+   */
+  Moving: "Moving",
+
+  /**
+   * Arc extension state is Succeeded.
+   */
+  Succeeded: "Succeeded",
+
+  /**
+   * Arc extension is in Updating State.
+   */
+  Updating: "Updating",
 }
 
 /**
