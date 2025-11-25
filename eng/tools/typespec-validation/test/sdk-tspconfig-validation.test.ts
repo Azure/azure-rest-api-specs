@@ -747,6 +747,167 @@ options:
   },
 ];
 
+// Test cases for CSharp emitters - validation behavior tests
+const csharpEmittersValidationTestCases: Case[] = [
+  // @azure-typespec/http-client-csharp - "Failed to find" should be ignored (success)
+  {
+    description: "Validate http-client-csharp emitter-output-dir - Failed to find should be ignored",
+    folder: "",
+    tspconfigContent: `
+options:
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "some-dir"
+`,
+    success: true,
+    subRules: [new TspConfigHttpClientCsharpAzEmitterOutputDirSubRule()],
+  },
+  {
+    description: "Validate http-client-csharp namespace - Failed to find should be ignored",
+    folder: "",
+    tspconfigContent: `
+options:
+  "@azure-tools/typespec-ts":
+    namespace: "Azure.Something"
+`,
+    success: true,
+    subRules: [new TspConfigHttpClientCsharpAzNamespaceSubRule()],
+  },
+  {
+    description: "Validate http-client-csharp-mgmt emitter-output-dir - Failed to find should be ignored",
+    folder: managementTspconfigFolder,
+    tspconfigContent: `
+options:
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "arm-something"
+`,
+    success: true,
+    subRules: [new TspConfigHttpClientCsharpMgmtEmitterOutputDirSubRule()],
+  },
+  {
+    description: "Validate http-client-csharp-mgmt namespace - Failed to find should be ignored",
+    folder: managementTspconfigFolder,
+    tspconfigContent: `
+options:
+  "@azure-tools/typespec-ts":
+    namespace: "Azure.ResourceManager.Something"
+`,
+    success: true,
+    subRules: [new TspConfigHttpClientCsharpMgmtNamespaceSubRule()],
+  },
+  {
+    description: "Validate http-client-csharp emitter-output-dir - Invalid value should fail",
+    folder: "",
+    tspconfigContent: `
+options:
+  "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "InvalidValue"
+`,
+    success: false,
+    subRules: [new TspConfigHttpClientCsharpAzEmitterOutputDirSubRule()],
+  },
+  {
+    description: "Validate http-client-csharp namespace - Invalid value should fail",
+    folder: "",
+    tspconfigContent: `
+options:
+  "@azure-typespec/http-client-csharp":
+    namespace: "InvalidNamespace"
+`,
+    success: false,
+    subRules: [new TspConfigHttpClientCsharpAzNamespaceSubRule()],
+  },
+
+  // @azure-tools/typespec-csharp - all validation failures should be treated as success (per emitter's decision)
+  {
+    description: "Validate typespec-csharp emitter-output-dir - Failed to find should pass",
+    folder: "",
+    tspconfigContent: `
+options:
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "some-dir"
+`,
+    success: true,
+    subRules: [new TspConfigCsharpAzEmitterOutputDirSubRule()],
+  },
+  {
+    description: "Validate typespec-csharp namespace - Failed to find should pass",
+    folder: "",
+    tspconfigContent: `
+options:
+  "@azure-tools/typespec-ts":
+    namespace: "Azure.Something"
+`,
+    success: true,
+    subRules: [new TspConfigCsharpAzNamespaceSubRule()],
+  },
+  {
+    description: "Validate typespec-csharp emitter-output-dir - Invalid value should pass (per emitter's decision)",
+    folder: "",
+    tspconfigContent: `
+options:
+  "@azure-tools/typespec-csharp":
+    emitter-output-dir: "InvalidValue"
+`,
+    success: true,
+    subRules: [new TspConfigCsharpAzEmitterOutputDirSubRule()],
+  },
+  {
+    description: "Validate typespec-csharp namespace - Invalid value should pass (per emitter's decision)",
+    folder: "",
+    tspconfigContent: `
+options:
+  "@azure-tools/typespec-csharp":
+    namespace: "InvalidNamespace"
+`,
+    success: true,
+    subRules: [new TspConfigCsharpAzNamespaceSubRule()],
+  },
+  {
+    description: "Validate typespec-csharp clear-output-folder - Failed to find should pass",
+    folder: "",
+    tspconfigContent: `
+options:
+  "@azure-tools/typespec-ts":
+    clear-output-folder: true
+`,
+    success: true,
+    subRules: [new TspConfigCsharpAzClearOutputFolderTrueSubRule()],
+  },
+  {
+    description: "Validate typespec-csharp clear-output-folder - Invalid value should pass (per emitter's decision)",
+    folder: "",
+    tspconfigContent: `
+options:
+  "@azure-tools/typespec-csharp":
+    clear-output-folder: false
+`,
+    success: true,
+    subRules: [new TspConfigCsharpAzClearOutputFolderTrueSubRule()],
+  },
+  {
+    description: "Validate typespec-csharp mgmt emitter-output-dir - Failed to find should pass",
+    folder: managementTspconfigFolder,
+    tspconfigContent: `
+options:
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "arm-something"
+`,
+    success: true,
+    subRules: [new TspConfigCsharpMgmtEmitterOutputDirSubRule()],
+  },
+  {
+    description: "Validate typespec-csharp mgmt namespace - Invalid value should pass (per emitter's decision)",
+    folder: managementTspconfigFolder,
+    tspconfigContent: `
+options:
+  "@azure-tools/typespec-csharp":
+    namespace: "Azure.Management.Something"
+`,
+    success: true,
+    subRules: [new TspConfigCsharpMgmtNamespaceSubRule()],
+  },
+];
+
 const suppressEntireRuleTestCase: Case = {
   description: "Suppress entire rule",
   folder: managementTspconfigFolder,
@@ -864,6 +1025,8 @@ describe("tspconfig", function () {
     ...httpClientCsharpMgmtNamespaceTestCases,
     // variable resolution in emitter-output-dir
     ...emitterOutputDirWithNamespaceVariableTestCases,
+    // CSharp emitters validation behavior tests
+    ...csharpEmittersValidationTestCases,
   ])(`$description`, async (c: Case) => {
     readTspConfigSpy.mockImplementation(async (_folder: string) => c.tspconfigContent);
     vi.spyOn(utils, "getSuppressions").mockImplementation(async (_path: string) => [
