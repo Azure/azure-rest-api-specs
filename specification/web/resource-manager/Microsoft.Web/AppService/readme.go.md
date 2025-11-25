@@ -55,4 +55,19 @@ input-file:
   - ../../../../domainregistration/resource-manager/Microsoft.DomainRegistration/DomainRegistration/stable/2024-11-01/DomainRegistrationProvider.json
   - ../../../../domainregistration/resource-manager/Microsoft.DomainRegistration/DomainRegistration/stable/2024-11-01/Domains.json
   - ../../../../domainregistration/resource-manager/Microsoft.DomainRegistration/DomainRegistration/stable/2024-11-01/TopLevelDomains.json
+  - stable/2025-03-01/AppServiceEnvironments.json
+  - stable/2025-03-01/AppServicePlans.json
+  - stable/2025-03-01/Certificates.json
+  - stable/2025-03-01/CommonDefinitions.json
+  - stable/2025-03-01/DeletedWebApps.json
+  - stable/2025-03-01/Diagnostics.json
+  - stable/2025-03-01/Global.json
+  - stable/2025-03-01/KubeEnvironments.json
+  - stable/2025-03-01/Provider.json
+  - stable/2025-03-01/Recommendations.json
+  - stable/2025-03-01/ResourceHealthMetadata.json
+  - stable/2025-03-01/ResourceProvider.json
+  - stable/2025-03-01/SiteCertificates.json
+  - stable/2025-03-01/StaticSites.json
+  - stable/2025-03-01/WebApps.json
 ```
