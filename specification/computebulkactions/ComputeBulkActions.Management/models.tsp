@@ -32,6 +32,16 @@ alias LocationParameter = {
   location: azureLocation;
 };
 
+alias OperationParameter = {
+  /** The async operation id. */
+  @path
+  @minLength(1)
+  @segment("operations")
+  @key
+  @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
+  asyncOperationId: string;
+};
+
 alias SubscriptionParams = {
   ...ApiVersionParameter;
   ...SubscriptionIdParameter;
@@ -316,13 +326,33 @@ model LaunchBulkInstancesOperation
 }
 
 // ------------------ Models --------------- //
+#suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Prefer using `utcDateTime` when representing a datetime unless an offset is necessary."
+@doc("Response for getting the status of a LaunchBulkInstancesOperation.")
+model LaunchBulkActionsOperationStatusResponse {
+  @doc("The ID of the LaunchBulkInstancesOperation.")
+  @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
+  name: string;
+
+  @doc("The status of the LaunchBulkInstancesOperation.")
+  status: ProvisioningState;
+
+  @doc("The start time of the LaunchBulkInstancesOperation.")
+  startTime?: offsetDateTime;
+
+  @doc("The end time of the LaunchBulkInstancesOperation.")
+  endTime?: offsetDateTime;
+
+  @doc("Error details of the LaunchBulkInstancesOperation, if it exists.")
+  error?: Error;
+}
+
 @doc("Details of error.")
 model Error {
   @doc("Error code if it exists")
-  errorCode?: string;
+  code?: string;
 
   @doc("Error details if they exist")
-  errorDetails?: string;
+  message?: string;
 }
 
 @doc("List of LaunchBulkInstancesOperation resources.")

@@ -23,6 +23,17 @@ interface BulkActions {
     ...CustomParams,
   ): ArmResponse<LaunchBulkInstancesOperation> | ErrorResponse;
 
+  @doc("List LaunchBulkInstancesOperation resources by subscriptionId.")
+  @get
+  @autoRoute
+  @armResourceRead(LaunchBulkInstancesOperation)
+  getOperationStatus(
+    ...SubscriptionParams,
+    ...ProviderNamespace<LaunchBulkInstancesOperation>,
+    ...LocationParameter,
+    ...OperationParameter,
+  ): ArmResponse<LaunchBulkActionsOperationStatusResponse> | ErrorResponse;
+
   @doc("Creates or updates LaunchBulkInstancesOperations.")
   createOrUpdate is LaunchBulkInstancesOps.CreateOrUpdateAsync<LaunchBulkInstancesOperation>;
 

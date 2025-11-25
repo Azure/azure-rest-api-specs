@@ -136,6 +136,20 @@ union ResourceOperationType {
   string,
 }
 
+@doc("Actions to take on failed retries for Scheduled Actions")
+union OnFailedRetriesAction {
+  @doc("Deallocate operations on the resources")
+  Deallocate: "Deallocate",
+
+  @doc("Start operations on the resources")
+  Start: "Start",
+
+  @doc("Delete operations on the resources")
+  Delete: "Delete",
+
+  string,
+}
+
 @doc("Values that define the states of operations in Scheduled Actions")
 union OperationState {
   @doc("The default value for the operation state enum")
@@ -212,6 +226,9 @@ model RetryPolicy {
 
   @doc("Retry window in minutes for user request")
   retryWindowInMinutes?: int32;
+
+  @doc("Action to take on failed retries for user request")
+  onFailedRetriesAction?: OnFailedRetriesAction;
 }
 
 @doc("Extra details needed to run the user's request")
