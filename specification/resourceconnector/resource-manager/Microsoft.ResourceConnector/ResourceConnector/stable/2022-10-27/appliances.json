@@ -53,7 +53,7 @@
         "tags": [
           "Operations"
         ],
-        "description": "List the operations for the provider",
+        "description": "Lists all available Appliances operations.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -63,7 +63,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+              "$ref": "#/definitions/applianceOperationsList"
             }
           },
           "default": {
@@ -1173,6 +1173,79 @@
             "$ref": "#/definitions/appliance"
           },
           "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "applianceOperation": {
+      "type": "object",
+      "description": "Appliances operation.",
+      "properties": {
+        "display": {
+          "$ref": "#/definitions/applianceOperationValueDisplay",
+          "description": "Describes the properties of an Appliances Operation Value Display.",
+          "x-ms-client-flatten": true
+        },
+        "isDataAction": {
+          "type": "boolean",
+          "description": "Is this Operation a data plane operation",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the compute operation.",
+          "readOnly": true
+        },
+        "origin": {
+          "type": "string",
+          "description": "The origin of the compute operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "applianceOperationValueDisplay": {
+      "type": "object",
+      "description": "Describes the properties of an Appliances Operation Value Display.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "The description of the operation.",
+          "readOnly": true
+        },
+        "operation": {
+          "type": "string",
+          "description": "The display name of the compute operation.",
+          "readOnly": true
+        },
+        "provider": {
+          "type": "string",
+          "description": "The resource provider for the operation.",
+          "readOnly": true
+        },
+        "resource": {
+          "type": "string",
+          "description": "The display name of the resource the operation applies to.",
+          "readOnly": true
+        }
+      }
+    },
+    "applianceOperationsList": {
+      "type": "object",
+      "description": "Paged collection of ApplianceOperation items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ApplianceOperation items on this page",
+          "items": {
+            "$ref": "#/definitions/applianceOperation"
+          }
         },
         "nextLink": {
           "type": "string",
