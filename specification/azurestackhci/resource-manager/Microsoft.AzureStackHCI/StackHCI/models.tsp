@@ -974,14 +974,14 @@ model HostNetwork {
   enableStorageAutoIp?: boolean;
 }
 
-/** 
+/**
  * Edge device backward compatibility model
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Edge Device is defined as empty model for backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "for backward compatibility, provisioningState is defined in EdgeDeviceProperties" 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "for backward compatibility, provisioningState is defined in EdgeDeviceProperties"
 model EdgeDevicePlaceholder {}
 
-/** 
+/**
  * Edge device job backward compatibility model
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "for backward compatibility, provisioningState is defined in EdgeDeviceProperties"

@@ -15,7 +15,8 @@ namespace Microsoft.AzureStackHCI;
  * Edge device resource.
  */
 @discriminator("kind")
-model EdgeDevice is Azure.ResourceManager.ExtensionResource<EdgeDevicePlaceholder> {
+model EdgeDevice
+  is Azure.ResourceManager.ExtensionResource<EdgeDevicePlaceholder> {
   ...ResourceNameParameter<
     Resource = EdgeDevice,
     KeyName = "edgeDeviceName",

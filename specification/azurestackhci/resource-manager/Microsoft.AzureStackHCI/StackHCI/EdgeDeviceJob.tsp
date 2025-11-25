@@ -14,7 +14,8 @@ namespace Microsoft.AzureStackHCI;
  */
 @parentResource(EdgeDevice)
 @discriminator("kind")
-model EdgeDeviceJob is Azure.ResourceManager.ExtensionResource<EdgeDeviceJobPlaceholder> {
+model EdgeDeviceJob
+  is Azure.ResourceManager.ExtensionResource<EdgeDeviceJobPlaceholder> {
   ...ResourceNameParameter<
     Resource = EdgeDeviceJob,
     KeyName = "jobsName",
