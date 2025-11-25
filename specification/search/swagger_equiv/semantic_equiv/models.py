@@ -29,6 +29,7 @@ class ParameterLocation(Enum):
 class CanonicalConstraints:
     """Represents validation constraints for parameters and schemas."""
 
+    # Standard OpenAPI/Swagger constraints
     minimum: Optional[float] = None
     maximum: Optional[float] = None
     exclusive_minimum: Optional[bool] = None
@@ -41,6 +42,25 @@ class CanonicalConstraints:
     unique_items: Optional[bool] = None
     enum: Optional[FrozenSet[str]] = None
     default: Optional[Any] = None
+    multiple_of: Optional[float] = None
+
+    # Property modifiers
+    read_only: Optional[bool] = None
+
+    # Array/collection constraints
+    collection_format: Optional[str] = None  # csv, ssv, tsv, pipes, multi
+
+    # Polymorphism support
+    discriminator: Optional[str] = None
+
+    # Azure-specific extensions
+    x_nullable: Optional[bool] = None
+    x_ms_enum: Optional[Dict[str, Any]] = (
+        None  # Enum metadata (name, modelAsString, etc.)
+    )
+    x_ms_mutability: Optional[List[str]] = None  # ['create', 'read', 'update']
+    x_ms_secret: Optional[bool] = None
+
     swagger_source: Optional[str] = None
 
 
@@ -99,6 +119,10 @@ class CanonicalParameter:
     param_type: Optional[str] = None  # For non-body parameters ('type' field)
     param_format: Optional[str] = None  # For non-body parameters
     constraints: Optional[CanonicalConstraints] = None
+    x_ms_parameter_grouping: Optional[Dict[str, Any]] = (
+        None  # For detecting parameter groups
+    )
+    x_ms_client_name: Optional[str] = None  # For client-side parameter naming
     swagger_source: Optional[str] = None
 
     @property
@@ -221,7 +245,14 @@ def build_constraints_from_dict(
             # Convert to frozenset of strings for comparison
             enum_value = frozenset(str(item) for item in enum_list)
 
+    # Handle x-ms-mutability list
+    x_ms_mutability = data.get("x-ms-mutability")
+    if x_ms_mutability and isinstance(x_ms_mutability, list):
+        # Keep as list for proper comparison
+        x_ms_mutability = x_ms_mutability
+
     return CanonicalConstraints(
+        # Standard constraints
         minimum=data.get("minimum"),
         maximum=data.get("maximum"),
         exclusive_minimum=data.get("exclusiveMinimum"),
@@ -234,6 +265,18 @@ def build_constraints_from_dict(
         unique_items=data.get("uniqueItems"),
         enum=enum_value,
         default=data.get("default"),
+        multiple_of=data.get("multipleOf"),
+        # Property modifiers
+        read_only=data.get("readOnly"),
+        # Array constraints
+        collection_format=data.get("collectionFormat"),
+        # Polymorphism
+        discriminator=data.get("discriminator"),
+        # Azure extensions
+        x_nullable=data.get("x-nullable"),
+        x_ms_enum=data.get("x-ms-enum"),
+        x_ms_mutability=x_ms_mutability,
+        x_ms_secret=data.get("x-ms-secret"),
         swagger_source=swagger_source,
     )
 
@@ -401,6 +444,8 @@ def build_parameter_from_dict(
         param_type=param_type,
         param_format=param_format,
         constraints=constraints,
+        x_ms_parameter_grouping=param_dict.get("x-ms-parameter-grouping"),
+        x_ms_client_name=param_dict.get("x-ms-client-name"),
         swagger_source=swagger_source,
     )
 

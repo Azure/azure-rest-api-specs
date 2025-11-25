@@ -206,6 +206,31 @@ class ApiComparator:
         # Find potential matches between missing and extra paths
         path_matches = self._find_path_matches(missing_paths, extra_paths)
 
+        # Promote high-confidence matches to prevent duplicate reporting
+        promoted_path_matches = []
+        for match in path_matches:
+            missing_path, extra_path, similarity = match
+            # High similarity (> 0.85) or simple substitution differences
+            if similarity > 0.85:
+                promoted_path_matches.append((missing_path, extra_path))
+
+        # Remove promoted matches from missing/extra
+        for missing_path, extra_path in promoted_path_matches:
+            missing_paths.discard(missing_path)
+            extra_paths.discard(extra_path)
+            # Report as potential match
+            print(f"Potential path match\t {missing_path} ~ {extra_path}")
+            # Compare methods for these matched paths
+            path1 = api1.paths[missing_path]
+            path2 = api2.paths[extra_path]
+            self._compare_methods(
+                path1,
+                api1.swagger_source,
+                path2,
+                api2.swagger_source,
+                f"{missing_path} ~ {extra_path}",
+            )
+
         for path in missing_paths:
             # Check if this missing path has a potential match
             matches = [match for match in path_matches if match[0] == path]
@@ -443,6 +468,41 @@ class ApiComparator:
             missing_keys, extra_keys, params1, params2
         )
 
+        # Promote high-confidence fuzzy matches for comparison
+        promoted_param_matches = []
+        for match in param_matches:
+            if len(match) >= 3:  # Ensure it's a 3-tuple with similarity
+                missing_key, extra_key, similarity = (
+                    match[0],
+                    match[1],
+                    match[2] if len(match) > 2 else 0,
+                )
+                # High similarity or simple prefix differences like "$" in OData
+                param1_name = (
+                    params1[missing_key].name if missing_key in params1 else ""
+                )
+                param2_name = params2[extra_key].name if extra_key in params2 else ""
+                if (
+                    similarity > 0.85
+                    or param1_name.lstrip("$") == param2_name
+                    or param2_name.lstrip("$") == param1_name
+                ):
+                    promoted_param_matches.append((missing_key, extra_key))
+
+        # Remove promoted matches and compare them
+        for missing_key, extra_key in promoted_param_matches:
+            if missing_key in missing_keys and extra_key in extra_keys:
+                missing_keys.discard(missing_key)
+                extra_keys.discard(extra_key)
+                param1 = params1[missing_key]
+                param2 = params2[extra_key]
+                param_context = (
+                    f"{operation_id}||{path_method}||{param1.name} ~ {param2.name}"
+                )
+                print(f"Potential parameter match\t {param_context}")
+                # Compare the matched parameters
+                self._compare_parameter(param1, param2, context, source1, source2)
+
         # Filter out case mismatches from missing/extra keys
         filtered_missing_keys = missing_keys.copy()
         filtered_extra_keys = extra_keys.copy()
@@ -642,6 +702,41 @@ class ApiComparator:
         # Find potential matches between missing and extra response codes
         response_matches = self._find_response_matches(missing_codes, extra_codes)
 
+        # Promote high-confidence matches (like 200 vs "200", or close status codes)
+        promoted_response_matches = []
+        for match in response_matches:
+            missing_code, extra_code, similarity = match
+            # Very high similarity for response codes (they're usually exact or very close)
+            if similarity > 0.9:
+                promoted_response_matches.append((missing_code, extra_code))
+
+        # Remove promoted matches from response_matches to avoid duplicate hints
+        promoted_response_codes = {(m, e) for m, e in promoted_response_matches}
+        response_matches = [
+            m for m in response_matches if (m[0], m[1]) not in promoted_response_codes
+        ]
+
+        # Remove promoted matches and compare them
+        for missing_code, extra_code in promoted_response_matches:
+            missing_codes.discard(missing_code)
+            extra_codes.discard(extra_code)
+            print(
+                f"Potential response match\t {context}\t {missing_code} ~ {extra_code}"
+            )
+            # Compare the matched responses
+            response1 = responses1[missing_code]
+            response2 = responses2[extra_code]
+            context_parts = (
+                context.split("||") if "||" in context else ["<unknown>", context, ""]
+            )
+            operation_id, path_method = context_parts[0], context_parts[1]
+            response_context = (
+                f"{operation_id}||{path_method}||{missing_code}~{extra_code}"
+            )
+            self._compare_response(
+                response1, response2, response_context, source1, source2
+            )
+
         for code in missing_codes:
             # Check if this missing response has a potential match
             matches = [match for match in response_matches if match[0] == code]
@@ -721,7 +816,7 @@ class ApiComparator:
                     and ref2.endswith("/definitions/ErrorResponse")
                     and ref1 != ref2
                 ):
-                    message = "Response schemas mismatch on ref path of /definitions/ErrorResponse"
+                    message = "Response schemas mismatch for /definitions/ErrorResponse"
 
             # Add detailed differences to message if available
             if schema_diffs:
@@ -781,6 +876,44 @@ class ApiComparator:
         potential_matches = self._find_definition_matches(
             missing_defs, extra_defs, api1, api2
         )
+
+        # Promote high-confidence matches to compare instead of reporting as missing/extra
+        promoted_def_matches = []
+        for match in potential_matches:
+            missing_def, extra_def, similarity = match
+            # High similarity threshold for definitions (0.75 to catch suffix additions like "Algorithm")
+            if similarity > 0.75:
+                promoted_def_matches.append((missing_def, extra_def))
+
+        # Remove promoted matches from potential_matches to avoid duplicate "Possible Match" hints
+        promoted_def_names = {(m, e) for m, e in promoted_def_matches}
+        potential_matches = [
+            m for m in potential_matches if (m[0], m[1]) not in promoted_def_names
+        ]
+
+        # Remove promoted matches and compare them
+        for missing_def, extra_def in promoted_def_matches:
+            missing_defs.discard(missing_def)
+            extra_defs.discard(extra_def)
+            print(f"Potential definition match\t {missing_def} ~ {extra_def}")
+            # Compare the matched definitions
+            schema1 = api1.definitions[missing_def]
+            schema2 = api2.definitions[extra_def]
+            if not self._schemas_equal(schema1, schema2):
+                schema_diffs = self._get_schema_differences(schema1, schema2)
+                diff_details = (
+                    "; ".join(schema_diffs) if schema_diffs else "unknown differences"
+                )
+                self.differences.append(
+                    Difference(
+                        type=DifferenceType.DEFINITION_MISMATCH,
+                        message=f"Definition schemas mismatch (potential match): {missing_def} ~ {extra_def} - {diff_details}",
+                        context=f"{missing_def}~{extra_def}",
+                    )
+                )
+                print(
+                    f"Definition schemas mismatch (potential match)\t {missing_def} ~ {extra_def}\t {diff_details}"
+                )
 
         for def_name in missing_defs:
             # Check if this missing definition has a potential match
@@ -1192,101 +1325,81 @@ class ApiComparator:
         params2 = api2.parameters or {}
 
         # Extract grouping information for both APIs
+        # Note: Hand-authored specs typically have SearchOptions/SuggestOptions parameters
+        # defined inline in operations with x-ms-parameter-grouping, while TSP-compiled
+        # specs have them as global parameters with dot notation (SearchOptions.xxx).
+        # We only compare parameter groups that exist in the global parameters section.
         ungrouped1, grouped1 = self._extract_parameter_grouping(params1)
         ungrouped2, grouped2 = self._extract_parameter_grouping(params2)
 
         # Compare parameter groups (SearchOptions and SuggestOptions)
+        # Handle cross-level comparison: global parameters in one spec vs operation-level in another
         for group_name in ["SearchOptions", "SuggestOptions"]:
             group1_params = grouped1.get(group_name, [])
             group2_params = grouped2.get(group_name, [])
 
-            if group1_params and not group2_params:
-                # Extract parameter names for display
-                param_names = [
-                    p["full_name"] if isinstance(p, dict) else str(p)
-                    for p in group1_params
-                ]
-                self.differences.append(
-                    Difference(
-                        type=DifferenceType.MISSING_GLOBAL_PARAMETER,
-                        message=f"Parameter group missing in {api2.swagger_source}: {group_name} (contains {len(group1_params)} parameters: {', '.join(param_names)})",
-                        context=f"parameter_group: {group_name}",
-                    )
-                )
+            if group1_params and group2_params:
+                # Both have the group in global parameters, perform detailed comparison
                 print(
-                    f"Parameter group missing in {api2.swagger_source}\t {group_name} (contains {len(group1_params)} parameters)"
+                    f"Comparing {group_name} parameter group: {len(group1_params)} params in {api1.swagger_source} vs {len(group2_params)} in {api2.swagger_source}"
                 )
-
+                self._compare_parameter_group(
+                    group1_params,
+                    group2_params,
+                    group_name,
+                    api1.swagger_source,
+                    api2.swagger_source,
+                )
             elif not group1_params and group2_params:
-                # Extract parameter names for display
-                param_names = [
-                    p["full_name"] if isinstance(p, dict) else str(p)
-                    for p in group2_params
-                ]
-                base_names = [
-                    p["base_name"] if isinstance(p, dict) else str(p)
-                    for p in group2_params
-                ]
-                self.differences.append(
-                    Difference(
-                        type=DifferenceType.EXTRA_GLOBAL_PARAMETER,
-                        message=f"Extra parameter group in {api2.swagger_source}: {group_name} (contains {len(group2_params)} parameters: {', '.join(param_names)} -> base names: {', '.join(base_names)})",
-                        context=f"parameter_group: {group_name}",
-                    )
-                )
+                # API2 has the group in global params, check if API1 has them in operations
                 print(
-                    f"Extra parameter group in {api2.swagger_source}\t {group_name} (contains {len(group2_params)} parameters)"
+                    f"Extracting {group_name} parameters from {api1.swagger_source} operations for cross-level comparison..."
                 )
+                operation_level_groups1 = (
+                    self._extract_operation_level_grouped_parameters(api1)
+                )
+                op_group1_params = operation_level_groups1.get(group_name, [])
 
-            elif group1_params and group2_params:
-                # Both have the group, compare parameter counts
-                if len(group1_params) != len(group2_params):
-                    param1_names = [
-                        p["full_name"] if isinstance(p, dict) else str(p)
-                        for p in group1_params
-                    ]
-                    param2_names = [
-                        p["full_name"] if isinstance(p, dict) else str(p)
-                        for p in group2_params
-                    ]
-                    self.differences.append(
-                        Difference(
-                            type=DifferenceType.GLOBAL_PARAMETER_MISMATCH,
-                            message=f"Parameter group count mismatch for {group_name}: {api1.swagger_source} has {len(group1_params)} parameters ({', '.join(param1_names)}) vs {api2.swagger_source} has {len(group2_params)} parameters ({', '.join(param2_names)})",
-                            context=f"parameter_group: {group_name}",
-                        )
-                    )
+                if op_group1_params:
                     print(
-                        f"Parameter group count mismatch\t {group_name}\t {len(group1_params)} vs {len(group2_params)}"
+                        f"Comparing {group_name} parameter group (cross-level): {len(op_group1_params)} params in {api1.swagger_source} operations vs {len(group2_params)} in {api2.swagger_source} global"
+                    )
+                    self._compare_parameter_group(
+                        op_group1_params,
+                        group2_params,
+                        group_name,
+                        api1.swagger_source,
+                        api2.swagger_source,
                     )
                 else:
-                    # Same count, compare base names for better matching info
-                    base_names1 = [
-                        p.get("base_name", p.get("full_name", str(p)))
-                        if isinstance(p, dict)
-                        else str(p)
-                        for p in group1_params
-                    ]
-                    base_names2 = [
-                        p.get("base_name", p.get("full_name", str(p)))
-                        if isinstance(p, dict)
-                        else str(p)
-                        for p in group2_params
-                    ]
-                    base_names1.sort()
-                    base_names2.sort()
+                    print(
+                        f"Note: {group_name} parameters not found in {api1.swagger_source} (neither global nor operations)"
+                    )
+            elif group1_params and not group2_params:
+                # API1 has the group in global params, check if API2 has them in operations
+                print(
+                    f"Extracting {group_name} parameters from {api2.swagger_source} operations for cross-level comparison..."
+                )
+                operation_level_groups2 = (
+                    self._extract_operation_level_grouped_parameters(api2)
+                )
+                op_group2_params = operation_level_groups2.get(group_name, [])
 
-                    if base_names1 != base_names2:
-                        self.differences.append(
-                            Difference(
-                                type=DifferenceType.GLOBAL_PARAMETER_MISMATCH,
-                                message=f"Parameter group content mismatch for {group_name}: {api1.swagger_source} base names [{', '.join(base_names1)}] vs {api2.swagger_source} base names [{', '.join(base_names2)}]",
-                                context=f"parameter_group: {group_name}",
-                            )
-                        )
-                        print(
-                            f"Parameter group content mismatch\t {group_name}\t base names differ"
-                        )
+                if op_group2_params:
+                    print(
+                        f"Comparing {group_name} parameter group (cross-level): {len(group1_params)} params in {api1.swagger_source} global vs {len(op_group2_params)} in {api2.swagger_source} operations"
+                    )
+                    self._compare_parameter_group(
+                        group1_params,
+                        op_group2_params,
+                        group_name,
+                        api1.swagger_source,
+                        api2.swagger_source,
+                    )
+                else:
+                    print(
+                        f"Note: {group_name} parameters not found in {api2.swagger_source} (neither global nor operations)"
+                    )
 
         # Compare ungrouped parameters using existing logic
         param_names1 = set(ungrouped1.keys())
@@ -1300,6 +1413,73 @@ class ApiComparator:
         global_param_matches = self._find_string_matches(
             missing_params, extra_params, threshold=0.6
         )
+
+        # Promote high-confidence matches for comparison
+        promoted_global_param_matches = []
+        for match in global_param_matches:
+            missing_param, extra_param, similarity = match
+            # High similarity or OData-style differences
+            if (
+                similarity > 0.85
+                or missing_param.lstrip("$") == extra_param
+                or extra_param.lstrip("$") == missing_param
+            ):
+                promoted_global_param_matches.append((missing_param, extra_param))
+            # Pattern-based matching for Azure.Core.* parameters
+            # e.g., ApiVersionParameter <-> Azure.Core.Foundations.ApiVersionParameter
+            # e.g., ClientRequestIdParameter <-> Azure.Core.ClientRequestIdHeader
+            elif (
+                (
+                    missing_param in extra_param
+                    or missing_param.replace("Parameter", "") in extra_param
+                    or missing_param.replace("Parameter", "Header") in extra_param
+                )
+                and "Azure.Core" in extra_param
+                and similarity > 0.6
+            ) or (
+                (
+                    extra_param in missing_param
+                    or extra_param.replace("Header", "") in missing_param
+                    or extra_param.replace("Header", "Parameter") in missing_param
+                )
+                and "Azure.Core" in missing_param
+                and similarity > 0.6
+            ):
+                promoted_global_param_matches.append((missing_param, extra_param))
+
+        # Remove promoted matches from global_param_matches to avoid duplicate hints
+        promoted_global_param_names = {(m, e) for m, e in promoted_global_param_matches}
+        global_param_matches = [
+            m
+            for m in global_param_matches
+            if (m[0], m[1]) not in promoted_global_param_names
+        ]
+
+        # Remove promoted matches and compare them
+        for missing_param, extra_param in promoted_global_param_matches:
+            missing_params.discard(missing_param)
+            extra_params.discard(extra_param)
+            print(f"Potential global parameter match\t{missing_param} ~ {extra_param}")
+
+            # Add to differences for Excel export
+            self.differences.append(
+                Difference(
+                    type=DifferenceType.GLOBAL_PARAMETER_MISMATCH,
+                    message=f"Potential global parameter match: {missing_param} ~ {extra_param}",
+                    context=f"global_parameter:{missing_param}~{extra_param}",
+                )
+            )
+
+            # Compare the matched parameters
+            param1 = params1[missing_param]
+            param2 = params2[extra_param]
+            self._compare_parameter(
+                param1,
+                param2,
+                f"global_parameter:{missing_param}~{extra_param}",
+                api1.swagger_source,
+                api2.swagger_source,
+            )
 
         for param_name in missing_params:
             # Check if this missing parameter has a potential match
@@ -1316,7 +1496,7 @@ class ApiComparator:
                 )
             )
             print(
-                f"Global parameter missing in {api2.swagger_source}\t {param_name}{possible_match}"
+                f"Global parameter missing in {api2.swagger_source}\t{param_name}\t{possible_match}"
             )
 
         for param_name in extra_params:
@@ -1334,7 +1514,7 @@ class ApiComparator:
                 )
             )
             print(
-                f"Extra global parameter in {api2.swagger_source}\t {param_name}{possible_match}"
+                f"Extra global parameter in {api2.swagger_source}\t{param_name}\t{possible_match}"
             )
 
         # Compare common global parameters
@@ -1511,8 +1691,8 @@ class ApiComparator:
 
         Returns:
             - ungrouped_params: Dict of parameters not in SearchOptions/SuggestOptions groups
-            - grouped_params: Dict with group names as keys and list of parameter info as values
-                Each parameter info is a dict with 'full_name' and 'base_name' keys
+            - grouped_params: Dict with group names as keys and list of parameter dicts as values
+                Each parameter dict contains 'full_name', 'base_name', and 'param' (CanonicalParameter object)
         """
         ungrouped_params = {}
         grouped_params = {"SearchOptions": [], "SuggestOptions": []}
@@ -1524,22 +1704,313 @@ class ApiComparator:
                     len("SearchOptions.") :
                 ]  # Extract name after the dot
                 grouped_params["SearchOptions"].append(
-                    {"full_name": param_name, "base_name": base_name}
+                    {"full_name": param_name, "base_name": base_name, "param": param}
                 )
             elif param_name.startswith("SuggestOptions."):
                 base_name = param_name[
                     len("SuggestOptions.") :
                 ]  # Extract name after the dot
                 grouped_params["SuggestOptions"].append(
-                    {"full_name": param_name, "base_name": base_name}
+                    {"full_name": param_name, "base_name": base_name, "param": param}
                 )
             else:
-                # For hand-authored swagger, we would need to check x-ms-parameter-grouping
-                # Since we don't have access to raw swagger here, we'll assume ungrouped
-                # TODO: Extend CanonicalParameter to include x-ms-parameter-grouping info
+                # For hand-authored swagger, check x-ms-parameter-grouping
+                if param.x_ms_parameter_grouping:
+                    group_name = param.x_ms_parameter_grouping.get("name")
+                    if group_name in ["SearchOptions", "SuggestOptions"]:
+                        # Use x-ms-client-name if available, otherwise use parameter name
+                        base_name = (
+                            param.x_ms_client_name
+                            if param.x_ms_client_name
+                            else param.name
+                        )
+                        grouped_params[group_name].append(
+                            {
+                                "full_name": param_name,
+                                "base_name": base_name,
+                                "param": param,
+                            }
+                        )
+                        continue
+                # Check if this might be a grouped parameter that we missed
+                if param.name in [
+                    "$count",
+                    "$filter",
+                    "$orderby",
+                    "$search",
+                    "$select",
+                    "$skip",
+                    "$top",
+                ]:
+                    print(
+                        f"    DEBUG: Ungrouped param '{param_name}' (name={param.name}), x_ms_parameter_grouping={param.x_ms_parameter_grouping}, x_ms_client_name={param.x_ms_client_name}"
+                    )
                 ungrouped_params[param_name] = param
 
         return ungrouped_params, grouped_params
+
+    def _extract_operation_level_grouped_parameters(self, api: CanonicalApi):
+        """Extract parameters with x-ms-parameter-grouping from all operations.
+
+        This is used to find SearchOptions/SuggestOptions parameters that are defined
+        inline in operations (typical in hand-authored swagger) rather than as global
+        parameters (typical in TSP-compiled swagger).
+
+        Returns:
+            Dict with group names as keys and list of parameter dicts as values.
+            Each parameter dict contains 'full_name', 'base_name', 'param', and 'operations'
+            where 'operations' is a list of operation IDs that use this parameter.
+        """
+        grouped_params = {"SearchOptions": {}, "SuggestOptions": {}}
+
+        for path, path_obj in api.paths.items():
+            for method, operation in path_obj.operations.items():
+                for param_key, param in (operation.parameters or {}).items():
+                    if param.x_ms_parameter_grouping:
+                        group_name = param.x_ms_parameter_grouping.get("name")
+                        if group_name in ["SearchOptions", "SuggestOptions"]:
+                            # Create extended name: group.clientName or group.paramName
+                            client_name = (
+                                param.x_ms_client_name
+                                if param.x_ms_client_name
+                                else param.name
+                            )
+                            extended_name = f"{group_name}.{client_name}"
+
+                            # Use lowercase for matching
+                            base_name = client_name.lower()
+
+                            if base_name not in grouped_params[group_name]:
+                                grouped_params[group_name][base_name] = {
+                                    "full_name": extended_name,
+                                    "base_name": client_name,
+                                    "param": param,
+                                    "operations": [],
+                                }
+                            grouped_params[group_name][base_name]["operations"].append(
+                                operation.operation_id or f"{path} {method}"
+                            )
+
+        # Convert to list format for consistency with _extract_parameter_grouping
+        result = {}
+        for group_name, params_dict in grouped_params.items():
+            result[group_name] = list(params_dict.values())
+
+        return result
+
+    def _compare_parameter_group(
+        self, group1_params, group2_params, group_name, source1, source2
+    ):
+        """Compare parameters within a parameter group with fuzzy matching and detailed comparison.
+
+        Args:
+            group1_params: List of parameter dicts from first API (each has 'full_name', 'base_name', 'param')
+            group2_params: List of parameter dicts from second API
+            group_name: Name of the parameter group (e.g., 'SearchOptions')
+            source1: Swagger source identifier for first API
+            source2: Swagger source identifier for second API
+        """
+        # Build mapping by base name (case-insensitive) for matching
+        group1_by_base = {}
+        for p in group1_params:
+            base_name = p.get("base_name", p.get("full_name", "")).lower()
+            group1_by_base[base_name] = p
+
+        group2_by_base = {}
+        for p in group2_params:
+            base_name = p.get("base_name", p.get("full_name", "")).lower()
+            group2_by_base[base_name] = p
+
+        keys1 = set(group1_by_base.keys())
+        keys2 = set(group2_by_base.keys())
+
+        missing_keys = keys1 - keys2
+        extra_keys = keys2 - keys1
+        common_keys = keys1 & keys2
+
+        # Find fuzzy matches for missing/extra parameters
+        fuzzy_matches = self._find_string_matches(
+            missing_keys, extra_keys, threshold=0.6
+        )
+
+        # Promote high-confidence fuzzy matches (similarity > 0.8) to actual matches for comparison
+        # This handles cases like "$select" vs "select" which are semantically equivalent
+        promoted_matches = []
+        for match in fuzzy_matches:
+            missing_key, extra_key, similarity = (
+                match  # fuzzy_matches returns 3-tuples with similarity score
+            )
+            # Calculate similarity - if one is substring of other or they differ only by prefix like "$"
+            if (
+                missing_key in extra_key
+                or extra_key in missing_key
+                or missing_key.lstrip("$") == extra_key
+                or extra_key.lstrip("$") == missing_key
+            ):
+                promoted_matches.append((missing_key, extra_key))
+
+        # Remove promoted matches from missing/extra and add to common for comparison
+        for missing_key, extra_key in promoted_matches:
+            missing_keys.discard(missing_key)
+            extra_keys.discard(extra_key)
+            # We'll handle these specially - compare them as potential matches
+
+        # Compare promoted matches (high-confidence fuzzy matches like "$select" vs "select")
+        for missing_key, extra_key in promoted_matches:
+            p_info1 = group1_by_base[missing_key]
+            p_info2 = group2_by_base[extra_key]
+
+            full_name1 = p_info1["full_name"]
+            full_name2 = p_info2["full_name"]
+            param1 = p_info1["param"]
+            param2 = p_info2["param"]
+
+            # Report potential match and then compare properties
+            print(
+                f"Potential parameter match in {group_name}\t {full_name1} ~ {full_name2}"
+            )
+
+            # Add to differences for Excel export
+            self.differences.append(
+                Difference(
+                    type=DifferenceType.GLOBAL_PARAMETER_MISMATCH,
+                    message=f"Potential parameter match in {group_name}: {full_name1} ~ {full_name2}",
+                    context=f"parameter_group:{group_name}:{missing_key}~{extra_key}",
+                )
+            )
+
+            context = f"parameter_group:{group_name}:{missing_key}"
+            self._compare_grouped_parameter(
+                param1, param2, full_name1, full_name2, context, source1, source2
+            )
+
+        # Report missing parameters
+        for base_name in missing_keys:
+            p_info = group1_by_base[base_name]
+            full_name = p_info["full_name"]
+
+            # Check for fuzzy match
+            matches = [match for match in fuzzy_matches if match[0] == base_name]
+            possible_match = f" || Possible Match: {matches[0][1]}" if matches else ""
+
+            self.differences.append(
+                Difference(
+                    type=DifferenceType.MISSING_GLOBAL_PARAMETER,
+                    message=f"Parameter missing in {source2} from {group_name} group: {full_name} (base: {base_name}){possible_match}",
+                    context=f"parameter_group:{group_name}:{full_name}",
+                )
+            )
+            print(
+                f"Parameter missing in {source2} from {group_name}\t {full_name} (base: {base_name}){possible_match}"
+            )
+
+        # Report extra parameters
+        for base_name in extra_keys:
+            p_info = group2_by_base[base_name]
+            full_name = p_info["full_name"]
+
+            # Check for fuzzy match
+            matches = [match for match in fuzzy_matches if match[1] == base_name]
+            possible_match = f" || Possible Match: {matches[0][0]}" if matches else ""
+
+            self.differences.append(
+                Difference(
+                    type=DifferenceType.EXTRA_GLOBAL_PARAMETER,
+                    message=f"Extra parameter in {source2} in {group_name} group: {full_name} (base: {base_name}){possible_match}",
+                    context=f"parameter_group:{group_name}:{full_name}",
+                )
+            )
+            print(
+                f"Extra parameter in {source2} in {group_name}\t {full_name} (base: {base_name}){possible_match}"
+            )
+
+        # Compare common parameters in detail
+        for base_name in common_keys:
+            p1_info = group1_by_base[base_name]
+            p2_info = group2_by_base[base_name]
+            param1 = p1_info["param"]
+            param2 = p2_info["param"]
+            full_name1 = p1_info["full_name"]
+            full_name2 = p2_info["full_name"]
+
+            # Compare the actual parameter properties
+            context = f"parameter_group:{group_name}:{base_name}"
+            self._compare_grouped_parameter(
+                param1, param2, full_name1, full_name2, context, source1, source2
+            )
+
+    def _compare_grouped_parameter(
+        self, param1, param2, full_name1, full_name2, context, source1, source2
+    ):
+        """Compare two parameters from a parameter group, checking for property mismatches.
+
+        This checks for differences like:
+        - Missing x-nullable
+        - Different x-ms-client-name casing
+        - Type, format, constraints mismatches
+        """
+        differences_found = []
+
+        # Check x-nullable
+        x_nullable1 = param1.constraints.x_nullable if param1.constraints else None
+        x_nullable2 = param2.constraints.x_nullable if param2.constraints else None
+
+        if x_nullable1 != x_nullable2:
+            differences_found.append(
+                f"x-nullable: {source1}={x_nullable1} vs {source2}={x_nullable2}"
+            )
+
+        # Check if this is comparing with different naming conventions
+        # The full_name1 might have x-ms-client-name, full_name2 might be SearchOptions.camelCase
+        if full_name1 != full_name2:
+            # This is expected - hand-authored uses x-ms-client-name, TSP uses dot notation
+            # We'll note this but not report as error since we matched by base name
+            pass
+
+        # Compare basic parameter properties (reuse existing logic)
+        if param1.required != param2.required:
+            differences_found.append(
+                f"required: {source1}={param1.required} vs {source2}={param2.required}"
+            )
+
+        # For non-body parameters, compare type, format, constraints
+        if param1.location != ParameterLocation.BODY:
+            if param1.param_type != param2.param_type:
+                differences_found.append(
+                    f"type: {source1}={param1.param_type} vs {source2}={param2.param_type}"
+                )
+
+            if param1.param_format != param2.param_format:
+                differences_found.append(
+                    f"format: {source1}={param1.param_format} vs {source2}={param2.param_format}"
+                )
+
+            if not self._constraints_equal(param1.constraints, param2.constraints):
+                constraint_diffs = self._get_constraint_differences(
+                    param1.constraints, param2.constraints
+                )
+                differences_found.extend(
+                    [f"constraint: {diff}" for diff in constraint_diffs]
+                )
+        else:
+            # For body parameters, compare schemas
+            if not self._schemas_equal(param1.schema, param2.schema):
+                schema_diffs = self._get_schema_differences(
+                    param1.schema, param2.schema
+                )
+                differences_found.extend([f"schema: {diff}" for diff in schema_diffs])
+
+        # Report all differences found
+        if differences_found:
+            diff_summary = "; ".join(differences_found)
+            self.differences.append(
+                Difference(
+                    type=DifferenceType.GLOBAL_PARAMETER_MISMATCH,
+                    message=f"Parameter property mismatch: {full_name1} <-> {full_name2}: {diff_summary}",
+                    context=context,
+                )
+            )
+            print(f"Parameter property mismatch\t {context}\t {diff_summary}")
 
     def _find_string_matches(self, missing_items, extra_items, threshold=0.6):
         """Find potential matches between missing and extra string items using similarity."""

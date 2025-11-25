@@ -1603,6 +1603,16 @@ def write_diffs_excel_v2(result, output_path: str) -> None:
                 )
 
         if summary_data:
+            # Calculate total row
+            total_diffs = sum(row["Total Diff"] for row in summary_data)
+            summary_data.append(
+                {
+                    "Category": "TOTAL",
+                    "Total Diff": total_diffs,
+                    "Diff Types (Count)": "",
+                }
+            )
+
             summary_df = pd.DataFrame(summary_data)
             summary_df.to_excel(writer, sheet_name="Summary", index=False)
 
@@ -1610,6 +1620,13 @@ def write_diffs_excel_v2(result, output_path: str) -> None:
         for category, diffs in categories.items():
             if diffs:  # Only create sheet if there are differences
                 df = pd.DataFrame(diffs)
+
+                # For Definitions sheet, remove OperationID and Context Suffix columns
+                if category == "Definitions":
+                    df = df.drop(
+                        columns=["OperationID", "Context Suffix"], errors="ignore"
+                    )
+
                 # Limit sheet name length for Excel compatibility
                 sheet_name = category[:31] if len(category) > 31 else category
                 df.to_excel(writer, sheet_name=sheet_name, index=False)
