@@ -19,7 +19,7 @@ export class EmitAutorestRule implements Rule {
 
     if (mainTspExists) {
       const configText = await readTspConfig(folder);
-      const config = yamlParse(configText);
+      const config = yamlParse(configText) as { emit?: string[] };
 
       const emit = config?.emit;
       stdOutput += `emit: ${JSON.stringify(emit)}\n`;
