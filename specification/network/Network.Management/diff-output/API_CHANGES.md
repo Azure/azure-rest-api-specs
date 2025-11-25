@@ -10,78 +10,251 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/publicIPAddresses/{publicIpAddressName}/disassociateCloudServiceReservedPublicIp'].post.parameters[0].minLength__deleted` | deleted | `1` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/publicIPAddresses/{publicIpAddressName}/reserveCloudServicePublicIpAddress'].post.parameters[0].minLength__deleted` | deleted | `1` |
 
-### Changes for `parameters`
+### Changes for `$ref`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/providers/microsoft.Management/managementGroups/{managementGroupId}/providers/microsoft.Network/networkManagerConnections/{networkManagerConnectionName}'].parameters__deleted` | deleted | `[{"$ref":"#/parameters/ManagementGroupIdParameter"},{"$ref":"#/parameters/NetworkManagerConnectionNa...` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/networkSecurityPerimeterOperationStatuses/{operationId}'].parameters__deleted` | deleted | `[{"$ref":"./network.json#/parameters/SubscriptionIdParameter"},{"$ref":"#/parameters/LocationParamet...` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/networkManagerConnections/{networkManagerConnectionName}'].parameters__deleted` | deleted | `[{"$ref":"./network.json#/parameters/SubscriptionIdParameter"},{"$ref":"#/parameters/NetworkManagerC...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}'].parameters__deleted` | deleted | `[{"$ref":"./network.json#/parameters/SubscriptionIdParameter"},{"$ref":"#/parameters/ResourceGroupNa...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/commit'].parameters__deleted` | deleted | `[{"$ref":"./network.json#/parameters/SubscriptionIdParameter"},{"$ref":"#/parameters/ResourceGroupNa...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/connectivityConfigurations/{configurationName}'].parameters__deleted` | deleted | `[{"$ref":"./network.json#/parameters/ApiVersionParameter"},{"$ref":"./network.json#/parameters/Subsc...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/listActiveConnectivityConfigurations'].parameters__deleted` | deleted | `[{"$ref":"./network.json#/parameters/ApiVersionParameter"},{"$ref":"./network.json#/parameters/Subsc...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/listActiveSecurityAdminRules'].parameters__deleted` | deleted | `[{"$ref":"./network.json#/parameters/ApiVersionParameter"},{"$ref":"./network.json#/parameters/Subsc...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/listDeploymentStatus'].parameters__deleted` | deleted | `[{"$ref":"./network.json#/parameters/SubscriptionIdParameter"},{"$ref":"#/parameters/ResourceGroupNa...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/networkGroups/{networkGroupName}'].parameters__deleted` | deleted | `[{"$ref":"./network.json#/parameters/SubscriptionIdParameter"},{"$ref":"#/parameters/ResourceGroupNa...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/networkGroups/{networkGroupName}/staticMembers/{staticMemberName}'].parameters__deleted` | deleted | `[{"$ref":"./network.json#/parameters/SubscriptionIdParameter"},{"$ref":"#/parameters/ResourceGroupNa...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/routingConfigurations/{configurationName}'].parameters__deleted` | deleted | `[{"$ref":"../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParame...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/routingConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}'].parameters__deleted` | deleted | `[{"$ref":"../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParame...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/routingConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}/rules'].parameters__deleted` | deleted | `[{"$ref":"../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParame...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/routingConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}/rules/{ruleName}'].parameters__deleted` | deleted | `[{"$ref":"../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParame...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/scopeConnections/{scopeConnectionName}'].parameters__deleted` | deleted | `[{"$ref":"./network.json#/parameters/SubscriptionIdParameter"},{"$ref":"./networkManager.json#/param...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/securityAdminConfigurations/{configurationName}'].parameters__deleted` | deleted | `[{"$ref":"./network.json#/parameters/ApiVersionParameter"},{"$ref":"./network.json#/parameters/Subsc...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/securityAdminConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}'].parameters__deleted` | deleted | `[{"$ref":"./network.json#/parameters/ApiVersionParameter"},{"$ref":"./network.json#/parameters/Subsc...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/securityAdminConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}/rules'].parameters__deleted` | deleted | `[{"$ref":"./network.json#/parameters/ApiVersionParameter"},{"$ref":"./network.json#/parameters/Subsc...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/securityAdminConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}/rules/{ruleName}'].parameters__deleted` | deleted | `[{"$ref":"./network.json#/parameters/ApiVersionParameter"},{"$ref":"./network.json#/parameters/Subsc...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/securityUserConfigurations/{configurationName}'].parameters__deleted` | deleted | `[{"$ref":"../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParame...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/securityUserConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}'].parameters__deleted` | deleted | `[{"$ref":"../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParame...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/securityUserConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}/rules'].parameters__deleted` | deleted | `[{"$ref":"../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParame...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/securityUserConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}/rules/{ruleName}'].parameters__deleted` | deleted | `[{"$ref":"../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParame...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}'].parameters__deleted` | deleted | `[{"$ref":"./network.json#/parameters/SubscriptionIdParameter"},{"$ref":"#/parameters/ResourceGroupNa...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/linkReferences/{linkReferenceName}'].parameters__deleted` | deleted | `[{"$ref":"./network.json#/parameters/SubscriptionIdParameter"},{"$ref":"#/parameters/ResourceGroupNa...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/links/{linkName}'].parameters__deleted` | deleted | `[{"$ref":"./network.json#/parameters/SubscriptionIdParameter"},{"$ref":"#/parameters/ResourceGroupNa...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/loggingConfigurations'].parameters__deleted` | deleted | `[{"$ref":"./network.json#/parameters/SubscriptionIdParameter"},{"$ref":"#/parameters/ResourceGroupNa...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/loggingConfigurations/{loggingConfigurationName}'].parameters__deleted` | deleted | `[{"$ref":"./network.json#/parameters/SubscriptionIdParameter"},{"$ref":"#/parameters/ResourceGroupNa...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/profiles/{profileName}'].parameters__deleted` | deleted | `[{"$ref":"./network.json#/parameters/SubscriptionIdParameter"},{"$ref":"#/parameters/ResourceGroupNa...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/profiles/{profileName}/accessRules/{accessRuleName}'].parameters__deleted` | deleted | `[{"$ref":"./network.json#/parameters/SubscriptionIdParameter"},{"$ref":"#/parameters/ResourceGroupNa...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/profiles/{profileName}/accessRules/{accessRuleName}/reconcile'].parameters__deleted` | deleted | `[{"$ref":"./network.json#/parameters/SubscriptionIdParameter"},{"$ref":"#/parameters/ResourceGroupNa...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations/{associationName}'].parameters__deleted` | deleted | `[{"$ref":"./network.json#/parameters/SubscriptionIdParameter"},{"$ref":"#/parameters/ResourceGroupNa...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations/{associationName}/reconcile'].parameters__deleted` | deleted | `[{"$ref":"./network.json#/parameters/SubscriptionIdParameter"},{"$ref":"#/parameters/ResourceGroupNa...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworks/{virtualNetworkName}/listNetworkManagerEffectiveConnectivityConfigurations'].parameters__deleted` | deleted | `[{"$ref":"./network.json#/parameters/SubscriptionIdParameter"},{"$ref":"#/parameters/ResourceGroupNa...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworks/{virtualNetworkName}/listNetworkManagerEffectiveSecurityAdminRules'].parameters__deleted` | deleted | `[{"$ref":"./network.json#/parameters/SubscriptionIdParameter"},{"$ref":"#/parameters/ResourceGroupNa...` |
-
-### Changes for `x-ms-pageable`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/azureFirewallFqdnTags'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/bgpServiceCommunities'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/expressRouteProviderPorts'].get['x-ms-pageable__added']` | added | `{"nextLinkName":"nextLink"}` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/expressRouteServiceProviders'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/autoApprovedPrivateLinkServices'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/availableDelegations'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/availablePrivateEndpointTypes'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/availableServiceAliases'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/nspServiceTags'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/perimeterAssociableResourceTypes'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/serviceTagDetails'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/usages'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/virtualNetworkAvailableEndpointServices'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/networkWatchers'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/locations/{location}/autoApprovedPrivateLinkServices'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/locations/{location}/availableDelegations'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/locations/{location}/availablePrivateEndpointTypes'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/locations/{location}/availableServiceAliases'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkInterfaces/{networkInterfaceName}/effectiveNetworkSecurityGroups'].post['x-ms-pageable__added']` | added | `{"nextLinkName":"nextLink"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkInterfaces/{networkInterfaceName}/effectiveRouteTable'].post['x-ms-pageable__added']` | added | `{"nextLinkName":"nextLink"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/connectionMonitors'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/packetCaptures'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/listRadiusSecrets'].post['x-ms-pageable__added']` | added | `{"nextLinkName":"nextLink"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}/resourceNavigationLinks'].get['x-ms-pageable__added']` | added | `{"nextLinkName":"nextLink"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}/serviceAssociationLinks'].get['x-ms-pageable__added']` | added | `{"nextLinkName":"nextLink"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnServerConfigurations/{vpnServerConfigurationName}/listRadiusSecrets'].post['x-ms-pageable__added']` | added | `{"nextLinkName":"nextLink"}` |
+| `definitions.ApplicationGatewayAuthenticationCertificatePropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.ApplicationGatewayBackendAddressPoolPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.ApplicationGatewayBackendHttpSettingsPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.ApplicationGatewayBackendSettingsPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.ApplicationGatewayEntraJWTValidationConfigPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.ApplicationGatewayFirewallRuleSetPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.ApplicationGatewayFrontendIPConfigurationPropertiesFormat.properties.privateIPAllocationMethod.$ref__deleted` | deleted | `./network.json#/definitions/IPAllocationMethod` |
+| `definitions.ApplicationGatewayFrontendIPConfigurationPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.ApplicationGatewayFrontendPortPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.ApplicationGatewayHttpListenerPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.ApplicationGatewayIPConfigurationPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.ApplicationGatewayListenerPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.ApplicationGatewayLoadDistributionPolicyPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.ApplicationGatewayPathRulePropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.ApplicationGatewayPrivateEndpointConnectionProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.ApplicationGatewayPrivateLinkConfigurationProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.ApplicationGatewayPrivateLinkIpConfigurationProperties.properties.privateIPAllocationMethod.$ref__deleted` | deleted | `./network.json#/definitions/IPAllocationMethod` |
+| `definitions.ApplicationGatewayPrivateLinkIpConfigurationProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.ApplicationGatewayProbePropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.ApplicationGatewayPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.ApplicationGatewayRequestRoutingRulePropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.ApplicationGatewayRewriteRuleSetPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.ApplicationGatewayRoutingRulePropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.ApplicationGatewaySslCertificatePropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.ApplicationGatewaySslProfilePropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.ApplicationGatewayTrustedClientCertificatePropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.ApplicationGatewayTrustedRootCertificatePropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.ApplicationGatewayUrlPathMapPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.ApplicationSecurityGroupPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.AuthorizationPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.AzureFirewallApplicationRuleCollectionPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.AzureFirewallFqdnTagPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.AzureFirewallIPConfigurationPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.AzureFirewallNatRuleCollectionProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.AzureFirewallNetworkRuleCollectionPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.AzureFirewallPropertiesFormat.properties.additionalProperties.$ref__deleted` | deleted | `#/definitions/AzureFirewallAdditionalProperties` |
+| `definitions.AzureFirewallPropertiesFormat.properties.ipGroups.$ref__deleted` | deleted | `#/definitions/IpGroups` |
+| `definitions.AzureFirewallPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.BackendAddressPoolPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.BastionHostIPConfigurationPropertiesFormat.properties.privateIPAllocationMethod.$ref__deleted` | deleted | `./network.json#/definitions/IPAllocationMethod` |
+| `definitions.BastionHostIPConfigurationPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.BastionHostPropertiesFormat.properties.networkAcls.$ref__added` | added | `#/definitions/BastionHostPropertiesFormatNetworkAcls` |
+| `definitions.BastionHostPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.BgpConnectionProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.ConnectionMonitorResultProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.ConnectivityConfigurationProperties.properties.connectivityCapabilities.$ref__added` | added | `#/definitions/ConnectivityConfigurationPropertiesConnectivityCapabilities` |
+| `definitions.ConnectivityConfigurationProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.ConnectivityIssue.properties.context.items.$ref__deleted` | deleted | `#/definitions/IssueContext` |
+| `definitions.ConnectivityParameters.properties.preferredIPVersion.$ref__deleted` | deleted | `./network.json#/definitions/IPVersion` |
+| `definitions.ContainerNetworkInterfaceConfigurationPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.ContainerNetworkInterfaceIpConfigurationPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.ContainerNetworkInterfacePropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.CustomIpPrefixPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.DdosCustomPolicyPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.DdosDetectionRulePropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.DdosProtectionPlanPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.DelegationProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.DscpConfigurationPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.EffectiveNetworkSecurityRule.properties.access.$ref__deleted` | deleted | `./networkSecurityGroup.json#/definitions/SecurityRuleAccess` |
+| `definitions.EffectiveNetworkSecurityRule.properties.direction.$ref__deleted` | deleted | `./networkSecurityGroup.json#/definitions/SecurityRuleDirection` |
+| `definitions.EffectiveRoute.properties.nextHopType.$ref__deleted` | deleted | `./routeTable.json#/definitions/RouteNextHopType` |
+| `definitions.ExpressRouteCircuitConnectionPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.ExpressRouteCircuitPeeringPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.ExpressRouteCircuitPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.ExpressRouteConnectionProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.ExpressRouteCrossConnectionPeeringProperties.properties.peeringType.$ref__deleted` | deleted | `./expressRouteCircuit.json#/definitions/ExpressRoutePeeringType` |
+| `definitions.ExpressRouteCrossConnectionPeeringProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.ExpressRouteCrossConnectionPeeringProperties.properties.state.$ref__deleted` | deleted | `./expressRouteCircuit.json#/definitions/ExpressRoutePeeringState` |
+| `definitions.ExpressRouteCrossConnectionProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.ExpressRouteCrossConnectionProperties.properties.serviceProviderProvisioningState.$ref__deleted` | deleted | `./expressRouteCircuit.json#/definitions/ServiceProviderProvisioningState` |
+| `definitions.ExpressRouteGatewayProperties.properties.autoScaleConfiguration.$ref__added` | added | `#/definitions/ExpressRouteGatewayPropertiesAutoScaleConfiguration` |
+| `definitions.ExpressRouteGatewayProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.ExpressRouteLinkPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.ExpressRoutePortAuthorizationPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.ExpressRoutePortPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.ExpressRoutePortsLocationPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.ExpressRouteServiceProviderPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.FirewallPolicyDraftProperties.properties.threatIntelMode.$ref__deleted` | deleted | `./azureFirewall.json#/definitions/AzureFirewallThreatIntelMode` |
+| `definitions.FirewallPolicyPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.FirewallPolicyPropertiesFormat.properties.threatIntelMode.$ref__deleted` | deleted | `./azureFirewall.json#/definitions/AzureFirewallThreatIntelMode` |
+| `definitions.FirewallPolicyRuleCollectionGroupProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.FlowLogPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.FrontendIPConfigurationPropertiesFormat.properties.privateIPAddressVersion.$ref__deleted` | deleted | `./network.json#/definitions/IPVersion` |
+| `definitions.FrontendIPConfigurationPropertiesFormat.properties.privateIPAllocationMethod.$ref__deleted` | deleted | `./network.json#/definitions/IPAllocationMethod` |
+| `definitions.FrontendIPConfigurationPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.HubIPConfigurationPropertiesFormat.properties.privateIPAllocationMethod.$ref__deleted` | deleted | `./network.json#/definitions/IPAllocationMethod` |
+| `definitions.HubIPConfigurationPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.HubRouteTableProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.HubVirtualNetworkConnectionProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.IDPSQueryObject.properties.filters.$ref__deleted` | deleted | `#/definitions/Filters` |
+| `definitions.InboundNatPoolPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.InboundNatRulePropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.InboundSecurityRuleProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.IpAllocationPropertiesFormat.properties.prefixType.$ref__deleted` | deleted | `./network.json#/definitions/IPVersion` |
+| `definitions.IpamPoolPrefixAllocation.properties.pool.$ref__added` | added | `#/definitions/IpamPoolPrefixAllocationPool` |
+| `definitions.IPConfigurationProfilePropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.IPConfigurationPropertiesFormat.properties.privateIPAllocationMethod.$ref__deleted` | deleted | `./network.json#/definitions/IPAllocationMethod` |
+| `definitions.IPConfigurationPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.IpGroupPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.LoadBalancerPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.LoadBalancingRulePropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.LocalNetworkGatewayPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.ManagedServiceIdentity.properties.userAssignedIdentities.additionalProperties.$ref__added` | added | `#/definitions/Components1Jq1T4ISchemasManagedserviceidentityPropertiesUserassignedidentitiesAdditionalproperties` |
+| `definitions.NatGatewayPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.NetworkGroupProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.NetworkInterfaceIPConfigurationPropertiesFormat.properties.privateIPAddressVersion.$ref__deleted` | deleted | `./network.json#/definitions/IPVersion` |
+| `definitions.NetworkInterfaceIPConfigurationPropertiesFormat.properties.privateIPAllocationMethod.$ref__deleted` | deleted | `./network.json#/definitions/IPAllocationMethod` |
+| `definitions.NetworkInterfaceIPConfigurationPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.NetworkInterfacePropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.NetworkInterfaceTapConfigurationPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.NetworkManagerConnectionProperties.properties.connectionState.$ref__deleted` | deleted | `./networkManagerScopeConnection.json#/definitions/ConnectionState` |
+| `definitions.NetworkManagerProperties.properties.networkManagerScopes.$ref__added` | added | `#/definitions/NetworkManagerPropertiesNetworkManagerScopes` |
+| `definitions.NetworkManagerProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.NetworkManagerRoutingConfigurationPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.NetworkProfilePropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.NetworkSecurityGroupPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.NetworkSecurityGroupResult.properties.securityRuleAccessResult.$ref__deleted` | deleted | `./networkSecurityGroup.json#/definitions/SecurityRuleAccess` |
+| `definitions.NetworkVirtualApplianceConnectionProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.NetworkVirtualAppliancePropertiesFormat.properties.networkProfile.$ref__added` | added | `#/definitions/NetworkVirtualAppliancePropertiesFormatNetworkProfile` |
+| `definitions.NetworkVirtualAppliancePropertiesFormat.properties.nvaInterfaceConfigurations.$ref__deleted` | deleted | `#/definitions/NvaInterfaceConfigurations` |
+| `definitions.NetworkVirtualAppliancePropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.NetworkWatcherPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.OutboundRulePropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.P2SConnectionConfigurationProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.P2SVpnGatewayProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.P2SVpnProfileParameters.properties.authenticationMethod.$ref__deleted` | deleted | `./network.json#/definitions/AuthenticationMethod` |
+| `definitions.PacketCaptureResultProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.PeerExpressRouteCircuitConnectionPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.PolicySettings.properties.logScrubbing.$ref__added` | added | `#/definitions/PolicySettingsLogScrubbing` |
+| `definitions.PrivateDnsZoneGroupPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.PrivateEndpointConnectionProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.PrivateEndpointProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.PrivateLinkServiceConnectionProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.PrivateLinkServiceIpConfigurationProperties.properties.privateIPAddressVersion.$ref__deleted` | deleted | `./network.json#/definitions/IPVersion` |
+| `definitions.PrivateLinkServiceIpConfigurationProperties.properties.privateIPAllocationMethod.$ref__deleted` | deleted | `./network.json#/definitions/IPAllocationMethod` |
+| `definitions.PrivateLinkServiceIpConfigurationProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.PrivateLinkServiceProperties.properties.autoApproval.$ref__added` | added | `#/definitions/PrivateLinkServicePropertiesAutoApproval` |
+| `definitions.PrivateLinkServiceProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.PrivateLinkServiceProperties.properties.visibility.$ref__added` | added | `#/definitions/PrivateLinkServicePropertiesVisibility` |
+| `definitions.ProbePropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.PublicIPAddressPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.PublicIPAddressPropertiesFormat.properties.publicIPAddressVersion.$ref__deleted` | deleted | `./network.json#/definitions/IPVersion` |
+| `definitions.PublicIPAddressPropertiesFormat.properties.publicIPAllocationMethod.$ref__deleted` | deleted | `./network.json#/definitions/IPAllocationMethod` |
+| `definitions.PublicIPPrefixPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.PublicIPPrefixPropertiesFormat.properties.publicIPAddressVersion.$ref__deleted` | deleted | `./network.json#/definitions/IPVersion` |
+| `definitions.RecordSet.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.ResourceNavigationLinkFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.RouteFilterPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.RouteFilterRulePropertiesFormat.properties.access.$ref__deleted` | deleted | `./network.json#/definitions/Access` |
+| `definitions.RouteFilterRulePropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.RouteMapProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.RoutePropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.RouteTablePropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.RoutingIntentProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.RoutingRuleCollectionPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.RoutingRulePropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.SecurityPartnerProviderPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.SecurityRulePropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.SecurityUserConfigurationPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.SecurityUserRuleCollectionPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.SecurityUserRulePropertiesFormat.properties.direction.$ref__deleted` | deleted | `./networkManagerSecurityAdminConfiguration.json#/definitions/SecurityConfigurationRuleDirection` |
+| `definitions.SecurityUserRulePropertiesFormat.properties.protocol.$ref__deleted` | deleted | `./networkManagerSecurityAdminConfiguration.json#/definitions/RuleProtocol` |
+| `definitions.SecurityUserRulePropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.ServiceAssociationLinkPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.ServiceDelegationPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.ServiceEndpointPolicyDefinitionPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.ServiceEndpointPolicyPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.ServiceEndpointPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.SharedKeyProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.SignaturesOverrides.properties.properties.$ref__added` | added | `#/definitions/SignaturesOverridesProperties` |
+| `definitions.SingleQueryResult.properties.destinationPorts.items.$ref__deleted` | deleted | `#/definitions/PortsList` |
+| `definitions.SingleQueryResult.properties.sourcePorts.items.$ref__deleted` | deleted | `#/definitions/PortsList` |
+| `definitions.StaticMemberProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.SubnetPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.VerificationIPFlowResult.properties.access.$ref__deleted` | deleted | `./network.json#/definitions/Access` |
+| `definitions.VirtualApplianceSiteProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.VirtualHubProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.VirtualHubRouteTableV2Properties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.VirtualNetworkGatewayConnectionListEntityPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.VirtualNetworkGatewayConnectionPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.VirtualNetworkGatewayIPConfigurationPropertiesFormat.properties.privateIPAllocationMethod.$ref__deleted` | deleted | `./network.json#/definitions/IPAllocationMethod` |
+| `definitions.VirtualNetworkGatewayIPConfigurationPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.VirtualNetworkGatewayNatRuleProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.VirtualNetworkGatewayPolicyGroupProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.VirtualNetworkGatewayPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.VirtualNetworkPeeringPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.VirtualNetworkPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.VirtualNetworkTapPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.VirtualRouterPeeringProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.VirtualRouterPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.VirtualWanProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.VirtualWanVpnProfileParameters.properties.authenticationMethod.$ref__deleted` | deleted | `./network.json#/definitions/AuthenticationMethod` |
+| `definitions.VngClientConnectionConfigurationProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.VpnClientParameters.properties.authenticationMethod.$ref__deleted` | deleted | `./network.json#/definitions/AuthenticationMethod` |
+| `definitions.VpnClientRevokedCertificatePropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.VpnClientRootCertificatePropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.VpnConnectionProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.VpnConnectionProperties.properties.vpnConnectionProtocolType.$ref__deleted` | deleted | `./virtualNetworkGateway.json#/definitions/ConnectionProtocol` |
+| `definitions.VpnGatewayNatRuleProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.VpnGatewayProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.VpnServerConfigurationPolicyGroupProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.VpnSiteLinkConnectionProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.VpnSiteLinkConnectionProperties.properties.vpnConnectionProtocolType.$ref__deleted` | deleted | `./virtualNetworkGateway.json#/definitions/ConnectionProtocol` |
+| `definitions.VpnSiteLinkProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.VpnSiteProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.WebApplicationFirewallPolicyPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `paths['/providers/microsoft.Management/managementGroups/{managementGroupId}/providers/microsoft.Network/networkManagerConnections'].get.parameters[1].$ref__deleted` | deleted | `./networkManager.json#/parameters/ListTopParameter` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/availablePrivateEndpointTypes'].get.parameters[0].$ref__added` | added | `../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/checkDnsNameAvailability'].get.parameters[0].$ref__added` | added | `../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/checkPrivateLinkServiceVisibility'].post.parameters[0].$ref__added` | added | `../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/serviceTags'].get.parameters[0].$ref__added` | added | `../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/setLoadBalancerFrontendPublicIpAddresses'].post.parameters[0].$ref__added` | added | `../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/networkManagerConnections'].get.parameters[0].$ref__deleted` | deleted | `./networkManager.json#/parameters/ListTopParameter` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/networkManagerConnections'].get.parameters[1].$ref__deleted` | deleted | `./networkManager.json#/parameters/ListSkipTokenParameter` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/getikesas'].post.responses.200.schema.$ref__added` | added | `#/definitions/stringApplicationJson` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/startPacketCapture'].post.responses.200.schema.$ref__added` | added | `#/definitions/stringApplicationJson` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/stopPacketCapture'].post.responses.200.schema.$ref__added` | added | `#/definitions/stringApplicationJson` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/vpndeviceconfigurationscript'].post.responses.200.schema.$ref__added` | added | `#/definitions/stringApplicationJson` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/locations/{location}/checkPrivateLinkServiceVisibility'].post.parameters[0].$ref__added` | added | `../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/scopeConnections'].get.parameters[0].$ref__deleted` | deleted | `./networkManager.json#/parameters/NetworkManagerNameParameter` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/scopeConnections'].get.parameters[1].$ref__deleted` | deleted | `./networkManager.json#/parameters/ListTopParameter` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/scopeConnections'].get.parameters[2].$ref__deleted` | deleted | `./networkManager.json#/parameters/ListSkipTokenParameter` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/profiles/{profileName}/accessRules/{accessRuleName}/reconcile'].post.parameters[3].schema.$ref__deleted` | deleted | `#/definitions/NspAccessRuleReconcile` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/profiles/{profileName}/accessRules/{accessRuleName}/reconcile'].post.responses.200.schema.$ref__deleted` | deleted | `#/definitions/NspAccessRuleReconcile` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations/{associationName}/reconcile'].post.parameters[2].schema.$ref__deleted` | deleted | `#/definitions/NspAssociationReconcile` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations/{associationName}/reconcile'].post.responses.200.schema.$ref__deleted` | deleted | `#/definitions/NspAssociationReconcile` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{hubName}/bgpConnections/{connectionName}/advertisedRoutes'].post.responses.200.schema.$ref__deleted` | deleted | `#/definitions/PeerRouteList` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{hubName}/bgpConnections/{connectionName}/learnedRoutes'].post.responses.200.schema.$ref__deleted` | deleted | `#/definitions/PeerRouteList` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/generatevpnclientpackage'].post.responses.200.schema.$ref__added` | added | `#/definitions/stringApplicationJson` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/generatevpnprofile'].post.responses.200.schema.$ref__added` | added | `#/definitions/stringApplicationJson` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getvpnprofilepackageurl'].post.responses.200.schema.$ref__added` | added | `#/definitions/stringApplicationJson` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/startPacketCapture'].post.responses.200.schema.$ref__added` | added | `#/definitions/stringApplicationJson` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/startSiteFailoverTest'].post.responses.200.schema.$ref__added` | added | `#/definitions/stringApplicationJson` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/stopPacketCapture'].post.responses.200.schema.$ref__added` | added | `#/definitions/stringApplicationJson` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/stopSiteFailoverTest'].post.responses.200.schema.$ref__added` | added | `#/definitions/stringApplicationJson` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/supportedvpndevices'].post.responses.200.schema.$ref__added` | added | `#/definitions/stringApplicationJson` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/startpacketcapture'].post.responses.200.schema.$ref__added` | added | `#/definitions/stringApplicationJson` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/stoppacketcapture'].post.responses.200.schema.$ref__added` | added | `#/definitions/stringApplicationJson` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}/vpnLinkConnections/{linkConnectionName}/getikesas'].post.responses.200.schema.$ref__added` | added | `#/definitions/stringApplicationJson` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{vpnConnectionName}/startpacketcapture'].post.responses.200.schema.$ref__added` | added | `#/definitions/stringApplicationJson` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{vpnConnectionName}/stoppacketcapture'].post.responses.200.schema.$ref__added` | added | `#/definitions/stringApplicationJson` |
 
 ### Changes for `name`
 
@@ -131,25 +304,14 @@
 | `definitions.VpnServerConfigurationPolicyGroup.properties.name__deleted` | deleted | `{"type":"string","description":"The name of the resource that is unique within a resource group. Thi...` |
 | `definitions.VpnSiteLink.properties.name__deleted` | deleted | `{"type":"string","description":"The name of the resource that is unique within a resource group. Thi...` |
 | `definitions.VpnSiteLinkConnection.properties.name__deleted` | deleted | `{"type":"string","description":"The name of the resource that is unique within a resource group. Thi...` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/autoApprovedPrivateLinkServices'].get.parameters[0].name__deleted` | deleted | `location` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/availableDelegations'].get.parameters[0].name__deleted` | deleted | `location` |
+| `paths['/providers/microsoft.Management/managementGroups/{managementGroupId}/providers/microsoft.Network/networkManagerConnections'].get.parameters[1].name__added` | added | `$top` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/availablePrivateEndpointTypes'].get.parameters[0].name__deleted` | deleted | `location` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/availableServiceAliases'].get.parameters[0].name__deleted` | deleted | `location` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/checkDnsNameAvailability'].get.parameters[0].name__deleted` | deleted | `location` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/checkPrivateLinkServiceVisibility'].post.parameters[0].name__deleted` | deleted | `location` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/nspServiceTags'].get.parameters[0].name__deleted` | deleted | `location` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/perimeterAssociableResourceTypes'].get.parameters[0].name__deleted` | deleted | `location` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/serviceTagDetails'].get.parameters[0].name__deleted` | deleted | `location` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/serviceTags'].get.parameters[0].name__deleted` | deleted | `location` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/setLoadBalancerFrontendPublicIpAddresses'].post.parameters[0].name__deleted` | deleted | `location` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/usages'].get.parameters[0].name__deleted` | deleted | `location` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/virtualNetworkAvailableEndpointServices'].get.parameters[0].name__deleted` | deleted | `location` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/networkManagerConnections'].get.parameters[0].name__added` | added | `$top` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/networkManagerConnections'].get.parameters[1].name__added` | added | `$skipToken` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/locations/{location}/autoApprovedPrivateLinkServices'].get.parameters[0].name__deleted` | deleted | `location` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/locations/{location}/availableDelegations'].get.parameters[0].name__deleted` | deleted | `location` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/locations/{location}/availablePrivateEndpointTypes'].get.parameters[0].name__deleted` | deleted | `location` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/locations/{location}/availableServiceAliases'].get.parameters[0].name__deleted` | deleted | `location` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/locations/{location}/checkPrivateLinkServiceVisibility'].post.parameters[0].name__deleted` | deleted | `location` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/scopeConnections'].get.parameters[0].name__added` | added | `networkManagerName` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/scopeConnections'].get.parameters[1].name__added` | added | `$top` |
@@ -159,194 +321,18 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/autoApprovedPrivateLinkServices'].get.parameters[0].in__deleted` | deleted | `path` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/availableDelegations'].get.parameters[0].in__deleted` | deleted | `path` |
+| `paths['/providers/microsoft.Management/managementGroups/{managementGroupId}/providers/microsoft.Network/networkManagerConnections'].get.parameters[1].in__added` | added | `query` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/availablePrivateEndpointTypes'].get.parameters[0].in__deleted` | deleted | `path` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/availableServiceAliases'].get.parameters[0].in__deleted` | deleted | `path` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/checkDnsNameAvailability'].get.parameters[0].in__deleted` | deleted | `path` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/checkPrivateLinkServiceVisibility'].post.parameters[0].in__deleted` | deleted | `path` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/nspServiceTags'].get.parameters[0].in__deleted` | deleted | `path` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/perimeterAssociableResourceTypes'].get.parameters[0].in__deleted` | deleted | `path` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/serviceTagDetails'].get.parameters[0].in__deleted` | deleted | `path` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/serviceTags'].get.parameters[0].in__deleted` | deleted | `path` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/setLoadBalancerFrontendPublicIpAddresses'].post.parameters[0].in__deleted` | deleted | `path` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/usages'].get.parameters[0].in__deleted` | deleted | `path` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/virtualNetworkAvailableEndpointServices'].get.parameters[0].in__deleted` | deleted | `path` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/networkManagerConnections'].get.parameters[0].in__added` | added | `query` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/networkManagerConnections'].get.parameters[1].in__added` | added | `query` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/locations/{location}/autoApprovedPrivateLinkServices'].get.parameters[0].in__deleted` | deleted | `path` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/locations/{location}/availableDelegations'].get.parameters[0].in__deleted` | deleted | `path` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/locations/{location}/availablePrivateEndpointTypes'].get.parameters[0].in__deleted` | deleted | `path` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/locations/{location}/availableServiceAliases'].get.parameters[0].in__deleted` | deleted | `path` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/locations/{location}/checkPrivateLinkServiceVisibility'].post.parameters[0].in__deleted` | deleted | `path` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/scopeConnections'].get.parameters[0].in__added` | added | `path` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/scopeConnections'].get.parameters[1].in__added` | added | `query` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/scopeConnections'].get.parameters[2].in__added` | added | `query` |
-
-### Changes for `required`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.AdminRule.required__added` | added | `["kind"]` |
-| `definitions.AdminRuleCollectionListResult.required__added` | added | `["value"]` |
-| `definitions.ApplicationGatewayAvailableSslPredefinedPolicies.required__added` | added | `["value"]` |
-| `definitions.ApplicationGatewayListResult.required__added` | added | `["value"]` |
-| `definitions.ApplicationGatewayPrivateEndpointConnectionListResult.required__added` | added | `["value"]` |
-| `definitions.ApplicationGatewayPrivateLinkResourceListResult.required__added` | added | `["value"]` |
-| `definitions.ApplicationGatewayWafDynamicManifestResultList.required__added` | added | `["value"]` |
-| `definitions.ApplicationSecurityGroupListResult.required__added` | added | `["value"]` |
-| `definitions.AutoApprovedPrivateLinkServicesResult.required__added` | added | `["value"]` |
-| `definitions.AvailableDelegationsResult.required__added` | added | `["value"]` |
-| `definitions.AvailablePrivateEndpointTypesResult.required__added` | added | `["value"]` |
-| `definitions.AvailableServiceAliasesResult.required__added` | added | `["value"]` |
-| `definitions.AzureFirewallFqdnTagListResult.required__added` | added | `["value"]` |
-| `definitions.AzureFirewallListResult.required__added` | added | `["value"]` |
-| `definitions.AzureWebCategoryListResult.required__added` | added | `["value"]` |
-| `definitions.BastionActiveSessionListResult.required__added` | added | `["value"]` |
-| `definitions.BastionHostListResult.required__added` | added | `["value"]` |
-| `definitions.BastionSessionDeleteResult.required__added` | added | `["value"]` |
-| `definitions.BastionShareableLinkListResult.required__added` | added | `["value"]` |
-| `definitions.BgpServiceCommunityListResult.required__added` | added | `["value"]` |
-| `definitions.ConnectionSharedKeyResultList.required__added` | added | `["value"]` |
-| `definitions.ConnectivityConfigurationListResult.required__added` | added | `["value"]` |
-| `definitions.ConnectivityConfigurationProperties.properties.connectivityCapabilities.required__deleted` | deleted | `["connectedGroupPrivateEndpointsScale","connectedGroupAddressOverlap","peeringEnforcement"]` |
-| `definitions.CustomIpPrefixListResult.required__added` | added | `["value"]` |
-| `definitions.DdosProtectionPlanListResult.required__added` | added | `["value"]` |
-| `definitions.DefaultAdminRule.required__added` | added | `["kind"]` |
-| `definitions.DscpConfigurationListResult.required__added` | added | `["value"]` |
-| `definitions.EffectiveNetworkSecurityGroupListResult.required__added` | added | `["value"]` |
-| `definitions.EffectiveRouteListResult.required__added` | added | `["value"]` |
-| `definitions.ExpressRouteCircuitConnectionListResult.required__added` | added | `["value"]` |
-| `definitions.ExpressRouteCircuitListResult.required__added` | added | `["value"]` |
-| `definitions.ExpressRouteCircuitPeeringListResult.required__added` | added | `["value"]` |
-| `definitions.ExpressRouteCircuitsArpTableListResult.required__added` | added | `["value"]` |
-| `definitions.ExpressRouteCircuitsRoutesTableListResult.required__added` | added | `["value"]` |
-| `definitions.ExpressRouteCircuitsRoutesTableSummaryListResult.required__added` | added | `["value"]` |
-| `definitions.ExpressRouteCrossConnectionListResult.required__added` | added | `["value"]` |
-| `definitions.ExpressRouteCrossConnectionPeeringList.required__added` | added | `["value"]` |
-| `definitions.ExpressRouteCrossConnectionsRoutesTableSummaryListResult.required__added` | added | `["value"]` |
-| `definitions.ExpressRouteLinkListResult.required__added` | added | `["value"]` |
-| `definitions.ExpressRoutePortAuthorizationListResult.required__added` | added | `["value"]` |
-| `definitions.ExpressRoutePortListResult.required__added` | added | `["value"]` |
-| `definitions.ExpressRoutePortsLocationListResult.required__added` | added | `["value"]` |
-| `definitions.ExpressRouteProviderPortListResult.required__added` | added | `["value"]` |
-| `definitions.ExpressRouteServiceProviderListResult.required__added` | added | `["value"]` |
-| `definitions.FirewallPolicyListResult.required__added` | added | `["value"]` |
-| `definitions.FirewallPolicyRuleCollectionGroupListResult.required__added` | added | `["value"]` |
-| `definitions.FlowLogListResult.required__added` | added | `["value"]` |
-| `definitions.InboundNatRuleListResult.required__added` | added | `["value"]` |
-| `definitions.IpAllocationListResult.required__added` | added | `["value"]` |
-| `definitions.IpamPoolList.required__added` | added | `["value"]` |
-| `definitions.IpGroupListResult.required__added` | added | `["value"]` |
-| `definitions.ListHubRouteTablesResult.required__added` | added | `["value"]` |
-| `definitions.ListHubVirtualNetworkConnectionsResult.required__added` | added | `["value"]` |
-| `definitions.ListP2SVpnGatewaysResult.required__added` | added | `["value"]` |
-| `definitions.ListRouteMapsResult.required__added` | added | `["value"]` |
-| `definitions.ListRoutingIntentResult.required__added` | added | `["value"]` |
-| `definitions.ListVirtualHubBgpConnectionResults.required__added` | added | `["value"]` |
-| `definitions.ListVirtualHubIpConfigurationResults.required__added` | added | `["value"]` |
-| `definitions.ListVirtualHubsResult.required__added` | added | `["value"]` |
-| `definitions.ListVirtualNetworkGatewayNatRulesResult.required__added` | added | `["value"]` |
-| `definitions.ListVirtualWANsResult.required__added` | added | `["value"]` |
-| `definitions.ListVpnConnectionsResult.required__added` | added | `["value"]` |
-| `definitions.ListVpnGatewayNatRulesResult.required__added` | added | `["value"]` |
-| `definitions.ListVpnGatewaysResult.required__added` | added | `["value"]` |
-| `definitions.ListVpnServerConfigurationPolicyGroupsResult.required__added` | added | `["value"]` |
-| `definitions.ListVpnServerConfigurationsResult.required__added` | added | `["value"]` |
-| `definitions.ListVpnSiteLinkConnectionsResult.required__added` | added | `["value"]` |
-| `definitions.ListVpnSiteLinksResult.required__added` | added | `["value"]` |
-| `definitions.ListVpnSitesResult.required__added` | added | `["value"]` |
-| `definitions.LoadBalancerListResult.required__added` | added | `["value"]` |
-| `definitions.LocalNetworkGatewayListResult.required__added` | added | `["value"]` |
-| `definitions.NatGatewayListResult.required__added` | added | `["value"]` |
-| `definitions.NetworkGroupListResult.required__added` | added | `["value"]` |
-| `definitions.NetworkInterfaceIPConfigurationListResult.required__added` | added | `["value"]` |
-| `definitions.NetworkInterfaceListResult.required__added` | added | `["value"]` |
-| `definitions.NetworkInterfaceTapConfigurationListResult.required__added` | added | `["value"]` |
-| `definitions.NetworkManagerConnectionListResult.required__added` | added | `["value"]` |
-| `definitions.NetworkManagerListResult.required__added` | added | `["value"]` |
-| `definitions.NetworkManagerRoutingConfigurationListResult.required__added` | added | `["value"]` |
-| `definitions.NetworkProfileListResult.required__added` | added | `["value"]` |
-| `definitions.NetworkSecurityGroupListResult.required__added` | added | `["value"]` |
-| `definitions.NetworkSecurityPerimeterListResult.required__added` | added | `["value"]` |
-| `definitions.NetworkVirtualApplianceConnectionList.required__added` | added | `["value"]` |
-| `definitions.NetworkVirtualApplianceListResult.required__added` | added | `["value"]` |
-| `definitions.NetworkVirtualApplianceSkuListResult.required__added` | added | `["value"]` |
-| `definitions.NspAccessRuleListResult.required__added` | added | `["value"]` |
-| `definitions.NspLinkListResult.required__added` | added | `["value"]` |
-| `definitions.NspLinkReferenceListResult.required__added` | added | `["value"]` |
-| `definitions.NspLoggingConfigurationListResult.required__added` | added | `["value"]` |
-| `definitions.NspProfileListResult.required__added` | added | `["value"]` |
-| `definitions.NspServiceTagsListResult.required__added` | added | `["value"]` |
-| `definitions.P2SVpnGateway.required__deleted` | deleted | `["location"]` |
-| `definitions.PeerExpressRouteCircuitConnectionListResult.required__added` | added | `["value"]` |
-| `definitions.PoolAssociationList.required__added` | added | `["value"]` |
-| `definitions.PrivateDnsZoneGroupListResult.required__added` | added | `["value"]` |
-| `definitions.PrivateEndpointConnectionListResult.required__added` | added | `["value"]` |
-| `definitions.PrivateEndpointListResult.required__added` | added | `["value"]` |
-| `definitions.PrivateLinkServiceListResult.required__added` | added | `["value"]` |
-| `definitions.PublicIPAddressListResult.required__added` | added | `["value"]` |
-| `definitions.PublicIPPrefixListResult.required__added` | added | `["value"]` |
-| `definitions.RadiusAuthServerListResult.required__added` | added | `["value"]` |
-| `definitions.ReachabilityAnalysisIntentListResult.required__added` | added | `["value"]` |
-| `definitions.ReachabilityAnalysisRunListResult.required__added` | added | `["value"]` |
-| `definitions.RouteFilter.required__deleted` | deleted | `["location"]` |
-| `definitions.RouteFilterListResult.required__added` | added | `["value"]` |
-| `definitions.RouteFilterRuleListResult.required__added` | added | `["value"]` |
-| `definitions.RouteListResult.required__added` | added | `["value"]` |
-| `definitions.RouteTableListResult.required__added` | added | `["value"]` |
-| `definitions.RoutingRuleCollectionListResult.required__added` | added | `["value"]` |
-| `definitions.RoutingRuleListResult.required__added` | added | `["value"]` |
-| `definitions.ScopeConnectionListResult.required__added` | added | `["value"]` |
-| `definitions.SecurityAdminConfigurationListResult.required__added` | added | `["value"]` |
-| `definitions.SecurityPartnerProviderListResult.required__added` | added | `["value"]` |
-| `definitions.SecurityRuleListResult.required__added` | added | `["value"]` |
-| `definitions.SecurityUserConfigurationListResult.required__added` | added | `["value"]` |
-| `definitions.SecurityUserRuleCollectionListResult.required__added` | added | `["value"]` |
-| `definitions.SecurityUserRuleListResult.required__added` | added | `["value"]` |
-| `definitions.ServiceEndpointPolicyDefinitionListResult.required__added` | added | `["value"]` |
-| `definitions.ServiceEndpointPolicyListResult.required__added` | added | `["value"]` |
-| `definitions.ServiceTagInformationListResult.required__added` | added | `["value"]` |
-| `definitions.StaticCidrList.required__added` | added | `["value"]` |
-| `definitions.StaticMemberListResult.required__added` | added | `["value"]` |
-| `definitions.SubnetListResult.required__added` | added | `["value"]` |
-| `definitions.UsagesListResult.required__added` | added | `["value"]` |
-| `definitions.VerifierWorkspaceListResult.required__added` | added | `["value"]` |
-| `definitions.VirtualHub.required__deleted` | deleted | `["location"]` |
-| `definitions.VirtualNetworkDdosProtectionStatusResult.required__added` | added | `["value"]` |
-| `definitions.VirtualNetworkGatewayConnectionListResult.required__added` | added | `["value"]` |
-| `definitions.VirtualNetworkGatewayListConnectionsResult.required__added` | added | `["value"]` |
-| `definitions.VirtualNetworkGatewayListResult.required__added` | added | `["value"]` |
-| `definitions.VirtualNetworkListResult.required__added` | added | `["value"]` |
-| `definitions.VirtualNetworkListUsageResult.required__added` | added | `["value"]` |
-| `definitions.VirtualNetworkPeeringListResult.required__added` | added | `["value"]` |
-| `definitions.VirtualNetworkTapListResult.required__added` | added | `["value"]` |
-| `definitions.VirtualRouterListResult.required__added` | added | `["value"]` |
-| `definitions.VirtualRouterPeeringListResult.required__added` | added | `["value"]` |
-| `definitions.VirtualWAN.required__deleted` | deleted | `["location"]` |
-| `definitions.VpnGateway.required__deleted` | deleted | `["location"]` |
-| `definitions.VpnSite.required__deleted` | deleted | `["location"]` |
-| `definitions.WebApplicationFirewallPolicyListResult.required__added` | added | `["value"]` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/autoApprovedPrivateLinkServices'].get.parameters[0].required__deleted` | deleted | `true` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/availableDelegations'].get.parameters[0].required__deleted` | deleted | `true` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/availablePrivateEndpointTypes'].get.parameters[0].required__deleted` | deleted | `true` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/availableServiceAliases'].get.parameters[0].required__deleted` | deleted | `true` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/checkDnsNameAvailability'].get.parameters[0].required__deleted` | deleted | `true` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/checkPrivateLinkServiceVisibility'].post.parameters[0].required__deleted` | deleted | `true` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/nspServiceTags'].get.parameters[0].required__deleted` | deleted | `true` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/perimeterAssociableResourceTypes'].get.parameters[0].required__deleted` | deleted | `true` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/serviceTagDetails'].get.parameters[0].required__deleted` | deleted | `true` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/serviceTags'].get.parameters[0].required__deleted` | deleted | `true` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/setLoadBalancerFrontendPublicIpAddresses'].post.parameters[0].required__deleted` | deleted | `true` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/usages'].get.parameters[0].required__deleted` | deleted | `true` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/virtualNetworkAvailableEndpointServices'].get.parameters[0].required__deleted` | deleted | `true` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/locations/{location}/autoApprovedPrivateLinkServices'].get.parameters[0].required__deleted` | deleted | `true` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/locations/{location}/availableDelegations'].get.parameters[0].required__deleted` | deleted | `true` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/locations/{location}/availablePrivateEndpointTypes'].get.parameters[0].required__deleted` | deleted | `true` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/locations/{location}/availableServiceAliases'].get.parameters[0].required__deleted` | deleted | `true` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/locations/{location}/checkPrivateLinkServiceVisibility'].post.parameters[0].required__deleted` | deleted | `true` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/ipamPools/{poolName}/staticCidrs/{staticCidrName}'].put.parameters[4].required__added` | added | `true` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/scopeConnections'].get.parameters[0].required__added` | added | `true` |
 
 ### Changes for `type`
 
@@ -462,6 +448,7 @@
 | `definitions.HubRouteTable.properties.type__deleted` | deleted | `{"type":"string","description":"Resource type.","readOnly":true}` |
 | `definitions.HubRouteTableProperties.properties.provisioningState.type__added` | added | `string` |
 | `definitions.HubVirtualNetworkConnectionProperties.properties.provisioningState.type__added` | added | `string` |
+| `definitions.IDPSQueryObject.properties.orderBy.type__deleted` | deleted | `object` |
 | `definitions.InboundNatPoolPropertiesFormat.properties.provisioningState.type__added` | added | `string` |
 | `definitions.InboundNatRule.properties.type__deleted` | deleted | `{"type":"string","description":"Type of the resource.","readOnly":true}` |
 | `definitions.InboundNatRulePropertiesFormat.properties.provisioningState.type__added` | added | `string` |
@@ -602,270 +589,368 @@
 | `definitions.VpnSiteLinkProperties.properties.provisioningState.type__added` | added | `string` |
 | `definitions.VpnSiteProperties.properties.provisioningState.type__added` | added | `string` |
 | `definitions.WebApplicationFirewallPolicyPropertiesFormat.properties.provisioningState.type__added` | added | `string` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/autoApprovedPrivateLinkServices'].get.parameters[0].type__deleted` | deleted | `string` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/availableDelegations'].get.parameters[0].type__deleted` | deleted | `string` |
+| `paths['/providers/microsoft.Management/managementGroups/{managementGroupId}/providers/microsoft.Network/networkManagerConnections'].get.parameters[1].type__added` | added | `integer` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/availablePrivateEndpointTypes'].get.parameters[0].type__deleted` | deleted | `string` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/availableServiceAliases'].get.parameters[0].type__deleted` | deleted | `string` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/checkDnsNameAvailability'].get.parameters[0].type__deleted` | deleted | `string` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/checkPrivateLinkServiceVisibility'].post.parameters[0].type__deleted` | deleted | `string` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/nspServiceTags'].get.parameters[0].type__deleted` | deleted | `string` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/perimeterAssociableResourceTypes'].get.parameters[0].type__deleted` | deleted | `string` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/serviceTagDetails'].get.parameters[0].type__deleted` | deleted | `string` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/serviceTags'].get.parameters[0].type__deleted` | deleted | `string` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/setLoadBalancerFrontendPublicIpAddresses'].post.parameters[0].type__deleted` | deleted | `string` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/usages'].get.parameters[0].type__deleted` | deleted | `string` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/virtualNetworkAvailableEndpointServices'].get.parameters[0].type__deleted` | deleted | `string` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/networkManagerConnections'].get.parameters[0].type__added` | added | `integer` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/networkManagerConnections'].get.parameters[1].type__added` | added | `string` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/locations/{location}/autoApprovedPrivateLinkServices'].get.parameters[0].type__deleted` | deleted | `string` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/locations/{location}/availableDelegations'].get.parameters[0].type__deleted` | deleted | `string` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/locations/{location}/availablePrivateEndpointTypes'].get.parameters[0].type__deleted` | deleted | `string` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/locations/{location}/availableServiceAliases'].get.parameters[0].type__deleted` | deleted | `string` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/getikesas'].post.responses.200.schema.type__deleted` | deleted | `string` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/startPacketCapture'].post.responses.200.schema.type__deleted` | deleted | `string` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/stopPacketCapture'].post.responses.200.schema.type__deleted` | deleted | `string` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/vpndeviceconfigurationscript'].post.responses.200.schema.type__deleted` | deleted | `string` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/locations/{location}/checkPrivateLinkServiceVisibility'].post.parameters[0].type__deleted` | deleted | `string` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/scopeConnections'].get.parameters[0].type__added` | added | `string` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/scopeConnections'].get.parameters[1].type__added` | added | `integer` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/scopeConnections'].get.parameters[2].type__added` | added | `string` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{hubName}/bgpConnections/{connectionName}/advertisedRoutes'].post.responses.200.schema.type__added` | added | `object` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{hubName}/bgpConnections/{connectionName}/learnedRoutes'].post.responses.200.schema.type__added` | added | `object` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/generatevpnclientpackage'].post.responses.200.schema.type__deleted` | deleted | `string` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/generatevpnprofile'].post.responses.200.schema.type__deleted` | deleted | `string` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getvpnprofilepackageurl'].post.responses.200.schema.type__deleted` | deleted | `string` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/startPacketCapture'].post.responses.200.schema.type__deleted` | deleted | `string` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/startSiteFailoverTest'].post.responses.200.schema.type__deleted` | deleted | `string` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/stopPacketCapture'].post.responses.200.schema.type__deleted` | deleted | `string` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/stopSiteFailoverTest'].post.responses.200.schema.type__deleted` | deleted | `string` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/supportedvpndevices'].post.responses.200.schema.type__deleted` | deleted | `string` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/startpacketcapture'].post.responses.200.schema.type__deleted` | deleted | `string` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/stoppacketcapture'].post.responses.200.schema.type__deleted` | deleted | `string` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}/vpnLinkConnections/{linkConnectionName}/getikesas'].post.responses.200.schema.type__deleted` | deleted | `string` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{vpnConnectionName}/startpacketcapture'].post.responses.200.schema.type__deleted` | deleted | `string` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{vpnConnectionName}/stoppacketcapture'].post.responses.200.schema.type__deleted` | deleted | `string` |
 
-### Changes for `$ref`
+### Changes for `format`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.ApplicationGatewayAuthenticationCertificatePropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.ApplicationGatewayBackendAddressPoolPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.ApplicationGatewayBackendHttpSettingsPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.ApplicationGatewayBackendSettingsPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.ApplicationGatewayEntraJWTValidationConfigPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.ApplicationGatewayFirewallRuleSetPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.ApplicationGatewayFrontendIPConfigurationPropertiesFormat.properties.privateIPAllocationMethod.$ref__deleted` | deleted | `./network.json#/definitions/IPAllocationMethod` |
-| `definitions.ApplicationGatewayFrontendIPConfigurationPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.ApplicationGatewayFrontendPortPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.ApplicationGatewayHttpListenerPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.ApplicationGatewayIPConfigurationPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.ApplicationGatewayListenerPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.ApplicationGatewayLoadDistributionPolicyPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.ApplicationGatewayPathRulePropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.ApplicationGatewayPrivateEndpointConnectionProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.ApplicationGatewayPrivateLinkConfigurationProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.ApplicationGatewayPrivateLinkIpConfigurationProperties.properties.privateIPAllocationMethod.$ref__deleted` | deleted | `./network.json#/definitions/IPAllocationMethod` |
-| `definitions.ApplicationGatewayPrivateLinkIpConfigurationProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.ApplicationGatewayProbePropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.ApplicationGatewayPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.ApplicationGatewayRequestRoutingRulePropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.ApplicationGatewayRewriteRuleSetPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.ApplicationGatewayRoutingRulePropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.ApplicationGatewaySslCertificatePropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.ApplicationGatewaySslProfilePropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.ApplicationGatewayTrustedClientCertificatePropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.ApplicationGatewayTrustedRootCertificatePropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.ApplicationGatewayUrlPathMapPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.ApplicationSecurityGroupPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.AuthorizationPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.AzureFirewallApplicationRuleCollectionPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.AzureFirewallFqdnTagPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.AzureFirewallIPConfigurationPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.AzureFirewallNatRuleCollectionProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.AzureFirewallNetworkRuleCollectionPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.AzureFirewallPropertiesFormat.properties.additionalProperties.$ref__deleted` | deleted | `#/definitions/AzureFirewallAdditionalProperties` |
-| `definitions.AzureFirewallPropertiesFormat.properties.ipGroups.$ref__deleted` | deleted | `#/definitions/IpGroups` |
-| `definitions.AzureFirewallPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.BackendAddressPoolPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.BastionHostIPConfigurationPropertiesFormat.properties.privateIPAllocationMethod.$ref__deleted` | deleted | `./network.json#/definitions/IPAllocationMethod` |
-| `definitions.BastionHostIPConfigurationPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.BastionHostPropertiesFormat.properties.networkAcls.$ref__added` | added | `#/definitions/BastionHostPropertiesFormatNetworkAcls` |
-| `definitions.BastionHostPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.BgpConnectionProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.ConnectionMonitorResultProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.ConnectivityConfigurationProperties.properties.connectivityCapabilities.$ref__added` | added | `#/definitions/ConnectivityConfigurationPropertiesConnectivityCapabilities` |
-| `definitions.ConnectivityConfigurationProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.ConnectivityIssue.properties.context.items.$ref__deleted` | deleted | `#/definitions/IssueContext` |
-| `definitions.ConnectivityParameters.properties.preferredIPVersion.$ref__deleted` | deleted | `./network.json#/definitions/IPVersion` |
-| `definitions.ContainerNetworkInterfaceConfigurationPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.ContainerNetworkInterfaceIpConfigurationPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.ContainerNetworkInterfacePropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.CustomIpPrefixPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.DdosCustomPolicyPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.DdosDetectionRulePropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.DdosProtectionPlanPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.DelegationProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.DscpConfigurationPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.EffectiveNetworkSecurityRule.properties.access.$ref__deleted` | deleted | `./networkSecurityGroup.json#/definitions/SecurityRuleAccess` |
-| `definitions.EffectiveNetworkSecurityRule.properties.direction.$ref__deleted` | deleted | `./networkSecurityGroup.json#/definitions/SecurityRuleDirection` |
-| `definitions.EffectiveRoute.properties.nextHopType.$ref__deleted` | deleted | `./routeTable.json#/definitions/RouteNextHopType` |
-| `definitions.ExpressRouteCircuitConnectionPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.ExpressRouteCircuitPeeringPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.ExpressRouteCircuitPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.ExpressRouteConnectionProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.ExpressRouteCrossConnectionPeeringProperties.properties.peeringType.$ref__deleted` | deleted | `./expressRouteCircuit.json#/definitions/ExpressRoutePeeringType` |
-| `definitions.ExpressRouteCrossConnectionPeeringProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.ExpressRouteCrossConnectionPeeringProperties.properties.state.$ref__deleted` | deleted | `./expressRouteCircuit.json#/definitions/ExpressRoutePeeringState` |
-| `definitions.ExpressRouteCrossConnectionProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.ExpressRouteCrossConnectionProperties.properties.serviceProviderProvisioningState.$ref__deleted` | deleted | `./expressRouteCircuit.json#/definitions/ServiceProviderProvisioningState` |
-| `definitions.ExpressRouteGatewayProperties.properties.autoScaleConfiguration.$ref__added` | added | `#/definitions/ExpressRouteGatewayPropertiesAutoScaleConfiguration` |
-| `definitions.ExpressRouteGatewayProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.ExpressRouteLinkPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.ExpressRoutePortAuthorizationPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.ExpressRoutePortPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.ExpressRoutePortsLocationPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.ExpressRouteServiceProviderPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.FirewallPolicyDraftProperties.properties.threatIntelMode.$ref__deleted` | deleted | `./azureFirewall.json#/definitions/AzureFirewallThreatIntelMode` |
-| `definitions.FirewallPolicyPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.FirewallPolicyPropertiesFormat.properties.threatIntelMode.$ref__deleted` | deleted | `./azureFirewall.json#/definitions/AzureFirewallThreatIntelMode` |
-| `definitions.FirewallPolicyRuleCollectionGroupProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.FlowLogPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.FrontendIPConfigurationPropertiesFormat.properties.privateIPAddressVersion.$ref__deleted` | deleted | `./network.json#/definitions/IPVersion` |
-| `definitions.FrontendIPConfigurationPropertiesFormat.properties.privateIPAllocationMethod.$ref__deleted` | deleted | `./network.json#/definitions/IPAllocationMethod` |
-| `definitions.FrontendIPConfigurationPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.HubIPConfigurationPropertiesFormat.properties.privateIPAllocationMethod.$ref__deleted` | deleted | `./network.json#/definitions/IPAllocationMethod` |
-| `definitions.HubIPConfigurationPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.HubRouteTableProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.HubVirtualNetworkConnectionProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.InboundNatPoolPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.InboundNatRulePropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.InboundSecurityRuleProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.IpAllocationPropertiesFormat.properties.prefixType.$ref__deleted` | deleted | `./network.json#/definitions/IPVersion` |
-| `definitions.IpamPoolPrefixAllocation.properties.pool.$ref__added` | added | `#/definitions/IpamPoolPrefixAllocationPool` |
-| `definitions.IPConfigurationProfilePropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.IPConfigurationPropertiesFormat.properties.privateIPAllocationMethod.$ref__deleted` | deleted | `./network.json#/definitions/IPAllocationMethod` |
-| `definitions.IPConfigurationPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.IpGroupPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.LoadBalancerPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.LoadBalancingRulePropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.LocalNetworkGatewayPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.ManagedServiceIdentity.properties.userAssignedIdentities.additionalProperties.$ref__added` | added | `#/definitions/Components1Jq1T4ISchemasManagedserviceidentityPropertiesUserassignedidentitiesAdditionalproperties` |
-| `definitions.NatGatewayPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.NetworkGroupProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.NetworkInterfaceIPConfigurationPropertiesFormat.properties.privateIPAddressVersion.$ref__deleted` | deleted | `./network.json#/definitions/IPVersion` |
-| `definitions.NetworkInterfaceIPConfigurationPropertiesFormat.properties.privateIPAllocationMethod.$ref__deleted` | deleted | `./network.json#/definitions/IPAllocationMethod` |
-| `definitions.NetworkInterfaceIPConfigurationPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.NetworkInterfacePropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.NetworkInterfaceTapConfigurationPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.NetworkManagerConnectionProperties.properties.connectionState.$ref__deleted` | deleted | `./networkManagerScopeConnection.json#/definitions/ConnectionState` |
-| `definitions.NetworkManagerProperties.properties.networkManagerScopes.$ref__added` | added | `#/definitions/NetworkManagerPropertiesNetworkManagerScopes` |
-| `definitions.NetworkManagerProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.NetworkManagerRoutingConfigurationPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.NetworkProfilePropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.NetworkSecurityGroupPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.NetworkSecurityGroupResult.properties.securityRuleAccessResult.$ref__deleted` | deleted | `./networkSecurityGroup.json#/definitions/SecurityRuleAccess` |
-| `definitions.NetworkVirtualApplianceConnectionProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.NetworkVirtualAppliancePropertiesFormat.properties.networkProfile.$ref__added` | added | `#/definitions/NetworkVirtualAppliancePropertiesFormatNetworkProfile` |
-| `definitions.NetworkVirtualAppliancePropertiesFormat.properties.nvaInterfaceConfigurations.$ref__deleted` | deleted | `#/definitions/NvaInterfaceConfigurations` |
-| `definitions.NetworkVirtualAppliancePropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.NetworkWatcherPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.OutboundRulePropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.P2SConnectionConfigurationProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.P2SVpnGatewayProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.P2SVpnProfileParameters.properties.authenticationMethod.$ref__deleted` | deleted | `./network.json#/definitions/AuthenticationMethod` |
-| `definitions.PacketCaptureResultProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.PeerExpressRouteCircuitConnectionPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.PolicySettings.properties.logScrubbing.$ref__added` | added | `#/definitions/PolicySettingsLogScrubbing` |
-| `definitions.PrivateDnsZoneGroupPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.PrivateEndpointConnectionProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.PrivateEndpointProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.PrivateLinkServiceConnectionProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.PrivateLinkServiceIpConfigurationProperties.properties.privateIPAddressVersion.$ref__deleted` | deleted | `./network.json#/definitions/IPVersion` |
-| `definitions.PrivateLinkServiceIpConfigurationProperties.properties.privateIPAllocationMethod.$ref__deleted` | deleted | `./network.json#/definitions/IPAllocationMethod` |
-| `definitions.PrivateLinkServiceIpConfigurationProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.PrivateLinkServiceProperties.properties.autoApproval.$ref__added` | added | `#/definitions/PrivateLinkServicePropertiesAutoApproval` |
-| `definitions.PrivateLinkServiceProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.PrivateLinkServiceProperties.properties.visibility.$ref__added` | added | `#/definitions/PrivateLinkServicePropertiesVisibility` |
-| `definitions.ProbePropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.PublicIPAddressPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.PublicIPAddressPropertiesFormat.properties.publicIPAddressVersion.$ref__deleted` | deleted | `./network.json#/definitions/IPVersion` |
-| `definitions.PublicIPAddressPropertiesFormat.properties.publicIPAllocationMethod.$ref__deleted` | deleted | `./network.json#/definitions/IPAllocationMethod` |
-| `definitions.PublicIPPrefixPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.PublicIPPrefixPropertiesFormat.properties.publicIPAddressVersion.$ref__deleted` | deleted | `./network.json#/definitions/IPVersion` |
-| `definitions.RecordSet.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.ResourceNavigationLinkFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.RouteFilterPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.RouteFilterRulePropertiesFormat.properties.access.$ref__deleted` | deleted | `./network.json#/definitions/Access` |
-| `definitions.RouteFilterRulePropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.RouteMapProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.RoutePropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.RouteTablePropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.RoutingIntentProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.RoutingRuleCollectionPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.RoutingRulePropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.SecurityPartnerProviderPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.SecurityRulePropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.SecurityUserConfigurationPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.SecurityUserRuleCollectionPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.SecurityUserRulePropertiesFormat.properties.direction.$ref__deleted` | deleted | `./networkManagerSecurityAdminConfiguration.json#/definitions/SecurityConfigurationRuleDirection` |
-| `definitions.SecurityUserRulePropertiesFormat.properties.protocol.$ref__deleted` | deleted | `./networkManagerSecurityAdminConfiguration.json#/definitions/RuleProtocol` |
-| `definitions.SecurityUserRulePropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.ServiceAssociationLinkPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.ServiceDelegationPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.ServiceEndpointPolicyDefinitionPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.ServiceEndpointPolicyPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.ServiceEndpointPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.SharedKeyProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.SignaturesOverrides.properties.properties.$ref__added` | added | `#/definitions/SignaturesOverridesProperties` |
-| `definitions.SingleQueryResult.properties.destinationPorts.items.$ref__deleted` | deleted | `#/definitions/PortsList` |
-| `definitions.SingleQueryResult.properties.sourcePorts.items.$ref__deleted` | deleted | `#/definitions/PortsList` |
-| `definitions.StaticMemberProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.SubnetPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.VerificationIPFlowResult.properties.access.$ref__deleted` | deleted | `./network.json#/definitions/Access` |
-| `definitions.VirtualApplianceSiteProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.VirtualHubProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.VirtualHubRouteTableV2Properties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.VirtualNetworkGatewayConnectionListEntityPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.VirtualNetworkGatewayConnectionPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.VirtualNetworkGatewayIPConfigurationPropertiesFormat.properties.privateIPAllocationMethod.$ref__deleted` | deleted | `./network.json#/definitions/IPAllocationMethod` |
-| `definitions.VirtualNetworkGatewayIPConfigurationPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.VirtualNetworkGatewayNatRuleProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.VirtualNetworkGatewayPolicyGroupProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.VirtualNetworkGatewayPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.VirtualNetworkPeeringPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.VirtualNetworkPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.VirtualNetworkTapPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.VirtualRouterPeeringProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.VirtualRouterPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.VirtualWanProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.VirtualWanVpnProfileParameters.properties.authenticationMethod.$ref__deleted` | deleted | `./network.json#/definitions/AuthenticationMethod` |
-| `definitions.VngClientConnectionConfigurationProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.VpnClientParameters.properties.authenticationMethod.$ref__deleted` | deleted | `./network.json#/definitions/AuthenticationMethod` |
-| `definitions.VpnClientRevokedCertificatePropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.VpnClientRootCertificatePropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.VpnConnectionProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.VpnConnectionProperties.properties.vpnConnectionProtocolType.$ref__deleted` | deleted | `./virtualNetworkGateway.json#/definitions/ConnectionProtocol` |
-| `definitions.VpnGatewayNatRuleProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.VpnGatewayProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.VpnServerConfigurationPolicyGroupProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.VpnSiteLinkConnectionProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.VpnSiteLinkConnectionProperties.properties.vpnConnectionProtocolType.$ref__deleted` | deleted | `./virtualNetworkGateway.json#/definitions/ConnectionProtocol` |
-| `definitions.VpnSiteLinkProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.VpnSiteProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `definitions.WebApplicationFirewallPolicyPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/autoApprovedPrivateLinkServices'].get.parameters[0].$ref__added` | added | `../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/availableDelegations'].get.parameters[0].$ref__added` | added | `../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/availablePrivateEndpointTypes'].get.parameters[0].$ref__added` | added | `../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/availableServiceAliases'].get.parameters[0].$ref__added` | added | `../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/checkDnsNameAvailability'].get.parameters[0].$ref__added` | added | `../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/checkPrivateLinkServiceVisibility'].post.parameters[0].$ref__added` | added | `../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/nspServiceTags'].get.parameters[0].$ref__added` | added | `../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/perimeterAssociableResourceTypes'].get.parameters[0].$ref__added` | added | `../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/serviceTagDetails'].get.parameters[0].$ref__added` | added | `../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/serviceTags'].get.parameters[0].$ref__added` | added | `../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/setLoadBalancerFrontendPublicIpAddresses'].post.parameters[0].$ref__added` | added | `../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/usages'].get.parameters[0].$ref__added` | added | `../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/virtualNetworkAvailableEndpointServices'].get.parameters[0].$ref__added` | added | `../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/networkManagerConnections'].get.parameters[0].$ref__deleted` | deleted | `./networkManager.json#/parameters/ListTopParameter` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/networkManagerConnections'].get.parameters[1].$ref__deleted` | deleted | `./networkManager.json#/parameters/ListSkipTokenParameter` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/locations/{location}/autoApprovedPrivateLinkServices'].get.parameters[0].$ref__added` | added | `../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/locations/{location}/availableDelegations'].get.parameters[0].$ref__added` | added | `../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/locations/{location}/availablePrivateEndpointTypes'].get.parameters[0].$ref__added` | added | `../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/locations/{location}/availableServiceAliases'].get.parameters[0].$ref__added` | added | `../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/locations/{location}/checkPrivateLinkServiceVisibility'].post.parameters[0].$ref__added` | added | `../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/scopeConnections'].get.parameters[0].$ref__deleted` | deleted | `./networkManager.json#/parameters/NetworkManagerNameParameter` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/scopeConnections'].get.parameters[1].$ref__deleted` | deleted | `./networkManager.json#/parameters/ListTopParameter` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/scopeConnections'].get.parameters[2].$ref__deleted` | deleted | `./networkManager.json#/parameters/ListSkipTokenParameter` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/profiles/{profileName}/accessRules/{accessRuleName}/reconcile'].post.parameters[3].schema.$ref__deleted` | deleted | `#/definitions/NspAccessRuleReconcile` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/profiles/{profileName}/accessRules/{accessRuleName}/reconcile'].post.responses.200.schema.$ref__deleted` | deleted | `#/definitions/NspAccessRuleReconcile` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations/{associationName}/reconcile'].post.parameters[2].schema.$ref__deleted` | deleted | `#/definitions/NspAssociationReconcile` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations/{associationName}/reconcile'].post.responses.200.schema.$ref__deleted` | deleted | `#/definitions/NspAssociationReconcile` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{hubName}/bgpConnections/{connectionName}/advertisedRoutes'].post.responses.200.schema.$ref__deleted` | deleted | `#/definitions/PeerRouteList` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{hubName}/bgpConnections/{connectionName}/learnedRoutes'].post.responses.200.schema.$ref__deleted` | deleted | `#/definitions/PeerRouteList` |
+| `definitions.ApplicationGatewayRewriteRule.properties.ruleSequence.format__added` | added | `int32` |
+| `definitions.BastionActiveSession.properties.sessionDurationInMins.format__added` | added | `float` |
+| `definitions.ConnectionMonitorSuccessThreshold.properties.roundTripTimeMs.format__added` | added | `float` |
+| `definitions.ExpressRouteCircuitPropertiesFormat.properties.bandwidthInGbps.format__added` | added | `float` |
+| `definitions.ExpressRouteConnectionProperties.properties.routingWeight.format__added` | added | `int32` |
+| `definitions.ExpressRouteCrossConnectionProperties.properties.sTag.format__added` | added | `int32` |
+| `definitions.ExpressRoutePortPropertiesFormat.properties.bandwidthInGbps.format__added` | added | `int32` |
+| `definitions.ExpressRoutePortPropertiesFormat.properties.provisionedBandwidthInGbps.format__added` | added | `float` |
+| `definitions.ExpressRoutePortsLocationBandwidths.properties.valueInGbps.format__added` | added | `int32` |
+| `definitions.IpAllocationPropertiesFormat.properties.prefixLength.format__added` | added | `int32` |
+| `definitions.OutboundRulePropertiesFormat.properties.idleTimeoutInMinutes.format__added` | added | `int32` |
+| `definitions.RecordSet.properties.ttl.format__added` | added | `int32` |
+| `definitions.SingleQueryResult.properties.direction.format__deleted` | deleted | `int32` |
+| `definitions.SingleQueryResult.properties.mode.format__deleted` | deleted | `int32` |
+| `definitions.SingleQueryResult.properties.severity.format__deleted` | deleted | `int32` |
+| `definitions.VirtualNetworkGatewayAutoScaleBounds.properties.max.format__added` | added | `int32` |
+| `definitions.VirtualNetworkGatewayAutoScaleBounds.properties.min.format__added` | added | `int32` |
+| `definitions.VirtualNetworkTapPropertiesFormat.properties.destinationPort.format__added` | added | `int32` |
+| `definitions.WebApplicationFirewallCustomRule.properties.priority.format__added` | added | `int32` |
+| `paths['/providers/microsoft.Management/managementGroups/{managementGroupId}/providers/microsoft.Network/networkManagerConnections'].get.parameters[1].format__added` | added | `int32` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/networkManagerConnections'].get.parameters[0].format__added` | added | `int32` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRoutePorts/{expressRoutePortName}'].delete.responses.202.headers['Azure-AsyncOperation'].format__added` | added | `uri` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRoutePorts/{expressRoutePortName}/authorizations/{authorizationName}'].delete.responses.202.headers['Azure-AsyncOperation'].format__added` | added | `uri` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/firewallPolicies/{firewallPolicyName}/deploy'].post.responses.202.headers['Azure-AsyncOperation'].format__added` | added | `uri` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/scopeConnections'].get.parameters[1].format__added` | added | `int32` |
+
+### Changes for `minimum`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.ApplicationGatewayAutoscaleConfiguration.properties.minCapacity.minimum__deleted` | deleted | `0` |
+| `definitions.ApplicationGatewayWebApplicationFirewallConfiguration.properties.fileUploadLimitInMb.minimum__deleted` | deleted | `0` |
+| `definitions.AzureFirewallApplicationRuleProtocol.properties.port.minimum__deleted` | deleted | `0` |
+| `definitions.BgpConnectionProperties.properties.peerAsn.minimum__deleted` | deleted | `0` |
+| `definitions.BgpPeerStatus.properties.asn.minimum__deleted` | deleted | `0` |
+| `definitions.BgpSettings.properties.asn.minimum__deleted` | deleted | `0` |
+| `definitions.ConnectionMonitorDestination.properties.port.minimum__deleted` | deleted | `0` |
+| `definitions.ConnectionMonitorHttpConfiguration.properties.port.minimum__deleted` | deleted | `0` |
+| `definitions.ConnectionMonitorSource.properties.port.minimum__deleted` | deleted | `0` |
+| `definitions.ConnectionMonitorTcpConfiguration.properties.port.minimum__deleted` | deleted | `0` |
+| `definitions.ConnectivityDestination.properties.port.minimum__deleted` | deleted | `0` |
+| `definitions.ConnectivitySource.properties.port.minimum__deleted` | deleted | `0` |
+| `definitions.ExplicitProxy.properties.httpPort.minimum__deleted` | deleted | `0` |
+| `definitions.ExplicitProxy.properties.httpsPort.minimum__deleted` | deleted | `0` |
+| `definitions.ExplicitProxy.properties.pacFilePort.minimum__deleted` | deleted | `0` |
+| `definitions.FirewallPolicyRuleApplicationProtocol.properties.port.minimum__deleted` | deleted | `0` |
+| `definitions.HopLinkProperties.properties.roundTripTimeAvg.minimum__deleted` | deleted | `0` |
+| `definitions.HopLinkProperties.properties.roundTripTimeMax.minimum__deleted` | deleted | `0` |
+| `definitions.HopLinkProperties.properties.roundTripTimeMin.minimum__deleted` | deleted | `0` |
+| `definitions.InboundSecurityRules.properties.destinationPortRange.minimum__deleted` | deleted | `0` |
+| `definitions.NetworkVirtualApplianceConnectionProperties.properties.asn.minimum__deleted` | deleted | `0` |
+| `definitions.NetworkVirtualApplianceConnectionProperties.properties.tunnelIdentifier.minimum__deleted` | deleted | `0` |
+| `definitions.NetworkVirtualAppliancePropertiesFormat.properties.virtualApplianceAsn.minimum__deleted` | deleted | `0` |
+| `definitions.PacketCaptureParameters.properties.bytesToCapturePerPacket.minimum__deleted` | deleted | `0` |
+| `definitions.PacketCaptureParameters.properties.timeLimitInSeconds.minimum__deleted` | deleted | `0` |
+| `definitions.PacketCaptureParameters.properties.totalBytesPerSession.minimum__deleted` | deleted | `0` |
+| `definitions.PacketCaptureSettings.properties.fileCount.minimum__deleted` | deleted | `0` |
+| `definitions.PacketCaptureSettings.properties.fileSizeInBytes.minimum__deleted` | deleted | `0` |
+| `definitions.PacketCaptureSettings.properties.sessionTimeLimitInSeconds.minimum__deleted` | deleted | `0` |
+| `definitions.PolicySettings.properties.customBlockResponseStatusCode.minimum__deleted` | deleted | `0` |
+| `definitions.PolicySettings.properties.fileUploadLimitInMb.minimum__deleted` | deleted | `0` |
+| `definitions.VirtualHubProperties.properties.virtualRouterAsn.minimum__deleted` | deleted | `0` |
+| `definitions.VirtualRouterAutoScaleConfiguration.properties.minCapacity.minimum__deleted` | deleted | `0` |
+| `definitions.VirtualRouterPeeringProperties.properties.peerAsn.minimum__deleted` | deleted | `0` |
+| `definitions.VirtualRouterPropertiesFormat.properties.virtualRouterAsn.minimum__deleted` | deleted | `0` |
+| `paths['/providers/microsoft.Management/managementGroups/{managementGroupId}/providers/microsoft.Network/networkManagerConnections'].get.parameters[1].minimum__added` | added | `1` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/networkManagerConnections'].get.parameters[0].minimum__added` | added | `1` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/scopeConnections'].get.parameters[1].minimum__added` | added | `1` |
+
+### Changes for `maximum`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/providers/microsoft.Management/managementGroups/{managementGroupId}/providers/microsoft.Network/networkManagerConnections'].get.parameters[1].maximum__added` | added | `20` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/networkManagerConnections'].get.parameters[0].maximum__added` | added | `20` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/scopeConnections'].get.parameters[1].maximum__added` | added | `20` |
+
+### Changes for `parameters`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/providers/microsoft.Management/managementGroups/{managementGroupId}/providers/microsoft.Network/networkManagerConnections/{networkManagerConnectionName}'].parameters__deleted` | deleted | `[{"$ref":"#/parameters/ManagementGroupIdParameter"},{"$ref":"#/parameters/NetworkManagerConnectionNa...` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/networkSecurityPerimeterOperationStatuses/{operationId}'].parameters__deleted` | deleted | `[{"$ref":"./network.json#/parameters/SubscriptionIdParameter"},{"$ref":"#/parameters/LocationParamet...` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/networkManagerConnections/{networkManagerConnectionName}'].parameters__deleted` | deleted | `[{"$ref":"./network.json#/parameters/SubscriptionIdParameter"},{"$ref":"#/parameters/NetworkManagerC...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}'].parameters__deleted` | deleted | `[{"$ref":"./network.json#/parameters/SubscriptionIdParameter"},{"$ref":"#/parameters/ResourceGroupNa...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/commit'].parameters__deleted` | deleted | `[{"$ref":"./network.json#/parameters/SubscriptionIdParameter"},{"$ref":"#/parameters/ResourceGroupNa...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/connectivityConfigurations/{configurationName}'].parameters__deleted` | deleted | `[{"$ref":"./network.json#/parameters/ApiVersionParameter"},{"$ref":"./network.json#/parameters/Subsc...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/listActiveConnectivityConfigurations'].parameters__deleted` | deleted | `[{"$ref":"./network.json#/parameters/ApiVersionParameter"},{"$ref":"./network.json#/parameters/Subsc...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/listActiveSecurityAdminRules'].parameters__deleted` | deleted | `[{"$ref":"./network.json#/parameters/ApiVersionParameter"},{"$ref":"./network.json#/parameters/Subsc...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/listDeploymentStatus'].parameters__deleted` | deleted | `[{"$ref":"./network.json#/parameters/SubscriptionIdParameter"},{"$ref":"#/parameters/ResourceGroupNa...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/networkGroups/{networkGroupName}'].parameters__deleted` | deleted | `[{"$ref":"./network.json#/parameters/SubscriptionIdParameter"},{"$ref":"#/parameters/ResourceGroupNa...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/networkGroups/{networkGroupName}/staticMembers/{staticMemberName}'].parameters__deleted` | deleted | `[{"$ref":"./network.json#/parameters/SubscriptionIdParameter"},{"$ref":"#/parameters/ResourceGroupNa...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/routingConfigurations/{configurationName}'].parameters__deleted` | deleted | `[{"$ref":"../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParame...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/routingConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}'].parameters__deleted` | deleted | `[{"$ref":"../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParame...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/routingConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}/rules'].parameters__deleted` | deleted | `[{"$ref":"../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParame...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/routingConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}/rules/{ruleName}'].parameters__deleted` | deleted | `[{"$ref":"../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParame...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/scopeConnections/{scopeConnectionName}'].parameters__deleted` | deleted | `[{"$ref":"./network.json#/parameters/SubscriptionIdParameter"},{"$ref":"./networkManager.json#/param...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/securityAdminConfigurations/{configurationName}'].parameters__deleted` | deleted | `[{"$ref":"./network.json#/parameters/ApiVersionParameter"},{"$ref":"./network.json#/parameters/Subsc...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/securityAdminConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}'].parameters__deleted` | deleted | `[{"$ref":"./network.json#/parameters/ApiVersionParameter"},{"$ref":"./network.json#/parameters/Subsc...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/securityAdminConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}/rules'].parameters__deleted` | deleted | `[{"$ref":"./network.json#/parameters/ApiVersionParameter"},{"$ref":"./network.json#/parameters/Subsc...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/securityAdminConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}/rules/{ruleName}'].parameters__deleted` | deleted | `[{"$ref":"./network.json#/parameters/ApiVersionParameter"},{"$ref":"./network.json#/parameters/Subsc...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/securityUserConfigurations/{configurationName}'].parameters__deleted` | deleted | `[{"$ref":"../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParame...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/securityUserConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}'].parameters__deleted` | deleted | `[{"$ref":"../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParame...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/securityUserConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}/rules'].parameters__deleted` | deleted | `[{"$ref":"../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParame...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/securityUserConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}/rules/{ruleName}'].parameters__deleted` | deleted | `[{"$ref":"../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParame...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}'].parameters__deleted` | deleted | `[{"$ref":"./network.json#/parameters/SubscriptionIdParameter"},{"$ref":"#/parameters/ResourceGroupNa...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/linkReferences/{linkReferenceName}'].parameters__deleted` | deleted | `[{"$ref":"./network.json#/parameters/SubscriptionIdParameter"},{"$ref":"#/parameters/ResourceGroupNa...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/links/{linkName}'].parameters__deleted` | deleted | `[{"$ref":"./network.json#/parameters/SubscriptionIdParameter"},{"$ref":"#/parameters/ResourceGroupNa...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/loggingConfigurations'].parameters__deleted` | deleted | `[{"$ref":"./network.json#/parameters/SubscriptionIdParameter"},{"$ref":"#/parameters/ResourceGroupNa...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/loggingConfigurations/{loggingConfigurationName}'].parameters__deleted` | deleted | `[{"$ref":"./network.json#/parameters/SubscriptionIdParameter"},{"$ref":"#/parameters/ResourceGroupNa...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/profiles/{profileName}'].parameters__deleted` | deleted | `[{"$ref":"./network.json#/parameters/SubscriptionIdParameter"},{"$ref":"#/parameters/ResourceGroupNa...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/profiles/{profileName}/accessRules/{accessRuleName}'].parameters__deleted` | deleted | `[{"$ref":"./network.json#/parameters/SubscriptionIdParameter"},{"$ref":"#/parameters/ResourceGroupNa...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/profiles/{profileName}/accessRules/{accessRuleName}/reconcile'].parameters__deleted` | deleted | `[{"$ref":"./network.json#/parameters/SubscriptionIdParameter"},{"$ref":"#/parameters/ResourceGroupNa...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations/{associationName}'].parameters__deleted` | deleted | `[{"$ref":"./network.json#/parameters/SubscriptionIdParameter"},{"$ref":"#/parameters/ResourceGroupNa...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations/{associationName}/reconcile'].parameters__deleted` | deleted | `[{"$ref":"./network.json#/parameters/SubscriptionIdParameter"},{"$ref":"#/parameters/ResourceGroupNa...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworks/{virtualNetworkName}/listNetworkManagerEffectiveConnectivityConfigurations'].parameters__deleted` | deleted | `[{"$ref":"./network.json#/parameters/SubscriptionIdParameter"},{"$ref":"#/parameters/ResourceGroupNa...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworks/{virtualNetworkName}/listNetworkManagerEffectiveSecurityAdminRules'].parameters__deleted` | deleted | `[{"$ref":"./network.json#/parameters/SubscriptionIdParameter"},{"$ref":"#/parameters/ResourceGroupNa...` |
+
+### Changes for `x-ms-pageable`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/bgpServiceCommunities'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/expressRouteProviderPorts'].get['x-ms-pageable__added']` | added | `{"nextLinkName":"nextLink"}` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/availablePrivateEndpointTypes'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/connectionMonitors'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/packetCaptures'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/listRadiusSecrets'].post['x-ms-pageable__added']` | added | `{"nextLinkName":"nextLink"}` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}/resourceNavigationLinks'].get['x-ms-pageable__added']` | added | `{"nextLinkName":"nextLink"}` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}/serviceAssociationLinks'].get['x-ms-pageable__added']` | added | `{"nextLinkName":"nextLink"}` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnServerConfigurations/{vpnServerConfigurationName}/listRadiusSecrets'].post['x-ms-pageable__added']` | added | `{"nextLinkName":"nextLink"}` |
+
+### Changes for `get`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/expressRouteServiceProviders'].get__deleted` | deleted | `{"operationId":"ExpressRouteServiceProviders_List","description":"Gets all the available express rou...` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/autoApprovedPrivateLinkServices'].get__deleted` | deleted | `{"operationId":"PrivateLinkServices_ListAutoApprovedPrivateLinkServices","description":"Returns all ...` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/availableDelegations'].get__deleted` | deleted | `{"operationId":"AvailableDelegations_List","description":"Gets all of the available subnet delegatio...` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/availableServiceAliases'].get__deleted` | deleted | `{"operationId":"AvailableServiceAliases_List","description":"Gets all available service aliases for ...` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/nspServiceTags'].get__deleted` | deleted | `{"operationId":"NetworkSecurityPerimeterServiceTags_List","description":"Gets the list of service ta...` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/perimeterAssociableResourceTypes'].get__deleted` | deleted | `{"operationId":"NetworkSecurityPerimeterAssociableResourceTypes_List","description":"Gets the list o...` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/serviceTagDetails'].get__deleted` | deleted | `{"operationId":"ServiceTagInformation_List","description":"Gets a list of service tag information re...` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/usages'].get__deleted` | deleted | `{"operationId":"Usages_List","description":"List network usages for a subscription.","parameters":[{...` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/virtualNetworkAvailableEndpointServices'].get__deleted` | deleted | `{"operationId":"AvailableEndpointServices_List","description":"List what values of endpoint services...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/locations/{location}/autoApprovedPrivateLinkServices'].get__deleted` | deleted | `{"operationId":"PrivateLinkServices_ListAutoApprovedPrivateLinkServicesByResourceGroup","description...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/locations/{location}/availableDelegations'].get__deleted` | deleted | `{"operationId":"AvailableResourceGroupDelegations_List","description":"Gets all of the available sub...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/locations/{location}/availablePrivateEndpointTypes'].get__deleted` | deleted | `{"operationId":"AvailablePrivateEndpointTypes_ListByResourceGroup","description":"Returns all of the...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/locations/{location}/availableServiceAliases'].get__deleted` | deleted | `{"operationId":"AvailableServiceAliases_ListByResourceGroup","description":"Gets all available servi...` |
+
+### Changes for `post`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/expressRouteServiceProviders'].post__added` | added | `{"operationId":"ExpressRouteServiceProviders_List","description":"Gets all the available express rou...` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/autoApprovedPrivateLinkServices'].post__added` | added | `{"operationId":"PrivateLinkServices_ListAutoApprovedPrivateLinkServices","description":"Returns all ...` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/availableDelegations'].post__added` | added | `{"operationId":"AvailableDelegations_List","description":"Gets all of the available subnet delegatio...` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/availableServiceAliases'].post__added` | added | `{"operationId":"AvailableServiceAliases_List","description":"Gets all available service aliases for ...` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/nspServiceTags'].post__added` | added | `{"operationId":"NetworkSecurityPerimeterServiceTags_List","description":"Gets the list of service ta...` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/perimeterAssociableResourceTypes'].post__added` | added | `{"operationId":"NetworkSecurityPerimeterAssociableResourceTypes_List","description":"Gets the list o...` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/serviceTagDetails'].post__added` | added | `{"operationId":"ServiceTagInformation_List","description":"Gets a list of service tag information re...` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/usages'].post__added` | added | `{"operationId":"Usages_List","description":"List network usages for a subscription.","parameters":[{...` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/virtualNetworkAvailableEndpointServices'].post__added` | added | `{"operationId":"AvailableEndpointServices_List","description":"List what values of endpoint services...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/locations/{location}/autoApprovedPrivateLinkServices'].post__added` | added | `{"operationId":"PrivateLinkServices_ListAutoApprovedPrivateLinkServicesByResourceGroup","description...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/locations/{location}/availableDelegations'].post__added` | added | `{"operationId":"AvailableResourceGroupDelegations_List","description":"Gets all of the available sub...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/locations/{location}/availablePrivateEndpointTypes'].post__added` | added | `{"operationId":"AvailablePrivateEndpointTypes_ListByResourceGroup","description":"Returns all of the...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/locations/{location}/availableServiceAliases'].post__added` | added | `{"operationId":"AvailableServiceAliases_ListByResourceGroup","description":"Gets all available servi...` |
+
+### Changes for `required`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.AdminRule.required__added` | added | `["kind"]` |
+| `definitions.AdminRuleCollectionListResult.required__added` | added | `["value"]` |
+| `definitions.ApplicationGatewayAvailableSslPredefinedPolicies.required__added` | added | `["value"]` |
+| `definitions.ApplicationGatewayListResult.required__added` | added | `["value"]` |
+| `definitions.ApplicationGatewayPrivateEndpointConnectionListResult.required__added` | added | `["value"]` |
+| `definitions.ApplicationGatewayPrivateLinkResourceListResult.required__added` | added | `["value"]` |
+| `definitions.ApplicationGatewayWafDynamicManifestResultList.required__added` | added | `["value"]` |
+| `definitions.ApplicationSecurityGroupListResult.required__added` | added | `["value"]` |
+| `definitions.AuthorizationListResult.required__added` | added | `["value"]` |
+| `definitions.AutoApprovedPrivateLinkServicesResult.required__added` | added | `["value"]` |
+| `definitions.AvailableDelegationsResult.required__added` | added | `["value"]` |
+| `definitions.AvailablePrivateEndpointTypesResult.required__added` | added | `["value"]` |
+| `definitions.AvailableServiceAliasesResult.required__added` | added | `["value"]` |
+| `definitions.AzureFirewallFqdnTagListResult.required__added` | added | `["value"]` |
+| `definitions.AzureFirewallListResult.required__added` | added | `["value"]` |
+| `definitions.AzureWebCategoryListResult.required__added` | added | `["value"]` |
+| `definitions.BastionActiveSessionListResult.required__added` | added | `["value"]` |
+| `definitions.BastionHostListResult.required__added` | added | `["value"]` |
+| `definitions.BastionSessionDeleteResult.required__added` | added | `["value"]` |
+| `definitions.BastionShareableLinkListResult.required__added` | added | `["value"]` |
+| `definitions.BgpServiceCommunityListResult.required__added` | added | `["value"]` |
+| `definitions.ConnectionSharedKeyResultList.required__added` | added | `["value"]` |
+| `definitions.ConnectivityConfigurationListResult.required__added` | added | `["value"]` |
+| `definitions.ConnectivityConfigurationProperties.properties.connectivityCapabilities.required__deleted` | deleted | `["connectedGroupPrivateEndpointsScale","connectedGroupAddressOverlap","peeringEnforcement"]` |
+| `definitions.CustomIpPrefixListResult.required__added` | added | `["value"]` |
+| `definitions.DdosProtectionPlanListResult.required__added` | added | `["value"]` |
+| `definitions.DefaultAdminRule.required__added` | added | `["kind"]` |
+| `definitions.DscpConfigurationListResult.required__added` | added | `["value"]` |
+| `definitions.EffectiveNetworkSecurityGroupListResult.required__added` | added | `["value"]` |
+| `definitions.EffectiveRouteListResult.required__added` | added | `["value"]` |
+| `definitions.EndpointServicesListResult.required__added` | added | `["value"]` |
+| `definitions.ExpressRouteCircuitConnectionListResult.required__added` | added | `["value"]` |
+| `definitions.ExpressRouteCircuitListResult.required__added` | added | `["value"]` |
+| `definitions.ExpressRouteCircuitPeeringListResult.required__added` | added | `["value"]` |
+| `definitions.ExpressRouteCircuitsArpTableListResult.required__added` | added | `["value"]` |
+| `definitions.ExpressRouteCircuitsRoutesTableListResult.required__added` | added | `["value"]` |
+| `definitions.ExpressRouteCircuitsRoutesTableSummaryListResult.required__added` | added | `["value"]` |
+| `definitions.ExpressRouteCrossConnectionListResult.required__added` | added | `["value"]` |
+| `definitions.ExpressRouteCrossConnectionPeeringList.required__added` | added | `["value"]` |
+| `definitions.ExpressRouteCrossConnectionsRoutesTableSummaryListResult.required__added` | added | `["value"]` |
+| `definitions.ExpressRouteLinkListResult.required__added` | added | `["value"]` |
+| `definitions.ExpressRoutePortAuthorizationListResult.required__added` | added | `["value"]` |
+| `definitions.ExpressRoutePortListResult.required__added` | added | `["value"]` |
+| `definitions.ExpressRoutePortsLocationListResult.required__added` | added | `["value"]` |
+| `definitions.ExpressRouteProviderPortListResult.required__added` | added | `["value"]` |
+| `definitions.ExpressRouteServiceProviderListResult.required__added` | added | `["value"]` |
+| `definitions.FirewallPolicyListResult.required__added` | added | `["value"]` |
+| `definitions.FirewallPolicyRuleCollectionGroupListResult.required__added` | added | `["value"]` |
+| `definitions.FlowLogListResult.required__added` | added | `["value"]` |
+| `definitions.InboundNatRuleListResult.required__added` | added | `["value"]` |
+| `definitions.IpAllocationListResult.required__added` | added | `["value"]` |
+| `definitions.IpamPoolList.required__added` | added | `["value"]` |
+| `definitions.IpGroupListResult.required__added` | added | `["value"]` |
+| `definitions.ListHubRouteTablesResult.required__added` | added | `["value"]` |
+| `definitions.ListHubVirtualNetworkConnectionsResult.required__added` | added | `["value"]` |
+| `definitions.ListP2SVpnGatewaysResult.required__added` | added | `["value"]` |
+| `definitions.ListRouteMapsResult.required__added` | added | `["value"]` |
+| `definitions.ListRoutingIntentResult.required__added` | added | `["value"]` |
+| `definitions.ListVirtualHubBgpConnectionResults.required__added` | added | `["value"]` |
+| `definitions.ListVirtualHubIpConfigurationResults.required__added` | added | `["value"]` |
+| `definitions.ListVirtualHubsResult.required__added` | added | `["value"]` |
+| `definitions.ListVirtualNetworkGatewayNatRulesResult.required__added` | added | `["value"]` |
+| `definitions.ListVirtualWANsResult.required__added` | added | `["value"]` |
+| `definitions.ListVpnConnectionsResult.required__added` | added | `["value"]` |
+| `definitions.ListVpnGatewayNatRulesResult.required__added` | added | `["value"]` |
+| `definitions.ListVpnGatewaysResult.required__added` | added | `["value"]` |
+| `definitions.ListVpnServerConfigurationPolicyGroupsResult.required__added` | added | `["value"]` |
+| `definitions.ListVpnServerConfigurationsResult.required__added` | added | `["value"]` |
+| `definitions.ListVpnSiteLinkConnectionsResult.required__added` | added | `["value"]` |
+| `definitions.ListVpnSiteLinksResult.required__added` | added | `["value"]` |
+| `definitions.ListVpnSitesResult.required__added` | added | `["value"]` |
+| `definitions.LoadBalancerFrontendIPConfigurationListResult.required__added` | added | `["value"]` |
+| `definitions.LoadBalancerListResult.required__added` | added | `["value"]` |
+| `definitions.LoadBalancerOutboundRuleListResult.required__added` | added | `["value"]` |
+| `definitions.LoadBalancerProbeListResult.required__added` | added | `["value"]` |
+| `definitions.LocalNetworkGatewayListResult.required__added` | added | `["value"]` |
+| `definitions.NatGatewayListResult.required__added` | added | `["value"]` |
+| `definitions.NetworkGroupListResult.required__added` | added | `["value"]` |
+| `definitions.NetworkInterfaceIPConfigurationListResult.required__added` | added | `["value"]` |
+| `definitions.NetworkInterfaceListResult.required__added` | added | `["value"]` |
+| `definitions.NetworkInterfaceTapConfigurationListResult.required__added` | added | `["value"]` |
+| `definitions.NetworkManagerConnectionListResult.required__added` | added | `["value"]` |
+| `definitions.NetworkManagerListResult.required__added` | added | `["value"]` |
+| `definitions.NetworkManagerRoutingConfigurationListResult.required__added` | added | `["value"]` |
+| `definitions.NetworkProfileListResult.required__added` | added | `["value"]` |
+| `definitions.NetworkSecurityGroupListResult.required__added` | added | `["value"]` |
+| `definitions.NetworkSecurityPerimeterListResult.required__added` | added | `["value"]` |
+| `definitions.NetworkVirtualApplianceConnectionList.required__added` | added | `["value"]` |
+| `definitions.NetworkVirtualApplianceListResult.required__added` | added | `["value"]` |
+| `definitions.NetworkVirtualApplianceSkuListResult.required__added` | added | `["value"]` |
+| `definitions.NspAccessRuleListResult.required__added` | added | `["value"]` |
+| `definitions.NspLinkListResult.required__added` | added | `["value"]` |
+| `definitions.NspLinkReferenceListResult.required__added` | added | `["value"]` |
+| `definitions.NspLoggingConfigurationListResult.required__added` | added | `["value"]` |
+| `definitions.NspProfileListResult.required__added` | added | `["value"]` |
+| `definitions.NspServiceTagsListResult.required__added` | added | `["value"]` |
+| `definitions.P2SVpnGateway.required__deleted` | deleted | `["location"]` |
+| `definitions.PeerExpressRouteCircuitConnectionListResult.required__added` | added | `["value"]` |
+| `definitions.PerimeterAssociableResourcesListResult.required__added` | added | `["value"]` |
+| `definitions.PoolAssociationList.required__added` | added | `["value"]` |
+| `definitions.PrivateDnsZoneGroupListResult.required__added` | added | `["value"]` |
+| `definitions.PrivateEndpointConnectionListResult.required__added` | added | `["value"]` |
+| `definitions.PrivateEndpointListResult.required__added` | added | `["value"]` |
+| `definitions.PrivateLinkServiceListResult.required__added` | added | `["value"]` |
+| `definitions.PublicIPAddressListResult.required__added` | added | `["value"]` |
+| `definitions.PublicIPPrefixListResult.required__added` | added | `["value"]` |
+| `definitions.RadiusAuthServerListResult.required__added` | added | `["value"]` |
+| `definitions.ReachabilityAnalysisIntentListResult.required__added` | added | `["value"]` |
+| `definitions.ReachabilityAnalysisRunListResult.required__added` | added | `["value"]` |
+| `definitions.RouteFilter.required__deleted` | deleted | `["location"]` |
+| `definitions.RouteFilterListResult.required__added` | added | `["value"]` |
+| `definitions.RouteFilterRuleListResult.required__added` | added | `["value"]` |
+| `definitions.RouteListResult.required__added` | added | `["value"]` |
+| `definitions.RouteTableListResult.required__added` | added | `["value"]` |
+| `definitions.RoutingRuleCollectionListResult.required__added` | added | `["value"]` |
+| `definitions.RoutingRuleListResult.required__added` | added | `["value"]` |
+| `definitions.ScopeConnectionListResult.required__added` | added | `["value"]` |
+| `definitions.SecurityAdminConfigurationListResult.required__added` | added | `["value"]` |
+| `definitions.SecurityPartnerProviderListResult.required__added` | added | `["value"]` |
+| `definitions.SecurityRuleListResult.required__added` | added | `["value"]` |
+| `definitions.SecurityUserConfigurationListResult.required__added` | added | `["value"]` |
+| `definitions.SecurityUserRuleCollectionListResult.required__added` | added | `["value"]` |
+| `definitions.SecurityUserRuleListResult.required__added` | added | `["value"]` |
+| `definitions.ServiceEndpointPolicyDefinitionListResult.required__added` | added | `["value"]` |
+| `definitions.ServiceEndpointPolicyListResult.required__added` | added | `["value"]` |
+| `definitions.ServiceTagInformationListResult.required__added` | added | `["value"]` |
+| `definitions.StaticCidrList.required__added` | added | `["value"]` |
+| `definitions.StaticMemberListResult.required__added` | added | `["value"]` |
+| `definitions.SubnetListResult.required__added` | added | `["value"]` |
+| `definitions.UsagesListResult.required__added` | added | `["value"]` |
+| `definitions.VerifierWorkspaceListResult.required__added` | added | `["value"]` |
+| `definitions.VirtualHub.required__deleted` | deleted | `["location"]` |
+| `definitions.VirtualNetworkDdosProtectionStatusResult.required__added` | added | `["value"]` |
+| `definitions.VirtualNetworkGatewayConnectionListResult.required__added` | added | `["value"]` |
+| `definitions.VirtualNetworkGatewayListConnectionsResult.required__added` | added | `["value"]` |
+| `definitions.VirtualNetworkGatewayListResult.required__added` | added | `["value"]` |
+| `definitions.VirtualNetworkListResult.required__added` | added | `["value"]` |
+| `definitions.VirtualNetworkListUsageResult.required__added` | added | `["value"]` |
+| `definitions.VirtualNetworkPeeringListResult.required__added` | added | `["value"]` |
+| `definitions.VirtualNetworkTapListResult.required__added` | added | `["value"]` |
+| `definitions.VirtualRouterListResult.required__added` | added | `["value"]` |
+| `definitions.VirtualRouterPeeringListResult.required__added` | added | `["value"]` |
+| `definitions.VirtualWAN.required__deleted` | deleted | `["location"]` |
+| `definitions.VpnGateway.required__deleted` | deleted | `["location"]` |
+| `definitions.VpnSite.required__deleted` | deleted | `["location"]` |
+| `definitions.WebApplicationFirewallPolicyListResult.required__added` | added | `["value"]` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/availablePrivateEndpointTypes'].get.parameters[0].required__deleted` | deleted | `true` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/checkDnsNameAvailability'].get.parameters[0].required__deleted` | deleted | `true` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/checkPrivateLinkServiceVisibility'].post.parameters[0].required__deleted` | deleted | `true` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/serviceTags'].get.parameters[0].required__deleted` | deleted | `true` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/setLoadBalancerFrontendPublicIpAddresses'].post.parameters[0].required__deleted` | deleted | `true` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/locations/{location}/checkPrivateLinkServiceVisibility'].post.parameters[0].required__deleted` | deleted | `true` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/ipamPools/{poolName}/staticCidrs/{staticCidrName}'].put.parameters[4].required__added` | added | `true` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/scopeConnections'].get.parameters[0].required__added` | added | `true` |
 
 ### Changes for `headers`
 
@@ -880,7 +965,7 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGateways/{applicationGatewayName}/backendhealth'].post.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGateways/{applicationGatewayName}/getBackendHealthOnDemand'].post.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGateways/{applicationGatewayName}/privateEndpointConnections/{connectionName}'].delete.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGateways/{applicationGatewayName}/privateEndpointConnections/{connectionName}'].put.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGateways/{applicationGatewayName}/privateEndpointConnections/{connectionName}'].put.responses.202.headers__added` | added | `{"Azure-AsyncOperation":{"type":"string","description":"A link to the status monitor"}}` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGateways/{applicationGatewayName}/start'].post.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGateways/{applicationGatewayName}/stop'].post.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGatewayWebApplicationFirewallPolicies/{policyName}'].delete.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
@@ -901,6 +986,7 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/connections/{virtualNetworkGatewayConnectionName}'].put.responses.201.headers__added` | added | `{"Azure-AsyncOperation":{"type":"string","description":"A link to the status monitor"}}` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/getikesas'].post.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/resetconnection'].post.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/sharedkey'].put.responses.201.headers__added` | added | `{"Azure-AsyncOperation":{"type":"string","description":"A link to the status monitor"}}` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/sharedkey/reset'].post.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/startPacketCapture'].post.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/stopPacketCapture'].post.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
@@ -916,11 +1002,20 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/authorizations/{authorizationName}'].put.responses.201.headers__added` | added | `{"Azure-AsyncOperation":{"type":"string","description":"A link to the status monitor"}}` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}'].delete.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}'].put.responses.201.headers__added` | added | `{"Azure-AsyncOperation":{"type":"string","description":"A link to the status monitor"}}` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/arpTables/{devicePath}'].post.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/connections/{connectionName}'].delete.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/connections/{connectionName}'].put.responses.201.headers__added` | added | `{"Azure-AsyncOperation":{"type":"string","description":"A link to the status monitor"}}` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/routeTables/{devicePath}'].post.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/routeTablesSummary/{devicePath}'].post.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCrossConnections/{crossConnectionName}'].put.responses.200.headers__added` | added | `{"Azure-AsyncOperation":{"type":"string","description":"A link to the status monitor"}}` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/peerings/{peeringName}'].delete.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/peerings/{peeringName}/arpTables/{devicePath}'].post.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/peerings/{peeringName}/routeTables/{devicePath}'].post.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/peerings/{peeringName}/routeTablesSummary/{devicePath}'].post.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteGateways/{expressRouteGatewayName}'].delete.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteGateways/{expressRouteGatewayName}'].patch.responses.202.headers__added` | added | `{"Azure-AsyncOperation":{"type":"string","description":"A link to the status monitor"}}` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteGateways/{expressRouteGatewayName}'].put.responses.201.headers__added` | added | `{"Azure-AsyncOperation":{"type":"string","description":"A link to the status monitor"}}` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/expressRouteConnections/{connectionName}'].delete.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRoutePorts/{expressRoutePortName}'].put.responses.201.headers__added` | added | `{"Azure-AsyncOperation":{"type":"string","description":"A link to the status monitor"}}` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRoutePorts/{expressRoutePortName}/authorizations/{authorizationName}'].put.responses.201.headers__added` | added | `{"Azure-AsyncOperation":{"type":"string","description":"A link to the status monitor"}}` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/firewallPolicies/{firewallPolicyName}'].delete.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
@@ -940,7 +1035,7 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/localNetworkGateways/{localNetworkGatewayName}'].put.responses.201.headers__added` | added | `{"Azure-AsyncOperation":{"type":"string","description":"A link to the status monitor"}}` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/locations/{location}/checkPrivateLinkServiceVisibility'].post.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/natGateways/{natGatewayName}'].delete.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/natGateways/{natGatewayName}'].put.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/natGateways/{natGatewayName}'].put.responses.202.headers__added` | added | `{"Azure-AsyncOperation":{"type":"string","description":"A link to the status monitor"}}` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkInterfaces/{networkInterfaceName}'].delete.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkInterfaces/{networkInterfaceName}'].put.responses.201.headers__added` | added | `{"Azure-AsyncOperation":{"type":"string","description":"A link to the status monitor"}}` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkInterfaces/{networkInterfaceName}/effectiveNetworkSecurityGroups'].post.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
@@ -1078,130 +1173,12 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnSites/{vpnSiteName}'].delete.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnSites/{vpnSiteName}'].put.responses.201.headers__added` | added | `{"Azure-AsyncOperation":{"type":"string","description":"A link to the status monitor"}}` |
 
-### Changes for `200`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/setLoadBalancerFrontendPublicIpAddresses'].post.responses.200__deleted` | deleted | `{"description":"ignore"}` |
-
-### Changes for `204`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/setLoadBalancerFrontendPublicIpAddresses'].post.responses.204__added` | added | `{"description":"ignore"}` |
-
-### Changes for `pattern`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/usages'].get.parameters[0].pattern__deleted` | deleted | `^[-\\w\\._ ]+$` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/loadBalancingRules/{loadBalancingRuleName}/health'].post.parameters[0].pattern__deleted` | deleted | `^[a-zA-Z0-9_.-]*$` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/loadBalancingRules/{loadBalancingRuleName}/health'].post.parameters[1].pattern__deleted` | deleted | `^[a-zA-Z0-9_.-]*$` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/loadBalancingRules/{loadBalancingRuleName}/health'].post.parameters[2].pattern__deleted` | deleted | `^[a-zA-Z0-9_.-]*$` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/migrateToIpBased'].post.parameters[0].pattern__deleted` | deleted | `^[a-z][a-z0-9]*$` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/migrateToIpBased'].post.parameters[1].pattern__deleted` | deleted | `^[a-z][a-z0-9]*$` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/azureFirewalls/{azureFirewallName}/packetCapture'].post.parameters[0].pattern__deleted` | deleted | `^[a-zA-Z0-9]` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/azureFirewalls/{azureFirewallName}/packetCaptureOperation'].post.parameters[0].pattern__deleted` | deleted | `^[A-Za-z0-9][\\w\\-._]{0,54}[A-Za-z0-9_]$` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/firewallPolicies/{firewallPolicyName}/deploy'].post.parameters[0].pattern__deleted` | deleted | `^[^_\\W][\\w-._]{0,79}(?<![-.])$` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/firewallPolicies/{firewallPolicyName}/firewallPolicyDrafts/default'].delete.parameters[0].pattern__deleted` | deleted | `^[^_\\W][\\w-._]{0,79}(?<![-.])$` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/firewallPolicies/{firewallPolicyName}/firewallPolicyDrafts/default'].get.parameters[0].pattern__deleted` | deleted | `^[^_\\W][\\w-._]{0,79}(?<![-.])$` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/firewallPolicies/{firewallPolicyName}/firewallPolicyDrafts/default'].put.parameters[0].pattern__deleted` | deleted | `^[^_\\W][\\w-._]{0,79}(?<![-.])$` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/firewallPolicies/{firewallPolicyName}/ruleCollectionGroups/{ruleCollectionGroupName}/ruleCollectionGroupDrafts/default'].delete.parameters[0].pattern__deleted` | deleted | `^[^_\\W][\\w-._]{0,79}(?<![-.])$` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/firewallPolicies/{firewallPolicyName}/ruleCollectionGroups/{ruleCollectionGroupName}/ruleCollectionGroupDrafts/default'].delete.parameters[1].pattern__deleted` | deleted | `^[^_\\W][\\w-._]{0,79}(?<![-.])$` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/firewallPolicies/{firewallPolicyName}/ruleCollectionGroups/{ruleCollectionGroupName}/ruleCollectionGroupDrafts/default'].get.parameters[0].pattern__deleted` | deleted | `^[^_\\W][\\w-._]{0,79}(?<![-.])$` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/firewallPolicies/{firewallPolicyName}/ruleCollectionGroups/{ruleCollectionGroupName}/ruleCollectionGroupDrafts/default'].get.parameters[1].pattern__deleted` | deleted | `^[^_\\W][\\w-._]{0,79}(?<![-.])$` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/firewallPolicies/{firewallPolicyName}/ruleCollectionGroups/{ruleCollectionGroupName}/ruleCollectionGroupDrafts/default'].put.parameters[0].pattern__deleted` | deleted | `^[^_\\W][\\w-._]{0,79}(?<![-.])$` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/firewallPolicies/{firewallPolicyName}/ruleCollectionGroups/{ruleCollectionGroupName}/ruleCollectionGroupDrafts/default'].put.parameters[1].pattern__deleted` | deleted | `^[^_\\W][\\w-._]{0,79}(?<![-.])$` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/scopeConnections'].get.parameters[0].pattern__added` | added | `^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkVirtualAppliances/{networkVirtualApplianceName}/getBootDiagnosticLogs'].post.parameters[0].pattern__deleted` | deleted | `^[A-Za-z0-9_]+` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkVirtualAppliances/{networkVirtualApplianceName}/networkVirtualApplianceConnections'].get.parameters[0].pattern__deleted` | deleted | `^[A-Za-z0-9_]+` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkVirtualAppliances/{networkVirtualApplianceName}/networkVirtualApplianceConnections/{connectionName}'].put.parameters[0].pattern__deleted` | deleted | `^[A-Za-z0-9_]+` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkVirtualAppliances/{networkVirtualApplianceName}/networkVirtualApplianceConnections/{connectionName}'].put.parameters[1].pattern__deleted` | deleted | `^[A-Za-z0-9_]+` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkVirtualAppliances/{networkVirtualApplianceName}/reimage'].post.parameters[0].pattern__deleted` | deleted | `^[A-Za-z0-9_]+` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/publicIPAddresses/{publicIpAddressName}/disassociateCloudServiceReservedPublicIp'].post.parameters[0].pattern__deleted` | deleted | `^[A-Za-z0-9][A-Za-z0-9_\\.-]*[A-Za-z0-9_]$` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/publicIPAddresses/{publicIpAddressName}/reserveCloudServicePublicIpAddress'].post.parameters[0].pattern__deleted` | deleted | `^[A-Za-z0-9][A-Za-z0-9_\\.-]*[A-Za-z0-9_]$` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnServerConfigurations/{vpnServerConfigurationName}/listRadiusSecrets'].post.parameters[0].pattern__deleted` | deleted | `^[A-Za-z0-9_]+` |
-
-### Changes for `format`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayRewriteRule.properties.ruleSequence.format__added` | added | `int32` |
-| `definitions.BastionActiveSession.properties.sessionDurationInMins.format__added` | added | `float` |
-| `definitions.ConnectionMonitorSuccessThreshold.properties.roundTripTimeMs.format__added` | added | `float` |
-| `definitions.ExpressRouteCircuitPropertiesFormat.properties.bandwidthInGbps.format__added` | added | `float` |
-| `definitions.ExpressRouteConnectionProperties.properties.routingWeight.format__added` | added | `int32` |
-| `definitions.ExpressRouteCrossConnectionProperties.properties.sTag.format__added` | added | `int32` |
-| `definitions.ExpressRoutePortPropertiesFormat.properties.bandwidthInGbps.format__added` | added | `int32` |
-| `definitions.ExpressRoutePortPropertiesFormat.properties.provisionedBandwidthInGbps.format__added` | added | `float` |
-| `definitions.ExpressRoutePortsLocationBandwidths.properties.valueInGbps.format__added` | added | `int32` |
-| `definitions.IpAllocationPropertiesFormat.properties.prefixLength.format__added` | added | `int32` |
-| `definitions.OutboundRulePropertiesFormat.properties.idleTimeoutInMinutes.format__added` | added | `int32` |
-| `definitions.RecordSet.properties.ttl.format__added` | added | `int32` |
-| `definitions.SingleQueryResult.properties.direction.format__deleted` | deleted | `int32` |
-| `definitions.SingleQueryResult.properties.mode.format__deleted` | deleted | `int32` |
-| `definitions.SingleQueryResult.properties.severity.format__deleted` | deleted | `int32` |
-| `definitions.VirtualNetworkGatewayAutoScaleBounds.properties.max.format__added` | added | `int32` |
-| `definitions.VirtualNetworkGatewayAutoScaleBounds.properties.min.format__added` | added | `int32` |
-| `definitions.VirtualNetworkTapPropertiesFormat.properties.destinationPort.format__added` | added | `int32` |
-| `definitions.WebApplicationFirewallCustomRule.properties.priority.format__added` | added | `int32` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/networkManagerConnections'].get.parameters[0].format__added` | added | `int32` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/scopeConnections'].get.parameters[1].format__added` | added | `int32` |
-
-### Changes for `minimum`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayAutoscaleConfiguration.properties.minCapacity.minimum__deleted` | deleted | `0` |
-| `definitions.ApplicationGatewayWebApplicationFirewallConfiguration.properties.fileUploadLimitInMb.minimum__deleted` | deleted | `0` |
-| `definitions.AzureFirewallApplicationRuleProtocol.properties.port.minimum__deleted` | deleted | `0` |
-| `definitions.BgpConnectionProperties.properties.peerAsn.minimum__deleted` | deleted | `0` |
-| `definitions.BgpPeerStatus.properties.asn.minimum__deleted` | deleted | `0` |
-| `definitions.BgpSettings.properties.asn.minimum__deleted` | deleted | `0` |
-| `definitions.ConnectionMonitorDestination.properties.port.minimum__deleted` | deleted | `0` |
-| `definitions.ConnectionMonitorHttpConfiguration.properties.port.minimum__deleted` | deleted | `0` |
-| `definitions.ConnectionMonitorSource.properties.port.minimum__deleted` | deleted | `0` |
-| `definitions.ConnectionMonitorTcpConfiguration.properties.port.minimum__deleted` | deleted | `0` |
-| `definitions.ConnectivityDestination.properties.port.minimum__deleted` | deleted | `0` |
-| `definitions.ConnectivitySource.properties.port.minimum__deleted` | deleted | `0` |
-| `definitions.ExplicitProxy.properties.httpPort.minimum__deleted` | deleted | `0` |
-| `definitions.ExplicitProxy.properties.httpsPort.minimum__deleted` | deleted | `0` |
-| `definitions.ExplicitProxy.properties.pacFilePort.minimum__deleted` | deleted | `0` |
-| `definitions.FirewallPolicyRuleApplicationProtocol.properties.port.minimum__deleted` | deleted | `0` |
-| `definitions.HopLinkProperties.properties.roundTripTimeAvg.minimum__deleted` | deleted | `0` |
-| `definitions.HopLinkProperties.properties.roundTripTimeMax.minimum__deleted` | deleted | `0` |
-| `definitions.HopLinkProperties.properties.roundTripTimeMin.minimum__deleted` | deleted | `0` |
-| `definitions.InboundSecurityRules.properties.destinationPortRange.minimum__deleted` | deleted | `0` |
-| `definitions.NetworkVirtualApplianceConnectionProperties.properties.asn.minimum__deleted` | deleted | `0` |
-| `definitions.NetworkVirtualApplianceConnectionProperties.properties.tunnelIdentifier.minimum__deleted` | deleted | `0` |
-| `definitions.NetworkVirtualAppliancePropertiesFormat.properties.virtualApplianceAsn.minimum__deleted` | deleted | `0` |
-| `definitions.PacketCaptureParameters.properties.bytesToCapturePerPacket.minimum__deleted` | deleted | `0` |
-| `definitions.PacketCaptureParameters.properties.timeLimitInSeconds.minimum__deleted` | deleted | `0` |
-| `definitions.PacketCaptureParameters.properties.totalBytesPerSession.minimum__deleted` | deleted | `0` |
-| `definitions.PacketCaptureSettings.properties.fileCount.minimum__deleted` | deleted | `0` |
-| `definitions.PacketCaptureSettings.properties.fileSizeInBytes.minimum__deleted` | deleted | `0` |
-| `definitions.PacketCaptureSettings.properties.sessionTimeLimitInSeconds.minimum__deleted` | deleted | `0` |
-| `definitions.PolicySettings.properties.customBlockResponseStatusCode.minimum__deleted` | deleted | `0` |
-| `definitions.PolicySettings.properties.fileUploadLimitInMb.minimum__deleted` | deleted | `0` |
-| `definitions.VirtualHubProperties.properties.virtualRouterAsn.minimum__deleted` | deleted | `0` |
-| `definitions.VirtualRouterAutoScaleConfiguration.properties.minCapacity.minimum__deleted` | deleted | `0` |
-| `definitions.VirtualRouterPeeringProperties.properties.peerAsn.minimum__deleted` | deleted | `0` |
-| `definitions.VirtualRouterPropertiesFormat.properties.virtualRouterAsn.minimum__deleted` | deleted | `0` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/networkManagerConnections'].get.parameters[0].minimum__added` | added | `1` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/scopeConnections'].get.parameters[1].minimum__added` | added | `1` |
-
-### Changes for `maximum`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/networkManagerConnections'].get.parameters[0].maximum__added` | added | `20` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/scopeConnections'].get.parameters[1].maximum__added` | added | `20` |
-
 ### Changes for `final-state-schema`
 
 | Path | Change Type | Value |
 |------|------------|-------|
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGateways/{applicationGatewayName}'].put['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/ApplicationGateway` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGateways/{applicationGatewayName}/privateEndpointConnections/{connectionName}'].put['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/ApplicationGatewayPrivateEndpointConnection` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationSecurityGroups/{applicationSecurityGroupName}'].put['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/ApplicationSecurityGroup` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/azureFirewalls/{azureFirewallName}'].patch['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/AzureFirewall` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/azureFirewalls/{azureFirewallName}'].put['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/AzureFirewall` |
@@ -1215,6 +1192,7 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/authorizations/{authorizationName}'].put['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/ExpressRouteCircuitAuthorization` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}'].put['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/ExpressRouteCircuitPeering` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/connections/{connectionName}'].put['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/ExpressRouteCircuitConnection` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCrossConnections/{crossConnectionName}'].put['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/ExpressRouteCrossConnection` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/peerings/{peeringName}'].put['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/ExpressRouteCrossConnection` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteGateways/{expressRouteGatewayName}'].patch['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/ExpressRouteGateway` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteGateways/{expressRouteGatewayName}'].put['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/ExpressRouteGateway` |
@@ -1229,6 +1207,7 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/backendAddressPools/{backendAddressPoolName}'].put['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/BackendAddressPool` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/inboundNatRules/{inboundNatRuleName}'].put['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/InboundNatRule` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/localNetworkGateways/{localNetworkGatewayName}'].put['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/LocalNetworkGateway` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/natGateways/{natGatewayName}'].put['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/NatGateway` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkInterfaces/{networkInterfaceName}'].put['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/NetworkInterface` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkInterfaces/{networkInterfaceName}/tapConfigurations/{tapConfigurationName}'].put['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/NetworkInterfaceTapConfiguration` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/ipamPools/{poolName}'].put['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/IpamPool` |
@@ -1281,17 +1260,6 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnServerConfigurations/{vpnServerConfigurationName}/configurationPolicyGroups/{configurationPolicyGroupName}'].put['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/VpnServerConfigurationPolicyGroup` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnSites/{vpnSiteName}'].put['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/VpnSite` |
 
-### Changes for `x-ms-long-running-operation-options`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGateways/{applicationGatewayName}/privateEndpointConnections/{connectionName}'].put['x-ms-long-running-operation-options__deleted']` | deleted | `{"final-state-via":"azure-async-operation"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/sharedkey'].put['x-ms-long-running-operation-options__deleted']` | deleted | `{"final-state-via":"azure-async-operation"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCrossConnections/{crossConnectionName}'].put['x-ms-long-running-operation-options__deleted']` | deleted | `{"final-state-via":"azure-async-operation"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/natGateways/{natGatewayName}'].put['x-ms-long-running-operation-options__deleted']` | deleted | `{"final-state-via":"azure-async-operation"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations/{associationName}'].put['x-ms-long-running-operation-options__deleted']` | deleted | `{"final-state-via":"azure-async-operation"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters/{routeFilterName}/routeFilterRules/{ruleName}'].delete['x-ms-long-running-operation-options__deleted']` | deleted | `{"final-state-via":"azure-async-operation"}` |
-
 ### Changes for `maxLength`
 
 | Path | Change Type | Value |
@@ -1300,6 +1268,32 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/azureFirewalls/{azureFirewallName}/packetCapture'].post.parameters[0].maxLength__deleted` | deleted | `56` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/publicIPAddresses/{publicIpAddressName}/disassociateCloudServiceReservedPublicIp'].post.parameters[0].maxLength__deleted` | deleted | `80` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/publicIPAddresses/{publicIpAddressName}/reserveCloudServicePublicIpAddress'].post.parameters[0].maxLength__deleted` | deleted | `80` |
+
+### Changes for `pattern`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/azureFirewalls/{azureFirewallName}/packetCapture'].post.parameters[0].pattern__deleted` | deleted | `^[a-zA-Z0-9]` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/azureFirewalls/{azureFirewallName}/packetCaptureOperation'].post.parameters[0].pattern__deleted` | deleted | `^[A-Za-z0-9][\\w\\-._]{0,54}[A-Za-z0-9_]$` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/firewallPolicies/{firewallPolicyName}/deploy'].post.parameters[0].pattern__deleted` | deleted | `^[^_\\W][\\w-._]{0,79}(?<![-.])$` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/firewallPolicies/{firewallPolicyName}/firewallPolicyDrafts/default'].delete.parameters[0].pattern__deleted` | deleted | `^[^_\\W][\\w-._]{0,79}(?<![-.])$` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/firewallPolicies/{firewallPolicyName}/firewallPolicyDrafts/default'].get.parameters[0].pattern__deleted` | deleted | `^[^_\\W][\\w-._]{0,79}(?<![-.])$` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/firewallPolicies/{firewallPolicyName}/firewallPolicyDrafts/default'].put.parameters[0].pattern__deleted` | deleted | `^[^_\\W][\\w-._]{0,79}(?<![-.])$` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/firewallPolicies/{firewallPolicyName}/ruleCollectionGroups/{ruleCollectionGroupName}/ruleCollectionGroupDrafts/default'].delete.parameters[0].pattern__deleted` | deleted | `^[^_\\W][\\w-._]{0,79}(?<![-.])$` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/firewallPolicies/{firewallPolicyName}/ruleCollectionGroups/{ruleCollectionGroupName}/ruleCollectionGroupDrafts/default'].delete.parameters[1].pattern__deleted` | deleted | `^[^_\\W][\\w-._]{0,79}(?<![-.])$` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/firewallPolicies/{firewallPolicyName}/ruleCollectionGroups/{ruleCollectionGroupName}/ruleCollectionGroupDrafts/default'].get.parameters[0].pattern__deleted` | deleted | `^[^_\\W][\\w-._]{0,79}(?<![-.])$` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/firewallPolicies/{firewallPolicyName}/ruleCollectionGroups/{ruleCollectionGroupName}/ruleCollectionGroupDrafts/default'].get.parameters[1].pattern__deleted` | deleted | `^[^_\\W][\\w-._]{0,79}(?<![-.])$` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/firewallPolicies/{firewallPolicyName}/ruleCollectionGroups/{ruleCollectionGroupName}/ruleCollectionGroupDrafts/default'].put.parameters[0].pattern__deleted` | deleted | `^[^_\\W][\\w-._]{0,79}(?<![-.])$` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/firewallPolicies/{firewallPolicyName}/ruleCollectionGroups/{ruleCollectionGroupName}/ruleCollectionGroupDrafts/default'].put.parameters[1].pattern__deleted` | deleted | `^[^_\\W][\\w-._]{0,79}(?<![-.])$` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/scopeConnections'].get.parameters[0].pattern__added` | added | `^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkVirtualAppliances/{networkVirtualApplianceName}/getBootDiagnosticLogs'].post.parameters[0].pattern__deleted` | deleted | `^[A-Za-z0-9_]+` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkVirtualAppliances/{networkVirtualApplianceName}/networkVirtualApplianceConnections'].get.parameters[0].pattern__deleted` | deleted | `^[A-Za-z0-9_]+` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkVirtualAppliances/{networkVirtualApplianceName}/networkVirtualApplianceConnections/{connectionName}'].put.parameters[0].pattern__deleted` | deleted | `^[A-Za-z0-9_]+` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkVirtualAppliances/{networkVirtualApplianceName}/networkVirtualApplianceConnections/{connectionName}'].put.parameters[1].pattern__deleted` | deleted | `^[A-Za-z0-9_]+` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkVirtualAppliances/{networkVirtualApplianceName}/reimage'].post.parameters[0].pattern__deleted` | deleted | `^[A-Za-z0-9_]+` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/publicIPAddresses/{publicIpAddressName}/disassociateCloudServiceReservedPublicIp'].post.parameters[0].pattern__deleted` | deleted | `^[A-Za-z0-9][A-Za-z0-9_\\.-]*[A-Za-z0-9_]$` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/publicIPAddresses/{publicIpAddressName}/reserveCloudServicePublicIpAddress'].post.parameters[0].pattern__deleted` | deleted | `^[A-Za-z0-9][A-Za-z0-9_\\.-]*[A-Za-z0-9_]$` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnServerConfigurations/{vpnServerConfigurationName}/listRadiusSecrets'].post.parameters[0].pattern__deleted` | deleted | `^[A-Za-z0-9_]+` |
 
 ### Changes for `description`
 
@@ -1367,104 +1361,6 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/verifierWorkspaces/{workspaceName}/reachabilityAnalysisRuns/{reachabilityAnalysisRunName}'].delete.description__added` | added | `Deletes Reachability Analysis Run.` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/verifierWorkspaces/{workspaceName}/reachabilityAnalysisRuns/{reachabilityAnalysisRunName}'].get.description__added` | added | `Gets Reachability Analysis Run.` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/verifierWorkspaces/{workspaceName}/reachabilityAnalysisRuns/{reachabilityAnalysisRunName}'].put.description__added` | added | `Creates Reachability Analysis Runs.` |
-
-### Changes for `produces`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/getikesas'].post.produces__added` | added | `["text/plain","application/json"]` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/startPacketCapture'].post.produces__added` | added | `["text/plain","application/json"]` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/stopPacketCapture'].post.produces__added` | added | `["text/plain","application/json"]` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/vpndeviceconfigurationscript'].post.produces__added` | added | `["text/plain","application/json"]` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/generatevpnclientpackage'].post.produces__added` | added | `["text/plain","application/json"]` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/generatevpnprofile'].post.produces__added` | added | `["text/plain","application/json"]` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getvpnprofilepackageurl'].post.produces__added` | added | `["text/plain","application/json"]` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/startPacketCapture'].post.produces__added` | added | `["text/plain","application/json"]` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/startSiteFailoverTest'].post.produces__added` | added | `["text/plain","application/json"]` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/stopPacketCapture'].post.produces__added` | added | `["text/plain","application/json"]` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/stopSiteFailoverTest'].post.produces__added` | added | `["text/plain","application/json"]` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/supportedvpndevices'].post.produces__added` | added | `["text/plain","application/json"]` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/startpacketcapture'].post.produces__added` | added | `["text/plain","application/json"]` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/stoppacketcapture'].post.produces__added` | added | `["text/plain","application/json"]` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}/vpnLinkConnections/{linkConnectionName}/getikesas'].post.produces__added` | added | `["text/plain","application/json"]` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{vpnConnectionName}/startpacketcapture'].post.produces__added` | added | `["text/plain","application/json"]` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{vpnConnectionName}/stoppacketcapture'].post.produces__added` | added | `["text/plain","application/json"]` |
-
-### Changes for `x-ms-long-running-operation`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/sharedkey'].put['x-ms-long-running-operation__deleted']` | deleted | `true` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCrossConnections/{crossConnectionName}'].put['x-ms-long-running-operation__deleted']` | deleted | `true` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/peerings/{peeringName}'].delete['x-ms-long-running-operation__deleted']` | deleted | `true` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/expressRouteConnections/{connectionName}'].delete['x-ms-long-running-operation__deleted']` | deleted | `true` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkVirtualAppliances/{networkVirtualApplianceName}/networkVirtualApplianceConnections/{connectionName}'].delete['x-ms-long-running-operation__deleted']` | deleted | `true` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/packetCaptures/{packetCaptureName}'].delete['x-ms-long-running-operation__deleted']` | deleted | `true` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/privateEndpoints/{privateEndpointName}/privateDnsZoneGroups/{privateDnsZoneGroupName}'].delete['x-ms-long-running-operation__deleted']` | deleted | `true` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters/{routeFilterName}/routeFilterRules/{ruleName}'].delete['x-ms-long-running-operation__deleted']` | deleted | `true` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/hubVirtualNetworkConnections/{connectionName}'].delete['x-ms-long-running-operation__deleted']` | deleted | `true` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/routeTables/{routeTableName}'].delete['x-ms-long-running-operation__deleted']` | deleted | `true` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getvpnclientipsecparameters'].post['x-ms-long-running-operation__deleted']` | deleted | `true` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}'].delete['x-ms-long-running-operation__deleted']` | deleted | `true` |
-
-### Changes for `post`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/arpTables/{devicePath}'].post__deleted` | deleted | `{"operationId":"ExpressRouteCircuits_ListArpTable","description":"Gets the currently advertised ARP ...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/routeTables/{devicePath}'].post__deleted` | deleted | `{"operationId":"ExpressRouteCircuits_ListRoutesTable","description":"Gets the currently advertised r...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/routeTablesSummary/{devicePath}'].post__deleted` | deleted | `{"operationId":"ExpressRouteCircuits_ListRoutesTableSummary","description":"Gets the currently adver...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/peerings/{peeringName}/arpTables/{devicePath}'].post__deleted` | deleted | `{"operationId":"ExpressRouteCrossConnections_ListArpTable","description":"Gets the currently adverti...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/peerings/{peeringName}/routeTables/{devicePath}'].post__deleted` | deleted | `{"operationId":"ExpressRouteCrossConnections_ListRoutesTable","description":"Gets the currently adve...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/peerings/{peeringName}/routeTablesSummary/{devicePath}'].post__deleted` | deleted | `{"operationId":"ExpressRouteCrossConnections_ListRoutesTableSummary","description":"Gets the route t...` |
-
-### Changes for `get`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/arpTables/{devicePath}'].get__added` | added | `{"operationId":"ExpressRouteCircuits_ListArpTable","description":"Gets the currently advertised ARP ...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/routeTables/{devicePath}'].get__added` | added | `{"operationId":"ExpressRouteCircuits_ListRoutesTable","description":"Gets the currently advertised r...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/routeTablesSummary/{devicePath}'].get__added` | added | `{"operationId":"ExpressRouteCircuits_ListRoutesTableSummary","description":"Gets the currently adver...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/peerings/{peeringName}/arpTables/{devicePath}'].get__added` | added | `{"operationId":"ExpressRouteCrossConnections_ListArpTable","description":"Gets the currently adverti...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/peerings/{peeringName}/routeTables/{devicePath}'].get__added` | added | `{"operationId":"ExpressRouteCrossConnections_ListRoutesTable","description":"Gets the currently adve...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/peerings/{peeringName}/routeTablesSummary/{devicePath}'].get__added` | added | `{"operationId":"ExpressRouteCrossConnections_ListRoutesTableSummary","description":"Gets the route t...` |
-
-### Changes for `202`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/peerings/{peeringName}'].delete.responses.202__deleted` | deleted | `{"description":"ignore"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/expressRouteConnections/{connectionName}'].delete.responses.202__deleted` | deleted | `{"description":"ignore"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkVirtualAppliances/{networkVirtualApplianceName}/networkVirtualApplianceConnections/{connectionName}'].delete.responses.202__deleted` | deleted | `{"description":"ignore","headers":{"location":{"type":"string","description":"The URL of the resourc...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/packetCaptures/{packetCaptureName}'].delete.responses.202__deleted` | deleted | `{"description":"ignore"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/privateEndpoints/{privateEndpointName}/privateDnsZoneGroups/{privateDnsZoneGroupName}'].delete.responses.202__deleted` | deleted | `{"description":"ignore"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters/{routeFilterName}/routeFilterRules/{ruleName}'].delete.responses.202__deleted` | deleted | `{"description":"ignore","headers":{"Azure-AsyncOperation":{"type":"string","description":"URL for ch...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/hubVirtualNetworkConnections/{connectionName}'].delete.responses.202__deleted` | deleted | `{"description":"ignore"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/routeTables/{routeTableName}'].delete.responses.202__deleted` | deleted | `{"description":"ignore"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}'].delete.responses.202__deleted` | deleted | `{"description":"ignore"}` |
-
-### Changes for `Location`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRoutePorts/{expressRoutePortName}'].delete.responses.202.headers.Location__deleted` | deleted | `{"type":"string","description":"URL for determining when an operation has completed. Send a GET requ...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRoutePorts/{expressRoutePortName}/authorizations/{authorizationName}'].delete.responses.202.headers.Location__deleted` | deleted | `{"type":"string","description":"URL for determining when an operation has completed. Send a GET requ...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/firewallPolicies/{firewallPolicyName}/deploy'].post.responses.202.headers.Location__deleted` | deleted | `{"type":"string","description":"URL to get the status of the operation."}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/linkReferences/{linkReferenceName}'].delete.responses.202.headers.Location__added` | added | `{"type":"string","description":"The Location header contains the URL where the status of the long ru...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/links/{linkName}'].delete.responses.202.headers.Location__added` | added | `{"type":"string","description":"The Location header contains the URL where the status of the long ru...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations/{associationName}'].put.responses.202.headers.Location__added` | added | `{"type":"string","description":"The Location header contains the URL where the status of the long ru...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkVirtualAppliances/{networkVirtualApplianceName}'].put.responses.201.headers.Location__deleted` | deleted | `{"type":"string","description":"The URL of the resource used to check the status of the asynchronous...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters/{routeFilterName}'].delete.responses.202.headers.Location__deleted` | deleted | `{"type":"string","description":"URL for determining when an operation has completed. Send a GET requ...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/abortMigration'].post.responses.202.headers.Location__added` | added | `{"type":"string","description":"The Location header contains the URL where the status of the long ru...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/commitMigration'].post.responses.202.headers.Location__added` | added | `{"type":"string","description":"The Location header contains the URL where the status of the long ru...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/executeMigration'].post.responses.202.headers.Location__added` | added | `{"type":"string","description":"The Location header contains the URL where the status of the long ru...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getFailoverAllTestsDetails'].post.responses.202.headers.Location__added` | added | `{"type":"string","description":"The Location header contains the URL where the status of the long ru...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getFailoverSingleTestDetails'].post.responses.202.headers.Location__added` | added | `{"type":"string","description":"The Location header contains the URL where the status of the long ru...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getResiliencyInformation'].post.responses.202.headers.Location__added` | added | `{"type":"string","description":"The Location header contains the URL where the status of the long ru...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getRoutesInformation'].post.responses.202.headers.Location__added` | added | `{"type":"string","description":"The Location header contains the URL where the status of the long ru...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/prepareMigration'].post.responses.202.headers.Location__added` | added | `{"type":"string","description":"The Location header contains the URL where the status of the long ru...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/startSiteFailoverTest'].post.responses.202.headers.Location__added` | added | `{"type":"string","description":"The Location header contains the URL where the status of the long ru...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/stopSiteFailoverTest'].post.responses.202.headers.Location__added` | added | `{"type":"string","description":"The Location header contains the URL where the status of the long ru...` |
 
 ### Changes for `schema`
 
@@ -1629,6 +1525,33 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/startSiteFailoverTest'].post.responses.202.headers.location__deleted` | deleted | `{"type":"string"}` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/stopSiteFailoverTest'].post.responses.202.headers.location__deleted` | deleted | `{"type":"string"}` |
 
+### Changes for `Location`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/linkReferences/{linkReferenceName}'].delete.responses.202.headers.Location__added` | added | `{"type":"string","description":"The Location header contains the URL where the status of the long ru...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/links/{linkName}'].delete.responses.202.headers.Location__added` | added | `{"type":"string","description":"The Location header contains the URL where the status of the long ru...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations/{associationName}'].put.responses.202.headers.Location__added` | added | `{"type":"string","description":"The Location header contains the URL where the status of the long ru...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkVirtualAppliances/{networkVirtualApplianceName}'].put.responses.201.headers.Location__deleted` | deleted | `{"type":"string","description":"The URL of the resource used to check the status of the asynchronous...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters/{routeFilterName}'].delete.responses.202.headers.Location__deleted` | deleted | `{"type":"string","description":"URL for determining when an operation has completed. Send a GET requ...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/abortMigration'].post.responses.202.headers.Location__added` | added | `{"type":"string","description":"The Location header contains the URL where the status of the long ru...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/commitMigration'].post.responses.202.headers.Location__added` | added | `{"type":"string","description":"The Location header contains the URL where the status of the long ru...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/executeMigration'].post.responses.202.headers.Location__added` | added | `{"type":"string","description":"The Location header contains the URL where the status of the long ru...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getFailoverAllTestsDetails'].post.responses.202.headers.Location__added` | added | `{"type":"string","description":"The Location header contains the URL where the status of the long ru...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getFailoverSingleTestDetails'].post.responses.202.headers.Location__added` | added | `{"type":"string","description":"The Location header contains the URL where the status of the long ru...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getResiliencyInformation'].post.responses.202.headers.Location__added` | added | `{"type":"string","description":"The Location header contains the URL where the status of the long ru...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getRoutesInformation'].post.responses.202.headers.Location__added` | added | `{"type":"string","description":"The Location header contains the URL where the status of the long ru...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/prepareMigration'].post.responses.202.headers.Location__added` | added | `{"type":"string","description":"The Location header contains the URL where the status of the long ru...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/startSiteFailoverTest'].post.responses.202.headers.Location__added` | added | `{"type":"string","description":"The Location header contains the URL where the status of the long ru...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/stopSiteFailoverTest'].post.responses.202.headers.Location__added` | added | `{"type":"string","description":"The Location header contains the URL where the status of the long ru...` |
+
+### Changes for `x-ms-long-running-operation-options`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations/{associationName}'].put['x-ms-long-running-operation-options__deleted']` | deleted | `{"final-state-via":"azure-async-operation"}` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters/{routeFilterName}/routeFilterRules/{ruleName}'].delete['x-ms-long-running-operation-options__deleted']` | deleted | `{"final-state-via":"azure-async-operation"}` |
+
 ### Changes for `Azure-AsyncOperation`
 
 | Path | Change Type | Value |
@@ -1637,6 +1560,31 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkVirtualAppliances/{networkVirtualApplianceName}'].put.responses.201.headers['Azure-AsyncOperation__added']` | added | `{"type":"string","description":"A link to the status monitor"}` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/publicIPAddresses/{publicIpAddressName}/disassociateCloudServiceReservedPublicIp'].post.responses.202.headers['Azure-AsyncOperation__deleted']` | deleted | `{"type":"string","description":"URL for checking the ongoing status of the operation.\\nTo get the st...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/publicIPAddresses/{publicIpAddressName}/reserveCloudServicePublicIpAddress'].post.responses.202.headers['Azure-AsyncOperation__deleted']` | deleted | `{"type":"string","description":"URL for checking the ongoing status of the operation.\\nTo get the st...` |
+
+### Changes for `x-ms-long-running-operation`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkVirtualAppliances/{networkVirtualApplianceName}/networkVirtualApplianceConnections/{connectionName}'].delete['x-ms-long-running-operation__deleted']` | deleted | `true` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/packetCaptures/{packetCaptureName}'].delete['x-ms-long-running-operation__deleted']` | deleted | `true` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/privateEndpoints/{privateEndpointName}/privateDnsZoneGroups/{privateDnsZoneGroupName}'].delete['x-ms-long-running-operation__deleted']` | deleted | `true` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters/{routeFilterName}/routeFilterRules/{ruleName}'].delete['x-ms-long-running-operation__deleted']` | deleted | `true` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/hubVirtualNetworkConnections/{connectionName}'].delete['x-ms-long-running-operation__deleted']` | deleted | `true` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/routeTables/{routeTableName}'].delete['x-ms-long-running-operation__deleted']` | deleted | `true` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getvpnclientipsecparameters'].post['x-ms-long-running-operation__deleted']` | deleted | `true` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}'].delete['x-ms-long-running-operation__deleted']` | deleted | `true` |
+
+### Changes for `202`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkVirtualAppliances/{networkVirtualApplianceName}/networkVirtualApplianceConnections/{connectionName}'].delete.responses.202__deleted` | deleted | `{"description":"ignore","headers":{"location":{"type":"string","description":"The URL of the resourc...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/packetCaptures/{packetCaptureName}'].delete.responses.202__deleted` | deleted | `{"description":"ignore"}` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/privateEndpoints/{privateEndpointName}/privateDnsZoneGroups/{privateDnsZoneGroupName}'].delete.responses.202__deleted` | deleted | `{"description":"ignore"}` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters/{routeFilterName}/routeFilterRules/{ruleName}'].delete.responses.202__deleted` | deleted | `{"description":"ignore","headers":{"Azure-AsyncOperation":{"type":"string","description":"URL for ch...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/hubVirtualNetworkConnections/{connectionName}'].delete.responses.202__deleted` | deleted | `{"description":"ignore"}` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/routeTables/{routeTableName}'].delete.responses.202__deleted` | deleted | `{"description":"ignore"}` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}'].delete.responses.202__deleted` | deleted | `{"description":"ignore"}` |
 
 ### Changes for `additionalProperties`
 
@@ -1653,12 +1601,6 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.AdminRuleListResult__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
-
-### Changes for `AuthorizationListResult`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.AuthorizationListResult__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
 
 ### Changes for `Availability`
 
@@ -1738,18 +1680,6 @@
 |------|------------|-------|
 | `definitions.Dimension__deleted` | deleted | `{"type":"object","description":"Dimension of the metric.","properties":{"name":{"type":"string","des...` |
 
-### Changes for `EndpointServicesListResult`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.EndpointServicesListResult__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
-
-### Changes for `Error`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.Error__deleted` | deleted | `{"type":"object","description":"Common error representation.","properties":{"code":{"type":"string",...` |
-
 ### Changes for `Filters`
 
 | Path | Change Type | Value |
@@ -1773,12 +1703,6 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.HTTPHeader__deleted` | deleted | `{"type":"object","description":"The HTTP header.","properties":{"name":{"type":"string","description...` |
-
-### Changes for `IDPSQueryObject`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.IDPSQueryObject__deleted` | deleted | `{"type":"object","description":"Will describe the query to run against the IDPS signatures DB","prop...` |
 
 ### Changes for `IpGroups`
 
@@ -1804,29 +1728,11 @@
 |------|------------|-------|
 | `definitions.LoadBalancerBackendAddressPoolListResult__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
 
-### Changes for `LoadBalancerFrontendIPConfigurationListResult`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.LoadBalancerFrontendIPConfigurationListResult__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
-
 ### Changes for `LoadBalancerLoadBalancingRuleListResult`
 
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.LoadBalancerLoadBalancingRuleListResult__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
-
-### Changes for `LoadBalancerOutboundRuleListResult`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.LoadBalancerOutboundRuleListResult__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
-
-### Changes for `LoadBalancerProbeListResult`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.LoadBalancerProbeListResult__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
 
 ### Changes for `LogSpecification`
 
@@ -1900,12 +1806,6 @@
 |------|------------|-------|
 | `definitions.PeerRouteList__deleted` | deleted | `{"type":"object","description":"Map from virtual router instance to list of peer routes.","additiona...` |
 
-### Changes for `PerimeterAssociableResourcesListResult`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.PerimeterAssociableResourcesListResult__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
-
 ### Changes for `PortsList`
 
 | Path | Change Type | Value |
@@ -1960,6 +1860,12 @@
 |------|------------|-------|
 | `definitions.connectivityGroupItem__deleted` | deleted | `{"type":"object","description":"Connectivity group item.","properties":{"networkGroupId":{"type":"st...` |
 
+### Changes for `Azure.ResourceManager.ArmAcceptedLroResponse<"Resource operation accepted.", Azure.ResourceManager.Legacy.{ location: string, retryAfter: int32 }>`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions['Azure.ResourceManager.ArmAcceptedLroResponse<"Resource operation accepted.", Azure.ResourceManager.Legacy.{ location: string, retryAfter: int32 }>__added']` | added | `{"type":"object","description":"Resource operation accepted."}` |
+
 ### Changes for `Azure.ResourceManager.ArmAcceptedLroResponse<"Resource operation accepted.", Azure.ResourceManager.{ location: string, retryAfter: int32 }>`
 
 | Path | Change Type | Value |
@@ -1995,12 +1901,6 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions['Azure.ResourceManager.ArmResponse<AzureReachabilityReport>__added']` | added | `{"type":"object","description":"Azure operation completed successfully.","properties":{"body":{"$ref...` |
-
-### Changes for `Azure.ResourceManager.ArmResponse<BackendAddressInboundNatRulePortMappings>`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions['Azure.ResourceManager.ArmResponse<BackendAddressInboundNatRulePortMappings>__added']` | added | `{"type":"object","description":"Azure operation completed successfully.","properties":{"body":{"$ref...` |
 
 ### Changes for `Azure.ResourceManager.ArmResponse<BastionActiveSessionListResult>`
 
@@ -2230,11 +2130,11 @@
 |------|------------|-------|
 | `definitions['Azure.ResourceManager.ArmResponse<VpnServerConfigurationsResponse>__added']` | added | `{"type":"object","description":"Azure operation completed successfully.","properties":{"body":{"$ref...` |
 
-### Changes for `Azure.ResourceManager.ArmResponse<string>`
+### Changes for `Azure.ResourceManager.ArmResponse<stringApplicationJson>`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions['Azure.ResourceManager.ArmResponse<string>__added']` | added | `{"type":"object","description":"Azure operation completed successfully.","properties":{"body":{"type...` |
+| `definitions['Azure.ResourceManager.ArmResponse<stringApplicationJson>__added']` | added | `{"type":"object","description":"Azure operation completed successfully.","properties":{"body":{"type...` |
 
 ### Changes for `BackendAddressPoolListResult`
 
@@ -2272,18 +2172,6 @@
 |------|------------|-------|
 | `definitions.ConnectivityGroupItem__added` | added | `{"type":"object","description":"Connectivity group item.","properties":{"networkGroupId":{"type":"st...` |
 
-### Changes for `EndpointServiceResultListResult`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.EndpointServiceResultListResult__added` | added | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
-
-### Changes for `ExpressRouteCircuitAuthorizationListResult`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ExpressRouteCircuitAuthorizationListResult__added` | added | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
-
 ### Changes for `ExpressRouteGatewayPropertiesAutoScaleConfiguration`
 
 | Path | Change Type | Value |
@@ -2302,12 +2190,6 @@
 |------|------------|-------|
 | `definitions.FirewallPolicySnat__added` | added | `{"type":"object","description":"The private IP addresses/IP ranges to which traffic will not be SNAT...` |
 
-### Changes for `FrontendIPConfigurationListResult`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.FrontendIPConfigurationListResult__added` | added | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
-
 ### Changes for `HttpConfiguration`
 
 | Path | Change Type | Value |
@@ -2319,12 +2201,6 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.HttpHeader__added` | added | `{"type":"object","description":"The HTTP header.","properties":{"name":{"type":"string","description...` |
-
-### Changes for `IdpsQueryObject`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.IdpsQueryObject__added` | added | `{"type":"object","description":"Will describe the query to run against the IDPS signatures DB","prop...` |
 
 ### Changes for `IpamPoolPrefixAllocationPool`
 
@@ -2362,18 +2238,6 @@
 |------|------------|-------|
 | `definitions.NspAssociationListResult__added` | added | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
 
-### Changes for `OutboundRuleListResult`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.OutboundRuleListResult__added` | added | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
-
-### Changes for `PerimeterAssociableResourceListResult`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.PerimeterAssociableResourceListResult__added` | added | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
-
 ### Changes for `PolicySettingsLogScrubbing`
 
 | Path | Change Type | Value |
@@ -2391,12 +2255,6 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.PrivateLinkServicePropertiesVisibility__added` | added | `{"type":"object","description":"The visibility list of the private link service.","allOf":[{"$ref":"...` |
-
-### Changes for `ProbeListResult`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ProbeListResult__added` | added | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
 
 ### Changes for `ResourceNavigationLinkListResult`
 
@@ -2427,6 +2285,12 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.VirtualApplianceSiteListResult__added` | added | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
+
+### Changes for `stringApplicationJson`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.stringApplicationJson__added` | added | `{"type":"string"}` |
 
 ### Changes for `x-ms-discriminator-value`
 
@@ -2961,6 +2825,7 @@
 | `definitions.AzureFirewallPropertiesFormat.properties.ipGroups.items__added` | added | `{"$ref":"#/definitions/AzureFirewallIpGroups"}` |
 | `definitions.ExpressRouteFailoverAllTestDetails.items__deleted` | deleted | `{"$ref":"#/definitions/ExpressRouteFailoverTestDetails"}` |
 | `definitions.ExpressRouteFailoverSingleTestDetailsObject.items__deleted` | deleted | `{"$ref":"#/definitions/ExpressRouteFailoverSingleTestDetails"}` |
+| `definitions.IDPSQueryObject.properties.filters.items__added` | added | `{"$ref":"#/definitions/FilterItems"}` |
 | `definitions.NetworkVirtualAppliancePropertiesFormat.properties.nvaInterfaceConfigurations.items__added` | added | `{"$ref":"#/definitions/NvaInterfaceConfigurationsProperties"}` |
 
 ### Changes for `properties`
@@ -3176,6 +3041,12 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.LoadBalancerBackendAddressPropertiesFormat.properties.ipAddress['x-ms-azure-resource__deleted']` | deleted | `false` |
+
+### Changes for `nextLink`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.NetworkWatcherListResult.properties.nextLink__added` | added | `{"type":"string","format":"uri","description":"[Placeholder] Discription for nextLink property"}` |
 
 ### Changes for `x-ms-client-flatten`
 
@@ -3544,6 +3415,7 @@
 | `definitions.HubVirtualNetworkConnection.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.HubVirtualNetworkConnectionProperties.properties.provisioningState.description` | `The provisioning state of the hub virtual network connection resource.` | `Provisioning states of a resource.` |
 | `definitions.HubVirtualNetworkConnectionProperties.properties.remoteVirtualNetwork.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
+| `definitions.IDPSQueryObject.properties.filters.type` | `object` | `array` |
 | `definitions.InboundNatPool.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.InboundNatPoolPropertiesFormat.properties.frontendIPConfiguration.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.InboundNatPoolPropertiesFormat.properties.provisioningState.description` | `The provisioning state of the inbound NAT pool resource.` | `Provisioning states of a resource.` |
@@ -3670,6 +3542,8 @@
 | `definitions.NetworkVirtualApplianceSku.properties.etag.description` | `A unique read-only string that changes whenever the resource is updated.` | `"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.")` |
 | `definitions.NetworkWatcher.allOf[0].$ref` | `./network.json#/definitions/Resource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/Resource` |
 | `definitions.NetworkWatcher.properties.etag.description` | `A unique read-only string that changes whenever the resource is updated.` | `"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.")` |
+| `definitions.NetworkWatcherListResult.description` | `Response for ListNetworkWatchers API service call.` | `[Placeholder] Discription for page model` |
+| `definitions.NetworkWatcherListResult.properties.value.description` | `List of network watcher resources.` | `[Placeholder] Discription for value property` |
 | `definitions.NetworkWatcherPropertiesFormat.properties.provisioningState.description` | `The provisioning state of the network watcher resource.` | `Provisioning states of a resource.` |
 | `definitions.NspAccessRule.allOf[0].$ref` | `../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
 | `definitions.NspAssociation.allOf[0].$ref` | `../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
@@ -3996,20 +3870,19 @@
 | `definitions.WebApplicationFirewallPolicyPropertiesFormat.properties.provisioningState.description` | `The provisioning state of the web application firewall policy resource.` | `Provisioning states of a resource.` |
 | `definitions.WebApplicationFirewallScrubbingRules.properties.selectorMatchOperator['x-ms-enum'].name` | ` scrubbingRuleEntryMatchOperator` | `ScrubbingRuleEntryMatchOperator` |
 | `definitions.WebApplicationFirewallScrubbingRules.properties.state['x-ms-enum'].name` | ` scrubbingRuleEntryState` | `ScrubbingRuleEntryState` |
-| `paths['/providers/microsoft.Management/managementGroups/{managementGroupId}/providers/microsoft.Network/networkManagerConnections'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
-| `paths['/providers/microsoft.Management/managementGroups/{managementGroupId}/providers/microsoft.Network/networkManagerConnections/{networkManagerConnectionName}'].delete.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
-| `paths['/providers/microsoft.Management/managementGroups/{managementGroupId}/providers/microsoft.Network/networkManagerConnections/{networkManagerConnectionName}'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
-| `paths['/providers/microsoft.Management/managementGroups/{managementGroupId}/providers/microsoft.Network/networkManagerConnections/{networkManagerConnectionName}'].put.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
-| `paths['/providers/microsoft.Network/operations'].get.description` | `Lists all of the available Network Rest API operations.` | `List the operations for the provider` |
+| `paths['/providers/microsoft.Management/managementGroups/{managementGroupId}/providers/microsoft.Network/networkManagerConnections'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
+| `paths['/providers/microsoft.Management/managementGroups/{managementGroupId}/providers/microsoft.Network/networkManagerConnections/{networkManagerConnectionName}'].delete.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
+| `paths['/providers/microsoft.Management/managementGroups/{managementGroupId}/providers/microsoft.Network/networkManagerConnections/{networkManagerConnectionName}'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
+| `paths['/providers/microsoft.Management/managementGroups/{managementGroupId}/providers/microsoft.Network/networkManagerConnections/{networkManagerConnectionName}'].put.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/providers/microsoft.Network/operations'].get.responses.200.schema.$ref` | `#/definitions/OperationListResult` | `../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult` |
-| `paths['/providers/microsoft.Network/operations'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGatewayAvailableRequestHeaders'].get.responses.default.schema.$ref` | `./network.json#/definitions/Error` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGatewayAvailableResponseHeaders'].get.responses.default.schema.$ref` | `./network.json#/definitions/Error` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGatewayAvailableServerVariables'].get.responses.default.schema.$ref` | `./network.json#/definitions/Error` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGatewayAvailableSslOptions/default'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGatewayAvailableSslOptions/default/predefinedPolicies'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGatewayAvailableSslOptions/default/predefinedPolicies/{predefinedPolicyName}'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGatewayAvailableWafRuleSets'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
+| `paths['/providers/microsoft.Network/operations'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGatewayAvailableRequestHeaders'].get.responses.default.schema.$ref` | `./network.json#/definitions/Error` | `#/definitions/Error` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGatewayAvailableResponseHeaders'].get.responses.default.schema.$ref` | `./network.json#/definitions/Error` | `#/definitions/Error` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGatewayAvailableServerVariables'].get.responses.default.schema.$ref` | `./network.json#/definitions/Error` | `#/definitions/Error` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGatewayAvailableSslOptions/default'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGatewayAvailableSslOptions/default/predefinedPolicies'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGatewayAvailableSslOptions/default/predefinedPolicies/{predefinedPolicyName}'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGatewayAvailableWafRuleSets'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGateways'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGatewayWebApplicationFirewallPolicies'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationSecurityGroups'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
@@ -4030,32 +3903,20 @@
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/expressRoutePortsLocations/{locationName}'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/expressRouteProviderPorts'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/expressRouteProviderPorts/{providerport}'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/expressRouteServiceProviders'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/firewallPolicies'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/ipAllocations'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/ipGroups'].get.responses.default.schema.$ref` | `./network.json#/definitions/Error` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/loadBalancers'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/applicationGatewayWafDynamicManifests'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/applicationGatewayWafDynamicManifests/dafault'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/autoApprovedPrivateLinkServices'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/availableDelegations'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/availablePrivateEndpointTypes'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/availableServiceAliases'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/checkDnsNameAvailability'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/checkPrivateLinkServiceVisibility'].post.parameters[1].name` | `parameters` | `body` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/checkPrivateLinkServiceVisibility'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/networkSecurityPerimeterOperationStatuses/{operationId}'].get.responses.200.schema.$ref` | `../../../../../common-types/resource-management/v6/types.json#/definitions/OperationStatusResult` | `../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/networkSecurityPerimeterOperationStatuses/{operationId}'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/nspServiceTags'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/perimeterAssociableResourceTypes'].get.responses.200.schema.$ref` | `#/definitions/PerimeterAssociableResourcesListResult` | `#/definitions/PerimeterAssociableResourceListResult` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/perimeterAssociableResourceTypes'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/serviceTagDetails'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/serviceTags'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/setLoadBalancerFrontendPublicIpAddresses'].post.parameters[1].name` | `parameters` | `body` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/setLoadBalancerFrontendPublicIpAddresses'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/usages'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/virtualNetworkAvailableEndpointServices'].get.responses.200.schema.$ref` | `#/definitions/EndpointServicesListResult` | `#/definitions/EndpointServiceResultListResult` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/virtualNetworkAvailableEndpointServices'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/setLoadBalancerFrontendPublicIpAddresses'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/natGateways'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/networkInterfaces'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/networkManagerConnections'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
@@ -4069,7 +3930,6 @@
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/networkVirtualAppliances'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/networkVirtualApplianceSkus'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/networkVirtualApplianceSkus/{skuName}'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/networkWatchers'].get.responses.default.schema.$ref` | `#/definitions/ErrorResponse` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/p2svpnGateways'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/privateEndpoints'].get.responses.default.schema.$ref` | `./network.json#/definitions/Error` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/privateLinkServices'].get.responses.default.schema.$ref` | `./network.json#/definitions/Error` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
@@ -4117,7 +3977,7 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGateways/{applicationGatewayName}/privateEndpointConnections'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGateways/{applicationGatewayName}/privateEndpointConnections/{connectionName}'].delete.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGateways/{applicationGatewayName}/privateEndpointConnections/{connectionName}'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGateways/{applicationGatewayName}/privateEndpointConnections/{connectionName}'].put.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGateways/{applicationGatewayName}/privateEndpointConnections/{connectionName}'].put.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGateways/{applicationGatewayName}/privateLinkResources'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGateways/{applicationGatewayName}/start'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGateways/{applicationGatewayName}/stop'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
@@ -4195,7 +4055,6 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}'].patch.parameters[1].schema.$ref` | `./network.json#/definitions/TagsObject` | `#/definitions/TagsObject` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}'].patch.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}'].put.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/authorizations'].get.responses.200.schema.$ref` | `#/definitions/AuthorizationListResult` | `#/definitions/ExpressRouteCircuitAuthorizationListResult` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/authorizations'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/authorizations/{authorizationName}'].delete.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/authorizations/{authorizationName}'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
@@ -4204,12 +4063,15 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}'].delete.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}'].put.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/arpTables/{devicePath}'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/connections'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/connections/{connectionName}'].delete.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/connections/{connectionName}'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/connections/{connectionName}'].put.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/peerConnections'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/peerConnections/{connectionName}'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/routeTables/{devicePath}'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/routeTablesSummary/{devicePath}'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/stats'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/stats'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCrossConnections'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
@@ -4221,7 +4083,11 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/peerings/{peeringName}'].delete.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/peerings/{peeringName}'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/peerings/{peeringName}'].put.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/peerings/{peeringName}'].put['x-ms-long-running-operation-options']['final-state-via']` | `azure-async-operation` | `original-uri` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/peerings/{peeringName}/arpTables/{devicePath}'].post.responses.200.schema.$ref` | `./expressRouteCircuit.json#/definitions/ExpressRouteCircuitsArpTableListResult` | `#/definitions/ExpressRouteCircuitsArpTableListResult` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/peerings/{peeringName}/arpTables/{devicePath}'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/peerings/{peeringName}/routeTables/{devicePath}'].post.responses.200.schema.$ref` | `./expressRouteCircuit.json#/definitions/ExpressRouteCircuitsRoutesTableListResult` | `#/definitions/ExpressRouteCircuitsRoutesTableListResult` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/peerings/{peeringName}/routeTables/{devicePath}'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/peerings/{peeringName}/routeTablesSummary/{devicePath}'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteGateways'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteGateways/{expressRouteGatewayName}'].delete.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteGateways/{expressRouteGatewayName}'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
@@ -4232,8 +4098,11 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/expressRouteConnections/{connectionName}'].delete.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/expressRouteConnections/{connectionName}'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/expressRouteConnections/{connectionName}'].put.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/expressRouteConnections/{connectionName}'].put['x-ms-long-running-operation-options']['final-state-via']` | `azure-async-operation` | `original-uri` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRoutePorts'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRoutePorts/{expressRoutePortName}'].delete.responses.202.headers.Location.description` | `URL for determining when an operation has completed. Send a GET request to the URL in Location header.
+The URI should return a 202 until the operation reaches a terminal state and 200 once it reaches a terminal state.
+
+For more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#202-accepted-and-location-headers` | `The Location header contains the URL where the status of the long running operation can be checked.` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRoutePorts/{expressRoutePortName}'].delete.responses.202.headers['Azure-AsyncOperation'].description` | `URL for checking the ongoing status of the operation.
 To get the status of the asynchronous operation, send a GET request to the URL in Azure-AsyncOperation header value.
 
@@ -4244,6 +4113,10 @@ For more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRoutePorts/{expressRoutePortName}'].patch.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRoutePorts/{expressRoutePortName}'].put.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRoutePorts/{expressRoutePortName}/authorizations'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRoutePorts/{expressRoutePortName}/authorizations/{authorizationName}'].delete.responses.202.headers.Location.description` | `URL for determining when an operation has completed. Send a GET request to the URL in Location header.
+The URI should return a 202 until the operation reaches a terminal state and 200 once it reaches a terminal state.
+
+For more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#202-accepted-and-location-headers` | `The Location header contains the URL where the status of the long running operation can be checked.` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRoutePorts/{expressRoutePortName}/authorizations/{authorizationName}'].delete.responses.202.headers['Azure-AsyncOperation'].description` | `URL for checking the ongoing status of the operation.
 To get the status of the asynchronous operation, send a GET request to the URL in Azure-AsyncOperation header value.
 
@@ -4260,13 +4133,13 @@ For more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/firewallPolicies/{firewallPolicyName}'].patch.parameters[1].schema.$ref` | `./network.json#/definitions/TagsObject` | `#/definitions/TagsObject` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/firewallPolicies/{firewallPolicyName}'].patch.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/firewallPolicies/{firewallPolicyName}'].put.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/firewallPolicies/{firewallPolicyName}/deploy'].post.responses.202.headers.Location.description` | `URL to get the status of the operation.` | `The Location header contains the URL where the status of the long running operation can be checked.` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/firewallPolicies/{firewallPolicyName}/deploy'].post.responses.202.headers['Azure-AsyncOperation'].description` | `URL to get the status of the operation.` | `A link to the status monitor` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/firewallPolicies/{firewallPolicyName}/deploy'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/firewallPolicies/{firewallPolicyName}/firewallPolicyDrafts/default'].delete.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/firewallPolicies/{firewallPolicyName}/firewallPolicyDrafts/default'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/firewallPolicies/{firewallPolicyName}/firewallPolicyDrafts/default'].put.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/firewallPolicies/{firewallPolicyName}/listIdpsFilterOptions'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/firewallPolicies/{firewallPolicyName}/listIdpsSignatures'].post.parameters[1].schema.$ref` | `#/definitions/IDPSQueryObject` | `#/definitions/IdpsQueryObject` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/firewallPolicies/{firewallPolicyName}/listIdpsSignatures'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/firewallPolicies/{firewallPolicyName}/ruleCollectionGroups'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/firewallPolicies/{firewallPolicyName}/ruleCollectionGroups/{ruleCollectionGroupName}'].delete.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
@@ -4303,7 +4176,6 @@ For more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/backendAddressPools/{backendAddressPoolName}'].delete.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/backendAddressPools/{backendAddressPoolName}'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/backendAddressPools/{backendAddressPoolName}'].put.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/frontendIPConfigurations'].get.responses.200.schema.$ref` | `#/definitions/LoadBalancerFrontendIPConfigurationListResult` | `#/definitions/FrontendIPConfigurationListResult` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/frontendIPConfigurations'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/frontendIPConfigurations/{frontendIPConfigurationName}'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/inboundNatRules'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
@@ -4315,10 +4187,8 @@ For more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/loadBalancingRules/{loadBalancingRuleName}'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/networkInterfaces'].get.responses.200.schema.$ref` | `./networkInterface.json#/definitions/NetworkInterfaceListResult` | `#/definitions/NetworkInterfaceListResult` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/networkInterfaces'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/outboundRules'].get.responses.200.schema.$ref` | `#/definitions/LoadBalancerOutboundRuleListResult` | `#/definitions/OutboundRuleListResult` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/outboundRules'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/outboundRules/{outboundRuleName}'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/probes'].get.responses.200.schema.$ref` | `#/definitions/LoadBalancerProbeListResult` | `#/definitions/ProbeListResult` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/probes'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/probes/{probeName}'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/localNetworkGateways'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
@@ -4327,11 +4197,6 @@ For more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/localNetworkGateways/{localNetworkGatewayName}'].patch.parameters[1].schema.$ref` | `./network.json#/definitions/TagsObject` | `#/definitions/TagsObject` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/localNetworkGateways/{localNetworkGatewayName}'].patch.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/localNetworkGateways/{localNetworkGatewayName}'].put.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/locations/{location}/autoApprovedPrivateLinkServices'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/locations/{location}/availableDelegations'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/locations/{location}/availablePrivateEndpointTypes'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/locations/{location}/availableServiceAliases'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/locations/{location}/checkPrivateLinkServiceVisibility'].post.parameters[1].name` | `parameters` | `body` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/locations/{location}/checkPrivateLinkServiceVisibility'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/natGateways'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/natGateways/{natGatewayName}'].delete.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
@@ -4588,7 +4453,7 @@ For more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/privateEndpoints/{privateEndpointName}'].delete.responses.default.schema.$ref` | `./network.json#/definitions/Error` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/privateEndpoints/{privateEndpointName}'].get.responses.default.schema.$ref` | `./network.json#/definitions/Error` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/privateEndpoints/{privateEndpointName}'].put.responses.default.schema.$ref` | `./network.json#/definitions/Error` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/privateEndpoints/{privateEndpointName}/privateDnsZoneGroups'].get.responses.default.schema.$ref` | `./network.json#/definitions/Error` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/privateEndpoints/{privateEndpointName}/privateDnsZoneGroups'].get.responses.default.schema.$ref` | `./network.json#/definitions/Error` | `#/definitions/Error` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/privateEndpoints/{privateEndpointName}/privateDnsZoneGroups/{privateDnsZoneGroupName}'].delete.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/privateEndpoints/{privateEndpointName}/privateDnsZoneGroups/{privateDnsZoneGroupName}'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/privateEndpoints/{privateEndpointName}/privateDnsZoneGroups/{privateDnsZoneGroupName}'].put.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |

@@ -94,7 +94,8 @@ interface BackendAddressPools {
   listInboundNatRulePortMappings is ListInboundNatRulePortMappingsOps.ActionAsync<
     BackendAddressPool,
     QueryInboundNatRulePortMappingRequest,
-    ArmResponse<BackendAddressInboundNatRulePortMappings>
+    ArmResponse<BackendAddressInboundNatRulePortMappings> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = BackendAddressInboundNatRulePortMappings> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 }
 

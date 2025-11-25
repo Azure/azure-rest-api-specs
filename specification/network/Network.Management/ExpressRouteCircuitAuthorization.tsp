@@ -50,7 +50,10 @@ interface ExpressRouteCircuitAuthorizations {
   /**
    * Gets all authorizations in an express route circuit.
    */
-  list is ArmResourceListByParent<ExpressRouteCircuitAuthorization>;
+  list is ArmResourceListByParent<
+    ExpressRouteCircuitAuthorization,
+    Response = AuthorizationListResult
+  >;
 }
 
 @@doc(ExpressRouteCircuitAuthorization.name, "The name of the authorization.");

@@ -121,7 +121,7 @@ interface VirtualNetworkGateways {
   generatevpnclientpackage is ArmResourceActionAsync<
     VirtualNetworkGateway,
     VpnClientParameters,
-    ArmResponse<string>
+    ArmResponse<stringApplicationJson>
   >;
 
   /**
@@ -131,7 +131,7 @@ interface VirtualNetworkGateways {
   generateVpnProfile is ArmResourceActionAsync<
     VirtualNetworkGateway,
     VpnClientParameters,
-    ArmResponse<string>
+    ArmResponse<stringApplicationJson>
   >;
 
   /**
@@ -141,7 +141,7 @@ interface VirtualNetworkGateways {
   getVpnProfilePackageUrl is ArmResourceActionAsync<
     VirtualNetworkGateway,
     void,
-    ArmResponse<string>
+    ArmResponse<stringApplicationJson>
   >;
 
   /**
@@ -168,7 +168,7 @@ interface VirtualNetworkGateways {
   supportedVpnDevices is ArmResourceActionSync<
     VirtualNetworkGateway,
     void,
-    ArmResponse<string>
+    ArmResponse<stringApplicationJson>
   >;
 
   /**
@@ -267,7 +267,7 @@ interface VirtualNetworkGateways {
   startPacketCapture is ArmResourceActionAsync<
     VirtualNetworkGateway,
     VpnPacketCaptureStartParameters,
-    ArmResponse<string>,
+    ArmResponse<stringApplicationJson>,
     OptionalRequestBody = true
   >;
 
@@ -277,7 +277,7 @@ interface VirtualNetworkGateways {
   stopPacketCapture is ArmResourceActionAsync<
     VirtualNetworkGateway,
     VpnPacketCaptureStopParameters,
-    ArmResponse<string>
+    ArmResponse<stringApplicationJson>
   >;
 
   /**
@@ -334,7 +334,7 @@ interface VirtualNetworkGateways {
   startExpressRouteSiteFailoverSimulation is ArmResourceActionAsync<
     VirtualNetworkGateway,
     void,
-    ArmResponse<string>,
+    ArmResponse<stringApplicationJson>,
     Parameters = {
       /**
        * Peering location of the test
@@ -351,7 +351,7 @@ interface VirtualNetworkGateways {
   stopExpressRouteSiteFailoverSimulation is ArmResourceActionAsync<
     VirtualNetworkGateway,
     ExpressRouteFailoverStopApiParameters,
-    ArmResponse<string>
+    ArmResponse<stringApplicationJson>
   >;
 
   /**

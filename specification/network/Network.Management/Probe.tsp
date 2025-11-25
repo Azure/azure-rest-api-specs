@@ -39,7 +39,10 @@ interface Probes {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("LoadBalancerProbes_List")
-  list is ArmResourceListByParent<Probe>;
+  list is ArmResourceListByParent<
+    Probe,
+    Response = LoadBalancerProbeListResult
+  >;
 }
 
 @@doc(Probe.name, "The name of the probe.");

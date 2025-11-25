@@ -63,9 +63,10 @@ interface ExpressRoutePortAuthorizations {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   delete is ExpressRoutePortAuthorizationOps.DeleteWithoutOkAsync<
     ExpressRoutePortAuthorization,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders &
       Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
   >;
 

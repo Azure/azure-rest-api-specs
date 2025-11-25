@@ -73,7 +73,7 @@ interface VirtualNetworkGatewayConnections {
   vpnDeviceConfigurationScript is ArmResourceActionSync<
     VirtualNetworkGatewayConnection,
     VpnDeviceScriptParameters,
-    ArmResponse<string>
+    ArmResponse<stringApplicationJson>
   >;
 
   /**
@@ -84,7 +84,11 @@ interface VirtualNetworkGatewayConnections {
   setSharedKey is ArmResourceActionAsyncBase<
     VirtualNetworkGatewayConnection,
     ConnectionSharedKey,
-    ArmResponse<ConnectionSharedKey> | ArmResourceCreatedResponse<ConnectionSharedKey>,
+    ArmResponse<ConnectionSharedKey> | ArmResourceCreatedResponse<
+      ConnectionSharedKey,
+      LroHeaders = ArmAsyncOperationHeader &
+        Azure.Core.Foundations.RetryAfterHeader
+    >,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<VirtualNetworkGatewayConnection>
   >;
 
@@ -115,7 +119,7 @@ interface VirtualNetworkGatewayConnections {
   startPacketCapture is ArmResourceActionAsync<
     VirtualNetworkGatewayConnection,
     VpnPacketCaptureStartParameters,
-    ArmResponse<string>,
+    ArmResponse<stringApplicationJson>,
     OptionalRequestBody = true
   >;
 
@@ -125,7 +129,7 @@ interface VirtualNetworkGatewayConnections {
   stopPacketCapture is ArmResourceActionAsync<
     VirtualNetworkGatewayConnection,
     VpnPacketCaptureStopParameters,
-    ArmResponse<string>
+    ArmResponse<stringApplicationJson>
   >;
 
   /**
@@ -135,7 +139,7 @@ interface VirtualNetworkGatewayConnections {
   getIkeSas is ArmResourceActionAsync<
     VirtualNetworkGatewayConnection,
     void,
-    ArmResponse<string>
+    ArmResponse<stringApplicationJson>
   >;
 
   /**

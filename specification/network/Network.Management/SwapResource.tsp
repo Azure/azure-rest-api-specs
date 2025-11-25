@@ -50,10 +50,13 @@ alias CloudServiceOps = Legacy.ExtensionOperations<
   {
     ...Extension.ExtensionProviderNamespace<SwapResource>;
 
+    /**
+     * The name of the singleton resource.
+     */
     @path
     @segment("cloudServiceSlots")
     @key
-    singletonResource: string;
+    singletonResource: SingletonResource;
   }
 >;
 

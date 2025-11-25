@@ -18368,6 +18368,12 @@ model NetworkWatcherListResult {
    */
   @pageItems
   value?: NetworkWatcher[];
+
+  /**
+   * URL to get the next set of results.
+   */
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -26962,3 +26968,29 @@ model ExpressRouteFailoverSingleTestDetailsObject {
   @pageItems
   value?: ExpressRouteFailoverSingleTestDetails[];
 }
+
+model PerimeterAssociableResourcesListResult
+  is Azure.Core.Page<PerimeterAssociableResource>;
+
+model EndpointServicesListResult is Azure.Core.Page<EndpointServiceResult>;
+
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+enum SingletonResource {
+  swap,
+}
+
+@mediaTypeHint("application/json")
+scalar stringApplicationJson extends string;
+
+model AuthorizationListResult
+  is Azure.Core.Page<ExpressRouteCircuitAuthorization>;
+
+model LoadBalancerBackendAddressPoolListResult
+  is Azure.Core.Page<BackendAddressPool>;
+
+model LoadBalancerFrontendIPConfigurationListResult
+  is Azure.Core.Page<FrontendIPConfiguration>;
+
+model LoadBalancerOutboundRuleListResult is Azure.Core.Page<OutboundRule>;
+
+model LoadBalancerProbeListResult is Azure.Core.Page<Probe>;

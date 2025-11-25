@@ -165,7 +165,7 @@ interface NetworkInterfaceOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("NetworkInterfaces_GetEffectiveRouteTable")
-  @list
+  @post
   @action("effectiveRouteTable")
   getEffectiveRouteTable is NetworkInterfaceOperationGroupOps.ActionAsync<
     NetworkInterface,
@@ -178,7 +178,7 @@ interface NetworkInterfaceOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("NetworkInterfaces_ListEffectiveNetworkSecurityGroups")
-  @list
+  @post
   @action("effectiveNetworkSecurityGroups")
   listEffectiveNetworkSecurityGroups is NetworkInterfaceOperationGroupOps.ActionAsync<
     NetworkInterface,

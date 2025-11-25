@@ -425,6 +425,23 @@
             "required": true,
             "type": "string",
             "minLength": 1
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "An optional query parameter which specifies the maximum number of records to be returned by the server.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 20
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "SkipToken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skipToken parameter that specifies a starting point to use for subsequent calls.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -437,7 +454,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -488,7 +505,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -549,7 +566,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -595,7 +612,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -612,7 +629,7 @@
         "tags": [
           "Operations"
         ],
-        "description": "List the operations for the provider",
+        "description": "Lists all of the available Network Rest API operations.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -628,7 +645,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -863,7 +880,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -896,7 +913,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -929,7 +946,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -965,7 +982,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1001,7 +1018,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1047,7 +1064,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1080,7 +1097,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1199,6 +1216,9 @@
           "List all Azure Firewall FQDN Tags for a given subscription": {
             "$ref": "./examples/AzureFirewallFqdnTagsListBySubscription.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1730,7 +1750,7 @@
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Network/expressRouteServiceProviders": {
-      "get": {
+      "post": {
         "operationId": "ExpressRouteServiceProviders_List",
         "description": "Gets all the available express route service providers.",
         "parameters": [
@@ -1759,6 +1779,9 @@
           "List ExpressRoute providers": {
             "$ref": "./examples/ExpressRouteProviderList.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1969,7 +1992,7 @@
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/autoApprovedPrivateLinkServices": {
-      "get": {
+      "post": {
         "operationId": "PrivateLinkServices_ListAutoApprovedPrivateLinkServices",
         "description": "Returns all of the private link service ids that can be linked to a Private Endpoint with auto approved in this subscription in this region.",
         "parameters": [
@@ -2001,11 +2024,14 @@
           "Get list of private link service id that can be linked to a private end point with auto approved": {
             "$ref": "./examples/AutoApprovedPrivateLinkServicesGet.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/availableDelegations": {
-      "get": {
+      "post": {
         "operationId": "AvailableDelegations_List",
         "description": "Gets all of the available subnet delegations for this subscription in this region.",
         "parameters": [
@@ -2037,6 +2063,9 @@
           "Get available delegations": {
             "$ref": "./examples/AvailableDelegationsSubscriptionGet.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2077,7 +2106,7 @@
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/availableServiceAliases": {
-      "get": {
+      "post": {
         "operationId": "AvailableServiceAliases_List",
         "description": "Gets all available service aliases for this subscription in this region.",
         "parameters": [
@@ -2109,6 +2138,9 @@
           "Get available service aliases": {
             "$ref": "./examples/AvailableServiceAliasesList.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2263,7 +2295,7 @@
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/nspServiceTags": {
-      "get": {
+      "post": {
         "operationId": "NetworkSecurityPerimeterServiceTags_List",
         "description": "Gets the list of service tags supported by NSP. These service tags can be used to create access rules in NSP.",
         "parameters": [
@@ -2295,11 +2327,14 @@
           "NSPServiceTagsList": {
             "$ref": "./examples/NspServiceTagsList.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/perimeterAssociableResourceTypes": {
-      "get": {
+      "post": {
         "operationId": "NetworkSecurityPerimeterAssociableResourceTypes_List",
         "description": "Gets the list of resources that are onboarded with NSP. These resources can be associated with a network security perimeter",
         "parameters": [
@@ -2317,7 +2352,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PerimeterAssociableResourceListResult"
+              "$ref": "#/definitions/PerimeterAssociableResourcesListResult"
             }
           },
           "default": {
@@ -2331,11 +2366,14 @@
           "NetworkSecurityPerimeterAssociableResourceTypes": {
             "$ref": "./examples/PerimeterAssociableResourcesList.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/serviceTagDetails": {
-      "get": {
+      "post": {
         "operationId": "ServiceTagInformation_List",
         "description": "Gets a list of service tag information resources with pagination.",
         "parameters": [
@@ -2387,6 +2425,9 @@
           "Get list of service tags with tag name.": {
             "$ref": "./examples/ServiceTagInformationListResultWithTagname.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2441,9 +2482,8 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           },
           {
-            "name": "body",
+            "name": "parameters",
             "in": "body",
-            "description": "The request body",
             "required": true,
             "schema": {
               "$ref": "#/definitions/LoadBalancerVipSwapRequest"
@@ -2451,6 +2491,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
@@ -2465,13 +2508,10 @@
               }
             }
           },
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -2487,7 +2527,7 @@
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/usages": {
-      "get": {
+      "post": {
         "operationId": "Usages_List",
         "description": "List network usages for a subscription.",
         "parameters": [
@@ -2511,7 +2551,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -2522,11 +2562,14 @@
           "List usages spaced location": {
             "$ref": "./examples/UsageListSpacedLocation.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/virtualNetworkAvailableEndpointServices": {
-      "get": {
+      "post": {
         "operationId": "AvailableEndpointServices_List",
         "description": "List what values of endpoint services are available for use.",
         "parameters": [
@@ -2544,13 +2587,13 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/EndpointServiceResultListResult"
+              "$ref": "#/definitions/EndpointServicesListResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -2558,6 +2601,9 @@
           "EndpointServicesList": {
             "$ref": "./examples/EndpointServicesList.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -3171,7 +3217,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -3179,6 +3225,9 @@
           "List all network watchers": {
             "$ref": "./examples/NetworkWatcherListAll.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -4308,7 +4357,12 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -5362,21 +5416,16 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
-              "Location": {
+              "Azure-AsyncOperation": {
                 "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+                "description": "A link to the status monitor"
               }
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -5386,7 +5435,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/ApplicationGatewayPrivateEndpointConnection"
         },
         "x-ms-long-running-operation": true
       },
@@ -7462,10 +7512,6 @@
           "VirtualNetworkGatewayConnections"
         ],
         "description": "Lists IKE Security Associations for the virtual network gateway connection in the specified resource group.",
-        "produces": [
-          "text/plain",
-          "application/json"
-        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -7488,7 +7534,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/stringApplicationJson"
             }
           },
           "202": {
@@ -7519,7 +7565,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3Cstring%3E"
+          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CstringApplicationJson%3E"
         },
         "x-ms-long-running-operation": true
       }
@@ -7673,6 +7719,10 @@
               "$ref": "#/definitions/ConnectionSharedKey"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -7691,7 +7741,11 @@
           "SetVirtualNetworkGatewayConnectionSharedKey": {
             "$ref": "./examples/VirtualNetworkGatewayConnectionSetSharedKey.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/sharedkey/reset": {
@@ -7775,10 +7829,6 @@
           "VirtualNetworkGatewayConnections"
         ],
         "description": "Starts packet capture on virtual network gateway connection in the specified resource group.",
-        "produces": [
-          "text/plain",
-          "application/json"
-        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -7810,7 +7860,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/stringApplicationJson"
             }
           },
           "202": {
@@ -7844,7 +7894,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3Cstring%3E"
+          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CstringApplicationJson%3E"
         },
         "x-ms-long-running-operation": true
       }
@@ -7856,10 +7906,6 @@
           "VirtualNetworkGatewayConnections"
         ],
         "description": "Stops packet capture on virtual network gateway connection in the specified resource group.",
-        "produces": [
-          "text/plain",
-          "application/json"
-        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -7891,7 +7937,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/stringApplicationJson"
             }
           },
           "202": {
@@ -7922,7 +7968,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3Cstring%3E"
+          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CstringApplicationJson%3E"
         },
         "x-ms-long-running-operation": true
       }
@@ -7934,10 +7980,6 @@
           "VirtualNetworkGatewayConnections"
         ],
         "description": "Gets a xml format representation for vpn device configuration script.",
-        "produces": [
-          "text/plain",
-          "application/json"
-        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -7969,7 +8011,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/stringApplicationJson"
             }
           },
           "default": {
@@ -9318,9 +9360,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ExpressRouteCircuitAuthorizationListResult"
+              "$ref": "#/definitions/AuthorizationListResult"
             }
           },
           "default": {
@@ -9798,7 +9840,7 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/arpTables/{devicePath}": {
-      "get": {
+      "post": {
         "operationId": "ExpressRouteCircuits_ListArpTable",
         "tags": [
           "ExpressRouteCircuitPeerings"
@@ -9843,6 +9885,20 @@
               "$ref": "#/definitions/ExpressRouteCircuitsArpTableListResult"
             }
           },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -9854,7 +9910,11 @@
           "List ARP Table": {
             "$ref": "./examples/ExpressRouteCircuitARPTableList.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/connections": {
@@ -10255,7 +10315,7 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/routeTables/{devicePath}": {
-      "get": {
+      "post": {
         "operationId": "ExpressRouteCircuits_ListRoutesTable",
         "tags": [
           "ExpressRouteCircuitPeerings"
@@ -10300,6 +10360,20 @@
               "$ref": "#/definitions/ExpressRouteCircuitsRoutesTableListResult"
             }
           },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -10312,13 +10386,14 @@
             "$ref": "./examples/ExpressRouteCircuitRouteTableList.json"
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/routeTablesSummary/{devicePath}": {
-      "get": {
+      "post": {
         "operationId": "ExpressRouteCircuits_ListRoutesTableSummary",
         "tags": [
           "ExpressRouteCircuitPeerings"
@@ -10363,6 +10438,20 @@
               "$ref": "#/definitions/ExpressRouteCircuitsRoutesTableSummaryListResult"
             }
           },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -10375,9 +10464,10 @@
             "$ref": "./examples/ExpressRouteCircuitRouteTableSummaryList.json"
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/stats": {
@@ -10601,9 +10691,15 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'ExpressRouteCrossConnection' update operation succeeded",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/ExpressRouteCrossConnection"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
             }
           },
           "default": {
@@ -10617,7 +10713,12 @@
           "UpdateExpressRouteCrossConnection": {
             "$ref": "./examples/ExpressRouteCrossConnectionUpdate.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/ExpressRouteCrossConnection"
+        },
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "operationId": "ExpressRouteCrossConnections_UpdateTags",
@@ -10847,7 +10948,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "original-uri",
+          "final-state-via": "azure-async-operation",
           "final-state-schema": "#/definitions/ExpressRouteCrossConnection"
         },
         "x-ms-long-running-operation": true
@@ -10887,6 +10988,20 @@
           "200": {
             "description": "The request has succeeded."
           },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
           "204": {
             "description": "There is no content to send for this request, but the headers may be useful."
           },
@@ -10901,11 +11016,15 @@
           "DeleteExpressRouteCrossConnectionBgpPeering": {
             "$ref": "./examples/ExpressRouteCrossConnectionBgpPeeringDelete.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/peerings/{peeringName}/arpTables/{devicePath}": {
-      "get": {
+      "post": {
         "operationId": "ExpressRouteCrossConnections_ListArpTable",
         "tags": [
           "ExpressRouteCrossConnections"
@@ -10950,6 +11069,20 @@
               "$ref": "#/definitions/ExpressRouteCircuitsArpTableListResult"
             }
           },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -10962,13 +11095,14 @@
             "$ref": "./examples/ExpressRouteCrossConnectionsArpTable.json"
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/peerings/{peeringName}/routeTables/{devicePath}": {
-      "get": {
+      "post": {
         "operationId": "ExpressRouteCrossConnections_ListRoutesTable",
         "tags": [
           "ExpressRouteCrossConnections"
@@ -11013,6 +11147,20 @@
               "$ref": "#/definitions/ExpressRouteCircuitsRoutesTableListResult"
             }
           },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -11025,13 +11173,14 @@
             "$ref": "./examples/ExpressRouteCrossConnectionsRouteTable.json"
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/peerings/{peeringName}/routeTablesSummary/{devicePath}": {
-      "get": {
+      "post": {
         "operationId": "ExpressRouteCrossConnections_ListRoutesTableSummary",
         "tags": [
           "ExpressRouteCrossConnections"
@@ -11076,6 +11225,20 @@
               "$ref": "#/definitions/ExpressRouteCrossConnectionsRoutesTableSummaryListResult"
             }
           },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -11088,9 +11251,10 @@
             "$ref": "./examples/ExpressRouteCrossConnectionsRouteTableSummary.json"
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteGateways": {
@@ -11558,7 +11722,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "original-uri",
+          "final-state-via": "azure-async-operation",
           "final-state-schema": "#/definitions/ExpressRouteGateway"
         },
         "x-ms-long-running-operation": true
@@ -11598,6 +11762,20 @@
           "200": {
             "description": "The request has succeeded."
           },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
           "204": {
             "description": "There is no content to send for this request, but the headers may be useful."
           },
@@ -11612,7 +11790,11 @@
           "ExpressRouteConnectionDelete": {
             "$ref": "./examples/ExpressRouteConnectionDelete.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRoutePorts/{expressRoutePortName}/authorizations": {
@@ -11838,7 +12020,12 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -12184,7 +12371,12 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -12445,7 +12637,7 @@
             "description": "",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/IdpsQueryObject"
+              "$ref": "#/definitions/IDPSQueryObject"
             }
           }
         ],
@@ -14056,7 +14248,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CBackendAddressInboundNatRulePortMappings%3E"
+          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmAcceptedLroResponse%3C%22Resource%20operation%20accepted.%22%2C%20Azure.ResourceManager.Legacy.%7B%20location%3A%20string%2C%20retryAfter%3A%20int32%20%7D%3E"
         },
         "x-ms-long-running-operation": true
       }
@@ -14088,9 +14280,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/FrontendIPConfigurationListResult"
+              "$ref": "#/definitions/LoadBalancerFrontendIPConfigurationListResult"
             }
           },
           "default": {
@@ -14543,21 +14735,24 @@
             "name": "groupName",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.-]*$"
           },
           {
             "name": "loadBalancerName",
             "in": "path",
             "description": "The name of the load balancer.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.-]*$"
           },
           {
             "name": "loadBalancingRuleName",
             "in": "path",
             "description": "The name of the load balancing rule.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.-]*$"
           }
         ],
         "responses": {
@@ -14618,14 +14813,16 @@
             "name": "groupName",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*$"
           },
           {
             "name": "loadBalancerName",
             "in": "path",
             "description": "The name of the load balancer.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*$"
           },
           {
             "name": "parameters",
@@ -14737,9 +14934,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/OutboundRuleListResult"
+              "$ref": "#/definitions/LoadBalancerOutboundRuleListResult"
             }
           },
           "default": {
@@ -14839,9 +15036,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ProbeListResult"
+              "$ref": "#/definitions/LoadBalancerProbeListResult"
             }
           },
           "default": {
@@ -15197,7 +15394,7 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/locations/{location}/autoApprovedPrivateLinkServices": {
-      "get": {
+      "post": {
         "operationId": "PrivateLinkServices_ListAutoApprovedPrivateLinkServicesByResourceGroup",
         "description": "Returns all of the private link service ids that can be linked to a Private Endpoint with auto approved in this subscription in this region.",
         "parameters": [
@@ -15232,11 +15429,14 @@
           "Get list of private link service id that can be linked to a private end point with auto approved": {
             "$ref": "./examples/AutoApprovedPrivateLinkServicesResourceGroupGet.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/locations/{location}/availableDelegations": {
-      "get": {
+      "post": {
         "operationId": "AvailableResourceGroupDelegations_List",
         "description": "Gets all of the available subnet delegations for this resource group in this region.",
         "parameters": [
@@ -15271,11 +15471,14 @@
           "Get available delegations in the resource group": {
             "$ref": "./examples/AvailableDelegationsResourceGroupGet.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/locations/{location}/availablePrivateEndpointTypes": {
-      "get": {
+      "post": {
         "operationId": "AvailablePrivateEndpointTypes_ListByResourceGroup",
         "description": "Returns all of the resource types that can be linked to a Private Endpoint in this subscription in this region.",
         "parameters": [
@@ -15310,11 +15513,14 @@
           "Get available PrivateEndpoint types in the resource group": {
             "$ref": "./examples/AvailablePrivateEndpointTypesResourceGroupGet.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/locations/{location}/availableServiceAliases": {
-      "get": {
+      "post": {
         "operationId": "AvailableServiceAliases_ListByResourceGroup",
         "description": "Gets all available service aliases for this resource group in this region.",
         "parameters": [
@@ -15349,6 +15555,9 @@
           "Get available service aliases in the resource group": {
             "$ref": "./examples/AvailableServiceAliasesListByResourceGroup.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -15370,7 +15579,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           },
           {
-            "name": "body",
+            "name": "parameters",
             "in": "body",
             "description": "The request body",
             "required": true,
@@ -15572,14 +15781,9 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
-              "Location": {
+              "Azure-AsyncOperation": {
                 "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+                "description": "A link to the status monitor"
               }
             }
           },
@@ -15599,7 +15803,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/NatGateway"
         },
         "x-ms-long-running-operation": true
       },
@@ -16072,10 +16277,7 @@
           "final-state-via": "location",
           "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CEffectiveNetworkSecurityGroupListResult%3E"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkInterfaces/{networkInterfaceName}/effectiveRouteTable": {
@@ -16140,10 +16342,7 @@
           "final-state-via": "location",
           "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CEffectiveRouteListResult%3E"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkInterfaces/{networkInterfaceName}/ipConfigurations": {
@@ -26677,6 +26876,9 @@
           "List network watchers": {
             "$ref": "./examples/NetworkWatcherList.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -29750,7 +29952,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -36089,10 +36291,6 @@
           "VirtualNetworkGateways"
         ],
         "description": "Generates VPN client package for P2S client of the virtual network gateway in the specified resource group.",
-        "produces": [
-          "text/plain",
-          "application/json"
-        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -36124,7 +36322,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/stringApplicationJson"
             }
           },
           "202": {
@@ -36155,7 +36353,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3Cstring%3E"
+          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CstringApplicationJson%3E"
         },
         "x-ms-long-running-operation": true
       }
@@ -36167,10 +36365,6 @@
           "VirtualNetworkGateways"
         ],
         "description": "Generates VPN profile for P2S client of the virtual network gateway in the specified resource group. Used for IKEV2 and radius based authentication.",
-        "produces": [
-          "text/plain",
-          "application/json"
-        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -36202,7 +36396,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/stringApplicationJson"
             }
           },
           "202": {
@@ -36233,7 +36427,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3Cstring%3E"
+          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CstringApplicationJson%3E"
         },
         "x-ms-long-running-operation": true
       }
@@ -36867,10 +37061,6 @@
           "VirtualNetworkGateways"
         ],
         "description": "Gets pre-generated VPN profile for P2S client of the virtual network gateway in the specified resource group. The profile needs to be generated first using generateVpnProfile.",
-        "produces": [
-          "text/plain",
-          "application/json"
-        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -36893,7 +37083,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/stringApplicationJson"
             }
           },
           "202": {
@@ -36924,7 +37114,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3Cstring%3E"
+          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CstringApplicationJson%3E"
         },
         "x-ms-long-running-operation": true
       }
@@ -37513,10 +37703,6 @@
           "VirtualNetworkGateways"
         ],
         "description": "Starts packet capture on virtual network gateway in the specified resource group.",
-        "produces": [
-          "text/plain",
-          "application/json"
-        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -37548,7 +37734,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/stringApplicationJson"
             }
           },
           "202": {
@@ -37582,7 +37768,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3Cstring%3E"
+          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CstringApplicationJson%3E"
         },
         "x-ms-long-running-operation": true
       }
@@ -37594,10 +37780,6 @@
           "VirtualNetworkGateways"
         ],
         "description": "This operation starts failover simulation on the gateway for the specified peering location",
-        "produces": [
-          "text/plain",
-          "application/json"
-        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -37627,7 +37809,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/stringApplicationJson"
             }
           },
           "202": {
@@ -37658,7 +37840,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3Cstring%3E"
+          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CstringApplicationJson%3E"
         },
         "x-ms-long-running-operation": true
       }
@@ -37670,10 +37852,6 @@
           "VirtualNetworkGateways"
         ],
         "description": "Stops packet capture on virtual network gateway in the specified resource group.",
-        "produces": [
-          "text/plain",
-          "application/json"
-        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -37705,7 +37883,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/stringApplicationJson"
             }
           },
           "202": {
@@ -37736,7 +37914,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3Cstring%3E"
+          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CstringApplicationJson%3E"
         },
         "x-ms-long-running-operation": true
       }
@@ -37748,10 +37926,6 @@
           "VirtualNetworkGateways"
         ],
         "description": "This operation stops failover simulation on the gateway for the specified peering location",
-        "produces": [
-          "text/plain",
-          "application/json"
-        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -37783,7 +37957,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/stringApplicationJson"
             }
           },
           "202": {
@@ -37814,7 +37988,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3Cstring%3E"
+          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CstringApplicationJson%3E"
         },
         "x-ms-long-running-operation": true
       }
@@ -37826,10 +38000,6 @@
           "VirtualNetworkGateways"
         ],
         "description": "Gets a xml format representation for supported vpn devices.",
-        "produces": [
-          "text/plain",
-          "application/json"
-        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -37852,7 +38022,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/stringApplicationJson"
             }
           },
           "default": {
@@ -41275,10 +41445,6 @@
           "VpnGateways"
         ],
         "description": "Starts packet capture on vpn gateway in the specified resource group.",
-        "produces": [
-          "text/plain",
-          "application/json"
-        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -41310,7 +41476,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/stringApplicationJson"
             }
           },
           "202": {
@@ -41344,7 +41510,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3Cstring%3E"
+          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CstringApplicationJson%3E"
         },
         "x-ms-long-running-operation": true
       }
@@ -41356,10 +41522,6 @@
           "VpnGateways"
         ],
         "description": "Stops packet capture on vpn gateway in the specified resource group.",
-        "produces": [
-          "text/plain",
-          "application/json"
-        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -41391,7 +41553,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/stringApplicationJson"
             }
           },
           "202": {
@@ -41422,7 +41584,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3Cstring%3E"
+          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CstringApplicationJson%3E"
         },
         "x-ms-long-running-operation": true
       }
@@ -41665,10 +41827,6 @@
           "VpnGateways"
         ],
         "description": "Starts packet capture on Vpn connection in the specified resource group.",
-        "produces": [
-          "text/plain",
-          "application/json"
-        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -41707,7 +41865,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/stringApplicationJson"
             }
           },
           "202": {
@@ -41741,7 +41899,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3Cstring%3E"
+          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CstringApplicationJson%3E"
         },
         "x-ms-long-running-operation": true
       }
@@ -41753,10 +41911,6 @@
           "VpnGateways"
         ],
         "description": "Stops packet capture on Vpn connection in the specified resource group.",
-        "produces": [
-          "text/plain",
-          "application/json"
-        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -41795,7 +41949,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/stringApplicationJson"
             }
           },
           "202": {
@@ -41826,7 +41980,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3Cstring%3E"
+          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CstringApplicationJson%3E"
         },
         "x-ms-long-running-operation": true
       }
@@ -41954,10 +42108,6 @@
           "VpnSiteLinkConnections"
         ],
         "description": "Lists IKE Security Associations for Vpn Site Link Connection in the specified resource group.",
-        "produces": [
-          "text/plain",
-          "application/json"
-        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -41994,7 +42144,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/stringApplicationJson"
             }
           },
           "202": {
@@ -42025,7 +42175,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3Cstring%3E"
+          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CstringApplicationJson%3E"
         },
         "x-ms-long-running-operation": true
       }
@@ -43460,8 +43610,16 @@
           {
             "name": "singletonResource",
             "in": "path",
+            "description": "The name of the singleton resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "swap"
+            ],
+            "x-ms-enum": {
+              "name": "SingletonResource",
+              "modelAsString": false
+            }
           }
         ],
         "responses": {
@@ -43513,8 +43671,16 @@
           {
             "name": "singletonResource",
             "in": "path",
+            "description": "The name of the singleton resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "swap"
+            ],
+            "x-ms-enum": {
+              "name": "SingletonResource",
+              "modelAsString": false
+            }
           },
           {
             "name": "parameters",
@@ -48815,6 +48981,27 @@
         ]
       }
     },
+    "AuthorizationListResult": {
+      "type": "object",
+      "description": "Paged collection of ExpressRouteCircuitAuthorization items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ExpressRouteCircuitAuthorization items on this page",
+          "items": {
+            "$ref": "#/definitions/ExpressRouteCircuitAuthorization"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "AuthorizationPropertiesFormat": {
       "type": "object",
       "description": "Properties of ExpressRouteCircuitAuthorization.",
@@ -49164,6 +49351,10 @@
         "value"
       ]
     },
+    "Azure.ResourceManager.ArmAcceptedLroResponse<\"Resource operation accepted.\", Azure.ResourceManager.Legacy.{ location: string, retryAfter: int32 }>": {
+      "type": "object",
+      "description": "Resource operation accepted."
+    },
     "Azure.ResourceManager.ArmAcceptedLroResponse<\"Resource operation accepted.\", Azure.ResourceManager.{ location: string, retryAfter: int32 }>": {
       "type": "object",
       "description": "Resource operation accepted."
@@ -49226,19 +49417,6 @@
       "properties": {
         "body": {
           "$ref": "#/definitions/AzureReachabilityReport",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<BackendAddressInboundNatRulePortMappings>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/BackendAddressInboundNatRulePortMappings",
           "description": "The body type of the operation request or response."
         }
       },
@@ -49746,12 +49924,12 @@
         "body"
       ]
     },
-    "Azure.ResourceManager.ArmResponse<string>": {
+    "Azure.ResourceManager.ArmResponse<stringApplicationJson>": {
       "type": "object",
       "description": "Azure operation completed successfully.",
       "properties": {
         "body": {
-          "type": "string",
+          "$ref": "#/definitions/stringApplicationJson",
           "description": "The body type of the operation request or response."
         }
       },
@@ -55169,9 +55347,9 @@
         }
       ]
     },
-    "EndpointServiceResultListResult": {
+    "EndpointServicesListResult": {
       "type": "object",
-      "description": "The response of a EndpointServiceResult list operation.",
+      "description": "Paged collection of EndpointServiceResult items",
       "properties": {
         "value": {
           "type": "array",
@@ -55254,6 +55432,35 @@
             "description": "AzureArcNetwork"
           }
         ]
+      }
+    },
+    "Error": {
+      "type": "object",
+      "description": "Common error representation.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message."
+        },
+        "target": {
+          "type": "string",
+          "description": "Error target."
+        },
+        "details": {
+          "type": "array",
+          "description": "Error details.",
+          "items": {
+            "$ref": "#/definitions/ErrorDetails"
+          }
+        },
+        "innerError": {
+          "type": "string",
+          "description": "Inner error message."
+        }
       }
     },
     "ErrorDetails": {
@@ -55634,27 +55841,6 @@
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
-      ]
-    },
-    "ExpressRouteCircuitAuthorizationListResult": {
-      "type": "object",
-      "description": "The response of a ExpressRouteCircuitAuthorization list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The ExpressRouteCircuitAuthorization items on this page",
-          "items": {
-            "$ref": "#/definitions/ExpressRouteCircuitAuthorization"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "ExpressRouteCircuitConnection": {
@@ -59579,27 +59765,6 @@
         }
       ]
     },
-    "FrontendIPConfigurationListResult": {
-      "type": "object",
-      "description": "The response of a FrontendIPConfiguration list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The FrontendIPConfiguration items on this page",
-          "items": {
-            "$ref": "#/definitions/FrontendIPConfiguration"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "FrontendIPConfigurationPropertiesFormat": {
       "type": "object",
       "description": "Properties of Frontend IP Configuration of the load balancer.",
@@ -60654,6 +60819,39 @@
         }
       }
     },
+    "IDPSQueryObject": {
+      "type": "object",
+      "description": "Will describe the query to run against the IDPS signatures DB",
+      "properties": {
+        "filters": {
+          "type": "array",
+          "description": "Contain all filters names and values",
+          "items": {
+            "$ref": "#/definitions/FilterItems"
+          }
+        },
+        "search": {
+          "type": "string",
+          "description": "Search term in all columns"
+        },
+        "orderBy": {
+          "$ref": "#/definitions/OrderBy",
+          "description": "Column to sort response by"
+        },
+        "resultsPerPage": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of the results to return in each page",
+          "minimum": 1,
+          "maximum": 1000
+        },
+        "skip": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of records matching the filter to skip"
+        }
+      }
+    },
     "IPAddressAvailabilityResult": {
       "type": "object",
       "description": "Response for CheckIPAddressAvailability API service call.",
@@ -60920,39 +61118,6 @@
             "description": "IPv6"
           }
         ]
-      }
-    },
-    "IdpsQueryObject": {
-      "type": "object",
-      "description": "Will describe the query to run against the IDPS signatures DB",
-      "properties": {
-        "filters": {
-          "type": "array",
-          "description": "Contain all filters names and values",
-          "items": {
-            "$ref": "#/definitions/FilterItems"
-          }
-        },
-        "search": {
-          "type": "string",
-          "description": "Search term in all columns"
-        },
-        "orderBy": {
-          "$ref": "#/definitions/OrderBy",
-          "description": "Column to sort response by"
-        },
-        "resultsPerPage": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of the results to return in each page",
-          "minimum": 1,
-          "maximum": 1000
-        },
-        "skip": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of records matching the filter to skip"
-        }
       }
     },
     "IkeEncryption": {
@@ -62739,6 +62904,27 @@
         }
       }
     },
+    "LoadBalancerFrontendIPConfigurationListResult": {
+      "type": "object",
+      "description": "Paged collection of FrontendIPConfiguration items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The FrontendIPConfiguration items on this page",
+          "items": {
+            "$ref": "#/definitions/FrontendIPConfiguration"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "LoadBalancerHealthPerRule": {
       "type": "object",
       "description": "The response for a Health API.",
@@ -62805,6 +62991,27 @@
         "value"
       ]
     },
+    "LoadBalancerOutboundRuleListResult": {
+      "type": "object",
+      "description": "Paged collection of OutboundRule items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The OutboundRule items on this page",
+          "items": {
+            "$ref": "#/definitions/OutboundRule"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "LoadBalancerOutboundRuleProtocol": {
       "type": "string",
       "description": "The protocol for the outbound rule in load balancer.",
@@ -62834,6 +63041,27 @@
           }
         ]
       }
+    },
+    "LoadBalancerProbeListResult": {
+      "type": "object",
+      "description": "Paged collection of Probe items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Probe items on this page",
+          "items": {
+            "$ref": "#/definitions/Probe"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "LoadBalancerPropertiesFormat": {
       "type": "object",
@@ -65902,6 +66130,10 @@
           "items": {
             "$ref": "#/definitions/NetworkWatcher"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of results."
         }
       }
     },
@@ -66974,27 +67206,6 @@
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
-      ]
-    },
-    "OutboundRuleListResult": {
-      "type": "object",
-      "description": "The response of a OutboundRule list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The OutboundRule items on this page",
-          "items": {
-            "$ref": "#/definitions/OutboundRule"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "OutboundRulePropertiesFormat": {
@@ -68081,27 +68292,6 @@
         }
       }
     },
-    "PerimeterAssociableResourceListResult": {
-      "type": "object",
-      "description": "The response of a PerimeterAssociableResource list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The PerimeterAssociableResource items on this page",
-          "items": {
-            "$ref": "#/definitions/PerimeterAssociableResource"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "PerimeterAssociableResourceProperties": {
       "type": "object",
       "description": "Properties of the perimeter associable resources.",
@@ -68125,6 +68315,27 @@
           "readOnly": true
         }
       }
+    },
+    "PerimeterAssociableResourcesListResult": {
+      "type": "object",
+      "description": "Paged collection of PerimeterAssociableResource items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The PerimeterAssociableResource items on this page",
+          "items": {
+            "$ref": "#/definitions/PerimeterAssociableResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "PerimeterBasedAccessRule": {
       "type": "object",
@@ -69235,27 +69446,6 @@
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
-      ]
-    },
-    "ProbeListResult": {
-      "type": "object",
-      "description": "The response of a Probe list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The Probe items on this page",
-          "items": {
-            "$ref": "#/definitions/Probe"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "ProbeNoHealthyBackendsBehavior": {
@@ -79879,6 +80069,9 @@
           }
         ]
       }
+    },
+    "stringApplicationJson": {
+      "type": "string"
     }
   },
   "parameters": {}

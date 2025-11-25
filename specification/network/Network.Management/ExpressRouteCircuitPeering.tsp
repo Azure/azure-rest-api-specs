@@ -141,9 +141,10 @@ interface ExpressRouteCircuitPeerings {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ExpressRouteCircuits_ListArpTable")
+  @post
   listArpTable is ArpTablesgOps.Read<
     ExpressRouteCircuitPeering,
-    Response = ArmResponse<ExpressRouteCircuitsArpTableListResult>
+    Response = ArmResponse<ExpressRouteCircuitsArpTableListResult> | ArmAcceptedLroResponse
   >;
 
   /**
@@ -151,10 +152,10 @@ interface ExpressRouteCircuitPeerings {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ExpressRouteCircuits_ListRoutesTable")
-  @list
+  @post
   listRoutesTable is RouteTablesOps.Read<
     ExpressRouteCircuitPeering,
-    Response = ArmResponse<ExpressRouteCircuitsRoutesTableListResult>,
+    Response = ArmResponse<ExpressRouteCircuitsRoutesTableListResult> | ArmAcceptedLroResponse
   >;
 
   /**
@@ -162,10 +163,10 @@ interface ExpressRouteCircuitPeerings {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ExpressRouteCircuits_ListRoutesTableSummary")
-  @list
+  @post
   listRoutesTableSummary is RouteTablesSummaryOps.Read<
     ExpressRouteCircuitPeering,
-    Response = ArmResponse<ExpressRouteCircuitsRoutesTableSummaryListResult>,
+    Response = ArmResponse<ExpressRouteCircuitsRoutesTableSummaryListResult> | ArmAcceptedLroResponse
   >;
 
   /**

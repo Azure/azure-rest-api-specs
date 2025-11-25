@@ -105,10 +105,11 @@ interface FirewallPolicies {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("FirewallPolicyDeployments_Deploy")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   deploy is ArmResourceActionAsyncBase<
     FirewallPolicy,
     void,
-    ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+    ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
       Azure.Core.Foundations.RetryAfterHeader>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<FirewallPolicy>
   >;

@@ -41,7 +41,10 @@ interface FrontendIPConfigurations {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("LoadBalancerFrontendIPConfigurations_List")
-  list is ArmResourceListByParent<FrontendIPConfiguration>;
+  list is ArmResourceListByParent<
+    FrontendIPConfiguration,
+    Response = LoadBalancerFrontendIPConfigurationListResult
+  >;
 }
 
 @@doc(FrontendIPConfiguration.name,

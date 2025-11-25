@@ -44,6 +44,7 @@ alias LoadBalancerLoadBalancerOps = Azure.ResourceManager.Legacy.LegacyOperation
 
     @path
     @segment("resourceGroups")
+    @pattern("^[a-z][a-z0-9]*$")
     groupName: string;
 
     ...Azure.ResourceManager.Legacy.Provider;
@@ -53,6 +54,7 @@ alias LoadBalancerLoadBalancerOps = Azure.ResourceManager.Legacy.LegacyOperation
     @path
     @segment("loadBalancers")
     @key
+    @pattern("^[a-z][a-z0-9]*$")
     loadBalancerName: string;
   }
 >;

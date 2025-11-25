@@ -157,4 +157,12 @@ enum Versions {
   v2025_03_01: "2025-03-01",
 }
 
-interface Operations extends Azure.ResourceManager.Operations {}
+interface Operations
+  extends Azure.ResourceManager.Legacy.Operations<
+      ArmResponse<OperationListResult>,
+      CloudError
+    > {}
+
+@@doc(Operations.list,
+  "Lists all of the available Network Rest API operations."
+);

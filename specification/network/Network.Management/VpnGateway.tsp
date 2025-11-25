@@ -139,7 +139,7 @@ interface VpnGateways {
   startPacketCapture is ArmResourceActionAsync<
     VpnGateway,
     VpnGatewayPacketCaptureStartParameters,
-    ArmResponse<string>,
+    ArmResponse<stringApplicationJson>,
     OptionalRequestBody = true
   >;
 
@@ -150,7 +150,7 @@ interface VpnGateways {
   stopPacketCapture is ArmResourceActionAsync<
     VpnGateway,
     VpnGatewayPacketCaptureStopParameters,
-    ArmResponse<string>,
+    ArmResponse<stringApplicationJson>,
     OptionalRequestBody = true
   >;
 
@@ -197,7 +197,7 @@ interface VpnGateways {
   vpnConnectionsStartPacketCapture is VpnConnection2Ops.ActionAsync<
     VpnGateway,
     VpnConnectionPacketCaptureStartParameters,
-    ArmResponse<string>,
+    ArmResponse<stringApplicationJson>,
     OptionalRequestBody = true
   >;
 
@@ -210,7 +210,7 @@ interface VpnGateways {
   vpnConnectionsStopPacketCapture is VpnConnection2Ops.ActionAsync<
     VpnGateway,
     VpnConnectionPacketCaptureStopParameters,
-    ArmResponse<string>,
+    ArmResponse<stringApplicationJson>,
     OptionalRequestBody = true
   >;
 

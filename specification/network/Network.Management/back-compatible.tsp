@@ -1728,3 +1728,7 @@ using Microsoft.Network;
 );
 
 @@clientLocation(UsagesOperationGroup.list, "Usages");
+@@clientName(LoadBalancersOperationGroup.swapPublicIpAddresses::parameters.body,
+  "parameters"
+);
+@@clientName(IdpsQueryObject, "IDPSQueryObject");

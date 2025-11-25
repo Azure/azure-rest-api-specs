@@ -10,15 +10,29 @@
             }
           ],
           [
-            "-",
+            "~",
             {
-              "$ref": "./networkManager.json#/parameters/ListTopParameter"
+              "$ref__deleted": "./networkManager.json#/parameters/ListTopParameter",
+              "name__added": "$top",
+              "in__added": "query",
+              "type__added": "integer",
+              "format__added": "int32",
+              "minimum__added": 1,
+              "maximum__added": 20
             }
           ],
           [
             "-",
             {
               "$ref": "./networkManager.json#/parameters/ListSkipTokenParameter"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "$skipToken",
+              "in": "query",
+              "type": "string"
             }
           ]
         ],
@@ -27,7 +41,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/CloudError",
-                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/CloudError"
               }
             }
           }
@@ -73,7 +87,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/CloudError",
-                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/CloudError"
               }
             }
           }
@@ -109,7 +123,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/CloudError",
-                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/CloudError"
               }
             }
           }
@@ -142,7 +156,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/CloudError",
-                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/CloudError"
               }
             }
           }
@@ -151,10 +165,6 @@
     },
     "/providers/microsoft.Network/operations": {
       "get": {
-        "description": {
-          "__old": "Lists all of the available Network Rest API operations.",
-          "__new": "List the operations for the provider"
-        },
         "responses": {
           "200": {
             "schema": {
@@ -168,7 +178,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/CloudError",
-                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/CloudError"
               }
             }
           }
@@ -182,7 +192,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/Error",
-                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/Error"
               }
             }
           }
@@ -196,7 +206,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/Error",
-                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/Error"
               }
             }
           }
@@ -210,7 +220,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/Error",
-                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/Error"
               }
             }
           }
@@ -224,7 +234,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/CloudError",
-                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/CloudError"
               }
             }
           }
@@ -238,7 +248,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/CloudError",
-                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/CloudError"
               }
             }
           }
@@ -252,7 +262,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/CloudError",
-                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/CloudError"
               }
             }
           }
@@ -266,7 +276,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/CloudError",
-                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/CloudError"
               }
             }
           }
@@ -317,9 +327,6 @@
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.Network/azureFirewallFqdnTags": {
       "get": {
-        "x-ms-pageable__deleted": {
-          "nextLinkName": "nextLink"
-        },
         "responses": {
           "default": {
             "schema": {
@@ -563,19 +570,58 @@
       }
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.Network/expressRouteServiceProviders": {
-      "get": {
-        "x-ms-pageable__deleted": {
-          "nextLinkName": "nextLink"
-        },
+      "get__deleted": {
+        "operationId": "ExpressRouteServiceProviders_List",
+        "description": "Gets all the available express route service providers.",
+        "parameters": [],
         "responses": {
-          "default": {
+          "200": {
+            "description": "ignore",
             "schema": {
-              "$ref": {
-                "__old": "./network.json#/definitions/CloudError",
-                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-              }
+              "$ref": "#/definitions/ExpressRouteServiceProviderListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "List ExpressRoute providers": {
+            "$ref": "./examples/ExpressRouteProviderList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      },
+      "post__added": {
+        "operationId": "ExpressRouteServiceProviders_List",
+        "description": "Gets all the available express route service providers.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteServiceProviderListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List ExpressRoute providers": {
+            "$ref": "./examples/ExpressRouteProviderList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -664,60 +710,136 @@
       }
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/autoApprovedPrivateLinkServices": {
-      "get": {
-        "x-ms-pageable__deleted": {
-          "nextLinkName": "nextLink"
-        },
+      "get__deleted": {
+        "operationId": "PrivateLinkServices_ListAutoApprovedPrivateLinkServices",
+        "description": "Returns all of the private link service ids that can be linked to a Private Endpoint with auto approved in this subscription in this region.",
         "parameters": [
-          [
-            "~",
-            {
-              "name__deleted": "location",
-              "in__deleted": "path",
-              "required__deleted": true,
-              "type__deleted": "string",
-              "$ref__added": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
-            }
-          ]
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
         ],
         "responses": {
-          "default": {
+          "200": {
+            "description": "ignore",
             "schema": {
-              "$ref": {
-                "__old": "./network.json#/definitions/CloudError",
-                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-              }
+              "$ref": "#/definitions/AutoApprovedPrivateLinkServicesResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get list of private link service id that can be linked to a private end point with auto approved": {
+            "$ref": "./examples/AutoApprovedPrivateLinkServicesGet.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      },
+      "post__added": {
+        "operationId": "PrivateLinkServices_ListAutoApprovedPrivateLinkServices",
+        "description": "Returns all of the private link service ids that can be linked to a Private Endpoint with auto approved in this subscription in this region.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/AutoApprovedPrivateLinkServicesResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get list of private link service id that can be linked to a private end point with auto approved": {
+            "$ref": "./examples/AutoApprovedPrivateLinkServicesGet.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/availableDelegations": {
-      "get": {
-        "x-ms-pageable__deleted": {
-          "nextLinkName": "nextLink"
-        },
+      "get__deleted": {
+        "operationId": "AvailableDelegations_List",
+        "description": "Gets all of the available subnet delegations for this subscription in this region.",
         "parameters": [
-          [
-            "~",
-            {
-              "name__deleted": "location",
-              "in__deleted": "path",
-              "required__deleted": true,
-              "type__deleted": "string",
-              "$ref__added": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
-            }
-          ]
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
         ],
         "responses": {
-          "default": {
+          "200": {
+            "description": "ignore",
             "schema": {
-              "$ref": {
-                "__old": "./network.json#/definitions/CloudError",
-                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-              }
+              "$ref": "#/definitions/AvailableDelegationsResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get available delegations": {
+            "$ref": "./examples/AvailableDelegationsSubscriptionGet.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      },
+      "post__added": {
+        "operationId": "AvailableDelegations_List",
+        "description": "Gets all of the available subnet delegations for this subscription in this region.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/AvailableDelegationsResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get available delegations": {
+            "$ref": "./examples/AvailableDelegationsSubscriptionGet.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -751,31 +873,69 @@
       }
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/availableServiceAliases": {
-      "get": {
-        "x-ms-pageable__deleted": {
-          "nextLinkName": "nextLink"
-        },
+      "get__deleted": {
+        "operationId": "AvailableServiceAliases_List",
+        "description": "Gets all available service aliases for this subscription in this region.",
         "parameters": [
-          [
-            "~",
-            {
-              "name__deleted": "location",
-              "in__deleted": "path",
-              "required__deleted": true,
-              "type__deleted": "string",
-              "$ref__added": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
-            }
-          ]
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
         ],
         "responses": {
-          "default": {
+          "200": {
+            "description": "ignore",
             "schema": {
-              "$ref": {
-                "__old": "./network.json#/definitions/CloudError",
-                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-              }
+              "$ref": "#/definitions/AvailableServiceAliasesResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get available service aliases": {
+            "$ref": "./examples/AvailableServiceAliasesList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      },
+      "post__added": {
+        "operationId": "AvailableServiceAliases_List",
+        "description": "Gets all available service aliases for this subscription in this region.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/AvailableServiceAliasesResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get available service aliases": {
+            "$ref": "./examples/AvailableServiceAliasesList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -905,103 +1065,235 @@
       }
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/nspServiceTags": {
-      "get": {
-        "x-ms-pageable__deleted": {
-          "nextLinkName": "nextLink"
-        },
+      "get__deleted": {
+        "operationId": "NetworkSecurityPerimeterServiceTags_List",
+        "description": "Gets the list of service tags supported by NSP. These service tags can be used to create access rules in NSP.",
         "parameters": [
-          [
-            "~",
-            {
-              "name__deleted": "location",
-              "in__deleted": "path",
-              "required__deleted": true,
-              "type__deleted": "string",
-              "$ref__added": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
-            }
-          ]
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
         ],
         "responses": {
-          "default": {
+          "200": {
+            "description": "ignore",
             "schema": {
-              "$ref": {
-                "__old": "./network.json#/definitions/CloudError",
-                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-              }
+              "$ref": "#/definitions/NspServiceTagsListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "NSPServiceTagsList": {
+            "$ref": "./examples/NspServiceTagsList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      },
+      "post__added": {
+        "operationId": "NetworkSecurityPerimeterServiceTags_List",
+        "description": "Gets the list of service tags supported by NSP. These service tags can be used to create access rules in NSP.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/NspServiceTagsListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NSPServiceTagsList": {
+            "$ref": "./examples/NspServiceTagsList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/perimeterAssociableResourceTypes": {
-      "get": {
-        "x-ms-pageable__deleted": {
-          "nextLinkName": "nextLink"
-        },
+      "get__deleted": {
+        "operationId": "NetworkSecurityPerimeterAssociableResourceTypes_List",
+        "description": "Gets the list of resources that are onboarded with NSP. These resources can be associated with a network security perimeter",
         "parameters": [
-          [
-            "~",
-            {
-              "name__deleted": "location",
-              "in__deleted": "path",
-              "required__deleted": true,
-              "type__deleted": "string",
-              "$ref__added": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
-            }
-          ]
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
         ],
         "responses": {
           "200": {
+            "description": "ignore",
             "schema": {
-              "$ref": {
-                "__old": "#/definitions/PerimeterAssociableResourcesListResult",
-                "__new": "#/definitions/PerimeterAssociableResourceListResult"
-              }
+              "$ref": "#/definitions/PerimeterAssociableResourcesListResult"
             }
           },
           "default": {
+            "description": "ignore",
             "schema": {
-              "$ref": {
-                "__old": "./network.json#/definitions/CloudError",
-                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-              }
+              "$ref": "./network.json#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "NetworkSecurityPerimeterAssociableResourceTypes": {
+            "$ref": "./examples/PerimeterAssociableResourcesList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      },
+      "post__added": {
+        "operationId": "NetworkSecurityPerimeterAssociableResourceTypes_List",
+        "description": "Gets the list of resources that are onboarded with NSP. These resources can be associated with a network security perimeter",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/PerimeterAssociableResourcesListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkSecurityPerimeterAssociableResourceTypes": {
+            "$ref": "./examples/PerimeterAssociableResourcesList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/serviceTagDetails": {
-      "get": {
-        "x-ms-pageable__deleted": {
-          "nextLinkName": "nextLink"
-        },
+      "get__deleted": {
+        "operationId": "ServiceTagInformation_List",
+        "description": "Gets a list of service tag information resources with pagination.",
         "parameters": [
-          [
-            "~",
-            {
-              "name__deleted": "location",
-              "in__deleted": "path",
-              "required__deleted": true,
-              "type__deleted": "string",
-              "$ref__added": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
-            }
-          ],
-          [
-            " "
-          ],
-          [
-            " "
-          ]
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "noAddressPrefixes",
+            "in": "query",
+            "type": "boolean"
+          },
+          {
+            "name": "tagName",
+            "in": "query",
+            "type": "string"
+          }
         ],
         "responses": {
-          "default": {
+          "200": {
+            "description": "ignore",
             "schema": {
-              "$ref": {
-                "__old": "./network.json#/definitions/CloudError",
-                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-              }
+              "$ref": "#/definitions/ServiceTagInformationListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get list of service tags": {
+            "$ref": "./examples/ServiceTagInformationListResult.json"
+          },
+          "Get list of service tags with no address prefixes": {
+            "$ref": "./examples/ServiceTagInformationListResultWithNoAddressPrefixes.json"
+          },
+          "Get list of service tags with tag name.": {
+            "$ref": "./examples/ServiceTagInformationListResultWithTagname.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      },
+      "post__added": {
+        "operationId": "ServiceTagInformation_List",
+        "description": "Gets a list of service tag information resources with pagination.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "noAddressPrefixes",
+            "in": "query",
+            "type": "boolean"
+          },
+          {
+            "name": "tagName",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ServiceTagInformationListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get list of service tags": {
+            "$ref": "./examples/ServiceTagInformationListResult.json"
+          },
+          "Get list of service tags with no address prefixes": {
+            "$ref": "./examples/ServiceTagInformationListResultWithNoAddressPrefixes.json"
+          },
+          "Get list of service tags with tag name.": {
+            "$ref": "./examples/ServiceTagInformationListResultWithTagname.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1045,13 +1337,7 @@
             }
           ],
           [
-            "~",
-            {
-              "name": {
-                "__old": "parameters",
-                "__new": "body"
-              }
-            }
+            " "
           ]
         ],
         "responses": {
@@ -1063,17 +1349,11 @@
               }
             }
           },
-          "200__deleted": {
-            "description": "ignore"
-          },
-          "204__added": {
-            "description": "ignore"
-          },
           "default": {
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/CloudError",
-                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/CloudError"
               }
             }
           }
@@ -1081,69 +1361,143 @@
       }
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/usages": {
-      "get": {
-        "x-ms-pageable__deleted": {
-          "nextLinkName": "nextLink"
-        },
+      "get__deleted": {
+        "operationId": "Usages_List",
+        "description": "List network usages for a subscription.",
         "parameters": [
-          [
-            "~",
-            {
-              "name__deleted": "location",
-              "in__deleted": "path",
-              "required__deleted": true,
-              "type__deleted": "string",
-              "pattern__deleted": "^[-\\w\\._ ]+$",
-              "$ref__added": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
-            }
-          ]
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._ ]+$"
+          }
         ],
         "responses": {
-          "default": {
+          "200": {
+            "description": "ignore",
             "schema": {
-              "$ref": {
-                "__old": "./network.json#/definitions/CloudError",
-                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-              }
+              "$ref": "#/definitions/UsagesListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "List usages": {
+            "$ref": "./examples/UsageList.json"
+          },
+          "List usages spaced location": {
+            "$ref": "./examples/UsageListSpacedLocation.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      },
+      "post__added": {
+        "operationId": "Usages_List",
+        "description": "List network usages for a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/UsagesListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List usages": {
+            "$ref": "./examples/UsageList.json"
+          },
+          "List usages spaced location": {
+            "$ref": "./examples/UsageListSpacedLocation.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/virtualNetworkAvailableEndpointServices": {
-      "get": {
-        "x-ms-pageable__deleted": {
-          "nextLinkName": "nextLink"
-        },
+      "get__deleted": {
+        "operationId": "AvailableEndpointServices_List",
+        "description": "List what values of endpoint services are available for use.",
         "parameters": [
-          [
-            "~",
-            {
-              "name__deleted": "location",
-              "in__deleted": "path",
-              "required__deleted": true,
-              "type__deleted": "string",
-              "$ref__added": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
-            }
-          ]
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
         ],
         "responses": {
           "200": {
+            "description": "ignore",
             "schema": {
-              "$ref": {
-                "__old": "#/definitions/EndpointServicesListResult",
-                "__new": "#/definitions/EndpointServiceResultListResult"
-              }
+              "$ref": "#/definitions/EndpointServicesListResult"
             }
           },
           "default": {
+            "description": "ignore",
             "schema": {
-              "$ref": {
-                "__old": "./network.json#/definitions/CloudError",
-                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-              }
+              "$ref": "./network.json#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "EndpointServicesList": {
+            "$ref": "./examples/EndpointServicesList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      },
+      "post__added": {
+        "operationId": "AvailableEndpointServices_List",
+        "description": "List what values of endpoint services are available for use.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/EndpointServicesListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EndpointServicesList": {
+            "$ref": "./examples/EndpointServicesList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1388,23 +1742,6 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/CloudError",
-                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/microsoft.Network/networkWatchers": {
-      "get": {
-        "x-ms-pageable__deleted": {
-          "nextLinkName": "nextLink"
-        },
-        "responses": {
-          "default": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/ErrorResponse",
                 "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
               }
             }
@@ -1688,39 +2025,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/microsoft.Compute/cloudServices/{resourceName}/providers/microsoft.Network/cloudServiceSlots/{singletonResource}": {
       "get": {
-        "parameters": [
-          [
-            " "
-          ],
-          [
-            " "
-          ],
-          [
-            "-",
-            {
-              "name": "singletonResource",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "enum": [
-                "swap"
-              ],
-              "x-ms-enum": {
-                "name": "SingletonResource",
-                "modelAsString": false
-              }
-            }
-          ],
-          [
-            "+",
-            {
-              "name": "singletonResource",
-              "in": "path",
-              "required": true,
-              "type": "string"
-            }
-          ]
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -1733,42 +2037,6 @@
         }
       },
       "put": {
-        "parameters": [
-          [
-            " "
-          ],
-          [
-            " "
-          ],
-          [
-            "-",
-            {
-              "name": "singletonResource",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "enum": [
-                "swap"
-              ],
-              "x-ms-enum": {
-                "name": "SingletonResource",
-                "modelAsString": false
-              }
-            }
-          ],
-          [
-            "+",
-            {
-              "name": "singletonResource",
-              "in": "path",
-              "required": true,
-              "type": "string"
-            }
-          ],
-          [
-            " "
-          ]
-        ],
         "responses": {
           "202": {
             "headers__added": {
@@ -2130,15 +2398,12 @@
         }
       },
       "put": {
-        "x-ms-long-running-operation-options__deleted": {
-          "final-state-via": "azure-async-operation"
-        },
         "responses": {
           "202": {
             "headers__added": {
-              "Location": {
+              "Azure-AsyncOperation": {
                 "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+                "description": "A link to the status monitor"
               }
             }
           },
@@ -2146,10 +2411,13 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/CloudError",
-                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/CloudError"
               }
             }
           }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-schema__added": "#/definitions/ApplicationGatewayPrivateEndpointConnection"
         }
       },
       "delete": {
@@ -2877,11 +3145,13 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/getikesas": {
       "post": {
-        "produces__added": [
-          "text/plain",
-          "application/json"
-        ],
         "responses": {
+          "200": {
+            "schema": {
+              "type__deleted": "string",
+              "$ref__added": "#/definitions/stringApplicationJson"
+            }
+          },
           "202": {
             "headers__added": {
               "Location": {
@@ -2937,11 +3207,15 @@
         }
       },
       "put": {
-        "x-ms-long-running-operation-options__deleted": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation__deleted": true,
         "responses": {
+          "201": {
+            "headers__added": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
+            }
+          },
           "default": {
             "schema": {
               "$ref": {
@@ -2977,11 +3251,13 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/startPacketCapture": {
       "post": {
-        "produces__added": [
-          "text/plain",
-          "application/json"
-        ],
         "responses": {
+          "200": {
+            "schema": {
+              "type__deleted": "string",
+              "$ref__added": "#/definitions/stringApplicationJson"
+            }
+          },
           "202": {
             "headers__added": {
               "Location": {
@@ -3003,11 +3279,13 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/stopPacketCapture": {
       "post": {
-        "produces__added": [
-          "text/plain",
-          "application/json"
-        ],
         "responses": {
+          "200": {
+            "schema": {
+              "type__deleted": "string",
+              "$ref__added": "#/definitions/stringApplicationJson"
+            }
+          },
           "202": {
             "headers__added": {
               "Location": {
@@ -3029,11 +3307,13 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/vpndeviceconfigurationscript": {
       "post": {
-        "produces__added": [
-          "text/plain",
-          "application/json"
-        ],
         "responses": {
+          "200": {
+            "schema": {
+              "type__deleted": "string",
+              "$ref__added": "#/definitions/stringApplicationJson"
+            }
+          },
           "default": {
             "schema": {
               "$ref": {
@@ -3499,14 +3779,6 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/authorizations": {
       "get": {
         "responses": {
-          "200": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/AuthorizationListResult",
-                "__new": "#/definitions/ExpressRouteCircuitAuthorizationListResult"
-              }
-            }
-          },
           "default": {
             "schema": {
               "$ref": {
@@ -3647,93 +3919,23 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/arpTables/{devicePath}": {
-      "post__deleted": {
-        "operationId": "ExpressRouteCircuits_ListArpTable",
-        "description": "Gets the currently advertised ARP table associated with the express route circuit in a resource group.",
-        "parameters": [
-          {
-            "name": "circuitName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "peeringName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "devicePath",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
+      "post": {
         "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/ExpressRouteCircuitsArpTableListResult"
-            }
-          },
           "202": {
-            "description": "ignore"
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List ARP Table": {
-            "$ref": "./examples/ExpressRouteCircuitARPTableList.json"
-          }
-        },
-        "x-ms-long-running-operation": true
-      },
-      "get__added": {
-        "operationId": "ExpressRouteCircuits_ListArpTable",
-        "description": "Gets the currently advertised ARP table associated with the express route circuit in a resource group.",
-        "parameters": [
-          {
-            "name": "circuitName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "peeringName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "devicePath",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/ExpressRouteCircuitsArpTableListResult"
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
             }
           },
           "default": {
-            "description": "ignore",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
             }
-          }
-        },
-        "x-ms-examples": {
-          "List ARP Table": {
-            "$ref": "./examples/ExpressRouteCircuitARPTableList.json"
           }
         }
       }
@@ -3838,192 +4040,46 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/routeTables/{devicePath}": {
-      "post__deleted": {
-        "operationId": "ExpressRouteCircuits_ListRoutesTable",
-        "description": "Gets the currently advertised routes table associated with the express route circuit in a resource group.",
-        "parameters": [
-          {
-            "name": "circuitName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "peeringName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "devicePath",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
+      "post": {
         "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/ExpressRouteCircuitsRoutesTableListResult"
-            }
-          },
           "202": {
-            "description": "ignore"
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List Route Tables": {
-            "$ref": "./examples/ExpressRouteCircuitRouteTableList.json"
-          }
-        },
-        "x-ms-long-running-operation": true
-      },
-      "get__added": {
-        "operationId": "ExpressRouteCircuits_ListRoutesTable",
-        "description": "Gets the currently advertised routes table associated with the express route circuit in a resource group.",
-        "parameters": [
-          {
-            "name": "circuitName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "peeringName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "devicePath",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/ExpressRouteCircuitsRoutesTableListResult"
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
             }
           },
           "default": {
-            "description": "ignore",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
             }
           }
-        },
-        "x-ms-examples": {
-          "List Route Tables": {
-            "$ref": "./examples/ExpressRouteCircuitRouteTableList.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/routeTablesSummary/{devicePath}": {
-      "post__deleted": {
-        "operationId": "ExpressRouteCircuits_ListRoutesTableSummary",
-        "description": "Gets the currently advertised routes table summary associated with the express route circuit in a resource group.",
-        "parameters": [
-          {
-            "name": "circuitName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "peeringName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "devicePath",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
+      "post": {
         "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/ExpressRouteCircuitsRoutesTableSummaryListResult"
-            }
-          },
           "202": {
-            "description": "ignore"
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List Route Table Summary": {
-            "$ref": "./examples/ExpressRouteCircuitRouteTableSummaryList.json"
-          }
-        },
-        "x-ms-long-running-operation": true
-      },
-      "get__added": {
-        "operationId": "ExpressRouteCircuits_ListRoutesTableSummary",
-        "description": "Gets the currently advertised routes table summary associated with the express route circuit in a resource group.",
-        "parameters": [
-          {
-            "name": "circuitName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "peeringName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "devicePath",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/ExpressRouteCircuitsRoutesTableSummaryListResult"
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
             }
           },
           "default": {
-            "description": "ignore",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
             }
           }
-        },
-        "x-ms-examples": {
-          "List Route Table Summary": {
-            "$ref": "./examples/ExpressRouteCircuitRouteTableSummaryList.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -4083,11 +4139,15 @@
         }
       },
       "put": {
-        "x-ms-long-running-operation-options__deleted": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation__deleted": true,
         "responses": {
+          "200": {
+            "headers__added": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
+            }
+          },
           "default": {
             "schema": {
               "$ref": {
@@ -4096,6 +4156,9 @@
               }
             }
           }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-schema__added": "#/definitions/ExpressRouteCrossConnection"
         }
       },
       "patch": {
@@ -4166,18 +4229,18 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-schema__added": "#/definitions/ExpressRouteCrossConnection",
-          "final-state-via": {
-            "__old": "azure-async-operation",
-            "__new": "original-uri"
-          }
+          "final-state-schema__added": "#/definitions/ExpressRouteCrossConnection"
         }
       },
       "delete": {
-        "x-ms-long-running-operation__deleted": true,
         "responses": {
-          "202__deleted": {
-            "description": "ignore"
+          "202": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
           },
           "default": {
             "schema": {
@@ -4191,287 +4254,84 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/peerings/{peeringName}/arpTables/{devicePath}": {
-      "post__deleted": {
-        "operationId": "ExpressRouteCrossConnections_ListArpTable",
-        "description": "Gets the currently advertised ARP table associated with the express route cross connection in a resource group.",
-        "parameters": [
-          {
-            "name": "crossConnectionName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "peeringName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "devicePath",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
+      "post": {
         "responses": {
           "200": {
-            "description": "ignore",
             "schema": {
-              "$ref": "./expressRouteCircuit.json#/definitions/ExpressRouteCircuitsArpTableListResult"
+              "$ref": {
+                "__old": "./expressRouteCircuit.json#/definitions/ExpressRouteCircuitsArpTableListResult",
+                "__new": "#/definitions/ExpressRouteCircuitsArpTableListResult"
+              }
             }
           },
           "202": {
-            "description": "ignore"
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "GetExpressRouteCrossConnectionsArpTable": {
-            "$ref": "./examples/ExpressRouteCrossConnectionsArpTable.json"
-          }
-        },
-        "x-ms-long-running-operation": true
-      },
-      "get__added": {
-        "operationId": "ExpressRouteCrossConnections_ListArpTable",
-        "description": "Gets the currently advertised ARP table associated with the express route cross connection in a resource group.",
-        "parameters": [
-          {
-            "name": "crossConnectionName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "peeringName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "devicePath",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/ExpressRouteCircuitsArpTableListResult"
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
             }
           },
           "default": {
-            "description": "ignore",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
             }
           }
-        },
-        "x-ms-examples": {
-          "GetExpressRouteCrossConnectionsArpTable": {
-            "$ref": "./examples/ExpressRouteCrossConnectionsArpTable.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/peerings/{peeringName}/routeTables/{devicePath}": {
-      "post__deleted": {
-        "operationId": "ExpressRouteCrossConnections_ListRoutesTable",
-        "description": "Gets the currently advertised routes table associated with the express route cross connection in a resource group.",
-        "parameters": [
-          {
-            "name": "crossConnectionName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "peeringName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "devicePath",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
+      "post": {
         "responses": {
           "200": {
-            "description": "ignore",
             "schema": {
-              "$ref": "./expressRouteCircuit.json#/definitions/ExpressRouteCircuitsRoutesTableListResult"
+              "$ref": {
+                "__old": "./expressRouteCircuit.json#/definitions/ExpressRouteCircuitsRoutesTableListResult",
+                "__new": "#/definitions/ExpressRouteCircuitsRoutesTableListResult"
+              }
             }
           },
           "202": {
-            "description": "ignore"
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "GetExpressRouteCrossConnectionsRouteTable": {
-            "$ref": "./examples/ExpressRouteCrossConnectionsRouteTable.json"
-          }
-        },
-        "x-ms-long-running-operation": true
-      },
-      "get__added": {
-        "operationId": "ExpressRouteCrossConnections_ListRoutesTable",
-        "description": "Gets the currently advertised routes table associated with the express route cross connection in a resource group.",
-        "parameters": [
-          {
-            "name": "crossConnectionName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "peeringName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "devicePath",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/ExpressRouteCircuitsRoutesTableListResult"
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
             }
           },
           "default": {
-            "description": "ignore",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
             }
           }
-        },
-        "x-ms-examples": {
-          "GetExpressRouteCrossConnectionsRouteTable": {
-            "$ref": "./examples/ExpressRouteCrossConnectionsRouteTable.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/peerings/{peeringName}/routeTablesSummary/{devicePath}": {
-      "post__deleted": {
-        "operationId": "ExpressRouteCrossConnections_ListRoutesTableSummary",
-        "description": "Gets the route table summary associated with the express route cross connection in a resource group.",
-        "parameters": [
-          {
-            "name": "crossConnectionName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "peeringName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "devicePath",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
+      "post": {
         "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/ExpressRouteCrossConnectionsRoutesTableSummaryListResult"
-            }
-          },
           "202": {
-            "description": "ignore"
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "GetExpressRouteCrossConnectionsRouteTableSummary": {
-            "$ref": "./examples/ExpressRouteCrossConnectionsRouteTableSummary.json"
-          }
-        },
-        "x-ms-long-running-operation": true
-      },
-      "get__added": {
-        "operationId": "ExpressRouteCrossConnections_ListRoutesTableSummary",
-        "description": "Gets the route table summary associated with the express route cross connection in a resource group.",
-        "parameters": [
-          {
-            "name": "crossConnectionName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "peeringName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "devicePath",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/ExpressRouteCrossConnectionsRoutesTableSummaryListResult"
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
             }
           },
           "default": {
-            "description": "ignore",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
             }
           }
-        },
-        "x-ms-examples": {
-          "GetExpressRouteCrossConnectionsRouteTableSummary": {
-            "$ref": "./examples/ExpressRouteCrossConnectionsRouteTableSummary.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -4624,18 +4484,18 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-schema__added": "#/definitions/ExpressRouteGateway",
-          "final-state-via": {
-            "__old": "azure-async-operation",
-            "__new": "original-uri"
-          }
+          "final-state-schema__added": "#/definitions/ExpressRouteGateway"
         }
       },
       "delete": {
-        "x-ms-long-running-operation__deleted": true,
         "responses": {
-          "202__deleted": {
-            "description": "ignore"
+          "202": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
           },
           "default": {
             "schema": {
@@ -4730,14 +4590,17 @@
         "responses": {
           "202": {
             "headers": {
-              "Location__deleted": {
-                "type": "string",
-                "description": "URL for determining when an operation has completed. Send a GET request to the URL in Location header.\nThe URI should return a 202 until the operation reaches a terminal state and 200 once it reaches a terminal state.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#202-accepted-and-location-headers"
-              },
               "Azure-AsyncOperation": {
+                "format__added": "uri",
                 "description": {
                   "__old": "URL for checking the ongoing status of the operation.\nTo get the status of the asynchronous operation, send a GET request to the URL in Azure-AsyncOperation header value.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#asynchronous-operations",
                   "__new": "A link to the status monitor"
+                }
+              },
+              "Location": {
+                "description": {
+                  "__old": "URL for determining when an operation has completed. Send a GET request to the URL in Location header.\nThe URI should return a 202 until the operation reaches a terminal state and 200 once it reaches a terminal state.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#202-accepted-and-location-headers",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
                 }
               }
             }
@@ -4807,14 +4670,17 @@
         "responses": {
           "202": {
             "headers": {
-              "Location__deleted": {
-                "type": "string",
-                "description": "URL for determining when an operation has completed. Send a GET request to the URL in Location header.\nThe URI should return a 202 until the operation reaches a terminal state and 200 once it reaches a terminal state.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#202-accepted-and-location-headers"
-              },
               "Azure-AsyncOperation": {
+                "format__added": "uri",
                 "description": {
                   "__old": "URL for checking the ongoing status of the operation.\nTo get the status of the asynchronous operation, send a GET request to the URL in Azure-AsyncOperation header value.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#asynchronous-operations",
                   "__new": "A link to the status monitor"
+                }
+              },
+              "Location": {
+                "description": {
+                  "__old": "URL for determining when an operation has completed. Send a GET request to the URL in Location header.\nThe URI should return a 202 until the operation reaches a terminal state and 200 once it reaches a terminal state.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#202-accepted-and-location-headers",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
                 }
               }
             }
@@ -4984,14 +4850,17 @@
         "responses": {
           "202": {
             "headers": {
-              "Location__deleted": {
-                "type": "string",
-                "description": "URL to get the status of the operation."
-              },
               "Azure-AsyncOperation": {
+                "format__added": "uri",
                 "description": {
                   "__old": "URL to get the status of the operation.",
                   "__new": "A link to the status monitor"
+                }
+              },
+              "Location": {
+                "description": {
+                  "__old": "URL to get the status of the operation.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
                 }
               }
             }
@@ -5111,22 +4980,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/firewallPolicies/{firewallPolicyName}/listIdpsSignatures": {
       "post": {
-        "parameters": [
-          [
-            " "
-          ],
-          [
-            "~",
-            {
-              "schema": {
-                "$ref": {
-                  "__old": "#/definitions/IDPSQueryObject",
-                  "__new": "#/definitions/IdpsQueryObject"
-                }
-              }
-            }
-          ]
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -5797,14 +5650,6 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/frontendIPConfigurations": {
       "get": {
         "responses": {
-          "200": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/LoadBalancerFrontendIPConfigurationListResult",
-                "__new": "#/definitions/FrontendIPConfigurationListResult"
-              }
-            }
-          },
           "default": {
             "schema": {
               "$ref": {
@@ -5939,26 +5784,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/loadBalancingRules/{loadBalancingRuleName}/health": {
       "post": {
-        "parameters": [
-          [
-            "~",
-            {
-              "pattern__deleted": "^[a-zA-Z0-9_.-]*$"
-            }
-          ],
-          [
-            "~",
-            {
-              "pattern__deleted": "^[a-zA-Z0-9_.-]*$"
-            }
-          ],
-          [
-            "~",
-            {
-              "pattern__deleted": "^[a-zA-Z0-9_.-]*$"
-            }
-          ]
-        ],
         "responses": {
           "202": {
             "headers": {
@@ -5983,23 +5808,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/migrateToIpBased": {
       "post": {
-        "parameters": [
-          [
-            "~",
-            {
-              "pattern__deleted": "^[a-z][a-z0-9]*$"
-            }
-          ],
-          [
-            "~",
-            {
-              "pattern__deleted": "^[a-z][a-z0-9]*$"
-            }
-          ],
-          [
-            " "
-          ]
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -6037,14 +5845,6 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/outboundRules": {
       "get": {
         "responses": {
-          "200": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/LoadBalancerOutboundRuleListResult",
-                "__new": "#/definitions/OutboundRuleListResult"
-              }
-            }
-          },
           "default": {
             "schema": {
               "$ref": {
@@ -6073,14 +5873,6 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/probes": {
       "get": {
         "responses": {
-          "200": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/LoadBalancerProbeListResult",
-                "__new": "#/definitions/ProbeListResult"
-              }
-            }
-          },
           "default": {
             "schema": {
               "$ref": {
@@ -6206,118 +5998,270 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/locations/{location}/autoApprovedPrivateLinkServices": {
-      "get": {
-        "x-ms-pageable__deleted": {
-          "nextLinkName": "nextLink"
-        },
+      "get__deleted": {
+        "operationId": "PrivateLinkServices_ListAutoApprovedPrivateLinkServicesByResourceGroup",
+        "description": "Returns all of the private link service ids that can be linked to a Private Endpoint with auto approved in this subscription in this region.",
         "parameters": [
-          [
-            "~",
-            {
-              "name__deleted": "location",
-              "in__deleted": "path",
-              "required__deleted": true,
-              "type__deleted": "string",
-              "$ref__added": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
-            }
-          ]
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
         ],
         "responses": {
-          "default": {
+          "200": {
+            "description": "ignore",
             "schema": {
-              "$ref": {
-                "__old": "./network.json#/definitions/CloudError",
-                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-              }
+              "$ref": "#/definitions/AutoApprovedPrivateLinkServicesResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get list of private link service id that can be linked to a private end point with auto approved": {
+            "$ref": "./examples/AutoApprovedPrivateLinkServicesResourceGroupGet.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      },
+      "post__added": {
+        "operationId": "PrivateLinkServices_ListAutoApprovedPrivateLinkServicesByResourceGroup",
+        "description": "Returns all of the private link service ids that can be linked to a Private Endpoint with auto approved in this subscription in this region.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/AutoApprovedPrivateLinkServicesResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get list of private link service id that can be linked to a private end point with auto approved": {
+            "$ref": "./examples/AutoApprovedPrivateLinkServicesResourceGroupGet.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/locations/{location}/availableDelegations": {
-      "get": {
-        "x-ms-pageable__deleted": {
-          "nextLinkName": "nextLink"
-        },
+      "get__deleted": {
+        "operationId": "AvailableResourceGroupDelegations_List",
+        "description": "Gets all of the available subnet delegations for this resource group in this region.",
         "parameters": [
-          [
-            "~",
-            {
-              "name__deleted": "location",
-              "in__deleted": "path",
-              "required__deleted": true,
-              "type__deleted": "string",
-              "$ref__added": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
-            }
-          ]
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
         ],
         "responses": {
-          "default": {
+          "200": {
+            "description": "ignore",
             "schema": {
-              "$ref": {
-                "__old": "./network.json#/definitions/CloudError",
-                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-              }
+              "$ref": "#/definitions/AvailableDelegationsResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get available delegations in the resource group": {
+            "$ref": "./examples/AvailableDelegationsResourceGroupGet.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      },
+      "post__added": {
+        "operationId": "AvailableResourceGroupDelegations_List",
+        "description": "Gets all of the available subnet delegations for this resource group in this region.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/AvailableDelegationsResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get available delegations in the resource group": {
+            "$ref": "./examples/AvailableDelegationsResourceGroupGet.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/locations/{location}/availablePrivateEndpointTypes": {
-      "get": {
-        "x-ms-pageable__deleted": {
-          "nextLinkName": "nextLink"
-        },
+      "get__deleted": {
+        "operationId": "AvailablePrivateEndpointTypes_ListByResourceGroup",
+        "description": "Returns all of the resource types that can be linked to a Private Endpoint in this subscription in this region.",
         "parameters": [
-          [
-            "~",
-            {
-              "name__deleted": "location",
-              "in__deleted": "path",
-              "required__deleted": true,
-              "type__deleted": "string",
-              "$ref__added": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
-            }
-          ]
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
         ],
         "responses": {
-          "default": {
+          "200": {
+            "description": "ignore",
             "schema": {
-              "$ref": {
-                "__old": "./network.json#/definitions/CloudError",
-                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-              }
+              "$ref": "#/definitions/AvailablePrivateEndpointTypesResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get available PrivateEndpoint types in the resource group": {
+            "$ref": "./examples/AvailablePrivateEndpointTypesResourceGroupGet.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      },
+      "post__added": {
+        "operationId": "AvailablePrivateEndpointTypes_ListByResourceGroup",
+        "description": "Returns all of the resource types that can be linked to a Private Endpoint in this subscription in this region.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/AvailablePrivateEndpointTypesResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get available PrivateEndpoint types in the resource group": {
+            "$ref": "./examples/AvailablePrivateEndpointTypesResourceGroupGet.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/locations/{location}/availableServiceAliases": {
-      "get": {
-        "x-ms-pageable__deleted": {
-          "nextLinkName": "nextLink"
-        },
+      "get__deleted": {
+        "operationId": "AvailableServiceAliases_ListByResourceGroup",
+        "description": "Gets all available service aliases for this resource group in this region.",
         "parameters": [
-          [
-            "~",
-            {
-              "name__deleted": "location",
-              "in__deleted": "path",
-              "required__deleted": true,
-              "type__deleted": "string",
-              "$ref__added": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
-            }
-          ]
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
         ],
         "responses": {
-          "default": {
+          "200": {
+            "description": "ignore",
             "schema": {
-              "$ref": {
-                "__old": "./network.json#/definitions/CloudError",
-                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-              }
+              "$ref": "#/definitions/AvailableServiceAliasesResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get available service aliases in the resource group": {
+            "$ref": "./examples/AvailableServiceAliasesListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      },
+      "post__added": {
+        "operationId": "AvailableServiceAliases_ListByResourceGroup",
+        "description": "Gets all available service aliases for this resource group in this region.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/AvailableServiceAliasesResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get available service aliases in the resource group": {
+            "$ref": "./examples/AvailableServiceAliasesListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -6335,13 +6279,7 @@
             }
           ],
           [
-            "~",
-            {
-              "name": {
-                "__old": "parameters",
-                "__new": "body"
-              }
-            }
+            " "
           ]
         ],
         "responses": {
@@ -6392,15 +6330,12 @@
         }
       },
       "put": {
-        "x-ms-long-running-operation-options__deleted": {
-          "final-state-via": "azure-async-operation"
-        },
         "responses": {
           "202": {
             "headers__added": {
-              "Location": {
+              "Azure-AsyncOperation": {
                 "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+                "description": "A link to the status monitor"
               }
             }
           },
@@ -6412,6 +6347,9 @@
               }
             }
           }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-schema__added": "#/definitions/NatGateway"
         }
       },
       "patch": {
@@ -6564,9 +6502,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkInterfaces/{networkInterfaceName}/effectiveNetworkSecurityGroups": {
       "post": {
-        "x-ms-pageable__added": {
-          "nextLinkName": "nextLink"
-        },
         "responses": {
           "202": {
             "headers__added": {
@@ -6589,9 +6524,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkInterfaces/{networkInterfaceName}/effectiveRouteTable": {
       "post": {
-        "x-ms-pageable__added": {
-          "nextLinkName": "nextLink"
-        },
         "responses": {
           "202": {
             "headers__added": {
@@ -12808,9 +12740,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers": {
       "get": {
-        "x-ms-pageable__deleted": {
-          "nextLinkName": "nextLink"
-        },
         "responses": {
           "default": {
             "schema": {
@@ -13853,7 +13782,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/Error",
-                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/Error"
               }
             }
           }
@@ -15924,11 +15853,13 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/generatevpnclientpackage": {
       "post": {
-        "produces__added": [
-          "text/plain",
-          "application/json"
-        ],
         "responses": {
+          "200": {
+            "schema": {
+              "type__deleted": "string",
+              "$ref__added": "#/definitions/stringApplicationJson"
+            }
+          },
           "202": {
             "headers__added": {
               "Location": {
@@ -15950,11 +15881,13 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/generatevpnprofile": {
       "post": {
-        "produces__added": [
-          "text/plain",
-          "application/json"
-        ],
         "responses": {
+          "200": {
+            "schema": {
+              "type__deleted": "string",
+              "$ref__added": "#/definitions/stringApplicationJson"
+            }
+          },
           "202": {
             "headers__added": {
               "Location": {
@@ -16179,11 +16112,13 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getvpnprofilepackageurl": {
       "post": {
-        "produces__added": [
-          "text/plain",
-          "application/json"
-        ],
         "responses": {
+          "200": {
+            "schema": {
+              "type__deleted": "string",
+              "$ref__added": "#/definitions/stringApplicationJson"
+            }
+          },
           "202": {
             "headers__added": {
               "Location": {
@@ -16384,11 +16319,13 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/startPacketCapture": {
       "post": {
-        "produces__added": [
-          "text/plain",
-          "application/json"
-        ],
         "responses": {
+          "200": {
+            "schema": {
+              "type__deleted": "string",
+              "$ref__added": "#/definitions/stringApplicationJson"
+            }
+          },
           "202": {
             "headers__added": {
               "Location": {
@@ -16410,11 +16347,13 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/startSiteFailoverTest": {
       "post": {
-        "produces__added": [
-          "text/plain",
-          "application/json"
-        ],
         "responses": {
+          "200": {
+            "schema": {
+              "type__deleted": "string",
+              "$ref__added": "#/definitions/stringApplicationJson"
+            }
+          },
           "202": {
             "headers": {
               "location__deleted": {
@@ -16439,11 +16378,13 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/stopPacketCapture": {
       "post": {
-        "produces__added": [
-          "text/plain",
-          "application/json"
-        ],
         "responses": {
+          "200": {
+            "schema": {
+              "type__deleted": "string",
+              "$ref__added": "#/definitions/stringApplicationJson"
+            }
+          },
           "202": {
             "headers__added": {
               "Location": {
@@ -16465,11 +16406,13 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/stopSiteFailoverTest": {
       "post": {
-        "produces__added": [
-          "text/plain",
-          "application/json"
-        ],
         "responses": {
+          "200": {
+            "schema": {
+              "type__deleted": "string",
+              "$ref__added": "#/definitions/stringApplicationJson"
+            }
+          },
           "202": {
             "headers": {
               "location__deleted": {
@@ -16494,11 +16437,13 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/supportedvpndevices": {
       "post": {
-        "produces__added": [
-          "text/plain",
-          "application/json"
-        ],
         "responses": {
+          "200": {
+            "schema": {
+              "type__deleted": "string",
+              "$ref__added": "#/definitions/stringApplicationJson"
+            }
+          },
           "default": {
             "schema": {
               "$ref": {
@@ -17689,11 +17634,13 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/startpacketcapture": {
       "post": {
-        "produces__added": [
-          "text/plain",
-          "application/json"
-        ],
         "responses": {
+          "200": {
+            "schema": {
+              "type__deleted": "string",
+              "$ref__added": "#/definitions/stringApplicationJson"
+            }
+          },
           "202": {
             "headers__added": {
               "Location": {
@@ -17715,11 +17662,13 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/stoppacketcapture": {
       "post": {
-        "produces__added": [
-          "text/plain",
-          "application/json"
-        ],
         "responses": {
+          "200": {
+            "schema": {
+              "type__deleted": "string",
+              "$ref__added": "#/definitions/stringApplicationJson"
+            }
+          },
           "202": {
             "headers__added": {
               "Location": {
@@ -17804,11 +17753,13 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{vpnConnectionName}/startpacketcapture": {
       "post": {
-        "produces__added": [
-          "text/plain",
-          "application/json"
-        ],
         "responses": {
+          "200": {
+            "schema": {
+              "type__deleted": "string",
+              "$ref__added": "#/definitions/stringApplicationJson"
+            }
+          },
           "202": {
             "headers__added": {
               "Location": {
@@ -17830,11 +17781,13 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{vpnConnectionName}/stoppacketcapture": {
       "post": {
-        "produces__added": [
-          "text/plain",
-          "application/json"
-        ],
         "responses": {
+          "200": {
+            "schema": {
+              "type__deleted": "string",
+              "$ref__added": "#/definitions/stringApplicationJson"
+            }
+          },
           "202": {
             "headers__added": {
               "Location": {
@@ -17884,11 +17837,13 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}/vpnLinkConnections/{linkConnectionName}/getikesas": {
       "post": {
-        "produces__added": [
-          "text/plain",
-          "application/json"
-        ],
         "responses": {
+          "200": {
+            "schema": {
+              "type__deleted": "string",
+              "$ref__added": "#/definitions/stringApplicationJson"
+            }
+          },
           "202": {
             "headers__added": {
               "Location": {
@@ -18345,24 +18300,6 @@
         }
       }
     },
-    "AuthorizationListResult__deleted": {
-      "type": "object",
-      "description": "[Placeholder] Discription for page model",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "[Placeholder] Discription for value property",
-          "items": {
-            "$ref": "#/definitions/ExpressRouteCircuitAuthorization"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
-        }
-      }
-    },
     "Availability__deleted": {
       "type": "object",
       "description": "Availability of the metric.",
@@ -18707,53 +18644,6 @@
         }
       }
     },
-    "EndpointServicesListResult__deleted": {
-      "type": "object",
-      "description": "[Placeholder] Discription for page model",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "[Placeholder] Discription for value property",
-          "items": {
-            "$ref": "#/definitions/EndpointServiceResult"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
-        }
-      }
-    },
-    "Error__deleted": {
-      "type": "object",
-      "description": "Common error representation.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "Error code."
-        },
-        "message": {
-          "type": "string",
-          "description": "Error message."
-        },
-        "target": {
-          "type": "string",
-          "description": "Error target."
-        },
-        "details": {
-          "type": "array",
-          "description": "Error details.",
-          "items": {
-            "$ref": "#/definitions/ErrorDetails"
-          }
-        },
-        "innerError": {
-          "type": "string",
-          "description": "Inner error message."
-        }
-      }
-    },
     "Filters__deleted": {
       "type": "array",
       "description": "Describers the filters to filter response by",
@@ -18833,38 +18723,6 @@
         }
       }
     },
-    "IDPSQueryObject__deleted": {
-      "type": "object",
-      "description": "Will describe the query to run against the IDPS signatures DB",
-      "properties": {
-        "filters": {
-          "$ref": "#/definitions/Filters",
-          "type": "object",
-          "description": "Contain all filters names and values"
-        },
-        "search": {
-          "type": "string",
-          "description": "Search term in all columns"
-        },
-        "orderBy": {
-          "$ref": "#/definitions/OrderBy",
-          "type": "object",
-          "description": "Column to sort response by"
-        },
-        "resultsPerPage": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of the results to return in each page",
-          "minimum": 1,
-          "maximum": 1000
-        },
-        "skip": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of records matching the filter to skip"
-        }
-      }
-    },
     "IpGroups__deleted": {
       "type": "array",
       "description": "List of IpGroups associated with azure firewall.",
@@ -18915,24 +18773,6 @@
         }
       }
     },
-    "LoadBalancerFrontendIPConfigurationListResult__deleted": {
-      "type": "object",
-      "description": "[Placeholder] Discription for page model",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "[Placeholder] Discription for value property",
-          "items": {
-            "$ref": "#/definitions/FrontendIPConfiguration"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
-        }
-      }
-    },
     "LoadBalancerLoadBalancingRuleListResult__deleted": {
       "type": "object",
       "description": "[Placeholder] Discription for page model",
@@ -18942,42 +18782,6 @@
           "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/LoadBalancingRule"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
-        }
-      }
-    },
-    "LoadBalancerOutboundRuleListResult__deleted": {
-      "type": "object",
-      "description": "[Placeholder] Discription for page model",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "[Placeholder] Discription for value property",
-          "items": {
-            "$ref": "#/definitions/OutboundRule"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
-        }
-      }
-    },
-    "LoadBalancerProbeListResult__deleted": {
-      "type": "object",
-      "description": "[Placeholder] Discription for page model",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "[Placeholder] Discription for value property",
-          "items": {
-            "$ref": "#/definitions/Probe"
           }
         },
         "nextLink": {
@@ -19243,24 +19047,6 @@
         "x-ms-identifiers": []
       }
     },
-    "PerimeterAssociableResourcesListResult__deleted": {
-      "type": "object",
-      "description": "[Placeholder] Discription for page model",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "[Placeholder] Discription for value property",
-          "items": {
-            "$ref": "#/definitions/PerimeterAssociableResource"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
-        }
-      }
-    },
     "PortsList__deleted": {
       "type": "string",
       "description": "Describes a port, port range, or negation of a port"
@@ -19479,6 +19265,10 @@
         "networkGroupId"
       ]
     },
+    "Azure.ResourceManager.ArmAcceptedLroResponse<\"Resource operation accepted.\", Azure.ResourceManager.Legacy.{ location: string, retryAfter: int32 }>__added": {
+      "type": "object",
+      "description": "Resource operation accepted."
+    },
     "Azure.ResourceManager.ArmAcceptedLroResponse<\"Resource operation accepted.\", Azure.ResourceManager.{ location: string, retryAfter: int32 }>__added": {
       "type": "object",
       "description": "Resource operation accepted."
@@ -19541,19 +19331,6 @@
       "properties": {
         "body": {
           "$ref": "#/definitions/AzureReachabilityReport",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<BackendAddressInboundNatRulePortMappings>__added": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/BackendAddressInboundNatRulePortMappings",
           "description": "The body type of the operation request or response."
         }
       },
@@ -20061,7 +19838,7 @@
         "body"
       ]
     },
-    "Azure.ResourceManager.ArmResponse<string>__added": {
+    "Azure.ResourceManager.ArmResponse<stringApplicationJson>__added": {
       "type": "object",
       "description": "Azure operation completed successfully.",
       "properties": {
@@ -20243,48 +20020,6 @@
         "networkGroupId"
       ]
     },
-    "EndpointServiceResultListResult__added": {
-      "type": "object",
-      "description": "[Placeholder] Discription for page model",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "[Placeholder] Discription for value property",
-          "items": {
-            "$ref": "#/definitions/EndpointServiceResult"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "ExpressRouteCircuitAuthorizationListResult__added": {
-      "type": "object",
-      "description": "[Placeholder] Discription for page model",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "[Placeholder] Discription for value property",
-          "items": {
-            "$ref": "#/definitions/ExpressRouteCircuitAuthorization"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "ExpressRouteGatewayPropertiesAutoScaleConfiguration__added": {
       "type": "object",
       "description": "Configuration for auto scaling.",
@@ -20336,27 +20071,6 @@
         }
       }
     },
-    "FrontendIPConfigurationListResult__added": {
-      "type": "object",
-      "description": "[Placeholder] Discription for page model",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "[Placeholder] Discription for value property",
-          "items": {
-            "$ref": "#/definitions/FrontendIPConfiguration"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "HttpConfiguration__added": {
       "type": "object",
       "description": "HTTP configuration of the connectivity check.",
@@ -20400,39 +20114,6 @@
         "value": {
           "type": "string",
           "description": "The value in HTTP header."
-        }
-      }
-    },
-    "IdpsQueryObject__added": {
-      "type": "object",
-      "description": "Will describe the query to run against the IDPS signatures DB",
-      "properties": {
-        "filters": {
-          "type": "array",
-          "description": "Contain all filters names and values",
-          "items": {
-            "$ref": "#/definitions/FilterItems"
-          }
-        },
-        "search": {
-          "type": "string",
-          "description": "Search term in all columns"
-        },
-        "orderBy": {
-          "$ref": "#/definitions/OrderBy",
-          "description": "Column to sort response by"
-        },
-        "resultsPerPage": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of the results to return in each page",
-          "minimum": 1,
-          "maximum": 1000
-        },
-        "skip": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of records matching the filter to skip"
         }
       }
     },
@@ -20549,48 +20230,6 @@
         "value"
       ]
     },
-    "OutboundRuleListResult__added": {
-      "type": "object",
-      "description": "[Placeholder] Discription for page model",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "[Placeholder] Discription for value property",
-          "items": {
-            "$ref": "#/definitions/OutboundRule"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "PerimeterAssociableResourceListResult__added": {
-      "type": "object",
-      "description": "[Placeholder] Discription for page model",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "[Placeholder] Discription for value property",
-          "items": {
-            "$ref": "#/definitions/PerimeterAssociableResource"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "PolicySettingsLogScrubbing__added": {
       "type": "object",
       "description": "To scrub sensitive log fields",
@@ -20632,27 +20271,6 @@
         {
           "$ref": "#/definitions/ResourceSet"
         }
-      ]
-    },
-    "ProbeListResult__added": {
-      "type": "object",
-      "description": "[Placeholder] Discription for page model",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "[Placeholder] Discription for value property",
-          "items": {
-            "$ref": "#/definitions/Probe"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "ResourceNavigationLinkListResult__added": {
@@ -20734,6 +20352,9 @@
       "required": [
         "value"
       ]
+    },
+    "stringApplicationJson__added": {
+      "type": "string"
     },
     "ActiveBaseSecurityAdminRule": {
       "properties": {
@@ -22603,6 +22224,11 @@
           }
         }
       }
+    },
+    "AuthorizationListResult": {
+      "required__added": [
+        "value"
+      ]
     },
     "AuthorizationPropertiesFormat": {
       "properties": {
@@ -24572,6 +24198,11 @@
         ]
       ]
     },
+    "EndpointServicesListResult": {
+      "required__added": [
+        "value"
+      ]
+    },
     "ErrorResponse": {
       "properties": {
         "error": {
@@ -26342,6 +25973,23 @@
         }
       }
     },
+    "IDPSQueryObject": {
+      "properties": {
+        "filters": {
+          "$ref__deleted": "#/definitions/Filters",
+          "items__added": {
+            "$ref": "#/definitions/FilterItems"
+          },
+          "type": {
+            "__old": "object",
+            "__new": "array"
+          }
+        },
+        "orderBy": {
+          "type__deleted": "object"
+        }
+      }
+    },
     "IPConfiguration": {
       "allOf": [
         [
@@ -27068,7 +26716,22 @@
         }
       }
     },
+    "LoadBalancerFrontendIPConfigurationListResult": {
+      "required__added": [
+        "value"
+      ]
+    },
     "LoadBalancerListResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "LoadBalancerOutboundRuleListResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "LoadBalancerProbeListResult": {
       "required__added": [
         "value"
       ]
@@ -28475,6 +28138,25 @@
         ]
       ]
     },
+    "NetworkWatcherListResult": {
+      "description": {
+        "__old": "Response for ListNetworkWatchers API service call.",
+        "__new": "[Placeholder] Discription for page model"
+      },
+      "properties": {
+        "nextLink__added": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        },
+        "value": {
+          "description": {
+            "__old": "List of network watcher resources.",
+            "__new": "[Placeholder] Discription for value property"
+          }
+        }
+      }
+    },
     "NetworkWatcherPropertiesFormat": {
       "properties": {
         "provisioningState": {
@@ -29096,6 +28778,11 @@
           }
         }
       }
+    },
+    "PerimeterAssociableResourcesListResult": {
+      "required__added": [
+        "value"
+      ]
     },
     "PolicySettings": {
       "properties": {

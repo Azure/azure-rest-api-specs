@@ -59,7 +59,8 @@ interface ExpressRouteCrossConnections {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ExpressRouteCrossConnection,
-    Response = ArmResourceUpdatedResponse<ExpressRouteCrossConnection>
+    Response = ArmResourceUpdatedResponse<ExpressRouteCrossConnection> &
+      ArmAsyncOperationHeader
   >;
 
   /**
@@ -93,7 +94,7 @@ interface ExpressRouteCrossConnections {
   /**
    * Gets the currently advertised ARP table associated with the express route cross connection in a resource group.
    */
-  @list
+  @post
   listArpTable is ArmResourceRead<
     ExpressRouteCrossConnection,
     Parameters = {
@@ -111,13 +112,13 @@ interface ExpressRouteCrossConnections {
       @segment("arpTables")
       devicePath: string;
     },
-    Response = ArmResponse<ExpressRouteCircuitsArpTableListResult>
+    Response = ArmResponse<ExpressRouteCircuitsArpTableListResult> | ArmAcceptedLroResponse
   >;
 
   /**
    * Gets the route table summary associated with the express route cross connection in a resource group.
    */
-  @list
+  @post
   listRoutesTableSummary is ArmResourceRead<
     ExpressRouteCrossConnection,
     Parameters = {
@@ -135,13 +136,13 @@ interface ExpressRouteCrossConnections {
       @segment("routeTablesSummary")
       devicePath: string;
     },
-    Response = ArmResponse<ExpressRouteCrossConnectionsRoutesTableSummaryListResult>
+    Response = ArmResponse<ExpressRouteCrossConnectionsRoutesTableSummaryListResult> | ArmAcceptedLroResponse
   >;
 
   /**
    * Gets the currently advertised routes table associated with the express route cross connection in a resource group.
    */
-  @list
+  @post
   listRoutesTable is ArmResourceRead<
     ExpressRouteCrossConnection,
     Parameters = {
@@ -159,7 +160,7 @@ interface ExpressRouteCrossConnections {
       @segment("routeTables")
       devicePath: string;
     },
-    Response = ArmResponse<ExpressRouteCircuitsRoutesTableListResult>
+    Response = ArmResponse<ExpressRouteCircuitsRoutesTableListResult> | ArmAcceptedLroResponse
   >;
 
   /**
@@ -182,7 +183,7 @@ interface ExpressRouteCrossConnections {
   @delete
   delete is ExpressRouteCrossConnectionPeeringOps.DeleteWithoutOkAsync<
     ExpressRouteCrossConnection,
-    Response = OkResponse | NoContentResponse
+    Response = OkResponse | ArmAcceptedLroResponse | NoContentResponse
   >;
 
   /**
@@ -202,6 +203,7 @@ interface ExpressRouteCrossConnections {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ExpressRouteCrossConnectionPeerings_CreateOrUpdate")
   @put
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   expressRouteCrossConnectionPeeringsCreateOrUpdate is ExpressRouteCrossConnectionPeeringOps.CreateOrUpdateAsync<
     ExpressRouteCrossConnection,
     Response = ArmResponse<ExpressRouteCrossConnectionPeering> | ArmResourceCreatedResponse<ExpressRouteCrossConnectionPeering>,

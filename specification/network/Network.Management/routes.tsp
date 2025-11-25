@@ -25,7 +25,8 @@ interface ApplicationGatewaysOperationGroup {
   @action("applicationGatewayAvailableServerVariables")
   listAvailableServerVariables is ArmProviderActionSync<
     Response = ApplicationGatewayAvailableServerVariablesResult,
-    Scope = SubscriptionActionScope
+    Scope = SubscriptionActionScope,
+    Error = Error
   >;
 
   /**
@@ -38,7 +39,8 @@ interface ApplicationGatewaysOperationGroup {
   @action("applicationGatewayAvailableRequestHeaders")
   listAvailableRequestHeaders is ArmProviderActionSync<
     Response = ApplicationGatewayAvailableRequestHeadersResult,
-    Scope = SubscriptionActionScope
+    Scope = SubscriptionActionScope,
+    Error = Error
   >;
 
   /**
@@ -51,7 +53,8 @@ interface ApplicationGatewaysOperationGroup {
   @action("applicationGatewayAvailableResponseHeaders")
   listAvailableResponseHeaders is ArmProviderActionSync<
     Response = ApplicationGatewayAvailableResponseHeadersResult,
-    Scope = SubscriptionActionScope
+    Scope = SubscriptionActionScope,
+    Error = Error
   >;
 
   /**
@@ -64,7 +67,8 @@ interface ApplicationGatewaysOperationGroup {
   @action("applicationGatewayAvailableWafRuleSets")
   listAvailableWafRuleSets is ArmProviderActionSync<
     Response = ApplicationGatewayAvailableWafRuleSetsResult,
-    Scope = SubscriptionActionScope
+    Scope = SubscriptionActionScope,
+    Error = CloudError
   >;
 }
 
@@ -76,7 +80,7 @@ interface AvailableDelegationsOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AvailableDelegations_List")
   @autoRoute
-  @get
+  @list
   @action("availableDelegations")
   list is ArmProviderActionSync<
     Response = AvailableDelegationsResult,
@@ -93,7 +97,7 @@ interface AvailableResourceGroupDelegationsOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AvailableResourceGroupDelegations_List")
   @autoRoute
-  @get
+  @list
   @action("availableDelegations")
   list is ArmProviderActionSync<
     Response = AvailableDelegationsResult,
@@ -110,7 +114,7 @@ interface AvailableServiceAliasesOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AvailableServiceAliases_List")
   @autoRoute
-  @get
+  @list
   @action("availableServiceAliases")
   list is ArmProviderActionSync<
     Response = AvailableServiceAliasesResult,
@@ -124,7 +128,7 @@ interface AvailableServiceAliasesOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AvailableServiceAliases_ListByResourceGroup")
   @autoRoute
-  @get
+  @list
   @action("availableServiceAliases")
   listByResourceGroup is ArmProviderActionSync<
     Response = AvailableServiceAliasesResult,
@@ -142,6 +146,7 @@ interface AzureFirewallFqdnTagsOperationGroup {
   @operationId("AzureFirewallFqdnTags_ListAll")
   @autoRoute
   @get
+  @list
   @action("azureFirewallFqdnTags")
   listAll is ArmProviderActionSync<
     Response = ResourceListResult<AzureFirewallFqdnTag>,
@@ -260,12 +265,13 @@ interface AvailableEndpointServicesOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AvailableEndpointServices_List")
   @autoRoute
-  @get
+  @list
   @action("virtualNetworkAvailableEndpointServices")
   list is ArmProviderActionSync<
-    Response = ResourceListResult<EndpointServiceResult>,
+    Response = EndpointServicesListResult,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter
+    Parameters = LocationParameter,
+    Error = CloudError
   >;
 }
 
@@ -277,7 +283,7 @@ interface ExpressRouteServiceProvidersOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ExpressRouteServiceProviders_List")
   @autoRoute
-  @get
+  @list
   @action("expressRouteServiceProviders")
   list is ArmProviderActionSync<
     Response = ResourceListResult<ExpressRouteServiceProvider>,
@@ -292,14 +298,14 @@ interface LoadBalancersOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("LoadBalancers_SwapPublicIpAddresses")
-  @autoRoute
-  @action("setLoadBalancerFrontendPublicIpAddresses")
-  swapPublicIpAddresses is ArmProviderActionAsync<
-    Request = LoadBalancerVipSwapRequest,
-    Response = void,
-    Scope = SubscriptionActionScope,
-    Parameters = LocationParameter
-  >;
+  @post
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/setLoadBalancerFrontendPublicIpAddresses")
+  swapPublicIpAddresses(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...LocationResourceParameter,
+    @body body: LoadBalancerVipSwapRequest,
+  ): OkResponse | ArmAcceptedLroResponse | CloudError;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
@@ -310,10 +316,10 @@ interface NetworkSecurityPerimeterAssociableResourceTypesOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("NetworkSecurityPerimeterAssociableResourceTypes_List")
   @autoRoute
-  @get
+  @list
   @action("perimeterAssociableResourceTypes")
   list is ArmProviderActionSync<
-    Response = ResourceListResult<PerimeterAssociableResource>,
+    Response = PerimeterAssociableResourcesListResult,
     Scope = SubscriptionActionScope,
     Parameters = LocationParameter
   >;
@@ -349,7 +355,7 @@ interface NetworkSecurityPerimeterServiceTagsOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("NetworkSecurityPerimeterServiceTags_List")
   @autoRoute
-  @get
+  @list
   @action("nspServiceTags")
   list is ArmProviderActionSync<
     Response = NspServiceTagsListResult,
@@ -379,7 +385,7 @@ interface AvailablePrivateEndpointTypesOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AvailablePrivateEndpointTypes_ListByResourceGroup")
   @autoRoute
-  @get
+  @list
   @action("availablePrivateEndpointTypes")
   listByResourceGroup is ArmProviderActionSync<
     Response = AvailablePrivateEndpointTypesResult,
@@ -421,7 +427,7 @@ interface PrivateLinkServicesOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("PrivateLinkServices_ListAutoApprovedPrivateLinkServices")
   @autoRoute
-  @get
+  @list
   @action("autoApprovedPrivateLinkServices")
   listAutoApprovedPrivateLinkServices is ArmProviderActionSync<
     Response = AutoApprovedPrivateLinkServicesResult,
@@ -434,7 +440,7 @@ interface PrivateLinkServicesOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("PrivateLinkServices_ListAutoApprovedPrivateLinkServicesByResourceGroup")
   @autoRoute
-  @get
+  @list
   @action("autoApprovedPrivateLinkServices")
   listAutoApprovedPrivateLinkServicesByResourceGroup is ArmProviderActionSync<
     Response = AutoApprovedPrivateLinkServicesResult,
@@ -484,7 +490,7 @@ interface ServiceTagInformationOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ServiceTagInformation_List")
   @autoRoute
-  @get
+  @list
   @action("serviceTagDetails")
   list is ArmProviderActionSync<
     Response = ServiceTagInformationListResult,
@@ -515,11 +521,16 @@ interface UsagesOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Usages_List")
   @autoRoute
-  @get
+  @list
   @action("usages")
   list is ArmProviderActionSync<
     Response = UsagesListResult,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter
+    Parameters = LocationParameter,
+    Error = CloudError
   >;
 }
+
+@@Azure.ClientGenerator.Core.clientName(PrivateLinkServicesOperationGroup.checkPrivateLinkServiceVisibilityByResourceGroup::parameters.body,
+  "parameters"
+);

@@ -99,7 +99,7 @@ interface VpnSiteLinkConnections {
   getIkeSas is VpnSiteLinkConnectionsOps.ActionAsync<
     VpnSiteLinkConnection,
     void,
-    ArmResponse<string>
+    ArmResponse<stringApplicationJson>
   >;
 }
 

@@ -136,7 +136,8 @@ interface PrivateEndpoints {
   @get
   privateDnsZoneGroupsList is PrivateDnsZoneGroupOps.List<
     PrivateEndpoint,
-    Response = ArmResponse<PrivateDnsZoneGroupListResult>
+    Response = ArmResponse<PrivateDnsZoneGroupListResult>,
+    OverrideErrorType = Error
   >;
 }
 

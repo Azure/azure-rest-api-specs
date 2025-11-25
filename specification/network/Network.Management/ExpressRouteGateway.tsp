@@ -100,6 +100,7 @@ interface ExpressRouteGateways {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ExpressRouteConnections_CreateOrUpdate")
   @put
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   expressRouteConnectionsCreateOrUpdate is ExpressRouteConnectionOps.CreateOrUpdateAsync<
     ExpressRouteGateway,
     Response = ArmResponse<ExpressRouteConnection> | ArmResourceCreatedResponse<ExpressRouteConnection>,
@@ -125,7 +126,7 @@ interface ExpressRouteGateways {
   @delete
   expressRouteConnectionsDelete is ExpressRouteConnectionOps.DeleteWithoutOkAsync<
     ExpressRouteGateway,
-    Response = OkResponse | NoContentResponse
+    Response = OkResponse | ArmAcceptedLroResponse | NoContentResponse
   >;
 
   /**

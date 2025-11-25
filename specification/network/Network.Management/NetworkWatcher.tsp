@@ -82,7 +82,8 @@ interface NetworkWatchers {
    */
   listAll is ArmListBySubscription<
     NetworkWatcher,
-    Response = ArmResponse<NetworkWatcherListResult>
+    Response = ArmResponse<NetworkWatcherListResult>,
+    Error = ErrorResponse
   >;
 
   /**

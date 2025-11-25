@@ -101,7 +101,8 @@ interface ManagementGroupNetworkManagerConnections {
    */
   get is Extension.Read<
     Extension.ManagementGroup<"managementGroupId">,
-    NetworkManagerConnection
+    NetworkManagerConnection,
+    Error = CloudError
   >;
 
   /**
@@ -109,7 +110,8 @@ interface ManagementGroupNetworkManagerConnections {
    */
   createOrUpdate is Extension.CreateOrReplaceSync<
     Extension.ManagementGroup<"managementGroupId">,
-    NetworkManagerConnection
+    NetworkManagerConnection,
+    Error = CloudError
   >;
 
   /**
@@ -117,7 +119,8 @@ interface ManagementGroupNetworkManagerConnections {
    */
   delete is Extension.DeleteSync<
     Extension.ManagementGroup<"managementGroupId">,
-    NetworkManagerConnection
+    NetworkManagerConnection,
+    Error = CloudError
   >;
 
   /**
@@ -125,7 +128,23 @@ interface ManagementGroupNetworkManagerConnections {
    */
   list is Extension.ListByTarget<
     Extension.ManagementGroup<"managementGroupId">,
-    NetworkManagerConnection
+    NetworkManagerConnection,
+    Parameters = {
+      /**
+       * An optional query parameter which specifies the maximum number of records to be returned by the server.
+       */
+      @maxValue(20)
+      @minValue(1)
+      @query("$top")
+      $top?: int32;
+
+      /**
+       * SkipToken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skipToken parameter that specifies a starting point to use for subsequent calls.
+       */
+      @query("$skipToken")
+      $skipToken?: string;
+    },
+    Error = CloudError
   >;
 }
 

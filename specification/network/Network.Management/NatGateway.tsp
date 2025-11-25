@@ -54,7 +54,7 @@ interface NatGateways {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     NatGateway,
-    Response = ArmResourceUpdatedResponse<NatGateway> | ArmResourceCreatedResponse<NatGateway> | ArmAcceptedLroResponse
+    Response = ArmResourceUpdatedResponse<NatGateway> | ArmResourceCreatedResponse<NatGateway> | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader>
   >;
 
   /**

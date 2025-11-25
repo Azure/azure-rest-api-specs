@@ -40,7 +40,10 @@ interface OutboundRules {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("LoadBalancerOutboundRules_List")
-  list is ArmResourceListByParent<OutboundRule>;
+  list is ArmResourceListByParent<
+    OutboundRule,
+    Response = LoadBalancerOutboundRuleListResult
+  >;
 }
 
 @@doc(OutboundRule.name, "The name of the outbound rule.");

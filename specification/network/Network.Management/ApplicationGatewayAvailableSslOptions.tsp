@@ -55,7 +55,8 @@ interface ApplicationGatewayAvailableSslOptionsOperationGroup {
   @operationId("ApplicationGateways_ListAvailableSslOptions")
   listAvailableSslOptions is ArmResourceRead<
     ApplicationGatewayAvailableSslOptions,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    Error = CloudError
   >;
 
   /**
@@ -70,7 +71,8 @@ interface ApplicationGatewayAvailableSslOptionsOperationGroup {
     ApplicationGatewayAvailableSslOptions,
     void,
     ArmResponse<ApplicationGatewayAvailableSslPredefinedPolicies>,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    Error = CloudError
   >;
 
   /**
@@ -81,7 +83,8 @@ interface ApplicationGatewayAvailableSslOptionsOperationGroup {
   @get
   getSslPredefinedPolicy is ApplicationGatewayAvailableSslOptionsOps.Read<
     ApplicationGatewayAvailableSslOptions,
-    Response = ArmResponse<ApplicationGatewaySslPredefinedPolicy>
+    Response = ArmResponse<ApplicationGatewaySslPredefinedPolicy>,
+    OverrideErrorType = CloudError
   >;
 }
 
