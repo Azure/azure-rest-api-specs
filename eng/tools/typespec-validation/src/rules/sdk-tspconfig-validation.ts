@@ -4,7 +4,7 @@
 import { join } from "path";
 import { Suppression } from "suppressions";
 import { parse as yamlParse } from "yaml";
-import { RuleResult } from "../rule-result.js";
+import { RuleResult, RuleFailureType } from "../rule-result.js";
 import { Rule } from "../rule.js";
 import { fileExists, getSuppressions, readTspConfig } from "../utils.js";
 
@@ -26,6 +26,7 @@ export abstract class TspconfigSubRuleBase {
       return this.createFailedResult(
         `Failed to find ${join(folder, "tspconfig.yaml")}`,
         "Please add tspconfig.yaml",
+        RuleFailureType.NotFind,
       );
 
     let config = undefined;
@@ -36,6 +37,7 @@ export abstract class TspconfigSubRuleBase {
       return this.createFailedResult(
         `Failed to parse ${join(folder, "tspconfig.yaml")}`,
         "Please add tspconfig.yaml.",
+        RuleFailureType.ParseError,
       );
     }
 
@@ -68,9 +70,10 @@ export abstract class TspconfigSubRuleBase {
     }
   }
 
-  protected createFailedResult(error: string, action: string): RuleResult {
+  protected createFailedResult(error: string, action: string, type: RuleFailureType): RuleResult {
     return {
       success: false,
+      type: type,
       errorOutput: `- ${error}. ${action}.`,
     };
   }
@@ -90,12 +93,14 @@ class TspconfigParameterSubRuleBase extends TspconfigSubRuleBase {
       return this.createFailedResult(
         `Failed to find "parameters.${this.keyToValidate}.default" with expected value "${this.expectedValue}"`,
         `Please add "parameters.${this.keyToValidate}.default" with expected value "${this.expectedValue}".`,
+        RuleFailureType.NotFind,
       );
 
     if (!this.validateValue(parameter, this.expectedValue))
       return this.createFailedResult(
         `The value of parameters.${this.keyToValidate}.default "${parameter}" does not match "${this.expectedValue}"`,
         `Please update the value of "parameters.${this.keyToValidate}.default" to match "${this.expectedValue}".`,
+        RuleFailureType.Mismatch,
       );
 
     return { success: true };
@@ -205,6 +210,7 @@ class TspconfigEmitterOptionsSubRuleBase extends TspconfigSubRuleBase {
       return this.createFailedResult(
         `Failed to find "options.${this.emitterName}.${this.keyToValidate}" with expected value "${this.expectedValue}"`,
         `Please add "options.${this.emitterName}.${this.keyToValidate}" with expected value "${this.expectedValue}"`,
+        RuleFailureType.NotFind,
       );
 
     let actualValue = option as unknown as undefined | string | boolean;
@@ -216,6 +222,7 @@ class TspconfigEmitterOptionsSubRuleBase extends TspconfigSubRuleBase {
         return this.createFailedResult(
           error,
           `Please define the variable in your configuration or use a direct value`,
+          RuleFailureType.Mismatch,
         );
       }
       actualValue = resolved;
@@ -225,6 +232,7 @@ class TspconfigEmitterOptionsSubRuleBase extends TspconfigSubRuleBase {
       return this.createFailedResult(
         `The value of options.${this.emitterName}.${this.keyToValidate} "${actualValue}" does not match "${this.expectedValue}"`,
         `Please update the value of "options.${this.emitterName}.${this.keyToValidate}" to match "${this.expectedValue}"`,
+        RuleFailureType.Mismatch,
       );
 
     return { success: true };
@@ -254,6 +262,7 @@ class TspconfigEmitterOptionsEmitterOutputDirSubRuleBase extends TspconfigEmitte
       return this.createFailedResult(
         `Failed to find "options.${this.emitterName}.${this.keyToValidate}"`,
         `Please add "options.${this.emitterName}.${this.keyToValidate}" with a path matching the SDK naming convention "${this.expectedValue}"`,
+        RuleFailureType.NotFind,
       );
 
     const actualValue = option as unknown as undefined | string | boolean;
@@ -261,6 +270,7 @@ class TspconfigEmitterOptionsEmitterOutputDirSubRuleBase extends TspconfigEmitte
       return this.createFailedResult(
         `The value of options.${this.emitterName}.${this.keyToValidate} "${actualValue}" must be a string`,
         `Please update the value of "options.${this.emitterName}.${this.keyToValidate}" to be a string path`,
+        RuleFailureType.TypeError,
       );
     }
 
@@ -307,6 +317,7 @@ class TspconfigEmitterOptionsEmitterOutputDirSubRuleBase extends TspconfigEmitte
         return this.createFailedResult(
           error,
           `Please define the variable in your configuration or use a direct path value`,
+          RuleFailureType.Mismatch,
         );
       }
       pathToValidate = resolved;
@@ -316,6 +327,7 @@ class TspconfigEmitterOptionsEmitterOutputDirSubRuleBase extends TspconfigEmitte
       return this.createFailedResult(
         `The path part "${pathToValidate}" in options.${this.emitterName}.${this.keyToValidate} does not match the required format "${this.expectedValue}"`,
         `Please update the emitter-output-dir path to follow the SDK naming convention`,
+        RuleFailureType.Mismatch,
       );
 
     return { success: true };
@@ -509,6 +521,7 @@ export class TspConfigGoModuleMatchPatternSubRule extends TspconfigEmitterOption
       return this.createFailedResult(
         `Neither "options.${this.emitterName}.module" nor "options.${this.emitterName}.containing-module" is defined`,
         `Please add either "options.${this.emitterName}.module" or "options.${this.emitterName}.containing-module" with a value matching the pattern "${this.expectedValue}"`,
+        RuleFailureType.NotFind,
       );
     }
     if (module === undefined) return { success: true };
@@ -531,6 +544,7 @@ export class TspConfigGoContainingModuleMatchPatternSubRule extends TspconfigEmi
       return this.createFailedResult(
         `Neither "options.${this.emitterName}.module" nor "options.${this.emitterName}.containing-module" is defined`,
         `Please add either "options.${this.emitterName}.module" or "options.${this.emitterName}.containing-module" with a value matching the pattern "${this.expectedValue}"`,
+        RuleFailureType.NotFind,
       );
     }
     if (containingModule === undefined) return { success: true };
@@ -845,7 +859,7 @@ export class SdkTspConfigValidationRule implements Rule {
           (emitterName === "@azure-typespec/http-client-csharp" ||
             emitterName === "@azure-typespec/http-client-csharp-mgmt") &&
           isSubRuleSuccess === false &&
-          result.errorOutput?.includes("Failed to find")
+          result.type === RuleFailureType.NotFind
         ) {
           console.warn(
             `Validation on option "${emitterOptionSubRule.getPathOfKeyToValidate()}" in "${emitterName}" is skipped because the option is not configured.`,
