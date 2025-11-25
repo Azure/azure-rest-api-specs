@@ -93,3 +93,7 @@ interface ContentUnderstandingClient {
   "getAnalyzers",
   "csharp"
 );
+
+// .NET-specific naming: rename ContentCategoryDefinition to avoid AZC0031 analyzer warning
+// Also do this for all languages to keep consistency across SDKs.
+@@clientName(ContentCategoryDefinition, "ContentCategory");
