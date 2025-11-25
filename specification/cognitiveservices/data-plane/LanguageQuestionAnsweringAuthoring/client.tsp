@@ -83,16 +83,19 @@ interface QuestionAnsweringAuthoringClientOperations {
 @@clientName(ExportQueryParameters.format, "fileFormat", "python");
 @@clientName(ImportQueryParameters.format, "fileFormat", "python");
 @@clientName(AssestKind, "AssetKind");
-@@clientName(Assets, "QnaAssets", "csharp");
-@@clientName(Error, "QnaAuthoringError", "csharp");
-@@clientName(ErrorCode, "QnaAuthoringErrorCode", "csharp");
+@@clientName(Assets, "QuestionAnsweringAuthoringAssets", "csharp");
+@@clientName(jobStatus, "QuestionAnsweringAuthoringJobStatus", "csharp");
+@@clientName(QnaDialog, "QuestionAnsweringAuthoringDialog", "csharp");
+@@clientName(QnaPrompt, "QuestionAnsweringAuthoringPrompt", "csharp");
+@@clientName(QnaPrompt.qna, "QnaRecord", "csharp");
+@@clientName(QnaRecord, "QuestionAnsweringAuthoringRecord", "csharp");
+@@clientName(QnaSourceRecord,
+  "QuestionAnsweringAuthoringSourceRecord",
+  "csharp"
+);
 @@clientName(format, "FileFormat", "csharp");
 @@clientName(ImportQnaRecord.lastUpdatedDateTime, "LastUpdated", "csharp");
-@@clientName(InnerErrorCode, "QnaAuthoringInnerErrorCode", "csharp");
-@@clientName(InnerErrorModel, "QnaAuthoringInnerErrorModel", "csharp");
-@@clientName(jobStatus, "QnaAuthoringJobStatus", "csharp");
 @@clientName(ProjectDeployment.lastDeployedDateTime, "LastDeployed", "csharp");
-@@clientName(QnaPrompt.qna, "QnaRecord", "csharp");
 @@clientName(QnaRecord.activeLearningSuggestions,
   "activeLearningSuggestionClusters ",
   "csharp"
