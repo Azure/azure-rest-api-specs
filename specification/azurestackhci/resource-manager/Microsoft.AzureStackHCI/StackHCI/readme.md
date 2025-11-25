@@ -141,7 +141,10 @@ suppressions:
       - arcSettings.json
       - hci.json
     where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/updates/{updateName}"].patch
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/updates/{updateName}"].patch.parameters["schema"]
+
+      $.paths["/providers/Microsoft.BareMetal/locations/{location}/utilization"].get.responses["200"].schema.properties
+
 
   - code: PostResponseCodes
     reason: already used in GA api version, fixing it will cause breaking change
@@ -206,6 +209,11 @@ suppressions:
       - updates.json
       - updateRuns.json
       - updateSummaries.json
+      - hci.json
+    where:
+      - $.definitions.Update
+      - $.definitions.UpdateRun
+      - $.definitions.UpdateSummaries
 
   - code: AvoidAdditionalProperties
     reason: already used in GA api version, fixing it will cause breaking change
