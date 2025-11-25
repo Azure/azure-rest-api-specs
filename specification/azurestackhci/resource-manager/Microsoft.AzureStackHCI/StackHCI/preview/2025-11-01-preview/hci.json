@@ -4972,13 +4972,6 @@
       "type": "object",
       "description": "ArcSetting properties.",
       "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state of the ArcSetting proxy resource.",
@@ -5933,10 +5926,6 @@
           "type": "string",
           "description": "Specify the fileshare path for the local witness for your Azure Stack HCI cluster."
         },
-        "witnessAuthenticationMode": {
-          "type": "string",
-          "description": "The authentication mode for the cluster witness. An example value 'ManagedIdentity'."
-        },
         "cloudAccountName": {
           "type": "string",
           "description": "Specify the Azure Storage account name for cloud witness for your Azure Stack HCI cluster."
@@ -6058,10 +6047,6 @@
         "hostNetwork": {
           "$ref": "#/definitions/DeploymentHostNetwork",
           "description": "HostNetwork config to deploy AzureStackHCI Cluster."
-        },
-        "cloudEnvironment": {
-          "type": "string",
-          "description": "Cloud Environment of the cluster. (e.g. AzurePublic, ALDO )"
         },
         "isManagementCluster": {
           "type": "boolean",
@@ -6239,7 +6224,8 @@
         },
         "credentialGuardEnforced": {
           "type": "boolean",
-          "description": "When set to true, Credential Guard is enabled."
+          "description": "When set to true, Credential Guard is enabled.",
+          "default": false
         },
         "smbSigningEnforced": {
           "type": "boolean",
@@ -6248,7 +6234,8 @@
         },
         "smbClusterEncryption": {
           "type": "boolean",
-          "description": "When set to true, cluster east-west traffic is encrypted."
+          "description": "When set to true, cluster east-west traffic is encrypted.",
+          "default": false
         },
         "sideChannelMitigationEnforced": {
           "type": "boolean",
@@ -6854,7 +6841,7 @@
       "description": "EdgeDevice Jobs resource",
       "properties": {
         "properties": {
-          "type": "object",
+          "$ref": "#/definitions/EdgeDeviceJobProperties",
           "description": "The resource-specific properties for this resource."
         },
         "kind": {
@@ -6866,6 +6853,7 @@
           ]
         }
       },
+      "discriminator": "kind",
       "required": [
         "kind"
       ],
@@ -7732,27 +7720,17 @@
         "properties": {
           "$ref": "#/definitions/HciEdgeDeviceJobProperties",
           "description": "HCI Edge device job properties"
-        },
-        "kind": {
-          "type": "string",
-          "description": "Edge Solution type to support polymorphic resource.",
-          "enum": [
-            "HCI"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
         }
       },
       "required": [
-        "properties",
-        "kind"
+        "properties"
       ],
       "allOf": [
         {
           "$ref": "#/definitions/EdgeDeviceJob"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "HCI"
     },
     "HciEdgeDeviceJobProperties": {
       "type": "object",

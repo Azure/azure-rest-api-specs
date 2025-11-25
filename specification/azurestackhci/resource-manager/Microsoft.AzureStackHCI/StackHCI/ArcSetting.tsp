@@ -44,6 +44,7 @@ interface ArcSettings {
   /**
    * Update ArcSettings for HCI cluster.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Resource PATCH models must be a subset of the resource model, for backward compatibility arcSetting didnt have this property"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<ArcSetting, PatchModel = ArcSettingsPatch>;
 
@@ -146,12 +147,6 @@ model ArcSettingList is Azure.Core.Page<ArcSetting>;
  * ArcSetting properties.
  */
 model ArcSettingProperties {
-  /**
-   * Resource tags.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  tags?: Record<string>;
-
   /**
    * Provisioning state of the ArcSetting proxy resource.
    */
