@@ -11,8 +11,9 @@ import { CompileRule } from "../src/rules/compile.js";
 
 import * as utils from "../src/utils.js";
 
-const swaggerPath = "data-plane/Azure.Foo/preview/2022-11-01-preview/foo.json";
-const handwrittenSwaggerPath = "data-plane/Azure.Foo/preview/2021-11-01-preview/foo.json";
+const swaggerPath = "specification/foo/data-plane/Azure.Foo/preview/2022-11-01-preview/foo.json";
+const handwrittenSwaggerPath =
+  "specification/foo/data-plane/Azure.Foo/preview/2021-11-01-preview/foo.json";
 
 describe("compile", function () {
   let gitDiffTopSpecFolderSpy: MockInstance;
