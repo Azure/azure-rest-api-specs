@@ -7,6 +7,8 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 no-namespace-folders: true
+package-name: azure-mgmt-rdbms
+package-version: 1.0.0b1
 clear-output-folder: true
 ```
 
@@ -23,10 +25,8 @@ Please also specify `--python-sdk-folder=<path to the root directory of your azu
 
 ``` yaml $(tag) == 'package-flexibleserver-2021-06-01' && $(python)
 title: PostgreSQLManagementClient
-package-name: azure-mgmt-postgresqlflexibleservers
-package-version: 1.0.0b1
-namespace: azure.mgmt.postgresqlflexibleservers
-output-folder: $(python-sdks-folder)/postgresqlflexibleservers/azure-mgmt-postgresqlflexibleservers/azure/mgmt/postgresqlflexibleservers
+namespace: azure.mgmt.rdbms.postgresqlflexibleservers
+output-folder: $(python-sdks-folder)/rdbms/azure-mgmt-rdbms/azure/mgmt/rdbms/postgresqlflexibleservers
 ```
 
 ### Tag: package-2020-01-01 and python
@@ -36,8 +36,6 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 
 ``` yaml $(tag) == 'package-2020-01-01' && $(python)
 title: PostgreSQLManagementClient
-package-name: azure-mgmt-rdbms
-package-version: 1.0.0b1
 namespace: azure.mgmt.rdbms.postgresql
 output-folder: $(python-sdks-folder)/rdbms/azure-mgmt-rdbms/azure/mgmt/rdbms/postgresql
 ```
