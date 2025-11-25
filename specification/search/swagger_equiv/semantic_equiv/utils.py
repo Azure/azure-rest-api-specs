@@ -1509,22 +1509,18 @@ def write_diffs_excel_v2(result, output_path: str) -> None:
 
         # Parse structured context into separate components
         if "||" in context:
-            # Structured context: operation_id||path_method||suffix
+            # Structured context: operation_id||path_method||context_suffix||possible_match
             context_parts = context.split("||")
             operation_id = context_parts[0] if len(context_parts) > 0 else ""
             path_method = context_parts[1] if len(context_parts) > 1 else ""
             context_suffix = context_parts[2] if len(context_parts) > 2 else ""
+            possible_match = context_parts[3] if len(context_parts) > 3 else ""
         else:
             # Legacy context format
             operation_id = ""
             path_method = context
             context_suffix = ""
-
-        possible_match = ""
-        if "|| Possible Match: " in message:
-            message_parts = message.split("|| Possible Match:")
-            message = message_parts[0].strip()
-            possible_match = message_parts[1].strip()
+            possible_match = ""
 
         row = {
             "Diff Type": diff_type,
@@ -1621,7 +1617,8 @@ def write_diffs_excel_v2(result, output_path: str) -> None:
             if diffs:  # Only create sheet if there are differences
                 df = pd.DataFrame(diffs)
 
-                # For Definitions sheet, remove OperationID and Context Suffix columns
+                # For Definitions sheet, the Possible Match is already in its own column
+                # We can now safely remove OperationID and Context Suffix columns
                 if category == "Definitions":
                     df = df.drop(
                         columns=["OperationID", "Context Suffix"], errors="ignore"
