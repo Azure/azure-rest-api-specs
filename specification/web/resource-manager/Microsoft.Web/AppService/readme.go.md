@@ -14,7 +14,6 @@ license-header: MICROSOFT_MIT_NO_VERSION
 module-name: sdk/resourcemanager/appservice/armappservice/v6
 module: github.com/Azure/azure-sdk-for-go/$(module-name)
 output-folder: $(go-sdk-folder)/$(module-name)
-title: WebSiteManagementClient
 azure-arm: true
 directive:
 - rename-model:
@@ -44,6 +43,17 @@ directive:
   where: $..[?(@.$ref == "./CommonDefinitions.json#/definitions/CertificatePatchResource")]
   transform:
     $["$ref"] = "./CommonDefinitions.json#/definitions/AppCertificatePatchResource"
+```
+
+### Basic Information
+
+These are the global settings for the AppService API.
+
+```yaml
+title: WebSiteManagementClientClient
+description: WebSite Management Client
+openapi-type: arm
+tag: package-2025-03
 ```
 
 ### Tag: package-2025-03 and go
