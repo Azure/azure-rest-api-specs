@@ -24,3 +24,8 @@ using Microsoft.ResourceConnector;
   "creationTimestamp",
   "java"
 );
+
+@@clientName(Microsoft.ResourceConnector.SupportedVersionCatalogVersionData,
+  "SupportedVersionCatalogVersionDataField",
+  "csharp"
+);
