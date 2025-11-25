@@ -118,6 +118,23 @@ describe("compile", function () {
     );
   });
 
+  it("should throw if output swaggers are not under expected folder - v1", async () => {
+    const folder = path.resolve("specification", "contosowidgetmanager", "Contoso.Management");
+
+    // Relative to cwd when command is run
+    const compileOutput = "tsp-output/contoso.json";
+
+    runNpmSpy.mockImplementation(
+      async (_args: string[], _cwd?: string): Promise<[Error | null, string, string]> => {
+        return [null, compileOutput, ""];
+      },
+    );
+
+    await expect(new CompileRule().execute(folder)).rejects.toThrowErrorMatchingInlineSnapshot(
+      `[Error: Output folder '.' must be under path 'specification/contosowidgetmanager']`,
+    );
+  });
+
   it("should fail if extra swaggers", async function () {
     runNpmSpy.mockImplementation(
       async (_args: string[], _cwd: string): Promise<[Error | null, string, string]> => {
