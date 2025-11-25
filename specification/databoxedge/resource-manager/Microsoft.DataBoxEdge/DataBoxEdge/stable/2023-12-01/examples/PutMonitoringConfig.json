@@ -1,0 +1,64 @@
+{
+  "parameters": {
+    "accept-language": [
+      "en-US"
+    ],
+    "api-version": "2023-12-01",
+    "deviceName": "testedgedevice",
+    "monitoringMetricConfiguration": {
+      "properties": {
+        "metricConfigurations": [
+          {
+            "counterSets": [
+              {
+                "counters": [
+                  {
+                    "name": "test"
+                  }
+                ]
+              }
+            ],
+            "mdmAccount": "test",
+            "metricNameSpace": "test",
+            "resourceId": "test"
+          }
+        ]
+      }
+    },
+    "resourceGroupName": "GroupForEdgeAutomation",
+    "roleName": "testrole",
+    "subscriptionId": "4385cf00-2d3a-425a-832f-f4285b1c9dce"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "foo/bar/id",
+        "properties": {
+          "metricConfigurations": [
+            {
+              "counterSets": [
+                {
+                  "counters": [
+                    {
+                      "name": "test"
+                    }
+                  ]
+                }
+              ],
+              "mdmAccount": "test",
+              "metricNameSpace": "test",
+              "resourceId": "test"
+            }
+          ]
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://foo.com/BandwidthSchdeuleDelete"
+      }
+    }
+  },
+  "operationId": "MonitoringConfig_CreateOrUpdate",
+  "title": "PutMonitoringConfig"
+}

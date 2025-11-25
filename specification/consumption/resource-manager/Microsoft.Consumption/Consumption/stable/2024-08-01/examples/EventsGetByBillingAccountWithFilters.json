@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "$filter": "lotid eq 'G202001083926600XXXXX' AND lotsource eq 'consumptioncommitment'",
+    "api-version": "2024-08-01",
+    "billingAccountId": "1234:5678"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "eventId1",
+            "type": "Microsoft.Consumption/events",
+            "id": "/providers/Microsoft.Billing/billingAccounts/1234:56789/providers/Microsoft.Consumption/events/eventId1",
+            "properties": {
+              "description": "MACC Canceled",
+              "billingAccountDisplayName": "TestBillingAccount",
+              "billingAccountId": "1234:5678",
+              "billingProfileDisplayName": "Contoso Operations Billing",
+              "billingProfileId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/X3TD-KVTT-BG7-TGB",
+              "canceledCredit": {
+                "currency": "USD",
+                "value": 200
+              },
+              "closedBalance": {
+                "currency": "USD",
+                "value": 500
+              },
+              "eventType": "CanceledCredit",
+              "invoiceNumber": "3304",
+              "lotId": "/providers/Microsoft.Billing/billingAccounts/1234:5678/Microsoft.Consumption/lots/G202001083926600XXXXX",
+              "lotSource": "ConsumptionCommitment",
+              "transactionDate": "2019-07-01T00:00:00Z"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Events_ListByBillingAccount",
+  "title": "EventsGetByBillingAccountWithFilters"
+}
