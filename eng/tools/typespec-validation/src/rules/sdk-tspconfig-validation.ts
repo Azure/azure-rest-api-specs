@@ -4,7 +4,7 @@
 import { join } from "path";
 import { Suppression } from "suppressions";
 import { parse as yamlParse } from "yaml";
-import { RuleResult, RuleFailureType } from "../rule-result.js";
+import { RuleFailureType, RuleResult } from "../rule-result.js";
 import { Rule } from "../rule.js";
 import { fileExists, getSuppressions, readTspConfig } from "../utils.js";
 

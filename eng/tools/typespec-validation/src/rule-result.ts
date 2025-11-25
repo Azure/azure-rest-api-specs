@@ -2,7 +2,7 @@ export enum RuleFailureType {
   NotFind = "not_find",
   Mismatch = "mismatch",
   ParseError = "parse_error",
-  TypeError = "type_error"
+  TypeError = "type_error",
 }
 
 export interface RuleResult {
