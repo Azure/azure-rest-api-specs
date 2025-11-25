@@ -7,7 +7,13 @@ import pc from "picocolors";
 import stripAnsi from "strip-ansi";
 import { RuleResult } from "../rule-result.js";
 import { Rule } from "../rule.js";
-import { fileExists, getSuppressions, gitDiffTopSpecFolder, runNpm } from "../utils.js";
+import {
+  fileExists,
+  getStructureVersion,
+  getSuppressions,
+  gitDiffTopSpecFolder,
+  runNpm,
+} from "../utils.js";
 
 export class CompileRule implements Rule {
   readonly name = "Compile";
@@ -86,13 +92,7 @@ export class CompileRule implements Rule {
           stdOutput += "\nOutput folder:\n";
           stdOutput += outputFolder + "\n";
 
-          const structureVersion =
-            basename(dirname(folder)) === "data-plane" ||
-            basename(dirname(folder)) === "resource-manager" ||
-            basename(dirname(dirname(folder))) === "data-plane" ||
-            basename(dirname(dirname(folder))) === "resource-manager"
-              ? 2
-              : 1;
+          const structureVersion = await getStructureVersion(folder);
 
           const allowedOutputFolder = path.relative(
             "",

@@ -2,7 +2,7 @@ import { execNpm, isExecError } from "@azure-tools/specs-shared/exec";
 import { ConsoleLogger } from "@azure-tools/specs-shared/logger";
 import debug from "debug";
 import { access, readFile } from "fs/promises";
-import defaultPath, { join, PlatformPath } from "path";
+import defaultPath, { join, PlatformPath, relative, sep } from "path";
 import { simpleGit } from "simple-git";
 import { getSuppressions as getSuppressionsImpl, Suppression } from "suppressions";
 import { context } from "./index.js";
@@ -77,4 +77,13 @@ export async function gitDiffTopSpecFolder(folder: string) {
     stdOutput: stdOutput,
     errorOutput: errorOutput,
   };
+}
+
+export async function getStructureVersion(folder: string) {
+  const gitRoot = normalizePath(await simpleGit(folder).revparse("--show-toplevel"));
+  const relativePath = relative(gitRoot, folder).split(sep).join("/");
+
+  // If the folder containing TypeSpec sources is under "data-plane" or "resource-manager", the spec
+  // must be using "folder structure v2".  Otherwise, it must be using v1.
+  return relativePath.includes("data-plane") || relativePath.includes("resource-manager") ? 2 : 1;
 }
