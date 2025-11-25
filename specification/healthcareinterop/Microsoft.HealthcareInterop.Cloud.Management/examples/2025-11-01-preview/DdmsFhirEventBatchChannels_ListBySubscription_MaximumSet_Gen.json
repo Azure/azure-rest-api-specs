@@ -1,0 +1,166 @@
+{
+  "title": "DdmsFhirEventBatchChannels_ListBySubscription_MaximumSet",
+  "operationId": "DdmsFhirEventBatchChannels_ListBySubscription",
+  "parameters": {
+    "api-version": "2025-11-01-preview",
+    "subscriptionId": "486949B6-5A50-4884-B12D-271498C14DE3"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "provisioningState": "Succeeded",
+              "hubResourceId": "/subscriptions/486949B6-5A50-4884-B12D-271498C14DE3/resourceGroups/rgcloud/providers/Microsoft.HealthcareInterop/hubs/testhub",
+              "sourceConfiguration": {
+                "connectorType": "Hl7Connector",
+                "hl7ConnectorResourceId": "/subscriptions/486949B6-5A50-4884-B12D-271498C14DE3/resourceGroups/rgcloud/providers/Microsoft.HealthcareInterop/hl7Connectors/hl7conn1"
+              },
+              "transformationConfiguration": {
+                "fhirQueryConfiguration": {
+                  "fhirServerConfiguration": {
+                    "emrSystem": "Epic",
+                    "serviceEndpoint": "https://fhir.epic.com/interconnect-fhir-oauth/api/FHIR/R4",
+                    "authenticationConfiguration": {
+                      "authorizationEndpoint": "https://fhir.epic.com/test-fhir-oauth/oauth2/token",
+                      "clientId": "epic-client-id",
+                      "clientSecret": {
+                        "type": "KeyVaultKey",
+                        "keyVaultKeyIdentifier": "https://keyvaultname.vault.azure.net/keys/testkeyname"
+                      }
+                    }
+                  }
+                }
+              },
+              "destinationConfiguration": {
+                "connectorType": "DdmsConnector",
+                "ddmsConnectorResourceId": "/subscriptions/486949B6-5A50-4884-B12D-271498C14DE3/resourceGroups/rgcloud/providers/Microsoft.HealthcareInterop/ddmsConnectors/ddmsConnector1"
+              },
+              "jobConfiguration": {
+                "trigger": {
+                  "triggerType": "RecurringScheduleTrigger",
+                  "state": "Enabled",
+                  "startDateTimeUtc": "2025-02-03T18:24:34.138Z",
+                  "activeHours": [
+                    0,
+                    2,
+                    4,
+                    6,
+                    8,
+                    10,
+                    12,
+                    14,
+                    16,
+                    18,
+                    20,
+                    22
+                  ],
+                  "activeDays": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6
+                  ]
+                }
+              }
+            },
+            "tags": {
+              "environment": "production",
+              "channel": "ddms-fhir-batch"
+            },
+            "location": "eastus2",
+            "id": "/subscriptions/486949B6-5A50-4884-B12D-271498C14DE3/resourceGroups/rgcloud/providers/Microsoft.HealthcareInterop/ddmsFhirEventBatchChannels/ddmsChannel1",
+            "name": "ddmsChannel1",
+            "type": "Microsoft.HealthcareInterop/ddmsFhirEventBatchChannels",
+            "systemData": {
+              "createdBy": "admin@healthcare.com",
+              "createdByType": "User",
+              "createdAt": "2025-07-18T22:23:10.008Z",
+              "lastModifiedBy": "admin@healthcare.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2025-07-18T22:23:10.008Z"
+            }
+          },
+          {
+            "properties": {
+              "provisioningState": "Succeeded",
+              "hubResourceId": "/subscriptions/486949B6-5A50-4884-B12D-271498C14DE3/resourceGroups/rgprod/providers/Microsoft.HealthcareInterop/hubs/prodhub",
+              "sourceConfiguration": {
+                "connectorType": "Hl7Connector",
+                "hl7ConnectorResourceId": "/subscriptions/486949B6-5A50-4884-B12D-271498C14DE3/resourceGroups/rgprod/providers/Microsoft.HealthcareInterop/hl7Connectors/hl7connProd"
+              },
+              "transformationConfiguration": {
+                "fhirQueryConfiguration": {
+                  "fhirServerConfiguration": {
+                    "emrSystem": "Epic",
+                    "serviceEndpoint": "https://fhir-prod.epic.com/interconnect-fhir-oauth/api/FHIR/R4",
+                    "authenticationConfiguration": {
+                      "authorizationEndpoint": "https://fhir-prod.epic.com/oauth2/token",
+                      "clientId": "epic-prod-client-id",
+                      "clientSecret": {
+                        "type": "KeyVaultKey",
+                        "keyVaultKeyIdentifier": "https://prodkeyvault.vault.azure.net/keys/prodkeyname"
+                      }
+                    }
+                  }
+                }
+              },
+              "destinationConfiguration": {
+                "connectorType": "DdmsConnector",
+                "ddmsConnectorResourceId": "/subscriptions/486949B6-5A50-4884-B12D-271498C14DE3/resourceGroups/rgprod/providers/Microsoft.HealthcareInterop/ddmsConnectors/ddmsConnectorProd"
+              },
+              "jobConfiguration": {
+                "trigger": {
+                  "triggerType": "RecurringScheduleTrigger",
+                  "state": "Enabled",
+                  "startDateTimeUtc": "2025-02-01T06:00:00.000Z",
+                  "activeHours": [
+                    6,
+                    8,
+                    10,
+                    12,
+                    14,
+                    16,
+                    18,
+                    20
+                  ],
+                  "activeDays": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6
+                  ]
+                }
+              }
+            },
+            "tags": {
+              "environment": "production",
+              "channel": "ddms-fhir-batch-prod",
+              "critical": "true"
+            },
+            "location": "centralus",
+            "id": "/subscriptions/486949B6-5A50-4884-B12D-271498C14DE3/resourceGroups/rgprod/providers/Microsoft.HealthcareInterop/ddmsFhirEventBatchChannels/ddmsChannelProd",
+            "name": "ddmsChannelProd",
+            "type": "Microsoft.HealthcareInterop/ddmsFhirEventBatchChannels",
+            "systemData": {
+              "createdBy": "prod-admin@healthcare.com",
+              "createdByType": "User",
+              "createdAt": "2025-07-20T15:45:30.789Z",
+              "lastModifiedBy": "prod-admin@healthcare.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2025-07-20T15:45:30.789Z"
+            }
+          }
+        ],
+        "nextLink": "https://management.azure.com/subscriptions/486949B6-5A50-4884-B12D-271498C14DE3/providers/Microsoft.HealthcareInterop/ddmsFhirEventBatchChannels?api-version=2025-06-01-preview&$skiptoken=xyz9876"
+      }
+    }
+  }
+}

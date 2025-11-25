@@ -1,0 +1,1019 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AwsConnector",
+    "version": "2025-12-01-preview",
+    "description": "Microsoft.AwsConnector Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "BedrockPrompts"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AwsConnector/bedrockPrompts": {
+      "get": {
+        "operationId": "BedrockPrompts_ListBySubscription",
+        "tags": [
+          "BedrockPrompts"
+        ],
+        "description": "List BedrockPrompt resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BedrockPromptListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BedrockPrompts_ListBySubscription_MaximumSet": {
+            "$ref": "./examples/BedrockPrompts_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/bedrockPrompts": {
+      "get": {
+        "operationId": "BedrockPrompts_ListByResourceGroup",
+        "tags": [
+          "BedrockPrompts"
+        ],
+        "description": "List BedrockPrompt resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BedrockPromptListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BedrockPrompts_ListByResourceGroup_MaximumSet": {
+            "$ref": "./examples/BedrockPrompts_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/bedrockPrompts/{name}": {
+      "get": {
+        "operationId": "BedrockPrompts_Get",
+        "tags": [
+          "BedrockPrompts"
+        ],
+        "description": "Get a BedrockPrompt",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of BedrockPrompt",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BedrockPrompt"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BedrockPrompts_Get_MaximumSet": {
+            "$ref": "./examples/BedrockPrompts_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "BedrockPrompts_CreateOrReplace",
+        "tags": [
+          "BedrockPrompts"
+        ],
+        "description": "Create a BedrockPrompt. Please note that end user resource creation is currently restricted, but it will be enabled in the future.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of BedrockPrompt",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BedrockPrompt"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'BedrockPrompt' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/BedrockPrompt"
+            }
+          },
+          "201": {
+            "description": "Resource 'BedrockPrompt' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/BedrockPrompt"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BedrockPrompts_CreateOrReplace_MaximumSet": {
+            "$ref": "./examples/BedrockPrompts_CreateOrReplace.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "BedrockPrompts_Update",
+        "tags": [
+          "BedrockPrompts"
+        ],
+        "description": "Update a BedrockPrompt",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of BedrockPrompt",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BedrockPromptTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BedrockPrompt"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BedrockPrompts_Update_MaximumSet": {
+            "$ref": "./examples/BedrockPrompts_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "BedrockPrompts_Delete",
+        "tags": [
+          "BedrockPrompts"
+        ],
+        "description": "Delete a BedrockPrompt",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of BedrockPrompt",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BedrockPrompts_Delete_MaximumSet": {
+            "$ref": "./examples/BedrockPrompts_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AwsBedrockPromptProperties": {
+      "type": "object",
+      "description": "Definition of awsBedrockPrompt",
+      "properties": {
+        "arn": {
+          "type": "string",
+          "description": "ARN of a prompt resource possibly with a version"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Time Stamp."
+        },
+        "customerEncryptionKeyArn": {
+          "type": "string",
+          "description": "A KMS key ARN"
+        },
+        "defaultVariant": {
+          "type": "string",
+          "description": "Name for a variant."
+        },
+        "description": {
+          "type": "string",
+          "description": "Name for a prompt resource."
+        },
+        "id": {
+          "type": "string",
+          "description": "Identifier for a Prompt"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name for a prompt resource."
+        },
+        "tags": {
+          "type": "object",
+          "description": "A map of tag keys and values",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Time Stamp."
+        },
+        "variants": {
+          "type": "array",
+          "description": "List of prompt variants",
+          "items": {
+            "$ref": "#/definitions/PromptVariant"
+          },
+          "x-ms-identifiers": []
+        },
+        "version": {
+          "type": "string",
+          "description": "Draft Version."
+        }
+      }
+    },
+    "BedrockPrompt": {
+      "type": "object",
+      "description": "A Microsoft.AwsConnector resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BedrockPromptProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "BedrockPromptListResult": {
+      "type": "object",
+      "description": "The response of a BedrockPrompt list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The BedrockPrompt items on this page",
+          "items": {
+            "$ref": "#/definitions/BedrockPrompt"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "BedrockPromptProperties": {
+      "type": "object",
+      "description": "Definition of BedrockPrompt",
+      "properties": {
+        "awsProperties": {
+          "$ref": "#/definitions/AwsBedrockPromptProperties",
+          "description": "AWS Properties"
+        },
+        "publicCloudConnectorsResourceId": {
+          "type": "string",
+          "description": "Public Cloud Connectors Resource ID"
+        },
+        "awsAccountId": {
+          "type": "string",
+          "description": "AWS Account ID"
+        },
+        "arn": {
+          "type": "string",
+          "description": "Amazon Resource Name (ARN)"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
+        },
+        "awsSourceSchema": {
+          "type": "string",
+          "description": "AWS Source Schema"
+        },
+        "awsRegion": {
+          "type": "string",
+          "description": "AWS Region"
+        },
+        "awsTags": {
+          "type": "object",
+          "description": "AWS Tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "BedrockPromptTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in BedrockPrompt resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "CachePointBlock": {
+      "type": "object",
+      "description": "Definition of CachePointBlock",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/CachePointBlockType",
+          "description": "CachePoint types for CachePointBlock"
+        }
+      }
+    },
+    "CachePointBlockType": {
+      "type": "string",
+      "description": "CachePointBlockType enum",
+      "enum": [
+        "default"
+      ],
+      "x-ms-enum": {
+        "name": "CachePointBlockType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "default",
+            "value": "default",
+            "description": "CachePointBlockType enum default"
+          }
+        ]
+      }
+    },
+    "ChatPromptTemplateConfiguration": {
+      "type": "object",
+      "description": "Definition of ChatPromptTemplateConfiguration",
+      "properties": {
+        "inputVariables": {
+          "type": "array",
+          "description": "List of input variables",
+          "items": {
+            "$ref": "#/definitions/PromptInputVariable"
+          },
+          "x-ms-identifiers": []
+        },
+        "messages": {
+          "type": "array",
+          "description": "List of messages for chat prompt template",
+          "items": {
+            "$ref": "#/definitions/Message"
+          },
+          "x-ms-identifiers": []
+        },
+        "system": {
+          "type": "array",
+          "description": "Configuration for chat prompt template",
+          "items": {
+            "$ref": "#/definitions/SystemContentBlock"
+          },
+          "x-ms-identifiers": []
+        },
+        "toolConfiguration": {
+          "$ref": "#/definitions/ToolConfiguration",
+          "description": "Tool configuration"
+        }
+      }
+    },
+    "ContentBlock": {
+      "type": "object",
+      "description": "Definition of ContentBlock",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "Configuration for chat prompt template"
+        },
+        "cachePoint": {
+          "$ref": "#/definitions/CachePointBlock",
+          "description": "CachePointBlock"
+        }
+      }
+    },
+    "Message": {
+      "type": "object",
+      "description": "Definition of Message",
+      "properties": {
+        "content": {
+          "type": "array",
+          "description": "List of Content Blocks",
+          "items": {
+            "$ref": "#/definitions/ContentBlock"
+          },
+          "x-ms-identifiers": []
+        },
+        "role": {
+          "$ref": "#/definitions/MessageRole",
+          "description": "Conversation roles for the chat prompt"
+        }
+      }
+    },
+    "MessageRole": {
+      "type": "string",
+      "description": "MessageRole enum",
+      "enum": [
+        "assistant",
+        "user"
+      ],
+      "x-ms-enum": {
+        "name": "MessageRole",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "assistant",
+            "value": "assistant",
+            "description": "MessageRole enum assistant"
+          },
+          {
+            "name": "user",
+            "value": "user",
+            "description": "MessageRole enum user"
+          }
+        ]
+      }
+    },
+    "PromptAgentResource": {
+      "type": "object",
+      "description": "Definition of PromptAgentResource",
+      "properties": {
+        "agentIdentifier": {
+          "type": "string",
+          "description": "Arn representation of the Agent Alias."
+        }
+      }
+    },
+    "PromptGenAiResource": {
+      "type": "object",
+      "description": "Definition of PromptGenAiResource",
+      "properties": {
+        "agent": {
+          "$ref": "#/definitions/PromptAgentResource",
+          "description": "Target Agent to invoke with Prompt"
+        }
+      }
+    },
+    "PromptInferenceConfiguration": {
+      "type": "object",
+      "description": "Definition of PromptInferenceConfiguration",
+      "properties": {
+        "text": {
+          "$ref": "#/definitions/PromptModelInferenceConfiguration",
+          "description": "Prompt model inference configuration"
+        }
+      }
+    },
+    "PromptInputVariable": {
+      "type": "object",
+      "description": "Definition of PromptInputVariable",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name for an input variable"
+        }
+      }
+    },
+    "PromptMetadataEntry": {
+      "type": "object",
+      "description": "Definition of PromptMetadataEntry",
+      "properties": {
+        "key": {
+          "type": "string",
+          "format": "password",
+          "description": "The key of a metadata tag for a prompt variant.",
+          "x-ms-secret": true
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of a metadata tag for a prompt variant."
+        }
+      }
+    },
+    "PromptModelInferenceConfiguration": {
+      "type": "object",
+      "description": "Definition of PromptModelInferenceConfiguration",
+      "properties": {
+        "maxTokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum length of output"
+        },
+        "stopSequences": {
+          "type": "array",
+          "description": "List of stop sequences",
+          "items": {
+            "type": "string"
+          }
+        },
+        "temperature": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Controls randomness, higher values increase diversity"
+        },
+        "topP": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Cumulative probability cutoff for token selection"
+        }
+      }
+    },
+    "PromptTemplateConfiguration": {
+      "type": "object",
+      "description": "Definition of PromptTemplateConfiguration",
+      "properties": {
+        "text": {
+          "$ref": "#/definitions/TextPromptTemplateConfiguration",
+          "description": "Configuration for text prompt template"
+        },
+        "chat": {
+          "$ref": "#/definitions/ChatPromptTemplateConfiguration",
+          "description": "Configuration for chat prompt template"
+        }
+      }
+    },
+    "PromptVariant": {
+      "type": "object",
+      "description": "Definition of PromptVariant",
+      "properties": {
+        "additionalModelRequestFields": {
+          "description": "Contains model-specific configurations"
+        },
+        "genAiResource": {
+          "$ref": "#/definitions/PromptGenAiResource",
+          "description": "Target resource to invoke with Prompt"
+        },
+        "inferenceConfiguration": {
+          "$ref": "#/definitions/PromptInferenceConfiguration",
+          "description": "Model inference configuration"
+        },
+        "metadata": {
+          "type": "array",
+          "description": "List of metadata to associate with the prompt variant.",
+          "items": {
+            "$ref": "#/definitions/PromptMetadataEntry"
+          },
+          "x-ms-identifiers": []
+        },
+        "modelId": {
+          "type": "string",
+          "description": "ARN or Id of a Bedrock Foundational Model or Inference Profile, or the ARN of a imported model, or a provisioned throughput ARN for custom models."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name for a variant."
+        },
+        "templateConfiguration": {
+          "$ref": "#/definitions/PromptTemplateConfiguration",
+          "description": "Prompt template configuration"
+        },
+        "templateType": {
+          "$ref": "#/definitions/PromptVariantTemplateType",
+          "description": "Prompt template type"
+        }
+      }
+    },
+    "PromptVariantTemplateType": {
+      "type": "string",
+      "description": "PromptVariantTemplateType enum",
+      "enum": [
+        "CHAT",
+        "TEXT"
+      ],
+      "x-ms-enum": {
+        "name": "PromptVariantTemplateType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CHAT",
+            "value": "CHAT",
+            "description": "PromptVariantTemplateType enum CHAT"
+          },
+          {
+            "name": "TEXT",
+            "value": "TEXT",
+            "description": "PromptVariantTemplateType enum TEXT"
+          }
+        ]
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "SpecificToolChoice": {
+      "type": "object",
+      "description": "Definition of SpecificToolChoice",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Tool name"
+        }
+      }
+    },
+    "SystemContentBlock": {
+      "type": "object",
+      "description": "Definition of SystemContentBlock",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "Configuration for chat prompt template"
+        },
+        "cachePoint": {
+          "$ref": "#/definitions/CachePointBlock",
+          "description": "CachePointBlock"
+        }
+      }
+    },
+    "TextPromptTemplateConfiguration": {
+      "type": "object",
+      "description": "Definition of TextPromptTemplateConfiguration",
+      "properties": {
+        "cachePoint": {
+          "$ref": "#/definitions/CachePointBlock",
+          "description": "CachePointBlock"
+        },
+        "inputVariables": {
+          "type": "array",
+          "description": "List of input variables",
+          "items": {
+            "$ref": "#/definitions/PromptInputVariable"
+          },
+          "x-ms-identifiers": []
+        },
+        "text": {
+          "type": "string",
+          "description": "Prompt content for String prompt template"
+        },
+        "textS3Location": {
+          "$ref": "#/definitions/TextS3Location",
+          "description": "The identifier for the S3 resource."
+        }
+      }
+    },
+    "TextS3Location": {
+      "type": "object",
+      "description": "Definition of TextS3Location",
+      "properties": {
+        "bucket": {
+          "type": "string",
+          "description": "A bucket in S3"
+        },
+        "key": {
+          "type": "string",
+          "format": "password",
+          "description": "A object key in S3",
+          "x-ms-secret": true
+        },
+        "version": {
+          "type": "string",
+          "description": "The version of the the S3 object to use"
+        }
+      }
+    },
+    "Tool": {
+      "type": "object",
+      "description": "Definition of Tool",
+      "properties": {
+        "toolSpec": {
+          "$ref": "#/definitions/ToolSpecification",
+          "description": "Tool specification"
+        },
+        "cachePoint": {
+          "$ref": "#/definitions/CachePointBlock",
+          "description": "CachePointBlock"
+        }
+      }
+    },
+    "ToolChoice": {
+      "type": "object",
+      "description": "Definition of ToolChoice",
+      "properties": {
+        "auto": {
+          "description": "Auto Tool choice"
+        },
+        "any": {
+          "description": "Any Tool choice"
+        },
+        "tool": {
+          "$ref": "#/definitions/SpecificToolChoice",
+          "description": "Specific Tool choice"
+        }
+      }
+    },
+    "ToolConfiguration": {
+      "type": "object",
+      "description": "Definition of ToolConfiguration",
+      "properties": {
+        "toolChoice": {
+          "$ref": "#/definitions/ToolChoice",
+          "description": "Tool choice"
+        },
+        "tools": {
+          "type": "array",
+          "description": "List of Tools",
+          "items": {
+            "$ref": "#/definitions/Tool"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ToolInputSchema": {
+      "type": "object",
+      "description": "Definition of ToolInputSchema",
+      "properties": {
+        "json": {
+          "description": "Property json"
+        }
+      }
+    },
+    "ToolSpecification": {
+      "type": "object",
+      "description": "Definition of ToolSpecification",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Property description"
+        },
+        "inputSchema": {
+          "$ref": "#/definitions/ToolInputSchema",
+          "description": "Tool input schema"
+        },
+        "name": {
+          "type": "string",
+          "description": "Tool name"
+        }
+      }
+    }
+  },
+  "parameters": {}
+}
