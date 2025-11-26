@@ -19,6 +19,7 @@ using Dynatrace.Observability;
 @@clientName(ProvisioningState, "DynatraceProvisioningState", "csharp");
 @@clientName(SingleSignOnStates, "DynatraceSingleSignOnState", "csharp");
 @@clientName(MonitorResource, "DynatraceMonitor", "csharp");
+@@clientName(MonitorProperties, "DynatraceMonitorProperties", "csharp");
 @@clientName(MonitorResourceUpdate, "DynatraceMonitorPatch", "csharp");
 @@clientName(AppServiceInfo,
   "DynatraceOneAgentEnabledAppServiceInfo",
@@ -52,6 +53,10 @@ using Dynatrace.Observability;
 @@clientName(PlanData, "DynatraceBillingPlanInfo", "csharp");
 @@clientName(UserInfo, "DynatraceMonitorUserInfo", "csharp");
 @@clientName(TagRule, "DynatraceTagRule", "csharp");
+@@clientName(MonitoringTagRulesProperties,
+  "DynatraceTagRuleProperties",
+  "csharp"
+);
 @@clientName(LogRules, "DynatraceMonitorResourceLogRules", "csharp");
 @@clientName(MetricRules, "DynatraceMonitorResourceMetricRules", "csharp");
 @@clientName(FilteringTag, "DynatraceMonitorResourceFilteringTag", "csharp");
@@ -110,7 +115,7 @@ using Dynatrace.Observability;
   armResourceIdentifier[],
   "csharp"
 );
-@@clientName(LogStatusRequest, "DynatraceMetricStatusContent", "csharp");
+@@clientName(LogStatusRequest, "DynatraceMonitoredResourceContent", "csharp");
 @@clientName(MarketplaceSaaSResourceDetailsResponse,
   "MarketplaceSaaSResourceDetailsResult",
   "csharp"
@@ -145,7 +150,7 @@ using Dynatrace.Observability;
   "DynatraceMonitoredSubscription",
   "csharp"
 );
-@@clientName(UpgradePlanRequest, "UpgradePlanContent", "csharp");
+@@clientName(UpgradePlanRequest, "DynatraceUpgradePlanContent", "csharp");
 @@alternateType(DynatraceSingleSignOnProperties.enterpriseAppId,
   uuid,
   "csharp"
@@ -169,13 +174,12 @@ using Dynatrace.Observability;
   "ManageAgentInstallationContent",
   "csharp"
 );
-@@clientName(MetricStatusRequest, "MetricStatusContent", "csharp");
+@@clientName(MetricStatusRequest, "DynatraceMetricStatusContent", "csharp");
 @@clientName(MarketplaceSaaSResourceDetailsRequest,
   "MarketplaceSaaSResourceDetailsContent",
   "csharp"
 );
 @@alternateType(MarketplaceSaaSResourceDetailsRequest.tenantId, uuid, "csharp");
-@@clientName(LiftrResourceCategories, "LiftrResourceCategory", "csharp");
 @@clientName(MonitorResources.getMetricStatus::parameters.body,
   "content",
   "csharp"
@@ -192,3 +196,4 @@ using Dynatrace.Observability;
 );
 @@clientName(ManageAgentList, "DynatraceManageAgentDetails", "csharp");
 @@alternateType(ManageAgentList.id, armResourceIdentifier, "csharp");
+@@clientName(LiftrResourceCategories, "LiftrResourceCategory", "csharp");
