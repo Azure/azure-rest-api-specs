@@ -25,6 +25,10 @@ using Microsoft.ResourceConnector;
   "java"
 );
 
+@@clientName(Microsoft.ResourceConnector.Appliance,
+  "Appliance",
+  "csharp"
+);
 @@clientName(Microsoft.ResourceConnector.SupportedVersionCatalogVersionData,
   "SupportedVersionCatalogVersionDataField",
   "csharp"
