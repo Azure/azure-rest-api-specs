@@ -113,4 +113,5 @@ interface QuestionAnsweringAuthoringClientOperations {
   "csharp"
 );
 @@clientName(sourceKind, "KnowledgeBaseSourceKind", "csharp");
-@@clientName(WordAlterations, "WordAlterationsGroup", "csharp");
+@@clientName(WordAlterations, "WordAlterationsGroups", "csharp");
+@@clientName(Error.innererror, "InnerError", "csharp");
