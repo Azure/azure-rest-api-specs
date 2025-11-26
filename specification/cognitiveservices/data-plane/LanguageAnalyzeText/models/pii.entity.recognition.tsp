@@ -37,6 +37,7 @@ model PiiTaskParameters is PreBuiltTaskParametersLoggingOptOut {
 
   /** RedactionPolicy to be used on the input. */
   @added(Versions.v2025_05_15_preview)
+  @removed(Versions.v2025_11_15_preview)
   redactionPolicy?: BaseRedactionPolicy;
 
   /** Policy for specific words and terms that should be excluded from detection by the PII detection service */
@@ -46,6 +47,18 @@ model PiiTaskParameters is PreBuiltTaskParametersLoggingOptOut {
   /** (Optional) request parameter that allows the user to provide synonyms for context words that to enhance pii entity detection. */
   @added(Versions.v2025_05_15_preview)
   entitySynonyms?: EntitySynonyms[];
+
+  /** List of RedactionPolicies to be used on the input. */
+  @added(Versions.v2025_11_15_preview)
+  redactionPolicies?: BaseRedactionPolicy[];
+
+  /** Confidence score threshold configuration for PII entity recognition */
+  @added(Versions.v2025_11_15_preview)
+  confidenceScoreThreshold?: ConfidenceScoreThreshold;
+
+  /** Disable entity validation for PII entity recognition */
+  @added(Versions.v2025_11_15_preview)
+  disableEntityValidation?: boolean = false;
 }
 
 /** Object that allows the user to provide synonyms for context words that to enhance pii entity detection. */
@@ -56,6 +69,29 @@ model EntitySynonyms {
 
   /** The entity synonyms */
   synonyms: EntitySynonym[];
+}
+
+/** Configuration for confidence score threshold for PII entity recognition */
+@added(Versions.v2025_11_15_preview)
+model ConfidenceScoreThreshold {
+  /** Minimum confidence score threshold for the PII entities to be returned in the response. Entities with a confidence score below this threshold will be filtered out. Value should be between 0.0 and 1.0 */
+  default: float32 = 0.3;
+
+  /** List of confidence score threshold overrides for specific PII categories */
+  overrides?: ConfidenceScoreThresholdOverride[];
+}
+
+/** Confidence score threshold override for a specific PII category */
+@added(Versions.v2025_11_15_preview)
+model ConfidenceScoreThresholdOverride {
+  /** The PII category for which to override the confidence score threshold */
+  entity: PiiCategoriesExclude;
+
+  /** The confidence score threshold for the specified PII category */
+  value: float32;
+
+  /** The 2 letter ISO 639-1 language for which the override applies. If not specified, the override applies to all languages. */
+  language: string;
 }
 
 /** The entity synonyms used to enhance pii entity detection */
@@ -84,6 +120,18 @@ model ValueExclusionPolicy {
 model BaseRedactionPolicy {
   /** The entity RedactionPolicy object kind. */
   policyKind: RedactionPolicyKind = RedactionPolicyKind.characterMask;
+
+  /** (Optional) describes the PII categories to which the redaction policy will be applied. If not specified, the redaction policy will be applied to all PII categories. */
+  @added(Versions.v2025_11_15_preview)
+  entityTypes?: PiiCategoriesExclude[];
+
+  /** (Optional) name of the redaction policy for identification purposes. */
+  @added(Versions.v2025_11_15_preview)
+  policyName?: string;
+
+  /** (Optional) flag to indicate whether this redaction policy is the default policy to be applied when no specific policy is defined for a PII category. Only one policy can be marked as default. */
+  @added(Versions.v2025_11_15_preview)
+  isDefaultPolicy?: boolean = false;
 }
 
 /** Represents the policy of redacting with a redaction character */
@@ -94,6 +142,24 @@ model CharacterMaskPolicyType extends BaseRedactionPolicy {
 
   /** Optional parameter to use a Custom Character to be used for redaction in PII responses. Default character will bce * as before. We allow specific ascii characters for redaction. */
   redactionCharacter?: redactionCharacter = redactionCharacter.asterisk;
+
+  /** Optional parameter to indicate the length of unmasked characters at the end of the redacted PII entity. Default is 0. */
+  @added(Versions.v2025_11_15_preview)
+  unmaskLength?: int32;
+
+  /** Optional parameter to indicate whether to unmask characters from the end of the redacted PII entity. Default is true. */
+  @added(Versions.v2025_11_15_preview)
+  unmaskFromEnd?: boolean = true;
+}
+
+/** Represents the policy of replacing detected PII with synthetic values. */
+@added(Versions.v2025_11_15_preview)
+model SyntheticReplacementPolicyType extends BaseRedactionPolicy {
+  /** The entity RedactionPolicy object kind. */
+  policyKind: RedactionPolicyKind.syntheticReplacement;
+
+  /** Optional flag to indicate whether to preserve the original data format in the synthetic replacement. Default is false. */
+  preserveDataFormat?: boolean;
 }
 
 /** Represents the policy of not redacting found PII. */
@@ -123,6 +189,10 @@ union RedactionPolicyKind {
 
   /** Redact detected entities with entity type. */
   entityMask: "entityMask",
+
+  /** Replace detected entities with synthetic values. */
+  @added(Versions.v2025_11_15_preview)
+  syntheticReplacement: "syntheticReplacement",
 }
 
 /** Contains the analyze text PIIEntityRecognition LRO task. */
@@ -778,9 +848,74 @@ union PiiCategoriesExclude {
   /** VIN */
   @added(Versions.v2025_11_01)
   @removed(Versions.v2025_05_15_preview)
+  @added(Versions.v2025_11_15_preview)
   VehicleIdentificationNumber: "VehicleIdentificationNumber",
 
   /** License Plate */
   @added(Versions.v2025_05_15_preview)
   LicensePlate: "LicensePlate",
+
+  /** KR Passport Number */
+  @added(Versions.v2025_11_15_preview)
+  KRPassportNumber: "KRPassportNumber",
+
+  /** KR Driver's License Number */
+  @added(Versions.v2025_11_15_preview)
+  KRDriversLicenseNumber: "KRDriversLicenseNumber",
+
+  /** KR Social Security Number */
+  @added(Versions.v2025_11_15_preview)
+  KRSocialSecurityNumber: "KRSocialSecurityNumber",
+
+  /** Government Issued ID */
+  @added(Versions.v2025_11_15_preview)
+  GovernmentIssuedId: "GovernmentIssuedId",
+
+  /** Password */
+  @added(Versions.v2025_11_15_preview)
+  Password: "Password",
+
+  /** National Identification */
+  @added(Versions.v2025_11_15_preview)
+  NationalId: "NationalId",
+
+  /** Zip Code */
+  @added(Versions.v2025_11_15_preview)
+  ZipCode: "ZipCode",
+
+  /** Card Verification Value */
+  @added(Versions.v2025_11_15_preview)
+  CVV: "CVV",
+
+  /** Expiration Date */
+  @added(Versions.v2025_11_15_preview)
+  ExpirationDate: "ExpirationDate",
+
+  /** CA Social Identification Number */
+  @added(Versions.v2025_11_15_preview)
+  CASocialIdentificationNumber: "CASocialIdentificationNumber",
+
+  /** Medicare Beneficiary ID */
+  @added(Versions.v2025_11_15_preview)
+  MedicareBeneficiaryId: "USMedicareBeneficiaryId",
+
+  /** Location */
+  @added(Versions.v2025_11_15_preview)
+  Location: "Location",
+
+  /** City */
+  @added(Versions.v2025_11_15_preview)
+  City: "City",
+
+  /** State */
+  @added(Versions.v2025_11_15_preview)
+  State: "State",
+
+  /** Airport */
+  @added(Versions.v2025_11_15_preview)
+  Airport: "Airport",
+
+  /** Geopolitical Entity */
+  @added(Versions.v2025_11_15_preview)
+  GPE: "GPE",
 }
