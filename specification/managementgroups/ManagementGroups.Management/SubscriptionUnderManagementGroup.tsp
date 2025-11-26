@@ -15,16 +15,12 @@ namespace Microsoft.Management;
 @parentResource(ManagementGroup)
 model SubscriptionUnderManagementGroup
   is Azure.ResourceManager.ProxyResource<SubscriptionUnderManagementGroupProperties> {
-  /**
-   * Subscription ID.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Extension needed for backwards compatibility"
-  @path
-  @segment("subscriptions")
-  @key("subscriptionId")
-  @pattern("")
-  @OpenAPI.extension("x-ms-parameter-location", "method")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = SubscriptionUnderManagementGroup,
+    KeyName = "subscriptionId",
+    SegmentName = "subscriptions",
+    NamePattern = ""
+  >;
 }
 
 @armResourceOperations
