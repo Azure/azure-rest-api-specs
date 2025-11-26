@@ -30,7 +30,7 @@ using Microsoft.ResourceConnector;
   "csharp"
 );
 @@clientName(Microsoft.ResourceConnector.ApplianceOperation,
-  "Operation",
+  "OperationEntity",
   "csharp"
 );
 @@clientName(Microsoft.ResourceConnector.ApplianceOperationValueDisplay,
