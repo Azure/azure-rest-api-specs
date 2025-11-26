@@ -1,7 +1,7 @@
 import { join } from "path";
-import { parse as yamlParse } from "yaml";
 import { RuleResult } from "../rule-result.js";
 import { Rule } from "../rule.js";
+import { parse } from "../tsp-config.js";
 import { fileExists, readTspConfig } from "../utils.js";
 
 // Maps deprecated rulesets to the replacement rulesets
@@ -25,14 +25,7 @@ export class LinterRulesetRule implements Rule {
     let errorOutput = "";
 
     const configText = await readTspConfig(folder);
-    const config = yamlParse(configText) as {
-      linter?: {
-        extends?: string[];
-      };
-      options?: {
-        "@azure-tools/typespec-autorest"?: { "azure-resource-provider-folder"?: string };
-      };
-    };
+    const config = parse(configText);
 
     const rpFolder =
       config?.options?.["@azure-tools/typespec-autorest"]?.["azure-resource-provider-folder"];
