@@ -93,7 +93,7 @@ interface Clusters {
   uploadCertificate is ArmResourceActionAsyncBase<
     Cluster,
     UploadCertificateRequest,
-    ArmAcceptedLroResponse<ArmAsyncOperationHeader &
+    ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
       Azure.Core.Foundations.RetryAfterHeader>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Cluster>
   >;

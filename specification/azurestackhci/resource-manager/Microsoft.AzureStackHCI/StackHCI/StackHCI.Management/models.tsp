@@ -2550,7 +2550,6 @@ model LocalAvailabilityZones {
   /**
    * Nodes belonging to a particular zone
    */
-  @identifiers(#[])
   nodes?: string[];
 }
 
@@ -2746,7 +2745,6 @@ model DeploymentSettingsProperties {
   /**
    * Azure resource ids of Arc machines to be part of cluster.
    */
-  @identifiers(#[])
   arcNodeResourceIds: string[];
 
   /**
@@ -2762,7 +2760,6 @@ model DeploymentSettingsProperties {
   /**
    * Scale units will contains list of deployment data
    */
-  @identifiers(#[])
   deploymentConfiguration: DeploymentConfiguration;
 
   /**
@@ -3575,7 +3572,6 @@ model DeploymentStep {
    * List of exceptions in AzureStackHCI Cluster Deployment.
    */
   @visibility(Lifecycle.Read)
-  @identifiers(#[])
   exception?: string[];
 }
 
@@ -5219,7 +5215,6 @@ model NicDetail {
   /**
    * DNS Servers for NIC
    */
-  @identifiers(#[])
   dnsServers?: string[];
 
   /**
@@ -5447,7 +5442,6 @@ model HciNicDetail {
    * DNS Servers for NIC
    */
   @visibility(Lifecycle.Read)
-  @identifiers(#[])
   dnsServers?: string[];
 
   /**

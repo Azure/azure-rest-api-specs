@@ -110,7 +110,7 @@ using Microsoft.AzureStackHCI;
 
 @@clientName(Updates.put::parameters.resource, "updateProperties");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
-@@Legacy.flattenProperty(Update.properties);
+@@Legacy.flattenProperty(Microsoft.AzureStackHCI.Update.properties);
 
 @@clientLocation(UpdateSummariesOperationGroup.get, "UpdateSummaries");
 @@clientLocation(UpdateSummariesOperationGroup.put, "UpdateSummaries");

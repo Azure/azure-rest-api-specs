@@ -67,7 +67,7 @@ interface Extensions {
   upgrade is ArmResourceActionAsyncBase<
     Extension,
     ExtensionUpgradeParameters,
-    ArmAcceptedLroResponse<ArmAsyncOperationHeader &
+    ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
       Azure.Core.Foundations.RetryAfterHeader>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension>
   >;
