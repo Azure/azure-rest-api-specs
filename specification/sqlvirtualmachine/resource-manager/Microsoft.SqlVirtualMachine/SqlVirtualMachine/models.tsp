@@ -630,6 +630,7 @@ model WsfcDomainProfile {
   /**
    * Primary key of the witness storage account.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @visibility(Lifecycle.Create)
   storageAccountPrimaryKey?: string;
 
@@ -802,16 +803,19 @@ model WsfcDomainCredentials {
   /**
    * Cluster bootstrap account password.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   clusterBootstrapAccountPassword?: string;
 
   /**
    * Cluster operator account password.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   clusterOperatorAccountPassword?: string;
 
   /**
    * SQL service account password.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   sqlServiceAccountPassword?: string;
 }
 
@@ -877,12 +881,14 @@ model AutoBackupSettings {
   /**
    * Storage account key where backup will be taken to.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @visibility(Lifecycle.Create, Lifecycle.Update)
   storageAccessKey?: string;
 
   /**
    * Password for encryption on backup.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @visibility(Lifecycle.Create, Lifecycle.Update)
   password?: string;
 
@@ -949,6 +955,7 @@ model KeyVaultCredentialSettings {
   /**
    * Service principal name secret to access key vault.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @visibility(Lifecycle.Create, Lifecycle.Update)
   servicePrincipalSecret?: string;
 }
@@ -1011,6 +1018,7 @@ model SqlConnectivityUpdateSettings {
   /**
    * SQL Server sysadmin login password.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @visibility(Lifecycle.Create)
   sqlAuthUpdatePassword?: string;
 }
