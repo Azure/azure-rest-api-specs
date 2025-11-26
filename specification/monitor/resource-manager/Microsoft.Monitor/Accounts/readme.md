@@ -97,7 +97,4 @@ suppressions:
     from: azuremonitorworkspace.json
     where:
      - $.definitions["Azure.Core.uuid"].format
-  - code: MISSING_APIS_IN_DEFAULT_TAG
-    reason: The startInvestigation API was deprecated in version 2025-10-03-preview
-    from: preview/2025-10-03-preview/azuremonitorworkspace.json
 ```
