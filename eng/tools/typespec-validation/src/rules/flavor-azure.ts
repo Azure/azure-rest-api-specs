@@ -14,7 +14,8 @@ export class FlavorAzureRule implements Rule {
     let errorOutput = "";
 
     const configText = await readTspConfig(folder);
-    const config = yamlParse(configText);
+
+    const config = yamlParse(configText) as { options?: Record<string, { flavor?: string }> };
 
     const options = config?.options;
     for (const emitter in options) {
