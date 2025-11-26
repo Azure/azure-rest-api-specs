@@ -4,7 +4,15 @@ import * as z from "zod";
 const TspConfigSchema = z
   .object({
     emit: z.array(z.string()).optional(),
-    options: z.record(z.string(), z.record(z.string(), z.string())).optional(),
+    options: z
+      .looseObject({
+        "@azure-tools/typespec-autorest": z
+          .looseObject({
+            "azure-resource-provider-folder": z.string().optional(),
+          })
+          .optional(),
+      })
+      .optional(),
     linter: z
       .object({
         extends: z.array(z.string()).optional(),
