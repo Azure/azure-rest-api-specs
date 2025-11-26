@@ -1,5 +1,3 @@
-// @ts-check
-
 // Ported from @azure/swagger-validation-common:src/types/message.ts
 
 import { markdownTable } from "markdown-table";

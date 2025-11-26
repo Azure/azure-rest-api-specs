@@ -10,6 +10,7 @@ import "./product.tsp";
 import "./deviceGroup.tsp";
 import "./deployment.tsp";
 import "./device.tsp";
+import "./back-compatible.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -33,7 +34,5 @@ enum Versions {
   /**
    * The 2024-04-01 API version.
    */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2024_04_01: "2024-04-01",
 }

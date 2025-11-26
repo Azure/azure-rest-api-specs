@@ -61,7 +61,7 @@ export function outputErrorSummary(errors: ReportableOavError[], reportName: str
 
   // sort the errors by file name then by error code
   errors.sort((a, b) => {
-    const nameCompare = a.file.localeCompare(b.file);
+    const nameCompare = (a.file || "").localeCompare(b.file || "");
     if (nameCompare !== 0) {
       return nameCompare;
     }

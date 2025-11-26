@@ -18,10 +18,8 @@ using Azure.ResourceManager;
 namespace Microsoft.Spatio;
 
 enum Versions {
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   `2024-01-31-preview`,
 
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   `2025-02-11-preview`,
 }

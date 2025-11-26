@@ -331,76 +331,127 @@ using Microsoft.AVS;
 );
 
 // flatten
-#suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(Azure.ResourceManager.TrackedResource.properties,
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Azure.ResourceManager.TrackedResource.properties,
   "java,python"
 );
-#suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(Azure.ResourceManager.Foundations.ResourceUpdateModel.properties,
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Azure.ResourceManager.Foundations.ResourceUpdateModel.properties,
   "java,python"
 );
-#suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(Azure.ResourceManager.Foundations.ProxyResourceUpdateModel.properties,
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Azure.ResourceManager.Foundations.ProxyResourceUpdateModel.properties,
   "java,python"
 );
 
-#suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(Location.properties, "java,python");
-#suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(Cluster.properties, "java,python,csharp");
-#suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(Datastore.properties, "java,python,csharp");
-#suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(HcxEnterpriseSite.properties, "java,python,csharp");
-#suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(ExpressRouteAuthorization.properties, "java,python,csharp");
-#suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(GlobalReachConnection.properties, "java,python,csharp");
-#suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(WorkloadNetwork.properties, "java,python,csharp");
-#suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(WorkloadNetworkSegment.properties, "java,python,csharp");
-#suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(WorkloadNetworkGateway.properties, "java,python,csharp");
-#suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(WorkloadNetworkPortMirroring.properties,
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Location.properties,
+  "java,python"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Cluster.properties,
   "java,python,csharp"
 );
-#suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(WorkloadNetworkVMGroup.properties, "java,python,csharp");
-#suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(WorkloadNetworkVirtualMachine.properties,
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Datastore.properties,
   "java,python,csharp"
 );
-#suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(WorkloadNetworkDnsService.properties, "java,python,csharp");
-#suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(WorkloadNetworkDnsZone.properties, "java,python,csharp");
-#suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(WorkloadNetworkPublicIP.properties, "java,python,csharp");
-#suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(CloudLink.properties, "java,python,csharp");
-#suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(VirtualMachine.properties, "java,python,csharp");
-#suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(ScriptPackage.properties, "java,python,csharp");
-#suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(ScriptCmdlet.properties, "java,python,csharp");
-#suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(ScriptExecution.properties, "java,python,csharp");
-#suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(IscsiPath.properties, "java,python,csharp");
-#suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(PrivateCloud.properties, "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(HcxEnterpriseSite.properties,
+  "java,python,csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ExpressRouteAuthorization.properties,
+  "java,python,csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(GlobalReachConnection.properties,
+  "java,python,csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(WorkloadNetwork.properties,
+  "java,python,csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(WorkloadNetworkSegment.properties,
+  "java,python,csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(WorkloadNetworkGateway.properties,
+  "java,python,csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(WorkloadNetworkPortMirroring.properties,
+  "java,python,csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(WorkloadNetworkVMGroup.properties,
+  "java,python,csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(WorkloadNetworkVirtualMachine.properties,
+  "java,python,csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(WorkloadNetworkDnsService.properties,
+  "java,python,csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(WorkloadNetworkDnsZone.properties,
+  "java,python,csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(WorkloadNetworkPublicIP.properties,
+  "java,python,csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(CloudLink.properties,
+  "java,python,csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(VirtualMachine.properties,
+  "java,python,csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ScriptPackage.properties,
+  "java,python,csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ScriptCmdlet.properties,
+  "java,python,csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ScriptExecution.properties,
+  "java,python,csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(IscsiPath.properties,
+  "java,python,csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateCloud.properties,
+  "csharp"
+);
 
-#suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(PrivateCloudUpdate.properties, "java,python");
-#suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(ClusterUpdate.properties, "java,python");
-#suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(PlacementPolicyUpdate.properties, "java,python");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateCloudUpdate.properties,
+  "java,python"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ClusterUpdate.properties,
+  "java,python"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PlacementPolicyUpdate.properties,
+  "java,python"
+);
 
 @@alternateType(ScriptExecutionProperties.namedOutputs,
   Record<unknown>,
   "java,go"
+);
+
+// We do not wish for ServiceComponents operations to be in the SDKs.
+@@scope(ServiceComponents.checkAvailability,
+  "!(python,javascript,go,java,csharp)"
 );

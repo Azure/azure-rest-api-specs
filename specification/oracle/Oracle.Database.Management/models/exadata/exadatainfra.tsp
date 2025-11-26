@@ -5,7 +5,6 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
-using OpenAPI;
 
 namespace Oracle.Database;
 
@@ -29,6 +28,23 @@ union Preference {
   CustomPreference: "CustomPreference",
 
   string,
+}
+
+@added(Versions.v20250801_preview)
+@doc("The exascale config response details for the cloud Exadata infrastructure")
+model ExascaleConfigDetails {
+  @doc("Storage size needed for Exascale in GBs.")
+  totalStorageInGbs: int32;
+
+  @doc("Available storage size for Exascale in GBs.")
+  availableStorageInGbs?: int32;
+}
+
+@added(Versions.v20250801_preview)
+@doc("The exascale config request details for the Cloud Exadata infrastructure.")
+model ConfigureExascaleCloudExadataInfrastructureDetails {
+  @doc("Storage size needed for Exascale in GBs.")
+  totalStorageInGbs: int32;
 }
 
 @doc("CloudExadataInfrastructureLifecycleState enum")
@@ -308,4 +324,9 @@ model CloudExadataInfrastructureProperties {
   @doc("The compute model of the Exadata Infrastructure")
   @visibility(Lifecycle.Read)
   computeModel?: ComputeModel;
+
+  @added(Versions.v20250801_preview)
+  @doc("The exascale config details for the cloud Exadata infrastructure")
+  @visibility(Lifecycle.Read)
+  exascaleConfig?: ExascaleConfigDetails;
 }

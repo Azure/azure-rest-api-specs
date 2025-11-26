@@ -273,7 +273,7 @@ model SkuEnumerationForNewResourceResult {
   /**
    * The collection of available SKUs for new resources
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   value?: CapacitySku[];
 }
 
@@ -284,7 +284,7 @@ model SkuEnumerationForExistingResourceResult {
   /**
    * The collection of available SKUs for existing resources
    */
-  @OpenAPI.extension("x-ms-identifiers", #["/sku/name"])
+  @identifiers(#["/sku/name"])
   value?: SkuDetailsForExistingResource[];
 }
 
@@ -320,13 +320,13 @@ model ServiceSpecification {
   /**
    * Metric specifications for exposing performance metrics to shoebox.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   metricSpecifications?: MetricSpecification[];
 
   /**
    * Log specifications for exposing diagnostic logs to shoebox.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   logSpecifications?: LogSpecification[];
 }
 
@@ -371,7 +371,7 @@ model MetricSpecification {
   /**
    * For describing multi dimensional metrics
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   dimensions?: MetricSpecificationDimensionsItem[];
 }
 
@@ -544,7 +544,7 @@ model OperationListResult {
   /**
    * List of capacities supported by the Microsoft.PowerBIDedicated resource provider.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   @pageItems
   @visibility(Lifecycle.Read)
   value?: Operation[];

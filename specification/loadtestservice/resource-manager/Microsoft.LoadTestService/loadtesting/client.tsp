@@ -8,7 +8,6 @@ using Microsoft.LoadTestService;
 using Azure.ResourceManager;
 
 @useDependency(Microsoft.LoadTestService.APIVersions.v2022_12_01)
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
 namespace Customizations;
 
 @@clientName(LoadTests.updateLoadtest::parameters.properties,

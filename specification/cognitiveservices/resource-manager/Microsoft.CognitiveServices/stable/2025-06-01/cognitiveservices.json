@@ -3863,6 +3863,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "HTTP 200 (Ok) if the operation completed successfully."
+          },
           "202": {
             "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously."
           },
@@ -4520,6 +4523,54 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/capabilityHosts": {
+      "get": {
+        "tags": [
+          "AccountCapabilityHost"
+        ],
+        "summary": "List capabilityHost.",
+        "operationId": "AccountCapabilityHosts_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/CapabilityHostResourceArmPaginatedResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListAccountCapabilityHost": {
+            "$ref": "./examples/AccountCapabilityHost/list.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/capabilityHosts/{capabilityHostName}": {
       "delete": {
         "tags": [
@@ -4715,6 +4766,57 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/capabilityHosts": {
+      "get": {
+        "tags": [
+          "ProjectCapabilityHost"
+        ],
+        "summary": "List capabilityHost.",
+        "operationId": "ProjectCapabilityHosts_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/projectNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ProjectCapabilityHostResourceArmPaginatedResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListProjectCapabilityHost": {
+            "$ref": "./examples/ProjectCapabilityHost/list.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/capabilityHosts/{capabilityHostName}": {
       "delete": {
         "tags": [
@@ -4820,7 +4922,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/CapabilityHostResource"
+              "$ref": "#/definitions/ProjectCapabilityHostResource"
             }
           },
           "default": {
@@ -4873,7 +4975,7 @@
             "description": "CapabilityHost definition.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CapabilityHostResource"
+              "$ref": "#/definitions/ProjectCapabilityHostResource"
             }
           }
         ],
@@ -4881,13 +4983,13 @@
           "200": {
             "description": "Create or update request is successful.",
             "schema": {
-              "$ref": "#/definitions/CapabilityHostResource"
+              "$ref": "#/definitions/ProjectCapabilityHostResource"
             }
           },
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/CapabilityHostResource"
+              "$ref": "#/definitions/ProjectCapabilityHostResource"
             },
             "headers": {
               "x-ms-async-operation-timeout": {
@@ -8661,6 +8763,46 @@
         }
       }
     },
+    "CapabilityHostResourceArmPaginatedResult": {
+      "description": "A paginated list of Capability Host entities.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link to the next page of Capability Host objects. If null, there are no additional pages.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "value": {
+          "description": "An array of objects of type Capability Host.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CapabilityHostResource"
+          },
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "ProjectCapabilityHostResourceArmPaginatedResult": {
+      "description": "A paginated list of Project Capability Host entities.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link to the next page of Project Capability Host objects. If null, there are no additional pages.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "value": {
+          "description": "An array of objects of type Project Capability Host.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProjectCapabilityHostResource"
+          },
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
     "CapabilityHostResource": {
       "description": "Azure Resource Manager resource envelope.",
       "required": [
@@ -8794,6 +8936,73 @@
           }
         ]
       },
+      "additionalProperties": false
+    },
+    "ProjectCapabilityHostResource": {
+      "description": "Azure Resource Manager resource envelope for Project CapabilityHost.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "[Required] Additional attributes of the entity.",
+          "$ref": "#/definitions/ProjectCapabilityHost"
+        }
+      },
+      "x-ms-client-name": "ProjectCapabilityHost",
+      "additionalProperties": false
+    },
+    "ProjectCapabilityHost": {
+      "type": "object",
+      "properties": {
+        "aiServicesConnections": {
+          "description": "List of AI services connections.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-nullable": true
+        },
+        "vectorStoreConnections": {
+          "description": "List of connection names from those available in the account or project to be used for vector database (e.g. CosmosDB).",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-nullable": true
+        },
+        "storageConnections": {
+          "description": "List of connection names from those available in the account or project to be used as a storage resource.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-nullable": true
+        },
+        "threadStorageConnections": {
+          "description": "List of connection names from those available in the account or project to be used for Thread storage.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-nullable": true
+        },
+        "provisioningState": {
+          "description": "Provisioning state for the CapabilityHost.",
+          "$ref": "#/definitions/CapabilityHostProvisioningState",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      },
+      "x-ms-client-name": "ProjectCapabilityHostProperties",
       "additionalProperties": false
     },
     "ResourceBase": {

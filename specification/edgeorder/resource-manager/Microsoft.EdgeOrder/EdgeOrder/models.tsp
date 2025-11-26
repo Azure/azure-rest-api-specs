@@ -933,7 +933,7 @@ model ConfigurationFilter {
   /**
    * Filters specific to product.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   filterableProperty?: FilterableProperty[];
 
   /**
@@ -994,7 +994,7 @@ model ChildConfigurationFilter {
   /**
    * The list of child configuration hierarchy customer wants to filter for the given configuration.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   hierarchyInformations?: HierarchyInformation[];
 
   /**
@@ -1010,7 +1010,7 @@ model CustomerSubscriptionDetails {
   /**
    * List of registered feature flags for subscription.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   registeredFeatures?: CustomerSubscriptionRegisteredFeatures[];
 
   /**
@@ -1052,7 +1052,6 @@ model Configuration {
   /**
    * Properties of configuration.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   properties?: ConfigurationProperties;
 }
@@ -1066,7 +1065,7 @@ model ConfigurationProperties extends CommonProperties {
    * Specifications of the configuration.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   specifications?: Specification[];
 
   /**
@@ -1091,7 +1090,7 @@ model ConfigurationProperties extends CommonProperties {
    * Child configurations present for the configuration after applying child configuration filter, grouped by the category name of the child configuration.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   groupedChildConfigurations?: GroupedChildConfigurations[];
 
   /**
@@ -1179,7 +1178,7 @@ model GroupedChildConfigurations {
    * List of child configurations.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   childConfigurations?: ChildConfiguration[];
 }
 
@@ -1205,7 +1204,7 @@ model CategoryInformation {
   /**
    * Links for the category.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   links?: Link[];
 }
 
@@ -1233,7 +1232,6 @@ model ChildConfiguration {
   /**
    * Properties of child configuration.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   properties?: ChildConfigurationProperties;
 }
@@ -1270,7 +1268,7 @@ model ChildConfigurationProperties {
    * Specifications of the configuration.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   specifications?: Specification[];
 
   /**
@@ -1295,7 +1293,7 @@ model ChildConfigurationProperties {
    * Child configurations present for the configuration after applying child configuration filter, grouped by the category name of the child configuration.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   groupedChildConfigurations?: GroupedChildConfigurations[];
 
   /**
@@ -1308,7 +1306,7 @@ model ChildConfigurationProperties {
    * List of filters supported for a product.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   filterableProperties?: FilterableProperty[];
 
   /**
@@ -1327,7 +1325,7 @@ model ChildConfigurationProperties {
    * Image information for the product system.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   imageInformation?: ImageInformation[];
 
   /**
@@ -1393,7 +1391,7 @@ model Description {
    * Links for the product system.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   links?: Link[];
 }
 
@@ -1422,7 +1420,7 @@ model CostInformation {
    * Details on the various billing aspects for the product system.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   billingMeterDetails?: BillingMeterDetails[];
 
   /**
@@ -1537,7 +1535,7 @@ model CommonProperties extends BasicInformation {
    * List of filters supported for a product.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   filterableProperties?: FilterableProperty[];
 }
 
@@ -1561,7 +1559,7 @@ model BasicInformation {
    * Image information for the product system.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   imageInformation?: ImageInformation[];
 
   /**
@@ -1618,7 +1616,6 @@ model ProductFamily {
   /**
    * Properties of product family.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   properties?: ProductFamilyProperties;
 }
@@ -1632,13 +1629,13 @@ model ProductFamilyProperties extends CommonProperties {
    * List of product lines supported in the product family.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   productLines?: ProductLine[];
 
   /**
    * Contains details related to resource provider.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   resourceProviderDetails?: ResourceProviderDetails[];
 }
 
@@ -1649,7 +1646,6 @@ model ProductLine {
   /**
    * Properties of product line.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   properties?: ProductLineProperties;
 }
@@ -1663,7 +1659,7 @@ model ProductLineProperties extends CommonProperties {
    * List of products in the product line.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   products?: Product[];
 }
 
@@ -1674,7 +1670,6 @@ model Product {
   /**
    * Properties of product.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   properties?: ProductProperties;
 }
@@ -1688,7 +1683,7 @@ model ProductProperties extends CommonProperties {
    * List of configurations for the product.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   configurations?: Configuration[];
 }
 
@@ -1776,7 +1771,7 @@ model OrderItemDetails {
    * Order item status history.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   orderItemStageHistory?: StageDetails[];
 
   /**
@@ -1835,7 +1830,7 @@ model OrderItemDetails {
    * List of parent RP details supported for configuration.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   managementRpDetailsList?: ResourceProviderDetails[];
 
   /**
@@ -1885,14 +1880,14 @@ model ProductDetails {
   /**
    * List of additional configurations customer wants in the order item apart from the ones included in the base configuration.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   optInAdditionalConfigurations?: AdditionalConfiguration[];
 
   /**
    * Details of all child configurations that are part of the order item.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   childConfigurationDeviceDetails?: ConfigurationDeviceDetails[];
 
   /**
@@ -2051,7 +2046,7 @@ model AdditionalConfiguration {
   /**
    * List Provisioning Details for Devices in Additional Config.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   provisioningDetails?: ProvisioningDetails[];
 }
 
@@ -2086,7 +2081,7 @@ model ConfigurationDeviceDetails {
    * List of device details.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   deviceDetails?: DeviceDetails[];
 
   /**
@@ -2166,7 +2161,7 @@ model Preferences {
   /**
    * Notification preferences.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   notificationPreferences?: NotificationPreference[];
 
   /**
@@ -2385,7 +2380,7 @@ model OrderProperties {
    * Order status history.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   orderStageHistory?: StageDetails[];
 
   /**
@@ -2409,7 +2404,6 @@ model ProductFamiliesMetadataDetails {
   /**
    * Product family properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   properties?: ProductFamilyProperties;
 }
@@ -2421,7 +2415,6 @@ model AddressUpdateParameter {
   /**
    * Properties of an address to be updated.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: AddressUpdateProperties;
 
   /**
@@ -2453,7 +2446,6 @@ model OrderItemUpdateParameter {
   /**
    * Order item update properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: OrderItemUpdateProperties;
 
   /**
