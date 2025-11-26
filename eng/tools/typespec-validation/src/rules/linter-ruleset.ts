@@ -25,7 +25,14 @@ export class LinterRulesetRule implements Rule {
     let errorOutput = "";
 
     const configText = await readTspConfig(folder);
-    const config = yamlParse(configText);
+    const config = yamlParse(configText) as {
+      linter?: {
+        extends?: string[];
+      };
+      options?: {
+        "@azure-tools/typespec-autorest"?: { "azure-resource-provider-folder"?: string };
+      };
+    };
 
     const rpFolder =
       config?.options?.["@azure-tools/typespec-autorest"]?.["azure-resource-provider-folder"];
@@ -42,7 +49,7 @@ export class LinterRulesetRule implements Rule {
     }
     stdOutput += `files: ${JSON.stringify(files)}\n`;
 
-    const linterExtends: string[] = config?.linter?.extends;
+    const linterExtends = config?.linter?.extends;
     stdOutput += `linter.extends: ${JSON.stringify(linterExtends)}`;
 
     let requiredRuleset = "";
