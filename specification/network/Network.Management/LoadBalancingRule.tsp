@@ -69,7 +69,11 @@ interface LoadBalancingRules {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("LoadBalancerLoadBalancingRules_List")
-  list is ArmResourceListByParent<LoadBalancingRule, Error = CloudError>;
+  list is ArmResourceListByParent<
+    LoadBalancingRule,
+    Response = LoadBalancerLoadBalancingRuleListResult,
+    Error = CloudError
+  >;
 
   /**
    * Get health details of a load balancing rule.
@@ -79,7 +83,8 @@ interface LoadBalancingRules {
   health is LoadBalancerLoadBalancingRuleOps.ActionAsync<
     LoadBalancingRule,
     void,
-    ArmResponse<LoadBalancerHealthPerRule>
+    ArmResponse<LoadBalancerHealthPerRule>,
+    OverrideErrorType = CloudError
   >;
 }
 

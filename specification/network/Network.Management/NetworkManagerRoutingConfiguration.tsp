@@ -31,18 +31,25 @@ interface NetworkManagerRoutingConfigurations {
   /**
    * Retrieves a network manager routing configuration.
    */
-  get is ArmResourceRead<NetworkManagerRoutingConfiguration, Error = CloudError>;
+  get is ArmResourceRead<
+    NetworkManagerRoutingConfiguration,
+    Error = CloudError
+  >;
 
   /**
    * Creates or updates a network manager routing configuration.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<NetworkManagerRoutingConfiguration, Error = CloudError>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<
+    NetworkManagerRoutingConfiguration,
+    Error = CloudError
+  >;
 
   /**
    * Deletes a network manager routing configuration.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<NetworkManagerRoutingConfiguration,
+  delete is ArmResourceDeleteWithoutOkAsync<
+    NetworkManagerRoutingConfiguration,
     Parameters = {
       /**
        * Deletes the resource even if it is part of a deployed configuration. If the configuration has been deployed, the service will do a cleanup deployment in the background, prior to the delete.
@@ -50,12 +57,15 @@ interface NetworkManagerRoutingConfigurations {
       @query("force")
       force?: boolean;
     },
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = CloudError
+  >;
 
   /**
    * Lists all the network manager routing configurations in a network manager, in a paginated format.
    */
-  list is ArmResourceListByParent<NetworkManagerRoutingConfiguration,
+  list is ArmResourceListByParent<
+    NetworkManagerRoutingConfiguration,
     Parameters = {
       /**
        * An optional query parameter which specifies the maximum number of records to be returned by the server.
@@ -70,7 +80,9 @@ interface NetworkManagerRoutingConfigurations {
        */
       @query("$skipToken")
       $skipToken?: string;
-    }, Error = CloudError>;
+    },
+    Error = CloudError
+  >;
 }
 
 @@doc(NetworkManagerRoutingConfiguration.name,

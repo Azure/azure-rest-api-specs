@@ -41,8 +41,11 @@ interface Routes {
    * Deletes the specified route from a route table.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<Route,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    Route,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = CloudError
+  >;
 
   /**
    * Gets all routes in a route table.

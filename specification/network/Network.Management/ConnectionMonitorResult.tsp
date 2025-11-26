@@ -58,31 +58,44 @@ interface ConnectionMonitorResults {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ConnectionMonitors_UpdateTags")
   @patch(#{ implicitOptionality: false })
-  updateTags is ArmCustomPatchSync<ConnectionMonitorResult,
-    PatchModel = TagsObject, Error = CloudError>;
+  updateTags is ArmCustomPatchSync<
+    ConnectionMonitorResult,
+    PatchModel = TagsObject,
+    Error = CloudError
+  >;
 
   /**
    * Deletes the specified connection monitor.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ConnectionMonitors_Delete")
-  delete is ArmResourceDeleteWithoutOkAsync<ConnectionMonitorResult, Error = CloudError>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    ConnectionMonitorResult,
+    Error = CloudError
+  >;
 
   /**
    * Lists all connection monitors for the specified Network Watcher.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ConnectionMonitors_List")
-  list is ArmResourceListByParent<ConnectionMonitorResult,
-    Response = ArmResponse<ConnectionMonitorListResult>
-  , Error = CloudError>;
+  list is ArmResourceListByParent<
+    ConnectionMonitorResult,
+    Response = ArmResponse<ConnectionMonitorListResult>,
+    Error = CloudError
+  >;
 
   /**
    * Stops the specified connection monitor.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ConnectionMonitors_Stop")
-  stop is ArmResourceActionAsync<ConnectionMonitorResult, void, OkResponse, Error = CloudError>;
+  stop is ArmResourceActionAsync<
+    ConnectionMonitorResult,
+    void,
+    OkResponse,
+    Error = CloudError
+  >;
 }
 
 @@doc(ConnectionMonitorResult.name, "The name of the connection monitor.");

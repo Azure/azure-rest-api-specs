@@ -36,21 +36,29 @@ interface HubRouteTables {
   /**
    * Creates a RouteTable resource if it doesn't exist else updates the existing RouteTable.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<HubRouteTable, Error = CloudError>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    HubRouteTable,
+    Error = CloudError
+  >;
 
   /**
    * Deletes a RouteTable.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<HubRouteTable,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    HubRouteTable,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = CloudError
+  >;
 
   /**
    * Retrieves the details of all RouteTables.
    */
-  list is ArmResourceListByParent<HubRouteTable,
-    Response = ArmResponse<ListHubRouteTablesResult>
-  , Error = CloudError>;
+  list is ArmResourceListByParent<
+    HubRouteTable,
+    Response = ArmResponse<ListHubRouteTablesResult>,
+    Error = CloudError
+  >;
 }
 
 @@doc(HubRouteTable.name, "The name of the RouteTable.");

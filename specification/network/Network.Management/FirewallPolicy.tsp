@@ -35,32 +35,45 @@ interface FirewallPolicies {
   /**
    * Gets the specified Firewall Policy.
    */
-  get is ArmResourceRead<FirewallPolicy,
+  get is ArmResourceRead<
+    FirewallPolicy,
     Parameters = {
       /**
        * Expands referenced resources.
        */
       @query("$expand")
       $expand?: string;
-    }, Error = CloudError>;
+    },
+    Error = CloudError
+  >;
 
   /**
    * Creates or updates the specified Firewall Policy.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<FirewallPolicy, Error = CloudError>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    FirewallPolicy,
+    Error = CloudError
+  >;
 
   /**
    * Updates tags of a Azure Firewall Policy resource.
    */
   @patch(#{ implicitOptionality: false })
-  updateTags is ArmCustomPatchSync<FirewallPolicy, PatchModel = TagsObject, Error = CloudError>;
+  updateTags is ArmCustomPatchSync<
+    FirewallPolicy,
+    PatchModel = TagsObject,
+    Error = CloudError
+  >;
 
   /**
    * Deletes the specified Firewall Policy.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<FirewallPolicy,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    FirewallPolicy,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = CloudError
+  >;
 
   /**
    * Lists all Firewall Policies in a resource group.
@@ -78,10 +91,12 @@ interface FirewallPolicies {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("FirewallPolicyIdpsSignatures_List")
   @action("listIdpsSignatures")
-  firewallPolicyIdpsSignaturesList is ArmResourceActionSync<FirewallPolicy,
+  firewallPolicyIdpsSignaturesList is ArmResourceActionSync<
+    FirewallPolicy,
     IdpsQueryObject,
-    ArmResponse<QueryResults>
-  , Error = CloudError>;
+    ArmResponse<QueryResults>,
+    Error = CloudError
+  >;
 
   /**
    * Retrieves the current filter values for the signatures overrides
@@ -89,10 +104,12 @@ interface FirewallPolicies {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("FirewallPolicyIdpsSignaturesFilterValues_List")
   @action("listIdpsFilterOptions")
-  firewallPolicyIdpsSignaturesFilterValuesList is ArmResourceActionSync<FirewallPolicy,
+  firewallPolicyIdpsSignaturesFilterValuesList is ArmResourceActionSync<
+    FirewallPolicy,
     SignatureOverridesFilterValuesQuery,
-    ArmResponse<SignatureOverridesFilterValuesResponse>
-  , Error = CloudError>;
+    ArmResponse<SignatureOverridesFilterValuesResponse>,
+    Error = CloudError
+  >;
 
   /**
    * Deploys the firewall policy draft and child rule collection group drafts.
@@ -100,12 +117,14 @@ interface FirewallPolicies {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("FirewallPolicyDeployments_Deploy")
   @Azure.Core.useFinalStateVia("azure-async-operation")
-  deploy is ArmResourceActionAsyncBase<FirewallPolicy,
+  deploy is ArmResourceActionAsyncBase<
+    FirewallPolicy,
     void,
     ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
       Azure.Core.Foundations.RetryAfterHeader>,
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<FirewallPolicy>
-  , Error = CloudError>;
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<FirewallPolicy>,
+    Error = CloudError
+  >;
 }
 
 @@doc(FirewallPolicy.name, "The name of the Firewall Policy.");

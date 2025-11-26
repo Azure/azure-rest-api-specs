@@ -32,16 +32,22 @@ interface NetworkVirtualApplianceSkus {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualApplianceSkus_Get")
-  get is ArmResourceRead<NetworkVirtualApplianceSku,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters, Error = CloudError>;
+  get is ArmResourceRead<
+    NetworkVirtualApplianceSku,
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    Error = CloudError
+  >;
 
   /**
    * List all SKUs available for a virtual appliance.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualApplianceSkus_List")
-  list is ArmResourceListByParent<NetworkVirtualApplianceSku,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters, Error = CloudError>;
+  list is ArmResourceListByParent<
+    NetworkVirtualApplianceSku,
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    Error = CloudError
+  >;
 }
 
 @@doc(NetworkVirtualApplianceSku.name, "Name of the Sku.");

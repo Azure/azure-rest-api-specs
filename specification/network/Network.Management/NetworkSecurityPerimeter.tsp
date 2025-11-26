@@ -33,21 +33,28 @@ interface NetworkSecurityPerimeters {
   /**
    * Creates or updates a Network Security Perimeter.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<NetworkSecurityPerimeter, Error = CloudError>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<
+    NetworkSecurityPerimeter,
+    Error = CloudError
+  >;
 
   /**
    * Patch Tags for a Network Security Perimeter.
    */
   @patch(#{ implicitOptionality: false })
-  patch is ArmCustomPatchSync<NetworkSecurityPerimeter,
-    PatchModel = UpdateTagsRequest, Error = CloudError>;
+  patch is ArmCustomPatchSync<
+    NetworkSecurityPerimeter,
+    PatchModel = UpdateTagsRequest,
+    Error = CloudError
+  >;
 
   /**
    * Deletes a network security perimeter.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<NetworkSecurityPerimeter,
+  delete is ArmResourceDeleteWithoutOkAsync<
+    NetworkSecurityPerimeter,
     Parameters = {
       /**
        * Deletes the resource even if it contains any child associations.
@@ -56,13 +63,15 @@ interface NetworkSecurityPerimeters {
       forceDeletion?: boolean;
     },
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
-,    Error = CloudError>;
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse,
+    Error = CloudError
+  >;
 
   /**
    * List network security perimeters in a resource group.
    */
-  list is ArmResourceListByParent<NetworkSecurityPerimeter,
+  list is ArmResourceListByParent<
+    NetworkSecurityPerimeter,
     Parameters = {
       /**
        * An optional query parameter which specifies the maximum number of records to be returned by the server.
@@ -77,12 +86,15 @@ interface NetworkSecurityPerimeters {
        */
       @query("$skipToken")
       $skipToken?: string;
-    }, Error = CloudError>;
+    },
+    Error = CloudError
+  >;
 
   /**
    * List all network security perimeters in a subscription.
    */
-  listBySubscription is ArmListBySubscription<NetworkSecurityPerimeter,
+  listBySubscription is ArmListBySubscription<
+    NetworkSecurityPerimeter,
     Parameters = {
       /**
        * An optional query parameter which specifies the maximum number of records to be returned by the server.
@@ -97,7 +109,9 @@ interface NetworkSecurityPerimeters {
        */
       @query("$skipToken")
       $skipToken?: string;
-    }, Error = CloudError>;
+    },
+    Error = CloudError
+  >;
 }
 
 @@maxLength(NetworkSecurityPerimeter.name, 80);

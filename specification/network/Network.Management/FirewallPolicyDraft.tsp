@@ -36,7 +36,10 @@ interface FirewallPolicyDrafts {
   /**
    * Create or update a draft Firewall Policy.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<FirewallPolicyDraft, Error = CloudError>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<
+    FirewallPolicyDraft,
+    Error = CloudError
+  >;
 
   /**
    * Delete a draft policy.

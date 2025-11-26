@@ -36,14 +36,20 @@ interface VirtualRouterPeerings {
   /**
    * Creates or updates the specified Virtual Router Peering.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<VirtualRouterPeering, Error = CloudError>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    VirtualRouterPeering,
+    Error = CloudError
+  >;
 
   /**
    * Deletes the specified peering from a Virtual Router.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<VirtualRouterPeering,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    VirtualRouterPeering,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = CloudError
+  >;
 
   /**
    * Lists all Virtual Router Peerings in a Virtual Router resource.

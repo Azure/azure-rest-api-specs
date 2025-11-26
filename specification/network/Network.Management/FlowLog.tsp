@@ -42,13 +42,20 @@ interface FlowLogs {
   /**
    * Create or update a flow log for the specified network security group.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<FlowLog, Error = CloudError>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    FlowLog,
+    Error = CloudError
+  >;
 
   /**
    * Update tags of the specified flow log.
    */
   @patch(#{ implicitOptionality: false })
-  updateTags is ArmCustomPatchSync<FlowLog, PatchModel = TagsObject, Error = CloudError>;
+  updateTags is ArmCustomPatchSync<
+    FlowLog,
+    PatchModel = TagsObject,
+    Error = CloudError
+  >;
 
   /**
    * Deletes the specified flow log resource.

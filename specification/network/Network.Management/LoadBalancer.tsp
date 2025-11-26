@@ -64,32 +64,45 @@ interface LoadBalancers {
   /**
    * Gets the specified load balancer.
    */
-  get is ArmResourceRead<LoadBalancer,
+  get is ArmResourceRead<
+    LoadBalancer,
     Parameters = {
       /**
        * Expands referenced resources.
        */
       @query("$expand")
       $expand?: string;
-    }, Error = CloudError>;
+    },
+    Error = CloudError
+  >;
 
   /**
    * Creates or updates a load balancer.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<LoadBalancer, Error = CloudError>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    LoadBalancer,
+    Error = CloudError
+  >;
 
   /**
    * Updates a load balancer tags.
    */
   @patch(#{ implicitOptionality: false })
-  updateTags is ArmCustomPatchSync<LoadBalancer, PatchModel = TagsObject, Error = CloudError>;
+  updateTags is ArmCustomPatchSync<
+    LoadBalancer,
+    PatchModel = TagsObject,
+    Error = CloudError
+  >;
 
   /**
    * Deletes the specified load balancer.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<LoadBalancer,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    LoadBalancer,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = CloudError
+  >;
 
   /**
    * Gets all the load balancers in a resource group.
@@ -108,7 +121,8 @@ interface LoadBalancers {
     LoadBalancer,
     MigrateLoadBalancerToIpBasedRequest,
     Response = ArmResponse<MigratedPools>,
-    OptionalRequestBody = true
+    OptionalRequestBody = true,
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -119,10 +133,12 @@ interface LoadBalancers {
   @list
   @get
   @action("networkInterfaces")
-  loadBalancerNetworkInterfacesList is ArmResourceActionSync<LoadBalancer,
+  loadBalancerNetworkInterfacesList is ArmResourceActionSync<
+    LoadBalancer,
     void,
-    ArmResponse<ResourceListResult<NetworkInterface>>
-  , Error = CloudError>;
+    ArmResponse<ResourceListResult<NetworkInterface>>,
+    Error = CloudError
+  >;
 }
 
 @@doc(LoadBalancer.name, "The name of the load balancer.");

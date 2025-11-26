@@ -41,20 +41,30 @@ interface ApplicationGateways {
   /**
    * Creates or updates the specified application gateway.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<ApplicationGateway, Error = CloudError>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    ApplicationGateway,
+    Error = CloudError
+  >;
 
   /**
    * Updates the specified application gateway tags.
    */
   @patch(#{ implicitOptionality: false })
-  updateTags is ArmCustomPatchSync<ApplicationGateway, PatchModel = TagsObject, Error = CloudError>;
+  updateTags is ArmCustomPatchSync<
+    ApplicationGateway,
+    PatchModel = TagsObject,
+    Error = CloudError
+  >;
 
   /**
    * Deletes the specified application gateway.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<ApplicationGateway,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    ApplicationGateway,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = CloudError
+  >;
 
   /**
    * Lists all application gateways in a resource group.
@@ -69,18 +79,29 @@ interface ApplicationGateways {
   /**
    * Starts the specified application gateway.
    */
-  start is ArmResourceActionAsync<ApplicationGateway, void, OkResponse, Error = CloudError>;
+  start is ArmResourceActionAsync<
+    ApplicationGateway,
+    void,
+    OkResponse,
+    Error = CloudError
+  >;
 
   /**
    * Stops the specified application gateway in a resource group.
    */
-  stop is ArmResourceActionAsync<ApplicationGateway, void, OkResponse, Error = CloudError>;
+  stop is ArmResourceActionAsync<
+    ApplicationGateway,
+    void,
+    OkResponse,
+    Error = CloudError
+  >;
 
   /**
    * Gets the backend health of the specified application gateway in a resource group.
    */
   @action("backendhealth")
-  backendHealth is ArmResourceActionAsync<ApplicationGateway,
+  backendHealth is ArmResourceActionAsync<
+    ApplicationGateway,
     void,
     ArmResponse<ApplicationGatewayBackendHealth>,
     Parameters = {
@@ -89,14 +110,16 @@ interface ApplicationGateways {
        */
       @query("$expand")
       $expand?: string;
-    }
-  , Error = CloudError>;
+    },
+    Error = CloudError
+  >;
 
   /**
    * Gets the backend health for given combination of backend pool and http setting of the specified application gateway in a resource group.
    */
   @action("getBackendHealthOnDemand")
-  backendHealthOnDemand is ArmResourceActionAsync<ApplicationGateway,
+  backendHealthOnDemand is ArmResourceActionAsync<
+    ApplicationGateway,
     ApplicationGatewayOnDemandProbe,
     ArmResponse<ApplicationGatewayBackendHealthOnDemand>,
     Parameters = {
@@ -105,8 +128,9 @@ interface ApplicationGateways {
        */
       @query("$expand")
       $expand?: string;
-    }
-  , Error = CloudError>;
+    },
+    Error = CloudError
+  >;
 
   /**
    * Lists all private link resources on an application gateway.
@@ -116,10 +140,12 @@ interface ApplicationGateways {
   @list
   @get
   @action("privateLinkResources")
-  applicationGatewayPrivateLinkResourcesList is ArmResourceActionSync<ApplicationGateway,
+  applicationGatewayPrivateLinkResourcesList is ArmResourceActionSync<
+    ApplicationGateway,
     void,
-    ArmResponse<ResourceListResult<ApplicationGatewayPrivateLinkResource>>
-  , Error = CloudError>;
+    ArmResponse<ResourceListResult<ApplicationGatewayPrivateLinkResource>>,
+    Error = CloudError
+  >;
 }
 
 @@doc(ApplicationGateway.name, "The name of the application gateway.");

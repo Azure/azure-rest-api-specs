@@ -34,19 +34,27 @@ interface NetworkManagers {
   /**
    * Creates or updates a Network Manager.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<NetworkManager, Error = CloudError>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<
+    NetworkManager,
+    Error = CloudError
+  >;
 
   /**
    * Patch NetworkManager.
    */
   @patch(#{ implicitOptionality: false })
-  patch is ArmCustomPatchSync<NetworkManager, PatchModel = PatchObject, Error = CloudError>;
+  patch is ArmCustomPatchSync<
+    NetworkManager,
+    PatchModel = PatchObject,
+    Error = CloudError
+  >;
 
   /**
    * Deletes a network manager.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<NetworkManager,
+  delete is ArmResourceDeleteWithoutOkAsync<
+    NetworkManager,
     Parameters = {
       /**
        * Deletes the resource even if it is part of a deployed configuration. If the configuration has been deployed, the service will do a cleanup deployment in the background, prior to the delete.
@@ -54,12 +62,15 @@ interface NetworkManagers {
       @query("force")
       force?: boolean;
     },
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = CloudError
+  >;
 
   /**
    * List network managers in a resource group.
    */
-  list is ArmResourceListByParent<NetworkManager,
+  list is ArmResourceListByParent<
+    NetworkManager,
     Parameters = {
       /**
        * An optional query parameter which specifies the maximum number of records to be returned by the server.
@@ -74,12 +85,15 @@ interface NetworkManagers {
        */
       @query("$skipToken")
       $skipToken?: string;
-    }, Error = CloudError>;
+    },
+    Error = CloudError
+  >;
 
   /**
    * List all network managers in a subscription.
    */
-  listBySubscription is ArmListBySubscription<NetworkManager,
+  listBySubscription is ArmListBySubscription<
+    NetworkManager,
     Parameters = {
       /**
        * An optional query parameter which specifies the maximum number of records to be returned by the server.
@@ -94,7 +108,9 @@ interface NetworkManagers {
        */
       @query("$skipToken")
       $skipToken?: string;
-    }, Error = CloudError>;
+    },
+    Error = CloudError
+  >;
 
   /**
    * Lists active connectivity configurations in a network manager.
@@ -102,7 +118,8 @@ interface NetworkManagers {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ListActiveConnectivityConfigurations")
   @list
-  listActiveConnectivityConfigurations is ArmResourceActionSync<NetworkManager,
+  listActiveConnectivityConfigurations is ArmResourceActionSync<
+    NetworkManager,
     ActiveConfigurationParameter,
     ArmResponse<ActiveConnectivityConfigurationsListResult>,
     Parameters = {
@@ -113,8 +130,9 @@ interface NetworkManagers {
       @minValue(1)
       @query("$top")
       $top?: int32;
-    }
-  , Error = CloudError>;
+    },
+    Error = CloudError
+  >;
 
   /**
    * Lists active security admin rules in a network manager.
@@ -122,7 +140,8 @@ interface NetworkManagers {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ListActiveSecurityAdminRules")
   @list
-  listActiveSecurityAdminRules is ArmResourceActionSync<NetworkManager,
+  listActiveSecurityAdminRules is ArmResourceActionSync<
+    NetworkManager,
     ActiveConfigurationParameter,
     ArmResponse<ActiveSecurityAdminRulesListResult>,
     Parameters = {
@@ -133,8 +152,9 @@ interface NetworkManagers {
       @minValue(1)
       @query("$top")
       $top?: int32;
-    }
-  , Error = CloudError>;
+    },
+    Error = CloudError
+  >;
 
   /**
    * Post a Network Manager Commit.
@@ -142,10 +162,16 @@ interface NetworkManagers {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("NetworkManagerCommits_Post")
   @action("commit")
-  post is ArmResourceActionAsync<NetworkManager,
-    NetworkManagerCommit,
-    ArmResponse<NetworkManagerCommit>
-  , Error = CloudError>;
+  post is ArmResourceActionAsyncBase<
+    NetworkManager,
+    Request = NetworkManagerCommit,
+    Response = ArmResponse<NetworkManagerCommit> | (ArmAcceptedLroResponse & {
+      @bodyRoot
+      _: NetworkManagerCommit;
+    }),
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<NetworkManager>,
+    Error = CloudError
+  >;
 
   /**
    * Post to List of Network Manager Deployment Status.
@@ -154,7 +180,8 @@ interface NetworkManagers {
   @operationId("NetworkManagerDeploymentStatus_List")
   @list
   @action("listDeploymentStatus")
-  networkManagerDeploymentStatusList is ArmResourceActionSync<NetworkManager,
+  networkManagerDeploymentStatusList is ArmResourceActionSync<
+    NetworkManager,
     NetworkManagerDeploymentStatusParameter,
     ArmResponse<NetworkManagerDeploymentStatusListResult>,
     Parameters = {
@@ -165,8 +192,9 @@ interface NetworkManagers {
       @minValue(1)
       @query("$top")
       $top?: int32;
-    }
-  , Error = CloudError>;
+    },
+    Error = CloudError
+  >;
 }
 
 @@doc(NetworkManager.name, "The name of the network manager.");

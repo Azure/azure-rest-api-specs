@@ -120,19 +120,28 @@ interface ExpressRouteCircuitPeerings {
   /**
    * Creates or updates a peering in the specified express route circuits.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<ExpressRouteCircuitPeering, Error = CloudError>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    ExpressRouteCircuitPeering,
+    Error = CloudError
+  >;
 
   /**
    * Deletes the specified peering from the specified express route circuit.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<ExpressRouteCircuitPeering,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    ExpressRouteCircuitPeering,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = CloudError
+  >;
 
   /**
    * Gets all peerings in a specified express route circuit.
    */
-  list is ArmResourceListByParent<ExpressRouteCircuitPeering, Error = CloudError>;
+  list is ArmResourceListByParent<
+    ExpressRouteCircuitPeering,
+    Error = CloudError
+  >;
 
   /**
    * Gets the currently advertised ARP table associated with the express route circuit in a resource group.
@@ -174,10 +183,12 @@ interface ExpressRouteCircuitPeerings {
   @operationId("ExpressRouteCircuits_GetPeeringStats")
   @get
   @action("stats")
-  getPeeringStats is ArmResourceActionSync<ExpressRouteCircuitPeering,
+  getPeeringStats is ArmResourceActionSync<
+    ExpressRouteCircuitPeering,
     void,
-    ArmResponse<ExpressRouteCircuitStats>
-  , Error = CloudError>;
+    ArmResponse<ExpressRouteCircuitStats>,
+    Error = CloudError
+  >;
 }
 
 @@doc(ExpressRouteCircuitPeering.name, "The name of the peering.");

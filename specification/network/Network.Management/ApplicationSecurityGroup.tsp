@@ -34,21 +34,30 @@ interface ApplicationSecurityGroups {
   /**
    * Creates or updates an application security group.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<ApplicationSecurityGroup, Error = CloudError>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    ApplicationSecurityGroup,
+    Error = CloudError
+  >;
 
   /**
    * Updates an application security group's tags.
    */
   @patch(#{ implicitOptionality: false })
-  updateTags is ArmCustomPatchSync<ApplicationSecurityGroup,
-    PatchModel = TagsObject, Error = CloudError>;
+  updateTags is ArmCustomPatchSync<
+    ApplicationSecurityGroup,
+    PatchModel = TagsObject,
+    Error = CloudError
+  >;
 
   /**
    * Deletes the specified application security group.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<ApplicationSecurityGroup,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    ApplicationSecurityGroup,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = CloudError
+  >;
 
   /**
    * Gets all the application security groups in a resource group.
@@ -58,7 +67,10 @@ interface ApplicationSecurityGroups {
   /**
    * Gets all application security groups in a subscription.
    */
-  listAll is ArmListBySubscription<ApplicationSecurityGroup, Error = CloudError>;
+  listAll is ArmListBySubscription<
+    ApplicationSecurityGroup,
+    Error = CloudError
+  >;
 }
 
 @@doc(ApplicationSecurityGroup.name,

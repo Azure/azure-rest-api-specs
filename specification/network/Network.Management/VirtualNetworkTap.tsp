@@ -34,25 +34,38 @@ interface VirtualNetworkTaps {
   /**
    * Creates or updates a Virtual Network Tap.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<VirtualNetworkTap, Error = CloudError>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    VirtualNetworkTap,
+    Error = CloudError
+  >;
 
   /**
    * Updates an VirtualNetworkTap tags.
    */
   @patch(#{ implicitOptionality: false })
-  updateTags is ArmCustomPatchSync<VirtualNetworkTap, PatchModel = TagsObject, Error = CloudError>;
+  updateTags is ArmCustomPatchSync<
+    VirtualNetworkTap,
+    PatchModel = TagsObject,
+    Error = CloudError
+  >;
 
   /**
    * Deletes the specified virtual network tap.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<VirtualNetworkTap,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    VirtualNetworkTap,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = CloudError
+  >;
 
   /**
    * Gets all the VirtualNetworkTaps in a subscription.
    */
-  listByResourceGroup is ArmResourceListByParent<VirtualNetworkTap, Error = CloudError>;
+  listByResourceGroup is ArmResourceListByParent<
+    VirtualNetworkTap,
+    Error = CloudError
+  >;
 
   /**
    * Gets all the VirtualNetworkTaps in a subscription.

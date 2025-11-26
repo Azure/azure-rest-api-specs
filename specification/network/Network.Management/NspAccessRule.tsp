@@ -39,7 +39,10 @@ interface NspAccessRules {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("NetworkSecurityPerimeterAccessRules_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceSync<NspAccessRule, Error = CloudError>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<
+    NspAccessRule,
+    Error = CloudError
+  >;
 
   /**
    * Deletes an NSP access rule.
@@ -53,7 +56,8 @@ interface NspAccessRules {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("NetworkSecurityPerimeterAccessRules_List")
-  list is ArmResourceListByParent<NspAccessRule,
+  list is ArmResourceListByParent<
+    NspAccessRule,
     Parameters = {
       /**
        * An optional query parameter which specifies the maximum number of records to be returned by the server.
@@ -68,17 +72,21 @@ interface NspAccessRules {
        */
       @query("$skipToken")
       $skipToken?: string;
-    }, Error = CloudError>;
+    },
+    Error = CloudError
+  >;
 
   /**
    * Reconcile NSP access rules
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("NetworkSecurityPerimeterAccessRules_Reconcile")
-  reconcile is ArmResourceActionSync<NspAccessRule,
+  reconcile is ArmResourceActionSync<
+    NspAccessRule,
     unknown,
-    ArmResponse<unknown>
-  , Error = CloudError>;
+    ArmResponse<unknown>,
+    Error = CloudError
+  >;
 }
 
 @@maxLength(NspAccessRule.name, 80);

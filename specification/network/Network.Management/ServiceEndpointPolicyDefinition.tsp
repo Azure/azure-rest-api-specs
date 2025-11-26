@@ -36,19 +36,28 @@ interface ServiceEndpointPolicyDefinitions {
   /**
    * Creates or updates a service endpoint policy definition in the specified service endpoint policy.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<ServiceEndpointPolicyDefinition, Error = CloudError>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    ServiceEndpointPolicyDefinition,
+    Error = CloudError
+  >;
 
   /**
    * Deletes the specified ServiceEndpoint policy definitions.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<ServiceEndpointPolicyDefinition,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    ServiceEndpointPolicyDefinition,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = CloudError
+  >;
 
   /**
    * Gets all service endpoint policy definitions in a service end point policy.
    */
-  listByResourceGroup is ArmResourceListByParent<ServiceEndpointPolicyDefinition, Error = CloudError>;
+  listByResourceGroup is ArmResourceListByParent<
+    ServiceEndpointPolicyDefinition,
+    Error = CloudError
+  >;
 }
 
 @@doc(ServiceEndpointPolicyDefinition.name,

@@ -31,26 +31,35 @@ interface InboundNatRules {
   /**
    * Gets the specified load balancer inbound NAT rule.
    */
-  get is ArmResourceRead<InboundNatRule,
+  get is ArmResourceRead<
+    InboundNatRule,
     Parameters = {
       /**
        * Expands referenced resources.
        */
       @query("$expand")
       $expand?: string;
-    }, Error = CloudError>;
+    },
+    Error = CloudError
+  >;
 
   /**
    * Creates or updates a load balancer inbound NAT rule.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<InboundNatRule, Error = CloudError>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    InboundNatRule,
+    Error = CloudError
+  >;
 
   /**
    * Deletes the specified load balancer inbound NAT rule.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<InboundNatRule,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    InboundNatRule,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = CloudError
+  >;
 
   /**
    * Gets all the inbound NAT rules in a load balancer.

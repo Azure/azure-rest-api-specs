@@ -31,13 +31,17 @@ interface ApplicationGatewayPrivateEndpointConnections {
   /**
    * Gets the specified private endpoint connection on application gateway.
    */
-  get is ArmResourceRead<ApplicationGatewayPrivateEndpointConnection, Error = CloudError>;
+  get is ArmResourceRead<
+    ApplicationGatewayPrivateEndpointConnection,
+    Error = CloudError
+  >;
 
   /**
    * Updates the specified private endpoint connection on application gateway.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  update is ArmResourceCreateOrReplaceAsync<ApplicationGatewayPrivateEndpointConnection,
+  update is ArmResourceCreateOrReplaceAsync<
+    ApplicationGatewayPrivateEndpointConnection,
     Response = ArmResourceUpdatedResponse<ApplicationGatewayPrivateEndpointConnection> | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader>,
     Error = CloudError
   >;
@@ -46,13 +50,19 @@ interface ApplicationGatewayPrivateEndpointConnections {
    * Deletes the specified private endpoint connection on application gateway.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<ApplicationGatewayPrivateEndpointConnection,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    ApplicationGatewayPrivateEndpointConnection,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = CloudError
+  >;
 
   /**
    * Lists all private endpoint connections on an application gateway.
    */
-  list is ArmResourceListByParent<ApplicationGatewayPrivateEndpointConnection, Error = CloudError>;
+  list is ArmResourceListByParent<
+    ApplicationGatewayPrivateEndpointConnection,
+    Error = CloudError
+  >;
 }
 
 @@doc(ApplicationGatewayPrivateEndpointConnection.name,

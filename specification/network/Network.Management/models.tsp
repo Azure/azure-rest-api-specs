@@ -26994,3 +26994,10 @@ model LoadBalancerFrontendIPConfigurationListResult
 model LoadBalancerOutboundRuleListResult is Azure.Core.Page<OutboundRule>;
 
 model LoadBalancerProbeListResult is Azure.Core.Page<Probe>;
+
+model LoadBalancerLoadBalancingRuleListResult
+  is Azure.Core.Page<LoadBalancingRule>;
+
+model NetworkInterfaceLoadBalancerListResult is Azure.Core.Page<LoadBalancer>;
+
+model AdminRuleListResult is Azure.Core.Page<BaseAdminRule>;

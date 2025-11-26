@@ -37,21 +37,30 @@ interface LocalNetworkGateways {
   /**
    * Creates or updates a local network gateway in the specified resource group.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<LocalNetworkGateway, Error = CloudError>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    LocalNetworkGateway,
+    Error = CloudError
+  >;
 
   /**
    * Updates a local network gateway tags.
    */
   @patch(#{ implicitOptionality: false })
-  updateTags is ArmCustomPatchSync<LocalNetworkGateway,
-    PatchModel = TagsObject, Error = CloudError>;
+  updateTags is ArmCustomPatchSync<
+    LocalNetworkGateway,
+    PatchModel = TagsObject,
+    Error = CloudError
+  >;
 
   /**
    * Deletes the specified local network gateway.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<LocalNetworkGateway,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    LocalNetworkGateway,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = CloudError
+  >;
 
   /**
    * Gets all the local network gateways in a resource group.

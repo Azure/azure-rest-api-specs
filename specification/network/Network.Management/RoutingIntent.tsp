@@ -40,7 +40,10 @@ interface RoutingIntents {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RoutingIntent_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<RoutingIntent, Error = CloudError>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    RoutingIntent,
+    Error = CloudError
+  >;
 
   /**
    * Deletes a RoutingIntent.
@@ -48,17 +51,22 @@ interface RoutingIntents {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   @operationId("RoutingIntent_Delete")
-  delete is ArmResourceDeleteWithoutOkAsync<RoutingIntent,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    RoutingIntent,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = CloudError
+  >;
 
   /**
    * Retrieves the details of all RoutingIntent child resources of the VirtualHub.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RoutingIntent_List")
-  list is ArmResourceListByParent<RoutingIntent,
-    Response = ArmResponse<ListRoutingIntentResult>
-  , Error = CloudError>;
+  list is ArmResourceListByParent<
+    RoutingIntent,
+    Response = ArmResponse<ListRoutingIntentResult>,
+    Error = CloudError
+  >;
 }
 
 @@doc(RoutingIntent.name, "The name of the RoutingIntent.");

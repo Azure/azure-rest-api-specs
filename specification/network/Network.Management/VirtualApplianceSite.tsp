@@ -36,14 +36,20 @@ interface VirtualApplianceSites {
   /**
    * Creates or updates the specified Network Virtual Appliance Site.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<VirtualApplianceSite, Error = CloudError>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    VirtualApplianceSite,
+    Error = CloudError
+  >;
 
   /**
    * Deletes the specified site from a Virtual Appliance.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<VirtualApplianceSite,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    VirtualApplianceSite,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = CloudError
+  >;
 
   /**
    * Lists all Network Virtual Appliance Sites in a Network Virtual Appliance resource.

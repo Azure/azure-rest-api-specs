@@ -36,7 +36,10 @@ interface ScopeConnections {
   /**
    * Creates or updates scope connection from Network Manager
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<ScopeConnection, Error = CloudError>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<
+    ScopeConnection,
+    Error = CloudError
+  >;
 
   /**
    * Delete the pending scope connection created by this network manager.
@@ -46,7 +49,8 @@ interface ScopeConnections {
   /**
    * List all scope connections created by this network manager.
    */
-  list is ArmResourceListByParent<ScopeConnection,
+  list is ArmResourceListByParent<
+    ScopeConnection,
     Parameters = {
       /**
        * An optional query parameter which specifies the maximum number of records to be returned by the server.
@@ -61,7 +65,9 @@ interface ScopeConnections {
        */
       @query("$skipToken")
       $skipToken?: string;
-    }, Error = CloudError>;
+    },
+    Error = CloudError
+  >;
 }
 
 @@doc(ScopeConnection.name, "Name for the cross-tenant connection.");

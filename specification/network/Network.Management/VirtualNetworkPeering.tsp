@@ -36,21 +36,27 @@ interface VirtualNetworkPeerings {
   /**
    * Creates or updates a peering in the specified virtual network.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<VirtualNetworkPeering,
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    VirtualNetworkPeering,
     Parameters = {
       /**
        * Parameter indicates the intention to sync the peering with the current address space on the remote vNet after it's updated.
        */
       @query("syncRemoteAddressSpace")
       syncRemoteAddressSpace?: SyncRemoteAddressSpace;
-    }, Error = CloudError>;
+    },
+    Error = CloudError
+  >;
 
   /**
    * Deletes the specified virtual network peering.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<VirtualNetworkPeering,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    VirtualNetworkPeering,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = CloudError
+  >;
 
   /**
    * Gets all virtual network peerings in a virtual network.

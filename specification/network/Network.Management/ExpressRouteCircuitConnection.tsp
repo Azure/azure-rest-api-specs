@@ -36,19 +36,28 @@ interface ExpressRouteCircuitConnections {
   /**
    * Creates or updates a Express Route Circuit Connection in the specified express route circuits.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<ExpressRouteCircuitConnection, Error = CloudError>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    ExpressRouteCircuitConnection,
+    Error = CloudError
+  >;
 
   /**
    * Deletes the specified Express Route Circuit Connection from the specified express route circuit.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<ExpressRouteCircuitConnection,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    ExpressRouteCircuitConnection,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = CloudError
+  >;
 
   /**
    * Gets all global reach connections associated with a private peering in an express route circuit.
    */
-  list is ArmResourceListByParent<ExpressRouteCircuitConnection, Error = CloudError>;
+  list is ArmResourceListByParent<
+    ExpressRouteCircuitConnection,
+    Error = CloudError
+  >;
 }
 
 @@doc(ExpressRouteCircuitConnection.name,

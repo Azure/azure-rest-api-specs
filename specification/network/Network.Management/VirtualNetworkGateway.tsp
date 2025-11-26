@@ -50,24 +50,32 @@ interface VirtualNetworkGateways {
   /**
    * Creates or updates a virtual network gateway in the specified resource group.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<VirtualNetworkGateway, Error = CloudError>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    VirtualNetworkGateway,
+    Error = CloudError
+  >;
 
   /**
    * Updates a virtual network gateway tags.
    */
   @patch(#{ implicitOptionality: false })
-  updateTags is ArmCustomPatchAsync<VirtualNetworkGateway,
+  updateTags is ArmCustomPatchAsync<
+    VirtualNetworkGateway,
     PatchModel = TagsObject,
     LroHeaders = ArmAsyncOperationHeader<FinalResult = VirtualNetworkGateway> &
-      Azure.Core.Foundations.RetryAfterHeader
-  , Error = CloudError>;
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = CloudError
+  >;
 
   /**
    * Deletes the specified virtual network gateway.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<VirtualNetworkGateway,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    VirtualNetworkGateway,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = CloudError
+  >;
 
   /**
    * Gets all virtual network gateways by resource group.
@@ -80,15 +88,18 @@ interface VirtualNetworkGateways {
   @list
   @get
   @action("connections")
-  listConnections is ArmResourceActionSync<VirtualNetworkGateway,
+  listConnections is ArmResourceActionSync<
+    VirtualNetworkGateway,
     void,
-    ArmResponse<VirtualNetworkGatewayListConnectionsResult>
-  , Error = CloudError>;
+    ArmResponse<VirtualNetworkGatewayListConnectionsResult>,
+    Error = CloudError
+  >;
 
   /**
    * Resets the primary of the virtual network gateway in the specified resource group.
    */
-  reset is ArmResourceActionAsync<VirtualNetworkGateway,
+  reset is ArmResourceActionAsync<
+    VirtualNetworkGateway,
     void,
     ArmResponse<VirtualNetworkGateway>,
     Parameters = {
@@ -97,48 +108,59 @@ interface VirtualNetworkGateways {
        */
       @query("gatewayVip")
       gatewayVip?: string;
-    }
-  , Error = CloudError>;
+    },
+    Error = CloudError
+  >;
 
   /**
    * Resets the VPN client shared key of the virtual network gateway in the specified resource group.
    */
   @action("resetvpnclientsharedkey")
-  resetVpnClientSharedKey is ArmResourceActionAsync<VirtualNetworkGateway,
+  resetVpnClientSharedKey is ArmResourceActionAsync<
+    VirtualNetworkGateway,
     void,
-    OkResponse, Error = CloudError>;
+    OkResponse,
+    Error = CloudError
+  >;
 
   /**
    * Generates VPN client package for P2S client of the virtual network gateway in the specified resource group.
    */
-  generatevpnclientpackage is ArmResourceActionAsync<VirtualNetworkGateway,
+  generatevpnclientpackage is ArmResourceActionAsync<
+    VirtualNetworkGateway,
     VpnClientParameters,
-    ArmResponse<stringApplicationJson>
-  , Error = CloudError>;
+    ArmResponse<stringApplicationJson>,
+    Error = CloudError
+  >;
 
   /**
    * Generates VPN profile for P2S client of the virtual network gateway in the specified resource group. Used for IKEV2 and radius based authentication.
    */
   @action("generatevpnprofile")
-  generateVpnProfile is ArmResourceActionAsync<VirtualNetworkGateway,
+  generateVpnProfile is ArmResourceActionAsync<
+    VirtualNetworkGateway,
     VpnClientParameters,
-    ArmResponse<stringApplicationJson>
-  , Error = CloudError>;
+    ArmResponse<stringApplicationJson>,
+    Error = CloudError
+  >;
 
   /**
    * Gets pre-generated VPN profile for P2S client of the virtual network gateway in the specified resource group. The profile needs to be generated first using generateVpnProfile.
    */
   @action("getvpnprofilepackageurl")
-  getVpnProfilePackageUrl is ArmResourceActionAsync<VirtualNetworkGateway,
+  getVpnProfilePackageUrl is ArmResourceActionAsync<
+    VirtualNetworkGateway,
     void,
-    ArmResponse<stringApplicationJson>
-  , Error = CloudError>;
+    ArmResponse<stringApplicationJson>,
+    Error = CloudError
+  >;
 
   /**
    * The GetBgpPeerStatus operation retrieves the status of all BGP peers.
    */
   @list
-  getBgpPeerStatus is ArmResourceActionAsync<VirtualNetworkGateway,
+  getBgpPeerStatus is ArmResourceActionAsync<
+    VirtualNetworkGateway,
     void,
     ArmResponse<BgpPeerStatusListResult>,
     Parameters = {
@@ -147,41 +169,49 @@ interface VirtualNetworkGateways {
        */
       @query("peer")
       peer?: string;
-    }
-  , Error = CloudError>;
+    },
+    Error = CloudError
+  >;
 
   /**
    * Gets a xml format representation for supported vpn devices.
    */
   @action("supportedvpndevices")
-  supportedVpnDevices is ArmResourceActionSync<VirtualNetworkGateway,
+  supportedVpnDevices is ArmResourceActionSync<
+    VirtualNetworkGateway,
     void,
-    ArmResponse<stringApplicationJson>
-  , Error = CloudError>;
+    ArmResponse<stringApplicationJson>,
+    Error = CloudError
+  >;
 
   /**
    * List all Radius servers with respective radius secrets from virtual network gateway VpnClientConfiguration.
    */
   @list
-  listRadiusSecrets is ArmResourceActionSync<VirtualNetworkGateway,
+  listRadiusSecrets is ArmResourceActionSync<
+    VirtualNetworkGateway,
     void,
-    ArmResponse<RadiusAuthServerListResult>
-  , Error = CloudError>;
+    ArmResponse<RadiusAuthServerListResult>,
+    Error = CloudError
+  >;
 
   /**
    * This operation retrieves a list of routes the virtual network gateway has learned, including routes learned from BGP peers.
    */
   @list
-  getLearnedRoutes is ArmResourceActionAsync<VirtualNetworkGateway,
+  getLearnedRoutes is ArmResourceActionAsync<
+    VirtualNetworkGateway,
     void,
-    ArmResponse<GatewayRouteListResult>
-  , Error = CloudError>;
+    ArmResponse<GatewayRouteListResult>,
+    Error = CloudError
+  >;
 
   /**
    * This operation retrieves a list of routes the virtual network gateway is advertising to the specified peer.
    */
   @list
-  getAdvertisedRoutes is ArmResourceActionAsync<VirtualNetworkGateway,
+  getAdvertisedRoutes is ArmResourceActionAsync<
+    VirtualNetworkGateway,
     void,
     ArmResponse<GatewayRouteListResult>,
     Parameters = {
@@ -190,13 +220,15 @@ interface VirtualNetworkGateways {
        */
       @query("peer")
       peer: string;
-    }
-  , Error = CloudError>;
+    },
+    Error = CloudError
+  >;
 
   /**
    * This operation retrieves the resiliency information for an Express Route Gateway, including the gateway's current resiliency score and recommendations to further improve the score
    */
-  getResiliencyInformation is ArmResourceActionAsync<VirtualNetworkGateway,
+  getResiliencyInformation is ArmResourceActionAsync<
+    VirtualNetworkGateway,
     void,
     ArmResponse<GatewayResiliencyInformation>,
     Parameters = {
@@ -205,13 +237,15 @@ interface VirtualNetworkGateways {
        */
       @query("attemptRefresh")
       attemptRefresh?: boolean;
-    }
-  , Error = CloudError>;
+    },
+    Error = CloudError
+  >;
 
   /**
    * This operation retrieves the route set information for an Express Route Gateway based on their resiliency
    */
-  getRoutesInformation is ArmResourceActionAsync<VirtualNetworkGateway,
+  getRoutesInformation is ArmResourceActionAsync<
+    VirtualNetworkGateway,
     void,
     ArmResponse<GatewayRouteSetsInformation>,
     Parameters = {
@@ -220,51 +254,61 @@ interface VirtualNetworkGateways {
        */
       @query("attemptRefresh")
       attemptRefresh?: boolean;
-    }
-  , Error = CloudError>;
+    },
+    Error = CloudError
+  >;
 
   /**
    * The Set VpnclientIpsecParameters operation sets the vpnclient ipsec policy for P2S client of virtual network gateway in the specified resource group through Network resource provider.
    */
   @action("setvpnclientipsecparameters")
-  setVpnclientIpsecParameters is ArmResourceActionAsync<VirtualNetworkGateway,
+  setVpnclientIpsecParameters is ArmResourceActionAsync<
+    VirtualNetworkGateway,
     VpnClientIPsecParameters,
-    ArmResponse<VpnClientIPsecParameters>
-  , Error = CloudError>;
+    ArmResponse<VpnClientIPsecParameters>,
+    Error = CloudError
+  >;
 
   /**
    * The Get VpnclientIpsecParameters operation retrieves information about the vpnclient ipsec policy for P2S client of virtual network gateway in the specified resource group through Network resource provider.
    */
   @action("getvpnclientipsecparameters")
-  getVpnclientIpsecParameters is ArmResourceActionAsyncBase<VirtualNetworkGateway,
+  getVpnclientIpsecParameters is ArmResourceActionAsyncBase<
+    VirtualNetworkGateway,
     void,
     ArmResponse<VpnClientIPsecParameters>,
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<VirtualNetworkGateway>
-  , Error = CloudError>;
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<VirtualNetworkGateway>,
+    Error = CloudError
+  >;
 
   /**
    * Starts packet capture on virtual network gateway in the specified resource group.
    */
-  startPacketCapture is ArmResourceActionAsync<VirtualNetworkGateway,
+  startPacketCapture is ArmResourceActionAsync<
+    VirtualNetworkGateway,
     VpnPacketCaptureStartParameters,
     ArmResponse<stringApplicationJson>,
-    OptionalRequestBody = true
-  , Error = CloudError>;
+    OptionalRequestBody = true,
+    Error = CloudError
+  >;
 
   /**
    * Stops packet capture on virtual network gateway in the specified resource group.
    */
-  stopPacketCapture is ArmResourceActionAsync<VirtualNetworkGateway,
+  stopPacketCapture is ArmResourceActionAsync<
+    VirtualNetworkGateway,
     VpnPacketCaptureStopParameters,
-    ArmResponse<stringApplicationJson>
-  , Error = CloudError>;
+    ArmResponse<stringApplicationJson>,
+    Error = CloudError
+  >;
 
   /**
    * This operation retrieves the details of all the failover tests performed on the gateway for different peering locations
    */
   @list
   @action("getFailoverAllTestsDetails")
-  getFailoverAllTestDetails is ArmResourceActionAsync<VirtualNetworkGateway,
+  getFailoverAllTestDetails is ArmResourceActionAsync<
+    VirtualNetworkGateway,
     void,
     ArmResponse<ExpressRouteFailoverAllTestDetails>,
     Parameters = {
@@ -286,7 +330,8 @@ interface VirtualNetworkGateways {
    * This operation retrieves the details of a particular failover test performed on the gateway based on the test Guid
    */
   @list
-  getFailoverSingleTestDetails is ArmResourceActionAsync<VirtualNetworkGateway,
+  getFailoverSingleTestDetails is ArmResourceActionAsync<
+    VirtualNetworkGateway,
     void,
     ArmResponse<ExpressRouteFailoverSingleTestDetailsObject>,
     Parameters = {
@@ -308,7 +353,8 @@ interface VirtualNetworkGateways {
    * This operation starts failover simulation on the gateway for the specified peering location
    */
   @action("startSiteFailoverTest")
-  startExpressRouteSiteFailoverSimulation is ArmResourceActionAsync<VirtualNetworkGateway,
+  startExpressRouteSiteFailoverSimulation is ArmResourceActionAsync<
+    VirtualNetworkGateway,
     void,
     ArmResponse<stringApplicationJson>,
     Parameters = {
@@ -317,74 +363,90 @@ interface VirtualNetworkGateways {
        */
       @query("peeringLocation")
       peeringLocation: string;
-    }
-  , Error = CloudError>;
+    },
+    Error = CloudError
+  >;
 
   /**
    * This operation stops failover simulation on the gateway for the specified peering location
    */
   @action("stopSiteFailoverTest")
-  stopExpressRouteSiteFailoverSimulation is ArmResourceActionAsync<VirtualNetworkGateway,
+  stopExpressRouteSiteFailoverSimulation is ArmResourceActionAsync<
+    VirtualNetworkGateway,
     ExpressRouteFailoverStopApiParameters,
-    ArmResponse<stringApplicationJson>
-  , Error = CloudError>;
+    ArmResponse<stringApplicationJson>,
+    Error = CloudError
+  >;
 
   /**
    * Get VPN client connection health detail per P2S client connection of the virtual network gateway in the specified resource group.
    */
   @list
   @action("getVpnClientConnectionHealth")
-  getVpnclientConnectionHealth is ArmResourceActionAsync<VirtualNetworkGateway,
+  getVpnclientConnectionHealth is ArmResourceActionAsync<
+    VirtualNetworkGateway,
     void,
-    ArmResponse<VpnClientConnectionHealthDetailListResult>
-  , Error = CloudError>;
+    ArmResponse<VpnClientConnectionHealthDetailListResult>,
+    Error = CloudError
+  >;
 
   /**
    * Disconnect vpn connections of virtual network gateway in the specified resource group.
    */
-  disconnectVirtualNetworkGatewayVpnConnections is ArmResourceActionAsync<VirtualNetworkGateway,
+  disconnectVirtualNetworkGatewayVpnConnections is ArmResourceActionAsync<
+    VirtualNetworkGateway,
     P2SVpnConnectionRequest,
-    OkResponse, Error = CloudError>;
+    OkResponse,
+    Error = CloudError
+  >;
 
   /**
    * Trigger prepare migration for the virtual network gateway.
    */
   @action("prepareMigration")
-  invokePrepareMigration is ArmResourceActionAsyncBase<VirtualNetworkGateway,
+  invokePrepareMigration is ArmResourceActionAsyncBase<
+    VirtualNetworkGateway,
     Request = VirtualNetworkGatewayMigrationParameters,
     Response = ArmAcceptedLroResponse,
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<VirtualNetworkGateway>
-  , Error = CloudError>;
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<VirtualNetworkGateway>,
+    Error = CloudError
+  >;
 
   /**
    * Trigger execute migration for the virtual network gateway.
    */
   @action("executeMigration")
-  invokeExecuteMigration is ArmResourceActionAsyncBase<VirtualNetworkGateway,
+  invokeExecuteMigration is ArmResourceActionAsyncBase<
+    VirtualNetworkGateway,
     Request = void,
     Response = ArmAcceptedLroResponse,
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<VirtualNetworkGateway>
-  , Error = CloudError>;
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<VirtualNetworkGateway>,
+    Error = CloudError
+  >;
 
   /**
    * Trigger commit migration for the virtual network gateway.
    */
   @action("commitMigration")
-  invokeCommitMigration is ArmResourceActionAsyncBase<VirtualNetworkGateway,
+  invokeCommitMigration is ArmResourceActionAsyncBase<
+    VirtualNetworkGateway,
     Request = void,
     Response = ArmAcceptedLroResponse,
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<VirtualNetworkGateway>
-  , Error = CloudError>;
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<VirtualNetworkGateway>,
+    Error = CloudError
+  >;
 
   /**
    * Trigger abort migration for the virtual network gateway.
    */
   @action("abortMigration")
-  invokeAbortMigration is ArmResourceActionAsyncBase<VirtualNetworkGateway,
+  invokeAbortMigration is ArmResourceActionAsyncBase<
+    VirtualNetworkGateway,
     Request = void,
     Response = ArmAcceptedLroResponse,
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<VirtualNetworkGateway>
-  , Error = CloudError>;
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<VirtualNetworkGateway>,
+    Error = CloudError
+  >;
 }
 
 @@doc(VirtualNetworkGateway.name, "The name of the virtual network gateway.");

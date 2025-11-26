@@ -39,7 +39,10 @@ interface NspLoggingConfigurations {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("NetworkSecurityPerimeterLoggingConfigurations_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceSync<NspLoggingConfiguration, Error = CloudError>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<
+    NspLoggingConfiguration,
+    Error = CloudError
+  >;
 
   /**
    * Deletes an NSP Logging configuration.

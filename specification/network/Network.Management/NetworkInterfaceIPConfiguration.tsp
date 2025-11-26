@@ -36,7 +36,10 @@ interface NetworkInterfaceIPConfigurations {
   /**
    * Get all ip configurations in a network interface.
    */
-  list is ArmResourceListByParent<NetworkInterfaceIPConfiguration, Error = CloudError>;
+  list is ArmResourceListByParent<
+    NetworkInterfaceIPConfiguration,
+    Error = CloudError
+  >;
 }
 
 @@doc(NetworkInterfaceIPConfiguration.name,

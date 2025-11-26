@@ -39,14 +39,17 @@ interface BaseAdminRules {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AdminRules_Get")
-  get is ArmResourceRead<BaseAdminRule, Error = CloudError>;
+  get is ArmResourceRead<BaseAdminRule, Error = CommonErrorResponse>;
 
   /**
    * Creates or updates an admin rule.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AdminRules_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceSync<BaseAdminRule, Error = CloudError>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<
+    BaseAdminRule,
+    Error = CommonErrorResponse
+  >;
 
   /**
    * Deletes an admin rule.
@@ -54,7 +57,8 @@ interface BaseAdminRules {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   @operationId("AdminRules_Delete")
-  delete is ArmResourceDeleteWithoutOkAsync<BaseAdminRule,
+  delete is ArmResourceDeleteWithoutOkAsync<
+    BaseAdminRule,
     Parameters = {
       /**
        * Deletes the resource even if it is part of a deployed configuration. If the configuration has been deployed, the service will do a cleanup deployment in the background, prior to the delete.
@@ -62,14 +66,17 @@ interface BaseAdminRules {
       @query("force")
       force?: boolean;
     },
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = CommonErrorResponse
+  >;
 
   /**
    * List all network manager security configuration admin rules.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AdminRules_List")
-  list is ArmResourceListByParent<BaseAdminRule,
+  list is ArmResourceListByParent<
+    BaseAdminRule,
     Parameters = {
       /**
        * An optional query parameter which specifies the maximum number of records to be returned by the server.
@@ -84,7 +91,10 @@ interface BaseAdminRules {
        */
       @query("$skipToken")
       $skipToken?: string;
-    }, Error = CloudError>;
+    },
+    Response = AdminRuleListResult,
+    Error = CommonErrorResponse
+  >;
 }
 
 @@doc(BaseAdminRule.name, "The name of the rule.");

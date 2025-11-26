@@ -54,7 +54,10 @@ interface VirtualWANS {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualWans_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<VirtualWAN, Error = CloudError>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    VirtualWAN,
+    Error = CloudError
+  >;
 
   /**
    * Updates a VirtualWAN tags.
@@ -62,7 +65,11 @@ interface VirtualWANS {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualWans_UpdateTags")
   @patch(#{ implicitOptionality: false })
-  updateTags is ArmCustomPatchSync<VirtualWAN, PatchModel = TagsObject, Error = CloudError>;
+  updateTags is ArmCustomPatchSync<
+    VirtualWAN,
+    PatchModel = TagsObject,
+    Error = CloudError
+  >;
 
   /**
    * Deletes a VirtualWAN.
@@ -70,26 +77,33 @@ interface VirtualWANS {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   @operationId("VirtualWans_Delete")
-  delete is ArmResourceDeleteWithoutOkAsync<VirtualWAN,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    VirtualWAN,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = CloudError
+  >;
 
   /**
    * Lists all the VirtualWANs in a resource group.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualWans_ListByResourceGroup")
-  listByResourceGroup is ArmResourceListByParent<VirtualWAN,
-    Response = ArmResponse<ListVirtualWANsResult>
-  , Error = CloudError>;
+  listByResourceGroup is ArmResourceListByParent<
+    VirtualWAN,
+    Response = ArmResponse<ListVirtualWANsResult>,
+    Error = CloudError
+  >;
 
   /**
    * Lists all the VirtualWANs in a subscription.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualWans_List")
-  list is ArmListBySubscription<VirtualWAN,
-    Response = ArmResponse<ListVirtualWANsResult>
-  , Error = CloudError>;
+  list is ArmListBySubscription<
+    VirtualWAN,
+    Response = ArmResponse<ListVirtualWANsResult>,
+    Error = CloudError
+  >;
 
   /**
    * Gives the supported security providers for the virtual wan.

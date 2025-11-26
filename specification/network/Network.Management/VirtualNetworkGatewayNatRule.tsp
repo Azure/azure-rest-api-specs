@@ -36,21 +36,29 @@ interface VirtualNetworkGatewayNatRules {
   /**
    * Creates a nat rule to a scalable virtual network gateway if it doesn't exist else updates the existing nat rules.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<VirtualNetworkGatewayNatRule, Error = CloudError>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    VirtualNetworkGatewayNatRule,
+    Error = CloudError
+  >;
 
   /**
    * Deletes a nat rule.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<VirtualNetworkGatewayNatRule,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    VirtualNetworkGatewayNatRule,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = CloudError
+  >;
 
   /**
    * Retrieves all nat rules for a particular virtual network gateway.
    */
-  listByVirtualNetworkGateway is ArmResourceListByParent<VirtualNetworkGatewayNatRule,
-    Response = ArmResponse<ListVirtualNetworkGatewayNatRulesResult>
-  , Error = CloudError>;
+  listByVirtualNetworkGateway is ArmResourceListByParent<
+    VirtualNetworkGatewayNatRule,
+    Response = ArmResponse<ListVirtualNetworkGatewayNatRulesResult>,
+    Error = CloudError
+  >;
 }
 
 @@doc(VirtualNetworkGatewayNatRule.name, "The name of the nat rule.");

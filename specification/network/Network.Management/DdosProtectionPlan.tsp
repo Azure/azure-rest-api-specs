@@ -34,25 +34,38 @@ interface DdosProtectionPlans {
   /**
    * Creates or updates a DDoS protection plan.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<DdosProtectionPlan, Error = CloudError>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    DdosProtectionPlan,
+    Error = CloudError
+  >;
 
   /**
    * Update a DDoS protection plan tags.
    */
   @patch(#{ implicitOptionality: false })
-  updateTags is ArmCustomPatchSync<DdosProtectionPlan, PatchModel = TagsObject, Error = CloudError>;
+  updateTags is ArmCustomPatchSync<
+    DdosProtectionPlan,
+    PatchModel = TagsObject,
+    Error = CloudError
+  >;
 
   /**
    * Deletes the specified DDoS protection plan.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<DdosProtectionPlan,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    DdosProtectionPlan,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = CloudError
+  >;
 
   /**
    * Gets all the DDoS protection plans in a resource group.
    */
-  listByResourceGroup is ArmResourceListByParent<DdosProtectionPlan, Error = CloudError>;
+  listByResourceGroup is ArmResourceListByParent<
+    DdosProtectionPlan,
+    Error = CloudError
+  >;
 
   /**
    * Gets all DDoS protection plans in a subscription.

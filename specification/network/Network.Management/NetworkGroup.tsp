@@ -36,20 +36,35 @@ interface NetworkGroups {
   /**
    * Creates or updates a network group.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<NetworkGroup,
+  createOrUpdate is ArmResourceCreateOrReplaceSync<
+    NetworkGroup,
     Parameters = {
       /**
        * The ETag of the transformation. Omit this value to always overwrite the current resource. Specify the last-seen ETag value to prevent accidentally overwriting concurrent changes.
        */
-      @header
+      @header("If-Match")
       IfMatch?: string;
-    }, Error = CloudError>;
+    },
+    Response = (ArmResponse<NetworkGroup> & {
+      /**
+       * The current entity tag.
+       */
+      @header("ETag") eTag?: string;
+    }) | (ArmCreatedResponse<NetworkGroup> & {
+      /**
+       * The current entity tag.
+       */
+      @header("ETag") eTag?: string;
+    }),
+    Error = CloudError
+  >;
 
   /**
    * Deletes a network group.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<NetworkGroup,
+  delete is ArmResourceDeleteWithoutOkAsync<
+    NetworkGroup,
     Parameters = {
       /**
        * Deletes the resource even if it is part of a deployed configuration. If the configuration has been deployed, the service will do a cleanup deployment in the background, prior to the delete.
@@ -57,12 +72,15 @@ interface NetworkGroups {
       @query("force")
       force?: boolean;
     },
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = CloudError
+  >;
 
   /**
    * Lists the specified network group.
    */
-  list is ArmResourceListByParent<NetworkGroup,
+  list is ArmResourceListByParent<
+    NetworkGroup,
     Parameters = {
       /**
        * An optional query parameter which specifies the maximum number of records to be returned by the server.
@@ -77,7 +95,9 @@ interface NetworkGroups {
        */
       @query("$skipToken")
       $skipToken?: string;
-    }, Error = CloudError>;
+    },
+    Error = CloudError
+  >;
 }
 
 @@doc(NetworkGroup.name, "The name of the network group.");

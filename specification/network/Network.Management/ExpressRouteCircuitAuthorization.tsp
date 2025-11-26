@@ -36,20 +36,29 @@ interface ExpressRouteCircuitAuthorizations {
   /**
    * Creates or updates an authorization in the specified express route circuit.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<ExpressRouteCircuitAuthorization, Error = CloudError>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    ExpressRouteCircuitAuthorization,
+    Error = CloudError
+  >;
 
   /**
    * Deletes the specified authorization from the specified express route circuit.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<ExpressRouteCircuitAuthorization,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    ExpressRouteCircuitAuthorization,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = CloudError
+  >;
 
   /**
    * Gets all authorizations in an express route circuit.
    */
-  list is ArmResourceListByParent<ExpressRouteCircuitAuthorization,
-    Response = AuthorizationListResult, Error = CloudError>;
+  list is ArmResourceListByParent<
+    ExpressRouteCircuitAuthorization,
+    Response = AuthorizationListResult,
+    Error = CloudError
+  >;
 }
 
 @@doc(ExpressRouteCircuitAuthorization.name, "The name of the authorization.");

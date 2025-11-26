@@ -59,7 +59,8 @@ interface VpnSiteLinkConnections {
   /**
    * Retrieves the details of a vpn site link connection.
    */
-  get is VpnSiteLinkConnectionsOps.Read<VpnSiteLinkConnection,
+  get is VpnSiteLinkConnectionsOps.Read<
+    VpnSiteLinkConnection,
     OverrideErrorType = CloudError
   >;
 
@@ -68,7 +69,8 @@ interface VpnSiteLinkConnections {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VpnLinkConnections_ListByVpnConnection")
-  listByVpnConnection is ArmResourceListByParent<VpnSiteLinkConnection,
+  listByVpnConnection is ArmResourceListByParent<
+    VpnSiteLinkConnection,
     Parameters = {
       /** The name of the vpn connection. */
       @path
@@ -76,8 +78,9 @@ interface VpnSiteLinkConnections {
       @key
       connectionName: string;
     },
-    Response = ArmResponse<ListVpnSiteLinkConnectionsResult>
-  , Error = CloudError>;
+    Response = ArmResponse<ListVpnSiteLinkConnectionsResult>,
+    Error = CloudError
+  >;
 
   /**
    * Resets the VpnLink connection specified.

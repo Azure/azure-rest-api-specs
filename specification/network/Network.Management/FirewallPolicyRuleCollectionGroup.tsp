@@ -36,19 +36,28 @@ interface FirewallPolicyRuleCollectionGroups {
   /**
    * Creates or updates the specified FirewallPolicyRuleCollectionGroup.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<FirewallPolicyRuleCollectionGroup, Error = CloudError>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    FirewallPolicyRuleCollectionGroup,
+    Error = CloudError
+  >;
 
   /**
    * Deletes the specified FirewallPolicyRuleCollectionGroup.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<FirewallPolicyRuleCollectionGroup,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    FirewallPolicyRuleCollectionGroup,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = CloudError
+  >;
 
   /**
    * Lists all FirewallPolicyRuleCollectionGroups in a FirewallPolicy resource.
    */
-  list is ArmResourceListByParent<FirewallPolicyRuleCollectionGroup, Error = CloudError>;
+  list is ArmResourceListByParent<
+    FirewallPolicyRuleCollectionGroup,
+    Error = CloudError
+  >;
 }
 
 @@doc(FirewallPolicyRuleCollectionGroup.name,

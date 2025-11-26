@@ -31,18 +31,22 @@ interface AdminRuleCollections {
   /**
    * Gets a network manager security admin configuration rule collection.
    */
-  get is ArmResourceRead<AdminRuleCollection, Error = CloudError>;
+  get is ArmResourceRead<AdminRuleCollection, Error = CommonErrorResponse>;
 
   /**
    * Creates or updates an admin rule collection.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<AdminRuleCollection, Error = CloudError>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<
+    AdminRuleCollection,
+    Error = CommonErrorResponse
+  >;
 
   /**
    * Deletes an admin rule collection.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<AdminRuleCollection,
+  delete is ArmResourceDeleteWithoutOkAsync<
+    AdminRuleCollection,
     Parameters = {
       /**
        * Deletes the resource even if it is part of a deployed configuration. If the configuration has been deployed, the service will do a cleanup deployment in the background, prior to the delete.
@@ -50,12 +54,15 @@ interface AdminRuleCollections {
       @query("force")
       force?: boolean;
     },
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = CommonErrorResponse
+  >;
 
   /**
    * Lists all the rule collections in a security admin configuration, in a paginated format.
    */
-  list is ArmResourceListByParent<AdminRuleCollection,
+  list is ArmResourceListByParent<
+    AdminRuleCollection,
     Parameters = {
       /**
        * An optional query parameter which specifies the maximum number of records to be returned by the server.
@@ -70,7 +77,9 @@ interface AdminRuleCollections {
        */
       @query("$skipToken")
       $skipToken?: string;
-    }, Error = CloudError>;
+    },
+    Error = CommonErrorResponse
+  >;
 }
 
 @@doc(AdminRuleCollection.name,

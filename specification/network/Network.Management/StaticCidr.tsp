@@ -24,27 +24,69 @@ model StaticCidr is Azure.ResourceManager.ProxyResource<StaticCidrProperties> {
   >;
 }
 
+alias StaticCidrOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    @path
+    @segment("networkManagers")
+    @key
+    @pattern("^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$")
+    networkManagerName: string;
+
+    /** The name of the IPAM pool. */
+    @path
+    @segment("ipamPools")
+    @key
+    @pattern("^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$")
+    poolName: string;
+  },
+  {
+    /** Name for the static CIDR. */
+    @path
+    @segment("staticCidrs")
+    @key
+    @pattern("^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$")
+    staticCidrName: string;
+  }
+>;
+
 @armResourceOperations
 interface StaticCidrs {
   /**
    * Gets the specific Static CIDR resource.
    */
-  get is ArmResourceRead<StaticCidr, Error = CloudError>;
+  @summary("Gets the specific Static CIDR resource.")
+  get is ArmResourceRead<StaticCidr, Error = CommonErrorResponse>;
 
   /**
    * Creates/Updates the Static CIDR resource.
    */
-  create is ArmResourceCreateOrReplaceSync<StaticCidr, Error = CloudError>;
+  @summary("Creates/Updates the Static CIDR resource.")
+  create is StaticCidrOps.CreateOrUpdateSync<
+    StaticCidr,
+    OptionalRequestBody = true,
+    OverrideErrorType = CommonErrorResponse
+  >;
 
   /**
    * Delete the Static CIDR resource.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<StaticCidr, Error = CloudError>;
+  @summary("Delete the Static CIDR resource.")
+  delete is ArmResourceDeleteWithoutOkAsync<
+    StaticCidr,
+    Error = CommonErrorResponse
+  >;
 
   /**
    * Gets list of Static CIDR resources at Network Manager level.
    */
-  list is ArmResourceListByParent<StaticCidr,
+  @summary("Gets list of Static CIDR resources at Network Manager level.")
+  list is ArmResourceListByParent<
+    StaticCidr,
     Parameters = {
       /**
        * Optional skip token.
@@ -56,7 +98,7 @@ interface StaticCidrs {
        * Optional num entries to skip.
        */
       @query("skip")
-      skip?: int32;
+      skip?: int32 = 0;
 
       /**
        * Optional num entries to show.
@@ -76,7 +118,8 @@ interface StaticCidrs {
       @query("sortValue")
       sortValue?: string;
     },
-    Response = ArmResponse<StaticCidrList>
+    Response = ArmResponse<StaticCidrList>,
+    Error = CommonErrorResponse
   >;
 }
 

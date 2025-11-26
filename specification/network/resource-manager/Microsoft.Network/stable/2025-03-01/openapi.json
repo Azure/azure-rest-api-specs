@@ -14642,9 +14642,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/LoadBalancingRuleListResult"
+              "$ref": "#/definitions/LoadBalancerLoadBalancingRuleListResult"
             }
           },
           "default": {
@@ -14779,7 +14779,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -14844,7 +14844,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -15790,7 +15790,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -17082,7 +17082,10 @@
             }
           },
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/NetworkManagerCommit"
+            },
             "headers": {
               "Location": {
                 "type": "string",
@@ -17108,8 +17111,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CNetworkManagerCommit%3E"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -17879,6 +17881,7 @@
         "tags": [
           "StaticCidrs"
         ],
+        "summary": "Gets list of Static CIDR resources at Network Manager level.",
         "description": "Gets list of Static CIDR resources at Network Manager level.",
         "parameters": [
           {
@@ -17919,7 +17922,8 @@
             "description": "Optional num entries to skip.",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "default": 0
           },
           {
             "name": "top",
@@ -17955,7 +17959,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CommonErrorResponse"
             }
           }
         },
@@ -17975,6 +17979,7 @@
         "tags": [
           "StaticCidrs"
         ],
+        "summary": "Gets the specific Static CIDR resource.",
         "description": "Gets the specific Static CIDR resource.",
         "parameters": [
           {
@@ -18021,7 +18026,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/CommonErrorResponse"
             }
           }
         },
@@ -18036,6 +18041,7 @@
         "tags": [
           "StaticCidrs"
         ],
+        "summary": "Creates/Updates the Static CIDR resource.",
         "description": "Creates/Updates the Static CIDR resource.",
         "parameters": [
           {
@@ -18050,7 +18056,6 @@
           {
             "name": "networkManagerName",
             "in": "path",
-            "description": "The name of the network manager.",
             "required": true,
             "type": "string",
             "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
@@ -18058,7 +18063,7 @@
           {
             "name": "poolName",
             "in": "path",
-            "description": "Pool resource name.",
+            "description": "The name of the IPAM pool.",
             "required": true,
             "type": "string",
             "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
@@ -18066,7 +18071,7 @@
           {
             "name": "staticCidrName",
             "in": "path",
-            "description": "StaticCidr resource name to retrieve.",
+            "description": "Name for the static CIDR.",
             "required": true,
             "type": "string",
             "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
@@ -18075,7 +18080,7 @@
             "name": "body",
             "in": "body",
             "description": "StaticCidr resource object to create/update.",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/StaticCidr"
             }
@@ -18097,7 +18102,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/CommonErrorResponse"
             }
           }
         },
@@ -18112,6 +18117,7 @@
         "tags": [
           "StaticCidrs"
         ],
+        "summary": "Delete the Static CIDR resource.",
         "description": "Delete the Static CIDR resource.",
         "parameters": [
           {
@@ -18169,7 +18175,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/CommonErrorResponse"
             }
           }
         },
@@ -18534,7 +18540,7 @@
             "type": "string"
           },
           {
-            "name": "if-match",
+            "name": "If-Match",
             "in": "header",
             "description": "The ETag of the transformation. Omit this value to always overwrite the current resource. Specify the last-seen ETag value to prevent accidentally overwriting concurrent changes.",
             "required": false,
@@ -18553,15 +18559,32 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'NetworkGroup' update operation succeeded",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/NetworkGroup"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The current entity tag."
+              }
             }
           },
           "201": {
-            "description": "Resource 'NetworkGroup' create operation succeeded",
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/NetworkGroup"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The current entity tag."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -20391,7 +20414,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/CommonErrorResponse"
             }
           }
         },
@@ -20455,7 +20478,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/CommonErrorResponse"
             }
           }
         },
@@ -20529,7 +20552,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/CommonErrorResponse"
             }
           }
         },
@@ -20609,7 +20632,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/CommonErrorResponse"
             }
           }
         },
@@ -20683,15 +20706,15 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/BaseAdminRuleListResult"
+              "$ref": "#/definitions/AdminRuleListResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/CommonErrorResponse"
             }
           }
         },
@@ -20762,7 +20785,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/CommonErrorResponse"
             }
           }
         },
@@ -20846,7 +20869,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/CommonErrorResponse"
             }
           }
         },
@@ -20936,7 +20959,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/CommonErrorResponse"
             }
           }
         },
@@ -21857,6 +21880,7 @@
         "tags": [
           "VerifierWorkspaces"
         ],
+        "summary": "Gets list of Verifier Workspaces.",
         "description": "Gets list of Verifier Workspaces.",
         "parameters": [
           {
@@ -21889,7 +21913,8 @@
             "description": "Optional num entries to skip.",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "default": 0
           },
           {
             "name": "top",
@@ -21925,7 +21950,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/CommonErrorResponse"
             }
           }
         },
@@ -21945,6 +21970,7 @@
         "tags": [
           "VerifierWorkspaces"
         ],
+        "summary": "Gets Verifier Workspace.",
         "description": "Gets Verifier Workspace.",
         "parameters": [
           {
@@ -21983,7 +22009,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/CommonErrorResponse"
             }
           }
         },
@@ -21998,6 +22024,7 @@
         "tags": [
           "VerifierWorkspaces"
         ],
+        "summary": "Creates Verifier Workspace.",
         "description": "Creates Verifier Workspace.",
         "parameters": [
           {
@@ -22026,12 +22053,11 @@
             "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
           },
           {
-            "name": "if-match",
+            "name": "If-Match",
             "in": "header",
             "description": "The entity state (ETag) version of the pool to update. This value can be omitted or set to \"*\" to apply the operation unconditionally.",
             "required": false,
-            "type": "string",
-            "x-ms-client-name": "If-Match"
+            "type": "string"
           },
           {
             "name": "body",
@@ -22059,7 +22085,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/CommonErrorResponse"
             }
           }
         },
@@ -22074,6 +22100,7 @@
         "tags": [
           "VerifierWorkspaces"
         ],
+        "summary": "Updates Verifier Workspace.",
         "description": "Updates Verifier Workspace.",
         "parameters": [
           {
@@ -22102,12 +22129,11 @@
             "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
           },
           {
-            "name": "if-match",
+            "name": "If-Match",
             "in": "header",
             "description": "The entity state (ETag) version of the pool to update. This value can be omitted or set to \"*\" to apply the operation unconditionally.",
             "required": false,
-            "type": "string",
-            "x-ms-client-name": "If-Match"
+            "type": "string"
           },
           {
             "name": "body",
@@ -22129,7 +22155,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CommonErrorResponse"
             }
           }
         },
@@ -44650,6 +44676,27 @@
         ]
       }
     },
+    "AdminRuleListResult": {
+      "type": "object",
+      "description": "Paged collection of BaseAdminRule items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The BaseAdminRule items on this page",
+          "items": {
+            "$ref": "#/definitions/BaseAdminRule"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "AdminState": {
       "type": "string",
       "description": "Property to indicate if the Express Route Gateway serves traffic when there are multiple Express Route Gateways in the vnet",
@@ -49645,19 +49692,6 @@
         "body"
       ]
     },
-    "Azure.ResourceManager.ArmResponse<NetworkManagerCommit>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/NetworkManagerCommit",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
     "Azure.ResourceManager.ArmResponse<NetworkVirtualApplianceInstanceId>": {
       "type": "object",
       "description": "Azure operation completed successfully.",
@@ -51369,27 +51403,6 @@
         }
       ]
     },
-    "BaseAdminRuleListResult": {
-      "type": "object",
-      "description": "The response of a BaseAdminRule list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The BaseAdminRule items on this page",
-          "items": {
-            "$ref": "#/definitions/BaseAdminRule"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "BastionActiveSession": {
       "type": "object",
       "description": "The session detail for a target.",
@@ -52246,6 +52259,73 @@
             "description": "Deprovisioned"
           }
         ]
+      }
+    },
+    "CommonErrorAdditionalInfo": {
+      "type": "object",
+      "description": "The resource management error additional info.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The additional info type.",
+          "readOnly": true
+        },
+        "info": {
+          "description": "The additional info.",
+          "readOnly": true
+        }
+      }
+    },
+    "CommonErrorDetail": {
+      "type": "object",
+      "description": "The error detail.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message.",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "description": "The error target.",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "description": "The error details.",
+          "items": {
+            "$ref": "#/definitions/CommonErrorDetail"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "message",
+            "target"
+          ]
+        },
+        "additionalInfo": {
+          "type": "array",
+          "description": "The error additional info.",
+          "items": {
+            "$ref": "#/definitions/CommonErrorAdditionalInfo"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "CommonErrorResponse": {
+      "type": "object",
+      "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CommonErrorDetail",
+          "description": "The error object."
+        }
       }
     },
     "Components1Jq1T4ISchemasManagedserviceidentityPropertiesUserassignedidentitiesAdditionalproperties": {
@@ -62991,6 +63071,27 @@
         "value"
       ]
     },
+    "LoadBalancerLoadBalancingRuleListResult": {
+      "type": "object",
+      "description": "Paged collection of LoadBalancingRule items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The LoadBalancingRule items on this page",
+          "items": {
+            "$ref": "#/definitions/LoadBalancingRule"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "LoadBalancerOutboundRuleListResult": {
       "type": "object",
       "description": "Paged collection of OutboundRule items",
@@ -63281,27 +63382,6 @@
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
-      ]
-    },
-    "LoadBalancingRuleListResult": {
-      "type": "object",
-      "description": "The response of a LoadBalancingRule list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The LoadBalancingRule items on this page",
-          "items": {
-            "$ref": "#/definitions/LoadBalancingRule"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "LoadBalancingRulePropertiesFormat": {

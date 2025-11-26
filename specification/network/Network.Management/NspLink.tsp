@@ -46,15 +46,19 @@ interface NspLinks {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   @operationId("NetworkSecurityPerimeterLinks_Delete")
-  delete is ArmResourceDeleteWithoutOkAsync<NspLink,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    NspLink,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = CloudError
+  >;
 
   /**
    * Lists the NSP Link resources in the specified network security perimeter.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("NetworkSecurityPerimeterLinks_List")
-  list is ArmResourceListByParent<NspLink,
+  list is ArmResourceListByParent<
+    NspLink,
     Parameters = {
       /**
        * An optional query parameter which specifies the maximum number of records to be returned by the server.
@@ -69,7 +73,9 @@ interface NspLinks {
        */
       @query("$skipToken")
       $skipToken?: string;
-    }, Error = CloudError>;
+    },
+    Error = CloudError
+  >;
 }
 
 @@maxLength(NspLink.name, 80);

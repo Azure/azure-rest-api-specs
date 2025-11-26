@@ -36,19 +36,28 @@ interface NetworkInterfaceTapConfigurations {
   /**
    * Creates or updates a Tap configuration in the specified NetworkInterface.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<NetworkInterfaceTapConfiguration, Error = CloudError>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    NetworkInterfaceTapConfiguration,
+    Error = CloudError
+  >;
 
   /**
    * Deletes the specified tap configuration from the NetworkInterface.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<NetworkInterfaceTapConfiguration,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    NetworkInterfaceTapConfiguration,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = CloudError
+  >;
 
   /**
    * Get all Tap configurations in a network interface.
    */
-  list is ArmResourceListByParent<NetworkInterfaceTapConfiguration, Error = CloudError>;
+  list is ArmResourceListByParent<
+    NetworkInterfaceTapConfiguration,
+    Error = CloudError
+  >;
 }
 
 @@doc(NetworkInterfaceTapConfiguration.name,

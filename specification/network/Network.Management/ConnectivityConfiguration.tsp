@@ -36,13 +36,17 @@ interface ConnectivityConfigurations {
   /**
    * Creates/Updates a new network manager connectivity configuration
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<ConnectivityConfiguration, Error = CloudError>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<
+    ConnectivityConfiguration,
+    Error = CloudError
+  >;
 
   /**
    * Deletes a network manager connectivity configuration, specified by the resource group, network manager name, and connectivity configuration name
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<ConnectivityConfiguration,
+  delete is ArmResourceDeleteWithoutOkAsync<
+    ConnectivityConfiguration,
     Parameters = {
       /**
        * Deletes the resource even if it is part of a deployed configuration. If the configuration has been deployed, the service will do a cleanup deployment in the background, prior to the delete.
@@ -50,12 +54,15 @@ interface ConnectivityConfigurations {
       @query("force")
       force?: boolean;
     },
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = CloudError
+  >;
 
   /**
    * Lists all the network manager connectivity configuration in a specified network manager.
    */
-  list is ArmResourceListByParent<ConnectivityConfiguration,
+  list is ArmResourceListByParent<
+    ConnectivityConfiguration,
     Parameters = {
       /**
        * An optional query parameter which specifies the maximum number of records to be returned by the server.
@@ -70,7 +77,9 @@ interface ConnectivityConfigurations {
        */
       @query("$skipToken")
       $skipToken?: string;
-    }, Error = CloudError>;
+    },
+    Error = CloudError
+  >;
 }
 
 @@doc(ConnectivityConfiguration.name,

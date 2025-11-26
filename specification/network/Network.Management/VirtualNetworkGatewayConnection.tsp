@@ -37,29 +37,40 @@ interface VirtualNetworkGatewayConnections {
   /**
    * Creates or updates a virtual network gateway connection in the specified resource group.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<VirtualNetworkGatewayConnection, Error = CloudError>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    VirtualNetworkGatewayConnection,
+    Error = CloudError
+  >;
 
   /**
    * Updates a virtual network gateway connection tags.
    */
   @patch(#{ implicitOptionality: false })
-  updateTags is ArmCustomPatchAsync<VirtualNetworkGatewayConnection,
+  updateTags is ArmCustomPatchAsync<
+    VirtualNetworkGatewayConnection,
     PatchModel = TagsObject,
     LroHeaders = ArmAsyncOperationHeader<FinalResult = VirtualNetworkGatewayConnection> &
-      Azure.Core.Foundations.RetryAfterHeader
-  , Error = CloudError>;
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = CloudError
+  >;
 
   /**
    * Deletes the specified virtual network Gateway connection.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<VirtualNetworkGatewayConnection,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    VirtualNetworkGatewayConnection,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = CloudError
+  >;
 
   /**
    * The List VirtualNetworkGatewayConnections operation retrieves all the virtual network gateways connections created.
    */
-  list is ArmResourceListByParent<VirtualNetworkGatewayConnection, Error = CloudError>;
+  list is ArmResourceListByParent<
+    VirtualNetworkGatewayConnection,
+    Error = CloudError
+  >;
 
   /**
    * Gets a xml format representation for vpn device configuration script.
@@ -67,80 +78,96 @@ interface VirtualNetworkGatewayConnections {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualNetworkGateways_VpnDeviceConfigurationScript")
   @action("vpndeviceconfigurationscript")
-  vpnDeviceConfigurationScript is ArmResourceActionSync<VirtualNetworkGatewayConnection,
+  vpnDeviceConfigurationScript is ArmResourceActionSync<
+    VirtualNetworkGatewayConnection,
     VpnDeviceScriptParameters,
-    ArmResponse<stringApplicationJson>
-  , Error = CloudError>;
+    ArmResponse<stringApplicationJson>,
+    Error = CloudError
+  >;
 
   /**
    * The Put VirtualNetworkGatewayConnectionSharedKey operation sets the virtual network gateway connection shared key for passed virtual network gateway connection in the specified resource group through Network resource provider.
    */
   @put
   @action("sharedkey")
-  setSharedKey is ArmResourceActionAsyncBase<VirtualNetworkGatewayConnection,
+  setSharedKey is ArmResourceActionAsyncBase<
+    VirtualNetworkGatewayConnection,
     ConnectionSharedKey,
     ArmResponse<ConnectionSharedKey> | ArmResourceCreatedResponse<
       ConnectionSharedKey,
       LroHeaders = ArmAsyncOperationHeader &
         Azure.Core.Foundations.RetryAfterHeader
     >,
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<VirtualNetworkGatewayConnection>
-  , Error = CloudError>;
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<VirtualNetworkGatewayConnection>,
+    Error = CloudError
+  >;
 
   /**
    * The Get VirtualNetworkGatewayConnectionSharedKey operation retrieves information about the specified virtual network gateway connection shared key through Network resource provider.
    */
   @get
   @action("sharedkey")
-  getSharedKey is ArmResourceActionSync<VirtualNetworkGatewayConnection,
+  getSharedKey is ArmResourceActionSync<
+    VirtualNetworkGatewayConnection,
     void,
-    ArmResponse<ConnectionSharedKey>
-  , Error = CloudError>;
+    ArmResponse<ConnectionSharedKey>,
+    Error = CloudError
+  >;
 
   /**
    * The VirtualNetworkGatewayConnectionResetSharedKey operation resets the virtual network gateway connection shared key for passed virtual network gateway connection in the specified resource group through Network resource provider.
    */
   @action("sharedkey/reset")
-  resetSharedKey is ArmResourceActionAsync<VirtualNetworkGatewayConnection,
+  resetSharedKey is ArmResourceActionAsync<
+    VirtualNetworkGatewayConnection,
     ConnectionResetSharedKey,
-    ArmResponse<ConnectionResetSharedKey>
-  , Error = CloudError>;
+    ArmResponse<ConnectionResetSharedKey>,
+    Error = CloudError
+  >;
 
   /**
    * Starts packet capture on virtual network gateway connection in the specified resource group.
    */
-  startPacketCapture is ArmResourceActionAsync<VirtualNetworkGatewayConnection,
+  startPacketCapture is ArmResourceActionAsync<
+    VirtualNetworkGatewayConnection,
     VpnPacketCaptureStartParameters,
     ArmResponse<stringApplicationJson>,
-    OptionalRequestBody = true
-  , Error = CloudError>;
+    OptionalRequestBody = true,
+    Error = CloudError
+  >;
 
   /**
    * Stops packet capture on virtual network gateway connection in the specified resource group.
    */
-  stopPacketCapture is ArmResourceActionAsync<VirtualNetworkGatewayConnection,
+  stopPacketCapture is ArmResourceActionAsync<
+    VirtualNetworkGatewayConnection,
     VpnPacketCaptureStopParameters,
-    ArmResponse<stringApplicationJson>
-  , Error = CloudError>;
+    ArmResponse<stringApplicationJson>,
+    Error = CloudError
+  >;
 
   /**
    * Lists IKE Security Associations for the virtual network gateway connection in the specified resource group.
    */
   @action("getikesas")
-  getIkeSas is ArmResourceActionAsync<VirtualNetworkGatewayConnection,
+  getIkeSas is ArmResourceActionAsync<
+    VirtualNetworkGatewayConnection,
     void,
-    ArmResponse<stringApplicationJson>
-  , Error = CloudError>;
+    ArmResponse<stringApplicationJson>,
+    Error = CloudError
+  >;
 
   /**
    * Resets the virtual network gateway connection specified.
    */
   @action("resetconnection")
-  resetConnection is ArmResourceActionAsyncBase<VirtualNetworkGatewayConnection,
+  resetConnection is ArmResourceActionAsyncBase<
+    VirtualNetworkGatewayConnection,
     Request = void,
     Response = ArmAcceptedLroResponse,
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<VirtualNetworkGatewayConnection>
-  , Error = CloudError>;
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<VirtualNetworkGatewayConnection>,
+    Error = CloudError
+  >;
 }
 
 @@doc(VirtualNetworkGatewayConnection.name,

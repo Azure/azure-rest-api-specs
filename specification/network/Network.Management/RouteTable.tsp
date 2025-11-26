@@ -29,32 +29,45 @@ interface RouteTables {
   /**
    * Gets the specified route table.
    */
-  get is ArmResourceRead<RouteTable,
+  get is ArmResourceRead<
+    RouteTable,
     Parameters = {
       /**
        * Expands referenced resources.
        */
       @query("$expand")
       $expand?: string;
-    }, Error = CloudError>;
+    },
+    Error = CloudError
+  >;
 
   /**
    * Create or updates a route table in a specified resource group.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<RouteTable, Error = CloudError>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    RouteTable,
+    Error = CloudError
+  >;
 
   /**
    * Updates a route table tags.
    */
   @patch(#{ implicitOptionality: false })
-  updateTags is ArmCustomPatchSync<RouteTable, PatchModel = TagsObject, Error = CloudError>;
+  updateTags is ArmCustomPatchSync<
+    RouteTable,
+    PatchModel = TagsObject,
+    Error = CloudError
+  >;
 
   /**
    * Deletes the specified route table.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<RouteTable,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    RouteTable,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = CloudError
+  >;
 
   /**
    * Gets all route tables in a resource group.

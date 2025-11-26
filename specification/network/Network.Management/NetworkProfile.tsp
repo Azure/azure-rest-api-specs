@@ -29,32 +29,45 @@ interface NetworkProfiles {
   /**
    * Gets the specified network profile in a specified resource group.
    */
-  get is ArmResourceRead<NetworkProfile,
+  get is ArmResourceRead<
+    NetworkProfile,
     Parameters = {
       /**
        * Expands referenced resources.
        */
       @query("$expand")
       $expand?: string;
-    }, Error = CloudError>;
+    },
+    Error = CloudError
+  >;
 
   /**
    * Creates or updates a network profile.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<NetworkProfile, Error = CloudError>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<
+    NetworkProfile,
+    Error = CloudError
+  >;
 
   /**
    * Updates network profile tags.
    */
   @patch(#{ implicitOptionality: false })
-  updateTags is ArmCustomPatchSync<NetworkProfile, PatchModel = TagsObject, Error = CloudError>;
+  updateTags is ArmCustomPatchSync<
+    NetworkProfile,
+    PatchModel = TagsObject,
+    Error = CloudError
+  >;
 
   /**
    * Deletes the specified network profile.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<NetworkProfile,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    NetworkProfile,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = CloudError
+  >;
 
   /**
    * Gets all network profiles in a resource group.

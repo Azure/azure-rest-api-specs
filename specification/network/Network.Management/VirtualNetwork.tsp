@@ -36,32 +36,45 @@ interface VirtualNetworks {
   /**
    * Gets the specified virtual network by resource group.
    */
-  get is ArmResourceRead<VirtualNetwork,
+  get is ArmResourceRead<
+    VirtualNetwork,
     Parameters = {
       /**
        * Expands referenced resources.
        */
       @query("$expand")
       $expand?: string;
-    }, Error = CloudError>;
+    },
+    Error = CloudError
+  >;
 
   /**
    * Creates or updates a virtual network in the specified resource group.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<VirtualNetwork, Error = CloudError>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    VirtualNetwork,
+    Error = CloudError
+  >;
 
   /**
    * Updates a virtual network tags.
    */
   @patch(#{ implicitOptionality: false })
-  updateTags is ArmCustomPatchSync<VirtualNetwork, PatchModel = TagsObject, Error = CloudError>;
+  updateTags is ArmCustomPatchSync<
+    VirtualNetwork,
+    PatchModel = TagsObject,
+    Error = CloudError
+  >;
 
   /**
    * Deletes the specified virtual network.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<VirtualNetwork,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    VirtualNetwork,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = CloudError
+  >;
 
   /**
    * Gets all virtual networks in a resource group.
@@ -79,7 +92,8 @@ interface VirtualNetworks {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ListNetworkManagerEffectiveConnectivityConfigurations")
   @list
-  listNetworkManagerEffectiveConnectivityConfigurations is ArmResourceActionSync<VirtualNetwork,
+  listNetworkManagerEffectiveConnectivityConfigurations is ArmResourceActionSync<
+    VirtualNetwork,
     QueryRequestOptions,
     ArmResponse<NetworkManagerEffectiveConnectivityConfigurationListResult>,
     Parameters = {
@@ -90,8 +104,9 @@ interface VirtualNetworks {
       @minValue(1)
       @query("$top")
       $top?: int32;
-    }
-  , Error = CloudError>;
+    },
+    Error = CloudError
+  >;
 
   /**
    * List all effective security admin rules applied on a virtual network.
@@ -99,7 +114,8 @@ interface VirtualNetworks {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ListNetworkManagerEffectiveSecurityAdminRules")
   @list
-  listNetworkManagerEffectiveSecurityAdminRules is ArmResourceActionSync<VirtualNetwork,
+  listNetworkManagerEffectiveSecurityAdminRules is ArmResourceActionSync<
+    VirtualNetwork,
     QueryRequestOptions,
     ArmResponse<NetworkManagerEffectiveSecurityAdminRulesListResult>,
     Parameters = {
@@ -110,15 +126,17 @@ interface VirtualNetworks {
       @minValue(1)
       @query("$top")
       $top?: int32;
-    }
-  , Error = CloudError>;
+    },
+    Error = CloudError
+  >;
 
   /**
    * Checks whether a private IP address is available for use.
    */
   @get
   @action("CheckIPAddressAvailability")
-  checkIPAddressAvailability is ArmResourceActionSync<VirtualNetwork,
+  checkIPAddressAvailability is ArmResourceActionSync<
+    VirtualNetwork,
     void,
     ArmResponse<IPAddressAvailabilityResult>,
     Parameters = {
@@ -127,8 +145,9 @@ interface VirtualNetworks {
        */
       @query("ipAddress")
       ipAddress: string;
-    }
-  , Error = CloudError>;
+    },
+    Error = CloudError
+  >;
 
   /**
    * Lists usage stats.
@@ -136,17 +155,20 @@ interface VirtualNetworks {
   @list
   @get
   @action("usages")
-  listUsage is ArmResourceActionSync<VirtualNetwork,
+  listUsage is ArmResourceActionSync<
+    VirtualNetwork,
     void,
-    ArmResponse<VirtualNetworkListUsageResult>
-  , Error = CloudError>;
+    ArmResponse<VirtualNetworkListUsageResult>,
+    Error = CloudError
+  >;
 
   /**
    * Gets the Ddos Protection Status of all IP Addresses under the Virtual Network
    */
   @list
   @action("ddosProtectionStatus")
-  listDdosProtectionStatus is ArmResourceActionAsync<VirtualNetwork,
+  listDdosProtectionStatus is ArmResourceActionAsync<
+    VirtualNetwork,
     void,
     ArmResponse<VirtualNetworkDdosProtectionStatusResult>,
     Parameters = {

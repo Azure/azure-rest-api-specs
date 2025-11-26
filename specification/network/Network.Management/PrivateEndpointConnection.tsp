@@ -33,14 +33,17 @@ interface PrivateEndpointConnections {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("PrivateLinkServices_GetPrivateEndpointConnection")
-  getPrivateEndpointConnection is ArmResourceRead<PrivateEndpointConnection,
+  getPrivateEndpointConnection is ArmResourceRead<
+    PrivateEndpointConnection,
     Parameters = {
       /**
        * Expands referenced resources.
        */
       @query("$expand")
       $expand?: string;
-    }, Error = CloudError>;
+    },
+    Error = CloudError
+  >;
 
   /**
    * Approve or reject private end point connection for a private link service in a subscription.
@@ -48,7 +51,8 @@ interface PrivateEndpointConnections {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @operationId("PrivateLinkServices_UpdatePrivateEndpointConnection")
-  updatePrivateEndpointConnection is ArmResourceCreateOrReplaceSync<PrivateEndpointConnection,
+  updatePrivateEndpointConnection is ArmResourceCreateOrReplaceSync<
+    PrivateEndpointConnection,
     Response = ArmResourceUpdatedResponse<PrivateEndpointConnection>
   >;
 
@@ -58,15 +62,20 @@ interface PrivateEndpointConnections {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   @operationId("PrivateLinkServices_DeletePrivateEndpointConnection")
-  deletePrivateEndpointConnection is ArmResourceDeleteWithoutOkAsync<PrivateEndpointConnection,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse>;
+  deletePrivateEndpointConnection is ArmResourceDeleteWithoutOkAsync<
+    PrivateEndpointConnection,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
 
   /**
    * Gets all private end point connections for a specific private link service.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("PrivateLinkServices_ListPrivateEndpointConnections")
-  listPrivateEndpointConnections is ArmResourceListByParent<PrivateEndpointConnection, Error = CloudError>;
+  listPrivateEndpointConnections is ArmResourceListByParent<
+    PrivateEndpointConnection,
+    Error = CloudError
+  >;
 }
 
 @@doc(PrivateEndpointConnection.name,

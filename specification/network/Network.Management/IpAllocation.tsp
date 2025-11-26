@@ -29,37 +29,53 @@ interface IpAllocations {
   /**
    * Gets the specified IpAllocation by resource group.
    */
-  get is ArmResourceRead<IpAllocation,
+  get is ArmResourceRead<
+    IpAllocation,
     Parameters = {
       /**
        * Expands referenced resources.
        */
       @query("$expand")
       $expand?: string;
-    }, Error = CloudError>;
+    },
+    Error = CloudError
+  >;
 
   /**
    * Creates or updates an IpAllocation in the specified resource group.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<IpAllocation, Error = CloudError>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    IpAllocation,
+    Error = CloudError
+  >;
 
   /**
    * Updates a IpAllocation tags.
    */
   @patch(#{ implicitOptionality: false })
-  updateTags is ArmCustomPatchSync<IpAllocation, PatchModel = TagsObject, Error = CloudError>;
+  updateTags is ArmCustomPatchSync<
+    IpAllocation,
+    PatchModel = TagsObject,
+    Error = CloudError
+  >;
 
   /**
    * Deletes the specified IpAllocation.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<IpAllocation,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    IpAllocation,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = CloudError
+  >;
 
   /**
    * Gets all IpAllocations in a resource group.
    */
-  listByResourceGroup is ArmResourceListByParent<IpAllocation, Error = CloudError>;
+  listByResourceGroup is ArmResourceListByParent<
+    IpAllocation,
+    Error = CloudError
+  >;
 
   /**
    * Gets all IpAllocations in a subscription.

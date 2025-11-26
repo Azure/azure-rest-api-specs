@@ -35,21 +35,29 @@ interface RouteMaps {
   /**
    * Creates a RouteMap if it doesn't exist else updates the existing one.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<RouteMap, Error = CloudError>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    RouteMap,
+    Error = CloudError
+  >;
 
   /**
    * Deletes a RouteMap.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<RouteMap,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    RouteMap,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = CloudError
+  >;
 
   /**
    * Retrieves the details of all RouteMaps.
    */
-  list is ArmResourceListByParent<RouteMap,
-    Response = ArmResponse<ListRouteMapsResult>
-  , Error = CloudError>;
+  list is ArmResourceListByParent<
+    RouteMap,
+    Response = ArmResponse<ListRouteMapsResult>,
+    Error = CloudError
+  >;
 }
 
 @@doc(RouteMap.name, "The name of the RouteMap.");

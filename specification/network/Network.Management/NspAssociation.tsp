@@ -41,7 +41,8 @@ interface NspAssociations {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @operationId("NetworkSecurityPerimeterAssociations_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<NspAssociation,
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    NspAssociation,
     Response = ArmResourceUpdatedResponse<NspAssociation> | ArmResourceCreatedResponse<NspAssociation> | (ArmAcceptedLroResponse & {
       @bodyRoot
       _: NspAssociation;
@@ -55,17 +56,20 @@ interface NspAssociations {
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   @operationId("NetworkSecurityPerimeterAssociations_Delete")
-  delete is ArmResourceDeleteWithoutOkAsync<NspAssociation,
+  delete is ArmResourceDeleteWithoutOkAsync<
+    NspAssociation,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
-,    Error = CloudError>;
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse,
+    Error = CloudError
+  >;
 
   /**
    * Lists the NSP resource associations.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("NetworkSecurityPerimeterAssociations_List")
-  list is ArmResourceListByParent<NspAssociation,
+  list is ArmResourceListByParent<
+    NspAssociation,
     Parameters = {
       /**
        * An optional query parameter which specifies the maximum number of records to be returned by the server.
@@ -80,17 +84,21 @@ interface NspAssociations {
        */
       @query("$skipToken")
       $skipToken?: string;
-    }, Error = CloudError>;
+    },
+    Error = CloudError
+  >;
 
   /**
    * Reconcile NSP association
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("NetworkSecurityPerimeterAssociations_Reconcile")
-  reconcile is ArmResourceActionSync<NspAssociation,
+  reconcile is ArmResourceActionSync<
+    NspAssociation,
     unknown,
-    ArmResponse<unknown>
-  , Error = CloudError>;
+    ArmResponse<unknown>,
+    Error = CloudError
+  >;
 }
 
 @@maxLength(NspAssociation.name, 80);

@@ -40,7 +40,10 @@ interface VpnServerConfigurationPolicyGroups {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ConfigurationPolicyGroups_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<VpnServerConfigurationPolicyGroup, Error = CloudError>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    VpnServerConfigurationPolicyGroup,
+    Error = CloudError
+  >;
 
   /**
    * Deletes a ConfigurationPolicyGroup.
@@ -48,17 +51,22 @@ interface VpnServerConfigurationPolicyGroups {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   @operationId("ConfigurationPolicyGroups_Delete")
-  delete is ArmResourceDeleteWithoutOkAsync<VpnServerConfigurationPolicyGroup,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    VpnServerConfigurationPolicyGroup,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = CloudError
+  >;
 
   /**
    * Lists all the configurationPolicyGroups in a resource group for a vpnServerConfiguration.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("configurationPolicyGroups_ListByVpnServerConfiguration")
-  listByVpnServerConfiguration is ArmResourceListByParent<VpnServerConfigurationPolicyGroup,
-    Response = ArmResponse<ListVpnServerConfigurationPolicyGroupsResult>
-  , Error = CloudError>;
+  listByVpnServerConfiguration is ArmResourceListByParent<
+    VpnServerConfigurationPolicyGroup,
+    Response = ArmResponse<ListVpnServerConfigurationPolicyGroupsResult>,
+    Error = CloudError
+  >;
 }
 
 @@doc(VpnServerConfigurationPolicyGroup.name,

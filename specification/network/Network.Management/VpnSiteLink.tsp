@@ -36,9 +36,11 @@ interface VpnSiteLinks {
   /**
    * Lists all the vpnSiteLinks in a resource group for a vpn site.
    */
-  listByVpnSite is ArmResourceListByParent<VpnSiteLink,
-    Response = ArmResponse<ListVpnSiteLinksResult>
-  , Error = CloudError>;
+  listByVpnSite is ArmResourceListByParent<
+    VpnSiteLink,
+    Response = ArmResponse<ListVpnSiteLinksResult>,
+    Error = CloudError
+  >;
 }
 
 @@doc(VpnSiteLink.name, "The name of the VpnSiteLink being retrieved.");

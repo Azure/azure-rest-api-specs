@@ -31,23 +31,29 @@ interface VerifierWorkspaces {
   /**
    * Gets Verifier Workspace.
    */
-  get is ArmResourceRead<VerifierWorkspace, Error = CloudError>;
+  @summary("Gets Verifier Workspace.")
+  get is ArmResourceRead<VerifierWorkspace, Error = CommonErrorResponse>;
 
   /**
    * Creates Verifier Workspace.
    */
-  create is ArmResourceCreateOrReplaceSync<VerifierWorkspace,
+  @summary("Creates Verifier Workspace.")
+  create is ArmResourceCreateOrReplaceSync<
+    VerifierWorkspace,
     Parameters = {
       /**
        * The entity state (ETag) version of the pool to update. This value can be omitted or set to "*" to apply the operation unconditionally.
        */
-      @header
+      @header("If-Match")
       `If-Match`?: string;
-    }, Error = CloudError>;
+    },
+    Error = CommonErrorResponse
+  >;
 
   /**
    * Updates Verifier Workspace.
    */
+  @summary("Updates Verifier Workspace.")
   @patch(#{ implicitOptionality: false })
   update is Azure.ResourceManager.Legacy.CustomPatchSync<
     VerifierWorkspace,
@@ -56,28 +62,34 @@ interface VerifierWorkspaces {
       /**
        * The entity state (ETag) version of the pool to update. This value can be omitted or set to "*" to apply the operation unconditionally.
        */
-      @header
+      @header("If-Match")
       `If-Match`?: string;
     },
+    Error = CommonErrorResponse,
     OptionalRequestBody = true
   >;
 
   /**
    * Deletes Verifier Workspace.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<VerifierWorkspace,
+  delete is ArmResourceDeleteWithoutOkAsync<
+    VerifierWorkspace,
     Parameters = {
       /**
        * The entity state (ETag) version of the pool to update. This value can be omitted or set to "*" to apply the operation unconditionally.
        */
       @header
       `If-Match`?: string;
-    }, Error = CloudError>;
+    },
+    Error = CloudError
+  >;
 
   /**
    * Gets list of Verifier Workspaces.
    */
-  list is ArmResourceListByParent<VerifierWorkspace,
+  @summary("Gets list of Verifier Workspaces.")
+  list is ArmResourceListByParent<
+    VerifierWorkspace,
     Parameters = {
       /**
        * Optional skip token.
@@ -89,7 +101,7 @@ interface VerifierWorkspaces {
        * Optional num entries to skip.
        */
       @query("skip")
-      skip?: int32;
+      skip?: int32 = 0;
 
       /**
        * Optional num entries to show.
@@ -108,7 +120,9 @@ interface VerifierWorkspaces {
        */
       @query("sortValue")
       sortValue?: string;
-    }, Error = CloudError>;
+    },
+    Error = CommonErrorResponse
+  >;
 }
 
 @@doc(VerifierWorkspace.name, "Workspace name.");

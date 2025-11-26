@@ -38,7 +38,8 @@ interface DscpConfigurations {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DscpConfiguration_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<DscpConfiguration,
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    DscpConfiguration,
     LroHeaders = ArmLroLocationHeader<FinalResult = DscpConfiguration> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
@@ -49,8 +50,11 @@ interface DscpConfigurations {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   @operationId("DscpConfiguration_Delete")
-  delete is ArmResourceDeleteWithoutOkAsync<DscpConfiguration,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    DscpConfiguration,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = CloudError
+  >;
 
   /**
    * Gets a DSCP Configuration.

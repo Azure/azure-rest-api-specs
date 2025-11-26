@@ -65,7 +65,10 @@ interface BackendAddressPools {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("LoadBalancerBackendAddressPools_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<BackendAddressPool, Error = CloudError>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    BackendAddressPool,
+    Error = CloudError
+  >;
 
   /**
    * Deletes the specified load balancer backend address pool.
@@ -73,8 +76,11 @@ interface BackendAddressPools {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   @operationId("LoadBalancerBackendAddressPools_Delete")
-  delete is ArmResourceDeleteWithoutOkAsync<BackendAddressPool,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    BackendAddressPool,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = CloudError
+  >;
 
   /**
    * Gets all the load balancer backed address pools.

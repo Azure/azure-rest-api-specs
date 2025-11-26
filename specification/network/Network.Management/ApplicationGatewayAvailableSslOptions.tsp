@@ -67,7 +67,8 @@ interface ApplicationGatewayAvailableSslOptionsOperationGroup {
   @list
   @get
   @action("predefinedPolicies")
-  listAvailableSslPredefinedPolicies is ArmResourceActionSync<ApplicationGatewayAvailableSslOptions,
+  listAvailableSslPredefinedPolicies is ArmResourceActionSync<
+    ApplicationGatewayAvailableSslOptions,
     void,
     ArmResponse<ApplicationGatewayAvailableSslPredefinedPolicies>,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,

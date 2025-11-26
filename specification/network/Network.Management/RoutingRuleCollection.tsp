@@ -36,13 +36,17 @@ interface RoutingRuleCollections {
   /**
    * Creates or updates a routing rule collection.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<RoutingRuleCollection, Error = CloudError>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<
+    RoutingRuleCollection,
+    Error = CloudError
+  >;
 
   /**
    * Deletes an routing rule collection.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<RoutingRuleCollection,
+  delete is ArmResourceDeleteWithoutOkAsync<
+    RoutingRuleCollection,
     Parameters = {
       /**
        * Deletes the resource even if it is part of a deployed configuration. If the configuration has been deployed, the service will do a cleanup deployment in the background, prior to the delete.
@@ -50,12 +54,15 @@ interface RoutingRuleCollections {
       @query("force")
       force?: boolean;
     },
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = CloudError
+  >;
 
   /**
    * Lists all the rule collections in a routing configuration, in a paginated format.
    */
-  list is ArmResourceListByParent<RoutingRuleCollection,
+  list is ArmResourceListByParent<
+    RoutingRuleCollection,
     Parameters = {
       /**
        * An optional query parameter which specifies the maximum number of records to be returned by the server.
@@ -70,7 +77,9 @@ interface RoutingRuleCollections {
        */
       @query("$skipToken")
       $skipToken?: string;
-    }, Error = CloudError>;
+    },
+    Error = CloudError
+  >;
 }
 
 @@doc(RoutingRuleCollection.name,
