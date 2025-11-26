@@ -197,3 +197,4 @@ using Dynatrace.Observability;
 @@clientName(ManageAgentList, "DynatraceManageAgentDetails", "csharp");
 @@alternateType(ManageAgentList.id, armResourceIdentifier, "csharp");
 @@clientName(LiftrResourceCategories, "LiftrResourceCategory", "csharp");
+@@clientName(VMHostsListResponse, "VmHostsListResult", "csharp");
