@@ -1493,7 +1493,7 @@
     },
     "CancelOperationsRequest": {
       "type": "object",
-      "description": "This is the request to cancel running operations in scheduled actions using the operation ids",
+      "description": "This is the request to cancel running operations in bulkactions using the operation ids",
       "properties": {
         "operationIds": {
           "type": "array",
@@ -1504,6 +1504,7 @@
         },
         "correlationid": {
           "type": "string",
+          "format": "uuid",
           "description": "CorrelationId item"
         }
       },
@@ -1636,11 +1637,11 @@
         },
         "type": {
           "type": "string",
-          "description": "The type of resources used in the create request eg virtual machines"
+          "description": "The type of resources used in the request eg virtual machines"
         },
         "location": {
           "$ref": "#/definitions/Azure.Core.azureLocation",
-          "description": "The location of the start request eg westus",
+          "description": "The location of the request eg westus",
           "x-ms-mutability": [
             "read",
             "create"
@@ -1648,7 +1649,7 @@
         },
         "results": {
           "type": "array",
-          "description": "The results from the start request if no errors exist",
+          "description": "The results from the request.",
           "items": {
             "$ref": "#/definitions/ResourceOperation"
           },
@@ -1729,7 +1730,7 @@
     },
     "DeadlineType": {
       "type": "string",
-      "description": "The types of deadlines supported by ScheduledActions",
+      "description": "The types of deadlines supported by Bulkactions",
       "enum": [
         "Unknown",
         "InitiateAt",
@@ -1767,11 +1768,11 @@
         },
         "type": {
           "type": "string",
-          "description": "The type of resources used in the deallocate request eg virtual machines"
+          "description": "The type of resources used in the request eg virtual machines"
         },
         "location": {
           "$ref": "#/definitions/Azure.Core.azureLocation",
-          "description": "The location of the deallocate request eg westus",
+          "description": "The location of the request eg westus",
           "x-ms-mutability": [
             "read",
             "create"
@@ -1779,7 +1780,7 @@
         },
         "results": {
           "type": "array",
-          "description": "The results from the deallocate request if no errors exist",
+          "description": "The results from the request.",
           "items": {
             "$ref": "#/definitions/ResourceOperation"
           },
@@ -1828,11 +1829,11 @@
         },
         "type": {
           "type": "string",
-          "description": "The type of resources used in the delete request eg virtual machines"
+          "description": "The type of resources used in the request eg virtual machines"
         },
         "location": {
           "$ref": "#/definitions/Azure.Core.azureLocation",
-          "description": "The location of the start request eg westus",
+          "description": "The location of the request eg westus",
           "x-ms-mutability": [
             "read",
             "create"
@@ -1840,7 +1841,7 @@
         },
         "results": {
           "type": "array",
-          "description": "The results from the start request if no errors exist",
+          "description": "The results from the request.",
           "items": {
             "$ref": "#/definitions/ResourceOperation"
           },
@@ -2174,6 +2175,7 @@
         },
         "correlationid": {
           "type": "string",
+          "format": "uuid",
           "description": "CorrelationId item"
         }
       },
@@ -2196,6 +2198,7 @@
         },
         "correlationid": {
           "type": "string",
+          "format": "uuid",
           "description": "CorrelationId item"
         }
       },
@@ -2219,6 +2222,7 @@
         },
         "correlationid": {
           "type": "string",
+          "format": "uuid",
           "description": "CorrelationId item"
         },
         "forceDeletion": {
@@ -2228,7 +2232,8 @@
       },
       "required": [
         "executionParameters",
-        "resources"
+        "resources",
+        "correlationid"
       ]
     },
     "ExecuteHibernateRequest": {
@@ -2245,6 +2250,7 @@
         },
         "correlationid": {
           "type": "string",
+          "format": "uuid",
           "description": "CorrelationId item"
         }
       },
@@ -2268,6 +2274,31 @@
         },
         "correlationid": {
           "type": "string",
+          "format": "uuid",
+          "description": "CorrelationId item"
+        }
+      },
+      "required": [
+        "executionParameters",
+        "resources",
+        "correlationid"
+      ]
+    },
+    "ExecuteTypeRequest": {
+      "type": "object",
+      "description": "The execute-type request for power operations",
+      "properties": {
+        "executionParameters": {
+          "$ref": "#/definitions/ExecutionParameters",
+          "description": "The execution parameters for the request"
+        },
+        "resources": {
+          "$ref": "#/definitions/Resources",
+          "description": "The resources for the request"
+        },
+        "correlationid": {
+          "type": "string",
+          "format": "uuid",
           "description": "CorrelationId item"
         }
       },
@@ -2339,6 +2370,7 @@
         },
         "correlationid": {
           "type": "string",
+          "format": "uuid",
           "description": "CorrelationId item"
         }
       },
@@ -2376,11 +2408,11 @@
         },
         "type": {
           "type": "string",
-          "description": "The type of resources used in the Hibernate request eg virtual machines"
+          "description": "The type of resources used in the request eg virtual machines"
         },
         "location": {
           "$ref": "#/definitions/Azure.Core.azureLocation",
-          "description": "The location of the Hibernate request eg westus",
+          "description": "The location of the request eg westus",
           "x-ms-mutability": [
             "read",
             "create"
@@ -2388,7 +2420,7 @@
         },
         "results": {
           "type": "array",
-          "description": "The results from the Hibernate request if no errors exist",
+          "description": "The results from the request.",
           "items": {
             "$ref": "#/definitions/ResourceOperation"
           },
@@ -2556,8 +2588,8 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The ID of the LaunchBulkInstancesOperation.",
-          "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+          "format": "uuid",
+          "description": "The ID of the LaunchBulkInstancesOperation."
         },
         "status": {
           "$ref": "#/definitions/ProvisioningState",
@@ -3223,16 +3255,16 @@
         }
       }
     },
-    "OnFailedRetriesAction": {
+    "OnFailureAction": {
       "type": "string",
-      "description": "Actions to take on failed retries for Scheduled Actions",
+      "description": "Actions to take on failed retries for BulkActions",
       "enum": [
         "Deallocate",
         "Start",
         "Delete"
       ],
       "x-ms-enum": {
-        "name": "OnFailedRetriesAction",
+        "name": "OnFailureAction",
         "modelAsString": true,
         "values": [
           {
@@ -3296,6 +3328,7 @@
         },
         "azureOperationName": {
           "type": "string",
+          "format": "uuid",
           "description": "The compute operationid of the Start/Deallocate/Hibernate request"
         }
       },
@@ -3310,6 +3343,7 @@
       "properties": {
         "operationId": {
           "type": "string",
+          "format": "uuid",
           "description": "The operationId identifying a vm operation"
         },
         "creationTime": {
@@ -3320,7 +3354,7 @@
         "activationTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The activation time of a vm operation"
+          "description": "The activation time of a Virtual Machine operation"
         },
         "completedAt": {
           "type": "string",
@@ -3345,9 +3379,46 @@
         }
       }
     },
+    "OperationResponse": {
+      "type": "object",
+      "description": "Common model for operation response",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "The description of the operation response"
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of resources used in the request eg virtual machines"
+        },
+        "location": {
+          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "description": "The location of the request eg westus",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "results": {
+          "type": "array",
+          "description": "The results from the request.",
+          "items": {
+            "$ref": "#/definitions/ResourceOperation"
+          },
+          "x-ms-identifiers": [
+            "resourceId"
+          ]
+        }
+      },
+      "required": [
+        "description",
+        "type",
+        "location"
+      ]
+    },
     "OperationState": {
       "type": "string",
-      "description": "Values that define the states of operations in Scheduled Actions",
+      "description": "Values that define the states of operations in BulkActions",
       "enum": [
         "Unknown",
         "PendingScheduling",
@@ -3414,7 +3485,7 @@
     },
     "OptimizationPreference": {
       "type": "string",
-      "description": "The preferences customers can select to optimize their requests to ScheduledActions",
+      "description": "The preferences customers can select to optimize their requests to Bulkactions",
       "enum": [
         "Cost",
         "Availability",
@@ -3678,7 +3749,7 @@
         "resourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "Unique identifier for the resource involved in the operation, eg ArmId"
+          "description": "Unique identifier for the resource involved in the operation, eg Azure Resource Manager ID"
         },
         "errorCode": {
           "type": "string",
@@ -3700,12 +3771,13 @@
       "properties": {
         "operationId": {
           "type": "string",
+          "format": "uuid",
           "description": "Operation identifier for the unique operation"
         },
         "resourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "Unique identifier for the resource involved in the operation, eg ArmId"
+          "description": "Unique identifier for the resource involved in the operation, eg Azure Resource Manager ID"
         },
         "opType": {
           "type": "string",
@@ -3906,7 +3978,7 @@
     },
     "ResourceOperationType": {
       "type": "string",
-      "description": "The kind of operation types that can be performed on resources using ScheduledActions",
+      "description": "The kind of operation types that can be performed on resources eg Virtual Machines, using BulkActions",
       "enum": [
         "Unknown",
         "Start",
@@ -4041,8 +4113,8 @@
           "format": "int32",
           "description": "Retry window in minutes for user request"
         },
-        "onFailedRetriesAction": {
-          "$ref": "#/definitions/OnFailedRetriesAction",
+        "onFailureAction": {
+          "$ref": "#/definitions/OnFailureAction",
           "description": "Action to take on failed retries for user request"
         }
       }
@@ -4286,11 +4358,11 @@
         },
         "type": {
           "type": "string",
-          "description": "The type of resources used in the start request eg virtual machines"
+          "description": "The type of resources used in the request eg virtual machines"
         },
         "location": {
           "$ref": "#/definitions/Azure.Core.azureLocation",
-          "description": "The location of the start request eg westus",
+          "description": "The location of the request eg westus",
           "x-ms-mutability": [
             "read",
             "create"
@@ -4298,7 +4370,7 @@
         },
         "results": {
           "type": "array",
-          "description": "The results from the start request if no errors exist",
+          "description": "The results from the request.",
           "items": {
             "$ref": "#/definitions/ResourceOperation"
           },
@@ -4423,6 +4495,7 @@
         },
         "correlationid": {
           "type": "string",
+          "format": "uuid",
           "description": "CorrelationId item"
         }
       },
@@ -4451,6 +4524,7 @@
         },
         "correlationid": {
           "type": "string",
+          "format": "uuid",
           "description": "CorrelationId item"
         }
       },
@@ -4479,6 +4553,36 @@
         },
         "correlationid": {
           "type": "string",
+          "format": "uuid",
+          "description": "CorrelationId item"
+        }
+      },
+      "required": [
+        "schedule",
+        "executionParameters",
+        "resources",
+        "correlationid"
+      ]
+    },
+    "SubmitTypeRequest": {
+      "type": "object",
+      "description": "The submit-type request for power operations",
+      "properties": {
+        "schedule": {
+          "$ref": "#/definitions/Schedule",
+          "description": "The schedule for the request"
+        },
+        "executionParameters": {
+          "$ref": "#/definitions/ExecutionParameters",
+          "description": "The execution parameters for the request"
+        },
+        "resources": {
+          "$ref": "#/definitions/Resources",
+          "description": "The resources for the request"
+        },
+        "correlationid": {
+          "type": "string",
+          "format": "uuid",
           "description": "CorrelationId item"
         }
       },

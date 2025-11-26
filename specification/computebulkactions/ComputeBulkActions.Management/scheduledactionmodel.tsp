@@ -85,7 +85,7 @@ namespace Microsoft.ComputeBulkActions;
 );
 
 // ------------------ Enums ---------------
-@doc("The types of deadlines supported by ScheduledActions")
+@doc("The types of deadlines supported by Bulkactions")
 union DeadlineType {
   @doc("Default value of Unknown.")
   Unknown: "Unknown",
@@ -99,7 +99,7 @@ union DeadlineType {
   string,
 }
 
-@doc("The preferences customers can select to optimize their requests to ScheduledActions")
+@doc("The preferences customers can select to optimize their requests to Bulkactions")
 union OptimizationPreference {
   @doc("Optimize while considering cost savings")
   Cost: "Cost",
@@ -113,7 +113,7 @@ union OptimizationPreference {
   string,
 }
 
-@doc("The kind of operation types that can be performed on resources using ScheduledActions")
+@doc("The kind of operation types that can be performed on resources eg Virtual Machines, using BulkActions")
 union ResourceOperationType {
   @doc("The default value for this enum type")
   Unknown: "Unknown",
@@ -136,8 +136,8 @@ union ResourceOperationType {
   string,
 }
 
-@doc("Actions to take on failed retries for Scheduled Actions")
-union OnFailedRetriesAction {
+@doc("Actions to take on failed retries for BulkActions")
+union OnFailureAction {
   @doc("Deallocate operations on the resources")
   Deallocate: "Deallocate",
 
@@ -150,7 +150,7 @@ union OnFailedRetriesAction {
   string,
 }
 
-@doc("Values that define the states of operations in Scheduled Actions")
+@doc("Values that define the states of operations in BulkActions")
 union OperationState {
   @doc("The default value for the operation state enum")
   Unknown: "Unknown",
@@ -185,7 +185,7 @@ union OperationState {
 // ------------------ Models ---------------
 @doc("The schedule details for the user request")
 model Schedule {
-  #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Prefer using `utcDateTime` when representing a datetime unless an offset is necessary."
+  #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Prefer using `offsetDateTime` when representing a datetime."
   @doc("The deadline for the operation")
   deadline?: offsetDateTime;
 
@@ -228,7 +228,7 @@ model RetryPolicy {
   retryWindowInMinutes?: int32;
 
   @doc("Action to take on failed retries for user request")
-  onFailedRetriesAction?: OnFailedRetriesAction;
+  onFailureAction?: OnFailureAction;
 }
 
 @doc("Extra details needed to run the user's request")
@@ -251,10 +251,12 @@ model ResourceOperationError {
 
 @doc("The details of a response from an operation on a resource")
 model ResourceOperationDetails {
+  #suppress "@azure-tools/typespec-azure-core/no-format" "Prefer using `format(" uuid ")` when representing UUIDs."
   @doc("Operation identifier for the unique operation")
+  @format("uuid")
   operationId: string;
 
-  @doc("Unique identifier for the resource involved in the operation, eg ArmId")
+  @doc("Unique identifier for the resource involved in the operation, eg Azure Resource Manager ID")
   resourceId?: armResourceIdentifier;
 
   @doc("Type of operation performed on the resources")
@@ -263,7 +265,7 @@ model ResourceOperationDetails {
   @doc("Subscription id attached to the request")
   subscriptionId?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Prefer using `utcDateTime` when representing a datetime unless an offset is necessary."
+  #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Prefer using `offsetDateTime` when representing a datetime."
   @doc("Deadline for the operation")
   deadline?: offsetDateTime;
 
@@ -279,7 +281,7 @@ model ResourceOperationDetails {
   @doc("Operation level errors if they exist")
   resourceOperationError?: ResourceOperationError;
 
-  #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Prefer using `utcDateTime` when representing a datetime unless an offset is necessary."
+  #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Prefer using `offsetDateTime` when representing a datetime."
   @doc("Time the operation was complete if errors are null")
   completedAt?: offsetDateTime;
 
@@ -289,7 +291,7 @@ model ResourceOperationDetails {
 
 @doc("High level response from an operation on a resource")
 model ResourceOperation {
-  @doc("Unique identifier for the resource involved in the operation, eg ArmId")
+  @doc("Unique identifier for the resource involved in the operation, eg Azure Resource Manager ID")
   resourceId?: armResourceIdentifier;
 
   @doc("Resource level error code if it exists")
@@ -302,7 +304,7 @@ model ResourceOperation {
   operation?: ResourceOperationDetails;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Prefer using `utcDateTime` when representing a datetime unless an offset is necessary."
+#suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Prefer using `offsetDateTime` when representing a datetime."
 @doc("This defines a list of operation errors associated with a unique operationId")
 model OperationErrorDetails {
   @doc("The error code of the operation")
@@ -314,20 +316,24 @@ model OperationErrorDetails {
   @doc("The timestamp of the error occurrence")
   timestamp?: offsetDateTime;
 
+  #suppress "@azure-tools/typespec-azure-core/no-format" "Prefer using `format(" uuid ")` when representing UUIDs."
   @doc("The compute operationid of the Start/Deallocate/Hibernate request")
+  @format("uuid")
   azureOperationName?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Prefer using `utcDateTime` when representing a datetime unless an offset is necessary."
+#suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Prefer using `offsetDateTime` when representing a datetime."
 @doc("This is the first level of operation errors from the request when clients get errors per vm operation")
 model OperationErrorsResult {
+  #suppress "@azure-tools/typespec-azure-core/no-format" "Prefer using `format(" uuid ")` when representing UUIDs."
   @doc("The operationId identifying a vm operation")
+  @format("uuid")
   operationId?: string;
 
   @doc("The creation time of the error result")
   creationTime?: offsetDateTime;
 
-  @doc("The activation time of a vm operation")
+  @doc("The activation time of a Virtual Machine operation")
   activationTime?: offsetDateTime;
 
   @doc("The completion time of the operation if the operation was completed")
@@ -344,9 +350,9 @@ model OperationErrorsResult {
   requestErrorDetails?: string;
 }
 
-// ----------- SubmitDeallocate ---------
-@doc("The deallocate request for resources")
-model SubmitDeallocateRequest {
+// ------------------ Common Models ---------------
+@doc("The submit-type request for power operations")
+model SubmitTypeRequest {
   @doc("The schedule for the request")
   schedule: Schedule;
 
@@ -356,128 +362,90 @@ model SubmitDeallocateRequest {
   @doc("The resources for the request")
   resources: Resources;
 
+  #suppress "@azure-tools/typespec-azure-core/no-format" "Prefer using `format(" uuid ")` when representing UUIDs."
   @doc("CorrelationId item")
+  @format("uuid")
   correlationid: string;
 }
 
-@doc("The response from a deallocate request")
-model DeallocateResourceOperationResponse {
+@doc("The execute-type request for power operations")
+model ExecuteTypeRequest {
+  @doc("The execution parameters for the request")
+  executionParameters: ExecutionParameters;
+
+  @doc("The resources for the request")
+  resources: Resources;
+
+  #suppress "@azure-tools/typespec-azure-core/no-format" "Prefer using `format(" uuid ")` when representing UUIDs."
+  @doc("CorrelationId item")
+  @format("uuid")
+  correlationid: string;
+}
+
+@doc("Common model for operation response")
+model OperationResponse {
   @doc("The description of the operation response")
   description: string;
 
-  @doc("The type of resources used in the deallocate request eg virtual machines")
+  @doc("The type of resources used in the request eg virtual machines")
   type: string;
 
-  @doc("The location of the deallocate request eg westus")
+  @doc("The location of the request eg westus")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   location: azureLocation;
 
   @identifiers(#["resourceId"])
-  @doc("The results from the deallocate request if no errors exist")
+  @doc("The results from the request.")
   results?: Array<ResourceOperation>;
+}
+
+// ----------- SubmitDeallocate ---------
+@doc("The deallocate request for resources")
+model SubmitDeallocateRequest {
+  ...SubmitTypeRequest;
+}
+
+@doc("The response from a deallocate request")
+model DeallocateResourceOperationResponse {
+  ...OperationResponse;
 }
 
 // ----------- SubmitStart ---------
 @doc("This is the request for start")
 model SubmitStartRequest {
-  @doc("The schedule for the request")
-  schedule: Schedule;
-
-  @doc("The execution parameters for the request")
-  executionParameters: ExecutionParameters;
-
-  @doc("The resources for the request")
-  resources: Resources;
-
-  @doc("CorrelationId item")
-  correlationid: string;
+  ...SubmitTypeRequest;
 }
 
 @doc("The response from a start request")
 model StartResourceOperationResponse {
-  @doc("The description of the operation response")
-  description: string;
-
-  @doc("The type of resources used in the start request eg virtual machines")
-  type: string;
-
-  @doc("The location of the start request eg westus")
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  location: azureLocation;
-
-  @identifiers(#["resourceId"])
-  @doc("The results from the start request if no errors exist")
-  results?: Array<ResourceOperation>;
+  ...OperationResponse;
 }
 
 // ----------- SubmitHibernate ---------
 @doc("This is the request for hibernate")
 model SubmitHibernateRequest {
-  @doc("The schedule for the request")
-  schedule: Schedule;
-
-  @doc("The execution parameters for the request")
-  executionParameters: ExecutionParameters;
-
-  @doc("The resources for the request")
-  resources: Resources;
-
-  @doc("CorrelationId item")
-  correlationid: string;
+  ...SubmitTypeRequest;
 }
 
 @doc("The response from a Hibernate request")
 model HibernateResourceOperationResponse {
-  @doc("The description of the operation response")
-  description: string;
-
-  @doc("The type of resources used in the Hibernate request eg virtual machines")
-  type: string;
-
-  @doc("The location of the Hibernate request eg westus")
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  location: azureLocation;
-
-  @identifiers(#["resourceId"])
-  @doc("The results from the Hibernate request if no errors exist")
-  results?: Array<ResourceOperation>;
+  ...OperationResponse;
 }
 
 // ----------- Execute Operations Request ---------
 @doc("The ExecuteDeallocateRequest request for executeDeallocate operations")
 model ExecuteDeallocateRequest {
-  @doc("The execution parameters for the request")
-  executionParameters: ExecutionParameters;
-
-  @doc("The resources for the request")
-  resources: Resources;
-
-  @doc("CorrelationId item")
-  correlationid: string;
+  ...ExecuteTypeRequest;
 }
 
 @doc("The ExecuteHibernateRequest request for executeHibernate operations")
 model ExecuteHibernateRequest {
-  @doc("The execution parameters for the request")
-  executionParameters: ExecutionParameters;
-
-  @doc("The resources for the request")
-  resources: Resources;
-
-  @doc("CorrelationId item")
-  correlationid: string;
+  ...ExecuteTypeRequest;
 }
 
 @doc("The ExecuteStartRequest request for executeStart operations")
 model ExecuteStartRequest {
-  @doc("The execution parameters for the request")
-  executionParameters: ExecutionParameters;
-
-  @doc("The resources for the request")
-  resources: Resources;
-
-  @doc("CorrelationId item")
-  correlationid: string;
+  ...ExecuteTypeRequest;
 }
 
 @doc("The ExecuteCreateRequest request for create operations")
@@ -488,54 +456,25 @@ model ExecuteCreateRequest {
   @doc("The execution parameters for the request")
   executionParameters: ExecutionParameters;
 
+  #suppress "@azure-tools/typespec-azure-core/no-format" "Prefer using `format(" uuid ")` when representing UUIDs."
   @doc("CorrelationId item")
+  @format("uuid")
   correlationid?: string;
 }
 
 @doc("The response from a create request")
 model CreateResourceOperationResponse {
-  @doc("The description of the operation response")
-  description: string;
-
-  @doc("The type of resources used in the create request eg virtual machines")
-  type: string;
-
-  @doc("The location of the start request eg westus")
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  location: azureLocation;
-
-  @identifiers(#["resourceId"])
-  @doc("The results from the start request if no errors exist")
-  results?: Array<ResourceOperation>;
+  ...OperationResponse;
 }
 
 @doc("The response from a delete request")
 model DeleteResourceOperationResponse {
-  @doc("The description of the operation response")
-  description: string;
-
-  @doc("The type of resources used in the delete request eg virtual machines")
-  type: string;
-
-  @doc("The location of the start request eg westus")
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  location: azureLocation;
-
-  @identifiers(#["resourceId"])
-  @doc("The results from the start request if no errors exist")
-  results?: Array<ResourceOperation>;
+  ...OperationResponse;
 }
 
 @doc("The ExecuteDeleteRequest for delete VM operation")
 model ExecuteDeleteRequest {
-  @doc("The execution parameters for the request")
-  executionParameters: ExecutionParameters;
-
-  @doc("The resources for the request")
-  resources: Resources;
-
-  @doc("CorrelationId item")
-  correlationid?: string;
+  ...ExecuteTypeRequest;
 
   @doc("Forced delete resource item")
   forceDeletion?: boolean;
@@ -547,7 +486,9 @@ model GetOperationStatusRequest {
   @doc("The list of operation ids to get the status of")
   operationIds: Array<string>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-format" "Prefer using `format(" uuid ")` when representing UUIDs."
   @doc("CorrelationId item")
+  @format("uuid")
   correlationid: string;
 }
 
@@ -559,12 +500,14 @@ model GetOperationStatusResponse {
 }
 
 // ----------- CancelOperations ---------
-@doc("This is the request to cancel running operations in scheduled actions using the operation ids")
+@doc("This is the request to cancel running operations in bulkactions using the operation ids")
 model CancelOperationsRequest {
   @doc("The list of operation ids to cancel operations on")
   operationIds: Array<string>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-format" "Prefer using `format(" uuid ")` when representing UUIDs."
   @doc("CorrelationId item")
+  @format("uuid")
   correlationid: string;
 }
 
