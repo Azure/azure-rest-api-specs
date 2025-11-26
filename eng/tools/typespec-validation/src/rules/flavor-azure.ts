@@ -1,6 +1,6 @@
-import { parse as yamlParse } from "yaml";
 import { RuleResult } from "../rule-result.js";
 import { Rule } from "../rule.js";
+import { parse } from "../tsp-config.js";
 import { readTspConfig } from "../utils.js";
 
 export class FlavorAzureRule implements Rule {
@@ -15,7 +15,7 @@ export class FlavorAzureRule implements Rule {
 
     const configText = await readTspConfig(folder);
 
-    const config = yamlParse(configText) as { options?: Record<string, { flavor?: string }> };
+    const config = parse(configText);
 
     const options = config?.options;
     for (const emitter in options) {
