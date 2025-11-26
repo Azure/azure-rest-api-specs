@@ -329,7 +329,7 @@ model MarketStartPrice {
   currency?: string;
 }
 
-@doc("Summary description of the product")
+@doc("Returns the full set of Product attributes")
 @resource("product")
 model ProductDetails {
   ...ProductBase;
@@ -458,7 +458,7 @@ model PlanMetadata {
   relatedSkus?: PlanSkuRelation[];
 }
 
-@doc("Returns a subset of Plan attributes")
+@doc("Returns the full set of Plan attributes")
 model PlanDetails {
   ...PlanSummary;
 
