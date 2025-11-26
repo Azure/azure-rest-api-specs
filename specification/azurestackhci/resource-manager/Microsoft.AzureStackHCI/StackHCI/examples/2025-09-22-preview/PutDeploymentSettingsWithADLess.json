@@ -1,5 +1,5 @@
 {
-  "title": "Create Deployment Settings",
+  "title": "Create Deployment Settings Without Active Directory Integration",
   "operationId": "DeploymentSettings_CreateOrUpdate",
   "parameters": {
     "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
@@ -44,6 +44,7 @@
                   "cloudAccountName": "myasestoragacct",
                   "azureServiceEndpoint": "core.windows.net"
                 },
+                "identityProvider": "LocalIdentity",
                 "storage": {
                   "configurationMode": "Express"
                 },
@@ -59,9 +60,13 @@
                         "endingAddress": "10.57.48.66"
                       }
                     ],
-                    "dnsServerConfig": "UseDnsServer",
-                    "dnsServers": [
-                      "10.57.50.90"
+                    "dnsZones": [
+                      {
+                        "dnsZoneName": "contoso.com",
+                        "dnsForwarder": [
+                          "192.168.1.1"
+                        ]
+                      }
                     ]
                   }
                 ],
@@ -130,7 +135,6 @@
                   }
                 },
                 "adouPath": "OU=ms169,DC=ASZ1PLab8,DC=nttest,DC=microsoft,DC=com",
-                "isManagementCluster": true,
                 "secretsLocation": "/subscriptions/db4e2fdb-6d80-4e6e-b7cd-xxxxxxx/resourceGroups/test-rg/providers/Microsoft.KeyVault/vaults/abcd123",
                 "secrets": [
                   {

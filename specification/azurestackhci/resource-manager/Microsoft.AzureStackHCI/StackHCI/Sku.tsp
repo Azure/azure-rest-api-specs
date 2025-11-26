@@ -29,7 +29,6 @@ interface Skus {
   /**
    * Get SKU resource details within a offer of HCI Cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   get is ArmResourceRead<
     Sku,
     Parameters = {
@@ -44,7 +43,6 @@ interface Skus {
   /**
    * List Skus available for a offer within the HCI Cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   listByOffer is ArmResourceListByParent<
     Sku,
     Parameters = {

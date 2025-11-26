@@ -8,6 +8,23 @@ using Azure.ResourceManager;
 namespace Microsoft.AzureStackHCI;
 
 /**
+ * Specifies how DNS servers are configured for the infrastructure network. Allowed values are 'UseDnsServer' to use the provided DNS servers, and 'UseForwarder' to use DNS forwarders.
+ */
+union DnsServerConfig {
+  string,
+
+  /**
+   * Use the provided DNS servers for the infrastructure network.
+   */
+  UseDnsServer: "UseDnsServer",
+
+  /**
+   * Use DNS forwarders for the infrastructure network.
+   */
+  UseForwarder: "UseForwarder",
+}
+
+/**
  * Aggregate state of Arc agent across the nodes in this HCI cluster.
  */
 union ArcSettingAggregateState {
@@ -453,141 +470,6 @@ union DeviceKind {
 }
 
 /**
- * Aggregate state of Arc Extensions across the nodes in this HCI cluster.
- */
-union ExtensionAggregateState {
-  string,
-
-  /** The state is not specified. */
-  NotSpecified: "NotSpecified",
-
-  /** An error occurred. */
-  Error: "Error",
-
-  /** The operation succeeded. */
-  Succeeded: "Succeeded",
-
-  /** The operation was canceled. */
-  Canceled: "Canceled",
-
-  /** The operation failed. */
-  Failed: "Failed",
-
-  /** The extension is connected. */
-  Connected: "Connected",
-
-  /** The extension is disconnected. */
-  Disconnected: "Disconnected",
-
-  /** The extension is deleted. */
-  Deleted: "Deleted",
-
-  /** The extension is being created. */
-  Creating: "Creating",
-
-  /** The extension is being updated. */
-  Updating: "Updating",
-
-  /** The extension is being deleted. */
-  Deleting: "Deleting",
-
-  /** The extension is being moved. */
-  Moving: "Moving",
-
-  /** The operation partially succeeded. */
-  PartiallySucceeded: "PartiallySucceeded",
-
-  /** The extension is partially connected. */
-  PartiallyConnected: "PartiallyConnected",
-
-  /** The operation is in progress. */
-  InProgress: "InProgress",
-
-  /** The operation has been accepted. */
-  Accepted: "Accepted",
-
-  /** The extension is provisioning. */
-  Provisioning: "Provisioning",
-
-  /** Upgrade failed but rollback succeeded. */
-  UpgradeFailedRollbackSucceeded: "UpgradeFailedRollbackSucceeded",
-}
-
-/**
- * State of Arc Extension in this node.
- */
-union NodeExtensionState {
-  string,
-
-  /** The state is not specified. */
-  NotSpecified: "NotSpecified",
-
-  /** An error occurred. */
-  Error: "Error",
-
-  /** The operation succeeded. */
-  Succeeded: "Succeeded",
-
-  /** The operation was canceled. */
-  Canceled: "Canceled",
-
-  /** The operation failed. */
-  Failed: "Failed",
-
-  /** The extension is connected. */
-  Connected: "Connected",
-
-  /** The extension is disconnected. */
-  Disconnected: "Disconnected",
-
-  /** The extension is deleted. */
-  Deleted: "Deleted",
-
-  /** The extension is being created. */
-  Creating: "Creating",
-
-  /** The extension is being updated. */
-  Updating: "Updating",
-
-  /** The extension is being deleted. */
-  Deleting: "Deleting",
-
-  /** The extension is being moved. */
-  Moving: "Moving",
-
-  /** The operation partially succeeded. */
-  PartiallySucceeded: "PartiallySucceeded",
-
-  /** The extension is partially connected. */
-  PartiallyConnected: "PartiallyConnected",
-
-  /** The operation is in progress. */
-  InProgress: "InProgress",
-
-  /** The operation has been accepted. */
-  Accepted: "Accepted",
-
-  /** The extension is provisioning. */
-  Provisioning: "Provisioning",
-}
-
-/**
- * The level code.
- */
-union StatusLevelTypes {
-  string,
-
-  /** Information level. */
-  Info: "Info",
-
-  /** Warning level. */
-  Warning: "Warning",
-
-  /** Error level. */
-  Error: "Error",
-}
-
-/**
  * Extension managed by user or Azure.
  */
 union ExtensionManagedBy {
@@ -840,23 +722,6 @@ union ServiceName {
 }
 
 /**
- * Job Type supported by Azure Linux Edge Devices.
- */
-union AzureLinuxEdgeDeviceJobType {
-  string,
-
-  /**
-   * Job to collect logs from the device.
-   */
-  CollectLog: "CollectLog",
-
-  /**
-   * Job to provide remote support to the device.
-   */
-  RemoteSupport: "RemoteSupport",
-}
-
-/**
  * Job Type supported.
  */
 union HciEdgeDeviceJobType {
@@ -1083,140 +948,28 @@ model DeploymentStep {
 }
 
 /**
- * Result of a precheck validation test.
+ * The HostNetwork of a cluster.
  */
-model PrecheckResult {
+model HostNetwork {
   /**
-   * Name of the individual test/rule/alert that was executed. Unique, not exposed to the customer.
+   * The network intents assigned to the network reference pattern used for the deployment. Each intent will define its own name, traffic type, adapter names, and overrides as recommended by your OEM.
    */
-  name?: string;
+  @identifiers(#["name"])
+  intents?: DeploymentIntents[];
 
   /**
-   * The health check DisplayName localized of the individual test executed.
+   * List of StorageNetworks config to deploy AzureStackHCI Cluster.
    */
-  displayName?: string;
+  @identifiers(#["name"])
+  storageNetworks?: DeploymentStorageNetworks[];
 
   /**
-   * Key-value pairs that allow grouping/filtering individual tests.
+   * Defines how the storage adapters between nodes are connected either switch or switch less..
    */
-  tags?: PrecheckResultTags;
+  storageConnectivitySwitchless?: boolean;
 
   /**
-   * Key-value pairs that allow grouping/filtering individual tests.
+   * Optional parameter required only for 3 Nodes Switchless deployments. This allows users to specify IPs and Mask for Storage NICs when Network ATC is not assigning the IPs for storage automatically.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Backward compatibility to maintain consistency with old swagger"
-  healthCheckTags?: Record<unknown>;
-
-  /**
-   * User-facing name; one or more sentences indicating the direct issue.
-   */
-  title?: string;
-
-  /**
-   * The status of the check running (i.e. Failed, Succeeded, In Progress). This answers whether the check ran, and passed or failed.
-   */
-  status?: Status;
-
-  /**
-   * Severity of the result (Critical, Warning, Informational, Hidden). This answers how important the result is. Critical is the only update-blocking severity.
-   */
-  severity?: Severity;
-
-  /**
-   * Detailed overview of the issue and what impact the issue has on the stamp.
-   */
-  description?: string;
-
-  /**
-   * Set of steps that can be taken to resolve the issue found.
-   */
-  remediation?: string;
-
-  /**
-   * The unique identifier for the affected resource (such as a node or drive).
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "model nomenclature"
-  targetResourceID?: string;
-
-  /**
-   * The name of the affected resource.
-   */
-  targetResourceName?: string;
-
-  /**
-   * The type of resource being referred to (well-known set of nouns in infrastructure, aligning with Monitoring).
-   */
-  targetResourceType?: string;
-
-  /**
-   * The time in which the HealthCheck was called.
-   */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  timestamp?: utcDateTime;
-
-  /**
-   * Property bag of key value pairs for additional information.
-   */
-  additionalData?: string;
-
-  /**
-   * The name of the services called for the HealthCheck (I.E. Test-AzureStack, Test-Cluster).
-   */
-  healthCheckSource?: string;
-}
-
-/**
- * Key-value pairs that allow grouping/filtering individual tests.
- */
-model PrecheckResultTags {
-  /**
-   * Key that allow grouping/filtering individual tests.
-   */
-  key?: string;
-
-  /**
-   * Value of the key that allow grouping/filtering individual tests.
-   */
-  value?: string;
-}
-
-/**
- * SKU Mapping details.
- */
-model SkuMappings {
-  /**
-   * Identifier of the CatalogPlan for the sku
-   */
-  catalogPlanId?: string;
-
-  /**
-   * Identifier for the sku
-   */
-  marketplaceSkuId?: string;
-
-  /**
-   * Array of SKU versions available
-   */
-  marketplaceSkuVersions?: string[];
-}
-
-/**
- * Current version of each updatable component.
- */
-model PackageVersionInfo {
-  /**
-   * Package type
-   */
-  packageType?: string;
-
-  /**
-   * Package version
-   */
-  version?: string;
-
-  /**
-   * Last time this component was updated.
-   */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  lastUpdated?: utcDateTime;
+  enableStorageAutoIp?: boolean;
 }
