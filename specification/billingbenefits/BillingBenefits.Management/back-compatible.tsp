@@ -111,6 +111,9 @@ using Microsoft.BillingBenefits;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(MaccValidateModel.properties
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SavingsPlanValidateModel.properties
+);
 
 @@clientName(Discounts.create::parameters.resource, "body");
 @@clientName(Discounts.update::parameters.properties, "body");

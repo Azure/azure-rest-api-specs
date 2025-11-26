@@ -3249,7 +3249,44 @@ model MaccValidateModel extends BenefitValidateModel {
  * Savings plan validate model
  */
 model SavingsPlanValidateModel extends BenefitValidateModel {
-  ...SavingsPlanOrderAliasModel;
+  /**
+   * Savings plan order alias properties
+   */
+  properties?: SavingsPlanOrderAliasProperties;
+
+  /**
+   * Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
+   */
+  @visibility(Lifecycle.Read)
+  id?: Azure.Core.armResourceIdentifier;
+
+  /**
+   * The name of the resource
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
+   */
+  @visibility(Lifecycle.Read)
+  type?: Azure.Core.armResourceType;
+
+  /**
+   * Azure Resource Manager metadata containing createdBy and modifiedBy information.
+   */
+  @visibility(Lifecycle.Read)
+  systemData?: SystemData;
+
+  /**
+   * Savings plan SKU
+   */
+  sku: ResourceSku;
+
+  /**
+   * Resource provider kind
+   */
+  kind?: string;
 
   /**
    * Type of benefit to validate. This is used to determine the model type for validation.

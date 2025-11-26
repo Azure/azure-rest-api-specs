@@ -7874,23 +7874,15 @@
           "description": "Savings plan order alias properties",
           "x-ms-client-flatten": true
         },
-        "name": {
-          "type": "string",
-          "description": "Name of the savings plan order alias",
-          "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
-        },
-        "sku": {
-          "$ref": "#/definitions/ResourceSku",
-          "description": "Savings plan SKU"
-        },
-        "kind": {
-          "type": "string",
-          "description": "Resource provider kind"
-        },
         "id": {
           "type": "string",
           "format": "arm-id",
           "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource",
           "readOnly": true
         },
         "type": {
@@ -7902,10 +7894,17 @@
           "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/systemData",
           "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
           "readOnly": true
+        },
+        "sku": {
+          "$ref": "#/definitions/ResourceSku",
+          "description": "Savings plan SKU"
+        },
+        "kind": {
+          "type": "string",
+          "description": "Resource provider kind"
         }
       },
       "required": [
-        "name",
         "sku"
       ],
       "allOf": [
