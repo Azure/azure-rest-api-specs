@@ -12,6 +12,7 @@ const TspConfigSchema = z
           })
           .optional(),
       })
+      .catchall(z.looseObject({ flavor: z.string().optional() }))
       .optional(),
     linter: z
       .object({
