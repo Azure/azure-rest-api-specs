@@ -1440,8 +1440,6 @@ union ConnectionStatus {
   Disconnected: "Disconnected",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Pending: "Pending",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  Stale: "Stale",
 }
 
 /** Parameters for updating a Connection resource. */
