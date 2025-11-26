@@ -3160,12 +3160,12 @@ model BackupPolicy extends BaseBackupPolicy {
  */
 model BackupSchedule {
   /**
-   * Repeating time interval which only support the following ISO 8601 format [R/startDateTime/Duration]. Example: R/2007-03-01T13:00:00Z/P1Y2M10DT2H30M
+   * Repeating time interval which Support the ISO 8601 format and Unsupported or partially Supported Formats. For more details refer aka.ms/SupportedAndUnsupportedISO8601TimeFormat
    */
   repeatingTimeIntervals: string[];
 
   /**
-   * Time zone for a schedule. Example: Pacific Standard Time
+   * Time Zone for a schedule. Example: Pacific Standard Time. For more details refer aka.ms/TimeZoneIndicator
    */
   timeZone?: string;
 }
