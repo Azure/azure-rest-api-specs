@@ -25,6 +25,14 @@ using Microsoft.Datadog;
 
 @@clientLocation(DatadogMonitorResources.list, "Monitors", "!csharp");
 @@clientName(DatadogMonitorResources.list, "List", "!csharp");
+@@clientLocation(DatadogMonitorResources.manageSreAgentConnectors, "Monitors");
+@@clientName(DatadogMonitorResources.manageSreAgentConnectors::parameters.body,
+  "request"
+);
+@@clientLocation(DatadogMonitorResources.getDefaultApplicationKey, "Monitors");
+@@clientName(DatadogMonitorResources.getDefaultApplicationKey,
+  "GetDefaultApplicationKey"
+);
 
 @@clientLocation(DatadogMonitorResources.listApiKeys, "Monitors");
 @@clientName(DatadogMonitorResources.listApiKeys, "ListApiKeys");
