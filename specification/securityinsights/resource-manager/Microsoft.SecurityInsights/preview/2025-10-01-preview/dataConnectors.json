@@ -3,7 +3,7 @@
   "info": {
     "title": "Security Insights",
     "description": "API spec for Microsoft.SecurityInsights (Azure Security Insights) resource provider",
-    "version": "2025-07-01-preview"
+    "version": "2025-10-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -136,6 +136,9 @@
           "Get a MicrosoftThreatIntelligence data connector": {
             "$ref": "./examples/dataConnectors/GetMicrosoftThreatIntelligenceById.json"
           },
+          "Get a PremiumMicrosoftDefenderForThreatIntelligence data connector": {
+            "$ref": "./examples/dataConnectors/GetPremiumMicrosoftDefenderForThreatIntelligenceById.json"
+          },
           "Get a GenericUI data connector": {
             "$ref": "./examples/dataConnectors/GetGenericUI.json"
           },
@@ -206,6 +209,9 @@
           },
           "Creates or updates a Microsoft Threat Intelligence data connector.": {
             "$ref": "./examples/dataConnectors/CreateMicrosoftThreatIntelligenceDataConnector.json"
+          },
+          "Creates or updates a PremiumMicrosoftDefenderForThreatIntelligence data connector.": {
+            "$ref": "./examples/dataConnectors/CreatePremiumMicrosoftDefenderForThreatIntelligenceDataConnector.json"
           },
           "Creates or updates an Office PowerBI data connector": {
             "$ref": "./examples/dataConnectors/CreateOfficePowerBIDataConnector.json"
@@ -294,6 +300,9 @@
           },
           "Delete an MicrosoftThreatIntelligence data connector": {
             "$ref": "./examples/dataConnectors/DeleteMicrosoftThreatIntelligenceDataConnector.json"
+          },
+          "Deletes a PremiumMicrosoftDefenderForThreatIntelligence data connector.": {
+            "$ref": "./examples/dataConnectors/DeletePremiumMicrosoftDefenderForThreatIntelligenceDataConnector.json"
           },
           "Delete an Office PowerBI data connector": {
             "$ref": "./examples/dataConnectors/DeleteOfficePowerBIDataConnetor.json"
@@ -1177,6 +1186,69 @@
       },
       "required": [
         "dataTypes"
+      ],
+      "type": "object"
+    },
+    "PremiumMicrosoftDefenderForThreatIntelligence": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnector"
+        }
+      ],
+      "description": "Represents Premium Microsoft Defender for Threat Intelligence data connector.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PremiumMdtiDataConnectorProperties",
+          "description": "Premium Microsoft Defender for Threat Intelligence data connector properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "PremiumMicrosoftDefenderForThreatIntelligence"
+    },
+    "PremiumMdtiDataConnectorDataTypes": {
+      "description": "The available data types for Premium Microsoft Defender for Threat Intelligence data connector.",
+      "properties": {
+        "connector": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/DataConnectorDataTypeCommon"
+            }
+          ],
+          "description": "Data type for Premium Microsoft Defender for Threat Intelligence data connector.",
+          "type": "object"
+        }
+      },
+      "type": "object",
+      "required": [
+        "connector"
+      ]
+    },
+    "PremiumMdtiDataConnectorProperties": {
+      "description": "Premium Microsoft Defender for Threat Intelligence data connector properties.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorTenantId"
+        }
+      ],
+      "properties": {
+        "lookbackPeriod": {
+          "description": "The lookback period for the feed to be imported. The date-time to begin importing the feed from, for example: 2024-01-01T00:00:00.000Z.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "requiredSKUsPresent": {
+          "description": "The flag to indicate whether the tenant has the premium SKU required to access this connector.",
+          "type": "boolean"
+        },
+        "dataTypes": {
+          "$ref": "#/definitions/PremiumMdtiDataConnectorDataTypes",
+          "description": "The available data types for the connector."
+        }
+      },
+      "required": [
+        "dataTypes",
+        "lookbackPeriod"
       ],
       "type": "object"
     },
@@ -2573,6 +2645,7 @@
         "Dynamics365",
         "MicrosoftThreatProtection",
         "MicrosoftThreatIntelligence",
+        "PremiumMicrosoftDefenderForThreatIntelligence",
         "GenericUI",
         "APIPolling",
         "IOT",
@@ -2638,6 +2711,9 @@
           },
           {
             "value": "MicrosoftThreatIntelligence"
+          },
+          {
+            "value": "PremiumMicrosoftDefenderForThreatIntelligence"
           },
           {
             "value": "GenericUI"
