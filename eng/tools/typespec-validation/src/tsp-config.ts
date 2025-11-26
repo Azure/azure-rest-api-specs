@@ -1,6 +1,7 @@
 import { parse as yamlParse } from "yaml";
 
 export type TspConfig = {
+  emit?: string[];
   options?: Record<string, Record<string, string>>;
 };
 
