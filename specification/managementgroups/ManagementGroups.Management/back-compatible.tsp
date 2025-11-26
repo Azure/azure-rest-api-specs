@@ -81,3 +81,7 @@ using Microsoft.Management;
 @@clientName(checkNameAvailability::parameters.body,
   "checkNameAvailabilityRequest"
 );
+
+@@clientLocation(checkNameAvailability, "API");
+@@clientLocation(startTenantBackfill, "API");
+@@clientLocation(tenantBackfillStatus, "API");
