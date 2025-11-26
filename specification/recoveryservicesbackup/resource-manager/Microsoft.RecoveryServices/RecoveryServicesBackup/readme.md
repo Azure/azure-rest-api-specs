@@ -554,5 +554,6 @@ directive:
 suppressions:
   - from: bms.json
     code: ProvisioningStateSpecifiedForLROPut
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}"].put
     reason: The existing API contract is legacy code and not be able to change.
 ```
