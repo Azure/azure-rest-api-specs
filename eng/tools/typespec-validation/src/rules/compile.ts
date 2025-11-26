@@ -105,7 +105,7 @@ export class CompileRule implements Rule {
             async (swaggerPath: string) => {
               const swaggerText = await readFile(swaggerPath, { encoding: "utf8" });
               const swaggerObj = JSON.parse(swaggerText) as {
-                info?: { "x-typespec-generated"?: unknown; "x-cadl-generated"?: unknown };
+                info?: Record<string, unknown>;
               };
               return (
                 swaggerObj["info"]?.["x-typespec-generated"] !== undefined ||
