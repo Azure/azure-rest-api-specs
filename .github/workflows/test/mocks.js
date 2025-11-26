@@ -21,7 +21,10 @@ function createMockGithubImpl() {
       after: vi.fn(),
       before: vi.fn(),
     },
-    paginate: async (/** @type {(arg0: any) => any} */ func, /** @type {any} */ params) => {
+    paginate: /** @template T,U */ async (
+      /** @type {(input: T) => Promise<{data: Array<U>|Record<string,Array<U>>}>} */ func,
+      /** @type {T} */ params,
+    ) => {
       // Assume all test data fits in single page
       const data = (await func(params)).data;
 
