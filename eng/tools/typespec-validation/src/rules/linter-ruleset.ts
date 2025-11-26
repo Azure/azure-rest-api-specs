@@ -33,7 +33,7 @@ export class LinterRulesetRule implements Rule {
 
     const mainTspExists = await fileExists(join(folder, "main.tsp"));
     const clientTspExists = await fileExists(join(folder, "client.tsp"));
-    let files = [];
+    const files = [];
     if (mainTspExists) {
       files.push("main.tsp");
     }
