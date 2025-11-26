@@ -35,4 +35,28 @@ directive:
   - from: policyStates.json
     where-operation: PolicyStates_ListQueryResultsForResourceGroupLevelPolicyAssignment
     transform: delete $["x-ms-pageable"]
+  - from: policyEvents.json
+    where-operation: PolicyEvents_ListQueryResultsForManagementGroup
+    transform: delete $["x-ms-pageable"]
+  - from: policyEvents.json
+    where-operation: PolicyEvents_ListQueryResultsForSubscription
+    transform: delete $["x-ms-pageable"]
+  - from: policyEvents.json
+    where-operation: PolicyEvents_ListQueryResultsForResourceGroup
+    transform: delete $["x-ms-pageable"]
+  - from: policyEvents.json
+    where-operation: PolicyEvents_ListQueryResultsForResource
+    transform: delete $["x-ms-pageable"]
+  - from: policyEvents.json
+    where-operation: PolicyEvents_ListQueryResultsForPolicySetDefinition
+    transform: delete $["x-ms-pageable"]
+  - from: policyEvents.json
+    where-operation: PolicyEvents_ListQueryResultsForPolicyDefinition
+    transform: delete $["x-ms-pageable"]
+  - from: policyEvents.json
+    where-operation: PolicyEvents_ListQueryResultsForSubscriptionLevelPolicyAssignment
+    transform: delete $["x-ms-pageable"]
+  - from: policyEvents.json
+    where-operation: PolicyEvents_ListQueryResultsForResourceGroupLevelPolicyAssignment
+    transform: delete $["x-ms-pageable"]
 ```
