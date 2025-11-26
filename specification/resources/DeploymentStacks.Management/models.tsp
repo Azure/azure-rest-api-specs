@@ -748,9 +748,9 @@ model DeploymentExtensionConfigItem {
 }
 
 /**
- * The configuration of a single deployment extension. The keys of this object are extension aliases as defined in the deployment template.
+ * The configuration of a deployment extension. The keys of this object should align with the extension config schema.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Keys are dynamic and based on the deployment template."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Keys are dynamic and based on the deployment extension config schema."
 @added(Versions.v2025_07_01)
 model DeploymentExtensionConfig is Record<DeploymentExtensionConfigItem>;
 
@@ -775,9 +775,8 @@ model DeploymentExtension {
   configId?: string;
 
   /**
-   * The configuration used for deployment. The keys of this object are config property names.
+   * The configuration used for deployment. The keys of this object should align with the extension config schema.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "The keys of this object are determined by the extension's config schema which is server-side data."
   config?: DeploymentExtensionConfig;
 }
 

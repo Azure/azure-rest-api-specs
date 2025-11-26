@@ -2181,7 +2181,7 @@
         },
         "config": {
           "$ref": "#/definitions/DeploymentExtensionConfig",
-          "description": "The configuration used for deployment. The keys of this object are config property names."
+          "description": "The configuration used for deployment. The keys of this object should align with the extension config schema."
         }
       },
       "required": [
@@ -2191,7 +2191,7 @@
     },
     "DeploymentExtensionConfig": {
       "type": "object",
-      "description": "The configuration of a single deployment extension. The keys of this object are extension aliases as defined in the deployment template.",
+      "description": "The configuration of a deployment extension. The keys of this object should align with the extension config schema.",
       "additionalProperties": {
         "$ref": "#/definitions/DeploymentExtensionConfigItem"
       }

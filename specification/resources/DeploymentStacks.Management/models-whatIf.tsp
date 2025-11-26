@@ -7,9 +7,7 @@ import "./models.tsp";
 
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
-using TypeSpec.Http;
 using TypeSpec.Versioning;
-using Microsoft.Resources.DeploymentStacks;
 
 namespace Microsoft.Resources.DeploymentStacks;
 
@@ -217,6 +215,7 @@ model DeploymentStacksChangeDelta<T> {
 /**
  * The predicted change to the resource property.
  */
+@added(Versions.v2025_07_01)
 model DeploymentStacksWhatIfPropertyChange {
   ...DeploymentStacksChangeBase<unknown>;
 
@@ -337,6 +336,7 @@ union DeploymentStacksWhatIfChangeType {
 /**
  * The type of property change.
  */
+@added(Versions.v2025_07_01)
 union DeploymentStacksWhatIfPropertyChangeType {
   string,
 
