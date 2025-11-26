@@ -12,10 +12,15 @@ namespace Microsoft.AzureStackHCI;
 /**
  * EdgeDevice Jobs resource
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "for backward compatibility, provisioningState is defined in EdgeDeviceProperties"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Legacy DO NOT EVER COPY THIS"
+@Http.Private.includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal({})
+@extensionResource
 @parentResource(EdgeDevice)
 @discriminator("kind")
-model EdgeDeviceJob is Azure.ResourceManager.ExtensionResource<EdgeDeviceJobProperties> {
+model EdgeDeviceJob extends Azure.ResourceManager.Foundations.ProxyResource {
   ...ResourceNameParameter<
     Resource = EdgeDeviceJob,
     KeyName = "jobsName",
@@ -56,9 +61,6 @@ interface EdgeDeviceJobs {
 }
 
 @@doc(EdgeDeviceJob.name, "Name of EdgeDevice Job");
-@@doc(EdgeDeviceJob.properties,
-  "The resource-specific properties for this resource."
-);
 
 // Models
 

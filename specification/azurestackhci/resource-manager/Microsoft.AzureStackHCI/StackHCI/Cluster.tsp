@@ -26,7 +26,9 @@ model Cluster is Azure.ResourceManager.TrackedResource<ClusterProperties> {
   ...ResourceKindProperty;
 }
 
-@@doc(Cluster.kind, "This property identifies the purpose of the Cluster deployment. For example, a valid value is AzureLocal.");
+@@doc(Cluster.kind,
+  "This property identifies the purpose of the Cluster deployment. For example, a valid value is AzureLocal."
+);
 
 @armResourceOperations
 interface Clusters {
@@ -38,11 +40,7 @@ interface Clusters {
   /**
    * Create an HCI cluster.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  create is ArmResourceCreateOrReplaceAsync<
-    Cluster,
-    Response = ArmResourceUpdatedResponse<Cluster>
-  >;
+  create is ArmResourceCreateOrReplaceAsync<Cluster>;
 
   /**
    * Update an HCI cluster.
@@ -101,7 +99,9 @@ interface Clusters {
     Cluster,
     void,
     ArmResponse<ClusterIdentityResponse>,
-    LroHeaders = ArmAsyncOperationHeader<FinalResult = ClusterIdentityResponse>
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = ClusterIdentityResponse> &
+      Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader
   >;
 
   /**

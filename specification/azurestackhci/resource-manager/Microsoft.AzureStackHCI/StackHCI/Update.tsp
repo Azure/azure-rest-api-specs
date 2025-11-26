@@ -42,10 +42,7 @@ interface Updates {
    * Put specified Update
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  put is ArmResourceCreateOrReplaceSync<
-    Update,
-    Response = ArmResourceUpdatedResponse<Update>
-  >;
+  put is ArmResourceCreateOrReplaceSync<Update>;
 
   /**
    * Delete specified Update

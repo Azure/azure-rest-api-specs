@@ -53,11 +53,7 @@ interface UpdateSummaries {
   /**
    * Put Update summaries under the HCI cluster
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  put is ArmResourceCreateOrReplaceSync<
-    UpdateSummariesResource,
-    Response = ArmResourceUpdatedResponse<UpdateSummariesResource>
-  >;
+  put is ArmResourceCreateOrReplaceSync<UpdateSummariesResource>;
 
   /**
    * Delete Update Summaries

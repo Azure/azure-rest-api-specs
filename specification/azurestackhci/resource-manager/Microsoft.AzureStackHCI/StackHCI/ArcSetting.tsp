@@ -35,16 +35,12 @@ interface ArcSettings {
   /**
    * Create ArcSetting for HCI cluster.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  create is ArmResourceCreateOrReplaceSync<
-    ArcSetting,
-    Response = ArmResourceUpdatedResponse<ArcSetting>
-  >;
+  create is ArmResourceCreateOrReplaceSync<ArcSetting>;
 
   /**
    * Update ArcSettings for HCI cluster.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Resource PATCH models must be a subset of the resource model, for backward compatibility arcSetting didnt have this property"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Resource PATCH models must be a subset of the resource model, for backward compatibility arcSetting didn't have this property"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<ArcSetting, PatchModel = ArcSettingsPatch>;
 
@@ -85,7 +81,9 @@ interface ArcSettings {
     ArcSetting,
     void,
     ArmResponse<ArcIdentityResponse>,
-    LroHeaders = ArmAsyncOperationHeader<FinalResult = ArcIdentityResponse>
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = ArcIdentityResponse> &
+      Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader
   >;
 
   /**
