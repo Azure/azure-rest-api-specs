@@ -3,7 +3,7 @@
   "info": {
     "description": "Azure Managed Lustre provides a fully managed Lustre® file system, integrated with Blob storage, for use on demand. These operations create and manage Azure Managed Lustre file systems.",
     "title": "Managed Lustre client",
-    "version": "2025-07-01"
+    "version": "2026-01-01"
   },
   "host": "management.azure.com",
   "basePath": "/",
@@ -1372,6 +1372,315 @@
         "operationId": "autoImportJobs_ListByAmlFilesystem"
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/amlFilesystems/{amlFilesystemName}/expansionJobs/{expansionJobName}": {
+      "delete": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AmlFilesystemNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ExpansionJobNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Started the expansion job's transition to Deleted state. Poll the expansion job to monitor.",
+            "headers": {
+              "Location": {
+                "description": "URL for monitoring the status.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URL for monitoring the async operation status.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Expansion job deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "expansionJobs_Delete": {
+            "$ref": "./examples/expansionJobs_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "tags": [
+          "expansionJobs"
+        ],
+        "description": "Schedules an expansion job for deletion.",
+        "operationId": "expansionJobs_Delete"
+      },
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AmlFilesystemNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ExpansionJobNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the expansion job object corresponding to expansionJobName.",
+            "schema": {
+              "$ref": "#/definitions/ExpansionJob"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "storagecache.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "expansionJobs_Get": {
+            "$ref": "./examples/expansionJobs_Get.json"
+          }
+        },
+        "tags": [
+          "expansionJobs"
+        ],
+        "description": "Returns an expansion job.",
+        "operationId": "expansionJobs_Get"
+      },
+      "put": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AmlFilesystemNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ExpansionJobNameParameter"
+          },
+          {
+            "description": "Object containing the user-selectable properties of the expansion job. If read-only properties are included, they must match the existing values of those properties.",
+            "in": "body",
+            "name": "expansionJob",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExpansionJob"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The expansion job has been created or updated.",
+            "schema": {
+              "$ref": "#/definitions/ExpansionJob"
+            }
+          },
+          "201": {
+            "description": "Expansion job creation has been initiated. Poll the expansion job's provisioningState property to monitor creation progress.",
+            "headers": {
+              "Location": {
+                "description": "URL for monitoring the status.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URL for monitoring the async operation status.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ExpansionJob"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "expansionJobs_CreateOrUpdate": {
+            "$ref": "./examples/expansionJobs_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "tags": [
+          "expansionJobs"
+        ],
+        "description": "Create or update an expansion job.",
+        "operationId": "expansionJobs_CreateOrUpdate"
+      },
+      "patch": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AmlFilesystemNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ExpansionJobNameParameter"
+          },
+          {
+            "description": "Object containing the user-selectable properties of the expansion job. If read-only properties are included, they must match the existing values of those properties.",
+            "in": "body",
+            "name": "expansionJob",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExpansionJobUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated the expansion job.",
+            "schema": {
+              "$ref": "#/definitions/ExpansionJob"
+            }
+          },
+          "202": {
+            "description": "Expansion job update has been initiated. Poll the expansion job's provisioningState property to monitor update progress.",
+            "headers": {
+              "Location": {
+                "description": "URL for monitoring the status.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URL for monitoring the async operation status.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "expansionJobs_Update": {
+            "$ref": "./examples/expansionJobs_Update.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "tags": [
+          "expansionJobs"
+        ],
+        "description": "Update an expansion job instance.",
+        "operationId": "expansionJobs_Update"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/amlFilesystems/{amlFilesystemName}/expansionJobs": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AmlFilesystemNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of expansion jobs. History is maintained for 10 most recent jobs, although more than 10 jobs can be returned in the list if they were run recently. If there are more than 10 job records, the inactive expansion jobs will be automatically deleted from the list 72 hours after completion. Note that entity references might replace complete AmlFilesystem objects, as described in http://docs.oasis-open.org/odata/odata-json-format/v4.01/cs01/odata-json-format-v4.01-cs01.html#sec_EntityReference",
+            "schema": {
+              "$ref": "#/definitions/ExpansionJobsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "storagecache.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "expansionJobs_ListByAmlFilesystem": {
+            "$ref": "./examples/expansionJobs_ListByAmlFilesystem.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "tags": [
+          "expansionJobs"
+        ],
+        "description": "Returns all the expansion jobs the user has access to under an AML File System.",
+        "operationId": "expansionJobs_ListByAmlFilesystem"
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.StorageCache/checkAmlFSSubnets": {
       "post": {
         "produces": [
@@ -1549,6 +1858,17 @@
               ],
               "type": "number",
               "format": "float"
+            },
+            "currentStorageCapacityTiB": {
+              "description": "The current storage capacity of the AML file system, in TiB. This reflects the actual capacity including any expansions.",
+              "type": "number",
+              "format": "float",
+              "readOnly": true
+            },
+            "clusterUuid": {
+              "description": "The unique identifier of the AML file system cluster.",
+              "type": "string",
+              "readOnly": true
             },
             "health": {
               "description": "Health of the AML file system.",
@@ -2918,6 +3238,128 @@
         }
       },
       "type": "object"
+    },
+    "ExpansionJob": {
+      "description": "An expansion job instance. Follows Azure Resource Manager standards: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md",
+      "x-ms-azure-resource": true,
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "type": "object",
+          "description": "Properties of the expansion job.",
+          "properties": {
+            "provisioningState": {
+              "description": "ARM provisioning state, see https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#provisioningstate-property",
+              "enum": [
+                "Succeeded",
+                "Failed",
+                "Creating",
+                "Deleting",
+                "Updating",
+                "Canceled"
+              ],
+              "x-ms-enum": {
+                "modelAsString": true
+              },
+              "type": "string",
+              "readOnly": true
+            },
+            "newStorageCapacityTiB": {
+              "description": "The new storage capacity in TiB for the AML file system after expansion. This must be a multiple of the Sku step size, and greater than the current storage capacity of the AML file system.",
+              "type": "number",
+              "format": "float",
+              "x-ms-mutability": [
+                "read",
+                "create"
+              ]
+            },
+            "percentComplete": {
+              "description": "The percentage of expansion job completion.",
+              "type": "number",
+              "format": "float",
+              "minimum": 0,
+              "maximum": 100,
+              "readOnly": true
+            },
+            "status": {
+              "description": "The status of the expansion job.",
+              "enum": [
+                "InProgress",
+                "Completed",
+                "Failed",
+                "Deleting"
+              ],
+              "x-ms-enum": {
+                "modelAsString": true
+              },
+              "type": "string",
+              "readOnly": true
+            },
+            "statusCode": {
+              "description": "Error code for expansion job failure.",
+              "type": "string",
+              "readOnly": true
+            },
+            "statusMessage": {
+              "description": "Error message for expansion job failure.",
+              "type": "string",
+              "readOnly": true
+            },
+            "startTimeUTC": {
+              "description": "The time (in UTC) the expansion job started.",
+              "type": "string",
+              "format": "date-time",
+              "readOnly": true
+            },
+            "completionTimeUTC": {
+              "description": "The time (in UTC) when the expansion job completed. Only populated when job reaches a terminal state.",
+              "type": "string",
+              "format": "date-time",
+              "readOnly": true
+            }
+          },
+          "required": [
+            "newStorageCapacityTiB"
+          ]
+        }
+      }
+    },
+    "ExpansionJobUpdate": {
+      "description": "An expansion job update instance.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        }
+      }
+    },
+    "ExpansionJobsListResult": {
+      "description": "Result of the request to list expansion jobs. It contains a list of expansion jobs and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "description": "List of expansion jobs.",
+          "items": {
+            "$ref": "#/definitions/ExpansionJob"
+          },
+          "type": "array"
+        },
+        "nextLink": {
+          "description": "URL to get the next set of expansion job list results, if there are any.",
+          "type": "string",
+          "format": "uri"
+        }
+      },
+      "type": "object"
     }
   },
   "parameters": {
@@ -2958,6 +3400,17 @@
       "description": "Name for the auto import job. Allows alphanumerics, underscores, and hyphens. Start and end with alphanumeric.",
       "in": "path",
       "name": "autoImportJobName",
+      "pattern": "^[0-9a-zA-Z][-0-9a-zA-Z_]{0,78}[0-9a-zA-Z]$",
+      "required": true,
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 80,
+      "x-ms-parameter-location": "method"
+    },
+    "ExpansionJobNameParameter": {
+      "description": "Name for the expansion job. Allows alphanumerics, underscores, and hyphens. Start and end with alphanumeric.",
+      "in": "path",
+      "name": "expansionJobName",
       "pattern": "^[0-9a-zA-Z][-0-9a-zA-Z_]{0,78}[0-9a-zA-Z]$",
       "required": true,
       "type": "string",
