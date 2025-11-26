@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.Dashboard",
-    "version": "2025-09-01-preview",
+    "version": "2025-11-01-preview",
     "description": "The Microsoft.Dashboard Rest API spec.",
     "x-typespec-generated": [
       {
@@ -62,6 +62,9 @@
     },
     {
       "name": "DashboardDefinitions"
+    },
+    {
+      "name": "GrafanaDefinitions"
     }
   ],
   "paths": {
@@ -1060,6 +1063,232 @@
         "x-ms-examples": {
           "Grafana_FetchAvailablePlugins": {
             "$ref": "./examples/Grafana_FetchAvailablePlugins.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Dashboard/grafana/{workspaceName}/grafanaDefinitions": {
+      "get": {
+        "operationId": "GrafanaDefinitions_List",
+        "tags": [
+          "GrafanaDefinitions"
+        ],
+        "description": "List all grafana definitions under the specified Grafana workspace.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The workspace name of Azure Managed Grafana.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GrafanaDefinitionsListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GrafanaDefinition_List": {
+            "$ref": "./examples/GrafanaDefinition_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Dashboard/grafana/{workspaceName}/grafanaDefinitions/{definitionName}": {
+      "get": {
+        "operationId": "GrafanaDefinitions_Get",
+        "tags": [
+          "GrafanaDefinitions"
+        ],
+        "description": "Get the properties of a specific grafana definition.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The workspace name of Azure Managed Grafana.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]$"
+          },
+          {
+            "name": "definitionName",
+            "in": "path",
+            "description": "The name of the grafana definition.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GrafanaDefinition"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GrafanaDefinition_Get": {
+            "$ref": "./examples/GrafanaDefinition_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "GrafanaDefinitions_Create",
+        "tags": [
+          "GrafanaDefinitions"
+        ],
+        "description": "Create a grafana definition to update a grafana workspace resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The workspace name of Azure Managed Grafana.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]$"
+          },
+          {
+            "name": "definitionName",
+            "in": "path",
+            "description": "The name of the grafana definition.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]$"
+          },
+          {
+            "name": "requestBodyParameters",
+            "in": "body",
+            "description": "The grafana definition resource to create or update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GrafanaDefinition"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/GrafanaDefinition"
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/GrafanaDefinition"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GrafanaDefinition_Create": {
+            "$ref": "./examples/GrafanaDefinition_Create.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "GrafanaDefinitions_Delete",
+        "tags": [
+          "GrafanaDefinitions"
+        ],
+        "description": "Delete a grafana definition.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The workspace name of Azure Managed Grafana.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]$"
+          },
+          {
+            "name": "definitionName",
+            "in": "path",
+            "description": "The name of the grafana definition.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GrafanaDefinition_Delete": {
+            "$ref": "./examples/GrafanaDefinition_Delete.json"
           }
         }
       }
@@ -2359,6 +2588,60 @@
           "description": "Grafana Unified Alerting Screenshots settings"
         }
       }
+    },
+    "GrafanaDefinition": {
+      "type": "object",
+      "description": "The grafana definition resource type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/GrafanaDefinitionsProperties",
+          "description": "Properties specific to the grafana definition resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "GrafanaDefinitionsListResponse": {
+      "type": "object",
+      "description": "The list response for grafana definitions.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The GrafanaDefinition items on this page",
+          "items": {
+            "$ref": "#/definitions/GrafanaDefinition"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "GrafanaDefinitionsProperties": {
+      "type": "object",
+      "description": "Properties specific to the grafana definition.",
+      "properties": {
+        "serializedData": {
+          "type": "string",
+          "description": "The grafana definition data in JSON format."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the grafana definition resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "serializedData"
+      ]
     },
     "GrafanaIntegrations": {
       "type": "object",

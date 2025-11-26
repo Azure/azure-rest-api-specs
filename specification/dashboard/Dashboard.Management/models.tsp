@@ -988,3 +988,26 @@ model DashboardDefinitionProperties {
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
+
+/**
+ * The list response for grafana definitions.
+ */
+@added(Versions.v2025_11_01_preview)
+model GrafanaDefinitionsListResponse is Azure.Core.Page<GrafanaDefinition>;
+
+/**
+ * Properties specific to the grafana definition.
+ */
+@added(Versions.v2025_11_01_preview)
+model GrafanaDefinitionsProperties {
+  /**
+   * The grafana definition data in JSON format.
+   */
+  serializedData: string;
+
+  /**
+   * The provisioning state of the grafana definition resource.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+}
