@@ -14,7 +14,6 @@ export class FlavorAzureRule implements Rule {
     let errorOutput = "";
 
     const configText = await readTspConfig(folder);
-
     const config = parse(configText);
 
     const options = config?.options;
