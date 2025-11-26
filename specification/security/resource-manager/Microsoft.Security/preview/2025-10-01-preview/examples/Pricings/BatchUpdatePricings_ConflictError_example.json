@@ -1,0 +1,52 @@
+{
+  "parameters": {
+    "api-version": "2025-10-01-preview",
+    "scopeId": "subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+    "batchPricingRequest": {
+      "plansConfigurations": [
+        {
+          "planName": "VirtualMachines",
+          "properties": {
+            "pricingTier": "Standard",
+            "subPlan": "P2",
+            "enforce": "True"
+          }
+        },
+        {
+          "planName": "StorageAccounts",
+          "properties": {
+            "pricingTier": "Free",
+            "enforce": "False"
+          }
+        }
+      ]
+    }
+  },
+  "responses": {
+    "409": {
+      "body": {
+        "error": {
+          "code": "Conflict",
+          "message": "The operation conflicts with the current subscription state due to enforcement policy violations or concurrent operations.",
+          "details": [
+            {
+              "code": "EnforcementPolicyViolation",
+              "message": "Cannot modify pricing configuration for plan 'VirtualMachines' because enforcement is enabled at the management group level and prevents changes to descendant scopes.",
+              "target": "plansConfigurations[0]"
+            },
+            {
+              "code": "ConcurrentOperationInProgress",
+              "message": "Another batch pricing operation is currently in progress for this subscription. Please wait for the current operation to complete before starting a new one.",
+              "target": "subscription"
+            },
+            {
+              "code": "ResourceLocked",
+              "message": "The subscription has a resource lock that prevents modifications to security configurations.",
+              "target": "subscription"
+            }
+          ]
+        }
+      }
+    }
+  }
+}
