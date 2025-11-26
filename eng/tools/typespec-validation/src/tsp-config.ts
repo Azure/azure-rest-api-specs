@@ -1,13 +1,20 @@
 import { parse as yamlParse } from "yaml";
+import * as z from "zod";
 
-export type TspConfig = {
-  emit?: string[];
-  options?: Record<string, Record<string, string>>;
-  linter?: {
-    extends?: string[];
-  };
-};
+const TspConfigSchema = z
+  .object({
+    emit: z.array(z.string()).optional(),
+    options: z.record(z.string(), z.record(z.string(), z.string())).optional(),
+    linter: z
+      .object({
+        extends: z.array(z.string()).optional(),
+      })
+      .optional(),
+  })
+  .nullish();
+
+export type TspConfig = z.infer<typeof TspConfigSchema>;
 
 export function parse(src: string): TspConfig {
-  return yamlParse(src) as TspConfig;
+  return TspConfigSchema.parse(yamlParse(src));
 }
