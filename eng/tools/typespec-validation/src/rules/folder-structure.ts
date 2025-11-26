@@ -97,7 +97,11 @@ export class FolderStructureRule implements Rule {
 
       if (tspConfigExists) {
         const configText = await readTspConfig(folder);
-        const config = yamlParse(configText);
+        const config = yamlParse(configText) as {
+          options?: {
+            "@azure-tools/typespec-autorest"?: { "azure-resource-provider-folder"?: string };
+          };
+        };
         const rpFolder =
           config?.options?.["@azure-tools/typespec-autorest"]?.["azure-resource-provider-folder"];
         stdOutput += `azure-resource-provider-folder: ${JSON.stringify(rpFolder)}\n`;
