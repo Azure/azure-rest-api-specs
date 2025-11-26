@@ -35,7 +35,4 @@ directive:
   - from: policyStates.json
     where-operation: PolicyStates_ListQueryResultsForResourceGroupLevelPolicyAssignment
     transform: delete $["x-ms-pageable"]
-  - from: PaloAltoNetworks.Cloudngfw.json
-    where-operation: LocalRulestacks_listPredefinedUrlCategories
-    transform: delete $["x-ms-pageable"]
 ```
