@@ -45,17 +45,6 @@ directive:
     $["$ref"] = "./CommonDefinitions.json#/definitions/AppCertificatePatchResource"
 ```
 
-### Basic Information
-
-These are the global settings for the AppService API.
-
-```yaml
-title: WebSiteManagementClientClient
-description: WebSite Management Client
-openapi-type: arm
-tag: package-2025-03
-```
-
 ### Tag: package-2025-03 and go
 
 ``` yaml $(go) && $(tag) == 'package-2025-03'
