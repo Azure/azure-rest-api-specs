@@ -725,7 +725,6 @@ model JobDefinitionProperties {
    */
   @added(Versions.v2025_08_01)
   dataIntegrityValidation?: DataIntegrityValidation = DataIntegrityValidation.None;
-
 }
 
 /**
@@ -1076,7 +1075,7 @@ model JobRunProperties {
    */
   @visibility(Lifecycle.Read)
   @added(Versions.v2025_08_01)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   warnings?: JobRunWarning[];
 
   /**
