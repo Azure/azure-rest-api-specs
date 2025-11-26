@@ -77,7 +77,11 @@ interface DefaultRollouts {
   /**
    * Stops or cancels the rollout, if in progress.
    */
-  stop is DefaultRolloutOps.ActionSync<DefaultRollout, void, OkResponse>;
+  stop is DefaultRolloutOps.ActionSync<
+    DefaultRollout,
+    Request = void,
+    Response = OkResponse
+  >;
 }
 @armResourceOperations
 interface NewRegionFrontloadReleaseOps
