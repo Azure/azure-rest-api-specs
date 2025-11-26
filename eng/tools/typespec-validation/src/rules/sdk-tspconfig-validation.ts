@@ -812,10 +812,8 @@ export class SdkTspConfigValidationRule implements Rule {
       "Failed to find", // Configuration not found errors
       // Add more patterns here as needed in the future
     ];
-    
-    return ignorableErrorPatterns.some(pattern => 
-      result.errorOutput?.includes(pattern) ?? false
-    );
+
+    return ignorableErrorPatterns.some((pattern) => result.errorOutput?.includes(pattern) ?? false);
   }
 
   async execute(folder: string): Promise<RuleResult> {
