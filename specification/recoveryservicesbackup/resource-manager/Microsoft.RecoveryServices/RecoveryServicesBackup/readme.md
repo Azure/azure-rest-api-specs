@@ -550,4 +550,9 @@ directive:
     where: 
      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints/{recoveryPointId}"].patch.parameters[8]["schema"]
     reason: Known false alarm for the discriminator pattern that causes ConsistentPatchProperties rule to fail.
+
+suppressions:
+  - from: bms.json
+    code: ProvisioningStateSpecifiedForLROPut
+    reason: The existing API contract is legacy code and not be able to change.
 ```
