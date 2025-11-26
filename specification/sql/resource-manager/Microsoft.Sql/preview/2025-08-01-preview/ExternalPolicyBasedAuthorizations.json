@@ -1,0 +1,327 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2025-08-01-preview",
+    "title": "SqlManagementClient",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/externalPolicyBasedAuthorizations": {
+      "get": {
+        "tags": [
+          "ExternalPolicyBasedAuthorizations"
+        ],
+        "description": "Gets a list of external policy based authorization property.",
+        "operationId": "ExternalPolicyBasedAuthorizations_ListByServer",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of external policy based authorization property.",
+            "schema": {
+              "$ref": "#/definitions/ExternalPolicyBasedAuthorizationListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidExternalPolicyBasedAuthorizationPolicySource - External policy based authorization policy source should be MicrosoftPurview\n\n * 400 ManagedInstanceStoppingOrStopped - Conflicting operation submitted while instance is in stopping/stopped state\n\n * 400 ManagedInstanceStarting - Conflicting operation submitted while instance is in starting state\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets a list of external policy based authorization properties.": {
+            "$ref": "./examples/ExternalPolicyBasedAuthorizationList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/externalPolicyBasedAuthorizations/{policySource}": {
+      "get": {
+        "tags": [
+          "ExternalPolicyBasedAuthorizations"
+        ],
+        "description": "Gets a specific policy based authorization property.",
+        "operationId": "ExternalPolicyBasedAuthorizations_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "policySource",
+            "in": "path",
+            "description": "The place where the external policies are stored.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "MicrosoftPurview"
+            ],
+            "x-ms-enum": {
+              "name": "PolicySource",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved policy based authorization property.",
+            "schema": {
+              "$ref": "#/definitions/ExternalPolicyBasedAuthorization"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidExternalPolicyBasedAuthorizationPolicySource - External policy based authorization policy source should be MicrosoftPurview\n\n * 400 ManagedInstanceStoppingOrStopped - Conflicting operation submitted while instance is in stopping/stopped state\n\n * 400 ManagedInstanceStarting - Conflicting operation submitted while instance is in starting state\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets external policy based authorization property.": {
+            "$ref": "./examples/ExternalPolicyBasedAuthorizationGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ExternalPolicyBasedAuthorizations"
+        ],
+        "description": "Sets or updates an external policy based authorization property.",
+        "operationId": "ExternalPolicyBasedAuthorizations_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "policySource",
+            "in": "path",
+            "description": "The place where the external policies are stored.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "MicrosoftPurview"
+            ],
+            "x-ms-enum": {
+              "name": "PolicySource",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The required parameters for creating or updating an external policy based authorization property.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExternalPolicyBasedAuthorization"
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated a external policy based authorization property.",
+            "schema": {
+              "$ref": "#/definitions/ExternalPolicyBasedAuthorization"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidExternalPolicyBasedAuthorizationPolicySource - External policy based authorization policy source should be MicrosoftPurview\n\n * 400 ManagedInstanceStoppingOrStopped - Conflicting operation submitted while instance is in stopping/stopped state\n\n * 400 ManagedInstanceStarting - Conflicting operation submitted while instance is in starting state\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 CannotCancelOperation - The management operation is in a state that cannot be cancelled.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Creates or updates external policy based authorization property.": {
+            "$ref": "./examples/ExternalPolicyBasedAuthorizationCreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ExternalPolicyBasedAuthorizations"
+        ],
+        "description": "Deletes an existing server external policy based authorization property.",
+        "operationId": "ExternalPolicyBasedAuthorizations_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "policySource",
+            "in": "path",
+            "description": "The place where the external policies are stored.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "MicrosoftPurview"
+            ],
+            "x-ms-enum": {
+              "name": "PolicySource",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the external policy based authorization property."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidExternalPolicyBasedAuthorizationPolicySource - External policy based authorization policy source should be MicrosoftPurview\n\n * 400 ManagedInstanceStoppingOrStopped - Conflicting operation submitted while instance is in stopping/stopped state\n\n * 400 ManagedInstanceStarting - Conflicting operation submitted while instance is in starting state\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 CannotCancelOperation - The management operation is in a state that cannot be cancelled.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "The specified external policy based authorization property does not exist."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Deletes external policy based authorization property.": {
+            "$ref": "./examples/ExternalPolicyBasedAuthorizationDelete.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ExternalPolicyBasedAuthorization": {
+      "description": "External policy based authorization.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ExternalPolicyBasedAuthorizationProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ExternalPolicyBasedAuthorizationListResult": {
+      "description": "A list of external policy based authorizations.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExternalPolicyBasedAuthorization"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ExternalPolicyBasedAuthorizationProperties": {
+      "description": "Properties of external policy based authorization.",
+      "required": [
+        "externalPolicyBasedAuthorization"
+      ],
+      "type": "object",
+      "properties": {
+        "externalPolicyBasedAuthorization": {
+          "description": "whether server external policy based authorization enabled.",
+          "type": "boolean"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "description": "The name of the server.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

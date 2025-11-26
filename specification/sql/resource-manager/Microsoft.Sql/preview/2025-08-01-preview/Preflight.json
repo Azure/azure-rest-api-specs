@@ -1,0 +1,157 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2025-08-01-preview",
+    "title": "SqlManagementClient",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/deployments/{deploymentName}/preflight": {
+      "post": {
+        "tags": [
+          "Preflight"
+        ],
+        "description": "Performs Preflight Validation for Microsoft.Sql Resources",
+        "operationId": "Preflight_PreflightValidation",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "deploymentName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PreflightRequest"
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Completed Preflight Validation",
+            "schema": {
+              "$ref": "#/definitions/AzureAsyncOperationResource"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 PreflightValidationCheckFailed - Preflight validation failed. Please refer to the details for the specific errors.\n\n * 404 ResourceNotFound - The requested resource was not found.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ArmErrorResponseExtendedErrorInfo": {
+      "description": "Contains additional details about the error that occured.",
+      "required": [
+        "code",
+        "message"
+      ],
+      "type": "object",
+      "properties": {
+        "details": {
+          "description": "A list of error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ArmErrorResponseExtendedErrorInfo"
+          }
+        },
+        "innerError": {
+          "description": "The inner error if available.",
+          "type": "object"
+        },
+        "code": {
+          "description": "The error code associated with the failure.",
+          "type": "string"
+        },
+        "message": {
+          "description": "The error message associated with the failure.",
+          "type": "string"
+        },
+        "target": {
+          "description": "The target of the particular error.",
+          "type": "string"
+        }
+      }
+    },
+    "AzureAsyncOperationResource": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "operationId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "startTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "endTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "percentComplete": {
+          "format": "double",
+          "type": "number"
+        },
+        "error": {
+          "$ref": "#/definitions/ArmErrorResponseExtendedErrorInfo"
+        }
+      }
+    },
+    "PreflightRequest": {
+      "type": "object",
+      "properties": {
+        "resources": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {},
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

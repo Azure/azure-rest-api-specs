@@ -1,0 +1,193 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2025-08-01-preview",
+    "title": "SqlManagementClient",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/restorableDroppedManagedInstances": {
+      "get": {
+        "tags": [
+          "RestorableDroppedManagedInstances"
+        ],
+        "description": "Gets a list of restorable dropped managed instances.",
+        "operationId": "RestorableDroppedManagedInstances_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of restorable dropped managed instances.",
+            "schema": {
+              "$ref": "#/definitions/RestorableDroppedManagedInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List restorable dropped managed instances by resource group": {
+            "$ref": "./examples/ListRestorableDroppedManagedInstanceByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/restorableDroppedManagedInstances/{restorableDroppedManagedInstanceId}": {
+      "get": {
+        "tags": [
+          "RestorableDroppedManagedInstances"
+        ],
+        "description": "Gets a restorable dropped managed instance.",
+        "operationId": "RestorableDroppedManagedInstances_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "restorableDroppedManagedInstanceId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the specified restorable dropped managed instance.",
+            "schema": {
+              "$ref": "#/definitions/RestorableDroppedManagedInstance"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidRestorableDroppedManagedInstanceId - Invalid restorable dropped managed instance identifier\n\n * 404 ResourceNotFound - The requested resource was not found.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets a restorable dropped managed instance": {
+            "$ref": "./examples/GetRestorableDroppedManagedInstance.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "RestorableDroppedManagedInstance": {
+      "description": "A restorable dropped managed instance resource.",
+      "required": [
+        "location"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RestorableDroppedManagedInstanceProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "RestorableDroppedManagedInstanceListResult": {
+      "description": "A list of restorable dropped managed instances.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RestorableDroppedManagedInstance"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "RestorableDroppedManagedInstanceProperties": {
+      "description": "The restorable dropped managed instance's properties.",
+      "type": "object",
+      "properties": {
+        "managedInstanceName": {
+          "description": "The name of the managed instance.",
+          "type": "string",
+          "readOnly": true
+        },
+        "creationTime": {
+          "format": "date-time",
+          "description": "The creation time of the managed instance (ISO8601 format).",
+          "type": "string",
+          "readOnly": true
+        },
+        "deletionTime": {
+          "format": "date-time",
+          "description": "The deletion time of the managed instance (ISO8601 format).",
+          "type": "string",
+          "readOnly": true
+        },
+        "serviceLevelObjective": {
+          "description": "The SLO of the managed instance.",
+          "type": "string",
+          "readOnly": true
+        },
+        "reservedStorageSizeGB": {
+          "format": "int32",
+          "description": "The reserved storage size of the managed instance in gigabytes.",
+          "type": "integer",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {},
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}
