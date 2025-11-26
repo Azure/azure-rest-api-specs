@@ -1228,6 +1228,23 @@
               "$ref": "#/definitions/Cluster"
             }
           },
+          "201": {
+            "description": "Resource 'Cluster' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -1239,7 +1256,11 @@
           "Create cluster": {
             "$ref": "./examples/CreateCluster.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "operationId": "Clusters_Update",
@@ -1505,6 +1526,12 @@
               "$ref": "#/definitions/ArcSetting"
             }
           },
+          "201": {
+            "description": "Resource 'ArcSetting' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ArcSetting"
+            }
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -1750,6 +1777,15 @@
               "Azure-AsyncOperation": {
                 "type": "string",
                 "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -2614,6 +2650,15 @@
               "Azure-AsyncOperation": {
                 "type": "string",
                 "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -3924,6 +3969,12 @@
               "$ref": "#/definitions/UpdateSummaries"
             }
           },
+          "201": {
+            "description": "Resource 'UpdateSummariesResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/UpdateSummaries"
+            }
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -4148,6 +4199,12 @@
         "responses": {
           "200": {
             "description": "Resource 'Update' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Update"
+            }
+          },
+          "201": {
+            "description": "Resource 'Update' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/Update"
             }
@@ -4476,6 +4533,12 @@
         "responses": {
           "200": {
             "description": "Resource 'UpdateRun' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/UpdateRun"
+            }
+          },
+          "201": {
+            "description": "Resource 'UpdateRun' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/UpdateRun"
             }
@@ -6760,10 +6823,6 @@
       "type": "object",
       "description": "Edge device resource.",
       "properties": {
-        "properties": {
-          "type": "object",
-          "description": "The resource-specific properties for this resource."
-        },
         "kind": {
           "type": "string",
           "description": "Device kind to support polymorphic resource.",
@@ -6840,10 +6899,6 @@
       "type": "object",
       "description": "EdgeDevice Jobs resource",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/EdgeDeviceJobProperties",
-          "description": "The resource-specific properties for this resource."
-        },
         "kind": {
           "$ref": "#/definitions/EdgeDeviceKind",
           "description": "Edge Solution type to support polymorphic resource.",
