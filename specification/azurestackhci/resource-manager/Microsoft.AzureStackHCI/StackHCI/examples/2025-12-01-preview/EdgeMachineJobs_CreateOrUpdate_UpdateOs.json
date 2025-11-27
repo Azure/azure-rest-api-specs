@@ -1,24 +1,24 @@
 {
-  "title": "EdgeMachineJobs_CreateOrUpdate_ProvisionOs",
+  "title": "EdgeMachineJobs_CreateOrUpdate_UpdateOs",
   "operationId": "EdgeMachineJobs_CreateOrUpdate",
   "parameters": {
     "api-version": "2025-12-01-preview",
     "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
     "resourceGroupName": "ArcInstance-rg",
     "edgeMachineName": "machine1",
-    "jobsName": "ProvisionOs",
+    "jobsName": "UpdateOs",
     "resource": {
       "properties": {
         "provisioningRequest": {
           "osProfile": {
             "osName": "AzureLinux",
             "osType": "AzureLinux",
-            "osVersion": "3.0",
-            "osImageLocation": "https://aka.ms/aep/azlinux3.0",
-            "vsrVersion": "1.0.0",
-            "imageHash": "sha256:a1b2c3d4e5f6789012345678901234567890abcdef1234567890abcdef123456",
+            "osVersion": "3.1",
+            "osImageLocation": "https://aka.ms/aep/azlinux3.1",
+            "vsrVersion": "1.1.0",
+            "imageHash": "sha256:b2c3d4e5f6789012345678901234567890abcdef1234567890abcdef12345678",
             "gpgPubKey": "LS0tLS1CRUdJTiBQR1AgUFVCTElDIEtFWSBCTE9DSy0tLS0tXG5WZXJzaW9uOiBHbnVQRyB2MlxuXG5tUUVOQkZYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYXG4tLS0tLUVORCBQR1AgUFVCTElDIEtFWSBCTE9DSy0tLS0t",
-            "operationType": "Provision"
+            "operationType": "Update"
           },
           "userDetails": [
             {
@@ -66,9 +66,6 @@
               "primaryTimeServer": "",
               "secondaryTimeServer": "",
               "timeZone": "UTC"
-            },
-            "storage": {
-              "partitionSize": "30GB"
             }
           },
           "target": "AzureLinux",
@@ -82,20 +79,20 @@
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/ff0aa6da-20f8-44fe-9aee-381c8e8a4aeb/resourceGroups/bhukumar-test-rg/providers/Microsoft.AzureStackHCI/EdgeMachines/em1/jobs/ProvisionOs",
-        "name": "ProvisionOs",
+        "id": "/subscriptions/ff0aa6da-20f8-44fe-9aee-381c8e8a4aeb/resourceGroups/bhukumar-test-rg/providers/Microsoft.AzureStackHCI/EdgeMachines/em1/jobs/UpdateOs",
+        "name": "UpdateOs",
         "type": "microsoft.azurestackhci/edgemachines/jobs",
         "properties": {
           "provisioningRequest": {
             "osProfile": {
               "osName": "AzureLinux",
               "osType": "AzureLinux",
-              "osVersion": "3.0",
-              "osImageLocation": "https://aka.ms/aep/azlinux3.0",
-              "vsrVersion": "1.0.0",
-              "imageHash": "sha256:a1b2c3d4e5f6789012345678901234567890abcdef1234567890abcdef123456",
+              "osVersion": "3.1",
+              "osImageLocation": "https://aka.ms/aep/azlinux3.1",
+              "vsrVersion": "1.1.0",
+              "imageHash": "sha256:b2c3d4e5f6789012345678901234567890abcdef1234567890abcdef12345678",
               "gpgPubKey": "LS0tLS1CRUdJTiBQR1AgUFVCTElDIEtFWSBCTE9DSy0tLS0tXG5WZXJzaW9uOiBHbnVQRyB2MlxuXG5tUUVOQkZYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYXG4tLS0tLUVORCBQR1AgUFVCTElDIEtFWSBCTE9DSy0tLS0t",
-              "operationType": "Provision"
+              "operationType": "Update"
             },
             "userDetails": [
               {
@@ -143,9 +140,6 @@
                 "primaryTimeServer": "",
                 "secondaryTimeServer": "",
                 "timeZone": "UTC"
-              },
-              "storage": {
-                "partitionSize": "30GB"
               }
             },
             "target": "AzureLinux",
@@ -175,27 +169,27 @@
                   "status": "Succeeded"
                 },
                 {
-                  "name": "SetupHybridComputeRP",
+                  "name": "ValidateOSUpdate",
                   "startTimeUtc": "03/11/2025 15:11:23",
-                  "endTimeUtc": "03/11/2025 15:13:24",
+                  "endTimeUtc": "03/11/2025 15:12:24",
                   "status": "Succeeded"
                 },
                 {
-                  "name": "PrepareTargetOSProvisioning",
+                  "name": "PrepareTargetOSUpdate",
                   "description": "NotStarted",
                   "startTimeUtc": "01/01/0001 00:00:00",
                   "endTimeUtc": "01/01/0001 00:00:00",
                   "status": "Succeeded"
                 },
                 {
-                  "name": "InitiateTargetOSProvisioning",
+                  "name": "InitiateTargetOSUpdate",
                   "description": "NotStarted",
                   "startTimeUtc": "01/01/0001 00:00:00",
                   "endTimeUtc": "01/01/0001 00:00:00",
                   "status": "Succeeded"
                 },
                 {
-                  "name": "BootIntoTargetOS",
+                  "name": "BootIntoUpdatedOS",
                   "description": "NotStarted",
                   "startTimeUtc": "01/01/0001 00:00:00",
                   "endTimeUtc": "01/01/0001 00:00:00",
@@ -220,20 +214,20 @@
         "Azure-AsyncOperation": "https://contoso.com/operationstatus"
       },
       "body": {
-        "id": "/subscriptions/ff0aa6da-20f8-44fe-9aee-381c8e8a4aeb/resourceGroups/bhukumar-test-rg/providers/Microsoft.AzureStackHCI/EdgeMachines/em1/jobs/ProvisionOs",
-        "name": "ProvisionOs",
+        "id": "/subscriptions/ff0aa6da-20f8-44fe-9aee-381c8e8a4aeb/resourceGroups/bhukumar-test-rg/providers/Microsoft.AzureStackHCI/EdgeMachines/em1/jobs/UpdateOs",
+        "name": "UpdateOs",
         "type": "microsoft.azurestackhci/edgemachines/jobs",
         "properties": {
           "provisioningRequest": {
             "osProfile": {
               "osName": "AzureLinux",
               "osType": "AzureLinux",
-              "osVersion": "3.0",
-              "osImageLocation": "https://aka.ms/aep/azlinux3.0",
-              "vsrVersion": "1.0.0",
-              "imageHash": "sha256:a1b2c3d4e5f6789012345678901234567890abcdef1234567890abcdef123456",
+              "osVersion": "3.1",
+              "osImageLocation": "https://aka.ms/aep/azlinux3.1",
+              "vsrVersion": "1.1.0",
+              "imageHash": "sha256:b2c3d4e5f6789012345678901234567890abcdef1234567890abcdef12345678",
               "gpgPubKey": "LS0tLS1CRUdJTiBQR1AgUFVCTElDIEtFWSBCTE9DSy0tLS0tXG5WZXJzaW9uOiBHbnVQRyB2MlxuXG5tUUVOQkZYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYXG4tLS0tLUVORCBQR1AgUFVCTElDIEtFWSBCTE9DSy0tLS0t",
-              "operationType": "Provision"
+              "operationType": "Update"
             },
             "userDetails": [
               {
@@ -281,9 +275,6 @@
                 "primaryTimeServer": "",
                 "secondaryTimeServer": "",
                 "timeZone": "UTC"
-              },
-              "storage": {
-                "partitionSize": "30GB"
               }
             },
             "target": "AzureLinux",
@@ -313,27 +304,27 @@
                   "status": "Succeeded"
                 },
                 {
-                  "name": "SetupHybridComputeRP",
+                  "name": "ValidateOSUpdate",
                   "startTimeUtc": "03/11/2025 15:11:23",
-                  "endTimeUtc": "03/11/2025 15:13:24",
+                  "endTimeUtc": "03/11/2025 15:12:24",
                   "status": "Succeeded"
                 },
                 {
-                  "name": "PrepareTargetOSProvisioning",
+                  "name": "PrepareTargetOSUpdate",
                   "description": "NotStarted",
                   "startTimeUtc": "01/01/0001 00:00:00",
                   "endTimeUtc": "01/01/0001 00:00:00",
                   "status": "Succeeded"
                 },
                 {
-                  "name": "InitiateTargetOSProvisioning",
+                  "name": "InitiateTargetOSUpdate",
                   "description": "NotStarted",
                   "startTimeUtc": "01/01/0001 00:00:00",
                   "endTimeUtc": "01/01/0001 00:00:00",
                   "status": "Succeeded"
                 },
                 {
-                  "name": "BootIntoTargetOS",
+                  "name": "BootIntoUpdatedOS",
                   "description": "NotStarted",
                   "startTimeUtc": "01/01/0001 00:00:00",
                   "endTimeUtc": "01/01/0001 00:00:00",
