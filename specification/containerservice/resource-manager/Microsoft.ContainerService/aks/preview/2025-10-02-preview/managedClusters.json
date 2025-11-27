@@ -70,13 +70,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerService/locations/{location}/vmSkus": {
-      "get": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerService/locations/{location}/listVmSkus": {
+      "post": {
         "tags": [
           "Skus"
         ],
-        "operationId": "ContainerServiceVmSkus_List",
-        "description": "Gets the list of VM SKUs accepted by AKS when creating node pools in a specified location. AKS will perform a best effort approach to provision the requested VM SKUs, but availability is not guaranteed.",
+        "operationId": "ContainerService_ListVMSkus",
+        "description": "Lists the VM SKUs accepted by AKS when creating node pools in a specified location. AKS will perform a best effort approach to provision the requested VM SKUs, but availability is not guaranteed.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -88,14 +88,20 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
           },
           {
-            "$ref": "#/parameters/IncludeExtendedLocationsParameter"
+            "name": "parameters",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/ListVMSkusRequest"
+            },
+            "description": "Parameters for listing VM SKUs."
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ResourceSkusResult"
+              "$ref": "#/definitions/VMSkusListResult"
             }
           },
           "default": {
@@ -112,9 +118,6 @@
           "Lists all available Container Service VM SKUs with Extended Location information": {
             "$ref": "./examples/vmSkus/ListAvailableContainerServiceVmSkusWithExtendedLocations.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -5577,7 +5580,7 @@
         }
       }
     },
-    "ResourceSkusResult": {
+    "VMSkusListResult": {
       "type": "object",
       "description": "The List Resource Skus operation response.",
       "properties": {
@@ -5588,16 +5591,21 @@
             "$ref": "#/definitions/ResourceSku"
           },
           "x-ms-identifiers": []
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
         }
       },
       "required": [
         "value"
       ]
+    },
+    "ListVMSkusRequest": {
+      "type": "object",
+      "description": "Request parameters for listing VM SKUs.",
+      "properties": {
+        "includeExtendedLocations": {
+          "type": "boolean",
+          "description": "Whether to include extended location information in the response."
+        }
+      }
     },
     "OperationListResult": {
       "type": "object",
