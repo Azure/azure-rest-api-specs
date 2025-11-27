@@ -70,8 +70,8 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerService/locations/{location}/vmSkus": {
-      "get": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerService/locations/{location}/listVmSkus": {
+      "post": {
         "tags": [
           "Skus"
         ],
@@ -112,9 +112,6 @@
           "Lists all available Container Service VM SKUs with Extended Location information": {
             "$ref": "./examples/vmSkus/ListAvailableContainerServiceVmSkusWithExtendedLocations.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -5588,11 +5585,6 @@
             "$ref": "#/definitions/ResourceSku"
           },
           "x-ms-identifiers": []
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
         }
       },
       "required": [
