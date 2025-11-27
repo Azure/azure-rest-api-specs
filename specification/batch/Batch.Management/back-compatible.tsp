@@ -30,6 +30,7 @@ using Microsoft.Batch;
 @@clientLocation(BatchAccounts.listOutboundNetworkDependenciesEndpoints,
   "BatchAccount"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(BatchAccount.properties);
 
 @@clientLocation(PrivateEndpointConnections.get, "PrivateEndpointConnection");
@@ -45,6 +46,7 @@ using Microsoft.Batch;
 @@clientLocation(PrivateEndpointConnections.listByBatchAccount,
   "PrivateEndpointConnection"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(PrivateEndpointConnection.properties);
 
 @@clientLocation(ApplicationPackages.get, "ApplicationPackage");
@@ -54,6 +56,7 @@ using Microsoft.Batch;
 @@clientLocation(ApplicationPackages.list, "ApplicationPackage");
 @@clientLocation(ApplicationPackages.activate, "ApplicationPackage");
 @@clientName(ApplicationPackages.activate::parameters.body, "parameters");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(ApplicationPackage.properties);
 
 @@clientLocation(Applications.get, "Application");
@@ -63,6 +66,7 @@ using Microsoft.Batch;
 @@clientName(Applications.update::parameters.properties, "parameters");
 @@clientLocation(Applications.delete, "Application");
 @@clientLocation(Applications.list, "Application");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(Application.properties);
 
 @@clientLocation(Certificates.get, "Certificate");
@@ -73,16 +77,19 @@ using Microsoft.Batch;
 @@clientLocation(Certificates.delete, "Certificate");
 @@clientLocation(Certificates.listByBatchAccount, "Certificate");
 @@clientLocation(Certificates.cancelDeletion, "Certificate");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(Certificate.properties);
 
 @@clientLocation(DetectorResponses.getDetector, "BatchAccount");
 @@clientLocation(DetectorResponses.listDetectors, "BatchAccount");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(DetectorResponse.properties);
 
 @@clientLocation(PrivateLinkResources.get, "PrivateLinkResource");
 @@clientLocation(PrivateLinkResources.listByBatchAccount,
   "PrivateLinkResource"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(PrivateLinkResource.properties);
 
 @@clientLocation(Pools.get, "Pool");
@@ -94,6 +101,7 @@ using Microsoft.Batch;
 @@clientLocation(Pools.listByBatchAccount, "Pool");
 @@clientLocation(Pools.disableAutoScale, "Pool");
 @@clientLocation(Pools.stopResize, "Pool");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(Pool.properties);
 
 @@clientLocation(NetworkSecurityPerimeterConfigurations.getConfiguration,

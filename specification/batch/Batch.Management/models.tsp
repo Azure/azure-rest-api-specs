@@ -1006,7 +1006,7 @@ model EndpointAccessProfile {
   /**
    * Array of IP ranges to filter client IP address.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["action"])
+  @identifiers(#["action"])
   ipRules?: IPRule[];
 }
 
@@ -1203,6 +1203,7 @@ model BatchAccountProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @OpenAPI.extension("x-ms-identifiers", #["name"])
   dedicatedCoreQuotaPerVMFamily?: VirtualMachineFamilyCoreQuota[] | null;
@@ -1308,6 +1309,10 @@ model PrivateLinkServiceConnectionState {
 /**
  * A definition of an Azure resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.customAzureResource
 model AzureProxyResource {
   /**
    * The ID of the resource.
@@ -1371,6 +1376,10 @@ model VirtualMachineFamilyCoreQuota {
 /**
  * A definition of an Azure resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.customAzureResource
 model AzureResource {
   /**
    * The ID of the resource.
@@ -1441,7 +1450,7 @@ model CloudErrorBody {
   /**
    * A list of additional details about the error.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["message", "target"])
+  @identifiers(#["message", "target"])
   details?: CloudErrorBody[];
 }
 
@@ -1647,7 +1656,7 @@ model SupportedSku {
    * A collection of capabilities which this SKU supports.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   capabilities?: SkuCapability[];
 
   /**
@@ -1860,7 +1869,7 @@ model DeleteCertificateError {
   /**
    * A list of additional details about the error.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["code"])
+  @identifiers(#["code"])
   details?: DeleteCertificateError[];
 }
 
@@ -1890,6 +1899,8 @@ model CertificateBaseProperties {
  * Contains information about a certificate.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model CertificateCreateOrUpdateParameters extends AzureProxyResource {
   /**
    * The properties associated with the certificate.
@@ -2091,14 +2102,14 @@ model PoolProperties {
    * The list of user accounts to be created on each node in the pool.
    */
   @summary("The list of user accounts to be created on each node in the pool.")
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   userAccounts?: UserAccount[];
 
   /**
    * The Batch service does not assign any meaning to metadata; it is solely for the use of user code.
    */
   @summary("A list of name-value pairs associated with the pool as metadata.")
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   metadata?: MetadataItem[];
 
   /**
@@ -2138,7 +2149,7 @@ model PoolProperties {
    * This supports Azure Files, NFS, CIFS/SMB, and Blobfuse.
    */
   @summary("A list of file systems to mount on each node in the pool.")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   mountConfiguration?: MountConfiguration[];
 
   /**
@@ -2209,7 +2220,7 @@ model VirtualMachineConfiguration {
    * This property must be specified if the compute nodes in the pool need to have empty data disks attached to them.
    */
   @summary("The configuration for data disks attached to the compute nodes in the pool.")
-  @OpenAPI.extension("x-ms-identifiers", #["lun"])
+  @identifiers(#["lun"])
   dataDisks?: DataDisk[];
 
   /**
@@ -2244,7 +2255,7 @@ model VirtualMachineConfiguration {
    * If specified, the extensions mentioned in this configuration will be installed on each node.
    */
   @summary("The virtual machine extension for the pool.")
-  @OpenAPI.extension("x-ms-identifiers", #["name", "type"])
+  @identifiers(#["name", "type"])
   extensions?: VMExtension[];
 
   /**
@@ -2385,7 +2396,7 @@ model ContainerConfiguration {
   /**
    * If any images must be downloaded from a private registry which requires credentials, then those credentials must be provided here.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["registryServer"])
+  @identifiers(#["registryServer"])
   @summary("Additional private registries from which containers can be pulled.")
   containerRegistries?: ContainerRegistry[];
 }
@@ -2753,7 +2764,7 @@ model AutoScaleRunError {
    * Additional details about the error.
    */
   @summary("Additional details about the error.")
-  @OpenAPI.extension("x-ms-identifiers", #["code"])
+  @identifiers(#["code"])
   details?: AutoScaleRunError[];
 }
 
@@ -2812,7 +2823,7 @@ model PoolEndpointConfiguration {
    * The maximum number of inbound NAT pools per Batch pool is 5. If the maximum number of inbound NAT pools is exceeded the request fails with HTTP status code 400. This cannot be specified if the IPAddressProvisioningType is NoPublicIPAddresses.
    */
   @summary("A list of inbound NAT pools that can be used to address specific ports on an individual compute node externally.")
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   inboundNatPools: InboundNatPool[];
 }
 
@@ -2855,7 +2866,7 @@ model InboundNatPool {
    * The maximum number of rules that can be specified across all the endpoints on a Batch pool is 25. If no network security group rules are specified, a default rule will be created to allow inbound access to the specified backendPort. If the maximum number of network security group rules is exceeded the request fails with HTTP status code 400.
    */
   @summary("A list of network security group rules that will be applied to the endpoint.")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   networkSecurityGroupRules?: NetworkSecurityGroupRule[];
 }
 
@@ -3026,14 +3037,14 @@ model StartTask {
    * A list of files that the Batch service will download to the compute node before running the command line.
    */
   @summary("A list of files that the Batch service will download to the compute node before running the command line.")
-  @OpenAPI.extension("x-ms-identifiers", #["httpUrl"])
+  @identifiers(#["httpUrl"])
   resourceFiles?: ResourceFile[];
 
   /**
    * A list of environment variable settings for the start task.
    */
   @summary("A list of environment variable settings for the start task.")
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   environmentSettings?: EnvironmentSetting[];
 
   /**
@@ -3196,7 +3207,7 @@ model TaskContainerSettings {
    * If this array is null or be not present, container task will mount entire temporary disk drive in windows (or AZ_BATCH_NODE_ROOT_DIR in Linux). It won't' mount any data paths into container if this array is set as empty.
    */
   @summary("The paths you want to mounted to container task.")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   containerHostBatchBindMounts?: ContainerHostBatchBindMountEntry[];
 }
 
@@ -3305,7 +3316,7 @@ model ResizeOperationStatus {
    * This property is set only if an error occurred during the last pool resize, and only when the pool allocationState is Steady.
    */
   @summary("Details of any errors encountered while performing the last resize on the pool.")
-  @OpenAPI.extension("x-ms-identifiers", #["code"])
+  @identifiers(#["code"])
   errors?: ResizeError[];
 }
 
@@ -3328,7 +3339,7 @@ model ResizeError {
    * Additional details about the error.
    */
   @summary("Additional details about the error.")
-  @OpenAPI.extension("x-ms-identifiers", #["code"])
+  @identifiers(#["code"])
   details?: ResizeError[];
 }
 
@@ -3644,7 +3655,7 @@ model OutboundEnvironmentEndpoint {
    * The endpoints for this service to which the Batch service makes outbound calls.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["domainName"])
+  @identifiers(#["domainName"])
   endpoints?: EndpointDependency[];
 }
 
@@ -3668,7 +3679,7 @@ model EndpointDependency {
    * The list of connection details for this endpoint.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["port"])
+  @identifiers(#["port"])
   endpointDetails?: EndpointDetail[];
 }
 
@@ -3765,7 +3776,7 @@ model NetworkSecurityPerimeterConfigurationProperties {
   /**
    * List of Provisioning Issues if any
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   provisioningIssues?: ProvisioningIssue[];
 
   /**

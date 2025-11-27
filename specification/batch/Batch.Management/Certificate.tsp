@@ -14,30 +14,42 @@ namespace Microsoft.Batch;
 /**
  * Contains information about a certificate.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(BatchAccount)
-model Certificate
-  is Azure.ResourceManager.ProxyResource<CertificateProperties> {
-  ...ResourceNameParameter<
-    Resource = Certificate,
-    KeyName = "certificateName",
-    SegmentName = "certificates",
-    NamePattern = "^[\\w]+-[\\w]+$"
-  >;
-
-  /**
-   * The ETag of the resource, used for concurrency statements.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @visibility(Lifecycle.Read)
-  etag?: string;
-
-  /**
-   * The tags of the certificate.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags?: Record<string>;
+model Certificate extends AzureProxyResource {
+  properties?: CertificateProperties;
 }
+
+alias CertificateOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider<Certificate>;
+
+    /** The name of the Batch account. */
+    @path
+    @segment("batchAccounts")
+    @key
+    @pattern("^[a-zA-Z0-9]+$")
+    @maxLength(24)
+    @minLength(3)
+    accountName: string;
+  },
+  {
+    /** The identifier for the certificate. This must be made up of algorithm and thumbprint separated by a dash, and must match the certificate data in the request. For example SHA1-a3d1c5. */
+    @path
+    @segment("certificates")
+    @key
+    @pattern("^[\\w]+-[\\w]+$")
+    @minLength(5)
+    @maxLength(45)
+    certificateName: string;
+  },
+  ErrorType = CloudError
+>;
 
 @armResourceOperations
 interface Certificates {
@@ -45,16 +57,15 @@ interface Certificates {
    * Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.
    */
   #deprecated "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  get is ArmResourceRead<
+  get is CertificateOps.Read<
     Certificate,
-    Response = ArmResponse<Certificate> & {
+    Response = ArmResourceUpdatedResponse<Certificate> & {
       /**
        * The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers.
        */
       @header("ETag")
       etag?: string;
-    },
-    Error = CloudError
+    }
   >;
 
   /**
@@ -62,7 +73,7 @@ interface Certificates {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #deprecated "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  create is Azure.ResourceManager.Legacy.CreateOrReplaceAsync<
+  create is CertificateOps.CreateOrUpdateAsync<
     Certificate,
     Request = CertificateCreateOrUpdateParameters,
     Parameters = {
@@ -86,8 +97,7 @@ interface Certificates {
        */
       @header("ETag")
       etag?: string;
-    },
-    Error = CloudError
+    }
   >;
 
   /**
@@ -95,7 +105,7 @@ interface Certificates {
    */
   #deprecated "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<
+  update is CertificateOps.CustomPatchSync<
     Certificate,
     PatchModel = CertificateCreateOrUpdateParameters,
     Parameters = {
@@ -106,14 +116,13 @@ interface Certificates {
       @header("If-Match")
       `If-Match`?: string;
     },
-    Response = ArmResponse<Certificate> & {
+    Response = ArmResourceUpdatedResponse<Certificate> & {
       /**
        * The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers.
        */
       @header("ETag")
       etag?: string;
-    },
-    Error = CloudError
+    }
   >;
 
   /**
@@ -121,17 +130,16 @@ interface Certificates {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #deprecated "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  delete is ArmResourceDeleteWithoutOkAsync<
+  delete is CertificateOps.DeleteWithoutOkAsync<
     Certificate,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
-    Error = CloudError
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
   /**
    * Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.
    */
   #deprecated "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  listByBatchAccount is ArmResourceListByParent<
+  listByBatchAccount is CertificateOps.List<
     Certificate,
     Parameters = {
       /**
@@ -152,8 +160,7 @@ interface Certificates {
       @query("$filter")
       $filter?: string;
     },
-    Response = ArmResponse<ListCertificatesResult>,
-    Error = CloudError
+    Response = ArmResponse<ListCertificatesResult>
   >;
 
   /**
@@ -163,24 +170,21 @@ interface Certificates {
    */
   #deprecated "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("cancelDelete")
-  cancelDeletion is ArmResourceActionSync<
+  cancelDeletion is CertificateOps.ActionSync<
     Certificate,
     void,
-    Response = ArmResponse<Certificate> & {
+    ArmResponse<Certificate> & {
       /**
        * The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers.
        */
       @header("ETag")
       etag?: string;
-    },
-    Error = CloudError
+    }
   >;
 }
 
-@@maxLength(Certificate.name, 45);
-@@minLength(Certificate.name, 5);
-@@doc(Certificate.name,
-  "The identifier for the certificate. This must be made up of algorithm and thumbprint separated by a dash, and must match the certificate data in the request. For example SHA1-a3d1c5."
+@@doc(Certificate.properties,
+  "The properties associated with the Certificate."
 );
 @@doc(Certificate.properties,
   "The properties associated with the certificate."

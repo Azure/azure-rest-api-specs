@@ -13,14 +13,11 @@ namespace Microsoft.Batch;
 /**
  * Contains information about an Azure Batch account.
  */
-model BatchAccount
-  is Azure.ResourceManager.TrackedResource<BatchAccountProperties> {
-  ...ResourceNameParameter<
-    Resource = BatchAccount,
-    KeyName = "accountName",
-    SegmentName = "batchAccounts",
-    NamePattern = "^[a-zA-Z0-9]+$"
-  >;
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model BatchAccount extends AzureResource {
+  properties?: BatchAccountProperties;
 
   /**
    * The identity of the Batch account.
@@ -29,57 +26,74 @@ model BatchAccount
   identity?: BatchAccountIdentity;
 }
 
+alias BatchAccountOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider<BatchAccount>;
+  },
+  {
+    /** The name of the Batch account. */
+    @path
+    @segment("batchAccounts")
+    @key
+    @pattern("^[a-zA-Z0-9]+$")
+    @maxLength(24)
+    @minLength(3)
+    accountName: string;
+  },
+  ErrorType = CloudError
+>;
+
 @armResourceOperations
 interface BatchAccounts {
   /**
    * Gets information about the specified Batch account.
    */
-  get is ArmResourceRead<BatchAccount, Error = CloudError>;
+  get is BatchAccountOps.Read<BatchAccount>;
 
   /**
    * Creates a new Batch account with the specified parameters. Existing accounts cannot be updated with this API and should instead be updated with the Update Batch Account API.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  create is Azure.ResourceManager.Legacy.CreateOrReplaceAsync<
+  create is BatchAccountOps.CreateOrUpdateAsync<
     BatchAccount,
     Request = BatchAccountCreateParameters,
     Response = ArmResourceUpdatedResponse<BatchAccount> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = BatchAccount> &
-      Azure.Core.Foundations.RetryAfterHeader>,
-    Error = CloudError
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
    * Updates the properties of an existing Batch account.
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<
+  update is BatchAccountOps.CustomPatchSync<
     BatchAccount,
-    PatchModel = BatchAccountUpdateParameters,
-    Error = CloudError
+    PatchModel = BatchAccountUpdateParameters
   >;
 
   /**
    * Deletes the specified Batch account.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  delete is ArmResourceDeleteWithoutOkAsync<
+  delete is BatchAccountOps.DeleteWithoutOkAsync<
     BatchAccount,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
-    Error = CloudError
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
   /**
    * Gets information about the Batch accounts associated with the specified resource group.
    */
-  listByResourceGroup is ArmResourceListByParent<
+  listByResourceGroup is BatchAccountOps.List<
     BatchAccount,
-    Response = BatchAccountListResult,
-    Error = CloudError
+    Response = BatchAccountListResult
   >;
 
   /**
    * Gets information about the Batch accounts associated with the subscription.
    */
+  @action("batchAccounts")
   list is ArmListBySubscription<
     BatchAccount,
     Response = BatchAccountListResult,
@@ -90,33 +104,30 @@ interface BatchAccounts {
    * Synchronizes access keys for the auto-storage account configured for the specified Batch account, only if storage key authentication is being used.
    */
   @action("syncAutoStorageKeys")
-  synchronizeAutoStorageKeys is ArmResourceActionSync<
+  synchronizeAutoStorageKeys is BatchAccountOps.ActionSync<
     BatchAccount,
     void,
-    NoContentResponse,
-    Error = CloudError
+    NoContentResponse
   >;
 
   /**
    * This operation applies only to Batch accounts with allowedAuthenticationModes containing 'SharedKey'. If the Batch account doesn't contain 'SharedKey' in its allowedAuthenticationMode, clients cannot use shared keys to authenticate, and must use another allowedAuthenticationModes instead. In this case, regenerating the keys will fail.
    */
   @action("regenerateKeys")
-  regenerateKey is ArmResourceActionSync<
+  regenerateKey is BatchAccountOps.ActionSync<
     BatchAccount,
     BatchAccountRegenerateKeyParameters,
-    ArmResponse<BatchAccountKeys>,
-    Error = CloudError
+    ArmResponse<BatchAccountKeys>
   >;
 
   /**
    * This operation applies only to Batch accounts with allowedAuthenticationModes containing 'SharedKey'. If the Batch account doesn't contain 'SharedKey' in its allowedAuthenticationMode, clients cannot use shared keys to authenticate, and must use another allowedAuthenticationModes instead. In this case, getting the keys will fail.
    */
   @action("listKeys")
-  getKeys is ArmResourceActionSync<
+  getKeys is BatchAccountOps.ActionSync<
     BatchAccount,
     void,
-    ArmResponse<BatchAccountKeys>,
-    Error = CloudError
+    ArmResponse<BatchAccountKeys>
   >;
 
   /**
@@ -125,17 +136,13 @@ interface BatchAccounts {
   @get
   @list
   @action("outboundNetworkDependenciesEndpoints")
-  listOutboundNetworkDependenciesEndpoints is ArmResourceActionSync<
+  listOutboundNetworkDependenciesEndpoints is BatchAccountOps.ActionSync<
     BatchAccount,
     void,
-    ArmResponse<OutboundEnvironmentEndpointCollection>,
-    Error = CloudError
+    ArmResponse<OutboundEnvironmentEndpointCollection>
   >;
 }
 
-@@maxLength(BatchAccount.name, 24);
-@@minLength(BatchAccount.name, 3);
-@@pattern(BatchAccount.name, "^[a-zA-Z0-9]+$");
 @@doc(BatchAccount.name, "The name of the Batch account.");
 @@doc(BatchAccount.properties, "The properties associated with the account.");
 @@doc(BatchAccounts.create::parameters.resource,

@@ -8,48 +8,60 @@ import "./BatchAccount.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.Batch;
 /**
  * Contains information about a pool.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(BatchAccount)
-model Pool is Azure.ResourceManager.ProxyResource<PoolProperties> {
-  ...ResourceNameParameter<
-    Resource = Pool,
-    KeyName = "poolName",
-    SegmentName = "pools",
-    NamePattern = "^[a-zA-Z0-9_-]+$"
-  >;
+model Pool extends AzureProxyResource {
+  properties?: PoolProperties;
 
   /**
    * The type of identity used for the Batch Pool.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   identity?: BatchPoolIdentity;
-
-  /**
-   * The ETag of the resource, used for concurrency statements.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @visibility(Lifecycle.Read)
-  etag?: string;
-
-  /**
-   * The tags of the certificate.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags?: Record<string>;
 }
+
+alias PoolOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider<Pool>;
+
+    /** The name of the Batch account. */
+    @path
+    @segment("batchAccounts")
+    @key
+    @pattern("^[a-zA-Z0-9]+$")
+    @maxLength(24)
+    @minLength(3)
+    accountName: string;
+  },
+  {
+    /** The pool name. This must be unique within the account. */
+    @path
+    @segment("pools")
+    @key
+    @pattern("^[a-zA-Z0-9_-]+$")
+    @maxLength(64)
+    @minLength(1)
+    poolName: string;
+  },
+  ErrorType = CloudError
+>;
 
 @armResourceOperations
 interface Pools {
   /**
    * Gets information about the specified pool.
    */
-  get is ArmResourceRead<
+  get is PoolOps.Read<
     Pool,
     Response = ArmResourceUpdatedResponse<Pool> & {
       /**
@@ -57,15 +69,14 @@ interface Pools {
        */
       @header("ETag")
       etag?: string;
-    },
-    Error = CloudError
+    }
   >;
 
   /**
    * Creates a new pool inside the specified account.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  create is ArmResourceCreateOrReplaceSync<
+  create is PoolOps.CreateOrUpdateSync<
     Pool,
     Parameters = {
       /**
@@ -88,15 +99,14 @@ interface Pools {
        */
       @header("ETag")
       etag?: string;
-    },
-    Error = CloudError
+    }
   >;
 
   /**
    * Updates the properties of an existing pool.
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<
+  update is PoolOps.CustomPatchSync<
     Pool,
     PatchModel = Pool,
     Parameters = {
@@ -113,24 +123,22 @@ interface Pools {
        */
       @header("ETag")
       etag?: string;
-    },
-    Error = CloudError
+    }
   >;
 
   /**
    * Deletes the specified pool.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  delete is ArmResourceDeleteWithoutOkAsync<
+  delete is PoolOps.DeleteWithoutOkAsync<
     Pool,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
-    Error = CloudError
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
   /**
    * Lists all of the pools in the specified account.
    */
-  listByBatchAccount is ArmResourceListByParent<
+  listByBatchAccount is PoolOps.List<
     Pool,
     Parameters = {
       /**
@@ -163,46 +171,40 @@ interface Pools {
       @query("$filter")
       $filter?: string;
     },
-    Response = ArmResponse<ListPoolsResult>,
-    Error = CloudError
+    Response = ArmResponse<ListPoolsResult>
   >;
 
   /**
    * Disables automatic scaling for a pool.
    */
-  disableAutoScale is ArmResourceActionSync<
+  disableAutoScale is PoolOps.ActionSync<
     Pool,
     void,
-    Response = ArmResponse<Pool> & {
+    ArmResponse<Pool> & {
       /**
        * The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers.
        */
       @header("ETag")
       etag?: string;
-    },
-    Error = CloudError
+    }
   >;
 
   /**
    * This does not restore the pool to its previous state before the resize operation: it only stops any further changes being made, and the pool maintains its current state. After stopping, the pool stabilizes at the number of nodes it was at when the stop operation was done. During the stop operation, the pool allocation state changes first to stopping and then to steady. A resize operation need not be an explicit resize pool request; this API can also be used to halt the initial sizing of the pool when it is created.
    */
-  stopResize is ArmResourceActionSync<
+  stopResize is PoolOps.ActionSync<
     Pool,
     void,
-    Response = ArmResponse<Pool> & {
+    ArmResponse<Pool> & {
       /**
        * The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers.
        */
       @header("ETag")
       etag?: string;
-    },
-    Error = CloudError
+    }
   >;
 }
 
-@@maxLength(Pool.name, 64);
-@@minLength(Pool.name, 1);
-@@doc(Pool.name, "The pool name. This must be unique within the account.");
 @@doc(Pool.properties, "The properties associated with the pool.");
 @@doc(Pools.create::parameters.resource,
   "Additional parameters for pool creation."
