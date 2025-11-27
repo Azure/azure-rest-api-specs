@@ -26,6 +26,6 @@ export default defineConfig(
   },
   {
     // TODO: Remove exclusion for "test/**"
-    ignores: ["coverage/**", "dist/**", "test/**"],
+    ignores: ["coverage/**", "dist/**"],
   },
 );
