@@ -118,9 +118,7 @@ describe("compile", function () {
     const compileOutput = "tsp-output/contoso.json";
 
     runNpmSpy.mockImplementation(
-      async (_args: string[], _cwd?: string): Promise<[Error | null, string, string]> => {
-        return [null, compileOutput, ""];
-      },
+      (): Promise<[Error | null, string, string]> => Promise.resolve([null, compileOutput, ""]),
     );
 
     await expect(new CompileRule().execute(folder)).rejects.toThrowErrorMatchingInlineSnapshot(
