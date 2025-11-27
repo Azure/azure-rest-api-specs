@@ -112,13 +112,13 @@ describe("folder-structure", function () {
     vi.mocked(globby.globby).mockImplementation(() => Promise.resolve(["/foo/bar/tspconfig.yaml"]));
     normalizePathSpy.mockReturnValue("/gitroot");
 
-    fileExistsSpy.mockImplementation(async (file: string) => {
+    fileExistsSpy.mockImplementation((file: string) => {
       if (file.includes("main.tsp")) {
-        return false;
+        return Promise.resolve(false);
       } else if (file.includes("client.tsp")) {
-        return false;
+        return Promise.resolve(false);
       }
-      return true;
+      return Promise.resolve(true);
     });
 
     const result = await new FolderStructureRule().execute(
@@ -133,13 +133,13 @@ describe("folder-structure", function () {
     vi.mocked(globby.globby).mockImplementation(() => Promise.resolve(["/foo/bar/tspconfig.yaml"]));
     normalizePathSpy.mockReturnValue("/gitroot");
 
-    fileExistsSpy.mockImplementation(async (file: string) => {
+    fileExistsSpy.mockImplementation((file: string) => {
       if (file.includes("main.tsp")) {
-        return true;
+        return Promise.resolve(true);
       } else if (file.includes("examples")) {
-        return false;
+        return Promise.resolve(false);
       }
-      return true;
+      return Promise.resolve(true);
     });
 
     const result = await new FolderStructureRule().execute(
@@ -154,11 +154,11 @@ describe("folder-structure", function () {
     vi.mocked(globby.globby).mockImplementation(() => Promise.resolve(["/foo/bar/tspconfig.yaml"]));
     normalizePathSpy.mockReturnValue("/gitroot");
 
-    fileExistsSpy.mockImplementation(async (file: string) => {
+    fileExistsSpy.mockImplementation((file: string) => {
       if (file.includes("tspconfig.yaml")) {
-        return false;
+        return Promise.resolve(false);
       }
-      return true;
+      return Promise.resolve(true);
     });
 
     const result = await new FolderStructureRule().execute(
@@ -170,14 +170,16 @@ describe("folder-structure", function () {
   });
 
   it("should succeed with resource-manager/Management", async function () {
-    vi.mocked(globby.globby).mockImplementation(() => Promise.resolve(["/foo/Foo.Management/tspconfig.yaml"]));
+    vi.mocked(globby.globby).mockImplementation(() =>
+      Promise.resolve(["/foo/Foo.Management/tspconfig.yaml"]),
+    );
     normalizePathSpy.mockReturnValue("/gitroot");
-    readTspConfigSpy.mockImplementation(
-      async (_folder: string) => `
+    readTspConfigSpy.mockImplementation(() =>
+      Promise.resolve(`
 options:
   "@azure-tools/typespec-autorest":
     azure-resource-provider-folder: "resource-manager"
-`,
+`),
     );
 
     const result = await new FolderStructureRule().execute(
@@ -190,12 +192,12 @@ options:
   it("should succeed with data-plane/NoManagement", async function () {
     vi.mocked(globby.globby).mockImplementation(() => Promise.resolve(["/foo/Foo/tspconfig.yaml"]));
     normalizePathSpy.mockReturnValue("/gitroot");
-    readTspConfigSpy.mockImplementation(
-      async (_folder: string) => `
+    readTspConfigSpy.mockImplementation(() =>
+      Promise.resolve(`
 options:
   "@azure-tools/typespec-autorest":
     azure-resource-provider-folder: "data-plane"
-`,
+`),
     );
 
     const result = await new FolderStructureRule().execute("/gitroot/specification/foo/Foo");
@@ -206,12 +208,12 @@ options:
   it("should fail with resource-manager/NoManagement", async function () {
     vi.mocked(globby.globby).mockImplementation(() => Promise.resolve(["/foo/Foo/tspconfig.yaml"]));
     normalizePathSpy.mockReturnValue("/gitroot");
-    readTspConfigSpy.mockImplementation(
-      async (_folder: string) => `
+    readTspConfigSpy.mockImplementation(() =>
+      Promise.resolve(`
 options:
   "@azure-tools/typespec-autorest":
     azure-resource-provider-folder: "resource-manager"
-`,
+`),
     );
 
     const result = await new FolderStructureRule().execute("/gitroot/specification/foo/Foo");
@@ -221,14 +223,16 @@ options:
   });
 
   it("should fail with data-plane/Management", async function () {
-    vi.mocked(globby.globby).mockImplementation(() => Promise.resolve(["/foo/Foo.Management/tspconfig.yaml"]));
+    vi.mocked(globby.globby).mockImplementation(() =>
+      Promise.resolve(["/foo/Foo.Management/tspconfig.yaml"]),
+    );
     normalizePathSpy.mockReturnValue("/gitroot");
-    readTspConfigSpy.mockImplementation(
-      async (_folder: string) => `
+    readTspConfigSpy.mockImplementation(() =>
+      Promise.resolve(`
 options:
   "@azure-tools/typespec-autorest":
     azure-resource-provider-folder: "data-plane"
-`,
+`),
     );
 
     const result = await new FolderStructureRule().execute(
@@ -243,11 +247,11 @@ options:
     vi.mocked(globby.globby).mockImplementation(() => Promise.resolve(["main.tsp"]));
     normalizePathSpy.mockReturnValue("/gitroot");
 
-    fileExistsSpy.mockImplementation(async (file: string) => {
+    fileExistsSpy.mockImplementation((file: string) => {
       if (file.includes("tspconfig.yaml")) {
-        return false;
+        return Promise.resolve(false);
       }
-      return true;
+      return Promise.resolve(true);
     });
 
     const result = await new FolderStructureRule().execute(
@@ -284,7 +288,11 @@ options:
   });
 
   it("v2: should succeed with data-plane", async function () {
-    vi.mocked(globby.globby).mockImplementation((patterns) => patterns[0].includes("tspconfig") ? Promise.resolve(["tspconfig.yaml"]) : Promise.resolve(["main.tsp"]));
+    vi.mocked(globby.globby).mockImplementation((patterns) =>
+      patterns[0].includes("tspconfig")
+        ? Promise.resolve(["tspconfig.yaml"])
+        : Promise.resolve(["main.tsp"]),
+    );
     normalizePathSpy.mockReturnValue("/gitroot");
 
     const result = await new FolderStructureRule().execute(
@@ -295,8 +303,11 @@ options:
   });
 
   it("v2: should succeed with resource-manager", async function () {
-    vi.mocked(globby.globby).mockImplementation(async (patterns) => {
-      return patterns[0].includes("tspconfig") ? Promise.resolve(["tspconfig.yaml"]) : Promise.resolve(["main.tsp"]);
+    vi.mocked(globby.globby).mockImplementation(async (patterns) =>
+      patterns[0].includes("tspconfig")
+        ? Promise.resolve(["tspconfig.yaml"])
+        : Promise.resolve(["main.tsp"]),
+    );
     normalizePathSpy.mockReturnValue("/gitroot");
 
     const result = await new FolderStructureRule().execute(
