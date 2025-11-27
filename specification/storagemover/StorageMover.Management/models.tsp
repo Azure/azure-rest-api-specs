@@ -737,6 +737,8 @@ union DataIntegrityValidation {
   SaveFileMD5: "SaveFileMD5",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   None: "None",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  SaveVerifyFileMD5: "SaveVerifyFileMD5"
 }
 
 /**
