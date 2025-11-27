@@ -4215,6 +4215,19 @@
           "$ref": "#/definitions/BandwidthScheduleProperties",
           "description": "The properties of the bandwidth schedule.",
           "x-ms-client-flatten": true
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "title": "The current state of the Bandwidth Schedule.",
+          "description": "The provisioning state, which only appears in the response.",
+          "enum": [
+            "Creating",
+            "Updating",
+            "Failed",
+            "Succeeded",
+            "Deleting"
+          ]
         }
       }
     },
@@ -4647,8 +4660,20 @@
         "properties": {
           "$ref": "#/definitions/DataBoxEdgeDeviceProperties",
           "description": "The properties of the Data Box Edge/Gateway device.",
-          "readOnly": true,
           "x-ms-client-flatten": true
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "title": "The current state of the DataBoxEdge Device.",
+          "description": "The provisioning state, which only appears in the response.",
+          "enum": [
+            "Creating",
+            "Updating",
+            "Failed",
+            "Succeeded",
+            "Deleting"
+          ]
         }
       }
     },
@@ -4835,13 +4860,11 @@
         },
         "description": {
           "description": "The Description of the Data Box Edge/Gateway device.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "modelDescription": {
           "description": "The description of the Data Box Edge/Gateway device model.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "deviceType": {
           "description": "The type of the Data Box Edge/Gateway device.",
@@ -4857,8 +4880,7 @@
         },
         "friendlyName": {
           "description": "The Data Box Edge/Gateway device name.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "culture": {
           "description": "The Data Box Edge/Gateway device culture.",
@@ -6976,6 +6998,19 @@
           "$ref": "#/definitions/OrderProperties",
           "description": "The order properties.",
           "x-ms-client-flatten": true
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "title": "The current state of the Bandwidth Schedule.",
+          "description": "The provisioning state, which only appears in the response.",
+          "enum": [
+            "Creating",
+            "Updating",
+            "Failed",
+            "Succeeded",
+            "Deleting"
+          ]
         }
       }
     },
@@ -7016,8 +7051,7 @@
         },
         "currentStatus": {
           "$ref": "#/definitions/OrderStatus",
-          "description": "Current status of the order.",
-          "readOnly": true
+          "description": "Current status of the order."
         },
         "orderHistory": {
           "description": "List of status changes in the order.",
