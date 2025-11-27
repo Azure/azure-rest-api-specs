@@ -17,11 +17,11 @@ namespace Microsoft.AzureStackHCI;
 @parentResource(Cluster)
 model DeploymentSetting
   is Azure.ResourceManager.ProxyResource<DeploymentSettingsProperties> {
-  ...ResourceNameParameter<
-    Resource = DeploymentSetting,
-    KeyName = "deploymentSettingsName",
-    SegmentName = "deploymentSettings"
-  >;
+  @path
+  @key("deploymentSettingsName")
+  @segment("deploymentSettings")
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
+  name: string = "default";
 }
 
 @armResourceOperations

@@ -16,11 +16,11 @@ namespace Microsoft.AzureStackHCI;
  */
 @extensionResource
 model EdgeDevice is Azure.ResourceManager.ExtensionResource<{}> {
-  ...ResourceNameParameter<
-    Resource = EdgeDevice,
-    KeyName = "edgeDeviceName",
-    SegmentName = "edgeDevices"
-  >;
+  @path
+  @key("edgeDeviceName")
+  @segment("edgeDevices")
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
+  name: string = "default";
 
   /**
    * Device kind to support polymorphic resource.

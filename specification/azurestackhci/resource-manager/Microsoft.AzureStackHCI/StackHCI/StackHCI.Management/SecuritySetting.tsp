@@ -17,11 +17,11 @@ namespace Microsoft.AzureStackHCI;
 @parentResource(Cluster)
 model SecuritySetting
   is Azure.ResourceManager.ProxyResource<SecurityProperties> {
-  ...ResourceNameParameter<
-    Resource = SecuritySetting,
-    KeyName = "securitySettingsName",
-    SegmentName = "securitySettings"
-  >;
+  @path
+  @key("securitySettingsName")
+  @segment("securitySettings")
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
+  name: string = "default";
 }
 
 @armResourceOperations
