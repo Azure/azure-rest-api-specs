@@ -128,3 +128,5 @@ using Azure.Core;
   "connectionState ",
   "csharp"
 );
+@@clientName(NetworkInterface.privateIpAddress, "PrivateIPAddress", "csharp");
+@@clientName(EndpointDetail.ipAddress, "IPAddress", "csharp");
