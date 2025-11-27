@@ -21,15 +21,13 @@ describe("compile", function () {
   beforeEach(() => {
     vi.spyOn(utils, "fileExists").mockResolvedValue(true);
     vi.spyOn(utils, "getSuppressions").mockResolvedValue([]);
-    gitDiffTopSpecFolderSpy = vi
-      .spyOn(utils, "gitDiffTopSpecFolder")
-      .mockImplementation((folder) => {
-        return Promise.resolve({
-          success: true,
-          stdOutput: `Running git diff on folder ${folder}}`,
-          errorOutput: "",
-        });
-      });
+    gitDiffTopSpecFolderSpy = vi.spyOn(utils, "gitDiffTopSpecFolder").mockImplementation((folder) =>
+      Promise.resolve({
+        success: true,
+        stdOutput: `Running git diff on folder ${folder}}`,
+        errorOutput: "",
+      }),
+    );
     runNpmSpy = vi
       .spyOn(utils, "runNpm")
       .mockImplementation((args, cwd) =>
