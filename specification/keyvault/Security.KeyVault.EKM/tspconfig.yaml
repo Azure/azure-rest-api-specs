@@ -25,14 +25,13 @@ options:
   # Uncomment this line and add "@azure-tools/typespec-ts" to your package.json to generate TypeSpec code
   # "@azure-tools/typespec-ts": true
   "@azure-tools/typespec-go":
-    containing-module: "github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/azadmin"
     service-dir: "sdk/security/keyvault"
-    emitter-output-dir: "{output-dir}/{service-dir}/azadmin/ekm"
-    go-generate: build.go
+    package-dir: "azadmin/ekm"
     inject-spans: true
     single-client: true
     generate-fakes: true
-    omit-constructors: true
+    module: "github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/azadmin"
+    module-version: "0.0.1"
   "@azure-tools/typespec-client-generator-cli":
     additionalDirectories:
       - "specification/keyvault/Security.KeyVault.Common/"
