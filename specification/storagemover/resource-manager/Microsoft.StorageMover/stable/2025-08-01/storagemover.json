@@ -2692,7 +2692,8 @@
         "Approved",
         "Rejected",
         "Disconnected",
-        "Pending"
+        "Pending",
+        "Stale"
       ],
       "x-ms-enum": {
         "name": "ConnectionStatus",
@@ -2713,6 +2714,10 @@
           {
             "name": "Pending",
             "value": "Pending"
+          },
+          {
+            "name": "Stale",
+            "value": "Stale"
           }
         ]
       }
@@ -3115,14 +3120,18 @@
           "description": "The checksum validation mode for the job definition.",
           "default": "None",
           "enum": [
+            "SaveVerifyFileMD5",
             "SaveFileMD5",
-            "None",
-            "SaveVerifyFileMD5"
+            "None"
           ],
           "x-ms-enum": {
             "name": "DataIntegrityValidation",
             "modelAsString": true,
             "values": [
+              {
+                "name": "SaveVerifyFileMD5",
+                "value": "SaveVerifyFileMD5"
+              },
               {
                 "name": "SaveFileMD5",
                 "value": "SaveFileMD5"
@@ -3130,10 +3139,6 @@
               {
                 "name": "None",
                 "value": "None"
-              },
-              {
-                "name": "SaveVerifyFileMD5",
-                "value": "SaveVerifyFileMD5"
               }
             ]
           }
