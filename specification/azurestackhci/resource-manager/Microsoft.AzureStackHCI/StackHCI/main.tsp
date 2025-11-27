@@ -16,6 +16,9 @@ import "./platformUpdates.tsp";
 import "./osImages.tsp";
 import "./updateContents.tsp";
 import "./Operations.tsp";
+import "./edgeMachine.tsp";
+import "./edgeMachineJobs.tsp";
+import "./validateOwnershipVouchers.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
