@@ -35,10 +35,10 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
- * Azure Stack HCI management service
+ * Azure Stack HCI service
  */
 @armProviderNamespace
-@service(#{ title: "AzureStackHCIClient" })
+@service(#{ title: "Microsoft.AzureStackHCI" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v4)
 namespace Microsoft.AzureStackHCI;
@@ -52,3 +52,4 @@ enum Versions {
    */
   v2025_11_01_preview: "2025-11-01-preview",
 }
+interface Operations extends Azure.ResourceManager.Operations {}

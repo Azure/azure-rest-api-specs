@@ -121,3 +121,4 @@ using Microsoft.AzureStackHCI;
 @@clientLocation(UpdateSummariesOperationGroup.list, "UpdateSummaries");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(UpdateSummaries.properties);
+@@key(Azure.ResourceManager.Extension.ScopeParameter.scope, "resourceUri");

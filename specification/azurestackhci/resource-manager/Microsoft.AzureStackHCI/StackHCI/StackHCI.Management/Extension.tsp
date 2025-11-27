@@ -40,7 +40,13 @@ interface Extensions {
    * Update Extension for HCI cluster.
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<Extension, PatchModel = ExtensionPatch>;
+  @Azure.Core.useFinalStateVia("original-uri")
+  update is ArmCustomPatchAsync<
+    Extension,
+    PatchModel = ExtensionPatch,
+    Response = Extension | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+      Azure.Core.Foundations.RetryAfterHeader>
+  >;
 
   /**
    * Delete particular Arc Extension of HCI Cluster.

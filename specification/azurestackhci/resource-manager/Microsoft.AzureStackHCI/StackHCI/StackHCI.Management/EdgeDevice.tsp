@@ -14,7 +14,8 @@ namespace Microsoft.AzureStackHCI;
 /**
  * Edge device resource.
  */
-model EdgeDevice is Azure.ResourceManager.ProxyResource<{}> {
+@extensionResource
+model EdgeDevice is Azure.ResourceManager.ExtensionResource<{}> {
   ...ResourceNameParameter<
     Resource = EdgeDevice,
     KeyName = "edgeDeviceName",
@@ -34,33 +35,41 @@ interface EdgeDevices {
   /**
    * Get a EdgeDevice
    */
-  get is ArmResourceRead<EdgeDevice>;
+  get is Azure.ResourceManager.Extension.Read<
+    Azure.ResourceManager.Extension.ScopeParameter,
+    EdgeDevice
+  >;
 
   /**
    * Create a EdgeDevice
    */
-  CreateOrUpdate is ArmResourceCreateOrUpdateAsync<EdgeDevice>;
-
+  createOrUpdate is Azure.ResourceManager.Extension.CreateOrReplaceAsync<
+    Azure.ResourceManager.Extension.ScopeParameter,
+    EdgeDevice
+  >;
   /**
    * Delete a EdgeDevice
    */
-  delete is ArmResourceDeleteWithoutOkAsync<EdgeDevice>;
-
+  delete is Azure.ResourceManager.Extension.DeleteWithoutOkAsync<
+    Azure.ResourceManager.Extension.ScopeParameter,
+    EdgeDevice
+  >;
   /**
    * List EdgeDevice resources by parent
    */
-  List is ArmResourceListByParent<
-    EdgeDevice,
-    Response = ArmResponse<ResourceListResult<EdgeDevice>>
+  list is Azure.ResourceManager.Extension.ListByTarget<
+    Azure.ResourceManager.Extension.ScopeParameter,
+    EdgeDevice
   >;
+
   /**
    * A long-running resource action.
    */
-  validate is ArmResourceActionAsync<
+  validate is Azure.ResourceManager.Extension.ActionAsync<
+    Azure.ResourceManager.Extension.ScopeParameter,
     EdgeDevice,
     ValidateRequest,
-    ValidateResponse
+    ArmResponse<ValidateResponse>
   >;
 }
-
 @@doc(EdgeDevice.name, "Name of Device");

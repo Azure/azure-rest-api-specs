@@ -15,8 +15,9 @@ namespace Microsoft.AzureStackHCI;
 /**
  * EdgeDevice Jobs resource
  */
+@extensionResource
 @parentResource(EdgeDevice)
-model EdgeDeviceJob is Azure.ResourceManager.ProxyResource<{}> {
+model EdgeDeviceJob is Azure.ResourceManager.ExtensionResource<{}> {
   ...ResourceNameParameter<
     Resource = EdgeDeviceJob,
     KeyName = "jobsName",
@@ -36,21 +37,34 @@ interface EdgeDeviceJobs {
   /**
    * Get a EdgeDeviceJob
    */
-  get is ArmResourceRead<EdgeDeviceJob>;
+  get is Azure.ResourceManager.Extension.Read<
+    Azure.ResourceManager.Extension.ScopeParameter,
+    EdgeDeviceJob
+  >;
+
   /**
    * Create a EdgeDeviceJob
    */
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<EdgeDeviceJob>;
+  createOrUpdate is Azure.ResourceManager.Extension.CreateOrReplaceAsync<
+    Azure.ResourceManager.Extension.ScopeParameter,
+    EdgeDeviceJob
+  >;
 
   /**
    * Delete a EdgeDeviceJob
    */
-  delete is ArmResourceDeleteWithoutOkAsync<EdgeDeviceJob>;
+  delete is Azure.ResourceManager.Extension.DeleteWithoutOkAsync<
+    Azure.ResourceManager.Extension.ScopeParameter,
+    EdgeDeviceJob
+  >;
 
   /**
    * List EdgeDeviceJob resources by EdgeDevice
    */
-  listByEdgeDevice is ArmResourceListByParent<EdgeDeviceJob>;
+  listByEdgeDevice is Azure.ResourceManager.Extension.ListByTarget<
+    Azure.ResourceManager.Extension.ScopeParameter,
+    EdgeDeviceJob
+  >;
 }
 
 @@doc(EdgeDeviceJob.name, "Name of EdgeDevice Job");
