@@ -22,18 +22,18 @@ describe("compile", function () {
   beforeEach(() => {
     vi.spyOn(utils, "fileExists").mockResolvedValue(true);
     vi.spyOn(utils, "getSuppressions").mockResolvedValue([]);
-    gitDiffTopSpecFolderSpy = vi
-      .spyOn(utils, "gitDiffTopSpecFolder")
-      .mockImplementation(async (folder) => {
-        return {
-          success: true,
-          stdOutput: `Running git diff on folder ${folder}}`,
-          errorOutput: "",
-        };
-      });
+    gitDiffTopSpecFolderSpy = vi.spyOn(utils, "gitDiffTopSpecFolder").mockImplementation((folder) =>
+      Promise.resolve({
+        success: true,
+        stdOutput: `Running git diff on folder ${folder}}`,
+        errorOutput: "",
+      }),
+    );
     runNpmSpy = vi
       .spyOn(utils, "runNpm")
-      .mockImplementation(async (args, cwd) => [null, `runNpm ${args.join(" ")} at ${cwd}`, ""]);
+      .mockImplementation((args, cwd) =>
+        Promise.resolve([null, `runNpm ${args.join(" ")} at ${cwd}`, ""]),
+      );
   });
 
   afterEach(() => {
@@ -56,15 +56,15 @@ describe("compile", function () {
       `${swaggerPath.replace("foo.json", "examples/example.json")}\n`;
 
     runNpmSpy.mockImplementation(
-      async (_args: string[], _cwd?: string): Promise<[Error | null, string, string]> => {
-        return [null, compileOutput, ""];
-      },
+      (): Promise<[Error | null, string, string]> => Promise.resolve([null, compileOutput, ""]),
     );
 
     // ensure handwritten swaggers are ignored
-    vi.mocked(globby.globby).mockImplementation(async () => [swaggerPath, handwrittenSwaggerPath]);
-    vi.mocked(fsPromises.readFile).mockImplementation(async (path) =>
-      path === swaggerPath ? '{"info": {"x-typespec-generated": true}}' : "{}",
+    vi.mocked(globby.globby).mockImplementation(() =>
+      Promise.resolve([swaggerPath, handwrittenSwaggerPath]),
+    );
+    vi.mocked(fsPromises.readFile).mockImplementation((path) =>
+      Promise.resolve(path === swaggerPath ? '{"info": {"x-typespec-generated": true}}' : "{}"),
     );
 
     await expect(new CompileRule().execute(mockFolder)).resolves.toMatchObject({
@@ -73,15 +73,13 @@ describe("compile", function () {
   });
 
   it("should fail if no emitter was configured", async function () {
-    runNpmSpy.mockImplementation(
-      async (args: string[], _cwd: string): Promise<[Error | null, string, string]> => {
-        if (args.join(" ").includes("tsp compile")) {
-          return [null, "no emitter was configured", ""];
-        } else {
-          return [null, "", ""];
-        }
-      },
-    );
+    runNpmSpy.mockImplementation((args: string[]): Promise<[Error | null, string, string]> => {
+      if (args.join(" ").includes("tsp compile")) {
+        return Promise.resolve([null, "no emitter was configured", ""]);
+      } else {
+        return Promise.resolve([null, "", ""]);
+      }
+    });
 
     await expect(new CompileRule().execute(mockFolder)).resolves.toMatchObject({
       success: false,
@@ -89,15 +87,13 @@ describe("compile", function () {
   });
 
   it("should fail if no output was generated", async function () {
-    runNpmSpy.mockImplementation(
-      async (args: string[], _cwd: string): Promise<[Error | null, string, string]> => {
-        if (args.join(" ").includes("tsp compile")) {
-          return [null, "no output was generated", ""];
-        } else {
-          return [null, "", ""];
-        }
-      },
-    );
+    runNpmSpy.mockImplementation((args: string[]): Promise<[Error | null, string, string]> => {
+      if (args.join(" ").includes("tsp compile")) {
+        return Promise.resolve([null, "no output was generated", ""]);
+      } else {
+        return Promise.resolve([null, "", ""]);
+      }
+    });
 
     await expect(new CompileRule().execute(mockFolder)).resolves.toMatchObject({
       success: false,
@@ -106,11 +102,8 @@ describe("compile", function () {
 
   it("should throw if output has no generated swaggers", async function () {
     runNpmSpy.mockImplementation(
-      async (_args: string[], _cwd: string): Promise<[Error | null, string, string]> => [
-        null,
-        "not-swagger",
-        "",
-      ],
+      async (): Promise<[Error | null, string, string]> =>
+        Promise.resolve([null, "not-swagger", ""]),
     );
 
     await expect(new CompileRule().execute(mockFolder)).rejects.toThrowErrorMatchingInlineSnapshot(
@@ -137,53 +130,53 @@ describe("compile", function () {
 
   it("should fail if extra swaggers", async function () {
     runNpmSpy.mockImplementation(
-      async (_args: string[], _cwd: string): Promise<[Error | null, string, string]> => {
-        return [null, swaggerPath, ""];
-      },
+      async (): Promise<[Error | null, string, string]> => Promise.resolve([null, swaggerPath, ""]),
     );
 
     // Simulate extra swagger
-    vi.mocked(globby.globby).mockImplementation(async () => [
-      swaggerPath,
-      swaggerPath.replace("2022", "2023"),
-      swaggerPath.replace("2023", "2024"),
-    ]);
+    vi.mocked(globby.globby).mockImplementation(() =>
+      Promise.resolve([
+        swaggerPath,
+        swaggerPath.replace("2022", "2023"),
+        swaggerPath.replace("2023", "2024"),
+      ]),
+    );
 
-    vi.mocked(fsPromises.readFile).mockImplementation(async (path) => {
-      return path.toString().includes("2024")
-        ? '{"info": {"x-typespec-generated": true}}'
-        : '{"info": {"x-cadl-generated": true}}';
+    vi.mocked(fsPromises.readFile).mockImplementation((path) => {
+      return (path as string).includes("2024")
+        ? Promise.resolve('{"info": {"x-typespec-generated": true}}')
+        : Promise.resolve('{"info": {"x-cadl-generated": true}}');
     });
 
     await expect(new CompileRule().execute(mockFolder)).resolves.toMatchObject({
       success: false,
-      errorOutput: expect.stringContaining("not generated from the current"),
+      errorOutput: expect.stringContaining("not generated from the current") as unknown,
     });
   });
 
   it("supports suppressions", async function () {
     runNpmSpy.mockImplementation(
-      async (_args: string[], _cwd: string): Promise<[Error | null, string, string]> => {
-        return [null, swaggerPath, ""];
-      },
+      async (): Promise<[Error | null, string, string]> => Promise.resolve([null, swaggerPath, ""]),
     );
 
     // Simulate extra swagger
-    vi.mocked(globby.globby).mockImplementation(async () => [
-      swaggerPath,
-      swaggerPath.replace("2022", "2023"),
-      swaggerPath.replace("2023", "2024"),
-    ]);
+    vi.mocked(globby.globby).mockImplementation(() =>
+      Promise.resolve([
+        swaggerPath,
+        swaggerPath.replace("2022", "2023"),
+        swaggerPath.replace("2023", "2024"),
+      ]),
+    );
 
-    vi.mocked(fsPromises.readFile).mockImplementation(async (path) => {
-      return path.toString().includes("2024")
-        ? '{"info": {"x-typespec-generated": true}}'
-        : '{"info": {"x-cadl-generated": true}}';
+    vi.mocked(fsPromises.readFile).mockImplementation((path) => {
+      return (path as string).includes("2024")
+        ? Promise.resolve('{"info": {"x-typespec-generated": true}}')
+        : Promise.resolve('{"info": {"x-cadl-generated": true}}');
     });
 
-    vi.spyOn(utils, "getSuppressions").mockImplementation(async (path) => {
+    vi.spyOn(utils, "getSuppressions").mockImplementation((path) => {
       return path.includes("2023") || path.includes("2024")
-        ? [
+        ? Promise.resolve([
             {
               tool: "TypeSpecValidation",
               rules: ["Compile"],
@@ -191,8 +184,8 @@ describe("compile", function () {
               paths: [swaggerPath.replace("2022", "2023"), swaggerPath.replace("2023", "2024")],
               reason: "test reason",
             },
-          ]
-        : [];
+          ])
+        : Promise.resolve([]);
     });
 
     await expect(new CompileRule().execute(mockFolder)).resolves.toMatchObject({
@@ -202,89 +195,85 @@ describe("compile", function () {
 
   it("throws on invalid suppressions", async function () {
     runNpmSpy.mockImplementation(
-      async (_args: string[], _cwd: string): Promise<[Error | null, string, string]> => {
-        return [null, swaggerPath, ""];
-      },
+      async (): Promise<[Error | null, string, string]> => Promise.resolve([null, swaggerPath, ""]),
     );
 
-    vi.spyOn(utils, "getSuppressions").mockImplementation(async () => [
-      {
-        tool: "TypeSpecValidation",
-        rules: ["Compile"],
-        subRules: ["ExtraSwagger"],
-        paths: ["**/*"],
-        reason: "test reason",
-      },
-    ]);
+    vi.spyOn(utils, "getSuppressions").mockImplementation(() =>
+      Promise.resolve([
+        {
+          tool: "TypeSpecValidation",
+          rules: ["Compile"],
+          subRules: ["ExtraSwagger"],
+          paths: ["**/*"],
+          reason: "test reason",
+        },
+      ]),
+    );
 
     await expect(new CompileRule().execute(mockFolder)).rejects.toThrow("Invalid path");
   });
 
   it("should skip git diff check if compile fails", async function () {
     runNpmSpy.mockImplementation(
-      async (args: string[], _cwd: string): Promise<[Error | null, string, string]> => {
+      async (args: string[]): Promise<[Error | null, string, string]> => {
         if (args.join(" ").includes("tsp compile")) {
-          return [
+          return Promise.resolve([
             { name: "compilation_error", message: "compilation error" },
             "running tsp compile",
             "compilation failure",
-          ];
+          ]);
         }
-        return [null, "", ""];
+        return Promise.resolve([null, "", ""]);
       },
     );
 
     await expect(new CompileRule().execute(mockFolder)).resolves.toMatchObject({
       success: false,
-      stdOutput: expect.not.stringContaining("Running git diff"),
+      stdOutput: expect.not.stringContaining("Running git diff") as unknown,
     });
   });
 
   it("should fail if git diff fails", async function () {
     runNpmSpy.mockImplementation(
-      async (_args: string[], _cwd: string): Promise<[Error | null, string, string]> => {
-        return [null, swaggerPath, ""];
-      },
+      async (): Promise<[Error | null, string, string]> => Promise.resolve([null, swaggerPath, ""]),
     );
 
-    vi.mocked(globby.globby).mockImplementation(async () => [swaggerPath]);
+    vi.mocked(globby.globby).mockImplementation(() => Promise.resolve([swaggerPath]));
 
-    gitDiffTopSpecFolderSpy.mockImplementation(async (folder: string): Promise<RuleResult> => {
-      let stdOut = `Running git diff on folder ${folder}`;
+    gitDiffTopSpecFolderSpy.mockImplementation((folder: string): Promise<RuleResult> => {
+      const stdOut = `Running git diff on folder ${folder}`;
 
-      return {
+      return Promise.resolve({
         success: false,
         stdOutput: stdOut,
         errorOutput: `Files generated: ${folder}/bar`,
-      };
+      });
     });
 
     await expect(new CompileRule().execute(mockFolder)).resolves.toMatchObject({
       success: false,
-      stdOutput: expect.stringContaining("Running git diff"),
+      stdOutput: expect.stringContaining("Running git diff") as unknown,
     });
   });
 
   it("should succeed if git diff succeeds", async function () {
     runNpmSpy.mockImplementation(
-      async (_args: string[], _cwd: string): Promise<[Error | null, string, string]> => {
-        return [null, swaggerPath, ""];
-      },
+      async (): Promise<[Error | null, string, string]> => Promise.resolve([null, swaggerPath, ""]),
     );
 
-    vi.mocked(globby.globby).mockImplementation(async () => [swaggerPath]);
+    vi.mocked(globby.globby).mockImplementation(() => Promise.resolve([swaggerPath]));
 
-    gitDiffTopSpecFolderSpy.mockImplementation(async (folder: string): Promise<RuleResult> => {
-      let stdOut = `Running git diff on folder ${folder}`;
-      return {
+    gitDiffTopSpecFolderSpy.mockImplementation((folder: string): Promise<RuleResult> => {
+      const stdOut = `Running git diff on folder ${folder}`;
+      return Promise.resolve({
         success: true,
         stdOutput: stdOut,
-      };
+      });
     });
 
     await expect(new CompileRule().execute(mockFolder)).resolves.toMatchObject({
       success: true,
-      stdOutput: expect.stringContaining("Running git diff"),
+      stdOutput: expect.stringContaining("Running git diff") as unknown,
     });
   });
 });
