@@ -11,9 +11,6 @@ using Dynatrace.Observability;
 @@scope(CreationSupportedOperationGroup.list, "!csharp");
 @@scope(CreationSupportedOperationGroup.get, "!csharp");
 @@scope(MonitorsOperationGroup.getAllConnectedResourcesCount, "!csharp");
-@@scope(MonitoredSubscriptions.createOrUpdate, "!csharp");
-@@scope(MonitoredSubscriptions.update, "!csharp");
-@@scope(MonitoredSubscriptions.delete, "!csharp");
 
 @@clientName(DynatraceSingleSignOnResource, "DynatraceSingleSignOn", "csharp");
 @@clientName(ProvisioningState, "DynatraceProvisioningState", "csharp");
