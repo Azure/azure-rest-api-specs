@@ -36,6 +36,7 @@ describe("npm-prefix", function () {
       },
     );
 
+    // eslint-disable-next-line @typescript-eslint/unbound-method
     vi.mocked(simpleGit.simpleGit().revparse).mockResolvedValue("c:/Git/azure-rest-api-specs");
 
     vi.spyOn(utils, "normalizePath").mockImplementation((folder) =>
@@ -55,6 +56,7 @@ describe("npm-prefix", function () {
         return Promise.resolve([null, "", ""]);
       }
     });
+    // eslint-disable-next-line @typescript-eslint/unbound-method
     vi.mocked(simpleGit.simpleGit().revparse).mockResolvedValue("/Git/azure-rest-api-specs");
 
     const result = await new NpmPrefixRule().execute(mockFolder);
