@@ -77,37 +77,3 @@ See configuration in [readme.python.md](./readme.python.md)
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
-
-## Java
-
-These settings apply only when `--java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
-
-``` yaml $(java)
-azure-arm: true
-fluent: true
-namespace: com.microsoft.azure.management.servicegroups
-license-header: MICROSOFT_MIT_NO_CODEGEN
-payload-flattening-threshold: 1
-output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-servicegroups
-```
-
-### Java multi-api
-
-``` yaml $(java) && $(multiapi)
-batch:
-  - tag: 2024-02-01-preview
-```
-
-### Tag: package-2018-03 and java
-
-These settings apply only when `--tag=2024-02-01-preview --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == '2024-02-01-preview' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.servicegroups.v2024_02_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/sdk/servicegroups/mgmt-v2024_02_01_preview
-regenerate-manager: true
-generate-interface: true
-```
