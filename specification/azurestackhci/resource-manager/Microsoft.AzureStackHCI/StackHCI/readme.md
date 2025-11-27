@@ -52,20 +52,6 @@ directive:
       $.StorageAdapterIPInfo['x-ms-client-name'] = 'DeploymentSettingStorageAdapterIPInfo';
       $.AdapterPropertyOverrides['x-ms-client-name'] = 'DeploymentSettingAdapterPropertyOverrides';
       $.VirtualSwitchConfigurationOverrides['x-ms-client-name'] = 'DeploymentSettingVirtualSwitchConfigurationOverrides';
-  - from: swagger-document
-    where: 
-      - $.definitions.Extension.allOf[0]
-      - $.definitions.Offer.allOf[0]
-      - $.definitions.Publisher.allOf[0]
-      - $.definitions.Sku.allOf[0]
-      - $.definitions.UpdateRun.allOf[0]
-      - $.definitions.Update.allOf[0]
-      - $.definitions.UpdateSummaries.allOf[0]
-    transform: >
-      $['$ref'] = "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
-  - from: swagger-document
-    where: $.paths[*]..responses.default
-    transform: $.schema['$ref'] = "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
 ```
 
 ## Suppression
