@@ -43,6 +43,7 @@ interface ArcSettings {
   /**
    * Update ArcSettings for HCI cluster.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<ArcSetting, PatchModel = ArcSettingsPatch>;
 
@@ -78,22 +79,24 @@ interface ArcSettings {
    * Create Aad identity for arc settings.
    */
   @action("createArcIdentity")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createIdentity is ArmResourceActionAsync<
     ArcSetting,
     void,
     ArmResponse<ArcIdentityResponse>,
-    LroHeaders = ArmAsyncOperationHeader<FinalResult = ArcIdentityResponse> &
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = ArcIdentityResponse> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
    * Reconcile Arc Settings with information related to all nodes.
    */
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   reconcile is ArmResourceActionAsync<
     ArcSetting,
     ReconcileArcSettingsRequest,
     ArmResponse<ArcSetting>,
-    LroHeaders = ArmAsyncOperationHeader<FinalResult = ArcSetting> &
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = ArcSetting> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -109,12 +112,12 @@ interface ArcSettings {
   /**
    * Initializes ARC Disable process on the cluster
    */
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   initializeDisableProcess is ArmResourceActionAsync<
     ArcSetting,
     void,
     OkResponse,
-    LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   >;
 }
 

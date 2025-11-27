@@ -1732,7 +1732,7 @@ model ArcSettingProperties {
   /**
    * contains connectivity related configuration for ARC resources
    */
-  connectivityProperties?: unknown;
+  connectivityProperties?: ArcConnectivityProperties;
 
   /**
    * Properties for each of the default extensions category
@@ -1812,7 +1812,7 @@ model ArcSettingsPatchProperties {
   /**
    * contains connectivity related configuration for ARC resources
    */
-  connectivityProperties?: unknown;
+  connectivityProperties?: ArcConnectivityProperties;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -2047,7 +2047,7 @@ model ClusterProperties {
    * Identity Provider for the cluster
    */
   @visibility(Lifecycle.Read)
-  identityProvider?: IdentityProvider;
+  identityProvider?: IdentityProvider = IdentityProvider.ActiveDirectory;
 }
 
 /**
@@ -2100,6 +2100,7 @@ model LogCollectionProperties {
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   logCollectionSessionDetails?: LogCollectionSession[];
 }
 
@@ -2208,10 +2209,12 @@ model RemoteSupportProperties {
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   remoteSupportNodeSettings?: RemoteSupportNodeSettings[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   remoteSupportSessionDetails?: PerNodeRemoteSupportSession[];
 }
 
@@ -2922,7 +2925,7 @@ model DeploymentSecuritySettings {
   /**
    * When set to true, Credential Guard is enabled.
    */
-  credentialGuardEnforced?: boolean;
+  credentialGuardEnforced?: boolean = false;
 
   /**
    * When set to true, the SMB default instance requires sign in for the client and server services.
@@ -2932,7 +2935,7 @@ model DeploymentSecuritySettings {
   /**
    * When set to true, cluster east-west traffic is encrypted.
    */
-  smbClusterEncryption?: boolean;
+  smbClusterEncryption?: boolean = false;
 
   /**
    * When set to true, all the side channel mitigations are enabled
@@ -3212,16 +3215,19 @@ model QosPolicyOverrides {
   /**
    * This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   priorityValue8021Action_Cluster?: string;
 
   /**
    * This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   priorityValue8021Action_SMB?: string;
 
   /**
    * This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   bandwidthPercentage_SMB?: string;
 }
 
@@ -3267,6 +3273,7 @@ model DeploymentSettingStorageNetworks {
   /**
    * List of Storage adapter physical nodes config to deploy AzureStackHCI Cluster.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @identifiers(#["physicalNode"])
   storageAdapterIPInfo?: DeploymentSettingStorageAdapterIPInfo[];
 }
@@ -3672,11 +3679,13 @@ model ExtensionParameters {
   /**
    * Json formatted public settings for the extension.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   settings?: unknown;
 
   /**
    * Protected settings (may contain secrets).
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   protectedSettings?: unknown;
 
   /**
@@ -3813,11 +3822,13 @@ model ExtensionPatchParameters {
   /**
    * Json formatted public settings for the extension.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   settings?: unknown;
 
   /**
    * Protected settings (may contain secrets).
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   protectedSettings?: unknown;
 }
 
@@ -3913,17 +3924,17 @@ model SecurityProperties {
   /**
    * Secured Core Compliance Assignment
    */
-  securedCoreComplianceAssignment?: ComplianceAssignmentType;
+  securedCoreComplianceAssignment?: ComplianceAssignmentType = ComplianceAssignmentType.Audit;
 
   /**
    * WDAC Compliance Assignment
    */
-  wdacComplianceAssignment?: ComplianceAssignmentType;
+  wdacComplianceAssignment?: ComplianceAssignmentType = ComplianceAssignmentType.Audit;
 
   /**
    * SMB encryption for intra-cluster traffic Compliance Assignment
    */
-  smbEncryptionForIntraClusterTrafficComplianceAssignment?: ComplianceAssignmentType;
+  smbEncryptionForIntraClusterTrafficComplianceAssignment?: ComplianceAssignmentType = ComplianceAssignmentType.Audit;
 
   /**
    * Security Compliance Status
@@ -3934,6 +3945,7 @@ model SecurityProperties {
   /**
    * The status of the last operation.
    */
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -4294,6 +4306,7 @@ model PrecheckResult {
   /**
    * Key-value pairs that allow grouping/filtering individual tests.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   healthCheckTags?: unknown;
 
   /**
@@ -4324,6 +4337,7 @@ model PrecheckResult {
   /**
    * The unique identifier for the affected resource (such as a node or drive).
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   targetResourceID?: string;
 
   /**
@@ -5720,6 +5734,7 @@ model HciEdgeDeviceStorageNetworks {
   /**
    * List of Storage adapter physical nodes config to deploy AzureStackHCI Cluster.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @identifiers(#["physicalNode"])
   storageAdapterIPInfo?: HciEdgeDeviceStorageAdapterIPInfo[];

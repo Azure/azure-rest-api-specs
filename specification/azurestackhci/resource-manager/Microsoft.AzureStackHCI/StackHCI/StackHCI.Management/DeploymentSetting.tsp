@@ -51,3 +51,4 @@ interface DeploymentSettings {
 @@doc(DeploymentSetting.properties,
   "The resource-specific properties for this resource."
 );
+@@visibility(DeploymentSetting.properties, Lifecycle.Read, Lifecycle.Create);

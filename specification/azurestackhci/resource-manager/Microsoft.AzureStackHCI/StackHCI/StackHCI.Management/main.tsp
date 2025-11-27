@@ -37,6 +37,7 @@ using TypeSpec.Versioning;
 /**
  * Azure Stack HCI service
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armProviderNamespace
 @service(#{ title: "Microsoft.AzureStackHCI" })
 @versioned(Versions)

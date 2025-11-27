@@ -15,19 +15,13 @@ namespace Microsoft.AzureStackHCI;
  * Edge device resource.
  */
 @extensionResource
-model EdgeDevice is Azure.ResourceManager.ExtensionResource<{}> {
+model EdgeDevice
+  is Azure.ResourceManager.Legacy.DiscriminatedExtensionResource<DeviceKind> {
   @path
   @key("edgeDeviceName")
   @segment("edgeDevices")
   @pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string = "default";
-
-  /**
-   * Device kind to support polymorphic resource.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  kind: DeviceKind = DeviceKind.HCI;
 }
 
 @armResourceOperations
@@ -69,7 +63,7 @@ interface EdgeDevices {
     Azure.ResourceManager.Extension.ScopeParameter,
     EdgeDevice,
     ValidateRequest,
-    ArmResponse<ValidateResponse>
+    ValidateResponse
   >;
 }
 @@doc(EdgeDevice.name, "Name of Device");

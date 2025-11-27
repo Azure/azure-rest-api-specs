@@ -84,16 +84,17 @@ interface Clusters {
   updateSecretsLocations is ArmResourceActionAsync<
     Cluster,
     SecretsLocationsChangeRequest,
-    ArmResponse<Cluster>
+    Cluster
   >;
 
   /**
    * Upload certificate.
    */
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   uploadCertificate is ArmResourceActionAsyncBase<
     Cluster,
     UploadCertificateRequest,
-    ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+    ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
       Azure.Core.Foundations.RetryAfterHeader>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Cluster>
   >;
@@ -101,12 +102,13 @@ interface Clusters {
   /**
    * Create cluster identity.
    */
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   @action("createClusterIdentity")
   createIdentity is ArmResourceActionAsync<
     Cluster,
     void,
     ArmResponse<ClusterIdentityResponse>,
-    LroHeaders = ArmAsyncOperationHeader<FinalResult = ClusterIdentityResponse> &
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = ClusterIdentityResponse> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -116,17 +118,13 @@ interface Clusters {
   extendSoftwareAssuranceBenefit is ArmResourceActionAsync<
     Cluster,
     SoftwareAssuranceChangeRequest,
-    ArmResponse<Cluster>
+    Cluster
   >;
 
   /**
    * Changes ring of a cluster
    */
-  changeRing is ArmResourceActionAsync<
-    Cluster,
-    ChangeRingRequest,
-    ArmResponse<Cluster>
-  >;
+  changeRing is ArmResourceActionAsync<Cluster, ChangeRingRequest, Cluster>;
 
   /**
    * Trigger Log Collection on a cluster
@@ -134,7 +132,7 @@ interface Clusters {
   triggerLogCollection is ArmResourceActionAsync<
     Cluster,
     LogCollectionRequest,
-    ArmResponse<Cluster>
+    Cluster
   >;
 
   /**
@@ -143,7 +141,7 @@ interface Clusters {
   configureRemoteSupport is ArmResourceActionAsync<
     Cluster,
     RemoteSupportRequest,
-    ArmResponse<Cluster>
+    Cluster
   >;
 
   /**

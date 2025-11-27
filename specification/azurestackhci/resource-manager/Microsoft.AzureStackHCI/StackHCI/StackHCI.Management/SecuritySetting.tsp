@@ -51,3 +51,4 @@ interface SecuritySettings {
 @@doc(SecuritySetting.properties,
   "The resource-specific properties for this resource."
 );
+@@visibility(SecuritySetting.properties, Lifecycle.Read, Lifecycle.Create);

@@ -17,19 +17,20 @@ namespace Microsoft.AzureStackHCI;
  */
 @extensionResource
 @parentResource(EdgeDevice)
-model EdgeDeviceJob is Azure.ResourceManager.ExtensionResource<{}> {
+model EdgeDeviceJob
+  is Azure.ResourceManager.Legacy.DiscriminatedExtensionResource<EdgeDeviceKind> {
   ...ResourceNameParameter<
     Resource = EdgeDeviceJob,
     KeyName = "jobsName",
     SegmentName = "jobs"
   >;
 
-  /**
-   * Edge Solution type to support polymorphic resource.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  kind: EdgeDeviceKind = EdgeDeviceKind.HCI;
+  // /**
+  //  * Edge Solution type to support polymorphic resource.
+  //  */
+  // #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  // @visibility(Lifecycle.Read, Lifecycle.Create)
+  // kind: EdgeDeviceKind = EdgeDeviceKind.HCI;
 }
 
 @armResourceOperations

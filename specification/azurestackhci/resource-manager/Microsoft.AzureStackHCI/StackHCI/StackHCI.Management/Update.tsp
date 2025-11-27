@@ -67,12 +67,12 @@ interface Updates {
    * Apply Update
    */
   @action("apply")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   post is ArmResourceActionAsync<
     Update,
     void,
     OkResponse,
-    LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   >;
 }
 

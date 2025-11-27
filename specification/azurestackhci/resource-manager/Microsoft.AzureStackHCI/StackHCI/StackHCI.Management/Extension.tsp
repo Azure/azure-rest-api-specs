@@ -39,6 +39,8 @@ interface Extensions {
   /**
    * Update Extension for HCI cluster.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   @Azure.Core.useFinalStateVia("original-uri")
   update is ArmCustomPatchAsync<
@@ -53,9 +55,10 @@ interface Extensions {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   delete is ArmResourceDeleteWithoutOkAsync<
     Extension,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders &
       Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
   >;
 
@@ -70,6 +73,7 @@ interface Extensions {
   /**
    * Upgrade a particular Arc Extension of HCI Cluster.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   upgrade is ArmResourceActionAsyncBase<
     Extension,
     ExtensionUpgradeParameters,
