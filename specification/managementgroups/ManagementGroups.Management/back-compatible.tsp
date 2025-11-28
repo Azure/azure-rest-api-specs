@@ -85,9 +85,9 @@ using Rest;
   "checkNameAvailabilityRequest"
 );
 
-@@clientLocation(checkNameAvailability, "API");
-@@clientLocation(startTenantBackfill, "API");
-@@clientLocation(tenantBackfillStatus, "API");
+@@clientLocation(checkNameAvailability, "API", "go");
+@@clientLocation(startTenantBackfill, "API", "go");
+@@clientLocation(tenantBackfillStatus, "API", "go");
 
 // Customization to make subscriptionId a method parameter instead of the default client level parameter.
 @@override(SubscriptionUnderManagementGroups.getSubscription,
