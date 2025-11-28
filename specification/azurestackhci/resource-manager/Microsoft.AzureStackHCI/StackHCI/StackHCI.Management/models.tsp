@@ -2510,6 +2510,7 @@ model IsolatedVmAttestationConfiguration {
   attestationResourceId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Attestation/attestationProviders";
+      scopes: ["Tenant"];
     }
   ]>;
 
@@ -2791,6 +2792,11 @@ model DeploymentConfiguration {
 /**
  * Scale units will contains list of deployment data
  */
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@OpenAPI.externalDocs(
+  "https://learn.microsoft.com/en-us/azure-stack/hci/deploy/deployment-tool-existing-file",
+  "Deploy Azure Stack HCI using an existing configuration file"
+)
 model ScaleUnits {
   /**
    * Deployment Data to deploy AzureStackHCI Cluster.
@@ -2970,7 +2976,7 @@ model Observability {
   /**
    * Location of your cluster. The log and diagnostic data is sent to the appropriate diagnostics servers depending upon where your cluster resides. Setting this to false results in all data sent to Microsoft to be stored outside of the EU.
    */
-  euLocation?: boolean;
+  euLocation?: boolean = false;
 
   /**
    * When set to true, collects log data to facilitate quicker issue resolution.
@@ -3686,6 +3692,7 @@ model ExtensionParameters {
    * Protected settings (may contain secrets).
    */
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @secret
   protectedSettings?: unknown;
 
   /**
@@ -3829,6 +3836,7 @@ model ExtensionPatchParameters {
    * Protected settings (may contain secrets).
    */
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @secret
   protectedSettings?: unknown;
 }
 
