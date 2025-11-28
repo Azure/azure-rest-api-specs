@@ -1,6 +1,7 @@
 import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
+using Http;
 using Azure.ClientGenerator.Core;
 using Microsoft.CostManagement;
 
@@ -31,3 +32,54 @@ using Microsoft.CostManagement;
 @@clientName(ScheduledAction.eTag, "etag", "java");
 @@clientName(Export.eTag, "etag", "java");
 @@clientName(Alert.eTag, "etag", "java");
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op GetGenerateDetailedCostReportOperationResultCustomized(
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  extensionProvider: "Microsoft.CostManagement",
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @query("api-version")
+  apiVersion: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path("operationId")
+  operationId: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path(#{ allowReserved: true })
+  scope: string,
+): GenerateDetailedCostReportOperationResult;
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op GetGenerateDetailedCostReportOperationStatusCustomized(
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  extensionProvider: "Microsoft.CostManagement",
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @query("api-version")
+  apiVersion: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path("operationId")
+  operationId: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path(#{ allowReserved: true })
+  scope: string,
+): GenerateDetailedCostReportOperationStatus;
+
+@@override(GenerateDetailedCostReportOperationResults.get,
+  GetGenerateDetailedCostReportOperationResultCustomized,
+  "python,go,java,javascript"
+);
+@@override(GenerateDetailedCostReportOperationStatus.get,
+  GetGenerateDetailedCostReportOperationStatusCustomized,
+  "python,go,java,javascript"
+);
