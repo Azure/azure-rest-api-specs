@@ -33,44 +33,6 @@
       }
     }
   },
-  "paths": {
-    "/providers/Microsoft.SecurityInsights/operations": {
-      "get": {
-        "x-ms-examples": {
-          "Get all operations.": {
-            "$ref": "./examples/operations/ListOperations.json"
-          }
-        },
-        "operationId": "Operations_List",
-        "description": "Lists all operations available Azure Security Insights Resource Provider.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. Successfully retrieved operations list.",
-            "schema": {
-              "$ref": "#/definitions/OperationsList"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    }
-  },
   "definitions": {
     "OperationsList": {
       "description": "Lists the operations available in the SecurityInsights RP.",
