@@ -48,6 +48,9 @@ enum Versions {
 union ServiceProvisioningStatus {
   string,
 
+  @doc("The object is succeed provisioning.")
+  succeed: "succeed",
+
   @doc("The object is pending provisioning.")
   pending: "pending",
 
