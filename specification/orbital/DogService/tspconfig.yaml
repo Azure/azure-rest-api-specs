@@ -1,0 +1,21 @@
+parameters:
+  "service-dir":
+    default: "sdk/dogs"
+  "dependencies":
+    default: ""
+emit:
+  - "@azure-tools/typespec-autorest"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "data-plane"
+    emitter-output-dir: "{project-root}/.."
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
+  "@azure-tools/typespec-python":
+    package-dir: "azure-dogs"
+    namespace: "azure.dogs"
+    generate-test: true
+    generate-sample: true
+    flavor: azure

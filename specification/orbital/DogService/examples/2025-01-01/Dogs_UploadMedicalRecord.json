@@ -1,0 +1,20 @@
+{
+  "title": "Upload dog medical record",
+  "operationId": "DogOperations_UploadMedicalRecord",
+  "parameters": {
+    "api-version": "2025-01-01"
+  },
+  "body": {
+    "medicalRecord": "---multipart-boundary\nContent-Disposition: form-data; name=\"image\"\nContent-Type: image/jpeg\n\n<binary JPEG data>\n---multipart-boundary--"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "message": "Medical record uploaded successfully",
+        "recordId": "med_67890",
+        "fileSize": 524288,
+        "timestamp": "2025-01-01T10:15:00Z"
+      }
+    }
+  }
+}
