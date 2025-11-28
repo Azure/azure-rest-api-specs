@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "ApplicationClient",
-    "version": "2023-12-01-preview",
+    "version": "2018-03-01",
     "description": "ARM applications"
   },
   "host": "management.azure.com",
@@ -48,20 +48,20 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/OperationListResult"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -84,33 +84,46 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "name": "applicationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the managed application.",
+            "minLength": 3,
+            "maxLength": 64
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ApplicationNameParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
-          "404": {
-            "description": "NotFound.",
-            "x-ms-error-response": false
-          },
           "200": {
             "description": "OK - Returns the managed application.",
             "schema": {
               "$ref": "#/definitions/Application"
             }
           },
+          "404": {
+            "description": "NotFound",
+            "x-ms-error-response": false
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -122,30 +135,43 @@
         "operationId": "Applications_Delete",
         "description": "Deletes the managed application.",
         "x-ms-examples": {
-          "Delete managed application": {
+          "Deletes a managed application": {
             "$ref": "./examples/deleteApplication.json"
           }
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "name": "applicationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the managed application.",
+            "minLength": 3,
+            "maxLength": 64
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ApplicationNameParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
           "204": {
             "description": "NoContent"
+          },
+          "200": {
+            "description": "OK."
           },
           "202": {
             "description": "Accepted - Returns this status until the asynchronous operation has completed."
@@ -153,7 +179,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -175,16 +201,23 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/ApplicationNameParameter"
+            "name": "applicationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the managed application.",
+            "minLength": 3,
+            "maxLength": 64
           },
           {
             "name": "parameters",
@@ -194,11 +227,17 @@
               "$ref": "#/definitions/Application"
             },
             "description": "Parameters supplied to the create or update a managed application."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns information about the managed application, including provisioning status.",
+            "description": "Created - Returns information about the managed application, including provisioning status.",
             "schema": {
               "$ref": "#/definitions/Application"
             }
@@ -212,7 +251,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -228,22 +267,29 @@
         "operationId": "Applications_Update",
         "description": "Updates an existing managed application.",
         "x-ms-examples": {
-          "Updates managed application": {
+          "Create or update managed application": {
             "$ref": "./examples/updateApplication.json"
           }
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/ApplicationNameParameter"
+            "name": "applicationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the managed application.",
+            "minLength": 3,
+            "maxLength": 64
           },
           {
             "name": "parameters",
@@ -252,6 +298,12 @@
               "$ref": "#/definitions/ApplicationPatchable"
             },
             "description": "Parameters supplied to update an existing managed application."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -270,7 +322,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -294,16 +346,29 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "name": "applicationDefinitionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the managed application definition.",
+            "minLength": 3,
+            "maxLength": 64
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ApplicationDefinitionNameParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -320,7 +385,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -332,22 +397,35 @@
         "operationId": "ApplicationDefinitions_Delete",
         "description": "Deletes the managed application definition.",
         "x-ms-examples": {
-          "delete managed application definition": {
+          "Deletes a managed application": {
             "$ref": "./examples/deleteApplicationDefinition.json"
           }
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "name": "applicationDefinitionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the managed application definition to delete.",
+            "minLength": 3,
+            "maxLength": 64
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ApplicationDefinitionNameParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -360,7 +438,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -370,7 +448,7 @@
           "ApplicationDefinitions"
         ],
         "operationId": "ApplicationDefinitions_CreateOrUpdate",
-        "description": "Creates or updates a managed application definition.",
+        "description": "Creates or update a managed application definition.",
         "x-ms-examples": {
           "Create or update managed application definition": {
             "$ref": "./examples/createOrUpdateApplicationDefinition.json"
@@ -378,16 +456,23 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/ApplicationDefinitionNameParameter"
+            "name": "applicationDefinitionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the managed application definition.",
+            "minLength": 3,
+            "maxLength": 64
           },
           {
             "name": "parameters",
@@ -397,6 +482,12 @@
               "$ref": "#/definitions/ApplicationDefinition"
             },
             "description": "Parameters supplied to the create or update an managed application definition."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -415,7 +506,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -433,16 +524,22 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ApplicationDefinitionNameParameter"
+            "name": "applicationDefinitionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the managed application definition.",
+            "minLength": 3,
+            "maxLength": 64
           },
           {
             "name": "parameters",
@@ -464,7 +561,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -484,13 +581,20 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -503,46 +607,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Solutions/applicationDefinitions": {
-      "get": {
-        "tags": [
-          "ApplicationDefinitions"
-        ],
-        "operationId": "ApplicationDefinitions_ListBySubscription",
-        "description": "Lists all the application definitions within a subscription.",
-        "x-ms-examples": {
-          "Lists all the application definitions within a subscription": {
-            "$ref": "./examples/listApplicationDefinitionsBySubscription.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK - Returns an array of managed application definitions.",
-            "schema": {
-              "$ref": "#/definitions/ApplicationDefinitionListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -565,13 +630,20 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -584,7 +656,46 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Solutions/applicationDefinitions": {
+      "get": {
+        "tags": [
+          "ApplicationDefinitions"
+        ],
+        "operationId": "ApplicationDefinitions_ListBySubscription",
+        "description": "Lists the managed application definitions in a subscription.",
+        "x-ms-examples": {
+          "List managed application definitions in a subscription": {
+            "$ref": "./examples/listApplicationDefinitionsBySubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns an array of managed application definitions.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationDefinitionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -602,15 +713,15 @@
         "description": "Lists all the applications within a subscription.",
         "x-ms-examples": {
           "Lists all the applications within a subscription": {
-            "$ref": "./examples/listApplicationsByResourceGroup.json"
+            "$ref": "./examples/listApplicationsBySubscription.json"
           }
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -623,7 +734,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -654,7 +765,7 @@
             "x-ms-skip-url-encoding": true
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -671,7 +782,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -697,15 +808,15 @@
             "x-ms-skip-url-encoding": true
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
-          "200": {
-            "description": "NoContent"
-          },
           "204": {
             "description": "NoContent"
+          },
+          "200": {
+            "description": "OK"
           },
           "202": {
             "description": "Accepted - Returns this status until the asynchronous operation has completed."
@@ -713,7 +824,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -752,12 +863,12 @@
             "description": "Parameters supplied to the create or update a managed application."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns information about the managed application, including provisioning status.",
+            "description": "Created - Returns information about the managed application, including provisioning status.",
             "schema": {
               "$ref": "#/definitions/Application"
             }
@@ -771,7 +882,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -809,12 +920,12 @@
             "description": "Parameters supplied to update an existing managed application."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns information about the managed application, including provisioning status.",
+            "description": "OK.",
             "schema": {
               "$ref": "#/definitions/ApplicationPatchable"
             }
@@ -828,7 +939,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -846,22 +957,33 @@
         "operationId": "JitRequests_Get",
         "description": "Gets the JIT request.",
         "x-ms-examples": {
-          "Gets the jit request": {
+          "Gets the JIT request": {
             "$ref": "./examples/getJitRequest.json"
           }
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "name": "jitRequestName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the JIT request."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/JitRequestNameParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -878,7 +1000,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -890,22 +1012,27 @@
         "operationId": "jitRequests_CreateOrUpdate",
         "description": "Creates or updates the JIT request.",
         "x-ms-examples": {
-          "Create or update jit request": {
+          "Creates or updates the JIT request": {
             "$ref": "./examples/createOrUpdateJitRequest.json"
           }
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/JitRequestNameParameter"
+            "name": "jitRequestName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the JIT request."
           },
           {
             "name": "parameters",
@@ -915,6 +1042,12 @@
               "$ref": "#/definitions/JitRequestDefinition"
             },
             "description": "Parameters supplied to the update JIT request."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -933,7 +1066,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -949,22 +1082,27 @@
         "operationId": "JitRequests_Update",
         "description": "Updates the JIT request.",
         "x-ms-examples": {
-          "Update jit request": {
+          "Updates the JIT request": {
             "$ref": "./examples/updateJitRequest.json"
           }
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/JitRequestNameParameter"
+            "name": "jitRequestName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the JIT request."
           },
           {
             "name": "parameters",
@@ -974,6 +1112,12 @@
               "$ref": "#/definitions/JitRequestPatchable"
             },
             "description": "Parameters supplied to the update JIT request."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -986,7 +1130,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -998,22 +1142,33 @@
         "operationId": "jitRequests_Delete",
         "description": "Deletes the JIT request.",
         "x-ms-examples": {
-          "Delete jit request": {
+          "Deletes the JIT request": {
             "$ref": "./examples/deleteJitRequest.json"
           }
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "name": "jitRequestName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the JIT request."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/JitRequestNameParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -1026,7 +1181,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -1041,15 +1196,15 @@
         "description": "Lists all JIT requests within the subscription.",
         "x-ms-examples": {
           "Lists all JIT requests within the subscription": {
-            "$ref": "./examples/listJitRequestsByResourceGroup.json"
+            "$ref": "./examples/listJitRequestsBySubscription.json"
           }
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -1062,7 +1217,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -1082,13 +1237,20 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -1101,7 +1263,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -1115,22 +1277,35 @@
         "operationId": "Applications_RefreshPermissions",
         "description": "Refresh Permissions for application.",
         "x-ms-examples": {
-          "Refresh managed application permissions": {
+          "Refresh Permissions for application": {
             "$ref": "./examples/refreshApplicationPermissions.json"
           }
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "name": "applicationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the managed application.",
+            "minLength": 3,
+            "maxLength": 64
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ApplicationNameParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -1143,55 +1318,13 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Solutions/applications/{applicationName}/listAllowedUpgradePlans": {
-      "post": {
-        "tags": [
-          "Applications"
-        ],
-        "operationId": "Applications_ListAllowedUpgradePlans",
-        "description": "List allowed upgrade plans for application.",
-        "x-ms-examples": {
-          "List allowed upgrade plans for application": {
-            "$ref": "./examples/listAllowedUpgradePlans.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/ApplicationNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK - Returns an array of managed identity tokens.",
-            "schema": {
-              "$ref": "#/definitions/AllowedUpgradePlansResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
         }
       }
     },
@@ -1209,10 +1342,10 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "applicationName",
@@ -1224,7 +1357,7 @@
             "maxLength": 64
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "parameters",
@@ -1233,7 +1366,7 @@
             "schema": {
               "$ref": "#/definitions/UpdateAccessDefinition"
             },
-            "description": "Request body parameters to list tokens."
+            "description": "Request body parameters to update access."
           }
         ],
         "responses": {
@@ -1249,7 +1382,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1273,10 +1406,10 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "applicationName",
@@ -1288,7 +1421,7 @@
             "maxLength": 64
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "parameters",
@@ -1310,49 +1443,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.Solutions/portalRegistryPackage": {
-      "post": {
-        "tags": [
-          "PortalRegistryPackage"
-        ],
-        "operationId": "PortalRegistryPackage",
-        "description": "Generates the registry package links for Managed Applications and Solution Templates.",
-        "x-ms-examples": {
-          "Generates a registry package": {
-            "$ref": "./examples/portalRegistryPackage.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/RegistryPackagePlan"
-            },
-            "description": "Request body parameters to get registry packages."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Returns information about the registry package and generated links.",
-            "schema": {
-              "$ref": "#/definitions/RegistryPackage"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -1393,10 +1484,10 @@
             "maxLength": 64
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -1413,7 +1504,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -1450,10 +1541,10 @@
             "maxLength": 64
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -1466,7 +1557,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -1503,10 +1594,10 @@
             "maxLength": 64
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "name": "parameters",
@@ -1534,7 +1625,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -1552,16 +1643,22 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ApplicationDefinitionNameParameter"
+            "name": "applicationDefinitionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the managed application definition.",
+            "minLength": 3,
+            "maxLength": 64
           },
           {
             "name": "parameters",
@@ -1583,7 +1680,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -1592,7 +1689,6 @@
   },
   "definitions": {
     "Application": {
-      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -1625,7 +1721,6 @@
       "description": "Information about managed application."
     },
     "ApplicationPatchable": {
-      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -1654,7 +1749,6 @@
       "description": "Information about managed application."
     },
     "ApplicationDefinition": {
-      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -1673,7 +1767,6 @@
       "description": "Information about managed application definition."
     },
     "ApplicationProperties": {
-      "type": "object",
       "properties": {
         "managedResourceGroupId": {
           "type": "string",
@@ -1682,6 +1775,10 @@
         "applicationDefinitionId": {
           "type": "string",
           "description": "The fully qualified path of managed application definition Id."
+        },
+        "publisherPackageId": {
+          "type": "string",
+          "description": "The publisher package Id."
         },
         "parameters": {
           "type": "object",
@@ -1717,15 +1814,6 @@
           "items": {
             "$ref": "#/definitions/ApplicationAuthorization"
           },
-          "x-ms-identifiers": [
-            "principalId",
-            "roleDefinitionId"
-          ],
-          "readOnly": true
-        },
-        "managementMode": {
-          "$ref": "#/definitions/ApplicationManagementMode",
-          "description": "The managed application management mode.",
           "readOnly": true
         },
         "customerSupport": {
@@ -1744,10 +1832,6 @@
           "items": {
             "$ref": "#/definitions/ApplicationArtifact"
           },
-          "x-ms-identifiers": [
-            "name",
-            "uri"
-          ],
           "readOnly": true
         },
         "createdBy": {
@@ -1763,8 +1847,34 @@
       },
       "description": "The managed application properties."
     },
+    "ApplicationPropertiesPatchable": {
+      "properties": {
+        "managedResourceGroupId": {
+          "type": "string",
+          "description": "The managed resource group Id."
+        },
+        "applicationDefinitionId": {
+          "type": "string",
+          "description": "The fully qualified path of managed application definition Id."
+        },
+        "parameters": {
+          "type": "object",
+          "description": "Name and value pairs that define the managed application parameters. It can be a JObject or a well formed JSON string."
+        },
+        "outputs": {
+          "readOnly": true,
+          "type": "object",
+          "description": "Name and value pairs that define the managed application outputs."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The managed application provisioning state."
+        }
+      },
+      "description": "The managed application properties."
+    },
     "ApplicationDefinitionProperties": {
-      "type": "object",
       "properties": {
         "lockLevel": {
           "$ref": "#/definitions/ApplicationLockLevel",
@@ -1783,22 +1893,14 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ApplicationAuthorization"
-          },
-          "x-ms-identifiers": [
-            "principalId",
-            "roleDefinitionId"
-          ]
+          }
         },
         "artifacts": {
           "description": "The collection of managed application artifacts. The portal will use the files specified as artifacts to construct the user experience of creating a managed application from a managed application definition.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ApplicationDefinitionArtifact"
-          },
-          "x-ms-identifiers": [
-            "name",
-            "uri"
-          ]
+          }
         },
         "description": {
           "type": "string",
@@ -1808,10 +1910,6 @@
           "type": "string",
           "description": "The managed application definition package file Uri. Use this element"
         },
-        "storageAccountId": {
-          "type": "string",
-          "description": "The storage account id for bring your own storage scenario."
-        },
         "mainTemplate": {
           "type": "object",
           "description": "The inline main template json which has resources to be provisioned. It can be a JObject or well-formed JSON string."
@@ -1820,32 +1918,12 @@
           "type": "object",
           "description": "The createUiDefinition json for the backing template with Microsoft.Solutions/applications resource. It can be a JObject or well-formed JSON string."
         },
-        "notificationPolicy": {
-          "$ref": "#/definitions/ApplicationNotificationPolicy",
-          "description": "The managed application notification policy."
-        },
-        "lockingPolicy": {
-          "$ref": "#/definitions/ApplicationPackageLockingPolicyDefinition",
-          "description": "The managed application locking policy."
-        },
-        "deploymentPolicy": {
-          "$ref": "#/definitions/ApplicationDeploymentPolicy",
-          "description": "The managed application deployment policy."
-        },
-        "managementPolicy": {
-          "$ref": "#/definitions/ApplicationManagementPolicy",
-          "description": "The managed application management policy that determines publisher's access to the managed resource group."
-        },
         "policies": {
           "description": "The managed application provider policies.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ApplicationPolicy"
-          },
-          "x-ms-identifiers": [
-            "name",
-            "policyDefinitionId"
-          ]
+          }
         }
       },
       "required": [
@@ -1866,81 +1944,7 @@
       },
       "description": "Information about an application definition request."
     },
-    "RegistryPackage": {
-      "type": "object",
-      "properties": {
-        "publisher": {
-          "type": "string",
-          "description": "The publisher"
-        },
-        "offer": {
-          "type": "string",
-          "description": "The offer Id"
-        },
-        "plan": {
-          "type": "string",
-          "description": "The plan Id"
-        },
-        "version": {
-          "type": "string",
-          "description": "The version of the plan"
-        },
-        "packageLinks": {
-          "$ref": "#/definitions/RegistryPackageLinks",
-          "description": "The registry package links."
-        }
-      },
-      "required": [
-        "offer",
-        "publisher",
-        "plan",
-        "packageLinks"
-      ],
-      "description": "Information about an application definition request."
-    },
-    "RegistryPackageLinks": {
-      "type": "object",
-      "properties": {
-        "createUiDefinitionLink": {
-          "type": "string",
-          "description": "The create ui definition link."
-        },
-        "deploymentTemplateLink": {
-          "type": "string",
-          "description": "The deployment template link."
-        }
-      },
-      "description": "Resource information."
-    },
-    "RegistryPackagePlan": {
-      "type": "object",
-      "properties": {
-        "publisher": {
-          "type": "string",
-          "description": "The publisher ID."
-        },
-        "offer": {
-          "type": "string",
-          "description": "The offer Id."
-        },
-        "plan": {
-          "type": "string",
-          "description": "The plan Id."
-        },
-        "version": {
-          "type": "string",
-          "description": "The plan's version."
-        }
-      },
-      "required": [
-        "offer",
-        "publisher",
-        "plan"
-      ],
-      "description": "Plan for the managed application."
-    },
     "Plan": {
-      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -1972,7 +1976,6 @@
       "description": "Plan for the managed application."
     },
     "PlanPatchable": {
-      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -1998,7 +2001,6 @@
       "description": "Plan for the managed application."
     },
     "GenericResource": {
-      "type": "object",
       "properties": {
         "managedBy": {
           "type": "string",
@@ -2017,7 +2019,6 @@
       "description": "Resource information."
     },
     "Sku": {
-      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -2051,7 +2052,6 @@
       "description": "SKU for the resource."
     },
     "Identity": {
-      "type": "object",
       "properties": {
         "principalId": {
           "readOnly": true,
@@ -2088,7 +2088,6 @@
       "description": "Identity for the resource."
     },
     "userAssignedResourceIdentity": {
-      "type": "object",
       "properties": {
         "principalId": {
           "readOnly": true,
@@ -2104,7 +2103,6 @@
       "description": "Represents the user assigned identity that is contained within the UserAssignedIdentities dictionary on ResourceIdentity"
     },
     "Resource": {
-      "type": "object",
       "properties": {
         "id": {
           "readOnly": true,
@@ -2131,17 +2129,12 @@
             "type": "string"
           },
           "description": "Resource tags"
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "readOnly": true
         }
       },
       "description": "Resource information.",
       "x-ms-azure-resource": true
     },
     "ApplicationListResult": {
-      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -2158,7 +2151,6 @@
       "description": "List of managed applications."
     },
     "ApplicationDefinitionListResult": {
-      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -2181,6 +2173,9 @@
         "NotSpecified",
         "Accepted",
         "Running",
+        "Ready",
+        "Creating",
+        "Created",
         "Deleting",
         "Deleted",
         "Canceled",
@@ -2249,7 +2244,6 @@
       }
     },
     "ApplicationArtifact": {
-      "type": "object",
       "properties": {
         "name": {
           "$ref": "#/definitions/ApplicationArtifactName",
@@ -2272,7 +2266,6 @@
       "description": "Managed application artifact."
     },
     "ApplicationDefinitionArtifact": {
-      "type": "object",
       "properties": {
         "name": {
           "$ref": "#/definitions/ApplicationDefinitionArtifactName",
@@ -2294,83 +2287,7 @@
       ],
       "description": "Application definition artifact."
     },
-    "ApplicationNotificationPolicy": {
-      "type": "object",
-      "properties": {
-        "notificationEndpoints": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ApplicationNotificationEndpoint"
-          },
-          "x-ms-identifiers": [
-            "uri"
-          ],
-          "description": "The managed application notification endpoint."
-        }
-      },
-      "required": [
-        "notificationEndpoints"
-      ],
-      "description": "Managed application notification policy."
-    },
-    "ApplicationNotificationEndpoint": {
-      "type": "object",
-      "properties": {
-        "uri": {
-          "type": "string",
-          "description": "The managed application notification endpoint uri."
-        }
-      },
-      "required": [
-        "uri"
-      ],
-      "description": "Managed application notification endpoint."
-    },
-    "ApplicationPackageLockingPolicyDefinition": {
-      "type": "object",
-      "properties": {
-        "allowedActions": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "The deny assignment excluded actions."
-        },
-        "allowedDataActions": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "The deny assignment excluded data actions."
-        }
-      },
-      "description": "Managed application locking policy."
-    },
-    "ApplicationDeploymentPolicy": {
-      "type": "object",
-      "properties": {
-        "deploymentMode": {
-          "$ref": "#/definitions/DeploymentMode",
-          "description": "The managed application deployment mode."
-        }
-      },
-      "required": [
-        "deploymentMode"
-      ],
-      "description": "Managed application deployment policy."
-    },
-    "ApplicationManagementPolicy": {
-      "type": "object",
-      "properties": {
-        "mode": {
-          "$ref": "#/definitions/ApplicationManagementMode",
-          "description": "The managed application management mode."
-        }
-      },
-      "description": "Managed application management policy."
-    },
     "ApplicationPolicy": {
-      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -2388,7 +2305,6 @@
       "description": "Managed application policy."
     },
     "ApplicationAuthorization": {
-      "type": "object",
       "properties": {
         "principalId": {
           "type": "string",
@@ -2406,7 +2322,6 @@
       "description": "The managed application provider authorization."
     },
     "ApplicationPackageContact": {
-      "type": "object",
       "properties": {
         "contactName": {
           "type": "string",
@@ -2428,7 +2343,6 @@
       "description": "The application package contact information."
     },
     "ApplicationPackageSupportUrls": {
-      "type": "object",
       "properties": {
         "publicAzure": {
           "type": "string",
@@ -2442,7 +2356,6 @@
       "description": "The appliance package support URLs."
     },
     "ApplicationBillingDetailsDefinition": {
-      "type": "object",
       "properties": {
         "resourceUsageId": {
           "type": "string",
@@ -2452,7 +2365,6 @@
       "description": "Managed application billing details definition."
     },
     "ApplicationJitAccessPolicy": {
-      "type": "object",
       "properties": {
         "jitAccessEnabled": {
           "type": "boolean",
@@ -2480,7 +2392,6 @@
       "description": "Managed application Jit access policy."
     },
     "JitRequestDefinition": {
-      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -2496,7 +2407,6 @@
       "description": "Information about JIT request definition."
     },
     "JitRequestPatchable": {
-      "type": "object",
       "properties": {
         "tags": {
           "type": "object",
@@ -2509,7 +2419,6 @@
       "description": "Information about JIT request."
     },
     "JitRequestDefinitionListResult": {
-      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -2526,7 +2435,6 @@
       "description": "List of JIT requests."
     },
     "JitRequestProperties": {
-      "type": "object",
       "properties": {
         "applicationResourceId": {
           "type": "string",
@@ -2542,11 +2450,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/JitAuthorizationPolicies"
-          },
-          "x-ms-identifiers": [
-            "principalId",
-            "roleDefinitionId"
-          ]
+          }
         },
         "jitSchedulingPolicy": {
           "$ref": "#/definitions/JitSchedulingPolicy",
@@ -2581,7 +2485,6 @@
       "description": "Information about JIT request properties"
     },
     "JitAuthorizationPolicies": {
-      "type": "object",
       "properties": {
         "principalId": {
           "type": "string",
@@ -2599,7 +2502,6 @@
       "description": "The JIT authorization policies."
     },
     "JitSchedulingPolicy": {
-      "type": "object",
       "properties": {
         "type": {
           "$ref": "#/definitions/JitSchedulingType",
@@ -2637,7 +2539,6 @@
       }
     },
     "JitApproverDefinition": {
-      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -2666,7 +2567,6 @@
       "description": "JIT approver definition."
     },
     "ApplicationClientDetails": {
-      "type": "object",
       "readOnly": true,
       "properties": {
         "oid": {
@@ -2714,6 +2614,33 @@
       "x-ms-enum": {
         "name": "JitSchedulingType",
         "modelAsString": true
+      }
+    },
+    "Operation": {
+      "description": "Microsoft.Solutions operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "display": {
+          "description": "The object that represents the operation.",
+          "properties": {
+            "provider": {
+              "description": "Service provider: Microsoft.Solutions",
+              "type": "string"
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed: Application, JitRequest, etc.",
+              "type": "string"
+            },
+            "operation": {
+              "description": "Operation type: Read, write, delete, etc.",
+              "type": "string"
+            }
+          }
+        }
       }
     },
     "DeploymentMode": {
@@ -2882,48 +2809,22 @@
     "UserAssignedIdentity": {
       "type": "string",
       "description": "The fully qualified resource id of user assigned identity."
-    },
-    "AllowedUpgradePlansResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Plan"
-          },
-          "description": "The array of plans."
-        }
-      },
-      "description": "The array of plan."
     }
   },
   "parameters": {
-    "ApplicationNameParameter": {
-      "name": "applicationName",
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the managed application.",
-      "minLength": 3,
-      "maxLength": 64,
-      "x-ms-parameter-location": "method"
+      "description": "The ID of the target subscription."
     },
-    "ApplicationDefinitionNameParameter": {
-      "name": "applicationDefinitionName",
-      "in": "path",
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
       "required": true,
       "type": "string",
-      "description": "The name of the managed application definition.",
-      "minLength": 3,
-      "maxLength": 64,
-      "x-ms-parameter-location": "method"
-    },
-    "JitRequestNameParameter": {
-      "name": "jitRequestName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the JIT request.",
-      "x-ms-parameter-location": "method"
+      "description": "The API version to use for this operation."
     }
   }
 }
