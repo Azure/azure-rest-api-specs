@@ -28,7 +28,7 @@ model UpdateSummaries
   /**
    * The geo-location where the resource lives
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   location?: string;
 }
@@ -38,16 +38,12 @@ interface UpdateSummariesOperationGroup {
   /**
    * Get all Update summaries under the HCI cluster
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("UpdateSummaries_Get")
   get is ArmResourceRead<UpdateSummaries>;
 
   /**
    * Put Update summaries under the HCI cluster
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  @operationId("UpdateSummaries_Put")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   put is ArmResourceCreateOrReplaceSync<
     UpdateSummaries,
     Response = ArmResourceUpdatedResponse<UpdateSummaries>
@@ -56,10 +52,8 @@ interface UpdateSummariesOperationGroup {
   /**
    * Delete Update Summaries
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  @operationId("UpdateSummaries_Delete")
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     UpdateSummaries,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
@@ -69,8 +63,6 @@ interface UpdateSummariesOperationGroup {
   /**
    * List all Update summaries under the HCI cluster
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("UpdateSummaries_List")
   list is ArmResourceListByParent<
     UpdateSummaries,
     Response = ArmResponse<UpdateSummariesList>

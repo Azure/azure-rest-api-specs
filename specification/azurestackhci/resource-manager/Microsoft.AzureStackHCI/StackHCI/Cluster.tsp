@@ -25,7 +25,7 @@ model Cluster is Azure.ResourceManager.TrackedResource<ClusterProperties> {
   /**
    * This property identifies the purpose of the Cluster deployment. For example, a valid value is AzureLocal
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @pattern("^[-\\w\\._,\\(\\\\\\)]+$")
   kind?: string;
@@ -41,7 +41,7 @@ interface Clusters {
   /**
    * Create an HCI cluster.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   create is ArmResourceCreateOrReplaceSync<
     Cluster,
     Response = ArmResourceUpdatedResponse<Cluster>
@@ -56,7 +56,7 @@ interface Clusters {
   /**
    * Delete an HCI cluster.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     Cluster,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -147,8 +147,6 @@ interface Clusters {
   /**
    * List Offers available across publishers for the HCI Cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Offers_ListByCluster")
   @list
   @get
   @action("offers")
