@@ -28,17 +28,41 @@ These are the global settings for the Azure Synapse Analytics API.
 description: Azure Synapse Analytics Management Client
 openapi-type: arm
 azure-arm: true
-tag: package-composite-v2
+tag: package-preview-2023-08
 generate-empty-classes: true
 modelerfour:
   lenient-model-deduplication: true
 ```
 
+
+### Tag: package-preview-2023-08
+
+These settings apply only when `--tag=package-preview-2023-08` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-08'
+input-file:
+  - Microsoft.Synapse/preview/2023-08-01-preview/azureADOnlyAuthentication.json
+  - Microsoft.Synapse/preview/2023-08-01-preview/bigDataPool.json
+  - Microsoft.Synapse/preview/2023-08-01-preview/checkNameAvailability.json
+  - Microsoft.Synapse/preview/2023-08-01-preview/firewallRule.json
+  - Microsoft.Synapse/preview/2023-08-01-preview/integrationRuntime.json
+  - Microsoft.Synapse/preview/2023-08-01-preview/keys.json
+  - Microsoft.Synapse/preview/2023-08-01-preview/kustoPool.json
+  - Microsoft.Synapse/preview/2023-08-01-preview/library.json
+  - Microsoft.Synapse/preview/2023-08-01-preview/operations.json
+  - Microsoft.Synapse/preview/2023-08-01-preview/privateEndpointConnections.json
+  - Microsoft.Synapse/preview/2023-08-01-preview/privateLinkResources.json
+  - Microsoft.Synapse/preview/2023-08-01-preview/privatelinkhub.json
+  - Microsoft.Synapse/preview/2023-08-01-preview/sparkConfiguration.json
+  - Microsoft.Synapse/preview/2023-08-01-preview/sqlPool.json
+  - Microsoft.Synapse/preview/2023-08-01-preview/sqlServer.json
+  - Microsoft.Synapse/preview/2023-08-01-preview/workspace.json
+```
 ### Tag: package-composite-v2
 
 These settings apply only when `--tag=package-composite-v2` is specified on the command line.
 
-```yaml $(tag) == 'package-composite-v2'
+``` yaml $(tag) == 'package-composite-v2'
 input-file:
   - Microsoft.Synapse/stable/2021-06-01/azureADOnlyAuthentication.json
   - Microsoft.Synapse/stable/2021-06-01/checkNameAvailability.json
@@ -62,7 +86,7 @@ input-file:
 
 These settings apply only when `--tag=package-composite-v1` is specified on the command line.
 
-```yaml $(tag) == 'package-composite-v1'
+``` yaml $(tag) == 'package-composite-v1'
 input-file:
   - Microsoft.Synapse/stable/2021-06-01/azureADOnlyAuthentication.json
   - Microsoft.Synapse/stable/2021-06-01/checkNameAvailability.json
@@ -85,7 +109,7 @@ input-file:
 
 These settings apply only when `--tag=package-2021-06` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-06'
+``` yaml $(tag) == 'package-2021-06'
 input-file:
   - Microsoft.Synapse/stable/2021-06-01/bigDataPool.json
   - Microsoft.Synapse/stable/2021-06-01/checkNameAvailability.json
@@ -107,7 +131,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2021-06` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2021-06'
+``` yaml $(tag) == 'package-preview-2021-06'
 input-file:
   - Microsoft.Synapse/preview/2021-06-01-preview/bigDataPool.json
   - Microsoft.Synapse/preview/2021-06-01-preview/checkNameAvailability.json
