@@ -5810,16 +5810,6 @@ model KnowledgeSourceUpdateParameters {
 @added(Versions.v2025_09_01_preview)
 model KnowledgeSourcePropertiesUpdateParameters {
   /**
-   * Description of the knowledge source.
-   */
-  description?: string;
-
-  /**
-   * Endpoint or location of the knowledge source.
-   */
-  url?: string;
-
-  /**
    * Specifies the units of time for scheduling update intervals for the knowledge source.
    */
   updateFrequency?: KnowledgeSourceUpdateFrequency;
