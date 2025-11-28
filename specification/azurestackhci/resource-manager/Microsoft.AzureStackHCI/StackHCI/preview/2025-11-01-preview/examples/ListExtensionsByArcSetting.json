@@ -1,39 +1,31 @@
 {
   "parameters": {
-    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
-    "resourceGroupName": "test-rg",
-    "clusterName": "myCluster",
+    "api-version": "2025-11-01-preview",
     "arcSettingName": "default",
-    "api-version": "2025-11-01-preview"
+    "clusterName": "myCluster",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/clusters/myCluster/arcSettings/default/extensions/MicrosoftMonitoringAgent",
             "name": "MicrosoftMonitoringAgent",
             "type": "Microsoft.AzureStackHCI/clusters/arcSettings/extensions",
-            "systemData": {
-              "createdBy": "user1",
-              "createdByType": "User",
-              "createdAt": "2021-01-01T17:18:19.1234567Z",
-              "lastModifiedBy": "user2",
-              "lastModifiedByType": "User",
-              "lastModifiedAt": "2021-01-02T17:18:19.1234567Z"
-            },
+            "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/clusters/myCluster/arcSettings/default/extensions/MicrosoftMonitoringAgent",
             "properties": {
-              "provisioningState": "Succeeded",
+              "aggregateState": "PartiallyConnected",
               "extensionParameters": {
-                "publisher": "Microsoft.Compute",
                 "type": "string",
-                "typeHandlerVersion": "1.10.3",
                 "autoUpgradeMinorVersion": false,
+                "publisher": "Microsoft.Compute",
                 "settings": {
                   "workspaceId": "xx"
-                }
+                },
+                "typeHandlerVersion": "1.10.3"
               },
-              "aggregateState": "PartiallyConnected",
+              "managedBy": "Azure",
               "perNodeExtensionDetails": [
                 {
                   "name": "Node-1",
@@ -46,33 +38,33 @@
                   "state": "Disconnected"
                 }
               ],
-              "managedBy": "Azure"
+              "provisioningState": "Succeeded"
+            },
+            "systemData": {
+              "createdAt": "2021-01-01T17:18:19.1234567Z",
+              "createdBy": "user1",
+              "createdByType": "User",
+              "lastModifiedAt": "2021-01-02T17:18:19.1234567Z",
+              "lastModifiedBy": "user2",
+              "lastModifiedByType": "User"
             }
           },
           {
-            "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/clusters/myCluster/arcSettings/default/Extensions/SecurityExtension",
             "name": "CustomScriptExtension",
             "type": "Microsoft.AzureStackHCI/clusters/arcSettings/extensions",
-            "systemData": {
-              "createdBy": "user1",
-              "createdByType": "User",
-              "createdAt": "2021-01-01T17:18:19.1234567Z",
-              "lastModifiedBy": "user2",
-              "lastModifiedByType": "User",
-              "lastModifiedAt": "2021-01-02T17:18:19.1234567Z"
-            },
+            "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/clusters/myCluster/arcSettings/default/Extensions/SecurityExtension",
             "properties": {
-              "provisioningState": "Succeeded",
+              "aggregateState": "PartiallySucceeded",
               "extensionParameters": {
-                "publisher": "Microsoft.CustomScriptExtension",
                 "type": "string",
-                "typeHandlerVersion": "1.10.3",
                 "autoUpgradeMinorVersion": false,
+                "publisher": "Microsoft.CustomScriptExtension",
                 "settings": {
                   "scriptLocation": "xx"
-                }
+                },
+                "typeHandlerVersion": "1.10.3"
               },
-              "aggregateState": "PartiallySucceeded",
+              "managedBy": "Azure",
               "perNodeExtensionDetails": [
                 {
                   "name": "Node-1",
@@ -85,11 +77,21 @@
                   "state": "Failed"
                 }
               ],
-              "managedBy": "Azure"
+              "provisioningState": "Succeeded"
+            },
+            "systemData": {
+              "createdAt": "2021-01-01T17:18:19.1234567Z",
+              "createdBy": "user1",
+              "createdByType": "User",
+              "lastModifiedAt": "2021-01-02T17:18:19.1234567Z",
+              "lastModifiedBy": "user2",
+              "lastModifiedByType": "User"
             }
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "Extensions_ListByArcSetting",
+  "title": "List Extensions under ArcSetting resource"
 }

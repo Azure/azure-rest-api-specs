@@ -1,44 +1,46 @@
 {
   "parameters": {
-    "subscriptionId": "b8d594e5-51f3-4c11-9c54-a7771b81c712",
-    "resourceGroupName": "testrg",
+    "api-version": "2025-11-01-preview",
     "clusterName": "testcluster",
-    "updateName": "Microsoft4.2203.2.32",
-    "api-version": "2025-11-01-preview"
+    "resourceGroupName": "testrg",
+    "subscriptionId": "b8d594e5-51f3-4c11-9c54-a7771b81c712",
+    "updateName": "Microsoft4.2203.2.32"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/b8d594e5-51f3-4c11-9c54-a7771b81c712/resourceGroups/testrg/providers/Microsoft.AzureStackHCI/clusters/testcluster/updates/Microsoft4.2203.2.32",
         "name": "Microsoft4.2203.2.32",
         "type": "Microsoft.AzureStackHCI/updates",
+        "id": "/subscriptions/b8d594e5-51f3-4c11-9c54-a7771b81c712/resourceGroups/testrg/providers/Microsoft.AzureStackHCI/clusters/testcluster/updates/Microsoft4.2203.2.32",
         "location": "West US",
         "properties": {
-          "installedDate": "2022-04-06T14:08:18.254Z",
           "description": "AzS Update 4.2203.2.32",
-          "state": "Installed",
-          "prerequisites": [
-            {
-              "updateType": "update type",
-              "version": "prerequisite version",
-              "packageName": "update package name"
-            }
-          ],
+          "additionalProperties": "additional properties",
+          "availabilityType": "Local",
+          "displayName": "AzS Update - 4.2203.2.32",
+          "installedDate": "2022-04-06T14:08:18.254Z",
           "packagePath": "\\\\SU1FileServer\\SU1_Infrastructure_2\\Updates\\Packages\\Microsoft4.2203.2.32",
           "packageSizeInMb": 18858,
-          "displayName": "AzS Update - 4.2203.2.32",
-          "version": "4.2203.2.32",
+          "packageType": "Infrastructure",
+          "prerequisites": [
+            {
+              "packageName": "update package name",
+              "updateType": "update type",
+              "version": "prerequisite version"
+            }
+          ],
           "publisher": "Microsoft",
           "releaseLink": "https://docs.microsoft.com/azure-stack/operator/release-notes?view=azs-2203",
-          "availabilityType": "Local",
-          "packageType": "Infrastructure",
+          "state": "Installed",
           "updateStateProperties": {
             "notifyMessage": "Brief message with instructions for updates of AvailabilityType Notify",
             "progressPercentage": 0
           },
-          "additionalProperties": "additional properties"
+          "version": "4.2203.2.32"
         }
       }
     }
-  }
+  },
+  "operationId": "Updates_Get",
+  "title": "Get a specific update"
 }

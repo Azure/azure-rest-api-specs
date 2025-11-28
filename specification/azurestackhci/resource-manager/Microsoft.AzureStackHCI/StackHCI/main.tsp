@@ -58,4 +58,3 @@ enum Versions {
    */
   v2025_11_01_preview: "2025-11-01-preview",
 }
-interface Operations extends Azure.ResourceManager.Operations {}
