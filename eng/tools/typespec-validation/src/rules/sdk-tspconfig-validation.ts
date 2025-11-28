@@ -209,7 +209,12 @@ class TspconfigEmitterOptionsSubRuleBase extends TspconfigSubRuleBase {
 
     let actualValue = option as unknown as undefined | string | boolean;
 
-    // Resolve variables if the value is a string
+    // First, try to validate the value as-is
+    if (this.validateValue(actualValue, this.expectedValue)) {
+      return { success: true };
+    }
+
+    // If validation fails and the value contains variables, try resolving them
     if (typeof actualValue === "string" && actualValue.includes("{")) {
       const { resolved, error } = this.resolveVariables(actualValue, config);
       if (error) {
@@ -219,13 +224,21 @@ class TspconfigEmitterOptionsSubRuleBase extends TspconfigSubRuleBase {
         );
       }
       actualValue = resolved;
-    }
 
-    if (!this.validateValue(actualValue, this.expectedValue))
+      // Validate again after resolving variables
+      if (!this.validateValue(actualValue, this.expectedValue)) {
+        return this.createFailedResult(
+          `The value of options.${this.emitterName}.${this.keyToValidate} "${actualValue}" does not match "${this.expectedValue}"`,
+          `Please update the value of "options.${this.emitterName}.${this.keyToValidate}" to match "${this.expectedValue}"`,
+        );
+      }
+    } else {
+      // No variables to resolve, validation already failed
       return this.createFailedResult(
         `The value of options.${this.emitterName}.${this.keyToValidate} "${actualValue}" does not match "${this.expectedValue}"`,
         `Please update the value of "options.${this.emitterName}.${this.keyToValidate}" to match "${this.expectedValue}"`,
       );
+    }
 
     return { success: true };
   }
