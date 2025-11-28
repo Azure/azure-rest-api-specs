@@ -77,9 +77,9 @@ model TileMatrixSet {
 model TileMatrixSetBoundingBox is TmsBoundingBox;
 
 /**
- * https://github.com/opengeospatial/2D-Tile-Matrix-Set/blob/master/schemas/tms/2.0/json/2DBoundingBox.json
- *
  * Bounding box defining the spatial extent in a specific coordinate reference system
+
+ * See the [2D Bounding Box Schema](https://github.com/opengeospatial/2D-Tile-Matrix-Set/blob/master/schemas/tms/2.0/json/2DBoundingBox.json).
  */
 model TmsBoundingBox {
   /**
@@ -93,7 +93,7 @@ model TmsBoundingBox {
   upperRight: string[];
 
   /**
-   * Coordinate reference system identifier (e.g., 'http://www.opengis.net/def/crs/EPSG/0/3857')
+   * Coordinate reference system identifier
    */
   crs?: string;
 
@@ -127,7 +127,7 @@ model TileMatrix {
 
   /**
    * Unordered list of one or more commonly used or formalized word(s) or phrase(s)
-   * used to describe this dataset
+   *   used to describe this dataset
    */
   keywords?: string[];
 
@@ -149,18 +149,18 @@ model TileMatrix {
 
   /**
    * The corner of the tile matrix (_topLeft_ or _bottomLeft_) used as the origin
-   * for numbering tile rows and columns. This corner is also a corner of the (0, 0)
-   * tile.
+   *  for numbering tile rows and columns. This corner is also a corner of the (0, 0)
+   *  tile.
    */
   cornerOfOrigin?: TileMatrixCornerOfOrigin;
 
   /**
    * Precise position in CRS coordinates of the corner of origin (e.g. the top-left
-   * corner) for this tile matrix. This position is also a corner of the (0, 0)
-   * tile. In previous version, this was 'topLeftCorner' and 'cornerOfOrigin' did
-   * not exist.
+   *   corner) for this tile matrix. This position is also a corner of the (0, 0)
+   *   tile. In previous version, this was 'topLeftCorner' and 'cornerOfOrigin' did
+   *   not exist.
    */
-  pointOfOrigin: float64[];
+  pointOfOrigin: float32[];
 
   /**
    * Pixel width of each tile at this level

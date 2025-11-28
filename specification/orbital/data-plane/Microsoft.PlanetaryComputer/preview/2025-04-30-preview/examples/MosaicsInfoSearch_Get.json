@@ -2,14 +2,14 @@
   "title": "MosaicsInfoSearch_Get",
   "operationId": "MosaicsInfoSearch_Get",
   "parameters": {
-    "searchId": "e32e0b12176246816953d75e3356d613",
+    "searchId": "ba13fc7947b9b585690d84ee61aaa653",
     "api-version": "2025-04-30-preview"
   },
   "responses": {
     "200": {
       "body": {
         "search": {
-          "hash": "e32e0b12176246816953d75e3356d613",
+          "hash": "ba13fc7947b9b585690d84ee61aaa653",
           "search": {
             "filter": {
               "op": "and",
@@ -20,7 +20,25 @@
                     {
                       "property": "collection"
                     },
-                    "maxar"
+                    "naip-atl"
+                  ]
+                },
+                {
+                  "op": ">=",
+                  "args": [
+                    {
+                      "property": "datetime"
+                    },
+                    "2021-01-01T00:00:00Z"
+                  ]
+                },
+                {
+                  "op": "<=",
+                  "args": [
+                    {
+                      "property": "datetime"
+                    },
+                    "2022-12-31T23:59:59Z"
                   ]
                 }
               ]
@@ -33,29 +51,29 @@
             ],
             "filter-lang": "cql2-json"
           },
-          "_where": "(collection = 'maxar')",
+          "_where": "(collection = 'naip-atl' AND datetime >= '2021-01-01T00:00:00Z' AND datetime <= '2022-12-31T23:59:59Z')",
           "orderby": "datetime DESC, id DESC",
-          "lastused": "2025-01-07T19:53:36.547783Z",
-          "usecount": 1,
+          "lastused": "2025-10-28T18:46:33.295848Z",
+          "usecount": 132,
           "metadata": {
             "type": "mosaic"
           }
         },
         "links": [
           {
-            "href": "http://stacforge.axarcnccdbcsduc4.eastus.geocatalog.spatio.azure.com/data/mosaic/e32e0b12176246816953d75e3356d613/info",
+            "href": "https://Sanitized.sanitized_label.sanitized_location.geocatalog.spatio.azure.com/data/mosaic/ba13fc7947b9b585690d84ee61aaa653/info",
             "rel": "self",
             "type": "application/json",
             "title": "Mosaic metadata"
           },
           {
-            "href": "http://stacforge.axarcnccdbcsduc4.eastus.geocatalog.spatio.azure.com/data/mosaic/e32e0b12176246816953d75e3356d613/tilejson.json",
+            "href": "https://Sanitized.sanitized_label.sanitized_location.geocatalog.spatio.azure.com/data/mosaic/ba13fc7947b9b585690d84ee61aaa653/tilejson.json",
             "rel": "tilejson",
             "type": "application/json",
             "title": "Link for TileJSON"
           },
           {
-            "href": "http://stacforge.axarcnccdbcsduc4.eastus.geocatalog.spatio.azure.com/data/mosaic/e32e0b12176246816953d75e3356d613/WMTSCapabilities.xml",
+            "href": "https://Sanitized.sanitized_label.sanitized_location.geocatalog.spatio.azure.com/data/mosaic/ba13fc7947b9b585690d84ee61aaa653/WMTSCapabilities.xml",
             "rel": "wmts",
             "type": "application/json",
             "title": "Link for WMTS"

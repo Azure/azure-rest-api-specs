@@ -36,7 +36,7 @@ interface TilerBound {
       @pattern(".*")
       itemId: string;
     },
-    BoundsResponse
+    StacItemBounds
   >;
 }
 
@@ -74,7 +74,7 @@ interface TilerInfoOperations {
       @query(#{ explode: true })
       assets?: string[];
     },
-    InfoOperationResponse
+    Record<TilerInfo>
   >;
 }
 
@@ -112,7 +112,7 @@ interface TilerInfoGeoJsonOperations {
       @query(#{ explode: true })
       assets?: string[];
     },
-    FeaturePolygonDictStrRioTilerModelsInfo
+    TilerInfoGeoJsonFeature
   >;
 }
 
@@ -143,7 +143,7 @@ interface TilerAvailableAssets {
       @pattern(".*")
       itemId: string;
     },
-    AvailableAssetsResponse | NoContentResponse
+    AvailableAssets
   >;
 }
 
@@ -159,26 +159,10 @@ interface TilerAssetStatistics {
   getAll is Azure.Core.Foundations.Operation<
     {
       ...AssetQueryParameters;
-
-      /**
-       * STAC Collection Identifier
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      collectionId: string;
-
-      /**
-       * STAC Item Identifier
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      itemId: string;
-
+      ...getAssetStatisticsCustomizedCommonSignatures;
       ...StatisticsQueryParameters;
     },
-    AssetStatisticsResponse
+    Record<unknown>
   >;
 }
 
@@ -194,63 +178,32 @@ interface TilerStatistics {
   getAll is Azure.Core.Foundations.Operation<
     {
       ...AssetQueryParameters;
-
-      /**
-       * STAC Collection Identifier
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      collectionId: string;
-
-      /**
-       * STAC Item Identifier
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      itemId: string;
-
+      ...listStatisticsCustomizedCommonSignatures;
       ...StatisticsQueryParameters;
     },
-    StatisticsResponse
+    TilerStacItemStatistics
   >;
 }
 
 interface TilerGeoJsonStatistics {
   /**
-   * Get Statistics from a geojson feature or featureCollection.
+   * Get Statistics from a geojson feature.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @summary("Geojson Statistics")
   @tag("Tiles for STAC Items")
   @route("/data/collections/{collectionId}/items/{itemId}/statistics")
   @post
-  getAll is Azure.Core.Foundations.Operation<
+  get is Azure.Core.Foundations.Operation<
     {
       ...AssetQueryParameters;
-
-      /**
-       * STAC Collection Identifier
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      collectionId: string;
-
-      /**
-       * STAC Item Identifier
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      itemId: string;
+      ...getGeoJsonStatisticsCustomizedCommonSignatures;
 
       /**
        * Coordinate Reference System of the input coords. Default to `epsg:4326`.
        */
       @query("coord-crs")
-      coordCrs?: string;
+      coordinateReferenceSystem?: string;
 
       ...StatisticsQueryParameters;
 
@@ -258,9 +211,9 @@ interface TilerGeoJsonStatistics {
        * Request GeoJson body
        */
       @body
-      body: GeoJson;
+      body: Feature;
     },
-    GeoJsonStatisticsItemCollectionResponse
+    StacItemStatisticsGeoJson
   >;
 }
 
@@ -273,10 +226,10 @@ interface TilerTiles {
   @tag("Tiles for STAC Items")
   @route("/data/collections/{collectionId}/items/{itemId}/tiles/{z}/{x}/{y}@{scale}x.{format}")
   @get
-  getZxyScalexFormat is Azure.Core.Foundations.Operation<
+  getZxyScaleByFormat is Azure.Core.Foundations.Operation<
     {
       ...AssetQueryParameters;
-      ...AlgorithmQueryParameters;
+      ...TerrainAlgorithmQueryParameters;
 
       /**
        * STAC Collection Identifier
@@ -315,13 +268,13 @@ interface TilerTiles {
        * 'WebMercatorQuad')
        */
       @query("tileMatrixSetId")
-      tileMatrixSetId?: Tilematrixsetid = Tilematrixsetid.WebMercatorQuad;
+      tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
 
       ...TileMatrixSetQueryParameters;
       ...MiscTileQueryParameters;
       ...SubDatasetQueryParameters;
     },
-    TileResponse | NoContentResponse
+    TileResponse
   >;
 }
 
@@ -334,51 +287,11 @@ interface TilerTileMatrixSets {
   @tag("Tiles for STAC Items")
   @route("/data/collections/{collectionId}/items/{itemId}/tiles/{tileMatrixSetId}/{z}/{x}/{y}@{scale}x.{format}")
   @get
-  getZxyScalexFormat is Azure.Core.Foundations.Operation<
+  getZxyScaleByFormat is Azure.Core.Foundations.Operation<
     {
       ...AssetQueryParameters;
-      ...AlgorithmQueryParameters;
-
-      /**
-       * STAC Collection Identifier
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      collectionId: string;
-
-      /**
-       * STAC Item Identifier
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      itemId: string;
-
-      /**
-       * Identifier selecting one of the TileMatrixSetId supported
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      tileMatrixSetId: string;
-
-      ...ZxyPathParameters;
-
-      /**
-       * Numeric scale factor for the tile. Higher values produce larger tiles (default: "1")
-       */
-      @path
-      scale: float32;
-
-      /**
-       * Output format for the tile or image (e.g., png, jpeg, webp) (default: "png").
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      format: string;
-
+      ...TerrainAlgorithmQueryParameters;
+      ...getTileCustomizedCommonSignatures;
       ...TileMatrixSetQueryParameters;
       ...MiscTileQueryParameters;
       ...SubDatasetQueryParameters;
@@ -389,17 +302,17 @@ interface TilerTileMatrixSets {
 
 interface TilerTileJsonOperations {
   /**
-   * Return Tilejson
+   * Return TileJson
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  @summary("Tilejson")
+  @summary("TileJson")
   @tag("Tiles for STAC Items")
   @route("/data/collections/{collectionId}/items/{itemId}/tilejson.json")
   @get
   get is Azure.Core.Foundations.Operation<
     {
       ...AssetQueryParameters;
-      ...AlgorithmQueryParameters;
+      ...TerrainAlgorithmQueryParameters;
 
       /**
        * STAC Collection Identifier
@@ -422,14 +335,14 @@ interface TilerTileJsonOperations {
        * 'WebMercatorQuad')
        */
       @query("tileMatrixSetId")
-      tileMatrixSetId?: Tilematrixsetid = Tilematrixsetid.WebMercatorQuad;
+      tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
 
       /**
        * Default will be automatically defined if the output image needs a mask (png) or
        * not (jpeg).
        */
       @query("tile_format")
-      tileFormat?: ImageType;
+      tileFormat?: TilerImageFormat;
 
       /**
        * Tile scale factor affecting output size. Values > 1 produce larger tiles (e.g., 1=256x256, 2=512x512).
@@ -442,54 +355,31 @@ interface TilerTileJsonOperations {
       ...TileMatrixSetQueryParameters;
       ...MiscTileQueryParameters;
     },
-    TileJsonResponse
+    TileJsonMetadata
   >;
 }
 
 interface TilerTileJsonTileMatrixSets {
   /**
-   * Return the Tilejson Tilematrixsetid As a path
+   * Return the TileJson Tilematrixsetid As a path
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  @summary("Tilejson Tilematrixsetid As Path")
+  @summary("TileJson Tilematrixsetid As Path")
   @tag("Tiles for STAC Items")
   @route("/data/collections/{collectionId}/items/{itemId}/{tileMatrixSetId}/tilejson.json")
   @get
   get is Azure.Core.Foundations.Operation<
     {
-      /**
-       * STAC Collection Identifier
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      collectionId: string;
-
-      /**
-       * STAC Item Identifier
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      itemId: string;
-
       ...AssetQueryParameters;
-      ...AlgorithmQueryParameters;
-
-      /**
-       * Identifier selecting one of the TileMatrixSetId supported
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      tileMatrixSetId: string;
+      ...TerrainAlgorithmQueryParameters;
+      ...getTileJsonCustomizedCommonSignatures;
 
       /**
        * Default will be automatically defined if the output image needs a mask (png) or
        * not (jpeg).
        */
       @query("tile_format")
-      tileFormat?: ImageType;
+      tileFormat?: TilerImageFormat;
 
       /**
        * Tile scale factor affecting output size. Values > 1 produce larger tiles (e.g., 1=256x256, 2=512x512).
@@ -502,7 +392,7 @@ interface TilerTileJsonTileMatrixSets {
       ...TileMatrixSetQueryParameters;
       ...MiscTileQueryParameters;
     },
-    TileJsonResponse
+    TileJsonMetadata
   >;
 }
 
@@ -518,7 +408,7 @@ interface TilerWmts {
   getCapabilitiesXml is Azure.Core.Foundations.Operation<
     {
       ...AssetQueryParameters;
-      ...AlgorithmQueryParameters;
+      ...TerrainAlgorithmQueryParameters;
 
       /**
        * STAC Collection Identifier
@@ -541,13 +431,13 @@ interface TilerWmts {
        * 'WebMercatorQuad')
        */
       @query("tileMatrixSetId")
-      tileMatrixSetId?: Tilematrixsetid = Tilematrixsetid.WebMercatorQuad;
+      tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
 
       /**
        * Output image type. Default is png.
        */
       @query("tile_format")
-      tileFormat?: ImageType = ImageType.png;
+      tileFormat?: TilerImageFormat = TilerImageFormat.png;
 
       /**
        * Tile scale factor affecting output size. Values > 1 produce larger tiles (e.g., 1=256x256, 2=512x512).
@@ -560,9 +450,334 @@ interface TilerWmts {
       ...TileMatrixSetQueryParameters;
       ...MiscTileQueryParameters;
     },
-    WmtsCapabilitiesResponse | NoContentResponse
+    WmtsCapabilities
   >;
 }
+
+// Common signature aliases for client overrides
+alias getWmtsCapabilitiesCustomizedCommonSignatures = {
+  /**
+   * STAC Collection Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
+  /**
+   * STAC Item Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  itemId: string;
+
+  /**
+   * Identifier selecting one of the TileMatrixSetId supported
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  tileMatrixSetId: string;
+};
+
+alias getTileCustomizedCommonSignatures = {
+  /**
+   * STAC Collection Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
+  /**
+   * STAC Item Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  itemId: string;
+
+  /**
+   * Identifier selecting one of the TileMatrixSetId supported
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  tileMatrixSetId: string;
+
+  ...ZxyPathParameters;
+
+  /**
+   * Numeric scale factor for the tile. Higher values produce larger tiles
+   */
+  @path
+  scale: float32;
+
+  /**
+   * Output format for the tile or image (e.g., png, jpeg, webp)
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  format: string;
+};
+
+alias getAssetStatisticsCustomizedCommonSignatures = {
+  /**
+   * STAC Collection Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
+  /**
+   * STAC Item Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  itemId: string;
+};
+
+alias cropGeoJsonCustomizedCommonSignatures = {
+  /**
+   * STAC Collection Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
+  /**
+   * STAC Item Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  itemId: string;
+
+  /**
+   * Output format for the tile or image (e.g., png, jpeg, webp)
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  format: string;
+};
+
+alias cropGeoJsonWithDimensionsCustomizedCommonSignatures = {
+  /**
+   * STAC Collection Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
+  /**
+   * STAC Item Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  itemId: string;
+
+  /**
+   * Width in pixels for the output image.
+   */
+  @path
+  width: int32;
+
+  /**
+   * Height in pixels for the output image.
+   */
+  @path
+  height: int32;
+
+  /**
+   * Output format for the tile or image (e.g., png, jpeg, webp)
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  format: string;
+};
+
+alias getGeoJsonStatisticsCustomizedCommonSignatures = {
+  /**
+   * STAC Collection Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
+  /**
+   * STAC Item Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  itemId: string;
+};
+
+alias getPartCustomizedCommonSignatures = {
+  /**
+   * STAC Collection Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
+  /**
+   * STAC Item Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  itemId: string;
+
+  ...BoundingBoxPathParameters;
+
+  /**
+   * Output format for the tile or image (e.g., png, jpeg, webp)
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  format: string;
+};
+
+alias getPartWithDimensionsCustomizedCommonSignatures = {
+  /**
+   * STAC Collection Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
+  /**
+   * STAC Item Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  itemId: string;
+
+  ...BoundingBoxPathParameters;
+
+  /**
+   * Width in pixels for the output image.
+   */
+  @path
+  width: int32;
+
+  /**
+   * Height in pixels for the output image.
+   */
+  @path
+  height: int32;
+
+  /**
+   * Output format for the tile or image (e.g., png, jpeg, webp)
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  format: string;
+};
+
+alias getPreviewCustomizedCommonSignatures = {
+  /**
+   * STAC Collection Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
+  /**
+   * STAC Item Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  itemId: string;
+};
+
+alias getPreviewWithFormatCustomizedCommonSignatures = {
+  /**
+   * STAC Collection Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
+  /**
+   * STAC Item Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  itemId: string;
+
+  /**
+   * Output format for the tile or image (e.g., png, jpeg, webp)
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  format: string;
+};
+
+alias listStatisticsCustomizedCommonSignatures = {
+  /**
+   * STAC Collection Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
+  /**
+   * STAC Item Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  itemId: string;
+};
+
+alias getTileJsonCustomizedCommonSignatures = {
+  /**
+   * STAC Collection Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
+  /**
+   * STAC Item Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  itemId: string;
+
+  /**
+   * Identifier selecting one of the TileMatrixSetId supported
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  tileMatrixSetId: string;
+};
 
 interface TilerWmtsTileMatrixSets {
   /**
@@ -576,37 +791,14 @@ interface TilerWmtsTileMatrixSets {
   getCapabilitiesXml is Azure.Core.Foundations.Operation<
     {
       ...AssetQueryParameters;
-      ...AlgorithmQueryParameters;
-
-      /**
-       * STAC Collection Identifier
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      collectionId: string;
-
-      /**
-       * STAC Item Identifier
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      itemId: string;
-
-      /**
-       * Identifier selecting one of the TileMatrixSetId supported
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      tileMatrixSetId: string;
+      ...TerrainAlgorithmQueryParameters;
+      ...getWmtsCapabilitiesCustomizedCommonSignatures;
 
       /**
        * Output image type. Default is png.
        */
       @query("tile_format")
-      tileFormat?: ImageType = ImageType.png;
+      tileFormat?: TilerImageFormat = TilerImageFormat.png;
 
       /**
        * Tile scale factor affecting output size. Values > 1 produce larger tiles (e.g., 1=256x256, 2=512x512).
@@ -630,9 +822,9 @@ interface TilerPoints {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @summary("Point")
   @tag("Tiles for STAC Items")
-  @route("/data/collections/{collectionId}/items/{itemId}/point/{lon},{lat}")
+  @route("/data/collections/{collectionId}/items/{itemId}/point/{longitude},{latitude}")
   @get
-  getLonLat is Azure.Core.Foundations.Operation<
+  getPoint is Azure.Core.Foundations.Operation<
     {
       /**
        * STAC Collection Identifier
@@ -654,13 +846,13 @@ interface TilerPoints {
        * Longitude
        */
       @path
-      lon: float64;
+      longitude: float32;
 
       /**
        * Latitude
        */
       @path
-      lat: float32;
+      latitude: float32;
 
       ...AssetQueryParameters;
 
@@ -668,7 +860,7 @@ interface TilerPoints {
        * Coordinate Reference System of the input coords. Default to `epsg:4326`.
        */
       @query("coord-crs")
-      coordCrs?: string;
+      coordinateReferenceSystem?: string;
 
       /**
        * Resampling method.
@@ -676,7 +868,7 @@ interface TilerPoints {
       @query("resampling")
       resampling?: Resampling = Resampling.nearest;
     },
-    TitilerCoreModelsResponsesPoint
+    TilerCoreModelsResponsesPoint
   >;
 }
 
@@ -692,31 +884,8 @@ interface TilerPreviews {
   getFormat is Azure.Core.Foundations.Operation<
     {
       ...AssetQueryParameters;
-      ...AlgorithmQueryParameters;
-
-      /**
-       * STAC Collection Identifier
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      collectionId: string;
-
-      /**
-       * STAC Item Identifier
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      itemId: string;
-
-      /**
-       * Output format for the tile or image (e.g., png, jpeg, webp).
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      format: string;
+      ...TerrainAlgorithmQueryParameters;
+      ...getPreviewWithFormatCustomizedCommonSignatures;
 
       /**
        * rio-color formula (info: https://github.com/mapbox/rio-color)
@@ -758,29 +927,14 @@ interface TilerPreviews {
   get is Azure.Core.Foundations.Operation<
     {
       ...AssetQueryParameters;
-      ...AlgorithmQueryParameters;
-
-      /**
-       * STAC Collection Identifier
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      collectionId: string;
-
-      /**
-       * STAC Item Identifier
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      itemId: string;
+      ...TerrainAlgorithmQueryParameters;
+      ...getPreviewCustomizedCommonSignatures;
 
       /**
        * Output format for the tile or image (e.g., png, jpeg, webp).
        */
       @query("format")
-      format?: ImageType;
+      format?: TilerImageFormat;
 
       /**
        * rio-color formula (info: https://github.com/mapbox/rio-color)
@@ -822,48 +976,11 @@ interface TilerParts {
   @tag("Tiles for STAC Items")
   @route("/data/collections/{collectionId}/items/{itemId}/crop/{minx},{miny},{maxx},{maxy}/{width}x{height}.{format}")
   @get
-  getMinxMinyMaxxMaxyWidthxHeightFormat is Azure.Core.Foundations.Operation<
+  getCroppedToBoundingBoxWidthByHeight is Azure.Core.Foundations.Operation<
     {
       ...AssetQueryParameters;
-      ...AlgorithmQueryParameters;
-
-      /**
-       * STAC Collection Identifier
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      collectionId: string;
-
-      /**
-       * STAC Item Identifier
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      itemId: string;
-
-      ...BoundingBoxPathParameters;
-
-      /**
-       * Width in pixels for the output image.
-       */
-      @path
-      width: float32;
-
-      /**
-       * Height in pixels for the output image.
-       */
-      @path
-      height: float32;
-
-      /**
-       * Output format for the tile or image (e.g., png, jpeg, webp).
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      format: string;
+      ...TerrainAlgorithmQueryParameters;
+      ...getPartWithDimensionsCustomizedCommonSignatures;
 
       /**
        * rio-color formula (info: https://github.com/mapbox/rio-color)
@@ -881,7 +998,7 @@ interface TilerParts {
        * Coordinate Reference System of the input coords. Default to `epsg:4326`.
        */
       @query("coord-crs")
-      coordCrs?: string;
+      coordinateReferenceSystem?: string;
 
       /**
        * Resampling method.
@@ -907,36 +1024,11 @@ interface TilerParts {
   @tag("Tiles for STAC Items")
   @route("/data/collections/{collectionId}/items/{itemId}/crop/{minx},{miny},{maxx},{maxy}.{format}")
   @get
-  getMinxMinyMaxxMaxyFormat is Azure.Core.Foundations.Operation<
+  getCroppedToBoundingBox is Azure.Core.Foundations.Operation<
     {
       ...AssetQueryParameters;
-      ...AlgorithmQueryParameters;
-
-      /**
-       * STAC Collection Identifier
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      collectionId: string;
-
-      /**
-       * STAC Item Identifier
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      itemId: string;
-
-      ...BoundingBoxPathParameters;
-
-      /**
-       * Output format for the tile or image (e.g., png, jpeg, webp).
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      format: string;
+      ...TerrainAlgorithmQueryParameters;
+      ...getPartCustomizedCommonSignatures;
 
       /**
        * rio-color formula (info: https://github.com/mapbox/rio-color)
@@ -954,7 +1046,7 @@ interface TilerParts {
        * Coordinate Reference System of the input coords. Default to `epsg:4326`.
        */
       @query("coord-crs")
-      coordCrs?: string;
+      coordinateReferenceSystem?: string;
 
       /**
        * Resampling method.
@@ -984,46 +1076,11 @@ interface TilerGeoJsons {
   @tag("Tiles for STAC Items")
   @route("/data/collections/{collectionId}/items/{itemId}/crop/{width}x{height}.{format}")
   @post
-  cropWidthxHeightFormat is Azure.Core.Foundations.Operation<
+  cropWidthByHeightFormat is Azure.Core.Foundations.Operation<
     {
       ...AssetQueryParameters;
-      ...AlgorithmQueryParameters;
-
-      /**
-       * STAC Collection Identifier
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      collectionId: string;
-
-      /**
-       * STAC Item Identifier
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      itemId: string;
-
-      /**
-       * Width in pixels for the output image.
-       */
-      @path
-      width: float32;
-
-      /**
-       * Height in pixels for the output image.
-       */
-      @path
-      height: float32;
-
-      /**
-       * Output format for the tile or image (e.g., png, jpeg, webp).
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      format: string;
+      ...TerrainAlgorithmQueryParameters;
+      ...cropGeoJsonWithDimensionsCustomizedCommonSignatures;
 
       /**
        * rio-color formula (info: https://github.com/mapbox/rio-color)
@@ -1035,7 +1092,7 @@ interface TilerGeoJsons {
        * Coordinate Reference System of the input coords. Default to `epsg:4326`.
        */
       @query("coord-crs")
-      coordCrs?: string;
+      coordinateReferenceSystem?: string;
 
       /**
        * Resampling method.
@@ -1055,7 +1112,7 @@ interface TilerGeoJsons {
        * Request GeoJson body.
        */
       @body
-      body: GeoJson;
+      body: Feature;
     },
     TileResponse
   >;
@@ -1070,31 +1127,8 @@ interface TilerGeoJsons {
   cropFormat is Azure.Core.Foundations.Operation<
     {
       ...AssetQueryParameters;
-      ...AlgorithmQueryParameters;
-
-      /**
-       * STAC Collection Identifier
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      collectionId: string;
-
-      /**
-       * STAC Item Identifier
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      itemId: string;
-
-      /**
-       * Output format for the tile or image (e.g., png, jpeg, webp) (default: "png").
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      format: string;
+      ...TerrainAlgorithmQueryParameters;
+      ...cropGeoJsonCustomizedCommonSignatures;
 
       /**
        * rio-color formula (info: https://github.com/mapbox/rio-color)
@@ -1106,7 +1140,7 @@ interface TilerGeoJsons {
        * Coordinate Reference System of the input coords. Default to `epsg:4326`.
        */
       @query("coord-crs")
-      coordCrs?: string;
+      coordinateReferenceSystem?: string;
 
       /**
        * Resampling method.
@@ -1127,7 +1161,7 @@ interface TilerGeoJsons {
        * Request GeoJson body.
        */
       @body
-      body: GeoJson;
+      body: Feature;
     },
     TileResponse
   >;
