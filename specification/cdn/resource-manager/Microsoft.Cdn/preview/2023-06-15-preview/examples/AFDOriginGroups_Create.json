@@ -1,0 +1,131 @@
+{
+  "parameters": {
+    "api-version": "2023-06-15-preview",
+    "subscriptionId": "subid",
+    "resourceGroupName": "RG",
+    "profileName": "profile1",
+    "originGroupName": "origingroup1",
+    "originGroup": {
+      "properties": {
+        "originGroupLayer": "Layer4",
+        "loadBalancingSettings": {
+          "sampleSize": 3,
+          "successfulSamplesRequired": 3,
+          "additionalLatencyInMilliseconds": 1000
+        },
+        "healthProbeSettings": {
+          "probePath": "/path2",
+          "probeRequestType": "NotSet",
+          "probeProtocol": "NotSet",
+          "probeIntervalInSeconds": 10
+        },
+        "trafficRestorationTimeToHealedOrNewEndpointsInMinutes": 5,
+        "originProtocolSettings": {
+          "clientAffinity": "SourceIP",
+          "originPort": [
+            "8080", "8081-8085", "8087"
+          ],
+          "clientIPPreservationState": "Enabled"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/origingroups/origingroup1",
+        "type": "Microsoft.Cdn/profiles/origingroups",
+        "name": "origingroup1",
+        "properties": {
+          "originGroupLayer": "Layer4",
+          "loadBalancingSettings": {
+            "sampleSize": 3,
+            "successfulSamplesRequired": 3,
+            "additionalLatencyInMilliseconds": 1000
+          },
+          "healthProbeSettings": {
+            "probePath": "/path1",
+            "probeRequestType": "HEAD",
+            "probeProtocol": "Http",
+            "probeIntervalInSeconds": 10
+          },
+          "trafficRestorationTimeToHealedOrNewEndpointsInMinutes": 5,
+          "originProtocolSettings": {
+            "clientAffinity": "SourceIP",
+            "originPort": [
+              "8080", "8081-8085", "8087"
+            ],
+            "clientIPPreservationState": "Enabled"
+          },
+          "provisioningState": "Succeeded",
+          "deploymentStatus": "NotStarted"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/origingroups/origingroup1",
+        "type": "Microsoft.Cdn/profiles/origingroups",
+        "name": "origingroup1",
+        "properties": {
+          "originGroupLayer": "Layer4",
+          "loadBalancingSettings": {
+            "sampleSize": 3,
+            "successfulSamplesRequired": 3,
+            "additionalLatencyInMilliseconds": 1000
+          },
+          "healthProbeSettings": {
+            "probePath": "/path1",
+            "probeRequestType": "HEAD",
+            "probeProtocol": "Http",
+            "probeIntervalInSeconds": 10
+          },
+          "trafficRestorationTimeToHealedOrNewEndpointsInMinutes": 5,
+          "originProtocolSettings": {
+            "clientAffinity": "SourceIP",
+            "originPort": [
+              "8080", "8081-8085", "8087"
+            ],
+            "clientIPPreservationState": "Enabled"
+          },
+          "provisioningState": "Succeeded",
+          "deploymentStatus": "NotStarted"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/subid/resourcegroups/resourceGroupName/providers/Microsoft.Cdn/operationresults/operationId?api-version=2023-06-15-preview"
+      },
+      "body": {
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/origingroups/origingroup1",
+        "type": "Microsoft.Cdn/profiles/origingroups",
+        "name": "origingroup1",
+        "properties": {
+          "originGroupLayer": "Layer4",
+          "loadBalancingSettings": {
+            "sampleSize": 3,
+            "successfulSamplesRequired": 3,
+            "additionalLatencyInMilliseconds": 1000
+          },
+          "healthProbeSettings": {
+            "probePath": "/path1",
+            "probeRequestType": "HEAD",
+            "probeProtocol": "Http",
+            "probeIntervalInSeconds": 10
+          },
+          "trafficRestorationTimeToHealedOrNewEndpointsInMinutes": 5,
+          "originProtocolSettings": {
+            "clientAffinity": "SourceIP",
+            "originPort": [
+              "8080", "8081-8085", "8087"
+            ],
+            "clientIPPreservationState": "Enabled"
+          },
+          "provisioningState": "Creating",
+          "deploymentStatus": "NotStarted"
+        }
+      }
+    }
+  }
+}
