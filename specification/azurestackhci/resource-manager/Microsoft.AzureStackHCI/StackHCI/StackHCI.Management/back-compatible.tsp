@@ -17,16 +17,6 @@ using Microsoft.AzureStackHCI;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(ClusterIdentityResponse.properties);
 
-@@clientName(QosPolicyOverrides.priorityValue8021Action_Cluster,
-  "priorityValue8021ActionCluster"
-);
-@@clientName(QosPolicyOverrides.priorityValue8021Action_SMB,
-  "priorityValue8021ActionSMB"
-);
-@@clientName(QosPolicyOverrides.bandwidthPercentage_SMB,
-  "bandwidthPercentageSMB"
-);
-
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(ExtensionProperties.extensionParameters);
 
@@ -122,3 +112,6 @@ using Microsoft.AzureStackHCI;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(UpdateSummaries.properties);
 @@key(Azure.ResourceManager.Extension.ScopeParameter.scope, "resourceUri");
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(Cluster.identity);

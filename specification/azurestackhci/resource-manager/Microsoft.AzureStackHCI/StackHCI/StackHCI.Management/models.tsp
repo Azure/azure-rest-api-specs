@@ -3141,12 +3141,12 @@ model DeploymentSettingHostNetwork {
   /**
    * Defines how the storage adapters between nodes are connected either switch or switch less..
    */
-  storageConnectivitySwitchless?: boolean;
+  storageConnectivitySwitchless?: boolean = false;
 
   /**
    * Optional parameter required only for 3 Nodes Switchless deployments. This allows users to specify IPs and Mask for Storage NICs when Network ATC is not assigning the IPs for storage automatically.
    */
-  enableStorageAutoIp?: boolean;
+  enableStorageAutoIp?: boolean = false;
 }
 
 /**
@@ -3171,7 +3171,7 @@ model DeploymentSettingIntents {
   /**
    * This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.
    */
-  overrideVirtualSwitchConfiguration?: boolean;
+  overrideVirtualSwitchConfiguration?: boolean = false;
 
   /**
    * Set virtualSwitch ConfigurationOverrides for cluster.
@@ -3181,7 +3181,7 @@ model DeploymentSettingIntents {
   /**
    * This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.
    */
-  overrideQosPolicy?: boolean;
+  overrideQosPolicy?: boolean = false;
 
   /**
    * Set QoS PolicyOverrides for cluster.
@@ -3191,7 +3191,7 @@ model DeploymentSettingIntents {
   /**
    * This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.
    */
-  overrideAdapterProperty?: boolean;
+  overrideAdapterProperty?: boolean = false;
 
   /**
    * Set Adapter PropertyOverrides for cluster.
@@ -5590,7 +5590,7 @@ model HciEdgeDeviceHostNetwork {
    * Optional parameter required only for 3 Nodes Switchless deployments. This allows users to specify IPs and Mask for Storage NICs when Network ATC is not assigning the IPs for storage automatically.
    */
   @visibility(Lifecycle.Read)
-  enableStorageAutoIp?: boolean;
+  enableStorageAutoIp?: boolean = false;
 }
 
 /**
