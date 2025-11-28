@@ -21972,11 +21972,13 @@
       "properties": {
         "secrets": {
           "$ref": "#/definitions/AccountKeyDatastoreSecrets",
+          "format": "password",
           "description": "[Required] Storage account secrets.",
           "x-ms-mutability": [
             "update",
             "create"
-          ]
+          ],
+          "x-ms-secret": true
         }
       },
       "required": [
@@ -25895,18 +25897,31 @@
           "$ref": "#/definitions/Compute",
           "description": "The resource-specific properties for this resource."
         },
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The identity of the resource."
+        "location": {
+          "type": "string",
+          "description": "Specifies the location of the resource."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Contains resource tags defined as key/value pairs.",
+          "x-nullable": true,
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "sku": {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Sku",
-          "description": "The SKU of the resource."
+          "description": "The sku of the workspace.",
+          "x-nullable": true
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The identity of the resource."
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -29546,7 +29561,9 @@
       "properties": {
         "keys": {
           "$ref": "#/definitions/AccountApiKeys",
-          "description": "Dictionary of Keys for the endpoint."
+          "format": "password",
+          "description": "Dictionary of Keys for the endpoint.",
+          "x-ms-secret": true
         }
       }
     },
@@ -29773,11 +29790,13 @@
         },
         "keys": {
           "$ref": "#/definitions/EndpointAuthKeys",
+          "format": "password",
           "description": "EndpointAuthKeys to set initially on an Endpoint.\nThis property will always be returned as null. AuthKey values must be retrieved using the ListKeys API.",
           "x-nullable": true,
           "x-ms-mutability": [
             "create"
-          ]
+          ],
+          "x-ms-secret": true
         },
         "properties": {
           "type": "object",
@@ -40322,11 +40341,13 @@
       "properties": {
         "secrets": {
           "$ref": "#/definitions/SasDatastoreSecrets",
+          "format": "password",
           "description": "[Required] Storage container secrets.",
           "x-ms-mutability": [
             "update",
             "create"
-          ]
+          ],
+          "x-ms-secret": true
         }
       },
       "required": [
@@ -41203,11 +41224,13 @@
         },
         "secrets": {
           "$ref": "#/definitions/ServicePrincipalDatastoreSecrets",
+          "format": "password",
           "description": "[Required] Service principal secrets.",
           "x-ms-mutability": [
             "update",
             "create"
-          ]
+          ],
+          "x-ms-secret": true
         },
         "tenantId": {
           "$ref": "#/definitions/Azure.Core.uuid",
