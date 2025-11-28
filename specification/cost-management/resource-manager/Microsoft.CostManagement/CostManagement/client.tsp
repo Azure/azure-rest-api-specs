@@ -33,6 +33,14 @@ using Microsoft.CostManagement;
 @@clientName(Export.eTag, "etag", "java");
 @@clientName(Alert.eTag, "etag", "java");
 
+@@clientName(Microsoft.CostManagement, "CostManagementClient", "python");
+@@clientName(Azure.ResourceManager.CommonTypes.ErrorResponse,
+  "ArmErrorResponse",
+  "python"
+);
+@@clientName(Term.`P1Y`, "P1_Y", "python");
+@@clientName(Term.`P3Y`, "P3_Y", "python");
+
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
