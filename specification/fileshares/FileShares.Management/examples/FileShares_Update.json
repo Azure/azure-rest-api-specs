@@ -1,0 +1,68 @@
+{
+  "parameters": {
+    "subscriptionId": "0590b445-524e-4caa-9870-2e2461d23434",
+    "resourceGroupName": "fiddler-mfs-rg",
+    "fileShareName": "fiddler-test-fs-resource",
+    "properties": {
+      "properties": {
+        "provisionedStorageGiB": 500,
+        "nfsProtocolProperties": {
+          "rootSquash": "RootSquash"
+        },
+        "publicEndpointNetworkRuleSet": {
+          "virtualNetworkRules": []
+        }
+      },
+      "tags": {
+        "Owner": "updatedowner"
+      }
+    },
+    "api-version": "2023-01-01-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "x-ms-request-id": "15bb4657-0074-4345-b310-a95ff90866ab",
+        "x-ms-correlation-request-id": "d166ca76-dad2-49df-b409-d2acfd42d730"
+      },
+      "body": {
+        "properties": {
+          "shareName": "mfs-fileshare",
+          "hostName": "mfsplfhfr4l44r4vchjb.file.preprod.core.windows.net",
+          "tier": "SSD",
+          "redundancy": "Local",
+          "protocols": [
+            "NFS"
+          ],
+          "provisionedStorageGiB": 500,
+          "provisionedIOPerSec": 102400,
+          "provisionedThroughputMiBPerSec": 204850,
+          "includedBurstIOPerSec": 10000,
+          "maxBurstIOPerSecCredits": 0,
+          "nfsProtocolProperties": {
+            "rootSquash": "RootSquash"
+          },
+          "publicEndpointNetworkRuleSet": {
+            "virtualNetworkRules": []
+          }
+        },
+        "tags": {
+          "Owner": "updatedowner"
+        },
+        "location": "southcentralus",
+        "id": "/subscriptions/0590b445-524e-4caa-9870-2e2461d23434/resourceGroups/fiddler-mfs-rg/providers/Microsoft.FileShares/fileShares/fiddler-test-fs-resource",
+        "name": "fiddler-test-fs-resource",
+        "type": "Microsoft.FileShares/fileShares"
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://api-dogfood.resources.windows-int.net/subscriptions/0590b445-524e-4caa-9870-2e2461d23434/providers/Microsoft.FileShares/locations/southcentralus/partitions/Workflow/operations/7bbb2f4d-8e01-4d0f-a463-8aac1c4ec2ce?api-version=2023-01-01-preview",
+        "Location": "https://api-dogfood.resources.windows-int.net/subscriptions/0590b445-524e-4caa-9870-2e2461d23434/providers/Microsoft.FileShares/locations/southcentralus/partitions/Workflow/operationresults/7bbb2f4d-8e01-4d0f-a463-8aac1c4ec2ce?api-version=2023-01-01-preview",
+        "Retry-After": "5",
+        "x-ms-request-id": "74e55a4d-1c6f-46de-9a8d-278e53a47403",
+        "x-ms-correlation-request-id": "d166ca76-dad2-49df-b409-d2acfd42d730"
+      }
+    }
+  }
+}
