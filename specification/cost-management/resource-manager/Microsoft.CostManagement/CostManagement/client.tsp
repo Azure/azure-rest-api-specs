@@ -38,8 +38,8 @@ using Microsoft.CostManagement;
   "ArmErrorResponse",
   "python"
 );
-@@clientName(Term.`P1Y`, "P1_Y", "python");
-@@clientName(Term.`P3Y`, "P3_Y", "python");
+@@clientName(Term.P1Y, "P1_Y", "python");
+@@clientName(Term.P3Y, "P3_Y", "python");
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
