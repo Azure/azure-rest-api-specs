@@ -226,3 +226,8 @@ using Microsoft.ComputeSchedule;
   "javascript"
 );
 @@clientName(Microsoft.ComputeSchedule.ActionType, "ScheduledActionType");
+// Fix for csharp api-compat issue
+@@clientName(LocationParameter.locationparameter,
+  "azureLocationparameter",
+  "csharp"
+);
