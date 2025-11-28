@@ -209,7 +209,6 @@ interface CloudHsmClusters {
    * Gets the restore operation status of the specified Cloud HSM Cluster
    */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters/{cloudHsmClusterName}/restoreOperationStatus/{jobId}")
-  @get
   cloudHsmClusterRestoreStatusGet is CloudHsmClustersOps.Read<
     CloudHsmCluster,
     Response = (RestoreResult &
