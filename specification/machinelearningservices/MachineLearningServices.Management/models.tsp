@@ -3836,7 +3836,7 @@ model VirtualMachineSizeListResult {
   /**
    * The list of virtual machine sizes supported by AmlCompute.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   value?: VirtualMachineSize[];
 }
 
@@ -3945,6 +3945,8 @@ model EstimatedVMPrices {
   /**
    * The list of estimated prices for using a VM of a particular OS type, tier, etc.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @OpenAPI.extension("x-ms-identifiers", #[])
   @summary("List of estimated VM prices.")
   values: EstimatedVMPrice[];
@@ -4198,6 +4200,7 @@ model Compute {
    * Errors during provisioning
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @OpenAPI.extension("x-ms-identifiers", #["/error/code"])
   provisioningErrors?: ErrorResponse[] | null;
@@ -4296,13 +4299,13 @@ model CustomService {
   /**
    * Configuring the endpoints for the container
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   endpoints?: Endpoint[];
 
   /**
    * Configuring the volumes for the container
    */
-  @OpenAPI.extension("x-ms-identifiers", #["source", "target"])
+  @identifiers(#["source", "target"])
   volumes?: VolumeDefinition[];
 
   /**
@@ -4506,7 +4509,7 @@ model AmlComputeNodesInformation {
    */
   @visibility(Lifecycle.Read)
   @pageItems
-  @OpenAPI.extension("x-ms-identifiers", #["nodeId"])
+  @identifiers(#["nodeId"])
   nodes?: AmlComputeNodeInformation[];
 
   /**
@@ -6429,6 +6432,7 @@ model FeaturestoreEntityVersionProperties extends AssetBase {
    * Specifies index columns
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @OpenAPI.extension("x-ms-identifiers", #[])
   indexColumns?: IndexColumn[] | null;
 
@@ -7733,6 +7737,7 @@ model RegistryProperties {
    * Details of each region the registry is in
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @OpenAPI.extension("x-ms-identifiers", #[])
   regionDetails?: RegistryRegionArmDetails[] | null;
 }
@@ -7757,6 +7762,7 @@ model ManagedResourceGroupSettings {
    * List of assigned identities for the managed resource group
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @OpenAPI.extension("x-ms-identifiers", #[])
   assignedIdentities?: ManagedResourceGroupAssignedIdentities[] | null;
 }
@@ -7870,6 +7876,7 @@ model RegistryRegionArmDetails {
    * List of ACR accounts
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @OpenAPI.extension("x-ms-identifiers", #[])
   acrDetails?: AcrDetails[] | null;
 
@@ -7883,6 +7890,7 @@ model RegistryRegionArmDetails {
    * List of storage accounts
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @OpenAPI.extension("x-ms-identifiers", #[])
   storageAccountDetails?: StorageAccountDetails[] | null;
 }
@@ -8185,7 +8193,7 @@ model WorkspaceProperties {
    * The list of private endpoint connections in the workspace.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   privateEndpointConnections?: PrivateEndpointConnection[];
 
   /**
@@ -8229,7 +8237,7 @@ model WorkspaceProperties {
   /**
    * The list of shared private link resources in this workspace.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   sharedPrivateLinkResources?: SharedPrivateLinkResource[];
 
   /**
@@ -9026,6 +9034,7 @@ model EndpointModelSkuRateLimitRuleProperties {
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   key?: string;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -9063,6 +9072,7 @@ model RaiBlocklistProperties {
  * The list of Cognitive Services RaiBlocklist Items for batch add.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @OpenAPI.extension("x-ms-identifiers", #["name"])
 model RaiBlocklistItemsBulkAddRequest is RaiBlocklistItemBulkRequest[];
 
@@ -9262,39 +9272,39 @@ model DiagnoseResponseResult {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DiagnoseResponseResultValue {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #["message"])
+  @identifiers(#["message"])
   userDefinedRouteResults?: DiagnoseResult[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #["message"])
+  @identifiers(#["message"])
   networkSecurityRuleResults?: DiagnoseResult[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #["message"])
+  @identifiers(#["message"])
   resourceLockResults?: DiagnoseResult[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #["message"])
+  @identifiers(#["message"])
   dnsResolutionResults?: DiagnoseResult[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #["message"])
+  @identifiers(#["message"])
   storageAccountResults?: DiagnoseResult[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #["message"])
+  @identifiers(#["message"])
   keyVaultResults?: DiagnoseResult[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #["message"])
+  @identifiers(#["message"])
   containerRegistryResults?: DiagnoseResult[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #["message"])
+  @identifiers(#["message"])
   applicationInsightsResults?: DiagnoseResult[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #["message"])
+  @identifiers(#["message"])
   otherResults?: DiagnoseResult[];
 }
 
@@ -9441,7 +9451,7 @@ model RegistryListCredentialsResult {
   location?: string;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   passwords?: Password[];
 
   /**
@@ -9532,7 +9542,7 @@ model ListStorageAccountKeysResult {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ExternalFQDNResponse {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #["/properties/category"])
+  @identifiers(#["/properties/category"])
   value?: FqdnEndpointsPropertyBag[];
 }
 
@@ -9550,7 +9560,7 @@ model FqdnEndpoints {
   category?: string;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #["domainName"])
+  @identifiers(#["domainName"])
   endpoints?: FqdnEndpoint[];
 }
 
@@ -9560,7 +9570,7 @@ model FqdnEndpoint {
   domainName?: string;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #["port"])
+  @identifiers(#["port"])
   endpointDetails?: FqdnEndpointDetail[];
 }
 
@@ -9739,6 +9749,7 @@ model AKSSchemaProperties {
    * System services
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @OpenAPI.extension("x-ms-identifiers", #["publicIpAddress"])
   systemServices?: SystemService[] | null;
@@ -10058,6 +10069,7 @@ model AmlComputeProperties {
    * Collection of errors encountered by various compute nodes during node setup.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @summary("Errors.")
   @OpenAPI.extension("x-ms-identifiers", #["/error/code"])
@@ -10243,6 +10255,7 @@ model ComputeInstanceProperties {
    * List of Custom Services added to the compute.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @OpenAPI.extension("x-ms-identifiers", #["name"])
   customServices?: CustomService[] | null;
 
@@ -10262,7 +10275,7 @@ model ComputeInstanceProperties {
    * Describes available applications and their endpoints on this ComputeInstance.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["displayName"])
+  @identifiers(#["displayName"])
   applications?: ComputeInstanceApplication[];
 
   /**
@@ -10275,7 +10288,7 @@ model ComputeInstanceProperties {
    * Collection of errors encountered on this ComputeInstance.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["/error/code"])
+  @identifiers(#["/error/code"])
   @summary("Errors.")
   errors?: ErrorResponse[];
 
@@ -10364,6 +10377,7 @@ model ComputeInstanceProperties {
    * Describes informations of containers on this ComputeInstance.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @OpenAPI.extension("x-ms-identifiers", #["name"])
   containers?: ComputeInstanceContainer[] | null;
@@ -10372,6 +10386,7 @@ model ComputeInstanceProperties {
    * Describes informations of dataDisks on this ComputeInstance.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @OpenAPI.extension("x-ms-identifiers", #[])
   dataDisks?: ComputeInstanceDataDisk[] | null;
@@ -10380,6 +10395,7 @@ model ComputeInstanceProperties {
    * Describes informations of dataMounts on this ComputeInstance.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @OpenAPI.extension("x-ms-identifiers", #[])
   dataMounts?: ComputeInstanceDataMount[] | null;
@@ -10483,6 +10499,7 @@ model OsPatchingStatus {
    * Collection of errors encountered when doing os patching.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @OpenAPI.extension("x-ms-identifiers", #["/error/code"])
   osPatchingErrors?: ErrorResponse[] | null;
 }
@@ -10838,7 +10855,7 @@ model ComputeInstanceContainer {
    * services of this containers.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   services?: Record<unknown>[];
 }
 
@@ -10981,6 +10998,7 @@ model VirtualMachineSshCredentials {
   /**
    * Password of admin account
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   password?: string;
 
   /**
@@ -11052,6 +11070,7 @@ model DatabricksProperties {
   /**
    * Databricks access token
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   databricksAccessToken?: string;
 
   /**
@@ -11251,6 +11270,7 @@ model DatabricksComputeSecretsProperties {
   /**
    * access token for databricks account.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   databricksAccessToken?: string;
 }
 
@@ -12445,6 +12465,7 @@ model TableVerticalFeaturizationSettings extends FeaturizationSettings {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @OpenAPI.extension("x-ms-identifiers", #[])
   transformerParams?: Record<ColumnTransformer[] | null> | null;
 }
@@ -12748,6 +12769,7 @@ model MonitorEmailNotificationSettings {
    * The email recipient list which has a limitation of 499 characters in total.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @OpenAPI.extension("x-ms-identifiers", #[])
   emails?: string[] | null;
@@ -12797,6 +12819,7 @@ model MonitoringSignalBase {
    * The current notification mode for this signal.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @OpenAPI.extension("x-ms-identifiers", #[])
   notificationTypes?: MonitoringNotificationType[] | null;
@@ -12929,7 +12952,7 @@ model CustomMonitoringSignal extends MonitoringSignalBase {
    * [Required] A list of metrics to calculate and their associated thresholds.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   metricThresholds: CustomMetricThreshold[];
 
   /**
@@ -13062,7 +13085,7 @@ model DataDriftMonitoringSignal extends MonitoringSignalBase {
    * [Required] A list of metrics to calculate and their associated thresholds.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   metricThresholds: DataDriftMetricThresholdBase[];
 
   /**
@@ -13220,7 +13243,7 @@ model DataQualityMonitoringSignal extends MonitoringSignalBase {
    * [Required] A list of metrics to calculate and their associated thresholds.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   metricThresholds: DataQualityMetricThresholdBase[];
 
   /**
@@ -13377,7 +13400,7 @@ model FeatureAttributionDriftMonitoringSignal extends MonitoringSignalBase {
    * [Required] The data which drift will be calculated for.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   productionData: MonitoringInputDataBase[];
 
   /**
@@ -13637,6 +13660,7 @@ model ImageClassificationBase extends ImageVertical {
    * Search space for sampling different combinations of models and their hyperparameters.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @OpenAPI.extension("x-ms-identifiers", #[])
   searchSpace?: ImageModelDistributionSettingsClassification[] | null;
 }
@@ -15016,7 +15040,7 @@ model PredictionDriftMonitoringSignal extends MonitoringSignalBase {
    * [Required] A list of metrics to calculate and their associated thresholds.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   metricThresholds: PredictionDriftMetricThresholdBase[];
 
   /**
@@ -15867,6 +15891,7 @@ model WorkspaceConnectionAccessKey {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   accessKeyId?: string;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   secretAccessKey?: string;
 }
 
@@ -15891,6 +15916,7 @@ model AccountKeyAuthTypeWorkspaceConnectionProperties
  */
 model WorkspaceConnectionAccountKey {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   key?: string;
 }
 
@@ -15932,6 +15958,7 @@ model ApiKeyAuthWorkspaceConnectionProperties
  */
 model WorkspaceConnectionApiKey {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   key?: string;
 }
 
@@ -16488,6 +16515,7 @@ model UsernamePasswordAuthTypeWorkspaceConnectionProperties
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model WorkspaceConnectionUsernamePassword {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   password?: string;
 
   /**

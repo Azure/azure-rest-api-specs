@@ -92,7 +92,7 @@ interface RaiBlocklistPropertiesBasicResources {
     RaiBlocklistItemsBulkAddRequest,
     {
       @body
-      @OpenAPI.extension("x-ms-identifiers", #[])
+      @identifiers(#[])
       _?: RaiBlocklistItemPropertiesBasicResource[];
     }
   >;
