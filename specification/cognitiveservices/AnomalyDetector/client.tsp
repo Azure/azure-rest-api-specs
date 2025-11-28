@@ -3,4 +3,7 @@ import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
 
-@@convenientAPI(AnomalyDetector.Univariate.detectUnivariateEntireSeries, false);
+@@convenientAPI(AnomalyDetector.Univariate.detectUnivariateEntireSeries,
+  false,
+  "!javascript"
+);
