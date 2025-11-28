@@ -26,5 +26,7 @@ jobs:
 
       - name: Install azsdk mcp server
         shell: pwsh
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           ./eng/common/mcp/azure-sdk-mcp.ps1 -InstallDirectory $HOME/bin
