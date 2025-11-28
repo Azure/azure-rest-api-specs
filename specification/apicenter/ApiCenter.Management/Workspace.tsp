@@ -6,6 +6,7 @@ import "./Service.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
 using TypeSpec.Http;
 
 namespace Microsoft.ApiCenter;
@@ -40,4 +41,11 @@ interface Workspaces {
   delete is ArmResourceDeleteSync<Workspace>;
   @doc("Returns a collection of workspaces.")
   list is ArmResourceListByParent<Workspace>;
+  @added(Versions.v2024_06_01_preview)
+  @doc("Imports from the API source (one-time import).")
+  importApiSource is ArmResourceActionAsync<
+    Workspace,
+    ImportApiSourceRequest,
+    Azure.ResourceManager.Foundations.OperationStatusResult
+  >;
 }
