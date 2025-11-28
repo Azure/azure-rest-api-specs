@@ -41,8 +41,7 @@ interface BackupAutomaticAndOnDemands {
   create is Legacy.CreateOrReplaceAsync<
     BackupAutomaticAndOnDemand,
     Request = void,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
-      ArmLroLocationHeader &
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = BackupAutomaticAndOnDemand> &
       Azure.Core.Foundations.RetryAfterHeader>
   >;
 

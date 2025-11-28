@@ -48,8 +48,7 @@ interface Servers {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Server,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
-      ArmLroLocationHeader &
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = Server> &
       Azure.Core.Foundations.RetryAfterHeader>
   >;
 
@@ -137,8 +136,7 @@ interface Servers {
       @header("x-ms-request-id")
       @doc("A unique ID for the current operation, service generated. All the resource providers must return this value in the response headers to facilitate debugging.")
       requestId?: string;
-    }) | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = BackupsLongTermRetentionResponse> &
-      ArmAsyncOperationHeader &
+    }) | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = BackupsLongTermRetentionResponse> &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @header("x-ms-request-id")
       @doc("A unique ID for the current operation, service generated. All the resource providers must return this value in the response headers to facilitate debugging.")

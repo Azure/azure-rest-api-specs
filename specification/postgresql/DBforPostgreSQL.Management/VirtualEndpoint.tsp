@@ -43,8 +43,7 @@ interface VirtualEndpoints {
   @useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrReplaceAsync<
     VirtualEndpoint,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
-      ArmLroLocationHeader &
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = VirtualEndpoint> &
       Azure.Core.Foundations.RetryAfterHeader>
   >;
 
@@ -56,8 +55,7 @@ interface VirtualEndpoints {
   update is ArmCustomPatchAsync<
     VirtualEndpoint,
     PatchModel = VirtualEndpointResourceForPatch,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
-      ArmLroLocationHeader &
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = VirtualEndpoint> &
       Azure.Core.Foundations.RetryAfterHeader>
   >;
 

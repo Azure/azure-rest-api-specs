@@ -142,6 +142,7 @@ using Microsoft.DBforPostgreSQL;
 @@clientName(Servers.serversStart, "Start");
 
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Server.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(VirtualEndpoint.properties);
 
 @@clientLocation(TuningOptionsOperationGroup.get, "TuningOptions");
 @@clientLocation(TuningOptionsOperationGroup.listByServer, "TuningOptions");
