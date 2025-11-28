@@ -1,0 +1,32 @@
+{
+  "title": "Groups_List",
+  "operationId": "Groups_List",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroup": "myResourceGroup",
+    "providerName": "Microsoft.HybridCompute",
+    "parentResourceType": "machines",
+    "parentResourceName": "myArcServer"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/machines/myArcServer/providers/Microsoft.GuestConfiguration/groups/myGroup",
+            "name": "myGroup",
+            "type": "Microsoft.GuestConfiguration/groups",
+            "properties": {
+              "groupId": "101",
+              "comment": "",
+              "members": [
+                "testUser"
+              ]
+            }
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}
