@@ -710,6 +710,16 @@ suppressions:
       - $.definitions.NspAssociation
 ```
 
+### Tag: package-2024-11-preview
+
+These settings apply only when `--tag=package-2024-11-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-11-preview'
+input-file:
+  - Microsoft.Network/preview/2024-11-01-preview/network.json
+  - Microsoft.Network/preview/2024-11-01-preview/networkSecurityPerimeter.json
+```
+
 ### Tag: package-2024-05
 
 These settings apply only when `--tag=package-2024-05` is specified on the command line.
