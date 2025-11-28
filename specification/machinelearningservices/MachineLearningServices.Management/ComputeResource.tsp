@@ -20,15 +20,36 @@ namespace Microsoft.MachineLearningServices;
 #suppress "@azure-tools/typespec-client-generator-core/legacy-hierarchy-building-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Workspace)
 @Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ComputeResourceSchema)
-model ComputeResource is Azure.ResourceManager.TrackedResource<Compute> {
+model ComputeResource is Azure.ResourceManager.ProxyResource<Compute> {
   ...ResourceNameParameter<
     Resource = ComputeResource,
     KeyName = "computeName",
     SegmentName = "computes",
     NamePattern = "^[a-zA-Z](?![a-zA-Z0-9-]*-\\d+$)[a-zA-Z0-9\\-]{2,23}$"
   >;
+
+  /**
+   * Specifies the location of the resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  location?: string;
+
+  /**
+   * Contains resource tags defined as key/value pairs.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  tags?: Record<string> | null;
+
+  /**
+   * The sku of the workspace.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  sku?: Azure.ResourceManager.Foundations.Sku | null;
+
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
-  ...Azure.ResourceManager.ResourceSkuProperty;
 }
 
 @armResourceOperations
@@ -219,5 +240,4 @@ interface ComputeResources {
 @@doc(ComputeResources.resize::parameters.body,
   "The object for updating VM size setting of specified Compute Instance."
 );
-@@doc(ComputeResource.sku, "The SKU of the resource.");
 @@doc(ComputeResource.identity, "The identity of the resource.");

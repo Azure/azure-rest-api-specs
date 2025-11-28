@@ -5580,6 +5580,7 @@ model EndpointPropertiesBase {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Create)
+  @secret
   keys?: EndpointAuthKeys | null;
 
   /**
@@ -9394,6 +9395,7 @@ model EndpointKeys {
   /**
    * Dictionary of Keys for the endpoint.
    */
+  @secret
   keys?: AccountApiKeys;
 }
 
@@ -11294,6 +11296,7 @@ model AccountKeyDatastoreCredentials extends DatastoreCredentials {
    * [Required] Storage account secrets.
    */
   @visibility(Lifecycle.Create, Lifecycle.Update)
+  @secret
   secrets: AccountKeyDatastoreSecrets;
 
   /**
@@ -15208,6 +15211,7 @@ model SasDatastoreCredentials extends DatastoreCredentials {
    * [Required] Storage container secrets.
    */
   @visibility(Lifecycle.Create, Lifecycle.Update)
+  @secret
   secrets: SasDatastoreSecrets;
 
   /**
@@ -15258,6 +15262,7 @@ model ServicePrincipalDatastoreCredentials extends DatastoreCredentials {
    * [Required] Service principal secrets.
    */
   @visibility(Lifecycle.Create, Lifecycle.Update)
+  @secret
   secrets: ServicePrincipalDatastoreSecrets;
 
   /**
