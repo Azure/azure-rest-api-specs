@@ -376,6 +376,16 @@ model NamespaceAssetStatusDataset {
   @doc("Object to transfer and persist errors that originate from the edge.")
   @visibility(Lifecycle.Read)
   error?: StatusError;
+
+  @doc("Health state of the dataset.")
+  @added(Versions.v2026_02_01_preview)
+  @visibility(Lifecycle.Read)
+  healthState?: HealthState = HealthState.Unknown;
+
+  @doc("Health details of the dataset.")
+  @added(Versions.v2026_02_01_preview)
+  @visibility(Lifecycle.Read)
+  healthDetails?: HealthDetails;
 }
 
 @doc("Defines the asset status event group properties.")
@@ -405,6 +415,16 @@ model NamespaceAssetStatusEvent {
   @doc("Object to transfer and persist errors that originate from the edge.")
   @visibility(Lifecycle.Read)
   error?: StatusError;
+
+  @doc("Health state of the event.")
+  @added(Versions.v2026_02_01_preview)
+  @visibility(Lifecycle.Read)
+  healthState?: HealthState = HealthState.Unknown;
+
+  @doc("Health details of the event.")
+  @added(Versions.v2026_02_01_preview)
+  @visibility(Lifecycle.Read)
+  healthDetails?: HealthDetails;
 }
 
 @doc("Defines the asset status stream properties.")
@@ -421,6 +441,16 @@ model NamespaceAssetStatusStream {
   @doc("Object to transfer and persist errors that originate from the edge.")
   @visibility(Lifecycle.Read)
   error?: StatusError;
+
+  @doc("Health state of the stream.")
+  @added(Versions.v2026_02_01_preview)
+  @visibility(Lifecycle.Read)
+  healthState?: HealthState = HealthState.Unknown;
+
+  @doc("Health details of the stream.")
+  @added(Versions.v2026_02_01_preview)
+  @visibility(Lifecycle.Read)
+  healthDetails?: HealthDetails;
 }
 
 @doc("Defines the asset status management group properties.")
@@ -454,6 +484,16 @@ model NamespaceAssetStatusManagementAction {
   @doc("Object to transfer and persist errors that originate from the edge.")
   @visibility(Lifecycle.Read)
   error?: StatusError;
+
+  @doc("Health state of the management action.")
+  @added(Versions.v2026_02_01_preview)
+  @visibility(Lifecycle.Read)
+  healthState?: HealthState = HealthState.Unknown;
+
+  @doc("Health details of the management action.")
+  @added(Versions.v2026_02_01_preview)
+  @visibility(Lifecycle.Read)
+  healthDetails?: HealthDetails;
 }
 
 @doc("Defines the message schema reference properties.")
