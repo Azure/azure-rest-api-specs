@@ -1785,6 +1785,87 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/namespaces/{namespaceName}/assets/{assetName}/pendingActions": {
+      "post": {
+        "operationId": "NamespaceAssets_PendingActions",
+        "tags": [
+          "NamespaceAssets"
+        ],
+        "description": "A long-running resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The name of the namespace.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "assetName",
+            "in": "path",
+            "description": "The name of the asset.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NamespaceAssetPendingActionsResponse"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Namespace Asset Pending Actions": {
+            "$ref": "./examples/PendingActions_Assets_Namespace.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/namespaces/{namespaceName}/credentials": {
       "get": {
         "operationId": "Credentials_ListByResourceGroup",
@@ -4524,6 +4605,29 @@
     }
   },
   "definitions": {
+    "ActionStatus": {
+      "type": "object",
+      "description": "Details of a management action status.",
+      "properties": {
+        "managementActionName": {
+          "type": "string",
+          "description": "Name of the management action."
+        },
+        "managementGroupName": {
+          "type": "string",
+          "description": "Name of the management group under which the action is executed."
+        },
+        "operationStatusId": {
+          "type": "string",
+          "description": "Operation status ID for tracking the action."
+        }
+      },
+      "required": [
+        "managementActionName",
+        "managementGroupName",
+        "operationStatusId"
+      ]
+    },
     "Asset": {
       "type": "object",
       "description": "Asset definition.",
@@ -6819,6 +6923,23 @@
       },
       "required": [
         "value"
+      ]
+    },
+    "NamespaceAssetPendingActionsResponse": {
+      "type": "object",
+      "description": "The response body for the pendingActions operation on NamespaceAsset.",
+      "properties": {
+        "pendingActions": {
+          "type": "array",
+          "description": "List of pending actions for the asset.",
+          "items": {
+            "$ref": "#/definitions/ActionStatus"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "pendingActions"
       ]
     },
     "NamespaceAssetProperties": {

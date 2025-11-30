@@ -1,0 +1,36 @@
+{
+  "title": "Namespace Asset Pending Actions",
+  "operationId": "NamespaceAssets_PendingActions",
+  "description": "Pending actions on Namespace Asset Resource.",
+  "parameters": {
+    "api-version": "2026-02-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "namespaceName": "my-namespace-1",
+    "assetName": "my-asset-1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "pendingActions": [
+          {
+            "managementActionName": "my-asset-action-1",
+            "managementGroupName": "my-asset-group-1",
+            "operationStatusId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.IoTWorkspaces/operationsStatuses/operationstatusid-1234"
+          },
+          {
+            "managementActionName": "my-asset-action-2",
+            "managementGroupName": "my-asset-group-2",
+            "operationStatusId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.IoTWorkspaces/operationsStatuses/operationstatusid-5678"
+          }
+        ]
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://contoso.com/operationstatus",
+        "Azure-AsyncOperation": "https://contoso.com/subscriptions/00000000-0000-0000-0000-000000000000/locations/westus/operationsStatuses/someguid"
+      }
+    }
+  }
+}

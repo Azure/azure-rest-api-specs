@@ -71,6 +71,27 @@ model NamespaceAssetExecuteActionResponse {
   error?: Error;
 }
 
+@added(Versions.v2026_02_01_preview)
+@doc("The response body for the pendingActions operation on NamespaceAsset.")
+model NamespaceAssetPendingActionsResponse {
+  @doc("List of pending actions for the asset.")
+  @identifiers(#[])
+  pendingActions: ActionStatus[];
+}
+
+@added(Versions.v2026_02_01_preview)
+@doc("Details of a management action status.")
+model ActionStatus {
+  @doc("Name of the management action.")
+  managementActionName: string;
+
+  @doc("Name of the management group under which the action is executed.")
+  managementGroupName: string;
+
+  @doc("Operation status ID for tracking the action.")
+  operationStatusId: string;
+}
+
 @added(Versions.v2025_07_01_preview)
 @armResourceOperations
 interface NamespaceAssets {
@@ -94,6 +115,16 @@ interface NamespaceAssets {
     NamespaceAsset,
     NamespaceAssetExecuteActionRequest,
     NamespaceAssetExecuteActionResponse,
+    LroHeaders = ArmAsyncOperationHeader &
+      ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
+
+  @added(Versions.v2026_02_01_preview)
+  pendingActions is ArmResourceActionAsync<
+    NamespaceAsset,
+    void,
+    NamespaceAssetPendingActionsResponse,
     LroHeaders = ArmAsyncOperationHeader &
       ArmLroLocationHeader &
       Azure.Core.Foundations.RetryAfterHeader
