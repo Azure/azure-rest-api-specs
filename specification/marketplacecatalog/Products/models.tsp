@@ -555,7 +555,7 @@ model PlanDetails {
 
 @doc("Data aggregated from product Sku level")
 model SkuAggregatedData {
-  @doc("Superset of actions available for at least one product Sku")
+  @doc("Superset of actions aggregated from availabilities and terms across product SKUs")
   actions?: string[];
 
   @doc("Superset of sku availability term states")
