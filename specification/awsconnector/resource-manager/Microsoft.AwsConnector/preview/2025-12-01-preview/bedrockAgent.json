@@ -1,0 +1,1417 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AwsConnector",
+    "version": "2025-12-01-preview",
+    "description": "Microsoft.AwsConnector Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "BedrockAgents"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AwsConnector/bedrockAgents": {
+      "get": {
+        "operationId": "BedrockAgents_ListBySubscription",
+        "tags": [
+          "BedrockAgents"
+        ],
+        "description": "List BedrockAgent resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BedrockAgentListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BedrockAgents_ListBySubscription_MaximumSet": {
+            "$ref": "./examples/BedrockAgents_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/bedrockAgents": {
+      "get": {
+        "operationId": "BedrockAgents_ListByResourceGroup",
+        "tags": [
+          "BedrockAgents"
+        ],
+        "description": "List BedrockAgent resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BedrockAgentListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BedrockAgents_ListByResourceGroup_MaximumSet": {
+            "$ref": "./examples/BedrockAgents_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/bedrockAgents/{name}": {
+      "get": {
+        "operationId": "BedrockAgents_Get",
+        "tags": [
+          "BedrockAgents"
+        ],
+        "description": "Get a BedrockAgent",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of BedrockAgent",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BedrockAgent"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BedrockAgents_Get_MaximumSet": {
+            "$ref": "./examples/BedrockAgents_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "BedrockAgents_CreateOrReplace",
+        "tags": [
+          "BedrockAgents"
+        ],
+        "description": "Create a BedrockAgent. Please note that end user resource creation is currently restricted, but it will be enabled in the future.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of BedrockAgent",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BedrockAgent"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'BedrockAgent' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/BedrockAgent"
+            }
+          },
+          "201": {
+            "description": "Resource 'BedrockAgent' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/BedrockAgent"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BedrockAgents_CreateOrReplace_MaximumSet": {
+            "$ref": "./examples/BedrockAgents_CreateOrReplace.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "BedrockAgents_Update",
+        "tags": [
+          "BedrockAgents"
+        ],
+        "description": "Update a BedrockAgent",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of BedrockAgent",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BedrockAgentTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BedrockAgent"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BedrockAgents_Update_MaximumSet": {
+            "$ref": "./examples/BedrockAgents_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "BedrockAgents_Delete",
+        "tags": [
+          "BedrockAgents"
+        ],
+        "description": "Delete a BedrockAgent",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of BedrockAgent",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BedrockAgents_Delete_MaximumSet": {
+            "$ref": "./examples/BedrockAgents_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "APISchema": {
+      "type": "object",
+      "description": "Definition of APISchema",
+      "properties": {
+        "s3": {
+          "$ref": "#/definitions/S3Identifier",
+          "description": "The identifier for the S3 resource."
+        },
+        "payload": {
+          "type": "string",
+          "description": "String OpenAPI Payload"
+        }
+      }
+    },
+    "ActionGroupExecutor": {
+      "type": "object",
+      "description": "Definition of ActionGroupExecutor",
+      "properties": {
+        "lambda": {
+          "type": "string",
+          "description": "ARN of a Lambda."
+        },
+        "customControl": {
+          "$ref": "#/definitions/CustomControlMethod",
+          "description": "Custom control of action execution"
+        }
+      }
+    },
+    "ActionGroupSignature": {
+      "type": "string",
+      "description": "ActionGroupSignature enum",
+      "enum": [
+        "AMAZON.CodeInterpreter",
+        "AMAZON.UserInput"
+      ],
+      "x-ms-enum": {
+        "name": "ActionGroupSignature",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AMAZONCodeInterpreter",
+            "value": "AMAZON.CodeInterpreter",
+            "description": "ActionGroupSignature enum AMAZON.CodeInterpreter"
+          },
+          {
+            "name": "AMAZONUserInput",
+            "value": "AMAZON.UserInput",
+            "description": "ActionGroupSignature enum AMAZON.UserInput"
+          }
+        ]
+      }
+    },
+    "ActionGroupState": {
+      "type": "string",
+      "description": "ActionGroupState enum",
+      "enum": [
+        "DISABLED",
+        "ENABLED"
+      ],
+      "x-ms-enum": {
+        "name": "ActionGroupState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DISABLED",
+            "value": "DISABLED",
+            "description": "ActionGroupState enum DISABLED"
+          },
+          {
+            "name": "ENABLED",
+            "value": "ENABLED",
+            "description": "ActionGroupState enum ENABLED"
+          }
+        ]
+      }
+    },
+    "AgentActionGroup": {
+      "type": "object",
+      "description": "Definition of AgentActionGroup",
+      "properties": {
+        "actionGroupExecutor": {
+          "$ref": "#/definitions/ActionGroupExecutor",
+          "description": "Type of Executors for an Action Group"
+        },
+        "actionGroupName": {
+          "type": "string",
+          "description": "Name of the action group"
+        },
+        "actionGroupState": {
+          "$ref": "#/definitions/ActionGroupState",
+          "description": "State of the action group"
+        },
+        "apiSchema": {
+          "$ref": "#/definitions/APISchema",
+          "description": "Contains information about the API Schema for the Action Group"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of action group"
+        },
+        "functionSchema": {
+          "$ref": "#/definitions/FunctionSchema",
+          "description": "Schema of Functions"
+        },
+        "parentActionGroupSignature": {
+          "$ref": "#/definitions/ActionGroupSignature",
+          "description": "Action Group Signature for a BuiltIn Action"
+        },
+        "skipResourceInUseCheckOnDelete": {
+          "type": "boolean",
+          "description": "Specifies whether to allow deleting action group while it is in use."
+        }
+      }
+    },
+    "AgentCollaboration": {
+      "type": "string",
+      "description": "AgentCollaboration enum",
+      "enum": [
+        "DISABLED",
+        "SUPERVISOR",
+        "SUPERVISOR_ROUTER"
+      ],
+      "x-ms-enum": {
+        "name": "AgentCollaboration",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DISABLED",
+            "value": "DISABLED",
+            "description": "AgentCollaboration enum DISABLED"
+          },
+          {
+            "name": "SUPERVISOR",
+            "value": "SUPERVISOR",
+            "description": "AgentCollaboration enum SUPERVISOR"
+          },
+          {
+            "name": "SUPERVISOR_ROUTER",
+            "value": "SUPERVISOR_ROUTER",
+            "description": "AgentCollaboration enum SUPERVISOR_ROUTER"
+          }
+        ]
+      }
+    },
+    "AgentCollaborator": {
+      "type": "object",
+      "description": "Definition of AgentCollaborator",
+      "properties": {
+        "agentDescriptor": {
+          "$ref": "#/definitions/AgentDescriptorModelProperties",
+          "description": "Agent descriptor for agent collaborator"
+        },
+        "collaborationInstruction": {
+          "type": "string",
+          "description": "Agent collaborator instruction"
+        },
+        "collaboratorName": {
+          "type": "string",
+          "description": "Agent collaborator name"
+        },
+        "relayConversationHistory": {
+          "$ref": "#/definitions/RelayConversationHistory",
+          "description": "Relay conversation history state"
+        }
+      }
+    },
+    "AgentDescriptorModelProperties": {
+      "type": "object",
+      "description": "Definition of AgentDescriptorModelProperties",
+      "properties": {
+        "aliasArn": {
+          "type": "string",
+          "description": "Alias ARN for agent descriptor"
+        }
+      }
+    },
+    "AgentKnowledgeBase": {
+      "type": "object",
+      "description": "Definition of AgentKnowledgeBase",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description of the Resource."
+        },
+        "knowledgeBaseId": {
+          "type": "string",
+          "description": "Identifier for a resource."
+        },
+        "knowledgeBaseState": {
+          "$ref": "#/definitions/KnowledgeBaseState",
+          "description": "State of the knowledge base; whether it is enabled or disabled"
+        }
+      }
+    },
+    "AgentStatus": {
+      "type": "string",
+      "description": "AgentStatus enum",
+      "enum": [
+        "CREATING",
+        "DELETING",
+        "FAILED",
+        "NOT_PREPARED",
+        "PREPARED",
+        "PREPARING",
+        "UPDATING",
+        "VERSIONING"
+      ],
+      "x-ms-enum": {
+        "name": "AgentStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CREATING",
+            "value": "CREATING",
+            "description": "AgentStatus enum CREATING"
+          },
+          {
+            "name": "DELETING",
+            "value": "DELETING",
+            "description": "AgentStatus enum DELETING"
+          },
+          {
+            "name": "FAILED",
+            "value": "FAILED",
+            "description": "AgentStatus enum FAILED"
+          },
+          {
+            "name": "NOT_PREPARED",
+            "value": "NOT_PREPARED",
+            "description": "AgentStatus enum NOT_PREPARED"
+          },
+          {
+            "name": "PREPARED",
+            "value": "PREPARED",
+            "description": "AgentStatus enum PREPARED"
+          },
+          {
+            "name": "PREPARING",
+            "value": "PREPARING",
+            "description": "AgentStatus enum PREPARING"
+          },
+          {
+            "name": "UPDATING",
+            "value": "UPDATING",
+            "description": "AgentStatus enum UPDATING"
+          },
+          {
+            "name": "VERSIONING",
+            "value": "VERSIONING",
+            "description": "AgentStatus enum VERSIONING"
+          }
+        ]
+      }
+    },
+    "AwsBedrockAgentProperties": {
+      "type": "object",
+      "description": "Definition of awsBedrockAgent",
+      "properties": {
+        "actionGroups": {
+          "type": "array",
+          "description": "List of ActionGroups",
+          "items": {
+            "$ref": "#/definitions/AgentActionGroup"
+          },
+          "x-ms-identifiers": []
+        },
+        "agentArn": {
+          "type": "string",
+          "description": "Arn representation of the Agent."
+        },
+        "agentCollaboration": {
+          "$ref": "#/definitions/AgentCollaboration",
+          "description": "Agent collaboration state"
+        },
+        "agentCollaborators": {
+          "type": "array",
+          "description": "List of Agent Collaborators",
+          "items": {
+            "$ref": "#/definitions/AgentCollaborator"
+          },
+          "x-ms-identifiers": []
+        },
+        "agentId": {
+          "type": "string",
+          "description": "Identifier for a resource."
+        },
+        "agentName": {
+          "type": "string",
+          "description": "Name for a resource."
+        },
+        "agentResourceRoleArn": {
+          "type": "string",
+          "description": "ARN of a IAM role."
+        },
+        "agentStatus": {
+          "$ref": "#/definitions/AgentStatus",
+          "description": "Schema Type for Action APIs."
+        },
+        "agentVersion": {
+          "type": "string",
+          "description": "Draft Agent Version."
+        },
+        "autoPrepare": {
+          "type": "boolean",
+          "description": "Specifies whether to automatically prepare after creating or updating the agent."
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Time Stamp."
+        },
+        "customOrchestration": {
+          "$ref": "#/definitions/CustomOrchestration",
+          "description": "Structure for custom orchestration"
+        },
+        "customerEncryptionKeyArn": {
+          "type": "string",
+          "description": "A KMS key ARN"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the Resource."
+        },
+        "failureReasons": {
+          "type": "array",
+          "description": "Failure Reasons for Error.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "foundationModel": {
+          "type": "string",
+          "description": "ARN or name of a Bedrock model."
+        },
+        "guardrailConfiguration": {
+          "$ref": "#/definitions/GuardrailConfiguration",
+          "description": "Configuration for a guardrail."
+        },
+        "idleSessionTTLInSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Max Session Time."
+        },
+        "instruction": {
+          "type": "string",
+          "description": "Instruction for the agent."
+        },
+        "knowledgeBases": {
+          "type": "array",
+          "description": "List of Agent Knowledge Bases",
+          "items": {
+            "$ref": "#/definitions/AgentKnowledgeBase"
+          },
+          "x-ms-identifiers": []
+        },
+        "memoryConfiguration": {
+          "$ref": "#/definitions/MemoryConfiguration",
+          "description": "Configuration for memory storage"
+        },
+        "orchestrationType": {
+          "$ref": "#/definitions/OrchestrationType",
+          "description": "Types of orchestration strategy for agents"
+        },
+        "preparedAt": {
+          "type": "string",
+          "description": "Time Stamp."
+        },
+        "promptOverrideConfiguration": {
+          "$ref": "#/definitions/PromptOverrideConfiguration",
+          "description": "Configuration for prompt override."
+        },
+        "recommendedActions": {
+          "type": "array",
+          "description": "The recommended actions users can take to resolve an error in failureReasons.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "skipResourceInUseCheckOnDelete": {
+          "type": "boolean",
+          "description": "Specifies whether to allow deleting agent while it is in use."
+        },
+        "tags": {
+          "type": "object",
+          "description": "A map of tag keys and values",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "testAliasTags": {
+          "type": "object",
+          "description": "A map of tag keys and values",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Time Stamp."
+        }
+      }
+    },
+    "BedrockAgent": {
+      "type": "object",
+      "description": "A Microsoft.AwsConnector resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BedrockAgentProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "BedrockAgentListResult": {
+      "type": "object",
+      "description": "The response of a BedrockAgent list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The BedrockAgent items on this page",
+          "items": {
+            "$ref": "#/definitions/BedrockAgent"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "BedrockAgentProperties": {
+      "type": "object",
+      "description": "Definition of BedrockAgent",
+      "properties": {
+        "awsProperties": {
+          "$ref": "#/definitions/AwsBedrockAgentProperties",
+          "description": "AWS Properties"
+        },
+        "publicCloudConnectorsResourceId": {
+          "type": "string",
+          "description": "Public Cloud Connectors Resource ID"
+        },
+        "awsAccountId": {
+          "type": "string",
+          "description": "AWS Account ID"
+        },
+        "arn": {
+          "type": "string",
+          "description": "Amazon Resource Name (ARN)"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
+        },
+        "awsSourceSchema": {
+          "type": "string",
+          "description": "AWS Source Schema"
+        },
+        "awsRegion": {
+          "type": "string",
+          "description": "AWS Region"
+        },
+        "awsTags": {
+          "type": "object",
+          "description": "AWS Tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "BedrockAgentTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in BedrockAgent resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "CreationMode": {
+      "type": "string",
+      "description": "CreationMode enum",
+      "enum": [
+        "DEFAULT",
+        "OVERRIDDEN"
+      ],
+      "x-ms-enum": {
+        "name": "CreationMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DEFAULT",
+            "value": "DEFAULT",
+            "description": "CreationMode enum DEFAULT"
+          },
+          {
+            "name": "OVERRIDDEN",
+            "value": "OVERRIDDEN",
+            "description": "CreationMode enum OVERRIDDEN"
+          }
+        ]
+      }
+    },
+    "CustomControlMethod": {
+      "type": "string",
+      "description": "CustomControlMethod enum",
+      "enum": [
+        "RETURN_CONTROL"
+      ],
+      "x-ms-enum": {
+        "name": "CustomControlMethod",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "RETURN_CONTROL",
+            "value": "RETURN_CONTROL",
+            "description": "CustomControlMethod enum RETURN_CONTROL"
+          }
+        ]
+      }
+    },
+    "CustomOrchestration": {
+      "type": "object",
+      "description": "Definition of CustomOrchestration",
+      "properties": {
+        "executor": {
+          "$ref": "#/definitions/OrchestrationExecutor",
+          "description": "Types of executors for custom orchestration strategy"
+        }
+      }
+    },
+    "Function": {
+      "type": "object",
+      "description": "Definition of Function",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description of function"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name for a resource."
+        },
+        "parameters": {
+          "type": "object",
+          "description": "A map of parameter name and detail",
+          "additionalProperties": {
+            "$ref": "#/definitions/ParameterDetail"
+          }
+        },
+        "requireConfirmation": {
+          "$ref": "#/definitions/RequireConfirmation",
+          "description": "ENUM to check if action requires user confirmation"
+        }
+      }
+    },
+    "FunctionSchema": {
+      "type": "object",
+      "description": "Definition of FunctionSchema",
+      "properties": {
+        "functions": {
+          "type": "array",
+          "description": "List of Function definitions",
+          "items": {
+            "$ref": "#/definitions/Function"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "GuardrailConfiguration": {
+      "type": "object",
+      "description": "Definition of GuardrailConfiguration",
+      "properties": {
+        "guardrailIdentifier": {
+          "type": "string",
+          "description": "Identifier for the guardrail, could be the id or the arn"
+        },
+        "guardrailVersion": {
+          "type": "string",
+          "description": "Version of the guardrail"
+        }
+      }
+    },
+    "InferenceConfiguration": {
+      "type": "object",
+      "description": "Definition of InferenceConfiguration",
+      "properties": {
+        "maximumLength": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum length of output"
+        },
+        "stopSequences": {
+          "type": "array",
+          "description": "List of stop sequences",
+          "items": {
+            "type": "string"
+          }
+        },
+        "temperature": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Controls randomness, higher values increase diversity"
+        },
+        "topK": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Sample from the k most likely next tokens"
+        },
+        "topP": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Cumulative probability cutoff for token selection"
+        }
+      }
+    },
+    "KnowledgeBaseState": {
+      "type": "string",
+      "description": "KnowledgeBaseState enum",
+      "enum": [
+        "DISABLED",
+        "ENABLED"
+      ],
+      "x-ms-enum": {
+        "name": "KnowledgeBaseState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DISABLED",
+            "value": "DISABLED",
+            "description": "KnowledgeBaseState enum DISABLED"
+          },
+          {
+            "name": "ENABLED",
+            "value": "ENABLED",
+            "description": "KnowledgeBaseState enum ENABLED"
+          }
+        ]
+      }
+    },
+    "MemoryConfiguration": {
+      "type": "object",
+      "description": "Definition of MemoryConfiguration",
+      "properties": {
+        "enabledMemoryTypes": {
+          "type": "array",
+          "description": "Types of session storage persisted in memory",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sessionSummaryConfiguration": {
+          "$ref": "#/definitions/SessionSummaryConfiguration",
+          "description": "Configuration for Session Summarization"
+        },
+        "storageDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum number of days to store session details"
+        }
+      }
+    },
+    "OrchestrationExecutor": {
+      "type": "object",
+      "description": "Definition of OrchestrationExecutor",
+      "properties": {
+        "lambda": {
+          "type": "string",
+          "description": "ARN of a Lambda."
+        }
+      }
+    },
+    "OrchestrationType": {
+      "type": "string",
+      "description": "OrchestrationType enum",
+      "enum": [
+        "CUSTOM_ORCHESTRATION",
+        "DEFAULT"
+      ],
+      "x-ms-enum": {
+        "name": "OrchestrationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CUSTOM_ORCHESTRATION",
+            "value": "CUSTOM_ORCHESTRATION",
+            "description": "OrchestrationType enum CUSTOM_ORCHESTRATION"
+          },
+          {
+            "name": "DEFAULT",
+            "value": "DEFAULT",
+            "description": "OrchestrationType enum DEFAULT"
+          }
+        ]
+      }
+    },
+    "ParameterDetail": {
+      "type": "object",
+      "description": "Definition of ParameterDetail",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description of function parameter."
+        },
+        "required": {
+          "type": "boolean",
+          "description": "Information about if a parameter is required for function call. Default to false."
+        },
+        "type": {
+          "$ref": "#/definitions/Type",
+          "description": "Parameter Type"
+        }
+      }
+    },
+    "PromptConfiguration": {
+      "type": "object",
+      "description": "Definition of PromptConfiguration",
+      "properties": {
+        "additionalModelRequestFields": {
+          "description": "Additional Model Request Fields for Prompt Configuration"
+        },
+        "basePromptTemplate": {
+          "type": "string",
+          "description": "Base Prompt Template."
+        },
+        "foundationModel": {
+          "type": "string",
+          "description": "ARN or name of a Bedrock model."
+        },
+        "inferenceConfiguration": {
+          "$ref": "#/definitions/InferenceConfiguration",
+          "description": "Configuration for inference in prompt configuration"
+        },
+        "parserMode": {
+          "$ref": "#/definitions/CreationMode",
+          "description": "Creation Mode for Prompt Configuration."
+        },
+        "promptCreationMode": {
+          "$ref": "#/definitions/CreationMode",
+          "description": "Creation Mode for Prompt Configuration."
+        },
+        "promptState": {
+          "$ref": "#/definitions/PromptState",
+          "description": "Prompt State."
+        },
+        "promptType": {
+          "$ref": "#/definitions/PromptType",
+          "description": "Prompt Type."
+        }
+      }
+    },
+    "PromptOverrideConfiguration": {
+      "type": "object",
+      "description": "Definition of PromptOverrideConfiguration",
+      "properties": {
+        "overrideLambda": {
+          "type": "string",
+          "description": "ARN of a Lambda."
+        },
+        "promptConfigurations": {
+          "type": "array",
+          "description": "List of BasePromptConfiguration",
+          "items": {
+            "$ref": "#/definitions/PromptConfiguration"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "PromptState": {
+      "type": "string",
+      "description": "PromptState enum",
+      "enum": [
+        "DISABLED",
+        "ENABLED"
+      ],
+      "x-ms-enum": {
+        "name": "PromptState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DISABLED",
+            "value": "DISABLED",
+            "description": "PromptState enum DISABLED"
+          },
+          {
+            "name": "ENABLED",
+            "value": "ENABLED",
+            "description": "PromptState enum ENABLED"
+          }
+        ]
+      }
+    },
+    "PromptType": {
+      "type": "string",
+      "description": "PromptType enum",
+      "enum": [
+        "KNOWLEDGE_BASE_RESPONSE_GENERATION",
+        "MEMORY_SUMMARIZATION",
+        "ORCHESTRATION",
+        "POST_PROCESSING",
+        "PRE_PROCESSING",
+        "ROUTING_CLASSIFIER"
+      ],
+      "x-ms-enum": {
+        "name": "PromptType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "KNOWLEDGE_BASE_RESPONSE_GENERATION",
+            "value": "KNOWLEDGE_BASE_RESPONSE_GENERATION",
+            "description": "PromptType enum KNOWLEDGE_BASE_RESPONSE_GENERATION"
+          },
+          {
+            "name": "MEMORY_SUMMARIZATION",
+            "value": "MEMORY_SUMMARIZATION",
+            "description": "PromptType enum MEMORY_SUMMARIZATION"
+          },
+          {
+            "name": "ORCHESTRATION",
+            "value": "ORCHESTRATION",
+            "description": "PromptType enum ORCHESTRATION"
+          },
+          {
+            "name": "POST_PROCESSING",
+            "value": "POST_PROCESSING",
+            "description": "PromptType enum POST_PROCESSING"
+          },
+          {
+            "name": "PRE_PROCESSING",
+            "value": "PRE_PROCESSING",
+            "description": "PromptType enum PRE_PROCESSING"
+          },
+          {
+            "name": "ROUTING_CLASSIFIER",
+            "value": "ROUTING_CLASSIFIER",
+            "description": "PromptType enum ROUTING_CLASSIFIER"
+          }
+        ]
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "RelayConversationHistory": {
+      "type": "string",
+      "description": "RelayConversationHistory enum",
+      "enum": [
+        "DISABLED",
+        "TO_COLLABORATOR"
+      ],
+      "x-ms-enum": {
+        "name": "RelayConversationHistory",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DISABLED",
+            "value": "DISABLED",
+            "description": "RelayConversationHistory enum DISABLED"
+          },
+          {
+            "name": "TO_COLLABORATOR",
+            "value": "TO_COLLABORATOR",
+            "description": "RelayConversationHistory enum TO_COLLABORATOR"
+          }
+        ]
+      }
+    },
+    "RequireConfirmation": {
+      "type": "string",
+      "description": "RequireConfirmation enum",
+      "enum": [
+        "DISABLED",
+        "ENABLED"
+      ],
+      "x-ms-enum": {
+        "name": "RequireConfirmation",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DISABLED",
+            "value": "DISABLED",
+            "description": "RequireConfirmation enum DISABLED"
+          },
+          {
+            "name": "ENABLED",
+            "value": "ENABLED",
+            "description": "RequireConfirmation enum ENABLED"
+          }
+        ]
+      }
+    },
+    "S3Identifier": {
+      "type": "object",
+      "description": "Definition of S3Identifier",
+      "properties": {
+        "s3BucketName": {
+          "type": "string",
+          "description": "A bucket in S3."
+        },
+        "s3ObjectKey": {
+          "type": "string",
+          "format": "password",
+          "description": "A object key in S3.",
+          "x-ms-secret": true
+        }
+      }
+    },
+    "SessionSummaryConfiguration": {
+      "type": "object",
+      "description": "Definition of SessionSummaryConfiguration",
+      "properties": {
+        "maxRecentSessions": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum number of Sessions to Summarize"
+        }
+      }
+    },
+    "Type": {
+      "type": "string",
+      "description": "Type enum",
+      "enum": [
+        "array",
+        "boolean",
+        "integer",
+        "number",
+        "string"
+      ],
+      "x-ms-enum": {
+        "name": "Type",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "array",
+            "value": "array",
+            "description": "Type enum array"
+          },
+          {
+            "name": "boolean",
+            "value": "boolean",
+            "description": "Type enum boolean"
+          },
+          {
+            "name": "integer",
+            "value": "integer",
+            "description": "Type enum integer"
+          },
+          {
+            "name": "number",
+            "value": "number",
+            "description": "Type enum number"
+          },
+          {
+            "name": "string",
+            "value": "string",
+            "description": "Type enum string"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}

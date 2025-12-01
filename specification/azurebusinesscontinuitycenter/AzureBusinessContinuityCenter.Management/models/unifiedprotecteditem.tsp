@@ -260,6 +260,7 @@ model RegionSpecificPropertiesForProtectedItem {
   configuredMaximumRetentionInDays: NullableIntPropertyInfo;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Back compatibility"
 @doc("Definition of provider specific properties.")
 model ProviderSpecificProperties {}
 

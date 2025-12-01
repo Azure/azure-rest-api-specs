@@ -30,7 +30,6 @@ interface ValidatedSolutionRecipes {
   /**
    * Get a validated solution recipe.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   get is ArmResourceRead<
     ValidatedSolutionRecipe,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
@@ -39,7 +38,6 @@ interface ValidatedSolutionRecipes {
   /**
    * List all validated solution recipes.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   listBySubscriptionLocationResource is ArmResourceListByParent<
     ValidatedSolutionRecipe,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
