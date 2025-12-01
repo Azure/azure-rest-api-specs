@@ -249,16 +249,8 @@ class TspconfigEmitterOptionsSubRuleBase extends TspconfigSubRuleBase {
 }
 
 class TspconfigEmitterOptionsEmitterOutputDirSubRuleBase extends TspconfigEmitterOptionsSubRuleBase {
-  private skipValidateNamespace: boolean;
-
-  constructor(
-    emitterName: string,
-    keyToValidate: string,
-    expectedValue: ExpectedValueType,
-    skipValidateNamespace: boolean = false,
-  ) {
+  constructor(emitterName: string, keyToValidate: string, expectedValue: ExpectedValueType) {
     super(emitterName, keyToValidate, expectedValue);
-    this.skipValidateNamespace = skipValidateNamespace;
   }
 
   protected validate(config: any): RuleResult {
@@ -283,7 +275,6 @@ class TspconfigEmitterOptionsEmitterOutputDirSubRuleBase extends TspconfigEmitte
     // Format 1: {output-dir}/{service-dir}/azure-mgmt-advisor
     // Format 2: {service-dir}/azure-mgmt-advisor where service-dir might include {output-dir}
     // Format 3: {output-dir}/{service-dir}/azadmin/settings where we need to validate "azadmin/settings"
-    // Format 4: {output-dir}/sdk/dellstorage/Azure.ResourceManager.Dell.Storage - validate last part only
 
     if (!actualValue.includes("/")) {
       pathToValidate = actualValue;
@@ -292,27 +283,8 @@ class TspconfigEmitterOptionsEmitterOutputDirSubRuleBase extends TspconfigEmitte
       const filteredParts = pathParts.filter(
         (part) => !(part === "{output-dir}" || part === "{service-dir}"),
       );
-
-      // Strategy: Remove common directory prefixes (sdk, sdk/xxx) and validate the remaining path
-      // This handles:
-      // - "sdk/dellstorage/Azure.ResourceManager.Dell.Storage" -> "Azure.ResourceManager.Dell.Storage"
-      // - "azadmin/settings" -> "azadmin/settings" (no sdk prefix, keep as is)
-      if (filteredParts.length > 1 && filteredParts[0] === "sdk") {
-        // Remove "sdk" and any intermediate directory, validate only the last segment
-        // Example: ["sdk", "dellstorage", "Azure.ResourceManager.Dell"] -> "Azure.ResourceManager.Dell"
-        pathToValidate = filteredParts[filteredParts.length - 1];
-      } else {
-        // Keep the full remaining path for validation
-        // Example: ["azadmin", "settings"] -> "azadmin/settings"
-        pathToValidate = filteredParts.join("/");
-      }
+      pathToValidate = filteredParts.join("/");
     }
-
-    // Skip validation if pathToValidate is exactly {namespace} and skipValidateNamespace is true
-    if (pathToValidate === "{namespace}" && this.skipValidateNamespace) {
-      return { success: true };
-    }
-
     // Resolve any variables in the pathToValidate
     if (pathToValidate.includes("{")) {
       const { resolved, error } = this.resolveVariables(pathToValidate, config);
@@ -643,7 +615,6 @@ export class TspConfigPythonMgmtEmitterOutputDirSubRule extends TspconfigEmitter
       "@azure-tools/typespec-python",
       "emitter-output-dir",
       new RegExp(/^azure-mgmt(-[a-z]+){1,2}$/),
-      true,
     );
   }
   protected skip(_: any, folder: string) {

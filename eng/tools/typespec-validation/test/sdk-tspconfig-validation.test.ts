@@ -630,7 +630,7 @@ const emitterOutputDirWithNamespaceVariableTestCases: Case[] = [
     tspconfigContent: `
 options:
   "@azure-tools/typespec-python":
-    namespace: "azure.mgmt.testservice"
+    namespace: "azure-mgmt-testservice"
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
 `,
     success: true,
@@ -708,20 +708,7 @@ options:
 `,
     success: true,
     subRules: [new TspConfigHttpClientCsharpMgmtEmitterOutputDirSubRule()],
-  },
-  {
-    description:
-      "Validate http-client-csharp-mgmt emitter-output-dir validates only last path segment",
-    folder: managementTspconfigFolder,
-    tspconfigContent: `
-options:
-  "@azure-typespec/http-client-csharp-mgmt":
-    namespace: "Azure.ResourceManager.Dell.Storage"
-    emitter-output-dir: "{output-dir}/sdk/dellstorage/Azure.ResourceManager.Dell.Storage"
-`,
-    success: true,
-    subRules: [new TspConfigHttpClientCsharpMgmtEmitterOutputDirSubRule()],
-  },
+  },  
   {
     description:
       "Validate http-client-csharp-mgmt emitter-output-dir fails when last segment is invalid",
@@ -734,20 +721,7 @@ options:
 `,
     success: false,
     subRules: [new TspConfigHttpClientCsharpMgmtEmitterOutputDirSubRule()],
-  },
-  {
-    description:
-      "Validate http-client-csharp emitter-output-dir with multiple path segments validates only last",
-    folder: "",
-    tspconfigContent: `
-options:
-  "@azure-typespec/http-client-csharp":
-    namespace: "Azure.AI.Translation"
-    emitter-output-dir: "{output-dir}/sdk/translation/Azure.AI.Translation"
-`,
-    success: true,
-    subRules: [new TspConfigHttpClientCsharpAzEmitterOutputDirSubRule()],
-  },
+  }
 ];
 
 // Test cases for CSharp emitters - validation behavior tests
