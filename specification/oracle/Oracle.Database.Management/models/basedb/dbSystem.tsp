@@ -221,6 +221,20 @@ model DbSystemBaseProperties {
   @doc("Indicates user preferences for the various diagnostic collection options for the Base DB.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   dataCollectionOptions?: DataCollectionOptions;
+
+  @added(Versions.v20251115_preview)
+  @doc("The character set for the DB system. The default is AL32UTF8")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @minLength(1)
+  @maxLength(255)
+  characterSet?: string;
+
+  @added(Versions.v20251115_preview)
+  @doc("The national character set for the DB system. The default is AL16UTF16")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @minLength(1)
+  @maxLength(255)
+  ncharacterSet?: string;
 }
 
 @added(Versions.v20250701_preview)

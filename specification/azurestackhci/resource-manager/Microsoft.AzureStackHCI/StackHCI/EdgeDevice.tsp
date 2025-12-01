@@ -5,16 +5,23 @@ import "@typespec/rest";
 import "./models.tsp";
 
 using Azure.ResourceManager;
-
+using Azure.Core;
+using Http;
+using Rest;
+using Azure.ClientGenerator.Core;
 namespace Microsoft.AzureStackHCI;
-// FIXME: EdgeDevice has no properties property
+
 /**
  * Edge device resource.
  */
-// @extensionResource
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Legacy DO NOT EVER COPY THIS"
+@Http.Private.includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal({})
 @discriminator("kind")
-model EdgeDevice
-  is Azure.ResourceManager.ExtensionResource<EdgeDeviceProperties> {
+@extensionResource
+model EdgeDevice extends Azure.ResourceManager.Foundations.ProxyResource {
   ...ResourceNameParameter<
     Resource = EdgeDevice,
     KeyName = "edgeDeviceName",
@@ -34,54 +41,46 @@ interface EdgeDevices {
   /**
    * Get a EdgeDevice
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  get is Azure.ResourceManager.Extension.Read<
-    Azure.ResourceManager.Extension.ScopeParameter,
-    EdgeDevice
-  >;
+  get is ArmResourceRead<EdgeDevice>;
 
   /**
    * Create a EdgeDevice
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  createOrUpdate is Azure.ResourceManager.Extension.CreateOrReplaceAsync<
-    Azure.ResourceManager.Extension.ScopeParameter,
-    EdgeDevice
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Follow existing naming for backward compatibility"
+  CreateOrUpdate is ArmResourceCreateOrUpdateAsync<EdgeDevice>;
+
+  /**
+   * List EdgeDevice resources by parent
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Follow existing naming for backward compatibility"
+  List is ArmResourceListByParent<
+    EdgeDevice,
+    Response = ArmResponse<EdgeDeviceListResult>
   >;
 
   /**
    * Delete a EdgeDevice
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  delete is Azure.ResourceManager.Extension.DeleteWithoutOkAsync<
-    Azure.ResourceManager.Extension.ScopeParameter,
-    EdgeDevice
-  >;
-
-  /**
-   * List EdgeDevice resources by parent
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  list is Azure.ResourceManager.Extension.ListByTarget<
-    Azure.ResourceManager.Extension.ScopeParameter,
-    EdgeDevice
-  >;
+  delete is ArmResourceDeleteWithoutOkAsync<EdgeDevice>;
 
   /**
    * A long-running resource action.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  validate is Azure.ResourceManager.Extension.ActionAsync<
-    Azure.ResourceManager.Extension.ScopeParameter,
+  validate is ArmResourceActionAsync<
     EdgeDevice,
     ValidateRequest,
-    ValidateResponseResult
+    EdgeDeviceValidateResponseResult
   >;
 }
 
 @@doc(EdgeDevice.name, "Name of Device");
 
 // Models
+
+/**
+ * The response of a EdgeDevice list operation.
+ */
+model EdgeDeviceListResult is Azure.Core.Page<EdgeDevice>;
 
 /**
  * The validate request for Edge Device.
@@ -101,7 +100,8 @@ model ValidateRequest {
 /**
  * An Accepted response with an Operation-Location header.
  */
-model ValidateResponseResult {
+@clientName("ValidateResponse")
+model EdgeDeviceValidateResponseResult {
   /**
    * edge device validation status
    */
@@ -133,56 +133,6 @@ model EdgeDevicesAdapterPropertyOverrides {
 }
 
 /**
- * The NIC Detail of a device.
- */
-model NicDetail {
-  /**
-   * Adapter Name of NIC
-   */
-  adapterName?: string;
-
-  /**
-   * Interface Description of NIC
-   */
-  interfaceDescription?: string;
-
-  /**
-   * Component Id of NIC
-   */
-  componentId?: string;
-
-  /**
-   * Driver Version of NIC
-   */
-  driverVersion?: string;
-
-  /**
-   * Subnet Mask of NIC
-   */
-  ip4Address?: string;
-
-  /**
-   * Subnet Mask of NIC
-   */
-  subnetMask?: string;
-
-  /**
-   * Default Gateway of NIC
-   */
-  defaultGateway?: string;
-
-  /**
-   * DNS Servers for NIC
-   */
-  dnsServers?: string[];
-
-  /**
-   * Default Isolation of Management NIC
-   */
-  defaultIsolationId?: string;
-}
-
-/**
  * Edge Device properties
  */
 model EdgeDeviceProperties {
@@ -199,9 +149,25 @@ model EdgeDeviceProperties {
 }
 
 /**
+ * The device Configuration for edge device.
+ */
+model DeviceConfiguration {
+  /**
+   * NIC Details of device
+   */
+  @identifiers(#["adapterName"])
+  nicDetails?: NicDetail[];
+
+  /**
+   * Device metadata details.
+   */
+  deviceMetadata?: string;
+}
+
+/**
  * details of validation failure
  */
-model EdgeDeviceErrorDetail {
+model ErrorDetail {
   /**
    * Exception details while installing extension.
    */
@@ -212,7 +178,7 @@ model EdgeDeviceErrorDetail {
 /**
  * Arc extension installed on edge device.
  */
-model EdgeDevicesExtension {
+model HciEdgeDeviceArcExtension {
   /**
    * Arc extension name installed on edge device.
    */
@@ -230,7 +196,7 @@ model EdgeDevicesExtension {
    */
   @visibility(Lifecycle.Read)
   @identifiers(#[])
-  errorDetails?: EdgeDeviceErrorDetail[];
+  errorDetails?: ErrorDetail[];
 
   /**
    * Arc Extension Azure resource id.
@@ -260,7 +226,7 @@ model ExtensionProfile {
    */
   @visibility(Lifecycle.Read)
   @identifiers(#["extensionName"])
-  extensions?: EdgeDevicesExtension[];
+  extensions?: HciEdgeDeviceArcExtension[];
 }
 
 /**
@@ -348,7 +314,57 @@ model HciNetworkProfile {
    * HostNetwork config to deploy AzureStackHCI Cluster.
    */
   @visibility(Lifecycle.Read)
-  hostNetwork?: EdgeDevicesHostNetwork;
+  hostNetwork?: EdgeDeviceHostNetwork;
+}
+
+/**
+ * The NIC Detail of a device.
+ */
+model NicDetail {
+  /**
+   * Adapter Name of NIC
+   */
+  adapterName?: string;
+
+  /**
+   * Interface Description of NIC
+   */
+  interfaceDescription?: string;
+
+  /**
+   * Component Id of NIC
+   */
+  componentId?: string;
+
+  /**
+   * Driver Version of NIC
+   */
+  driverVersion?: string;
+
+  /**
+   * Subnet Mask of NIC
+   */
+  ip4Address?: string;
+
+  /**
+   * Subnet Mask of NIC
+   */
+  subnetMask?: string;
+
+  /**
+   * Default Gateway of NIC
+   */
+  defaultGateway?: string;
+
+  /**
+   * DNS Servers for NIC
+   */
+  dnsServers?: string[];
+
+  /**
+   * Default Isolation of Management NIC
+   */
+  defaultIsolationId?: string;
 }
 
 /**
@@ -502,7 +518,7 @@ model SwitchExtension {
 /**
  * The HostNetwork of a cluster.
  */
-model EdgeDevicesHostNetwork {
+model EdgeDeviceHostNetwork {
   /**
    * The network intents assigned to the network reference pattern used for the deployment. Each intent will define its own name, traffic type, adapter names, and overrides as recommended by your OEM.
    */

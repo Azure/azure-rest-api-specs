@@ -13,36 +13,101 @@ using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.AzureStackHCI;
 
-@doc("The provisioning state of a resource.")
+/**
+ * Provisioning state of the ArcSetting proxy resource.
+ */
 union ProvisioningState {
   string,
 
-  @doc("Resource has been created.")
-  Succeeded: "Succeeded",
-
-  @doc("Resource creation failed.")
-  Failed: "Failed",
-
-  @doc("Resource creation was canceled.")
-  Canceled: "Canceled",
-
-  @doc("Resource creation is in progress.")
-  InProgress: "InProgress",
-
-  @doc("The resource provision state is not specified")
+  /**
+   * The provisioning state is not specified.
+   */
   NotSpecified: "NotSpecified",
 
-  @doc("The resource is being provisioned")
-  Provisioning: "Provisioning",
+  /**
+   * An error occurred during provisioning.
+   */
+  Error: "Error",
 
-  @doc("The resource is updating")
+  /**
+   * Provisioning completed successfully.
+   */
+  Succeeded: "Succeeded",
+
+  /**
+   * Provisioning failed.
+   */
+  Failed: "Failed",
+
+  /**
+   * Provisioning was canceled.
+   */
+  Canceled: "Canceled",
+
+  /**
+   * The resource is connected.
+   */
+  Connected: "Connected",
+
+  /**
+   * The resource is disconnected.
+   */
+  Disconnected: "Disconnected",
+
+  /**
+   * The resource has been deleted.
+   */
+  Deleted: "Deleted",
+
+  /**
+   * The resource is being created.
+   */
+  Creating: "Creating",
+
+  /**
+   * The resource is being updated.
+   */
   Updating: "Updating",
 
-  @doc("The resource is being deleted")
+  /**
+   * The resource is being deleted.
+   */
   Deleting: "Deleting",
 
-  @doc("The resource create request has been accepted")
+  /**
+   * The resource is being moved.
+   */
+  Moving: "Moving",
+
+  /**
+   * Provisioning partially succeeded.
+   */
+  PartiallySucceeded: "PartiallySucceeded",
+
+  /**
+   * The resource is partially connected.
+   */
+  PartiallyConnected: "PartiallyConnected",
+
+  /**
+   * Provisioning is in progress.
+   */
+  InProgress: "InProgress",
+
+  /**
+   * Provisioning request has been accepted.
+   */
   Accepted: "Accepted",
+
+  /**
+   * The resource is currently provisioning.
+   */
+  Provisioning: "Provisioning",
+
+  /**
+   * The resource is being disabled.
+   */
+  DisableInProgress: "DisableInProgress",
 }
 
 @doc("Represents the various statuses a job can have throughout its lifecycle.")
@@ -145,72 +210,13 @@ model Step {
   exception?: string[];
 }
 
-@doc("The HostNetwork of a cluster.")
-model DeploymentHostNetwork {
-  @doc("The network intents assigned to the network reference pattern used for the deployment. Each intent will define its own name, traffic type, adapter names, and overrides as recommended by your OEM.")
-  @identifiers(#["name"])
-  intents?: DeploymentIntents[];
-
-  @doc("List of StorageNetworks config to deploy AzureStackHCI Cluster.")
-  @identifiers(#["name"])
-  storageNetworks?: DeploymentStorageNetworks[];
-
-  @doc("Defines how the storage adapters between nodes are connected either switch or switch less..")
-  storageConnectivitySwitchless?: boolean;
-
-  @doc("Optional parameter required only for 3 Nodes switchless deployments. This allows users to specify IPs and Mask for Storage NICs when Network ATC is not assigning the IPs for storage automatically.")
-  enableStorageAutoIp?: boolean;
-}
-
-@doc("The Intents of a cluster.")
-model DeploymentIntents {
-  @doc("Name of the network intent you wish to create.")
-  name?: string;
-
-  @doc("List of network traffic types. Only allowed values are 'Compute', 'Storage', 'Management'.")
-  trafficType?: string[];
-
-  @doc("Array of network interfaces used for the network intent.")
-  adapter?: string[];
-
-  @doc("This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.")
-  overrideVirtualSwitchConfiguration?: boolean;
-
-  @doc("Set virtualSwitch ConfigurationOverrides for cluster.")
-  virtualSwitchConfigurationOverrides?: DeploymentVirtualSwitchConfigurationOverrides;
-
-  @doc("This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.")
-  overrideQosPolicy?: boolean;
-
-  @doc("Set QoS PolicyOverrides for cluster.")
-  qosPolicyOverrides?: QosPolicyOverrides;
-
-  @doc("This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.")
-  overrideAdapterProperty?: boolean;
-
-  @doc("Set Adapter PropertyOverrides for cluster.")
-  adapterPropertyOverrides?: DeploymentAdapterPropertyOverrides;
-}
-
 @doc("Local Availability Zone information for HCI cluster")
 model LocalAvailabilityZones {
   @doc("Local Availability Zone name for HCI cluster")
   localAvailabilityZoneName?: string;
 
-  @doc("Local Availability Zone Mode for HCI cluster. Can be active or passive.")
-  localAvailabilityZoneMode?: LocalAvailabilityZoneMode;
-
   @doc("Nodes belonging to a particular zone")
   nodes?: string[];
-}
-
-@doc("The VirtualSwitchConfigurationOverrides of a cluster.")
-model DeploymentVirtualSwitchConfigurationOverrides {
-  @doc("Enable IoV for Virtual Switch")
-  enableIov?: string;
-
-  @doc("Load Balancing Algorithm for Virtual Switch")
-  loadBalancingAlgorithm?: string;
 }
 
 @doc("The QoSPolicyOverrides of a cluster.")
@@ -228,69 +234,12 @@ model QosPolicyOverrides {
   bandwidthPercentage_SMB?: string;
 }
 
-@doc("The network adapter properties to override during deployment of a cluster.")
-model DeploymentAdapterPropertyOverrides {
-  @doc("This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.")
-  jumboPacket?: string;
-
-  @doc("This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.")
-  networkDirect?: string;
-
-  @doc("This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation. Expected values are 'iWARP', 'RoCEv2', 'RoCE'")
-  networkDirectTechnology?: string;
-}
-
-@doc("The StorageNetworks of a cluster.")
-model DeploymentStorageNetworks {
-  @doc("Name of the storage network.")
-  name?: string;
-
-  @doc("Name of the storage network adapter.")
-  networkAdapterName?: string;
-
-  @doc("ID specified for the VLAN storage network. This setting is applied to the network interfaces that route the storage and VM migration traffic.")
-  vlanId?: string;
-
-  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
-  @doc("List of Storage adapter physical nodes config to deploy AzureStackHCI Cluster.")
-  @Azure.ResourceManager.identifiers(#["physicalNode"])
-  storageAdapterIPInfo?: DeploymentStorageAdapterIPInfo[];
-}
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
-@doc("The storage network adapter info.")
-model DeploymentStorageAdapterIPInfo {
-  @doc("physical node name.")
-  physicalNode?: string;
-
-  @doc("The IPv4 address assigned to network adapter used for storage.")
-  ipv4Address?: string;
-
-  @doc("The SubnetMask address assigned to network adapter used for storage.")
-  subnetMask?: string;
-}
-
 @doc("Edge device type based on host OS installed.")
 union EdgeDeviceKind {
   string,
 
   @doc("Arc-enabled edge device with HCI OS.")
   HCI: "HCI",
-
-  @doc("Arc-enabled edge device with WindowsServer OS.")
-  WindowsServer: "WindowsServer",
-
-  @doc("Arc-enabled edge device with WindowsIoT OS.")
-  WindowsIoT: "WindowsIoT",
-
-  @doc("Arc-enabled edge device with AzureLinux OS.")
-  AzureLinux: "AzureLinux",
-
-  @doc("Arc-enabled edge device with UbuntuLinux OS.")
-  UbuntuLinux: "UbuntuLinux",
-
-  @doc("Arc-enabled edge device with Azure Linux restricted operating environment.")
-  AzureLinuxRoe: "AzureLinuxRoe",
 }
 
 @doc("Defines the level of remote support access granted.")
@@ -344,20 +293,6 @@ union EdgeSolutionType {
 
   @doc("Edge solution for Windows based edge devices.")
   WindowsServer: "WindowsServer",
-
-  @doc("Edge solution for Azure linux edge devices.")
-  AzureLinux: "AzureLinux",
-}
-
-@doc("Local Availability Zone Mode for HCI cluster.")
-union LocalAvailabilityZoneMode {
-  string,
-
-  @doc("Local Availability Zone in active mode.")
-  Active: "Active",
-
-  @doc("Local Availability Zone in passive mode.")
-  Passive: "Passive",
 }
 
 @doc("Identity Provider for the cluster")
@@ -386,58 +321,6 @@ model JobReportedProperties {
   deploymentStatus?: EceActionStatus;
 }
 
-@doc("Device configuration.")
-model DeviceConfiguration {
-  @doc("Network configuration.")
-  network?: NetworkConfiguration;
-
-  @doc("Hostname of the device.")
-  hostName?: string;
-
-  @doc("Web proxy configuration.")
-  webProxy?: WebProxyConfiguration;
-
-  @doc("Time configuration.")
-  time?: TimeConfiguration;
-}
-
-@doc("Network configuration.")
-model NetworkConfiguration {
-  @Azure.ResourceManager.identifiers(#[])
-  @doc("List of network adapters.")
-  networkAdapters?: NetworkAdapter[];
-}
-
-@doc("Network adapter configuration.")
-model NetworkAdapter {
-  @doc("Type of IP assignment.")
-  ipAssignmentType: IpAssignmentType;
-
-  @doc("IP address.")
-  ipAddress?: string;
-
-  @doc("Adapter Name.")
-  adapterName?: string;
-
-  @doc("MAC address.")
-  macAddress?: string;
-
-  @doc("IP address range.")
-  ipAddressRange?: IpAddressRange;
-
-  @doc("Gateway id.")
-  gateway?: string;
-
-  @doc("Subnet mask.")
-  subnetMask?: string;
-
-  @doc("Array of DNS addresses.")
-  dnsAddressArray?: string[];
-
-  @doc("VLAN ID for the network setup.")
-  vlanId?: string;
-}
-
 @doc("IP assignment types")
 union IpAssignmentType {
   string,
@@ -449,45 +332,9 @@ union IpAssignmentType {
   Manual: "Manual",
 }
 
-@doc("IP address range configuration.")
-model IpAddressRange {
-  @doc("Start IP address.")
-  startIp: string;
-
-  @doc("End IP address.")
-  endIp: string;
-}
-
-@doc("Web proxy configuration.")
-model WebProxyConfiguration {
-  @doc("Connection URI of the web proxy.")
-  connectionUri?: string;
-
-  @doc("Port of the web proxy.")
-  port?: string;
-
-  @doc("Bypass list for the web proxy.")
-  bypassList?: string[];
-}
-
-@doc("Time configuration.")
-model TimeConfiguration {
-  @doc("Primary NTP server.")
-  primaryTimeServer?: string;
-
-  @doc("Secondary NTP server.")
-  secondaryTimeServer?: string;
-
-  @doc("Time zone.")
-  timeZone?: string;
-}
-
 @doc("Represents the provisioning operating system type.")
 union ProvisioningOsType {
   string,
-
-  @doc("AzureLinux OS.")
-  AzureLinux: "AzureLinux",
 
   @doc("HCI OS.")
   HCI: "HCI",
@@ -521,11 +368,11 @@ model LogCollectionReportedProperties {
   @doc("Details of the log collection session.")
   @visibility(Lifecycle.Read)
   @Azure.ResourceManager.identifiers(#["correlationId"])
-  logCollectionSessionDetails?: LogCollectionSession[];
+  logCollectionSessionDetails?: LogCollectionJobSession[];
 }
 
 @doc("Represents a session for collecting logs from an edge device.")
-model LogCollectionSession {
+model LogCollectionJobSession {
   @doc("The timestamp when log collection started, in ISO 8601 format.")
   @visibility(Lifecycle.Read)
   startTime?: string;
@@ -549,9 +396,4 @@ model LogCollectionSession {
   @doc("A unique identifier for correlating this log collection session with other operations or sessions.")
   @visibility(Lifecycle.Read)
   correlationId?: string;
-}
-
-@doc("Reported Properties for Provision Os job")
-model ProvisionOsReportedProperties {
-  ...JobReportedProperties;
 }
