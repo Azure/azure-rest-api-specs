@@ -12,7 +12,13 @@ interface Documents {
   @doc("Queries the number of documents in the index.")
   @route("/indexes('{indexName}')/docs/$count")
   @get
-  count is SearchIndexOperation<{}, int64>;
+  count is SearchIndexOperation<
+    {},
+    {
+      @header contentType: "application/json";
+      @body body: int64;
+    }
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
