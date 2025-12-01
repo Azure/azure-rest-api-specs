@@ -868,7 +868,6 @@ export class SdkTspConfigValidationRule implements Rule {
       // Check for both direct matches and wildcard patterns
       if (this.isKeyPathSuppressed(subRule.getPathOfKeyToValidate())) continue;
       const result = await subRule.execute(folder!);
-      if (!result.success) failedResults.push(result);
 
       let isSubRuleSuccess = result.success;
 
@@ -897,6 +896,7 @@ export class SdkTspConfigValidationRule implements Rule {
           isSubRuleSuccess = true;
         }
       }
+      if (!isSubRuleSuccess) failedResults.push(result);
 
       success &&= isSubRuleSuccess;
     }
