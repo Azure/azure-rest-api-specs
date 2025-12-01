@@ -152,6 +152,10 @@ using Azure.Core;
   "ArmResource",
   "python"
 );
+@@clientName(Azure.ResourceManager.CommonTypes.createdByType,
+  "IdentityType",
+  "python"
+);
 @@clientName(VaultListResult, "ResourceListResult");
 @@clientName(MhsmServiceTagRule, "MHSMServiceTagRule", "!java,!csharp");
 
