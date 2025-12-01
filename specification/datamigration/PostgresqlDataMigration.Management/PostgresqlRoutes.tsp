@@ -43,7 +43,7 @@ interface MigrationServices {
 }
 
 @armResourceOperations
-interface DatabaseMigrations {
+interface PostgresqlDatabaseMigrations {
   @doc("Gets a database migration.")
   get is ArmResourceRead<DatabaseMigration>;
 

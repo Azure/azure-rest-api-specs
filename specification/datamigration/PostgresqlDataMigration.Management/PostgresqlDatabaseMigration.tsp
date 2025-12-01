@@ -13,12 +13,12 @@ using Azure.ResourceManager;
 namespace Microsoft.DataMigration;
 
 @doc("A database migration resource.")
-@resource("databaseMigrations")
+@resource("postgresqlDatabaseMigrations")
 @parentResource(MigrationService)
 model DatabaseMigration is ProxyResource<DatabaseMigrationProperties> {
   @doc("The database migration identifier.")
   @key("databaseMigrationId")
-  @segment("databaseMigrations")
+  @segment("postgresqlDatabaseMigrations")
   @path
   @pattern("^[a-zA-Z0-9-_]*$")
   name: string;
