@@ -14177,14 +14177,8 @@
           "maximum": 1125899906842624
         },
         "exportPolicy": {
-          "type": "array",
-          "description": "Set of export policy rules",
-          "items": {
-            "$ref": "#/definitions/ExportPolicyRule"
-          },
-          "x-ms-identifiers": [
-            "ruleIndex"
-          ]
+          "$ref": "#/definitions/CachePropertiesExportPolicy",
+          "description": "Set of export policy rules"
         },
         "protocolTypes": {
           "type": "array",
@@ -14355,6 +14349,22 @@
         "originClusterInformation"
       ]
     },
+    "CachePropertiesExportPolicy": {
+      "type": "object",
+      "description": "Set of export policy rules",
+      "properties": {
+        "rules": {
+          "type": "array",
+          "description": "Export policy rule",
+          "items": {
+            "$ref": "#/definitions/ExportPolicyRule"
+          },
+          "x-ms-identifiers": [
+            "ruleIndex"
+          ]
+        }
+      }
+    },
     "CacheProvisioningState": {
       "type": "string",
       "description": "Azure lifecycle management",
@@ -14433,14 +14443,8 @@
           "maximum": 1125899906842624
         },
         "exportPolicy": {
-          "type": "array",
-          "description": "Set of export policy rules",
-          "items": {
-            "$ref": "#/definitions/ExportPolicyRule"
-          },
-          "x-ms-identifiers": [
-            "ruleIndex"
-          ]
+          "$ref": "#/definitions/CachePropertiesExportPolicy",
+          "description": "Set of export policy rules"
         },
         "protocolTypes": {
           "type": "array",
@@ -18679,7 +18683,7 @@
     },
     "ProtocolTypes": {
       "type": "string",
-      "description": "Export policy rule",
+      "description": "Set of supported protocol types, which include NFSv3, NFSv4 and SMB protocol",
       "enum": [
         "NFSv3",
         "NFSv4",
