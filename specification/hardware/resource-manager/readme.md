@@ -30,13 +30,13 @@ openapi-subtype: providerHub
 tag: package-2023-07-12-preview
 ```
 
-### Tag: package-2023-07-12-preview
+### Tag: package-2025-12-04-preview
 
-These settings apply only when `--tag=package-2023-07-12-preview` is specified on the command line.
+These settings apply only when `--tag=package-2025-12-04-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-07-12-preview'
+```yaml $(tag) == 'package-2025-12-04-preview'
 input-file:
-  - Microsoft.Hardware/preview/2023-07-12-preview/hardware.json
+  - Microsoft.Hardware/preview/2025-12-04-preview/hardware.json
 suppressions:
   - code: TrackedResourcePatchOperation
     reason: This is a false positive.
