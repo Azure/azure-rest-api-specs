@@ -14,9 +14,19 @@ using Azure.ResourceManager;
 @armProviderNamespace
 @service(#{
   title: "Hardware Resource Provider",
-  version: "2023-07-12-preview",
+  //version: "2023-07-12-preview",
 })
+@versioned(Versions)
+
+//@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
 namespace Microsoft.Hardware;
+
+enum Versions {
+  /**
+   * The 2025-12-04-preview API version.
+   */
+  v2025_12_04_preview: "2025-12-04-preview",
+}
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
@@ -57,10 +67,6 @@ model OrderProperties {
 
   @doc("Reservation for order if applicable")
   reservationId?: string;
-
-  @visibility(Lifecycle.Read)
-  @doc("The status of the last operation.")
-  provisioningState?: ProvisioningState;
 }
 
 @doc("Customer PurchaseOrder")
@@ -68,8 +74,8 @@ model CustomerOrder {
   @doc("Customer PurchaseOrder Id")
   id: string;
 
-  @doc("Customer PurchaseOrder Date")
-  createdDate: plainDate;
+  @doc("Customer PurchaseOrder Date Time")
+  createdDateTime: utcDateTime;
 }
 
 @doc("Order Line")
@@ -100,8 +106,8 @@ model OrderLine {
   @doc("Shipping Method")
   shippingMethod?: ShippingMethod;
 
-  @doc("Requested Delivery Date")
-  requestedDeliveryDate?: plainDate;
+  @doc("Requested Delivery Date Time")
+  requestedDeliveryDateTime?: utcDateTime;
 
   @doc("Cancellation Reason")
   cancellationReason?: string;
@@ -109,29 +115,33 @@ model OrderLine {
   @doc("Cancelled By User details")
   cancelledBy?: string;
 
-  @doc("Estimated Deliver Date")
+  @doc("Estimated Deliver Date Time")
   @visibility(Lifecycle.Read)
-  estimatedDeliveryDate?: plainDate;
+  estimatedDeliveryDateTime?: utcDateTime;
 
-  @doc("Estimated Shipped Date")
+  @doc("Estimated Shipped Date Time")
   @visibility(Lifecycle.Read)
-  estimatedShippedDate?: plainDate;
+  estimatedShippedDateTime?: utcDateTime;
 }
 
 @doc("Order line quantity")
 model OrderLineQuantity {
-  @doc("Order lineId Ordered Quantity")
-  ordered: int64;
+  @doc("Order lineId pending Quantity")
+  pending: int64;
 
-  @doc("Order lineId Confirmed Quantity")
+  @doc("Order lineId in-progress quantity")
   @visibility(Lifecycle.Read)
-  confirmed?: int64;
+  inProgress?: int64;
 
-  @doc("Order lineId Shipped Quantity")
+  @doc("Order lineId fulfilled Quantity")
   @visibility(Lifecycle.Read)
-  shipped?: int64;
+  fulfilled?: int64;
 
-  @doc("Order lineId Returned Quantity")
+  @doc("Order lineId cancelled Quantity")
+  @visibility(Lifecycle.Read)
+  cancelled?:int64;
+  
+  @doc("Order lineId returned Quantity")
   @visibility(Lifecycle.Read)
   returned?: int64;
 }
@@ -143,6 +153,15 @@ model Product {
 
   @doc("ProductId Type")
   type: ProductIdType;
+}
+
+@doc("Order line fulfillment instructions")
+model LineFulfillmentInstruction {
+  @doc("Device line referred to by the warranty line.")
+  referenceDeviceLine?: int64;
+
+  @doc("Serial Numbers")
+  serialNumbers?: int64[];
 }
 
 @doc("Order line price")
@@ -177,6 +196,21 @@ model Tax {
 
   @doc("Tax type")
   type: TaxType;
+
+  @doc("Categorization of the taxation system")
+  class?: string;
+  
+  @doc("Specific title assigned to the tax entity")
+  name?: string;
+
+  @doc("Level of governing authority")
+  jurisdictionEntity?: string;
+
+  @doc("Name of the jurisdiction")
+  jurisdictionName?: string;
+
+  @doc("Tax Rate")
+  rate?: float64;
 }
 
 @doc("Ship-To id")
@@ -286,17 +320,18 @@ enum OrderStatus {
   @doc("Order is PartiallyConfirmed")
   PartiallyConfirmed,
 
-  @doc("Order is pending cancellation")
-  PendingCancel,
-
-  @doc("Order is ready to ship cannot be cancelled")
-  PendingShipment,
-
   @doc("Order is partially shipped")
   PartiallyShipped,
 
   @doc("Order is shipped")
   Shipped,
+
+  @doc("Order is returned")
+  Returned,
+
+  @doc("Order is cancelled")
+  Cancelled,
+
 }
 
 @doc("Order Line Status")
@@ -304,36 +339,30 @@ enum OrderLineStatus {
   @doc("Order is pending")
   Pending,
 
-  @doc("Order is created")
-  Created,
+  @doc("Order is in-progress")
+  InProgress,
 
   @doc("Order is confirmed")
   Confirmed,
 
-  @doc("Order is partially confirmed")
-  PartiallyConfirmed,
+  @doc("Order is fulfilled")
+  Fulfilled,
 
-  @doc("Order is pending cancellation")
-  PendingCancel,
+  @doc("Order is cancelled")
+  Cancelled,
 
-  @doc("Order is ready to ship cannot be cancelled")
-  PendingShipment,
-
-  @doc("Order is partially shipped")
-  PartiallyShipped,
-
-  @doc("Order is shipped")
-  Shipped,
+  @doc("Order is returned")
+  Returned,
 }
 
-@doc("Provisioning State")
-@lroStatus
-enum ProvisioningState {
-  ...ResourceProvisioningState,
+//@doc("Provisioning State")
+//@lroStatus
+//enum ProvisioningState {
+//  ...ResourceProvisioningState,
 
-  @doc("Order is pending")
-  Pending,
-}
+//  @doc("Order is pending")
+//  Pending,
+//}
 
 alias DefaultProviderNamespace = {
   @path
