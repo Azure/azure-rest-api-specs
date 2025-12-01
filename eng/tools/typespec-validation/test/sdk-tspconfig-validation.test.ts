@@ -708,7 +708,21 @@ options:
 `,
     success: true,
     subRules: [new TspConfigHttpClientCsharpMgmtEmitterOutputDirSubRule()],
-  },  
+  },
+  {
+    description:
+      "Validate http-client-csharp-mgmt emitter-output-dir with custom service-dir and recursive variable resolution",
+    folder: managementTspconfigFolder,
+    tspconfigContent: `
+options:
+  "@azure-typespec/http-client-csharp-mgmt":
+    package-name: "Azure.ResourceManager.Compute.Recommender"
+    namespace: "{package-name}"
+    emitter-output-dir: "{output-dir}/sdk/dellstorage/{namespace}"
+`,
+    success: true,
+    subRules: [new TspConfigHttpClientCsharpMgmtEmitterOutputDirSubRule()],
+  },
   {
     description:
       "Validate http-client-csharp-mgmt emitter-output-dir fails when last segment is invalid",
@@ -721,7 +735,7 @@ options:
 `,
     success: false,
     subRules: [new TspConfigHttpClientCsharpMgmtEmitterOutputDirSubRule()],
-  }
+  },
 ];
 
 // Test cases for CSharp emitters - validation behavior tests
