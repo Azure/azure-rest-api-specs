@@ -1,0 +1,338 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "App Insights Profiler and Debugger",
+    "version": "2025-01-07-preview",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "description": "Fully-qualified base URI of the Profiler & Debugger service (e.g. https://dataplane.diagnosticservices.azure.com).",
+        "required": true,
+        "type": "string",
+        "format": "uri",
+        "x-ms-skip-url-encoding": true
+      }
+    ]
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "OAuth2Auth": [
+        "api://dataplane.diagnosticservices.azure.com/.default"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+      "scopes": {
+        "api://dataplane.diagnosticservices.azure.com/.default": ""
+      }
+    }
+  },
+  "tags": [],
+  "paths": {
+    "/api/apps/bulk/insights/rollups": {
+      "post": {
+        "operationId": "InsightsService_ListBulkInsights",
+        "description": "Retrieves performance insights for multiple applications over a specified time interval.",
+        "parameters": [
+          {
+            "name": "startTime",
+            "in": "query",
+            "description": "The start of the time interval.",
+            "required": true,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "endTime",
+            "in": "query",
+            "description": "The end of the time interval.",
+            "required": true,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "take",
+            "in": "query",
+            "description": "How many rows to return.",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "requestBody",
+            "in": "body",
+            "description": "The request body.",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "appIds": {
+                  "type": "array",
+                  "description": "The Application IDs.",
+                  "items": {
+                    "$ref": "#/definitions/Azure.Core.uuid"
+                  }
+                }
+              },
+              "required": [
+                "appIds"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Insights"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          }
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Azure REST API guidelines - https://aka.ms/AzureRestApiGuidelines#handling-errors.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
+    "Insights": {
+      "type": "object",
+      "description": "The code optimization insights.",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The key of the insight. MD5 hash of the aggregated properties (IssueCategory, Function, ParentFunction, AppId, RoleName, IssueId). Joined with a underscore.",
+          "readOnly": true
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of insights returned with the record."
+        },
+        "appId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The Application ID."
+        },
+        "issueId": {
+          "type": "string",
+          "description": "The registry ID correlating to an issue in the issue registry."
+        },
+        "criteria": {
+          "type": "number",
+          "format": "double",
+          "description": "The largest threshold value in the result list."
+        },
+        "issueCategory": {
+          "type": "string",
+          "description": "A string to describe where the issue is."
+        },
+        "relation": {
+          "type": "string",
+          "description": "A relation descriptor for criteria to value. See the substitute below for an example.",
+          "default": "<",
+          "enum": [
+            "<"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
+        },
+        "value": {
+          "type": "number",
+          "format": "double",
+          "description": "Value of the performance metric."
+        },
+        "provenance": {
+          "type": "string",
+          "description": "If the blob is derived from, or closely associated with another blob, then the value is the URI to the original artifact. For example, this is used for the output of a transcoder, or the result of running analysis on an ingested artifact. Blobs without Provenance may be deleted by the clean-up service. Blobs with Provenance may be deleted when the primary artifact is deleted by the clean-up service."
+        },
+        "correlationId": {
+          "type": "string",
+          "description": "The CorrelationId. Used to track artifacts across services. One is created if not provided."
+        },
+        "source": {
+          "type": "string",
+          "description": "Source that produced the artifact. (e.g. 'Agent', 'PerfLens', 'Transcoder', 'Aggregator')"
+        },
+        "roleName": {
+          "type": "string",
+          "description": "The role name, if any."
+        },
+        "containers": {
+          "type": "array",
+          "description": "A list of all containers that have insights in this result.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The most recent timestamp from this result."
+        },
+        "context": {
+          "type": "array",
+          "description": "The call stack of the issue.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "symbol": {
+          "type": "string",
+          "description": "The symbol that is the bottleneck of the issue."
+        },
+        "parentSymbol": {
+          "type": "string",
+          "description": "The parent symbol of the issue."
+        },
+        "function": {
+          "type": "string",
+          "description": "Processed method used in rationale"
+        },
+        "parentFunction": {
+          "type": "string",
+          "description": "Processed component used in rationale"
+        },
+        "traceOccurrences": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total number of trace occurrences across all insights in this result."
+        },
+        "isFixable": {
+          "type": "boolean",
+          "description": "Whether the issue is automatically fixable.",
+          "default": false
+        }
+      },
+      "required": [
+        "key",
+        "count",
+        "appId",
+        "issueId",
+        "criteria",
+        "issueCategory",
+        "relation",
+        "value",
+        "containers",
+        "timestamp",
+        "traceOccurrences",
+        "isFixable"
+      ]
+    }
+  },
+  "parameters": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    }
+  }
+}
