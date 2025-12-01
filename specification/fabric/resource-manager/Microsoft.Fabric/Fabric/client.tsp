@@ -47,6 +47,8 @@ namespace Microsoft.Fabric {
     "csharp"
   );
   @@clientName(Quota, "FabricQuota", "csharp");
+  @@clientName(FabricCapacities.listSkus, "GetSkusFabricCapacities", "csharp");
+  @@clientName(QuotaName, "FabricQuotaName", "csharp");
 }
 
 @@clientName(Microsoft.Fabric, "FabricMgmtClient", "python");
