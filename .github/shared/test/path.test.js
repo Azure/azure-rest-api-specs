@@ -28,22 +28,22 @@ describe("path", () => {
   });
 
   it.each([
-    ["/a/b/c/d.txt", "d.txt", "/a/b/c"],
-    ["/a/b/c/d.txt", "c", "/a/b"],
-    ["/a/b/c/d.txt", "b", "/a"],
-    ["/a/b/c/d.txt", "a", "/"],
+    ["/a/b/c/d.txt", "d.txt", "/a/b/c/d.txt"],
+    ["/a/b/c/d.txt", "c", "/a/b/c"],
+    ["/a/b/c/d.txt", "b", "/a/b"],
+    ["/a/b/c/d.txt", "a", "/a"],
     ["/a/b/c/d.txt", "", "/"],
     ["/a/b/c/d.txt", "z", ""],
     ["/a/b/c/d.txt", sep, ""],
     // Ensure path is resolved (against cwd) before searching
-    ["a/b/c/d.txt", "d.txt", "a/b/c"],
-    ["a/b/c/d.txt", "c", "a/b"],
-    ["a/b/c/d.txt", "b", "a"],
-    ["a/b/c/d.txt", "a", cwd],
+    ["a/b/c/d.txt", "d.txt", "a/b/c/d.txt"],
+    ["a/b/c/d.txt", "c", "a/b/c"],
+    ["a/b/c/d.txt", "b", "a/b"],
+    ["a/b/c/d.txt", "a", `${cwd}/a`],
     ["a/b/c/d.txt", "", "/"],
     ["a/b/c/d.txt", sep, ""],
     // Ensure last occurrence of segment is used
-    ["/a/b/a/c/a/d.txt", "a", "/a/b/a/c"],
+    ["/a/b/a/c/a/d.txt", "a", "/a/b/a/c/a"],
   ])("untilLastSegment(%o, %o) => %o", (path, segment, expected) => {
     const resolvedExpected = expected === "" ? "" : resolve(expected);
     expect(untilLastSegment(path, segment)).toEqual(resolvedExpected);

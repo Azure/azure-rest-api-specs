@@ -17,7 +17,7 @@ export function includesSegment(path, segment) {
 /**
  * @param {string} path Absolute or relative path
  * @param {string} segment File or folder
- * @returns {string} Portion of resolved path up to (but excluding) the last occurrence of segment
+ * @returns {string} Portion of resolved path up to (and including) the last occurrence of segment
  *
  * @example
  * untilLastSegment("stable/2025-01-01/examples/foo.json", "examples")
@@ -30,8 +30,8 @@ export function untilLastSegment(path, segment) {
     const parent = dirname(current);
 
     if (basename(current) === segment) {
-      // Found the target folder.  Return everything before it.
-      return parent;
+      // Found the target folder.  Return it.
+      return current;
     } else if (parent === current) {
       // Reached the filesystem root (folder not found).  Return empty string.
       return "";
