@@ -8,8 +8,9 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Microsoft.Compute;
 
-namespace Microsoft.Compute;
+namespace Microsoft.ComputeDisk;
 /**
  * disk encryption set resource.
  */

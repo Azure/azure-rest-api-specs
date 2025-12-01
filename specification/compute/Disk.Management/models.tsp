@@ -10,7 +10,7 @@ using Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
-namespace Microsoft.Compute;
+namespace Microsoft.ComputeDisk;
 
 /**
  * The sku name.
@@ -1455,7 +1455,7 @@ model EncryptionSetProperties {
    * The error that was encountered during auto-key rotation. If an error is present, then auto-key rotation will not be attempted until the error on this disk encryption set is fixed.
    */
   @visibility(Lifecycle.Read)
-  autoKeyRotationError?: ApiError;
+  autoKeyRotationError?: Microsoft.Compute.ApiError;
 
   /**
    * Multi-tenant application client id to access key vault in a different tenant. Setting the value to 'None' will clear the property.
