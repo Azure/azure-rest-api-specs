@@ -142,7 +142,7 @@
         "tags": [
           "BulkActions"
         ],
-        "description": "List LaunchBulkInstancesOperation resources by subscriptionId.",
+        "description": "Get the status of a LaunchBulkInstancesOperation.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -172,7 +172,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/LaunchBulkActionsOperationStatusResponse"
+              "$ref": "#/definitions/LaunchBulkInstancesOperationStatusResponse"
             }
           },
           "default": {
@@ -2574,39 +2574,6 @@
         "sourceVault"
       ]
     },
-    "LaunchBulkActionsOperationStatusResponse": {
-      "type": "object",
-      "description": "Response for getting the status of a LaunchBulkInstancesOperation.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "format": "uuid",
-          "description": "The ID of the LaunchBulkInstancesOperation."
-        },
-        "status": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The status of the LaunchBulkInstancesOperation."
-        },
-        "startTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The start time of the LaunchBulkInstancesOperation."
-        },
-        "endTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The end time of the LaunchBulkInstancesOperation."
-        },
-        "error": {
-          "$ref": "#/definitions/Error",
-          "description": "Error details of the LaunchBulkInstancesOperation, if it exists."
-        }
-      },
-      "required": [
-        "name",
-        "status"
-      ]
-    },
     "LaunchBulkInstancesOperation": {
       "type": "object",
       "description": "A LaunchBulkInstancesOperation resource",
@@ -2710,6 +2677,38 @@
         "priorityProfile",
         "vmSizesProfile",
         "computeProfile"
+      ]
+    },
+    "LaunchBulkInstancesOperationStatusResponse": {
+      "type": "object",
+      "description": "Response for getting the status of a LaunchBulkInstancesOperation.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The ID of the LaunchBulkInstancesOperation."
+        },
+        "status": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the LaunchBulkInstancesOperation."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start time of the LaunchBulkInstancesOperation."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end time of the LaunchBulkInstancesOperation."
+        },
+        "error": {
+          "$ref": "#/definitions/Error",
+          "description": "Error details of the LaunchBulkInstancesOperation, if it exists."
+        }
+      },
+      "required": [
+        "name",
+        "status"
       ]
     },
     "LinuxConfiguration": {

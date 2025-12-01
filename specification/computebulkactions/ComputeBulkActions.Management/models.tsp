@@ -328,10 +328,8 @@ model LaunchBulkInstancesOperation
 // ------------------ Models --------------- //
 #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Prefer using `utcDateTime` when representing a datetime unless an offset is necessary."
 @doc("Response for getting the status of a LaunchBulkInstancesOperation.")
-model LaunchBulkActionsOperationStatusResponse {
-  #suppress "@azure-tools/typespec-azure-core/no-format" "Prefer using `format(" uuid ")` when representing UUIDs."
+model LaunchBulkInstancesOperationStatusResponse {
   @doc("The ID of the LaunchBulkInstancesOperation.")
-  @format("uuid")
   name: string;
 
   @doc("The status of the LaunchBulkInstancesOperation.")
