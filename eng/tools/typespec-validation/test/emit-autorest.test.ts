@@ -22,7 +22,7 @@ describe("emit-autorest", function () {
   });
 
   it("should succeed if no main.tsp", async function () {
-    fileExistsSpy.mockImplementation(async (file: string) => file != join(mockFolder, "main.tsp"));
+    fileExistsSpy.mockImplementation((file: string) => file != join(mockFolder, "main.tsp"));
 
     const result = await new EmitAutorestRule().execute(mockFolder);
 
@@ -30,11 +30,11 @@ describe("emit-autorest", function () {
   });
 
   it("should succeed if emits autorest", async function () {
-    readTspConfigSpy.mockImplementation(
-      async (_mockFolder: string) => `
+    readTspConfigSpy.mockImplementation(() =>
+      Promise.resolve(`
 emit:
   - "@azure-tools/typespec-autorest"
-`,
+`),
     );
 
     const result = await new EmitAutorestRule().execute(mockFolder);
@@ -43,7 +43,7 @@ emit:
   });
 
   it("should fail if config is empty", async function () {
-    readTspConfigSpy.mockImplementation(async (_mockFolder: string) => "");
+    readTspConfigSpy.mockImplementation(() => Promise.resolve(""));
 
     const result = await new EmitAutorestRule().execute(mockFolder);
 
@@ -51,12 +51,12 @@ emit:
   });
 
   it("should fail if no emit", async function () {
-    readTspConfigSpy.mockImplementation(
-      async (_mockFolder: string) => `
+    readTspConfigSpy.mockImplementation(() =>
+      Promise.resolve(`
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
-`,
+`),
     );
 
     const result = await new EmitAutorestRule().execute(mockFolder);
@@ -65,11 +65,11 @@ linter:
   });
 
   it("should fail if no emit autorest", async function () {
-    readTspConfigSpy.mockImplementation(
-      async (_mockFolder: string) => `
+    readTspConfigSpy.mockImplementation(() =>
+      Promise.resolve(`
 emit:
 - foo
-`,
+`),
     );
 
     const result = await new EmitAutorestRule().execute(mockFolder);
