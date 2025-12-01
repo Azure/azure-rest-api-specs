@@ -61,7 +61,7 @@ model CacheProperties {
   exportPolicy?: CachePropertiesExportPolicy;
 
   /**
-   * Set of protocol types, default NFSv3, CIFS for SMB protocol
+   * Set of supported protocol types, which include NFSv3, NFSv4 and SMB protocol
    */
   protocolTypes?: ProtocolTypes[];
 
