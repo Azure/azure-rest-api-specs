@@ -42,7 +42,7 @@
       "name": "Operations"
     },
     {
-      "name": "MigrationServices"
+      "name": "PostgresqlMigrationServices"
     },
     {
       "name": "PostgresqlDatabaseMigrations"
@@ -87,9 +87,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataMigration/postgresqlMigrationServices": {
       "get": {
-        "operationId": "MigrationServices_ListByResourceGroup",
+        "operationId": "PostgresqlMigrationServices_ListByResourceGroup",
         "tags": [
-          "MigrationServices"
+          "PostgresqlMigrationServices"
         ],
         "description": "Lists migration services by resource group.",
         "parameters": [
@@ -129,9 +129,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataMigration/postgresqlMigrationServices/{serviceName}": {
       "get": {
-        "operationId": "MigrationServices_Get",
+        "operationId": "PostgresqlMigrationServices_Get",
         "tags": [
-          "MigrationServices"
+          "PostgresqlMigrationServices"
         ],
         "description": "Gets a migration service.",
         "parameters": [
@@ -174,9 +174,9 @@
         }
       },
       "put": {
-        "operationId": "MigrationServices_Create",
+        "operationId": "PostgresqlMigrationServices_Create",
         "tags": [
-          "MigrationServices"
+          "PostgresqlMigrationServices"
         ],
         "description": "Creates or updates a migration service.",
         "parameters": [
@@ -234,9 +234,9 @@
         }
       },
       "patch": {
-        "operationId": "MigrationServices_Update",
+        "operationId": "PostgresqlMigrationServices_Update",
         "tags": [
-          "MigrationServices"
+          "PostgresqlMigrationServices"
         ],
         "description": "Updates a migration service.",
         "parameters": [
@@ -288,9 +288,9 @@
         }
       },
       "delete": {
-        "operationId": "MigrationServices_Delete",
+        "operationId": "PostgresqlMigrationServices_Delete",
         "tags": [
-          "MigrationServices"
+          "PostgresqlMigrationServices"
         ],
         "description": "Deletes a migration service.",
         "parameters": [
@@ -335,9 +335,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataMigration/postgresqlMigrationServices/{serviceName}/discoverDatabaseObjects": {
       "post": {
-        "operationId": "MigrationServices_DiscoverDatabaseObjects",
+        "operationId": "PostgresqlMigrationServices_DiscoverDatabaseObjects",
         "tags": [
-          "MigrationServices"
+          "PostgresqlMigrationServices"
         ],
         "description": "Discovers database objects (databases and schemas) from source and target.",
         "parameters": [
@@ -394,17 +394,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Discover database objects from Oracle source": {
-            "$ref": "./examples/PostgresqlDiscoverDatabaseObjects_Oracle.json"
-          },
-          "Discover database objects from multiple connections": {
-            "$ref": "./examples/PostgresqlDiscoverDatabaseObjects_MultipleConnections.json"
-          },
-          "Discover database objects from postgresQL source": {
-            "$ref": "./examples/PostgresqlDiscoverDatabaseObjects_Postgres.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -721,9 +710,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataMigration/postgresqlMigrationServices/{serviceName}/testConnectivity": {
       "post": {
-        "operationId": "MigrationServices_TestConnectivity",
+        "operationId": "PostgresqlMigrationServices_TestConnectivity",
         "tags": [
-          "MigrationServices"
+          "PostgresqlMigrationServices"
         ],
         "description": "Tests connectivity to source and target databases.",
         "parameters": [
@@ -780,11 +769,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Test connectivity to source and target databases": {
-            "$ref": "./examples/PostgresqlMigrationService_TestConnectivity.json"
           }
         },
         "x-ms-long-running-operation-options": {

@@ -11,7 +11,7 @@ using Azure.ResourceManager;
 namespace Microsoft.DataMigration;
 
 @armResourceOperations
-interface MigrationServices {
+interface PostgresqlMigrationServices {
   @doc("Gets a migration service.")
   get is ArmResourceRead<MigrationService>;
 
