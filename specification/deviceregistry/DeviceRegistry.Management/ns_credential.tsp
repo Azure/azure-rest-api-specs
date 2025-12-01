@@ -50,4 +50,10 @@ interface Credentials {
   >;
   listByResourceGroup is ArmResourceListByParent<Credential>;
   synchronize is ArmResourceActionNoResponseContentAsync<Credential, void>;
+  
+  @added(Versions.v2026_04_01)
+  revokeDeviceAccess is ArmResourceActionNoResponseContentAsync<
+    Credential,
+    void
+  >;
 }
