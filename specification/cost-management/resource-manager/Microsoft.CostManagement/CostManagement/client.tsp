@@ -91,3 +91,7 @@ op GetGenerateDetailedCostReportOperationStatusCustomized(
   GetGenerateDetailedCostReportOperationStatusCustomized,
   "python,go,java,javascript"
 );
+@@clientName(DimensionsOperationGroup.byExternalCloudProviderType,
+  "listByExternalCloudProviderType",
+  "javascript"
+);
