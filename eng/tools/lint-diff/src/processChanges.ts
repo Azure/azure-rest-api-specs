@@ -82,7 +82,7 @@ export async function buildState(
 
   // Get affected services from changed files
   // e.g. specification/service1/readme.md -> specification/service1
-  const affectedServiceDirectories = await getAffectedServices(existingChangedFiles);
+  const affectedServiceDirectories = getAffectedServices(existingChangedFiles);
 
   // Build service models of affected services
   const specModels = new Map<string, SpecModel>();
@@ -233,10 +233,10 @@ export async function readFileList(changedFilesPath: string): Promise<string[]> 
  * @param changedFiles a list of changed files
  * @returns A list of "services" that are affected by the changed files
  */
-export async function getAffectedServices(changedFiles: string[]) {
+export function getAffectedServices(changedFiles: string[]) {
   const affectedServices = new Set<string>();
   for (const file of changedFiles) {
-    const service = await getService(file);
+    const service = getService(file);
     if (service) {
       affectedServices.add(service);
     }
