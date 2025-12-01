@@ -10,6 +10,7 @@ namespace Customizations;
 @@clientName(getIpToLocation, "getLocation");
 @@clientName(getIpToLocation, "getCountryCode", "python");
 
+/** Client options */
 model MapsGeolocationClientOptions {
   /**
    * Indicates the account intended for use with the Microsoft Entra ID security
