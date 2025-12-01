@@ -53,7 +53,6 @@ interface Documents {
     {
       ...querySourceAuthorizationHeader;
       ...enableElevatedReadHeader;
-
       ...SearchRequest;
     },
     SearchDocumentsResult & {

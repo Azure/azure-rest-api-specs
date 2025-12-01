@@ -116,9 +116,7 @@ alias SearchIndexOperation<
   Traits extends Reflection.Model = {},
   TError extends Reflection.Model = ErrorResponse
 > = Foundations.Operation<
-  TParams &
-    ClientRequestIdHeader &
-    indexNamePath,
+  TParams & ClientRequestIdHeader & indexNamePath,
   TResponse,
   Traits,
   TError
