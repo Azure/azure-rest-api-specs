@@ -13232,25 +13232,6 @@
         }
       }
     },
-    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
-      "type": "object",
-      "title": "Tracked Resource",
-      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
-        }
-      ]
-    },
     "Backup": {
       "type": "object",
       "description": "Backup under a Backup Vault",
@@ -15333,18 +15314,51 @@
     },
     "ElasticBackupPolicyUpdate": {
       "type": "object",
-      "description": "NetApp Elastic Backup Policy resource",
+      "description": "The type used for update operations of the ElasticBackupPolicy.",
       "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "properties": {
-          "$ref": "#/definitions/ElasticBackupPolicyProperties",
+          "$ref": "#/definitions/ElasticBackupPolicyUpdateProperties",
           "description": "The resource-specific properties for this resource."
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+      }
+    },
+    "ElasticBackupPolicyUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the ElasticBackupPolicy.",
+      "properties": {
+        "dailyBackupsToKeep": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Daily backups count to keep",
+          "minimum": 2,
+          "maximum": 1017
+        },
+        "weeklyBackupsToKeep": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Weekly backups count to keep",
+          "minimum": 0,
+          "maximum": 1019
+        },
+        "monthlyBackupsToKeep": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Monthly backups count to keep",
+          "minimum": 0,
+          "maximum": 1019
+        },
+        "policyState": {
+          "$ref": "#/definitions/ElasticBackupPolicyState",
+          "description": "The property to identify whether Backup Policy is enabled or not"
         }
-      ]
+      }
     },
     "ElasticBackupProperties": {
       "type": "object",
@@ -15580,18 +15594,16 @@
     },
     "ElasticBackupVaultUpdate": {
       "type": "object",
-      "description": "NetApp elastic backup vault resource",
+      "description": "The type used for update operations of the ElasticBackupVault.",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/ElasticBackupVaultProperties",
-          "description": "The resource-specific properties for this resource."
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
-        }
-      ]
+      }
     },
     "ElasticCapacityPool": {
       "type": "object",
@@ -16448,18 +16460,46 @@
     },
     "ElasticSnapshotPolicyUpdate": {
       "type": "object",
-      "description": "NetApp Elastic Snapshot Policy under an Elastic Account",
+      "description": "The type used for update operations of the ElasticSnapshotPolicy.",
       "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "properties": {
-          "$ref": "#/definitions/ElasticSnapshotPolicyProperties",
+          "$ref": "#/definitions/ElasticSnapshotPolicyUpdateProperties",
           "description": "The resource-specific properties for this resource."
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+      }
+    },
+    "ElasticSnapshotPolicyUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the ElasticSnapshotPolicy.",
+      "properties": {
+        "hourlySchedule": {
+          "$ref": "#/definitions/ElasticSnapshotPolicyHourlySchedule",
+          "description": "Schedule for hourly snapshots"
+        },
+        "dailySchedule": {
+          "$ref": "#/definitions/ElasticSnapshotPolicyDailySchedule",
+          "description": "Schedule for daily snapshots"
+        },
+        "weeklySchedule": {
+          "$ref": "#/definitions/ElasticSnapshotPolicyWeeklySchedule",
+          "description": "Schedule for weekly snapshots"
+        },
+        "monthlySchedule": {
+          "$ref": "#/definitions/ElasticSnapshotPolicyMonthlySchedule",
+          "description": "Schedule for monthly snapshots"
+        },
+        "policyStatus": {
+          "$ref": "#/definitions/PolicyStatus",
+          "description": "Configures if the snapshot policy is enabled on the volumes connected to the policy."
         }
-      ]
+      }
     },
     "ElasticSnapshotPolicyVolumeList": {
       "type": "object",
@@ -18235,11 +18275,11 @@
     },
     "NicInfo": {
       "type": "object",
-      "description": "NIC information and list of volumes for which the NIC has the primary mount ip address.",
+      "description": "NIC information and list of volumes for which the NIC has the primary mount IP Address.",
       "properties": {
         "ipAddress": {
           "type": "string",
-          "description": "ipAddress",
+          "description": "IP Address",
           "readOnly": true
         },
         "volumeResourceIds": {
