@@ -117,13 +117,13 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "List migration services by resource group": {
             "$ref": "./examples/PostgresqlMigrationServices_ListByResourceGroup.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -399,12 +399,7 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Discover database objects": {
-            "$ref": "./examples/PostgresqlDiscoverDatabaseObjects_Postgres.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataMigration/postgresqlMigrationServices/{serviceName}/postgresqlDatabaseMigrations": {
@@ -773,15 +768,15 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Test connectivity to source and target databases": {
+            "$ref": "./examples/PostgresqlMigrationServices_TestConnectivity.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Test connectivity to databases": {
-            "$ref": "./examples/PostgresqlMigrationServices_TestConnectivity.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     }
   },
