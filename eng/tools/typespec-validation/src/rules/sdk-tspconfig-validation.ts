@@ -249,16 +249,33 @@ class TspconfigEmitterOptionsSubRuleBase extends TspconfigSubRuleBase {
 }
 
 class TspconfigEmitterOptionsEmitterOutputDirSubRuleBase extends TspconfigEmitterOptionsSubRuleBase {
-  private skipValidateNamespace: boolean;
-
-  constructor(
-    emitterName: string,
-    keyToValidate: string,
-    expectedValue: ExpectedValueType,
-    skipValidateNamespace: boolean = false,
-  ) {
+  constructor(emitterName: string, keyToValidate: string, expectedValue: ExpectedValueType) {
     super(emitterName, keyToValidate, expectedValue);
-    this.skipValidateNamespace = skipValidateNamespace;
+  }
+
+  private tryResolveAndValidate(
+    path: string,
+    config: any,
+  ): { success: boolean; resolved?: string; error?: string } {
+    // First, try to validate the path as-is
+    if (this.validateValue(path, this.expectedValue)) {
+      return { success: true, resolved: path };
+    }
+
+    // Only resolve variables if validation failed and path contains variables
+    if (path.includes("{")) {
+      const { resolved, error } = this.resolveVariables(path, config);
+      if (error) {
+        return { success: false, error };
+      }
+
+      // Validate the resolved path
+      const isValid = this.validateValue(resolved, this.expectedValue);
+      return { success: isValid, resolved };
+    }
+
+    // No variables and validation failed
+    return { success: false, resolved: path };
   }
 
   protected validate(config: any): RuleResult {
@@ -277,59 +294,64 @@ class TspconfigEmitterOptionsEmitterOutputDirSubRuleBase extends TspconfigEmitte
       );
     }
 
-    let pathToValidate: string;
-
     // Handle various path formats with different prefixes
     // Format 1: {output-dir}/{service-dir}/azure-mgmt-advisor
     // Format 2: {service-dir}/azure-mgmt-advisor where service-dir might include {output-dir}
     // Format 3: {output-dir}/{service-dir}/azadmin/settings where we need to validate "azadmin/settings"
-    // Format 4: {output-dir}/sdk/dellstorage/Azure.ResourceManager.Dell.Storage - validate last part only
+    // Format 4: {output-dir}/{service-dir}/{namespace} where namespace needs to be resolved
 
+    // For simple paths without '/', validate directly
     if (!actualValue.includes("/")) {
-      pathToValidate = actualValue;
-    } else {
-      const pathParts = actualValue.split("/");
-      const filteredParts = pathParts.filter(
-        (part) => !(part === "{output-dir}" || part === "{service-dir}"),
-      );
-
-      // Strategy: Remove common directory prefixes (sdk, sdk/xxx) and validate the remaining path
-      // This handles:
-      // - "sdk/dellstorage/Azure.ResourceManager.Dell.Storage" -> "Azure.ResourceManager.Dell.Storage"
-      // - "azadmin/settings" -> "azadmin/settings" (no sdk prefix, keep as is)
-      if (filteredParts.length > 1 && filteredParts[0] === "sdk") {
-        // Remove "sdk" and any intermediate directory, validate only the last segment
-        // Example: ["sdk", "dellstorage", "Azure.ResourceManager.Dell"] -> "Azure.ResourceManager.Dell"
-        pathToValidate = filteredParts[filteredParts.length - 1];
-      } else {
-        // Keep the full remaining path for validation
-        // Example: ["azadmin", "settings"] -> "azadmin/settings"
-        pathToValidate = filteredParts.join("/");
-      }
-    }
-
-    // Skip validation if pathToValidate is exactly {namespace} and skipValidateNamespace is true
-    if (pathToValidate === "{namespace}" && this.skipValidateNamespace) {
-      return { success: true };
-    }
-
-    // Resolve any variables in the pathToValidate
-    if (pathToValidate.includes("{")) {
-      const { resolved, error } = this.resolveVariables(pathToValidate, config);
-      if (error) {
+      const result = this.tryResolveAndValidate(actualValue, config);
+      if (result.error) {
         return this.createFailedResult(
-          error,
+          result.error,
           `Please define the variable in your configuration or use a direct path value`,
         );
       }
-      pathToValidate = resolved;
+      if (!result.success) {
+        return this.createFailedResult(
+          `The path part "${result.resolved}" in options.${this.emitterName}.${this.keyToValidate} does not match the required format "${this.expectedValue}"`,
+          `Please update the emitter-output-dir path to follow the SDK naming convention`,
+        );
+      }
+      return { success: true };
     }
 
-    if (!this.validateValue(pathToValidate, this.expectedValue))
+    // For paths with '/', filter out prefix parts and try from last segment backward
+    const filteredParts = actualValue
+      .split("/")
+      .filter((part) => part !== "{output-dir}" && part !== "{service-dir}");
+
+    // Try from the last segment backward to find a valid match
+    for (let i = filteredParts.length - 1; i >= 0; i--) {
+      const candidatePath = filteredParts.slice(i).join("/");
+      const result = this.tryResolveAndValidate(candidatePath, config);
+
+      // Skip if resolution failed, try next segment
+      if (result.error) continue;
+
+      // If validation succeeds, return success immediately
+      if (result.success) return { success: true };
+    }
+
+    // If all segments failed, try the complete filtered path as final attempt
+    const completePath = filteredParts.join("/");
+    const finalResult = this.tryResolveAndValidate(completePath, config);
+
+    if (finalResult.error) {
       return this.createFailedResult(
-        `The path part "${pathToValidate}" in options.${this.emitterName}.${this.keyToValidate} does not match the required format "${this.expectedValue}"`,
+        finalResult.error,
+        `Please define the variable in your configuration or use a direct path value`,
+      );
+    }
+
+    if (!finalResult.success) {
+      return this.createFailedResult(
+        `The path part "${finalResult.resolved}" in options.${this.emitterName}.${this.keyToValidate} does not match the required format "${this.expectedValue}"`,
         `Please update the emitter-output-dir path to follow the SDK naming convention`,
       );
+    }
 
     return { success: true };
   }
@@ -643,7 +665,6 @@ export class TspConfigPythonMgmtEmitterOutputDirSubRule extends TspconfigEmitter
       "@azure-tools/typespec-python",
       "emitter-output-dir",
       new RegExp(/^azure-mgmt(-[a-z]+){1,2}$/),
-      true,
     );
   }
   protected skip(_: any, folder: string) {
