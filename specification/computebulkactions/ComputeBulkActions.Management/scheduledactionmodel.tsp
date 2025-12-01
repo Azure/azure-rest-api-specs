@@ -336,13 +336,13 @@ model OperationErrorsResult {
   @doc("The operationId identifying a vm operation")
   operationId?: string;
 
-  @doc("The creation time of the error result")
+  @doc("The creation time of the error result, returned in UTC datetimeoffset format")
   creationTime?: offsetDateTime;
 
-  @doc("The activation time of a Virtual Machine operation")
+  @doc("The activation time of a Virtual Machine operation, returned in UTC datetimeoffset format")
   activationTime?: offsetDateTime;
 
-  @doc("The completion time of the operation if the operation was completed")
+  @doc("The completion time of the operation if the operation was completed, returned in UTC datetimeoffset format")
   completedAt?: offsetDateTime;
 
   @identifiers(#[])
