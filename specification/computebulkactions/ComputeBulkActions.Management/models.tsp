@@ -39,7 +39,7 @@ alias OperationParameter = {
   @segment("operations")
   @key
   @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
-  asyncOperationId: string;
+  operationId: string;
 };
 
 alias SubscriptionParams = {
@@ -329,8 +329,8 @@ model LaunchBulkInstancesOperation
 #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Prefer using `utcDateTime` when representing a datetime unless an offset is necessary."
 @doc("Response for getting the status of a LaunchBulkInstancesOperation.")
 model LaunchBulkInstancesOperationStatusResponse {
-  @doc("The ID of the LaunchBulkInstancesOperation.")
-  name: string;
+  @doc("The unique id of the operation.")
+  id: string;
 
   @doc("The status of the LaunchBulkInstancesOperation.")
   status: ProvisioningState;

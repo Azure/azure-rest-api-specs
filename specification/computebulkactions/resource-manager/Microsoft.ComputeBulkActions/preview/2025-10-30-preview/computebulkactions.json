@@ -136,7 +136,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.ComputeBulkActions/locations/{location}/operations/{asyncOperationId}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ComputeBulkActions/locations/{location}/operations/{operationId}": {
       "get": {
         "operationId": "BulkActions_GetOperationStatus",
         "tags": [
@@ -159,7 +159,7 @@
             "minLength": 1
           },
           {
-            "name": "asyncOperationId",
+            "name": "operationId",
             "in": "path",
             "description": "The async operation id.",
             "required": true,
@@ -2683,9 +2683,9 @@
       "type": "object",
       "description": "Response for getting the status of a LaunchBulkInstancesOperation.",
       "properties": {
-        "name": {
+        "id": {
           "type": "string",
-          "description": "The ID of the LaunchBulkInstancesOperation."
+          "description": "The unique id of the operation."
         },
         "status": {
           "$ref": "#/definitions/ProvisioningState",
@@ -2707,7 +2707,7 @@
         }
       },
       "required": [
-        "name",
+        "id",
         "status"
       ]
     },
