@@ -112,8 +112,7 @@ alias SearchIndexOperation<
 > = Foundations.Operation<
   TParams &
     ClientRequestIdHeader &
-    indexNamePath &
-    querySourceAuthorizationHeader,
+    indexNamePath,
   TResponse,
   Traits,
   TError
