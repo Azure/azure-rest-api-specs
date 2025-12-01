@@ -119,6 +119,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List migration services by resource group": {
+            "$ref": "./examples/PostgresqlMigrationServices_ListByResourceGroup.json"
+          }
         }
       }
     },
@@ -160,6 +165,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get a migration service": {
+            "$ref": "./examples/PostgresqlMigrationServices_Get.json"
           }
         }
       },
@@ -216,6 +226,11 @@
               "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Create a migration service": {
+            "$ref": "./examples/PostgresqlMigrationServices_Create.json"
+          }
         }
       },
       "patch": {
@@ -265,6 +280,11 @@
               "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Update a migration service": {
+            "$ref": "./examples/PostgresqlMigrationServices_Update.json"
+          }
         }
       },
       "delete": {
@@ -304,6 +324,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a migration service": {
+            "$ref": "./examples/PostgresqlMigrationServices_Delete.json"
           }
         }
       }
@@ -374,7 +399,12 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Discover database objects": {
+            "$ref": "./examples/PostgresqlDiscoverDatabaseObjects_Postgres.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataMigration/postgresqlMigrationServices/{serviceName}/postgresqlDatabaseMigrations": {
@@ -746,7 +776,12 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Test connectivity to databases": {
+            "$ref": "./examples/PostgresqlMigrationServices_TestConnectivity.json"
+          }
+        }
       }
     }
   },
