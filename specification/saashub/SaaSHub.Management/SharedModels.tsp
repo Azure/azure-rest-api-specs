@@ -793,7 +793,8 @@ model SeatBasedResourceProperties {
    * Type of the offer for which the resource is purchased
    */
   @visibility(Lifecycle.Read)
-  offerType?: OfferType;
+  @typeChangedFrom(SaaSHubVersions.v2025_07_01_preview, OfferType)
+  offerType?: string;
 
   /**
    * Product Universal Product Number of the product
@@ -907,6 +908,41 @@ model ResourceToken {
 }
 
 /**
+ * Dependency value containing type and value for dependency tracking purposes.
+ */
+model DependsOnValue {
+  /**
+   * The type of the dependency value.
+   */
+  type?: string;
+
+  /**
+   * The value of the dependency.
+   */
+  value?: string;
+}
+
+/**
+ * Additional information key-value pair
+ */
+model AdditionalInfoItem {
+  /**
+   * The type of the additional information item.
+   */
+  type?: string;
+
+  /**
+   * The key of the additional information item.
+   */
+  key?: string;
+
+  /**
+   * The value of the additional information item.
+   */
+  value?: string;
+}
+
+/**
  * Linked resource for scheduled actions
  */
 model ScheduleActionLinkedResource {
@@ -920,6 +956,16 @@ model ScheduleActionLinkedResource {
    * Format: /providers/Microsoft.Billing/billingAccounts/{baId}/billingProfiles/{bfId}/invoiceSections/{isId}
    */
   billingScope?: string;
+
+  /**
+   * The link operation type.
+   */
+  operationType?: string;
+
+  /**
+   * The resource type for the linked resource.
+   */
+  resourceType?: string;
 }
 
 /**
@@ -956,6 +1002,12 @@ model ScheduleAction {
    * Optional property.
    */
   linkedResource?: ScheduleActionLinkedResource;
+
+  /**
+   * Type of the offer for which the schedule action is applied
+   */
+  @visibility(Lifecycle.Read)
+  offerType?: string;
 
   /**
    * Resource tokens for various authorization and context purposes.
@@ -1035,115 +1087,224 @@ model CotermResponseItem {
 }
 
 /**
- * Request model for Proposal operation.
+ * Request model for CanTransact operation.
  */
-model ProposalRequest {
+model CanTransactSaasResourcesRequest {
   /**
-   * The unique identifier for the proposal.
+   * The URI of the resource for the transaction evaluation.
    */
-  proposalId: string;
+  resourceUri: string;
+
+  /**
+   * Optional token for the evaluation request.
+   */
+  approvalCode?: string;
+
+  /**
+   * The type of operation to evaluate for the transaction.
+   */
+  operationType: CanTransactOperationType;
+
+  /**
+   * Resource properties for the transaction evaluation.
+   * Supports SaasResources only.
+   */
+  properties?: SaasResourceProperties;
+
+  /**
+   * Full merge request payload used for canMerge operations.
+   */
+  mergeRequest?: MergeSaasResourcesRequest;
+
+  /**
+   * Additional information as key-value pairs
+   */
+  @identifiers(#[])
+  additionalInfo?: AdditionalInfoItem[];
 }
 
 /**
- * Error information for proposal line items.
+ * Bulk request model for TenantLevelCanTransact operation.
  */
-model ProposalLineItemError {
+model TenantLevelCanTransactBulkRequest {
   /**
-   * Error code for the line item.
+   * Array of transaction requests to evaluate.
    */
-  errorCode?: string;
-
-  /**
-   * Error message for the line item.
-   */
-  message?: string;
+  @identifiers(#[])
+  items: CanTransactSaasResourcesRequest[];
 }
 
 /**
- * Additional information for proposal line items.
+ * Request model for CanTransact operation with CloudServices.
  */
-model ProposalLineItemAdditionalInfo {
+model CanTransactCloudServicesRequest {
   /**
-   * ETag for concurrency control.
+   * The URI of the resource for the transaction evaluation.
    */
-  etag?: string;
+  resourceUri: string;
 
   /**
-   * System identifier.
+   * Optional token for the evaluation request.
    */
-  systemId?: string;
+  approvalCode?: string;
 
   /**
-   * Tracking identifier.
+   * The type of operation to evaluate for the transaction.
    */
-  trackingId?: string;
+  operationType: CanTransactOperationType;
+
+  /**
+   * Resource properties for the transaction evaluation.
+   * Supports CloudServices only.
+   */
+  properties?: CloudServiceProperties;
+
+  /**
+   * Full merge request payload used for canMerge operations.
+   */
+  mergeRequest?: MergeCloudServiceRequest;
+
+  /**
+   * Additional information as key-value pairs
+   */
+  @identifiers(#[])
+  additionalInfo?: AdditionalInfoItem[];
 }
 
 /**
- * Line item information in a proposal response.
+ * Bulk request model for ResourceGroupLevelCanTransact operation.
  */
-model ProposalLineItem {
+model ResourceGroupLevelCanTransactBulkRequest {
   /**
-   * Unique identifier for the line item.
+   * Array of transaction requests to evaluate.
    */
-  lineItemId?: string;
-
-  /**
-   * Product identifier.
-   */
-  productId?: string;
-
-  /**
-   * SKU identifier.
-   */
-  skuId?: string;
-
-  /**
-   * Availability identifier.
-   */
-  availabilityId?: string;
-
-  /**
-   * BigId identifier.
-   */
-  bigId?: string;
-
-  /**
-   * Product code for the line item.
-   */
-  productCode?: string;
-
-  /**
-   * Error information if any issues occurred with this line item.
-   */
-  error?: ProposalLineItemError;
-
-  /**
-   * Additional information for the line item.
-   */
-  additionalInfo?: ProposalLineItemAdditionalInfo;
+  @identifiers(#[])
+  items: CanTransactCloudServicesRequest[];
 }
 
 /**
- * Response model for Proposal operation.
+ * Bulk response model for ResourceGroupLevelCanTransact operation with pagination support.
  */
-model ProposalResponse {
+model ResourceGroupLevelCanTransactBulkResponse
+  is Azure.Core.Page<CanTransactResponse>;
+
+/**
+ * The type of operation being evaluated in a CanTransact request.
+ */
+union CanTransactOperationType {
+  string,
+
   /**
-   * Unique identifier for the proposal response.
+   * Create operation type
+   */
+  canCreate: "canCreate",
+
+  /**
+   * Cancel operation type
+   */
+  canCancel: "canCancel",
+
+  /**
+   * Update operation type
+   */
+  canUpdate: "canUpdate",
+
+  /**
+   * Merge operation type
+   */
+  canMerge: "canMerge",
+}
+
+/**
+ * Base response model for CanTransact operation result.
+ * The operationType discriminator determines which specific result structure is used.
+ */
+@discriminator("operationType")
+model CanTransactResponse {
+  /**
+   * The URI of the resource that was evaluated.
    */
   @visibility(Lifecycle.Read)
-  id?: string;
+  resourceUri: string;
 
   /**
-   * Status of the proposal.
+   * Proof of successful evaluation.
    */
   @visibility(Lifecycle.Read)
-  status?: string;
+  approvalCode?: string;
 
   /**
-   * List of line items in the proposal.
+   * The type of operation that was evaluated.
+   */
+  @visibility(Lifecycle.Read)
+  operationType: CanTransactOperationType;
+
+  /**
+   * Dependencies for the transaction evaluation.
    */
   @visibility(Lifecycle.Read)
   @identifiers(#[])
-  lineItems?: ProposalLineItem[];
+  dependsOn?: DependsOnValue[];
 }
+
+/**
+ * Response for canCreate operation evaluation.
+ */
+model CanTransactCanCreateResponse extends CanTransactResponse {
+  // Discriminator value: must be a literal string (not a union reference) matching a CanTransactOperationType value for proper polymorphic deserialization
+  operationType: "canCreate";
+
+  /**
+   * The result of the canCreate operation evaluation.
+   */
+  @visibility(Lifecycle.Read)
+  result?: CanCreateResult;
+}
+
+/**
+ * Response for canCancel operation evaluation.
+ */
+model CanTransactCanCancelResponse extends CanTransactResponse {
+  // Discriminator value: must be a literal string (not a union reference) matching a CanTransactOperationType value for proper polymorphic deserialization
+  operationType: "canCancel";
+
+  /**
+   * The result of the canCancel operation evaluation.
+   */
+  @visibility(Lifecycle.Read)
+  result?: CanCancelResult;
+}
+
+/**
+ * Response for canUpdate operation evaluation.
+ */
+model CanTransactCanUpdateResponse extends CanTransactResponse {
+  // Discriminator value: must be a literal string (not a union reference) matching a CanTransactOperationType value for proper polymorphic deserialization
+  operationType: "canUpdate";
+
+  /**
+   * The result of the canUpdate operation evaluation.
+   */
+  @visibility(Lifecycle.Read)
+  result?: CanUpdateResult;
+}
+
+/**
+ * Response for canMerge operation evaluation.
+ */
+model CanTransactCanMergeResponse extends CanTransactResponse {
+  // Discriminator value: must be a literal string (not a union reference) matching a CanTransactOperationType value for proper polymorphic deserialization
+  operationType: "canMerge";
+
+  /**
+   * The result of the canMerge operation evaluation.
+   */
+  @visibility(Lifecycle.Read)
+  result?: CanMergeResult;
+}
+
+/**
+ * Bulk response model for TenantLevelCanTransact operation with pagination support.
+ */
+model TenantLevelCanTransactBulkResponse
+  is Azure.Core.Page<CanTransactResponse>;

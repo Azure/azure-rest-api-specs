@@ -325,6 +325,9 @@ model AttentionReason {
 
   @doc("User MSI associated with chaos experiment object is deleted.")
   chaosExperimentUserMsi?: ExtensionObjectState;
+
+  @doc("Included resource in Drill.")
+  includedResourceInDrill?: ExtensionObjectState;
 }
 
 @doc("Internal System Metadata, to be used by internal components only.")

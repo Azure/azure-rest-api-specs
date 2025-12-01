@@ -42,4 +42,10 @@ enum Versions {
 
   @doc("2025-09-01")
   v20250901: "2025-09-01",
+
+  @doc("2025-11-01-preview")
+  v20251101_preview: "2025-11-01-preview",
+
+  @doc("2025-11-15-preview")
+  v20251115_preview: "2025-11-15-preview",
 }

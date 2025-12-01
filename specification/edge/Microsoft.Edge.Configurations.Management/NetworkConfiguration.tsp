@@ -1,14 +1,6 @@
-import "@typespec/http";
-import "@typespec/rest";
-import "@typespec/versioning";
-import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
 import "./Configuration.tsp";
-import "./Commons.tsp";
 
-using TypeSpec.OpenAPI;
-using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
@@ -17,6 +9,7 @@ using Azure.ResourceManager;
 namespace Microsoft.Edge;
 
 @removed(Versions.v2025_06_01)
+@added(Versions.v2025_12_01_preview)
 @armResourceOperations
 interface NetworkConfigurations {
   get is ArmResourceRead<NetworkConfiguration>;
@@ -30,6 +23,7 @@ interface NetworkConfigurations {
 }
 
 @removed(Versions.v2025_06_01)
+@added(Versions.v2025_12_01_preview)
 @doc("NetworkConfiguration Resource")
 @parentResource(Configuration)
 model NetworkConfiguration is ProxyResource<LanNetworkConfigurationProperties> {
@@ -44,6 +38,7 @@ model NetworkConfiguration is ProxyResource<LanNetworkConfigurationProperties> {
 }
 
 @removed(Versions.v2025_06_01)
+@added(Versions.v2025_12_01_preview)
 @doc("NetworkConfiguration Properties")
 model NetworkConfigurationProperties {
   @doc("The status of the last operation.")
@@ -55,6 +50,7 @@ model NetworkConfigurationProperties {
 }
 
 @removed(Versions.v2025_06_01)
+@added(Versions.v2025_12_01_preview)
 @doc("NetworkConfigurationProperties for LAN")
 model LanNetworkConfigurationProperties {
   ...NetworkConfigurationProperties;
@@ -64,6 +60,7 @@ model LanNetworkConfigurationProperties {
 }
 
 @removed(Versions.v2025_06_01)
+@added(Versions.v2025_12_01_preview)
 @doc("IP Assignment")
 model IpAssignment {
   @doc("IpAssignment Type")
@@ -74,6 +71,7 @@ model IpAssignment {
 }
 
 @removed(Versions.v2025_06_01)
+@added(Versions.v2025_12_01_preview)
 @doc("Ip V4")
 model Ipv4 {
   @doc("AddressRange for IPv4")
@@ -93,6 +91,7 @@ model Ipv4 {
 }
 
 @removed(Versions.v2025_06_01)
+@added(Versions.v2025_12_01_preview)
 @doc("AddressRange for IP V4")
 model Ipv4AddressRange {
   @doc("startIp of Address range")
@@ -103,6 +102,7 @@ model Ipv4AddressRange {
 }
 
 @removed(Versions.v2025_06_01)
+@added(Versions.v2025_12_01_preview)
 @doc("IpAssignment Types")
 union IpAssignmentType {
   @doc("Automatic IpAssignment") Automatic: "Automatic",
@@ -111,6 +111,7 @@ union IpAssignmentType {
 }
 
 @removed(Versions.v2025_06_01)
+@added(Versions.v2025_12_01_preview)
 @doc("kind for type of supported NetworkConfigurations")
 union NetworkConfigurationKind {
   @doc("LAN type of NetworkConfigurations") LAN: "LAN",

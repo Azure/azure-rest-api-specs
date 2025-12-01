@@ -45,12 +45,26 @@ enum Versions {
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   @useDependency(LiftrBase.Versions.v1_preview)
   v2025_05_23_preview: "2025-05-23-preview",
+
+  /** 2025-10-24-preview version (new) */
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  @useDependency(LiftrBase.Versions.v1_preview)
+  v2025_10_24_preview: "2025-10-24-preview",
 }
 
 /** These properties will be sent to your endpoints registered with Liftr during CRUD on resource.
  * BaseResourceProperties contains Marketplace, useDetail related properties*/
 @doc("Properties specific to Organization")
-model OrganizationProperties is BaseResourceProperties;
+model OrganizationProperties is BaseResourceProperties {
+  @added(Versions.v2025_10_24_preview)
+  @visibility(Lifecycle.Read)
+  @doc("Managed-On-Behalf-Of configuration for the resource.")
+  managedOnBehalfOfConfiguration?: Azure.ResourceManager.CommonTypes.ManagedOnBehalfOfConfiguration;
+
+  @added(Versions.v2025_10_24_preview)
+  @doc("Indicates whether this organization is created as part of a MOBO flow")
+  isMoboFlowEnabled?: boolean;
+}
 
 model OrganizationResource
   is Azure.ResourceManager.TrackedResource<OrganizationProperties> {

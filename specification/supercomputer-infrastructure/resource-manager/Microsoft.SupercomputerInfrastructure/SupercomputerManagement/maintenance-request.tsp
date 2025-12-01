@@ -14,7 +14,10 @@ namespace Microsoft.SupercomputerInfrastructure;
 /** A maintenance request on resource(s) that can be requested and approved. */
 @parentResource(Supercomputer)
 model MaintenanceRequest is ProxyResource<MaintenanceRequestProperties> {
-  ...ResourceNameParameter<MaintenanceRequest>;
+  ...ResourceNameParameter<
+    MaintenanceRequest,
+    NamePattern = "^[a-zA-Z0-9-]{3,64}$"
+  >;
 }
 
 /** The properties of a maintenance request. */
@@ -38,7 +41,7 @@ model MaintenanceRequestProperties {
   state: MaintenanceRequestState;
 
   /**
-   * The ARM resource IDs of the entities that are reported to be unhealthy.
+   * The Azure resource IDs of the entities that are reported to be unhealthy.
    */
   @visibility(Lifecycle.Create, Lifecycle.Read)
   unhealthyResources: ReportableWithinMaintenanceRequestResourceId[];
@@ -46,6 +49,16 @@ model MaintenanceRequestProperties {
   /** The impact seen to cause this maintenance request. */
   @visibility(Lifecycle.Create, Lifecycle.Read)
   impactCategory: MaintenanceRequestImpactCategory;
+
+  /**
+   * The Azure resource IDs of the entities that are repaired through this request.
+   */
+  @visibility(Lifecycle.Read)
+  repairedResources?: ReportableWithinMaintenanceRequestResourceId[];
+
+  /** The category of repair on the repaired resources. */
+  @visibility(Lifecycle.Read)
+  repairCategory?: MaintenanceRequestRepairCategory;
 
   /**
    * The Azure Resource ID of the workload impact resource,
@@ -115,6 +128,32 @@ union MaintenanceRequestImpactCategory {
 
   /** The referenced switch has unspecified issues, such as a low buffer. */
   EthSwitchUnhealthy: "EthSwitchUnhealthy",
+
+  string,
+}
+
+/** The types of repair covered by maintenance requests. */
+union MaintenanceRequestRepairCategory {
+  /** The repair needs human investigation. */
+  HumanInvestigate: "HumanInvestigate",
+
+  /** The operating system needs to be upgraded. */
+  OsUpgrade: "OsUpgrade",
+
+  /** A power cycle is required. */
+  PowerCycle: "PowerCycle",
+
+  /** A restart without power cycle is required. */
+  Restart: "Restart",
+
+  /** The repair involves an RMA on a device. */
+  RMA: "RMA",
+
+  /** A NIC needs to be replaced. */
+  ReplaceNic: "ReplaceNic",
+
+  /** A cable needs to be replaced. */
+  ReplaceCable: "ReplaceCable",
 
   string,
 }

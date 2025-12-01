@@ -9,6 +9,7 @@
         "displayName": "Updated Conditional Credit 20250801",
         "milestones": [
           {
+            "name": "Milestone 1",
             "milestoneId": "550e8400-e29b-41d4-a716-446655440001",
             "endAt": "2025-09-30T23:59:59Z",
             "spendTarget": {
@@ -16,15 +17,20 @@
               "currencyCode": "USD"
             },
             "award": {
+              "duration": "P3M",
               "credit": {
                 "grain": "FullTerm",
                 "amount": 6000,
                 "currencyCode": "USD"
               },
-              "duration": "P3M"
+              "startAt": "2025-10-01T00:00:00Z",
+              "endAt": "2025-12-31T23:59:59Z",
+              "balanceVersion": 13,
+              "systemId": "credit98765432"
             }
           },
           {
+            "name": "Milestone 2",
             "milestoneId": "550e8400-e29b-41d4-a716-446655440002",
             "endAt": "2025-12-31T23:59:59Z",
             "spendTarget": {
@@ -41,6 +47,7 @@
             }
           },
           {
+            "name": "Milestone 3",
             "milestoneId": "550e8400-e29b-41d4-a716-446655440003",
             "endAt": "2026-03-31T23:59:59Z",
             "spendTarget": {
@@ -117,14 +124,12 @@
                   "grain": "FullTerm",
                   "amount": 10000,
                   "currencyCode": "USD"
-                },
-                "balanceVersion": 13,
-                "systemId": "credit98765432"
+                }
               }
             },
             {
               "milestoneId": "550e8400-e29b-41d4-a716-446655440003",
-              "status": "Scheduled",
+              "status": "Active",
               "endAt": "2026-03-31T23:59:59Z",
               "spendTarget": {
                 "amount": 150000,
@@ -136,9 +141,7 @@
                   "grain": "FullTerm",
                   "amount": 15000,
                   "currencyCode": "USD"
-                },
-                "balanceVersion": 13,
-                "systemId": "credit98765432"
+                }
               }
             }
           ]
@@ -158,8 +161,8 @@
     },
     "202": {
       "headers": {
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/{primaryCloudSubId}/resourceGroups/resource_group_name_01/providers/Microsoft.BillingBenefits/operationResults/4e2ffff7-b331-4fcb-ab11-b5fa49368188?api-version=2025-05-01-preview",
-        "Location": "https://management.azure.com/subscriptions/{primaryCloudSubId}/resourceGroups/resource_group_name_01/providers/Microsoft.BillingBenefits/conditionalCredits/conditionalCredit_20250801?api-version=2025-05-01-preview",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/{primaryCloudSubId}/resourceGroups/resource_group_name_01/providers/Microsoft.BillingBenefits/operationStatus/4e2ffff7-b331-4fcb-ab11-b5fa49368188?api-version=2025-05-01-preview",
+        "Location": "https://management.azure.com/subscriptions/{contributorCloudSubId}/resourceGroups/resource_group_name_02/providers/Microsoft.BillingBenefits/operationStatus/5f3gggg8-c442-5gdc-bc22-c6gb5a479299?api-version=2025-05-01-preview",
         "Retry-After": 5
       }
     }

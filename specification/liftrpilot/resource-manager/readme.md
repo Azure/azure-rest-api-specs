@@ -82,6 +82,19 @@ suppressions:
     reason: User Assigned Managed Identity Type inline definition is automtaically added to json.
 ```
 
+### Tag: package-2025-10-24-preview
+
+These settings apply only when `--tag=package-2025-10-24-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-10-24-preview'
+input-file:
+  - Microsoft.LiftrPilot/preview/2025-10-24-preview/pilot.json
+suppressions:
+  - code: AvoidAnonymousTypes
+    where: $.definitions["Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate"].properties.userAssignedIdentities.additionalProperties
+    reason: User Assigned Managed Identity Type inline definition is automtaically added to json.
+```
+
 ### Tag: default
 
 These settings apply when no tag is specified on the command line.

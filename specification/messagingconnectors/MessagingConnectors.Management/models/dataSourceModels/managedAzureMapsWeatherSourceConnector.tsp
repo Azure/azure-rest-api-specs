@@ -40,4 +40,7 @@ model ManagedAzureMapsWeatherSourceConnectorProperties
 
   @doc("The polling interval in minutes.")
   pollIntervalInMinutes?: int32;
+
+  @doc("Name of the location.")
+  locationName?: string;
 }

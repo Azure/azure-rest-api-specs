@@ -1,6 +1,3 @@
-using TypeSpec.Http;
-using TypeSpec.Rest;
-using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
 namespace Microsoft.Approvals;
@@ -32,6 +29,7 @@ model ApprovalRequestOutput {
   @doc("The current state of the approval request.")
   approvalRequestState: ApprovalWorkflowExecutionState;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("The approval token of the approval request.")
   approvalToken: string;
 }

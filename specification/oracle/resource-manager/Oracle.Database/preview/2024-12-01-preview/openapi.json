@@ -5301,7 +5301,7 @@
         "retentionPeriodInDays": {
           "type": "integer",
           "format": "int32",
-          "description": "Retention period, in days",
+          "description": "Retention period, in days, for long-term backups.",
           "x-ms-mutability": [
             "read",
             "update",
@@ -10669,6 +10669,13 @@
         ]
       }
     },
+    "LongTermBackUpRetentionPeriod": {
+      "type": "integer",
+      "format": "int32",
+      "description": "Retention period, in days, for long-term backups",
+      "minimum": 90,
+      "maximum": 3650
+    },
     "LongTermBackUpScheduleDetails": {
       "type": "object",
       "description": "Details for the long-term backup schedule.",
@@ -10684,7 +10691,7 @@
         },
         "retentionPeriodInDays": {
           "$ref": "#/definitions/RetentionPeriod",
-          "description": "Retention period, in days, for backups."
+          "description": "Retention period, in days, for long-term backups"
         },
         "isDisabled": {
           "type": "boolean",

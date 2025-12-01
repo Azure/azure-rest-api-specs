@@ -1,0 +1,85 @@
+{
+  "operationId": "GenomeAccounts_BeginUpdate",
+  "title": "Update a Genome account",
+  "parameters": {
+    "subscriptionId": "12345678-1234-1234-1234-123456789012",
+    "resourceGroupName": "rg1",
+    "accountName": "mygenomeaccount",
+    "api-version": "2021-08-01-preview",
+    "properties": {
+      "tags": {
+        "project": "genomics-research",
+        "cost-center": "12345"
+      },
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myIdentity": {}
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/rg1/providers/Microsoft.Genome/accounts/mygenomeaccount",
+        "name": "mygenomeaccount",
+        "type": "Microsoft.Genome/accounts",
+        "location": "West US 2",
+        "tags": {
+          "project": "genomics-research",
+          "cost-center": "12345"
+        },
+        "kind": "Standard",
+        "sku": {
+          "name": "Standard_S1",
+          "tier": "Standard"
+        },
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myIdentity": {
+              "principalId": "11111111-1111-1111-1111-111111111111",
+              "clientId": "44444444-4444-4444-4444-444444444444"
+            }
+          }
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "endpoint": "https://mygenomeaccount.genome.azure.com",
+          "networkAcls": {
+            "defaultAction": "Deny",
+            "ipRules": [
+              {
+                "value": "203.0.113.0/24"
+              },
+              {
+                "value": "198.51.100.0/24"
+              }
+            ],
+            "virtualNetworkRules": [
+              {
+                "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1"
+              }
+            ]
+          },
+          "encryption": {
+            "keySource": "Microsoft.KeyVault",
+            "keyVaultProperties": {
+              "keyName": "mykey",
+              "keyVersion": "1.0",
+              "keyVaultUri": "https://myvault.vault.azure.net/",
+              "identityClientId": "33333333-3333-3333-3333-333333333333"
+            }
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/rg1/providers/Microsoft.Genome/accounts/mygenomeaccount/operationResults/12345678-1234-1234-1234-123456789012",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/rg1/providers/Microsoft.Genome/accounts/mygenomeaccount/operationStatuses/12345678-1234-1234-1234-123456789012"
+      }
+    }
+  }
+}

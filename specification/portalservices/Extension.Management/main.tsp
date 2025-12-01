@@ -8,6 +8,7 @@ import "./ExtensionVersion.tsp";
 import "./ExtensionDeployment.tsp";
 import "./ExtensionSlot.tsp";
 import "./ExtensionTenantCompileFile.tsp";
+import "./back-compatible.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

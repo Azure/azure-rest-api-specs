@@ -134,4 +134,7 @@ model MySqlSourceConnectorProperties extends DataSourceProperties {
 
   @doc("A Boolean value that specifies whether the connector should ignore malformed or unknown database statements or stop processing so a human can fix the issue. The safe default is false. Skipping should be used only with care as it can lead to data loss or mangling when the binlog is being processed.")
   schemaHistoryInternalSkipUnparseableDdl?: boolean;
+
+  @doc("A Boolean value that specifies whether the connector records schema structures from all tables in a schema or database, or only from tables that are designated for capture.")
+  isStoreOnlyCapturedTablesDdl?: boolean;
 }

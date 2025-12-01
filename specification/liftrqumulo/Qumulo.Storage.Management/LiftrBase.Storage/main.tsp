@@ -24,6 +24,11 @@ enum Versions {
   @useDependency(LiftrBase.Versions.v2_preview)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
   v2_preview: "2024-02-01-preview",
+
+  @doc("Dependent on LiftrBase.Versions.v1_preview")
+  @useDependency(LiftrBase.Versions.v2_preview)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
+  v2025_10_01_preview: "2025-10-01-preview",
 }
 
 /**
@@ -57,6 +62,12 @@ model FileSystemResourceProperties {
   delegatedSubnetId: string;
 
   /**
+   *Pre-Provisioned Performance of the Resource
+   */
+  @added(Versions.v2025_10_01_preview)
+  performanceTier?: string;
+
+  /**
    * File system Id of the resource
    */
   clusterLoginUrl?: string;
@@ -70,7 +81,7 @@ model FileSystemResourceProperties {
   /**
    * Initial administrator password of the resource
    */
-  @extension("x-ms-secret", true)
+  @secret
   adminPassword: string;
 
   /**
@@ -120,6 +131,7 @@ model FileSystemResourceUpdate {
   /**
    * Resource tags.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Tags are commonly represented as Record<string>"
   tags?: Record<string>;
 
   /**
@@ -150,8 +162,7 @@ model FileSystemResourceUpdateProperties {
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Http.Private.includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(FileSystemResourceProperties)
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Legacy decorator usage for backward compatibility"
 model FileSystemResource
   is Azure.ResourceManager.TrackedResource<FileSystemResourceProperties> {
   /**

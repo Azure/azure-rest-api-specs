@@ -9,9 +9,6 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
-using Azure.Core;
-using Azure.Core.Traits;
-using OpenAPI;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "legacy"
 @armProviderNamespace("Microsoft.ConnectedCredentials")
@@ -147,6 +144,7 @@ model Metadata {
 
 @doc("The data defines the connection between the Kubernetes Secret keys and the Provider data.")
 model Data {
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("SecretKey defines the key in which the controller stores the value.")
   secretKey?: string;
@@ -158,6 +156,7 @@ model Data {
 
 @doc("Identifier of the secret in the provider.")
 model RemoteRef {
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @doc("The key of the secret identifier.")
   key?: string;
