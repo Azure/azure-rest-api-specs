@@ -23,16 +23,27 @@ interface BulkActions {
     ...CustomParams,
   ): ArmResponse<LaunchBulkInstancesOperation> | ErrorResponse;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "necessary to avoid routing this as a get by resource"
   @doc("Get the status of a LaunchBulkInstancesOperation.")
   @get
   @autoRoute
-  @armResourceRead(ArmResponse<LaunchBulkInstancesOperationStatusResponse>)
   getOperationStatus(
     ...SubscriptionParams,
     ...ProviderNamespace<LaunchBulkInstancesOperation>,
     ...LocationParameter,
     ...OperationParameter,
   ): ArmResponse<LaunchBulkInstancesOperationStatusResponse> | ErrorResponse;
+
+  // @doc("Get the status of a LaunchBulkInstancesOperation.")
+  // @get
+  // @autoRoute
+  // @armResourceRead(ArmResponse<LaunchBulkInstancesOperationStatusResponse>)
+  // getOperationStatus(
+  //   ...SubscriptionParams,
+  //   ...ProviderNamespace<LaunchBulkInstancesOperation>,
+  //   ...LocationParameter,
+  //   ...OperationParameter,
+  // ): ArmResponse<LaunchBulkInstancesOperationStatusResponse> | ErrorResponse;
 
   @doc("Creates or updates LaunchBulkInstancesOperations.")
   createOrUpdate is LaunchBulkInstancesOps.CreateOrUpdateAsync<LaunchBulkInstancesOperation>;
