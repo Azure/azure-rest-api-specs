@@ -100,7 +100,11 @@ interface Indexers {
   @route("/indexers('{indexerName}')/search.resync")
   @post
   resync is SearchIndexerOperation<
-    {},
+    {
+      @doc("The definition of the indexer resync options.")
+      @body
+      indexerResync: IndexerResyncBody;
+    },
     {
       @doc("A process exit code.")
       @statusCode
