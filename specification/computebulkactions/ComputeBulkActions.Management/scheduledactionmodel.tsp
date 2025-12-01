@@ -255,9 +255,7 @@ model ResourceOperationError {
 
 @doc("The details of a response from an operation on a resource")
 model ResourceOperationDetails {
-  #suppress "@azure-tools/typespec-azure-core/no-format" "Prefer using `format(" uuid ")` when representing UUIDs."
   @doc("Operation identifier for the unique operation")
-  @format("uuid")
   operationId: string;
 
   @doc("Unique identifier for the resource involved in the operation, eg Azure Resource Manager ID")
@@ -328,18 +326,14 @@ model OperationErrorDetails {
   @doc("The timestamp of the error occurrence")
   timestamp?: offsetDateTime;
 
-  #suppress "@azure-tools/typespec-azure-core/no-format" "Prefer using `format(" uuid ")` when representing UUIDs."
   @doc("The compute operationid of the Start/Deallocate/Hibernate request")
-  @format("uuid")
   azureOperationName?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Prefer using `offsetDateTime` when representing a datetime."
 @doc("This is the first level of operation errors from the request when clients get errors per vm operation")
 model OperationErrorsResult {
-  #suppress "@azure-tools/typespec-azure-core/no-format" "Prefer using `format(" uuid ")` when representing UUIDs."
   @doc("The operationId identifying a vm operation")
-  @format("uuid")
   operationId?: string;
 
   @doc("The creation time of the error result")
@@ -374,9 +368,7 @@ model SubmitTypeRequest {
   @doc("The resources for the request")
   resources: Resources;
 
-  #suppress "@azure-tools/typespec-azure-core/no-format" "Prefer using `format(" uuid ")` when representing UUIDs."
   @doc("CorrelationId item")
-  @format("uuid")
   correlationid: string;
 }
 
@@ -388,9 +380,7 @@ model ExecuteTypeRequest {
   @doc("The resources for the request")
   resources: Resources;
 
-  #suppress "@azure-tools/typespec-azure-core/no-format" "Prefer using `format(" uuid ")` when representing UUIDs."
   @doc("CorrelationId item")
-  @format("uuid")
   correlationid: string;
 }
 
@@ -468,9 +458,7 @@ model ExecuteCreateRequest {
   @doc("The execution parameters for the request")
   executionParameters: ExecutionParameters;
 
-  #suppress "@azure-tools/typespec-azure-core/no-format" "Prefer using `format(" uuid ")` when representing UUIDs."
   @doc("CorrelationId item")
-  @format("uuid")
   correlationid?: string;
 }
 
@@ -498,9 +486,7 @@ model GetOperationStatusRequest {
   @doc("The list of operation ids to get the status of")
   operationIds: Array<string>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-format" "Prefer using `format(" uuid ")` when representing UUIDs."
   @doc("CorrelationId item")
-  @format("uuid")
   correlationid: string;
 }
 
@@ -517,9 +503,7 @@ model CancelOperationsRequest {
   @doc("The list of operation ids to cancel operations on")
   operationIds: Array<string>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-format" "Prefer using `format(" uuid ")` when representing UUIDs."
   @doc("CorrelationId item")
-  @format("uuid")
   correlationid: string;
 }
 
