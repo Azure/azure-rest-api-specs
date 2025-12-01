@@ -1,6 +1,6 @@
 export const fullGitSha = "abc123abc123abc123abc123abc123abc123abc1";
 
-export const swaggerHandWritten = JSON.stringify("foo");
+export const swaggerHandWritten = JSON.stringify({});
 
 export const swaggerTypeSpecGenerated = JSON.stringify({
   info: {

@@ -37,7 +37,7 @@ model ExecutionPlanRunProperties {
 
   @doc("The test runs under this execution plan run.")
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   @maxItems(100)
   testRuns: ValidationTestRun[];
 

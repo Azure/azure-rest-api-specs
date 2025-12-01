@@ -12,13 +12,11 @@ import "./models.tsp";
 import "./EndpointResource.tsp";
 import "./ServiceConfigurationResource.tsp";
 import "./PublicCloud.tsp";
+import "./back-compatible.tsp";
+
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
-using TypeSpec.Rest;
-using TypeSpec.Http;
-using Azure.ResourceManager.Foundations;
-using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**

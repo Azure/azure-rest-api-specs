@@ -39,13 +39,13 @@ model ValidationTestRunProperties {
 
   @doc("Detailed pass information when the test passes.")
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   @maxItems(100)
   passDetails?: ValidationTestPassDetails[];
 
   @doc("Detailed failure information when the test fails.")
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   @maxItems(100)
   failureDetails?: ValidationTestFailureDetails[];
 }

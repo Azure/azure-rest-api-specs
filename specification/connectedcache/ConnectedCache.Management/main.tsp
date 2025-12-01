@@ -32,4 +32,7 @@ enum Versions {
 
   @doc("Microsoft Connected Cache Rest Api version 2025-06-15")
   v2025_06_15: "2025-06-15",
+
+  @doc("Microsoft Connected Cache Rest Api version 2025-11-15-preview")
+  v2025_11_15_preview: "2025-11-15-preview",
 }

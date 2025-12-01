@@ -56,51 +56,6 @@
     }
   ],
   "paths": {
-    "/providers/Microsoft.SaaSHub/coterminousDates": {
-      "post": {
-        "operationId": "ProviderLevelActions_GetCotermEndDates",
-        "tags": [
-          "ProviderLevelActions"
-        ],
-        "description": "Gets coterm end dates for multiple resources.\nOnly available in API version 2025-07-01-preview.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "Request parameters that are provided to the GetCotermEndDates operation.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CotermEndDatesRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/CotermResponseItem"
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "GetCotermEndDates for Provider Level": {
-            "$ref": "./examples/ProviderLevelActions_GetCotermEndDates.json"
-          }
-        }
-      }
-    },
     "/providers/Microsoft.SaaSHub/operations": {
       "get": {
         "operationId": "Operations_List",
@@ -134,48 +89,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/providers/Microsoft.SaaSHub/proposal": {
-      "post": {
-        "operationId": "ProviderLevelActions_Proposal",
-        "tags": [
-          "ProviderLevelActions"
-        ],
-        "description": "Processes a proposal request and returns proposal information.\nOnly available in API version 2025-07-01-preview.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "Request parameters that are provided to the proposal operation.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ProposalRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ProposalResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Proposal for Provider Level": {
-            "$ref": "./examples/ProviderLevelActions_Proposal.json"
-          }
         }
       }
     },
@@ -431,6 +344,12 @@
           },
           "Update a SaaSHub saas resource with schedule actions": {
             "$ref": "./examples/SaasResources_Update_ScheduleActions.json"
+          },
+          "Update a SaaSHub saas resource with schedule actions for scheduled merges": {
+            "$ref": "./examples/SaasResources_Update_ScheduleActions_WithMerge.json"
+          },
+          "Update a SaaSHub saas resource with schedule actions for scheduled splits": {
+            "$ref": "./examples/SaasResources_Update_ScheduleActions_WithSplit.json"
           },
           "Update renewal term - Microsoft Customer Agreement Enterprise scenario": {
             "$ref": "./examples/SaasResources_Update_Microsoft_Customer_Agreement_Enterprise_Renewal.json"
@@ -909,6 +828,99 @@
         }
       }
     },
+    "/providers/Microsoft.SaaSHub/tenantLevelCanTransact": {
+      "post": {
+        "operationId": "ProviderLevelActions_TenantLevelCanTransact",
+        "tags": [
+          "ProviderLevelActions"
+        ],
+        "description": "Evaluates whether multiple transaction requests can be processed at tenant level.\nOnly available in API version 2025-07-01-preview.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request parameters that are provided to the tenant level canTransact operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TenantLevelCanTransactBulkRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TenantLevelCanTransactBulkResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Evaluates multiple transaction operations for SaasResources at tenant level": {
+            "$ref": "./examples/TenantLevelCanTransact_MultipleOperations.json"
+          },
+          "Tenant Level CanTransact - Single SaasResource CanCreate - Passed": {
+            "$ref": "./examples/TenantLevelCanTransact_SingleSaasResource_CanCreate_Pass.json"
+          },
+          "TenantLevelCanTransact with AdditionalInfo - Multiple Operations": {
+            "$ref": "./examples/TenantLevelCanTransact_WithAdditionalInfo.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.SaaSHub/tenantLevelCoterminousDates": {
+      "post": {
+        "operationId": "ProviderLevelActions_TenantLevelGetCotermEndDates",
+        "tags": [
+          "ProviderLevelActions"
+        ],
+        "description": "Gets coterm end dates for multiple resources at tenant level.\nOnly available in API version 2025-07-01-preview.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request parameters that are provided to the GetCotermEndDates operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CotermEndDatesRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CotermResponseItem"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TenantLevelGetCotermEndDates for Provider Level": {
+            "$ref": "./examples/ProviderLevelActions_TenantLevelGetCotermEndDates.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.SaaSHub/cloudServices": {
       "get": {
         "operationId": "CloudServices_ListBySubscription",
@@ -992,6 +1004,60 @@
         "x-ms-examples": {
           "Check if a cloud service can be created at resource group level": {
             "$ref": "./examples/ResourceGroupLevelProviderActions_CanCreate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SaaSHub/canTransact": {
+      "post": {
+        "operationId": "ResourceGroupLevelProviderActions_CanTransact",
+        "tags": [
+          "ResourceGroupLevelProviderActions"
+        ],
+        "description": "Evaluates whether multiple transaction requests can be processed at resource group level.\nOnly available in API version 2025-07-01-preview.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request parameters that are provided to the resource group level canTransact operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResourceGroupLevelCanTransactBulkRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ResourceGroupLevelCanTransactBulkResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Evaluates multiple transaction operations for CloudServices at resource group level": {
+            "$ref": "./examples/ResourceGroupLevelCanTransact_MultipleOperations.json"
+          },
+          "Resource Group Level CanTransact - Single CloudService CanCreate - Passed": {
+            "$ref": "./examples/ResourceGroupLevelCanTransact_SingleCloudService_CanCreate_Pass.json"
+          },
+          "ResourceGroupLevelCanTransact with AdditionalInfo - CloudServices": {
+            "$ref": "./examples/ResourceGroupLevelCanTransact_WithAdditionalInfo.json"
           }
         }
       }
@@ -1269,6 +1335,12 @@
           },
           "Update a SaaSHub cloud service with schedule actions": {
             "$ref": "./examples/CloudService_Update_ScheduleActions.json"
+          },
+          "Update a SaaSHub cloud service with schedule actions for scheduled merges": {
+            "$ref": "./examples/CloudService_Update_ScheduleActions_WithMerge.json"
+          },
+          "Update a SaaSHub cloud service with schedule actions for scheduled splits": {
+            "$ref": "./examples/CloudService_Update_ScheduleActions_WithSplit.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1725,9 +1797,78 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SaaSHub/coterminousDates": {
+      "post": {
+        "operationId": "ResourceGroupLevelProviderActions_GetCotermEndDates",
+        "tags": [
+          "ResourceGroupLevelProviderActions"
+        ],
+        "description": "Gets coterm end dates for multiple resources at resource group level.\nOnly available in API version 2025-07-01-preview.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request parameters that are provided to the GetCotermEndDates operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CotermEndDatesRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CotermResponseItem"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetCotermEndDates for Resource Group Level": {
+            "$ref": "./examples/ResourceGroupLevelProviderActions_GetCotermEndDates.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
+    "AdditionalInfoItem": {
+      "type": "object",
+      "description": "Additional information key-value pair",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of the additional information item."
+        },
+        "key": {
+          "type": "string",
+          "description": "The key of the additional information item."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the additional information item."
+        }
+      }
+    },
     "AutoRenew": {
       "type": "string",
       "description": "Indicates whether auto renewal is turned on or off for a SaaSHub saas resource. The default value will be 'On' for products that support autorenew.",
@@ -2048,6 +2189,221 @@
         }
       }
     },
+    "CanTransactCanCancelResponse": {
+      "type": "object",
+      "description": "Response for canCancel operation evaluation.",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/CanCancelResult",
+          "description": "The result of the canCancel operation evaluation.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/CanTransactResponse"
+        }
+      ],
+      "x-ms-discriminator-value": "canCancel"
+    },
+    "CanTransactCanCreateResponse": {
+      "type": "object",
+      "description": "Response for canCreate operation evaluation.",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/CanCreateResult",
+          "description": "The result of the canCreate operation evaluation.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/CanTransactResponse"
+        }
+      ],
+      "x-ms-discriminator-value": "canCreate"
+    },
+    "CanTransactCanMergeResponse": {
+      "type": "object",
+      "description": "Response for canMerge operation evaluation.",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/CanMergeResult",
+          "description": "The result of the canMerge operation evaluation.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/CanTransactResponse"
+        }
+      ],
+      "x-ms-discriminator-value": "canMerge"
+    },
+    "CanTransactCanUpdateResponse": {
+      "type": "object",
+      "description": "Response for canUpdate operation evaluation.",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/CanUpdateResult",
+          "description": "The result of the canUpdate operation evaluation.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/CanTransactResponse"
+        }
+      ],
+      "x-ms-discriminator-value": "canUpdate"
+    },
+    "CanTransactCloudServicesRequest": {
+      "type": "object",
+      "description": "Request model for CanTransact operation with CloudServices.",
+      "properties": {
+        "resourceUri": {
+          "type": "string",
+          "description": "The URI of the resource for the transaction evaluation."
+        },
+        "approvalCode": {
+          "type": "string",
+          "description": "Optional token for the evaluation request."
+        },
+        "operationType": {
+          "$ref": "#/definitions/CanTransactOperationType",
+          "description": "The type of operation to evaluate for the transaction."
+        },
+        "properties": {
+          "$ref": "#/definitions/CloudServiceProperties",
+          "description": "Resource properties for the transaction evaluation.\nSupports CloudServices only."
+        },
+        "mergeRequest": {
+          "$ref": "#/definitions/MergeCloudServiceRequest",
+          "description": "Full merge request payload used for canMerge operations."
+        },
+        "additionalInfo": {
+          "type": "array",
+          "description": "Additional information as key-value pairs",
+          "items": {
+            "$ref": "#/definitions/AdditionalInfoItem"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "resourceUri",
+        "operationType"
+      ]
+    },
+    "CanTransactOperationType": {
+      "type": "string",
+      "description": "The type of operation being evaluated in a CanTransact request.",
+      "enum": [
+        "canCreate",
+        "canCancel",
+        "canUpdate",
+        "canMerge"
+      ],
+      "x-ms-enum": {
+        "name": "CanTransactOperationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "canCreate",
+            "value": "canCreate",
+            "description": "Create operation type"
+          },
+          {
+            "name": "canCancel",
+            "value": "canCancel",
+            "description": "Cancel operation type"
+          },
+          {
+            "name": "canUpdate",
+            "value": "canUpdate",
+            "description": "Update operation type"
+          },
+          {
+            "name": "canMerge",
+            "value": "canMerge",
+            "description": "Merge operation type"
+          }
+        ]
+      }
+    },
+    "CanTransactResponse": {
+      "type": "object",
+      "description": "Base response model for CanTransact operation result.\nThe operationType discriminator determines which specific result structure is used.",
+      "properties": {
+        "resourceUri": {
+          "type": "string",
+          "description": "The URI of the resource that was evaluated.",
+          "readOnly": true
+        },
+        "approvalCode": {
+          "type": "string",
+          "description": "Proof of successful evaluation.",
+          "readOnly": true
+        },
+        "operationType": {
+          "$ref": "#/definitions/CanTransactOperationType",
+          "description": "The type of operation that was evaluated.",
+          "readOnly": true
+        },
+        "dependsOn": {
+          "type": "array",
+          "description": "Dependencies for the transaction evaluation.",
+          "items": {
+            "$ref": "#/definitions/DependsOnValue"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      },
+      "discriminator": "operationType",
+      "required": [
+        "resourceUri",
+        "operationType"
+      ]
+    },
+    "CanTransactSaasResourcesRequest": {
+      "type": "object",
+      "description": "Request model for CanTransact operation.",
+      "properties": {
+        "resourceUri": {
+          "type": "string",
+          "description": "The URI of the resource for the transaction evaluation."
+        },
+        "approvalCode": {
+          "type": "string",
+          "description": "Optional token for the evaluation request."
+        },
+        "operationType": {
+          "$ref": "#/definitions/CanTransactOperationType",
+          "description": "The type of operation to evaluate for the transaction."
+        },
+        "properties": {
+          "$ref": "#/definitions/SaasResourceProperties",
+          "description": "Resource properties for the transaction evaluation.\nSupports SaasResources only."
+        },
+        "mergeRequest": {
+          "$ref": "#/definitions/MergeSaasResourcesRequest",
+          "description": "Full merge request payload used for canMerge operations."
+        },
+        "additionalInfo": {
+          "type": "array",
+          "description": "Additional information as key-value pairs",
+          "items": {
+            "$ref": "#/definitions/AdditionalInfoItem"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "resourceUri",
+        "operationType"
+      ]
+    },
     "CanUpdateResult": {
       "type": "object",
       "description": "Validation result for canUpdate operation.",
@@ -2217,7 +2573,7 @@
           "description": "Linked resources for the resource"
         },
         "offerType": {
-          "$ref": "#/definitions/OfferType",
+          "type": "string",
           "description": "Type of the offer for which the resource is purchased",
           "readOnly": true
         },
@@ -2456,6 +2812,20 @@
         "coTermTargetType",
         "errorCode"
       ]
+    },
+    "DependsOnValue": {
+      "type": "object",
+      "description": "Dependency value containing type and value for dependency tracking purposes.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of the dependency value."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the dependency."
+        }
+      }
     },
     "EligibilityConstraint": {
       "type": "object",
@@ -2714,30 +3084,6 @@
         }
       }
     },
-    "OfferType": {
-      "type": "string",
-      "description": "Type of the offer for which the saas resource is purchased",
-      "enum": [
-        "Paid",
-        "Trial"
-      ],
-      "x-ms-enum": {
-        "name": "OfferType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Paid",
-            "value": "Paid",
-            "description": "Paid offer"
-          },
-          {
-            "name": "Trial",
-            "value": "Trial",
-            "description": "Trial offer"
-          }
-        ]
-      }
-    },
     "OriginResourceOperationType": {
       "type": "string",
       "description": "The operation type for the linked resources",
@@ -2760,114 +3106,6 @@
             "description": "Merge operation type"
           }
         ]
-      }
-    },
-    "ProposalLineItem": {
-      "type": "object",
-      "description": "Line item information in a proposal response.",
-      "properties": {
-        "lineItemId": {
-          "type": "string",
-          "description": "Unique identifier for the line item."
-        },
-        "productId": {
-          "type": "string",
-          "description": "Product identifier."
-        },
-        "skuId": {
-          "type": "string",
-          "description": "SKU identifier."
-        },
-        "availabilityId": {
-          "type": "string",
-          "description": "Availability identifier."
-        },
-        "bigId": {
-          "type": "string",
-          "description": "BigId identifier."
-        },
-        "productCode": {
-          "type": "string",
-          "description": "Product code for the line item."
-        },
-        "error": {
-          "$ref": "#/definitions/ProposalLineItemError",
-          "description": "Error information if any issues occurred with this line item."
-        },
-        "additionalInfo": {
-          "$ref": "#/definitions/ProposalLineItemAdditionalInfo",
-          "description": "Additional information for the line item."
-        }
-      }
-    },
-    "ProposalLineItemAdditionalInfo": {
-      "type": "object",
-      "description": "Additional information for proposal line items.",
-      "properties": {
-        "etag": {
-          "type": "string",
-          "description": "ETag for concurrency control."
-        },
-        "systemId": {
-          "type": "string",
-          "description": "System identifier."
-        },
-        "trackingId": {
-          "type": "string",
-          "description": "Tracking identifier."
-        }
-      }
-    },
-    "ProposalLineItemError": {
-      "type": "object",
-      "description": "Error information for proposal line items.",
-      "properties": {
-        "errorCode": {
-          "type": "string",
-          "description": "Error code for the line item."
-        },
-        "message": {
-          "type": "string",
-          "description": "Error message for the line item."
-        }
-      }
-    },
-    "ProposalRequest": {
-      "type": "object",
-      "description": "Request model for Proposal operation.",
-      "properties": {
-        "proposalId": {
-          "type": "string",
-          "description": "The unique identifier for the proposal."
-        }
-      },
-      "required": [
-        "proposalId"
-      ]
-    },
-    "ProposalResponse": {
-      "type": "object",
-      "description": "Response model for Proposal operation.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique identifier for the proposal response.",
-          "readOnly": true
-        },
-        "status": {
-          "type": "string",
-          "description": "Status of the proposal.",
-          "readOnly": true
-        },
-        "lineItems": {
-          "type": "array",
-          "description": "List of line items in the proposal.",
-          "items": {
-            "$ref": "#/definitions/ProposalLineItem"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": []
-        }
       }
     },
     "ProvisioningState": {
@@ -2964,6 +3202,44 @@
         }
       }
     },
+    "ResourceGroupLevelCanTransactBulkRequest": {
+      "type": "object",
+      "description": "Bulk request model for ResourceGroupLevelCanTransact operation.",
+      "properties": {
+        "items": {
+          "type": "array",
+          "description": "Array of transaction requests to evaluate.",
+          "items": {
+            "$ref": "#/definitions/CanTransactCloudServicesRequest"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "items"
+      ]
+    },
+    "ResourceGroupLevelCanTransactBulkResponse": {
+      "type": "object",
+      "description": "Bulk response model for ResourceGroupLevelCanTransact operation with pagination support.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The CanTransactResponse items on this page",
+          "items": {
+            "$ref": "#/definitions/CanTransactResponse"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "ResourceToken": {
       "type": "object",
       "description": "Resource token containing type and value for various authorization and context purposes.",
@@ -3040,7 +3316,7 @@
           "description": "Linked resources for the resource"
         },
         "offerType": {
-          "$ref": "#/definitions/OfferType",
+          "type": "string",
           "description": "Type of the offer for which the resource is purchased",
           "readOnly": true
         },
@@ -3184,6 +3460,11 @@
           "$ref": "#/definitions/ScheduleActionLinkedResource",
           "description": "Linked resource for the scheduled action.\nOptional property."
         },
+        "offerType": {
+          "type": "string",
+          "description": "Type of the offer for which the schedule action is applied",
+          "readOnly": true
+        },
         "resourceTokens": {
           "type": "array",
           "description": "Resource tokens for various authorization and context purposes.",
@@ -3207,6 +3488,14 @@
         "billingScope": {
           "type": "string",
           "description": "The billing scope for the linked resource. Only applicable for SaaS resources.\nFormat: /providers/Microsoft.Billing/billingAccounts/{baId}/billingProfiles/{bfId}/invoiceSections/{isId}"
+        },
+        "operationType": {
+          "type": "string",
+          "description": "The link operation type."
+        },
+        "resourceType": {
+          "type": "string",
+          "description": "The resource type for the linked resource."
         }
       }
     },
@@ -3336,6 +3625,44 @@
           "readOnly": true
         }
       }
+    },
+    "TenantLevelCanTransactBulkRequest": {
+      "type": "object",
+      "description": "Bulk request model for TenantLevelCanTransact operation.",
+      "properties": {
+        "items": {
+          "type": "array",
+          "description": "Array of transaction requests to evaluate.",
+          "items": {
+            "$ref": "#/definitions/CanTransactSaasResourcesRequest"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "items"
+      ]
+    },
+    "TenantLevelCanTransactBulkResponse": {
+      "type": "object",
+      "description": "Bulk response model for TenantLevelCanTransact operation with pagination support.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The CanTransactResponse items on this page",
+          "items": {
+            "$ref": "#/definitions/CanTransactResponse"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "TermDetails": {
       "type": "object",

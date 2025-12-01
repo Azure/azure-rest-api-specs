@@ -51,7 +51,7 @@ model JobProperties {
   processingLogic?: ProcessingLogic;
 
   /** Primary key attributes for the batch job. */
-  @OpenAPI.extension("x-ms-identifiers", #["keyAttribute"])
+  @identifiers(#["keyAttribute"])
   primaryKeyAttributes?: PrimaryKeyAttribute[];
 
   /** Snapshot merge strategy. Used by Batch jobs. */
@@ -262,6 +262,7 @@ model AzureDataExplorerSink extends DatasetSink {
   type: "AzureDataExplorerSink";
 
   /** Connection string or identifier for the Azure Data Explorer cluster. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Mark with @secret if the contents of this property should be kept private."
   azureDataExplorerClusterConnection: string;
 
   /** Name of the database within the Azure Data Explorer cluster. */
