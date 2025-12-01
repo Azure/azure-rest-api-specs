@@ -25,16 +25,35 @@ To see additional help and options, run:
 These are the global settings for the IotHub API.
 
 ``` yaml
-openapi-type: arm
-tag: package-2021-10-01
+openapi-type: data-plane
+tag: package-2026-04-01-device
 ```
 
+### Tag: package-2026-04-service
 
-### Tag: package-2021-10-01
+These settings apply only when `--tag=package-2026-04-service` is specified on the command line.
 
-These settings apply only when `--tag=package-2021-10-01` is specified on the command line.
+```yaml $(tag) == 'package-2025-04-service'
+input-file:
+  - stable/2026-04-01/service.json
+title: ProvisioningServiceClient
+```
 
-```yaml $(tag) == 'package-2021-10-01'
+### Tag: package-2026-04-device
+
+These settings apply only when `--tag=package-2026-04-device` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-04-device'
+input-file:
+  - stable/2026-04-01/device.json
+title: ProvisioningDeviceClient
+```
+
+### Tag: package-2021-10-01-service
+
+These settings apply only when `--tag=package-2021-10-01-service` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-10-01-service'
 input-file:
   - stable/2021-10-01/service.json
 ```
