@@ -11,8 +11,9 @@ import { CompileRule } from "../src/rules/compile.js";
 
 import * as utils from "../src/utils.js";
 
-const swaggerPath = "data-plane/Azure.Foo/preview/2022-11-01-preview/foo.json";
-const handwrittenSwaggerPath = "data-plane/Azure.Foo/preview/2021-11-01-preview/foo.json";
+const swaggerPath = "specification/foo/data-plane/Azure.Foo/preview/2022-11-01-preview/foo.json";
+const handwrittenSwaggerPath =
+  "specification/foo/data-plane/Azure.Foo/preview/2021-11-01-preview/foo.json";
 
 describe("compile", function () {
   let gitDiffTopSpecFolderSpy: MockInstance;
@@ -107,6 +108,21 @@ describe("compile", function () {
 
     await expect(new CompileRule().execute(mockFolder)).rejects.toThrowErrorMatchingInlineSnapshot(
       `[Error: No generated swaggers found in output of 'tsp compile']`,
+    );
+  });
+
+  it("should throw if output swaggers are not under expected folder - v1", async () => {
+    const folder = path.resolve("specification", "contosowidgetmanager", "Contoso.Management");
+
+    // Relative to cwd when command is run
+    const compileOutput = "tsp-output/contoso.json";
+
+    runNpmSpy.mockImplementation(
+      (): Promise<[Error | null, string, string]> => Promise.resolve([null, compileOutput, ""]),
+    );
+
+    await expect(new CompileRule().execute(folder)).rejects.toThrowErrorMatchingInlineSnapshot(
+      `[Error: Output folder '.' must be under path 'specification/contosowidgetmanager']`,
     );
   });
 

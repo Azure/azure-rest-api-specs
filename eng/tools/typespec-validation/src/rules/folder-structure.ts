@@ -6,7 +6,7 @@ import { simpleGit } from "simple-git";
 import { RuleResult } from "../rule-result.js";
 import { Rule } from "../rule.js";
 import { parse } from "../tsp-config.js";
-import { fileExists, normalizePath, readTspConfig } from "../utils.js";
+import { fileExists, getStructureVersion, normalizePath, readTspConfig } from "../utils.js";
 
 // Enable simple-git debug logging to improve console output
 debug.enable("simple-git");
@@ -20,11 +20,7 @@ export class FolderStructureRule implements Rule {
     let errorOutput = "";
     const gitRoot = normalizePath(await simpleGit(folder).revparse("--show-toplevel"));
     const relativePath = path.relative(gitRoot, folder).split(path.sep).join("/");
-
-    // If the folder containing TypeSpec sources is under "data-plane" or "resource-manager", the spec
-    // must be using "folder structure v2".  Otherwise, it must be using v1.
-    const structureVersion =
-      relativePath.includes("data-plane") || relativePath.includes("resource-manager") ? 2 : 1;
+    const structureVersion = await getStructureVersion(folder);
 
     stdOutput += `folder: ${folder}\n`;
     if (!(await fileExists(folder))) {

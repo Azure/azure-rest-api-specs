@@ -1,4 +1,5 @@
 import { filterAsync } from "@azure-tools/specs-shared/array";
+import { untilLastSegmentWithParent } from "@azure-tools/specs-shared/path";
 import { readFile } from "fs/promises";
 import { globby } from "globby";
 import path, { basename, dirname, normalize } from "path";
@@ -6,7 +7,13 @@ import pc from "picocolors";
 import stripAnsi from "strip-ansi";
 import { RuleResult } from "../rule-result.js";
 import { Rule } from "../rule.js";
-import { fileExists, getSuppressions, gitDiffTopSpecFolder, runNpm } from "../utils.js";
+import {
+  fileExists,
+  getStructureVersion,
+  getSuppressions,
+  gitDiffTopSpecFolder,
+  runNpm,
+} from "../utils.js";
 
 export class CompileRule implements Rule {
   readonly name = "Compile";
@@ -84,6 +91,22 @@ export class CompileRule implements Rule {
 
           stdOutput += "\nOutput folder:\n";
           stdOutput += outputFolder + "\n";
+
+          const structureVersion = await getStructureVersion(folder);
+
+          const allowedOutputFolder = path.relative(
+            "",
+            structureVersion === 2 ? folder : untilLastSegmentWithParent(folder, "specification"),
+          );
+
+          stdOutput += "\nAllowed output folder:\n";
+          stdOutput += allowedOutputFolder + "\n";
+
+          if (!outputFolder.startsWith(allowedOutputFolder)) {
+            throw new Error(
+              `Output folder '${outputFolder}' must be under path '${allowedOutputFolder}'`,
+            );
+          }
 
           // Filter to only specs matching the folder and filename extracted from the first output-file.
           // Necessary to handle multi-project specs like keyvault.
