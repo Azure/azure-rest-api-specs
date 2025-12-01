@@ -22,6 +22,7 @@ interface Documents {
   searchGet is SearchIndexOperation<
     {
       ...querySourceAuthorizationHeader;
+      ...enableElevatedReadHeader;
 
       @doc("A full-text search query expression; Use \"*\" or omit this parameter to match all documents.")
       @query("search")
@@ -45,6 +46,7 @@ interface Documents {
   searchPost is SearchIndexOperation<
     {
       ...querySourceAuthorizationHeader;
+      ...enableElevatedReadHeader;
 
       ...SearchRequest;
     },
@@ -63,6 +65,7 @@ interface Documents {
   get is SearchIndexOperation<
     {
       ...querySourceAuthorizationHeader;
+      ...enableElevatedReadHeader;
 
       @doc("The key of the document to retrieve.")
       @path
