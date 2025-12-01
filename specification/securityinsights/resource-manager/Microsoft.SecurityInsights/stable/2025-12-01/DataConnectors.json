@@ -284,18 +284,16 @@
       "type": "object",
       "x-ms-discriminator-value": "AzureActiveDirectory"
     },
-    "AADDataConnectorProperties": {
-      "description": "AAD (Azure Active Directory) data connector properties.",
-      "properties": {
-        "tenantId": {
-          "description": "The tenant id to connect to, and get the data from.",
-          "type": "string"
+    "AADDataConnectorProperties": {     
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorTenantId"
         },
-        "dataTypes": {
-          "$ref": "#/definitions/AlertsDataTypeOfDataConnector",
-          "description": "The available data types for the connector."
+        {
+          "$ref": "#/definitions/DataConnectorWithAlertsProperties"
         }
-      },
+      ],
+      "description": "AAD (Azure Active Directory) data connector properties.",
       "type": "object"
     },
     "AATPDataConnector": {
@@ -317,16 +315,14 @@
     },
     "AATPDataConnectorProperties": {
       "description": "AATP (Azure Advanced Threat Protection) data connector properties.",
-      "properties": {
-        "tenantId": {
-          "description": "The tenant id to connect to, and get the data from.",
-          "type": "string"
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorTenantId"
         },
-        "dataTypes": {
-          "$ref": "#/definitions/AlertsDataTypeOfDataConnector",
-          "description": "The available data types for the connector."
+        {
+          "$ref": "#/definitions/DataConnectorWithAlertsProperties"
         }
-      },
+      ],
       "type": "object"
     },
     "ASCDataConnector": {
@@ -370,6 +366,9 @@
           "type": "object"
         }
       },
+       "required": [
+        "alerts"
+      ],
       "type": "object"
     },
     "AwsCloudTrailDataConnector": {
@@ -402,6 +401,9 @@
           "type": "object"
         }
       },
+      "required": [
+        "logs"
+      ],
       "type": "object"
     },
     "AwsCloudTrailDataConnectorProperties": {
@@ -416,6 +418,9 @@
           "description": "The available data types for the connector."
         }
       },
+      "required": [
+        "dataTypes"
+      ],
       "type": "object"
     },
     "RestApiPollerDataConnector": {
@@ -1389,7 +1394,8 @@
       "properties": {
         "kind": {
           "$ref": "#/definitions/DataConnectorKind",
-          "description": "The data connector kind"
+          "description": "The data connector kind",
+          "type": "string"
         }
       },
       "type": "object"
@@ -1487,6 +1493,9 @@
           }
         }
       },
+      "required": [
+        "state"
+      ],
       "type": "object"
     },
     "DataConnectorTenantId": {
@@ -1497,6 +1506,9 @@
           "type": "string"
         }
       },
+      "required": [
+        "tenantId"
+      ],
       "type": "object"
     },
     "DataConnectorWithAlertsProperties": {
@@ -1533,11 +1545,7 @@
         }
       ],
       "description": "The available data types for MCAS (Microsoft Cloud App Security) data connector.",
-      "properties": {
-        "alerts": {
-          "$ref": "#/definitions/DataConnectorDataTypeCommon",
-          "description": "Alerts data type connection."
-        },
+      "properties": {     
         "discoveryLogs": {
           "$ref": "#/definitions/DataConnectorDataTypeCommon",
           "description": "Discovery log data type connection."
@@ -1546,17 +1554,21 @@
       "type": "object"
     },
     "MCASDataConnectorProperties": {
+       "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorTenantId"
+        }
+      ],
       "description": "MCAS (Microsoft Cloud App Security) data connector properties.",
       "properties": {
-        "tenantId": {
-          "description": "The tenant id to connect to, and get the data from.",
-          "type": "string"
-        },
         "dataTypes": {
           "$ref": "#/definitions/MCASDataConnectorDataTypes",
           "description": "The available data types for the connector."
         }
       },
+      "required": [
+        "dataTypes"
+      ],
       "type": "object"
     },
     "MDATPDataConnector": {
@@ -1577,17 +1589,15 @@
       "x-ms-discriminator-value": "MicrosoftDefenderAdvancedThreatProtection"
     },
     "MDATPDataConnectorProperties": {
-      "description": "MDATP (Microsoft Defender Advanced Threat Protection) data connector properties.",
-      "properties": {
-        "tenantId": {
-          "description": "The tenant id to connect to, and get the data from.",
-          "type": "string"
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorTenantId"
         },
-        "dataTypes": {
-          "$ref": "#/definitions/AlertsDataTypeOfDataConnector",
-          "description": "The available data types for the connector."
+        {
+          "$ref": "#/definitions/DataConnectorWithAlertsProperties"
         }
-      },
+      ],
+      "description": "MDATP (Microsoft Defender Advanced Threat Protection) data connector properties.",
       "type": "object"
     },
     "TIDataConnector": {
@@ -1620,15 +1630,19 @@
           "type": "object"
         }
       },
+       "required": [
+        "indicators"
+      ],
       "type": "object"
     },
     "TIDataConnectorProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorTenantId"
+        }
+      ],
       "description": "TI (Threat Intelligence) data connector properties.",
       "properties": {
-        "tenantId": {
-          "description": "The tenant id to connect to, and get the data from.",
-          "type": "string"
-        },
         "tipLookbackPeriod": {
           "description": "The lookback period for the feed to be imported.",
           "format": "date-time",
@@ -1640,6 +1654,9 @@
           "description": "The available data types for the connector."
         }
       },
+      "required": [
+        "dataTypes"
+      ],
       "type": "object"
     },
     "MSTIDataConnector": {
@@ -1816,20 +1833,29 @@
           "type": "object"
         }
       },
+       "required": [
+        "exchange",
+        "sharePoint",
+        "teams"
+      ],
       "type": "object"
     },
     "OfficeDataConnectorProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorTenantId"
+        }
+      ],
       "description": "Office data connector properties.",
       "properties": {
-        "tenantId": {
-          "description": "The tenant id to connect to, and get the data from.",
-          "type": "string"
-        },
         "dataTypes": {
           "$ref": "#/definitions/OfficeDataConnectorDataTypes",
           "description": "The available data types for the connector."
         }
       },
+      "required": [
+        "dataTypes"
+      ],
       "type": "object"
     }
   },
