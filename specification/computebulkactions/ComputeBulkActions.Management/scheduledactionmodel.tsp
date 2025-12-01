@@ -199,7 +199,11 @@ model Schedule {
 @doc("The resources needed for the user request")
 model Resources {
   @doc("The resource ids used for the request")
-  ids: Array<armResourceIdentifier>;
+  ids: Array<armResourceIdentifier<[
+    {
+      type: "Microsoft.Compute/vm";
+    }
+  ]>>;
 }
 
 @doc("Resource creation data model")
@@ -257,7 +261,11 @@ model ResourceOperationDetails {
   operationId: string;
 
   @doc("Unique identifier for the resource involved in the operation, eg Azure Resource Manager ID")
-  resourceId?: armResourceIdentifier;
+  resourceId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.Compute/vm";
+    }
+  ]>;
 
   @doc("Type of operation performed on the resources")
   opType?: ResourceOperationType = ResourceOperationType.Unknown;
@@ -289,10 +297,14 @@ model ResourceOperationDetails {
   retryPolicy?: RetryPolicy;
 }
 
-@doc("High level response from an operation on a resource")
+@doc("Top level response from an operation on a resource")
 model ResourceOperation {
   @doc("Unique identifier for the resource involved in the operation, eg Azure Resource Manager ID")
-  resourceId?: armResourceIdentifier;
+  resourceId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.Compute/vm";
+    }
+  ]>;
 
   @doc("Resource level error code if it exists")
   errorCode?: string;

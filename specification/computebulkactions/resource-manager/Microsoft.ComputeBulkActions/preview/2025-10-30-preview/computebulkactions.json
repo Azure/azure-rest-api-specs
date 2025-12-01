@@ -3744,12 +3744,19 @@
     },
     "ResourceOperation": {
       "type": "object",
-      "description": "High level response from an operation on a resource",
+      "description": "Top level response from an operation on a resource",
       "properties": {
         "resourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "Unique identifier for the resource involved in the operation, eg Azure Resource Manager ID"
+          "description": "Unique identifier for the resource involved in the operation, eg Azure Resource Manager ID",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Compute/vm"
+              }
+            ]
+          }
         },
         "errorCode": {
           "type": "string",
@@ -3777,7 +3784,14 @@
         "resourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "Unique identifier for the resource involved in the operation, eg Azure Resource Manager ID"
+          "description": "Unique identifier for the resource involved in the operation, eg Azure Resource Manager ID",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Compute/vm"
+              }
+            ]
+          }
         },
         "opType": {
           "type": "string",
@@ -4091,7 +4105,14 @@
           "items": {
             "type": "string",
             "format": "arm-id",
-            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.Compute/vm"
+                }
+              ]
+            }
           }
         }
       },
