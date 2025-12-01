@@ -21,7 +21,7 @@ export function includesSegment(path, segment) {
  *
  * @example
  * untilLastSegment("stable/2025-01-01/examples/foo.json", "examples")
- * // -> "{cwd}/stable/2025-01-01"
+ * // -> "{cwd}/stable/2025-01-01/examples"
  */
 export function untilLastSegment(path, segment) {
   let current = resolve(path);
