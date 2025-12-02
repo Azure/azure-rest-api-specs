@@ -1424,7 +1424,7 @@ model AccountProperties {
    * Gets the capabilities of the cognitive services account. Each item indicates the capability of a specific feature. The values are read-only and for reference only.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   capabilities?: SkuCapability[];
 
   /**
@@ -1462,7 +1462,7 @@ model AccountProperties {
   /**
    * The storage accounts for this resource.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["resourceId"])
+  @identifiers(#["resourceId"])
   userOwnedStorage?: UserOwnedStorage[];
 
   /**
@@ -1551,7 +1551,7 @@ model AccountProperties {
    * The commitment plan associations of Cognitive Services account.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["commitmentPlanId"])
+  @identifiers(#["commitmentPlanId"])
   commitmentPlanAssociations?: CommitmentPlanAssociation[];
 
   /**
@@ -1637,7 +1637,7 @@ model NetworkRuleSet {
   /**
    * The list of IP address rules.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   ipRules?: IpRule[];
 
   /**
@@ -1849,7 +1849,7 @@ model CallRateLimit {
   renewalPeriod?: float32;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #["key"])
+  @identifiers(#["key"])
   rules?: ThrottlingRule[];
 }
 
@@ -1867,7 +1867,7 @@ model ThrottlingRule {
   dynamicThrottlingEnabled?: boolean;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #["path", "method"])
+  @identifiers(#["path", "method"])
   matchPatterns?: RequestMatchPattern[];
 }
 
@@ -1887,7 +1887,7 @@ model QuotaLimit {
   renewalPeriod?: float32;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #["key"])
+  @identifiers(#["key"])
   rules?: ThrottlingRule[];
 }
 
@@ -1901,7 +1901,7 @@ model MultiRegionSettings {
   routingMethod?: RoutingMethods;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   regions?: RegionSetting[];
 }
 
@@ -2062,7 +2062,7 @@ model ResourceSku {
   /**
    * The restrictions because of which SKU cannot be used. This is empty if there are no restrictions.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   restrictions?: ResourceSkuRestrictions[];
 }
 
@@ -2111,7 +2111,7 @@ model AccountSkuListResult {
   /**
    * Gets the list of Cognitive Services accounts and their properties.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["sku/name", "resourceType"])
+  @identifiers(#["sku/name", "resourceType"])
   value?: AccountSku[];
 }
 
@@ -2144,7 +2144,7 @@ model UsageListResult {
    * The list of usages for Cognitive Service account.
    */
   @pageItems
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   value?: Usage[];
 }
 
@@ -2217,7 +2217,7 @@ model AccountModelListResult {
    * Gets the list of Cognitive Services accounts Model and their properties.
    */
   @pageItems
-  @OpenAPI.extension("x-ms-identifiers", #["name", "format", "version"])
+  @identifiers(#["name", "format", "version"])
   value?: AccountModel[];
 }
 
@@ -2239,7 +2239,7 @@ model AccountModel extends DeploymentModel {
   /**
    * The list of Model Sku.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   skus?: ModelSku[];
 
   /**
@@ -2359,13 +2359,13 @@ model ModelSku {
   /**
    * The list of rateLimit.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   rateLimits?: CallRateLimit[];
 
   /**
    * The list of billing meter info.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   cost?: BillingMeterInfo[];
 }
 
@@ -2482,7 +2482,7 @@ model SkuAvailabilityListResult {
   /**
    * Check SKU availability result list.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["skuName", "type", "kind"])
+  @identifiers(#["skuName", "type", "kind"])
   value?: SkuAvailability[];
 }
 
@@ -2770,7 +2770,7 @@ model CalculateModelCapacityParameter {
   /**
    * List of Model Capacity Calculator Workload.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   workloads?: ModelCapacityCalculatorWorkload[];
 }
 
@@ -2932,7 +2932,7 @@ model DeploymentProperties {
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["key"])
+  @identifiers(#["key"])
   rateLimits?: ThrottlingRule[];
 
   /**
@@ -3054,7 +3054,7 @@ model DeploymentSkuListResult {
    * Gets the list of Cognitive Services accounts deployment skus.
    */
   @pageItems
-  @OpenAPI.extension("x-ms-identifiers", #["resourceType"])
+  @identifiers(#["resourceType"])
   @visibility(Lifecycle.Read)
   value?: SkuResource[];
 }
@@ -3207,25 +3207,25 @@ model RaiPolicyProperties {
   /**
    * The list of Content Filters.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   contentFilters?: RaiPolicyContentFilter[];
 
   /**
    * The list of custom Blocklist.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   customBlocklists?: CustomBlocklistConfig[];
 
   /**
    * The list of custom rai topics.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   customTopics?: CustomTopicConfig[];
 
   /**
    * The list of Safety Providers.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   safetyProviders?: SafetyProviderConfig[];
 }
 
@@ -3367,7 +3367,7 @@ model RaiBlockListItemsResult {
    * The list of RaiBlocklistItems.
    */
   @pageItems
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   value?: RaiBlocklistItem[];
 }
 
@@ -3462,7 +3462,7 @@ model RaiExternalSafetyProviderResult {
    * The list of RaiExternalSafetyProvider.
    */
   @pageItems
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   value?: RaiExternalSafetyProviderSchema[];
 }
 
@@ -3597,7 +3597,7 @@ model RaiTopicResult {
    * The list of RaiTopic.
    */
   @pageItems
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   value?: RaiTopic[];
 }
 
@@ -3662,7 +3662,7 @@ model RaiToolLabelResult {
    * The list of RAI Tool Labels.
    */
   @pageItems
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   value?: RaiToolLabel[];
 }
 
@@ -3707,7 +3707,7 @@ model NetworkSecurityPerimeterConfigurationList {
    * Array of NSP configurations List Result for an Cognitive Services account.
    */
   @pageItems
-  @OpenAPI.extension("x-ms-identifiers", #["id"])
+  @identifiers(#["id"])
   value?: NetworkSecurityPerimeterConfiguration[];
 
   /**
@@ -3731,7 +3731,7 @@ model NetworkSecurityPerimeterConfigurationProperties {
   /**
    * List of Provisioning Issues
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   provisioningIssues?: ProvisioningIssue[];
 
   /**
@@ -3898,7 +3898,7 @@ model NetworkSecurityPerimeterProfileInfo {
   accessRulesVersion?: int64;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   accessRules?: NetworkSecurityPerimeterAccessRule[];
 
   /**
@@ -3927,7 +3927,7 @@ model DefenderForAISettingResult {
    * The list of Defender for AI Settings.
    */
   @pageItems
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   value?: DefenderForAISetting[];
 }
 
@@ -4639,14 +4639,12 @@ model AgentDeployment extends ResourceBase {
    * Gets or sets the supported protocol types and versions exposed by this deployment.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #["protocol", "version"])
   protocols?: AgentProtocolVersion[] | null;
 
   /**
    * Returns a flat list of agent:version deployed in this deployment.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #["agentId"])
   agents?: VersionedAgentReference[] | null;
 
   /**
@@ -5219,7 +5217,7 @@ model ModelCapacityListResult {
    */
   @visibility(Lifecycle.Read)
   @pageItems
-  @OpenAPI.extension("x-ms-identifiers", #["model"])
+  @identifiers(#["model"])
   value?: ModelCapacityListResultValueItem[];
 }
 
@@ -5277,7 +5275,7 @@ model RaiBlockListResult {
    * The list of RaiBlocklist.
    */
   @pageItems
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   value?: RaiBlocklist[];
 }
 
@@ -5285,7 +5283,7 @@ model RaiBlockListResult {
  * The list of Cognitive Services RaiBlocklist Items for batch add.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@OpenAPI.extension("x-ms-identifiers", #["name"])
+@identifiers(#["name"])
 model RaiBlocklistItemsBulkAddRequest is Array<RaiBlocklistItemBulkRequest>;
 
 /**
@@ -5321,7 +5319,7 @@ model CommitmentPlanAccountAssociationListResult {
    */
   @pageItems
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["id"])
+  @identifiers(#["id"])
   value?: CommitmentPlanAccountAssociation[];
 }
 
@@ -5375,7 +5373,7 @@ model EncryptionScopeListResult {
    * The list of EncryptionScope.
    */
   @pageItems
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   value?: EncryptionScope[];
 }
 
@@ -5412,7 +5410,7 @@ model QuotaTierListResult {
    */
   @pageItems
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["id"])
+  @identifiers(#["id"])
   value?: QuotaTier[];
 }
 
@@ -5430,7 +5428,7 @@ model RaiContentFilterListResult {
    * The list of RaiContentFilter.
    */
   @pageItems
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   value?: RaiContentFilter[];
 }
 
@@ -5448,13 +5446,10 @@ model RaiPolicyListResult {
    * The list of RaiPolicy.
    */
   @pageItems
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   value?: RaiPolicy[];
 }
-@@OpenAPI.extension(ResourceSkuListResult.value,
-  "x-ms-identifiers",
-  #["resourceType", "name", "kind"]
-);
+@@identifiers(ResourceSkuListResult.value, #["resourceType", "name", "kind"]);
 
 /**
  * The list of Cognitive Services RaiBlocklist Items Names.
