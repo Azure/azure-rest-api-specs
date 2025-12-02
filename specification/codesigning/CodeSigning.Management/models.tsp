@@ -59,6 +59,13 @@ union ProfileType {
 
   @doc("Used for signing files for testing purpose.")
   PublicTrustTest: "PublicTrustTest",
+
+  @removed(Versions.v2024_02_05_preview)
+  @removed(Versions.v2024_09_30_preview)
+  @removed(Versions.v2025_10_13)
+  @added(Versions.v2025_11_20_preview)
+  @doc("Used for signing content files.")
+  C2PAContentCredentials: "C2PAContentCredentials",
 }
 
 @doc("Status of the certificate profiles.")
