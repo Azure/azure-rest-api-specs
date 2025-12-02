@@ -26,26 +26,45 @@ These are the global settings for the API.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-2021-10-01-device
+tag: package-2026-04-01-device
 ```
 
-### Tag: package-stable-2026-04-service
+### Tag: package-2026-04-service
 
-These settings apply only when `--tag=package-stable-2026-04-service` is specified on the command line.
+These settings apply only when `--tag=package-2026-04-service` is specified on the command line.
 
-```yaml $(tag) == 'package-stable-2026-04-service'
+```yaml $(tag) == 'package-2026-04-01-01-service'
 input-file:
   - stable/2026-04-01/service.json
 title: ProvisioningServiceClient
 ```
 
-### Tag: package-stable-2026-04-device
+### Tag: package-2026-04-device
 
-These settings apply only when `--tag=package-stable-2026-04-device` is specified on the command line.
+These settings apply only when `--tag=package-2026-04-device` is specified on the command line.
 
-```yaml $(tag) == 'package-stable-2026-04-device'
+```yaml $(tag) == 'package-2026-04-01-device'
 input-file:
   - stable/2026-04-01/device.json
+title: ProvisioningDeviceClient
+```
+
+### Tag: package-preview-2025-07-service
+These settings apply only when `--tag=package-preview-2025-07-service` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-07-service'
+input-file:
+  - preview/2025-07-01-preview/service.json
+title: ProvisioningServiceClient
+```
+
+### Tag: package-preview-2025-07-device
+
+These settings apply only when `--tag=package-preview-2025-07-device` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-07-device'
+input-file:
+  - preview/2025-07-01-preview/device.json
 title: ProvisioningDeviceClient
 ```
 
