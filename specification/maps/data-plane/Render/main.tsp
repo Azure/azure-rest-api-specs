@@ -5,7 +5,7 @@
  *   isFullCompatible: false
  *   guessResourceKey: false
  * Version: 0.11.12
- * Date: 2025-12-02T00:47:42.020Z
+ * Date: 2025-11-25T00:47:42.020Z
  */
 import "@typespec/rest";
 import "@typespec/http";
