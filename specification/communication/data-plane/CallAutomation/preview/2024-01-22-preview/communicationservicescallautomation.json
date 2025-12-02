@@ -1926,6 +1926,11 @@
         "dtmfOptions": {
           "$ref": "#/definitions/DtmfConfigurationOptions",
           "description": "DTMF (Dual-Tone Multi-Frequency) configuration for the call."
+        },
+        "postDialTones": {
+          "description": "DTMF tones to send as part of the call for a participant.",
+          "maxLength": 30,
+          "type": "string"
         }
       }
     },
@@ -2074,7 +2079,6 @@
     "MediaStreamingOptions": {
       "description": "Configuration of Media streaming.",
       "required": [
-        "transportUrl",
         "transportType",
         "contentType",
         "audioChannelType"
@@ -2246,6 +2250,10 @@
           "items": {
             "$ref": "#/definitions/MediaStreamingContentType"
           }
+        },
+        "streamUrl": {
+          "description": "Media streaming subscription stream URL.",
+          "type": "string"
         }
       }
     },
@@ -3140,6 +3148,11 @@
         "customCallingContext": {
           "$ref": "#/definitions/CustomCallingContext",
           "description": "Used by customer to send custom calling context to targets"
+        },
+        "postDialTones": {
+          "description": "DTMF tones to send as part of the call for a participant.",
+          "maxLength": 30,
+          "type": "string"
         }
       }
     },
@@ -4138,6 +4151,56 @@
           "readOnly": true
         }
       }
+    },
+    "PostDialDtmfTonesCompleted": {
+      "type": "object",
+      "properties": {
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string"
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string"
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation.",
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string"
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation"
+        }
+      },
+      "additionalProperties": false
+    },
+    "PostDialDtmfTonesFailed": {
+      "type": "object",
+      "properties": {
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string"
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string"
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation.",
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string"
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation"
+        }
+      },
+      "additionalProperties": false
     },
     "PlayResumed": {
       "type": "object",
