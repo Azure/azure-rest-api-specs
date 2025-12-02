@@ -1182,7 +1182,7 @@
             "collectionFormat": "multi"
           },
           {
-            "name": "accept",
+            "name": "Accept",
             "in": "header",
             "description": "The Accept header field can be used to specify preferences regarding response\nmedia types. Allowed media types include image/jpeg and image/png. Return image\nin image/png if Accept header is not specified.",
             "required": false,
@@ -1207,7 +1207,7 @@
                 }
               ]
             },
-            "x-ms-client-name": "Accept"
+            "x-ms-client-name": "accept"
           }
         ],
         "responses": {
@@ -1983,6 +1983,7 @@
     },
     "IncludeText": {
       "type": "string",
+      "description": "Include textual data in response.",
       "enum": [
         "yes",
         "no"
@@ -2006,6 +2007,7 @@
     },
     "LocalizedMapView": {
       "type": "string",
+      "description": "The View parameter (also called the \\\"user region\\\" parameter) allows you to show the correct maps for a certain country/region for geopolitically disputed regions. Different countries/regions have different views of such regions, and the View parameter allows your application to comply with the view required by the country/region your application will be serving. By default, the View parameter is set to “Unified” even if you haven’t defined it in  the request. It is your responsibility to determine the location of your users, and then set the View parameter correctly for that location. Alternatively, you have the option to set ‘View=Auto’, which will return the map data based on the IP  address of the request. The View parameter in Azure Maps must be used in compliance with applicable laws, including those  regarding mapping, of the country/region where maps, images and other data and third party content that you are authorized to  access via Azure Maps is made available. Example: view=IN.\\n\\nPlease refer to [Supported Views](https://aka.ms/AzureMapsLocalizationViews) for details and to see the available Views.",
       "enum": [
         "AE",
         "AR",
@@ -2144,6 +2146,7 @@
     },
     "MapTileSize": {
       "type": "string",
+      "description": "The size of the returned map tile in pixels.",
       "enum": [
         "256",
         "512"
@@ -2258,6 +2261,7 @@
     },
     "MediaType": {
       "type": "string",
+      "description": "The desired media type of the response.",
       "enum": [
         "image/png",
         "image/jpeg"
@@ -2281,6 +2285,7 @@
     },
     "RegionCopyrights": {
       "type": "object",
+      "description": "Region copyrights",
       "properties": {
         "copyrights": {
           "type": "array",
@@ -2315,6 +2320,7 @@
     },
     "ResponseFormat": {
       "type": "string",
+      "description": "Desired format of the response. Value can be either _json_ or _xml_.",
       "enum": [
         "json",
         "xml"
@@ -2338,6 +2344,7 @@
     },
     "TilesetID": {
       "type": "string",
+      "description": "A tileset is a collection of raster or vector data broken up into a uniform grid of square tiles at preset zoom levels. Every tileset has a **tilesetId** to use when making requests. The ready-to-use tilesets supplied by Azure Maps are listed below. For example, microsoft.base.",
       "enum": [
         "microsoft.base",
         "microsoft.base.labels",
@@ -2481,6 +2488,7 @@
     },
     "TrafficTilesetId": {
       "type": "string",
+      "description": "Value indicating no traffic flow overlaid on the image result.",
       "enum": [
         "microsoft.traffic.relative.main",
         "none"

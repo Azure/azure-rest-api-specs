@@ -670,6 +670,7 @@ interface Render {
        * * X and Y coordinates can be anywhere within pin image or a margin around it.
        * The margin size is the minimum of the pin width and height.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Existing API contract."
       @query(#{ name: "pins", explode: true })
       pins?: string[];
 
@@ -745,6 +746,7 @@ interface Render {
        * lw   | Line width     |int32        | (0, 50]
        * ra        | Circle radius (meters) |   float  | Greater than 0
        */
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Existing API contract."
       @query(#{ name: "path", explode: true })
       path?: string[];
 
@@ -753,8 +755,8 @@ interface Render {
        * media types. Allowed media types include image/jpeg and image/png. Return image
        * in image/png if Accept header is not specified.
        */
-      @header
-      Accept?: MediaType;
+      @header("Accept")
+      accept?: MediaType;
     },
     void
   >;
