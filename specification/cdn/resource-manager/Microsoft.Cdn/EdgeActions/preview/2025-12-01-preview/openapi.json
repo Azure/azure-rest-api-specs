@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.Cdn/EdgeAction",
-    "version": "2025-09-01-preview",
+    "version": "2025-12-01-preview",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -380,153 +380,6 @@
         "x-ms-examples": {
           "DeleteEdgeAction": {
             "$ref": "./examples/EdgeActions_Delete.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/edgeActions/{edgeActionName}/addAttachment": {
-      "post": {
-        "operationId": "EdgeActions_AddAttachment",
-        "tags": [
-          "EdgeActions"
-        ],
-        "description": "A long-running resource action.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "edgeActionName",
-            "in": "path",
-            "description": "The name of the Edge Action",
-            "required": true,
-            "type": "string",
-            "maxLength": 50,
-            "pattern": "[a-zA-Z0-9]+"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The content of the action request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/EdgeActionAttachment"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/EdgeActionAttachmentResponse"
-            }
-          },
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "AddAttachment": {
-            "$ref": "./examples/EdgeActions_AddAttachment.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/edgeActions/{edgeActionName}/deleteAttachment": {
-      "post": {
-        "operationId": "EdgeActions_DeleteAttachment",
-        "tags": [
-          "EdgeActions"
-        ],
-        "description": "A long-running resource action.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "edgeActionName",
-            "in": "path",
-            "description": "The name of the Edge Action",
-            "required": true,
-            "type": "string",
-            "maxLength": 50,
-            "pattern": "[a-zA-Z0-9]+"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The content of the action request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/EdgeActionAttachment"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "204": {
-            "description": "Action completed successfully."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "DeleteAttachment": {
-            "$ref": "./examples/EdgeActions_DeleteAttachment.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1538,24 +1391,6 @@
       "required": [
         "id",
         "attachedResourceId"
-      ]
-    },
-    "EdgeActionAttachmentResponse": {
-      "type": "object",
-      "description": "Edge action attachment response",
-      "properties": {
-        "edgeActionId": {
-          "type": "string",
-          "description": "Non changing guid to identity edge action",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        }
-      },
-      "required": [
-        "edgeActionId"
       ]
     },
     "EdgeActionExecutionFilter": {
