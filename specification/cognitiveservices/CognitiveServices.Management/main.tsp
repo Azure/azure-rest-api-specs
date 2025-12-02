@@ -5,7 +5,7 @@
  *   isFullCompatible: true
  *   guessResourceKey: false
  * Version: 0.11.5
- * Date: 2025-10-21T03:06:05.639Z
+ * Date: 2025-11-25T03:28:48.108Z
  */
 import "@typespec/rest";
 import "@typespec/versioning";
@@ -31,6 +31,7 @@ import "./DefenderForAISetting.tsp";
 import "./Project.tsp";
 import "./ConnectionPropertiesV2BasicResource.tsp";
 import "./CapabilityHost.tsp";
+import "./ProjectCapabilityHost.tsp";
 import "./QuotaTier.tsp";
 import "./OutboundRuleBasicResource.tsp";
 import "./ManagedNetworkSettingsPropertiesBasicResource.tsp";
@@ -64,6 +65,3 @@ enum Versions {
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
-@@doc(Operations.list,
-  "Lists all the available Cognitive Services account operations."
-);

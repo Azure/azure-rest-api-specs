@@ -83,11 +83,8 @@ interface Accounts {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   create is AccountOps.CreateOrUpdateAsync<
     Account,
-    Response = ArmResourceUpdatedResponse<Account> | ArmResourceCreatedResponse<
-      Account,
-      ArmLroLocationHeader<FinalResult = Account> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | (ArmAcceptedLroResponse & {
+    Response = ArmResourceUpdatedResponse<Account> | ArmResourceCreatedResponse<Account> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Account> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: Account;
     })

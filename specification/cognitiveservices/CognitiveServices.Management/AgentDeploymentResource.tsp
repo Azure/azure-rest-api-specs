@@ -68,7 +68,7 @@ interface AgentDeploymentResourcesOps
          * The name of the deployment associated with the Cognitive Services Account
          */
         @path
-        @segment("deployments")
+        @segment("agentDeployments")
         @key
         deploymentName: string,
       }

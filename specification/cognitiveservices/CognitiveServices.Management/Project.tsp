@@ -51,11 +51,8 @@ interface Projects {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   create is ArmResourceCreateOrReplaceAsync<
     Project,
-    Response = ArmResourceUpdatedResponse<Project> | ArmResourceCreatedResponse<
-      Project,
-      ArmLroLocationHeader<FinalResult = Project> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | (ArmAcceptedLroResponse & {
+    Response = ArmResourceUpdatedResponse<Project> | ArmResourceCreatedResponse<Project> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Project> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: Project;
     })

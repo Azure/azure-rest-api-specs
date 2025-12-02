@@ -1107,9 +1107,9 @@ union BuiltInAuthorizationScheme {
   OrganizationScope: "OrganizationScope",
 
   /**
-   * Microsoft365-specific (AzureBotService) authorization
+   * Channels-specific (AzureBotService) authorization
    */
-  Microsoft365: "Microsoft365",
+  Channels: "Channels",
 
   /**
    * Custom scheme defined by the application author
@@ -1760,6 +1760,7 @@ model PrivateEndpointConnectionProperties {
    * The provisioning state of the private endpoint connection resource.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
   provisioningState?: Azure.ResourceManager.CommonTypes.PrivateEndpointConnectionProvisioningState;
 
   /**
@@ -2281,6 +2282,7 @@ model AccountModel extends DeploymentModel {
   /**
    * Metadata pertaining to creation and last modification of the resource.
    */
+  @visibility(Lifecycle.Read)
   systemData?: SystemData;
 }
 
@@ -2489,7 +2491,7 @@ model SkuAvailabilityListResult {
  */
 model SkuAvailability {
   /**
-   * The kind (type) of cognitive service account.
+   * The Kind of the resource.
    */
   kind?: string;
 
@@ -2499,7 +2501,7 @@ model SkuAvailability {
   type?: string;
 
   /**
-   * The name of SKU.
+   * The SKU of Cognitive Services account.
    */
   skuName?: string;
 
@@ -2546,7 +2548,7 @@ model CommitmentTierListResult {
  */
 model CommitmentTier {
   /**
-   * The kind (type) of cognitive service account.
+   * The Kind of the resource.
    */
   kind?: string;
 
@@ -2716,7 +2718,7 @@ model CheckDomainAvailabilityParameter {
   type: string;
 
   /**
-   * The kind (type) of cognitive service account.
+   * The Kind of the resource.
    */
   kind?: string;
 }
@@ -2746,7 +2748,7 @@ model DomainAvailability {
   type?: string;
 
   /**
-   * The kind (type) of cognitive service account.
+   * The Kind of the resource.
    */
   kind?: string;
 }
@@ -4061,6 +4063,22 @@ model ConnectionPropertiesV2BasicResourceArmPaginatedResult {
   @pageItems
   value?: ConnectionPropertiesV2BasicResource[];
 }
+/**
+ * A paginated list of Capability Host entities.
+ */
+model CapabilityHostResourceArmPaginatedResult {
+  /**
+   * The link to the next page of Capability Host objects. If null, there are no additional pages.
+   */
+  @nextLink
+  nextLink?: string | null;
+
+  /**
+   * An array of objects of type Capability Host.
+   */
+  @pageItems
+  value?: CapabilityHostResource[];
+}
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -4105,6 +4123,11 @@ model CapabilityHost extends ResourceBase {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   vectorStoreConnections?: string[] | null;
+
+  /**
+   * Whether public hosting environment is enabled for the capability host
+   */
+  enablePublicHostingEnvironment?: boolean;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -4121,6 +4144,52 @@ model ResourceBase {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string> | null;
+}
+
+/**
+ * A paginated list of Project Capability Host entities.
+ */
+model ProjectCapabilityHostResourceArmPaginatedResult {
+  /**
+   * The link to the next page of Project Capability Host objects. If null, there are no additional pages.
+   */
+  @nextLink
+  nextLink?: string | null;
+
+  /**
+   * An array of objects of type Project Capability Host.
+   */
+  @pageItems
+  value?: ProjectCapabilityHostResource[];
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model ProjectCapabilityHost {
+  /**
+   * List of AI services connections.
+   */
+  aiServicesConnections?: string[] | null;
+
+  /**
+   * List of connection names from those available in the account or project to be used for vector database (e.g. CosmosDB).
+   */
+  vectorStoreConnections?: string[] | null;
+
+  /**
+   * List of connection names from those available in the account or project to be used as a storage resource.
+   */
+  storageConnections?: string[] | null;
+
+  /**
+   * List of connection names from those available in the account or project to be used for Thread storage.
+   */
+  threadStorageConnections?: string[] | null;
+
+  /**
+   * Provisioning state for the CapabilityHost.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: CapabilityHostProvisioningState;
 }
 
 /**
@@ -5002,13 +5071,14 @@ model OrganizationSharedBuiltInAuthorizationPolicy
 }
 
 /**
- * Represents a built-in authorization policy specific to Azure Bot Service/M365 authentication.
+ * Represents a built-in authorization policy specific to Azure Bot Service/Channels authentication.
  */
-model M365BuiltInAuthorizationPolicy extends ApplicationAuthorizationPolicy {
+model ChannelsBuiltInAuthorizationPolicy
+  extends ApplicationAuthorizationPolicy {
   /**
    * Authorization scheme type.
    */
-  type: "Microsoft365";
+  type: "Channels";
 }
 
 /**

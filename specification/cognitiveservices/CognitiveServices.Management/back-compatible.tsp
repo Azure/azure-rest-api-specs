@@ -142,6 +142,8 @@ using Microsoft.CognitiveServices;
   "capabilityHost"
 );
 @@clientLocation(CapabilityHosts.delete, "AccountCapabilityHosts");
+@@clientLocation(CapabilityHosts.list, "AccountCapabilityHosts");
+
 @@clientName(ProjectCapabilityHosts.createOrUpdate::parameters.resource,
   "capabilityHost"
 );
@@ -211,14 +213,7 @@ using Microsoft.CognitiveServices;
 @@clientName(calculateModelCapacity::parameters.body, "parameters");
 @@clientName(checkDomainAvailability::parameters.body, "parameters");
 @@clientName(checkSkuAvailability::parameters.body, "parameters");
-@@clientName(AgentApplicationResource, "AgentApplication");
-@@clientName(CapabilityHost, "CapabilityHostProperties");
-@@clientName(CapabilityHostResource, "CapabilityHost");
-
-//@@clientName(AgentDeploymentResource, "AgentDeployment");
-//@@clientName(AgentDeployment, "AgentDeploymentProperties");
-//@@clientName(AgentReferenceResource, "AgentReference");
-//@@clientName(AgentReference, "AgentReferenceProperties");
+//@@clientName(ProjectCapabilityHostResource, "ProjectCapabilityHost");
 
 @@visibility(Project.tags, Lifecycle.Read, Lifecycle.Create, Lifecycle.Update);
 @@visibility(CommitmentPlan.tags,

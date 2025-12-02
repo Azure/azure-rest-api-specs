@@ -1,51 +1,40 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-1111-2222-3333-444444444444",
-    "resourceGroupName": "test-rg",
     "accountName": "my-cognitive-services-account",
-    "projectName": "my-project",
-    "appName": "agent-app-1",
-    "deploymentName": "deployment-1",
     "api-version": "2025-10-01-preview",
+    "appName": "agent-app-1",
     "body": {
       "properties": {
-        "displayName": "Production Deployment",
-        "state": "Starting",
-        "deploymentType": "Managed",
-        "protocols": [
-          {
-            "protocol": "Agent",
-            "version": "1.0"
-          }
-        ],
         "agents": [
           {
             "agentId": "agent-123",
             "agentName": "support-agent",
             "agentVersion": "1.0.0"
           }
-        ]
+        ],
+        "deploymentType": "Managed",
+        "displayName": "Production Deployment",
+        "protocols": [
+          {
+            "version": "1.0",
+            "protocol": "Agent"
+          }
+        ],
+        "state": "Starting"
       }
-    }
+    },
+    "deploymentName": "deployment-1",
+    "projectName": "my-project",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
-        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/test-rg/providers/Microsoft.CognitiveServices/accounts/my-cognitive-services-account/projects/my-project/applications/agent-app-1/agentDeployments/deployment-1",
         "name": "deployment-1",
         "type": "Microsoft.CognitiveServices/accounts/projects/applications/agentDeployments",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/test-rg/providers/Microsoft.CognitiveServices/accounts/my-cognitive-services-account/projects/my-project/applications/agent-app-1/agentDeployments/deployment-1",
         "properties": {
-          "displayName": "Production Deployment",
-          "deploymentId": "550e8400-e29b-41d4-a716-446655440001",
-          "state": "Running",
-          "deploymentType": "Managed",
-          "protocols": [
-            {
-              "protocol": "Agent",
-              "version": "1.0"
-            }
-          ],
           "agents": [
             {
               "agentId": "agent-123",
@@ -53,7 +42,17 @@
               "agentVersion": "1.0.0"
             }
           ],
-          "provisioningState": "Succeeded"
+          "deploymentId": "550e8400-e29b-41d4-a716-446655440001",
+          "deploymentType": "Managed",
+          "displayName": "Production Deployment",
+          "protocols": [
+            {
+              "version": "1.0",
+              "protocol": "Agent"
+            }
+          ],
+          "provisioningState": "Succeeded",
+          "state": "Running"
         },
         "systemData": {
           "createdAt": "2024-09-29T12:34:56.999Z",
@@ -63,27 +62,15 @@
           "lastModifiedBy": "user@contoso.com",
           "lastModifiedByType": "User"
         }
-      }
+      },
+      "headers": {}
     },
     "201": {
-      "headers": {
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.CognitiveServices/locations/westus/operationresults/00000000-1111-2222-3333-444444444444?api-version=2025-10-01-preview"
-      },
       "body": {
-        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/test-rg/providers/Microsoft.CognitiveServices/accounts/my-cognitive-services-account/projects/my-project/applications/agent-app-1/agentDeployments/deployment-1",
         "name": "deployment-1",
         "type": "Microsoft.CognitiveServices/accounts/projects/applications/agentDeployments",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/test-rg/providers/Microsoft.CognitiveServices/accounts/my-cognitive-services-account/projects/my-project/applications/agent-app-1/agentDeployments/deployment-1",
         "properties": {
-          "displayName": "Production Deployment",
-          "deploymentId": "550e8400-e29b-41d4-a716-446655440001",
-          "state": "Starting",
-          "deploymentType": "Managed",
-          "protocols": [
-            {
-              "protocol": "Agent",
-              "version": "1.0"
-            }
-          ],
           "agents": [
             {
               "agentId": "agent-123",
@@ -91,7 +78,17 @@
               "agentVersion": "1.0.0"
             }
           ],
-          "provisioningState": "Creating"
+          "deploymentId": "550e8400-e29b-41d4-a716-446655440001",
+          "deploymentType": "Managed",
+          "displayName": "Production Deployment",
+          "protocols": [
+            {
+              "version": "1.0",
+              "protocol": "Agent"
+            }
+          ],
+          "provisioningState": "Creating",
+          "state": "Starting"
         },
         "systemData": {
           "createdAt": "2024-09-29T12:34:56.999Z",
@@ -101,7 +98,12 @@
           "lastModifiedBy": "user@contoso.com",
           "lastModifiedByType": "User"
         }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.CognitiveServices/locations/westus/operationresults/00000000-1111-2222-3333-444444444444?api-version=2025-10-01-preview"
       }
     }
-  }
+  },
+  "operationId": "AgentDeployments_CreateOrUpdate",
+  "title": "Create or Update Agent Deployment."
 }

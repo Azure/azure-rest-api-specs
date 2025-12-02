@@ -99,85 +99,15 @@ interface CapabilityHosts {
       asyncOperationTimeout: string;
     }> | NoContentResponse
   >;
-}
-@armResourceOperations
-interface ProjectCapabilityHostOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
-
-        /** The name of Cognitive Services account. */
-        @path
-        @segment("accounts")
-        @key
-        @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]*$")
-        @minLength(2)
-        @maxLength(64)
-        accountName: string,
-
-        /** The name of Cognitive Services account's project. */
-        @path
-        @segment("projects")
-        @key
-        @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]*$")
-        @minLength(2)
-        @maxLength(64)
-        projectName: string,
-      },
-      {
-        /** The name of the capability host associated with the Cognitive Services Resource */
-        @path
-        @segment("capabilityHosts")
-        @key
-        @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
-        capabilityHostName: string,
-      }
-    > {}
-
-@armResourceOperations
-interface ProjectCapabilityHosts {
-  /**
-   * Get project capabilityHost.
-   */
-  get is ProjectCapabilityHostOps.Read<CapabilityHostResource>;
 
   /**
-   * Create or update project capabilityHost.
+   * List capabilityHost.
    */
-  @Azure.Core.useFinalStateVia("original-uri")
-  createOrUpdate is ProjectCapabilityHostOps.CreateOrUpdateAsync<
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("AccountCapabilityHosts_List")
+  list is ArmResourceListByParent<
     CapabilityHostResource,
-    Response = ArmResponse<CapabilityHostResource> | ArmResourceCreatedResponse<
-      CapabilityHostResource,
-      LroHeaders = ArmAsyncOperationHeader<FinalResult = CapabilityHostResource> & {
-        /**
-         * Timeout for the client to use when polling the asynchronous operation.
-         */
-        #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-        @header("x-ms-async-operation-timeout")
-        @format("duration")
-        asyncOperationTimeout: string;
-      }
-    >
-  >;
-
-  /**
-   * Delete project capabilityHost.
-   */
-  delete is ProjectCapabilityHostOps.DeleteWithoutOkAsync<
-    CapabilityHostResource,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = void> & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @header("x-ms-async-operation-timeout")
-      @format("duration")
-      asyncOperationTimeout: string;
-    }> | NoContentResponse
+    Response = ArmResponse<CapabilityHostResourceArmPaginatedResult>
   >;
 }
 
