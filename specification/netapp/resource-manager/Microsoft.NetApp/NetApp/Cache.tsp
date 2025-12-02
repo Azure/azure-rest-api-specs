@@ -544,7 +544,6 @@ interface Caches {
       Cache,
       CacheProperties
     >,
-    Response = ArmResourceUpdatedResponse<Cache> | ArmAcceptedLroResponse,
     LroHeaders = ArmCombinedLroHeaders<FinalResult = Cache> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
