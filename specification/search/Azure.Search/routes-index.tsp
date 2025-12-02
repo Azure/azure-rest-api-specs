@@ -12,7 +12,13 @@ interface Documents {
   @doc("Queries the number of documents in the index.")
   @route("/indexes('{indexName}')/docs/$count")
   @get
-  count is SearchIndexOperation<{}, int64>;
+  count is SearchIndexOperation<
+    {},
+    {
+      @header contentType: "application/json";
+      @body body: int64;
+    }
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
@@ -21,6 +27,9 @@ interface Documents {
   @get
   searchGet is SearchIndexOperation<
     {
+      ...querySourceAuthorizationHeader;
+      ...enableElevatedReadHeader;
+
       @doc("A full-text search query expression; Use \"*\" or omit this parameter to match all documents.")
       @query("search")
       searchText?: string;
@@ -42,6 +51,8 @@ interface Documents {
   @post
   searchPost is SearchIndexOperation<
     {
+      ...querySourceAuthorizationHeader;
+      ...enableElevatedReadHeader;
       ...SearchRequest;
     },
     SearchDocumentsResult & {
@@ -58,6 +69,9 @@ interface Documents {
   @get
   get is SearchIndexOperation<
     {
+      ...querySourceAuthorizationHeader;
+      ...enableElevatedReadHeader;
+
       @doc("The key of the document to retrieve.")
       @path
       key: string;

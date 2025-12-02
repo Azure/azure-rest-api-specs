@@ -940,6 +940,15 @@
             "description": "The name of the indexer.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "indexerResync",
+            "in": "body",
+            "description": "The definition of the indexer resync options.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IndexerResyncBody"
+            }
           }
         ],
         "responses": {
@@ -1137,14 +1146,6 @@
             "description": "The name of the index.",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "x-ms-query-source-authorization",
-            "in": "header",
-            "description": "Token identifying the user for which the query is being executed. This token is used to enforce security restrictions on documents.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "querySourceAuthorization"
           }
         ],
         "responses": {
@@ -1222,14 +1223,6 @@
             "type": "string"
           },
           {
-            "name": "x-ms-query-source-authorization",
-            "in": "header",
-            "description": "Token identifying the user for which the query is being executed. This token is used to enforce security restrictions on documents.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "querySourceAuthorization"
-          },
-          {
             "name": "index",
             "in": "body",
             "description": "The definition of the index to create or update.",
@@ -1297,14 +1290,6 @@
             "description": "The name of the index.",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "x-ms-query-source-authorization",
-            "in": "header",
-            "description": "Token identifying the user for which the query is being executed. This token is used to enforce security restrictions on documents.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "querySourceAuthorization"
           }
         ],
         "responses": {
@@ -1335,6 +1320,22 @@
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "x-ms-query-source-authorization",
+            "in": "header",
+            "description": "Token identifying the user for which the query is being executed. This token is used to enforce security restrictions on documents.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "querySourceAuthorization"
+          },
+          {
+            "name": "x-ms-enable-elevated-read",
+            "in": "header",
+            "description": "A value that enables elevated read that bypass document level permission checks for the query operation.",
+            "required": false,
+            "type": "boolean",
+            "x-ms-client-name": "enableElevatedRead"
           },
           {
             "name": "search",
@@ -1440,14 +1441,6 @@
             "description": "The name of the index.",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "x-ms-query-source-authorization",
-            "in": "header",
-            "description": "Token identifying the user for which the query is being executed. This token is used to enforce security restrictions on documents.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "querySourceAuthorization"
           }
         ],
         "responses": {
@@ -1484,10 +1477,6 @@
       "get": {
         "operationId": "Documents_Count",
         "description": "Queries the number of documents in the index.",
-        "produces": [
-          "text/plain",
-          "application/json"
-        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1501,14 +1490,6 @@
             "description": "The name of the index.",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "x-ms-query-source-authorization",
-            "in": "header",
-            "description": "Token identifying the user for which the query is being executed. This token is used to enforce security restrictions on documents.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "querySourceAuthorization"
           }
         ],
         "responses": {
@@ -1654,14 +1635,6 @@
             "description": "The name of the index.",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "x-ms-query-source-authorization",
-            "in": "header",
-            "description": "Token identifying the user for which the query is being executed. This token is used to enforce security restrictions on documents.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "querySourceAuthorization"
           }
         ],
         "responses": {
@@ -1702,14 +1675,6 @@
             "description": "The name of the index.",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "x-ms-query-source-authorization",
-            "in": "header",
-            "description": "Token identifying the user for which the query is being executed. This token is used to enforce security restrictions on documents.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "querySourceAuthorization"
           },
           {
             "name": "batch",
@@ -1767,14 +1732,6 @@
             "type": "string"
           },
           {
-            "name": "x-ms-query-source-authorization",
-            "in": "header",
-            "description": "Token identifying the user for which the query is being executed. This token is used to enforce security restrictions on documents.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "querySourceAuthorization"
-          },
-          {
             "name": "body",
             "in": "body",
             "required": true,
@@ -1813,6 +1770,22 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "x-ms-query-source-authorization",
+            "in": "header",
+            "description": "Token identifying the user for which the query is being executed. This token is used to enforce security restrictions on documents.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "querySourceAuthorization"
+          },
+          {
+            "name": "x-ms-enable-elevated-read",
+            "in": "header",
+            "description": "A value that enables elevated read that bypass document level permission checks for the query operation.",
+            "required": false,
+            "type": "boolean",
+            "x-ms-client-name": "enableElevatedRead"
+          },
+          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           },
           {
@@ -1821,14 +1794,6 @@
             "description": "The name of the index.",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "x-ms-query-source-authorization",
-            "in": "header",
-            "description": "Token identifying the user for which the query is being executed. This token is used to enforce security restrictions on documents.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "querySourceAuthorization"
           },
           {
             "name": "body",
@@ -1886,14 +1851,6 @@
             "description": "The name of the index.",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "x-ms-query-source-authorization",
-            "in": "header",
-            "description": "Token identifying the user for which the query is being executed. This token is used to enforce security restrictions on documents.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "querySourceAuthorization"
           },
           {
             "name": "body",
@@ -1984,14 +1941,6 @@
             "description": "The name of the index.",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "x-ms-query-source-authorization",
-            "in": "header",
-            "description": "Token identifying the user for which the query is being executed. This token is used to enforce security restrictions on documents.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "querySourceAuthorization"
           }
         ],
         "responses": {
@@ -2024,6 +1973,22 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "x-ms-query-source-authorization",
+            "in": "header",
+            "description": "Token identifying the user for which the query is being executed. This token is used to enforce security restrictions on documents.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "querySourceAuthorization"
+          },
+          {
+            "name": "x-ms-enable-elevated-read",
+            "in": "header",
+            "description": "A value that enables elevated read that bypass document level permission checks for the query operation.",
+            "required": false,
+            "type": "boolean",
+            "x-ms-client-name": "enableElevatedRead"
+          },
+          {
             "name": "key",
             "in": "path",
             "description": "The key of the document to retrieve.",
@@ -2051,14 +2016,6 @@
             "description": "The name of the index.",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "x-ms-query-source-authorization",
-            "in": "header",
-            "description": "Token identifying the user for which the query is being executed. This token is used to enforce security restrictions on documents.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "querySourceAuthorization"
           }
         ],
         "responses": {
@@ -2099,14 +2056,6 @@
             "description": "The name of the index.",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "x-ms-query-source-authorization",
-            "in": "header",
-            "description": "Token identifying the user for which the query is being executed. This token is used to enforce security restrictions on documents.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "querySourceAuthorization"
           },
           {
             "name": "request",
@@ -2156,14 +2105,6 @@
             "description": "The name of the index.",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "x-ms-query-source-authorization",
-            "in": "header",
-            "description": "Token identifying the user for which the query is being executed. This token is used to enforce security restrictions on documents.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "querySourceAuthorization"
           }
         ],
         "responses": {
@@ -2522,13 +2463,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -3989,66 +3924,6 @@
       "required": [
         "value"
       ]
-    },
-    "Azure.Core.Foundations.Error": {
-      "type": "object",
-      "description": "The error object.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "One of a server-defined set of error codes."
-        },
-        "message": {
-          "type": "string",
-          "description": "A human-readable representation of the error."
-        },
-        "target": {
-          "type": "string",
-          "description": "The target of the error."
-        },
-        "details": {
-          "type": "array",
-          "description": "An array of details about specific errors that led to this reported error.",
-          "items": {
-            "$ref": "#/definitions/Azure.Core.Foundations.Error"
-          }
-        },
-        "innererror": {
-          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
-          "description": "An object containing more specific information than the current object about the error."
-        }
-      },
-      "required": [
-        "code",
-        "message"
-      ]
-    },
-    "Azure.Core.Foundations.ErrorResponse": {
-      "type": "object",
-      "description": "A response containing error details.",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/Azure.Core.Foundations.Error",
-          "description": "The error object."
-        }
-      },
-      "required": [
-        "error"
-      ]
-    },
-    "Azure.Core.Foundations.InnerError": {
-      "type": "object",
-      "description": "An object containing more specific information about the error. As per Azure REST API guidelines - https://aka.ms/AzureRestApiGuidelines#handling-errors.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "One of a server-defined set of error codes."
-        },
-        "innererror": {
-          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
-          "description": "Inner error."
-        }
-      }
     },
     "AzureActiveDirectoryApplicationCredentials": {
       "type": "object",

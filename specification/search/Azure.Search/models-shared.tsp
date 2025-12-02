@@ -85,6 +85,12 @@ alias querySourceAuthorizationHeader = {
   querySourceAuthorization?: string;
 };
 
+alias enableElevatedReadHeader = {
+  @doc("A value that enables elevated read that bypass document level permission checks for the query operation.")
+  @header("x-ms-enable-elevated-read")
+  enableElevatedRead?: boolean;
+};
+
 @doc("Client initialization options for SearchIndexClient.")
 model SearchIndexClientOptions {
   @doc("The name of the index.")
@@ -110,10 +116,7 @@ alias SearchIndexOperation<
   Traits extends Reflection.Model = {},
   TError extends Reflection.Model = ErrorResponse
 > = Foundations.Operation<
-  TParams &
-    ClientRequestIdHeader &
-    indexNamePath &
-    querySourceAuthorizationHeader,
+  TParams & ClientRequestIdHeader & indexNamePath,
   TResponse,
   Traits,
   TError
