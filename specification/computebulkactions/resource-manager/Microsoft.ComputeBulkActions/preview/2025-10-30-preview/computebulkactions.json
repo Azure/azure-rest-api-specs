@@ -172,7 +172,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/LaunchBulkInstancesOperationStatusResponse"
+              "$ref": "#/definitions/OperationStatus"
             }
           },
           "default": {
@@ -1447,6 +1447,37 @@
       "type": "string",
       "description": "Represents an Azure geography region where supported resource providers live."
     },
+    "Azure.ResourceManager.ResourceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource type.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          }
+        ]
+      },
+      "readOnly": true
+    },
     "BootDiagnostics": {
       "type": "object",
       "description": "Boot Diagnostics is a debugging feature which allows you to view Console Output and Screenshot to diagnose VM status. You can easily view the output of your console log. Azure also enables you to see a screenshot of the VM from the hypervisor.",
@@ -2679,38 +2710,6 @@
         "computeProfile"
       ]
     },
-    "LaunchBulkInstancesOperationStatusResponse": {
-      "type": "object",
-      "description": "Response for getting the status of a LaunchBulkInstancesOperation.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The unique id of the operation."
-        },
-        "status": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The status of the LaunchBulkInstancesOperation."
-        },
-        "startTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The start time of the LaunchBulkInstancesOperation."
-        },
-        "endTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The end time of the LaunchBulkInstancesOperation."
-        },
-        "error": {
-          "$ref": "#/definitions/Error",
-          "description": "Error details of the LaunchBulkInstancesOperation, if it exists."
-        }
-      },
-      "required": [
-        "id",
-        "status"
-      ]
-    },
     "LinuxConfiguration": {
       "type": "object",
       "description": "Specifies the Linux operating system settings on the virtual machine. For a list of supported Linux distributions, see [Linux on Azure-Endorsed Distributions](https://docs.microsoft.com/azure/virtual-machines/linux/endorsed-distros).",
@@ -3471,6 +3470,47 @@
         ]
       },
       "readOnly": true
+    },
+    "OperationStatus": {
+      "type": "object",
+      "description": "The template for omitting properties.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The operation status"
+        },
+        "id": {
+          "type": "string",
+          "description": "The unique identifier for the operationStatus resource"
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Operation start time",
+          "readOnly": true
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Operation complete time",
+          "readOnly": true
+        },
+        "percentComplete": {
+          "type": "number",
+          "format": "double",
+          "description": "The progress made toward completing the operation",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
+          "description": "Errors that occurred if the operation ended with Canceled or Failed status",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "status",
+        "id"
+      ]
     },
     "OptimizationPreference": {
       "type": "string",

@@ -325,26 +325,9 @@ model LaunchBulkInstancesOperation
   ...ResourcePlanProperty;
 }
 
+model OperationStatus is OmitProperties<ArmOperationStatus, "name">;
+
 // ------------------ Models --------------- //
-#suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Prefer using `utcDateTime` when representing a datetime unless an offset is necessary."
-@doc("Response for getting the status of a LaunchBulkInstancesOperation.")
-model LaunchBulkInstancesOperationStatusResponse {
-  @doc("The unique id of the operation.")
-  id: string;
-
-  @doc("The status of the LaunchBulkInstancesOperation.")
-  status: ProvisioningState;
-
-  @doc("The start time of the LaunchBulkInstancesOperation.")
-  startTime?: offsetDateTime;
-
-  @doc("The end time of the LaunchBulkInstancesOperation.")
-  endTime?: offsetDateTime;
-
-  @doc("Error details of the LaunchBulkInstancesOperation, if it exists.")
-  error?: Error;
-}
-
 @doc("Details of error.")
 model Error {
   @doc("Error code if it exists")
