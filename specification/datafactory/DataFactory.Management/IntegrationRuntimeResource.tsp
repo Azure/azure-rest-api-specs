@@ -317,7 +317,8 @@ interface IntegrationRuntimeResources {
    * Updates a self-hosted integration runtime node.
    */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/nodes/{nodeName}")
-  integrationRuntimeNodesUpdate is IntegrationRuntimesOps.CustomPatchSync<
+  @patch(#{ implicitOptionality: false })
+  integrationRuntimeNodesUpdate is IntegrationRuntimesOps.ActionSync<
     IntegrationRuntimeResource,
     UpdateIntegrationRuntimeNodeRequest,
     Response = ArmResponse<SelfHostedIntegrationRuntimeNode>,
@@ -402,7 +403,7 @@ interface IntegrationRuntimeResources {
 @@doc(IntegrationRuntimeResources.integrationRuntimeObjectMetadataGet::parameters.body,
   "The parameters for getting a SSIS object metadata."
 );
-@@doc(IntegrationRuntimeResources.integrationRuntimeNodesUpdate::parameters.properties,
+@@doc(IntegrationRuntimeResources.integrationRuntimeNodesUpdate::parameters.body,
   "The parameters for updating an integration runtime node."
 );
 @@doc(IntegrationRuntimeResources.enableInteractiveQuery::parameters.body,

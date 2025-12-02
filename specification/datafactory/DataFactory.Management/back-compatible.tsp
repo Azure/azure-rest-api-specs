@@ -1012,7 +1012,7 @@ using Microsoft.DataFactory;
 @@clientName(IntegrationRuntimeResources.integrationRuntimeNodesUpdate,
   "Update"
 );
-@@clientName(IntegrationRuntimeResources.integrationRuntimeNodesUpdate::parameters.properties,
+@@clientName(IntegrationRuntimeResources.integrationRuntimeNodesUpdate::parameters.body,
   "updateIntegrationRuntimeNodeRequest"
 );
 @@clientLocation(IntegrationRuntimeResources.getIpAddress,
