@@ -6,3 +6,7 @@ using Azure.ClientGenerator.Core;
 namespace ClientCustomizations;
 
 @@clientName(Microsoft.Management, "ManagementGroupsMgmtClient", "python");
+
+@@clientLocation(checkNameAvailability, "API", "go");
+@@clientLocation(startTenantBackfill, "API", "go");
+@@clientLocation(tenantBackfillStatus, "API", "go");
