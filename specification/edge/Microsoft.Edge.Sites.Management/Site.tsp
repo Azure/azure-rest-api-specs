@@ -1,6 +1,8 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 
+using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 
 namespace Microsoft.Edge;
@@ -82,7 +84,7 @@ model Site is ExtensionResource<SiteProperties> {
 interface SiteOps<Scope extends Azure.ResourceManager.Foundations.SimpleResource> {
   list is Extension.ListByTarget<Scope, Site>;
   get is Extension.Read<Scope, Site>;
-  create is Extension.CreateOrUpdateAsync<Scope, Site>;
+  createOrUpdate is Extension.CreateOrUpdateAsync<Scope, Site>;
   update is Extension.CustomPatchSync<Scope, Site, SiteUpdate>;
   delete is Extension.DeleteSync<Scope, Site>;
 }
@@ -104,3 +106,9 @@ alias ServiceGroup = Extension.ExternalResource<
 
 @armResourceOperations
 interface SitesByServiceGroup extends SiteOps<ServiceGroup> {}
+
+/*
+ * Following section is for overriding the client sdk method names
+ */
+@@clientName(Sites.list, "ListByResourceGroup");
+@@clientName(SitesByServiceGroup.list, "ListByServiceGroup");
