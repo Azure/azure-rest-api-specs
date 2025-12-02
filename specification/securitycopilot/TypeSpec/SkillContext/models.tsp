@@ -903,6 +903,14 @@ namespace SkillContext
 	}
 
 	@doc("")
+	model ChildEvaluationResult {
+		content: string;
+		sources: Array<SkillSource>;
+		isError: boolean;
+		additionalTools: Array<SkillDescriptor>;
+	}
+
+	@doc("")
 	enum EvaluationType {
 		`unknown`,
 		normal,

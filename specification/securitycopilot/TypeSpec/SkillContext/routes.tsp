@@ -315,6 +315,14 @@ op enqueueChildPrompt(
 ): string;
 
 @get
+@route("/skillContext/getChildPromptResult")
+@doc("")
+op getChildPromptResult(
+@header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
+@query promptId : string,
+): ChildEvaluationResult;
+
+@get
 @route("/skillContext/yieldForChildren")
 @doc("")
 op yieldForChildren(
