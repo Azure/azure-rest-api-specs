@@ -19,7 +19,7 @@ namespace Microsoft.Storage;
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(StorageAccount)
 @Http.Private.includeInapplicableMetadataInPayload(false)
-model StorageTaskAssignment extends BaseResource {
+model StorageTaskAssignment extends Resource {
   ...ResourceNameParameter<
     Resource = StorageTaskAssignment,
     KeyName = "storageTaskAssignmentName",
