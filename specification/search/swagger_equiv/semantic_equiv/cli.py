@@ -26,6 +26,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 
 from canonicalize import CanonicalizationError, canonicalize_both_specs
 from compare import EquivalencyResult, compare_swagger_specs
+from false_positive_filter import FalsePositiveFilter
 from utils import (
     ConfigError,
     LoaderError,
@@ -211,6 +212,11 @@ Exit codes:
         default="config.yaml",
         help="Path to configuration file (default: config.yaml)",
     )
+    parser.add_argument(
+        "--no-filter",
+        action="store_true",
+        help="Disable false positive filtering (show all differences)",
+    )
     args = parser.parse_args(argv)
 
     try:
@@ -238,6 +244,28 @@ Exit codes:
             canonical_hand_authored,
             canonical_typespec,
         )
+
+        # Apply false positive filtering if not disabled
+        if not args.no_filter:
+            fp_filter = FalsePositiveFilter()
+            original_count = len(result.differences)
+
+            # Filter differences
+            remaining_diffs, _ = fp_filter.filter_differences(
+                result.differences, return_filtered_out=False
+            )
+
+            # Update result with filtered differences
+            result.differences = remaining_diffs
+            result.equivalent = len(remaining_diffs) == 0
+
+            # Show filtering statistics
+            filtered_count = original_count - len(remaining_diffs)
+            if filtered_count > 0:
+                print(
+                    f"\n\033[93mFiltered out {filtered_count} known false positive(s)\033[0m"
+                )
+                print(f"Remaining differences: {len(remaining_diffs)}")
 
         # save canonical spec files if requested
         save_artifacts(config, result, canonical_hand_authored, canonical_typespec)

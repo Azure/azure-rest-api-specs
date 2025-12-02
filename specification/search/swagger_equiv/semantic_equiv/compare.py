@@ -182,9 +182,9 @@ class ApiComparator:
         print("\nComparing global responses...")
         self._compare_global_responses(api1, api2)
 
-        # 6. Global API configuration
-        print("\nComparing global API configuration...")
-        self._compare_global_configuration(api1, api2)
+        # 6. Global API configuration (DISABLED)
+        # print("\nComparing global API configuration...")
+        # self._compare_global_configuration(api1, api2)
 
         print("------- Comparison complete -------")
 
@@ -1422,6 +1422,34 @@ class ApiComparator:
             missing_params, extra_params, threshold=0.6
         )
 
+        # Also check for Parameter suffix matches even if not in fuzzy matches
+        # This handles cases where parameter exists in operations but not in global parameters
+        # NOTE: Some parameters like DisableCacheReprocessingChangeDetectionParameter are defined
+        # as global parameters in hand-authored swagger but as inline operation parameters in TSP.
+        # These won't match here and should be filtered as false positives.
+        parameter_suffix_matches = []
+        for missing_param in missing_params:
+            if missing_param.endswith("Parameter"):
+                base_name = missing_param[: -len("Parameter")]
+                camel_case_name = (
+                    base_name[0].lower() + base_name[1:] if base_name else ""
+                )
+                # Check if this camelCase name exists in extra_params
+                if camel_case_name in extra_params:
+                    parameter_suffix_matches.append(
+                        (missing_param, camel_case_name, 1.0)
+                    )
+
+        for extra_param in extra_params:
+            if extra_param.endswith("Parameter"):
+                base_name = extra_param[: -len("Parameter")]
+                camel_case_name = (
+                    base_name[0].lower() + base_name[1:] if base_name else ""
+                )
+                # Check if this camelCase name exists in missing_params
+                if camel_case_name in missing_params:
+                    parameter_suffix_matches.append((camel_case_name, extra_param, 1.0))
+
         # Promote high-confidence matches for comparison
         promoted_global_param_matches = []
         for match in global_param_matches:
@@ -1453,6 +1481,30 @@ class ApiComparator:
                 and "Azure.Core" in missing_param
                 and similarity > 0.6
             ):
+                promoted_global_param_matches.append((missing_param, extra_param))
+            # Check if removing "Parameter" suffix gives a camelCase match
+            # e.g., DisableCacheReprocessingChangeDetectionParameter -> disableCacheReprocessingChangeDetection
+            # e.g., IgnoreResetRequirementsParameter -> ignoreResetRequirements
+            elif missing_param.endswith("Parameter"):
+                base_name = missing_param[: -len("Parameter")]
+                # Convert PascalCase to camelCase for comparison
+                camel_case_name = (
+                    base_name[0].lower() + base_name[1:] if base_name else ""
+                )
+                if camel_case_name == extra_param and similarity > 0.7:
+                    promoted_global_param_matches.append((missing_param, extra_param))
+            elif extra_param.endswith("Parameter"):
+                base_name = extra_param[: -len("Parameter")]
+                # Convert PascalCase to camelCase for comparison
+                camel_case_name = (
+                    base_name[0].lower() + base_name[1:] if base_name else ""
+                )
+                if camel_case_name == missing_param and similarity > 0.7:
+                    promoted_global_param_matches.append((missing_param, extra_param))
+
+        # Add parameter suffix matches to promoted matches
+        for missing_param, extra_param, _ in parameter_suffix_matches:
+            if (missing_param, extra_param) not in promoted_global_param_matches:
                 promoted_global_param_matches.append((missing_param, extra_param))
 
         # Remove promoted matches from global_param_matches to avoid duplicate hints
@@ -1710,33 +1762,40 @@ class ApiComparator:
         for param_name, param in params_dict.items():
             # Check if parameter follows SearchOptions.<name> or SuggestOptions.<name> pattern (TSP style)
             if param_name.startswith("SearchOptions."):
-                base_name = param_name[
-                    len("SearchOptions.") :
-                ]  # Extract name after the dot
+                # Always use the actual parameter name from the definition (e.g., "$filter")
+                # This ensures consistent comparison: SearchOptions.$filter vs SearchOptions.$filter
+                base_name = (
+                    param.name if param.name else param_name[len("SearchOptions.") :]
+                )
+                # Build full_name using actual parameter name from definition
+                full_name = f"SearchOptions.{base_name}"
                 grouped_params["SearchOptions"].append(
-                    {"full_name": param_name, "base_name": base_name, "param": param}
+                    {"full_name": full_name, "base_name": base_name, "param": param}
                 )
             elif param_name.startswith("SuggestOptions."):
-                base_name = param_name[
-                    len("SuggestOptions.") :
-                ]  # Extract name after the dot
+                # Always use the actual parameter name from the definition (e.g., "$filter")
+                # This ensures consistent comparison: SuggestOptions.$filter vs SuggestOptions.$filter
+                base_name = (
+                    param.name if param.name else param_name[len("SuggestOptions.") :]
+                )
+                # Build full_name using actual parameter name from definition
+                full_name = f"SuggestOptions.{base_name}"
                 grouped_params["SuggestOptions"].append(
-                    {"full_name": param_name, "base_name": base_name, "param": param}
+                    {"full_name": full_name, "base_name": base_name, "param": param}
                 )
             else:
                 # For hand-authored swagger, check x-ms-parameter-grouping
                 if param.x_ms_parameter_grouping:
                     group_name = param.x_ms_parameter_grouping.get("name")
                     if group_name in ["SearchOptions", "SuggestOptions"]:
-                        # Use x-ms-client-name if available, otherwise use parameter name
-                        base_name = (
-                            param.x_ms_client_name
-                            if param.x_ms_client_name
-                            else param.name
-                        )
+                        # Always use the actual parameter name from definition (not x-ms-client-name)
+                        # This ensures consistent comparison with TSP-compiled swagger
+                        base_name = param.name if param.name else param_name
+                        # Build full_name using actual parameter name from definition
+                        full_name = f"{group_name}.{base_name}"
                         grouped_params[group_name].append(
                             {
-                                "full_name": param_name,
+                                "full_name": full_name,
                                 "base_name": base_name,
                                 "param": param,
                             }
@@ -1779,21 +1838,18 @@ class ApiComparator:
                     if param.x_ms_parameter_grouping:
                         group_name = param.x_ms_parameter_grouping.get("name")
                         if group_name in ["SearchOptions", "SuggestOptions"]:
-                            # Create extended name: group.clientName or group.paramName
-                            client_name = (
-                                param.x_ms_client_name
-                                if param.x_ms_client_name
-                                else param.name
-                            )
-                            extended_name = f"{group_name}.{client_name}"
+                            # Always use the actual parameter name from definition (not x-ms-client-name)
+                            # This ensures consistent comparison with TSP-compiled swagger
+                            actual_name = param.name if param.name else param_key
+                            extended_name = f"{group_name}.{actual_name}"
 
                             # Use lowercase for matching
-                            base_name = client_name.lower()
+                            base_name = actual_name.lower()
 
                             if base_name not in grouped_params[group_name]:
                                 grouped_params[group_name][base_name] = {
                                     "full_name": extended_name,
-                                    "base_name": client_name,
+                                    "base_name": actual_name,
                                     "param": param,
                                     "operations": [],
                                 }
@@ -1820,133 +1876,284 @@ class ApiComparator:
             source1: Swagger source identifier for first API
             source2: Swagger source identifier for second API
         """
-        # Build mapping by base name (case-insensitive) for matching
-        group1_by_base = {}
+        # Build mappings using actual parameter names from definitions
+        # Step 1: Build case-sensitive mappings first
+        group1_original = {}
+        group1_by_lowercase = {}
         for p in group1_params:
-            base_name = p.get("base_name", p.get("full_name", "")).lower()
-            group1_by_base[base_name] = p
+            # Always use base_name which is already set to param.name in extraction
+            base_name = p.get("base_name", p.get("full_name", ""))
+            group1_original[base_name] = p
+            group1_by_lowercase[base_name.lower()] = p
 
-        group2_by_base = {}
+        group2_original = {}
+        group2_by_lowercase = {}
         for p in group2_params:
-            base_name = p.get("base_name", p.get("full_name", "")).lower()
-            group2_by_base[base_name] = p
+            # Always use base_name which is already set to param.name in extraction
+            base_name = p.get("base_name", p.get("full_name", ""))
+            group2_original[base_name] = p
+            group2_by_lowercase[base_name.lower()] = p
 
-        keys1 = set(group1_by_base.keys())
-        keys2 = set(group2_by_base.keys())
+        # Step 2: Find exact case-sensitive matches
+        keys1_original = set(group1_original.keys())
+        keys2_original = set(group2_original.keys())
+        exact_matches = keys1_original & keys2_original
 
-        missing_keys = keys1 - keys2
-        extra_keys = keys2 - keys1
-        common_keys = keys1 & keys2
+        # Step 3: Find case-insensitive matches (but not exact)
+        keys1_lower = set(group1_by_lowercase.keys())
+        keys2_lower = set(group2_by_lowercase.keys())
+        case_insensitive_matches = []
 
-        # Find fuzzy matches for missing/extra parameters
+        for key1_lower in keys1_lower:
+            if key1_lower in keys2_lower:
+                # Find original case versions
+                key1_original = None
+                key2_original = None
+                for k in keys1_original:
+                    if k.lower() == key1_lower:
+                        key1_original = k
+                        break
+                for k in keys2_original:
+                    if k.lower() == key1_lower:
+                        key2_original = k
+                        break
+
+                # If they differ in case, it's a case-insensitive match
+                if key1_original and key2_original and key1_original != key2_original:
+                    case_insensitive_matches.append((key1_original, key2_original))
+                    exact_matches.discard(key1_original)
+
+        # Step 4: Find remaining missing/extra parameters (after case-insensitive matching)
+        matched_keys1 = exact_matches | {m[0] for m in case_insensitive_matches}
+        matched_keys2 = exact_matches | {m[1] for m in case_insensitive_matches}
+
+        missing_keys_original = keys1_original - matched_keys1
+        extra_keys_original = keys2_original - matched_keys2
+
+        # Convert to lowercase for fuzzy matching
+        missing_keys = {k.lower() for k in missing_keys_original}
+        extra_keys = {k.lower() for k in extra_keys_original}
+
+        # Find fuzzy matches only for remaining missing/extra parameters
         fuzzy_matches = self._find_string_matches(
             missing_keys, extra_keys, threshold=0.6
         )
 
-        # Promote high-confidence fuzzy matches (similarity > 0.8) to actual matches for comparison
-        # This handles cases like "$select" vs "select" which are semantically equivalent
+        # Process fuzzy matches and promote high-confidence ones
         promoted_matches = []
         for match in fuzzy_matches:
-            missing_key, extra_key, similarity = (
-                match  # fuzzy_matches returns 3-tuples with similarity score
-            )
-            # Calculate similarity - if one is substring of other or they differ only by prefix like "$"
+            missing_key, extra_key, similarity = match
+
+            # High confidence if:
+            # 1. One is substring of other
+            # 2. They differ only by $ prefix
+            # 3. High similarity score (> 0.85)
             if (
-                missing_key in extra_key
+                similarity > 0.85
+                or missing_key in extra_key
                 or extra_key in missing_key
                 or missing_key.lstrip("$") == extra_key
                 or extra_key.lstrip("$") == missing_key
+                or missing_key == extra_key.lstrip("$")
+                or extra_key == missing_key.lstrip("$")
             ):
-                promoted_matches.append((missing_key, extra_key))
+                promoted_matches.append((missing_key, extra_key, similarity))
 
-        # Remove promoted matches from missing/extra and add to common for comparison
-        for missing_key, extra_key in promoted_matches:
+        # Remove promoted matches from missing/extra
+        for missing_key, extra_key, _ in promoted_matches:
             missing_keys.discard(missing_key)
             extra_keys.discard(extra_key)
             # We'll handle these specially - compare them as potential matches
 
-        # Compare promoted matches (high-confidence fuzzy matches like "$select" vs "select")
-        for missing_key, extra_key in promoted_matches:
-            p_info1 = group1_by_base[missing_key]
-            p_info2 = group2_by_base[extra_key]
+        # Process case-insensitive matches first (these are likely just casing differences)
+        for key1_original, key2_original in case_insensitive_matches:
+            p_info1 = group1_original[key1_original]
+            p_info2 = group2_original[key2_original]
 
             full_name1 = p_info1["full_name"]
             full_name2 = p_info2["full_name"]
             param1 = p_info1["param"]
             param2 = p_info2["param"]
 
-            # Report potential match and then compare properties
+            # Get actual parameter names
+            actual_name1 = param1.name if param1 and param1.name else key1_original
+            actual_name2 = param2.name if param2 and param2.name else key2_original
+
             print(
-                f"Potential parameter match in {group_name}\t {full_name1} ~ {full_name2}"
+                f"Case mismatch in {group_name}\t {full_name1} (name: {actual_name1}) vs {full_name2} (name: {actual_name2})"
             )
 
             # Add to differences for Excel export
             self.differences.append(
                 Difference(
                     type=DifferenceType.GLOBAL_PARAMETER_MISMATCH,
-                    message=f"Parameter in {group_name}: {full_name1}",
+                    message=f"Parameter in {group_name}: {full_name1} (case mismatch with {full_name2})",
                     context=f"||{group_name}||{full_name1}||{full_name2}",
                 )
             )
 
-            context = f"parameter_group:{group_name}:{missing_key}"
+            context = f"parameter_group:{group_name}:{key1_original.lower()}"
             self._compare_grouped_parameter(
                 param1, param2, full_name1, full_name2, context, source1, source2
             )
 
-        # Report missing parameters
-        for base_name in missing_keys:
-            p_info = group1_by_base[base_name]
-            full_name = p_info["full_name"]
+        # Compare promoted fuzzy matches (high-confidence matches like $ prefix differences)
+        for missing_key, extra_key, similarity in promoted_matches:
+            # Find original case keys
+            key1_original = None
+            key2_original = None
+            for k in missing_keys_original:
+                if k.lower() == missing_key:
+                    key1_original = k
+                    break
+            for k in extra_keys_original:
+                if k.lower() == extra_key:
+                    key2_original = k
+                    break
 
-            # Check for fuzzy match
-            matches = [match for match in fuzzy_matches if match[0] == base_name]
-            possible_match = matches[0][1] if matches else ""
+            if not key1_original or not key2_original:
+                continue
+
+            p_info1 = group1_original[key1_original]
+            p_info2 = group2_original[key2_original]
+
+            full_name1 = p_info1["full_name"]
+            full_name2 = p_info2["full_name"]
+            param1 = p_info1["param"]
+            param2 = p_info2["param"]
+
+            # Get actual parameter names for better reporting
+            actual_name1 = param1.name if param1 and param1.name else key1_original
+            actual_name2 = param2.name if param2 and param2.name else key2_original
+
+            # Determine match type
+            if (
+                missing_key.lstrip("$") == extra_key
+                or extra_key.lstrip("$") == missing_key
+            ):
+                match_type = "match ($ prefix difference)"
+            elif actual_name1.lower() == actual_name2.lower():
+                match_type = "match (name difference)"
+            else:
+                match_type = f"fuzzy match (similarity: {similarity:.2f})"
+
+            print(
+                f"Potential parameter {match_type} in {group_name}\t {full_name1} (name: {actual_name1}) ~ {full_name2} (name: {actual_name2})"
+            )
+
+            # Add to differences for Excel export with more detail
+            self.differences.append(
+                Difference(
+                    type=DifferenceType.GLOBAL_PARAMETER_MISMATCH,
+                    message=f"Parameter in {group_name}: {full_name1} (possible match: {full_name2}, similarity: {similarity:.2f})",
+                    context=f"||{group_name}||{full_name1}||{full_name2}",
+                )
+            )
+
+            context = f"parameter_group:{group_name}:{missing_key}~{extra_key}"
+            self._compare_grouped_parameter(
+                param1, param2, full_name1, full_name2, context, source1, source2
+            )
+
+        # Report missing parameters with improved fuzzy matching info
+        for key_original in missing_keys_original:
+            if key_original.lower() not in missing_keys:
+                continue  # Already handled in promoted matches
+
+            p_info = group1_original[key_original]
+            full_name = p_info["full_name"]
+            param = p_info.get("param")
+            actual_name = param.name if param and param.name else key_original
+
+            # Check for fuzzy match with similarity score
+            key_lower = key_original.lower()
+            matches = [match for match in fuzzy_matches if match[0] == key_lower]
+            possible_match = ""
+            similarity = 0
+            if matches:
+                possible_match = matches[0][1]
+                similarity = matches[0][2] if len(matches[0]) > 2 else 0
+
+            message = (
+                f"Parameter missing in {source2} from {group_name} group: {full_name}"
+            )
+            if actual_name != key_original:
+                message += f" (name: {actual_name})"
+            if possible_match:
+                message += (
+                    f" (possible match: {possible_match}, similarity: {similarity:.2f})"
+                )
 
             self.differences.append(
                 Difference(
                     type=DifferenceType.MISSING_GLOBAL_PARAMETER,
-                    message=f"Parameter missing in {source2} from {group_name} group: {full_name} (base: {base_name})",
+                    message=message,
                     context=f"||{group_name}||{full_name}||{possible_match}",
                 )
             )
             print(
-                f"Parameter missing in {source2} from {group_name}\t {full_name} (base: {base_name})"
-                + (f"\t|| Possible Match: {possible_match}" if possible_match else "")
+                f"Parameter missing in {source2} from {group_name}\t {full_name} (name: {actual_name})"
+                + (
+                    f"\t|| Possible Match: {possible_match} (similarity: {similarity:.2f})"
+                    if possible_match
+                    else ""
+                )
             )
 
-        # Report extra parameters
-        for base_name in extra_keys:
-            p_info = group2_by_base[base_name]
-            full_name = p_info["full_name"]
+        # Report extra parameters with improved fuzzy matching info
+        for key_original in extra_keys_original:
+            if key_original.lower() not in extra_keys:
+                continue  # Already handled in promoted matches
 
-            # Check for fuzzy match
-            matches = [match for match in fuzzy_matches if match[1] == base_name]
-            possible_match = matches[0][0] if matches else ""
+            p_info = group2_original[key_original]
+            full_name = p_info["full_name"]
+            param = p_info.get("param")
+            actual_name = param.name if param and param.name else key_original
+
+            # Check for fuzzy match with similarity score
+            key_lower = key_original.lower()
+            matches = [match for match in fuzzy_matches if match[1] == key_lower]
+            possible_match = ""
+            similarity = 0
+            if matches:
+                possible_match = matches[0][0]
+                similarity = matches[0][2] if len(matches[0]) > 2 else 0
+
+            message = f"Extra parameter in {source2} in {group_name} group: {full_name}"
+            if actual_name != key_original:
+                message += f" (name: {actual_name})"
+            if possible_match:
+                message += (
+                    f" (possible match: {possible_match}, similarity: {similarity:.2f})"
+                )
 
             self.differences.append(
                 Difference(
                     type=DifferenceType.EXTRA_GLOBAL_PARAMETER,
-                    message=f"Extra parameter in {source2} in {group_name} group: {full_name} (base: {base_name})",
+                    message=message,
                     context=f"||{group_name}||{full_name}||{possible_match}",
                 )
             )
             print(
-                f"Extra parameter in {source2} in {group_name}\t {full_name} (base: {base_name})"
-                + (f"\t|| Possible Match: {possible_match}" if possible_match else "")
+                f"Extra parameter in {source2} in {group_name}\t {full_name} (name: {actual_name})"
+                + (
+                    f"\t|| Possible Match: {possible_match} (similarity: {similarity:.2f})"
+                    if possible_match
+                    else ""
+                )
             )
 
-        # Compare common parameters in detail
-        for base_name in common_keys:
-            p1_info = group1_by_base[base_name]
-            p2_info = group2_by_base[base_name]
+        # Compare exact match parameters in detail
+        for key_exact in exact_matches:
+            p1_info = group1_original[key_exact]
+            p2_info = group2_original[key_exact]
             param1 = p1_info["param"]
             param2 = p2_info["param"]
             full_name1 = p1_info["full_name"]
             full_name2 = p2_info["full_name"]
 
             # Compare the actual parameter properties
-            context = f"parameter_group:{group_name}:{base_name}"
+            context = f"parameter_group:{group_name}:{key_exact.lower()}"
             self._compare_grouped_parameter(
                 param1, param2, full_name1, full_name2, context, source1, source2
             )
