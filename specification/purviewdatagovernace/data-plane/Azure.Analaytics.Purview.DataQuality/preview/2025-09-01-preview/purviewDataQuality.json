@@ -243,54 +243,6 @@
             "$ref": "./examples/Alert_GetAlerts.json"
           }
         }
-      },
-      "post": {
-        "operationId": "CreateAlert",
-        "tags": [
-          "Alerts"
-        ],
-        "description": "Creates an alert scoped to the specified business domain.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "businessDomainId",
-            "in": "path",
-            "description": "Unique identifier for the business domain containing the alerts",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "request",
-            "in": "body",
-            "description": "Alert payload to create",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Alert"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
-            "schema": {
-              "$ref": "#/definitions/Alert"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
       }
     },
     "/business-domains/{businessDomainId}/alerts/{alertId}": {
@@ -345,7 +297,7 @@
         "tags": [
           "Alerts"
         ],
-        "description": "Replaces an existing alert definition within the specified business domain.",
+        "description": "Creates a new alert or updates an existing alert within the specified business domain. Returns 201 Created if the alert was created, or 200 OK if it was updated.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -360,14 +312,14 @@
           {
             "name": "alertId",
             "in": "path",
-            "description": "Unique identifier of the alert to update",
+            "description": "Unique identifier of the alert to create or update",
             "required": true,
             "type": "string"
           },
           {
             "name": "request",
             "in": "body",
-            "description": "Updated alert payload",
+            "description": "Alert payload to create or update",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Alert"
@@ -392,6 +344,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Alert_Update": {
+            "$ref": "./examples/Alert_Update.json"
           }
         }
       },
@@ -2189,20 +2146,21 @@
           {
             "name": "businessDomainId",
             "in": "path",
-            "description": "Unique identifier for the business domain",
+            "description": "Unique identifier for the business domain containing the data product",
             "required": true,
             "type": "string"
           },
           {
             "name": "scheduleId",
             "in": "path",
-            "description": "Unique identifier of the schedule",
+            "description": "Unique identifier for the scheduled job within the business domain",
             "required": true,
             "type": "string"
           },
           {
-            "name": "body",
+            "name": "request",
             "in": "body",
+            "description": "Scan configuration request payload",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ScanDTO"

@@ -867,37 +867,6 @@ namespace PurviewDataQuality {
   >;
 
   /**
-   * Create a new alert within a business domain.
-   */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing service operation."
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing service operation."
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Existing service operation."
-  @tag("Alerts")
-  @doc("Creates an alert scoped to the specified business domain.")
-  @route("/business-domains/{businessDomainId}/alerts")
-  @post
-  op createAlert is RpcOperation<
-    {
-      @doc("Unique identifier for the business domain containing the alerts")
-      @path
-      businessDomainId: string;
-
-      @doc("Alert payload to create")
-      @body
-      request: Alert;
-    },
-    {
-      @statusCode
-      statusCode: 201;
-
-      @doc("Created alert entity")
-      @body
-      response: Alert;
-    }
-  >;
-
-  /**
    * Get a specific alert by identifier.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing service operation."
@@ -922,14 +891,19 @@ namespace PurviewDataQuality {
   >;
 
   /**
-   * Update an existing alert.
+   * Create or update an alert (upsert operation).
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing service operation."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing service operation."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Existing service operation."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" ""
   @tag("Alerts")
-  @doc("Replaces an existing alert definition within the specified business domain.")
+  @extension(
+    "x-ms-examples",
+    #{ Alert_Update: #{ $ref: "./examples/Alert_Update.json" } }
+  )
+  @doc("Creates a new alert or updates an existing alert within the specified business domain. Returns 201 Created if the alert was created, or 200 OK if it was updated.")
   @route("/business-domains/{businessDomainId}/alerts/{alertId}")
   @put
   op updateAlert is RpcOperation<
@@ -938,15 +912,19 @@ namespace PurviewDataQuality {
       @path
       businessDomainId: string;
 
-      @doc("Unique identifier of the alert to update")
+      @doc("Unique identifier of the alert to create or update")
       @path
       alertId: string;
 
-      @doc("Updated alert payload")
+      @doc("Alert payload to create or update")
       @body
       request: Alert;
     },
-    Alert
+    {
+      @doc("Alert entity (returns 201 Created if alert was created, 200 OK if updated)")
+      @body
+      response: Alert;
+    }
   >;
 
   /**
