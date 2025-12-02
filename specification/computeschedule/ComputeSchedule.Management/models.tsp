@@ -146,6 +146,10 @@ model RetryPolicy {
 
   @doc("Retry window in minutes for user request")
   retryWindowInMinutes?: int32;
+
+  @added(Microsoft.ComputeSchedule.Versions.`2026-01-01-preview`)
+  @doc("Action to take on failure")
+  onFailureAction?: ResourceOperationType;
 }
 
 @doc("Extra details needed to run the user's request")
@@ -164,6 +168,16 @@ model ResourceOperationError {
 
   @doc("Detailed message about the error")
   errorDetails: string;
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2026-01-01-preview`)
+@doc("Describes the fallback operation that was performed")
+model FallbackOperation {
+  @doc("The last operation type that was performed as a fallback")
+  lastOpType?: ResourceOperationType;
+
+  @doc("The status of the fallback operation")
+  status?: string;
 }
 
 @doc("The details of a response from an operation on a resource")
@@ -200,6 +214,10 @@ model ResourceOperationDetails {
 
   @doc("Operation level errors if they exist")
   resourceOperationError?: ResourceOperationError;
+
+  @added(Microsoft.ComputeSchedule.Versions.`2026-01-01-preview`)
+  @doc("Fallback operation details if a fallback was performed")
+  fallbackOperation?: FallbackOperation;
 
   #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Prefer using `utcDateTime` when representing a datetime unless an offset is necessary."
   @doc("Time the operation was complete if errors are null")
