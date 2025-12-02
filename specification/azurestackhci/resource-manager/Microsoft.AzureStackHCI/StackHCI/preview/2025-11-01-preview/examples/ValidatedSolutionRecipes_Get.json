@@ -1,15 +1,18 @@
 {
-  "title": "ValidatedSolutionRecipes_Get",
   "operationId": "ValidatedSolutionRecipes_Get",
   "parameters": {
     "api-version": "2025-11-01-preview",
-    "subscriptionId": "b8d594e5-51f3-4c11-9c54-a7771b81c712",
     "location": "westus2",
+    "subscriptionId": "b8d594e5-51f3-4c11-9c54-a7771b81c712",
     "validatedSolutionRecipeName": "10.2408.0"
   },
+  "title": "ValidatedSolutionRecipes_Get",
   "responses": {
     "200": {
       "body": {
+        "name": "10.2408.0",
+        "type": "Microsoft.AzureStackHCI/ValidatedSolutionRecipes",
+        "id": "/subscriptions/b8d594e5-51f3-4c11-9c54-a7771b81c712/providers/Microsoft.AzureStackHCI/validatedSolutionRecipes/10.2408.0",
         "properties": {
           "recipeContent": {
             "info": {
@@ -38,152 +41,143 @@
               {
                 "name": "ComposedImage",
                 "type": "Platform",
-                "requiredVersion": "10.2411.0.4027",
                 "installOrder": 10,
-                "tags": [
-                  "Azure"
-                ],
                 "payloads": [
                   {
-                    "identifier": "ComposedImage_ISO",
-                    "hash": "9542EB842C768EC8215578A98C04C2FC0E1AAE750C8DECE362226C8C4488E8A6",
                     "fileName": "ComposedImage_ISO.iso",
+                    "hash": "9542EB842C768EC8215578A98C04C2FC0E1AAE750C8DECE362226C8C4488E8A6",
+                    "identifier": "ComposedImage_ISO",
                     "url": "http://foo.bar.com"
                   },
                   {
-                    "identifier": "ComposedImage_TargetOSBundle",
-                    "hash": "9542EB842C768EC8215578A98C04C2FC0E1AAE750C8DECE362226C8C4488E8A6",
                     "fileName": "ComposedImage_TargetOSBundle.iso",
+                    "hash": "9542EB842C768EC8215578A98C04C2FC0E1AAE750C8DECE362226C8C4488E8A6",
+                    "identifier": "ComposedImage_TargetOSBundle",
                     "url": "http://foo.bar.com"
                   }
+                ],
+                "requiredVersion": "10.2411.0.4027",
+                "tags": [
+                  "Azure"
                 ]
               },
               {
                 "name": "PlatformUpdate",
                 "type": "Platform",
-                "requiredVersion": "10.2411.0.4027",
                 "installOrder": 15,
-                "tags": [
-                  "Azure"
-                ],
                 "payloads": [
                   {
-                    "identifier": "PlatformUpdatePackage_zip",
-                    "hash": "9542EB842C768EC8215578A98C04C2FC0E1AAE750C8DECE362226C8C4488E8A6",
                     "fileName": "PlatformUpdatePackage_zip.zip",
+                    "hash": "9542EB842C768EC8215578A98C04C2FC0E1AAE750C8DECE362226C8C4488E8A6",
+                    "identifier": "PlatformUpdatePackage_zip",
                     "url": "http://foo.bar.com"
                   }
+                ],
+                "requiredVersion": "10.2411.0.4027",
+                "tags": [
+                  "Azure"
                 ]
               },
               {
                 "name": "CloudDeployment",
                 "type": "Services",
-                "requiredVersion": "22.2411.0.9027",
                 "installOrder": 20,
-                "tags": [
-                  "Azure"
-                ],
                 "payloads": [
                   {
-                    "identifier": "CloudDeployment_zip",
-                    "hash": "9542EB842C768EC8215578A98C04C2FC0E1AAE750C8DECE362226C8C4488E8A6",
                     "fileName": "CloudDeployment_zip.zip",
+                    "hash": "9542EB842C768EC8215578A98C04C2FC0E1AAE750C8DECE362226C8C4488E8A6",
+                    "identifier": "CloudDeployment_zip",
                     "url": "http://foo.bar.com"
                   },
                   {
-                    "identifier": "VerifyCloudDeployment_ps1",
-                    "hash": "9542EB842C768EC8215578A98C04C2FC0E1AAE750C8DECE362226C8C4488E8A6",
                     "fileName": "VerifyCloudDeployment_ps1.ps1",
+                    "hash": "9542EB842C768EC8215578A98C04C2FC0E1AAE750C8DECE362226C8C4488E8A6",
+                    "identifier": "VerifyCloudDeployment_ps1",
                     "url": "http://foo.bar.com"
                   },
                   {
-                    "identifier": "BootstrapCloudDeploymentTool_ps1",
-                    "hash": "9542EB842C768EC8215578A98C04C2FC0E1AAE750C8DECE362226C8C4488E8A6",
                     "fileName": "BootstrapCloudDeploymentTool_ps1.ps1",
+                    "hash": "9542EB842C768EC8215578A98C04C2FC0E1AAE750C8DECE362226C8C4488E8A6",
+                    "identifier": "BootstrapCloudDeploymentTool_ps1",
                     "url": "http://foo.bar.com"
                   }
+                ],
+                "requiredVersion": "22.2411.0.9027",
+                "tags": [
+                  "Azure"
                 ]
               },
               {
                 "name": "ServicesUpdate",
                 "type": "Services",
-                "requiredVersion": "22.2411.0.9027",
                 "installOrder": 25,
-                "tags": [
-                  "Azure"
-                ],
                 "payloads": [
                   {
-                    "identifier": "Services_zip",
-                    "hash": "9542EB842C768EC8215578A98C04C2FC0E1AAE750C8DECE362226C8C4488E8A6",
                     "fileName": "Services_zip.zip",
+                    "hash": "9542EB842C768EC8215578A98C04C2FC0E1AAE750C8DECE362226C8C4488E8A6",
+                    "identifier": "Services_zip",
                     "url": "http://foo.bar.com"
                   }
+                ],
+                "requiredVersion": "22.2411.0.9027",
+                "tags": [
+                  "Azure"
                 ]
               },
               {
                 "name": "AzureEdgeTelemetryAndDiagnostics",
                 "type": "ArcExtension",
                 "installOrder": 80,
+                "metadata": {
+                  "enableAutomaticUpgrade": true,
+                  "extensionType": "TelemetryAndDiagnostics",
+                  "lcmUpdate": false,
+                  "publisher": "Microsoft.AzureStack.Observability"
+                },
                 "tags": [
                   "Azure"
-                ],
-                "metadata": {
-                  "extensionType": "TelemetryAndDiagnostics",
-                  "publisher": "Microsoft.AzureStack.Observability",
-                  "enableAutomaticUpgrade": true,
-                  "lcmUpdate": false
-                }
+                ]
               },
               {
                 "name": "AzureEdgeRemoteSupport",
                 "type": "ArcExtension",
                 "installOrder": 81,
+                "metadata": {
+                  "enableAutomaticUpgrade": true,
+                  "extensionType": "EdgeRemoteSupport",
+                  "lcmUpdate": false,
+                  "publisher": "Microsoft.AzureStack.Observability"
+                },
                 "tags": [
                   "Azure"
-                ],
-                "metadata": {
-                  "extensionType": "EdgeRemoteSupport",
-                  "publisher": "Microsoft.AzureStack.Observability",
-                  "enableAutomaticUpgrade": true,
-                  "lcmUpdate": false
-                }
+                ]
               },
               {
                 "name": "AzureEdgeDeviceManagement",
                 "type": "ArcExtension",
-                "requiredVersion": "1.2408.0.3024",
                 "installOrder": 82,
+                "metadata": {
+                  "enableAutomaticUpgrade": false,
+                  "extensionType": "DeviceManagementExtension",
+                  "lcmUpdate": false,
+                  "publisher": "Microsoft.Edge"
+                },
+                "requiredVersion": "1.2408.0.3024",
                 "tags": [
                   "Azure"
-                ],
-                "metadata": {
-                  "extensionType": "DeviceManagementExtension",
-                  "publisher": "Microsoft.Edge",
-                  "enableAutomaticUpgrade": false,
-                  "lcmUpdate": false
-                }
+                ]
               },
               {
                 "name": "AzureEdgeLifecycleManager",
                 "type": "ArcExtension",
-                "requiredVersion": "30.2408.2.687",
                 "installOrder": 83,
-                "tags": [
-                  "Azure"
-                ],
                 "metadata": {
-                  "extensionType": "LcmController",
-                  "publisher": "Microsoft.AzureStack.Orchestration",
                   "enableAutomaticUpgrade": false,
-                  "lcmUpdate": false
-                }
-              },
-              {
-                "name": "arcappliance",
-                "type": "AzCliExtension",
-                "requiredVersion": "1.3.0",
-                "installOrder": 210,
+                  "extensionType": "LcmController",
+                  "lcmUpdate": false,
+                  "publisher": "Microsoft.AzureStack.Orchestration"
+                },
+                "requiredVersion": "30.2408.2.687",
                 "tags": [
                   "Azure"
                 ]
@@ -191,8 +185,17 @@
               {
                 "name": "arcappliance",
                 "type": "AzCliExtension",
+                "installOrder": 210,
                 "requiredVersion": "1.3.0",
+                "tags": [
+                  "Azure"
+                ]
+              },
+              {
+                "name": "arcappliance",
+                "type": "AzCliExtension",
                 "installOrder": 211,
+                "requiredVersion": "1.3.0",
                 "tags": [
                   "Azure.local"
                 ]
@@ -200,8 +203,8 @@
               {
                 "name": "k8s-extension",
                 "type": "AzCliExtension",
-                "requiredVersion": "1.4.5",
                 "installOrder": 220,
+                "requiredVersion": "1.4.5",
                 "tags": [
                   "Azure",
                   "Azure.local"
@@ -210,8 +213,8 @@
               {
                 "name": "customlocation",
                 "type": "AzCliExtension",
-                "requiredVersion": "0.1.3",
                 "installOrder": 230,
+                "requiredVersion": "0.1.3",
                 "tags": [
                   "Azure",
                   "Azure.local"
@@ -220,21 +223,21 @@
               {
                 "name": "stack-hci-vm",
                 "type": "AzCliExtension",
-                "requiredVersion": "1.4.2",
                 "installOrder": 240,
+                "metadata": {
+                  "previewSource": "https://hciarcvmsstorage.z13.web.core.windows.net/cli-extensions/stack_hci_vm-1.4.2-py3-none-any.whl"
+                },
+                "requiredVersion": "1.4.2",
                 "tags": [
                   "Azure",
                   "Azure.local"
-                ],
-                "metadata": {
-                  "previewSource": "https://hciarcvmsstorage.z13.web.core.windows.net/cli-extensions/stack_hci_vm-1.4.2-py3-none-any.whl"
-                }
+                ]
               },
               {
                 "name": "connectedk8s",
                 "type": "AzCliExtension",
-                "requiredVersion": "1.6.2",
                 "installOrder": 270,
+                "requiredVersion": "1.6.2",
                 "tags": [
                   "Azure",
                   "Azure.local"
@@ -243,21 +246,21 @@
               {
                 "name": "MocNodeAndClusteredService",
                 "type": "MocServiceBinaries",
-                "requiredVersion": "1.9.0.11008",
                 "installOrder": 300,
-                "tags": [
-                  "Azure"
-                ],
                 "metadata": {
                   "catalog": "aks-hci-asz-stable-catalogs-int",
                   "ring": "monthly"
-                }
+                },
+                "requiredVersion": "1.9.0.11008",
+                "tags": [
+                  "Azure"
+                ]
               },
               {
                 "name": "ArcResourceBridgeVM",
                 "type": "ArcResourceBridge",
-                "requiredVersion": "1.3.0",
                 "installOrder": 400,
+                "requiredVersion": "1.3.0",
                 "tags": [
                   "Azure"
                 ]
@@ -265,67 +268,67 @@
               {
                 "name": "vmss-hci",
                 "type": "ArbVmExtension",
-                "requiredVersion": "5.4.3",
                 "installOrder": 410,
-                "tags": [
-                  "Azure"
-                ],
                 "metadata": {
                   "releaseTrain": "prerelease"
-                }
+                },
+                "requiredVersion": "5.4.3",
+                "tags": [
+                  "Azure"
+                ]
               },
               {
                 "name": "vmss-hci",
                 "type": "ArbVmExtension",
                 "installOrder": 411,
-                "tags": [
-                  "Azure.local"
-                ],
                 "metadata": {
                   "releaseTrain": "prerelease"
-                }
+                },
+                "tags": [
+                  "Azure.local"
+                ]
               },
               {
                 "name": "hybridaksextension",
                 "type": "ArbVmExtension",
-                "requiredVersion": "2.0.129",
                 "installOrder": 420,
-                "tags": [
-                  "Azure"
-                ],
                 "metadata": {
                   "releaseTrain": "stable"
-                }
+                },
+                "requiredVersion": "2.0.129",
+                "tags": [
+                  "Azure"
+                ]
               },
               {
                 "name": "hybridaksextension",
                 "type": "ArbVmExtension",
                 "installOrder": 421,
-                "tags": [
-                  "Azure.local"
-                ],
                 "metadata": {
                   "releaseTrain": "stable"
-                }
+                },
+                "tags": [
+                  "Azure.local"
+                ]
               },
               {
                 "name": "InfraVmImage23H2",
                 "type": "InfraVmImage",
                 "installOrder": 430,
+                "metadata": {
+                  "name": "AzureStackHCI_25398.469.231004-1141_zn_release_en-us.iso",
+                  "expectedHash": "140D2A6BC53DADCCB9FB66B0D6D2EF61C9D23EA937F8CCC62788866D02997BCA",
+                  "link": "https://aka.ms/infrahcios23"
+                },
                 "tags": [
                   "Azure"
-                ],
-                "metadata": {
-                  "link": "https://aka.ms/infrahcios23",
-                  "name": "AzureStackHCI_25398.469.231004-1141_zn_release_en-us.iso",
-                  "expectedHash": "140D2A6BC53DADCCB9FB66B0D6D2EF61C9D23EA937F8CCC62788866D02997BCA"
-                }
+                ]
               },
               {
                 "name": "Az.StackHCI",
                 "type": "PowerShell",
-                "requiredVersion": "2.4.1",
                 "installOrder": 40,
+                "requiredVersion": "2.4.1",
                 "tags": [
                   "Azure.local"
                 ]
@@ -334,16 +337,13 @@
           },
           "signature": "9542EB842C768EC8215578A98C04C2FC0E1AAE750C8DECE362226C8C4488E8A6"
         },
-        "id": "/subscriptions/b8d594e5-51f3-4c11-9c54-a7771b81c712/providers/Microsoft.AzureStackHCI/validatedSolutionRecipes/10.2408.0",
-        "name": "10.2408.0",
-        "type": "Microsoft.AzureStackHCI/ValidatedSolutionRecipes",
         "systemData": {
+          "createdAt": "2024-07-01T17:02:21.168Z",
           "createdBy": "zsnvvvbj",
           "createdByType": "User",
-          "createdAt": "2024-07-01T17:02:21.168Z",
+          "lastModifiedAt": "2024-07-01T17:02:21.168Z",
           "lastModifiedBy": "qxlrx",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2024-07-01T17:02:21.168Z"
+          "lastModifiedByType": "User"
         }
       }
     }

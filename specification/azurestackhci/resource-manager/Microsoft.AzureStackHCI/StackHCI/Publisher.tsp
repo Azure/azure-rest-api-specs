@@ -44,22 +44,3 @@ interface Publishers {
   "The name of the publisher available within HCI cluster."
 );
 @@doc(Publisher.properties, "Publisher properties.");
-
-// Models
-
-/**
- * List of Publisher proxy resources for the HCI cluster.
- */
-model PublisherList is Azure.Core.Page<Publisher>;
-
-/**
- * Publisher properties.
- */
-model PublisherProperties {
-  /**
-   * Provisioning State
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
-  @visibility(Lifecycle.Read)
-  provisioningState?: string;
-}

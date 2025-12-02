@@ -1,86 +1,108 @@
 {
-  "title": "Get Deployment Settings",
-  "operationId": "DeploymentSettings_Get",
   "parameters": {
-    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
-    "resourceGroupName": "test-rg",
+    "api-version": "2025-11-01-preview",
     "clusterName": "myCluster",
     "deploymentSettingsName": "default",
-    "api-version": "2025-11-01-preview"
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/clusters/myCluster/deploymentSettings/default",
         "name": "default",
         "type": "Microsoft.AzureStackHCI/clusters/deploymentSettings",
-        "systemData": {
-          "createdBy": "user1",
-          "createdByType": "User",
-          "createdAt": "2021-01-01T17:18:19.1234567Z",
-          "lastModifiedBy": "user2",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2021-01-02T17:18:19.1234567Z"
-        },
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/clusters/myCluster/deploymentSettings/default",
         "properties": {
-          "provisioningState": "Succeeded",
-          "operationType": "ClusterProvisioning",
-          "deploymentMode": "Deploy",
           "arcNodeResourceIds": [
             "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.HybridCompute/machines/Node-1",
             "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.HybridCompute/machines/Node-2"
           ],
           "deploymentConfiguration": {
-            "version": "string",
             "scaleUnits": [
               {
                 "deploymentData": {
-                  "securitySettings": {
-                    "hvciProtection": true,
-                    "drtmProtection": true,
-                    "driftControlEnforced": true,
-                    "credentialGuardEnforced": false,
-                    "smbSigningEnforced": true,
-                    "smbClusterEncryption": false,
-                    "sideChannelMitigationEnforced": true,
-                    "bitlockerBootVolume": true,
-                    "bitlockerDataVolumes": true,
-                    "wdacEnforced": true
-                  },
-                  "observability": {
-                    "streamingDataClient": true,
-                    "euLocation": false,
-                    "episodicDataUpload": true
-                  },
+                  "adouPath": "OU=ms169,DC=ASZ1PLab8,DC=nttest,DC=microsoft,DC=com",
                   "cluster": {
                     "name": "testHCICluster",
-                    "witnessType": "Cloud",
-                    "witnessPath": "Cloud",
-                    "cloudAccountName": "myasestoragacct",
                     "azureServiceEndpoint": "core.windows.net",
-                    "hardwareClass": "Medium"
+                    "cloudAccountName": "myasestoragacct",
+                    "hardwareClass": "Medium",
+                    "witnessPath": "Cloud",
+                    "witnessType": "Cloud"
                   },
-                  "storage": {
-                    "configurationMode": "Express"
-                  },
-                  "namingPrefix": "ms169",
                   "domainFqdn": "ASZ1PLab8.nttest.microsoft.com",
+                  "hostNetwork": {
+                    "enableStorageAutoIp": false,
+                    "intents": [
+                      {
+                        "name": "Compute_Management",
+                        "adapter": [
+                          "Port2"
+                        ],
+                        "adapterPropertyOverrides": {
+                          "jumboPacket": "1514",
+                          "networkDirect": "Enabled",
+                          "networkDirectTechnology": "iWARP"
+                        },
+                        "overrideAdapterProperty": false,
+                        "overrideQosPolicy": false,
+                        "overrideVirtualSwitchConfiguration": false,
+                        "qosPolicyOverrides": {
+                          "bandwidthPercentage_SMB": "50",
+                          "priorityValue8021Action_Cluster": "7",
+                          "priorityValue8021Action_SMB": "3"
+                        },
+                        "trafficType": [
+                          "Compute",
+                          "Management"
+                        ],
+                        "virtualSwitchConfigurationOverrides": {
+                          "enableIov": "True",
+                          "loadBalancingAlgorithm": "HyperVPort"
+                        }
+                      }
+                    ],
+                    "storageConnectivitySwitchless": true,
+                    "storageNetworks": [
+                      {
+                        "name": "Storage1Network",
+                        "networkAdapterName": "Port3",
+                        "storageAdapterIPInfo": [
+                          {
+                            "ipv4Address": "10.57.48.60",
+                            "physicalNode": "string",
+                            "subnetMask": "255.255.248.0"
+                          }
+                        ],
+                        "vlanId": "5"
+                      }
+                    ]
+                  },
                   "infrastructureNetwork": [
                     {
-                      "subnetMask": "255.255.248.0",
-                      "gateway": "255.255.248.0",
-                      "ipPools": [
-                        {
-                          "startingAddress": "10.57.48.60",
-                          "endingAddress": "10.57.48.66"
-                        }
-                      ],
                       "dnsServerConfig": "UseDnsServer",
                       "dnsServers": [
                         "10.57.50.90"
-                      ]
+                      ],
+                      "gateway": "255.255.248.0",
+                      "ipPools": [
+                        {
+                          "endingAddress": "10.57.48.66",
+                          "startingAddress": "10.57.48.60"
+                        }
+                      ],
+                      "subnetMask": "255.255.248.0"
                     }
                   ],
+                  "namingPrefix": "ms169",
+                  "observability": {
+                    "episodicDataUpload": true,
+                    "euLocation": false,
+                    "streamingDataClient": true
+                  },
+                  "optionalServices": {
+                    "customLocation": "customLocationName"
+                  },
                   "physicalNodes": [
                     {
                       "name": "ms169host",
@@ -91,53 +113,6 @@
                       "ipv4Address": "10.57.53.236"
                     }
                   ],
-                  "hostNetwork": {
-                    "intents": [
-                      {
-                        "name": "Compute_Management",
-                        "trafficType": [
-                          "Compute",
-                          "Management"
-                        ],
-                        "adapter": [
-                          "Port2"
-                        ],
-                        "overrideVirtualSwitchConfiguration": false,
-                        "virtualSwitchConfigurationOverrides": {
-                          "enableIov": "True",
-                          "loadBalancingAlgorithm": "HyperVPort"
-                        },
-                        "overrideQosPolicy": false,
-                        "qosPolicyOverrides": {
-                          "priorityValue8021Action_Cluster": "7",
-                          "priorityValue8021Action_SMB": "3",
-                          "bandwidthPercentage_SMB": "50"
-                        },
-                        "overrideAdapterProperty": false,
-                        "adapterPropertyOverrides": {
-                          "jumboPacket": "1514",
-                          "networkDirect": "Enabled",
-                          "networkDirectTechnology": "iWARP"
-                        }
-                      }
-                    ],
-                    "storageNetworks": [
-                      {
-                        "name": "Storage1Network",
-                        "networkAdapterName": "Port3",
-                        "vlanId": "5",
-                        "storageAdapterIPInfo": [
-                          {
-                            "physicalNode": "string",
-                            "ipv4Address": "10.57.48.60",
-                            "subnetMask": "255.255.248.0"
-                          }
-                        ]
-                      }
-                    ],
-                    "storageConnectivitySwitchless": true,
-                    "enableStorageAutoIp": false
-                  },
                   "sdnIntegration": {
                     "networkController": {
                       "macAddressPoolStart": "00-0D-3A-1B-C7-21",
@@ -145,32 +120,43 @@
                       "networkVirtualizationEnabled": true
                     }
                   },
-                  "adouPath": "OU=ms169,DC=ASZ1PLab8,DC=nttest,DC=microsoft,DC=com",
-                  "secretsLocation": "/subscriptions/db4e2fdb-6d80-4e6e-b7cd-xxxxxxx/resourceGroups/test-rg/providers/Microsoft.KeyVault/vaults/abcd123",
                   "secrets": [
                     {
-                      "secretName": "cluster1-BmcAdminUser-f5bcc1d9-23af-4ae9-aca1-041d0f593a63",
                       "eceSecretName": "BMCAdminUserCred",
-                      "secretLocation": "https://sclusterkvnirhci35.vault.azure.net/secrets/cluster-34232342-BmcAdminUser-f5bcc1d9-23af-4ae9-aca1-041d0f593a63/9276354aabfc492fa9b2cdbefb54ae4b"
+                      "secretLocation": "https://sclusterkvnirhci35.vault.azure.net/secrets/cluster-34232342-BmcAdminUser-f5bcc1d9-23af-4ae9-aca1-041d0f593a63/9276354aabfc492fa9b2cdbefb54ae4b",
+                      "secretName": "cluster1-BmcAdminUser-f5bcc1d9-23af-4ae9-aca1-041d0f593a63"
                     },
                     {
-                      "secretName": "cluster2-AzureStackLCMUserCredential-f5bcc1d9-23af-4ae9-aca1-041d0f593a63",
                       "eceSecretName": "AzureStackLCMUserCredential",
-                      "secretLocation": "https://sclusterkvnirhci35.vault.azure.net/secrets/cluster-34232342-AzureStackLCMUserCredential-f5bcc1d9-23af-4ae9-aca1-041d0f593a63/9276354aabfc492fa9b2cdbefb54ae4c"
+                      "secretLocation": "https://sclusterkvnirhci35.vault.azure.net/secrets/cluster-34232342-AzureStackLCMUserCredential-f5bcc1d9-23af-4ae9-aca1-041d0f593a63/9276354aabfc492fa9b2cdbefb54ae4c",
+                      "secretName": "cluster2-AzureStackLCMUserCredential-f5bcc1d9-23af-4ae9-aca1-041d0f593a63"
                     }
                   ],
-                  "optionalServices": {
-                    "customLocation": "customLocationName"
+                  "secretsLocation": "/subscriptions/db4e2fdb-6d80-4e6e-b7cd-xxxxxxx/resourceGroups/test-rg/providers/Microsoft.KeyVault/vaults/abcd123",
+                  "securitySettings": {
+                    "bitlockerBootVolume": true,
+                    "bitlockerDataVolumes": true,
+                    "credentialGuardEnforced": false,
+                    "driftControlEnforced": true,
+                    "drtmProtection": true,
+                    "hvciProtection": true,
+                    "sideChannelMitigationEnforced": true,
+                    "smbClusterEncryption": false,
+                    "smbSigningEnforced": true,
+                    "wdacEnforced": true
+                  },
+                  "storage": {
+                    "configurationMode": "Express"
                   }
                 },
                 "sbePartnerInfo": {
-                  "sbeDeploymentInfo": {
-                    "version": "4.0.2309.13",
-                    "family": "Gen5",
-                    "publisher": "Contoso",
-                    "sbeManifestSource": "default",
-                    "sbeManifestCreationDate": "2023-07-25T02:40:33Z"
-                  },
+                  "credentialList": [
+                    {
+                      "eceSecretName": "DownloadConnectorCred",
+                      "secretLocation": "https://sclusterkvnirhci35.vault.azure.net/secrets/cluster-34232342-DownloadConnectorCred-f5bcc1d9-23af-4ae9-aca1-041d0f593a63/9276354aabfc492fa9b2cdbefb54ae4b",
+                      "secretName": "cluster1-DownloadConnectorCred-f5bcc1d9-23af-4ae9-aca1-041d0f593a63"
+                    }
+                  ],
                   "partnerProperties": [
                     {
                       "name": "EnableBMCIpV6",
@@ -185,89 +171,103 @@
                       "value": "HighSecurity"
                     }
                   ],
-                  "credentialList": [
-                    {
-                      "secretName": "cluster1-DownloadConnectorCred-f5bcc1d9-23af-4ae9-aca1-041d0f593a63",
-                      "eceSecretName": "DownloadConnectorCred",
-                      "secretLocation": "https://sclusterkvnirhci35.vault.azure.net/secrets/cluster-34232342-DownloadConnectorCred-f5bcc1d9-23af-4ae9-aca1-041d0f593a63/9276354aabfc492fa9b2cdbefb54ae4b"
-                    }
-                  ]
+                  "sbeDeploymentInfo": {
+                    "family": "Gen5",
+                    "publisher": "Contoso",
+                    "sbeManifestCreationDate": "2023-07-25T02:40:33Z",
+                    "sbeManifestSource": "default",
+                    "version": "4.0.2309.13"
+                  }
                 }
               }
-            ]
+            ],
+            "version": "string"
           },
+          "deploymentMode": "Deploy",
+          "operationType": "ClusterProvisioning",
+          "provisioningState": "Succeeded",
           "reportedProperties": {
-            "validationStatus": {
+            "deploymentStatus": {
               "status": "Error",
               "steps": [
                 {
-                  "fullStepIndex": "0",
                   "name": "Cloud Deployment",
                   "description": "Deploy Cloud.",
-                  "startTimeUtc": "2023-06-09T00:08:19",
                   "endTimeUtc": "2023-06-09T04:01:47",
+                  "fullStepIndex": "0",
+                  "startTimeUtc": "2023-06-09T00:08:19",
                   "status": "Error",
                   "steps": [
                     {
-                      "fullStepIndex": "0.1",
                       "name": "Before Cloud Deployment",
                       "description": "Before Cloud Deployment",
-                      "startTimeUtc": "2023-06-09T00:08:23",
-                      "endTimeUtc": "2023-06-09T01:10:10"
+                      "endTimeUtc": "2023-06-09T01:10:10",
+                      "fullStepIndex": "0.1",
+                      "startTimeUtc": "2023-06-09T00:08:23"
                     },
                     {
-                      "fullStepIndex": "0.36",
                       "name": "Clean up temporary content",
                       "description": "Clean up temporary content",
-                      "startTimeUtc": "2023-06-09T03:58:37",
                       "endTimeUtc": "2023-06-09T04:01:47",
-                      "status": "Error",
                       "exception": [
                         "exception1",
                         "exception2"
-                      ]
+                      ],
+                      "fullStepIndex": "0.36",
+                      "startTimeUtc": "2023-06-09T03:58:37",
+                      "status": "Error"
                     }
                   ]
                 }
               ]
             },
-            "deploymentStatus": {
+            "validationStatus": {
               "status": "Error",
               "steps": [
                 {
-                  "fullStepIndex": "0",
                   "name": "Cloud Deployment",
                   "description": "Deploy Cloud.",
-                  "startTimeUtc": "2023-06-09T00:08:19",
                   "endTimeUtc": "2023-06-09T04:01:47",
+                  "fullStepIndex": "0",
+                  "startTimeUtc": "2023-06-09T00:08:19",
                   "status": "Error",
                   "steps": [
                     {
-                      "fullStepIndex": "0.1",
                       "name": "Before Cloud Deployment",
                       "description": "Before Cloud Deployment",
-                      "startTimeUtc": "2023-06-09T00:08:23",
-                      "endTimeUtc": "2023-06-09T01:10:10"
+                      "endTimeUtc": "2023-06-09T01:10:10",
+                      "fullStepIndex": "0.1",
+                      "startTimeUtc": "2023-06-09T00:08:23"
                     },
                     {
-                      "fullStepIndex": "0.36",
                       "name": "Clean up temporary content",
                       "description": "Clean up temporary content",
-                      "startTimeUtc": "2023-06-09T03:58:37",
                       "endTimeUtc": "2023-06-09T04:01:47",
-                      "status": "Error",
                       "exception": [
                         "exception1",
                         "exception2"
-                      ]
+                      ],
+                      "fullStepIndex": "0.36",
+                      "startTimeUtc": "2023-06-09T03:58:37",
+                      "status": "Error"
                     }
                   ]
                 }
               ]
             }
           }
+        },
+        "systemData": {
+          "createdAt": "2021-01-01T17:18:19.1234567Z",
+          "createdBy": "user1",
+          "createdByType": "User",
+          "lastModifiedAt": "2021-01-02T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User"
         }
       }
     }
-  }
+  },
+  "operationId": "DeploymentSettings_Get",
+  "title": "Get Deployment Settings"
 }

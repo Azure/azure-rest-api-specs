@@ -1,52 +1,51 @@
 {
-  "title": "Patch ArcSetting",
-  "operationId": "ArcSettings_Update",
   "parameters": {
-    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
-    "resourceGroupName": "test-rg",
-    "clusterName": "myCluster",
-    "arcSettingName": "default",
+    "api-version": "2025-11-01-preview",
     "arcSetting": {
       "properties": {
         "connectivityProperties": {
           "enabled": true,
           "serviceConfigurations": [
             {
-              "serviceName": "WAC",
-              "port": 6516
+              "port": 6516,
+              "serviceName": "WAC"
             }
           ]
         }
       }
     },
-    "api-version": "2025-11-01-preview"
+    "arcSettingName": "default",
+    "clusterName": "myCluster",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/clusters/myCluster/arcSettings/default",
         "type": "Microsoft.AzureStackHCI/clusters/arcSettings",
-        "systemData": {
-          "createdBy": "user1",
-          "createdByType": "User",
-          "createdAt": "2021-01-01T17:18:19.1234567Z",
-          "lastModifiedBy": "user2",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2021-01-02T17:18:19.1234567Z"
-        },
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/clusters/myCluster/arcSettings/default",
         "properties": {
-          "provisioningState": "Succeeded",
-          "arcInstanceResourceGroup": "ArcInstance-rg",
           "aggregateState": "Creating",
+          "arcInstanceResourceGroup": "ArcInstance-rg",
           "connectivityProperties": {
             "enabled": true,
             "serviceConfigurations": [
               {
-                "serviceName": "WAC",
-                "port": 6516
+                "port": 6516,
+                "serviceName": "WAC"
               }
             ]
           },
+          "defaultExtensions": [
+            {
+              "category": "Telemetry",
+              "consentTime": "2023-01-01T17:18:19.1234567Z"
+            },
+            {
+              "category": "Supportability",
+              "consentTime": null
+            }
+          ],
           "perNodeDetails": [
             {
               "name": "Node-1",
@@ -59,18 +58,19 @@
               "state": "Creating"
             }
           ],
-          "defaultExtensions": [
-            {
-              "category": "Telemetry",
-              "consentTime": "2023-01-01T17:18:19.1234567Z"
-            },
-            {
-              "category": "Supportability",
-              "consentTime": null
-            }
-          ]
+          "provisioningState": "Succeeded"
+        },
+        "systemData": {
+          "createdAt": "2021-01-01T17:18:19.1234567Z",
+          "createdBy": "user1",
+          "createdByType": "User",
+          "lastModifiedAt": "2021-01-02T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User"
         }
       }
     }
-  }
+  },
+  "operationId": "ArcSettings_Update",
+  "title": "Patch ArcSetting"
 }
