@@ -328,15 +328,6 @@ model LaunchBulkInstancesOperation
 model OperationStatus is OmitProperties<ArmOperationStatus, "name">;
 
 // ------------------ Models --------------- //
-@doc("Details of error.")
-model Error {
-  @doc("Error code if it exists")
-  code?: string;
-
-  @doc("Error details if they exist")
-  message?: string;
-}
-
 @doc("List of LaunchBulkInstancesOperation resources.")
 model LaunchBulkInstancesOperationListResult {
   @pageItems
