@@ -24,6 +24,8 @@ export function includesSegment(path, segment) {
  * // -> "{cwd}/stable/2025-01-01/examples"
  */
 export function untilLastSegment(path, segment) {
+  // Shares code with `untilLastSegmentWithParent()`, but not worth refactoring yet
+
   let current = resolve(path);
 
   while (true) {
@@ -52,6 +54,8 @@ export function untilLastSegment(path, segment) {
  * // -> "{cwd}/stable/2025-01-01"
  */
 export function untilLastSegmentWithParent(path, segment) {
+  // Shares code with `untilLastSegment()`, but not worth refactoring yet
+
   let current = resolve(path);
 
   while (true) {
