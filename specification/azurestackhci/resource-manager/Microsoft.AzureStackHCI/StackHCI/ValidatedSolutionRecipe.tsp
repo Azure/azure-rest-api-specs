@@ -14,6 +14,7 @@ namespace Microsoft.AzureStackHCI;
  * Represents a validated solution recipe resource.
  */
 @subscriptionResource
+@parentResource(Azure.ResourceManager.SubscriptionLocationResource)
 model ValidatedSolutionRecipe
   is Azure.ResourceManager.ProxyResource<ValidatedSolutionRecipeProperties> {
   ...ResourceNameParameter<
@@ -48,12 +49,18 @@ interface ValidatedSolutionRecipes {
   /**
    * Get a validated solution recipe.
    */
-  get is ValidatedSolutionRecipesOps.Read<ValidatedSolutionRecipe>;
+  get is ArmResourceRead<
+    ValidatedSolutionRecipe,
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+  >;
 
   /**
    * List all validated solution recipes.
    */
-  listBySubscriptionLocationResource is ValidatedSolutionRecipesOps.List<ValidatedSolutionRecipe>;
+  listBySubscriptionLocationResource is ArmResourceListByParent<
+    ValidatedSolutionRecipe,
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+  >;
 }
 
 @@doc(ValidatedSolutionRecipe.name, "The name of the ValidatedSolutionRecipe");
