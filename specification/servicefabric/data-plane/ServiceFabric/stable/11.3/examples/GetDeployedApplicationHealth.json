@@ -1,0 +1,51 @@
+{
+    "operationId": "GetApplicationHealth",
+    "description": "Gets the health of a Service Fabric application.",
+    "parameters": {
+        "api-version": "6.0",
+        "nodeName": "_Node_0",
+        "applicationId": "fabric:\/VisualObjects"
+    },
+    "responses": {
+        "200": {
+            "headers": {},
+            "body": {
+                "HealthEvents": [
+                    {
+                        "SourceId": "System.Hosting",
+                        "Property": "Activation",
+                        "HealthState": "Ok",
+                        "TimeToLiveInMilliSeconds": "P10675199DT2H48M5.4775807S",
+                        "Description": "The application was activated successfully.",
+                        "SequenceNumber": "133126558817728531",
+                        "RemoveWhenExpired": false,
+                        "HealthReportId": "Hosting_7.0_1003",
+                        "SourceUtcTimestamp": "2022-11-11T15:58:01.772Z",
+                        "LastModifiedUtcTimestamp": "2022-11-11T15:58:28.450Z",
+                        "IsExpired": false,
+                        "LastOkTransitionAt": "2022-11-11T15:58:28.450Z",
+                        "LastWarningTransitionAt": "0001-01-01T00:00:00.000Z",
+                        "LastErrorTransitionAt": "0001-01-01T00:00:00.000Z"
+                    }
+                ],
+                "AggregatedHealthState": "Ok",
+                "UnhealthyEvaluations": [],
+                "HealthStatistics": {
+                    "HealthStateCountList": [
+                        {
+                            "EntityKind": "DeployedServicePackage",
+                            "HealthStateCount": {
+                                "OkCount": 1,
+                                "ErrorCount": 0,
+                                "WarningCount": 0
+                            }
+                        }
+                    ]
+                },
+                "Name": "fabric:\/VisualObjects",
+                "NodeName": "_Node_0",
+                "DeployedServicePackageHealthStates": []
+            }
+        }
+    }
+}
