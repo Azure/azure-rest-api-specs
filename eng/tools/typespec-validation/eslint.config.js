@@ -8,26 +8,23 @@ import tseslint from "typescript-eslint";
 /** @type {import('eslint').Linter.Config[]} */
 export default defineConfig(
   eslint.configs.recommended,
-  tseslint.configs.recommended,
-  // TODO: Enable "recommendedTypeChecked" rules, fix all violations
-  // tseslint.configs.recommendedTypeChecked,
+  tseslint.configs.recommendedTypeChecked,
   {
     languageOptions: {
       // we only run in node, not browser
       globals: globals.node,
       // required to use tseslint.configs.recommendedTypeChecked
-      // parserOptions: {
-      //   projectService: {
-      //     allowDefaultProject: ["*.js", "cmd/*.js"],
-      //   },
-      //   // ensures the tsconfig path resolves relative to this file
-      //   // default is process.cwd() when running eslint, which may be incorrect
-      //   tsconfigRootDir: import.meta.dirname,
-      // },
+      parserOptions: {
+        projectService: {
+          allowDefaultProject: ["*.js", "cmd/*.js"],
+        },
+        // ensures the tsconfig path resolves relative to this file
+        // default is process.cwd() when running eslint, which may be incorrect
+        tsconfigRootDir: import.meta.dirname,
+      },
     },
   },
   {
-    // TODO: Remove exclusion for "test/**"
-    ignores: ["coverage/**", "dist/**", "test/**"],
+    ignores: ["coverage/**", "dist/**"],
   },
 );

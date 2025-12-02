@@ -13,8 +13,10 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./Collaboration.tsp";
+import "./ConsortiumView.tsp";
 import "./Consortium.tsp";
 import "./Contract.tsp";
+import "./ConsortiumViewContract.tsp";
 import "./back-compatible.tsp";
 
 using Azure.ResourceManager;
@@ -36,6 +38,11 @@ enum Versions {
    * The 2025-01-31-preview API version.
    */
   v2025_01_31_preview: "2025-01-31-preview",
+
+  /**
+   * The 2025-10-31-preview API version.
+   */
+  v2025_10_31_preview: "2025-10-31-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}

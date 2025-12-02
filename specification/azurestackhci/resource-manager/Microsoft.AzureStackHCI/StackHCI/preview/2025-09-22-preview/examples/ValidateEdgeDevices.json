@@ -1,28 +1,28 @@
 {
-  "title": "Validate Edge Devices",
-  "operationId": "EdgeDevices_Validate",
   "parameters": {
-    "api-version": "2025-09-22-preview",
-    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
-    "resourceGroupName": "test-rg",
-    "clusterName": "myCluster",
-    "scope": "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}",
-    "edgeDeviceName": "edge-device-1",
     "ValidateRequest": {
+      "additionalInfo": "test",
       "edgeDeviceIds": [
-        "edge-device-1",
-        "edge-device-2"
+        "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.HybridCompute/machines/Node-1/edgeDevices/default",
+        "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.HybridCompute/machines/Node-2/edgeDevices/default"
       ]
-    }
+    },
+    "api-version": "2025-09-22-preview",
+    "edgeDeviceName": "default",
+    "resourceUri": "subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.HybridCompute/machines/Node-1"
   },
   "responses": {
     "200": {
-      "body": {}
+      "body": {
+        "status": "success"
+      }
     },
     "202": {
       "headers": {
-        "Location": "https://management.azure.com/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/providers/Microsoft.AzureStackHCI/operationStatuses/operation-id"
+        "location": "https://foo.com/operationStatuses"
       }
     }
-  }
+  },
+  "operationId": "EdgeDevices_Validate",
+  "title": "Validate Edge Devices"
 }

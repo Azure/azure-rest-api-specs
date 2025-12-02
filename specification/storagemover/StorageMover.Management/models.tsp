@@ -740,6 +740,8 @@ model JobDefinitionProperties {
 union DataIntegrityValidation {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  SaveVerifyFileMD5: "SaveVerifyFileMD5",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   SaveFileMD5: "SaveFileMD5",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   None: "None",
@@ -1448,6 +1450,8 @@ union ConnectionStatus {
   Disconnected: "Disconnected",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Pending: "Pending",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Stale: "Stale",
 }
 
 /** Parameters for updating a Connection resource. */
