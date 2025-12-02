@@ -2692,8 +2692,7 @@
         "Approved",
         "Rejected",
         "Disconnected",
-        "Pending Approval",
-        "Stale"
+        "Pending"
       ],
       "x-ms-enum": {
         "name": "ConnectionStatus",
@@ -2712,12 +2711,8 @@
             "value": "Disconnected"
           },
           {
-            "name": "PendingApproval",
-            "value": "Pending Approval"
-          },
-          {
-            "name": "Stale",
-            "value": "Stale"
+            "name": "Pending",
+            "value": "Pending"
           }
         ]
       }
@@ -3117,6 +3112,29 @@
             "type": "string",
             "format": "arm-id",
             "description": "A type definition that refers the id to an Azure Resource Manager resource."
+          }
+        },
+        "dataIntegrityValidation": {
+          "type": "string",
+          "description": "The checksum validation mode for the job definition.",
+          "default": "None",
+          "enum": [
+            "SaveFileMD5",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "DataIntegrityValidation",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "SaveFileMD5",
+                "value": "SaveFileMD5"
+              },
+              {
+                "name": "None",
+                "value": "None"
+              }
+            ]
           }
         }
       },

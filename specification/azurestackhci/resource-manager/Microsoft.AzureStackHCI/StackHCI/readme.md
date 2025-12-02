@@ -139,6 +139,9 @@ suppressions:
     reason: already used in GA api version, fixing it will cause breaking change
     from:
       - arcSettings.json
+      - hci.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}"].patch.parameters[5]["schema"]
 
   - code: PostResponseCodes
     reason: already used in GA api version, fixing it will cause breaking change
@@ -192,6 +195,10 @@ suppressions:
       - updates.json
       - updateRuns.json
       - updateSummaries.json
+      - hci.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/updates/{updateName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/updates/{updateName}/updateRuns/{updateRunName}"].put
 
   - code: TrackedResourcePatchOperation
     reason: these are not tracked resources, so no tags and corresponding patch operation is needed
@@ -200,6 +207,10 @@ suppressions:
       - updateRuns.json
       - updateSummaries.json
       - hci.json
+    where:
+      - $.definitions.Update
+      - $.definitions.UpdateRun
+      - $.definitions.UpdateSummaries
 
   - code: AvoidAdditionalProperties
     reason: already used in GA api version, fixing it will cause breaking change
