@@ -187,8 +187,10 @@ interface CloudHsmClusters {
    * Gets the backup operation status of the specified Cloud HSM Cluster
    */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters/{cloudHsmClusterName}/backupOperationStatus/{jobId}")
-  cloudHsmClusterBackupStatusGet is CloudHsmClustersOps.Read<
+  @get
+  cloudHsmClusterBackupStatusGet is CloudHsmClustersOps.ActionSync<
     CloudHsmCluster,
+    void,
     Response = (BackupResult &
       Azure.Core.RequestIdResponseHeader) | ArmAcceptedResponse<ExtraHeaders = {
       @header("Location")
@@ -209,8 +211,10 @@ interface CloudHsmClusters {
    * Gets the restore operation status of the specified Cloud HSM Cluster
    */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters/{cloudHsmClusterName}/restoreOperationStatus/{jobId}")
-  cloudHsmClusterRestoreStatusGet is CloudHsmClustersOps.Read<
+  @get
+  cloudHsmClusterRestoreStatusGet is CloudHsmClustersOps.ActionSync<
     CloudHsmCluster,
+    void,
     Response = (RestoreResult &
       Azure.Core.RequestIdResponseHeader) | ArmAcceptedResponse<ExtraHeaders = {
       @header("Location")
