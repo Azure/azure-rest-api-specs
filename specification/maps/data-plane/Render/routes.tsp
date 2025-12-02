@@ -1,13 +1,11 @@
 import "@azure-tools/typespec-azure-core";
 import "./models.tsp";
-import "@typespec/openapi";
 
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace MapsRender;
 
-interface RenderOperationGroup {
+interface Render {
   /**
    *
    *
@@ -17,8 +15,8 @@ interface RenderOperationGroup {
    * default, the Azure Maps [Web SDK](/azure/azure-maps/about-azure-maps#web-sdk)
    * uses vector tiles for rendering its web map control.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Non-standard operation."
   @summary("Use to request map tiles in vector or raster format.")
-  @operationId("Render_GetMapTile")
   @route("/map/tile")
   @get
   getMapTile is Azure.Core.Foundations.Operation<
@@ -139,8 +137,8 @@ interface RenderOperationGroup {
    *
    * The Get Map Tileset API allows users to request metadata for a tileset.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Non-standard operation."
   @summary("Use to get metadata for a tileset.")
-  @operationId("Render_GetMapTileset")
   @route("/map/tileset")
   @get
   getMapTileset is Azure.Core.Foundations.Operation<
@@ -174,8 +172,8 @@ interface RenderOperationGroup {
    * The `Get Map Attribution` API allows users to request map copyright attribution
    * information for a section of a tileset.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Non-standard operation."
   @summary("Use to get map copyright attribution information.")
-  @operationId("Render_GetMapAttribution")
   @route("/map/attribution")
   @get
   getMapAttribution is Azure.Core.Foundations.Operation<
@@ -227,11 +225,11 @@ interface RenderOperationGroup {
    * user turns on dynamic styling. For more information, see [Zoom Levels and Tile
    * Grid](/azure/location-based-services/zoom-levels-and-tile-grid).
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Non-standard operation."
   @summary("""
     Use to get state tiles in vector format that can then be used to display
     feature state information in an indoor map.
     """)
-  @operationId("Render_GetMapStateTile")
   @route("/map/statetile")
   @get
   getMapStateTile is Azure.Core.Foundations.Operation<
@@ -299,8 +297,8 @@ interface RenderOperationGroup {
    * As an alternative to copyrights for map request, it can also return captions
    * for displaying provider information on the map.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Non-standard operation."
   @summary("Use to get copyright information to use when rendering a tile.")
-  @operationId("Render_GetCopyrightCaption")
   @route("/map/copyright/caption/{format}")
   @get
   getCopyrightCaption is Azure.Core.Foundations.Operation<
@@ -374,7 +372,7 @@ interface RenderOperationGroup {
    *
    * _Note_ : Either **center** or **bbox** parameter must be supplied to the API.
    */
-  @operationId("Render_GetMapStaticImage")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Non-standard operation."
   @route("/map/static")
   @get
   getMapStaticImage is Azure.Core.Foundations.Operation<
@@ -768,8 +766,8 @@ interface RenderOperationGroup {
    * should specify the minimum and maximum longitude and latitude (EPSG-3857)
    * coordinates
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Non-standard operation."
   @summary("Use to get copyright information for the specified bounding box.")
-  @operationId("Render_GetCopyrightFromBoundingBox")
   @route("/map/copyright/bounding/{format}")
   @get
   getCopyrightFromBoundingBox is Azure.Core.Foundations.Operation<
@@ -826,8 +824,8 @@ interface RenderOperationGroup {
    * In addition to basic copyright for the whole map, API is serving specific
    * groups of copyrights for some countries/regions.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Non-standard operation."
   @summary("Use to get copyright information.")
-  @operationId("Render_GetCopyrightForTile")
   @route("/map/copyright/tile/{format}")
   @get
   getCopyrightForTile is Azure.Core.Foundations.Operation<
@@ -902,8 +900,8 @@ interface RenderOperationGroup {
    * In addition to basic copyright for the whole map, API is serving specific
    * groups of copyrights for some countries/regions.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Non-standard operation."
   @summary("Use to get copyright information for for the world.")
-  @operationId("Render_GetCopyrightForWorld")
   @route("/map/copyright/world/{format}")
   @get
   getCopyrightForWorld is Azure.Core.Foundations.Operation<
