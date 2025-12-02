@@ -3,7 +3,6 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 
-
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
@@ -13,7 +12,6 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.AzureStackHCI;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-
 interface OwnershipVouchers {
   /**
    * Validates ownership vouchers.
@@ -36,7 +34,6 @@ interface OwnershipVouchers {
   ): ArmResponse<ValidateOwnershipVouchersResponse> | ErrorResponse;
 }
 
-
 @doc("Validate Ownership Voucher Request")
 model ValidateOwnershipVouchersRequest {
   @doc("Ownership Voucher Details.")
@@ -45,14 +42,12 @@ model ValidateOwnershipVouchersRequest {
   ownershipVoucherDetails: OwnershipVoucherDetails[];
 }
 
-
 @doc("Validate Ownership Voucher Response")
 model ValidateOwnershipVouchersResponse {
   @doc("Ownership Voucher Validation Details.")
   @identifiers(#["id"])
   ownershipVoucherValidationDetails: OwnershipVoucherValidationDetails[];
 }
-
 
 @doc("Ownership Voucher Validation Details")
 model OwnershipVoucherValidationDetails {
@@ -80,7 +75,6 @@ model OwnershipVoucherValidationDetails {
   @doc("Error details if the validation failed.")
   error?: Azure.ResourceManager.CommonTypes.ErrorDetail;
 }
-
 
 @doc("Ownership Voucher validation Status.")
 union OwnershipVoucherValidationStatus {

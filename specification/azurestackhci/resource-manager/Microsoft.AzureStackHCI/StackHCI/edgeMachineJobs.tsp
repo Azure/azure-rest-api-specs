@@ -14,7 +14,6 @@ using Azure.Core;
 namespace Microsoft.AzureStackHCI;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" ""
-
 @doc("Cluster Jobs resource")
 @parentResource(EdgeMachine)
 model EdgeMachineJob
@@ -26,7 +25,6 @@ model EdgeMachineJob
     NamePattern = "^[a-zA-Z0-9-_]{3,63}$"
   >;
 }
-
 
 @armResourceOperations
 interface EdgeMachineJobs {
@@ -46,7 +44,6 @@ interface EdgeMachineJobs {
 @@doc(EdgeMachineJob.name, "Name of EdgeMachineJob");
 
 //////////////////// models ////////////////////
-
 
 @doc("EdgeMachine Job properties")
 @discriminator("jobType")
@@ -83,7 +80,6 @@ model EdgeMachineJobProperties {
   error?: Azure.ResourceManager.Foundations.ErrorDetail;
 }
 
-
 @doc("Job Type supported.")
 union EdgeMachineJobType {
   string,
@@ -100,7 +96,6 @@ union EdgeMachineJobType {
   @doc("Job to download OS packages on to the device")
   DownloadOs: "DownloadOs",
 }
-
 
 @doc("Represents the various statuses a job can have throughout its lifecycle.")
 union JobStatus {
@@ -143,7 +138,6 @@ union JobStatus {
   Scheduled: "Scheduled",
 }
 
-
 @doc("Properties for adding a server in the cluster.")
 model RemoteSupportJobProperties extends EdgeMachineJobProperties {
   @doc("Job Type to support polymorphic resource.")
@@ -163,7 +157,6 @@ model RemoteSupportJobProperties extends EdgeMachineJobProperties {
   reportedProperties?: RemoteSupportReportedProperties;
 }
 
-
 @doc("Represents the properties of an Azure Linux restricted operating environment Provision Os job.")
 model ProvisionOsJobProperties extends EdgeMachineJobProperties {
   @doc("Job Type to support polymorphic resource.")
@@ -176,7 +169,6 @@ model ProvisionOsJobProperties extends EdgeMachineJobProperties {
   reportedProperties?: ProvisionOsReportedProperties;
 }
 
-
 @doc("Download Request properties")
 model DownloadRequest {
   @doc("Target operating system to support polymorphic resource.")
@@ -186,7 +178,6 @@ model DownloadRequest {
   @doc("Operating system profile.")
   osProfile: DownloadOsProfile;
 }
-
 
 @doc("Represents the properties of Download Os job.")
 model DownloadOsJobProperties extends EdgeMachineJobProperties {
@@ -200,12 +191,10 @@ model DownloadOsJobProperties extends EdgeMachineJobProperties {
   reportedProperties?: ProvisionOsReportedProperties;
 }
 
-
 @doc("Reported Properties for Provision Os job")
 model ProvisionOsReportedProperties {
   ...JobReportedProperties;
 }
-
 
 @doc("Represents a provisioning request.")
 model ProvisioningRequest {
@@ -230,7 +219,6 @@ model ProvisioningRequest {
   customConfiguration?: string;
 }
 
-
 @doc("Represents the provisioning operating system type.")
 union ProvisioningOsType {
   string,
@@ -241,7 +229,6 @@ union ProvisioningOsType {
   @doc("HCI OS.")
   HCI: "HCI",
 }
-
 
 @doc("Represents the reported properties of a remote support job.")
 model RemoteSupportReportedProperties {
@@ -256,7 +243,6 @@ model RemoteSupportReportedProperties {
   @Azure.ResourceManager.identifiers(#["sessionId"])
   sessionDetails?: RemoteSupportSession[];
 }
-
 
 @doc("Represents the settings of a remote support node.")
 model RemoteSupportNodeSettings {
@@ -281,7 +267,6 @@ model RemoteSupportNodeSettings {
   connectionErrorMessage?: string;
 }
 
-
 @doc("Represents a remote support session.")
 model RemoteSupportSession {
   @doc("Unique session Id.")
@@ -305,7 +290,6 @@ model RemoteSupportSession {
   transcriptLocation?: string;
 }
 
-
 @doc("Defines the level of remote support access granted.")
 union RemoteSupportAccessLevel {
   @doc("A custom access level provided as a string.")
@@ -321,7 +305,6 @@ union RemoteSupportAccessLevel {
   DiagnosticsAndRepair: "DiagnosticsAndRepair",
 }
 
-
 @doc("Defines the type of remote support action to be performed on an edge device.")
 union RemoteSupportType {
   @doc("A custom action type provided as a string.")
@@ -333,7 +316,6 @@ union RemoteSupportType {
   @doc("Revokes remote support access for the edge device.")
   Revoke: "Revoke",
 }
-
 
 @doc("Properties for pausing a server in the cluster.")
 model CollectLogJobProperties extends EdgeMachineJobProperties {
@@ -355,7 +337,6 @@ model CollectLogJobProperties extends EdgeMachineJobProperties {
   reportedProperties?: LogCollectionReportedProperties;
 }
 
-
 @doc("Represents the reported properties of a log collection job.")
 model LogCollectionReportedProperties {
   ...JobReportedProperties;
@@ -365,7 +346,6 @@ model LogCollectionReportedProperties {
   @Azure.ResourceManager.identifiers(#["correlationId"])
   logCollectionSessionDetails?: LogCollectionSession[];
 }
-
 
 @doc("Represents a session for collecting logs from an edge device.")
 model LogCollectionSession {
@@ -394,7 +374,6 @@ model LogCollectionSession {
   correlationId?: string;
 }
 
-
 @doc("Reported Properties for job triggered from cloud.")
 model JobReportedProperties {
   @doc("The percentage of the job that is complete.")
@@ -409,7 +388,6 @@ model JobReportedProperties {
   @visibility(Lifecycle.Read)
   deploymentStatus?: EceActionStatus;
 }
-
 
 @doc("Represents the status of a log collection operation.")
 union DeviceLogCollectionStatus {
@@ -432,7 +410,6 @@ union DeviceLogCollectionStatus {
   Canceled: "Canceled",
 }
 
-
 @doc("Validation / deployment status details for Job.")
 model EceActionStatus {
   @doc("Job status.")
@@ -445,7 +422,6 @@ model EceActionStatus {
   steps?: Step[];
 }
 
-
 @doc("Deployment mode to trigger job.")
 union DeploymentMode {
   string,
@@ -456,7 +432,6 @@ union DeploymentMode {
   @doc("Deploy ECE action deployment for a cluster.")
   Deploy: "Deploy",
 }
-
 
 @doc("Step details during job execution.")
 model Step {
@@ -498,7 +473,6 @@ model Step {
   error?: Azure.ResourceManager.Foundations.ErrorDetail;
 }
 
-
 @doc("Operating system profile.")
 model OsProvisionProfile {
   @doc("Name of the operating system.")
@@ -527,7 +501,6 @@ model OsProvisionProfile {
   operationType?: OSOperationType = OSOperationType.Provision;
 }
 
-
 @doc("Operating system profile.")
 model DownloadOsProfile {
   @doc("Name of the operating system.")
@@ -553,7 +526,6 @@ model DownloadOsProfile {
   gpgPubKey?: string;
 }
 
-
 @doc("OS Provision Operation type")
 union OSOperationType {
   string,
@@ -568,7 +540,6 @@ union OSOperationType {
   ReImage: "ReImage",
 }
 
-
 @doc("Type of secret used for authentication.")
 union SecretType {
   string,
@@ -579,7 +550,6 @@ union SecretType {
   @doc("SSH Public Key based authentication")
   SshPubKey: "SshPubKey",
 }
-
 
 @doc("User configuration.")
 model UserDetails {
@@ -596,7 +566,6 @@ model UserDetails {
   sshPubKey?: string[];
 }
 
-
 @doc("Onboarding resource type.")
 union OnboardingResourceType {
   string,
@@ -604,7 +573,6 @@ union OnboardingResourceType {
   @doc("Hybrid Compute Machine.")
   HybridComputeMachine: "HybridComputeMachine",
 }
-
 
 @doc("Onboarding configuration.")
 model OnboardingConfiguration {
@@ -626,7 +594,6 @@ model OnboardingConfiguration {
   arcVirtualMachineId?: string;
 }
 
-
 @doc("Device configuration.")
 model DeviceConfiguration {
   @doc("Network configuration.")
@@ -645,7 +612,6 @@ model DeviceConfiguration {
   storage?: StorageConfiguration;
 }
 
-
 @doc("Network configuration.")
 model NetworkConfiguration {
   @Azure.ResourceManager.identifiers(#[])
@@ -653,13 +619,11 @@ model NetworkConfiguration {
   networkAdapters?: NetworkAdapter[];
 }
 
-
 @doc("Storage configuration.")
 model StorageConfiguration {
   @doc("Partition size.")
   partitionSize?: string;
 }
-
 
 @doc("Network adapter configuration.")
 model NetworkAdapter {
@@ -691,7 +655,6 @@ model NetworkAdapter {
   vlanId?: string;
 }
 
-
 @doc("IP assignment types")
 union IpAssignmentType {
   string,
@@ -703,7 +666,6 @@ union IpAssignmentType {
   Manual: "Manual",
 }
 
-
 @doc("IP address range configuration.")
 model IpAddressRange {
   @doc("Start IP address.")
@@ -712,7 +674,6 @@ model IpAddressRange {
   @doc("End IP address.")
   endIp: string;
 }
-
 
 @doc("Web proxy configuration.")
 model WebProxyConfiguration {
@@ -726,7 +687,6 @@ model WebProxyConfiguration {
   @doc("Bypass list for the web proxy.")
   bypassList?: url[];
 }
-
 
 @doc("Time configuration.")
 model TimeConfiguration {

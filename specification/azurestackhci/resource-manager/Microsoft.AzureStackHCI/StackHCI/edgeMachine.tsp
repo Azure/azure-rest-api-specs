@@ -13,7 +13,6 @@ using Azure.Core;
 @armProviderNamespace("Microsoft.AzureStackHCI")
 namespace Microsoft.AzureStackHCI;
 
-
 @doc("EdgeMachine details.")
 model EdgeMachine
   is Azure.ResourceManager.TrackedResource<EdgeMachineProperties> {
@@ -25,7 +24,6 @@ model EdgeMachine
   >;
   ...ManagedServiceIdentityProperty;
 }
-
 
 @armResourceOperations
 interface EdgeMachines {
@@ -53,7 +51,6 @@ interface EdgeMachines {
 
 ////////////////////// models //////////////////////
 
-
 @doc("Edge Machine Kind.")
 union EdgeMachineKind {
   string,
@@ -64,7 +61,6 @@ union EdgeMachineKind {
   @doc("EdgeMachine resource created for brownfield HCI customers without zero touch provisioning.")
   Dedicated: "Dedicated",
 }
-
 
 @doc("Properties for edge machine.")
 model EdgeMachineProperties {
@@ -145,7 +141,6 @@ model EdgeMachineProperties {
   lastSyncTimestamp?: utcDateTime;
 }
 
-
 @doc("Model for patching edge machine.")
 model EdgeMachinePatch {
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
@@ -155,7 +150,6 @@ model EdgeMachinePatch {
 /**
  * Details for device provisioning.
  */
-
 model ProvisioningDetails {
   @doc("Operating system profile.")
   osProfile: OsProvisionProfile;
@@ -169,7 +163,6 @@ model ProvisioningDetails {
 /**
  * Details for ownership voucher.
  */
-
 model OwnershipVoucherDetails {
   @doc("Ownership voucher in base64 encoded format")
   @secret
@@ -182,14 +175,12 @@ model OwnershipVoucherDetails {
 /**
  * Type of owner key in the voucher
  */
-
 union OwnerKeyType {
   string,
 
   @doc("Owner is Microsoft managed key")
   MicrosoftManaged: "MicrosoftManaged",
 }
-
 
 @doc("operation detail.")
 model OperationDetail {
@@ -222,7 +213,6 @@ model OperationDetail {
   error?: Azure.ResourceManager.Foundations.ErrorDetail;
 }
 
-
 @doc("Overall connectivity status for the machine resource.")
 union EdgeMachineConnectivityStatus {
   string,
@@ -237,7 +227,6 @@ union EdgeMachineConnectivityStatus {
   Connected: "Connected",
 }
 
-
 @doc("Site Details consists of common configurations.")
 model SiteDetails {
   @doc("Site resource Id to be set during Edge Machine resource creation.")
@@ -250,7 +239,6 @@ model SiteDetails {
   @doc("Edge Device configuration received from site common configuration.")
   deviceConfiguration?: DeviceConfiguration;
 }
-
 
 @doc("OS State")
 union EdgeMachineState {
@@ -284,7 +272,6 @@ union EdgeMachineState {
   Preparing: "Preparing",
 }
 
-
 @doc("The provisioning state of a resource.")
 union ProvisioningState {
   string,
@@ -317,7 +304,6 @@ union ProvisioningState {
   Accepted: "Accepted",
 }
 
-
 @doc("Reported properties for edge machine.")
 model ReportedProperties {
   @doc("Last time data reported.")
@@ -349,7 +335,6 @@ model ReportedProperties {
   extensionProfile?: ExtensionProfile;
 }
 
-
 @doc("NetworkProfile of edge machine.")
 model NetworkProfile {
   @doc("List of Network Interface Card (NIC) Details of edge machine.")
@@ -362,7 +347,6 @@ model NetworkProfile {
   @Azure.ResourceManager.identifiers(#["switchName"])
   switchDetails?: SwitchDetail[];
 }
-
 
 @doc("Network Interface Card (NIC) Details of edge machine.")
 model NicDetail {
@@ -463,7 +447,6 @@ model NicDetail {
   rdmaCapability?: RdmaCapability = RdmaCapability.Disabled;
 }
 
-
 @doc("Switch Details of edge machine.")
 model SwitchDetail {
   /**
@@ -489,7 +472,6 @@ model SwitchDetail {
 /**
  * This represents extensions installed on virtualSwitch.
  */
-
 model SwitchExtension {
   /**
    * Unique identifier for virtualSwitch.
@@ -513,7 +495,6 @@ model SwitchExtension {
 /**
  * OS configurations for HCI device.
  */
-
 model OsProfile {
   /**
    * The boot type of the device. e.g. UEFI, Legacy etc
@@ -567,7 +548,6 @@ model OsProfile {
 /**
  * Describes the RDMA capability of the network adapter.
  */
-
 union RdmaCapability {
   string,
 
@@ -585,7 +565,6 @@ union RdmaCapability {
 /**
  * Hardware profile for the machine
  */
-
 model HardwareProfile {
   /**
    * Number of cpu cores in the machine
@@ -630,7 +609,6 @@ model HardwareProfile {
   processorType?: string;
 }
 
-
 @doc("StorageProfile of edge machine.")
 model StorageProfile {
   @doc("Number of storage disks in the device with $CanPool as true.")
@@ -641,7 +619,6 @@ model StorageProfile {
 /**
  * Solution builder extension (SBE) deployment package information.
  */
-
 model SbeDeploymentPackageInfo {
   /**
    * SBE deployment validation code.
@@ -665,7 +642,6 @@ model SbeDeploymentPackageInfo {
 /**
  * Extensions details for edge device.
  */
-
 model ExtensionProfile {
   /**
    * List of Arc extensions installed on edge device.
@@ -678,7 +654,6 @@ model ExtensionProfile {
 /**
  * Arc extension installed on edge device.
  */
-
 model Extension {
   /**
    * Arc extension name installed on edge device.
@@ -727,7 +702,6 @@ model Extension {
 /**
  * Arc extension installation state.
  */
-
 union ArcExtensionState {
   string,
 
@@ -785,7 +759,6 @@ union ArcExtensionState {
 /**
  * details of validation failure
  */
-
 model ErrorDetailModel {
   /**
    * Exception details while installing extension.
@@ -797,7 +770,6 @@ model ErrorDetailModel {
 /**
  * Extension managed by user or Azure.
  */
-
 union ExtensionManagedBy {
   string,
 

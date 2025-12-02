@@ -43,11 +43,6 @@ namespace Microsoft.AzureStackHCI;
  */
 enum Versions {
   /**
-   * The 2025-11-01-preview API version.
-   */
-  v2025_11_01_preview: "2025-11-01-preview",
-
-  /**
    * The 2025-12-01-preview API version.
    */
   v2025_12_01_preview: "2025-12-01-preview",

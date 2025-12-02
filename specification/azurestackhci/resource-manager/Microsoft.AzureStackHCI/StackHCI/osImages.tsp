@@ -8,10 +8,8 @@ import "@azure-tools/typespec-azure-resource-manager";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 
-
 @armProviderNamespace("Microsoft.AzureStackHCI")
 namespace Microsoft.AzureStackHCI;
-
 
 @doc("Represents a os image resource.")
 @parentResource(SubscriptionLocationResource)
@@ -23,7 +21,6 @@ model OsImage is Azure.ResourceManager.ProxyResource<OsImageProperties> {
 }
 
 @armResourceOperations
-
 interface OsImages {
   @doc("Get a os image.")
   get is ArmResourceRead<OsImage>;
@@ -33,7 +30,6 @@ interface OsImages {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state"
-
 @doc("Represents properties of a os image resource.")
 model OsImageProperties {
   @doc("Represents validated solution recipe version of a os image.")

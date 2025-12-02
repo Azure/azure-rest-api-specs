@@ -8,10 +8,8 @@ import "@azure-tools/typespec-azure-resource-manager";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 
-
 @armProviderNamespace("Microsoft.AzureStackHCI")
 namespace Microsoft.AzureStackHCI;
-
 
 @doc("Represents a update content.")
 @parentResource(SubscriptionLocationResource)
@@ -22,7 +20,6 @@ model UpdateContent
     NamePattern = "^[a-zA-Z0-9-.]{3,50}$"
   >;
 }
-
 
 @armResourceOperations
 interface UpdateContents {
@@ -37,14 +34,12 @@ interface UpdateContents {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state"
-
 @doc("Represents properties of a update content resource.")
 model UpdateContentProperties {
   @doc("Represents the payloads of a update content resource.")
   @Azure.ResourceManager.identifiers(#[])
   updatePayloads: Array<ContentPayload>;
 }
-
 
 @doc("Represents details of a specific update content payload.")
 model ContentPayload {
