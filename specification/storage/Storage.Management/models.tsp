@@ -1101,7 +1101,7 @@ model CorsRules {
    * The List of CORS rules. You can include up to five CorsRule elements in the request.
    */
   #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   corsRules?: CorsRule[];
 }
 
@@ -1269,7 +1269,6 @@ model ListContainerItem extends AzureEntityResource {
    * The blob container properties be listed out.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ContainerProperties;
 }
 
@@ -1397,7 +1396,6 @@ model ImmutabilityPolicyProperties {
    * The properties of an ImmutabilityPolicy of a blob container.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ImmutabilityPolicyProperty;
 
   /**
@@ -1410,7 +1408,7 @@ model ImmutabilityPolicyProperties {
    * The ImmutabilityPolicy update history of the blob container.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   updateHistory?: UpdateHistoryProperty[];
 }
 
@@ -1506,7 +1504,7 @@ model LegalHoldProperties {
   /**
    * The list of LegalHold tags of a blob container.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   tags?: TagProperty[];
 
   /**
@@ -1698,7 +1696,7 @@ model CloudErrorBody {
   /**
    * A list of additional details about the error.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   details?: CloudErrorBody[];
 }
 
@@ -2046,7 +2044,6 @@ model FileShareItem extends AzureEntityResource {
    * The file share properties be listed out.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: FileShareProperties;
 }
 
@@ -2377,7 +2374,6 @@ model ListQueue extends Azure.ResourceManager.CommonTypes.Resource {
    * List Queue resource properties.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ListQueueProperties;
 }
 
@@ -2428,7 +2424,6 @@ model Operation {
    * Properties of operation, include metric specifications.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: OperationProperties;
 }
 
@@ -2592,7 +2587,7 @@ model SkuInformation {
   locations?: string[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   locationInfo?: SkuInformationLocationInfoItem[];
 
   /**
@@ -2604,7 +2599,7 @@ model SkuInformation {
   /**
    * The restrictions because of which SKU cannot be used. This is empty if there are no restrictions.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   restrictions?: Restriction[];
 }
 
@@ -2750,7 +2745,6 @@ model StorageAccountCreateParameters {
    * The parameters used to create the storage account.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: StorageAccountPropertiesCreateParameters;
 }
 
@@ -3145,7 +3139,7 @@ model NetworkRuleSet {
   /**
    * Sets the resource access rules
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   resourceAccessRules?: ResourceAccessRule[];
 
   /**
@@ -3156,13 +3150,13 @@ model NetworkRuleSet {
   /**
    * Sets the IP ACL rules
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   ipRules?: IPRule[];
 
   /**
    * Sets the IPv6 ACL rules.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   ipv6Rules?: IPRule[];
 
   /**
@@ -3941,7 +3935,7 @@ model BlobRestoreParameters {
   /**
    * Blob ranges to restore.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   blobRanges: BlobRestoreRange[];
 }
 
@@ -4012,7 +4006,6 @@ model StorageAccountUpdateParameters {
    * The parameters used when updating a storage account.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: StorageAccountPropertiesUpdateParameters;
 
   /**
@@ -4227,7 +4220,7 @@ model StorageAccountListKeysResult {
    * Gets the list of storage account keys and their properties for the specified storage account.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   keys?: StorageAccountKey[];
 }
 
@@ -4386,6 +4379,7 @@ model ListAccountSasResponse {
   /**
    * List SAS credentials of storage account.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   accountSasToken?: string;
 }
@@ -4495,6 +4489,7 @@ model ListServiceSasResponse {
   /**
    * List service SAS credentials of specific resource.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   serviceSasToken?: string;
 }
@@ -5003,7 +4998,6 @@ model PrivateLinkResource extends Azure.ResourceManager.CommonTypes.Resource {
    * Resource properties.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: PrivateLinkResourceProperties;
 }
 
@@ -5075,7 +5069,7 @@ model ObjectReplicationPolicyProperties {
   /**
    * The storage account object replication rules.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   rules?: ObjectReplicationPolicyRule[];
 
   /**
@@ -5162,7 +5156,7 @@ model LocalUserProperties {
   /**
    * The permission scopes of the local user.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   permissionScopes?: PermissionScope[];
 
   /**
@@ -5173,7 +5167,7 @@ model LocalUserProperties {
   /**
    * Optional, local user ssh authorized keys for SFTP.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   sshAuthorizedKeys?: SshPublicKey[];
 
   /**
@@ -5253,6 +5247,7 @@ model SshPublicKey {
   /**
    * Ssh public key base64 encoded. The format should be: '<keyType> <keyData>', e.g. ssh-rsa AAAABBBB
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   key?: string;
 }
 
@@ -5263,7 +5258,7 @@ model LocalUserKeys {
   /**
    * Optional, local user ssh authorized keys for SFTP.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   sshAuthorizedKeys?: SshPublicKey[];
 
   /**
@@ -5447,7 +5442,7 @@ model NetworkSecurityPerimeterConfigurationProperties {
    * List of Provisioning Issues if any
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   provisioningIssues?: ProvisioningIssue[];
 
   /**
@@ -5558,7 +5553,7 @@ model NetworkSecurityPerimeterConfigurationPropertiesProfile {
   /**
    * List of Access Rules
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   accessRules?: NspAccessRule[];
 
   /**
