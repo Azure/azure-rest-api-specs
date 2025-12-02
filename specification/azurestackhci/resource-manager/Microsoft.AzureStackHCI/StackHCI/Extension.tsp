@@ -14,7 +14,6 @@ namespace Microsoft.AzureStackHCI;
 /**
  * Details of a particular extension in HCI Cluster.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "model nomenclature"
 @parentResource(ArcSetting)
 model Extension is Azure.ResourceManager.ProxyResource<ExtensionProperties> {
   ...ResourceNameParameter<
@@ -28,35 +27,43 @@ model Extension is Azure.ResourceManager.ProxyResource<ExtensionProperties> {
 @armResourceOperations
 interface Extensions {
   /**
-   * Get particular Arc Extension of the Parent Entity(HCI Cluster/Edge Machine).
+   * Get particular Arc Extension of HCI Cluster.
    */
   get is ArmResourceRead<Extension>;
 
   /**
-   * Create Extension for the Parent Entity(HCI Cluster/Edge Machine).
+   * Create Extension for HCI cluster.
    */
   create is ArmResourceCreateOrReplaceAsync<Extension>;
 
   /**
-   * Update Extension for the Parent Entity(HCI Cluster/Edge Machine).
+   * Update Extension for HCI cluster.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<Extension, PatchModel = ExtensionPatch>;
-
-  /**
-   * Delete particular Arc Extension of the Parent Entity(HCI Cluster/Edge Machine).
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<
+  @Azure.Core.useFinalStateVia("original-uri")
+  update is ArmCustomPatchAsync<
     Extension,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader &
-      ArmLroLocationHeader> | ArmDeletedNoContentResponse
+    PatchModel = ExtensionPatch,
+    Response = Extension | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
-   * List all Extensions under the Parent Entity(HCI Cluster/Edge Machine).
+   * Delete particular Arc Extension of HCI Cluster.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  delete is ArmResourceDeleteWithoutOkAsync<
+    Extension,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+  >;
+
+  /**
+   * List all Extensions under ArcSetting resource.
    */
   listByArcSetting is ArmResourceListByParent<
     Extension,
@@ -64,12 +71,14 @@ interface Extensions {
   >;
 
   /**
-   * Upgrade a particular Arc Extension of the Parent Entity(HCI Cluster/Edge Machine).
+   * Upgrade a particular Arc Extension of HCI Cluster.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   upgrade is ArmResourceActionAsyncBase<
     Extension,
     ExtensionUpgradeParameters,
-    Response = ArmAcceptedLroResponse<"azure-asyncoperation">,
+    ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+      Azure.Core.Foundations.RetryAfterHeader>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension>
   >;
 }
@@ -85,74 +94,3 @@ interface Extensions {
 @@doc(Extensions.upgrade::parameters.body,
   "Parameters supplied to the Upgrade Extensions operation."
 );
-
-// Models
-
-/**
- * List of Extensions in the Parent Entity(HCI Cluster/Edge Machine).
- */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "model nomenclature"
-model ExtensionList is Azure.Core.Page<Extension>;
-
-/**
- * Extension Details to update
- */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "model nomenclature"
-model ExtensionPatch {
-  /**
-   * Describes Machine Extension Properties that can be updated.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-  @Azure.ClientGenerator.Core.Legacy.flattenProperty
-  properties?: ExtensionPatchProperties;
-}
-
-/**
- * Describes Machine Extension Properties that can be updated.
- */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "model nomenclature"
-model ExtensionPatchProperties {
-  /**
-   * Describes the properties of a Machine Extension that can be updated.
-   */
-  extensionParameters?: ExtensionPatchParameters;
-}
-
-/**
- * Describes the properties of a Machine Extension that can be updated.
- */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "model nomenclature"
-model ExtensionPatchParameters {
-  /**
-   * Specifies the version of the script handler. Latest version would be used if not specified.
-   */
-  typeHandlerVersion?: string;
-
-  /**
-   * Indicates whether the extension should be automatically upgraded by the platform if there is a newer version available.
-   */
-  enableAutomaticUpgrade?: boolean;
-
-  /**
-   * Json formatted public settings for the extension.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Backward compatibility to maintain consistency with old swagger"
-  settings?: Record<unknown>;
-
-  /**
-   * Protected settings (may contain secrets).
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Backward compatibility to maintain consistency with old swagger"
-  protectedSettings?: Record<unknown>;
-}
-
-/**
- * Describes the parameters for Extension upgrade.
- */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "model nomenclature"
-model ExtensionUpgradeParameters {
-  /**
-   * Extension Upgrade Target Version.
-   */
-  targetVersion?: string;
-}

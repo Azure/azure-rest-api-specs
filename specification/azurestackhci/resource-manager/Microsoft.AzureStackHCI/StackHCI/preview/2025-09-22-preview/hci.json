@@ -58,6 +58,9 @@
       "name": "ArcSettings"
     },
     {
+      "name": "Offers"
+    },
+    {
       "name": "Clusters"
     },
     {
@@ -71,9 +74,6 @@
     },
     {
       "name": "Extensions"
-    },
-    {
-      "name": "Offers"
     },
     {
       "name": "Publishers"
@@ -91,7 +91,7 @@
       "name": "Updates"
     },
     {
-      "name": "UpdateSummaries"
+      "name": "UpdateSummariesOperationGroup"
     },
     {
       "name": "ValidatedSolutionRecipes"
@@ -110,7 +110,12 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+            "name": "resourceUri",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           }
         ],
         "responses": {
@@ -149,7 +154,12 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+            "name": "resourceUri",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "edgeDeviceName",
@@ -157,6 +167,7 @@
             "description": "Name of Device",
             "required": true,
             "type": "string",
+            "default": "default",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           }
         ],
@@ -191,7 +202,12 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+            "name": "resourceUri",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "edgeDeviceName",
@@ -199,6 +215,7 @@
             "description": "Name of Device",
             "required": true,
             "type": "string",
+            "default": "default",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
@@ -263,7 +280,12 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+            "name": "resourceUri",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "edgeDeviceName",
@@ -271,6 +293,7 @@
             "description": "Name of Device",
             "required": true,
             "type": "string",
+            "default": "default",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           }
         ],
@@ -322,7 +345,12 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+            "name": "resourceUri",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "edgeDeviceName",
@@ -330,6 +358,7 @@
             "description": "Name of Device",
             "required": true,
             "type": "string",
+            "default": "default",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           }
         ],
@@ -369,7 +398,12 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+            "name": "resourceUri",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "edgeDeviceName",
@@ -377,6 +411,7 @@
             "description": "Name of Device",
             "required": true,
             "type": "string",
+            "default": "default",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
@@ -419,7 +454,12 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+            "name": "resourceUri",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "edgeDeviceName",
@@ -427,6 +467,7 @@
             "description": "Name of Device",
             "required": true,
             "type": "string",
+            "default": "default",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
@@ -502,7 +543,12 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+            "name": "resourceUri",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "edgeDeviceName",
@@ -510,6 +556,7 @@
             "description": "Name of Device",
             "required": true,
             "type": "string",
+            "default": "default",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
@@ -569,7 +616,12 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+            "name": "resourceUri",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "edgeDeviceName",
@@ -577,6 +629,7 @@
             "description": "Name of Device",
             "required": true,
             "type": "string",
+            "default": "default",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
@@ -1228,23 +1281,6 @@
               "$ref": "#/definitions/Cluster"
             }
           },
-          "201": {
-            "description": "Resource 'Cluster' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/Cluster"
-            },
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -1256,11 +1292,7 @@
           "Create cluster": {
             "$ref": "./examples/CreateCluster.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true
+        }
       },
       "patch": {
         "operationId": "Clusters_Update",
@@ -1526,12 +1558,6 @@
               "$ref": "#/definitions/ArcSetting"
             }
           },
-          "201": {
-            "description": "Resource 'ArcSetting' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/ArcSetting"
-            }
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -1647,10 +1673,6 @@
                 "type": "string",
                 "description": "A link to the status monitor"
               },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -1674,7 +1696,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       }
@@ -1776,6 +1798,7 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
               },
               "Location": {
@@ -1813,7 +1836,7 @@
         "tags": [
           "Extensions"
         ],
-        "description": "List all Extensions under the Parent Entity(HCI Cluster/Edge Machine).",
+        "description": "List all Extensions under ArcSetting resource.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -1869,7 +1892,7 @@
         "tags": [
           "Extensions"
         ],
-        "description": "Get particular Arc Extension of the Parent Entity(HCI Cluster/Edge Machine).",
+        "description": "Get particular Arc Extension of HCI Cluster.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -1927,7 +1950,7 @@
         "tags": [
           "Extensions"
         ],
-        "description": "Create Extension for the Parent Entity(HCI Cluster/Edge Machine).",
+        "description": "Create Extension for HCI cluster.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -2015,7 +2038,7 @@
         "tags": [
           "Extensions"
         ],
-        "description": "Update Extension for the Parent Entity(HCI Cluster/Edge Machine).",
+        "description": "Update Extension for HCI cluster.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -2059,17 +2082,17 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/Extension"
             }
           },
           "202": {
-            "description": "Resource update request accepted.",
+            "description": "Resource operation accepted.",
             "headers": {
-              "Location": {
+              "Azure-AsyncOperation": {
                 "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+                "description": "A link to the status monitor"
               },
               "Retry-After": {
                 "type": "integer",
@@ -2091,7 +2114,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "original-uri"
         },
         "x-ms-long-running-operation": true
       },
@@ -2100,7 +2123,7 @@
         "tags": [
           "Extensions"
         ],
-        "description": "Delete particular Arc Extension of the Parent Entity(HCI Cluster/Edge Machine).",
+        "description": "Delete particular Arc Extension of HCI Cluster.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -2142,6 +2165,7 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
               },
               "Location": {
@@ -2171,7 +2195,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       }
@@ -2182,7 +2206,7 @@
         "tags": [
           "Extensions"
         ],
-        "description": "Upgrade a particular Arc Extension of the Parent Entity(HCI Cluster/Edge Machine).",
+        "description": "Upgrade a particular Arc Extension of HCI Cluster.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -2226,11 +2250,11 @@
         ],
         "responses": {
           "202": {
-            "description": "azure-asyncoperation",
+            "description": "Resource operation accepted.",
             "headers": {
-              "Location": {
+              "Azure-AsyncOperation": {
                 "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+                "description": "A link to the status monitor"
               },
               "Retry-After": {
                 "type": "integer",
@@ -2252,7 +2276,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       }
@@ -2351,6 +2375,7 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
               },
               "Location": {
@@ -2377,7 +2402,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       }
@@ -2435,6 +2460,7 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
               },
               "Location": {
@@ -2493,7 +2519,7 @@
           {
             "name": "changeRingRequest",
             "in": "body",
-            "description": "The content of the action request",
+            "description": "Change ring request payload",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ChangeRingRequest"
@@ -2649,6 +2675,7 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
               },
               "Location": {
@@ -2759,6 +2786,7 @@
             "description": "Name of Deployment Setting",
             "required": true,
             "type": "string",
+            "default": "default",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           }
         ],
@@ -2811,6 +2839,7 @@
             "description": "Name of Deployment Setting",
             "required": true,
             "type": "string",
+            "default": "default",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
@@ -2896,6 +2925,7 @@
             "description": "Name of Deployment Setting",
             "required": true,
             "type": "string",
+            "default": "default",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           }
         ],
@@ -3012,7 +3042,7 @@
       "get": {
         "operationId": "Offers_ListByCluster",
         "tags": [
-          "Offers"
+          "Clusters"
         ],
         "description": "List Offers available across publishers for the HCI Cluster.",
         "parameters": [
@@ -3058,6 +3088,9 @@
           "List Offer resources by HCI Cluster": {
             "$ref": "./examples/ListOffersByCluster.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -3516,6 +3549,7 @@
             "description": "Name of security setting",
             "required": true,
             "type": "string",
+            "default": "default",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           }
         ],
@@ -3568,6 +3602,7 @@
             "description": "Name of security setting",
             "required": true,
             "type": "string",
+            "default": "default",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
@@ -3650,6 +3685,7 @@
             "description": "Name of security setting",
             "required": true,
             "type": "string",
+            "default": "default",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           }
         ],
@@ -3839,7 +3875,7 @@
       "get": {
         "operationId": "UpdateSummaries_List",
         "tags": [
-          "UpdateSummaries"
+          "UpdateSummariesOperationGroup"
         ],
         "description": "List all Update summaries under the HCI cluster",
         "parameters": [
@@ -3888,7 +3924,7 @@
       "get": {
         "operationId": "UpdateSummaries_Get",
         "tags": [
-          "UpdateSummaries"
+          "UpdateSummariesOperationGroup"
         ],
         "description": "Get all Update summaries under the HCI cluster",
         "parameters": [
@@ -3932,7 +3968,7 @@
       "put": {
         "operationId": "UpdateSummaries_Put",
         "tags": [
-          "UpdateSummaries"
+          "UpdateSummariesOperationGroup"
         ],
         "description": "Put Update summaries under the HCI cluster",
         "parameters": [
@@ -3964,13 +4000,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'UpdateSummariesResource' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/UpdateSummaries"
-            }
-          },
-          "201": {
-            "description": "Resource 'UpdateSummariesResource' create operation succeeded",
+            "description": "Resource 'UpdateSummaries' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/UpdateSummaries"
             }
@@ -3991,7 +4021,7 @@
       "delete": {
         "operationId": "UpdateSummaries_Delete",
         "tags": [
-          "UpdateSummaries"
+          "UpdateSummariesOperationGroup"
         ],
         "description": "Delete Update Summaries",
         "parameters": [
@@ -4017,15 +4047,11 @@
             "description": "Resource deleted successfully."
           },
           "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "description": "Resource deletion accepted.",
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
                 "description": "A link to the status monitor"
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -4050,7 +4076,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       }
@@ -4203,12 +4229,6 @@
               "$ref": "#/definitions/Update"
             }
           },
-          "201": {
-            "description": "Resource 'Update' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/Update"
-            }
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -4264,10 +4284,6 @@
                 "type": "string",
                 "description": "A link to the status monitor"
               },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -4291,7 +4307,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       }
@@ -4337,6 +4353,7 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
               },
               "Location": {
@@ -4363,7 +4380,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       }
@@ -4537,12 +4554,6 @@
               "$ref": "#/definitions/UpdateRun"
             }
           },
-          "201": {
-            "description": "Resource 'UpdateRun' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/UpdateRun"
-            }
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -4599,15 +4610,11 @@
             "description": "Resource deleted successfully."
           },
           "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "description": "Resource deletion accepted.",
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
                 "description": "A link to the status monitor"
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -4632,7 +4639,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       }
@@ -4675,6 +4682,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -4699,7 +4711,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       }
@@ -4720,32 +4732,14 @@
           {
             "name": "Diagnostics",
             "value": "Diagnostics",
-            "description": "Diagnostics access level."
+            "description": "Allows remote diagnostics operations only."
           },
           {
             "name": "DiagnosticsAndRepair",
             "value": "DiagnosticsAndRepair",
-            "description": "Diagnostics and repair access level."
+            "description": "Allows both remote diagnostics and repair operations."
           }
         ]
-      }
-    },
-    "AdapterPropertyOverrides": {
-      "type": "object",
-      "description": "The AdapterPropertyOverrides of a cluster.",
-      "properties": {
-        "jumboPacket": {
-          "type": "string",
-          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation."
-        },
-        "networkDirect": {
-          "type": "string",
-          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation."
-        },
-        "networkDirectTechnology": {
-          "type": "string",
-          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation. Expected values are 'iWARP', 'RoCEv2', 'RoCE'"
-        }
       }
     },
     "ArcConnectivityProperties": {
@@ -4848,29 +4842,25 @@
         "properties": {
           "$ref": "#/definitions/ArcIdentityResponseProperties",
           "description": "ArcIdentity properties.",
+          "readOnly": true,
           "x-ms-client-flatten": true
         }
       }
     },
     "ArcIdentityResponseProperties": {
       "type": "object",
-      "description": "Arc identity response properties.",
       "properties": {
         "arcApplicationClientId": {
-          "type": "string",
-          "description": "The Arc application client identifier."
+          "type": "string"
         },
         "arcApplicationTenantId": {
-          "type": "string",
-          "description": "The Arc application tenant identifier."
+          "type": "string"
         },
         "arcServicePrincipalObjectId": {
-          "type": "string",
-          "description": "The Arc service principal object identifier."
+          "type": "string"
         },
         "arcApplicationObjectId": {
-          "type": "string",
-          "description": "The Arc application object identifier."
+          "type": "string"
         }
       }
     },
@@ -4880,7 +4870,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/ArcSettingProperties",
-          "description": "ArcSetting properties."
+          "description": "ArcSetting properties.",
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -4919,92 +4910,92 @@
           {
             "name": "NotSpecified",
             "value": "NotSpecified",
-            "description": "The state is not specified."
+            "description": "The aggregate state is not specified."
           },
           {
             "name": "Error",
             "value": "Error",
-            "description": "An error occurred."
+            "description": "An error occurred in the aggregate state."
           },
           {
             "name": "Succeeded",
             "value": "Succeeded",
-            "description": "The operation succeeded."
+            "description": "The operation successfully completed across all nodes."
           },
           {
             "name": "Canceled",
             "value": "Canceled",
-            "description": "The operation was canceled."
+            "description": "The operation was canceled across the nodes."
           },
           {
             "name": "Failed",
             "value": "Failed",
-            "description": "The operation failed."
+            "description": "The operation failed on all or most nodes."
           },
           {
             "name": "Connected",
             "value": "Connected",
-            "description": "The arc setting is connected."
+            "description": "All nodes are connected."
           },
           {
             "name": "Disconnected",
             "value": "Disconnected",
-            "description": "The arc setting is disconnected."
+            "description": "All nodes are disconnected."
           },
           {
             "name": "Deleted",
             "value": "Deleted",
-            "description": "The arc setting is deleted."
+            "description": "The Arc agent has been deleted from all nodes."
           },
           {
             "name": "Creating",
             "value": "Creating",
-            "description": "The arc setting is being created."
+            "description": "The Arc agent is being created across the nodes."
           },
           {
             "name": "Updating",
             "value": "Updating",
-            "description": "The arc setting is being updated."
+            "description": "The Arc agent is being updated across the nodes."
           },
           {
             "name": "Deleting",
             "value": "Deleting",
-            "description": "The arc setting is being deleted."
+            "description": "The Arc agent is being deleted across the nodes."
           },
           {
             "name": "Moving",
             "value": "Moving",
-            "description": "The arc setting is being moved."
+            "description": "The Arc agent is being moved across the nodes."
           },
           {
             "name": "PartiallySucceeded",
             "value": "PartiallySucceeded",
-            "description": "The operation partially succeeded."
+            "description": "The operation succeeded on some nodes."
           },
           {
             "name": "PartiallyConnected",
             "value": "PartiallyConnected",
-            "description": "The arc setting is partially connected."
+            "description": "Some nodes are connected, others are not."
           },
           {
             "name": "InProgress",
             "value": "InProgress",
-            "description": "The operation is in progress."
+            "description": "The operation is currently in progress across the nodes."
           },
           {
             "name": "Accepted",
             "value": "Accepted",
-            "description": "The operation has been accepted."
+            "description": "The operation has been accepted and is pending execution."
           },
           {
             "name": "Provisioning",
             "value": "Provisioning",
-            "description": "The arc setting is provisioning."
+            "description": "The Arc agent is being provisioned across the nodes."
           },
           {
             "name": "DisableInProgress",
             "value": "DisableInProgress",
-            "description": "Disable operation is in progress."
+            "description": "The Arc agent is being disabled across the nodes."
           }
         ]
       },
@@ -5166,7 +5157,7 @@
     },
     "AvailabilityType": {
       "type": "string",
-      "description": "Indicates the way the update content can be downloaded.",
+      "description": "Indicates how the update content is made available for download. This determines whether the update is sourced locally, from an online repository, or requires user notification.",
       "enum": [
         "Local",
         "Online",
@@ -5179,34 +5170,31 @@
           {
             "name": "Local",
             "value": "Local",
-            "description": "Update content is available locally."
+            "description": "The update content is available locally within the environment."
           },
           {
             "name": "Online",
             "value": "Online",
-            "description": "Update content is available online."
+            "description": "The update content is available from an online source."
           },
           {
             "name": "Notify",
             "value": "Notify",
-            "description": "Update content requires notification."
+            "description": "The system will notify the user when update content becomes available."
           }
         ]
       }
     },
     "ChangeRingRequest": {
       "type": "object",
-      "description": "Change Ring Request for cluster",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ChangeRingRequestProperties",
-          "description": "Properties for Change Ring Request"
+          "$ref": "#/definitions/ChangeRingRequestProperties"
         }
       }
     },
     "ChangeRingRequestProperties": {
       "type": "object",
-      "description": "Properties for Change Ring Request",
       "properties": {
         "targetRing": {
           "type": "string",
@@ -5220,15 +5208,17 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/ClusterProperties",
-          "description": "Cluster properties."
+          "description": "Cluster properties.",
+          "x-ms-client-flatten": true
         },
         "identity": {
           "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
+          "description": "The managed service identities assigned to this resource.",
+          "x-ms-client-flatten": true
         },
         "kind": {
           "type": "string",
-          "description": "This property identifies the purpose of the Cluster deployment. For example, a valid value is AzureLocal.",
+          "description": "This property identifies the purpose of the Cluster deployment. For example, a valid value is AzureLocal",
           "pattern": "^[-\\w\\._,\\(\\\\\\)]+$",
           "x-ms-mutability": [
             "read",
@@ -5270,23 +5260,18 @@
     },
     "ClusterIdentityResponseProperties": {
       "type": "object",
-      "description": "Cluster identity response properties.",
       "properties": {
         "aadClientId": {
-          "type": "string",
-          "description": "App id of cluster AAD identity."
+          "type": "string"
         },
         "aadTenantId": {
-          "type": "string",
-          "description": "Tenant id of cluster AAD identity."
+          "type": "string"
         },
         "aadServicePrincipalObjectId": {
-          "type": "string",
-          "description": "Id of cluster identity service principal."
+          "type": "string"
         },
         "aadApplicationObjectId": {
-          "type": "string",
-          "description": "Object id of cluster AAD identity."
+          "type": "string"
         }
       }
     },
@@ -5398,7 +5383,7 @@
     },
     "ClusterNodeType": {
       "type": "string",
-      "description": "The node type of all the nodes of the cluster.",
+      "description": "Specifies the type of hardware vendor for all nodes in the cluster. Indicates whether the nodes are provided by Microsoft or a third-party vendor.",
       "enum": [
         "FirstParty",
         "ThirdParty"
@@ -5410,12 +5395,12 @@
           {
             "name": "FirstParty",
             "value": "FirstParty",
-            "description": "First party cluster node."
+            "description": "All nodes in the cluster are provided and managed by Microsoft."
           },
           {
             "name": "ThirdParty",
             "value": "ThirdParty",
-            "description": "Third party cluster node."
+            "description": "All nodes in the cluster are provided and managed by a third-party vendor."
           }
         ]
       }
@@ -5495,17 +5480,17 @@
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning state.",
+          "description": "Provisioning state. Indicates the current lifecycle status of the resource, including creation, update, deletion, connectivity, and error states.",
           "readOnly": true
         },
         "status": {
           "$ref": "#/definitions/Status",
-          "description": "Status of the cluster agent.",
+          "description": "Status of the cluster agent. Indicates the current connectivity, validation, and deployment state of the agent within the cluster.",
           "readOnly": true
         },
         "connectivityStatus": {
           "$ref": "#/definitions/ConnectivityStatus",
-          "description": "Overall connectivity status for the cluster resource.",
+          "description": "Overall connectivity status for the cluster resource. Indicates whether the cluster is connected to Azure, partially connected, or has not recently communicated.",
           "readOnly": true
         },
         "supportStatus": {
@@ -5637,8 +5622,29 @@
           ]
         },
         "identityProvider": {
-          "$ref": "#/definitions/IdentityProvider",
+          "type": "string",
           "description": "Identity Provider for the cluster",
+          "default": "ActiveDirectory",
+          "enum": [
+            "ActiveDirectory",
+            "LocalIdentity"
+          ],
+          "x-ms-enum": {
+            "name": "IdentityProvider",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "ActiveDirectory",
+                "value": "ActiveDirectory",
+                "description": "Uses Active Directory as the identity provider, enabling domain-based authentication and centralized identity management. This is the default option."
+              },
+              {
+                "name": "LocalIdentity",
+                "value": "LocalIdentity",
+                "description": "Uses a local identity system integrated with Azure Key Vault for authentication. Suitable for AD-less environments where Active Directory is not available or required."
+              }
+            ]
+          },
           "readOnly": true
         }
       }
@@ -5679,7 +5685,7 @@
         "msiExpirationTimeStamp": {
           "type": "string",
           "format": "date-time",
-          "description": "MSI expiration timestamp of the cluster MSI",
+          "description": "Specifies the expiration timestamp of the cluster's Managed Service Identity (MSI). The value is expressed in Coordinated Universal Time (UTC).",
           "readOnly": true
         },
         "imdsAttestation": {
@@ -5701,7 +5707,7 @@
         },
         "clusterType": {
           "$ref": "#/definitions/ClusterNodeType",
-          "description": "The node type of all the nodes of the cluster.",
+          "description": "Specifies the type of hardware vendor for all nodes in the cluster. Indicates whether the nodes are provided by Microsoft or a third-party vendor.",
           "readOnly": true
         },
         "manufacturer": {
@@ -5744,11 +5750,6 @@
               }
             ]
           },
-          "readOnly": true
-        },
-        "customLocationId": {
-          "type": "string",
-          "description": "Name of the on-prem cluster connected to this resource.",
           "readOnly": true
         }
       }
@@ -5840,7 +5841,7 @@
     },
     "ConnectivityStatus": {
       "type": "string",
-      "description": "Overall connectivity status for the cluster resource.",
+      "description": "Overall connectivity status for the cluster resource. Indicates whether the cluster is connected to Azure, partially connected, or has not recently communicated.",
       "enum": [
         "NotYetRegistered",
         "Connected",
@@ -5856,32 +5857,32 @@
           {
             "name": "NotYetRegistered",
             "value": "NotYetRegistered",
-            "description": "The cluster is not yet registered."
+            "description": "The cluster has not yet registered with Azure."
           },
           {
             "name": "Connected",
             "value": "Connected",
-            "description": "The cluster is connected."
+            "description": "The cluster is fully connected to Azure."
           },
           {
             "name": "NotConnectedRecently",
             "value": "NotConnectedRecently",
-            "description": "The cluster has not connected recently."
+            "description": "The cluster has not connected to Azure recently."
           },
           {
             "name": "PartiallyConnected",
             "value": "PartiallyConnected",
-            "description": "The cluster is partially connected."
+            "description": "Some components of the cluster are connected, while others are not."
           },
           {
             "name": "Disconnected",
             "value": "Disconnected",
-            "description": "The cluster is disconnected."
+            "description": "The cluster is not connected to Azure."
           },
           {
             "name": "NotSpecified",
             "value": "NotSpecified",
-            "description": "The state is not specified."
+            "description": "The connectivity status is not specified."
           }
         ]
       }
@@ -5936,22 +5937,22 @@
           {
             "name": "User",
             "value": "User",
-            "description": "The resource was created by a user."
+            "description": "User"
           },
           {
             "name": "Application",
             "value": "Application",
-            "description": "The resource was created by an application."
+            "description": "Application"
           },
           {
             "name": "ManagedIdentity",
             "value": "ManagedIdentity",
-            "description": "The resource was created by a managed identity."
+            "description": "ManagedIdentity"
           },
           {
             "name": "Key",
             "value": "Key",
-            "description": "The resource was created by a key."
+            "description": "Key"
           }
         ]
       }
@@ -6108,16 +6109,16 @@
           ]
         },
         "hostNetwork": {
-          "$ref": "#/definitions/DeploymentHostNetwork",
+          "$ref": "#/definitions/DeploymentSettingHostNetwork",
           "description": "HostNetwork config to deploy AzureStackHCI Cluster."
-        },
-        "isManagementCluster": {
-          "type": "boolean",
-          "description": "Is Management Cluster, when true indicates that the cluster is used for managing other clusters"
         },
         "sdnIntegration": {
           "$ref": "#/definitions/SdnIntegration",
           "description": "SDN Integration config to deploy AzureStackHCI Cluster."
+        },
+        "isManagementCluster": {
+          "type": "boolean",
+          "description": "Is Management Cluster, when true indicates that the cluster is used for managing other clusters"
         },
         "adouPath": {
           "type": "string",
@@ -6125,7 +6126,7 @@
         },
         "secretsLocation": {
           "type": "string",
-          "description": "Azure keyvault endpoint. This property is deprecated from 2023-12-01-preview. Please use secrets property instead."
+          "description": "Azure key vault endpoint. This property is deprecated from 2023-12-01-preview. Please use secrets property instead."
         },
         "secrets": {
           "type": "array",
@@ -6154,91 +6155,6 @@
         "assemblyInfo": {
           "$ref": "#/definitions/AssemblyInfo",
           "description": "Assembly Package details for Validated Solution Recipe for AzureStackHCI Cluster"
-        }
-      }
-    },
-    "DeploymentHostNetwork": {
-      "type": "object",
-      "description": "The HostNetwork of a cluster.",
-      "properties": {
-        "intents": {
-          "type": "array",
-          "description": "The network intents assigned to the network reference pattern used for the deployment. Each intent will define its own name, traffic type, adapter names, and overrides as recommended by your OEM.",
-          "items": {
-            "$ref": "#/definitions/DeploymentIntents"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
-        },
-        "storageNetworks": {
-          "type": "array",
-          "description": "List of StorageNetworks config to deploy AzureStackHCI Cluster.",
-          "items": {
-            "$ref": "#/definitions/DeploymentStorageNetworks"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
-        },
-        "storageConnectivitySwitchless": {
-          "type": "boolean",
-          "description": "Defines how the storage adapters between nodes are connected either switch or switch less..",
-          "default": false
-        },
-        "enableStorageAutoIp": {
-          "type": "boolean",
-          "description": "Optional parameter required only for 3 Nodes Switchless deployments. This allows users to specify IPs and Mask for Storage NICs when Network ATC is not assigning the IPs for storage automatically.",
-          "default": false
-        }
-      }
-    },
-    "DeploymentIntents": {
-      "type": "object",
-      "description": "The Intents of a cluster.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the network intent you wish to create."
-        },
-        "trafficType": {
-          "type": "array",
-          "description": "List of network traffic types. Only allowed values are 'Compute', 'Storage', 'Management'.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "adapter": {
-          "type": "array",
-          "description": "Array of network interfaces used for the network intent.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "overrideVirtualSwitchConfiguration": {
-          "type": "boolean",
-          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.",
-          "default": false
-        },
-        "virtualSwitchConfigurationOverrides": {
-          "$ref": "#/definitions/DeploymentVirtualSwitchConfigurationOverrides",
-          "description": "Set virtualSwitch ConfigurationOverrides for cluster."
-        },
-        "overrideQosPolicy": {
-          "type": "boolean",
-          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation."
-        },
-        "qosPolicyOverrides": {
-          "$ref": "#/definitions/QosPolicyOverrides",
-          "description": "Set QoS PolicyOverrides for cluster."
-        },
-        "overrideAdapterProperty": {
-          "type": "boolean",
-          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation."
-        },
-        "adapterPropertyOverrides": {
-          "$ref": "#/definitions/AdapterPropertyOverrides",
-          "description": "Set Adapter PropertyOverrides for cluster."
         }
       }
     },
@@ -6328,7 +6244,12 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/DeploymentSettingsProperties",
-          "description": "The resource-specific properties for this resource."
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -6336,6 +6257,111 @@
           "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ]
+    },
+    "DeploymentSettingAdapterPropertyOverrides": {
+      "type": "object",
+      "description": "The AdapterPropertyOverrides of a cluster.",
+      "properties": {
+        "jumboPacket": {
+          "type": "string",
+          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation."
+        },
+        "networkDirect": {
+          "type": "string",
+          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation."
+        },
+        "networkDirectTechnology": {
+          "type": "string",
+          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation. Expected values are 'iWARP', 'RoCEv2', 'RoCE'"
+        }
+      }
+    },
+    "DeploymentSettingHostNetwork": {
+      "type": "object",
+      "description": "The HostNetwork of a cluster.",
+      "properties": {
+        "intents": {
+          "type": "array",
+          "description": "The network intents assigned to the network reference pattern used for the deployment. Each intent will define its own name, traffic type, adapter names, and overrides as recommended by your OEM.",
+          "items": {
+            "$ref": "#/definitions/DeploymentSettingIntents"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "storageNetworks": {
+          "type": "array",
+          "description": "List of StorageNetworks config to deploy AzureStackHCI Cluster.",
+          "items": {
+            "$ref": "#/definitions/DeploymentSettingStorageNetworks"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "storageConnectivitySwitchless": {
+          "type": "boolean",
+          "description": "Defines how the storage adapters between nodes are connected either switch or switch less..",
+          "default": false
+        },
+        "enableStorageAutoIp": {
+          "type": "boolean",
+          "description": "Optional parameter required only for 3 Nodes Switchless deployments. This allows users to specify IPs and Mask for Storage NICs when Network ATC is not assigning the IPs for storage automatically.",
+          "default": false
+        }
+      }
+    },
+    "DeploymentSettingIntents": {
+      "type": "object",
+      "description": "The Intents of a cluster.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the network intent you wish to create."
+        },
+        "trafficType": {
+          "type": "array",
+          "description": "List of network traffic types. Only allowed values are 'Compute', 'Storage', 'Management'.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "adapter": {
+          "type": "array",
+          "description": "Array of network interfaces used for the network intent.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "overrideVirtualSwitchConfiguration": {
+          "type": "boolean",
+          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.",
+          "default": false
+        },
+        "virtualSwitchConfigurationOverrides": {
+          "$ref": "#/definitions/DeploymentSettingVirtualSwitchConfigurationOverrides",
+          "description": "Set virtualSwitch ConfigurationOverrides for cluster."
+        },
+        "overrideQosPolicy": {
+          "type": "boolean",
+          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.",
+          "default": false
+        },
+        "qosPolicyOverrides": {
+          "$ref": "#/definitions/QosPolicyOverrides",
+          "description": "Set QoS PolicyOverrides for cluster."
+        },
+        "overrideAdapterProperty": {
+          "type": "boolean",
+          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.",
+          "default": false
+        },
+        "adapterPropertyOverrides": {
+          "$ref": "#/definitions/DeploymentSettingAdapterPropertyOverrides",
+          "description": "Set Adapter PropertyOverrides for cluster."
+        }
+      }
     },
     "DeploymentSettingListResult": {
       "type": "object",
@@ -6357,6 +6383,66 @@
       "required": [
         "value"
       ]
+    },
+    "DeploymentSettingStorageAdapterIPInfo": {
+      "type": "object",
+      "description": "The StorageAdapter physical nodes of a cluster.",
+      "properties": {
+        "physicalNode": {
+          "type": "string",
+          "description": "storage adapter physical node name."
+        },
+        "ipv4Address": {
+          "type": "string",
+          "description": "The IPv4 address assigned to each storage adapter physical node on your Azure Stack HCI cluster."
+        },
+        "subnetMask": {
+          "type": "string",
+          "description": "The SubnetMask address assigned to each storage adapter physical node on your Azure Stack HCI cluster."
+        }
+      }
+    },
+    "DeploymentSettingStorageNetworks": {
+      "type": "object",
+      "description": "The StorageNetworks of a cluster.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the storage network."
+        },
+        "networkAdapterName": {
+          "type": "string",
+          "description": "Name of the storage network adapter."
+        },
+        "vlanId": {
+          "type": "string",
+          "description": "ID specified for the VLAN storage network. This setting is applied to the network interfaces that route the storage and VM migration traffic."
+        },
+        "storageAdapterIPInfo": {
+          "type": "array",
+          "description": "List of Storage adapter physical nodes config to deploy AzureStackHCI Cluster.",
+          "items": {
+            "$ref": "#/definitions/DeploymentSettingStorageAdapterIPInfo"
+          },
+          "x-ms-identifiers": [
+            "physicalNode"
+          ]
+        }
+      }
+    },
+    "DeploymentSettingVirtualSwitchConfigurationOverrides": {
+      "type": "object",
+      "description": "The VirtualSwitchConfigurationOverrides of a cluster.",
+      "properties": {
+        "enableIov": {
+          "type": "string",
+          "description": "Enable IoV for Virtual Switch"
+        },
+        "loadBalancingAlgorithm": {
+          "type": "string",
+          "description": "Load Balancing Algorithm for Virtual Switch"
+        }
+      }
     },
     "DeploymentSettingsProperties": {
       "type": "object",
@@ -6469,48 +6555,6 @@
             "type": "string"
           },
           "readOnly": true
-        }
-      }
-    },
-    "DeploymentStorageNetworks": {
-      "type": "object",
-      "description": "The StorageNetworks of a cluster.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the storage network."
-        },
-        "networkAdapterName": {
-          "type": "string",
-          "description": "Name of the storage network adapter."
-        },
-        "vlanId": {
-          "type": "string",
-          "description": "ID specified for the VLAN storage network. This setting is applied to the network interfaces that route the storage and VM migration traffic."
-        },
-        "storageAdapterIPInfo": {
-          "type": "array",
-          "description": "List of Storage adapter physical nodes config to deploy AzureStackHCI Cluster.",
-          "items": {
-            "$ref": "#/definitions/StorageAdapterIPInfo"
-          },
-          "x-ms-identifiers": [
-            "physicalNode"
-          ]
-        }
-      }
-    },
-    "DeploymentVirtualSwitchConfigurationOverrides": {
-      "type": "object",
-      "description": "The VirtualSwitchConfigurationOverrides of a cluster.",
-      "properties": {
-        "enableIov": {
-          "type": "string",
-          "description": "Enable IoV for Virtual Switch"
-        },
-        "loadBalancingAlgorithm": {
-          "type": "string",
-          "description": "Load Balancing Algorithm for Virtual Switch"
         }
       }
     },
@@ -6670,17 +6714,17 @@
           {
             "name": "Off",
             "value": "Off",
-            "description": "Diagnostic data is turned off."
+            "description": "No diagnostic data will be emitted."
           },
           {
             "name": "Basic",
             "value": "Basic",
-            "description": "Basic level of diagnostic data."
+            "description": "Basic diagnostic data will be emitted, including essential health metrics."
           },
           {
             "name": "Enhanced",
             "value": "Enhanced",
-            "description": "Enhanced level of diagnostic data."
+            "description": "Enhanced diagnostic data will be emitted, including detailed performance and usage metrics."
           }
         ]
       }
@@ -6728,23 +6772,21 @@
     },
     "EceActionStatus": {
       "type": "object",
-      "description": "Validation / deployment status details for Job.",
+      "description": "The ECE action plan deployment status for AzureStackHCI Cluster.",
       "properties": {
         "status": {
           "type": "string",
-          "description": "Job status.",
+          "description": "Status of ECE action AzureStackHCI Cluster Deployment.",
           "readOnly": true
         },
         "steps": {
           "type": "array",
-          "description": "List of steps of Edge device job.",
+          "description": "List of steps of AzureStackHCI Cluster Deployment.",
           "items": {
-            "$ref": "#/definitions/Step"
+            "$ref": "#/definitions/DeploymentStep"
           },
           "readOnly": true,
-          "x-ms-identifiers": [
-            "name"
-          ]
+          "x-ms-identifiers": []
         }
       }
     },
@@ -6824,23 +6866,8 @@
       "description": "Edge device resource.",
       "properties": {
         "kind": {
-          "type": "string",
-          "description": "Device kind to support polymorphic resource.",
-          "default": "HCI",
-          "enum": [
-            "HCI"
-          ],
-          "x-ms-enum": {
-            "name": "DeviceKind",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "HCI",
-                "value": "HCI",
-                "description": "Arc-enabled edge device with HCI OS."
-              }
-            ]
-          },
+          "$ref": "#/definitions/DeviceKind",
+          "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -6857,51 +6884,13 @@
         }
       ]
     },
-    "EdgeDeviceHostNetwork": {
-      "type": "object",
-      "description": "The HostNetwork of a cluster.",
-      "properties": {
-        "intents": {
-          "type": "array",
-          "description": "The network intents assigned to the network reference pattern used for the deployment. Each intent will define its own name, traffic type, adapter names, and overrides as recommended by your OEM.",
-          "items": {
-            "$ref": "#/definitions/EdgeDevicesIntents"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "intentName"
-          ]
-        },
-        "storageNetworks": {
-          "type": "array",
-          "description": "List of StorageNetworks config to deploy AzureStackHCI Cluster.",
-          "items": {
-            "$ref": "#/definitions/EdgeDevicesStorageNetworks"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "networkAdapterName"
-          ]
-        },
-        "storageConnectivitySwitchless": {
-          "type": "boolean",
-          "description": "Defines how the storage adapters between nodes are connected either switch or switch less.",
-          "readOnly": true
-        },
-        "enableStorageAutoIp": {
-          "type": "boolean",
-          "description": "Optional parameter required only for 3 Nodes Switchless deployments. This allows users to specify IPs and Mask for Storage NICs when Network ATC is not assigning the IPs for storage automatically.",
-          "readOnly": true
-        }
-      }
-    },
     "EdgeDeviceJob": {
       "type": "object",
       "description": "EdgeDevice Jobs resource",
       "properties": {
         "kind": {
           "$ref": "#/definitions/EdgeDeviceKind",
-          "description": "Edge Solution type to support polymorphic resource.",
+          "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -7002,7 +6991,7 @@
     },
     "EdgeDeviceKind": {
       "type": "string",
-      "description": "Edge device type based on host OS installed.",
+      "description": "Edge device kind.",
       "enum": [
         "HCI"
       ],
@@ -7054,192 +7043,6 @@
         }
       }
     },
-    "EdgeDevicesAdapterPropertyOverrides": {
-      "type": "object",
-      "description": "The AdapterPropertyOverrides of a cluster.",
-      "properties": {
-        "jumboPacket": {
-          "type": "string",
-          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.",
-          "readOnly": true
-        },
-        "networkDirect": {
-          "type": "string",
-          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.",
-          "readOnly": true
-        },
-        "networkDirectTechnology": {
-          "type": "string",
-          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation. Expected values are 'iWARP', 'RoCEv2', 'RoCE'",
-          "readOnly": true
-        }
-      }
-    },
-    "EdgeDevicesIntents": {
-      "type": "object",
-      "description": "The Intents of a cluster.",
-      "properties": {
-        "scope": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Scope for host network intent.",
-          "readOnly": true
-        },
-        "intentType": {
-          "type": "integer",
-          "format": "int64",
-          "description": "IntentType for host network intent.",
-          "readOnly": true
-        },
-        "isComputeIntentSet": {
-          "type": "boolean",
-          "description": "IsComputeIntentSet for host network intent.",
-          "readOnly": true
-        },
-        "isStorageIntentSet": {
-          "type": "boolean",
-          "description": "IsStorageIntentSet for host network intent.",
-          "readOnly": true
-        },
-        "isOnlyStorage": {
-          "type": "boolean",
-          "description": "IntentType for host network intent.",
-          "readOnly": true
-        },
-        "isManagementIntentSet": {
-          "type": "boolean",
-          "description": "IsManagementIntentSet for host network intent.",
-          "readOnly": true
-        },
-        "isStretchIntentSet": {
-          "type": "boolean",
-          "description": "IsStretchIntentSet for host network intent.",
-          "readOnly": true
-        },
-        "isOnlyStretch": {
-          "type": "boolean",
-          "description": "IsOnlyStretch for host network intent.",
-          "readOnly": true
-        },
-        "isNetworkIntentType": {
-          "type": "boolean",
-          "description": "IsNetworkIntentType for host network intent.",
-          "readOnly": true
-        },
-        "intentName": {
-          "type": "string",
-          "description": "Name of the network intent you wish to create.",
-          "readOnly": true
-        },
-        "intentAdapters": {
-          "type": "array",
-          "description": "Array of adapters used for the network intent.",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "overrideVirtualSwitchConfiguration": {
-          "type": "boolean",
-          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.",
-          "readOnly": true
-        },
-        "virtualSwitchConfigurationOverrides": {
-          "$ref": "#/definitions/EdgeDevicesVirtualSwitchConfigurationOverrides",
-          "description": "Set virtualSwitch ConfigurationOverrides for cluster.",
-          "readOnly": true
-        },
-        "overrideQosPolicy": {
-          "type": "boolean",
-          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.",
-          "readOnly": true
-        },
-        "qosPolicyOverrides": {
-          "$ref": "#/definitions/QosPolicyOverrides",
-          "description": "Set QoS PolicyOverrides for cluster.",
-          "readOnly": true
-        },
-        "overrideAdapterProperty": {
-          "type": "boolean",
-          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.",
-          "readOnly": true
-        },
-        "adapterPropertyOverrides": {
-          "$ref": "#/definitions/EdgeDevicesAdapterPropertyOverrides",
-          "description": "Set Adapter PropertyOverrides for cluster.",
-          "readOnly": true
-        }
-      }
-    },
-    "EdgeDevicesStorageAdapterIPInfo": {
-      "type": "object",
-      "description": "The StorageAdapter physical nodes of a cluster.",
-      "properties": {
-        "physicalNode": {
-          "type": "string",
-          "description": "storage adapter physical node name.",
-          "readOnly": true
-        },
-        "ipv4Address": {
-          "type": "string",
-          "description": "The IPv4 address assigned to each storage adapter physical node on your Azure Stack HCI cluster.",
-          "readOnly": true
-        },
-        "subnetMask": {
-          "type": "string",
-          "description": "The SubnetMask address assigned to each storage adapter physical node on your Azure Stack HCI cluster.",
-          "readOnly": true
-        }
-      }
-    },
-    "EdgeDevicesStorageNetworks": {
-      "type": "object",
-      "description": "The StorageNetworks of a cluster.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the storage network.",
-          "readOnly": true
-        },
-        "networkAdapterName": {
-          "type": "string",
-          "description": "Name of the storage network adapter.",
-          "readOnly": true
-        },
-        "storageVlanId": {
-          "type": "string",
-          "description": "ID specified for the VLAN storage network. This setting is applied to the network interfaces that route the storage and VM migration traffic.",
-          "readOnly": true
-        },
-        "storageAdapterIPInfo": {
-          "type": "array",
-          "description": "List of Storage adapter physical nodes config to deploy AzureStackHCI Cluster.",
-          "items": {
-            "$ref": "#/definitions/EdgeDevicesStorageAdapterIPInfo"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "physicalNode"
-          ]
-        }
-      }
-    },
-    "EdgeDevicesVirtualSwitchConfigurationOverrides": {
-      "type": "object",
-      "description": "The VirtualSwitchConfigurationOverrides of a cluster.",
-      "properties": {
-        "enableIov": {
-          "type": "string",
-          "description": "Enable IoV for Virtual Switch",
-          "readOnly": true
-        },
-        "loadBalancingAlgorithm": {
-          "type": "string",
-          "description": "Load Balancing Algorithm for Virtual Switch",
-          "readOnly": true
-        }
-      }
-    },
     "EdgeSolutionType": {
       "type": "string",
       "description": "Edge solution type.",
@@ -7258,24 +7061,14 @@
         ]
       }
     },
-    "ErrorDetail": {
-      "type": "object",
-      "description": "details of validation failure",
-      "properties": {
-        "exception": {
-          "type": "string",
-          "description": "Exception details while installing extension.",
-          "readOnly": true
-        }
-      }
-    },
     "Extension": {
       "type": "object",
       "description": "Details of a particular extension in HCI Cluster.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/ExtensionProperties",
-          "description": "Describes Machine Extension Properties."
+          "description": "Describes Machine Extension Properties.",
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -7286,7 +7079,7 @@
     },
     "ExtensionAggregateState": {
       "type": "string",
-      "description": "Aggregate state of Arc Extensions across the nodes in the Parent Entity(HCI Cluster/Edge Machine).",
+      "description": "Aggregate state of Arc Extensions across the nodes in this HCI cluster. This reflects the overall status of the extension deployment and operation across all nodes.",
       "enum": [
         "NotSpecified",
         "Error",
@@ -7314,92 +7107,92 @@
           {
             "name": "NotSpecified",
             "value": "NotSpecified",
-            "description": "The state is not specified."
+            "description": "The aggregate state is not specified."
           },
           {
             "name": "Error",
             "value": "Error",
-            "description": "An error occurred."
+            "description": "An error occurred in the aggregate state."
           },
           {
             "name": "Succeeded",
             "value": "Succeeded",
-            "description": "The operation succeeded."
+            "description": "The operation succeeded across all nodes."
           },
           {
             "name": "Canceled",
             "value": "Canceled",
-            "description": "The operation was canceled."
+            "description": "The operation was canceled across the nodes."
           },
           {
             "name": "Failed",
             "value": "Failed",
-            "description": "The operation failed."
+            "description": "The operation failed on all or most nodes."
           },
           {
             "name": "Connected",
             "value": "Connected",
-            "description": "The extension is connected."
+            "description": "All nodes are connected."
           },
           {
             "name": "Disconnected",
             "value": "Disconnected",
-            "description": "The extension is disconnected."
+            "description": "All nodes are disconnected."
           },
           {
             "name": "Deleted",
             "value": "Deleted",
-            "description": "The extension is deleted."
+            "description": "The extension has been deleted from all nodes."
           },
           {
             "name": "Creating",
             "value": "Creating",
-            "description": "The extension is being created."
+            "description": "The extension is being created across the nodes."
           },
           {
             "name": "Updating",
             "value": "Updating",
-            "description": "The extension is being updated."
+            "description": "The extension is being updated across the nodes."
           },
           {
             "name": "Deleting",
             "value": "Deleting",
-            "description": "The extension is being deleted."
+            "description": "The extension is being deleted across the nodes."
           },
           {
             "name": "Moving",
             "value": "Moving",
-            "description": "The extension is being moved."
+            "description": "The extension is being moved across the nodes."
           },
           {
             "name": "PartiallySucceeded",
             "value": "PartiallySucceeded",
-            "description": "The operation partially succeeded."
+            "description": "The operation succeeded on some nodes."
           },
           {
             "name": "PartiallyConnected",
             "value": "PartiallyConnected",
-            "description": "The extension is partially connected."
+            "description": "Some nodes are connected, others are not."
           },
           {
             "name": "InProgress",
             "value": "InProgress",
-            "description": "The operation is in progress."
+            "description": "The operation is currently in progress across the nodes."
           },
           {
             "name": "Accepted",
             "value": "Accepted",
-            "description": "The operation has been accepted."
+            "description": "The operation has been accepted and is pending execution."
           },
           {
             "name": "Provisioning",
             "value": "Provisioning",
-            "description": "The extension is provisioning."
+            "description": "The extension is currently being provisioned across the nodes."
           },
           {
             "name": "UpgradeFailedRollbackSucceeded",
             "value": "UpgradeFailedRollbackSucceeded",
-            "description": "Upgrade failed but rollback succeeded."
+            "description": "Extension upgrade failed, but rollback succeeded across the nodes."
           }
         ]
       },
@@ -7437,7 +7230,7 @@
         },
         "level": {
           "$ref": "#/definitions/StatusLevelTypes",
-          "description": "The level code."
+          "description": "The level code. Indicates the severity or importance of the status message."
         },
         "displayStatus": {
           "type": "string",
@@ -7456,7 +7249,7 @@
     },
     "ExtensionList": {
       "type": "object",
-      "description": "List of Extensions in the Parent Entity(HCI Cluster/Edge Machine).",
+      "description": "List of Extensions in HCI cluster.",
       "properties": {
         "value": {
           "type": "array",
@@ -7477,7 +7270,7 @@
     },
     "ExtensionManagedBy": {
       "type": "string",
-      "description": "Extension managed by user or Azure.",
+      "description": "Indicates whether the extension is managed by the user or by Azure.",
       "enum": [
         "User",
         "Azure"
@@ -7489,12 +7282,12 @@
           {
             "name": "User",
             "value": "User",
-            "description": "Extension is managed by user."
+            "description": "The extension is managed by the user."
           },
           {
             "name": "Azure",
             "value": "Azure",
-            "description": "Extension is managed by Azure."
+            "description": "The extension is managed by Azure."
           }
         ]
       }
@@ -7524,14 +7317,12 @@
           "description": "Indicates whether the extension should use a newer minor version if one is available at deployment time. Once deployed, however, the extension will not upgrade minor versions unless redeployed, even with this property set to true."
         },
         "settings": {
-          "type": "object",
-          "description": "Json formatted public settings for the extension.",
-          "additionalProperties": {}
+          "description": "Json formatted public settings for the extension."
         },
         "protectedSettings": {
-          "type": "object",
+          "format": "password",
           "description": "Protected settings (may contain secrets).",
-          "additionalProperties": {}
+          "x-ms-secret": true
         },
         "enableAutomaticUpgrade": {
           "type": "boolean",
@@ -7563,14 +7354,12 @@
           "description": "Indicates whether the extension should be automatically upgraded by the platform if there is a newer version available."
         },
         "settings": {
-          "type": "object",
-          "description": "Json formatted public settings for the extension.",
-          "additionalProperties": {}
+          "description": "Json formatted public settings for the extension."
         },
         "protectedSettings": {
-          "type": "object",
+          "format": "password",
           "description": "Protected settings (may contain secrets).",
-          "additionalProperties": {}
+          "x-ms-secret": true
         }
       }
     },
@@ -7603,25 +7392,26 @@
     },
     "ExtensionProperties": {
       "type": "object",
-      "description": "Status of Arc Extension for a particular node in the Parent Entity(HCI Cluster/Edge Machine).",
+      "description": "Status of Arc Extension for a particular node in HCI Cluster.",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning state of the Extension proxy resource.",
+          "description": "Provisioning state of the Extension proxy resource. Indicates the current lifecycle status of the resource, such as whether it's being created, updated, deleted, or has encountered an error.",
           "readOnly": true
         },
         "extensionParameters": {
           "$ref": "#/definitions/ExtensionParameters",
-          "description": "Parameters specific to this extension type."
+          "description": "Parameters specific to this extension type.",
+          "x-ms-client-flatten": true
         },
         "aggregateState": {
           "$ref": "#/definitions/ExtensionAggregateState",
-          "description": "Aggregate state of Arc Extensions across the nodes in the Parent Entity(HCI Cluster/Edge Machine).",
+          "description": "Aggregate state of Arc Extensions across the nodes in this HCI cluster. This reflects the overall status of the extension deployment and operation across all nodes.",
           "readOnly": true
         },
         "perNodeExtensionDetails": {
           "type": "array",
-          "description": "State of Arc Extension in each of the nodes/machines.",
+          "description": "State of Arc Extension in each of the nodes.",
           "items": {
             "$ref": "#/definitions/PerNodeExtensionState"
           },
@@ -7629,7 +7419,7 @@
         },
         "managedBy": {
           "$ref": "#/definitions/ExtensionManagedBy",
-          "description": "Indicates if the extension is managed by azure or the user.",
+          "description": "Indicates if the extension is managed by Azure or the user. This determines who controls the deployment and lifecycle of the extension.",
           "readOnly": true
         }
       }
@@ -7727,6 +7517,27 @@
       ],
       "x-ms-discriminator-value": "HCI"
     },
+    "HciEdgeDeviceAdapterPropertyOverrides": {
+      "type": "object",
+      "description": "The AdapterPropertyOverrides of a cluster.",
+      "properties": {
+        "jumboPacket": {
+          "type": "string",
+          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.",
+          "readOnly": true
+        },
+        "networkDirect": {
+          "type": "string",
+          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.",
+          "readOnly": true
+        },
+        "networkDirectTechnology": {
+          "type": "string",
+          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation. Expected values are 'iWARP', 'RoCEv2', 'RoCE'",
+          "readOnly": true
+        }
+      }
+    },
     "HciEdgeDeviceArcExtension": {
       "type": "object",
       "description": "Arc extension installed on edge device.",
@@ -7745,7 +7556,7 @@
           "type": "array",
           "description": "Error details while installing Arc extension.",
           "items": {
-            "$ref": "#/definitions/ErrorDetail"
+            "$ref": "#/definitions/HciValidationFailureDetail"
           },
           "readOnly": true,
           "x-ms-identifiers": []
@@ -7763,7 +7574,142 @@
         },
         "managedBy": {
           "$ref": "#/definitions/ExtensionManagedBy",
-          "description": "Extension managed by user or Azure.",
+          "description": "Indicates whether the extension is managed by the user or by Azure.",
+          "readOnly": true
+        }
+      }
+    },
+    "HciEdgeDeviceHostNetwork": {
+      "type": "object",
+      "description": "The HostNetwork of a cluster.",
+      "properties": {
+        "intents": {
+          "type": "array",
+          "description": "The network intents assigned to the network reference pattern used for the deployment. Each intent will define its own name, traffic type, adapter names, and overrides as recommended by your OEM.",
+          "items": {
+            "$ref": "#/definitions/HciEdgeDeviceIntents"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "intentName"
+          ]
+        },
+        "storageNetworks": {
+          "type": "array",
+          "description": "List of StorageNetworks config to deploy AzureStackHCI Cluster.",
+          "items": {
+            "$ref": "#/definitions/HciEdgeDeviceStorageNetworks"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "networkAdapterName"
+          ]
+        },
+        "storageConnectivitySwitchless": {
+          "type": "boolean",
+          "description": "Defines how the storage adapters between nodes are connected either switch or switch less.",
+          "readOnly": true
+        },
+        "enableStorageAutoIp": {
+          "type": "boolean",
+          "description": "Optional parameter required only for 3 Nodes Switchless deployments. This allows users to specify IPs and Mask for Storage NICs when Network ATC is not assigning the IPs for storage automatically.",
+          "default": false,
+          "readOnly": true
+        }
+      }
+    },
+    "HciEdgeDeviceIntents": {
+      "type": "object",
+      "description": "The Intents of a cluster.",
+      "properties": {
+        "scope": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Scope for host network intent.",
+          "readOnly": true
+        },
+        "intentType": {
+          "type": "integer",
+          "format": "int64",
+          "description": "IntentType for host network intent.",
+          "readOnly": true
+        },
+        "isComputeIntentSet": {
+          "type": "boolean",
+          "description": "IsComputeIntentSet for host network intent.",
+          "readOnly": true
+        },
+        "isStorageIntentSet": {
+          "type": "boolean",
+          "description": "IsStorageIntentSet for host network intent.",
+          "readOnly": true
+        },
+        "isOnlyStorage": {
+          "type": "boolean",
+          "description": "IntentType for host network intent.",
+          "readOnly": true
+        },
+        "isManagementIntentSet": {
+          "type": "boolean",
+          "description": "IsManagementIntentSet for host network intent.",
+          "readOnly": true
+        },
+        "isStretchIntentSet": {
+          "type": "boolean",
+          "description": "IsStretchIntentSet for host network intent.",
+          "readOnly": true
+        },
+        "isOnlyStretch": {
+          "type": "boolean",
+          "description": "IsOnlyStretch for host network intent.",
+          "readOnly": true
+        },
+        "isNetworkIntentType": {
+          "type": "boolean",
+          "description": "IsNetworkIntentType for host network intent.",
+          "readOnly": true
+        },
+        "intentName": {
+          "type": "string",
+          "description": "Name of the network intent you wish to create.",
+          "readOnly": true
+        },
+        "intentAdapters": {
+          "type": "array",
+          "description": "Array of adapters used for the network intent.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "overrideVirtualSwitchConfiguration": {
+          "type": "boolean",
+          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.",
+          "readOnly": true
+        },
+        "virtualSwitchConfigurationOverrides": {
+          "$ref": "#/definitions/HciEdgeDeviceVirtualSwitchConfigurationOverrides",
+          "description": "Set virtualSwitch ConfigurationOverrides for cluster.",
+          "readOnly": true
+        },
+        "overrideQosPolicy": {
+          "type": "boolean",
+          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.",
+          "readOnly": true
+        },
+        "qosPolicyOverrides": {
+          "$ref": "#/definitions/QosPolicyOverrides",
+          "description": "Set QoS PolicyOverrides for cluster.",
+          "readOnly": true
+        },
+        "overrideAdapterProperty": {
+          "type": "boolean",
+          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.",
+          "readOnly": true
+        },
+        "adapterPropertyOverrides": {
+          "$ref": "#/definitions/HciEdgeDeviceAdapterPropertyOverrides",
+          "description": "Set Adapter PropertyOverrides for cluster.",
           "readOnly": true
         }
       }
@@ -7876,6 +7822,75 @@
         }
       ]
     },
+    "HciEdgeDeviceStorageAdapterIPInfo": {
+      "type": "object",
+      "description": "The StorageAdapter physical nodes of a cluster.",
+      "properties": {
+        "physicalNode": {
+          "type": "string",
+          "description": "storage adapter physical node name.",
+          "readOnly": true
+        },
+        "ipv4Address": {
+          "type": "string",
+          "description": "The IPv4 address assigned to each storage adapter physical node on your Azure Stack HCI cluster.",
+          "readOnly": true
+        },
+        "subnetMask": {
+          "type": "string",
+          "description": "The SubnetMask address assigned to each storage adapter physical node on your Azure Stack HCI cluster.",
+          "readOnly": true
+        }
+      }
+    },
+    "HciEdgeDeviceStorageNetworks": {
+      "type": "object",
+      "description": "The StorageNetworks of a cluster.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the storage network.",
+          "readOnly": true
+        },
+        "networkAdapterName": {
+          "type": "string",
+          "description": "Name of the storage network adapter.",
+          "readOnly": true
+        },
+        "storageVlanId": {
+          "type": "string",
+          "description": "ID specified for the VLAN storage network. This setting is applied to the network interfaces that route the storage and VM migration traffic.",
+          "readOnly": true
+        },
+        "storageAdapterIPInfo": {
+          "type": "array",
+          "description": "List of Storage adapter physical nodes config to deploy AzureStackHCI Cluster.",
+          "items": {
+            "$ref": "#/definitions/HciEdgeDeviceStorageAdapterIPInfo"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "physicalNode"
+          ]
+        }
+      }
+    },
+    "HciEdgeDeviceVirtualSwitchConfigurationOverrides": {
+      "type": "object",
+      "description": "The VirtualSwitchConfigurationOverrides of a cluster.",
+      "properties": {
+        "enableIov": {
+          "type": "string",
+          "description": "Enable IoV for Virtual Switch",
+          "readOnly": true
+        },
+        "loadBalancingAlgorithm": {
+          "type": "string",
+          "description": "Load Balancing Algorithm for Virtual Switch",
+          "readOnly": true
+        }
+      }
+    },
     "HciHardwareProfile": {
       "type": "object",
       "description": "Hardware configurations for HCI device.",
@@ -7914,7 +7929,7 @@
           ]
         },
         "hostNetwork": {
-          "$ref": "#/definitions/EdgeDeviceHostNetwork",
+          "$ref": "#/definitions/HciEdgeDeviceHostNetwork",
           "description": "HostNetwork config to deploy AzureStackHCI Cluster.",
           "readOnly": true
         }
@@ -8129,9 +8144,20 @@
         }
       }
     },
+    "HciValidationFailureDetail": {
+      "type": "object",
+      "description": "details of validation failure",
+      "properties": {
+        "exception": {
+          "type": "string",
+          "description": "Exception details while installing extension.",
+          "readOnly": true
+        }
+      }
+    },
     "HealthState": {
       "type": "string",
-      "description": "The overall health state.",
+      "description": "Overall health state for update-specific health checks. Indicates whether the system is functioning correctly, has warnings or errors, or is undergoing a health evaluation.",
       "enum": [
         "Unknown",
         "Success",
@@ -8147,68 +8173,34 @@
           {
             "name": "Unknown",
             "value": "Unknown",
-            "description": "The health state is unknown."
+            "description": "The health state is not known or cannot be determined."
           },
           {
             "name": "Success",
             "value": "Success",
-            "description": "The health check was successful."
+            "description": "The health check completed successfully and the system is healthy."
           },
           {
             "name": "Failure",
             "value": "Failure",
-            "description": "The health check failed."
+            "description": "The health check failed, indicating a critical issue."
           },
           {
             "name": "Warning",
             "value": "Warning",
-            "description": "The health check returned a warning."
+            "description": "The health check detected a non-critical issue that may require attention."
           },
           {
             "name": "Error",
             "value": "Error",
-            "description": "The health check returned an error."
+            "description": "An error occurred during the health check process."
           },
           {
             "name": "InProgress",
             "value": "InProgress",
-            "description": "The health check is in progress."
+            "description": "The health check is currently in progress."
           }
         ]
-      }
-    },
-    "HostNetwork": {
-      "type": "object",
-      "description": "The HostNetwork of a cluster.",
-      "properties": {
-        "intents": {
-          "type": "array",
-          "description": "The network intents assigned to the network reference pattern used for the deployment. Each intent will define its own name, traffic type, adapter names, and overrides as recommended by your OEM.",
-          "items": {
-            "$ref": "#/definitions/DeploymentIntents"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
-        },
-        "storageNetworks": {
-          "type": "array",
-          "description": "List of StorageNetworks config to deploy AzureStackHCI Cluster.",
-          "items": {
-            "$ref": "#/definitions/DeploymentStorageNetworks"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
-        },
-        "storageConnectivitySwitchless": {
-          "type": "boolean",
-          "description": "Defines how the storage adapters between nodes are connected either switch or switch less.."
-        },
-        "enableStorageAutoIp": {
-          "type": "boolean",
-          "description": "Optional parameter required only for 3 Nodes Switchless deployments. This allows users to specify IPs and Mask for Storage NICs when Network ATC is not assigning the IPs for storage automatically."
-        }
       }
     },
     "IdentityProvider": {
@@ -8225,12 +8217,12 @@
           {
             "name": "ActiveDirectory",
             "value": "ActiveDirectory",
-            "description": "Active Directory as the Identity Provider. This is the default option."
+            "description": "Uses Active Directory as the identity provider, enabling domain-based authentication and centralized identity management. This is the default option."
           },
           {
             "name": "LocalIdentity",
             "value": "LocalIdentity",
-            "description": "Use local identity with Azure Keyvault"
+            "description": "Uses a local identity system integrated with Azure Key Vault for authentication. Suitable for AD-less environments where Active Directory is not available or required."
           }
         ]
       }
@@ -8249,12 +8241,12 @@
           {
             "name": "Disabled",
             "value": "Disabled",
-            "description": "IMDS attestation is disabled."
+            "description": "IMDS attestation is disabled for the cluster."
           },
           {
             "name": "Enabled",
             "value": "Enabled",
-            "description": "IMDS attestation is enabled."
+            "description": "IMDS attestation is enabled for the cluster."
           }
         ]
       }
@@ -8327,30 +8319,6 @@
         }
       }
     },
-    "IpAssignmentType": {
-      "type": "string",
-      "description": "IP assignment types",
-      "enum": [
-        "Automatic",
-        "Manual"
-      ],
-      "x-ms-enum": {
-        "name": "IpAssignmentType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Automatic",
-            "value": "Automatic",
-            "description": "Automatic IP assignment"
-          },
-          {
-            "name": "Manual",
-            "value": "Manual",
-            "description": "Manual IP assignment"
-          }
-        ]
-      }
-    },
     "IpPools": {
       "type": "object",
       "description": "The dnsServers of a device.",
@@ -8377,7 +8345,10 @@
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
-                "type": "Microsoft.Attestation/attestationProviders"
+                "type": "Microsoft.Attestation/attestationProviders",
+                "scopes": [
+                  "Tenant"
+                ]
               }
             ]
           }
@@ -8622,7 +8593,7 @@
     },
     "LogCollectionJobType": {
       "type": "string",
-      "description": "LogCollection job type",
+      "description": "Specifies the type of log collection job. Determines whether the logs are collected immediately on demand or as part of a scheduled operation.",
       "enum": [
         "OnDemand",
         "Scheduled"
@@ -8634,12 +8605,12 @@
           {
             "name": "OnDemand",
             "value": "OnDemand",
-            "description": "On-demand log collection job."
+            "description": "Log collection is triggered manually and executed immediately."
           },
           {
             "name": "Scheduled",
             "value": "Scheduled",
-            "description": "Scheduled log collection job."
+            "description": "Log collection is scheduled to run at a predefined time or interval."
           }
         ]
       }
@@ -8668,7 +8639,6 @@
         },
         "logCollectionSessionDetails": {
           "type": "array",
-          "description": "Log collection session details for the cluster.",
           "items": {
             "$ref": "#/definitions/LogCollectionSession"
           },
@@ -8780,7 +8750,7 @@
         },
         "logCollectionJobType": {
           "$ref": "#/definitions/LogCollectionJobType",
-          "description": "LogCollection job type",
+          "description": "Specifies the type of log collection job. Determines whether the logs are collected immediately on demand or as part of a scheduled operation.",
           "readOnly": true
         },
         "endTimeCollected": {
@@ -8798,7 +8768,7 @@
     },
     "LogCollectionStatus": {
       "type": "string",
-      "description": "Represents the status of a log collection operation.",
+      "description": "LogCollection status",
       "enum": [
         "None",
         "InProgress",
@@ -8812,22 +8782,22 @@
           {
             "name": "None",
             "value": "None",
-            "description": "Indicates that no log collection operation has been initiated."
+            "description": "No log collection has been initiated."
           },
           {
             "name": "InProgress",
             "value": "InProgress",
-            "description": "Indicates that the log collection operation is currently in progress."
+            "description": "Log collection is currently in progress."
           },
           {
             "name": "Failed",
             "value": "Failed",
-            "description": "Indicates that the log collection operation has failed."
+            "description": "Log collection has failed."
           },
           {
             "name": "Succeeded",
             "value": "Succeeded",
-            "description": "Indicates that the log collection operation has completed successfully."
+            "description": "Log collection completed successfully."
           }
         ]
       },
@@ -8898,7 +8868,7 @@
     },
     "NodeArcState": {
       "type": "string",
-      "description": "State of Arc agent in this node.",
+      "description": "State of the Arc agent in this node. Indicates the current lifecycle status of the agent, such as whether it's being provisioned, connected, updated, or has encountered an error.",
       "enum": [
         "NotSpecified",
         "Error",
@@ -8931,17 +8901,17 @@
           {
             "name": "Error",
             "value": "Error",
-            "description": "An error occurred."
+            "description": "An error occurred during the agent's lifecycle."
           },
           {
             "name": "Succeeded",
             "value": "Succeeded",
-            "description": "The operation succeeded."
+            "description": "The operation completed successfully."
           },
           {
             "name": "Canceled",
             "value": "Canceled",
-            "description": "The operation was canceled."
+            "description": "The operation was canceled before completion."
           },
           {
             "name": "Failed",
@@ -8951,37 +8921,37 @@
           {
             "name": "Connected",
             "value": "Connected",
-            "description": "The arc agent is connected."
+            "description": "The Arc agent is connected on this node."
           },
           {
             "name": "Disconnected",
             "value": "Disconnected",
-            "description": "The arc agent is disconnected."
+            "description": "The Arc agent is disconnected on this node."
           },
           {
             "name": "Deleted",
             "value": "Deleted",
-            "description": "The arc agent is deleted."
+            "description": "The Arc agent has been deleted from this node."
           },
           {
             "name": "Creating",
             "value": "Creating",
-            "description": "The arc agent is being created."
+            "description": "The Arc agent is being created on this node."
           },
           {
             "name": "Updating",
             "value": "Updating",
-            "description": "The arc agent is being updated."
+            "description": "The Arc agent is being updated on this node."
           },
           {
             "name": "Deleting",
             "value": "Deleting",
-            "description": "The arc agent is being deleted."
+            "description": "The Arc agent is being deleted from this node."
           },
           {
             "name": "Moving",
             "value": "Moving",
-            "description": "The arc agent is being moved."
+            "description": "The Arc agent is being moved on this node."
           },
           {
             "name": "PartiallySucceeded",
@@ -8991,27 +8961,27 @@
           {
             "name": "PartiallyConnected",
             "value": "PartiallyConnected",
-            "description": "The arc agent is partially connected."
+            "description": "The Arc agent is partially connected on this node."
           },
           {
             "name": "InProgress",
             "value": "InProgress",
-            "description": "The operation is in progress."
+            "description": "The operation is currently in progress."
           },
           {
             "name": "Accepted",
             "value": "Accepted",
-            "description": "The operation has been accepted."
+            "description": "The operation has been accepted and is pending execution."
           },
           {
             "name": "Provisioning",
             "value": "Provisioning",
-            "description": "The arc agent is provisioning."
+            "description": "The Arc agent is currently being provisioned on this node."
           },
           {
             "name": "DisableInProgress",
             "value": "DisableInProgress",
-            "description": "Disable operation is in progress."
+            "description": "The Arc agent is in the process of being disabled on this node."
           }
         ]
       },
@@ -9019,7 +8989,7 @@
     },
     "NodeExtensionState": {
       "type": "string",
-      "description": "State of Arc Extension in this node.",
+      "description": "State of Arc Extension in this node. Reflects the current lifecycle status of the extension on the individual node, such as whether it's being created, updated, deleted, or has encountered an error.",
       "enum": [
         "NotSpecified",
         "Error",
@@ -9051,82 +9021,82 @@
           {
             "name": "Error",
             "value": "Error",
-            "description": "An error occurred."
+            "description": "An error occurred during the extension lifecycle."
           },
           {
             "name": "Succeeded",
             "value": "Succeeded",
-            "description": "The operation succeeded."
+            "description": "The extension operation completed successfully."
           },
           {
             "name": "Canceled",
             "value": "Canceled",
-            "description": "The operation was canceled."
+            "description": "The extension operation was canceled."
           },
           {
             "name": "Failed",
             "value": "Failed",
-            "description": "The operation failed."
+            "description": "The extension operation failed."
           },
           {
             "name": "Connected",
             "value": "Connected",
-            "description": "The extension is connected."
+            "description": "The extension is connected on the node."
           },
           {
             "name": "Disconnected",
             "value": "Disconnected",
-            "description": "The extension is disconnected."
+            "description": "The extension is disconnected on the node."
           },
           {
             "name": "Deleted",
             "value": "Deleted",
-            "description": "The extension is deleted."
+            "description": "The extension has been deleted from the node."
           },
           {
             "name": "Creating",
             "value": "Creating",
-            "description": "The extension is being created."
+            "description": "The extension is being created on the node."
           },
           {
             "name": "Updating",
             "value": "Updating",
-            "description": "The extension is being updated."
+            "description": "The extension is being updated on the node."
           },
           {
             "name": "Deleting",
             "value": "Deleting",
-            "description": "The extension is being deleted."
+            "description": "The extension is being deleted from the node."
           },
           {
             "name": "Moving",
             "value": "Moving",
-            "description": "The extension is being moved."
+            "description": "The extension is being moved on the node."
           },
           {
             "name": "PartiallySucceeded",
             "value": "PartiallySucceeded",
-            "description": "The operation partially succeeded."
+            "description": "The extension operation partially succeeded."
           },
           {
             "name": "PartiallyConnected",
             "value": "PartiallyConnected",
-            "description": "The extension is partially connected."
+            "description": "The extension is partially connected on the node."
           },
           {
             "name": "InProgress",
             "value": "InProgress",
-            "description": "The operation is in progress."
+            "description": "The extension operation is currently in progress."
           },
           {
             "name": "Accepted",
             "value": "Accepted",
-            "description": "The operation has been accepted."
+            "description": "The extension operation has been accepted and is pending execution."
           },
           {
             "name": "Provisioning",
             "value": "Provisioning",
-            "description": "The extension is provisioning."
+            "description": "The extension is currently being provisioned on the node."
           }
         ]
       },
@@ -9143,7 +9113,8 @@
         },
         "euLocation": {
           "type": "boolean",
-          "description": "Location of your cluster. The log and diagnostic data is sent to the appropriate diagnostics servers depending upon where your cluster resides. Setting this to false results in all data sent to Microsoft to be stored outside of the EU."
+          "description": "Location of your cluster. The log and diagnostic data is sent to the appropriate diagnostics servers depending upon where your cluster resides. Setting this to false results in all data sent to Microsoft to be stored outside of the EU.",
+          "default": false
         },
         "episodicDataUpload": {
           "type": "boolean",
@@ -9166,12 +9137,12 @@
           {
             "name": "Disabled",
             "value": "Disabled",
-            "description": "OEM activation is disabled."
+            "description": "OEM activation is disabled for the cluster."
           },
           {
             "name": "Enabled",
             "value": "Enabled",
-            "description": "OEM activation is enabled."
+            "description": "OEM activation is enabled for the cluster."
           }
         ]
       }
@@ -9182,7 +9153,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/OfferProperties",
-          "description": "Offer properties."
+          "description": "Offer properties.",
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -9356,40 +9328,35 @@
     },
     "PasswordCredential": {
       "type": "object",
-      "description": "The password credential associated with the arc setting.",
       "properties": {
         "secretText": {
-          "type": "string",
-          "description": "The password secret text."
+          "type": "string"
         },
         "keyId": {
-          "type": "string",
-          "description": "The unique identifier of the password key."
+          "type": "string"
         },
         "startDateTime": {
           "type": "string",
-          "format": "date-time",
-          "description": "The start date and time of the password validity."
+          "format": "date-time"
         },
         "endDateTime": {
           "type": "string",
-          "format": "date-time",
-          "description": "The end date and time of the password validity."
+          "format": "date-time"
         }
       }
     },
     "PerNodeExtensionState": {
       "type": "object",
-      "description": "Status of Arc Extension for a particular node in the Parent Entity(HCI Cluster/Edge Machine).",
+      "description": "Status of Arc Extension for a particular node in HCI Cluster.",
       "properties": {
         "name": {
           "type": "string",
-          "description": "Name of the node/machine in the Parent Entity(HCI Cluster/Edge Machine).",
+          "description": "Name of the node in HCI Cluster.",
           "readOnly": true
         },
         "extension": {
           "type": "string",
-          "description": "Fully qualified resource ID for the particular Arc Extension on this node/machine.",
+          "description": "Fully qualified resource ID for the particular Arc Extension on this node.",
           "readOnly": true
         },
         "typeHandlerVersion": {
@@ -9399,7 +9366,7 @@
         },
         "state": {
           "$ref": "#/definitions/NodeExtensionState",
-          "description": "State of Arc Extension in this node/machine.",
+          "description": "State of Arc Extension in this node. Reflects the current lifecycle status of the extension on the individual node, such as whether it's being created, updated, deleted, or has encountered an error.",
           "readOnly": true
         },
         "instanceView": {
@@ -9464,7 +9431,7 @@
         },
         "state": {
           "$ref": "#/definitions/NodeArcState",
-          "description": "State of Arc agent in this node.",
+          "description": "State of the Arc agent in this node. Indicates the current lifecycle status of the agent, such as whether it's being provisioned, connected, updated, or has encountered an error.",
           "readOnly": true
         }
       }
@@ -9585,7 +9552,6 @@
     },
     "PrecheckResult": {
       "type": "object",
-      "description": "Result of a precheck validation test.",
       "properties": {
         "name": {
           "type": "string",
@@ -9600,11 +9566,7 @@
           "description": "Key-value pairs that allow grouping/filtering individual tests."
         },
         "healthCheckTags": {
-          "type": "object",
-          "description": "Key-value pairs that allow grouping/filtering individual tests.",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "description": "Key-value pairs that allow grouping/filtering individual tests."
         },
         "title": {
           "type": "string",
@@ -9665,24 +9627,6 @@
           "type": "string",
           "description": "Value of the key that allow grouping/filtering individual tests."
         }
-      }
-    },
-    "ProvisioningOsType": {
-      "type": "string",
-      "description": "Represents the provisioning operating system type.",
-      "enum": [
-        "HCI"
-      ],
-      "x-ms-enum": {
-        "name": "ProvisioningOsType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "HCI",
-            "value": "HCI",
-            "description": "HCI OS."
-          }
-        ]
       }
     },
     "ProvisioningState": {
@@ -9812,7 +9756,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/PublisherProperties",
-          "description": "Publisher properties."
+          "description": "Publisher properties.",
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -9859,28 +9804,23 @@
       "properties": {
         "priorityValue8021Action_Cluster": {
           "type": "string",
-          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.",
-          "x-ms-client-name": "priorityValue8021ActionCluster"
+          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation."
         },
         "priorityValue8021Action_SMB": {
           "type": "string",
-          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.",
-          "x-ms-client-name": "priorityValue8021ActionSMB"
+          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation."
         },
         "bandwidthPercentage_SMB": {
           "type": "string",
-          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.",
-          "x-ms-client-name": "bandwidthPercentageSMB"
+          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation."
         }
       }
     },
     "RawCertificateData": {
       "type": "object",
-      "description": "Raw certificate data.",
       "properties": {
         "certificates": {
           "type": "array",
-          "description": "List of certificates to upload.",
           "items": {
             "type": "string"
           }
@@ -9913,7 +9853,7 @@
     },
     "RebootRequirement": {
       "type": "string",
-      "description": "Whether a reboot is required after applying the update.",
+      "description": "Indicates whether a reboot is required after the update or operation. Helps determine if a system restart is necessary to complete the process.",
       "enum": [
         "Unknown",
         "True",
@@ -9926,17 +9866,17 @@
           {
             "name": "Unknown",
             "value": "Unknown",
-            "description": "The reboot requirement is unknown."
+            "description": "It is not known whether a reboot is required."
           },
           {
             "name": "True",
             "value": "True",
-            "description": "A reboot is required."
+            "description": "A reboot is required to complete the operation."
           },
           {
             "name": "False",
             "value": "False",
-            "description": "A reboot is not required."
+            "description": "No reboot is required after the operation."
           }
         ]
       }
@@ -9957,7 +9897,6 @@
       "properties": {
         "clusterNodes": {
           "type": "array",
-          "description": "List of cluster node names to reconcile Arc settings for.",
           "items": {
             "type": "string"
           }
@@ -10159,7 +10098,6 @@
         },
         "remoteSupportNodeSettings": {
           "type": "array",
-          "description": "Remote support node settings for the cluster.",
           "items": {
             "$ref": "#/definitions/RemoteSupportNodeSettings"
           },
@@ -10168,7 +10106,6 @@
         },
         "remoteSupportSessionDetails": {
           "type": "array",
-          "description": "Remote support session details for the cluster.",
           "items": {
             "$ref": "#/definitions/PerNodeRemoteSupportSession"
           },
@@ -10242,7 +10179,7 @@
     },
     "RemoteSupportType": {
       "type": "string",
-      "description": "Defines the type of remote support action to be performed on an edge device.",
+      "description": "Remote Support Type for cluster",
       "enum": [
         "Enable",
         "Revoke"
@@ -10254,12 +10191,12 @@
           {
             "name": "Enable",
             "value": "Enable",
-            "description": "Enables remote support for the edge device."
+            "description": "Enable remote support for the cluster."
           },
           {
             "name": "Revoke",
             "value": "Revoke",
-            "description": "Revokes previously granted remote support access for the edge device."
+            "description": "Revoke previously enabled remote support for the cluster."
           }
         ]
       }
@@ -10404,7 +10341,11 @@
       },
       "required": [
         "deploymentData"
-      ]
+      ],
+      "externalDocs": {
+        "description": "Deploy Azure Stack HCI using an existing configuration file",
+        "url": "https://learn.microsoft.com/en-us/azure-stack/hci/deploy/deployment-tool-existing-file"
+      }
     },
     "SdnIntegration": {
       "type": "object",
@@ -10595,7 +10536,12 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/SecurityProperties",
-          "description": "The resource-specific properties for this resource."
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -10631,7 +10577,7 @@
       "properties": {
         "serviceName": {
           "$ref": "#/definitions/ServiceName",
-          "description": "Name of the service."
+          "description": "Specifies the name of the service associated with the update or operation. This helps identify which system component or tool is involved."
         },
         "port": {
           "type": "integer",
@@ -10646,7 +10592,7 @@
     },
     "ServiceName": {
       "type": "string",
-      "description": "Name of the service.",
+      "description": "Specifies the name of the service associated with the update or operation. This helps identify which system component or tool is involved.",
       "enum": [
         "WAC"
       ],
@@ -10657,14 +10603,14 @@
           {
             "name": "WAC",
             "value": "WAC",
-            "description": "Windows Admin Center service."
+            "description": "Windows Admin Center (WAC) is the service associated with this operation."
           }
         ]
       }
     },
     "Severity": {
       "type": "string",
-      "description": "Severity of the result (Critical, Warning, Informational, Hidden). This answers how important the result is. Critical is the only update-blocking severity.",
+      "description": "Indicates the importance or impact level of the result. Determines whether the result is informational, a warning, or a critical issue that may block updates.",
       "enum": [
         "Critical",
         "Warning",
@@ -10678,22 +10624,22 @@
           {
             "name": "Critical",
             "value": "Critical",
-            "description": "Critical severity - blocks updates."
+            "description": "A critical issue that blocks updates and requires immediate attention."
           },
           {
             "name": "Warning",
             "value": "Warning",
-            "description": "Warning severity."
+            "description": "A warning that may indicate a potential issue but does not block updates."
           },
           {
             "name": "Informational",
             "value": "Informational",
-            "description": "Informational severity."
+            "description": "General information that does not indicate any issue."
           },
           {
             "name": "Hidden",
             "value": "Hidden",
-            "description": "Hidden severity."
+            "description": "The result is hidden and not shown in the output."
           }
         ]
       }
@@ -10704,7 +10650,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/SkuProperties",
-          "description": "SKU properties."
+          "description": "SKU properties.",
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -10792,21 +10739,18 @@
     },
     "SoftwareAssuranceChangeRequest": {
       "type": "object",
-      "description": "Software Assurance change request.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/SoftwareAssuranceChangeRequestProperties",
-          "description": "Properties for Software Assurance change request."
+          "$ref": "#/definitions/SoftwareAssuranceChangeRequestProperties"
         }
       }
     },
     "SoftwareAssuranceChangeRequestProperties": {
       "type": "object",
-      "description": "Properties for Software Assurance change request.",
       "properties": {
         "softwareAssuranceIntent": {
           "$ref": "#/definitions/SoftwareAssuranceIntent",
-          "description": "Customer Intent for Software Assurance Benefit."
+          "description": "Customer Intent for Software Assurance Benefit. This indicates whether the customer wishes to opt in or out of the Software Assurance program, which provides licensing and support benefits."
         }
       }
     },
@@ -10824,12 +10768,12 @@
           {
             "name": "Enable",
             "value": "Enable",
-            "description": "Enable Software Assurance."
+            "description": "Customer intends to enable the Software Assurance benefit."
           },
           {
             "name": "Disable",
             "value": "Disable",
-            "description": "Disable Software Assurance."
+            "description": "Customer intends to disable the Software Assurance benefit."
           }
         ]
       }
@@ -10869,19 +10813,19 @@
           {
             "name": "Enabled",
             "value": "Enabled",
-            "description": "Software Assurance is enabled."
+            "description": "Software Assurance is enabled for the cluster."
           },
           {
             "name": "Disabled",
             "value": "Disabled",
-            "description": "Software Assurance is disabled."
+            "description": "Software Assurance is disabled for the cluster."
           }
         ]
       }
     },
     "State": {
       "type": "string",
-      "description": "State of the update as it relates to this stamp.",
+      "description": "Represents the current state of the update as it relates to this stamp. This includes phases such as preparation, installation, scanning, and error handling, providing insight into the update's progress and any issues encountered.",
       "enum": [
         "HasPrerequisite",
         "Obsolete",
@@ -10910,12 +10854,12 @@
           {
             "name": "HasPrerequisite",
             "value": "HasPrerequisite",
-            "description": "The update has prerequisites that need to be installed first."
+            "description": "The update has prerequisites that must be fulfilled before it can proceed."
           },
           {
             "name": "Obsolete",
             "value": "Obsolete",
-            "description": "The update is obsolete."
+            "description": "The update is obsolete and no longer applicable."
           },
           {
             "name": "Ready",
@@ -10925,27 +10869,27 @@
           {
             "name": "NotApplicableBecauseAnotherUpdateIsInProgress",
             "value": "NotApplicableBecauseAnotherUpdateIsInProgress",
-            "description": "The update is not applicable because another update is in progress."
+            "description": "The update cannot be applied because another update is currently in progress."
           },
           {
             "name": "Preparing",
             "value": "Preparing",
-            "description": "The update is being prepared for installation."
+            "description": "The update is currently in the preparation phase."
           },
           {
             "name": "Installing",
             "value": "Installing",
-            "description": "The update is being installed."
+            "description": "The update is currently being installed."
           },
           {
             "name": "Installed",
             "value": "Installed",
-            "description": "The update has been installed."
+            "description": "The update has been successfully installed."
           },
           {
             "name": "PreparationFailed",
             "value": "PreparationFailed",
-            "description": "The update preparation failed."
+            "description": "The update preparation phase failed."
           },
           {
             "name": "InstallationFailed",
@@ -10955,17 +10899,17 @@
           {
             "name": "Invalid",
             "value": "Invalid",
-            "description": "The update is invalid."
+            "description": "The update is invalid and cannot be applied."
           },
           {
             "name": "Recalled",
             "value": "Recalled",
-            "description": "The update has been recalled."
+            "description": "The update has been recalled and should not be applied."
           },
           {
             "name": "Downloading",
             "value": "Downloading",
-            "description": "The update is being downloaded."
+            "description": "The update is currently being downloaded."
           },
           {
             "name": "DownloadFailed",
@@ -10975,39 +10919,39 @@
           {
             "name": "HealthChecking",
             "value": "HealthChecking",
-            "description": "The update is undergoing health checking."
+            "description": "A health check is being performed before applying the update."
           },
           {
             "name": "HealthCheckFailed",
             "value": "HealthCheckFailed",
-            "description": "The update health check failed."
+            "description": "The health check failed, preventing the update from proceeding."
           },
           {
             "name": "ReadyToInstall",
             "value": "ReadyToInstall",
-            "description": "The update is ready to be installed."
+            "description": "The update is ready to be installed after successful preparation and checks."
           },
           {
             "name": "ScanInProgress",
             "value": "ScanInProgress",
-            "description": "The update scan is in progress."
+            "description": "The system is scanning for updates."
           },
           {
             "name": "ScanFailed",
             "value": "ScanFailed",
-            "description": "The update scan failed."
+            "description": "The scan for updates failed."
           },
           {
             "name": "AdditionalContentRequired",
             "value": "AdditionalContentRequired",
-            "description": "The update requires additional content."
+            "description": "Additional content is required to proceed with the update."
           }
         ]
       }
     },
     "Status": {
       "type": "string",
-      "description": "Status of the cluster agent.",
+      "description": "Status of the cluster agent. Indicates the current connectivity, validation, and deployment state of the agent within the cluster.",
       "enum": [
         "NotYetRegistered",
         "ConnectedRecently",
@@ -11020,10 +10964,7 @@
         "ValidationFailed",
         "DeploymentInProgress",
         "DeploymentFailed",
-        "DeploymentSuccess",
-        "Succeeded",
-        "Failed",
-        "InProgress"
+        "DeploymentSuccess"
       ],
       "x-ms-enum": {
         "name": "Status",
@@ -11032,85 +10973,69 @@
           {
             "name": "NotYetRegistered",
             "value": "NotYetRegistered",
-            "description": "The cluster agent is not yet registered."
+            "description": "The cluster agent has not yet registered with Azure."
           },
           {
             "name": "ConnectedRecently",
             "value": "ConnectedRecently",
-            "description": "The cluster agent connected recently."
+            "description": "The cluster agent has connected to Azure recently."
           },
           {
             "name": "NotConnectedRecently",
             "value": "NotConnectedRecently",
-            "description": "The cluster agent has not connected recently."
+            "description": "The cluster agent has not connected to Azure recently."
           },
           {
             "name": "Disconnected",
             "value": "Disconnected",
-            "description": "The cluster agent is disconnected."
+            "description": "The cluster agent is currently disconnected from Azure."
           },
           {
             "name": "Error",
             "value": "Error",
-            "description": "An error occurred."
+            "description": "An error occurred in the cluster agent's operation."
           },
           {
             "name": "NotSpecified",
             "value": "NotSpecified",
-            "description": "The state is not specified."
+            "description": "The status of the cluster agent is not specified."
           },
           {
             "name": "ValidationInProgress",
             "value": "ValidationInProgress",
-            "description": "Validation is in progress."
+            "description": "Validation of the cluster agent is currently in progress."
           },
           {
             "name": "ValidationSuccess",
             "value": "ValidationSuccess",
-            "description": "Validation was successful."
+            "description": "Validation of the cluster agent completed successfully."
           },
           {
             "name": "ValidationFailed",
             "value": "ValidationFailed",
-            "description": "Validation failed."
+            "description": "Validation of the cluster agent failed."
           },
           {
             "name": "DeploymentInProgress",
             "value": "DeploymentInProgress",
-            "description": "Deployment is in progress."
+            "description": "Deployment of the cluster agent is currently in progress."
           },
           {
             "name": "DeploymentFailed",
             "value": "DeploymentFailed",
-            "description": "Deployment failed."
+            "description": "Deployment of the cluster agent failed."
           },
           {
             "name": "DeploymentSuccess",
             "value": "DeploymentSuccess",
-            "description": "Deployment was successful."
-          },
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "The operation succeeded."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "The operation failed."
-          },
-          {
-            "name": "InProgress",
-            "value": "InProgress",
-            "description": "The operation is in progress."
+            "description": "Deployment of the cluster agent completed successfully."
           }
         ]
-      },
-      "readOnly": true
+      }
     },
     "StatusLevelTypes": {
       "type": "string",
-      "description": "The level code.",
+      "description": "The level code. Indicates the severity or importance of the status message.",
       "enum": [
         "Info",
         "Warning",
@@ -11123,73 +11048,69 @@
           {
             "name": "Info",
             "value": "Info",
-            "description": "Information level."
+            "description": "Informational message indicating normal operation."
           },
           {
             "name": "Warning",
             "value": "Warning",
-            "description": "Warning level."
+            "description": "Warning message indicating a potential issue or non-critical problem."
           },
           {
             "name": "Error",
             "value": "Error",
-            "description": "Error level."
+            "description": "Error message indicating a failure or critical issue."
           }
         ]
       }
     },
     "Step": {
       "type": "object",
-      "description": "Step details during job execution.",
+      "description": "Progress representation of the update run steps.",
       "properties": {
         "name": {
           "type": "string",
-          "description": "Name of step.",
-          "readOnly": true
+          "description": "Name of the step."
         },
         "description": {
           "type": "string",
-          "description": "Description of step.",
-          "readOnly": true
+          "description": "More detailed description of the step."
         },
-        "fullStepIndex": {
+        "errorMessage": {
           "type": "string",
-          "description": "FullStepIndex of step.",
-          "readOnly": true
-        },
-        "startTimeUtc": {
-          "type": "string",
-          "description": "Start time in utc of step.",
-          "readOnly": true
-        },
-        "endTimeUtc": {
-          "type": "string",
-          "description": "End time in utc of step.",
-          "readOnly": true
+          "description": "Error message, specified if the step is in a failed state."
         },
         "status": {
           "type": "string",
-          "description": "Status of step. Allowed values are 'Error', 'Success', 'InProgress'",
-          "readOnly": true
+          "description": "Status of the step, bubbled up from the ECE action plan for installation attempts. Values are: 'Success', 'Error', 'InProgress', and 'Unknown status'."
+        },
+        "startTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the step started, or empty if it has not started executing."
+        },
+        "endTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the step reached a terminal state."
+        },
+        "lastUpdatedTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Completion time of this step or the last completed sub-step."
+        },
+        "expectedExecutionTime": {
+          "type": "string",
+          "description": "Expected execution time of a given step. This is optionally authored in the update action plan and can be empty."
         },
         "steps": {
           "type": "array",
-          "description": "List of nested steps during job execution..",
+          "description": "Recursive model for child steps of this step.",
           "items": {
             "$ref": "#/definitions/Step"
           },
-          "readOnly": true,
           "x-ms-identifiers": [
             "name"
           ]
-        },
-        "exception": {
-          "type": "array",
-          "description": "List of exceptions in job execution.",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
         }
       }
     },
@@ -11201,24 +11122,6 @@
           "type": "string",
           "description": "By default, this mode is set to Express and your storage is configured as per best practices based on the number of nodes in the cluster. Allowed values are 'Express','InfraOnly', 'KeepStorage'",
           "default": "Express"
-        }
-      }
-    },
-    "StorageAdapterIPInfo": {
-      "type": "object",
-      "description": "The StorageAdapter physical nodes of a cluster.",
-      "properties": {
-        "physicalNode": {
-          "type": "string",
-          "description": "storage adapter physical node name."
-        },
-        "ipv4Address": {
-          "type": "string",
-          "description": "The IPv4 address assigned to each storage adapter physical node on your Azure Stack HCI cluster."
-        },
-        "subnetMask": {
-          "type": "string",
-          "description": "The SubnetMask address assigned to each storage adapter physical node on your Azure Stack HCI cluster."
         }
       }
     },
@@ -11306,7 +11209,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/UpdateProperties",
-          "description": "Update properties"
+          "description": "Update properties",
+          "x-ms-client-flatten": true
         },
         "location": {
           "type": "string",
@@ -11421,7 +11325,7 @@
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning state of the Updates proxy resource.",
+          "description": "Provisioning state of the Updates proxy resource. Indicates the current lifecycle status of the update operation, such as whether it has been accepted, is in progress, or has completed.",
           "readOnly": true
         },
         "installedDate": {
@@ -11439,7 +11343,7 @@
         },
         "state": {
           "$ref": "#/definitions/State",
-          "description": "State of the update as it relates to this stamp."
+          "description": "Represents the current state of the update as it relates to this stamp. This includes phases such as preparation, installation, scanning, and error handling, providing insight into the update's progress and any issues encountered."
         },
         "prerequisites": {
           "type": "array",
@@ -11464,7 +11368,7 @@
         },
         "rebootRequired": {
           "$ref": "#/definitions/RebootRequirement",
-          "description": "Whether a reboot is required after applying the update.",
+          "description": "Indicates whether a reboot is required after the update or operation. Helps determine if a system restart is necessary to complete the process.",
           "x-ms-client-flatten": true
         },
         "healthState": {
@@ -11512,7 +11416,7 @@
         },
         "availabilityType": {
           "$ref": "#/definitions/AvailabilityType",
-          "description": "Indicates the way the update content can be downloaded."
+          "description": "Indicates how the update content is made available for download. This determines whether the update is sourced locally, from an online repository, or requires user notification."
         },
         "packageType": {
           "type": "string",
@@ -11535,7 +11439,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/UpdateRunProperties",
-          "description": "Describes Update Run Properties."
+          "description": "Describes Update Run Properties.",
+          "x-ms-client-flatten": true
         },
         "location": {
           "type": "string",
@@ -11579,7 +11484,7 @@
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning state of the UpdateRuns proxy resource.",
+          "description": "Provisioning state of the UpdateRuns proxy resource. Indicates the current lifecycle status of the update operation, such as whether it has been accepted, is in progress, or has completed.",
           "readOnly": true
         },
         "timeStarted": {
@@ -11598,10 +11503,10 @@
         },
         "state": {
           "$ref": "#/definitions/UpdateRunPropertiesState",
-          "description": "State of the update run."
+          "description": "Represents the current state of the update run. Indicates whether the update is in progress, has completed successfully, failed, or is in an unknown state."
         },
         "progress": {
-          "$ref": "#/definitions/UpdateStep",
+          "$ref": "#/definitions/Step",
           "description": "Progress representation of the update run steps.",
           "x-ms-client-flatten": true
         }
@@ -11609,7 +11514,7 @@
     },
     "UpdateRunPropertiesState": {
       "type": "string",
-      "description": "State of the update run.",
+      "description": "Represents the current state of the update run. Indicates whether the update is in progress, has completed successfully, failed, or is in an unknown state.",
       "enum": [
         "Unknown",
         "Succeeded",
@@ -11623,22 +11528,22 @@
           {
             "name": "Unknown",
             "value": "Unknown",
-            "description": "The update run state is unknown."
+            "description": "The state of the update run is not known."
           },
           {
             "name": "Succeeded",
             "value": "Succeeded",
-            "description": "The update run succeeded."
+            "description": "The update run completed successfully."
           },
           {
             "name": "InProgress",
             "value": "InProgress",
-            "description": "The update run is in progress."
+            "description": "The update run is currently in progress."
           },
           {
             "name": "Failed",
             "value": "Failed",
-            "description": "The update run failed."
+            "description": "The update run failed to complete successfully."
           }
         ]
       },
@@ -11659,64 +11564,14 @@
         }
       }
     },
-    "UpdateStep": {
-      "type": "object",
-      "description": "Progress representation of the update run steps.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the step."
-        },
-        "description": {
-          "type": "string",
-          "description": "More detailed description of the step."
-        },
-        "errorMessage": {
-          "type": "string",
-          "description": "Error message, specified if the step is in a failed state."
-        },
-        "status": {
-          "type": "string",
-          "description": "Status of the step, bubbled up from the ECE action plan for installation attempts. Values are: 'Success', 'Error', 'InProgress', and 'Unknown status'."
-        },
-        "startTimeUtc": {
-          "type": "string",
-          "format": "date-time",
-          "description": "When the step started, or empty if it has not started executing."
-        },
-        "endTimeUtc": {
-          "type": "string",
-          "format": "date-time",
-          "description": "When the step reached a terminal state."
-        },
-        "lastUpdatedTimeUtc": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Completion time of this step or the last completed sub-step."
-        },
-        "expectedExecutionTime": {
-          "type": "string",
-          "description": "Expected execution time of a given step. This is optionally authored in the update action plan and can be empty."
-        },
-        "steps": {
-          "type": "array",
-          "description": "Recursive model for child steps of this step.",
-          "items": {
-            "$ref": "#/definitions/UpdateStep"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
-        }
-      }
-    },
     "UpdateSummaries": {
       "type": "object",
       "description": "Get the update summaries for the cluster",
       "properties": {
         "properties": {
           "$ref": "#/definitions/UpdateSummariesProperties",
-          "description": "Update summaries properties"
+          "description": "Update summaries properties",
+          "x-ms-client-flatten": true
         },
         "location": {
           "type": "string",
@@ -11725,13 +11580,6 @@
             "read",
             "create"
           ]
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
         }
       },
       "allOf": [
@@ -11746,7 +11594,7 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The UpdateSummariesResource items on this page",
+          "description": "The UpdateSummaries items on this page",
           "items": {
             "$ref": "#/definitions/UpdateSummaries"
           }
@@ -11767,7 +11615,7 @@
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning state of the UpdateSummaries proxy resource.",
+          "description": "Provisioning state of the UpdateSummaries proxy resource. Indicates the current lifecycle status of the update summary operation, such as whether it has been accepted, is in progress, or has completed.",
           "readOnly": true
         },
         "oemFamily": {
@@ -11834,13 +11682,13 @@
         },
         "state": {
           "$ref": "#/definitions/UpdateSummariesPropertiesState",
-          "description": "Overall update state of the stamp."
+          "description": "Overall update state of the stamp. Indicates the current status of update deployment across the stamp, including preparation, application, and any issues encountered."
         }
       }
     },
     "UpdateSummariesPropertiesState": {
       "type": "string",
-      "description": "Overall update state of the stamp.",
+      "description": "Overall update state of the stamp. Indicates the current status of update deployment across the stamp, including preparation, application, and any issues encountered.",
       "enum": [
         "Unknown",
         "AppliedSuccessfully",
@@ -11858,53 +11706,51 @@
           {
             "name": "Unknown",
             "value": "Unknown",
-            "description": "The update state is unknown."
+            "description": "The update state is not known."
           },
           {
             "name": "AppliedSuccessfully",
             "value": "AppliedSuccessfully",
-            "description": "Updates were applied successfully."
+            "description": "Updates have been successfully applied to the stamp."
           },
           {
             "name": "UpdateAvailable",
             "value": "UpdateAvailable",
-            "description": "An update is available."
+            "description": "Updates are available but have not yet been applied."
           },
           {
             "name": "UpdateInProgress",
             "value": "UpdateInProgress",
-            "description": "An update is in progress."
+            "description": "Updates are currently being applied to the stamp."
           },
           {
             "name": "UpdateFailed",
             "value": "UpdateFailed",
-            "description": "An update failed."
+            "description": "The update process failed."
           },
           {
             "name": "NeedsAttention",
             "value": "NeedsAttention",
-            "description": "The update needs attention."
+            "description": "The update process requires user intervention or has encountered issues needing attention."
           },
           {
             "name": "PreparationInProgress",
             "value": "PreparationInProgress",
-            "description": "Update preparation is in progress."
+            "description": "Preparation for the update is currently in progress."
           },
           {
             "name": "PreparationFailed",
             "value": "PreparationFailed",
-            "description": "Update preparation failed."
+            "description": "Preparation for the update failed."
           }
         ]
       }
     },
     "UploadCertificateRequest": {
       "type": "object",
-      "description": "Upload certificate request.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/RawCertificateData",
-          "description": "Raw certificate data for upload."
+          "$ref": "#/definitions/RawCertificateData"
         }
       }
     },
@@ -12225,15 +12071,5 @@
       }
     }
   },
-  "parameters": {
-    "Azure.ResourceManager.ResourceUriParameter": {
-      "name": "resourceUri",
-      "in": "path",
-      "description": "The fully qualified Azure Resource manager identifier of the resource.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "x-ms-skip-url-encoding": true
-    }
-  }
+  "parameters": {}
 }
