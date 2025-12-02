@@ -18914,6 +18914,12 @@ model PacketCaptureListResult {
    */
   @pageItems
   value?: PacketCaptureResult[];
+
+  /**
+   * URL to get the next set of results.
+   */
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -20237,6 +20243,12 @@ model ConnectionMonitorListResult {
    */
   @pageItems
   value?: ConnectionMonitorResult[];
+
+  /**
+   * URL to get the next set of results.
+   */
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -27001,3 +27013,8 @@ model LoadBalancerLoadBalancingRuleListResult
 model NetworkInterfaceLoadBalancerListResult is Azure.Core.Page<LoadBalancer>;
 
 model AdminRuleListResult is Azure.Core.Page<BaseAdminRule>;
+
+model NspAssociationsListResult is Azure.Core.Page<NspAssociation>;
+
+model NetworkVirtualApplianceSiteListResult
+  is Azure.Core.Page<VirtualApplianceSite>;

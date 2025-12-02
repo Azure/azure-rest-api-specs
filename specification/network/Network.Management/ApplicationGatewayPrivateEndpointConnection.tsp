@@ -42,7 +42,8 @@ interface ApplicationGatewayPrivateEndpointConnections {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   update is ArmResourceCreateOrReplaceAsync<
     ApplicationGatewayPrivateEndpointConnection,
-    Response = ArmResourceUpdatedResponse<ApplicationGatewayPrivateEndpointConnection> | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader>,
+    Response = ArmResourceUpdatedResponse<ApplicationGatewayPrivateEndpointConnection> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader> &
+      Azure.Core.Foundations.RetryAfterHeader),
     Error = CloudError
   >;
 

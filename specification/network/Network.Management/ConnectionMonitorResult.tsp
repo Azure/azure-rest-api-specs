@@ -33,7 +33,7 @@ interface ConnectionMonitorResults {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ConnectionMonitors_Get")
-  get is ArmResourceRead<ConnectionMonitorResult, Error = CloudError>;
+  get is ArmResourceRead<ConnectionMonitorResult, Error = ErrorResponse>;
 
   /**
    * Create or update a connection monitor.
@@ -61,7 +61,7 @@ interface ConnectionMonitorResults {
   updateTags is ArmCustomPatchSync<
     ConnectionMonitorResult,
     PatchModel = TagsObject,
-    Error = CloudError
+    Error = ErrorResponse
   >;
 
   /**
@@ -71,7 +71,7 @@ interface ConnectionMonitorResults {
   @operationId("ConnectionMonitors_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     ConnectionMonitorResult,
-    Error = CloudError
+    Error = ErrorResponse
   >;
 
   /**
@@ -82,7 +82,7 @@ interface ConnectionMonitorResults {
   list is ArmResourceListByParent<
     ConnectionMonitorResult,
     Response = ArmResponse<ConnectionMonitorListResult>,
-    Error = CloudError
+    Error = ErrorResponse
   >;
 
   /**
@@ -94,7 +94,7 @@ interface ConnectionMonitorResults {
     ConnectionMonitorResult,
     void,
     OkResponse,
-    Error = CloudError
+    Error = ErrorResponse
   >;
 }
 

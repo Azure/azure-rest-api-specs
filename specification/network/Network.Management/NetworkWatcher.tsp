@@ -51,14 +51,14 @@ interface NetworkWatchers {
   /**
    * Gets the specified network watcher by resource group.
    */
-  get is ArmResourceRead<NetworkWatcher, Error = CloudError>;
+  get is ArmResourceRead<NetworkWatcher, Error = ErrorResponse>;
 
   /**
    * Creates or updates a network watcher in the specified resource group.
    */
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     NetworkWatcher,
-    Error = CloudError
+    Error = ErrorResponse
   >;
 
   /**
@@ -68,13 +68,16 @@ interface NetworkWatchers {
   updateTags is ArmCustomPatchSync<
     NetworkWatcher,
     PatchModel = TagsObject,
-    Error = CloudError
+    Error = ErrorResponse
   >;
 
   /**
    * Deletes the specified network watcher resource.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<NetworkWatcher, Error = CloudError>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    NetworkWatcher,
+    Error = ErrorResponse
+  >;
 
   /**
    * Gets all network watchers by resource group.
@@ -82,7 +85,7 @@ interface NetworkWatchers {
   list is ArmResourceListByParent<
     NetworkWatcher,
     Response = ArmResponse<NetworkWatcherListResult>,
-    Error = CloudError
+    Error = ErrorResponse
   >;
 
   /**
@@ -91,7 +94,7 @@ interface NetworkWatchers {
   listAll is ArmListBySubscription<
     NetworkWatcher,
     Response = ArmResponse<NetworkWatcherListResult>,
-    Error = CloudError
+    Error = ErrorResponse
   >;
 
   /**
@@ -102,29 +105,37 @@ interface NetworkWatchers {
     NetworkWatcher,
     TopologyParameters,
     ArmResponse<Topology>,
-    Error = CloudError
+    Error = ErrorResponse
   >;
 
   /**
    * Verify IP flow from the specified VM to a location given the currently configured NSG rules.
    */
   @action("ipFlowVerify")
-  verifyIPFlow is ArmResourceActionAsync<
+  verifyIPFlow is ArmResourceActionAsyncBase<
     NetworkWatcher,
     VerificationIPFlowParameters,
-    ArmResponse<VerificationIPFlowResult>,
-    Error = CloudError
+    ArmResponse<VerificationIPFlowResult> | (ArmAcceptedLroResponse & {
+      @body
+      _: VerificationIPFlowResult;
+    }),
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<NetworkWatcher>,
+    Error = ErrorResponse
   >;
 
   /**
    * Gets the next hop from the specified VM.
    */
   @action("nextHop")
-  getNextHop is ArmResourceActionAsync<
+  getNextHop is ArmResourceActionAsyncBase<
     NetworkWatcher,
     NextHopParameters,
-    ArmResponse<NextHopResult>,
-    Error = CloudError
+    ArmResponse<NextHopResult> | (ArmAcceptedLroResponse & {
+      @body
+      _: NextHopResult;
+    }),
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<NetworkWatcher>,
+    Error = ErrorResponse
   >;
 
   /**
@@ -135,7 +146,7 @@ interface NetworkWatchers {
     NetworkWatcher,
     SecurityGroupViewParameters,
     ArmResponse<SecurityGroupViewResult>,
-    Error = CloudError
+    Error = ErrorResponse
   >;
 
   /**
@@ -146,97 +157,126 @@ interface NetworkWatchers {
     NetworkWatcher,
     TroubleshootingParameters,
     ArmResponse<TroubleshootingResult>,
-    Error = CloudError
+    Error = ErrorResponse
   >;
 
   /**
    * Get the last completed troubleshooting result on a specified resource.
    */
   @action("queryTroubleshootResult")
-  getTroubleshootingResult is ArmResourceActionAsync<
+  getTroubleshootingResult is ArmResourceActionAsyncBase<
     NetworkWatcher,
     QueryTroubleshootingParameters,
-    ArmResponse<TroubleshootingResult>,
-    Error = CloudError
+    ArmResponse<TroubleshootingResult> | (ArmAcceptedLroResponse & {
+      @body
+      _: TroubleshootingResult;
+    }),
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<NetworkWatcher>,
+    Error = ErrorResponse
   >;
 
   /**
    * Configures flow log and traffic analytics (optional) on a specified resource.
    */
   @action("configureFlowLog")
-  setFlowLogConfiguration is ArmResourceActionAsync<
+  setFlowLogConfiguration is ArmResourceActionAsyncBase<
     NetworkWatcher,
     FlowLogInformation,
-    ArmResponse<FlowLogInformation>,
-    Error = CloudError
+    ArmResponse<FlowLogInformation> | (ArmAcceptedLroResponse & {
+      @body
+      _: FlowLogInformation;
+    }),
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<NetworkWatcher>,
+    Error = ErrorResponse
   >;
 
   /**
    * Queries status of flow log and traffic analytics (optional) on a specified resource.
    */
   @action("queryFlowLogStatus")
-  getFlowLogStatus is ArmResourceActionAsync<
+  getFlowLogStatus is ArmResourceActionAsyncBase<
     NetworkWatcher,
     FlowLogStatusParameters,
-    ArmResponse<FlowLogInformation>,
-    Error = CloudError
+    ArmResponse<FlowLogInformation> | (ArmAcceptedLroResponse & {
+      @body
+      _: FlowLogInformation;
+    }),
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<NetworkWatcher>,
+    Error = ErrorResponse
   >;
 
   /**
    * Verifies the possibility of establishing a direct TCP connection from a virtual machine to a given endpoint including another VM or an arbitrary remote server.
    */
   @action("connectivityCheck")
-  checkConnectivity is ArmResourceActionAsync<
+  checkConnectivity is ArmResourceActionAsyncBase<
     NetworkWatcher,
     ConnectivityParameters,
-    ArmResponse<ConnectivityInformation>,
-    Error = CloudError
+    ArmResponse<ConnectivityInformation> | (ArmAcceptedLroResponse & {
+      @body
+      _: ConnectivityInformation;
+    }),
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<NetworkWatcher>,
+    Error = ErrorResponse
   >;
 
   /**
    * NOTE: This feature is currently in preview and still being tested for stability. Gets the relative latency score for internet service providers from a specified location to Azure regions.
    */
   @action("azureReachabilityReport")
-  getAzureReachabilityReport is ArmResourceActionAsync<
+  getAzureReachabilityReport is ArmResourceActionAsyncBase<
     NetworkWatcher,
     AzureReachabilityReportParameters,
-    ArmResponse<AzureReachabilityReport>,
-    Error = CloudError
+    ArmResponse<AzureReachabilityReport> | (ArmAcceptedLroResponse & {
+      @body
+      _: AzureReachabilityReport;
+    }),
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<NetworkWatcher>,
+    Error = ErrorResponse
   >;
 
   /**
    * NOTE: This feature is currently in preview and still being tested for stability. Lists all available internet service providers for a specified Azure region.
    */
   @action("availableProvidersList")
-  listAvailableProviders is ArmResourceActionAsync<
+  listAvailableProviders is ArmResourceActionAsyncBase<
     NetworkWatcher,
     AvailableProvidersListParameters,
-    ArmResponse<AvailableProvidersList>,
-    Error = CloudError
+    ArmResponse<AvailableProvidersList> | (ArmAcceptedLroResponse & {
+      @body
+      _: AvailableProvidersList;
+    }),
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<NetworkWatcher>,
+    Error = ErrorResponse
   >;
 
   /**
    * Gets Network Configuration Diagnostic data to help customers understand and debug network behavior. It provides detailed information on what security rules were applied to a specified traffic flow and the result of evaluating these rules. Customers must provide details of a flow like source, destination, protocol, etc. The API returns whether traffic was allowed or denied, the rules evaluated for the specified flow and the evaluation results.
    */
   @action("networkConfigurationDiagnostic")
-  getNetworkConfigurationDiagnostic is ArmResourceActionAsync<
+  getNetworkConfigurationDiagnostic is ArmResourceActionAsyncBase<
     NetworkWatcher,
     NetworkConfigurationDiagnosticParameters,
-    ArmResponse<NetworkConfigurationDiagnosticResponse>,
-    Error = CloudError
+    ArmResponse<NetworkConfigurationDiagnosticResponse> | (ArmAcceptedLroResponse & {
+      @body
+      _: NetworkConfigurationDiagnosticResponse;
+    }),
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<NetworkWatcher>,
+    Error = ErrorResponse
   >;
 
   /**
    * Create and start a packet capture on the specified VM.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   @operationId("PacketCaptures_Create")
   @put
   create is PacketCaptureOps.CreateOrUpdateAsync<
     NetworkWatcher,
     Response = ArmResourceCreatedResponse<PacketCaptureResult>,
     Request = PacketCapture,
-    OverrideErrorType = CloudError
+    OverrideErrorType = ErrorResponse
   >;
 
   /**
@@ -247,7 +287,8 @@ interface NetworkWatchers {
   @get
   packetCapturesGet is PacketCaptureOps.Read<
     NetworkWatcher,
-    Response = ArmResponse<PacketCaptureResult>
+    Response = ArmResponse<PacketCaptureResult>,
+    OverrideErrorType = ErrorResponse
   >;
 
   /**
@@ -258,8 +299,8 @@ interface NetworkWatchers {
   @delete
   packetCapturesDelete is PacketCaptureOps.DeleteWithoutOkAsync<
     NetworkWatcher,
-    Response = NoContentResponse,
-    OverrideErrorType = CloudError
+    Response = ArmAcceptedLroResponse | NoContentResponse,
+    OverrideErrorType = ErrorResponse
   >;
 
   /**
@@ -267,7 +308,12 @@ interface NetworkWatchers {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("PacketCaptures_Stop")
-  stop is PacketCaptureOps.ActionAsync<NetworkWatcher, void, OkResponse>;
+  stop is PacketCaptureOps.ActionAsync<
+    NetworkWatcher,
+    void,
+    OkResponse,
+    OverrideErrorType = ErrorResponse
+  >;
 
   /**
    * Query the status of a running packet capture session.
@@ -278,7 +324,12 @@ interface NetworkWatchers {
   getStatus is PacketCaptureOps.ActionAsync<
     NetworkWatcher,
     void,
-    ArmResponse<PacketCaptureQueryStatusResult>
+    Result = void,
+    Response = ArmResponse<PacketCaptureQueryStatusResult> | (ArmAcceptedLroResponse & {
+      @body
+      _: PacketCaptureQueryStatusResult;
+    }),
+    OverrideErrorType = ErrorResponse
   >;
 
   /**
@@ -290,7 +341,8 @@ interface NetworkWatchers {
   @get
   packetCapturesList is PacketCaptureOps.List<
     NetworkWatcher,
-    Response = ArmResponse<PacketCaptureListResult>
+    Response = ArmResponse<PacketCaptureListResult>,
+    OverrideErrorType = ErrorResponse
   >;
 }
 

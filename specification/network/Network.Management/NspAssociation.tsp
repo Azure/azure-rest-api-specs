@@ -43,10 +43,11 @@ interface NspAssociations {
   @operationId("NetworkSecurityPerimeterAssociations_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     NspAssociation,
-    Response = ArmResourceUpdatedResponse<NspAssociation> | ArmResourceCreatedResponse<NspAssociation> | (ArmAcceptedLroResponse & {
-      @bodyRoot
-      _: NspAssociation;
-    })
+    Response = ArmResourceUpdatedResponse<NspAssociation> | ArmResourceCreatedResponse<NspAssociation> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader> &
+      Azure.Core.Foundations.RetryAfterHeader & {
+        @bodyRoot
+        _: NspAssociation;
+      })
   >;
 
   /**
@@ -85,6 +86,7 @@ interface NspAssociations {
       @query("$skipToken")
       $skipToken?: string;
     },
+    Response = NspAssociationsListResult,
     Error = CloudError
   >;
 

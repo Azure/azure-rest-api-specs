@@ -33,27 +33,34 @@ interface ReachabilityAnalysisIntents {
   /**
    * Get the Reachability Analysis Intent.
    */
-  get is ArmResourceRead<ReachabilityAnalysisIntent, Error = CloudError>;
+  @summary("Get the Reachability Analysis Intent.")
+  get is ArmResourceRead<
+    ReachabilityAnalysisIntent,
+    Error = CommonErrorResponse
+  >;
 
   /**
    * Creates Reachability Analysis Intent.
    */
+  @summary("Creates Reachability Analysis Intent.")
   create is ArmResourceCreateOrReplaceSync<
     ReachabilityAnalysisIntent,
-    Error = CloudError
+    Error = CommonErrorResponse
   >;
 
   /**
    * Deletes Reachability Analysis Intent.
    */
+  @summary("Deletes Reachability Analysis Intent.")
   delete is ArmResourceDeleteSync<
     ReachabilityAnalysisIntent,
-    Error = CloudError
+    Error = CommonErrorResponse
   >;
 
   /**
    * Gets list of Reachability Analysis Intents .
    */
+  @summary("Gets list of Reachability Analysis Intents .")
   list is ArmResourceListByParent<
     ReachabilityAnalysisIntent,
     Parameters = {
@@ -67,7 +74,7 @@ interface ReachabilityAnalysisIntents {
        * Optional num entries to skip.
        */
       @query("skip")
-      skip?: int32;
+      skip?: int32 = 0;
 
       /**
        * Optional num entries to show.
@@ -87,7 +94,7 @@ interface ReachabilityAnalysisIntents {
       @query("sortValue")
       sortValue?: string;
     },
-    Error = CloudError
+    Error = CommonErrorResponse
   >;
 }
 

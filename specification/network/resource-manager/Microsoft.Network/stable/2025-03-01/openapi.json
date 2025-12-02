@@ -3217,7 +3217,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -3295,7 +3295,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -3334,7 +3334,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -5414,11 +5414,16 @@
             }
           },
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
                 "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -15779,11 +15784,16 @@
             }
           },
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
                 "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -22198,12 +22208,11 @@
             "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
           },
           {
-            "name": "if-match",
+            "name": "If-Match",
             "in": "header",
             "description": "The entity state (ETag) version of the pool to update. This value can be omitted or set to \"*\" to apply the operation unconditionally.",
             "required": false,
-            "type": "string",
-            "x-ms-client-name": "If-Match"
+            "type": "string"
           }
         ],
         "responses": {
@@ -22227,7 +22236,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/CommonErrorResponse"
             }
           }
         },
@@ -22248,6 +22257,7 @@
         "tags": [
           "ReachabilityAnalysisIntents"
         ],
+        "summary": "Gets list of Reachability Analysis Intents .",
         "description": "Gets list of Reachability Analysis Intents .",
         "parameters": [
           {
@@ -22288,7 +22298,8 @@
             "description": "Optional num entries to skip.",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "default": 0
           },
           {
             "name": "top",
@@ -22324,7 +22335,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/CommonErrorResponse"
             }
           }
         },
@@ -22344,6 +22355,7 @@
         "tags": [
           "ReachabilityAnalysisIntents"
         ],
+        "summary": "Get the Reachability Analysis Intent.",
         "description": "Get the Reachability Analysis Intent.",
         "parameters": [
           {
@@ -22390,7 +22402,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/CommonErrorResponse"
             }
           }
         },
@@ -22405,6 +22417,7 @@
         "tags": [
           "ReachabilityAnalysisIntents"
         ],
+        "summary": "Creates Reachability Analysis Intent.",
         "description": "Creates Reachability Analysis Intent.",
         "parameters": [
           {
@@ -22466,7 +22479,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/CommonErrorResponse"
             }
           }
         },
@@ -22481,6 +22494,7 @@
         "tags": [
           "ReachabilityAnalysisIntents"
         ],
+        "summary": "Deletes Reachability Analysis Intent.",
         "description": "Deletes Reachability Analysis Intent.",
         "parameters": [
           {
@@ -22527,7 +22541,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/CommonErrorResponse"
             }
           }
         },
@@ -22544,6 +22558,7 @@
         "tags": [
           "ReachabilityAnalysisRuns"
         ],
+        "summary": "Gets list of Reachability Analysis Runs.",
         "description": "Gets list of Reachability Analysis Runs.",
         "parameters": [
           {
@@ -22584,7 +22599,8 @@
             "description": "Optional num entries to skip.",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "default": 0
           },
           {
             "name": "top",
@@ -22620,7 +22636,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/CommonErrorResponse"
             }
           }
         },
@@ -22640,6 +22656,7 @@
         "tags": [
           "ReachabilityAnalysisRuns"
         ],
+        "summary": "Gets Reachability Analysis Run.",
         "description": "Gets Reachability Analysis Run.",
         "parameters": [
           {
@@ -22686,7 +22703,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/CommonErrorResponse"
             }
           }
         },
@@ -22701,6 +22718,7 @@
         "tags": [
           "ReachabilityAnalysisRuns"
         ],
+        "summary": "Creates Reachability Analysis Runs.",
         "description": "Creates Reachability Analysis Runs.",
         "parameters": [
           {
@@ -22762,7 +22780,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/CommonErrorResponse"
             }
           }
         },
@@ -22777,6 +22795,7 @@
         "tags": [
           "ReachabilityAnalysisRuns"
         ],
+        "summary": "Deletes Reachability Analysis Run.",
         "description": "Deletes Reachability Analysis Run.",
         "parameters": [
           {
@@ -22834,7 +22853,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/CommonErrorResponse"
             }
           }
         },
@@ -24012,7 +24031,7 @@
             "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
           },
           {
-            "name": "forceDeletion",
+            "name": "force",
             "in": "query",
             "description": "Deletes the resource even if it contains any child associations.",
             "required": false,
@@ -25410,9 +25429,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/NspAssociationListResult"
+              "$ref": "#/definitions/NspAssociationsListResult"
             }
           },
           "default": {
@@ -25558,9 +25577,9 @@
               "$ref": "#/definitions/NspAssociation"
             },
             "headers": {
-              "Location": {
+              "Azure-AsyncOperation": {
                 "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+                "description": "A link to the status monitor"
               },
               "Retry-After": {
                 "type": "integer",
@@ -25582,7 +25601,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/NspAssociation"
         },
         "x-ms-long-running-operation": true
       },
@@ -25864,7 +25884,12 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -25904,8 +25929,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/NetworkVirtualAppliance"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       },
@@ -26381,11 +26405,15 @@
             }
           },
           "201": {
-            "description": "Resource 'NetworkVirtualApplianceConnection' create operation succeeded",
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/NetworkVirtualApplianceConnection"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -26406,7 +26434,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "original-uri",
+          "final-state-via": "azure-async-operation",
           "final-state-schema": "#/definitions/NetworkVirtualAppliance"
         },
         "x-ms-long-running-operation": true
@@ -26445,6 +26473,15 @@
           "200": {
             "description": "The request has succeeded."
           },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
           "204": {
             "description": "There is no content to send for this request, but the headers may be useful."
           },
@@ -26459,7 +26496,11 @@
           "NetworkVirtualApplianceConnectionDelete": {
             "$ref": "./examples/NetworkVirtualApplianceConnectionDelete.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkVirtualAppliances/{networkVirtualApplianceName}/reimage": {
@@ -26640,9 +26681,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/VirtualApplianceSiteListResult"
+              "$ref": "#/definitions/NetworkVirtualApplianceSiteListResult"
             }
           },
           "default": {
@@ -26894,7 +26935,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -26943,7 +26984,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -27002,7 +27043,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -27055,7 +27096,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -27110,7 +27151,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -27167,7 +27208,10 @@
             }
           },
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/AvailableProvidersList"
+            },
             "headers": {
               "Location": {
                 "type": "string",
@@ -27183,7 +27227,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -27193,8 +27237,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CAvailableProvidersList%3E"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -27241,7 +27284,10 @@
             }
           },
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/AzureReachabilityReport"
+            },
             "headers": {
               "Location": {
                 "type": "string",
@@ -27257,7 +27303,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -27267,8 +27313,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CAzureReachabilityReport%3E"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -27315,7 +27360,10 @@
             }
           },
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/FlowLogInformation"
+            },
             "headers": {
               "Location": {
                 "type": "string",
@@ -27331,7 +27379,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -27341,8 +27389,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CFlowLogInformation%3E"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -27382,7 +27429,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -27390,6 +27437,9 @@
           "List connection monitors": {
             "$ref": "./examples/NetworkWatcherConnectionMonitorList.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -27435,7 +27485,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -27590,7 +27640,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -27652,7 +27702,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -27720,7 +27770,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -27778,7 +27828,10 @@
             }
           },
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/ConnectivityInformation"
+            },
             "headers": {
               "Location": {
                 "type": "string",
@@ -27794,7 +27847,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -27804,8 +27857,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CConnectivityInformation%3E"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -27845,7 +27897,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -27901,7 +27953,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -27978,7 +28030,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -28043,7 +28095,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -28105,7 +28157,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -28162,7 +28214,10 @@
             }
           },
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/VerificationIPFlowResult"
+            },
             "headers": {
               "Location": {
                 "type": "string",
@@ -28178,7 +28233,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -28188,8 +28243,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CVerificationIPFlowResult%3E"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -28236,7 +28290,10 @@
             }
           },
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/NetworkConfigurationDiagnosticResponse"
+            },
             "headers": {
               "Location": {
                 "type": "string",
@@ -28252,7 +28309,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -28262,8 +28319,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CNetworkConfigurationDiagnosticResponse%3E"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -28310,7 +28366,10 @@
             }
           },
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/NextHopResult"
+            },
             "headers": {
               "Location": {
                 "type": "string",
@@ -28326,7 +28385,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -28336,8 +28395,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CNextHopResult%3E"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -28377,7 +28435,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -28385,6 +28443,9 @@
           "List packet captures": {
             "$ref": "./examples/NetworkWatcherPacketCapturesList.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -28430,7 +28491,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -28497,7 +28558,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -28507,7 +28568,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "original-uri",
+          "final-state-via": "azure-async-operation",
           "final-state-schema": "#/definitions/NetworkWatcher"
         },
         "x-ms-long-running-operation": true
@@ -28544,13 +28605,27 @@
           }
         ],
         "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
           "204": {
             "description": "There is no content to send for this request, but the headers may be useful."
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -28558,7 +28633,11 @@
           "Delete packet capture": {
             "$ref": "./examples/NetworkWatcherPacketCaptureDelete.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/packetCaptures/{packetCaptureName}/queryStatus": {
@@ -28601,7 +28680,10 @@
             }
           },
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PacketCaptureQueryStatusResult"
+            },
             "headers": {
               "Location": {
                 "type": "string",
@@ -28617,7 +28699,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -28627,8 +28709,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CPacketCaptureQueryStatusResult%3E"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -28686,7 +28767,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -28744,7 +28825,10 @@
             }
           },
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/FlowLogInformation"
+            },
             "headers": {
               "Location": {
                 "type": "string",
@@ -28760,7 +28844,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -28770,8 +28854,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CFlowLogInformation%3E"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -28818,7 +28901,10 @@
             }
           },
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/TroubleshootingResult"
+            },
             "headers": {
               "Location": {
                 "type": "string",
@@ -28834,7 +28920,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -28844,8 +28930,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CTroubleshootingResult%3E"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -28908,7 +28993,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -28968,7 +29053,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -29037,7 +29122,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -29727,7 +29812,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -29783,7 +29868,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -29859,7 +29944,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -29928,7 +30013,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -29978,7 +30063,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -30117,7 +30202,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "original-uri",
+          "final-state-via": "azure-async-operation",
           "final-state-schema": "#/definitions/PrivateEndpoint"
         },
         "x-ms-long-running-operation": true
@@ -30157,6 +30242,20 @@
           "200": {
             "description": "The request has succeeded."
           },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
           "204": {
             "description": "There is no content to send for this request, but the headers may be useful."
           },
@@ -30171,7 +30270,11 @@
           "Delete private dns zone group": {
             "$ref": "./examples/PrivateEndpointDnsZoneGroupDelete.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/privateLinkServices": {
@@ -30202,7 +30305,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -30258,7 +30361,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -30328,7 +30431,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -30391,7 +30494,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -30993,7 +31096,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -31053,6 +31156,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -31067,7 +31175,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -31077,8 +31185,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CPublicIPAddress%3E"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -31127,6 +31234,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -31141,7 +31253,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -31151,8 +31263,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CPublicIPAddress%3E"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -49432,38 +49543,12 @@
         "body"
       ]
     },
-    "Azure.ResourceManager.ArmResponse<AvailableProvidersList>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/AvailableProvidersList",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
     "Azure.ResourceManager.ArmResponse<AzureFirewallPacketCaptureResponse>": {
       "type": "object",
       "description": "Azure operation completed successfully.",
       "properties": {
         "body": {
           "$ref": "#/definitions/AzureFirewallPacketCaptureResponse",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<AzureReachabilityReport>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/AzureReachabilityReport",
           "description": "The body type of the operation request or response."
         }
       },
@@ -49516,19 +49601,6 @@
       "properties": {
         "body": {
           "$ref": "#/definitions/ConnectionResetSharedKey",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<ConnectivityInformation>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/ConnectivityInformation",
           "description": "The body type of the operation request or response."
         }
       },
@@ -49601,19 +49673,6 @@
         "body"
       ]
     },
-    "Azure.ResourceManager.ArmResponse<FlowLogInformation>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/FlowLogInformation",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
     "Azure.ResourceManager.ArmResponse<GatewayResiliencyInformation>": {
       "type": "object",
       "description": "Azure operation completed successfully.",
@@ -49679,19 +49738,6 @@
         "body"
       ]
     },
-    "Azure.ResourceManager.ArmResponse<NetworkConfigurationDiagnosticResponse>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/NetworkConfigurationDiagnosticResponse",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
     "Azure.ResourceManager.ArmResponse<NetworkVirtualApplianceInstanceId>": {
       "type": "object",
       "description": "Azure operation completed successfully.",
@@ -49718,19 +49764,6 @@
         "body"
       ]
     },
-    "Azure.ResourceManager.ArmResponse<NextHopResult>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/NextHopResult",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
     "Azure.ResourceManager.ArmResponse<P2SVpnConnectionHealth>": {
       "type": "object",
       "description": "Azure operation completed successfully.",
@@ -49750,32 +49783,6 @@
       "properties": {
         "body": {
           "$ref": "#/definitions/P2SVpnGateway",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<PacketCaptureQueryStatusResult>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/PacketCaptureQueryStatusResult",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<PublicIPAddress>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/PublicIPAddress",
           "description": "The body type of the operation request or response."
         }
       },
@@ -49834,19 +49841,6 @@
       "properties": {
         "body": {
           "$ref": "#/definitions/TroubleshootingResult",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<VerificationIPFlowResult>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/VerificationIPFlowResult",
           "description": "The body type of the operation request or response."
         }
       },
@@ -52674,6 +52668,10 @@
           "items": {
             "$ref": "#/definitions/ConnectionMonitorResult"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of results."
         }
       }
     },
@@ -66064,6 +66062,27 @@
         }
       }
     },
+    "NetworkVirtualApplianceSiteListResult": {
+      "type": "object",
+      "description": "Paged collection of VirtualApplianceSite items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The VirtualApplianceSite items on this page",
+          "items": {
+            "$ref": "#/definitions/VirtualApplianceSite"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "NetworkVirtualApplianceSku": {
       "type": "object",
       "description": "Definition of the NetworkVirtualApplianceSkus resource.",
@@ -66523,27 +66542,6 @@
         }
       ]
     },
-    "NspAssociationListResult": {
-      "type": "object",
-      "description": "The response of a NspAssociation list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The NspAssociation items on this page",
-          "items": {
-            "$ref": "#/definitions/NspAssociation"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "NspAssociationProperties": {
       "type": "object",
       "properties": {
@@ -66570,6 +66568,27 @@
           "readOnly": true
         }
       }
+    },
+    "NspAssociationsListResult": {
+      "type": "object",
+      "description": "Paged collection of NspAssociation items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The NspAssociation items on this page",
+          "items": {
+            "$ref": "#/definitions/NspAssociation"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "NspLink": {
       "type": "object",
@@ -67762,6 +67781,10 @@
           "items": {
             "$ref": "#/definitions/PacketCaptureResult"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of results."
         }
       }
     },
@@ -75090,27 +75113,6 @@
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
-      ]
-    },
-    "VirtualApplianceSiteListResult": {
-      "type": "object",
-      "description": "The response of a VirtualApplianceSite list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The VirtualApplianceSite items on this page",
-          "items": {
-            "$ref": "#/definitions/VirtualApplianceSite"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "VirtualApplianceSiteProperties": {

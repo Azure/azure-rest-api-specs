@@ -45,7 +45,7 @@ interface PrivateLinkServices {
       @query("$expand")
       $expand?: string;
     },
-    Error = CloudError
+    Error = Error
   >;
 
   /**
@@ -53,7 +53,7 @@ interface PrivateLinkServices {
    */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     PrivateLinkService,
-    Error = CloudError
+    Error = Error
   >;
 
   /**
@@ -63,20 +63,20 @@ interface PrivateLinkServices {
   delete is ArmResourceDeleteWithoutOkAsync<
     PrivateLinkService,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
-    Error = CloudError
+    Error = Error
   >;
 
   /**
    * Gets all private link services in a resource group.
    */
-  list is ArmResourceListByParent<PrivateLinkService, Error = CloudError>;
+  list is ArmResourceListByParent<PrivateLinkService, Error = Error>;
 
   /**
    * Gets all private link service in a subscription.
    */
   listBySubscription is ArmListBySubscription<
     PrivateLinkService,
-    Error = CloudError
+    Error = Error
   >;
 }
 

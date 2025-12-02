@@ -78,10 +78,10 @@ interface VerifierWorkspaces {
       /**
        * The entity state (ETag) version of the pool to update. This value can be omitted or set to "*" to apply the operation unconditionally.
        */
-      @header
+      @header("If-Match")
       `If-Match`?: string;
     },
-    Error = CloudError
+    Error = CommonErrorResponse
   >;
 
   /**

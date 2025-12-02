@@ -54,7 +54,11 @@ interface VirtualApplianceSites {
   /**
    * Lists all Network Virtual Appliance Sites in a Network Virtual Appliance resource.
    */
-  list is ArmResourceListByParent<VirtualApplianceSite, Error = CloudError>;
+  list is ArmResourceListByParent<
+    VirtualApplianceSite,
+    Response = NetworkVirtualApplianceSiteListResult,
+    Error = CloudError
+  >;
 }
 
 @@doc(VirtualApplianceSite.name, "The name of the site.");

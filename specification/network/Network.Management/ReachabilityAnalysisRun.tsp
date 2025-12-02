@@ -33,27 +33,31 @@ interface ReachabilityAnalysisRuns {
   /**
    * Gets Reachability Analysis Run.
    */
-  get is ArmResourceRead<ReachabilityAnalysisRun, Error = CloudError>;
+  @summary("Gets Reachability Analysis Run.")
+  get is ArmResourceRead<ReachabilityAnalysisRun, Error = CommonErrorResponse>;
 
   /**
    * Creates Reachability Analysis Runs.
    */
+  @summary("Creates Reachability Analysis Runs.")
   create is ArmResourceCreateOrReplaceSync<
     ReachabilityAnalysisRun,
-    Error = CloudError
+    Error = CommonErrorResponse
   >;
 
   /**
    * Deletes Reachability Analysis Run.
    */
+  @summary("Deletes Reachability Analysis Run.")
   delete is ArmResourceDeleteWithoutOkAsync<
     ReachabilityAnalysisRun,
-    Error = CloudError
+    Error = CommonErrorResponse
   >;
 
   /**
    * Gets list of Reachability Analysis Runs.
    */
+  @summary("Gets list of Reachability Analysis Runs.")
   list is ArmResourceListByParent<
     ReachabilityAnalysisRun,
     Parameters = {
@@ -67,7 +71,7 @@ interface ReachabilityAnalysisRuns {
        * Optional num entries to skip.
        */
       @query("skip")
-      skip?: int32;
+      skip?: int32 = 0;
 
       /**
        * Optional num entries to show.
@@ -87,7 +91,7 @@ interface ReachabilityAnalysisRuns {
       @query("sortValue")
       sortValue?: string;
     },
-    Error = CloudError
+    Error = CommonErrorResponse
   >;
 }
 

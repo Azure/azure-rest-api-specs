@@ -55,7 +55,8 @@ interface NatGateways {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     NatGateway,
-    Response = ArmResourceUpdatedResponse<NatGateway> | ArmResourceCreatedResponse<NatGateway> | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader>,
+    Response = ArmResourceUpdatedResponse<NatGateway> | ArmResourceCreatedResponse<NatGateway> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader> &
+      Azure.Core.Foundations.RetryAfterHeader),
     Error = CloudError
   >;
 

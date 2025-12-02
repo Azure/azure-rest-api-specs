@@ -59,8 +59,8 @@ interface NetworkSecurityPerimeters {
       /**
        * Deletes the resource even if it contains any child associations.
        */
-      @query("forceDeletion")
-      forceDeletion?: boolean;
+      @query("force")
+      force?: boolean;
     },
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
       Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse,

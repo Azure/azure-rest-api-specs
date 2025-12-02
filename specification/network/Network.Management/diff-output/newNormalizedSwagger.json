@@ -2198,7 +2198,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -2256,7 +2256,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -2285,7 +2285,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -16474,10 +16474,9 @@
             "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
           },
           {
-            "name": "if-match",
+            "name": "If-Match",
             "in": "header",
-            "type": "string",
-            "x-ms-client-name": "If-Match"
+            "type": "string"
           }
         ],
         "responses": {
@@ -16496,7 +16495,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/CommonErrorResponse"
             }
           }
         },
@@ -16511,6 +16510,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/verifierWorkspaces/{workspaceName}/reachabilityAnalysisIntents": {
       "get": {
         "operationId": "ReachabilityAnalysisIntents_List",
+        "summary": "Gets list of Reachability Analysis Intents .",
         "description": "Gets list of Reachability Analysis Intents .",
         "parameters": [
           {
@@ -16536,7 +16536,8 @@
             "name": "skip",
             "in": "query",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "default": 0
           },
           {
             "name": "top",
@@ -16566,7 +16567,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/CommonErrorResponse"
             }
           }
         },
@@ -16583,6 +16584,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/verifierWorkspaces/{workspaceName}/reachabilityAnalysisIntents/{reachabilityAnalysisIntentName}": {
       "get": {
         "operationId": "ReachabilityAnalysisIntents_Get",
+        "summary": "Get the Reachability Analysis Intent.",
         "description": "Get the Reachability Analysis Intent.",
         "parameters": [
           {
@@ -16617,7 +16619,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/CommonErrorResponse"
             }
           }
         },
@@ -16629,6 +16631,7 @@
       },
       "put": {
         "operationId": "ReachabilityAnalysisIntents_Create",
+        "summary": "Creates Reachability Analysis Intent.",
         "description": "Creates Reachability Analysis Intent.",
         "parameters": [
           {
@@ -16677,7 +16680,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/CommonErrorResponse"
             }
           }
         },
@@ -16689,6 +16692,7 @@
       },
       "delete": {
         "operationId": "ReachabilityAnalysisIntents_Delete",
+        "summary": "Deletes Reachability Analysis Intent.",
         "description": "Deletes Reachability Analysis Intent.",
         "parameters": [
           {
@@ -16723,7 +16727,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/CommonErrorResponse"
             }
           }
         },
@@ -16737,6 +16741,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/verifierWorkspaces/{workspaceName}/reachabilityAnalysisRuns": {
       "get": {
         "operationId": "ReachabilityAnalysisRuns_List",
+        "summary": "Gets list of Reachability Analysis Runs.",
         "description": "Gets list of Reachability Analysis Runs.",
         "parameters": [
           {
@@ -16762,7 +16767,8 @@
             "name": "skip",
             "in": "query",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "default": 0
           },
           {
             "name": "top",
@@ -16792,7 +16798,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/CommonErrorResponse"
             }
           }
         },
@@ -16809,6 +16815,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/verifierWorkspaces/{workspaceName}/reachabilityAnalysisRuns/{reachabilityAnalysisRunName}": {
       "get": {
         "operationId": "ReachabilityAnalysisRuns_Get",
+        "summary": "Gets Reachability Analysis Run.",
         "description": "Gets Reachability Analysis Run.",
         "parameters": [
           {
@@ -16843,7 +16850,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/CommonErrorResponse"
             }
           }
         },
@@ -16855,6 +16862,7 @@
       },
       "put": {
         "operationId": "ReachabilityAnalysisRuns_Create",
+        "summary": "Creates Reachability Analysis Runs.",
         "description": "Creates Reachability Analysis Runs.",
         "parameters": [
           {
@@ -16903,7 +16911,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/CommonErrorResponse"
             }
           }
         },
@@ -16915,6 +16923,7 @@
       },
       "delete": {
         "operationId": "ReachabilityAnalysisRuns_Delete",
+        "summary": "Deletes Reachability Analysis Run.",
         "description": "Deletes Reachability Analysis Run.",
         "parameters": [
           {
@@ -16955,7 +16964,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/CommonErrorResponse"
             }
           }
         },
@@ -17805,7 +17814,7 @@
             "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
           },
           {
-            "name": "forceDeletion",
+            "name": "force",
             "in": "query",
             "type": "boolean"
           }
@@ -18864,7 +18873,7 @@
           "200": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/NspAssociationListResult"
+              "$ref": "#/definitions/NspAssociationsListResult"
             }
           },
           "default": {
@@ -18974,9 +18983,9 @@
               "$ref": "#/definitions/NspAssociation"
             },
             "headers": {
-              "Location": {
+              "Azure-AsyncOperation": {
                 "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+                "description": "A link to the status monitor"
               }
             }
           },
@@ -18991,6 +19000,10 @@
           "NspAssociationPut": {
             "$ref": "./examples/NspAssociationPut.json"
           }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/NspAssociation"
         },
         "x-ms-long-running-operation": true
       },
@@ -19196,7 +19209,12 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -19231,8 +19249,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/NetworkVirtualAppliance"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       },
@@ -19579,6 +19596,12 @@
             "description": "ignore",
             "schema": {
               "$ref": "#/definitions/NetworkVirtualApplianceConnection"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
             }
           },
           "default": {
@@ -19594,7 +19617,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "original-uri",
+          "final-state-via": "azure-async-operation",
           "final-state-schema": "#/definitions/NetworkVirtualAppliance"
         },
         "x-ms-long-running-operation": true
@@ -19620,6 +19643,15 @@
           "200": {
             "description": "ignore"
           },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
           "204": {
             "description": "ignore"
           },
@@ -19634,7 +19666,8 @@
           "NetworkVirtualApplianceConnectionDelete": {
             "$ref": "./examples/NetworkVirtualApplianceConnectionDelete.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkVirtualAppliances/{networkVirtualApplianceName}/reimage": {
@@ -19756,7 +19789,7 @@
           "200": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/VirtualApplianceSiteListResult"
+              "$ref": "#/definitions/NetworkVirtualApplianceSiteListResult"
             }
           },
           "default": {
@@ -19939,7 +19972,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -19975,7 +20008,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -20020,7 +20053,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -20059,7 +20092,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -20096,7 +20129,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -20137,6 +20170,9 @@
           },
           "202": {
             "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/AvailableProvidersList"
+            },
             "headers": {
               "Location": {
                 "type": "string",
@@ -20147,7 +20183,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -20188,6 +20224,9 @@
           },
           "202": {
             "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/AzureReachabilityReport"
+            },
             "headers": {
               "Location": {
                 "type": "string",
@@ -20198,7 +20237,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -20239,6 +20278,9 @@
           },
           "202": {
             "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/FlowLogInformation"
+            },
             "headers": {
               "Location": {
                 "type": "string",
@@ -20249,7 +20291,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -20283,7 +20325,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -20291,6 +20333,9 @@
           "List connection monitors": {
             "$ref": "./examples/NetworkWatcherConnectionMonitorList.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -20322,7 +20367,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -20440,7 +20485,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -20483,7 +20528,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -20529,7 +20574,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -20570,6 +20615,9 @@
           },
           "202": {
             "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ConnectivityInformation"
+            },
             "headers": {
               "Location": {
                 "type": "string",
@@ -20580,7 +20628,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -20614,7 +20662,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -20656,7 +20704,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -20713,7 +20761,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -20763,7 +20811,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -20806,7 +20854,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -20847,6 +20895,9 @@
           },
           "202": {
             "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VerificationIPFlowResult"
+            },
             "headers": {
               "Location": {
                 "type": "string",
@@ -20857,7 +20908,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -20898,6 +20949,9 @@
           },
           "202": {
             "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/NetworkConfigurationDiagnosticResponse"
+            },
             "headers": {
               "Location": {
                 "type": "string",
@@ -20908,7 +20962,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -20949,6 +21003,9 @@
           },
           "202": {
             "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/NextHopResult"
+            },
             "headers": {
               "Location": {
                 "type": "string",
@@ -20959,7 +21016,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -20993,7 +21050,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -21001,6 +21058,9 @@
           "List packet captures": {
             "$ref": "./examples/NetworkWatcherPacketCapturesList.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -21032,7 +21092,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -21077,7 +21137,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -21087,7 +21147,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "original-uri",
+          "final-state-via": "azure-async-operation",
           "final-state-schema": "#/definitions/NetworkWatcher"
         },
         "x-ms-long-running-operation": true
@@ -21110,13 +21170,22 @@
           }
         ],
         "responses": {
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
           "204": {
             "description": "ignore"
           },
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -21124,7 +21193,8 @@
           "Delete packet capture": {
             "$ref": "./examples/NetworkWatcherPacketCaptureDelete.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/packetCaptures/{packetCaptureName}/queryStatus": {
@@ -21154,6 +21224,9 @@
           },
           "202": {
             "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/PacketCaptureQueryStatusResult"
+            },
             "headers": {
               "Location": {
                 "type": "string",
@@ -21164,7 +21237,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -21210,7 +21283,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -21251,6 +21324,9 @@
           },
           "202": {
             "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/FlowLogInformation"
+            },
             "headers": {
               "Location": {
                 "type": "string",
@@ -21261,7 +21337,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -21302,6 +21378,9 @@
           },
           "202": {
             "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/TroubleshootingResult"
+            },
             "headers": {
               "Location": {
                 "type": "string",
@@ -21312,7 +21391,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -21363,7 +21442,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -21405,7 +21484,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -21455,7 +21534,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -21930,7 +22009,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -21971,7 +22050,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -22028,7 +22107,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -22079,7 +22158,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -22113,7 +22192,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -22216,7 +22295,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "original-uri",
+          "final-state-via": "azure-async-operation",
           "final-state-schema": "#/definitions/PrivateEndpoint"
         },
         "x-ms-long-running-operation": true
@@ -22242,6 +22321,15 @@
           "200": {
             "description": "ignore"
           },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
           "204": {
             "description": "ignore"
           },
@@ -22256,7 +22344,8 @@
           "Delete private dns zone group": {
             "$ref": "./examples/PrivateEndpointDnsZoneGroupDelete.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/privateLinkServices": {
@@ -22274,7 +22363,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -22315,7 +22404,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -22366,7 +22455,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -22411,7 +22500,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -22844,7 +22933,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -22886,6 +22975,11 @@
           "202": {
             "description": "ignore",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -22895,7 +22989,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -22937,6 +23031,11 @@
           "202": {
             "description": "ignore",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -22946,7 +23045,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -36597,38 +36696,12 @@
         "body"
       ]
     },
-    "Azure.ResourceManager.ArmResponse<AvailableProvidersList>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/AvailableProvidersList",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
     "Azure.ResourceManager.ArmResponse<AzureFirewallPacketCaptureResponse>": {
       "type": "object",
       "description": "Azure operation completed successfully.",
       "properties": {
         "body": {
           "$ref": "#/definitions/AzureFirewallPacketCaptureResponse",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<AzureReachabilityReport>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/AzureReachabilityReport",
           "description": "The body type of the operation request or response."
         }
       },
@@ -36681,19 +36754,6 @@
       "properties": {
         "body": {
           "$ref": "#/definitions/ConnectionResetSharedKey",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<ConnectivityInformation>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/ConnectivityInformation",
           "description": "The body type of the operation request or response."
         }
       },
@@ -36766,19 +36826,6 @@
         "body"
       ]
     },
-    "Azure.ResourceManager.ArmResponse<FlowLogInformation>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/FlowLogInformation",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
     "Azure.ResourceManager.ArmResponse<GatewayResiliencyInformation>": {
       "type": "object",
       "description": "Azure operation completed successfully.",
@@ -36844,19 +36891,6 @@
         "body"
       ]
     },
-    "Azure.ResourceManager.ArmResponse<NetworkConfigurationDiagnosticResponse>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/NetworkConfigurationDiagnosticResponse",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
     "Azure.ResourceManager.ArmResponse<NetworkVirtualApplianceInstanceId>": {
       "type": "object",
       "description": "Azure operation completed successfully.",
@@ -36883,19 +36917,6 @@
         "body"
       ]
     },
-    "Azure.ResourceManager.ArmResponse<NextHopResult>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/NextHopResult",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
     "Azure.ResourceManager.ArmResponse<P2SVpnConnectionHealth>": {
       "type": "object",
       "description": "Azure operation completed successfully.",
@@ -36915,32 +36936,6 @@
       "properties": {
         "body": {
           "$ref": "#/definitions/P2SVpnGateway",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<PacketCaptureQueryStatusResult>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/PacketCaptureQueryStatusResult",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<PublicIPAddress>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/PublicIPAddress",
           "description": "The body type of the operation request or response."
         }
       },
@@ -36999,19 +36994,6 @@
       "properties": {
         "body": {
           "$ref": "#/definitions/TroubleshootingResult",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<VerificationIPFlowResult>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/VerificationIPFlowResult",
           "description": "The body type of the operation request or response."
         }
       },
@@ -39583,14 +39565,19 @@
     },
     "ConnectionMonitorListResult": {
       "type": "object",
-      "description": "List of connection monitors.",
+      "description": "[Placeholder] Discription for page model",
       "properties": {
         "value": {
           "type": "array",
-          "description": "Information about connection monitors.",
+          "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/ConnectionMonitorResult"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
         }
       }
     },
@@ -51785,6 +51772,27 @@
         }
       }
     },
+    "NetworkVirtualApplianceSiteListResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/VirtualApplianceSite"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "NetworkVirtualApplianceSku": {
       "type": "object",
       "description": "Definition of the NetworkVirtualApplianceSkus resource.",
@@ -52157,27 +52165,6 @@
         }
       ]
     },
-    "NspAssociationListResult": {
-      "type": "object",
-      "description": "[Placeholder] Discription for page model",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "[Placeholder] Discription for value property",
-          "items": {
-            "$ref": "#/definitions/NspAssociation"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "NspAssociationProperties": {
       "type": "object",
       "properties": {
@@ -52225,6 +52212,27 @@
           "readOnly": true
         }
       }
+    },
+    "NspAssociationsListResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/NspAssociation"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "NspLink": {
       "type": "object",
@@ -53170,14 +53178,19 @@
     },
     "PacketCaptureListResult": {
       "type": "object",
-      "description": "List of packet capture sessions.",
+      "description": "[Placeholder] Discription for page model",
       "properties": {
         "value": {
           "type": "array",
-          "description": "Information about packet capture sessions.",
+          "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/PacketCaptureResult"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
         }
       }
     },
@@ -59766,27 +59779,6 @@
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
-      ]
-    },
-    "VirtualApplianceSiteListResult": {
-      "type": "object",
-      "description": "[Placeholder] Discription for page model",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "[Placeholder] Discription for value property",
-          "items": {
-            "$ref": "#/definitions/VirtualApplianceSite"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "VirtualApplianceSiteProperties": {
