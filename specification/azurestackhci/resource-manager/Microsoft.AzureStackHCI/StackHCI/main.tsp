@@ -27,6 +27,7 @@ using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
+
 /**
  * Azure Stack HCI service
  */

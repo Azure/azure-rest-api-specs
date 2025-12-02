@@ -4,7 +4,7 @@ import "@typespec/openapi";
 import "@typespec/rest";
 
 using TypeSpec.Rest;
-using TypeSpec.Versioning;
+
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -13,7 +13,7 @@ using Azure.Core;
 @armProviderNamespace("Microsoft.AzureStackHCI")
 namespace Microsoft.AzureStackHCI;
 
-@added(Versions.v2025_12_01_preview)
+
 @doc("EdgeMachine details.")
 model EdgeMachine
   is Azure.ResourceManager.TrackedResource<EdgeMachineProperties> {
@@ -26,7 +26,7 @@ model EdgeMachine
   ...ManagedServiceIdentityProperty;
 }
 
-@added(Versions.v2025_12_01_preview)
+
 @armResourceOperations
 interface EdgeMachines {
   @doc("Get an edge machine.")
@@ -53,7 +53,7 @@ interface EdgeMachines {
 
 ////////////////////// models //////////////////////
 
-@added(Versions.v2025_12_01_preview)
+
 @doc("Edge Machine Kind.")
 union EdgeMachineKind {
   string,
@@ -65,7 +65,7 @@ union EdgeMachineKind {
   Dedicated: "Dedicated",
 }
 
-@added(Versions.v2025_12_01_preview)
+
 @doc("Properties for edge machine.")
 model EdgeMachineProperties {
   @doc("Edge Machine type.")
@@ -145,7 +145,7 @@ model EdgeMachineProperties {
   lastSyncTimestamp?: utcDateTime;
 }
 
-@added(Versions.v2025_12_01_preview)
+
 @doc("Model for patching edge machine.")
 model EdgeMachinePatch {
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
@@ -155,7 +155,7 @@ model EdgeMachinePatch {
 /**
  * Details for device provisioning.
  */
-@added(Versions.v2025_12_01_preview)
+
 model ProvisioningDetails {
   @doc("Operating system profile.")
   osProfile: OsProvisionProfile;
@@ -169,7 +169,7 @@ model ProvisioningDetails {
 /**
  * Details for ownership voucher.
  */
-@added(Versions.v2025_12_01_preview)
+
 model OwnershipVoucherDetails {
   @doc("Ownership voucher in base64 encoded format")
   @secret
@@ -182,7 +182,7 @@ model OwnershipVoucherDetails {
 /**
  * Type of owner key in the voucher
  */
-@added(Versions.v2025_12_01_preview)
+
 union OwnerKeyType {
   string,
 
@@ -190,7 +190,7 @@ union OwnerKeyType {
   MicrosoftManaged: "MicrosoftManaged",
 }
 
-@added(Versions.v2025_12_01_preview)
+
 @doc("operation detail.")
 model OperationDetail {
   @doc("operation name.")
@@ -222,7 +222,7 @@ model OperationDetail {
   error?: Azure.ResourceManager.Foundations.ErrorDetail;
 }
 
-@added(Versions.v2025_12_01_preview)
+
 @doc("Overall connectivity status for the machine resource.")
 union EdgeMachineConnectivityStatus {
   string,
@@ -237,7 +237,7 @@ union EdgeMachineConnectivityStatus {
   Connected: "Connected",
 }
 
-@added(Versions.v2025_12_01_preview)
+
 @doc("Site Details consists of common configurations.")
 model SiteDetails {
   @doc("Site resource Id to be set during Edge Machine resource creation.")
@@ -251,7 +251,7 @@ model SiteDetails {
   deviceConfiguration?: DeviceConfiguration;
 }
 
-@added(Versions.v2025_12_01_preview)
+
 @doc("OS State")
 union EdgeMachineState {
   string,
@@ -284,7 +284,7 @@ union EdgeMachineState {
   Preparing: "Preparing",
 }
 
-@added(Versions.v2025_12_01_preview)
+
 @doc("The provisioning state of a resource.")
 union ProvisioningState {
   string,
@@ -317,7 +317,7 @@ union ProvisioningState {
   Accepted: "Accepted",
 }
 
-@added(Versions.v2025_12_01_preview)
+
 @doc("Reported properties for edge machine.")
 model ReportedProperties {
   @doc("Last time data reported.")
@@ -349,7 +349,7 @@ model ReportedProperties {
   extensionProfile?: ExtensionProfile;
 }
 
-@added(Versions.v2025_12_01_preview)
+
 @doc("NetworkProfile of edge machine.")
 model NetworkProfile {
   @doc("List of Network Interface Card (NIC) Details of edge machine.")
@@ -363,7 +363,7 @@ model NetworkProfile {
   switchDetails?: SwitchDetail[];
 }
 
-@added(Versions.v2025_12_01_preview)
+
 @doc("Network Interface Card (NIC) Details of edge machine.")
 model NicDetail {
   /**
@@ -463,7 +463,7 @@ model NicDetail {
   rdmaCapability?: RdmaCapability = RdmaCapability.Disabled;
 }
 
-@added(Versions.v2025_12_01_preview)
+
 @doc("Switch Details of edge machine.")
 model SwitchDetail {
   /**
@@ -489,7 +489,7 @@ model SwitchDetail {
 /**
  * This represents extensions installed on virtualSwitch.
  */
-@added(Versions.v2025_12_01_preview)
+
 model SwitchExtension {
   /**
    * Unique identifier for virtualSwitch.
@@ -513,7 +513,7 @@ model SwitchExtension {
 /**
  * OS configurations for HCI device.
  */
-@added(Versions.v2025_12_01_preview)
+
 model OsProfile {
   /**
    * The boot type of the device. e.g. UEFI, Legacy etc
@@ -567,7 +567,7 @@ model OsProfile {
 /**
  * Describes the RDMA capability of the network adapter.
  */
-@added(Versions.v2025_12_01_preview)
+
 union RdmaCapability {
   string,
 
@@ -585,7 +585,7 @@ union RdmaCapability {
 /**
  * Hardware profile for the machine
  */
-@added(Versions.v2025_12_01_preview)
+
 model HardwareProfile {
   /**
    * Number of cpu cores in the machine
@@ -630,7 +630,7 @@ model HardwareProfile {
   processorType?: string;
 }
 
-@added(Versions.v2025_12_01_preview)
+
 @doc("StorageProfile of edge machine.")
 model StorageProfile {
   @doc("Number of storage disks in the device with $CanPool as true.")
@@ -641,7 +641,7 @@ model StorageProfile {
 /**
  * Solution builder extension (SBE) deployment package information.
  */
-@added(Versions.v2025_12_01_preview)
+
 model SbeDeploymentPackageInfo {
   /**
    * SBE deployment validation code.
@@ -665,7 +665,7 @@ model SbeDeploymentPackageInfo {
 /**
  * Extensions details for edge device.
  */
-@added(Versions.v2025_12_01_preview)
+
 model ExtensionProfile {
   /**
    * List of Arc extensions installed on edge device.
@@ -678,7 +678,7 @@ model ExtensionProfile {
 /**
  * Arc extension installed on edge device.
  */
-@added(Versions.v2025_12_01_preview)
+
 model Extension {
   /**
    * Arc extension name installed on edge device.
@@ -727,7 +727,7 @@ model Extension {
 /**
  * Arc extension installation state.
  */
-@added(Versions.v2025_12_01_preview)
+
 union ArcExtensionState {
   string,
 
@@ -785,7 +785,7 @@ union ArcExtensionState {
 /**
  * details of validation failure
  */
-@added(Versions.v2025_12_01_preview)
+
 model ErrorDetailModel {
   /**
    * Exception details while installing extension.
@@ -797,7 +797,7 @@ model ErrorDetailModel {
 /**
  * Extension managed by user or Azure.
  */
-@added(Versions.v2025_12_01_preview)
+
 union ExtensionManagedBy {
   string,
 
