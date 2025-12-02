@@ -1,7 +1,10 @@
 import "@azure-tools/typespec-client-generator-core";
+import "@azure-tools/typespec-azure-resource-manager";
 import "./main.tsp";
 
+using Azure.Core;
 using Azure.ClientGenerator.Core;
+using Azure.ResourceManager.Foundations;
 using Microsoft.ContainerRegistry;
 
 @@clientName(Microsoft.ContainerRegistry,
@@ -9,26 +12,30 @@ using Microsoft.ContainerRegistry;
   "javascript"
 );
 
-@@clientName(PrivateEndpointConnection, "ContainerRegistryPrivateEndpointConnectionData", "csharp");
+@@clientName(Microsoft.ContainerRegistry.PrivateEndpointConnection, "ContainerRegistryPrivateEndpointConnectionData", "csharp");
 @@clientName(Action, "ContainerRegistryIPRuleAction", "csharp");
 @@clientName(ActionsRequired, "ActionsRequiredForPrivateLinkServiceConsumer", "csharp");
 @@clientName(ActivationProperties, "ConnectedRegistryActivation", "csharp");
 @@clientName(ActivationStatus, "ConnectedRegistryActivationStatus", "csharp");
 @@clientName(Actor, "ContainerRegistryWebhookEventActor", "csharp");
+@@clientName(Archive, "ContainerRegistryArchive", "csharp");
+@@clientName(ArchiveVersion, "ContainerRegistryArchiveVersion", "csharp");
 @@clientName(AuditLogStatus, "ConnectedRegistryAuditLogStatus", "csharp");
 @@clientName(AuthCredential, "ContainerRegistryAuthCredential", "csharp");
 @@clientName(AzureADAuthenticationAsArmPolicyStatus, "AadAuthenticationAsArmPolicyStatus", "csharp");
 @@clientName(CacheRule, "ContainerRegistryCacheRule", "csharp");
 @@clientName(CallbackConfig, "ContainerRegistryWebhookCallbackConfig", "csharp");
 @@clientName(CertificateType, "ContainerRegistryCertificateType", "csharp");
+@@alternateType(CredentialSet.identity, ManagedServiceIdentity, "csharp");
 @@clientName(ConnectionState, "ConnectedRegistryConnectionState", "csharp");
 @@clientName(ConnectionStatus, "ContainerRegistryPrivateLinkServiceConnectionStatus", "csharp");
+@@alternateType(ConnectedRegistryProperties.clientTokenIds, armResourceIdentifier[], "csharp");
 @@clientName(CredentialHealth, "ContainerRegistryCredentialHealth", "csharp");
 @@clientName(CredentialHealthStatus, "ContainerRegistryCredentialHealthStatus", "csharp");
 @@clientName(CredentialName, "ContainerRegistryCredentialName", "csharp");
 @@clientName(CredentialSet, "ContainerRegistryCredentialSet", "csharp");
 @@clientName(DefaultAction, "ContainerRegistryNetworkRuleDefaultAction", "csharp");
-@@clientName(EncryptionProperty, "ContainerRegistryEncryption", "csharp");
+@@clientName(Microsoft.ContainerRegistry.EncryptionProperty, "ContainerRegistryEncryption", "csharp");
 @@clientName(EncryptionStatus, "ContainerRegistryEncryptionStatus", "csharp");
 @@clientName(Event, "ContainerRegistryWebhookEvent", "csharp");
 @@clientName(EventContent, "ContainerRegistryWebhookEventContent", "csharp");
@@ -62,6 +69,7 @@ using Microsoft.ContainerRegistry;
 @@clientName(QuarantinePolicy, "ContainerRegistryQuarantinePolicy", "csharp");
 @@clientName(RegenerateCredentialParameters, "ContainerRegistryCredentialRegenerateContent", "csharp");
 @@clientName(Registry, "ContainerRegistry", "csharp");
+@@alternateType(Registry.identity, ManagedServiceIdentity, "csharp");
 @@clientName(RegistryListCredentialsResult, "ContainerRegistryListCredentialsResult", "csharp");
 @@clientName(RegistryListResult, "ContainerRegistryListResult", "csharp");
 @@clientName(RegistryNameCheckRequest, "ContainerRegistryNameAvailabilityContent", "csharp");
@@ -105,6 +113,16 @@ using Microsoft.ContainerRegistry;
 @@clientName(WebhookListResult, "ContainerRegistryWebhookListResult", "csharp");
 @@clientName(WebhookStatus, "ContainerRegistryWebhookStatus", "csharp");
 @@clientName(ZoneRedundancy, "ContainerRegistryZoneRedundancy", "csharp");
+
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ConnectedRegistry.properties, "csharp");
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(CacheRule.properties, "csharp");
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(CredentialSet.properties, "csharp");
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Registry.properties, "csharp");
+
+@@clientName(Registries.checkNameAvailability,
+  "CheckContainerRegistryNameAvailability",
+  "csharp"
+);
 
 /*
 prepend-rp-prefix:
