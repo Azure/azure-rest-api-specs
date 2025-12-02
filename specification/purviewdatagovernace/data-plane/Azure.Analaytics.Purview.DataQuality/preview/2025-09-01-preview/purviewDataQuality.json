@@ -73,6 +73,9 @@
       "name": "DataSources"
     },
     {
+      "name": "Alerts"
+    },
+    {
       "name": "Scoped Asset Metadata"
     },
     {
@@ -177,6 +180,313 @@
         "x-ms-examples": {
           "BulkAssetMetadata_Create": {
             "$ref": "./examples/BulkAssetMetadata_Create.json"
+          }
+        }
+      }
+    },
+    "/business-domains/{businessDomainId}/alerts": {
+      "get": {
+        "operationId": "GetAlerts",
+        "tags": [
+          "Alerts"
+        ],
+        "description": "Retrieves alerts defined under a business domain with optional name filter and pagination.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Unique identifier for the business domain containing the alerts",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "Optional alert name filter",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "Continuation token for paged alert results",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "skipToken"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AlertListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Alert_GetAlerts": {
+            "$ref": "./examples/Alert_GetAlerts.json"
+          }
+        }
+      },
+      "post": {
+        "operationId": "CreateAlert",
+        "tags": [
+          "Alerts"
+        ],
+        "description": "Creates an alert scoped to the specified business domain.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Unique identifier for the business domain containing the alerts",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Alert payload to create",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Alert"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/Alert"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/business-domains/{businessDomainId}/alerts/{alertId}": {
+      "get": {
+        "operationId": "GetAlert",
+        "tags": [
+          "Alerts"
+        ],
+        "description": "Retrieves a specific alert definition within a business domain.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Unique identifier for the business domain containing the alerts",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "alertId",
+            "in": "path",
+            "description": "Unique identifier of the alert",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Alert"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "UpdateAlert",
+        "tags": [
+          "Alerts"
+        ],
+        "description": "Replaces an existing alert definition within the specified business domain.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Unique identifier for the business domain containing the alerts",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "alertId",
+            "in": "path",
+            "description": "Unique identifier of the alert to update",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Updated alert payload",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Alert"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Alert"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "UpdateAlertStatus",
+        "tags": [
+          "Alerts"
+        ],
+        "description": "Updates the status of an alert within the specified business domain.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Unique identifier for the business domain containing the alerts",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "alertId",
+            "in": "path",
+            "description": "Unique identifier of the alert to update",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Alert status update payload",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AlertStatusUpdateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DeleteAlert",
+        "tags": [
+          "Alerts"
+        ],
+        "description": "Deletes a specific alert within the specified business domain.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Unique identifier for the business domain containing the alerts",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "alertId",
+            "in": "path",
+            "description": "Unique identifier of the alert to delete",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
           }
         }
       }
@@ -2217,6 +2527,160 @@
     }
   },
   "definitions": {
+    "Alert": {
+      "type": "object",
+      "description": "Alert definition including condition, receivers, and scope",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the alert"
+        },
+        "name": {
+          "type": "string",
+          "description": "Human-readable alert name"
+        },
+        "description": {
+          "type": "string",
+          "description": "Detailed description of the alert"
+        },
+        "annotations": {
+          "type": "object",
+          "description": "Key-value annotations for alert categorization",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "businessDomain": {
+          "$ref": "#/definitions/Reference",
+          "description": "Reference to the governing business domain"
+        },
+        "scopes": {
+          "type": "array",
+          "description": "Array of scopes the alert monitors",
+          "items": {
+            "$ref": "#/definitions/AlertScope"
+          }
+        },
+        "status": {
+          "$ref": "#/definitions/AlertStatus",
+          "description": "Current alert status"
+        },
+        "condition": {
+          "type": "string",
+          "description": "Condition expression evaluated for alert triggering"
+        },
+        "receivers": {
+          "type": "array",
+          "description": "Notification receivers for the alert",
+          "items": {
+            "type": "string"
+          }
+        },
+        "enabledForFailedJobs": {
+          "type": "boolean",
+          "description": "Flag indicating whether failures automatically enable the alert"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation timestamp (UTC)"
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "Creator identity"
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last modification timestamp (UTC)"
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "Last modifier identity"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "scopes",
+        "status",
+        "condition",
+        "receivers",
+        "enabledForFailedJobs"
+      ]
+    },
+    "AlertListResult": {
+      "type": "object",
+      "description": "Paginated alert list result",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Collection of alerts",
+          "items": {
+            "$ref": "#/definitions/Alert"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to retrieve the next page of results"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AlertScope": {
+      "type": "object",
+      "description": "Alert scope referencing data product and data asset",
+      "properties": {
+        "dataProduct": {
+          "$ref": "#/definitions/Reference",
+          "description": "Reference to the data product associated with the alert"
+        },
+        "dataAsset": {
+          "$ref": "#/definitions/Reference",
+          "description": "Reference to the data asset associated with the alert"
+        }
+      },
+      "required": [
+        "dataProduct",
+        "dataAsset"
+      ]
+    },
+    "AlertStatus": {
+      "type": "string",
+      "description": "Alert status classification",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "AlertStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Alert is enabled and may trigger notifications"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Alert is disabled and will not trigger"
+          }
+        ]
+      }
+    },
+    "AlertStatusUpdateRequest": {
+      "type": "object",
+      "description": "Request payload for updating alert status",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/AlertStatus",
+          "description": "New alert status value"
+        }
+      }
+    },
     "AssetMetadata": {
       "type": "object",
       "description": "Unified metadata observer for monitoring data assets across platforms",
