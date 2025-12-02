@@ -11,3 +11,4 @@ namespace ClientCustomizations;
 @@clientLocation(checkNameAvailability, "API", "go");
 @@clientLocation(startTenantBackfill, "API", "go");
 @@clientLocation(tenantBackfillStatus, "API", "go");
+@@usage(CreateManagementGroupChildInfo, Usage.input, "javascript");
