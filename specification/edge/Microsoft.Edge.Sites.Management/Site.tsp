@@ -82,16 +82,16 @@ model Site is ExtensionResource<SiteProperties> {
 interface SiteOps<Scope extends Azure.ResourceManager.Foundations.SimpleResource> {
   list is Extension.ListByTarget<Scope, Site>;
   get is Extension.Read<Scope, Site>;
-  create is Extension.CreateOrReplaceAsync<Scope, Site>;
+  create is Extension.CreateOrUpdateAsync<Scope, Site>;
   update is Extension.CustomPatchSync<Scope, Site, SiteUpdate>;
   delete is Extension.DeleteSync<Scope, Site>;
 }
 
 @armResourceOperations
-interface SitesByResourceGroups extends SiteOps<Extension.ResourceGroup> {}
+interface Sites extends SiteOps<Extension.ResourceGroup> {}
 
 @armResourceOperations
-interface SitesBySubscriptions extends SiteOps<Extension.Subscription> {}
+interface SitesBySubscription extends SiteOps<Extension.Subscription> {}
 
 alias ServiceGroup = Extension.ExternalResource<
   TargetNamespace = "Microsoft.Management",
@@ -103,4 +103,4 @@ alias ServiceGroup = Extension.ExternalResource<
 >;
 
 @armResourceOperations
-interface SitesByServiceGroups extends SiteOps<ServiceGroup> {}
+interface SitesByServiceGroup extends SiteOps<ServiceGroup> {}
