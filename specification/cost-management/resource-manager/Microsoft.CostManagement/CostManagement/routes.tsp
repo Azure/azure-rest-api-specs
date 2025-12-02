@@ -1124,3 +1124,32 @@ interface ScheduledActionsOperationGroup {
     checkNameAvailabilityRequest: Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest,
   ): ArmResponse<Azure.ResourceManager.CommonTypes.CheckNameAvailabilityResponse> | ErrorResponseWithNestedDetails;
 }
+
+@armResourceOperations
+interface GenerateCostDetailsReport {
+  /**
+   * Get the result of the specified operation. This link is provided in the CostDetails creation request response Location header.
+   */
+  #suppress "@azure-tools/typespec-client-generator-core/mark-as-lro-ineffective" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ClientGenerator.Core.Legacy.markAsLro
+  getOperationResults(
+    ...ApiVersionParameter,
+
+    /**
+     * The ARM Resource ID for subscription, billing account, or other billing scopes.Currently Resource Group and Management Group are not supported. For details, see https://aka.ms/costmgmt/scopes.
+     */
+    @path(#{ allowReserved: true })
+    scope: string,
+
+    ...Azure.ResourceManager.Legacy.Provider,
+
+    /**
+     * The target operation Id.
+     */
+    @path
+    @segment("costDetailsOperationResults")
+    operationId: string,
+  ): ArmResponse<CostDetailsOperationResults> | ArmAcceptedResponse | ErrorResponse;
+}

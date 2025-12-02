@@ -52,9 +52,6 @@
       "name": "Exports"
     },
     {
-      "name": "GenerateCostDetailsReport"
-    },
-    {
       "name": "GenerateDetailedCostReportOperationResults"
     },
     {
@@ -77,6 +74,9 @@
     },
     {
       "name": "Settings"
+    },
+    {
+      "name": "GenerateCostDetailsReport"
     }
   ],
   "paths": {
@@ -677,7 +677,7 @@
           {
             "name": "scope",
             "in": "path",
-            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "description": "The ARM Resource ID for subscription, billing account, or other billing scopes.Currently Resource Group and Management Group are not supported. For details, see https://aka.ms/costmgmt/scopes.",
             "required": true,
             "type": "string",
             "x-ms-skip-url-encoding": true
@@ -6119,6 +6119,18 @@
       "type": "object",
       "description": "The result of the long running operation for cost details Api.",
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "The id of the long running operation."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the long running operation."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the long running operation."
+        },
         "status": {
           "$ref": "#/definitions/CostDetailsStatusType",
           "description": "The status of the cost details operation"
@@ -6137,12 +6149,7 @@
           "$ref": "#/definitions/ErrorDetails",
           "description": "The details of the error."
         }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
+      }
     },
     "CostDetailsStatusType": {
       "type": "string",

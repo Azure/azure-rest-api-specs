@@ -16,7 +16,6 @@ import "./back-compatible.tsp";
 import "./CostAllocationRuleDefinition.tsp";
 import "./Budget.tsp";
 import "./Export.tsp";
-import "./CostDetailsOperationResults.tsp";
 import "./GenerateDetailedCostReportOperationResult.tsp";
 import "./GenerateDetailedCostReportOperationStatuses.tsp";
 import "./View.tsp";
