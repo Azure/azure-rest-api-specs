@@ -33,7 +33,7 @@ using TypeSpec.Versioning;
 @armProviderNamespace
 @service(#{ title: "Azure Compute resource management API." })
 @versioned(Versions)
-namespace Microsoft.Compute;
+namespace Microsoft.ComputeDisk;
 
 /**
  * The available API versions.
