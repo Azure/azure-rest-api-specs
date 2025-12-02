@@ -1,0 +1,138 @@
+{
+  "parameters": {
+    "api-version": "2025-10-01-preview",
+    "scopeId": "subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+    "batchPricingRequest": {
+      "plansConfigurations": [
+        {
+          "planName": "VirtualMachines",
+          "properties": {
+            "pricingTier": "Standard",
+            "subPlan": "P2"
+          }
+        },
+        {
+          "planName": "StorageAccounts",
+          "properties": {
+            "pricingTier": "Standard"
+          }
+        }
+      ]
+    }
+  },
+  "responses": {
+    "403": {
+      "body": {
+        "error": {
+          "code": "Forbidden",
+          "message": "The client does not have authorization to perform action 'Microsoft.Security/pricings/write' over scope '/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23' or the scope is invalid. If access was recently granted, please refresh your credentials.",
+          "details": [
+            {
+              "code": "AuthorizationFailed",
+              "message": "The client 'user@contoso.com' with object id 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx' does not have authorization to perform action 'Microsoft.Security/pricings/write' over scope '/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23'.",
+              "target": "authorization"
+            },
+            {
+              "code": "InsufficientPermissions",
+              "message": "Required role: Security Admin, Contributor, or Owner at subscription level",
+              "target": "permissions"
+            }
+          ]
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "results": [
+          {
+            "planName": "VirtualMachines",
+            "success": true,
+            "result": {
+              "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/pricings/VirtualMachines",
+              "name": "VirtualMachines",
+              "type": "Microsoft.Security/pricings",
+              "properties": {
+                "pricingTier": "Standard",
+                "subPlan": "P2",
+                "freeTrialRemainingTime": "PT0S",
+                "enablementTime": "2023-03-01T12:42:42.1921106Z",
+                "enforce": "False",
+                "resourcesCoverageStatus": "FullyCovered"
+              }
+            }
+          },
+          {
+            "planName": "StorageAccounts",
+            "success": true,
+            "result": {
+              "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/pricings/StorageAccounts",
+              "name": "StorageAccounts",
+              "type": "Microsoft.Security/pricings",
+              "properties": {
+                "pricingTier": "Standard",
+                "freeTrialRemainingTime": "PT0S",
+                "enablementTime": "2023-03-01T12:42:42.1921106Z",
+                "enforce": "False",
+                "resourcesCoverageStatus": "FullyCovered"
+              }
+            }
+          }
+        ],
+        "summary": {
+          "totalRequested": 2,
+          "successfulUpdates": 2,
+          "failedUpdates": 0
+        }
+      }
+    },
+    "207": {
+      "body": {
+        "results": [
+          {
+            "planName": "VirtualMachines",
+            "success": true,
+            "result": {
+              "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/pricings/VirtualMachines",
+              "name": "VirtualMachines",
+              "type": "Microsoft.Security/pricings",
+              "properties": {
+                "pricingTier": "Standard",
+                "subPlan": "P2",
+                "freeTrialRemainingTime": "PT0S",
+                "enablementTime": "2023-03-01T12:42:42.1921106Z",
+                "enforce": "False",
+                "resourcesCoverageStatus": "FullyCovered"
+              }
+            }
+          },
+          {
+            "planName": "StorageAccounts",
+            "success": false,
+            "errorMessage": "Invalid configuration for StorageAccounts pricing plan"
+          }
+        ],
+        "summary": {
+          "totalRequested": 2,
+          "successfulUpdates": 1,
+          "failedUpdates": 1
+        }
+      }
+    },
+    "400": {
+      "body": {
+        "error": {
+          "code": "InvalidRequestContent",
+          "message": "The request content was invalid and could not be deserialized: 'Required property 'pricingTier' not found in JSON. Path 'plansConfigurations[0].properties', line 1, position 462.'."
+        }
+      }
+    },
+    "409": {
+      "body": {
+        "error": {
+          "code": "ConflictError",
+          "message": "Cannot update pricing plan due to enforcement policy violations. The subscription has active enforcement policies that prevent pricing changes."
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,278 @@
+{
+  "parameters": {
+    "api-version": "2025-10-01-preview",
+    "scopeId": "subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+    "batchPricingRequest": {
+      "plansConfigurations": [
+        {
+          "planName": "VirtualMachines",
+          "properties": {
+            "pricingTier": "Standard",
+            "subPlan": "P2",
+            "extensions": [
+              {
+                "name": "AgentlessVmScanning",
+                "isEnabled": "True"
+              },
+              {
+                "name": "FileIntegrityMonitoring",
+                "isEnabled": "True",
+                "additionalExtensionProperties": {
+                  "detectionType": "WindowsFiles",
+                  "workspace": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "planName": "StorageAccounts",
+          "properties": {
+            "pricingTier": "Standard",
+            "subPlan": "DefenderForStorageV2",
+            "extensions": [
+              {
+                "name": "OnUploadMalwareScanning",
+                "isEnabled": "True",
+                "additionalExtensionProperties": {
+                  "capGBPerMonth": "5000"
+                }
+              },
+              {
+                "name": "SensitiveDataDiscovery",
+                "isEnabled": "True"
+              }
+            ]
+          }
+        },
+        {
+          "planName": "CloudPosture",
+          "properties": {
+            "pricingTier": "Standard",
+            "extensions": [
+              {
+                "name": "AgentlessDiscoveryForKubernetes",
+                "isEnabled": "True"
+              },
+              {
+                "name": "ContainerRegistriesVulnerabilityAssessments",
+                "isEnabled": "True"
+              },
+              {
+                "name": "EntraPermissionsManagement",
+                "isEnabled": "True"
+              }
+            ],
+            "securityOperatorResourceId": "/providers/Microsoft.Management/managementGroups/ContosoGroup/providers/Microsoft.Security/securityOperators/ContosoOperator"
+          }
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "results": [
+          {
+            "planName": "VirtualMachines",
+            "success": true,
+            "result": {
+              "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/pricings/VirtualMachines",
+              "name": "VirtualMachines",
+              "type": "Microsoft.Security/pricings",
+              "properties": {
+                "pricingTier": "Standard",
+                "subPlan": "P2",
+                "freeTrialRemainingTime": "PT0S",
+                "enablementTime": "2023-03-01T12:42:42.1921106Z",
+                "enforce": "False",
+                "resourcesCoverageStatus": "FullyCovered",
+                "extensions": [
+                  {
+                    "name": "AgentlessVmScanning",
+                    "isEnabled": "True",
+                    "operationStatus": {
+                      "code": "Succeeded",
+                      "message": "Successfully enabled extension"
+                    }
+                  },
+                  {
+                    "name": "FileIntegrityMonitoring",
+                    "isEnabled": "True",
+                    "additionalExtensionProperties": {
+                      "detectionType": "WindowsFiles",
+                      "workspace": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace"
+                    },
+                    "operationStatus": {
+                      "code": "Succeeded",
+                      "message": "Successfully enabled extension"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "planName": "StorageAccounts",
+            "success": true,
+            "result": {
+              "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/pricings/StorageAccounts",
+              "name": "StorageAccounts",
+              "type": "Microsoft.Security/pricings",
+              "properties": {
+                "pricingTier": "Standard",
+                "subPlan": "DefenderForStorageV2",
+                "freeTrialRemainingTime": "PT0S",
+                "enablementTime": "2023-03-01T12:42:42.1921106Z",
+                "enforce": "False",
+                "resourcesCoverageStatus": "FullyCovered",
+                "extensions": [
+                  {
+                    "name": "OnUploadMalwareScanning",
+                    "isEnabled": "True",
+                    "additionalExtensionProperties": {
+                      "capGBPerMonth": "5000"
+                    },
+                    "operationStatus": {
+                      "code": "Succeeded",
+                      "message": "Successfully enabled extension"
+                    }
+                  },
+                  {
+                    "name": "SensitiveDataDiscovery",
+                    "isEnabled": "True",
+                    "operationStatus": {
+                      "code": "Succeeded",
+                      "message": "Successfully enabled extension"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "planName": "CloudPosture",
+            "success": true,
+            "result": {
+              "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/pricings/CloudPosture",
+              "name": "CloudPosture",
+              "type": "Microsoft.Security/pricings",
+              "properties": {
+                "pricingTier": "Standard",
+                "freeTrialRemainingTime": "PT0S",
+                "enablementTime": "2023-03-01T12:42:42.1921106Z",
+                "enforce": "False",
+                "resourcesCoverageStatus": "FullyCovered",
+                "extensions": [
+                  {
+                    "name": "AgentlessDiscoveryForKubernetes",
+                    "isEnabled": "True",
+                    "operationStatus": {
+                      "code": "Succeeded",
+                      "message": "Successfully enabled extension"
+                    }
+                  },
+                  {
+                    "name": "ContainerRegistriesVulnerabilityAssessments",
+                    "isEnabled": "True",
+                    "operationStatus": {
+                      "code": "Succeeded",
+                      "message": "Successfully enabled extension"
+                    }
+                  },
+                  {
+                    "name": "EntraPermissionsManagement",
+                    "isEnabled": "True",
+                    "operationStatus": {
+                      "code": "Succeeded",
+                      "message": "Successfully enabled extension"
+                    }
+                  }
+                ],
+                "securityOperatorResourceId": "/providers/Microsoft.Management/managementGroups/ContosoGroup/providers/Microsoft.Security/securityOperators/ContosoOperator"
+              }
+            }
+          }
+        ],
+        "summary": {
+          "totalRequested": 3,
+          "successfulUpdates": 3,
+          "failedUpdates": 0
+        }
+      }
+    },
+    "207": {
+      "body": {
+        "results": [
+          {
+            "planName": "VirtualMachines",
+            "success": true,
+            "result": {
+              "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/pricings/VirtualMachines",
+              "name": "VirtualMachines",
+              "type": "Microsoft.Security/pricings",
+              "properties": {
+                "pricingTier": "Standard",
+                "subPlan": "P2",
+                "freeTrialRemainingTime": "PT0S",
+                "enablementTime": "2023-03-01T12:42:42.1921106Z",
+                "enforce": "False",
+                "resourcesCoverageStatus": "FullyCovered"
+              }
+            }
+          },
+          {
+            "planName": "StorageAccounts",
+            "success": false,
+            "errorMessage": "Invalid subPlan 'InvalidPlan' for StorageAccounts pricing tier"
+          },
+          {
+            "planName": "CloudPosture",
+            "success": true,
+            "result": {
+              "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/pricings/CloudPosture",
+              "name": "CloudPosture",
+              "type": "Microsoft.Security/pricings",
+              "properties": {
+                "pricingTier": "Standard",
+                "freeTrialRemainingTime": "PT0S",
+                "enablementTime": "2023-03-01T12:42:42.1921106Z",
+                "enforce": "False",
+                "resourcesCoverageStatus": "FullyCovered"
+              }
+            }
+          }
+        ],
+        "summary": {
+          "totalRequested": 3,
+          "successfulUpdates": 2,
+          "failedUpdates": 1
+        }
+      }
+    },
+    "400": {
+      "body": {
+        "error": {
+          "code": "InvalidRequestContent",
+          "message": "The request content was invalid and could not be deserialized: 'Required property 'pricingTier' not found in JSON. Path 'plansConfigurations[0].properties', line 1, position 462.'."
+        }
+      }
+    },
+    "403": {
+      "body": {
+        "error": {
+          "code": "InsufficientPermissions",
+          "message": "The client does not have authorization to perform action 'Microsoft.Security/pricings/write' over scope '/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/pricings/VirtualMachines'."
+        }
+      }
+    },
+    "409": {
+      "body": {
+        "error": {
+          "code": "ConflictError",
+          "message": "Cannot update pricing plan due to enforcement policy violations. The subscription has active enforcement policies that prevent pricing changes."
+        }
+      }
+    }
+  }
+}

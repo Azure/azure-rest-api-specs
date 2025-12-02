@@ -1,0 +1,905 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft Defender for Cloud",
+    "description": "API spec for Microsoft.Security (Microsoft Defender for Cloud) resource provider",
+    "version": "2025-10-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/{scopeId}/providers/Microsoft.Security/pricings/{pricingName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get pricings on subscription - VirtualMachines plan": {
+            "$ref": "./examples/Pricings/GetPricingByNameVirtualMachines_example.json"
+          },
+          "Get pricings on resource - VirtualMachines plan": {
+            "$ref": "./examples/Pricings/GetResourcePricingByNameVirtualMachines_example.json"
+          },
+          "Get pricings on resource - Containers plan": {
+            "$ref": "./examples/Pricings/GetResourcePricingByNameContainers_example.json"
+          },
+          "Get pricings on subscription - Dns plan": {
+            "$ref": "./examples/Pricings/GetPricingByNameDns_example.json"
+          },
+          "Get pricings on subscription - StorageAccounts plan": {
+            "$ref": "./examples/Pricings/GetPricingByNameStorageAccounts_example.json"
+          },
+          "Get pricings on subscription - Containers plan": {
+            "$ref": "./examples/Pricings/GetPricingByNameContainers_example.json"
+          },
+          "Get pricings on subscription - CloudPosture plan": {
+            "$ref": "./examples/Pricings/GetPricingByNameCloudPosture_example.json"
+          },
+          "Get pricings on subscription - Managed by M365 security rule": {
+            "$ref": "./examples/Pricings/GetPricingByNameExternallyUpdated_example.json"
+          }
+        },
+        "tags": [
+          "Pricings"
+        ],
+        "description": "Get the Defender plans pricing configurations of the selected scope (valid scopes are resource id or a subscription id). At the resource level, supported resource types are 'VirtualMachines, VMSS and ARC Machines'.",
+        "operationId": "Pricings_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ScopeId"
+          },
+          {
+            "$ref": "#/parameters/PricingName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Pricing"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Update pricing on subscription (example for CloudPosture plan)": {
+            "$ref": "./examples/Pricings/PutPricingByName_example.json"
+          },
+          "Update pricing on subscription (example for VirtualMachines plan)": {
+            "$ref": "./examples/Pricings/PutPricingVMsByName_example.json"
+          },
+          "Update pricing on resource (example for VirtualMachines plan)": {
+            "$ref": "./examples/Pricings/PutResourcePricingByNameVirtualMachines_example.json"
+          },
+          "Update pricing on resource (example for Containers plan)": {
+            "$ref": "./examples/Pricings/PutResourcePricingByNameContainers_example.json"
+          },
+          "Update pricing on subscription (example for CloudPosture plan) - partial success": {
+            "$ref": "./examples/Pricings/PutPricingByNamePartialSuccess_example.json"
+          }
+        },
+        "tags": [
+          "Pricings"
+        ],
+        "description": "Updates a provided Microsoft Defender for Cloud pricing configuration in the scope. Valid scopes are: subscription id or a specific resource id (Supported resources are: 'VirtualMachines', 'VMSS', 'ARC Machines', (only for plan='VirtualMachines' and subPlan='P1'), and 'Containers').",
+        "operationId": "Pricings_Update",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ScopeId"
+          },
+          {
+            "$ref": "#/parameters/PricingName"
+          },
+          {
+            "$ref": "#/parameters/Pricing"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated",
+            "schema": {
+              "$ref": "#/definitions/Pricing"
+            }
+          },
+          "201": {
+            "description": "Successfully created.",
+            "schema": {
+              "$ref": "#/definitions/Pricing"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete a pricing on resource": {
+            "$ref": "./examples/Pricings/DeleteResourcePricing_example.json"
+          },
+          "Delete a pricing on resource (example for Containers plan)": {
+            "$ref": "./examples/Pricings/DeleteResourcePricingByNameContainers_example.json"
+          }
+        },
+        "tags": [
+          "Pricings"
+        ],
+        "description": "Deletes a provided Microsoft Defender for Cloud pricing configuration in a specific resource. Valid only for resource scope (Supported resources are: 'VirtualMachines', 'VMSS', 'ARC Machines' and 'Containers').",
+        "operationId": "Pricings_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ScopeResourceId"
+          },
+          {
+            "$ref": "#/parameters/PricingName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the pricing configuration of the resource."
+          },
+          "204": {
+            "description": "No Content - Pricing does not exist"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/{scopeId}/providers/Microsoft.Security/pricings": {
+      "get": {
+        "x-ms-examples": {
+          "Get pricings on subscription": {
+            "$ref": "./examples/Pricings/ListPricings_example.json"
+          },
+          "Get pricings on subscription with plans filter": {
+            "$ref": "./examples/Pricings/ListPricingsWithPlanFilter_example.json"
+          },
+          "Get pricings on resource": {
+            "$ref": "./examples/Pricings/ListResourcePricings_example.json"
+          }
+        },
+        "tags": [
+          "Pricings"
+        ],
+        "description": "Lists Microsoft Defender for Cloud pricing configurations of the scopeId, that match the optional given $filter. Valid scopes are: subscription id or a specific resource id (Supported resources are: 'VirtualMachines', 'VMSS', 'ARC Machines' and 'Containers'). Valid $filter is: 'name in ({planName1},{planName2},...)'. If $filter is not provided, the unfiltered list will be returned. If '$filter=name in (planName1,planName2)' is provided, the returned list includes the pricings set for 'planName1' and 'planName2' only.",
+        "operationId": "Pricings_List",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ScopeId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ODataFilter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PricingList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/{scopeId}/providers/Microsoft.Security/pricings/batch": {
+      "put": {
+        "x-ms-examples": {
+          "Batch update multiple pricing plans - success": {
+            "$ref": "./examples/Pricings/BatchUpdatePricings_Success_example.json"
+          },
+          "Batch update with partial success": {
+            "$ref": "./examples/Pricings/BatchUpdatePricings_PartialSuccess_example.json"
+          },
+          "Batch update with validation errors": {
+            "$ref": "./examples/Pricings/BatchUpdatePricings_ValidationError_example.json"
+          },
+          "Batch update with authorization failure": {
+            "$ref": "./examples/Pricings/BatchUpdatePricings_AuthError_example.json"
+          },
+          "Batch update with conflict error": {
+            "$ref": "./examples/Pricings/BatchUpdatePricings_ConflictError_example.json"
+          }
+        },
+        "tags": [
+          "Pricings"
+        ],
+        "description": "Updates multiple Microsoft Defender for Cloud pricing configurations for the specified subscription scope. This operation uses a best-effort approach where valid plans are saved atomically, while invalid plans return detailed error information. Only subscription-level scopes are supported for batch operations. Maximum of 30 pricing plans can be updated in a single batch request.",
+        "operationId": "Pricings_BatchUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ScopeIdSubscriptionOnly"
+          },
+          {
+            "$ref": "#/parameters/BatchPricingUpdateRequest"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Batch update completed successfully. All pricing plans were updated without errors.",
+            "schema": {
+              "$ref": "#/definitions/BatchPricingUpdateResponse"
+            },
+            "examples": {
+              "application/json": {
+                "results": [
+                  {
+                    "planName": "VirtualMachines",
+                    "success": true,
+                    "result": {
+                      "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/pricings/VirtualMachines",
+                      "name": "VirtualMachines",
+                      "type": "Microsoft.Security/pricings",
+                      "properties": {
+                        "pricingTier": "Standard",
+                        "subPlan": "P2",
+                        "freeTrialRemainingTime": "PT0S",
+                        "enablementTime": "2023-03-01T12:42:42.1921106Z",
+                        "enforce": "False",
+                        "resourcesCoverageStatus": "FullyCovered",
+                        "extensions": [
+                          {
+                            "name": "AgentlessVmScanning",
+                            "isEnabled": "True",
+                            "operationStatus": {
+                              "code": "Succeeded",
+                              "message": "Successfully enabled extension"
+                            }
+                          }
+                        ],
+                        "securityOperatorResourceId": "/providers/Microsoft.Management/managementGroups/ContosoGroup/providers/Microsoft.Security/securityOperators/ContosoOperator"
+                      }
+                    }
+                  },
+                  {
+                    "planName": "StorageAccounts",
+                    "success": true,
+                    "result": {
+                      "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/pricings/StorageAccounts",
+                      "name": "StorageAccounts",
+                      "type": "Microsoft.Security/pricings",
+                      "properties": {
+                        "pricingTier": "Standard",
+                        "subPlan": "DefenderForStorageV2",
+                        "freeTrialRemainingTime": "PT0S",
+                        "enablementTime": "2023-03-01T12:42:42.1921106Z",
+                        "enforce": "False",
+                        "resourcesCoverageStatus": "FullyCovered",
+                        "extensions": [
+                          {
+                            "name": "OnUploadMalwareScanning",
+                            "isEnabled": "True",
+                            "additionalExtensionProperties": {
+                              "capGBPerMonth": "5000"
+                            },
+                            "operationStatus": {
+                              "code": "Succeeded",
+                              "message": "Successfully enabled extension"
+                            },
+                            "securityOperatorResourceId": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/securityOperators/ContosoHighPrivilegedOperator"
+                          }
+                        ],
+                        "securityOperatorResourceId": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/securityOperators/ContosoOperator"
+                      }
+                    }
+                  }
+                ],
+                "summary": {
+                  "totalRequested": 2,
+                  "successfulUpdates": 2,
+                  "failedUpdates": 0
+                }
+              }
+            }
+          },
+          "207": {
+            "description": "Multi-Status: Batch update completed with mixed results. Some pricing plans were updated successfully while others failed. Check individual results for the status of each pricing plan and refer to the summary for overall statistics.",
+            "schema": {
+              "$ref": "#/definitions/BatchPricingUpdateResponse"
+            },
+            "examples": {
+              "application/json": {
+                "results": [
+                  {
+                    "planName": "VirtualMachines",
+                    "success": true,
+                    "result": {
+                      "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/pricings/VirtualMachines",
+                      "name": "VirtualMachines",
+                      "type": "Microsoft.Security/pricings",
+                      "properties": {
+                        "pricingTier": "Standard",
+                        "subPlan": "P2",
+                        "freeTrialRemainingTime": "PT0S",
+                        "enablementTime": "2023-03-01T12:42:42.1921106Z",
+                        "enforce": "False",
+                        "resourcesCoverageStatus": "FullyCovered",
+                        "extensions": [
+                          {
+                            "name": "AgentlessVmScanning",
+                            "isEnabled": "True",
+                            "operationStatus": {
+                              "code": "Succeeded",
+                              "message": "Successfully enabled extension"
+                            }
+                          }
+                        ],
+                        "securityOperatorResourceId": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/securityOperators/ContosoOperator"
+                      }
+                    }
+                  },
+                  {
+                    "planName": "StorageAccounts",
+                    "success": false,
+                    "error": {
+                      "code": "InvalidConfiguration",
+                      "message": "The specified subplan 'DefenderForStorageV2' is not available in this region."
+                    }
+                  }
+                ],
+                "summary": {
+                  "totalRequested": 2,
+                  "successfulUpdates": 1,
+                  "failedUpdates": 1
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request - Invalid request structure, unsupported scope (only subscription-level supported), validation errors, or batch size exceeds limit (max 30 plans).",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          },
+          "403": {
+            "description": "Forbidden - Insufficient permissions for subscription or authorization failures for specific extensions.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          },
+          "409": {
+            "description": "Conflict - Enforcement policy violations or concurrent operation conflicts due to subscription-level locking.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "PricingList": {
+      "type": "object",
+      "description": "List of pricing configurations response.",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of pricing configurations",
+          "items": {
+            "$ref": "#/definitions/Pricing"
+          }
+        }
+      }
+    },
+    "Pricing": {
+      "type": "object",
+      "description": "Microsoft Defender for Cloud is provided in two pricing tiers: free and standard. The standard tier offers advanced security capabilities, while the free tier offers basic security features.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Pricing data",
+          "$ref": "#/definitions/PricingProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "PricingProperties": {
+      "type": "object",
+      "description": "Pricing properties for the relevant scope",
+      "properties": {
+        "pricingTier": {
+          "type": "string",
+          "description": "Indicates whether the Defender plan is enabled on the selected scope. Microsoft Defender for Cloud is provided in two pricing tiers: free and standard. The standard tier offers advanced security capabilities, while the free tier offers basic security features.",
+          "enum": [
+            "Free",
+            "Standard"
+          ],
+          "x-ms-enum": {
+            "name": "pricingTier",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Free",
+                "description": "Get free Microsoft Defender for Cloud experience with basic security features"
+              },
+              {
+                "value": "Standard",
+                "description": "Get the standard Microsoft Defender for Cloud experience with advanced security features"
+              }
+            ]
+          }
+        },
+        "subPlan": {
+          "type": "string",
+          "description": "The sub-plan selected for a Standard pricing configuration, when more than one sub-plan is available. Each sub-plan enables a set of security features. When not specified, full plan is applied. For VirtualMachines plan, available sub plans are 'P1' & 'P2', where for resource level only 'P1' sub plan is supported."
+        },
+        "freeTrialRemainingTime": {
+          "type": "string",
+          "format": "duration",
+          "readOnly": true,
+          "description": "The duration left for the subscriptions free trial period - in ISO 8601 format (e.g. P3Y6M4DT12H30M5S)."
+        },
+        "enablementTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Optional. If `pricingTier` is `Standard` then this property holds the date of the last time the `pricingTier` was set to `Standard`, when available (e.g 2023-03-01T12:42:42.1921106Z)."
+        },
+        "enforce": {
+          "type": "string",
+          "description": "If set to \"False\", it allows the descendants of this scope to override the pricing configuration set on this scope (allows setting inherited=\"False\"). If set to \"True\", it prevents overrides and forces this pricing configuration on all the descendants of this scope. This field is only available for subscription-level pricing.",
+          "enum": [
+            "False",
+            "True"
+          ],
+          "x-ms-enum": {
+            "name": "enforce",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "False",
+                "description": "Allows the descendants of this scope to override the pricing configuration set on this scope (allows setting inherited=\"False\")"
+              },
+              {
+                "value": "True",
+                "description": "Prevents overrides and forces the current scope's pricing configuration to all descendants"
+              }
+            ]
+          }
+        },
+        "inherited": {
+          "type": "string",
+          "readOnly": true,
+          "description": "\"inherited\" = \"True\" indicates that the current scope inherits its pricing configuration from its parent. The ID of the parent scope that provides the inherited configuration is displayed in the \"inheritedFrom\" field. On the other hand, \"inherited\" = \"False\" indicates that the current scope has its own pricing configuration explicitly set, and does not inherit from its parent. This field is read only and available only for resource-level pricing.",
+          "enum": [
+            "True",
+            "False"
+          ],
+          "x-ms-enum": {
+            "name": "inherited",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "True",
+                "description": "Indicates that the current scope is inheriting its pricing configuration from its parent"
+              },
+              {
+                "value": "False",
+                "description": "Indicates that the current scope sets its own pricing configuration and does not inherit it from its parent"
+              }
+            ]
+          }
+        },
+        "inheritedFrom": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The id of the scope inherited from. \"Null\" if not inherited."
+        },
+        "resourcesCoverageStatus": {
+          "type": "string",
+          "readOnly": true,
+          "description": "This field is available for subscription-level only, and reflects the coverage status of the resources under the subscription. Please note: The \"pricingTier\" field reflects the plan status of the subscription. However, since the plan status can also be defined at the resource level, there might be misalignment between the subscription's plan status and the resource status. This field helps indicate the coverage status of the resources.",
+          "enum": [
+            "FullyCovered",
+            "PartiallyCovered",
+            "NotCovered"
+          ],
+          "x-ms-enum": {
+            "name": "resourcesCoverageStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "FullyCovered",
+                "description": "This value indicates that all resources associated with the subscription have the Defender plan enabled."
+              },
+              {
+                "value": "PartiallyCovered",
+                "description": "This value indicates that some resources under the subscription have the Defender plan enabled, while others have it disabled. There is a mixed coverage status among resources."
+              },
+              {
+                "value": "NotCovered",
+                "description": "This value indicates that the Defender plan is disabled for all resources under the subscription. None of the resources are protected by the Defender plan."
+              }
+            ]
+          }
+        },
+        "extensions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Extension"
+          },
+          "description": "Optional. List of extensions offered under a plan.",
+          "x-ms-identifiers": []
+        },
+        "deprecated": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "Optional. True if the plan is deprecated. If there are replacing plans they will appear in `replacedBy` property"
+        },
+        "replacedBy": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "description": "Optional. List of plans that replace this plan. This property exists only if this plan is deprecated."
+        },
+        "securityOperatorResourceId": {
+          "type": "string",
+          "description": "Resource Id of Microsoft.Security/SecurityOperator, as an extension resource of Subscription (format: /subscriptions/{subscriptionId}/providers/Microsoft.Security/securityOperators/{operatorName}) or Management Group (format: /providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Security/securityOperators/{operatorName}).<br><br>The Security Operator should be created with a System Managed Identity which is used by Microsoft Defender for Cloud to operate on scope according to Plan configuration."
+        },
+        "originatedFrom": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Optional. Indicates the origin of the most recent configuration change when the update was performed by a management system other than direct Azure Resource Manager (ARM).",
+          "enum": [
+            "M365"
+          ],
+          "x-ms-enum": {
+            "name": "originatedFrom",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "M365",
+                "description": "Indicates that the configuration change originated from Microsoft 365."
+              }
+            ]
+          }
+        },
+        "managedBy": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Optional. Indicates who exclusively manage the configuration when the last update was performed by a management system other than direct Azure Resource Manager (ARM)."
+        }
+      },
+      "required": [
+        "pricingTier"
+      ]
+    },
+    "Extension": {
+      "type": "object",
+      "description": "A plan's extension properties",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The extension name. Supported values are: <br><br>**AgentlessDiscoveryForKubernetes** - Provides zero footprint, API-based discovery of Kubernetes clusters, their configurations and deployments. The collected data is used to create a contextualized security graph for Kubernetes clusters, provide risk hunting capabilities, and visualize risks and threats to  Kubernetes environments and workloads.<br>Available for CloudPosture plan and Containers plan.<br><br>**OnUploadMalwareScanning** - Limits the GB to be scanned per month for each storage account within the subscription. Once this limit reached on a given storage account, Blobs won't be scanned during current calendar month.<br>Available for StorageAccounts plan (DefenderForStorageV2 sub plans).<br><br>**SensitiveDataDiscovery** - Sensitive data discovery identifies Blob storage container with sensitive data such as credentials, credit cards, and more, to help prioritize and investigate security events.<br>Available for StorageAccounts plan (DefenderForStorageV2 sub plan) and CloudPosture plan.<br><br>**ContainerRegistriesVulnerabilityAssessments** - Provides vulnerability management for images stored in your container registries.<br>Available for CloudPosture plan and Containers plan.<br><br>**MdeDesignatedSubscription** - Direct onboarding is a seamless integration between Defender for Endpoint and Defender for Cloud that doesn’t require extra software deployment on your servers. The onboarded resources will be presented under a designated Azure Subscription you configure<br>Available for VirtualMachines plan (P1 and P2 sub plans).<br><br>**AgentlessVmScanning** - Scans your machines for installed software, vulnerabilities, malware and secret scanning without relying on agents or impacting machine performance. Learn more here https://learn.microsoft.com/en-us/azure/defender-for-cloud/concept-agentless-data-collection.<br>Available for CloudPosture plan, VirtualMachines plan (P2 sub plan) and Containers plan.<br><br>**EntraPermissionsManagement** - Permissions Management provides Cloud Infrastructure Entitlement Management (CIEM) capabilities that helps organizations to manage and control user access and entitlements in their cloud infrastructure - important attack vector for cloud environments.<br>Permissions Management analyzes all permissions and active usage, and suggests recommendations to reduce permissions to enforce the principle of least privilege. Learn more here https://learn.microsoft.com/en-us/azure/defender-for-cloud/permissions-management.<br>Available for CloudPosture plan. <br><br>**FileIntegrityMonitoring** - File integrity monitoring (FIM), examines operating system files.<br>Windows registries, Linux system files, in real time, for changes that might indicate an attack.<br>Available for VirtualMachines plan (P2 sub plan). <br><br>**ContainerSensor** - The sensor is based on IG and provides a rich threat detection suite for Kubernetes clusters, nodes, and workloads, powered by Microsoft leading threat intelligence, provides mapping to MITRE ATT&CK framework.<br>Available for Containers plan. <br><br>**AIPromptEvidence** - Exposes the prompts passed between the user and the AI model as alert evidence. This helps classify and triage the alerts with relevant user context. The prompt snippets will include only segments of the user prompt or model response that were deemed suspicious and relevant for security classifications. The prompt evidence will be available through Defender portal as part of each alert.<br>Available for AI plan. <br><br>"
+        },
+        "isEnabled": {
+          "type": "string",
+          "description": "Indicates whether the extension is enabled.",
+          "enum": [
+            "True",
+            "False"
+          ],
+          "x-ms-enum": {
+            "name": "isEnabled",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "True",
+                "description": "Indicates the extension is enabled"
+              },
+              {
+                "value": "False",
+                "description": "Indicates the extension is disabled"
+              }
+            ]
+          }
+        },
+        "additionalExtensionProperties": {
+          "type": "object",
+          "description": "Property values associated with the extension.",
+          "additionalProperties": {}
+        },
+        "operationStatus": {
+          "type": "object",
+          "$ref": "#/definitions/OperationStatus",
+          "readOnly": true,
+          "description": "Optional. A status describing the success/failure of the extension's enablement/disablement operation."
+        },
+        "securityOperatorResourceId": {
+          "type": "string",
+          "description": "Resource Id of Microsoft.Security/SecurityOperator, as an extension resource of Subscription (format: /subscriptions/{subscriptionId}/providers/Microsoft.Security/securityOperators/{operatorName}) or Management Group (format: /providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Security/securityOperators/{operatorName}).<br><br>The Security Operator should be created with a System Managed Identity which is used by Microsoft Defender for Cloud to operate on scope according to Extension configuration."
+        }
+      },
+      "required": [
+        "name",
+        "isEnabled"
+      ]
+    },
+    "OperationStatus": {
+      "type": "object",
+      "description": "A status describing the success/failure of the extension's enablement/disablement operation.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The operation status code.",
+          "enum": [
+            "Succeeded",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "code",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Succeeded",
+                "description": "Extension was created/updated successfully."
+              },
+              {
+                "value": "Failed",
+                "description": "Extension was not created/updated successfully. See operation status message for more details."
+              }
+            ]
+          }
+        },
+        "message": {
+          "type": "string",
+          "description": "Additional information regarding the success/failure of the operation."
+        }
+      }
+    },
+    "BatchPricingUpdateRequest": {
+      "type": "object",
+      "description": "Request for updating multiple pricing configurations in a single operation",
+      "required": [
+        "plansConfigurations"
+      ],
+      "properties": {
+        "plansConfigurations": {
+          "type": "array",
+          "description": "Array of pricing plan configurations to update. Maximum of 30 plans allowed per batch request.",
+          "items": {
+            "$ref": "#/definitions/BatchPlanItem"
+          },
+          "minItems": 1,
+          "maxItems": 30
+        }
+      },
+      "example": {
+        "plansConfigurations": [
+          {
+            "planName": "VirtualMachines",
+            "properties": {
+              "pricingTier": "Standard",
+              "subPlan": "P2",
+              "enforce": "False",
+              "extensions": [
+                {
+                  "name": "AgentlessVmScanning",
+                  "isEnabled": "True"
+                }
+              ]
+            }
+          },
+          {
+            "planName": "StorageAccounts",
+            "properties": {
+              "pricingTier": "Standard",
+              "subPlan": "DefenderForStorageV2",
+              "enforce": "False",
+              "extensions": [
+                {
+                  "name": "OnUploadMalwareScanning",
+                  "isEnabled": "True",
+                  "additionalExtensionProperties": {
+                    "capGBPerMonth": "5000"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "BatchPlanItem": {
+      "type": "object",
+      "description": "Individual pricing plan configuration for batch update operation",
+      "required": [
+        "planName",
+        "properties"
+      ],
+      "properties": {
+        "planName": {
+          "type": "string",
+          "description": "Name of the pricing plan (e.g., VirtualMachines, StorageAccounts, CloudPosture, Containers, etc.)",
+          "example": "VirtualMachines"
+        },
+        "properties": {
+          "$ref": "#/definitions/PricingProperties",
+          "description": "Pricing configuration properties for this plan"
+        }
+      }
+    },
+    "BatchPricingUpdateResponse": {
+      "type": "object",
+      "description": "Response from batch pricing update operation containing results for each plan and operation summary",
+      "required": [
+        "results",
+        "summary"
+      ],
+      "properties": {
+        "results": {
+          "type": "array",
+          "description": "Results for each individual pricing plan update within the batch operation",
+          "items": {
+            "$ref": "#/definitions/BatchPricingResult"
+          }
+        },
+        "summary": {
+          "$ref": "#/definitions/BatchOperationSummary",
+          "description": "Summary statistics for the batch operation including total, successful, and failed update counts"
+        }
+      }
+    },
+    "BatchPricingResult": {
+      "type": "object",
+      "description": "Result of updating a single pricing plan within a batch operation",
+      "required": [
+        "planName",
+        "success"
+      ],
+      "properties": {
+        "planName": {
+          "type": "string",
+          "description": "Name of the pricing plan that was processed in this batch operation"
+        },
+        "success": {
+          "type": "boolean",
+          "description": "Whether the update for this pricing plan was successful"
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Detailed error message if the update failed (only present when success=false). Contains specific validation or authorization error details."
+        },
+        "result": {
+          "$ref": "#/definitions/Pricing",
+          "description": "Updated pricing configuration resource (only present when success=true). Contains the complete pricing configuration with all properties populated."
+        }
+      }
+    },
+    "BatchOperationSummary": {
+      "type": "object",
+      "description": "Summary statistics for batch operation results providing overview of operation success",
+      "required": [
+        "totalRequested",
+        "successfulUpdates",
+        "failedUpdates"
+      ],
+      "properties": {
+        "totalRequested": {
+          "type": "integer",
+          "description": "Total number of pricing configurations requested for update in this batch",
+          "minimum": 1,
+          "maximum": 30
+        },
+        "successfulUpdates": {
+          "type": "integer",
+          "description": "Number of pricing configurations successfully updated",
+          "minimum": 0
+        },
+        "failedUpdates": {
+          "type": "integer",
+          "description": "Number of pricing configurations that failed to update due to validation or authorization errors",
+          "minimum": 0
+        }
+      },
+      "example": {
+        "totalRequested": 2,
+        "successfulUpdates": 1,
+        "failedUpdates": 1
+      }
+    }
+  },
+  "parameters": {
+    "PricingName": {
+      "name": "pricingName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "name of the pricing configuration",
+      "x-ms-parameter-location": "method"
+    },
+    "Pricing": {
+      "name": "pricing",
+      "in": "body",
+      "required": true,
+      "description": "Pricing object",
+      "schema": {
+        "$ref": "#/definitions/Pricing"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "BatchPricingUpdateRequest": {
+      "name": "batchPricingRequest",
+      "in": "body",
+      "required": true,
+      "description": "Batch pricing update request containing multiple plan configurations (maximum 30 plans per batch)",
+      "schema": {
+        "$ref": "#/definitions/BatchPricingUpdateRequest"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
