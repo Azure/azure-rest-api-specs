@@ -871,10 +871,12 @@ export class SdkTspConfigValidationRule implements Rule {
 
       let isSubRuleSuccess = result.success;
 
-      // TODO: remove when @azure-tools/typespec-csharp is ready for validating tspconfig
+      // Special handling for emitter-specific validation rules
       if (subRule instanceof TspconfigEmitterOptionsSubRuleBase) {
         const emitterOptionSubRule = subRule as TspconfigEmitterOptionsSubRuleBase;
         const emitterName = emitterOptionSubRule.getEmitterName();
+        
+        // Skip all validation failures for @azure-tools/typespec-csharp (legacy emitter)
         if (emitterName === "@azure-tools/typespec-csharp" && isSubRuleSuccess === false) {
           console.warn(
             `Validation on option "${emitterOptionSubRule.getPathOfKeyToValidate()}" in "${emitterName}" are failed. However, per ${emitterName}'s decision, we will treat it as passed, please refer to https://eng.ms/docs/products/azure-developer-experience/onboard/request-exception`,
@@ -882,11 +884,26 @@ export class SdkTspConfigValidationRule implements Rule {
           isSubRuleSuccess = true;
         }
 
-        // For @azure-typespec/http-client-csharp and @azure-typespec/http-client-csharp-mgmt,
+        // For new C# emitters (@azure-typespec/http-client-csharp and @azure-typespec/http-client-csharp-mgmt),
         // only ignore validation for specific error types (e.g., missing configuration)
         if (
           (emitterName === "@azure-typespec/http-client-csharp" ||
             emitterName === "@azure-typespec/http-client-csharp-mgmt") &&
+          isSubRuleSuccess === false &&
+          this.shouldIgnoreValidationError(result)
+        ) {
+          console.warn(
+            `Validation on option "${emitterOptionSubRule.getPathOfKeyToValidate()}" in "${emitterName}" is skipped because the option is not configured.`,
+          );
+          isSubRuleSuccess = true;
+        }
+
+        // For @azure-tools/typespec-go data plane SDKs only,
+        // ignore validation for specific error types (e.g., missing configuration)
+        // Management plane SDKs still require strict validation
+        if (
+          emitterName === "@azure-tools/typespec-go" &&
+          !isManagementSdk(folder) &&
           isSubRuleSuccess === false &&
           this.shouldIgnoreValidationError(result)
         ) {
