@@ -1297,18 +1297,19 @@
         "startDate": {
           "type": "string",
           "format": "date",
-          "description": "Billing start date"
+          "description": "Billing start date",
+          "readOnly": true
         },
         "endDate": {
           "type": "string",
           "format": "date",
-          "description": "Billing end date"
+          "description": "Billing end date",
+          "readOnly": true
         }
       },
       "required": [
         "cores",
-        "pricingModel",
-        "startDate"
+        "pricingModel"
       ]
     },
     "BillingPeriodUpdate": {
@@ -1323,16 +1324,6 @@
         "pricingModel": {
           "$ref": "#/definitions/PricingModel",
           "description": "Pricing model"
-        },
-        "startDate": {
-          "type": "string",
-          "format": "date",
-          "description": "Billing start date"
-        },
-        "endDate": {
-          "type": "string",
-          "format": "date",
-          "description": "Billing end date"
         }
       }
     },

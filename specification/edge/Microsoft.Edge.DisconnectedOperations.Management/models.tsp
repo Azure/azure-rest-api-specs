@@ -382,9 +382,11 @@ model BillingPeriod {
   @doc("Pricing model")
   pricingModel: PricingModel;
 
+  @visibility(Lifecycle.Read)
   @doc("Billing start date")
-  startDate: plainDate;
+  startDate?: plainDate;
 
+  @visibility(Lifecycle.Read)
   @doc("Billing end date")
   endDate?: plainDate;
 }
