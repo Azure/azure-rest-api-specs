@@ -26,25 +26,6 @@ model ValidatedSolutionRecipe
 }
 
 @armResourceOperations
-interface ValidatedSolutionRecipesOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
-        ...Azure.ResourceManager.LocationParameter,
-      },
-      {
-        /** Represents a validated solution recipe resource. */
-        @path
-        @segment("validatedSolutionRecipes")
-        @key
-        @pattern("^[a-zA-Z0-9-.]{3,50}$")
-        validatedSolutionRecipeName: string,
-      }
-    > {}
-
-@armResourceOperations
 interface ValidatedSolutionRecipes {
   /**
    * Get a validated solution recipe.
