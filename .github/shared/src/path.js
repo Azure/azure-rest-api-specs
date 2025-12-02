@@ -50,8 +50,8 @@ export function untilLastSegment(path, segment) {
  * @returns {string} Portion of resolved path up to (and including) the last segment with the specified parent
  *
  * @example
- * untilLastParentSegment("stable/2025-01-01/examples/foo.json", "examples")
- * // -> "{cwd}/stable/2025-01-01"
+ * untilLastSegmentWithParent("specification/foo/data-plane/stable/2025-01-01/foo.json", "specification")
+ * // -> "{cwd}/specification/foo"
  */
 export function untilLastSegmentWithParent(path, segment) {
   // Shares code with `untilLastSegment()`, but not worth refactoring yet
