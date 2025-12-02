@@ -525,7 +525,10 @@ class FalsePositiveFilter:
         In OpenAPI 2.0, x-nullable: false is equivalent to missing x-nullable.
         We only care about differences involving x-nullable: true.
         """
-        if diff.type != DifferenceType.PARAMETER_MISMATCH:
+        if diff.type not in [
+            DifferenceType.PARAMETER_MISMATCH,
+            DifferenceType.GLOBAL_PARAMETER_MISMATCH,
+        ]:
             return False
 
         message = diff.message
