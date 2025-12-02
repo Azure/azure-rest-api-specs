@@ -1,0 +1,58 @@
+{
+  "parameters": {
+    "api-version": "2025-04-15",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "location": "West US",
+    "accountName": "softdeleted-cosmosdb-1",
+    "databaseName": "MyDatabase",
+    "containerName": "MyContainer",
+    "restoreSoftDeletedSqlContainerParameters": {}
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/softdeleted-cosmosdb-1/sqlDatabases/MyDatabase/containers/MyContainer",
+        "name": "MyContainer",
+        "type": "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers",
+        "properties": {
+          "resource": {
+            "id": "MyContainer",
+            "_rid": "d9RzAJRFKgw=",
+            "_etag": "\"00003e00-0000-0700-0000-63553a460000\"",
+            "indexingPolicy": {
+              "indexingMode": "consistent",
+              "automatic": true,
+              "includedPaths": [
+                {
+                  "path": "/*"
+                }
+              ],
+              "excludedPaths": [
+                {
+                  "path": "/\"_etag\"/?"
+                }
+              ]
+            },
+            "partitionKey": {
+              "paths": [
+                "/id"
+              ],
+              "kind": "Hash"
+            },
+            "_ts": 1666522694
+          },
+          "options": {
+            "throughput": 400
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/subid/providers/Microsoft.DocumentDB/locations/West US/operationResults/restore-container-operation-id?api-version=2025-04-15",
+        "location": "https://management.azure.com/subscriptions/subid/providers/Microsoft.DocumentDB/locations/West US/operationResults/restore-container-operation-id?api-version=2025-04-15"
+      }
+    }
+  }
+}
