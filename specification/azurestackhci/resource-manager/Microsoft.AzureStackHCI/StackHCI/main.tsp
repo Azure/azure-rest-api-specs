@@ -32,6 +32,7 @@ import "./UpdateRun.tsp";
 import "./Update.tsp";
 import "./UpdateSummaries.tsp";
 import "./ValidatedSolutionRecipe.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
