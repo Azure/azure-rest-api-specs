@@ -14,18 +14,23 @@ namespace Microsoft.Storage;
 /**
  * The storage task assignment.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(StorageAccount)
-model StorageTaskAssignment
-  is Azure.ResourceManager.ProxyResource<
-    StorageTaskAssignmentProperties,
-    false
-  > {
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model StorageTaskAssignment extends BaseResource {
   ...ResourceNameParameter<
     Resource = StorageTaskAssignment,
     KeyName = "storageTaskAssignmentName",
     SegmentName = "storageTaskAssignments",
     NamePattern = "^[a-z][a-z0-9]{2,23}$"
   >;
+
+  /**
+   * Properties of the storage task assignment.
+   */
+  properties: StorageTaskAssignmentProperties;
 }
 
 @armResourceOperations
@@ -39,30 +44,26 @@ interface StorageTaskAssignments {
    * Asynchronously creates a new storage task assignment sub-resource with the specified parameters. If a storage task assignment is already created and a subsequent create request is issued with different properties, the storage task assignment properties will be updated. If a storage task assignment is already created and a subsequent create or update request is issued with the exact same set of properties, the request will succeed.
    */
   @put
-  create is Azure.ResourceManager.Foundations.ArmCreateOperation<
-    ResourceInstanceParameters<
-      StorageTaskAssignment,
-      Azure.ResourceManager.Foundations.DefaultBaseParameters<StorageTaskAssignment>
-    >,
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  create is ArmResourceCreateOrReplaceAsync<
     StorageTaskAssignment,
-    ArmResourceUpdatedResponse<StorageTaskAssignment> | ArmResourceCreatedResponse<StorageTaskAssignment> | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = StorageTaskAssignment> &
-      ArmLroLocationHeader<FinalResult = StorageTaskAssignment> &
+    Response = ArmResourceUpdatedResponse<StorageTaskAssignment> | ArmResourceCreatedResponse<StorageTaskAssignment> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = StorageTaskAssignment> &
       Azure.Core.Foundations.RetryAfterHeader>,
-    ErrorResponse
+    Error = ErrorResponse
   >;
 
   /**
    * Update storage task assignment properties
    */
   @patch(#{ implicitOptionality: false })
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   update is Azure.ResourceManager.Foundations.ArmUpdateOperation<
     ResourceInstanceParameters<
       StorageTaskAssignment,
       Azure.ResourceManager.Foundations.DefaultBaseParameters<StorageTaskAssignment>
     >,
     StorageTaskAssignmentUpdateParameters,
-    Response = ArmResponse<StorageTaskAssignment> | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = StorageTaskAssignment> &
-      ArmLroLocationHeader<FinalResult = StorageTaskAssignment> &
+    Response = ArmResponse<StorageTaskAssignment> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = StorageTaskAssignment> &
       Azure.Core.Foundations.RetryAfterHeader>,
     ErrorResponse = ErrorResponse
   >;
@@ -80,8 +81,7 @@ interface StorageTaskAssignments {
   @delete
   delete is Azure.ResourceManager.ArmResourceDeleteAsyncBase<
     Resource = StorageTaskAssignment,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
-      ArmLroLocationHeader &
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
       Azure.Core.Foundations.RetryAfterHeader> | NoContentResponse,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<StorageTaskAssignment>,
     Error = ErrorResponse
@@ -144,3 +144,4 @@ interface StorageTaskAssignments {
 @@doc(StorageTaskAssignments.update::parameters.properties,
   "The parameters to update a Storage Task Assignment."
 );
+@@visibility(StorageTaskAssignment.name, Lifecycle.Read);
