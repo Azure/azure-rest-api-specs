@@ -104,6 +104,17 @@ interface MonitorResources {
   >;
 
   /**
+   * Gets the list of managed agent resources by the Dynatrace monitor.
+   */
+  @added(Dynatrace.Observability.Versions.v2025_11_03_preview)
+  @list
+  listManagedAgentResources is ArmResourceActionSync<
+    MonitorResource,
+    void,
+    ArmResponse<ManagedAgentResourceListResponse>
+  >;
+
+  /**
    * Manages Dynatrace MCP connectors to add/remove through the Azure Dynatrace resource on the provided list of resources.
    */
   @added(Dynatrace.Observability.Versions.v2025_11_03_preview)

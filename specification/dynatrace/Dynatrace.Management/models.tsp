@@ -601,6 +601,49 @@ model VMExtensionPayload {
 }
 
 /**
+ * Response of a list operation for managed agent resources.
+ */
+@added(Dynatrace.Observability.Versions.v2025_11_03_preview)
+model ManagedAgentResourceListResponse
+  is Azure.Core.Page<ManagedAgentResourceInfo>;
+
+/**
+ * Details of a managed agent resource monitored by the Dynatrace monitor.
+ */
+@added(Dynatrace.Observability.Versions.v2025_11_03_preview)
+model ManagedAgentResourceInfo {
+  /**
+   * The full ARM resource ID of the monitored resource.
+   */
+  monitoredResourceId?: Azure.Core.armResourceIdentifier;
+
+  /**
+   * The type of the Azure resource (e.g., managedClusters).
+   */
+  resourceType?: string;
+
+  /**
+   * The ARM resource ID path of the Dynatrace monitor.
+   */
+  monitorId?: Azure.Core.armResourceIdentifier;
+
+  /**
+   * The partner name
+   */
+  partnerName?: string;
+
+  /**
+   * Flag indicating if the resource is currently being monitored.
+   */
+  isMonitored?: boolean;
+
+  /**
+   * The tenant ID associated with the agent resource.
+   */
+  tenantId?: string;
+}
+
+/**
  * Request for performing Dynatrace agent install/uninstall action through the Azure Dynatrace resource on the provided list of agent resources.
  */
 model ManageAgentInstallationRequest {
