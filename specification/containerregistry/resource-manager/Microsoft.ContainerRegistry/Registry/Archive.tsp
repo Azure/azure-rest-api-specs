@@ -90,7 +90,10 @@ interface Archives {
   /**
    * Lists all archives for the specified container registry and package type.
    */
-  list is AchieveOperationOps.List<Archive, Response = ArmResponse<ArchiveListResult>>;
+  list is AchieveOperationOps.List<
+    Archive,
+    Response = ArmResponse<ArchiveListResult>
+  >;
 }
 
 @@maxLength(Archive.name, 200);

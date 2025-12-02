@@ -80,6 +80,5 @@ enum Versions {
   vLatestPreview: "2025-06-01-preview",
 }
 
-interface Operations extends Azure.ResourceManager.Legacy.Operations<
-  Response = ArmResponse<OperationListResult>
-> {}
+interface Operations
+  extends Azure.ResourceManager.Legacy.Operations<Response = ArmResponse<OperationListResult>> {}
