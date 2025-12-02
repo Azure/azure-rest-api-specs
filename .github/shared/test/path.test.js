@@ -38,6 +38,8 @@ describe("path", () => {
     ["a/b/c/d.txt", "c", "a/b/c"],
     ["a/b/c/d.txt", "b", "a/b"],
     ["a/b/c/d.txt", "a", "a"],
+    // Cannot easily test segment "" with relative path, since result is subset of cwd. Covered in absolute path test.
+    // ["a/b/c/d.txt", "", "/"],
     ["a/b/c/d.txt", sep, ""],
     // Ensure last occurrence of segment is used
     ["/a/b/a/c/a/d.txt", "a", "/a/b/a/c/a"],
@@ -58,7 +60,9 @@ describe("path", () => {
     ["a/b/c/d.txt", "d.txt", ""],
     ["a/b/c/d.txt", "c", "a/b/c/d.txt"],
     ["a/b/c/d.txt", "b", "a/b/c"],
-    ["a/b/c/d.txt", "a", `a/b`],
+    ["a/b/c/d.txt", "a", "a/b"],
+    // Cannot easily test segment "" with relative path, since result is subset of cwd. Covered in absolute path test.
+    // ["a/b/c/d.txt", "", "/home"],
     ["a/b/c/d.txt", sep, ""],
     // Ensure last occurrence of segment is used
     ["/a/b/a/c/a/d.txt", "a", "/a/b/a/c/a/d.txt"],
