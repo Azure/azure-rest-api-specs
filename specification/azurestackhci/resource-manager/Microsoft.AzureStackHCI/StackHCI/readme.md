@@ -269,21 +269,6 @@ These settings apply only when `--tag=package-preview-2025-11-01-preview` is spe
 
 ```yaml $(tag) == 'package-preview-2025-11-01-preview'
 input-file:
-  - preview/2025-11-01-preview/arcSettings.json
-  - preview/2025-11-01-preview/clusters.json
-  - preview/2025-11-01-preview/deploymentSettings.json
-  - preview/2025-11-01-preview/edgeDeviceJobs.json
-  - preview/2025-11-01-preview/edgeDevices.json
-  - preview/2025-11-01-preview/extensions.json
-  - preview/2025-11-01-preview/hciCommon.json
-  - preview/2025-11-01-preview/offers.json
-  - preview/2025-11-01-preview/publishers.json
-  - preview/2025-11-01-preview/securitySettings.json
-  - preview/2025-11-01-preview/skus.json
-  - preview/2025-11-01-preview/updateRuns.json
-  - preview/2025-11-01-preview/updates.json
-  - preview/2025-11-01-preview/updateSummaries.json
-  - preview/2025-11-01-preview/validatedSolutionRecipes.json
   - preview/2025-11-01-preview/hci.json
 ```
 
