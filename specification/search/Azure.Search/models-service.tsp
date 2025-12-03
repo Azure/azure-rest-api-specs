@@ -5111,23 +5111,8 @@ model LimitTokenFilter extends TokenFilter {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
-#deprecated "This version of NGramTokenFilter is deprecated. Please use NGramTokenFilterV2 instead."
 @doc("Generates n-grams of the given size(s). This token filter is implemented using Apache Lucene.")
 model NGramTokenFilter extends TokenFilter {
-  @doc("The minimum n-gram length. Default is 1. Must be less than the value of maxGram.")
-  minGram?: int32 = 1;
-
-  @doc("The maximum n-gram length. Default is 2.")
-  maxGram?: int32 = 2;
-
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
-  @doc("A URI fragment specifying the type of token filter.")
-  `@odata.type`: "#Microsoft.Azure.Search.NGramTokenFilter";
-}
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
-@doc("Generates n-grams of the given size(s). This token filter is implemented using Apache Lucene.")
-model NGramTokenFilterV2 extends TokenFilter {
   @doc("The minimum n-gram length. Default is 1. Maximum is 300. Must be less than the value of maxGram.")
   @maxValue(300)
   minGram?: int32 = 1;
