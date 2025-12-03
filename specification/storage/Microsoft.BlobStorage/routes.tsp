@@ -377,7 +377,7 @@ interface Container {
     },
     {
       @statusCode statusCode: 201;
-      ...DateResponseHeader;
+      ...DateResponseHeaderPrivate;
     }
   >;
 
