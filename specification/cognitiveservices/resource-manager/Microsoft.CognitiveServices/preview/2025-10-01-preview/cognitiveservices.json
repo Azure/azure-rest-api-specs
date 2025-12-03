@@ -1866,7 +1866,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/CapabilityHostResource"
+              "$ref": "#/definitions/CapabilityHost"
             }
           },
           "default": {
@@ -1923,7 +1923,7 @@
             "description": "CapabilityHost definition.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CapabilityHostResource"
+              "$ref": "#/definitions/CapabilityHost"
             }
           }
         ],
@@ -1931,13 +1931,13 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/CapabilityHostResource"
+              "$ref": "#/definitions/CapabilityHost"
             }
           },
           "201": {
             "description": "Resource 'CapabilityHostResource' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/CapabilityHostResource"
+              "$ref": "#/definitions/CapabilityHost"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -1965,7 +1965,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "original-uri",
-          "final-state-schema": "#/definitions/CapabilityHostResource"
+          "final-state-schema": "#/definitions/CapabilityHost"
         },
         "x-ms-long-running-operation": true
       },
@@ -5427,7 +5427,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/AgentApplicationResource"
+              "$ref": "#/definitions/AgentApplication"
             }
           },
           "default": {
@@ -5493,7 +5493,7 @@
             "description": "Agent Application definition object.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AgentApplicationResource"
+              "$ref": "#/definitions/AgentApplication"
             }
           }
         ],
@@ -5501,13 +5501,13 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/AgentApplicationResource"
+              "$ref": "#/definitions/AgentApplication"
             }
           },
           "201": {
             "description": "Resource 'AgentApplicationResource' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/AgentApplicationResource"
+              "$ref": "#/definitions/AgentApplication"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -5539,7 +5539,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/AgentApplicationResource"
+          "final-state-schema": "#/definitions/AgentApplication"
         },
         "x-ms-long-running-operation": true
       },
@@ -6460,7 +6460,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ProjectCapabilityHostResource"
+              "$ref": "#/definitions/ProjectCapabilityHost"
             }
           },
           "default": {
@@ -6527,7 +6527,7 @@
             "description": "CapabilityHost definition.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ProjectCapabilityHostResource"
+              "$ref": "#/definitions/ProjectCapabilityHost"
             }
           }
         ],
@@ -6535,13 +6535,13 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ProjectCapabilityHostResource"
+              "$ref": "#/definitions/ProjectCapabilityHost"
             }
           },
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
-              "$ref": "#/definitions/ProjectCapabilityHostResource"
+              "$ref": "#/definitions/ProjectCapabilityHost"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -6569,7 +6569,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "original-uri",
-          "final-state-schema": "#/definitions/ProjectCapabilityHostResource"
+          "final-state-schema": "#/definitions/ProjectCapabilityHost"
         },
         "x-ms-long-running-operation": true
       },
@@ -9784,7 +9784,7 @@
         ]
       }
     },
-    "AgentApplicationResource": {
+    "AgentApplication": {
       "type": "object",
       "description": "Agent Application resource",
       "properties": {
@@ -9815,7 +9815,7 @@
           "type": "array",
           "description": "An array of objects of type Agent Application.",
           "items": {
-            "$ref": "#/definitions/AgentApplicationResource"
+            "$ref": "#/definitions/AgentApplication"
           }
         }
       }
@@ -10626,6 +10626,40 @@
     },
     "CapabilityHost": {
       "type": "object",
+      "description": "Azure Resource Manager resource envelope.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CapabilityHostProperties",
+          "description": "[Required] Additional attributes of the entity."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "CapabilityHostKind": {
+      "type": "string",
+      "enum": [
+        "Agents"
+      ],
+      "x-ms-enum": {
+        "name": "CapabilityHostKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Agents",
+            "value": "Agents"
+          }
+        ]
+      }
+    },
+    "CapabilityHostProperties": {
+      "type": "object",
       "properties": {
         "aiServicesConnections": {
           "type": "array",
@@ -10684,22 +10718,6 @@
         }
       ]
     },
-    "CapabilityHostKind": {
-      "type": "string",
-      "enum": [
-        "Agents"
-      ],
-      "x-ms-enum": {
-        "name": "CapabilityHostKind",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Agents",
-            "value": "Agents"
-          }
-        ]
-      }
-    },
     "CapabilityHostProvisioningState": {
       "type": "string",
       "description": "Provisioning state of capability host.",
@@ -10742,24 +10760,6 @@
         ]
       }
     },
-    "CapabilityHostResource": {
-      "type": "object",
-      "description": "Azure Resource Manager resource envelope.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/CapabilityHost",
-          "description": "[Required] Additional attributes of the entity."
-        }
-      },
-      "required": [
-        "properties"
-      ],
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
     "CapabilityHostResourceArmPaginatedResult": {
       "type": "object",
       "description": "A paginated list of Capability Host entities.",
@@ -10773,7 +10773,7 @@
           "type": "array",
           "description": "An array of objects of type Capability Host.",
           "items": {
-            "$ref": "#/definitions/CapabilityHostResource"
+            "$ref": "#/definitions/CapabilityHost"
           }
         }
       }
@@ -14593,6 +14593,24 @@
     },
     "ProjectCapabilityHost": {
       "type": "object",
+      "description": "Azure Resource Manager resource envelope for Project CapabilityHost.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ProjectCapabilityHostProperties",
+          "description": "[Required] Additional attributes of the entity."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ProjectCapabilityHostProperties": {
+      "type": "object",
       "properties": {
         "aiServicesConnections": {
           "type": "array",
@@ -14633,24 +14651,6 @@
         }
       }
     },
-    "ProjectCapabilityHostResource": {
-      "type": "object",
-      "description": "Azure Resource Manager resource envelope for Project CapabilityHost.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ProjectCapabilityHost",
-          "description": "[Required] Additional attributes of the entity."
-        }
-      },
-      "required": [
-        "properties"
-      ],
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
     "ProjectCapabilityHostResourceArmPaginatedResult": {
       "type": "object",
       "description": "A paginated list of Project Capability Host entities.",
@@ -14664,7 +14664,7 @@
           "type": "array",
           "description": "An array of objects of type Project Capability Host.",
           "items": {
-            "$ref": "#/definitions/ProjectCapabilityHostResource"
+            "$ref": "#/definitions/ProjectCapabilityHost"
           }
         }
       }

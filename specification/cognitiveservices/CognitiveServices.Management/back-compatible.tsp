@@ -213,7 +213,6 @@ using Microsoft.CognitiveServices;
 @@clientName(calculateModelCapacity::parameters.body, "parameters");
 @@clientName(checkDomainAvailability::parameters.body, "parameters");
 @@clientName(checkSkuAvailability::parameters.body, "parameters");
-//@@clientName(ProjectCapabilityHostResource, "ProjectCapabilityHost");
 
 @@visibility(Project.tags, Lifecycle.Read, Lifecycle.Create, Lifecycle.Update);
 @@visibility(CommitmentPlan.tags,
@@ -225,3 +224,12 @@ using Microsoft.CognitiveServices;
 @@TypeSpec.Http.header(Azure.ResourceManager.ArmLroLocationHeader.location,
   "location"
 );
+
+@@clientName(AgentApplicationResource, "AgentApplication");
+@@clientName(CapabilityHost, "CapabilityHostProperties");
+@@clientName(CapabilityHostResource, "CapabilityHost");
+@@clientName(ProjectCapabilityHostResource, "ProjectCapabilityHost");
+@@clientName(ProjectCapabilityHost, "ProjectCapabilityHostProperties");
+
+//@@clientName(AgentDeploymentResource, "AgentDeployment");
+//@@clientName(AgentReferenceResource, "AgentReference");
