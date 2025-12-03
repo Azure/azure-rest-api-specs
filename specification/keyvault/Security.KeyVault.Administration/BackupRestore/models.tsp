@@ -3,7 +3,7 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
-import "../Security.KeyVault.Common/common.tsp";
+import "../Common/common.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;

@@ -3,7 +3,7 @@ import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
-import "../Security.KeyVault.Common/common.tsp";
+import "./common.tsp";
 
 using Azure.ClientGenerator.Core;
 using TypeSpec.Http;

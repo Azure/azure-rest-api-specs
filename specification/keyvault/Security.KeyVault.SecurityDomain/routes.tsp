@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
-import "../Security.KeyVault.Common/common.tsp";
+import "./common.tsp";
 
 using Azure.Core;
 using TypeSpec.Http;

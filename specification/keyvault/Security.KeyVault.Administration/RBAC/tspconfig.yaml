@@ -15,7 +15,7 @@ options:
   "@azure-tools/typespec-autorest":
     azure-resource-provider-folder: "data-plane"
     emitter-output-dir: "{project-root}/.."
-    output-file: "{azure-resource-provider-folder}/Microsoft.KeyVault/{version-status}/{version}/backuprestore.json"
+    output-file: "{azure-resource-provider-folder}/Microsoft.KeyVault/{version-status}/{version}/rbac.json"
   # Uncomment this line and add "@azure-tools/typespec-python" to your package.json to generate Python code
   # "@azure-tools/typespec-python": true
   # Uncomment this line and add "@azure-tools/typespec-java" to your package.json to generate Java code
@@ -24,10 +24,16 @@ options:
   # "@azure-tools/typespec-csharp": true
   # Uncomment this line and add "@azure-tools/typespec-ts" to your package.json to generate TypeSpec code
   # "@azure-tools/typespec-ts": true
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-keyvault-administration/rbac"
+    namespace: "azure.keyvault.administration.rbac"
+    generate-test: false
+    generate-sample: false
+    flavor: azure
   "@azure-tools/typespec-go":
     containing-module: "github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/azadmin"
     service-dir: "sdk/security/keyvault"
-    emitter-output-dir: "{output-dir}/{service-dir}/azadmin/backup"
+    emitter-output-dir: "{output-dir}/{service-dir}/azadmin/rbac"
     go-generate: build.go
     inject-spans: true
     single-client: true
@@ -35,4 +41,4 @@ options:
     omit-constructors: true
   "@azure-tools/typespec-client-generator-cli":
     additionalDirectories:
-      - "specification/keyvault/Security.KeyVault.Common/"
+      - "specification/keyvault/Security.KeyVault.Administration/Common"
