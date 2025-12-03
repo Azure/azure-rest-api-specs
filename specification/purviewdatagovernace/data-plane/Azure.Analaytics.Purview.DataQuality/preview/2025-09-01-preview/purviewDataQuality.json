@@ -290,6 +290,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Alert_GetAlert": {
+            "$ref": "./examples/Alert_GetAlert.json"
+          }
         }
       },
       "put": {
@@ -402,6 +407,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Alert_Patch": {
+            "$ref": "./examples/Alert_Patch.json"
+          }
         }
       },
       "delete": {
@@ -444,6 +454,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Alert_Delete": {
+            "$ref": "./examples/Alert_Delete.json"
           }
         }
       }
@@ -2146,21 +2161,20 @@
           {
             "name": "businessDomainId",
             "in": "path",
-            "description": "Unique identifier for the business domain containing the data product",
+            "description": "Unique identifier for the business domain",
             "required": true,
             "type": "string"
           },
           {
             "name": "scheduleId",
             "in": "path",
-            "description": "Unique identifier for the scheduled job within the business domain",
+            "description": "Unique identifier of the schedule",
             "required": true,
             "type": "string"
           },
           {
-            "name": "request",
+            "name": "body",
             "in": "body",
-            "description": "Scan configuration request payload",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ScanDTO"

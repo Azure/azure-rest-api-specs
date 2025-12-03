@@ -873,7 +873,12 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing service operation."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Existing service operation."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" ""
   @tag("Alerts")
+  @extension(
+    "x-ms-examples",
+    #{ Alert_GetAlert: #{ $ref: "./examples/Alert_GetAlert.json" } }
+  )
   @doc("Retrieves a specific alert definition within a business domain.")
   @route("/business-domains/{businessDomainId}/alerts/{alertId}")
   @get
@@ -899,11 +904,11 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Existing service operation."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" ""
   @tag("Alerts")
+  @doc("Creates a new alert or updates an existing alert within the specified business domain. Returns 201 Created if the alert was created, or 200 OK if it was updated.")
   @extension(
     "x-ms-examples",
     #{ Alert_Update: #{ $ref: "./examples/Alert_Update.json" } }
   )
-  @doc("Creates a new alert or updates an existing alert within the specified business domain. Returns 201 Created if the alert was created, or 200 OK if it was updated.")
   @route("/business-domains/{businessDomainId}/alerts/{alertId}")
   @put
   op updateAlert is RpcOperation<
@@ -934,7 +939,12 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing service operation."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Existing service operation."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" ""
   @tag("Alerts")
+  @extension(
+    "x-ms-examples",
+    #{ Alert_Delete: #{ $ref: "./examples/Alert_Delete.json" } }
+  )
   @doc("Deletes a specific alert within the specified business domain.")
   @route("/business-domains/{businessDomainId}/alerts/{alertId}")
   @delete
@@ -961,7 +971,12 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing service operation."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Existing service operation."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" ""
   @tag("Alerts")
+  @extension(
+    "x-ms-examples",
+    #{ Alert_Patch: #{ $ref: "./examples/Alert_Patch.json" } }
+  )
   @doc("Updates the status of an alert within the specified business domain.")
   @route("/business-domains/{businessDomainId}/alerts/{alertId}")
   @patch(#{ implicitOptionality: true })
