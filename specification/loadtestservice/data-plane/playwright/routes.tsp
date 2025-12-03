@@ -12,7 +12,13 @@ namespace Playwright;
 
 alias ServiceTraits = NoRepeatableRequests &
   NoConditionalRequests &
-  SupportsClientRequestId;
+  SupportsClientRequestId &
+  RequestHeadersTrait<{
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase."
+    @header
+    @doc("Optional header to specify additional client information when the standard 'User-Agent' header cannot be explicitly set, such as when using Playwright Client. The value should follow the standard 'User-Agent' header format.")
+    `x-ms-useragent`?: string;
+  }>;
 
 alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
 
@@ -57,7 +63,7 @@ alias GetBrowsersResponse = {
 
   @header
   @doc("The redirect target URL for executing Playwright scripts on remote browsers.")
-  location: url;
+  location: string;
 };
 
 interface Workspaces {

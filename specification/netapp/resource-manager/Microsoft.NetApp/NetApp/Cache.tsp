@@ -5,12 +5,11 @@ import "@typespec/rest";
 import "./models.tsp";
 import "./Volume.tsp";
 
-using TypeSpec.Rest;
+using Rest;
 using Azure.Core;
 using Azure.ResourceManager;
-using TypeSpec.Http;
-using TypeSpec.OpenAPI;
-using TypeSpec.Versioning;
+using Http;
+using Versioning;
 
 namespace Microsoft.NetApp;
 /**
@@ -59,11 +58,10 @@ model CacheProperties {
   /**
    * Set of export policy rules
    */
-  @OpenAPI.extension("x-ms-identifiers", #["ruleIndex"])
-  exportPolicy?: ExportPolicyRule[];
+  exportPolicy?: CachePropertiesExportPolicy;
 
   /**
-   * Set of protocol types, default NFSv3, CIFS for SMB protocol
+   * Set of supported protocol types, which include NFSv3, NFSv4 and SMB protocol
    */
   protocolTypes?: ProtocolTypes[];
 
@@ -103,7 +101,7 @@ model CacheProperties {
    * List of mount targets that can be used to mount this cache
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["mountTargetId"])
+  @identifiers(#["mountTargetId"])
   mountTargets?: CacheMountTargetProperties[];
 
   /**
@@ -329,6 +327,17 @@ union LdapState {
 }
 
 /**
+ * Set of export policy rules
+ */
+model CachePropertiesExportPolicy {
+  /**
+   * Export policy rule
+   */
+  @identifiers(#["ruleIndex"])
+  rules?: ExportPolicyRule[];
+}
+
+/**
  * Flag indicating whether the global file lock is enabled for the cache.
  */
 @added(Versions.v2025_09_01_preview)
@@ -452,7 +461,7 @@ union SmbEncryptionState {
 }
 
 /**
- * Export policy rule
+ * Set of supported protocol types, which include NFSv3, NFSv4 and SMB protocol
  */
 @added(Versions.v2025_09_01_preview)
 union ProtocolTypes {
@@ -535,7 +544,8 @@ interface Caches {
       Cache,
       CacheProperties
     >,
-    Response = ArmResourceUpdatedResponse<Cache> | ArmAcceptedLroResponse
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = Cache> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
