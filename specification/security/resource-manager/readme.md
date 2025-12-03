@@ -106,6 +106,15 @@ tag: package-composite-v3
 
 The following packages may be composed from multiple api-versions.
 
+### Tag: package-2026-01
+
+These settings apply only when `--tag=package-2026-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-01'
+input-file:
+  - Microsoft.Security/stable/2026-01-01/privateLinks.json
+```
+
 ### Tag: package-preview-2025-11-01-preview
 
 These settings apply only when `--tag=package-preview-2025-11-01-preview` is specified on the command line.
