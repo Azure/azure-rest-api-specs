@@ -11,6 +11,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "../Common.Management/legacy.tsp";
 import "../Common.Management/operations.tsp";
 import "../Common.Management/models-ref.tsp";
+import "../ComputeCommon.Management/models.tsp";
 import "./models.tsp";
 import "./Disk.tsp";
 import "./DiskAccess.tsp";

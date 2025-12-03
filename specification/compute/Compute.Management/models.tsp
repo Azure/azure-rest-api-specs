@@ -3,6 +3,7 @@ import "@typespec/http";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "../ComputeCommon.Management/models.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -515,17 +516,6 @@ union OrchestrationServiceOperationStatus {
    * Completed orchestration service operation status.
    */
   Completed: "Completed",
-}
-
-/**
- * The hypervisor generation of the Virtual Machine [V1, V2]
- */
-union HyperVGeneration {
-  string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  V1: "V1",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  V2: "V2",
 }
 
 /**
@@ -1245,39 +1235,6 @@ union RestorePointExpandOptions {
   instanceView: "instanceView",
 }
 
-/**
- * The state of snapshot which determines the access availability of the snapshot.
- */
-@added(Versions.v2025_04_01)
-union SnapshotAccessState {
-  string,
-
-  /**
-   * Default value.
-   */
-  Unknown: "Unknown",
-
-  /**
-   * The snapshot cannot be used for restore, copy or download to offline.
-   */
-  Pending: "Pending",
-
-  /**
-   * The snapshot can be used for restore, copy to different region, and download to offline.
-   */
-  Available: "Available",
-
-  /**
-   * The snapshot can be used for restoring disks with fast performance but cannot be copied or downloaded.
-   */
-  InstantAccess: "InstantAccess",
-
-  /**
-   * The snapshot can be used for restoring disks with fast performance, copied and downloaded.
-   */
-  AvailableWithInstantAccess: "AvailableWithInstantAccess",
-}
-
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 union ExpandTypesForGetCapacityReservationGroups {
   string,
@@ -1398,15 +1355,6 @@ enum CachingTypes {
   None,
   ReadOnly,
   ReadWrite,
-}
-
-/**
- * This property allows you to specify the type of the OS that is included in the disk if creating a VM from user-image or a specialized VHD. Possible values are: **Windows,** **Linux.**
- */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
-enum OperatingSystemTypes {
-  Windows,
-  Linux,
 }
 
 /**
@@ -3566,21 +3514,6 @@ model VirtualMachineScaleSetIdentity {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   userAssignedIdentities?: Record<UserAssignedIdentitiesValue>;
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-model UserAssignedIdentitiesValue {
-  /**
-   * The principal id of user assigned identity.
-   */
-  @visibility(Lifecycle.Read)
-  principalId?: string;
-
-  /**
-   * The client id of user assigned identity.
-   */
-  @visibility(Lifecycle.Read)
-  clientId?: string;
 }
 
 /**
