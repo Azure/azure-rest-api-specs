@@ -2363,7 +2363,7 @@
         "tags": [
           "Policies"
         ],
-        "description": "Activates or renews a BYOR policy by accepting a customer-provided signed certificate. This is a long-running operation that returns no content upon completion.",
+        "description": "Activates or renews a Bring Your Own Root policy by accepting a customer-provided signed certificate. This is a long-running operation that returns no content upon completion.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -4642,7 +4642,7 @@
   "definitions": {
     "ActivateBringYourOwnRootRequest": {
       "type": "object",
-      "description": "Request payload for activating a BYOR policy with a customer-provided signed certificate.",
+      "description": "Request payload for activating a Bring Your Own Root policy with a customer-provided signed certificate.",
       "properties": {
         "certificateChain": {
           "type": "string",
@@ -5379,11 +5379,11 @@
     },
     "BringYourOwnRoot": {
       "type": "object",
-      "description": "Configuration for Bring Your Own Root (BYOR). When enabled, customers provide their own CA-signed certificates instead of using the service-managed CA.",
+      "description": "Configuration for Bring Your Own Root. When enabled, customers provide their own CA-signed certificates instead of using the service-managed CA.",
       "properties": {
         "enabled": {
           "type": "boolean",
-          "description": "Indicates whether BYOR is enabled. This can only be set at creation time and cannot be changed afterward.",
+          "description": "Indicates whether Bring Your Own Root is enabled. This can only be set at creation time and cannot be changed afterward.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -5401,7 +5401,7 @@
         },
         "status": {
           "$ref": "#/definitions/BringYourOwnRootStatus",
-          "description": "The status of the BYOR configuration, indicating the current state of the certificate lifecycle.",
+          "description": "The status of the Bring Your Own Root configuration, indicating the current state of the certificate lifecycle.",
           "readOnly": true
         }
       },
@@ -5411,7 +5411,7 @@
     },
     "BringYourOwnRootStatus": {
       "type": "string",
-      "description": "Status of the Bring Your Own Root (BYOR) configuration.",
+      "description": "Status of the Bring Your Own Root configuration.",
       "enum": [
         "PendingActivation",
         "Active",
@@ -5441,7 +5441,7 @@
     },
     "BringYourOwnRootUpdate": {
       "type": "object",
-      "description": "Configuration for Bring Your Own Root (BYOR). When enabled, customers provide their own CA-signed certificates instead of using the service-managed CA."
+      "description": "Configuration for Bring Your Own Root. When enabled, customers provide their own CA-signed certificates instead of using the service-managed CA."
     },
     "BrokerStateStoreDestinationConfiguration": {
       "type": "object",
@@ -5487,7 +5487,7 @@
         },
         "bringYourOwnRoot": {
           "$ref": "#/definitions/BringYourOwnRoot",
-          "description": "Configuration for Bring Your Own Root (BYOR)."
+          "description": "Configuration for Bring Your Own Root."
         }
       },
       "required": [
@@ -5500,7 +5500,7 @@
       "properties": {
         "bringYourOwnRoot": {
           "$ref": "#/definitions/BringYourOwnRootUpdate",
-          "description": "Configuration for Bring Your Own Root (BYOR)."
+          "description": "Configuration for Bring Your Own Root."
         }
       }
     },
