@@ -602,23 +602,6 @@ namespace PurviewDataQuality {
   >;
 
   /**
-   * Deletes a specific observation.
-   */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Need to specify long-running operation extensions for 202 responses"
-  @delete
-  @tag("DQ Assessment Observations")
-  @extension("x-ms-long-running-operation", true)
-  @extension(
-    "x-ms-examples",
-    #{ Observation_Delete: #{ $ref: "./examples/Observation_Delete.json" } }
-  )
-  @doc("Deletes a specific observation associated with a data asset.")
-  op deleteObservation is DataQualityOperation.ResourceDelete<ObservationAssetMetadata>;
-
-  /**
    * Retrieves all data source connections for a given business domain.
    *
    * This operation returns a paginated list of data source configurations,
@@ -1018,19 +1001,6 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" ""
-  @tag("Profiles")
-  @doc("Deletes a specific profile run for a given data asset within a business domain.")
-  @extension(
-    "x-ms-examples",
-    #{ Profile_Delete: #{ $ref: "./examples/Profile_Delete.json" } }
-  )
-  @delete
-  op deleteProfileRun is DataQualityOperation.ResourceDelete<ProfileRun>;
-
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Multiple path parameters are required for this nested resource operation."
   @tag("JobRunMonitoring")
   @doc("Retrieves all runs associated with a specific scan under a given schedule.")
@@ -1194,11 +1164,7 @@ namespace PurviewDataQuality {
   @route("/bulk-asset-metadata")
   @put
   op createBulkAssetMetadata is RpcOperation<
-    {
-      @doc("Bulk asset metadata to insert")
-      @bodyRoot
-      request: BulkAssetMetadataRequestResponse;
-    },
+    BulkAssetMetadataCreateRequest,
     {
       @statusCode
       statusCode: 201;

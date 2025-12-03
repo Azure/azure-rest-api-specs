@@ -145,13 +145,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "request",
-            "in": "body",
-            "description": "Bulk asset metadata to insert",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/BulkAssetMetadataRequestResponse"
-            }
+            "$ref": "#/parameters/BulkAssetMetadataCreateRequest"
           }
         ],
         "responses": {
@@ -319,135 +313,6 @@
           }
         },
         "x-ms-long-running-operation": true
-      }
-    },
-    "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/observations/{observationId}": {
-      "delete": {
-        "operationId": "DeleteObservation",
-        "tags": [
-          "DQ Assessment Observations"
-        ],
-        "description": "Deletes a specific observation associated with a data asset.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "businessDomainId",
-            "in": "path",
-            "description": "Unique identifier for the business domain",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "dataProductId",
-            "in": "path",
-            "description": "Unique identifier for the data product",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "dataAssetId",
-            "in": "path",
-            "description": "Unique identifier for the data asset",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "observationId",
-            "in": "path",
-            "description": "Unique identifier for the observation metadata",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Observation_Delete": {
-            "$ref": "./examples/Observation_Delete.json"
-          }
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/profiles/{profileRunId}": {
-      "delete": {
-        "operationId": "DeleteProfileRun",
-        "tags": [
-          "Profiles"
-        ],
-        "description": "Deletes a specific profile run for a given data asset within a business domain.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "businessDomainId",
-            "in": "path",
-            "description": "Unique identifier for the business domain",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "dataProductId",
-            "in": "path",
-            "description": "Unique identifier for the data product",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "dataAssetId",
-            "in": "path",
-            "description": "Unique identifier for the data asset",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "profileRunId",
-            "in": "path",
-            "description": "Unique identifier for the profile run execution",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Profile_Delete": {
-            "$ref": "./examples/Profile_Delete.json"
-          }
-        }
       }
     },
     "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/rule-opinions/{ruleId}": {
@@ -4824,6 +4689,19 @@
       "minLength": 1,
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "apiVersion"
+    },
+    "BulkAssetMetadataCreateRequest": {
+      "name": "items",
+      "in": "body",
+      "description": "Array of bulk asset metadata entries (up to 10 per request)",
+      "required": true,
+      "schema": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/BulkAssetMetadataEntry"
+        }
+      },
+      "x-ms-parameter-location": "method"
     }
   }
 }

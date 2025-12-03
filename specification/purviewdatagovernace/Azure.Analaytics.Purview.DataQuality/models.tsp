@@ -3559,3 +3559,17 @@ model BulkAssetMetadataRequest {
   @doc("Array of metadata entries to insert")
   metadata: BulkAssetMetadataEntry[];
 }
+
+/**
+ * Request model for bulk asset metadata PUT operations.
+ * The request body is a direct array of bulk asset metadata entries.
+ */
+model BulkAssetMetadataCreateRequest {
+  /**
+   * Array of bulk asset metadata entries (up to 10 per request)
+   */
+  #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Container model for array with future extensibility"
+  @doc("Array of bulk asset metadata entries (up to 10 per request)")
+  @bodyRoot
+  items: BulkAssetMetadataEntry[];
+}
