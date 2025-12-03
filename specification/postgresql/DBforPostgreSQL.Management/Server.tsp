@@ -34,6 +34,12 @@ model Server is Azure.ResourceManager.TrackedResource<ServerProperties> {
   identity?: UserAssignedIdentity;
 }
 
+alias RequestIdResponseHeader = {
+  @header("x-ms-request-id")
+  @doc("A unique ID for the current operation, service generated. All the resource providers must return this value in the response headers to facilitate debugging.")
+  requestId?: string;
+};
+
 @armResourceOperations
 interface Servers {
   /**
@@ -116,11 +122,7 @@ interface Servers {
   checkPrerequisites is ArmResourceActionAsyncBase<
     Server,
     LtrPreBackupRequest,
-    Response = LtrPreBackupResponse & {
-      @header("x-ms-request-id")
-      @doc("A unique ID for the current operation, service generated. All the resource providers must return this value in the response headers to facilitate debugging.")
-      requestId?: string;
-    },
+    Response = LtrPreBackupResponse & RequestIdResponseHeader,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Server>,
     Error = CustomErrorResponse
   >;
@@ -132,16 +134,10 @@ interface Servers {
   start is ArmResourceActionAsyncBase<
     Server,
     BackupsLongTermRetentionRequest,
-    (BackupsLongTermRetentionResponse & {
-      @header("x-ms-request-id")
-      @doc("A unique ID for the current operation, service generated. All the resource providers must return this value in the response headers to facilitate debugging.")
-      requestId?: string;
-    }) | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = BackupsLongTermRetentionResponse> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @header("x-ms-request-id")
-      @doc("A unique ID for the current operation, service generated. All the resource providers must return this value in the response headers to facilitate debugging.")
-      requestId?: string;
-    }),
+    (BackupsLongTermRetentionResponse &
+      RequestIdResponseHeader) | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = BackupsLongTermRetentionResponse> &
+      Azure.Core.Foundations.RetryAfterHeader> &
+      RequestIdResponseHeader),
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Server>,
     Error = CustomErrorResponse
   >;

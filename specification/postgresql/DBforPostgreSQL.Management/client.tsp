@@ -16,3 +16,17 @@ using Azure.ClientGenerator.Core;
 @@clientName(PostgresMajorVersion.`16`, "SIXTEEN", "python");
 @@clientName(PostgresMajorVersion.`17`, "SEVENTEEN", "python");
 @@clientName(PostgresMajorVersion.`18`, "EIGHTEEN", "python");
+
+@@clientName(Microsoft.DBforPostgreSQL.ServerProperties.pointInTimeUTC,
+  "pointInTimeUtc",
+  "java"
+);
+@@clientName(Microsoft.DBforPostgreSQL.DataEncryption.primaryKeyURI,
+  "primaryKeyUri",
+  "java"
+);
+@@clientName(Microsoft.DBforPostgreSQL.DataEncryption.geoBackupKeyURI,
+  "geoBackupKeyUri",
+  "java"
+);
+@@clientName(RequestIdResponseHeader.requestId, "xMsRequestId", "java");
