@@ -903,7 +903,7 @@ interface Blob {
     {
       ...TimeoutParameter;
     },
-    DateResponseHeader
+    DateResponseHeaderPrivate
   >;
 
   /** Set the expiration time of a blob */
