@@ -43,19 +43,19 @@ class DifferenceType(Enum):
     """Types of differences that can be detected."""
 
     # Path-level differences
-    MISSING_PATH = "missing_path"
-    EXTRA_PATH = "extra_path"
+    MISSING_PATH = "missing_path_in_tsp"
+    EXTRA_PATH = "extra_path_in_tsp"
 
     # Method-level differences
-    MISSING_METHOD = "missing_method"
-    EXTRA_METHOD = "extra_method"
+    MISSING_METHOD = "missing_method_in_tsp"
+    EXTRA_METHOD = "extra_method_in_tsp"
 
     # Operation-level differences
     OPERATION_ID_MISMATCH = "operation_id_mismatch"
     PATH_INCONSISTENCY = "path_inconsistency"
     OPERATION_ID_INCONSISTENCY = "operation_id_inconsistency"
-    MISSING_PARAMETER = "missing_parameter"
-    EXTRA_PARAMETER = "extra_parameter"
+    MISSING_PARAMETER = "missing_parameter_in_tsp"
+    EXTRA_PARAMETER = "extra_parameter_in_tsp"
     PARAMETER_MISMATCH = "parameter_mismatch"
     PARAMETER_MISMATCH_NAME_CASE = "parameter_mismatch_name_case"
     REQUEST_BODY_MISMATCH = "request_body_mismatch"
@@ -63,15 +63,19 @@ class DifferenceType(Enum):
     PRODUCES_MISMATCH = "produces_mismatch"
 
     # Response-level differences
-    MISSING_RESPONSE = "missing_response"
-    EXTRA_RESPONSE = "extra_response"
+    MISSING_RESPONSE = "missing_response_in_tsp"
+    EXTRA_RESPONSE = "extra_response_in_tsp"
     RESPONSE_SCHEMA_MISMATCH = "response_schema_mismatch"
     RESPONSE_HEADERS_MISMATCH = "response_headers_mismatch"
 
     # Definition-level differences
-    MISSING_DEFINITION = "missing_definition"
-    EXTRA_DEFINITION = "extra_definition"
+    MISSING_DEFINITION = "missing_definition_in_tsp"
+    EXTRA_DEFINITION = "extra_definition_in_tsp"
     DEFINITION_MISMATCH = "definition_mismatch"
+    UNREFERENCED_DEFINITION_IN_HAND_AUTHORED = (
+        "unreferenced_definition_in_hand_authored"
+    )
+    UNREFERENCED_DEFINITION_IN_TSP = "unreferenced_definition_in_tsp"
 
     # Schema-level differences
     SCHEMA_TYPE_MISMATCH = "schema_type_mismatch"
@@ -99,11 +103,11 @@ class DifferenceType(Enum):
     EXTERNAL_DOCS_MISMATCH = "external_docs_mismatch"
 
     # Global parameter and response differences
-    MISSING_GLOBAL_PARAMETER = "missing_global_parameter"
-    EXTRA_GLOBAL_PARAMETER = "extra_global_parameter"
+    MISSING_GLOBAL_PARAMETER = "missing_global_parameter_in_tsp"
+    EXTRA_GLOBAL_PARAMETER = "extra_global_parameter_in_tsp"
     GLOBAL_PARAMETER_MISMATCH = "global_parameter_mismatch"
-    MISSING_GLOBAL_RESPONSE = "missing_global_response"
-    EXTRA_GLOBAL_RESPONSE = "extra_global_response"
+    MISSING_GLOBAL_RESPONSE = "missing_global_response_in_tsp"
+    EXTRA_GLOBAL_RESPONSE = "extra_global_response_in_tsp"
     GLOBAL_RESPONSE_MISMATCH = "global_response_mismatch"
 
 
@@ -154,6 +158,8 @@ class ApiComparator:
         Initialize the comparator.
         """
         self.differences: List[Difference] = []
+        self.api1: Optional[CanonicalApi] = None
+        self.api2: Optional[CanonicalApi] = None
 
     def compare_apis(self, api1: CanonicalApi, api2: CanonicalApi) -> EquivalencyResult:
         """
@@ -167,6 +173,8 @@ class ApiComparator:
             EquivalencyResult indicating whether APIs are equivalent
         """
         self.differences = []
+        self.api1 = api1
+        self.api2 = api2
 
         # According to equiv_contract.md and the expanded CanonicalApi model,
         # we check the following dimensions:
@@ -892,7 +900,14 @@ class ApiComparator:
             missing_defs, extra_defs, api1, api2
         )
 
-        # Promote high-confidence matches to compare instead of reporting as missing/extra
+        # Remove ALL potential matches from missing/extra to avoid duplicates
+        # Even if they're not promoted for comparison, they should not be reported as missing/extra
+        for match in potential_matches:
+            missing_def, extra_def, similarity = match
+            missing_defs.discard(missing_def)
+            extra_defs.discard(extra_def)
+
+        # Promote high-confidence matches to compare instead of just hinting
         promoted_def_matches = []
         for match in potential_matches:
             missing_def, extra_def, similarity = match
@@ -907,10 +922,8 @@ class ApiComparator:
         ]
 
         # Context format: operation_id || path_method || context_suffix || possible_match
-        # Remove promoted matches and compare them
+        # Compare promoted matches
         for missing_def, extra_def in promoted_def_matches:
-            missing_defs.discard(missing_def)
-            extra_defs.discard(extra_def)
             print(f"Potential definition match\t {missing_def} vs {extra_def}")
             # Compare the matched definitions
             schema1 = api1.definitions[missing_def]
@@ -939,15 +952,33 @@ class ApiComparator:
             matches = [match for match in potential_matches if match[0] == def_name]
             possible_match = matches[0][1] if matches else ""
 
+            # Find where this definition is referenced in hand-authored (its source)
+            references = self._find_definition_references(def_name, api1)
+            if references:
+                ref_info = f" (ref in hand-authored: {', '.join(references[:5])})"
+                diff_type = DifferenceType.MISSING_DEFINITION
+            else:
+                ref_info = " (no ref in hand-authored)"
+                # Add an additional difference for unreferenced definition
+                diff_type = DifferenceType.MISSING_DEFINITION
+                self.differences.append(
+                    Difference(
+                        type=DifferenceType.UNREFERENCED_DEFINITION_IN_HAND_AUTHORED,
+                        message=f"Unreferenced definition in hand-authored: {def_name}",
+                        context=f" || {def_name} || ||{possible_match}",
+                    )
+                )
+                print(f"Unreferenced definition in hand-authored\t {def_name}")
+
             self.differences.append(
                 Difference(
-                    type=DifferenceType.MISSING_DEFINITION,
-                    message=f"Definition missing in {api2.swagger_source} : {def_name}",
+                    type=diff_type,
+                    message=f"Definition missing in {api2.swagger_source} : {def_name}{ref_info}",
                     context=f" || {def_name} ||  || {possible_match}",
                 )
             )
             print(
-                f"Definition missing in {api2.swagger_source} \t {def_name}"
+                f"Definition missing in {api2.swagger_source} \t {def_name}{ref_info}"
                 + (f"\t|| Possible Match: {possible_match}" if possible_match else "")
             )
 
@@ -956,15 +987,33 @@ class ApiComparator:
             matches = [match for match in potential_matches if match[1] == def_name]
             possible_match = matches[0][0] if matches else ""
 
+            # Find where this definition is referenced in TSP (its source)
+            references = self._find_definition_references(def_name, api2)
+            if references:
+                ref_info = f" (ref in tsp: {', '.join(references[:5])})"
+                diff_type = DifferenceType.EXTRA_DEFINITION
+            else:
+                ref_info = " (no ref in tsp)"
+                # Add an additional difference for unreferenced definition
+                diff_type = DifferenceType.EXTRA_DEFINITION
+                self.differences.append(
+                    Difference(
+                        type=DifferenceType.UNREFERENCED_DEFINITION_IN_TSP,
+                        message=f"Unreferenced definition in tsp: {def_name}",
+                        context=f" || {def_name} || ||{possible_match}",
+                    )
+                )
+                print(f"Unreferenced definition in tsp\t {def_name}")
+
             self.differences.append(
                 Difference(
-                    type=DifferenceType.EXTRA_DEFINITION,
-                    message=f"Extra definition in {api2.swagger_source}: {def_name}",
+                    type=diff_type,
+                    message=f"Extra definition in {api2.swagger_source}: {def_name}{ref_info}",
                     context=f" || {def_name} ||  || {possible_match}",
                 )
             )
             print(
-                f"Extra definition in {api2.swagger_source} \t {def_name}"
+                f"Extra definition in {api2.swagger_source} \t {def_name}{ref_info}"
                 + (f"\t|| Possible Match: {possible_match}" if possible_match else "")
             )
 
@@ -981,9 +1030,45 @@ class ApiComparator:
                     if schema_diffs
                     else "unknown differences"
                 )
-                message = (
-                    f"Definition '{def_name}' has schema differences:{diff_details}"
-                )
+
+                # Find where this definition is referenced in both APIs
+                refs1 = self._find_definition_references(def_name, api1)
+                refs2 = self._find_definition_references(def_name, api2)
+                ref_info = ""
+                console_ref_info = ""
+
+                # Track unreferenced common definitions
+                if not refs1 and not refs2:
+                    self.differences.append(
+                        Difference(
+                            type=DifferenceType.UNREFERENCED_DEFINITION_IN_HAND_AUTHORED,
+                            message=f"Unreferenced definition in hand-authored: {def_name}",
+                            context=f" || {def_name} || ||",
+                        )
+                    )
+                    self.differences.append(
+                        Difference(
+                            type=DifferenceType.UNREFERENCED_DEFINITION_IN_TSP,
+                            message=f"Unreferenced definition in tsp: {def_name}",
+                            context=f" || {def_name} || ||",
+                        )
+                    )
+                    console_ref_info = " (no ref in hand-authored or tsp)"
+                    ref_info = " (no ref in hand-authored or tsp)"
+                elif refs1 or refs2:
+                    ref_parts = []
+                    if refs1:
+                        ref_parts.append(f"hand-authored: {', '.join(refs1[:3])}")
+                    else:
+                        ref_parts.append("no ref in hand-authored")
+                    if refs2:
+                        ref_parts.append(f"tsp: {', '.join(refs2[:3])}")
+                    else:
+                        ref_parts.append("no ref in tsp")
+                    ref_info = f" (ref in {'; '.join(ref_parts)})"
+                    console_ref_info = f" {ref_info}"
+
+                message = f"Definition '{def_name}' has schema differences:{diff_details}{ref_info}"
 
                 self.differences.append(
                     Difference(
@@ -992,12 +1077,24 @@ class ApiComparator:
                         context=f" || {def_name} ||  || ",
                     )
                 )
-                print(f"Definition schemas mismatch \t {def_name}\n{diff_details}")
+                print(
+                    f"Definition schemas mismatch \t {def_name}{console_ref_info}\n{diff_details}"
+                )
 
     def _get_schema_differences(
-        self, schema1: Optional[CanonicalSchema], schema2: Optional[CanonicalSchema]
+        self,
+        schema1: Optional[CanonicalSchema],
+        schema2: Optional[CanonicalSchema],
+        check_inline_vs_ref: bool = True,
     ) -> List[str]:
-        """Get list of specific schema differences."""
+        """Get list of specific schema differences.
+
+        Args:
+            schema1: First schema to compare
+            schema2: Second schema to compare
+            check_inline_vs_ref: If True, check for inline vs ref patterns and resolve them.
+                                 Set to False to prevent infinite recursion when comparing resolved schemas.
+        """
         if schema1 is None and schema2 is None:
             return []
         if schema1 is None:
@@ -1007,15 +1104,28 @@ class ApiComparator:
 
         differences = []
 
+        # Check for inline vs ref pattern (one has ref, other is inline)
+        inline_vs_ref_info = None
+        if check_inline_vs_ref:
+            inline_vs_ref_info = self._check_inline_vs_ref(schema1, schema2)
+            if inline_vs_ref_info:
+                differences.append(inline_vs_ref_info)
+                # If it's a benign inline vs ref difference, we might not add other differences
+                # But we should still check if the content differs
+
         # Core schema fields
         if schema1.type != schema2.type:
-            differences.append(f"type: {schema1.type} vs {schema2.type}")
+            # Don't report type difference if it's explained by inline vs ref
+            if not inline_vs_ref_info:
+                differences.append(f"type: {schema1.type} vs {schema2.type}")
         if schema1.format != schema2.format:
             differences.append(f"format: {schema1.format} vs {schema2.format}")
         if schema1.ref != schema2.ref:
-            differences.append(f"ref: {schema1.ref} vs {schema2.ref}")
-
-        # Object schema differences
+            # Don't report ref difference if it's explained by inline vs ref
+            if not inline_vs_ref_info:
+                differences.append(
+                    f"ref: {schema1.ref} vs {schema2.ref}"
+                )  # Object schema differences
         if not self._object_schemas_equal(schema1, schema2):
             props1 = schema1.properties or {}
             props2 = schema2.properties or {}
@@ -1058,8 +1168,15 @@ class ApiComparator:
                     )
 
             if schema1.additional_properties != schema2.additional_properties:
+                # Format additionalProperties in a readable way
+                add_props1_str = self._format_additional_properties(
+                    schema1.additional_properties
+                )
+                add_props2_str = self._format_additional_properties(
+                    schema2.additional_properties
+                )
                 differences.append(
-                    f"additionalProperties: {schema1.additional_properties} vs {schema2.additional_properties}"
+                    f"additionalProperties: {add_props1_str} vs {add_props2_str}"
                 )
 
         # Array schema differences
@@ -1078,18 +1195,223 @@ class ApiComparator:
 
         # Composed schema differences
         if not self._composed_schemas_equal(schema1, schema2):
-            if (schema1.all_of is None) != (schema2.all_of is None):
-                differences.append(
-                    f"allOf: {schema1.all_of is not None} vs {schema2.all_of is not None}"
+            composed_diffs = self._get_composed_schema_differences(schema1, schema2)
+            differences.extend(composed_diffs)
+
+        return differences
+
+    def _resolve_schema_ref(
+        self, schema: CanonicalSchema, api: CanonicalApi
+    ) -> Optional[CanonicalSchema]:
+        """Resolve a schema reference to its actual definition.
+
+        Args:
+            schema: Schema that may contain a $ref
+            api: API containing the definitions
+
+        Returns:
+            The resolved schema if ref exists, otherwise the original schema
+        """
+        if schema.ref and schema.ref.startswith("#/definitions/"):
+            def_name = schema.ref.split("/")[-1]
+            if def_name in api.definitions:
+                return api.definitions[def_name]
+        return schema
+
+    def _format_additional_properties(self, add_props) -> str:
+        """Format additionalProperties for readable display."""
+        if add_props is None:
+            return "None"
+        if isinstance(add_props, bool):
+            return str(add_props)
+        if hasattr(add_props, "type") and hasattr(add_props, "ref"):
+            # It's a CanonicalSchema
+            if add_props.ref:
+                ref_name = (
+                    add_props.ref.split("/")[-1]
+                    if "/" in add_props.ref
+                    else add_props.ref
                 )
-            if (schema1.one_of is None) != (schema2.one_of is None):
-                differences.append(
-                    f"oneOf: {schema1.one_of is not None} vs {schema2.one_of is not None}"
+                return f"{{$ref: {ref_name}}}"
+            elif add_props.type:
+                return f"{{type: {add_props.type}}}"
+            else:
+                return "{schema}"
+        return str(add_props)
+
+    def _check_inline_vs_ref(
+        self, schema1: CanonicalSchema, schema2: CanonicalSchema
+    ) -> Optional[str]:
+        """Check if schemas differ in inline vs ref representation, and compare the actual schemas.
+
+        Returns a description of the difference after resolving refs, or None if schemas are equivalent.
+        """
+        # Pattern 1: schema1 has ref, schema2 is inline
+        if schema1.ref and not schema2.ref and schema2.type and self.api1:
+            ref_name = schema1.ref.split("/")[-1] if "/" in schema1.ref else schema1.ref
+            resolved1 = self._resolve_schema_ref(schema1, self.api1)
+            # Compare resolved schema with inline schema
+            if self._schemas_equal(resolved1, schema2):
+                # They're equivalent - just different representation
+                return None  # Don't report equivalent schemas
+            else:
+                # They differ - report the actual differences
+                actual_diffs = self._get_schema_differences(
+                    resolved1, schema2, check_inline_vs_ref=False
                 )
-            if (schema1.any_of is None) != (schema2.any_of is None):
-                differences.append(
-                    f"anyOf: {schema1.any_of is not None} vs {schema2.any_of is not None}"
+                if actual_diffs:
+                    return f"inline vs ref: hand-authored uses ref '{ref_name}', tsp defines inline {schema2.type}. Actual differences: {'; '.join(actual_diffs)}"
+                return f"inline vs ref: hand-authored uses ref '{ref_name}', tsp defines inline {schema2.type}"
+
+        # Pattern 2: schema2 has ref, schema1 is inline
+        if schema2.ref and not schema1.ref and schema1.type and self.api2:
+            ref_name = schema2.ref.split("/")[-1] if "/" in schema2.ref else schema2.ref
+            resolved2 = self._resolve_schema_ref(schema2, self.api2)
+            # Compare inline schema with resolved schema
+            if self._schemas_equal(schema1, resolved2):
+                # They're equivalent - just different representation
+                return None  # Don't report equivalent schemas
+            else:
+                # They differ - report the actual differences
+                actual_diffs = self._get_schema_differences(
+                    schema1, resolved2, check_inline_vs_ref=False
                 )
+                if actual_diffs:
+                    return f"inline vs ref: hand-authored defines inline {schema1.type}, tsp uses ref '{ref_name}'. Actual differences: {'; '.join(actual_diffs)}"
+                return f"inline vs ref: hand-authored defines inline {schema1.type}, tsp uses ref '{ref_name}'"
+
+        # Pattern 3: Both have refs but different
+        if (
+            schema1.ref
+            and schema2.ref
+            and schema1.ref != schema2.ref
+            and self.api1
+            and self.api2
+        ):
+            ref1_name = (
+                schema1.ref.split("/")[-1] if "/" in schema1.ref else schema1.ref
+            )
+            ref2_name = (
+                schema2.ref.split("/")[-1] if "/" in schema2.ref else schema2.ref
+            )
+            # Resolve both refs and compare
+            resolved1 = self._resolve_schema_ref(schema1, self.api1)
+            resolved2 = self._resolve_schema_ref(schema2, self.api2)
+            if self._schemas_equal(resolved1, resolved2):
+                return None  # Don't report equivalent schemas
+            else:
+                actual_diffs = self._get_schema_differences(
+                    resolved1, resolved2, check_inline_vs_ref=False
+                )
+                if actual_diffs:
+                    return f"different refs: hand-authored uses '{ref1_name}', tsp uses '{ref2_name}'. Actual differences: {'; '.join(actual_diffs)}"
+                return f"different refs: hand-authored uses '{ref1_name}', tsp uses '{ref2_name}'"
+
+        # Pattern 4: Type mismatch where one is None (has ref) and other has type
+        if (
+            schema1.type is None
+            and schema2.type is not None
+            and schema1.ref
+            and self.api1
+        ):
+            ref_name = schema1.ref.split("/")[-1] if "/" in schema1.ref else schema1.ref
+            resolved1 = self._resolve_schema_ref(schema1, self.api1)
+            if self._schemas_equal(resolved1, schema2):
+                return None  # Don't report equivalent schemas
+            else:
+                actual_diffs = self._get_schema_differences(
+                    resolved1, schema2, check_inline_vs_ref=False
+                )
+                if actual_diffs:
+                    return f"inline vs ref: hand-authored uses ref '{ref_name}', tsp defines inline {schema2.type}. Actual differences: {'; '.join(actual_diffs)}"
+                return f"inline vs ref: hand-authored uses ref '{ref_name}', tsp defines inline {schema2.type}"
+
+        if (
+            schema2.type is None
+            and schema1.type is not None
+            and schema2.ref
+            and self.api2
+        ):
+            ref_name = schema2.ref.split("/")[-1] if "/" in schema2.ref else schema2.ref
+            resolved2 = self._resolve_schema_ref(schema2, self.api2)
+            if self._schemas_equal(schema1, resolved2):
+                return None  # Don't report equivalent schemas
+            else:
+                actual_diffs = self._get_schema_differences(
+                    schema1, resolved2, check_inline_vs_ref=False
+                )
+                if actual_diffs:
+                    return f"inline vs ref: hand-authored defines inline {schema1.type}, tsp uses ref '{ref_name}'. Actual differences: {'; '.join(actual_diffs)}"
+                return f"inline vs ref: hand-authored defines inline {schema1.type}, tsp uses ref '{ref_name}'"
+
+        return None
+
+    def _get_composed_schema_differences(
+        self, schema1: CanonicalSchema, schema2: CanonicalSchema
+    ) -> List[str]:
+        """Get detailed differences in composed schemas (allOf, oneOf, anyOf)."""
+        differences = []
+
+        # Check allOf differences
+        if not self._schema_lists_equal(schema1.all_of, schema2.all_of):
+            allof_diffs = self._get_schema_list_differences(
+                schema1.all_of, schema2.all_of, "allOf"
+            )
+            differences.extend(allof_diffs)
+
+        # Check oneOf differences
+        if not self._schema_lists_equal(schema1.one_of, schema2.one_of):
+            oneof_diffs = self._get_schema_list_differences(
+                schema1.one_of, schema2.one_of, "oneOf"
+            )
+            differences.extend(oneof_diffs)
+
+        # Check anyOf differences
+        if not self._schema_lists_equal(schema1.any_of, schema2.any_of):
+            anyof_diffs = self._get_schema_list_differences(
+                schema1.any_of, schema2.any_of, "anyOf"
+            )
+            differences.extend(anyof_diffs)
+
+        return differences
+
+    def _get_schema_list_differences(
+        self,
+        list1: Optional[List[CanonicalSchema]],
+        list2: Optional[List[CanonicalSchema]],
+        list_name: str,
+    ) -> List[str]:
+        """Get differences between two lists of schemas."""
+        differences = []
+
+        if list1 is None and list2 is None:
+            return differences
+        if list1 is None:
+            differences.append(
+                f"{list_name}: missing in first spec (has {len(list2)} items)"
+            )
+            return differences
+        if list2 is None:
+            differences.append(
+                f"{list_name}: missing in second spec (has {len(list1)} items)"
+            )
+            return differences
+
+        if len(list1) != len(list2):
+            differences.append(
+                f"{list_name}: different counts ({len(list1)} vs {len(list2)})"
+            )
+            # Still try to compare common schemas
+            min_len = min(len(list1), len(list2))
+        else:
+            min_len = len(list1)
+
+        # Compare each schema in the list
+        for i in range(min_len):
+            if not self._schemas_equal(list1[i], list2[i]):
+                item_diffs = self._get_schema_differences(list1[i], list2[i])
+                if item_diffs:
+                    differences.append(f"{list_name}[{i}]: {'; '.join(item_diffs)}")
 
         return differences
 
@@ -2381,7 +2703,7 @@ class ApiComparator:
         from difflib import SequenceMatcher
 
         matches = []
-        threshold = 0.7  # Similarity threshold for potential matches
+        threshold = 0.65  # Similarity threshold for potential matches
         matched_missing = set()
         matched_extra = set()
 
@@ -2443,6 +2765,96 @@ class ApiComparator:
                 matches.append((missing_path, best_match, best_similarity))
 
         return matches
+
+    def _find_definition_references(self, def_name: str, api: Any) -> List[str]:
+        """Find where a definition is referenced in the API."""
+        references = []
+        ref_string = f"#/definitions/{def_name}"
+
+        # Check in other definitions
+        for other_def_name, schema in api.definitions.items():
+            if other_def_name == def_name:
+                continue
+            if self._schema_references_definition(schema, ref_string):
+                references.append(f"definition:{other_def_name}")
+
+        # Check in operations
+        for path_name, path_obj in api.paths.items():
+            for method, operation in path_obj.operations.items():
+                # Check parameters
+                for param in operation.parameters.values():
+                    if param.schema and self._schema_references_definition(
+                        param.schema, ref_string
+                    ):
+                        references.append(
+                            f"operation:{operation.operation_id}:param:{param.name}"
+                        )
+
+                # Check request body
+                if operation.request_body_schema and self._schema_references_definition(
+                    operation.request_body_schema, ref_string
+                ):
+                    references.append(f"operation:{operation.operation_id}:requestBody")
+
+                # Check responses
+                for status_code, response in operation.responses.items():
+                    if response.schema and self._schema_references_definition(
+                        response.schema, ref_string
+                    ):
+                        references.append(
+                            f"operation:{operation.operation_id}:response:{status_code}"
+                        )
+
+        # Limit to first 5 references to keep output manageable
+        return references[:5]
+
+    def _schema_references_definition(
+        self, schema: Optional[Any], ref_string: str
+    ) -> bool:
+        """Check if a schema references a specific definition."""
+        if schema is None:
+            return False
+
+        # Direct reference
+        if hasattr(schema, "ref") and schema.ref == ref_string:
+            return True
+
+        # Check properties
+        if hasattr(schema, "properties") and schema.properties:
+            for prop_schema in schema.properties.values():
+                if self._schema_references_definition(prop_schema, ref_string):
+                    return True
+
+        # Check items (for arrays)
+        if hasattr(schema, "items") and schema.items:
+            if self._schema_references_definition(schema.items, ref_string):
+                return True
+
+        # Check composed schemas
+        if hasattr(schema, "all_of") and schema.all_of:
+            for sub_schema in schema.all_of:
+                if self._schema_references_definition(sub_schema, ref_string):
+                    return True
+
+        if hasattr(schema, "one_of") and schema.one_of:
+            for sub_schema in schema.one_of:
+                if self._schema_references_definition(sub_schema, ref_string):
+                    return True
+
+        if hasattr(schema, "any_of") and schema.any_of:
+            for sub_schema in schema.any_of:
+                if self._schema_references_definition(sub_schema, ref_string):
+                    return True
+
+        # Check additional_properties
+        if hasattr(schema, "additional_properties") and schema.additional_properties:
+            if isinstance(schema.additional_properties, type(schema)):
+                if self._schema_references_definition(
+                    schema.additional_properties, ref_string
+                ):
+                    return True
+
+        return False
 
     def _find_parameter_name_case_mismatches(
         self, missing_keys, extra_keys, params1, params2
