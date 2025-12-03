@@ -163,8 +163,11 @@ interface ContainerRegistry {
       name: string;
     },
     {
+      /** The repository is deleted */
       @statusCode statusCode: 202;
-      @bodyRoot body: DeleteRepositoryResult;
+    } | {
+      /** The repository was not found */
+      @statusCode statusCode: 404;
     }
   >;
 
