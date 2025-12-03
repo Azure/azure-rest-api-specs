@@ -1,5 +1,5 @@
 import { defineConfig } from "eslint/config";
-import baseConfig from "./shared/eslint.config.js";
+import baseConfig from "./shared/eslint.base.config.js";
 
 /** @type {import('eslint').Linter.Config[]} */
 export default defineConfig(baseConfig, {
