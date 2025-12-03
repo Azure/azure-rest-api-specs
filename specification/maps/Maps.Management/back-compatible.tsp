@@ -33,7 +33,7 @@ using TypeSpec.OpenAPI;
 
 @@clientLocation(OperationStatusOperationGroup.get, "OperationStatus");
 
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@operationId(Operations.list, "Maps_ListOperations");
 @@doc(Operations.list,
   "List operations available for the Maps Resource Provider"

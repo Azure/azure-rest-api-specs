@@ -17,33 +17,61 @@ namespace Microsoft.Maps;
 model PrivateEndpointConnection is PrivateEndpointConnectionResource;
 alias PrivateEndpointOperations = PrivateEndpoints<PrivateEndpointConnection>;
 
+alias PrivateEndpointConnectionOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** Name of the Maps Account */
+    @path
+    @minLength(1)
+    @segment("accounts")
+    @pattern("^[^%&:\\\\/#?]+$")
+    accountName: string;
+  },
+  {
+    /** Name of the private endpoint connection */
+    @path
+    @minLength(3)
+    @maxLength(98)
+    @pattern("^[^%&:\\\\/#?]+$")
+    @segment("privateEndpointConnections")
+    privateEndpointConnectionName: string;
+  }
+>;
+
 @armResourceOperations
 interface PrivateEndpointConnections {
   /**
    * Gets the specified private endpoint connection associated with the Maps Account.
    */
-  get is PrivateEndpointOperations.Read<MapsAccount, PrivateEndpointConnection>;
+  get is PrivateEndpointConnectionOps.Read<
+    PrivateEndpointConnection,
+    Response = PrivateEndpointConnection
+  >;
 
   /**
    * Create or update the state of specified private endpoint connection associated with the Maps account.
    */
-  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "back-compatible"
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.Core.useFinalStateVia("location")
-  create is PrivateEndpointOperations.CreateOrReplaceAsync<
-    MapsAccount,
+  create is PrivateEndpointConnectionOps.CreateOrUpdateAsync<
     PrivateEndpointConnection,
     Response = PrivateEndpointConnection | ArmCreatedResponse<
       PrivateEndpointConnection,
       ExtraHeaders = ArmAsyncOperationHeader &
         Azure.Core.Foundations.RetryAfterHeader
-    > | ErrorResponse
+    >,
+    OverrideErrorType = ErrorResponse,
+    Request = PrivateEndpointConnection
   >;
 
   /**
    * Deletes the specified private endpoint connection associated with the Maps Account.
    */
-  delete is PrivateEndpointOperations.DeleteAsync<
-    MapsAccount,
+  delete is PrivateEndpointConnectionOps.DeleteWithoutOkAsync<
     PrivateEndpointConnection,
     Response = ArmNoContentResponse<"Resource does not exist."> | ArmAcceptedResponse<ExtraHeaders = ArmAsyncOperationHeader &
       Azure.Core.Foundations.RetryAfterHeader &
@@ -60,8 +88,6 @@ interface PrivateEndpointConnections {
   >;
 }
 
-// @@maxLength(PrivateEndpointConnection.name, 98);
-// @@minLength(PrivateEndpointConnection.name, 3);
 @@doc(PrivateEndpointConnection.properties, "Resource properties.");
 @@doc(PrivateEndpointConnections.create::parameters.resource,
   "The private endpoint connection properties."

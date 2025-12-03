@@ -286,7 +286,7 @@ model CorsRules {
   /**
    * The list of CORS rules. You can include up to five CorsRule elements in the request.
    */
-  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "backward-compatible"
+  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @maxItems(5)
   @identifiers(#[])
   corsRules?: CorsRule[];
@@ -437,7 +437,7 @@ model MapsAccountSasToken {
   /**
    * The shared access signature access token.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "backward-compatible"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   accountSasToken?: string;
 }
@@ -455,14 +455,14 @@ model MapsAccountKeys {
   /**
    * The primary key for accessing the Maps REST APIs.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "backward-compatible"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   primaryKey?: string;
 
   /**
    * The secondary key for accessing the Maps REST APIs.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "backward-compatible"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   secondaryKey?: string;
 
@@ -571,15 +571,12 @@ model PrivateLinkResourceList is Azure.Core.Page<PrivateLinkResource>;
 /**
  * A list of private endpoint connections
  */
-// model PrivateEndpointConnectionList
-//   is Azure.Core.Page<PrivateEndpointConnection>;
-// @@extension(PrivateEndpointConnectionList.nextLink, "x-nullable", true);
 model PrivateEndpointConnectionList {
   @doc("The {name} items on this page", PrivateEndpointConnection)
   @pageItems
   value: PrivateEndpointConnection[];
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "backward-compatible"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @doc("The link to the next page of items")
   @nextLink
   nextLink?: ResourceLocation<PrivateEndpointConnection> | null;

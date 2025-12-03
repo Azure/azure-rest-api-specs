@@ -955,19 +955,26 @@
           {
             "name": "accountName",
             "in": "path",
-            "description": "The name of the Maps Account.",
+            "description": "Name of the Maps Account",
             "required": true,
             "type": "string",
             "minLength": 1,
             "pattern": "^[^%&:\\\\/#?]+$"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "description": "Name of the private endpoint connection",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 98,
+            "pattern": "^[^%&:\\\\/#?]+$"
           }
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
@@ -1004,14 +1011,21 @@
           {
             "name": "accountName",
             "in": "path",
-            "description": "The name of the Maps Account.",
+            "description": "Name of the Maps Account",
             "required": true,
             "type": "string",
             "minLength": 1,
             "pattern": "^[^%&:\\\\/#?]+$"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "description": "Name of the private endpoint connection",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 98,
+            "pattern": "^[^%&:\\\\/#?]+$"
           },
           {
             "name": "properties",
@@ -1084,14 +1098,21 @@
           {
             "name": "accountName",
             "in": "path",
-            "description": "The name of the Maps Account.",
+            "description": "Name of the Maps Account",
             "required": true,
             "type": "string",
             "minLength": 1,
             "pattern": "^[^%&:\\\\/#?]+$"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "description": "Name of the private endpoint connection",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 98,
+            "pattern": "^[^%&:\\\\/#?]+$"
           }
         ],
         "responses": {
