@@ -35,3 +35,6 @@ using TypeSpec.OpenAPI;
 
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "backward compatibility."
 @@operationId(Operations.list, "Maps_ListOperations");
+@@doc(Operations.list,
+  "List operations available for the Maps Resource Provider"
+);
