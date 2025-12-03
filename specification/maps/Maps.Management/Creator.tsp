@@ -24,6 +24,8 @@ model Creator
     NamePattern = "^[^%&:\\\\/#?]+$"
   >;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  @doc("The system meta data relating to this resource.")
   @visibility(Lifecycle.Read)
   systemData?: Azure.ResourceManager.CommonTypes.SystemData;
 }

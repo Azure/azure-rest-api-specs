@@ -3,7 +3,7 @@
   "info": {
     "title": "Azure Maps Resource Provider",
     "version": "2025-10-01-preview",
-    "description": "Azure Maps Resource Provider",
+    "description": "Resource Provider",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -62,7 +62,7 @@
         "tags": [
           "Operations"
         ],
-        "description": "List the operations for the provider",
+        "description": "List operations available for the Maps Resource Provider",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -157,7 +157,8 @@
             "description": "Resource operation accepted.",
             "headers": {
               "Location": {
-                "type": "string"
+                "type": "string",
+                "description": ""
               }
             }
           },
@@ -1024,20 +1025,20 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'PrivateEndpointConnection' update operation succeeded",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           },
           "201": {
-            "description": "Resource 'PrivateEndpointConnection' create operation succeeded",
+            "description": "Azure create operation completed successfully.",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
             },
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
-                "description": "Operation Status Location URI"
+                "description": "A link to the status monitor"
               },
               "Retry-After": {
                 "type": "integer",
@@ -1059,7 +1060,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
+          "final-state-via": "location",
           "final-state-schema": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
         },
         "x-ms-long-running-operation": true
@@ -1095,15 +1096,15 @@
         ],
         "responses": {
           "202": {
-            "description": "Resource deletion accepted.",
+            "description": "Resource operation accepted.",
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
-                "description": "Operation Status Location URI"
+                "description": "A link to the status monitor"
               },
               "Location": {
                 "type": "string",
-                "description": "Operation Results Location URI"
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -1322,8 +1323,6 @@
           "format": "int32",
           "description": "Required parameter which represents the desired maximum request per second to allowed for the given SAS token. This does not guarantee perfect accuracy in measurements but provides application safe guards of abuse with eventual enforcement.",
           "default": 500,
-          "minimum": 0,
-          "exclusiveMinimum": true,
           "maximum": 500
         },
         "start": {
@@ -1384,6 +1383,7 @@
         },
         "systemData": {
           "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/systemData",
+          "description": "The system meta data relating to this resource.",
           "readOnly": true
         }
       },
@@ -1631,7 +1631,7 @@
           "description": "Specifies CORS rules for the Blob service. You can include up to five CorsRule elements in the request. If no CorsRule elements are included in the request body, all CORS rules will be deleted, and CORS will be disabled for the Blob service."
         },
         "encryption": {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/encryptionProperties",
+          "$ref": "../../../../../../common-types/resource-management/v6/customermanagedkeys.json#/definitions/encryption",
           "description": "All encryption configuration for a resource."
         },
         "locations": {
@@ -1640,7 +1640,7 @@
           "items": {
             "$ref": "#/definitions/LocationsItem"
           },
-          "x-ms-identifires": [
+          "x-ms-identifiers": [
             "locationName"
           ]
         },

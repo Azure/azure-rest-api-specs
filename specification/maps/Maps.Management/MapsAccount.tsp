@@ -34,6 +34,8 @@ model MapsAccount
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   kind?: Kind;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "backward-compatible"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   systemData?: Azure.ResourceManager.CommonTypes.SystemData;
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }

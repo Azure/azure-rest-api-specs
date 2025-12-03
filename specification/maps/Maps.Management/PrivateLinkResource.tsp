@@ -11,19 +11,6 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Maps;
-// /**
-//  * A private link resource.
-//  */
-// @parentResource(MapsAccount)
-// model PrivateLinkResource
-//   is Azure.ResourceManager.ProxyResource<PrivateLinkResourceProperties> {
-//   ...ResourceNameParameter<
-//     Resource = PrivateLinkResource,
-//     KeyName = "privateLinkResourceName",
-//     SegmentName = "privateLinkResources",
-//     NamePattern = "^.*$"
-//   >;
-// }
 
 model PrivateLink is PrivateLinkResource;
 alias PrivateLinkOperations = PrivateLinks<PrivateLink>;

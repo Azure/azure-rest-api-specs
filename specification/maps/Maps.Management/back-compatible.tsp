@@ -33,4 +33,5 @@ using TypeSpec.OpenAPI;
 
 @@clientLocation(OperationStatusOperationGroup.get, "OperationStatus");
 
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "backward compatibility."
 @@operationId(Operations.list, "Maps_ListOperations");

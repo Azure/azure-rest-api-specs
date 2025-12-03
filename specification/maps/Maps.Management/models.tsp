@@ -243,12 +243,12 @@ model MapsAccountProperties {
   /**
    * All encryption configuration for a resource.
    */
-  encryption?: Azure.ResourceManager.CommonTypes.EncryptionProperties;
+  encryption?: EncryptionConfiguration;
 
   /**
    * List of additional data processing regions for the Maps Account, which may result in requests being processed in another geography. Some features or results may be restricted to specific regions. By default, Maps REST APIs process requests according to the account location or the [geographic scope](https://learn.microsoft.com/azure/azure-maps/geographic-scope).
    */
-  @extension("x-ms-identifires", #["locationName"])
+  @identifiers(#["locationName"])
   locations?: LocationsItem[];
 
   /**
@@ -286,6 +286,7 @@ model CorsRules {
   /**
    * The list of CORS rules. You can include up to five CorsRule elements in the request.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "backward-compatible"
   @maxItems(5)
   @identifiers(#[])
   corsRules?: CorsRule[];
@@ -414,9 +415,8 @@ model AccountSasParameters {
   /**
    * Required parameter which represents the desired maximum request per second to allowed for the given SAS token. This does not guarantee perfect accuracy in measurements but provides application safe guards of abuse with eventual enforcement.
    */
-  @minValue(0)
   @maxValue(500)
-  @extension("exclusiveMinimum", true)
+  @minValueExclusive(0)
   maxRatePerSecond: int32 = 500;
 
   /**
@@ -437,6 +437,7 @@ model MapsAccountSasToken {
   /**
    * The shared access signature access token.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "backward-compatible"
   @visibility(Lifecycle.Read)
   accountSasToken?: string;
 }
@@ -454,12 +455,14 @@ model MapsAccountKeys {
   /**
    * The primary key for accessing the Maps REST APIs.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "backward-compatible"
   @visibility(Lifecycle.Read)
   primaryKey?: string;
 
   /**
    * The secondary key for accessing the Maps REST APIs.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "backward-compatible"
   @visibility(Lifecycle.Read)
   secondaryKey?: string;
 
@@ -568,6 +571,16 @@ model PrivateLinkResourceList is Azure.Core.Page<PrivateLinkResource>;
 /**
  * A list of private endpoint connections
  */
-model PrivateEndpointConnectionList
-  is Azure.Core.Page<PrivateEndpointConnection>;
-@@extension(PrivateEndpointConnectionList.nextLink, "x-nullable", true);
+// model PrivateEndpointConnectionList
+//   is Azure.Core.Page<PrivateEndpointConnection>;
+// @@extension(PrivateEndpointConnectionList.nextLink, "x-nullable", true);
+model PrivateEndpointConnectionList {
+  @doc("The {name} items on this page", PrivateEndpointConnection)
+  @pageItems
+  value: PrivateEndpointConnection[];
+
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "backward-compatible"
+  @doc("The link to the next page of items")
+  @nextLink
+  nextLink?: ResourceLocation<PrivateEndpointConnection> | null;
+}

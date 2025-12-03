@@ -17,25 +17,6 @@ namespace Microsoft.Maps;
 model PrivateEndpointConnection is PrivateEndpointConnectionResource;
 alias PrivateEndpointOperations = PrivateEndpoints<PrivateEndpointConnection>;
 
-model PrivateEndpointConnectionPUTHeader {
-  ...ArmAsyncOperationHeader<FinalResult = PrivateEndpointConnection>;
-  ...Azure.Core.Foundations.RetryAfterHeader;
-}
-@@doc(PrivateEndpointConnectionPUTHeader.azureAsyncOperation,
-  "Operation Status Location URI"
-);
-model PrivateEndpointConnectionDELETEHeader {
-  ...ArmAsyncOperationHeader;
-  ...Azure.Core.Foundations.RetryAfterHeader;
-  ...ArmLroLocationHeader;
-}
-@@doc(PrivateEndpointConnectionDELETEHeader.azureAsyncOperation,
-  "Operation Status Location URI"
-);
-@@doc(PrivateEndpointConnectionDELETEHeader.location,
-  "Operation Results Location URI"
-);
-
 @armResourceOperations
 interface PrivateEndpointConnections {
   /**
@@ -46,10 +27,16 @@ interface PrivateEndpointConnections {
   /**
    * Create or update the state of specified private endpoint connection associated with the Maps account.
    */
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "back-compatible"
+  @Azure.Core.useFinalStateVia("location")
   create is PrivateEndpointOperations.CreateOrReplaceAsync<
     MapsAccount,
     PrivateEndpointConnection,
-    LroHeaders = PrivateEndpointConnectionPUTHeader
+    Response = PrivateEndpointConnection | ArmCreatedResponse<
+      PrivateEndpointConnection,
+      ExtraHeaders = ArmAsyncOperationHeader &
+        Azure.Core.Foundations.RetryAfterHeader
+    > | ErrorResponse
   >;
 
   /**
@@ -58,7 +45,9 @@ interface PrivateEndpointConnections {
   delete is PrivateEndpointOperations.DeleteAsync<
     MapsAccount,
     PrivateEndpointConnection,
-    LroHeaders = PrivateEndpointConnectionDELETEHeader
+    Response = ArmNoContentResponse<"Resource does not exist."> | ArmAcceptedResponse<ExtraHeaders = ArmAsyncOperationHeader &
+      Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader> | ErrorResponse
   >;
 
   /**

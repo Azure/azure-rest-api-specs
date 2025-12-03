@@ -26,7 +26,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
- * Azure Maps Resource Provider
+ * Resource Provider
  */
 @armProviderNamespace
 @service(#{ title: "Azure Maps Resource Provider" })

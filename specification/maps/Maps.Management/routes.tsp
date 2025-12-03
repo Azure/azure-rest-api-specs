@@ -19,6 +19,7 @@ interface OperationResultOperationGroup {
    * Get the result of a long running azure asynchronous operation.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body"
   @operationId("OperationResult_Get")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Maps/locations/{location}/operationResults/{operationId}")
   @get
@@ -28,6 +29,7 @@ interface OperationResultOperationGroup {
     ...LocationResourceParameter,
     ...Azure.ResourceManager.CommonTypes.OperationIdParameter,
   ): OkResponse | ArmAcceptedResponse<ExtraHeaders = {
+    @doc("")
     @header("Location")
     location?: string;
   }> | ErrorResponse;
