@@ -1,14 +1,14 @@
 {
-  "title": "SitesByServiceGroups_Create_MaximumSet",
-  "operationId": "SitesByServiceGroup_CreateOrUpdate",
+  "title": "SitesByServiceGroup_Update_MaximumSet",
+  "operationId": "SitesByServiceGroup_Update",
   "parameters": {
     "api-version": "2025-03-01-preview",
     "servicegroupName": "aServiceGroup",
     "siteName": "aSite",
-    "resource": {
+    "properties": {
       "properties": {
-        "displayName": "A Display Name for Site",
-        "description": "Description for Site",
+        "displayName": "A Display Name for Site - Updated",
+        "description": "Description for Site - Updated",
         "siteAddress": {
           "streetAddress1": "Street Address one",
           "streetAddress2": "Street Address Two",
@@ -18,47 +18,13 @@
           "postalCode": "560035"
         },
         "labels": {
-          "aKey": "aValue"
+          "aKey": "aValue-updated"
         }
       }
     }
   },
   "responses": {
     "200": {
-      "body": {
-        "properties": {
-          "displayName": "A Display Name for Site",
-          "description": "Description for Site",
-          "siteAddress": {
-            "streetAddress1": "Street Address one",
-            "streetAddress2": "Street Address Two",
-            "city": "Bengaluru",
-            "stateOrProvince": "KA",
-            "country": "India",
-            "postalCode": "560035"
-          },
-          "labels": {
-            "aKey": "aValue"
-          },
-          "provisioningState": "Succeeded"
-        },
-        "id": "/providers/Microsoft.Management/serviceGroups/aServiceGroup/providers/Microsoft.Edge/Sites/aSite",
-        "name": "aSite",
-        "type": "Microsoft.Edge/sites",
-        "systemData": {
-          "createdBy": "julxbiyjzi",
-          "createdByType": "User",
-          "createdAt": "2024-12-30T07:53:03.972Z",
-          "lastModifiedBy": "bceneuzzvzqmiocbrfef",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2024-12-30T07:53:03.972Z"
-        }
-      }
-    },
-    "201": {
-      "headers": {
-        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
-      },
       "body": {
         "properties": {
           "displayName": "A Display Name for Site",

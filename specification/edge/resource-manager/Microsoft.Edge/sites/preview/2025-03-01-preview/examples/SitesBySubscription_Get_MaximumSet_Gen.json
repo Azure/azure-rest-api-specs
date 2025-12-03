@@ -1,35 +1,17 @@
 {
-  "title": "SitesByResourceGroups_Update_MaximumSet",
-  "operationId": "Sites_Update",
+  "title": "SitesBySubscription_Get_MaximumSet",
+  "operationId": "SitesBySubscription_Get",
   "parameters": {
     "api-version": "2025-03-01-preview",
     "subscriptionId": "0154f7fe-df09-4981-bf82-7ad5c1f596eb",
-    "resourceGroupName": "aResourceGroup",
-    "siteName": "aSite",
-    "properties": {
-      "properties": {
-        "displayName": "A Display Name for Site - Updated",
-        "description": "Description for Site - Updated",
-        "siteAddress": {
-          "streetAddress1": "Street Address one",
-          "streetAddress2": "Street Address Two",
-          "city": "Bengaluru",
-          "stateOrProvince": "KA",
-          "country": "India",
-          "postalCode": "560035"
-        },
-        "labels": {
-          "aKey": "aValue-updated"
-        }
-      }
-    }
+    "siteName": "aSite"
   },
   "responses": {
     "200": {
       "body": {
         "properties": {
-          "displayName": "A Display Name for Site - Updated",
-          "description": "Description for Site - Updated",
+          "displayName": "A Display Name for Site",
+          "description": "Description for Site",
           "siteAddress": {
             "streetAddress1": "Street Address one",
             "streetAddress2": "Street Address Two",
@@ -39,11 +21,11 @@
             "postalCode": "560035"
           },
           "labels": {
-            "aKey": "aValue-updated"
+            "aKey": "aValue"
           },
           "provisioningState": "Succeeded"
         },
-        "id": "/subscriptions/0154f7fe-df09-4981-bf82-7ad5c1f596eb/resourcegroups/aResourceGroup/providers/Microsoft.Edge/Sites/aSite",
+        "id": "/subscriptions/0154f7fe-df09-4981-bf82-7ad5c1f596eb/providers/Microsoft.Edge/Sites/aSite",
         "name": "aSite",
         "type": "Microsoft.Edge/sites",
         "systemData": {
