@@ -131,6 +131,10 @@ union DeploymentStackProvisioningState {
   /** The deployment stack is currently being initialized */
   @added(Versions.v2025_07_01)
   Initializing: "initializing",
+
+  /** The deployment stack is currently performing an operation */
+  @added(Versions.v2025_07_01)
+  Running: "running",
 }
 
 /**
