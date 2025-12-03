@@ -27,6 +27,17 @@ from models import (
     build_canonical_api_from_swagger,
 )
 
+# Known renamed mappings between hand-authored and TSP-compiled swaggers
+KNOWN_DEFINITION_RENAMES = {
+    "WebApiParameters": "WebApiVectorizerParameters",
+    "ServiceStatistics": "SearchServiceStatistics",
+    "PathHierarchyTokenizerV2": "PathHierarchyTokenizer",
+    "ClassicSimilarity": "ClassicSimilarityAlgorithm",
+    "BM25Similarity": "BM25SimilarityAlgorithm",
+    "Suggester": "SearchSuggester",
+    "DataToExtract": "BlobIndexerDataToExtract",
+}
+
 
 class DifferenceType(Enum):
     """Types of differences that can be detected."""
@@ -907,17 +918,20 @@ class ApiComparator:
             if not self._schemas_equal(schema1, schema2):
                 schema_diffs = self._get_schema_differences(schema1, schema2)
                 diff_details = (
-                    "; ".join(schema_diffs) if schema_diffs else "unknown differences"
+                    "\n    - " + "\n    - ".join(schema_diffs)
+                    if schema_diffs
+                    else "unknown differences"
                 )
+                message = f"Definition '{missing_def}' (matched with '{extra_def}') has schema differences:{diff_details}"
                 self.differences.append(
                     Difference(
                         type=DifferenceType.DEFINITION_MISMATCH,
-                        message=f"Definition schemas mismatch: {missing_def} - {diff_details}",
+                        message=message,
                         context=f" ||{missing_def} || ||{extra_def}",
                     )
                 )
                 print(
-                    f"Definition schemas mismatch (potential match)\t {missing_def} ~ {extra_def}\t {diff_details}"
+                    f"Definition schemas mismatch (potential match)\t {missing_def} ~ {extra_def}\n{diff_details}"
                 )
 
         for def_name in missing_defs:
@@ -963,17 +977,22 @@ class ApiComparator:
                 # Get detailed schema differences
                 schema_diffs = self._get_schema_differences(schema1, schema2)
                 diff_details = (
-                    "; ".join(schema_diffs) if schema_diffs else "unknown differences"
+                    "\n    - " + "\n    - ".join(schema_diffs)
+                    if schema_diffs
+                    else "unknown differences"
+                )
+                message = (
+                    f"Definition '{def_name}' has schema differences:{diff_details}"
                 )
 
                 self.differences.append(
                     Difference(
                         type=DifferenceType.DEFINITION_MISMATCH,
-                        message=f"Definition schemas mismatch: {def_name} - {diff_details}",
+                        message=message,
                         context=f" || {def_name} ||  || ",
                     )
                 )
-                print(f"Definition schemas mismatch \t {def_name} \t {diff_details}")
+                print(f"Definition schemas mismatch \t {def_name}\n{diff_details}")
 
     def _get_schema_differences(
         self, schema1: Optional[CanonicalSchema], schema2: Optional[CanonicalSchema]
@@ -1005,15 +1024,38 @@ class ApiComparator:
                 extra_props = set(props2.keys()) - set(props1.keys())
                 if missing_props:
                     differences.append(
-                        f"missing properties: {', '.join(missing_props)}"
+                        f"missing properties: {', '.join(sorted(missing_props))}"
                     )
                 if extra_props:
-                    differences.append(f"extra properties: {', '.join(extra_props)}")
+                    differences.append(
+                        f"extra properties: {', '.join(sorted(extra_props))}"
+                    )
+
+            # Compare property schemas for common properties
+            common_props = set(props1.keys()) & set(props2.keys())
+            for prop_name in sorted(common_props):
+                if not self._schemas_equal(props1[prop_name], props2[prop_name]):
+                    prop_diffs = self._get_schema_differences(
+                        props1[prop_name], props2[prop_name]
+                    )
+                    if prop_diffs:
+                        differences.append(
+                            f"property '{prop_name}': {'; '.join(prop_diffs)}"
+                        )
 
             if schema1.required != schema2.required:
                 req1 = schema1.required or frozenset()
                 req2 = schema2.required or frozenset()
-                differences.append(f"required fields: {sorted(req1)} vs {sorted(req2)}")
+                missing_required = req1 - req2
+                extra_required = req2 - req1
+                if missing_required:
+                    differences.append(
+                        f"missing required fields: {', '.join(sorted(missing_required))}"
+                    )
+                if extra_required:
+                    differences.append(
+                        f"extra required fields: {', '.join(sorted(extra_required))}"
+                    )
 
             if schema1.additional_properties != schema2.additional_properties:
                 differences.append(
@@ -1261,13 +1303,30 @@ class ApiComparator:
             )
         if constraints1.enum != constraints2.enum:
             # Show enum differences in a more readable way
-            enum1_str = (
-                ", ".join(sorted(constraints1.enum)) if constraints1.enum else "None"
-            )
-            enum2_str = (
-                ", ".join(sorted(constraints2.enum)) if constraints2.enum else "None"
-            )
-            differences.append(f"enum: [{enum1_str}] vs [{enum2_str}]")
+            enum1 = set(constraints1.enum) if constraints1.enum else set()
+            enum2 = set(constraints2.enum) if constraints2.enum else set()
+
+            if enum1 and enum2:
+                missing_values = enum1 - enum2
+                extra_values = enum2 - enum1
+                if missing_values or extra_values:
+                    enum_diff_parts = []
+                    if missing_values:
+                        enum_diff_parts.append(
+                            f"missing values: [{', '.join(sorted(missing_values))}]"
+                        )
+                    if extra_values:
+                        enum_diff_parts.append(
+                            f"extra values: [{', '.join(sorted(extra_values))}]"
+                        )
+                    differences.append(f"enum: {'; '.join(enum_diff_parts)}")
+                else:
+                    # Same values, likely ordering difference (shouldn't happen with sets)
+                    differences.append(f"enum: ordering difference")
+            else:
+                enum1_str = ", ".join(sorted(enum1)) if enum1 else "None"
+                enum2_str = ", ".join(sorted(enum2)) if enum2 else "None"
+                differences.append(f"enum: [{enum1_str}] vs [{enum2_str}]")
         if constraints1.default != constraints2.default:
             differences.append(
                 f"default: {constraints1.default} vs {constraints2.default}"
@@ -2318,17 +2377,33 @@ class ApiComparator:
         return matches
 
     def _find_definition_matches(self, missing_defs, extra_defs, api1, api2):
-        """Find potential matches between missing and extra definitions using name similarity."""
+        """Find potential matches between missing and extra definitions using known mappings and name similarity."""
         from difflib import SequenceMatcher
 
         matches = []
         threshold = 0.7  # Similarity threshold for potential matches
+        matched_missing = set()
+        matched_extra = set()
 
+        # First, check known renamed mappings
         for missing_name in missing_defs:
+            if missing_name in KNOWN_DEFINITION_RENAMES:
+                known_match = KNOWN_DEFINITION_RENAMES[missing_name]
+                if known_match in extra_defs:
+                    # Perfect match via known mapping - use 1.0 similarity
+                    matches.append((missing_name, known_match, 1.0))
+                    matched_missing.add(missing_name)
+                    matched_extra.add(known_match)
+
+        # Then use similarity matching for remaining definitions
+        remaining_missing = missing_defs - matched_missing
+        remaining_extra = extra_defs - matched_extra
+
+        for missing_name in remaining_missing:
             best_match = None
             best_similarity = 0
 
-            for extra_name in extra_defs:
+            for extra_name in remaining_extra:
                 # Calculate name similarity
                 similarity = SequenceMatcher(
                     None, missing_name.lower(), extra_name.lower()
