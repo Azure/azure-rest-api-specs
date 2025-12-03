@@ -1,6 +1,11 @@
-namespace AzureMonitorExporter;
+import "@typespec/http";
 
 using TypeSpec.Http;
+
+namespace AzureMonitorExporter;
+
+@maxLength(8192)
+scalar PropertyValue extends string;
 
 /**
  * Type of the metric data.
@@ -315,7 +320,7 @@ model AvailabilityData extends Domain {
   /**
    * Collection of custom properties.
    */
-  properties?: Record<string>;
+  properties?: Record<PropertyValue>;
 
   /**
    * Collection of custom measurements.
@@ -389,7 +394,7 @@ model EventData extends Domain {
   /**
    * Collection of custom properties.
    */
-  properties?: Record<string>;
+  properties?: Record<PropertyValue>;
 
   /**
    * Collection of custom measurements.
@@ -426,7 +431,7 @@ model ExceptionData extends Domain {
   /**
    * Collection of custom properties.
    */
-  properties?: Record<string>;
+  properties?: Record<PropertyValue>;
 
   /**
    * Collection of custom measurements.
@@ -533,7 +538,7 @@ model MessageData extends Domain {
   /**
    * Collection of custom properties.
    */
-  properties?: Record<string>;
+  properties?: Record<PropertyValue>;
 
   /**
    * Collection of custom measurements.
@@ -558,7 +563,7 @@ model MetricsData extends Domain {
   /**
    * Collection of custom properties.
    */
-  properties?: Record<string>;
+  properties?: Record<PropertyValue>;
 }
 
 /**
@@ -603,7 +608,7 @@ model PageViewData extends Domain {
   /**
    * Collection of custom properties.
    */
-  properties?: Record<string>;
+  properties?: Record<PropertyValue>;
 
   /**
    * Collection of custom measurements.
@@ -674,7 +679,7 @@ model PageViewPerfData extends Domain {
   /**
    * Collection of custom properties.
    */
-  properties?: Record<string>;
+  properties?: Record<PropertyValue>;
 
   /**
    * Collection of custom measurements.
@@ -744,7 +749,7 @@ model RemoteDependencyData extends Domain {
   /**
    * Collection of custom properties.
    */
-  properties?: Record<string>;
+  properties?: Record<PropertyValue>;
 
   /**
    * Collection of custom measurements.
@@ -807,7 +812,7 @@ model RequestData extends Domain {
   /**
    * Collection of custom properties.
    */
-  properties?: Record<string>;
+  properties?: Record<PropertyValue>;
 
   /**
    * Collection of custom measurements.

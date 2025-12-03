@@ -171,7 +171,7 @@
           "type": "object",
           "description": "Collection of custom properties.",
           "additionalProperties": {
-            "type": "string"
+            "$ref": "#/definitions/PropertyValue"
           }
         },
         "measurements": {
@@ -331,7 +331,7 @@
           "type": "object",
           "description": "Collection of custom properties.",
           "additionalProperties": {
-            "type": "string"
+            "$ref": "#/definitions/PropertyValue"
           }
         },
         "measurements": {
@@ -376,7 +376,7 @@
           "type": "object",
           "description": "Collection of custom properties.",
           "additionalProperties": {
-            "type": "string"
+            "$ref": "#/definitions/PropertyValue"
           }
         },
         "measurements": {
@@ -460,7 +460,7 @@
           "type": "object",
           "description": "Collection of custom properties.",
           "additionalProperties": {
-            "type": "string"
+            "$ref": "#/definitions/PropertyValue"
           }
         },
         "measurements": {
@@ -496,7 +496,7 @@
           "type": "object",
           "description": "Collection of custom properties.",
           "additionalProperties": {
-            "type": "string"
+            "$ref": "#/definitions/PropertyValue"
           }
         }
       },
@@ -541,7 +541,7 @@
           "type": "object",
           "description": "Collection of custom properties.",
           "additionalProperties": {
-            "type": "string"
+            "$ref": "#/definitions/PropertyValue"
           }
         },
         "measurements": {
@@ -610,7 +610,7 @@
           "type": "object",
           "description": "Collection of custom properties.",
           "additionalProperties": {
-            "type": "string"
+            "$ref": "#/definitions/PropertyValue"
           }
         },
         "measurements": {
@@ -631,6 +631,10 @@
           "$ref": "#/definitions/Domain"
         }
       ]
+    },
+    "PropertyValue": {
+      "type": "string",
+      "maxLength": 8192
     },
     "RemoteDependencyData": {
       "type": "object",
@@ -679,7 +683,7 @@
           "type": "object",
           "description": "Collection of custom properties.",
           "additionalProperties": {
-            "type": "string"
+            "$ref": "#/definitions/PropertyValue"
           }
         },
         "measurements": {
@@ -743,7 +747,7 @@
           "type": "object",
           "description": "Collection of custom properties.",
           "additionalProperties": {
-            "type": "string"
+            "$ref": "#/definitions/PropertyValue"
           }
         },
         "measurements": {
