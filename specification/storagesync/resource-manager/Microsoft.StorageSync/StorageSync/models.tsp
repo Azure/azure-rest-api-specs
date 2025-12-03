@@ -827,6 +827,8 @@ model CloudEndpointCreateParametersProperties {
   /**
    * The interval for enumerating changes on the cloud endpoint.
    */
+  @minValue(1)
+  @maxValue(20)
   changeEnumerationIntervalDays?: int32;
 }
 
@@ -890,6 +892,8 @@ model CloudEndpointProperties {
   /**
    * The interval for enumerating changes on the cloud endpoint.
    */
+  @minValue(1)
+  @maxValue(20)
   changeEnumerationIntervalDays?: int32;
 }
 
@@ -1094,6 +1098,8 @@ model CloudEndpointUpdateProperties {
   /**
    * The interval for enumerating changes on the cloud endpoint.
    */
+  @minValue(1)
+  @maxValue(20)
   changeEnumerationIntervalDays?: int32;
 }
 
