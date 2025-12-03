@@ -64,8 +64,6 @@ input-file:
   - Microsoft.Sql/preview/2025-08-01-preview/DatabaseVulnerabilityAssessmentScans.json
   - Microsoft.Sql/preview/2025-08-01-preview/DataMaskingPolicies.json
   - Microsoft.Sql/preview/2025-08-01-preview/DataMaskingRules.json
-  - Microsoft.Sql/preview/2025-08-01-preview/DataWarehouseQueries.json
-  - Microsoft.Sql/preview/2025-08-01-preview/DataWarehouseQuerySteps.json
   - Microsoft.Sql/preview/2025-08-01-preview/DataWarehouseUserActivities.json
   - Microsoft.Sql/preview/2025-08-01-preview/DeletedServers.json
   - Microsoft.Sql/preview/2025-08-01-preview/DistributedAvailabilityGroups.json
