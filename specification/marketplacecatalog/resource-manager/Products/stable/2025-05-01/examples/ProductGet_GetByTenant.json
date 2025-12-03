@@ -81,6 +81,7 @@
         ],
         "ratingAverage": 4.8,
         "ratingCount": 245,
+        "hasAddOns": true,
         "plans": [
           {
             "planId": "pro",
@@ -178,6 +179,84 @@
                 "discountPercentage": 20.0
               }
             ],
+            "hasConsumptionComponents": true,
+            "isEndUserEligible": true,
+            "isAdminEligible": true,
+            "entraIdVersion": "3f2504e0-4f89-11d3-9a0c-0305e82c3301",
+            "technicalRequirements": "Azure subscription with sufficient compute resources for security scanning workloads",
+            "faqUri": "https://support.cloudguard.com/faq/pro-plan",
+            "fulfillmentData": {
+              "fulfillmentType": "AdditionalProductsOnly",
+              "additionalProducts": [
+                {
+                  "productSkuId": "product/sku",
+                  "DefaultKeyActivationCount": 300
+                }
+              ]
+            },
+            "benefits": [
+              {
+                "benefitType": "EarlyAccess",
+                "basePlanId": "productId/planid",
+                "billingPlan": "monthly",
+                "termDuration": "P1M"
+              }
+            ],
+            "constraintsData": {
+              "seatConstraints": [
+                {
+                  "type": "Quantity",
+                  "minSeats": 1,
+                  "maxSeats": 1000
+                }
+              ],
+              "assetOwnershipLimits": [
+                {
+                  "type": "LifetimeCount",
+                  "minAssets": 0,
+                  "maxAssets": 1
+                }
+              ],
+              "prerequisiteSkus": {
+                "mustHaveAll": [
+                  {
+                    "ProductId": "some product id",
+                    "SkuIds": [
+                      "0001"
+                    ]
+                  }
+                ],
+                "mustHaveAny": [
+                  {
+                    "ProductId": "some product id",
+                    "SkuIds": [
+                      "0001"
+                    ]
+                  }
+                ],
+                "seatConstraints": [
+                  {
+                    "MinPercentSeats": 1.0,
+                    "Type": "AddOnSeatsasPercentageofCumulativeBase"
+                  },
+                  {
+                    "MaxPercentSeats": 1.0,
+                    "Type": "AddOnSeatsasPercentageofCumulativeBase"
+                  }
+                ]
+              }
+            },
+            "meterTypeDescriptions": [
+              {
+                "key": "1 Consumption Unit - Outbound",
+                "value": {
+                  "meterType": "1 Consumption Unit - Outbound",
+                  "unitOfMeasure": "Per call"
+                }
+              }
+            ],
+            "usageUnit": "program pass",
+            "skuName": "CloudGuard Pro Scanner",
             "availabilities": [
               {
                 "id": "pro-payg",
@@ -242,7 +321,19 @@
                         "value": "30 days"
                       }
                     ],
-                    "renewToTermBillingPlan": "pro-monthly-renewed"
+                    "renewToTermBillingPlan": "pro-monthly-renewed",
+                    "lifecyclePolicy": {
+                      "graceDuration": "P7D",
+                      "inactiveDuration": "P30D",
+                      "lockoutDuration": "P90D"
+                    },
+                    "productCode": "3f2504e0-4f89-11d3-9a0c-0305e82c3301",
+                    "state": "Active",
+                    "actions": [
+                      "Purchase",
+                      "Renew",
+                      "Cancel"
+                    ]
                   }
                 ],
                 "hasFreeTrials": true,
