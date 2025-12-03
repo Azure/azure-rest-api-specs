@@ -1747,6 +1747,102 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}/transferAnalyticsUnits": {
+      "post": {
+        "tags": [
+          "Accounts_TransferAnalyticsUnits"
+        ],
+        "operationId": "Accounts_TransferAnalyticsUnits",
+        "description": "Transfer Guarantee Analytics Units between allowed Data Lake Analytics accounts.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TransferAnalyticsUnitsParameters"
+            },
+            "description": "Parameters supplied to transfer Guarantee Analytics Units between allowed accounts."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully transferred Guarantee analytics units between accounts."
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "description": ""
+          }
+        },
+        "x-ms-examples": {
+          "Transfer Guarantee Analytics Units between allowed Data Lake Analytics accounts. This supplies the user with computation services for Data Lake Analytics workloads.": {
+            "$ref": "./examples/Accounts_TransferAnalyticsUnits.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}/transferEcoAnalyticsUnits": {
+      "post": {
+        "tags": [
+          "Accounts_TransferEcoAnalyticsUnits"
+        ],
+        "operationId": "Accounts_TransferEcoAnalyticsUnits",
+        "description": "Transfer Eco-Analytics Units between allowed Data Lake Analytics accounts.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TransferAnalyticsUnitsParameters"
+            },
+            "description": "Parameters supplied to transfer Eco-Analytics Units between allowed accounts."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully transferred Eco-Analytics units between accounts."
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "description": ""
+          }
+        },
+        "x-ms-examples": {
+          "Transfer Eco-Analytics Units between allowed Data Lake Analytics accounts. This supplies the user with computation services for Data Lake Analytics workloads.": {
+            "$ref": "./examples/Accounts_TransferEcoAnalyticsUnits.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1932,6 +2028,18 @@
             "modelAsString": false
           },
           "description": "The current state of allowing or disallowing IPs originating within Azure through the firewall. If the firewall is disabled, this is not enforced."
+        },
+        "mixedTokensMode": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "MixedTokensMode",
+            "modelAsString": false
+          },
+          "description": "The current state of allowing or disallowing to use both Guarantee Analytics Unit and Eco Analytics Unit together during Job execution."
         },
         "newTier": {
           "type": "string",
@@ -2908,6 +3016,18 @@
           },
           "description": "The current state of allowing or disallowing IPs originating within Azure through the firewall. If the firewall is disabled, this is not enforced."
         },
+        "mixedTokensMode": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "MixedTokensMode",
+            "modelAsString": false
+          },
+          "description": "The current state of allowing or disallowing to use both Guarantee Analytics Unit and Eco Analytics Unit together during Job execution."
+        },
         "newTier": {
           "type": "string",
           "enum": [
@@ -3047,6 +3167,18 @@
             "modelAsString": false
           },
           "description": "The current state of allowing or disallowing IPs originating within Azure through the firewall. If the firewall is disabled, this is not enforced."
+        },
+        "mixedTokensMode": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "MixedTokensMode",
+            "modelAsString": false
+          },
+          "description": "The current state of allowing or disallowing to use both Guarantee Analytics Unit and Eco Analytics Unit together during Job execution."
         },
         "newTier": {
           "type": "string",
@@ -3490,6 +3622,48 @@
         }
       },
       "description": "Data Lake Analytics account name availability check parameters."
+    },
+    "TransferAnalyticsUnitsParameters": {
+      "type": "object",
+      "description": "The parameters used to transfer Analytics Units from one account to another.",
+      "properties": {
+        "newSystemMax": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Current Account's updated Analytics Units"
+        },
+        "participants": {
+          "type": "array",
+          "description": "The list of Accounts provides its Analytics Units except the current Account",
+          "items": {
+            "x-ms-client-flatten": true,
+            "$ref": "#/definitions/AnalyticsUnitsParameters"
+          }
+        },
+        "recipients": {
+          "type": "array",
+          "description": "The list of Accounts to receive the Analytics Units except the current Account",
+          "items": {
+            "x-ms-client-flatten": true,
+            "$ref": "#/definitions/AnalyticsUnitsParameters"
+          }
+        }
+      }
+    },
+    "AnalyticsUnitsParameters": {
+      "type": "object",
+      "description": "The Analytics Units",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The Account Id - Format: /subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}"
+        },
+        "newSystemMax": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The updated Analytics Units"
+        }
+      }
     }
   },
   "parameters": {
