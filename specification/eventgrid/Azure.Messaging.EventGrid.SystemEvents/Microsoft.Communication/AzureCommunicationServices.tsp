@@ -1082,7 +1082,7 @@ model AcsChatMessageEventBaseProperties extends AcsChatEventBaseProperties {
   senderDisplayName?: string;
 
   /** The Sequence id of the message */
-  sequenceId?: uint64;
+  sequenceId?: int64;
 
   /** The original compose time of the message */
   @madeRequired(ServiceApiVersions.v2024_01_01)
@@ -1202,7 +1202,7 @@ model AcsChatMessageEventInThreadBaseProperties
   senderDisplayName?: string;
 
   /** The Sequence id of the message */
-  sequenceId?: uint64;
+  sequenceId?: int64;
 
   /** The original compose time of the message */
   @madeRequired(ServiceApiVersions.v2024_01_01)
