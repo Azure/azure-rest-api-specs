@@ -3119,8 +3119,9 @@ union IndexerResyncOption {
 
 @doc("Request body for resync indexer operation.")
 model IndexerResyncBody {
-  @doc("Indexer to re-ingest pre-selected permissions data from data source to index.")
-  options?: IndexerResyncOption[];
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
+  @doc("Re-sync options that have been pre-defined from data source.")
+  options?: IndexerResyncOption[] | null;
 }
 
 @doc("Represents a datasource definition, which can be used to configure an indexer.")
