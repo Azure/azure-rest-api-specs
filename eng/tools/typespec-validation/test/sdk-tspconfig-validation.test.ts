@@ -358,6 +358,7 @@ const goDpInjectSpansTestCases = createEmitterOptionTestCases(
   true,
   false,
   [new TspConfigGoAzInjectSpansTrueSubRule()],
+  true,
 );
 
 const goDpModuleTestCases = createEmitterOptionTestCases(
@@ -387,6 +388,7 @@ const goDpEmitterOutputDirTestCases = createEmitterOptionTestCases(
   "{output-dir}/{service-dir}/azsystemevents",
   "{output-dir}/{service-dir}/armcompute",
   [new TspConfigGoDpEmitterOutputDirMatchPatternSubRule()],
+  true,
 );
 
 const goDpServiceDirTestCases = createEmitterOptionTestCases(
