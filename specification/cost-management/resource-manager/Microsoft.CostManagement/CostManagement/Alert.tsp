@@ -29,6 +29,22 @@ model Alert is Azure.ResourceManager.ExtensionResource<AlertProperties> {
 }
 
 @armResourceOperations
+interface AlertsOps
+  extends Azure.ResourceManager.Legacy.ExtensionOperations<
+      {
+        ...ApiVersionParameter,
+
+        /** The scope associated with alerts operations. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}' for Department scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope, '/providers/Microsoft.Management/managementGroups/{managementGroupId} for Management Group scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/invoiceSections/{invoiceSectionId}' for invoiceSection scope, and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/customers/{customerId}' specific for partners. */
+        @path(#{ allowReserved: true })
+        scope: string,
+
+        ...Azure.ResourceManager.Legacy.Provider,
+      },
+      {},
+      {}
+    > {}
+
+@armResourceOperations
 interface Alerts {
   /**
    * Gets the alert for the scope by alert ID.
@@ -55,11 +71,10 @@ interface Alerts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/costmanagement/")
-  list is Extension.ListByTarget<
-    Extension.ScopeParameter,
+  list is AlertsOps.ListSinglePage<
     Alert,
     Response = ArmResponse<AlertsResult>,
-    Error = ErrorResponse
+    ErrorType = ErrorResponse
   >;
 }
 

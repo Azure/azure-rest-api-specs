@@ -42,6 +42,22 @@ model Export is Azure.ResourceManager.ExtensionResource<ExportProperties> {
 }
 
 @armResourceOperations
+interface ExportsOps
+  extends Azure.ResourceManager.Legacy.ExtensionOperations<
+      {
+        ...ApiVersionParameter,
+
+        /** The scope associated with alerts operations. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}' for Department scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope, '/providers/Microsoft.Management/managementGroups/{managementGroupId} for Management Group scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/invoiceSections/{invoiceSectionId}' for invoiceSection scope, and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/customers/{customerId}' specific for partners. */
+        @path(#{ allowReserved: true })
+        scope: string,
+
+        ...Azure.ResourceManager.Legacy.Provider,
+      },
+      {},
+      {}
+    > {}
+
+@armResourceOperations
 interface Exports {
   /**
    * The operation to get the export for the defined scope by export name.
@@ -90,8 +106,7 @@ interface Exports {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/costmanagement/")
-  list is Extension.ListByTarget<
-    Extension.ScopeParameter,
+  list is ExportsOps.ListSinglePage<
     Export,
     Parameters = {
       /**
@@ -101,7 +116,7 @@ interface Exports {
       $expand?: string;
     },
     Response = ArmResponse<ExportListResult>,
-    Error = ErrorResponse
+    ErrorType = ErrorResponse
   >;
 
   /**
