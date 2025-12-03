@@ -1,11 +1,12 @@
 {
-  "title": "EdgeMachineJobs_ListByCluster_MaximumSet",
-  "operationId": "EdgeMachineJobs_ListByCluster",
+  "title": "EdgeMachineGpuJobs_List_MaximumSet_Gen",
+  "operationId": "EdgeMachineGpuJobs_List",
   "parameters": {
     "api-version": "2024-11-01-preview",
     "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
     "resourceGroupName": "ArcInstance-rg",
-    "edgeMachineName": "machine1"
+    "edgeMachineName": "machine1",
+    "gpuName": "default"
   },
   "responses": {
     "200": {
@@ -13,7 +14,7 @@
         "value": [
           {
             "properties": {
-              "jobType": "CollectLog",
+              "jobType": "CreatePartition",
               "fromDate": "2024-01-29T10:43:27.9471574Z",
               "toDate": "2024-01-29T10:43:27.9471574Z",
               "deploymentMode": "Validate",
@@ -23,9 +24,9 @@
               "endTimeUtc": "2024-12-03T11:31:42.387Z",
               "status": "NotSpecified"
             },
-            "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.AzureStackHCI/edgeMachines/machine-1/jobs/collectLog",
-            "name": "collectLog",
-            "type": "Microsoft.AzureStackHCI/edgeMachines/jobs",
+            "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.AzureStackHCI/edgeMachines/machine-1/gpus/default/jobs/CreatePartition",
+            "name": "CreatePartition",
+            "type": "Microsoft.AzureStackHCI/edgeMachines/gpus/jobs",
             "systemData": {
               "createdBy": "user1",
               "createdByType": "User",
