@@ -78,6 +78,36 @@ interface CloudEndpoints {
   >;
 
   /**
+   * Patch a given CloudEndpoint.
+   */
+  @patch(#{ implicitOptionality: false })
+  @Azure.Core.useFinalStateVia("location")
+  update is Legacy.CustomPatchAsync<
+    CloudEndpoint,
+    PatchModel = CloudEndpointUpdateParameters,
+    Response = (ArmResponse<CloudEndpoint> & {
+      @header("x-ms-correlation-request-id")
+      @doc("correlation request id.")
+      correlationRequestId?: string;
+
+      @header("x-ms-request-id")
+      @doc("request id.")
+      requestId?: string;
+    }) | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = CloudEndpoint> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
+      @header("x-ms-correlation-request-id")
+      @doc("correlation request id.")
+      correlationRequestId?: string;
+
+      @header("x-ms-request-id")
+      @doc("request id.")
+      requestId?: string;
+    }),
+    Error = StorageSyncError,
+    OptionalRequestBody = true
+  >;
+
+  /**
    * Delete a given CloudEndpoint.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
