@@ -609,7 +609,7 @@ model KnowledgeBaseRemoteSharePointReference extends KnowledgeBaseReference {
   type: KnowledgeBaseReferenceType.remoteSharePoint;
 
   @doc("The url the reference data originated from.")
-  webUrl: url;
+  webUrl?: url;
 
   @doc("Information about the sensitivity label applied to the SharePoint document.")
   searchSensitivityLabelInfo?: SharePointSensitivityLabelInfo;

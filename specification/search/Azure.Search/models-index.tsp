@@ -636,41 +636,6 @@ model SuggestOptions {
   top?: int32;
 }
 
-@doc("Parameters grouped for autocomplete operations.")
-model AutocompleteOptions {
-  @doc("Specifies the mode for Autocomplete. The default is 'oneTerm'. Use 'twoTerms' to get shingles and 'oneTermWithContext' to use the current context while producing auto-completed terms.")
-  @query
-  autocompleteMode?: AutocompleteMode;
-
-  @doc("An OData expression that filters the documents used to produce completed terms for the Autocomplete result.")
-  @query("$filter")
-  filter?: string;
-
-  @doc("A value indicating whether to use fuzzy matching for the autocomplete query. Default is false. When set to true, the query will find terms even if there's a substituted or missing character in the search text. While this provides a better experience in some scenarios, it comes at a performance cost as fuzzy autocomplete queries are slower and consume more resources.")
-  @query("fuzzy")
-  useFuzzyMatching?: boolean;
-
-  @doc("A string tag that is appended to hit highlights. Must be set with highlightPreTag. If omitted, hit highlighting is disabled.")
-  @query
-  highlightPostTag?: string;
-
-  @doc("A string tag that is prepended to hit highlights. Must be set with highlightPostTag. If omitted, hit highlighting is disabled.")
-  @query
-  highlightPreTag?: string;
-
-  @doc("A number between 0 and 100 indicating the percentage of the index that must be covered by an autocomplete query in order for the query to be reported as a success. This parameter can be useful for ensuring search availability even for services with only one replica. The default is 80.")
-  @query
-  minimumCoverage?: float64;
-
-  @doc("The list of field names to consider when querying for auto-completed terms. Target fields must be included in the specified suggester.")
-  @query
-  searchFields?: string[];
-
-  @doc("The number of auto-completed terms to retrieve. This must be a value between 1 and 100. The default is 5.")
-  @query("$top")
-  top?: int32;
-}
-
 @doc("Response containing search results from an index.")
 model SearchDocumentsResult {
   @doc("The total count of results found by the search operation, or null if the count was not requested. If present, the count may be greater than the number of results in this response. This can happen if you use the $top or $skip parameters, or if the query can't return all the requested documents in a single response.")
@@ -1299,7 +1264,7 @@ model VectorizableTextQuery extends VectorQuery {
 @doc("The query parameters to use for vector search when an url that represents an image value that needs to be vectorized is provided.")
 model VectorizableImageUrlQuery extends VectorQuery {
   @doc("The URL of an image to be vectorized to perform a vector search query.")
-  url: string;
+  url?: string;
 
   @doc("The kind of vector query being performed.")
   kind: "imageUrl";
@@ -1308,7 +1273,7 @@ model VectorizableImageUrlQuery extends VectorQuery {
 @doc("The query parameters to use for vector search when a base 64 encoded binary of an image that needs to be vectorized is provided.")
 model VectorizableImageBinaryQuery extends VectorQuery {
   @doc("The base 64 encoded binary of an image to be vectorized to perform a vector search query.")
-  base64Image: string;
+  base64Image?: string;
 
   @doc("The kind of vector query being performed.")
   kind: "imageBinary";
