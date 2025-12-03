@@ -14,6 +14,21 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.EventGrid.SystemEvents;
 
+// [BEGIN] AKS renames
+
+@@clientName(ResourceNotificationsAksResourcesFleetGateCreatedEventData,
+  "ResourceNotificationsAKSResourcesFleetGateCreatedEventData",
+  "go"
+);
+@@clientName(ResourceNotificationsAksResourcesFleetGateUpdatedEventData,
+  "ResourceNotificationsAKSResourcesFleetGateUpdatedEventData",
+  "go"
+);
+@@clientName(ResourceNotificationsAksResourcesFleetGateDeletedEventData,
+  "ResourceNotificationsAKSResourcesFleetGateDeletedEventData",
+  "go"
+);
+
 // [BEGIN] misc renames
 
 @@clientName(AcsRecordingFileStatusUpdatedEventData.recordingDurationMs,
