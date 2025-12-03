@@ -185,6 +185,7 @@ model AgentEvaluation {
 @removed(Versions.v1)
 @added(Versions.v2025_05_15_preview)
 model Message {
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Backwards compatibility - Existing union"
   @doc("The role of the message author. Known values: 'system', 'assistant', 'developer', 'user'.")
   role: "system" | "assistant" | "developer" | "user" | string;
 }
