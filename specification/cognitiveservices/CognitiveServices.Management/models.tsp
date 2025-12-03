@@ -1436,6 +1436,7 @@ model AccountProperties {
   /**
    * Resource migration token.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   migrationToken?: string;
 
   /**
@@ -1783,6 +1784,7 @@ model ApiProperties {
   /**
    * (QnAMaker Only) The Azure Search endpoint key of QnAMaker.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   qnaAzureSearchEndpointKey?: string;
 
   /**
@@ -1856,6 +1858,7 @@ model CallRateLimit {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ThrottlingRule {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   key?: string;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   renewalPeriod?: float32;
@@ -2536,10 +2539,7 @@ model CommitmentTierListResult {
    */
   @pageItems
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension(
-    "x-ms-identifiers",
-    #["kind", "tier", "skuName", "hostingModel", "planType"]
-  )
+  @identifiers(#["kind", "tier", "skuName", "hostingModel", "planType"])
   value?: CommitmentTier[];
 }
 
@@ -2632,10 +2632,13 @@ model ModelListResult {
    * Gets the list of Cognitive Services accounts Model and their properties.
    */
   @pageItems
-  @OpenAPI.extension(
-    "x-ms-identifiers",
-    #["kind", "skuName", "/model/name", "/model/format", "/model/version"]
-  )
+  @identifiers(#[
+    "kind",
+    "skuName",
+    "/model/name",
+    "/model/format",
+    "/model/version"
+  ])
   value?: Model[];
 }
 
@@ -4070,6 +4073,7 @@ model CapabilityHostResourceArmPaginatedResult {
   /**
    * The link to the next page of Capability Host objects. If null, there are no additional pages.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @nextLink
   nextLink?: string | null;
 
@@ -4153,6 +4157,7 @@ model ProjectCapabilityHostResourceArmPaginatedResult {
   /**
    * The link to the next page of Project Capability Host objects. If null, there are no additional pages.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @nextLink
   nextLink?: string | null;
 
@@ -4168,21 +4173,25 @@ model ProjectCapabilityHost {
   /**
    * List of AI services connections.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   aiServicesConnections?: string[] | null;
 
   /**
    * List of connection names from those available in the account or project to be used for vector database (e.g. CosmosDB).
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   vectorStoreConnections?: string[] | null;
 
   /**
    * List of connection names from those available in the account or project to be used as a storage resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   storageConnections?: string[] | null;
 
   /**
    * List of connection names from those available in the account or project to be used for Thread storage.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   threadStorageConnections?: string[] | null;
 
   /**
