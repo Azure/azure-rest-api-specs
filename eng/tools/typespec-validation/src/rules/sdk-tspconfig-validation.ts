@@ -875,7 +875,7 @@ export class SdkTspConfigValidationRule implements Rule {
       if (subRule instanceof TspconfigEmitterOptionsSubRuleBase) {
         const emitterOptionSubRule = subRule as TspconfigEmitterOptionsSubRuleBase;
         const emitterName = emitterOptionSubRule.getEmitterName();
-        
+
         // Skip all validation failures for @azure-tools/typespec-csharp (legacy emitter)
         if (emitterName === "@azure-tools/typespec-csharp" && isSubRuleSuccess === false) {
           console.warn(
