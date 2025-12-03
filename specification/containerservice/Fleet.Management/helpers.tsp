@@ -30,7 +30,7 @@ alias IfMatchHeadersParameters<T extends Azure.ResourceManager.Foundations.Resou
 model SkipTokenQueryParameter {
   @query("$skiptoken")
   @doc("The page-continuation token to use with a paged version of this API.")
-  skipToken?: int32;
+  skipToken?: string;
 }
 
 @doc("Provides the standard '$top' query parameter for list operations.")
