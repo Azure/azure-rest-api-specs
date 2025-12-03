@@ -26,9 +26,18 @@ These are the global settings for the Storage Sync API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2022-09
+tag: package-2025-12
 ```
 
+
+### Tag: package-2025-12
+
+These settings apply only when `--tag=package-2025-12` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-12'
+input-file:
+  - stable/2025-12-01/storagesync.json
+```
 
 ### Tag: package-2022-09
 
