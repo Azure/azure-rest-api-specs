@@ -789,8 +789,6 @@ namespace ConversationAuthoringClient {
 
   op deleteProject is Language.Conversations.Authoring.ConversationAuthoringProject.deleteProject;
 
-  op getExportStatus is Language.Conversations.Authoring.ConversationAuthoringProject.getExportStatus;
-
   op getImportStatus is Language.Conversations.Authoring.ConversationAuthoringProject.getImportStatus;
   
   @operationGroup
