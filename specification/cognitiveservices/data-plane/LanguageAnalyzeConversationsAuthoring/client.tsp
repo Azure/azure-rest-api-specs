@@ -788,8 +788,6 @@ namespace ConversationAuthoringClient {
   op getProject is Language.Conversations.Authoring.ConversationAuthoringProject.getProject;
 
   op deleteProject is Language.Conversations.Authoring.ConversationAuthoringProject.deleteProject;
-
-  op getImportStatus is Language.Conversations.Authoring.ConversationAuthoringProject.getImportStatus;
   
   @operationGroup
   @clientInitialization(ConversationAuthoringDeploymentClientOptions, "csharp")
@@ -841,6 +839,8 @@ namespace ConversationAuthoringClient {
     `import` is Language.Conversations.Authoring.ConversationAuthoringProject.`import`;
 
     export is Language.Conversations.Authoring.ConversationAuthoringProject.export;
+
+    getImportStatus is Language.Conversations.Authoring.ConversationAuthoringProject.getImportStatus;
 
     getExportStatus is Language.Conversations.Authoring.ConversationAuthoringProject.getExportStatus;
 
