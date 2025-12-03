@@ -8,7 +8,7 @@ import tseslint from "typescript-eslint";
  * @param {boolean|object} [options.projectService]
  * @param {string} options.tsconfigRootDir
  * @returns {import('eslint').Linter.Config[]}
- * */
+ */
 export function defineBaseConfig(options) {
   const { projectService = true, tsconfigRootDir } = options;
 
