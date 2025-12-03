@@ -735,6 +735,19 @@
             "$ref": "../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateLinkResource"
           },
           "readOnly": true
+        },
+        "publicNetworkAccess": {
+          "description": "This determines if traffic is allowed over public network. By default it is disabled.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "modelAsString": true
+          },
+          "default": "Disabled"
         }
       }
     },
