@@ -4,4 +4,4 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.AzureStackHCI;
 
-@@clientName(Update, "HciUpdate", "java");
+@@clientName(Microsoft.AzureStackHCI.Update, "HciUpdate", "java");
