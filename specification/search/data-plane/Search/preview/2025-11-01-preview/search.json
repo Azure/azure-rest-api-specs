@@ -11512,30 +11512,6 @@
         "minGram": {
           "type": "integer",
           "format": "int32",
-          "description": "The minimum n-gram length. Default is 1. Must be less than the value of maxGram.",
-          "default": 1
-        },
-        "maxGram": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The maximum n-gram length. Default is 2.",
-          "default": 2
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/TokenFilter"
-        }
-      ],
-      "x-ms-discriminator-value": "#Microsoft.Azure.Search.NGramTokenFilter"
-    },
-    "NGramTokenFilterV2": {
-      "type": "object",
-      "description": "Generates n-grams of the given size(s). This token filter is implemented using Apache Lucene.",
-      "properties": {
-        "minGram": {
-          "type": "integer",
-          "format": "int32",
           "description": "The minimum n-gram length. Default is 1. Maximum is 300. Must be less than the value of maxGram.",
           "default": 1,
           "maximum": 300
