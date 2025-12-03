@@ -523,8 +523,8 @@ model OsProvisionProfile {
   @doc("Hash of the OS package downloaded")
   imageHash?: string;
 
-  @doc("GPG Public Key used for package verification")
   #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Public key is not a secret."
+  @doc("GPG Public Key used for package verification")
   gpgPubKey?: string;
 
   @doc("Operation sub type of OS Provisioning")
@@ -551,8 +551,8 @@ model DownloadOsProfile {
   @doc("Hash of the OS package downloaded")
   imageHash?: string;
 
-  @doc("GPG Public Key used for package verification")
   #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Public key is not a secret."
+  @doc("GPG Public Key used for package verification")
   gpgPubKey?: string;
 }
 

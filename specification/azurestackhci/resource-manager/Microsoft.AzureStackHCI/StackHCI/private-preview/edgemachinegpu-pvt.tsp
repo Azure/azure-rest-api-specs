@@ -65,13 +65,11 @@ model GpuList is Azure.Core.Page<EdgeMachineGpu>;
  * GPU resource properties
  */
 model EdgeMachineGpuProperties {
-  
   /**
    * The provisioning state of the GPU.
    */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
-
 
   /**
    * Represents the instance Id of the GPU.
@@ -95,7 +93,7 @@ model EdgeMachineGpuProperties {
    * The model of the GPU.
    */
   @visibility(Lifecycle.Read)
-   `model`?: string;
+  `model`?: string;
 
   /**
    * The status of the GPU.

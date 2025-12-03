@@ -11,15 +11,28 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "./private-preview/devicePool-pvt.tsp";
-import "./private-preview/edgeMachine-pvt.tsp";
-import "./private-preview/edgeMachineJobs-pvt.tsp";
-import "./private-preview/edgeMachineExtensions-pvt.tsp";
-import "./private-preview/edgemachinegpu-pvt.tsp";
-import "./private-preview/edgemachinegpujobs-pvt.tsp";
-import "./private-preview/validateOwnershipVouchers-pvt.tsp";
-import "./private-preview/extensionCommon-pvt.tsp";
-import "./private-preview/routes.tsp";
+import "./kubernetesVersions.tsp";
+import "./platformUpdates.tsp";
+import "./osImages.tsp";
+import "./updateContents.tsp";
+import "./Operations.tsp";
+import "./models.tsp";
+import "./back-compatible.tsp";
+import "./ArcSetting.tsp";
+import "./Cluster.tsp";
+import "./DeploymentSetting.tsp";
+import "./EdgeDeviceJob.tsp";
+import "./EdgeDevice.tsp";
+import "./Extension.tsp";
+import "./Offer.tsp";
+import "./Publisher.tsp";
+import "./SecuritySetting.tsp";
+import "./Sku.tsp";
+import "./UpdateRun.tsp";
+import "./Update.tsp";
+import "./UpdateSummaries.tsp";
+import "./ValidatedSolutionRecipe.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -34,7 +47,7 @@ using TypeSpec.Versioning;
 @armProviderNamespace
 @service(#{ title: "Microsoft.AzureStackHCI" })
 @versioned(Versions)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
 namespace Microsoft.AzureStackHCI;
 
 /**
@@ -44,6 +57,5 @@ enum Versions {
   /**
    * The 2025-09-22-preview API version.
    */
-  v2025_09_22_preview: "2024-11-01-preview",
+  v2025_09_22_preview: "2025-09-22-preview",
 }
-

@@ -12,10 +12,10 @@ using Azure.Core;
 @armProviderNamespace("Microsoft.AzureStackHCI")
 namespace Microsoft.AzureStackHCI;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" ""
 /**
  * Details of a GPU Job on an Edge Machine GPU.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" ""
 @parentResource(EdgeMachineGpu)
 model EdgeMachineGpuJob
   is Azure.ResourceManager.ProxyResource<EdgeMachineGpuJobProperties> {
@@ -58,7 +58,7 @@ interface EdgeMachineGpuJobs {
 ////////////////////models////////////////////
 
 /**
- *EdgeMachine GPU Job properties 
+ *EdgeMachine GPU Job properties
  */
 @discriminator("jobType")
 model EdgeMachineGpuJobProperties {
@@ -134,45 +134,45 @@ union EdgeMachineGpuJobType {
   /**
    * Remove GPU partition and free up resources for other workloads.
    */
-  RemovePartition: "RemovePartition"
+  RemovePartition: "RemovePartition",
 }
 
 /**
-* Properties for creating GPU partitions for virtualization and workload isolation.
-*/
+ * Properties for creating GPU partitions for virtualization and workload isolation.
+ */
 model CreatePartitionGpuJobProperties extends EdgeMachineGpuJobProperties {
- /**
-  * Type of GPU job to be performed.
-  */
- jobType: EdgeMachineGpuJobType.CreatePartition;
+  /**
+   * Type of GPU job to be performed.
+   */
+  jobType: EdgeMachineGpuJobType.CreatePartition;
 }
 
 /**
-* Properties for switching GPU mode between DDA and GPU-P for different workload requirements.
-*/
+ * Properties for switching GPU mode between DDA and GPU-P for different workload requirements.
+ */
 model SwitchModeGpuJobProperties extends EdgeMachineGpuJobProperties {
- /**
-  * Type of GPU job to be performed.
-  */
- jobType: EdgeMachineGpuJobType.SwitchMode;
+  /**
+   * Type of GPU job to be performed.
+   */
+  jobType: EdgeMachineGpuJobType.SwitchMode;
 }
 
 /**
-* Properties for assigning GPU partition to a specific workload or virtual machine.
-*/
+ * Properties for assigning GPU partition to a specific workload or virtual machine.
+ */
 model AssignPartitionGpuJobProperties extends EdgeMachineGpuJobProperties {
- /**
-  * Type of GPU job to be performed.
-  */
- jobType: EdgeMachineGpuJobType.AssignPartition;
+  /**
+   * Type of GPU job to be performed.
+   */
+  jobType: EdgeMachineGpuJobType.AssignPartition;
 }
 
 /**
-* Properties for removing GPU partition and freeing up resources for other workloads.
-*/
+ * Properties for removing GPU partition and freeing up resources for other workloads.
+ */
 model RemovePartitionGpuJobProperties extends EdgeMachineGpuJobProperties {
- /**
-  * Type of GPU job to be performed.
-  */
- jobType: EdgeMachineGpuJobType.RemovePartition;
+  /**
+   * Type of GPU job to be performed.
+   */
+  jobType: EdgeMachineGpuJobType.RemovePartition;
 }
