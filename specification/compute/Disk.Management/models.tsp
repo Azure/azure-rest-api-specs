@@ -3,6 +3,7 @@ import "@typespec/http";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "../ComputeCommon.Management/models.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -52,17 +53,6 @@ union DiskStorageAccountTypes {
    * Premium SSD v2 locally redundant storage. Best for production and performance-sensitive workloads that consistently require low latency and high IOPS and throughput.
    */
   PremiumV2_LRS: "PremiumV2_LRS",
-}
-
-/**
- * The hypervisor generation of the Virtual Machine. Applicable to OS disks only.
- */
-union HyperVGeneration {
-  string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  V1: "V1",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  V2: "V2",
 }
 
 /**
@@ -252,39 +242,6 @@ union AvailabilityPolicyDiskDelay {
    * Upon a disk io failure or slow response, try detaching then reattaching the disk.
    */
   AutomaticReattach: "AutomaticReattach",
-}
-
-/**
- * The state of snapshot which determines the access availability of the snapshot.
- */
-@added(Versions.v2025_01_02)
-union SnapshotAccessState {
-  string,
-
-  /**
-   * Default value.
-   */
-  Unknown: "Unknown",
-
-  /**
-   * The snapshot cannot be used for restore, copy or download to offline.
-   */
-  Pending: "Pending",
-
-  /**
-   * The snapshot can be used for restore, copy to different region, and download to offline.
-   */
-  Available: "Available",
-
-  /**
-   * The snapshot can be used for restoring disks with fast performance but cannot be copied or downloaded.
-   */
-  InstantAccess: "InstantAccess",
-
-  /**
-   * The snapshot can be used for restoring disks with fast performance, copied and downloaded.
-   */
-  AvailableWithInstantAccess: "AvailableWithInstantAccess",
 }
 
 /**
@@ -503,15 +460,6 @@ union CopyCompletionErrorReason {
    * Indicates that the source snapshot was deleted while the background copy of the resource created via CopyStart operation was in progress.
    */
   CopySourceNotFound: "CopySourceNotFound",
-}
-
-/**
- * The Operating System type.
- */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
-enum OperatingSystemTypes {
-  Windows,
-  Linux,
 }
 
 /**
@@ -1397,21 +1345,6 @@ model EncryptionSetIdentity {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   userAssignedIdentities?: Record<UserAssignedIdentitiesValue>;
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-model UserAssignedIdentitiesValue {
-  /**
-   * The principal id of user assigned identity.
-   */
-  @visibility(Lifecycle.Read)
-  principalId?: string;
-
-  /**
-   * The client id of user assigned identity.
-   */
-  @visibility(Lifecycle.Read)
-  clientId?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
