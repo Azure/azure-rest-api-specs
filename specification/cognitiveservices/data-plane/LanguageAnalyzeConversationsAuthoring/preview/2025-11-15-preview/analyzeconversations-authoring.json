@@ -3101,11 +3101,11 @@
           "type": "string",
           "description": "Represents the trained model label."
         },
-        "assignedResources": {
+        "azureResourceIds": {
           "type": "array",
-          "description": "Represents the resources to be assigned to the deployment. If provided, the deployment will be rolled out to the resources provided here as well as the original resource in which the project is created.",
+          "description": "Represents the Language or AIService resource IDs that if provided,\\n            the deployment will be rolled out to the resources provided here as well as the original resource in which the project is created.",
           "items": {
-            "$ref": "#/definitions/AnalyzeConversationAuthoringDeploymentResource"
+            "$ref": "#/definitions/AnalyzeConversationAuthoringProjectResourceInfo"
           }
         }
       },
@@ -3307,28 +3307,6 @@
         "createdDateTime",
         "lastUpdatedDateTime",
         "status"
-      ]
-    },
-    "AnalyzeConversationAuthoringDeploymentResource": {
-      "type": "object",
-      "description": "Represents an Azure resource assigned to a deployment.",
-      "properties": {
-        "resourceId": {
-          "type": "string",
-          "description": "Represents the Azure resource Id."
-        },
-        "region": {
-          "type": "string",
-          "description": "Represents the resource region."
-        },
-        "assignedAoaiResource": {
-          "$ref": "#/definitions/AnalyzeConversationAuthoringDataGenerationConnectionInfo",
-          "description": "Represents the AOAI resource assigned for data generation."
-        }
-      },
-      "required": [
-        "resourceId",
-        "region"
       ]
     },
     "AnalyzeConversationAuthoringEntitiesEvaluationSummary": {
@@ -4547,7 +4525,10 @@
         "azureResourceId": {
           "type": "string",
           "description": "The Azure resource ID of the language or AI resource.",
-          "readOnly": true
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "region": {
           "type": "string",

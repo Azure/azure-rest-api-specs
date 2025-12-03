@@ -672,6 +672,9 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 @@clientName(ExportedModelOptions, "ConversationAuthoringExportedModelDetails");
 @@clientName(ExportedModelOptions, "ExportedModelDetails", "python");
 @@clientName(AnalyzeConversationAuthoringUtteranceEvaluationResult,
+  "UtteranceEvaluationResult"
+);
+@@clientName(AnalyzeConversationAuthoringUtteranceEvaluationResult,
   "UtteranceEvaluationResult",
   "python"
 );
@@ -697,12 +700,18 @@ namespace Language.ConversationsAuthoringClientCustomizations;
   "python"
 );
 @@clientName(AnalyzeConversationAuthoringEntityEvaluationSummary,
+  "ConversationAuthoringEntityEvalSummary"
+);
+@@clientName(AnalyzeConversationAuthoringEntityEvaluationSummary,
   "EntityEvaluationSummary",
   "python"
 );
 @@clientName(AnalyzeConversationAuthoringUtteranceEntitiesEvaluationResult,
   "UtteranceEntitiesEvaluationResult",
   "python"
+);
+@@clientName(AnalyzeConversationAuthoringUtteranceEntityEvaluationResult,
+  "UtteranceEntityEvaluationResult",
 );
 @@clientName(AnalyzeConversationAuthoringUtteranceEntityEvaluationResult,
   "UtteranceEntityEvaluationResult",
@@ -811,7 +820,6 @@ namespace ConversationAuthoringClient {
 
     listProjectResources is Language.Conversations.Authoring.conversationAuthoringListProjectResources;
 
-    @clientName("listDeployments", "csharp")
     listDeployments is Language.Conversations.Authoring.conversationAuthoringListDeployments;
 
     listExportedModels is Language.Conversations.Authoring.conversationAuthoringListExportedModels;

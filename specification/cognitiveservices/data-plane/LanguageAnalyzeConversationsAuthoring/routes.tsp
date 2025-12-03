@@ -540,6 +540,7 @@ interface ConversationAuthoringProject {
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style"
       @query("format")
+      @clientName("projectFormat", "csharp")
       ExportedProjectFormat?: ExportedProjectFormat;
 
       /**

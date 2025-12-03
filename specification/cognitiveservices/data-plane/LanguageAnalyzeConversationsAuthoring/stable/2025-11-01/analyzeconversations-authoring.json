@@ -2412,7 +2412,7 @@
           "type": "string",
           "description": "Represents the trained model label."
         },
-        "assignedResourceIds": {
+        "azureResourceIds": {
           "type": "array",
           "description": "Represents the Language or AIService resource IDs that if provided,\\n            the deployment will be rolled out to the resources provided here as well as the original resource in which the project is created.",
           "items": {
@@ -3588,7 +3588,10 @@
         "azureResourceId": {
           "type": "string",
           "description": "The Azure resource ID of the language or AI resource.",
-          "readOnly": true
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "region": {
           "type": "string",
