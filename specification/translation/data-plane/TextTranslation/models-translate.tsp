@@ -400,23 +400,23 @@ model TranslationText {
   language: string;
 
   @added(APIVersion.v2025_10_01_preview)
-  @doc("An interger indicating the number of characters in the source text string")
+  @doc("An integer indicating the number of characters in the source text string")
   sourceCharacters?: int32;
 
   @added(APIVersion.v2025_10_01_preview)
-  @doc("An interger indicating the number of tokens used in generating the translated text")
+  @doc("An integer indicating the number of tokens used in generating the translated text")
   instructionTokens?: int32;
 
   @added(APIVersion.v2025_10_01_preview)
-  @doc("An interger indicating the number of tokens used in the source sentence")
+  @doc("An integer indicating the number of tokens used in the source sentence")
   sourceTokens?: int32;
 
   @added(APIVersion.v2025_10_01_preview)
-  @doc("An interger indicating the number of tokens used in the translation response")
+  @doc("An integer indicating the number of tokens used in the translation response")
   responseTokens?: int32;
 
   @added(APIVersion.v2025_10_01_preview)
-  @doc("An interger indicating the number of tokens used in the target sentence")
+  @doc("An integer indicating the number of tokens used in the target sentence")
   targetTokens?: int32;
 
   @doc("A string giving the translated text.")
