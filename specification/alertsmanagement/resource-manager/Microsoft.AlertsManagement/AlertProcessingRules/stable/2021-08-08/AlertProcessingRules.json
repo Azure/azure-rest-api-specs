@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "AlertProcessingRulesClient",
+    "title": "Azure Alerts Management Service Resource Provider",
     "version": "2021-08-08",
-    "description": "Alert Processing Rules Client",
+    "description": "APIs for Azure alert processing rules CRUD operations.",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -61,15 +61,22 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/AlertProcessingRulesList"
+            },
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              }
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -103,15 +110,22 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/AlertProcessingRulesList"
+            },
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              }
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -152,15 +166,22 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/AlertProcessingRule"
+            },
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              }
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -205,21 +226,35 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'AlertProcessingRule' update operation succeeded",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/AlertProcessingRule"
+            },
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              }
             }
           },
           "201": {
-            "description": "Resource 'AlertProcessingRule' create operation succeeded",
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/AlertProcessingRule"
+            },
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              }
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -279,15 +314,22 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/AlertProcessingRule"
+            },
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              }
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -323,15 +365,29 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource deleted successfully."
+            "description": "The request has succeeded.",
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              }
+            }
           },
           "204": {
-            "description": "Resource does not exist."
+            "description": "There is no content to send for this request, but the headers may be useful. ",
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -435,7 +491,8 @@
           "description": "Conditions on which alerts will be filtered.",
           "items": {
             "$ref": "#/definitions/Condition"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "schedule": {
           "$ref": "#/definitions/Schedule",
@@ -446,11 +503,12 @@
           "description": "Actions to be applied.",
           "items": {
             "$ref": "#/definitions/Action"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "description": {
           "type": "string",
-          "description": "Description of alert processing rule."
+          "description": "Actions to be applied.Description of alert processing rule."
         },
         "enabled": {
           "type": "boolean",
@@ -503,6 +561,42 @@
             "type": "string"
           }
         }
+      }
+    },
+    "CreatedByType": {
+      "type": "string",
+      "description": "The type of identity that created the resource.",
+      "enum": [
+        "User",
+        "Application",
+        "ManagedIdentity",
+        "Key"
+      ],
+      "x-ms-enum": {
+        "name": "CreatedByType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "User",
+            "value": "User",
+            "description": "User"
+          },
+          {
+            "name": "Application",
+            "value": "Application",
+            "description": "Application"
+          },
+          {
+            "name": "ManagedIdentity",
+            "value": "ManagedIdentity",
+            "description": "ManagedIdentity"
+          },
+          {
+            "name": "Key",
+            "value": "Key",
+            "description": "Key"
+          }
+        ]
       }
     },
     "DailyRecurrence": {
@@ -567,6 +661,42 @@
             "description": "Saturday"
           }
         ]
+      }
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "description": "An error response from the service.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorResponseBody",
+          "description": "Details of error response."
+        }
+      }
+    },
+    "ErrorResponseBody": {
+      "type": "object",
+      "description": "Details of error response.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code, intended to be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "Description of the error, intended for display in user interface."
+        },
+        "target": {
+          "type": "string",
+          "description": "Target of the particular error, for example name of the property."
+        },
+        "details": {
+          "type": "array",
+          "description": "A list of additional details about the error.",
+          "items": {
+            "$ref": "#/definitions/ErrorResponseBody"
+          },
+          "x-ms-identifiers": []
+        }
       }
     },
     "Field": {
@@ -646,6 +776,35 @@
           }
         ]
       }
+    },
+    "ManagedResource": {
+      "type": "object",
+      "description": "An azure managed resource object.",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Resource location",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
     },
     "MonthlyRecurrence": {
       "type": "object",
@@ -796,6 +955,27 @@
       ],
       "x-ms-discriminator-value": "RemoveAllActionGroups"
     },
+    "Resource": {
+      "type": "object",
+      "description": "An azure resource object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Azure resource Id",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Azure resource type",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Azure resource name",
+          "readOnly": true
+        }
+      }
+    },
     "Schedule": {
       "type": "object",
       "description": "Scheduling configuration for a given alert processing rule.",
@@ -819,7 +999,8 @@
           "description": "List of recurrences.",
           "items": {
             "$ref": "#/definitions/Recurrence"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },

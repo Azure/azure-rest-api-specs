@@ -225,6 +225,7 @@ model AlertProcessingRuleProperties {
   /**
    * Conditions on which alerts will be filtered.
    */
+  @identifiers(#[])
   conditions?: Condition[];
 
   /**
@@ -235,8 +236,12 @@ model AlertProcessingRuleProperties {
   /**
    * Actions to be applied.
    */
+  @identifiers(#[])
   actions: Action[];
 
+  /**
+   * Actions to be applied.
+   */
   /**
    * Description of alert processing rule.
    */
@@ -292,6 +297,7 @@ model Schedule {
   /**
    * List of recurrences.
    */
+  @identifiers(#[])
   recurrences?: Recurrence[];
 }
 
@@ -401,6 +407,7 @@ model ErrorResponseBody {
   /**
    * A list of additional details about the error.
    */
+  @identifiers(#[])
   details?: ErrorResponseBody[];
 }
 

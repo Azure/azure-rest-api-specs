@@ -28,30 +28,55 @@ interface AlertProcessingRules {
   /**
    * Get an alert processing rule by name.
    */
-  getByName is ArmResourceRead<AlertProcessingRule>;
+  getByName is ArmResourceRead<
+    AlertProcessingRule,
+    Response = ArmResponse<AlertProcessingRule> &
+      Azure.Core.RequestIdResponseHeader,
+    Error = ErrorResponse
+  >;
 
   /**
    * Create or update an alert processing rule.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<AlertProcessingRule>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<
+    AlertProcessingRule,
+    Response = (ArmResourceUpdatedResponse<AlertProcessingRule> &
+      Azure.Core.RequestIdResponseHeader) | (ArmResourceCreatedSyncResponse<AlertProcessingRule> &
+      Azure.Core.RequestIdResponseHeader),
+    Error = ErrorResponse
+  >;
 
   /**
    * Enable, disable, or update tags for an alert processing rule.
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<AlertProcessingRule, PatchModel = PatchObject>;
+  update is ArmCustomPatchSync<
+    AlertProcessingRule,
+    PatchModel = PatchObject,
+    Response = ArmResponse<AlertProcessingRule> &
+      Azure.Core.RequestIdResponseHeader,
+    Error = ErrorResponse
+  >;
 
   /**
    * Delete an alert processing rule.
    */
-  delete is ArmResourceDeleteSync<AlertProcessingRule>;
+  delete is ArmResourceDeleteSync<
+    AlertProcessingRule,
+    Response = (ArmDeletedResponse &
+      Azure.Core.RequestIdResponseHeader) | (ArmDeletedNoContentResponse &
+      Azure.Core.RequestIdResponseHeader),
+    Error = ErrorResponse
+  >;
 
   /**
    * List all alert processing rules in a resource group.
    */
   listByResourceGroup is ArmResourceListByParent<
     AlertProcessingRule,
-    Response = ArmResponse<AlertProcessingRulesList>
+    Response = ArmResponse<AlertProcessingRulesList> &
+      Azure.Core.RequestIdResponseHeader,
+    Error = ErrorResponse
   >;
 
   /**
@@ -59,7 +84,9 @@ interface AlertProcessingRules {
    */
   listBySubscription is ArmListBySubscription<
     AlertProcessingRule,
-    Response = ArmResponse<AlertProcessingRulesList>
+    Response = ArmResponse<AlertProcessingRulesList> &
+      Azure.Core.RequestIdResponseHeader,
+    Error = ErrorResponse
   >;
 }
 

@@ -22,10 +22,10 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
- * Alert Processing Rules Client
+ * APIs for Azure alert processing rules CRUD operations.
  */
 @armProviderNamespace
-@service(#{ title: "AlertProcessingRulesClient" })
+@service(#{ title: "Azure Alerts Management Service Resource Provider" })
 @versioned(Versions)
 // FIXME: Common type version v2 is not supported for now. Set to v3.
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
