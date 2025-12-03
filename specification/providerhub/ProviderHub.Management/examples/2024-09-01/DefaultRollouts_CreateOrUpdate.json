@@ -1,0 +1,195 @@
+{
+  "parameters": {
+    "api-version": "2024-09-01",
+    "properties": {
+      "properties": {
+        "specification": {
+          "canary": {
+            "skipRegions": [
+              "eastus2euap"
+            ]
+          },
+          "expeditedRollout": {
+            "enabled": true
+          },
+          "restOfTheWorldGroupTwo": {
+            "waitDuration": "PT4H"
+          }
+        }
+      }
+    },
+    "providerNamespace": "Microsoft.Contoso",
+    "rolloutName": "2020week10",
+    "subscriptionId": "ab7a8701-f7ef-471a-a2f4-d0ebbf494f77"
+  },
+  "responses": {
+    "200": {
+      "description": "Default rollout updated successfully.",
+      "body": {
+        "name": "Microsoft.Contoso/2020week10",
+        "type": "Microsoft.ProviderHub/providerRegistrations/defaultRollouts",
+        "id": "/subscriptions/ab7a8701-f7ef-471a-a2f4-d0ebbf494f77/providers/Microsoft.ProviderHub/providerRegistrations/Microsoft.Contoso/defaultRollouts/2020week10",
+        "properties": {
+          "provisioningState": "RolloutInProgress",
+          "specification": {
+            "canary": {
+              "regions": [
+                "brazilus",
+                "eastus2euap",
+                "centraluseuap"
+              ]
+            },
+            "highTraffic": {
+              "regions": [
+                "australiasoutheast",
+                "otherhightraficregions"
+              ],
+              "waitDuration": "PT24H"
+            },
+            "lowTraffic": {
+              "regions": [
+                "southeastasia"
+              ],
+              "waitDuration": "PT24H"
+            },
+            "mediumTraffic": {
+              "regions": [
+                "uksouth",
+                "indiawest"
+              ],
+              "waitDuration": "PT24H"
+            },
+            "restOfTheWorldGroupOne": {
+              "regions": [
+                "koreacentral",
+                "francecentral",
+                "australiacentral",
+                "westus",
+                "allotherregions"
+              ],
+              "waitDuration": "PT4H"
+            },
+            "restOfTheWorldGroupTwo": {
+              "regions": [
+                "germanynorth",
+                "norwayeast",
+                "allotherregions"
+              ],
+              "waitDuration": "PT4H"
+            }
+          },
+          "status": {
+            "completedRegions": [
+              "brazilus",
+              "eastus2euap",
+              "centraluseuap",
+              "allcompletedregions"
+            ],
+            "manifestCheckinStatus": {
+              "commitId": "47317892d4edf22f08704f6b595105c4fd7a8db7",
+              "isCheckedIn": true,
+              "statusMessage": "Manifest is successfully merged. Use the Default/Custom rollout (http://aka.ms/rpaasrollout) to roll out the manifest in ARM."
+            }
+          }
+        },
+        "systemData": {
+          "createdAt": "2020-02-01T01:01:01.1075056Z",
+          "createdBy": "string",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-02-01T01:01:01.1075056Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User"
+        }
+      }
+    },
+    "201": {
+      "description": "Default rollout started successfully.",
+      "body": {
+        "name": "Microsoft.Contoso/2020week10",
+        "type": "Microsoft.ProviderHub/providerRegistrations/defaultRollouts",
+        "id": "/subscriptions/ab7a8701-f7ef-471a-a2f4-d0ebbf494f77/providers/Microsoft.ProviderHub/providerRegistrations/Microsoft.Contoso/defaultRollouts/2020week10",
+        "properties": {
+          "provisioningState": "RolloutInProgress",
+          "specification": {
+            "canary": {
+              "regions": [
+                "brazilus",
+                "eastus2euap",
+                "centraluseuap"
+              ],
+              "skipRegions": [
+                "brazilus"
+              ]
+            },
+            "highTraffic": {
+              "regions": [
+                "australiasoutheast",
+                "otherhightraficregions"
+              ],
+              "waitDuration": "PT24H"
+            },
+            "lowTraffic": {
+              "regions": [
+                "southeastasia"
+              ],
+              "waitDuration": "PT24H"
+            },
+            "mediumTraffic": {
+              "regions": [
+                "uksouth",
+                "indiawest"
+              ],
+              "waitDuration": "PT24H"
+            },
+            "restOfTheWorldGroupOne": {
+              "regions": [
+                "koreacentral",
+                "francecentral",
+                "australiacentral",
+                "westus",
+                "allotherregions"
+              ],
+              "waitDuration": "PT4H"
+            },
+            "restOfTheWorldGroupTwo": {
+              "regions": [
+                "germanynorth",
+                "norwayeast",
+                "allotherregions"
+              ],
+              "waitDuration": "PT4H"
+            }
+          },
+          "status": {
+            "completedRegions": [
+              "brazilus",
+              "eastus2euap",
+              "centraluseuap"
+            ],
+            "manifestCheckinStatus": {
+              "commitId": "47317892d4edf22f08704f6b595105c4fd7a8db7",
+              "isCheckedIn": true,
+              "statusMessage": "Manifest is successfully merged. Use the Default/Custom rollout (http://aka.ms/rpaasrollout) to roll out the manifest in ARM."
+            },
+            "nextTrafficRegion": "LowTraffic",
+            "nextTrafficRegionScheduledTime": "2020-03-03T22:00:00Z"
+          }
+        },
+        "systemData": {
+          "createdAt": "2020-02-01T01:01:01.1075056Z",
+          "createdBy": "string",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-02-01T01:01:01.1075056Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User"
+        }
+      },
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/ab7a8701-f7ef-471a-a2f4-d0ebbf494f77/providers/Microsoft.ProviderHub/operationStauses/11111111-f7ef-471a-a2f4-d0ebbf494f77",
+        "retry-after": "5000"
+      }
+    }
+  },
+  "operationId": "DefaultRollouts_CreateOrUpdate",
+  "title": "DefaultRollouts_CreateOrUpdate"
+}

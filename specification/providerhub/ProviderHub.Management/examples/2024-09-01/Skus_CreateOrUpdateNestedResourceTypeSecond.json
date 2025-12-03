@@ -1,0 +1,52 @@
+{
+  "parameters": {
+    "api-version": "2024-09-01",
+    "nestedResourceTypeFirst": "nestedResourceTypeFirst",
+    "nestedResourceTypeSecond": "nestedResourceTypeSecond",
+    "properties": {
+      "properties": {
+        "skuSettings": [
+          {
+            "name": "freeSku",
+            "kind": "Standard",
+            "tier": "Tier1"
+          },
+          {
+            "name": "premiumSku",
+            "costs": [
+              {
+                "meterId": "xxx"
+              }
+            ],
+            "kind": "Premium",
+            "tier": "Tier2"
+          }
+        ]
+      }
+    },
+    "providerNamespace": "Microsoft.Contoso",
+    "resourceType": "testResourceType",
+    "sku": "testSku",
+    "subscriptionId": "ab7a8701-f7ef-471a-a2f4-d0ebbf494f77"
+  },
+  "responses": {
+    "200": {
+      "description": "",
+      "body": {
+        "name": "Microsoft.Contoso/employees/nestedEmployee/nestedEmployee2/sku1",
+        "type": "Microsoft.ProviderHub/providerRegistrations/resourcetypeRegistrations/resourcetypeRegistrations/resourcetypeRegistrations/skus",
+        "id": "/subscriptions/ab7a8701-f7ef-471a-a2f4-d0ebbf494f77/providers/Microsoft.ProviderHub/providerRegistrations/Microsoft.Contoso/resourcetypeRegistrations/employees/resourcetypeRegistrations/nestedEmployee/resourcetypeRegistrations/nestedEmployee2/skus/sku1",
+        "systemData": {
+          "createdAt": "2020-02-01T01:01:01.1075056Z",
+          "createdBy": "string",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-02-01T01:01:01.1075056Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User"
+        }
+      }
+    }
+  },
+  "operationId": "Skus_CreateOrUpdateNestedResourceTypeSecond",
+  "title": "Skus_CreateOrUpdateNestedResourceTypeSecond"
+}
