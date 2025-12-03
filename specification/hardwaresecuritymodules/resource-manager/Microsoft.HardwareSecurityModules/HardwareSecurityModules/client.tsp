@@ -28,6 +28,11 @@ using Azure.Core;
   "csharp"
 );
 
+@@clientName(CloudHsmClusters.listByCloudHsmCluster,
+  "GetCloudHsmClusterPrivateLinkResources",
+  "csharp"
+);
+
 @@clientName(ActivationState, "SecurityDomainActivationState", "csharp");
 @@clientName(BackupRequestProperties, "CloudHsmClusterBackupContent", "csharp");
 @@clientName(BackupResult, "CloudHsmClusterBackupResult", "csharp");
@@ -36,9 +41,11 @@ using Azure.Core;
   "csharp"
 );
 @@clientName(EndpointDetail, "DedicatedHsmEndpointDetail", "csharp");
+@@clientName(EndpointDetail.ipAddress, "IPAddress", "csharp");
 @@clientName(EndpointDependency, "DedicatedHsmEndpointDependency", "csharp");
 @@clientName(JsonWebKeyType, "DedicatedHsmJsonWebKeyType", "csharp");
 @@clientName(NetworkInterface, "DedicatedHsmNetworkInterface", "csharp");
+@@clientName(NetworkInterface.privateIpAddress, "PrivateIPAddress", "csharp");
 @@clientName(NetworkProfile, "DedicatedHsmNetworkProfile", "csharp");
 @@clientName(OutboundEnvironmentEndpoint,
   "DedicatedHsmEgressEndpoint",
@@ -128,3 +135,7 @@ using Azure.Core;
   "connectionState ",
   "csharp"
 );
+@@clientName(CloudHsmClusters.backup::parameters.body, "content", "csharp");
+@@clientName(CloudHsmClusters.validateRestoreProperties::parameters.body, "content", "csharp");
+@@clientName(CloudHsmClusters.validateBackupProperties::parameters.body, "content", "csharp");
+@@clientName(DedicatedHsms.update::parameters.properties, "patch", "csharp");
