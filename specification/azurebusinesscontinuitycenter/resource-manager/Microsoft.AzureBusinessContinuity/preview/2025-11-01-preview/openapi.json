@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.AzureBusinessContinuity management service.",
-    "version": "2024-09-01-preview",
+    "version": "2025-11-01-preview",
     "description": "microsoft.azurebusinesscontinuity Resource Provider management API.",
     "x-typespec-generated": [
       {
@@ -52,7 +52,7 @@
   "paths": {
     "/{resourceUri}/providers/Microsoft.AzureBusinessContinuity/unifiedProtectedItems": {
       "get": {
-        "operationId": "UnifiedProtectedItem_ListByResourceGroup",
+        "operationId": "UnifiedProtectedItem_ListByResource",
         "tags": [
           "UnifiedProtectedItem"
         ],
@@ -80,8 +80,8 @@
           }
         },
         "x-ms-examples": {
-          "UnifiedProtectedItem_ListByResourceGroup": {
-            "$ref": "./examples/Upi_ListByResourceGroup.json"
+          "UnifiedProtectedItem_ListByResource": {
+            "$ref": "./examples/Upi_ListByResource.json"
           }
         },
         "x-ms-pageable": {
@@ -1065,6 +1065,10 @@
           "$ref": "#/definitions/BCDRDataSecurityLevel",
           "description": "BCDR Security score of protected item."
         },
+        "sourceSideScanInfo": {
+          "$ref": "#/definitions/SourceSideScanInfo",
+          "description": "Source side scan information of protected item."
+        },
         "providerSpecificProperties": {
           "$ref": "#/definitions/ProviderSpecificProperties",
           "description": "Provider specific properties."
@@ -1098,6 +1102,7 @@
         "protectedItemFriendlyName",
         "allowedOperations",
         "bcdrDataSecurityLevel",
+        "sourceSideScanInfo",
         "lastUpdatedTime",
         "dictionaryOfResourceTypeToLastEventTime",
         "referencedObjects"
@@ -1118,6 +1123,102 @@
       "required": [
         "allowedOperationsPerSolution"
       ]
+    },
+    "SourceSideScanInfo": {
+      "type": "object",
+      "description": "Source side scan information.",
+      "properties": {
+        "sourceSideScanStatus": {
+          "$ref": "#/definitions/SourceSideScanStatus",
+          "description": "Source side scan status."
+        },
+        "sourceSideScanSummary": {
+          "$ref": "#/definitions/SourceSideScanSummary",
+          "description": "Source side scan summary."
+        }
+      },
+      "required": [
+        "sourceSideScanStatus",
+        "sourceSideScanSummary"
+      ]
+    },
+    "SourceSideScanStatus": {
+      "type": "string",
+      "description": "Enum for source side scan status.",
+      "enum": [
+        "NotApplicable",
+        "Configured",
+        "NotConfigured",
+        "ConfigurationFailed"
+      ],
+      "x-ms-enum": {
+        "name": "SourceSideScanStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotApplicable",
+            "value": "NotApplicable",
+            "description": "Not Applicable."
+          },
+          {
+            "name": "Configured",
+            "value": "Configured",
+            "description": "Source side scan is configured."
+          },
+          {
+            "name": "NotConfigured",
+            "value": "NotConfigured",
+            "description": "Source side scan is not configured."
+          },
+          {
+            "name": "ConfigurationFailed",
+            "value": "ConfigurationFailed",
+            "description": "Source side scan configuration has failed."
+          }
+        ]
+      }
+    },
+    "SourceSideScanSummary": {
+      "type": "string",
+      "description": "Enum for source side scan summary.",
+      "enum": [
+        "NotApplicable",
+        "Unknown",
+        "Suspicious",
+        "Healthy",
+        "NoThreatsReported"
+      ],
+      "x-ms-enum": {
+        "name": "SourceSideScanSummary",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotApplicable",
+            "value": "NotApplicable",
+            "description": "Not Applicable."
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Scan status is unknown."
+          },
+          {
+            "name": "Suspicious",
+            "value": "Suspicious",
+            "description": "Suspicious activity detected."
+          },
+          {
+            "name": "Healthy",
+            "value": "Healthy",
+            "description": "No issues detected, status is healthy."
+          },
+          {
+            "name": "NoThreatsReported",
+            "value": "NoThreatsReported",
+            "description": "No threats reported."
+          }
+        ]
+      }
     },
     "Tag": {
       "type": "object",
@@ -1236,6 +1337,11 @@
           "description": "Computed & aggregated Security Level of UPI",
           "readOnly": true
         },
+        "sourceSideScanInfo": {
+          "$ref": "#/definitions/SourceSideScanInfo",
+          "description": "Computed & aggregated source side scan information on UPI.",
+          "readOnly": true
+        },
         "primaryRegionProtectionDetails": {
           "$ref": "#/definitions/RegionSpecificPropertiesForUnifiedProtectedItem",
           "description": "Primary region properties of UPI.",
@@ -1309,6 +1415,7 @@
         "protectionStatusInPrimaryRegion",
         "protectionStatusInSecondaryRegion",
         "maximumBcdrDataSecurity",
+        "sourceSideScanInfo",
         "primaryRegionProtectionDetails",
         "solutionSpecificProtectionProperties",
         "protectedItems",
