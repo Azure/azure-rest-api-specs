@@ -1,33 +1,32 @@
 {
   "parameters": {
-    "api-version": "2021-08-08",
-    "subscriptionId": "1e3ff1c0-771a-4119-a03b-be82a51e232d",
-    "resourceGroupName": "alertscorrelationrg",
     "alertProcessingRuleName": "WeeklySuppression",
     "alertProcessingRulePatch": {
+      "properties": {
+        "enabled": false
+      },
       "tags": {
         "key1": "value1",
         "key2": "value2"
-      },
-      "properties": {
-        "enabled": false
       }
-    }
+    },
+    "api-version": "2021-08-08",
+    "resourceGroupName": "alertscorrelationrg",
+    "subscriptionId": "1e3ff1c0-771a-4119-a03b-be82a51e232d"
   },
   "responses": {
     "200": {
       "body": {
-        "systemData": {
-          "createdBy": "abc@microsoft.com",
-          "createdByType": "User",
-          "createdAt": "2018-06-12T22:05:09Z",
-          "lastModifiedBy": "xyz@microsoft.com",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2018-06-12T22:05:09Z"
-        },
+        "name": "WeeklySuppression",
+        "type": "Microsoft.AlertsManagement/actionRules",
+        "id": "/subscriptions/1e3ff1c0-771a-4119-a03b-be82a51e232d/resourceGroups/alertscorrelationrg/providers/Microsoft.AlertsManagement/actionRules/WeeklySuppression",
+        "location": "Global",
         "properties": {
-          "scopes": [
-            "/subscriptions/1e3ff1c0-771a-4119-a03b-be82a51e232d/resourceGroups/alertscorrelationrg"
+          "description": "Alert processing rule on resource group for weekly suppression",
+          "actions": [
+            {
+              "actionType": "RemoveAllActionGroups"
+            }
           ],
           "conditions": [
             {
@@ -54,39 +53,42 @@
               ]
             }
           ],
+          "enabled": false,
           "schedule": {
             "effectiveFrom": "2018-12-10T22:05:09",
             "effectiveUntil": "2018-12-05T22:05:09",
-            "timeZone": "Pacific Standard Time",
             "recurrences": [
               {
-                "recurrenceType": "Weekly",
-                "startTime": "06:00:00",
-                "endTime": "14:00:00",
                 "daysOfWeek": [
                   "Tuesday",
                   "Friday"
-                ]
+                ],
+                "endTime": "14:00:00",
+                "recurrenceType": "Weekly",
+                "startTime": "06:00:00"
               }
-            ]
+            ],
+            "timeZone": "Pacific Standard Time"
           },
-          "actions": [
-            {
-              "actionType": "RemoveAllActionGroups"
-            }
-          ],
-          "description": "Alert processing rule on resource group for weekly suppression",
-          "enabled": false
+          "scopes": [
+            "/subscriptions/1e3ff1c0-771a-4119-a03b-be82a51e232d/resourceGroups/alertscorrelationrg"
+          ]
         },
-        "id": "/subscriptions/1e3ff1c0-771a-4119-a03b-be82a51e232d/resourceGroups/alertscorrelationrg/providers/Microsoft.AlertsManagement/actionRules/WeeklySuppression",
-        "type": "Microsoft.AlertsManagement/actionRules",
-        "name": "WeeklySuppression",
-        "location": "Global",
+        "systemData": {
+          "createdAt": "2018-06-12T22:05:09Z",
+          "createdBy": "abc@microsoft.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2018-06-12T22:05:09Z",
+          "lastModifiedBy": "xyz@microsoft.com",
+          "lastModifiedByType": "User"
+        },
         "tags": {
           "key1": "value1",
           "key2": "value2"
         }
       }
     }
-  }
+  },
+  "operationId": "AlertProcessingRules_Update",
+  "title": "PatchAlertProcessingRule"
 }

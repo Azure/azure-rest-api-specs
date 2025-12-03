@@ -1,15 +1,13 @@
 {
   "parameters": {
-    "api-version": "2021-08-08",
-    "subscriptionId": "subId1",
-    "resourceGroupName": "alertscorrelationrg",
-    "alertProcessingRuleName": "RemoveActionGroupsSpecificAlertRule",
     "alertProcessingRule": {
       "location": "Global",
-      "tags": {},
       "properties": {
-        "scopes": [
-          "/subscriptions/subId1"
+        "description": "Removes all ActionGroups from all Alerts that fire on above AlertRule",
+        "actions": [
+          {
+            "actionType": "RemoveAllActionGroups"
+          }
         ],
         "conditions": [
           {
@@ -20,30 +18,31 @@
             ]
           }
         ],
-        "actions": [
-          {
-            "actionType": "RemoveAllActionGroups"
-          }
-        ],
-        "description": "Removes all ActionGroups from all Alerts that fire on above AlertRule",
-        "enabled": true
-      }
-    }
+        "enabled": true,
+        "scopes": [
+          "/subscriptions/subId1"
+        ]
+      },
+      "tags": {}
+    },
+    "alertProcessingRuleName": "RemoveActionGroupsSpecificAlertRule",
+    "api-version": "2021-08-08",
+    "resourceGroupName": "alertscorrelationrg",
+    "subscriptionId": "subId1"
   },
   "responses": {
     "200": {
       "body": {
-        "systemData": {
-          "createdBy": "abc@microsoft.com",
-          "createdByType": "User",
-          "createdAt": "2018-06-11T22:05:09Z",
-          "lastModifiedBy": "xyz@microsoft.com",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2018-06-12T22:05:09Z"
-        },
+        "name": "RemoveActionGroupsSpecificAlertRule",
+        "type": "Microsoft.AlertsManagement/actionRules",
+        "id": "/subscriptions/subId1/resourceGroups/alertscorrelationrg/providers/Microsoft.AlertsManagement/actionRules/RemoveActionGroupsSpecificAlertRule",
+        "location": "Global",
         "properties": {
-          "scopes": [
-            "/subscriptions/subId1"
+          "description": "Removes all ActionGroups from all Alerts that fire on above AlertRule",
+          "actions": [
+            {
+              "actionType": "RemoveAllActionGroups"
+            }
           ],
           "conditions": [
             {
@@ -54,34 +53,34 @@
               ]
             }
           ],
-          "actions": [
-            {
-              "actionType": "RemoveAllActionGroups"
-            }
-          ],
-          "description": "Removes all ActionGroups from all Alerts that fire on above AlertRule",
-          "enabled": true
+          "enabled": true,
+          "scopes": [
+            "/subscriptions/subId1"
+          ]
         },
-        "id": "/subscriptions/subId1/resourceGroups/alertscorrelationrg/providers/Microsoft.AlertsManagement/actionRules/RemoveActionGroupsSpecificAlertRule",
-        "type": "Microsoft.AlertsManagement/actionRules",
-        "name": "RemoveActionGroupsSpecificAlertRule",
-        "location": "Global",
+        "systemData": {
+          "createdAt": "2018-06-11T22:05:09Z",
+          "createdBy": "abc@microsoft.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2018-06-12T22:05:09Z",
+          "lastModifiedBy": "xyz@microsoft.com",
+          "lastModifiedByType": "User"
+        },
         "tags": {}
       }
     },
     "201": {
       "body": {
-        "systemData": {
-          "createdBy": "abc@microsoft.com",
-          "createdByType": "User",
-          "createdAt": "2018-06-11T22:05:09Z",
-          "lastModifiedBy": "xyz@microsoft.com",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2018-06-12T22:05:09Z"
-        },
+        "name": "RemoveActionGroupsSpecificAlertRule",
+        "type": "Microsoft.AlertsManagement/actionRules",
+        "id": "/subscriptions/subId1/resourceGroups/alertscorrelationrg/providers/Microsoft.AlertsManagement/actionRules/RemoveActionGroupsSpecificAlertRule",
+        "location": "Global",
         "properties": {
-          "scopes": [
-            "/subscriptions/subId1"
+          "description": "Removes all ActionGroups from all Alerts that fire on above AlertRule",
+          "actions": [
+            {
+              "actionType": "RemoveAllActionGroups"
+            }
           ],
           "conditions": [
             {
@@ -92,20 +91,23 @@
               ]
             }
           ],
-          "actions": [
-            {
-              "actionType": "RemoveAllActionGroups"
-            }
-          ],
-          "description": "Removes all ActionGroups from all Alerts that fire on above AlertRule",
-          "enabled": true
+          "enabled": true,
+          "scopes": [
+            "/subscriptions/subId1"
+          ]
         },
-        "id": "/subscriptions/subId1/resourceGroups/alertscorrelationrg/providers/Microsoft.AlertsManagement/actionRules/RemoveActionGroupsSpecificAlertRule",
-        "type": "Microsoft.AlertsManagement/actionRules",
-        "name": "RemoveActionGroupsSpecificAlertRule",
-        "location": "Global",
+        "systemData": {
+          "createdAt": "2018-06-11T22:05:09Z",
+          "createdBy": "abc@microsoft.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2018-06-12T22:05:09Z",
+          "lastModifiedBy": "xyz@microsoft.com",
+          "lastModifiedByType": "User"
+        },
         "tags": {}
       }
     }
-  }
+  },
+  "operationId": "AlertProcessingRules_CreateOrUpdate",
+  "title": "Create or update a rule that removes all action groups from all alerts in a subscription coming from a specific alert rule"
 }

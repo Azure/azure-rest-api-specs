@@ -1,135 +1,137 @@
 {
   "parameters": {
-    "api-version": "2021-08-08",
-    "subscriptionId": "subId1",
-    "resourceGroupName": "alertscorrelationrg",
-    "alertProcessingRuleName": "RemoveActionGroupsOutsideBusinessHours",
     "alertProcessingRule": {
       "location": "Global",
-      "tags": {},
       "properties": {
-        "scopes": [
-          "/subscriptions/subId1"
-        ],
+        "description": "Remove all ActionGroups outside business hours",
         "actions": [
           {
             "actionType": "RemoveAllActionGroups"
           }
         ],
+        "enabled": true,
         "schedule": {
-          "timeZone": "Eastern Standard Time",
           "recurrences": [
             {
+              "endTime": "09:00:00",
               "recurrenceType": "Daily",
-              "startTime": "17:00:00",
-              "endTime": "09:00:00"
+              "startTime": "17:00:00"
             },
             {
-              "recurrenceType": "Weekly",
               "daysOfWeek": [
                 "Saturday",
                 "Sunday"
-              ]
+              ],
+              "recurrenceType": "Weekly"
             }
-          ]
+          ],
+          "timeZone": "Eastern Standard Time"
         },
-        "description": "Remove all ActionGroups outside business hours",
-        "enabled": true
-      }
-    }
+        "scopes": [
+          "/subscriptions/subId1"
+        ]
+      },
+      "tags": {}
+    },
+    "alertProcessingRuleName": "RemoveActionGroupsOutsideBusinessHours",
+    "api-version": "2021-08-08",
+    "resourceGroupName": "alertscorrelationrg",
+    "subscriptionId": "subId1"
   },
   "responses": {
     "200": {
       "body": {
-        "systemData": {
-          "createdBy": "abc@microsoft.com",
-          "createdByType": "User",
-          "createdAt": "2018-06-11T22:05:09Z",
-          "lastModifiedBy": "xyz@microsoft.com",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2018-06-12T22:05:09Z"
-        },
+        "name": "RemoveActionGroupsOutsideBusinessHours",
+        "type": "Microsoft.AlertsManagement/actionRules",
+        "id": "/subscriptions/subId1/resourceGroups/alertscorrelationrg/providers/Microsoft.AlertsManagement/actionRules/RemoveActionGroupsOutsideBusinessHours",
+        "location": "Global",
         "properties": {
-          "scopes": [
-            "/subscriptions/subId1"
-          ],
+          "description": "Remove all ActionGroups outside business hours",
           "actions": [
             {
               "actionType": "RemoveAllActionGroups"
             }
           ],
+          "enabled": true,
           "schedule": {
-            "timeZone": "Eastern Standard Time",
             "recurrences": [
               {
+                "endTime": "09:00:00",
                 "recurrenceType": "Daily",
-                "startTime": "17:00:00",
-                "endTime": "09:00:00"
+                "startTime": "17:00:00"
               },
               {
-                "recurrenceType": "Weekly",
                 "daysOfWeek": [
                   "Saturday",
                   "Sunday"
-                ]
+                ],
+                "recurrenceType": "Weekly"
               }
-            ]
+            ],
+            "timeZone": "Eastern Standard Time"
           },
-          "description": "Remove all ActionGroups outside business hours",
-          "enabled": true
+          "scopes": [
+            "/subscriptions/subId1"
+          ]
         },
-        "id": "/subscriptions/subId1/resourceGroups/alertscorrelationrg/providers/Microsoft.AlertsManagement/actionRules/RemoveActionGroupsOutsideBusinessHours",
-        "type": "Microsoft.AlertsManagement/actionRules",
-        "name": "RemoveActionGroupsOutsideBusinessHours",
-        "location": "Global",
+        "systemData": {
+          "createdAt": "2018-06-11T22:05:09Z",
+          "createdBy": "abc@microsoft.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2018-06-12T22:05:09Z",
+          "lastModifiedBy": "xyz@microsoft.com",
+          "lastModifiedByType": "User"
+        },
         "tags": {}
       }
     },
     "201": {
       "body": {
-        "systemData": {
-          "createdBy": "abc@microsoft.com",
-          "createdByType": "User",
-          "createdAt": "2018-06-11T22:05:09Z",
-          "lastModifiedBy": "xyz@microsoft.com",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2018-06-12T22:05:09Z"
-        },
+        "name": "RemoveActionGroupsOutsideBusinessHours",
+        "type": "Microsoft.AlertsManagement/actionRules",
+        "id": "/subscriptions/subId1/resourceGroups/alertscorrelationrg/providers/Microsoft.AlertsManagement/actionRules/RemoveActionGroupsOutsideBusinessHours",
+        "location": "Global",
         "properties": {
-          "scopes": [
-            "/subscriptions/subId1"
-          ],
+          "description": "Remove all ActionGroups outside business hours",
           "actions": [
             {
               "actionType": "RemoveAllActionGroups"
             }
           ],
+          "enabled": true,
           "schedule": {
-            "timeZone": "Eastern Standard Time",
             "recurrences": [
               {
+                "endTime": "09:00:00",
                 "recurrenceType": "Daily",
-                "startTime": "17:00:00",
-                "endTime": "09:00:00"
+                "startTime": "17:00:00"
               },
               {
-                "recurrenceType": "Weekly",
                 "daysOfWeek": [
                   "Saturday",
                   "Sunday"
-                ]
+                ],
+                "recurrenceType": "Weekly"
               }
-            ]
+            ],
+            "timeZone": "Eastern Standard Time"
           },
-          "description": "Remove all ActionGroups outside business hours",
-          "enabled": true
+          "scopes": [
+            "/subscriptions/subId1"
+          ]
         },
-        "id": "/subscriptions/subId1/resourceGroups/alertscorrelationrg/providers/Microsoft.AlertsManagement/actionRules/RemoveActionGroupsOutsideBusinessHours",
-        "type": "Microsoft.AlertsManagement/actionRules",
-        "name": "RemoveActionGroupsOutsideBusinessHours",
-        "location": "Global",
+        "systemData": {
+          "createdAt": "2018-06-11T22:05:09Z",
+          "createdBy": "abc@microsoft.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2018-06-12T22:05:09Z",
+          "lastModifiedBy": "xyz@microsoft.com",
+          "lastModifiedByType": "User"
+        },
         "tags": {}
       }
     }
-  }
+  },
+  "operationId": "AlertProcessingRules_CreateOrUpdate",
+  "title": "Create or update a rule that removes all action groups outside business hours (Mon-Fri 09:00-17:00, Eastern Standard Time)"
 }
