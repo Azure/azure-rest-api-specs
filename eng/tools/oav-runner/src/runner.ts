@@ -170,7 +170,7 @@ export async function processFilesToSpecificationList(
       */
       const swaggerDir = path.relative(
         rootDirectory,
-        untilLastSegment(absoluteFilePath, "examples"),
+        path.dirname(untilLastSegment(absoluteFilePath, "examples")),
       );
 
       const visibleSwaggerFiles = await getFiles(rootDirectory, swaggerDir);
