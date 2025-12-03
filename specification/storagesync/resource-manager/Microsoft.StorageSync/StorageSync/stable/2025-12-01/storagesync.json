@@ -101,16 +101,13 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Operations_List_MaximumSet_Gen": {
-            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
-          },
-          "Operations_List_MinimumSet_Gen": {
-            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
-          }
         }
       }
     },
@@ -157,11 +154,11 @@
           }
         },
         "x-ms-examples": {
-          "StorageSyncServices_CheckNameAvailability_MaximumSet_Gen": {
-            "$ref": "./examples/StorageSyncServices_CheckNameAvailability_MaximumSet_Gen.json"
+          "StorageSyncServiceCheckNameAvailability_AlreadyExists": {
+            "$ref": "./examples/StorageSyncServiceCheckNameAvailability_AlreadyExists.json"
           },
-          "StorageSyncServices_CheckNameAvailability_MinimumSet_Gen": {
-            "$ref": "./examples/StorageSyncServices_CheckNameAvailability_MinimumSet_Gen.json"
+          "StorageSyncServiceCheckNameAvailability_Available": {
+            "$ref": "./examples/StorageSyncServiceCheckNameAvailability_Available.json"
           }
         }
       }
@@ -217,11 +214,8 @@
           }
         },
         "x-ms-examples": {
-          "LocationOperationStatus_MaximumSet_Gen": {
-            "$ref": "./examples/LocationOperationStatus_MaximumSet_Gen.json"
-          },
-          "LocationOperationStatus_MinimumSet_Gen": {
-            "$ref": "./examples/LocationOperationStatus_MinimumSet_Gen.json"
+          "LocationOperationStatus": {
+            "$ref": "./examples/LocationOperationStatus_Get.json"
           }
         }
       }
@@ -265,13 +259,13 @@
             }
           }
         },
+        "x-ms-examples": {
+          "StorageSyncServices_ListBySubscription": {
+            "$ref": "./examples/StorageSyncServices_ListBySubscription.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "StorageSyncServices_ListBySubscription_MaximumSet_Gen": {
-            "$ref": "./examples/StorageSyncServices_ListBySubscription_MaximumSet_Gen.json"
-          }
         }
       }
     },
@@ -336,11 +330,8 @@
           }
         },
         "x-ms-examples": {
-          "OperationStatus_Get_MaximumSet_Gen": {
-            "$ref": "./examples/OperationStatus_Get_MaximumSet_Gen.json"
-          },
-          "OperationStatus_Get_MinimumSet_Gen": {
-            "$ref": "./examples/OperationStatus_Get_MinimumSet_Gen.json"
+          "OperationStatus_Get": {
+            "$ref": "./examples/OperationStatus_Get.json"
           }
         }
       }
@@ -387,13 +378,13 @@
             }
           }
         },
+        "x-ms-examples": {
+          "StorageSyncServices_ListByResourceGroup": {
+            "$ref": "./examples/StorageSyncServices_ListByResourceGroup.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "StorageSyncServices_ListByResourceGroup_MaximumSet_Gen": {
-            "$ref": "./examples/StorageSyncServices_ListByResourceGroup_MaximumSet_Gen.json"
-          }
         }
       }
     },
@@ -447,8 +438,8 @@
           }
         },
         "x-ms-examples": {
-          "StorageSyncServices_Get_MaximumSet_Gen": {
-            "$ref": "./examples/StorageSyncServices_Get_MaximumSet_Gen.json"
+          "StorageSyncServices_Get": {
+            "$ref": "./examples/StorageSyncServices_Get.json"
           }
         }
       },
@@ -526,16 +517,16 @@
             }
           }
         },
+        "x-ms-examples": {
+          "StorageSyncServices_Create": {
+            "$ref": "./examples/StorageSyncServices_Create.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/StorageSyncService"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "StorageSyncServices_Create_MaximumSet_Gen": {
-            "$ref": "./examples/StorageSyncServices_Create_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "operationId": "StorageSyncServices_Update",
@@ -621,16 +612,16 @@
             }
           }
         },
+        "x-ms-examples": {
+          "StorageSyncServices_Update": {
+            "$ref": "./examples/StorageSyncServices_Update.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/StorageSyncService"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "StorageSyncServices_Update_MaximumSet_Gen": {
-            "$ref": "./examples/StorageSyncServices_Update_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "StorageSyncServices_Delete",
@@ -707,19 +698,16 @@
             }
           }
         },
+        "x-ms-examples": {
+          "StorageSyncServices_Delete": {
+            "$ref": "./examples/StorageSyncServices_Delete.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/StorageSyncService"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "StorageSyncServices_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/StorageSyncServices_Delete_MaximumSet_Gen.json"
-          },
-          "StorageSyncServices_Delete_MinimumSet_Gen": {
-            "$ref": "./examples/StorageSyncServices_Delete_MinimumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/privateEndpointConnections": {
@@ -771,13 +759,13 @@
             }
           }
         },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_ListByStorageSyncService": {
+            "$ref": "./examples/PrivateEndpointConnections_ListByStorageSyncService.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "PrivateEndpointConnections_ListByStorageSyncService_MaximumSet_Gen": {
-            "$ref": "./examples/PrivateEndpointConnections_ListByStorageSyncService_MaximumSet_Gen.json"
-          }
         }
       }
     },
@@ -824,8 +812,8 @@
           }
         },
         "x-ms-examples": {
-          "PrivateEndpointConnections_Get_MaximumSet_Gen": {
-            "$ref": "./examples/PrivateEndpointConnections_Get_MaximumSet_Gen.json"
+          "PrivateEndpointConnections_Get": {
+            "$ref": "./examples/PrivateEndpointConnections_Get.json"
           }
         }
       },
@@ -906,16 +894,16 @@
             }
           }
         },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_Create": {
+            "$ref": "./examples/PrivateEndpointConnections_Create.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "../../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "PrivateEndpointConnections_Create_MaximumSet_Gen": {
-            "$ref": "./examples/PrivateEndpointConnections_Create_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "PrivateEndpointConnections_Delete",
@@ -985,19 +973,16 @@
             }
           }
         },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_Delete": {
+            "$ref": "./examples/PrivateEndpointConnections_Delete.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "../../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "PrivateEndpointConnections_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/PrivateEndpointConnections_Delete_MaximumSet_Gen.json"
-          },
-          "PrivateEndpointConnections_Delete_MinimumSet_Gen": {
-            "$ref": "./examples/PrivateEndpointConnections_Delete_MinimumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/privateLinkResources": {
@@ -1040,8 +1025,8 @@
           }
         },
         "x-ms-examples": {
-          "PrivateLinkResources_ListByStorageSyncService_MaximumSet_Gen": {
-            "$ref": "./examples/PrivateLinkResources_ListByStorageSyncService_MaximumSet_Gen.json"
+          "PrivateLinkResources_List": {
+            "$ref": "./examples/PrivateLinkResources_List.json"
           }
         }
       }
@@ -1095,13 +1080,13 @@
             }
           }
         },
+        "x-ms-examples": {
+          "RegisteredServers_ListByStorageSyncService": {
+            "$ref": "./examples/RegisteredServers_ListByStorageSyncService.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "RegisteredServers_ListByStorageSyncService_MaximumSet_Gen": {
-            "$ref": "./examples/RegisteredServers_ListByStorageSyncService_MaximumSet_Gen.json"
-          }
         }
       }
     },
@@ -1162,8 +1147,8 @@
           }
         },
         "x-ms-examples": {
-          "RegisteredServers_Get_MaximumSet_Gen": {
-            "$ref": "./examples/RegisteredServers_Get_MaximumSet_Gen.json"
+          "RegisteredServers_Get": {
+            "$ref": "./examples/RegisteredServers_Get.json"
           }
         }
       },
@@ -1258,16 +1243,16 @@
             }
           }
         },
+        "x-ms-examples": {
+          "RegisteredServers_Create": {
+            "$ref": "./examples/RegisteredServers_Create.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/RegisteredServer"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "RegisteredServers_Create_MaximumSet_Gen": {
-            "$ref": "./examples/RegisteredServers_Create_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "operationId": "RegisteredServers_Update",
@@ -1360,16 +1345,16 @@
             }
           }
         },
+        "x-ms-examples": {
+          "RegisteredServers_Update": {
+            "$ref": "./examples/RegisteredServers_Update.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/RegisteredServer"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "RegisteredServers_Update_MaximumSet_Gen": {
-            "$ref": "./examples/RegisteredServers_Update_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "RegisteredServers_Delete",
@@ -1448,18 +1433,15 @@
             }
           }
         },
+        "x-ms-examples": {
+          "RegisteredServers_Delete": {
+            "$ref": "./examples/RegisteredServers_Delete.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "RegisteredServers_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/RegisteredServers_Delete_MaximumSet_Gen.json"
-          },
-          "RegisteredServers_Delete_MinimumSet_Gen": {
-            "$ref": "./examples/RegisteredServers_Delete_MinimumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/registeredServers/{serverId}/triggerRollover": {
@@ -1546,18 +1528,15 @@
             }
           }
         },
+        "x-ms-examples": {
+          "RegisteredServers_triggerRollover": {
+            "$ref": "./examples/RegisteredServers_TriggerRollover.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "RegisteredServers_triggerRollover_MaximumSet_Gen": {
-            "$ref": "./examples/RegisteredServers_triggerRollover_MaximumSet_Gen.json"
-          },
-          "RegisteredServers_triggerRollover_MinimumSet_Gen": {
-            "$ref": "./examples/RegisteredServers_triggerRollover_MinimumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups": {
@@ -1609,13 +1588,13 @@
             }
           }
         },
+        "x-ms-examples": {
+          "SyncGroups_ListByStorageSyncService": {
+            "$ref": "./examples/SyncGroups_ListByStorageSyncService.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "SyncGroups_ListByStorageSyncService_MaximumSet_Gen": {
-            "$ref": "./examples/SyncGroups_ListByStorageSyncService_MaximumSet_Gen.json"
-          }
         }
       }
     },
@@ -1676,8 +1655,8 @@
           }
         },
         "x-ms-examples": {
-          "SyncGroups_Get_MaximumSet_Gen": {
-            "$ref": "./examples/SyncGroups_Get_MaximumSet_Gen.json"
+          "SyncGroups_Get": {
+            "$ref": "./examples/SyncGroups_Get.json"
           }
         }
       },
@@ -1746,8 +1725,8 @@
           }
         },
         "x-ms-examples": {
-          "SyncGroups_Create_MaximumSet_Gen": {
-            "$ref": "./examples/SyncGroups_Create_MaximumSet_Gen.json"
+          "SyncGroups_Create": {
+            "$ref": "./examples/SyncGroups_Create.json"
           }
         }
       },
@@ -1807,11 +1786,8 @@
           }
         },
         "x-ms-examples": {
-          "SyncGroups_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/SyncGroups_Delete_MaximumSet_Gen.json"
-          },
-          "SyncGroups_Delete_MinimumSet_Gen": {
-            "$ref": "./examples/SyncGroups_Delete_MinimumSet_Gen.json"
+          "SyncGroups_Delete": {
+            "$ref": "./examples/SyncGroups_Delete.json"
           }
         }
       }
@@ -1872,13 +1848,13 @@
             }
           }
         },
+        "x-ms-examples": {
+          "CloudEndpoints_ListBySyncGroup": {
+            "$ref": "./examples/CloudEndpoints_ListBySyncGroup.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "CloudEndpoints_ListBySyncGroup_MaximumSet_Gen": {
-            "$ref": "./examples/CloudEndpoints_ListBySyncGroup_MaximumSet_Gen.json"
-          }
         }
       }
     },
@@ -1946,8 +1922,8 @@
           }
         },
         "x-ms-examples": {
-          "CloudEndpoints_Get_MaximumSet_Gen": {
-            "$ref": "./examples/CloudEndpoints_Get_MaximumSet_Gen.json"
+          "CloudEndpoints_Get": {
+            "$ref": "./examples/CloudEndpoints_Get.json"
           }
         }
       },
@@ -2049,16 +2025,16 @@
             }
           }
         },
+        "x-ms-examples": {
+          "CloudEndpoints_Create": {
+            "$ref": "./examples/CloudEndpoints_Create.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/CloudEndpoint"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "CloudEndpoints_Create_MaximumSet_Gen": {
-            "$ref": "./examples/CloudEndpoints_Create_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "CloudEndpoints_Delete",
@@ -2149,19 +2125,16 @@
             }
           }
         },
+        "x-ms-examples": {
+          "CloudEndpoints_Delete": {
+            "$ref": "./examples/CloudEndpoints_Delete.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/CloudEndpoint"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "CloudEndpoints_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/CloudEndpoints_Delete_MaximumSet_Gen.json"
-          },
-          "CloudEndpoints_Delete_MinimumSet_Gen": {
-            "$ref": "./examples/CloudEndpoints_Delete_MinimumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}/cloudEndpoints/{cloudEndpointName}/afsShareMetadataCertificatePublicKeys": {
@@ -2228,11 +2201,8 @@
           }
         },
         "x-ms-examples": {
-          "CloudEndpoints_AfsShareMetadataCertificatePublicKeys_MaximumSet_Gen": {
-            "$ref": "./examples/CloudEndpoints_AfsShareMetadataCertificatePublicKeys_MaximumSet_Gen.json"
-          },
-          "CloudEndpoints_AfsShareMetadataCertificatePublicKeys_MinimumSet_Gen": {
-            "$ref": "./examples/CloudEndpoints_AfsShareMetadataCertificatePublicKeys_MinimumSet_Gen.json"
+          "CloudEndpoints_AfsShareMetadataCertificatePublicKeys": {
+            "$ref": "./examples/CloudEndpoints_AfsShareMetadataCertificatePublicKeys.json"
           }
         }
       }
@@ -2335,19 +2305,16 @@
             }
           }
         },
+        "x-ms-examples": {
+          "CloudEndpoints_PostBackup": {
+            "$ref": "./examples/CloudEndpoints_PostBackup.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/PostBackupResponse"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "CloudEndpoints_PostBackup_MaximumSet_Gen": {
-            "$ref": "./examples/CloudEndpoints_PostBackup_MaximumSet_Gen.json"
-          },
-          "CloudEndpoints_PostBackup_MinimumSet_Gen": {
-            "$ref": "./examples/CloudEndpoints_PostBackup_MinimumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}/cloudEndpoints/{cloudEndpointName}/postrestore": {
@@ -2431,18 +2398,15 @@
             }
           }
         },
+        "x-ms-examples": {
+          "CloudEndpoints_PostRestore": {
+            "$ref": "./examples/CloudEndpoints_PostRestore.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "CloudEndpoints_PostRestore_MaximumSet_Gen": {
-            "$ref": "./examples/CloudEndpoints_PostRestore_MaximumSet_Gen.json"
-          },
-          "CloudEndpoints_PostRestore_MinimumSet_Gen": {
-            "$ref": "./examples/CloudEndpoints_PostRestore_MinimumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}/cloudEndpoints/{cloudEndpointName}/prebackup": {
@@ -2540,18 +2504,15 @@
             }
           }
         },
+        "x-ms-examples": {
+          "CloudEndpoints_PreBackup": {
+            "$ref": "./examples/CloudEndpoints_PreBackup.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "CloudEndpoints_PreBackup_MaximumSet_Gen": {
-            "$ref": "./examples/CloudEndpoints_PreBackup_MaximumSet_Gen.json"
-          },
-          "CloudEndpoints_PreBackup_MinimumSet_Gen": {
-            "$ref": "./examples/CloudEndpoints_PreBackup_MinimumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}/cloudEndpoints/{cloudEndpointName}/prerestore": {
@@ -2635,18 +2596,15 @@
             }
           }
         },
+        "x-ms-examples": {
+          "CloudEndpoints_PreRestore": {
+            "$ref": "./examples/CloudEndpoints_PreRestore.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "CloudEndpoints_PreRestore_MaximumSet_Gen": {
-            "$ref": "./examples/CloudEndpoints_PreRestore_MaximumSet_Gen.json"
-          },
-          "CloudEndpoints_PreRestore_MinimumSet_Gen": {
-            "$ref": "./examples/CloudEndpoints_PreRestore_MinimumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}/cloudEndpoints/{cloudEndpointName}/restoreheartbeat": {
@@ -2710,11 +2668,8 @@
           }
         },
         "x-ms-examples": {
-          "CloudEndpoints_restoreheartbeat_MaximumSet_Gen": {
-            "$ref": "./examples/CloudEndpoints_restoreheartbeat_MaximumSet_Gen.json"
-          },
-          "CloudEndpoints_restoreheartbeat_MinimumSet_Gen": {
-            "$ref": "./examples/CloudEndpoints_restoreheartbeat_MinimumSet_Gen.json"
+          "CloudEndpoints_restoreheartbeat": {
+            "$ref": "./examples/CloudEndpoints_RestoreHeatbeat.json"
           }
         }
       }
@@ -2800,18 +2755,15 @@
             }
           }
         },
+        "x-ms-examples": {
+          "CloudEndpoints_TriggerChangeDetection": {
+            "$ref": "./examples/CloudEndpoints_TriggerChangeDetection.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "CloudEndpoints_TriggerChangeDetection_MaximumSet_Gen": {
-            "$ref": "./examples/CloudEndpoints_TriggerChangeDetection_MaximumSet_Gen.json"
-          },
-          "CloudEndpoints_TriggerChangeDetection_MinimumSet_Gen": {
-            "$ref": "./examples/CloudEndpoints_TriggerChangeDetection_MinimumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}/serverEndpoints": {
@@ -2874,13 +2826,13 @@
             }
           }
         },
+        "x-ms-examples": {
+          "ServerEndpoints_ListBySyncGroup": {
+            "$ref": "./examples/ServerEndpoints_ListBySyncGroup.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "ServerEndpoints_ListBySyncGroup_MaximumSet_Gen": {
-            "$ref": "./examples/ServerEndpoints_ListBySyncGroup_MaximumSet_Gen.json"
-          }
         }
       }
     },
@@ -2948,8 +2900,8 @@
           }
         },
         "x-ms-examples": {
-          "ServerEndpoints_Get_MaximumSet_Gen": {
-            "$ref": "./examples/ServerEndpoints_Get_MaximumSet_Gen.json"
+          "ServerEndpoints_Get": {
+            "$ref": "./examples/ServerEndpoints_Get.json"
           }
         }
       },
@@ -3051,16 +3003,16 @@
             }
           }
         },
+        "x-ms-examples": {
+          "ServerEndpoints_Create": {
+            "$ref": "./examples/ServerEndpoints_Create.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/ServerEndpoint"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "ServerEndpoints_Create_MaximumSet_Gen": {
-            "$ref": "./examples/ServerEndpoints_Create_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "operationId": "ServerEndpoints_Update",
@@ -3160,16 +3112,16 @@
             }
           }
         },
+        "x-ms-examples": {
+          "ServerEndpoints_Update": {
+            "$ref": "./examples/ServerEndpoints_Update.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/ServerEndpoint"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "ServerEndpoints_Update_MaximumSet_Gen": {
-            "$ref": "./examples/ServerEndpoints_Update_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "ServerEndpoints_Delete",
@@ -3252,18 +3204,15 @@
             }
           }
         },
+        "x-ms-examples": {
+          "ServerEndpoints_Delete": {
+            "$ref": "./examples/ServerEndpoints_Delete.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "ServerEndpoints_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/ServerEndpoints_Delete_MaximumSet_Gen.json"
-          },
-          "ServerEndpoints_Delete_MinimumSet_Gen": {
-            "$ref": "./examples/ServerEndpoints_Delete_MinimumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}/serverEndpoints/{serverEndpointName}/recallAction": {
@@ -3357,18 +3306,15 @@
             }
           }
         },
+        "x-ms-examples": {
+          "ServerEndpoints_recallAction": {
+            "$ref": "./examples/ServerEndpoints_Recall.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "ServerEndpoints_recallAction_MaximumSet_Gen": {
-            "$ref": "./examples/ServerEndpoints_recallAction_MaximumSet_Gen.json"
-          },
-          "ServerEndpoints_recallAction_MinimumSet_Gen": {
-            "$ref": "./examples/ServerEndpoints_recallAction_MinimumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/workflows": {
@@ -3420,13 +3366,13 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Workflows_ListByStorageSyncService": {
+            "$ref": "./examples/Workflows_ListByStorageSyncService.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Workflows_ListByStorageSyncService_MaximumSet_Gen": {
-            "$ref": "./examples/Workflows_ListByStorageSyncService_MaximumSet_Gen.json"
-          }
         }
       }
     },
@@ -3487,8 +3433,8 @@
           }
         },
         "x-ms-examples": {
-          "Workflows_Get_MaximumSet_Gen": {
-            "$ref": "./examples/Workflows_Get_MaximumSet_Gen.json"
+          "Workflows_Get": {
+            "$ref": "./examples/Workflows_Get.json"
           }
         }
       }
@@ -3547,11 +3493,8 @@
           }
         },
         "x-ms-examples": {
-          "Workflows_Abort_MaximumSet_Gen": {
-            "$ref": "./examples/Workflows_Abort_MaximumSet_Gen.json"
-          },
-          "Workflows_Abort_MinimumSet_Gen": {
-            "$ref": "./examples/Workflows_Abort_MinimumSet_Gen.json"
+          "Workflows_Abort": {
+            "$ref": "./examples/Workflows_Abort.json"
           }
         }
       }
