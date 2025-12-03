@@ -1367,6 +1367,11 @@
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "EdgeMachineGpus_Get": {
+            "$ref": "./examples/EdgeMachineGpus_Get_MaximumSet_Gen.json"
+          }
         }
       },
       "put": {
@@ -1442,6 +1447,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "EdgeMachineGpus_CreateOrUpdate": {
+            "$ref": "./examples/EdgeMachineGpus_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
@@ -1503,6 +1513,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "EdgeMachineGpus_Delete": {
+            "$ref": "./examples/EdgeMachineGpus_Delete_MaximumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1623,6 +1638,23 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "EdgeMachineGpuJobs_Get": {
+            "$ref": "./examples/EdgeMachineGpuJobs_Get_MaximumSet_Gen.json"
+          },
+          "EdgeMachineGpuJobs_Get_AssignPartition": {
+            "$ref": "./examples/EdgeMachineGpuJobs_Get_AssignPartition.json"
+          },
+          "EdgeMachineGpuJobs_Get_CreatePartition": {
+            "$ref": "./examples/EdgeMachineGpuJobs_Get_CreatePartition.json"
+          },
+          "EdgeMachineGpuJobs_Get_RemovePartition": {
+            "$ref": "./examples/EdgeMachineGpuJobs_Get_RemovePartition.json"
+          },
+          "EdgeMachineGpuJobs_Get_SwitchMode": {
+            "$ref": "./examples/EdgeMachineGpuJobs_Get_SwitchMode.json"
           }
         }
       },
@@ -1902,18 +1934,6 @@
           }
         },
         "x-ms-examples": {
-          "EdgeMachineGpuJobs_Get_AssignPartition": {
-            "$ref": "./examples/EdgeMachineGpuJobs_Get_AssignPartition.json"
-          },
-          "EdgeMachineGpuJobs_Get_CreatePartition": {
-            "$ref": "./examples/EdgeMachineGpuJobs_Get_CreatePartition.json"
-          },
-          "EdgeMachineGpuJobs_Get_RemovePartition": {
-            "$ref": "./examples/EdgeMachineGpuJobs_Get_RemovePartition.json"
-          },
-          "EdgeMachineGpuJobs_Get_SwitchMode": {
-            "$ref": "./examples/EdgeMachineGpuJobs_Get_SwitchMode.json"
-          },
           "EdgeMachineJobs_Get_CollectLog": {
             "$ref": "./examples/EdgeMachineJobs_Get_CollectLog.json"
           },
@@ -2431,6 +2451,16 @@
       },
       "readOnly": true
     },
+    "AssignPartitionGpuJobProperties": {
+      "type": "object",
+      "description": "Properties for assigning GPU partition to a specific workload or virtual machine.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EdgeMachineGpuJobProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "AssignPartition"
+    },
     "ClaimDeviceRequest": {
       "type": "object",
       "description": "Request for claiming devices of the pool.",
@@ -2489,6 +2519,16 @@
         }
       ],
       "x-ms-discriminator-value": "CollectLog"
+    },
+    "CreatePartitionGpuJobProperties": {
+      "type": "object",
+      "description": "Properties for creating GPU partitions for virtualization and workload isolation.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EdgeMachineGpuJobProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "CreatePartition"
     },
     "DdaDetails": {
       "type": "object",
@@ -5576,6 +5616,16 @@
         ]
       }
     },
+    "RemovePartitionGpuJobProperties": {
+      "type": "object",
+      "description": "Properties for removing GPU partition and freeing up resources for other workloads.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EdgeMachineGpuJobProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "RemovePartition"
+    },
     "ReportedProperties": {
       "type": "object",
       "description": "Reported properties for edge machine.",
@@ -5826,6 +5876,16 @@
           "readOnly": true
         }
       }
+    },
+    "SwitchModeGpuJobProperties": {
+      "type": "object",
+      "description": "Properties for switching GPU mode between DDA and GPU-P for different workload requirements.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EdgeMachineGpuJobProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "SwitchMode"
     },
     "TimeConfiguration": {
       "type": "object",

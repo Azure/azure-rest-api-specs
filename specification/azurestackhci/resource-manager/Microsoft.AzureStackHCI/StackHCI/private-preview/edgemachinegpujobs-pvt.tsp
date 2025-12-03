@@ -136,3 +136,43 @@ union EdgeMachineGpuJobType {
    */
   RemovePartition: "RemovePartition"
 }
+
+/**
+* Properties for creating GPU partitions for virtualization and workload isolation.
+*/
+model CreatePartitionGpuJobProperties extends EdgeMachineGpuJobProperties {
+ /**
+  * Type of GPU job to be performed.
+  */
+ jobType: EdgeMachineGpuJobType.CreatePartition;
+}
+
+/**
+* Properties for switching GPU mode between DDA and GPU-P for different workload requirements.
+*/
+model SwitchModeGpuJobProperties extends EdgeMachineGpuJobProperties {
+ /**
+  * Type of GPU job to be performed.
+  */
+ jobType: EdgeMachineGpuJobType.SwitchMode;
+}
+
+/**
+* Properties for assigning GPU partition to a specific workload or virtual machine.
+*/
+model AssignPartitionGpuJobProperties extends EdgeMachineGpuJobProperties {
+ /**
+  * Type of GPU job to be performed.
+  */
+ jobType: EdgeMachineGpuJobType.AssignPartition;
+}
+
+/**
+* Properties for removing GPU partition and freeing up resources for other workloads.
+*/
+model RemovePartitionGpuJobProperties extends EdgeMachineGpuJobProperties {
+ /**
+  * Type of GPU job to be performed.
+  */
+ jobType: EdgeMachineGpuJobType.RemovePartition;
+}
