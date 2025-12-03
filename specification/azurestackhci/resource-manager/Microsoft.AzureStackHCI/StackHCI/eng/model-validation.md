@@ -35,7 +35,34 @@ npx oav validate-example preview/{API_VERSION}/hci.json
 
 Replace `{API_VERSION}` with your target API version (e.g., `2024-11-01-preview`).
 
-This command validates all examples in the `examples/{API_VERSION}/` folder against the generated OpenAPI schema.
+This command validates all examples in the `preview/{API_VERSION}/examples/` folder against the generated OpenAPI schema.
+
+## File Compilation Process
+
+**Important:** Understanding the file compilation process is crucial for successful validation.
+
+### Source vs Target Files
+
+1. **Source Files (where you edit):**
+   - `examples/{API_VERSION}/*.json` - Example files you create and modify
+   - `private-preview/*.tsp` - TypeSpec model definitions
+   - `main.tsp` - Main TypeSpec entry point
+
+2. **Target Files (what validation uses):**
+   - `preview/{API_VERSION}/hci.json` - Generated OpenAPI schema
+   - `preview/{API_VERSION}/examples/*.json` - Copied example files
+
+### Compilation Flow
+
+```
+[Source] examples/2024-11-01-preview/*.json
+    ↓ (tsp compile .)
+[Target] preview/2024-11-01-preview/examples/*.json
+    ↓ (validation reads from)
+[Validation] npx oav validate-example preview/2024-11-01-preview/hci.json
+```
+
+**Key Point:** You edit source files in `examples/{API_VERSION}/`, but validation runs against the target files in `preview/{API_VERSION}/examples/` that are copied during compilation.
 
 ## Common Issue Types and Solutions
 
@@ -78,9 +105,29 @@ model ConcreteTypeProperties extends BaseDiscriminatedProperties {
 2. **Categorize Errors**: Group errors by type (missing properties, discriminator issues, etc.)
 3. **Fix TypeSpec Models**: Update TypeSpec files to define missing models or properties
 4. **Fix Example Files**: Update or create example JSON files as needed
-5. **Recompile**: Run `tsp compile .` to regenerate OpenAPI schema
+5. **⚠️ CRITICAL: Recompile**: **ALWAYS** run `tsp compile .` after ANY changes to regenerate OpenAPI schema and copy updated examples
 6. **Validate Again**: Run validation command to confirm fixes
 7. **Iterate**: Repeat until validation passes without errors
+
+### ⚠️ IMPORTANT: TypeSpec Compilation Requirement
+
+**You MUST run `tsp compile .` after every change to example files or TypeSpec models.**
+
+The compilation process:
+1. Compiles TypeSpec files into OpenAPI schema: `preview/{API_VERSION}/hci.json`
+2. Copies source example files: `examples/{API_VERSION}/*.json` → `preview/{API_VERSION}/examples/*.json`
+3. Validation then reads from the target files in `preview/{API_VERSION}/`
+
+**Common mistake:**
+- Edit source files in `examples/{API_VERSION}/` ✅
+- Run validation ❌ (without recompilation)
+- Get same errors because validation reads old copies in `preview/{API_VERSION}/examples/`
+
+**Correct workflow:**
+- Edit source files in `examples/{API_VERSION}/` ✅
+- Run `tsp compile .` (copies files to `preview/{API_VERSION}/examples/`) ✅
+- Run validation against `preview/{API_VERSION}/hci.json` ✅
+- See updated results ✅
 
 ## Best Practices
 

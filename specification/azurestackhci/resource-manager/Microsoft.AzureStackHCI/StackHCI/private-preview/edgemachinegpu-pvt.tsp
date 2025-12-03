@@ -78,12 +78,6 @@ model EdgeMachineGpuProperties {
   gpuId: string;
 
   /**
-   * The name of the GPU.
-   */
-  @visibility(Lifecycle.Read)
-  gpuName?: string;
-
-  /**
    * The vendor of the GPU.
    */
   @visibility(Lifecycle.Read)

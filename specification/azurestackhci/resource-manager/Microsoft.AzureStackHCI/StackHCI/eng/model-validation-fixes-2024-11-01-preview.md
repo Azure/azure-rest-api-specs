@@ -26,7 +26,6 @@ Before fixes, validation failed with multiple errors related to:
 ```json
 {
   "gpuId": "gpu-001",
-  "gpuName": "NVIDIA GeForce RTX 4090",
   "manufacturer": "NVIDIA",
   "model": "GeForce RTX 4090",
   "status": "Available",
@@ -99,6 +98,31 @@ model RemovePartitionGpuJobProperties extends EdgeMachineGpuJobProperties {
 
 **Solution:** Updated `operationId` from `EdgeMachineJobs_Get` to `EdgeMachineGpuJobs_Get` and removed invalid date properties.
 
+### 6. Invalid `gpuName` Property (Second Fix Session)
+
+**Issue:** EdgeMachineGpu examples contained `gpuName` property that is not defined in the [`EdgeMachineGpuProperties`](private-preview/edgemachinegpu-pvt.tsp:67) TypeSpec model
+
+**Error Message:**
+```
+OBJECT_ADDITIONAL_PROPERTIES: Additional properties not allowed: gpuName
+```
+
+**Files Fixed:**
+- `examples/2024-11-01-preview/EdgeMachineGpus_List_MaximumSet_Gen.json`
+- `examples/2024-11-01-preview/EdgeMachineGpus_Get_MaximumSet_Gen.json`
+- `examples/2024-11-01-preview/EdgeMachineGpus_CreateOrUpdate_MaximumSet_Gen.json`
+
+**Root Cause:** The `gpuName` is a path parameter (resource identifier), not a response body property. The TypeSpec model only defines `gpuId` as a property.
+
+**Solution:** Removed `gpuName` from the properties section of all EdgeMachineGpu response examples.
+
+**Root Cause Analysis:** The TypeSpec compilation process copies source files from `examples/{API_VERSION}/` to `preview/{API_VERSION}/examples/`. The validation tool reads from the target directory, not the source files.
+
+**Critical Learning:** Always run `tsp compile .` after modifying example files to ensure:
+1. OpenAPI schema is regenerated: `preview/2024-11-01-preview/hci.json`
+2. Source examples are copied to target: `examples/2024-11-01-preview/*.json` → `preview/2024-11-01-preview/examples/*.json`
+3. Validation reads from updated target files
+
 ## Validation Commands Used
 
 ```bash
@@ -134,9 +158,17 @@ Validation completes without errors.
 - `examples/2024-11-01-preview/EdgeMachineGpus_Delete_MaximumSet_Gen.json`
 - `examples/2024-11-01-preview/EdgeMachineGpuJobs_Get_MaximumSet_Gen.json`
 
-**Modified Example Files:**
+**Modified Source Example Files:**
 - `examples/2024-11-01-preview/EdgeMachineGpus_List_MaximumSet_Gen.json`
+- `examples/2024-11-01-preview/EdgeMachineGpus_Get_MaximumSet_Gen.json`
+- `examples/2024-11-01-preview/EdgeMachineGpus_CreateOrUpdate_MaximumSet_Gen.json`
 - All EdgeMachineGpuJob examples (removed invalid properties and fixed operation IDs)
+
+**Generated Target Files (copied during `tsp compile .`):**
+- `preview/2024-11-01-preview/examples/EdgeMachineGpus_List_MaximumSet_Gen.json`
+- `preview/2024-11-01-preview/examples/EdgeMachineGpus_Get_MaximumSet_Gen.json`
+- `preview/2024-11-01-preview/examples/EdgeMachineGpus_CreateOrUpdate_MaximumSet_Gen.json`
+- All corresponding EdgeMachineGpuJob target examples
 
 ## Lessons Learned
 
@@ -144,4 +176,6 @@ Validation completes without errors.
 2. **Property Validation:** Ensure examples only include properties defined in their specific TypeSpec models
 3. **Operation Mapping:** Verify example files reference the correct operation IDs
 4. **Required Properties:** Include all required properties as defined in TypeSpec models
-5. **Compilation Order:** Always compile TypeSpec before running validation to ensure schema is up-to-date
+5. **Property vs Parameter:** Distinguish between path parameters (resource identifiers) and response body properties
+6. **File Compilation Process:** Understand that you edit source files (`examples/{API_VERSION}/`) but validation runs against target files (`preview/{API_VERSION}/examples/`)
+7. **Compilation Order:** **ALWAYS** run `tsp compile .` after ANY changes to example files or TypeSpec models to copy source files to target directory before validation
