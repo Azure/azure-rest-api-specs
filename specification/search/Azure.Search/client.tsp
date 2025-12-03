@@ -387,6 +387,7 @@ namespace KnowledgeBaseRetrievalClient {
   "java"
 );
 
+// Search documents types
 @@clientNamespace(Search.SemanticErrorMode, "Azure.Search.Documents");
 @@clientNamespace(Search.SemanticErrorMode,
   "com.azure.search.documents",
@@ -625,6 +626,7 @@ namespace KnowledgeBaseRetrievalClient {
   "java"
 );
 
+// Search index types
 @@clientNamespace(Search.SearchIndexerDataSourceType,
   "Azure.Search.Documents.Indexes"
 );
@@ -910,6 +912,11 @@ namespace KnowledgeBaseRetrievalClient {
 );
 @@clientNamespace(Search.IndexerStatus, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.IndexerStatus,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(Search.IndexerRuntime, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.IndexerRuntime,
   "com.azure.search.documents.indexes",
   "java"
 );
@@ -1297,6 +1304,27 @@ namespace KnowledgeBaseRetrievalClient {
   "com.azure.search.documents.indexes",
   "java"
 );
+@@clientNamespace(Search.KnowledgeSourceContentExtractionMode,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.KnowledgeSourceContentExtractionMode,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(Search.KnowledgeSourceIngestionPermissionOption,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.KnowledgeSourceIngestionPermissionOption,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(Search.KnowledgeSourceSynchronizationStatus,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.KnowledgeSourceSynchronizationStatus,
+  "com.azure.search.documents.indexes",
+  "java"
+);
 @@clientNamespace(Search.ListKnowledgeBasesResult,
   "Azure.Search.Documents.Indexes"
 );
@@ -1365,6 +1393,88 @@ namespace KnowledgeBaseRetrievalClient {
   "Azure.Search.Documents.Indexes"
 );
 @@clientNamespace(Search.AzureBlobKnowledgeSourceParameters,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(Search.IndexedOneLakeKnowledgeSource,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.IndexedOneLakeKnowledgeSource,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(Search.IndexedOneLakeKnowledgeSourceParameters,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.IndexedOneLakeKnowledgeSourceParameters,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(Search.IndexedSharePointKnowledgeSource,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.IndexedSharePointKnowledgeSource,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(Search.IndexedSharePointKnowledgeSourceParameters,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.IndexedSharePointKnowledgeSourceParameters,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(Search.RemoteSharePointKnowledgeSource,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.RemoteSharePointKnowledgeSource,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(Search.RemoteSharePointKnowledgeSourceParameters,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.RemoteSharePointKnowledgeSourceParameters,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(Search.WebKnowledgeSource, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.WebKnowledgeSource,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(Search.WebKnowledgeSourceDomain,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.WebKnowledgeSourceDomain,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(Search.WebKnowledgeSourceDomains,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.WebKnowledgeSourceDomains,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(Search.WebKnowledgeSourceParameters,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.WebKnowledgeSourceParameters,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(Search.SearchIndexFieldReference,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.SearchIndexFieldReference,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(Search.ServiceIndexersRuntime,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.ServiceIndexersRuntime,
   "com.azure.search.documents.indexes",
   "java"
 );
@@ -2777,6 +2887,25 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(Search.SearchServiceLimits, "ServiceLimits", "javascript");
 
 // Knowledge Base types
+@@clientNamespace(Search.AIServices, "Azure.Search.Documents.KnowledgeBase");
+@@clientNamespace(Search.AIServices,
+  "com.azure.search.documents.knowledgebase",
+  "java"
+);
+@@clientNamespace(Search.SynchronizationState,
+  "Azure.Search.Documents.KnowledgeBase"
+);
+@@clientNamespace(Search.SynchronizationState,
+  "com.azure.search.documents.knowledgebase",
+  "java"
+);
+@@clientNamespace(Search.CompletedSynchronizationState,
+  "Azure.Search.Documents.KnowledgeBase"
+);
+@@clientNamespace(Search.CompletedSynchronizationState,
+  "com.azure.search.documents.knowledgebase",
+  "java"
+);
 @@clientNamespace(Search.KnowledgeBaseRetrievalRequest,
   "Azure.Search.Documents.KnowledgeBase"
 );
@@ -2882,6 +3011,41 @@ namespace KnowledgeBaseRetrievalClient {
   "com.azure.search.documents.knowledgebase",
   "java"
 );
+@@clientNamespace(Search.KnowledgeSourceVectorizer,
+  "Azure.Search.Documents.KnowledgeBase"
+);
+@@clientNamespace(Search.KnowledgeSourceVectorizer,
+  "com.azure.search.documents.knowledgebase",
+  "java"
+);
+@@clientNamespace(Search.KnowledgeSourceAzureOpenAIVectorizer,
+  "Azure.Search.Documents.KnowledgeBase"
+);
+@@clientNamespace(Search.KnowledgeSourceAzureOpenAIVectorizer,
+  "com.azure.search.documents.knowledgebase",
+  "java"
+);
+@@clientNamespace(Search.KnowledgeSourceIngestionParameters,
+  "Azure.Search.Documents.KnowledgeBase"
+);
+@@clientNamespace(Search.KnowledgeSourceIngestionParameters,
+  "com.azure.search.documents.knowledgebase",
+  "java"
+);
+@@clientNamespace(Search.KnowledgeSourceStatistics,
+  "Azure.Search.Documents.KnowledgeBase"
+);
+@@clientNamespace(Search.KnowledgeSourceStatistics,
+  "com.azure.search.documents.knowledgebase",
+  "java"
+);
+@@clientNamespace(Search.KnowledgeSourceStatus,
+  "Azure.Search.Documents.KnowledgeBase"
+);
+@@clientNamespace(Search.KnowledgeSourceStatus,
+  "com.azure.search.documents.knowledgebase",
+  "java"
+);
 @@clientNamespace(Search.KnowledgeRetrievalIntent,
   "Azure.Search.Documents.KnowledgeBase"
 );
@@ -2949,6 +3113,13 @@ namespace KnowledgeBaseRetrievalClient {
   "Azure.Search.Documents.KnowledgeBase"
 );
 @@clientNamespace(Search.KnowledgeBaseActivityRecord,
+  "com.azure.search.documents.knowledgebase",
+  "java"
+);
+@@clientNamespace(Search.KnowledgeBaseActivityRecordType,
+  "Azure.Search.Documents.KnowledgeBase"
+);
+@@clientNamespace(Search.KnowledgeBaseActivityRecordType,
   "com.azure.search.documents.knowledgebase",
   "java"
 );
@@ -3068,6 +3239,13 @@ namespace KnowledgeBaseRetrievalClient {
   "Azure.Search.Documents.KnowledgeBase"
 );
 @@clientNamespace(Search.KnowledgeBaseReference,
+  "com.azure.search.documents.knowledgebase",
+  "java"
+);
+@@clientNamespace(Search.KnowledgeBaseReferenceType,
+  "Azure.Search.Documents.KnowledgeBase"
+);
+@@clientNamespace(Search.KnowledgeBaseReferenceType,
   "com.azure.search.documents.knowledgebase",
   "java"
 );
