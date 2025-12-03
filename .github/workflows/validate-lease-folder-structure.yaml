@@ -1,0 +1,44 @@
+name: Validate Lease Folder Structure
+
+on:
+  pull_request:
+    types:
+      # default
+      - opened
+      - synchronize
+      - reopened
+      # re-run if base branch is changed, since previous merge commit may generate incorrect diff
+      - edited
+
+permissions:
+  contents: read
+
+jobs:
+  validate-folder-structure:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Validate folder structure
+        run: |
+          echo "Running folder structure validation..."
+          INVALID_FILES=$(git diff --name-only origin/${{ github.base_ref }} HEAD | grep -vE '^lease/[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+/[A-Za-z0-9_-]+/lease\.yaml$' || true)
+          if [ -n "$INVALID_FILES" ]; then
+            echo ""
+            echo "❌ Invalid folder structure detected!"
+            echo ""
+            echo "Expected format: lease/<Namespace>/<Service>/lease.yaml"
+            echo "Examples:"
+            echo "  - lease/Microsoft.Widget/Widget/lease.yaml"
+            echo "  - lease/Azure.Storage/BlobService/lease.yaml"
+            echo ""
+            echo "Invalid files:"
+            echo -e "$INVALID_FILES"
+            exit 1
+          fi
+          
+          echo "✅ All lease files follow the correct structure!"
+          exit 0
