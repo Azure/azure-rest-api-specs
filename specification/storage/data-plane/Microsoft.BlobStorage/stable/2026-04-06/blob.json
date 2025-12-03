@@ -4478,6 +4478,15 @@
           },
           {
             "$ref": "#/parameters/FileRequestIntent"
+          },
+          {
+            "$ref": "#/parameters/SourceEncryptionKey"
+          },
+          {
+            "$ref": "#/parameters/SourceEncryptionKeySha256"
+          },
+          {
+            "$ref": "#/parameters/SourceEncryptionAlgorithm"
           }
         ],
         "responses": {
@@ -6963,6 +6972,15 @@
           },
           {
             "$ref": "#/parameters/FileRequestIntent"
+          },
+          {
+            "$ref": "#/parameters/SourceEncryptionKey"
+          },
+          {
+            "$ref": "#/parameters/SourceEncryptionKeySha256"
+          },
+          {
+            "$ref": "#/parameters/SourceEncryptionAlgorithm"
           }
         ],
         "responses": {
@@ -7807,6 +7825,15 @@
           },
           {
             "$ref": "#/parameters/FileRequestIntent"
+          },
+          {
+            "$ref": "#/parameters/SourceEncryptionKey"
+          },
+          {
+            "$ref": "#/parameters/SourceEncryptionKeySha256"
+          },
+          {
+            "$ref": "#/parameters/SourceEncryptionAlgorithm"
           }
         ],
         "responses": {
@@ -8826,6 +8853,15 @@
           },
           {
             "$ref": "#/parameters/FileRequestIntent"
+          },
+          {
+            "$ref": "#/parameters/SourceEncryptionKey"
+          },
+          {
+            "$ref": "#/parameters/SourceEncryptionKeySha256"
+          },
+          {
+            "$ref": "#/parameters/SourceEncryptionAlgorithm"
           }
         ],
         "responses": {
@@ -12492,6 +12528,40 @@
       "type": "string",
       "x-ms-parameter-location": "method",
       "description": "The snapshot parameter is an opaque DateTime value that, when present, specifies the blob snapshot to retrieve. For more information on working with blob snapshots, see <a href=\"https://learn.microsoft.com/rest/api/storageservices/creating-a-snapshot-of-a-blob\">Creating a Snapshot of a Blob.</a>"
+    },
+    "SourceEncryptionKey": {
+      "name": "x-ms-source-encryption-key",
+      "x-ms-client-name": "sourceEncryptionKey",
+      "type": "string",
+      "in": "header",
+      "required": false,
+      "x-ms-parameter-location": "method",
+      "description": "Optional. Specifies the source encryption key to use to encrypt the source data provided in the request."
+    },
+    "SourceEncryptionKeySha256": {
+      "name": "x-ms-source-encryption-key-sha256",
+      "x-ms-client-name": "sourceEncryptionKeySha256",
+      "type": "string",
+      "in": "header",
+      "required": false,
+      "x-ms-parameter-location": "method",
+      "description": "The SHA-256 hash of the provided source encryption key. Must be provided if the x-ms-source-encryption-key header is provided."
+    },
+    "SourceEncryptionAlgorithm": {
+      "name": "x-ms-source-encryption-algorithm",
+      "x-ms-client-name": "sourceEncryptionAlgorithm",
+      "type": "string",
+      "in": "header",
+      "required": false,
+      "enum": [
+        "AES256"
+      ],
+      "x-ms-enum": {
+        "name": "EncryptionAlgorithmType",
+        "modelAsString": false
+      },
+      "x-ms-parameter-location": "method",
+      "description": "The algorithm used to produce the source encryption key hash. Currently, the only accepted value is \"AES256\". Must be provided if the x-ms-source-encryption-key is provided."
     },
     "VersionId": {
       "name": "versionid",
