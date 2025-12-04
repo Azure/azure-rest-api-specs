@@ -27,7 +27,7 @@ These are the global settings for the appliance.
 ```yaml
 name: appliances
 openapi-type: arm
-tag: package-2022-10-27
+tag: package-2025-03-01-preview
 ```
 
 ### Tag: package-2021-10-31-preview
@@ -55,6 +55,15 @@ These settings apply only when `--tag=package-2022-10-27` is specified on the co
 ```yaml $(tag) == 'package-2022-10-27'
 input-file:
   - stable/2022-10-27/appliances.json
+```
+
+### Tag: package-2025-03-01-preview
+
+These settings apply only when `--tag=package-2025-03-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-03-01-preview'
+input-file:
+  - preview/2025-03-01-preview/appliances.json
 ```
 
 ---

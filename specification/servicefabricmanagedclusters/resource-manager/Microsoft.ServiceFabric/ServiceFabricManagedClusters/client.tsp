@@ -413,6 +413,17 @@ using Microsoft.ServiceFabric;
   "NodeTypeSecurityEncryptionType",
   "csharp"
 );
+@@clientName(HealthFilter, "ApplicationFetchHealthFilter ", "csharp");
+@@clientName(RestartReplicaRequest,
+  "ManagedServiceRestartReplicaContent ",
+  "csharp"
+);
+@@clientName(RestartReplicaRequest.timeout, "TimeoutInSeconds", "csharp");
+@@clientName(RestartKind, "ManagedServiceRestartKind", "csharp");
+@@clientName(ApplicationFetchHealthRequest.timeout,
+  "TimeoutInSeconds",
+  "csharp"
+);
 
 @@alternateType(ManagedClusterVersion.list::parameters.location,
   azureLocation,

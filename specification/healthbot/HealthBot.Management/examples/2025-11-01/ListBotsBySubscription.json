@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "api-version": "2025-11-01",
+    "resourceGroupName": "OneResourceGroupName",
+    "subscriptionId": "subscription-id"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "samplebotname2",
+            "type": "Microsoft.HealthBot/healthBots",
+            "id": "/subscriptions/subscription-id/resourceGroups/OneResourceGroupName/providers/Microsoft.HealthBot/healthBots/samplebotname2",
+            "identity": {
+              "type": "SystemAssigned, UserAssigned",
+              "principalId": "principalId",
+              "tenantId": "tenantId",
+              "userAssignedIdentities": {
+                "/subscriptions/subscription-id/resourcegroups/myrg/providers/microsoft.managedidentity/userassignedidentities/my-mi": {},
+                "/subscriptions/subscription-id/resourcegroups/myrg/providers/microsoft.managedidentity/userassignedidentities/my-mi2": {}
+              }
+            },
+            "location": "East US",
+            "properties": {
+              "botManagementPortalLink": "https://us.healthbot.microsoft.com/account/samplebotname2-hdi1osc"
+            },
+            "sku": {
+              "name": "C1"
+            },
+            "systemData": {
+              "createdAt": "2020-05-05T17:18:19.1234567Z",
+              "createdBy": "jack@outlook.com",
+              "createdByType": "User",
+              "lastModifiedAt": "2020-05-06T17:18:19.1234567Z",
+              "lastModifiedBy": "ryan@outlook.com",
+              "lastModifiedByType": "User"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Bots_List",
+  "title": "List Bots by Subscription"
+}
