@@ -51,7 +51,6 @@ union HciJobType {
   ConfigureArcGateway: "ConfigureArcGateway",
 }
 
-
 /** Cluster Job properties */
 @discriminator("jobType")
 model ClusterJobProperties {
