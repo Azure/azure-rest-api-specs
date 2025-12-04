@@ -36,10 +36,20 @@ alias OperationParameter = {
   /** The async operation id. */
   @path
   @minLength(1)
-  @segment("operations")
+  @segment("operationId")
   @key
   @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
   id: string;
+};
+
+alias LaunchBulkInstancesOperationId = {
+  /** The name of the LaunchBulkInstancesOperation. */
+  @path
+  @minLength(1)
+  @segment("launchBulkInstancesOperations")
+  @key
+  @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
+  name: string;
 };
 
 alias SubscriptionParams = {
@@ -307,16 +317,7 @@ model ResourcePlanUpdate
   is OptionalProperties<UpdateableProperties<Azure.ResourceManager.CommonTypes.Plan>>;
 
 @doc("A LaunchBulkInstancesOperation resource")
-model LaunchBulkInstancesOperation
-  is ProxyResource<LaunchBulkInstancesOperationProperties> {
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "The field name `name` is the valid field name."
-  @doc("The ID of the LaunchBulkInstancesOperation")
-  @segment("launchBulkInstancesOperations")
-  @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
-  @path
-  @key
-  name: string;
-
+model LaunchBulkInstancesOperation {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Zones is a valid property"
   @doc("Zones in which the LaunchBulkInstancesOperation is available")
   zones?: Array<string>;
@@ -325,14 +326,31 @@ model LaunchBulkInstancesOperation
   ...ResourcePlanProperty;
 }
 
-model OperationStatus is OmitProperties<ArmOperationStatus, "name">;
+@doc("Location based type.")
+model LocationBasedLaunchBulkInstancesOperation
+  is ProxyResource<LaunchBulkInstancesOperationProperties> {
+  @doc("The location name.")
+  @path
+  @minLength(1)
+  @segment("locations")
+  @key
+  @visibility(Lifecycle.Read)
+  location: azureLocation;
+
+  ...LaunchBulkInstancesOperation;
+}
+
+model OperationStatus is OmitProperties<ArmOperationStatus, "name"> {
+  ...ResourceNameParameter<OperationStatus>;
+}
 
 // ------------------ Models --------------- //
 @doc("List of LaunchBulkInstancesOperation resources.")
 model LaunchBulkInstancesOperationListResult {
   @pageItems
   @doc("The list of LaunchBulkInstancesOperation resources.")
-  value: LaunchBulkInstancesOperation[];
+  // @OpenAPI.extension("x-ms-identifiers", #[])
+  value: LocationBasedLaunchBulkInstancesOperation[];
 
   @doc("The URL to get the next set of results.")
   @nextLink

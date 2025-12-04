@@ -206,6 +206,25 @@ model Resources {
   ]>>;
 }
 
+@doc("The resources needed for the user request with the correlationId")
+model ResourceWithCorrelationId {
+  @doc("The resource ids used for the request")
+  id: armResourceIdentifier<[
+    {
+      type: "Microsoft.Compute/vm";
+    }
+  ]>;
+
+  @doc("The operational context of the resourceId")
+  correlationId: string;
+}
+
+@doc("The resources needed for the user request with the correlationId")
+model ResourcesWithCorrelationId {
+  @doc("The resource ids used for the request")
+  ids: Array<ResourceWithCorrelationId>;
+}
+
 @doc("Resource creation data model")
 model ResourceProvisionPayload {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "reviewed this with ARM, we are a pass through to compute RP and doing any property specific validation, compute RP will do that."
@@ -366,7 +385,10 @@ model SubmitTypeRequest {
   executionParameters: ExecutionParameters;
 
   @doc("The resources for the request")
-  resources: Resources;
+  resources?: Resources;
+
+  @doc("The resources for the request with operation context information")
+  resourcesWithContext?: ResourcesWithCorrelationId;
 
   @doc("CorrelationId item")
   correlationid: string;
@@ -378,7 +400,10 @@ model ExecuteTypeRequest {
   executionParameters: ExecutionParameters;
 
   @doc("The resources for the request")
-  resources: Resources;
+  resources?: Resources;
+
+  @doc("The resources for the request with operation context information")
+  resourcesWithContext?: ResourcesWithCorrelationId;
 
   @doc("CorrelationId item")
   correlationid: string;

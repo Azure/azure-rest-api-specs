@@ -16,37 +16,37 @@ interface Operations extends Azure.ResourceManager.Operations {}
 @armResourceOperations(#{ allowStaticRoutes: true })
 interface BulkActions {
   @doc("Gets an instance of LaunchBulkInstancesOperations.")
-  @get
-  @autoRoute
-  @armResourceRead(LaunchBulkInstancesOperation)
-  get(
-    ...CustomParams,
-  ): ArmResponse<LaunchBulkInstancesOperation> | ErrorResponse;
+  get is ArmResourceRead<
+    Resource = LocationBasedLaunchBulkInstancesOperation,
+    Parameters = LaunchBulkInstancesOperationId,
+    Response = ArmResponse<LocationBasedLaunchBulkInstancesOperation>
+  >;
 
   @doc("Get the status of a LaunchBulkInstancesOperation.")
-  @get
-  @autoRoute
-  @armResourceRead(OperationStatus)
-  getOperationStatus(
-    ...SubscriptionParams,
-    ...ProviderNamespace<LaunchBulkInstancesOperation>,
-    ...LocationParameter,
-    ...OperationParameter,
-  ): ArmResponse<OperationStatus> | ErrorResponse;
+  getOperationStatus is ArmResourceRead<
+    Resource = LocationBasedLaunchBulkInstancesOperation,
+    Parameters = OperationParameter,
+    Response = ArmResponse<OperationStatus>,
+    BaseParameters = SubscriptionParams
+  >;
 
   @doc("Creates or updates LaunchBulkInstancesOperations.")
-  createOrUpdate is LaunchBulkInstancesOps.CreateOrUpdateAsync<LaunchBulkInstancesOperation>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    Resource = LocationBasedLaunchBulkInstancesOperation,
+    Parameters = LaunchBulkInstancesOperationId
+  >;
 
-  @doc("Deletes the LaunchBulkInstancesOperations.")
-  delete is LaunchBulkInstancesOps.DeleteWithoutOkAsync<LaunchBulkInstancesOperation>;
+  @doc("Deletes LaunchBulkInstancesOperations.")
+  delete is ArmResourceDeleteWithoutOkAsync<
+    Resource = LocationBasedLaunchBulkInstancesOperation,
+    Parameters = LaunchBulkInstancesOperationId
+  >;
 
   @doc("Cancels LaunchBulkInstancesOperation instances that have not yet launched.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ComputeBulkActions/locations/{location}/launchBulkInstancesOperations/{name}/cancel")
-  cancel is LaunchBulkInstancesOps.ActionAsync<
-    LaunchBulkInstancesOperation,
-    void,
-    void,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>
+  cancel is ArmResourceActionAsync<
+    Resource = LocationBasedLaunchBulkInstancesOperation,
+    Request = void,
+    Response = ArmResponse<LocationBasedLaunchBulkInstancesOperation>
   >;
 
   @doc("List LaunchBulkInstancesOperation resources by resource group.")
@@ -54,10 +54,10 @@ interface BulkActions {
   @autoRoute
   @list
   @listsResource(LaunchBulkInstancesOperation)
-  @armResourceList(LaunchBulkInstancesOperation)
+  @armResourceList(LocationBasedLaunchBulkInstancesOperation)
   listByResourceGroup(
     ...CommonParams,
-    ...ProviderNamespace<LaunchBulkInstancesOperation>,
+    ...ProviderNamespace<LocationBasedLaunchBulkInstancesOperation>,
     ...LocationParameter,
   ): ArmResponse<LaunchBulkInstancesOperationListResult> | ErrorResponse;
 
@@ -66,10 +66,10 @@ interface BulkActions {
   @autoRoute
   @list
   @listsResource(LaunchBulkInstancesOperation)
-  @armResourceList(LaunchBulkInstancesOperation)
+  @armResourceList(LocationBasedLaunchBulkInstancesOperation)
   listBySubscription(
     ...SubscriptionParams,
-    ...ProviderNamespace<LaunchBulkInstancesOperation>,
+    ...ProviderNamespace<LocationBasedLaunchBulkInstancesOperation>,
     ...LocationParameter,
   ): ArmResponse<LaunchBulkInstancesOperationListResult> | ErrorResponse;
 
