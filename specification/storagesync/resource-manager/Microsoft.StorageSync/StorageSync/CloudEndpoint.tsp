@@ -83,8 +83,6 @@ interface CloudEndpoints {
    * Patch a given CloudEndpoint.
    */
   @added(Versions.v2025_12_01)
-  @OpenAPI.example("./examples/CloudEndpoints_Update_MinimumSet_Gen.json", "CloudEndpoints_Update_MinimumSet_Gen")
-  @OpenAPI.example("./examples/CloudEndpoints_Update_MaximumSet_Gen.json", "CloudEndpoints_Update_MaximumSet_Gen")
   @patch(#{ implicitOptionality: false })
   @Azure.Core.useFinalStateVia("location")
   update is Legacy.CustomPatchAsync<
