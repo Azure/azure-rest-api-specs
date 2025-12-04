@@ -232,7 +232,6 @@ model DdaDetails {
  * Represents the details of the GPU specifically in GPU-P mode.
  */
 model GpuPartitionDetails {
-
   /**
    * The name used by Hyper-V commandlets for GPU partitioning
    */
