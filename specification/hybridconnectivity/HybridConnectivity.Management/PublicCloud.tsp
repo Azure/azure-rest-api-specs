@@ -510,7 +510,7 @@ union GCPTemplateFormat {
 
   @doc("Terraform template format")
   Terraform: "terraform",
- 
+
   @doc("Shell script template format")
   ShellScript: "shellscript",
 }
