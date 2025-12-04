@@ -8,7 +8,7 @@ using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
-namespace AlertRuleRecommendationsClient;
+namespace Microsoft.AlertsManagement;
 
 /**
  * The type of identity that created the resource.
@@ -233,7 +233,7 @@ model AlertRuleRecommendationsListResponse
 /**
  * A single alert rule recommendation resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AlertRuleRecommendationResource
   extends Azure.ResourceManager.CommonTypes.ProxyResource {
   /**
@@ -259,7 +259,7 @@ model AlertRuleRecommendationProperties {
   /**
    * A dictionary that provides the display information for an alert rule recommendation.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   displayInformation: Record<string>;
 
   /**
@@ -286,16 +286,18 @@ model RuleArmTemplate {
   /**
    * Variable definitions
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   variables: unknown;
 
   /**
    * Input parameter definitions
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   parameters: unknown;
 
   /**
    * Alert rule resource definitions
    */
-  @identifiers(#[])
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   resources: unknown[];
 }

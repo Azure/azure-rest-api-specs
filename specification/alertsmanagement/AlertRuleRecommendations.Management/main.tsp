@@ -22,13 +22,14 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
- * Alert Rule Recommendations Client
+ * Azure Alerts Management Service provides a single pane of glass of alerts across Azure Monitor.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armProviderNamespace
-@service(#{ title: "AlertRuleRecommendationsClient" })
+@service(#{ title: "Azure Alerts Management Service Resource Provider" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
-namespace AlertRuleRecommendationsClient;
+namespace Microsoft.AlertsManagement;
 
 /**
  * The available API versions.

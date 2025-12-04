@@ -11,18 +11,19 @@ using TypeSpec.Http;
 using Azure.ResourceManager;
 using TypeSpec.OpenAPI;
 
-namespace AlertRuleRecommendationsClient;
+namespace Microsoft.AlertsManagement;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface AlertRuleRecommendationsOperationGroup {
   /**
    * Retrieve alert rule recommendations for a resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AlertRuleRecommendations_ListByResource")
   @autoRoute
   @get
   @action("alertRuleRecommendations")
+  @list
   listByResource is ArmProviderActionSync<
     Response = AlertRuleRecommendationsListResponse,
     Scope = ExtensionResourceActionScope
@@ -30,11 +31,12 @@ interface AlertRuleRecommendationsOperationGroup {
   /**
    * Retrieve alert rule recommendations for a target type.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AlertRuleRecommendations_ListByTargetType")
   @autoRoute
   @get
   @action("alertRuleRecommendations")
+  @list
   listByTargetType is ArmProviderActionSync<
     Response = AlertRuleRecommendationsListResponse,
     Scope = SubscriptionActionScope,

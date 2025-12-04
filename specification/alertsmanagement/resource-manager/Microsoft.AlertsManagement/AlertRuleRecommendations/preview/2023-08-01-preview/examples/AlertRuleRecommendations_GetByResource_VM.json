@@ -1,36 +1,28 @@
 {
   "parameters": {
-    "resourceUri": "subscriptions/2f00cc51-6809-498f-9ffc-48c42aff570d/resourcegroups/test/providers/Microsoft.Compute/virtualMachines/testMachineCanBeSafelyDeleted",
-    "api-version": "2023-08-01-preview"
+    "api-version": "2023-08-01-preview",
+    "resourceUri": "subscriptions/2f00cc51-6809-498f-9ffc-48c42aff570d/resourcegroups/test/providers/Microsoft.Compute/virtualMachines/testMachineCanBeSafelyDeleted"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "id": "/subscriptions/2f00cc51-6809-498f-9ffc-48c42aff570d/resourcegroups/test/providers/Microsoft.Compute/virtualMachines/testMachineCanBeSafelyDeleted/providers/Microsoft.AlertsManagement/alertRuleRecommendations/Percentage CPU",
             "name": "Percentage CPU",
             "type": "Microsoft.AlertsManagement/alertRuleRecommendations",
+            "id": "/subscriptions/2f00cc51-6809-498f-9ffc-48c42aff570d/resourcegroups/test/providers/Microsoft.Compute/virtualMachines/testMachineCanBeSafelyDeleted/providers/Microsoft.AlertsManagement/alertRuleRecommendations/Percentage CPU",
             "properties": {
               "alertRuleType": "Microsoft.Insights/metricAlerts",
               "displayInformation": {
-                "infoBallonMessage": "Rule1 InfoBalloon Message",
+                "displayUnits": "Percentage",
                 "infoBallonLink": "Rule1 InfoBalloon Link",
-                "metricDisplayName": "Percentage CPU",
-                "displayUnits": "Percentage"
+                "infoBallonMessage": "Rule1 InfoBalloon Message",
+                "metricDisplayName": "Percentage CPU"
               },
               "ruleArmTemplate": {
                 "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
                 "contentVersion": "1.0.0.0",
                 "parameters": {
-                  "targetResourceId": {
-                    "type": "string",
-                    "defaultValue": "/subscriptions/2f00cc51-6809-498f-9ffc-48c42aff570d/resourcegroups/test/providers/Microsoft.Compute/virtualMachines/testMachineCanBeSafelyDeleted"
-                  },
-                  "targetResourceName": {
-                    "type": "string",
-                    "defaultValue": "testmachinecanbesafelydeleted"
-                  },
                   "actionGroupIds": {
                     "type": "array",
                     "defaultValue": [],
@@ -38,21 +30,21 @@
                       "description": "Insert Action groups ids to attach them to the below alert rules."
                     }
                   },
-                  "alertNamePrefix": {
-                    "type": "string",
-                    "defaultValue": "Percentage CPU",
-                    "minLength": 1,
-                    "metadata": {
-                      "description": "prefix of the alert rule name"
-                    }
-                  },
                   "alertName": {
                     "type": "string",
                     "defaultValue": "[concat('parameters('alertNamePrefix'), ' - ', parameters('targetResourceName'))]",
-                    "minLength": 1,
                     "metadata": {
                       "description": "Name of the alert rule"
-                    }
+                    },
+                    "minLength": 1
+                  },
+                  "alertNamePrefix": {
+                    "type": "string",
+                    "defaultValue": "Percentage CPU",
+                    "metadata": {
+                      "description": "prefix of the alert rule name"
+                    },
+                    "minLength": 1
                   },
                   "alertSeverity": {
                     "type": "int",
@@ -67,6 +59,14 @@
                     "metadata": {
                       "description": "Severity of alert {0,1,2,3,4}"
                     }
+                  },
+                  "targetResourceId": {
+                    "type": "string",
+                    "defaultValue": "/subscriptions/2f00cc51-6809-498f-9ffc-48c42aff570d/resourcegroups/test/providers/Microsoft.Compute/virtualMachines/testMachineCanBeSafelyDeleted"
+                  },
+                  "targetResourceName": {
+                    "type": "string",
+                    "defaultValue": "testmachinecanbesafelydeleted"
                   },
                   "threshold": {
                     "type": "int",
@@ -76,18 +76,6 @@
                     }
                   }
                 },
-                "variables": {
-                  "scopes": "[array(parameters('targetResourceId'))]",
-                  "copy": [
-                    {
-                      "name": "actionsForMetricAlerts",
-                      "count": "[length(parameters('actionGroupIds'))]",
-                      "input": {
-                        "actiongroupId": "[parameters('actionGroupIds')[copyIndex('actionsForMetricAlerts')]]"
-                      }
-                    }
-                  ]
-                },
                 "resources": [
                   {
                     "name": "[parameters('alertName')]",
@@ -96,13 +84,8 @@
                     "location": "global",
                     "properties": {
                       "description": "Percentage CPU is greater than 80 %",
-                      "severity": "[parameters('alertSeverity')]",
-                      "enabled": true,
-                      "scopes": "[variables('scopes')]",
-                      "evaluationFrequency": "PT5M",
-                      "windowSize": "PT5M",
+                      "actions": "[variables('actionsForMetricAlerts')]",
                       "criteria": {
-                        "odata.type": "Microsoft.Azure.Monitor.MultipleResourceMultipleMetricCriteria",
                         "allOf": [
                           {
                             "name": "Metric1",
@@ -111,39 +94,48 @@
                             "threshold": "[parameters('threshold')]",
                             "timeAggregation": "Average"
                           }
-                        ]
+                        ],
+                        "odata.type": "Microsoft.Azure.Monitor.MultipleResourceMultipleMetricCriteria"
                       },
-                      "actions": "[variables('actionsForMetricAlerts')]"
+                      "enabled": true,
+                      "evaluationFrequency": "PT5M",
+                      "scopes": "[variables('scopes')]",
+                      "severity": "[parameters('alertSeverity')]",
+                      "windowSize": "PT5M"
                     }
                   }
-                ]
+                ],
+                "variables": {
+                  "copy": [
+                    {
+                      "name": "actionsForMetricAlerts",
+                      "count": "[length(parameters('actionGroupIds'))]",
+                      "input": {
+                        "actiongroupId": "[parameters('actionGroupIds')[copyIndex('actionsForMetricAlerts')]]"
+                      }
+                    }
+                  ],
+                  "scopes": "[array(parameters('targetResourceId'))]"
+                }
               }
             }
           },
           {
-            "id": "/subscriptions/2f00cc51-6809-498f-9ffc-48c42aff570d/resourcegroups/test/providers/Microsoft.Compute/virtualMachines/testMachineCanBeSafelyDeleted/providers/Microsoft.AlertsManagement/alertRuleRecommendations/Available Memory Bytes",
             "name": "Available Memory Bytes",
             "type": "Microsoft.AlertsManagement/alertRuleRecommendations",
+            "id": "/subscriptions/2f00cc51-6809-498f-9ffc-48c42aff570d/resourcegroups/test/providers/Microsoft.Compute/virtualMachines/testMachineCanBeSafelyDeleted/providers/Microsoft.AlertsManagement/alertRuleRecommendations/Available Memory Bytes",
             "properties": {
               "alertRuleType": "Microsoft.Insights/metricAlerts",
               "displayInformation": {
-                "infoBallonMessage": "Rule2 InfoBalloon Message",
+                "displayUnits": "Gigabytes",
                 "infoBallonLink": "Rule2 InfoBalloon Link",
-                "metricDisplayName": "Available Memory Bytes",
-                "displayUnits": "Gigabytes"
+                "infoBallonMessage": "Rule2 InfoBalloon Message",
+                "metricDisplayName": "Available Memory Bytes"
               },
               "ruleArmTemplate": {
                 "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
                 "contentVersion": "1.0.0.0",
                 "parameters": {
-                  "targetResourceId": {
-                    "type": "string",
-                    "defaultValue": "/subscriptions/2f00cc51-6809-498f-9ffc-48c42aff570d/resourcegroups/test/providers/Microsoft.Compute/virtualMachines/testMachineCanBeSafelyDeleted"
-                  },
-                  "targetResourceName": {
-                    "type": "string",
-                    "defaultValue": "testmachinecanbesafelydeleted"
-                  },
                   "actionGroupIds": {
                     "type": "array",
                     "defaultValue": [],
@@ -151,21 +143,21 @@
                       "description": "Insert Action groups ids to attach them to the below alert rules."
                     }
                   },
-                  "alertNamePrefix": {
-                    "type": "string",
-                    "defaultValue": "Available Memory Bytes",
-                    "minLength": 1,
-                    "metadata": {
-                      "description": "prefix of the alert rule name"
-                    }
-                  },
                   "alertName": {
                     "type": "string",
                     "defaultValue": "[concat('parameters('alertNamePrefix'), ' - ', parameters('targetResourceName'))]",
-                    "minLength": 1,
                     "metadata": {
                       "description": "Name of the alert rule"
-                    }
+                    },
+                    "minLength": 1
+                  },
+                  "alertNamePrefix": {
+                    "type": "string",
+                    "defaultValue": "Available Memory Bytes",
+                    "metadata": {
+                      "description": "prefix of the alert rule name"
+                    },
+                    "minLength": 1
                   },
                   "alertSeverity": {
                     "type": "int",
@@ -181,6 +173,14 @@
                       "description": "Severity of alert {0,1,2,3,4}"
                     }
                   },
+                  "targetResourceId": {
+                    "type": "string",
+                    "defaultValue": "/subscriptions/2f00cc51-6809-498f-9ffc-48c42aff570d/resourcegroups/test/providers/Microsoft.Compute/virtualMachines/testMachineCanBeSafelyDeleted"
+                  },
+                  "targetResourceName": {
+                    "type": "string",
+                    "defaultValue": "testmachinecanbesafelydeleted"
+                  },
                   "threshold": {
                     "type": "int",
                     "defaultValue": 1000000000,
@@ -188,18 +188,6 @@
                       "description": "The threshold value at which the alert is activated."
                     }
                   }
-                },
-                "variables": {
-                  "scopes": "[array(parameters('targetResourceId'))]",
-                  "copy": [
-                    {
-                      "name": "actionsForMetricAlerts",
-                      "count": "[length(parameters('actionGroupIds'))]",
-                      "input": {
-                        "actiongroupId": "[parameters('actionGroupIds')[copyIndex('actionsForMetricAlerts')]]"
-                      }
-                    }
-                  ]
                 },
                 "resources": [
                   {
@@ -209,13 +197,8 @@
                     "location": "global",
                     "properties": {
                       "description": "Available Memory Bytes is less than 1 GB",
-                      "severity": "[parameters('alertSeverity')]",
-                      "enabled": true,
-                      "scopes": "[variables('scopes')]",
-                      "evaluationFrequency": "PT5M",
-                      "windowSize": "PT5M",
+                      "actions": "[variables('actionsForMetricAlerts')]",
                       "criteria": {
-                        "odata.type": "Microsoft.Azure.Monitor.MultipleResourceMultipleMetricCriteria",
                         "allOf": [
                           {
                             "name": "Metric1",
@@ -224,17 +207,36 @@
                             "threshold": "[parameters('threshold')]",
                             "timeAggregation": "Average"
                           }
-                        ]
+                        ],
+                        "odata.type": "Microsoft.Azure.Monitor.MultipleResourceMultipleMetricCriteria"
                       },
-                      "actions": "[variables('actionsForMetricAlerts')]"
+                      "enabled": true,
+                      "evaluationFrequency": "PT5M",
+                      "scopes": "[variables('scopes')]",
+                      "severity": "[parameters('alertSeverity')]",
+                      "windowSize": "PT5M"
                     }
                   }
-                ]
+                ],
+                "variables": {
+                  "copy": [
+                    {
+                      "name": "actionsForMetricAlerts",
+                      "count": "[length(parameters('actionGroupIds'))]",
+                      "input": {
+                        "actiongroupId": "[parameters('actionGroupIds')[copyIndex('actionsForMetricAlerts')]]"
+                      }
+                    }
+                  ],
+                  "scopes": "[array(parameters('targetResourceId'))]"
+                }
               }
             }
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "AlertRuleRecommendations_ListByResource",
+  "title": "List alert rule recommendations for virtual machines at resource level"
 }
