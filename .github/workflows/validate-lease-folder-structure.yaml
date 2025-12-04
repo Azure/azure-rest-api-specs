@@ -35,12 +35,39 @@ jobs:
           EXIT_CODE=0
           TODAY=$(date +%Y-%m-%d)
           
+          # Get all changed files excluding specific allowed paths
+          ALL_CHANGED_FILES=$(git diff --name-only origin/${{ github.base_ref }} HEAD || true)
+          
+          # Check for files outside allowed directories
+          echo ""
+          echo "========================================="
+          echo "0. Validating Changed File Locations"
+          echo "========================================="
+          
+          # Allow only: lease/ and .github/workflows/ (for this workflow file itself)
+          DISALLOWED_FILES=$(echo "$ALL_CHANGED_FILES" | grep -vE '^(lease/|\.github/workflows/validate-lease-folder-structure\.yaml)' || true)
+          
+          if [ -n "$DISALLOWED_FILES" ]; then
+            echo "❌ Files outside lease/ directory detected!"
+            echo ""
+            echo "The following files are not allowed:"
+            echo "$DISALLOWED_FILES"
+            echo ""
+            echo "Only changes in the lease/ directory are allowed."
+            echo "Exception: .github/workflows/validate-lease-folder-structure.yaml"
+            echo ""
+            EXIT_CODE=1
+          else
+            echo "✅ All changed files are in the lease/ directory"
+          fi
+          
           # Get all changed files in the lease/ directory
-          ALL_LEASE_FILES=$(git diff --name-only origin/${{ github.base_ref }} HEAD | grep '^lease/' || true)
+          ALL_LEASE_FILES=$(git diff --name-only origin/${{ github.base_ref }} HEAD | grep '^lease/' | grep -v '\.md$' || true)
           
           if [ -z "$ALL_LEASE_FILES" ]; then
+            echo ""
             echo "No lease files to validate"
-            exit 0
+            exit $EXIT_CODE
           fi
           
           echo ""
