@@ -1442,8 +1442,8 @@ directive:
     from: managedClusters.json
     where: $.definitions.LocalDNSOverrides
     reason: User defined custom key-value pairs, similar to the allowed "user defined tags." These pairs can have any value, as there is no validation on the values
-  - suppress: RequiredPropertiesMissingInResourceModel
+   - suppress: RequiredPropertiesMissingInResourceModel
     from: managedClusters.json
     where: $.definitions.ResourceSkusResult
-    reason: The model is reused from [compute rp](https://github.com/Azure/azure-rest-api-specs/blob/main/specification/compute/resource-manager/Microsoft.Compute/Skus/stable/2021-07-01/skus.json#L114), and its original definition does not include attributes such as name, id or type.
+    reason: The model is reused from compute rp, and its original definition does not include attributes such as name, id or type, more details see line 114 in https://github.com/Azure/azure-rest-api-specs/blob/main/specification/compute/resource-manager/Microsoft.Compute/Skus/stable/2021-07-01/skus.json
 ```
