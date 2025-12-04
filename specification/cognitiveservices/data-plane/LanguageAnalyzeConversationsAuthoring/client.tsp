@@ -759,19 +759,12 @@ model ConversationAuthoringTrainedModelClientOptions {
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @client(
   {
-    name: "ConversationAuthoringClient",
-    service: Language.Conversations.Authoring,
-  },
-  "python"
-)
-@client(
-  {
     name: "ConversationAnalysisAuthoringClient",
     service: Language.Conversations.Authoring,
   },
   "csharp"
 )
-namespace ConversationAuthoringClient {
+namespace ConversationAuthoringClientCsharp {
   
   op listProjects is Language.Conversations.Authoring.conversationAuthoringListProjects;
 
@@ -783,11 +776,15 @@ namespace ConversationAuthoringClient {
 
   op listTrainingConfigVersions is Language.Conversations.Authoring.conversationAuthoringListTrainingConfigVersions;
 
-  op createProject is Language.Conversations.Authoring.ConversationAuthoringProject.createProject;
+  op listDeployments is Language.Conversations.Authoring.conversationAuthoringListDeployments;
 
-  op getProject is Language.Conversations.Authoring.ConversationAuthoringProject.getProject;
-
-  op deleteProject is Language.Conversations.Authoring.ConversationAuthoringProject.deleteProject;
+  op listProjectResources is Language.Conversations.Authoring.conversationAuthoringListProjectResources;
+  
+  op listTrainingJobs is Language.Conversations.Authoring.conversationAuthoringListTrainingJobs;
+  
+  op listTrainedModels is Language.Conversations.Authoring.conversationAuthoringListTrainedModels;
+  
+  op listExportedModels is Language.Conversations.Authoring.conversationAuthoringListExportedModels;
   
   @operationGroup
   @clientInitialization(ConversationAuthoringDeploymentClientOptions, "csharp")
@@ -810,15 +807,6 @@ namespace ConversationAuthoringClient {
   @clientInitialization(ConversationAuthoringProjectClientOptions, "csharp")
   @clientName("ConversationAuthoringProject", "csharp")
   interface ProjectOperations {
-    listTrainedModels is Language.Conversations.Authoring.conversationAuthoringListTrainedModels;
-
-    listTrainingJobs is Language.Conversations.Authoring.conversationAuthoringListTrainingJobs;
-
-    listProjectResources is Language.Conversations.Authoring.conversationAuthoringListProjectResources;
-
-    listDeployments is Language.Conversations.Authoring.conversationAuthoringListDeployments;
-
-    listExportedModels is Language.Conversations.Authoring.conversationAuthoringListExportedModels;
 
     assignProjectResources is Language.Conversations.Authoring.ConversationAuthoringProject.assignProjectResources;
 
@@ -855,6 +843,10 @@ namespace ConversationAuthoringClient {
     getTrainingStatus is Language.Conversations.Authoring.ConversationAuthoringProject.getTrainingStatus;
 
     cancelTrainingJob is Language.Conversations.Authoring.ConversationAuthoringProject.cancelTrainingJob;
+
+    createProject is Language.Conversations.Authoring.ConversationAuthoringProject.createProject;
+
+    deleteProject is Language.Conversations.Authoring.ConversationAuthoringProject.deleteProject;
   }
 
   @operationGroup
@@ -890,6 +882,41 @@ namespace ConversationAuthoringClient {
 
     getLoadSnapshotStatus is Language.Conversations.Authoring.ConversationAuthoringTrainedModel.getLoadSnapshotStatus;
   }
+}
+
+// Root client definition
+#suppress "@azure-tools/typespec-azure-core/use-standard-names"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+@client(
+  {
+    name: "ConversationAuthoringClient",
+    service: Language.Conversations.Authoring,
+  },
+  "python"
+)
+namespace ConversationAuthoringClient {
+  op listProjects is Language.Conversations.Authoring.conversationAuthoringListProjects;
+
+  op listSupportedLanguages is Language.Conversations.Authoring.conversationAuthoringListSupportedLanguages;
+
+  op listAssignedResourceDeployments is Language.Conversations.Authoring.conversationAuthoringListAssignedResourceDeployments;
+
+  op listSupportedPrebuiltEntities is Language.Conversations.Authoring.conversationAuthoringListSupportedPrebuiltEntities;
+
+  op listTrainingConfigVersions is Language.Conversations.Authoring.conversationAuthoringListTrainingConfigVersions;
+
+  op createProject is Language.Conversations.Authoring.ConversationAuthoringProject.createProject;
+
+  op getProject is Language.Conversations.Authoring.ConversationAuthoringProject.getProject;
+
+  @access(Access.internal, "python")
+  op deleteProject is Language.Conversations.Authoring.ConversationAuthoringProject.deleteProject;
+
+  @access(Access.internal, "python")
+  op getExportStatus is Language.Conversations.Authoring.ConversationAuthoringProject.getExportStatus;
+
+  @access(Access.internal, "python")
+  op getImportStatus is Language.Conversations.Authoring.ConversationAuthoringProject.getImportStatus;
 }
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-names"
