@@ -27,23 +27,6 @@ model MonitoredSubscriptionProperties
 }
 
 @armResourceOperations
-interface MonitoredSubscriptionPropertiesOps
-  extends Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
-      },
-      KeysOf<ResourceNameParameter<
-        Resource = MonitorResource,
-        KeyName = "monitorName",
-        SegmentName = "monitors",
-        NamePattern = "^[a-zA-Z0-9_-]*$"
-      >>
-    > {}
-
-@armResourceOperations
 interface MonitoredSubscriptions {
   /**
    * List the subscriptions currently being monitored by the Dynatrace monitor resource.
@@ -53,8 +36,7 @@ interface MonitoredSubscriptions {
   /**
    * Add the subscriptions that should be monitored by the Dynatrace monitor resource.
    */
-  @action("monitoredSubscriptions/default")
-  createOrUpdate is MonitoredSubscriptionPropertiesOps.CreateOrUpdateAsync<
+  createOrUpdate is Legacy.CreateOrReplaceAsync<
     MonitoredSubscriptionProperties,
     LroHeaders = ArmLroLocationHeader<FinalResult = MonitoredSubscriptionProperties> &
       Azure.Core.Foundations.RetryAfterHeader,
