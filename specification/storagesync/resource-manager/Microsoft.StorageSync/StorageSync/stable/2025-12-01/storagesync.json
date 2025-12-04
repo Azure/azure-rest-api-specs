@@ -2036,6 +2036,110 @@
         },
         "x-ms-long-running-operation": true
       },
+      "patch": {
+        "operationId": "CloudEndpoints_Update",
+        "tags": [
+          "CloudEndpoints"
+        ],
+        "description": "Patch a given CloudEndpoint.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "storageSyncServiceName",
+            "in": "path",
+            "description": "Name of Storage Sync Service resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "syncGroupName",
+            "in": "path",
+            "description": "Name of Sync Group resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cloudEndpointName",
+            "in": "path",
+            "description": "Name of Cloud Endpoint object.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/CloudEndpointUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CloudEndpoint"
+            },
+            "headers": {
+              "x-ms-correlation-request-id": {
+                "type": "string",
+                "description": "correlation request id."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "request id."
+              }
+            }
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "x-ms-correlation-request-id": {
+                "type": "string",
+                "description": "correlation request id."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "request id."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/StorageSyncError"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/CloudEndpoint"
+        },
+        "x-ms-long-running-operation": true
+      },
       "delete": {
         "operationId": "CloudEndpoints_Delete",
         "tags": [
@@ -3817,6 +3921,13 @@
         "friendlyName": {
           "type": "string",
           "description": "Friendly Name"
+        },
+        "changeEnumerationIntervalDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The interval for enumerating changes on the cloud endpoint.",
+          "minimum": 1,
+          "maximum": 20
         }
       }
     },
@@ -3910,6 +4021,36 @@
           "$ref": "#/definitions/CloudEndpointChangeEnumerationStatus",
           "description": "Cloud endpoint change enumeration status",
           "readOnly": true
+        },
+        "changeEnumerationIntervalDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The interval for enumerating changes on the cloud endpoint.",
+          "minimum": 1,
+          "maximum": 20
+        }
+      }
+    },
+    "CloudEndpointUpdateParameters": {
+      "type": "object",
+      "description": "The parameters used when updating a cloud endpoint.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CloudEndpointUpdateProperties",
+          "description": "The properties of the cloud endpoint."
+        }
+      }
+    },
+    "CloudEndpointUpdateProperties": {
+      "type": "object",
+      "description": "CloudEndpoint Update Properties object.",
+      "properties": {
+        "changeEnumerationIntervalDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The interval for enumerating changes on the cloud endpoint.",
+          "minimum": 1,
+          "maximum": 20
         }
       }
     },
