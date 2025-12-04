@@ -6632,7 +6632,8 @@
         "cancelled",
         "failed",
         "completed",
-        "expired"
+        "expired",
+        "incomplete"
       ],
       "x-ms-enum": {
         "name": "RunStatus",
@@ -6677,6 +6678,11 @@
             "name": "expired",
             "value": "expired",
             "description": "Represents a run that expired before it could otherwise finish."
+          },
+          {
+            "name": "incomplete",
+            "value": "incomplete",
+            "description": "Represents a run that cannot be completed due to safety guardrails."
           }
         ]
       }
