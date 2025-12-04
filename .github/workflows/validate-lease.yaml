@@ -1,0 +1,38 @@
+name: Validate Lease
+
+on:
+  pull_request:
+    types:
+      # default
+      - opened
+      - synchronize
+      - reopened
+      # re-run if base branch is changed, since previous merge commit may generate incorrect diff
+      - edited
+
+permissions:
+  contents: read
+
+jobs:
+  validate-folder-structure:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: |
+          cd .github
+          npm install
+
+      - name: Validate lease files
+        run: |
+          cd .github
+          node workflows/src/validate-lease.js ${{ github.base_ref }}
