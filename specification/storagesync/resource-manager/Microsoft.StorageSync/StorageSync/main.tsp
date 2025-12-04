@@ -34,6 +34,7 @@ using TypeSpec.Versioning;
 @armProviderNamespace
 @service(#{ title: "Microsoft Storage Sync" })
 @versioned(Versions)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.StorageSync;
 
 /**
@@ -43,13 +44,11 @@ enum Versions {
   /**
    * The 2022-09-01 API version.
    */
-  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2022_09_01: "2022-09-01",
 
   /**
    * The 2025-12-01 API version.
    */
-  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
   v2025_12_01: "2025-12-01",
 }
 
