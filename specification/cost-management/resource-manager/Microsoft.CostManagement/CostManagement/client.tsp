@@ -6,10 +6,10 @@ using Azure.ClientGenerator.Core;
 using Microsoft.CostManagement;
 
 // Rename PivotTypeType back to PivotType for Java
-@@clientName(PivotTypeType, "PivotType", "java");
+@@clientName(PivotTypeType, "PivotType", "java,javascript");
 
 // Rename KpiTypeType back to KpiType for Java
-@@clientName(KpiTypeType, "KpiType", "java");
+@@clientName(KpiTypeType, "KpiType", "java,javascript");
 
 // Rename DownloadURL back to DownloadUrl for Java
 @@clientName(DownloadURL, "DownloadUrl", "java");
