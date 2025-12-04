@@ -114,7 +114,8 @@ model EdgeMachineGpuJobProperties {
   /**
    * Reported properties specific to the GPU job.
    */
-  ...JobReportedProperties;
+  @visibility(Lifecycle.Read)
+  reportedProperties?: JobReportedProperties;
 }
 
 /**
