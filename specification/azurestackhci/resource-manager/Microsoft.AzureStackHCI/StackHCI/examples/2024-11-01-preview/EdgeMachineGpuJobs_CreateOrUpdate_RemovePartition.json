@@ -1,19 +1,17 @@
 {
-  "title": "EdgeMachineJobs_CreateOrUpdate_MachineAssistant",
-  "operationId": "EdgeMachineJobs_CreateOrUpdate",
+  "title": "EdgeMachineGpuJobs_CreateOrUpdate_RemovePartition",
+  "operationId": "EdgeMachineGpuJobs_CreateOrUpdate",
   "parameters": {
     "api-version": "2024-11-01-preview",
     "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
     "resourceGroupName": "ArcInstance-rg",
     "edgeMachineName": "machine1",
-    "jobsName": "MachineAssistant",
+    "gpuName": "default",
+    "jobsName": "RemovePartition",
     "resource": {
       "properties": {
-        "jobType": "MachineAssistant",
-        "deploymentMode": "Deploy",
-        "intent": "OS provision failure details",
-        "source": "https://contoso.com/model",
-        "type": "gpt-4o"
+        "jobType": "RemovePartition",
+        "deploymentMode": "Validate"
       }
     }
   },
@@ -21,20 +19,17 @@
     "200": {
       "body": {
         "properties": {
-          "jobType": "MachineAssistant",
-          "deploymentMode": "Deploy",
-          "intent": "OS provision failure details",
-          "source": "https://contoso.com/model",
-          "type": "gpt-4o",
+          "jobType": "RemovePartition",
+          "deploymentMode": "Validate",
           "provisioningState": "Succeeded",
           "jobId": "egmijofqvbbkscxzfghmybzwdhfwny",
           "startTimeUtc": "2024-12-03T11:31:42.387Z",
           "endTimeUtc": "2024-12-03T11:31:42.387Z",
           "status": "NotSpecified"
         },
-        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.AzureStackHCI/edgeMachines/machine-1/jobs/machineassistant",
-        "name": "machineAssistant",
-        "type": "Microsoft.AzureStackHCI/edgeMachines/jobs",
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.AzureStackHCI/edgeMachines/machine-1/gpus/default/jobs/RemovePartition",
+        "name": "RemovePartition",
+        "type": "Microsoft.AzureStackHCI/edgeMachines/gpus/jobs",
         "systemData": {
           "createdBy": "user1",
           "createdByType": "User",
@@ -51,20 +46,17 @@
       },
       "body": {
         "properties": {
-          "jobType": "MachineAssistant",
-          "deploymentMode": "Deploy",
+          "jobType": "RemovePartition",
+          "deploymentMode": "Validate",
           "provisioningState": "Succeeded",
-          "intent": "OS provision failure details",
-          "source": "https://contoso.com/model",
-          "type": "gpt-4o",
           "jobId": "egmijofqvbbkscxzfghmybzwdhfwny",
           "startTimeUtc": "2024-12-03T11:31:42.387Z",
           "endTimeUtc": "2024-12-03T11:31:42.387Z",
           "status": "NotSpecified"
         },
-        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.AzureStackHCI/edgeMachines/machine-1/jobs/machineAssistant",
-        "name": "collectLog",
-        "type": "Microsoft.AzureStackHCI/edgeMachines/jobs",
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.AzureStackHCI/edgeMachines/machine-1/gpus/default/jobs/RemovePartition",
+        "name": "RemovePartition",
+        "type": "Microsoft.AzureStackHCI/edgeMachines/gpus/jobs",
         "systemData": {
           "createdBy": "user1",
           "createdByType": "User",
