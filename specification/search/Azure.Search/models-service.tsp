@@ -4395,10 +4395,10 @@ model KnowledgeSourceReference {
 @doc("Specifies the parameters for connecting to the Azure OpenAI resource.")
 model AzureOpenAiParameters {
   @doc("The resource URI of the Azure OpenAI resource.")
-  resourceUri: url;
+  resourceUri?: url;
 
   @doc("ID of the Azure OpenAI model deployment on the designated resource.")
-  deploymentId: string;
+  deploymentId?: string;
 
   @doc("API key of the designated Azure OpenAI resource.")
   apiKey?: string;
