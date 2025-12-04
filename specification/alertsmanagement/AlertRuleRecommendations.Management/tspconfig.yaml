@@ -1,3 +1,6 @@
+parameters:
+  "service-dir":
+    default: "sdk/alertrulerecommendations"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -8,6 +11,35 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/AlertRuleRecommendations/{version-status}/{version}/AlertRuleRecommendations.json"
     emit-lro-options: "all"
     examples-dir: "{project-root}/examples"
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-alertrulerecommendations"
+    namespace: "azure.mgmt.alertrulerecommendations"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-alertrulerecommendations"
+    namespace: "com.azure.resourcemanager.alertrulerecommendations"
+    service-name: "AlertRuleRecommendations" # human-readable service name, whitespace allowed
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    service-dir: sdk/alertrulerecommendations
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-alertrulerecommendations"
+    is-modular-library: true
+    flavor: "azure"
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-alertrulerecommendations"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/alertrulerecommendations"
+    emitter-output-dir: "{output-dir}/{service-dir}/armalertrulerecommendations"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armalertrulerecommendations"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
