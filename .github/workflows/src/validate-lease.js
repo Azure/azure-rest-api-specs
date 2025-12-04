@@ -2,6 +2,7 @@
 
 import { execSync } from 'child_process';
 import { readFileSync, existsSync } from 'fs';
+import { join } from 'path';
 import YAML from 'yaml';
 
 // ============================================
@@ -11,7 +12,10 @@ import YAML from 'yaml';
 const ALLOWED_FILE_PATTERNS = [
   /^lease\//,
   /^\.github\/workflows\/validate-lease\.yaml$/,
-  /^\.github\/scripts\/validate-lease\.js$/
+  /^\.github\/workflows\/src\/validate-lease\.js$/,
+  /^\.github\/workflows\/tests\/validate-lease\.test\.js$/,
+  /^\.github\/package\.json$/,
+  /^\.github\/\.gitignore$/
 ];
 
 const LEASE_FILE_PATTERN = /^lease\/[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+\/lease\.yaml$/;
@@ -95,13 +99,15 @@ function parseLeaseFile(filePath) {
 
 /**
  * Validate lease file contents
- * @param {string} leaseFile - Path to lease file
+ * @param {string} leaseFile - Path to lease file (can be full or relative)
  * @param {string} today - Today's date in YYYY-MM-DD format
+ * @param {string} relativePath - Relative path for folder name extraction
  * @returns {object} Validation result with errors array
  */
-function validateLeaseContent(leaseFile, today) {
+function validateLeaseContent(leaseFile, today, relativePath = null) {
   const errors = [];
-  const folderRP = leaseFile.split('/')[1];
+  const pathForExtraction = relativePath || leaseFile;
+  const folderRP = pathForExtraction.split('/')[1];
   
   if (!existsSync(leaseFile)) {
     return { file: leaseFile, errors: ['File does not exist'] };
@@ -138,6 +144,7 @@ function validateLeaseContent(leaseFile, today) {
 function main() {
   const baseBranch = process.argv[2] || 'main';
   const today = new Date().toISOString().split('T')[0];
+  const repoRoot = execSync('git rev-parse --show-toplevel', { encoding: 'utf-8' }).trim();
   let exitCode = 0;
 
   console.log('Running Lease File Validation\n');
@@ -198,9 +205,11 @@ function main() {
   const contentErrors = [];
   
   for (const leaseFile of validLeaseFiles) {
-    const result = validateLeaseContent(leaseFile, today);
+    const fullPath = join(repoRoot, leaseFile);
+    const result = validateLeaseContent(fullPath, today, leaseFile);
     if (result.errors.length > 0) {
-      contentErrors.push(result);
+      // Store with relative path for display
+      contentErrors.push({ file: leaseFile, errors: result.errors });
       exitCode = 1;
     }
   }
