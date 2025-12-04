@@ -3,6 +3,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./edgeMachineJobs-pvt.tsp";
+import "./edgemachinegpu-pvt.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -147,6 +148,9 @@ model CreatePartitionGpuJobProperties extends EdgeMachineGpuJobProperties {
    */
   jobType: EdgeMachineGpuJobType.CreatePartition;
 
+  /**
+   * Number of partitions to be created on the GPU.
+   */
   partitionCount: int32;
 
   /**
@@ -165,6 +169,11 @@ model SwitchModeGpuJobProperties extends EdgeMachineGpuJobProperties {
   jobType: EdgeMachineGpuJobType.SwitchMode;
 
   /**
+   * Desired GPU mode to switch to.
+   */
+  mode: GpuMode;
+
+  /**
    * Reported properties for Switch Mode job.
    */
   reportedProperties: SwitchModeReportedProperties;
@@ -180,6 +189,11 @@ model AssignPartitionGpuJobProperties extends EdgeMachineGpuJobProperties {
   jobType: EdgeMachineGpuJobType.AssignPartition;
 
   /**
+   * Virtual machine ID to which the GPU partition is assigned.
+   */
+  vmId: string;
+
+  /**
    * Reported properties for Assign Partition job.
    */
   reportedProperties: AssignPartitionReportedProperties;
@@ -193,6 +207,11 @@ model RemovePartitionGpuJobProperties extends EdgeMachineGpuJobProperties {
    * Type of GPU job to be performed.
    */
   jobType: EdgeMachineGpuJobType.RemovePartition;
+
+  /**
+   * Virtual machine ID from which the GPU partition is removed.
+   */
+  vmId: string;
 
   /**
    * Reported properties for Remove Partition job.
