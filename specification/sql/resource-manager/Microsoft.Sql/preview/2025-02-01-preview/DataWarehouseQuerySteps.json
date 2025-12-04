@@ -36,7 +36,10 @@
             "name": "datawarehouseQueryName",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 4,
+            "pattern": "^[A-Za-z0-9-]+$"
           },
           {
             "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
