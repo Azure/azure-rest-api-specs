@@ -134,6 +134,9 @@
       "name": "MasterSitesController"
     },
     {
+      "name": "MasterSitesImportJobsController"
+    },
+    {
       "name": "MasterSitesOperationsStatusController"
     },
     {
@@ -4026,6 +4029,148 @@
         "x-ms-examples": {
           "MasterSitesController_ErrorSummary_MaximumSet_Gen": {
             "$ref": "./examples/MasterSitesController_ErrorSummary_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/masterSites/{siteName}/import": {
+      "post": {
+        "operationId": "MasterSitesController_ImportMachines",
+        "tags": [
+          "MasterSitesController"
+        ],
+        "description": "Method to import machines to master site.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SasUriResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/masterSites/{siteName}/jobs": {
+      "get": {
+        "operationId": "MasterSitesImportJobsController_ListByMasterSite",
+        "tags": [
+          "MasterSitesImportJobsController"
+        ],
+        "description": "Gets all import jobs in a master site. Jobs are returned sorted descending by start time.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MasterSiteImportJobListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/masterSites/{siteName}/jobs/{jobName}": {
+      "get": {
+        "operationId": "MasterSitesImportJobsController_Get",
+        "tags": [
+          "MasterSitesImportJobsController"
+        ],
+        "description": "Retrieves details about a specific import job associated with a Master Site.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "Job Arm Name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MasterSiteImportJob"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -16222,6 +16367,60 @@
         "value"
       ]
     },
+    "ImportDiscoveredDataJobResult": {
+      "type": "string",
+      "description": "Import Discovered Data Job Result enum.",
+      "enum": [
+        "Unknown",
+        "Completed",
+        "CompletedWithWarnings",
+        "CompletedWithErrors",
+        "Failed",
+        "WaitingForBlobUpload",
+        "InProgress"
+      ],
+      "x-ms-enum": {
+        "name": "ImportDiscoveredDataJobResult",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown value."
+          },
+          {
+            "name": "Completed",
+            "value": "Completed",
+            "description": "Completed value."
+          },
+          {
+            "name": "CompletedWithWarnings",
+            "value": "CompletedWithWarnings",
+            "description": "CompletedWithWarnings value."
+          },
+          {
+            "name": "CompletedWithErrors",
+            "value": "CompletedWithErrors",
+            "description": "CompletedWithErrors value."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Failed value."
+          },
+          {
+            "name": "WaitingForBlobUpload",
+            "value": "WaitingForBlobUpload",
+            "description": "WaitingForBlobUpload value."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "InProgress value."
+          }
+        ]
+      }
+    },
     "ImportJob": {
       "type": "object",
       "description": "A host resource belonging to a site resource.",
@@ -17125,6 +17324,92 @@
         }
       ]
     },
+    "MasterSiteImportJob": {
+      "type": "object",
+      "description": "A master site import job resource belonging to a master site resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MasterSiteImportJobProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "status": {
+          "type": "string",
+          "description": "Gets or sets the Job status.",
+          "readOnly": true
+        },
+        "startTime": {
+          "type": "string",
+          "description": "Gets or sets the Job start time.",
+          "readOnly": true
+        },
+        "endTime": {
+          "type": "string",
+          "description": "Gets or sets the Job end time.",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Gets or sets the Display name.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "MasterSiteImportJobListResult": {
+      "type": "object",
+      "description": "The response of a MasterSiteImportJob list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The MasterSiteImportJob items on this page",
+          "items": {
+            "$ref": "#/definitions/MasterSiteImportJob"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "MasterSiteImportJobProperties": {
+      "type": "object",
+      "description": "Master Site Import Job Properties",
+      "properties": {
+        "blobName": {
+          "type": "string",
+          "description": "Gets or sets the blob name."
+        },
+        "jobResult": {
+          "$ref": "#/definitions/ImportDiscoveredDataJobResult",
+          "description": "Gets or sets the job result status."
+        },
+        "blobCreationTimeStamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the blob creation time stamp.",
+          "readOnly": true
+        },
+        "errorSummary": {
+          "$ref": "#/definitions/JobErrorSummary",
+          "description": "Gets or sets the job error summary.",
+          "readOnly": true
+        }
+      }
+    },
     "MasterSiteListResult": {
       "type": "object",
       "description": "The response of a MasterSite list operation.",
@@ -17195,6 +17480,10 @@
           "format": "date-time",
           "description": "Gets the last refresh time of arc status in UTC.",
           "readOnly": true
+        },
+        "migrateProjectId": {
+          "type": "string",
+          "description": "Gets or sets the migrate project id."
         }
       }
     },
@@ -17267,6 +17556,10 @@
         "customerStorageAccountArmId": {
           "type": "string",
           "description": "Gets or sets a value for customer storage account ARM id."
+        },
+        "migrateProjectId": {
+          "type": "string",
+          "description": "Gets or sets the migrate project id."
         }
       }
     },
