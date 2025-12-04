@@ -596,7 +596,7 @@ model KnowledgeBaseWebReference extends KnowledgeBaseReference {
   type: KnowledgeBaseReferenceType.web;
 
   @doc("The url the reference data originated from.")
-  url: url;
+  url?: url;
 
   @doc("The title of the web document.")
   title?: string;
