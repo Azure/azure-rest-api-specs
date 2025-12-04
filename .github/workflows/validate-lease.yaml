@@ -22,12 +22,17 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Install yq
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
         run: |
-          sudo wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
-          sudo chmod +x /usr/local/bin/yq
+          cd .github
+          npm install
 
       - name: Validate lease files
         run: |
-          chmod +x .github/scripts/validate-lease.sh
-          .github/scripts/validate-lease.sh ${{ github.base_ref }}
+          cd .github
+          node workflows/src/validate-lease.js ${{ github.base_ref }}
