@@ -67,23 +67,6 @@ alias CustomParams = {
   >;
 };
 
-alias LaunchBulkInstancesOps = Azure.ResourceManager.Legacy.RoutedOperations<
-  ParentParameters = {
-    ...ApiVersionParameter;
-    ...SubscriptionIdParameter;
-    ...ResourceGroupParameter;
-    ...LocationParameter;
-  },
-  ResourceTypeParameter = ResourceNameParameter<
-    LaunchBulkInstancesOperation,
-    NamePattern = "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
-    KeyName = "name"
-  >,
-  ResourceRoute = #{
-    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ComputeBulkActions/locations/{location}/launchBulkInstancesOperations/{name}",
-  }
->;
-
 // ------------------ Union --------------- //
 @doc("The status of the LaunchBulkInstancesOperation.")
 @Azure.Core.lroStatus
