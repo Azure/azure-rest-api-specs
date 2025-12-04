@@ -18,8 +18,6 @@ interface AlertRuleRecommendationsOperationGroup {
   /**
    * Retrieve alert rule recommendations for a resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AlertRuleRecommendations_ListByResource")
   @autoRoute
   @get
   @action("alertRuleRecommendations")
@@ -31,8 +29,6 @@ interface AlertRuleRecommendationsOperationGroup {
   /**
    * Retrieve alert rule recommendations for a target type.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AlertRuleRecommendations_ListByTargetType")
   @autoRoute
   @get
   @action("alertRuleRecommendations")
