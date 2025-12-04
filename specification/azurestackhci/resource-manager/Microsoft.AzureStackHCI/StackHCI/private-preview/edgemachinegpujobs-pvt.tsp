@@ -2,6 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "./edgeMachineJobs-pvt.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -145,6 +146,13 @@ model CreatePartitionGpuJobProperties extends EdgeMachineGpuJobProperties {
    * Type of GPU job to be performed.
    */
   jobType: EdgeMachineGpuJobType.CreatePartition;
+
+  partitionCount: int32;
+
+  /**
+   * Reported properties for Create Partition job.
+   */
+  reportedProperties: CreatePartitionReportedProperties;
 }
 
 /**
@@ -155,6 +163,11 @@ model SwitchModeGpuJobProperties extends EdgeMachineGpuJobProperties {
    * Type of GPU job to be performed.
    */
   jobType: EdgeMachineGpuJobType.SwitchMode;
+
+  /**
+   * Reported properties for Switch Mode job.
+   */
+  reportedProperties: SwitchModeReportedProperties;
 }
 
 /**
@@ -165,6 +178,11 @@ model AssignPartitionGpuJobProperties extends EdgeMachineGpuJobProperties {
    * Type of GPU job to be performed.
    */
   jobType: EdgeMachineGpuJobType.AssignPartition;
+
+  /**
+   * Reported properties for Assign Partition job.
+   */
+  reportedProperties: AssignPartitionReportedProperties;
 }
 
 /**
@@ -175,4 +193,33 @@ model RemovePartitionGpuJobProperties extends EdgeMachineGpuJobProperties {
    * Type of GPU job to be performed.
    */
   jobType: EdgeMachineGpuJobType.RemovePartition;
+
+  /**
+   * Reported properties for Remove Partition job.
+   */
+  reportedProperties: RemovePartitionReportedProperties;
+}
+
+@doc("Represents the reported properties of create partition job.")
+model CreatePartitionReportedProperties {
+  ...JobReportedProperties;
+
+  @doc("The result obtained after creating the partitions on the gpu.")
+  @visibility(Lifecycle.Read)
+  summary?: string;
+}
+
+@doc("Represents the reported properties of switch mode job.")
+model SwitchModeReportedProperties {
+  ...JobReportedProperties;
+}
+
+@doc("Represents the reported properties of assign partition job.")
+model AssignPartitionReportedProperties {
+  ...JobReportedProperties;
+}
+
+@doc("Represents the reported properties of remove partition job.")
+model RemovePartitionReportedProperties {
+  ...JobReportedProperties;
 }
