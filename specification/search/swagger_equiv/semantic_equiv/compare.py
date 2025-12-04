@@ -69,13 +69,11 @@ class DifferenceType(Enum):
     RESPONSE_HEADERS_MISMATCH = "response_headers_mismatch"
 
     # Definition-level differences
-    MISSING_DEFINITION = "missing_definition_in_tsp"
-    EXTRA_DEFINITION = "extra_definition_in_tsp"
-    DEFINITION_MISMATCH = "definition_mismatch"
-    UNREFERENCED_DEFINITION_IN_HAND_AUTHORED = (
-        "unreferenced_definition_in_hand_authored"
-    )
-    UNREFERENCED_DEFINITION_IN_TSP = "unreferenced_definition_in_tsp"
+    MISSING_DEFINITION = "missing_def_in_tsp"
+    EXTRA_DEFINITION = "extra_def_in_tsp"
+    DEFINITION_MISMATCH = "def_mismatch"
+    UNREFERENCED_DEFINITION_IN_HAND_AUTHORED = "unref_def_in_hand_authored"
+    UNREFERENCED_DEFINITION_IN_TSP = "unref_def_in_tsp"
 
     # Schema-level differences
     SCHEMA_TYPE_MISMATCH = "schema_type_mismatch"
@@ -940,7 +938,7 @@ class ApiComparator:
                     Difference(
                         type=DifferenceType.DEFINITION_MISMATCH,
                         message=message,
-                        context=f" ||{missing_def} || ||{extra_def}",
+                        context=f"||{missing_def}||||{extra_def}",
                     )
                 )
                 print(
@@ -965,7 +963,7 @@ class ApiComparator:
                     Difference(
                         type=DifferenceType.UNREFERENCED_DEFINITION_IN_HAND_AUTHORED,
                         message=f"Unreferenced definition in hand-authored: {def_name}",
-                        context=f" || {def_name} || ||{possible_match}",
+                        context=f"||{def_name}||||{possible_match}",
                     )
                 )
                 print(f"Unreferenced definition in hand-authored\t {def_name}")
@@ -974,7 +972,7 @@ class ApiComparator:
                 Difference(
                     type=diff_type,
                     message=f"Definition missing in {api2.swagger_source} : {def_name}{ref_info}",
-                    context=f" || {def_name} ||  || {possible_match}",
+                    context=f"||{def_name}||||{possible_match}",
                 )
             )
             print(
@@ -1000,7 +998,7 @@ class ApiComparator:
                     Difference(
                         type=DifferenceType.UNREFERENCED_DEFINITION_IN_TSP,
                         message=f"Unreferenced definition in tsp: {def_name}",
-                        context=f" || {def_name} || ||{possible_match}",
+                        context=f"||{def_name}||||{possible_match}",
                     )
                 )
                 print(f"Unreferenced definition in tsp\t {def_name}")
@@ -1009,7 +1007,7 @@ class ApiComparator:
                 Difference(
                     type=diff_type,
                     message=f"Extra definition in {api2.swagger_source}: {def_name}{ref_info}",
-                    context=f" || {def_name} ||  || {possible_match}",
+                    context=f"||{def_name}||||{possible_match}",
                 )
             )
             print(
@@ -1043,14 +1041,14 @@ class ApiComparator:
                         Difference(
                             type=DifferenceType.UNREFERENCED_DEFINITION_IN_HAND_AUTHORED,
                             message=f"Unreferenced definition in hand-authored: {def_name}",
-                            context=f" || {def_name} || ||",
+                            context=f"||{def_name}||||",
                         )
                     )
                     self.differences.append(
                         Difference(
                             type=DifferenceType.UNREFERENCED_DEFINITION_IN_TSP,
                             message=f"Unreferenced definition in tsp: {def_name}",
-                            context=f" || {def_name} || ||",
+                            context=f"||{def_name}||||",
                         )
                     )
                     console_ref_info = " (no ref in hand-authored or tsp)"
@@ -1074,7 +1072,7 @@ class ApiComparator:
                     Difference(
                         type=DifferenceType.DEFINITION_MISMATCH,
                         message=message,
-                        context=f" || {def_name} ||  || ",
+                        context=f"||{def_name}||||",
                     )
                 )
                 print(
