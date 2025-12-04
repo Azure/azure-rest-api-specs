@@ -215,7 +215,7 @@ model AlertProcessingRulesList is Azure.Core.Page<AlertProcessingRule>;
 /**
  * Alert processing rule properties defining scopes, conditions and scheduling logic for alert processing rule.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AlertProcessingRuleProperties {
   /**
    * Scopes on which alert processing rule will apply.
@@ -336,7 +336,7 @@ model Action {
 /**
  * An azure managed resource object.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ManagedResource extends Resource {
   /**
    * Resource location
@@ -347,7 +347,7 @@ model ManagedResource extends Resource {
   /**
    * Resource tags
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -423,7 +423,7 @@ model PatchObject {
   /**
    * Tags to be updated.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
