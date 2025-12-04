@@ -3521,7 +3521,7 @@
     },
     "OperationStatus": {
       "type": "object",
-      "description": "The template for omitting properties.",
+      "description": "Status of a long-running operation.",
       "properties": {
         "status": {
           "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
@@ -3529,7 +3529,18 @@
         },
         "id": {
           "type": "string",
-          "description": "The unique identifier for the operationStatus resource"
+          "description": "The unique identifier for the operationStatus resource",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the  operationStatus resource",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the  operationStatus resource",
+          "readOnly": true
         },
         "startTime": {
           "type": "string",
