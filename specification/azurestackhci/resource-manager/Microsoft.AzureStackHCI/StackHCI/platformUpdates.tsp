@@ -7,10 +7,12 @@ import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
 
 @armProviderNamespace("Microsoft.AzureStackHCI")
 namespace Microsoft.AzureStackHCI;
 
+@added(Versions.v2025_11_01_preview)
 @doc("Represents a platform update resource.")
 @parentResource(SubscriptionLocationResource)
 model PlatformUpdate
@@ -21,6 +23,7 @@ model PlatformUpdate
   >;
 }
 
+@added(Versions.v2025_11_01_preview)
 @armResourceOperations
 interface PlatformUpdates {
   @doc("Get a platform update.")
@@ -34,6 +37,7 @@ interface PlatformUpdates {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state"
+@added(Versions.v2025_11_01_preview)
 @doc("Represents properties of a platform update resource.")
 model PlatformUpdateProperties {
   @doc("Represents applicable platform updates.")
@@ -41,6 +45,7 @@ model PlatformUpdateProperties {
   platformUpdateDetails: Array<PlatformUpdateDetails>;
 }
 
+@added(Versions.v2025_11_01_preview)
 @doc("Represents details of a specific platform update.")
 model PlatformUpdateDetails {
   @doc("Represents validated solution recipe version of a platform update.")
@@ -54,6 +59,7 @@ model PlatformUpdateDetails {
   platformPayloads: Array<PlatformPayload>;
 }
 
+@added(Versions.v2025_11_01_preview)
 @doc("Represents details of a specific platform update payload.")
 model PlatformPayload {
   @doc("Represents url of a platform update payload.")

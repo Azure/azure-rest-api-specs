@@ -27,7 +27,6 @@ using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
-
 /**
  * Azure Stack HCI service
  */
@@ -42,6 +41,11 @@ namespace Microsoft.AzureStackHCI;
  * The available API versions.
  */
 enum Versions {
+  /**
+   * The 2025-11-01-preview API version.
+   */
+  v2025_11_01_preview: "2025-11-01-preview",
+
   /**
    * The 2025-12-01-preview API version.
    */
