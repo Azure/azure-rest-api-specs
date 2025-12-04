@@ -1,15 +1,7 @@
-import "@azure-tools/typespec-azure-core";
-import "@typespec/openapi";
-import "@typespec/rest";
-import "@typespec/versioning";
+import "@typespec/http";
 import "./models.tsp";
-import "../main.tsp";
 
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
-using TypeSpec.Rest;
-using TypeSpec.Versioning;
-using Azure.Core;
 
 namespace KeyVault;
 

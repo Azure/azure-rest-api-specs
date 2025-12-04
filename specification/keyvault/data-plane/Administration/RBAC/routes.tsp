@@ -1,8 +1,6 @@
 import "@azure-tools/typespec-azure-core";
-import "@azure-tools/typespec-client-generator-core";
-import "@typespec/rest";
+import "@typespec/http";
 import "./models.tsp";
-import "../main.tsp";
 
 using TypeSpec.Http;
 using Azure.ClientGenerator.Core;

@@ -1,14 +1,7 @@
-import "@typespec/http";
-import "@typespec/openapi";
-import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "../common/common.tsp";
-import "../main.tsp";
 
-using TypeSpec.Http;
-using TypeSpec.OpenAPI;
-using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 
