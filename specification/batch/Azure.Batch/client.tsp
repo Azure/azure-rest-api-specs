@@ -380,3 +380,4 @@ interface BatchClient {
   "VMDiskSecurityProfile",
   "go"
 );
+@@clientName(Azure.Batch, "BatchManagementClient", "javascript");
