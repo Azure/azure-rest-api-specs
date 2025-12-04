@@ -187,7 +187,7 @@ interface VirtualNetworkGateways {
   /**
    * List all Radius servers with respective radius secrets from virtual network gateway VpnClientConfiguration.
    */
-  @list
+  @post
   listRadiusSecrets is ArmResourceActionSync<
     VirtualNetworkGateway,
     void,
@@ -276,7 +276,7 @@ interface VirtualNetworkGateways {
   getVpnclientIpsecParameters is ArmResourceActionAsyncBase<
     VirtualNetworkGateway,
     void,
-    ArmResponse<VpnClientIPsecParameters>,
+    Response = VpnClientIPsecParameters & ArmLroLocationHeader,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<VirtualNetworkGateway>,
     Error = CloudError
   >;
@@ -289,7 +289,7 @@ interface VirtualNetworkGateways {
     VpnPacketCaptureStartParameters,
     ArmResponse<stringApplicationJson>,
     OptionalRequestBody = true,
-    Error = CloudError
+    Error = Error
   >;
 
   /**
@@ -299,7 +299,7 @@ interface VirtualNetworkGateways {
     VirtualNetworkGateway,
     VpnPacketCaptureStopParameters,
     ArmResponse<stringApplicationJson>,
-    Error = CloudError
+    Error = Error
   >;
 
   /**
@@ -323,7 +323,8 @@ interface VirtualNetworkGateways {
        */
       @query("fetchLatest")
       fetchLatest: boolean;
-    }
+    },
+    Error = CloudError
   >;
 
   /**
@@ -346,7 +347,8 @@ interface VirtualNetworkGateways {
        */
       @query("failoverTestId")
       failoverTestId: string;
-    }
+    },
+    Error = CloudError
   >;
 
   /**

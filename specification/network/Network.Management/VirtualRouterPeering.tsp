@@ -31,14 +31,14 @@ interface VirtualRouterPeerings {
   /**
    * Gets the specified Virtual Router Peering.
    */
-  get is ArmResourceRead<VirtualRouterPeering, Error = CloudError>;
+  get is ArmResourceRead<VirtualRouterPeering, Error = Error>;
 
   /**
    * Creates or updates the specified Virtual Router Peering.
    */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     VirtualRouterPeering,
-    Error = CloudError
+    Error = Error
   >;
 
   /**
@@ -48,13 +48,13 @@ interface VirtualRouterPeerings {
   delete is ArmResourceDeleteWithoutOkAsync<
     VirtualRouterPeering,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
-    Error = CloudError
+    Error = Error
   >;
 
   /**
    * Lists all Virtual Router Peerings in a Virtual Router resource.
    */
-  list is ArmResourceListByParent<VirtualRouterPeering, Error = CloudError>;
+  list is ArmResourceListByParent<VirtualRouterPeering, Error = Error>;
 }
 
 @@doc(VirtualRouterPeering.name, "The name of the Virtual Router Peering.");

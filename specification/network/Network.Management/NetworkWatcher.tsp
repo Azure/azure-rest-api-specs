@@ -142,10 +142,14 @@ interface NetworkWatchers {
    * Gets the configured and effective security group rules on the specified VM.
    */
   @action("securityGroupView")
-  getVMSecurityRules is ArmResourceActionAsync<
+  getVMSecurityRules is ArmResourceActionAsyncBase<
     NetworkWatcher,
     SecurityGroupViewParameters,
-    ArmResponse<SecurityGroupViewResult>,
+    ArmResponse<SecurityGroupViewResult> | (ArmAcceptedLroResponse & {
+      @body
+      _: SecurityGroupViewResult;
+    }),
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<NetworkWatcher>,
     Error = ErrorResponse
   >;
 
@@ -153,10 +157,14 @@ interface NetworkWatchers {
    * Initiate troubleshooting on a specified resource.
    */
   @action("troubleshoot")
-  getTroubleshooting is ArmResourceActionAsync<
+  getTroubleshooting is ArmResourceActionAsyncBase<
     NetworkWatcher,
     TroubleshootingParameters,
-    ArmResponse<TroubleshootingResult>,
+    ArmResponse<TroubleshootingResult> | (ArmAcceptedLroResponse & {
+      @body
+      _: TroubleshootingResult;
+    }),
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<NetworkWatcher>,
     Error = ErrorResponse
   >;
 

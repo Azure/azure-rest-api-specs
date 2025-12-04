@@ -13079,9 +13079,6 @@
       "post": {
         "responses": {
           "202": {
-            "schema__deleted": {
-              "$ref": "#/definitions/SecurityGroupViewResult"
-            },
             "headers__added": {
               "Location": {
                 "type": "string",
@@ -13096,9 +13093,6 @@
       "post": {
         "responses": {
           "202": {
-            "schema__deleted": {
-              "$ref": "#/definitions/TroubleshootingResult"
-            },
             "headers__added": {
               "Location": {
                 "type": "string",
@@ -13541,7 +13535,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/Error",
-                "__new": "#/definitions/CloudError"
+                "__new": "#/definitions/Error"
               }
             }
           }
@@ -13555,7 +13549,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/Error",
-                "__new": "#/definitions/CloudError"
+                "__new": "#/definitions/Error"
               }
             }
           }
@@ -13567,7 +13561,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/Error",
-                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/Error"
               }
             }
           }
@@ -13587,7 +13581,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/Error",
-                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/Error"
               }
             }
           }
@@ -13848,7 +13842,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/CloudError",
-                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/CloudError"
               }
             }
           }
@@ -13985,14 +13979,17 @@
         "responses": {
           "202": {
             "headers": {
-              "Location__deleted": {
-                "type": "string",
-                "description": "URL for determining when an operation has completed. Send a GET request to the URL in Location header.\nThe URI should return a 202 until the operation reaches a terminal state and 200 once it reaches a terminal state.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#202-accepted-and-location-headers"
-              },
               "Azure-AsyncOperation": {
+                "format__added": "uri",
                 "description": {
                   "__old": "URL for checking the ongoing status of the operation.\nTo get the status of the asynchronous operation, send a GET request to the URL in Azure-AsyncOperation header value.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#asynchronous-operations",
                   "__new": "A link to the status monitor"
+                }
+              },
+              "Location": {
+                "description": {
+                  "__old": "URL for determining when an operation has completed. Send a GET request to the URL in Location header.\nThe URI should return a 202 until the operation reaches a terminal state and 200 once it reaches a terminal state.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#202-accepted-and-location-headers",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
                 }
               }
             }
@@ -14047,29 +14044,25 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-schema__added": "#/definitions/RouteFilter",
-          "final-state-via": {
-            "__old": "azure-async-operation",
-            "__new": "original-uri"
-          }
+          "final-state-schema__added": "#/definitions/RouteFilter"
         }
       },
       "delete": {
-        "x-ms-long-running-operation-options__deleted": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation__deleted": true,
         "responses": {
-          "202__deleted": {
-            "description": "ignore",
+          "202": {
             "headers": {
               "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "URL for checking the ongoing status of the operation.\nTo get the status of the asynchronous operation, send a GET request to the URL in Azure-AsyncOperation header value.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#asynchronous-operations"
+                "format__added": "uri",
+                "description": {
+                  "__old": "URL for checking the ongoing status of the operation.\nTo get the status of the asynchronous operation, send a GET request to the URL in Azure-AsyncOperation header value.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#asynchronous-operations",
+                  "__new": "A link to the status monitor"
+                }
               },
               "Location": {
-                "type": "string",
-                "description": "URL for determining when an operation has completed. Send a GET request to the URL in Location header.\nThe URI should return a 202 until the operation reaches a terminal state and 200 once it reaches a terminal state.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#202-accepted-and-location-headers"
+                "description": {
+                  "__old": "URL for determining when an operation has completed. Send a GET request to the URL in Location header.\nThe URI should return a 202 until the operation reaches a terminal state and 200 once it reaches a terminal state.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#202-accepted-and-location-headers",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
               }
             }
           },
@@ -14720,7 +14713,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/CloudError",
-                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/CloudError"
               }
             }
           }
@@ -14754,7 +14747,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/CloudError",
-                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/CloudError"
               }
             }
           }
@@ -14893,24 +14886,24 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-schema__added": "#/definitions/VirtualHub",
-          "final-state-via": {
-            "__old": "azure-async-operation",
-            "__new": "original-uri"
-          }
+          "final-state-schema__added": "#/definitions/VirtualHub"
         }
       },
       "delete": {
-        "x-ms-long-running-operation__deleted": true,
         "responses": {
-          "202__deleted": {
-            "description": "ignore"
+          "202": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
           },
           "default": {
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/CloudError",
-                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/CloudError"
               }
             }
           }
@@ -15106,19 +15099,11 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/routeTables": {
       "get": {
         "responses": {
-          "200": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/ListVirtualHubRouteTableV2sResult",
-                "__new": "#/definitions/ListVirtualHubRouteTableV2SResult"
-              }
-            }
-          },
           "default": {
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/CloudError",
-                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/CloudError"
               }
             }
           }
@@ -15132,7 +15117,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/Error",
-                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/Error"
               }
             }
           }
@@ -15144,30 +15129,30 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/Error",
-                "__new": "#/definitions/CloudError"
+                "__new": "#/definitions/Error"
               }
             }
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-schema__added": "#/definitions/VirtualHub",
-          "final-state-via": {
-            "__old": "azure-async-operation",
-            "__new": "original-uri"
-          }
+          "final-state-schema__added": "#/definitions/VirtualHub"
         }
       },
       "delete": {
-        "x-ms-long-running-operation__deleted": true,
         "responses": {
-          "202__deleted": {
-            "description": "ignore"
+          "202": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
           },
           "default": {
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/Error",
-                "__new": "#/definitions/CloudError"
+                "__new": "#/definitions/Error"
               }
             }
           }
@@ -15600,7 +15585,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/CloudError",
-                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/CloudError"
               }
             }
           }
@@ -15625,7 +15610,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/CloudError",
-                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/CloudError"
               }
             }
           }
@@ -15728,8 +15713,15 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getvpnclientipsecparameters": {
       "post": {
-        "x-ms-long-running-operation__deleted": true,
         "responses": {
+          "200": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
           "default": {
             "schema": {
               "$ref": {
@@ -15771,9 +15763,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/listRadiusSecrets": {
       "post": {
-        "x-ms-pageable__added": {
-          "nextLinkName": "nextLink"
-        },
         "responses": {
           "default": {
             "schema": {
@@ -15969,7 +15958,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/Error",
-                "__new": "#/definitions/CloudError"
+                "__new": "#/definitions/Error"
               }
             }
           }
@@ -16028,7 +16017,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/Error",
-                "__new": "#/definitions/CloudError"
+                "__new": "#/definitions/Error"
               }
             }
           }
@@ -16543,18 +16532,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}/resourceNavigationLinks": {
       "get": {
-        "x-ms-pageable__added": {
-          "nextLinkName": "nextLink"
-        },
         "responses": {
-          "200": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/ResourceNavigationLinksListResult",
-                "__new": "#/definitions/ResourceNavigationLinkListResult"
-              }
-            }
-          },
           "default": {
             "schema": {
               "$ref": {
@@ -16568,18 +16546,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}/serviceAssociationLinks": {
       "get": {
-        "x-ms-pageable__added": {
-          "nextLinkName": "nextLink"
-        },
         "responses": {
-          "200": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/ServiceAssociationLinksListResult",
-                "__new": "#/definitions/ServiceAssociationLinkListResult"
-              }
-            }
-          },
           "default": {
             "schema": {
               "$ref": {
@@ -16746,7 +16713,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/Error",
-                "__new": "#/definitions/CloudError"
+                "__new": "#/definitions/Error"
               }
             }
           }
@@ -16760,7 +16727,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/Error",
-                "__new": "#/definitions/CloudError"
+                "__new": "#/definitions/Error"
               }
             }
           }
@@ -16780,7 +16747,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/Error",
-                "__new": "#/definitions/CloudError"
+                "__new": "#/definitions/Error"
               }
             }
           }
@@ -16803,7 +16770,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/Error",
-                "__new": "#/definitions/CloudError"
+                "__new": "#/definitions/Error"
               }
             }
           }
@@ -16817,7 +16784,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/Error",
-                "__new": "#/definitions/CloudError"
+                "__new": "#/definitions/Error"
               }
             }
           }
@@ -16831,7 +16798,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/Error",
-                "__new": "#/definitions/CloudError"
+                "__new": "#/definitions/Error"
               }
             }
           }
@@ -16851,7 +16818,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/Error",
-                "__new": "#/definitions/CloudError"
+                "__new": "#/definitions/Error"
               }
             }
           }
@@ -16874,7 +16841,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/Error",
-                "__new": "#/definitions/CloudError"
+                "__new": "#/definitions/Error"
               }
             }
           }
@@ -16995,7 +16962,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/CloudError",
-                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/CloudError"
               }
             }
           }
@@ -17009,7 +16976,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/CloudError",
-                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/CloudError"
               }
             }
           }
@@ -17031,7 +16998,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/CloudError",
-                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/CloudError"
               }
             }
           }
@@ -17053,7 +17020,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/CloudError",
-                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/CloudError"
               }
             }
           }
@@ -17358,18 +17325,18 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-schema__added": "#/definitions/VpnGateway",
-          "final-state-via": {
-            "__old": "azure-async-operation",
-            "__new": "original-uri"
-          }
+          "final-state-schema__added": "#/definitions/VpnGateway"
         }
       },
       "delete": {
-        "x-ms-long-running-operation__deleted": true,
         "responses": {
-          "202__deleted": {
-            "description": "ignore"
+          "202": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
           },
           "default": {
             "schema": {
@@ -17431,7 +17398,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/CloudError",
-                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/CloudError"
               }
             }
           }
@@ -17487,7 +17454,7 @@
             "schema": {
               "$ref": {
                 "__old": "./networkWatcher.json#/definitions/ErrorResponse",
-                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/CloudError"
               }
             }
           }
@@ -17509,7 +17476,7 @@
             "schema": {
               "$ref": {
                 "__old": "./networkWatcher.json#/definitions/ErrorResponse",
-                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/ErrorResponse"
               }
             }
           }
@@ -17753,9 +17720,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnServerConfigurations/{vpnServerConfigurationName}/listRadiusSecrets": {
       "post": {
-        "x-ms-pageable__added": {
-          "nextLinkName": "nextLink"
-        },
         "parameters": [
           [
             "~",
@@ -18282,24 +18246,6 @@
         "type": "string"
       }
     },
-    "ListVirtualHubRouteTableV2sResult__deleted": {
-      "type": "object",
-      "description": "[Placeholder] Discription for page model",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "[Placeholder] Discription for value property",
-          "items": {
-            "$ref": "#/definitions/VirtualHubRouteTableV2"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
-        }
-      }
-    },
     "LoadBalancerBackendAddressPoolListResult__deleted": {
       "type": "object",
       "description": "[Placeholder] Discription for page model",
@@ -18597,42 +18543,6 @@
           "additionalProperties": {
             "type": "string"
           }
-        }
-      }
-    },
-    "ResourceNavigationLinksListResult__deleted": {
-      "type": "object",
-      "description": "[Placeholder] Discription for page model",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "[Placeholder] Discription for value property",
-          "items": {
-            "$ref": "#/definitions/ResourceNavigationLink"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
-        }
-      }
-    },
-    "ServiceAssociationLinksListResult__deleted": {
-      "type": "object",
-      "description": "[Placeholder] Discription for page model",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "[Placeholder] Discription for value property",
-          "items": {
-            "$ref": "#/definitions/ServiceAssociationLink"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
         }
       }
     },
@@ -19069,32 +18979,6 @@
         "body"
       ]
     },
-    "Azure.ResourceManager.ArmResponse<SecurityGroupViewResult>__added": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/SecurityGroupViewResult",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<TroubleshootingResult>__added": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/TroubleshootingResult",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
     "Azure.ResourceManager.ArmResponse<VirtualHubEffectiveRouteList>__added": {
       "type": "object",
       "description": "Azure operation completed successfully.",
@@ -19467,27 +19351,6 @@
         }
       }
     },
-    "ListVirtualHubRouteTableV2SResult__added": {
-      "type": "object",
-      "description": "[Placeholder] Discription for page model",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "[Placeholder] Discription for value property",
-          "items": {
-            "$ref": "#/definitions/VirtualHubRouteTableV2"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "NetworkManagerPropertiesNetworkManagerScopes__added": {
       "type": "object",
       "description": "Scope of Network Manager.",
@@ -19569,48 +19432,6 @@
         {
           "$ref": "#/definitions/ResourceSet"
         }
-      ]
-    },
-    "ResourceNavigationLinkListResult__added": {
-      "type": "object",
-      "description": "[Placeholder] Discription for page model",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "[Placeholder] Discription for value property",
-          "items": {
-            "$ref": "#/definitions/ResourceNavigationLink"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "ServiceAssociationLinkListResult__added": {
-      "type": "object",
-      "description": "[Placeholder] Discription for page model",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "[Placeholder] Discription for value property",
-          "items": {
-            "$ref": "#/definitions/ServiceAssociationLink"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "SignaturesOverridesProperties__added": {
@@ -25898,6 +25719,11 @@
         "value"
       ]
     },
+    "ListVirtualHubRouteTableV2sResult": {
+      "required__added": [
+        "value"
+      ]
+    },
     "ListVirtualHubsResult": {
       "required__added": [
         "value"
@@ -29109,6 +28935,11 @@
         }
       }
     },
+    "ResourceNavigationLinksListResult": {
+      "required__added": [
+        "value"
+      ]
+    },
     "RetentionPolicyParameters": {
       "properties": {
         "days": {
@@ -30130,6 +29961,11 @@
           }
         }
       }
+    },
+    "ServiceAssociationLinksListResult": {
+      "required__added": [
+        "value"
+      ]
     },
     "ServiceDelegationPropertiesFormat": {
       "properties": {

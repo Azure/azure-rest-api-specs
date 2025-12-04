@@ -89,13 +89,12 @@ interface Subnets {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ResourceNavigationLinks_List")
-  @list
   @get
   @action("ResourceNavigationLinks")
   resourceNavigationLinksList is ArmResourceActionSync<
     Subnet,
     void,
-    ArmResponse<ResourceListResult<ResourceNavigationLink>>,
+    ResourceNavigationLinksListResult,
     Error = CloudError
   >;
 
@@ -104,13 +103,12 @@ interface Subnets {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ServiceAssociationLinks_List")
-  @list
   @get
   @action("ServiceAssociationLinks")
   serviceAssociationLinksList is ArmResourceActionSync<
     Subnet,
     void,
-    ArmResponse<ResourceListResult<ServiceAssociationLink>>,
+    ServiceAssociationLinksListResult,
     Error = CloudError
   >;
 }

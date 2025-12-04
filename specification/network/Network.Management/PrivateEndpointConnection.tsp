@@ -42,7 +42,7 @@ interface PrivateEndpointConnections {
       @query("$expand")
       $expand?: string;
     },
-    Error = CloudError
+    Error = Error
   >;
 
   /**
@@ -53,7 +53,8 @@ interface PrivateEndpointConnections {
   @operationId("PrivateLinkServices_UpdatePrivateEndpointConnection")
   updatePrivateEndpointConnection is ArmResourceCreateOrReplaceSync<
     PrivateEndpointConnection,
-    Response = ArmResourceUpdatedResponse<PrivateEndpointConnection>
+    Response = ArmResourceUpdatedResponse<PrivateEndpointConnection>,
+    Error = Error
   >;
 
   /**
@@ -64,7 +65,8 @@ interface PrivateEndpointConnections {
   @operationId("PrivateLinkServices_DeletePrivateEndpointConnection")
   deletePrivateEndpointConnection is ArmResourceDeleteWithoutOkAsync<
     PrivateEndpointConnection,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = Error
   >;
 
   /**
@@ -74,7 +76,7 @@ interface PrivateEndpointConnections {
   @operationId("PrivateLinkServices_ListPrivateEndpointConnections")
   listPrivateEndpointConnections is ArmResourceListByParent<
     PrivateEndpointConnection,
-    Error = CloudError
+    Error = Error
   >;
 }
 

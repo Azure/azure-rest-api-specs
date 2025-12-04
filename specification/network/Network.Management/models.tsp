@@ -27018,3 +27018,13 @@ model NspAssociationsListResult is Azure.Core.Page<NspAssociation>;
 
 model NetworkVirtualApplianceSiteListResult
   is Azure.Core.Page<VirtualApplianceSite>;
+
+model ResourceNavigationLinksListResult
+  is Azure.Core.Page<ResourceNavigationLink>;
+
+model ServiceAssociationLinksListResult
+  is Azure.Core.Page<ServiceAssociationLink>;
+
+@@Azure.ClientGenerator.Core.clientName(ListVirtualHubRouteTableV2SResult,
+  "ListVirtualHubRouteTableV2sResult"
+);

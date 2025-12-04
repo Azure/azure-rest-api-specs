@@ -91,7 +91,8 @@ interface VpnSiteLinkConnections {
   resetConnection is VpnSiteLinkConnectionsOps.ActionAsync<
     VpnSiteLinkConnection,
     Request = void,
-    Result = ArmAcceptedLroResponse
+    Result = ArmAcceptedLroResponse,
+    OverrideErrorType = ErrorResponse
   >;
 
   /**
@@ -103,7 +104,8 @@ interface VpnSiteLinkConnections {
   getIkeSas is VpnSiteLinkConnectionsOps.ActionAsync<
     VpnSiteLinkConnection,
     void,
-    ArmResponse<stringApplicationJson>
+    ArmResponse<stringApplicationJson>,
+    OverrideErrorType = CloudError
   >;
 }
 

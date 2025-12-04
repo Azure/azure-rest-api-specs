@@ -50,40 +50,56 @@ interface RouteFilters {
   /**
    * Gets the specified route filter.
    */
-  get is ArmResourceRead<RouteFilter,
+  get is ArmResourceRead<
+    RouteFilter,
     Parameters = {
       /**
        * Expands referenced express route bgp peering resources.
        */
       @query("$expand")
       $expand?: string;
-    }, Error = CloudError>;
+    },
+    Error = CloudError
+  >;
 
   /**
    * Creates or updates a route filter in a specified resource group.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<RouteFilter, Error = CloudError>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    RouteFilter,
+    Error = CloudError
+  >;
 
   /**
    * Updates tags of a route filter.
    */
   @patch(#{ implicitOptionality: false })
-  updateTags is ArmCustomPatchSync<RouteFilter, PatchModel = TagsObject, Error = CloudError>;
+  updateTags is ArmCustomPatchSync<
+    RouteFilter,
+    PatchModel = TagsObject,
+    Error = CloudError
+  >;
 
   /**
    * Deletes the specified route filter.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<RouteFilter,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  delete is ArmResourceDeleteWithoutOkAsync<
+    RouteFilter,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders &
       Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse,
-    Error = CloudError>;
+    Error = CloudError
+  >;
 
   /**
    * Gets all route filters in a resource group.
    */
-  listByResourceGroup is ArmResourceListByParent<RouteFilter, Error = CloudError>;
+  listByResourceGroup is ArmResourceListByParent<
+    RouteFilter,
+    Error = CloudError
+  >;
 
   /**
    * Gets all route filters in a subscription.
@@ -96,12 +112,15 @@ interface RouteFilters {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RouteFilterRules_Delete")
   @delete
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   routeFilterRulesDelete is RouteFilterRuleOps.DeleteWithoutOkAsync<
     RouteFilter,
     LroHeaders = ArmAsyncOperationHeader &
       Azure.Core.Foundations.RetryAfterHeader,
-    Response = OkResponse | NoContentResponse
-,    OverrideErrorType = CloudError>;
+    Response = OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+      Azure.Core.Foundations.RetryAfterHeader> | NoContentResponse,
+    OverrideErrorType = CloudError
+  >;
 
   /**
    * Gets the specified rule from a route filter.
@@ -121,11 +140,13 @@ interface RouteFilters {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RouteFilterRules_CreateOrUpdate")
   @put
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   routeFilterRulesCreateOrUpdate is RouteFilterRuleOps.CreateOrUpdateAsync<
     RouteFilter,
     Response = ArmResponse<RouteFilterRule> | ArmResourceCreatedResponse<RouteFilterRule>,
-    Request = RouteFilterRule
-,    OverrideErrorType = CloudError>;
+    Request = RouteFilterRule,
+    OverrideErrorType = CloudError
+  >;
 
   /**
    * Gets all RouteFilterRules in a route filter.

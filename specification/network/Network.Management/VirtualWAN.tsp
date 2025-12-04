@@ -114,7 +114,8 @@ interface VirtualWANS {
   supportedSecurityProviders is VirtualWanOps.ActionSync<
     VirtualWAN,
     void,
-    ArmResponse<VirtualWanSecurityProviders>
+    ArmResponse<VirtualWanSecurityProviders>,
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -126,7 +127,8 @@ interface VirtualWANS {
   generatevirtualwanvpnserverconfigurationvpnprofile is VirtualWanOps.ActionAsync<
     VirtualWAN,
     VirtualWanVpnProfileParameters,
-    ArmResponse<VpnProfileResponse>
+    ArmResponse<VpnProfileResponse>,
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -138,7 +140,8 @@ interface VirtualWANS {
   download is VirtualWanOps.ActionAsync<
     VirtualWAN,
     GetVpnSitesConfigurationRequest,
-    OkResponse
+    OkResponse,
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -150,7 +153,8 @@ interface VirtualWANS {
   vpnServerConfigurationsAssociatedWithVirtualWanList is VirtualWanOps.ActionAsync<
     VirtualWAN,
     void,
-    ArmResponse<VpnServerConfigurationsResponse>
+    ArmResponse<VpnServerConfigurationsResponse>,
+    OverrideErrorType = CloudError
   >;
 }
 

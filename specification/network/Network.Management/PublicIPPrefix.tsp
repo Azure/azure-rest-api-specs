@@ -61,7 +61,8 @@ interface PublicIPPrefixes {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     PublicIPPrefix,
     LroHeaders = ArmLroLocationHeader<FinalResult = PublicIPPrefix> &
-      Azure.Core.Foundations.RetryAfterHeader
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = CloudError
   >;
 
   /**

@@ -21432,6 +21432,9 @@
           },
           "202": {
             "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/SecurityGroupViewResult"
+            },
             "headers": {
               "Location": {
                 "type": "string",
@@ -21524,6 +21527,9 @@
           },
           "202": {
             "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/TroubleshootingResult"
+            },
             "headers": {
               "Location": {
                 "type": "string",
@@ -22534,7 +22540,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -22581,7 +22587,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -22626,7 +22632,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -22672,7 +22678,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -23167,7 +23173,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -23446,7 +23452,12 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -23596,7 +23607,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "original-uri",
+          "final-state-via": "azure-async-operation",
           "final-state-schema": "#/definitions/RouteFilter"
         },
         "x-ms-long-running-operation": true
@@ -23622,6 +23633,20 @@
           "200": {
             "description": "ignore"
           },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
           "204": {
             "description": "ignore"
           },
@@ -23636,7 +23661,11 @@
           "RouteFilterRuleDelete": {
             "$ref": "./examples/RouteFilterRuleDelete.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeTables": {
@@ -25042,7 +25071,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -25097,7 +25126,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -25474,7 +25503,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "original-uri",
+          "final-state-via": "azure-async-operation",
           "final-state-schema": "#/definitions/VirtualHub"
         },
         "x-ms-long-running-operation": true
@@ -25500,13 +25529,22 @@
           "200": {
             "description": "ignore"
           },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
           "204": {
             "description": "ignore"
           },
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -25514,7 +25552,8 @@
           "HubVirtualNetworkConnectionDelete": {
             "$ref": "./examples/HubVirtualNetworkConnectionDelete.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/inboundRoutes": {
@@ -26003,13 +26042,13 @@
           "200": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/ListVirtualHubRouteTableV2SResult"
+              "$ref": "#/definitions/ListVirtualHubRouteTableV2sResult"
             }
           },
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -26051,7 +26090,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -26102,7 +26141,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -26112,7 +26151,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "original-uri",
+          "final-state-via": "azure-async-operation",
           "final-state-schema": "#/definitions/VirtualHub"
         },
         "x-ms-long-running-operation": true
@@ -26138,13 +26177,22 @@
           "200": {
             "description": "ignore"
           },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
           "204": {
             "description": "ignore"
           },
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -26152,7 +26200,8 @@
           "VirtualHubRouteTableV2Delete": {
             "$ref": "./examples/VirtualHubRouteTableV2Delete.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/routingIntent": {
@@ -26994,7 +27043,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -27049,7 +27098,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -27260,6 +27309,12 @@
             "description": "ignore",
             "schema": {
               "$ref": "#/definitions/VpnClientIPsecParameters"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
             }
           },
           "default": {
@@ -27273,7 +27328,8 @@
           "Get VirtualNetworkGateway VpnClientIpsecParameters": {
             "$ref": "./examples/VirtualNetworkGatewayGetVpnClientIpsecParameters.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getvpnprofilepackageurl": {
@@ -27349,9 +27405,6 @@
           "ListAllVirtualNetworkGatewayRadiusServerSecrets": {
             "$ref": "./examples/AllVirtualNetworkGatewayRadiusServerSecretsList.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -27761,7 +27814,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -27864,7 +27917,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -28868,7 +28921,7 @@
           "200": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/ResourceNavigationLinkListResult"
+              "$ref": "#/definitions/ResourceNavigationLinksListResult"
             }
           },
           "default": {
@@ -28882,9 +28935,6 @@
           "Get Resource Navigation Links": {
             "$ref": "./examples/VirtualNetworkGetResourceNavigationLinks.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -28910,7 +28960,7 @@
           "200": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/ServiceAssociationLinkListResult"
+              "$ref": "#/definitions/ServiceAssociationLinksListResult"
             }
           },
           "default": {
@@ -28924,9 +28974,6 @@
           "Get Service Association Links": {
             "$ref": "./examples/VirtualNetworkGetServiceAssociationLinks.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -29261,7 +29308,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -29302,7 +29349,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -29353,7 +29400,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -29398,7 +29445,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -29432,7 +29479,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -29474,7 +29521,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -29531,7 +29578,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -29582,7 +29629,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -29831,7 +29878,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -29865,7 +29912,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -29912,7 +29959,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -29955,7 +30002,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -30639,7 +30686,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "original-uri",
+          "final-state-via": "azure-async-operation",
           "final-state-schema": "#/definitions/VpnGateway"
         },
         "x-ms-long-running-operation": true
@@ -30665,6 +30712,15 @@
           "200": {
             "description": "ignore"
           },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
           "204": {
             "description": "ignore"
           },
@@ -30679,7 +30735,8 @@
           "VpnConnectionDelete": {
             "$ref": "./examples/VpnConnectionDelete.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{vpnConnectionName}/startpacketcapture": {
@@ -30785,7 +30842,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -30927,7 +30984,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -30976,7 +31033,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -31606,9 +31663,6 @@
           "ListAllVpnServerConfigurationRadiusServerSecrets": {
             "$ref": "./examples/AllVpnServerConfigurationRadiusServerSecretsList.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -36969,32 +37023,6 @@
             },
             "type": "array"
           }
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<SecurityGroupViewResult>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/SecurityGroupViewResult",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<TroubleshootingResult>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/TroubleshootingResult",
-          "description": "The body type of the operation request or response."
         }
       },
       "required": [
@@ -48256,7 +48284,7 @@
         "value"
       ]
     },
-    "ListVirtualHubRouteTableV2SResult": {
+    "ListVirtualHubRouteTableV2sResult": {
       "type": "object",
       "description": "[Placeholder] Discription for page model",
       "properties": {
@@ -56007,7 +56035,7 @@
         }
       }
     },
-    "ResourceNavigationLinkListResult": {
+    "ResourceNavigationLinksListResult": {
       "type": "object",
       "description": "[Placeholder] Discription for page model",
       "properties": {
@@ -57810,27 +57838,6 @@
         }
       ]
     },
-    "ServiceAssociationLinkListResult": {
-      "type": "object",
-      "description": "[Placeholder] Discription for page model",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "[Placeholder] Discription for value property",
-          "items": {
-            "$ref": "#/definitions/ServiceAssociationLink"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "ServiceAssociationLinkPropertiesFormat": {
       "type": "object",
       "description": "Properties of ServiceAssociationLink.",
@@ -57872,6 +57879,27 @@
           }
         }
       }
+    },
+    "ServiceAssociationLinksListResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/ServiceAssociationLink"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "ServiceDelegationPropertiesFormat": {
       "type": "object",

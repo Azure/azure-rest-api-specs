@@ -38,7 +38,7 @@ interface VirtualRouters {
       @query("$expand")
       $expand?: string;
     },
-    Error = CloudError
+    Error = Error
   >;
 
   /**
@@ -46,7 +46,7 @@ interface VirtualRouters {
    */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     VirtualRouter,
-    Error = CloudError
+    Error = Error
   >;
 
   /**
@@ -56,16 +56,13 @@ interface VirtualRouters {
   delete is ArmResourceDeleteWithoutOkAsync<
     VirtualRouter,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
-    Error = CloudError
+    Error = Error
   >;
 
   /**
    * Lists all Virtual Routers in a resource group.
    */
-  listByResourceGroup is ArmResourceListByParent<
-    VirtualRouter,
-    Error = CloudError
-  >;
+  listByResourceGroup is ArmResourceListByParent<VirtualRouter, Error = Error>;
 
   /**
    * Gets all the Virtual Routers in a subscription.

@@ -653,6 +653,8 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/scopeConnections'].get.parameters[1].format__added` | added | `int32` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/publicIPAddresses/{publicIpAddressName}/disassociateCloudServiceReservedPublicIp'].post.responses.202.headers['Azure-AsyncOperation'].format__added` | added | `uri` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/publicIPAddresses/{publicIpAddressName}/reserveCloudServicePublicIpAddress'].post.responses.202.headers['Azure-AsyncOperation'].format__added` | added | `uri` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters/{routeFilterName}'].delete.responses.202.headers['Azure-AsyncOperation'].format__added` | added | `uri` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters/{routeFilterName}/routeFilterRules/{ruleName}'].delete.responses.202.headers['Azure-AsyncOperation'].format__added` | added | `uri` |
 
 ### Changes for `minimum`
 
@@ -753,10 +755,6 @@
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/bgpServiceCommunities'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/expressRouteProviderPorts'].get['x-ms-pageable__added']` | added | `{"nextLinkName":"nextLink"}` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/availablePrivateEndpointTypes'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/listRadiusSecrets'].post['x-ms-pageable__added']` | added | `{"nextLinkName":"nextLink"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}/resourceNavigationLinks'].get['x-ms-pageable__added']` | added | `{"nextLinkName":"nextLink"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}/serviceAssociationLinks'].get['x-ms-pageable__added']` | added | `{"nextLinkName":"nextLink"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnServerConfigurations/{vpnServerConfigurationName}/listRadiusSecrets'].post['x-ms-pageable__added']` | added | `{"nextLinkName":"nextLink"}` |
 
 ### Changes for `get`
 
@@ -859,6 +857,7 @@
 | `definitions.ListRoutingIntentResult.required__added` | added | `["value"]` |
 | `definitions.ListVirtualHubBgpConnectionResults.required__added` | added | `["value"]` |
 | `definitions.ListVirtualHubIpConfigurationResults.required__added` | added | `["value"]` |
+| `definitions.ListVirtualHubRouteTableV2sResult.required__added` | added | `["value"]` |
 | `definitions.ListVirtualHubsResult.required__added` | added | `["value"]` |
 | `definitions.ListVirtualNetworkGatewayNatRulesResult.required__added` | added | `["value"]` |
 | `definitions.ListVirtualWANsResult.required__added` | added | `["value"]` |
@@ -911,6 +910,7 @@
 | `definitions.RadiusAuthServerListResult.required__added` | added | `["value"]` |
 | `definitions.ReachabilityAnalysisIntentListResult.required__added` | added | `["value"]` |
 | `definitions.ReachabilityAnalysisRunListResult.required__added` | added | `["value"]` |
+| `definitions.ResourceNavigationLinksListResult.required__added` | added | `["value"]` |
 | `definitions.RouteFilter.required__deleted` | deleted | `["location"]` |
 | `definitions.RouteFilterListResult.required__added` | added | `["value"]` |
 | `definitions.RouteFilterRuleListResult.required__added` | added | `["value"]` |
@@ -925,6 +925,7 @@
 | `definitions.SecurityUserConfigurationListResult.required__added` | added | `["value"]` |
 | `definitions.SecurityUserRuleCollectionListResult.required__added` | added | `["value"]` |
 | `definitions.SecurityUserRuleListResult.required__added` | added | `["value"]` |
+| `definitions.ServiceAssociationLinksListResult.required__added` | added | `["value"]` |
 | `definitions.ServiceEndpointPolicyDefinitionListResult.required__added` | added | `["value"]` |
 | `definitions.ServiceEndpointPolicyListResult.required__added` | added | `["value"]` |
 | `definitions.ServiceTagInformationListResult.required__added` | added | `["value"]` |
@@ -1112,12 +1113,14 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/effectiveRoutes'].post.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/hubRouteTables/{routeTableName}'].delete.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/hubRouteTables/{routeTableName}'].put.responses.201.headers__added` | added | `{"Azure-AsyncOperation":{"type":"string","description":"A link to the status monitor"}}` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/hubVirtualNetworkConnections/{connectionName}'].delete.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/inboundRoutes'].post.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/ipConfigurations/{ipConfigName}'].delete.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/ipConfigurations/{ipConfigName}'].put.responses.201.headers__added` | added | `{"Azure-AsyncOperation":{"type":"string","description":"A link to the status monitor"}}` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/outboundRoutes'].post.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/routeMaps/{routeMapName}'].delete.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/routeMaps/{routeMapName}'].put.responses.201.headers__added` | added | `{"Azure-AsyncOperation":{"type":"string","description":"A link to the status monitor"}}` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/routeTables/{routeTableName}'].delete.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/routingIntent/{routingIntentName}'].delete.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/routingIntent/{routingIntentName}'].put.responses.201.headers__added` | added | `{"Azure-AsyncOperation":{"type":"string","description":"A link to the status monitor"}}` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}'].delete.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
@@ -1130,6 +1133,7 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getBgpPeerStatus'].post.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getLearnedRoutes'].post.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getVpnClientConnectionHealth'].post.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getvpnclientipsecparameters'].post.responses.200.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getvpnprofilepackageurl'].post.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/natRules/{natRuleName}'].delete.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/natRules/{natRuleName}'].put.responses.201.headers__added` | added | `{"Azure-AsyncOperation":{"type":"string","description":"A link to the status monitor"}}` |
@@ -1166,6 +1170,7 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/reset'].post.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/startpacketcapture'].post.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/stoppacketcapture'].post.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}'].delete.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}/vpnLinkConnections/{linkConnectionName}/getikesas'].post.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}/vpnLinkConnections/{linkConnectionName}/resetconnection'].post.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}/vpnLinkConnections/{linkConnectionName}/sharedKeys/default'].put.responses.201.headers__added` | added | `{"Azure-AsyncOperation":{"type":"string","description":"A link to the status monitor"}}` |
@@ -1372,8 +1377,6 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/backendAddressPools/{backendPoolName}/queryInboundNatRulePortMapping'].post.responses.202.schema__deleted` | deleted | `{"$ref":"#/definitions/BackendAddressInboundNatRulePortMappings"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/securityGroupView'].post.responses.202.schema__deleted` | deleted | `{"$ref":"#/definitions/SecurityGroupViewResult"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/troubleshoot'].post.responses.202.schema__deleted` | deleted | `{"$ref":"#/definitions/TroubleshootingResult"}` |
 
 ### Changes for `summary`
 
@@ -1506,7 +1509,6 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/linkReferences/{linkReferenceName}'].delete.responses.202.headers.Location__added` | added | `{"type":"string","description":"The Location header contains the URL where the status of the long ru...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/links/{linkName}'].delete.responses.202.headers.Location__added` | added | `{"type":"string","description":"The Location header contains the URL where the status of the long ru...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkVirtualAppliances/{networkVirtualApplianceName}/networkVirtualApplianceConnections/{connectionName}'].delete.responses.202.headers.Location__added` | added | `{"type":"string","description":"The Location header contains the URL where the status of the long ru...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters/{routeFilterName}'].delete.responses.202.headers.Location__deleted` | deleted | `{"type":"string","description":"URL for determining when an operation has completed. Send a GET requ...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/abortMigration'].post.responses.202.headers.Location__added` | added | `{"type":"string","description":"The Location header contains the URL where the status of the long ru...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/commitMigration'].post.responses.202.headers.Location__added` | added | `{"type":"string","description":"The Location header contains the URL where the status of the long ru...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/executeMigration'].post.responses.202.headers.Location__added` | added | `{"type":"string","description":"The Location header contains the URL where the status of the long ru...` |
@@ -1523,31 +1525,6 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkVirtualAppliances/{networkVirtualApplianceName}'].put.responses.201.headers['Azure-AsyncOperation__added']` | added | `{"type":"string","format":"uri","description":"A link to the status monitor"}` |
-
-### Changes for `x-ms-long-running-operation-options`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters/{routeFilterName}/routeFilterRules/{ruleName}'].delete['x-ms-long-running-operation-options__deleted']` | deleted | `{"final-state-via":"azure-async-operation"}` |
-
-### Changes for `x-ms-long-running-operation`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters/{routeFilterName}/routeFilterRules/{ruleName}'].delete['x-ms-long-running-operation__deleted']` | deleted | `true` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/hubVirtualNetworkConnections/{connectionName}'].delete['x-ms-long-running-operation__deleted']` | deleted | `true` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/routeTables/{routeTableName}'].delete['x-ms-long-running-operation__deleted']` | deleted | `true` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getvpnclientipsecparameters'].post['x-ms-long-running-operation__deleted']` | deleted | `true` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}'].delete['x-ms-long-running-operation__deleted']` | deleted | `true` |
-
-### Changes for `202`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters/{routeFilterName}/routeFilterRules/{ruleName}'].delete.responses.202__deleted` | deleted | `{"description":"ignore","headers":{"Azure-AsyncOperation":{"type":"string","description":"URL for ch...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/hubVirtualNetworkConnections/{connectionName}'].delete.responses.202__deleted` | deleted | `{"description":"ignore"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/routeTables/{routeTableName}'].delete.responses.202__deleted` | deleted | `{"description":"ignore"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}'].delete.responses.202__deleted` | deleted | `{"description":"ignore"}` |
 
 ### Changes for `additionalProperties`
 
@@ -1655,12 +1632,6 @@
 |------|------------|-------|
 | `definitions.IssueContext__deleted` | deleted | `{"type":"object","description":"A key-value pair that provides additional context on the issue.","ad...` |
 
-### Changes for `ListVirtualHubRouteTableV2sResult`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ListVirtualHubRouteTableV2sResult__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
-
 ### Changes for `LoadBalancerBackendAddressPoolListResult`
 
 | Path | Change Type | Value |
@@ -1744,18 +1715,6 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.Resource__deleted` | deleted | `{"type":"object","description":"Common resource representation.","properties":{"id":{"type":"string"...` |
-
-### Changes for `ResourceNavigationLinksListResult`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ResourceNavigationLinksListResult__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
-
-### Changes for `ServiceAssociationLinksListResult`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ServiceAssociationLinksListResult__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
 
 ### Changes for `Signatures`
 
@@ -1931,18 +1890,6 @@
 |------|------------|-------|
 | `definitions['Azure.ResourceManager.ArmResponse<Record<PeerRoute[]>>__added']` | added | `{"type":"object","description":"Azure operation completed successfully.","properties":{"body":{"type...` |
 
-### Changes for `Azure.ResourceManager.ArmResponse<SecurityGroupViewResult>`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions['Azure.ResourceManager.ArmResponse<SecurityGroupViewResult>__added']` | added | `{"type":"object","description":"Azure operation completed successfully.","properties":{"body":{"$ref...` |
-
-### Changes for `Azure.ResourceManager.ArmResponse<TroubleshootingResult>`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions['Azure.ResourceManager.ArmResponse<TroubleshootingResult>__added']` | added | `{"type":"object","description":"Azure operation completed successfully.","properties":{"body":{"$ref...` |
-
 ### Changes for `Azure.ResourceManager.ArmResponse<VirtualHubEffectiveRouteList>`
 
 | Path | Change Type | Value |
@@ -2063,12 +2010,6 @@
 |------|------------|-------|
 | `definitions.IpamPoolPrefixAllocationPool__added` | added | `{"type":"object","properties":{"id":{"type":"string","format":"arm-id","description":"Resource id of...` |
 
-### Changes for `ListVirtualHubRouteTableV2SResult`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ListVirtualHubRouteTableV2SResult__added` | added | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
-
 ### Changes for `NetworkManagerPropertiesNetworkManagerScopes`
 
 | Path | Change Type | Value |
@@ -2098,18 +2039,6 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.PrivateLinkServicePropertiesVisibility__added` | added | `{"type":"object","description":"The visibility list of the private link service.","allOf":[{"$ref":"...` |
-
-### Changes for `ResourceNavigationLinkListResult`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ResourceNavigationLinkListResult__added` | added | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
-
-### Changes for `ServiceAssociationLinkListResult`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ServiceAssociationLinkListResult__added` | added | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
 
 ### Changes for `SignaturesOverridesProperties`
 
@@ -4273,10 +4202,10 @@ For more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/privateLinkServices/{serviceName}'].delete.responses.default.schema.$ref` | `./network.json#/definitions/Error` | `#/definitions/Error` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/privateLinkServices/{serviceName}'].get.responses.default.schema.$ref` | `./network.json#/definitions/Error` | `#/definitions/Error` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/privateLinkServices/{serviceName}'].put.responses.default.schema.$ref` | `./network.json#/definitions/Error` | `#/definitions/Error` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/privateLinkServices/{serviceName}/privateEndpointConnections'].get.responses.default.schema.$ref` | `./network.json#/definitions/Error` | `#/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/privateLinkServices/{serviceName}/privateEndpointConnections/{peConnectionName}'].delete.responses.default.schema.$ref` | `./network.json#/definitions/Error` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/privateLinkServices/{serviceName}/privateEndpointConnections/{peConnectionName}'].get.responses.default.schema.$ref` | `./network.json#/definitions/Error` | `#/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/privateLinkServices/{serviceName}/privateEndpointConnections/{peConnectionName}'].put.responses.default.schema.$ref` | `./network.json#/definitions/Error` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/privateLinkServices/{serviceName}/privateEndpointConnections'].get.responses.default.schema.$ref` | `./network.json#/definitions/Error` | `#/definitions/Error` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/privateLinkServices/{serviceName}/privateEndpointConnections/{peConnectionName}'].delete.responses.default.schema.$ref` | `./network.json#/definitions/Error` | `#/definitions/Error` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/privateLinkServices/{serviceName}/privateEndpointConnections/{peConnectionName}'].get.responses.default.schema.$ref` | `./network.json#/definitions/Error` | `#/definitions/Error` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/privateLinkServices/{serviceName}/privateEndpointConnections/{peConnectionName}'].put.responses.default.schema.$ref` | `./network.json#/definitions/Error` | `#/definitions/Error` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/publicIPAddresses'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/publicIPAddresses/{publicIpAddressName}'].delete.responses.202.headers.Location.description` | `The URL of the resource used to check the status of the asynchronous operation.` | `The Location header contains the URL where the status of the long running operation can be checked.` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/publicIPAddresses/{publicIpAddressName}'].delete.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
@@ -4309,8 +4238,12 @@ For more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/publicIPPrefixes/{publicIpPrefixName}'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/publicIPPrefixes/{publicIpPrefixName}'].patch.parameters[1].schema.$ref` | `./network.json#/definitions/TagsObject` | `#/definitions/TagsObject` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/publicIPPrefixes/{publicIpPrefixName}'].patch.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/publicIPPrefixes/{publicIpPrefixName}'].put.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/publicIPPrefixes/{publicIpPrefixName}'].put.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters/{routeFilterName}'].delete.responses.202.headers.Location.description` | `URL for determining when an operation has completed. Send a GET request to the URL in Location header.
+The URI should return a 202 until the operation reaches a terminal state and 200 once it reaches a terminal state.
+
+For more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#202-accepted-and-location-headers` | `The Location header contains the URL where the status of the long running operation can be checked.` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters/{routeFilterName}'].delete.responses.202.headers['Azure-AsyncOperation'].description` | `URL for checking the ongoing status of the operation.
 To get the status of the asynchronous operation, send a GET request to the URL in Azure-AsyncOperation header value.
 
@@ -4321,10 +4254,17 @@ For more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters/{routeFilterName}'].patch.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters/{routeFilterName}'].put.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters/{routeFilterName}/routeFilterRules'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters/{routeFilterName}/routeFilterRules/{ruleName}'].delete.responses.202.headers.Location.description` | `URL for determining when an operation has completed. Send a GET request to the URL in Location header.
+The URI should return a 202 until the operation reaches a terminal state and 200 once it reaches a terminal state.
+
+For more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#202-accepted-and-location-headers` | `The Location header contains the URL where the status of the long running operation can be checked.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters/{routeFilterName}/routeFilterRules/{ruleName}'].delete.responses.202.headers['Azure-AsyncOperation'].description` | `URL for checking the ongoing status of the operation.
+To get the status of the asynchronous operation, send a GET request to the URL in Azure-AsyncOperation header value.
+
+For more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#asynchronous-operations` | `A link to the status monitor` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters/{routeFilterName}/routeFilterRules/{ruleName}'].delete.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters/{routeFilterName}/routeFilterRules/{ruleName}'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters/{routeFilterName}/routeFilterRules/{ruleName}'].put.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters/{routeFilterName}/routeFilterRules/{ruleName}'].put['x-ms-long-running-operation-options']['final-state-via']` | `azure-async-operation` | `original-uri` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeTables'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeTables/{routeTableName}'].delete.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeTables/{routeTableName}'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
@@ -4352,8 +4292,8 @@ For more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/serviceEndpointPolicies/{serviceEndpointPolicyName}/serviceEndpointPolicyDefinitions/{serviceEndpointPolicyDefinitionName}'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/serviceEndpointPolicies/{serviceEndpointPolicyName}/serviceEndpointPolicyDefinitions/{serviceEndpointPolicyDefinitionName}'].put.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{hubName}/bgpConnections/{connectionName}/advertisedRoutes'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{hubName}/bgpConnections/{connectionName}/learnedRoutes'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{hubName}/bgpConnections/{connectionName}/advertisedRoutes'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{hubName}/bgpConnections/{connectionName}/learnedRoutes'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}'].delete.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}'].patch.parameters[1].schema.$ref` | `./network.json#/definitions/TagsObject` | `#/definitions/TagsObject` |
@@ -4369,10 +4309,9 @@ For more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/hubRouteTables/{routeTableName}'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/hubRouteTables/{routeTableName}'].put.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/hubVirtualNetworkConnections'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/hubVirtualNetworkConnections/{connectionName}'].delete.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/hubVirtualNetworkConnections/{connectionName}'].delete.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/hubVirtualNetworkConnections/{connectionName}'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/hubVirtualNetworkConnections/{connectionName}'].put.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/hubVirtualNetworkConnections/{connectionName}'].put['x-ms-long-running-operation-options']['final-state-via']` | `azure-async-operation` | `original-uri` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/inboundRoutes'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/ipConfigurations'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/ipConfigurations/{ipConfigName}'].delete.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
@@ -4383,12 +4322,10 @@ For more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/routeMaps/{routeMapName}'].delete.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/routeMaps/{routeMapName}'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/routeMaps/{routeMapName}'].put.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/routeTables'].get.responses.200.schema.$ref` | `#/definitions/ListVirtualHubRouteTableV2sResult` | `#/definitions/ListVirtualHubRouteTableV2SResult` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/routeTables'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/routeTables/{routeTableName}'].delete.responses.default.schema.$ref` | `./network.json#/definitions/Error` | `#/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/routeTables/{routeTableName}'].get.responses.default.schema.$ref` | `./network.json#/definitions/Error` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/routeTables/{routeTableName}'].put.responses.default.schema.$ref` | `./network.json#/definitions/Error` | `#/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/routeTables/{routeTableName}'].put['x-ms-long-running-operation-options']['final-state-via']` | `azure-async-operation` | `original-uri` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/routeTables'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/routeTables/{routeTableName}'].delete.responses.default.schema.$ref` | `./network.json#/definitions/Error` | `#/definitions/Error` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/routeTables/{routeTableName}'].get.responses.default.schema.$ref` | `./network.json#/definitions/Error` | `#/definitions/Error` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/routeTables/{routeTableName}'].put.responses.default.schema.$ref` | `./network.json#/definitions/Error` | `#/definitions/Error` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/routingIntent'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/routingIntent/{routingIntentName}'].delete.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/routingIntent/{routingIntentName}'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
@@ -4409,8 +4346,8 @@ For more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/generatevpnprofile'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getAdvertisedRoutes'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getBgpPeerStatus'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getFailoverAllTestsDetails'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getFailoverSingleTestDetails'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getFailoverAllTestsDetails'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getFailoverSingleTestDetails'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getLearnedRoutes'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getResiliencyInformation'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getRoutesInformation'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
@@ -4426,9 +4363,9 @@ For more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/reset'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/resetvpnclientsharedkey'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/setvpnclientipsecparameters'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/startPacketCapture'].post.responses.default.schema.$ref` | `./network.json#/definitions/Error` | `#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/startPacketCapture'].post.responses.default.schema.$ref` | `./network.json#/definitions/Error` | `#/definitions/Error` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/startSiteFailoverTest'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/stopPacketCapture'].post.responses.default.schema.$ref` | `./network.json#/definitions/Error` | `#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/stopPacketCapture'].post.responses.default.schema.$ref` | `./network.json#/definitions/Error` | `#/definitions/Error` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/stopSiteFailoverTest'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/supportedvpndevices'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworks'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
@@ -4448,9 +4385,7 @@ For more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}'].put.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}/prepareNetworkPolicies'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}/resourceNavigationLinks'].get.responses.200.schema.$ref` | `#/definitions/ResourceNavigationLinksListResult` | `#/definitions/ResourceNavigationLinkListResult` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}/resourceNavigationLinks'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}/serviceAssociationLinks'].get.responses.200.schema.$ref` | `#/definitions/ServiceAssociationLinksListResult` | `#/definitions/ServiceAssociationLinkListResult` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}/serviceAssociationLinks'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}/unprepareNetworkPolicies'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworks/{virtualNetworkName}/usages'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
@@ -4464,24 +4399,24 @@ For more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkTaps/{tapName}'].patch.parameters[1].schema.$ref` | `./network.json#/definitions/TagsObject` | `#/definitions/TagsObject` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkTaps/{tapName}'].patch.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkTaps/{tapName}'].put.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualRouters'].get.responses.default.schema.$ref` | `./network.json#/definitions/Error` | `#/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualRouters/{virtualRouterName}'].delete.responses.default.schema.$ref` | `./network.json#/definitions/Error` | `#/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualRouters/{virtualRouterName}'].get.responses.default.schema.$ref` | `./network.json#/definitions/Error` | `#/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualRouters/{virtualRouterName}'].put.responses.default.schema.$ref` | `./network.json#/definitions/Error` | `#/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualRouters/{virtualRouterName}/peerings'].get.responses.default.schema.$ref` | `./network.json#/definitions/Error` | `#/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualRouters/{virtualRouterName}/peerings/{peeringName}'].delete.responses.default.schema.$ref` | `./network.json#/definitions/Error` | `#/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualRouters/{virtualRouterName}/peerings/{peeringName}'].get.responses.default.schema.$ref` | `./network.json#/definitions/Error` | `#/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualRouters/{virtualRouterName}/peerings/{peeringName}'].put.responses.default.schema.$ref` | `./network.json#/definitions/Error` | `#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualRouters'].get.responses.default.schema.$ref` | `./network.json#/definitions/Error` | `#/definitions/Error` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualRouters/{virtualRouterName}'].delete.responses.default.schema.$ref` | `./network.json#/definitions/Error` | `#/definitions/Error` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualRouters/{virtualRouterName}'].get.responses.default.schema.$ref` | `./network.json#/definitions/Error` | `#/definitions/Error` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualRouters/{virtualRouterName}'].put.responses.default.schema.$ref` | `./network.json#/definitions/Error` | `#/definitions/Error` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualRouters/{virtualRouterName}/peerings'].get.responses.default.schema.$ref` | `./network.json#/definitions/Error` | `#/definitions/Error` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualRouters/{virtualRouterName}/peerings/{peeringName}'].delete.responses.default.schema.$ref` | `./network.json#/definitions/Error` | `#/definitions/Error` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualRouters/{virtualRouterName}/peerings/{peeringName}'].get.responses.default.schema.$ref` | `./network.json#/definitions/Error` | `#/definitions/Error` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualRouters/{virtualRouterName}/peerings/{peeringName}'].put.responses.default.schema.$ref` | `./network.json#/definitions/Error` | `#/definitions/Error` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans/{VirtualWANName}'].delete.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans/{VirtualWANName}'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans/{VirtualWANName}'].patch.parameters[1].schema.$ref` | `./network.json#/definitions/TagsObject` | `#/definitions/TagsObject` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans/{VirtualWANName}'].patch.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans/{VirtualWANName}'].put.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans/{virtualWANName}/generateVpnProfile'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans/{virtualWANName}/supportedSecurityProviders'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans/{virtualWANName}/vpnConfiguration'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans/{virtualWANName}/vpnServerConfigurations'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans/{virtualWANName}/generateVpnProfile'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans/{virtualWANName}/supportedSecurityProviders'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans/{virtualWANName}/vpnConfiguration'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans/{virtualWANName}/vpnServerConfigurations'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}'].delete.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
@@ -4499,17 +4434,16 @@ For more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}'].delete.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}'].put.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}'].put['x-ms-long-running-operation-options']['final-state-via']` | `azure-async-operation` | `original-uri` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}/vpnLinkConnections'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}/vpnLinkConnections/{linkConnectionName}'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}/vpnLinkConnections/{linkConnectionName}/getikesas'].post.responses.default.schema.$ref` | `./networkWatcher.json#/definitions/ErrorResponse` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}/vpnLinkConnections/{linkConnectionName}/resetconnection'].post.responses.default.schema.$ref` | `./networkWatcher.json#/definitions/ErrorResponse` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}/vpnLinkConnections/{linkConnectionName}/getikesas'].post.responses.default.schema.$ref` | `./networkWatcher.json#/definitions/ErrorResponse` | `#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}/vpnLinkConnections/{linkConnectionName}/resetconnection'].post.responses.default.schema.$ref` | `./networkWatcher.json#/definitions/ErrorResponse` | `#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}/vpnLinkConnections/{linkConnectionName}/sharedKeys'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}/vpnLinkConnections/{linkConnectionName}/sharedKeys/default'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}/vpnLinkConnections/{linkConnectionName}/sharedKeys/default'].put.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}/vpnLinkConnections/{linkConnectionName}/sharedKeys/default/listSharedKey'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{vpnConnectionName}/startpacketcapture'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{vpnConnectionName}/stoppacketcapture'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{vpnConnectionName}/stoppacketcapture'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnServerConfigurations'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnServerConfigurations/{vpnServerConfigurationName}'].delete.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnServerConfigurations/{vpnServerConfigurationName}'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |

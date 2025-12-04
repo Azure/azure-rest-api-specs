@@ -78,43 +78,56 @@ interface VpnGateways {
   /**
    * Creates a virtual wan vpn gateway if it doesn't exist else updates the existing gateway.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<VpnGateway, Error = CloudError>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    VpnGateway,
+    Error = CloudError
+  >;
 
   /**
    * Updates virtual wan vpn gateway tags.
    */
   @patch(#{ implicitOptionality: false })
-  updateTags is ArmCustomPatchAsync<VpnGateway,
+  updateTags is ArmCustomPatchAsync<
+    VpnGateway,
     PatchModel = TagsObject,
     LroHeaders = ArmAsyncOperationHeader<FinalResult = VpnGateway> &
-      Azure.Core.Foundations.RetryAfterHeader
-  , Error = CloudError>;
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = CloudError
+  >;
 
   /**
    * Deletes a virtual wan vpn gateway.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<VpnGateway,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    VpnGateway,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = CloudError
+  >;
 
   /**
    * Lists all the VpnGateways in a resource group.
    */
-  listByResourceGroup is ArmResourceListByParent<VpnGateway,
-    Response = ArmResponse<ListVpnGatewaysResult>
-  , Error = CloudError>;
+  listByResourceGroup is ArmResourceListByParent<
+    VpnGateway,
+    Response = ArmResponse<ListVpnGatewaysResult>,
+    Error = CloudError
+  >;
 
   /**
    * Lists all the VpnGateways in a subscription.
    */
-  list is ArmListBySubscription<VpnGateway,
-    Response = ArmResponse<ListVpnGatewaysResult>
-  , Error = CloudError>;
+  list is ArmListBySubscription<
+    VpnGateway,
+    Response = ArmResponse<ListVpnGatewaysResult>,
+    Error = CloudError
+  >;
 
   /**
    * Resets the primary of the vpn gateway in the specified resource group.
    */
-  reset is ArmResourceActionAsync<VpnGateway,
+  reset is ArmResourceActionAsync<
+    VpnGateway,
     void,
     ArmResponse<VpnGateway>,
     Parameters = {
@@ -123,28 +136,33 @@ interface VpnGateways {
        */
       @query("ipConfigurationId")
       ipConfigurationId?: string;
-    }
-  , Error = CloudError>;
+    },
+    Error = CloudError
+  >;
 
   /**
    * Starts packet capture on vpn gateway in the specified resource group.
    */
   @action("startpacketcapture")
-  startPacketCapture is ArmResourceActionAsync<VpnGateway,
+  startPacketCapture is ArmResourceActionAsync<
+    VpnGateway,
     VpnGatewayPacketCaptureStartParameters,
     ArmResponse<stringApplicationJson>,
-    OptionalRequestBody = true
-  , Error = CloudError>;
+    OptionalRequestBody = true,
+    Error = CloudError
+  >;
 
   /**
    * Stops packet capture on vpn gateway in the specified resource group.
    */
   @action("stoppacketcapture")
-  stopPacketCapture is ArmResourceActionAsync<VpnGateway,
+  stopPacketCapture is ArmResourceActionAsync<
+    VpnGateway,
     VpnGatewayPacketCaptureStopParameters,
     ArmResponse<stringApplicationJson>,
-    OptionalRequestBody = true
-  , Error = CloudError>;
+    OptionalRequestBody = true,
+    Error = CloudError
+  >;
 
   /**
    * Retrieves the details of a vpn connection.
@@ -164,11 +182,13 @@ interface VpnGateways {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VpnConnections_CreateOrUpdate")
   @put
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   vpnConnectionsCreateOrUpdate is VpnConnectionOps.CreateOrUpdateAsync<
     VpnGateway,
     Response = ArmResponse<VpnConnection> | ArmResourceCreatedResponse<VpnConnection>,
-    Request = VpnConnection
-,    OverrideErrorType = CloudError>;
+    Request = VpnConnection,
+    OverrideErrorType = CloudError
+  >;
 
   /**
    * Deletes a vpn connection.
@@ -178,8 +198,9 @@ interface VpnGateways {
   @delete
   vpnConnectionsDelete is VpnConnectionOps.DeleteWithoutOkAsync<
     VpnGateway,
-    Response = OkResponse | NoContentResponse
-,    OverrideErrorType = CloudError>;
+    Response = OkResponse | ArmAcceptedLroResponse | NoContentResponse,
+    OverrideErrorType = CloudError
+  >;
 
   /**
    * Starts packet capture on Vpn connection in the specified resource group.
@@ -204,7 +225,8 @@ interface VpnGateways {
     VpnGateway,
     VpnConnectionPacketCaptureStopParameters,
     ArmResponse<stringApplicationJson>,
-    OptionalRequestBody = true
+    OptionalRequestBody = true,
+    OverrideErrorType = CloudError
   >;
 
   /**

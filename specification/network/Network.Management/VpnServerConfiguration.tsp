@@ -80,7 +80,7 @@ interface VpnServerConfigurations {
   /**
    * List all Radius servers with respective radius secrets from VpnServerConfiguration.
    */
-  @list
+  @post
   listRadiusSecrets is ArmResourceActionSync<
     VpnServerConfiguration,
     void,
