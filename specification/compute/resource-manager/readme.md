@@ -349,6 +349,33 @@ suppressions:
     reason: ScaleOut operation returns both 200 and 202, but 200 will not return schema. This is a common pattern for VMSS action operations. 
     from: ComputeRP.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/scaleOut"].post
+  - code: ResourceNameRestriction
+    reason: Gallery resources follow ARM resource naming requirements; no additional gallery name pattern is enforced beyond ARM.
+    from: GalleryRP.json
+    where:
+      - $.parameters.galleryName
+```
+
+### Tag: package-2025-03-03
+
+These settings apply only when `--tag=package-2025-03-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-03-03'
+input-file:
+  - Microsoft.Compute/ComputeRP/stable/2025-04-01/ComputeRP.json
+  - Microsoft.Compute/DiskRP/stable/2025-01-02/DiskRP.json
+  - Microsoft.Compute/Skus/stable/2021-07-01/skus.json
+  - Microsoft.Compute/GalleryRP/stable/2025-03-03/GalleryRP.json
+  - Microsoft.Compute/CloudserviceRP/stable/2024-11-04/cloudService.json
+```
+
+### Tag: package-2025-03-03-only
+
+These settings apply only when `--tag=package-2025-03-03-only` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-03-03-only'
+input-file:
+  - Microsoft.Compute/GalleryRP/stable/2025-03-03/GalleryRP.json
 ```
 
 ### Tag: package-2025-04-01
@@ -360,7 +387,7 @@ input-file:
   - Microsoft.Compute/ComputeRP/stable/2025-04-01/ComputeRP.json
   - Microsoft.Compute/DiskRP/stable/2025-01-02/DiskRP.json
   - Microsoft.Compute/Skus/stable/2021-07-01/skus.json
-  - Microsoft.Compute/GalleryRP/stable/2025-03-03/GalleryRP.json
+  - Microsoft.Compute/GalleryRP/stable/2024-03-03/GalleryRP.json
   - Microsoft.Compute/CloudserviceRP/stable/2024-11-04/cloudService.json
 ```
 
