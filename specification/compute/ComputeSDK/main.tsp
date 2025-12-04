@@ -57,6 +57,9 @@ import "../Gallery.Management/CommunityGallery.tsp";
 import "../Gallery.Management/CommunityGalleryImage.tsp";
 import "../Gallery.Management/CommunityGalleryImageVersion.tsp";
 import "../Gallery.Management/back-compatible.tsp";
+import "../Sku.Management/models.tsp";
+import "../Sku.Management/routes.tsp";
+
 
 
 using TypeSpec.Rest;
