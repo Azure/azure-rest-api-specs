@@ -156,8 +156,7 @@ function main() {
   const disallowedFiles = allChangedFiles.filter(file => !isFileAllowed(file));
   
   if (disallowedFiles.length > 0) {
-    console.log(`❌ Found ${disallowedFiles.length} file(s) outside lease/ directory`);
-    console.log('Only changes in lease/ are allowed\n');
+    console.log(`❌Found ${disallowedFiles.length} file(s) outside the lease/ directory. Please note that only changes within the lease/ directory are permitted. Kindly move the following files into the lease/ directory to proceed.`);
     console.log('Disallowed files:');
     disallowedFiles.slice(0, 20).forEach(file => console.log(`  ${file}`));
     if (disallowedFiles.length > 20) {
@@ -187,7 +186,7 @@ function main() {
   if (invalidStructure.length > 0) {
     console.log(`❌ ${invalidStructure.length} file(s) with invalid folder structure:`);
     invalidStructure.forEach(file => console.log(`  ${file}`));
-    console.log('\nExpected format: lease/<Namespace>/<Service>/lease.yaml');
+    console.log('\n✅Expected format: lease/<Namespace>/<Service>/lease.yaml');
     console.log('Examples:');
     console.log('  - lease/Microsoft.Widget/Widget/lease.yaml');
     console.log('  - lease/Azure.Storage/BlobService/lease.yaml\n');
