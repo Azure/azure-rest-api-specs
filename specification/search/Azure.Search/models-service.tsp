@@ -3462,10 +3462,6 @@ model IndexerExecutionResult {
   @visibility(Lifecycle.Read)
   mode?: IndexingMode;
 
-  @doc("All of the state that defines and dictates the indexer's current execution.")
-  @visibility(Lifecycle.Read)
-  currentState?: IndexerCurrentState;
-
   @doc("The error message indicating the top-level error, if any.")
   @visibility(Lifecycle.Read)
   errorMessage?: string;
