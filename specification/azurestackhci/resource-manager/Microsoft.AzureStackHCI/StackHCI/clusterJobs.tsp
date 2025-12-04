@@ -11,19 +11,18 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.AzureStackHCI;
-// FIXME: EdgeDevice has no properties property
+
 /**
- * Edge device resource.
+ * Cluster Jobs resource
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-base-parameter" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@extensionResource
 @parentResource(Cluster)
 model ClusterJob is Azure.ResourceManager.ProxyResource<ClusterJobProperties> {
-  @path
-  @key("edgeDeviceName")
-  @segment("edgeDevices")
-  @pattern("^[a-zA-Z0-9-]{3,24}$")
-  name: string = "default";
+  ...ResourceNameParameter<
+    Resource = ClusterJob,
+    KeyName = "jobsName",
+    SegmentName = "jobs",
+    NamePattern = "^[a-zA-Z0-9-]{3,24}$"
+  >;
 }
 
 @armResourceOperations
