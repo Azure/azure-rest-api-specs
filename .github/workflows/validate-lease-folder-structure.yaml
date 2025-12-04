@@ -42,3 +42,89 @@ jobs:
           
           echo "✅ All lease files follow the correct structure!"
           exit 0
+
+      - name: Install yq
+        run: |
+          sudo wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
+          sudo chmod +x /usr/local/bin/yq
+
+      - name: Validate lease file contents
+        run: |
+          echo "Running lease file content validation..."
+          EXIT_CODE=0
+          TODAY=$(date +%Y-%m-%d)
+          
+          # Get all changed lease.yaml files
+          LEASE_FILES=$(git diff --name-only origin/${{ github.base_ref }} HEAD | grep 'lease\.yaml$' || true)
+          
+          if [ -z "$LEASE_FILES" ]; then
+            echo "No lease.yaml files to validate"
+            exit 0
+          fi
+          
+          for LEASE_FILE in $LEASE_FILES; do
+            echo ""
+            echo "Validating: $LEASE_FILE"
+            echo "----------------------------------------"
+            
+            # Extract folder structure components
+            FOLDER_RP=$(echo "$LEASE_FILE" | cut -d'/' -f2)
+            
+            # Read lease.yaml fields
+            RP_NAME=$(yq eval '.lease.resource-provider' "$LEASE_FILE" 2>/dev/null || echo "")
+            STARTDATE=$(yq eval '.lease.startdate' "$LEASE_FILE" 2>/dev/null || echo "")
+            REVIEWER=$(yq eval '.lease.reviewer' "$LEASE_FILE" 2>/dev/null || echo "")
+            
+            # Validation 1: Resource provider name matches folder name
+            if [ "$RP_NAME" != "$FOLDER_RP" ]; then
+              echo "❌ Resource provider name mismatch!"
+              echo "   Folder name: $FOLDER_RP"
+              echo "   lease.yaml resource-provider: $RP_NAME"
+              echo "   These must match exactly."
+              EXIT_CODE=1
+            else
+              echo "✅ Resource provider name matches folder structure"
+            fi
+            
+            # Validation 2: Startdate format (ISO 8601: YYYY-MM-DD)
+            if ! echo "$STARTDATE" | grep -qE '^[0-9]{4}-[0-9]{2}-[0-9]{2}$'; then
+              echo "❌ Invalid startdate format!"
+              echo "   Current: $STARTDATE"
+              echo "   Expected: ISO 8601 format (YYYY-MM-DD)"
+              EXIT_CODE=1
+            else
+              echo "✅ Startdate follows ISO 8601 format"
+              
+              # Validation 3: Startdate is today or future (not past)
+              if [[ "$STARTDATE" < "$TODAY" ]]; then
+                echo "❌ Startdate is in the past!"
+                echo "   Startdate: $STARTDATE"
+                echo "   Today: $TODAY"
+                echo "   Startdate must be today or a future date."
+                EXIT_CODE=1
+              else
+                echo "✅ Startdate is today or in the future"
+              fi
+            fi
+            
+            # TODO: Validation 4: Reviewer alias is present (commented for future use)
+            # if [ -z "$REVIEWER" ] || [ "$REVIEWER" = "null" ]; then
+            #   echo "❌ Reviewer alias is missing!"
+            #   echo "   Please provide a valid reviewer alias in the lease.yaml file."
+            #   EXIT_CODE=1
+            # else
+            #   echo "✅ Reviewer alias is present: $REVIEWER"
+            # fi
+            
+            echo "----------------------------------------"
+          done
+          
+          if [ $EXIT_CODE -eq 0 ]; then
+            echo ""
+            echo "✅ All lease file validations passed!"
+          else
+            echo ""
+            echo "❌ Lease file validation failed. Please fix the errors above."
+          fi
+          
+          exit $EXIT_CODE
