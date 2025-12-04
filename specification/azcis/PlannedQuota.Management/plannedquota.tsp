@@ -29,7 +29,7 @@ model PlannedQuotaResourceProperties {
 
   @doc("Blueprint name")
   @added(Versions.v2025_12_04_preview)
-  Blueprint?: string;
+  blueprint?: string;
 
   @doc("Region name")
   @added(Versions.v2023_08_22)
