@@ -1,8 +1,8 @@
 import { inspect } from "util";
-import { CommitStatusState, PER_PAGE_MAX } from "../../shared/src/github.js";
-import { equals } from "../../shared/src/set.js";
-import { byDate, invert } from "../../shared/src/sort.js";
-import { extractInputs } from "./context.js";
+import { CommitStatusState, PER_PAGE_MAX } from "../../../shared/src/github.js";
+import { equals } from "../../../shared/src/set.js";
+import { byDate, invert } from "../../../shared/src/sort.js";
+import { extractInputs } from "../context.js";
 import { isTrivialPullRequest } from "../../../shared/src/pr-changes.js";
 
 // TODO: Add tests

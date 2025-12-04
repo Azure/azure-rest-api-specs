@@ -8,10 +8,10 @@ import {
   readme,
   resourceManager,
   swagger,
-} from "../../shared/src/changed-files.js";
-import { Readme } from "../../shared/src/readme.js";
-import { Swagger } from "../../shared/src/swagger.js";
-import { CoreLogger } from "./core-logger.js";
+} from "../../../shared/src/changed-files.js";
+import { Readme } from "../../../shared/src/readme.js";
+import { Swagger } from "../../../shared/src/swagger.js";
+import { CoreLogger } from "../core-logger.js";
 
 // Enable simple-git debug logging to improve console output
 debug.enable("simple-git");

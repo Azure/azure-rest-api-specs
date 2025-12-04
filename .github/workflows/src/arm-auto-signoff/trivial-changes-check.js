@@ -16,7 +16,7 @@ import {
   isExamplesOnly,
   isNonFunctionalOnly,
 } from "../../../shared/src/pr-changes.js";
-import { CoreLogger } from "./core-logger.js";
+import { CoreLogger } from "../core-logger.js";
 
 // Enable simple-git debug logging to improve console output
 debug.enable("simple-git");
