@@ -2534,6 +2534,15 @@
             "minLength": 3,
             "maxLength": 64,
             "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CredentialsRevokeDeviceAccessRequest"
+            }
           }
         ],
         "responses": {
@@ -5596,6 +5605,26 @@
           }
         }
       }
+    },
+    "CredentialsRevokeDeviceAccessRequest": {
+      "type": "object",
+      "description": "Request payload for revoking device access on a credential.",
+      "properties": {
+        "deviceIds": {
+          "type": "array",
+          "description": "List of device ids from which access was revoked.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "disable": {
+          "type": "boolean",
+          "description": "Indicates whether to disable the device(s) after revoking access."
+        }
+      },
+      "required": [
+        "deviceIds"
+      ]
     },
     "DataPoint": {
       "type": "object",

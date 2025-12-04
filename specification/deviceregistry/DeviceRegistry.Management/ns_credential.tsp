@@ -31,6 +31,16 @@ model CredentialProperties {
   provisioningState?: ProvisioningState;
 }
 
+@doc("Request payload for revoking device access on a credential.")
+@added(Versions.v2026_04_01)
+model CredentialsRevokeDeviceAccessRequest {
+  @doc("List of device ids from which access was revoked.")
+  deviceIds: string[];
+
+  @doc("Indicates whether to disable the device(s) after revoking access.")
+  disable?: boolean;
+}
+
 @added(Versions.v2025_11_01_preview)
 @armResourceOperations
 interface Credentials {
@@ -50,7 +60,7 @@ interface Credentials {
   >;
   listByResourceGroup is ArmResourceListByParent<Credential>;
   synchronize is ArmResourceActionNoResponseContentAsync<Credential, void>;
-  
+
   @added(Versions.v2026_04_01)
   revokeDeviceAccess is ArmResourceActionNoResponseContentAsync<
     Credential,
