@@ -438,6 +438,8 @@ union ZonalPlatformFaultDomainAlignMode {
   Aligned: "Aligned",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Unaligned: "Unaligned",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  BestEffortAligned: "BestEffortAligned",
 }
 
 /**
@@ -900,6 +902,28 @@ union DiskControllerTypes {
   SCSI: "SCSI",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   NVMe: "NVMe",
+}
+
+/**
+ * Specifies the storage fault domain alignment type for the disk.
+ */
+union StorageFaultDomainAlignmentType {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Aligned: "Aligned",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  BestEffortAligned: "BestEffortAligned",
+}
+
+/**
+ * Specifies the storage alignment status for the disk.
+ */
+union StorageAlignment {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Unaligned: "Unaligned",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Aligned: "Aligned",
 }
 
 /**
@@ -2501,6 +2525,11 @@ model VirtualMachineScaleSetOSDisk {
   diskSizeGB?: int32;
 
   /**
+   * Specifies the storage fault domain alignment type for the disk.
+   */
+  storageFDAlignment?: StorageFaultDomainAlignmentType;
+
+  /**
    * This property allows you to specify the type of the OS that is included in the disk if creating a VM from user-image or a specialized VHD. Possible values are: **Windows,** **Linux.**
    */
   osType?: OperatingSystemTypes;
@@ -2632,6 +2661,11 @@ model VirtualMachineScaleSetDataDisk {
    * Specifies the size of an empty data disk in gigabytes. This element can be used to overwrite the size of the disk in a virtual machine image. The property diskSizeGB is the number of bytes x 1024^3 for the disk and the value cannot be larger than 1023.
    */
   diskSizeGB?: int32;
+
+  /**
+   * Specifies the storage fault domain alignment type for the disk.
+   */
+  storageFDAlignment?: StorageFaultDomainAlignmentType;
 
   /**
    * The managed disk parameters.
@@ -3852,6 +3886,11 @@ model VirtualMachineScaleSetUpdateOSDisk {
   diskSizeGB?: int32;
 
   /**
+   * Specifies the storage fault domain alignment type for the disk.
+   */
+  storageFDAlignment?: StorageFaultDomainAlignmentType;
+
+  /**
    * The Source User Image VirtualHardDisk. This VirtualHardDisk will be copied before using it to attach to the Virtual Machine. If SourceImage is provided, the destination VirtualHardDisk should not exist.
    */
   image?: VirtualHardDisk;
@@ -5012,6 +5051,11 @@ model DiskInstanceView {
    */
   @identifiers(#[])
   statuses?: InstanceViewStatus[];
+
+  /**
+   * Specifies the storage alignment status for the disk.
+   */
+  storageAlignment?: StorageAlignment;
 }
 
 /**
@@ -5216,6 +5260,11 @@ model OSDisk {
   diskSizeGB?: int32;
 
   /**
+   * Specifies the storage fault domain alignment type for the disk.
+   */
+  storageFDAlignment?: StorageFaultDomainAlignmentType;
+
+  /**
    * The managed disk parameters.
    */
   managedDisk?: ManagedDiskParameters;
@@ -5290,6 +5339,11 @@ model DataDisk {
    * Specifies the size of an empty data disk in gigabytes. This element can be used to overwrite the size of the disk in a virtual machine image. The property 'diskSizeGB' is the number of bytes x 1024^3 for the disk and the value cannot be larger than 1023.
    */
   diskSizeGB?: int32;
+
+  /**
+   * Specifies the storage fault domain alignment type for the disk.
+   */
+  storageFDAlignment?: StorageFaultDomainAlignmentType;
 
   /**
    * The managed disk parameters.
