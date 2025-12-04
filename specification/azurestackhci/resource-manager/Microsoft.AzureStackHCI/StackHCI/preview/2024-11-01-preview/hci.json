@@ -3019,6 +3019,14 @@
       "type": "object",
       "description": "EdgeMachine GPU Job properties",
       "properties": {
+        "gpuId": {
+          "type": "string",
+          "description": "The ID of the GPU on which the job is to be performed.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
         "jobType": {
           "$ref": "#/definitions/EdgeMachineGpuJobType",
           "description": "Type of GPU job to be performed.",
@@ -3071,6 +3079,7 @@
       },
       "discriminator": "jobType",
       "required": [
+        "gpuId",
         "jobType"
       ]
     },

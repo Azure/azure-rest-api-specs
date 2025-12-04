@@ -65,6 +65,12 @@ interface EdgeMachineGpuJobs {
 @discriminator("jobType")
 model EdgeMachineGpuJobProperties {
   /**
+   * The ID of the GPU on which the job is to be performed.
+   */
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  gpuId: string;
+
+  /**
    * Type of GPU job to be performed.
    */
   @visibility(Lifecycle.Create, Lifecycle.Read)
