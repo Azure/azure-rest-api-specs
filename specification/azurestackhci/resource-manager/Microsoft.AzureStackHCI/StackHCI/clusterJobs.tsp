@@ -1,0 +1,102 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+import "./Cluster.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.AzureStackHCI;
+// FIXME: EdgeDevice has no properties property
+/**
+ * Edge device resource.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-base-parameter" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@extensionResource
+@parentResource(Cluster)
+model ClusterJob is Azure.ResourceManager.ProxyResource<ClusterJobProperties> {
+  @path
+  @key("edgeDeviceName")
+  @segment("edgeDevices")
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
+  name: string = "default";
+}
+
+@armResourceOperations
+interface ClusterJobs {
+  /** Get a ClusterJob */
+  get is ArmResourceRead<ClusterJob>;
+
+  /** Create a ClusterJob */
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<ClusterJob>;
+
+  /** Delete a ClusterJob */
+  delete is ArmResourceDeleteWithoutOkAsync<ClusterJob>;
+
+  /** List ClusterJob resources by Clusters */
+  list is ArmResourceListByParent<
+    ClusterJob,
+    Response = ArmResponse<ClusterJobListResult>
+  >;
+}
+
+/** ClusterJob Type supported. */
+union HciJobType {
+  string,
+
+  /** Job to configure arc gateway for the cluster. */
+  ConfigureArcGateway: "ConfigureArcGateway",
+}
+
+
+/** Cluster Job properties */
+@discriminator("jobType")
+model ClusterJobProperties {
+  /** Job Type to support polymorphic resource. */
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  jobType: HciJobType;
+
+  /** Deployment mode to trigger job. */
+  deploymentMode?: DeploymentMode = DeploymentMode.Deploy;
+
+  /** Job provisioning state */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+
+  /** Unique, immutable job id. */
+  @visibility(Lifecycle.Read)
+  jobId?: string;
+
+  /** The UTC date and time at which the job started. */
+  @visibility(Lifecycle.Read)
+  startTimeUtc?: utcDateTime;
+
+  /** The UTC date and time at which the job completed. */
+  @visibility(Lifecycle.Read)
+  endTimeUtc?: utcDateTime;
+
+  /** Status of Cluster job. */
+  @visibility(Lifecycle.Read)
+  status?: JobStatus;
+
+  /** Reported properties for job */
+  @visibility(Lifecycle.Read)
+  reportedProperties?: JobReportedProperties;
+}
+
+@@doc(ClusterJob.name, "Name of ClusterJob");
+
+/**
+ * List of Cluster Job resources for the HCI cluster.
+ */
+model ClusterJobListResult is Azure.Core.Page<ClusterJob>;
+
+/** Properties for configuring arc gateway to a cluster. */
+model HciConfigureArcGatewayJobProperties extends ClusterJobProperties {
+  /** ClusterJob Type to support polymorphic resource. */
+  jobType: HciJobType.ConfigureArcGateway;
+}
