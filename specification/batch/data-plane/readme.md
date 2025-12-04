@@ -30,7 +30,7 @@ openapi-type: data-plane
 tag: package-2025-06
 ```
 
-### Tag: package-2025-06.21.0
+### Tag: package-2025-06
 
 These settings apply only when `--tag=package-2025-06` is specified on the command line.
 

@@ -1,4 +1,4 @@
-import { ExecError, execNpmExec, isExecError } from "@azure-tools/specs-shared/exec";
+import { execNpmExec, isExecError } from "@azure-tools/specs-shared/exec";
 import { debugLogger } from "@azure-tools/specs-shared/logger";
 import { join } from "path";
 
@@ -22,14 +22,14 @@ export async function runChecks(
   for (const [readme, tags] of runList.entries()) {
     const changedFilePath = join(path, readme);
 
-    let openApiType = await getOpenapiType(tags.readme);
+    const openApiType = await getOpenapiType(tags.readme);
 
     // From momentOfTruth.ts:executeAutoRestWithLintDiff
     // This is a quick workaround for https://github.com/Azure/azure-sdk-tools/issues/6549
     // We override the openapi-subtype with the value of openapi-type,
     // to prevent LintDiff from reading openapi-subtype from the AutoRest config file (README)
     // and overriding openapi-type with it.
-    let openApiSubType = openApiType;
+    const openApiSubType = openApiType;
 
     // If the tags array is empty run the loop once but with a null tag
     const coalescedTags = tags.changedTags?.size ? [...tags.changedTags] : [null];
@@ -77,16 +77,15 @@ export async function runChecks(
           throw error;
         }
 
-        const execError = error as ExecError;
         lintDiffResult = {
           autorestCommand,
           rootPath: path,
           readme: tags.readme,
           tag: tag ? tag : "",
           openApiType,
-          error: execError,
-          stdout: execError.stdout || "",
-          stderr: execError.stderr || "",
+          error,
+          stdout: error.stdout || "",
+          stderr: error.stderr || "",
         } as AutorestRunResult;
 
         logAutorestExecutionErrors(lintDiffResult);
