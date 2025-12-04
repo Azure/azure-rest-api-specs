@@ -1,0 +1,113 @@
+{
+  "operationId": "DeploymentStacksWhatIfResultsAtSubscription_CreateOrUpdate",
+  "title": "Create or update a subscription-scoped Deployment stack what-if result",
+  "parameters": {
+    "api-version": "2025-07-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "deploymentStacksWhatIfResultName": "simpleDeploymentStackWhatIfResult",
+    "resource": {
+      "location": "eastus",
+      "properties": {
+        "deploymentStackResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Resources/deploymentStacks/simpleDeploymentStack",
+        "retentionInterval": "P7D",
+        "templateLink": {
+          "uri": "https://example.com/exampleTemplate.json"
+        },
+        "parameters": {},
+        "actionOnUnmanage": {
+          "resources": "delete",
+          "resourceGroups": "delete",
+          "managementGroups": "detach"
+        },
+        "denySettings": {
+          "mode": "none",
+          "applyToChildScopes": false
+        },
+        "extensionConfigs": {
+          "contoso": {
+            "configOne": {
+              "value": "config1Value"
+            },
+            "configTwo": {
+              "value": true
+            }
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Resources/deploymentStacksWhatIfResults/simpleDeploymentStackWhatIfResult",
+        "type": "Microsoft.Resources/deploymentStacksWhatIfResults",
+        "name": "simpleDeploymentStackWhatIfResult",
+        "location": "eastus",
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "Application",
+          "createdAt": "2025-02-01T01:01:01.1075056Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2025-02-02T02:03:01.1974346Z"
+        },
+        "properties": {
+          "deploymentStackResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Resources/deploymentStacks/simpleDeploymentStack",
+          "deploymentStackLastModified": "2025-01-01T01:01:01.1075056Z",
+          "retentionInterval": "P7D",
+          "correlationId": "00000000-0000-0000-0000-000000000000",
+          "templateLink": {
+            "uri": "https://example.com/exampleTemplate.json"
+          },
+          "parameters": {},
+          "actionOnUnmanage": {
+            "resources": "delete",
+            "resourceGroups": "delete",
+            "managementGroups": "detach"
+          },
+          "denySettings": {
+            "mode": "none",
+            "applyToChildScopes": false
+          },
+          "provisioningState": "initializing"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Resources/deploymentStacksWhatIfResults/simpleDeploymentStackWhatIfResult",
+        "type": "Microsoft.Resources/deploymentStacksWhatIfResults",
+        "name": "simpleDeploymentStackWhatIfResult",
+        "location": "eastus",
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "Application",
+          "createdAt": "2025-02-01T01:01:01.1075056Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2025-02-02T02:03:01.1974346Z"
+        },
+        "properties": {
+          "deploymentStackResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Resources/deploymentStacks/simpleDeploymentStack",
+          "deploymentStackLastModified": "2025-01-01T01:01:01.1075056Z",
+          "retentionInterval": "P7D",
+          "correlationId": "00000000-0000-0000-0000-000000000000",
+          "templateLink": {
+            "uri": "https://example.com/exampleTemplate.json"
+          },
+          "parameters": {},
+          "actionOnUnmanage": {
+            "resources": "delete",
+            "resourceGroups": "delete",
+            "managementGroups": "detach"
+          },
+          "denySettings": {
+            "mode": "none",
+            "applyToChildScopes": false
+          },
+          "provisioningState": "initializing"
+        }
+      }
+    }
+  }
+}
