@@ -3590,7 +3590,7 @@
       "type": "object",
       "description": "Clears the identity property of a datasource.",
       "properties": {
-        "AIServicesVisionParameters": {
+        "aiServicesVisionParameters": {
           "$ref": "#/definitions/AIServicesVisionParameters",
           "description": "Contains the parameters specific to AI Services Vision embedding vectorization."
         }
@@ -3806,49 +3806,6 @@
             "description": "Completes the last term in a query with two or more terms, where the last two terms are a phrase that exists in the index. For example, if the input is 'washington medic', the suggested terms could include 'washington medicaid' and 'washington medical'."
           }
         ]
-      }
-    },
-    "AutocompleteOptions": {
-      "type": "object",
-      "description": "Parameters grouped for autocomplete operations.",
-      "properties": {
-        "autocompleteMode": {
-          "$ref": "#/definitions/AutocompleteMode",
-          "description": "Specifies the mode for Autocomplete. The default is 'oneTerm'. Use 'twoTerms' to get shingles and 'oneTermWithContext' to use the current context while producing auto-completed terms."
-        },
-        "filter": {
-          "type": "string",
-          "description": "An OData expression that filters the documents used to produce completed terms for the Autocomplete result."
-        },
-        "useFuzzyMatching": {
-          "type": "boolean",
-          "description": "A value indicating whether to use fuzzy matching for the autocomplete query. Default is false. When set to true, the query will find terms even if there's a substituted or missing character in the search text. While this provides a better experience in some scenarios, it comes at a performance cost as fuzzy autocomplete queries are slower and consume more resources."
-        },
-        "highlightPostTag": {
-          "type": "string",
-          "description": "A string tag that is appended to hit highlights. Must be set with highlightPreTag. If omitted, hit highlighting is disabled."
-        },
-        "highlightPreTag": {
-          "type": "string",
-          "description": "A string tag that is prepended to hit highlights. Must be set with highlightPostTag. If omitted, hit highlighting is disabled."
-        },
-        "minimumCoverage": {
-          "type": "number",
-          "format": "double",
-          "description": "A number between 0 and 100 indicating the percentage of the index that must be covered by an autocomplete query in order for the query to be reported as a success. This parameter can be useful for ensuring search availability even for services with only one replica. The default is 80."
-        },
-        "searchFields": {
-          "type": "array",
-          "description": "The list of field names to consider when querying for auto-completed terms. Target fields must be included in the specified suggester.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "top": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of auto-completed terms to retrieve. This must be a value between 1 and 100. The default is 5."
-        }
       }
     },
     "AutocompleteRequest": {
@@ -4248,16 +4205,12 @@
           "description": "API key of the designated Azure OpenAI resource."
         },
         "authIdentity": {
-          "type": "string",
+          "$ref": "#/definitions/SearchIndexerDataIdentity",
           "description": "The user-assigned managed identity used for outbound connections."
         },
         "modelName": {
           "$ref": "#/definitions/AzureOpenAIModelName",
           "description": "The name of the embedding model that is deployed at the provided deploymentId path."
-        },
-        "authenticationMethod": {
-          "type": "string",
-          "description": "The authentication method to use when connecting to the Azure OpenAI resource."
         }
       },
       "required": [
@@ -8933,9 +8886,6 @@
           "description": "Information about the sensitivity label applied to the SharePoint document."
         }
       },
-      "required": [
-        "webUrl"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/KnowledgeBaseReference"
@@ -13934,9 +13884,6 @@
           "description": "The parameters for the remote SharePoint knowledge source."
         }
       },
-      "required": [
-        "remoteSharePointParameters"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/KnowledgeSource"
@@ -15690,7 +15637,6 @@
       },
       "required": [
         "keyVaultKeyName",
-        "keyVaultKeyVersion",
         "keyVaultUri"
       ]
     },
@@ -19354,9 +19300,6 @@
           "description": "The base 64 encoded binary of an image to be vectorized to perform a vector search query."
         }
       },
-      "required": [
-        "base64Image"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/VectorQuery"
@@ -19373,9 +19316,6 @@
           "description": "The URL of an image to be vectorized to perform a vector search query."
         }
       },
-      "required": [
-        "url"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/VectorQuery"

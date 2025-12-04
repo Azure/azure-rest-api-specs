@@ -3206,7 +3206,7 @@ model SearchResourceEncryptionKey {
   keyVaultKeyName: string;
 
   @doc("The version of your Azure Key Vault key to be used to encrypt your data at rest.")
-  keyVaultKeyVersion: string;
+  keyVaultKeyVersion?: string;
 
   @doc("The URI of your Azure Key Vault, also referred to as DNS name, that contains the key to be used to encrypt your data at rest. An example URI might be `https://my-keyvault-name.vault.azure.net`.")
   keyVaultUri: string;
@@ -4404,13 +4404,10 @@ model AzureOpenAiParameters {
   apiKey?: string;
 
   @doc("The user-assigned managed identity used for outbound connections.")
-  authIdentity?: string;
+  authIdentity?: SearchIndexerDataIdentity;
 
   @doc("The name of the embedding model that is deployed at the provided deploymentId path.")
   modelName?: AzureOpenAIModelName;
-
-  @doc("The authentication method to use when connecting to the Azure OpenAI resource.")
-  authenticationMethod?: string;
 }
 
 // Knowledge Source models
@@ -4621,7 +4618,7 @@ model RemoteSharePointKnowledgeSource extends KnowledgeSource {
   kind: KnowledgeSourceKind.RemoteSharePoint;
 
   @doc("The parameters for the remote SharePoint knowledge source.")
-  remoteSharePointParameters: RemoteSharePointKnowledgeSourceParameters;
+  remoteSharePointParameters?: RemoteSharePointKnowledgeSourceParameters;
 }
 
 @doc("Parameters for remote SharePoint knowledge source.")
@@ -5501,7 +5498,7 @@ model WebApiVectorizerParameters {
 @doc("Clears the identity property of a datasource.")
 model AIServicesVisionVectorizer extends VectorSearchVectorizer {
   @doc("Contains the parameters specific to AI Services Vision embedding vectorization.")
-  AIServicesVisionParameters?: AIServicesVisionParameters;
+  aiServicesVisionParameters?: AIServicesVisionParameters;
 
   @doc("The name of the kind of vectorization method being configured for use with vector search.")
   kind: "aiServicesVision";
