@@ -3,7 +3,6 @@ import { CommitStatusState, PER_PAGE_MAX } from "../../../shared/src/github.js";
 import { equals } from "../../../shared/src/set.js";
 import { byDate, invert } from "../../../shared/src/sort.js";
 import { extractInputs } from "../context.js";
-import { isTrivialPullRequest } from "../../../shared/src/pr-changes.js";
 
 // TODO: Add tests
 /* v8 ignore start */
@@ -226,19 +225,25 @@ async function checkArmAnalysisWorkflow(workflowRuns, github, owner, repo, core)
   const combinedArtifact = artifactNames.find(name => name.startsWith("arm-auto-signoff-code-results="));
   if (combinedArtifact) {
     try {
-      const resultsJson = combinedArtifact.substring("arm-auto-signoff-code-results=".length);
-      const results = JSON.parse(resultsJson);
+      const resultValue = combinedArtifact.substring("arm-auto-signoff-code-results=".length);
+      // Parse key-value format: incrementalTypeSpec-true,isTrivial-false,qualifies-true
+      // Split by comma, then parse each key-value pair
+      const keyValuePairs = resultValue.split(',');
       
-      core.info(`Combined ARM analysis results: ${JSON.stringify(results)}`);
+      // Extract values directly by key name
+      const incrementalTypeSpec = keyValuePairs[0]?.endsWith('-true') ?? false;
+      const isTrivial = keyValuePairs[1]?.endsWith('-true') ?? false;
+      const qualifiesForAutoSignOff = keyValuePairs[2]?.endsWith('-true') ?? false;
       
-      if (results.qualifiesForAutoSignOff) {
+      core.info(`ARM analysis results: incrementalTypeSpec=${incrementalTypeSpec}, isTrivial=${isTrivial}, qualifiesForAutoSignOff=${qualifiesForAutoSignOff}`);
+      
+      if (qualifiesForAutoSignOff) {
         const labelsToAdd = [];
         
-        if (results.incrementalTypeSpec) {
+        if (incrementalTypeSpec) {
           labelsToAdd.push("ARMAutoSignedOff-IncrementalTSP");
         }
-        // Check if trivial changes exist using the new PullRequestChanges structure
-        if (results.trivialChanges && isTrivialPullRequest(results.trivialChanges)) {
+        if (isTrivial) {
           labelsToAdd.push("ARMAutoSignedOff-Trivial");
         }
         

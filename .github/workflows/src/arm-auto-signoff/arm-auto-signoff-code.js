@@ -44,5 +44,6 @@ export default async function armAutoSignOffCode({ github, context, core }) {
   core.info(`Combined result: ${JSON.stringify(combined, null, 2)}`);
   core.info(`Qualifies for auto sign-off: ${combined.qualifiesForAutoSignOff}`);
 
-  return JSON.stringify(combined);
+  // Return key-value format: incrementalTypeSpec-true,isTrivial-false,qualifies-true
+  return `incrementalTypeSpec-${incrementalTypeSpecResult},isTrivial-${isTrivial},qualifies-${qualifiesForAutoSignOff}`;
 }
