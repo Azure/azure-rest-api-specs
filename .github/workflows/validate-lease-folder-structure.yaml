@@ -29,156 +29,110 @@ jobs:
 
       - name: Validate lease files
         run: |
-          echo "========================================="
           echo "Running Lease File Validation"
-          echo "========================================="
           EXIT_CODE=0
           TODAY=$(date +%Y-%m-%d)
           
-          # Get all changed files excluding specific allowed paths
+          # Get all changed files
           ALL_CHANGED_FILES=$(git diff --name-only origin/${{ github.base_ref }} HEAD || true)
           
-          # Check for files outside allowed directories
-          echo ""
-          echo "========================================="
-          echo "0. Validating Changed File Locations"
-          echo "========================================="
-          
-          # Allow only: lease/ and .github/workflows/ (for this workflow file itself)
+          # Check for files outside lease/ directory
           DISALLOWED_FILES=$(echo "$ALL_CHANGED_FILES" | grep -vE '^(lease/|\.github/workflows/validate-lease-folder-structure\.yaml)' || true)
           
           if [ -n "$DISALLOWED_FILES" ]; then
-            echo "❌ Files outside lease/ directory detected!"
+            DISALLOWED_COUNT=$(echo "$DISALLOWED_FILES" | wc -l)
+            echo "❌ Found $DISALLOWED_COUNT file(s) outside lease/ directory"
+            echo "Only changes in lease/ are allowed (except workflow file)"
             echo ""
-            echo "The following files are not allowed:"
-            echo "$DISALLOWED_FILES"
-            echo ""
-            echo "Only changes in the lease/ directory are allowed."
-            echo "Exception: .github/workflows/validate-lease-folder-structure.yaml"
+            echo "Disallowed files:"
+            echo "$DISALLOWED_FILES" | head -20
+            if [ "$DISALLOWED_COUNT" -gt 20 ]; then
+              echo "... and $((DISALLOWED_COUNT - 20)) more files"
+            fi
             echo ""
             EXIT_CODE=1
-          else
-            echo "✅ All changed files are in the lease/ directory"
           fi
           
-          # Get all changed files in the lease/ directory
+          # Get lease files
           ALL_LEASE_FILES=$(git diff --name-only origin/${{ github.base_ref }} HEAD | grep '^lease/' | grep -v '\.md$' || true)
           
           if [ -z "$ALL_LEASE_FILES" ]; then
-            echo ""
-            echo "No lease files to validate"
+            if [ $EXIT_CODE -eq 0 ]; then
+              echo "✅ No lease files to validate"
+            fi
             exit $EXIT_CODE
           fi
           
-          echo ""
-          echo "Changed files in lease/ directory:"
-          echo "$ALL_LEASE_FILES"
-          echo ""
+          LEASE_COUNT=$(echo "$ALL_LEASE_FILES" | wc -l)
+          echo "Found $LEASE_COUNT lease file(s) to validate"
           
-          # Validation 1: Check folder structure
-          echo "========================================="
-          echo "1. Validating Folder Structure"
-          echo "========================================="
-          
+          # Validation 1: Folder structure
           INVALID_STRUCTURE=$(echo "$ALL_LEASE_FILES" | grep -vE '^lease/[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+/lease\.yaml$' || true)
           
           if [ -n "$INVALID_STRUCTURE" ]; then
-            echo "❌ Invalid folder structure detected!"
-            echo ""
-            echo "Invalid files:"
+            INVALID_COUNT=$(echo "$INVALID_STRUCTURE" | wc -l)
+            echo "❌ $INVALID_COUNT file(s) with invalid folder structure:"
             echo "$INVALID_STRUCTURE"
-            echo ""
-            echo "Expected format: lease/<Namespace>/<Service>/lease.yaml"
-            echo "Examples:"
-            echo "  - lease/Microsoft.Widget/Widget/lease.yaml"
-            echo "  - lease/Azure.Storage/BlobService/lease.yaml"
-            echo ""
+            echo "Expected: lease/<Namespace>/<Service>/lease.yaml"
             EXIT_CODE=1
-          else
-            echo "✅ All files follow the correct folder structure"
           fi
           
-          # Get only valid lease.yaml files for content validation
+          # Get valid lease files for content validation
           VALID_LEASE_FILES=$(echo "$ALL_LEASE_FILES" | grep -E '^lease/[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+/lease\.yaml$' || true)
           
           if [ -z "$VALID_LEASE_FILES" ]; then
-            echo ""
-            echo "No valid lease.yaml files to validate content"
             exit $EXIT_CODE
           fi
           
-          # Validation 2-4: Check lease.yaml content
-          echo ""
-          echo "========================================="
-          echo "2. Validating Lease File Contents"
-          echo "========================================="
+          # Validation 2-4: Content validation (only show failures)
+          CONTENT_ERRORS=""
           
           for LEASE_FILE in $VALID_LEASE_FILES; do
-            echo ""
-            echo "File: $LEASE_FILE"
-            echo "-----------------------------------------"
-            
-            # Extract folder structure components
             FOLDER_RP=$(echo "$LEASE_FILE" | cut -d'/' -f2)
-            
-            # Read lease.yaml fields
             RP_NAME=$(yq eval '.lease.resource-provider' "$LEASE_FILE" 2>/dev/null || echo "")
             STARTDATE=$(yq eval '.lease.startdate' "$LEASE_FILE" 2>/dev/null || echo "")
-            REVIEWER=$(yq eval '.lease.reviewer' "$LEASE_FILE" 2>/dev/null || echo "")
             
-            # Check: Resource provider name matches folder name
+            FILE_ERRORS=""
+            
+            # Check resource provider name
             if [ "$RP_NAME" != "$FOLDER_RP" ]; then
-              echo "❌ Resource provider name mismatch!"
-              echo "   Folder name: $FOLDER_RP"
-              echo "   lease.yaml resource-provider: $RP_NAME"
-              echo "   These must match exactly."
+              FILE_ERRORS="${FILE_ERRORS}  - Resource provider mismatch: folder=$FOLDER_RP, yaml=$RP_NAME\n"
               EXIT_CODE=1
-            else
-              echo "✅ Resource provider name matches folder structure"
             fi
             
-            # Check: Startdate format (ISO 8601: YYYY-MM-DD)
+            # Check startdate format
             if ! echo "$STARTDATE" | grep -qE '^[0-9]{4}-[0-9]{2}-[0-9]{2}$'; then
-              echo "❌ Invalid startdate format!"
-              echo "   Current: $STARTDATE"
-              echo "   Expected: ISO 8601 format (YYYY-MM-DD)"
+              FILE_ERRORS="${FILE_ERRORS}  - Invalid startdate format: $STARTDATE (expected: YYYY-MM-DD)\n"
               EXIT_CODE=1
             else
-              echo "✅ Startdate follows ISO 8601 format"
-              
-              # Check: Startdate is today or future (not past)
+              # Check startdate is not in past
               if [[ "$STARTDATE" < "$TODAY" ]]; then
-                echo "❌ Startdate is in the past!"
-                echo "   Startdate: $STARTDATE"
-                echo "   Today: $TODAY"
-                echo "   Startdate must be today or a future date."
+                FILE_ERRORS="${FILE_ERRORS}  - Startdate is in the past: $STARTDATE (today: $TODAY)\n"
                 EXIT_CODE=1
-              else
-                echo "✅ Startdate is today or in the future"
               fi
             fi
             
-            # TODO: Check: Reviewer alias is present (commented for future use)
-            # if [ -z "$REVIEWER" ] || [ "$REVIEWER" = "null" ]; then
-            #   echo "❌ Reviewer alias is missing!"
-            #   echo "   Please provide a valid reviewer alias in the lease.yaml file."
-            #   EXIT_CODE=1
-            # else
-            #   echo "✅ Reviewer alias is present: $REVIEWER"
-            # fi
-            
-            echo "-----------------------------------------"
+            if [ -n "$FILE_ERRORS" ]; then
+              CONTENT_ERRORS="${CONTENT_ERRORS}\n❌ $LEASE_FILE\n${FILE_ERRORS}"
+            fi
           done
           
+          # Summary
           echo ""
           echo "========================================="
           echo "Validation Summary"
           echo "========================================="
           
+          if [ -n "$CONTENT_ERRORS" ]; then
+            echo "Content validation errors:"
+            echo -e "$CONTENT_ERRORS"
+          fi
+          
           if [ $EXIT_CODE -eq 0 ]; then
             echo "✅ All validations passed!"
           else
-            echo "❌ Validation failed. Please fix the errors above."
+            echo ""
+            echo "❌ Validation failed - fix errors above"
           fi
           
           exit $EXIT_CODE
