@@ -14,6 +14,9 @@ union EventHubEventPosition {
   @doc("Corresponds to the end of the partition.")
   Latest: "Latest",
 
+  @doc("Corresponds to the special position for one time.")
+  CustomStartTime: "CustomStartTime",
+
   string,
 }
 

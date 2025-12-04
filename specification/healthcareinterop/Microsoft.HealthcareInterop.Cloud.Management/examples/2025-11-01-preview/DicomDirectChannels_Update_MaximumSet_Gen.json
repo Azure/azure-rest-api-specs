@@ -1,0 +1,62 @@
+{
+  "title": "DicomDirectChannels_Update_MaximumSet",
+  "operationId": "DicomDirectChannels_Update",
+  "parameters": {
+    "api-version": "2025-11-01-preview",
+    "subscriptionId": "EA9A3A92-77E8-44C3-9154-791246044458",
+    "resourceGroupName": "rgcloud",
+    "dicomDirectChannelName": "channel1",
+    "properties": {
+      "properties": {
+        "hubResourceId": "/subscriptions/EA9A3A92-77E8-44C3-9154-791246044458/resourceGroups/rgcloud/providers/Microsoft.HealthcareInterop/hubs/testhub",
+        "sourceConfiguration": {
+          "dicomConnectorResourceId": "/subscriptions/EA9A3A92-77E8-44C3-9154-791246044458/resourceGroups/rgcloud/providers/Microsoft.HealthcareInterop/dicomConnectors/dicomconn1"
+        },
+        "destinationConfiguration": {
+          "connectorType": "StorageAccountConnector",
+          "storageAccountConnectorResourceId": "/subscriptions/EA9A3A92-77E8-44C3-9154-791246044458/resourceGroups/rgcloud/providers/Microsoft.HealthcareInterop/storageAccountConnectors/saconn1"
+        }
+      },
+      "tags": {
+        "key6702": "rsxdsqapkggladglpg"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "hubResourceId": "/subscriptions/EA9A3A92-77E8-44C3-9154-791246044458/resourceGroups/rgcloud/providers/Microsoft.HealthcareInterop/hubs/testhub",
+          "sourceConfiguration": {
+            "dicomConnectorResourceId": "/subscriptions/EA9A3A92-77E8-44C3-9154-791246044458/resourceGroups/rgcloud/providers/Microsoft.HealthcareInterop/dicomConnectors/dicomconn1"
+          },
+          "destinationConfiguration": {
+            "connectorType": "StorageAccountConnector",
+            "storageAccountConnectorResourceId": "/subscriptions/EA9A3A92-77E8-44C3-9154-791246044458/resourceGroups/rgcloud/providers/Microsoft.HealthcareInterop/storageAccountConnectors/saconn1"
+          }
+        },
+        "tags": {
+          "key308": "ydcweaakvyqcpwcpx"
+        },
+        "location": "eastus2",
+        "id": "/subscriptions/EA9A3A92-77E8-44C3-9154-791246044458/resourceGroups/rgcloud/providers/Microsoft.HealthcareInterop/dicomDirectChannel/channel1",
+        "name": "channel1",
+        "type": "Microsoft.HealthcareInterop/dicomDirectChannel",
+        "systemData": {
+          "createdBy": "rqgqiooxsbu",
+          "createdByType": "User",
+          "createdAt": "2025-05-24T00:22:48.973Z",
+          "lastModifiedBy": "zqtbhvndtfvwzg",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-05-24T00:22:48.973Z"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://eastus2euap.management.azure.com/subscriptions/EA9A3A92-77E8-44C3-9154-791246044458/providers/Microsoft.HealthcareInterop/locations/EASTUS2/operationStatuses/04afacb4-b78c-42c8-b11d-f6708dad7aac"
+      }
+    }
+  }
+}

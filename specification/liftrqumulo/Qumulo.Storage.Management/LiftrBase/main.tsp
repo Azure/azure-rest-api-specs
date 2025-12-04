@@ -86,7 +86,7 @@ model UserDetails {
   /**
    * User Email
    */
-  @extension("x-ms-secret", true)
+  @secret
   email: string;
 }
 

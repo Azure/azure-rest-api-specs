@@ -364,6 +364,12 @@ model ConfigurationValidationResultsProperties {
   workloadInstanceArmId: string;
 
   /**
+   * Represents the system identifier for the workload.
+   */
+  @doc("The workload system identifier.")
+  workloadSystemIdentifier?: string;
+
+  /**
    * The environment of the resource being validated.
    */
   @doc("The environment of the resource being validated.")

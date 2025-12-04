@@ -4,9 +4,6 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
-using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -408,7 +405,7 @@ model MongoInstanceProperties is AzureResourceProperties {
   /**
    * The list of critical errors.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   criticalErrors?: CollectionExceptionInfo[];
 
   /**
@@ -419,7 +416,7 @@ model MongoInstanceProperties is AzureResourceProperties {
   /**
    * The list of warnings.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   warnings?: CollectionExceptionInfo[];
 
   /**
@@ -430,7 +427,7 @@ model MongoInstanceProperties is AzureResourceProperties {
   /**
    * The list of informational messages.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   informationalMessages?: CollectionExceptionInfo[];
 
   /**
@@ -596,19 +593,18 @@ model MongoDatabaseProperties is AzureResourceProperties {
   /**
    * The list of critical errors.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   criticalErrors?: CollectionExceptionInfo[];
 
   /**
    * The number of critical errors.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
   criticalErrorCount: int64;
 
   /**
    * The list of warnings.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   warnings?: CollectionExceptionInfo[];
 
   /**
@@ -619,7 +615,7 @@ model MongoDatabaseProperties is AzureResourceProperties {
   /**
    * The list of informational messages.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   informationalMessages?: CollectionExceptionInfo[];
 
   /**
@@ -705,7 +701,7 @@ model MongoCollectionProperties is AzureResourceProperties {
   /**
    * The list of critical errors.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   criticalErrors?: CollectionExceptionInfo[];
 
   /**
@@ -716,7 +712,7 @@ model MongoCollectionProperties is AzureResourceProperties {
   /**
    * The list of warnings.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   warnings?: CollectionExceptionInfo[];
 
   /**
@@ -727,7 +723,7 @@ model MongoCollectionProperties is AzureResourceProperties {
   /**
    * The list of informational messages.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   informationalMessages?: CollectionExceptionInfo[];
 
   /**

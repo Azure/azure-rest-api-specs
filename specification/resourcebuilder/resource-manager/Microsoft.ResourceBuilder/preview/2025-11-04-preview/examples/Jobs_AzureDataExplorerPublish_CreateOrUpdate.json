@@ -1,0 +1,93 @@
+{
+  "title": "Jobs_AzureDataExplorerPublish_CreateOrUpdate",
+  "operationId": "Jobs_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2025-11-04-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resourcebuilder-rg",
+    "workspaceName": "my-workspace",
+    "pipelineName": "data-processing-pipeline",
+    "jobName": "azure-data-explorer-publish-job",
+    "resource": {
+      "kind": "AzureDataExplorerPublish",
+      "properties": {
+        "inputs": [
+          {
+            "dataset": {
+              "type": "ResourceId",
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourcebuilder-rg/providers/Microsoft.ResourceBuilder/workspaces/my-workspace/datasets/resource-snapshot-dataset"
+            },
+            "name": "input-dataset"
+          }
+        ],
+        "sink": {
+          "type": "AzureDataExplorerSink",
+          "name": "azure-data-explorer-sink",
+          "azureDataExplorerClusterConnection": "https://mycluster.kusto.windows.net",
+          "azureDataExplorerClusterDatabase": "myDatabase",
+          "publishMode": "Overwrite",
+          "tableName": "myTable",
+          "folderName": "myFolder"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "kind": "AzureDataExplorerPublish",
+        "properties": {
+          "inputs": [
+            {
+              "dataset": {
+                "type": "ResourceId",
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourcebuilder-rg/providers/Microsoft.ResourceBuilder/workspaces/my-workspace/datasets/resource-snapshot-dataset"
+              },
+              "name": "input-dataset"
+            }
+          ],
+          "sink": {
+            "type": "AzureDataExplorerSink",
+            "name": "azure-data-explorer-sink",
+            "azureDataExplorerClusterConnection": "https://mycluster.kusto.windows.net",
+            "azureDataExplorerClusterDatabase": "myDatabase",
+            "publishMode": "Overwrite",
+            "tableName": "myTable",
+            "folderName": "myFolder"
+          }
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourcebuilder-rg/providers/Microsoft.ResourceBuilder/workspaces/my-workspace/pipelines/data-processing-pipeline/jobs/azure-data-explorer-publish-job",
+        "name": "azure-data-explorer-publish-job",
+        "type": "Microsoft.ResourceBuilder/workspaces/pipelines/jobs"
+      }
+    },
+    "201": {
+      "body": {
+        "kind": "AzureDataExplorerPublish",
+        "properties": {
+          "inputs": [
+            {
+              "dataset": {
+                "type": "ResourceId",
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourcebuilder-rg/providers/Microsoft.ResourceBuilder/workspaces/my-workspace/datasets/resource-snapshot-dataset"
+              },
+              "name": "input-dataset"
+            }
+          ],
+          "sink": {
+            "type": "AzureDataExplorerSink",
+            "name": "azure-data-explorer-sink",
+            "azureDataExplorerClusterConnection": "https://mycluster.kusto.windows.net",
+            "azureDataExplorerClusterDatabase": "myDatabase",
+            "publishMode": "Overwrite",
+            "tableName": "myTable",
+            "folderName": "myFolder"
+          }
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourcebuilder-rg/providers/Microsoft.ResourceBuilder/workspaces/my-workspace/pipelines/data-processing-pipeline/jobs/azure-data-explorer-publish-job",
+        "name": "azure-data-explorer-publish-job",
+        "type": "Microsoft.ResourceBuilder/workspaces/pipelines/jobs"
+      }
+    }
+  }
+}

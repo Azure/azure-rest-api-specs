@@ -36,17 +36,20 @@ model SignalSource {
   metricName: string;
 
   @doc("Filters applied to modify signal values.")
-  @OpenAPI.extension(
-    "x-ms-identifiers",
-    #["dimensionName", "scalarFunction", "samplingType", "value", "operator"]
-  )
+  @identifiers(#[
+    "dimensionName",
+    "scalarFunction",
+    "samplingType",
+    "value",
+    "operator"
+  ])
   filters: Condition[];
 
   @doc("Defines how measurements are aggregated across multiple time series.")
   spatialAggregation: SpatialAggregation;
 
   @doc("Defines how measurements are aggregated over a specific time window within the same time series.")
-  temporalAggregation?: TemporalAggregation;
+  temporalAggregation: TemporalAggregation;
 }
 
 @doc("Represents a filtering condition.")
@@ -206,7 +209,6 @@ union SpatialAggregationType {
 @doc("Represents criteria for determining uptime in window-based SLIs.")
 model WindowUptimeCriteria {
   @doc("Threshold value used to determine uptime.")
-  @minValue(0)
   target: float32;
 
   @doc("Comparison operator used for uptime evaluation.")
@@ -236,5 +238,5 @@ model TemporalAggregation {
   type: TemporalAggregationType;
 
   @doc("Time window size for aggregation, in minutes.")
-  windowSizeMinutes: int32;
+  windowSizeMinutes?: int32;
 }

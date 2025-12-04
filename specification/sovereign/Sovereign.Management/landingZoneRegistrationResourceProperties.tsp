@@ -74,9 +74,6 @@ model DriftResponseArray {
   totalDriftedItems: int32;
 
   @doc("Array of Drift JSON response.")
-  @OpenAPI.extension(
-    "x-ms-identifiers",
-    #["ruleName", "category", "priority", "detail", "identifier"]
-  )
+  @identifiers(#["ruleName", "category", "priority", "detail", "identifier"])
   driftedItems: DriftedItems[];
 }

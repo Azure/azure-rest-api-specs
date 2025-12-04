@@ -1,0 +1,1003 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft Genome Resource Provider API",
+    "version": "2021-08-01-preview",
+    "description": "Microsoft Genome Resource Provider API",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "GenomeAccounts"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.Genome/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Genome/accounts": {
+      "get": {
+        "operationId": "GenomeAccounts_ListBySubscription",
+        "tags": [
+          "GenomeAccounts"
+        ],
+        "description": "List all Genome accounts.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GenomeAccountListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Genome accounts by subscription": {
+            "$ref": "./examples/GenomeAccounts_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Genome/accounts": {
+      "get": {
+        "operationId": "GenomeAccounts_ListByResourceGroup",
+        "tags": [
+          "GenomeAccounts"
+        ],
+        "description": "List all Genome accounts belonging to a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GenomeAccountListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Genome accounts by resource group": {
+            "$ref": "./examples/GenomeAccounts_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Genome/accounts/{accountName}": {
+      "get": {
+        "operationId": "GenomeAccounts_Get",
+        "tags": [
+          "GenomeAccounts"
+        ],
+        "description": "Get details of a Genome account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of the genome account within the specified resource group.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GenomeAccount"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a Genome account": {
+            "$ref": "./examples/GenomeAccounts_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "GenomeAccounts_BeginCreate",
+        "tags": [
+          "GenomeAccounts"
+        ],
+        "description": "Provision a new Genome account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of the genome account within the specified resource group.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GenomeAccount"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'GenomeAccount' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/GenomeAccount"
+            }
+          },
+          "201": {
+            "description": "Resource 'GenomeAccount' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/GenomeAccount"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a Genome account": {
+            "$ref": "./examples/GenomeAccounts_Create.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "GenomeAccounts_BeginUpdate",
+        "tags": [
+          "GenomeAccounts"
+        ],
+        "description": "Update properties of an existing Genome account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of the genome account within the specified resource group.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GenomeAccountUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GenomeAccount"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a Genome account": {
+            "$ref": "./examples/GenomeAccounts_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "GenomeAccounts_BeginDelete",
+        "tags": [
+          "GenomeAccounts"
+        ],
+        "description": "Delete a Genome account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of the genome account within the specified resource group.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a Genome account": {
+            "$ref": "./examples/GenomeAccounts_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
+      "type": "object",
+      "title": "Tracked Resource",
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "Encryption": {
+      "type": "object",
+      "description": "Encryption configuration.",
+      "properties": {
+        "keyVaultProperties": {
+          "$ref": "#/definitions/KeyVaultProperties",
+          "description": "Properties of KeyVault"
+        },
+        "keySource": {
+          "$ref": "#/definitions/KeySource",
+          "description": "Key source for encryption"
+        }
+      }
+    },
+    "GenomeAccount": {
+      "type": "object",
+      "description": "Genome account resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/GenomeAccountProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "kind": {
+          "type": "string",
+          "description": "The Kind of the resource."
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The resource model definition representing SKU"
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "Identity for the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "GenomeAccountListResult": {
+      "type": "object",
+      "description": "The response of a GenomeAccount list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The GenomeAccount items on this page",
+          "items": {
+            "$ref": "#/definitions/GenomeAccount"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "GenomeAccountProperties": {
+      "type": "object",
+      "description": "Properties of Genome account.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the account.",
+          "readOnly": true
+        },
+        "endpoint": {
+          "type": "string",
+          "description": "Endpoint of the created account.",
+          "readOnly": true
+        },
+        "publicNetworkAccess": {
+          "$ref": "#/definitions/PublicNetworkAccess",
+          "description": "Whether the resource can be accessed from public networks."
+        },
+        "networkAcls": {
+          "$ref": "#/definitions/NetworkRuleSet",
+          "description": "Network access control rules."
+        },
+        "encryption": {
+          "$ref": "#/definitions/Encryption",
+          "description": "Encryption properties for this resource."
+        }
+      }
+    },
+    "GenomeAccountUpdate": {
+      "type": "object",
+      "description": "Genome account resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/GenomeAccountProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "kind": {
+          "type": "string",
+          "description": "The Kind of the resource."
+        },
+        "sku": {
+          "$ref": "#/definitions/SkuUpdate",
+          "description": "The resource model definition representing SKU"
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "Identity for the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
+    },
+    "Identity": {
+      "type": "object",
+      "description": "Properties to configure User Assigned Identities for Bring your Own Keys",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "ObjectId from the KeyVault",
+          "readOnly": true
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "TenantId from the KeyVault",
+          "readOnly": true
+        },
+        "type": {
+          "$ref": "#/definitions/ResourceIdentityType",
+          "description": "Type of managed service identity."
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "Properties for User Assigned Identities",
+          "additionalProperties": {
+            "$ref": "#/definitions/UserAssignedIdentity"
+          }
+        }
+      }
+    },
+    "IpRule": {
+      "type": "object",
+      "description": "IP rule for network access control.",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "An IPv4 address range in CIDR notation."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "KeySource": {
+      "type": "string",
+      "description": "Key source for encryption.",
+      "enum": [
+        "Microsoft.Genome",
+        "Microsoft.KeyVault"
+      ],
+      "x-ms-enum": {
+        "name": "KeySource",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "MicrosoftGenome",
+            "value": "Microsoft.Genome",
+            "description": "Encryption managed by the Genome service"
+          },
+          {
+            "name": "MicrosoftKeyVault",
+            "value": "Microsoft.KeyVault",
+            "description": "Encryption managed by Azure Key Vault"
+          }
+        ]
+      }
+    },
+    "KeyVaultProperties": {
+      "type": "object",
+      "description": "Key Vault properties for encryption.",
+      "properties": {
+        "keyName": {
+          "type": "string",
+          "description": "Name of the Key from KeyVault"
+        },
+        "keyVersion": {
+          "type": "string",
+          "description": "Version of the Key from KeyVault"
+        },
+        "keyVaultUri": {
+          "type": "string",
+          "description": "Uri of KeyVault"
+        },
+        "identityClientId": {
+          "type": "string",
+          "description": "Identity client ID"
+        }
+      }
+    },
+    "NetworkRuleAction": {
+      "type": "string",
+      "description": "Network rule action type.",
+      "enum": [
+        "Allow",
+        "Deny"
+      ],
+      "x-ms-enum": {
+        "name": "NetworkRuleAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Allow",
+            "value": "Allow",
+            "description": "Allow network access"
+          },
+          {
+            "name": "Deny",
+            "value": "Deny",
+            "description": "Deny network access"
+          }
+        ]
+      }
+    },
+    "NetworkRuleBypass": {
+      "type": "string",
+      "description": "Network rule bypass options.",
+      "enum": [
+        "None",
+        "AzureServices",
+        "Logging",
+        "Metrics"
+      ],
+      "x-ms-enum": {
+        "name": "NetworkRuleBypass",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "No services can bypass network rules"
+          },
+          {
+            "name": "AzureServices",
+            "value": "AzureServices",
+            "description": "Allow Azure services to bypass network rules"
+          },
+          {
+            "name": "Logging",
+            "value": "Logging",
+            "description": "Allow logging services to bypass network rules"
+          },
+          {
+            "name": "Metrics",
+            "value": "Metrics",
+            "description": "Allow metrics services to bypass network rules"
+          }
+        ]
+      }
+    },
+    "NetworkRuleSet": {
+      "type": "object",
+      "description": "Network access control rules.",
+      "properties": {
+        "defaultAction": {
+          "$ref": "#/definitions/NetworkRuleAction",
+          "description": "The default action when no rule matches."
+        },
+        "bypass": {
+          "$ref": "#/definitions/NetworkRuleBypass",
+          "description": "Specifies which Azure services are allowed to bypass the network rules."
+        },
+        "ipRules": {
+          "type": "array",
+          "description": "The list of IP address rules.",
+          "items": {
+            "$ref": "#/definitions/IpRule"
+          },
+          "x-ms-identifiers": [
+            "value"
+          ]
+        },
+        "virtualNetworkRules": {
+          "type": "array",
+          "description": "The list of virtual network rules.",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkRule"
+          }
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of the genome account.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "Resource is being created or updated"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "PublicNetworkAccess": {
+      "type": "string",
+      "description": "Public network access options.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "PublicNetworkAccess",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Public network access is enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Public network access is disabled"
+          }
+        ]
+      }
+    },
+    "ResourceIdentityType": {
+      "type": "string",
+      "description": "The identity type.",
+      "enum": [
+        "None",
+        "SystemAssigned",
+        "UserAssigned",
+        "SystemAssigned, UserAssigned"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceIdentityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "No managed identity is assigned to the resource"
+          },
+          {
+            "name": "SystemAssigned",
+            "value": "SystemAssigned",
+            "description": "System-assigned managed identity"
+          },
+          {
+            "name": "UserAssigned",
+            "value": "UserAssigned",
+            "description": "User-assigned managed identity"
+          },
+          {
+            "name": "SystemAssigned, UserAssigned",
+            "value": "SystemAssigned, UserAssigned",
+            "description": "Both system-assigned and user-assigned managed identities"
+          }
+        ]
+      }
+    },
+    "Sku": {
+      "type": "object",
+      "description": "The resource model definition representing SKU",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the SKU. Ex - P3. It is typically a letter+number code"
+        },
+        "tier": {
+          "$ref": "#/definitions/SkuTier",
+          "description": "This field is required to be implemented by the Resource Provider if the service has more than one tier, but is not required on a PUT."
+        },
+        "size": {
+          "type": "string",
+          "description": "The SKU size. When the name field is the combination of tier and some other value, this would be the standalone code."
+        },
+        "family": {
+          "type": "string",
+          "description": "If the service has different generations of hardware, for the same SKU, then that can be captured here."
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "If the SKU supports scale out/in then the capacity integer should be included. If scale out/in is not possible for the resource this may be omitted."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "SkuTier": {
+      "type": "string",
+      "description": "SKU tier of a resource.",
+      "enum": [
+        "Free",
+        "Basic",
+        "Standard",
+        "Premium",
+        "Enterprise"
+      ],
+      "x-ms-enum": {
+        "name": "SkuTier",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Free",
+            "value": "Free",
+            "description": "Free tier"
+          },
+          {
+            "name": "Basic",
+            "value": "Basic",
+            "description": "Basic tier"
+          },
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "Standard tier"
+          },
+          {
+            "name": "Premium",
+            "value": "Premium",
+            "description": "Premium tier"
+          },
+          {
+            "name": "Enterprise",
+            "value": "Enterprise",
+            "description": "Enterprise tier"
+          }
+        ]
+      }
+    },
+    "SkuUpdate": {
+      "type": "object",
+      "description": "The resource model definition representing SKU",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the SKU. Ex - P3. It is typically a letter+number code"
+        },
+        "tier": {
+          "$ref": "#/definitions/SkuTier",
+          "description": "This field is required to be implemented by the Resource Provider if the service has more than one tier, but is not required on a PUT."
+        },
+        "size": {
+          "type": "string",
+          "description": "The SKU size. When the name field is the combination of tier and some other value, this would be the standalone code."
+        },
+        "family": {
+          "type": "string",
+          "description": "If the service has different generations of hardware, for the same SKU, then that can be captured here."
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "If the SKU supports scale out/in then the capacity integer should be included. If scale out/in is not possible for the resource this may be omitted."
+        }
+      }
+    },
+    "UserAssignedIdentity": {
+      "type": "object",
+      "description": "User-assigned managed identity.",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "Principal Id of user assigned identity",
+          "readOnly": true
+        },
+        "clientId": {
+          "type": "string",
+          "description": "Client Id of user assigned identity",
+          "readOnly": true
+        }
+      }
+    },
+    "VirtualNetworkRule": {
+      "type": "object",
+      "description": "Virtual network rule for network access control.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Full resource id of a vnet subnet."
+        },
+        "state": {
+          "type": "string",
+          "description": "Gets the state of virtual network rule."
+        },
+        "vnetServiceEndpointBehavior": {
+          "$ref": "#/definitions/VnetServiceEndpointBehavior",
+          "description": "Virtual network service endpoint behavior."
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "VnetServiceEndpointBehavior": {
+      "type": "string",
+      "description": "Virtual network service endpoint behavior.",
+      "enum": [
+        "Ignore",
+        "Require"
+      ],
+      "x-ms-enum": {
+        "name": "VnetServiceEndpointBehavior",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Ignore",
+            "value": "Ignore",
+            "description": "Ignore missing virtual network service endpoint"
+          },
+          {
+            "name": "Require",
+            "value": "Require",
+            "description": "Require virtual network service endpoint to be present"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}

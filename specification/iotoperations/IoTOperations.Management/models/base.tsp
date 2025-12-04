@@ -126,7 +126,8 @@ model BatchingConfiguration {
 
   @doc("Maximum number of messages in a batch.")
   @minValue(0)
-  @maxValue(4294967295)
+  // TODO: verify values/type -> 4294967295 is not an int32
+  // @maxValue(4294967295)
   maxMessages?: int32 = 100000;
 }
 

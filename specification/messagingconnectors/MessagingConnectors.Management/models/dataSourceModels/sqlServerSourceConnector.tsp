@@ -114,4 +114,10 @@ model SqlServerSourceConnectorProperties extends DataSourceProperties {
 
   @doc("Specifies the criteria for running a snapshot when the connector starts.")
   snapshotMode?: SqlServerSnapshotMode;
+
+  @doc("A Boolean value that specifies whether the connector records schema structures from all tables in a schema or database, or only from tables that are designated for capture.")
+  isStoreOnlyCapturedTablesDdl?: boolean;
+
+  @doc("A Boolean value that specifies whether the connector enable delta flow.")
+  isDeltaFlowEnabled?: boolean;
 }

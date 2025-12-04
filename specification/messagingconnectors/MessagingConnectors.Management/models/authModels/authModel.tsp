@@ -33,5 +33,8 @@ union AuthenticationMode {
   @doc("Anonymous model.")
   Anonymous: "Anonymous",
 
+  @doc("Certificate model.")
+  Certificate: "Certificate",
+
   string,
 }

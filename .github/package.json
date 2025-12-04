@@ -9,7 +9,7 @@
     "@apidevtools/json-schema-ref-parser": "^14.2.1",
     "debug": "^4.4.3",
     "js-yaml": "^4.1.0",
-    "marked": "^16.3.0",
+    "marked": "^17.0.0",
     "markdown-table": "^3.0.4",
     "simple-git": "^3.27.0",
     "zod": "^4.1.11"
@@ -39,6 +39,7 @@
     "vitest": "^3.2.4"
   },
   "scripts": {
+    "check": "npm run lint && npm run format:check && npm run test:ci",
     "lint": "npm run lint:eslint && npm run lint:tsc",
     "lint:eslint": "cross-env DEBUG=eslint:eslint eslint",
     "lint:tsc": "tsc --build --verbose",

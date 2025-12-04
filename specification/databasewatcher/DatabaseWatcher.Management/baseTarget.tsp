@@ -6,9 +6,7 @@ namespace Microsoft.DatabaseWatcher;
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
-using TypeSpec.Versioning;
 using Azure.ResourceManager;
-using OpenAPI;
 
 @armResourceOperations
 interface Targets {
@@ -62,6 +60,7 @@ model VaultSecret {
   @doc("The path to the Key Vault secret storing the login name (aka user name, aka account name) for authentication to a target.")
   akvTargetUser?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("The path to the Key Vault secret storing the password for authentication to a target.")
   akvTargetPassword?: string;
 }

@@ -3,9 +3,7 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "./common.tsp";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
-using Azure.Core;
+using Azure.ResourceManager;
 
 namespace Microsoft.ComputeBulkActions;
 @doc("Describes the properties of a Virtual Machine.")
@@ -107,7 +105,7 @@ model StorageProfile {
   osDisk?: OSDisk;
 
   @doc("Specifies the parameters that are used to add a data disk to a virtual machine. For more information about disks, see [About disks and VHDs for Azure virtual machines](https://docs.microsoft.com/azure/virtual-machines/managed-disks-overview).")
-  @OpenAPI.extension("x-ms-identifiers", #["lun"])
+  @identifiers(#["lun"])
   dataDisks?: DataDisk[];
 
   @doc("Specifies the disk controller type configured for the VM. **Note:** This property will be set to the default disk controller type if not specified provided virtual machine is being created with 'hyperVGeneration' set to V2 based on the capabilities of the operating system disk and VM size from the the specified minimum api version. You need to deallocate the VM before updating its disk controller type unless you are updating the VM size in the VM configuration which implicitly deallocates and reallocates the VM. Minimum api-version: 2022-08-01.")
@@ -492,7 +490,7 @@ model OSProfile {
   /**
    * Specifies set of certificates that should be installed onto the virtual machine. To install certificates on a virtual machine it is recommended to use the [Azure Key Vault virtual machine extension for Linux](https://docs.microsoft.com/azure/virtual-machines/extensions/key-vault-linux) or the [Azure Key Vault virtual machine extension for Windows](https://docs.microsoft.com/azure/virtual-machines/extensions/key-vault-windows).
    */
-  @OpenAPI.extension("x-ms-identifiers", #["sourceVault/id"])
+  @identifiers(#["sourceVault/id"])
   secrets?: VaultSecretGroup[];
 
   /**
@@ -529,7 +527,7 @@ model WindowsConfiguration {
   /**
    * Specifies additional base-64 encoded XML formatted information that can be included in the Unattend.xml file, which is used by Windows Setup.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   additionalUnattendContent?: AdditionalUnattendContent[];
 
   /**
@@ -616,7 +614,7 @@ model WinRMConfiguration {
   /**
    * The list of Windows Remote Management listeners
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   listeners?: WinRMListener[];
 }
 
@@ -743,7 +741,7 @@ model SshConfiguration {
   /**
    * The list of SSH public keys used to authenticate with linux based VMs.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["path"])
+  @identifiers(#["path"])
   publicKeys?: SshPublicKey[];
 }
 
@@ -843,7 +841,7 @@ model VaultSecretGroup {
   sourceVault?: SubResource;
 
   @doc("The list of key vault references in SourceVault which contain certificates.")
-  @OpenAPI.extension("x-ms-identifiers", #["certificateUrl"])
+  @identifiers(#["certificateUrl"])
   vaultCertificates?: VaultCertificate[];
 }
 
@@ -865,7 +863,7 @@ model NetworkProfile {
   networkApiVersion?: NetworkApiVersion;
 
   @doc("Specifies the networking configurations that will be used to create the virtual machine networking resources.")
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   networkInterfaceConfigurations?: VirtualMachineNetworkInterfaceConfiguration[];
 }
 
@@ -926,7 +924,7 @@ model VirtualMachineNetworkInterfaceConfigurationProperties {
   dnsSettings?: VirtualMachineNetworkInterfaceDnsSettingsConfiguration;
 
   @doc("Specifies the IP configurations of the network interface.")
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   ipConfigurations: VirtualMachineNetworkInterfaceIPConfiguration[];
 
   @doc("The DSCP configuration for the network interface.")
@@ -1012,7 +1010,7 @@ model VirtualMachinePublicIPAddressConfigurationProperties {
   dnsSettings?: VirtualMachinePublicIPAddressDnsSettingsConfiguration;
 
   @doc("The list of IP tags associated with the public IP address.")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   ipTags?: VirtualMachineIpTag[];
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is an abbreviation for Internet Protocol"
@@ -1183,7 +1181,7 @@ union NetworkInterfaceAuxiliarySku {
  */
 model ApplicationProfile {
   @doc("Specifies the gallery applications that should be made available to the VM")
-  @OpenAPI.extension("x-ms-identifiers", #["packageReferenceId"])
+  @identifiers(#["packageReferenceId"])
   galleryApplications?: VMGalleryApplication[];
 }
 

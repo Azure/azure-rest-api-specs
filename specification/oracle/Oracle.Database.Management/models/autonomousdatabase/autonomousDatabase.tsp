@@ -428,7 +428,7 @@ model LongTermBackUpScheduleDetails {
   timeOfBackup?: utcDateTime;
 
   @doc("Retention period, in days, for long-term backups")
-  retentionPeriodInDays?: LongTermBackUpRetentionPeriod;
+  retentionPeriodInDays?: RetentionPeriod;
 
   @doc("Indicates if the long-term backup schedule should be deleted. The default value is `FALSE`.")
   isDisabled?: boolean;

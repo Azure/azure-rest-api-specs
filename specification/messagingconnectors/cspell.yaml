@@ -11,14 +11,10 @@ words:
   - postgre
 overrides:
   - filename: >-
-      **/specification/messagingconnectors/resource-manager/Microsoft.MessagingConnectors/preview/**/*.json
+      **/specification/messagingconnectors/resource-manager/Microsoft.MessagingConnectors/**/messagingconnectors.json
     words:
       - gssapi
       - oauthbearer
-      - unparseable
-  - filename: >-
-      **/specification/messagingconnectors/resource-manager/Microsoft.MessagingConnectors/**/messagingconnectors.json
-    words:
       - protobuf
       - messagingconnectors
       - mqtt
@@ -28,9 +24,13 @@ overrides:
       - jdbc
       - retriable
       - Debezium
+      - OCSP
+      - unparseable
   - filename: >-
       **/specification/messagingconnectors/MessagingConnectors.Management/**/*
     words:
+      - gssapi
+      - oauthbearer
       - protobuf
       - messagingconnectors
       - mqtt
@@ -40,4 +40,5 @@ overrides:
       - jdbc
       - retriable
       - Debezium
+      - OCSP
       - unparseable
