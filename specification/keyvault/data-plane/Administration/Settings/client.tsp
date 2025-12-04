@@ -1,10 +1,8 @@
-import "../Administration/main.tsp";
+import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
-
-@@clientName(KeyVault, "Client", "go");
-
 using KeyVault;
 
+@@clientName(KeyVault, "Client", "go");
 @@clientName(SettingTypeEnum, "SettingType", "go");
