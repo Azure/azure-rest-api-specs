@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "apimBaseUrl": "apimservice1.management.azure-api.net",
+    "loggerid": "5a58bc28a40f7e10489292a3",
+    "api-version": "2017-03-01",
+    "parameters": {
+      "loggerType": "azureEventHub",
+      "description": "first eventhub logger",
+      "credentials": {
+        "name": "testeventhub3",
+        "connectionString": "Endpoint=sb://contoso.servicebus.windows.net/;SharedAccessKeyName=SendPolicy;SharedAccessKey=sdfsdfdf"
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "/loggers/5a58bc28a40f7e10489292a3",
+        "loggerType": "azureEventHub",
+        "description": "first eventhub logger",
+        "credentials": {
+          "name": "testeventhub3",
+          "connectionString": "{{Logger-Credentials-5a58bc31a40f7e10489292a5}}"
+        },
+        "isBuffered": true
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/loggers/5a58bc28a40f7e10489292a3",
+        "loggerType": "azureEventHub",
+        "description": "first eventhub logger",
+        "credentials": {
+          "name": "testeventhub3",
+          "connectionString": "{{Logger-Credentials-5a58bc31a40f7e10489292a5}}"
+        },
+        "isBuffered": true
+      }
+    }
+  }
+}

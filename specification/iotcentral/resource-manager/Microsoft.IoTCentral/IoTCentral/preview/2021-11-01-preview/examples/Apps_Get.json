@@ -1,0 +1,72 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resRg",
+    "resourceName": "myIoTCentralApp",
+    "api-version": "2021-11-01-preview"
+  },
+  "responses": {
+    "200": {
+      "description": "Returns the application details",
+      "headers": {
+        "Code": "200"
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.IoTCentral/iotApps/myIoTCentralApp",
+        "location": "westus",
+        "type": "Microsoft.IoTCentral/iotApps",
+        "name": "myIoTCentralApp",
+        "tags": {
+          "key": "value"
+        },
+        "properties": {
+          "applicationId": "6ebd8fd3-6e34-419e-908f-9be61ec6f6d6",
+          "displayName": "My IoT Central App",
+          "subdomain": "my-iot-central-app",
+          "template": "iotc-pnp-preview@1.0.0",
+          "state": "created",
+          "publicNetworkAccess": "Enabled",
+          "networkRuleSets": {
+            "applyToDevices": true,
+            "applyToIoTCentral": false,
+            "defaultAction": "Deny",
+            "ipRules": [
+              {
+                "filterName": "My Computer",
+                "ipMask": "21.19.35.40/24"
+              }
+            ]
+          },
+          "privateEndpointConnections": [
+            {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.IoTCentral/iotApps/myIoTCentralApp/PrivateEndpointConnections/myIoTCentralAppEndpoint.a791c6b5-874d-4f03-9092-718490d33770",
+              "name": "myIoTCentralAppEndpoint.a791c6b5-874d-4f03-9092-718490d33770",
+              "type": "Microsoft.IoTCentral/iotApps/privateEndpointConnections",
+              "properties": {
+                "groupIds": [
+                  "iotApp"
+                ],
+                "privateEndpoint": {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.Network/privateEndpoints/myIoTCentralAppEndpoint"
+                },
+                "privateLinkServiceConnectionState": {
+                  "status": "Approved",
+                  "description": "Auto-approved",
+                  "actionsRequired": "None"
+                }
+              }
+            }
+          ]
+        },
+        "sku": {
+          "name": "ST2"
+        },
+        "identity": {
+          "type": "SystemAssigned",
+          "tenantId": "f686d426-8d16-42db-81b7-ab578e110ccd",
+          "principalId": "8988ab15-3e7a-4586-8a1c-ed07a73a53e9"
+        }
+      }
+    }
+  }
+}

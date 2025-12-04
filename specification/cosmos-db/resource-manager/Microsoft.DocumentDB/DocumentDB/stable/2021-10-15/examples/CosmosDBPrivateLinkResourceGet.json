@@ -1,0 +1,28 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "rg1",
+    "accountName": "ddb1",
+    "api-version": "2021-10-15",
+    "groupName": "sql"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.DocumentDb/databaseAccounts/ddb1/privateLinkResources/sql",
+        "name": "sql",
+        "type": "Microsoft.DocumentDB/databaseAccounts/privateLinkResources",
+        "properties": {
+          "groupId": "sql",
+          "requiredMembers": [
+            "ddb1",
+            "ddb1-westus"
+          ],
+          "requiredZoneNames": [
+            "privatelink.documents.azure.net"
+          ]
+        }
+      }
+    }
+  }
+}

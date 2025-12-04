@@ -1,0 +1,75 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "SwaggerTestRg",
+    "vaultName": "NetSDKTestRsVault",
+    "policyName": "testPolicy1",
+    "api-version": "2019-05-13",
+    "parameters": {
+      "properties": {
+        "backupManagementType": "AzureIaasVM",
+        "timeZone": "Pacific Standard Time",
+        "schedulePolicy": {
+          "schedulePolicyType": "SimpleSchedulePolicy",
+          "scheduleRunFrequency": "Daily",
+          "scheduleRunTimes": [
+            "2018-01-24T02:00:00Z"
+          ]
+        },
+        "retentionPolicy": {
+          "retentionPolicyType": "LongTermRetentionPolicy",
+          "dailySchedule": {
+            "retentionTimes": [
+              "2018-01-24T02:00:00Z"
+            ],
+            "retentionDuration": {
+              "count": 1,
+              "durationType": "Days"
+            }
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/NetSDKTestRsVault/backupPolicies/testPolicy1",
+        "name": "testPolicy1",
+        "type": "Microsoft.RecoveryServices/vaults/backupPolicies",
+        "properties": {
+          "backupManagementType": "AzureIaasVM",
+          "schedulePolicy": {
+            "schedulePolicyType": "SimpleSchedulePolicy",
+            "scheduleRunFrequency": "Daily",
+            "scheduleRunTimes": [
+              "2018-01-24T02:00:00Z"
+            ],
+            "scheduleWeeklyFrequency": 0
+          },
+          "retentionPolicy": {
+            "retentionPolicyType": "LongTermRetentionPolicy",
+            "dailySchedule": {
+              "retentionTimes": [
+                "2018-01-24T02:00:00Z"
+              ],
+              "retentionDuration": {
+                "count": 1,
+                "durationType": "Days"
+              }
+            }
+          },
+          "timeZone": "Pacific Standard Time",
+          "protectedItemsCount": 0
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/NetSDKTestRsVault/backupPolicies/testPolicy1/operationResults/00000000-0000-0000-0000-000000000000?api-version=2016-06-01",
+        "Azure-AsyncOperation": "https://management.azure.com/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/NetSDKTestRsVault/backupPolicies/testPolicy1/operations/00000000-0000-0000-0000-000000000000?api-version=2016-06-01",
+        "Retry-After": 60
+      }
+    }
+  }
+}

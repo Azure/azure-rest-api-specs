@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "api-version": "2018-01-31",
+    "reservationOrderId": "87f3c981-3e33-43d0-b26b-dfca785cf18a",
+    "reservationId": "ba4a5693-71ef-4ec2-a5ea-c4897ee7e740",
+    "grain": "daily",
+    "$filter": "properties/usageDate ge '2017-10-01' AND properties/usageDate le '2017-11-20'"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "providers/Microsoft.Capacity/reservationOrders/87f3c981-3e33-43d0-b26b-dfca785cf18a/reservations/ed0bcc5a-8027-451e-8435-e96c4021abc3/providers/Microsoft.Consumption/reservationSummaries/20171001",
+            "name": "87f3c981-3e33-43d0-b26b-dfca785cf18a_ed0bcc5a-8027-451e-8435-e96c4021abc3_20171001",
+            "type": "Microsoft.Consumption/reservationsummaries",
+            "tags": {
+              "env": "newcrp",
+              "dev": "tools"
+            },
+            "properties": {
+              "reservationOrderId": "87f3c981-3e33-43d0-b26b-dfca785cf18a",
+              "reservationId": "ed0bcc5a-8027-451e-8435-e96c4021abc3",
+              "skuName": "Standard_D8s_v3",
+              "reservedHours": 0.0,
+              "usageDate": "2017-10-01T00:00:00Z",
+              "usedHours": 0.0,
+              "minUtilizationPercentage": 0.0,
+              "avgUtilizationPercentage": 0.0,
+              "maxUtilizationPercentage": 0.0
+            }
+          }
+        ]
+      }
+    }
+  }
+}

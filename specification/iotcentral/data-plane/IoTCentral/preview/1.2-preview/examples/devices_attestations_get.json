@@ -1,0 +1,26 @@
+{
+  "title": "Get device attestation",
+  "description": "Gets the attestation for a device.",
+  "parameters": {
+    "baseDomain": "azureiotcentral.com",
+    "subdomain": "appsubdomain",
+    "deviceId": "CheckoutThermostat",
+    "api-version": "1.2-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "type": "x509",
+        "x509": {
+          "clientCertificates": {
+            "primary": {
+              "info": {
+                "sha1Thumbprint": "<thumbprint>"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

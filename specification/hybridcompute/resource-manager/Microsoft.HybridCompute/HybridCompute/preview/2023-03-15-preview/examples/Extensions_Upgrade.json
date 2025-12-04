@@ -1,0 +1,28 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "myResourceGroup",
+    "machineName": "myMachine",
+    "api-version": "2023-03-15-preview",
+    "extensionUpgradeParameters": {
+      "extensionTargets": {
+        "Microsoft.Compute.CustomScriptExtension": {
+          "targetVersion": "1.10"
+        },
+        "Microsoft.Azure.Monitoring": {
+          "targetVersion": "2.0"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {},
+    "202": {
+      "headers": {
+        "Location": "{callbackUrl}",
+        "Retry-After": 200,
+        "Azure-AsyncOperation": "{callbackUri}"
+      }
+    }
+  }
+}

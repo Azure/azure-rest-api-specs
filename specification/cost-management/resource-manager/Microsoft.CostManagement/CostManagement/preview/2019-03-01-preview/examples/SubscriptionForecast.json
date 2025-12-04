@@ -1,0 +1,124 @@
+{
+  "parameters": {
+    "api-version": "2019-03-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "parameters": {
+      "type": "Usage",
+      "timeframe": "Custom",
+      "timePeriod": {
+        "from": "2018-10-01T00:00:00.000Z",
+        "to": "2018-12-31T00:00:00.000Z"
+      },
+      "dataset": {
+        "granularity": "Daily",
+        "filter": {
+          "tag": {
+            "name": "Environment",
+            "operator": "In",
+            "values": [
+              "Dev",
+              "PPE",
+              "Prod"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CostManagement/Forecast/00000000-0000-0000-0000-000000000000",
+            "name": "55312978-ba1b-415c-9304-cfd9c43c0481",
+            "type": "microsoft.costmanagement/Forecast",
+            "properties": {
+              "nextLink": null,
+              "columns": [
+                {
+                  "name": "PreTaxCost",
+                  "type": "Number"
+                },
+                {
+                  "name": "UsageDate",
+                  "type": "Number"
+                },
+                {
+                  "name": "CostStatus",
+                  "type": "String"
+                },
+                {
+                  "name": "Currency",
+                  "type": "String"
+                }
+              ],
+              "rows": [
+                [
+                  214.68795741935486,
+                  20181222,
+                  "Actual",
+                  "USD"
+                ],
+                [
+                  215.68795741935486,
+                  20181223,
+                  "Actual",
+                  "USD"
+                ],
+                [
+                  216.68795741935486,
+                  20181224,
+                  "Actual",
+                  "USD"
+                ],
+                [
+                  217.68795741935486,
+                  20181225,
+                  "Actual",
+                  "USD"
+                ],
+                [
+                  218.68795741935486,
+                  20181226,
+                  "Actual",
+                  "USD"
+                ],
+                [
+                  219.143849143581657052,
+                  20181227,
+                  "Actual",
+                  "USD"
+                ],
+                [
+                  220.143849143588766052,
+                  20181228,
+                  "Forecast",
+                  "USD"
+                ],
+                [
+                  221.143433143588766052,
+                  20181229,
+                  "Forecast",
+                  "USD"
+                ],
+                [
+                  222.143433555588766052,
+                  20181230,
+                  "Forecast",
+                  "USD"
+                ],
+                [
+                  223.143433555588743252,
+                  20181231,
+                  "Forecast",
+                  "USD"
+                ]
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

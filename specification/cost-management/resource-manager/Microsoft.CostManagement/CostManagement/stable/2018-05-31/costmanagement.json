@@ -1,0 +1,1460 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2018-05-31",
+    "title": "CostManagementClient"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CostManagement/reportconfigs": {
+      "get": {
+        "tags": [
+          "Reports"
+        ],
+        "operationId": "ReportConfig_List",
+        "description": "Lists all report configs for a subscription.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "ReportConfigList": {
+            "$ref": "./examples/ReportConfigList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ReportConfigListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CostManagement/reportconfigs": {
+      "get": {
+        "tags": [
+          "Reports"
+        ],
+        "operationId": "ReportConfig_ListByResourceGroupName",
+        "description": "Lists all report configs for a resource group under a subscription.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "ReportConfigList": {
+            "$ref": "./examples/ReportConfigList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ReportConfigListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CostManagement/reportconfigs/{reportConfigName}": {
+      "get": {
+        "tags": [
+          "Reports"
+        ],
+        "operationId": "ReportConfig_Get",
+        "description": "Gets the report config for a subscription by report config name.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "Report": {
+            "$ref": "./examples/ReportConfig.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/reportConfigNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ReportConfig"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Reports"
+        ],
+        "operationId": "ReportConfig_CreateOrUpdate",
+        "description": "The operation to create or update a report config. Update operation requires latest eTag to be set in the request mandatorily. You may obtain the latest eTag by performing a get operation. Create operation does not require eTag.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "CreateOrUpdateReport": {
+            "$ref": "./examples/ReportConfigCreateOrUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/reportConfigNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReportConfig"
+            },
+            "description": "Parameters supplied to the CreateOrUpdate Report Config operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ReportConfig"
+            }
+          },
+          "201": {
+            "description": "Created.",
+            "schema": {
+              "$ref": "#/definitions/ReportConfig"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Reports"
+        ],
+        "operationId": "ReportConfig_Delete",
+        "description": "The operation to delete a report.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "DeleteReport": {
+            "$ref": "./examples/ReportConfigDelete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/reportConfigNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CostManagement/reportconfigs/{reportConfigName}": {
+      "get": {
+        "tags": [
+          "Reports"
+        ],
+        "operationId": "ReportConfig_GetByResourceGroupName",
+        "description": "Gets the report config for a resource group under a subscription by report config name.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "ReportConfig": {
+            "$ref": "./examples/ReportConfig.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/reportConfigNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ReportConfig"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Reports"
+        ],
+        "operationId": "ReportConfig_CreateOrUpdateByResourceGroupName",
+        "description": "The operation to create or update a report config. Update operation requires latest eTag to be set in the request mandatorily. You may obtain the latest eTag by performing a get operation. Create operation does not require eTag.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "CreateOrUpdateReport": {
+            "$ref": "./examples/ReportConfigCreateOrUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/reportConfigNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReportConfig"
+            },
+            "description": "Parameters supplied to the CreateOrUpdate Report Config operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ReportConfig"
+            }
+          },
+          "201": {
+            "description": "Created.",
+            "schema": {
+              "$ref": "#/definitions/ReportConfig"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Reports"
+        ],
+        "operationId": "ReportConfig_DeleteByResourceGroupName",
+        "description": "The operation to delete a report config.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "DeleteReport": {
+            "$ref": "./examples/ReportConfigDelete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/reportConfigNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/dimensions": {
+      "get": {
+        "tags": [
+          "Dimensions"
+        ],
+        "x-ms-odata": "#/definitions/Dimension",
+        "operationId": "BillingAccountDimensions_List",
+        "description": "Lists the dimensions by billingAccount Id.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "BillingAccountDimensionsList": {
+            "$ref": "./examples/BillingAccountDimensionsList.json"
+          },
+          "BillingAccountDimensionsListExpandAndTop": {
+            "$ref": "./examples/BillingAccountDimensionsListExpandAndTop.json"
+          },
+          "BillingAccountDimensionsListWithFilter": {
+            "$ref": "./examples/BillingAccountDimensionsListWithFilter.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "name": "$filter",
+            "description": "May be used to filter dimensions by properties/category, properties/usageStart, properties/usageEnd. Supported operators are 'eq','lt', 'gt', 'le', 'ge'.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "description": "May be used to expand the properties/data within a dimension category. By default, data is not included when listing dimensions.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$skiptoken",
+            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "description": "May be used to limit the number of results to the most recent N dimension data.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DimensionsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CostManagement/dimensions": {
+      "get": {
+        "tags": [
+          "Dimensions"
+        ],
+        "x-ms-odata": "#/definitions/Dimension",
+        "operationId": "SubscriptionDimensions_List",
+        "description": "Lists the dimensions by subscription Id.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "SubscriptionDimensionsList": {
+            "$ref": "./examples/SubscriptionDimensionsList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "name": "$filter",
+            "description": "May be used to filter dimensions by properties/category, properties/usageStart, properties/usageEnd. Supported operators are 'eq','lt', 'gt', 'le', 'ge'.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "description": "May be used to expand the properties/data within a dimension category. By default, data is not included when listing dimensions.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$skiptoken",
+            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "description": "May be used to limit the number of results to the most recent N dimension data.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DimensionsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CostManagement/dimensions": {
+      "get": {
+        "tags": [
+          "Dimensions"
+        ],
+        "x-ms-odata": "#/definitions/Dimension",
+        "operationId": "ResourceGroupDimensions_List",
+        "description": "Lists the dimensions by resource group Id.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "ResourceGroupDimensionsList": {
+            "$ref": "./examples/ResourceGroupDimensionsList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "$filter",
+            "description": "May be used to filter dimensions by properties/category, properties/usageStart, properties/usageEnd. Supported operators are 'eq','lt', 'gt', 'le', 'ge'.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "description": "May be used to expand the properties/data within a dimension category. By default, data is not included when listing dimensions.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$skiptoken",
+            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "description": "May be used to limit the number of results to the most recent N dimension data.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DimensionsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CostManagement/Query": {
+      "post": {
+        "tags": [
+          "Query"
+        ],
+        "operationId": "QuerySubscription",
+        "description": "Lists the usage data for subscriptionId.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "SubscriptionQuery": {
+            "$ref": "./examples/SubscriptionQuery.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReportConfigDefinition"
+            },
+            "description": "Parameters supplied to the CreateOrUpdate Report Config operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/QueryResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.CostManagement/Query": {
+      "post": {
+        "tags": [
+          "Query"
+        ],
+        "operationId": "QueryResourceGroup",
+        "description": "Lists the usage data for subscriptionId and resource group.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "ResourceGroupQuery": {
+            "$ref": "./examples/ResourceGroupQuery.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReportConfigDefinition"
+            },
+            "description": "Parameters supplied to the CreateOrUpdate Report Config operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/QueryResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/Query": {
+      "post": {
+        "tags": [
+          "Query"
+        ],
+        "operationId": "QueryBillingAccount",
+        "description": "Lists the usage data for billing account.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "BillingAccountQuery": {
+            "$ref": "./examples/BillingAccountQuery.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReportConfigDefinition"
+            },
+            "description": "Parameters supplied to the CreateOrUpdate Report Config operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/QueryResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/providers/Microsoft.CostManagement/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "description": "Lists all of the available consumption REST API operations.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ErrorDetails": {
+      "description": "The details of the error.",
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The details of the error.",
+          "$ref": "#/definitions/ErrorDetails"
+        }
+      }
+    },
+    "Resource": {
+      "description": "The Resource model definition.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        },
+        "tags": {
+          "readOnly": true,
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ReportConfigListResult": {
+      "description": "Result of listing report configs. It contains a list of available report configurations in the scope provided.",
+      "properties": {
+        "value": {
+          "description": "The list of report configs.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/ReportConfig"
+          }
+        }
+      }
+    },
+    "ReportConfig": {
+      "description": "A report config resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ReportConfigProperties",
+          "title": "Report config properties"
+        }
+      }
+    },
+    "ReportConfigProperties": {
+      "description": "The properties of the report config.",
+      "properties": {
+        "schedule": {
+          "description": "Has schedule information for the report config.",
+          "$ref": "#/definitions/ReportConfigSchedule"
+        },
+        "format": {
+          "description": "The format of the report being delivered.",
+          "type": "string",
+          "enum": [
+            "Csv"
+          ],
+          "x-ms-enum": {
+            "name": "FormatType",
+            "modelAsString": true
+          }
+        },
+        "deliveryInfo": {
+          "description": "Has delivery information for the report config.",
+          "$ref": "#/definitions/ReportConfigDeliveryInfo"
+        },
+        "definition": {
+          "description": "Has definition for the report config.",
+          "$ref": "#/definitions/ReportConfigDefinition"
+        }
+      },
+      "required": [
+        "deliveryInfo",
+        "definition"
+      ]
+    },
+    "ReportConfigSchedule": {
+      "description": "The schedule associated with a report config.",
+      "properties": {
+        "status": {
+          "description": "The status of the schedule. Whether active or not. If inactive, the report's scheduled execution is paused.",
+          "type": "string",
+          "enum": [
+            "Active",
+            "Inactive"
+          ],
+          "x-ms-enum": {
+            "name": "StatusType",
+            "modelAsString": true
+          }
+        },
+        "recurrence": {
+          "description": "The schedule recurrence.",
+          "type": "string",
+          "enum": [
+            "Daily",
+            "Weekly",
+            "Monthly",
+            "Annually"
+          ],
+          "x-ms-enum": {
+            "name": "RecurrenceType",
+            "modelAsString": true
+          }
+        },
+        "recurrencePeriod": {
+          "description": "Has start and end date of the recurrence. The start date must be in future. If present, the end date must be greater than start date.",
+          "$ref": "#/definitions/ReportConfigRecurrencePeriod"
+        }
+      },
+      "required": [
+        "recurrence",
+        "recurrencePeriod"
+      ]
+    },
+    "ReportConfigDeliveryInfo": {
+      "description": "The delivery information associated with a report config.",
+      "properties": {
+        "destination": {
+          "description": "Has destination for the report being delivered.",
+          "$ref": "#/definitions/ReportConfigDeliveryDestination"
+        }
+      },
+      "required": [
+        "destination"
+      ]
+    },
+    "ReportConfigDefinition": {
+      "description": "The definition of a report config.",
+      "properties": {
+        "type": {
+          "description": "The type of the report.",
+          "type": "string",
+          "enum": [
+            "Usage"
+          ],
+          "x-ms-enum": {
+            "name": "ReportType",
+            "modelAsString": true
+          }
+        },
+        "timeframe": {
+          "description": "The time frame for pulling data for the report. If custom, then a specific time period must be provided.",
+          "type": "string",
+          "enum": [
+            "WeekToDate",
+            "MonthToDate",
+            "YearToDate",
+            "Custom"
+          ],
+          "x-ms-enum": {
+            "name": "TimeframeType",
+            "modelAsString": true
+          }
+        },
+        "timePeriod": {
+          "description": "Has time period for pulling data for the report.",
+          "$ref": "#/definitions/ReportConfigTimePeriod"
+        },
+        "dataset": {
+          "description": "Has definition for data in this report config.",
+          "$ref": "#/definitions/ReportConfigDataset"
+        }
+      },
+      "required": [
+        "type",
+        "timeframe"
+      ]
+    },
+    "ReportConfigRecurrencePeriod": {
+      "description": "The start and end date for recurrence schedule.",
+      "properties": {
+        "from": {
+          "description": "The start date of recurrence.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "to": {
+          "description": "The end date of recurrence. If not provided, we default this to 10 years from the start date.",
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "from"
+      ]
+    },
+    "ReportConfigDeliveryDestination": {
+      "description": "The destination information for the delivery of the report.",
+      "properties": {
+        "resourceId": {
+          "description": "The resource id of the storage account where reports will be delivered.",
+          "type": "string"
+        },
+        "container": {
+          "description": "The name of the container where reports will be uploaded.",
+          "type": "string"
+        },
+        "rootFolderPath": {
+          "description": "The name of the directory where reports will be uploaded.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "resourceId",
+        "container"
+      ]
+    },
+    "ReportConfigTimePeriod": {
+      "description": "The start and end date for pulling data for the report.",
+      "properties": {
+        "from": {
+          "description": "The start date to pull data from.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "to": {
+          "description": "The end date to pull data to.",
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "from",
+        "to"
+      ]
+    },
+    "ReportConfigDataset": {
+      "description": "The definition of data present in the report.",
+      "properties": {
+        "granularity": {
+          "description": "The granularity of rows in the report.",
+          "type": "string",
+          "enum": [
+            "Daily"
+          ],
+          "x-ms-enum": {
+            "name": "GranularityType",
+            "modelAsString": true
+          }
+        },
+        "configuration": {
+          "description": "Has configuration information for the data in the report. The configuration will be ignored if aggregation and grouping are provided.",
+          "$ref": "#/definitions/ReportConfigDatasetConfiguration"
+        },
+        "aggregation": {
+          "type": "object",
+          "description": "Dictionary of aggregation expression to use in the report. The key of each item in the dictionary is the alias for the aggregated column. Report can have up to 2 aggregation clauses.",
+          "additionalProperties": {
+            "type": "object",
+            "$ref": "#/definitions/ReportConfigAggregation"
+          },
+          "maxItems": 2
+        },
+        "grouping": {
+          "description": "Array of group by expression to use in the report. Report can have up to 2 group by clauses.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReportConfigGrouping"
+          },
+          "maxItems": 2
+        },
+        "filter": {
+          "type": "object",
+          "description": "Has filter expression to use in the report.",
+          "$ref": "#/definitions/ReportConfigFilter"
+        }
+      }
+    },
+    "ReportConfigDatasetConfiguration": {
+      "description": "The configuration of dataset in the report.",
+      "properties": {
+        "columns": {
+          "description": "Array of column names to be included in the report. Any valid report column name is allowed. If not provided, then report includes all columns.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ReportConfigAggregation": {
+      "description": "The aggregation expression to be used in the report.",
+      "properties": {
+        "name": {
+          "description": "The name of the column to aggregate.",
+          "type": "string"
+        },
+        "function": {
+          "description": "The name of the aggregation function to use.",
+          "type": "string",
+          "enum": [
+            "Sum"
+          ],
+          "x-ms-enum": {
+            "name": "FunctionType",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "name",
+        "function"
+      ]
+    },
+    "ReportConfigGrouping": {
+      "description": "The group by expression to be used in the report.",
+      "properties": {
+        "columnType": {
+          "description": "Has type of the column to group.",
+          "$ref": "#/definitions/ReportConfigColumnType"
+        },
+        "name": {
+          "description": "The name of the column to group.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "columnType",
+        "name"
+      ]
+    },
+    "ReportConfigFilter": {
+      "description": "The filter expression to be used in the report.",
+      "properties": {
+        "and": {
+          "description": "The logical \"AND\" expression. Must have at least 2 items.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReportConfigFilter"
+          },
+          "minItems": 2
+        },
+        "or": {
+          "description": "The logical \"OR\" expression. Must have at least 2 items.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReportConfigFilter"
+          },
+          "minItems": 2
+        },
+        "not": {
+          "description": "The logical \"NOT\" expression.",
+          "$ref": "#/definitions/ReportConfigFilter"
+        },
+        "dimension": {
+          "description": "Has comparison expression for a dimension",
+          "$ref": "#/definitions/ReportConfigComparisonExpression"
+        },
+        "tag": {
+          "description": "Has comparison expression for a tag",
+          "$ref": "#/definitions/ReportConfigComparisonExpression"
+        }
+      }
+    },
+    "ReportConfigColumnType": {
+      "description": "The type of the column in the report.",
+      "type": "string",
+      "enum": [
+        "Tag",
+        "Dimension"
+      ],
+      "x-ms-enum": {
+        "name": "ReportConfigColumnType",
+        "modelAsString": true
+      }
+    },
+    "ReportConfigComparisonExpression": {
+      "description": "The comparison expression to be used in the report.",
+      "properties": {
+        "name": {
+          "description": "The name of the column to use in comparison.",
+          "type": "string"
+        },
+        "operator": {
+          "description": "The operator to use for comparison.",
+          "type": "string",
+          "enum": [
+            "In"
+          ],
+          "x-ms-enum": {
+            "name": "OperatorType",
+            "modelAsString": true
+          }
+        },
+        "values": {
+          "description": "Array of values to use for comparison",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "name",
+        "operator",
+        "values"
+      ]
+    },
+    "DimensionsListResult": {
+      "description": "Result of listing dimensions. It contains a list of available dimensions.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of dimensions.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Dimension"
+          }
+        }
+      }
+    },
+    "Dimension": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DimensionProperties",
+          "title": "Dimension properties"
+        }
+      }
+    },
+    "DimensionProperties": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "total": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "category": {
+          "type": "string"
+        },
+        "usageStart": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "usageEnd": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "QueryResult": {
+      "description": "Result of query. It contains all columns listed under groupings and aggregation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of usage data.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Query"
+          }
+        }
+      }
+    },
+    "Query": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/QueryProperties",
+          "title": "Query properties"
+        }
+      }
+    },
+    "QueryProperties": {
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "type": "string"
+        },
+        "columns": {
+          "description": "Array of columns",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QueryColumn"
+          }
+        },
+        "rows": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {}
+          }
+        }
+      }
+    },
+    "QueryColumn": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "Result of listing cost management operations. It contains a list of operations and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "description": "List of cost management operations supported by the Microsoft.CostManagement resource provider.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next set of operation list results if there are any.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Operation": {
+      "description": "A Cost management REST API operation.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}.",
+          "type": "string",
+          "readOnly": true
+        },
+        "display": {
+          "description": "The object that represents the operation.",
+          "properties": {
+            "provider": {
+              "description": "Service provider: Microsoft.CostManagement.",
+              "type": "string",
+              "readOnly": true
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed: Dimensions, Query.",
+              "type": "string",
+              "readOnly": true
+            },
+            "operation": {
+              "description": "Operation type: Read, write, delete, etc.",
+              "type": "string",
+              "readOnly": true
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "apiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Version of the API to be used with the client request. The current version is 2018-05-31."
+    },
+    "subscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "Azure Subscription ID.",
+      "required": true,
+      "type": "string"
+    },
+    "resourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "Azure Resource Group Name.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "billingAccountIdParameter": {
+      "name": "billingAccountId",
+      "in": "path",
+      "description": "BillingAccount ID",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "reportConfigNameParameter": {
+      "name": "reportConfigName",
+      "in": "path",
+      "description": "Report Config Name.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

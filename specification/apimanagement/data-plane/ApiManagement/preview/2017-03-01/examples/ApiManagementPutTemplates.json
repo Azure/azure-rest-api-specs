@@ -1,0 +1,85 @@
+{
+  "parameters": {
+    "apimBaseUrl": "apimservice1.management.azure-api.net",
+    "templateName": "newIssueNotificationMessage",
+    "api-version": "2017-03-01",
+    "Accept": "application/json",
+    "parameters": {
+      "subject": "Your request for $IssueName was successfully received."
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "/templates/ApplicationApprovedNotificationMessage",
+        "subject": "Your application $AppName is published in the application gallery",
+        "body": "<!DOCTYPE html >\r\n<html>\r\n  <head />\r\n  <body>\r\n    <p style=\"font-size:12pt;font-family:'Segoe UI'\">Dear $DevFirstName $DevLastName,</p>\r\n    <p style=\"font-size:12pt;font-family:'Segoe UI'\">\r\n          We are happy to let you know that your request to publish the $AppName application in the application gallery has been approved. Your application has been published and can be viewed <a href=\"http://$DevPortalUrl/Applications/Details/$AppId\">here</a>.\r\n        </p>\r\n    <p style=\"font-size:12pt;font-family:'Segoe UI'\">Best,</p>\r\n    <p style=\"font-size:12pt;font-family:'Segoe UI'\">The $OrganizationName API Team</p>\r\n  </body>\r\n</html>",
+        "title": "Application gallery submission approved",
+        "description": "Developers who submitted their application for publication in the application gallery on the developer portal receive this email after their submission is approved.",
+        "isDefault": false,
+        "parameters": [
+          {
+            "name": "AppId",
+            "title": "Application id"
+          },
+          {
+            "name": "AppName",
+            "title": "Application name"
+          },
+          {
+            "name": "DevFirstName",
+            "title": "Developer first name"
+          },
+          {
+            "name": "DevLastName",
+            "title": "Developer last name"
+          },
+          {
+            "name": "OrganizationName",
+            "title": "Organization name"
+          },
+          {
+            "name": "DevPortalUrl",
+            "title": "Developer portal URL"
+          }
+        ]
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/templates/ApplicationApprovedNotificationMessage",
+        "subject": "Your application $AppName is published in the application gallery",
+        "body": "<!DOCTYPE html >\r\n<html>\r\n  <head />\r\n  <body>\r\n    <p style=\"font-size:12pt;font-family:'Segoe UI'\">Dear $DevFirstName $DevLastName,</p>\r\n    <p style=\"font-size:12pt;font-family:'Segoe UI'\">\r\n          We are happy to let you know that your request to publish the $AppName application in the application gallery has been approved. Your application has been published and can be viewed <a href=\"http://$DevPortalUrl/Applications/Details/$AppId\">here</a>.\r\n        </p>\r\n    <p style=\"font-size:12pt;font-family:'Segoe UI'\">Best,</p>\r\n    <p style=\"font-size:12pt;font-family:'Segoe UI'\">The $OrganizationName API Team</p>\r\n  </body>\r\n</html>",
+        "title": "Application gallery submission approved",
+        "description": "Developers who submitted their application for publication in the application gallery on the developer portal receive this email after their submission is approved.",
+        "isDefault": false,
+        "parameters": [
+          {
+            "name": "AppId",
+            "title": "Application id"
+          },
+          {
+            "name": "AppName",
+            "title": "Application name"
+          },
+          {
+            "name": "DevFirstName",
+            "title": "Developer first name"
+          },
+          {
+            "name": "DevLastName",
+            "title": "Developer last name"
+          },
+          {
+            "name": "OrganizationName",
+            "title": "Organization name"
+          },
+          {
+            "name": "DevPortalUrl",
+            "title": "Developer portal URL"
+          }
+        ]
+      }
+    }
+  }
+}

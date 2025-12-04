@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "subscriptionId": "b368ca2f-e298-46b7-b0ab-012281956afa",
+    "resourceGroupName": "MyAlertRules",
+    "alertRuleName": "MyAlertRule",
+    "api-version": "2019-06-01",
+    "parameters": {
+      "tags": {
+        "newKey": "newVal"
+      },
+      "properties": {
+        "description": "New description for patching",
+        "frequency": "PT1M"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/b368ca2f-e298-46b7-b0ab-012281956afa/resourceGroups/MyAlertRules/providers/microsoft.alertsManagement/smartDetectorAlertRules/MyAlertRule",
+        "type": "Microsoft.AlertsManagement/smartDetectorAlertRules",
+        "name": "MyAlertRule",
+        "location": "global",
+        "tags": {
+          "newKey": "newVal"
+        },
+        "properties": {
+          "description": "New description for patching",
+          "state": "Enabled",
+          "severity": "Sev3",
+          "frequency": "PT1M",
+          "detector": {
+            "id": "VMMemoryLeak"
+          },
+          "scope": [
+            "/subscriptions/b368ca2f-e298-46b7-b0ab-012281956afa/resourceGroups/MyVms/providers/Microsoft.Compute/virtualMachines/vm1"
+          ],
+          "actionGroups": [
+            {
+              "actionGroupId": "/subscriptions/b368ca2f-e298-46b7-b0ab-012281956afa/resourcegroups/actionGroups/providers/microsoft.insights/actiongroups/MyActionGroup"
+            }
+          ],
+          "throttling": {
+            "duration": "PT20M"
+          }
+        }
+      }
+    }
+  }
+}

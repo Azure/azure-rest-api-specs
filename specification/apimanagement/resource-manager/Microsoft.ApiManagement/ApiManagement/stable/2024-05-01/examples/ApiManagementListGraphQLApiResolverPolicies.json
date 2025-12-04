@@ -1,0 +1,28 @@
+{
+  "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2024-05-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "apiId": "599e2953193c3c0bd0b3e2fa",
+    "resolverId": "599e29ab193c3c0bd0b3e2fb"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/599e2953193c3c0bd0b3e2fa/resolvers/599e29ab193c3c0bd0b3e2fb/policies/policy",
+            "type": "Microsoft.ApiManagement/service/apis/resolvers/policies",
+            "name": "policy",
+            "properties": {
+              "value": "<!--\r\n    IMPORTANT:\r\n    - Resolver elements can appear only within the <http-request>, <http-response>, <backend> section elements.\r\n    - Only the <forward-request> policy element can appear within the <backend> section element.\r\n    - To apply a policy to the query request (before it is forwarded to the backend service), place a corresponding policy element within the <http-request> section element.\r\n    - To apply a policy to the resolver response (before it is sent back to the document executor), place a corresponding policy element within the <http-response> section element.\r\n    - To add a policy position the cursor at the desired insertion point and click on the round button associated with the policy.\r\n    - To remove a policy, delete the corresponding policy statement from the policy document.\r\n  - Policies are applied in the order of their appearance, from the top down.\r\n-->\r\n<http-data-source>\r\n  <http-request>\r\n    <set-method>GET</set-method>\r\n<set-backend-service base-url=\"https://some.service.com\" />\r\n<set-url>/api/users</set-url>  </http-request>\r\n  <backend>\r\n    <forward-request />\r\n  </backend>\r\n  <http-response>\r\n    <set-body template=\"liquid\">\r\n { \"id\": \"{{body.id}}\" }  </http-response>\r\n</http-data-source>"
+            }
+          }
+        ],
+        "count": 1,
+        "nextLink": ""
+      }
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "title": "Set device properties",
+  "description": "Replace the values of read-write device properties of a device",
+  "parameters": {
+    "centralDnsSuffixInPath": "azureiotcentral.com",
+    "baseDomain": "azureiotcentral.com",
+    "subdomain": "appsubdomain",
+    "deviceId": "mx1",
+    "api-version": "preview",
+    "body": {
+      "settings": {
+        "voltage": 25,
+        "current": 7
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "body": {
+        "settings": {
+          "$metadata": {
+            "voltage": {
+              "desiredValue": 25
+            },
+            "current": {
+              "desiredValue": 7
+            }
+          }
+        }
+      }
+    }
+  }
+}

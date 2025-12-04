@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "subscriptionId": "D633CC2E-722B-4AE1-B636-BBD9E4C60ED9",
+    "location": "eastus",
+    "api-version": "2023-05-01",
+    "body": {
+      "networkSiblingSetId": "9760acf5-4638-11e7-9bdb-020073ca3333",
+      "subnetId": "/subscriptions/9760acf5-4638-11e7-9bdb-020073ca7778/resourceGroups/myRP/providers/Microsoft.Network/virtualNetworks/testVnet/subnets/testSubnet",
+      "networkSiblingSetStateId": "12345_44420.8001578125",
+      "networkFeatures": "Standard"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "networkSiblingSetId": "9760acf5-4638-11e7-9bdb-020073ca3333",
+        "subnetId": "/subscriptions/9760acf5-4638-11e7-9bdb-020073ca7778/resourceGroups/myRP/providers/Microsoft.Network/virtualNetworks/testVnet/subnets/testSubnet",
+        "networkSiblingSetStateId": "12345_44420.8001578125",
+        "networkFeatures": "Standard",
+        "provisioningState": "Succeeded",
+        "nicInfoList": [
+          {
+            "ipAddress": "1.2.3.4",
+            "volumeResourceIds": [
+              "/subscriptions/9760acf5-4638-11e7-9bdb-020073ca7778/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1/capacityPools/pool1/volumes/volume10",
+              "/subscriptions/9760acf5-4638-11e7-9bdb-020073ca7778/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1/capacityPools/pool1/volumes/volume11"
+            ]
+          },
+          {
+            "ipAddress": "1.2.3.5",
+            "volumeResourceIds": [
+              "/subscriptions/9760acf5-4638-11e7-9bdb-020073ca7778/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account2/capacityPools/pool2/volumes/volume20",
+              "/subscriptions/9760acf5-4638-11e7-9bdb-020073ca7778/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account2/capacityPools/pool2/volumes/volume21"
+            ]
+          },
+          {
+            "ipAddress": "1.2.3.9",
+            "volumeResourceIds": []
+          }
+        ]
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/D633CC2E-722B-4AE1-B636-BBD9E4C60ED9/providers/Microsoft.NetApp/locations/eastus/operationResults/18c499e1-2a3c-441c-950e-4b456c991c18?api-version=2023-01-01-preview&operationResultResponseType=Location"
+      }
+    }
+  }
+}

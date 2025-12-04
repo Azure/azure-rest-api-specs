@@ -1,0 +1,31 @@
+{
+  "title": "List organizations in your application",
+  "description": "Get a list of organizations in your application.",
+  "parameters": {
+    "baseDomain": "azureiotcentral.com",
+    "subdomain": "appsubdomain",
+    "api-version": "1.1-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "us",
+            "displayName": "United States"
+          },
+          {
+            "id": "washington",
+            "displayName": "Washington",
+            "parent": "us"
+          },
+          {
+            "id": "seattle",
+            "displayName": "Seattle",
+            "parent": "washington"
+          }
+        ]
+      }
+    }
+  }
+}

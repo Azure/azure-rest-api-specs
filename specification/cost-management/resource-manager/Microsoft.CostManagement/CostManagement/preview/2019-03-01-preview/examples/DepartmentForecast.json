@@ -1,0 +1,129 @@
+{
+  "parameters": {
+    "api-version": "2019-03-01-preview",
+    "billingAccountId": "70664866",
+    "departmentId": "123",
+    "parameters": {
+      "type": "Usage",
+      "timeframe": "Custom",
+      "timePeriod": {
+        "from": "2018-10-01T00:00:00.000Z",
+        "to": "2018-12-31T00:00:00.000Z"
+      },
+      "dataset": {
+        "granularity": "Daily",
+        "filter": {
+          "and": [
+            {
+              "or": [
+                {
+                  "dimension": {
+                    "name": "SubscriptionName",
+                    "operator": "In",
+                    "values": [
+                      "Azure Dev Subscription",
+                      "Azure Prod Subscription",
+                      "Azure PPE Subscription"
+                    ]
+                  }
+                },
+                {
+                  "tag": {
+                    "name": "Environment",
+                    "operator": "In",
+                    "values": [
+                      "Dev",
+                      "PPE",
+                      "Prod"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "dimension": {
+                "name": "AccountName",
+                "operator": "In",
+                "values": [
+                  "Azure Account"
+                ]
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "providers/Microsoft.Billing/billingAccounts/70664866/departments/123/providers/Microsoft.CostManagement/Forecast/ad67fd91-c131-4bda-9ba9-7187ecb1cebd",
+            "name": "ad67fd91-c131-4bda-9ba9-7187ecb1cebd",
+            "type": "microsoft.costmanagement/Forecast",
+            "properties": {
+              "nextLink": "https://management.azure.com/providers/Microsoft.Billing/billingAccounts/70664866/departments/123/providers/Microsoft.CostManagement/Forecast?api-version=2019-03-01-preview&$skiptoken=AQAAAA%3D%3D",
+              "columns": [
+                {
+                  "name": "PreTaxCost",
+                  "type": "Number"
+                },
+                {
+                  "name": "UsageDate",
+                  "type": "Number"
+                },
+                {
+                  "name": "CostStatus",
+                  "type": "String"
+                },
+                {
+                  "name": "Currency",
+                  "type": "String"
+                }
+              ],
+              "rows": [
+                [
+                  19.545363672276512,
+                  20181026,
+                  "Actual",
+                  "USD"
+                ],
+                [
+                  20.41179241293923,
+                  20181027,
+                  "Actual",
+                  "USD"
+                ],
+                [
+                  21.359416562625452,
+                  20181028,
+                  "Actual",
+                  "USD"
+                ],
+                [
+                  22.545363672276512,
+                  20181029,
+                  "Forecast",
+                  "USD"
+                ],
+                [
+                  23.41979241290323,
+                  20181030,
+                  "Forecast",
+                  "USD"
+                ],
+                [
+                  24.359416562625452,
+                  20181031,
+                  "Forecast",
+                  "USD"
+                ]
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

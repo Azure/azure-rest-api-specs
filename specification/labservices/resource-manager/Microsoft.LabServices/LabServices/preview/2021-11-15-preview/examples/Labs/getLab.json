@@ -1,0 +1,76 @@
+{
+  "parameters": {
+    "api-version": "2021-11-15-preview",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "testrg123",
+    "labName": "testlab"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.LabServices/labs/testlab",
+        "name": "testlabplan",
+        "type": "Microsoft.LabServices/Lab",
+        "location": "westus",
+        "systemData": {
+          "createdBy": "identity123",
+          "createdByType": "User",
+          "createdAt": "2020-05-01T10:00:00Z",
+          "lastModifiedBy": "identity123",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-06-01T09:12:28Z"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "connectionProfile": {
+            "webSshAccess": "None",
+            "webRdpAccess": "None",
+            "clientSshAccess": "Public",
+            "clientRdpAccess": "Public"
+          },
+          "autoShutdownProfile": {
+            "shutdownOnDisconnect": "Enabled",
+            "shutdownWhenNotConnected": "Enabled",
+            "shutdownOnIdle": "UserAbsence",
+            "disconnectDelay": "00:05",
+            "noConnectDelay": "01:00",
+            "idleDelay": "01:00"
+          },
+          "securityProfile": {
+            "registrationCode": "fAkEcodE",
+            "openAccess": "Disabled"
+          },
+          "networkProfile": {
+            "subnetId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/default"
+          },
+          "virtualMachineProfile": {
+            "createOption": "TemplateVM",
+            "imageReference": {
+              "offer": "WindowsServer",
+              "publisher": "Microsoft",
+              "sku": "2019-Datacenter",
+              "version": "2019.0.20190410"
+            },
+            "osType": "Windows",
+            "sku": {
+              "name": "Medium",
+              "capacity": 20
+            },
+            "additionalCapabilities": {
+              "installGpuDrivers": "Disabled"
+            },
+            "usageQuota": "10:00",
+            "useSharedPassword": "Disabled",
+            "adminUser": {
+              "username": "test-user"
+            }
+          },
+          "title": "Test Lab",
+          "description": "This is a test lab.",
+          "labPlanId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.LabServices/labPlans/testlabplan",
+          "state": "Draft"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg",
+    "workspaceName": "myWorkspace",
+    "peeringName": "vNetPeeringTest",
+    "api-version": "2018-04-01",
+    "VirtualNetworkPeeringParameters": {
+      "properties": {
+        "allowForwardedTraffic": false,
+        "allowGatewayTransit": false,
+        "allowVirtualNetworkAccess": true,
+        "remoteVirtualNetwork": {
+          "id": "/subscriptions/0140911e-1040-48da-8bc9-b99fb3dd88a6/resourceGroups/subramantest/providers/Microsoft.Network/virtualNetworks/subramanvnet"
+        },
+        "useRemoteGateways": false
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/0140911e-1040-48da-8bc9-b99fb3dd88a6/resourceGroups/subramantest/providers/Microsoft.Databricks/workspaces/adbworkspace/virtualNetworkPeerings/vNetPeeringTest",
+        "name": "vNetPeeringTest",
+        "properties": {
+          "allowVirtualNetworkAccess": true,
+          "allowForwardedTraffic": false,
+          "allowGatewayTransit": false,
+          "useRemoteGateways": false,
+          "remoteVirtualNetwork": {
+            "id": "/subscriptions/0140911e-1040-48da-8bc9-b99fb3dd88a6/resourceGroups/subramantest/providers/Microsoft.Network/virtualNetworks/subramanvnet"
+          },
+          "remoteAddressSpace": {
+            "addressPrefixes": [
+              "10.203.0.0/16"
+            ]
+          },
+          "databricksVirtualNetwork": {
+            "id": "/subscriptions/0140911e-1040-48da-8bc9-b99fb3dd88a6/resourceGroups/databricks-rg-adbworkspace-2jsxhmzoyooxm/providers/Microsoft.Network/virtualNetworks/workers-vnet"
+          },
+          "databricksAddressSpace": {
+            "addressPrefixes": [
+              "10.139.0.0/16"
+            ]
+          },
+          "peeringState": "Initiated",
+          "provisioningState": "Updating"
+        }
+      }
+    },
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/0140911e-1040-48da-8bc9-b99fb3dd88a6/resourceGroups/subramantest/providers/Microsoft.Databricks/workspaces/adbworkspace/virtualNetworkPeerings/vNetPeeringTest",
+        "name": "vNetPeeringTest",
+        "properties": {
+          "allowVirtualNetworkAccess": true,
+          "allowForwardedTraffic": false,
+          "allowGatewayTransit": false,
+          "useRemoteGateways": false,
+          "remoteVirtualNetwork": {
+            "id": "/subscriptions/0140911e-1040-48da-8bc9-b99fb3dd88a6/resourceGroups/subramantest/providers/Microsoft.Network/virtualNetworks/subramanvnet"
+          },
+          "remoteAddressSpace": {
+            "addressPrefixes": [
+              "10.203.0.0/16"
+            ]
+          },
+          "databricksVirtualNetwork": {
+            "id": "/subscriptions/0140911e-1040-48da-8bc9-b99fb3dd88a6/resourceGroups/databricks-rg-adbworkspace-2jsxhmzoyooxm/providers/Microsoft.Network/virtualNetworks/workers-vnet"
+          },
+          "databricksAddressSpace": {
+            "addressPrefixes": [
+              "10.139.0.0/16"
+            ]
+          },
+          "peeringState": "Initiated",
+          "provisioningState": "Updating"
+        }
+      }
+    }
+  }
+}

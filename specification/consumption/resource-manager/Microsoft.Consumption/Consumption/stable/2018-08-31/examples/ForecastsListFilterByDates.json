@@ -1,0 +1,52 @@
+{
+  "parameters": {
+    "api-version": "2018-08-31",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "$filter": "usagedate ge '2018-04-01' AND usagedate le '2018-04-02'"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subid/providers/Microsoft.Consumption/forecasts/forecastId1",
+            "name": "forecastId1",
+            "type": "Microsoft.Consumption/forecasts",
+            "properties": {
+              "usageDate": "2018-04-01",
+              "grain": "Daily",
+              "charge": 752.000000,
+              "currency": "USD",
+              "chargeType": "Actual",
+              "confidenceLevels": null
+            }
+          },
+          {
+            "id": "/subscriptions/subid/providers/Microsoft.Consumption/forecasts/forecastId2",
+            "name": "forecastId2",
+            "type": "Microsoft.Consumption/forecasts",
+            "properties": {
+              "usageDate": "2018-04-02",
+              "grain": "Daily",
+              "charge": 753.809074,
+              "currency": "USD",
+              "chargeType": "Forecast",
+              "confidenceLevels": [
+                {
+                  "percentage": 95,
+                  "bound": "Upper",
+                  "value": 1165.951737
+                },
+                {
+                  "percentage": 95,
+                  "bound": "Lower",
+                  "value": 340.753404
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

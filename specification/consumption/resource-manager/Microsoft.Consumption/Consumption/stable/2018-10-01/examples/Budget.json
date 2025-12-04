@@ -1,0 +1,71 @@
+{
+  "parameters": {
+    "api-version": "2018-10-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "MYDEVTESTRG",
+    "budgetName": "TestBudget"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "subscriptions/{subscription-id}/providers/Microsoft.Consumption/budgets/TestBudget",
+        "name": "TestBudget",
+        "type": "Microsoft.Consumption/budgets",
+        "eTag": "\"1d34d012214157f\"",
+        "properties": {
+          "category": "Cost",
+          "amount": 100.65,
+          "timeGrain": "Monthly",
+          "timePeriod": {
+            "startDate": "2017-10-01T00:00:00Z",
+            "endDate": "2018-10-31T00:00:00Z"
+          },
+          "filters": {
+            "resourceGroups": [
+              "MPDEVTESTRG"
+            ],
+            "resources": [
+              "/subscriptions/{subscription-id}/resourceGroups/MYDEVTESTRG/providers/Microsoft.Compute/virtualMachines/MSVM2",
+              "/subscriptions/{subscription-id}/resourceGroups/MYDEVTESTRG/providers/Microsoft.Compute/virtualMachines/platformcloudplatformGeneric1"
+            ],
+            "meters": [
+              "00000000-0000-0000-0000-000000000000"
+            ],
+            "tags": {
+              "category": [
+                "Dev",
+                "Prod"
+              ],
+              "department": [
+                "engineering",
+                "sales"
+              ]
+            }
+          },
+          "currentSpend": {
+            "amount": 80.89,
+            "unit": "USD"
+          },
+          "notifications": {
+            "Actual_GreaterThan_80_Percent": {
+              "enabled": true,
+              "operator": "GreaterThan",
+              "threshold": 80,
+              "contactEmails": [
+                "johndoe@contoso.com",
+                "janesmith@contoso.com"
+              ],
+              "contactRoles": [
+                "Contributor",
+                "Reader"
+              ],
+              "contactGroups": [
+                "/subscriptions/{subscription-id}/resourceGroups/MYDEVTESTRG/providers/microsoft.insights/actionGroups/SampleActionGroup"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,111 @@
+{
+  "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2024-05-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "diagnosticId": "applicationinsights",
+    "If-Match": "*",
+    "parameters": {
+      "properties": {
+        "alwaysLog": "allErrors",
+        "loggerId": "/loggers/applicationinsights",
+        "sampling": {
+          "samplingType": "fixed",
+          "percentage": 50
+        },
+        "frontend": {
+          "request": {
+            "headers": [
+              "Content-type"
+            ],
+            "body": {
+              "bytes": 512
+            }
+          },
+          "response": {
+            "headers": [
+              "Content-type"
+            ],
+            "body": {
+              "bytes": 512
+            }
+          }
+        },
+        "backend": {
+          "request": {
+            "headers": [
+              "Content-type"
+            ],
+            "body": {
+              "bytes": 512
+            }
+          },
+          "response": {
+            "headers": [
+              "Content-type"
+            ],
+            "body": {
+              "bytes": 512
+            }
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/diagnostics/applicationinsights",
+        "type": "Microsoft.ApiManagement/service/diagnostics",
+        "name": "applicationinsights",
+        "properties": {
+          "alwaysLog": "allErrors",
+          "httpCorrelationProtocol": "Legacy",
+          "logClientIp": true,
+          "loggerId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/loggers/aisamplingtest",
+          "sampling": {
+            "samplingType": "fixed",
+            "percentage": 50
+          },
+          "frontend": {
+            "request": {
+              "headers": [
+                "Content-type"
+              ],
+              "body": {
+                "bytes": 512
+              }
+            },
+            "response": {
+              "headers": [
+                "Content-type"
+              ],
+              "body": {
+                "bytes": 512
+              }
+            }
+          },
+          "backend": {
+            "request": {
+              "headers": [
+                "Content-type"
+              ],
+              "body": {
+                "bytes": 512
+              }
+            },
+            "response": {
+              "headers": [
+                "Content-type"
+              ],
+              "body": {
+                "bytes": 512
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
