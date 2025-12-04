@@ -69,6 +69,7 @@ using Microsoft.Quota;
 @@clientName(GroupQuotasEntityPatch, "GroupQuotaEntityPatch", "csharp");
 @@clientName(GroupQuotasEntityBase, "GroupQuotaEntityBase", "csharp");
 @@clientName(GroupQuotaLimitLists.list, "get", "csharp");
+@@clientName(SubscriptionQuotaAllocationsLists.list, "get", "csharp");
 
 @@clientName(Microsoft.Quota, "QuotaMgmtClient", "python");
 
