@@ -67,6 +67,44 @@ enum OperatingSystemTypes {
   Linux,
 }
 
+/**
+ * CPU architecture supported by an OS disk.
+ */
+union Architecture {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  x64: "x64",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Arm64: "Arm64",
+}
+
+/**
+ * The type of identity used for the virtual machine scale set. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the virtual machine scale set.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+enum ResourceIdentityType {
+  SystemAssigned,
+  UserAssigned,
+  `SystemAssigned, UserAssigned`,
+  None,
+}
+
+/**
+ * This property allows the user to specify whether the virtual machines created under this image are 'Generalized' or 'Specialized'.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+enum OperatingSystemStateTypes {
+  /**
+   * Generalized image. Needs to be provisioned during deployment time.
+   */
+  Generalized,
+
+  /**
+   * Specialized image. Contains already provisioned OS Disk.
+   */
+  Specialized,
+}
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model UserAssignedIdentitiesValue {
   /**

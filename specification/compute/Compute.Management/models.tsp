@@ -1358,17 +1358,6 @@ enum CachingTypes {
 }
 
 /**
- * The type of identity used for the virtual machine scale set. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the virtual machine scale set.
- */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
-enum ResourceIdentityType {
-  SystemAssigned,
-  UserAssigned,
-  `SystemAssigned, UserAssigned`,
-  None,
-}
-
-/**
  * The level code.
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
@@ -1459,18 +1448,6 @@ enum DedicatedHostLicenseTypes {
 /**
  * The OS State. For managed images, use Generalized.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
-enum OperatingSystemStateTypes {
-  /**
-   * Generalized image. Needs to be provisioned during deployment time.
-   */
-  Generalized,
-
-  /**
-   * Specialized image. Contains already provisioned OS Disk.
-   */
-  Specialized,
-}
 
 /**
  * Interval value in minutes used to create LogAnalytics call rate logs.

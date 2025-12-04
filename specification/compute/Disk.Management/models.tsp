@@ -56,17 +56,6 @@ union DiskStorageAccountTypes {
 }
 
 /**
- * CPU architecture supported by an OS disk.
- */
-union Architecture {
-  string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  x64: "x64",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  Arm64: "Arm64",
-}
-
-/**
  * Refers to the security capability of the disk supported to create a Trusted launch or Confidential VM
  */
 @added(Versions.v2025_01_02)

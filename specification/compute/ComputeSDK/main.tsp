@@ -42,6 +42,22 @@ import "../Disk.Management/DiskEncryptionSet.tsp";
 import "../Disk.Management/DiskRestorePoint.tsp";
 import "../Disk.Management/Snapshot.tsp";
 import "../Disk.Management/back-compatible.tsp";
+import "../Gallery.Management/models.tsp";
+import "../Gallery.Management/Gallery.tsp";
+import "../Gallery.Management/GalleryImage.tsp";
+import "../Gallery.Management/GalleryImageVersion.tsp";
+import "../Gallery.Management/GalleryApplication.tsp";
+import "../Gallery.Management/GalleryApplicationVersion.tsp";
+import "../Gallery.Management/GalleryInVMAccessControlProfile.tsp";
+import "../Gallery.Management/GalleryInVMAccessControlProfileVersion.tsp";
+import "../Gallery.Management/SharedGallery.tsp";
+import "../Gallery.Management/SharedGalleryImage.tsp";
+import "../Gallery.Management/SharedGalleryImageVersion.tsp";
+import "../Gallery.Management/CommunityGallery.tsp";
+import "../Gallery.Management/CommunityGalleryImage.tsp";
+import "../Gallery.Management/CommunityGalleryImageVersion.tsp";
+import "../Gallery.Management/back-compatible.tsp";
+
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -78,6 +94,11 @@ enum Versions {
    */
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
   v2024_03_02: "2024-03-02",
+
+  /**
+   * The 2024-03-03 API version.
+   */
+  v2024_03_03: "2024-03-03",
 
   /**
    * The 2025-01-02 API version.
