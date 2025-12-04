@@ -14,10 +14,6 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./routes.tsp";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
-using Azure.ResourceManager.Foundations;
-using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**

@@ -1,0 +1,39 @@
+{
+  "title": "Get regional move container",
+  "operationId": "RegionalMoveContainers_Get",
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "sampleResourceGroup",
+    "moveContainerName": "sampleContainer1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sampleResourceGroup/providers/Microsoft.Resources/regionalMoveContainers/sampleContainer1",
+        "name": "sampleContainer1",
+        "type": "Microsoft.Resources/regionalMoveContainers",
+        "location": "westus",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "sourceLocation": "westus",
+          "targetLocation": "eastus",
+          "requestedResources": [
+            {
+              "sourceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sampleResourceGroup/providers/Microsoft.Compute/virtualMachines/sampleVm1",
+              "targetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sampleResourceGroup/providers/Microsoft.Compute/virtualMachines/sampleVm1Copy",
+              "resourceProperties": {},
+              "apiVersion": "2025-04-01"
+            },
+            {
+              "sourceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sampleResourceGroup/providers/Microsoft.Compute/virtualMachines/sampleVm2",
+              "targetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sampleResourceGroup/providers/Microsoft.Compute/virtualMachines/sampleVm2Copy",
+              "resourceProperties": {},
+              "apiVersion": "2025-04-01"
+            }
+          ]
+        }
+      }
+    }
+  }
+}
