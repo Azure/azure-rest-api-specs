@@ -1,0 +1,60 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000001",
+    "resourceGroupName": "group1",
+    "serverName": "server1",
+    "databaseName": "database1",
+    "api-version": "2025-02-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "queryId": "QID89",
+              "startTime": "2025-01-31T03:04:05.006Z",
+              "endTime": "2025-02-03T04:05:06.007Z",
+              "duration": 264061001,
+              "status": "Completed",
+              "queryText": "SELECT * FROM dbo.TestTable WHERE Id > 100",
+              "importance": "Normal",
+              "groupName": "DefaultWorkloadGroup",
+              "classifierName": "DefaultClassifier",
+              "resourceAllocationPercentage": "25",
+              "login": "testuser",
+              "progress": 100,
+              "sessionId": "12345",
+              "resourceClass": "staticrc20",
+              "concurrencySlots": "2"
+            },
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/group1/providers/Microsoft.Sql/servers/server1/databases/database1/dataWarehouseQueries/QID89",
+            "name": "QID89",
+            "type": "Microsoft.Sql/servers/databases/dataWarehouseQueries"
+          },
+          {
+            "properties": {
+              "queryId": "QID90",
+              "startTime": "2025-02-01T10:15:30Z",
+              "duration": 1792500,
+              "status": "Running",
+              "queryText": "UPDATE dbo.ProductTable SET Price = Price * 1.1 WHERE Category = 'Electronics'",
+              "importance": "High",
+              "groupName": "HighPriorityWorkloadGroup",
+              "classifierName": "HighPriorityClassifier",
+              "resourceAllocationPercentage": "50",
+              "login": "adminuser",
+              "progress": 75,
+              "sessionId": "67890",
+              "resourceClass": "staticrc40",
+              "concurrencySlots": "4"
+            },
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/group1/providers/Microsoft.Sql/servers/server1/databases/database1/dataWarehouseQueries/QID90",
+            "name": "QID90",
+            "type": "Microsoft.Sql/servers/databases/dataWarehouseQueries"
+          }
+        ]
+      }
+    }
+  }
+}
