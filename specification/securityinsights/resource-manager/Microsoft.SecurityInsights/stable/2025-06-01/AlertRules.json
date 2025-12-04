@@ -705,6 +705,51 @@
       },
       "type": "object"
     },
+    "AlertRuleTemplatePropertiesBase": {
+      "description": "Base alert rule template property bag.",
+      "properties": {
+        "alertRulesCreatedByTemplateCount": {
+          "description": "the number of alert rules that were created by this template",
+          "format": "int32",
+          "type": "integer"
+        },
+        "createdDateUTC": {
+          "description": "The time that this alert rule template has been added.",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "description": {
+          "description": "The description of the alert rule template.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The display name for alert rule template.",
+          "type": "string"
+        },
+        "lastUpdatedDateUTC": {
+          "description": "The last time that this alert rule template has been updated.",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "requiredDataConnectors": {
+          "description": "The required data sources for this template",
+          "items": {
+            "$ref": "#/definitions/AlertRuleTemplateDataSource"
+          },
+          "type": "array",
+          "x-ms-identifiers": [
+            "connectorId"
+          ]
+        },
+        "status": {
+          "$ref": "#/definitions/AlertRuleTemplateStatus",
+          "description": "The alert rule template status."
+        }
+      },
+      "type": "object"
+    },
     "AlertRuleTemplateStatus": {
       "description": "The alert rule template status.",
       "enum": [
@@ -1068,46 +1113,13 @@
       "x-ms-discriminator-value": "MicrosoftSecurityIncidentCreation"
     },
     "MicrosoftSecurityIncidentCreationAlertRuleTemplateProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertRuleTemplatePropertiesBase"
+        }
+      ],
       "description": "MicrosoftSecurityIncidentCreation rule template properties",
       "properties": {
-        "alertRulesCreatedByTemplateCount": {
-          "description": "the number of alert rules that were created by this template",
-          "format": "int32",
-          "type": "integer"
-        },
-        "createdDateUTC": {
-          "description": "The time that this alert rule template has been added.",
-          "format": "date-time",
-          "readOnly": true,
-          "type": "string"
-        },
-        "lastUpdatedDateUTC": {
-          "description": "The time that this alert rule template was last updated.",
-          "format": "date-time",
-          "readOnly": true,
-          "type": "string"
-        },
-        "description": {
-          "description": "The description of the alert rule template.",
-          "type": "string"
-        },
-        "displayName": {
-          "description": "The display name for alert rule template.",
-          "type": "string"
-        },
-        "requiredDataConnectors": {
-          "description": "The required data connectors for this template",
-          "items": {
-            "$ref": "#/definitions/AlertRuleTemplateDataSource"
-          },
-          "type": "array",
-          "x-ms-identifiers": []
-        },
-        "status": {
-          "$ref": "#/definitions/AlertRuleTemplateStatus",
-          "description": "The alert rule template status.",
-          "type": "string"
-        },
         "displayNamesFilter": {
           "description": "the alerts' displayNames on which the cases will be generated",
           "items": {
@@ -1650,6 +1662,7 @@
             "triggerThreshold",
             "version"
           ],
+          "type": "object",
           "x-ms-client-flatten": true
         }
       },
