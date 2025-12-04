@@ -1,11 +1,7 @@
-// Keep in sync with .github/eslint.config.js
+import { defineBaseConfig } from "./eslint.base.config.js";
 
-import eslint from "@eslint/js";
-import { defineConfig } from "eslint/config";
-import globals from "globals";
-import tseslint from "typescript-eslint";
-
-/** @type {import('eslint').Linter.Config[]} */
-export default defineConfig(eslint.configs.recommended, tseslint.configs.recommended, {
-  languageOptions: { globals: globals.node },
+export default defineBaseConfig({
+  // ensures the tsconfig path resolves relative to this file (so cannot be defined in base file)
+  // default is process.cwd() when running eslint, which may be incorrect
+  tsconfigRootDir: import.meta.dirname,
 });

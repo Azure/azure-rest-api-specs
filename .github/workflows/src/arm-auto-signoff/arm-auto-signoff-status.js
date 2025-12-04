@@ -1,3 +1,4 @@
+import { inspect } from "util";
 import { CommitStatusState, PER_PAGE_MAX } from "../../shared/src/github.js";
 import { equals } from "../../shared/src/set.js";
 import { byDate, invert } from "../../shared/src/sort.js";
@@ -52,7 +53,7 @@ export async function getLabelActionImpl({ owner, repo, issue_number, head_sha, 
     name === "ARMAutoSignedOff-IncrementalTSP"
   );
 
-  core.info(`Labels: ${labelNames}`);
+  core.info(`Labels: ${inspect(labelNames)}`);
   core.info(`Has auto signed-off labels: ${hasAutoSignedOffLabels}`);
 
   // permissions: { actions: read }
@@ -136,7 +137,7 @@ export async function getLabelActionImpl({ owner, repo, issue_number, head_sha, 
       (matchingStatus.state === CommitStatusState.ERROR ||
         matchingStatus.state === CommitStatusState.FAILURE)
     ) {
-      core.info(`Status '${matchingStatus}' did not succeed`);
+      core.info(`Status '${matchingStatus.context}' did not succeed`);
       return {
         headSha: head_sha,
         issueNumber: issue_number,

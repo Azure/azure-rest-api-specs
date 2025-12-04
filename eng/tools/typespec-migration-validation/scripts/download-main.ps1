@@ -90,7 +90,7 @@ Write-Host "Latest commit id from main branch: $latestCommitId"
 
 $swaggerFolder = ""
 $swaggerPath = $swaggerPath.Replace("\", "/")
-if ($swaggerPath -match "specification/([a-z]*)/resource-manager/(.*)/(stable|preview)/([a-z0-9-]+)/(.*).json") {
+if ($swaggerPath -match "specification/([a-z-]*)/resource-manager/(.*)/(stable|preview)/([a-z0-9-]+)/(.*).json") {
   $swaggerFolder = "specification/$($matches[1])/resource-manager/$($matches[2])/$($matches[3])/$($matches[4])/"
   Write-Host "Swagger folder: $swaggerFolder"
 }
