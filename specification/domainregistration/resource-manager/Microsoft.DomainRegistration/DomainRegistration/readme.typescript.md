@@ -6,6 +6,7 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ## Common TypeScript settings
 
 ```yaml $(typescript)
+title: DomainRegistrationManagementClient
 typescript:
   azure-arm: true
   generate-metadata: true
