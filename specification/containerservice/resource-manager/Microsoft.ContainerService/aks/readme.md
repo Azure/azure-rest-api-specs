@@ -1445,5 +1445,5 @@ directive:
    - suppress: RequiredPropertiesMissingInResourceModel
     from: managedClusters.json
     where: $.definitions.ResourceSkusResult
-    reason: The model is reused from compute rp, and its original definition does not include attributes such as name, id or type, more details see line 114 in https://github.com/Azure/azure-rest-api-specs/blob/main/specification/compute/resource-manager/Microsoft.Compute/Skus/stable/2021-07-01/skus.json
+    reason: The model is reused from compute rp, see https://github.com/Azure/azure-rest-api-specs/blob/main/specification/compute/resource-manager/Microsoft.Compute/Skus/stable/2021-07-01/skus.json#L114, and its original definition does not include attributes such as name, id or type.
 ```
