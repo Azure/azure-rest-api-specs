@@ -4012,7 +4012,8 @@
         },
         "provisioningState": {
           "type": "string",
-          "description": "CloudEndpoint Provisioning State"
+          "description": "CloudEndpoint Provisioning State",
+          "readOnly": true
         },
         "lastWorkflowId": {
           "type": "string",
@@ -4042,7 +4043,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/CloudEndpointUpdateProperties",
-          "description": "The properties of the cloud endpoint."
+          "description": "The properties of the cloud endpoint.",
+          "x-ms-client-flatten": true
         }
       }
     },
