@@ -53,8 +53,7 @@ interface ProtectedItems {
    * asynchronous operation. To know the status of the operation, call the GetItemOperationResult API.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  createOrUpdate is ArmResourceCreateOrReplaceSync<
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
     ProtectedItemResource,
     Parameters = {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -62,7 +61,8 @@ interface ProtectedItems {
       @header
       `x-ms-authorization-auxiliary`?: string;
     },
-    Response = ArmResourceUpdatedResponse<ProtectedItemResource> | AcceptedResponse
+    Response = ArmResourceUpdatedResponse<ProtectedItemResource> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ProtectedItemResource> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
