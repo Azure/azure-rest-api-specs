@@ -29,13 +29,31 @@ from models import (
 
 # Known renamed mappings between hand-authored and TSP-compiled swaggers
 KNOWN_DEFINITION_RENAMES = {
-    "WebApiParameters": "WebApiVectorizerParameters",
-    "ServiceStatistics": "SearchServiceStatistics",
-    "PathHierarchyTokenizerV2": "PathHierarchyTokenizer",
-    "ClassicSimilarity": "ClassicSimilarityAlgorithm",
+    "AmlSkill": "AzureMachineLearningSkill",
+    "Answers": "QueryAnswerType",
+    "AzureOpenAIParameters": "AzureOpenAIVectorizerParameters",
+    "BinaryQuantizationVectorSearchCompressionConfiguration": "BinaryQuantizationCompression",
     "BM25Similarity": "BM25SimilarityAlgorithm",
-    "Suggester": "SearchSuggester",
+    "Captions": "QueryCaptionType",
+    "ClassicSimilarity": "ClassicSimilarityAlgorithm",
     "DataToExtract": "BlobIndexerDataToExtract",
+    "EdgeNGramTokenFilterV2": "EdgeNGramTokenFilter",
+    "ImageAction": "BlobIndexerImageAction",
+    "KeywordTokenizerV2": "KeywordTokenizer",
+    "LuceneStandardTokenizerV2": "LuceneStandardTokenizer",
+    "ParsingMode": "BlobIndexerParsingMode",
+    "PathHierarchyTokenizerV2": "PathHierarchyTokenizer",
+    "QueryResultDocumentSemanticFieldState": "SemanticFieldState",
+    "ScalarQuantizationVectorSearchCompressionConfiguration": "ScalarQuantizationCompression",
+    "SemanticErrorHandling": "SemanticErrorMode",
+    "SemanticPartialResponseReason": "SemanticErrorReason",
+    "SemanticPartialResponseType": "SemanticSearchResultsType",
+    "SemanticSettings": "SemanticSearch",
+    "ServiceStatistics": "SearchServiceStatistics",
+    "Similarity": "SimilarityAlgorithm",
+    "Speller": "QuerySpellerType",
+    "Suggester": "SearchSuggester",
+    "WebApiParameters": "WebApiVectorizerParameters",
 }
 
 
@@ -72,8 +90,12 @@ class DifferenceType(Enum):
     MISSING_DEFINITION = "missing_def_in_tsp"
     EXTRA_DEFINITION = "extra_def_in_tsp"
     DEFINITION_MISMATCH = "def_mismatch"
-    UNREFERENCED_DEFINITION_IN_HAND_AUTHORED = "unref_def_in_hand_authored"
-    UNREFERENCED_DEFINITION_IN_TSP = "unref_def_in_tsp"
+    DEFINITION_MISMATCH_X_NULLABLE = "def_mismatch_x_nullable_true_missing_in_tsp"
+    DEFINITION_MISMATCH_ADDITIONAL_PROPERTIES = (
+        "def_mismatch_additionalProperties_true_missing_in_tsp"
+    )
+    DEFINITION_MISMATCH_DEFAULT = "def_mismatch_default_missing_in_tsp"
+    DEFINITION_MISMATCH_READONLY = "def_mismatch_readOnly_true_missing_in_tsp"
 
     # Schema-level differences
     SCHEMA_TYPE_MISMATCH = "schema_type_mismatch"
@@ -923,17 +945,32 @@ class ApiComparator:
         # Compare promoted matches
         for missing_def, extra_def in promoted_def_matches:
             print(f"Potential definition match\t {missing_def} vs {extra_def}")
-            # Compare the matched definitions
+            # Compare the matched definitions - resolve ref chains for deep comparison
+            # Use cross-API resolution with known mappings for renamed definitions
             schema1 = api1.definitions[missing_def]
             schema2 = api2.definitions[extra_def]
-            if not self._schemas_equal(schema1, schema2):
-                schema_diffs = self._get_schema_differences(schema1, schema2)
+            resolved_schema1 = self._resolve_schema_ref_chain_with_mapping(
+                schema1, api1, api2
+            )
+            resolved_schema2 = self._resolve_schema_ref_chain_with_mapping(
+                schema2, api2, api1
+            )
+            if not self._schemas_equal(resolved_schema1, resolved_schema2):
+                schema_diffs = self._get_schema_differences(
+                    resolved_schema1, resolved_schema2
+                )
+
+                # Format diffs in short format
+                short_diffs = self._format_short_diffs(schema_diffs)
                 diff_details = (
-                    "\n    - " + "\n    - ".join(schema_diffs)
-                    if schema_diffs
+                    "\n- " + "\n- ".join(short_diffs)
+                    if short_diffs
                     else "unknown differences"
                 )
-                message = f"Definition '{missing_def}' (matched with '{extra_def}') has schema differences:{diff_details}"
+
+                message = (
+                    f"Definition '{missing_def}' VS '{extra_def}':\n{diff_details}"
+                )
                 self.differences.append(
                     Difference(
                         type=DifferenceType.DEFINITION_MISMATCH,
@@ -952,31 +989,21 @@ class ApiComparator:
 
             # Find where this definition is referenced in hand-authored (its source)
             references = self._find_definition_references(def_name, api1)
-            if references:
-                ref_info = f" (ref in hand-authored: {', '.join(references[:5])})"
-                diff_type = DifferenceType.MISSING_DEFINITION
-            else:
+            if not references:
                 ref_info = " (no ref in hand-authored)"
-                # Add an additional difference for unreferenced definition
-                diff_type = DifferenceType.MISSING_DEFINITION
-                self.differences.append(
-                    Difference(
-                        type=DifferenceType.UNREFERENCED_DEFINITION_IN_HAND_AUTHORED,
-                        message=f"Unreferenced definition in hand-authored: {def_name}",
-                        context=f"||{def_name}||||{possible_match}",
-                    )
-                )
-                print(f"Unreferenced definition in hand-authored\t {def_name}")
+            else:
+                ref_info = f" (ref in hand-authored: {', '.join(references[:3])})"
 
+            message = f"{def_name}{ref_info}"
             self.differences.append(
                 Difference(
-                    type=diff_type,
-                    message=f"Definition missing in {api2.swagger_source} : {def_name}{ref_info}",
+                    type=DifferenceType.MISSING_DEFINITION,
+                    message=message,
                     context=f"||{def_name}||||{possible_match}",
                 )
             )
             print(
-                f"Definition missing in {api2.swagger_source} \t {def_name}{ref_info}"
+                f"Definition missing in {api2.swagger_source} \t {message}"
                 + (f"\t|| Possible Match: {possible_match}" if possible_match else "")
             )
 
@@ -987,31 +1014,21 @@ class ApiComparator:
 
             # Find where this definition is referenced in TSP (its source)
             references = self._find_definition_references(def_name, api2)
-            if references:
-                ref_info = f" (ref in tsp: {', '.join(references[:5])})"
-                diff_type = DifferenceType.EXTRA_DEFINITION
-            else:
+            if not references:
                 ref_info = " (no ref in tsp)"
-                # Add an additional difference for unreferenced definition
-                diff_type = DifferenceType.EXTRA_DEFINITION
-                self.differences.append(
-                    Difference(
-                        type=DifferenceType.UNREFERENCED_DEFINITION_IN_TSP,
-                        message=f"Unreferenced definition in tsp: {def_name}",
-                        context=f"||{def_name}||||{possible_match}",
-                    )
-                )
-                print(f"Unreferenced definition in tsp\t {def_name}")
+            else:
+                ref_info = f" (ref in tsp: {', '.join(references[:3])})"
 
+            message = f"{def_name}{ref_info}"
             self.differences.append(
                 Difference(
-                    type=diff_type,
-                    message=f"Extra definition in {api2.swagger_source}: {def_name}{ref_info}",
+                    type=DifferenceType.EXTRA_DEFINITION,
+                    message=message,
                     context=f"||{def_name}||||{possible_match}",
                 )
             )
             print(
-                f"Extra definition in {api2.swagger_source} \t {def_name}{ref_info}"
+                f"Extra definition in {api2.swagger_source} \t {message}"
                 + (f"\t|| Possible Match: {possible_match}" if possible_match else "")
             )
 
@@ -1020,64 +1037,126 @@ class ApiComparator:
         for def_name in common_defs:
             schema1 = api1.definitions[def_name]
             schema2 = api2.definitions[def_name]
-            if not self._schemas_equal(schema1, schema2):
+            # Resolve ref chains for deep comparison
+            resolved_schema1 = self._resolve_schema_ref_chain(schema1, api1)
+            resolved_schema2 = self._resolve_schema_ref_chain(schema2, api2)
+            if not self._schemas_equal(resolved_schema1, resolved_schema2):
                 # Get detailed schema differences
-                schema_diffs = self._get_schema_differences(schema1, schema2)
-                diff_details = (
-                    "\n    - " + "\n    - ".join(schema_diffs)
-                    if schema_diffs
-                    else "unknown differences"
+                schema_diffs = self._get_schema_differences(
+                    resolved_schema1, resolved_schema2
+                )
+
+                # Detect specific patterns for granular categorization
+                mismatch_type = self._categorize_definition_mismatch(
+                    def_name, schema_diffs
                 )
 
                 # Find where this definition is referenced in both APIs
                 refs1 = self._find_definition_references(def_name, api1)
                 refs2 = self._find_definition_references(def_name, api2)
-                ref_info = ""
-                console_ref_info = ""
 
-                # Track unreferenced common definitions
-                if not refs1 and not refs2:
-                    self.differences.append(
-                        Difference(
-                            type=DifferenceType.UNREFERENCED_DEFINITION_IN_HAND_AUTHORED,
-                            message=f"Unreferenced definition in hand-authored: {def_name}",
-                            context=f"||{def_name}||||",
-                        )
-                    )
-                    self.differences.append(
-                        Difference(
-                            type=DifferenceType.UNREFERENCED_DEFINITION_IN_TSP,
-                            message=f"Unreferenced definition in tsp: {def_name}",
-                            context=f"||{def_name}||||",
-                        )
-                    )
-                    console_ref_info = " (no ref in hand-authored or tsp)"
-                    ref_info = " (no ref in hand-authored or tsp)"
-                elif refs1 or refs2:
-                    ref_parts = []
-                    if refs1:
-                        ref_parts.append(f"hand-authored: {', '.join(refs1[:3])}")
-                    else:
-                        ref_parts.append("no ref in hand-authored")
-                    if refs2:
-                        ref_parts.append(f"tsp: {', '.join(refs2[:3])}")
-                    else:
-                        ref_parts.append("no ref in tsp")
-                    ref_info = f" (ref in {'; '.join(ref_parts)})"
-                    console_ref_info = f" {ref_info}"
+                # Build no ref info
+                no_ref_parts = []
+                if not refs1:
+                    no_ref_parts.append("hand-authored")
+                if not refs2:
+                    no_ref_parts.append("tsp")
+                no_ref_info = (
+                    f" (no ref in {'/'.join(no_ref_parts)})" if no_ref_parts else ""
+                )
 
-                message = f"Definition '{def_name}' has schema differences:{diff_details}{ref_info}"
+                # Format diffs in short format
+                short_diffs = self._format_short_diffs(schema_diffs)
+                diff_details = (
+                    "\n- " + "\n- ".join(short_diffs)
+                    if short_diffs
+                    else "unknown differences"
+                )
+
+                message = f"{def_name}{no_ref_info}\n{diff_details}"
 
                 self.differences.append(
                     Difference(
-                        type=DifferenceType.DEFINITION_MISMATCH,
+                        type=mismatch_type,
                         message=message,
                         context=f"||{def_name}||||",
                     )
                 )
                 print(
-                    f"Definition schemas mismatch \t {def_name}{console_ref_info}\n{diff_details}"
+                    f"Definition schemas mismatch \t {def_name}{no_ref_info}\n{diff_details}"
                 )
+
+    def _format_short_diffs(self, schema_diffs: List[str]) -> List[str]:
+        """Format schema differences in shorter format."""
+        short_diffs = []
+        for diff in schema_diffs:
+            # Keep constraint diffs short
+            if diff.startswith("constraint "):
+                # Extract the key part: constraint x_nullable: True vs None -> x-nullable: True vs None
+                diff = diff.replace("constraint ", "")
+                diff = diff.replace("x_nullable", "x-nullable")
+                diff = diff.replace("read_only", "readOnly")
+            # Keep property diffs short
+            elif diff.startswith("property '"):
+                # property 'name': type: string vs None -> property name: type: string vs None
+                diff = diff.replace("property '", "property ").replace("':", ":")
+            short_diffs.append(diff)
+        return short_diffs
+
+    def _categorize_definition_mismatch(
+        self, def_name: str, schema_diffs: List[str]
+    ) -> DifferenceType:
+        """
+        Categorize definition mismatch based on specific patterns.
+
+        Returns a more specific DifferenceType if the mismatch matches known patterns:
+        - x-nullable missing in TSP
+        - additionalProperties missing in TSP
+        - default value missing in TSP
+        - readOnly missing in TSP
+
+        If multiple patterns are found, returns a generic DEFINITION_MISMATCH
+        to indicate mixed issues (the actual issues are shown in the message).
+
+        Otherwise returns generic DEFINITION_MISMATCH.
+        """
+        if not schema_diffs:
+            return DifferenceType.DEFINITION_MISMATCH
+
+        # Join all diffs to analyze patterns
+        all_diffs = " ".join(schema_diffs).lower()
+
+        # Check for all specific patterns and count matches
+        matched_patterns = []
+
+        # Pattern: x-nullable missing in TSP (detected in constraint comparison)
+        if "constraint x_nullable:" in all_diffs and " vs none" in all_diffs:
+            matched_patterns.append(DifferenceType.DEFINITION_MISMATCH_X_NULLABLE)
+
+        # Pattern: readOnly missing in TSP (detected in constraint comparison)
+        if "constraint read_only:" in all_diffs and " vs none" in all_diffs:
+            matched_patterns.append(DifferenceType.DEFINITION_MISMATCH_READONLY)
+
+        # Pattern: constraint default: <value> vs None
+        if "constraint default:" in all_diffs and " vs none" in all_diffs:
+            matched_patterns.append(DifferenceType.DEFINITION_MISMATCH_DEFAULT)
+
+        # Pattern: additionalProperties: True vs None or additionalProperties: {...} vs None
+        if "additionalproperties:" in all_diffs and " vs none" in all_diffs:
+            matched_patterns.append(
+                DifferenceType.DEFINITION_MISMATCH_ADDITIONAL_PROPERTIES
+            )
+
+        # If exactly one specific pattern matched, return it
+        if len(matched_patterns) == 1:
+            return matched_patterns[0]
+
+        # If multiple specific patterns matched, return generic DEFINITION_MISMATCH
+        # The detailed differences will show all the issues in the message
+        if len(matched_patterns) > 1:
+            return DifferenceType.DEFINITION_MISMATCH
+
+        return DifferenceType.DEFINITION_MISMATCH
 
     def _get_schema_differences(
         self,
@@ -1215,6 +1294,234 @@ class ApiComparator:
             if def_name in api.definitions:
                 return api.definitions[def_name]
         return schema
+
+    def _resolve_schema_ref_chain(
+        self,
+        schema: Optional[CanonicalSchema],
+        api: CanonicalApi,
+        visited: Optional[Set[str]] = None,
+    ) -> Optional[CanonicalSchema]:
+        """Recursively resolve all reference chains in a schema to get the final schema without refs.
+
+        This method deeply resolves:
+        - Direct $ref in the schema itself
+        - $refs in properties
+        - $refs in items (for arrays)
+        - $refs in allOf/oneOf/anyOf compositions
+        - $refs in additionalProperties
+
+        Args:
+            schema: Schema that may contain $refs
+            api: API containing the definitions
+            visited: Set of already visited definition names to prevent circular references
+
+        Returns:
+            The fully resolved schema with all refs replaced by their actual content
+        """
+        if schema is None:
+            return None
+
+        if visited is None:
+            visited = set()
+
+        # If this schema has a direct ref, resolve it first
+        if schema.ref and schema.ref.startswith("#/definitions/"):
+            def_name = schema.ref.split("/")[-1]
+
+            # Prevent circular references
+            if def_name in visited:
+                return schema
+
+            visited.add(def_name)
+
+            if def_name in api.definitions:
+                resolved_schema = api.definitions[def_name]
+                # Continue resolving the resolved schema
+                return self._resolve_schema_ref_chain(resolved_schema, api, visited)
+            return schema
+
+        # If no direct ref, create a copy and resolve nested refs
+        from dataclasses import replace
+
+        resolved_schema = schema
+
+        # Resolve refs in properties
+        if schema.properties:
+            resolved_props = {}
+            for prop_name, prop_schema in schema.properties.items():
+                resolved_props[prop_name] = self._resolve_schema_ref_chain(
+                    prop_schema, api, visited.copy()
+                )
+            resolved_schema = replace(resolved_schema, properties=resolved_props)
+
+        # Resolve refs in items (for array types)
+        if schema.items:
+            resolved_items = self._resolve_schema_ref_chain(
+                schema.items, api, visited.copy()
+            )
+            resolved_schema = replace(resolved_schema, items=resolved_items)
+
+        # Resolve refs in allOf
+        if schema.all_of:
+            resolved_all_of = [
+                self._resolve_schema_ref_chain(s, api, visited.copy())
+                for s in schema.all_of
+            ]
+            resolved_schema = replace(resolved_schema, all_of=resolved_all_of)
+
+        # Resolve refs in oneOf
+        if schema.one_of:
+            resolved_one_of = [
+                self._resolve_schema_ref_chain(s, api, visited.copy())
+                for s in schema.one_of
+            ]
+            resolved_schema = replace(resolved_schema, one_of=resolved_one_of)
+
+        # Resolve refs in anyOf
+        if schema.any_of:
+            resolved_any_of = [
+                self._resolve_schema_ref_chain(s, api, visited.copy())
+                for s in schema.any_of
+            ]
+            resolved_schema = replace(resolved_schema, any_of=resolved_any_of)
+
+        # Resolve refs in additionalProperties (if it's a schema)
+        if schema.additional_properties and hasattr(
+            schema.additional_properties, "ref"
+        ):
+            resolved_add_props = self._resolve_schema_ref_chain(
+                schema.additional_properties, api, visited.copy()
+            )
+            resolved_schema = replace(
+                resolved_schema, additional_properties=resolved_add_props
+            )
+
+        return resolved_schema
+
+    def _resolve_schema_ref_chain_with_mapping(
+        self,
+        schema: Optional[CanonicalSchema],
+        source_api: CanonicalApi,
+        target_api: CanonicalApi,
+        visited: Optional[Set[str]] = None,
+    ) -> Optional[CanonicalSchema]:
+        """Recursively resolve reference chains across APIs using known definition mappings.
+
+        This method resolves refs from source_api by looking them up in target_api,
+        applying KNOWN_DEFINITION_RENAMES to map definition names.
+
+        Args:
+            schema: Schema from source_api that may contain $refs
+            source_api: API where the schema originates (e.g., hand-authored)
+            target_api: API where we should look up mapped definitions (e.g., TSP)
+            visited: Set of already visited definition names to prevent circular references
+
+        Returns:
+            The fully resolved schema with all refs replaced by their actual content from target_api
+        """
+        if schema is None:
+            return None
+
+        if visited is None:
+            visited = set()
+
+        # If this schema has a direct ref, resolve it using the mapping
+        if schema.ref and schema.ref.startswith("#/definitions/"):
+            def_name = schema.ref.split("/")[-1]
+
+            # Prevent circular references
+            if def_name in visited:
+                return schema
+
+            visited.add(def_name)
+
+            # Apply known mapping if it exists
+            mapped_name = KNOWN_DEFINITION_RENAMES.get(def_name, def_name)
+
+            # Try to find in target API using mapped name
+            if mapped_name in target_api.definitions:
+                resolved_schema = target_api.definitions[mapped_name]
+                # Continue resolving in target API
+                return self._resolve_schema_ref_chain_with_mapping(
+                    resolved_schema, source_api, target_api, visited
+                )
+            # Fallback: try original name in target API
+            elif def_name in target_api.definitions:
+                resolved_schema = target_api.definitions[def_name]
+                return self._resolve_schema_ref_chain_with_mapping(
+                    resolved_schema, source_api, target_api, visited
+                )
+            # Fallback: resolve in source API if not found in target
+            elif def_name in source_api.definitions:
+                resolved_schema = source_api.definitions[def_name]
+                return self._resolve_schema_ref_chain_with_mapping(
+                    resolved_schema, source_api, target_api, visited
+                )
+            return schema
+
+        # If no direct ref, create a copy and resolve nested refs
+        from dataclasses import replace
+
+        resolved_schema = schema
+
+        # Resolve refs in properties
+        if schema.properties:
+            resolved_props = {}
+            for prop_name, prop_schema in schema.properties.items():
+                resolved_props[prop_name] = self._resolve_schema_ref_chain_with_mapping(
+                    prop_schema, source_api, target_api, visited.copy()
+                )
+            resolved_schema = replace(resolved_schema, properties=resolved_props)
+
+        # Resolve refs in items (for array types)
+        if schema.items:
+            resolved_items = self._resolve_schema_ref_chain_with_mapping(
+                schema.items, source_api, target_api, visited.copy()
+            )
+            resolved_schema = replace(resolved_schema, items=resolved_items)
+
+        # Resolve refs in allOf
+        if schema.all_of:
+            resolved_all_of = [
+                self._resolve_schema_ref_chain_with_mapping(
+                    s, source_api, target_api, visited.copy()
+                )
+                for s in schema.all_of
+            ]
+            resolved_schema = replace(resolved_schema, all_of=resolved_all_of)
+
+        # Resolve refs in oneOf
+        if schema.one_of:
+            resolved_one_of = [
+                self._resolve_schema_ref_chain_with_mapping(
+                    s, source_api, target_api, visited.copy()
+                )
+                for s in schema.one_of
+            ]
+            resolved_schema = replace(resolved_schema, one_of=resolved_one_of)
+
+        # Resolve refs in anyOf
+        if schema.any_of:
+            resolved_any_of = [
+                self._resolve_schema_ref_chain_with_mapping(
+                    s, source_api, target_api, visited.copy()
+                )
+                for s in schema.any_of
+            ]
+            resolved_schema = replace(resolved_schema, any_of=resolved_any_of)
+
+        # Resolve refs in additionalProperties (if it's a schema)
+        if schema.additional_properties and hasattr(
+            schema.additional_properties, "ref"
+        ):
+            resolved_add_props = self._resolve_schema_ref_chain_with_mapping(
+                schema.additional_properties, source_api, target_api, visited.copy()
+            )
+            resolved_schema = replace(
+                resolved_schema, additional_properties=resolved_add_props
+            )
+
+        return resolved_schema
 
     def _format_additional_properties(self, add_props) -> str:
         """Format additionalProperties for readable display."""
@@ -1648,9 +1955,31 @@ class ApiComparator:
                 enum2_str = ", ".join(sorted(enum2)) if enum2 else "None"
                 differences.append(f"enum: [{enum1_str}] vs [{enum2_str}]")
         if constraints1.default != constraints2.default:
+            # Only report if hand-authored has a default value and TSP has None
+            if constraints1.default is not None and constraints2.default is None:
+                differences.append(
+                    f"default: {constraints1.default} vs {constraints2.default}"
+                )
+        if constraints1.multiple_of != constraints2.multiple_of:
             differences.append(
-                f"default: {constraints1.default} vs {constraints2.default}"
+                f"multiple_of: {constraints1.multiple_of} vs {constraints2.multiple_of}"
             )
+
+        # Property modifiers
+        if constraints1.read_only != constraints2.read_only:
+            # Only report if hand-authored has True and TSP has None
+            if constraints1.read_only is True and constraints2.read_only is None:
+                differences.append(
+                    f"read_only: {constraints1.read_only} vs {constraints2.read_only}"
+                )
+
+        # Azure-specific extensions
+        if constraints1.x_nullable != constraints2.x_nullable:
+            # Only report if hand-authored has True and TSP has None
+            if constraints1.x_nullable is True and constraints2.x_nullable is None:
+                differences.append(
+                    f"x_nullable: {constraints1.x_nullable} vs {constraints2.x_nullable}"
+                )
 
         return differences
 

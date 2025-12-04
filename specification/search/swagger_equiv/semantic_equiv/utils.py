@@ -1542,7 +1542,7 @@ def write_diffs_excel_v2(result, output_path: str) -> None:
             categories["Parameters"].append(row)
         elif "response" in diff_type.lower():
             categories["Responses"].append(row)
-        elif "definition" in diff_type.lower():
+        elif "def" in diff_type.lower():
             categories["Definitions"].append(row)
         elif any(
             x in diff_type.lower()
@@ -1617,11 +1617,21 @@ def write_diffs_excel_v2(result, output_path: str) -> None:
             if diffs:  # Only create sheet if there are differences
                 df = pd.DataFrame(diffs)
 
-                # For Definitions sheet, the Possible Match is already in its own column
-                # We can now safely remove OperationID and Context Suffix columns
+                # For Definitions sheet, merge Possible Match into Path-Method and rename columns
                 if category == "Definitions":
+                    # Merge Path-Method and Possible Match columns
+                    df["Path-Method"] = df.apply(
+                        lambda row: f"{row['Path-Method']} ~ {row['Possible Match']}"
+                        if pd.notna(row["Possible Match"]) and row["Possible Match"]
+                        else row["Path-Method"],
+                        axis=1,
+                    )
+                    # Rename Path-Method to Definition
+                    df = df.rename(columns={"Path-Method": "Definition"})
+                    # Drop unnecessary columns
                     df = df.drop(
-                        columns=["OperationID", "Context Suffix"], errors="ignore"
+                        columns=["OperationID", "Context Suffix", "Possible Match"],
+                        errors="ignore",
                     )
 
                 # Limit sheet name length for Excel compatibility
