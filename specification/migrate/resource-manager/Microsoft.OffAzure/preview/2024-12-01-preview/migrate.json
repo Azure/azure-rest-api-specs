@@ -4058,7 +4058,8 @@
             "in": "path",
             "description": "Site name",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "name": "body",
@@ -4116,7 +4117,8 @@
             "in": "path",
             "description": "Site name",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           }
         ],
         "responses": {
@@ -4165,14 +4167,16 @@
             "in": "path",
             "description": "Site name",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "name": "jobName",
             "in": "path",
             "description": "Job Arm Name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           }
         ],
         "responses": {
@@ -17357,26 +17361,6 @@
             "read",
             "create"
           ]
-        },
-        "status": {
-          "type": "string",
-          "description": "Gets or sets the Job status.",
-          "readOnly": true
-        },
-        "startTime": {
-          "type": "string",
-          "description": "Gets or sets the Job start time.",
-          "readOnly": true
-        },
-        "endTime": {
-          "type": "string",
-          "description": "Gets or sets the Job end time.",
-          "readOnly": true
-        },
-        "displayName": {
-          "type": "string",
-          "description": "Gets or sets the Display name.",
-          "readOnly": true
         }
       },
       "allOf": [
@@ -17427,6 +17411,26 @@
         "errorSummary": {
           "$ref": "#/definitions/JobErrorSummary",
           "description": "Gets or sets the job error summary.",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "Gets or sets the Job status.",
+          "readOnly": true
+        },
+        "startTime": {
+          "type": "string",
+          "description": "Gets or sets the Job start time.",
+          "readOnly": true
+        },
+        "endTime": {
+          "type": "string",
+          "description": "Gets or sets the Job end time.",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Gets or sets the Display name.",
           "readOnly": true
         }
       }
