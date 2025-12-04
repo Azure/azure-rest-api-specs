@@ -16,6 +16,28 @@ import "./platformUpdates.tsp";
 import "./osImages.tsp";
 import "./updateContents.tsp";
 import "./Operations.tsp";
+import "./models.tsp";
+import "./back-compatible.tsp";
+import "./ArcSetting.tsp";
+import "./Cluster.tsp";
+import "./DeploymentSetting.tsp";
+import "./EdgeDeviceJob.tsp";
+import "./EdgeDevice.tsp";
+import "./Extension.tsp";
+import "./extensionCommon.tsp";
+import "./kubernetesVersions.tsp";
+import "./platformUpdates.tsp";
+import "./Offer.tsp";
+import "./osImages.tsp";
+import "./Publisher.tsp";
+import "./SecuritySetting.tsp";
+import "./Sku.tsp";
+import "./updateContents.tsp";
+import "./UpdateRun.tsp";
+import "./Update.tsp";
+import "./UpdateSummaries.tsp";
+import "./ValidatedSolutionRecipe.tsp";
+import "./hciCommon.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -38,7 +60,7 @@ namespace Microsoft.AzureStackHCI;
  */
 enum Versions {
   /**
-   * The 2025-11-01-preview API version.
+   * The 2025-09-22-preview API version.
    */
   v2025_11_01_preview: "2025-11-01-preview",
 }
