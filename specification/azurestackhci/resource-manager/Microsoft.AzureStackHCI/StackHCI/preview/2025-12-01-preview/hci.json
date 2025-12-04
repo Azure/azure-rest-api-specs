@@ -1066,6 +1066,79 @@
     }
   },
   "definitions": {
+    "ArcExtensionState": {
+      "type": "string",
+      "description": "Arc extension installation state.",
+      "enum": [
+        "NotSpecified",
+        "Accepted",
+        "Canceled",
+        "Creating",
+        "Deleted",
+        "Deleting",
+        "Failed",
+        "Moving",
+        "Succeeded",
+        "Updating"
+      ],
+      "x-ms-enum": {
+        "name": "ArcExtensionState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotSpecified",
+            "value": "NotSpecified",
+            "description": "Arc extension state is not specified."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "Arc extension state is Accepted when extension installation triggered."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Arc extension state is Canceled."
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "Arc extension is in Creating State."
+          },
+          {
+            "name": "Deleted",
+            "value": "Deleted",
+            "description": "Arc extension is in Deleted State."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Arc extension is in Deleting State."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Arc extension state is Failed."
+          },
+          {
+            "name": "Moving",
+            "value": "Moving",
+            "description": "Arc extension is in Moving State."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Arc extension state is Succeeded."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Arc extension is in Updating State."
+          }
+        ]
+      },
+      "readOnly": true
+    },
     "ClusterSdnProperties": {
       "type": "object",
       "description": "Represents the Software Defined Networking (SDN) configuration state of the Azure Stack HCI cluster.",
@@ -1081,6 +1154,43 @@
           "$ref": "#/definitions/SdnProperties"
         }
       ]
+    },
+    "CollectLogJobProperties": {
+      "type": "object",
+      "description": "Properties for pausing a server in the cluster.",
+      "properties": {
+        "fromDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "From date for log collection."
+        },
+        "toDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "To date for log collection."
+        },
+        "lastLogGenerated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "To date for log collection.",
+          "readOnly": true
+        },
+        "reportedProperties": {
+          "$ref": "#/definitions/LogCollectionReportedProperties",
+          "description": "log collection job reported properties.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "fromDate",
+        "toDate"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EdgeMachineJobProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "CollectLog"
     },
     "ConfidentialVmIntent": {
       "type": "string",
@@ -1260,6 +1370,122 @@
         }
       }
     },
+    "DeploymentMode": {
+      "type": "string",
+      "description": "Deployment mode to trigger job.",
+      "enum": [
+        "Validate",
+        "Deploy"
+      ],
+      "x-ms-enum": {
+        "name": "DeploymentMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Validate",
+            "value": "Validate",
+            "description": "Validate ECE action deployment for a cluster."
+          },
+          {
+            "name": "Deploy",
+            "value": "Deploy",
+            "description": "Deploy ECE action deployment for a cluster."
+          }
+        ]
+      }
+    },
+    "DeviceConfiguration": {
+      "type": "object",
+      "description": "Device configuration.",
+      "properties": {
+        "network": {
+          "$ref": "#/definitions/NetworkConfiguration",
+          "description": "Network configuration."
+        },
+        "hostName": {
+          "type": "string",
+          "description": "Hostname of the device."
+        },
+        "webProxy": {
+          "$ref": "#/definitions/WebProxyConfiguration",
+          "description": "Web proxy configuration."
+        },
+        "time": {
+          "$ref": "#/definitions/TimeConfiguration",
+          "description": "Time configuration."
+        },
+        "storage": {
+          "$ref": "#/definitions/StorageConfiguration",
+          "description": "Storage configuration."
+        }
+      }
+    },
+    "DeviceLogCollectionStatus": {
+      "type": "string",
+      "description": "Represents the status of a log collection operation.",
+      "enum": [
+        "NotStarted",
+        "Running",
+        "Failed",
+        "Succeeded",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "DeviceLogCollectionStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "Log collection operation has not been initiated."
+          },
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "Indicates that the log collection operation is currently running."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Indicates that the log collection operation has failed."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Indicates that the log collection operation has completed successfully."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Indicates that the log collection operation has completed successfully."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "DownloadOsJobProperties": {
+      "type": "object",
+      "description": "Represents the properties of Download Os job.",
+      "properties": {
+        "downloadRequest": {
+          "$ref": "#/definitions/DownloadRequest",
+          "description": "Download OS request."
+        },
+        "reportedProperties": {
+          "$ref": "#/definitions/ProvisionOsReportedProperties",
+          "description": "Reported Properties for Download Os job"
+        }
+      },
+      "required": [
+        "downloadRequest"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EdgeMachineJobProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "DownloadOs"
+    },
     "DownloadOsProfile": {
       "type": "object",
       "description": "Operating system profile.",
@@ -1316,9 +1542,31 @@
         "osProfile"
       ]
     },
+    "EceActionStatus": {
+      "type": "object",
+      "description": "Validation / deployment status details for Job.",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Job status.",
+          "readOnly": true
+        },
+        "steps": {
+          "type": "array",
+          "description": "List of steps of Edge device job.",
+          "items": {
+            "$ref": "#/definitions/Step"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
     "EdgeMachine": {
       "type": "object",
-      "description": "Edge Machine resource",
+      "description": "EdgeMachine details.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/EdgeMachineProperties",
@@ -1334,116 +1582,6 @@
           "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
         }
       ]
-    },
-    "EdgeMachineArcExtensionState": {
-      "type": "string",
-      "description": "Arc extension installation state.",
-      "enum": [
-        "NotSpecified",
-        "Accepted",
-        "Canceled",
-        "Creating",
-        "Deleted",
-        "Deleting",
-        "Failed",
-        "Moving",
-        "Succeeded",
-        "Updating"
-      ],
-      "x-ms-enum": {
-        "name": "EdgeMachineArcExtensionState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "NotSpecified",
-            "value": "NotSpecified",
-            "description": "Arc extension state is not specified."
-          },
-          {
-            "name": "Accepted",
-            "value": "Accepted",
-            "description": "Arc extension state is Accepted when extension installation triggered."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "Arc extension state is Canceled."
-          },
-          {
-            "name": "Creating",
-            "value": "Creating",
-            "description": "Arc extension is in Creating State."
-          },
-          {
-            "name": "Deleted",
-            "value": "Deleted",
-            "description": "Arc extension is in Deleted State."
-          },
-          {
-            "name": "Deleting",
-            "value": "Deleting",
-            "description": "Arc extension is in Deleting State."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Arc extension state is Failed."
-          },
-          {
-            "name": "Moving",
-            "value": "Moving",
-            "description": "Arc extension is in Moving State."
-          },
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Arc extension state is Succeeded."
-          },
-          {
-            "name": "Updating",
-            "value": "Updating",
-            "description": "Arc extension is in Updating State."
-          }
-        ]
-      },
-      "readOnly": true
-    },
-    "EdgeMachineCollectLogJobProperties": {
-      "type": "object",
-      "description": "Properties for pausing a server in the cluster.",
-      "properties": {
-        "fromDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "From date for log collection."
-        },
-        "toDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "To date for log collection."
-        },
-        "lastLogGenerated": {
-          "type": "string",
-          "format": "date-time",
-          "description": "To date for log collection.",
-          "readOnly": true
-        },
-        "reportedProperties": {
-          "$ref": "#/definitions/EdgeMachineLogCollectionReportedProperties",
-          "description": "log collection job reported properties.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "fromDate",
-        "toDate"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/EdgeMachineJobProperties"
-        }
-      ],
-      "x-ms-discriminator-value": "CollectLog"
     },
     "EdgeMachineConnectivityStatus": {
       "type": "string",
@@ -1473,231 +1611,6 @@
             "description": "The machine resource is connected."
           }
         ]
-      }
-    },
-    "EdgeMachineDeploymentMode": {
-      "type": "string",
-      "description": "Deployment mode to trigger job.",
-      "enum": [
-        "Validate",
-        "Deploy"
-      ],
-      "x-ms-enum": {
-        "name": "EdgeMachineDeploymentMode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Validate",
-            "value": "Validate",
-            "description": "Validate ECE action deployment for a cluster."
-          },
-          {
-            "name": "Deploy",
-            "value": "Deploy",
-            "description": "Deploy ECE action deployment for a cluster."
-          }
-        ]
-      }
-    },
-    "EdgeMachineDeviceConfiguration": {
-      "type": "object",
-      "description": "Device configuration.",
-      "properties": {
-        "network": {
-          "$ref": "#/definitions/NetworkConfiguration",
-          "description": "Network configuration."
-        },
-        "hostName": {
-          "type": "string",
-          "description": "Hostname of the device."
-        },
-        "webProxy": {
-          "$ref": "#/definitions/WebProxyConfiguration",
-          "description": "Web proxy configuration."
-        },
-        "time": {
-          "$ref": "#/definitions/TimeConfiguration",
-          "description": "Time configuration."
-        },
-        "storage": {
-          "$ref": "#/definitions/StorageConfiguration",
-          "description": "Storage configuration."
-        }
-      }
-    },
-    "EdgeMachineDeviceLogCollectionStatus": {
-      "type": "string",
-      "description": "Represents the status of a log collection operation.",
-      "enum": [
-        "NotStarted",
-        "Running",
-        "Failed",
-        "Succeeded",
-        "Canceled"
-      ],
-      "x-ms-enum": {
-        "name": "EdgeMachineDeviceLogCollectionStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "NotStarted",
-            "value": "NotStarted",
-            "description": "Log collection operation has not been initiated."
-          },
-          {
-            "name": "Running",
-            "value": "Running",
-            "description": "Indicates that the log collection operation is currently running."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Indicates that the log collection operation has failed."
-          },
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Indicates that the log collection operation has completed successfully."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "Indicates that the log collection operation has completed successfully."
-          }
-        ]
-      },
-      "readOnly": true
-    },
-    "EdgeMachineDownloadOsJobProperties": {
-      "type": "object",
-      "description": "Represents the properties of Download Os job.",
-      "properties": {
-        "downloadRequest": {
-          "$ref": "#/definitions/DownloadRequest",
-          "description": "Download OS request."
-        },
-        "reportedProperties": {
-          "$ref": "#/definitions/EdgeMachineProvisionOsReportedProperties",
-          "description": "Reported Properties for Download Os job"
-        }
-      },
-      "required": [
-        "downloadRequest"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/EdgeMachineJobProperties"
-        }
-      ],
-      "x-ms-discriminator-value": "DownloadOs"
-    },
-    "EdgeMachineEceActionStatus": {
-      "type": "object",
-      "description": "Validation / deployment status details for Job.",
-      "properties": {
-        "status": {
-          "type": "string",
-          "description": "Job status.",
-          "readOnly": true
-        },
-        "steps": {
-          "type": "array",
-          "description": "List of steps of Edge device job.",
-          "items": {
-            "$ref": "#/definitions/EdgeMachineStep"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "name"
-          ]
-        }
-      }
-    },
-    "EdgeMachineExtension": {
-      "type": "object",
-      "description": "Arc extension installed on edge device.",
-      "properties": {
-        "extensionName": {
-          "type": "string",
-          "description": "Arc extension name installed on edge device.",
-          "readOnly": true
-        },
-        "state": {
-          "$ref": "#/definitions/EdgeMachineArcExtensionState",
-          "description": "Arc extension state from arc machine extension.",
-          "readOnly": true
-        },
-        "errorDetails": {
-          "type": "array",
-          "description": "Error details while installing Arc extension.",
-          "items": {
-            "$ref": "#/definitions/ErrorDetailModel"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": []
-        },
-        "exception": {
-          "type": "string",
-          "description": "Exception details while installing Arc extension.",
-          "readOnly": true
-        },
-        "extensionResourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Arc Extension Azure resource id.",
-          "readOnly": true
-        },
-        "typeHandlerVersion": {
-          "type": "string",
-          "description": "Extension version installed.",
-          "readOnly": true
-        },
-        "managedBy": {
-          "$ref": "#/definitions/EdgeMachineExtensionManagedBy",
-          "description": "Extension managed by user or Azure.",
-          "readOnly": true
-        }
-      }
-    },
-    "EdgeMachineExtensionManagedBy": {
-      "type": "string",
-      "description": "Extension managed by user or Azure.",
-      "enum": [
-        "User",
-        "Azure"
-      ],
-      "x-ms-enum": {
-        "name": "EdgeMachineExtensionManagedBy",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "User",
-            "value": "User",
-            "description": "Extension managed by user."
-          },
-          {
-            "name": "Azure",
-            "value": "Azure",
-            "description": "Extension managed by Azure."
-          }
-        ]
-      }
-    },
-    "EdgeMachineExtensionProfile": {
-      "type": "object",
-      "description": "Extensions details for edge device.",
-      "properties": {
-        "extensions": {
-          "type": "array",
-          "description": "List of Arc extensions installed on edge device.",
-          "items": {
-            "$ref": "#/definitions/EdgeMachineExtension"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "extensionName"
-          ]
-        }
       }
     },
     "EdgeMachineJob": {
@@ -1749,11 +1662,11 @@
           ]
         },
         "deploymentMode": {
-          "$ref": "#/definitions/EdgeMachineDeploymentMode",
+          "$ref": "#/definitions/DeploymentMode",
           "description": "Deployment mode to trigger job."
         },
         "provisioningState": {
-          "$ref": "#/definitions/EdgeMachineProvisioningState",
+          "$ref": "#/definitions/ProvisioningState",
           "description": "Job provisioning state",
           "readOnly": true
         },
@@ -1775,7 +1688,7 @@
           "readOnly": true
         },
         "status": {
-          "$ref": "#/definitions/EdgeMachineJobStatus",
+          "$ref": "#/definitions/JobStatus",
           "description": "Status of Edge device job.",
           "readOnly": true
         },
@@ -1789,113 +1702,6 @@
       "required": [
         "jobType"
       ]
-    },
-    "EdgeMachineJobReportedProperties": {
-      "type": "object",
-      "description": "Reported Properties for job triggered from cloud.",
-      "properties": {
-        "percentComplete": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The percentage of the job that is complete.",
-          "readOnly": true
-        },
-        "validationStatus": {
-          "$ref": "#/definitions/EdgeMachineEceActionStatus",
-          "description": "Validation status of job.",
-          "readOnly": true
-        },
-        "deploymentStatus": {
-          "$ref": "#/definitions/EdgeMachineEceActionStatus",
-          "description": "Deployment status of job.",
-          "readOnly": true
-        }
-      }
-    },
-    "EdgeMachineJobStatus": {
-      "type": "string",
-      "description": "Represents the various statuses a job can have throughout its lifecycle.",
-      "enum": [
-        "NotSpecified",
-        "ValidationInProgress",
-        "ValidationSuccess",
-        "ValidationFailed",
-        "DeploymentInProgress",
-        "DeploymentFailed",
-        "DeploymentSuccess",
-        "Succeeded",
-        "Failed",
-        "Canceled",
-        "Paused",
-        "Scheduled"
-      ],
-      "x-ms-enum": {
-        "name": "EdgeMachineJobStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "NotSpecified",
-            "value": "NotSpecified",
-            "description": "The job status has not been specified."
-          },
-          {
-            "name": "ValidationInProgress",
-            "value": "ValidationInProgress",
-            "description": "The job is currently undergoing validation."
-          },
-          {
-            "name": "ValidationSuccess",
-            "value": "ValidationSuccess",
-            "description": "The job has successfully passed validation."
-          },
-          {
-            "name": "ValidationFailed",
-            "value": "ValidationFailed",
-            "description": "The job has failed validation."
-          },
-          {
-            "name": "DeploymentInProgress",
-            "value": "DeploymentInProgress",
-            "description": "The job's deployment is currently in progress."
-          },
-          {
-            "name": "DeploymentFailed",
-            "value": "DeploymentFailed",
-            "description": "The job's deployment has failed."
-          },
-          {
-            "name": "DeploymentSuccess",
-            "value": "DeploymentSuccess",
-            "description": "The job has been successfully deployed."
-          },
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "The job has succeeded."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "The job has failed."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "The job has been canceled."
-          },
-          {
-            "name": "Paused",
-            "value": "Paused",
-            "description": "The job is paused."
-          },
-          {
-            "name": "Scheduled",
-            "value": "Scheduled",
-            "description": "The job is scheduled to run."
-          }
-        ]
-      },
-      "readOnly": true
     },
     "EdgeMachineJobType": {
       "type": "string",
@@ -1978,186 +1784,6 @@
         "value"
       ]
     },
-    "EdgeMachineLogCollectionReportedProperties": {
-      "type": "object",
-      "description": "Represents the reported properties of a log collection job.",
-      "properties": {
-        "percentComplete": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The percentage of the job that is complete.",
-          "readOnly": true
-        },
-        "validationStatus": {
-          "$ref": "#/definitions/EdgeMachineEceActionStatus",
-          "description": "Validation status of job.",
-          "readOnly": true
-        },
-        "deploymentStatus": {
-          "$ref": "#/definitions/EdgeMachineEceActionStatus",
-          "description": "Deployment status of job.",
-          "readOnly": true
-        },
-        "logCollectionSessionDetails": {
-          "type": "array",
-          "description": "Details of the log collection session.",
-          "items": {
-            "$ref": "#/definitions/EdgeMachineLogCollectionSession"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "correlationId"
-          ]
-        }
-      }
-    },
-    "EdgeMachineLogCollectionSession": {
-      "type": "object",
-      "description": "Represents a session for collecting logs from an edge device.",
-      "properties": {
-        "startTime": {
-          "type": "string",
-          "description": "The timestamp when log collection started, in ISO 8601 format.",
-          "readOnly": true
-        },
-        "endTime": {
-          "type": "string",
-          "description": "The timestamp when log collection ended, in ISO 8601 format.",
-          "readOnly": true
-        },
-        "timeCollected": {
-          "type": "string",
-          "description": "The total time logs were collected for, in ISO 8601 duration format.",
-          "readOnly": true
-        },
-        "logSize": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The size of the collected logs in bytes.",
-          "readOnly": true
-        },
-        "status": {
-          "$ref": "#/definitions/EdgeMachineDeviceLogCollectionStatus",
-          "description": "The status of the log collection session.",
-          "readOnly": true
-        },
-        "correlationId": {
-          "type": "string",
-          "description": "A unique identifier for correlating this log collection session with other operations or sessions.",
-          "readOnly": true
-        }
-      }
-    },
-    "EdgeMachineNicDetail": {
-      "type": "object",
-      "description": "Network Interface Card (NIC) Details of edge machine.",
-      "properties": {
-        "adapterName": {
-          "type": "string",
-          "description": "Adapter Name of NIC",
-          "readOnly": true
-        },
-        "interfaceDescription": {
-          "type": "string",
-          "description": "Interface Description of NIC",
-          "readOnly": true
-        },
-        "componentId": {
-          "type": "string",
-          "description": "Component Id of NIC",
-          "readOnly": true
-        },
-        "driverVersion": {
-          "type": "string",
-          "description": "Driver Version of NIC",
-          "readOnly": true
-        },
-        "ip4Address": {
-          "type": "string",
-          "description": "Subnet Mask of NIC",
-          "readOnly": true
-        },
-        "subnetMask": {
-          "type": "string",
-          "description": "Subnet Mask of NIC",
-          "readOnly": true
-        },
-        "defaultGateway": {
-          "type": "string",
-          "description": "Default Gateway of NIC",
-          "readOnly": true
-        },
-        "dnsServers": {
-          "type": "array",
-          "description": "DNS Servers for NIC",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "defaultIsolationId": {
-          "type": "string",
-          "description": "Default Isolation of Management NIC",
-          "readOnly": true
-        },
-        "macAddress": {
-          "type": "string",
-          "description": "MAC address information of NIC.",
-          "readOnly": true
-        },
-        "slot": {
-          "type": "string",
-          "description": "The slot attached to the NIC.",
-          "readOnly": true
-        },
-        "switchName": {
-          "type": "string",
-          "description": "The switch attached to the NIC, if any.",
-          "readOnly": true
-        },
-        "nicType": {
-          "type": "string",
-          "description": "The type of NIC, physical, virtual, management.",
-          "readOnly": true
-        },
-        "vlanId": {
-          "type": "string",
-          "description": "The VLAN ID of the physical NIC.",
-          "readOnly": true
-        },
-        "nicStatus": {
-          "type": "string",
-          "description": "The status of NIC, up, disconnected.",
-          "readOnly": true
-        },
-        "rdmaCapability": {
-          "type": "string",
-          "description": "Describes the RDMA capability of the network adapter.",
-          "default": "Disabled",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "EdgeMachineRdmaCapability",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Enabled",
-                "value": "Enabled",
-                "description": "Network Adapter on the device is RDMA Capable"
-              },
-              {
-                "name": "Disabled",
-                "value": "Disabled",
-                "description": "Network Adapter on the device isn't RDMA Capable"
-              }
-            ]
-          },
-          "readOnly": true
-        }
-      }
-    },
     "EdgeMachinePatch": {
       "type": "object",
       "description": "Model for patching edge machine.",
@@ -2188,7 +1814,7 @@
           ]
         },
         "provisioningState": {
-          "$ref": "#/definitions/EdgeMachineProvisioningState",
+          "$ref": "#/definitions/ProvisioningState",
           "description": "The provisioning state of a resource.",
           "readOnly": true
         },
@@ -2272,7 +1898,7 @@
         },
         "machineState": {
           "$ref": "#/definitions/EdgeMachineState",
-          "description": "OS configuration status details",
+          "description": "OS configuration status details ",
           "readOnly": true
         },
         "connectivityStatus": {
@@ -2286,7 +1912,7 @@
           "readOnly": true
         },
         "reportedProperties": {
-          "$ref": "#/definitions/EdgeMachineReportedProperties",
+          "$ref": "#/definitions/ReportedProperties",
           "description": "Reported properties for edge machine.",
           "readOnly": true
         },
@@ -2303,398 +1929,6 @@
           "type": "string",
           "format": "date-time",
           "description": "Last time data updated to service.",
-          "readOnly": true
-        }
-      }
-    },
-    "EdgeMachineProvisionOsJobProperties": {
-      "type": "object",
-      "description": "Represents the properties of an Azure Linux restricted operating environment Provision Os job.",
-      "properties": {
-        "provisioningRequest": {
-          "$ref": "#/definitions/ProvisioningRequest",
-          "description": "Os Provisioning request."
-        },
-        "reportedProperties": {
-          "$ref": "#/definitions/EdgeMachineProvisionOsReportedProperties",
-          "description": "Reported Properties for Provision Os job"
-        }
-      },
-      "required": [
-        "provisioningRequest"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/EdgeMachineJobProperties"
-        }
-      ],
-      "x-ms-discriminator-value": "ProvisionOs"
-    },
-    "EdgeMachineProvisionOsReportedProperties": {
-      "type": "object",
-      "description": "Reported Properties for Provision Os job",
-      "properties": {
-        "percentComplete": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The percentage of the job that is complete.",
-          "readOnly": true
-        },
-        "validationStatus": {
-          "$ref": "#/definitions/EdgeMachineEceActionStatus",
-          "description": "Validation status of job.",
-          "readOnly": true
-        },
-        "deploymentStatus": {
-          "$ref": "#/definitions/EdgeMachineEceActionStatus",
-          "description": "Deployment status of job.",
-          "readOnly": true
-        }
-      }
-    },
-    "EdgeMachineProvisioningState": {
-      "type": "string",
-      "description": "The provisioning state of a resource.",
-      "enum": [
-        "NotSpecified",
-        "Succeeded",
-        "Failed",
-        "Canceled",
-        "InProgress",
-        "Provisioning",
-        "Updating",
-        "Deleting",
-        "Accepted"
-      ],
-      "x-ms-enum": {
-        "name": "EdgeMachineProvisioningState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "NotSpecified",
-            "value": "NotSpecified",
-            "description": "The resource provision state is not specified"
-          },
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Resource has been created."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Resource creation failed."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "Resource creation was canceled."
-          },
-          {
-            "name": "InProgress",
-            "value": "InProgress",
-            "description": "Resource creation is in progress."
-          },
-          {
-            "name": "Provisioning",
-            "value": "Provisioning",
-            "description": "The resource is being provisioned"
-          },
-          {
-            "name": "Updating",
-            "value": "Updating",
-            "description": "The resource is updating"
-          },
-          {
-            "name": "Deleting",
-            "value": "Deleting",
-            "description": "The resource is being deleted"
-          },
-          {
-            "name": "Accepted",
-            "value": "Accepted",
-            "description": "The resource create request has been accepted"
-          }
-        ]
-      },
-      "readOnly": true
-    },
-    "EdgeMachineRdmaCapability": {
-      "type": "string",
-      "description": "Describes the RDMA capability of the network adapter.",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ],
-      "x-ms-enum": {
-        "name": "EdgeMachineRdmaCapability",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Enabled",
-            "value": "Enabled",
-            "description": "Network Adapter on the device is RDMA Capable"
-          },
-          {
-            "name": "Disabled",
-            "value": "Disabled",
-            "description": "Network Adapter on the device isn't RDMA Capable"
-          }
-        ]
-      }
-    },
-    "EdgeMachineRemoteSupportAccessLevel": {
-      "type": "string",
-      "description": "Defines the level of remote support access granted.",
-      "enum": [
-        "None",
-        "Diagnostics",
-        "DiagnosticsAndRepair"
-      ],
-      "x-ms-enum": {
-        "name": "EdgeMachineRemoteSupportAccessLevel",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "None",
-            "value": "None",
-            "description": "No remote support access is granted."
-          },
-          {
-            "name": "Diagnostics",
-            "value": "Diagnostics",
-            "description": "Access is limited to diagnostics information only."
-          },
-          {
-            "name": "DiagnosticsAndRepair",
-            "value": "DiagnosticsAndRepair",
-            "description": "Access includes diagnostics information and the ability to perform repairs."
-          }
-        ]
-      }
-    },
-    "EdgeMachineRemoteSupportJobProperties": {
-      "type": "object",
-      "description": "Properties for adding a server in the cluster.",
-      "properties": {
-        "accessLevel": {
-          "$ref": "#/definitions/EdgeMachineRemoteSupportAccessLevel",
-          "description": "Remote support access level."
-        },
-        "expirationTimestamp": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Remote support expiration timestamp."
-        },
-        "type": {
-          "$ref": "#/definitions/EdgeMachineRemoteSupportType",
-          "description": "Remote support type."
-        },
-        "reportedProperties": {
-          "$ref": "#/definitions/EdgeMachineRemoteSupportReportedProperties",
-          "description": "log collection job reported properties.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "accessLevel",
-        "expirationTimestamp",
-        "type"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/EdgeMachineJobProperties"
-        }
-      ],
-      "x-ms-discriminator-value": "RemoteSupport"
-    },
-    "EdgeMachineRemoteSupportNodeSettings": {
-      "type": "object",
-      "description": "Represents the settings of a remote support node.",
-      "properties": {
-        "state": {
-          "type": "string",
-          "description": "The state of the remote support node.",
-          "readOnly": true
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp when the node settings were created, in UTC.",
-          "readOnly": true
-        },
-        "updatedAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp when the node settings were last updated, in UTC.",
-          "readOnly": true
-        },
-        "connectionStatus": {
-          "type": "string",
-          "description": "The current connection status of the remote support session.",
-          "readOnly": true
-        },
-        "connectionErrorMessage": {
-          "type": "string",
-          "description": "The error message, if any, from the last connection attempt.",
-          "readOnly": true
-        }
-      }
-    },
-    "EdgeMachineRemoteSupportReportedProperties": {
-      "type": "object",
-      "description": "Represents the reported properties of a remote support job.",
-      "properties": {
-        "percentComplete": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The percentage of the job that is complete.",
-          "readOnly": true
-        },
-        "validationStatus": {
-          "$ref": "#/definitions/EdgeMachineEceActionStatus",
-          "description": "Validation status of job.",
-          "readOnly": true
-        },
-        "deploymentStatus": {
-          "$ref": "#/definitions/EdgeMachineEceActionStatus",
-          "description": "Deployment status of job.",
-          "readOnly": true
-        },
-        "nodeSettings": {
-          "$ref": "#/definitions/EdgeMachineRemoteSupportNodeSettings",
-          "description": "Optional settings for configuring the node for remote support.",
-          "readOnly": true
-        },
-        "sessionDetails": {
-          "type": "array",
-          "description": "Details of the remote support session.",
-          "items": {
-            "$ref": "#/definitions/EdgeMachineRemoteSupportSession"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "sessionId"
-          ]
-        }
-      }
-    },
-    "EdgeMachineRemoteSupportSession": {
-      "type": "object",
-      "description": "Represents a remote support session.",
-      "properties": {
-        "sessionId": {
-          "type": "string",
-          "description": "Unique session Id.",
-          "readOnly": true
-        },
-        "sessionStartTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The start time of the remote support session, in UTC.",
-          "readOnly": true
-        },
-        "sessionEndTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The end time of the remote support session, in UTC.",
-          "readOnly": true
-        },
-        "accessLevel": {
-          "$ref": "#/definitions/EdgeMachineRemoteSupportAccessLevel",
-          "description": "The level of access granted during the remote support session.",
-          "readOnly": true
-        },
-        "transcriptLocation": {
-          "type": "string",
-          "description": "The location where the session transcript is stored.",
-          "readOnly": true
-        }
-      }
-    },
-    "EdgeMachineRemoteSupportType": {
-      "type": "string",
-      "description": "Defines the type of remote support action to be performed on an edge device.",
-      "enum": [
-        "Enable",
-        "Revoke"
-      ],
-      "x-ms-enum": {
-        "name": "EdgeMachineRemoteSupportType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Enable",
-            "value": "Enable",
-            "description": "Enables remote support for the edge device."
-          },
-          {
-            "name": "Revoke",
-            "value": "Revoke",
-            "description": "Revokes remote support access for the edge device."
-          }
-        ]
-      }
-    },
-    "EdgeMachineReportedProperties": {
-      "type": "object",
-      "description": "Reported properties for edge machine.",
-      "properties": {
-        "lastUpdated": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Last time data reported.",
-          "readOnly": true
-        },
-        "networkProfile": {
-          "$ref": "#/definitions/NetworkProfile",
-          "description": "Network details for edge machine.",
-          "readOnly": true
-        },
-        "osProfile": {
-          "$ref": "#/definitions/OsProfile",
-          "description": "OS Properties for edge machine.",
-          "readOnly": true
-        },
-        "hardwareProfile": {
-          "$ref": "#/definitions/HardwareProfile",
-          "description": "Hardware related information for edge machine.",
-          "readOnly": true
-        },
-        "storageProfile": {
-          "$ref": "#/definitions/StorageProfile",
-          "description": "Storage related information for edge machine.",
-          "readOnly": true
-        },
-        "sbeDeploymentPackageInfo": {
-          "$ref": "#/definitions/EdgeMachineSbeDeploymentPackageInfo",
-          "description": "Solution builder extension (SBE) deployment package information.",
-          "readOnly": true
-        },
-        "extensionProfile": {
-          "$ref": "#/definitions/EdgeMachineExtensionProfile",
-          "description": "Extension details for edge machine.",
-          "readOnly": true
-        }
-      }
-    },
-    "EdgeMachineSbeDeploymentPackageInfo": {
-      "type": "object",
-      "description": "Solution builder extension (SBE) deployment package information.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "SBE deployment validation code.",
-          "readOnly": true
-        },
-        "message": {
-          "type": "string",
-          "description": "A detailed message that explains the SBE package validation result.",
-          "readOnly": true
-        },
-        "sbeManifest": {
-          "type": "string",
-          "description": "This represents discovered update results for matching updates and store it as SBE manifest.",
           "readOnly": true
         }
       }
@@ -2765,114 +1999,6 @@
         ]
       }
     },
-    "EdgeMachineStep": {
-      "type": "object",
-      "description": "Step details during job execution.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of step.",
-          "readOnly": true
-        },
-        "description": {
-          "type": "string",
-          "description": "Description of step.",
-          "readOnly": true
-        },
-        "fullStepIndex": {
-          "type": "string",
-          "description": "FullStepIndex of step.",
-          "readOnly": true
-        },
-        "startTimeUtc": {
-          "type": "string",
-          "description": "Start time in utc of step.",
-          "readOnly": true
-        },
-        "endTimeUtc": {
-          "type": "string",
-          "description": "End time in utc of step.",
-          "readOnly": true
-        },
-        "status": {
-          "type": "string",
-          "description": "Status of step. Allowed values are 'Error', 'Success', 'InProgress'",
-          "readOnly": true
-        },
-        "steps": {
-          "type": "array",
-          "description": "List of nested steps during job execution..",
-          "items": {
-            "$ref": "#/definitions/EdgeMachineStep"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "name"
-          ]
-        },
-        "exception": {
-          "type": "array",
-          "description": "List of exceptions in job execution.",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "error": {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
-          "description": "Error information for the step",
-          "readOnly": true
-        }
-      }
-    },
-    "EdgeMachineSwitchDetail": {
-      "type": "object",
-      "description": "Switch Details of edge machine.",
-      "properties": {
-        "switchName": {
-          "type": "string",
-          "description": "The name of the switch.",
-          "readOnly": true
-        },
-        "switchType": {
-          "type": "string",
-          "description": "The type of the switch. e.g. external, internal.",
-          "readOnly": true
-        },
-        "extensions": {
-          "type": "array",
-          "description": "This represents extensions installed on virtualSwitch.",
-          "items": {
-            "$ref": "#/definitions/EdgeMachineSwitchExtension"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "extensionName"
-          ]
-        }
-      }
-    },
-    "EdgeMachineSwitchExtension": {
-      "type": "object",
-      "description": "This represents extensions installed on virtualSwitch.",
-      "properties": {
-        "switchId": {
-          "type": "string",
-          "description": "Unique identifier for virtualSwitch.",
-          "readOnly": true
-        },
-        "extensionName": {
-          "type": "string",
-          "description": "This will show extension name for virtualSwitch.",
-          "readOnly": true
-        },
-        "extensionEnabled": {
-          "type": "boolean",
-          "description": "This represents whether extension is enabled on virtualSwitch.",
-          "readOnly": true
-        }
-      }
-    },
     "ErrorDetailModel": {
       "type": "object",
       "description": "details of validation failure",
@@ -2881,6 +2007,93 @@
           "type": "string",
           "description": "Exception details while installing extension.",
           "readOnly": true
+        }
+      }
+    },
+    "Extension": {
+      "type": "object",
+      "description": "Arc extension installed on edge device.",
+      "properties": {
+        "extensionName": {
+          "type": "string",
+          "description": "Arc extension name installed on edge device.",
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "#/definitions/ArcExtensionState",
+          "description": "Arc extension state from arc machine extension.",
+          "readOnly": true
+        },
+        "errorDetails": {
+          "type": "array",
+          "description": "Error details while installing Arc extension.",
+          "items": {
+            "$ref": "#/definitions/ErrorDetailModel"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "exception": {
+          "type": "string",
+          "description": "Exception details while installing Arc extension.",
+          "readOnly": true
+        },
+        "extensionResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Arc Extension Azure resource id.",
+          "readOnly": true
+        },
+        "typeHandlerVersion": {
+          "type": "string",
+          "description": "Extension version installed.",
+          "readOnly": true
+        },
+        "managedBy": {
+          "$ref": "#/definitions/ExtensionManagedBy",
+          "description": "Extension managed by user or Azure.",
+          "readOnly": true
+        }
+      }
+    },
+    "ExtensionManagedBy": {
+      "type": "string",
+      "description": "Extension managed by user or Azure.",
+      "enum": [
+        "User",
+        "Azure"
+      ],
+      "x-ms-enum": {
+        "name": "ExtensionManagedBy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "User",
+            "value": "User",
+            "description": "Extension managed by user."
+          },
+          {
+            "name": "Azure",
+            "value": "Azure",
+            "description": "Extension managed by Azure."
+          }
+        ]
+      }
+    },
+    "ExtensionProfile": {
+      "type": "object",
+      "description": "Extensions details for edge device.",
+      "properties": {
+        "extensions": {
+          "type": "array",
+          "description": "List of Arc extensions installed on edge device.",
+          "items": {
+            "$ref": "#/definitions/Extension"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "extensionName"
+          ]
         }
       }
     },
@@ -3016,6 +2229,113 @@
         ]
       }
     },
+    "JobReportedProperties": {
+      "type": "object",
+      "description": "Reported Properties for job triggered from cloud.",
+      "properties": {
+        "percentComplete": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The percentage of the job that is complete.",
+          "readOnly": true
+        },
+        "validationStatus": {
+          "$ref": "#/definitions/EceActionStatus",
+          "description": "Validation status of job.",
+          "readOnly": true
+        },
+        "deploymentStatus": {
+          "$ref": "#/definitions/EceActionStatus",
+          "description": "Deployment status of job.",
+          "readOnly": true
+        }
+      }
+    },
+    "JobStatus": {
+      "type": "string",
+      "description": "Represents the various statuses a job can have throughout its lifecycle.",
+      "enum": [
+        "NotSpecified",
+        "ValidationInProgress",
+        "ValidationSuccess",
+        "ValidationFailed",
+        "DeploymentInProgress",
+        "DeploymentFailed",
+        "DeploymentSuccess",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Paused",
+        "Scheduled"
+      ],
+      "x-ms-enum": {
+        "name": "JobStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotSpecified",
+            "value": "NotSpecified",
+            "description": "The job status has not been specified."
+          },
+          {
+            "name": "ValidationInProgress",
+            "value": "ValidationInProgress",
+            "description": "The job is currently undergoing validation."
+          },
+          {
+            "name": "ValidationSuccess",
+            "value": "ValidationSuccess",
+            "description": "The job has successfully passed validation."
+          },
+          {
+            "name": "ValidationFailed",
+            "value": "ValidationFailed",
+            "description": "The job has failed validation."
+          },
+          {
+            "name": "DeploymentInProgress",
+            "value": "DeploymentInProgress",
+            "description": "The job's deployment is currently in progress."
+          },
+          {
+            "name": "DeploymentFailed",
+            "value": "DeploymentFailed",
+            "description": "The job's deployment has failed."
+          },
+          {
+            "name": "DeploymentSuccess",
+            "value": "DeploymentSuccess",
+            "description": "The job has been successfully deployed."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The job has succeeded."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The job has failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The job has been canceled."
+          },
+          {
+            "name": "Paused",
+            "value": "Paused",
+            "description": "The job is paused."
+          },
+          {
+            "name": "Scheduled",
+            "value": "Scheduled",
+            "description": "The job is scheduled to run."
+          }
+        ]
+      },
+      "readOnly": true
+    },
     "KubernetesVersion": {
       "type": "object",
       "description": "Represents a kubernetes version resource.",
@@ -3064,6 +2384,76 @@
       "required": [
         "version"
       ]
+    },
+    "LogCollectionReportedProperties": {
+      "type": "object",
+      "description": "Represents the reported properties of a log collection job.",
+      "properties": {
+        "percentComplete": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The percentage of the job that is complete.",
+          "readOnly": true
+        },
+        "validationStatus": {
+          "$ref": "#/definitions/EceActionStatus",
+          "description": "Validation status of job.",
+          "readOnly": true
+        },
+        "deploymentStatus": {
+          "$ref": "#/definitions/EceActionStatus",
+          "description": "Deployment status of job.",
+          "readOnly": true
+        },
+        "logCollectionSessionDetails": {
+          "type": "array",
+          "description": "Details of the log collection session.",
+          "items": {
+            "$ref": "#/definitions/LogCollectionSession"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "correlationId"
+          ]
+        }
+      }
+    },
+    "LogCollectionSession": {
+      "type": "object",
+      "description": "Represents a session for collecting logs from an edge device.",
+      "properties": {
+        "startTime": {
+          "type": "string",
+          "description": "The timestamp when log collection started, in ISO 8601 format.",
+          "readOnly": true
+        },
+        "endTime": {
+          "type": "string",
+          "description": "The timestamp when log collection ended, in ISO 8601 format.",
+          "readOnly": true
+        },
+        "timeCollected": {
+          "type": "string",
+          "description": "The total time logs were collected for, in ISO 8601 duration format.",
+          "readOnly": true
+        },
+        "logSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The size of the collected logs in bytes.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/DeviceLogCollectionStatus",
+          "description": "The status of the log collection session.",
+          "readOnly": true
+        },
+        "correlationId": {
+          "type": "string",
+          "description": "A unique identifier for correlating this log collection session with other operations or sessions.",
+          "readOnly": true
+        }
+      }
     },
     "NetworkAdapter": {
       "type": "object",
@@ -3135,7 +2525,7 @@
           "type": "array",
           "description": "List of Network Interface Card (NIC) Details of edge machine.",
           "items": {
-            "$ref": "#/definitions/EdgeMachineNicDetail"
+            "$ref": "#/definitions/NicDetail"
           },
           "readOnly": true,
           "x-ms-identifiers": [
@@ -3146,12 +2536,122 @@
           "type": "array",
           "description": "List of switch Details of edge machine.",
           "items": {
-            "$ref": "#/definitions/EdgeMachineSwitchDetail"
+            "$ref": "#/definitions/SwitchDetail"
           },
           "readOnly": true,
           "x-ms-identifiers": [
             "switchName"
           ]
+        }
+      }
+    },
+    "NicDetail": {
+      "type": "object",
+      "description": "Network Interface Card (NIC) Details of edge machine.",
+      "properties": {
+        "adapterName": {
+          "type": "string",
+          "description": "Adapter Name of NIC",
+          "readOnly": true
+        },
+        "interfaceDescription": {
+          "type": "string",
+          "description": "Interface Description of NIC",
+          "readOnly": true
+        },
+        "componentId": {
+          "type": "string",
+          "description": "Component Id of NIC",
+          "readOnly": true
+        },
+        "driverVersion": {
+          "type": "string",
+          "description": "Driver Version of NIC",
+          "readOnly": true
+        },
+        "ip4Address": {
+          "type": "string",
+          "description": "Subnet Mask of NIC",
+          "readOnly": true
+        },
+        "subnetMask": {
+          "type": "string",
+          "description": "Subnet Mask of NIC",
+          "readOnly": true
+        },
+        "defaultGateway": {
+          "type": "string",
+          "description": "Default Gateway of NIC",
+          "readOnly": true
+        },
+        "dnsServers": {
+          "type": "array",
+          "description": "DNS Servers for NIC",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "defaultIsolationId": {
+          "type": "string",
+          "description": "Default Isolation of Management NIC",
+          "readOnly": true
+        },
+        "macAddress": {
+          "type": "string",
+          "description": "MAC address information of NIC.",
+          "readOnly": true
+        },
+        "slot": {
+          "type": "string",
+          "description": "The slot attached to the NIC.",
+          "readOnly": true
+        },
+        "switchName": {
+          "type": "string",
+          "description": "The switch attached to the NIC, if any.",
+          "readOnly": true
+        },
+        "nicType": {
+          "type": "string",
+          "description": "The type of NIC, physical, virtual, management.",
+          "readOnly": true
+        },
+        "vlanId": {
+          "type": "string",
+          "description": "The VLAN ID of the physical NIC.",
+          "readOnly": true
+        },
+        "nicStatus": {
+          "type": "string",
+          "description": "The status of NIC, up, disconnected.",
+          "readOnly": true
+        },
+        "rdmaCapability": {
+          "type": "string",
+          "description": "Describes the RDMA capability of the network adapter.",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "RdmaCapability",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "Network Adapter on the device is RDMA Capable"
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "Network Adapter on the device isn't RDMA Capable"
+              }
+            ]
+          },
+          "readOnly": true
         }
       }
     },
@@ -3649,6 +3149,51 @@
         "platformUpdateDetails"
       ]
     },
+    "ProvisionOsJobProperties": {
+      "type": "object",
+      "description": "Represents the properties of an Azure Linux restricted operating environment Provision Os job.",
+      "properties": {
+        "provisioningRequest": {
+          "$ref": "#/definitions/ProvisioningRequest",
+          "description": "Os Provisioning request."
+        },
+        "reportedProperties": {
+          "$ref": "#/definitions/ProvisionOsReportedProperties",
+          "description": "Reported Properties for Provision Os job"
+        }
+      },
+      "required": [
+        "provisioningRequest"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EdgeMachineJobProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "ProvisionOs"
+    },
+    "ProvisionOsReportedProperties": {
+      "type": "object",
+      "description": "Reported Properties for Provision Os job",
+      "properties": {
+        "percentComplete": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The percentage of the job that is complete.",
+          "readOnly": true
+        },
+        "validationStatus": {
+          "$ref": "#/definitions/EceActionStatus",
+          "description": "Validation status of job.",
+          "readOnly": true
+        },
+        "deploymentStatus": {
+          "$ref": "#/definitions/EceActionStatus",
+          "description": "Deployment status of job.",
+          "readOnly": true
+        }
+      }
+    },
     "ProvisioningDetails": {
       "type": "object",
       "description": "Details for device provisioning.",
@@ -3728,7 +3273,7 @@
           "description": "Onboarding configuration."
         },
         "deviceConfiguration": {
-          "$ref": "#/definitions/EdgeMachineDeviceConfiguration",
+          "$ref": "#/definitions/DeviceConfiguration",
           "description": "Device configuration."
         },
         "customConfiguration": {
@@ -3740,6 +3285,353 @@
         "target",
         "osProfile"
       ]
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "NotSpecified",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "InProgress",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotSpecified",
+            "value": "NotSpecified",
+            "description": "The resource provision state is not specified"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "Resource creation is in progress."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "RdmaCapability": {
+      "type": "string",
+      "description": "Describes the RDMA capability of the network adapter.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "RdmaCapability",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Network Adapter on the device is RDMA Capable"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Network Adapter on the device isn't RDMA Capable"
+          }
+        ]
+      }
+    },
+    "RemoteSupportAccessLevel": {
+      "type": "string",
+      "description": "Defines the level of remote support access granted.",
+      "enum": [
+        "None",
+        "Diagnostics",
+        "DiagnosticsAndRepair"
+      ],
+      "x-ms-enum": {
+        "name": "RemoteSupportAccessLevel",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "No remote support access is granted."
+          },
+          {
+            "name": "Diagnostics",
+            "value": "Diagnostics",
+            "description": "Access is limited to diagnostics information only."
+          },
+          {
+            "name": "DiagnosticsAndRepair",
+            "value": "DiagnosticsAndRepair",
+            "description": "Access includes diagnostics information and the ability to perform repairs."
+          }
+        ]
+      }
+    },
+    "RemoteSupportJobProperties": {
+      "type": "object",
+      "description": "Properties for adding a server in the cluster.",
+      "properties": {
+        "accessLevel": {
+          "$ref": "#/definitions/RemoteSupportAccessLevel",
+          "description": "Remote support access level."
+        },
+        "expirationTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Remote support expiration timestamp."
+        },
+        "type": {
+          "$ref": "#/definitions/RemoteSupportType",
+          "description": "Remote support type."
+        },
+        "reportedProperties": {
+          "$ref": "#/definitions/RemoteSupportReportedProperties",
+          "description": "log collection job reported properties.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "accessLevel",
+        "expirationTimestamp",
+        "type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EdgeMachineJobProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "RemoteSupport"
+    },
+    "RemoteSupportNodeSettings": {
+      "type": "object",
+      "description": "Represents the settings of a remote support node.",
+      "properties": {
+        "state": {
+          "type": "string",
+          "description": "The state of the remote support node.",
+          "readOnly": true
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the node settings were created, in UTC.",
+          "readOnly": true
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the node settings were last updated, in UTC.",
+          "readOnly": true
+        },
+        "connectionStatus": {
+          "type": "string",
+          "description": "The current connection status of the remote support session.",
+          "readOnly": true
+        },
+        "connectionErrorMessage": {
+          "type": "string",
+          "description": "The error message, if any, from the last connection attempt.",
+          "readOnly": true
+        }
+      }
+    },
+    "RemoteSupportReportedProperties": {
+      "type": "object",
+      "description": "Represents the reported properties of a remote support job.",
+      "properties": {
+        "percentComplete": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The percentage of the job that is complete.",
+          "readOnly": true
+        },
+        "validationStatus": {
+          "$ref": "#/definitions/EceActionStatus",
+          "description": "Validation status of job.",
+          "readOnly": true
+        },
+        "deploymentStatus": {
+          "$ref": "#/definitions/EceActionStatus",
+          "description": "Deployment status of job.",
+          "readOnly": true
+        },
+        "nodeSettings": {
+          "$ref": "#/definitions/RemoteSupportNodeSettings",
+          "description": "Optional settings for configuring the node for remote support.",
+          "readOnly": true
+        },
+        "sessionDetails": {
+          "type": "array",
+          "description": "Details of the remote support session.",
+          "items": {
+            "$ref": "#/definitions/RemoteSupportSession"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "sessionId"
+          ]
+        }
+      }
+    },
+    "RemoteSupportSession": {
+      "type": "object",
+      "description": "Represents a remote support session.",
+      "properties": {
+        "sessionId": {
+          "type": "string",
+          "description": "Unique session Id.",
+          "readOnly": true
+        },
+        "sessionStartTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start time of the remote support session, in UTC.",
+          "readOnly": true
+        },
+        "sessionEndTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end time of the remote support session, in UTC.",
+          "readOnly": true
+        },
+        "accessLevel": {
+          "$ref": "#/definitions/RemoteSupportAccessLevel",
+          "description": "The level of access granted during the remote support session.",
+          "readOnly": true
+        },
+        "transcriptLocation": {
+          "type": "string",
+          "description": "The location where the session transcript is stored.",
+          "readOnly": true
+        }
+      }
+    },
+    "RemoteSupportType": {
+      "type": "string",
+      "description": "Defines the type of remote support action to be performed on an edge device.",
+      "enum": [
+        "Enable",
+        "Revoke"
+      ],
+      "x-ms-enum": {
+        "name": "RemoteSupportType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enable",
+            "value": "Enable",
+            "description": "Enables remote support for the edge device."
+          },
+          {
+            "name": "Revoke",
+            "value": "Revoke",
+            "description": "Revokes remote support access for the edge device."
+          }
+        ]
+      }
+    },
+    "ReportedProperties": {
+      "type": "object",
+      "description": "Reported properties for edge machine.",
+      "properties": {
+        "lastUpdated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last time data reported.",
+          "readOnly": true
+        },
+        "networkProfile": {
+          "$ref": "#/definitions/NetworkProfile",
+          "description": "Network details for edge machine.",
+          "readOnly": true
+        },
+        "osProfile": {
+          "$ref": "#/definitions/OsProfile",
+          "description": "OS Properties for edge machine.",
+          "readOnly": true
+        },
+        "hardwareProfile": {
+          "$ref": "#/definitions/HardwareProfile",
+          "description": "Hardware related information for edge machine.",
+          "readOnly": true
+        },
+        "storageProfile": {
+          "$ref": "#/definitions/StorageProfile",
+          "description": "Storage related information for edge machine.",
+          "readOnly": true
+        },
+        "sbeDeploymentPackageInfo": {
+          "$ref": "#/definitions/SbeDeploymentPackageInfo",
+          "description": "Solution builder extension (SBE) deployment package information.",
+          "readOnly": true
+        },
+        "extensionProfile": {
+          "$ref": "#/definitions/ExtensionProfile",
+          "description": "Extension details for edge machine.",
+          "readOnly": true
+        }
+      }
+    },
+    "SbeDeploymentPackageInfo": {
+      "type": "object",
+      "description": "Solution builder extension (SBE) deployment package information.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "SBE deployment validation code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "A detailed message that explains the SBE package validation result.",
+          "readOnly": true
+        },
+        "sbeManifest": {
+          "type": "string",
+          "description": "This represents discovered update results for matching updates and store it as SBE manifest.",
+          "readOnly": true
+        }
+      }
     },
     "SdnIntegrationIntent": {
       "type": "string",
@@ -3857,13 +3749,73 @@
           }
         },
         "deviceConfiguration": {
-          "$ref": "#/definitions/EdgeMachineDeviceConfiguration",
+          "$ref": "#/definitions/DeviceConfiguration",
           "description": "Edge Device configuration received from site common configuration."
         }
       },
       "required": [
         "siteResourceId"
       ]
+    },
+    "Step": {
+      "type": "object",
+      "description": "Step details during job execution.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of step.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of step.",
+          "readOnly": true
+        },
+        "fullStepIndex": {
+          "type": "string",
+          "description": "FullStepIndex of step.",
+          "readOnly": true
+        },
+        "startTimeUtc": {
+          "type": "string",
+          "description": "Start time in utc of step.",
+          "readOnly": true
+        },
+        "endTimeUtc": {
+          "type": "string",
+          "description": "End time in utc of step.",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of step. Allowed values are 'Error', 'Success', 'InProgress'",
+          "readOnly": true
+        },
+        "steps": {
+          "type": "array",
+          "description": "List of nested steps during job execution..",
+          "items": {
+            "$ref": "#/definitions/Step"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "exception": {
+          "type": "array",
+          "description": "List of exceptions in job execution.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
+          "description": "Error information for the step",
+          "readOnly": true
+        }
+      }
     },
     "StorageConfiguration": {
       "type": "object",
@@ -3883,6 +3835,54 @@
           "type": "integer",
           "format": "int64",
           "description": "Number of storage disks in the device with $CanPool as true.",
+          "readOnly": true
+        }
+      }
+    },
+    "SwitchDetail": {
+      "type": "object",
+      "description": "Switch Details of edge machine.",
+      "properties": {
+        "switchName": {
+          "type": "string",
+          "description": "The name of the switch.",
+          "readOnly": true
+        },
+        "switchType": {
+          "type": "string",
+          "description": "The type of the switch. e.g. external, internal.",
+          "readOnly": true
+        },
+        "extensions": {
+          "type": "array",
+          "description": "This represents extensions installed on virtualSwitch.",
+          "items": {
+            "$ref": "#/definitions/SwitchExtension"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "extensionName"
+          ]
+        }
+      }
+    },
+    "SwitchExtension": {
+      "type": "object",
+      "description": "This represents extensions installed on virtualSwitch.",
+      "properties": {
+        "switchId": {
+          "type": "string",
+          "description": "Unique identifier for virtualSwitch.",
+          "readOnly": true
+        },
+        "extensionName": {
+          "type": "string",
+          "description": "This will show extension name for virtualSwitch.",
+          "readOnly": true
+        },
+        "extensionEnabled": {
+          "type": "boolean",
+          "description": "This represents whether extension is enabled on virtualSwitch.",
           "readOnly": true
         }
       }

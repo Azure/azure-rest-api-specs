@@ -19,7 +19,6 @@ import "./updateContents.tsp";
 import "./Operations.tsp";
 import "./edgeMachine.tsp";
 import "./edgeMachineJobs.tsp";
-import "./edgeMachineModels.tsp";
 import "./validateOwnershipVouchers.tsp";
 
 using TypeSpec.Rest;
