@@ -577,15 +577,6 @@ input-file:
 - preview/2018-12-01-preview/costmanagement.json
 ```
 
-### Tag: package-2019-01
-
-These settings apply only when `--tag=package-2019-01` is specified on the command line.
-
-``` yaml $(tag) == 'package-2019-01'
-input-file:
-- stable/2019-01-01/costmanagement.json
-```
-
 ---
 
 # Code Generation

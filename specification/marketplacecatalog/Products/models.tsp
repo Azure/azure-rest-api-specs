@@ -273,6 +273,21 @@ model ProductBase {
 
   @doc("Used to map SaaS apps to their Azure AD appIds")
   activeDirectoryAppId?: string;
+
+  @doc("Labels used to filter the product")
+  productLabels?: string[];
+
+  @doc("An identifier for publishing services")
+  mixProductId?: string;
+
+  @doc("List of linked Add Ins provided for the item")
+  linkedAddIns?: string[];
+
+  @doc("Data aggregated from product Sku level")
+  skuAggregatedData?: SkuAggregatedData;
+
+  @doc("Maximum quantity allowed on a proposal")
+  maxQuantityOnProposal?: int32;
 }
 
 @doc("Returns a subset of Product attributes")
@@ -314,7 +329,7 @@ model MarketStartPrice {
   currency?: string;
 }
 
-@doc("Summary description of the product")
+@doc("Returns the full set of Product attributes")
 @resource("product")
 model ProductDetails {
   ...ProductBase;
@@ -324,9 +339,6 @@ model ProductDetails {
 
   @doc("List of Images")
   images?: ImageGroup[];
-
-  @doc("List of linked add ins provided for the item")
-  linkedAddIns?: string[];
 
   @doc("List of Links provided for the item")
   links?: LinkProperties[];
@@ -405,6 +417,12 @@ model ProductDetails {
 
   @doc("Full set of plan/SKU attributes")
   plans?: PlanDetails[];
+
+  @doc("Custom passthrough data provided by the publisher")
+  productCustomData?: string;
+
+  @doc("The Id of the service")
+  serviceId?: string;
 }
 
 @doc("Sku object related to given plan")
@@ -440,7 +458,7 @@ model PlanMetadata {
   relatedSkus?: PlanSkuRelation[];
 }
 
-@doc("Returns a subset of Plan attributes")
+@doc("Returns the full set of Plan attributes")
 model PlanDetails {
   ...PlanSummary;
 
@@ -530,6 +548,35 @@ model PlanDetails {
 
   @doc("SKU price related properties")
   offeringProperties?: OfferingProperties[];
+
+  @doc("Plan's artifacts version")
+  planArtifactsVersion?: string;
+}
+
+@doc("Data aggregated from product Sku level")
+model SkuAggregatedData {
+  @doc("Superset of actions aggregated from availabilities and terms across product SKUs")
+  actions?: string[];
+
+  @doc("Superset of sku availability term states")
+  states?: string[];
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "changing this would be a breaking change for existing partners"
+  @doc("There is at least one EndUser Eligible Sku")
+  hasEndUserEligibleSKUs?: boolean;
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "changing this would be a breaking change for existing partners"
+  @doc("There is at least one Admin Eligible Sku")
+  hasAdminEligibleSKUs?: boolean;
+
+  @doc("Superset of Sku features")
+  features?: string[];
+
+  @doc("Superset of Sku programs")
+  programs?: string[];
+
+  @doc("There is at least one Sku with consumption components")
+  hasConsumptionComponents?: boolean;
 }
 
 @doc("Returns a subset of Plan attributes")
