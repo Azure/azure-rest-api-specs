@@ -25,7 +25,18 @@ jobs:
       - name: Validate folder structure
         run: |
           echo "Running folder structure validation..."
-          INVALID_FILES=$(git diff --name-only origin/${{ github.base_ref }} HEAD | grep -vE '^lease/[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+/[A-Za-z0-9_-]+/lease\.yaml$' || true)
+          
+          # Get all changed files in the lease/ directory
+          LEASE_FILES=$(git diff --name-only origin/${{ github.base_ref }} HEAD | grep '^lease/' || true)
+          
+          if [ -z "$LEASE_FILES" ]; then
+            echo "No lease files to validate"
+            exit 0
+          fi
+          
+          # Check if any files don't match the expected pattern
+          INVALID_FILES=$(echo "$LEASE_FILES" | grep -vE '^lease/[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+/lease\.yaml$' || true)
+          
           if [ -n "$INVALID_FILES" ]; then
             echo ""
             echo "❌ Invalid folder structure detected!"
