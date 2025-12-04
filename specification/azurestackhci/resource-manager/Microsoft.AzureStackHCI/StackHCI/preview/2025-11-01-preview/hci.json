@@ -5104,8 +5104,11 @@
       "description": "ArcSettings properties.",
       "properties": {
         "connectivityProperties": {
-          "$ref": "#/definitions/ArcConnectivityProperties",
-          "description": "contains connectivity related configuration for ARC resources"
+          "type": "array",
+          "description": "contains connectivity related configuration for ARC resources",
+          "items": {
+            "$ref": "#/definitions/ArcConnectivityProperties"
+          }
         }
       }
     },
