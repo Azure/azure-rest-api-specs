@@ -16,14 +16,20 @@ using TypeSpec.Http;
 using TypeSpec.Versioning;
 using Azure.Core;
 
+/** Subscription Key Authentication */
+model SubscriptionKeyAuth
+  is ApiKeyAuth<ApiKeyLocation.header, "subscription-key">;
+
+/** SAS Token Authentication */
+model SasTokenAuth is ApiKeyAuth<ApiKeyLocation.header, "SAS Token">;
+
 /**
  * Azure Maps Render REST APIs
  */
 @useAuth(
-  AadOauth2Auth<["https://atlas.microsoft.com/.default"]> | ApiKeyAuth<
-    ApiKeyLocation.header,
-    "subscription-key"
-  > | ApiKeyAuth<ApiKeyLocation.header, "SAS Token">
+  AadOauth2Auth<[
+    "https://atlas.microsoft.com/.default"
+  ]> | SubscriptionKeyAuth | SasTokenAuth
 )
 @service(#{ title: "Maps Render" })
 @versioned(Versions)
@@ -34,14 +40,14 @@ using Azure.Core;
     endpoint: "https://atlas.microsoft.com",
   }
 )
-namespace MapsRender;
-
-/**
- * The available API versions.
- */
-enum Versions {
+namespace MapsRender {
   /**
-   * The 2024-04-01 API version.
+   * The available API versions.
    */
-  v2024_04_01: "2024-04-01",
+  enum Versions {
+    /**
+     * The 2024-04-01 API version.
+     */
+    v2024_04_01: "2024-04-01",
+  }
 }

@@ -44,10 +44,10 @@
       ]
     },
     {
-      "ApiKeyAuth": []
+      "SubscriptionKeyAuth": []
     },
     {
-      "ApiKeyAuth": []
+      "SasTokenAuth": []
     }
   ],
   "securityDefinitions": {
@@ -61,9 +61,16 @@
       },
       "tokenUrl": "https://login.microsoftonline.com/common/oauth2/token"
     },
-    "ApiKeyAuth": {
+    "SasTokenAuth": {
       "type": "apiKey",
+      "description": "SAS Token Authentication",
       "name": "SAS Token",
+      "in": "header"
+    },
+    "SubscriptionKeyAuth": {
+      "type": "apiKey",
+      "description": "Subscription Key Authentication",
+      "name": "subscription-key",
       "in": "header"
     }
   },
