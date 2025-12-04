@@ -118,20 +118,18 @@ jobs:
           done
           
           # Summary
-          echo ""
           echo "========================================="
           echo "Validation Summary"
           echo "========================================="
           
           if [ -n "$CONTENT_ERRORS" ]; then
-            echo "Content validation errors:"
+            echo "Content validation errors in lease.yaml file:"
             echo -e "$CONTENT_ERRORS"
           fi
           
           if [ $EXIT_CODE -eq 0 ]; then
             echo "✅ All validations passed!"
           else
-            echo ""
             echo "❌ Validation failed - fix errors above"
           fi
           
