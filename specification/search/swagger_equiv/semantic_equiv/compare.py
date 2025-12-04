@@ -90,12 +90,10 @@ class DifferenceType(Enum):
     MISSING_DEFINITION = "missing_def_in_tsp"
     EXTRA_DEFINITION = "extra_def_in_tsp"
     DEFINITION_MISMATCH = "def_mismatch"
-    DEFINITION_MISMATCH_X_NULLABLE = "def_mismatch_x_nullable_true_missing_in_tsp"
-    DEFINITION_MISMATCH_ADDITIONAL_PROPERTIES = (
-        "def_mismatch_additionalProperties_true_missing_in_tsp"
-    )
-    DEFINITION_MISMATCH_DEFAULT = "def_mismatch_default_missing_in_tsp"
-    DEFINITION_MISMATCH_READONLY = "def_mismatch_readOnly_true_missing_in_tsp"
+    DEFINITION_MISMATCH_X_NULLABLE = "def_mismatch_x-nullable-true"
+    DEFINITION_MISMATCH_ADDITIONAL_PROPERTIES = "def_mismatch_additionalProperties-true"
+    DEFINITION_MISMATCH_DEFAULT = "def_mismatch_default-value"
+    DEFINITION_MISMATCH_READONLY = "def_mismatch_readOnly-true"
 
     # Schema-level differences
     SCHEMA_TYPE_MISMATCH = "schema_type_mismatch"
@@ -960,6 +958,11 @@ class ApiComparator:
                     resolved_schema1, resolved_schema2
                 )
 
+                # Detect specific patterns for granular categorization
+                mismatch_type = self._categorize_definition_mismatch(
+                    f"{missing_def} VS {extra_def}", schema_diffs
+                )
+
                 # Format diffs in short format
                 short_diffs = self._format_short_diffs(schema_diffs)
                 diff_details = (
@@ -968,12 +971,10 @@ class ApiComparator:
                     else "unknown differences"
                 )
 
-                message = (
-                    f"Definition '{missing_def}' VS '{extra_def}':\n{diff_details}"
-                )
+                message = f"Definition '{missing_def}' VS '{extra_def}':{diff_details}"
                 self.differences.append(
                     Difference(
-                        type=DifferenceType.DEFINITION_MISMATCH,
+                        type=mismatch_type,
                         message=message,
                         context=f"||{missing_def}||||{extra_def}",
                     )
@@ -1073,7 +1074,7 @@ class ApiComparator:
                     else "unknown differences"
                 )
 
-                message = f"{def_name}{no_ref_info}\n{diff_details}"
+                message = f"Definition '{def_name}'{no_ref_info}:{diff_details}"
 
                 self.differences.append(
                     Difference(
@@ -1098,8 +1099,8 @@ class ApiComparator:
                 diff = diff.replace("read_only", "readOnly")
             # Keep property diffs short
             elif diff.startswith("property '"):
-                # property 'name': type: string vs None -> property name: type: string vs None
-                diff = diff.replace("property '", "property ").replace("':", ":")
+                # property 'name': type: string vs None -> property `name`: type: string vs None
+                diff = diff.replace("property '", "property `").replace("':", "`:")
             short_diffs.append(diff)
         return short_diffs
 
@@ -1110,10 +1111,10 @@ class ApiComparator:
         Categorize definition mismatch based on specific patterns.
 
         Returns a more specific DifferenceType if the mismatch matches known patterns:
-        - x-nullable missing in TSP
-        - additionalProperties missing in TSP
+        - x-nullable:true missing in TSP
+        - additionalProperties:true missing in TSP
         - default value missing in TSP
-        - readOnly missing in TSP
+        - readOnly:true missing in TSP
 
         If multiple patterns are found, returns a generic DEFINITION_MISMATCH
         to indicate mixed issues (the actual issues are shown in the message).
@@ -1130,19 +1131,22 @@ class ApiComparator:
         matched_patterns = []
 
         # Pattern: x-nullable missing in TSP (detected in constraint comparison)
-        if "constraint x_nullable:" in all_diffs and " vs none" in all_diffs:
+        # Can appear at top level or nested in allOf/oneOf/anyOf or properties
+        if "x_nullable:" in all_diffs and " vs none" in all_diffs:
             matched_patterns.append(DifferenceType.DEFINITION_MISMATCH_X_NULLABLE)
 
         # Pattern: readOnly missing in TSP (detected in constraint comparison)
-        if "constraint read_only:" in all_diffs and " vs none" in all_diffs:
+        # Can appear at top level or nested in allOf/oneOf/anyOf or properties
+        if "read_only:" in all_diffs and " vs none" in all_diffs:
             matched_patterns.append(DifferenceType.DEFINITION_MISMATCH_READONLY)
 
         # Pattern: constraint default: <value> vs None
-        if "constraint default:" in all_diffs and " vs none" in all_diffs:
+        # Can appear at top level or nested in allOf/oneOf/anyOf or properties
+        if "default:" in all_diffs and " vs none" in all_diffs:
             matched_patterns.append(DifferenceType.DEFINITION_MISMATCH_DEFAULT)
 
         # Pattern: additionalProperties: True vs None or additionalProperties: {...} vs None
-        if "additionalproperties:" in all_diffs and " vs none" in all_diffs:
+        if "additionalProperties:" in all_diffs and " vs none" in all_diffs:
             matched_patterns.append(
                 DifferenceType.DEFINITION_MISMATCH_ADDITIONAL_PROPERTIES
             )
@@ -1229,6 +1233,11 @@ class ApiComparator:
                         differences.append(
                             f"property '{prop_name}': {'; '.join(prop_diffs)}"
                         )
+                    else:
+                        # Property differs but we couldn't determine why - report it anyway
+                        differences.append(
+                            f"property '{prop_name}': schemas differ (details unknown)"
+                        )
 
             if schema1.required != schema2.required:
                 req1 = schema1.required or frozenset()
@@ -1262,6 +1271,11 @@ class ApiComparator:
                 differences.append(
                     f"items schema: {schema1.items is not None} vs {schema2.items is not None}"
                 )
+            elif schema1.items is not None and schema2.items is not None:
+                # Both have items but they differ
+                items_diffs = self._get_schema_differences(schema1.items, schema2.items)
+                if items_diffs:
+                    differences.append(f"items: {'; '.join(items_diffs)}")
 
         # Constraint differences
         if not self._constraints_equal(schema1.constraints, schema2.constraints):
@@ -1565,8 +1579,8 @@ class ApiComparator:
                     resolved1, schema2, check_inline_vs_ref=False
                 )
                 if actual_diffs:
-                    return f"inline vs ref: hand-authored uses ref '{ref_name}', tsp defines inline {schema2.type}. Actual differences: {'; '.join(actual_diffs)}"
-                return f"inline vs ref: hand-authored uses ref '{ref_name}', tsp defines inline {schema2.type}"
+                    return f"ref '{ref_name}' (hand-authored) vs inline (tsp). Actual diff: {'; '.join(actual_diffs)}"
+                return f"ref '{ref_name}' (hand-authored) vs inline (tsp)"
 
         # Pattern 2: schema2 has ref, schema1 is inline
         if schema2.ref and not schema1.ref and schema1.type and self.api2:
@@ -1582,8 +1596,8 @@ class ApiComparator:
                     schema1, resolved2, check_inline_vs_ref=False
                 )
                 if actual_diffs:
-                    return f"inline vs ref: hand-authored defines inline {schema1.type}, tsp uses ref '{ref_name}'. Actual differences: {'; '.join(actual_diffs)}"
-                return f"inline vs ref: hand-authored defines inline {schema1.type}, tsp uses ref '{ref_name}'"
+                    return f"inline (hand-authored) vs ref '{ref_name}' (tsp). Actual diff: {'; '.join(actual_diffs)}"
+                return f"inline (hand-authored) vs ref '{ref_name}' (tsp)"
 
         # Pattern 3: Both have refs but different
         if (
@@ -1609,8 +1623,8 @@ class ApiComparator:
                     resolved1, resolved2, check_inline_vs_ref=False
                 )
                 if actual_diffs:
-                    return f"different refs: hand-authored uses '{ref1_name}', tsp uses '{ref2_name}'. Actual differences: {'; '.join(actual_diffs)}"
-                return f"different refs: hand-authored uses '{ref1_name}', tsp uses '{ref2_name}'"
+                    return f"ref '{ref1_name}' (hand-authored) vs ref '{ref2_name}' (tsp). Actual diff: {'; '.join(actual_diffs)}"
+                return f"ref '{ref1_name}' (hand-authored) vs ref '{ref2_name}' (tsp)"
 
         # Pattern 4: Type mismatch where one is None (has ref) and other has type
         if (
@@ -1628,8 +1642,8 @@ class ApiComparator:
                     resolved1, schema2, check_inline_vs_ref=False
                 )
                 if actual_diffs:
-                    return f"inline vs ref: hand-authored uses ref '{ref_name}', tsp defines inline {schema2.type}. Actual differences: {'; '.join(actual_diffs)}"
-                return f"inline vs ref: hand-authored uses ref '{ref_name}', tsp defines inline {schema2.type}"
+                    return f"ref '{ref_name}' (hand-authored) vs inline (tsp). Actual diff: {'; '.join(actual_diffs)}"
+                return f"ref '{ref_name}' (hand-authored) vs inline (tsp)"
 
         if (
             schema2.type is None
@@ -1646,8 +1660,8 @@ class ApiComparator:
                     schema1, resolved2, check_inline_vs_ref=False
                 )
                 if actual_diffs:
-                    return f"inline vs ref: hand-authored defines inline {schema1.type}, tsp uses ref '{ref_name}'. Actual differences: {'; '.join(actual_diffs)}"
-                return f"inline vs ref: hand-authored defines inline {schema1.type}, tsp uses ref '{ref_name}'"
+                    return f"inline (hand-authored) vs ref '{ref_name}' (tsp). Actual diff: {'; '.join(actual_diffs)}"
+                return f"inline (hand-authored) vs ref '{ref_name}' (tsp)"
 
         return None
 
