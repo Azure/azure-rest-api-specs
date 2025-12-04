@@ -41,6 +41,9 @@ model GenerateGcpTemplateRequest {
 
   @doc("The GCP cloud profile.")
   gcpCloudProfile?: GcpCloudProfile;
+
+  @doc("Optional template output format. Defaults to 'terraform' if not provided")
+  gcpTemplateFormat?: GCPTemplateFormat;
 }
 
 @doc("The properties of Solution Type")
@@ -494,10 +497,6 @@ interface GenerateGcpTemplate {
   post(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
-
-    @doc("Optional template output format. Defaults to 'terraform' if not provided")
-    @query
-    gcpTemplateFormat?: GCPTemplateFormat,
 
     @doc("ConnectorId and SolutionTypes and their properties to Generate GCP Access Control Template.")
     @body
