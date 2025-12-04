@@ -383,9 +383,109 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/tables/{tableName}/deleteData": {
+      "post": {
+        "tags": [
+          "Tables"
+        ],
+        "x-ms-examples": {
+          "TablesDeleteData": {
+            "$ref": "./examples/TablesDeleteData.json"
+          }
+        },
+        "operationId": "DeleteData_DeleteData",
+        "description": "Deletes data from a Log Analytics workspace table based on a set of user-defined filters.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/types.json#/parameters/TableNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SoftDeleteFilter"
+            },
+            "description": "The parameters required to delete data from the table."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted request for deleting data from the table.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL to check the status of the asynchronous operation."
+              },
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to check the status of the asynchronous operation."
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
     }
   },
   "definitions": {
+    "SoftDeleteFilter": {
+      "description": "Describes the body of a request to delete data from a table.",
+      "type": "object",
+      "properties": {
+        "filters": {
+          "type": "array",
+          "description": "The set of filters to identify data to delete from the table.",
+          "items": {
+            "$ref": "#/definitions/SoftDeleteFilterItem"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "SoftDeleteFilterItem": {
+      "description": "User-defined filter to identify data which will be deleted from the table.",
+      "type": "object",
+      "properties": {
+        "column": {
+          "description": "The column of the table over which the given query should run.",
+          "type": "string"
+        },
+        "operator": {
+          "description": "A query operator to evaluate over the provided column and value(s). Supported operators are ==, =~, in, in~, >, >=, <, <=, between, and have the same behavior as they would in a KQL query.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The value for the operator to function over. This can be a number (e.g., > 100), a string (timestamp >= '2017-09-01') or array of values."
+        },
+        "key": {
+          "description": "When filtering over custom dimensions, this key will be used as the name of the custom dimension.",
+          "type": "string"
+        }
+      }
+    },
     "Column": {
       "type": "object",
       "properties": {
