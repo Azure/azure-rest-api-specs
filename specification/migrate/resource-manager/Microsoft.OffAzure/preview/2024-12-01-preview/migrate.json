@@ -236,6 +236,9 @@
         "x-ms-examples": {
           "Operations_List_MaximumSet_Gen": {
             "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          },
+          "Operations_List_MinimumSet_Gen": {
+            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
           }
         }
       }
@@ -315,6 +318,9 @@
         "x-ms-examples": {
           "ImportSitesController_ListBySubscription_MaximumSet_Gen": {
             "$ref": "./examples/ImportSitesController_ListBySubscription_MaximumSet_Gen.json"
+          },
+          "ImportSitesController_ListBySubscription_MinimumSet_Gen": {
+            "$ref": "./examples/ImportSitesController_ListBySubscription_MinimumSet_Gen.json"
           }
         }
       }
@@ -355,6 +361,9 @@
         "x-ms-examples": {
           "MasterSitesController_ListBySubscription_MaximumSet_Gen": {
             "$ref": "./examples/MasterSitesController_ListBySubscription_MaximumSet_Gen.json"
+          },
+          "MasterSitesController_ListBySubscription_MinimumSet_Gen": {
+            "$ref": "./examples/MasterSitesController_ListBySubscription_MinimumSet_Gen.json"
           }
         }
       }
@@ -2706,6 +2715,9 @@
         "x-ms-examples": {
           "ImportSitesController_ListByResourceGroup_MaximumSet_Gen": {
             "$ref": "./examples/ImportSitesController_ListByResourceGroup_MaximumSet_Gen.json"
+          },
+          "ImportSitesController_ListByResourceGroup_MinimumSet_Gen": {
+            "$ref": "./examples/ImportSitesController_ListByResourceGroup_MinimumSet_Gen.json"
           }
         }
       }
@@ -3737,6 +3749,9 @@
         "x-ms-examples": {
           "MasterSitesController_ListByResourceGroup_MaximumSet_Gen": {
             "$ref": "./examples/MasterSitesController_ListByResourceGroup_MaximumSet_Gen.json"
+          },
+          "MasterSitesController_ListByResourceGroup_MinimumSet_Gen": {
+            "$ref": "./examples/MasterSitesController_ListByResourceGroup_MinimumSet_Gen.json"
           }
         }
       }
@@ -4042,13 +4057,13 @@
         "description": "Method to import machines to master site.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "siteName",
@@ -4077,8 +4092,16 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "MasterSitesController_ImportMachines_MaximumSet_Gen": {
+            "$ref": "./examples/MasterSitesController_ImportMachines_MaximumSet_Gen.json"
+          },
+          "MasterSitesController_ImportMachines_MinimumSet_Gen": {
+            "$ref": "./examples/MasterSitesController_ImportMachines_MinimumSet_Gen.json"
           }
         }
       }
@@ -4092,13 +4115,13 @@
         "description": "Gets all import jobs in a master site. Jobs are returned sorted descending by start time.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "siteName",
@@ -4118,12 +4141,17 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "MasterSitesImportJobsController_ListByMasterSite_MaximumSet_Gen": {
+            "$ref": "./examples/MasterSitesImportJobsController_ListByMasterSite_MaximumSet_Gen.json"
+          }
         }
       }
     },
@@ -4136,13 +4164,13 @@
         "description": "Retrieves details about a specific import job associated with a Master Site.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "siteName",
@@ -4169,8 +4197,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "MasterSitesImportJobsController_Get_MaximumSet_Gen": {
+            "$ref": "./examples/MasterSitesImportJobsController_Get_MaximumSet_Gen.json"
           }
         }
       }
@@ -5342,6 +5375,9 @@
         "x-ms-examples": {
           "ExportUri": {
             "$ref": "./examples/SqlSitesController_ExportUri_Example.json"
+          },
+          "SqlSitesController_ExportUri_MaximumSet_Gen": {
+            "$ref": "./examples/SqlSitesController_ExportUri_MaximumSet_Gen.json"
           }
         }
       }
@@ -5564,6 +5600,9 @@
         "x-ms-examples": {
           "ListImportJobsExample": {
             "$ref": "./examples/SqlImportJobsController_ListImportjobs_Example.json"
+          },
+          "SqlImportJobsController_ListImportjobs_MaximumSet_Gen": {
+            "$ref": "./examples/SqlImportJobsController_ListImportjobs_MaximumSet_Gen.json"
           }
         }
       }
@@ -5627,6 +5666,9 @@
         "x-ms-examples": {
           "GetImportJobExample": {
             "$ref": "./examples/SqlImportJobsController_GetImportjob_Example.json"
+          },
+          "SqlImportJobsController_GetImportjob_MaximumSet_Gen": {
+            "$ref": "./examples/SqlImportJobsController_GetImportjob_MaximumSet_Gen.json"
           }
         }
       }
@@ -6667,6 +6709,9 @@
         "x-ms-examples": {
           "ImportUriExample": {
             "$ref": "./examples/SqlSitesController_ImportUri_Example.json"
+          },
+          "SqlSitesController_ImportUri_MaximumSet_Gen": {
+            "$ref": "./examples/SqlSitesController_ImportUri_MaximumSet_Gen.json"
           }
         }
       }
@@ -6731,6 +6776,9 @@
         "x-ms-examples": {
           "ValidateAndImportUriExample": {
             "$ref": "./examples/SqlSitesController_ValidateAndImportUri_Example.json"
+          },
+          "SqlSitesController_ValidateAndImportUri_MaximumSet_Gen": {
+            "$ref": "./examples/SqlSitesController_ValidateAndImportUri_MaximumSet_Gen.json"
           }
         }
       }
@@ -17360,7 +17408,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
