@@ -84,19 +84,19 @@ import "./../Web.Management/WorkflowTriggerHistory.tsp";
 import "./../Web.Management/WorkflowVersion.tsp";
 import "./../Web.Management/routes.tsp";
 
-import "../../domainregistration/DomainRegistration.Management/models.tsp";
-import "../../domainregistration/DomainRegistration.Management/back-compatible.tsp";
-import "../../domainregistration/DomainRegistration.Management/Domain.tsp";
-import "../../domainregistration/DomainRegistration.Management/DomainOwnershipIdentifier.tsp";
-import "../../domainregistration/DomainRegistration.Management/TopLevelDomain.tsp";
-import "../../domainregistration/DomainRegistration.Management/routes.tsp";
+import "./models2.tsp";
+import "./back-compatible.tsp";
+import "./Domain.tsp";
+import "./DomainOwnershipIdentifier.tsp";
+import "./TopLevelDomain.tsp";
+import "./routes2.tsp";
 
-import "../../certificateregistration/CertificateRegistration.Management/models.tsp";
-import "../../certificateregistration/CertificateRegistration.Management/back-compatible.tsp";
-import "../../certificateregistration/CertificateRegistration.Management/AppServiceCertificateOrder.tsp";
-import "../../certificateregistration/CertificateRegistration.Management/AppServiceCertificateResource.tsp";
-import "../../certificateregistration/CertificateRegistration.Management/DetectorResponse.tsp";
-import "../../certificateregistration/CertificateRegistration.Management/routes.tsp";
+import "./models2.tsp";
+import "./back-compatible.tsp";
+import "./AppServiceCertificateOrder.tsp";
+import "./AppServiceCertificateResource.tsp";
+import "./DetectorResponse.tsp";
+import "./routes2.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
