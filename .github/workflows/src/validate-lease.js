@@ -213,13 +213,9 @@ function main() {
     }
   }
 
-  // Step 6: Print summary
-  console.log('=========================================');
-  console.log('Validation Summary');
-  console.log('=========================================\n');
-
+  // Step 6: Print lease file content errors
   if (contentErrors.length > 0) {
-    console.log('Content validation errors:\n');
+    console.log('Lease content validation errors:\n');
     contentErrors.forEach(({ file, errors }) => {
       console.log(`❌ ${file}`);
       errors.forEach(error => console.log(`  - ${error}`));
@@ -239,7 +235,7 @@ function printSummary(exitCode) {
   if (exitCode === 0) {
     console.log('✅ All validations passed!');
   } else {
-    console.log('❌ Validation failed - fix errors above');
+    console.log('Lease Validation failed - fix errors above');
   }
 }
 
