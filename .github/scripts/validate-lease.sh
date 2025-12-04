@@ -9,7 +9,7 @@ TODAY=$(date +%Y-%m-%d)
 ALL_CHANGED_FILES=$(git diff --name-only origin/$1 HEAD || true)
 
 # Check for files outside lease/ directory
-DISALLOWED_FILES=$(echo "$ALL_CHANGED_FILES" | grep -vE '^(lease/|\.github/workflows/validate-lease-folder-structure\.yaml)' || true)
+DISALLOWED_FILES=$(echo "$ALL_CHANGED_FILES" | grep -vE '^(lease/|\.github/workflows/validate-lease-folder-structure\.yaml|\.github/scripts/validate-lease\.sh)' || true)
 
 if [ -n "$DISALLOWED_FILES" ]; then
   DISALLOWED_COUNT=$(echo "$DISALLOWED_FILES" | wc -l)
