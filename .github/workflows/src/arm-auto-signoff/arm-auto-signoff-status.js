@@ -2,6 +2,7 @@ import { CommitStatusState, PER_PAGE_MAX } from "../../shared/src/github.js";
 import { equals } from "../../shared/src/set.js";
 import { byDate, invert } from "../../shared/src/sort.js";
 import { extractInputs } from "./context.js";
+import { isTrivialPullRequest } from "../../../shared/src/pr-changes.js";
 
 // TODO: Add tests
 /* v8 ignore start */
@@ -183,7 +184,7 @@ export async function getLabelActionImpl({ owner, repo, issue_number, head_sha, 
  * @returns {Promise<{shouldAutoSign: boolean, reason: string, labelsToAdd?: string[]}>}
  */
 async function checkArmAnalysisWorkflow(workflowRuns, github, owner, repo, core) {
-  const wfName = "ARM Auto-SignOff Analysis";
+  const wfName = "ARM Auto-SignOff - Analyze Code";
   const armAnalysisRuns = workflowRuns
     .filter((wf) => wf.name == wfName)
     // Sort by "updated_at" descending
@@ -193,7 +194,7 @@ async function checkArmAnalysisWorkflow(workflowRuns, github, owner, repo, core)
     core.info(
       `Found no runs for workflow '${wfName}'.  Assuming workflow trigger was skipped, which should be treated equal to "completed false".`,
     );
-    return { shouldAutoSign: false, reason: "No ARM analysis workflow runs found" };
+    return { shouldAutoSign: false, reason: `No '${wfName}' workflow runs found` };
   }
 
   // Sorted by "updated_at" descending, so most recent run is at index 0
@@ -201,12 +202,12 @@ async function checkArmAnalysisWorkflow(workflowRuns, github, owner, repo, core)
 
   if (run.status != "completed") {
     core.info(`Workflow '${wfName}' is still in-progress: status='${run.status}'`);
-    return { shouldAutoSign: false, reason: "ARM analysis workflow still in progress" };
+    return { shouldAutoSign: false, reason: `'${wfName}' workflow still in progress` };
   }
 
   if (run.conclusion != "success") {
     core.info(`Run for workflow '${wfName}' did not succeed: '${run.conclusion}'`);
-    return { shouldAutoSign: false, reason: "ARM analysis workflow failed" };
+    return { shouldAutoSign: false, reason: `'${wfName}' workflow failed` };
   }
 
   // permissions: { actions: read }
@@ -221,10 +222,10 @@ async function checkArmAnalysisWorkflow(workflowRuns, github, owner, repo, core)
   core.info(`${wfName} artifactNames: ${JSON.stringify(artifactNames)}`);
 
   // check for new combined artifact
-  const combinedArtifact = artifactNames.find(name => name.startsWith("arm-analysis-results="));
+  const combinedArtifact = artifactNames.find(name => name.startsWith("arm-auto-signoff-code-results="));
   if (combinedArtifact) {
     try {
-      const resultsJson = combinedArtifact.substring("arm-analysis-results=".length);
+      const resultsJson = combinedArtifact.substring("arm-auto-signoff-code-results=".length);
       const results = JSON.parse(resultsJson);
       
       core.info(`Combined ARM analysis results: ${JSON.stringify(results)}`);
@@ -235,7 +236,8 @@ async function checkArmAnalysisWorkflow(workflowRuns, github, owner, repo, core)
         if (results.incrementalTypeSpec) {
           labelsToAdd.push("ARMAutoSignedOff-IncrementalTSP");
         }
-        if (results.trivialChanges?.anyTrivialChanges) {
+        // Check if trivial changes exist using the new PullRequestChanges structure
+        if (results.trivialChanges && isTrivialPullRequest(results.trivialChanges)) {
           labelsToAdd.push("ARMAutoSignedOff-Trivial");
         }
         
