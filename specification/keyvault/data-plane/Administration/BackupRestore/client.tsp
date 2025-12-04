@@ -8,7 +8,7 @@ namespace ClientCustomizations;
 
 @client(
   {
-    name: "BackupRestoreClient",
+    name: "Client",
     service: KeyVault,
   },
   "go"
