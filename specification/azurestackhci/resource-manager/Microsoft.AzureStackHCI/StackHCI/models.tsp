@@ -1812,8 +1812,7 @@ model ArcSettingsPatchProperties {
   /**
    * contains connectivity related configuration for ARC resources
    */
-  @identifiers(#[])
-  connectivityProperties?: ArcConnectivityProperties[];
+  connectivityProperties?: ArcConnectivityProperties;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
