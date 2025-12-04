@@ -132,19 +132,18 @@ using Azure.Core;
 @@clientName(EndpointDetail.ipAddress, "IPAddress", "csharp");
 
 @@clientName(CloudHsmClusters.validateBackupProperties::parameters.body,
-  "content", "csharp"
+  "content",
+  "csharp"
 );
-@@clientName(CloudHsmClusters.backup::parameters.body,
-  "content", "csharp"
-);
+@@clientName(CloudHsmClusters.backup::parameters.body, "content", "csharp");
 @@clientName(CloudHsmClusters.validateRestoreProperties::parameters.body,
-  "content", "csharp"
+  "content",
+  "csharp"
 );
 
-@@clientName(DedicatedHsms.update::parameters.properties,
-  "patch", "csharp"
-);
+@@clientName(DedicatedHsms.update::parameters.properties, "patch", "csharp");
 
 @@clientName(CloudHsmClusters.listByCloudHsmCluster,
-  "GetCloudHsmClusterPrivateLinkResources", "csharp"
+  "GetCloudHsmClusterPrivateLinkResources",
+  "csharp"
 );
