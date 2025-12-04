@@ -62,9 +62,10 @@ alias GroupQuotasEntitiesOps = Azure.ResourceManager.Legacy.ExtensionOperations<
   }
 >;
 
-alias EmployeeBuildingOps = Azure.ResourceManager.Legacy.RoutedOperations<
+alias groupQuotaOps = Azure.ResourceManager.Legacy.RoutedOperations<
   {
     ...ApiVersionParameter;
+
     /**
      * The management group ID.
      */
@@ -183,7 +184,7 @@ interface GroupQuotasEntities {
   @get
   @list
   @route("/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/resourceProviders/{resourceProviderName}/locationUsages/{location}")
-  groupQuotaUsagesList is EmployeeBuildingOps.ActionSync<
+  groupQuotaUsagesList is groupQuotaOps.ActionSync<
     GroupQuotasEntity,
     void,
     ArmResponse<ResourceUsageList>,

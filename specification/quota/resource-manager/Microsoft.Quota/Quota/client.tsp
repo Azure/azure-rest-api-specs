@@ -57,6 +57,11 @@ using Microsoft.Quota;
 );
 @@clientName(QuotaRequestDetails, "QuotaRequestDetail", "csharp");
 @@clientName(QuotaLimitTypes, "QuotaLimitType", "csharp");
+@@clientName(GroupQuotasEntityPatch, "GroupQuotaEntityPatch", "csharp");
+@@clientName(GroupQuotasEntityBase, "GroupQuotaEntityBase", "csharp");
+@@clientName(GroupQuotaLimitLists.list, "get", "csharp");
+@@clientName(SubscriptionQuotaAllocationsLists.list, "get", "csharp");
+
 @@usage(QuotaAllocationRequestStatus, Usage.input, "csharp");
 @@usage(QuotaAllocationRequestBase, Usage.input, "csharp");
 @@usage(GroupQuotaSubscriptionRequestStatusProperties, Usage.input, "csharp");
@@ -66,10 +71,6 @@ using Microsoft.Quota;
 @@usage(GroupQuotaSubscriptionRequestStatus, Usage.input, "csharp");
 @@usage(GroupQuotaSubscriptionId, Usage.input, "csharp");
 @@usage(SubmittedResourceRequestStatus, Usage.input, "csharp");
-@@clientName(GroupQuotasEntityPatch, "GroupQuotaEntityPatch", "csharp");
-@@clientName(GroupQuotasEntityBase, "GroupQuotaEntityBase", "csharp");
-@@clientName(GroupQuotaLimitLists.list, "get", "csharp");
-@@clientName(SubscriptionQuotaAllocationsLists.list, "get", "csharp");
 
 @@clientName(Microsoft.Quota, "QuotaMgmtClient", "python");
 
