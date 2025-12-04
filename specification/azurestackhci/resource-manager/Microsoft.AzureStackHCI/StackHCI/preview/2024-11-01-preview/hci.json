@@ -2454,6 +2454,15 @@
     "AssignPartitionGpuJobProperties": {
       "type": "object",
       "description": "Properties for assigning GPU partition to a specific workload or virtual machine.",
+      "properties": {
+        "vmId": {
+          "type": "string",
+          "description": "Virtual machine ID to which the GPU partition is assigned."
+        }
+      },
+      "required": [
+        "vmId"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/EdgeMachineGpuJobProperties"
@@ -2523,6 +2532,16 @@
     "CreatePartitionGpuJobProperties": {
       "type": "object",
       "description": "Properties for creating GPU partitions for virtualization and workload isolation.",
+      "properties": {
+        "partitionCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of partitions to be created on the GPU."
+        }
+      },
+      "required": [
+        "partitionCount"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/EdgeMachineGpuJobProperties"
@@ -3042,6 +3061,22 @@
         "error": {
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail",
           "description": "Error details.",
+          "readOnly": true
+        },
+        "percentComplete": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The percentage of the job that is complete.",
+          "readOnly": true
+        },
+        "validationStatus": {
+          "$ref": "#/definitions/EceActionStatus",
+          "description": "Validation status of job.",
+          "readOnly": true
+        },
+        "deploymentStatus": {
+          "$ref": "#/definitions/EceActionStatus",
+          "description": "Deployment status of job.",
           "readOnly": true
         }
       },
@@ -5614,6 +5649,15 @@
     "RemovePartitionGpuJobProperties": {
       "type": "object",
       "description": "Properties for removing GPU partition and freeing up resources for other workloads.",
+      "properties": {
+        "vmId": {
+          "type": "string",
+          "description": "Virtual machine ID from which the GPU partition is removed."
+        }
+      },
+      "required": [
+        "vmId"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/EdgeMachineGpuJobProperties"
@@ -5875,6 +5919,15 @@
     "SwitchModeGpuJobProperties": {
       "type": "object",
       "description": "Properties for switching GPU mode between DDA and GPU-P for different workload requirements.",
+      "properties": {
+        "mode": {
+          "$ref": "#/definitions/GpuMode",
+          "description": "Desired GPU mode to switch to."
+        }
+      },
+      "required": [
+        "mode"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/EdgeMachineGpuJobProperties"

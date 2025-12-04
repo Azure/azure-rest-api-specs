@@ -110,6 +110,11 @@ model EdgeMachineGpuJobProperties {
    */
   @visibility(Lifecycle.Read)
   error?: Azure.ResourceManager.Foundations.ErrorDetail;
+
+  /**
+   * Reported properties specific to the GPU job.
+   */
+  ...JobReportedProperties;
 }
 
 /**
@@ -152,11 +157,6 @@ model CreatePartitionGpuJobProperties extends EdgeMachineGpuJobProperties {
    * Number of partitions to be created on the GPU.
    */
   partitionCount: int32;
-
-  /**
-   * Reported properties for Create Partition job.
-   */
-  reportedProperties: CreatePartitionReportedProperties;
 }
 
 /**
@@ -172,11 +172,6 @@ model SwitchModeGpuJobProperties extends EdgeMachineGpuJobProperties {
    * Desired GPU mode to switch to.
    */
   mode: GpuMode;
-
-  /**
-   * Reported properties for Switch Mode job.
-   */
-  reportedProperties: SwitchModeReportedProperties;
 }
 
 /**
@@ -192,11 +187,6 @@ model AssignPartitionGpuJobProperties extends EdgeMachineGpuJobProperties {
    * Virtual machine ID to which the GPU partition is assigned.
    */
   vmId: string;
-
-  /**
-   * Reported properties for Assign Partition job.
-   */
-  reportedProperties: AssignPartitionReportedProperties;
 }
 
 /**
@@ -212,33 +202,4 @@ model RemovePartitionGpuJobProperties extends EdgeMachineGpuJobProperties {
    * Virtual machine ID from which the GPU partition is removed.
    */
   vmId: string;
-
-  /**
-   * Reported properties for Remove Partition job.
-   */
-  reportedProperties: RemovePartitionReportedProperties;
-}
-
-@doc("Represents the reported properties of create partition job.")
-model CreatePartitionReportedProperties {
-  ...JobReportedProperties;
-
-  @doc("The result obtained after creating the partitions on the gpu.")
-  @visibility(Lifecycle.Read)
-  summary?: string;
-}
-
-@doc("Represents the reported properties of switch mode job.")
-model SwitchModeReportedProperties {
-  ...JobReportedProperties;
-}
-
-@doc("Represents the reported properties of assign partition job.")
-model AssignPartitionReportedProperties {
-  ...JobReportedProperties;
-}
-
-@doc("Represents the reported properties of remove partition job.")
-model RemovePartitionReportedProperties {
-  ...JobReportedProperties;
 }
