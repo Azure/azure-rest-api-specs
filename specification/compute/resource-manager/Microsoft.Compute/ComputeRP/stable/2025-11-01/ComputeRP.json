@@ -388,7 +388,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "type": "array",
               "items": {
@@ -444,7 +444,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "type": "array",
               "items": {
@@ -507,7 +507,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "type": "array",
               "items": {
@@ -599,7 +599,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "type": "array",
               "items": {
@@ -887,7 +887,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "type": "array",
               "items": {
@@ -1117,7 +1117,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "type": "array",
               "items": {
@@ -1173,7 +1173,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "type": "array",
               "items": {
@@ -1256,7 +1256,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "type": "array",
               "items": {
@@ -1352,10 +1352,6 @@
       "get": {
         "operationId": "VirtualMachineRunCommands_List",
         "description": "Lists all available run commands for a subscription in a location.",
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1395,10 +1391,6 @@
       "get": {
         "operationId": "VirtualMachineRunCommands_Get",
         "description": "Gets specific run command for a subscription in a location.",
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -12300,7 +12292,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "type": "array",
               "items": {
@@ -13254,6 +13246,10 @@
           "format": "int32",
           "description": "Specifies the size of an empty data disk in gigabytes. This element can be used to overwrite the size of the disk in a virtual machine image. The property 'diskSizeGB' is the number of bytes x 1024^3 for the disk and the value cannot be larger than 1023."
         },
+        "storageFDAlignment": {
+          "$ref": "#/definitions/StorageFaultDomainAlignmentType",
+          "description": "Specifies the storage fault domain alignment type for the disk."
+        },
         "managedDisk": {
           "$ref": "#/definitions/ManagedDiskParameters",
           "description": "The managed disk parameters."
@@ -13967,6 +13963,10 @@
             "$ref": "#/definitions/InstanceViewStatus"
           },
           "x-ms-identifiers": []
+        },
+        "storageAlignment": {
+          "$ref": "#/definitions/StorageAlignment",
+          "description": "Specifies the storage alignment status for the disk."
         }
       }
     },
@@ -15393,6 +15393,10 @@
           "type": "integer",
           "format": "int32",
           "description": "Specifies the size of an empty data disk in gigabytes. This element can be used to overwrite the size of the disk in a virtual machine image. The property 'diskSizeGB' is the number of bytes x 1024^3 for the disk and the value cannot be larger than 1023."
+        },
+        "storageFDAlignment": {
+          "$ref": "#/definitions/StorageFaultDomainAlignmentType",
+          "description": "Specifies the storage fault domain alignment type for the disk."
         },
         "managedDisk": {
           "$ref": "#/definitions/ManagedDiskParameters",
@@ -17895,6 +17899,50 @@
         ]
       }
     },
+    "StorageAlignment": {
+      "type": "string",
+      "description": "Specifies the storage alignment status for the disk.",
+      "enum": [
+        "Unaligned",
+        "Aligned"
+      ],
+      "x-ms-enum": {
+        "name": "StorageAlignment",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unaligned",
+            "value": "Unaligned"
+          },
+          {
+            "name": "Aligned",
+            "value": "Aligned"
+          }
+        ]
+      }
+    },
+    "StorageFaultDomainAlignmentType": {
+      "type": "string",
+      "description": "Specifies the storage fault domain alignment type for the disk.",
+      "enum": [
+        "Aligned",
+        "BestEffortAligned"
+      ],
+      "x-ms-enum": {
+        "name": "StorageFaultDomainAlignmentType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Aligned",
+            "value": "Aligned"
+          },
+          {
+            "name": "BestEffortAligned",
+            "value": "BestEffortAligned"
+          }
+        ]
+      }
+    },
     "StorageProfile": {
       "type": "object",
       "description": "Specifies the storage settings for the virtual machine disks.",
@@ -17962,10 +18010,6 @@
           "$ref": "#/definitions/LogAnalyticsInputBase"
         }
       ]
-    },
-    "TypeSpec.Http.OkResponse": {
-      "type": "object",
-      "description": "The request has succeeded."
     },
     "UefiSettings": {
       "type": "object",
@@ -20110,6 +20154,10 @@
           "format": "int32",
           "description": "Specifies the size of an empty data disk in gigabytes. This element can be used to overwrite the size of the disk in a virtual machine image. The property diskSizeGB is the number of bytes x 1024^3 for the disk and the value cannot be larger than 1023."
         },
+        "storageFDAlignment": {
+          "$ref": "#/definitions/StorageFaultDomainAlignmentType",
+          "description": "Specifies the storage fault domain alignment type for the disk."
+        },
         "managedDisk": {
           "$ref": "#/definitions/VirtualMachineScaleSetManagedDiskParameters",
           "description": "The managed disk parameters."
@@ -20736,6 +20784,10 @@
           "format": "int32",
           "description": "Specifies the size of an empty data disk in gigabytes. This element can be used to overwrite the size of the disk in a virtual machine image. The property 'diskSizeGB' is the number of bytes x 1024^3 for the disk and the value cannot be larger than 1023."
         },
+        "storageFDAlignment": {
+          "$ref": "#/definitions/StorageFaultDomainAlignmentType",
+          "description": "Specifies the storage fault domain alignment type for the disk."
+        },
         "osType": {
           "$ref": "#/definitions/OperatingSystemTypes",
           "description": "This property allows you to specify the type of the OS that is included in the disk if creating a VM from user-image or a specialized VHD. Possible values are: **Windows,** **Linux.**"
@@ -21359,6 +21411,10 @@
           "type": "integer",
           "format": "int32",
           "description": "Specifies the size of an empty data disk in gigabytes. This element can be used to overwrite the size of the disk in a virtual machine image. <br><br> diskSizeGB is the number of bytes x 1024^3 for the disk and the value cannot be larger than 1023"
+        },
+        "storageFDAlignment": {
+          "$ref": "#/definitions/StorageFaultDomainAlignmentType",
+          "description": "Specifies the storage fault domain alignment type for the disk."
         },
         "image": {
           "$ref": "#/definitions/VirtualHardDisk",
@@ -23368,7 +23424,8 @@
       "description": "Specifies the align mode between Virtual Machine Scale Set compute and storage Fault Domain count.",
       "enum": [
         "Aligned",
-        "Unaligned"
+        "Unaligned",
+        "BestEffortAligned"
       ],
       "x-ms-enum": {
         "name": "ZonalPlatformFaultDomainAlignMode",
@@ -23381,6 +23438,10 @@
           {
             "name": "Unaligned",
             "value": "Unaligned"
+          },
+          {
+            "name": "BestEffortAligned",
+            "value": "BestEffortAligned"
           }
         ]
       }
