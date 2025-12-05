@@ -2527,6 +2527,7 @@ model VirtualMachineScaleSetOSDisk {
   /**
    * Specifies the storage fault domain alignment type for the disk.
    */
+  @added(Versions.v2025_11_01)
   storageFDAlignment?: StorageFaultDomainAlignmentType;
 
   /**
@@ -2665,6 +2666,7 @@ model VirtualMachineScaleSetDataDisk {
   /**
    * Specifies the storage fault domain alignment type for the disk.
    */
+  @added(Versions.v2025_11_01)
   storageFDAlignment?: StorageFaultDomainAlignmentType;
 
   /**
@@ -3888,6 +3890,7 @@ model VirtualMachineScaleSetUpdateOSDisk {
   /**
    * Specifies the storage fault domain alignment type for the disk.
    */
+  @added(Versions.v2025_11_01)
   storageFDAlignment?: StorageFaultDomainAlignmentType;
 
   /**
@@ -5262,6 +5265,7 @@ model OSDisk {
   /**
    * Specifies the storage fault domain alignment type for the disk.
    */
+  @added(Versions.v2025_11_01)
   storageFDAlignment?: StorageFaultDomainAlignmentType;
 
   /**
@@ -5343,6 +5347,7 @@ model DataDisk {
   /**
    * Specifies the storage fault domain alignment type for the disk.
    */
+  @added(Versions.v2025_11_01)
   storageFDAlignment?: StorageFaultDomainAlignmentType;
 
   /**
