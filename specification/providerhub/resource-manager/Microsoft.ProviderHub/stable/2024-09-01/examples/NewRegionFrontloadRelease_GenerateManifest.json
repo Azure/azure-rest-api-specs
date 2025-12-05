@@ -1,72 +1,111 @@
 {
   "parameters": {
-    "subscriptionId": "ab7a8701-f7ef-471a-a2f4-d0ebbf494f77",
-    "providerNamespace": "Microsoft.Contoso",
-    "releaseName": "2020week11",
     "api-version": "2024-09-01",
     "properties": {
       "properties": {
-        "operationType": "Rollout",
-        "providerNamespace": "Microsoft.Contoso",
-        "frontloadLocation": "Israel Central",
         "copyFromLocation": "eastus",
         "environmentType": "Prod",
-        "serviceFeatureFlag": "DoNotCreate",
-        "includeResourceTypes": [
-          "servers"
-        ],
         "excludeResourceTypes": [
           "monitors"
         ],
-        "overrideManifestLevelFields": {
-          "resourceHydrationAccounts": [
-            {
-              "subscriptionId": "e4eae963-2d15-43e6-a097-98bd75b33edd",
-              "accountName": "classichydrationprodsn01"
-            }
-          ]
-        },
+        "frontloadLocation": "Israel Central",
+        "ignoreFields": [
+          "apiversion"
+        ],
+        "includeResourceTypes": [
+          "servers"
+        ],
+        "operationType": "Rollout",
         "overrideEndpointLevelFields": {
-          "enabled": true,
+          "apiVersion": "2024-04-01-preview",
           "apiVersions": [
             "2024-04-01-preview"
           ],
+          "dstsConfiguration": {
+            "serviceDnsName": "messaging.azure-ppe.net",
+            "serviceName": "resourceprovider"
+          },
+          "enabled": true,
+          "endpointType": "Production",
           "endpointUri": "https://resource-endpoint.com/",
+          "featuresRule": "Any",
           "locations": [
             "East US"
           ],
           "requiredFeatures": [
             "<feature flag>"
           ],
-          "featuresRule": "Any",
-          "timeout": "PT20S",
-          "endpointType": "Production",
-          "dstsConfiguration": {
-            "serviceName": "resourceprovider",
-            "serviceDnsName": "messaging.azure-ppe.net"
-          },
           "skuLink": "http://endpointuri/westus/skus",
-          "apiVersion": "2024-04-01-preview",
+          "timeout": "PT20S",
           "zones": [
             "zone1"
           ]
         },
-        "ignoreFields": [
-          "apiversion"
-        ]
+        "overrideManifestLevelFields": {
+          "resourceHydrationAccounts": [
+            {
+              "accountName": "classichydrationprodsn01",
+              "subscriptionId": "e4eae963-2d15-43e6-a097-98bd75b33edd"
+            }
+          ]
+        },
+        "providerNamespace": "Microsoft.Contoso",
+        "serviceFeatureFlag": "DoNotCreate"
       }
-    }
+    },
+    "providerNamespace": "Microsoft.Contoso",
+    "releaseName": "2020week11",
+    "subscriptionId": "ab7a8701-f7ef-471a-a2f4-d0ebbf494f77"
   },
   "responses": {
     "200": {
       "description": "New region frontload release resource.",
       "body": {
+        "capabilities": [
+          {
+            "effect": "Allow",
+            "quotaId": "CSP_2015-05-01"
+          },
+          {
+            "effect": "Allow",
+            "quotaId": "CSP_MG_2017-12-01"
+          }
+        ],
+        "crossTenantTokenValidation": "EnsureSecureValidation",
+        "globalNotificationEndpoints": [
+          {
+            "enabled": true,
+            "endpointUri": "https://notificationendpoint.com"
+          }
+        ],
+        "management": {
+          "authorizationOwners": [
+            "authorizationOwners-group"
+          ],
+          "incidentContactEmail": "helpme@contoso.com",
+          "incidentRoutingService": "",
+          "incidentRoutingTeam": "",
+          "manifestOwners": [
+            "manifestOwners-group"
+          ],
+          "resourceAccessPolicy": "NotSpecified"
+        },
+        "metadata": {
+          "onboardedVia": "ProviderHub"
+        },
+        "namespace": "microsoft.contoso",
         "providerAuthorizations": [
           {
             "applicationId": "1a3b5c7d-8e9f-10g1-1h12-i13j14k1",
             "roleDefinitionId": "123456bf-gkur-2098-b890-98da392a00b2"
           }
         ],
+        "providerType": "Internal, Hidden",
+        "providerVersion": "2.0",
+        "reRegisterSubscriptionMetadata": {
+          "concurrencyLimit": 100,
+          "enabled": true
+        },
         "resourceProviderAuthorizationRules": {
           "asyncOperationPollingRules": {
             "authorizationActions": [
@@ -74,22 +113,9 @@
             ]
           }
         },
-        "namespace": "microsoft.contoso",
-        "serviceName": "root",
-        "services": [
-          {
-            "serviceName": "tags",
-            "status": "Inactive"
-          }
-        ],
-        "providerVersion": "2.0",
-        "providerType": "Internal, Hidden",
-        "crossTenantTokenValidation": "EnsureSecureValidation",
         "resourceTypes": [
           {
             "name": "Operations",
-            "routingType": "ProxyOnly, Tenant",
-            "resourceValidation": "ReservedWords, ProfaneWords",
             "allowedUnauthorizedActions": [
               "microsoft.contoso/operations/read"
             ],
@@ -111,12 +137,12 @@
                 "timeout": "PT20S"
               }
             ],
-            "linkedOperationRules": []
+            "linkedOperationRules": [],
+            "resourceValidation": "ReservedWords, ProfaneWords",
+            "routingType": "ProxyOnly, Tenant"
           },
           {
             "name": "Locations",
-            "routingType": "ProxyOnly",
-            "resourceValidation": "ReservedWords, ProfaneWords",
             "endpoints": [
               {
                 "apiVersions": [
@@ -129,12 +155,12 @@
                 "timeout": "PT20S"
               }
             ],
-            "linkedOperationRules": []
+            "linkedOperationRules": [],
+            "resourceValidation": "ReservedWords, ProfaneWords",
+            "routingType": "ProxyOnly"
           },
           {
             "name": "Locations/OperationStatuses",
-            "routingType": "ProxyOnly, LocationBased",
-            "resourceValidation": "ReservedWords, ProfaneWords",
             "additionalOptions": "ProtectedAsyncOperationPolling",
             "endpoints": [
               {
@@ -148,45 +174,21 @@
                 "timeout": "PT20S"
               }
             ],
-            "linkedOperationRules": []
+            "linkedOperationRules": [],
+            "resourceValidation": "ReservedWords, ProfaneWords",
+            "routingType": "ProxyOnly, LocationBased"
           }
         ],
-        "management": {
-          "manifestOwners": [
-            "manifestOwners-group"
-          ],
-          "authorizationOwners": [
-            "authorizationOwners-group"
-          ],
-          "incidentRoutingService": "",
-          "incidentRoutingTeam": "",
-          "incidentContactEmail": "helpme@contoso.com",
-          "resourceAccessPolicy": "NotSpecified"
-        },
-        "capabilities": [
+        "serviceName": "root",
+        "services": [
           {
-            "quotaId": "CSP_2015-05-01",
-            "effect": "Allow"
-          },
-          {
-            "quotaId": "CSP_MG_2017-12-01",
-            "effect": "Allow"
+            "serviceName": "tags",
+            "status": "Inactive"
           }
-        ],
-        "metadata": {
-          "onboardedVia": "ProviderHub"
-        },
-        "globalNotificationEndpoints": [
-          {
-            "enabled": true,
-            "endpointUri": "https://notificationendpoint.com"
-          }
-        ],
-        "reRegisterSubscriptionMetadata": {
-          "enabled": true,
-          "concurrencyLimit": 100
-        }
+        ]
       }
     }
-  }
+  },
+  "operationId": "NewRegionFrontloadRelease_GenerateManifest",
+  "title": "NewRegionFrontloadRelease_GenerateManifest"
 }

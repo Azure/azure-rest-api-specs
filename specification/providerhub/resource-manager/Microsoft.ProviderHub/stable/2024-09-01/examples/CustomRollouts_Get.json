@@ -1,31 +1,23 @@
 {
   "parameters": {
-    "subscriptionId": "ab7a8701-f7ef-471a-a2f4-d0ebbf494f77",
+    "api-version": "2024-09-01",
     "providerNamespace": "Microsoft.Contoso",
     "rolloutName": "canaryTesting99",
-    "api-version": "2024-09-01"
+    "subscriptionId": "ab7a8701-f7ef-471a-a2f4-d0ebbf494f77"
   },
   "responses": {
     "200": {
       "description": "Successfully retrieved the rollout details.",
       "body": {
-        "id": "/subscriptions/ab7a8701-f7ef-471a-a2f4-d0ebbf494f77/providers/Microsoft.ProviderHub/providerRegistrations/Microsoft.Contoso/customRollouts/canaryTesting99",
         "name": "Microsoft.Contoso/canaryTesting99",
         "type": "Microsoft.ProviderHub/providerRegistrations/customRollouts",
-        "systemData": {
-          "createdBy": "string",
-          "createdByType": "User",
-          "createdAt": "2020-02-01T01:01:01.1075056Z",
-          "lastModifiedBy": "string",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2020-02-01T01:01:01.1075056Z"
-        },
+        "id": "/subscriptions/ab7a8701-f7ef-471a-a2f4-d0ebbf494f77/providers/Microsoft.ProviderHub/providerRegistrations/Microsoft.Contoso/customRollouts/canaryTesting99",
         "properties": {
           "provisioningState": "Completed",
           "specification": {
             "autoProvisionConfig": {
-              "storage": true,
-              "resourceGraph": true
+              "resourceGraph": true,
+              "storage": true
             },
             "canary": {
               "regions": [
@@ -33,12 +25,41 @@
                 "centraluseuap"
               ]
             },
-            "refreshSubscriptionRegistration": true,
             "providerRegistration": {
-              "id": "/subscriptions/ab7a8701-f7ef-471a-a2f4-d0ebbf494f77/providers/Microsoft.ProviderHub/providerRegistrations/Microsoft.Contoso",
               "name": "Microsoft.Contoso",
               "type": "Microsoft.ProviderHub/providerRegistrations",
+              "id": "/subscriptions/ab7a8701-f7ef-471a-a2f4-d0ebbf494f77/providers/Microsoft.ProviderHub/providerRegistrations/Microsoft.Contoso",
               "properties": {
+                "capabilities": [
+                  {
+                    "effect": "Allow",
+                    "quotaId": "CSP_2015-05-01"
+                  },
+                  {
+                    "effect": "Allow",
+                    "quotaId": "CSP_MG_2017-12-01"
+                  }
+                ],
+                "management": {
+                  "authorizationOwners": [
+                    "RPAAS-PlatformServiceAdministrator"
+                  ],
+                  "incidentContactEmail": "helpme@contoso.com",
+                  "incidentRoutingService": "",
+                  "incidentRoutingTeam": "",
+                  "manifestOwners": [
+                    "SPARTA-PlatformServiceAdministrator"
+                  ],
+                  "resourceAccessPolicy": "NotSpecified"
+                },
+                "metadata": null,
+                "namespace": "microsoft.contoso",
+                "providerAuthorizations": [
+                  {
+                    "applicationId": "1a3b5c7d-8e9f-10g1-1h12-i13j14k1",
+                    "roleDefinitionId": "123456bf-gkur-2098-b890-98da392a00b2"
+                  }
+                ],
                 "providerHubMetadata": {
                   "providerAuthentication": {
                     "allowedAudiences": [
@@ -46,49 +67,20 @@
                     ]
                   }
                 },
-                "provisioningState": "Succeeded",
-                "providerAuthorizations": [
-                  {
-                    "applicationId": "1a3b5c7d-8e9f-10g1-1h12-i13j14k1",
-                    "roleDefinitionId": "123456bf-gkur-2098-b890-98da392a00b2"
-                  }
-                ],
-                "namespace": "microsoft.contoso",
-                "providerVersion": "2.0",
                 "providerType": "Internal, Hidden",
-                "management": {
-                  "manifestOwners": [
-                    "SPARTA-PlatformServiceAdministrator"
-                  ],
-                  "authorizationOwners": [
-                    "RPAAS-PlatformServiceAdministrator"
-                  ],
-                  "incidentRoutingService": "",
-                  "incidentRoutingTeam": "",
-                  "incidentContactEmail": "helpme@contoso.com",
-                  "resourceAccessPolicy": "NotSpecified"
-                },
-                "capabilities": [
-                  {
-                    "quotaId": "CSP_2015-05-01",
-                    "effect": "Allow"
-                  },
-                  {
-                    "quotaId": "CSP_MG_2017-12-01",
-                    "effect": "Allow"
-                  }
-                ],
-                "metadata": null
+                "providerVersion": "2.0",
+                "provisioningState": "Succeeded"
               }
             },
+            "refreshSubscriptionRegistration": true,
             "resourceTypeRegistrations": [
               {
-                "id": "/subscriptions/ab7a8701-f7ef-471a-a2f4-d0ebbf494f77/providers/Microsoft.ProviderHub/providerRegistrations/Microsoft.Contoso/resourceTypeRegistrations/employees",
                 "name": "Microsoft.Contoso/employees",
                 "type": "Microsoft.ProviderHub/providerRegistrations/resourceTypeRegistrations",
+                "id": "/subscriptions/ab7a8701-f7ef-471a-a2f4-d0ebbf494f77/providers/Microsoft.ProviderHub/providerRegistrations/Microsoft.Contoso/resourceTypeRegistrations/employees",
                 "properties": {
-                  "routingType": "Default",
-                  "regionality": "Regional",
+                  "enableAsyncOperation": false,
+                  "enableThirdPartyS2S": false,
                   "endpoints": [
                     {
                       "apiVersions": [
@@ -113,6 +105,9 @@
                       ]
                     }
                   ],
+                  "provisioningState": "Succeeded",
+                  "regionality": "Regional",
+                  "routingType": "Default",
                   "swaggerSpecifications": [
                     {
                       "apiVersions": [
@@ -122,10 +117,7 @@
                       ],
                       "swaggerSpecFolderUri": "https://github.com/Azure/azure-rest-api-specs/blob/feature/azure/contoso/specification/contoso/resource-manager/Microsoft.SampleRP/"
                     }
-                  ],
-                  "enableAsyncOperation": false,
-                  "provisioningState": "Succeeded",
-                  "enableThirdPartyS2S": false
+                  ]
                 }
               }
             ]
@@ -136,13 +128,23 @@
               "centraluseuap"
             ],
             "manifestCheckinStatus": {
+              "commitId": "47317892d4edf22f08704f6b595105c4fd7a8db7",
               "isCheckedIn": true,
-              "statusMessage": "Manifest is successfully merged. Use the Default/Custom rollout (http://aka.ms/rpaasrollout) to roll out the manifest in ARM.",
-              "commitId": "47317892d4edf22f08704f6b595105c4fd7a8db7"
+              "statusMessage": "Manifest is successfully merged. Use the Default/Custom rollout (http://aka.ms/rpaasrollout) to roll out the manifest in ARM."
             }
           }
+        },
+        "systemData": {
+          "createdAt": "2020-02-01T01:01:01.1075056Z",
+          "createdBy": "string",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-02-01T01:01:01.1075056Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User"
         }
       }
     }
-  }
+  },
+  "operationId": "CustomRollouts_Get",
+  "title": "CustomRollouts_Get"
 }

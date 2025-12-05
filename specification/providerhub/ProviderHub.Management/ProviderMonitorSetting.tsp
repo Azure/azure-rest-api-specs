@@ -38,7 +38,10 @@ interface ProviderMonitorSettings {
    * Updates the provider monitor setting properties as specified in the request body. Update fails if the specified provider monitor setting does not already exist.
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<ProviderMonitorSetting, PatchModel = {}>;
+  update is Azure.ResourceManager.Legacy.CustomPatchSync<
+    ProviderMonitorSetting,
+    PatchModel = void
+  >;
 
   /**
    * Deletes a provider monitor setting.

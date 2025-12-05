@@ -1,48 +1,51 @@
 {
   "parameters": {
-    "subscriptionId": "ab7a8701-f7ef-471a-a2f4-d0ebbf494f77",
-    "providerNamespace": "Microsoft.Contoso",
     "api-version": "2024-09-01",
     "properties": {
       "kind": "Direct",
       "properties": {
-        "providerType": "Internal",
-        "providerVersion": "2.0",
-        "serviceName": "root",
-        "services": [
+        "capabilities": [
           {
-            "serviceName": "tags",
-            "status": "Inactive"
+            "effect": "Allow",
+            "quotaId": "CSP_2015-05-01"
+          },
+          {
+            "effect": "Allow",
+            "quotaId": "CSP_MG_2017-12-01"
           }
         ],
+        "customManifestVersion": "2.0",
+        "dstsConfiguration": {
+          "serviceDnsName": "prds.sparta.azure.com",
+          "serviceName": "prds-shim"
+        },
+        "legacyNamespace": "legacyNamespace",
+        "legacyRegistrations": [
+          "legacyRegistration"
+        ],
         "management": {
+          "incidentContactEmail": "helpme@contoso.com",
           "incidentRoutingService": "Contoso Resource Provider",
           "incidentRoutingTeam": "Contoso Triage",
-          "incidentContactEmail": "helpme@contoso.com",
           "serviceTreeInfos": [
             {
-              "serviceId": "d1b7d8ba-05e2-48e6-90d6-d781b99c6e69",
               "componentId": "d1b7d8ba-05e2-48e6-90d6-d781b99c6e69",
-              "readiness": "InDevelopment"
+              "readiness": "InDevelopment",
+              "serviceId": "d1b7d8ba-05e2-48e6-90d6-d781b99c6e69"
             }
           ]
         },
-        "capabilities": [
+        "managementGroupGlobalNotificationEndpoints": [
           {
-            "quotaId": "CSP_2015-05-01",
-            "effect": "Allow"
-          },
-          {
-            "quotaId": "CSP_MG_2017-12-01",
-            "effect": "Allow"
+            "endpointUri": "{your_management_group_notification_endpoint}"
           }
         ],
+        "notificationOptions": "EmitSpendingLimit",
         "notificationSettings": {
           "subscriberSettings": [
             {
               "filterRules": [
                 {
-                  "filterQuery": "Resources | where event.eventType in ('Microsoft.Network/IpAddresses/write', 'Microsoft.KeyVault/vaults/move/action')",
                   "endpointInformation": [
                     {
                       "endpoint": "https://userrp.azure.com/arnnotify",
@@ -54,112 +57,107 @@
                       "endpointType": "Eventhub",
                       "schemaVersion": "3.0"
                     }
-                  ]
+                  ],
+                  "filterQuery": "Resources | where event.eventType in ('Microsoft.Network/IpAddresses/write', 'Microsoft.KeyVault/vaults/move/action')"
                 }
               ]
             }
           ]
         },
-        "dstsConfiguration": {
-          "serviceName": "prds-shim",
-          "serviceDnsName": "prds.sparta.azure.com"
-        },
-        "notificationOptions": "EmitSpendingLimit",
-        "resourceHydrationAccounts": [
-          {
-            "subscriptionId": "e4eae963-2d15-43e6-a097-98bd75b33edd",
-            "accountName": "classichydrationprodsn01"
-          },
-          {
-            "subscriptionId": "69e69ecb-e69c-41d4-99b8-87dd12781067",
-            "accountName": "classichydrationprodch01"
-          }
-        ],
-        "managementGroupGlobalNotificationEndpoints": [
-          {
-            "endpointUri": "{your_management_group_notification_endpoint}"
-          }
-        ],
         "optionalFeatures": [
           "Microsoft.Resources/PlatformSubscription"
         ],
+        "providerType": "Internal",
+        "providerVersion": "2.0",
         "resourceGroupLockOptionDuringMove": {
           "blockActionVerb": "Action"
         },
+        "resourceHydrationAccounts": [
+          {
+            "accountName": "classichydrationprodsn01",
+            "subscriptionId": "e4eae963-2d15-43e6-a097-98bd75b33edd"
+          },
+          {
+            "accountName": "classichydrationprodch01",
+            "subscriptionId": "69e69ecb-e69c-41d4-99b8-87dd12781067"
+          }
+        ],
         "responseOptions": {
           "serviceClientOptionsType": "DisableAutomaticDecompression"
         },
-        "legacyNamespace": "legacyNamespace",
-        "legacyRegistrations": [
-          "legacyRegistration"
-        ],
-        "customManifestVersion": "2.0"
+        "serviceName": "root",
+        "services": [
+          {
+            "serviceName": "tags",
+            "status": "Inactive"
+          }
+        ]
       }
-    }
+    },
+    "providerNamespace": "Microsoft.Contoso",
+    "subscriptionId": "ab7a8701-f7ef-471a-a2f4-d0ebbf494f77"
   },
   "responses": {
     "200": {
       "description": "",
       "body": {
-        "id": "/subscriptions/ab7a8701-f7ef-471a-a2f4-d0ebbf494f77/providers/Microsoft.ProviderHub/providerRegistrations/Microsoft.Contoso",
         "name": "Microsoft.Contoso",
         "type": "Microsoft.ProviderHub/providerRegistrations",
+        "id": "/subscriptions/ab7a8701-f7ef-471a-a2f4-d0ebbf494f77/providers/Microsoft.ProviderHub/providerRegistrations/Microsoft.Contoso",
         "properties": {
-          "namespace": "Microsoft.Contoso",
-          "providerAuthorizations": [
+          "capabilities": [
             {
-              "applicationId": "1a3b5c7d-8e9f-10g1-1h12-i13j14k1",
-              "roleDefinitionId": "123456bf-gkur-2098-b890-98da392a00b2"
+              "effect": "Allow",
+              "quotaId": "CSP_2015-05-01"
+            },
+            {
+              "effect": "Allow",
+              "quotaId": "CSP_MG_2017-12-01"
             }
           ],
+          "customManifestVersion": "2.0",
+          "dstsConfiguration": {
+            "serviceDnsName": "prds.sparta.azure.com",
+            "serviceName": "prds-shim"
+          },
+          "legacyNamespace": "legacyNamespace",
+          "legacyRegistrations": [
+            "legacyRegistration"
+          ],
           "management": {
-            "manifestOwners": [
-              "manifestOwners-group"
-            ],
             "authorizationOwners": [
               "authorizationOwners-group"
             ],
+            "incidentContactEmail": "helpme@contoso.com",
             "incidentRoutingService": "",
             "incidentRoutingTeam": "",
-            "incidentContactEmail": "helpme@contoso.com",
+            "manifestOwners": [
+              "manifestOwners-group"
+            ],
+            "resourceAccessPolicy": "NotSpecified",
             "serviceTreeInfos": [
               {
-                "serviceId": "d1b7d8ba-05e2-48e6-90d6-d781b99c6e69",
                 "componentId": "d1b7d8ba-05e2-48e6-90d6-d781b99c6e69",
-                "readiness": "InDevelopment"
+                "readiness": "InDevelopment",
+                "serviceId": "d1b7d8ba-05e2-48e6-90d6-d781b99c6e69"
               }
-            ],
-            "resourceAccessPolicy": "NotSpecified"
+            ]
           },
-          "capabilities": [
+          "managementGroupGlobalNotificationEndpoints": [
             {
-              "quotaId": "CSP_2015-05-01",
-              "effect": "Allow"
-            },
-            {
-              "quotaId": "CSP_MG_2017-12-01",
-              "effect": "Allow"
+              "endpointUri": "{your_management_group_notification_endpoint}"
             }
           ],
           "metadata": {
             "onboardedVia": "ProviderHub"
           },
-          "providerVersion": "2.0",
-          "providerType": "Internal, Hidden",
-          "serviceName": "root",
-          "services": [
-            {
-              "serviceName": "tags",
-              "status": "Inactive"
-            }
-          ],
-          "provisioningState": "Succeeded",
+          "namespace": "Microsoft.Contoso",
+          "notificationOptions": "EmitSpendingLimit",
           "notificationSettings": {
             "subscriberSettings": [
               {
                 "filterRules": [
                   {
-                    "filterQuery": "Resources | where event.eventType in ('Microsoft.Network/IpAddresses/write', 'Microsoft.KeyVault/vaults/move/action')",
                     "endpointInformation": [
                       {
                         "endpoint": "https://userrp.azure.com/arnnotify",
@@ -171,119 +169,119 @@
                         "endpointType": "Eventhub",
                         "schemaVersion": "3.0"
                       }
-                    ]
+                    ],
+                    "filterQuery": "Resources | where event.eventType in ('Microsoft.Network/IpAddresses/write', 'Microsoft.KeyVault/vaults/move/action')"
                   }
                 ]
               }
             ]
           },
-          "dstsConfiguration": {
-            "serviceName": "prds-shim",
-            "serviceDnsName": "prds.sparta.azure.com"
-          },
-          "notificationOptions": "EmitSpendingLimit",
-          "resourceHydrationAccounts": [
-            {
-              "subscriptionId": "e4eae963-2d15-43e6-a097-98bd75b33edd",
-              "accountName": "classichydrationprodsn01"
-            },
-            {
-              "subscriptionId": "69e69ecb-e69c-41d4-99b8-87dd12781067",
-              "accountName": "classichydrationprodch01"
-            }
-          ],
-          "managementGroupGlobalNotificationEndpoints": [
-            {
-              "endpointUri": "{your_management_group_notification_endpoint}"
-            }
-          ],
           "optionalFeatures": [
             "Microsoft.Resources/PlatformSubscription"
           ],
+          "providerAuthorizations": [
+            {
+              "applicationId": "1a3b5c7d-8e9f-10g1-1h12-i13j14k1",
+              "roleDefinitionId": "123456bf-gkur-2098-b890-98da392a00b2"
+            }
+          ],
+          "providerType": "Internal, Hidden",
+          "providerVersion": "2.0",
+          "provisioningState": "Succeeded",
           "resourceGroupLockOptionDuringMove": {
             "blockActionVerb": "Action"
           },
+          "resourceHydrationAccounts": [
+            {
+              "accountName": "classichydrationprodsn01",
+              "subscriptionId": "e4eae963-2d15-43e6-a097-98bd75b33edd"
+            },
+            {
+              "accountName": "classichydrationprodch01",
+              "subscriptionId": "69e69ecb-e69c-41d4-99b8-87dd12781067"
+            }
+          ],
           "responseOptions": {
             "serviceClientOptionsType": "DisableAutomaticDecompression"
           },
-          "legacyNamespace": "legacyNamespace",
-          "legacyRegistrations": [
-            "legacyRegistration"
-          ],
-          "customManifestVersion": "2.0"
+          "serviceName": "root",
+          "services": [
+            {
+              "serviceName": "tags",
+              "status": "Inactive"
+            }
+          ]
         },
         "systemData": {
+          "createdAt": "2020-02-01T01:01:01.1075056Z",
           "createdBy": "string",
           "createdByType": "User",
-          "createdAt": "2020-02-01T01:01:01.1075056Z",
+          "lastModifiedAt": "2020-02-01T01:01:01.1075056Z",
           "lastModifiedBy": "string",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2020-02-01T01:01:01.1075056Z"
+          "lastModifiedByType": "User"
         }
       }
     },
     "201": {
       "description": "Successfully created the provider registration.",
       "body": {
-        "id": "/subscriptions/ab7a8701-f7ef-471a-a2f4-d0ebbf494f77/providers/Microsoft.ProviderHub/providerRegistrations/Microsoft.Contoso",
         "name": "Microsoft.Contoso",
         "type": "Microsoft.ProviderHub/providerRegistrations",
+        "id": "/subscriptions/ab7a8701-f7ef-471a-a2f4-d0ebbf494f77/providers/Microsoft.ProviderHub/providerRegistrations/Microsoft.Contoso",
         "properties": {
-          "namespace": "Microsoft.Contoso",
-          "providerAuthorizations": [
+          "capabilities": [
             {
-              "applicationId": "1a3b5c7d-8e9f-10g1-1h12-i13j14k1",
-              "roleDefinitionId": "123456bf-gkur-2098-b890-98da392a00b2"
+              "effect": "Allow",
+              "quotaId": "CSP_2015-05-01"
+            },
+            {
+              "effect": "Allow",
+              "quotaId": "CSP_MG_2017-12-01"
             }
           ],
+          "customManifestVersion": "2.0",
+          "dstsConfiguration": {
+            "serviceDnsName": "prds.sparta.azure.com",
+            "serviceName": "prds-shim"
+          },
+          "legacyNamespace": "legacyNamespace",
+          "legacyRegistrations": [
+            "legacyRegistration"
+          ],
           "management": {
-            "manifestOwners": [
-              "manifestOwners-group"
-            ],
             "authorizationOwners": [
               "authorizationOwners-group"
             ],
+            "incidentContactEmail": "helpme@contoso.com",
             "incidentRoutingService": "",
             "incidentRoutingTeam": "",
-            "incidentContactEmail": "helpme@contoso.com",
+            "manifestOwners": [
+              "manifestOwners-group"
+            ],
+            "resourceAccessPolicy": "NotSpecified",
             "serviceTreeInfos": [
               {
-                "serviceId": "d1b7d8ba-05e2-48e6-90d6-d781b99c6e69",
                 "componentId": "d1b7d8ba-05e2-48e6-90d6-d781b99c6e69",
-                "readiness": "InDevelopment"
+                "readiness": "InDevelopment",
+                "serviceId": "d1b7d8ba-05e2-48e6-90d6-d781b99c6e69"
               }
-            ],
-            "resourceAccessPolicy": "NotSpecified"
+            ]
           },
-          "capabilities": [
+          "managementGroupGlobalNotificationEndpoints": [
             {
-              "quotaId": "CSP_2015-05-01",
-              "effect": "Allow"
-            },
-            {
-              "quotaId": "CSP_MG_2017-12-01",
-              "effect": "Allow"
+              "endpointUri": "{your_management_group_notification_endpoint}"
             }
           ],
           "metadata": {
             "onboardedVia": "ProviderHub"
           },
-          "providerVersion": "2.0",
-          "providerType": "Internal, Hidden",
-          "serviceName": "root",
-          "services": [
-            {
-              "serviceName": "tags",
-              "status": "Inactive"
-            }
-          ],
-          "provisioningState": "Succeeded",
+          "namespace": "Microsoft.Contoso",
+          "notificationOptions": "EmitSpendingLimit",
           "notificationSettings": {
             "subscriberSettings": [
               {
                 "filterRules": [
                   {
-                    "filterQuery": "Resources | where event.eventType in ('Microsoft.Network/IpAddresses/write', 'Microsoft.KeyVault/vaults/move/action')",
                     "endpointInformation": [
                       {
                         "endpoint": "https://userrp.azure.com/arnnotify",
@@ -295,56 +293,60 @@
                         "endpointType": "Eventhub",
                         "schemaVersion": "3.0"
                       }
-                    ]
+                    ],
+                    "filterQuery": "Resources | where event.eventType in ('Microsoft.Network/IpAddresses/write', 'Microsoft.KeyVault/vaults/move/action')"
                   }
                 ]
               }
             ]
           },
-          "dstsConfiguration": {
-            "serviceName": "prds-shim",
-            "serviceDnsName": "prds.sparta.azure.com"
-          },
-          "notificationOptions": "EmitSpendingLimit",
-          "resourceHydrationAccounts": [
-            {
-              "subscriptionId": "e4eae963-2d15-43e6-a097-98bd75b33edd",
-              "accountName": "classichydrationprodsn01"
-            },
-            {
-              "subscriptionId": "69e69ecb-e69c-41d4-99b8-87dd12781067",
-              "accountName": "classichydrationprodch01"
-            }
-          ],
-          "managementGroupGlobalNotificationEndpoints": [
-            {
-              "endpointUri": "{your_management_group_notification_endpoint}"
-            }
-          ],
           "optionalFeatures": [
             "Microsoft.Resources/PlatformSubscription"
           ],
+          "providerAuthorizations": [
+            {
+              "applicationId": "1a3b5c7d-8e9f-10g1-1h12-i13j14k1",
+              "roleDefinitionId": "123456bf-gkur-2098-b890-98da392a00b2"
+            }
+          ],
+          "providerType": "Internal, Hidden",
+          "providerVersion": "2.0",
+          "provisioningState": "Succeeded",
           "resourceGroupLockOptionDuringMove": {
             "blockActionVerb": "Action"
           },
+          "resourceHydrationAccounts": [
+            {
+              "accountName": "classichydrationprodsn01",
+              "subscriptionId": "e4eae963-2d15-43e6-a097-98bd75b33edd"
+            },
+            {
+              "accountName": "classichydrationprodch01",
+              "subscriptionId": "69e69ecb-e69c-41d4-99b8-87dd12781067"
+            }
+          ],
           "responseOptions": {
             "serviceClientOptionsType": "DisableAutomaticDecompression"
           },
-          "legacyNamespace": "legacyNamespace",
-          "legacyRegistrations": [
-            "legacyRegistration"
-          ],
-          "customManifestVersion": "2.0"
+          "serviceName": "root",
+          "services": [
+            {
+              "serviceName": "tags",
+              "status": "Inactive"
+            }
+          ]
         },
         "systemData": {
+          "createdAt": "2020-02-01T01:01:01.1075056Z",
           "createdBy": "string",
           "createdByType": "User",
-          "createdAt": "2020-02-01T01:01:01.1075056Z",
+          "lastModifiedAt": "2020-02-01T01:01:01.1075056Z",
           "lastModifiedBy": "string",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2020-02-01T01:01:01.1075056Z"
+          "lastModifiedByType": "User"
         }
       }
     }
-  }
+  },
+  "operationId": "ProviderRegistrations_CreateOrUpdate",
+  "title": "DirectProviderRegistrations_CreateOrUpdate"
 }

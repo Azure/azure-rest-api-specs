@@ -1,8 +1,8 @@
 {
   "parameters": {
-    "subscriptionId": "ab7a8701-f7ef-471a-a2f4-d0ebbf494f77",
+    "api-version": "2024-09-01",
     "providerNamespace": "Microsoft.Contoso",
-    "api-version": "2024-09-01"
+    "subscriptionId": "ab7a8701-f7ef-471a-a2f4-d0ebbf494f77"
   },
   "responses": {
     "200": {
@@ -10,71 +10,73 @@
       "body": {
         "value": [
           {
-            "id": "/subscriptions/ab7a8701-f7ef-471a-a2f4-d0ebbf494f77/providers/Microsoft.ProviderHub/providerRegistrations/Microsoft.Contoso/notificationRegistration/2020week01",
-            "type": "Microsoft.ProviderHub/providerRegistrations/notificationRegistration",
             "name": "fooNotificationRegistration",
-            "systemData": {
-              "createdBy": "string",
-              "createdByType": "User",
-              "createdAt": "2020-02-01T01:01:01.1075056Z",
-              "lastModifiedBy": "string",
-              "lastModifiedByType": "User",
-              "lastModifiedAt": "2020-02-01T01:01:01.1075056Z"
-            },
+            "type": "Microsoft.ProviderHub/providerRegistrations/notificationRegistration",
+            "id": "/subscriptions/ab7a8701-f7ef-471a-a2f4-d0ebbf494f77/providers/Microsoft.ProviderHub/providerRegistrations/Microsoft.Contoso/notificationRegistration/2020week01",
             "properties": {
-              "notificationMode": "EventHub",
-              "messageScope": "RegisteredSubscriptions",
               "includedEvents": [
                 "*/write",
                 "Microsoft.Contoso/employees/delete"
               ],
+              "messageScope": "RegisteredSubscriptions",
               "notificationEndpoints": [
                 {
-                  "notificationDestination": "/subscriptions/ac6bcfb5-3dc1-491f-95a6-646b89bf3e88/resourceGroups/mgmtexp-eastus/providers/Microsoft.EventHub/namespaces/unitedstates-mgmtexpint/eventhubs/armlinkednotifications",
                   "locations": [
                     "",
                     "East US"
-                  ]
+                  ],
+                  "notificationDestination": "/subscriptions/ac6bcfb5-3dc1-491f-95a6-646b89bf3e88/resourceGroups/mgmtexp-eastus/providers/Microsoft.EventHub/namespaces/unitedstates-mgmtexpint/eventhubs/armlinkednotifications"
                 },
                 {
-                  "notificationDestination": "/subscriptions/ac6bcfb5-3dc1-491f-95a6-646b89bf3e88/resourceGroups/mgmtexp-northeurope/providers/Microsoft.EventHub/namespaces/europe-mgmtexpint/eventhubs/armlinkednotifications",
                   "locations": [
                     "North Europe"
-                  ]
+                  ],
+                  "notificationDestination": "/subscriptions/ac6bcfb5-3dc1-491f-95a6-646b89bf3e88/resourceGroups/mgmtexp-northeurope/providers/Microsoft.EventHub/namespaces/europe-mgmtexpint/eventhubs/armlinkednotifications"
                 }
-              ]
+              ],
+              "notificationMode": "EventHub"
+            },
+            "systemData": {
+              "createdAt": "2020-02-01T01:01:01.1075056Z",
+              "createdBy": "string",
+              "createdByType": "User",
+              "lastModifiedAt": "2020-02-01T01:01:01.1075056Z",
+              "lastModifiedBy": "string",
+              "lastModifiedByType": "User"
             }
           },
           {
-            "id": "/subscriptions/ab7a8701-f7ef-471a-a2f4-d0ebbf494f77/providers/Microsoft.ProviderHub/providerRegistrations/Microsoft.Contoso/notificationRegistration/2020week01",
-            "type": "Microsoft.ProviderHub/providerRegistrations/notificationRegistration",
             "name": "barNotificationRegistration",
-            "systemData": {
-              "createdBy": "string",
-              "createdByType": "User",
-              "createdAt": "2020-02-01T01:01:01.1075056Z",
-              "lastModifiedBy": "string",
-              "lastModifiedByType": "User",
-              "lastModifiedAt": "2020-02-01T01:01:01.1075056Z"
-            },
+            "type": "Microsoft.ProviderHub/providerRegistrations/notificationRegistration",
+            "id": "/subscriptions/ab7a8701-f7ef-471a-a2f4-d0ebbf494f77/providers/Microsoft.ProviderHub/providerRegistrations/Microsoft.Contoso/notificationRegistration/2020week01",
             "properties": {
-              "notificationMode": "EventHub",
-              "messageScope": "RegisteredSubscriptions",
               "includedEvents": [
                 "*/delete"
               ],
+              "messageScope": "RegisteredSubscriptions",
               "notificationEndpoints": [
                 {
-                  "notificationDestination": "/subscriptions/ac6bcfb5-3dc1-491f-95a6-646b89bf3e88/resourceGroups/mgmtexp-eastus/providers/Microsoft.EventHub/namespaces/unitedstates-mgmtexpint/eventhubs/armlinkednotifications",
                   "locations": [
                     ""
-                  ]
+                  ],
+                  "notificationDestination": "/subscriptions/ac6bcfb5-3dc1-491f-95a6-646b89bf3e88/resourceGroups/mgmtexp-eastus/providers/Microsoft.EventHub/namespaces/unitedstates-mgmtexpint/eventhubs/armlinkednotifications"
                 }
-              ]
+              ],
+              "notificationMode": "EventHub"
+            },
+            "systemData": {
+              "createdAt": "2020-02-01T01:01:01.1075056Z",
+              "createdBy": "string",
+              "createdByType": "User",
+              "lastModifiedAt": "2020-02-01T01:01:01.1075056Z",
+              "lastModifiedBy": "string",
+              "lastModifiedByType": "User"
             }
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "NotificationRegistrations_ListByProviderRegistration",
+  "title": "NotificationRegistrations_ListByProviderRegistration"
 }

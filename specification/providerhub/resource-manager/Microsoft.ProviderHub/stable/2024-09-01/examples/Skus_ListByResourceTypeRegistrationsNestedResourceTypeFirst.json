@@ -1,49 +1,51 @@
 {
   "parameters": {
-    "subscriptionId": "ab7a8701-f7ef-471a-a2f4-d0ebbf494f77",
-    "providerNamespace": "Microsoft.Contoso",
     "api-version": "2024-09-01",
+    "nestedResourceTypeFirst": "nestedResourceTypeFirst",
+    "providerNamespace": "Microsoft.Contoso",
     "resourceType": "testResourceType",
-    "nestedResourceTypeFirst": "nestedResourceTypeFirst"
+    "subscriptionId": "ab7a8701-f7ef-471a-a2f4-d0ebbf494f77"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "id": "/subscriptions/ab7a8701-f7ef-471a-a2f4-d0ebbf494f77/providers/Microsoft.ProviderHub/providerRegistrations/Microsoft.Contoso/resourcetypeRegistrations/employees/resourcetypeRegistrations/nestedEmployee/skus/sku1",
             "name": "Microsoft.Contoso/employees/nestedEmployee/sku1",
             "type": "Microsoft.ProviderHub/providerRegistrations/resourcetypeRegistrations/resourcetypeRegistrations/skus",
+            "id": "/subscriptions/ab7a8701-f7ef-471a-a2f4-d0ebbf494f77/providers/Microsoft.ProviderHub/providerRegistrations/Microsoft.Contoso/resourcetypeRegistrations/employees/resourcetypeRegistrations/nestedEmployee/skus/sku1",
             "properties": {
               "skuSettings": [
                 {
                   "name": "freeSku",
-                  "tier": "Tier1",
-                  "kind": "Standard"
+                  "kind": "Standard",
+                  "tier": "Tier1"
                 },
                 {
                   "name": "premiumSku",
-                  "tier": "Tier2",
-                  "kind": "Premium",
                   "costs": [
                     {
                       "meterId": "xxx"
                     }
-                  ]
+                  ],
+                  "kind": "Premium",
+                  "tier": "Tier2"
                 }
               ]
             },
             "systemData": {
+              "createdAt": "2020-02-01T01:01:01.1075056Z",
               "createdBy": "string",
               "createdByType": "User",
-              "createdAt": "2020-02-01T01:01:01.1075056Z",
+              "lastModifiedAt": "2020-02-01T01:01:01.1075056Z",
               "lastModifiedBy": "string",
-              "lastModifiedByType": "User",
-              "lastModifiedAt": "2020-02-01T01:01:01.1075056Z"
+              "lastModifiedByType": "User"
             }
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "Skus_ListByResourceTypeRegistrationsNestedResourceTypeFirst",
+  "title": "Skus_ListByResourceTypeRegistrationsNestedResourceTypeFirst"
 }

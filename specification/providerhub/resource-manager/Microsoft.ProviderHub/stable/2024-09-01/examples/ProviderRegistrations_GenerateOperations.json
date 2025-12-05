@@ -1,8 +1,8 @@
 {
   "parameters": {
-    "subscriptionId": "ab7a8701-f7ef-471a-a2f4-d0ebbf494f77",
+    "api-version": "2024-09-01",
     "providerNamespace": "Microsoft.Contoso",
-    "api-version": "2024-09-01"
+    "subscriptionId": "ab7a8701-f7ef-471a-a2f4-d0ebbf494f77"
   },
   "responses": {
     "200": {
@@ -10,47 +10,49 @@
       "body": [
         {
           "name": "Microsoft.Contoso/Employees/Read",
-          "isDataAction": false,
           "display": {
-            "provider": "Microsoft.Contoso",
-            "resource": "Employees",
+            "description": "Read employees",
             "operation": "Gets/List employee resources",
-            "description": "Read employees"
-          }
+            "provider": "Microsoft.Contoso",
+            "resource": "Employees"
+          },
+          "isDataAction": false
         },
         {
           "name": "Microsoft.Contoso/Employees/Write",
-          "isDataAction": false,
           "display": {
-            "provider": "Microsoft.Contoso",
-            "resource": "Employees",
+            "description": "Writes employees",
             "operation": "Create/update employee resources",
-            "description": "Writes employees"
-          }
+            "provider": "Microsoft.Contoso",
+            "resource": "Employees"
+          },
+          "isDataAction": false
         },
         {
           "name": "Microsoft.Contoso/Employees/Delete",
-          "isDataAction": false,
-          "origin": "User",
           "display": {
-            "provider": "Microsoft.Contoso",
-            "resource": "Employees",
+            "description": "Deletes employees",
             "operation": "Deletes employee resource",
-            "description": "Deletes employees"
-          }
+            "provider": "Microsoft.Contoso",
+            "resource": "Employees"
+          },
+          "isDataAction": false,
+          "origin": "User"
         },
         {
           "name": "Microsoft.Contoso/Employees/Action",
-          "isDataAction": true,
-          "origin": "System",
           "display": {
-            "provider": "Microsoft.Contoso",
-            "resource": "Employees",
+            "description": "Writes employees",
             "operation": "Create/update employee resources",
-            "description": "Writes employees"
-          }
+            "provider": "Microsoft.Contoso",
+            "resource": "Employees"
+          },
+          "isDataAction": true,
+          "origin": "System"
         }
       ]
     }
-  }
+  },
+  "operationId": "ProviderRegistrations_GenerateOperations",
+  "title": "ProviderRegistrations_GenerateOperations"
 }

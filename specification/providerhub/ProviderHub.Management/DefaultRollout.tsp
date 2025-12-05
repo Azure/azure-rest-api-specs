@@ -29,12 +29,7 @@ interface DefaultRolloutOps
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
-
-        /** the provider namespace */
-        @path
-        @segment("providers")
-        @key
-        providerNamespace: "Microsoft.ProviderHub",
+        ...Azure.ResourceManager.Legacy.Provider,
 
         /** The name of the resource provider hosted within ProviderHub. */
         @path
@@ -89,12 +84,7 @@ interface NewRegionFrontloadReleaseOps
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
-
-        /** the provider namespace */
-        @path
-        @segment("providers")
-        @key
-        providerNamespace: "Microsoft.ProviderHub",
+        ...Azure.ResourceManager.Legacy.Provider,
 
         /** The name of the resource provider hosted within ProviderHub. */
         @path

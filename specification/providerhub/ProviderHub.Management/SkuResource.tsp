@@ -29,12 +29,7 @@ interface SkuResourceOps
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
-
-        /** the provider namespace */
-        @path
-        @segment("providers")
-        @key
-        providerNamespace: "Microsoft.ProviderHub",
+        ...Azure.ResourceManager.Legacy.Provider,
 
         /** The name of the resource provider hosted within ProviderHub. */
         @path
@@ -71,7 +66,7 @@ interface SkuResources {
    * Creates or updates the resource type skus in the given resource type.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Skus_CreateOrUpdate")
   createOrUpdate is SkuResourceOps.CreateOrUpdateSync<
     SkuResource,
@@ -101,12 +96,7 @@ interface SkusOps
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
-
-        /** the provider namespace */
-        @path
-        @segment("providers")
-        @key
-        providerNamespace: "Microsoft.ProviderHub",
+        ...Azure.ResourceManager.Legacy.Provider,
 
         /** The name of the resource provider hosted within ProviderHub. */
         @path
@@ -146,7 +136,7 @@ interface Skus {
   /**
    * Creates or updates the resource type skus in the given resource type.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdateNestedResourceTypeFirst is SkusOps.CreateOrUpdateSync<
     SkuResource,
     Response = ArmResourceUpdatedResponse<SkuResource>
@@ -166,17 +156,12 @@ interface Skus {
   >;
 }
 @armResourceOperations
-interface SkuResourceOperationGroupOps
+interface SkuResourceOperationOps
   extends Azure.ResourceManager.Legacy.ExtensionOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
-
-        /** the provider namespace */
-        @path
-        @segment("providers")
-        @key
-        providerNamespace: "Microsoft.ProviderHub",
+        ...Azure.ResourceManager.Legacy.Provider,
 
         /** The name of the resource provider hosted within ProviderHub. */
         @path
@@ -213,21 +198,21 @@ interface SkuResourceOperationGroupOps
     > {}
 
 @armResourceOperations
-interface SkuResourceOperationGroup {
+interface SkuResourceOperations {
   /**
    * Gets the sku details for the given resource type and sku name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Skus_GetNestedResourceTypeSecond")
-  getNestedResourceTypeSecond is SkuResourceOperationGroupOps.Read<SkuResource>;
+  getNestedResourceTypeSecond is SkuResourceOperationOps.Read<SkuResource>;
 
   /**
    * Creates or updates the resource type skus in the given resource type.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Skus_CreateOrUpdateNestedResourceTypeSecond")
-  createOrUpdateNestedResourceTypeSecond is SkuResourceOperationGroupOps.CreateOrUpdateSync<
+  createOrUpdateNestedResourceTypeSecond is SkuResourceOperationOps.CreateOrUpdateSync<
     SkuResource,
     Response = ArmResourceUpdatedResponse<SkuResource>
   >;
@@ -237,14 +222,14 @@ interface SkuResourceOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Skus_DeleteNestedResourceTypeSecond")
-  deleteNestedResourceTypeSecond is SkuResourceOperationGroupOps.DeleteSync<SkuResource>;
+  deleteNestedResourceTypeSecond is SkuResourceOperationOps.DeleteSync<SkuResource>;
 
   /**
    * Gets the list of skus for the given resource type.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Skus_ListByResourceTypeRegistrationsNestedResourceTypeSecond")
-  listByResourceTypeRegistrationsNestedResourceTypeSecond is SkuResourceOperationGroupOps.List<
+  listByResourceTypeRegistrationsNestedResourceTypeSecond is SkuResourceOperationOps.List<
     SkuResource,
     Response = ArmResponse<SkuResourceArrayResponseWithContinuation>
   >;
@@ -255,12 +240,7 @@ interface SkuResourceOperationGroupOps
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
-
-        /** the provider namespace */
-        @path
-        @segment("providers")
-        @key
-        providerNamespace: "Microsoft.ProviderHub",
+        ...Azure.ResourceManager.Legacy.Provider,
 
         /** The name of the resource provider hosted within ProviderHub. */
         @path
@@ -315,7 +295,7 @@ interface SkuResourceOperationGroup {
    * Creates or updates the resource type skus in the given resource type.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Skus_CreateOrUpdateNestedResourceTypeThird")
   createOrUpdateNestedResourceTypeThird is SkuResourceOperationGroupOps.CreateOrUpdateSync<
     SkuResource,
@@ -348,7 +328,7 @@ interface SkuResourceOperationGroup {
 @@doc(Skus.createOrUpdateNestedResourceTypeFirst::parameters.resource,
   "The required body parameters supplied to the resource sku operation."
 );
-@@doc(SkuResourceOperationGroup.createOrUpdateNestedResourceTypeSecond::parameters.resource,
+@@doc(SkuResourceOperations.createOrUpdateNestedResourceTypeSecond::parameters.resource,
   "The required body parameters supplied to the resource sku operation."
 );
 @@doc(SkuResourceOperationGroup.createOrUpdateNestedResourceTypeThird::parameters.resource,

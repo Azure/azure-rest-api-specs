@@ -24,7 +24,7 @@ model ProviderRegistration
   /**
    * Provider registration kind. This Metadata is also used by portal/tooling/etc to render different UX experiences for resources of the same type.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   kind?: ProviderRegistrationKind = ProviderRegistrationKind.Managed;
 }
 
@@ -115,6 +115,7 @@ interface ProviderRegistrations {
       @minLength(3)
       @pattern("^[a-z][a-z0-9]*$")
       @path
+      @segment("resourceActions")
       resourceActionName: string;
     }
   >;

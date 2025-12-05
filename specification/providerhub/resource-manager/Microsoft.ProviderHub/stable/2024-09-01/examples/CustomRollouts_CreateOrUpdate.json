@@ -1,15 +1,12 @@
 {
   "parameters": {
-    "subscriptionId": "ab7a8701-f7ef-471a-a2f4-d0ebbf494f77",
-    "providerNamespace": "Microsoft.Contoso",
-    "rolloutName": "brazilUsShoeBoxTesting",
     "api-version": "2024-09-01",
     "properties": {
       "properties": {
         "specification": {
           "autoProvisionConfig": {
-            "storage": true,
-            "resourceGraph": true
+            "resourceGraph": true,
+            "storage": true
           },
           "canary": {
             "regions": [
@@ -19,29 +16,24 @@
           "refreshSubscriptionRegistration": true
         }
       }
-    }
+    },
+    "providerNamespace": "Microsoft.Contoso",
+    "rolloutName": "brazilUsShoeBoxTesting",
+    "subscriptionId": "ab7a8701-f7ef-471a-a2f4-d0ebbf494f77"
   },
   "responses": {
     "200": {
       "description": "Custom rollout completed successfully.",
       "body": {
-        "id": "/subscriptions/ab7a8701-f7ef-471a-a2f4-d0ebbf494f77/providers/Microsoft.ProviderHub/providerRegistrations/Microsoft.Contoso/customRollouts/brazilUsShoeBoxTesting",
         "name": "Microsoft.Contoso/brazilUsShoeBoxTesting",
         "type": "Microsoft.ProviderHub/providerRegistrations/customRollouts",
-        "systemData": {
-          "createdBy": "string",
-          "createdByType": "User",
-          "createdAt": "2020-02-01T01:01:01.1075056Z",
-          "lastModifiedBy": "string",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2020-02-01T01:01:01.1075056Z"
-        },
+        "id": "/subscriptions/ab7a8701-f7ef-471a-a2f4-d0ebbf494f77/providers/Microsoft.ProviderHub/providerRegistrations/Microsoft.Contoso/customRollouts/brazilUsShoeBoxTesting",
         "properties": {
           "provisioningState": "Succeeded",
           "specification": {
             "autoProvisionConfig": {
-              "storage": true,
-              "resourceGraph": true
+              "resourceGraph": true,
+              "storage": true
             },
             "canary": {
               "regions": [
@@ -59,38 +51,34 @@
               "centraluseuap"
             ],
             "manifestCheckinStatus": {
+              "commitId": "47317892d4edf22f08704f6b595105c4fd7a8db7",
               "isCheckedIn": true,
-              "statusMessage": "Manifest is successfully merged. Use the Default/Custom rollout (http://aka.ms/rpaasrollout) to roll out the manifest in ARM.",
-              "commitId": "47317892d4edf22f08704f6b595105c4fd7a8db7"
+              "statusMessage": "Manifest is successfully merged. Use the Default/Custom rollout (http://aka.ms/rpaasrollout) to roll out the manifest in ARM."
             }
           }
+        },
+        "systemData": {
+          "createdAt": "2020-02-01T01:01:01.1075056Z",
+          "createdBy": "string",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-02-01T01:01:01.1075056Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User"
         }
       }
     },
     "201": {
       "description": "Custom rollout started successfully.",
-      "headers": {
-        "location": "https://management.azure.com/subscriptions/ab7a8701-f7ef-471a-a2f4-d0ebbf494f77/providers/Microsoft.ProviderHub/operationStauses/11111111-f7ef-471a-a2f4-d0ebbf494f77",
-        "retry-after": "5000"
-      },
       "body": {
-        "id": "/subscriptions/ab7a8701-f7ef-471a-a2f4-d0ebbf494f77/providers/Microsoft.ProviderHub/providerRegistrations/Microsoft.Contoso/customRollouts/brazilUsShoeBoxTesting",
         "name": "Microsoft.Contoso/brazilUsShoeBoxTesting",
         "type": "Microsoft.ProviderHub/providerRegistrations/customRollouts",
-        "systemData": {
-          "createdBy": "string",
-          "createdByType": "User",
-          "createdAt": "2020-02-01T01:01:01.1075056Z",
-          "lastModifiedBy": "string",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2020-02-01T01:01:01.1075056Z"
-        },
+        "id": "/subscriptions/ab7a8701-f7ef-471a-a2f4-d0ebbf494f77/providers/Microsoft.ProviderHub/providerRegistrations/Microsoft.Contoso/customRollouts/brazilUsShoeBoxTesting",
         "properties": {
           "provisioningState": "RolloutInProgress",
           "specification": {
             "autoProvisionConfig": {
-              "storage": true,
-              "resourceGraph": true
+              "resourceGraph": true,
+              "storage": true
             },
             "canary": {
               "regions": [
@@ -108,8 +96,22 @@
               "centraluseuap"
             ]
           }
+        },
+        "systemData": {
+          "createdAt": "2020-02-01T01:01:01.1075056Z",
+          "createdBy": "string",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-02-01T01:01:01.1075056Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User"
         }
+      },
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/ab7a8701-f7ef-471a-a2f4-d0ebbf494f77/providers/Microsoft.ProviderHub/operationStauses/11111111-f7ef-471a-a2f4-d0ebbf494f77",
+        "retry-after": "5000"
       }
     }
-  }
+  },
+  "operationId": "CustomRollouts_CreateOrUpdate",
+  "title": "CustomRollouts_CreateOrUpdate"
 }

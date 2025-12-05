@@ -1,17 +1,14 @@
 {
   "parameters": {
-    "subscriptionId": "ab7a8701-f7ef-471a-a2f4-d0ebbf494f77",
-    "providerNamespace": "Microsoft.Contoso",
     "api-version": "2024-09-01",
     "notificationRegistrationName": "fooNotificationRegistration",
     "properties": {
       "properties": {
-        "notificationMode": "EventHub",
-        "messageScope": "RegisteredSubscriptions",
         "includedEvents": [
           "*/write",
           "Microsoft.Contoso/employees/delete"
         ],
+        "messageScope": "RegisteredSubscriptions",
         "notificationEndpoints": [
           {
             "locations": [
@@ -26,32 +23,26 @@
             ],
             "notificationDestination": "/subscriptions/ac6bcfb5-3dc1-491f-95a6-646b89bf3e88/resourceGroups/mgmtexp-northeurope/providers/Microsoft.EventHub/namespaces/europe-mgmtexpint/eventhubs/armlinkednotifications"
           }
-        ]
+        ],
+        "notificationMode": "EventHub"
       }
-    }
+    },
+    "providerNamespace": "Microsoft.Contoso",
+    "subscriptionId": "ab7a8701-f7ef-471a-a2f4-d0ebbf494f77"
   },
   "responses": {
     "200": {
       "description": "Gets the notification registration details.",
       "body": {
-        "id": "/subscriptions/ab7a8701-f7ef-471a-a2f4-d0ebbf494f77/providers/Microsoft.ProviderHub/providerRegistrations/Microsoft.Contoso/notificationregistrations/fooNotificationRegistration",
-        "type": "Microsoft.ProviderHub/providerRegistrations/notificationregistrations",
         "name": "fooNotificationRegistration",
-        "systemData": {
-          "createdBy": "string",
-          "createdByType": "User",
-          "createdAt": "2020-02-01T01:01:01.1075056Z",
-          "lastModifiedBy": "string",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2020-02-01T01:01:01.1075056Z"
-        },
+        "type": "Microsoft.ProviderHub/providerRegistrations/notificationregistrations",
+        "id": "/subscriptions/ab7a8701-f7ef-471a-a2f4-d0ebbf494f77/providers/Microsoft.ProviderHub/providerRegistrations/Microsoft.Contoso/notificationregistrations/fooNotificationRegistration",
         "properties": {
-          "notificationMode": "EventHub",
-          "messageScope": "RegisteredSubscriptions",
           "includedEvents": [
             "*/write",
             "Microsoft.Contoso/employees/delete"
           ],
+          "messageScope": "RegisteredSubscriptions",
           "notificationEndpoints": [
             {
               "locations": [
@@ -66,9 +57,20 @@
               ],
               "notificationDestination": "/subscriptions/ac6bcfb5-3dc1-491f-95a6-646b89bf3e88/resourceGroups/mgmtexp-northeurope/providers/Microsoft.EventHub/namespaces/europe-mgmtexpint/eventhubs/armlinkednotifications"
             }
-          ]
+          ],
+          "notificationMode": "EventHub"
+        },
+        "systemData": {
+          "createdAt": "2020-02-01T01:01:01.1075056Z",
+          "createdBy": "string",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-02-01T01:01:01.1075056Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User"
         }
       }
     }
-  }
+  },
+  "operationId": "NotificationRegistrations_CreateOrUpdate",
+  "title": "NotificationRegistrations_CreateOrUpdate"
 }
