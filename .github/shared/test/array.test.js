@@ -1,5 +1,3 @@
-// @ts-check
-
 import { describe, expect, it } from "vitest";
 import { filterAsync, flatMapAsync, includesEvery, includesNone, mapAsync } from "../src/array.js";
 import { sleep } from "../src/sleep.js";
