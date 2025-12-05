@@ -8,6 +8,14 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/DiskRP/{version-status}/{version}/DiskRP.json"
     examples-dir: "{project-root}/examples"
     arm-resource-flattening: true
+  "@azure-tools/typespec-ts":
+    service-dir: "sdk/compute"
+    experimental-extensible-enums: true
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-computedisk"
+    flavor: azure
+    compatibility-lro: true
+    package-details:
+      name: "@azure/arm-computedisk"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
