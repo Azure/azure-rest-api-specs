@@ -1,14 +1,14 @@
-# SearchIndexClient
+# SearchIndexClient And SearchServiceClient
     
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for SearchIndexClient.
+This is the AutoRest configuration file for SearchIndexClient and SearchServiceClient.
 
 
 ---
 ## Getting Started 
 
-To build the SDK for SearchIndexClient, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
+To build the SDK for SearchIndexClient and SearchServiceClient, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
 
@@ -20,7 +20,7 @@ To see additional help and options, run:
 ## Configuration
 
 ### Basic Information 
-These are the global settings for SearchIndexClient.
+These are the global settings for SearchIndexClient and SearchServiceClient.
 
 ``` yaml
 openapi-type: data-plane
@@ -35,6 +35,7 @@ These settings apply only when `--tag=package-2019-05-preview` is specified on t
 opt-in-extensible-enums: true
 input-file:
 - preview/2019-05-06-preview/searchindex.json
+- preview/2019-05-06-preview/searchservice.json
 ```
 
 ### Tag: package-2019-05
@@ -44,6 +45,7 @@ These settings apply only when `--tag=package-2019-05` is specified on the comma
 ``` yaml $(tag) == 'package-2019-05'
 input-file:
 - stable/2019-05-06/searchindex.json
+- stable/2019-05-06/searchservice.json
 ```
 
 ### Tag: package-2017-11-preview
@@ -53,6 +55,7 @@ These settings apply only when `--tag=package-2017-11-preview` is specified on t
 ``` yaml $(tag) == 'package-2017-11-preview'
 input-file:
 - preview/2017-11-11-preview/searchindex.json
+- preview/2017-11-11-preview/searchservice.json
 ```
 
 ### Tag: package-2017-11
@@ -62,6 +65,7 @@ These settings apply only when `--tag=package-2017-11` is specified on the comma
 ``` yaml $(tag) == 'package-2017-11'
 input-file:
 - preview/2017-11-11/searchindex.json
+- preview/2017-11-11/searchservice.json
 ```
 
 ### Tag: package-2016-09-preview
@@ -71,6 +75,7 @@ These settings apply only when `--tag=package-2016-09-preview` is specified on t
 ``` yaml $(tag) == 'package-2016-09-preview'
 input-file:
 - preview/2016-09-01-preview/searchindex.json
+- preview/2016-09-01-preview/searchservice.json
 ```
 
 ### Tag: package-2016-09
@@ -80,6 +85,7 @@ These settings apply only when `--tag=package-2016-09` is specified on the comma
 ``` yaml $(tag) == 'package-2016-09'
 input-file:
 - preview/2016-09-01/searchindex.json
+- preview/2016-09-01/searchservice.json
 ```
  
 ### Tag: package-2015-02-preview
@@ -89,6 +95,7 @@ These settings apply only when `--tag=package-2015-02-preview` is specified on t
 ``` yaml $(tag) == 'package-2015-02-preview'
 input-file:
 - preview/2015-02-28-preview/searchindex.json
+- preview/2015-02-28-preview/searchservice.json
 ```
  
 ### Tag: package-2015-02
@@ -98,6 +105,7 @@ These settings apply only when `--tag=package-2015-02` is specified on the comma
 ``` yaml $(tag) == 'package-2015-02'
 input-file:
 - preview/2015-02-28/searchindex.json
+- preview/2015-02-28/searchservice.json
 ```
 
 ---
@@ -307,14 +315,21 @@ require: $(this-folder)/../../../../profiles/readme.md
 # all the input files across all versions
 input-file:
   - $(this-folder)/preview/2019-05-06-preview/searchindex.json
+  - $(this-folder)/preview/2019-05-06-preview/searchservice.json
   - $(this-folder)/stable/2019-05-06/searchindex.json
+  - $(this-folder)/stable/2019-05-06/searchservice.json
   - $(this-folder)/preview/2017-11-11-preview/searchindex.json
+  - $(this-folder)/preview/2017-11-11-preview/searchservice.json
   - $(this-folder)/preview/2017-11-11/searchindex.json
+  - $(this-folder)/preview/2017-11-11/searchservice.json
   - $(this-folder)/preview/2016-09-01-preview/searchindex.json
+  - $(this-folder)/preview/2016-09-01-preview/searchservice.json
   - $(this-folder)/preview/2016-09-01/searchindex.json
+  - $(this-folder)/preview/2016-09-01/searchservice.json
   - $(this-folder)/preview/2015-02-28-preview/searchindex.json
+  - $(this-folder)/preview/2015-02-28-preview/searchservice.json
   - $(this-folder)/preview/2015-02-28/searchindex.json
-
+  - $(this-folder)/preview/2015-02-28/searchservice.json
 ```
 
 If there are files that should not be in the `all-api-versions` set, 
