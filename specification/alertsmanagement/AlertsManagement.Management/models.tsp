@@ -686,6 +686,7 @@ model AlertsManagementErrorResponse {
 /**
  * Details of error response.
  */
+@Azure.ResourceManager.Legacy.armExternalType
 model ErrorResponseBody {
   /**
    * Error code, intended to be consumed programmatically.

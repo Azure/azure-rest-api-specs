@@ -5,7 +5,7 @@ using Microsoft.AlertsManagement;
 
 @@clientName(Alerts.changeStateTenant::parameters.body, "comment");
 @@clientLocation(AlertOperationGroup.getById, Alerts);
-@@clientLocation(AlertOperationGroup.getAllTenant, Alerts);
+@@clientLocation(AlertOperationGroup.getAll, Alerts);
 @@clientLocation(AlertOperationGroup.changeState, Alerts);
 @@clientName(AlertOperationGroup.changeState::parameters.body, "comment");
 @@clientLocation(AlertOperationGroup.getHistory, Alerts);

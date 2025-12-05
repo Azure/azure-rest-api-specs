@@ -31,7 +31,8 @@ interface AlertsOperationGroup {
        */
       @query("identifier")
       identifier: Identifier;
-    }
+    },
+    Error = AlertsManagementErrorResponse
   >;
   /**
    * Get a summarized count of your alerts grouped by various parameters (e.g. grouping by 'Severity' returns the count of alerts for each severity).
@@ -116,6 +117,7 @@ interface AlertsOperationGroup {
        */
       @query("customTimeRange")
       customTimeRange?: string;
-    }
+    },
+    Error = AlertsManagementErrorResponse
   >;
 }
