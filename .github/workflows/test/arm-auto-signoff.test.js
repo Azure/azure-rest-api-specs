@@ -1,7 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { CommitStatusState } from "../../shared/src/github.js";
-import { getLabelActionImpl } from "../src/arm-auto-signoff-status.js";
-import { LabelAction } from "../src/label.js";
+import { getLabelActionImpl } from "../src/arm-auto-signoff/arm-auto-signoff-status.js";
 import { createMockCore, createMockGithub as createMockGithubBase } from "./mocks.js";
 
 const core = createMockCore();
@@ -23,7 +22,7 @@ function createMockGithub({ incrementalTypeSpec }) {
           conclusion: null,
         },
         {
-          name: "ARM Incremental TypeSpec",
+          name: "ARM Auto-SignOff - Analyze Code",
           id: 456,
           status: "completed",
           conclusion: "success",
@@ -32,9 +31,11 @@ function createMockGithub({ incrementalTypeSpec }) {
     },
   });
 
+  // Return artifact in the format: arm-auto-signoff-code-results=incrementalTypeSpec-VALUE,isTrivial-VALUE,qualifies-VALUE
+  const qualifies = incrementalTypeSpec ? "true" : "false";
   github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
     data: {
-      artifacts: [{ name: `incremental-typespec=${incrementalTypeSpec}` }],
+      artifacts: [{ name: `arm-auto-signoff-code-results=incrementalTypeSpec-${qualifies},isTrivial-false,qualifies-${qualifies}` }],
     },
   });
 
@@ -81,13 +82,13 @@ describe("getLabelActionImpl", () => {
         github: github,
         core: core,
       }),
-    ).resolves.toEqual({ labelAction: LabelAction.None, headSha: "abc123", issueNumber: 123 });
+    ).resolves.toEqual({ headSha: "abc123", issueNumber: 123, autoSignOffLabels: undefined });
   });
 
   it("removes label if not incremental typespec", async () => {
     const github = createMockGithub({ incrementalTypeSpec: false });
     github.rest.issues.listLabelsOnIssue.mockResolvedValue({
-      data: [{ name: "ARMAutoSignedOff" }],
+      data: [{ name: "ARMAutoSignedOff-IncrementalTSP" }],
     });
 
     await expect(
@@ -99,7 +100,7 @@ describe("getLabelActionImpl", () => {
         github: github,
         core: core,
       }),
-    ).resolves.toEqual({ labelAction: LabelAction.Remove, headSha: "abc123", issueNumber: 123 });
+    ).resolves.toEqual({ headSha: "abc123", issueNumber: 123, autoSignOffLabels: [] });
   });
 
   it("no-ops if incremental typespec in progress", async () => {
@@ -108,7 +109,7 @@ describe("getLabelActionImpl", () => {
       data: {
         workflow_runs: [
           {
-            name: "ARM Incremental TypeSpec",
+            name: "ARM Auto-SignOff - Analyze Code",
             id: 456,
             status: "in_progress",
             conclusion: null,
@@ -126,13 +127,13 @@ describe("getLabelActionImpl", () => {
         github: github,
         core: core,
       }),
-    ).resolves.toEqual({ labelAction: LabelAction.None, headSha: "abc123", issueNumber: 123 });
+    ).resolves.toEqual({ headSha: "abc123", issueNumber: 123, autoSignOffLabels: undefined });
   });
 
   it("removes label if no runs of incremental typespec", async () => {
     const github = createMockGithubBase();
     github.rest.issues.listLabelsOnIssue.mockResolvedValue({
-      data: [{ name: "ARMAutoSignedOff" }],
+      data: [{ name: "ARMAutoSignedOff-IncrementalTSP" }],
     });
     github.rest.actions.listWorkflowRunsForRepo.mockResolvedValue({
       data: {
@@ -149,26 +150,26 @@ describe("getLabelActionImpl", () => {
         github: github,
         core: core,
       }),
-    ).resolves.toEqual({ labelAction: LabelAction.Remove, headSha: "abc123", issueNumber: 123 });
+    ).resolves.toEqual({ headSha: "abc123", issueNumber: 123, autoSignOffLabels: [] });
   });
 
   it("uses latest run of incremental typespec", async () => {
     const github = createMockGithubBase();
     github.rest.issues.listLabelsOnIssue.mockResolvedValue({
-      data: [{ name: "ARMAutoSignedOff" }],
+      data: [{ name: "ARMAutoSignedOff-IncrementalTSP" }],
     });
     github.rest.actions.listWorkflowRunsForRepo.mockResolvedValue({
       data: {
         workflow_runs: [
           {
-            name: "ARM Incremental TypeSpec",
+            name: "ARM Auto-SignOff - Analyze Code",
             id: 456,
             status: "completed",
             conclusion: "success",
             updated_at: "2020-01-22T19:33:08Z",
           },
           {
-            name: "ARM Incremental TypeSpec",
+            name: "ARM Auto-SignOff - Analyze Code",
             id: 789,
             status: "completed",
             conclusion: "failure",
@@ -187,13 +188,13 @@ describe("getLabelActionImpl", () => {
         github: github,
         core: core,
       }),
-    ).resolves.toEqual({ labelAction: LabelAction.Remove, headSha: "abc123", issueNumber: 123 });
+    ).resolves.toEqual({ headSha: "abc123", issueNumber: 123, autoSignOffLabels: [] });
   });
 
   it.each([
-    { labels: ["ARMAutoSignedOff"] },
-    { labels: ["ARMAutoSignedOff", "ARMReview", "NotReadyForARMReview"] },
-    { labels: ["ARMAutoSignedOff", "ARMReview", "SuppressionReviewRequired"] },
+    { labels: ["ARMAutoSignedOff-IncrementalTSP"] },
+    { labels: ["ARMAutoSignedOff-IncrementalTSP", "ARMReview", "NotReadyForARMReview"] },
+    { labels: ["ARMAutoSignedOff-IncrementalTSP", "ARMReview", "SuppressionReviewRequired"] },
   ])("removes label if not all labels match ($labels)", async ({ labels }) => {
     const github = createMockGithub({ incrementalTypeSpec: true });
 
@@ -210,7 +211,7 @@ describe("getLabelActionImpl", () => {
         github: github,
         core: core,
       }),
-    ).resolves.toEqual({ labelAction: LabelAction.Remove, headSha: "abc123", issueNumber: 123 });
+    ).resolves.toEqual({ headSha: "abc123", issueNumber: 123, autoSignOffLabels: [] });
   });
 
   it.each(["Swagger Avocado", "Swagger LintDiff"])(
@@ -219,7 +220,7 @@ describe("getLabelActionImpl", () => {
       const github = createMockGithub({ incrementalTypeSpec: true });
 
       github.rest.issues.listLabelsOnIssue.mockResolvedValue({
-        data: [{ name: "ARMAutoSignedOff" }, { name: "ARMReview" }],
+        data: [{ name: "ARMAutoSignedOff-IncrementalTSP" }, { name: "ARMReview" }],
       });
       github.rest.repos.listCommitStatusesForRef.mockResolvedValue({
         data: [
@@ -239,16 +240,16 @@ describe("getLabelActionImpl", () => {
           github: github,
           core: core,
         }),
-      ).resolves.toEqual({ labelAction: LabelAction.Remove, headSha: "abc123", issueNumber: 123 });
+      ).resolves.toEqual({ headSha: "abc123", issueNumber: 123, autoSignOffLabels: [] });
     },
   );
 
   it.each([
-    [CommitStatusState.ERROR, ["ARMReview", "ARMAutoSignedOff"]],
-    [CommitStatusState.FAILURE, ["ARMReview", "ARMAutoSignedOff"]],
-    [CommitStatusState.PENDING, ["ARMReview"]],
-    [CommitStatusState.SUCCESS, ["ARMReview"]],
-  ])("uses latest status if multiple (%o)", async (state, labels) => {
+    [CommitStatusState.ERROR, ["ARMReview", "ARMAutoSignedOff-IncrementalTSP"], []],
+    [CommitStatusState.FAILURE, ["ARMReview", "ARMAutoSignedOff-IncrementalTSP"], []],
+    [CommitStatusState.PENDING, ["ARMReview"], undefined],
+    [CommitStatusState.SUCCESS, ["ARMReview"], ["ARMAutoSignedOff-IncrementalTSP"]],
+  ])("uses latest status if multiple (%o)", async (state, labels, expectedAutoSignOffLabels) => {
     const github = createMockGithub({ incrementalTypeSpec: true });
 
     github.rest.issues.listLabelsOnIssue.mockResolvedValue({
@@ -277,20 +278,6 @@ describe("getLabelActionImpl", () => {
       ],
     });
 
-    let expectedAction;
-    switch (state) {
-      case CommitStatusState.ERROR:
-      case CommitStatusState.FAILURE:
-        expectedAction = LabelAction.Remove;
-        break;
-      case CommitStatusState.SUCCESS:
-        expectedAction = LabelAction.Add;
-        break;
-      case CommitStatusState.PENDING:
-        expectedAction = LabelAction.None;
-        break;
-    }
-
     await expect(
       getLabelActionImpl({
         owner: "TestOwner",
@@ -300,7 +287,7 @@ describe("getLabelActionImpl", () => {
         github: github,
         core: core,
       }),
-    ).resolves.toEqual({ labelAction: expectedAction, headSha: "abc123", issueNumber: 123 });
+    ).resolves.toEqual({ headSha: "abc123", issueNumber: 123, autoSignOffLabels: expectedAutoSignOffLabels });
   });
 
   it("no-ops if check not found or not completed", async () => {
@@ -322,7 +309,7 @@ describe("getLabelActionImpl", () => {
         github: github,
         core: core,
       }),
-    ).resolves.toEqual({ labelAction: LabelAction.None, headSha: "abc123", issueNumber: 123 });
+    ).resolves.toEqual({ headSha: "abc123", issueNumber: 123, autoSignOffLabels: undefined });
 
     github.rest.repos.listCommitStatusesForRef.mockResolvedValue({
       data: [{ context: "Swagger LintDiff", state: CommitStatusState.PENDING }],
@@ -336,7 +323,7 @@ describe("getLabelActionImpl", () => {
         github: github,
         core: core,
       }),
-    ).resolves.toEqual({ labelAction: LabelAction.None, headSha: "abc123", issueNumber: 123 });
+    ).resolves.toEqual({ headSha: "abc123", issueNumber: 123, autoSignOffLabels: undefined });
   });
 
   it("adds label if incremental tsp, labels match, and check succeeded", async () => {
@@ -367,6 +354,6 @@ describe("getLabelActionImpl", () => {
         github: github,
         core: core,
       }),
-    ).resolves.toEqual({ labelAction: LabelAction.Add, headSha: "abc123", issueNumber: 123 });
+    ).resolves.toEqual({ headSha: "abc123", issueNumber: 123, autoSignOffLabels: ["ARMAutoSignedOff-IncrementalTSP"] });
   });
 });

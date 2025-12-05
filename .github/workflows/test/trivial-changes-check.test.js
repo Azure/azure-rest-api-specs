@@ -42,10 +42,11 @@ describe("checkTrivialChanges", () => {
     const parsed = JSON.parse(result);
 
     expect(parsed).toEqual({
-      documentationOnlyChanges: false,
-      examplesOnlyChanges: false,
-      nonFunctionalChanges: false,
-      anyTrivialChanges: false,
+      documentation: false,
+      examples: false,
+      functional: false,
+      nonFunctional: false,
+      other: false,
     });
   });
 
@@ -64,10 +65,11 @@ describe("checkTrivialChanges", () => {
     const parsed = JSON.parse(result);
 
     expect(parsed).toEqual({
-      documentationOnlyChanges: true,
-      examplesOnlyChanges: false,
-      nonFunctionalChanges: false,
-      anyTrivialChanges: true,
+      documentation: true,
+      examples: false,
+      functional: false,
+      nonFunctional: false,
+      other: false,
     });
   });
 
@@ -86,10 +88,11 @@ describe("checkTrivialChanges", () => {
     const parsed = JSON.parse(result);
 
     expect(parsed).toEqual({
-      documentationOnlyChanges: false,
-      examplesOnlyChanges: true,
-      nonFunctionalChanges: false,
-      anyTrivialChanges: true,
+      documentation: false,
+      examples: true,
+      functional: false,
+      nonFunctional: false,
+      other: false,
     });
   });
 
@@ -134,10 +137,11 @@ describe("checkTrivialChanges", () => {
     const parsed = JSON.parse(result);
 
     expect(parsed).toEqual({
-      documentationOnlyChanges: false,
-      examplesOnlyChanges: false,
-      nonFunctionalChanges: true,
-      anyTrivialChanges: true,
+      documentation: false,
+      examples: false,
+      functional: false,
+      nonFunctional: true,
+      other: false,
     });
 
     expect(showSpy).toHaveBeenCalled();
@@ -162,13 +166,15 @@ describe("checkTrivialChanges", () => {
     });
 
     vi.spyOn(changedFiles, "getChangedFiles").mockResolvedValue(jsonFiles);
-    vi.spyOn(changedFiles, "getChangedFilesStatuses").mockResolvedValue({});
+    vi.spyOn(changedFiles, "getChangedFilesStatuses").mockResolvedValue({
+      additions: [], modifications: jsonFiles, deletions: [], renames: []
+    });
     
     vi.mocked(simpleGit.simpleGit().show)
       .mockImplementation((args) => {
         if (Array.isArray(args)) {
           const ref = args[0];
-          if (ref.startsWith("HEAD^:")) {
+          if (ref.includes("origin/main:")) {
             return Promise.resolve(oldJson);
           } else if (ref.startsWith("HEAD:")) {
             return Promise.resolve(newJson);
@@ -177,14 +183,15 @@ describe("checkTrivialChanges", () => {
         return Promise.reject(new Error("does not exist"));
       });
 
-    const result = await checkTrivialChanges({ core });
+    const result = await checkTrivialChanges({ core, context });
     const parsed = JSON.parse(result);
 
     expect(parsed).toEqual({
-      documentationOnlyChanges: false,
-      examplesOnlyChanges: false,
-      nonFunctionalChanges: false,
-      anyTrivialChanges: false,
+      documentation: false,
+      examples: false,
+      functional: true,
+      nonFunctional: false,
+      other: false,
     });
   });
 
@@ -231,10 +238,11 @@ describe("checkTrivialChanges", () => {
 
     // Should detect functional changes, so overall not trivial
     expect(parsed).toEqual({
-      documentationOnlyChanges: false,
-      examplesOnlyChanges: false,
-      nonFunctionalChanges: false,
-      anyTrivialChanges: false,
+      documentation: true,
+      examples: true,
+      functional: true,
+      nonFunctional: false,
+      other: false,
     });
   });
 
@@ -266,10 +274,11 @@ describe("checkTrivialChanges", () => {
 
     // Should treat JSON parsing errors as non-trivial changes
     expect(parsed).toEqual({
-      documentationOnlyChanges: false,
-      examplesOnlyChanges: false,
-      nonFunctionalChanges: false,
-      anyTrivialChanges: false,
+      documentation: false,
+      examples: false,
+      functional: true,
+      nonFunctional: false,
+      other: false,
     });
   });
 
@@ -291,10 +300,11 @@ describe("checkTrivialChanges", () => {
 
     // Should treat git errors as non-trivial changes  
     expect(parsed).toEqual({
-      documentationOnlyChanges: false,
-      examplesOnlyChanges: false,
-      nonFunctionalChanges: false,
-      anyTrivialChanges: false,
+      documentation: false,
+      examples: false,
+      functional: true,
+      nonFunctional: false,
+      other: false,
     });
   });
 
@@ -333,13 +343,15 @@ describe("checkTrivialChanges", () => {
     });
 
     vi.spyOn(changedFiles, "getChangedFiles").mockResolvedValue(jsonFiles);
-    vi.spyOn(changedFiles, "getChangedFilesStatuses").mockResolvedValue({});
+    vi.spyOn(changedFiles, "getChangedFilesStatuses").mockResolvedValue({
+      additions: [], modifications: jsonFiles, deletions: [], renames: []
+    });
     
     vi.mocked(simpleGit.simpleGit().show)
       .mockImplementation((args) => {
         if (Array.isArray(args)) {
           const ref = args[0];
-          if (ref.startsWith("HEAD^:")) {
+          if (ref.includes("origin/main:")) {
             return Promise.resolve(oldJson);
           } else if (ref.startsWith("HEAD:")) {
             return Promise.resolve(newJson);
@@ -348,14 +360,15 @@ describe("checkTrivialChanges", () => {
         return Promise.reject(new Error("does not exist"));
       });
 
-    const result = await checkTrivialChanges({ core });
+    const result = await checkTrivialChanges({ core, context });
     const parsed = JSON.parse(result);
 
     expect(parsed).toEqual({
-      documentationOnlyChanges: false,
-      examplesOnlyChanges: false,
-      nonFunctionalChanges: true,
-      anyTrivialChanges: true,
+      documentation: false,
+      examples: false,
+      functional: false,
+      nonFunctional: true,
+      other: false,
     });
   });
 
@@ -392,13 +405,15 @@ describe("checkTrivialChanges", () => {
     });
 
     vi.spyOn(changedFiles, "getChangedFiles").mockResolvedValue(jsonFiles);
-    vi.spyOn(changedFiles, "getChangedFilesStatuses").mockResolvedValue({});
+    vi.spyOn(changedFiles, "getChangedFilesStatuses").mockResolvedValue({
+      additions: [], modifications: jsonFiles, deletions: [], renames: []
+    });
     
     vi.mocked(simpleGit.simpleGit().show)
       .mockImplementation((args) => {
         if (Array.isArray(args)) {
           const ref = args[0];
-          if (ref.startsWith("HEAD^:")) {
+          if (ref.includes("origin/main:")) {
             return Promise.resolve(oldJson);
           } else if (ref.startsWith("HEAD:")) {
             return Promise.resolve(newJson);
@@ -407,14 +422,15 @@ describe("checkTrivialChanges", () => {
         return Promise.reject(new Error("does not exist"));
       });
 
-    const result = await checkTrivialChanges({ core });
+    const result = await checkTrivialChanges({ core, context });
     const parsed = JSON.parse(result);
 
     expect(parsed).toEqual({
-      documentationOnlyChanges: false,
-      examplesOnlyChanges: false,
-      nonFunctionalChanges: false,
-      anyTrivialChanges: false,
+      documentation: false,
+      examples: false,
+      functional: true,
+      nonFunctional: false,
+      other: false,
     });
   });
 
@@ -434,10 +450,11 @@ describe("checkTrivialChanges", () => {
     const parsed = JSON.parse(result);
 
     expect(parsed).toEqual({
-      documentationOnlyChanges: false, // Not ONLY documentation
-      examplesOnlyChanges: false, // Not ONLY examples
-      nonFunctionalChanges: false, // No JSON analysis needed
-      anyTrivialChanges: true, // But it IS all trivial
+      documentation: true,
+      examples: true,
+      functional: false,
+      nonFunctional: false,
+      other: false,
     });
   });
 });
