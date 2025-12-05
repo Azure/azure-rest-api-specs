@@ -9,8 +9,6 @@ using Versioning;
 @useDependency(Language.Conversations.Authoring.Versions.v2025_11_15_preview)
 namespace Language.ConversationsAuthoringClientCustomizations;
 
-@@clientName(conversationAuthoringListDeployments, "listDeployments");
-@@clientName(conversationAuthoringListProjects, "listProjects");
 @@clientName(conversationAuthoringListSupportedLanguages,
   "listSupportedLanguages"
 );
@@ -18,7 +16,7 @@ namespace Language.ConversationsAuthoringClientCustomizations;
   "listAssignedResourceDeployments"
 );
 @@clientName(conversationAuthoringListProjectResources,
-  "listDeploymentResources"
+  "listProjectResources"
 );
 @@clientName(conversationAuthoringListSupportedPrebuiltEntities,
   "listSupportedPrebuiltEntities"
@@ -194,10 +192,10 @@ namespace Language.ConversationsAuthoringClientCustomizations;
   "python"
 );
 @@clientName(AnalyzeConversationAuthoringProjectAzureResourceIds,
-  "ConversationAuthoringDeleteDeploymentDetails"
+  "ConversationAuthoringProjectResourceIds"
 );
 @@clientName(AnalyzeConversationAuthoringProjectAzureResourceIds,
-  "DeleteDeploymentDetails",
+  "ProjectResourceIds",
   "python"
 );
 @@clientName(AnalyzeConversationAuthoringDeploymentJobState,
@@ -320,20 +318,20 @@ namespace Language.ConversationsAuthoringClientCustomizations;
   "python"
 );
 @@clientName(AnalyzeConversationAuthoringProjectResourceInfo,
-  "ConversationAuthoringAssignedDeploymentResource"
+  "ConversationAuthoringAssignedProjectResource"
 );
 @@clientName(AnalyzeConversationAuthoringProjectResourceInfo,
-  "AssignedDeploymentResource",
+  "AssignedProjectResource",
   "python"
 );
 @@clientName(AnalyzeConversationAuthoringProjectResourceInfo.azureResourceId,
   "resourceId"
 );
 @@clientName(AnalyzeConversationAuthoringProjectResourceAssignments,
-  "ConversationAuthoringAssignDeploymentResourcesDetails"
+  "ConversationAuthoringAssignProjectResourcesDetails"
 );
 @@clientName(AnalyzeConversationAuthoringProjectResourceAssignments,
-  "AssignDeploymentResourcesDetails",
+  "AssignProjectResourcesDetails",
   "python"
 );
 @@clientName(AnalyzeConversationAuthoringProjectResourceAssignments.projectResources,
@@ -354,10 +352,10 @@ namespace Language.ConversationsAuthoringClientCustomizations;
   "python"
 );
 @@clientName(AnalyzeConversationAuthoringProjectResourcesJobState,
-  "ConversationAuthoringDeploymentResourcesState"
+  "ConversationAuthoringProjectResourcesState"
 );
 @@clientName(AnalyzeConversationAuthoringProjectResourcesJobState,
-  "DeploymentResourcesState",
+  "ProjectResourcesState",
   "python"
 );
 @@clientName(AnalyzeConversationAuthoringTrainingJobs,
@@ -674,6 +672,9 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 @@clientName(ExportedModelOptions, "ConversationAuthoringExportedModelDetails");
 @@clientName(ExportedModelOptions, "ExportedModelDetails", "python");
 @@clientName(AnalyzeConversationAuthoringUtteranceEvaluationResult,
+  "UtteranceEvaluationResult"
+);
+@@clientName(AnalyzeConversationAuthoringUtteranceEvaluationResult,
   "UtteranceEvaluationResult",
   "python"
 );
@@ -699,12 +700,18 @@ namespace Language.ConversationsAuthoringClientCustomizations;
   "python"
 );
 @@clientName(AnalyzeConversationAuthoringEntityEvaluationSummary,
+  "ConversationAuthoringEntityEvalSummary"
+);
+@@clientName(AnalyzeConversationAuthoringEntityEvaluationSummary,
   "EntityEvaluationSummary",
   "python"
 );
 @@clientName(AnalyzeConversationAuthoringUtteranceEntitiesEvaluationResult,
   "UtteranceEntitiesEvaluationResult",
   "python"
+);
+@@clientName(AnalyzeConversationAuthoringUtteranceEntityEvaluationResult,
+  "UtteranceEntityEvaluationResult",
 );
 @@clientName(AnalyzeConversationAuthoringUtteranceEntityEvaluationResult,
   "UtteranceEntityEvaluationResult",
@@ -727,6 +734,154 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 model ConversationAuthoringProjectClientOptions {
   projectName: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required"
+model ConversationAuthoringDeploymentClientOptions {
+  projectName: string;
+  deploymentName: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required"
+model ConversationAuthoringExportedModelClientOptions {
+  projectName: string;
+  exportedModelName: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required"
+model ConversationAuthoringTrainedModelClientOptions {
+  projectName: string;
+  trainedModelLabel: string;
+}
+
+// Root client definition
+#suppress "@azure-tools/typespec-azure-core/use-standard-names"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+@client(
+  {
+    name: "ConversationAnalysisAuthoringClient",
+    service: Language.Conversations.Authoring,
+  },
+  "csharp"
+)
+namespace ConversationAuthoringClientCsharp {
+  
+  op listProjects is Language.Conversations.Authoring.conversationAuthoringListProjects;
+
+  op listSupportedLanguages is Language.Conversations.Authoring.conversationAuthoringListSupportedLanguages;
+
+  op listAssignedResourceDeployments is Language.Conversations.Authoring.conversationAuthoringListAssignedResourceDeployments;
+
+  op listSupportedPrebuiltEntities is Language.Conversations.Authoring.conversationAuthoringListSupportedPrebuiltEntities;
+
+  op listTrainingConfigVersions is Language.Conversations.Authoring.conversationAuthoringListTrainingConfigVersions;
+
+  op listDeployments is Language.Conversations.Authoring.conversationAuthoringListDeployments;
+
+  op listProjectResources is Language.Conversations.Authoring.conversationAuthoringListProjectResources;
+  
+  op listTrainingJobs is Language.Conversations.Authoring.conversationAuthoringListTrainingJobs;
+  
+  op listTrainedModels is Language.Conversations.Authoring.conversationAuthoringListTrainedModels;
+  
+  op listExportedModels is Language.Conversations.Authoring.conversationAuthoringListExportedModels;
+  
+  @operationGroup
+  @clientInitialization(ConversationAuthoringDeploymentClientOptions, "csharp")
+  @clientName("ConversationAuthoringDeployment", "csharp")
+  interface DeploymentOperations {
+    getDeployment is Language.Conversations.Authoring.ConversationAuthoringDeployment.getDeployment;
+
+    deployProject is Language.Conversations.Authoring.ConversationAuthoringDeployment.deployProject;
+
+    deleteDeployment is Language.Conversations.Authoring.ConversationAuthoringDeployment.deleteDeployment;
+
+    deleteDeploymentFromResources is Language.Conversations.Authoring.ConversationAuthoringDeployment.deleteDeploymentFromResources;
+
+    getDeploymentDeleteFromResourcesStatus is Language.Conversations.Authoring.ConversationAuthoringDeployment.getDeploymentDeleteFromResourcesStatus;
+
+    getDeploymentStatus is Language.Conversations.Authoring.ConversationAuthoringDeployment.getDeploymentStatus;
+  }
+
+  @operationGroup
+  @clientInitialization(ConversationAuthoringProjectClientOptions, "csharp")
+  @clientName("ConversationAuthoringProject", "csharp")
+  interface ProjectOperations {
+
+    assignProjectResources is Language.Conversations.Authoring.ConversationAuthoringProject.assignProjectResources;
+
+    unassignProjectResources is Language.Conversations.Authoring.ConversationAuthoringProject.unassignProjectResources;
+
+    getAssignProjectResourcesStatus is Language.Conversations.Authoring.ConversationAuthoringProject.getAssignProjectResourcesStatus;
+
+    getUnassignProjectResourcesStatus is Language.Conversations.Authoring.ConversationAuthoringProject.getUnassignProjectResourcesStatus;
+
+    swapDeployments is Language.Conversations.Authoring.ConversationAuthoringProject.swapDeployments;
+
+    getSwapDeploymentsStatus is Language.Conversations.Authoring.ConversationAuthoringProject.getSwapDeploymentsStatus;
+
+    getProject is Language.Conversations.Authoring.ConversationAuthoringProject.getProject;
+
+    getProjectDeletionStatus is Language.Conversations.Authoring.ConversationAuthoringProject.getProjectDeletionStatus;
+
+    `import` is Language.Conversations.Authoring.ConversationAuthoringProject.`import`;
+
+    export is Language.Conversations.Authoring.ConversationAuthoringProject.export;
+
+    getImportStatus is Language.Conversations.Authoring.ConversationAuthoringProject.getImportStatus;
+
+    getExportStatus is Language.Conversations.Authoring.ConversationAuthoringProject.getExportStatus;
+
+    copyProjectAuthorization is Language.Conversations.Authoring.ConversationAuthoringProject.copyProjectAuthorization;
+
+    copyProject is Language.Conversations.Authoring.ConversationAuthoringProject.copyProject;
+
+    getCopyProjectStatus is Language.Conversations.Authoring.ConversationAuthoringProject.getCopyProjectStatus;
+
+    train is Language.Conversations.Authoring.ConversationAuthoringProject.train;
+
+    getTrainingStatus is Language.Conversations.Authoring.ConversationAuthoringProject.getTrainingStatus;
+
+    cancelTrainingJob is Language.Conversations.Authoring.ConversationAuthoringProject.cancelTrainingJob;
+
+    createProject is Language.Conversations.Authoring.ConversationAuthoringProject.createProject;
+
+    deleteProject is Language.Conversations.Authoring.ConversationAuthoringProject.deleteProject;
+  }
+
+  @operationGroup
+  @clientInitialization(ConversationAuthoringExportedModelClientOptions, "csharp")
+  @clientName("ConversationAuthoringExportedModel", "csharp")
+  interface ExportedModelOperations {
+    getExportedModel is Language.Conversations.Authoring.ConversationAuthoringExportedModel.getExportedModel;
+
+    deleteExportedModel is Language.Conversations.Authoring.ConversationAuthoringExportedModel.deleteExportedModel;
+
+    createOrUpdateExportedModel is Language.Conversations.Authoring.ConversationAuthoringExportedModel.createOrUpdateExportedModel;
+
+    getExportedModelJobStatus is Language.Conversations.Authoring.ConversationAuthoringExportedModel.getExportedModelJobStatus;
+  }
+
+  @operationGroup
+  @clientInitialization(ConversationAuthoringTrainedModelClientOptions, "csharp")
+  @clientName("ConversationAuthoringTrainedModel", "csharp")
+  interface TrainedModelOperations {
+    getTrainedModel is Language.Conversations.Authoring.ConversationAuthoringTrainedModel.getTrainedModel;
+
+    deleteTrainedModel is Language.Conversations.Authoring.ConversationAuthoringTrainedModel.deleteTrainedModel;
+
+    evaluateModel is Language.Conversations.Authoring.ConversationAuthoringTrainedModel.evaluateModel;
+
+    loadSnapshot is Language.Conversations.Authoring.ConversationAuthoringTrainedModel.loadSnapshot;
+
+    getEvaluationStatus is Language.Conversations.Authoring.ConversationAuthoringTrainedModel.getEvaluationStatus;
+
+    getModelEvaluationResults is Language.Conversations.Authoring.ConversationAuthoringTrainedModel.getModelEvaluationResults;
+
+    getModelEvaluationSummary is Language.Conversations.Authoring.ConversationAuthoringTrainedModel.getModelEvaluationSummary;
+
+    getLoadSnapshotStatus is Language.Conversations.Authoring.ConversationAuthoringTrainedModel.getLoadSnapshotStatus;
+  }
 }
 
 // Root client definition
@@ -785,10 +940,8 @@ namespace ConversationAuthoringProjectClient {
 
     deleteDeploymentFromResources is Language.Conversations.Authoring.ConversationAuthoringDeployment.deleteDeploymentFromResources;
 
-    @access(Access.internal, "python")
     getDeploymentDeleteFromResourcesStatus is Language.Conversations.Authoring.ConversationAuthoringDeployment.getDeploymentDeleteFromResourcesStatus;
 
-    @access(Access.internal, "python")
     getDeploymentStatus is Language.Conversations.Authoring.ConversationAuthoringDeployment.getDeploymentStatus;
   }
 
@@ -799,53 +952,42 @@ namespace ConversationAuthoringProjectClient {
 
     listTrainingJobs is Language.Conversations.Authoring.conversationAuthoringListTrainingJobs;
 
-    listDeploymentResources is Language.Conversations.Authoring.conversationAuthoringListProjectResources;
+    listProjectResources is Language.Conversations.Authoring.conversationAuthoringListProjectResources;
 
     listDeployments is Language.Conversations.Authoring.conversationAuthoringListDeployments;
 
     listExportedModels is Language.Conversations.Authoring.conversationAuthoringListExportedModels;
 
-    assignDeploymentResources is Language.Conversations.Authoring.ConversationAuthoringProject.assignProjectResources;
+    assignProjectResources is Language.Conversations.Authoring.ConversationAuthoringProject.assignProjectResources;
 
-    unassignDeploymentResources is Language.Conversations.Authoring.ConversationAuthoringProject.unassignProjectResources;
+    unassignProjectResources is Language.Conversations.Authoring.ConversationAuthoringProject.unassignProjectResources;
 
-    @access(Access.internal, "python")
-    getAssignDeploymentResourcesStatus is Language.Conversations.Authoring.ConversationAuthoringProject.getAssignProjectResourcesStatus;
+    getAssignProjectResourcesStatus is Language.Conversations.Authoring.ConversationAuthoringProject.getAssignProjectResourcesStatus;
 
-    @access(Access.internal, "python")
-    getUnassignDeploymentResourcesStatus is Language.Conversations.Authoring.ConversationAuthoringProject.getUnassignProjectResourcesStatus;
+    getUnassignProjectResourcesStatus is Language.Conversations.Authoring.ConversationAuthoringProject.getUnassignProjectResourcesStatus;
 
     swapDeployments is Language.Conversations.Authoring.ConversationAuthoringProject.swapDeployments;
 
-    @access(Access.internal, "python")
     getSwapDeploymentsStatus is Language.Conversations.Authoring.ConversationAuthoringProject.getSwapDeploymentsStatus;
 
-    @access(Access.internal, "python")
     getProject is Language.Conversations.Authoring.ConversationAuthoringProject.getProject;
 
-    @access(Access.internal, "python")
     getProjectDeletionStatus is Language.Conversations.Authoring.ConversationAuthoringProject.getProjectDeletionStatus;
 
-    @access(Access.internal, "python")
     `import` is Language.Conversations.Authoring.ConversationAuthoringProject.`import`;
 
     export is Language.Conversations.Authoring.ConversationAuthoringProject.export;
 
-    @access(Access.internal, "python")
     getExportStatus is Language.Conversations.Authoring.ConversationAuthoringProject.getExportStatus;
 
-    @access(Access.internal, "python")
     copyProjectAuthorization is Language.Conversations.Authoring.ConversationAuthoringProject.copyProjectAuthorization;
 
     copyProject is Language.Conversations.Authoring.ConversationAuthoringProject.copyProject;
 
-    @access(Access.internal, "python")
     getCopyProjectStatus is Language.Conversations.Authoring.ConversationAuthoringProject.getCopyProjectStatus;
 
-    @access(Access.internal, "python")
     train is Language.Conversations.Authoring.ConversationAuthoringProject.train;
 
-    @access(Access.internal, "python")
     getTrainingStatus is Language.Conversations.Authoring.ConversationAuthoringProject.getTrainingStatus;
 
     cancelTrainingJob is Language.Conversations.Authoring.ConversationAuthoringProject.cancelTrainingJob;
@@ -860,7 +1002,6 @@ namespace ConversationAuthoringProjectClient {
 
     createOrUpdateExportedModel is Language.Conversations.Authoring.ConversationAuthoringExportedModel.createOrUpdateExportedModel;
 
-    @access(Access.internal, "python")
     getExportedModelJobStatus is Language.Conversations.Authoring.ConversationAuthoringExportedModel.getExportedModelJobStatus;
   }
 
@@ -871,19 +1012,16 @@ namespace ConversationAuthoringProjectClient {
 
     deleteTrainedModel is Language.Conversations.Authoring.ConversationAuthoringTrainedModel.deleteTrainedModel;
 
-    @access(Access.internal, "python")
     evaluateModel is Language.Conversations.Authoring.ConversationAuthoringTrainedModel.evaluateModel;
 
     loadSnapshot is Language.Conversations.Authoring.ConversationAuthoringTrainedModel.loadSnapshot;
 
-    @access(Access.internal, "python")
     getEvaluationStatus is Language.Conversations.Authoring.ConversationAuthoringTrainedModel.getEvaluationStatus;
 
     getModelEvaluationResults is Language.Conversations.Authoring.ConversationAuthoringTrainedModel.getModelEvaluationResults;
 
     getModelEvaluationSummary is Language.Conversations.Authoring.ConversationAuthoringTrainedModel.getModelEvaluationSummary;
 
-    @access(Access.internal, "python")
     getLoadSnapshotStatus is Language.Conversations.Authoring.ConversationAuthoringTrainedModel.getLoadSnapshotStatus;
   }
 }
