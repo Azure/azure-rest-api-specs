@@ -357,11 +357,11 @@ These settings apply only when `--tag=package-2025-04-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2025-04-01'
 input-file:
-  - Microsoft.Compute/ComputeRP/stable/2025-04-01/ComputeRP.json
-  - Microsoft.Compute/DiskRP/stable/2025-01-02/DiskRP.json
-  - Microsoft.Compute/Skus/stable/2021-07-01/skus.json
-  - Microsoft.Compute/GalleryRP/stable/2024-03-03/GalleryRP.json
-  - Microsoft.Compute/CloudserviceRP/stable/2024-11-04/cloudService.json
+  - stable/2025-04-01/ComputeRP.json
+  - stable/2025-01-02/DiskRP.json
+  - stable/2021-07-01/skus.json
+  - stable/2024-03-03/GalleryRP.json
+  - Cloudservice/stable/2024-11-04/cloudService.json
 ```
 
 ### Tag: package-2025-04-01-only
@@ -370,7 +370,7 @@ These settings apply only when `--tag=package-2025-04-01-only` is specified on t
 
 ```yaml $(tag) == 'package-2025-04-01-only'
 input-file:
-  - Microsoft.Compute/ComputeRP/stable/2025-04-01/ComputeRP.json
+  - stable/2025-04-01/ComputeRP.json
 ```
 
 ### Tag: package-2025-03-01
@@ -379,11 +379,11 @@ These settings apply only when `--tag=package-2025-03-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2025-03-01'
 input-file:
-  - Microsoft.Compute/ComputeRP/stable/2024-11-01/ComputeRP.json
-  - Microsoft.Compute/DiskRP/stable/2025-01-02/DiskRP.json
-  - Microsoft.Compute/Skus/stable/2021-07-01/skus.json
-  - Microsoft.Compute/GalleryRP/stable/2024-03-03/GalleryRP.json
-  - Microsoft.Compute/CloudserviceRP/stable/2024-11-04/cloudService.json
+  - stable/2024-11-01/ComputeRP.json
+  - stable/2025-01-02/DiskRP.json
+  - stable/2021-07-01/skus.json
+  - stable/2024-03-03/GalleryRP.json
+  - Cloudservice/stable/2024-11-04/cloudService.json
 ```
 
 ### Tag: package-2025-03-01-only
@@ -392,8 +392,8 @@ These settings apply only when `--tag=package-2025-03-01-only` is specified on t
 
 ```yaml $(tag) == 'package-2025-03-01-only'
 input-file:
-  - Microsoft.Compute/common-types/v1/common.json
-  - Microsoft.Compute/DiskRP/stable/2025-01-02/DiskRP.json
+  - common-types/v1/common.json
+  - stable/2025-01-02/DiskRP.json
 ```
 
 ### Tag: package-2025-02-01
@@ -402,11 +402,11 @@ These settings apply only when `--tag=package-2025-02-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2025-02-01'
 input-file:
-  - Microsoft.Compute/ComputeRP/stable/2024-11-01/ComputeRP.json
-  - Microsoft.Compute/DiskRP/stable/2024-03-02/DiskRP.json
-  - Microsoft.Compute/Skus/stable/2021-07-01/skus.json
-  - Microsoft.Compute/GalleryRP/stable/2024-03-03/GalleryRP.json
-  - Microsoft.Compute/CloudserviceRP/stable/2024-11-04/cloudService.json
+  - stable/2024-11-01/ComputeRP.json
+  - stable/2024-03-02/DiskRP.json
+  - stable/2021-07-01/skus.json
+  - stable/2024-03-03/GalleryRP.json
+  - Cloudservice/stable/2024-11-04/cloudService.json
 ```
 
 ### Tag: package-2025-02-01-only
@@ -415,8 +415,8 @@ These settings apply only when `--tag=package-2025-02-01-only` is specified on t
 
 ```yaml $(tag) == 'package-2025-02-01-only'
 input-file:
-  - Microsoft.Compute/common-types/v1/common.json
-  - Microsoft.Compute/ComputeRP/stable/2024-11-01/ComputeRP.json
+  - common-types/v1/common.json
+  - stable/2024-11-01/ComputeRP.json
 ```
 
 ### Tag: package-2025-02-01-preview
@@ -425,7 +425,7 @@ These settings apply only when `--tag=package-2025-02-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2025-02-01-preview'
 input-file:
-  - Microsoft.Compute/DiagnosticRP/preview/2025-02-01-preview/diagnostic.json
+  - Diagnostic/preview/2025-02-01-preview/diagnostic.json
 ```
 
 ### Tag: package-python-sdk
@@ -434,20 +434,20 @@ These settings apply only when `--tag=package-python-sdk` is specified on the co
 
 ```yaml $(tag) == 'package-python-sdk'
 input-file:
-  - Microsoft.Compute/common-types/v1/common.json
-  - Microsoft.Compute/ComputeRP/stable/2024-11-01/ComputeRP.json
-  - Microsoft.Compute/CloudserviceRP/stable/2024-11-04/cloudService.json
-  - Microsoft.Compute/DiskRP/stable/2023-10-02/diskRPCommon.json
-  - Microsoft.Compute/DiskRP/stable/2023-10-02/disk.json
-  - Microsoft.Compute/DiskRP/stable/2023-10-02/diskAccess.json
-  - Microsoft.Compute/DiskRP/stable/2023-10-02/diskEncryptionSet.json
-  - Microsoft.Compute/DiskRP/stable/2023-10-02/diskRestorePoint.json
-  - Microsoft.Compute/DiskRP/stable/2023-10-02/snapshot.json
-  - Microsoft.Compute/Skus/stable/2021-07-01/skus.json
-  - Microsoft.Compute/GalleryRP/stable/2023-07-03/galleryRPCommon.json
-  - Microsoft.Compute/GalleryRP/stable/2023-07-03/gallery.json
-  - Microsoft.Compute/GalleryRP/stable/2023-07-03/sharedGallery.json
-  - Microsoft.Compute/GalleryRP/stable/2023-07-03/communityGallery.json
+  - common-types/v1/common.json
+  - stable/2024-11-01/ComputeRP.json
+  - Cloudservice/stable/2024-11-04/cloudService.json
+  - stable/2023-10-02/diskRPCommon.json
+  - stable/2023-10-02/disk.json
+  - stable/2023-10-02/diskAccess.json
+  - stable/2023-10-02/diskEncryptionSet.json
+  - stable/2023-10-02/diskRestorePoint.json
+  - stable/2023-10-02/snapshot.json
+  - stable/2021-07-01/skus.json
+  - stable/2023-07-03/galleryRPCommon.json
+  - stable/2023-07-03/gallery.json
+  - stable/2023-07-03/sharedGallery.json
+  - stable/2023-07-03/communityGallery.json
 ```
 
 ### Tag: package-2024-11-04
@@ -456,24 +456,24 @@ These settings apply only when `--tag=package-2024-11-04` is specified on the co
 
 ```yaml $(tag) == 'package-2024-11-04'
 input-file:
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/computeRPCommon.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/virtualMachineScaleSet.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/virtualMachine.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/virtualMachineImage.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/virtualMachineExtensionImage.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/availabilitySet.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/proximityPlacementGroup.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/dedicatedHost.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/sshPublicKey.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/image.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/restorePoint.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/capacityReservation.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/logAnalytic.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/runCommand.json 
-  - Microsoft.Compute/DiskRP/stable/2024-03-02/DiskRP.json
-  - Microsoft.Compute/Skus/stable/2021-07-01/skus.json
-  - Microsoft.Compute/GalleryRP/stable/2024-03-03/GalleryRP.json
-  - Microsoft.Compute/CloudserviceRP/stable/2024-11-04/cloudService.json
+  - stable/2024-07-01/computeRPCommon.json
+  - stable/2024-07-01/virtualMachineScaleSet.json
+  - stable/2024-07-01/virtualMachine.json
+  - stable/2024-07-01/virtualMachineImage.json
+  - stable/2024-07-01/virtualMachineExtensionImage.json
+  - stable/2024-07-01/availabilitySet.json
+  - stable/2024-07-01/proximityPlacementGroup.json
+  - stable/2024-07-01/dedicatedHost.json
+  - stable/2024-07-01/sshPublicKey.json
+  - stable/2024-07-01/image.json
+  - stable/2024-07-01/restorePoint.json
+  - stable/2024-07-01/capacityReservation.json
+  - stable/2024-07-01/logAnalytic.json
+  - stable/2024-07-01/runCommand.json 
+  - stable/2024-03-02/DiskRP.json
+  - stable/2021-07-01/skus.json
+  - stable/2024-03-03/GalleryRP.json
+  - Cloudservice/stable/2024-11-04/cloudService.json
 ```
 
 ### Tag: package-2024-11-04-only
@@ -482,8 +482,8 @@ These settings apply only when `--tag=package-2024-11-04-only` is specified on t
 
 ```yaml $(tag) == 'package-2024-11-04-only'
 input-file:
-  - Microsoft.Compute/common-types/v1/common.json
-  - Microsoft.Compute/CloudserviceRP/stable/2024-11-04/cloudService.json
+  - common-types/v1/common.json
+  - Cloudservice/stable/2024-11-04/cloudService.json
 ```
 
 ### Tag: package-2024-11-01-only
@@ -492,8 +492,8 @@ These settings apply only when `--tag=package-2024-11-01-only` is specified on t
 
 ```yaml $(tag) == 'package-2024-11-01-only'
 input-file:
-  - Microsoft.Compute/common-types/v1/common.json
-  - Microsoft.Compute/ComputeRP/stable/2024-11-01/ComputeRP.json
+  - common-types/v1/common.json
+  - stable/2024-11-01/ComputeRP.json
 ```
 
 ### Tag: package-2024-10-01
@@ -502,25 +502,25 @@ These settings apply only when `--tag=package-2024-10-01` is specified on the co
 
 ```yaml $(tag) == 'package-2024-10-01'
 input-file:
-  - Microsoft.Compute/common-types/v1/common.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/computeRPCommon.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/virtualMachineScaleSet.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/virtualMachine.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/virtualMachineImage.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/virtualMachineExtensionImage.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/availabilitySet.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/proximityPlacementGroup.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/dedicatedHost.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/sshPublicKey.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/image.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/restorePoint.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/capacityReservation.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/logAnalytic.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/runCommand.json 
-  - Microsoft.Compute/DiskRP/stable/2024-03-02/DiskRP.json
-  - Microsoft.Compute/Skus/stable/2021-07-01/skus.json
-  - Microsoft.Compute/GalleryRP/stable/2024-03-03/GalleryRP.json
-  - Microsoft.Compute/CloudserviceRP/stable/2022-09-04/cloudService.json
+  - common-types/v1/common.json
+  - stable/2024-07-01/computeRPCommon.json
+  - stable/2024-07-01/virtualMachineScaleSet.json
+  - stable/2024-07-01/virtualMachine.json
+  - stable/2024-07-01/virtualMachineImage.json
+  - stable/2024-07-01/virtualMachineExtensionImage.json
+  - stable/2024-07-01/availabilitySet.json
+  - stable/2024-07-01/proximityPlacementGroup.json
+  - stable/2024-07-01/dedicatedHost.json
+  - stable/2024-07-01/sshPublicKey.json
+  - stable/2024-07-01/image.json
+  - stable/2024-07-01/restorePoint.json
+  - stable/2024-07-01/capacityReservation.json
+  - stable/2024-07-01/logAnalytic.json
+  - stable/2024-07-01/runCommand.json 
+  - stable/2024-03-02/DiskRP.json
+  - stable/2021-07-01/skus.json
+  - stable/2024-03-03/GalleryRP.json
+  - Cloudservice/stable/2022-09-04/cloudService.json
 ```
 
 ### Tag: package-2024-03-03-only
@@ -529,8 +529,8 @@ These settings apply only when `--tag=package-2024-03-03-only` is specified on t
 
 ```yaml $(tag) == 'package-2024-03-03-only'
 input-file:
-  - Microsoft.Compute/common-types/v1/common.json
-  - Microsoft.Compute/GalleryRP/stable/2024-03-03/GalleryRP.json
+  - common-types/v1/common.json
+  - stable/2024-03-03/GalleryRP.json
 ```
 
 ### Tag: package-2024-07-01
@@ -539,28 +539,28 @@ These settings apply only when `--tag=package-2024-07-01` is specified on the co
 
 ```yaml $(tag) == 'package-2024-07-01'
 input-file:
-  - Microsoft.Compute/common-types/v1/common.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/computeRPCommon.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/virtualMachineScaleSet.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/virtualMachine.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/virtualMachineImage.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/virtualMachineExtensionImage.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/availabilitySet.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/proximityPlacementGroup.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/dedicatedHost.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/sshPublicKey.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/image.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/restorePoint.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/capacityReservation.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/logAnalytic.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/runCommand.json 
-  - Microsoft.Compute/DiskRP/stable/2024-03-02/DiskRP.json
-  - Microsoft.Compute/Skus/stable/2021-07-01/skus.json
-  - Microsoft.Compute/GalleryRP/stable/2023-07-03/galleryRPCommon.json
-  - Microsoft.Compute/GalleryRP/stable/2023-07-03/gallery.json
-  - Microsoft.Compute/GalleryRP/stable/2023-07-03/sharedGallery.json
-  - Microsoft.Compute/GalleryRP/stable/2023-07-03/communityGallery.json
-  - Microsoft.Compute/CloudserviceRP/stable/2022-09-04/cloudService.json
+  - common-types/v1/common.json
+  - stable/2024-07-01/computeRPCommon.json
+  - stable/2024-07-01/virtualMachineScaleSet.json
+  - stable/2024-07-01/virtualMachine.json
+  - stable/2024-07-01/virtualMachineImage.json
+  - stable/2024-07-01/virtualMachineExtensionImage.json
+  - stable/2024-07-01/availabilitySet.json
+  - stable/2024-07-01/proximityPlacementGroup.json
+  - stable/2024-07-01/dedicatedHost.json
+  - stable/2024-07-01/sshPublicKey.json
+  - stable/2024-07-01/image.json
+  - stable/2024-07-01/restorePoint.json
+  - stable/2024-07-01/capacityReservation.json
+  - stable/2024-07-01/logAnalytic.json
+  - stable/2024-07-01/runCommand.json 
+  - stable/2024-03-02/DiskRP.json
+  - stable/2021-07-01/skus.json
+  - stable/2023-07-03/galleryRPCommon.json
+  - stable/2023-07-03/gallery.json
+  - stable/2023-07-03/sharedGallery.json
+  - stable/2023-07-03/communityGallery.json
+  - Cloudservice/stable/2022-09-04/cloudService.json
 ```
 
 ### Tag: package-2024-07-01-only
@@ -569,21 +569,21 @@ These settings apply only when `--tag=package-2024-07-01-only` is specified on t
 
 ```yaml $(tag) == 'package-2024-07-01-only'
 input-file:
-  - Microsoft.Compute/common-types/v1/common.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/computeRPCommon.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/virtualMachineScaleSet.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/virtualMachine.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/virtualMachineImage.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/virtualMachineExtensionImage.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/availabilitySet.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/proximityPlacementGroup.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/dedicatedHost.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/sshPublicKey.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/image.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/restorePoint.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/capacityReservation.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/logAnalytic.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/runCommand.json 
+  - common-types/v1/common.json
+  - stable/2024-07-01/computeRPCommon.json
+  - stable/2024-07-01/virtualMachineScaleSet.json
+  - stable/2024-07-01/virtualMachine.json
+  - stable/2024-07-01/virtualMachineImage.json
+  - stable/2024-07-01/virtualMachineExtensionImage.json
+  - stable/2024-07-01/availabilitySet.json
+  - stable/2024-07-01/proximityPlacementGroup.json
+  - stable/2024-07-01/dedicatedHost.json
+  - stable/2024-07-01/sshPublicKey.json
+  - stable/2024-07-01/image.json
+  - stable/2024-07-01/restorePoint.json
+  - stable/2024-07-01/capacityReservation.json
+  - stable/2024-07-01/logAnalytic.json
+  - stable/2024-07-01/runCommand.json 
 ```
 
 ### Tag: package-2024-03-02
@@ -592,28 +592,28 @@ These settings apply only when `--tag=package-2024-03-02` is specified on the co
 
 ```yaml $(tag) == 'package-2024-03-02'
 input-file:
-  - Microsoft.Compute/common-types/v1/common.json
-  - Microsoft.Compute/ComputeRP/stable/2024-03-01/computeRPCommon.json
-  - Microsoft.Compute/ComputeRP/stable/2024-03-01/virtualMachineScaleSet.json
-  - Microsoft.Compute/ComputeRP/stable/2024-03-01/virtualMachine.json
-  - Microsoft.Compute/ComputeRP/stable/2024-03-01/virtualMachineImage.json
-  - Microsoft.Compute/ComputeRP/stable/2024-03-01/virtualMachineExtensionImage.json
-  - Microsoft.Compute/ComputeRP/stable/2024-03-01/availabilitySet.json
-  - Microsoft.Compute/ComputeRP/stable/2024-03-01/proximityPlacementGroup.json
-  - Microsoft.Compute/ComputeRP/stable/2024-03-01/dedicatedHost.json
-  - Microsoft.Compute/ComputeRP/stable/2024-03-01/sshPublicKey.json
-  - Microsoft.Compute/ComputeRP/stable/2024-03-01/image.json
-  - Microsoft.Compute/ComputeRP/stable/2024-03-01/restorePoint.json
-  - Microsoft.Compute/ComputeRP/stable/2024-03-01/capacityReservation.json
-  - Microsoft.Compute/ComputeRP/stable/2024-03-01/logAnalytic.json
-  - Microsoft.Compute/ComputeRP/stable/2024-03-01/runCommand.json
-  - Microsoft.Compute/DiskRP/stable/2024-03-02/DiskRP.json
-  - Microsoft.Compute/Skus/stable/2021-07-01/skus.json
-  - Microsoft.Compute/GalleryRP/stable/2023-07-03/galleryRPCommon.json
-  - Microsoft.Compute/GalleryRP/stable/2023-07-03/gallery.json
-  - Microsoft.Compute/GalleryRP/stable/2023-07-03/sharedGallery.json
-  - Microsoft.Compute/GalleryRP/stable/2023-07-03/communityGallery.json
-  - Microsoft.Compute/CloudserviceRP/stable/2022-09-04/cloudService.json
+  - common-types/v1/common.json
+  - stable/2024-03-01/computeRPCommon.json
+  - stable/2024-03-01/virtualMachineScaleSet.json
+  - stable/2024-03-01/virtualMachine.json
+  - stable/2024-03-01/virtualMachineImage.json
+  - stable/2024-03-01/virtualMachineExtensionImage.json
+  - stable/2024-03-01/availabilitySet.json
+  - stable/2024-03-01/proximityPlacementGroup.json
+  - stable/2024-03-01/dedicatedHost.json
+  - stable/2024-03-01/sshPublicKey.json
+  - stable/2024-03-01/image.json
+  - stable/2024-03-01/restorePoint.json
+  - stable/2024-03-01/capacityReservation.json
+  - stable/2024-03-01/logAnalytic.json
+  - stable/2024-03-01/runCommand.json
+  - stable/2024-03-02/DiskRP.json
+  - stable/2021-07-01/skus.json
+  - stable/2023-07-03/galleryRPCommon.json
+  - stable/2023-07-03/gallery.json
+  - stable/2023-07-03/sharedGallery.json
+  - stable/2023-07-03/communityGallery.json
+  - Cloudservice/stable/2022-09-04/cloudService.json
 ```
 
 ### Tag: package-2024-03-02-only
@@ -622,8 +622,8 @@ These settings apply only when `--tag=package-2024-03-02-only` is specified on t
 
 ```yaml $(tag) == 'package-2024-03-02-only'
 input-file:
-  - Microsoft.Compute/common-types/v1/common.json
-  - Microsoft.Compute/DiskRP/stable/2024-03-02/DiskRP.json
+  - common-types/v1/common.json
+  - stable/2024-03-02/DiskRP.json
 ```
 
 ### Tag: package-2024-06-01-preview
@@ -632,7 +632,7 @@ These settings apply only when `--tag=package-2024-06-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-06-01-preview'
 input-file:
-  - Microsoft.Compute/DiagnosticRP/preview/2024-06-01-preview/diagnostic.json
+  - Diagnostic/preview/2024-06-01-preview/diagnostic.json
 ```
 
 ### Tag: package-2024-03-01
@@ -641,33 +641,33 @@ These settings apply only when `--tag=package-2024-03-01` is specified on the co
 
 ```yaml $(tag) == 'package-2024-03-01'
 input-file:
-  - Microsoft.Compute/common-types/v1/common.json
-  - Microsoft.Compute/ComputeRP/stable/2024-03-01/computeRPCommon.json
-  - Microsoft.Compute/ComputeRP/stable/2024-03-01/virtualMachineScaleSet.json
-  - Microsoft.Compute/ComputeRP/stable/2024-03-01/virtualMachine.json
-  - Microsoft.Compute/ComputeRP/stable/2024-03-01/virtualMachineImage.json
-  - Microsoft.Compute/ComputeRP/stable/2024-03-01/virtualMachineExtensionImage.json
-  - Microsoft.Compute/ComputeRP/stable/2024-03-01/availabilitySet.json
-  - Microsoft.Compute/ComputeRP/stable/2024-03-01/proximityPlacementGroup.json
-  - Microsoft.Compute/ComputeRP/stable/2024-03-01/dedicatedHost.json
-  - Microsoft.Compute/ComputeRP/stable/2024-03-01/sshPublicKey.json
-  - Microsoft.Compute/ComputeRP/stable/2024-03-01/image.json
-  - Microsoft.Compute/ComputeRP/stable/2024-03-01/restorePoint.json
-  - Microsoft.Compute/ComputeRP/stable/2024-03-01/capacityReservation.json
-  - Microsoft.Compute/ComputeRP/stable/2024-03-01/logAnalytic.json
-  - Microsoft.Compute/ComputeRP/stable/2024-03-01/runCommand.json
-  - Microsoft.Compute/DiskRP/stable/2023-10-02/diskRPCommon.json
-  - Microsoft.Compute/DiskRP/stable/2023-10-02/disk.json
-  - Microsoft.Compute/DiskRP/stable/2023-10-02/diskAccess.json
-  - Microsoft.Compute/DiskRP/stable/2023-10-02/diskEncryptionSet.json
-  - Microsoft.Compute/DiskRP/stable/2023-10-02/diskRestorePoint.json
-  - Microsoft.Compute/DiskRP/stable/2023-10-02/snapshot.json
-  - Microsoft.Compute/Skus/stable/2021-07-01/skus.json
-  - Microsoft.Compute/GalleryRP/stable/2023-07-03/galleryRPCommon.json
-  - Microsoft.Compute/GalleryRP/stable/2023-07-03/gallery.json
-  - Microsoft.Compute/GalleryRP/stable/2023-07-03/sharedGallery.json
-  - Microsoft.Compute/GalleryRP/stable/2023-07-03/communityGallery.json
-  - Microsoft.Compute/CloudserviceRP/stable/2022-09-04/cloudService.json
+  - common-types/v1/common.json
+  - stable/2024-03-01/computeRPCommon.json
+  - stable/2024-03-01/virtualMachineScaleSet.json
+  - stable/2024-03-01/virtualMachine.json
+  - stable/2024-03-01/virtualMachineImage.json
+  - stable/2024-03-01/virtualMachineExtensionImage.json
+  - stable/2024-03-01/availabilitySet.json
+  - stable/2024-03-01/proximityPlacementGroup.json
+  - stable/2024-03-01/dedicatedHost.json
+  - stable/2024-03-01/sshPublicKey.json
+  - stable/2024-03-01/image.json
+  - stable/2024-03-01/restorePoint.json
+  - stable/2024-03-01/capacityReservation.json
+  - stable/2024-03-01/logAnalytic.json
+  - stable/2024-03-01/runCommand.json
+  - stable/2023-10-02/diskRPCommon.json
+  - stable/2023-10-02/disk.json
+  - stable/2023-10-02/diskAccess.json
+  - stable/2023-10-02/diskEncryptionSet.json
+  - stable/2023-10-02/diskRestorePoint.json
+  - stable/2023-10-02/snapshot.json
+  - stable/2021-07-01/skus.json
+  - stable/2023-07-03/galleryRPCommon.json
+  - stable/2023-07-03/gallery.json
+  - stable/2023-07-03/sharedGallery.json
+  - stable/2023-07-03/communityGallery.json
+  - Cloudservice/stable/2022-09-04/cloudService.json
 ```
 
 ### Tag: package-2024-03-01-only
@@ -676,21 +676,21 @@ These settings apply only when `--tag=package-2024-03-01-only` is specified on t
 
 ```yaml $(tag) == 'package-2024-03-01-only'
 input-file:
-  - Microsoft.Compute/common-types/v1/common.json
-  - Microsoft.Compute/ComputeRP/stable/2024-03-01/computeRPCommon.json
-  - Microsoft.Compute/ComputeRP/stable/2024-03-01/virtualMachineScaleSet.json
-  - Microsoft.Compute/ComputeRP/stable/2024-03-01/virtualMachine.json
-  - Microsoft.Compute/ComputeRP/stable/2024-03-01/virtualMachineImage.json
-  - Microsoft.Compute/ComputeRP/stable/2024-03-01/virtualMachineExtensionImage.json
-  - Microsoft.Compute/ComputeRP/stable/2024-03-01/availabilitySet.json
-  - Microsoft.Compute/ComputeRP/stable/2024-03-01/proximityPlacementGroup.json
-  - Microsoft.Compute/ComputeRP/stable/2024-03-01/dedicatedHost.json
-  - Microsoft.Compute/ComputeRP/stable/2024-03-01/sshPublicKey.json
-  - Microsoft.Compute/ComputeRP/stable/2024-03-01/image.json
-  - Microsoft.Compute/ComputeRP/stable/2024-03-01/restorePoint.json
-  - Microsoft.Compute/ComputeRP/stable/2024-03-01/capacityReservation.json
-  - Microsoft.Compute/ComputeRP/stable/2024-03-01/logAnalytic.json
-  - Microsoft.Compute/ComputeRP/stable/2024-03-01/runCommand.json
+  - common-types/v1/common.json
+  - stable/2024-03-01/computeRPCommon.json
+  - stable/2024-03-01/virtualMachineScaleSet.json
+  - stable/2024-03-01/virtualMachine.json
+  - stable/2024-03-01/virtualMachineImage.json
+  - stable/2024-03-01/virtualMachineExtensionImage.json
+  - stable/2024-03-01/availabilitySet.json
+  - stable/2024-03-01/proximityPlacementGroup.json
+  - stable/2024-03-01/dedicatedHost.json
+  - stable/2024-03-01/sshPublicKey.json
+  - stable/2024-03-01/image.json
+  - stable/2024-03-01/restorePoint.json
+  - stable/2024-03-01/capacityReservation.json
+  - stable/2024-03-01/logAnalytic.json
+  - stable/2024-03-01/runCommand.json
 ```
 
 ### Tag: package-2024-03-01-preview
@@ -699,7 +699,7 @@ These settings apply only when `--tag=package-2024-03-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-03-01-preview'
 input-file:
-  - Microsoft.Compute/DiagnosticRP/preview/2024-03-01-preview/diagnostic.json
+  - Diagnostic/preview/2024-03-01-preview/diagnostic.json
 ```
 
 ### Tag: package-2024-03-01-preview-only
@@ -708,7 +708,7 @@ These settings apply only when `--tag=package-2024-03-01-preview-only` is specif
 
 ```yaml $(tag) == 'package-2024-03-01-preview-only'
 input-file:
-  - Microsoft.Compute/DiagnosticRP/preview/2024-03-01-preview/diagnostic.json
+  - Diagnostic/preview/2024-03-01-preview/diagnostic.json
 ```
 
 ### Tag: package-2023-07-03
@@ -717,33 +717,33 @@ These settings apply only when `--tag=package-2023-07-03` is specified on the co
 
 ```yaml $(tag) == 'package-2023-07-03'
 input-file:
-  - Microsoft.Compute/common-types/v1/common.json
-  - Microsoft.Compute/ComputeRP/stable/2023-09-01/computeRPCommon.json
-  - Microsoft.Compute/ComputeRP/stable/2023-09-01/virtualMachineScaleSet.json
-  - Microsoft.Compute/ComputeRP/stable/2023-09-01/virtualMachine.json
-  - Microsoft.Compute/ComputeRP/stable/2023-09-01/virtualMachineImage.json
-  - Microsoft.Compute/ComputeRP/stable/2023-09-01/virtualMachineExtensionImage.json
-  - Microsoft.Compute/ComputeRP/stable/2023-09-01/availabilitySet.json
-  - Microsoft.Compute/ComputeRP/stable/2023-09-01/proximityPlacementGroup.json
-  - Microsoft.Compute/ComputeRP/stable/2023-09-01/dedicatedHost.json
-  - Microsoft.Compute/ComputeRP/stable/2023-09-01/sshPublicKey.json
-  - Microsoft.Compute/ComputeRP/stable/2023-09-01/image.json
-  - Microsoft.Compute/ComputeRP/stable/2023-09-01/restorePoint.json
-  - Microsoft.Compute/ComputeRP/stable/2023-09-01/capacityReservation.json
-  - Microsoft.Compute/ComputeRP/stable/2023-09-01/logAnalytic.json
-  - Microsoft.Compute/ComputeRP/stable/2023-09-01/runCommand.json
-  - Microsoft.Compute/DiskRP/stable/2023-10-02/diskRPCommon.json
-  - Microsoft.Compute/DiskRP/stable/2023-10-02/disk.json
-  - Microsoft.Compute/DiskRP/stable/2023-10-02/diskAccess.json
-  - Microsoft.Compute/DiskRP/stable/2023-10-02/diskEncryptionSet.json
-  - Microsoft.Compute/DiskRP/stable/2023-10-02/diskRestorePoint.json
-  - Microsoft.Compute/DiskRP/stable/2023-10-02/snapshot.json
-  - Microsoft.Compute/Skus/stable/2021-07-01/skus.json
-  - Microsoft.Compute/GalleryRP/stable/2023-07-03/galleryRPCommon.json
-  - Microsoft.Compute/GalleryRP/stable/2023-07-03/gallery.json
-  - Microsoft.Compute/GalleryRP/stable/2023-07-03/sharedGallery.json
-  - Microsoft.Compute/GalleryRP/stable/2023-07-03/communityGallery.json
-  - Microsoft.Compute/CloudserviceRP/stable/2022-09-04/cloudService.json
+  - common-types/v1/common.json
+  - stable/2023-09-01/computeRPCommon.json
+  - stable/2023-09-01/virtualMachineScaleSet.json
+  - stable/2023-09-01/virtualMachine.json
+  - stable/2023-09-01/virtualMachineImage.json
+  - stable/2023-09-01/virtualMachineExtensionImage.json
+  - stable/2023-09-01/availabilitySet.json
+  - stable/2023-09-01/proximityPlacementGroup.json
+  - stable/2023-09-01/dedicatedHost.json
+  - stable/2023-09-01/sshPublicKey.json
+  - stable/2023-09-01/image.json
+  - stable/2023-09-01/restorePoint.json
+  - stable/2023-09-01/capacityReservation.json
+  - stable/2023-09-01/logAnalytic.json
+  - stable/2023-09-01/runCommand.json
+  - stable/2023-10-02/diskRPCommon.json
+  - stable/2023-10-02/disk.json
+  - stable/2023-10-02/diskAccess.json
+  - stable/2023-10-02/diskEncryptionSet.json
+  - stable/2023-10-02/diskRestorePoint.json
+  - stable/2023-10-02/snapshot.json
+  - stable/2021-07-01/skus.json
+  - stable/2023-07-03/galleryRPCommon.json
+  - stable/2023-07-03/gallery.json
+  - stable/2023-07-03/sharedGallery.json
+  - stable/2023-07-03/communityGallery.json
+  - Cloudservice/stable/2022-09-04/cloudService.json
 ```
 
 ### Tag: package-2023-07-03-only
@@ -752,11 +752,11 @@ These settings apply only when `--tag=package-2023-07-03-only` is specified on t
 
 ```yaml $(tag) == 'package-2023-07-03-only'
 input-file:
-  - Microsoft.Compute/common-types/v1/common.json
-  - Microsoft.Compute/GalleryRP/stable/2023-07-03/galleryRPCommon.json
-  - Microsoft.Compute/GalleryRP/stable/2023-07-03/gallery.json
-  - Microsoft.Compute/GalleryRP/stable/2023-07-03/sharedGallery.json
-  - Microsoft.Compute/GalleryRP/stable/2023-07-03/communityGallery.json
+  - common-types/v1/common.json
+  - stable/2023-07-03/galleryRPCommon.json
+  - stable/2023-07-03/gallery.json
+  - stable/2023-07-03/sharedGallery.json
+  - stable/2023-07-03/communityGallery.json
 ```
 
 ### Tag: package-2023-10-02
@@ -765,33 +765,33 @@ These settings apply only when `--tag=package-2023-10-02` is specified on the co
 
 ```yaml $(tag) == 'package-2023-10-02'
 input-file:
-  - Microsoft.Compute/common-types/v1/common.json
-  - Microsoft.Compute/ComputeRP/stable/2023-09-01/computeRPCommon.json
-  - Microsoft.Compute/ComputeRP/stable/2023-09-01/virtualMachineScaleSet.json
-  - Microsoft.Compute/ComputeRP/stable/2023-09-01/virtualMachine.json
-  - Microsoft.Compute/ComputeRP/stable/2023-09-01/virtualMachineImage.json
-  - Microsoft.Compute/ComputeRP/stable/2023-09-01/virtualMachineExtensionImage.json
-  - Microsoft.Compute/ComputeRP/stable/2023-09-01/availabilitySet.json
-  - Microsoft.Compute/ComputeRP/stable/2023-09-01/proximityPlacementGroup.json
-  - Microsoft.Compute/ComputeRP/stable/2023-09-01/dedicatedHost.json
-  - Microsoft.Compute/ComputeRP/stable/2023-09-01/sshPublicKey.json
-  - Microsoft.Compute/ComputeRP/stable/2023-09-01/image.json
-  - Microsoft.Compute/ComputeRP/stable/2023-09-01/restorePoint.json
-  - Microsoft.Compute/ComputeRP/stable/2023-09-01/capacityReservation.json
-  - Microsoft.Compute/ComputeRP/stable/2023-09-01/logAnalytic.json
-  - Microsoft.Compute/ComputeRP/stable/2023-09-01/runCommand.json
-  - Microsoft.Compute/DiskRP/stable/2023-10-02/diskRPCommon.json
-  - Microsoft.Compute/DiskRP/stable/2023-10-02/disk.json
-  - Microsoft.Compute/DiskRP/stable/2023-10-02/diskAccess.json
-  - Microsoft.Compute/DiskRP/stable/2023-10-02/diskEncryptionSet.json
-  - Microsoft.Compute/DiskRP/stable/2023-10-02/diskRestorePoint.json
-  - Microsoft.Compute/DiskRP/stable/2023-10-02/snapshot.json
-  - Microsoft.Compute/Skus/stable/2021-07-01/skus.json
-  - Microsoft.Compute/GalleryRP/stable/2022-08-03/galleryRPCommon.json
-  - Microsoft.Compute/GalleryRP/stable/2022-08-03/gallery.json
-  - Microsoft.Compute/GalleryRP/stable/2022-08-03/sharedGallery.json
-  - Microsoft.Compute/GalleryRP/stable/2022-08-03/communityGallery.json
-  - Microsoft.Compute/CloudserviceRP/stable/2022-09-04/cloudService.json
+  - common-types/v1/common.json
+  - stable/2023-09-01/computeRPCommon.json
+  - stable/2023-09-01/virtualMachineScaleSet.json
+  - stable/2023-09-01/virtualMachine.json
+  - stable/2023-09-01/virtualMachineImage.json
+  - stable/2023-09-01/virtualMachineExtensionImage.json
+  - stable/2023-09-01/availabilitySet.json
+  - stable/2023-09-01/proximityPlacementGroup.json
+  - stable/2023-09-01/dedicatedHost.json
+  - stable/2023-09-01/sshPublicKey.json
+  - stable/2023-09-01/image.json
+  - stable/2023-09-01/restorePoint.json
+  - stable/2023-09-01/capacityReservation.json
+  - stable/2023-09-01/logAnalytic.json
+  - stable/2023-09-01/runCommand.json
+  - stable/2023-10-02/diskRPCommon.json
+  - stable/2023-10-02/disk.json
+  - stable/2023-10-02/diskAccess.json
+  - stable/2023-10-02/diskEncryptionSet.json
+  - stable/2023-10-02/diskRestorePoint.json
+  - stable/2023-10-02/snapshot.json
+  - stable/2021-07-01/skus.json
+  - stable/2022-08-03/galleryRPCommon.json
+  - stable/2022-08-03/gallery.json
+  - stable/2022-08-03/sharedGallery.json
+  - stable/2022-08-03/communityGallery.json
+  - Cloudservice/stable/2022-09-04/cloudService.json
 ```
 
 ### Tag: package-2023-10-02-only
@@ -800,13 +800,13 @@ These settings apply only when `--tag=package-2023-10-02-only` is specified on t
 
 ```yaml $(tag) == 'package-2023-10-02-only'
 input-file:
-  - Microsoft.Compute/common-types/v1/common.json
-  - Microsoft.Compute/DiskRP/stable/2023-10-02/diskRPCommon.json
-  - Microsoft.Compute/DiskRP/stable/2023-10-02/disk.json
-  - Microsoft.Compute/DiskRP/stable/2023-10-02/diskAccess.json
-  - Microsoft.Compute/DiskRP/stable/2023-10-02/diskEncryptionSet.json
-  - Microsoft.Compute/DiskRP/stable/2023-10-02/diskRestorePoint.json
-  - Microsoft.Compute/DiskRP/stable/2023-10-02/snapshot.json
+  - common-types/v1/common.json
+  - stable/2023-10-02/diskRPCommon.json
+  - stable/2023-10-02/disk.json
+  - stable/2023-10-02/diskAccess.json
+  - stable/2023-10-02/diskEncryptionSet.json
+  - stable/2023-10-02/diskRestorePoint.json
+  - stable/2023-10-02/snapshot.json
 ```
 
 ### Tag: package-2023-09-01
@@ -815,33 +815,33 @@ These settings apply only when `--tag=package-2023-09-01` is specified on the co
 
 ```yaml $(tag) == 'package-2023-09-01'
 input-file:
-  - Microsoft.Compute/common-types/v1/common.json
-  - Microsoft.Compute/ComputeRP/stable/2023-09-01/computeRPCommon.json
-  - Microsoft.Compute/ComputeRP/stable/2023-09-01/virtualMachineScaleSet.json
-  - Microsoft.Compute/ComputeRP/stable/2023-09-01/virtualMachine.json
-  - Microsoft.Compute/ComputeRP/stable/2023-09-01/virtualMachineImage.json
-  - Microsoft.Compute/ComputeRP/stable/2023-09-01/virtualMachineExtensionImage.json
-  - Microsoft.Compute/ComputeRP/stable/2023-09-01/availabilitySet.json
-  - Microsoft.Compute/ComputeRP/stable/2023-09-01/proximityPlacementGroup.json
-  - Microsoft.Compute/ComputeRP/stable/2023-09-01/dedicatedHost.json
-  - Microsoft.Compute/ComputeRP/stable/2023-09-01/sshPublicKey.json
-  - Microsoft.Compute/ComputeRP/stable/2023-09-01/image.json
-  - Microsoft.Compute/ComputeRP/stable/2023-09-01/restorePoint.json
-  - Microsoft.Compute/ComputeRP/stable/2023-09-01/capacityReservation.json
-  - Microsoft.Compute/ComputeRP/stable/2023-09-01/logAnalytic.json
-  - Microsoft.Compute/ComputeRP/stable/2023-09-01/runCommand.json
-  - Microsoft.Compute/DiskRP/stable/2023-04-02/diskRPCommon.json
-  - Microsoft.Compute/DiskRP/stable/2023-04-02/disk.json
-  - Microsoft.Compute/DiskRP/stable/2023-04-02/diskAccess.json
-  - Microsoft.Compute/DiskRP/stable/2023-04-02/diskEncryptionSet.json
-  - Microsoft.Compute/DiskRP/stable/2023-04-02/diskRestorePoint.json
-  - Microsoft.Compute/DiskRP/stable/2023-04-02/snapshot.json
-  - Microsoft.Compute/Skus/stable/2021-07-01/skus.json
-  - Microsoft.Compute/GalleryRP/stable/2022-08-03/galleryRPCommon.json
-  - Microsoft.Compute/GalleryRP/stable/2022-08-03/gallery.json
-  - Microsoft.Compute/GalleryRP/stable/2022-08-03/sharedGallery.json
-  - Microsoft.Compute/GalleryRP/stable/2022-08-03/communityGallery.json
-  - Microsoft.Compute/CloudserviceRP/stable/2022-09-04/cloudService.json
+  - common-types/v1/common.json
+  - stable/2023-09-01/computeRPCommon.json
+  - stable/2023-09-01/virtualMachineScaleSet.json
+  - stable/2023-09-01/virtualMachine.json
+  - stable/2023-09-01/virtualMachineImage.json
+  - stable/2023-09-01/virtualMachineExtensionImage.json
+  - stable/2023-09-01/availabilitySet.json
+  - stable/2023-09-01/proximityPlacementGroup.json
+  - stable/2023-09-01/dedicatedHost.json
+  - stable/2023-09-01/sshPublicKey.json
+  - stable/2023-09-01/image.json
+  - stable/2023-09-01/restorePoint.json
+  - stable/2023-09-01/capacityReservation.json
+  - stable/2023-09-01/logAnalytic.json
+  - stable/2023-09-01/runCommand.json
+  - stable/2023-04-02/diskRPCommon.json
+  - stable/2023-04-02/disk.json
+  - stable/2023-04-02/diskAccess.json
+  - stable/2023-04-02/diskEncryptionSet.json
+  - stable/2023-04-02/diskRestorePoint.json
+  - stable/2023-04-02/snapshot.json
+  - stable/2021-07-01/skus.json
+  - stable/2022-08-03/galleryRPCommon.json
+  - stable/2022-08-03/gallery.json
+  - stable/2022-08-03/sharedGallery.json
+  - stable/2022-08-03/communityGallery.json
+  - Cloudservice/stable/2022-09-04/cloudService.json
 ```
 
 ### Tag: package-2023-09-01-only
@@ -850,21 +850,21 @@ These settings apply only when `--tag=package-2023-09-01-only` is specified on t
 
 ```yaml $(tag) == 'package-2023-09-01-only'
 input-file:
-  - Microsoft.Compute/common-types/v1/common.json
-  - Microsoft.Compute/ComputeRP/stable/2023-09-01/computeRPCommon.json
-  - Microsoft.Compute/ComputeRP/stable/2023-09-01/virtualMachineScaleSet.json
-  - Microsoft.Compute/ComputeRP/stable/2023-09-01/virtualMachine.json
-  - Microsoft.Compute/ComputeRP/stable/2023-09-01/virtualMachineImage.json
-  - Microsoft.Compute/ComputeRP/stable/2023-09-01/virtualMachineExtensionImage.json
-  - Microsoft.Compute/ComputeRP/stable/2023-09-01/availabilitySet.json
-  - Microsoft.Compute/ComputeRP/stable/2023-09-01/proximityPlacementGroup.json
-  - Microsoft.Compute/ComputeRP/stable/2023-09-01/dedicatedHost.json
-  - Microsoft.Compute/ComputeRP/stable/2023-09-01/sshPublicKey.json
-  - Microsoft.Compute/ComputeRP/stable/2023-09-01/image.json
-  - Microsoft.Compute/ComputeRP/stable/2023-09-01/restorePoint.json
-  - Microsoft.Compute/ComputeRP/stable/2023-09-01/capacityReservation.json
-  - Microsoft.Compute/ComputeRP/stable/2023-09-01/logAnalytic.json
-  - Microsoft.Compute/ComputeRP/stable/2023-09-01/runCommand.json
+  - common-types/v1/common.json
+  - stable/2023-09-01/computeRPCommon.json
+  - stable/2023-09-01/virtualMachineScaleSet.json
+  - stable/2023-09-01/virtualMachine.json
+  - stable/2023-09-01/virtualMachineImage.json
+  - stable/2023-09-01/virtualMachineExtensionImage.json
+  - stable/2023-09-01/availabilitySet.json
+  - stable/2023-09-01/proximityPlacementGroup.json
+  - stable/2023-09-01/dedicatedHost.json
+  - stable/2023-09-01/sshPublicKey.json
+  - stable/2023-09-01/image.json
+  - stable/2023-09-01/restorePoint.json
+  - stable/2023-09-01/capacityReservation.json
+  - stable/2023-09-01/logAnalytic.json
+  - stable/2023-09-01/runCommand.json
 ```
 
 ### Tag: package-2022-08-03
@@ -873,33 +873,33 @@ These settings apply only when `--tag=package-2022-08-03` is specified on the co
 
 ```yaml $(tag) == 'package-2022-08-03'
 input-file:
-  - Microsoft.Compute/common-types/v1/common.json
-  - Microsoft.Compute/ComputeRP/stable/2023-07-01/computeRPCommon.json
-  - Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json
-  - Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachine.json
-  - Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineImage.json
-  - Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineExtensionImage.json
-  - Microsoft.Compute/ComputeRP/stable/2023-07-01/availabilitySet.json
-  - Microsoft.Compute/ComputeRP/stable/2023-07-01/proximityPlacementGroup.json
-  - Microsoft.Compute/ComputeRP/stable/2023-07-01/dedicatedHost.json
-  - Microsoft.Compute/ComputeRP/stable/2023-07-01/sshPublicKey.json
-  - Microsoft.Compute/ComputeRP/stable/2023-07-01/image.json
-  - Microsoft.Compute/ComputeRP/stable/2023-07-01/restorePoint.json
-  - Microsoft.Compute/ComputeRP/stable/2023-07-01/capacityReservation.json
-  - Microsoft.Compute/ComputeRP/stable/2023-07-01/logAnalytic.json
-  - Microsoft.Compute/ComputeRP/stable/2023-07-01/runCommand.json
-  - Microsoft.Compute/DiskRP/stable/2023-04-02/diskRPCommon.json
-  - Microsoft.Compute/DiskRP/stable/2023-04-02/disk.json
-  - Microsoft.Compute/DiskRP/stable/2023-04-02/diskAccess.json
-  - Microsoft.Compute/DiskRP/stable/2023-04-02/diskEncryptionSet.json
-  - Microsoft.Compute/DiskRP/stable/2023-04-02/diskRestorePoint.json
-  - Microsoft.Compute/DiskRP/stable/2023-04-02/snapshot.json
-  - Microsoft.Compute/Skus/stable/2021-07-01/skus.json
-  - Microsoft.Compute/GalleryRP/stable/2022-08-03/galleryRPCommon.json
-  - Microsoft.Compute/GalleryRP/stable/2022-08-03/gallery.json
-  - Microsoft.Compute/GalleryRP/stable/2022-08-03/sharedGallery.json
-  - Microsoft.Compute/GalleryRP/stable/2022-08-03/communityGallery.json
-  - Microsoft.Compute/CloudserviceRP/stable/2022-09-04/cloudService.json
+  - common-types/v1/common.json
+  - stable/2023-07-01/computeRPCommon.json
+  - stable/2023-07-01/virtualMachineScaleSet.json
+  - stable/2023-07-01/virtualMachine.json
+  - stable/2023-07-01/virtualMachineImage.json
+  - stable/2023-07-01/virtualMachineExtensionImage.json
+  - stable/2023-07-01/availabilitySet.json
+  - stable/2023-07-01/proximityPlacementGroup.json
+  - stable/2023-07-01/dedicatedHost.json
+  - stable/2023-07-01/sshPublicKey.json
+  - stable/2023-07-01/image.json
+  - stable/2023-07-01/restorePoint.json
+  - stable/2023-07-01/capacityReservation.json
+  - stable/2023-07-01/logAnalytic.json
+  - stable/2023-07-01/runCommand.json
+  - stable/2023-04-02/diskRPCommon.json
+  - stable/2023-04-02/disk.json
+  - stable/2023-04-02/diskAccess.json
+  - stable/2023-04-02/diskEncryptionSet.json
+  - stable/2023-04-02/diskRestorePoint.json
+  - stable/2023-04-02/snapshot.json
+  - stable/2021-07-01/skus.json
+  - stable/2022-08-03/galleryRPCommon.json
+  - stable/2022-08-03/gallery.json
+  - stable/2022-08-03/sharedGallery.json
+  - stable/2022-08-03/communityGallery.json
+  - Cloudservice/stable/2022-09-04/cloudService.json
 ```
 
 ### Tag: package-2022-08-03-only
@@ -908,11 +908,11 @@ These settings apply only when `--tag=package-2022-08-03-only` is specified on t
 
 ```yaml $(tag) == 'package-2022-08-03-only'
 input-file:
-  - Microsoft.Compute/common-types/v1/common.json
-  - Microsoft.Compute/GalleryRP/stable/2022-08-03/galleryRPCommon.json
-  - Microsoft.Compute/GalleryRP/stable/2022-08-03/gallery.json
-  - Microsoft.Compute/GalleryRP/stable/2022-08-03/sharedGallery.json
-  - Microsoft.Compute/GalleryRP/stable/2022-08-03/communityGallery.json
+  - common-types/v1/common.json
+  - stable/2022-08-03/galleryRPCommon.json
+  - stable/2022-08-03/gallery.json
+  - stable/2022-08-03/sharedGallery.json
+  - stable/2022-08-03/communityGallery.json
 ```
 
 ### Tag: package-2023-07-01
@@ -921,33 +921,33 @@ These settings apply only when `--tag=package-2023-07-01` is specified on the co
 
 ```yaml $(tag) == 'package-2023-07-01'
 input-file:
-  - Microsoft.Compute/common-types/v1/common.json
-  - Microsoft.Compute/ComputeRP/stable/2023-07-01/computeRPCommon.json
-  - Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json
-  - Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachine.json
-  - Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineImage.json
-  - Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineExtensionImage.json
-  - Microsoft.Compute/ComputeRP/stable/2023-07-01/availabilitySet.json
-  - Microsoft.Compute/ComputeRP/stable/2023-07-01/proximityPlacementGroup.json
-  - Microsoft.Compute/ComputeRP/stable/2023-07-01/dedicatedHost.json
-  - Microsoft.Compute/ComputeRP/stable/2023-07-01/sshPublicKey.json
-  - Microsoft.Compute/ComputeRP/stable/2023-07-01/image.json
-  - Microsoft.Compute/ComputeRP/stable/2023-07-01/restorePoint.json
-  - Microsoft.Compute/ComputeRP/stable/2023-07-01/capacityReservation.json
-  - Microsoft.Compute/ComputeRP/stable/2023-07-01/logAnalytic.json
-  - Microsoft.Compute/ComputeRP/stable/2023-07-01/runCommand.json
-  - Microsoft.Compute/DiskRP/stable/2023-04-02/diskRPCommon.json
-  - Microsoft.Compute/DiskRP/stable/2023-04-02/disk.json
-  - Microsoft.Compute/DiskRP/stable/2023-04-02/diskAccess.json
-  - Microsoft.Compute/DiskRP/stable/2023-04-02/diskEncryptionSet.json
-  - Microsoft.Compute/DiskRP/stable/2023-04-02/diskRestorePoint.json
-  - Microsoft.Compute/DiskRP/stable/2023-04-02/snapshot.json
-  - Microsoft.Compute/Skus/stable/2021-07-01/skus.json
-  - Microsoft.Compute/GalleryRP/stable/2022-03-03/galleryRPCommon.json
-  - Microsoft.Compute/GalleryRP/stable/2022-03-03/gallery.json
-  - Microsoft.Compute/GalleryRP/stable/2022-03-03/sharedGallery.json
-  - Microsoft.Compute/GalleryRP/stable/2022-03-03/communityGallery.json
-  - Microsoft.Compute/CloudserviceRP/stable/2022-09-04/cloudService.json
+  - common-types/v1/common.json
+  - stable/2023-07-01/computeRPCommon.json
+  - stable/2023-07-01/virtualMachineScaleSet.json
+  - stable/2023-07-01/virtualMachine.json
+  - stable/2023-07-01/virtualMachineImage.json
+  - stable/2023-07-01/virtualMachineExtensionImage.json
+  - stable/2023-07-01/availabilitySet.json
+  - stable/2023-07-01/proximityPlacementGroup.json
+  - stable/2023-07-01/dedicatedHost.json
+  - stable/2023-07-01/sshPublicKey.json
+  - stable/2023-07-01/image.json
+  - stable/2023-07-01/restorePoint.json
+  - stable/2023-07-01/capacityReservation.json
+  - stable/2023-07-01/logAnalytic.json
+  - stable/2023-07-01/runCommand.json
+  - stable/2023-04-02/diskRPCommon.json
+  - stable/2023-04-02/disk.json
+  - stable/2023-04-02/diskAccess.json
+  - stable/2023-04-02/diskEncryptionSet.json
+  - stable/2023-04-02/diskRestorePoint.json
+  - stable/2023-04-02/snapshot.json
+  - stable/2021-07-01/skus.json
+  - stable/2022-03-03/galleryRPCommon.json
+  - stable/2022-03-03/gallery.json
+  - stable/2022-03-03/sharedGallery.json
+  - stable/2022-03-03/communityGallery.json
+  - Cloudservice/stable/2022-09-04/cloudService.json
 ```
 
 ### Tag: package-2023-07-01-only
@@ -956,21 +956,21 @@ These settings apply only when `--tag=package-2023-07-01-only` is specified on t
 
 ```yaml $(tag) == 'package-2023-07-01-only'
 input-file:
-  - Microsoft.Compute/common-types/v1/common.json
-  - Microsoft.Compute/ComputeRP/stable/2023-07-01/computeRPCommon.json
-  - Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json
-  - Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachine.json
-  - Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineImage.json
-  - Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineExtensionImage.json
-  - Microsoft.Compute/ComputeRP/stable/2023-07-01/availabilitySet.json
-  - Microsoft.Compute/ComputeRP/stable/2023-07-01/proximityPlacementGroup.json
-  - Microsoft.Compute/ComputeRP/stable/2023-07-01/dedicatedHost.json
-  - Microsoft.Compute/ComputeRP/stable/2023-07-01/sshPublicKey.json
-  - Microsoft.Compute/ComputeRP/stable/2023-07-01/image.json
-  - Microsoft.Compute/ComputeRP/stable/2023-07-01/restorePoint.json
-  - Microsoft.Compute/ComputeRP/stable/2023-07-01/capacityReservation.json
-  - Microsoft.Compute/ComputeRP/stable/2023-07-01/logAnalytic.json
-  - Microsoft.Compute/ComputeRP/stable/2023-07-01/runCommand.json
+  - common-types/v1/common.json
+  - stable/2023-07-01/computeRPCommon.json
+  - stable/2023-07-01/virtualMachineScaleSet.json
+  - stable/2023-07-01/virtualMachine.json
+  - stable/2023-07-01/virtualMachineImage.json
+  - stable/2023-07-01/virtualMachineExtensionImage.json
+  - stable/2023-07-01/availabilitySet.json
+  - stable/2023-07-01/proximityPlacementGroup.json
+  - stable/2023-07-01/dedicatedHost.json
+  - stable/2023-07-01/sshPublicKey.json
+  - stable/2023-07-01/image.json
+  - stable/2023-07-01/restorePoint.json
+  - stable/2023-07-01/capacityReservation.json
+  - stable/2023-07-01/logAnalytic.json
+  - stable/2023-07-01/runCommand.json
 ```
 
 ### Tag: package-2023-04-02
@@ -979,33 +979,33 @@ These settings apply only when `--tag=package-2023-04-02` is specified on the co
 
 ```yaml $(tag) == 'package-2023-04-02'
 input-file:
-  - Microsoft.Compute/common-types/v1/common.json
-  - Microsoft.Compute/ComputeRP/stable/2023-03-01/computeRPCommon.json
-  - Microsoft.Compute/ComputeRP/stable/2023-03-01/virtualMachineScaleSet.json
-  - Microsoft.Compute/ComputeRP/stable/2023-03-01/virtualMachine.json
-  - Microsoft.Compute/ComputeRP/stable/2023-03-01/virtualMachineImage.json
-  - Microsoft.Compute/ComputeRP/stable/2023-03-01/virtualMachineExtensionImage.json
-  - Microsoft.Compute/ComputeRP/stable/2023-03-01/availabilitySet.json
-  - Microsoft.Compute/ComputeRP/stable/2023-03-01/proximityPlacementGroup.json
-  - Microsoft.Compute/ComputeRP/stable/2023-03-01/dedicatedHost.json
-  - Microsoft.Compute/ComputeRP/stable/2023-03-01/sshPublicKey.json
-  - Microsoft.Compute/ComputeRP/stable/2023-03-01/image.json
-  - Microsoft.Compute/ComputeRP/stable/2023-03-01/restorePoint.json
-  - Microsoft.Compute/ComputeRP/stable/2023-03-01/capacityReservation.json
-  - Microsoft.Compute/ComputeRP/stable/2023-03-01/logAnalytic.json
-  - Microsoft.Compute/ComputeRP/stable/2023-03-01/runCommand.json
-  - Microsoft.Compute/DiskRP/stable/2023-04-02/diskRPCommon.json
-  - Microsoft.Compute/DiskRP/stable/2023-04-02/disk.json
-  - Microsoft.Compute/DiskRP/stable/2023-04-02/diskAccess.json
-  - Microsoft.Compute/DiskRP/stable/2023-04-02/diskEncryptionSet.json
-  - Microsoft.Compute/DiskRP/stable/2023-04-02/diskRestorePoint.json
-  - Microsoft.Compute/DiskRP/stable/2023-04-02/snapshot.json
-  - Microsoft.Compute/Skus/stable/2021-07-01/skus.json
-  - Microsoft.Compute/GalleryRP/stable/2022-03-03/galleryRPCommon.json
-  - Microsoft.Compute/GalleryRP/stable/2022-03-03/gallery.json
-  - Microsoft.Compute/GalleryRP/stable/2022-03-03/sharedGallery.json
-  - Microsoft.Compute/GalleryRP/stable/2022-03-03/communityGallery.json
-  - Microsoft.Compute/CloudserviceRP/stable/2022-09-04/cloudService.json
+  - common-types/v1/common.json
+  - stable/2023-03-01/computeRPCommon.json
+  - stable/2023-03-01/virtualMachineScaleSet.json
+  - stable/2023-03-01/virtualMachine.json
+  - stable/2023-03-01/virtualMachineImage.json
+  - stable/2023-03-01/virtualMachineExtensionImage.json
+  - stable/2023-03-01/availabilitySet.json
+  - stable/2023-03-01/proximityPlacementGroup.json
+  - stable/2023-03-01/dedicatedHost.json
+  - stable/2023-03-01/sshPublicKey.json
+  - stable/2023-03-01/image.json
+  - stable/2023-03-01/restorePoint.json
+  - stable/2023-03-01/capacityReservation.json
+  - stable/2023-03-01/logAnalytic.json
+  - stable/2023-03-01/runCommand.json
+  - stable/2023-04-02/diskRPCommon.json
+  - stable/2023-04-02/disk.json
+  - stable/2023-04-02/diskAccess.json
+  - stable/2023-04-02/diskEncryptionSet.json
+  - stable/2023-04-02/diskRestorePoint.json
+  - stable/2023-04-02/snapshot.json
+  - stable/2021-07-01/skus.json
+  - stable/2022-03-03/galleryRPCommon.json
+  - stable/2022-03-03/gallery.json
+  - stable/2022-03-03/sharedGallery.json
+  - stable/2022-03-03/communityGallery.json
+  - Cloudservice/stable/2022-09-04/cloudService.json
 ```
 
 ### Tag: package-2023-04-02-only
@@ -1014,13 +1014,13 @@ These settings apply only when `--tag=package-2023-04-02-only` is specified on t
 
 ```yaml $(tag) == 'package-2023-04-02-only'
 input-file:
-  - Microsoft.Compute/common-types/v1/common.json
-  - Microsoft.Compute/DiskRP/stable/2023-04-02/diskRPCommon.json
-  - Microsoft.Compute/DiskRP/stable/2023-04-02/disk.json
-  - Microsoft.Compute/DiskRP/stable/2023-04-02/diskAccess.json
-  - Microsoft.Compute/DiskRP/stable/2023-04-02/diskEncryptionSet.json
-  - Microsoft.Compute/DiskRP/stable/2023-04-02/diskRestorePoint.json
-  - Microsoft.Compute/DiskRP/stable/2023-04-02/snapshot.json
+  - common-types/v1/common.json
+  - stable/2023-04-02/diskRPCommon.json
+  - stable/2023-04-02/disk.json
+  - stable/2023-04-02/diskAccess.json
+  - stable/2023-04-02/diskEncryptionSet.json
+  - stable/2023-04-02/diskRestorePoint.json
+  - stable/2023-04-02/snapshot.json
 ```
 
 ### Tag: package-2023-01-02
@@ -1029,33 +1029,33 @@ These settings apply only when `--tag=package-2023-01-02` is specified on the co
 
 ```yaml $(tag) == 'package-2023-01-02'
 input-file:
-  - Microsoft.Compute/common-types/v1/common.json
-  - Microsoft.Compute/ComputeRP/stable/2023-03-01/computeRPCommon.json
-  - Microsoft.Compute/ComputeRP/stable/2023-03-01/virtualMachineScaleSet.json
-  - Microsoft.Compute/ComputeRP/stable/2023-03-01/virtualMachine.json
-  - Microsoft.Compute/ComputeRP/stable/2023-03-01/virtualMachineImage.json
-  - Microsoft.Compute/ComputeRP/stable/2023-03-01/virtualMachineExtensionImage.json
-  - Microsoft.Compute/ComputeRP/stable/2023-03-01/availabilitySet.json
-  - Microsoft.Compute/ComputeRP/stable/2023-03-01/proximityPlacementGroup.json
-  - Microsoft.Compute/ComputeRP/stable/2023-03-01/dedicatedHost.json
-  - Microsoft.Compute/ComputeRP/stable/2023-03-01/sshPublicKey.json
-  - Microsoft.Compute/ComputeRP/stable/2023-03-01/image.json
-  - Microsoft.Compute/ComputeRP/stable/2023-03-01/restorePoint.json
-  - Microsoft.Compute/ComputeRP/stable/2023-03-01/capacityReservation.json
-  - Microsoft.Compute/ComputeRP/stable/2023-03-01/logAnalytic.json
-  - Microsoft.Compute/ComputeRP/stable/2023-03-01/runCommand.json
-  - Microsoft.Compute/DiskRP/stable/2023-01-02/diskRPCommon.json
-  - Microsoft.Compute/DiskRP/stable/2023-01-02/disk.json
-  - Microsoft.Compute/DiskRP/stable/2023-01-02/diskAccess.json
-  - Microsoft.Compute/DiskRP/stable/2023-01-02/diskEncryptionSet.json
-  - Microsoft.Compute/DiskRP/stable/2023-01-02/diskRestorePoint.json
-  - Microsoft.Compute/DiskRP/stable/2023-01-02/snapshot.json
-  - Microsoft.Compute/Skus/stable/2021-07-01/skus.json
-  - Microsoft.Compute/GalleryRP/stable/2022-03-03/galleryRPCommon.json
-  - Microsoft.Compute/GalleryRP/stable/2022-03-03/gallery.json
-  - Microsoft.Compute/GalleryRP/stable/2022-03-03/sharedGallery.json
-  - Microsoft.Compute/GalleryRP/stable/2022-03-03/communityGallery.json
-  - Microsoft.Compute/CloudserviceRP/stable/2022-09-04/cloudService.json
+  - common-types/v1/common.json
+  - stable/2023-03-01/computeRPCommon.json
+  - stable/2023-03-01/virtualMachineScaleSet.json
+  - stable/2023-03-01/virtualMachine.json
+  - stable/2023-03-01/virtualMachineImage.json
+  - stable/2023-03-01/virtualMachineExtensionImage.json
+  - stable/2023-03-01/availabilitySet.json
+  - stable/2023-03-01/proximityPlacementGroup.json
+  - stable/2023-03-01/dedicatedHost.json
+  - stable/2023-03-01/sshPublicKey.json
+  - stable/2023-03-01/image.json
+  - stable/2023-03-01/restorePoint.json
+  - stable/2023-03-01/capacityReservation.json
+  - stable/2023-03-01/logAnalytic.json
+  - stable/2023-03-01/runCommand.json
+  - stable/2023-01-02/diskRPCommon.json
+  - stable/2023-01-02/disk.json
+  - stable/2023-01-02/diskAccess.json
+  - stable/2023-01-02/diskEncryptionSet.json
+  - stable/2023-01-02/diskRestorePoint.json
+  - stable/2023-01-02/snapshot.json
+  - stable/2021-07-01/skus.json
+  - stable/2022-03-03/galleryRPCommon.json
+  - stable/2022-03-03/gallery.json
+  - stable/2022-03-03/sharedGallery.json
+  - stable/2022-03-03/communityGallery.json
+  - Cloudservice/stable/2022-09-04/cloudService.json
 ```
 
 ### Tag: package-2023-01-02-only
@@ -1064,13 +1064,13 @@ These settings apply only when `--tag=package-2023-01-02-only` is specified on t
 
 ```yaml $(tag) == 'package-2023-01-02-only'
 input-file:
-  - Microsoft.Compute/common-types/v1/common.json
-  - Microsoft.Compute/DiskRP/stable/2023-01-02/diskRPCommon.json
-  - Microsoft.Compute/DiskRP/stable/2023-01-02/disk.json
-  - Microsoft.Compute/DiskRP/stable/2023-01-02/diskAccess.json
-  - Microsoft.Compute/DiskRP/stable/2023-01-02/diskEncryptionSet.json
-  - Microsoft.Compute/DiskRP/stable/2023-01-02/diskRestorePoint.json
-  - Microsoft.Compute/DiskRP/stable/2023-01-02/snapshot.json
+  - common-types/v1/common.json
+  - stable/2023-01-02/diskRPCommon.json
+  - stable/2023-01-02/disk.json
+  - stable/2023-01-02/diskAccess.json
+  - stable/2023-01-02/diskEncryptionSet.json
+  - stable/2023-01-02/diskRestorePoint.json
+  - stable/2023-01-02/snapshot.json
 ```
 
 ### Tag: package-2023-03-01
@@ -1079,33 +1079,33 @@ These settings apply only when `--tag=package-2023-03-01` is specified on the co
 
 ```yaml $(tag) == 'package-2023-03-01'
 input-file:
-  - Microsoft.Compute/common-types/v1/common.json
-  - Microsoft.Compute/ComputeRP/stable/2023-03-01/computeRPCommon.json
-  - Microsoft.Compute/ComputeRP/stable/2023-03-01/virtualMachineScaleSet.json
-  - Microsoft.Compute/ComputeRP/stable/2023-03-01/virtualMachine.json
-  - Microsoft.Compute/ComputeRP/stable/2023-03-01/virtualMachineImage.json
-  - Microsoft.Compute/ComputeRP/stable/2023-03-01/virtualMachineExtensionImage.json
-  - Microsoft.Compute/ComputeRP/stable/2023-03-01/availabilitySet.json
-  - Microsoft.Compute/ComputeRP/stable/2023-03-01/proximityPlacementGroup.json
-  - Microsoft.Compute/ComputeRP/stable/2023-03-01/dedicatedHost.json
-  - Microsoft.Compute/ComputeRP/stable/2023-03-01/sshPublicKey.json
-  - Microsoft.Compute/ComputeRP/stable/2023-03-01/image.json
-  - Microsoft.Compute/ComputeRP/stable/2023-03-01/restorePoint.json
-  - Microsoft.Compute/ComputeRP/stable/2023-03-01/capacityReservation.json
-  - Microsoft.Compute/ComputeRP/stable/2023-03-01/logAnalytic.json
-  - Microsoft.Compute/ComputeRP/stable/2023-03-01/runCommand.json
-  - Microsoft.Compute/DiskRP/stable/2022-07-02/diskRPCommon.json
-  - Microsoft.Compute/DiskRP/stable/2022-07-02/disk.json
-  - Microsoft.Compute/DiskRP/stable/2022-07-02/diskAccess.json
-  - Microsoft.Compute/DiskRP/stable/2022-07-02/diskEncryptionSet.json
-  - Microsoft.Compute/DiskRP/stable/2022-07-02/diskRestorePoint.json
-  - Microsoft.Compute/DiskRP/stable/2022-07-02/snapshot.json
-  - Microsoft.Compute/Skus/stable/2021-07-01/skus.json
-  - Microsoft.Compute/GalleryRP/stable/2022-03-03/galleryRPCommon.json
-  - Microsoft.Compute/GalleryRP/stable/2022-03-03/gallery.json
-  - Microsoft.Compute/GalleryRP/stable/2022-03-03/sharedGallery.json
-  - Microsoft.Compute/GalleryRP/stable/2022-03-03/communityGallery.json
-  - Microsoft.Compute/CloudserviceRP/stable/2022-09-04/cloudService.json
+  - common-types/v1/common.json
+  - stable/2023-03-01/computeRPCommon.json
+  - stable/2023-03-01/virtualMachineScaleSet.json
+  - stable/2023-03-01/virtualMachine.json
+  - stable/2023-03-01/virtualMachineImage.json
+  - stable/2023-03-01/virtualMachineExtensionImage.json
+  - stable/2023-03-01/availabilitySet.json
+  - stable/2023-03-01/proximityPlacementGroup.json
+  - stable/2023-03-01/dedicatedHost.json
+  - stable/2023-03-01/sshPublicKey.json
+  - stable/2023-03-01/image.json
+  - stable/2023-03-01/restorePoint.json
+  - stable/2023-03-01/capacityReservation.json
+  - stable/2023-03-01/logAnalytic.json
+  - stable/2023-03-01/runCommand.json
+  - stable/2022-07-02/diskRPCommon.json
+  - stable/2022-07-02/disk.json
+  - stable/2022-07-02/diskAccess.json
+  - stable/2022-07-02/diskEncryptionSet.json
+  - stable/2022-07-02/diskRestorePoint.json
+  - stable/2022-07-02/snapshot.json
+  - stable/2021-07-01/skus.json
+  - stable/2022-03-03/galleryRPCommon.json
+  - stable/2022-03-03/gallery.json
+  - stable/2022-03-03/sharedGallery.json
+  - stable/2022-03-03/communityGallery.json
+  - Cloudservice/stable/2022-09-04/cloudService.json
 ```
 
 ### Tag: package-2023-03-01-only
@@ -1114,21 +1114,21 @@ These settings apply only when `--tag=package-2023-03-01-only` is specified on t
 
 ```yaml $(tag) == 'package-2023-03-01-only'
 input-file:
-  - Microsoft.Compute/common-types/v1/common.json
-  - Microsoft.Compute/ComputeRP/stable/2023-03-01/computeRPCommon.json
-  - Microsoft.Compute/ComputeRP/stable/2023-03-01/virtualMachineScaleSet.json
-  - Microsoft.Compute/ComputeRP/stable/2023-03-01/virtualMachine.json
-  - Microsoft.Compute/ComputeRP/stable/2023-03-01/virtualMachineImage.json
-  - Microsoft.Compute/ComputeRP/stable/2023-03-01/virtualMachineExtensionImage.json
-  - Microsoft.Compute/ComputeRP/stable/2023-03-01/availabilitySet.json
-  - Microsoft.Compute/ComputeRP/stable/2023-03-01/proximityPlacementGroup.json
-  - Microsoft.Compute/ComputeRP/stable/2023-03-01/dedicatedHost.json
-  - Microsoft.Compute/ComputeRP/stable/2023-03-01/sshPublicKey.json
-  - Microsoft.Compute/ComputeRP/stable/2023-03-01/image.json
-  - Microsoft.Compute/ComputeRP/stable/2023-03-01/restorePoint.json
-  - Microsoft.Compute/ComputeRP/stable/2023-03-01/capacityReservation.json
-  - Microsoft.Compute/ComputeRP/stable/2023-03-01/logAnalytic.json
-  - Microsoft.Compute/ComputeRP/stable/2023-03-01/runCommand.json
+  - common-types/v1/common.json
+  - stable/2023-03-01/computeRPCommon.json
+  - stable/2023-03-01/virtualMachineScaleSet.json
+  - stable/2023-03-01/virtualMachine.json
+  - stable/2023-03-01/virtualMachineImage.json
+  - stable/2023-03-01/virtualMachineExtensionImage.json
+  - stable/2023-03-01/availabilitySet.json
+  - stable/2023-03-01/proximityPlacementGroup.json
+  - stable/2023-03-01/dedicatedHost.json
+  - stable/2023-03-01/sshPublicKey.json
+  - stable/2023-03-01/image.json
+  - stable/2023-03-01/restorePoint.json
+  - stable/2023-03-01/capacityReservation.json
+  - stable/2023-03-01/logAnalytic.json
+  - stable/2023-03-01/runCommand.json
 ```
 
 ### Tag: package-2022-11-01
@@ -1137,33 +1137,33 @@ These settings apply only when `--tag=package-2022-11-01` is specified on the co
 
 ```yaml $(tag) == 'package-2022-11-01'
 input-file:
-  - Microsoft.Compute/common-types/v1/common.json
-  - Microsoft.Compute/ComputeRP/stable/2022-11-01/computeRPCommon.json
-  - Microsoft.Compute/ComputeRP/stable/2022-11-01/virtualMachineScaleSet.json
-  - Microsoft.Compute/ComputeRP/stable/2022-11-01/virtualMachine.json
-  - Microsoft.Compute/ComputeRP/stable/2022-11-01/virtualMachineImage.json
-  - Microsoft.Compute/ComputeRP/stable/2022-11-01/virtualMachineExtensionImage.json
-  - Microsoft.Compute/ComputeRP/stable/2022-11-01/availabilitySet.json
-  - Microsoft.Compute/ComputeRP/stable/2022-11-01/proximityPlacementGroup.json
-  - Microsoft.Compute/ComputeRP/stable/2022-11-01/dedicatedHost.json
-  - Microsoft.Compute/ComputeRP/stable/2022-11-01/sshPublicKey.json
-  - Microsoft.Compute/ComputeRP/stable/2022-11-01/image.json
-  - Microsoft.Compute/ComputeRP/stable/2022-11-01/restorePoint.json
-  - Microsoft.Compute/ComputeRP/stable/2022-11-01/capacityReservation.json
-  - Microsoft.Compute/ComputeRP/stable/2022-11-01/logAnalytic.json
-  - Microsoft.Compute/ComputeRP/stable/2022-11-01/runCommand.json
-  - Microsoft.Compute/DiskRP/stable/2022-07-02/diskRPCommon.json
-  - Microsoft.Compute/DiskRP/stable/2022-07-02/disk.json
-  - Microsoft.Compute/DiskRP/stable/2022-07-02/diskAccess.json
-  - Microsoft.Compute/DiskRP/stable/2022-07-02/diskEncryptionSet.json
-  - Microsoft.Compute/DiskRP/stable/2022-07-02/diskRestorePoint.json
-  - Microsoft.Compute/DiskRP/stable/2022-07-02/snapshot.json
-  - Microsoft.Compute/Skus/stable/2021-07-01/skus.json
-  - Microsoft.Compute/GalleryRP/stable/2022-03-03/galleryRPCommon.json
-  - Microsoft.Compute/GalleryRP/stable/2022-03-03/gallery.json
-  - Microsoft.Compute/GalleryRP/stable/2022-03-03/sharedGallery.json
-  - Microsoft.Compute/GalleryRP/stable/2022-03-03/communityGallery.json
-  - Microsoft.Compute/CloudserviceRP/stable/2022-09-04/cloudService.json
+  - common-types/v1/common.json
+  - stable/2022-11-01/computeRPCommon.json
+  - stable/2022-11-01/virtualMachineScaleSet.json
+  - stable/2022-11-01/virtualMachine.json
+  - stable/2022-11-01/virtualMachineImage.json
+  - stable/2022-11-01/virtualMachineExtensionImage.json
+  - stable/2022-11-01/availabilitySet.json
+  - stable/2022-11-01/proximityPlacementGroup.json
+  - stable/2022-11-01/dedicatedHost.json
+  - stable/2022-11-01/sshPublicKey.json
+  - stable/2022-11-01/image.json
+  - stable/2022-11-01/restorePoint.json
+  - stable/2022-11-01/capacityReservation.json
+  - stable/2022-11-01/logAnalytic.json
+  - stable/2022-11-01/runCommand.json
+  - stable/2022-07-02/diskRPCommon.json
+  - stable/2022-07-02/disk.json
+  - stable/2022-07-02/diskAccess.json
+  - stable/2022-07-02/diskEncryptionSet.json
+  - stable/2022-07-02/diskRestorePoint.json
+  - stable/2022-07-02/snapshot.json
+  - stable/2021-07-01/skus.json
+  - stable/2022-03-03/galleryRPCommon.json
+  - stable/2022-03-03/gallery.json
+  - stable/2022-03-03/sharedGallery.json
+  - stable/2022-03-03/communityGallery.json
+  - Cloudservice/stable/2022-09-04/cloudService.json
 ```
 
 ### Tag: package-2022-11-01-only
@@ -1172,21 +1172,21 @@ These settings apply only when `--tag=package-2022-11-01-only` is specified on t
 
 ```yaml $(tag) == 'package-2022-11-01-only'
 input-file:
-  - Microsoft.Compute/common-types/v1/common.json
-  - Microsoft.Compute/ComputeRP/stable/2022-11-01/computeRPCommon.json
-  - Microsoft.Compute/ComputeRP/stable/2022-11-01/virtualMachineScaleSet.json
-  - Microsoft.Compute/ComputeRP/stable/2022-11-01/virtualMachine.json
-  - Microsoft.Compute/ComputeRP/stable/2022-11-01/virtualMachineImage.json
-  - Microsoft.Compute/ComputeRP/stable/2022-11-01/virtualMachineExtensionImage.json
-  - Microsoft.Compute/ComputeRP/stable/2022-11-01/availabilitySet.json
-  - Microsoft.Compute/ComputeRP/stable/2022-11-01/proximityPlacementGroup.json
-  - Microsoft.Compute/ComputeRP/stable/2022-11-01/dedicatedHost.json
-  - Microsoft.Compute/ComputeRP/stable/2022-11-01/sshPublicKey.json
-  - Microsoft.Compute/ComputeRP/stable/2022-11-01/image.json
-  - Microsoft.Compute/ComputeRP/stable/2022-11-01/restorePoint.json
-  - Microsoft.Compute/ComputeRP/stable/2022-11-01/capacityReservation.json
-  - Microsoft.Compute/ComputeRP/stable/2022-11-01/logAnalytic.json
-  - Microsoft.Compute/ComputeRP/stable/2022-11-01/runCommand.json
+  - common-types/v1/common.json
+  - stable/2022-11-01/computeRPCommon.json
+  - stable/2022-11-01/virtualMachineScaleSet.json
+  - stable/2022-11-01/virtualMachine.json
+  - stable/2022-11-01/virtualMachineImage.json
+  - stable/2022-11-01/virtualMachineExtensionImage.json
+  - stable/2022-11-01/availabilitySet.json
+  - stable/2022-11-01/proximityPlacementGroup.json
+  - stable/2022-11-01/dedicatedHost.json
+  - stable/2022-11-01/sshPublicKey.json
+  - stable/2022-11-01/image.json
+  - stable/2022-11-01/restorePoint.json
+  - stable/2022-11-01/capacityReservation.json
+  - stable/2022-11-01/logAnalytic.json
+  - stable/2022-11-01/runCommand.json
 ```
 
 ### Tag: package-2022-09-04
@@ -1195,33 +1195,33 @@ These settings apply only when `--tag=package-2022-09-04` is specified on the co
 
 ```yaml $(tag) == 'package-2022-09-04'
 input-file:
-  - Microsoft.Compute/common-types/v1/common.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/computeRPCommon.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/virtualMachineScaleSet.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/virtualMachine.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/virtualMachineImage.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/virtualMachineExtensionImage.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/availabilitySet.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/proximityPlacementGroup.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/dedicatedHost.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/sshPublicKey.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/image.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/restorePoint.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/capacityReservation.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/logAnalytic.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/runCommand.json
-  - Microsoft.Compute/DiskRP/stable/2022-07-02/diskRPCommon.json
-  - Microsoft.Compute/DiskRP/stable/2022-07-02/disk.json
-  - Microsoft.Compute/DiskRP/stable/2022-07-02/diskAccess.json
-  - Microsoft.Compute/DiskRP/stable/2022-07-02/diskEncryptionSet.json
-  - Microsoft.Compute/DiskRP/stable/2022-07-02/diskRestorePoint.json
-  - Microsoft.Compute/DiskRP/stable/2022-07-02/snapshot.json
-  - Microsoft.Compute/Skus/stable/2021-07-01/skus.json
-  - Microsoft.Compute/GalleryRP/stable/2022-03-03/galleryRPCommon.json
-  - Microsoft.Compute/GalleryRP/stable/2022-03-03/gallery.json
-  - Microsoft.Compute/GalleryRP/stable/2022-03-03/sharedGallery.json
-  - Microsoft.Compute/GalleryRP/stable/2022-03-03/communityGallery.json
-  - Microsoft.Compute/CloudserviceRP/stable/2022-09-04/cloudService.json
+  - common-types/v1/common.json
+  - stable/2022-08-01/computeRPCommon.json
+  - stable/2022-08-01/virtualMachineScaleSet.json
+  - stable/2022-08-01/virtualMachine.json
+  - stable/2022-08-01/virtualMachineImage.json
+  - stable/2022-08-01/virtualMachineExtensionImage.json
+  - stable/2022-08-01/availabilitySet.json
+  - stable/2022-08-01/proximityPlacementGroup.json
+  - stable/2022-08-01/dedicatedHost.json
+  - stable/2022-08-01/sshPublicKey.json
+  - stable/2022-08-01/image.json
+  - stable/2022-08-01/restorePoint.json
+  - stable/2022-08-01/capacityReservation.json
+  - stable/2022-08-01/logAnalytic.json
+  - stable/2022-08-01/runCommand.json
+  - stable/2022-07-02/diskRPCommon.json
+  - stable/2022-07-02/disk.json
+  - stable/2022-07-02/diskAccess.json
+  - stable/2022-07-02/diskEncryptionSet.json
+  - stable/2022-07-02/diskRestorePoint.json
+  - stable/2022-07-02/snapshot.json
+  - stable/2021-07-01/skus.json
+  - stable/2022-03-03/galleryRPCommon.json
+  - stable/2022-03-03/gallery.json
+  - stable/2022-03-03/sharedGallery.json
+  - stable/2022-03-03/communityGallery.json
+  - Cloudservice/stable/2022-09-04/cloudService.json
 ```
 
 ### Tag: package-2022-09-04-only
@@ -1230,8 +1230,8 @@ These settings apply only when `--tag=package-2022-09-04-only` is specified on t
 
 ```yaml $(tag) == 'package-2022-09-04-only'
 input-file:
-  - Microsoft.Compute/common-types/v1/common.json
-  - Microsoft.Compute/CloudserviceRP/stable/2022-09-04/cloudService.json
+  - common-types/v1/common.json
+  - Cloudservice/stable/2022-09-04/cloudService.json
 ```
 
 ### Tag: package-2022-03-03
@@ -1240,33 +1240,33 @@ These settings apply only when `--tag=package-2022-03-03` is specified on the co
 
 ```yaml $(tag) == 'package-2022-03-03'
 input-file:
-  - Microsoft.Compute/common-types/v1/common.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/computeRPCommon.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/virtualMachineScaleSet.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/virtualMachine.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/virtualMachineImage.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/virtualMachineExtensionImage.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/availabilitySet.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/proximityPlacementGroup.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/dedicatedHost.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/sshPublicKey.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/image.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/restorePoint.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/capacityReservation.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/logAnalytic.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/runCommand.json
-  - Microsoft.Compute/DiskRP/stable/2022-07-02/diskRPCommon.json
-  - Microsoft.Compute/DiskRP/stable/2022-07-02/disk.json
-  - Microsoft.Compute/DiskRP/stable/2022-07-02/diskAccess.json
-  - Microsoft.Compute/DiskRP/stable/2022-07-02/diskEncryptionSet.json
-  - Microsoft.Compute/DiskRP/stable/2022-07-02/diskRestorePoint.json
-  - Microsoft.Compute/DiskRP/stable/2022-07-02/snapshot.json
-  - Microsoft.Compute/Skus/stable/2021-07-01/skus.json
-  - Microsoft.Compute/GalleryRP/stable/2022-03-03/galleryRPCommon.json
-  - Microsoft.Compute/GalleryRP/stable/2022-03-03/gallery.json
-  - Microsoft.Compute/GalleryRP/stable/2022-03-03/sharedGallery.json
-  - Microsoft.Compute/GalleryRP/stable/2022-03-03/communityGallery.json
-  - Microsoft.Compute/CloudserviceRP/stable/2022-04-04/cloudService.json
+  - common-types/v1/common.json
+  - stable/2022-08-01/computeRPCommon.json
+  - stable/2022-08-01/virtualMachineScaleSet.json
+  - stable/2022-08-01/virtualMachine.json
+  - stable/2022-08-01/virtualMachineImage.json
+  - stable/2022-08-01/virtualMachineExtensionImage.json
+  - stable/2022-08-01/availabilitySet.json
+  - stable/2022-08-01/proximityPlacementGroup.json
+  - stable/2022-08-01/dedicatedHost.json
+  - stable/2022-08-01/sshPublicKey.json
+  - stable/2022-08-01/image.json
+  - stable/2022-08-01/restorePoint.json
+  - stable/2022-08-01/capacityReservation.json
+  - stable/2022-08-01/logAnalytic.json
+  - stable/2022-08-01/runCommand.json
+  - stable/2022-07-02/diskRPCommon.json
+  - stable/2022-07-02/disk.json
+  - stable/2022-07-02/diskAccess.json
+  - stable/2022-07-02/diskEncryptionSet.json
+  - stable/2022-07-02/diskRestorePoint.json
+  - stable/2022-07-02/snapshot.json
+  - stable/2021-07-01/skus.json
+  - stable/2022-03-03/galleryRPCommon.json
+  - stable/2022-03-03/gallery.json
+  - stable/2022-03-03/sharedGallery.json
+  - stable/2022-03-03/communityGallery.json
+  - Cloudservice/stable/2022-04-04/cloudService.json
 ```
 
 ### Tag: package-2022-03-03-only
@@ -1275,11 +1275,11 @@ These settings apply only when `--tag=package-2022-03-03-only` is specified on t
 
 ```yaml $(tag) == 'package-2022-03-03-only'
 input-file:
-  - Microsoft.Compute/common-types/v1/common.json
-  - Microsoft.Compute/GalleryRP/stable/2022-03-03/galleryRPCommon.json
-  - Microsoft.Compute/GalleryRP/stable/2022-03-03/gallery.json
-  - Microsoft.Compute/GalleryRP/stable/2022-03-03/sharedGallery.json
-  - Microsoft.Compute/GalleryRP/stable/2022-03-03/communityGallery.json
+  - common-types/v1/common.json
+  - stable/2022-03-03/galleryRPCommon.json
+  - stable/2022-03-03/gallery.json
+  - stable/2022-03-03/sharedGallery.json
+  - stable/2022-03-03/communityGallery.json
 ```
 
 ### Tag: package-2022-08-01
@@ -1288,33 +1288,33 @@ These settings apply only when `--tag=package-2022-08-01` is specified on the co
 
 ```yaml $(tag) == 'package-2022-08-01'
 input-file:
-  - Microsoft.Compute/common-types/v1/common.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/computeRPCommon.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/virtualMachineScaleSet.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/virtualMachine.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/virtualMachineImage.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/virtualMachineExtensionImage.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/availabilitySet.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/proximityPlacementGroup.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/dedicatedHost.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/sshPublicKey.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/image.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/restorePoint.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/capacityReservation.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/logAnalytic.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/runCommand.json
-  - Microsoft.Compute/DiskRP/stable/2022-07-02/diskRPCommon.json
-  - Microsoft.Compute/DiskRP/stable/2022-07-02/disk.json
-  - Microsoft.Compute/DiskRP/stable/2022-07-02/diskAccess.json
-  - Microsoft.Compute/DiskRP/stable/2022-07-02/diskEncryptionSet.json
-  - Microsoft.Compute/DiskRP/stable/2022-07-02/diskRestorePoint.json
-  - Microsoft.Compute/DiskRP/stable/2022-07-02/snapshot.json
-  - Microsoft.Compute/Skus/stable/2021-07-01/skus.json
-  - Microsoft.Compute/GalleryRP/stable/2022-01-03/galleryRPCommon.json
-  - Microsoft.Compute/GalleryRP/stable/2022-01-03/gallery.json
-  - Microsoft.Compute/GalleryRP/stable/2022-01-03/sharedGallery.json
-  - Microsoft.Compute/GalleryRP/stable/2022-01-03/communityGallery.json
-  - Microsoft.Compute/CloudserviceRP/stable/2022-04-04/cloudService.json
+  - common-types/v1/common.json
+  - stable/2022-08-01/computeRPCommon.json
+  - stable/2022-08-01/virtualMachineScaleSet.json
+  - stable/2022-08-01/virtualMachine.json
+  - stable/2022-08-01/virtualMachineImage.json
+  - stable/2022-08-01/virtualMachineExtensionImage.json
+  - stable/2022-08-01/availabilitySet.json
+  - stable/2022-08-01/proximityPlacementGroup.json
+  - stable/2022-08-01/dedicatedHost.json
+  - stable/2022-08-01/sshPublicKey.json
+  - stable/2022-08-01/image.json
+  - stable/2022-08-01/restorePoint.json
+  - stable/2022-08-01/capacityReservation.json
+  - stable/2022-08-01/logAnalytic.json
+  - stable/2022-08-01/runCommand.json
+  - stable/2022-07-02/diskRPCommon.json
+  - stable/2022-07-02/disk.json
+  - stable/2022-07-02/diskAccess.json
+  - stable/2022-07-02/diskEncryptionSet.json
+  - stable/2022-07-02/diskRestorePoint.json
+  - stable/2022-07-02/snapshot.json
+  - stable/2021-07-01/skus.json
+  - stable/2022-01-03/galleryRPCommon.json
+  - stable/2022-01-03/gallery.json
+  - stable/2022-01-03/sharedGallery.json
+  - stable/2022-01-03/communityGallery.json
+  - Cloudservice/stable/2022-04-04/cloudService.json
 ```
 
 ### Tag: package-2022-08-01-only
@@ -1323,21 +1323,21 @@ These settings apply only when `--tag=package-2022-08-01-only` is specified on t
 
 ```yaml $(tag) == 'package-2022-08-01-only'
 input-file:
-  - Microsoft.Compute/common-types/v1/common.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/computeRPCommon.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/virtualMachineScaleSet.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/virtualMachine.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/virtualMachineImage.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/virtualMachineExtensionImage.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/availabilitySet.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/proximityPlacementGroup.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/dedicatedHost.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/sshPublicKey.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/image.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/restorePoint.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/capacityReservation.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/logAnalytic.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/runCommand.json
+  - common-types/v1/common.json
+  - stable/2022-08-01/computeRPCommon.json
+  - stable/2022-08-01/virtualMachineScaleSet.json
+  - stable/2022-08-01/virtualMachine.json
+  - stable/2022-08-01/virtualMachineImage.json
+  - stable/2022-08-01/virtualMachineExtensionImage.json
+  - stable/2022-08-01/availabilitySet.json
+  - stable/2022-08-01/proximityPlacementGroup.json
+  - stable/2022-08-01/dedicatedHost.json
+  - stable/2022-08-01/sshPublicKey.json
+  - stable/2022-08-01/image.json
+  - stable/2022-08-01/restorePoint.json
+  - stable/2022-08-01/capacityReservation.json
+  - stable/2022-08-01/logAnalytic.json
+  - stable/2022-08-01/runCommand.json
 ```
 
 ### Tag: package-2022-07-02
@@ -1346,33 +1346,33 @@ These settings apply only when `--tag=package-2022-07-02` is specified on the co
 
 ```yaml $(tag) == 'package-2022-07-02'
 input-file:
-  - Microsoft.Compute/common-types/v1/common.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/computeRPCommon.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/virtualMachineScaleSet.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/virtualMachine.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/virtualMachineImage.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/virtualMachineExtensionImage.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/availabilitySet.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/proximityPlacementGroup.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/dedicatedHost.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/sshPublicKey.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/image.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/restorePoint.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/capacityReservation.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/logAnalytic.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/runCommand.json
-  - Microsoft.Compute/DiskRP/stable/2022-07-02/diskRPCommon.json
-  - Microsoft.Compute/DiskRP/stable/2022-07-02/disk.json
-  - Microsoft.Compute/DiskRP/stable/2022-07-02/diskAccess.json
-  - Microsoft.Compute/DiskRP/stable/2022-07-02/diskEncryptionSet.json
-  - Microsoft.Compute/DiskRP/stable/2022-07-02/diskRestorePoint.json
-  - Microsoft.Compute/DiskRP/stable/2022-07-02/snapshot.json
-  - Microsoft.Compute/Skus/stable/2021-07-01/skus.json
-  - Microsoft.Compute/GalleryRP/stable/2022-01-03/galleryRPCommon.json
-  - Microsoft.Compute/GalleryRP/stable/2022-01-03/gallery.json
-  - Microsoft.Compute/GalleryRP/stable/2022-01-03/sharedGallery.json
-  - Microsoft.Compute/GalleryRP/stable/2022-01-03/communityGallery.json
-  - Microsoft.Compute/CloudserviceRP/stable/2022-04-04/cloudService.json
+  - common-types/v1/common.json
+  - stable/2022-03-01/computeRPCommon.json
+  - stable/2022-03-01/virtualMachineScaleSet.json
+  - stable/2022-03-01/virtualMachine.json
+  - stable/2022-03-01/virtualMachineImage.json
+  - stable/2022-03-01/virtualMachineExtensionImage.json
+  - stable/2022-03-01/availabilitySet.json
+  - stable/2022-03-01/proximityPlacementGroup.json
+  - stable/2022-03-01/dedicatedHost.json
+  - stable/2022-03-01/sshPublicKey.json
+  - stable/2022-03-01/image.json
+  - stable/2022-03-01/restorePoint.json
+  - stable/2022-03-01/capacityReservation.json
+  - stable/2022-03-01/logAnalytic.json
+  - stable/2022-03-01/runCommand.json
+  - stable/2022-07-02/diskRPCommon.json
+  - stable/2022-07-02/disk.json
+  - stable/2022-07-02/diskAccess.json
+  - stable/2022-07-02/diskEncryptionSet.json
+  - stable/2022-07-02/diskRestorePoint.json
+  - stable/2022-07-02/snapshot.json
+  - stable/2021-07-01/skus.json
+  - stable/2022-01-03/galleryRPCommon.json
+  - stable/2022-01-03/gallery.json
+  - stable/2022-01-03/sharedGallery.json
+  - stable/2022-01-03/communityGallery.json
+  - Cloudservice/stable/2022-04-04/cloudService.json
 ```
 
 ### Tag: package-2022-07-02-only
@@ -1381,13 +1381,13 @@ These settings apply only when `--tag=package-2022-07-02-only` is specified on t
 
 ```yaml $(tag) == 'package-2022-07-02-only'
 input-file:
-  - Microsoft.Compute/common-types/v1/common.json
-  - Microsoft.Compute/DiskRP/stable/2022-07-02/diskRPCommon.json
-  - Microsoft.Compute/DiskRP/stable/2022-07-02/disk.json
-  - Microsoft.Compute/DiskRP/stable/2022-07-02/diskAccess.json
-  - Microsoft.Compute/DiskRP/stable/2022-07-02/diskEncryptionSet.json
-  - Microsoft.Compute/DiskRP/stable/2022-07-02/diskRestorePoint.json
-  - Microsoft.Compute/DiskRP/stable/2022-07-02/snapshot.json
+  - common-types/v1/common.json
+  - stable/2022-07-02/diskRPCommon.json
+  - stable/2022-07-02/disk.json
+  - stable/2022-07-02/diskAccess.json
+  - stable/2022-07-02/diskEncryptionSet.json
+  - stable/2022-07-02/diskRestorePoint.json
+  - stable/2022-07-02/snapshot.json
 ```
 
 ### Tag: package-2022-04-04
@@ -1396,33 +1396,33 @@ These settings apply only when `--tag=package-2022-04-04` is specified on the co
 
 ```yaml $(tag) == 'package-2022-04-04'
 input-file:
-  - Microsoft.Compute/CloudserviceRP/stable/2022-04-04/common.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/computeRPCommon.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/virtualMachineScaleSet.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/virtualMachine.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/virtualMachineImage.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/virtualMachineExtensionImage.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/availabilitySet.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/proximityPlacementGroup.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/dedicatedHost.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/sshPublicKey.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/image.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/restorePoint.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/capacityReservation.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/logAnalytic.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/runCommand.json
-  - Microsoft.Compute/DiskRP/stable/2022-03-02/diskRPCommon.json
-  - Microsoft.Compute/DiskRP/stable/2022-03-02/disk.json
-  - Microsoft.Compute/DiskRP/stable/2022-03-02/diskAccess.json
-  - Microsoft.Compute/DiskRP/stable/2022-03-02/diskEncryptionSet.json
-  - Microsoft.Compute/DiskRP/stable/2022-03-02/diskRestorePoint.json
-  - Microsoft.Compute/DiskRP/stable/2022-03-02/snapshot.json
-  - Microsoft.Compute/Skus/stable/2021-07-01/skus.json
-  - Microsoft.Compute/GalleryRP/stable/2022-01-03/galleryRPCommon.json
-  - Microsoft.Compute/GalleryRP/stable/2022-01-03/gallery.json
-  - Microsoft.Compute/GalleryRP/stable/2022-01-03/sharedGallery.json
-  - Microsoft.Compute/GalleryRP/stable/2022-01-03/communityGallery.json
-  - Microsoft.Compute/CloudserviceRP/stable/2022-04-04/cloudService.json
+  - Cloudservice/stable/2022-04-04/common.json
+  - stable/2022-03-01/computeRPCommon.json
+  - stable/2022-03-01/virtualMachineScaleSet.json
+  - stable/2022-03-01/virtualMachine.json
+  - stable/2022-03-01/virtualMachineImage.json
+  - stable/2022-03-01/virtualMachineExtensionImage.json
+  - stable/2022-03-01/availabilitySet.json
+  - stable/2022-03-01/proximityPlacementGroup.json
+  - stable/2022-03-01/dedicatedHost.json
+  - stable/2022-03-01/sshPublicKey.json
+  - stable/2022-03-01/image.json
+  - stable/2022-03-01/restorePoint.json
+  - stable/2022-03-01/capacityReservation.json
+  - stable/2022-03-01/logAnalytic.json
+  - stable/2022-03-01/runCommand.json
+  - stable/2022-03-02/diskRPCommon.json
+  - stable/2022-03-02/disk.json
+  - stable/2022-03-02/diskAccess.json
+  - stable/2022-03-02/diskEncryptionSet.json
+  - stable/2022-03-02/diskRestorePoint.json
+  - stable/2022-03-02/snapshot.json
+  - stable/2021-07-01/skus.json
+  - stable/2022-01-03/galleryRPCommon.json
+  - stable/2022-01-03/gallery.json
+  - stable/2022-01-03/sharedGallery.json
+  - stable/2022-01-03/communityGallery.json
+  - Cloudservice/stable/2022-04-04/cloudService.json
 ```
 
 ### Tag: package-2022-04-04-only
@@ -1431,8 +1431,8 @@ These settings apply only when `--tag=package-2022-04-04-only` is specified on t
 
 ```yaml $(tag) == 'package-2022-04-04-only'
 input-file:
-  - Microsoft.Compute/CloudserviceRP/stable/2022-04-04/common.json
-  - Microsoft.Compute/CloudserviceRP/stable/2022-04-04/cloudService.json
+  - Cloudservice/stable/2022-04-04/common.json
+  - Cloudservice/stable/2022-04-04/cloudService.json
 ```
 
 ### Tag: package-2022-03-02
@@ -1441,33 +1441,33 @@ These settings apply only when `--tag=package-2022-03-02` is specified on the co
 
 ```yaml $(tag) == 'package-2022-03-02'
 input-file:
-  - Microsoft.Compute/DiskRP/stable/2022-03-02/common.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/computeRPCommon.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/virtualMachineScaleSet.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/virtualMachine.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/virtualMachineImage.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/virtualMachineExtensionImage.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/availabilitySet.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/proximityPlacementGroup.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/dedicatedHost.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/sshPublicKey.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/image.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/restorePoint.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/capacityReservation.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/logAnalytic.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/runCommand.json
-  - Microsoft.Compute/DiskRP/stable/2022-03-02/diskRPCommon.json
-  - Microsoft.Compute/DiskRP/stable/2022-03-02/disk.json
-  - Microsoft.Compute/DiskRP/stable/2022-03-02/diskAccess.json
-  - Microsoft.Compute/DiskRP/stable/2022-03-02/diskEncryptionSet.json
-  - Microsoft.Compute/DiskRP/stable/2022-03-02/diskRestorePoint.json
-  - Microsoft.Compute/DiskRP/stable/2022-03-02/snapshot.json
-  - Microsoft.Compute/Skus/stable/2021-07-01/skus.json
-  - Microsoft.Compute/GalleryRP/stable/2022-01-03/galleryRPCommon.json
-  - Microsoft.Compute/GalleryRP/stable/2022-01-03/gallery.json
-  - Microsoft.Compute/GalleryRP/stable/2022-01-03/sharedGallery.json
-  - Microsoft.Compute/GalleryRP/stable/2022-01-03/communityGallery.json
-  - Microsoft.Compute/CloudserviceRP/stable/2021-03-01/cloudService.json
+  - stable/2022-03-02/common.json
+  - stable/2022-03-01/computeRPCommon.json
+  - stable/2022-03-01/virtualMachineScaleSet.json
+  - stable/2022-03-01/virtualMachine.json
+  - stable/2022-03-01/virtualMachineImage.json
+  - stable/2022-03-01/virtualMachineExtensionImage.json
+  - stable/2022-03-01/availabilitySet.json
+  - stable/2022-03-01/proximityPlacementGroup.json
+  - stable/2022-03-01/dedicatedHost.json
+  - stable/2022-03-01/sshPublicKey.json
+  - stable/2022-03-01/image.json
+  - stable/2022-03-01/restorePoint.json
+  - stable/2022-03-01/capacityReservation.json
+  - stable/2022-03-01/logAnalytic.json
+  - stable/2022-03-01/runCommand.json
+  - stable/2022-03-02/diskRPCommon.json
+  - stable/2022-03-02/disk.json
+  - stable/2022-03-02/diskAccess.json
+  - stable/2022-03-02/diskEncryptionSet.json
+  - stable/2022-03-02/diskRestorePoint.json
+  - stable/2022-03-02/snapshot.json
+  - stable/2021-07-01/skus.json
+  - stable/2022-01-03/galleryRPCommon.json
+  - stable/2022-01-03/gallery.json
+  - stable/2022-01-03/sharedGallery.json
+  - stable/2022-01-03/communityGallery.json
+  - Cloudservice/stable/2021-03-01/cloudService.json
 ```
 
 ### Tag: package-2022-03-02-only
@@ -1476,13 +1476,13 @@ These settings apply only when `--tag=package-2022-03-02-only` is specified on t
 
 ```yaml $(tag) == 'package-2022-03-02-only'
 input-file:
-  - Microsoft.Compute/DiskRP/stable/2022-03-02/common.json
-  - Microsoft.Compute/DiskRP/stable/2022-03-02/diskRPCommon.json
-  - Microsoft.Compute/DiskRP/stable/2022-03-02/disk.json
-  - Microsoft.Compute/DiskRP/stable/2022-03-02/diskAccess.json
-  - Microsoft.Compute/DiskRP/stable/2022-03-02/diskEncryptionSet.json
-  - Microsoft.Compute/DiskRP/stable/2022-03-02/diskRestorePoint.json
-  - Microsoft.Compute/DiskRP/stable/2022-03-02/snapshot.json
+  - stable/2022-03-02/common.json
+  - stable/2022-03-02/diskRPCommon.json
+  - stable/2022-03-02/disk.json
+  - stable/2022-03-02/diskAccess.json
+  - stable/2022-03-02/diskEncryptionSet.json
+  - stable/2022-03-02/diskRestorePoint.json
+  - stable/2022-03-02/snapshot.json
 ```
 
 ### Tag: package-2022-01-03
@@ -1491,28 +1491,28 @@ These settings apply only when `--tag=package-2022-01-03` is specified on the co
 
 ```yaml $(tag) == 'package-2022-01-03'
 input-file:
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/computeRPCommon.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/virtualMachineScaleSet.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/virtualMachine.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/virtualMachineImage.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/virtualMachineExtensionImage.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/availabilitySet.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/proximityPlacementGroup.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/dedicatedHost.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/sshPublicKey.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/image.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/restorePoint.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/capacityReservation.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/logAnalytic.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/runCommand.json
-  - Microsoft.Compute/Skus/stable/2021-07-01/skus.json
-  - Microsoft.Compute/DiskRP/stable/2021-12-01/disk.json
-  - Microsoft.Compute/GalleryRP/stable/2022-01-03/common.json
-  - Microsoft.Compute/GalleryRP/stable/2022-01-03/galleryRPCommon.json
-  - Microsoft.Compute/GalleryRP/stable/2022-01-03/gallery.json
-  - Microsoft.Compute/GalleryRP/stable/2022-01-03/sharedGallery.json
-  - Microsoft.Compute/GalleryRP/stable/2022-01-03/communityGallery.json
-  - Microsoft.Compute/CloudserviceRP/stable/2021-03-01/cloudService.json
+  - stable/2022-03-01/computeRPCommon.json
+  - stable/2022-03-01/virtualMachineScaleSet.json
+  - stable/2022-03-01/virtualMachine.json
+  - stable/2022-03-01/virtualMachineImage.json
+  - stable/2022-03-01/virtualMachineExtensionImage.json
+  - stable/2022-03-01/availabilitySet.json
+  - stable/2022-03-01/proximityPlacementGroup.json
+  - stable/2022-03-01/dedicatedHost.json
+  - stable/2022-03-01/sshPublicKey.json
+  - stable/2022-03-01/image.json
+  - stable/2022-03-01/restorePoint.json
+  - stable/2022-03-01/capacityReservation.json
+  - stable/2022-03-01/logAnalytic.json
+  - stable/2022-03-01/runCommand.json
+  - stable/2021-07-01/skus.json
+  - stable/2021-12-01/disk.json
+  - stable/2022-01-03/common.json
+  - stable/2022-01-03/galleryRPCommon.json
+  - stable/2022-01-03/gallery.json
+  - stable/2022-01-03/sharedGallery.json
+  - stable/2022-01-03/communityGallery.json
+  - Cloudservice/stable/2021-03-01/cloudService.json
 ```
 
 ### Tag: package-2022-01-03-only
@@ -1521,11 +1521,11 @@ These settings apply only when `--tag=package-2022-01-03-only` is specified on t
 
 ```yaml $(tag) == 'package-2022-01-03-only'
 input-file:
-  - Microsoft.Compute/GalleryRP/stable/2022-01-03/common.json
-  - Microsoft.Compute/GalleryRP/stable/2022-01-03/galleryRPCommon.json
-  - Microsoft.Compute/GalleryRP/stable/2022-01-03/gallery.json
-  - Microsoft.Compute/GalleryRP/stable/2022-01-03/sharedGallery.json
-  - Microsoft.Compute/GalleryRP/stable/2022-01-03/communityGallery.json
+  - stable/2022-01-03/common.json
+  - stable/2022-01-03/galleryRPCommon.json
+  - stable/2022-01-03/gallery.json
+  - stable/2022-01-03/sharedGallery.json
+  - stable/2022-01-03/communityGallery.json
 ```
 
 ### Tag: package-2022-03-01
@@ -1534,27 +1534,27 @@ These settings apply only when `--tag=package-2022-03-01` is specified on the co
 
 ```yaml $(tag) == 'package-2022-03-01'
 input-file:
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/common.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/computeRPCommon.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/virtualMachineScaleSet.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/virtualMachine.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/virtualMachineImage.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/virtualMachineExtensionImage.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/availabilitySet.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/proximityPlacementGroup.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/dedicatedHost.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/sshPublicKey.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/image.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/restorePoint.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/capacityReservation.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/logAnalytic.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/runCommand.json
-  - Microsoft.Compute/Skus/stable/2021-07-01/skus.json
-  - Microsoft.Compute/DiskRP/stable/2021-12-01/disk.json
-  - Microsoft.Compute/GalleryRP/stable/2021-10-01/gallery.json
-  - Microsoft.Compute/GalleryRP/stable/2021-07-01/sharedGallery.json
-  - Microsoft.Compute/GalleryRP/stable/2021-07-01/communityGallery.json
-  - Microsoft.Compute/CloudserviceRP/stable/2021-03-01/cloudService.json
+  - stable/2022-03-01/common.json
+  - stable/2022-03-01/computeRPCommon.json
+  - stable/2022-03-01/virtualMachineScaleSet.json
+  - stable/2022-03-01/virtualMachine.json
+  - stable/2022-03-01/virtualMachineImage.json
+  - stable/2022-03-01/virtualMachineExtensionImage.json
+  - stable/2022-03-01/availabilitySet.json
+  - stable/2022-03-01/proximityPlacementGroup.json
+  - stable/2022-03-01/dedicatedHost.json
+  - stable/2022-03-01/sshPublicKey.json
+  - stable/2022-03-01/image.json
+  - stable/2022-03-01/restorePoint.json
+  - stable/2022-03-01/capacityReservation.json
+  - stable/2022-03-01/logAnalytic.json
+  - stable/2022-03-01/runCommand.json
+  - stable/2021-07-01/skus.json
+  - stable/2021-12-01/disk.json
+  - stable/2021-10-01/gallery.json
+  - stable/2021-07-01/sharedGallery.json
+  - stable/2021-07-01/communityGallery.json
+  - Cloudservice/stable/2021-03-01/cloudService.json
 ```
 
 ### Tag: package-2022-03-01-only
@@ -1563,21 +1563,21 @@ These settings apply only when `--tag=package-2022-03-01-only` is specified on t
 
 ```yaml $(tag) == 'package-2022-03-01-only'
 input-file:
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/common.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/computeRPCommon.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/virtualMachineScaleSet.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/virtualMachine.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/virtualMachineImage.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/virtualMachineExtensionImage.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/availabilitySet.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/proximityPlacementGroup.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/dedicatedHost.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/sshPublicKey.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/image.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/restorePoint.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/capacityReservation.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/logAnalytic.json
-  - Microsoft.Compute/ComputeRP/stable/2022-03-01/runCommand.json
+  - stable/2022-03-01/common.json
+  - stable/2022-03-01/computeRPCommon.json
+  - stable/2022-03-01/virtualMachineScaleSet.json
+  - stable/2022-03-01/virtualMachine.json
+  - stable/2022-03-01/virtualMachineImage.json
+  - stable/2022-03-01/virtualMachineExtensionImage.json
+  - stable/2022-03-01/availabilitySet.json
+  - stable/2022-03-01/proximityPlacementGroup.json
+  - stable/2022-03-01/dedicatedHost.json
+  - stable/2022-03-01/sshPublicKey.json
+  - stable/2022-03-01/image.json
+  - stable/2022-03-01/restorePoint.json
+  - stable/2022-03-01/capacityReservation.json
+  - stable/2022-03-01/logAnalytic.json
+  - stable/2022-03-01/runCommand.json
 ```
 
 ### Tag: package-2021-12-01
@@ -1586,14 +1586,14 @@ These settings apply only when `--tag=package-2021-12-01` is specified on the co
 
 ```yaml $(tag) == 'package-2021-12-01'
 input-file:
-  - Microsoft.Compute/ComputeRP/stable/2021-11-01/compute.json
-  - Microsoft.Compute/ComputeRP/stable/2021-11-01/runCommands.json
-  - Microsoft.Compute/Skus/stable/2021-07-01/skus.json
-  - Microsoft.Compute/DiskRP/stable/2021-12-01/disk.json
-  - Microsoft.Compute/GalleryRP/stable/2021-10-01/gallery.json
-  - Microsoft.Compute/GalleryRP/stable/2021-07-01/sharedGallery.json
-  - Microsoft.Compute/GalleryRP/stable/2021-07-01/communityGallery.json
-  - Microsoft.Compute/CloudserviceRP/stable/2021-03-01/cloudService.json
+  - stable/2021-11-01/compute.json
+  - stable/2021-11-01/runCommands.json
+  - stable/2021-07-01/skus.json
+  - stable/2021-12-01/disk.json
+  - stable/2021-10-01/gallery.json
+  - stable/2021-07-01/sharedGallery.json
+  - stable/2021-07-01/communityGallery.json
+  - Cloudservice/stable/2021-03-01/cloudService.json
 ```
 
 ### Tag: package-2021-12-01-only
@@ -1602,7 +1602,7 @@ These settings apply only when `--tag=package-2021-12-01-oly` is specified on th
 
 ```yaml $(tag) == 'package-2021-12-01-only'
 input-file:
-  - Microsoft.Compute/DiskRP/stable/2021-12-01/disk.json
+  - stable/2021-12-01/disk.json
 ```
 
 ### Tag: package-2021-11-01
@@ -1611,14 +1611,14 @@ These settings apply only when `--tag=package-2021-11-01` is specified on the co
 
 ```yaml $(tag) == 'package-2021-11-01'
 input-file:
-  - Microsoft.Compute/ComputeRP/stable/2021-11-01/compute.json
-  - Microsoft.Compute/ComputeRP/stable/2021-11-01/runCommands.json
-  - Microsoft.Compute/Skus/stable/2021-07-01/skus.json
-  - Microsoft.Compute/DiskRP/stable/2021-08-01/disk.json
-  - Microsoft.Compute/GalleryRP/stable/2021-10-01/gallery.json
-  - Microsoft.Compute/GalleryRP/stable/2021-07-01/sharedGallery.json
-  - Microsoft.Compute/GalleryRP/stable/2021-07-01/communityGallery.json
-  - Microsoft.Compute/CloudserviceRP/stable/2021-03-01/cloudService.json
+  - stable/2021-11-01/compute.json
+  - stable/2021-11-01/runCommands.json
+  - stable/2021-07-01/skus.json
+  - stable/2021-08-01/disk.json
+  - stable/2021-10-01/gallery.json
+  - stable/2021-07-01/sharedGallery.json
+  - stable/2021-07-01/communityGallery.json
+  - Cloudservice/stable/2021-03-01/cloudService.json
 ```
 
 ### Tag: package-2021-11-01-only
@@ -1627,8 +1627,8 @@ These settings apply only when `--tag=package-2021-11-01-only` is specified on t
 
 ```yaml $(tag) == 'package-2021-11-01-only'
 input-file:
-  - Microsoft.Compute/ComputeRP/stable/2021-11-01/compute.json
-  - Microsoft.Compute/ComputeRP/stable/2021-11-01/runCommands.json
+  - stable/2021-11-01/compute.json
+  - stable/2021-11-01/runCommands.json
 ```
 
 ### Tag: package-2021-08-01-only
@@ -1637,7 +1637,7 @@ These settings apply only when `--tag=package-2021-08-01-only` is specified on t
 
 ```yaml $(tag) == 'package-2021-08-01-only'
 input-file:
-  - Microsoft.Compute/DiskRP/stable/2021-08-01/disk.json
+  - stable/2021-08-01/disk.json
 ```
 
 ### Tag: package-2021-08-01
@@ -1646,14 +1646,14 @@ These settings apply only when `--tag=package-2021-08-01` is specified on the co
 
 ```yaml $(tag) == 'package-2021-08-01'
 input-file:
-  - Microsoft.Compute/ComputeRP/stable/2021-07-01/compute.json
-  - Microsoft.Compute/ComputeRP/stable/2021-07-01/runCommands.json
-  - Microsoft.Compute/Skus/stable/2021-07-01/skus.json
-  - Microsoft.Compute/DiskRP/stable/2021-08-01/disk.json
-  - Microsoft.Compute/GalleryRP/stable/2021-07-01/gallery.json
-  - Microsoft.Compute/GalleryRP/stable/2021-07-01/sharedGallery.json
-  - Microsoft.Compute/GalleryRP/stable/2021-07-01/communityGallery.json
-  - Microsoft.Compute/CloudserviceRP/stable/2021-03-01/cloudService.json
+  - stable/2021-07-01/compute.json
+  - stable/2021-07-01/runCommands.json
+  - stable/2021-07-01/skus.json
+  - stable/2021-08-01/disk.json
+  - stable/2021-07-01/gallery.json
+  - stable/2021-07-01/sharedGallery.json
+  - stable/2021-07-01/communityGallery.json
+  - Cloudservice/stable/2021-03-01/cloudService.json
 ```
 
 ### Tag: package-2021-10-01
@@ -1662,14 +1662,14 @@ These settings apply only when `--tag=package-2021-10-01` is specified on the co
 
 ```yaml $(tag) == 'package-2021-10-01'
 input-file:
-  - Microsoft.Compute/ComputeRP/stable/2021-07-01/compute.json
-  - Microsoft.Compute/ComputeRP/stable/2021-07-01/runCommands.json
-  - Microsoft.Compute/Skus/stable/2021-07-01/skus.json
-  - Microsoft.Compute/DiskRP/stable/2021-04-01/disk.json
-  - Microsoft.Compute/GalleryRP/stable/2021-10-01/gallery.json
-  - Microsoft.Compute/GalleryRP/stable/2021-07-01/sharedGallery.json
-  - Microsoft.Compute/GalleryRP/stable/2021-07-01/communityGallery.json
-  - Microsoft.Compute/CloudserviceRP/stable/2021-03-01/cloudService.json
+  - stable/2021-07-01/compute.json
+  - stable/2021-07-01/runCommands.json
+  - stable/2021-07-01/skus.json
+  - stable/2021-04-01/disk.json
+  - stable/2021-10-01/gallery.json
+  - stable/2021-07-01/sharedGallery.json
+  - stable/2021-07-01/communityGallery.json
+  - Cloudservice/stable/2021-03-01/cloudService.json
 ```
 
 ### Tag: package-2021-10-01-only
@@ -1678,7 +1678,7 @@ These settings apply only when `--tag=package-2021-10-01-only` is specified on t
 
 ```yaml $(tag) == 'package-2021-10-01-only'
 input-file:
-  - Microsoft.Compute/GalleryRP/stable/2021-10-01/gallery.json
+  - stable/2021-10-01/gallery.json
 ```
 
 ### Tag: package-2021-07-01
@@ -1687,14 +1687,14 @@ These settings apply only when `--tag=package-2021-07-01` is specified on the co
 
 ```yaml $(tag) == 'package-2021-07-01'
 input-file:
-  - Microsoft.Compute/ComputeRP/stable/2021-07-01/compute.json
-  - Microsoft.Compute/ComputeRP/stable/2021-07-01/runCommands.json
-  - Microsoft.Compute/Skus/stable/2021-07-01/skus.json
-  - Microsoft.Compute/DiskRP/stable/2021-04-01/disk.json
-  - Microsoft.Compute/GalleryRP/stable/2021-07-01/gallery.json
-  - Microsoft.Compute/GalleryRP/stable/2021-07-01/sharedGallery.json
-  - Microsoft.Compute/GalleryRP/stable/2021-07-01/communityGallery.json
-  - Microsoft.Compute/CloudserviceRP/stable/2021-03-01/cloudService.json
+  - stable/2021-07-01/compute.json
+  - stable/2021-07-01/runCommands.json
+  - stable/2021-07-01/skus.json
+  - stable/2021-04-01/disk.json
+  - stable/2021-07-01/gallery.json
+  - stable/2021-07-01/sharedGallery.json
+  - stable/2021-07-01/communityGallery.json
+  - Cloudservice/stable/2021-03-01/cloudService.json
 ```
 
 ### Tag: package-2021-07-01-only
@@ -1703,12 +1703,12 @@ These settings apply only when `--tag=package-2021-07-01-only` is specified on t
 
 ```yaml $(tag) == 'package-2021-07-01-only'
 input-file:
-  - Microsoft.Compute/ComputeRP/stable/2021-07-01/compute.json
-  - Microsoft.Compute/ComputeRP/stable/2021-07-01/runCommands.json
-  - Microsoft.Compute/Skus/stable/2021-07-01/skus.json
-  - Microsoft.Compute/GalleryRP/stable/2021-07-01/gallery.json
-  - Microsoft.Compute/GalleryRP/stable/2021-07-01/sharedGallery.json
-  - Microsoft.Compute/GalleryRP/stable/2021-07-01/communityGallery.json
+  - stable/2021-07-01/compute.json
+  - stable/2021-07-01/runCommands.json
+  - stable/2021-07-01/skus.json
+  - stable/2021-07-01/gallery.json
+  - stable/2021-07-01/sharedGallery.json
+  - stable/2021-07-01/communityGallery.json
 ```
 
 ### Tag: package-2021-06-01-preview
@@ -1717,15 +1717,15 @@ These settings apply only when `--tag=2021-06-01-preview` is specified on the co
 
 ```yaml $(tag) == 'package-2021-06-01-preview'
 input-file:
-  - Microsoft.Compute/ComputeRP/stable/2021-11-01/compute.json
-  - Microsoft.Compute/ComputeRP/stable/2021-11-01/runCommands.json
-  - Microsoft.Compute/Skus/stable/2021-07-01/skus.json
-  - Microsoft.Compute/DiskRP/stable/2021-12-01/disk.json
-  - Microsoft.Compute/GalleryRP/stable/2021-10-01/gallery.json
-  - Microsoft.Compute/GalleryRP/stable/2021-07-01/sharedGallery.json
-  - Microsoft.Compute/GalleryRP/stable/2021-07-01/communityGallery.json
-  - Microsoft.Compute/CloudserviceRP/stable/2021-03-01/cloudService.json
-  - Microsoft.Compute/DiagnosticRP/preview/2021-06-01-preview/diagnostic.json
+  - stable/2021-11-01/compute.json
+  - stable/2021-11-01/runCommands.json
+  - stable/2021-07-01/skus.json
+  - stable/2021-12-01/disk.json
+  - stable/2021-10-01/gallery.json
+  - stable/2021-07-01/sharedGallery.json
+  - stable/2021-07-01/communityGallery.json
+  - Cloudservice/stable/2021-03-01/cloudService.json
+  - Diagnostic/preview/2021-06-01-preview/diagnostic.json
 ```
 
 ### Tag: package-2021-06-01-preview-only
@@ -1734,7 +1734,7 @@ These settings apply only when `--tag=package-2021-06-01-preview-only` is specif
 
 ```yaml $(tag) == 'package-2021-06-01-preview-only'
 input-file:
-  - Microsoft.Compute/DiagnosticRP/preview/2021-06-01-preview/diagnostic.json
+  - Diagnostic/preview/2021-06-01-preview/diagnostic.json
 ```
 
 ### Tag: package-2021-04-01
@@ -1743,13 +1743,13 @@ These settings apply only when `--tag=package-2021-04-01` is specified on the co
 
 ```yaml $(tag) == 'package-2021-04-01'
 input-file:
-  - Microsoft.Compute/ComputeRP/stable/2021-04-01/compute.json
-  - Microsoft.Compute/ComputeRP/stable/2021-04-01/runCommands.json
-  - Microsoft.Compute/Skus/stable/2019-04-01/skus.json
-  - Microsoft.Compute/DiskRP/stable/2021-04-01/disk.json
-  - Microsoft.Compute/GalleryRP/stable/2020-09-30/gallery.json
-  - Microsoft.Compute/GalleryRP/stable/2020-09-30/sharedGallery.json
-  - Microsoft.Compute/CloudserviceRP/stable/2021-03-01/cloudService.json
+  - stable/2021-04-01/compute.json
+  - stable/2021-04-01/runCommands.json
+  - stable/2019-04-01/skus.json
+  - stable/2021-04-01/disk.json
+  - stable/2020-09-30/gallery.json
+  - stable/2020-09-30/sharedGallery.json
+  - Cloudservice/stable/2021-03-01/cloudService.json
 ```
 
 ### Tag: package-2021-04-01-only
@@ -1758,9 +1758,9 @@ These settings apply only when `--tag=package-2021-04-01-only` is specified on t
 
 ```yaml $(tag) == 'package-2021-04-01-only'
 input-file:
-  - Microsoft.Compute/ComputeRP/stable/2021-04-01/compute.json
-  - Microsoft.Compute/ComputeRP/stable/2021-04-01/runCommands.json
-  - Microsoft.Compute/DiskRP/stable/2021-04-01/disk.json
+  - stable/2021-04-01/compute.json
+  - stable/2021-04-01/runCommands.json
+  - stable/2021-04-01/disk.json
 ```
 
 ### Tag: package-2021-03-01
@@ -1769,13 +1769,13 @@ These settings apply only when `--tag=package-2021-03-01` is specified on the co
 
 ```yaml $(tag) == 'package-2021-03-01'
 input-file:
-  - Microsoft.Compute/ComputeRP/stable/2021-03-01/compute.json
-  - Microsoft.Compute/ComputeRP/stable/2021-03-01/runCommands.json
-  - Microsoft.Compute/Skus/stable/2019-04-01/skus.json
-  - Microsoft.Compute/DiskRP/stable/2020-12-01/disk.json
-  - Microsoft.Compute/GalleryRP/stable/2020-09-30/gallery.json
-  - Microsoft.Compute/GalleryRP/stable/2020-09-30/sharedGallery.json
-  - Microsoft.Compute/CloudserviceRP/stable/2021-03-01/cloudService.json
+  - stable/2021-03-01/compute.json
+  - stable/2021-03-01/runCommands.json
+  - stable/2019-04-01/skus.json
+  - stable/2020-12-01/disk.json
+  - stable/2020-09-30/gallery.json
+  - stable/2020-09-30/sharedGallery.json
+  - Cloudservice/stable/2021-03-01/cloudService.json
 ```
 
 ### Tag: package-2021-03-01-only
@@ -1784,9 +1784,9 @@ These settings apply only when `--tag=package-2021-03-01-only` is specified on t
 
 ```yaml $(tag) == 'package-2021-03-01-only'
 input-file:
-  - Microsoft.Compute/CloudserviceRP/stable/2021-03-01/cloudService.json
-  - Microsoft.Compute/ComputeRP/stable/2021-03-01/compute.json
-  - Microsoft.Compute/ComputeRP/stable/2021-03-01/runCommands.json
+  - Cloudservice/stable/2021-03-01/cloudService.json
+  - stable/2021-03-01/compute.json
+  - stable/2021-03-01/runCommands.json
 ```
 
 ### Tag: package-2020-12-01
@@ -1795,11 +1795,11 @@ These settings apply only when `--tag=package-2020-12-01` is specified on the co
 
 ```yaml $(tag) == 'package-2020-12-01'
 input-file:
-  - Microsoft.Compute/ComputeRP/stable/2020-12-01/compute.json
-  - Microsoft.Compute/ComputeRP/stable/2020-12-01/runCommands.json
-  - Microsoft.Compute/Skus/stable/2019-04-01/skus.json
-  - Microsoft.Compute/DiskRP/stable/2020-12-01/disk.json
-  - Microsoft.Compute/GalleryRP/stable/2019-12-01/gallery.json
+  - stable/2020-12-01/compute.json
+  - stable/2020-12-01/runCommands.json
+  - stable/2019-04-01/skus.json
+  - stable/2020-12-01/disk.json
+  - stable/2019-12-01/gallery.json
 ```
 
 ### Tag: package-2020-12-01-only
@@ -1808,9 +1808,9 @@ These settings apply only when `--tag=package-2020-12-01-only` is specified on t
 
 ```yaml $(tag) == 'package-2020-12-01-only'
 input-file:
-  - Microsoft.Compute/DiskRP/stable/2020-12-01/disk.json
-  - Microsoft.Compute/ComputeRP/stable/2020-12-01/compute.json
-  - Microsoft.Compute/ComputeRP/stable/2020-12-01/runCommands.json
+  - stable/2020-12-01/disk.json
+  - stable/2020-12-01/compute.json
+  - stable/2020-12-01/runCommands.json
 ```
 
 ### Tag: package-2020-10-01-preview
@@ -1819,13 +1819,12 @@ These settings apply only when `--tag=package-2020-10-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2020-10-01-preview'
 input-file:
-  - Microsoft.Compute/ComputeRP/stable/2020-06-01/compute.json
-  - Microsoft.Compute/ComputeRP/stable/2020-06-01/runCommands.json
-  - Microsoft.Compute/Skus/stable/2019-04-01/skus.json
-  - Microsoft.Compute/DiskRP/stable/2020-09-30/disk.json
-  - Microsoft.Compute/GalleryRP/stable/2019-12-01/gallery.json
-  - Microsoft.ContainerService/stable/2017-01-31/containerService.json
-  - Microsoft.Compute/CloudserviceRP/preview/2020-10-01-preview/cloudService.json
+  - stable/2020-06-01/compute.json
+  - stable/2020-06-01/runCommands.json
+  - stable/2019-04-01/skus.json
+  - stable/2020-09-30/disk.json
+  - stable/2019-12-01/gallery.json
+  - Cloudservice/preview/2020-10-01-preview/cloudService.json
 ```
 
 ### Tag: package-2020-10-01-preview-only
@@ -1834,7 +1833,7 @@ These settings apply only when `--tag=package-2020-10-01-preview-only` is specif
 
 ```yaml $(tag) == 'package-2020-10-01-preview-only'
 input-file:
-  - Microsoft.Compute/CloudserviceRP/preview/2020-10-01-preview/cloudService.json
+  - Cloudservice/preview/2020-10-01-preview/cloudService.json
 ```
 
 ### Tag: package-2020-09-30
@@ -1843,13 +1842,12 @@ These settings apply only when `--tag=package-2020-09-30` is specified on the co
 
 ```yaml $(tag) == 'package-2020-09-30'
 input-file:
-  - Microsoft.Compute/ComputeRP/stable/2020-06-01/compute.json
-  - Microsoft.Compute/ComputeRP/stable/2020-06-01/runCommands.json
-  - Microsoft.Compute/Skus/stable/2019-04-01/skus.json
-  - Microsoft.Compute/DiskRP/stable/2020-09-30/disk.json
-  - Microsoft.Compute/GalleryRP/preview/2020-09-30/gallery.json
-  - Microsoft.Compute/GalleryRP/preview/2020-09-30/sharedGallery.json
-  - Microsoft.ContainerService/stable/2017-01-31/containerService.json
+  - stable/2020-06-01/compute.json
+  - stable/2020-06-01/runCommands.json
+  - stable/2019-04-01/skus.json
+  - stable/2020-09-30/disk.json
+  - preview/2020-09-30/gallery.json
+  - preview/2020-09-30/sharedGallery.json
 ```
 
 ### Tag: package-2020-09-30-only
@@ -1858,9 +1856,9 @@ These settings apply only when `--tag=package-2020-09-30-only` is specified on t
 
 ```yaml $(tag) == 'package-2020-09-30-only'
 input-file:
-  - Microsoft.Compute/DiskRP/stable/2020-09-30/disk.json
-  - Microsoft.Compute/GalleryRP/preview/2020-09-30/gallery.json
-  - Microsoft.Compute/GalleryRP/preview/2020-09-30/sharedGallery.json
+  - stable/2020-09-30/disk.json
+  - preview/2020-09-30/gallery.json
+  - preview/2020-09-30/sharedGallery.json
 ```
 
 ### Tag: package-2020-06-30
@@ -1869,12 +1867,11 @@ These settings apply only when `--tag=package-2020-06-30` is specified on the co
 
 ```yaml $(tag) == 'package-2020-06-30'
 input-file:
-  - Microsoft.Compute/ComputeRP/stable/2020-06-01/compute.json
-  - Microsoft.Compute/ComputeRP/stable/2020-06-01/runCommands.json
-  - Microsoft.Compute/Skus/stable/2019-04-01/skus.json
-  - Microsoft.Compute/DiskRP/stable/2020-06-30/disk.json
-  - Microsoft.Compute/GalleryRP/stable/2019-12-01/gallery.json
-  - Microsoft.ContainerService/stable/2017-01-31/containerService.json
+  - stable/2020-06-01/compute.json
+  - stable/2020-06-01/runCommands.json
+  - stable/2019-04-01/skus.json
+  - stable/2020-06-30/disk.json
+  - stable/2019-12-01/gallery.json
 ```
 
 ### Tag: package-2020-06-30-only
@@ -1883,7 +1880,7 @@ These settings apply only when `--tag=package-2020-06-30-only` is specified on t
 
 ```yaml $(tag) == 'package-2020-06-30-only'
 input-file:
-  - Microsoft.Compute/DiskRP/stable/2020-06-30/disk.json
+  - stable/2020-06-30/disk.json
 ```
 
 ### Tag: package-2020-06-01
@@ -1892,12 +1889,11 @@ These settings apply only when `--tag=package-2020-06-01` is specified on the co
 
 ```yaml $(tag) == 'package-2020-06-01'
 input-file:
-  - Microsoft.Compute/ComputeRP/stable/2020-06-01/compute.json
-  - Microsoft.Compute/ComputeRP/stable/2020-06-01/runCommands.json
-  - Microsoft.Compute/Skus/stable/2019-04-01/skus.json
-  - Microsoft.Compute/DiskRP/stable/2020-05-01/disk.json
-  - Microsoft.Compute/GalleryRP/stable/2019-12-01/gallery.json
-  - Microsoft.ContainerService/stable/2017-01-31/containerService.json
+  - stable/2020-06-01/compute.json
+  - stable/2020-06-01/runCommands.json
+  - stable/2019-04-01/skus.json
+  - stable/2020-05-01/disk.json
+  - stable/2019-12-01/gallery.json
 ```
 
 ### Tag: package-2020-06-01-only
@@ -1906,8 +1902,8 @@ These settings apply only when `--tag=package-2020-06-01-only` is specified on t
 
 ```yaml $(tag) == 'package-2020-06-01-only'
 input-file:
-  - Microsoft.Compute/ComputeRP/stable/2020-06-01/compute.json
-  - Microsoft.Compute/ComputeRP/stable/2020-06-01/runCommands.json
+  - stable/2020-06-01/compute.json
+  - stable/2020-06-01/runCommands.json
 ```
 
 ### Tag: package-2020-05-01
@@ -1916,12 +1912,11 @@ These settings apply only when `--tag=package-2020-05-01` is specified on the co
 
 ```yaml $(tag) == 'package-2020-05-01'
 input-file:
-  - Microsoft.Compute/ComputeRP/stable/2019-12-01/compute.json
-  - Microsoft.Compute/ComputeRP/stable/2019-12-01/runCommands.json
-  - Microsoft.Compute/Skus/stable/2019-04-01/skus.json
-  - Microsoft.Compute/DiskRP/stable/2020-05-01/disk.json
-  - Microsoft.Compute/GalleryRP/stable/2019-12-01/gallery.json
-  - Microsoft.ContainerService/stable/2017-01-31/containerService.json
+  - stable/2019-12-01/compute.json
+  - stable/2019-12-01/runCommands.json
+  - stable/2019-04-01/skus.json
+  - stable/2020-05-01/disk.json
+  - stable/2019-12-01/gallery.json
 ```
 
 ### Tag: package-2020-05-01-only
@@ -1930,7 +1925,7 @@ These settings apply only when `--tag=package-2020-05-01-only` is specified on t
 
 ```yaml $(tag) == 'package-2020-05-01-only'
 input-file:
-  - Microsoft.Compute/DiskRP/stable/2020-05-01/disk.json
+  - stable/2020-05-01/disk.json
 ```
 
 ### Tag: package-2019-12-01
@@ -1939,12 +1934,11 @@ These settings apply only when `--tag=package-2019-12-01` is specified on the co
 
 ```yaml $(tag) == 'package-2019-12-01'
 input-file:
-  - Microsoft.Compute/ComputeRP/stable/2019-12-01/compute.json
-  - Microsoft.Compute/ComputeRP/stable/2019-12-01/runCommands.json
-  - Microsoft.Compute/Skus/stable/2019-04-01/skus.json
-  - Microsoft.Compute/DiskRP/stable/2019-11-01/disk.json
-  - Microsoft.Compute/GalleryRP/stable/2019-12-01/gallery.json
-  - Microsoft.ContainerService/stable/2017-01-31/containerService.json
+  - stable/2019-12-01/compute.json
+  - stable/2019-12-01/runCommands.json
+  - stable/2019-04-01/skus.json
+  - stable/2019-11-01/disk.json
+  - stable/2019-12-01/gallery.json
 ```
 
 ### Tag: package-2019-12-01-only
@@ -1953,9 +1947,9 @@ These settings apply only when `--tag=package-2019-12-01-only` is specified on t
 
 ```yaml $(tag) == 'package-2019-12-01-only'
 input-file:
-  - Microsoft.Compute/ComputeRP/stable/2019-12-01/compute.json
-  - Microsoft.Compute/ComputeRP/stable/2019-12-01/runCommands.json
-  - Microsoft.Compute/GalleryRP/stable/2019-12-01/gallery.json
+  - stable/2019-12-01/compute.json
+  - stable/2019-12-01/runCommands.json
+  - stable/2019-12-01/gallery.json
 ```
 
 ### Tag: package-2019-11-01
@@ -1964,12 +1958,11 @@ These settings apply only when `--package-2019-11-01` is specified on the comman
 
 ```yaml $(tag) == 'package-2019-11-01'
 input-file:
-  - Microsoft.Compute/ComputeRP/stable/2019-07-01/compute.json
-  - Microsoft.Compute/ComputeRP/stable/2019-07-01/runCommands.json
-  - Microsoft.Compute/Skus/stable/2019-04-01/skus.json
-  - Microsoft.Compute/DiskRP/stable/2019-11-01/disk.json
-  - Microsoft.Compute/GalleryRP/stable/2019-07-01/gallery.json
-  - Microsoft.ContainerService/stable/2017-01-31/containerService.json
+  - stable/2019-07-01/compute.json
+  - stable/2019-07-01/runCommands.json
+  - stable/2019-04-01/skus.json
+  - stable/2019-11-01/disk.json
+  - stable/2019-07-01/gallery.json
 ```
 
 ### Tag: package-2019-11-01-only
@@ -1978,7 +1971,7 @@ These settings apply only when `--package-2019-11-01-only` is specified on the c
 
 ```yaml $(tag) == 'package-2019-11-01-only'
 input-file:
-  - Microsoft.Compute/DiskRP/stable/2019-11-01/disk.json
+  - stable/2019-11-01/disk.json
 ```
 
 ### Tag: package-2019-07
@@ -1987,12 +1980,11 @@ These settings apply only when `--tag=package-2019-07` is specified on the comma
 
 ```yaml $(tag) == 'package-2019-07'
 input-file:
-  - Microsoft.Compute/ComputeRP/stable/2019-07-01/compute.json
-  - Microsoft.Compute/ComputeRP/stable/2019-07-01/runCommands.json
-  - Microsoft.Compute/Skus/stable/2019-04-01/skus.json
-  - Microsoft.Compute/DiskRP/stable/2019-07-01/disk.json
-  - Microsoft.Compute/GalleryRP/stable/2019-07-01/gallery.json
-  - Microsoft.ContainerService/stable/2017-01-31/containerService.json
+  - stable/2019-07-01/compute.json
+  - stable/2019-07-01/runCommands.json
+  - stable/2019-04-01/skus.json
+  - stable/2019-07-01/disk.json
+  - stable/2019-07-01/gallery.json
 ```
 
 ### Tag: package-2019-07-01
@@ -2001,12 +1993,11 @@ These settings apply only when `--tag=package-2019-07-01` is specified on the co
 
 ```yaml $(tag) == 'package-2019-07-01'
 input-file:
-  - Microsoft.Compute/ComputeRP/stable/2019-03-01/compute.json
-  - Microsoft.Compute/ComputeRP/stable/2019-03-01/runCommands.json
-  - Microsoft.Compute/Skus/stable/2019-04-01/skus.json
-  - Microsoft.Compute/DiskRP/stable/2019-07-01/disk.json
-  - Microsoft.Compute/GalleryRP/stable/2019-07-01/gallery.json
-  - Microsoft.ContainerService/stable/2017-01-31/containerService.json
+  - stable/2019-03-01/compute.json
+  - stable/2019-03-01/runCommands.json
+  - stable/2019-04-01/skus.json
+  - stable/2019-07-01/disk.json
+  - stable/2019-07-01/gallery.json
 ```
 
 ### Tag: package-2019-07-01-only
@@ -2015,10 +2006,10 @@ These settings apply only when `--tag=package-2019-07-01-only` is specified on t
 
 ```yaml $(tag) == 'package-2019-07-01-only'
 input-file:
-  - Microsoft.Compute/ComputeRP/stable/2019-07-01/compute.json
-  - Microsoft.Compute/DiskRP/stable/2019-07-01/disk.json
-  - Microsoft.Compute/GalleryRP/stable/2019-07-01/gallery.json
-  - Microsoft.Compute/ComputeRP/stable/2019-07-01/runCommands.json
+  - stable/2019-07-01/compute.json
+  - stable/2019-07-01/disk.json
+  - stable/2019-07-01/gallery.json
+  - stable/2019-07-01/runCommands.json
 ```
 
 ### Tag: package-2019-03-01
@@ -2027,12 +2018,11 @@ These settings apply only when `--tag=package-2019-03-01` is specified on the co
 
 ```yaml $(tag) == 'package-2019-03-01'
 input-file:
-  - Microsoft.Compute/ComputeRP/stable/2019-03-01/compute.json
-  - Microsoft.Compute/ComputeRP/stable/2019-03-01/runCommands.json
-  - Microsoft.Compute/Skus/stable/2019-04-01/skus.json
-  - Microsoft.Compute/DiskRP/stable/2019-03-01/disk.json
-  - Microsoft.Compute/GalleryRP/stable/2019-03-01/gallery.json
-  - Microsoft.ContainerService/stable/2017-01-31/containerService.json
+  - stable/2019-03-01/compute.json
+  - stable/2019-03-01/runCommands.json
+  - stable/2019-04-01/skus.json
+  - stable/2019-03-01/disk.json
+  - stable/2019-03-01/gallery.json
 ```
 
 ### Tag: package-2019-04-01-only
@@ -2041,7 +2031,7 @@ These settings apply only when `--tag=package-2019-04-01-only` is specified on t
 
 ```yaml $(tag) == 'package-2019-04-01-only'
 input-file:
-  - Microsoft.Compute/Skus/stable/2019-04-01/skus.json
+  - stable/2019-04-01/skus.json
 ```
 
 ### Tag: package-2019-03-01-only
@@ -2050,10 +2040,10 @@ These settings apply only when `--tag=package-2019-03-01-only` is specified on t
 
 ```yaml $(tag) == 'package-2019-03-01-only'
 input-file:
-  - Microsoft.Compute/ComputeRP/stable/2019-03-01/compute.json
-  - Microsoft.Compute/ComputeRP/stable/2019-03-01/runCommands.json
-  - Microsoft.Compute/GalleryRP/stable/2019-03-01/gallery.json
-  - Microsoft.Compute/DiskRP/stable/2019-03-01/disk.json
+  - stable/2019-03-01/compute.json
+  - stable/2019-03-01/runCommands.json
+  - stable/2019-03-01/gallery.json
+  - stable/2019-03-01/disk.json
 ```
 
 ### Tag: package-2018-10-01-Disks
@@ -2062,12 +2052,11 @@ These settings apply only when `--tag=package-2018-10-01-Disks` is specified on 
 
 ```yaml $(tag) == 'package-2018-10-01-Disks'
 input-file:
-  - Microsoft.Compute/ComputeRP/stable/2018-10-01/compute.json
-  - Microsoft.Compute/ComputeRP/stable/2018-10-01/runCommands.json
-  - Microsoft.Compute/Skus/stable/2017-09-01/skus.json
-  - Microsoft.Compute/DiskRP/stable/2018-09-30/disk.json
-  - Microsoft.Compute/GalleryRP/stable/2018-06-01/gallery.json
-  - Microsoft.ContainerService/stable/2017-01-31/containerService.json
+  - stable/2018-10-01/compute.json
+  - stable/2018-10-01/runCommands.json
+  - stable/2017-09-01/skus.json
+  - stable/2018-09-30/disk.json
+  - stable/2018-06-01/gallery.json
 ```
 
 ### Tag: package-2018-10-01
@@ -2076,12 +2065,11 @@ These settings apply only when `--tag=package-2018-10-01` is specified on the co
 
 ```yaml $(tag) == 'package-2018-10-01'
 input-file:
-  - Microsoft.Compute/ComputeRP/stable/2018-10-01/compute.json
-  - Microsoft.Compute/ComputeRP/stable/2018-10-01/runCommands.json
-  - Microsoft.Compute/Skus/stable/2017-09-01/skus.json
-  - Microsoft.Compute/DiskRP/stable/2018-06-01/disk.json
-  - Microsoft.Compute/GalleryRP/stable/2018-06-01/gallery.json
-  - Microsoft.ContainerService/stable/2017-01-31/containerService.json
+  - stable/2018-10-01/compute.json
+  - stable/2018-10-01/runCommands.json
+  - stable/2017-09-01/skus.json
+  - stable/2018-06-01/disk.json
+  - stable/2018-06-01/gallery.json
 ```
 
 ### Tag: package-2018-10-01-only
@@ -2090,8 +2078,8 @@ These settings apply only when `--tag=package-2018-10-01-only` is specified on t
 
 ```yaml $(tag) == 'package-2018-10-01-only'
 input-file:
-  - Microsoft.Compute/ComputeRP/stable/2018-10-01/compute.json
-  - Microsoft.Compute/ComputeRP/stable/2018-10-01/runCommands.json
+  - stable/2018-10-01/compute.json
+  - stable/2018-10-01/runCommands.json
 ```
 
 ### Tag: package-2018-09-30-only
@@ -2100,7 +2088,7 @@ These settings apply only when `--tag=package-2018-09-30-only` is specified on t
 
 ```yaml $(tag) == 'package-2018-09-30-only'
 input-file:
-  - Microsoft.Compute/DiskRP/stable/2018-09-30/disk.json
+  - stable/2018-09-30/disk.json
 ```
 
 ### Tag: package-2018-06-exclude-gallery
@@ -2109,11 +2097,10 @@ These settings apply only when `--tag=package-2018-06-exclude-gallery` is specif
 
 ```yaml $(tag) == 'package-2018-06-exclude-gallery'
 input-file:
-  - Microsoft.Compute/ComputeRP/stable/2018-06-01/compute.json
-  - Microsoft.Compute/ComputeRP/stable/2018-06-01/runCommands.json
-  - Microsoft.Compute/Skus/stable/2017-09-01/skus.json
-  - Microsoft.Compute/DiskRP/stable/2018-06-01/disk.json
-  - Microsoft.ContainerService/stable/2017-01-31/containerService.json
+  - stable/2018-06-01/compute.json
+  - stable/2018-06-01/runCommands.json
+  - stable/2017-09-01/skus.json
+  - stable/2018-06-01/disk.json
 ```
 
 ### Tag: package-2018-06
@@ -2122,12 +2109,11 @@ These settings apply only when `--tag=package-2018-06` is specified on the comma
 
 ```yaml $(tag) == 'package-2018-06'
 input-file:
-  - Microsoft.Compute/ComputeRP/stable/2018-06-01/compute.json
-  - Microsoft.Compute/ComputeRP/stable/2018-06-01/runCommands.json
-  - Microsoft.Compute/Skus/stable/2017-09-01/skus.json
-  - Microsoft.Compute/DiskRP/stable/2018-06-01/disk.json
-  - Microsoft.Compute/GalleryRP/stable/2018-06-01/gallery.json
-  - Microsoft.ContainerService/stable/2017-01-31/containerService.json
+  - stable/2018-06-01/compute.json
+  - stable/2018-06-01/runCommands.json
+  - stable/2017-09-01/skus.json
+  - stable/2018-06-01/disk.json
+  - stable/2018-06-01/gallery.json
 ```
 
 ### Tag: package-2018-06-01
@@ -2136,12 +2122,11 @@ These settings apply only when `--tag=package-2018-06-01` is specified on the co
 
 ```yaml $(tag) == 'package-2018-06-01'
 input-file:
-  - Microsoft.Compute/ComputeRP/stable/2018-04-01/compute.json
-  - Microsoft.Compute/ComputeRP/stable/2018-04-01/runCommands.json
-  - Microsoft.Compute/Skus/stable/2017-09-01/skus.json
-  - Microsoft.Compute/DiskRP/stable/2018-06-01/disk.json
-  - Microsoft.Compute/GalleryRP/stable/2018-06-01/gallery.json
-  - Microsoft.ContainerService/stable/2017-01-31/containerService.json
+  - stable/2018-04-01/compute.json
+  - stable/2018-04-01/runCommands.json
+  - stable/2017-09-01/skus.json
+  - stable/2018-06-01/disk.json
+  - stable/2018-06-01/gallery.json
 ```
 
 ### Tag: package-compute-only-2018-06
@@ -2150,10 +2135,10 @@ These settings apply only when `--tag=package-compute-only-2018-06` is specified
 
 ```yaml $(tag) == 'package-compute-only-2018-06'
 input-file:
-  - Microsoft.Compute/ComputeRP/stable/2018-06-01/compute.json
-  - Microsoft.Compute/ComputeRP/stable/2018-06-01/runCommands.json
-  - Microsoft.Compute/GalleryRP/stable/2018-06-01/gallery.json
-  - Microsoft.Compute/DiskRP/stable/2018-06-01/disk.json
+  - stable/2018-06-01/compute.json
+  - stable/2018-06-01/runCommands.json
+  - stable/2018-06-01/gallery.json
+  - stable/2018-06-01/disk.json
 ```
 
 ### Tag: package-2018-04-01
@@ -2162,11 +2147,10 @@ These settings apply only when `--tag=package-2018-04-01` is specified on the co
 
 ```yaml $(tag) == 'package-2018-04-01'
 input-file:
-  - Microsoft.Compute/ComputeRP/stable/2018-04-01/compute.json
-  - Microsoft.Compute/ComputeRP/stable/2018-04-01/runCommands.json
-  - Microsoft.Compute/Skus/stable/2017-09-01/skus.json
-  - Microsoft.Compute/DiskRP/stable/2018-04-01/disk.json
-  - Microsoft.ContainerService/stable/2017-01-31/containerService.json
+  - stable/2018-04-01/compute.json
+  - stable/2018-04-01/runCommands.json
+  - stable/2017-09-01/skus.json
+  - stable/2018-04-01/disk.json
 ```
 
 ### Tag: package-2018-04
@@ -2175,11 +2159,10 @@ These settings apply only when `--tag=package-2018-04` is specified on the comma
 
 ```yaml $(tag) == 'package-2018-04'
 input-file:
-  - Microsoft.Compute/ComputeRP/stable/2017-12-01/compute.json
-  - Microsoft.Compute/ComputeRP/stable/2017-12-01/runCommands.json
-  - Microsoft.Compute/Skus/stable/2017-09-01/skus.json
-  - Microsoft.Compute/DiskRP/stable/2018-04-01/disk.json
-  - Microsoft.ContainerService/stable/2017-01-31/containerService.json
+  - stable/2017-12-01/compute.json
+  - stable/2017-12-01/runCommands.json
+  - stable/2017-09-01/skus.json
+  - stable/2018-04-01/disk.json
 ```
 
 ### Tag: package-compute-2018-04
@@ -2188,9 +2171,9 @@ These settings apply only when `--tag=package-compute-2018-04` is specified on t
 
 ```yaml $(tag) == 'package-compute-2018-04'
 input-file:
-  - Microsoft.Compute/ComputeRP/stable/2018-04-01/compute.json
-  - Microsoft.Compute/ComputeRP/stable/2018-04-01/runCommands.json
-  - Microsoft.Compute/DiskRP/stable/2018-04-01/disk.json
+  - stable/2018-04-01/compute.json
+  - stable/2018-04-01/runCommands.json
+  - stable/2018-04-01/disk.json
 ```
 
 ### Tag: package-disks-2018-04
@@ -2199,7 +2182,7 @@ These settings apply only when `--tag=package-disks-2018-04` is specified on the
 
 ```yaml $(tag) == 'package-disks-2018-04'
 input-file:
-  - Microsoft.Compute/DiskRP/stable/2018-04-01/disk.json
+  - stable/2018-04-01/disk.json
 ```
 
 ### Tag: package-2017-12
@@ -2208,11 +2191,10 @@ These settings apply only when `--tag=package-2017-12` is specified on the comma
 
 ```yaml $(tag) == 'package-2017-12'
 input-file:
-  - Microsoft.Compute/ComputeRP/stable/2017-12-01/compute.json
-  - Microsoft.Compute/ComputeRP/stable/2017-12-01/runCommands.json
-  - Microsoft.Compute/Skus/stable/2017-09-01/skus.json
-  - Microsoft.Compute/DiskRP/stable/2017-03-30/disk.json
-  - Microsoft.ContainerService/stable/2017-01-31/containerService.json
+  - stable/2017-12-01/compute.json
+  - stable/2017-12-01/runCommands.json
+  - stable/2017-09-01/skus.json
+  - stable/2017-03-30/disk.json
 ```
 
 ### Tag: package-compute-2017-12
@@ -2221,10 +2203,10 @@ These settings apply only when `--tag=package-compute-2017-12` is specified on t
 
 ```yaml $(tag) == 'package-compute-2017-12'
 input-file:
-  - Microsoft.Compute/ComputeRP/stable/2017-12-01/compute.json
-  - Microsoft.Compute/ComputeRP/stable/2017-12-01/runCommands.json
-  - Microsoft.Compute/Skus/stable/2017-09-01/skus.json
-  - Microsoft.Compute/DiskRP/stable/2017-03-30/disk.json
+  - stable/2017-12-01/compute.json
+  - stable/2017-12-01/runCommands.json
+  - stable/2017-09-01/skus.json
+  - stable/2017-03-30/disk.json
 ```
 
 ### Tag: package-compute-only-2017-12
@@ -2233,8 +2215,8 @@ These settings apply only when `--tag=package-compute-only-2017-12` is specified
 
 ```yaml $(tag) == 'package-compute-only-2017-12'
 input-file:
-  - Microsoft.Compute/ComputeRP/stable/2017-12-01/compute.json
-  - Microsoft.Compute/ComputeRP/stable/2017-12-01/runCommands.json
+  - stable/2017-12-01/compute.json
+  - stable/2017-12-01/runCommands.json
 ```
 
 ### Tag: package-skus-2017-09
@@ -2243,7 +2225,7 @@ These settings apply only when `--tag=package-skus-2017-09` is specified on the 
 
 ```yaml $(tag) == 'package-skus-2017-09'
 input-file:
-  - Microsoft.Compute/Skus/stable/2017-09-01/skus.json
+  - stable/2017-09-01/skus.json
 ```
 
 ### Tag: package-2017-03
@@ -2252,10 +2234,9 @@ These settings apply only when `--tag=package-2017-03` is specified on the comma
 
 ```yaml $(tag) == 'package-2017-03'
 input-file:
-  - Microsoft.Compute/ComputeRP/stable/2017-03-30/compute.json
-  - Microsoft.Compute/DiskRP/stable/2017-03-30/disk.json
-  - Microsoft.Compute/ComputeRP/stable/2017-03-30/runCommands.json
-  - Microsoft.ContainerService/stable/2017-01-31/containerService.json
+  - stable/2017-03-30/compute.json
+  - stable/2017-03-30/disk.json
+  - stable/2017-03-30/runCommands.json
 ```
 
 ### Tag: package-compute-2017-03
@@ -2264,27 +2245,9 @@ These settings apply only when `--tag=package-compute-2017-03` is specified on t
 
 ```yaml $(tag) == 'package-compute-2017-03'
 input-file:
-  - Microsoft.Compute/ComputeRP/stable/2017-03-30/compute.json
-  - Microsoft.Compute/DiskRP/stable/2017-03-30/disk.json
-  - Microsoft.Compute/ComputeRP/stable/2017-03-30/runCommands.json
-```
-
-### Tag: package-container-service-2017-01
-
-These settings apply only when `--tag=package-container-service-2017-01` is specified on the command line.
-
-```yaml $(tag) == 'package-container-service-2017-01'
-input-file:
-  - Microsoft.ContainerService/stable/2017-01-31/containerService.json
-```
-
-### Tag: package-container-service-2016-09
-
-These settings apply only when `--tag=package-container-service-2016-09` is specified on the command line.
-
-```yaml $(tag) == 'package-container-service-2016-09'
-input-file:
-  - Microsoft.ContainerService/stable/2016-09-30/containerService.json
+  - stable/2017-03-30/compute.json
+  - stable/2017-03-30/disk.json
+  - stable/2017-03-30/runCommands.json
 ```
 
 ### Tag: package-2016-04-preview
@@ -2293,9 +2256,8 @@ These settings apply only when `--tag=package-2016-04-preview` is specified on t
 
 ```yaml $(tag) == 'package-2016-04-preview'
 input-file:
-  - Microsoft.Compute/ComputeRP/preview/2016-04-30-preview/compute.json
-  - Microsoft.Compute/DiskRP/preview/2016-04-30-preview/disk.json
-  - Microsoft.ContainerService/stable/2017-01-31/containerService.json
+  - preview/2016-04-30-preview/compute.json
+  - preview/2016-04-30-preview/disk.json
 ```
 
 ### Tag: package-compute-2016-04-preview
@@ -2304,8 +2266,8 @@ These settings apply only when `--tag=package-compute-2016-04-preview` is specif
 
 ```yaml $(tag) == 'package-compute-2016-04-preview'
 input-file:
-  - Microsoft.Compute/ComputeRP/preview/2016-04-30-preview/compute.json
-  - Microsoft.Compute/DiskRP/preview/2016-04-30-preview/disk.json
+  - preview/2016-04-30-preview/compute.json
+  - preview/2016-04-30-preview/disk.json
 ```
 
 ### Tag: package-2016-03
@@ -2314,8 +2276,7 @@ These settings apply only when `--tag=package-2016-03` is specified on the comma
 
 ```yaml $(tag) == 'package-2016-03'
 input-file:
-  - Microsoft.Compute/ComputeRP/stable/2016-03-30/compute.json
-  - Microsoft.ContainerService/stable/2016-03-30/containerService.json
+  - stable/2016-03-30/compute.json
 ```
 
 ### Tag: package-compute-2016-03
@@ -2324,25 +2285,7 @@ These settings apply only when `--tag=package-compute-2016-03` is specified on t
 
 ```yaml $(tag) == 'package-compute-2016-03'
 input-file:
-  - Microsoft.Compute/ComputeRP/stable/2016-03-30/compute.json
-```
-
-### Tag: package-container-service-2016-03
-
-These settings apply only when `--tag=package-container-service-2016-03` is specified on the command line.
-
-```yaml $(tag) == 'package-container-service-2016-03'
-input-file:
-  - Microsoft.ContainerService/stable/2016-03-30/containerService.json
-```
-
-### Tag: package-container-service-2015-11-preview
-
-These settings apply only when `--tag=package-container-service-2015-11-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-container-service-2015-11-preview'
-input-file:
-  - Microsoft.ContainerService/preview/2015-11-01-preview/containerService.json
+  - stable/2016-03-30/compute.json
 ```
 
 ### Tag: package-compute-2015-06
@@ -2351,7 +2294,7 @@ These settings apply only when `--tag=package-compute-2015-06` is specified on t
 
 ```yaml $(tag) == 'package-compute-2015-06'
 input-file:
-  - Microsoft.Compute/ComputeRP/stable/2015-06-15/compute.json
+  - stable/2015-06-15/compute.json
 ```
 
 ### Tag: package-2015-06-preview
@@ -2360,8 +2303,7 @@ These settings apply only when `--tag=package-2015-06-preview` is specified on t
 
 ```yaml $(tag) == 'package-2015-06-preview'
 input-file:
-  - Microsoft.Compute/ComputeRP/stable/2015-06-15/compute.json
-  - Microsoft.ContainerService/preview/2015-11-01-preview/containerService.json
+  - stable/2015-06-15/compute.json
 ```
 
 ---
@@ -2403,6 +2345,6 @@ Creating this tag to pick proper resources from the hybrid profile.
 
 ```yaml $(tag) == 'profile-hybrid-2020-09-01'
 input-file:
-  - Microsoft.Compute/ComputeRP/stable/2020-06-01/compute.json
-  - Microsoft.Compute/DiskRP/stable/2019-07-01/disk.json
+  - stable/2020-06-01/compute.json
+  - stable/2019-07-01/disk.json
 ```

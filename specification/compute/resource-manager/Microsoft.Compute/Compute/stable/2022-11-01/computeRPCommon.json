@@ -43,7 +43,7 @@
         "description": "Gets a list of compute operations.",
         "parameters": [
           {
-            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common-types/v1/common.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -56,7 +56,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+              "$ref": "../../common-types/v1/common.json#/definitions/CloudError"
             }
           }
         },
@@ -90,10 +90,10 @@
             "pattern": "^[-\\w\\._]+$"
           },
           {
-            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common-types/v1/common.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -106,7 +106,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+              "$ref": "../../common-types/v1/common.json#/definitions/CloudError"
             }
           }
         },
@@ -140,10 +140,10 @@
             "pattern": "^[-\\w\\._]+$"
           },
           {
-            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common-types/v1/common.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -156,7 +156,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+              "$ref": "../../common-types/v1/common.json#/definitions/CloudError"
             }
           }
         },
@@ -354,7 +354,7 @@
     "SubResourceWithColocationStatus": {
       "allOf": [
         {
-          "$ref": "../../../common-types/v1/common.json#/definitions/SubResource"
+          "$ref": "../../common-types/v1/common.json#/definitions/SubResource"
         }
       ],
       "properties": {
@@ -670,7 +670,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../common-types/v1/common.json#/definitions/SubResource"
+          "$ref": "../../common-types/v1/common.json#/definitions/SubResource"
         }
       ],
       "description": "Specifies information about the image to use. You can specify information about platform images, marketplace images, or virtual machine images. This element is required when you want to use a platform image, marketplace image, or virtual machine image, but is not used in other creation operations. NOTE: Image reference publisher and offer can only be set when you create the scale set."
@@ -694,7 +694,7 @@
           "description": "The URL referencing a secret in a Key Vault."
         },
         "sourceVault": {
-          "$ref": "../../../common-types/v1/common.json#/definitions/SubResource",
+          "$ref": "../../common-types/v1/common.json#/definitions/SubResource",
           "description": "The relative URL of the Key Vault containing the secret."
         }
       },
@@ -707,7 +707,7 @@
     "DiskEncryptionSetParameters": {
       "allOf": [
         {
-          "$ref": "../../../common-types/v1/common.json#/definitions/SubResource"
+          "$ref": "../../common-types/v1/common.json#/definitions/SubResource"
         }
       ],
       "description": "Describes the parameter of customer managed disk encryption set resource id that can be specified for disk. <br><br> NOTE: The disk encryption set resource id can only be specified for managed disk. Please refer https://aka.ms/mdssewithcmkoverview for more details.",
@@ -720,7 +720,7 @@
           "description": "The URL referencing a key encryption key in Key Vault."
         },
         "sourceVault": {
-          "$ref": "../../../common-types/v1/common.json#/definitions/SubResource",
+          "$ref": "../../common-types/v1/common.json#/definitions/SubResource",
           "description": "The relative URL of the Key Vault containing the key."
         }
       },
@@ -897,7 +897,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../common-types/v1/common.json#/definitions/SubResource"
+          "$ref": "../../common-types/v1/common.json#/definitions/SubResource"
         }
       ],
       "description": "The parameters of a managed disk."
@@ -1042,7 +1042,7 @@
       "type": "object",
       "properties": {
         "capacityReservationGroup": {
-          "$ref": "../../../common-types/v1/common.json#/definitions/SubResource",
+          "$ref": "../../common-types/v1/common.json#/definitions/SubResource",
           "description": "Specifies the capacity reservation group resource id that should be used for allocating the virtual machine or scaleset vm instances provided enough capacity has been reserved. Please refer to https://aka.ms/CapacityReservation for more details."
         }
       },
@@ -1359,7 +1359,7 @@
     "VaultSecretGroup": {
       "properties": {
         "sourceVault": {
-          "$ref": "../../../common-types/v1/common.json#/definitions/SubResource",
+          "$ref": "../../common-types/v1/common.json#/definitions/SubResource",
           "description": "The relative URL of the Key Vault containing all of the certificates in VaultCertificates."
         },
         "vaultCertificates": {
@@ -1453,7 +1453,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../common-types/v1/common.json#/definitions/SubResource"
+          "$ref": "../../common-types/v1/common.json#/definitions/SubResource"
         }
       ],
       "description": "Describes a network interface reference.",
@@ -1714,7 +1714,7 @@
           "description": "The number of instances which failed to rollback."
         },
         "rollbackError": {
-          "$ref": "../../../common-types/v1/common.json#/definitions/ApiError",
+          "$ref": "../../common-types/v1/common.json#/definitions/ApiError",
           "readOnly": true,
           "description": "Error details if OS rollback failed."
         }
