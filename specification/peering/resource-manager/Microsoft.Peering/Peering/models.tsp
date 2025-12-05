@@ -659,6 +659,7 @@ model BgpSession {
   /**
    * The MD5 authentication key of the session.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Property 'md5AuthenticationKey' looks like it contains sensitive information. Consider marking it with @secret decorator to ensure it is handled securely."
   md5AuthenticationKey?: string;
 }
 
@@ -1165,6 +1166,7 @@ model PeeringRegisteredAsnProperties {
   /**
    * The peering service prefix key that is to be shared with the customer.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Property 'peeringServicePrefixKey' looks like it contains sensitive information. Consider marking it with @secret decorator to ensure it is handled securely."
   @visibility(Lifecycle.Read)
   peeringServicePrefixKey?: string;
 
@@ -1193,6 +1195,7 @@ model PeeringRegisteredPrefixProperties {
   /**
    * The peering service prefix key that is to be shared with the customer.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Property 'peeringServicePrefixKey' looks like it contains sensitive information. Consider marking it with @secret decorator to ensure it is handled securely."
   @visibility(Lifecycle.Read)
   peeringServicePrefixKey?: string;
 
@@ -1391,6 +1394,7 @@ model PeeringServicePrefixProperties {
   /**
    * The peering service prefix key
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Property 'peeringServicePrefixKey' looks like it contains sensitive information. Consider marking it with @secret decorator to ensure it is handled securely."
   peeringServicePrefixKey?: string;
 
   /**
@@ -1522,6 +1526,7 @@ model LogAnalyticsWorkspaceProperties {
   /**
    * The Workspace Key.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Property 'key' looks like it contains sensitive information. Consider marking it with @secret decorator to ensure it is handled securely."
   @visibility(Lifecycle.Read)
   key?: string;
 
