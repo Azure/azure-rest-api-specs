@@ -89,7 +89,7 @@ import "./back-compatible.tsp";
 import "./Domain.tsp";
 import "./DomainOwnershipIdentifier.tsp";
 import "./TopLevelDomain.tsp";
-import "./routes2.tsp";
+import "./routes.tsp";
 
 import "./models2.tsp";
 import "./back-compatible.tsp";
