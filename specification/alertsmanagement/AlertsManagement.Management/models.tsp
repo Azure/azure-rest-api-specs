@@ -705,6 +705,7 @@ model ErrorResponseBody {
   /**
    * A list of additional details about the error.
    */
+  @identifiers(#[])
   details?: ErrorResponseBody[];
 }
 
@@ -732,6 +733,7 @@ model AlertModificationProperties {
   /**
    * Array of alert modification events.
    */
+  @identifiers(#[])
   modifications?: AlertModificationItem[];
 }
 
@@ -1024,6 +1026,7 @@ model ActionSuppressedDetails extends BaseDetails {
   /**
    * List of suppressed action groups
    */
+  @identifiers(#[])
   suppressedActionGroups?: TriggeredRule[];
 
   /**

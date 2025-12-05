@@ -23,10 +23,10 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
- * AlertsManagement Client
+ * Azure Alerts Management Service provides a single pane of glass of alerts across Azure Monitor.
  */
 @armProviderNamespace
-@service(#{ title: "AlertsManagementClient" })
+@service(#{ title: "Azure Alerts Management Service Resource Provider" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.AlertsManagement;
