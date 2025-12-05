@@ -36,7 +36,7 @@ alias OperationParameter = {
   /** The async operation id. */
   @path
   @minLength(1)
-  @segment("operationId")
+  @segment("operations")
   @key
   @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
   id: string;
