@@ -190,7 +190,7 @@ model ProductBase {
   @doc("Unique product identifier")
   uniqueProductId: string;
 
-  @doc("Specifies the primary deployment model and hosting architecture for the marketplace product stored in the Marketplace Catalog.\n- `None` - Unspecified product type, typically used for products without a defined deployment model\n- `ManagedApplication` - Azure Managed Applications that deploy and manage resources in customer subscriptions\n- `VirtualMachine` - Pre-configured virtual machine images deployable to Azure compute infrastructure\n- `AzureApplication` - Native Azure applications leveraging platform services and APIs\n- `Container` - Containerized applications deployed through Azure Container Instances or similar services\n- `SaaS` - Software as a Service solutions hosted and managed by the publisher\n- `SolutionTemplate` - Azure Resource Manager templates that provision multiple Azure resources\n- `IotEdgeModules` - Modules designed for deployment to Azure IoT Edge runtime environments\n- `ManagedServices` - Fully managed services where the publisher handles infrastructure and operations\n- `ContainerApps` - Applications built for Azure Container Apps serverless container platform\n- `DynamicsOps` - Microsoft Dynamics 365 Finance and Operations applications and extensions\n- `DynamicsCE` - Microsoft Dynamics 365 Customer Engagement applications and customizations\n- `DynamicsBC` - Microsoft Dynamics 365 Business Central applications and add-ons\n- `PowerBI` - Microsoft Power BI reports, dashboards, and data visualization components\n- `ConsultingServices` - Professional services offerings including implementation and advisory services\n- `CosellOnly` - Products available exclusively through Microsoft co-sell partner programs\n- `CoreVirtualMachine` - Core virtual machine offerings with baseline Azure compute capabilities\n- `PowerBIVisuals` - Custom visualizations for Microsoft Power BI reporting platform\n- `Office365` - Microsoft 365 and Office 365 applications, add-ins, and integrations\n- `AADApps` - Azure Active Directory integrated applications supporting organizational identity\n- `AzureServices` - Native Azure platform services and resource providers\n- `AppService` - Web applications hosted on Azure App Service platform\n- `LogAnalytics` - Azure Monitor Log Analytics solutions and workspace configurations\n- `MicrosoftProduct` - First-party Microsoft products available through marketplace channels")
+  @doc("Specifies the primary deployment model and hosting architecture for the marketplace product stored in the Marketplace Catalog. Possible values include, but are not limited to:\n- `None` - Unspecified product type, typically used for products without a defined deployment model\n- `ManagedApplication` - Azure Managed Applications that deploy and manage resources in customer subscriptions\n- `VirtualMachine` - Pre-configured virtual machine images deployable to Azure compute infrastructure\n- `AzureApplication` - Native Azure applications leveraging platform services and APIs\n- `Container` - Containerized applications deployed through Azure Container Instances or similar services\n- `SaaS` - Software as a Service solutions hosted and managed by the publisher\n- `SolutionTemplate` - Azure Resource Manager templates that provision multiple Azure resources\n- `IotEdgeModules` - Modules designed for deployment to Azure IoT Edge runtime environments\n- `ManagedServices` - Fully managed services where the publisher handles infrastructure and operations\n- `ContainerApps` - Applications built for Azure Container Apps serverless container platform\n- `DynamicsOps` - Microsoft Dynamics 365 Finance and Operations applications and extensions\n- `DynamicsCE` - Microsoft Dynamics 365 Customer Engagement applications and customizations\n- `DynamicsBC` - Microsoft Dynamics 365 Business Central applications and add-ons\n- `PowerBI` - Microsoft Power BI reports, dashboards, and data visualization components\n- `ConsultingServices` - Professional services offerings including implementation and advisory services\n- `CosellOnly` - Products available exclusively through Microsoft co-sell partner programs\n- `CoreVirtualMachine` - Core virtual machine offerings with baseline Azure compute capabilities\n- `PowerBIVisuals` - Custom visualizations for Microsoft Power BI reporting platform\n- `Office365` - Microsoft 365 and Office 365 applications, add-ins, and integrations\n- `AADApps` - Azure Active Directory integrated applications supporting organizational identity\n- `AzureServices` - Native Azure platform services and resource providers\n- `AppService` - Web applications hosted on Azure App Service platform\n- `LogAnalytics` - Azure Monitor Log Analytics solutions and workspace configurations\n- `MicrosoftProduct` - First-party Microsoft products available through marketplace channels")
   productType: string;
 
   @doc("Product sub type")
@@ -273,6 +273,21 @@ model ProductBase {
 
   @doc("Used to map SaaS apps to their Azure AD appIds")
   activeDirectoryAppId?: string;
+
+  @doc("Labels used to filter the product")
+  productLabels?: string[];
+
+  @doc("An identifier for publishing services")
+  mixProductId?: string;
+
+  @doc("List of linked Add Ins provided for the item")
+  linkedAddIns?: string[];
+
+  @doc("Data aggregated from product Sku level")
+  skuAggregatedData?: SkuAggregatedData;
+
+  @doc("Maximum quantity allowed on a proposal")
+  maxQuantityOnProposal?: int32;
 }
 
 @doc("Returns a subset of Product attributes")
@@ -314,7 +329,7 @@ model MarketStartPrice {
   currency?: string;
 }
 
-@doc("Summary description of the product")
+@doc("Returns the full set of Product attributes")
 @resource("product")
 model ProductDetails {
   ...ProductBase;
@@ -324,9 +339,6 @@ model ProductDetails {
 
   @doc("List of Images")
   images?: ImageGroup[];
-
-  @doc("List of linked add ins provided for the item")
-  linkedAddIns?: string[];
 
   @doc("List of Links provided for the item")
   links?: LinkProperties[];
@@ -405,6 +417,12 @@ model ProductDetails {
 
   @doc("Full set of plan/SKU attributes")
   plans?: PlanDetails[];
+
+  @doc("Custom passthrough data provided by the publisher")
+  productCustomData?: string;
+
+  @doc("The Id of the service")
+  serviceId?: string;
 }
 
 @doc("Sku object related to given plan")
@@ -440,7 +458,7 @@ model PlanMetadata {
   relatedSkus?: PlanSkuRelation[];
 }
 
-@doc("Returns a subset of Plan attributes")
+@doc("Returns the full set of Plan attributes")
 model PlanDetails {
   ...PlanSummary;
 
@@ -530,6 +548,35 @@ model PlanDetails {
 
   @doc("SKU price related properties")
   offeringProperties?: OfferingProperties[];
+
+  @doc("Plan's artifacts version")
+  planArtifactsVersion?: string;
+}
+
+@doc("Data aggregated from product Sku level")
+model SkuAggregatedData {
+  @doc("Superset of actions aggregated from availabilities and terms across product SKUs")
+  actions?: string[];
+
+  @doc("Superset of sku availability term states")
+  states?: string[];
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "changing this would be a breaking change for existing partners"
+  @doc("There is at least one EndUser Eligible Sku")
+  hasEndUserEligibleSKUs?: boolean;
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "changing this would be a breaking change for existing partners"
+  @doc("There is at least one Admin Eligible Sku")
+  hasAdminEligibleSKUs?: boolean;
+
+  @doc("Superset of Sku features")
+  features?: string[];
+
+  @doc("Superset of Sku programs")
+  programs?: string[];
+
+  @doc("There is at least one Sku with consumption components")
+  hasConsumptionComponents?: boolean;
 }
 
 @doc("Returns a subset of Plan attributes")
@@ -874,7 +921,7 @@ model ListingSkusMarketParameter {
 @doc("Parameters for language selection")
 model LanguageParameter {
   @query
-  @doc("Language to search, ISO 639-1 two-letter code, possible values - 'en,cs,de,es,fr,hu,it,ja,ko,nl,pl,pt-br,pt-pt,ru,sv,tr,id,zh-hans,zh-hant'. Default is \"en\"")
+  @doc("Language to search, ISO 639-1 two-letter code, possible values - 'en,cs,de,es,fr,hu,it,ja,ko,nl,pl,pt-br,pt-pt,ru,sv,tr,zh-hans,zh-hant'. Default is \"en\"")
   language?: string = "en";
 }
 

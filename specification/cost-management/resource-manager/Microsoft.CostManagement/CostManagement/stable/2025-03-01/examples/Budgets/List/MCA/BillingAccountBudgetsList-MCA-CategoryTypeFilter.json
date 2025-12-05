@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "$filter": "properties/category eq 'ReservationUtilization'",
+    "api-version": "2025-03-01",
+    "billingAccountId": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee:ffffffff-gggg-hhhh-iiii-jjjjjjjjjjjj_2023-04-01",
+    "scope": "providers/Microsoft.Billing/billingAccounts/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee:ffffffff-gggg-hhhh-iiii-jjjjjjjjjjjj_2023-04-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "TestRUAlert",
+            "type": "Microsoft.CostManagement/budgets",
+            "eTag": "\"1d34d012214157f\"",
+            "id": "/providers/Microsoft.Billing/billingAccounts/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee:ffffffff-gggg-hhhh-iiii-jjjjjjjjjjjj_2023-04-01/billingProfiles/KKKK-LLLL-MMM-NNN/providers/Microsoft.CostManagement/budgets/TestRUAlert",
+            "properties": {
+              "category": "ReservationUtilization",
+              "filter": {},
+              "notifications": {
+                "Actual_LessThan_99_Percent": {
+                  "contactEmails": [
+                    "johndoe@contoso.com",
+                    "janesmith@contoso.com"
+                  ],
+                  "enabled": true,
+                  "frequency": "Daily",
+                  "locale": "en-us",
+                  "operator": "LessThan",
+                  "threshold": 99
+                }
+              },
+              "timeGrain": "Last30Days",
+              "timePeriod": {
+                "endDate": "2025-04-01T00:00:00Z",
+                "startDate": "2023-04-01T00:00:00Z"
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Budgets_List",
+  "title": "BillingAccountBudgetsList-MCA-CategoryTypeFilter"
+}
