@@ -190,7 +190,6 @@ using Microsoft.DataBoxEdge;
 @@visibility(Alert.properties, Lifecycle.Read);
 @@visibility(NetworkSettings.properties, Lifecycle.Read);
 
-@@OpenAPI.extension(DataBoxEdgeSkuList.value,
-  "x-ms-identifiers",
+@@Azure.ResourceManager.identifiers(DataBoxEdgeSkuList.value,
   #["name", "resourceType"]
 );
