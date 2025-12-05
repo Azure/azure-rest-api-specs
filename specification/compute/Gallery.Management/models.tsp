@@ -2,6 +2,7 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "../ComputeCommon.Management/models.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -81,28 +82,6 @@ union GalleryExpandParams {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   `SharingProfile/Groups`: "SharingProfile/Groups",
-}
-
-/**
- * The hypervisor generation of the Virtual Machine. Applicable to OS disks only.
- */
-union HyperVGeneration {
-  string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  V1: "V1",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  V2: "V2",
-}
-
-/**
- * The architecture of the image. Applicable to OS disks only.
- */
-union Architecture {
-  string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  x64: "x64",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  Arm64: "Arm64",
 }
 
 /**
@@ -343,35 +322,6 @@ union SharedGalleryHostCaching {
 }
 
 /**
- * The type of identity used for the gallery. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove all identities from the gallery.
- */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
-enum ResourceIdentityType {
-  SystemAssigned,
-  UserAssigned,
-  `SystemAssigned, UserAssigned`,
-  None,
-}
-
-/**
- * This property allows you to specify the supported type of the OS that application is built for. Possible values are: **Windows,** **Linux.**
- */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
-enum OperatingSystemTypes {
-  Windows,
-  Linux,
-}
-
-/**
- * This property allows the user to specify whether the virtual machines created under this image are 'Generalized' or 'Specialized'.
- */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
-enum OperatingSystemStateTypes {
-  Generalized,
-  Specialized,
-}
-
-/**
  * The host caching of the disk. Valid values are 'None', 'ReadOnly', and 'ReadWrite'
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
@@ -596,21 +546,6 @@ model GalleryIdentity {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   userAssignedIdentities?: Record<UserAssignedIdentitiesValue>;
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-model UserAssignedIdentitiesValue {
-  /**
-   * The principal id of user assigned identity.
-   */
-  @visibility(Lifecycle.Read)
-  principalId?: string;
-
-  /**
-   * The client id of user assigned identity.
-   */
-  @visibility(Lifecycle.Read)
-  clientId?: string;
 }
 
 /**
