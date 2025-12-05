@@ -287,7 +287,7 @@
       "name": "typeahead",
       "x-ms-client-name": "isTypeAhead",
       "in": "query",
-      "description": "Boolean. If the typeahead flag is set, the query will be interpreted as a partial input and the search will enter predictive mode",
+      "description": "If the typeahead flag is set, the query will be interpreted as a partial input and the search will enter predictive mode.",
       "type": "boolean",
       "x-ms-parameter-location": "method"
     },
@@ -924,7 +924,12 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/Typeahead"
+            "name": "typeahead",
+            "x-ms-client-name": "isTypeAhead",
+            "in": "query",
+            "description": "If the typeahead flag is set, the query will be interpreted as a partial input and the search will enter predictive mode.\n\n**Important**: This property is deprecated and may be omitted from the response.",
+            "type": "boolean",
+            "x-ms-parameter-location": "method"
           },
           {
             "$ref": "#/parameters/LimitSearch"
@@ -1025,7 +1030,7 @@
             "name": "number",
             "x-ms-client-name": "streetNumber",
             "in": "query",
-            "description": "Street number as a string. If a number is sent in along with the request, the response may include the side of the street (Left/Right) and also an offset position for that number",
+            "description": "Street number as a string. If a number is sent in along with the request, the response may include the side of the street (Left/Right) and also an offset position for that number.",
             "type": "string"
           },
           {
@@ -1199,7 +1204,7 @@
           {
             "name": "crossStreet",
             "in": "query",
-            "description": "The cross street name for the structured address",
+            "description": "The cross street name for the structured address.",
             "type": "string"
           },
           {
@@ -1909,7 +1914,7 @@
           "readOnly": true
         },
         "queryType": {
-          "description": "The type of query being returned: NEARBY or NON_NEAR.",
+          "description": "The type of query being returned: NEARBY or NON_NEAR.\n\n**Important**: This property is deprecated and may be omitted from the response.",
           "type": "string",
           "readOnly": true,
           "enum": [
@@ -1923,7 +1928,7 @@
               {
                 "value": "NEARBY",
                 "name": "NEARBY",
-                "description": "Search was performed around a certain latitude and longitude with a defined radius"
+                "description": "Search was performed around a certain latitude and longitude with a defined radius."
               },
               {
                 "value": "NON_NEAR",
@@ -2371,32 +2376,32 @@
       }
     },
     "Address": {
-      "description": "The address of the result",
+      "description": "The address of the result.",
       "type": "object",
       "readOnly": true,
       "properties": {
         "buildingNumber": {
-          "description": "The building number on the street.\n**Important**: This property is *deprecated*. Use `streetNumber` instead.",
+          "description": "The building number on the street.\n\n**Important**: This property is *deprecated*. Use `streetNumber` instead.",
           "type": "string",
           "readOnly": true
         },
         "street": {
-          "description": "The street name.\n**Important**: This property is *deprecated*. Use `streetName` instead.",
+          "description": "The street name.\n\n**Important**: This property is *deprecated*. Use `streetName` instead.",
           "type": "string",
           "readOnly": true
         },
         "crossStreet": {
-          "description": "The name of the street being crossed.",
+          "description": "The name of the street being crossed.\n\nThis property is only available in the `Get Search Address Reverse Cross Street` API.",
           "type": "string",
           "readOnly": true
         },
         "streetNumber": {
-          "description": "The building number on the street.",
+          "description": "The building number on the street.\n\nNot available in the `Get Search Address Reverse Cross Street` API.",
           "type": "string",
           "readOnly": true
         },
         "routeNumbers": {
-          "description": "The codes used to unambiguously identify the street",
+          "description": "The codes used to unambiguously identify the street.\n\nOnly available for the Search Address Reverse APIs.",
           "type": "array",
           "items": {
             "type": "string",
@@ -2410,7 +2415,7 @@
           "readOnly": true
         },
         "streetNameAndNumber": {
-          "description": "The street name and number.\nOnly available for the Search Address Reverse APIs.",
+          "description": "The street name and number.\n\nOnly available for the Search Address Reverse APIs.",
           "type": "string",
           "readOnly": true
         },
@@ -2420,67 +2425,67 @@
           "readOnly": true
         },
         "municipality": {
-          "description": "City / Town <BR>Note:  `municipality` represents the residential municipality. Depending on the location, the `municipality` value may differ from the commonly known name of a city or town. For the commonly known name of the city or town, it’s suggested that the `localName` value be used instead of the `municipality` value.",
-          "type": "string",
-          "readOnly": true
-        },
-        "municipalitySubdivision": {
-          "description": "Sub / Super City",
+          "description": "City / Town <BR>Note:  `municipality` represents the residential municipality. Depending on the location, the `municipality` value may differ from the commonly known name of a city or town. For the commonly known name of the city or town, it's suggested that the `localName` value be used instead of the `municipality` value.",
           "type": "string",
           "readOnly": true
         },
         "countrySubdivision": {
-          "description": "State or Province",
-          "type": "string",
-          "readOnly": true
-        },
-        "countrySubdivisionCode": {
-          "description": "`countrySubdivisionCode` prefixed by `countryCode` ( countryCode-countrySubdivisionCode ) and the hyphen forms the ISO 3166-2 code. Examples: TX for Texas, SCT for Scotland and ON for Ontario.",
-          "type": "string",
-          "readOnly": true
-        },
-        "countryTertiarySubdivision": {
-          "description": "Named Area",
+          "description": "The primary administrative division within a country, such as a state, province. It is used to represent the first-level subdivision below the national level.",
           "type": "string",
           "readOnly": true
         },
         "countrySecondarySubdivision": {
-          "description": "County",
+          "description": "The second-level administrative division within a country/region. It identifies a subdivision that is below the primary subdivision, such as state or province, but above smaller units like municipalities or neighborhoods. Examples include *County* in the United States and *District* in the United Kingdom.",
           "type": "string",
           "readOnly": true
         },
-        "postalCode": {
-          "description": "Postal Code / Zip Code",
+        "countryTertiarySubdivision": {
+          "description": "The third-level administrative division within a country/region. It provides even finer granularity than the secondary subdivision (such as county or district). Examples include municipalities such as a city, town, village, borough, or township and neighborhoods a smaller, informal geographic area within a municipality such as Capitol Hill, Green Lake, and Wallingford in Seattle.",
           "type": "string",
           "readOnly": true
         },
-        "extendedPostalCode": {
-          "description": "Extended postal code (availability is dependent on the region).",
-          "type": "string",
-          "readOnly": true
-        },
-        "countryCode": {
-          "description": "Country (Note: This is a two-letter code, not a country/region name.)",
-          "type": "string",
-          "readOnly": true
-        },
-        "country": {
-          "description": "country/region name",
-          "type": "string",
-          "readOnly": true
-        },
-        "countryCodeISO3": {
-          "description": "ISO alpha-3 country code",
-          "type": "string",
-          "readOnly": true
-        },
-        "freeformAddress": {
-          "description": "An address line formatted according to the formatting rules of a Result's country/region of origin, or in the case of a country/region, its full country/region name.",
+        "municipalitySubdivision": {
+          "description": "A subdivision within a municipality. It represents a smaller administrative or geographic unit inside a city, town, or other municipal entity.",
           "type": "string",
           "readOnly": true
         },
         "countrySubdivisionName": {
-          "description": "The full name of a first level of country/region administrative hierarchy. This field appears only in case countrySubdivision is presented in an abbreviated form. Only supported for USA, Canada, and United Kingdom.",
+          "description": "Represents the full name of the first-level administrative division (such as state, province, or region) within a country or region. This property is included only when the `countrySubdivision` value is provided in abbreviated form. Currently supported for the United States, Canada, and the United Kingdom.",
+          "type": "string",
+          "readOnly": true
+        },
+        "countrySubdivisionCode": {
+          "description": "`countrySubdivisionCode` prefixed by `countryCode` ( countryCode-countrySubdivisionCode ) and the hyphen forms the ISO 3166-2 code. Examples: TX for Texas, SCT for Scotland and ON for Ontario.\n\nThis property is not available in the `Get Search Nearby` and `Get Search POI` API.",
+          "type": "string",
+          "readOnly": true
+        },
+        "postalCode": {
+          "description": "A series of numbers or letters (or both) added to an address to help identify a specific geographic area. A ZIP Code is the U.S. version of a postal code, other countries/regions use other formats such as Postcode, PIN Code and PLZ.",
+          "type": "string",
+          "readOnly": true
+        },
+        "extendedPostalCode": {
+          "description": "An extended postal code refers to a postal code format that goes beyond the standard set of digits to provide greater location precision. It is commonly used in systems like the U.S. ZIP+4 code or similar extended formats in other countries/regions. Availability is dependent on the region.\n\nNot available in the `Get Search Address Reverse Cross Street` API.",
+          "type": "string",
+          "readOnly": true
+        },
+        "country": {
+          "description": "The country/region name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "countryCode": {
+          "description": "A two-letter alphabetic code defined by the ISO 3166-1 Alpha-2 standard to represent a country/region and dependent territories.",
+          "type": "string",
+          "readOnly": true
+        },
+        "countryCodeISO3": {
+          "description": "A three-letter alphabetic code defined by the ISO 3166-1 Alpha-3 standard to represent a country/region and dependent territories.",
+          "type": "string",
+          "readOnly": true
+        },
+        "freeformAddress": {
+          "description": "An address line formatted according to the formatting rules of a result's country/region of origin, or in the case of a country/region, its full country/region name.",
           "type": "string",
           "readOnly": true
         },
@@ -2603,7 +2608,7 @@
       }
     },
     "Score": {
-      "description": "The value within a result set to indicate the relative matching score between results.  You can use this to  determine that result x is twice as likely to be as relevant as result y if the value of x is 2x the value of y.   The values vary between queries and is only meant as a relative value for one result set.",
+      "description": "The value within a result set to indicate the relative matching score between results.  You can use this to  determine that result x is twice as likely to be as relevant as result y if the value of x is 2x the value of y.   The values vary between queries and is only meant as a relative value for one result set.\n\n**Important**: This property is deprecated and may be omitted from the response.",
       "type": "number",
       "format": "double",
       "readOnly": true
