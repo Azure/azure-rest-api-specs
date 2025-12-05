@@ -20,3 +20,6 @@ using Azure.ClientGenerator.Core;
   "TranslationTargets",
   "java"
 );
+
+@@clientName(TextTranslation.TranslateBody, "TranslateInputs", "java");
+@@clientName(TextTranslation.TransliterateBody, "TransliterateInputs", "java");
