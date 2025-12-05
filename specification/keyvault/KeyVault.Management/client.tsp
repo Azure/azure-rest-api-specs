@@ -34,7 +34,7 @@ using Azure.Core;
   "csharp"
 );
 @@clientName(CheckMhsmNameAvailabilityParameters,
-  "ManagedHsmNameAvailabilityParameters",
+  "ManagedHsmNameAvailabilityContent",
   "csharp"
 );
 @@clientName(ActivationStatus,
@@ -148,11 +148,14 @@ using Azure.Core;
   "csharp"
 );
 @@clientName(MhsmNetworkRuleSet, "ManagedHsmNetworkRuleSet", "csharp");
+@@clientName(MhsmNetworkRuleSet.ipRules, "IPRules", "csharp");
 @@alternateType(VaultProperties.tenantId, uuid, "csharp");
 @@alternateType(VaultProperties.vaultUri, url, "csharp");
 @@clientName(MhsmPrivateEndpoint, "ManagedHsmPrivateEndpoint", "csharp");
 @@clientName(MhsmVirtualNetworkRule, "ManagedHsmVirtualNetworkRule", "csharp");
 @@alternateType(MhsmVirtualNetworkRule.id, armResourceIdentifier, "csharp");
+@@clientName(MhsmVirtualNetworkRule.id, "SubnetId", "csharp");
+@@clientName(SecretCreateOrUpdateParameters, "KeyVaultSecretCreateOrUpdateContent", "csharp");
 @@clientName(MhsmPrivateLinkServiceConnectionState,
   "ManagedHsmPrivateLinkServiceConnectionState",
   "csharp"
@@ -260,6 +263,7 @@ using Azure.Core;
 @@clientName(DeletedVaults.getDeleted, "get", "csharp");
 @@clientName(DeletedManagedHsms.getDeleted, "get", "csharp");
 @@clientName(VaultCreateOrUpdateParameters, "KeyVaultCreateOrUpdateContent", "csharp");
+@@alternateType(MhsmPrivateEndpoint.id, armResourceIdentifier, "csharp");
 
 // Java-specific client configurations
 @@clientName(IPRule, "IpRule", "java");
