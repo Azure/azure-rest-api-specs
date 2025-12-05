@@ -1492,7 +1492,7 @@ alias BlobContentLengthResponseHeader = {
 alias BlobContentLengthRequired = {
   /** This header specifies the maximum size for the page blob, up to 1 TB. The page blob size must be aligned to a 512-byte boundary. */
   @header("x-ms-blob-content-length")
-  blobContentLength: int64;
+  size: int64;
 };
 
 /** The deny encryption scope override response header. */
