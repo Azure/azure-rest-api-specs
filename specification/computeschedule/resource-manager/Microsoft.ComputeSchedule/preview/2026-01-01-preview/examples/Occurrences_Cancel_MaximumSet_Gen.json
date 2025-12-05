@@ -1,0 +1,38 @@
+{
+  "title": "Occurrences_Cancel_MaximumSet",
+  "operationId": "Occurrences_Cancel",
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "subscriptionId": "4F73D9F5-A38C-44CB-9BE3-2F1EC42137A5",
+    "resourceGroupName": "rgcomputeschedule",
+    "scheduledActionName": "scheduledaction-test01",
+    "occurrenceId": "01234567-89ab-cdef-0123-456789abcdef",
+    "body": {
+      "resourceIds": [
+        "/subscriptions/4F73D9F5-A38C-44CB-9BE3-2F1EC42137A5/resourceGroups/rgcomputeschedule/providers/Microsoft.Compute/virtualMachines/testVM1"
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "totalResources": 21,
+        "resourcesStatuses": [
+          {
+            "resourceId": "/subscriptions/4F73D9F5-A38C-44CB-9BE3-2F1EC42137A5/resourceGroups/rgcomputeschedule/providers/Microsoft.Compute/virtualMachines/testVM1",
+            "status": "Succeeded",
+            "error": {
+              "code": "qdoi",
+              "message": "sscbadevmxudkgvc",
+              "target": "jgxczrmikdgpcwlltcu",
+              "details": [],
+              "innererror": {
+                "code": "yujumrcdflvg"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}
