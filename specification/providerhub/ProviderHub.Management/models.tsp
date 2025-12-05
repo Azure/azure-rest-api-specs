@@ -4125,7 +4125,6 @@ model OperationsContentProperties {
   /**
    * Operations content.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @identifiers(#["name"])
   contents?: LocalizedOperationDefinition[];
 }
@@ -4278,7 +4277,6 @@ model ResourceTypeRegistrationArrayResponseWithContinuation
   is Azure.Core.Page<ResourceTypeRegistration>;
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SkuResourceProperties extends ResourceTypeSku {}
@@ -4476,7 +4474,6 @@ model ResourceManagementAction {
   /**
    * resource management action content.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @identifiers(#["resourceId"])
   resources?: ResourceManagementEntity[];
 }
@@ -4726,7 +4723,6 @@ model OperationsContent extends Azure.ResourceManager.CommonTypes.Resource {
   /**
    * Operations content.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: OperationsDefinition;
 }
 
@@ -4753,19 +4749,17 @@ model GroupConnectivityInformation {
   redirectMapId?: string;
 }
 
-/**
- * aaaaaaaaaaaaaaa
- */
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model OperationsDefinitionArrayResponseWithContinuation {
   /**
-   * aaaaaaaaaaaaaaaa
+   * The value.
    */
   @pageItems
   @identifiers(#["name"])
   value?: OperationsDefinition[];
 
   /**
-   * aaaaaaaaaaaaaaa
+   * The URL to get to the next set of results, if there are any.
    */
   @nextLink
   nextLink?: string;

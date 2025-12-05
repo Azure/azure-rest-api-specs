@@ -985,6 +985,7 @@
             "description": "The rollout name.",
             "required": true,
             "type": "string",
+            "maxLength": 260,
             "pattern": "^[-\\w\\._\\(\\)]+$"
           }
         ],
@@ -1034,6 +1035,7 @@
             "description": "The rollout name.",
             "required": true,
             "type": "string",
+            "maxLength": 260,
             "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
@@ -1114,6 +1116,7 @@
             "description": "The rollout name.",
             "required": true,
             "type": "string",
+            "maxLength": 260,
             "pattern": "^[-\\w\\._\\(\\)]+$"
           }
         ],
@@ -1165,6 +1168,7 @@
             "description": "The rollout name.",
             "required": true,
             "type": "string",
+            "maxLength": 260,
             "pattern": "^[-\\w\\._\\(\\)]+$"
           }
         ],
@@ -1411,21 +1415,28 @@
             "description": "",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DefaultRollout"
+              "$ref": "#/definitions/FrontloadPayload"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'DefaultRollout' update operation succeeded",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/DefaultRollout"
             }
           },
           "201": {
-            "description": "Resource 'DefaultRollout' create operation succeeded",
+            "description": "Azure create operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/DefaultRollout"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -6071,11 +6082,10 @@
     },
     "OperationsDefinitionArrayResponseWithContinuation": {
       "type": "object",
-      "description": "aaaaaaaaaaaaaaa",
       "properties": {
         "value": {
           "type": "array",
-          "description": "aaaaaaaaaaaaaaaa",
+          "description": "The value.",
           "items": {
             "$ref": "#/definitions/OperationsDefinition"
           },
@@ -6085,7 +6095,7 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "aaaaaaaaaaaaaaa"
+          "description": "The URL to get to the next set of results, if there are any."
         }
       }
     },

@@ -43,6 +43,7 @@ interface DefaultRolloutOps
         @path
         @segment("defaultRollouts")
         @key
+        @maxLength(260)
         @pattern("^[-\\w\\._\\(\\)]+$")
         rolloutName: string,
       }
@@ -76,7 +77,11 @@ interface DefaultRollouts {
   /**
    * Stops or cancels the rollout, if in progress.
    */
-  stop is DefaultRolloutOps.ActionSync<DefaultRollout, void, OkResponse>;
+  stop is DefaultRolloutOps.ActionSync<
+    DefaultRollout,
+    Request = void,
+    Response = OkResponse
+  >;
 }
 @armResourceOperations
 interface NewRegionFrontloadReleaseOps
@@ -113,7 +118,10 @@ interface NewRegionFrontloadRelease {
   /**
    * Creates or updates a new region frontload release.
    */
-  createOrUpdate is NewRegionFrontloadReleaseOps.CreateOrUpdateSync<DefaultRollout>;
+  createOrUpdate is NewRegionFrontloadReleaseOps.CreateOrUpdateSync<
+    FrontloadPayload,
+    Response = DefaultRollout | ArmCreatedResponse<DefaultRollout>
+  >;
 
   /**
    * Stops a new region frontload release.

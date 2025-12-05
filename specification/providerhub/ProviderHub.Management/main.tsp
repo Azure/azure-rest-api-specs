@@ -50,7 +50,7 @@ enum Versions {
 }
 
 /**
- * aaaaaaaaaaaaa
+ * Lists all the operations supported by Microsoft.ProviderHub.
  */
 interface Operations
   extends Azure.ResourceManager.Legacy.Operations<
