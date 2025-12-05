@@ -35,8 +35,7 @@ These settings apply only when `--tag=package-2025-04-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2025-04-01-preview'
 input-file:
-  - Microsoft.Portal/preview/2025-04-01-preview/portal.json
-  - Microsoft.Portal/preview/2025-04-01-preview/tenantConfiguration.json
+  - preview/2025-04-01-preview/portal.json
 ```
 
 ### Tag: package-2022-12-01-preview
@@ -45,8 +44,7 @@ These settings apply only when `--tag=package-2022-12-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2022-12-01-preview'
 input-file:
-  - Microsoft.Portal/preview/2022-12-01-preview/portal.json
-  - Microsoft.Portal/preview/2022-12-01-preview/tenantConfiguration.json
+  - preview/2022-12-01-preview/portal.json
 ```
 
 ### Tag: package-2020-09-01-preview
@@ -55,17 +53,16 @@ These settings apply only when `--tag=package-2020-09-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2020-09-01-preview'
 input-file:
-  - Microsoft.Portal/preview/2020-09-01-preview/portal.json
-  - Microsoft.Portal/preview/2020-09-01-preview/tenantConfiguration.json
+  - preview/2020-09-01-preview/portal.json
 ```
+
 ### Tag: package-2019-01-01-preview
 
 These settings apply only when `--tag=package-2019-01-01-preview` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2019-01-01-preview'
 input-file:
-  - Microsoft.Portal/preview/2019-01-01-preview/portal.json
-  - Microsoft.Portal/preview/2019-01-01-preview/tenantConfiguration.json
+  - preview/2019-01-01-preview/portal.json
 ```
 
 ### Tag: package-2018-10-01-preview
@@ -74,7 +71,7 @@ These settings apply only when `--tag=package-2018-10-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2018-10-01-preview'
 input-file:
-  - Microsoft.Portal/preview/2018-10-01-preview/portal.json
+  - preview/2018-10-01-preview/portal.json
 ```
 
 ### Tag: package-2015-08-01-preview
@@ -83,7 +80,7 @@ These settings apply only when `--tag=package-2015-08-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2015-08-01-preview'
 input-file:
-  - Microsoft.Portal/preview/2015-08-01-preview/portal.json
+  - preview/2015-08-01-preview/portal.json
 ```
 
 ---
@@ -133,6 +130,3 @@ See configuration in [readme.csharp.md](./readme.csharp.md)
 ## NodeJS
 
 See configuration in [readme.nodejs.md](./readme.nodejs.md)
-
-
-
