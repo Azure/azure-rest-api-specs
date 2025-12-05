@@ -1145,7 +1145,7 @@ model PrometheusEnrichmentItem is AlertEnrichmentItem {
   query: string;
 }
 
-alias PrometheusEnrichmentItemPrperties = {
+alias PrometheusEnrichmentItemProperties = {
   /**
    * Link to Prometheus query API (Url format).
    */
@@ -1174,7 +1174,7 @@ alias PrometheusEnrichmentItemPrperties = {
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(PrometheusEnrichmentItem)
 model PrometheusInstantQuery extends AlertEnrichmentItem {
-  ...PrometheusEnrichmentItemPrperties;
+  ...PrometheusEnrichmentItemProperties;
 
   /**
    * The date and the time of the evaluation.
@@ -1194,7 +1194,7 @@ model PrometheusInstantQuery extends AlertEnrichmentItem {
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(PrometheusEnrichmentItem)
 model PrometheusRangeQuery extends AlertEnrichmentItem {
-  ...PrometheusEnrichmentItemPrperties;
+  ...PrometheusEnrichmentItemProperties;
 
   /**
    * The start evaluation date and time in ISO8601 format.
