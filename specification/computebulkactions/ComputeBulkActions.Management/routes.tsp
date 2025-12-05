@@ -46,12 +46,14 @@ interface BulkActions {
   cancel is ArmResourceActionAsync<
     Resource = LocationBasedLaunchBulkInstancesOperation,
     Request = void,
+    Parameters = LaunchBulkInstancesOperationId,
     Response = LocationBasedLaunchBulkInstancesOperation
   >;
 
   @doc("List LaunchBulkInstancesOperation resources by resource group.")
   @get
   @autoRoute
+  @action("launchBulkInstancesOperations")
   @list
   @listsResource(LaunchBulkInstancesOperation)
   @armResourceList(LocationBasedLaunchBulkInstancesOperation)
@@ -64,6 +66,7 @@ interface BulkActions {
   @doc("List LaunchBulkInstancesOperation resources by subscriptionId.")
   @get
   @autoRoute
+  @action("launchBulkInstancesOperations")
   @list
   @listsResource(LaunchBulkInstancesOperation)
   @armResourceList(LocationBasedLaunchBulkInstancesOperation)
