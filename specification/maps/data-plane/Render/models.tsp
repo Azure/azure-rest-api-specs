@@ -413,9 +413,9 @@ model ErrorAdditionalInfo {
   /**
    * The additional info.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Existing API contract."
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Existing API contract."
   @visibility(Lifecycle.Read)
-  info?: unknown;
+  info?: Record<unknown>;
 }
 
 /**
@@ -426,6 +426,7 @@ model MapTileset {
    * Describes the version of the TileJSON spec that is implemented by this JSON
    * object.
    */
+  @visibility(Lifecycle.Read)
   @pattern("\\d+\\.\\d+\\.\\d+\\w?[\\w\\d]*")
   tilejson?: string;
 
@@ -433,18 +434,21 @@ model MapTileset {
    * A name describing the tileset. The name can contain any legal character.
    * Implementations SHOULD NOT interpret the name as HTML.
    */
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * Text description of the tileset. The description can contain any legal
    * character. Implementations SHOULD NOT interpret the description as HTML.
    */
+  @visibility(Lifecycle.Read)
   description?: string;
 
   /**
    * A semver.org style version number for the tiles contained within the tileset.
    * When changes across tiles are introduced, the minor version MUST change.
    */
+  @visibility(Lifecycle.Read)
   @pattern("\\d+\\.\\d+\\.\\d+\\w?[\\w\\d]*")
   version?: string;
 
@@ -453,11 +457,13 @@ model MapTileset {
    * treat this as HTML or literal text. For security reasons, make absolutely sure
    * that this field can't be abused as a vector for XSS or beacon tracking.
    */
+  @visibility(Lifecycle.Read)
   attribution?: string;
 
   /**
    * A mustache template to be used to format data from grids for interaction.
    */
+  @visibility(Lifecycle.Read)
   template?: string;
 
   /**
@@ -465,12 +471,14 @@ model MapTileset {
    * as HTML or literal text. For security reasons, make absolutely sure that this
    * field can't be abused as a vector for XSS or beacon tracking.
    */
+  @visibility(Lifecycle.Read)
   legend?: string;
 
   /**
    * Default: "xyz". Either "xyz" or "tms". Influences the y direction of the tile
    * coordinates. The global-mercator (aka Spherical Mercator) profile is assumed.
    */
+  @visibility(Lifecycle.Read)
   scheme?: string;
 
   /**
@@ -478,21 +486,25 @@ model MapTileset {
    * use any combination of endpoints. All endpoints MUST return the same content
    * for the same URL. The array MUST contain at least one endpoint.
    */
+  @visibility(Lifecycle.Read)
   tiles?: string[];
 
   /**
    * An array of interactivity endpoints.
    */
+  @visibility(Lifecycle.Read)
   grids?: string[];
 
   /**
    * An array of data files in GeoJSON format.
    */
+  @visibility(Lifecycle.Read)
   data?: string[];
 
   /**
    * The minimum zoom level.
    */
+  @visibility(Lifecycle.Read)
   @minValue(0)
   @maxValue(30)
   minzoom?: int32;
@@ -500,6 +512,7 @@ model MapTileset {
   /**
    * The maximum zoom level.
    */
+  @visibility(Lifecycle.Read)
   @minValue(0)
   @maxValue(30)
   maxzoom?: int32;
@@ -510,6 +523,7 @@ model MapTileset {
    * values, in the order left, bottom, right, top. Values may be integers or
    * floating point numbers.
    */
+  @visibility(Lifecycle.Read)
   bounds?: float32[];
 
   /**
@@ -517,6 +531,7 @@ model MapTileset {
    * The zoom level MUST be between minzoom and maxzoom. Implementations can use
    * this value to set the default location.
    */
+  @visibility(Lifecycle.Read)
   center?: float32[];
 }
 
@@ -527,6 +542,7 @@ model MapAttribution {
   /**
    * A list of copyright strings.
    */
+  @visibility(Lifecycle.Read)
   copyrights?: string[];
 }
 

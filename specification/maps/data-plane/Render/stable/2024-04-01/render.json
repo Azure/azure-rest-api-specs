@@ -1847,7 +1847,9 @@
           "readOnly": true
         },
         "info": {
+          "type": "object",
           "description": "The additional info.",
+          "additionalProperties": {},
           "readOnly": true
         }
       }
@@ -2058,7 +2060,8 @@
           "description": "A list of copyright strings.",
           "items": {
             "type": "string"
-          }
+          },
+          "readOnly": true
         }
       }
     },
@@ -2093,71 +2096,84 @@
         "tilejson": {
           "type": "string",
           "description": "Describes the version of the TileJSON spec that is implemented by this JSON\nobject.",
-          "pattern": "\\d+\\.\\d+\\.\\d+\\w?[\\w\\d]*"
+          "pattern": "\\d+\\.\\d+\\.\\d+\\w?[\\w\\d]*",
+          "readOnly": true
         },
         "name": {
           "type": "string",
-          "description": "A name describing the tileset. The name can contain any legal character.\nImplementations SHOULD NOT interpret the name as HTML."
+          "description": "A name describing the tileset. The name can contain any legal character.\nImplementations SHOULD NOT interpret the name as HTML.",
+          "readOnly": true
         },
         "description": {
           "type": "string",
-          "description": "Text description of the tileset. The description can contain any legal\ncharacter. Implementations SHOULD NOT interpret the description as HTML."
+          "description": "Text description of the tileset. The description can contain any legal\ncharacter. Implementations SHOULD NOT interpret the description as HTML.",
+          "readOnly": true
         },
         "version": {
           "type": "string",
           "description": "A semver.org style version number for the tiles contained within the tileset.\nWhen changes across tiles are introduced, the minor version MUST change.",
-          "pattern": "\\d+\\.\\d+\\.\\d+\\w?[\\w\\d]*"
+          "pattern": "\\d+\\.\\d+\\.\\d+\\w?[\\w\\d]*",
+          "readOnly": true
         },
         "attribution": {
           "type": "string",
-          "description": "Copyright attribution to be displayed on the map. Implementations MAY decide to\ntreat this as HTML or literal text. For security reasons, make absolutely sure\nthat this field can't be abused as a vector for XSS or beacon tracking."
+          "description": "Copyright attribution to be displayed on the map. Implementations MAY decide to\ntreat this as HTML or literal text. For security reasons, make absolutely sure\nthat this field can't be abused as a vector for XSS or beacon tracking.",
+          "readOnly": true
         },
         "template": {
           "type": "string",
-          "description": "A mustache template to be used to format data from grids for interaction."
+          "description": "A mustache template to be used to format data from grids for interaction.",
+          "readOnly": true
         },
         "legend": {
           "type": "string",
-          "description": "A legend to be displayed with the map. Implementations MAY decide to treat this\nas HTML or literal text. For security reasons, make absolutely sure that this\nfield can't be abused as a vector for XSS or beacon tracking."
+          "description": "A legend to be displayed with the map. Implementations MAY decide to treat this\nas HTML or literal text. For security reasons, make absolutely sure that this\nfield can't be abused as a vector for XSS or beacon tracking.",
+          "readOnly": true
         },
         "scheme": {
           "type": "string",
-          "description": "Default: \"xyz\". Either \"xyz\" or \"tms\". Influences the y direction of the tile\ncoordinates. The global-mercator (aka Spherical Mercator) profile is assumed."
+          "description": "Default: \"xyz\". Either \"xyz\" or \"tms\". Influences the y direction of the tile\ncoordinates. The global-mercator (aka Spherical Mercator) profile is assumed.",
+          "readOnly": true
         },
         "tiles": {
           "type": "array",
           "description": "An array of tile endpoints. If multiple endpoints are specified, clients may\nuse any combination of endpoints. All endpoints MUST return the same content\nfor the same URL. The array MUST contain at least one endpoint.",
           "items": {
             "type": "string"
-          }
+          },
+          "readOnly": true
         },
         "grids": {
           "type": "array",
           "description": "An array of interactivity endpoints.",
           "items": {
             "type": "string"
-          }
+          },
+          "readOnly": true
         },
         "data": {
           "type": "array",
           "description": "An array of data files in GeoJSON format.",
           "items": {
             "type": "string"
-          }
+          },
+          "readOnly": true
         },
         "minzoom": {
           "type": "integer",
           "format": "int32",
           "description": "The minimum zoom level.",
           "minimum": 0,
-          "maximum": 30
+          "maximum": 30,
+          "readOnly": true
         },
         "maxzoom": {
           "type": "integer",
           "format": "int32",
           "description": "The maximum zoom level.",
           "minimum": 0,
-          "maximum": 30
+          "maximum": 30,
+          "readOnly": true
         },
         "bounds": {
           "type": "array",
@@ -2165,7 +2181,8 @@
           "items": {
             "type": "number",
             "format": "float"
-          }
+          },
+          "readOnly": true
         },
         "center": {
           "type": "array",
@@ -2173,7 +2190,8 @@
           "items": {
             "type": "number",
             "format": "float"
-          }
+          },
+          "readOnly": true
         }
       }
     },
