@@ -113,7 +113,7 @@ interface P2SVpnGateways {
   reset is ArmResourceActionAsync<
     P2SVpnGateway,
     void,
-    ArmResponse<P2SVpnGateway>,
+    P2SVpnGateway,
     Error = CloudError
   >;
 
@@ -126,7 +126,7 @@ interface P2SVpnGateways {
   generateVpnProfile is ArmResourceActionAsync<
     P2SVpnGateway,
     P2SVpnProfileParameters,
-    ArmResponse<VpnProfileResponse>,
+    VpnProfileResponse,
     Error = CloudError
   >;
 
@@ -138,7 +138,7 @@ interface P2SVpnGateways {
   getP2sVpnConnectionHealth is ArmResourceActionAsync<
     P2SVpnGateway,
     void,
-    ArmResponse<P2SVpnGateway>,
+    P2SVpnGateway,
     Error = CloudError
   >;
 
@@ -150,7 +150,7 @@ interface P2SVpnGateways {
   getP2sVpnConnectionHealthDetailed is ArmResourceActionAsync<
     P2SVpnGateway,
     P2SVpnConnectionHealthRequest,
-    ArmResponse<P2SVpnConnectionHealth>,
+    P2SVpnConnectionHealth,
     Error = CloudError
   >;
 

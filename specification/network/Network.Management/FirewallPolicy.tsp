@@ -120,7 +120,7 @@ interface FirewallPolicies {
   deploy is ArmResourceActionAsyncBase<
     FirewallPolicy,
     void,
-    ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
       Azure.Core.Foundations.RetryAfterHeader>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<FirewallPolicy>,
     Error = CloudError

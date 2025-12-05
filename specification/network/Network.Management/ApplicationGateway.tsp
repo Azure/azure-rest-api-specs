@@ -14,15 +14,26 @@ namespace Microsoft.Network;
  * Application gateway resource.
  */
 model ApplicationGateway
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<ApplicationGatewayPropertiesFormat> {
+  is Azure.ResourceManager.ProxyResource<ApplicationGatewayPropertiesFormat> {
   ...ResourceNameParameter<
     Resource = ApplicationGateway,
     KeyName = "applicationGatewayName",
     SegmentName = "applicationGateways",
     NamePattern = ""
   >;
-  ...Azure.ResourceManager.Legacy.EntityTagProperty;
-  ...Azure.ResourceManager.AvailabilityZonesProperty;
+
+  /** Resource tags. */
+  tags?: TagsObject;
+
+  /** Resource location. */
+  location?: string;
+
+  /** A unique read-only string that changes whenever the resource is updated. */
+  @visibility(Lifecycle.Read)
+  etag?: string;
+
+  /** A list of availability zones denoting where the resource needs to come from. */
+  zones?: string[];
 
   /**
    * The identity of the application gateway, if configured.
@@ -103,7 +114,7 @@ interface ApplicationGateways {
   backendHealth is ArmResourceActionAsync<
     ApplicationGateway,
     void,
-    ArmResponse<ApplicationGatewayBackendHealth>,
+    ApplicationGatewayBackendHealth,
     Parameters = {
       /**
        * Expands BackendAddressPool and BackendHttpSettings referenced in backend health.
@@ -121,7 +132,7 @@ interface ApplicationGateways {
   backendHealthOnDemand is ArmResourceActionAsync<
     ApplicationGateway,
     ApplicationGatewayOnDemandProbe,
-    ArmResponse<ApplicationGatewayBackendHealthOnDemand>,
+    ApplicationGatewayBackendHealthOnDemand,
     Parameters = {
       /**
        * Expands BackendAddressPool and BackendHttpSettings referenced in backend health.

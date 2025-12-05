@@ -220,7 +220,7 @@ interface PublicIPAddressOperationGroup {
   ddosProtectionStatus is PublicIPAddressOperationGroupOps.ActionAsync<
     PublicIPAddress,
     void,
-    ArmResponse<PublicIpDdosProtectionStatusResult>,
+    PublicIpDdosProtectionStatusResult,
     OverrideErrorType = CloudError
   >;
 

@@ -23,7 +23,9 @@ model BaseAdminRule is Azure.ResourceManager.ProxyResource<{}> {
     SegmentName = "rules",
     NamePattern = ""
   >;
-  ...Azure.ResourceManager.Legacy.EntityTagProperty;
+
+  /** A unique read-only string that changes whenever the resource is updated. */
+  etag?: string;
 
   /**
    * Whether the rule is custom or default.

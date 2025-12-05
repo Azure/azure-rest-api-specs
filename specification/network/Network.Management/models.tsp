@@ -11843,6 +11843,7 @@ model AzureFirewallApplicationRuleProtocol {
   /**
    * Port number for the protocol, cannot be greater than 64000. This field is optional.
    */
+  @minValue(0)
   @maxValue(64000)
   port?: int32;
 }
@@ -12197,13 +12198,13 @@ model AzureFirewallAutoscaleConfiguration {
    * The minimum number of capacity units for this azure firewall. Use null to reset the value to the service default.
    */
   @minValue(2)
-  minCapacity?: int32;
+  minCapacity?: int32 | null;
 
   /**
    * The maximum number of capacity units for this azure firewall. Use null to reset the value to the service default.
    */
   @minValue(2)
-  maxCapacity?: int32;
+  maxCapacity?: int32 | null;
 }
 
 /**
@@ -26767,16 +26768,12 @@ model EffectiveDefaultSecurityAdminRule extends EffectiveBaseSecurityAdminRule {
 /**
  * Network admin rule.
  */
+@discriminator("Custom")
 model AdminRule extends BaseAdminRule {
   /**
    * Indicates the properties of the security admin rule
    */
   properties?: AdminPropertiesFormat;
-
-  /**
-   * Whether the rule is custom or default.
-   */
-  kind: "Custom";
 }
 
 /**

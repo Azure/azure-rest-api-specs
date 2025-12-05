@@ -5546,14 +5546,6 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/backendAddressPools": {
       "get": {
         "responses": {
-          "200": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/LoadBalancerBackendAddressPoolListResult",
-                "__new": "#/definitions/BackendAddressPoolListResult"
-              }
-            }
-          },
           "default": {
             "schema": {
               "$ref": {
@@ -18246,24 +18238,6 @@
         "type": "string"
       }
     },
-    "LoadBalancerBackendAddressPoolListResult__deleted": {
-      "type": "object",
-      "description": "[Placeholder] Discription for page model",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "[Placeholder] Discription for value property",
-          "items": {
-            "$ref": "#/definitions/BackendAddressPool"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
-        }
-      }
-    },
     "LogSpecification__deleted": {
       "type": "object",
       "description": "Description of logging specification.",
@@ -18670,419 +18644,6 @@
       "type": "object",
       "description": "Resource operation accepted."
     },
-    "Azure.ResourceManager.ArmAcceptedLroResponse<\"Resource operation accepted.\", Azure.ResourceManager.{ location: string, retryAfter: int32 }>__added": {
-      "type": "object",
-      "description": "Resource operation accepted."
-    },
-    "Azure.ResourceManager.ArmResponse<ApplicationGatewayBackendHealth>__added": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/ApplicationGatewayBackendHealth",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<ApplicationGatewayBackendHealthOnDemand>__added": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/ApplicationGatewayBackendHealthOnDemand",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<AzureFirewallPacketCaptureResponse>__added": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/AzureFirewallPacketCaptureResponse",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<BastionActiveSessionListResult>__added": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/BastionActiveSessionListResult",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<BastionShareableLinkListResult>__added": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/BastionShareableLinkListResult",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<BgpPeerStatusListResult>__added": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/BgpPeerStatusListResult",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<ConnectionResetSharedKey>__added": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/ConnectionResetSharedKey",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<EffectiveNetworkSecurityGroupListResult>__added": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/EffectiveNetworkSecurityGroupListResult",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<EffectiveRouteListResult>__added": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/EffectiveRouteListResult",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<EffectiveRouteMapRouteList>__added": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/EffectiveRouteMapRouteList",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<ExpressRouteFailoverAllTestDetails>__added": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/ExpressRouteFailoverAllTestDetails",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<ExpressRouteFailoverSingleTestDetailsObject>__added": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/ExpressRouteFailoverSingleTestDetailsObject",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<GatewayResiliencyInformation>__added": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/GatewayResiliencyInformation",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<GatewayRouteListResult>__added": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/GatewayRouteListResult",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<GatewayRouteSetsInformation>__added": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/GatewayRouteSetsInformation",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<IPPrefixesList>__added": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/IPPrefixesList",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<LoadBalancerHealthPerRule>__added": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/LoadBalancerHealthPerRule",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<NetworkVirtualApplianceInstanceId>__added": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/NetworkVirtualApplianceInstanceId",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<NetworkVirtualApplianceInstanceIds>__added": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/NetworkVirtualApplianceInstanceIds",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<P2SVpnConnectionHealth>__added": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/P2SVpnConnectionHealth",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<P2SVpnGateway>__added": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/P2SVpnGateway",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<PublicIpDdosProtectionStatusResult>__added": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/PublicIpDdosProtectionStatusResult",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<Record<PeerRoute[]>>__added": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "type": "object",
-          "description": "The body type of the operation request or response.",
-          "additionalProperties": {
-            "items": {
-              "$ref": "#/definitions/PeerRoute"
-            },
-            "type": "array"
-          }
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<VirtualHubEffectiveRouteList>__added": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/VirtualHubEffectiveRouteList",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<VirtualNetworkDdosProtectionStatusResult>__added": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/VirtualNetworkDdosProtectionStatusResult",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<VirtualNetworkGateway>__added": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/VirtualNetworkGateway",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<VpnClientConnectionHealthDetailListResult>__added": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/VpnClientConnectionHealthDetailListResult",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<VpnClientIPsecParameters>__added": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/VpnClientIPsecParameters",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<VpnGateway>__added": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/VpnGateway",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<VpnProfileResponse>__added": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/VpnProfileResponse",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<VpnServerConfigurationsResponse>__added": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/VpnServerConfigurationsResponse",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
     "Azure.ResourceManager.ArmResponse<stringApplicationJson>__added": {
       "type": "object",
       "description": "Azure operation completed successfully.",
@@ -19094,27 +18655,6 @@
       },
       "required": [
         "body"
-      ]
-    },
-    "BackendAddressPoolListResult__added": {
-      "type": "object",
-      "description": "[Placeholder] Discription for page model",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "[Placeholder] Discription for value property",
-          "items": {
-            "$ref": "#/definitions/BackendAddressPool"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "BastionHostPropertiesFormatNetworkAcls__added": {
@@ -19434,6 +18974,15 @@
         }
       ]
     },
+    "Record<PeerRoute[]>__added": {
+      "type": "object",
+      "additionalProperties": {
+        "items": {
+          "$ref": "#/definitions/PeerRoute"
+        },
+        "type": "array"
+      }
+    },
     "SignaturesOverridesProperties__added": {
       "type": "object",
       "description": "Will contain the properties of the resource (the actual signature overrides)",
@@ -19532,19 +19081,14 @@
     },
     "AdminRule": {
       "x-ms-discriminator-value__deleted": "Custom",
+      "discriminator__added": "Custom",
       "required__added": [
-        "kind"
+        "Custom"
       ],
       "properties": {
-        "kind__added": {
+        "Custom__added": {
           "type": "string",
-          "description": "Whether the rule is custom or default.",
-          "enum": [
-            "Custom"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
+          "description": "Discriminator property for AdminRule."
         }
       }
     },
@@ -19586,31 +19130,12 @@
     "ApplicationGateway": {
       "properties": {
         "tags__added": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "$ref": "#/definitions/TagsObject",
+          "description": "Resource tags."
         },
         "location__added": {
           "type": "string",
-          "description": "The geo-location where the resource lives",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "etag": {
-          "description": {
-            "__old": "A unique read-only string that changes whenever the resource is updated.",
-            "__new": "\"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.\")"
-          }
-        },
-        "zones": {
-          "description": {
-            "__old": "A list of availability zones denoting where the resource needs to come from.",
-            "__new": "The availability zones."
-          }
+          "description": "Resource location."
         },
         "identity": {
           "$ref": {
@@ -19625,7 +19150,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
             }
           }
         ]
@@ -20499,12 +20024,6 @@
           "type": "string",
           "description": "Type of the resource.",
           "readOnly": true
-        },
-        "etag": {
-          "description": {
-            "__old": "A unique read-only string that changes whenever the resource is updated.",
-            "__new": "\"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.\")"
-          }
         }
       },
       "allOf": [
@@ -21279,12 +20798,6 @@
             "create",
             "read"
           ]
-        },
-        "etag": {
-          "description": {
-            "__old": "A unique read-only string that changes whenever the resource is updated.",
-            "__new": "\"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.\")"
-          }
         }
       },
       "allOf": [
@@ -21380,36 +20893,17 @@
     "AzureFirewall": {
       "properties": {
         "tags__added": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "$ref": "#/definitions/TagsObject",
+          "description": "Resource tags."
         },
         "location__added": {
           "type": "string",
-          "description": "The geo-location where the resource lives",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
+          "description": "Resource location."
         },
         "extendedLocation": {
           "$ref": {
             "__old": "./network.json#/definitions/ExtendedLocation",
             "__new": "#/definitions/ExtendedLocation"
-          }
-        },
-        "zones": {
-          "description": {
-            "__old": "A list of availability zones denoting where the resource needs to come from.",
-            "__new": "The availability zones."
-          }
-        },
-        "etag": {
-          "description": {
-            "__old": "A unique read-only string that changes whenever the resource is updated.",
-            "__new": "\"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.\")"
           }
         }
       },
@@ -21419,7 +20913,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
             }
           }
         ]
@@ -21469,7 +20963,6 @@
     "AzureFirewallApplicationRuleProtocol": {
       "properties": {
         "port": {
-          "minimum__deleted": 0,
           "exclusiveMinimum__deleted": false,
           "exclusiveMaximum__deleted": false
         }
@@ -21478,10 +20971,10 @@
     "AzureFirewallAutoscaleConfiguration": {
       "properties": {
         "minCapacity": {
-          "x-nullable__deleted": true
+          "minimum__deleted": 2
         },
         "maxCapacity": {
-          "x-nullable__deleted": true
+          "minimum__deleted": 2
         }
       }
     },
@@ -21735,10 +21228,7 @@
           "readOnly": true
         },
         "etag": {
-          "description": {
-            "__old": "A unique read-only string that changes whenever the resource is updated.",
-            "__new": "\"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.\")"
-          }
+          "readOnly__deleted": true
         }
       }
     },
@@ -21759,10 +21249,7 @@
           "readOnly": true
         },
         "etag": {
-          "description": {
-            "__old": "A unique read-only string that changes whenever the resource is updated.",
-            "__new": "\"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.\")"
-          }
+          "readOnly__deleted": true
         }
       },
       "allOf": [
@@ -21859,8 +21346,7 @@
         },
         "etag__added": {
           "type": "string",
-          "description": "\"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.\")",
-          "readOnly": true
+          "description": "A unique read-only string that changes whenever the resource is updated."
         }
       },
       "allOf": [
@@ -25819,6 +25305,11 @@
             }
           }
         ]
+      ]
+    },
+    "LoadBalancerBackendAddressPoolListResult": {
+      "required__added": [
+        "value"
       ]
     },
     "LoadBalancerBackendAddressPropertiesFormat": {

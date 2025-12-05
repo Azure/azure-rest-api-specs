@@ -101,7 +101,7 @@ interface VirtualNetworkGateways {
   reset is ArmResourceActionAsync<
     VirtualNetworkGateway,
     void,
-    ArmResponse<VirtualNetworkGateway>,
+    VirtualNetworkGateway,
     Parameters = {
       /**
        * Virtual network gateway vip address supplied to the begin reset of the active-active feature enabled gateway.
@@ -162,7 +162,7 @@ interface VirtualNetworkGateways {
   getBgpPeerStatus is ArmResourceActionAsync<
     VirtualNetworkGateway,
     void,
-    ArmResponse<BgpPeerStatusListResult>,
+    BgpPeerStatusListResult,
     Parameters = {
       /**
        * The IP address of the peer to retrieve the status of.
@@ -202,7 +202,7 @@ interface VirtualNetworkGateways {
   getLearnedRoutes is ArmResourceActionAsync<
     VirtualNetworkGateway,
     void,
-    ArmResponse<GatewayRouteListResult>,
+    GatewayRouteListResult,
     Error = CloudError
   >;
 
@@ -213,7 +213,7 @@ interface VirtualNetworkGateways {
   getAdvertisedRoutes is ArmResourceActionAsync<
     VirtualNetworkGateway,
     void,
-    ArmResponse<GatewayRouteListResult>,
+    GatewayRouteListResult,
     Parameters = {
       /**
        * The IP address of the peer.
@@ -230,7 +230,7 @@ interface VirtualNetworkGateways {
   getResiliencyInformation is ArmResourceActionAsync<
     VirtualNetworkGateway,
     void,
-    ArmResponse<GatewayResiliencyInformation>,
+    GatewayResiliencyInformation,
     Parameters = {
       /**
        * Attempt to recalculate the Resiliency Information for the gateway
@@ -247,7 +247,7 @@ interface VirtualNetworkGateways {
   getRoutesInformation is ArmResourceActionAsync<
     VirtualNetworkGateway,
     void,
-    ArmResponse<GatewayRouteSetsInformation>,
+    GatewayRouteSetsInformation,
     Parameters = {
       /**
        * Attempt to recalculate the Route Sets Information for the gateway
@@ -265,7 +265,7 @@ interface VirtualNetworkGateways {
   setVpnclientIpsecParameters is ArmResourceActionAsync<
     VirtualNetworkGateway,
     VpnClientIPsecParameters,
-    ArmResponse<VpnClientIPsecParameters>,
+    VpnClientIPsecParameters,
     Error = CloudError
   >;
 
@@ -310,7 +310,7 @@ interface VirtualNetworkGateways {
   getFailoverAllTestDetails is ArmResourceActionAsync<
     VirtualNetworkGateway,
     void,
-    ArmResponse<ExpressRouteFailoverAllTestDetails>,
+    ExpressRouteFailoverAllTestDetails,
     Parameters = {
       /**
        * The type of failover test
@@ -334,7 +334,7 @@ interface VirtualNetworkGateways {
   getFailoverSingleTestDetails is ArmResourceActionAsync<
     VirtualNetworkGateway,
     void,
-    ArmResponse<ExpressRouteFailoverSingleTestDetailsObject>,
+    ExpressRouteFailoverSingleTestDetailsObject,
     Parameters = {
       /**
        * Peering location of the test
@@ -388,7 +388,7 @@ interface VirtualNetworkGateways {
   getVpnclientConnectionHealth is ArmResourceActionAsync<
     VirtualNetworkGateway,
     void,
-    ArmResponse<VpnClientConnectionHealthDetailListResult>,
+    VpnClientConnectionHealthDetailListResult,
     Error = CloudError
   >;
 

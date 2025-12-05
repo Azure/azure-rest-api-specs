@@ -170,7 +170,7 @@ interface VirtualNetworks {
   listDdosProtectionStatus is ArmResourceActionAsync<
     VirtualNetwork,
     void,
-    ArmResponse<VirtualNetworkDdosProtectionStatusResult>,
+    VirtualNetworkDdosProtectionStatusResult,
     Parameters = {
       /**
        * The max number of ip addresses to return.

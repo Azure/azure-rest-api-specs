@@ -99,7 +99,7 @@ interface BgpConnections {
   listLearnedRoutes is VirtualHubBgpConnectionOps.ActionAsync<
     BgpConnection,
     void,
-    ArmResponse<PeerRouteList>,
+    PeerRouteList,
     OverrideErrorType = CloudError
   >;
 
@@ -112,7 +112,7 @@ interface BgpConnections {
   listAdvertisedRoutes is VirtualHubBgpConnectionOps.ActionAsync<
     BgpConnection,
     void,
-    ArmResponse<PeerRouteList>,
+    PeerRouteList,
     OverrideErrorType = CloudError
   >;
 }

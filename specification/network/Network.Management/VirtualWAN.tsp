@@ -127,7 +127,7 @@ interface VirtualWANS {
   generatevirtualwanvpnserverconfigurationvpnprofile is VirtualWanOps.ActionAsync<
     VirtualWAN,
     VirtualWanVpnProfileParameters,
-    ArmResponse<VpnProfileResponse>,
+    VpnProfileResponse,
     OverrideErrorType = CloudError
   >;
 
@@ -153,7 +153,7 @@ interface VirtualWANS {
   vpnServerConfigurationsAssociatedWithVirtualWanList is VirtualWanOps.ActionAsync<
     VirtualWAN,
     void,
-    ArmResponse<VpnServerConfigurationsResponse>,
+    VpnServerConfigurationsResponse,
     OverrideErrorType = CloudError
   >;
 }

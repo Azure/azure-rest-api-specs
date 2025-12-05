@@ -129,7 +129,7 @@ interface VpnGateways {
   reset is ArmResourceActionAsync<
     VpnGateway,
     void,
-    ArmResponse<VpnGateway>,
+    VpnGateway,
     Parameters = {
       /**
        * VpnGateway ipConfigurationId to specify the gateway instance.

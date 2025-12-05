@@ -91,7 +91,8 @@ interface VpnSiteLinkConnections {
   resetConnection is VpnSiteLinkConnectionsOps.ActionAsync<
     VpnSiteLinkConnection,
     Request = void,
-    Result = ArmAcceptedLroResponse,
+    Result = void,
+    Response = ArmAcceptedLroResponse,
     OverrideErrorType = ErrorResponse
   >;
 

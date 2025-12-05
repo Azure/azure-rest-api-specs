@@ -14,7 +14,7 @@ namespace Microsoft.Network;
  * Azure Firewall resource.
  */
 model AzureFirewall
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<AzureFirewallPropertiesFormat> {
+  is Azure.ResourceManager.ProxyResource<AzureFirewallPropertiesFormat> {
   ...ResourceNameParameter<
     Resource = AzureFirewall,
     KeyName = "azureFirewallName",
@@ -28,8 +28,18 @@ model AzureFirewall
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   extendedLocation?: ExtendedLocation;
 
-  ...Azure.ResourceManager.AvailabilityZonesProperty;
-  ...Azure.ResourceManager.Legacy.EntityTagProperty;
+  /** Resource tags. */
+  tags?: TagsObject;
+
+  /** Resource location. */
+  location?: string;
+
+  /** A list of availability zones denoting where the resource needs to come from. */
+  zones?: string[];
+
+  /** A unique read-only string that changes whenever the resource is updated. */
+  @visibility(Lifecycle.Read)
+  etag?: string;
 }
 
 @armResourceOperations
@@ -86,7 +96,7 @@ interface AzureFirewalls {
   listLearnedPrefixes is ArmResourceActionAsync<
     AzureFirewall,
     void,
-    ArmResponse<IPPrefixesList>,
+    IPPrefixesList,
     Error = CloudError
   >;
 
@@ -107,7 +117,7 @@ interface AzureFirewalls {
   packetCaptureOperation is ArmResourceActionAsync<
     AzureFirewall,
     FirewallPacketCaptureParameters,
-    ArmResponse<AzureFirewallPacketCaptureResponse>,
+    AzureFirewallPacketCaptureResponse,
     Error = CloudError
   >;
 }

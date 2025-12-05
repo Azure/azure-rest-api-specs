@@ -23,7 +23,9 @@ model BackendAddressPool
     SegmentName = "backendAddressPools",
     NamePattern = ""
   >;
-  ...Azure.ResourceManager.Legacy.EntityTagProperty;
+
+  /** A unique read-only string that changes whenever the resource is updated. */
+  etag?: string;
 }
 
 alias ListInboundNatRulePortMappingsOps = Azure.ResourceManager.Legacy.LegacyOperations<
@@ -87,7 +89,11 @@ interface BackendAddressPools {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("LoadBalancerBackendAddressPools_List")
-  list is ArmResourceListByParent<BackendAddressPool, Error = CloudError>;
+  list is ArmResourceListByParent<
+    BackendAddressPool,
+    Response = LoadBalancerBackendAddressPoolListResult,
+    Error = CloudError
+  >;
 
   /**
    * List of inbound NAT rule port mappings.

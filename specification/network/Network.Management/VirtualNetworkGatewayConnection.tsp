@@ -121,7 +121,7 @@ interface VirtualNetworkGatewayConnections {
   resetSharedKey is ArmResourceActionAsync<
     VirtualNetworkGatewayConnection,
     ConnectionResetSharedKey,
-    ArmResponse<ConnectionResetSharedKey>,
+    ConnectionResetSharedKey,
     Error = CloudError
   >;
 

@@ -23,7 +23,10 @@ model ApplicationGatewayPrivateEndpointConnection
     SegmentName = "privateEndpointConnections",
     NamePattern = ""
   >;
-  ...Azure.ResourceManager.Legacy.EntityTagProperty;
+
+  /** A unique read-only string that changes whenever the resource is updated. */
+  @visibility(Lifecycle.Read)
+  etag?: string;
 }
 
 @armResourceOperations
@@ -67,7 +70,7 @@ interface ApplicationGatewayPrivateEndpointConnections {
 }
 
 @@doc(ApplicationGatewayPrivateEndpointConnection.name,
-  "The name of the application gateway private endpoint connection."
+  "Name of the private endpoint connection on an application gateway."
 );
 @@doc(ApplicationGatewayPrivateEndpointConnection.properties,
   "Properties of the application gateway private endpoint connection."

@@ -135,7 +135,7 @@ interface VirtualHubs {
   getEffectiveVirtualHubRoutes is ArmResourceActionAsync<
     VirtualHub,
     EffectiveRoutesParameters,
-    ArmResponse<VirtualHubEffectiveRouteList>,
+    VirtualHubEffectiveRouteList,
     OptionalRequestBody = true,
     Error = CloudError
   >;
@@ -148,7 +148,7 @@ interface VirtualHubs {
   getInboundRoutes is ArmResourceActionAsync<
     VirtualHub,
     GetInboundRoutesParameters,
-    ArmResponse<EffectiveRouteMapRouteList>,
+    EffectiveRouteMapRouteList,
     Error = CloudError
   >;
 
@@ -160,7 +160,7 @@ interface VirtualHubs {
   getOutboundRoutes is ArmResourceActionAsync<
     VirtualHub,
     GetOutboundRoutesParameters,
-    ArmResponse<EffectiveRouteMapRouteList>,
+    EffectiveRouteMapRouteList,
     Error = CloudError
   >;
 

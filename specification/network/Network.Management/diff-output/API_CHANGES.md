@@ -662,7 +662,8 @@
 |------|------------|-------|
 | `definitions.ApplicationGatewayAutoscaleConfiguration.properties.minCapacity.minimum__deleted` | deleted | `0` |
 | `definitions.ApplicationGatewayWebApplicationFirewallConfiguration.properties.fileUploadLimitInMb.minimum__deleted` | deleted | `0` |
-| `definitions.AzureFirewallApplicationRuleProtocol.properties.port.minimum__deleted` | deleted | `0` |
+| `definitions.AzureFirewallAutoscaleConfiguration.properties.maxCapacity.minimum__deleted` | deleted | `2` |
+| `definitions.AzureFirewallAutoscaleConfiguration.properties.minCapacity.minimum__deleted` | deleted | `2` |
 | `definitions.BgpConnectionProperties.properties.peerAsn.minimum__deleted` | deleted | `0` |
 | `definitions.BgpPeerStatus.properties.asn.minimum__deleted` | deleted | `0` |
 | `definitions.BgpSettings.properties.asn.minimum__deleted` | deleted | `0` |
@@ -796,7 +797,7 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.AdminRule.required__added` | added | `["kind"]` |
+| `definitions.AdminRule.required__added` | added | `["Custom"]` |
 | `definitions.AdminRuleCollectionListResult.required__added` | added | `["value"]` |
 | `definitions.AdminRuleListResult.required__added` | added | `["value"]` |
 | `definitions.ApplicationGatewayAvailableSslPredefinedPolicies.required__added` | added | `["value"]` |
@@ -869,6 +870,7 @@
 | `definitions.ListVpnSiteLinkConnectionsResult.required__added` | added | `["value"]` |
 | `definitions.ListVpnSiteLinksResult.required__added` | added | `["value"]` |
 | `definitions.ListVpnSitesResult.required__added` | added | `["value"]` |
+| `definitions.LoadBalancerBackendAddressPoolListResult.required__added` | added | `["value"]` |
 | `definitions.LoadBalancerFrontendIPConfigurationListResult.required__added` | added | `["value"]` |
 | `definitions.LoadBalancerListResult.required__added` | added | `["value"]` |
 | `definitions.LoadBalancerLoadBalancingRuleListResult.required__added` | added | `["value"]` |
@@ -1439,10 +1441,10 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.ApplicationGateway.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives","x-ms-mutability":["creat...` |
+| `definitions.ApplicationGateway.properties.location__added` | added | `{"type":"string","description":"Resource location."}` |
 | `definitions.ApplicationGatewayAvailableSslOptions.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives","x-ms-mutability":["creat...` |
 | `definitions.ApplicationSecurityGroup.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives","x-ms-mutability":["creat...` |
-| `definitions.AzureFirewall.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives","x-ms-mutability":["creat...` |
+| `definitions.AzureFirewall.properties.location__added` | added | `{"type":"string","description":"Resource location."}` |
 | `definitions.BastionHost.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives","x-ms-mutability":["creat...` |
 | `definitions.CustomIpPrefix.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives","x-ms-mutability":["creat...` |
 | `definitions.DdosCustomPolicy.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives","x-ms-mutability":["creat...` |
@@ -1632,12 +1634,6 @@
 |------|------------|-------|
 | `definitions.IssueContext__deleted` | deleted | `{"type":"object","description":"A key-value pair that provides additional context on the issue.","ad...` |
 
-### Changes for `LoadBalancerBackendAddressPoolListResult`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.LoadBalancerBackendAddressPoolListResult__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
-
 ### Changes for `LogSpecification`
 
 | Path | Change Type | Value |
@@ -1746,209 +1742,11 @@
 |------|------------|-------|
 | `definitions['Azure.ResourceManager.ArmAcceptedLroResponse<"Resource operation accepted.", Azure.ResourceManager.Legacy.{ location: string, retryAfter: int32 }>__added']` | added | `{"type":"object","description":"Resource operation accepted."}` |
 
-### Changes for `Azure.ResourceManager.ArmAcceptedLroResponse<"Resource operation accepted.", Azure.ResourceManager.{ location: string, retryAfter: int32 }>`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions['Azure.ResourceManager.ArmAcceptedLroResponse<"Resource operation accepted.", Azure.ResourceManager.{ location: string, retryAfter: int32 }>__added']` | added | `{"type":"object","description":"Resource operation accepted."}` |
-
-### Changes for `Azure.ResourceManager.ArmResponse<ApplicationGatewayBackendHealth>`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions['Azure.ResourceManager.ArmResponse<ApplicationGatewayBackendHealth>__added']` | added | `{"type":"object","description":"Azure operation completed successfully.","properties":{"body":{"$ref...` |
-
-### Changes for `Azure.ResourceManager.ArmResponse<ApplicationGatewayBackendHealthOnDemand>`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions['Azure.ResourceManager.ArmResponse<ApplicationGatewayBackendHealthOnDemand>__added']` | added | `{"type":"object","description":"Azure operation completed successfully.","properties":{"body":{"$ref...` |
-
-### Changes for `Azure.ResourceManager.ArmResponse<AzureFirewallPacketCaptureResponse>`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions['Azure.ResourceManager.ArmResponse<AzureFirewallPacketCaptureResponse>__added']` | added | `{"type":"object","description":"Azure operation completed successfully.","properties":{"body":{"$ref...` |
-
-### Changes for `Azure.ResourceManager.ArmResponse<BastionActiveSessionListResult>`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions['Azure.ResourceManager.ArmResponse<BastionActiveSessionListResult>__added']` | added | `{"type":"object","description":"Azure operation completed successfully.","properties":{"body":{"$ref...` |
-
-### Changes for `Azure.ResourceManager.ArmResponse<BastionShareableLinkListResult>`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions['Azure.ResourceManager.ArmResponse<BastionShareableLinkListResult>__added']` | added | `{"type":"object","description":"Azure operation completed successfully.","properties":{"body":{"$ref...` |
-
-### Changes for `Azure.ResourceManager.ArmResponse<BgpPeerStatusListResult>`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions['Azure.ResourceManager.ArmResponse<BgpPeerStatusListResult>__added']` | added | `{"type":"object","description":"Azure operation completed successfully.","properties":{"body":{"$ref...` |
-
-### Changes for `Azure.ResourceManager.ArmResponse<ConnectionResetSharedKey>`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions['Azure.ResourceManager.ArmResponse<ConnectionResetSharedKey>__added']` | added | `{"type":"object","description":"Azure operation completed successfully.","properties":{"body":{"$ref...` |
-
-### Changes for `Azure.ResourceManager.ArmResponse<EffectiveNetworkSecurityGroupListResult>`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions['Azure.ResourceManager.ArmResponse<EffectiveNetworkSecurityGroupListResult>__added']` | added | `{"type":"object","description":"Azure operation completed successfully.","properties":{"body":{"$ref...` |
-
-### Changes for `Azure.ResourceManager.ArmResponse<EffectiveRouteListResult>`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions['Azure.ResourceManager.ArmResponse<EffectiveRouteListResult>__added']` | added | `{"type":"object","description":"Azure operation completed successfully.","properties":{"body":{"$ref...` |
-
-### Changes for `Azure.ResourceManager.ArmResponse<EffectiveRouteMapRouteList>`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions['Azure.ResourceManager.ArmResponse<EffectiveRouteMapRouteList>__added']` | added | `{"type":"object","description":"Azure operation completed successfully.","properties":{"body":{"$ref...` |
-
-### Changes for `Azure.ResourceManager.ArmResponse<ExpressRouteFailoverAllTestDetails>`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions['Azure.ResourceManager.ArmResponse<ExpressRouteFailoverAllTestDetails>__added']` | added | `{"type":"object","description":"Azure operation completed successfully.","properties":{"body":{"$ref...` |
-
-### Changes for `Azure.ResourceManager.ArmResponse<ExpressRouteFailoverSingleTestDetailsObject>`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions['Azure.ResourceManager.ArmResponse<ExpressRouteFailoverSingleTestDetailsObject>__added']` | added | `{"type":"object","description":"Azure operation completed successfully.","properties":{"body":{"$ref...` |
-
-### Changes for `Azure.ResourceManager.ArmResponse<GatewayResiliencyInformation>`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions['Azure.ResourceManager.ArmResponse<GatewayResiliencyInformation>__added']` | added | `{"type":"object","description":"Azure operation completed successfully.","properties":{"body":{"$ref...` |
-
-### Changes for `Azure.ResourceManager.ArmResponse<GatewayRouteListResult>`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions['Azure.ResourceManager.ArmResponse<GatewayRouteListResult>__added']` | added | `{"type":"object","description":"Azure operation completed successfully.","properties":{"body":{"$ref...` |
-
-### Changes for `Azure.ResourceManager.ArmResponse<GatewayRouteSetsInformation>`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions['Azure.ResourceManager.ArmResponse<GatewayRouteSetsInformation>__added']` | added | `{"type":"object","description":"Azure operation completed successfully.","properties":{"body":{"$ref...` |
-
-### Changes for `Azure.ResourceManager.ArmResponse<IPPrefixesList>`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions['Azure.ResourceManager.ArmResponse<IPPrefixesList>__added']` | added | `{"type":"object","description":"Azure operation completed successfully.","properties":{"body":{"$ref...` |
-
-### Changes for `Azure.ResourceManager.ArmResponse<LoadBalancerHealthPerRule>`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions['Azure.ResourceManager.ArmResponse<LoadBalancerHealthPerRule>__added']` | added | `{"type":"object","description":"Azure operation completed successfully.","properties":{"body":{"$ref...` |
-
-### Changes for `Azure.ResourceManager.ArmResponse<NetworkVirtualApplianceInstanceId>`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions['Azure.ResourceManager.ArmResponse<NetworkVirtualApplianceInstanceId>__added']` | added | `{"type":"object","description":"Azure operation completed successfully.","properties":{"body":{"$ref...` |
-
-### Changes for `Azure.ResourceManager.ArmResponse<NetworkVirtualApplianceInstanceIds>`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions['Azure.ResourceManager.ArmResponse<NetworkVirtualApplianceInstanceIds>__added']` | added | `{"type":"object","description":"Azure operation completed successfully.","properties":{"body":{"$ref...` |
-
-### Changes for `Azure.ResourceManager.ArmResponse<P2SVpnConnectionHealth>`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions['Azure.ResourceManager.ArmResponse<P2SVpnConnectionHealth>__added']` | added | `{"type":"object","description":"Azure operation completed successfully.","properties":{"body":{"$ref...` |
-
-### Changes for `Azure.ResourceManager.ArmResponse<P2SVpnGateway>`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions['Azure.ResourceManager.ArmResponse<P2SVpnGateway>__added']` | added | `{"type":"object","description":"Azure operation completed successfully.","properties":{"body":{"$ref...` |
-
-### Changes for `Azure.ResourceManager.ArmResponse<PublicIpDdosProtectionStatusResult>`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions['Azure.ResourceManager.ArmResponse<PublicIpDdosProtectionStatusResult>__added']` | added | `{"type":"object","description":"Azure operation completed successfully.","properties":{"body":{"$ref...` |
-
-### Changes for `Azure.ResourceManager.ArmResponse<Record<PeerRoute[]>>`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions['Azure.ResourceManager.ArmResponse<Record<PeerRoute[]>>__added']` | added | `{"type":"object","description":"Azure operation completed successfully.","properties":{"body":{"type...` |
-
-### Changes for `Azure.ResourceManager.ArmResponse<VirtualHubEffectiveRouteList>`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions['Azure.ResourceManager.ArmResponse<VirtualHubEffectiveRouteList>__added']` | added | `{"type":"object","description":"Azure operation completed successfully.","properties":{"body":{"$ref...` |
-
-### Changes for `Azure.ResourceManager.ArmResponse<VirtualNetworkDdosProtectionStatusResult>`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions['Azure.ResourceManager.ArmResponse<VirtualNetworkDdosProtectionStatusResult>__added']` | added | `{"type":"object","description":"Azure operation completed successfully.","properties":{"body":{"$ref...` |
-
-### Changes for `Azure.ResourceManager.ArmResponse<VirtualNetworkGateway>`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions['Azure.ResourceManager.ArmResponse<VirtualNetworkGateway>__added']` | added | `{"type":"object","description":"Azure operation completed successfully.","properties":{"body":{"$ref...` |
-
-### Changes for `Azure.ResourceManager.ArmResponse<VpnClientConnectionHealthDetailListResult>`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions['Azure.ResourceManager.ArmResponse<VpnClientConnectionHealthDetailListResult>__added']` | added | `{"type":"object","description":"Azure operation completed successfully.","properties":{"body":{"$ref...` |
-
-### Changes for `Azure.ResourceManager.ArmResponse<VpnClientIPsecParameters>`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions['Azure.ResourceManager.ArmResponse<VpnClientIPsecParameters>__added']` | added | `{"type":"object","description":"Azure operation completed successfully.","properties":{"body":{"$ref...` |
-
-### Changes for `Azure.ResourceManager.ArmResponse<VpnGateway>`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions['Azure.ResourceManager.ArmResponse<VpnGateway>__added']` | added | `{"type":"object","description":"Azure operation completed successfully.","properties":{"body":{"$ref...` |
-
-### Changes for `Azure.ResourceManager.ArmResponse<VpnProfileResponse>`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions['Azure.ResourceManager.ArmResponse<VpnProfileResponse>__added']` | added | `{"type":"object","description":"Azure operation completed successfully.","properties":{"body":{"$ref...` |
-
-### Changes for `Azure.ResourceManager.ArmResponse<VpnServerConfigurationsResponse>`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions['Azure.ResourceManager.ArmResponse<VpnServerConfigurationsResponse>__added']` | added | `{"type":"object","description":"Azure operation completed successfully.","properties":{"body":{"$ref...` |
-
 ### Changes for `Azure.ResourceManager.ArmResponse<stringApplicationJson>`
 
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions['Azure.ResourceManager.ArmResponse<stringApplicationJson>__added']` | added | `{"type":"object","description":"Azure operation completed successfully.","properties":{"body":{"type...` |
-
-### Changes for `BackendAddressPoolListResult`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.BackendAddressPoolListResult__added` | added | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
 
 ### Changes for `BastionHostPropertiesFormatNetworkAcls`
 
@@ -2040,6 +1838,12 @@
 |------|------------|-------|
 | `definitions.PrivateLinkServicePropertiesVisibility__added` | added | `{"type":"object","description":"The visibility list of the private link service.","allOf":[{"$ref":"...` |
 
+### Changes for `Record<PeerRoute[]>`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.Record<PeerRoute[]>__added` | added | `{"type":"object","additionalProperties":{"items":{"$ref":"#/definitions/PeerRoute"},"type":"array"}}` |
+
 ### Changes for `SignaturesOverridesProperties`
 
 | Path | Change Type | Value |
@@ -2065,12 +1869,18 @@
 | `definitions.AdminRule['x-ms-discriminator-value__deleted']` | deleted | `Custom` |
 | `definitions.DefaultAdminRule['x-ms-discriminator-value__deleted']` | deleted | `Default` |
 
-### Changes for `kind`
+### Changes for `discriminator`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.AdminRule.properties.kind__added` | added | `{"type":"string","description":"Whether the rule is custom or default.","enum":["Custom"],"x-ms-enum...` |
-| `definitions.DefaultAdminRule.properties.kind__added` | added | `{"type":"string","description":"Whether the rule is custom or default.","enum":["Default"],"x-ms-enu...` |
+| `definitions.AdminRule.discriminator__added` | added | `Custom` |
+| `definitions.BaseAdminRule.discriminator__deleted` | deleted | `kind` |
+
+### Changes for `Custom`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.AdminRule.properties.Custom__added` | added | `{"type":"string","description":"Discriminator property for AdminRule."}` |
 
 ### Changes for `systemData`
 
@@ -2100,7 +1910,7 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.AdminRuleCollection.properties.etag__added` | added | `{"type":"string","description":"\\"If etag is provided in the response body, it may also be provided ...` |
-| `definitions.BaseAdminRule.properties.etag__added` | added | `{"type":"string","description":"\\"If etag is provided in the response body, it may also be provided ...` |
+| `definitions.BaseAdminRule.properties.etag__added` | added | `{"type":"string","description":"A unique read-only string that changes whenever the resource is upda...` |
 | `definitions.ConnectivityConfiguration.properties.etag__added` | added | `{"type":"string","description":"\\"If etag is provided in the response body, it may also be provided ...` |
 | `definitions.NetworkGroup.properties.etag__added` | added | `{"type":"string","description":"\\"If etag is provided in the response body, it may also be provided ...` |
 | `definitions.NetworkManagerRoutingConfiguration.properties.etag__added` | added | `{"type":"string","description":"\\"If etag is provided in the response body, it may also be provided ...` |
@@ -2116,10 +1926,10 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.ApplicationGateway.properties.tags__added` | added | `{"type":"object","description":"Resource tags.","additionalProperties":{"type":"string"}}` |
+| `definitions.ApplicationGateway.properties.tags__added` | added | `{"$ref":"#/definitions/TagsObject","description":"Resource tags."}` |
 | `definitions.ApplicationGatewayAvailableSslOptions.properties.tags__added` | added | `{"type":"object","description":"Resource tags.","additionalProperties":{"type":"string"}}` |
 | `definitions.ApplicationSecurityGroup.properties.tags__added` | added | `{"type":"object","description":"Resource tags.","additionalProperties":{"type":"string"}}` |
-| `definitions.AzureFirewall.properties.tags__added` | added | `{"type":"object","description":"Resource tags.","additionalProperties":{"type":"string"}}` |
+| `definitions.AzureFirewall.properties.tags__added` | added | `{"$ref":"#/definitions/TagsObject","description":"Resource tags."}` |
 | `definitions.BastionHost.properties.tags__added` | added | `{"type":"object","description":"Resource tags.","additionalProperties":{"type":"string"}}` |
 | `definitions.CustomIpPrefix.properties.tags__added` | added | `{"type":"object","description":"Resource tags.","additionalProperties":{"type":"string"}}` |
 | `definitions.DdosCustomPolicy.properties.tags__added` | added | `{"type":"object","description":"Resource tags.","additionalProperties":{"type":"string"}}` |
@@ -2644,8 +2454,6 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.ApplicationGatewayFirewallDisabledRuleGroup.properties.rules.items['x-nullable__deleted']` | deleted | `false` |
-| `definitions.AzureFirewallAutoscaleConfiguration.properties.maxCapacity['x-nullable__deleted']` | deleted | `true` |
-| `definitions.AzureFirewallAutoscaleConfiguration.properties.minCapacity['x-nullable__deleted']` | deleted | `true` |
 | `definitions.DnsSettings.properties.requireProxyForNetworkRules['x-nullable__deleted']` | deleted | `true` |
 | `definitions.ExplicitProxy.properties.enableExplicitProxy['x-nullable__deleted']` | deleted | `true` |
 | `definitions.ExplicitProxy.properties.enablePacFile['x-nullable__deleted']` | deleted | `true` |
@@ -2681,16 +2489,12 @@
 | `definitions.SignaturesOverrides.properties.id__deleted` | deleted | `{"type":"string","description":"Will contain the resource id of the signature override resource"}` |
 | `definitions.SwapResource.properties.id__deleted` | deleted | `{"type":"string","description":"Resource Id.","readOnly":true}` |
 
-### Changes for `discriminator`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.BaseAdminRule.discriminator__deleted` | deleted | `kind` |
-
 ### Changes for `readOnly`
 
 | Path | Change Type | Value |
 |------|------------|-------|
+| `definitions.AzureWebCategory.properties.etag.readOnly__deleted` | deleted | `true` |
+| `definitions.BackendAddressPool.properties.etag.readOnly__deleted` | deleted | `true` |
 | `definitions.BgpConnectionProperties.properties.hubVirtualNetworkConnection.readOnly__deleted` | deleted | `false` |
 | `definitions.BgpConnectionProperties.properties.peerAsn.readOnly__deleted` | deleted | `false` |
 | `definitions.BgpConnectionProperties.properties.peerIp.readOnly__deleted` | deleted | `false` |
@@ -2811,6 +2615,12 @@
 | `definitions.ConnectionMonitorResult.properties.location['x-ms-mutability__added']` | added | `["create","read"]` |
 | `definitions.DdosProtectionPlan.properties.location['x-ms-mutability__added']` | added | `["create","read"]` |
 
+### Changes for `kind`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.DefaultAdminRule.properties.kind__added` | added | `{"type":"string","description":"Whether the rule is custom or default.","enum":["Default"],"x-ms-enu...` |
+
 ### Changes for `x-ms-azure-resource`
 
 | Path | Change Type | Value |
@@ -2857,10 +2667,8 @@
 | `definitions.ActiveDefaultSecurityAdminRule.properties.properties.$ref` | `./networkManagerSecurityAdminConfiguration.json#/definitions/DefaultAdminPropertiesFormat` | `#/definitions/DefaultAdminPropertiesFormat` |
 | `definitions.ActiveSecurityAdminRule.properties.properties.$ref` | `./networkManagerSecurityAdminConfiguration.json#/definitions/AdminPropertiesFormat` | `#/definitions/AdminPropertiesFormat` |
 | `definitions.AdminRuleCollection.allOf[0].$ref` | `./network.json#/definitions/ChildResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
-| `definitions.ApplicationGateway.allOf[0].$ref` | `./network.json#/definitions/Resource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/Resource` |
-| `definitions.ApplicationGateway.properties.etag.description` | `A unique read-only string that changes whenever the resource is updated.` | `"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.")` |
+| `definitions.ApplicationGateway.allOf[0].$ref` | `./network.json#/definitions/Resource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
 | `definitions.ApplicationGateway.properties.identity.$ref` | `./network.json#/definitions/ManagedServiceIdentity` | `#/definitions/ManagedServiceIdentity` |
-| `definitions.ApplicationGateway.properties.zones.description` | `A list of availability zones denoting where the resource needs to come from.` | `The availability zones.` |
 | `definitions.ApplicationGatewayAuthenticationCertificate.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.ApplicationGatewayAuthenticationCertificatePropertiesFormat.properties.provisioningState.description` | `The provisioning state of the authentication certificate resource.` | `Provisioning states of a resource.` |
 | `definitions.ApplicationGatewayAvailableRequestHeadersResult.type` | `array` | `object` |
@@ -2925,7 +2733,6 @@
 | `definitions.ApplicationGatewayPathRulePropertiesFormat.properties.redirectConfiguration.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.ApplicationGatewayPathRulePropertiesFormat.properties.rewriteRuleSet.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.ApplicationGatewayPrivateEndpointConnection.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
-| `definitions.ApplicationGatewayPrivateEndpointConnection.properties.etag.description` | `A unique read-only string that changes whenever the resource is updated.` | `"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.")` |
 | `definitions.ApplicationGatewayPrivateEndpointConnectionProperties.properties.privateEndpoint.$ref` | `./privateEndpoint.json#/definitions/PrivateEndpoint` | `#/definitions/PrivateEndpoint` |
 | `definitions.ApplicationGatewayPrivateEndpointConnectionProperties.properties.privateLinkServiceConnectionState.$ref` | `./privateLinkService.json#/definitions/PrivateLinkServiceConnectionState` | `#/definitions/PrivateLinkServiceConnectionState` |
 | `definitions.ApplicationGatewayPrivateEndpointConnectionProperties.properties.provisioningState.description` | `The provisioning state of the application gateway private endpoint connection resource.` | `Provisioning states of a resource.` |
@@ -2980,13 +2787,10 @@
 | `definitions.ApplicationGatewayUrlPathMapPropertiesFormat.properties.defaultRewriteRuleSet.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.ApplicationGatewayUrlPathMapPropertiesFormat.properties.provisioningState.description` | `The provisioning state of the URL path map resource.` | `Provisioning states of a resource.` |
 | `definitions.ApplicationSecurityGroup.allOf[0].$ref` | `./network.json#/definitions/Resource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/Resource` |
-| `definitions.ApplicationSecurityGroup.properties.etag.description` | `A unique read-only string that changes whenever the resource is updated.` | `"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.")` |
 | `definitions.ApplicationSecurityGroupPropertiesFormat.properties.provisioningState.description` | `The provisioning state of the application security group resource.` | `Provisioning states of a resource.` |
 | `definitions.AuthorizationPropertiesFormat.properties.provisioningState.description` | `The provisioning state of the authorization resource.` | `Provisioning states of a resource.` |
-| `definitions.AzureFirewall.allOf[0].$ref` | `./network.json#/definitions/Resource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/Resource` |
-| `definitions.AzureFirewall.properties.etag.description` | `A unique read-only string that changes whenever the resource is updated.` | `"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.")` |
+| `definitions.AzureFirewall.allOf[0].$ref` | `./network.json#/definitions/Resource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
 | `definitions.AzureFirewall.properties.extendedLocation.$ref` | `./network.json#/definitions/ExtendedLocation` | `#/definitions/ExtendedLocation` |
-| `definitions.AzureFirewall.properties.zones.description` | `A list of availability zones denoting where the resource needs to come from.` | `The availability zones.` |
 | `definitions.AzureFirewallApplicationRuleCollection.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.AzureFirewallApplicationRuleCollectionPropertiesFormat.properties.provisioningState.description` | `The provisioning state of the application rule collection resource.` | `Provisioning states of a resource.` |
 | `definitions.AzureFirewallFqdnTag.allOf[0].$ref` | `./network.json#/definitions/Resource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/Resource` |
@@ -3002,9 +2806,7 @@
 | `definitions.AzureFirewallPropertiesFormat.properties.firewallPolicy.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.AzureFirewallPropertiesFormat.properties.provisioningState.description` | `The provisioning state of the Azure firewall resource.` | `Provisioning states of a resource.` |
 | `definitions.AzureFirewallPropertiesFormat.properties.virtualHub.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
-| `definitions.AzureWebCategory.properties.etag.description` | `A unique read-only string that changes whenever the resource is updated.` | `"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.")` |
 | `definitions.BackendAddressPool.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
-| `definitions.BackendAddressPool.properties.etag.description` | `A unique read-only string that changes whenever the resource is updated.` | `"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.")` |
 | `definitions.BackendAddressPoolPropertiesFormat.properties.backendIPConfigurations.items.$ref` | `./networkInterface.json#/definitions/NetworkInterfaceIPConfiguration` | `#/definitions/NetworkInterfaceIPConfiguration` |
 | `definitions.BackendAddressPoolPropertiesFormat.properties.inboundNatRules.items.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.BackendAddressPoolPropertiesFormat.properties.loadBalancingRules.items.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
@@ -3944,7 +3746,6 @@ For more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}'].patch.parameters[1].schema.$ref` | `./network.json#/definitions/TagsObject` | `#/definitions/TagsObject` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}'].patch.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}'].put.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/backendAddressPools'].get.responses.200.schema.$ref` | `#/definitions/LoadBalancerBackendAddressPoolListResult` | `#/definitions/BackendAddressPoolListResult` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/backendAddressPools'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/backendAddressPools/{backendAddressPoolName}'].delete.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/backendAddressPools/{backendAddressPoolName}'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |

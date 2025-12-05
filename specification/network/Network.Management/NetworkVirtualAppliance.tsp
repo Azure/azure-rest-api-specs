@@ -119,7 +119,7 @@ interface NetworkVirtualAppliances {
   restart is ArmResourceActionAsync<
     NetworkVirtualAppliance,
     NetworkVirtualApplianceInstanceIds,
-    ArmResponse<NetworkVirtualApplianceInstanceIds>,
+    NetworkVirtualApplianceInstanceIds,
     OptionalRequestBody = true,
     Error = CloudError
   >;
@@ -130,7 +130,7 @@ interface NetworkVirtualAppliances {
   reimage is ArmResourceActionAsync<
     NetworkVirtualAppliance,
     NetworkVirtualApplianceInstanceIds,
-    ArmResponse<NetworkVirtualApplianceInstanceIds>,
+    NetworkVirtualApplianceInstanceIds,
     OptionalRequestBody = true,
     Error = CloudError
   >;
@@ -141,7 +141,7 @@ interface NetworkVirtualAppliances {
   getBootDiagnosticLogs is ArmResourceActionAsync<
     NetworkVirtualAppliance,
     NetworkVirtualApplianceBootDiagnosticParameters,
-    ArmResponse<NetworkVirtualApplianceInstanceId>,
+    NetworkVirtualApplianceInstanceId,
     Error = CloudError
   >;
 

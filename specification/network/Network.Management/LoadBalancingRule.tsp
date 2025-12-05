@@ -83,7 +83,7 @@ interface LoadBalancingRules {
   health is LoadBalancerLoadBalancingRuleOps.ActionAsync<
     LoadBalancingRule,
     void,
-    ArmResponse<LoadBalancerHealthPerRule>,
+    LoadBalancerHealthPerRule,
     OverrideErrorType = CloudError
   >;
 }

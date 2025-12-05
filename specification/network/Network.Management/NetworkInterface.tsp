@@ -82,7 +82,10 @@ interface NetworkInterfaces {
   /**
    * Gets information about all network interfaces in a role instance in a cloud service.
    */
-  listCloudServiceRoleInstanceNetworkInterfaces is NetworkInterfaceOps.List<NetworkInterface, OverrideErrorType = CloudError>;
+  listCloudServiceRoleInstanceNetworkInterfaces is NetworkInterfaceOps.List<
+    NetworkInterface,
+    OverrideErrorType = CloudError
+  >;
 }
 alias NetworkInterfaceOperationGroupOps = Azure.ResourceManager.Legacy.LegacyOperations<
   {
@@ -124,7 +127,10 @@ interface NetworkInterfaceOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("NetworkInterfaces_CreateOrUpdate")
-  createOrUpdate is NetworkInterfaceOperationGroupOps.CreateOrUpdateAsync<NetworkInterface,  OverrideErrorType = CloudError>;
+  createOrUpdate is NetworkInterfaceOperationGroupOps.CreateOrUpdateAsync<
+    NetworkInterface,
+    OverrideErrorType = CloudError
+  >;
 
   /**
    * Updates a network interface tags.
@@ -146,15 +152,19 @@ interface NetworkInterfaceOperationGroup {
   @operationId("NetworkInterfaces_Delete")
   delete is NetworkInterfaceOperationGroupOps.DeleteWithoutOkAsync<
     NetworkInterface,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
-,    OverrideErrorType = CloudError>;
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    OverrideErrorType = CloudError
+  >;
 
   /**
    * Gets all network interfaces in a resource group.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("NetworkInterfaces_List")
-  list is NetworkInterfaceOperationGroupOps.List<NetworkInterface, OverrideErrorType = CloudError>;
+  list is NetworkInterfaceOperationGroupOps.List<
+    NetworkInterface,
+    OverrideErrorType = CloudError
+  >;
 
   /**
    * Gets all network interfaces in a subscription.
@@ -173,7 +183,7 @@ interface NetworkInterfaceOperationGroup {
   getEffectiveRouteTable is NetworkInterfaceOperationGroupOps.ActionAsync<
     NetworkInterface,
     void,
-    ArmResponse<EffectiveRouteListResult>
+    EffectiveRouteListResult
   >;
 
   /**
@@ -186,7 +196,7 @@ interface NetworkInterfaceOperationGroup {
   listEffectiveNetworkSecurityGroups is NetworkInterfaceOperationGroupOps.ActionAsync<
     NetworkInterface,
     void,
-    ArmResponse<EffectiveNetworkSecurityGroupListResult>
+    EffectiveNetworkSecurityGroupListResult
   >;
 
   /**

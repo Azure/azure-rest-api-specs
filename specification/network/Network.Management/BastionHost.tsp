@@ -91,7 +91,7 @@ interface BastionHosts {
   putBastionShareableLink is ArmResourceActionAsync<
     BastionHost,
     BastionShareableLinkListRequest,
-    ArmResponse<BastionShareableLinkListResult>,
+    BastionShareableLinkListResult,
     Error = CloudError
   >;
 
@@ -132,7 +132,7 @@ interface BastionHosts {
   getBastionShareableLink is ArmResourceActionSync<
     BastionHost,
     BastionShareableLinkListRequest,
-    ArmResponse<BastionShareableLinkListResult>,
+    BastionShareableLinkListResult,
     Error = CloudError
   >;
 
@@ -145,7 +145,7 @@ interface BastionHosts {
   getActiveSessions is ArmResourceActionAsync<
     BastionHost,
     void,
-    ArmResponse<BastionActiveSessionListResult>,
+    BastionActiveSessionListResult,
     Error = CloudError
   >;
 
