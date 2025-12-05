@@ -729,29 +729,36 @@ union KnowledgeSourceIngestionPermissionOption {
 
 @doc("Consolidates all general ingestion settings for knowledge sources.")
 model KnowledgeSourceIngestionParameters {
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @doc("An explicit identity to use for this knowledge source.")
-  identity?: SearchIndexerDataIdentity;
+  identity?: SearchIndexerDataIdentity | null;
 
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @doc("Optional vectorizer configuration for vectorizing content.")
-  embeddingModel?: KnowledgeSourceVectorizer;
+  embeddingModel?: KnowledgeSourceVectorizer | null;
 
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @doc("Optional chat completion model for image verbalization or context extraction.")
-  chatCompletionModel?: KnowledgeBaseModel;
+  chatCompletionModel?: KnowledgeBaseModel | null;
 
   @doc("Indicates whether image verbalization should be disabled. Default is false.")
   disableImageVerbalization?: boolean = false;
 
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @doc("Optional schedule for data ingestion.")
-  ingestionSchedule?: IndexingSchedule;
+  ingestionSchedule?: IndexingSchedule | null;
 
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @doc("Optional list of permission types to ingest together with document content. If specified, it will set the indexer permission options for the data source.")
-  ingestionPermissionOptions?: KnowledgeSourceIngestionPermissionOption[];
+  ingestionPermissionOptions?: KnowledgeSourceIngestionPermissionOption[] | null;
 
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @doc("Optional content extraction mode. Default is 'minimal'.")
-  contentExtractionMode?: KnowledgeSourceContentExtractionMode = KnowledgeSourceContentExtractionMode.Minimal;
+  contentExtractionMode?: KnowledgeSourceContentExtractionMode | null = KnowledgeSourceContentExtractionMode.Minimal;
 
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @doc("Optional AI Services configuration for content processing.")
-  aiServices?: AIServices;
+  aiServices?: AIServices | null;
 }
 
 @doc("Specifies the vectorization method to be used for knowledge source embedding model.")
@@ -790,17 +797,21 @@ model KnowledgeSourceStatus {
   @doc("The current synchronization status.")
   synchronizationStatus: KnowledgeSourceSynchronizationStatus;
 
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @doc("The synchronization interval (e.g., '1d' for daily). Null if no schedule is configured.")
-  synchronizationInterval?: string;
+  synchronizationInterval?: string | null;
 
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @doc("Current synchronization state that spans multiple indexer runs.")
-  currentSynchronizationState?: SynchronizationState;
+  currentSynchronizationState?: SynchronizationState | null;
 
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @doc("Details of the last completed synchronization. Null on first sync.")
-  lastSynchronizationState?: CompletedSynchronizationState;
+  lastSynchronizationState?: CompletedSynchronizationState | null;
 
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @doc("Statistical information about the knowledge source synchronization history. Null on first sync.")
-  statistics?: KnowledgeSourceStatistics;
+  statistics?: KnowledgeSourceStatistics | null;
 }
 
 @doc("Statistical information about knowledge source synchronization history.")

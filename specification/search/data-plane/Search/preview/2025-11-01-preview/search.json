@@ -3518,7 +3518,8 @@
       "properties": {
         "identity": {
           "$ref": "#/definitions/SearchIndexerDataIdentity",
-          "description": "The user-assigned managed identity used for connections to AI Service. If not specified, the system-assigned managed identity is used. On updates to the skillset, if the identity is unspecified, the value remains unchanged. If set to \"none\", the value of this property is cleared."
+          "description": "The user-assigned managed identity used for connections to AI Service. If not specified, the system-assigned managed identity is used. On updates to the skillset, if the identity is unspecified, the value remains unchanged. If set to \"none\", the value of this property is cleared.",
+          "x-nullable": true
         },
         "subdomainUrl": {
           "type": "string",
@@ -3565,7 +3566,8 @@
       "properties": {
         "modelVersion": {
           "type": "string",
-          "description": "The version of the model to use when calling the AI Services Vision service. It will default to the latest available when not specified."
+          "description": "The version of the model to use when calling the AI Services Vision service. It will default to the latest available when not specified.",
+          "x-nullable": true
         },
         "resourceUri": {
           "type": "string",
@@ -3578,7 +3580,8 @@
         },
         "authIdentity": {
           "$ref": "#/definitions/SearchIndexerDataIdentity",
-          "description": "The user-assigned managed identity used for outbound connections. If an authResourceId is provided and it's not specified, the system-assigned managed identity is used. On updates to the index, if the identity is unspecified, the value remains unchanged. If set to \"none\", the value of this property is cleared."
+          "description": "The user-assigned managed identity used for outbound connections. If an authResourceId is provided and it's not specified, the system-assigned managed identity is used. On updates to the index, if the identity is unspecified, the value remains unchanged. If set to \"none\", the value of this property is cleared.",
+          "x-nullable": true
         }
       },
       "required": [
@@ -3609,24 +3612,29 @@
         "uri": {
           "type": "string",
           "format": "uri",
-          "description": "(Required for no authentication or key authentication) The scoring URI of the AML service to which the JSON payload will be sent. Only the https URI scheme is allowed."
+          "description": "(Required for no authentication or key authentication) The scoring URI of the AML service to which the JSON payload will be sent. Only the https URI scheme is allowed.",
+          "x-nullable": true
         },
         "key": {
           "type": "string",
-          "description": "(Required for key authentication) The key for the AML service."
+          "description": "(Required for key authentication) The key for the AML service.",
+          "x-nullable": true
         },
         "resourceId": {
           "type": "string",
-          "description": "(Required for token authentication). The Azure Resource Manager resource ID of the AML service. It should be in the format subscriptions/{guid}/resourceGroups/{resource-group-name}/Microsoft.MachineLearningServices/workspaces/{workspace-name}/services/{service_name}."
+          "description": "(Required for token authentication). The Azure Resource Manager resource ID of the AML service. It should be in the format subscriptions/{guid}/resourceGroups/{resource-group-name}/Microsoft.MachineLearningServices/workspaces/{workspace-name}/services/{service_name}.",
+          "x-nullable": true
         },
         "timeout": {
           "type": "string",
           "format": "duration",
-          "description": "(Optional) When specified, indicates the timeout for the http client making the API call."
+          "description": "(Optional) When specified, indicates the timeout for the http client making the API call.",
+          "x-nullable": true
         },
         "region": {
           "type": "string",
-          "description": "(Optional for token authentication). The region the AML service is deployed in."
+          "description": "(Optional for token authentication). The region the AML service is deployed in.",
+          "x-nullable": true
         },
         "modelName": {
           "$ref": "#/definitions/AIFoundryModelCatalogName",
@@ -3932,7 +3940,8 @@
         },
         "folderPath": {
           "type": "string",
-          "description": "Optional folder path within the container."
+          "description": "Optional folder path within the container.",
+          "x-nullable": true
         },
         "isADLSGen2": {
           "type": "boolean",
@@ -3941,7 +3950,8 @@
         },
         "ingestionParameters": {
           "$ref": "#/definitions/KnowledgeSourceIngestionParameters",
-          "description": "Consolidates all general ingestion settings."
+          "description": "Consolidates all general ingestion settings.",
+          "x-nullable": true
         },
         "createdResources": {
           "$ref": "#/definitions/CreatedResources",
@@ -3971,29 +3981,35 @@
         "uri": {
           "type": "string",
           "format": "uri",
-          "description": "(Required for no authentication or key authentication) The scoring URI of the AML service to which the JSON payload will be sent. Only the https URI scheme is allowed."
+          "description": "(Required for no authentication or key authentication) The scoring URI of the AML service to which the JSON payload will be sent. Only the https URI scheme is allowed.",
+          "x-nullable": true
         },
         "key": {
           "type": "string",
-          "description": "(Required for key authentication) The key for the AML service."
+          "description": "(Required for key authentication) The key for the AML service.",
+          "x-nullable": true
         },
         "resourceId": {
           "type": "string",
-          "description": "(Required for token authentication). The Azure Resource Manager resource ID of the AML service. It should be in the format subscriptions/{guid}/resourceGroups/{resource-group-name}/Microsoft.MachineLearningServices/workspaces/{workspace-name}/services/{service_name}."
+          "description": "(Required for token authentication). The Azure Resource Manager resource ID of the AML service. It should be in the format subscriptions/{guid}/resourceGroups/{resource-group-name}/Microsoft.MachineLearningServices/workspaces/{workspace-name}/services/{service_name}.",
+          "x-nullable": true
         },
         "timeout": {
           "type": "string",
           "format": "duration",
-          "description": "(Optional) When specified, indicates the timeout for the http client making the API call."
+          "description": "(Optional) When specified, indicates the timeout for the http client making the API call.",
+          "x-nullable": true
         },
         "region": {
           "type": "string",
-          "description": "(Optional for token authentication). The region the AML service is deployed in."
+          "description": "(Optional for token authentication). The region the AML service is deployed in.",
+          "x-nullable": true
         },
         "degreeOfParallelism": {
           "type": "integer",
           "format": "int32",
-          "description": "(Optional) When specified, indicates the number of calls the indexer will make in parallel to the endpoint you have provided. You can decrease this value if your endpoint is failing under too high of a request load, or raise it if your endpoint is able to accept more requests and you would like an increase in the performance of the indexer. If not set, a default value of 5 is used. The degreeOfParallelism can be set to a maximum of 10 and a minimum of 1."
+          "description": "(Optional) When specified, indicates the number of calls the indexer will make in parallel to the endpoint you have provided. You can decrease this value if your endpoint is failing under too high of a request load, or raise it if your endpoint is able to accept more requests and you would like an increase in the performance of the indexer. If not set, a default value of 5 is used. The degreeOfParallelism can be set to a maximum of 10 and a minimum of 1.",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -4035,7 +4051,8 @@
         "dimensions": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of dimensions the resulting output embeddings should have. Only supported in text-embedding-3 and later models."
+          "description": "The number of dimensions the resulting output embeddings should have. Only supported in text-embedding-3 and later models.",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -4129,7 +4146,8 @@
       "properties": {
         "encoderModelName": {
           "$ref": "#/definitions/SplitSkillEncoderModelName",
-          "description": "Only applies if the unit is set to azureOpenAITokens. Options include 'R50k_base', 'P50k_base', 'P50k_edit' and 'CL100k_base'. The default value is 'CL100k_base'."
+          "description": "Only applies if the unit is set to azureOpenAITokens. Options include 'R50k_base', 'P50k_base', 'P50k_edit' and 'CL100k_base'. The default value is 'CL100k_base'.",
+          "x-nullable": true
         },
         "allowedSpecialTokens": {
           "type": "array",
@@ -4206,7 +4224,8 @@
         },
         "authIdentity": {
           "$ref": "#/definitions/SearchIndexerDataIdentity",
-          "description": "The user-assigned managed identity used for outbound connections."
+          "description": "The user-assigned managed identity used for outbound connections.",
+          "x-nullable": true
         },
         "modelName": {
           "$ref": "#/definitions/AzureOpenAIModelName",
@@ -4221,12 +4240,14 @@
         "k1": {
           "type": "number",
           "format": "double",
-          "description": "This property controls the scaling function between the term frequency of each matching terms and the final relevance score of a document-query pair. By default, a value of 1.2 is used. A value of 0.0 means the score does not scale with an increase in term frequency."
+          "description": "This property controls the scaling function between the term frequency of each matching terms and the final relevance score of a document-query pair. By default, a value of 1.2 is used. A value of 0.0 means the score does not scale with an increase in term frequency.",
+          "x-nullable": true
         },
         "b": {
           "type": "number",
           "format": "double",
-          "description": "This property controls how the length of a document affects the relevance score. By default, a value of 0.75 is used. A value of 0.0 means no length normalization is applied, while a value of 1.0 means the score is fully normalized by the length of the document."
+          "description": "This property controls how the length of a document affects the relevance score. By default, a value of 0.75 is used. A value of 0.0 means no length normalization is applied, while a value of 1.0 means the score is fully normalized by the length of the document.",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -4428,39 +4449,46 @@
         "model": {
           "type": "string",
           "description": "The name of the model to use (e.g., 'gpt-4o', etc.). Default is null if not specified.",
+          "x-nullable": true,
           "x-ms-client-name": "modelName"
         },
         "frequencyPenalty": {
           "type": "number",
           "format": "double",
           "description": "A float in the range [-2,2] that reduces or increases likelihood of repeated tokens. Default is 0.",
-          "default": 0
+          "default": 0,
+          "x-nullable": true
         },
         "presencePenalty": {
           "type": "number",
           "format": "double",
           "description": "A float in the range [-2,2] that penalizes new tokens based on their existing presence. Default is 0.",
-          "default": 0
+          "default": 0,
+          "x-nullable": true
         },
         "maxTokens": {
           "type": "integer",
           "format": "int32",
-          "description": "Maximum number of tokens to generate."
+          "description": "Maximum number of tokens to generate.",
+          "x-nullable": true
         },
         "temperature": {
           "type": "number",
           "format": "double",
           "description": "Sampling temperature. Default is 0.7.",
-          "default": 0.7
+          "default": 0.7,
+          "x-nullable": true
         },
         "seed": {
           "type": "integer",
           "format": "int32",
-          "description": "Random seed for controlling deterministic outputs. If omitted, randomization is used."
+          "description": "Random seed for controlling deterministic outputs. If omitted, randomization is used.",
+          "x-nullable": true
         },
         "stop": {
           "type": "array",
           "description": "List of stop sequences that will cut off text generation. Default is none.",
+          "x-nullable": true,
           "items": {
             "type": "string"
           }
@@ -4534,7 +4562,8 @@
         },
         "jsonSchemaProperties": {
           "$ref": "#/definitions/ChatCompletionSchemaProperties",
-          "description": "An open dictionary for extended properties. Required if 'type' == 'json_schema'"
+          "description": "An open dictionary for extended properties. Required if 'type' == 'json_schema'",
+          "x-nullable": true
         }
       }
     },
@@ -4601,11 +4630,13 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Name of the json schema the model will adhere to."
+          "description": "Name of the json schema the model will adhere to.",
+          "x-nullable": true
         },
         "description": {
           "type": "string",
-          "description": "Description of the json schema the model will adhere to."
+          "description": "Description of the json schema the model will adhere to.",
+          "x-nullable": true
         },
         "strict": {
           "type": "boolean",
@@ -4668,6 +4699,7 @@
         "extraParameters": {
           "type": "object",
           "description": "Open-type dictionary for model-specific parameters that should be appended to the chat completions call. Follows Azure AI Foundry's extensibility pattern.",
+          "x-nullable": true,
           "additionalProperties": {}
         },
         "extraParametersBehavior": {
@@ -4926,13 +4958,15 @@
         "extractionOptions": {
           "type": "array",
           "description": "Controls the cardinality of the content extracted from the document by the skill.",
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/ContentUnderstandingSkillExtractionOptions"
           }
         },
         "chunkingProperties": {
           "$ref": "#/definitions/ContentUnderstandingSkillChunkingProperties",
-          "description": "Controls the cardinality for chunking the content."
+          "description": "Controls the cardinality for chunking the content.",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -4948,17 +4982,20 @@
       "properties": {
         "unit": {
           "$ref": "#/definitions/ContentUnderstandingSkillChunkingUnit",
-          "description": "The unit of the chunk."
+          "description": "The unit of the chunk.",
+          "x-nullable": true
         },
         "maximumLength": {
           "type": "integer",
           "format": "int32",
-          "description": "The maximum chunk length in characters. Default is 500."
+          "description": "The maximum chunk length in characters. Default is 500.",
+          "x-nullable": true
         },
         "overlapLength": {
           "type": "integer",
           "format": "int32",
-          "description": "The length of overlap provided between two text chunks. Default is 0."
+          "description": "The length of overlap provided between two text chunks. Default is 0.",
+          "x-nullable": true
         }
       }
     },
@@ -5018,7 +5055,8 @@
         "maxAgeInSeconds": {
           "type": "integer",
           "format": "int64",
-          "description": "The duration for which browsers should cache CORS preflight responses. Defaults to 5 minutes."
+          "description": "The duration for which browsers should cache CORS preflight responses. Defaults to 5 minutes.",
+          "x-nullable": true
         }
       },
       "required": [
@@ -5075,49 +5113,60 @@
         },
         "description": {
           "type": "string",
-          "description": "This field can be used as a passthrough for custom metadata about the matched text(s). The value of this field will appear with every match of its entity in the skill output."
+          "description": "This field can be used as a passthrough for custom metadata about the matched text(s). The value of this field will appear with every match of its entity in the skill output.",
+          "x-nullable": true
         },
         "type": {
           "type": "string",
-          "description": "This field can be used as a passthrough for custom metadata about the matched text(s). The value of this field will appear with every match of its entity in the skill output."
+          "description": "This field can be used as a passthrough for custom metadata about the matched text(s). The value of this field will appear with every match of its entity in the skill output.",
+          "x-nullable": true
         },
         "subtype": {
           "type": "string",
-          "description": "This field can be used as a passthrough for custom metadata about the matched text(s). The value of this field will appear with every match of its entity in the skill output."
+          "description": "This field can be used as a passthrough for custom metadata about the matched text(s). The value of this field will appear with every match of its entity in the skill output.",
+          "x-nullable": true
         },
         "id": {
           "type": "string",
-          "description": "This field can be used as a passthrough for custom metadata about the matched text(s). The value of this field will appear with every match of its entity in the skill output."
+          "description": "This field can be used as a passthrough for custom metadata about the matched text(s). The value of this field will appear with every match of its entity in the skill output.",
+          "x-nullable": true
         },
         "caseSensitive": {
           "type": "boolean",
-          "description": "Defaults to false. Boolean value denoting whether comparisons with the entity name should be sensitive to character casing. Sample case insensitive matches of \"Microsoft\" could be: microsoft, microSoft, MICROSOFT."
+          "description": "Defaults to false. Boolean value denoting whether comparisons with the entity name should be sensitive to character casing. Sample case insensitive matches of \"Microsoft\" could be: microsoft, microSoft, MICROSOFT.",
+          "x-nullable": true
         },
         "accentSensitive": {
           "type": "boolean",
-          "description": "Defaults to false. Boolean value denoting whether comparisons with the entity name should be sensitive to accent."
+          "description": "Defaults to false. Boolean value denoting whether comparisons with the entity name should be sensitive to accent.",
+          "x-nullable": true
         },
         "fuzzyEditDistance": {
           "type": "integer",
           "format": "int32",
-          "description": "Defaults to 0. Maximum value of 5. Denotes the acceptable number of divergent characters that would still constitute a match with the entity name. The smallest possible fuzziness for any given match is returned. For instance, if the edit distance is set to 3, \"Windows10\" would still match \"Windows\", \"Windows10\" and \"Windows 7\". When case sensitivity is set to false, case differences do NOT count towards fuzziness tolerance, but otherwise do."
+          "description": "Defaults to 0. Maximum value of 5. Denotes the acceptable number of divergent characters that would still constitute a match with the entity name. The smallest possible fuzziness for any given match is returned. For instance, if the edit distance is set to 3, \"Windows10\" would still match \"Windows\", \"Windows10\" and \"Windows 7\". When case sensitivity is set to false, case differences do NOT count towards fuzziness tolerance, but otherwise do.",
+          "x-nullable": true
         },
         "defaultCaseSensitive": {
           "type": "boolean",
-          "description": "Changes the default case sensitivity value for this entity. It be used to change the default value of all aliases caseSensitive values."
+          "description": "Changes the default case sensitivity value for this entity. It be used to change the default value of all aliases caseSensitive values.",
+          "x-nullable": true
         },
         "defaultAccentSensitive": {
           "type": "boolean",
-          "description": "Changes the default accent sensitivity value for this entity. It be used to change the default value of all aliases accentSensitive values."
+          "description": "Changes the default accent sensitivity value for this entity. It be used to change the default value of all aliases accentSensitive values.",
+          "x-nullable": true
         },
         "defaultFuzzyEditDistance": {
           "type": "integer",
           "format": "int32",
-          "description": "Changes the default fuzzy edit distance value for this entity. It can be used to change the default value of all aliases fuzzyEditDistance values."
+          "description": "Changes the default fuzzy edit distance value for this entity. It can be used to change the default value of all aliases fuzzyEditDistance values.",
+          "x-nullable": true
         },
         "aliases": {
           "type": "array",
           "description": "An array of complex objects that can be used to specify alternative spellings or synonyms to the root entity name.",
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/CustomEntityAlias"
           }
@@ -5137,16 +5186,19 @@
         },
         "caseSensitive": {
           "type": "boolean",
-          "description": "Determine if the alias is case sensitive."
+          "description": "Determine if the alias is case sensitive.",
+          "x-nullable": true
         },
         "accentSensitive": {
           "type": "boolean",
-          "description": "Determine if the alias is accent sensitive."
+          "description": "Determine if the alias is accent sensitive.",
+          "x-nullable": true
         },
         "fuzzyEditDistance": {
           "type": "integer",
           "format": "int32",
-          "description": "Determine the fuzzy edit distance of the alias."
+          "description": "Determine the fuzzy edit distance of the alias.",
+          "x-nullable": true
         }
       },
       "required": [
@@ -5159,31 +5211,37 @@
       "properties": {
         "defaultLanguageCode": {
           "$ref": "#/definitions/CustomEntityLookupSkillLanguage",
-          "description": "A value indicating which language code to use. Default is `en`."
+          "description": "A value indicating which language code to use. Default is `en`.",
+          "x-nullable": true
         },
         "entitiesDefinitionUri": {
           "type": "string",
-          "description": "Path to a JSON or CSV file containing all the target text to match against. This entity definition is read at the beginning of an indexer run. Any updates to this file during an indexer run will not take effect until subsequent runs. This config must be accessible over HTTPS."
+          "description": "Path to a JSON or CSV file containing all the target text to match against. This entity definition is read at the beginning of an indexer run. Any updates to this file during an indexer run will not take effect until subsequent runs. This config must be accessible over HTTPS.",
+          "x-nullable": true
         },
         "inlineEntitiesDefinition": {
           "type": "array",
           "description": "The inline CustomEntity definition.",
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/CustomEntity"
           }
         },
         "globalDefaultCaseSensitive": {
           "type": "boolean",
-          "description": "A global flag for CaseSensitive. If CaseSensitive is not set in CustomEntity, this value will be the default value."
+          "description": "A global flag for CaseSensitive. If CaseSensitive is not set in CustomEntity, this value will be the default value.",
+          "x-nullable": true
         },
         "globalDefaultAccentSensitive": {
           "type": "boolean",
-          "description": "A global flag for AccentSensitive. If AccentSensitive is not set in CustomEntity, this value will be the default value."
+          "description": "A global flag for AccentSensitive. If AccentSensitive is not set in CustomEntity, this value will be the default value.",
+          "x-nullable": true
         },
         "globalDefaultFuzzyEditDistance": {
           "type": "integer",
           "format": "int32",
-          "description": "A global flag for FuzzyEditDistance. If FuzzyEditDistance is not set in CustomEntity, this value will be the default value."
+          "description": "A global flag for FuzzyEditDistance. If FuzzyEditDistance is not set in CustomEntity, this value will be the default value.",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -5462,15 +5520,18 @@
       "properties": {
         "parsingMode": {
           "type": "string",
-          "description": "The parsingMode for the skill. Will be set to 'default' if not defined."
+          "description": "The parsingMode for the skill. Will be set to 'default' if not defined.",
+          "x-nullable": true
         },
         "dataToExtract": {
           "type": "string",
-          "description": "The type of data to be extracted for the skill. Will be set to 'contentAndMetadata' if not defined."
+          "description": "The type of data to be extracted for the skill. Will be set to 'contentAndMetadata' if not defined.",
+          "x-nullable": true
         },
         "configuration": {
           "type": "object",
           "description": "A dictionary of configurations for the skill.",
+          "x-nullable": true,
           "additionalProperties": {}
         }
       },
@@ -5494,7 +5555,6 @@
             "markdown"
           ],
           "x-ms-enum": {
-            "name": "DocumentIntelligenceLayoutSkillOutputFormat",
             "modelAsString": true,
             "values": [
               {
@@ -5508,7 +5568,8 @@
                 "description": "Specify the format of the output as markdown."
               }
             ]
-          }
+          },
+          "x-nullable": true
         },
         "outputMode": {
           "type": "string",
@@ -5518,7 +5579,6 @@
             "oneToMany"
           ],
           "x-ms-enum": {
-            "name": "DocumentIntelligenceLayoutSkillOutputMode",
             "modelAsString": true,
             "values": [
               {
@@ -5527,7 +5587,8 @@
                 "description": "Specify that the output should be parsed as 'oneToMany'."
               }
             ]
-          }
+          },
+          "x-nullable": true
         },
         "markdownHeaderDepth": {
           "type": "string",
@@ -5542,7 +5603,6 @@
             "h6"
           ],
           "x-ms-enum": {
-            "name": "DocumentIntelligenceLayoutSkillMarkdownHeaderDepth",
             "modelAsString": true,
             "values": [
               {
@@ -5576,18 +5636,21 @@
                 "description": "Header level 6."
               }
             ]
-          }
+          },
+          "x-nullable": true
         },
         "extractionOptions": {
           "type": "array",
           "description": "Controls the cardinality of the content extracted from the document by the skill.",
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/DocumentIntelligenceLayoutSkillExtractionOptions"
           }
         },
         "chunkingProperties": {
           "$ref": "#/definitions/DocumentIntelligenceLayoutSkillChunkingProperties",
-          "description": "Controls the cardinality for chunking the content."
+          "description": "Controls the cardinality for chunking the content.",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -5603,17 +5666,20 @@
       "properties": {
         "unit": {
           "$ref": "#/definitions/DocumentIntelligenceLayoutSkillChunkingUnit",
-          "description": "The unit of the chunk."
+          "description": "The unit of the chunk.",
+          "x-nullable": true
         },
         "maximumLength": {
           "type": "integer",
           "format": "int32",
-          "description": "The maximum chunk length in characters. Default is 500."
+          "description": "The maximum chunk length in characters. Default is 500.",
+          "x-nullable": true
         },
         "overlapLength": {
           "type": "integer",
           "format": "int32",
-          "description": "The length of overlap provided between two text chunks. Default is 0."
+          "description": "The length of overlap provided between two text chunks. Default is 0.",
+          "x-nullable": true
         }
       }
     },
@@ -5935,18 +6001,19 @@
       "properties": {
         "defaultLanguageCode": {
           "type": "string",
-          "description": "A value indicating which language code to use. Default is `en`."
+          "description": "A value indicating which language code to use. Default is `en`.",
+          "x-nullable": true
         },
         "minimumPrecision": {
           "type": "number",
           "format": "double",
           "description": "A value between 0 and 1 that be used to only include entities whose confidence score is greater than the value specified. If not set (default), or if explicitly set to null, all entities will be included.",
-          "minimum": 0,
-          "maximum": 1
+          "x-nullable": true
         },
         "modelVersion": {
           "type": "string",
-          "description": "The version of the model to use when calling the Text Analytics service. It will default to the latest available when not specified. We recommend you do not specify this value unless absolutely necessary."
+          "description": "The version of the model to use when calling the Text Analytics service. It will default to the latest available when not specified. We recommend you do not specify this value unless absolutely necessary.",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -5958,27 +6025,30 @@
     },
     "EntityRecognitionSkill": {
       "type": "object",
-      "description": "This skill is deprecated. Use the V3.EntityRecognitionSkill instead.",
+      "description": "Using the Text Analytics API, extracts entities of different types from text.",
       "properties": {
         "categories": {
           "type": "array",
           "description": "A list of entity categories that should be extracted.",
           "items": {
-            "$ref": "#/definitions/EntityCategory"
+            "type": "string"
           }
         },
         "defaultLanguageCode": {
-          "$ref": "#/definitions/EntityRecognitionSkillLanguage",
-          "description": "A value indicating which language code to use. Default is `en`."
-        },
-        "includeTypelessEntities": {
-          "type": "boolean",
-          "description": "Determines whether or not to include entities which are well known but don't conform to a pre-defined type. If this configuration is not set (default), set to null or set to false, entities which don't conform to one of the pre-defined types will not be surfaced."
+          "type": "string",
+          "description": "A value indicating which language code to use. Default is `en`.",
+          "x-nullable": true
         },
         "minimumPrecision": {
           "type": "number",
           "format": "double",
-          "description": "A value between 0 and 1 that be used to only include entities whose confidence score is greater than the value specified. If not set (default), or if explicitly set to null, all entities will be included."
+          "description": "A value between 0 and 1 that be used to only include entities whose confidence score is greater than the value specified. If not set (default), or if explicitly set to null, all entities will be included.",
+          "x-nullable": true
+        },
+        "modelVersion": {
+          "type": "string",
+          "description": "The version of the model to use when calling the Text Analytics API. It will default to the latest available when not specified. We recommend you do not specify this value unless absolutely necessary.",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -5986,7 +6056,7 @@
           "$ref": "#/definitions/SearchIndexerSkill"
         }
       ],
-      "x-ms-discriminator-value": "#Microsoft.Skills.Text.EntityRecognitionSkill"
+      "x-ms-discriminator-value": "#Microsoft.Skills.Text.V3.EntityRecognitionSkill"
     },
     "EntityRecognitionSkillLanguage": {
       "type": "string",
@@ -6138,40 +6208,6 @@
         ]
       }
     },
-    "EntityRecognitionSkillV3": {
-      "type": "object",
-      "description": "Using the Text Analytics API, extracts entities of different types from text.",
-      "properties": {
-        "categories": {
-          "type": "array",
-          "description": "A list of entity categories that should be extracted.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "defaultLanguageCode": {
-          "type": "string",
-          "description": "A value indicating which language code to use. Default is `en`."
-        },
-        "minimumPrecision": {
-          "type": "number",
-          "format": "double",
-          "description": "A value between 0 and 1 that be used to only include entities whose confidence score is greater than the value specified. If not set (default), or if explicitly set to null, all entities will be included.",
-          "minimum": 0,
-          "maximum": 1
-        },
-        "modelVersion": {
-          "type": "string",
-          "description": "The version of the model to use when calling the Text Analytics API. It will default to the latest available when not specified. We recommend you do not specify this value unless absolutely necessary."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/SearchIndexerSkill"
-        }
-      ],
-      "x-ms-discriminator-value": "#Microsoft.Skills.Text.V3.EntityRecognitionSkill"
-    },
     "ErrorAdditionalInfo": {
       "type": "object",
       "description": "The resource management error additional info.",
@@ -6253,7 +6289,8 @@
       "properties": {
         "metric": {
           "$ref": "#/definitions/VectorSearchAlgorithmMetric",
-          "description": "The similarity metric to use for vector comparisons."
+          "description": "The similarity metric to use for vector comparisons.",
+          "x-nullable": true
         }
       }
     },
@@ -6326,7 +6363,8 @@
         },
         "mappingFunction": {
           "$ref": "#/definitions/FieldMappingFunction",
-          "description": "A function to apply to each source field value before indexing."
+          "description": "A function to apply to each source field value before indexing.",
+          "x-nullable": true
         }
       },
       "required": [
@@ -6344,6 +6382,7 @@
         "parameters": {
           "type": "object",
           "description": "A dictionary of parameter name/value pairs to pass to the function. Each value must be of a primitive type.",
+          "x-nullable": true,
           "additionalProperties": {}
         }
       },
@@ -6457,28 +6496,26 @@
           "format": "int32",
           "description": "The number of bi-directional links created for every new element during construction. Increasing this parameter value may improve recall and reduce retrieval times for datasets with high intrinsic dimensionality at the expense of increased memory consumption and longer indexing time.",
           "default": 4,
-          "minimum": 4,
-          "maximum": 10
+          "x-nullable": true
         },
         "efConstruction": {
           "type": "integer",
           "format": "int32",
           "description": "The size of the dynamic list containing the nearest neighbors, which is used during index time. Increasing this parameter may improve index quality, at the expense of increased indexing time. At a certain point, increasing this parameter leads to diminishing returns.",
           "default": 400,
-          "minimum": 100,
-          "maximum": 1000
+          "x-nullable": true
         },
         "efSearch": {
           "type": "integer",
           "format": "int32",
           "description": "The size of the dynamic list containing the nearest neighbors, which is used during search time. Increasing this parameter may improve search results, at the expense of slower search. At a certain point, increasing this parameter leads to diminishing returns.",
           "default": 500,
-          "minimum": 100,
-          "maximum": 1000
+          "x-nullable": true
         },
         "metric": {
           "$ref": "#/definitions/VectorSearchAlgorithmMetric",
-          "description": "The similarity metric to use for vector comparisons."
+          "description": "The similarity metric to use for vector comparisons.",
+          "x-nullable": true
         }
       }
     },
@@ -7070,7 +7107,8 @@
         },
         "targetPath": {
           "type": "string",
-          "description": "Optional OneLakehouse folder or shortcut to filter OneLake content."
+          "description": "Optional OneLakehouse folder or shortcut to filter OneLake content.",
+          "x-nullable": true
         },
         "ingestionParameters": {
           "$ref": "#/definitions/KnowledgeSourceIngestionParameters",
@@ -7164,7 +7202,8 @@
         },
         "query": {
           "type": "string",
-          "description": "SharePoint query."
+          "description": "SharePoint query.",
+          "x-nullable": true
         },
         "embeddingModel": {
           "$ref": "#/definitions/KnowledgeSourceVectorizer",
@@ -7176,7 +7215,8 @@
         },
         "ingestionParameters": {
           "$ref": "#/definitions/KnowledgeSourceIngestionParameters",
-          "description": "Ingestion parameters."
+          "description": "Ingestion parameters.",
+          "x-nullable": true
         },
         "createdResources": {
           "$ref": "#/definitions/CreatedResources",
@@ -7318,6 +7358,7 @@
           "type": "string",
           "format": "date-time",
           "description": "The end time of this indexer execution, if the execution has already completed.",
+          "x-nullable": true,
           "readOnly": true
         },
         "errors": {
@@ -7501,7 +7542,8 @@
         "remainingSeconds": {
           "type": "integer",
           "format": "int64",
-          "description": "Cumulative runtime remaining for all indexers in the service from the beginningTime to endingTime, in seconds."
+          "description": "Cumulative runtime remaining for all indexers in the service from the beginningTime to endingTime, in seconds.",
+          "x-nullable": true
         },
         "beginningTime": {
           "type": "string",
@@ -7587,19 +7629,22 @@
         "batchSize": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of items that are read from the data source and indexed as a single batch in order to improve performance. The default depends on the data source type."
+          "description": "The number of items that are read from the data source and indexed as a single batch in order to improve performance. The default depends on the data source type.",
+          "x-nullable": true
         },
         "maxFailedItems": {
           "type": "integer",
           "format": "int32",
           "description": "The maximum number of items that can fail indexing for indexer execution to still be considered successful. -1 means no limit. Default is 0.",
-          "default": 0
+          "default": 0,
+          "x-nullable": true
         },
         "maxFailedItemsPerBatch": {
           "type": "integer",
           "format": "int32",
           "description": "The maximum number of items in a single batch that can fail indexing for the batch to still be considered successful. -1 means no limit. Default is 0.",
-          "default": 0
+          "default": 0,
+          "x-nullable": true
         },
         "configuration": {
           "$ref": "#/definitions/IndexingParametersConfiguration",
@@ -7713,7 +7758,6 @@
             "oneToOne"
           ],
           "x-ms-enum": {
-            "name": "MarkdownParsingSubmode",
             "modelAsString": true,
             "values": [
               {
@@ -7727,7 +7771,8 @@
                 "description": "Indicates that each markdown file will be parsed into a single search document."
               }
             ]
-          }
+          },
+          "x-nullable": true
         },
         "markdownHeaderDepth": {
           "type": "string",
@@ -7742,7 +7787,6 @@
             "h6"
           ],
           "x-ms-enum": {
-            "name": "MarkdownHeaderDepth",
             "modelAsString": true,
             "values": [
               {
@@ -7776,7 +7820,8 @@
                 "description": "Indicates that headers up to a level of h6 will be considered while grouping markdown content. This is the default."
               }
             ]
-          }
+          },
+          "x-nullable": true
         },
         "documentRoot": {
           "type": "string",
@@ -8024,11 +8069,13 @@
         "maxKeyPhraseCount": {
           "type": "integer",
           "format": "int32",
-          "description": "A number indicating how many key phrases to return. If absent, all identified key phrases will be returned."
+          "description": "A number indicating how many key phrases to return. If absent, all identified key phrases will be returned.",
+          "x-nullable": true
         },
         "modelVersion": {
           "type": "string",
-          "description": "The version of the model to use when calling the Text Analytics service. It will default to the latest available when not specified. We recommend you do not specify this value unless absolutely necessary."
+          "description": "The version of the model to use when calling the Text Analytics service. It will default to the latest available when not specified. We recommend you do not specify this value unless absolutely necessary.",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -8229,7 +8276,8 @@
         },
         "encryptionKey": {
           "$ref": "#/definitions/SearchResourceEncryptionKey",
-          "description": "A description of an encryption key that you create in Azure Key Vault."
+          "description": "A description of an encryption key that you create in Azure Key Vault.",
+          "x-nullable": true
         },
         "description": {
           "type": "string",
@@ -9319,7 +9367,8 @@
         },
         "encryptionKey": {
           "$ref": "#/definitions/SearchResourceEncryptionKey",
-          "description": "A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your knowledge source definition when you want full assurance that no one, not even Microsoft, can decrypt them. Once you have encrypted your knowledge source definition, it will always remain encrypted. The search service will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your knowledge source definition will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019."
+          "description": "A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your knowledge source definition when you want full assurance that no one, not even Microsoft, can decrypt them. Once you have encrypted your knowledge source definition, it will always remain encrypted. The search service will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your knowledge source definition will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019.",
+          "x-nullable": true
         }
       },
       "discriminator": "kind",
@@ -9374,15 +9423,18 @@
       "properties": {
         "identity": {
           "$ref": "#/definitions/SearchIndexerDataIdentity",
-          "description": "An explicit identity to use for this knowledge source."
+          "description": "An explicit identity to use for this knowledge source.",
+          "x-nullable": true
         },
         "embeddingModel": {
           "$ref": "#/definitions/KnowledgeSourceVectorizer",
-          "description": "Optional vectorizer configuration for vectorizing content."
+          "description": "Optional vectorizer configuration for vectorizing content.",
+          "x-nullable": true
         },
         "chatCompletionModel": {
           "$ref": "#/definitions/KnowledgeBaseModel",
-          "description": "Optional chat completion model for image verbalization or context extraction."
+          "description": "Optional chat completion model for image verbalization or context extraction.",
+          "x-nullable": true
         },
         "disableImageVerbalization": {
           "type": "boolean",
@@ -9391,11 +9443,13 @@
         },
         "ingestionSchedule": {
           "$ref": "#/definitions/IndexingSchedule",
-          "description": "Optional schedule for data ingestion."
+          "description": "Optional schedule for data ingestion.",
+          "x-nullable": true
         },
         "ingestionPermissionOptions": {
           "type": "array",
           "description": "Optional list of permission types to ingest together with document content. If specified, it will set the indexer permission options for the data source.",
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/KnowledgeSourceIngestionPermissionOption"
           }
@@ -9409,7 +9463,6 @@
             "standard"
           ],
           "x-ms-enum": {
-            "name": "KnowledgeSourceContentExtractionMode",
             "modelAsString": true,
             "values": [
               {
@@ -9423,11 +9476,13 @@
                 "description": "Performs the full default content extraction pipeline."
               }
             ]
-          }
+          },
+          "x-nullable": true
         },
         "aiServices": {
           "$ref": "#/definitions/AIServices",
-          "description": "Optional AI Services configuration for content processing."
+          "description": "Optional AI Services configuration for content processing.",
+          "x-nullable": true
         }
       }
     },
@@ -9593,19 +9648,23 @@
         },
         "synchronizationInterval": {
           "type": "string",
-          "description": "The synchronization interval (e.g., '1d' for daily). Null if no schedule is configured."
+          "description": "The synchronization interval (e.g., '1d' for daily). Null if no schedule is configured.",
+          "x-nullable": true
         },
         "currentSynchronizationState": {
           "$ref": "#/definitions/SynchronizationState",
-          "description": "Current synchronization state that spans multiple indexer runs."
+          "description": "Current synchronization state that spans multiple indexer runs.",
+          "x-nullable": true
         },
         "lastSynchronizationState": {
           "$ref": "#/definitions/CompletedSynchronizationState",
-          "description": "Details of the last completed synchronization. Null on first sync."
+          "description": "Details of the last completed synchronization. Null on first sync.",
+          "x-nullable": true
         },
         "statistics": {
           "$ref": "#/definitions/KnowledgeSourceStatistics",
-          "description": "Statistical information about the knowledge source synchronization history. Null on first sync."
+          "description": "Statistical information about the knowledge source synchronization history. Null on first sync.",
+          "x-nullable": true
         }
       },
       "required": [
@@ -9662,11 +9721,13 @@
       "properties": {
         "defaultCountryHint": {
           "type": "string",
-          "description": "A country code to use as a hint to the language detection model if it cannot disambiguate the language."
+          "description": "A country code to use as a hint to the language detection model if it cannot disambiguate the language.",
+          "x-nullable": true
         },
         "modelVersion": {
           "type": "string",
-          "description": "The version of the model to use when calling the Text Analytics service. It will default to the latest available when not specified. We recommend you do not specify this value unless absolutely necessary."
+          "description": "The version of the model to use when calling the Text Analytics service. It will default to the latest available when not specified. We recommend you do not specify this value unless absolutely necessary.",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -12627,14 +12688,14 @@
       "properties": {
         "defaultLanguageCode": {
           "type": "string",
-          "description": "A value indicating which language code to use. Default is `en`."
+          "description": "A value indicating which language code to use. Default is `en`.",
+          "x-nullable": true
         },
         "minimumPrecision": {
           "type": "number",
           "format": "double",
           "description": "A value between 0 and 1 that be used to only include entities whose confidence score is greater than the value specified. If not set (default), or if explicitly set to null, all entities will be included.",
-          "minimum": 0,
-          "maximum": 1
+          "x-nullable": true
         },
         "maskingMode": {
           "$ref": "#/definitions/PIIDetectionSkillMaskingMode",
@@ -12643,11 +12704,12 @@
         "maskingCharacter": {
           "type": "string",
           "description": "The character used to mask the text if the maskingMode parameter is set to replace. Default is '*'.",
-          "maxLength": 1
+          "x-nullable": true
         },
         "modelVersion": {
           "type": "string",
-          "description": "The version of the model to use when calling the Text Analytics service. It will default to the latest available when not specified. We recommend you do not specify this value unless absolutely necessary."
+          "description": "The version of the model to use when calling the Text Analytics service. It will default to the latest available when not specified. We recommend you do not specify this value unless absolutely necessary.",
+          "x-nullable": true
         },
         "piiCategories": {
           "type": "array",
@@ -12658,7 +12720,8 @@
         },
         "domain": {
           "type": "string",
-          "description": "If specified, will set the PII domain to include only a subset of the entity categories. Possible values include: 'phi', 'none'. Default is 'none'."
+          "description": "If specified, will set the PII domain to include only a subset of the entity categories. Possible values include: 'phi', 'none'. Default is 'none'.",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -13015,7 +13078,8 @@
         },
         "highlights": {
           "type": "string",
-          "description": "Same text passage as in the Text property with highlighted text phrases most relevant to the query."
+          "description": "Same text passage as in the Text property with highlighted text phrases most relevant to the query.",
+          "x-nullable": true
         }
       },
       "additionalProperties": {}
@@ -13050,11 +13114,14 @@
       "properties": {
         "text": {
           "type": "string",
-          "description": "A representative text passage extracted from the document most relevant to the search query."
+          "description": "A representative text passage extracted from the document most relevant to the search query.",
+          "readOnly": true
         },
         "highlights": {
           "type": "string",
-          "description": "Same text passage as in the Text property with highlighted phrases most relevant to the query."
+          "description": "Same text passage as in the Text property with highlighted phrases most relevant to the query.",
+          "x-nullable": true,
+          "readOnly": true
         }
       },
       "additionalProperties": {}
@@ -13923,12 +13990,14 @@
         "enableRescoring": {
           "type": "boolean",
           "description": "If set to true, after the initial search on the compressed vectors, the similarity scores are recalculated using the full-precision vectors. This will improve recall at the expense of latency.",
-          "default": true
+          "default": true,
+          "x-nullable": true
         },
         "defaultOversampling": {
           "type": "number",
           "format": "double",
-          "description": "Default oversampling factor. Oversampling retrieves a greater set of potential documents to offset the resolution loss due to quantization. This increases the set of results that will be rescored on full-precision vectors. Minimum value is 1, meaning no oversampling (1x). This parameter can only be set when 'enableRescoring' is true. Higher values improve recall at the expense of latency."
+          "description": "Default oversampling factor. Oversampling retrieves a greater set of potential documents to offset the resolution loss due to quantization. This increases the set of results that will be rescored on full-precision vectors. Minimum value is 1, meaning no oversampling (1x). This parameter can only be set when 'enableRescoring' is true. Higher values improve recall at the expense of latency.",
+          "x-nullable": true
         },
         "rescoreStorageMethod": {
           "type": "string",
@@ -13939,7 +14008,6 @@
             "discardOriginals"
           ],
           "x-ms-enum": {
-            "name": "VectorSearchCompressionRescoreStorageMethod",
             "modelAsString": true,
             "values": [
               {
@@ -13953,7 +14021,8 @@
                 "description": "This option discards the original full-precision vectors. Choose this option for maximum storage savings. Since this option does not allow for rescoring and oversampling, it will often cause slight to moderate reductions in quality."
               }
             ]
-          }
+          },
+          "x-nullable": true
         }
       }
     },
@@ -13969,7 +14038,8 @@
         "quota": {
           "type": "integer",
           "format": "int64",
-          "description": "The resource amount quota."
+          "description": "The resource amount quota.",
+          "x-nullable": true
         }
       },
       "required": [
@@ -13998,7 +14068,8 @@
       "properties": {
         "quantizedDataType": {
           "$ref": "#/definitions/VectorSearchCompressionTarget",
-          "description": "The quantized data type of compressed vector values."
+          "description": "The quantized data type of compressed vector values.",
+          "x-nullable": true
         }
       }
     },
@@ -14125,7 +14196,8 @@
         },
         "text": {
           "$ref": "#/definitions/TextWeights",
-          "description": "Parameters that boost scoring based on text matches in certain index fields."
+          "description": "Parameters that boost scoring based on text matches in certain index fields.",
+          "x-nullable": true
         },
         "functions": {
           "type": "array",
@@ -14226,6 +14298,7 @@
         "@search.answers": {
           "type": "array",
           "description": "The answers query results for the search operation; null if the answers query parameter was not specified or set to 'none'.",
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/QueryAnswerResult"
           },
@@ -14235,6 +14308,7 @@
         "@search.debug": {
           "$ref": "#/definitions/DebugInfo",
           "description": "Debug information that applies to the search results as a whole.",
+          "x-nullable": true,
           "readOnly": true,
           "x-ms-client-name": "debugInfo"
         },
@@ -14323,42 +14397,49 @@
         },
         "permissionFilter": {
           "$ref": "#/definitions/PermissionFilter",
-          "description": "A value indicating whether the field should be used as a permission filter."
+          "description": "A value indicating whether the field should be used as a permission filter.",
+          "x-nullable": true
         },
         "sensitivityLabel": {
           "type": "boolean",
-          "description": "A value indicating whether the field contains sensitivity label information."
+          "description": "A value indicating whether the field contains sensitivity label information.",
+          "x-nullable": true
         },
         "analyzer": {
           "$ref": "#/definitions/LexicalAnalyzerName",
-          "description": "The name of the analyzer to use for the field. This option can be used only with searchable fields and it can't be set together with either searchAnalyzer or indexAnalyzer. Once the analyzer is chosen, it cannot be changed for the field. Must be null for complex fields."
+          "description": "The name of the analyzer to use for the field. This option can be used only with searchable fields and it can't be set together with either searchAnalyzer or indexAnalyzer. Once the analyzer is chosen, it cannot be changed for the field. Must be null for complex fields.",
+          "x-nullable": true
         },
         "searchAnalyzer": {
           "$ref": "#/definitions/LexicalAnalyzerName",
-          "description": "The name of the analyzer used at search time for the field. This option can be used only with searchable fields. It must be set together with indexAnalyzer and it cannot be set together with the analyzer option. This property cannot be set to the name of a language analyzer; use the analyzer property instead if you need a language analyzer. This analyzer can be updated on an existing field. Must be null for complex fields."
+          "description": "The name of the analyzer used at search time for the field. This option can be used only with searchable fields. It must be set together with indexAnalyzer and it cannot be set together with the analyzer option. This property cannot be set to the name of a language analyzer; use the analyzer property instead if you need a language analyzer. This analyzer can be updated on an existing field. Must be null for complex fields.",
+          "x-nullable": true
         },
         "indexAnalyzer": {
           "$ref": "#/definitions/LexicalAnalyzerName",
-          "description": "The name of the analyzer used at indexing time for the field. This option can be used only with searchable fields. It must be set together with searchAnalyzer and it cannot be set together with the analyzer option.  This property cannot be set to the name of a language analyzer; use the analyzer property instead if you need a language analyzer. Once the analyzer is chosen, it cannot be changed for the field. Must be null for complex fields."
+          "description": "The name of the analyzer used at indexing time for the field. This option can be used only with searchable fields. It must be set together with searchAnalyzer and it cannot be set together with the analyzer option.  This property cannot be set to the name of a language analyzer; use the analyzer property instead if you need a language analyzer. Once the analyzer is chosen, it cannot be changed for the field. Must be null for complex fields.",
+          "x-nullable": true
         },
         "normalizer": {
           "$ref": "#/definitions/LexicalNormalizerName",
-          "description": "The name of the normalizer to use for the field. This option can be used only with fields with filterable, sortable, or facetable enabled. Once the normalizer is chosen, it cannot be changed for the field. Must be null for complex fields."
+          "description": "The name of the normalizer to use for the field. This option can be used only with fields with filterable, sortable, or facetable enabled. Once the normalizer is chosen, it cannot be changed for the field. Must be null for complex fields.",
+          "x-nullable": true
         },
         "dimensions": {
           "type": "integer",
           "format": "int32",
           "description": "The dimensionality of the vector field.",
-          "minimum": 2,
-          "maximum": 4096
+          "x-nullable": true
         },
         "vectorSearchProfile": {
           "type": "string",
-          "description": "The name of the vector search profile that specifies the algorithm and vectorizer to use when searching the vector field."
+          "description": "The name of the vector search profile that specifies the algorithm and vectorizer to use when searching the vector field.",
+          "x-nullable": true
         },
         "vectorEncoding": {
           "$ref": "#/definitions/VectorEncodingFormat",
-          "description": "The encoding format to interpret the field contents."
+          "description": "The encoding format to interpret the field contents.",
+          "x-nullable": true
         },
         "synonymMaps": {
           "type": "array",
@@ -14502,7 +14583,8 @@
         },
         "corsOptions": {
           "$ref": "#/definitions/CorsOptions",
-          "description": "Options to control Cross-Origin Resource Sharing (CORS) for the index."
+          "description": "Options to control Cross-Origin Resource Sharing (CORS) for the index.",
+          "x-nullable": true
         },
         "suggesters": {
           "type": "array",
@@ -14548,7 +14630,8 @@
         },
         "encryptionKey": {
           "$ref": "#/definitions/SearchResourceEncryptionKey",
-          "description": "A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your data when you want full assurance that no one, not even Microsoft, can decrypt your data. Once you have encrypted your data, it will always remain encrypted. The search service will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your data will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019."
+          "description": "A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your data when you want full assurance that no one, not even Microsoft, can decrypt your data. Once you have encrypted your data, it will always remain encrypted. The search service will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your data will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019.",
+          "x-nullable": true
         },
         "similarity": {
           "$ref": "#/definitions/SimilarityAlgorithm",
@@ -14556,19 +14639,23 @@
         },
         "semantic": {
           "$ref": "#/definitions/SemanticSearch",
-          "description": "Defines parameters for a search index that influence semantic capabilities."
+          "description": "Defines parameters for a search index that influence semantic capabilities.",
+          "x-nullable": true
         },
         "vectorSearch": {
           "$ref": "#/definitions/VectorSearch",
-          "description": "Contains configuration options related to vector search."
+          "description": "Contains configuration options related to vector search.",
+          "x-nullable": true
         },
         "permissionFilterOption": {
           "$ref": "#/definitions/SearchIndexPermissionFilterOption",
-          "description": "A value indicating whether permission filtering is enabled for the index."
+          "description": "A value indicating whether permission filtering is enabled for the index.",
+          "x-nullable": true
         },
         "purviewEnabled": {
           "type": "boolean",
-          "description": "A value indicating whether Purview is enabled for the index."
+          "description": "A value indicating whether Purview is enabled for the index.",
+          "x-nullable": true
         },
         "@odata.etag": {
           "type": "string",
@@ -14723,11 +14810,13 @@
         },
         "schedule": {
           "$ref": "#/definitions/IndexingSchedule",
-          "description": "The schedule for this indexer."
+          "description": "The schedule for this indexer.",
+          "x-nullable": true
         },
         "parameters": {
           "$ref": "#/definitions/IndexingParameters",
-          "description": "Parameters for indexer execution."
+          "description": "Parameters for indexer execution.",
+          "x-nullable": true
         },
         "fieldMappings": {
           "type": "array",
@@ -14745,7 +14834,9 @@
         },
         "disabled": {
           "type": "boolean",
-          "description": "A value indicating whether the indexer is disabled. Default is false."
+          "description": "A value indicating whether the indexer is disabled. Default is false.",
+          "default": false,
+          "x-nullable": true
         },
         "@odata.etag": {
           "type": "string",
@@ -14754,11 +14845,13 @@
         },
         "encryptionKey": {
           "$ref": "#/definitions/SearchResourceEncryptionKey",
-          "description": "A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your indexer definition (as well as indexer execution status) when you want full assurance that no one, not even Microsoft, can decrypt them. Once you have encrypted your indexer definition, it will always remain encrypted. The search service will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your indexer definition (and indexer execution status) will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019."
+          "description": "A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your indexer definition (as well as indexer execution status) when you want full assurance that no one, not even Microsoft, can decrypt them. Once you have encrypted your indexer definition, it will always remain encrypted. The search service will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your indexer definition (and indexer execution status) will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019.",
+          "x-nullable": true
         },
         "cache": {
           "$ref": "#/definitions/SearchIndexerCache",
-          "description": "Adds caching to an enrichment pipeline to allow for incremental modification steps without having to rebuild the index every time."
+          "description": "Adds caching to an enrichment pipeline to allow for incremental modification steps without having to rebuild the index every time.",
+          "x-nullable": true
         }
       },
       "required": [
@@ -14781,11 +14874,13 @@
         },
         "enableReprocessing": {
           "type": "boolean",
-          "description": "Specifies whether incremental reprocessing is enabled."
+          "description": "Specifies whether incremental reprocessing is enabled.",
+          "x-nullable": true
         },
         "identity": {
           "$ref": "#/definitions/SearchIndexerDataIdentity",
-          "description": "The user-assigned managed identity used for connections to the enrichment cache.  If the connection string indicates an identity (ResourceId) and it's not specified, the system-assigned managed identity is used. On updates to the indexer, if the identity is unspecified, the value remains unchanged. If set to \"none\", the value of this property is cleared."
+          "description": "The user-assigned managed identity used for connections to the enrichment cache.  If the connection string indicates an identity (ResourceId) and it's not specified, the system-assigned managed identity is used. On updates to the indexer, if the identity is unspecified, the value remains unchanged. If set to \"none\", the value of this property is cleared.",
+          "x-nullable": true
         }
       }
     },
@@ -14862,22 +14957,26 @@
         },
         "identity": {
           "$ref": "#/definitions/SearchIndexerDataIdentity",
-          "description": "An explicit managed identity to use for this datasource. If not specified and the connection string is a managed identity, the system-assigned managed identity is used. If not specified, the value remains unchanged. If \"none\" is specified, the value of this property is cleared."
+          "description": "An explicit managed identity to use for this datasource. If not specified and the connection string is a managed identity, the system-assigned managed identity is used. If not specified, the value remains unchanged. If \"none\" is specified, the value of this property is cleared.",
+          "x-nullable": true
         },
         "indexerPermissionOptions": {
           "type": "array",
           "description": "Ingestion options with various types of permission data.",
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/IndexerPermissionOption"
           }
         },
         "dataChangeDetectionPolicy": {
           "$ref": "#/definitions/DataChangeDetectionPolicy",
-          "description": "The data change detection policy for the datasource."
+          "description": "The data change detection policy for the datasource.",
+          "x-nullable": true
         },
         "dataDeletionDetectionPolicy": {
           "$ref": "#/definitions/DataDeletionDetectionPolicy",
-          "description": "The data deletion detection policy for the datasource."
+          "description": "The data deletion detection policy for the datasource.",
+          "x-nullable": true
         },
         "@odata.etag": {
           "type": "string",
@@ -14886,7 +14985,8 @@
         },
         "encryptionKey": {
           "$ref": "#/definitions/SearchResourceEncryptionKey",
-          "description": "A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your datasource definition when you want full assurance that no one, not even Microsoft, can decrypt your data source definition. Once you have encrypted your data source definition, it will always remain encrypted. The search service will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your datasource definition will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019."
+          "description": "A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your datasource definition when you want full assurance that no one, not even Microsoft, can decrypt your data source definition. Once you have encrypted your data source definition, it will always remain encrypted. The search service will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your datasource definition will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019.",
+          "x-nullable": true
         }
       },
       "required": [
@@ -15089,7 +15189,8 @@
         },
         "identity": {
           "$ref": "#/definitions/SearchIndexerDataIdentity",
-          "description": "The user-assigned managed identity used for connections to Azure Storage when writing knowledge store projections. If the connection string indicates an identity (ResourceId) and it's not specified, the system-assigned managed identity is used. On updates to the indexer, if the identity is unspecified, the value remains unchanged. If set to \"none\", the value of this property is cleared."
+          "description": "The user-assigned managed identity used for connections to Azure Storage when writing knowledge store projections. If the connection string indicates an identity (ResourceId) and it's not specified, the system-assigned managed identity is used. On updates to the indexer, if the identity is unspecified, the value remains unchanged. If set to \"none\", the value of this property is cleared.",
+          "x-nullable": true
         },
         "parameters": {
           "$ref": "#/definitions/SearchIndexerKnowledgeStoreParameters",
@@ -15328,7 +15429,8 @@
         },
         "encryptionKey": {
           "$ref": "#/definitions/SearchResourceEncryptionKey",
-          "description": "A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your skillset definition when you want full assurance that no one, not even Microsoft, can decrypt your skillset definition. Once you have encrypted your skillset definition, it will always remain encrypted. The search service will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your skillset definition will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019."
+          "description": "A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your skillset definition when you want full assurance that no one, not even Microsoft, can decrypt your skillset definition. Once you have encrypted your skillset definition, it will always remain encrypted. The search service will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your skillset definition will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019.",
+          "x-nullable": true
         }
       },
       "required": [
@@ -15620,7 +15722,8 @@
         },
         "identity": {
           "$ref": "#/definitions/SearchIndexerDataIdentity",
-          "description": "An explicit managed identity to use for this encryption key. If not specified and the access credentials property is null, the system-assigned managed identity is used. On update to the resource, if the explicit identity is unspecified, it remains unchanged. If \"none\" is specified, the value of this property is cleared."
+          "description": "An explicit managed identity to use for this encryption key. If not specified and the access credentials property is null, the system-assigned managed identity is used. On update to the resource, if the explicit identity is unspecified, it remains unchanged. If \"none\" is specified, the value of this property is cleared.",
+          "x-nullable": true
         }
       },
       "required": [
@@ -15642,12 +15745,14 @@
           "type": "number",
           "format": "double",
           "description": "The relevance score computed by the semantic ranker for the top search results. Search results are sorted by the RerankerScore first and then by the Score. RerankerScore is only returned for queries of type 'semantic'.",
+          "x-nullable": true,
           "x-ms-client-name": "rerankerScore"
         },
         "@search.rerankerBoostedScore": {
           "type": "number",
           "format": "double",
           "description": "The relevance score computed by boosting the Reranker Score. Search results are sorted by the RerankerScore/RerankerBoostedScore based on useScoringProfileBoostedRanking in the Semantic Config. RerankerBoostedScore is only returned for queries of type 'semantic'.",
+          "x-nullable": true,
           "x-ms-client-name": "rerankerBoostedScore"
         },
         "@search.highlights": {
@@ -15664,6 +15769,7 @@
         "@search.captions": {
           "type": "array",
           "description": "Captions are the most representative passages from the document relatively to the search query. They are often used as document summary. Captions are only returned for queries of type 'semantic'.",
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/QueryCaptionResult"
           },
@@ -15672,6 +15778,7 @@
         "@search.documentDebugInfo": {
           "$ref": "#/definitions/DocumentDebugInfo",
           "description": "Contains debugging information that can be used to further explore your search results.",
+          "x-nullable": true,
           "readOnly": true,
           "x-ms-client-name": "documentDebugInfo"
         }
@@ -15761,32 +15868,38 @@
         "maxFieldsPerIndex": {
           "type": "integer",
           "format": "int32",
-          "description": "The maximum allowed fields per index."
+          "description": "The maximum allowed fields per index.",
+          "x-nullable": true
         },
         "maxFieldNestingDepthPerIndex": {
           "type": "integer",
           "format": "int32",
-          "description": "The maximum depth which you can nest sub-fields in an index, including the top-level complex field. For example, a/b/c has a nesting depth of 3."
+          "description": "The maximum depth which you can nest sub-fields in an index, including the top-level complex field. For example, a/b/c has a nesting depth of 3.",
+          "x-nullable": true
         },
         "maxComplexCollectionFieldsPerIndex": {
           "type": "integer",
           "format": "int32",
-          "description": "The maximum number of fields of type Collection(Edm.ComplexType) allowed in an index."
+          "description": "The maximum number of fields of type Collection(Edm.ComplexType) allowed in an index.",
+          "x-nullable": true
         },
         "maxComplexObjectsInCollectionsPerDocument": {
           "type": "integer",
           "format": "int32",
-          "description": "The maximum number of objects in complex collections allowed per document."
+          "description": "The maximum number of objects in complex collections allowed per document.",
+          "x-nullable": true
         },
         "maxStoragePerIndex": {
           "type": "integer",
           "format": "int64",
-          "description": "The maximum amount of storage in bytes allowed per index."
+          "description": "The maximum amount of storage in bytes allowed per index.",
+          "x-nullable": true
         },
         "maxCumulativeIndexerRuntimeSeconds": {
           "type": "integer",
           "format": "int64",
-          "description": "The maximum cumulative indexer runtime in seconds allowed for the service."
+          "description": "The maximum cumulative indexer runtime in seconds allowed for the service.",
+          "x-nullable": true
         }
       }
     },
@@ -15859,11 +15972,13 @@
         },
         "rankingOrder": {
           "$ref": "#/definitions/RankingOrder",
-          "description": "Specifies the score type to be used for the sort order of the search results."
+          "description": "Specifies the score type to be used for the sort order of the search results.",
+          "x-nullable": true
         },
         "flightingOptIn": {
           "type": "boolean",
-          "description": "Determines which semantic or query rewrite models to use during model flighting/upgrades."
+          "description": "Determines which semantic or query rewrite models to use during model flighting/upgrades.",
+          "default": false
         }
       },
       "required": [
@@ -16085,11 +16200,21 @@
     },
     "SentimentSkill": {
       "type": "object",
-      "description": "This skill is deprecated. Use the V3.SentimentSkill instead.",
+      "description": "Using the Text Analytics API, evaluates unstructured text and for each record, provides sentiment labels (such as \"negative\", \"neutral\" and \"positive\") based on the highest confidence score found by the service at a sentence and document-level.",
       "properties": {
         "defaultLanguageCode": {
-          "$ref": "#/definitions/SentimentSkillLanguage",
-          "description": "A value indicating which language code to use. Default is `en`."
+          "type": "string",
+          "description": "A value indicating which language code to use. Default is `en`.",
+          "x-nullable": true
+        },
+        "includeOpinionMining": {
+          "type": "boolean",
+          "description": "If set to true, the skill output will include information from Text Analytics for opinion mining, namely targets (nouns or verbs) and their associated assessment (adjective) in the text. Default is false."
+        },
+        "modelVersion": {
+          "type": "string",
+          "description": "The version of the model to use when calling the Text Analytics service. It will default to the latest available when not specified. We recommend you do not specify this value unless absolutely necessary.",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -16097,7 +16222,7 @@
           "$ref": "#/definitions/SearchIndexerSkill"
         }
       ],
-      "x-ms-discriminator-value": "#Microsoft.Skills.Text.SentimentSkill"
+      "x-ms-discriminator-value": "#Microsoft.Skills.Text.V3.SentimentSkill"
     },
     "SentimentSkillLanguage": {
       "type": "string",
@@ -16201,30 +16326,6 @@
         ]
       }
     },
-    "SentimentSkillV3": {
-      "type": "object",
-      "description": "Using the Text Analytics API, evaluates unstructured text and for each record, provides sentiment labels (such as \"negative\", \"neutral\" and \"positive\") based on the highest confidence score found by the service at a sentence and document-level.",
-      "properties": {
-        "defaultLanguageCode": {
-          "type": "string",
-          "description": "A value indicating which language code to use. Default is `en`."
-        },
-        "includeOpinionMining": {
-          "type": "boolean",
-          "description": "If set to true, the skill output will include information from Text Analytics for opinion mining, namely targets (nouns or verbs) and their associated assessment (adjective) in the text. Default is false."
-        },
-        "modelVersion": {
-          "type": "string",
-          "description": "The version of the model to use when calling the Text Analytics service. It will default to the latest available when not specified. We recommend you do not specify this value unless absolutely necessary."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/SearchIndexerSkill"
-        }
-      ],
-      "x-ms-discriminator-value": "#Microsoft.Skills.Text.V3.SentimentSkill"
-    },
     "ServiceIndexersRuntime": {
       "type": "object",
       "description": "Represents service-level indexer runtime counters.",
@@ -16237,7 +16338,8 @@
         "remainingSeconds": {
           "type": "integer",
           "format": "int64",
-          "description": "Cumulative runtime remaining for all indexers in the service from the beginningTime to endingTime, in seconds."
+          "description": "Cumulative runtime remaining for all indexers in the service from the beginningTime to endingTime, in seconds.",
+          "x-nullable": true
         },
         "beginningTime": {
           "type": "string",
@@ -16586,25 +16688,30 @@
         "maximumPageLength": {
           "type": "integer",
           "format": "int32",
-          "description": "The desired maximum page length. Default is 10000."
+          "description": "The desired maximum page length. Default is 10000.",
+          "x-nullable": true
         },
         "pageOverlapLength": {
           "type": "integer",
           "format": "int32",
-          "description": "Only applicable when textSplitMode is set to 'pages'. If specified, n+1th chunk will start with this number of characters/tokens from the end of the nth chunk."
+          "description": "Only applicable when textSplitMode is set to 'pages'. If specified, n+1th chunk will start with this number of characters/tokens from the end of the nth chunk.",
+          "x-nullable": true
         },
         "maximumPagesToTake": {
           "type": "integer",
           "format": "int32",
-          "description": "Only applicable when textSplitMode is set to 'pages'. If specified, the SplitSkill will discontinue splitting after processing the first 'maximumPagesToTake' pages, in order to improve performance when only a few initial pages are needed from each document."
+          "description": "Only applicable when textSplitMode is set to 'pages'. If specified, the SplitSkill will discontinue splitting after processing the first 'maximumPagesToTake' pages, in order to improve performance when only a few initial pages are needed from each document.",
+          "x-nullable": true
         },
         "unit": {
           "$ref": "#/definitions/SplitSkillUnit",
-          "description": "Only applies if textSplitMode is set to pages. There are two possible values. The choice of the values will decide the length (maximumPageLength and pageOverlapLength) measurement. The default is 'characters', which means the length will be measured by character."
+          "description": "Only applies if textSplitMode is set to pages. There are two possible values. The choice of the values will decide the length (maximumPageLength and pageOverlapLength) measurement. The default is 'characters', which means the length will be measured by character.",
+          "x-nullable": true
         },
         "azureOpenAITokenizerParameters": {
           "$ref": "#/definitions/AzureOpenAITokenizerParameters",
-          "description": "Only applies if the unit is set to azureOpenAITokens. If specified, the splitSkill will use these parameters when performing the tokenization. The parameters are a valid 'encoderModelName' and an optional 'allowedSpecialTokens' property."
+          "description": "Only applies if the unit is set to azureOpenAITokens. If specified, the splitSkill will use these parameters when performing the tokenization. The parameters are a valid 'encoderModelName' and an optional 'allowedSpecialTokens' property.",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -17865,7 +17972,8 @@
         },
         "encryptionKey": {
           "$ref": "#/definitions/SearchResourceEncryptionKey",
-          "description": "A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your data when you want full assurance that no one, not even Microsoft, can decrypt your data. Once you have encrypted your data, it will always remain encrypted. The search service will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your data will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019."
+          "description": "A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your data when you want full assurance that no one, not even Microsoft, can decrypt your data. Once you have encrypted your data, it will always remain encrypted. The search service will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your data will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019.",
+          "x-nullable": true
         },
         "@odata.etag": {
           "type": "string",
@@ -17993,7 +18101,8 @@
         },
         "suggestedFrom": {
           "$ref": "#/definitions/TextTranslationSkillLanguage",
-          "description": "The language code to translate documents from when neither the fromLanguageCode input nor the defaultFromLanguageCode parameter are provided, and the automatic language detection is unsuccessful. Default is `en`."
+          "description": "The language code to translate documents from when neither the fromLanguageCode input nor the defaultFromLanguageCode parameter are provided, and the automatic language detection is unsuccessful. Default is `en`.",
+          "x-nullable": true
         }
       },
       "required": [
@@ -19056,12 +19165,14 @@
         },
         "rescoringOptions": {
           "$ref": "#/definitions/RescoringOptions",
-          "description": "Contains the options for rescoring."
+          "description": "Contains the options for rescoring.",
+          "x-nullable": true
         },
         "truncationDimension": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of dimensions to truncate the vectors to. Truncating the vectors reduces the size of the vectors and the amount of data that needs to be transferred during search. This can save storage cost and improve search performance at the expense of recall. It should be only used for embeddings trained with Matryoshka Representation Learning (MRL) such as OpenAI text-embedding-3-large (small). The default value is null, which means no truncation."
+          "description": "The number of dimensions to truncate the vectors to. Truncating the vectors reduces the size of the vectors and the amount of data that needs to be transferred during search. This can save storage cost and improve search performance at the expense of recall. It should be only used for embeddings trained with Matryoshka Representation Learning (MRL) such as OpenAI text-embedding-3-large (small). The default value is null, which means no truncation.",
+          "x-nullable": true
         },
         "kind": {
           "$ref": "#/definitions/VectorSearchCompressionKind",
@@ -19374,7 +19485,8 @@
       "properties": {
         "modelVersion": {
           "type": "string",
-          "description": "The version of the model to use when calling the AI Services Vision service. It will default to the latest available when not specified."
+          "description": "The version of the model to use when calling the AI Services Vision service. It will default to the latest available when not specified.",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -19469,20 +19581,24 @@
         "batchSize": {
           "type": "integer",
           "format": "int32",
-          "description": "The desired batch size which indicates number of documents."
+          "description": "The desired batch size which indicates number of documents.",
+          "x-nullable": true
         },
         "degreeOfParallelism": {
           "type": "integer",
           "format": "int32",
-          "description": "If set, the number of parallel calls that can be made to the Web API."
+          "description": "If set, the number of parallel calls that can be made to the Web API.",
+          "x-nullable": true
         },
         "authResourceId": {
           "type": "string",
-          "description": "Applies to custom skills that connect to external code in an Azure function or some other application that provides the transformations. This value should be the application ID created for the function or app when it was registered with Azure Active Directory. When specified, the custom skill connects to the function or app using a managed ID (either system or user-assigned) of the search service and the access token of the function or app, using this value as the resource id for creating the scope of the access token."
+          "description": "Applies to custom skills that connect to external code in an Azure function or some other application that provides the transformations. This value should be the application ID created for the function or app when it was registered with Azure Active Directory. When specified, the custom skill connects to the function or app using a managed ID (either system or user-assigned) of the search service and the access token of the function or app, using this value as the resource id for creating the scope of the access token.",
+          "x-nullable": true
         },
         "authIdentity": {
           "$ref": "#/definitions/SearchIndexerDataIdentity",
-          "description": "The user-assigned managed identity used for outbound connections. If an authResourceId is provided and it's not specified, the system-assigned managed identity is used. On updates to the indexer, if the identity is unspecified, the value remains unchanged. If set to \"none\", the value of this property is cleared."
+          "description": "The user-assigned managed identity used for outbound connections. If an authResourceId is provided and it's not specified, the system-assigned managed identity is used. On updates to the indexer, if the identity is unspecified, the value remains unchanged. If set to \"none\", the value of this property is cleared.",
+          "x-nullable": true
         }
       },
       "required": [
@@ -19538,11 +19654,13 @@
         },
         "authResourceId": {
           "type": "string",
-          "description": "Applies to custom endpoints that connect to external code in an Azure function or some other application that provides the transformations. This value should be the application ID created for the function or app when it was registered with Azure Active Directory. When specified, the vectorization connects to the function or app using a managed ID (either system or user-assigned) of the search service and the access token of the function or app, using this value as the resource id for creating the scope of the access token."
+          "description": "Applies to custom endpoints that connect to external code in an Azure function or some other application that provides the transformations. This value should be the application ID created for the function or app when it was registered with Azure Active Directory. When specified, the vectorization connects to the function or app using a managed ID (either system or user-assigned) of the search service and the access token of the function or app, using this value as the resource id for creating the scope of the access token.",
+          "x-nullable": true
         },
         "authIdentity": {
           "$ref": "#/definitions/SearchIndexerDataIdentity",
-          "description": "The user-assigned managed identity used for outbound connections. If an authResourceId is provided and it's not specified, the system-assigned managed identity is used. On updates to the indexer, if the identity is unspecified, the value remains unchanged. If set to \"none\", the value of this property is cleared."
+          "description": "The user-assigned managed identity used for outbound connections. If an authResourceId is provided and it's not specified, the system-assigned managed identity is used. On updates to the indexer, if the identity is unspecified, the value remains unchanged. If set to \"none\", the value of this property is cleared.",
+          "x-nullable": true
         }
       }
     },
@@ -20581,8 +20699,8 @@
       "required": false,
       "type": "integer",
       "format": "int32",
-      "minimum": 700,
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "x-nullable": true
     },
     "SearchOptions.semanticQuery": {
       "name": "semanticQuery",

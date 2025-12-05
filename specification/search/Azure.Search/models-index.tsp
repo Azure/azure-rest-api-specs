@@ -559,10 +559,11 @@ model SearchOptions {
   @query
   semanticErrorHandling?: SemanticErrorMode;
 
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @doc("Allows the user to set an upper bound on the amount of time it takes for semantic enrichment to finish processing before the request fails.")
   @minValue(700)
   @query
-  semanticMaxWaitInMilliseconds?: int32;
+  semanticMaxWaitInMilliseconds?: int32 | null;
 
   @doc("This parameter is only valid if the query type is `semantic`. If set, the query returns answers extracted from key passages in the highest ranked documents. The number of answers returned can be configured by appending the pipe character `|` followed by the `count-<number of answers>` option after the answers parameter value, such as `extractive|count-3`. Default count is 1. The confidence threshold can be configured by appending the pipe character `|` followed by the `threshold-<confidence threshold>` option after the answers parameter value, such as `extractive|threshold-0.9`. Default threshold is 0.7. The maximum character length of answers can be configured by appending the pipe character '|' followed by the 'count-<number of maximum character length>', such as 'extractive|maxcharlength-600'.")
   @query
@@ -653,15 +654,17 @@ model SearchDocumentsResult {
   @visibility(Lifecycle.Read)
   facets?: Record<FacetResult[]>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @doc("The answers query results for the search operation; null if the answers query parameter was not specified or set to 'none'.")
   @encodedName("application/json", "@search.answers")
   @visibility(Lifecycle.Read)
-  answers?: QueryAnswerResult[];
+  answers?: QueryAnswerResult[] | null;
 
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @doc("Debug information that applies to the search results as a whole.")
   @visibility(Lifecycle.Read)
   @encodedName("application/json", "@search.debug")
-  debugInfo?: DebugInfo;
+  debugInfo?: DebugInfo | null;
 
   @doc("Continuation JSON payload returned when the query can't return all the requested results in a single response. You can use this JSON along with @odata.nextLink to formulate another POST Search request to get the next part of the search response.")
   @encodedName("application/json", "@search.nextPageParameters")
@@ -740,8 +743,9 @@ model QueryAnswerResult is Record<unknown> {
   @doc("The text passage extracted from the document contents as the answer.")
   text?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @doc("Same text passage as in the Text property with highlighted text phrases most relevant to the query.")
-  highlights?: string;
+  highlights?: string | null;
 }
 
 @doc("Contains debugging information that can be used to further explore your search results.")
@@ -932,26 +936,30 @@ model SearchResult {
   @encodedName("application/json", "@search.score")
   score: float64;
 
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @doc("The relevance score computed by the semantic ranker for the top search results. Search results are sorted by the RerankerScore first and then by the Score. RerankerScore is only returned for queries of type 'semantic'.")
   @encodedName("application/json", "@search.rerankerScore")
-  rerankerScore?: float64;
+  rerankerScore?: float64 | null;
 
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @doc("The relevance score computed by boosting the Reranker Score. Search results are sorted by the RerankerScore/RerankerBoostedScore based on useScoringProfileBoostedRanking in the Semantic Config. RerankerBoostedScore is only returned for queries of type 'semantic'.")
   @encodedName("application/json", "@search.rerankerBoostedScore")
-  rerankerBoostedScore?: float64;
+  rerankerBoostedScore?: float64 | null;
 
   @doc("Text fragments from the document that indicate the matching search terms, organized by each applicable field; null if hit highlighting was not enabled for the query.")
   @encodedName("application/json", "@search.highlights")
   highlights?: Record<string[]>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @doc("Captions are the most representative passages from the document relatively to the search query. They are often used as document summary. Captions are only returned for queries of type 'semantic'.")
   @encodedName("application/json", "@search.captions")
-  captions?: QueryCaptionResult[];
+  captions?: QueryCaptionResult[] | null;
 
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @doc("Contains debugging information that can be used to further explore your search results.")
   @visibility(Lifecycle.Read)
   @encodedName("application/json", "@search.documentDebugInfo")
-  documentDebugInfo?: DocumentDebugInfo;
+  documentDebugInfo?: DocumentDebugInfo | null;
 }
 
 #suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
@@ -960,10 +968,13 @@ model QueryCaptionResult {
   ...Record<unknown>;
 
   @doc("A representative text passage extracted from the document most relevant to the search query.")
+  @visibility(Lifecycle.Read)
   text?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @doc("Same text passage as in the Text property with highlighted phrases most relevant to the query.")
-  highlights?: string;
+  @visibility(Lifecycle.Read)
+  highlights?: string | null;
 }
 
 @doc("Contains debugging information that can be used to further explore your search results.")
