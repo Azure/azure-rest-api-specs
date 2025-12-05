@@ -42,6 +42,13 @@ options:
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
+  "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    service-dir: "sdk/frontdoor"
+    namespace: "Azure.ResourceManager.FrontDoor"
+    flavor: azure
+    clear-output-folder: true
+    model-namespace: false
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
