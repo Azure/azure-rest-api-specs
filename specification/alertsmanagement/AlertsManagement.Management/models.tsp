@@ -935,7 +935,8 @@ model AlertEnrichmentsList is Azure.Core.Page<AlertEnrichmentResponse>;
  * The alert's enrichments.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model AlertEnrichmentResponse extends ProxyResource {
+model AlertEnrichmentResponse
+  extends Azure.ResourceManager.Foundations.ProxyResource {
   /**
    * Properties of the alert enrichment item.
    */
@@ -1123,7 +1124,6 @@ model PrometheusEnrichmentItem extends AlertEnrichmentItem {
   /**
    * An array of the azure monitor workspace resource ids.
    */
-  @identifiers(#[])
   datasources: string[];
 
   /**

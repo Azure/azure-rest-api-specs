@@ -120,7 +120,6 @@ interface AlertOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Alerts_GetAllTenant")
   getAllTenant is AlertOperationGroupOps.List<
-    Extension.ScopeParameter,
     Alert,
     Parameters = {
       /**
@@ -235,9 +234,8 @@ interface AlertOperationGroup {
   @operationId("Alerts_ChangeState")
   @action("changestate")
   changeState is AlertOperationGroupOps.ActionSync<
-    Extension.ScopeParameter,
     Alert,
-    Comments,
+    void,
     ArmResponse<Alert>,
     Parameters = {
       /**
@@ -257,7 +255,6 @@ interface AlertOperationGroup {
   @get
   @action("history")
   getHistory is AlertOperationGroupOps.ActionSync<
-    Extension.ScopeParameter,
     Alert,
     void,
     ArmResponse<AlertModification>
@@ -272,7 +269,6 @@ interface AlertOperationGroup {
   @get
   @action("enrichments")
   getEnrichments is AlertOperationGroupOps.ActionSync<
-    Extension.ScopeParameter,
     Alert,
     void,
     ArmResponse<AlertEnrichmentsList>

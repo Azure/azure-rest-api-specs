@@ -1,12 +1,15 @@
 {
   "parameters": {
     "api-version": "2025-05-25-preview",
-    "scope": "subscriptions/1e3ff1c0-771a-4119-a03b-be82a51e232d",
-    "groupby": "severity,alertState"
+    "groupby": "severity,alertState",
+    "scope": "subscriptions/1e3ff1c0-771a-4119-a03b-be82a51e232d"
   },
   "responses": {
     "200": {
       "body": {
+        "name": "current",
+        "type": "Microsoft.AlertsManagement/alertsSummary",
+        "id": "/subscriptions/1e3ff1c0-771a-4119-a03b-be82a51e232d/providers/Microsoft.AlertsManagement/alertsSummary/current",
         "properties": {
           "groupedby": "severity",
           "smartGroupsCount": 100,
@@ -108,11 +111,10 @@
               ]
             }
           ]
-        },
-        "id": "/subscriptions/1e3ff1c0-771a-4119-a03b-be82a51e232d/providers/Microsoft.AlertsManagement/alertsSummary/current",
-        "type": "Microsoft.AlertsManagement/alertsSummary",
-        "name": "current"
+        }
       }
     }
-  }
+  },
+  "operationId": "Alerts_GetSummary",
+  "title": "Summary"
 }

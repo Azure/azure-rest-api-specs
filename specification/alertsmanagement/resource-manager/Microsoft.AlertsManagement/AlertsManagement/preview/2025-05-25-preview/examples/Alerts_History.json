@@ -1,51 +1,51 @@
 {
   "parameters": {
+    "alertId": "66114d64-d9d9-478b-95c9-b789d6502100",
     "api-version": "2025-05-25-preview",
-    "scope": "subscriptions/9e261de7-c804-4b9d-9ebf-6f50fe350a9a",
-    "alertId": "66114d64-d9d9-478b-95c9-b789d6502100"
+    "scope": "subscriptions/9e261de7-c804-4b9d-9ebf-6f50fe350a9a"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/9e261de7-c804-4b9d-9ebf-6f50fe350a9a/resourceGroups/someResourceGroup/providers/Microsoft.AlertsManagement/alerts/66114d64-d9d9-478b-95c9-b789d6502100",
-        "type": "Microsoft.AlertsManagement/alerts",
         "name": "CPU Alert",
+        "type": "Microsoft.AlertsManagement/alerts",
+        "id": "/subscriptions/9e261de7-c804-4b9d-9ebf-6f50fe350a9a/resourceGroups/someResourceGroup/providers/Microsoft.AlertsManagement/alerts/66114d64-d9d9-478b-95c9-b789d6502100",
         "properties": {
           "alertId": "66114d64-d9d9-478b-95c9-b789d6502100",
           "modifications": [
             {
+              "description": "New Alert Object is created",
+              "comments": "",
               "modificationEvent": "AlertCreated",
               "modifiedAt": "2018-06-13T06:09:01Z",
               "modifiedBy": "System",
-              "description": "New Alert Object is created",
-              "oldValue": "",
               "newValue": "",
-              "comments": "",
+              "oldValue": "",
               "details": null
             },
             {
+              "description": "State changed from 'New' to 'Acknowledged'",
+              "comments": "The alert has been resolved",
               "modificationEvent": "StateChange",
               "modifiedAt": "2018-06-13T06:14:15.7378737Z",
               "modifiedBy": "vikramm@microsoft.com",
-              "description": "State changed from 'New' to 'Acknowledged'",
-              "oldValue": "Fired",
               "newValue": "Resolved",
-              "comments": "The alert has been resolved",
+              "oldValue": "Fired",
               "details": {
                 "type": "PropertyChange",
-                "oldValue": "Fired",
+                "comment": "The alert has been resolved",
                 "newValue": "Resolved",
-                "comment": "The alert has been resolved"
+                "oldValue": "Fired"
               }
             },
             {
+              "description": "New Alert Object is created",
+              "comments": "",
               "modificationEvent": "ActionsTriggered",
               "modifiedAt": "2018-06-13T06:09:01Z",
               "modifiedBy": "System",
-              "description": "New Alert Object is created",
-              "oldValue": "",
               "newValue": "",
-              "comments": "",
+              "oldValue": "",
               "details": {
                 "type": "ActionsTriggered",
                 "actionGroup": {
@@ -60,25 +60,25 @@
               }
             },
             {
+              "description": "New Alert Object is created",
+              "comments": "",
               "modificationEvent": "ActionsSuppressed",
               "modifiedAt": "2018-06-13T06:09:01Z",
               "modifiedBy": "System",
-              "description": "New Alert Object is created",
-              "oldValue": "",
               "newValue": "",
-              "comments": "",
+              "oldValue": "",
               "details": {
                 "type": "ActionsSuppressed",
-                "suppressionActionRules": [
-                  "ActionRule 1",
-                  "ActionRule 2"
-                ],
                 "suppressedActionGroups": [
                   {
                     "actionGroupId": "/subscriptions/9e261de7-c804-4b9d-9ebf-6f50fe350a9a/resourceGroups/rg1/providers/Microsoft.Insights/actionGroups/actionGroup1",
                     "ruleId": "RuleId1",
                     "ruleType": "AlertRule"
                   }
+                ],
+                "suppressionActionRules": [
+                  "ActionRule 1",
+                  "ActionRule 2"
                 ]
               }
             }
@@ -86,5 +86,7 @@
         }
       }
     }
-  }
+  },
+  "operationId": "Alerts_GetHistory",
+  "title": "Resolve"
 }

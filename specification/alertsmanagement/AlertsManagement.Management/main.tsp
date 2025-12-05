@@ -36,11 +36,6 @@ namespace Microsoft.AlertsManagement;
  */
 enum Versions {
   /**
-   * The 2025-05-25-preview API version.
-   */
-  v2025_05_25_preview: "2025-05-25-preview",
-
-  /**
    * The 2019-03-01 API version.
    */
   v2019_03_01: "2019-03-01",
