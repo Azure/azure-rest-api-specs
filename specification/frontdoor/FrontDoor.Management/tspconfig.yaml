@@ -8,6 +8,37 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
     emit-lro-options: "final-state-only"
     examples-dir: "{project-root}/examples"
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-frontdoor"
+    service-dir: "sdk/network"
+    namespace: "azure.mgmt.frontdoor"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-frontdoor"
+    service-dir: "sdk/frontdoor"
+    namespace: "com.azure.resourcemanager.frontdoor"
+    service-name: "FrontDoor" # human-readable service name, whitespace allowed
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    service-dir: sdk/frontdoor
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-frontdoor"
+    is-modular-library: true
+    flavor: "azure"
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-frontdoor"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/frontdoor"
+    emitter-output-dir: "{output-dir}/{service-dir}/armfrontdoor"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armfrontdoor"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
