@@ -68,10 +68,10 @@ interface Disks {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   createOrUpdate is ComputeResourceCreateOrReplaceAsync<
     Disk,
-    Response = ArmResourceUpdatedResponse<Disk> | (ArmAcceptedLroResponse & {
+    Response = ArmResourceUpdatedResponse<Disk> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Disk> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot _: Disk;
-    }),
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    })
   >;
 
   /**
@@ -82,7 +82,8 @@ interface Disks {
   update is ComputeCustomPatchAsync<
     Disk,
     DiskUpdate,
-    Response = ArmResponse<Disk> | (ArmAcceptedLroResponse & {
+    Response = ArmResponse<Disk> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Disk> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot _: Disk;
     })
   >;
@@ -115,7 +116,12 @@ interface Disks {
    * Revokes access to a disk.
    */
   @action("endGetAccess")
-  revokeAccess is ComputeResourceActionAsync<Disk, void, OkResponse>;
+  revokeAccess is ComputeResourceActionAsync<
+    Disk,
+    void,
+    OkResponse,
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+  >;
 }
 
 @@doc(Disk.name,

@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "accept-language": [
+      "en-US"
+    ],
+    "api-version": "2023-12-01",
+    "deviceName": "testedgedevice",
+    "resourceGroupName": "GroupForEdgeAutomation",
+    "roleName": "testrole",
+    "subscriptionId": "4385cf00-2d3a-425a-832f-f4285b1c9dce"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "foo/bar/id",
+            "properties": {
+              "metricConfigurations": [
+                {
+                  "counterSets": [
+                    {
+                      "counters": [
+                        {
+                          "name": "test"
+                        }
+                      ]
+                    }
+                  ],
+                  "mdmAccount": "test",
+                  "metricNameSpace": "test",
+                  "resourceId": "test"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "MonitoringConfig_List",
+  "title": "ListMonitoringConfig"
+}

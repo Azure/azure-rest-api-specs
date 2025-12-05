@@ -18,7 +18,7 @@ export class CompileRule implements Rule {
     let errorOutput = "";
 
     if (await fileExists(path.join(folder, "main.tsp"))) {
-      let [err, stdout, stderr] = await runNpm([
+      const [err, stdout, stderr] = await runNpm([
         "exec",
         "--no",
         "--",
@@ -104,10 +104,12 @@ export class CompileRule implements Rule {
             allSwaggers,
             async (swaggerPath: string) => {
               const swaggerText = await readFile(swaggerPath, { encoding: "utf8" });
-              const swaggerObj = JSON.parse(swaggerText);
+              const swaggerObj = JSON.parse(swaggerText) as {
+                info?: Record<string, unknown>;
+              };
               return (
-                swaggerObj["info"]?.["x-typespec-generated"] ||
-                swaggerObj["info"]?.["x-cadl-generated"]
+                swaggerObj["info"]?.["x-typespec-generated"] !== undefined ||
+                swaggerObj["info"]?.["x-cadl-generated"] !== undefined
               );
             },
           );
@@ -178,7 +180,7 @@ export class CompileRule implements Rule {
 
     const clientTsp = path.join(folder, "client.tsp");
     if (await fileExists(clientTsp)) {
-      let [err, stdout, stderr] = await runNpm([
+      const [err, stdout, stderr] = await runNpm([
         "exec",
         "--no",
         "--",

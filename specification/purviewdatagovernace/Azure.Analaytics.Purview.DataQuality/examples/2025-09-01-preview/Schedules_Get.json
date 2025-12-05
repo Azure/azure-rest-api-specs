@@ -1,0 +1,89 @@
+{
+  "operationId": "GetSchedules",
+  "parameters": {
+    "$skipToken": "12345678-abcd-1234-ef00-123456abcdeg",
+    "api-version": "2025-09-01-preview",
+    "businessDomainId": "abcdef12-3456-7890-abcd-ef1234567890"
+  },
+  "title": "Schedules_Get",
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "test",
+            "id": "test",
+            "businessDomain": {
+              "type": "BusinessDomainReference",
+              "referenceId": "99a01b25-bb9c-4b8f-89c8-8e28bcf801a9"
+            },
+            "scope": {
+              "items": [
+                {
+                  "dataProduct": {
+                    "referenceId": "7e74da09-2498-4276-8345-c1e4711ac320",
+                    "type": "DataProductReference"
+                  },
+                  "dataAsset": {
+                    "referenceId": "588199cc-b60d-44c1-8ad1-4bb7ea49a577",
+                    "type": "DataAssetReference"
+                  }
+                }
+              ]
+            },
+            "trigger": {
+              "type": "RunOnce",
+              "typeProperties": {
+                "timezone": "UTC",
+                "isScheduled": false
+              }
+            },
+            "lastModifiedAt": "2025-09-03T09:00:52.4304544Z",
+            "lastModifiedBy": "d898432e-87c8-44ba-93b3-c95d61c79ced"
+          },
+          {
+            "name": "test scan",
+            "id": "testscan",
+            "businessDomain": {
+              "type": "BusinessDomainReference",
+              "referenceId": "99a01b25-bb9c-4b8f-89c8-8e28bcf801a9"
+            },
+            "scope": {
+              "items": [
+                {
+                  "dataProduct": {
+                    "referenceId": "7e74da09-2498-4276-8345-c1e4711ac320",
+                    "type": "DataProductReference"
+                  },
+                  "dataAsset": {
+                    "referenceId": "588199cc-b60d-44c1-8ad1-4bb7ea49a577",
+                    "type": "DataAssetReference"
+                  }
+                },
+                {
+                  "dataProduct": {
+                    "referenceId": "7e74da09-2498-4276-8345-c1e4711ac320",
+                    "type": "DataProductReference"
+                  },
+                  "dataAsset": {
+                    "referenceId": "ef0dbbff-3e75-4df5-a3df-e60e1d8b5838",
+                    "type": "DataAssetReference"
+                  }
+                }
+              ]
+            },
+            "trigger": {
+              "type": "RunOnce",
+              "typeProperties": {
+                "timezone": "UTC",
+                "isScheduled": false
+              }
+            },
+            "lastModifiedAt": "2025-10-09T19:00:46.0970882Z",
+            "lastModifiedBy": "d898432e-87c8-44ba-93b3-c95d61c79ced"
+          }
+        ]
+      }
+    }
+  }
+}
