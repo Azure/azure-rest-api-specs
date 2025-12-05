@@ -1,15 +1,14 @@
 parameters:
-  "dependencies":
-    additionalDirectories:
-      - specification/compute/Common.Management
   "service-dir":
     default: "sdk/compute"
+  "dependencies":
+    default: ""
 emit:
   - "@azure-tools/typespec-autorest"
 options:
   "@azure-tools/typespec-autorest":
     omit-unreachable-types: true
-    emitter-output-dir: "{project-root}/.."
+    emitter-output-dir: "{project-root}"
     azure-resource-provider-folder: "resource-manager"
     output-file: "{azure-resource-provider-folder}/{service-name}/DiskRP/{version-status}/{version}/DiskRP.json"
     examples-dir: "{project-root}/examples"
@@ -21,6 +20,9 @@ options:
     compatibility-lro: true
     package-details:
       name: "@azure/arm-computedisk"
+  "@azure-tools/typespec-client-generator-cli":
+    "additionalDirectories":
+      - specification/compute/Common.Management
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
