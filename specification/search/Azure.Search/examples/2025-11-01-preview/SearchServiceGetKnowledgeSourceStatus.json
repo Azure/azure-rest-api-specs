@@ -1,0 +1,36 @@
+{
+  "operationId": "KnowledgeSources_GetStatus",
+  "title": "SearchServiceGetKnowledgeSourceStatus",
+  "parameters": {
+    "endpoint": "https://previewexampleservice.search.windows.net",
+    "sourceName": "ks-preview-test",
+    "api-version": "2025-11-01-preview",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "synchronizationStatus": "active",
+        "synchronizationInterval": "1d",
+        "currentSynchronizationState": {
+          "startTime": "2024-11-26T03:37:18.853Z",
+          "itemsUpdatesProcessed": 10,
+          "itemsUpdatesFailed": 2,
+          "itemsSkipped": 1
+        },
+        "lastSynchronizationState": {
+          "startTime": "2024-11-25T03:37:18.853Z",
+          "endTime": "2024-11-25T03:38:19.012Z",
+          "itemsUpdatesProcessed": 8,
+          "itemsUpdatesFailed": 1,
+          "itemsSkipped": 0
+        },
+        "statistics": {
+          "totalSynchronization": 5,
+          "averageSynchronizationDuration": "PT30M",
+          "averageItemsProcessedPerSynchronization": 100
+        }
+      }
+    }
+  }
+}
