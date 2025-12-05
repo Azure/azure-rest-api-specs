@@ -37,6 +37,7 @@ interface ProviderMonitorSettings {
   /**
    * Updates the provider monitor setting properties as specified in the request body. Update fails if the specified provider monitor setting does not already exist.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   update is Azure.ResourceManager.Legacy.CustomPatchSync<
     ProviderMonitorSetting,

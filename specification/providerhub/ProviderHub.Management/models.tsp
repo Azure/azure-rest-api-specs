@@ -1233,6 +1233,7 @@ model CustomRolloutProperties {
  * The specification.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model CustomRolloutPropertiesSpecification extends CustomRolloutSpecification {}
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1287,6 +1288,7 @@ model CustomRolloutSpecificationAutoProvisionConfig {
  * The canary region configuration.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model CustomRolloutSpecificationCanary extends TrafficRegions {}
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1299,6 +1301,7 @@ model TrafficRegions {
  * The provider registration.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model CustomRolloutSpecificationProviderRegistration
   extends ProviderRegistration {}
 
@@ -1337,6 +1340,7 @@ model ProviderRegistrationProperties
  * The provider hub metadata.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ProviderRegistrationPropertiesProviderHubMetadata
   extends ProviderHubMetadata {}
 
@@ -1455,6 +1459,7 @@ model ResourceProviderAuthentication {
  * The third party provider authorization.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ProviderHubMetadataThirdPartyProviderAuthorization
   extends ThirdPartyProviderAuthorization {}
 
@@ -1489,6 +1494,7 @@ model LightHouseAuthorization {
  * The subscription lifecycle notification specifications.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SubscriptionLifecycleNotificationSpecificationsProperties
   extends SubscriptionLifecycleNotificationSpecifications {}
 
@@ -1503,6 +1509,7 @@ model SubscriptionLifecycleNotificationSpecifications {
   /**
    * The soft delete TTL.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   softDeleteTTL?: duration;
 }
 
@@ -1523,6 +1530,7 @@ model SubscriptionStateOverrideAction {
  * The private resource provider configuration.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ProviderRegistrationPropertiesPrivateResourceProviderConfiguration
   extends PrivateResourceProviderConfiguration {}
 
@@ -1625,6 +1633,7 @@ model ResourceProviderManifestProperties {
   /**
    * The metadata.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   metadata?: unknown;
 
   /**
@@ -1641,6 +1650,7 @@ model ResourceProviderManifestProperties {
   /**
    * The enable tenant linked notification.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   enableTenantLinkedNotification?: boolean | null;
 
   /**
@@ -1745,6 +1755,7 @@ model FeaturesRule {
  * The request header options.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model RequestHeaderOptionsProperties extends RequestHeaderOptions {}
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1764,6 +1775,7 @@ model RequestHeaderOptions {
  * The resource provider management.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ResourceProviderManagementProperties extends ResourceProviderManagement {}
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1924,6 +1936,7 @@ model ResourceProviderCapabilities {
  * The template deployment options.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model TemplateDeploymentOptionsProperties extends TemplateDeploymentOptions {}
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -2202,6 +2215,7 @@ model ResourceTypeRegistrationProperties {
   /**
    * The allowed unauthorized actions extensions.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   allowedUnauthorizedActionsExtensions?: AllowedUnauthorizedActionsExtension[];
 
   /**
@@ -2652,6 +2666,7 @@ model ResourceTypeExtension {
  * The extension options.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ResourceTypeRegistrationPropertiesExtensionOptions
   extends ResourceTypeExtensionOptions {}
 
@@ -2667,6 +2682,7 @@ model ResourceTypeExtensionOptions {
  * Resource creation begin.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ResourceTypeExtensionOptionsResourceCreationBegin
   extends ExtensionOptions {}
 
@@ -2777,6 +2793,7 @@ model LoggingRule {
  * The hidden property paths.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model LoggingRuleHiddenPropertyPaths extends LoggingHiddenPropertyPath {}
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -2838,6 +2855,7 @@ model ThrottlingMetric {
  * The identity management.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ResourceTypeRegistrationPropertiesIdentityManagement
   extends IdentityManagementProperties {}
 
@@ -2868,6 +2886,7 @@ model IdentityManagementProperties {
  * The check name availability specifications.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ResourceTypeRegistrationPropertiesCheckNameAvailabilitySpecifications
   extends CheckNameAvailabilitySpecifications {}
 
@@ -2912,6 +2931,7 @@ model ExtendedLocationOptions {
  * The resource move policy.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ResourceTypeRegistrationPropertiesResourceMovePolicy
   extends ResourceMovePolicy {}
 
@@ -2945,6 +2965,7 @@ model ResourceConcurrencyControlOption {
  * The resource graph configuration.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ResourceTypeRegistrationPropertiesResourceGraphConfiguration
   extends ResourceGraphConfiguration {}
 
@@ -3059,6 +3080,7 @@ model LinkedNotificationRule {
  * The template deployment policy.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model TemplateDeploymentPolicyProperties extends TemplateDeploymentPolicy {}
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -3091,6 +3113,7 @@ model ResourceTypeRegistrationPropertiesAvailabilityZoneRule {
  * The dsts configuration.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DstsConfigurationProperties extends DstsConfiguration {}
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -3235,10 +3258,7 @@ model ResourceTypeRegistrationPropertiesResourceManagementOptions {
   /**
    * Delete dependencies.
    */
-  @OpenAPI.extension(
-    "x-ms-identifiers",
-    #["linkedType", "linkedProperty", "requiredFeatures"]
-  )
+  @identifiers(#["linkedType", "linkedProperty", "requiredFeatures"])
   deleteDependencies?: DeleteDependency[];
 
   /**
@@ -3309,6 +3329,7 @@ model ResourceTypeRegistrationPropertiesRoutingRule {
  * The status.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model CustomRolloutPropertiesStatus extends CustomRolloutStatus {}
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -3374,6 +3395,7 @@ model TypedErrorInfo {
   /**
    * The error information.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   info?: unknown;
 }
@@ -3382,6 +3404,7 @@ model TypedErrorInfo {
  * The manifest checkin status.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model CustomRolloutStatusManifestCheckinStatus extends CheckinManifestInfo {}
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -3434,6 +3457,7 @@ model DefaultRolloutProperties {
  * The default rollout specification.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DefaultRolloutPropertiesSpecification
   extends DefaultRolloutSpecification {}
 
@@ -3494,6 +3518,7 @@ model DefaultRolloutSpecification {
  * The expedited rollout definition.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DefaultRolloutSpecificationExpeditedRollout
   extends ExpeditedRolloutDefinition {}
 
@@ -3509,6 +3534,7 @@ model ExpeditedRolloutDefinition {
  * The canary traffic region configuration.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DefaultRolloutSpecificationCanary
   extends CanaryTrafficRegionRolloutConfiguration {}
 
@@ -3538,6 +3564,8 @@ model TrafficRegionRolloutConfiguration extends TrafficRegions {
  * The medium traffic region configuration.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model TrafficRegionRolloutConfigurationProperties
   extends TrafficRegionRolloutConfiguration {}
 
@@ -3545,6 +3573,7 @@ model TrafficRegionRolloutConfigurationProperties
  * The provider registration.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DefaultRolloutSpecificationProviderRegistration
   extends ProviderRegistration {}
 
@@ -3567,6 +3596,7 @@ model DefaultRolloutSpecificationAutoProvisionConfig {
  * The default rollout status.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DefaultRolloutPropertiesStatus extends DefaultRolloutStatus {}
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -3598,6 +3628,7 @@ model DefaultRolloutStatus extends RolloutStatusBase {
  * The manifest checkin status.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DefaultRolloutStatusManifestCheckinStatus extends CheckinManifestInfo {}
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -3697,6 +3728,7 @@ model ResourceProviderManifest {
   /**
    * The metadata.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   metadata?: unknown;
 
   /**
@@ -3713,6 +3745,7 @@ model ResourceProviderManifest {
   /**
    * Whether tenant linked notification is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   enableTenantLinkedNotification?: boolean | null;
 
   /**
@@ -3737,6 +3770,7 @@ model ResourceProviderManifest {
  * The provider authentication.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ResourceProviderAuthenticationProperties
   extends ResourceProviderAuthentication {}
 
@@ -3775,6 +3809,7 @@ model ResourceType {
   /**
    * The allowed unauthorized actions extensions.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   allowedUnauthorizedActionsExtensions?: AllowedUnauthorizedActionsExtension[];
 
   /**
@@ -3825,6 +3860,7 @@ model ResourceType {
   /**
    * The metadata.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   metadata?: unknown;
 
   /**
@@ -3913,6 +3949,7 @@ model ResourceType {
  * The identity management.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ResourceTypeIdentityManagement extends IdentityManagement {}
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -3927,12 +3964,14 @@ model IdentityManagement {
  * The features rule.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model FeaturesRuleProperties extends FeaturesRule {}
 
 /**
  * The re-register subscription metadata.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ResourceProviderManifestReRegisterSubscriptionMetadata
   extends ReRegisterSubscriptionMetadata {}
 
@@ -4041,6 +4080,7 @@ model OperationsDefinition {
   /**
    * Anything
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: unknown;
 }
 
@@ -4048,6 +4088,7 @@ model OperationsDefinition {
  * Display information of the operation.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model OperationsDefinitionDisplay extends OperationsDisplayDefinition {}
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -4076,6 +4117,7 @@ model OperationsDisplayDefinition {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model OperationsPutContentProperties extends OperationsContentProperties {}
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -4085,7 +4127,6 @@ model OperationsContentProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @identifiers(#["name"])
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   contents?: LocalizedOperationDefinition[];
 }
 
@@ -4121,6 +4162,7 @@ model LocalizedOperationDefinition {
  * Display information of the operation.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model LocalizedOperationDisplayDefinitionProperties
   extends LocalizedOperationDisplayDefinition {}
 
@@ -4189,11 +4231,13 @@ model LocalizedOperationDisplayDefinition {
   /**
    * Display information of the operation for pt-BR locale.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ptBR?: OperationsDisplayDefinitionProperties;
 
   /**
    * Display information of the operation for pt-PT locale.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ptPT?: OperationsDisplayDefinitionProperties;
 
   /**
@@ -4221,6 +4265,7 @@ model LocalizedOperationDisplayDefinition {
  * Display information of the operation.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model OperationsDisplayDefinitionProperties
   extends OperationsDisplayDefinition {}
 
@@ -4235,6 +4280,7 @@ model ResourceTypeRegistrationArrayResponseWithContinuation
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SkuResourceProperties extends ResourceTypeSku {}
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -4378,6 +4424,7 @@ model SkuCapability {
  * The capacity.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SkuSettingCapacity extends SkuCapacity {}
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -4431,7 +4478,6 @@ model ResourceManagementAction {
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @identifiers(#["resourceId"])
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   resources?: ResourceManagementEntity[];
 }
 
@@ -4590,6 +4636,7 @@ model FrontloadPayloadProperties {
  * The manifest level fields to override.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model FrontloadPayloadPropertiesOverrideManifestLevelFields
   extends ManifestLevelPropertyBag {}
 
@@ -4606,6 +4653,7 @@ model ManifestLevelPropertyBag {
  * The endpoint level fields to override.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model FrontloadPayloadPropertiesOverrideEndpointLevelFields
   extends ResourceTypeEndpointBase {}
 
@@ -4679,7 +4727,6 @@ model OperationsContent extends Azure.ResourceManager.CommonTypes.Resource {
    * Operations content.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: OperationsDefinition;
 }
 

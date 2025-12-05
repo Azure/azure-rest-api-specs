@@ -66,7 +66,7 @@ interface ProviderRegistrations {
   /**
    * Generates the manifest for the given provider.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("GenerateManifest")
   generateManifest is ArmResourceActionSync<
     ProviderRegistration,
@@ -78,7 +78,7 @@ interface ProviderRegistrations {
   /**
    * Checkin the manifest.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("CheckinManifest")
   checkinManifest is ArmResourceActionSync<
     ProviderRegistration,
@@ -100,7 +100,7 @@ interface ProviderRegistrations {
   /**
    * Deletes resources.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ResourceActions_DeleteResources")
   deleteResources is ArmResourceActionAsyncBase<
     ProviderRegistration,
@@ -123,7 +123,7 @@ interface ProviderRegistrations {
   /**
    * Generates the new region frontload manifest.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("NewRegionFrontloadRelease_GenerateManifest")
   @action("generateNewRegionFrontloadManifest")
   newRegionFrontloadReleaseGenerateManifest is ArmResourceActionSync<
