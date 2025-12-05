@@ -907,6 +907,7 @@ union DiskControllerTypes {
 /**
  * Specifies the storage fault domain alignment type for the disk.
  */
+@added(Versions.v2025_11_01)
 union StorageFaultDomainAlignmentType {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -918,6 +919,7 @@ union StorageFaultDomainAlignmentType {
 /**
  * Specifies the storage alignment status for the disk.
  */
+@added(Versions.v2025_11_01)
 union StorageAlignment {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -5058,6 +5060,7 @@ model DiskInstanceView {
   /**
    * Specifies the storage alignment status for the disk.
    */
+  @added(Versions.v2025_11_01)
   storageAlignment?: StorageAlignment;
 }
 

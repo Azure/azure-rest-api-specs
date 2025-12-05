@@ -5483,6 +5483,9 @@
           "Create a platform-image scale set with unmanaged os disks.": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_PlatformImageWithUnmanagedOsDisks.json"
           },
+          "Create a scale set containing disks with storage fault domain alignment.": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithStorageFDAlignment.json"
+          },
           "Create a scale set from a custom image.": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_FromACustomImage.json"
           },
@@ -13964,10 +13967,6 @@
             "diskEncryptionKey/sourceVault/id"
           ]
         },
-        "storageAlignment": {
-          "$ref": "#/definitions/StorageAlignment",
-          "description": "Specifies the storage alignment for the disk."
-        },
         "statuses": {
           "type": "array",
           "description": "The resource status information.",
@@ -13975,6 +13974,10 @@
             "$ref": "#/definitions/InstanceViewStatus"
           },
           "x-ms-identifiers": []
+        },
+        "storageAlignment": {
+          "$ref": "#/definitions/StorageAlignment",
+          "description": "Specifies the storage alignment status for the disk."
         }
       }
     },
@@ -17907,6 +17910,28 @@
         ]
       }
     },
+    "StorageAlignment": {
+      "type": "string",
+      "description": "Specifies the storage alignment status for the disk.",
+      "enum": [
+        "Unaligned",
+        "Aligned"
+      ],
+      "x-ms-enum": {
+        "name": "StorageAlignment",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unaligned",
+            "value": "Unaligned"
+          },
+          {
+            "name": "Aligned",
+            "value": "Aligned"
+          }
+        ]
+      }
+    },
     "StorageFaultDomainAlignmentType": {
       "type": "string",
       "description": "Specifies the storage fault domain alignment type for the disk.",
@@ -17925,28 +17950,6 @@
           {
             "name": "BestEffortAligned",
             "value": "BestEffortAligned"
-          }
-        ]
-      }
-    },
-    "StorageAlignment": {
-      "type": "string",
-      "description": "Specifies the storage alignment for the disk.",
-      "enum": [
-        "Unaligned",
-        "Aligned"
-      ],
-      "x-ms-enum": {
-        "name": "StorageAlignment",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Unaligned",
-            "value": "Unaligned"
-          },
-          {
-            "name": "Aligned",
-            "value": "Aligned"
           }
         ]
       }
