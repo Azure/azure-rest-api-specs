@@ -129,7 +129,25 @@ interface Render {
       @query("view")
       localizedMapView?: LocalizedMapView;
     },
-    void
+    {
+      /**
+       * The media type of the response.
+       */
+      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Specifying response content-types."
+      @header("Content-Type")
+      contentType?:
+        | "application/json"
+        | "image/jpeg"
+        | "image/png"
+        | "image/pbf"
+        | "application/vnd.mapbox-vector-tile";
+
+      /**
+       * The tile returned from a successful API call.
+       */
+      @body
+      body?: bytes;
+    }
   >;
 
   /**
@@ -283,12 +301,23 @@ interface Render {
       @query("statesetId")
       statesetId: string;
     },
-    void
+    {
+      /**
+       * The media type of the response.
+       */
+      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Specifying response content-types."
+      @header("Content-Type")
+      contentType?: "application/json" | "application/vnd.mapbox-vector-tile";
+
+      /**
+       * The tile returned from a successful API call.
+       */
+      @body
+      body?: bytes;
+    }
   >;
 
   /**
-   *
-   *
    * The `Get Copyright Caption` API is an HTTP GET request designed to serve
    * copyright information to be used with tiles requested from the Render service.
    * In addition to a basic copyright for the whole map, it can serve specific
@@ -764,8 +793,9 @@ interface Render {
        * media type will be image/png or image/jpeg depending on the Accept header in
        * the request.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Specifying response content-types which are only allowed to be closed."
       @header("Content-Type")
-      contentType?: ResponseMediaType;
+      contentType?: "image/png" | "image/jpeg";
 
       /**
        * This image is returned from a successful Get Map Static Image call.

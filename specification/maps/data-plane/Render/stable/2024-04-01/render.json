@@ -716,6 +716,10 @@
         "operationId": "Render_GetMapStateTile",
         "summary": "Use to get state tiles in vector format that can then be used to display\nfeature state information in an indoor map.",
         "description": "Fetches state tiles in vector format typically to be integrated into indoor\nmaps module of map control or SDK. The map control will call this API after\nuser turns on dynamic styling. For more information, see [Zoom Levels and Tile\nGrid](/azure/location-based-services/zoom-levels-and-tile-grid).",
+        "produces": [
+          "application/json",
+          "application/vnd.mapbox-vector-tile"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -762,8 +766,12 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "string",
+              "format": "byte"
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1254,6 +1262,13 @@
         "operationId": "Render_GetMapTile",
         "summary": "Use to request map tiles in vector or raster format.",
         "description": "The `Get Map Tiles` API enables users to request map tiles in either vector or\nraster formats, typically for integration into a map control or SDK. Supported\ntile types include Azure Maps road tiles and real-time Weather Radar tiles. By\ndefault, the Azure Maps [Web SDK](/azure/azure-maps/about-azure-maps#web-sdk)\nuses vector tiles for rendering its web map control.",
+        "produces": [
+          "application/json",
+          "image/jpeg",
+          "image/png",
+          "image/pbf",
+          "application/vnd.mapbox-vector-tile"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1612,8 +1627,12 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "string",
+              "format": "byte"
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -2353,30 +2372,6 @@
             "name": "xml",
             "value": "xml",
             "description": "[The Extensible Markup Language](https://www.w3.org/TR/xml/)"
-          }
-        ]
-      }
-    },
-    "ResponseMediaType": {
-      "type": "string",
-      "description": "The desired media type of the response.",
-      "enum": [
-        "image/png",
-        "image/jpeg"
-      ],
-      "x-ms-enum": {
-        "name": "ResponseMediaType",
-        "modelAsString": false,
-        "values": [
-          {
-            "name": "image/png",
-            "value": "image/png",
-            "description": "Return image in png format."
-          },
-          {
-            "name": "image/jpeg",
-            "value": "image/jpeg",
-            "description": "Return image in jpeg format."
           }
         ]
       }
