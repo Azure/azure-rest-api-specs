@@ -13,3 +13,4 @@ using Microsoft.AlertsManagement;
 
 @@clientLocation(AlertsOperationGroup.metaData, Alerts);
 @@clientLocation(AlertsOperationGroup.getSummary, Alerts);
+@@clientLocation(AlertGetAllTenantOperation.getAllTenant, Alerts);

@@ -18,8 +18,6 @@ interface AlertsOperationGroup {
   /**
    * List alerts meta data information based on value of identifier parameter.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Alerts_MetaData")
   @autoRoute
   @get
   @action("alertsMetaData")
@@ -37,8 +35,6 @@ interface AlertsOperationGroup {
   /**
    * Get a summarized count of your alerts grouped by various parameters (e.g. grouping by 'Severity' returns the count of alerts for each severity).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Alerts_GetSummary")
   @autoRoute
   @get
   @action("alertsSummary")

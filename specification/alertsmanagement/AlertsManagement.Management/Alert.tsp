@@ -135,8 +135,6 @@ interface AlertGetAllTenantOperation {
   /**
    * List all existing alerts, where the results can be filtered on the basis of multiple parameters (e.g. time range). The results can then be sorted on the basis specific fields, with the default being lastModifiedDateTime.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Alerts_GetAllTenant")
   getAllTenant is GetAllTenantOps.List<
     Alert,
     Parameters = {
@@ -252,9 +250,7 @@ interface AlertOperationGroup {
   /**
    * Get information related to a specific alert. If scope is a deleted resource then please use scope as parent resource of the delete resource. For example if my alert id is '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/virtualMachines/vm1/providers/Microsoft.AlertsManagement/alerts/{alertId}' and 'vm1' is deleted then if you want to get alert by id then use parent resource of scope. So in this example get alert by id call will look like this: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.AlertsManagement/alerts/{alertId}'.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Get a specific alert.")
-  @operationId("Alerts_GetById")
   getById is AlertOperationGroupOps.Read<
     Alert,
     ErrorType = AlertsManagementErrorResponse
@@ -263,8 +259,6 @@ interface AlertOperationGroup {
   /**
    * List all existing alerts, where the results can be filtered on the basis of multiple parameters (e.g. time range). The results can then be sorted on the basis specific fields, with the default being lastModifiedDateTime.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Alerts_GetAll")
   getAll is AlertOperationGroupOps.List<
     Alert,
     Parameters = {
@@ -377,8 +371,6 @@ interface AlertOperationGroup {
   /**
    * Change the state of an alert. If scope is a deleted resource then please use scope as parent resource of the delete resource. For example if my alert id is '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/virtualMachines/vm1/providers/Microsoft.AlertsManagement/alerts/{alertId}' and 'vm1' is deleted then if you want to change state of this particular alert then use parent resource of scope. So in this example change state call will look like this: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.AlertsManagement/alerts/{alertId}'.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Alerts_ChangeState")
   @action("changestate")
   changeState is AlertOperationGroupOps.ActionSync<
     Alert,
@@ -398,8 +390,6 @@ interface AlertOperationGroup {
   /**
    * Get the history of an alert, which captures any monitor condition changes (Fired/Resolved), alert state changes (New/Acknowledged/Closed) and applied action rules for that particular alert. If scope is a deleted resource then please use scope as parent resource of the delete resource. For example if my alert id is '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/virtualMachines/vm1/providers/Microsoft.AlertsManagement/alerts/{alertId}' and 'vm1' is deleted then if you want to get history of this particular alert then use parent resource of scope. So in this example get history call will look like this: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.AlertsManagement/alerts/{alertId}/history'.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Alerts_GetHistory")
   @get
   @action("history")
   getHistory is AlertOperationGroupOps.ActionSync<
@@ -412,8 +402,6 @@ interface AlertOperationGroup {
   /**
    * Get the enrichments of an alert. It returns a collection of one object named default.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Alerts_GetEnrichments")
   @list
   @get
   @action("enrichments")
