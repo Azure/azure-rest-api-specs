@@ -2161,12 +2161,12 @@ using Microsoft.Web;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(AppServiceCertificateResource.properties);
 
-@@clientLocation(CertificateOrdersDiagnostics.getAppServiceCertificateOrderDetectorResponse,
-  CertificateOrdersDiagnostics
-);
-@@clientLocation(CertificateOrdersDiagnostics.listAppServiceCertificateOrderDetectorResponse,
-  CertificateOrdersDiagnostics
-);
+// @@clientLocation(CertificateOrdersDiagnostics.getAppServiceCertificateOrderDetectorResponse,
+//   CertificateOrdersDiagnostics
+// );
+// @@clientLocation(CertificateOrdersDiagnostics.listAppServiceCertificateOrderDetectorResponse,
+//   CertificateOrdersDiagnostics
+// );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(DetectorResponse.properties);
 
