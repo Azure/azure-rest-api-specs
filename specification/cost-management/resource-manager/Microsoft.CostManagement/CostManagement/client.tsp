@@ -36,7 +36,7 @@ using Microsoft.CostManagement;
 @@clientName(Microsoft.CostManagement, "CostManagementClient", "python");
 @@clientName(Azure.ResourceManager.CommonTypes.ErrorResponse,
   "ArmErrorResponse",
-  "python"
+  "python,javascript"
 );
 @@clientName(Term.P1Y, "P1_Y", "python");
 @@clientName(Term.P3Y, "P3_Y", "python");
