@@ -126,7 +126,7 @@ interface Render {
        */
       #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Specifying response content-types."
       @header("Content-Type")
-      contentType?:
+      contentType:
         | "application/json"
         | "image/jpeg"
         | "image/png"
@@ -271,7 +271,7 @@ interface Render {
        */
       #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Specifying response content-types."
       @header("Content-Type")
-      contentType?: "application/json" | "application/vnd.mapbox-vector-tile";
+      contentType: "application/json" | "application/vnd.mapbox-vector-tile";
 
       /**
        * The tile returned from a successful API call.
@@ -741,7 +741,7 @@ interface Render {
        */
       #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Specifying response content-types which are only allowed to be closed."
       @header("Content-Type")
-      contentType?: "image/png" | "image/jpeg";
+      contentType: "image/png" | "image/jpeg";
 
       /**
        * This image is returned from a successful Get Map Static Image call.
