@@ -368,8 +368,6 @@ model CdnPeeringPrefix extends CommonTypes.Resource {
   /**
    * The properties that define a cdn peering prefix.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: CdnPeeringPrefixProperties;
 }
 
@@ -496,7 +494,7 @@ model PeeringProperties {
   /**
    * The connectivity probes associated with the peering.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   connectivityProbes?: ConnectivityProbe[];
 
   /**
@@ -518,7 +516,7 @@ model PeeringPropertiesDirect {
   /**
    * The set of connections that constitute a direct peering.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   connections?: DirectConnection[];
 
   /**
@@ -681,7 +679,7 @@ model PeeringPropertiesExchange {
   /**
    * The set of connections that constitute an exchange peering.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   connections?: ExchangeConnection[];
 
   /**
@@ -752,7 +750,6 @@ model ConnectivityProbe {
    * network the connectivity probe traffic can reach their endpoint for the connectivity probe.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
   prefixesToAccesslist?: string[];
 }
 
@@ -814,9 +811,7 @@ model Operation {
   /**
    * The properties of the operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   @visibility(Lifecycle.Read)
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: OperationProperties;
 }
 
@@ -868,7 +863,7 @@ model ServiceSpecification {
    * Specifications of the Metrics for Azure Monitoring.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   metricSpecifications?: MetricSpecification[];
 }
 
@@ -910,14 +905,13 @@ model MetricSpecification {
    * Supported time grain types for the metric.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
   supportedTimeGrainTypes?: string[];
 
   /**
    * Dimensions of the metric.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   dimensions?: MetricDimension[];
 }
 
@@ -951,7 +945,7 @@ model PeerAsnProperties {
   /**
    * The contact details of the peer.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   peerContactDetail?: ContactDetail[];
 
   /**
@@ -1005,8 +999,6 @@ model PeeringLocation extends CommonTypes.Resource {
   /**
    * The properties that define a peering location.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: PeeringLocationProperties;
 }
 
@@ -1047,13 +1039,13 @@ model PeeringLocationPropertiesDirect {
   /**
    * The list of direct peering facilities at the peering location.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   peeringFacilities?: DirectPeeringFacility[];
 
   /**
    * The list of bandwidth offers available at the peering location.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   bandwidthOffers?: PeeringBandwidthOffer[];
 }
 
@@ -1106,7 +1098,7 @@ model PeeringLocationPropertiesExchange {
   /**
    * The list of exchange peering facilities at the peering location.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   peeringFacilities?: ExchangePeeringFacility[];
 }
 
@@ -1315,7 +1307,6 @@ model ConnectionMonitorTestProperties {
    * The path representing the Connection Monitor test.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
   path?: string[];
 
   /**
@@ -1340,8 +1331,6 @@ model PeeringServiceLocation extends CommonTypes.Resource {
   /**
    * The properties that define a peering service location.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: PeeringServiceLocationProperties;
 }
 
@@ -1396,7 +1385,7 @@ model PeeringServicePrefixProperties {
    * The list of events for peering service prefix
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   events?: PeeringServicePrefixEvent[];
 
   /**
@@ -1455,8 +1444,6 @@ model PeeringServiceProvider extends CommonTypes.Resource {
   /**
    * The properties that define a peering service provider.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: PeeringServiceProviderProperties;
 }
 
@@ -1472,7 +1459,6 @@ model PeeringServiceProviderProperties {
   /**
    * The list of locations at which the service provider peers with Microsoft.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
   peeringLocations?: string[];
 }
 
@@ -1543,7 +1529,6 @@ model LogAnalyticsWorkspaceProperties {
    * The list of connected agents.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
   connectedAgents?: string[];
 }
 
