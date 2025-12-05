@@ -5,7 +5,7 @@ using Azure.Core;
 using Azure.ClientGenerator.Core;
 using Microsoft.Cdn;
 
-// Change the interface name to avoid naming conflicts for CShapr CodeGen, issue tracked here: https://github.com/Azure/azure-sdk-for-net/issues/54327
+// Change the interface name to avoid naming conflicts for CSharp CodeGen, issue tracked here: https://github.com/Azure/azure-sdk-for-net/issues/54327
 @@clientName(EdgeActions, "EdgeActionsMgmtClient", "csharp");
 
 @@clientName(EdgeActionExecutionFilterProperties.lastUpdateTime,
