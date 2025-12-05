@@ -758,7 +758,21 @@ interface Render {
       @header("Accept")
       accept?: MediaType;
     },
-    void
+    {
+      /**
+       * The Content-Type header field indicates the media type of the resource. The
+       * media type will be image/png or image/jpeg depending on the Accept header in
+       * the request.
+       */
+      @header("Content-Type")
+      contentType?: ResponseMediaType;
+
+      /**
+       * This image is returned from a successful Get Map Static Image call.
+       */
+      @body
+      body?: bytes;
+    }
   >;
 
   /**

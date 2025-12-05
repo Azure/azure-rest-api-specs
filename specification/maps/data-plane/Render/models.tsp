@@ -320,6 +320,20 @@ union MediaType {
   `image/jpeg`: "image/jpeg",
 }
 
+/** The desired media type of the response. */
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Specifying response content-types which are only allowed to be closed."
+union ResponseMediaType {
+  /**
+   * Return image in png format.
+   */
+  `image/png`: "image/png",
+
+  /**
+   * Return image in jpeg format.
+   */
+  `image/jpeg`: "image/jpeg",
+}
+
 /** Include textual data in response. */
 union IncludeText {
   string,
