@@ -87,3 +87,8 @@ using Microsoft.NetApp;
 @@clientName(QuotaItem, "SubscriptionQuotaItem", "go");
 @@clientName(QuotaItemList, "SubscriptionQuotaItemList", "go");
 @@clientName(QuotaItemProperties, "SubscriptionQuotaItemProperties", "go");
+
+@@clientName(Microsoft.NetApp.CachePropertiesExportPolicy,
+  "NetAppCachePropertiesExportPolicy",
+  "csharp"
+);
