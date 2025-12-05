@@ -21,5 +21,14 @@ using Azure.ClientGenerator.Core;
   "java"
 );
 
+// avoid 'body' name in java generated code
 @@clientName(TextTranslation.TranslateBody, "TranslateInputs", "java");
 @@clientName(TextTranslation.TransliterateBody, "TransliterateInputs", "java");
+@@clientName(TextTranslation.translate::parameters.body,
+  "translateInput",
+  "java"
+);
+@@clientName(TextTranslation.transliterate::parameters.body,
+  "transliterateInput",
+  "java"
+);
