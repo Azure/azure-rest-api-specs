@@ -111,11 +111,6 @@ using Microsoft.Peering;
   "checkServiceProviderAvailabilityInput"
 );
 
-@@clientName(Azure.ResourceManager.CommonTypes.Resource,
-  "ArmResource",
-  "python"
-);
-
 @@clientLocation(Microsoft.Peering.checkServiceProviderAvailability,
   "Management",
   "go"

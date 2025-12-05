@@ -364,7 +364,7 @@ union LearnedType {
  * The CDN peering prefix
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model CdnPeeringPrefix extends Resource {
+model CdnPeeringPrefix extends CommonTypes.Resource {
   /**
    * The properties that define a cdn peering prefix.
    */
@@ -406,29 +406,6 @@ model CdnPeeringPrefixProperties {
    */
   @visibility(Lifecycle.Read)
   bgpCommunity?: string;
-}
-
-/**
- * The ARM resource class.
- */
-model Resource {
-  /**
-   * The name of the resource.
-   */
-  @visibility(Lifecycle.Read)
-  name?: string;
-
-  /**
-   * The ID of the resource.
-   */
-  @visibility(Lifecycle.Read)
-  id?: string;
-
-  /**
-   * The type of the resource.
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
 }
 
 /**
@@ -1019,7 +996,7 @@ model ContactDetail {
  * Peering location is where connectivity could be established to the Microsoft Cloud Edge.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model PeeringLocation extends Resource {
+model PeeringLocation extends CommonTypes.Resource {
   /**
    * The kind of peering that the peering location supports.
    */
@@ -1353,13 +1330,13 @@ model ConnectionMonitorTestProperties {
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For backward compatibility"
-model PeeringServiceCountry extends Resource {}
+model PeeringServiceCountry extends CommonTypes.Resource {}
 
 /**
  * The peering service location.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model PeeringServiceLocation extends Resource {
+model PeeringServiceLocation extends CommonTypes.Resource {
   /**
    * The properties that define a peering service location.
    */
@@ -1474,7 +1451,7 @@ model PeeringServicePrefixEvent {
  * PeeringService provider
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model PeeringServiceProvider extends Resource {
+model PeeringServiceProvider extends CommonTypes.Resource {
   /**
    * The properties that define a peering service provider.
    */
