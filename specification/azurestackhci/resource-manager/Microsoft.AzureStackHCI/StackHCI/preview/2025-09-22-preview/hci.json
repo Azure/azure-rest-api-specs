@@ -3140,6 +3140,12 @@
         "x-ms-examples": {
           "ClusterJobs_Get_ConfigureArcGatewayJob": {
             "$ref": "./examples/ClusterJobs_Get_ConfigureArcGatewayJob.json"
+          },
+          "ClusterJobs_Get_GpuCreatePartitionJob": {
+            "$ref": "./examples/ClusterJobs_Get_GpuCreatePartitionJob.json"
+          },
+          "ClusterJobs_Get_GpuSwitchModeJob": {
+            "$ref": "./examples/ClusterJobs_Get_GpuSwitchModeJob.json"
           }
         }
       },
@@ -3218,6 +3224,12 @@
         "x-ms-examples": {
           "ClusterJobs_CreateOrUpdate_ConfigureArcGatewayJob": {
             "$ref": "./examples/ClusterJobs_CreateOrUpdate_ConfigureArcGateway.json"
+          },
+          "ClusterJobs_CreateOrUpdate_GpuCreatePartitionJob": {
+            "$ref": "./examples/ClusterJobs_CreateOrUpdate_GpuCreatePartition.json"
+          },
+          "ClusterJobs_CreateOrUpdate_GpuSwitchModeJob": {
+            "$ref": "./examples/ClusterJobs_CreateOrUpdate_GpuSwitchMode.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -7800,6 +7812,75 @@
         }
       }
     },
+    "GpuCreatePartitionJobProperties": {
+      "type": "object",
+      "description": "Properties for creating GPU partitions for virtualization and workload isolation.",
+      "properties": {
+        "partitionCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of partitions to be created on the GPU."
+        }
+      },
+      "required": [
+        "partitionCount"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClusterJobProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "GpuCreatePartition"
+    },
+    "GpuMode": {
+      "type": "string",
+      "description": "GPU modes supported.",
+      "enum": [
+        "Unknown",
+        "GPUP",
+        "DDA"
+      ],
+      "x-ms-enum": {
+        "name": "GpuMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown mode."
+          },
+          {
+            "name": "GPUP",
+            "value": "GPUP",
+            "description": "GPU-P mode."
+          },
+          {
+            "name": "DDA",
+            "value": "DDA",
+            "description": "DDA mode."
+          }
+        ]
+      }
+    },
+    "GpuSwitchModeJobProperties": {
+      "type": "object",
+      "description": "Properties for switching GPU mode between DDA and GPU-P for different workload requirements.",
+      "properties": {
+        "mode": {
+          "$ref": "#/definitions/GpuMode",
+          "description": "Desired GPU mode to switch to."
+        }
+      },
+      "required": [
+        "mode"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClusterJobProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "GpuSwitchMode"
+    },
     "HardwareClass": {
       "type": "string",
       "description": "Hardware class of the cluster.",
@@ -8282,7 +8363,9 @@
       "type": "string",
       "description": "ClusterJob Type supported.",
       "enum": [
-        "ConfigureArcGateway"
+        "ConfigureArcGateway",
+        "GpuCreatePartition",
+        "GpuSwitchMode"
       ],
       "x-ms-enum": {
         "name": "HciJobType",
@@ -8292,6 +8375,14 @@
             "name": "ConfigureArcGateway",
             "value": "ConfigureArcGateway",
             "description": "Job to configure arc gateway for the cluster."
+          },
+          {
+            "name": "GpuCreatePartition",
+            "value": "GpuCreatePartition"
+          },
+          {
+            "name": "GpuSwitchMode",
+            "value": "GpuSwitchMode"
           }
         ]
       }
