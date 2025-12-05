@@ -7,6 +7,7 @@ import "./operations.tsp";
 import "../common/models.tsp";
 import "../common/models-jobs.tsp";
 
+using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Quantum.Workspace;
 
@@ -33,9 +34,13 @@ namespace Quantum.Workspace.Services {
     @renamedFrom(QuantumWorkspaceAPIVersion.v2025_09_01_preview, "update")
     updateOld is PatchOperationOld<JobDetails>;
 
+    /** Delete a job by its id. Use for cancellation in versions before 2025-12-01-preview. */
+    @renamedFrom(QuantumWorkspaceAPIVersion.v2025_12_01_preview, "cancel")
+    delete is DeleteOperation<JobDetails>;
+
     /** Request the cancellation of an existing job. */
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
-    cancel is CancelOperation<JobDetails>;
+    @added(QuantumWorkspaceAPIVersion.v2025_12_01_preview)
+    cancel is ActionOperation<JobDetails>;
 
     /** Get job by its id. */
     get is GetOperation<JobDetails>;
