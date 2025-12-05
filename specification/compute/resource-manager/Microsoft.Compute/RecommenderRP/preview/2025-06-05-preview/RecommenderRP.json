@@ -1,0 +1,492 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ComputeRecommenderResourceProviderClient",
+    "version": "2025-06-05-preview",
+    "description": "The Compute Recommender Resource Provider Client",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "ComputeDiagnosticBases"
+    },
+    {
+      "name": "CapacityBlocksOperationGroup"
+    },
+    {
+      "name": "RegionalCapacityBlocksOperationGroup"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.Compute/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List_MaximumSet_Gen": {
+            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          },
+          "Operations_List_MinimumSet_Gen": {
+            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/capacityBlocks": {
+      "get": {
+        "operationId": "CapacityBlocks_Get",
+        "tags": [
+          "CapacityBlocksOperationGroup"
+        ],
+        "description": "Get available capacity blocks.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "An OData filter expression that describes a subset of capacity blocks to return. Mandatory parameters are sku, capacity, durationhours, start-date-range and end-date-range. Optional parameters are zone and location. The supported operator is eq. Example: $filter = sku eq Standard_D16s_v4 and capacity eq 4 and start-date-range eq 2025-06-25T00:00:00-07:00 and end-date-range eq 2025-06-27T00:00:00-07:00 and durationhours eq 24 and zone eq 1 and location eq westus",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CapacityBlocks"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Returns list of capacity block objects.": {
+            "$ref": "./examples/GetCapacityBlocks.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/capacityBlocks": {
+      "get": {
+        "operationId": "RegionalCapacityBlocks_Get",
+        "tags": [
+          "RegionalCapacityBlocksOperationGroup"
+        ],
+        "description": "Get available capacity blocks by location.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "An OData filter expression that describes a subset of capacity blocks to return. Mandatory parameters are sku, capacity, durationhours, start-date-range and end-date-range. Optional parameters are zone. The supported operator is eq. Example: $filter = sku eq Standard_D16s_v4 and capacity eq 4 and start-date-range eq 2025-06-25T00:00:00-07:00 and end-date-range eq 2025-06-27T00:00:00-07:00 and durationhours eq 24 and zone eq 1",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CapacityBlocks"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Returns list of capacity block objects.": {
+            "$ref": "./examples/GetCapacityBlocksByLocation.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/placementScores/spot": {
+      "get": {
+        "operationId": "SpotPlacementScores_Get",
+        "tags": [
+          "ComputeDiagnosticBases"
+        ],
+        "description": "Gets Spot Placement Scores metadata.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ComputeDiagnosticBase"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the metadata of Spot Placement Scores.": {
+            "$ref": "./examples/GetSpotPlacementScores.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/placementScores/spot/generate": {
+      "post": {
+        "operationId": "SpotPlacementScores_Post",
+        "tags": [
+          "ComputeDiagnosticBases"
+        ],
+        "description": "Generates placement scores for Spot VM skus.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "spotPlacementScoresInput",
+            "in": "body",
+            "description": "SpotPlacementScores object supplied in the body of the Post spot placement scores operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SpotPlacementScoresInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SpotPlacementScoresResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Returns spot VM placement scores for given configurations.": {
+            "$ref": "./examples/GenerateSpotPlacementScores.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CapacityBlock": {
+      "type": "object",
+      "description": "Capacity block.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CapacityBlockProperties",
+          "description": "Contains additional properties of a capacity block"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "CapacityBlockProperties": {
+      "type": "object",
+      "description": "Contains additional properties of a capacity block",
+      "properties": {
+        "zone": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Logical Zone of the Capacity Block",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "Location of the Capacity Block.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "sku": {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Sku",
+          "description": "SKU of the Capacity Block."
+        },
+        "scheduleProfile": {
+          "$ref": "#/definitions/ScheduleProfile",
+          "description": "Schedule profile of the Capacity Block."
+        }
+      }
+    },
+    "CapacityBlocks": {
+      "type": "object",
+      "description": "Lists available Capacity Blocks for a subscription.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The CapacityBlock items on this page",
+          "items": {
+            "$ref": "#/definitions/CapacityBlock"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ComputeDiagnosticBase": {
+      "type": "object",
+      "description": "Contains metadata of a diagnostic type",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DiagnosticProperties",
+          "description": "Contains additional properties of a diagnostic"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DiagnosticProperties": {
+      "type": "object",
+      "description": "Contains additional properties of a diagnostic",
+      "properties": {
+        "supportedResourceTypes": {
+          "type": "array",
+          "description": "Describes what are the supported resource types for a diagnostic.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PlacementScore": {
+      "type": "object",
+      "description": "The spot placement score for sku/region/zone combination.",
+      "properties": {
+        "sku": {
+          "type": "string",
+          "description": "The resource's CRP virtual machine SKU size."
+        },
+        "region": {
+          "type": "string",
+          "description": "The region."
+        },
+        "availabilityZone": {
+          "type": "string",
+          "description": "The availability zone."
+        },
+        "score": {
+          "type": "string",
+          "description": "A placement score indicating the likelihood of successfully allocating the specified Spot VM(s), as well as the expected lifetimes of the Spot VM(s) after allocation."
+        },
+        "isQuotaAvailable": {
+          "type": "boolean",
+          "description": "Whether the desired quota is available."
+        }
+      }
+    },
+    "ResourceSize": {
+      "type": "object",
+      "description": "SpotPlacementRecommender API response.",
+      "properties": {
+        "sku": {
+          "type": "string",
+          "description": "The resource's CRP virtual machine SKU size."
+        }
+      }
+    },
+    "ScheduleProfile": {
+      "type": "object",
+      "description": "Schedule of Capacity Block Reservation.",
+      "properties": {
+        "start": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start DateTime of Capacity Block reservation.",
+          "readOnly": true
+        },
+        "end": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End DateTime of Capacity Block Reservation.",
+          "readOnly": true
+        }
+      }
+    },
+    "SpotPlacementScoresInput": {
+      "type": "object",
+      "description": "SpotPlacementScores API Input.",
+      "properties": {
+        "desiredLocations": {
+          "type": "array",
+          "description": "The desired regions",
+          "items": {
+            "type": "string"
+          }
+        },
+        "desiredSizes": {
+          "type": "array",
+          "description": "The desired virtual machine SKU sizes.",
+          "items": {
+            "$ref": "#/definitions/ResourceSize"
+          }
+        },
+        "desiredCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Desired instance count per region/zone based on the scope."
+        },
+        "availabilityZones": {
+          "type": "boolean",
+          "description": "Defines if the scope is zonal or regional."
+        }
+      }
+    },
+    "SpotPlacementScoresResponse": {
+      "type": "object",
+      "description": "SpotPlacementScores API response.",
+      "properties": {
+        "desiredLocations": {
+          "type": "array",
+          "description": "The desired regions",
+          "items": {
+            "type": "string"
+          }
+        },
+        "desiredSizes": {
+          "type": "array",
+          "description": "The desired virtual machine SKU sizes.",
+          "items": {
+            "$ref": "#/definitions/ResourceSize"
+          }
+        },
+        "desiredCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Desired instance count per region/zone based on the scope."
+        },
+        "availabilityZones": {
+          "type": "boolean",
+          "description": "Defines if the scope is zonal or regional."
+        },
+        "placementScores": {
+          "type": "array",
+          "description": "A placement score indicating the likelihood of successfully allocating the specified Spot VM(s), as well as the expected lifetimes of the Spot VM(s) after allocation.",
+          "items": {
+            "$ref": "#/definitions/PlacementScore"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {}
+}
