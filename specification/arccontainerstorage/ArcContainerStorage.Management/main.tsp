@@ -6,6 +6,7 @@ import "@azure-tools/typespec-client-generator-core";
 
 import "./edgestorageconfiguration.tsp";
 import "./ingestsubvolume.tsp";
+import "./mirrorsubvolume.tsp";
 import "./edgevolume.tsp";
 import "./back-compatible.tsp";
 
@@ -24,7 +25,7 @@ namespace Microsoft.ArcContainerStorage;
 /** API versions */
 @doc("Microsoft.ArcContainerStorage Resource Provider supported API versions.")
 enum Versions {
-  @doc("Microsoft.ArcContainerStorage Resource Provider management API version 2023-11-01-preview.")
+  @doc("Microsoft.ArcContainerStorage Resource Provider management API version 2024-10-01-preview.")
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
   v2024_10_01_preview: "2024-10-01-preview",
 }
