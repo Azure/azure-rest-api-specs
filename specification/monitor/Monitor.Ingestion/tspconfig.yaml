@@ -17,8 +17,7 @@ options:
     emitter-output-dir: "{project-root}/.."
     output-file: "{azure-resource-provider-folder}/ingestion/{version-status}/{version}/DataCollectionRules.json"
   "@azure-tools/typespec-python":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-monitoring"
-    package-name: "azure-mgmt-monitoring"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-monitor-ingestion"
     package-mode: dataplane
     flavor: azure
     namespace: azure.monitor.ingestion
@@ -46,7 +45,6 @@ options:
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/monitor-ingestion"
-    is-modular-library: true
     package-details:
       name: "@azure/monitor-ingestion"
       description: "Azure Monitor Ingestion library"
