@@ -2735,8 +2735,8 @@ model VirtualMachineScaleSetNetworkConfiguration {
   /**
    * Describes a virtual machine scale set network profile's IP configuration.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: VirtualMachineScaleSetNetworkConfigurationProperties;
 
   /**
@@ -2830,8 +2830,8 @@ model VirtualMachineScaleSetIPConfiguration {
   /**
    * Describes a virtual machine scale set network profile's IP configuration properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: VirtualMachineScaleSetIPConfigurationProperties;
 }
 
@@ -2892,8 +2892,8 @@ model VirtualMachineScaleSetPublicIPAddressConfiguration {
   /**
    * Describes a virtual machines scale set IP Configuration's PublicIPAddress configuration
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: VirtualMachineScaleSetPublicIPAddressConfigurationProperties;
 
   /**
@@ -3657,8 +3657,8 @@ model VirtualMachineScaleSetUpdate extends UpdateResource {
   /**
    * Describes the properties of a Virtual Machine Scale Set.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: VirtualMachineScaleSetUpdateProperties;
 
   /**
@@ -3949,8 +3949,8 @@ model VirtualMachineScaleSetUpdateNetworkConfiguration {
   /**
    * Describes a virtual machine scale set updatable network profile's IP configuration.Use this object for updating network profile's IP Configuration.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: VirtualMachineScaleSetUpdateNetworkConfigurationProperties;
 
   /**
@@ -4034,8 +4034,8 @@ model VirtualMachineScaleSetUpdateIPConfiguration {
   /**
    * Describes a virtual machine scale set network profile's IP configuration properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: VirtualMachineScaleSetUpdateIPConfigurationProperties;
 }
 
@@ -4096,8 +4096,8 @@ model VirtualMachineScaleSetUpdatePublicIPAddressConfiguration {
   /**
    * Describes a virtual machines scale set IP Configuration's PublicIPAddress configuration
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: VirtualMachineScaleSetUpdatePublicIPAddressConfigurationProperties;
 
   /**
@@ -4227,8 +4227,8 @@ model VirtualMachineScaleSetExtensionUpdate extends SubResourceReadOnly {
   /**
    * Describes the properties of a Virtual Machine Scale Set Extension.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: VirtualMachineScaleSetExtensionProperties;
 }
 
@@ -5486,8 +5486,8 @@ model NetworkInterfaceReference extends SubResource {
   /**
    * Describes a network interface reference properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: NetworkInterfaceReferenceProperties;
 }
 
@@ -5518,8 +5518,8 @@ model VirtualMachineNetworkInterfaceConfiguration {
   /**
    * Describes a virtual machine network profile's IP configuration.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: VirtualMachineNetworkInterfaceConfigurationProperties;
 
   /**
@@ -5616,8 +5616,8 @@ model VirtualMachineNetworkInterfaceIPConfiguration {
   /**
    * Describes a virtual machine network interface IP configuration properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: VirtualMachineNetworkInterfaceIPConfigurationProperties;
 }
 
@@ -5673,8 +5673,8 @@ model VirtualMachinePublicIPAddressConfiguration {
   /**
    * Describes a virtual machines IP Configuration's PublicIPAddress configuration
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: VirtualMachinePublicIPAddressConfigurationProperties;
 
   /**
@@ -5922,8 +5922,8 @@ model VirtualMachineScaleSetVMExtensionUpdate extends SubResourceReadOnly {
   /**
    * Describes the properties of a Virtual Machine Extension.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: VirtualMachineExtensionUpdateProperties;
 }
 
@@ -6500,8 +6500,8 @@ model VirtualMachineUpdate extends UpdateResource {
   /**
    * Describes the properties of a Virtual Machine.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: VirtualMachineProperties;
 
   /**
@@ -6705,8 +6705,8 @@ model VirtualMachineExtensionUpdate extends UpdateResource {
   /**
    * Describes the properties of a Virtual Machine Extension.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: VirtualMachineExtensionUpdateProperties;
 }
 
@@ -6976,8 +6976,8 @@ model VirtualMachineImage extends VirtualMachineImageResource {
   /**
    * Describes the properties of a Virtual Machine Image.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: VirtualMachineImageProperties;
 }
 
@@ -7303,8 +7303,8 @@ model AvailabilitySetUpdate extends UpdateResource {
   /**
    * The instance view of a resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: AvailabilitySetProperties;
 
   /**
@@ -7523,8 +7523,8 @@ model DedicatedHostGroupUpdate extends UpdateResource {
   /**
    * Dedicated Host Group Properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: DedicatedHostGroupProperties;
 
   /**
@@ -7608,8 +7608,8 @@ model DedicatedHostUpdate extends UpdateResource {
   /**
    * Properties of the dedicated host.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: DedicatedHostProperties;
 
   /**
@@ -7664,8 +7664,8 @@ model SshPublicKeyUpdateResource extends UpdateResource {
   /**
    * Properties of the SSH public key.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: SshPublicKeyResourceProperties;
 }
 
@@ -7686,6 +7686,7 @@ model SshPublicKeyGenerateKeyPairResult {
   /**
    * Private key portion of the key pair used to authenticate to a virtual machine through ssh. The private key is returned in RFC3447 format and should be treated as a secret.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   privateKey: string;
 
   /**
@@ -7832,8 +7833,8 @@ model ImageUpdate extends UpdateResource {
   /**
    * Describes the properties of an Image.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: ImageProperties;
 }
 
@@ -8223,8 +8224,8 @@ model RestorePointCollectionUpdate extends UpdateResource {
   /**
    * The restore point collection properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: RestorePointCollectionProperties;
 }
 
@@ -8391,8 +8392,8 @@ model CapacityReservationGroupUpdate extends UpdateResource {
   /**
    * capacity reservation group Properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: CapacityReservationGroupProperties;
 }
 
@@ -8470,8 +8471,8 @@ model CapacityReservationUpdate extends UpdateResource {
   /**
    * Properties of the Capacity reservation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: CapacityReservationProperties;
 
   /**
@@ -8693,6 +8694,7 @@ model VirtualMachineRunCommandProperties {
   /**
    * Specifies the user account password on the VM when executing the run command.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   runAsPassword?: string;
 
   /**
@@ -8860,8 +8862,8 @@ model VirtualMachineRunCommandUpdate extends UpdateResource {
   /**
    * Describes the properties of a Virtual Machine run command.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: VirtualMachineRunCommandProperties;
 }
 

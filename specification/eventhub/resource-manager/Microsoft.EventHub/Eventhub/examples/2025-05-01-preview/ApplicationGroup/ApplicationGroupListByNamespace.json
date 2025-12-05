@@ -1,0 +1,78 @@
+{
+  "parameters": {
+    "api-version": "2025-05-01-preview",
+    "namespaceName": "contoso-ua-test-eh-system-1",
+    "resourceGroupName": "contosotest",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "appGroup1",
+            "type": "Microsoft.EventHub/Namespaces/ApplicationGroups",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosotest/providers/Microsoft.EventHub/namespaces/contoso-ua-test-eh-system-1/applicationgroups/appGroup1",
+            "location": "EAST US 2 EUAP",
+            "properties": {
+              "clientAppGroupIdentifier": "SASKeyName=KeyName",
+              "isEnabled": true,
+              "policies": [
+                {
+                  "name": "ThrottlingPolicy1",
+                  "type": "ThrottlingPolicy",
+                  "metricId": "IncomingMessages",
+                  "rateLimitThreshold": 7912
+                },
+                {
+                  "name": "ThrottlingPolicy2",
+                  "type": "ThrottlingPolicy",
+                  "metricId": "IncomingBytes",
+                  "rateLimitThreshold": 3951729
+                },
+                {
+                  "name": "ThrottlingPolicy3",
+                  "type": "ThrottlingPolicy",
+                  "metricId": "OutgoingBytes",
+                  "rateLimitThreshold": 245175
+                }
+              ]
+            }
+          },
+          {
+            "name": "appGroup2",
+            "type": "Microsoft.EventHub/Namespaces/ApplicationGroups",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosotest/providers/Microsoft.EventHub/namespaces/contoso-ua-test-eh-system-1/applicationgroups/appGroup2",
+            "location": "EAST US 2 EUAP",
+            "properties": {
+              "clientAppGroupIdentifier": "AADAppID=Guid",
+              "isEnabled": false,
+              "policies": [
+                {
+                  "name": "ThrottlingPolicy1",
+                  "type": "ThrottlingPolicy",
+                  "metricId": "IncomingMessages",
+                  "rateLimitThreshold": 9984
+                },
+                {
+                  "name": "ThrottlingPolicy2",
+                  "type": "ThrottlingPolicy",
+                  "metricId": "IncomingBytes",
+                  "rateLimitThreshold": 7823412
+                },
+                {
+                  "name": "ThrottlingPolicy3",
+                  "type": "ThrottlingPolicy",
+                  "metricId": "OutgoingBytes",
+                  "rateLimitThreshold": 331665
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ApplicationGroup_ListByNamespace",
+  "title": "ListApplicationGroups"
+}
