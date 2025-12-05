@@ -183,6 +183,15 @@ export function readme(file) {
  * @param {string} [file]
  * @returns {boolean}
  */
+export function markdown(file) {
+  // Extension ".md" with any case is a valid markdown file
+  return typeof file === "string" && file.toLowerCase().endsWith(".md");
+}
+
+/**
+ * @param {string} [file]
+ * @returns {boolean}
+ */
 export function dataPlane(file) {
   // Folder name "data-plane" should match case for consistency across specs
   return typeof file === "string" && includesSegment(file, "data-plane");
