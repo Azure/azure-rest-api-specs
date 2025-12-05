@@ -108,10 +108,10 @@ model ContentAnalyzer {
 @doc("Chat completion and embedding models supported by the analyzer.")
 model SupportedModels {
   @doc("Chat completion models supported by the analyzer.")
-  completion: string[];
+  completion?: string[];
 
   @doc("Embedding models supported by the analyzer.")
-  embedding: string[];
+  embedding?: string[];
 }
 
 @doc("Status of a resource.")
