@@ -21,16 +21,7 @@ interface Render {
   @get
   getMapTile is Azure.Core.Foundations.Operation<
     {
-      /**
-       * Indicates the account intended for use with the Microsoft Entra ID security
-       * model. This unique ID for the Azure Maps account can be obtained from the
-       * [Azure Maps management plane Account API](/rest/api/maps-management/accounts).
-       * For more information on using Microsoft Entra ID security in Azure Maps, see
-       * [Manage authentication in Azure
-       * Maps](/azure/azure-maps/how-to-manage-authentication).
-       */
-      @header
-      clientId?: string;
+      ...clientId;
 
       /**
        * A tileset is a collection of raster or vector data broken up into a uniform
@@ -161,16 +152,7 @@ interface Render {
   @get
   getMapTileset is Azure.Core.Foundations.Operation<
     {
-      /**
-       * Indicates the account intended for use with the Microsoft Entra ID security
-       * model. This unique ID for the Azure Maps account can be obtained from the
-       * [Azure Maps management plane Account API](/rest/api/maps-management/accounts).
-       * For more information on using Microsoft Entra ID security in Azure Maps, see
-       * [Manage authentication in Azure
-       * Maps](/azure/azure-maps/how-to-manage-authentication).
-       */
-      @header
-      clientId?: string;
+      ...clientId;
 
       /**
        * A tileset is a collection of raster or vector data broken up into a uniform
@@ -196,16 +178,7 @@ interface Render {
   @get
   getMapAttribution is Azure.Core.Foundations.Operation<
     {
-      /**
-       * Indicates the account intended for use with the Microsoft Entra ID security
-       * model. This unique ID for the Azure Maps account can be obtained from the
-       * [Azure Maps management plane Account API](/rest/api/maps-management/accounts).
-       * For more information on using Microsoft Entra ID security in Azure Maps, see
-       * [Manage authentication in Azure
-       * Maps](/azure/azure-maps/how-to-manage-authentication).
-       */
-      @header
-      clientId?: string;
+      ...clientId;
 
       /**
        * A tileset is a collection of raster or vector data broken up into a uniform
@@ -252,16 +225,7 @@ interface Render {
   @get
   getMapStateTile is Azure.Core.Foundations.Operation<
     {
-      /**
-       * Indicates the account intended for use with the Microsoft Entra ID security
-       * model. This unique ID for the Azure Maps account can be obtained from the
-       * [Azure Maps management plane Account API](/rest/api/maps-management/accounts).
-       * For more information on using Microsoft Entra ID security in Azure Maps, see
-       * [Manage authentication in Azure
-       * Maps](/azure/azure-maps/how-to-manage-authentication).
-       */
-      @header
-      clientId?: string;
+      ...clientId;
 
       /**
        * Zoom level for the desired tile.
@@ -332,16 +296,7 @@ interface Render {
   @get
   getCopyrightCaption is Azure.Core.Foundations.Operation<
     {
-      /**
-       * Indicates the account intended for use with the Microsoft Entra ID security
-       * model. This unique ID for the Azure Maps account can be obtained from the
-       * [Azure Maps management plane Account API](/rest/api/maps-management/accounts).
-       * For more information on using Microsoft Entra ID security in Azure Maps, see
-       * [Manage authentication in Azure
-       * Maps](/azure/azure-maps/how-to-manage-authentication).
-       */
-      @header
-      clientId?: string;
+      ...clientId;
 
       /**
        * Desired format of the response. Value can be either _json_ or _xml_.
@@ -406,16 +361,7 @@ interface Render {
   @get
   getMapStaticImage is Azure.Core.Foundations.Operation<
     {
-      /**
-       * Indicates the account intended for use with the Microsoft Entra ID security
-       * model. This unique ID for the Azure Maps account can be obtained from the
-       * [Azure Maps management plane Account API](/rest/api/maps-management/accounts).
-       * For more information on using Microsoft Entra ID security in Azure Maps, see
-       * [Manage authentication in Azure
-       * Maps](/azure/azure-maps/how-to-manage-authentication).
-       */
-      @header
-      clientId?: string;
+      ...clientId;
 
       /**
        * Map style to be returned. Possible values are microsoft.base.road,
@@ -424,7 +370,7 @@ interface Render {
        * TilesetId](https://learn.microsoft.com/en-us/rest/api/maps/render/get-map-tileset?view=rest-maps-2023-06-01&tabs=HTTP#tilesetid).
        */
       @query("tilesetId")
-      tilesetId?: TilesetID;
+      tilesetId?: Tileset;
 
       /**
        * Optional Value, indicating no traffic flow overlaid on the image result.
@@ -818,16 +764,7 @@ interface Render {
   @get
   getCopyrightFromBoundingBox is Azure.Core.Foundations.Operation<
     {
-      /**
-       * Indicates the account intended for use with the Microsoft Entra ID security
-       * model. This unique ID for the Azure Maps account can be obtained from the
-       * [Azure Maps management plane Account API](/rest/api/maps-management/accounts).
-       * For more information on using Microsoft Entra ID security in Azure Maps, see
-       * [Manage authentication in Azure
-       * Maps](/azure/azure-maps/how-to-manage-authentication).
-       */
-      @header
-      clientId?: string;
+      ...clientId;
 
       /**
        * Minimum coordinates (south-west point) of bounding box in latitude longitude
@@ -876,16 +813,7 @@ interface Render {
   @get
   getCopyrightForTile is Azure.Core.Foundations.Operation<
     {
-      /**
-       * Indicates the account intended for use with the Microsoft Entra ID security
-       * model. This unique ID for the Azure Maps account can be obtained from the
-       * [Azure Maps management plane Account API](/rest/api/maps-management/accounts).
-       * For more information on using Microsoft Entra ID security in Azure Maps, see
-       * [Manage authentication in Azure
-       * Maps](/azure/azure-maps/how-to-manage-authentication).
-       */
-      @header
-      clientId?: string;
+      ...clientId;
 
       /**
        * Zoom level for the desired tile.
@@ -952,16 +880,7 @@ interface Render {
   @get
   getCopyrightForWorld is Azure.Core.Foundations.Operation<
     {
-      /**
-       * Indicates the account intended for use with the Microsoft Entra ID security
-       * model. This unique ID for the Azure Maps account can be obtained from the
-       * [Azure Maps management plane Account API](/rest/api/maps-management/accounts).
-       * For more information on using Microsoft Entra ID security in Azure Maps, see
-       * [Manage authentication in Azure
-       * Maps](/azure/azure-maps/how-to-manage-authentication).
-       */
-      @header
-      clientId?: string;
+      ...clientId;
 
       /**
        * Desired format of the response. Value can be either _json_ or _xml_.

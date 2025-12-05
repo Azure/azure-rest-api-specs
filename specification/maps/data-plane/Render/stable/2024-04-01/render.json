@@ -86,7 +86,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "client-id",
+            "name": "x-ms-client-id",
             "in": "header",
             "description": "Indicates the account intended for use with the Microsoft Entra ID security\nmodel. This unique ID for the Azure Maps account can be obtained from the\n[Azure Maps management plane Account API](/rest/api/maps-management/accounts).\nFor more information on using Microsoft Entra ID security in Azure Maps, see\n[Manage authentication in Azure\nMaps](/azure/azure-maps/how-to-manage-authentication).",
             "required": false,
@@ -298,7 +298,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "client-id",
+            "name": "x-ms-client-id",
             "in": "header",
             "description": "Indicates the account intended for use with the Microsoft Entra ID security\nmodel. This unique ID for the Azure Maps account can be obtained from the\n[Azure Maps management plane Account API](/rest/api/maps-management/accounts).\nFor more information on using Microsoft Entra ID security in Azure Maps, see\n[Manage authentication in Azure\nMaps](/azure/azure-maps/how-to-manage-authentication).",
             "required": false,
@@ -424,7 +424,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "client-id",
+            "name": "x-ms-client-id",
             "in": "header",
             "description": "Indicates the account intended for use with the Microsoft Entra ID security\nmodel. This unique ID for the Azure Maps account can be obtained from the\n[Azure Maps management plane Account API](/rest/api/maps-management/accounts).\nFor more information on using Microsoft Entra ID security in Azure Maps, see\n[Manage authentication in Azure\nMaps](/azure/azure-maps/how-to-manage-authentication).",
             "required": false,
@@ -496,7 +496,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "client-id",
+            "name": "x-ms-client-id",
             "in": "header",
             "description": "Indicates the account intended for use with the Microsoft Entra ID security\nmodel. This unique ID for the Azure Maps account can be obtained from the\n[Azure Maps management plane Account API](/rest/api/maps-management/accounts).\nFor more information on using Microsoft Entra ID security in Azure Maps, see\n[Manage authentication in Azure\nMaps](/azure/azure-maps/how-to-manage-authentication).",
             "required": false,
@@ -621,7 +621,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "client-id",
+            "name": "x-ms-client-id",
             "in": "header",
             "description": "Indicates the account intended for use with the Microsoft Entra ID security\nmodel. This unique ID for the Azure Maps account can be obtained from the\n[Azure Maps management plane Account API](/rest/api/maps-management/accounts).\nFor more information on using Microsoft Entra ID security in Azure Maps, see\n[Manage authentication in Azure\nMaps](/azure/azure-maps/how-to-manage-authentication).",
             "required": false,
@@ -725,7 +725,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "client-id",
+            "name": "x-ms-client-id",
             "in": "header",
             "description": "Indicates the account intended for use with the Microsoft Entra ID security\nmodel. This unique ID for the Azure Maps account can be obtained from the\n[Azure Maps management plane Account API](/rest/api/maps-management/accounts).\nFor more information on using Microsoft Entra ID security in Azure Maps, see\n[Manage authentication in Azure\nMaps](/azure/azure-maps/how-to-manage-authentication).",
             "required": false,
@@ -807,7 +807,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "client-id",
+            "name": "x-ms-client-id",
             "in": "header",
             "description": "Indicates the account intended for use with the Microsoft Entra ID security\nmodel. This unique ID for the Azure Maps account can be obtained from the\n[Azure Maps management plane Account API](/rest/api/maps-management/accounts).\nFor more information on using Microsoft Entra ID security in Azure Maps, see\n[Manage authentication in Azure\nMaps](/azure/azure-maps/how-to-manage-authentication).",
             "required": false,
@@ -821,142 +821,28 @@
             "required": false,
             "type": "string",
             "enum": [
-              "microsoft.base",
-              "microsoft.base.labels",
-              "microsoft.base.hybrid",
-              "microsoft.terra.main",
               "microsoft.base.road",
               "microsoft.base.darkgrey",
-              "microsoft.base.labels.road",
-              "microsoft.base.labels.darkgrey",
-              "microsoft.base.hybrid.road",
-              "microsoft.base.hybrid.darkgrey",
-              "microsoft.imagery",
-              "microsoft.weather.radar.main",
-              "microsoft.weather.infrared.main",
-              "microsoft.traffic.absolute",
-              "microsoft.traffic.absolute.main",
-              "microsoft.traffic.relative",
-              "microsoft.traffic.relative.main",
-              "microsoft.traffic.relative.dark",
-              "microsoft.traffic.delay",
-              "microsoft.traffic.delay.main",
-              "microsoft.traffic.reduced.main",
-              "microsoft.traffic.incident"
+              "microsoft.imagery"
             ],
             "x-ms-enum": {
-              "name": "TilesetID",
+              "name": "Tileset",
               "modelAsString": true,
               "values": [
                 {
-                  "name": "microsoft.base",
-                  "value": "microsoft.base",
-                  "description": "A base map is a standard map that displays roads, natural and artificial\nfeatures along with the labels for those features in a vector tile.<br>\n\nSupports zoom levels 0 through 22. Format: vector (pbf)."
-                },
-                {
-                  "name": "microsoft.base.labels",
-                  "value": "microsoft.base.labels",
-                  "description": "Displays labels for roads, natural and artificial features in a vector\ntile.<br>\n\nSupports zoom levels 0 through 22. Format: vector (pbf)."
-                },
-                {
-                  "name": "microsoft.base.hybrid",
-                  "value": "microsoft.base.hybrid",
-                  "description": "Displays road, boundary and label data in a vector tile.<br>\n\nSupports zoom levels 0 through 22. Format: vector (pbf)."
-                },
-                {
-                  "name": "microsoft.terra.main",
-                  "value": "microsoft.terra.main",
-                  "description": "Shaded relief and terra layers.<br>\n\nSupports zoom levels 0 through 6. Format: raster (png)."
-                },
-                {
                   "name": "microsoft.base.road",
                   "value": "microsoft.base.road",
-                  "description": "All layers with our main style.<br>\n\nSupports zoom levels 0 through 22. Format: raster (png)."
+                  "description": "microsoft.base.road"
                 },
                 {
                   "name": "microsoft.base.darkgrey",
                   "value": "microsoft.base.darkgrey",
-                  "description": "All layers with our dark grey style.<br>\n\nSupports zoom levels 0 through 22. Format: raster (png)."
-                },
-                {
-                  "name": "microsoft.base.labels.road",
-                  "value": "microsoft.base.labels.road",
-                  "description": "Label data in our main style.<br>\n\nSupports zoom levels 0 through 22. Format: raster (png)."
-                },
-                {
-                  "name": "microsoft.base.labels.darkgrey",
-                  "value": "microsoft.base.labels.darkgrey",
-                  "description": "Label data in our dark grey style.<br>\n\nSupports zoom levels 0 through 22. Format: raster (png)."
-                },
-                {
-                  "name": "microsoft.base.hybrid.road",
-                  "value": "microsoft.base.hybrid.road",
-                  "description": "Road, boundary and label data in our main style.<br>\n\nSupports zoom levels 0 through 22. Format: raster (png)."
-                },
-                {
-                  "name": "microsoft.base.hybrid.darkgrey",
-                  "value": "microsoft.base.hybrid.darkgrey",
-                  "description": "Road, boundary and label data in our dark grey style.<br>\n\nSupports zoom levels 0 through 22. Format: raster (png)."
+                  "description": "microsoft.base.darkgrey"
                 },
                 {
                   "name": "microsoft.imagery",
                   "value": "microsoft.imagery",
-                  "description": "A combination of satellite or aerial imagery. Only available in S1 and G2\npricing SKU.<br>\n\nSupports zoom levels 1 through 19. Format: raster (png)."
-                },
-                {
-                  "name": "microsoft.weather.radar.main",
-                  "value": "microsoft.weather.radar.main",
-                  "description": "Weather radar tiles. Latest weather radar images including areas of rain, snow,\nice and mixed conditions. For more information on the Azure Maps Weather\nservice coverage, see [Azure Maps weather services\ncoverage](/azure/azure-maps/weather-coverage).  For more information on Radar\ndata, see [Weather services in Azure\nMaps](/azure/azure-maps/weather-services-concepts#radar-images).\n\nSupports zoom levels 0 through 15. Format: raster (png)."
-                },
-                {
-                  "name": "microsoft.weather.infrared.main",
-                  "value": "microsoft.weather.infrared.main",
-                  "description": "Weather infrared tiles. Latest Infrared Satellite images shows clouds by their\ntemperature.  For more information, see [Azure Maps weather services\ncoverage](/azure/azure-maps/weather-coverage). For more information about the\nsatellite data returned, see [Weather services in Azure\nMaps](https://learn.microsoft.com/azure/azure-maps/weather-services-concepts#satellite-images).\n\nSupports zoom levels 0 through 15. Format: raster (png)."
-                },
-                {
-                  "name": "microsoft.traffic.absolute",
-                  "value": "microsoft.traffic.absolute",
-                  "description": "absolute traffic tiles in vector"
-                },
-                {
-                  "name": "microsoft.traffic.absolute.main",
-                  "value": "microsoft.traffic.absolute.main",
-                  "description": "absolute traffic tiles in raster in our main style."
-                },
-                {
-                  "name": "microsoft.traffic.relative",
-                  "value": "microsoft.traffic.relative",
-                  "description": "relative traffic tiles in vector"
-                },
-                {
-                  "name": "microsoft.traffic.relative.main",
-                  "value": "microsoft.traffic.relative.main",
-                  "description": "relative traffic tiles in raster in our main style."
-                },
-                {
-                  "name": "microsoft.traffic.relative.dark",
-                  "value": "microsoft.traffic.relative.dark",
-                  "description": "relative traffic tiles in raster in our dark style."
-                },
-                {
-                  "name": "microsoft.traffic.delay",
-                  "value": "microsoft.traffic.delay",
-                  "description": "traffic tiles in vector"
-                },
-                {
-                  "name": "microsoft.traffic.delay.main",
-                  "value": "microsoft.traffic.delay.main",
-                  "description": "traffic tiles in raster in our main style"
-                },
-                {
-                  "name": "microsoft.traffic.reduced.main",
-                  "value": "microsoft.traffic.reduced.main",
-                  "description": "reduced traffic tiles in raster in our main style"
-                },
-                {
-                  "name": "microsoft.traffic.incident",
-                  "value": "microsoft.traffic.incident",
-                  "description": "incident tiles in vector"
+                  "description": "microsoft.imagery"
                 }
               ]
             }
@@ -1274,7 +1160,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "client-id",
+            "name": "x-ms-client-id",
             "in": "header",
             "description": "Indicates the account intended for use with the Microsoft Entra ID security\nmodel. This unique ID for the Azure Maps account can be obtained from the\n[Azure Maps management plane Account API](/rest/api/maps-management/accounts).\nFor more information on using Microsoft Entra ID security in Azure Maps, see\n[Manage authentication in Azure\nMaps](/azure/azure-maps/how-to-manage-authentication).",
             "required": false,
@@ -1664,7 +1550,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "client-id",
+            "name": "x-ms-client-id",
             "in": "header",
             "description": "Indicates the account intended for use with the Microsoft Entra ID security\nmodel. This unique ID for the Azure Maps account can be obtained from the\n[Azure Maps management plane Account API](/rest/api/maps-management/accounts).\nFor more information on using Microsoft Entra ID security in Azure Maps, see\n[Manage authentication in Azure\nMaps](/azure/azure-maps/how-to-manage-authentication).",
             "required": false,
@@ -1991,8 +1877,7 @@
           "items": {
             "$ref": "#/definitions/ErrorDetail"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "additionalInfo": {
           "type": "array",
@@ -2000,8 +1885,7 @@
           "items": {
             "$ref": "#/definitions/ErrorAdditionalInfo"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         }
       }
     },
@@ -2372,6 +2256,36 @@
             "name": "xml",
             "value": "xml",
             "description": "[The Extensible Markup Language](https://www.w3.org/TR/xml/)"
+          }
+        ]
+      }
+    },
+    "Tileset": {
+      "type": "string",
+      "description": "A tileset is a collection of raster or vector data broken up into a uniform grid of square tiles at preset zoom levels. Every tileset has a **tilesetId** to use when making requests. The ready-to-use tilesets supplied by Azure Maps are listed below. For example, microsoft.base.",
+      "enum": [
+        "microsoft.base.road",
+        "microsoft.base.darkgrey",
+        "microsoft.imagery"
+      ],
+      "x-ms-enum": {
+        "name": "Tileset",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "microsoft.base.road",
+            "value": "microsoft.base.road",
+            "description": "microsoft.base.road"
+          },
+          {
+            "name": "microsoft.base.darkgrey",
+            "value": "microsoft.base.darkgrey",
+            "description": "microsoft.base.darkgrey"
+          },
+          {
+            "name": "microsoft.imagery",
+            "value": "microsoft.imagery",
+            "description": "microsoft.imagery"
           }
         ]
       }

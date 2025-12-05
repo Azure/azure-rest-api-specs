@@ -1,8 +1,24 @@
-import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/http";
 
-using Azure.ResourceManager;
+using TypeSpec.Http;
 
 namespace MapsRender;
+
+/**
+ * A tileset is a collection of raster or vector data broken up into a uniform grid of square tiles at preset zoom levels. Every tileset has a **tilesetId** to use when making requests. The ready-to-use tilesets supplied by Azure Maps are listed below. For example, microsoft.base.
+ */
+union Tileset {
+  string,
+
+  /** microsoft.base.road */
+  `microsoft.base.road`: "microsoft.base.road",
+
+  /** microsoft.base.darkgrey */
+  `microsoft.base.darkgrey`: "microsoft.base.darkgrey",
+
+  /** microsoft.imagery */
+  `microsoft.imagery`: "microsoft.imagery",
+}
 
 /**
  * A tileset is a collection of raster or vector data broken up into a uniform grid of square tiles at preset zoom levels. Every tileset has a **tilesetId** to use when making requests. The ready-to-use tilesets supplied by Azure Maps are listed below. For example, microsoft.base.
@@ -375,14 +391,12 @@ model ErrorDetail {
    * The error details.
    */
   @visibility(Lifecycle.Read)
-  @identifiers(#[])
   details?: ErrorDetail[];
 
   /**
    * The error additional info.
    */
   @visibility(Lifecycle.Read)
-  @identifiers(#[])
   additionalInfo?: ErrorAdditionalInfo[];
 }
 
@@ -590,3 +604,16 @@ model RegionCopyrightsCountry {
   @visibility(Lifecycle.Read)
   label?: string;
 }
+
+alias clientId = {
+  /**
+   * Indicates the account intended for use with the Microsoft Entra ID security
+   * model. This unique ID for the Azure Maps account can be obtained from the
+   * [Azure Maps management plane Account API](/rest/api/maps-management/accounts).
+   * For more information on using Microsoft Entra ID security in Azure Maps, see
+   * [Manage authentication in Azure
+   * Maps](/azure/azure-maps/how-to-manage-authentication).
+   */
+  @header("x-ms-client-id")
+  clientId?: string;
+};
