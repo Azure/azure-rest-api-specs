@@ -2,6 +2,8 @@ parameters:
   "dependencies":
     additionalDirectories:
       - specification/compute/Common.Management
+  "service-dir":
+    default: "sdk/compute"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -13,7 +15,6 @@ options:
     examples-dir: "{project-root}/examples"
     arm-resource-flattening: true
   "@azure-tools/typespec-ts":
-    service-dir: "sdk/compute"
     experimental-extensible-enums: true
     emitter-output-dir: "{output-dir}/{service-dir}/arm-computedisk"
     flavor: azure
