@@ -6,6 +6,8 @@ import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
 
 using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.Rest;
 
 namespace RegionalMoveClient;
 
@@ -22,4 +24,12 @@ interface RegionalMoveContainers {
   update is ArmTagsPatchSync<RegionalMoveContainer>;
 
   delete is ArmResourceDeleteSync<RegionalMoveContainer>;
+
+  @action("finalize")
+  finalize is ArmResourceActionSync<
+    RegionalMoveContainer,
+    FinalizationRequest,
+    OkResponse,
+    OptionalRequestBody = true
+  >;
 }

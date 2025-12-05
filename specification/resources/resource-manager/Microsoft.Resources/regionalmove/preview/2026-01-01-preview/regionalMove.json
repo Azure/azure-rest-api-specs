@@ -352,9 +352,77 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Resources/regionalMoveContainers/{moveContainerName}/finalize": {
+      "post": {
+        "operationId": "RegionalMoveContainers_Finalize",
+        "tags": [
+          "RegionalMoveContainers"
+        ],
+        "description": "A synchronous resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "moveContainerName",
+            "in": "path",
+            "description": "The name of the Regional Move Container resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/FinalizationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Finalize subset of resources in a regional move container": {
+            "$ref": "./examples/RegionalMoveContainers_Finalize.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
+    "FinalizationRequest": {
+      "type": "object",
+      "description": "Represents the finalization request body.",
+      "properties": {
+        "resourceIds": {
+          "type": "array",
+          "description": "List of fully-qualified resource IDs to mark for finalization. Each resource ID specified should be part of the Regional Move Container.\nIf you set this to null, all resources in the move container will be marked for finalization.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "RegionalMoveContainer": {
       "type": "object",
       "description": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
@@ -417,6 +485,17 @@
           "items": {
             "$ref": "#/definitions/ResourceMoveRequest"
           },
+          "x-ms-identifiers": [
+            "sourceResourceId"
+          ]
+        },
+        "resourceStatusDetails": {
+          "type": "array",
+          "description": "Status of operations for each resource in the move container.",
+          "items": {
+            "$ref": "#/definitions/ResourceMoveStatusInfo"
+          },
+          "readOnly": true,
           "x-ms-identifiers": [
             "sourceResourceId"
           ]
@@ -520,6 +599,100 @@
         "sourceResourceId",
         "targetResourceId",
         "apiVersion"
+      ]
+    },
+    "ResourceMoveStatus": {
+      "type": "string",
+      "description": "Represents the status of the move or copy operation for an individual resource within a move container.",
+      "enum": [
+        "Queued",
+        "ValidatingPreMove",
+        "ValidatedPreMove",
+        "FailedPreMoveValidate",
+        "Moving",
+        "AwaitingMoveFinalization",
+        "MoveFinalizing",
+        "CleaningUp",
+        "MoveSucceeded",
+        "MoveFailed"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceMoveStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Queued",
+            "value": "Queued",
+            "description": "The resource operation is queued."
+          },
+          {
+            "name": "ValidatingPreMove",
+            "value": "ValidatingPreMove",
+            "description": "Pre-move validation is in progress."
+          },
+          {
+            "name": "ValidatedPreMove",
+            "value": "ValidatedPreMove",
+            "description": "Pre-move validation has completed."
+          },
+          {
+            "name": "FailedPreMoveValidate",
+            "value": "FailedPreMoveValidate",
+            "description": "Pre-move validation failed."
+          },
+          {
+            "name": "Moving",
+            "value": "Moving",
+            "description": "The resource move is in progress."
+          },
+          {
+            "name": "AwaitingMoveFinalization",
+            "value": "AwaitingMoveFinalization",
+            "description": "The resource is awaiting finalization."
+          },
+          {
+            "name": "MoveFinalizing",
+            "value": "MoveFinalizing",
+            "description": "The resource move is finalizing."
+          },
+          {
+            "name": "CleaningUp",
+            "value": "CleaningUp",
+            "description": "The resource move is cleaning up."
+          },
+          {
+            "name": "MoveSucceeded",
+            "value": "MoveSucceeded",
+            "description": "The resource move has succeeded."
+          },
+          {
+            "name": "MoveFailed",
+            "value": "MoveFailed",
+            "description": "The resource move has failed."
+          }
+        ]
+      }
+    },
+    "ResourceMoveStatusInfo": {
+      "type": "object",
+      "description": "Represents the status details (state, errors, etc.) of a resource within a move container.",
+      "properties": {
+        "sourceResourceId": {
+          "type": "string",
+          "description": "Resource ID of the resource being moved/copied."
+        },
+        "status": {
+          "$ref": "#/definitions/ResourceMoveStatus",
+          "description": "Status of the resource move/copy operation."
+        },
+        "error": {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "sourceResourceId",
+        "status"
       ]
     }
   },

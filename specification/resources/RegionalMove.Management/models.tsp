@@ -21,6 +21,41 @@ union RegionalMoveProvisioningState {
   InProgressAwaitingFinalization: "InProgressAwaitingFinalization",
 }
 
+/** Represents the status of the move or copy operation for an individual resource within a move container. */
+union ResourceMoveStatus {
+  string,
+
+  /** The resource operation is queued. */
+  Queued: "Queued",
+
+  /** Pre-move validation is in progress. */
+  ValidatingPreMove: "ValidatingPreMove",
+
+  /** Pre-move validation has completed. */
+  ValidatedPreMove: "ValidatedPreMove",
+
+  /** Pre-move validation failed. */
+  FailedPreMoveValidate: "FailedPreMoveValidate",
+
+  /** The resource move is in progress. */
+  Moving: "Moving",
+
+  /** The resource is awaiting finalization. */
+  AwaitingMoveFinalization: "AwaitingMoveFinalization",
+
+  /** The resource move is finalizing. */
+  MoveFinalizing: "MoveFinalizing",
+
+  /** The resource move is cleaning up. */
+  CleaningUp: "CleaningUp",
+
+  /** The resource move has succeeded. */
+  MoveSucceeded: "MoveSucceeded",
+
+  /** The resource move has failed. */
+  MoveFailed: "MoveFailed",
+}
+
 model RegionalMoveContainer
   is TrackedResource<
     RegionalMoveContainerProperties,
@@ -60,6 +95,11 @@ model RegionalMoveContainerProperties {
   @identifiers(#["sourceResourceId"])
   requestedResources: ResourceMoveRequest[];
 
+  /** Status of operations for each resource in the move container. */
+  @visibility(Lifecycle.Read)
+  @identifiers(#["sourceResourceId"])
+  resourceStatusDetails?: ResourceMoveStatusInfo[];
+
   ...ErrorResponse;
 }
 
@@ -77,4 +117,24 @@ model ResourceMoveRequest {
 
   /** The API version to use to perform the copy operation. */
   apiVersion: string;
+}
+
+/** Represents the status details (state, errors, etc.) of a resource within a move container. */
+model ResourceMoveStatusInfo {
+  /** Resource ID of the resource being moved/copied. */
+  sourceResourceId: string;
+
+  /** Status of the resource move/copy operation. */
+  status: ResourceMoveStatus;
+
+  ...ErrorResponse;
+}
+
+/** Represents the finalization request body. */
+model FinalizationRequest {
+  /**
+   * List of fully-qualified resource IDs to mark for finalization. Each resource ID specified should be part of the Regional Move Container.
+   * If you set this to null, all resources in the move container will be marked for finalization.
+   */
+  resourceIds?: string[];
 }
