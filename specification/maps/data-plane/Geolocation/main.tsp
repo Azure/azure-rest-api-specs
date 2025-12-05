@@ -12,19 +12,24 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "./routes.tsp";
 
-using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 using Azure.Core;
+
+/** Subscription Key Authentication */
+model SubscriptionKeyAuth
+  is ApiKeyAuth<ApiKeyLocation.query, "subscription-key">;
+
+/** SAS Token Authentication */
+model SasTokenAuth is ApiKeyAuth<ApiKeyLocation.header, "SAS Token">;
 
 /**
  * Azure Maps Geolocation REST APIs
  */
 @useAuth(
-  AadOauth2Auth<["https://atlas.microsoft.com/.default"]> | ApiKeyAuth<
-    ApiKeyLocation.query,
-    "subscription-key"
-  > | ApiKeyAuth<ApiKeyLocation.header, "SAS Token">
+  AadOauth2Auth<[
+    "https://atlas.microsoft.com/.default"
+  ]> | SubscriptionKeyAuth | SasTokenAuth
 )
 @service(#{ title: "Maps Geolocation" })
 @versioned(Versions)
@@ -35,14 +40,14 @@ using Azure.Core;
     endpoint: "https://atlas.microsoft.com",
   }
 )
-namespace MapsGeolocation;
-
-/**
- * The available API versions.
- */
-enum Versions {
+namespace MapsGeolocation {
   /**
-   * The 1.0 API version.
+   * The available API versions.
    */
-  v1_0: "1.0",
+  enum Versions {
+    /**
+     * The 1.0 API version.
+     */
+    v1_0: "1.0",
+  }
 }
