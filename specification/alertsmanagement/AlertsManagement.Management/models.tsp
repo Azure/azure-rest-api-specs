@@ -10,7 +10,7 @@ using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.AlertsManagement;
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union MonitorService {
   string,
 
@@ -90,7 +90,7 @@ union MonitorService {
   `Resource Health`: "Resource Health",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union MonitorCondition {
   string,
 
@@ -105,7 +105,7 @@ union MonitorCondition {
   Resolved: "Resolved",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union Severity {
   string,
 
@@ -135,7 +135,7 @@ union Severity {
   Sev4: "Sev4",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union AlertState {
   string,
 
@@ -155,7 +155,7 @@ union AlertState {
   Closed: "Closed",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union AlertsSortByFields {
   string,
 
@@ -210,7 +210,7 @@ union AlertsSortByFields {
   lastModifiedDateTime: "lastModifiedDateTime",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union SortOrder {
   string,
 
@@ -225,7 +225,7 @@ union SortOrder {
   desc: "desc",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union TimeRange {
   string,
 
@@ -294,7 +294,7 @@ union AlertModificationType {
   ActionsTriggered: "ActionsTriggered",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union Identifier {
   string,
 
@@ -316,7 +316,7 @@ union MetadataIdentifier {
   MonitorServiceList: "MonitorServiceList",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union AlertsSummaryGroupByFields {
   string,
 
@@ -439,8 +439,8 @@ union ResultStatus {
   ThrottledBySubscription: "ThrottledBySubscription",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum ApiVersion {
   /**
    * 2019-03-01
@@ -456,7 +456,7 @@ enum ApiVersion {
 /**
  * Reason for the modification
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum AlertModificationEvent {
   /**
    * AlertCreated
@@ -497,7 +497,7 @@ model AlertsList is Azure.Core.Page<Alert>;
 /**
  * Alert property bag
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AlertProperties {
   /**
    * This object contains consistent fields across different monitor services.
@@ -507,19 +507,21 @@ model AlertProperties {
   /**
    * Information specific to the monitor service that gives more contextual details about the alert.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   context?: unknown;
 
   /**
    * Config which would be used for displaying the data in portal.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   egressConfig?: unknown;
 
   /**
    * Custom properties that can hold any user defined key-value pairs
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   customProperties?: Record<string>;
 }
 
@@ -686,6 +688,7 @@ model AlertsManagementErrorResponse {
 /**
  * Details of error response.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.armExternalType
 model ErrorResponseBody {
   /**
@@ -713,7 +716,7 @@ model ErrorResponseBody {
 /**
  * Alert Modification details
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AlertModification extends ProxyResource {
   /**
    * Alert modification history properties.
@@ -798,7 +801,8 @@ model BaseDetails {
  * Change alert state reason
  */
 model Comments {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   comments?: string;
 }
 
@@ -871,7 +875,7 @@ model AlertsMetaDataProperties {
 /**
  * Summary of alerts based on the input filters and 'groupby' parameters.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AlertsSummary extends ProxyResource {
   /**
    * Group the result set.
@@ -937,7 +941,7 @@ model AlertEnrichmentsList is Azure.Core.Page<AlertEnrichmentResponse>;
 /**
  * The alert's enrichments.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AlertEnrichmentResponse
   extends Azure.ResourceManager.Foundations.ProxyResource {
   /**
@@ -994,7 +998,7 @@ model AlertEnrichmentItem {
   type: Type;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PropertyChangeDetails extends BaseDetails {
   /**
    * The value before the change
@@ -1017,7 +1021,7 @@ model PropertyChangeDetails extends BaseDetails {
   type: "PropertyChange";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ActionSuppressedDetails extends BaseDetails {
   /**
    * List of suppression action rules
@@ -1036,7 +1040,7 @@ model ActionSuppressedDetails extends BaseDetails {
   type: "ActionsSuppressed";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model TriggeredRule {
   /**
    * The action group ID
@@ -1054,7 +1058,7 @@ model TriggeredRule {
   ruleType?: RuleType;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ActionTriggeredDetails extends BaseDetails {
   /**
    * The action group that was triggered
@@ -1072,11 +1076,12 @@ model ActionTriggeredDetails extends BaseDetails {
   type: "ActionsTriggered";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model NotificationResult {
   /**
    * URL endpoint for checking notification delivery status. Only populated when status is 'Inline'.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   statusURL?: string;
 
   /**
@@ -1118,8 +1123,7 @@ model MonitorServiceDetails {
 /**
  * Prometheus enrichment object.
  */
-@discriminator("type")
-model PrometheusEnrichmentItem extends AlertEnrichmentItem {
+model PrometheusEnrichmentItem is AlertEnrichmentItem {
   /**
    * Link to Prometheus query API (Url format).
    */
@@ -1141,10 +1145,37 @@ model PrometheusEnrichmentItem extends AlertEnrichmentItem {
   query: string;
 }
 
+alias PrometheusEnrichmentItemPrperties = {
+  /**
+   * Link to Prometheus query API (Url format).
+   */
+  linkToApi: string;
+
+  /**
+   * An array of the azure monitor workspace resource ids.
+   */
+  datasources: string[];
+
+  /**
+   * Partial link to the Grafana explore API.
+   */
+  grafanaExplorePath: string;
+
+  /**
+   * The Prometheus expression query.
+   */
+  query: string;
+};
+
 /**
  * Prometheus instant query enrichment object.
  */
-model PrometheusInstantQuery extends PrometheusEnrichmentItem {
+#suppress "@azure-tools/typespec-client-generator-core/legacy-hierarchy-building-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(PrometheusEnrichmentItem)
+model PrometheusInstantQuery extends AlertEnrichmentItem {
+  ...PrometheusEnrichmentItemPrperties;
+
   /**
    * The date and the time of the evaluation.
    */
@@ -1159,7 +1190,12 @@ model PrometheusInstantQuery extends PrometheusEnrichmentItem {
 /**
  * Prometheus instant query enrichment object.
  */
-model PrometheusRangeQuery extends PrometheusEnrichmentItem {
+#suppress "@azure-tools/typespec-client-generator-core/legacy-hierarchy-building-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(PrometheusEnrichmentItem)
+model PrometheusRangeQuery extends AlertEnrichmentItem {
+  ...PrometheusEnrichmentItemPrperties;
+
   /**
    * The start evaluation date and time in ISO8601 format.
    */
