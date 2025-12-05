@@ -109,7 +109,7 @@ model ErrorAdditionalInfo {
   /**
    * The additional info.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Existing API contract."
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Existing API contract."
   @visibility(Lifecycle.Read)
-  info?: unknown;
+  info?: Record<unknown>;
 }
