@@ -41,6 +41,7 @@ namespace Customizations;
 @@clientName(ImmutabilityPolicyExpiryRequiredParameter.immutabilityPolicyExpiry,
   "expiry"
 );
+@@clientName(BlobContentLengthRequired.blobContentLength, "size", "rust");
 @@alternateType(BlobPropertiesInternal.contentLength, uint64, "rust");
 @@alternateType(BlobContentLengthRequired.blobContentLength, uint64, "rust");
 @@alternateType(ContentLengthResponseHeader.contentLength, uint64, "rust");
