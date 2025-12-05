@@ -36,7 +36,7 @@ alias OperationParameter = {
   /** The async operation id. */
   @path
   @minLength(1)
-  @segment("operationId")
+  @segment("operationStatuses")
   @key
   @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
   id: string;
@@ -335,9 +335,6 @@ model OperationStatus {
 
   /** The unique identifier for the operationStatus resource */
   @visibility(Lifecycle.Read)
-  @key
-  @path
-  @segment("operationStatuses")
   id: string;
 
   /** The name of the  operationStatus resource */
