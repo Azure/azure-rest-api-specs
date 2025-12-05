@@ -120,7 +120,7 @@ interface Indexers {
     {
       @doc("If false, keys or ids will be appended to existing ones. If true, only the keys or ids in this payload will be queued to be re-ingested.")
       @query
-      overwrite?: boolean;
+      overwrite?: boolean = false;
 
       @doc("The keys or ids of the documents to be re-ingested. If keys are provided, the document key field must be specified in the indexer configuration. If ids are provided, the document key field is ignored.")
       @body

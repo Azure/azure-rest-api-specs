@@ -735,16 +735,20 @@ model FacetResult is Record<unknown> {
 @doc("An answer is a text passage extracted from the contents of the most relevant documents that matched the query. Answers are extracted from the top search results. Answer candidates are scored and the top answers are selected.")
 model QueryAnswerResult is Record<unknown> {
   @doc("The score value represents how relevant the answer is to the query relative to other answers returned for the query.")
+  @visibility(Lifecycle.Read)
   score?: float64;
 
   @doc("The key of the document the answer was extracted from.")
+  @visibility(Lifecycle.Read)
   key?: string;
 
   @doc("The text passage extracted from the document contents as the answer.")
+  @visibility(Lifecycle.Read)
   text?: string;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @doc("Same text passage as in the Text property with highlighted text phrases most relevant to the query.")
+  @visibility(Lifecycle.Read)
   highlights?: string | null;
 }
 
@@ -934,25 +938,30 @@ model SearchResult {
 
   @doc("The relevance score of the document compared to other documents returned by the query.")
   @encodedName("application/json", "@search.score")
+  @visibility(Lifecycle.Read)
   score: float64;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @doc("The relevance score computed by the semantic ranker for the top search results. Search results are sorted by the RerankerScore first and then by the Score. RerankerScore is only returned for queries of type 'semantic'.")
   @encodedName("application/json", "@search.rerankerScore")
+  @visibility(Lifecycle.Read)
   rerankerScore?: float64 | null;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @doc("The relevance score computed by boosting the Reranker Score. Search results are sorted by the RerankerScore/RerankerBoostedScore based on useScoringProfileBoostedRanking in the Semantic Config. RerankerBoostedScore is only returned for queries of type 'semantic'.")
   @encodedName("application/json", "@search.rerankerBoostedScore")
+  @visibility(Lifecycle.Read)
   rerankerBoostedScore?: float64 | null;
 
   @doc("Text fragments from the document that indicate the matching search terms, organized by each applicable field; null if hit highlighting was not enabled for the query.")
   @encodedName("application/json", "@search.highlights")
+  @visibility(Lifecycle.Read)
   highlights?: Record<string[]>;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @doc("Captions are the most representative passages from the document relatively to the search query. They are often used as document summary. Captions are only returned for queries of type 'semantic'.")
   @encodedName("application/json", "@search.captions")
+  @visibility(Lifecycle.Read)
   captions?: QueryCaptionResult[] | null;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
@@ -1092,9 +1101,11 @@ model SingleVectorFieldResult {
 model SuggestDocumentsResult {
   @doc("The sequence of results returned by the query.")
   @pageItems
+  @visibility(Lifecycle.Read)
   value: SuggestResult[];
 
   @doc("A value indicating the percentage of the index that was included in the query, or null if minimumCoverage was not set in the request.")
+  @visibility(Lifecycle.Read)
   @encodedName("application/json", "@search.coverage")
   coverage?: float64;
 }
@@ -1106,6 +1117,7 @@ model SuggestResult {
 
   @doc("The text of the suggestion result.")
   @encodedName("application/json", "@search.text")
+  @visibility(Lifecycle.Read)
   text: string;
 }
 
@@ -1176,6 +1188,7 @@ model IndexDocumentsResult {
 
   @doc("The list of status information for each document in the indexing request.")
   @pageItems
+  @visibility(Lifecycle.Read)
   value: IndexingResult[];
 }
 
@@ -1202,19 +1215,23 @@ model IndexingResult {
 model AutocompleteResult {
   @doc("A value indicating the percentage of the index that was considered by the autocomplete request, or null if minimumCoverage was not specified in the request.")
   @encodedName("application/json", "@search.coverage")
+  @visibility(Lifecycle.Read)
   coverage?: float64;
 
   @doc("The list of returned Autocompleted items.")
   @pageItems
+  @visibility(Lifecycle.Read)
   value: AutocompleteItem[];
 }
 
 @doc("The result of Autocomplete requests.")
 model AutocompleteItem {
   @doc("The completed term.")
+  @visibility(Lifecycle.Read)
   text: string;
 
   @doc("The query along with the completed term.")
+  @visibility(Lifecycle.Read)
   queryPlusText: string;
 }
 

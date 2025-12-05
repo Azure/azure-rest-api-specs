@@ -3239,6 +3239,7 @@ model AzureActiveDirectoryApplicationCredentials {
 model ListDataSourcesResult {
   @doc("The datasources in the Search service.")
   @pageItems
+  @visibility(Lifecycle.Read)
   value: SearchIndexerDataSource[];
 }
 
@@ -3434,6 +3435,7 @@ model SearchIndexerCache {
 model ListIndexersResult {
   @doc("The indexers in the Search service.")
   @pageItems
+  @visibility(Lifecycle.Read)
   value: SearchIndexer[];
 }
 
@@ -3563,21 +3565,27 @@ model IndexerCurrentState {
 @error
 model SearchIndexerError {
   @doc("The key of the item for which indexing failed.")
+  @visibility(Lifecycle.Read)
   key?: string;
 
   @doc("The message describing the error that occurred while processing the item.")
+  @visibility(Lifecycle.Read)
   errorMessage: string;
 
   @doc("The status code indicating why the indexing operation failed. Possible values include: 400 for a malformed input document, 404 for document not found, 409 for a version conflict, 422 when the index is temporarily unavailable, or 503 for when the service is too busy.")
+  @visibility(Lifecycle.Read)
   statusCode: int32;
 
   @doc("The name of the source at which the error originated. For example, this could refer to a particular skill in the attached skillset. This may not be always available.")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   @doc("Additional, verbose details about the error to assist in debugging the indexer. This may not be always available.")
+  @visibility(Lifecycle.Read)
   details?: string;
 
   @doc("A link to a troubleshooting guide for these classes of errors. This may not be always available.")
+  @visibility(Lifecycle.Read)
   documentationLink?: string;
 }
 
@@ -3607,12 +3615,15 @@ model SearchIndexerWarning {
 @doc("Represents the limits that can be applied to an indexer.")
 model SearchIndexerLimits {
   @doc("The maximum duration that the indexer is permitted to run for one execution.")
+  @visibility(Lifecycle.Read)
   maxRunTime?: duration;
 
   @doc("The maximum size of a document, in bytes, which will be considered valid for indexing.")
+  @visibility(Lifecycle.Read)
   maxDocumentExtractionSize?: int64;
 
   @doc("The maximum number of characters that will be extracted from a document picked up for indexing.")
+  @visibility(Lifecycle.Read)
   maxDocumentContentCharactersToExtract?: int64;
 }
 
@@ -4574,35 +4585,23 @@ model IndexedSharePointKnowledgeSource extends KnowledgeSource {
 
 @doc("Parameters for SharePoint knowledge source.")
 model IndexedSharePointKnowledgeSourceParameters {
-  @doc("An explicit identity to use for this knowledge source.")
-  identity?: SearchIndexerDataIdentity;
-
-  @doc("The connection string for the SharePoint site.")
+  @doc("SharePoint connection string with format: SharePointOnlineEndpoint=[SharePoint site url];ApplicationId=[Azure AD App ID];ApplicationSecret=[Azure AD App client secret];TenantId=[SharePoint site tenant id]")
   connectionString: string;
 
-  @doc("The name of the SharePoint container.")
-  containerName: string;
+  @doc("Specifies which SharePoint libraries to access.")
+  containerName: IndexedSharePointContainerName;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
-  @doc("SharePoint query.")
+  @doc("Optional query to filter SharePoint content.")
   query?: string | null;
 
-  @doc("The embedding model to use for vectorization.")
-  embeddingModel?: KnowledgeSourceVectorizer;
-
-  @doc("The chat completion model to use for understanding images.")
-  chatCompletionModel?: KnowledgeBaseModel;
-
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
-  @doc("Ingestion parameters.")
+  @doc("Consolidates all general ingestion settings.")
   ingestionParameters?: KnowledgeSourceIngestionParameters | null;
 
-  @doc("Resources created for this knowledge source. These resources are managed by the service and should not be modified or deleted.")
+  @doc("Resources created by the knowledge source.")
   @visibility(Lifecycle.Read)
   createdResources?: CreatedResources;
-
-  @doc("If true, images will not be verbalized using the chatCompletionModel.")
-  disableImageVerbalization?: boolean;
 }
 
 @doc("Configuration for OneLake knowledge source.")
@@ -4912,7 +4911,7 @@ model MicrosoftLanguageTokenizer extends LexicalTokenizer {
   maxTokenLength?: int32 = 255;
 
   @doc("A value indicating how the tokenizer is used. Set to true if used as the search tokenizer, set to false if used as the indexing tokenizer. Default is false.")
-  isSearchTokenizer?: boolean;
+  isSearchTokenizer?: boolean = false;
 
   @doc("The language to use. The default is English.")
   language?: MicrosoftTokenizerLanguage;
@@ -4929,7 +4928,7 @@ model MicrosoftLanguageStemmingTokenizer extends LexicalTokenizer {
   maxTokenLength?: int32 = 255;
 
   @doc("A value indicating how the tokenizer is used. Set to true if used as the search tokenizer, set to false if used as the indexing tokenizer. Default is false.")
-  isSearchTokenizer?: boolean;
+  isSearchTokenizer?: boolean = false;
 
   @doc("The language to use. The default is English.")
   language?: MicrosoftStemmingTokenizerLanguage;
@@ -5022,7 +5021,7 @@ model UaxUrlEmailTokenizer extends LexicalTokenizer {
 @doc("Converts alphabetic, numeric, and symbolic Unicode characters which are not in the first 127 ASCII characters (the \"Basic Latin\" Unicode block) into their ASCII equivalents, if such equivalents exist. This token filter is implemented using Apache Lucene.")
 model AsciiFoldingTokenFilter extends TokenFilter {
   @doc("A value indicating whether the original token will be kept. Default is false.")
-  preserveOriginal?: boolean;
+  preserveOriginal?: boolean = false;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   @doc("A URI fragment specifying the type of token filter.")
@@ -5035,7 +5034,7 @@ model CjkBigramTokenFilter extends TokenFilter {
   ignoreScripts?: CjkBigramTokenFilterScripts[];
 
   @doc("A value indicating whether to output both unigrams and bigrams (if true), or just bigrams (if false). Default is false.")
-  outputUnigrams?: boolean;
+  outputUnigrams?: boolean = false;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   @doc("A URI fragment specifying the type of token filter.")
@@ -5048,10 +5047,10 @@ model CommonGramTokenFilter extends TokenFilter {
   commonWords: string[];
 
   @doc("A value indicating whether common words matching will be case insensitive. Default is false.")
-  ignoreCase?: boolean;
+  ignoreCase?: boolean = false;
 
   @doc("A value that indicates whether the token filter is in query mode. When in query mode, the token filter generates bigrams and then removes common words and single terms followed by a common word. Default is false.")
-  queryMode?: boolean;
+  queryMode?: boolean = false;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   @doc("A URI fragment specifying the type of token filter.")
@@ -5076,7 +5075,7 @@ model DictionaryDecompounderTokenFilter extends TokenFilter {
   maxSubwordSize?: int32 = 15;
 
   @doc("A value indicating whether to add only the longest matching subword to the output. Default is false.")
-  onlyLongestMatch?: boolean;
+  onlyLongestMatch?: boolean = false;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   @doc("A URI fragment specifying the type of token filter.")
@@ -5095,7 +5094,7 @@ model EdgeNGramTokenFilter extends TokenFilter {
   maxGram?: int32 = 2;
 
   @doc("Specifies which side of the input the n-gram should be generated from. Default is \"front\".")
-  side?: EdgeNGramTokenFilterSide;
+  side?: EdgeNGramTokenFilterSide = EdgeNGramTokenFilterSide.Front;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   @doc("A URI fragment specifying the type of token filter.")
@@ -5141,7 +5140,6 @@ model KeywordMarkerTokenFilter extends TokenFilter {
 @doc("Removes words that are too long or too short. This token filter is implemented using Apache Lucene.")
 model LengthTokenFilter extends TokenFilter {
   @doc("The minimum length in characters. Default is 0. Maximum is 300. Must be less than the value of max.")
-  @minValue(0)
   @maxValue(300)
   min?: int32 = 0;
 
@@ -5212,7 +5210,7 @@ model PatternReplaceTokenFilter extends TokenFilter {
 @doc("Create tokens for phonetic matches. This token filter is implemented using Apache Lucene.")
 model PhoneticTokenFilter extends TokenFilter {
   @doc("The phonetic encoder to use. Default is \"metaphone\".")
-  encoder?: PhoneticEncoder;
+  encoder?: PhoneticEncoder = PhoneticEncoder.Metaphone;
 
   @doc("A value indicating whether encoded tokens should replace original tokens. If false, encoded tokens are added as synonyms. Default is true.")
   replace?: boolean = true;
@@ -5760,7 +5758,7 @@ model SearchIndexerKnowledgeStoreParameters {
   ...Record<unknown>;
 
   @doc("Whether or not projections should synthesize a generated key name if one isn't already present.")
-  synthesizeGeneratedKeyName?: boolean;
+  synthesizeGeneratedKeyName?: boolean = false;
 }
 
 @doc("An empty object that represents the default Azure AI service resource for a skillset.")
@@ -5908,7 +5906,7 @@ model OcrSkill extends SearchIndexerSkill {
   defaultLanguageCode?: OcrSkillLanguage;
 
   @doc("A value indicating to turn orientation detection on or not. Default is false.")
-  detectOrientation?: boolean;
+  detectOrientation?: boolean = false;
 
   @doc("Defines the sequence of characters to use between the lines of text recognized by the OCR skill. The default value is \"space\".")
   lineEnding?: OcrLineEnding;
@@ -6007,7 +6005,7 @@ model SentimentSkill extends SearchIndexerSkill {
   defaultLanguageCode?: string | null;
 
   @doc("If set to true, the skill output will include information from Text Analytics for opinion mining, namely targets (nouns or verbs) and their associated assessment (adjective) in the text. Default is false.")
-  includeOpinionMining?: boolean;
+  includeOpinionMining?: boolean = false;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @doc("The version of the model to use when calling the Text Analytics service. It will default to the latest available when not specified. We recommend you do not specify this value unless absolutely necessary.")
@@ -6361,7 +6359,7 @@ union ContentUnderstandingSkillExtractionOptions {
 model ContentUnderstandingSkillChunkingProperties {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @doc("The unit of the chunk.")
-  unit?: ContentUnderstandingSkillChunkingUnit | null;
+  unit?: ContentUnderstandingSkillChunkingUnit | null = ContentUnderstandingSkillChunkingUnit.Characters;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @doc("The maximum chunk length in characters. Default is 500.")
@@ -6427,7 +6425,7 @@ model ChatCompletionCommonModelParameters {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @doc("The name of the model to use (e.g., 'gpt-4o', etc.). Default is null if not specified.")
   @encodedName("application/json", "model")
-  modelName?: string | null;
+  modelName?: string | null = null;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @doc("A float in the range [-2,2] that reduces or increases likelihood of repeated tokens. Default is 0.")
@@ -6532,7 +6530,7 @@ model ListIndexStatsSummary {
 model DocumentIntelligenceLayoutSkillChunkingProperties {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @doc("The unit of the chunk.")
-  unit?: DocumentIntelligenceLayoutSkillChunkingUnit | null;
+  unit?: DocumentIntelligenceLayoutSkillChunkingUnit | null = DocumentIntelligenceLayoutSkillChunkingUnit.Characters;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @doc("The maximum chunk length in characters. Default is 500.")

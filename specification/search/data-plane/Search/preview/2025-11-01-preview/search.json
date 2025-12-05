@@ -883,7 +883,8 @@
             "in": "query",
             "description": "If false, keys or ids will be appended to existing ones. If true, only the keys or ids in this payload will be queued to be re-ingested.",
             "required": false,
-            "type": "boolean"
+            "type": "boolean",
+            "default": false
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -3758,7 +3759,8 @@
       "properties": {
         "preserveOriginal": {
           "type": "boolean",
-          "description": "A value indicating whether the original token will be kept. Default is false."
+          "description": "A value indicating whether the original token will be kept. Default is false.",
+          "default": false
         }
       },
       "allOf": [
@@ -3774,11 +3776,13 @@
       "properties": {
         "text": {
           "type": "string",
-          "description": "The completed term."
+          "description": "The completed term.",
+          "readOnly": true
         },
         "queryPlusText": {
           "type": "string",
-          "description": "The query along with the completed term."
+          "description": "The query along with the completed term.",
+          "readOnly": true
         }
       },
       "required": [
@@ -3876,6 +3880,7 @@
           "type": "number",
           "format": "double",
           "description": "A value indicating the percentage of the index that was considered by the autocomplete request, or null if minimumCoverage was not specified in the request.",
+          "readOnly": true,
           "x-ms-client-name": "coverage"
         },
         "value": {
@@ -3883,7 +3888,8 @@
           "description": "The list of returned Autocompleted items.",
           "items": {
             "$ref": "#/definitions/AutocompleteItem"
-          }
+          },
+          "readOnly": true
         }
       },
       "required": [
@@ -4449,6 +4455,7 @@
         "model": {
           "type": "string",
           "description": "The name of the model to use (e.g., 'gpt-4o', etc.). Default is null if not specified.",
+          "default": null,
           "x-nullable": true,
           "x-ms-client-name": "modelName"
         },
@@ -4761,7 +4768,8 @@
         },
         "outputUnigrams": {
           "type": "boolean",
-          "description": "A value indicating whether to output both unigrams and bigrams (if true), or just bigrams (if false). Default is false."
+          "description": "A value indicating whether to output both unigrams and bigrams (if true), or just bigrams (if false). Default is false.",
+          "default": false
         }
       },
       "allOf": [
@@ -4886,11 +4894,13 @@
         },
         "ignoreCase": {
           "type": "boolean",
-          "description": "A value indicating whether common words matching will be case insensitive. Default is false."
+          "description": "A value indicating whether common words matching will be case insensitive. Default is false.",
+          "default": false
         },
         "queryMode": {
           "type": "boolean",
-          "description": "A value that indicates whether the token filter is in query mode. When in query mode, the token filter generates bigrams and then removes common words and single terms followed by a common word. Default is false."
+          "description": "A value that indicates whether the token filter is in query mode. When in query mode, the token filter generates bigrams and then removes common words and single terms followed by a common word. Default is false.",
+          "default": false
         }
       },
       "required": [
@@ -4981,8 +4991,22 @@
       "description": "Controls the cardinality for chunking the content.",
       "properties": {
         "unit": {
-          "$ref": "#/definitions/ContentUnderstandingSkillChunkingUnit",
+          "type": "string",
           "description": "The unit of the chunk.",
+          "default": "characters",
+          "enum": [
+            "characters"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Characters",
+                "value": "characters",
+                "description": "Specifies chunk by characters."
+              }
+            ]
+          },
           "x-nullable": true
         },
         "maximumLength": {
@@ -5436,7 +5460,8 @@
         },
         "onlyLongestMatch": {
           "type": "boolean",
-          "description": "A value indicating whether to add only the longest matching subword to the output. Default is false."
+          "description": "A value indicating whether to add only the longest matching subword to the output. Default is false.",
+          "default": false
         }
       },
       "required": [
@@ -5665,8 +5690,22 @@
       "description": "Controls the cardinality for chunking the content.",
       "properties": {
         "unit": {
-          "$ref": "#/definitions/DocumentIntelligenceLayoutSkillChunkingUnit",
+          "type": "string",
           "description": "The unit of the chunk.",
+          "default": "characters",
+          "enum": [
+            "characters"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Characters",
+                "value": "characters",
+                "description": "Specifies chunk by characters."
+              }
+            ]
+          },
           "x-nullable": true
         },
         "maximumLength": {
@@ -5854,8 +5893,29 @@
           "maximum": 300
         },
         "side": {
-          "$ref": "#/definitions/EdgeNGramTokenFilterSide",
-          "description": "Specifies which side of the input the n-gram should be generated from. Default is \"front\"."
+          "type": "string",
+          "description": "Specifies which side of the input the n-gram should be generated from. Default is \"front\".",
+          "default": "front",
+          "enum": [
+            "front",
+            "back"
+          ],
+          "x-ms-enum": {
+            "name": "EdgeNGramTokenFilterSide",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Front",
+                "value": "front",
+                "description": "Specifies that the n-gram should be generated from the front of the input."
+              },
+              {
+                "name": "Back",
+                "value": "back",
+                "description": "Specifies that the n-gram should be generated from the back of the input."
+              }
+            ]
+          }
         }
       },
       "allOf": [
@@ -7009,7 +7069,8 @@
           "description": "The list of status information for each document in the indexing request.",
           "items": {
             "$ref": "#/definitions/IndexingResult"
-          }
+          },
+          "readOnly": true
         }
       },
       "required": [
@@ -7188,44 +7249,28 @@
       "type": "object",
       "description": "Parameters for SharePoint knowledge source.",
       "properties": {
-        "identity": {
-          "$ref": "#/definitions/SearchIndexerDataIdentity",
-          "description": "An explicit identity to use for this knowledge source."
-        },
         "connectionString": {
           "type": "string",
-          "description": "The connection string for the SharePoint site."
+          "description": "SharePoint connection string with format: SharePointOnlineEndpoint=[SharePoint site url];ApplicationId=[Azure AD App ID];ApplicationSecret=[Azure AD App client secret];TenantId=[SharePoint site tenant id]"
         },
         "containerName": {
-          "type": "string",
-          "description": "The name of the SharePoint container."
+          "$ref": "#/definitions/IndexedSharePointContainerName",
+          "description": "Specifies which SharePoint libraries to access."
         },
         "query": {
           "type": "string",
-          "description": "SharePoint query.",
+          "description": "Optional query to filter SharePoint content.",
           "x-nullable": true
-        },
-        "embeddingModel": {
-          "$ref": "#/definitions/KnowledgeSourceVectorizer",
-          "description": "The embedding model to use for vectorization."
-        },
-        "chatCompletionModel": {
-          "$ref": "#/definitions/KnowledgeBaseModel",
-          "description": "The chat completion model to use for understanding images."
         },
         "ingestionParameters": {
           "$ref": "#/definitions/KnowledgeSourceIngestionParameters",
-          "description": "Ingestion parameters.",
+          "description": "Consolidates all general ingestion settings.",
           "x-nullable": true
         },
         "createdResources": {
           "$ref": "#/definitions/CreatedResources",
-          "description": "Resources created for this knowledge source. These resources are managed by the service and should not be modified or deleted.",
+          "description": "Resources created by the knowledge source.",
           "readOnly": true
-        },
-        "disableImageVerbalization": {
-          "type": "boolean",
-          "description": "If true, images will not be verbalized using the chatCompletionModel."
         }
       },
       "required": [
@@ -9746,7 +9791,6 @@
           "format": "int32",
           "description": "The minimum length in characters. Default is 0. Maximum is 300. Must be less than the value of max.",
           "default": 0,
-          "minimum": 0,
           "maximum": 300
         },
         "max": {
@@ -10572,7 +10616,8 @@
           "description": "The datasources in the Search service.",
           "items": {
             "$ref": "#/definitions/SearchIndexerDataSource"
-          }
+          },
+          "readOnly": true
         }
       },
       "required": [
@@ -10605,7 +10650,8 @@
           "description": "The indexers in the Search service.",
           "items": {
             "$ref": "#/definitions/SearchIndexer"
-          }
+          },
+          "readOnly": true
         }
       },
       "required": [
@@ -10917,7 +10963,8 @@
         },
         "isSearchTokenizer": {
           "type": "boolean",
-          "description": "A value indicating how the tokenizer is used. Set to true if used as the search tokenizer, set to false if used as the indexing tokenizer. Default is false."
+          "description": "A value indicating how the tokenizer is used. Set to true if used as the search tokenizer, set to false if used as the indexing tokenizer. Default is false.",
+          "default": false
         },
         "language": {
           "$ref": "#/definitions/MicrosoftStemmingTokenizerLanguage",
@@ -10944,7 +10991,8 @@
         },
         "isSearchTokenizer": {
           "type": "boolean",
-          "description": "A value indicating how the tokenizer is used. Set to true if used as the search tokenizer, set to false if used as the indexing tokenizer. Default is false."
+          "description": "A value indicating how the tokenizer is used. Set to true if used as the search tokenizer, set to false if used as the indexing tokenizer. Default is false.",
+          "default": false
         },
         "language": {
           "$ref": "#/definitions/MicrosoftTokenizerLanguage",
@@ -11619,7 +11667,8 @@
         },
         "detectOrientation": {
           "type": "boolean",
-          "description": "A value indicating to turn orientation detection on or not. Default is false."
+          "description": "A value indicating to turn orientation detection on or not. Default is false.",
+          "default": false
         },
         "lineEnding": {
           "$ref": "#/definitions/OcrLineEnding",
@@ -13043,8 +13092,83 @@
       "description": "Create tokens for phonetic matches. This token filter is implemented using Apache Lucene.",
       "properties": {
         "encoder": {
-          "$ref": "#/definitions/PhoneticEncoder",
-          "description": "The phonetic encoder to use. Default is \"metaphone\"."
+          "type": "string",
+          "description": "The phonetic encoder to use. Default is \"metaphone\".",
+          "default": "metaphone",
+          "enum": [
+            "metaphone",
+            "doubleMetaphone",
+            "soundex",
+            "refinedSoundex",
+            "caverphone1",
+            "caverphone2",
+            "cologne",
+            "nysiis",
+            "koelnerPhonetik",
+            "haasePhonetik",
+            "beiderMorse"
+          ],
+          "x-ms-enum": {
+            "name": "PhoneticEncoder",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Metaphone",
+                "value": "metaphone",
+                "description": "Encodes a token into a Metaphone value."
+              },
+              {
+                "name": "DoubleMetaphone",
+                "value": "doubleMetaphone",
+                "description": "Encodes a token into a double metaphone value."
+              },
+              {
+                "name": "Soundex",
+                "value": "soundex",
+                "description": "Encodes a token into a Soundex value."
+              },
+              {
+                "name": "RefinedSoundex",
+                "value": "refinedSoundex",
+                "description": "Encodes a token into a Refined Soundex value."
+              },
+              {
+                "name": "Caverphone1",
+                "value": "caverphone1",
+                "description": "Encodes a token into a Caverphone 1.0 value."
+              },
+              {
+                "name": "Caverphone2",
+                "value": "caverphone2",
+                "description": "Encodes a token into a Caverphone 2.0 value."
+              },
+              {
+                "name": "Cologne",
+                "value": "cologne",
+                "description": "Encodes a token into a Cologne Phonetic value."
+              },
+              {
+                "name": "Nysiis",
+                "value": "nysiis",
+                "description": "Encodes a token into a NYSIIS value."
+              },
+              {
+                "name": "KoelnerPhonetik",
+                "value": "koelnerPhonetik",
+                "description": "Encodes a token using the Kölner Phonetik algorithm."
+              },
+              {
+                "name": "HaasePhonetik",
+                "value": "haasePhonetik",
+                "description": "Encodes a token using the Haase refinement of the Kölner Phonetik algorithm."
+              },
+              {
+                "name": "BeiderMorse",
+                "value": "beiderMorse",
+                "description": "Encodes a token into a Beider-Morse value."
+              }
+            ]
+          }
         },
         "replace": {
           "type": "boolean",
@@ -13066,20 +13190,24 @@
         "score": {
           "type": "number",
           "format": "double",
-          "description": "The score value represents how relevant the answer is to the query relative to other answers returned for the query."
+          "description": "The score value represents how relevant the answer is to the query relative to other answers returned for the query.",
+          "readOnly": true
         },
         "key": {
           "type": "string",
-          "description": "The key of the document the answer was extracted from."
+          "description": "The key of the document the answer was extracted from.",
+          "readOnly": true
         },
         "text": {
           "type": "string",
-          "description": "The text passage extracted from the document contents as the answer."
+          "description": "The text passage extracted from the document contents as the answer.",
+          "readOnly": true
         },
         "highlights": {
           "type": "string",
           "description": "Same text passage as in the Text property with highlighted text phrases most relevant to the query.",
-          "x-nullable": true
+          "x-nullable": true,
+          "readOnly": true
         }
       },
       "additionalProperties": {}
@@ -15081,28 +15209,34 @@
       "properties": {
         "key": {
           "type": "string",
-          "description": "The key of the item for which indexing failed."
+          "description": "The key of the item for which indexing failed.",
+          "readOnly": true
         },
         "errorMessage": {
           "type": "string",
-          "description": "The message describing the error that occurred while processing the item."
+          "description": "The message describing the error that occurred while processing the item.",
+          "readOnly": true
         },
         "statusCode": {
           "type": "integer",
           "format": "int32",
-          "description": "The status code indicating why the indexing operation failed. Possible values include: 400 for a malformed input document, 404 for document not found, 409 for a version conflict, 422 when the index is temporarily unavailable, or 503 for when the service is too busy."
+          "description": "The status code indicating why the indexing operation failed. Possible values include: 400 for a malformed input document, 404 for document not found, 409 for a version conflict, 422 when the index is temporarily unavailable, or 503 for when the service is too busy.",
+          "readOnly": true
         },
         "name": {
           "type": "string",
-          "description": "The name of the source at which the error originated. For example, this could refer to a particular skill in the attached skillset. This may not be always available."
+          "description": "The name of the source at which the error originated. For example, this could refer to a particular skill in the attached skillset. This may not be always available.",
+          "readOnly": true
         },
         "details": {
           "type": "string",
-          "description": "Additional, verbose details about the error to assist in debugging the indexer. This may not be always available."
+          "description": "Additional, verbose details about the error to assist in debugging the indexer. This may not be always available.",
+          "readOnly": true
         },
         "documentationLink": {
           "type": "string",
-          "description": "A link to a troubleshooting guide for these classes of errors. This may not be always available."
+          "description": "A link to a troubleshooting guide for these classes of errors. This may not be always available.",
+          "readOnly": true
         }
       },
       "required": [
@@ -15244,7 +15378,8 @@
       "properties": {
         "synthesizeGeneratedKeyName": {
           "type": "boolean",
-          "description": "Whether or not projections should synthesize a generated key name if one isn't already present."
+          "description": "Whether or not projections should synthesize a generated key name if one isn't already present.",
+          "default": false
         }
       },
       "additionalProperties": {}
@@ -15335,17 +15470,20 @@
         "maxRunTime": {
           "type": "string",
           "format": "duration",
-          "description": "The maximum duration that the indexer is permitted to run for one execution."
+          "description": "The maximum duration that the indexer is permitted to run for one execution.",
+          "readOnly": true
         },
         "maxDocumentExtractionSize": {
           "type": "integer",
           "format": "int64",
-          "description": "The maximum size of a document, in bytes, which will be considered valid for indexing."
+          "description": "The maximum size of a document, in bytes, which will be considered valid for indexing.",
+          "readOnly": true
         },
         "maxDocumentContentCharactersToExtract": {
           "type": "integer",
           "format": "int64",
-          "description": "The maximum number of characters that will be extracted from a document picked up for indexing."
+          "description": "The maximum number of characters that will be extracted from a document picked up for indexing.",
+          "readOnly": true
         }
       }
     },
@@ -15739,6 +15877,7 @@
           "type": "number",
           "format": "double",
           "description": "The relevance score of the document compared to other documents returned by the query.",
+          "readOnly": true,
           "x-ms-client-name": "score"
         },
         "@search.rerankerScore": {
@@ -15746,6 +15885,7 @@
           "format": "double",
           "description": "The relevance score computed by the semantic ranker for the top search results. Search results are sorted by the RerankerScore first and then by the Score. RerankerScore is only returned for queries of type 'semantic'.",
           "x-nullable": true,
+          "readOnly": true,
           "x-ms-client-name": "rerankerScore"
         },
         "@search.rerankerBoostedScore": {
@@ -15753,6 +15893,7 @@
           "format": "double",
           "description": "The relevance score computed by boosting the Reranker Score. Search results are sorted by the RerankerScore/RerankerBoostedScore based on useScoringProfileBoostedRanking in the Semantic Config. RerankerBoostedScore is only returned for queries of type 'semantic'.",
           "x-nullable": true,
+          "readOnly": true,
           "x-ms-client-name": "rerankerBoostedScore"
         },
         "@search.highlights": {
@@ -15764,6 +15905,7 @@
             },
             "type": "array"
           },
+          "readOnly": true,
           "x-ms-client-name": "highlights"
         },
         "@search.captions": {
@@ -15773,6 +15915,7 @@
           "items": {
             "$ref": "#/definitions/QueryCaptionResult"
           },
+          "readOnly": true,
           "x-ms-client-name": "captions"
         },
         "@search.documentDebugInfo": {
@@ -16209,7 +16352,8 @@
         },
         "includeOpinionMining": {
           "type": "boolean",
-          "description": "If set to true, the skill output will include information from Text Analytics for opinion mining, namely targets (nouns or verbs) and their associated assessment (adjective) in the text. Default is false."
+          "description": "If set to true, the skill output will include information from Text Analytics for opinion mining, namely targets (nouns or verbs) and their associated assessment (adjective) in the text. Default is false.",
+          "default": false
         },
         "modelVersion": {
           "type": "string",
@@ -17832,12 +17976,14 @@
           "description": "The sequence of results returned by the query.",
           "items": {
             "$ref": "#/definitions/SuggestResult"
-          }
+          },
+          "readOnly": true
         },
         "@search.coverage": {
           "type": "number",
           "format": "double",
           "description": "A value indicating the percentage of the index that was included in the query, or null if minimumCoverage was not set in the request.",
+          "readOnly": true,
           "x-ms-client-name": "coverage"
         }
       },
@@ -17908,6 +18054,7 @@
         "@search.text": {
           "type": "string",
           "description": "The text of the suggestion result.",
+          "readOnly": true,
           "x-ms-client-name": "text"
         }
       },
