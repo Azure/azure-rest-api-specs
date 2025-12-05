@@ -46,7 +46,7 @@ interface BulkActions {
   cancel is ArmResourceActionAsync<
     Resource = LocationBasedLaunchBulkInstancesOperation,
     Request = void,
-    Response = ArmResponse<LocationBasedLaunchBulkInstancesOperation>
+    Response = LocationBasedLaunchBulkInstancesOperation
   >;
 
   @doc("List LaunchBulkInstancesOperation resources by resource group.")
