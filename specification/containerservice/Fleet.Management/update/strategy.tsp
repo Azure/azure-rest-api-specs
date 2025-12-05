@@ -9,8 +9,6 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
-using Azure.Core;
-using Azure.Core.Traits;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.ContainerService;
@@ -79,5 +77,8 @@ interface FleetUpdateStrategies {
   >;
 
   /** List FleetUpdateStrategy resources by Fleet */
-  listByFleet is ArmResourceListByParent<FleetUpdateStrategy>;
+  listByFleet is ArmResourceListByParent<
+    FleetUpdateStrategy,
+    Parameters = TopQueryParameter & SkipTokenQueryParameter
+  >;
 }
