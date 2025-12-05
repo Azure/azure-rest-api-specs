@@ -1,0 +1,18 @@
+{
+    "operationId": "GetServiceManifest",
+    "description": " Gets the manifest describing a service type. The response contains the service manifest XML as a string.",
+    "parameters": {
+        "api-version": "6.0",
+        "applicationTypeName": "Store/App1",
+        "ApplicationTypeVersion": "9.0.0",
+        "ServiceManifestName": "service1"
+    },
+    "responses": {
+        "200": {
+            "headers": {},
+            "body": {
+                "Manifest": "<ServiceManifest xmlns:xsd=\"http:\/\/www.w3.org\/2001\/XMLSchema\" xmlns:xsi=\"http:\/\/www.w3.org\/2001\/XMLSchema-instance\" ManifestId=\"4dee858c-5b39-44f2-8d22-26b184493937\" Name=\"VisualObjects.ActorServicePkg\" Version=\"14.0.0\" xmlns=\"http:\/\/schemas.microsoft.com\/2011\/01\/fabric\">\r\n  <ServiceTypes>\r\n    <StatefulServiceType ServiceTypeName=\"VisualObjects.ActorServiceType\" HasPersistedState=\"true\">\r\n      <Extensions>\r\n        <Extension Name=\"__GeneratedServiceType__\" GeneratedId=\"e9ba88d7-7199-42f5-94fc-f093573f46c5|Persisted\">\r\n          <GeneratedNames xmlns=\"http:\/\/schemas.microsoft.com\/2015\/03\/fabact-no-schema\">\r\n            <DefaultService Name=\"VisualObjects.ActorService\" \/>\r\n            <ServiceEndpoint Name=\"VisualObjects.ActorServiceEndpoint\" \/>\r\n            <ReplicatorEndpoint Name=\"VisualObjects.ActorServiceReplicatorEndpoint\" \/>\r\n            <ReplicatorConfigSection Name=\"VisualObjects.ActorServiceReplicatorConfig\" \/>\r\n            <ReplicatorSecurityConfigSection Name=\"VisualObjects.ActorServiceReplicatorSecurityConfig\" \/>\r\n            <StoreConfigSection Name=\"VisualObjects.ActorServiceLocalStoreConfig\" \/>\r\n          <\/GeneratedNames>\r\n        <\/Extension>\r\n      <\/Extensions>\r\n    <\/StatefulServiceType>\r\n  <\/ServiceTypes>\r\n  <CodePackage Name=\"Code\" Version=\"11.0.0\">\r\n    <EntryPoint>\r\n      <ExeHost>\r\n        <Program>VisualObjects.ActorService.exe<\/Program>\r\n      <\/ExeHost>\r\n    <\/EntryPoint>\r\n  <\/CodePackage>\r\n  <ConfigPackage Name=\"Config\" Version=\"3.0.0\" \/>\r\n  <Resources>\r\n    <Endpoints>\r\n      <Endpoint Name=\"VisualObjects.ActorServiceEndpoint\" \/>\r\n      <Endpoint Name=\"VisualObjects.ActorServiceReplicatorEndpoint\" \/>\r\n    <\/Endpoints>\r\n  <\/Resources>\r\n<\/ServiceManifest>"
+            }
+        }
+    }
+}

@@ -1,0 +1,24 @@
+{
+  "operationId": "GetPartitionRestoreProgress",
+  "description": "This shows an example of possible output when GetPartitionRestoreProgress has reached a RestoreState of Success.  If the RestoreState has a value of RestoreInProgress, only the RestoreState field will have a value.",
+  "parameters": {
+    "partitionId": "1daae3f5-7fd6-42e9-b1ba-8c05f873994d",
+    "api-version": "6.4"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+      },
+      "body": {
+        "RestoreState": "Success",
+        "TimeStampUtc": "2018-01-01T09:00:55Z",
+        "RestoredEpoch": {
+          "DataLossVersion": "131462452931584510",
+          "ConfigurationVersion": "8589934592"
+        },
+        "RestoredLsn": "261",
+        "FailureError": null
+      }
+    }
+  }
+}

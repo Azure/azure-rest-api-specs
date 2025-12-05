@@ -1,0 +1,107 @@
+{
+    "operationId": "GetDeployedServiceTypeInfoByName",
+    "description": "Gets the information about a specified service type of the application deployed on a node in a Service Fabric cluster.",
+    "parameters": {
+        "api-version": "6.0",
+        "nodeName": "_Node_0",
+        "serviceTypeName": "VisualObjects.ActorServicePkg",
+        "applicationId": "fabric:/VisualObjects"
+    },
+    "responses": {
+        "200": {
+            "headers": {},
+            "body": [{
+                "ServiceKind": "Stateful",
+                "ServiceName": "fabric:\/VisualObjects\/VisualObjects.ActorService",
+                "PartitionId": "365a03af-3718-4580-bef8-6f5f432ea092",
+                "CurrentServiceOperation": "None",
+                "CurrentServiceOperationStartTimeUtc": "2022-11-11T16:02:57.830Z",
+                "ReportedLoad": [],
+                "ReplicaId": "133117243825817602",
+                "CurrentReplicatorOperation": "None",
+                "ReadStatus": "Granted",
+                "WriteStatus": "Granted",
+                "ReplicatorStatus": {
+                    "Kind": "Primary",
+                    "ReplicationQueueStatus": {
+                        "QueueUtilizationPercentage": 0,
+                        "QueueMemorySize": "0",
+                        "FirstSequenceNumber": "0",
+                        "CompletedSequenceNumber": "74206293",
+                        "CommittedSequenceNumber": "74206293",
+                        "LastSequenceNumber": "74206293"
+                    },
+                    "RemoteReplicators": [
+                        {
+                            "ReplicaId": "133117243749608166",
+                            "LastAcknowledgementProcessedTimeUtc": "2022-11-15T20:22:44.693Z",
+                            "LastReceivedReplicationSequenceNumber": "74206293",
+                            "LastAppliedReplicationSequenceNumber": "74206293",
+                            "IsInBuild": false,
+                            "LastReceivedCopySequenceNumber": "0",
+                            "LastAppliedCopySequenceNumber": "0",
+                            "RemoteReplicatorAcknowledgementStatus": {
+                                "ReplicationStreamAcknowledgementDetail": {
+                                    "AverageReceiveDuration": "15",
+                                    "AverageApplyDuration": "15",
+                                    "NotReceivedCount": "0",
+                                    "ReceivedAndNotAppliedCount": "0"
+                                },
+                                "CopyStreamAcknowledgementDetail": {
+                                    "AverageReceiveDuration": "0",
+                                    "AverageApplyDuration": "0",
+                                    "NotReceivedCount": "0",
+                                    "ReceivedAndNotAppliedCount": "0"
+                                }
+                            }
+                        },
+                        {
+                            "ReplicaId": "133117243825817603",
+                            "LastAcknowledgementProcessedTimeUtc": "2022-11-15T20:22:44.693Z",
+                            "LastReceivedReplicationSequenceNumber": "74206293",
+                            "LastAppliedReplicationSequenceNumber": "74206293",
+                            "IsInBuild": false,
+                            "LastReceivedCopySequenceNumber": "0",
+                            "LastAppliedCopySequenceNumber": "0",
+                            "RemoteReplicatorAcknowledgementStatus": {
+                                "ReplicationStreamAcknowledgementDetail": {
+                                    "AverageReceiveDuration": "15",
+                                    "AverageApplyDuration": "15",
+                                    "NotReceivedCount": "0",
+                                    "ReceivedAndNotAppliedCount": "0"
+                                },
+                                "CopyStreamAcknowledgementDetail": {
+                                    "AverageReceiveDuration": "0",
+                                    "AverageApplyDuration": "0",
+                                    "NotReceivedCount": "0",
+                                    "ReceivedAndNotAppliedCount": "0"
+                                }
+                            }
+                        }
+                    ]
+                },
+                "DeployedServiceReplica": {
+                    "ServiceKind": "Stateful",
+                    "ServiceName": "fabric:\/VisualObjects\/VisualObjects.ActorService",
+                    "ServiceTypeName": "VisualObjects.ActorServiceType",
+                    "ServiceManifestVersion": "",
+                    "ServiceManifestName": "VisualObjects.ActorServicePkg",
+                    "CodePackageName": "Code",
+                    "PartitionId": "365a03af-3718-4580-bef8-6f5f432ea092",
+                    "ReplicaId": "133117243825817602",
+                    "ReplicaRole": "Primary",
+                    "ReplicaStatus": "Ready",
+                    "Address": "{\"Endpoints\":{\"\":\"jeff-desktop.redmond.corp.microsoft.com:34001+365a03af-3718-4580-bef8-6f5f432ea092-133117243825817602\"}}",
+                    "ServicePackageActivationId": "",
+                    "HostProcessId": "11508",
+                    "ReconfigurationInformation": {
+                        "PreviousConfigurationRole": "None",
+                        "ReconfigurationPhase": "None",
+                        "ReconfigurationType": "None",
+                        "ReconfigurationStartTimeUtc": "0001-01-01T00:00:00.000Z"
+                    }
+                }
+            }]
+        }
+    }
+}

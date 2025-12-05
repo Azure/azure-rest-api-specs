@@ -1,0 +1,25 @@
+{
+  "operationId": "GetAllEntitiesBackedUpByPolicy",
+  "description": "This example shows how to get list of backup entities that are currently associated with a backup policy. This example uses the ContinuationToken parameter. The value of this parameter is provided from the previous query; in this case the example shown above. The response contains the remaining results and an empty ContinuationToken. The empty ContinuationToken indicates that additional results are not available.",
+  "parameters": {
+    "api-version": "6.4",
+    "backupPolicyName": "DailyAzureBackupPolicy",
+    "MaxResults": 2,
+    "ContinuationToken": "fabric:/DemoApp"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+      },
+      "body": {
+        "ContinuationToken": "",
+        "Items": [ 
+          {
+            "EntityKind": "Service",
+            "ServiceName": "fabric:/VotingApp/VotingActorService"
+          }
+        ]
+      }
+    }
+  }
+}

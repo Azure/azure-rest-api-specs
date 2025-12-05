@@ -1,0 +1,124 @@
+{
+    "operationId": "GetClusterHealthUsingPolicy",
+    "description": "Gets the health of a Service Fabric cluster using the specified policy",
+    "parameters": {
+        "api-version": "6.0"
+    },
+    "responses": {
+        "200": {
+            "headers": {},
+            "body": {
+                "HealthEvents": [],
+                "AggregatedHealthState": "Ok",
+                "UnhealthyEvaluations": [],
+                "HealthStatistics": {
+                    "HealthStateCountList": [
+                        {
+                            "EntityKind": "Node",
+                            "HealthStateCount": {
+                                "OkCount": 5,
+                                "ErrorCount": 0,
+                                "WarningCount": 0
+                            }
+                        },
+                        {
+                            "EntityKind": "Replica",
+                            "HealthStateCount": {
+                                "OkCount": 16,
+                                "ErrorCount": 0,
+                                "WarningCount": 0
+                            }
+                        },
+                        {
+                            "EntityKind": "Partition",
+                            "HealthStateCount": {
+                                "OkCount": 6,
+                                "ErrorCount": 0,
+                                "WarningCount": 0
+                            }
+                        },
+                        {
+                            "EntityKind": "Service",
+                            "HealthStateCount": {
+                                "OkCount": 2,
+                                "ErrorCount": 0,
+                                "WarningCount": 0
+                            }
+                        },
+                        {
+                            "EntityKind": "DeployedServicePackage",
+                            "HealthStateCount": {
+                                "OkCount": 10,
+                                "ErrorCount": 0,
+                                "WarningCount": 0
+                            }
+                        },
+                        {
+                            "EntityKind": "DeployedApplication",
+                            "HealthStateCount": {
+                                "OkCount": 5,
+                                "ErrorCount": 0,
+                                "WarningCount": 0
+                            }
+                        },
+                        {
+                            "EntityKind": "Application",
+                            "HealthStateCount": {
+                                "OkCount": 1,
+                                "ErrorCount": 0,
+                                "WarningCount": 0
+                            }
+                        }
+                    ]
+                },
+                "NodeHealthStates": [
+                    {
+                        "Name": "_Node_4",
+                        "Id": {
+                            "Id": "4f4e3698a196896b5efe8156cc4e1351"
+                        },
+                        "AggregatedHealthState": "Ok"
+                    },
+                    {
+                        "Name": "_Node_3",
+                        "Id": {
+                            "Id": "6b5c3db003a0bd126f7b8a86fc3916a4"
+                        },
+                        "AggregatedHealthState": "Ok"
+                    },
+                    {
+                        "Name": "_Node_2",
+                        "Id": {
+                            "Id": "876a44d9185bf9416336b22e5d37cde8"
+                        },
+                        "AggregatedHealthState": "Ok"
+                    },
+                    {
+                        "Name": "_Node_1",
+                        "Id": {
+                            "Id": "a3784be1d81710242ed0a9632647b4f7"
+                        },
+                        "AggregatedHealthState": "Ok"
+                    },
+                    {
+                        "Name": "_Node_0",
+                        "Id": {
+                            "Id": "bf865279ba277deb864a976fbf4c200e"
+                        },
+                        "AggregatedHealthState": "Ok"
+                    }
+                ],
+                "ApplicationHealthStates": [
+                    {
+                        "Name": "fabric:\/System",
+                        "AggregatedHealthState": "Ok"
+                    },
+                    {
+                        "Name": "fabric:\/VisualObjects",
+                        "AggregatedHealthState": "Ok"
+                    }
+                ]
+            }
+        }
+    }
+}
