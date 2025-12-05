@@ -2779,6 +2779,33 @@
         "type"
       ]
     },
+    "DataIntegrityValidation": {
+      "type": "string",
+      "description": "The Data integrity validation mode.",
+      "enum": [
+        "SaveVerifyFileMD5",
+        "SaveFileMD5",
+        "None"
+      ],
+      "x-ms-enum": {
+        "name": "DataIntegrityValidation",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SaveVerifyFileMD5",
+            "value": "SaveVerifyFileMD5"
+          },
+          {
+            "name": "SaveFileMD5",
+            "value": "SaveFileMD5"
+          },
+          {
+            "name": "None",
+            "value": "None"
+          }
+        ]
+      }
+    },
     "DayOfWeek": {
       "type": "string",
       "description": "The day of week.",
@@ -3185,6 +3212,10 @@
             "format": "arm-id",
             "description": "A type definition that refers the id to an Azure Resource Manager resource."
           }
+        },
+        "dataIntegrityValidation": {
+          "$ref": "#/definitions/DataIntegrityValidation",
+          "description": "Data Integrity Validation mode."
         }
       }
     },

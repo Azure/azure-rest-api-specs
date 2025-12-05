@@ -879,6 +879,13 @@ model JobDefinitionUpdateProperties {
    */
   @added(Versions.v2025_08_01)
   connections?: Azure.Core.armResourceIdentifier[];
+
+  /**
+   * Data Integrity Validation mode.
+   */
+  @added(Versions.v2025_08_01)
+  dataIntegrityValidation?: DataIntegrityValidation;
+
 }
 
 /**
