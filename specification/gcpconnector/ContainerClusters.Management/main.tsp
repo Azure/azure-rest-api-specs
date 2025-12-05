@@ -93,7 +93,7 @@ model GcpContainerClusterProperties {
   /**
    * Which conditions caused the current cluster state.
    */
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   conditions?: StatusCondition[];
 
   /**
@@ -444,7 +444,7 @@ model NodeConfig {
   /**
    * A list of hardware accelerators to be attached to each node. See https://cloud.google.com/compute/docs/gpus for more information about support for GPUs.
    */
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   accelerators?: AcceleratorConfig[];
 
   /**
@@ -455,6 +455,7 @@ model NodeConfig {
   /**
    * The Customer Managed Encryption Key used to encrypt the boot disk attached to each node in the node pool. This should be of the form projects/[KEY_PROJECT_ID]/locations/[LOCATION]/keyRings/[RING_NAME]/cryptoKeys/[KEY_NAME]. For more information about protecting resources with Cloud KMS Keys please see: https://cloud.google.com/compute/docs/disks/customer-managed-encryption
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   bootDiskKmsKey?: string;
 
   /**
@@ -588,7 +589,7 @@ model NodeConfig {
   /**
    * List of secondary boot disks attached to the nodes.
    */
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   secondaryBootDisks?: SecondaryBootDisk[];
 
   /**
@@ -619,7 +620,7 @@ model NodeConfig {
   /**
    * List of kubernetes taints to be applied to each node. For more information, including usage and the valid values, see: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
    */
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   taints?: NodeTaint[];
 
   /**
@@ -650,7 +651,7 @@ model NodePool {
   /**
    * Which conditions caused the current node pool state.
    */
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   conditions?: StatusCondition[];
 
   /**
@@ -767,13 +768,13 @@ model NodeNetworkConfig {
   /**
    * Configuration of additional node network interfaces.
    */
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   additionalNodeNetworkConfigs?: AdditionalNodeNetworkConfig[];
 
   /**
    * Configuration of additional pod network interfaces.
    */
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   additionalPodNetworkConfigs?: AdditionalPodNetworkConfig[];
 
   /**
@@ -1148,6 +1149,7 @@ model MasterAuth {
   /**
    * The password to use for HTTP basic authentication.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   password?: string;
 
   /**
@@ -1168,6 +1170,7 @@ model MasterAuth {
   /**
    * Base64-encoded private key used by clients to authenticate to the cluster endpoint.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   clientKey?: string;
 }
 
@@ -1702,7 +1705,7 @@ model AdditionalPodRangesConfig {
   /**
    * Output only. [Output only] Information for additional pod range.
    */
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   podRangeInfo?: RangeInfo[];
 
   /**
@@ -1738,7 +1741,7 @@ model MasterAuthorizedNetworksConfig {
   /**
    * External networks that can access Kubernetes master through HTTPS
    */
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   cidrBlocks?: CidrBlock[];
 
   /**
@@ -1917,7 +1920,7 @@ model ClusterAutoscaling {
   /**
    * Contains global constraints regarding minimum and maximum amount of resources in the cluster
    */
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   resourceLimits?: ResourceLimit[];
 
   /**
@@ -2024,6 +2027,7 @@ model AutoprovisioningNodePoolDefaults {
   /**
    * Boot disk KMS key for NAP created node pools
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   bootDiskKmsKey?: string;
 
   /**
@@ -2307,7 +2311,7 @@ model DatabaseEncryption {
   /**
    * Errors that occurred during the last operation
    */
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   lastOperationErrors?: OperationError[];
 
   /**
@@ -3005,6 +3009,7 @@ model NodeTaint {
   /**
    * Key for taint
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   key?: string;
 
   /**
@@ -3050,6 +3055,7 @@ model ReservationAffinity {
   /**
    * Corresponds to the label key of a reservation resource
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   key?: string;
 
   /**
@@ -3219,7 +3225,7 @@ model SoleTenantConfig {
   /**
    * List of node affinities associated with the sole tenant node pool
    */
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   nodeAffinities?: NodeAffinity[];
 }
 
@@ -3230,6 +3236,7 @@ model NodeAffinity {
   /**
    * Key for NodeAffinity
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   key?: string;
 
   /**
@@ -3265,7 +3272,7 @@ model PrivateRegistryAccessConfig {
   /**
    * List of certificate authority certificates for private registries
    */
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   certificateAuthorityDomainConfig?: CertificateAuthorityDomainConfig[];
 }
 

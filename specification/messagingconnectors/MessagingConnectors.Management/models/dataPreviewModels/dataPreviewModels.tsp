@@ -95,6 +95,7 @@ model JsonConvertedRecord {
   @doc("Header of DataPreview result")
   headers: DataHeader[];
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("Key of DataPreview result")
   key: string;
 

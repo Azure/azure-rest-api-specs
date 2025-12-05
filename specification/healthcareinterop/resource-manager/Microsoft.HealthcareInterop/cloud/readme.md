@@ -27,7 +27,37 @@ These are the global settings for the Microsoft HealthcareInterop Cloud service.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2025-10-01-preview
+tag: package-2025-11-01-preview
+```
+
+### Tag: package-2025-11-01-preview
+
+These settings apply only when `--tag=package-2025-11-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-11-01-preview'
+input-file:
+  - preview/2025-11-01-preview/cloud.json
+suppressions:
+  - code: PatchBodyParametersSchema
+    from: cloud.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareInterop/fhirQueryEventBatchChannels/{fhirQueryEventBatchChannelName}"].patch.parameters[4].schema.properties.properties
+    reason: There are properties (connectorType, emrSystem, triggerType) used as discriminators to support polymorphic resource definitions. The discriminators need to be provided during PATCH to allow updates on certain polymorphic resource properties.
+  - code: PatchBodyParametersSchema
+    from: cloud.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareInterop/fhirQueryFlatFileBatchChannels/{fhirQueryFlatFileBatchChannelName}"].patch.parameters[4].schema.properties.properties
+    reason: There are properties (connectorType, emrSystem, triggerType) used as discriminators to support polymorphic resource definitions. The discriminators need to be provided during PATCH to allow updates on certain polymorphic resource properties.
+  - code: PatchBodyParametersSchema
+    from: cloud.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareInterop/dicomDirectChannels/{dicomDirectChannelName}"].patch.parameters[4].schema.properties.properties
+    reason: There are properties (connectorType) used as discriminators to support polymorphic resource definitions. The discriminators need to be provided during PATCH to allow updates on certain polymorphic resource properties.
+  - code: PatchBodyParametersSchema
+    from: cloud.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareInterop/ddmsFhirEventBatchChannels/{ddmsFhirEventBatchChannelName}"].patch.parameters[4].schema.properties.properties
+    reason: There are properties (connectorType) used as discriminators to support polymorphic resource definitions. The discriminators need to be provided during PATCH to allow updates on certain polymorphic resource properties.
+  - code: PatchBodyParametersSchema
+    from: cloud.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareInterop/ddmsFhirFlatFileBatchChannels/{ddmsFhirFlatFileBatchChannelName}"].patch.parameters[4].schema.properties.properties
+    reason: There are properties (connectorType, emrSystem, triggerType) used as discriminators to support polymorphic resource definitions. The discriminators need to be provided during PATCH to allow updates on certain polymorphic resource properties.
 ```
 
 ### Tag: package-2025-10-01-preview

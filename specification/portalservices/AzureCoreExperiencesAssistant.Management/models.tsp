@@ -35,10 +35,7 @@ model AssistantRequest {
   bladeContext?: PortalBladeContext;
 
   @doc("Past conversation history between the user and the assistant")
-  @OpenAPI.extension(
-    "x-ms-identifiers",
-    #["index", "userInput", "assistantResult"]
-  )
+  @identifiers(#["index", "userInput", "assistantResult"])
   conversationHistory?: ConversationHistoryContext[];
 }
 

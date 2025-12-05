@@ -29,7 +29,7 @@ title: AzureStackHCIClient
 description: Azure Stack HCI management service
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2025-09-22-preview
+tag: package-2025-10
 ```
 
 ## Suppression
@@ -134,11 +134,15 @@ suppressions:
       - updateRuns.json
       - updates.json
       - updateSummaries.json
+      - hci.json
     
   - code: ConsistentPatchProperties
     reason: already used in GA api version, fixing it will cause breaking change
     from:
       - arcSettings.json
+      - hci.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}"].patch.parameters[5]["schema"]
 
   - code: PostResponseCodes
     reason: already used in GA api version, fixing it will cause breaking change
@@ -168,6 +172,7 @@ suppressions:
       - updateRuns.json
       - updates.json
       - updateSummaries.json
+      - hci.json
 
   - code: ProvisioningStateSpecifiedForLROPut
     reason: already working without the properties section, adding it will break polymorphism
@@ -192,7 +197,17 @@ suppressions:
       - updates.json
       - updateRuns.json
       - updateSummaries.json
-
+      - hci.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/updates/{updateName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/updates/{updateName}/updateRuns/{updateRunName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/updateSummaries/default"].put
+  
+  - code: DescriptionMustNotBeNodeName
+    reason: backward compatible
+    from:
+      - hci.json
+  
   - code: TrackedResourcePatchOperation
     reason: these are not tracked resources, so no tags and corresponding patch operation is needed
     from:
@@ -200,6 +215,10 @@ suppressions:
       - updateRuns.json
       - updateSummaries.json
       - hci.json
+    where:
+      - $.definitions.Update
+      - $.definitions.UpdateRun
+      - $.definitions.UpdateSummaries
 
   - code: AvoidAdditionalProperties
     reason: already used in GA api version, fixing it will cause breaking change
@@ -242,6 +261,30 @@ suppressions:
       - edgeDevices.json
       - securitySettings.json
     reason: Changing it will break backward compatibility
+```
+
+### Tag: package-2025-10
+
+These settings apply only when `--tag=package-2025-10` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-10'
+input-file:
+  - stable/2025-10-01/arcSettings.json
+  - stable/2025-10-01/clusters.json
+  - stable/2025-10-01/deploymentSettings.json
+  - stable/2025-10-01/edgeDeviceJobs.json
+  - stable/2025-10-01/edgeDevices.json
+  - stable/2025-10-01/extensions.json
+  - stable/2025-10-01/hciCommon.json
+  - stable/2025-10-01/offers.json
+  - stable/2025-10-01/operations.json
+  - stable/2025-10-01/publishers.json
+  - stable/2025-10-01/securitySettings.json
+  - stable/2025-10-01/skus.json
+  - stable/2025-10-01/updateRuns.json
+  - stable/2025-10-01/updates.json
+  - stable/2025-10-01/updateSummaries.json
+  - stable/2025-10-01/validatedSolutionRecipes.json
 ```
 
 ### Tag: package-preview-2025-09-22-preview

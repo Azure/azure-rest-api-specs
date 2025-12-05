@@ -1,0 +1,82 @@
+{
+  "title": "CloudResources_CreateOrUpdate",
+  "operationId": "CloudResources_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2023-04-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "AnyscaleResourceGroup",
+    "cloudName": "AnyscaleCloud",
+    "cloudResourceName": "AnyscaleCloudResourceName",
+    "resource": {
+      "properties": {
+        "provider": "Anyscale",
+        "computeStack": "AnyscaleComputeStack",
+        "cloudStorageBucketName": "AnyscaleCloudStorageBucket",
+        "cloudStorageBucketEndpoint": "https://anyscalecloudstoragebucket.blob.core.windows.net"
+      },
+      "tags": {
+        "test": "AnyscaleTag"
+      },
+      "location": "eastus"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "cloudResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/AnyscaleResourceGroup/providers/Anyscale.Platform/cloudResources/AnyscaleCloudResourceId",
+          "provider": "Anyscale",
+          "computeStack": "AnyscaleComputeStack",
+          "cloudStorageBucketName": "AnyscaleCloudStorageBucket",
+          "cloudStorageBucketEndpoint": "https://anyscalecloudstoragebucket.blob.core.windows.net",
+          "provisioningState": "Succeeded"
+        },
+        "tags": {
+          "test": "AnyscaleTag"
+        },
+        "location": "eastus",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/AnyscaleResourceGroup/providers/Anyscale.Platform/cloudResources/AnyscaleCloudResourceId",
+        "name": "AnyscaleCloud",
+        "type": "Anyscale.Platform/cloudResources",
+        "systemData": {
+          "createdBy": "AnyscaleUser",
+          "createdByType": "User",
+          "createdAt": "2025-11-01T10:30:45.678Z",
+          "lastModifiedBy": "Anyscale",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-11-20T10:23:45.678Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://anyscale.com/operationstatus"
+      },
+      "body": {
+        "properties": {
+          "cloudResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/AnyscaleResourceGroup/providers/Anyscale.Platform/cloudResources/AnyscaleCloudResourceId",
+          "provider": "Anyscale",
+          "computeStack": "AnyscaleComputeStack",
+          "cloudStorageBucketName": "AnyscaleCloudStorageBucket",
+          "cloudStorageBucketEndpoint": "https://anyscalecloudstoragebucket.blob.core.windows.net",
+          "provisioningState": "Succeeded"
+        },
+        "tags": {
+          "test": "AnyscaleTag"
+        },
+        "location": "eastus",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/AnyscaleResourceGroup/providers/Anyscale.Platform/cloudResources/AnyscaleCloudResourceId",
+        "name": "AnyscaleCloud",
+        "type": "Anyscale.Platform/cloudResources",
+        "systemData": {
+          "createdBy": "AnyscaleUser",
+          "createdByType": "User",
+          "createdAt": "2025-11-01T10:30:45.678Z",
+          "lastModifiedBy": "Anyscale",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-11-20T10:23:45.678Z"
+        }
+      }
+    }
+  }
+}

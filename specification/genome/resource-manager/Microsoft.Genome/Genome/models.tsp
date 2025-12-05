@@ -4,11 +4,7 @@ import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
-using TypeSpec.Http;
-using TypeSpec.OpenAPI;
-using Azure.Core;
 using Azure.ResourceManager;
-using Azure.ResourceManager.CommonTypes;
 
 namespace Microsoft.Genome;
 
@@ -182,7 +178,7 @@ model NetworkRuleSet {
   bypass?: NetworkRuleBypass;
 
   /** The list of IP address rules. */
-  @OpenAPI.extension("x-ms-identifiers", #["value"])
+  @identifiers(#["value"])
   ipRules?: IpRule[];
 
   /** The list of virtual network rules. */
