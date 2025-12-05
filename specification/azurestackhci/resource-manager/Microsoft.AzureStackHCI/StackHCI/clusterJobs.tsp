@@ -50,8 +50,7 @@ union HciJobType {
   /** Job to configure arc gateway for the cluster. */
   ConfigureArcGateway: "ConfigureArcGateway",
 
-  GpuCreatePartition : "GpuCreatePartition",
-
+  GpuCreatePartition: "GpuCreatePartition",
   GpuSwitchMode: "GpuSwitchMode",
 }
 
