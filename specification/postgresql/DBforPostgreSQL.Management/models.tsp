@@ -1083,21 +1083,21 @@ model Capability extends CapabilityBase {
    * List of supported compute tiers.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   supportedServerEditions?: ServerEditionCapability[];
 
   /**
    * List of supported major versions of PostgreSQL database engine.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   supportedServerVersions?: ServerVersionCapability[];
 
   /**
    * Features supported.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   supportedFeatures?: SupportedFeature[];
 
   /**
@@ -1110,7 +1110,7 @@ model Capability extends CapabilityBase {
    * List of compute tiers supporting fast provisioning.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["supportedSku"])
+  @identifiers(#["supportedSku"])
   supportedFastProvisioningEditions?: FastProvisioningEditionCapability[];
 
   /**
@@ -1171,14 +1171,14 @@ model ServerEditionCapability extends CapabilityBase {
    * List of storage editions supported by this compute tier and compute name.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   supportedStorageEditions?: StorageEditionCapability[];
 
   /**
    * List of supported compute names (SKUs).
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   supportedServerSkus?: ServerSkuCapability[];
 }
 
@@ -1203,7 +1203,7 @@ model StorageEditionCapability extends CapabilityBase {
    * Configurations of storage supported for this storage tier.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["storageSizeMb"])
+  @identifiers(#["storageSizeMb"])
   supportedStorageMb?: StorageMbCapability[];
 }
 
@@ -1258,7 +1258,7 @@ model StorageMbCapability extends CapabilityBase {
    * List of all supported storage tiers for this tier and storage size.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   supportedIopsTiers?: StorageTierCapability[];
 }
 
@@ -1342,7 +1342,7 @@ model ServerSkuCapability extends CapabilityBase {
    * Features supported.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   supportedFeatures?: SupportedFeature[];
 
   /**
@@ -1390,7 +1390,7 @@ model ServerVersionCapability extends CapabilityBase {
    * Features supported.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   supportedFeatures?: SupportedFeature[];
 }
 
@@ -1840,6 +1840,7 @@ model MigrationProperties {
   /**
    * Names of databases to migrate.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @OpenAPI.extension("x-ms-identifiers", #[])
   @maxItems(50)
   dbsToMigrate?: string[];
@@ -1884,6 +1885,7 @@ model MigrationProperties {
   /**
    * When you want to trigger cutover for specific databases set 'triggerCutover' to 'True' and the names of the specific databases in this array.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @OpenAPI.extension("x-ms-identifiers", #[])
   dbsToTriggerCutoverOn?: string[];
 
@@ -1895,6 +1897,7 @@ model MigrationProperties {
   /**
    * When you want to trigger cancel for specific databases set 'triggerCutover' to 'True' and the names of the specific databases in this array.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @OpenAPI.extension("x-ms-identifiers", #[])
   dbsToCancelMigrationOn?: string[];
 }
@@ -2050,13 +2053,13 @@ model ValidationDetails {
   /**
    * Details of server level validations.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   serverLevelValidationDetails?: ValidationSummaryItem[];
 
   /**
    * Details of server level validations.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["databaseName"])
+  @identifiers(#["databaseName"])
   dbLevelValidationDetails?: DbLevelValidationStatus[];
 }
 
@@ -2077,7 +2080,7 @@ model ValidationSummaryItem {
   /**
    * Validation messages.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   messages?: ValidationMessage[];
 }
 
@@ -2120,7 +2123,7 @@ model DbLevelValidationStatus {
   /**
    * Summary of database level validations.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   summary?: ValidationSummaryItem[];
 }
 
@@ -2249,6 +2252,7 @@ model MigrationPropertiesForPatch {
   /**
    * Names of databases to migrate.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @OpenAPI.extension("x-ms-identifiers", #[])
   @maxItems(50)
   dbsToMigrate?: string[];
@@ -2287,6 +2291,7 @@ model MigrationPropertiesForPatch {
   /**
    * When you want to trigger cutover for specific databases set 'triggerCutover' to 'True' and the names of the specific databases in this array.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @OpenAPI.extension("x-ms-identifiers", #[])
   dbsToTriggerCutoverOn?: string[];
 
@@ -2298,6 +2303,7 @@ model MigrationPropertiesForPatch {
   /**
    * When you want to trigger cancel for specific databases set 'triggerCutover' to 'True' and the names of the specific databases in this array.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @OpenAPI.extension("x-ms-identifiers", #[])
   dbsToCancelMigrationOn?: string[];
 
@@ -3072,6 +3078,11 @@ model ServerPropertiesForPatch {
   dataEncryption?: DataEncryption;
 
   /**
+   * Availability zone of a server.
+   */
+  availabilityZone?: string = "";
+
+  /**
    * Update mode of an existing server.
    */
   @visibility(Lifecycle.Update)
@@ -3283,7 +3294,7 @@ model ObjectRecommendationProperties {
    * Estimated impact of this recommended action.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["dimensionName"])
+  @identifiers(#["dimensionName"])
   estimatedImpact?: ImpactRecord[];
 
   /**
@@ -3454,7 +3465,7 @@ model VirtualNetworkSubnetUsageParameter {
 model VirtualNetworkSubnetUsageModel {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["subnetName"])
+  @identifiers(#["subnetName"])
   delegatedSubnetsUsage?: DelegatedSubnetUsage[];
 
   /**
@@ -3522,11 +3533,8 @@ model OperationList is Azure.Core.Page<Operation>;
 @@visibility(PrivateEndpointConnectionList.value, Lifecycle.Read);
 @@visibility(PrivateLinkResourceList.value, Lifecycle.Read);
 @@visibility(QuotaUsageList.value, Lifecycle.Read);
-@@OpenAPI.extension(CapabilityList.value, "x-ms-identifiers", #["name"]);
-@@OpenAPI.extension(ObjectRecommendationList.value,
-  "x-ms-identifiers",
-  #["name"]
-);
-@@OpenAPI.extension(OperationList.value, "x-ms-identifiers", #["name"]);
-@@OpenAPI.extension(QuotaUsageList.value, "x-ms-identifiers", #["name"]);
-@@OpenAPI.extension(TuningOptionsList.value, "x-ms-identifiers", #["name"]);
+@@identifiers(CapabilityList.value, #["name"]);
+@@identifiers(ObjectRecommendationList.value, #["name"]);
+@@identifiers(OperationList.value, #["name"]);
+@@identifiers(QuotaUsageList.value, #["name"]);
+@@identifiers(TuningOptionsList.value, #["name"]);

@@ -43,8 +43,7 @@ interface Configurations {
   put is Azure.ResourceManager.Legacy.CreateOrReplaceAsync<
     Configuration,
     ConfigurationForUpdate,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
-      ArmLroLocationHeader &
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = Configuration> &
       Azure.Core.Foundations.RetryAfterHeader>
   >;
 
@@ -56,8 +55,7 @@ interface Configurations {
   update is ArmCustomPatchAsync<
     Configuration,
     PatchModel = ConfigurationForUpdate,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
-      ArmLroLocationHeader &
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = Configuration> &
       Azure.Core.Foundations.RetryAfterHeader>
   >;
 

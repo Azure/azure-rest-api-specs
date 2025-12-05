@@ -44,8 +44,7 @@ interface AdministratorMicrosoftEntras {
   createOrUpdate is Legacy.CreateOrReplaceAsync<
     AdministratorMicrosoftEntra,
     Request = AdministratorMicrosoftEntraAdd,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
-      ArmLroLocationHeader &
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = AdministratorMicrosoftEntra> &
       Azure.Core.Foundations.RetryAfterHeader>
   >;
 

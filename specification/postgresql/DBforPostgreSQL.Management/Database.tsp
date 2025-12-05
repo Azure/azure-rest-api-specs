@@ -39,8 +39,7 @@ interface Databases {
   @useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrReplaceAsync<
     Database,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
-      ArmLroLocationHeader &
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = Database> &
       Azure.Core.Foundations.RetryAfterHeader>
   >;
 

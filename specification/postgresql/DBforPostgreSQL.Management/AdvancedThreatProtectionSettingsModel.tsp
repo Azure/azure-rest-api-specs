@@ -41,8 +41,7 @@ interface AdvancedThreatProtectionSettingsModels {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     AdvancedThreatProtectionSettingsModel,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
-      ArmLroLocationHeader &
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = AdvancedThreatProtectionSettingsModel> &
       Azure.Core.Foundations.RetryAfterHeader>
   >;
 

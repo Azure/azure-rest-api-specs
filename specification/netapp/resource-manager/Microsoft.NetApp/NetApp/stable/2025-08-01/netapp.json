@@ -3780,97 +3780,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/listQuotaReport": {
-      "post": {
-        "operationId": "Volumes_ListQuotaReport",
-        "tags": [
-          "Volumes"
-        ],
-        "description": "A long-running resource action.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "description": "The name of the NetApp account",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,127}$"
-          },
-          {
-            "name": "poolName",
-            "in": "path",
-            "description": "The name of the capacity pool",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,63}$"
-          },
-          {
-            "name": "volumeName",
-            "in": "path",
-            "description": "The name of the volume",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "pattern": "^[a-zA-Z][a-zA-Z0-9\\-_]{0,63}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ListQuotaReportResponse"
-            }
-          },
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "format": "uri",
-                "description": "A link to the status monitor"
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ListQuotaReport": {
-            "$ref": "./examples/Volumes_ListQuotaReport.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/ListQuotaReportResponse"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/listReplications": {
       "post": {
         "operationId": "Volumes_ListReplications",
@@ -7868,10 +7777,6 @@
           "$ref": "#/definitions/MultiAdStatus",
           "description": "MultiAD Status for the account",
           "readOnly": true
-        },
-        "ldapConfiguration": {
-          "$ref": "#/definitions/LdapConfiguration",
-          "description": "LDAP Configuration for the account."
         }
       }
     },
@@ -9106,48 +9011,6 @@
         }
       }
     },
-    "ExternalReplicationSetupStatus": {
-      "type": "string",
-      "description": "Property that only applies to external replications. Provides a machine-readable value for the status of the external replication setup.",
-      "enum": [
-        "ClusterPeerRequired",
-        "ClusterPeerPending",
-        "VServerPeerRequired",
-        "ReplicationCreateRequired",
-        "NoActionRequired"
-      ],
-      "x-ms-enum": {
-        "name": "ExternalReplicationSetupStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "ClusterPeerRequired",
-            "value": "ClusterPeerRequired",
-            "description": "Your cluster needs to be peered by using the 'peerExternalCluster' action"
-          },
-          {
-            "name": "ClusterPeerPending",
-            "value": "ClusterPeerPending",
-            "description": "The peering needs to be accepted on your cluster before the setup can proceed"
-          },
-          {
-            "name": "VServerPeerRequired",
-            "value": "VServerPeerRequired",
-            "description": "Need to call 'authorizeExternalReplication' and accept the returned 'vserver peer accept' command on your cluster to finish setting up the external replication"
-          },
-          {
-            "name": "ReplicationCreateRequired",
-            "value": "ReplicationCreateRequired",
-            "description": "Need to call 'authorizeExternalReplication' to finish setting up the external replication"
-          },
-          {
-            "name": "NoActionRequired",
-            "value": "NoActionRequired",
-            "description": "External Replication setup is complete, you can now monitor the 'mirrorState' in the replication status for the health of the replication"
-          }
-        ]
-      }
-    },
     "FileName": {
       "type": "string",
       "minLength": 1,
@@ -9411,42 +9274,6 @@
         ]
       }
     },
-    "LdapConfiguration": {
-      "type": "object",
-      "description": "LDAP configuration",
-      "properties": {
-        "domain": {
-          "type": "string",
-          "description": "Name of the LDAP configuration domain",
-          "maxLength": 255,
-          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9.-]{0,253}[a-zA-Z0-9]$"
-        },
-        "ldapServers": {
-          "type": "array",
-          "description": "List of LDAP server IP addresses (IPv4 only) for the LDAP domain.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "ldapOverTLS": {
-          "type": "boolean",
-          "description": "Specifies whether or not the LDAP traffic needs to be secured via TLS."
-        },
-        "serverCACertificate": {
-          "type": "string",
-          "format": "password",
-          "description": "When LDAP over SSL/TLS is enabled, the LDAP client is required to have base64 encoded ldap servers CA certificate.",
-          "minLength": 1,
-          "maxLength": 10240,
-          "x-ms-secret": true
-        },
-        "certificateCNHost": {
-          "type": "string",
-          "description": "The CN host name used while generating the certificate, LDAP Over TLS requires the CN host name to create DNS host entry.",
-          "x-nullable": true
-        }
-      }
-    },
     "LdapSearchScopeOpt": {
       "type": "object",
       "description": "LDAP search scope",
@@ -9465,44 +9292,6 @@
           "type": "string",
           "description": "This specifies the custom LDAP search filter to be used when looking up group membership from LDAP server.",
           "maxLength": 255
-        }
-      }
-    },
-    "LdapServerType": {
-      "type": "string",
-      "description": "The type of the LDAP server",
-      "enum": [
-        "ActiveDirectory",
-        "OpenLDAP"
-      ],
-      "x-ms-enum": {
-        "name": "LdapServerType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "ActiveDirectory",
-            "value": "ActiveDirectory",
-            "description": "The volume should use Active Directory for LDAP connections."
-          },
-          {
-            "name": "OpenLDAP",
-            "value": "OpenLDAP",
-            "description": "The volume should use OpenLDAP for LDAP connections."
-          }
-        ]
-      }
-    },
-    "ListQuotaReportResponse": {
-      "type": "object",
-      "description": "Quota Report for volume",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "List of quota reports",
-          "items": {
-            "$ref": "#/definitions/QuotaReport"
-          },
-          "x-ms-identifiers": []
         }
       }
     },
@@ -9890,37 +9679,37 @@
           {
             "name": "Accepted",
             "value": "Accepted",
-            "description": "Accepted"
+            "description": "Resource has been Accepted"
           },
           {
             "name": "Creating",
             "value": "Creating",
-            "description": "Creating"
+            "description": "Resource is being Created"
           },
           {
             "name": "Patching",
             "value": "Patching",
-            "description": "Patching"
+            "description": "Resource is being Patched"
           },
           {
             "name": "Deleting",
             "value": "Deleting",
-            "description": "Deleting"
+            "description": "Resource is being Deleted"
           },
           {
             "name": "Moving",
             "value": "Moving",
-            "description": "Moving"
+            "description": "Resource is being Moved"
           },
           {
             "name": "Failed",
             "value": "Failed",
-            "description": "Failed"
+            "description": "Resource has Failed"
           },
           {
             "name": "Succeeded",
             "value": "Succeeded",
-            "description": "Succeeded"
+            "description": "Resource has Succeeded"
           }
         ]
       },
@@ -10044,11 +9833,11 @@
     },
     "NicInfo": {
       "type": "object",
-      "description": "NIC information and list of volumes for which the NIC has the primary mount ip address.",
+      "description": "NIC information and list of volumes for which the NIC has the primary mount IP Address.",
       "properties": {
         "ipAddress": {
           "type": "string",
-          "description": "ipAddress",
+          "description": "IP Address",
           "readOnly": true
         },
         "volumeResourceIds": {
@@ -10509,39 +10298,6 @@
         }
       }
     },
-    "QuotaReport": {
-      "type": "object",
-      "description": "Quota report record properties",
-      "properties": {
-        "quotaType": {
-          "$ref": "#/definitions/Type",
-          "description": "Type of quota"
-        },
-        "quotaTarget": {
-          "type": "string",
-          "description": "UserID/GroupID/SID based on the quota target type. UserID and groupID can be found by running ‘id’ or ‘getent’ command for the user or group and SID can be found by running <wmic useraccount where name='user-name' get sid>"
-        },
-        "quotaLimitUsedInKiBs": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Specifies the current usage in kibibytes for the user/group quota."
-        },
-        "quotaLimitTotalInKiBs": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Specifies the total size limit in kibibytes for the user/group quota."
-        },
-        "percentageUsed": {
-          "type": "number",
-          "format": "float",
-          "description": "Percentage of used size compared to total size."
-        },
-        "isDerivedQuota": {
-          "type": "boolean",
-          "description": "Flag to indicate whether the quota is derived from default quota."
-        }
-      }
-    },
     "ReestablishReplicationRequest": {
       "type": "object",
       "description": "Re-establish request object supplied in the body of the operation.",
@@ -10843,26 +10599,6 @@
           "x-ms-identifiers": [
             "resourceId"
           ]
-        },
-        "externalReplicationSetupStatus": {
-          "$ref": "#/definitions/ExternalReplicationSetupStatus",
-          "description": "Property that only applies to external replications. Provides a machine-readable value for the status of the external replication setup.",
-          "readOnly": true
-        },
-        "externalReplicationSetupInfo": {
-          "type": "string",
-          "description": "Contains human-readable instructions on what the next step is to finish the external replication setup.",
-          "readOnly": true
-        },
-        "mirrorState": {
-          "$ref": "#/definitions/MirrorState",
-          "description": "The mirror state property describes the current status of data replication for a replication. It provides insight into whether the data is actively being mirrored, if the replication process has been paused, or if it has yet to be initialized.",
-          "readOnly": true
-        },
-        "relationshipStatus": {
-          "$ref": "#/definitions/VolumeReplicationRelationshipStatus",
-          "description": "The status of the Volume Replication",
-          "readOnly": true
         }
       }
     },
@@ -12064,432 +11800,6 @@
         "properties"
       ]
     },
-    "VolumeLanguage": {
-      "type": "string",
-      "description": "Language supported for volume.",
-      "enum": [
-        "c.utf-8",
-        "utf8mb4",
-        "ar",
-        "ar.utf-8",
-        "hr",
-        "hr.utf-8",
-        "cs",
-        "cs.utf-8",
-        "da",
-        "da.utf-8",
-        "nl",
-        "nl.utf-8",
-        "en",
-        "en.utf-8",
-        "fi",
-        "fi.utf-8",
-        "fr",
-        "fr.utf-8",
-        "de",
-        "de.utf-8",
-        "he",
-        "he.utf-8",
-        "hu",
-        "hu.utf-8",
-        "it",
-        "it.utf-8",
-        "ja",
-        "ja.utf-8",
-        "ja-v1",
-        "ja-v1.utf-8",
-        "ja-jp.pck",
-        "ja-jp.pck.utf-8",
-        "ja-jp.932",
-        "ja-jp.932.utf-8",
-        "ja-jp.pck-v2",
-        "ja-jp.pck-v2.utf-8",
-        "ko",
-        "ko.utf-8",
-        "no",
-        "no.utf-8",
-        "pl",
-        "pl.utf-8",
-        "pt",
-        "pt.utf-8",
-        "c",
-        "ro",
-        "ro.utf-8",
-        "ru",
-        "ru.utf-8",
-        "zh",
-        "zh.utf-8",
-        "zh.gbk",
-        "zh.gbk.utf-8",
-        "zh-tw.big5",
-        "zh-tw.big5.utf-8",
-        "zh-tw",
-        "zh-tw.utf-8",
-        "sk",
-        "sk.utf-8",
-        "sl",
-        "sl.utf-8",
-        "es",
-        "es.utf-8",
-        "sv",
-        "sv.utf-8",
-        "tr",
-        "tr.utf-8",
-        "en-us",
-        "en-us.utf-8"
-      ],
-      "x-ms-enum": {
-        "name": "VolumeLanguage",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "c.utf-8",
-            "value": "c.utf-8",
-            "description": "Posix with UTF-8"
-          },
-          {
-            "name": "utf8mb4",
-            "value": "utf8mb4",
-            "description": "UTF-8 with 4 byte character support"
-          },
-          {
-            "name": "ar",
-            "value": "ar",
-            "description": "Arabic - Deprecated"
-          },
-          {
-            "name": "ar.utf-8",
-            "value": "ar.utf-8",
-            "description": "Arabic with UTF-8"
-          },
-          {
-            "name": "hr",
-            "value": "hr",
-            "description": "Croatian - Deprecated"
-          },
-          {
-            "name": "hr.utf-8",
-            "value": "hr.utf-8",
-            "description": "Croatian with UTF-8"
-          },
-          {
-            "name": "cs",
-            "value": "cs",
-            "description": "Czech - Deprecated"
-          },
-          {
-            "name": "cs.utf-8",
-            "value": "cs.utf-8",
-            "description": "Czech with UTF-8"
-          },
-          {
-            "name": "da",
-            "value": "da",
-            "description": "Danish - Deprecated"
-          },
-          {
-            "name": "da.utf-8",
-            "value": "da.utf-8",
-            "description": "Danish with UTF-8"
-          },
-          {
-            "name": "nl",
-            "value": "nl",
-            "description": "Dutch - Deprecated"
-          },
-          {
-            "name": "nl.utf-8",
-            "value": "nl.utf-8",
-            "description": "Dutch with UTF-8"
-          },
-          {
-            "name": "en",
-            "value": "en",
-            "description": "English - Deprecated"
-          },
-          {
-            "name": "en.utf-8",
-            "value": "en.utf-8",
-            "description": "English with UTF-8"
-          },
-          {
-            "name": "fi",
-            "value": "fi",
-            "description": "Finnish - Deprecated"
-          },
-          {
-            "name": "fi.utf-8",
-            "value": "fi.utf-8",
-            "description": "Finnish with UTF-8"
-          },
-          {
-            "name": "fr",
-            "value": "fr",
-            "description": "French - Deprecated"
-          },
-          {
-            "name": "fr.utf-8",
-            "value": "fr.utf-8",
-            "description": "French with UTF-8"
-          },
-          {
-            "name": "de",
-            "value": "de",
-            "description": "German - Deprecated"
-          },
-          {
-            "name": "de.utf-8",
-            "value": "de.utf-8",
-            "description": "German with UTF-8"
-          },
-          {
-            "name": "he",
-            "value": "he",
-            "description": "Hebrew - Deprecated"
-          },
-          {
-            "name": "he.utf-8",
-            "value": "he.utf-8",
-            "description": "Hebrew with UTF-8"
-          },
-          {
-            "name": "hu",
-            "value": "hu",
-            "description": "Hungarian - Deprecated"
-          },
-          {
-            "name": "hu.utf-8",
-            "value": "hu.utf-8",
-            "description": "Hungarian with UTF-8"
-          },
-          {
-            "name": "it",
-            "value": "it",
-            "description": "Italian - Deprecated"
-          },
-          {
-            "name": "it.utf-8",
-            "value": "it.utf-8",
-            "description": "Italian with UTF-8"
-          },
-          {
-            "name": "ja",
-            "value": "ja",
-            "description": "Japanese euc-j - Deprecated"
-          },
-          {
-            "name": "ja.utf-8",
-            "value": "ja.utf-8",
-            "description": "Japanese euc-j with UTF-8"
-          },
-          {
-            "name": "ja-v1",
-            "value": "ja-v1",
-            "description": "Japanese euc-j - Deprecated"
-          },
-          {
-            "name": "ja-v1.utf-8",
-            "value": "ja-v1.utf-8",
-            "description": "Japanese euc-j with UTF-8"
-          },
-          {
-            "name": "ja-jp.pck",
-            "value": "ja-jp.pck",
-            "description": "Japanese pck"
-          },
-          {
-            "name": "ja-jp.pck.utf-8",
-            "value": "ja-jp.pck.utf-8",
-            "description": "Japanese pck with UTF-8 - Deprecated"
-          },
-          {
-            "name": "ja-jp.932",
-            "value": "ja-jp.932",
-            "description": "Japanese cp932"
-          },
-          {
-            "name": "ja-jp.932.utf-8",
-            "value": "ja-jp.932.utf-8",
-            "description": "Japanese cp932 with UTF-8 - Deprecated"
-          },
-          {
-            "name": "ja-jp.pck-v2",
-            "value": "ja-jp.pck-v2",
-            "description": "Japanese pck - sjis"
-          },
-          {
-            "name": "ja-jp.pck-v2.utf-8",
-            "value": "ja-jp.pck-v2.utf-8",
-            "description": "Japanese pck - sjis with UTF-8 - Deprecated"
-          },
-          {
-            "name": "ko",
-            "value": "ko",
-            "description": "Korean - Deprecated"
-          },
-          {
-            "name": "ko.utf-8",
-            "value": "ko.utf-8",
-            "description": "Korean with UTF-8"
-          },
-          {
-            "name": "no",
-            "value": "no",
-            "description": "Norwegian - Deprecated"
-          },
-          {
-            "name": "no.utf-8",
-            "value": "no.utf-8",
-            "description": "Norwegian with UTF-8"
-          },
-          {
-            "name": "pl",
-            "value": "pl",
-            "description": "Polish - Deprecated"
-          },
-          {
-            "name": "pl.utf-8",
-            "value": "pl.utf-8",
-            "description": "Polish with UTF-8"
-          },
-          {
-            "name": "pt",
-            "value": "pt",
-            "description": "Portuguese - Deprecated"
-          },
-          {
-            "name": "pt.utf-8",
-            "value": "pt.utf-8",
-            "description": "Portuguese with UTF-8"
-          },
-          {
-            "name": "c",
-            "value": "c",
-            "description": "Posix - Deprecated"
-          },
-          {
-            "name": "ro",
-            "value": "ro",
-            "description": "Romanian - Deprecated"
-          },
-          {
-            "name": "ro.utf-8",
-            "value": "ro.utf-8",
-            "description": "Romanian with UTF-8"
-          },
-          {
-            "name": "ru",
-            "value": "ru",
-            "description": "Russian - Deprecated"
-          },
-          {
-            "name": "ru.utf-8",
-            "value": "ru.utf-8",
-            "description": "Russian with UTF-8"
-          },
-          {
-            "name": "zh",
-            "value": "zh",
-            "description": "Simplified Chinese - Deprecated"
-          },
-          {
-            "name": "zh.utf-8",
-            "value": "zh.utf-8",
-            "description": "Simplified Chinese with UTF-8"
-          },
-          {
-            "name": "zh.gbk",
-            "value": "zh.gbk",
-            "description": "Simplified gbk Chinese"
-          },
-          {
-            "name": "zh.gbk.utf-8",
-            "value": "zh.gbk.utf-8",
-            "description": "Simplified gbk Chinese with UTF-8 - Deprecated"
-          },
-          {
-            "name": "zh-tw.big5",
-            "value": "zh-tw.big5",
-            "description": "Traditional Chinese BIG 5"
-          },
-          {
-            "name": "zh-tw.big5.utf-8",
-            "value": "zh-tw.big5.utf-8",
-            "description": "Traditional Chinese BIG 5 with UTF-8 - Deprecated"
-          },
-          {
-            "name": "zh-tw",
-            "value": "zh-tw",
-            "description": "Traditional Chinese EUC-TW"
-          },
-          {
-            "name": "zh-tw.utf-8",
-            "value": "zh-tw.utf-8",
-            "description": "Traditional Chinese EUC-TW with UTF-8 - Deprecated"
-          },
-          {
-            "name": "sk",
-            "value": "sk",
-            "description": "Slovak - Deprecated"
-          },
-          {
-            "name": "sk.utf-8",
-            "value": "sk.utf-8",
-            "description": "Slovak with UTF-8"
-          },
-          {
-            "name": "sl",
-            "value": "sl",
-            "description": "Slovenian - Deprecated"
-          },
-          {
-            "name": "sl.utf-8",
-            "value": "sl.utf-8",
-            "description": "Slovenian with UTF-8"
-          },
-          {
-            "name": "es",
-            "value": "es",
-            "description": "Spanish - Deprecated"
-          },
-          {
-            "name": "es.utf-8",
-            "value": "es.utf-8",
-            "description": "Spanish with UTF-8"
-          },
-          {
-            "name": "sv",
-            "value": "sv",
-            "description": "Swedish - Deprecated"
-          },
-          {
-            "name": "sv.utf-8",
-            "value": "sv.utf-8",
-            "description": "Swedish with UTF-8"
-          },
-          {
-            "name": "tr",
-            "value": "tr",
-            "description": "Turkish - Deprecated"
-          },
-          {
-            "name": "tr.utf-8",
-            "value": "tr.utf-8",
-            "description": "Turkish with UTF-8"
-          },
-          {
-            "name": "en-us",
-            "value": "en-us",
-            "description": "US English - Deprecated"
-          },
-          {
-            "name": "en-us.utf-8",
-            "value": "en-us.utf-8",
-            "description": "US English with UTF-8"
-          }
-        ]
-      }
-    },
     "VolumeList": {
       "type": "object",
       "description": "List of volume resources",
@@ -13041,14 +12351,6 @@
             "create"
           ]
         },
-        "ldapServerType": {
-          "$ref": "#/definitions/LdapServerType",
-          "description": "Specifies the type of LDAP server for a given NFS volume.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
         "coolAccess": {
           "type": "boolean",
           "description": "Specifies whether Cool Access(tiering) is enabled for the volume.",
@@ -13256,10 +12558,6 @@
           "description": "Space shared by short term clone volume with parent volume in bytes.",
           "x-nullable": true,
           "readOnly": true
-        },
-        "language": {
-          "$ref": "#/definitions/VolumeLanguage",
-          "description": "Language supported for volume."
         }
       },
       "required": [
