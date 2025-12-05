@@ -42,9 +42,8 @@ interface BulkActions {
     Parameters = LaunchBulkInstancesOperationId
   >;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "ArmResourceActionNoContentAsync allows only 202 responses and has no field for default response"
   @doc("Cancels LaunchBulkInstancesOperation instances that have not yet launched.")
-  cancel is ArmResourceActionNoContentAsync<
+  cancel is ArmResourceActionNoResponseContentAsync<
     Resource = LocationBasedLaunchBulkInstancesOperation,
     Request = void,
     Parameters = LaunchBulkInstancesOperationId
