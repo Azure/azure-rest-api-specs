@@ -27,7 +27,8 @@ These are the global settings for the API.
 ``` yaml
 openapi-type: arm
 tag: package-2024-12-01-preview
-
+# Default to track2 for Go
+track2: true
 ```
 
 ### Tag: package-2024-12-01-preview
