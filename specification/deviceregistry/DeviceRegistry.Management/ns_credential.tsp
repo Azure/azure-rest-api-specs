@@ -8,6 +8,7 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
+using Azure.Core;
 
 namespace Microsoft.DeviceRegistry;
 
@@ -35,7 +36,11 @@ model CredentialProperties {
 @added(Versions.v2026_04_01)
 model CredentialsRevokeDeviceAccessRequest {
   @doc("List of device ids from which access was revoked.")
-  deviceIds: string[];
+  deviceIds: armResourceIdentifier<[
+    {
+      type: "Microsoft.DeviceRegistry/namespaces/devices";
+    }
+  ]>[];
 
   @doc("Indicates whether to disable the device(s) after revoking access.")
   disable?: boolean;
