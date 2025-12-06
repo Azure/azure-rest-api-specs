@@ -93,18 +93,18 @@ model RegionalMoveContainerProperties {
 
   /** The list of resources to be copied. */
   @identifiers(#["sourceResourceId"])
-  requestedResources: ResourceMoveRequest[];
+  requestedResources: RegionalMoveRequestedResource[];
 
   /** Status of operations for each resource in the move container. */
   @visibility(Lifecycle.Read)
   @identifiers(#["sourceResourceId"])
-  resourceStatusDetails?: ResourceMoveStatusInfo[];
+  resourceStatusDetails?: RegionalMoveResourceStatusDetail[];
 
   ...ErrorResponse;
 }
 
 /** Information about the resource to be copied */
-model ResourceMoveRequest {
+model RegionalMoveRequestedResource {
   /** Resource ID of the resource being copied */
   sourceResourceId: string;
 
@@ -120,7 +120,7 @@ model ResourceMoveRequest {
 }
 
 /** Represents the status details (state, errors, etc.) of a resource within a move container. */
-model ResourceMoveStatusInfo {
+model RegionalMoveResourceStatusDetail {
   /** Resource ID of the resource being moved/copied. */
   sourceResourceId: string;
 
@@ -131,7 +131,7 @@ model ResourceMoveStatusInfo {
 }
 
 /** Represents the finalization request body. */
-model FinalizationRequest {
+model RegionalMoveFinalizationRequestContent {
   /**
    * List of fully-qualified resource IDs to mark for finalization. Each resource ID specified should be part of the Regional Move Container.
    * If you set this to null, all resources in the move container will be marked for finalization.

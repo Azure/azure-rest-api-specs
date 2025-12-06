@@ -28,7 +28,7 @@ interface RegionalMoveContainers {
   @action("finalize")
   finalize is ArmResourceActionSync<
     RegionalMoveContainer,
-    FinalizationRequest,
+    RegionalMoveFinalizationRequestContent,
     OkResponse,
     OptionalRequestBody = true
   >;

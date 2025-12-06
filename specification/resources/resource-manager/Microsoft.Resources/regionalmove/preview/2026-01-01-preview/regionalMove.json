@@ -386,7 +386,7 @@
             "description": "The content of the action request",
             "required": false,
             "schema": {
-              "$ref": "#/definitions/FinalizationRequest"
+              "$ref": "#/definitions/RegionalMoveFinalizationRequestContent"
             }
           }
         ],
@@ -410,19 +410,6 @@
     }
   },
   "definitions": {
-    "FinalizationRequest": {
-      "type": "object",
-      "description": "Represents the finalization request body.",
-      "properties": {
-        "resourceIds": {
-          "type": "array",
-          "description": "List of fully-qualified resource IDs to mark for finalization. Each resource ID specified should be part of the Regional Move Container.\nIf you set this to null, all resources in the move container will be marked for finalization.",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "RegionalMoveContainer": {
       "type": "object",
       "description": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
@@ -483,7 +470,7 @@
           "type": "array",
           "description": "The list of resources to be copied.",
           "items": {
-            "$ref": "#/definitions/ResourceMoveRequest"
+            "$ref": "#/definitions/RegionalMoveRequestedResource"
           },
           "x-ms-identifiers": [
             "sourceResourceId"
@@ -493,7 +480,7 @@
           "type": "array",
           "description": "Status of operations for each resource in the move container.",
           "items": {
-            "$ref": "#/definitions/ResourceMoveStatusInfo"
+            "$ref": "#/definitions/RegionalMoveResourceStatusDetail"
           },
           "readOnly": true,
           "x-ms-identifiers": [
@@ -519,6 +506,19 @@
           "type": "object",
           "description": "Resource tags.",
           "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "RegionalMoveFinalizationRequestContent": {
+      "type": "object",
+      "description": "Represents the finalization request body.",
+      "properties": {
+        "resourceIds": {
+          "type": "array",
+          "description": "List of fully-qualified resource IDs to mark for finalization. Each resource ID specified should be part of the Regional Move Container.\nIf you set this to null, all resources in the move container will be marked for finalization.",
+          "items": {
             "type": "string"
           }
         }
@@ -573,7 +573,7 @@
       },
       "readOnly": true
     },
-    "ResourceMoveRequest": {
+    "RegionalMoveRequestedResource": {
       "type": "object",
       "description": "Information about the resource to be copied",
       "properties": {
@@ -599,6 +599,28 @@
         "sourceResourceId",
         "targetResourceId",
         "apiVersion"
+      ]
+    },
+    "RegionalMoveResourceStatusDetail": {
+      "type": "object",
+      "description": "Represents the status details (state, errors, etc.) of a resource within a move container.",
+      "properties": {
+        "sourceResourceId": {
+          "type": "string",
+          "description": "Resource ID of the resource being moved/copied."
+        },
+        "status": {
+          "$ref": "#/definitions/ResourceMoveStatus",
+          "description": "Status of the resource move/copy operation."
+        },
+        "error": {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "sourceResourceId",
+        "status"
       ]
     },
     "ResourceMoveStatus": {
@@ -672,28 +694,6 @@
           }
         ]
       }
-    },
-    "ResourceMoveStatusInfo": {
-      "type": "object",
-      "description": "Represents the status details (state, errors, etc.) of a resource within a move container.",
-      "properties": {
-        "sourceResourceId": {
-          "type": "string",
-          "description": "Resource ID of the resource being moved/copied."
-        },
-        "status": {
-          "$ref": "#/definitions/ResourceMoveStatus",
-          "description": "Status of the resource move/copy operation."
-        },
-        "error": {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
-          "description": "The error object."
-        }
-      },
-      "required": [
-        "sourceResourceId",
-        "status"
-      ]
     }
   },
   "parameters": {}
