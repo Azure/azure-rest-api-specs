@@ -41,6 +41,7 @@ KNOWN_DEFINITION_RENAMES = {
     "ImageAction": "BlobIndexerImageAction",
     "KeywordTokenizerV2": "KeywordTokenizer",
     "LuceneStandardTokenizerV2": "LuceneStandardTokenizer",
+    "NGramTokenFilterV2": "NGramTokenFilter",
     "ParsingMode": "BlobIndexerParsingMode",
     "PathHierarchyTokenizerV2": "PathHierarchyTokenizer",
     "QueryResultDocumentSemanticFieldState": "SemanticFieldState",
@@ -90,6 +91,7 @@ class DifferenceType(Enum):
     MISSING_DEFINITION = "missing_def_in_tsp"
     EXTRA_DEFINITION = "extra_def_in_tsp"
     DEFINITION_MISMATCH = "def_mismatch"
+    DEFINITION_MISMATCH_TYPE = "def_mismatch_type"
     DEFINITION_MISMATCH_X_NULLABLE = "def_mismatch_x-nullable-true"
     DEFINITION_MISMATCH_ADDITIONAL_PROPERTIES = "def_mismatch_additionalProperties-true"
     DEFINITION_MISMATCH_DEFAULT = "def_mismatch_default-value"
@@ -1130,6 +1132,10 @@ class ApiComparator:
         # Check for all specific patterns and count matches
         matched_patterns = []
 
+        # Pattern: type mismatch where one is None (e.g., "type: None vs object" or "type: object vs None")
+        if "type:" in all_diffs and " vs none" in all_diffs:
+            matched_patterns.append(DifferenceType.DEFINITION_MISMATCH_TYPE)
+
         # Pattern: x-nullable missing in TSP (detected in constraint comparison)
         # Can appear at top level or nested in allOf/oneOf/anyOf or properties
         if "x_nullable:" in all_diffs and " vs none" in all_diffs:
@@ -1146,7 +1152,7 @@ class ApiComparator:
             matched_patterns.append(DifferenceType.DEFINITION_MISMATCH_DEFAULT)
 
         # Pattern: additionalProperties: True vs None or additionalProperties: {...} vs None
-        if "additionalProperties:" in all_diffs and " vs none" in all_diffs:
+        if "additionalproperties:" in all_diffs and " vs none" in all_diffs:
             matched_patterns.append(
                 DifferenceType.DEFINITION_MISMATCH_ADDITIONAL_PROPERTIES
             )
@@ -1195,7 +1201,14 @@ class ApiComparator:
                 # But we should still check if the content differs
 
         # Core schema fields
-        if schema1.type != schema2.type:
+        # Special case: type None with properties is implicitly "object" in OpenAPI
+        type1 = (
+            schema1.type if schema1.type else ("object" if schema1.properties else None)
+        )
+        type2 = (
+            schema2.type if schema2.type else ("object" if schema2.properties else None)
+        )
+        if type1 != type2:
             # Don't report type difference if it's explained by inline vs ref
             if not inline_vs_ref_info:
                 differences.append(f"type: {schema1.type} vs {schema2.type}")
@@ -1204,9 +1217,9 @@ class ApiComparator:
         if schema1.ref != schema2.ref:
             # Don't report ref difference if it's explained by inline vs ref
             if not inline_vs_ref_info:
-                differences.append(
-                    f"ref: {schema1.ref} vs {schema2.ref}"
-                )  # Object schema differences
+                differences.append(f"ref: {schema1.ref} vs {schema2.ref}")
+
+        # Object schema differences - always check even if type differs
         if not self._object_schemas_equal(schema1, schema2):
             props1 = schema1.properties or {}
             props2 = schema2.properties or {}
@@ -1787,78 +1800,89 @@ class ApiComparator:
             return False
 
         # 4.1 Core Schema Fields - type and format must match exactly (no coercion)
-        if schema1.type != schema2.type:
-            return False
+        # Special case: type None with properties is implicitly "object" in OpenAPI
+        type1 = (
+            schema1.type if schema1.type else ("object" if schema1.properties else None)
+        )
+        type2 = (
+            schema2.type if schema2.type else ("object" if schema2.properties else None)
+        )
+
+        # Check all aspects and collect differences
+        all_equal = True
+
+        if type1 != type2:
+            all_equal = False
         if schema1.format != schema2.format:
-            return False
+            all_equal = False
 
         # 4.5 References - $ref values must match exactly
         if schema1.ref != schema2.ref:
-            return False
+            all_equal = False
 
         # 4.2 Object Schemas
         if not self._object_schemas_equal(schema1, schema2):
-            return False
+            all_equal = False
 
         # 4.3 Array Schemas
         if not self._array_schemas_equal(schema1, schema2):
-            return False
+            all_equal = False
 
         # Constraints (including 4.4 Enums)
         if not self._constraints_equal(schema1.constraints, schema2.constraints):
-            return False
+            all_equal = False
 
         # 4.6 Composed Schemas
         if not self._composed_schemas_equal(schema1, schema2):
-            return False
+            all_equal = False
 
-        return True
+        return all_equal
 
     def _object_schemas_equal(
         self, schema1: CanonicalSchema, schema2: CanonicalSchema
     ) -> bool:
         """Compare object schema fields."""
+        # Check all aspects comprehensively without early returns
+        all_equal = True
+
         # Property sets must match exactly
         props1 = schema1.properties or {}
         props2 = schema2.properties or {}
 
         if set(props1.keys()) != set(props2.keys()):
-            return False
+            all_equal = False
 
-        # Each property schema must be equivalent
+        # Each property schema must be equivalent - check ALL properties
         for prop_name in props1.keys():
-            if not self._schemas_equal(props1[prop_name], props2[prop_name]):
-                return False
+            if prop_name in props2:
+                if not self._schemas_equal(props1[prop_name], props2[prop_name]):
+                    all_equal = False
 
         # Required sets must match
         if schema1.required != schema2.required:
-            return False
+            all_equal = False
 
         # additionalProperties must match
         add_props1 = schema1.additional_properties
         add_props2 = schema2.additional_properties
 
         if type(add_props1) is not type(add_props2):
-            return False
-
-        if isinstance(add_props1, CanonicalSchema):
+            all_equal = False
+        elif isinstance(add_props1, CanonicalSchema):
             if not self._schemas_equal(add_props1, add_props2):
-                return False
+                all_equal = False
         elif add_props1 != add_props2:
-            return False
+            all_equal = False
 
-        return True
+        return all_equal
 
     def _array_schemas_equal(
         self, schema1: CanonicalSchema, schema2: CanonicalSchema
     ) -> bool:
         """Compare array schema fields."""
         # Items schema must match
-        if not self._schemas_equal(schema1.items, schema2.items):
-            return False
-
         # Array constraints are handled in _constraints_equal
-        return True
+        return self._schemas_equal(schema1.items, schema2.items)
 
     def _constraints_equal(
         self,
@@ -1871,7 +1895,7 @@ class ApiComparator:
         if constraints1 is None or constraints2 is None:
             return False
 
-        # All constraint fields must match exactly
+        # All constraint fields must match exactly, including readOnly and x-nullable
         return (
             constraints1.minimum == constraints2.minimum
             and constraints1.maximum == constraints2.maximum
@@ -1885,6 +1909,8 @@ class ApiComparator:
             and constraints1.unique_items == constraints2.unique_items
             and constraints1.enum == constraints2.enum  # Frozensets handle ordering
             and constraints1.default == constraints2.default
+            and constraints1.read_only == constraints2.read_only
+            and constraints1.x_nullable == constraints2.x_nullable
         )
 
     def _get_constraint_differences(
@@ -2001,15 +2027,17 @@ class ApiComparator:
         self, schema1: CanonicalSchema, schema2: CanonicalSchema
     ) -> bool:
         """Compare composed schema fields (allOf, oneOf, anyOf)."""
-        # Component counts must match, and component schemas must match
-        if not self._schema_lists_equal(schema1.all_of, schema2.all_of):
-            return False
-        if not self._schema_lists_equal(schema1.one_of, schema2.one_of):
-            return False
-        if not self._schema_lists_equal(schema1.any_of, schema2.any_of):
-            return False
+        # Check all composition types comprehensively without early returns
+        all_equal = True
 
-        return True
+        if not self._schema_lists_equal(schema1.all_of, schema2.all_of):
+            all_equal = False
+        if not self._schema_lists_equal(schema1.one_of, schema2.one_of):
+            all_equal = False
+        if not self._schema_lists_equal(schema1.any_of, schema2.any_of):
+            all_equal = False
+
+        return all_equal
 
     def _schema_lists_equal(
         self,
@@ -2024,12 +2052,13 @@ class ApiComparator:
         if len(list1) != len(list2):
             return False
 
-        # Component schemas must match (treating as ordered lists)
+        # Check all component schemas without early returns
+        all_equal = True
         for i in range(len(list1)):
             if not self._schemas_equal(list1[i], list2[i]):
-                return False
+                all_equal = False
 
-        return True
+        return all_equal
 
     def _headers_equal(
         self, headers1: Optional[Dict], headers2: Optional[Dict]
@@ -2038,14 +2067,20 @@ class ApiComparator:
         headers1 = headers1 or {}
         headers2 = headers2 or {}
 
+        all_equal = True
+
         if set(headers1.keys()) != set(headers2.keys()):
-            return False
+            all_equal = False
 
+        # Check all headers without early returns
         for header_name in headers1.keys():
-            if not self._schemas_equal(headers1[header_name], headers2[header_name]):
-                return False
+            if header_name in headers2:
+                if not self._schemas_equal(
+                    headers1[header_name], headers2[header_name]
+                ):
+                    all_equal = False
 
-        return True
+        return all_equal
 
     def _compare_global_parameters(
         self, api1: CanonicalApi, api2: CanonicalApi
