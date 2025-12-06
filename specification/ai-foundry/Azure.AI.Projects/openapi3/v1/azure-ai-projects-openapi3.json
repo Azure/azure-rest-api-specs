@@ -1,0 +1,43 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Azure AI",
+    "version": "v1"
+  },
+  "tags": [],
+  "paths": {},
+  "security": [
+    {
+      "OAuth2Auth": [
+        "https://ai.azure.com/.default"
+      ]
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "OAuth2Auth": {
+        "type": "oauth2",
+        "flows": {
+          "implicit": {
+            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+            "scopes": {
+              "https://ai.azure.com/.default": ""
+            }
+          }
+        }
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "{endpoint}",
+      "description": "Azure AI",
+      "variables": {
+        "endpoint": {
+          "default": "",
+          "description": "Foundry Project endpoint in the form\n\"https://{ai-services-account-name}.services.ai.azure.com/api/projects/{project-name}\".\nIf you only have one Project in your Foundry Hub, or to target the default Project\nin your Hub, use the form\n\"https://{ai-services-account-name}.services.ai.azure.com/api/projects/_project\""
+        }
+      }
+    }
+  ]
+}
