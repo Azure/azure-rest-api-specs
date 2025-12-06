@@ -51,6 +51,11 @@ model DataflowProperties {
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 
+  @visibility(Lifecycle.Read)
+  @doc("The status for the dataflow.")
+  @added(Versions.`2025-12-01-preview`)
+  status?: DataflowStatus;
+
   ...ResourceHealth;
 }
 
@@ -310,4 +315,10 @@ model DataflowSourceOperationSettings {
 
   @doc("List of source locations. Can be Broker or Kafka topics. Supports wildcards # and +.")
   dataSources: NonEmptyString[];
+}
+
+/** Dataflow status. */
+@added(Versions.`2025-12-01-preview`)
+model DataflowStatus{
+  ...ResourceHealthStatus;
 }

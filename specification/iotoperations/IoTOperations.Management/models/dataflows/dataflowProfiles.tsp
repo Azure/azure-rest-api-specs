@@ -47,10 +47,21 @@ model DataflowProfileProperties {
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 
+  @visibility(Lifecycle.Read)
+  @doc("The status for the dataflow profile.")
+  @added(Versions.`2025-12-01-preview`)
+  status?: DataflowProfileStatus;
+
   ...ResourceHealth;
 }
 
 @doc("DataflowProfile Diagnostics properties")
 model ProfileDiagnostics {
   ...MetricProperties;
+}
+
+/** DataflowProfile status. */
+@added(Versions.`2025-12-01-preview`)
+model DataflowProfileStatus{
+  ...ResourceHealthStatus;
 }

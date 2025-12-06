@@ -64,6 +64,11 @@ model BrokerProperties {
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 
+  @visibility(Lifecycle.Read)
+  @doc("The status for the broker.")
+  @added(Versions.`2025-12-01-preview`)
+  status?: BrokerStatus;
+
   ...ResourceHealth;
 }
 
@@ -617,4 +622,10 @@ union SubscriberMessageDropStrategy {
 
   @doc("The oldest message is dropped.")
   DropOldest: "DropOldest",
+}
+
+/** AkriConnector status. */
+@added(Versions.`2025-12-01-preview`)
+model BrokerStatus{
+  ...ResourceHealthStatus;
 }
