@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Quantum Workspace Services",
-    "version": "2024-03-01-preview",
+    "version": "2025-12-01-preview",
     "description": "Azure Quantum Workspace Services",
     "contact": {
       "email": "azqengg@microsoft.com"
@@ -66,6 +66,96 @@
   },
   "tags": [],
   "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/jobUpdateOptions/{jobId}": {
+      "patch": {
+        "operationId": "Jobs_Update",
+        "description": "Update job properties.",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The Azure subscription ID.",
+            "required": true,
+            "type": "string",
+            "minLength": 36,
+            "maxLength": 36,
+            "pattern": "^[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$",
+            "x-ms-parameter-location": "client"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of the Azure resource group.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9\\-_\\.]*$",
+            "x-ms-parameter-location": "client"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "Name of the Azure Quantum workspace.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9\\-_]*$",
+            "x-ms-parameter-location": "client"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "Id of the job.",
+            "required": true,
+            "type": "string",
+            "maxLength": 36,
+            "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/JobUpdateOptionsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/JobUpdateOptions"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patches a job.": {
+            "$ref": "./examples/Jobs_Update.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/jobs": {
       "get": {
         "operationId": "Jobs_List",
@@ -106,6 +196,18 @@
             "maxLength": 50,
             "pattern": "^[a-zA-Z][a-zA-Z0-9\\-_]*$",
             "x-ms-parameter-location": "client"
+          },
+          {
+            "$ref": "#/parameters/CustomFilterQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomSkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomTopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomOrderByQueryParameter"
           }
         ],
         "responses": {
@@ -306,99 +408,8 @@
           }
         }
       },
-      "patch": {
-        "operationId": "Jobs_Update",
-        "description": "OLD METHOD: Update job properties.",
-        "consumes": [
-          "application/json-patch+json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The Azure subscription ID.",
-            "required": true,
-            "type": "string",
-            "minLength": 36,
-            "maxLength": 36,
-            "pattern": "^[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$",
-            "x-ms-parameter-location": "client"
-          },
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of the Azure resource group.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 90,
-            "pattern": "^[a-zA-Z][a-zA-Z0-9\\-_\\.]*$",
-            "x-ms-parameter-location": "client"
-          },
-          {
-            "name": "workspaceName",
-            "in": "path",
-            "description": "Name of the Azure Quantum workspace.",
-            "required": true,
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 50,
-            "pattern": "^[a-zA-Z][a-zA-Z0-9\\-_]*$",
-            "x-ms-parameter-location": "client"
-          },
-          {
-            "name": "jobId",
-            "in": "path",
-            "description": "Id of the job.",
-            "required": true,
-            "type": "string",
-            "maxLength": 36,
-            "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "The resource instance.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/JsonPatchDocument"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/JobDetails"
-            }
-          },
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Patches a job.": {
-            "$ref": "./examples/Jobs_Update.json"
-          }
-        }
-      },
       "delete": {
-        "operationId": "Jobs_Cancel",
+        "operationId": "Jobs_Delete",
         "description": "Delete a job by its id. Use for cancellation in versions before 2025-12-01-preview.",
         "parameters": [
           {
@@ -450,6 +461,84 @@
         "responses": {
           "204": {
             "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes a job by its id.": {
+            "$ref": "./examples/Jobs_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/jobs/{jobId}:cancel": {
+      "post": {
+        "operationId": "Jobs_Cancel",
+        "description": "Request the cancellation of an existing job.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The Azure subscription ID.",
+            "required": true,
+            "type": "string",
+            "minLength": 36,
+            "maxLength": 36,
+            "pattern": "^[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$",
+            "x-ms-parameter-location": "client"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of the Azure resource group.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9\\-_\\.]*$",
+            "x-ms-parameter-location": "client"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "Name of the Azure Quantum workspace.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9\\-_]*$",
+            "x-ms-parameter-location": "client"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "Id of the job.",
+            "required": true,
+            "type": "string",
+            "maxLength": 36,
+            "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/JobDetails"
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -617,7 +706,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/sessions": {
       "get": {
-        "operationId": "Sessions_List",
+        "operationId": "Sessions_Listv2",
         "description": "List all Sessions.",
         "parameters": [
           {
@@ -655,6 +744,18 @@
             "maxLength": 50,
             "pattern": "^[a-zA-Z][a-zA-Z0-9\\-_]*$",
             "x-ms-parameter-location": "client"
+          },
+          {
+            "$ref": "#/parameters/CustomFilterQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomSkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomTopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomOrderByQueryParameter"
           }
         ],
         "responses": {
@@ -983,6 +1084,18 @@
             "type": "string",
             "maxLength": 36,
             "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          },
+          {
+            "$ref": "#/parameters/CustomFilterQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomSkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomTopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomOrderByQueryParameter"
           }
         ],
         "responses": {
@@ -1071,7 +1184,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/topLevelItems": {
       "get": {
-        "operationId": "TopLevelItems_List",
+        "operationId": "TopLevelItems_Listv2",
         "description": "List top-level items.",
         "parameters": [
           {
@@ -1109,6 +1222,18 @@
             "maxLength": 50,
             "pattern": "^[a-zA-Z][a-zA-Z0-9\\-_]*$",
             "x-ms-parameter-location": "client"
+          },
+          {
+            "$ref": "#/parameters/CustomFilterQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomSkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomTopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomOrderByQueryParameter"
           }
         ],
         "responses": {
@@ -1254,6 +1379,42 @@
         "estimatedTotal"
       ]
     },
+    "CreatedByType": {
+      "type": "string",
+      "description": "The type of identity that created the item.",
+      "enum": [
+        "User",
+        "Application",
+        "ManagedIdentity",
+        "Key"
+      ],
+      "x-ms-enum": {
+        "name": "CreatedByType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "User",
+            "value": "User",
+            "description": "The item is created by user"
+          },
+          {
+            "name": "Application",
+            "value": "Application",
+            "description": "The item is created by application"
+          },
+          {
+            "name": "ManagedIdentity",
+            "value": "ManagedIdentity",
+            "description": "The item is created using managed identity"
+          },
+          {
+            "name": "Key",
+            "value": "Key",
+            "description": "The item is created using key"
+          }
+        ]
+      }
+    },
     "DimensionScope": {
       "type": "string",
       "description": "The scope at which the quota is applied to.",
@@ -1359,6 +1520,38 @@
           "description": "The creation time of the item.",
           "readOnly": true
         },
+        "createdBy": {
+          "type": "string",
+          "description": "The identity that created the item.",
+          "readOnly": true
+        },
+        "createdByType": {
+          "$ref": "#/definitions/CreatedByType",
+          "description": "The type of identity that created the item.",
+          "readOnly": true
+        },
+        "lastModifiedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of the item last modification initiated by the customer.",
+          "readOnly": true
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "The identity that last modified the item.",
+          "readOnly": true
+        },
+        "lastModifiedByType": {
+          "$ref": "#/definitions/CreatedByType",
+          "description": "The type of identity that last modified the item.",
+          "readOnly": true
+        },
+        "lastUpdatedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last time the item was updated by the system.",
+          "readOnly": true
+        },
         "beginExecutionTime": {
           "type": "string",
           "format": "date-time",
@@ -1379,6 +1572,32 @@
         "errorData": {
           "$ref": "#/definitions/Errors.WorkspaceItemError",
           "description": "Error information.",
+          "readOnly": true
+        },
+        "priority": {
+          "$ref": "#/definitions/Priority",
+          "description": "Priority of job or session.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "tags": {
+          "type": "array",
+          "description": "List of user-supplied tags associated with the job.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "usage": {
+          "$ref": "#/definitions/Usage",
+          "description": "Resource consumption metrics containing provider-specific usage data such as execution time, quantum shots consumed etc.",
           "readOnly": true
         }
       },
@@ -1512,18 +1731,6 @@
             "read",
             "create"
           ]
-        },
-        "tags": {
-          "type": "array",
-          "description": "List of user-supplied tags associated with the job.",
-          "items": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
         }
       },
       "required": [
@@ -1541,8 +1748,13 @@
       "type": "string",
       "description": "The status of the job.",
       "enum": [
+        "Queued",
         "Waiting",
         "Executing",
+        "CancellationRequested",
+        "Cancelling",
+        "Finishing",
+        "Completed",
         "Succeeded",
         "Failed",
         "Cancelled"
@@ -1552,6 +1764,11 @@
         "modelAsString": true,
         "values": [
           {
+            "name": "Queued",
+            "value": "Queued",
+            "description": "The job has been queued."
+          },
+          {
             "name": "Waiting",
             "value": "Waiting",
             "description": "The job is waiting in the queue to be executed."
@@ -1560,6 +1777,26 @@
             "name": "Executing",
             "value": "Executing",
             "description": "The job is being executed."
+          },
+          {
+            "name": "CancellationRequested",
+            "value": "CancellationRequested",
+            "description": "Cancellation of the job has been requested."
+          },
+          {
+            "name": "Cancelling",
+            "value": "Cancelling",
+            "description": "The job is in the process of being cancelled."
+          },
+          {
+            "name": "Finishing",
+            "value": "Finishing",
+            "description": "The job is in the process of being finished."
+          },
+          {
+            "name": "Completed",
+            "value": "Completed",
+            "description": "The job completed."
           },
           {
             "name": "Succeeded",
@@ -1609,98 +1846,78 @@
         ]
       }
     },
-    "JsonPatchDocument": {
-      "type": "array",
-      "description": "A JSONPatch document as defined by RFC 6902.",
-      "items": {
-        "$ref": "#/definitions/JsonPatchObject"
-      }
-    },
-    "JsonPatchObject": {
+    "JobUpdateOptions": {
       "type": "object",
-      "description": "A JSONPatch object as defined by RFC 6902.",
+      "description": "Options for updating a job.",
       "properties": {
-        "op": {
-          "$ref": "#/definitions/JsonPatchOperation",
-          "description": "The operation to be performed.",
-          "x-ms-client-name": "operation",
+        "id": {
+          "$ref": "#/definitions/WorkspaceItemId",
+          "description": "Id of the job.",
+          "readOnly": true
+        },
+        "priority": {
+          "$ref": "#/definitions/Priority",
+          "description": "Priority of job.",
           "x-ms-mutability": [
-            "create"
+            "update"
           ]
         },
-        "path": {
+        "name": {
           "type": "string",
-          "description": "A JSON-Pointer.",
+          "description": "The name of the job.",
           "x-ms-mutability": [
-            "create"
+            "read",
+            "update"
           ]
         },
-        "value": {
-          "type": "object",
-          "description": "A value to be used in the operation on the path.",
+        "tags": {
+          "type": "array",
+          "description": "List of user-supplied tags associated with the job.",
+          "items": {
+            "type": "string"
+          },
           "x-ms-mutability": [
-            "create"
-          ]
-        },
-        "from": {
-          "type": "string",
-          "description": "Optional field used in copy and move operations.",
-          "x-ms-mutability": [
+            "read",
+            "update",
             "create"
           ]
         }
       },
       "required": [
-        "op",
-        "path"
+        "id"
       ]
     },
-    "JsonPatchOperation": {
-      "type": "string",
-      "description": "The operation to be performed.",
-      "enum": [
-        "add",
-        "remove",
-        "replace",
-        "move",
-        "copy",
-        "test"
-      ],
-      "x-ms-enum": {
-        "name": "JsonPatchOperation",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "add",
-            "value": "add",
-            "description": "Add value operation."
+    "JobUpdateOptionsUpdate": {
+      "type": "object",
+      "description": "Options for updating a job.",
+      "properties": {
+        "priority": {
+          "$ref": "#/definitions/Priority",
+          "description": "Priority of job.",
+          "x-ms-mutability": [
+            "update"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the job.",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        },
+        "tags": {
+          "type": "array",
+          "description": "List of user-supplied tags associated with the job.",
+          "items": {
+            "type": "string"
           },
-          {
-            "name": "remove",
-            "value": "remove",
-            "description": "Remove value operation."
-          },
-          {
-            "name": "replace",
-            "value": "replace",
-            "description": "Replace value operation."
-          },
-          {
-            "name": "move",
-            "value": "move",
-            "description": "Move value operation."
-          },
-          {
-            "name": "copy",
-            "value": "copy",
-            "description": "Copy value operation."
-          },
-          {
-            "name": "test",
-            "value": "test",
-            "description": "Test value operation."
-          }
-        ]
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
       }
     },
     "MeterPeriod": {
@@ -1831,6 +2048,30 @@
       "required": [
         "value"
       ]
+    },
+    "Priority": {
+      "type": "string",
+      "description": "Job priority levels.",
+      "enum": [
+        "Standard",
+        "High"
+      ],
+      "x-ms-enum": {
+        "name": "Priority",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "The job's base priority."
+          },
+          {
+            "name": "High",
+            "value": "High",
+            "description": "The job's priority is elevated."
+          }
+        ]
+      }
     },
     "ProviderAvailability": {
       "type": "string",
@@ -2133,6 +2374,24 @@
           "type": "string",
           "description": "A page with detailed status of the provider.",
           "readOnly": true
+        },
+        "numQubits": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The qubit number.",
+          "minimum": 1,
+          "maximum": 100000,
+          "readOnly": true
+        },
+        "targetProfile": {
+          "type": "string",
+          "description": "Target QIR profile.",
+          "readOnly": true
+        },
+        "metadata": {
+          "type": "object",
+          "description": "The metadata of this target.",
+          "readOnly": true
         }
       },
       "required": [
@@ -2140,6 +2399,14 @@
         "currentAvailability",
         "averageQueueTime"
       ]
+    },
+    "Usage": {
+      "type": "object",
+      "description": "Resource usage metrics represented as key-value pairs. Keys are provider-defined metric names (e.g. \"standardMinutes\", \"shots\") and values are the corresponding consumption amounts. The specific metrics available depend on the quantum provider and target used.",
+      "additionalProperties": {
+        "format": "double",
+        "type": "number"
+      }
     },
     "UsageEvent": {
       "type": "object",
@@ -2232,6 +2499,40 @@
       "maxLength": 50,
       "pattern": "^[a-zA-Z][a-zA-Z0-9\\-_]*$",
       "x-ms-parameter-location": "client"
+    },
+    "CustomFilterQueryParameter": {
+      "name": "filter",
+      "in": "query",
+      "description": "Filter the result list using the given expression",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "CustomOrderByQueryParameter": {
+      "name": "orderby",
+      "in": "query",
+      "description": "The order of returned items.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "CustomSkipQueryParameter": {
+      "name": "skip",
+      "in": "query",
+      "description": "The number of result items to skip.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
+    "CustomTopQueryParameter": {
+      "name": "top",
+      "in": "query",
+      "description": "The number of jobs taken.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
     }
   }
 }
