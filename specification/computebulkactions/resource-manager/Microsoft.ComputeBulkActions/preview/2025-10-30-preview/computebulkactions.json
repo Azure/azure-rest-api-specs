@@ -2356,6 +2356,20 @@
         }
       }
     },
+    "FallbackOperation": {
+      "type": "object",
+      "description": "Describes the fallback operation that was performed",
+      "properties": {
+        "lastOpType": {
+          "$ref": "#/definitions/ResourceOperationType",
+          "description": "The last operation type that was performed as a fallback"
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of the fallback operation"
+        }
+      }
+    },
     "GetOperationErrorsRequest": {
       "type": "object",
       "description": "This is the request to get errors per vm operations",
@@ -3280,36 +3294,6 @@
         }
       }
     },
-    "OnFailureAction": {
-      "type": "string",
-      "description": "Actions to take on failed retries for BulkActions",
-      "enum": [
-        "Deallocate",
-        "Start",
-        "Delete"
-      ],
-      "x-ms-enum": {
-        "name": "OnFailureAction",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Deallocate",
-            "value": "Deallocate",
-            "description": "Deallocate operations on the resources"
-          },
-          {
-            "name": "Start",
-            "value": "Start",
-            "description": "Start operations on the resources"
-          },
-          {
-            "name": "Delete",
-            "value": "Delete",
-            "description": "Delete operations on the resources"
-          }
-        ]
-      }
-    },
     "OperatingSystemTypes": {
       "type": "string",
       "description": "This property allows you to specify the supported type of the OS that application is built for. Possible values are: **Windows,** **Linux.**",
@@ -3817,6 +3801,16 @@
         ]
       }
     },
+    "ResourceNotificationDetails": {
+      "type": "object",
+      "description": "The common request model for power operations",
+      "properties": {
+        "operationContext": {
+          "type": "string",
+          "description": "Operation context for notification tracking"
+        }
+      }
+    },
     "ResourceOperation": {
       "type": "object",
       "description": "Top level response from an operation on a resource",
@@ -4040,6 +4034,14 @@
         "retryPolicy": {
           "$ref": "#/definitions/RetryPolicy",
           "description": "Retry policy the user can pass"
+        },
+        "resourceNotificationDetails": {
+          "$ref": "#/definitions/ResourceNotificationDetails",
+          "description": "Resource notification details."
+        },
+        "fallbackOperation": {
+          "$ref": "#/definitions/FallbackOperation",
+          "description": "Fallback operation details if a fallback was performed"
         }
       },
       "required": [
@@ -4251,7 +4253,7 @@
           "description": "Retry window in minutes for user request"
         },
         "onFailureAction": {
-          "$ref": "#/definitions/OnFailureAction",
+          "$ref": "#/definitions/ResourceOperationType",
           "description": "Action to take on failed retries for user request"
         }
       }
@@ -4632,7 +4634,7 @@
         },
         "resourcesWithContext": {
           "$ref": "#/definitions/ResourcesWithCorrelationId",
-          "description": "The resources for the request with operation context information"
+          "description": "The resources for the request with operation context information needed for notification tracking."
         },
         "correlationid": {
           "type": "string",
@@ -4663,7 +4665,7 @@
         },
         "resourcesWithContext": {
           "$ref": "#/definitions/ResourcesWithCorrelationId",
-          "description": "The resources for the request with operation context information"
+          "description": "The resources for the request with operation context information needed for notification tracking."
         },
         "correlationid": {
           "type": "string",
@@ -4694,7 +4696,7 @@
         },
         "resourcesWithContext": {
           "$ref": "#/definitions/ResourcesWithCorrelationId",
-          "description": "The resources for the request with operation context information"
+          "description": "The resources for the request with operation context information needed for notification tracking."
         },
         "correlationid": {
           "type": "string",
@@ -4725,7 +4727,7 @@
         },
         "resourcesWithContext": {
           "$ref": "#/definitions/ResourcesWithCorrelationId",
-          "description": "The resources for the request with operation context information"
+          "description": "The resources for the request with operation context information needed for notification tracking."
         },
         "correlationid": {
           "type": "string",

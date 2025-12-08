@@ -136,20 +136,6 @@ union ResourceOperationType {
   string,
 }
 
-@doc("Actions to take on failed retries for BulkActions")
-union OnFailureAction {
-  @doc("Deallocate operations on the resources")
-  Deallocate: "Deallocate",
-
-  @doc("Start operations on the resources")
-  Start: "Start",
-
-  @doc("Delete operations on the resources")
-  Delete: "Delete",
-
-  string,
-}
-
 @doc("Values that define the states of operations in BulkActions")
 union OperationState {
   @doc("The default value for the operation state enum")
@@ -183,6 +169,15 @@ union OperationState {
 }
 
 // ------------------ Models ---------------
+@doc("Describes the fallback operation that was performed")
+model FallbackOperation {
+  @doc("The last operation type that was performed as a fallback")
+  lastOpType?: ResourceOperationType;
+
+  @doc("The status of the fallback operation")
+  status?: string;
+}
+
 @doc("The schedule details for the user request")
 model Schedule {
   #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Prefer using `offsetDateTime` when representing a datetime."
@@ -251,7 +246,7 @@ model RetryPolicy {
   retryWindowInMinutes?: int32;
 
   @doc("Action to take on failed retries for user request")
-  onFailureAction?: OnFailureAction;
+  onFailureAction?: ResourceOperationType;
 }
 
 @doc("Extra details needed to run the user's request")
@@ -312,6 +307,12 @@ model ResourceOperationDetails {
 
   @doc("Retry policy the user can pass")
   retryPolicy?: RetryPolicy;
+
+  @doc("Resource notification details.")
+  resourceNotificationDetails?: ResourceNotificationDetails;
+
+  @doc("Fallback operation details if a fallback was performed")
+  fallbackOperation?: FallbackOperation;
 }
 
 @doc("Top level response from an operation on a resource")
@@ -376,6 +377,12 @@ model OperationErrorsResult {
 }
 
 // ------------------ Common Models ---------------
+@doc("The common request model for power operations")
+model ResourceNotificationDetails {
+  @doc("Operation context for notification tracking")
+  operationContext?: string;
+}
+
 @doc("The submit-type request for power operations")
 model SubmitTypeRequest {
   @doc("The schedule for the request")
@@ -387,7 +394,7 @@ model SubmitTypeRequest {
   @doc("The resources for the request")
   resources?: Resources;
 
-  @doc("The resources for the request with operation context information")
+  @doc("The resources for the request with operation context information needed for notification tracking.")
   resourcesWithContext?: ResourcesWithCorrelationId;
 
   @doc("CorrelationId item")
