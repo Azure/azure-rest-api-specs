@@ -32,8 +32,5 @@ using Azure.ClientGenerator.Core;
   "username",
   "java"
 );
-@@clientName(Microsoft.Batch.AccessRulePropertiesSubscriptionsItem,
-  "AccessRulePropertiesSubscriptionsItem"
-);
 @@clientName(Microsoft.Batch.ContainerRegistry.username, "username", "java");
 @@clientName(Microsoft.Batch.UserIdentity.userName, "username", "java");
