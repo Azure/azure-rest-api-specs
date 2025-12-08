@@ -15,6 +15,18 @@ namespace Microsoft.StorageSync;
  * The private endpoint connection resource.
  */
 model PrivateEndpointConnection is PrivateEndpointConnectionResource;
+/*model PrivateEndpointConnection
+  is Azure.ResourceManager.ProxyResource<
+    PrivateEndpointConnectionProperties,
+    false
+  > {
+  ...ResourceNameParameter<
+    Resource = PrivateEndpointConnection,
+    KeyName = "privateEndpointConnectionName",
+    SegmentName = "privateEndpointConnections",
+    NamePattern = ""
+  >;
+}*/
 alias PrivateEndpointOperations = Azure.ResourceManager.PrivateEndpoints<PrivateEndpointConnection>;
 
 @armResourceOperations
@@ -22,6 +34,7 @@ interface PrivateEndpointConnections {
   /**
    * Gets the specified private endpoint connection associated with the storage sync service.
    */
+  @armResourceRead(PrivateEndpointConnection)
   get is PrivateEndpointOperations.Read<
     StorageSyncService,
     Error = StorageSyncError
@@ -32,6 +45,7 @@ interface PrivateEndpointConnections {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.Core.useFinalStateVia("location")
+  @armResourceCreateOrUpdate(PrivateEndpointConnection)
   create is PrivateEndpointOperations.CreateOrUpdateAsync<
     StorageSyncService,
     Response = ArmResourceUpdatedResponse<PrivateEndpointConnection> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PrivateEndpointConnection> &
@@ -52,6 +66,7 @@ interface PrivateEndpointConnections {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.Core.useFinalStateVia("location")
+  @armResourceDelete(PrivateEndpointConnection)
   delete is PrivateEndpointOperations.DeleteAsync<
     StorageSyncService,
     Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PrivateEndpointConnection> &
@@ -71,6 +86,7 @@ interface PrivateEndpointConnections {
    * Get a PrivateEndpointConnection List.
    */
   @list
+  @armResourceList(PrivateEndpointConnection)
   listByStorageSyncService is Azure.ResourceManager.Legacy.PrivateEndpoints.ListSinglePageByParent<
     StorageSyncService,
     PrivateEndpointConnection,

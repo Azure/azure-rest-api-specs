@@ -50,6 +50,7 @@ interface RegisteredServers {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @put
   @Azure.Core.useFinalStateVia("location")
+  @armResourceCreateOrUpdate(RegisteredServer)
   create is ArmCreateOperation<
     ResourceInstanceParameters<
       RegisteredServer,
