@@ -18,14 +18,20 @@ using Microsoft.Workloads;
   "autorest"
 );
 @@clientName(SAPVirtualInstances.getSizingRecommendations,
-  "InvokeSizingRecommendations"
+  "InvokeSizingRecommendations",
+  "autorest"
 );
-@@clientName(SAPVirtualInstances.getSapSupportedSku, "InvokeSapSupportedSku");
+@@clientName(SAPVirtualInstances.getSapSupportedSku,
+  "InvokeSapSupportedSku",
+  "autorest"
+);
 @@clientName(SAPVirtualInstances.getDiskConfigurations,
-  "InvokeDiskConfigurations"
+  "InvokeDiskConfigurations",
+  "autorest"
 );
 @@clientName(SAPVirtualInstances.getAvailabilityZoneDetails,
-  "InvokeAvailabilityZoneDetails"
+  "InvokeAvailabilityZoneDetails",
+  "autorest"
 );
 
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(SAPApplicationServerInstance.properties,
