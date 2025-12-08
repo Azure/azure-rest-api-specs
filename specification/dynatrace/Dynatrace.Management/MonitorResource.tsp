@@ -110,7 +110,13 @@ interface MonitorResources {
   @list
   listManagedComputeResources is ArmResourceActionSync<
     MonitorResource,
-    void,
+    {
+      /**
+       * Optional filter to get resources of a specific type.
+       */
+      @query
+      resourceType?: string;
+    },
     ArmResponse<ManagedComputeResourceListResponse>
   >;
 

@@ -967,6 +967,22 @@
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9_-]*$"
+          },
+          {
+            "name": "resourceType",
+            "in": "query",
+            "description": "Optional filter to get resources of a specific type.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
           }
         ],
         "responses": {
