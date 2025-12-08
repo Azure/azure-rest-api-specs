@@ -129,6 +129,38 @@ The compilation process:
 - Run validation against `preview/{API_VERSION}/hci.json` ✅
 - See updated results ✅
 
+### ⚠️ CRITICAL: Delete Scenario - Source AND Target Files
+
+**When deleting example files, you MUST delete both source AND target files.**
+
+**Why This Matters:**
+- TypeSpec compilation (`tsp compile .`) copies source files to target but does NOT remove deleted source files from target
+- Validation reads from `preview/{API_VERSION}/examples/`, not `examples/{API_VERSION}/`
+- If you only delete source files, validation will continue to validate the old files still present in target directory
+
+**Critical Delete Workflow:**
+1. **Delete source file:** `examples/{API_VERSION}/filename.json`
+2. **Delete target file:** `preview/{API_VERSION}/examples/filename.json` ⚠️ **CRITICAL STEP**
+3. **Recompile:** `tsp compile .`
+4. **Validate:** `npx oav validate-example preview/{API_VERSION}/hci.json`
+
+**Common Delete Mistake:**
+- Delete source file: `examples/{API_VERSION}/filename.json` ✅
+- Run `tsp compile .` ✅
+- Run validation ❌ Still fails because old file exists in `preview/{API_VERSION}/examples/`
+- Confusion: "Why didn't my delete work?"
+
+**Correct Delete Process:**
+```bash
+# Delete both source AND target
+del "examples/{API_VERSION}/problematic-file.json"
+del "preview/{API_VERSION}/examples/problematic-file.json"
+
+# Then recompile and validate
+tsp compile .
+npx oav validate-example preview/{API_VERSION}/hci.json
+```
+
 ## Best Practices
 
 1. **Consistent Property Sets**: Ensure example files include all required properties for their resource type
@@ -149,9 +181,11 @@ Validation completes without errors.
 If validation continues to fail after fixes:
 1. Ensure TypeSpec compilation was successful
 2. Check that the OpenAPI schema was regenerated
-3. Verify example file paths are correct
-4. Review discriminator mappings in the generated schema
-5. Compare working examples with problematic ones to identify patterns
+3. **CRITICAL: Verify you deleted BOTH source AND target example files** - Most common oversight
+4. Verify example file paths are correct
+5. Review discriminator mappings in the generated schema
+6. Compare working examples with problematic ones to identify patterns
+7. **Check target directory:** List files in `preview/{API_VERSION}/examples/` to confirm deleted files are actually gone
 
 ## Version-Specific Issues
 
