@@ -116,3 +116,10 @@ using Microsoft.Network;
 @@clientName(FrontDoorNameAvailabilityWithSubscriptionOperationGroup.check::parameters.body,
   "checkFrontDoorNameAvailabilityInput"
 );
+@@visibility(FrontDoorListResult.value, Lifecycle.Read);
+@@visibility(FrontendEndpointsListResult.value, Lifecycle.Read);
+@@visibility(RulesEngineListResult.value, Lifecycle.Read);
+@@clientName(ScrubbingRuleEntryMatchOperator,
+  "scrubbingRuleEntryMatchOperator"
+);
+@@clientName(ScrubbingRuleEntryState, "scrubbingRuleEntryState");

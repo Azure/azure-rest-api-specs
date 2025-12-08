@@ -123,7 +123,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
         },
@@ -143,6 +143,7 @@
         "tags": [
           "Profiles"
         ],
+        "summary": "Gets a list of Network Experiment Profiles under a subscription",
         "description": "Gets a list of Network Experiment Profiles under a subscription",
         "parameters": [
           {
@@ -235,7 +236,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/FrontDoorListResult"
             }
@@ -601,6 +602,7 @@
         "tags": [
           "Profiles"
         ],
+        "summary": "Gets a list of Network Experiment Profiles within a resource group under a subscription",
         "description": "Gets a list of Network Experiment Profiles within a resource group under a subscription",
         "parameters": [
           {
@@ -643,6 +645,7 @@
         "tags": [
           "Profiles"
         ],
+        "summary": "Gets an NetworkExperiment Profile by ProfileName",
         "description": "Gets an NetworkExperiment Profile by ProfileName",
         "parameters": [
           {
@@ -688,6 +691,7 @@
         "tags": [
           "Profiles"
         ],
+        "summary": "Creates an NetworkExperiment Profile",
         "description": "Creates an NetworkExperiment Profile",
         "parameters": [
           {
@@ -780,6 +784,7 @@
         "tags": [
           "Profiles"
         ],
+        "summary": "Updates an NetworkExperimentProfiles",
         "description": "Updates an NetworkExperimentProfiles",
         "parameters": [
           {
@@ -920,6 +925,7 @@
         "tags": [
           "Experiments"
         ],
+        "summary": "Gets a list of Experiments",
         "description": "Gets a list of Experiments",
         "parameters": [
           {
@@ -970,6 +976,7 @@
         "tags": [
           "Experiments"
         ],
+        "summary": "Gets an Experiment by ExperimentName",
         "description": "Gets an Experiment by ExperimentName",
         "parameters": [
           {
@@ -1023,6 +1030,7 @@
         "tags": [
           "Experiments"
         ],
+        "summary": "Creates or updates an Experiment",
         "description": "Creates or updates an Experiment",
         "parameters": [
           {
@@ -1123,6 +1131,7 @@
         "tags": [
           "Experiments"
         ],
+        "summary": "Updates an Experiment by Experiment id",
         "description": "Updates an Experiment",
         "parameters": [
           {
@@ -1206,6 +1215,7 @@
         "tags": [
           "Experiments"
         ],
+        "summary": "Deletes an Experiment",
         "description": "Deletes an Experiment",
         "parameters": [
           {
@@ -1279,6 +1289,7 @@
         "tags": [
           "Experiments"
         ],
+        "summary": "Gets a Latency Scorecard for a given Experiment",
         "description": "Gets a Latency Scorecard for a given Experiment",
         "parameters": [
           {
@@ -1381,6 +1392,7 @@
         "tags": [
           "Experiments"
         ],
+        "summary": "Gets a Timeseries for a given Experiment",
         "description": "Gets a Timeseries for a given Experiment",
         "parameters": [
           {
@@ -1532,6 +1544,7 @@
         "tags": [
           "Profiles"
         ],
+        "summary": "Gets a list of Preconfigured Endpoints",
         "description": "Gets a list of Preconfigured Endpoints",
         "parameters": [
           {
@@ -1596,7 +1609,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/FrontDoorListResult"
             }
@@ -1857,9 +1870,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/FrontendEndpointListResult"
+              "$ref": "#/definitions/FrontendEndpointsListResult"
             }
           },
           "default": {
@@ -2198,7 +2211,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/RulesEngineListResult"
             }
@@ -2734,6 +2747,7 @@
       "properties": {
         "resourceState": {
           "$ref": "#/definitions/FrontDoorResourceState",
+          "title": "Resource status of the Front Door or Front Door SubResource.",
           "description": "Resource status.",
           "readOnly": true
         }
@@ -3107,6 +3121,32 @@
           "items": {
             "$ref": "#/definitions/CustomRule"
           }
+        }
+      }
+    },
+    "DefaultErrorResponse": {
+      "type": "object",
+      "description": "Error response indicates Front Door service is not able to process the incoming request. The reason is provided in the error message.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/DefaultErrorResponseError",
+          "description": "Error model."
+        }
+      }
+    },
+    "DefaultErrorResponseError": {
+      "type": "object",
+      "description": "Error model.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message indicating why the operation failed.",
+          "readOnly": true
         }
       }
     },
@@ -3489,14 +3529,15 @@
     },
     "FrontDoorListResult": {
       "type": "object",
-      "description": "The response of a FrontDoor list operation.",
+      "description": "Paged collection of FrontDoor items",
       "properties": {
         "value": {
           "type": "array",
           "description": "The FrontDoor items on this page",
           "items": {
             "$ref": "#/definitions/FrontDoor"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -3514,6 +3555,7 @@
       "properties": {
         "resourceState": {
           "$ref": "#/definitions/FrontDoorResourceState",
+          "title": "Resource status of the Front Door or Front Door SubResource.",
           "description": "Resource status of the Front Door.",
           "readOnly": true
         },
@@ -3838,33 +3880,13 @@
         }
       }
     },
-    "FrontendEndpointListResult": {
-      "type": "object",
-      "description": "The response of a FrontendEndpoint list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The FrontendEndpoint items on this page",
-          "items": {
-            "$ref": "#/definitions/FrontendEndpoint"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "FrontendEndpointProperties": {
       "type": "object",
       "description": "The JSON object that contains the properties required to create a frontend endpoint.",
       "properties": {
         "resourceState": {
           "$ref": "#/definitions/FrontDoorResourceState",
+          "title": "Resource status of the Front Door or Front Door SubResource.",
           "description": "Resource status.",
           "readOnly": true
         },
@@ -3918,6 +3940,28 @@
           }
         }
       }
+    },
+    "FrontendEndpointsListResult": {
+      "type": "object",
+      "description": "Paged collection of FrontendEndpoint items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The FrontendEndpoint items on this page",
+          "items": {
+            "$ref": "#/definitions/FrontendEndpoint"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "GroupByVariable": {
       "type": "object",
@@ -4039,6 +4083,7 @@
       "properties": {
         "resourceState": {
           "$ref": "#/definitions/FrontDoorResourceState",
+          "title": "Resource status of the Front Door or Front Door SubResource.",
           "description": "Resource status.",
           "readOnly": true
         }
@@ -4287,6 +4332,7 @@
       "properties": {
         "resourceState": {
           "$ref": "#/definitions/FrontDoorResourceState",
+          "title": "Resource status of the Front Door or Front Door SubResource.",
           "description": "Resource status.",
           "readOnly": true
         }
@@ -4577,6 +4623,7 @@
         },
         "ruleSetAction": {
           "$ref": "#/definitions/ManagedRuleSetActionType",
+          "title": "ruleSetAction",
           "description": "Defines the rule set action."
         },
         "exclusions": {
@@ -5605,6 +5652,7 @@
       "properties": {
         "resourceState": {
           "$ref": "#/definitions/FrontDoorResourceState",
+          "title": "Resource status of the Front Door or Front Door SubResource.",
           "description": "Resource status.",
           "readOnly": true
         }
@@ -5730,14 +5778,15 @@
     },
     "RulesEngineListResult": {
       "type": "object",
-      "description": "The response of a RulesEngine list operation.",
+      "description": "Paged collection of RulesEngine items",
       "properties": {
         "value": {
           "type": "array",
           "description": "The RulesEngine items on this page",
           "items": {
             "$ref": "#/definitions/RulesEngine"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -5958,6 +6007,7 @@
       "properties": {
         "resourceState": {
           "$ref": "#/definitions/FrontDoorResourceState",
+          "title": "Resource status of the Front Door or Front Door SubResource.",
           "description": "Resource status.",
           "readOnly": true
         }
@@ -6016,30 +6066,6 @@
         }
       }
     },
-    "ScrubbingRuleEntryMatchOperator": {
-      "type": "string",
-      "description": "When matchVariable is a collection, operate on the selector to specify which elements in the collection this rule applies to.",
-      "enum": [
-        "EqualsAny",
-        "Equals"
-      ],
-      "x-ms-enum": {
-        "name": "ScrubbingRuleEntryMatchOperator",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "EqualsAny",
-            "value": "EqualsAny",
-            "description": "EqualsAny"
-          },
-          {
-            "name": "Equals",
-            "value": "Equals",
-            "description": "Equals"
-          }
-        ]
-      }
-    },
     "ScrubbingRuleEntryMatchVariable": {
       "type": "string",
       "description": "The variable to be scrubbed from the logs.",
@@ -6090,30 +6116,6 @@
             "name": "RequestBodyJsonArgNames",
             "value": "RequestBodyJsonArgNames",
             "description": "RequestBodyJsonArgNames"
-          }
-        ]
-      }
-    },
-    "ScrubbingRuleEntryState": {
-      "type": "string",
-      "description": "Defines the state of a log scrubbing rule. Default value is enabled.",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ],
-      "x-ms-enum": {
-        "name": "ScrubbingRuleEntryState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Enabled",
-            "value": "Enabled",
-            "description": "Enabled"
-          },
-          {
-            "name": "Disabled",
-            "value": "Disabled",
-            "description": "Disabled"
           }
         ]
       }
@@ -6626,6 +6628,7 @@
         },
         "resourceState": {
           "$ref": "#/definitions/PolicyResourceState",
+          "title": "Resource status of the policy.",
           "description": "Resource status of the policy.",
           "readOnly": true
         }
@@ -6640,7 +6643,7 @@
           "description": "The variable to be scrubbed from the logs."
         },
         "selectorMatchOperator": {
-          "$ref": "#/definitions/ScrubbingRuleEntryMatchOperator",
+          "$ref": "#/definitions/scrubbingRuleEntryMatchOperator",
           "description": "When matchVariable is a collection, operate on the selector to specify which elements in the collection this rule applies to."
         },
         "selector": {
@@ -6648,7 +6651,7 @@
           "description": "When matchVariable is a collection, operator used to specify which elements in the collection this rule applies to."
         },
         "state": {
-          "$ref": "#/definitions/ScrubbingRuleEntryState",
+          "$ref": "#/definitions/scrubbingRuleEntryState",
           "description": "Defines the state of a log scrubbing rule. Default value is enabled."
         }
       },
@@ -6666,6 +6669,54 @@
       ],
       "x-ms-enum": {
         "name": "WebApplicationFirewallScrubbingState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Disabled"
+          }
+        ]
+      }
+    },
+    "scrubbingRuleEntryMatchOperator": {
+      "type": "string",
+      "description": "When matchVariable is a collection, operate on the selector to specify which elements in the collection this rule applies to.",
+      "enum": [
+        "EqualsAny",
+        "Equals"
+      ],
+      "x-ms-enum": {
+        "name": "scrubbingRuleEntryMatchOperator",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "EqualsAny",
+            "value": "EqualsAny",
+            "description": "EqualsAny"
+          },
+          {
+            "name": "Equals",
+            "value": "Equals",
+            "description": "Equals"
+          }
+        ]
+      }
+    },
+    "scrubbingRuleEntryState": {
+      "type": "string",
+      "description": "Defines the state of a log scrubbing rule. Default value is enabled.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "scrubbingRuleEntryState",
         "modelAsString": true,
         "values": [
           {

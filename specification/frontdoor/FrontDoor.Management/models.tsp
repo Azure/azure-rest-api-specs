@@ -1549,6 +1549,7 @@ model WebApplicationFirewallPolicyProperties {
    * Resource status of the policy.
    */
   @visibility(Lifecycle.Read)
+  @summary("Resource status of the policy.")
   resourceState?: PolicyResourceState;
 }
 
@@ -1787,6 +1788,7 @@ model ManagedRuleSet {
   /**
    * Defines the rule set action.
    */
+  @summary("ruleSetAction")
   ruleSetAction?: ManagedRuleSetActionType;
 
   /**
@@ -2165,6 +2167,7 @@ model FrontDoorProperties extends FrontDoorUpdateParameters {
   /**
    * Resource status of the Front Door.
    */
+  @summary("Resource status of the Front Door or Front Door SubResource.")
   @visibility(Lifecycle.Read)
   resourceState?: FrontDoorResourceState;
 
@@ -2211,6 +2214,7 @@ model RulesEngineProperties extends RulesEngineUpdateParameters {
    * Resource status.
    */
   @visibility(Lifecycle.Read)
+  @summary("Resource status of the Front Door or Front Door SubResource.")
   resourceState?: FrontDoorResourceState;
 }
 
@@ -2418,6 +2422,7 @@ model RoutingRuleProperties extends RoutingRuleUpdateParameters {
   /**
    * Resource status.
    */
+  @summary("Resource status of the Front Door or Front Door SubResource.")
   @visibility(Lifecycle.Read)
   resourceState?: FrontDoorResourceState;
 }
@@ -2509,6 +2514,7 @@ model LoadBalancingSettingsProperties
    * Resource status.
    */
   @visibility(Lifecycle.Read)
+  @summary("Resource status of the Front Door or Front Door SubResource.")
   resourceState?: FrontDoorResourceState;
 }
 
@@ -2564,6 +2570,7 @@ model HealthProbeSettingsProperties
    * Resource status.
    */
   @visibility(Lifecycle.Read)
+  @summary("Resource status of the Front Door or Front Door SubResource.")
   resourceState?: FrontDoorResourceState;
 }
 
@@ -2627,6 +2634,7 @@ model BackendPoolProperties extends BackendPoolUpdateParameters {
   /**
    * Resource status.
    */
+  @summary("Resource status of the Front Door or Front Door SubResource.")
   @visibility(Lifecycle.Read)
   resourceState?: FrontDoorResourceState;
 }
@@ -2736,6 +2744,7 @@ model FrontendEndpointProperties extends FrontendEndpointUpdateParameters {
    * Resource status.
    */
   @visibility(Lifecycle.Read)
+  @summary("Resource status of the Front Door or Front Door SubResource.")
   resourceState?: FrontDoorResourceState;
 
   /**
@@ -3463,3 +3472,6 @@ model HealthProbeSettingsListResult
  * Result of the request to list Backend Pools. It contains a list of Backend Pools objects and a URL link to get the next set of results.
  */
 model BackendPoolListResult is Azure.Core.Page<BackendPool>;
+model FrontendEndpointsListResult is Azure.Core.Page<FrontendEndpoint>;
+model FrontDoorListResult is Azure.Core.Page<FrontDoor>;
+model RulesEngineListResult is Azure.Core.Page<RulesEngine>;

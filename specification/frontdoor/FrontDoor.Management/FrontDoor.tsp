@@ -66,13 +66,18 @@ interface FrontDoors {
    */
   listByResourceGroup is ArmResourceListByParent<
     FrontDoor,
-    Error = ErrorResponse
+    Error = ErrorResponse,
+    Response = FrontDoorListResult
   >;
 
   /**
    * Lists all of the Front Doors within an Azure subscription.
    */
-  list is ArmListBySubscription<FrontDoor, Error = ErrorResponse>;
+  list is ArmListBySubscription<
+    FrontDoor,
+    Error = ErrorResponse,
+    Response = FrontDoorListResult
+  >;
 
   /**
    * Validates the custom domain mapping to ensure it maps to the correct Front Door endpoint in DNS.

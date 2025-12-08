@@ -111,7 +111,8 @@ interface WebApplicationFirewallPolicies {
   @operationId("Policies_ListBySubscription")
   listBySubscription is ArmListBySubscription<
     WebApplicationFirewallPolicy,
-    Response = ArmResponse<WebApplicationFirewallPolicyList>
+    Response = ArmResponse<WebApplicationFirewallPolicyList>,
+    Error = DefaultErrorResponse
   >;
 }
 

@@ -35,6 +35,7 @@ interface Profiles {
    * Gets an NetworkExperiment Profile by ProfileName
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @summary("Gets an NetworkExperiment Profile by ProfileName")
   @operationId("NetworkExperimentProfiles_Get")
   get is ArmResourceRead<Profile, Error = ErrorResponse>;
 
@@ -44,6 +45,7 @@ interface Profiles {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  @summary("Creates an NetworkExperiment Profile")
   @operationId("NetworkExperimentProfiles_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Profile,
@@ -63,6 +65,7 @@ interface Profiles {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  @summary("Updates an NetworkExperimentProfiles")
   @operationId("NetworkExperimentProfiles_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
@@ -92,6 +95,7 @@ interface Profiles {
    * Gets a list of Network Experiment Profiles within a resource group under a subscription
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @summary("Gets a list of Network Experiment Profiles within a resource group under a subscription")
   @operationId("NetworkExperimentProfiles_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<
     Profile,
@@ -103,6 +107,7 @@ interface Profiles {
    * Gets a list of Network Experiment Profiles under a subscription
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @summary("Gets a list of Network Experiment Profiles under a subscription")
   @operationId("NetworkExperimentProfiles_List")
   list is ArmListBySubscription<
     Profile,
@@ -114,6 +119,7 @@ interface Profiles {
    * Gets a list of Preconfigured Endpoints
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @summary("Gets a list of Preconfigured Endpoints")
   @operationId("PreconfiguredEndpoints_List")
   @list
   @get

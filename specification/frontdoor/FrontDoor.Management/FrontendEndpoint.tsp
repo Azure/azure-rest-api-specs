@@ -37,6 +37,7 @@ interface FrontendEndpoints {
    */
   listByFrontDoor is ArmResourceListByParent<
     FrontendEndpoint,
+    Response = FrontendEndpointsListResult,
     Error = ErrorResponse
   >;
 

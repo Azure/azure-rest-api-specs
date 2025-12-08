@@ -67,7 +67,8 @@ interface RulesEngines {
    */
   listByFrontDoor is ArmResourceListByParent<
     RulesEngine,
-    Error = ErrorResponse
+    Error = ErrorResponse,
+    Response = RulesEngineListResult
   >;
 }
 

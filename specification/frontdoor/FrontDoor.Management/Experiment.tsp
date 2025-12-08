@@ -30,6 +30,7 @@ interface Experiments {
   /**
    * Gets an Experiment by ExperimentName
    */
+  @summary("Gets an Experiment by ExperimentName")
   get is ArmResourceRead<Experiment, Error = ErrorResponse>;
 
   /**
@@ -37,6 +38,7 @@ interface Experiments {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  @summary("Creates or updates an Experiment")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Experiment,
     Response = ArmResourceUpdatedResponse<Experiment> | ArmResourceCreatedResponse<
@@ -54,6 +56,7 @@ interface Experiments {
    * Updates an Experiment
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  @summary("Updates an Experiment by Experiment id")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     Experiment,
@@ -70,6 +73,7 @@ interface Experiments {
    * Deletes an Experiment
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @summary("Deletes an Experiment")
   delete is ArmResourceDeleteWithoutOkAsync<
     Experiment,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
@@ -79,6 +83,7 @@ interface Experiments {
   /**
    * Gets a list of Experiments
    */
+  @summary("Gets a list of Experiments")
   listByProfile is ArmResourceListByParent<
     Experiment,
     Response = ArmResponse<ExperimentList>,
@@ -92,6 +97,7 @@ interface Experiments {
   @operationId("Reports_GetLatencyScorecards")
   @get
   @action("LatencyScorecard")
+  @summary("Gets a Latency Scorecard for a given Experiment")
   getLatencyScorecards is ArmResourceActionSync<
     Experiment,
     void,
@@ -126,6 +132,7 @@ interface Experiments {
   @operationId("Reports_GetTimeseries")
   @get
   @action("Timeseries")
+  @summary("Gets a Timeseries for a given Experiment")
   getTimeseries is ArmResourceActionSync<
     Experiment,
     void,
