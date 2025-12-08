@@ -6,5 +6,5 @@ using Azure.ClientGenerator.Core;
 @@clientName(Microsoft.Peering, "PeeringManagementClient", "python,javascript");
 @@clientName(Microsoft.Peering.CheckServiceProviderAvailabilityResponse,
   "Enum0",
-  "go"
+  "go, javascript"
 );
