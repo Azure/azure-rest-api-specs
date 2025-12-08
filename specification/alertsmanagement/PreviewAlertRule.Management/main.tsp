@@ -28,7 +28,7 @@ using TypeSpec.Versioning;
 @service(#{ title: "PreviewAlertRuleClient" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
-namespace PreviewAlertRuleClient;
+namespace Microsoft.AlertsManagement;
 
 /**
  * The available API versions.

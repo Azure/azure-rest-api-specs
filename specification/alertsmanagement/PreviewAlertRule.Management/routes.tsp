@@ -5,24 +5,26 @@ import "@typespec/rest";
 import "./models.tsp";
 import "@azure-tools/typespec-azure-resource-manager";
 
-
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 
+namespace Microsoft.AlertsManagement;
 
-namespace PreviewAlertRuleClient;
-
-
-
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 /**
-* Retrieves the results of a simulated historical execution of an alert rule
-*/
+ * Retrieves the results of a simulated historical execution of an alert rule
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 @autoRoute
-previewAlertRule is ArmProviderActionSync<Request = PreviewAlertRuleRequest,Response = PreviewAlertRuleResponse,Parameters = {/**
-* The identifier of the resource.
-*/
-@path
-@segment("")
-"resourceId": string}>
+op previewAlertRule is ArmProviderActionSync<
+  Request = PreviewAlertRuleRequest,
+  Response = PreviewAlertRuleResponse,
+  Parameters = {
+    /**
+     * The identifier of the resource.
+     */
+    @path
+    @segment("")
+    resourceId: string;
+  }
+>;
