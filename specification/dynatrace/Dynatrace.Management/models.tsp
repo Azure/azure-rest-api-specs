@@ -607,6 +607,16 @@ model VMExtensionPayload {
 model ManagedComputeResourceListResponse
   is Azure.Core.Page<ManagedComputeResourceInfo> {
   /**
+   * The ARM resource ID path of the Dynatrace monitor.
+   */
+  monitorId?: Azure.Core.armResourceIdentifier;
+
+  /**
+   * The partner name associated with the monitoring.
+   */
+  partnerName?: string;
+
+  /**
    * Tenant ID of the monitored resources.
    */
   tenantId?: string;
