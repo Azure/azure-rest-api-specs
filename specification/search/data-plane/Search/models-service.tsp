@@ -5515,9 +5515,6 @@ model AzureOpenAIVectorizerParameters {
 
   @doc("The name of the embedding model that is deployed at the provided deploymentId path.")
   modelName?: AzureOpenAIModelName;
-
-  @doc("The authentication method to use when connecting to the Azure OpenAI resource.")
-  authenticationMethod?: string;
 }
 
 @doc("Abstract base type for data identities.")
