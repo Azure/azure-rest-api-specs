@@ -10,6 +10,7 @@ options:
     azure-resource-provider-folder: "resource-manager"
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/storagemover.json"
     examples-dir: "{project-root}/examples"
+    use-read-only-status-schema: true
   "@azure-tools/typespec-csharp":
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     flavor: azure
@@ -31,7 +32,6 @@ options:
   "@azure-tools/typespec-ts":
     service-dir: sdk/storagemover
     emitter-output-dir: "{output-dir}/{service-dir}/arm-storagemover"
-    is-modular-library: true
     flavor: "azure"
     experimental-extensible-enums: true
     package-details:
