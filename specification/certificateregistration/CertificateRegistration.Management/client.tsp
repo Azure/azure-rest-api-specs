@@ -7,3 +7,8 @@ using Azure.ClientGenerator.Core;
   "CertificateRegistrationManagementClient",
   "javascript"
 );
+
+@@clientName(Microsoft.CertificateRegistration,
+  "CertificateRegistrationMgmtClient",
+  "python"
+);
