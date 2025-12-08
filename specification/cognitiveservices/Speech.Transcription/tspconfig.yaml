@@ -23,18 +23,21 @@ options:
     flavor: azure
     generate-protocol-methods: true
     generate-convenience-methods: true
-  "@typespec/http-client-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/Azure.AI.Speech.Transcription"
-    package-name: Azure.AI.Speech.Transcription
-    unreferenced-types-handling: keepAll
-    disable-xml-docs: true
-    save-inputs: true
+  # "@typespec/http-client-csharp":
+  #   emitter-output-dir: "{output-dir}/{service-dir}/Azure.AI.Speech.Transcription"
+  #   package-name: Azure.AI.Speech.Transcription
+  #   unreferenced-types-handling: keepAll
+  #   disable-xml-docs: true
+  #   save-inputs: true
   "@azure-tools/typespec-java":
     namespace: com.azure.ai.speech.transcription
     partial-update: true
     emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-speech-transcription"
     package-version: "1.0.0-beta.1"
     flavor: azure
+    generate-protocol-methods: true
+    generate-convenience-methods: true
+    customization-class: customization/src/main/java/SpeechTranscriptionCustomization.java
   "@azure-tools/typespec-python":
     package-version: "1.0.0b1"
     package-name: "azure-ai-transcription"

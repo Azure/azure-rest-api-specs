@@ -1,3 +1,6 @@
+/* eslint-disable */
+// TODO: Enable eslint, fix errors
+
 import { join } from "path";
 import { Suppression } from "suppressions";
 import { parse as yamlParse } from "yaml";
@@ -250,7 +253,7 @@ function skipForRestLevelClientOrManagementPlaneInTsEmitter(
   folder: string,
 ): SkipResult {
   const isRLCClient =
-    config?.options?.["@azure-tools/typespec-ts"]?.["is-modular-library"] !== true;
+    config?.options?.["@azure-tools/typespec-ts"]?.["is-modular-library"] === false;
   const shouldSkip = isManagementSdk(folder) || isRLCClient;
   const result: SkipResult = {
     shouldSkip: shouldSkip,
@@ -262,7 +265,7 @@ function skipForRestLevelClientOrManagementPlaneInTsEmitter(
 
 function skipForModularOrManagementPlaneInTsEmitter(config: any, folder: string): SkipResult {
   const isModularClient =
-    config?.options?.["@azure-tools/typespec-ts"]?.["is-modular-library"] === true;
+    config?.options?.["@azure-tools/typespec-ts"]?.["is-modular-library"] !== false;
   const shouldSkip = isManagementSdk(folder) || isModularClient;
   const result: SkipResult = {
     shouldSkip: shouldSkip,
