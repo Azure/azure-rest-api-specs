@@ -54,14 +54,14 @@ export function normalizePathImpl(folder: string, path: PlatformPath = defaultPa
     .resolve(folder)
     .split(path.sep)
     .join("/")
-    .replace(/^([a-z]):/, (_match, driveLetter) => driveLetter.toUpperCase() + ":");
+    .replace(/^([a-z]):/, (_match, driveLetter: string) => driveLetter.toUpperCase() + ":");
 }
 
 export async function gitDiffTopSpecFolder(folder: string) {
   const git = simpleGit(folder);
-  let topSpecFolder = folder.replace(/(^.*specification\/[^\/]*)(.*)/, "$1");
-  let stdOutput = `Running git diff on folder ${topSpecFolder}`;
-  let gitStatus = await git.status(["--porcelain", topSpecFolder]);
+  const topSpecFolder = folder.replace(/(^.*specification\/[^/]*)(.*)/, "$1");
+  const stdOutput = `Running git diff on folder ${topSpecFolder}`;
+  const gitStatus = await git.status(["--porcelain", topSpecFolder]);
 
   let success = true;
   let errorOutput: string | undefined;

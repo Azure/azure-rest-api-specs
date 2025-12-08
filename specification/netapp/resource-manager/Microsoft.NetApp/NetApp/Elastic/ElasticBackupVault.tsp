@@ -59,12 +59,14 @@ interface ElasticBackupVaults {
    * Patch the specified NetApp Elastic Backup Vault
    */
   @added(Versions.v2025_09_01_preview)
-  update is ArmResourcePatchAsync<
+  update is ArmCustomPatchAsync<
     ElasticBackupVault,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
       ElasticBackupVault,
       ElasticBackupVaultProperties
-    >
+    >,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = ElasticBackupVault> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
