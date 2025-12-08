@@ -156,7 +156,9 @@ interface ElasticBackups {
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
       ElasticBackup,
       ElasticBackupProperties
-    >
+    >,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = ElasticBackup> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   @added(Versions.v2025_09_01_preview)
