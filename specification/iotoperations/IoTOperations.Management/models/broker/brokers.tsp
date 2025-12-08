@@ -69,6 +69,7 @@ model BrokerProperties {
   @added(Versions.`2025-12-01-preview`)
   status?: BrokerStatus;
 
+  #suppress "deprecated" "ResourceHealth is deprecated, use 'status' instead."
   ...ResourceHealth;
 }
 

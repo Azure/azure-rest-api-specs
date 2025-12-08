@@ -115,16 +115,13 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Operations_List_MaximumSet_Gen": {
-            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
-          },
-          "Operations_List_MinimumSet_Gen": {
-            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
-          }
         }
       }
     },
@@ -157,13 +154,13 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
-          "Instance_ListBySubscription_MaximumSet_Gen": {
+          "Instance_ListBySubscription": {
             "$ref": "./examples/Instance_ListBySubscription_MaximumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -199,13 +196,13 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
-          "Instance_ListByResourceGroup_MaximumSet_Gen": {
+          "Instance_ListByResourceGroup": {
             "$ref": "./examples/Instance_ListByResourceGroup_MaximumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -252,7 +249,7 @@
           }
         },
         "x-ms-examples": {
-          "Instance_Get_MaximumSet_Gen": {
+          "Instance_Get": {
             "$ref": "./examples/Instance_Get_MaximumSet_Gen.json"
           }
         }
@@ -324,15 +321,15 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Instance_CreateOrUpdate": {
+            "$ref": "./examples/Instance_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Instance_CreateOrUpdate_MaximumSet_Gen": {
-            "$ref": "./examples/Instance_CreateOrUpdate_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "operationId": "Instance_Update",
@@ -385,7 +382,7 @@
           }
         },
         "x-ms-examples": {
-          "Instance_Update_MaximumSet_Gen": {
+          "Instance_Update": {
             "$ref": "./examples/Instance_Update_MaximumSet_Gen.json"
           }
         }
@@ -442,15 +439,15 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Instance_Delete": {
+            "$ref": "./examples/Instance_Delete_MaximumSet_Gen.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Instance_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/Instance_Delete_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperations/instances/{instanceName}/akriConnectorTemplates": {
@@ -495,13 +492,13 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
-          "AkriConnectorTemplate_ListByInstanceResource_MaximumSet_Gen": {
+          "AkriConnectorTemplate_ListByInstanceResource_MaximumSet": {
             "$ref": "./examples/AkriConnectorTemplate_ListByInstanceResource_MaximumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -558,7 +555,10 @@
           }
         },
         "x-ms-examples": {
-          "AkriConnectorTemplate_Get_MaximumSet_Gen": {
+          "AkriConnectorTemplate_Get_Managed_Rest": {
+            "$ref": "./examples/AkriConnectorTemplate_Get_Managed_Rest.json"
+          },
+          "AkriConnectorTemplate_Get_MaximumSet": {
             "$ref": "./examples/AkriConnectorTemplate_Get_MaximumSet_Gen.json"
           }
         }
@@ -640,15 +640,15 @@
             }
           }
         },
+        "x-ms-examples": {
+          "AkriConnectorTemplate_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/AkriConnectorTemplate_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "AkriConnectorTemplate_CreateOrUpdate_MaximumSet_Gen": {
-            "$ref": "./examples/AkriConnectorTemplate_CreateOrUpdate_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "AkriConnectorTemplate_Delete",
@@ -712,15 +712,15 @@
             }
           }
         },
+        "x-ms-examples": {
+          "AkriConnectorTemplate_Delete_MaximumSet": {
+            "$ref": "./examples/AkriConnectorTemplate_Delete_MaximumSet_Gen.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "AkriConnectorTemplate_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/AkriConnectorTemplate_Delete_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperations/instances/{instanceName}/akriConnectorTemplates/{akriConnectorTemplateName}/connectors": {
@@ -775,13 +775,13 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
-          "AkriConnector_ListByTemplate_MaximumSet_Gen": {
+          "AkriConnector_ListByTemplate_MaximumSet": {
             "$ref": "./examples/AkriConnector_ListByTemplate_MaximumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -848,7 +848,7 @@
           }
         },
         "x-ms-examples": {
-          "AkriConnector_Get_MaximumSet_Gen": {
+          "AkriConnector_Get_MaximumSet": {
             "$ref": "./examples/AkriConnector_Get_MaximumSet_Gen.json"
           }
         }
@@ -940,15 +940,15 @@
             }
           }
         },
+        "x-ms-examples": {
+          "AkriConnector_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/AkriConnector_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "AkriConnector_CreateOrUpdate_MaximumSet_Gen": {
-            "$ref": "./examples/AkriConnector_CreateOrUpdate_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "AkriConnector_Delete",
@@ -1022,15 +1022,15 @@
             }
           }
         },
+        "x-ms-examples": {
+          "AkriConnector_Delete_MaximumSet": {
+            "$ref": "./examples/AkriConnector_Delete_MaximumSet_Gen.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "AkriConnector_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/AkriConnector_Delete_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperations/instances/{instanceName}/akriDiscoveryHandlers": {
@@ -1075,13 +1075,13 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
-          "AkriDiscoveryHandler_ListByInstanceResource_MaximumSet_Gen": {
+          "AkriDiscoveryHandler_ListByInstanceResource_MaximumSet": {
             "$ref": "./examples/AkriDiscoveryHandler_ListByInstanceResource_MaximumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1138,7 +1138,7 @@
           }
         },
         "x-ms-examples": {
-          "AkriDiscoveryHandler_Get_MaximumSet_Gen": {
+          "AkriDiscoveryHandler_Get_MaximumSet": {
             "$ref": "./examples/AkriDiscoveryHandler_Get_MaximumSet_Gen.json"
           }
         }
@@ -1220,15 +1220,15 @@
             }
           }
         },
+        "x-ms-examples": {
+          "AkriDiscoveryHandler_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/AkriDiscoveryHandler_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "AkriDiscoveryHandler_CreateOrUpdate_MaximumSet_Gen": {
-            "$ref": "./examples/AkriDiscoveryHandler_CreateOrUpdate_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "AkriDiscoveryHandler_Delete",
@@ -1292,15 +1292,15 @@
             }
           }
         },
+        "x-ms-examples": {
+          "AkriDiscoveryHandler_Delete_MaximumSet": {
+            "$ref": "./examples/AkriDiscoveryHandler_Delete_MaximumSet_Gen.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "AkriDiscoveryHandler_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/AkriDiscoveryHandler_Delete_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperations/instances/{instanceName}/akriServices": {
@@ -1345,13 +1345,13 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
-          "AkriService_ListByInstanceResource_MaximumSet_Gen": {
+          "AkriService_ListByInstanceResource_MaximumSet": {
             "$ref": "./examples/AkriService_ListByInstanceResource_MaximumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1408,7 +1408,7 @@
           }
         },
         "x-ms-examples": {
-          "AkriService_Get_MaximumSet_Gen": {
+          "AkriService_Get_MaximumSet": {
             "$ref": "./examples/AkriService_Get_MaximumSet_Gen.json"
           }
         }
@@ -1490,15 +1490,15 @@
             }
           }
         },
+        "x-ms-examples": {
+          "AkriService_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/AkriService_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "AkriService_CreateOrUpdate_MaximumSet_Gen": {
-            "$ref": "./examples/AkriService_CreateOrUpdate_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "AkriService_Delete",
@@ -1562,15 +1562,15 @@
             }
           }
         },
+        "x-ms-examples": {
+          "AkriService_Delete_MaximumSet": {
+            "$ref": "./examples/AkriService_Delete_MaximumSet_Gen.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "AkriService_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/AkriService_Delete_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperations/instances/{instanceName}/brokers": {
@@ -1615,13 +1615,13 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
-          "Broker_ListByResourceGroup_MaximumSet_Gen": {
+          "Broker_ListByResourceGroup": {
             "$ref": "./examples/Broker_ListByResourceGroup_MaximumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1678,7 +1678,7 @@
           }
         },
         "x-ms-examples": {
-          "Broker_Get_MaximumSet_Gen": {
+          "Broker_Get": {
             "$ref": "./examples/Broker_Get_MaximumSet_Gen.json"
           }
         }
@@ -1760,15 +1760,24 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Broker_CreateOrUpdate": {
+            "$ref": "./examples/Broker_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "Broker_CreateOrUpdate_Complex": {
+            "$ref": "./examples/Broker_CreateOrUpdate_Complex.json"
+          },
+          "Broker_CreateOrUpdate_Minimal": {
+            "$ref": "./examples/Broker_CreateOrUpdate_Minimal.json"
+          },
+          "Broker_CreateOrUpdate_Simple": {
+            "$ref": "./examples/Broker_CreateOrUpdate_Simple.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Broker_CreateOrUpdate_MaximumSet_Gen": {
-            "$ref": "./examples/Broker_CreateOrUpdate_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "Broker_Delete",
@@ -1832,15 +1841,15 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Broker_Delete": {
+            "$ref": "./examples/Broker_Delete_MaximumSet_Gen.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Broker_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/Broker_Delete_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperations/instances/{instanceName}/brokers/{brokerName}/authentications": {
@@ -1895,13 +1904,13 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
-          "BrokerAuthentication_ListByResourceGroup_MaximumSet_Gen": {
+          "BrokerAuthentication_ListByResourceGroup": {
             "$ref": "./examples/BrokerAuthentication_ListByResourceGroup_MaximumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1968,7 +1977,7 @@
           }
         },
         "x-ms-examples": {
-          "BrokerAuthentication_Get_MaximumSet_Gen": {
+          "BrokerAuthentication_Get": {
             "$ref": "./examples/BrokerAuthentication_Get_MaximumSet_Gen.json"
           }
         }
@@ -2060,15 +2069,18 @@
             }
           }
         },
+        "x-ms-examples": {
+          "BrokerAuthentication_CreateOrUpdate": {
+            "$ref": "./examples/BrokerAuthentication_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "BrokerAuthentication_CreateOrUpdate_Complex": {
+            "$ref": "./examples/BrokerAuthentication_CreateOrUpdate_Complex.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "BrokerAuthentication_CreateOrUpdate_MaximumSet_Gen": {
-            "$ref": "./examples/BrokerAuthentication_CreateOrUpdate_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "BrokerAuthentication_Delete",
@@ -2142,15 +2154,15 @@
             }
           }
         },
+        "x-ms-examples": {
+          "BrokerAuthentication_Delete": {
+            "$ref": "./examples/BrokerAuthentication_Delete_MaximumSet_Gen.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "BrokerAuthentication_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/BrokerAuthentication_Delete_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperations/instances/{instanceName}/brokers/{brokerName}/authorizations": {
@@ -2205,13 +2217,13 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
-          "BrokerAuthorization_ListByResourceGroup_MaximumSet_Gen": {
+          "BrokerAuthorization_ListByResourceGroup": {
             "$ref": "./examples/BrokerAuthorization_ListByResourceGroup_MaximumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2278,7 +2290,7 @@
           }
         },
         "x-ms-examples": {
-          "BrokerAuthorization_Get_MaximumSet_Gen": {
+          "BrokerAuthorization_Get": {
             "$ref": "./examples/BrokerAuthorization_Get_MaximumSet_Gen.json"
           }
         }
@@ -2370,15 +2382,21 @@
             }
           }
         },
+        "x-ms-examples": {
+          "BrokerAuthorization_CreateOrUpdate": {
+            "$ref": "./examples/BrokerAuthorization_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "BrokerAuthorization_CreateOrUpdate_Complex": {
+            "$ref": "./examples/BrokerAuthorization_CreateOrUpdate_Complex.json"
+          },
+          "BrokerAuthorization_CreateOrUpdate_Simple": {
+            "$ref": "./examples/BrokerAuthorization_CreateOrUpdate_Simple.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "BrokerAuthorization_CreateOrUpdate_MaximumSet_Gen": {
-            "$ref": "./examples/BrokerAuthorization_CreateOrUpdate_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "BrokerAuthorization_Delete",
@@ -2452,15 +2470,15 @@
             }
           }
         },
+        "x-ms-examples": {
+          "BrokerAuthorization_Delete": {
+            "$ref": "./examples/BrokerAuthorization_Delete_MaximumSet_Gen.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "BrokerAuthorization_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/BrokerAuthorization_Delete_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperations/instances/{instanceName}/brokers/{brokerName}/listeners": {
@@ -2515,13 +2533,13 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
-          "BrokerListener_ListByResourceGroup_MaximumSet_Gen": {
+          "BrokerListener_ListByResourceGroup": {
             "$ref": "./examples/BrokerListener_ListByResourceGroup_MaximumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2588,7 +2606,7 @@
           }
         },
         "x-ms-examples": {
-          "BrokerListener_Get_MaximumSet_Gen": {
+          "BrokerListener_Get": {
             "$ref": "./examples/BrokerListener_Get_MaximumSet_Gen.json"
           }
         }
@@ -2680,15 +2698,21 @@
             }
           }
         },
+        "x-ms-examples": {
+          "BrokerListener_CreateOrUpdate": {
+            "$ref": "./examples/BrokerListener_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "BrokerListener_CreateOrUpdate_Complex": {
+            "$ref": "./examples/BrokerListener_CreateOrUpdate_Complex.json"
+          },
+          "BrokerListener_CreateOrUpdate_Simple": {
+            "$ref": "./examples/BrokerListener_CreateOrUpdate_Simple.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "BrokerListener_CreateOrUpdate_MaximumSet_Gen": {
-            "$ref": "./examples/BrokerListener_CreateOrUpdate_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "BrokerListener_Delete",
@@ -2762,15 +2786,15 @@
             }
           }
         },
+        "x-ms-examples": {
+          "BrokerListener_Delete": {
+            "$ref": "./examples/BrokerListener_Delete_MaximumSet_Gen.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "BrokerListener_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/BrokerListener_Delete_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperations/instances/{instanceName}/dataflowEndpoints": {
@@ -2815,13 +2839,13 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
-          "DataflowEndpoint_ListByResourceGroup_MaximumSet_Gen": {
+          "DataflowEndpoint_ListByResourceGroup": {
             "$ref": "./examples/DataflowEndpoint_ListByResourceGroup_MaximumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2878,7 +2902,7 @@
           }
         },
         "x-ms-examples": {
-          "DataflowEndpoint_Get_MaximumSet_Gen": {
+          "DataflowEndpoint_Get": {
             "$ref": "./examples/DataflowEndpoint_Get_MaximumSet_Gen.json"
           }
         }
@@ -2960,15 +2984,42 @@
             }
           }
         },
+        "x-ms-examples": {
+          "DataflowEndpoint_CreateOrUpdate": {
+            "$ref": "./examples/DataflowEndpoint_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "DataflowEndpoint_CreateOrUpdate_ADLSv2": {
+            "$ref": "./examples/DataflowEndpoint_CreateOrUpdate_ADLSv2.json"
+          },
+          "DataflowEndpoint_CreateOrUpdate_ADX": {
+            "$ref": "./examples/DataflowEndpoint_CreateOrUpdate_ADX.json"
+          },
+          "DataflowEndpoint_CreateOrUpdate_AIO": {
+            "$ref": "./examples/DataflowEndpoint_CreateOrUpdate_AIO.json"
+          },
+          "DataflowEndpoint_CreateOrUpdate_EventGrid": {
+            "$ref": "./examples/DataflowEndpoint_CreateOrUpdate_EventGrid.json"
+          },
+          "DataflowEndpoint_CreateOrUpdate_EventHub": {
+            "$ref": "./examples/DataflowEndpoint_CreateOrUpdate_EventHub.json"
+          },
+          "DataflowEndpoint_CreateOrUpdate_Fabric": {
+            "$ref": "./examples/DataflowEndpoint_CreateOrUpdate_Fabric.json"
+          },
+          "DataflowEndpoint_CreateOrUpdate_Kafka": {
+            "$ref": "./examples/DataflowEndpoint_CreateOrUpdate_Kafka.json"
+          },
+          "DataflowEndpoint_CreateOrUpdate_LocalStorage": {
+            "$ref": "./examples/DataflowEndpoint_CreateOrUpdate_LocalStorage.json"
+          },
+          "DataflowEndpoint_CreateOrUpdate_MQTT": {
+            "$ref": "./examples/DataflowEndpoint_CreateOrUpdate_MQTT.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "DataflowEndpoint_CreateOrUpdate_MaximumSet_Gen": {
-            "$ref": "./examples/DataflowEndpoint_CreateOrUpdate_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "DataflowEndpoint_Delete",
@@ -3032,15 +3083,15 @@
             }
           }
         },
+        "x-ms-examples": {
+          "DataflowEndpoint_Delete": {
+            "$ref": "./examples/DataflowEndpoint_Delete_MaximumSet_Gen.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "DataflowEndpoint_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/DataflowEndpoint_Delete_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperations/instances/{instanceName}/dataflowProfiles": {
@@ -3085,13 +3136,13 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
-          "DataflowProfile_ListByResourceGroup_MaximumSet_Gen": {
+          "DataflowProfile_ListByResourceGroup": {
             "$ref": "./examples/DataflowProfile_ListByResourceGroup_MaximumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -3148,7 +3199,7 @@
           }
         },
         "x-ms-examples": {
-          "DataflowProfile_Get_MaximumSet_Gen": {
+          "DataflowProfile_Get": {
             "$ref": "./examples/DataflowProfile_Get_MaximumSet_Gen.json"
           }
         }
@@ -3230,15 +3281,21 @@
             }
           }
         },
+        "x-ms-examples": {
+          "DataflowProfile_CreateOrUpdate": {
+            "$ref": "./examples/DataflowProfile_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "DataflowProfile_CreateOrUpdate_Minimal": {
+            "$ref": "./examples/DataflowProfile_CreateOrUpdate_Minimal.json"
+          },
+          "DataflowProfile_CreateOrUpdate_Multi": {
+            "$ref": "./examples/DataflowProfile_CreateOrUpdate_Multi.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "DataflowProfile_CreateOrUpdate_MaximumSet_Gen": {
-            "$ref": "./examples/DataflowProfile_CreateOrUpdate_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "DataflowProfile_Delete",
@@ -3302,15 +3359,15 @@
             }
           }
         },
+        "x-ms-examples": {
+          "DataflowProfile_Delete": {
+            "$ref": "./examples/DataflowProfile_Delete_MaximumSet_Gen.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "DataflowProfile_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/DataflowProfile_Delete_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperations/instances/{instanceName}/dataflowProfiles/{dataflowProfileName}/dataflowGraphs": {
@@ -3365,13 +3422,13 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
-          "DataflowGraph_ListByDataflowProfile_MaximumSet_Gen": {
+          "DataflowGraph_ListByDataflowProfile_MaximumSet": {
             "$ref": "./examples/DataflowGraph_ListByDataflowProfile_MaximumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -3438,7 +3495,7 @@
           }
         },
         "x-ms-examples": {
-          "DataflowGraph_Get_MaximumSet_Gen": {
+          "DataflowGraph_Get_MaximumSet": {
             "$ref": "./examples/DataflowGraph_Get_MaximumSet_Gen.json"
           }
         }
@@ -3530,15 +3587,15 @@
             }
           }
         },
+        "x-ms-examples": {
+          "DataflowGraph_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/DataflowGraph_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "DataflowGraph_CreateOrUpdate_MaximumSet_Gen": {
-            "$ref": "./examples/DataflowGraph_CreateOrUpdate_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "DataflowGraph_Delete",
@@ -3612,15 +3669,15 @@
             }
           }
         },
+        "x-ms-examples": {
+          "DataflowGraph_Delete_MaximumSet": {
+            "$ref": "./examples/DataflowGraph_Delete_MaximumSet_Gen.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "DataflowGraph_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/DataflowGraph_Delete_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperations/instances/{instanceName}/dataflowProfiles/{dataflowProfileName}/dataflows": {
@@ -3675,13 +3732,13 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
-          "Dataflow_ListByProfileResource_MaximumSet_Gen": {
+          "Dataflow_ListByProfileResource": {
             "$ref": "./examples/Dataflow_ListByProfileResource_MaximumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -3748,7 +3805,7 @@
           }
         },
         "x-ms-examples": {
-          "Dataflow_Get_MaximumSet_Gen": {
+          "Dataflow_Get": {
             "$ref": "./examples/Dataflow_Get_MaximumSet_Gen.json"
           }
         }
@@ -3840,15 +3897,30 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Dataflow_CreateOrUpdate": {
+            "$ref": "./examples/Dataflow_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "Dataflow_CreateOrUpdate_ComplexContextualization": {
+            "$ref": "./examples/Dataflow_CreateOrUpdate_ComplexContextualization.json"
+          },
+          "Dataflow_CreateOrUpdate_ComplexEventHub": {
+            "$ref": "./examples/Dataflow_CreateOrUpdate_ComplexEventHub.json"
+          },
+          "Dataflow_CreateOrUpdate_FilterToTopic": {
+            "$ref": "./examples/Dataflow_CreateOrUpdate_FilterToTopic.json"
+          },
+          "Dataflow_CreateOrUpdate_SimpleEventGrid": {
+            "$ref": "./examples/Dataflow_CreateOrUpdate_SimpleEventGrid.json"
+          },
+          "Dataflow_CreateOrUpdate_SimpleFabric": {
+            "$ref": "./examples/Dataflow_CreateOrUpdate_SimpleFabric.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Dataflow_CreateOrUpdate_MaximumSet_Gen": {
-            "$ref": "./examples/Dataflow_CreateOrUpdate_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "Dataflow_Delete",
@@ -3922,15 +3994,15 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Dataflow_Delete": {
+            "$ref": "./examples/Dataflow_Delete_MaximumSet_Gen.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Dataflow_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/Dataflow_Delete_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperations/instances/{instanceName}/diagnostics": {
@@ -3975,13 +4047,13 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Diagnostic_ListByInstanceResource": {
+            "$ref": "./examples/Diagnostic_ListByInstanceResource.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Diagnostic_ListByInstanceResource_MaximumSet_Gen": {
-            "$ref": "./examples/Diagnostic_ListByInstanceResource_MaximumSet_Gen.json"
-          }
         }
       }
     },
@@ -4038,8 +4110,8 @@
           }
         },
         "x-ms-examples": {
-          "Diagnostic_Get_MaximumSet_Gen": {
-            "$ref": "./examples/Diagnostic_Get_MaximumSet_Gen.json"
+          "Diagnostic_Get": {
+            "$ref": "./examples/Diagnostic_Get.json"
           }
         }
       },
@@ -4120,15 +4192,15 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Diagnostic_CreateOrUpdate": {
+            "$ref": "./examples/Diagnostic_CreateOrUpdate.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Diagnostic_CreateOrUpdate_MaximumSet_Gen": {
-            "$ref": "./examples/Diagnostic_CreateOrUpdate_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "Diagnostic_Delete",
@@ -4192,15 +4264,15 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Diagnostic_Delete": {
+            "$ref": "./examples/Diagnostic_Delete.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Diagnostic_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/Diagnostic_Delete_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperations/instances/{instanceName}/registryEndpoints": {
@@ -4245,13 +4317,13 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
-          "RegistryEndpoint_ListByInstanceResource_MaximumSet_Gen": {
+          "RegistryEndpoint_ListByInstanceResource_MaximumSet": {
             "$ref": "./examples/RegistryEndpoint_ListByInstanceResource_MaximumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -4308,7 +4380,7 @@
           }
         },
         "x-ms-examples": {
-          "RegistryEndpoint_Get_MaximumSet_Gen": {
+          "RegistryEndpoint_Get_MaximumSet": {
             "$ref": "./examples/RegistryEndpoint_Get_MaximumSet_Gen.json"
           }
         }
@@ -4390,15 +4462,15 @@
             }
           }
         },
+        "x-ms-examples": {
+          "RegistryEndpoint_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/RegistryEndpoint_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "RegistryEndpoint_CreateOrUpdate_MaximumSet_Gen": {
-            "$ref": "./examples/RegistryEndpoint_CreateOrUpdate_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "RegistryEndpoint_Delete",
@@ -4462,15 +4534,15 @@
             }
           }
         },
+        "x-ms-examples": {
+          "RegistryEndpoint_Delete_MaximumSet": {
+            "$ref": "./examples/RegistryEndpoint_Delete_MaximumSet_Gen.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "RegistryEndpoint_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/RegistryEndpoint_Delete_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     }
   },

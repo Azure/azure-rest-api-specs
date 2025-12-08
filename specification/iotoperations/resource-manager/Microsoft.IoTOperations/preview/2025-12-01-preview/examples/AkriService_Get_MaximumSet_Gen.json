@@ -3,53 +3,56 @@
   "operationId": "AkriService_Get",
   "parameters": {
     "api-version": "2025-12-01-preview",
-    "subscriptionId": "255BB976-001C-4622-B918-E4C7A8C2A4BB",
+    "subscriptionId": "F8C729F9-DF9C-4743-848F-96EE433D8E53",
     "resourceGroupName": "rgiotoperations",
-    "instanceName": "Replace this value with a string matching RegExp ^[a-z0-9][a-z0-9-]*[a-z0-9]$",
-    "akriServiceName": "Replace this value with a string matching RegExp ^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+    "instanceName": "resource-name123",
+    "akriServiceName": "resource-name123"
   },
   "responses": {
     "200": {
       "body": {
         "properties": {
           "provisioningState": "Succeeded",
-          "adrServiceReplicas": 5,
+          "adrServiceReplicas": 2,
           "mqttConnectionConfiguration": {
             "authentication": {
-              "method": "AkriConnectorsMqttAuthentication"
+              "method": "ServiceAccountToken",
+              "serviceAccountTokenSettings": {
+                "audience": "MQ-SAT"
+              }
             },
-            "host": "wdmjo",
+            "host": "aio-broker:18883",
             "protocol": "Mqtt",
-            "keepAliveSeconds": 0,
-            "maxInflightMessages": 0,
-            "sessionExpirySeconds": 0,
+            "keepAliveSeconds": 10,
+            "maxInflightMessages": 10,
+            "sessionExpirySeconds": 60,
             "tls": {
               "mode": "Enabled",
-              "trustedCaCertificateConfigMapRef": "vbotnvfesp"
+              "trustedCaCertificateConfigMapRef": "azure-iot-operations-aio-ca-trust-bundle"
             }
           },
           "status": {
             "healthState": "Available",
-            "lastTransitionTime": "lfupgyibqjffwckrbr",
-            "lastUpdateTime": "gqdlvnuhyatlxkegxntcbuuwui",
-            "message": "cwvzaudrbzlasgpgzwb",
-            "reasonCode": "gfz"
+            "lastTransitionTime": "hml",
+            "lastUpdateTime": "lsazvbdodsetgjqmetltqciz",
+            "message": "nfwqwrr",
+            "reasonCode": "c"
           }
         },
         "extendedLocation": {
-          "name": "lvrdfyhajrjrofhq",
+          "name": "/subscriptions/F8C729F9-DF9C-4743-848F-96EE433D8E53/resourceGroups/rgiotoperations/providers/Microsoft.ExtendedLocation/customLocations/resource-123",
           "type": "CustomLocation"
         },
-        "id": "xf",
-        "name": "xlcdvzwxrmawdyikaqtpm",
-        "type": "khionmiztzig",
+        "id": "/subscriptions/0000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup123/providers/Microsoft.IoTOperations/instances/resource-name123/akriConnectorTemplates/resource-name123/akriServices/resource-name123",
+        "name": "isognxyalpymhpo",
+        "type": "oiyiicuypahicquron",
         "systemData": {
-          "createdBy": "xhkichxwsegpmbwowp",
+          "createdBy": "contosouser",
           "createdByType": "User",
-          "createdAt": "2025-12-06T01:30:56.955Z",
-          "lastModifiedBy": "vuduhuibonvzew",
+          "createdAt": "2024-08-09T18:13:29.389Z",
+          "lastModifiedBy": "contosouser",
           "lastModifiedByType": "User",
-          "lastModifiedAt": "2025-12-06T01:30:56.956Z"
+          "lastModifiedAt": "2024-08-09T18:13:29.389Z"
         }
       }
     }

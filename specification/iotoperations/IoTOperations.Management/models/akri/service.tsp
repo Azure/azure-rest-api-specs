@@ -51,7 +51,6 @@ model AkriServiceProperties {
   /** The status for the service. */
   @visibility(Lifecycle.Read)
   status?: AkriServiceStatus;
-
 }
 
 /** AkriService status. */

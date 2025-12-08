@@ -47,6 +47,7 @@ model AkriConnectorProperties {
   @added(Versions.`2025-12-01-preview`)
   status?: AkriConnectorStatus;
 
+  #suppress "deprecated" "ResourceHealth is deprecated, use 'status' instead."
   ...ResourceHealth;
 }
 

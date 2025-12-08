@@ -52,6 +52,7 @@ model DataflowProfileProperties {
   @added(Versions.`2025-12-01-preview`)
   status?: DataflowProfileStatus;
 
+  #suppress "deprecated" "ResourceHealth is deprecated, use 'status' instead."
   ...ResourceHealth;
 }
 
