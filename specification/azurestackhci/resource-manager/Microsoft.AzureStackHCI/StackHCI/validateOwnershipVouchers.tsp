@@ -17,9 +17,9 @@ namespace Microsoft.AzureStackHCI;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @added(Versions.v2025_12_01_preview)
 interface OwnershipVouchers {
-  /**  
+  /**
    * Validates ownership vouchers.
-   */ 
+   */
   @action("validateOwnershipVouchers")
   validate is ArmResourceActionSync<
     ResourceGroupLocationResource,
@@ -36,10 +36,10 @@ model ValidateOwnershipVouchersRequest {
   @minItems(1)
   ownershipVoucherDetails: OwnershipVoucherDetails[];
 }
-
+@@doc(OwnershipVouchers.validate::parameters.body,
+  "Ownership vouchers to be validated."
+);
 @@clientName(OwnershipVouchers.validate::parameters.body, "validationRequest");
-@@doc(OwnershipVouchers.validate::parameters.body, "The content of the action request");
-
 
 @added(Versions.v2025_12_01_preview)
 @doc("Validate Ownership Voucher Response")
