@@ -28,23 +28,32 @@ from models import (
 )
 
 # Known renamed mappings between hand-authored and TSP-compiled swaggers
+# Extracted from human review CSV analysis
 KNOWN_DEFINITION_RENAMES = {
     "AmlSkill": "AzureMachineLearningSkill",
+    "AnswerResult": "QueryAnswerResult",
     "Answers": "QueryAnswerType",
     "AzureOpenAIParameters": "AzureOpenAIVectorizerParameters",
     "BinaryQuantizationVectorSearchCompressionConfiguration": "BinaryQuantizationCompression",
     "BM25Similarity": "BM25SimilarityAlgorithm",
+    "CaptionResult": "QueryCaptionResult",
     "Captions": "QueryCaptionType",
     "ClassicSimilarity": "ClassicSimilarityAlgorithm",
     "DataToExtract": "BlobIndexerDataToExtract",
     "EdgeNGramTokenFilterV2": "EdgeNGramTokenFilter",
+    "ExecutionEnvironment": "IndexerExecutionEnvironment",
+    "ExhaustiveKnnVectorSearchAlgorithmConfiguration": "ExhaustiveKnnAlgorithmConfiguration",
     "ImageAction": "BlobIndexerImageAction",
     "KeywordTokenizerV2": "KeywordTokenizer",
+    "KnowledgeBaseErrorAdditionalInfo": "ErrorAdditionalInfo",
+    "KnowledgeBaseErrorDetail": "ErrorDetail",
     "LuceneStandardTokenizerV2": "LuceneStandardTokenizer",
     "NGramTokenFilterV2": "NGramTokenFilter",
     "ParsingMode": "BlobIndexerParsingMode",
     "PathHierarchyTokenizerV2": "PathHierarchyTokenizer",
+    "PdfTextRotationAlgorithm": "BlobIndexerPDFTextRotationAlgorithm",
     "QueryResultDocumentSemanticFieldState": "SemanticFieldState",
+    "RawVectorQuery": "VectorizedQuery",
     "ScalarQuantizationVectorSearchCompressionConfiguration": "ScalarQuantizationCompression",
     "SemanticErrorHandling": "SemanticErrorMode",
     "SemanticPartialResponseReason": "SemanticErrorReason",
@@ -54,6 +63,7 @@ KNOWN_DEFINITION_RENAMES = {
     "Similarity": "SimilarityAlgorithm",
     "Speller": "QuerySpellerType",
     "Suggester": "SearchSuggester",
+    "VectorSearchCompressionConfiguration": "VectorSearchCompression",
     "WebApiParameters": "WebApiVectorizerParameters",
 }
 
@@ -176,10 +186,20 @@ class ApiComparator:
     def __init__(self):
         """
         Initialize the comparator.
+
+        Improvements based on human review analysis:
+        - Track compared definitions to prevent duplicate reporting when definitions
+          are referenced by other definitions
+        - Add format tolerance for numeric types (None vs double/float for number types)
+        - Enhanced inline vs reference detection to avoid false positives
         """
         self.differences: List[Difference] = []
         self.api1: Optional[CanonicalApi] = None
         self.api2: Optional[CanonicalApi] = None
+        # Track compared definition pairs to avoid duplicates: (hand_name, tsp_name)
+        self.compared_definition_pairs: Set[tuple[str, str]] = set()
+        # Queue for recursive definition comparison
+        self.definition_comparison_queue: List[tuple[str, str]] = []
 
     def compare_apis(self, api1: CanonicalApi, api2: CanonicalApi) -> EquivalencyResult:
         """
@@ -195,6 +215,8 @@ class ApiComparator:
         self.differences = []
         self.api1 = api1
         self.api2 = api2
+        self.compared_definition_pairs = set()  # Reset for each comparison
+        self.definition_comparison_queue = []  # Reset queue
 
         # According to equiv_contract.md and the expanded CanonicalApi model,
         # we check the following dimensions:
@@ -907,115 +929,143 @@ class ApiComparator:
             )
 
     def _compare_definitions(self, api1: CanonicalApi, api2: CanonicalApi) -> None:
-        """Compare definition dictionaries according to equiv_contract.md section 4.7."""
+        """
+        Compare definition dictionaries using unified graph traversal.
+
+        This implements a 4-phase approach:
+        Phase 1: Build unified definition mapping (KNOWN_RENAMES + fuzzy matches + exact matches)
+        Phase 2: Compare all mapped definition pairs with tuple-based memoization
+        Phase 3: Process recursive comparison queue (BFS)
+        Phase 4: Report unmatched definitions (with inlined detection)
+        """
         defs1 = set(api1.definitions.keys())
         defs2 = set(api2.definitions.keys())
 
-        # Definition name sets must match
-        missing_defs = defs1 - defs2
-        extra_defs = defs2 - defs1
+        # PHASE 1: DISCOVERY & MAPPING
+        # Build unified mapping: hand_name -> tsp_name
+        definition_mapping: Dict[str, str] = {}
 
-        # Find potential matches between missing and extra definitions
+        # 1a. Add KNOWN_DEFINITION_RENAMES (highest priority)
+        for hand_name, tsp_name in KNOWN_DEFINITION_RENAMES.items():
+            if hand_name in defs1 and tsp_name in defs2:
+                definition_mapping[hand_name] = tsp_name
+
+        # 1b. Find fuzzy matches for unmapped definitions
+        unmapped_defs1 = defs1 - set(definition_mapping.keys())
+        unmapped_defs2 = defs2 - set(definition_mapping.values())
+
         potential_matches = self._find_definition_matches(
-            missing_defs, extra_defs, api1, api2
+            unmapped_defs1, unmapped_defs2, api1, api2
         )
 
-        # Remove ALL potential matches from missing/extra to avoid duplicates
-        # Even if they're not promoted for comparison, they should not be reported as missing/extra
+        # Promote high-confidence fuzzy matches (>0.75 similarity)
         for match in potential_matches:
             missing_def, extra_def, similarity = match
-            missing_defs.discard(missing_def)
-            extra_defs.discard(extra_def)
-
-        # Promote high-confidence matches to compare instead of just hinting
-        promoted_def_matches = []
-        for match in potential_matches:
-            missing_def, extra_def, similarity = match
-            # High similarity threshold for definitions (0.75 to catch suffix additions like "Algorithm")
             if similarity > 0.75:
-                promoted_def_matches.append((missing_def, extra_def))
+                definition_mapping[missing_def] = extra_def
 
-        # Remove promoted matches from potential_matches to avoid duplicate "Possible Match" hints
-        promoted_def_names = {(m, e) for m, e in promoted_def_matches}
-        potential_matches = [
-            m for m in potential_matches if (m[0], m[1]) not in promoted_def_names
+        # 1c. Add exact matches (common definitions)
+        common_defs = defs1 & defs2
+        for def_name in common_defs:
+            if def_name not in definition_mapping:
+                definition_mapping[def_name] = def_name
+
+        # PHASE 2: UNIFIED COMPARISON
+        # Compare all mapped pairs using single unified function
+        print(f"Comparing {len(definition_mapping)} definition pairs...")
+        for hand_name, tsp_name in definition_mapping.items():
+            self._compare_definition_pair(
+                hand_name, tsp_name, api1, api2, source="initial"
+            )
+
+        # PHASE 3: PROCESS RECURSIVE QUEUE (BFS)
+        # Process all triggered recursive comparisons
+        while self.definition_comparison_queue:
+            hand_name, tsp_name = self.definition_comparison_queue.pop(0)
+            self._compare_definition_pair(
+                hand_name, tsp_name, api1, api2, source="recursive"
+            )
+
+        # PHASE 4: REPORT UNMATCHED
+        # Identify definitions that were never compared
+        compared_hand_names = {pair[0] for pair in self.compared_definition_pairs}
+        compared_tsp_names = {pair[1] for pair in self.compared_definition_pairs}
+
+        missing_defs = defs1 - compared_hand_names
+        extra_defs = defs2 - compared_tsp_names
+
+        # Find remaining potential matches (low confidence, not promoted)
+        remaining_potential_matches = [
+            match
+            for match in potential_matches
+            if match[0] in missing_defs and match[1] in extra_defs
         ]
 
-        # Context format: operation_id || path_method || context_suffix || possible_match
-        # Compare promoted matches
-        for missing_def, extra_def in promoted_def_matches:
-            print(f"Potential definition match\t {missing_def} vs {extra_def}")
-            # Compare the matched definitions - resolve ref chains for deep comparison
-            # Use cross-API resolution with known mappings for renamed definitions
-            schema1 = api1.definitions[missing_def]
-            schema2 = api2.definitions[extra_def]
-            resolved_schema1 = self._resolve_schema_ref_chain_with_mapping(
-                schema1, api1, api2
-            )
-            resolved_schema2 = self._resolve_schema_ref_chain_with_mapping(
-                schema2, api2, api1
-            )
-            if not self._schemas_equal(resolved_schema1, resolved_schema2):
-                schema_diffs = self._get_schema_differences(
-                    resolved_schema1, resolved_schema2
-                )
+        # Report missing definitions (with inlined detection)
+        for def_name in missing_defs:
+            # Check if this missing definition has a low-confidence potential match
+            matches = [
+                match for match in remaining_potential_matches if match[0] == def_name
+            ]
+            possible_match = matches[0][1] if matches else ""
 
-                # Detect specific patterns for granular categorization
-                mismatch_type = self._categorize_definition_mismatch(
-                    f"{missing_def} VS {extra_def}", schema_diffs
-                )
+            # Find where this definition is referenced in hand-authored
+            references = self._find_definition_references(def_name, api1)
 
-                # Format diffs in short format
-                short_diffs = self._format_short_diffs(schema_diffs)
-                diff_details = (
-                    "\n- " + "\n- ".join(short_diffs)
-                    if short_diffs
-                    else "unknown differences"
-                )
+            # NEW: Check if this definition was inlined in TSP operations
+            inline_info = self._find_inlined_definition(def_name, api1, api2)
 
-                message = f"Definition '{missing_def}' VS '{extra_def}':{diff_details}"
+            if inline_info:
+                # Found inline match - report as inlined instead of missing
+                message = f"{def_name} (inlined in tsp: {inline_info})"
+                ref_info = (
+                    f" (ref in hand-authored: {', '.join(references[:3])})"
+                    if references
+                    else ""
+                )
                 self.differences.append(
                     Difference(
-                        type=mismatch_type,
-                        message=message,
-                        context=f"||{missing_def}||||{extra_def}",
+                        type=DifferenceType.MISSING_DEFINITION,
+                        message=message + ref_info,
+                        context=f"||{def_name}||inlined||{inline_info}",
                     )
                 )
                 print(
-                    f"Definition schemas mismatch (potential match)\t {missing_def} ~ {extra_def}\n{diff_details}"
+                    f"Definition inlined in {api2.swagger_source} \t {message}{ref_info}"
                 )
-
-        for def_name in missing_defs:
-            # Check if this missing definition has a potential match
-            matches = [match for match in potential_matches if match[0] == def_name]
-            possible_match = matches[0][1] if matches else ""
-
-            # Find where this definition is referenced in hand-authored (its source)
-            references = self._find_definition_references(def_name, api1)
-            if not references:
-                ref_info = " (no ref in hand-authored)"
             else:
-                ref_info = f" (ref in hand-authored: {', '.join(references[:3])})"
+                # Truly missing
+                if not references:
+                    ref_info = " (no ref in hand-authored)"
+                else:
+                    ref_info = f" (ref in hand-authored: {', '.join(references[:3])})"
 
-            message = f"{def_name}{ref_info}"
-            self.differences.append(
-                Difference(
-                    type=DifferenceType.MISSING_DEFINITION,
-                    message=message,
-                    context=f"||{def_name}||||{possible_match}",
+                message = f"{def_name}{ref_info}"
+                self.differences.append(
+                    Difference(
+                        type=DifferenceType.MISSING_DEFINITION,
+                        message=message,
+                        context=f"||{def_name}||||{possible_match}",
+                    )
                 )
-            )
-            print(
-                f"Definition missing in {api2.swagger_source} \t {message}"
-                + (f"\t|| Possible Match: {possible_match}" if possible_match else "")
-            )
+                print(
+                    f"Definition missing in {api2.swagger_source} \t {message}"
+                    + (
+                        f"\t|| Possible Match: {possible_match}"
+                        if possible_match
+                        else ""
+                    )
+                )
 
+        # Report extra definitions
         for def_name in extra_defs:
-            # Check if this extra definition has a potential match
-            matches = [match for match in potential_matches if match[1] == def_name]
+            # Check if this extra definition has a low-confidence potential match
+            matches = [
+                match for match in remaining_potential_matches if match[1] == def_name
+            ]
             possible_match = matches[0][0] if matches else ""
 
-            # Find where this definition is referenced in TSP (its source)
+            # Find where this definition is referenced in TSP
             references = self._find_definition_references(def_name, api2)
             if not references:
                 ref_info = " (no ref in tsp)"
@@ -1034,60 +1084,6 @@ class ApiComparator:
                 f"Extra definition in {api2.swagger_source} \t {message}"
                 + (f"\t|| Possible Match: {possible_match}" if possible_match else "")
             )
-
-        # Compare common definitions
-        common_defs = defs1 & defs2
-        for def_name in common_defs:
-            schema1 = api1.definitions[def_name]
-            schema2 = api2.definitions[def_name]
-            # Resolve ref chains for deep comparison
-            resolved_schema1 = self._resolve_schema_ref_chain(schema1, api1)
-            resolved_schema2 = self._resolve_schema_ref_chain(schema2, api2)
-            if not self._schemas_equal(resolved_schema1, resolved_schema2):
-                # Get detailed schema differences
-                schema_diffs = self._get_schema_differences(
-                    resolved_schema1, resolved_schema2
-                )
-
-                # Detect specific patterns for granular categorization
-                mismatch_type = self._categorize_definition_mismatch(
-                    def_name, schema_diffs
-                )
-
-                # Find where this definition is referenced in both APIs
-                refs1 = self._find_definition_references(def_name, api1)
-                refs2 = self._find_definition_references(def_name, api2)
-
-                # Build no ref info
-                no_ref_parts = []
-                if not refs1:
-                    no_ref_parts.append("hand-authored")
-                if not refs2:
-                    no_ref_parts.append("tsp")
-                no_ref_info = (
-                    f" (no ref in {'/'.join(no_ref_parts)})" if no_ref_parts else ""
-                )
-
-                # Format diffs in short format
-                short_diffs = self._format_short_diffs(schema_diffs)
-                diff_details = (
-                    "\n- " + "\n- ".join(short_diffs)
-                    if short_diffs
-                    else "unknown differences"
-                )
-
-                message = f"Definition '{def_name}'{no_ref_info}:{diff_details}"
-
-                self.differences.append(
-                    Difference(
-                        type=mismatch_type,
-                        message=message,
-                        context=f"||{def_name}||||",
-                    )
-                )
-                print(
-                    f"Definition schemas mismatch \t {def_name}{no_ref_info}\n{diff_details}"
-                )
 
     def _format_short_diffs(self, schema_diffs: List[str]) -> List[str]:
         """Format schema differences in shorter format."""
@@ -1212,8 +1208,34 @@ class ApiComparator:
             # Don't report type difference if it's explained by inline vs ref
             if not inline_vs_ref_info:
                 differences.append(f"type: {schema1.type} vs {schema2.type}")
+
+        # Check format with tolerance for numeric types
         if schema1.format != schema2.format:
-            differences.append(f"format: {schema1.format} vs {schema2.format}")
+            type1_is_number = type1 in ("number", "integer")
+            type2_is_number = type2 in ("number", "integer")
+            format1_is_numeric = schema1.format in (
+                None,
+                "double",
+                "float",
+                "int32",
+                "int64",
+            )
+            format2_is_numeric = schema2.format in (
+                None,
+                "double",
+                "float",
+                "int32",
+                "int64",
+            )
+
+            # Only report format difference if NOT both numeric types with numeric formats
+            if not (
+                type1_is_number
+                and type2_is_number
+                and format1_is_numeric
+                and format2_is_numeric
+            ):
+                differences.append(f"format: {schema1.format} vs {schema2.format}")
         if schema1.ref != schema2.ref:
             # Don't report ref difference if it's explained by inline vs ref
             if not inline_vs_ref_info:
@@ -1238,6 +1260,11 @@ class ApiComparator:
             # Compare property schemas for common properties
             common_props = set(props1.keys()) & set(props2.keys())
             for prop_name in sorted(common_props):
+                # Trigger recursive comparison for referenced definitions
+                self._trigger_recursive_definition_comparison(
+                    props1[prop_name], props2[prop_name]
+                )
+
                 if not self._schemas_equal(props1[prop_name], props2[prop_name]):
                     prop_diffs = self._get_schema_differences(
                         props1[prop_name], props2[prop_name]
@@ -1285,6 +1312,10 @@ class ApiComparator:
                     f"items schema: {schema1.items is not None} vs {schema2.items is not None}"
                 )
             elif schema1.items is not None and schema2.items is not None:
+                # Trigger recursive comparison for array items
+                self._trigger_recursive_definition_comparison(
+                    schema1.items, schema2.items
+                )
                 # Both have items but they differ
                 items_diffs = self._get_schema_differences(schema1.items, schema2.items)
                 if items_diffs:
@@ -1550,6 +1581,95 @@ class ApiComparator:
 
         return resolved_schema
 
+    def _trigger_recursive_definition_comparison(
+        self,
+        schema1: Optional[CanonicalSchema],
+        schema2: Optional[CanonicalSchema],
+    ) -> None:
+        """
+        Trigger recursive comparison of referenced definitions.
+
+        This implements depth-first comparison with memoization:
+        - If both schemas have $ref to definitions, extract the definition names
+        - Check if those definitions have been compared already (in compared_definitions)
+        - If not, trigger comparison and add to compared_definitions
+
+        This prevents duplicate reporting and handles nested references efficiently.
+        """
+        if not schema1 or not schema2 or not self.api1 or not self.api2:
+            return
+
+        # Extract definition names from $ref
+        def extract_def_name(ref: Optional[str]) -> Optional[str]:
+            if not ref:
+                return None
+            # Handle both "#/definitions/Name" and "Name" formats
+            if "/" in ref:
+                return ref.split("/")[-1]
+            return ref
+
+        def_name1 = extract_def_name(schema1.ref)
+        def_name2 = extract_def_name(schema2.ref)
+
+        # Only trigger if both have refs to definitions
+        if not def_name1 or not def_name2:
+            return
+
+        # Check if definition exists in both APIs
+        if (
+            def_name1 not in self.api1.definitions
+            or def_name2 not in self.api2.definitions
+        ):
+            return
+
+        # Check if already compared (memoization)
+        # For renamed definitions, use the source (hand-authored) name as the key
+        comparison_key = def_name1
+        if comparison_key in self.compared_definitions:
+            return
+
+        # Mark as compared to prevent infinite recursion and duplicate reporting
+        self.compared_definitions.add(comparison_key)
+
+        # Trigger recursive comparison
+        def_schema1 = self.api1.definitions[def_name1]
+        def_schema2 = self.api2.definitions[def_name2]
+
+        # Resolve ref chains for deep comparison
+        resolved_schema1 = self._resolve_schema_ref_chain(def_schema1, self.api1)
+        resolved_schema2 = self._resolve_schema_ref_chain(def_schema2, self.api2)
+
+        if not self._schemas_equal(resolved_schema1, resolved_schema2):
+            # Get detailed schema differences
+            schema_diffs = self._get_schema_differences(
+                resolved_schema1, resolved_schema2
+            )
+
+            if schema_diffs:
+                short_diffs = self._format_short_diffs(schema_diffs)
+                diff_type = self._categorize_definition_mismatch(
+                    def_name1, schema_diffs
+                )
+
+                message = (
+                    f"Definition '{def_name1}'"
+                    + (f" VS '{def_name2}'" if def_name1 != def_name2 else "")
+                    + f":\n- {chr(10).join([f'- {d}' if not d.startswith('-') else d for d in short_diffs])}"
+                )
+
+                self.differences.append(
+                    Difference(
+                        type=diff_type,
+                        message=message,
+                        context=f"||{def_name1}",
+                    )
+                )
+                print(
+                    f"Definition schemas mismatch (recursive)\t {def_name1}"
+                    + (f" ~ {def_name2}" if def_name1 != def_name2 else "")
+                )
+                print(f"\n- " + "\n- ".join(short_diffs))
+
     def _format_additional_properties(self, add_props) -> str:
         """Format additionalProperties for readable display."""
         if add_props is None:
@@ -1684,6 +1804,19 @@ class ApiComparator:
         """Get detailed differences in composed schemas (allOf, oneOf, anyOf)."""
         differences = []
 
+        # Trigger recursive comparison for composed schemas
+        if schema1.all_of and schema2.all_of:
+            for s1, s2 in zip(schema1.all_of, schema2.all_of):
+                self._trigger_recursive_definition_comparison(s1, s2)
+
+        if schema1.one_of and schema2.one_of:
+            for s1, s2 in zip(schema1.one_of, schema2.one_of):
+                self._trigger_recursive_definition_comparison(s1, s2)
+
+        if schema1.any_of and schema2.any_of:
+            for s1, s2 in zip(schema1.any_of, schema2.any_of):
+                self._trigger_recursive_definition_comparison(s1, s2)
+
         # Check allOf differences
         if not self._schema_lists_equal(schema1.all_of, schema2.all_of):
             allof_diffs = self._get_schema_list_differences(
@@ -1813,8 +1946,35 @@ class ApiComparator:
 
         if type1 != type2:
             all_equal = False
+
+        # Check format with tolerance for numeric types
+        # Allow format: None vs format: double/float when type is number
         if schema1.format != schema2.format:
-            all_equal = False
+            type1_is_number = type1 in ("number", "integer")
+            type2_is_number = type2 in ("number", "integer")
+            format1_is_numeric = schema1.format in (
+                None,
+                "double",
+                "float",
+                "int32",
+                "int64",
+            )
+            format2_is_numeric = schema2.format in (
+                None,
+                "double",
+                "float",
+                "int32",
+                "int64",
+            )
+
+            # Only mark as different if NOT both numeric types with numeric formats
+            if not (
+                type1_is_number
+                and type2_is_number
+                and format1_is_numeric
+                and format2_is_numeric
+            ):
+                all_equal = False
 
         # 4.5 References - $ref values must match exactly
         if schema1.ref != schema2.ref:
@@ -3141,6 +3301,224 @@ class ApiComparator:
                 matches.append((missing_path, best_match, best_similarity))
 
         return matches
+
+    def _compare_definition_pair(
+        self,
+        hand_name: str,
+        tsp_name: str,
+        api1: CanonicalApi,
+        api2: CanonicalApi,
+        source: str = "unknown",
+    ) -> None:
+        """
+        Unified function to compare a single definition pair.
+
+        Uses tuple-based memoization to avoid duplicate comparisons.
+        Collects recursive comparison triggers during schema comparison.
+
+        Args:
+            hand_name: Definition name in hand-authored swagger
+            tsp_name: Definition name in TSP-compiled swagger
+            api1: Hand-authored API
+            api2: TSP-compiled API
+            source: Where this comparison was triggered from (initial/recursive)
+        """
+        # Check memoization with tuple key
+        comparison_key = (hand_name, tsp_name)
+        if comparison_key in self.compared_definition_pairs:
+            return
+
+        # Mark as compared BEFORE comparing to prevent cycles
+        self.compared_definition_pairs.add(comparison_key)
+
+        # Fetch definitions
+        if hand_name not in api1.definitions:
+            print(f"WARNING: Definition '{hand_name}' not found in hand-authored")
+            return
+        if tsp_name not in api2.definitions:
+            print(f"WARNING: Definition '{tsp_name}' not found in TSP")
+            return
+
+        schema1 = api1.definitions[hand_name]
+        schema2 = api2.definitions[tsp_name]
+
+        # Resolve ref chains
+        resolved_schema1 = self._resolve_schema_ref_chain_with_mapping(
+            schema1, api1, api2
+        )
+        resolved_schema2 = self._resolve_schema_ref_chain_with_mapping(
+            schema2, api2, api1
+        )
+
+        # Compare schemas and collect recursive triggers
+        if not self._schemas_equal(resolved_schema1, resolved_schema2):
+            # Get detailed differences
+            schema_diffs = self._get_schema_differences(
+                resolved_schema1, resolved_schema2
+            )
+
+            # Categorize mismatch type
+            context_name = (
+                f"{hand_name} VS {tsp_name}" if hand_name != tsp_name else hand_name
+            )
+            mismatch_type = self._categorize_definition_mismatch(
+                context_name, schema_diffs
+            )
+
+            # Format differences
+            short_diffs = self._format_short_diffs(schema_diffs)
+            diff_details = (
+                "\n- " + "\n- ".join(short_diffs)
+                if short_diffs
+                else "unknown differences"
+            )
+
+            # Build message
+            if hand_name != tsp_name:
+                message = f"Definition '{hand_name}' VS '{tsp_name}':{diff_details}"
+                context_str = f"||{hand_name}||||{tsp_name}"
+                print(
+                    f"Definition schemas mismatch ({source})\t {hand_name} ~ {tsp_name}\n{diff_details}"
+                )
+            else:
+                message = f"Definition '{hand_name}':{diff_details}"
+                context_str = f"||{hand_name}||||"
+
+                # Find references for common definitions
+                refs1 = self._find_definition_references(hand_name, api1)
+                refs2 = self._find_definition_references(tsp_name, api2)
+                no_ref_parts = []
+                if not refs1:
+                    no_ref_parts.append("hand-authored")
+                if not refs2:
+                    no_ref_parts.append("tsp")
+                no_ref_info = (
+                    f" (no ref in {'/'.join(no_ref_parts)})" if no_ref_parts else ""
+                )
+                message += no_ref_info
+                print(
+                    f"Definition schemas mismatch\t {hand_name}{no_ref_info}\n{diff_details}"
+                )
+
+            self.differences.append(
+                Difference(
+                    type=mismatch_type,
+                    message=message,
+                    context=context_str,
+                )
+            )
+        else:
+            # Definitions are equal
+            if hand_name != tsp_name:
+                print(f"Definition match ({source})\t {hand_name} = {tsp_name}")
+
+    def _find_inlined_definition(
+        self, missing_def_name: str, api1: CanonicalApi, api2: CanonicalApi
+    ) -> str:
+        """
+        Check if a 'missing' definition was actually inlined in TSP operations.
+
+        For a definition missing in TSP:
+        1. Find operations in hand-authored that reference it via $ref
+        2. Find the corresponding TSP operation
+        3. Check if TSP operation has inline schema matching the missing definition
+
+        Returns:
+            String describing where it was inlined (e.g., "operation:query, param:options")
+            Empty string if not found inlined
+        """
+        if missing_def_name not in api1.definitions:
+            return ""
+
+        missing_def_schema = api1.definitions[missing_def_name]
+        ref_string = f"#/definitions/{missing_def_name}"
+        inline_locations = []
+
+        # Find operations that reference this definition in hand-authored
+        for path_name, path_obj in api1.paths.items():
+            for method, op1 in path_obj.operations.items():
+                # Check if this operation references the missing definition
+                op_refs_def = False
+
+                # Check parameters
+                for param in op1.parameters.values():
+                    if param.schema and self._schema_references_definition(
+                        param.schema, ref_string
+                    ):
+                        op_refs_def = True
+                        break
+
+                # Check request body
+                if not op_refs_def and op1.request_body_schema:
+                    if self._schema_references_definition(
+                        op1.request_body_schema, ref_string
+                    ):
+                        op_refs_def = True
+
+                # Check responses
+                if not op_refs_def:
+                    for status_code, response in op1.responses.items():
+                        if response.schema and self._schema_references_definition(
+                            response.schema, ref_string
+                        ):
+                            op_refs_def = True
+                            break
+
+                if not op_refs_def:
+                    continue
+
+                # Found an operation that references it - now find corresponding TSP operation
+                op2 = self._find_corresponding_operation(path_name, method, api2)
+                if not op2:
+                    continue
+
+                # Check if TSP operation has inline schema matching the missing definition
+                # Check parameters
+                for param_name, param in op2.parameters.items():
+                    if param.schema and not hasattr(param.schema, "ref"):
+                        # Inline schema - compare with missing definition
+                        resolved_missing = self._resolve_schema_ref_chain(
+                            missing_def_schema, api1
+                        )
+                        if self._schemas_equal(resolved_missing, param.schema):
+                            inline_locations.append(
+                                f"operation:{op2.operation_id}, param:{param_name}"
+                            )
+
+                # Check request body
+                if op2.request_body_schema and not hasattr(
+                    op2.request_body_schema, "ref"
+                ):
+                    resolved_missing = self._resolve_schema_ref_chain(
+                        missing_def_schema, api1
+                    )
+                    if self._schemas_equal(resolved_missing, op2.request_body_schema):
+                        inline_locations.append(
+                            f"operation:{op2.operation_id}, requestBody"
+                        )
+
+                # Check responses
+                for status_code, response in op2.responses.items():
+                    if response.schema and not hasattr(response.schema, "ref"):
+                        resolved_missing = self._resolve_schema_ref_chain(
+                            missing_def_schema, api1
+                        )
+                        if self._schemas_equal(resolved_missing, response.schema):
+                            inline_locations.append(
+                                f"operation:{op2.operation_id}, response:{status_code}"
+                            )
+
+        return "; ".join(inline_locations[:2])  # Limit to 2 locations for readability
+
+    def _find_corresponding_operation(
+        self, path: str, method: str, api: CanonicalApi
+    ) -> Optional[CanonicalOperation]:
+        """Find an operation in an API by path and method."""
+        if path in api.paths:
+            path_obj = api.paths[path]
+            if method in path_obj.operations:
+                return path_obj.operations[method]
+        return None
 
     def _find_definition_references(self, def_name: str, api: Any) -> List[str]:
         """Find where a definition is referenced in the API."""
