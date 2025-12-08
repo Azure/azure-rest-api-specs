@@ -17,7 +17,7 @@ using Microsoft.CertificateRegistration;
 @@flattenProperty(RenewCertificateOrderRequest.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(SiteSeal.html);
+@@flattenProperty(SiteSeal.html, "!javascript");
 @@clientName(AppServiceCertificateOrders.createOrUpdate::parameters.resource,
   "certificateDistinguishedName"
 );
