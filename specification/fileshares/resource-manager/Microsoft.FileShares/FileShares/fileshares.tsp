@@ -460,6 +460,13 @@ model FileShareProvisioningConstants {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "customized style suitable for storage admins"
   @doc("Scalar throughput in MiB per second.")
   scalarThroughputMiBPerSec: float64;
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "customized style suitable for storage admins"
+  @doc("Guardrail scalar IO per second.")
+  guardrailIOPerSecScalar: float64;
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "customized style suitable for storage admins"
+  @doc("Guardrail scalar throughput in MiB per second.")
+  guardrailThroughputScalar: float64;
 }
 
 @doc("Response structure for file share limits API.")
