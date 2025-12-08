@@ -3,7 +3,7 @@ import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
 
-@@clientName(Microsoft.Batch, "BatchManagementClient", "javascript");
+@@clientName(Microsoft.Batch, "BatchManagementClient", "javascript, python");
 
 // Java compat renames for existing management SDK surface
 @@clientName(Microsoft.Batch.IPAddressProvisioningType,
