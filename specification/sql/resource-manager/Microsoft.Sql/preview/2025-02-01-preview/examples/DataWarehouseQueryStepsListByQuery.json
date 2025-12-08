@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000001",
+    "resourceGroupName": "group1",
+    "serverName": "server1",
+    "databaseName": "database1",
+    "datawarehouseQueryName": "QID89",
+    "api-version": "2025-02-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "queryId": "QID100",
+              "startTime": "2025-03-10T08:30:00Z",
+              "endTime": "2025-03-10T09:00:00Z",
+              "duration": 1800000,
+              "status": "Failed",
+              "queryText": "DELETE FROM dbo.OldRecords WHERE CreatedDate < '2024-01-01'",
+              "stepIndex": 0,
+              "operationType": "Delete",
+              "distributionType": "Hash",
+              "locationType": "Remote",
+              "rowCount": "5000"
+            },
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/group1/providers/Microsoft.Sql/servers/server1/databases/database1/dataWarehouseQueries/QID89/steps/0",
+            "name": "0",
+            "type": "Microsoft.Sql/servers/databases/dataWarehouseQueries"
+          },
+          {
+            "properties": {
+              "queryId": "QID100",
+              "startTime": "2025-04-05T14:45:00Z",
+              "endTime": "2025-04-05T15:15:00Z",
+              "duration": 1800000,
+              "status": "Completed",
+              "queryText": "INSERT INTO dbo.NewProducts (Name, Price) VALUES ('Gadget', 99.99)",
+              "stepIndex": 1,
+              "operationType": "Insert",
+              "distributionType": "RoundRobin",
+              "locationType": "Local",
+              "rowCount": "1"
+            },
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/group1/providers/Microsoft.Sql/servers/server1/databases/database1/dataWarehouseQueries/QID89/steps/1",
+            "name": "1",
+            "type": "Microsoft.Sql/servers/databases/dataWarehouseQueries"
+          }
+        ]
+      }
+    }
+  }
+}

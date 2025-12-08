@@ -1,0 +1,223 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2025-02-01-preview",
+    "title": "SqlManagementClient",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/dataWarehouseQueries": {
+      "get": {
+        "tags": [
+          "DataWarehouseQueries"
+        ],
+        "operationId": "DataWarehouseQueries_ListByDatabase",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved list of Data Warehouse queries.",
+            "schema": {
+              "$ref": "#/definitions/DataWarehouseQueryListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 ManagedInstanceStoppingOrStopped - Conflicting operation submitted while instance is in stopping/stopped state\n\n * 400 ManagedInstanceStarting - Conflicting operation submitted while instance is in starting state\n\n * 400 UpdateNotAllowedOnPausedDatabase - User attempted to perform an update on a paused database.\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionNotFound - The requested subscription was not found.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 ResourceNotFound - The specified resource was not found.\n\n * 404 SubscriptionNotFound - The requested subscription was not found.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets top 50 most time-consuming Data Warehouse queries for specific database.": {
+            "$ref": "./examples/DataWarehouseQueriesListByDatabase.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "DataWarehouseQuery": {
+      "description": "A data warehouse query.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DataWarehouseQueryProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "DataWarehouseQueryListResult": {
+      "description": "The response to a list data warehouse queries request",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataWarehouseQuery"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DataWarehouseQueryProperties": {
+      "description": "The Data Warehouse query properties.",
+      "type": "object",
+      "properties": {
+        "queryId": {
+          "description": "The query ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "startTime": {
+          "format": "date-time",
+          "description": "The query start time.",
+          "type": "string",
+          "readOnly": true
+        },
+        "endTime": {
+          "format": "date-time",
+          "description": "The query end time.",
+          "type": "string",
+          "readOnly": true
+        },
+        "duration": {
+          "format": "int32",
+          "description": "The query duration in milliseconds.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "status": {
+          "description": "The query status.",
+          "type": "string",
+          "readOnly": true
+        },
+        "queryText": {
+          "description": "The query text.",
+          "type": "string",
+          "readOnly": true
+        },
+        "importance": {
+          "description": "The query importance level.",
+          "type": "string",
+          "readOnly": true
+        },
+        "groupName": {
+          "description": "The workload group name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "classifierName": {
+          "description": "The workload classifier name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resourceAllocationPercentage": {
+          "description": "The resource allocation percentage.",
+          "type": "string",
+          "readOnly": true
+        },
+        "error": {
+          "description": "The query error information.",
+          "type": "string",
+          "readOnly": true
+        },
+        "login": {
+          "description": "The login associated with the query.",
+          "type": "string",
+          "readOnly": true
+        },
+        "progress": {
+          "format": "int32",
+          "description": "The query progress percentage.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "sessionId": {
+          "description": "The session ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resourceClass": {
+          "description": "The resource class.",
+          "type": "string",
+          "readOnly": true
+        },
+        "concurrencySlots": {
+          "description": "The concurrency slots.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "DatabaseNameParameter": {
+      "name": "databaseName",
+      "in": "path",
+      "description": "The name of the database.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "description": "The name of the server.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}
