@@ -4,6 +4,10 @@ parameters:
 
 emit:
   - "@azure-tools/typespec-autorest"
+  # - "@azure-typespec/http-client-csharp"
+  # - "@azure-tools/typespec-python"
+  # - "@azure-tools/typespec-ts"
+  # - "@azure-tools/typespec-java"
 
 linter:
   extends:
@@ -16,21 +20,31 @@ options:
     emitter-output-dir: "{project-root}/.."
     omit-unreachable-types: true
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/ContentUnderstanding.json"
-  "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    clear-output-folder: true
-    model-namespace: false
-    namespace: "Azure.AI.ContentUnderstanding"
-    flavor: azure
   "@azure-typespec/http-client-csharp":
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    namespace: Azure.AI.ContentUnderstanding
     model-namespace: false
+    namespace: "Azure.AI.ContentUnderstanding"
   "@azure-tools/typespec-python":
     package-pprint-name: "Azure AI Content Understanding"
     emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-contentunderstanding"
     namespace: "azure.ai.contentunderstanding"
     package-version: 1.0.0b1
+    generate-test: true
+    generate-sample: true
     flavor: azure
-    generate-test: false
-    generate-sample: false
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/ai-content-understanding-rest"
+    package-details:
+      name: "@azure-rest/ai-content-understanding"
+      description: "Azure Content Understanding Rest Client"
+      version: "1.0.0-beta.1"
+    generate-test: true
+    flavor: azure
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-contentunderstanding"
+    namespace: com.azure.ai.contentunderstanding
+    enable-sync-stack: true
+    generate-tests: true
+    partial-update: true
+    use-eclipse-language-server: false
+    flavor: azure
