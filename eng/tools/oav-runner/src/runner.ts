@@ -13,6 +13,7 @@ import {
 } from "@azure-tools/specs-shared/changed-files";
 import { untilLastSegment } from "@azure-tools/specs-shared/path";
 import { Swagger } from "@azure-tools/specs-shared/swagger";
+import { inspect } from "util";
 import { ReportableOavError } from "./formatting.js";
 
 export async function preCheckFiltering(
@@ -34,7 +35,7 @@ export async function checkExamples(
   rootDirectory: string,
   fileList?: string[],
 ): Promise<[number, string[], ReportableOavError[]]> {
-  let errors: ReportableOavError[] = [];
+  const errors: ReportableOavError[] = [];
 
   const swaggerFiles = await preCheckFiltering(rootDirectory, fileList);
 
@@ -59,9 +60,9 @@ export async function checkExamples(
           file: swaggerFile,
         } as ReportableOavError);
       } else {
-        console.log(`Error validating examples for ${swaggerFile}: ${e}`);
+        console.log(`Error validating examples for ${swaggerFile}: ${inspect(e)}`);
         errors.push({
-          message: `Unhandled error validating ${swaggerFile}: ${e}`,
+          message: `Unhandled error validating ${swaggerFile}: ${inspect(e)}`,
           file: swaggerFile,
         } as ReportableOavError);
       }
@@ -78,7 +79,7 @@ export async function checkSpecs(
   rootDirectory: string,
   fileList?: string[],
 ): Promise<[number, string[], ReportableOavError[]]> {
-  let errors: ReportableOavError[] = [];
+  const errors: ReportableOavError[] = [];
 
   const swaggerFiles = await preCheckFiltering(rootDirectory, fileList);
 
@@ -104,9 +105,9 @@ export async function checkSpecs(
           file: swaggerFile,
         } as ReportableOavError);
       } else {
-        console.log(`Error validating ${swaggerFile}: ${e}`);
+        console.log(`Error validating ${swaggerFile}: ${inspect(e)}`);
         errors.push({
-          message: `Unhandled error validating ${swaggerFile}: ${e}`,
+          message: `Unhandled error validating ${swaggerFile}: ${inspect(e)}`,
           file: swaggerFile,
         } as ReportableOavError);
       }
@@ -139,7 +140,7 @@ async function getFiles(rootDirectory: string, directory: string): Promise<strin
   return items
     .filter((d) => d.isFile() && d.name.endsWith(".json"))
     .map((d) => path.join(target, d.name))
-    .map((d) => d.replace(/^.*?(specification[\/\\].*)$/, "$1"))
+    .map((d) => d.replace(/^.*?(specification[/\\].*)$/, "$1"))
     .filter((d) => d.includes("specification" + path.sep));
 }
 
@@ -170,7 +171,7 @@ export async function processFilesToSpecificationList(
       */
       const swaggerDir = path.relative(
         rootDirectory,
-        untilLastSegment(absoluteFilePath, "examples"),
+        path.dirname(untilLastSegment(absoluteFilePath, "examples")),
       );
 
       const visibleSwaggerFiles = await getFiles(rootDirectory, swaggerDir);
