@@ -11,6 +11,7 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "./commonModels.tsp";
 import "./kubernetesVersions.tsp";
 import "./platformUpdates.tsp";
 import "./osImages.tsp";
@@ -32,6 +33,9 @@ import "./UpdateRun.tsp";
 import "./Update.tsp";
 import "./UpdateSummaries.tsp";
 import "./ValidatedSolutionRecipe.tsp";
+import "./edgeMachine.tsp";
+import "./edgeMachineJobs.tsp";
+import "./validateOwnershipVouchers.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -57,4 +61,9 @@ enum Versions {
    * The 2025-11-01-preview API version.
    */
   v2025_11_01_preview: "2025-11-01-preview",
+
+  /**
+   * The 2025-12-01-preview API version.
+   */
+  v2025_12_01_preview: "2025-12-01-preview",
 }
