@@ -21,9 +21,7 @@ using Azure.ClientGenerator.Core;
   "java"
 );
 
-// avoid 'body' name in java generated code
-@@clientName(TextTranslation.TranslateBody, "TranslateInputs", "java");
-@@clientName(TextTranslation.TransliterateBody, "TransliterateInputs", "java");
+// customization for naming & access in java client
 @@clientName(TextTranslation.translate::parameters.body,
   "translateInput",
   "java"
@@ -32,3 +30,8 @@ using Azure.ClientGenerator.Core;
   "transliterateInput",
   "java"
 );
+
+@@access(TextTranslation.TranslationResult, Access.internal, "java");
+@@access(TextTranslation.TransliterateResult, Access.internal, "java");
+@@access(TextTranslation.TranslateBody, Access.internal, "java");
+@@access(TextTranslation.TransliterateBody, Access.internal, "java");
