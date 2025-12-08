@@ -23,6 +23,7 @@ using TypeSpec.Versioning;
   "{endpoint}/datagovernance/catalog",
   "PurviewUnifiedCatalog Service is a fully managed cloud service whose users can discover the data sources they need and understand the data sources they find. At the same time, Data Map helps organizations get more value from their existing investments.",
   {
+    @doc("The endpoint of the Purview Unified Catalog service. Example: https://api.purview-service.microsoft.com/")
     endpoint: "https://api.purview-service.microsoft.com/",
   }
 )
@@ -38,9 +39,9 @@ namespace PurviewUnifiedCatalog;
 
 @doc("Service API versions")
 enum ApiVersions {
-  @doc("2025-09-15-preview service API version")
+  @doc("2026-01-15-preview service API version")
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  v2025_09_15_preview: "2025-09-15-preview",
+  v2026_01_15_preview: "2026-01-15-preview",
 }
 
 alias AuthToken = OAuth2Auth<[
