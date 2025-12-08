@@ -4684,7 +4684,7 @@ model ResourceTypeEndpointBase {
   /**
    * The features rule.
    */
-  featuresRule: FeaturesRuleProperties;
+  featuresRule: FeaturesPolicy;
 
   /**
    * This is a TimeSpan property.
