@@ -4329,7 +4329,6 @@ model AnalyzeRequest {
 @doc("The result of testing an analyzer on text.")
 model AnalyzeResult {
   @doc("The list of tokens returned by the analyzer specified in the request.")
-  @visibility(Lifecycle.Read)
   tokens: AnalyzedTokenInfo[];
 }
 
