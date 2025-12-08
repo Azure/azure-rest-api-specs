@@ -605,7 +605,12 @@ model VMExtensionPayload {
  */
 @added(Dynatrace.Observability.Versions.v2025_11_03_preview)
 model ManagedComputeResourceListResponse
-  is Azure.Core.Page<ManagedComputeResourceInfo>;
+  is Azure.Core.Page<ManagedComputeResourceInfo> {
+  /**
+   * Tenant ID of the monitored resources.
+   */
+  tenantId?: string;
+}
 
 /**
  * Details of a managed compute resource monitored by the Dynatrace monitor.
@@ -623,24 +628,9 @@ model ManagedComputeResourceInfo {
   resourceType?: string;
 
   /**
-   * The ARM resource ID path of the Dynatrace monitor.
-   */
-  monitorId?: Azure.Core.armResourceIdentifier;
-
-  /**
-   * The partner name
-   */
-  partnerName?: string;
-
-  /**
    * Flag indicating if the resource is currently being monitored.
    */
   isMonitored?: boolean;
-
-  /**
-   * The tenant ID associated with the agent resource.
-   */
-  tenantId?: string;
 }
 
 /**

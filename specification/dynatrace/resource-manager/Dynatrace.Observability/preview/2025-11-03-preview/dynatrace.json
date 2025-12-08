@@ -2637,22 +2637,9 @@
           "type": "string",
           "description": "The type of the Azure resource (e.g., managedClusters)."
         },
-        "monitorId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The ARM resource ID path of the Dynatrace monitor."
-        },
-        "partnerName": {
-          "type": "string",
-          "description": "The partner name"
-        },
         "isMonitored": {
           "type": "boolean",
           "description": "Flag indicating if the resource is currently being monitored."
-        },
-        "tenantId": {
-          "type": "string",
-          "description": "The tenant ID associated with the agent resource."
         }
       }
     },
@@ -2671,6 +2658,10 @@
           "type": "string",
           "format": "uri",
           "description": "The link to the next page of items"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "Tenant ID of the monitored resources."
         }
       },
       "required": [
