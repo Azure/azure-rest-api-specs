@@ -3160,13 +3160,46 @@ model BackupPolicy extends BaseBackupPolicy {
  */
 model BackupSchedule {
   /**
-   * Repeating time interval which support the ISO 8601 format and Unsupported or partially Supported Formats.\r\n\r\nSupported ISO 8601 Time Formats\r\n\r\nThe following time formats were verified to be successfully parsed and supported. These cover the majority of ISO 8601-compliant time representations and are sufficient for most use cases:\r\n\r\n- T14:30:45.123  →  Thh:mm:ss.sss (with milliseconds)\r\n- T14:30:45  →  Thh:mm:ss (standard time format)\r\n- T14:30  →  Thh:mm (hour and minute only)\r\n\r\nAll of the above can optionally include a timezone indicator, such as 'Z' for UTC, '+05:30' for India Standard Time, or '-08:00' for Pacific Time.\r\n\r\nExamples of Supported Timestamps\r\n\r\n- 2023-10-15T14:30:45Z\r\n- 2023-10-15T14:30:45.123+05:30\r\n- 2023-10-15T14:30Z\r\n\r\nUnsupported or Partially Supported Formats\r\n\r\nSome ISO 8601 time representations are not currently supported or may not parse correctly. These include compact or ambiguous formats that omit colons or use unconventional notations:\r\n\r\n- T143045.123 or T143045 (no colons)\r\n- T14.500 (decimal hours)\r\n- T14 (hour only)\r\n- T14:30.500 (minute fractions)\r\n- T24:00:00 (midnight next day, not valid in parser)\r\n- T23:59:60 (leap second)
-   */
+    * Repeating time interval which supports the ISO 8601 format and unsupported or partially supported formats.
+    *
+    * Supported ISO 8601 Time Formats
+    *
+    * The following time formats were verified to be successfully parsed and supported:
+    * - T14:30:45.123 → Thh:mm:ss.sss (with milliseconds)
+    * - T14:30:45 → Thh:mm:ss (standard time format)
+    * - T14:30 → Thh:mm (hour and minute only)
+    *
+    * All of the above may include time zone indicators like 'Z', '+05:30', '-08:00'.
+    *
+    * Examples of supported timestamps:
+    * - 2023-10-15T14:30:45Z
+    * - 2023-10-15T14:30:45.123+05:30
+    * - 2023-10-15T14:30Z
+    *
+    * Unsupported or partially supported formats:
+    * - T143045.123 or T143045 (no colons)
+    * - T14.500 (decimal hours)
+    * - T14 (hour only)
+    * - T14:30.500 (minute fractions)
+    * - T24:00:00 (invalid)
+    * - T23:59:60 (leap second)
+    */
   repeatingTimeIntervals: string[];
 
   /**
-   * Time Zone for a schedule.\r\n\r\nSupported timezone indicators include 'Z' for UTC, and offsets like '+00:00', '+05:30', or '-08:00'.\r\n\r\nExamples of Supported Time Zone Indicators\r\n\r\nOnly time zone indicators in the format Z (UTC) or offsets like ±hh:mm is supported.\r\n\r\n- 2023-10-15T14:30:45Z\r\n- 2023-10-15T14:30:45.123+05:30\r\n- 2023-10-15T14:30-08:00
-   */
+    * Time Zone for a schedule.
+    *
+    * Supported timezone indicators include:
+    * - 'Z' for UTC
+    * - '+00:00'
+    * - '+05:30'
+    * - '-08:00'
+    *
+    * Examples:
+    * - 2023-10-15T14:30:45Z
+    * - 2023-10-15T14:30:45.123+05:30
+    * - 2023-10-15T14:30-08:00
+    */
   timeZone?: string;
 }
 
