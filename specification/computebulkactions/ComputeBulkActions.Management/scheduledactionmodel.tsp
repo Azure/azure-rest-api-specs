@@ -214,7 +214,7 @@ model ResourceWithContext {
   context: string;
 }
 
-@doc("The resources needed for the user request with the context for traacking purposes")
+@doc("The resources needed for the user request with the context for tracking purposes")
 model ResourcesWithContext {
   @doc("The resource ids used for the request")
   ids: Array<ResourceWithContext>;
