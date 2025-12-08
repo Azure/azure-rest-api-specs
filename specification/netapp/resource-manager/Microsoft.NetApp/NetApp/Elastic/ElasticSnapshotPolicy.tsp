@@ -209,7 +209,9 @@ interface ElasticSnapshotPolicies {
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
       ElasticSnapshotPolicy,
       ElasticSnapshotPolicyProperties
-    >
+    >,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = ElasticSnapshotPolicy> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
   @added(Versions.v2025_09_01_preview)
   delete is ArmResourceDeleteWithoutOkAsync<ElasticSnapshotPolicy>;
