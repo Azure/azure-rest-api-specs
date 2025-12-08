@@ -22,10 +22,13 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
- * Preview Alert Rule Client
+ * The Preview Alert Rule API provides the ability to retrieve the results of a simulated historical execution of an alert rule
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armProviderNamespace
-@service(#{ title: "PreviewAlertRuleClient" })
+@service(#{
+  title: "Preview Alert Rule API in Alerts Management Service Resource Provider",
+})
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
 namespace Microsoft.AlertsManagement;

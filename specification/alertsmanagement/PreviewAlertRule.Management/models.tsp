@@ -35,7 +35,7 @@ union Kind {
  * Severity of the alert. Should be an integer between [0-4]. Value of 0 is severest. Relevant and required only for rules of the kind LogAlert.
  */
 union AlertSeverity {
-  integer,
+  int64,
 
   /**
    * 0
@@ -198,18 +198,18 @@ union AlertState {
   Resolved: "Resolved",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PreviewAlertRuleRequest {
   /**
    * The location of the rule resource.
    */
   location: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties: PreviewAlertRuleRequestProperties;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PreviewAlertRuleRequestProperties {
   /**
    * Specifies the timespan of the preview in ISO 8601 duration format.
@@ -229,7 +229,7 @@ model LogAlertRuleResource {
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   tags?: Record<string>;
 
@@ -418,11 +418,12 @@ model LogAlertRuleConditionFailingPeriods {
   minFailingPeriodsToAlert?: int64 = 1;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PreviewAlertRuleResponse {
   /**
    * An array of rule preview results.
    */
+  @identifiers(#[])
   rulePreviewResults?: RulePreviewResult[];
 }
 
@@ -438,6 +439,7 @@ model RulePreviewResult {
   /**
    * An array of evaluations.
    */
+  @identifiers(#[])
   evaluations?: Evaluation[];
 }
 
@@ -474,6 +476,7 @@ model Evaluation {
   /**
    * An array of evaluated periods.
    */
+  @identifiers(#[])
   evaluatedPeriods?: EvaluatedPeriod[];
 
   /**

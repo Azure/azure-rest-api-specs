@@ -1,3 +1,6 @@
+parameters:
+  "service-dir":
+    default: "sdk/pre"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -8,6 +11,38 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/PreviewAlertRule/{version-status}/{version}/PreviewAlertRule.json"
     emit-lro-options: "all"
     examples-dir: "{project-root}/examples"
+  "@azure-tools/typespec-python":
+    package-dir: "azure-mgmt-confidentialledger"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-confidentialledger"
+    namespace: "azure.mgmt.confidentialledger"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    package-dir: "azure-resourcemanager-confidentialledger"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-confidentialledger"
+    namespace: "com.azure.resourcemanager.confidentialledger"
+    service-name: "ConfidentialLedger" # human-readable service name, whitespace allowed
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    service-dir: sdk/confidentialledger
+    package-dir: "arm-confidentialledger"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-confidentialledger"
+    is-modular-library: true
+    flavor: "azure"
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-confidentialledger"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/confidentialledger"
+    emitter-output-dir: "{output-dir}/{service-dir}/armconfidentialledger"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armconfidentialledger"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

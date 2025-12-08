@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "PreviewAlertRuleClient",
+    "title": "Preview Alert Rule API in Alerts Management Service Resource Provider",
     "version": "2025-07-01-preview",
-    "description": "Preview Alert Rule Client",
+    "description": "The Preview Alert Rule API provides the ability to retrieve the results of a simulated historical execution of an alert rule",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -40,7 +40,7 @@
   },
   "tags": [],
   "paths": {
-    "/providers/Microsoft.ThisWillBeReplaced/{resourceId}/previewAlertRule": {
+    "/{resourceId}/providers/microsoft.AlertsManagement/previewAlertRule": {
       "post": {
         "operationId": "PreviewAlertRule",
         "description": "Retrieves the results of a simulated historical execution of an alert rule",
@@ -51,14 +51,12 @@
           {
             "name": "resourceId",
             "in": "path",
-            "description": "The identifier of the resource.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "body",
+            "name": "parameters",
             "in": "body",
-            "description": "The request body",
             "required": true,
             "schema": {
               "$ref": "#/definitions/PreviewAlertRuleRequest"
@@ -334,7 +332,8 @@
           "description": "An array of evaluated periods.",
           "items": {
             "$ref": "#/definitions/EvaluatedPeriod"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "thresholdMet": {
           "type": "boolean",
@@ -625,7 +624,8 @@
           "description": "An array of rule preview results.",
           "items": {
             "$ref": "#/definitions/RulePreviewResult"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -645,7 +645,8 @@
           "description": "An array of evaluations.",
           "items": {
             "$ref": "#/definitions/Evaluation"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
